@@ -1,8 +1,6 @@
-[![Build Status](https://travis-ci.org/RedHatInsights/insights-frontend-starter-app.svg?branch=master)](https://travis-ci.org/RedHatInsights/insights-frontend-starter-app)
+# Ansible Automation Hub UI
 
-# insights-frontend-starter-app
-
-React.js starter app for Red Hat Insights products that includes Patternfly 3 and Patternfly Next.
+Ansible Automation Hub UI site.
 
 ## Getting Started
 
