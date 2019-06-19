@@ -87,6 +87,6 @@
     "verify": "npm-run-all build lint test"
   },
   "insights": {
-    "appname": "starter"
+    "appname": "automation-hub"
   }
 }
