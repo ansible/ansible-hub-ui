@@ -7,9 +7,9 @@ import { Section, Main, PageHeader, PageHeaderTitle } from '@redhat-cloud-servic
 
 import { Button } from '@patternfly/react-core';
 
-const SampleComponent = asyncComponent(() => import('../../PresentationalComponents/SampleComponent/sample-component'));
-// const PageHeader2 = asyncComponent(() => import('../../PresentationalComponents/PageHeader/page-header'));
-// const PageHeaderTitle2 = asyncComponent(() => import('../../PresentationalComponents/PageHeader/page-header-title'));
+const SampleComponent = asyncComponent(() => import('../../components/SampleComponent/sample-component'));
+// const PageHeader2 = asyncComponent(() => import('../../components/PageHeader/page-header'));
+// const PageHeaderTitle2 = asyncComponent(() => import('../../components/PageHeader/page-header-title'));
 
 /**
  * A smart component that handles all the api calls and data needed by the dumb components.
