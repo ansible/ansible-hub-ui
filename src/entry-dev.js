@@ -8,11 +8,11 @@ import logger from 'redux-logger';
 import getBaseName from './Utilities/getBaseName';
 
 ReactDOM.render(
-    <Provider store={ init(logger).getStore() }>
-        <Router basename={ getBaseName(window.location.pathname) }>
-            <App/>
+    <Provider store={init(logger).getStore()}>
+        <Router basename={getBaseName(window.location.pathname)}>
+            <App />
         </Router>
     </Provider>,
 
-    document.getElementById('root')
+    document.getElementById('root'),
 );

@@ -8,10 +8,8 @@ import React from 'react';
  *
  * @param props the props given by the smart component.
  */
-const SampleComponent = (props) => {
-    return (
-        <span className='sample-component'> { props.children } </span>
-    );
+const SampleComponent = props => {
+    return <span className="sample-component"> {props.children} </span>;
 };
 
 SampleComponent.displayName = 'SampleComponent';
@@ -19,8 +17,8 @@ SampleComponent.displayName = 'SampleComponent';
 SampleComponent.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ])
+        PropTypes.node,
+    ]),
 };
 
 export default SampleComponent;

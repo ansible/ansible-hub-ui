@@ -13,4 +13,3 @@ function getBaseName(pathname) {
 }
 
 export default getBaseName;
-
