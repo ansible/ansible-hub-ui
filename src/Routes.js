@@ -19,45 +19,45 @@ import some from 'lodash/some';
  *
  */
 const SamplePage = asyncComponent(() =>
-  import(/* webpackChunkName: "SamplePage" */ './containers/SamplePage/SamplePage'),
+    import(/* webpackChunkName: "SamplePage" */ './containers/SamplePage/SamplePage'),
 );
 const Rules = asyncComponent(() =>
-  import(/* webpackChunkName: "Rules" */ './components/Rules/ListRules'),
+    import(/* webpackChunkName: "Rules" */ './components/Rules/ListRules'),
 );
 
 export const paths = {
-  samplepage: '/samplepage',
-  rules: '/rules',
-  myCollections: '/me/namespaces/:namespace',
-  myNamespaces: '/me/namespaces',
-  myImportsNamespace: '/me/imports/:namespace',
-  myImports: '/me/imports',
-  myPreferences: '/me/preferences',
-  search: '/search',
-  collectionContentDocs: '/:namespace/:collection/:type/:name',
-  collectionDocsPage: '/:namepsace/:collection/docs/:page',
-  collectionDocsIndex: '/:namespace/:collection/docs',
-  collectionContentList: '/:namespace/:collection/content',
-  collection: '/:namespace/:collection',
-  namespace: '/:namespace',
+    samplepage: '/samplepage',
+    rules: '/rules',
+    myCollections: '/me/namespaces/:namespace',
+    myNamespaces: '/me/namespaces',
+    myImportsNamespace: '/me/imports/:namespace',
+    myImports: '/me/imports',
+    myPreferences: '/me/preferences',
+    search: '/search',
+    collectionContentDocs: '/:namespace/:collection/:type/:name',
+    collectionDocsPage: '/:namepsace/:collection/docs/:page',
+    collectionDocsIndex: '/:namespace/:collection/docs',
+    collectionContentList: '/:namespace/:collection/content',
+    collection: '/:namespace/:collection',
+    namespace: '/:namespace',
 };
 
-type Props = {
-  childProps: any,
-};
+// Props = {
+//     childProps: any,
+// };
 
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
-  const root = document.getElementById('root');
-  root.removeAttribute('class');
-  root.classList.add(`page__${rootClass}`, 'pf-c-page__main');
-  root.setAttribute('role', 'main');
+    const root = document.getElementById('root');
+    root.removeAttribute('class');
+    root.classList.add(`page__${rootClass}`, 'pf-c-page__main');
+    root.setAttribute('role', 'main');
 
-  return <Route {...rest} component={Component} />;
+    return <Route {...rest} component={Component} />;
 };
 
 InsightsRoute.propTypes = {
-  component: PropTypes.func,
-  rootClass: PropTypes.string,
+    component: PropTypes.func,
+    rootClass: PropTypes.string,
 };
 
 /**
@@ -68,26 +68,30 @@ InsightsRoute.propTypes = {
  *      path - https://prod.foo.redhat.com:1337/insights/advisor/rules
  *      component - component to be rendered when a route has been chosen.
  */
-export const Routes = (props: Props) => {
-  const path = props.childProps.location.pathname;
+export const Routes = props => {
+    const path = props.childProps.location.pathname;
 
-  return (
-    <Switch>
-      <InsightsRoute
-        path={paths.samplepage}
-        component={SamplePage}
-        rootClass="samplepage"
-      />
-      <InsightsRoute path={paths.rules} component={Rules} rootClass="rules" />
+    return (
+        <Switch>
+            <InsightsRoute
+                path={paths.samplepage}
+                component={SamplePage}
+                rootClass="samplepage"
+            />
+            <InsightsRoute
+                path={paths.rules}
+                component={Rules}
+                rootClass="rules"
+            />
 
-      {/* Finally, catch all unmatched routes */}
-      <Route
-        render={() =>
-          some(paths, p => p === path) ? null : (
-            <Redirect to={paths.samplepage} />
-          )
-        }
-      />
-    </Switch>
-  );
+            {/* Finally, catch all unmatched routes */}
+            <Route
+                render={() =>
+                    some(paths, p => p === path) ? null : (
+                        <Redirect to={paths.samplepage} />
+                    )
+                }
+            />
+        </Switch>
+    );
 };

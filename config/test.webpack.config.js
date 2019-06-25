@@ -6,7 +6,13 @@ const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../')
 });
 
-module.exports = {
+// Override sections of the webpack config to work with TypeScript
+const newWebpackConfig = {
     ...webpackConfig,
+    ...TSOverrides,
+};
+
+module.exports = {
+    ...newWebpackConfig,
     plugins
 };
