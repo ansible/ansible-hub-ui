@@ -9,7 +9,8 @@
         "allowJs": true,
         "noImplicitAny": true,
         "lib": ["es2018", "dom"],
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "noImplicitAny": false
     },
     "include": ["./src/"]
 }
