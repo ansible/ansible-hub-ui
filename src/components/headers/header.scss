@@ -1,0 +1,37 @@
+.image-container {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+.image {
+    object-fit: contain;
+    padding-right: 10px;
+}
+
+.title-box {
+    display: flex;
+    align-items: center;
+}
+
+.column-section {
+    display: flex;
+    justify-content: space-between;
+
+    .header-right {
+        align-items: right;
+    }
+}
+
+.background {
+    background-color: white;
+    padding: 0px 24px 0px 24px;
+}
+
+.placeholder {
+    height: 24px;
+}
+
+.breadcrumb-container {
+    padding-top: 5px;
+}
