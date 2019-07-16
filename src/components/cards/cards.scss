@@ -1,0 +1,20 @@
+.ns-card-container {
+    width: 310px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    .image-container {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        img {
+            object-fit: contain;
+        }
+    }
+
+    .title {
+        font-weight: bold;
+    }
+}
