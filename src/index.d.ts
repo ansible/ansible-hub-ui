@@ -3,3 +3,4 @@
 // TODO: Add actual typings to the upstream project
 
 declare module '@redhat-cloud-services/frontend-components';
+declare module 'axios-mock-adapter';
