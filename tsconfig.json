@@ -7,7 +7,6 @@
         "jsx": "react",
         "target": "es5",
         "allowJs": true,
-        "noImplicitAny": true,
         "lib": ["es2018", "dom"],
         "moduleResolution": "node",
         "noImplicitAny": false
