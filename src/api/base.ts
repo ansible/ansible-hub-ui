@@ -18,16 +18,16 @@ export class BaseAPI {
 
     get(id: string, apiPath?: string) {
         const path = apiPath || this.apiPath;
-        return this.http.get(this.apiBaseURL + path + id + '/');
+        return this.http.get(path + id + '/');
     }
 
     update(id: string, data: any, apiPath?: string) {
         const path = apiPath || this.apiPath;
-        return this.http.put(this.apiBaseURL + path + id + '/', data);
+        return this.http.put(path + id + '/', data);
     }
 
     create(data: any, apiPath?: string) {
         const path = apiPath || this.apiPath;
-        return this.http.post(this.apiBaseURL + path, data);
+        return this.http.post(path, data);
     }
 }
