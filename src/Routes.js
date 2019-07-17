@@ -18,21 +18,22 @@ import some from 'lodash/some';
  *         see the difference with DashboardMap and InventoryDeployments.
  *
  */
-const SamplePage = asyncComponent(() =>
-    import(/* webpackChunkName: "SamplePage" */ './containers/SamplePage/SamplePage'),
+const EditNamespace = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "SamplePage" */ './containers/edit-namespace/namespace-form'
+    ),
 );
 const Rules = asyncComponent(() =>
     import(/* webpackChunkName: "Rules" */ './components/Rules/ListRules'),
 );
 
 export const paths = {
-    samplepage: '/samplepage',
-    rules: '/rules',
-    myCollections: '/me/namespaces/:namespace',
-    myNamespaces: '/me/namespaces',
-    myImportsNamespace: '/me/imports/:namespace',
-    myImports: '/me/imports',
-    myPreferences: '/me/preferences',
+    myCollections: '/my-namespaces/:namespace',
+    myNamespaces: '/my-namespaces/',
+    newNamespace: '/my-namespaces/edit/',
+    editNamespace: '/my-namespaces/edit/:namespace',
+    myImportsNamespace: '/my-imports/:namespace',
+    myImports: '/my-imports',
     search: '/search',
     collectionContentDocs: '/:namespace/:collection/:type/:name',
     collectionDocsPage: '/:namepsace/:collection/docs/:page',
@@ -74,14 +75,9 @@ export const Routes = props => {
     return (
         <Switch>
             <InsightsRoute
-                path={paths.samplepage}
-                component={SamplePage}
-                rootClass="samplepage"
-            />
-            <InsightsRoute
-                path={paths.rules}
-                component={Rules}
-                rootClass="rules"
+                path={paths.editNamespace}
+                component={EditNamespace}
+                rootClass='root'
             />
 
             {/* Finally, catch all unmatched routes */}

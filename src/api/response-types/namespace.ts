@@ -8,6 +8,7 @@ export class Namespace {
     resources_page_html: string;
     owners: any[];
     useful_links: NamespaceLink[];
+    num_collections: number;
 }
 
 export class NamespaceLink {
