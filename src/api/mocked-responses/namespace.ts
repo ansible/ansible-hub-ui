@@ -8,6 +8,7 @@ export class MockNamespace {
         this.mock = new MockAdapter(http, { delayResponse: 200 });
         this.mock.onGet(apiPath).reply(200, this.getNSList());
         this.mock.onGet(apiPath + 'red_hat/').reply(200, this.getNSDetail());
+        this.mock.onPut(apiPath + 'red_hat/').reply(204, this.ns1);
     }
 
     ns1 = {

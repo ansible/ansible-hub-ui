@@ -1,0 +1,41 @@
+.card-row {
+    display: flex;
+
+    .fields {
+        flex-grow: 1;
+        margin-right: 15px;
+    }
+
+    .card {
+        border-left: 24px solid #ededed;
+        border-bottom: 24px solid #ededed;
+        margin-top: -15px;
+        margin-right: -15px;
+    }
+}
+
+.body {
+    background-color: white;
+    padding: 15px;
+}
+
+.useful-links {
+    display: flex;
+    margin-bottom: 10px;
+
+    .link-name {
+        flex-grow: 1;
+    }
+
+    .link-url {
+        flex-grow: 2;
+        margin-left: 20px;
+    }
+
+    .link-button {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+}

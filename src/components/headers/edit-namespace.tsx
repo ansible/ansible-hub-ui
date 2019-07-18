@@ -12,6 +12,8 @@ import {
     GridItem,
 } from '@patternfly/react-core';
 
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+
 interface IProps {
     namespace: Namespace;
 }
@@ -31,8 +33,10 @@ export class EditNamespaceHeader extends React.Component<IProps, {}> {
                     </Breadcrumb>
                 }
             >
-                <Grid>
-                    <GridItem span={12}>{namespace.description}</GridItem>
+                <Grid gutter='sm'>
+                    {namespace.description ? (
+                        <GridItem span={12}>{namespace.description}</GridItem>
+                    ) : null}
                     <GridItem span={4}>
                         <Tabs>
                             <Tab eventKey={0} title='Edit Details'></Tab>
@@ -42,11 +46,11 @@ export class EditNamespaceHeader extends React.Component<IProps, {}> {
                     {namespace.useful_links.length > 0 ? (
                         <GridItem className='links' span={8}>
                             <div>
-                                <i className='fas fa-external-link-square-alt'></i>
+                                <ExternalLinkAltIcon />
                             </div>
-                            {namespace.useful_links.map(x => {
+                            {namespace.useful_links.map((x, i) => {
                                 return (
-                                    <div>
+                                    <div key={i}>
                                         <a href={x.url} target='blank'>
                                             {x.name}
                                         </a>
