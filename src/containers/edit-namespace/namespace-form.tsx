@@ -1,17 +1,27 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
-import { Main } from '@redhat-cloud-services/frontend-components';
+import {
+    Main,
+    Section,
+    Spinner,
+} from '@redhat-cloud-services/frontend-components';
 
-import { EditNamespaceHeader } from '../../components/headers/edit-namespace';
+import {
+    EditNamespaceHeader,
+    TabKeys,
+} from '../../components/headers/edit-namespace';
 import { NamespaceForm } from '../../components/namespace-form/namespace-form';
+import { ResourcesForm } from '../../components/namespace-form/resources-form';
 
 import { NamespaceAPI } from '../../api/namespace';
 import { Namespace } from '../../api/response-types/namespace';
 
-import { Paths, formatPath } from '../../paths';
+import { Paths } from '../../paths';
 
 interface IProps extends RouteComponentProps {}
+
+import { Form, ActionGroup, Button, Alert } from '@patternfly/react-core';
 
 interface IState {
     namespace: Namespace;
@@ -20,12 +30,18 @@ interface IState {
     errorMessages: any;
     saving: boolean;
     redirect: string;
+    tab: TabKeys;
+    unsavedData: boolean;
 }
 
 class EditNamespace extends React.Component<IProps, IState> {
+    queryParams: URLSearchParams;
+
     constructor(props) {
         super(props);
-        console.log(props);
+
+        this.queryParams = new URLSearchParams(props.location.search);
+
         this.state = {
             namespace: null,
             newLinkURL: '',
@@ -33,19 +49,17 @@ class EditNamespace extends React.Component<IProps, IState> {
             errorMessages: {},
             saving: false,
             redirect: null,
+            unsavedData: false,
+            tab: parseInt(this.queryParams.get('tab')) || TabKeys.details,
         };
     }
 
     componentDidMount() {
-        NamespaceAPI.get(this.props.match.params['namespace']).then(
-            response => {
-                this.setState({ namespace: response.data });
-            },
-        );
+        this.loadNamespace();
     }
 
     render() {
-        const { namespace, errorMessages, saving, redirect } = this.state;
+        const { namespace, errorMessages, saving, redirect, tab } = this.state;
 
         if (redirect) {
             return <Redirect to={redirect} />;
@@ -58,30 +72,84 @@ class EditNamespace extends React.Component<IProps, IState> {
             <React.Fragment>
                 <EditNamespaceHeader
                     namespace={namespace}
+                    activeTab={tab}
+                    tabClick={key => this.updateTab(key)}
                 ></EditNamespaceHeader>
                 <Main>
-                    <NamespaceForm
-                        namespace={namespace}
-                        errorMessages={errorMessages}
-                        saving={saving}
-                        updateNamespace={namespace =>
-                            this.setState({ namespace: namespace })
-                        }
-                        save={() => this.saveNamespace()}
-                        cancel={() =>
-                            this.setState({
-                                redirect: formatPath(Paths.myCollections, {
-                                    namespace: this.state.namespace.name,
-                                }),
-                            })
-                        }
-                    />
+                    <Section className='body'>
+                        {tab === TabKeys.details ? (
+                            <NamespaceForm
+                                namespace={namespace}
+                                errorMessages={errorMessages}
+                                updateNamespace={namespace =>
+                                    this.setState({
+                                        namespace: namespace,
+                                        unsavedData: true,
+                                    })
+                                }
+                            />
+                        ) : (
+                            <ResourcesForm
+                                updateNamespace={namespace =>
+                                    this.setState({
+                                        namespace: namespace,
+                                        unsavedData: true,
+                                    })
+                                }
+                                namespace={namespace}
+                            />
+                        )}
+                        <Form>
+                            <ActionGroup>
+                                <Button
+                                    variant='primary'
+                                    onClick={() => this.saveNamespace()}
+                                >
+                                    Save
+                                </Button>
+                                <Button
+                                    variant='secondary'
+                                    onClick={() => this.cancel()}
+                                >
+                                    Cancel
+                                </Button>
+
+                                {this.state.saving ? <Spinner></Spinner> : null}
+                            </ActionGroup>
+                            {this.state.unsavedData ? (
+                                <div style={{ color: 'red' }}>
+                                    You have unsaved changes
+                                </div>
+                            ) : null}
+                        </Form>
+                    </Section>
                 </Main>
             </React.Fragment>
         );
     }
 
-    saveNamespace() {
+    private loadNamespace() {
+        NamespaceAPI.get(this.props.match.params['namespace'])
+            .then(response => {
+                this.setState({ namespace: response.data });
+            })
+            .catch(response => {
+                this.setState({ redirect: Paths.notFound });
+            });
+    }
+
+    private updateTab(key: TabKeys) {
+        this.queryParams.set('tab', key.toString());
+
+        this.props.history.push({
+            pathname: this.props.location.pathname,
+            search: '?' + this.queryParams.toString(),
+        });
+
+        this.setState({ tab: key });
+    }
+
+    private saveNamespace() {
         this.setState({ saving: true }, () => {
             NamespaceAPI.update(this.state.namespace.name, this.state.namespace)
                 .then(result => {
@@ -89,9 +157,7 @@ class EditNamespace extends React.Component<IProps, IState> {
                         namespace: result.data,
                         errorMessages: {},
                         saving: false,
-                        redirect: formatPath(Paths.myCollections, {
-                            namespace: result.data.name,
-                        }),
+                        unsavedData: false,
                     });
                 })
                 .catch(result => {
@@ -103,7 +169,11 @@ class EditNamespace extends React.Component<IProps, IState> {
         });
     }
 
-    validateNamesace(namespace) {
+    private cancel() {
+        this.setState({ unsavedData: false }, () => this.loadNamespace());
+    }
+
+    private validateNamesace(namespace) {
         // TODO: add data validation once error format and validation checks
         // are known
     }

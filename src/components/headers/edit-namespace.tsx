@@ -12,23 +12,44 @@ import {
     GridItem,
 } from '@patternfly/react-core';
 
+import { Link } from 'react-router-dom';
+
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+
+import { Paths, formatPath } from '../../paths';
 
 interface IProps {
     namespace: Namespace;
+    activeTab: TabKeys;
+
+    tabClick: (key) => void;
+}
+
+export enum TabKeys {
+    details = 1,
+    resources = 2,
 }
 
 export class EditNamespaceHeader extends React.Component<IProps, {}> {
     render() {
-        const { namespace } = this.props;
+        const { namespace, activeTab } = this.props;
+        // TODO: Fix links on breadcrumbs to use react router.
         return (
             <BaseHeader
                 title={namespace.company}
                 imageURL={namespace.avatar_url}
                 breadcrumbs={
                     <Breadcrumb>
-                        <BreadcrumbItem to='#'>My Namespaces</BreadcrumbItem>
-                        <BreadcrumbItem to='#'>{namespace.name}</BreadcrumbItem>
+                        <BreadcrumbItem to={Paths.myNamespaces}>
+                            My Namespaces
+                        </BreadcrumbItem>
+                        <BreadcrumbItem
+                            to={formatPath(Paths.myCollections, {
+                                namespace: namespace.name,
+                            })}
+                        >
+                            {namespace.name}
+                        </BreadcrumbItem>
                         <BreadcrumbItem isActive>Edit</BreadcrumbItem>
                     </Breadcrumb>
                 }
@@ -38,9 +59,18 @@ export class EditNamespaceHeader extends React.Component<IProps, {}> {
                         <GridItem span={12}>{namespace.description}</GridItem>
                     ) : null}
                     <GridItem span={4}>
-                        <Tabs>
-                            <Tab eventKey={0} title='Edit Details'></Tab>
-                            <Tab eventKey={1} title='Edit Resources'></Tab>
+                        <Tabs
+                            activeKey={activeTab}
+                            onSelect={(_, index) => this.props.tabClick(index)}
+                        >
+                            <Tab
+                                eventKey={TabKeys.details}
+                                title='Edit Details'
+                            ></Tab>
+                            <Tab
+                                eventKey={TabKeys.resources}
+                                title='Edit Resources'
+                            ></Tab>
                         </Tabs>
                     </GridItem>
                     {namespace.useful_links.length > 0 ? (

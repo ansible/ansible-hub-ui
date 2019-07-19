@@ -68,8 +68,8 @@ export const Routes = props => {
             {/* Finally, catch all unmatched routes */}
             <Route
                 render={() =>
-                    some(paths, p => p === path) ? null : (
-                        <Redirect to={paths.samplepage} />
+                    some(Paths, p => p === path) ? null : (
+                        <Redirect to={Paths.notFound} />
                     )
                 }
             />

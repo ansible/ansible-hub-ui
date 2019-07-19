@@ -1,16 +1,7 @@
 import * as React from 'react';
 import './namespace-form.scss';
 
-import {
-    Form,
-    FormGroup,
-    TextInput,
-    ActionGroup,
-    Button,
-    TextArea,
-} from '@patternfly/react-core';
-
-import { Section, Spinner } from '@redhat-cloud-services/frontend-components';
+import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
 
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
@@ -21,11 +12,8 @@ import { Namespace } from '../../api/response-types/namespace';
 interface IProps {
     namespace: Namespace;
     errorMessages: any;
-    saving: boolean;
 
     updateNamespace: (namespace) => void;
-    save: () => void;
-    cancel: () => void;
 }
 
 interface IState {
@@ -51,130 +39,109 @@ export class NamespaceForm extends React.Component<IProps, IState> {
             return null;
         }
         return (
-            <Section className='body'>
-                <Form>
-                    <div className='card-row'>
-                        <div className='fields'>
-                            <FormGroup fieldId='name' label='Name' isRequired>
-                                <TextInput
-                                    isRequired
-                                    id='name'
-                                    type='text'
-                                    value={namespace.name}
-                                    onChange={(value, event) =>
-                                        this.udateField(value, event)
-                                    }
-                                />
-                            </FormGroup>
-
-                            <br />
-
-                            <FormGroup
-                                fieldId='company'
-                                label='Company Name'
+            <Form>
+                <div className='card-row'>
+                    <div className='fields'>
+                        <FormGroup fieldId='name' label='Name' isRequired>
+                            <TextInput
                                 isRequired
-                            >
-                                <TextInput
-                                    isRequired
-                                    id='company'
-                                    type='text'
-                                    value={namespace.company}
-                                    onChange={(value, event) =>
-                                        this.udateField(value, event)
-                                    }
-                                />
-                            </FormGroup>
+                                isDisabled
+                                id='name'
+                                type='text'
+                                value={namespace.name}
+                            />
+                        </FormGroup>
+
+                        <br />
+
+                        <FormGroup
+                            fieldId='company'
+                            label='Company Name'
+                            isRequired
+                        >
+                            <TextInput
+                                isRequired
+                                id='company'
+                                type='text'
+                                value={namespace.company}
+                                onChange={(value, event) =>
+                                    this.udateField(value, event)
+                                }
+                            />
+                        </FormGroup>
+                    </div>
+                    <div className='card'>
+                        <NamespaceCard {...namespace} />
+                    </div>
+                </div>
+
+                <FormGroup fieldId='avatar_url' label='Logo URL'>
+                    <TextInput
+                        id='avatar_url'
+                        type='text'
+                        value={namespace.avatar_url}
+                        onChange={(value, event) =>
+                            this.udateField(value, event)
+                        }
+                    />
+                </FormGroup>
+
+                <FormGroup fieldId='description' label='Description'>
+                    <TextArea
+                        id='description'
+                        type='text'
+                        value={namespace.description}
+                        onChange={(value, event) =>
+                            this.udateField(value, event)
+                        }
+                    />
+                </FormGroup>
+
+                {namespace.useful_links.length > 0 ? (
+                    <FormGroup fieldId='useful_links' label='Useful Links'>
+                        {namespace.useful_links.map((link, index) =>
+                            this.renderLinkGroup(link, index),
+                        )}
+                    </FormGroup>
+                ) : null}
+
+                <FormGroup fieldId='add_link' label='Add Link'>
+                    <div className='useful-links'>
+                        <div className='link-name'>
+                            <TextInput
+                                id='name'
+                                type='text'
+                                placeholder='Link Text'
+                                value={this.state.newLinkName}
+                                onChange={value => {
+                                    this.setState({
+                                        newLinkName: value,
+                                    });
+                                }}
+                            />
                         </div>
-                        <div className='card'>
-                            <NamespaceCard {...namespace} />
+                        <div className='link-url'>
+                            <TextInput
+                                id='url'
+                                type='text'
+                                placeholder='Link Url'
+                                value={this.state.newLinkURL}
+                                onChange={value =>
+                                    this.setState({
+                                        newLinkURL: value,
+                                    })
+                                }
+                            />
+                        </div>
+                        <div className='link-button'>
+                            <PlusCircleIcon
+                                onClick={() => this.addLink()}
+                                size='md'
+                            />
                         </div>
                     </div>
-
-                    <FormGroup fieldId='avatar_url' label='Logo URL'>
-                        <TextInput
-                            id='avatar_url'
-                            type='text'
-                            value={namespace.avatar_url}
-                            onChange={(value, event) =>
-                                this.udateField(value, event)
-                            }
-                        />
-                    </FormGroup>
-
-                    <FormGroup fieldId='description' label='Description'>
-                        <TextArea
-                            id='description'
-                            type='text'
-                            value={namespace.description}
-                            onChange={(value, event) =>
-                                this.udateField(value, event)
-                            }
-                        />
-                    </FormGroup>
-
-                    {namespace.useful_links.length > 0 ? (
-                        <FormGroup fieldId='useful_links' label='Useful Links'>
-                            {namespace.useful_links.map((link, index) =>
-                                this.renderLinkGroup(link, index),
-                            )}
-                        </FormGroup>
-                    ) : null}
-
-                    <FormGroup fieldId='add_link' label='Add Link'>
-                        <div className='useful-links'>
-                            <div className='link-name'>
-                                <TextInput
-                                    id='name'
-                                    type='text'
-                                    placeholder='Link Text'
-                                    value={this.state.newLinkName}
-                                    onChange={value => {
-                                        this.setState({
-                                            newLinkName: value,
-                                        });
-                                    }}
-                                />
-                            </div>
-                            <div className='link-url'>
-                                <TextInput
-                                    id='url'
-                                    type='text'
-                                    placeholder='Link Url'
-                                    value={this.state.newLinkURL}
-                                    onChange={value =>
-                                        this.setState({
-                                            newLinkURL: value,
-                                        })
-                                    }
-                                />
-                            </div>
-                            <div className='link-button'>
-                                <PlusCircleIcon
-                                    onClick={() => this.addLink()}
-                                    size='md'
-                                />
-                            </div>
-                        </div>
-                    </FormGroup>
-
-                    <ActionGroup>
-                        <Button
-                            variant='primary'
-                            onClick={() => this.props.save()}
-                        >
-                            Save
-                        </Button>
-                        <Button
-                            variant='secondary'
-                            onClick={() => this.props.cancel()}
-                        >
-                            Cancel
-                        </Button>
-
-                        {this.props.saving ? <Spinner></Spinner> : null}
-                    </ActionGroup>
-                </Form>
-            </Section>
+                </FormGroup>
+            </Form>
         );
     }
 

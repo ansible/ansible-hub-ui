@@ -14,9 +14,30 @@
     }
 }
 
-.body {
-    background-color: white;
-    padding: 15px;
+.markdown-editor {
+    display: flex;
+    // flex-wrap: wrap;
+
+    .column {
+        flex-grow: 1;
+        margin-right: 15px;
+    }
+
+    .preview-container {
+        .preview {
+            overflow: scroll;
+            height: 500px;
+            border: 1px solid #ededed;
+            padding: 5px;
+        }
+    }
+
+    .editor {
+        // I don't know why, but just setting width causes this element to get
+        // shrunk whenever the preview window expands.
+        min-width: 500px;
+        max-width: 500px;
+    }
 }
 
 .useful-links {
@@ -38,4 +59,8 @@
         margin-left: 10px;
         cursor: pointer;
     }
+}
+
+.resources-editor {
+    height: 500px;
 }

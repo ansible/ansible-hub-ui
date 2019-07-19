@@ -22,4 +22,5 @@ export enum Paths {
     collectionContentList = '/:namespace/:collection/content',
     collection = '/:namespace/:collection',
     namespace = '/:namespace',
+    notFound = '/not-found',
 }
