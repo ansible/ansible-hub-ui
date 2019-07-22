@@ -9,6 +9,9 @@
         width: 100px;
         height: 100px;
         margin: 10px;
+        display: flex;
+        align-items: center;
+
         img {
             object-fit: contain;
         }

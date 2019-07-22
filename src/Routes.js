@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import asyncComponent from './Utilities/asyncComponent';
 import some from 'lodash/some';
+import { Paths } from './paths';
 
 /**
  * Aysnc imports of components
@@ -18,29 +19,14 @@ import some from 'lodash/some';
  *         see the difference with DashboardMap and InventoryDeployments.
  *
  */
-const SamplePage = asyncComponent(() =>
-    import(/* webpackChunkName: "SamplePage" */ './containers/SamplePage/SamplePage'),
+const EditNamespace = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "SamplePage" */ './containers/edit-namespace/namespace-form'
+    ),
 );
 const Rules = asyncComponent(() =>
     import(/* webpackChunkName: "Rules" */ './components/Rules/ListRules'),
 );
-
-export const paths = {
-    samplepage: '/samplepage',
-    rules: '/rules',
-    myCollections: '/me/namespaces/:namespace',
-    myNamespaces: '/me/namespaces',
-    myImportsNamespace: '/me/imports/:namespace',
-    myImports: '/me/imports',
-    myPreferences: '/me/preferences',
-    search: '/search',
-    collectionContentDocs: '/:namespace/:collection/:type/:name',
-    collectionDocsPage: '/:namepsace/:collection/docs/:page',
-    collectionDocsIndex: '/:namespace/:collection/docs',
-    collectionContentList: '/:namespace/:collection/content',
-    collection: '/:namespace/:collection',
-    namespace: '/:namespace',
-};
 
 // Props = {
 //     childProps: any,
@@ -74,21 +60,16 @@ export const Routes = props => {
     return (
         <Switch>
             <InsightsRoute
-                path={paths.samplepage}
-                component={SamplePage}
-                rootClass="samplepage"
-            />
-            <InsightsRoute
-                path={paths.rules}
-                component={Rules}
-                rootClass="rules"
+                path={Paths.editNamespace}
+                component={EditNamespace}
+                rootClass='root'
             />
 
             {/* Finally, catch all unmatched routes */}
             <Route
                 render={() =>
-                    some(paths, p => p === path) ? null : (
-                        <Redirect to={paths.samplepage} />
+                    some(Paths, p => p === path) ? null : (
+                        <Redirect to={Paths.notFound} />
                     )
                 }
             />

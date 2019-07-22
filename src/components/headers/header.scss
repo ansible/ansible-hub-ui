@@ -1,7 +1,10 @@
+@import '../../global-variables.scss';
+
 .image-container {
     width: 50px;
     height: 50px;
-    display: inline-block;
+    display: flex;
+    align-items: center;
 }
 
 .image {
@@ -33,5 +36,47 @@
 }
 
 .breadcrumb-container {
-    padding-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.header-bottom {
+    padding-top: 10px;
+}
+
+.tab-link-container {
+    display: flex;
+    margin-top: 10px;
+    @media (max-width: $breakpoint-md) {
+        flex-direction: column-reverse;
+    }
+
+    .tabs {
+        flex-grow: 0;
+    }
+
+    .links {
+        @media (min-width: $breakpoint-md) {
+            justify-content: flex-end;
+        }
+        @media (max-width: $breakpoint-md) {
+            margin-bottom: 10px;
+        }
+
+        flex-grow: 1;
+
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        div {
+            @media (min-width: $breakpoint-md) {
+                margin-left: 20px;
+            }
+
+            @media (max-width: $breakpoint-md) {
+                margin-right: 20px;
+            }
+        }
+    }
 }

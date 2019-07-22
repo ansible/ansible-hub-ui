@@ -26,20 +26,20 @@ export class BaseHeader extends React.Component<IProps, {}> {
             breadcrumbs,
         } = this.props;
         return (
-            <div className="background">
+            <div className='background'>
                 {breadcrumbs ? (
-                    <div className="breadcrumb-container">{breadcrumbs}</div>
+                    <div className='breadcrumb-container'>{breadcrumbs}</div>
                 ) : (
-                    <div className="placeholder" />
+                    <div className='placeholder' />
                 )}
-                <div className="column-section">
-                    <div className="title-box">
+                <div className='column-section'>
+                    <div className='title-box'>
                         {imageURL ? (
-                            <div className="image-container">
+                            <div className='image-container'>
                                 <img
-                                    className="image"
+                                    className='image'
                                     src={imageURL}
-                                    alt="Page logo"
+                                    alt='Page logo'
                                 />
                             </div>
                         ) : null}
@@ -49,14 +49,14 @@ export class BaseHeader extends React.Component<IProps, {}> {
                     </div>
 
                     {pageControls ? (
-                        <div className="header-right">{pageControls}</div>
+                        <div className='header-right'>{pageControls}</div>
                     ) : null}
                 </div>
 
                 {children ? (
-                    <div>{children}</div>
+                    <div className='header-bottom'>{children}</div>
                 ) : (
-                    <div className="placeholder" />
+                    <div className='placeholder' />
                 )}
             </div>
         );

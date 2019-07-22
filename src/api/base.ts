@@ -11,7 +11,7 @@ export class BaseAPI {
         });
     }
 
-    list(params: object, apiPath?: string) {
+    list(params?: object, apiPath?: string) {
         const path = apiPath || this.apiPath;
         return this.http.get(path, params);
     }

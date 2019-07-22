@@ -17,6 +17,7 @@
         "classnames": "^2.2.5",
         "react": "^16.4.2",
         "react-dom": "^16.4.2",
+        "react-markdown": "^4.1.0",
         "react-redux": "^5.0.7",
         "react-router-dom": "^4.2.2",
         "redux": "^3.7.2",
