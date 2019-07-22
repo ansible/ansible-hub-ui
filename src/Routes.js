@@ -24,13 +24,66 @@ const EditNamespace = asyncComponent(() =>
         /* webpackChunkName: "SamplePage" */ './containers/edit-namespace/namespace-form'
     ),
 );
-const Rules = asyncComponent(() =>
-    import(/* webpackChunkName: "Rules" */ './components/Rules/ListRules'),
+
+const CollectionDetail = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "Rules" */ './containers/collection-detail/collection-detail'
+    ),
 );
 
-// Props = {
-//     childProps: any,
-// };
+const CollectionContent = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "Rules" */ './containers/collection-detail/collection-content'
+    ),
+);
+
+const CollectionDocs = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "Rules" */ './containers/collection-detail/collection-docs'
+    ),
+);
+
+const CollectionContentDocs = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "Rules" */ './containers/collection-detail/collection-content-docs'
+    ),
+);
+
+const NotFound = asyncComponent(() =>
+    import(/* webpackChunkName: "Rules" */ './containers/not-found/not-found'),
+);
+
+const MyCollections = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "Rules" */ './containers/my-namespaces/my-collections'
+    ),
+);
+
+const MyNamespaces = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "Rules" */ './containers/my-namespaces/my-namespaces'
+    ),
+);
+
+const PartnerDetail = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "Rules" */ './containers/partners/partner-detail'
+    ),
+);
+
+const Partners = asyncComponent(() =>
+    import(/* webpackChunkName: "Rules" */ './containers/partners/partners'),
+);
+
+const MyImports = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "Rules" */ './containers/my-imports/my-imports'
+    ),
+);
+
+const Search = asyncComponent(() =>
+    import(/* webpackChunkName: "Rules" */ './containers/search/search'),
+);
 
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
     const root = document.getElementById('root');
@@ -60,11 +113,77 @@ export const Routes = props => {
     return (
         <Switch>
             <InsightsRoute
+                path={Paths.notFound}
+                component={NotFound}
+                rootClass='root'
+            />
+            <InsightsRoute
+                path={Paths.partners}
+                component={Partners}
+                rootClass='root'
+            />
+            <InsightsRoute
                 path={Paths.editNamespace}
                 component={EditNamespace}
                 rootClass='root'
             />
+            <InsightsRoute
+                path={Paths.myCollections}
+                component={MyCollections}
+                rootClass='root'
+            />
+            <InsightsRoute
+                path={Paths.myNamespaces}
+                component={MyNamespaces}
+                rootClass='root'
+            />
 
+            <InsightsRoute
+                path={Paths.collectionDocsIndex}
+                component={CollectionDocs}
+                rootClass='root'
+            />
+            <InsightsRoute
+                path={Paths.collectionDocsPage}
+                component={CollectionDocs}
+                rootClass='root'
+            />
+            <InsightsRoute
+                path={Paths.collectionContentDocs}
+                component={CollectionContentDocs}
+                rootClass='root'
+            />
+            <InsightsRoute
+                path={Paths.collectionContentList}
+                component={CollectionContent}
+                rootClass='root'
+            />
+
+            <InsightsRoute
+                path={Paths.myImportsNamespace}
+                component={MyImports}
+                rootClass='root'
+            />
+            <InsightsRoute
+                path={Paths.myImports}
+                component={MyImports}
+                rootClass='root'
+            />
+            <InsightsRoute
+                path={Paths.collection}
+                component={CollectionDetail}
+                rootClass='root'
+            />
+            <InsightsRoute
+                path={Paths.namespace}
+                component={PartnerDetail}
+                rootClass='root'
+            />
+            <InsightsRoute
+                path={Paths.search}
+                component={Search}
+                rootClass='root'
+            />
             {/* Finally, catch all unmatched routes */}
             <Route
                 render={() =>
