@@ -13,7 +13,7 @@ This app is part of the Red Hat cloud platform. Because of that the app needs to
   - `npm install`
   - `sudo bash scripts/patch-etc-hosts.sh` This adds the following entries to your `/etc/hosts` file
 
-  ```
+```
 127.0.0.1 prod.foo.redhat.com
 127.0.0.1 stage.foo.redhat.com
 127.0.0.1 qa.foo.redhat.com
