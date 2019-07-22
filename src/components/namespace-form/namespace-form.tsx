@@ -65,7 +65,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                                 type='text'
                                 value={namespace.company}
                                 onChange={(value, event) =>
-                                    this.udateField(value, event)
+                                    this.updateField(value, event)
                                 }
                             />
                         </FormGroup>
@@ -81,7 +81,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                         type='text'
                         value={namespace.avatar_url}
                         onChange={(value, event) =>
-                            this.udateField(value, event)
+                            this.updateField(value, event)
                         }
                     />
                 </FormGroup>
@@ -92,7 +92,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                         type='text'
                         value={namespace.description}
                         onChange={(value, event) =>
-                            this.udateField(value, event)
+                            this.updateField(value, event)
                         }
                     />
                 </FormGroup>
@@ -131,6 +131,11 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                                         newLinkURL: value,
                                     })
                                 }
+                                onKeyDown={e => {
+                                    if (e.key === 'Enter') {
+                                        this.addLink();
+                                    }
+                                }}
                             />
                         </div>
                         <div className='link-button'>
@@ -145,7 +150,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         );
     }
 
-    private udateField(value, event) {
+    private updateField(value, event) {
         const update = { ...this.props.namespace };
         update[event.target.id] = value;
         this.props.updateNamespace(update);
