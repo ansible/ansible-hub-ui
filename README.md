@@ -1,24 +1,53 @@
 # Ansible Automation Hub UI
 
-Ansible Automation Hub UI site.
+Frontend for Ansible Automation Hub. The backend for this project can be [found here](https://github.com/ansible/galaxy-dev/)
 
-## Getting Started
+## Setting up Your Dev Environment
 
-There is a [comprehensive quick start guide in the Storybook Documentation](https://github.com/RedHatInsights/insights-frontend-storybook/blob/master/src/docs/welcome/quickStart/DOC.md) to setting up an Insights environment complete with:
+This app is part of the Red Hat cloud platform. Because of that the app needs to be loaded within the context of cloud.redhat.com. This is done by accessing the app via the [insights-proxy project](https://github.com/RedHatInsights/insights-proxy).
 
-- Insights Frontend Starter App
+### Set up Insights Proxy
+- Install docker
+- Clone this repo `git@github.com:RedHatInsights/insights-proxy.git` to your machine
+- Inside the `insights-proxy/` directory on your computer, run the following scripts
+  - `npm install`
+  - `sudo bash scripts/patch-etc-hosts.sh` This adds the following entries to your `/etc/hosts` file
 
-- [Insights Chroming](https://github.com/RedHatInsights/insights-chrome)
-- [Insights Proxy](https://github.com/RedHatInsights/insights-proxy)
+  ```
+127.0.0.1 prod.foo.redhat.com
+127.0.0.1 stage.foo.redhat.com
+127.0.0.1 qa.foo.redhat.com
+127.0.0.1 ci.foo.redhat.com
+```
 
-Note: You will need to set up the Insights environment if you want to develop with the starter app due to the consumption of the chroming service as well as setting up your global/app navigation through the API.
+  - `bash scripts/update.sh` This updates the insights proxy container to the latest version.
 
-## Build app
+Once all this is done, you can launch `insights-proxy` with this command:
 
-1. ```npm install```
+```
+SPANDX_CONFIG=/path/to/ansible-hub-ui/profiles/local-frontend-and-api.js bash /path/to/insights-proxy/scripts/run.sh
+```
 
-2. ```npm run start```
-    - starts webpack bundler and serves the files with webpack dev server
+This should launch `insights-proxy`, which will redirect the routes defined in `profiles/local-frontend-and-api.js` to the automation hub UI running locally on your machine.
+
+#### NOTE
+
+If you are on a Mac, you might have to make a small change to the `insights-proxy/scripts/run.sh` script. Update this line
+
+```
+REALPATH=`python2 -c 'import os,sys;print os.path.realpath(sys.argv[1])' $SPANDX_CONFIG`
+```
+
+to use `python` instead of `python2`.
+
+### Run Automation Hub
+
+Once the insights proxy is running simply execute
+
+1. `npm install`
+2. `npm run start`
+
+To access the app, visit: https://ci.foo.redhat.com:1337/insights/automation-hub
 
 ### Testing
 
