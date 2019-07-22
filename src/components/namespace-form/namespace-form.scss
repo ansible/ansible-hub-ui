@@ -1,4 +1,9 @@
+@import '../../global-variables.scss';
 .card-row {
+    @media (max-width: $breakpoint-md) {
+        flex-direction: column-reverse;
+    }
+
     display: flex;
 
     .fields {
@@ -7,20 +12,26 @@
     }
 
     .card {
-        border-left: 24px solid #ededed;
-        border-bottom: 24px solid #ededed;
-        margin-top: -15px;
-        margin-right: -15px;
+        @media (min-width: $breakpoint-md) {
+            border-left: 24px solid #ededed;
+            border-bottom: 24px solid #ededed;
+            margin-top: -15px;
+            margin-right: -15px;
+        }
     }
 }
 
 .markdown-editor {
     display: flex;
-    // flex-wrap: wrap;
+
+    @media (max-width: $breakpoint-md) {
+        flex-direction: column-reverse;
+    }
 
     .column {
         flex-grow: 1;
         margin-right: 15px;
+        margin-bottom: 15px;
     }
 
     .preview-container {

@@ -54,11 +54,12 @@ export class EditNamespaceHeader extends React.Component<IProps, {}> {
                     </Breadcrumb>
                 }
             >
-                <Grid gutter='sm'>
-                    {namespace.description ? (
-                        <GridItem span={12}>{namespace.description}</GridItem>
-                    ) : null}
-                    <GridItem span={4}>
+                {namespace.description ? (
+                    <div>{namespace.description}</div>
+                ) : null}
+
+                <div className='tab-link-container'>
+                    <div className='tabs'>
                         <Tabs
                             activeKey={activeTab}
                             onSelect={(_, index) => this.props.tabClick(index)}
@@ -72,23 +73,26 @@ export class EditNamespaceHeader extends React.Component<IProps, {}> {
                                 title='Edit Resources'
                             ></Tab>
                         </Tabs>
-                    </GridItem>
+                    </div>
                     {namespace.useful_links.length > 0 ? (
-                        <GridItem className='links' span={8}>
+                        <div className='links'>
                             <div>
                                 <ExternalLinkAltIcon />
                             </div>
                             {namespace.useful_links.map((x, i) => {
                                 return (
-                                    <div key={i}>
+                                    <div className='link' key={i}>
                                         <a href={x.url} target='blank'>
                                             {x.name}
                                         </a>
                                     </div>
                                 );
                             })}
-                        </GridItem>
+                        </div>
                     ) : null}
+                </div>
+                <Grid gutter='sm'>
+                    <GridItem span={4}></GridItem>
                 </Grid>
             </BaseHeader>
         );
