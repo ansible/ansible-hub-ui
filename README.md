@@ -41,7 +41,7 @@ to use `python` instead of `python2`.
 
 ### Run Automation Hub
 
-Once the insights proxy is running simply execute
+Once the insights proxy is running, open a new terminal, navigate to your local copy of `ansible-hub-ui` and execute
 
 1. `npm install`
 2. `npm run start`
