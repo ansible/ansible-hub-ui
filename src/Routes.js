@@ -123,6 +123,11 @@ export const Routes = props => {
                 rootClass='root'
             />
             <InsightsRoute
+                path={Paths.editNamespace}
+                component={EditNamespace}
+                rootClass='root'
+            />
+            <InsightsRoute
                 path={Paths.myCollections}
                 component={MyCollections}
                 rootClass='root'
@@ -132,11 +137,7 @@ export const Routes = props => {
                 component={MyNamespaces}
                 rootClass='root'
             />
-            <InsightsRoute
-                path={Paths.editNamespace}
-                component={EditNamespace}
-                rootClass='root'
-            />
+
             <InsightsRoute
                 path={Paths.collectionDocsIndex}
                 component={CollectionDocs}
@@ -157,15 +158,20 @@ export const Routes = props => {
                 component={CollectionContent}
                 rootClass='root'
             />
+
             <InsightsRoute
-                path={Paths.collection}
-                component={CollectionDetail}
+                path={Paths.myImportsNamespace}
+                component={MyImports}
                 rootClass='root'
             />
-
             <InsightsRoute
                 path={Paths.myImports}
                 component={MyImports}
+                rootClass='root'
+            />
+            <InsightsRoute
+                path={Paths.collection}
+                component={CollectionDetail}
                 rootClass='root'
             />
             <InsightsRoute

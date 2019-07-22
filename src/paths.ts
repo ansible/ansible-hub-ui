@@ -11,13 +11,11 @@ export function formatPath(path: Paths, data: any) {
 export enum Paths {
     myCollections = '/my-namespaces/:namespace',
     myNamespaces = '/my-namespaces/',
-    // We're handling namespace creation in django admin
-    // newNamespace = '/my-namespaces/edit/',
     editNamespace = '/my-namespaces/edit/:namespace',
     myImportsNamespace = '/my-imports/:namespace',
     myImports = '/my-imports',
     search = '/',
-    collectionDocsPage = '/:namepsace/:collection/docs/:page',
+    collectionDocsPage = '/:namespace/:collection/docs/:page',
     collectionDocsIndex = '/:namespace/:collection/docs',
     collectionContentDocs = '/:namespace/:collection/content/:type/:name',
     collectionContentList = '/:namespace/:collection/content',
