@@ -11,6 +11,7 @@ This app is part of the Red Hat cloud platform. Because of that the app needs to
 - Clone this repo `git@github.com:RedHatInsights/insights-proxy.git` to your machine
 - Inside the `insights-proxy/` directory on your computer, run the following scripts
   - `npm install`
+  - `bash scripts/update.sh` This updates the insights proxy container to the latest version.
   - `sudo bash scripts/patch-etc-hosts.sh` This adds the following entries to your `/etc/hosts` file
 
 ```
@@ -19,8 +20,6 @@ This app is part of the Red Hat cloud platform. Because of that the app needs to
 127.0.0.1 qa.foo.redhat.com
 127.0.0.1 ci.foo.redhat.com
 ```
-
-  - `bash scripts/update.sh` This updates the insights proxy container to the latest version.
 
 Once all this is done, you can launch `insights-proxy` with this command:
 
