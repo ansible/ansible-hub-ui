@@ -33,22 +33,23 @@ export enum TabKeys {
 export class EditNamespaceHeader extends React.Component<IProps, {}> {
     render() {
         const { namespace, activeTab } = this.props;
-        // TODO: Fix links on breadcrumbs to use react router.
         return (
             <BaseHeader
                 title={namespace.company}
                 imageURL={namespace.avatar_url}
                 breadcrumbs={
                     <Breadcrumb>
-                        <BreadcrumbItem to={Paths.myNamespaces}>
-                            My Namespaces
+                        <BreadcrumbItem>
+                            <Link to={Paths.myNamespaces}>My Namespaces</Link>
                         </BreadcrumbItem>
-                        <BreadcrumbItem
-                            to={formatPath(Paths.myCollections, {
-                                namespace: namespace.name,
-                            })}
-                        >
-                            {namespace.name}
+                        <BreadcrumbItem>
+                            <Link
+                                to={formatPath(Paths.myCollections, {
+                                    namespace: namespace.name,
+                                })}
+                            >
+                                {namespace.name}
+                            </Link>
                         </BreadcrumbItem>
                         <BreadcrumbItem isActive>Edit</BreadcrumbItem>
                     </Breadcrumb>
