@@ -25,7 +25,7 @@ export class CollectionListItem extends React.Component<CollectionList, {}> {
                 <DataListItemRow>
                     <DataListItemCells
                         dataListCells={[
-                            <DataListCell key='primary content'>
+                            <DataListCell key='content'>
                                 <div>
                                     <Link
                                         to={formatPath(Paths.collection, {
@@ -40,16 +40,18 @@ export class CollectionListItem extends React.Component<CollectionList, {}> {
                                     {latest_version.metadata.description}
                                 </div>
                                 <div className='entry pf-l-flex pf-m-wrap'>
-                                    {latest_version.metadata.tags.map(tag => (
-                                        <Tag>{tag}</Tag>
-                                    ))}
+                                    {latest_version.metadata.tags.map(
+                                        (tag, index) => (
+                                            <Tag key={index}>{tag}</Tag>
+                                        ),
+                                    )}
                                 </div>
                                 <div className='entry pf-l-flex pf-m-wrap'>
                                     {Object.keys(
                                         latest_version.content_summary.contents,
                                     ).map(k => {
                                         return (
-                                            <div>
+                                            <div key={k}>
                                                 <NumericLabel
                                                     label={k}
                                                     number={
@@ -66,7 +68,7 @@ export class CollectionListItem extends React.Component<CollectionList, {}> {
                             <DataListCell
                                 isFilled={false}
                                 alignRight
-                                key='secondary content align'
+                                key='stats'
                             >
                                 <div className='right-col entry'>
                                     <NumericLabel
