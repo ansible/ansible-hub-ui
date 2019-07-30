@@ -1,7 +1,16 @@
-.entry {
-    margin-top: 5px;
+.controls {
+    display: flex;
+    justify-content: space-between;
+
+    // padding-left: 24px;
+    // padding-right: 24px;
+}
+.top {
+    padding-top: 0px;
+    padding-bottom: 10px;
 }
 
-.right-col {
-    width: 200px;
+.bottom {
+    padding-top: 10px;
+    padding-bottom: 0px;
 }

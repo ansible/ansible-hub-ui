@@ -20,61 +20,25 @@ import { Paths, formatPath } from '../../paths';
 
 interface IProps {
     namespace: Namespace;
-    activeTab: TabKeys;
-
-    tabClick: (key) => void;
+    tabs: React.ReactNode;
+    breadcrumbs: React.ReactNode;
 }
 
-export enum TabKeys {
-    details = 1,
-    resources = 2,
-}
-
-export class EditNamespaceHeader extends React.Component<IProps, {}> {
+export class PartnerHeader extends React.Component<IProps, {}> {
     render() {
-        const { namespace, activeTab } = this.props;
+        const { namespace, breadcrumbs, tabs } = this.props;
         return (
             <BaseHeader
                 title={namespace.company}
                 imageURL={namespace.avatar_url}
-                breadcrumbs={
-                    <Breadcrumb>
-                        <BreadcrumbItem>
-                            <Link to={Paths.myNamespaces}>My Namespaces</Link>
-                        </BreadcrumbItem>
-                        <BreadcrumbItem>
-                            <Link
-                                to={formatPath(Paths.myCollections, {
-                                    namespace: namespace.name,
-                                })}
-                            >
-                                {namespace.name}
-                            </Link>
-                        </BreadcrumbItem>
-                        <BreadcrumbItem isActive>Edit</BreadcrumbItem>
-                    </Breadcrumb>
-                }
+                breadcrumbs={breadcrumbs}
             >
                 {namespace.description ? (
                     <div>{namespace.description}</div>
                 ) : null}
 
                 <div className='tab-link-container'>
-                    <div className='tabs'>
-                        <Tabs
-                            activeKey={activeTab}
-                            onSelect={(_, index) => this.props.tabClick(index)}
-                        >
-                            <Tab
-                                eventKey={TabKeys.details}
-                                title='Edit Details'
-                            ></Tab>
-                            <Tab
-                                eventKey={TabKeys.resources}
-                                title='Edit Resources'
-                            ></Tab>
-                        </Tabs>
-                    </div>
+                    <div className='tabs'>{tabs}</div>
                     {namespace.useful_links.length > 0 ? (
                         <div className='links'>
                             <div>

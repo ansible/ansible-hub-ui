@@ -7,21 +7,28 @@ import {
     Spinner,
 } from '@redhat-cloud-services/frontend-components';
 
-import {
-    EditNamespaceHeader,
-    TabKeys,
-} from '../../components/headers/edit-namespace';
+import { PartnerHeader } from '../../components/headers/partner-header';
 import { NamespaceForm } from '../../components/namespace-form/namespace-form';
 import { ResourcesForm } from '../../components/namespace-form/resources-form';
 
 import { NamespaceAPI } from '../../api/namespace';
 import { Namespace } from '../../api/response-types/namespace';
 
-import { Paths } from '../../paths';
-
 interface IProps extends RouteComponentProps {}
 
-import { Form, ActionGroup, Button, Alert } from '@patternfly/react-core';
+import {
+    Form,
+    ActionGroup,
+    Button,
+    Breadcrumb,
+    BreadcrumbItem,
+    Tab,
+    Tabs,
+} from '@patternfly/react-core';
+
+import { Paths, formatPath } from '../../paths';
+
+import { Link } from 'react-router-dom';
 
 interface IState {
     namespace: Namespace;
@@ -32,6 +39,11 @@ interface IState {
     redirect: string;
     tab: TabKeys;
     unsavedData: boolean;
+}
+
+enum TabKeys {
+    details = 1,
+    resources = 2,
 }
 
 class EditNamespace extends React.Component<IProps, IState> {
@@ -70,11 +82,48 @@ class EditNamespace extends React.Component<IProps, IState> {
         }
         return (
             <React.Fragment>
-                <EditNamespaceHeader
+                <PartnerHeader
                     namespace={namespace}
-                    activeTab={tab}
-                    tabClick={key => this.updateTab(key)}
-                ></EditNamespaceHeader>
+                    breadcrumbs={
+                        <Breadcrumb>
+                            <BreadcrumbItem>
+                                <Link to={Paths.myNamespaces}>
+                                    My Namespaces
+                                </Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem>
+                                <Link
+                                    to={formatPath(Paths.myCollections, {
+                                        namespace: namespace.name,
+                                    })}
+                                >
+                                    {namespace.name}
+                                </Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem isActive>Edit</BreadcrumbItem>
+                        </Breadcrumb>
+                    }
+                    tabs={
+                        <Tabs
+                            activeKey={tab}
+                            onSelect={(_, key) =>
+                                // For some reason this function receives a
+                                // "ReactText" type, that has to be converted
+                                // into a string and then into a number
+                                this.updateTab(parseInt(key.toString()))
+                            }
+                        >
+                            <Tab
+                                eventKey={TabKeys.details}
+                                title='Edit Details'
+                            ></Tab>
+                            <Tab
+                                eventKey={TabKeys.resources}
+                                title='Edit Resources'
+                            ></Tab>
+                        </Tabs>
+                    }
+                ></PartnerHeader>
                 <Main>
                     <Section className='body'>
                         {tab === TabKeys.details ? (

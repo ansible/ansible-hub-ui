@@ -138,7 +138,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                                 }}
                             />
                         </div>
-                        <div className='link-button'>
+                        <div className='clickable link-button'>
                             <PlusCircleIcon
                                 onClick={() => this.addLink()}
                                 size='md'

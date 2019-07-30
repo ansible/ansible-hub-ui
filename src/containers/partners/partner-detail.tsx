@@ -1,67 +1,118 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
-import { BaseHeader } from '../../components/headers/base-header';
-import { NotImplemented } from '../../components/not-implemented/not-implemented';
-
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
-import {
-    Button,
-    DataList,
-    DataListItem,
-    DataListItemRow,
-    DataListItemCells,
-    DataListCell,
-    DataListCheck,
-    DataListAction,
-    DataListToggle,
-    DataListContent,
-    Dropdown,
-    KebabToggle,
-    DropdownItem,
-} from '@patternfly/react-core';
-
-import { CollectionList } from '../../api/response-types/collection';
+import { CollectionList as CollectionListType } from '../../api/response-types/collection';
+import { Namespace } from '../../api/response-types/namespace';
 import { CollectionAPI } from '../../api/collection';
-import { CollectionListItem } from '../../components/collection-list/collection-list-item';
+import { NamespaceAPI } from '../../api/namespace';
+import { CollectionList } from '../../components/collection-list/collection-list';
+
+import { PartnerHeader } from '../../components/headers/partner-header';
+import { Paths } from '../../paths';
+
+import { Breadcrumb, BreadcrumbItem, Tab, Tabs } from '@patternfly/react-core';
+
+import * as ReactMarkdown from 'react-markdown';
+
+import { Link } from 'react-router-dom';
+
+enum TabKeys {
+    collections = 1,
+    resources = 2,
+}
 
 interface IState {
-    collections: CollectionList[];
+    collections: CollectionListType[];
+    namespace: Namespace;
+    tab: TabKeys;
+    params: any;
 }
 
 class PartnerDetail extends React.Component<RouteComponentProps, IState> {
     constructor(props) {
         super(props);
-        this.state = { collections: [] };
+        this.state = {
+            collections: [],
+            namespace: null,
+            tab: TabKeys.collections,
+            params: {},
+        };
     }
 
     componentDidMount() {
-        CollectionAPI.list().then(result =>
-            this.setState({ collections: result.data }),
-        );
+        Promise.all([
+            CollectionAPI.list(),
+            NamespaceAPI.get(this.props.match.params['namespace']),
+        ]).then(val => {
+            this.setState({ collections: val[0].data, namespace: val[1].data });
+        });
     }
 
     render() {
-        const { collections } = this.state;
+        const { collections, namespace, tab, params } = this.state;
+        if (!namespace) {
+            return null;
+        }
         return (
             <React.Fragment>
-                <BaseHeader title='Partner Details' />
-                <Main>
-                    <Section className='body'>
-                        <DataList
-                            aria-label={
-                                'List of Collections uploaded by ' +
-                                this.props.match.params['namespace']
+                <PartnerHeader
+                    namespace={namespace}
+                    breadcrumbs={
+                        <Breadcrumb>
+                            <BreadcrumbItem>
+                                <Link to={Paths.partners}>Partners</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem isActive>
+                                {namespace.name}
+                            </BreadcrumbItem>
+                        </Breadcrumb>
+                    }
+                    tabs={
+                        <Tabs
+                            activeKey={tab}
+                            onSelect={(_, key) =>
+                                this.setState({ tab: parseInt(key.toString()) })
                             }
                         >
-                            {collections.map(c => (
-                                <CollectionListItem key={c.id} {...c} />
-                            ))}
-                        </DataList>
+                            <Tab
+                                eventKey={TabKeys.collections}
+                                title='Collections'
+                            ></Tab>
+                            <Tab
+                                eventKey={TabKeys.resources}
+                                title='Resources'
+                            ></Tab>
+                        </Tabs>
+                    }
+                ></PartnerHeader>
+                <Main>
+                    <Section className='body'>
+                        {tab === TabKeys.collections ? (
+                            <CollectionList
+                                updateParams={params =>
+                                    this.setState({ params: params })
+                                }
+                                params={params}
+                                collections={collections}
+                            />
+                        ) : (
+                            this.renderResources(namespace)
+                        )}
                     </Section>
                 </Main>
             </React.Fragment>
+        );
+    }
+
+    private renderCollections(collections) {}
+
+    private renderResources(namespace) {
+        return (
+            <div className='pf-c-content preview'>
+                <ReactMarkdown source={namespace.resources_page_src} />
+            </div>
         );
     }
 }

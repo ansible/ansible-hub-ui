@@ -1,0 +1,110 @@
+import * as React from 'react';
+import './list.scss';
+
+import { DataList } from '@patternfly/react-core';
+
+import { CollectionList as CollectionListType } from '../../api/response-types/collection';
+import { Namespace } from '../../api/response-types/namespace';
+
+import { CollectionListItem } from '../../components/collection-list/collection-list-item';
+import { Sort } from '../patternfly-wrappers/sort';
+
+import {
+    Form,
+    ActionGroup,
+    Button,
+    Alert,
+    Breadcrumb,
+    BreadcrumbItem,
+    Tab,
+    Tabs,
+    Grid,
+    GridItem,
+    Dropdown,
+    DropdownPosition,
+    DropdownToggle,
+    DropdownItem,
+    KebabToggle,
+    TextInput,
+    Toolbar,
+    ToolbarGroup,
+    ToolbarItem,
+    ToolbarSection,
+    Pagination,
+    PaginationVariant,
+} from '@patternfly/react-core';
+
+import * as ReactMarkdown from 'react-markdown';
+
+import { Link } from 'react-router-dom';
+
+interface IProps {
+    collections: CollectionListType[];
+    params: any;
+    updateParams: (params) => void;
+
+    showNamespace?: boolean;
+    controls?: React.ReactNode;
+}
+
+export class CollectionList extends React.Component<IProps, {}> {
+    render() {
+        const { collections, params, updateParams } = this.props;
+
+        return (
+            <React.Fragment>
+                <div className='controls top'>
+                    <Toolbar>
+                        <ToolbarGroup>
+                            <ToolbarItem>
+                                <TextInput
+                                    value=''
+                                    type='search'
+                                    aria-label='search text input'
+                                    placeholder='Find collection by name'
+                                />
+                            </ToolbarItem>
+                        </ToolbarGroup>
+                        <ToolbarGroup>
+                            <ToolbarItem>
+                                <Sort
+                                    options={[
+                                        { title: 'Name', id: 'name' },
+                                        {
+                                            title: 'Last Updated',
+                                            id: 'created',
+                                        },
+                                    ]}
+                                    params={params}
+                                    updateParams={updateParams}
+                                />
+                            </ToolbarItem>
+                        </ToolbarGroup>
+                    </Toolbar>
+
+                    <div>
+                        <Pagination
+                            itemCount={40}
+                            perPage={10}
+                            page={1}
+                            widgetId='pagination-options-menu-top'
+                        />
+                    </div>
+                </div>
+
+                <DataList aria-label={'List of Collections'}>
+                    {collections.map(c => (
+                        <CollectionListItem key={c.id} {...c} />
+                    ))}
+                </DataList>
+
+                <div className='controls bottom'>
+                    <div></div>
+                    <div>
+                        <Pagination itemCount={40} perPage={10} page={1} />
+                    </div>
+                </div>
+            </React.Fragment>
+        );
+    }
+}
