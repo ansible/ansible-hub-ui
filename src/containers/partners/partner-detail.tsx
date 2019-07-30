@@ -28,6 +28,7 @@ interface IState {
     namespace: Namespace;
     tab: TabKeys;
     params: any;
+    redirect: string;
 }
 
 class PartnerDetail extends React.Component<RouteComponentProps, IState> {
@@ -38,6 +39,7 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
             namespace: null,
             tab: TabKeys.collections,
             params: {},
+            redirect: null,
         };
     }
 
@@ -45,13 +47,25 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
         Promise.all([
             CollectionAPI.list(),
             NamespaceAPI.get(this.props.match.params['namespace']),
-        ]).then(val => {
-            this.setState({ collections: val[0].data, namespace: val[1].data });
-        });
+        ])
+            .then(val => {
+                this.setState({
+                    collections: val[0].data,
+                    namespace: val[1].data,
+                });
+            })
+            .catch(response => {
+                this.setState({ redirect: Paths.notFound });
+            });
     }
 
     render() {
-        const { collections, namespace, tab, params } = this.state;
+        const { collections, namespace, tab, params, redirect } = this.state;
+
+        if (redirect) {
+            return <Redirect to={redirect} />;
+        }
+
         if (!namespace) {
             return null;
         }
