@@ -1,12 +1,7 @@
 import * as React from 'react';
 import './header.scss';
 
-import {
-    PageHeader,
-    PageHeaderTitle,
-} from '@redhat-cloud-services/frontend-components';
-
-import { Breadcrumb } from '@patternfly/react-core';
+import { PageHeaderTitle } from '@redhat-cloud-services/frontend-components';
 
 interface IProps {
     title: string;

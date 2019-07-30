@@ -3,19 +3,10 @@ import * as React from 'react';
 import './list-item.scss';
 
 import {
-    Button,
-    DataList,
     DataListItem,
     DataListItemRow,
     DataListItemCells,
     DataListCell,
-    DataListCheck,
-    DataListAction,
-    DataListToggle,
-    DataListContent,
-    Dropdown,
-    KebabToggle,
-    DropdownItem,
 } from '@patternfly/react-core';
 
 import { Paths, formatPath } from '../../paths';

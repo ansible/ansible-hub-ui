@@ -4,39 +4,17 @@ import './list.scss';
 import { DataList } from '@patternfly/react-core';
 
 import { CollectionList as CollectionListType } from '../../api/response-types/collection';
-import { Namespace } from '../../api/response-types/namespace';
 
 import { CollectionListItem } from '../../components/collection-list/collection-list-item';
 import { Sort } from '../patternfly-wrappers/sort';
 
 import {
-    Form,
-    ActionGroup,
-    Button,
-    Alert,
-    Breadcrumb,
-    BreadcrumbItem,
-    Tab,
-    Tabs,
-    Grid,
-    GridItem,
-    Dropdown,
-    DropdownPosition,
-    DropdownToggle,
-    DropdownItem,
-    KebabToggle,
-    TextInput,
     Toolbar,
     ToolbarGroup,
     ToolbarItem,
-    ToolbarSection,
     Pagination,
-    PaginationVariant,
+    TextInput,
 } from '@patternfly/react-core';
-
-import * as ReactMarkdown from 'react-markdown';
-
-import { Link } from 'react-router-dom';
 
 interface IProps {
     collections: CollectionListType[];
