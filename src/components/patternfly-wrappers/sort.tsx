@@ -47,7 +47,6 @@ export class Sort extends React.Component<IProps, IState> {
 
         params[this.props.sortParamName] = desc + option.id;
 
-        console.log(params);
         this.setState({ isExpanded: false }, () =>
             this.props.updateParams(params),
         );
@@ -58,7 +57,7 @@ export class Sort extends React.Component<IProps, IState> {
         let field = this.getSelected(params);
         const descending = !this.getIsDescending(params);
 
-        params[this.props.sortParamName] = descending ? '-' : '' + field;
+        params[this.props.sortParamName] = (descending ? '-' : '') + field.id;
 
         this.props.updateParams(params);
     }
@@ -73,7 +72,7 @@ export class Sort extends React.Component<IProps, IState> {
 
     private getSelected(params) {
         let sort = params[this.props.sortParamName];
-        const def = this.props.options[0].title;
+        const def = this.props.options[0];
 
         if (!sort) {
             return def;
@@ -85,7 +84,7 @@ export class Sort extends React.Component<IProps, IState> {
 
         const option = this.props.options.find(x => x.id === sort);
 
-        return option ? option.title : def;
+        return option ? option : def;
     }
 
     render() {
@@ -98,7 +97,7 @@ export class Sort extends React.Component<IProps, IState> {
                     aria-label='Select Input'
                     onToggle={e => this.onToggle(e)}
                     onSelect={(_, name) => this.onSelect(name)}
-                    selections={this.getSelected(params)}
+                    selections={this.getSelected(params).title}
                     isExpanded={isExpanded}
                     ariaLabelledBy='Sort results'
                 >
