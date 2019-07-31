@@ -4,6 +4,8 @@ import './sort.scss';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import { SortAmountDownIcon, SortAmountUpIcon } from '@patternfly/react-icons';
 
+import { ParamHelper } from '../../utilities/param-helper';
+
 export class SortFieldOption {
     id: string;
     title: string;
@@ -41,25 +43,31 @@ export class Sort extends React.Component<IProps, IState> {
     }
 
     private onSelect(name) {
-        const params = { ...this.props.params };
-        const desc = this.getIsDescending(params) ? '-' : '';
+        const desc = this.getIsDescending(this.props.params) ? '-' : '';
         const option = this.props.options.find(i => i.title === name);
 
-        params[this.props.sortParamName] = desc + option.id;
-
         this.setState({ isExpanded: false }, () =>
-            this.props.updateParams(params),
+            this.props.updateParams(
+                ParamHelper.setParam(
+                    this.props.params,
+                    this.props.sortParamName,
+                    desc + option.id,
+                ),
+            ),
         );
     }
 
     private setDescending() {
-        const params = { ...this.props.params };
-        let field = this.getSelected(params);
-        const descending = !this.getIsDescending(params);
+        let field = this.getSelected(this.props.params);
+        const descending = !this.getIsDescending(this.props.params);
 
-        params[this.props.sortParamName] = (descending ? '-' : '') + field.id;
-
-        this.props.updateParams(params);
+        this.props.updateParams(
+            ParamHelper.setParam(
+                this.props.params,
+                this.props.sortParamName,
+                (descending ? '-' : '') + field.id,
+            ),
+        );
     }
 
     private getIsDescending(params) {

@@ -2,6 +2,61 @@ import * as MockAdapter from 'axios-mock-adapter';
 import { CollectionList } from '../response-types/collection';
 import { redHat } from './namespace';
 
+export class MockCollection {
+    mock: any;
+    collectionNames = [
+        'epel',
+        'collection_demo',
+        'a_collection_with_a_really_annoying_long_name',
+        'community',
+        'kitchen_sink',
+        'bathroom_sink',
+        'outdoor_sink',
+        'network',
+        'os',
+        'cloud',
+        'crypto',
+        'monitoring',
+        'messaging',
+        'packaging',
+        'openshift',
+    ];
+
+    constructor(http: any, apiPath: string) {
+        const collectionList = this.getCollectionList();
+
+        this.mock = new MockAdapter(http, { delayResponse: 200 });
+        this.mock.onGet(apiPath, {}).reply(200, {
+            meta: { count: collectionList.length },
+            links: {},
+            data: collectionList.slice(0, 9),
+        });
+        this.mock
+            .onGet(apiPath, { params: { offset: 10, limit: 10 } })
+            .reply(200, {
+                meta: { count: collectionList.length },
+                links: {},
+                data: collectionList.slice(10, 19),
+            });
+    }
+
+    getCollectionList() {
+        const collections = [] as CollectionList[];
+
+        for (let i = 0; i < this.collectionNames.length; i++) {
+            collections.push(
+                CollectionGenerator.generate(
+                    i,
+                    this.collectionNames[i],
+                    redHat,
+                ),
+            );
+        }
+
+        return collections;
+    }
+}
+
 class CollectionGenerator {
     static lipsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget nisl quis diam lacinia pretium. Donec pharetra varius erat in condimentum. Maecenas sed tortor fringilla, congue lectus sit amet, ultricies urna. Nam sodales mi quis lacus condimentum, id semper nunc ultrices. In sem orci, condimentum eu magna quis, faucibus ultricies metus. Nullam justo dolor, convallis sed lacinia eget, semper ac massa. Curabitur turpis metus, auctor sed tellus et, dictum aliquam velit.`;
 
@@ -82,47 +137,5 @@ class CollectionGenerator {
         } as CollectionList;
 
         return collection;
-    }
-}
-
-export class MockCollection {
-    mock: any;
-    collectionNames = [
-        'epel',
-        'collection_demo',
-        'a_collection_with_a_really_annoying_long_name',
-        'community',
-        'kitchen_sink',
-        'bathroom_sink',
-        'outdoor_sink',
-        'network',
-        'os',
-        'cloud',
-        'crypto',
-        'monitoring',
-        'messaging',
-        'packaging',
-        'openshift',
-    ];
-
-    constructor(http: any, apiPath: string) {
-        this.mock = new MockAdapter(http, { delayResponse: 200 });
-        this.mock.onGet(apiPath).reply(200, this.getCollectionList());
-    }
-
-    getCollectionList() {
-        const collections = [] as CollectionList[];
-
-        for (let i = 0; i < this.collectionNames.length; i++) {
-            collections.push(
-                CollectionGenerator.generate(
-                    i,
-                    this.collectionNames[i],
-                    redHat,
-                ),
-            );
-        }
-
-        return collections;
     }
 }

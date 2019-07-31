@@ -1,7 +1,7 @@
 /*global describe, it, expect*/
-import getBaseName from './Utilities/getBaseName';
+import getBaseName from './utilities/getBaseName';
 
-describe('Utilities/getBaseName', () => {
+describe('utilities/getBaseName', () => {
     it('should find the right base name on Stable ', () => {
         expect(getBaseName('/insights/foo/bar/baz')).toEqual('/insights/foo');
         expect(getBaseName('/rhcs/bar/bar/baz')).toEqual('/rhcs/bar');

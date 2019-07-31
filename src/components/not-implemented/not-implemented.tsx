@@ -13,7 +13,7 @@ export class NotImplemented extends React.Component<{}, {}> {
                 Here's a list of pages that you can go to that do work:
                 <ol>
                     {this.implementedLinks.map(x => (
-                        <li>
+                        <li key={x}>
                             <Link to={x}>{x}</Link>
                         </li>
                     ))}

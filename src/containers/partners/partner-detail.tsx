@@ -9,6 +9,8 @@ import { CollectionAPI } from '../../api/collection';
 import { NamespaceAPI } from '../../api/namespace';
 import { CollectionList } from '../../components/collection-list/collection-list';
 
+import { ParamHelper } from '../../utilities/param-helper';
+
 import { PartnerHeader } from '../../components/headers/partner-header';
 import { Paths } from '../../paths';
 
@@ -26,31 +28,43 @@ enum TabKeys {
 interface IState {
     collections: CollectionListType[];
     namespace: Namespace;
-    tab: TabKeys;
     params: any;
     redirect: string;
+    resultsCount: number;
 }
 
 class PartnerDetail extends React.Component<RouteComponentProps, IState> {
+    nonAPIParams = ['tab'];
+
     constructor(props) {
         super(props);
+        const params = ParamHelper.parseParamString(props.location.search);
+        if (!params['tab']) {
+            params['tab'] = 1;
+        } else {
+            params['tab'] = parseInt(params['tab']);
+        }
+
         this.state = {
             collections: [],
             namespace: null,
-            tab: TabKeys.collections,
-            params: {},
+            params: params,
             redirect: null,
+            resultsCount: 0,
         };
     }
 
     componentDidMount() {
         Promise.all([
-            CollectionAPI.list(),
+            CollectionAPI.list(
+                ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+            ),
             NamespaceAPI.get(this.props.match.params['namespace']),
         ])
             .then(val => {
                 this.setState({
-                    collections: val[0].data,
+                    collections: val[0].data.data,
+                    resultsCount: val[0].data.meta.count,
                     namespace: val[1].data,
                 });
             })
@@ -60,7 +74,7 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
     }
 
     render() {
-        const { collections, namespace, tab, params, redirect } = this.state;
+        const { collections, namespace, params, redirect } = this.state;
 
         if (redirect) {
             return <Redirect to={redirect} />;
@@ -85,9 +99,16 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
                     }
                     tabs={
                         <Tabs
-                            activeKey={tab}
+                            activeKey={params['tab']}
                             onSelect={(_, key) =>
-                                this.setState({ tab: parseInt(key.toString()) })
+                                this.updateParams(
+                                    ParamHelper.setParam(
+                                        params,
+                                        'tab',
+                                        parseInt(key.toString()),
+                                    ),
+                                    true,
+                                )
                             }
                         >
                             <Tab
@@ -103,10 +124,10 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
                 ></PartnerHeader>
                 <Main>
                     <Section className='body'>
-                        {tab === TabKeys.collections ? (
+                        {params['tab'] === TabKeys.collections ? (
                             <CollectionList
                                 updateParams={params =>
-                                    this.setState({ params: params })
+                                    this.updateParams(params)
                                 }
                                 params={params}
                                 collections={collections}
@@ -122,12 +143,35 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
 
     private renderCollections(collections) {}
 
+    private updateParams(params, dontLoadAPI?) {
+        this.setState({ params: params }, () => {
+            if (!dontLoadAPI) {
+                this.reloadCollections();
+            }
+        });
+        this.props.history.push({
+            pathname: this.props.location.pathname,
+            search: '?' + ParamHelper.getQueryString(params),
+        });
+    }
+
     private renderResources(namespace) {
         return (
             <div className='pf-c-content preview'>
                 <ReactMarkdown source={namespace.resources_page_src} />
             </div>
         );
+    }
+
+    private reloadCollections() {
+        CollectionAPI.list(
+            ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+        ).then(result => {
+            this.setState({
+                collections: result.data.data,
+                resultsCount: result.data.meta.count,
+            });
+        });
     }
 }
 

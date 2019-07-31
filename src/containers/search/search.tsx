@@ -8,6 +8,8 @@ import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
 class Search extends React.Component<RouteComponentProps, {}> {
     render() {
+        const p = new URLSearchParams(this.props.location.search);
+        p.forEach((v, k) => console.log(v, k));
         return (
             <React.Fragment>
                 <BaseHeader title='Search' />
