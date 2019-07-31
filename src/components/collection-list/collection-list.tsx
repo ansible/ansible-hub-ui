@@ -20,6 +20,7 @@ interface IProps {
     collections: CollectionListType[];
     params: any;
     updateParams: (params) => void;
+    itemCount: number;
 
     showNamespace?: boolean;
     controls?: React.ReactNode;
@@ -27,7 +28,7 @@ interface IProps {
 
 export class CollectionList extends React.Component<IProps, {}> {
     render() {
-        const { collections, params, updateParams } = this.props;
+        const { collections, params, updateParams, itemCount } = this.props;
 
         return (
             <React.Fragment>
@@ -62,7 +63,7 @@ export class CollectionList extends React.Component<IProps, {}> {
 
                     <div>
                         <Pagination
-                            itemCount={40}
+                            itemCount={itemCount}
                             perPage={10}
                             page={1}
                             widgetId='pagination-options-menu-top'
@@ -79,7 +80,11 @@ export class CollectionList extends React.Component<IProps, {}> {
                 <div className='controls bottom'>
                     <div></div>
                     <div>
-                        <Pagination itemCount={40} perPage={10} page={1} />
+                        <Pagination
+                            itemCount={itemCount}
+                            perPage={10}
+                            page={1}
+                        />
                     </div>
                 </div>
             </React.Fragment>

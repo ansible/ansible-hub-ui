@@ -30,7 +30,7 @@ interface IState {
     namespace: Namespace;
     params: any;
     redirect: string;
-    resultsCount: number;
+    itemCount: number;
 }
 
 class PartnerDetail extends React.Component<RouteComponentProps, IState> {
@@ -50,7 +50,7 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
             namespace: null,
             params: params,
             redirect: null,
-            resultsCount: 0,
+            itemCount: 0,
         };
     }
 
@@ -64,7 +64,7 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
             .then(val => {
                 this.setState({
                     collections: val[0].data.data,
-                    resultsCount: val[0].data.meta.count,
+                    itemCount: val[0].data.meta.count,
                     namespace: val[1].data,
                 });
             })
@@ -74,7 +74,13 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
     }
 
     render() {
-        const { collections, namespace, params, redirect } = this.state;
+        const {
+            collections,
+            namespace,
+            params,
+            redirect,
+            itemCount,
+        } = this.state;
 
         if (redirect) {
             return <Redirect to={redirect} />;
@@ -131,6 +137,7 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
                                 }
                                 params={params}
                                 collections={collections}
+                                itemCount={itemCount}
                             />
                         ) : (
                             this.renderResources(namespace)
@@ -169,7 +176,7 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
         ).then(result => {
             this.setState({
                 collections: result.data.data,
-                resultsCount: result.data.meta.count,
+                itemCount: result.data.meta.count,
             });
         });
     }
