@@ -8,6 +8,10 @@ import { CollectionList as CollectionListType } from '../../api/response-types/c
 import { CollectionListItem } from '../../components/collection-list/collection-list-item';
 import { Sort } from '../patternfly-wrappers/sort';
 
+import { Constants } from '../../constants';
+
+import { ParamHelper } from '../../utilities/param-helper';
+
 import {
     Toolbar,
     ToolbarGroup,
@@ -18,7 +22,11 @@ import {
 
 interface IProps {
     collections: CollectionListType[];
-    params: any;
+    params: {
+        sort?: string;
+        page?: number;
+        page_size?: number;
+    };
     updateParams: (params) => void;
     itemCount: number;
 
@@ -26,9 +34,18 @@ interface IProps {
     controls?: React.ReactNode;
 }
 
-export class CollectionList extends React.Component<IProps, {}> {
+interface IState {
+    kwField: string;
+}
+
+export class CollectionList extends React.Component<IProps, IState> {
+    constructor(props) {
+        super(props);
+        this.state = { kwField: props.params['keywords'] || '' };
+    }
+
     render() {
-        const { collections, params, updateParams, itemCount } = this.props;
+        const { collections, params, updateParams } = this.props;
 
         return (
             <React.Fragment>
@@ -37,7 +54,11 @@ export class CollectionList extends React.Component<IProps, {}> {
                         <ToolbarGroup>
                             <ToolbarItem>
                                 <TextInput
-                                    value=''
+                                    value={this.state.kwField}
+                                    onChange={k =>
+                                        this.setState({ kwField: k })
+                                    }
+                                    onKeyPress={e => this.handleEnter(e)}
                                     type='search'
                                     aria-label='search text input'
                                     placeholder='Find collection by name'
@@ -62,12 +83,7 @@ export class CollectionList extends React.Component<IProps, {}> {
                     </Toolbar>
 
                     <div>
-                        <Pagination
-                            itemCount={itemCount}
-                            perPage={10}
-                            page={1}
-                            widgetId='pagination-options-menu-top'
-                        />
+                        {this.renderPagination('pagination-options-menu-top')}
                     </div>
                 </div>
 
@@ -79,15 +95,40 @@ export class CollectionList extends React.Component<IProps, {}> {
 
                 <div className='controls bottom'>
                     <div></div>
-                    <div>
-                        <Pagination
-                            itemCount={itemCount}
-                            perPage={10}
-                            page={1}
-                        />
-                    </div>
+                    <div>{this.renderPagination()}</div>
                 </div>
             </React.Fragment>
+        );
+    }
+
+    private handleEnter(e) {
+        if (e.key === 'Enter') {
+            this.props.updateParams(
+                ParamHelper.setParam(
+                    this.props.params,
+                    'keywords',
+                    this.state.kwField,
+                ),
+            );
+        }
+    }
+
+    private renderPagination(widgetId?) {
+        const { params, updateParams, itemCount } = this.props;
+
+        return (
+            <Pagination
+                itemCount={itemCount}
+                perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
+                page={params.page || 1}
+                widgetId={widgetId}
+                onSetPage={(_, p) =>
+                    updateParams(ParamHelper.setParam(params, 'page', p))
+                }
+                onPerPageSelect={(_, p) =>
+                    updateParams(ParamHelper.setParam(params, 'page_size', p))
+                }
+            />
         );
     }
 }

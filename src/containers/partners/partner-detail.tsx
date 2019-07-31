@@ -28,7 +28,13 @@ enum TabKeys {
 interface IState {
     collections: CollectionListType[];
     namespace: Namespace;
-    params: any;
+    params: {
+        sort?: string;
+        page?: number;
+        page_size?: number;
+        tab?: number;
+        keywords?: string;
+    };
     redirect: string;
     itemCount: number;
 }
@@ -38,11 +44,14 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
 
     constructor(props) {
         super(props);
-        const params = ParamHelper.parseParamString(props.location.search);
+        const params = ParamHelper.parseParamString(props.location.search, [
+            'page',
+            'tab',
+            'page_size',
+        ]);
+
         if (!params['tab']) {
             params['tab'] = 1;
-        } else {
-            params['tab'] = parseInt(params['tab']);
         }
 
         this.state = {
@@ -105,7 +114,7 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
                     }
                     tabs={
                         <Tabs
-                            activeKey={params['tab']}
+                            activeKey={params.tab}
                             onSelect={(_, key) =>
                                 this.updateParams(
                                     ParamHelper.setParam(
@@ -130,7 +139,7 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
                 ></PartnerHeader>
                 <Main>
                     <Section className='body'>
-                        {params['tab'] === TabKeys.collections ? (
+                        {params.tab === TabKeys.collections ? (
                             <CollectionList
                                 updateParams={params =>
                                     this.updateParams(params)

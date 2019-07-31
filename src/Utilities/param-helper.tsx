@@ -6,12 +6,24 @@ export class ParamHelper {
     // parameter names that contain a value or list of values
 
     // Convert URLSearchParams object to param object
-    static parseParamString(paramString: string) {
-        const params = {};
+    static parseParamString(paramString: string, numericTypes?: string[]) {
+        let params = {};
         const paramObj = new URLSearchParams(paramString);
+        let v;
 
         paramObj.forEach((val, key) => {
-            params[key] = val;
+            // Parse value as number if it's included in the list of numeric
+            // types.
+            // It seems like there should be a better way to do this based off
+            // of the interface for the parameters, but I can't figure out if
+            // that's possible or not
+            if (numericTypes.includes(key)) {
+                v = Number(val);
+            } else {
+                v = val;
+            }
+
+            params = ParamHelper.appendParam(params, key, v);
         });
 
         return params;
@@ -87,7 +99,7 @@ export class ParamHelper {
         for (const key of Object.keys(params)) {
             if (Array.isArray(params[key])) {
                 for (const val of params[key]) {
-                    paramString += key + '=' + val + '&';
+                    paramString += key + '=' + encodeURIComponent(val) + '&';
                 }
             } else {
                 paramString += key + '=' + params[key] + '&';

@@ -26,6 +26,17 @@ export class MockCollection {
         const collectionList = this.getCollectionList();
 
         this.mock = new MockAdapter(http, { delayResponse: 200 });
+
+        this.mock
+            .onGet(apiPath, {
+                params: { keywords: 'epel', offset: 0, limit: 10 },
+            })
+            .reply(200, {
+                meta: { count: 1 },
+                links: {},
+                data: [collectionList[0]],
+            });
+
         this.mock
             .onGet(apiPath, { params: { offset: 10, limit: 10 } })
             .reply(200, {
@@ -33,6 +44,7 @@ export class MockCollection {
                 links: {},
                 data: collectionList.slice(10, 19),
             });
+
         this.mock.onGet(apiPath, {}).reply(200, {
             meta: { count: collectionList.length },
             links: {},
