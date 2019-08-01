@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
-import { BaseHeader } from '../../components/headers/base-header';
-import { NotImplemented } from '../../components/not-implemented/not-implemented';
+import { BaseHeader, NotImplemented } from '../../components';
 
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
 

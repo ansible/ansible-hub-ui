@@ -7,10 +7,7 @@ import {
     Spinner,
 } from '@redhat-cloud-services/frontend-components';
 
-import { PartnerHeader } from '../../components/headers/partner-header';
-import { NamespaceForm } from '../../components/namespace-form/namespace-form';
-import { ResourcesForm } from '../../components/namespace-form/resources-form';
-
+import { PartnerHeader, NamespaceForm, ResourcesForm } from '../../components';
 import { NamespaceAPI, NamespaceType } from '../../api';
 
 interface IProps extends RouteComponentProps {}

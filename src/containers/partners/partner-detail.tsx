@@ -10,11 +10,10 @@ import {
     NamespaceAPI,
 } from '../../api';
 
-import { CollectionList } from '../../components/collection-list/collection-list';
+import { CollectionList, PartnerHeader } from '../../components';
 
 import { ParamHelper } from '../../utilities/param-helper';
 
-import { PartnerHeader } from '../../components/headers/partner-header';
 import { Paths } from '../../paths';
 
 import { Breadcrumb, BreadcrumbItem, Tab, Tabs } from '@patternfly/react-core';

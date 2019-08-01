@@ -5,7 +5,7 @@ import { DataList } from '@patternfly/react-core';
 
 import { CollectionListType } from '../../api';
 
-import { CollectionListItem } from '../../components/collection-list/collection-list-item';
+import { CollectionListItem } from '../../components';
 import { Sort } from '../patternfly-wrappers/sort';
 
 import { Constants } from '../../constants';

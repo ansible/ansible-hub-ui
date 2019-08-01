@@ -61,6 +61,6 @@ export class CollectionListType {
     };
 }
 
-export class CollectionDetail extends CollectionList {
+export class CollectionDetailType extends CollectionListType {
     all_versions: CollectionVersion[];
 }

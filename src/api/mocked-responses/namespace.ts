@@ -1,5 +1,5 @@
 import * as MockAdapter from 'axios-mock-adapter';
-import { Namespace } from '../response-types/namespace';
+import { NamespaceType } from '../../api';
 
 export const redHat = {
     name: 'red_hat',
@@ -64,7 +64,7 @@ Ansible Galaxy is an [Ansible by Red Hat](https://ansible.com) sponsored project
     ],
     owners: [{ name: 'newswangerd' }],
     num_collections: 10,
-} as Namespace;
+} as NamespaceType;
 
 export class MockNamespace {
     mock: any;
