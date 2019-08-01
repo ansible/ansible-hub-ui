@@ -2,15 +2,13 @@ import * as React from 'react';
 import './namespace-form.scss';
 
 import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
-
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
-import { NamespaceCard } from '../cards/namespace-card';
-
-import { Namespace } from '../../api/response-types/namespace';
+import { NamespaceCard } from '../../components';
+import { NamespaceType } from '../../api';
 
 interface IProps {
-    namespace: Namespace;
+    namespace: NamespaceType;
     errorMessages: any;
 
     updateNamespace: (namespace) => void;

@@ -1,5 +1,5 @@
 import * as MockAdapter from 'axios-mock-adapter';
-import { CollectionList } from '../response-types/collection';
+import { CollectionListType } from '../../api';
 import { redHat } from './namespace';
 
 export class MockCollection {
@@ -53,7 +53,7 @@ export class MockCollection {
     }
 
     getCollectionList() {
-        const collections = [] as CollectionList[];
+        const collections = [] as CollectionListType[];
 
         for (let i = 0; i < this.collectionNames.length; i++) {
             collections.push(
@@ -114,7 +114,7 @@ class CollectionGenerator {
         return w;
     }
 
-    static generate(id, name, namespace): CollectionList {
+    static generate(id, name, namespace): CollectionListType {
         const collection = {
             id: id,
             name: name,
@@ -146,7 +146,7 @@ class CollectionGenerator {
                     },
                 },
             },
-        } as CollectionList;
+        } as CollectionListType;
 
         return collection;
     }

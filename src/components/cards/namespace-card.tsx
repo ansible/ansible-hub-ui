@@ -1,8 +1,7 @@
 import * as React from 'react';
+import './cards.scss';
 
 import { Card } from '@patternfly/react-core';
-
-import './cards.scss';
 
 // Use snake case to match field types provided py python API so that the
 // spread operator can be used.

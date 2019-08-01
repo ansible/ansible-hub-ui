@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { BaseHeader } from './base-header';
-import { Namespace } from '../../api/response-types/namespace';
 import './header.scss';
 
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 
+import { BaseHeader } from '../../components';
+import { NamespaceType } from '../../api';
+
 interface IProps {
-    namespace: Namespace;
+    namespace: NamespaceType;
     tabs: React.ReactNode;
     breadcrumbs: React.ReactNode;
 }

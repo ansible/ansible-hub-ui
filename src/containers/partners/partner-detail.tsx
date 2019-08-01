@@ -1,24 +1,21 @@
 import * as React from 'react';
+
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
-
-import { CollectionList as CollectionListType } from '../../api/response-types/collection';
-import { Namespace } from '../../api/response-types/namespace';
-import { CollectionAPI } from '../../api/collection';
-import { NamespaceAPI } from '../../api/namespace';
-import { CollectionList } from '../../components/collection-list/collection-list';
-
-import { ParamHelper } from '../../utilities/param-helper';
-
-import { PartnerHeader } from '../../components/headers/partner-header';
-import { Paths } from '../../paths';
-
 import { Breadcrumb, BreadcrumbItem, Tab, Tabs } from '@patternfly/react-core';
-
 import * as ReactMarkdown from 'react-markdown';
-
 import { Link } from 'react-router-dom';
+
+import {
+    CollectionListType,
+    NamespaceType,
+    CollectionAPI,
+    NamespaceAPI,
+} from '../../api';
+
+import { CollectionList, PartnerHeader } from '../../components';
+import { ParamHelper } from '../../utilities/param-helper';
+import { Paths } from '../../paths';
 
 enum TabKeys {
     collections = 1,
@@ -27,7 +24,7 @@ enum TabKeys {
 
 interface IState {
     collections: CollectionListType[];
-    namespace: Namespace;
+    namespace: NamespaceType;
     params: {
         sort?: string;
         page?: number;

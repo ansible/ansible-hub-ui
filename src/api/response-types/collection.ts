@@ -35,7 +35,7 @@ export class CollectionVersion {
     // readme_html: string;
 }
 
-export class CollectionList {
+export class CollectionListType {
     id: number;
     name: string;
     description: string;
@@ -61,6 +61,6 @@ export class CollectionList {
     };
 }
 
-export class CollectionDetail extends CollectionList {
+export class CollectionDetailType extends CollectionListType {
     all_versions: CollectionVersion[];
 }

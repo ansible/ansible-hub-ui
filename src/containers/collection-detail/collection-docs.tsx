@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
-import { BaseHeader } from '../../components/headers/base-header';
-import { NotImplemented } from '../../components/not-implemented/not-implemented';
-
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
+
+import { BaseHeader, NotImplemented } from '../../components';
 
 class CollectionDocs extends React.Component<RouteComponentProps, {}> {
     render() {
