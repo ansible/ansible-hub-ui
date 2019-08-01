@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { BaseHeader } from './base-header';
-import { NamespaceType } from '../../api';
 import './header.scss';
 
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+
+import { BaseHeader } from '../../components';
+import { NamespaceType } from '../../api';
 
 interface IProps {
     namespace: NamespaceType;

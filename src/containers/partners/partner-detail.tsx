@@ -1,7 +1,10 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import { Breadcrumb, BreadcrumbItem, Tab, Tabs } from '@patternfly/react-core';
+import * as ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 
 import {
     CollectionListType,
@@ -11,16 +14,8 @@ import {
 } from '../../api';
 
 import { CollectionList, PartnerHeader } from '../../components';
-
 import { ParamHelper } from '../../utilities/param-helper';
-
 import { Paths } from '../../paths';
-
-import { Breadcrumb, BreadcrumbItem, Tab, Tabs } from '@patternfly/react-core';
-
-import * as ReactMarkdown from 'react-markdown';
-
-import { Link } from 'react-router-dom';
 
 enum TabKeys {
     collections = 1,

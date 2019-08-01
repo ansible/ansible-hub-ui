@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import './list-item.scss';
 
 import {
@@ -9,12 +8,12 @@ import {
     DataListCell,
 } from '@patternfly/react-core';
 
-import { Paths, formatPath } from '../../paths';
 import { Link } from 'react-router-dom';
-import { NumericLabel } from '../numeric-label/numeric-label';
-import { CollectionListType } from '../../api';
 import * as moment from 'moment';
-import { Tag } from '../tags/tag';
+
+import { Paths, formatPath } from '../../paths';
+import { NumericLabel, Tag } from '../../components';
+import { CollectionListType } from '../../api';
 
 export class CollectionListItem extends React.Component<
     CollectionListType,

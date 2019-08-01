@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { NamespaceType } from '../../api';
 import './namespace-form.scss';
-import * as ReactMarkdown from 'react-markdown';
 
 import { Form, FormGroup, TextArea } from '@patternfly/react-core';
+import * as ReactMarkdown from 'react-markdown';
+
+import { NamespaceType } from '../../api';
 
 interface IProps {
     namespace: NamespaceType;

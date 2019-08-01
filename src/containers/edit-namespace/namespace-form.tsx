@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import {
     Main,
     Section,
     Spinner,
 } from '@redhat-cloud-services/frontend-components';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { PartnerHeader, NamespaceForm, ResourcesForm } from '../../components';
 import { NamespaceAPI, NamespaceType } from '../../api';
