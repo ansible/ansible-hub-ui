@@ -7,10 +7,10 @@ import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
 import { NamespaceCard } from '../cards/namespace-card';
 
-import { Namespace } from '../../api/response-types/namespace';
+import { NamespaceType } from '../../api';
 
 interface IProps {
-    namespace: Namespace;
+    namespace: NamespaceType;
     errorMessages: any;
 
     updateNamespace: (namespace) => void;

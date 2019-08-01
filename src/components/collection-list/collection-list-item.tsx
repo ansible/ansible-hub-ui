@@ -12,11 +12,14 @@ import {
 import { Paths, formatPath } from '../../paths';
 import { Link } from 'react-router-dom';
 import { NumericLabel } from '../numeric-label/numeric-label';
-import { CollectionList } from '../../api/response-types/collection';
+import { CollectionListType } from '../../api';
 import * as moment from 'moment';
 import { Tag } from '../tags/tag';
 
-export class CollectionListItem extends React.Component<CollectionList, {}> {
+export class CollectionListItem extends React.Component<
+    CollectionListType,
+    {}
+> {
     render() {
         const { name, download_count, latest_version, namespace } = this.props;
 

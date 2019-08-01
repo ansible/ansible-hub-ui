@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Namespace } from '../../api/response-types/namespace';
+import { NamespaceType } from '../../api';
 import './namespace-form.scss';
 import * as ReactMarkdown from 'react-markdown';
 
 import { Form, FormGroup, TextArea } from '@patternfly/react-core';
 
 interface IProps {
-    namespace: Namespace;
+    namespace: NamespaceType;
 
     updateNamespace: (data) => void;
 }

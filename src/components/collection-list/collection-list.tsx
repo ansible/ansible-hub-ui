@@ -3,7 +3,7 @@ import './list.scss';
 
 import { DataList } from '@patternfly/react-core';
 
-import { CollectionList as CollectionListType } from '../../api/response-types/collection';
+import { CollectionListType } from '../../api';
 
 import { CollectionListItem } from '../../components/collection-list/collection-list-item';
 import { Sort } from '../patternfly-wrappers/sort';

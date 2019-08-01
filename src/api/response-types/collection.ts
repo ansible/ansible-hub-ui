@@ -35,7 +35,7 @@ export class CollectionVersion {
     // readme_html: string;
 }
 
-export class CollectionList {
+export class CollectionListType {
     id: number;
     name: string;
     description: string;

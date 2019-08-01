@@ -3,10 +3,13 @@ import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
-import { CollectionList as CollectionListType } from '../../api/response-types/collection';
-import { Namespace } from '../../api/response-types/namespace';
-import { CollectionAPI } from '../../api/collection';
-import { NamespaceAPI } from '../../api/namespace';
+import {
+    CollectionListType,
+    NamespaceType,
+    CollectionAPI,
+    NamespaceAPI,
+} from '../../api';
+
 import { CollectionList } from '../../components/collection-list/collection-list';
 
 import { ParamHelper } from '../../utilities/param-helper';
@@ -27,7 +30,7 @@ enum TabKeys {
 
 interface IState {
     collections: CollectionListType[];
-    namespace: Namespace;
+    namespace: NamespaceType;
     params: {
         sort?: string;
         page?: number;

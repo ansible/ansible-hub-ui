@@ -11,8 +11,7 @@ import { PartnerHeader } from '../../components/headers/partner-header';
 import { NamespaceForm } from '../../components/namespace-form/namespace-form';
 import { ResourcesForm } from '../../components/namespace-form/resources-form';
 
-import { NamespaceAPI } from '../../api/namespace';
-import { Namespace } from '../../api/response-types/namespace';
+import { NamespaceAPI, NamespaceType } from '../../api';
 
 interface IProps extends RouteComponentProps {}
 
@@ -31,7 +30,7 @@ import { Paths, formatPath } from '../../paths';
 import { Link } from 'react-router-dom';
 
 interface IState {
-    namespace: Namespace;
+    namespace: NamespaceType;
     newLinkName: string;
     newLinkURL: string;
     errorMessages: any;

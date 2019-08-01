@@ -1,4 +1,4 @@
-export class Namespace {
+export class NamespaceType {
     name: string;
     company: string;
     email: string;
