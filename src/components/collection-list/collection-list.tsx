@@ -125,9 +125,9 @@ export class CollectionList extends React.Component<IProps, IState> {
                 onSetPage={(_, p) =>
                     updateParams(ParamHelper.setParam(params, 'page', p))
                 }
-                onPerPageSelect={(_, p) =>
-                    updateParams(ParamHelper.setParam(params, 'page_size', p))
-                }
+                onPerPageSelect={(_, p) => {
+                    updateParams({ ...params, page: 1, page_size: p });
+                }}
             />
         );
     }
