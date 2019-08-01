@@ -1,24 +1,14 @@
 import * as MockAdapter from 'axios-mock-adapter';
 import { Namespace } from '../response-types/namespace';
 
-export class MockNamespace {
-    mock: any;
-
-    constructor(http: any, apiPath: string) {
-        this.mock = new MockAdapter(http, { delayResponse: 200 });
-        this.mock.onGet(apiPath).reply(200, this.getNSList());
-        this.mock.onGet(apiPath + 'red_hat/').reply(200, this.getNSDetail());
-        this.mock.onPut(apiPath + 'red_hat/').reply(204, this.ns1);
-    }
-
-    ns1 = {
-        name: 'red_hat',
-        company: 'Red Hat',
-        avatar_url:
-            'https://www.redhat.com/cms/managed-files/styles/wysiwyg_full_width/s3/Logo-RedHat-Hat-Color-CMYK%20%281%29.jpg?itok=Mf0Ff9jq',
-        description:
-            'We’re the world’s leading provider of enterprise open source solutions, using a community-powered approach to deliver high-performing Linux, cloud, container, and Kubernetes technologies. We help you standardize across environments, develop cloud-native applications, and integrate, automate, secure, and manage complex environments with award-winning support, training, and consulting services.',
-        resources_page_src: `[![Build Status](https://travis-ci.com/ansible/galaxy.svg?branch=devel)](https://travis-ci.com/ansible/galaxy)
+export const redHat = {
+    name: 'red_hat',
+    company: 'Red Hat',
+    avatar_url:
+        'https://www.redhat.com/cms/managed-files/styles/wysiwyg_full_width/s3/Logo-RedHat-Hat-Color-CMYK%20%281%29.jpg?itok=Mf0Ff9jq',
+    description:
+        'We’re the world’s leading provider of enterprise open source solutions, using a community-powered approach to deliver high-performing Linux, cloud, container, and Kubernetes technologies. We help you standardize across environments, develop cloud-native applications, and integrate, automate, secure, and manage complex environments with award-winning support, training, and consulting services.',
+    resources_page_src: `[![Build Status](https://travis-ci.com/ansible/galaxy.svg?branch=devel)](https://travis-ci.com/ansible/galaxy)
 
 # Ansible Galaxy
 
@@ -46,17 +36,17 @@ For the [galaxy.ansible.com](https://galaxy.ansible.com) site, get alerted when 
 
 ## Contributing
 
- * If you're interested in jumping in and helping out, view the [contributing guide](./CONTRIBUTING.rst).
- * Chat with us on irc.freenode.net: #ansible-galaxy
+* If you're interested in jumping in and helping out, view the [contributing guide](./CONTRIBUTING.rst).
+* Chat with us on irc.freenode.net: #ansible-galaxy
 
 ## Branch Information
 
- * Releases are named after Daft Punk songs.
- * The *devel* branch is the release actively under development.
- * The *master* branch corresponds to the latest stable release.
- * Submit pull requests for bug fixes and new features to *devel*.
- * Various [release/X.Y.Z branches exist for previous releases](https://github.com/ansible/galaxy/tags).
- * Contributors welcome! Get started by reviewing [CONTRIBUTING.md](./CONTRIBUTING.md).
+* Releases are named after Daft Punk songs.
+* The *devel* branch is the release actively under development.
+* The *master* branch corresponds to the latest stable release.
+* Submit pull requests for bug fixes and new features to *devel*.
+* Various [release/X.Y.Z branches exist for previous releases](https://github.com/ansible/galaxy/tags).
+* Contributors welcome! Get started by reviewing [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Authors
 
@@ -64,17 +54,29 @@ View [AUTHORS](./AUTHORS) for a list contributors to Ansible Galaxy. Thanks ever
 
 Ansible Galaxy is an [Ansible by Red Hat](https://ansible.com) sponsored project.
 `,
-        resources_page_html: '',
-        useful_links: [
-            { name: 'Red Hat', url: 'https://www.redhat.com' },
-            {
-                name: 'Cormier: "Ansible is a Platform"',
-                url: 'https://www.redhat.com',
-            },
-        ],
-        owners: [{ name: 'newswangerd' }],
-        num_collections: 10,
-    } as Namespace;
+    resources_page_html: '',
+    useful_links: [
+        { name: 'Red Hat', url: 'https://www.redhat.com' },
+        {
+            name: 'Cormier: "Ansible is a Platform"',
+            url: 'https://www.redhat.com',
+        },
+    ],
+    owners: [{ name: 'newswangerd' }],
+    num_collections: 10,
+} as Namespace;
+
+export class MockNamespace {
+    mock: any;
+
+    constructor(http: any, apiPath: string) {
+        this.mock = new MockAdapter(http, { delayResponse: 200 });
+        this.mock.onGet(apiPath).reply(200, this.getNSList());
+        this.mock.onGet(apiPath + 'red_hat/').reply(200, this.getNSDetail());
+        this.mock.onPut(apiPath + 'red_hat/').reply(204, this.ns1);
+    }
+
+    ns1 = redHat;
 
     getNSList() {
         return [this.ns1];

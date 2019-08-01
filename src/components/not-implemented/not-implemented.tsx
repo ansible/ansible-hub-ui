@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 export class NotImplemented extends React.Component<{}, {}> {
-    implementedLinks = ['/my-namespaces/edit/red_hat'];
+    implementedLinks = ['/my-namespaces/edit/red_hat', '/red_hat'];
 
     render() {
         return (
@@ -13,7 +13,7 @@ export class NotImplemented extends React.Component<{}, {}> {
                 Here's a list of pages that you can go to that do work:
                 <ol>
                     {this.implementedLinks.map(x => (
-                        <li>
+                        <li key={x}>
                             <Link to={x}>{x}</Link>
                         </li>
                     ))}
