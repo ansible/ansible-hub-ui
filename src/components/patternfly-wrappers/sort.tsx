@@ -72,6 +72,9 @@ export class Sort extends React.Component<IProps, IState> {
 
     private getIsDescending(params) {
         const sort = params[this.props.sortParamName];
+
+        // The ?sort= url param is not always guaranteed to be set. If it's
+        // not set, return the default
         if (!sort) {
             return true;
         }

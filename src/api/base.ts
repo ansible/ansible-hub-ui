@@ -36,8 +36,7 @@ export class BaseAPI {
         return this.http.post(path, data);
     }
 
-    private mapPageToOffset(p) {
-        const params = { ...p };
+    private mapPageToOffset(params) {
         const pageSize =
             parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
         const page = parseInt(params['page']) || 1;
