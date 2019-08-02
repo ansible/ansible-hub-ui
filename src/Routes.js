@@ -68,17 +68,17 @@ const MyCollections = asyncComponent(() =>
     ),
 );
 
-const MyNamespaces = asyncComponent(() =>
+const ManageNamespace = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */
-        './containers/namespace-list/my-namespaces'
+        /* webpackChunkName: "namespace_detail" */
+        './containers/namespace-detail/manage-namespace'
     ),
 );
 
 const PartnerDetail = asyncComponent(() =>
     import(
         /* webpackChunkName: "namespace_detail" */
-        './containers/partners/partner-detail'
+        './containers/namespace-detail/partner-detail'
     ),
 );
 
@@ -152,7 +152,7 @@ export const Routes = props => {
             />
             <InsightsRoute
                 path={Paths.myNamespaces}
-                component={MyNamespaces}
+                component={ManageNamespace}
                 rootClass='root'
             />
 

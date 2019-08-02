@@ -5,7 +5,7 @@ import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
 import { BaseHeader, NotImplemented } from '../../components';
 
-class MyNamespaces extends React.Component<RouteComponentProps, {}> {
+class ManageNamespace extends React.Component<RouteComponentProps, {}> {
     render() {
         return (
             <React.Fragment>
@@ -20,4 +20,4 @@ class MyNamespaces extends React.Component<RouteComponentProps, {}> {
     }
 }
 
-export default withRouter(MyNamespaces);
+export default withRouter(ManageNamespace);
