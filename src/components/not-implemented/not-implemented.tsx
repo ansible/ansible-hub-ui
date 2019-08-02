@@ -10,6 +10,7 @@ export class NotImplemented extends React.Component<{}, {}> {
         '/my-namespaces',
         '/my-imports',
         '/',
+        '/my-namespaces/red_hat',
     ];
 
     render() {

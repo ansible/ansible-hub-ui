@@ -61,10 +61,10 @@ const NotFound = asyncComponent(() =>
     ),
 );
 
-const MyCollections = asyncComponent(() =>
+const MyNamespaces = asyncComponent(() =>
     import(
         /* webpackChunkName: "Rules" */
-        './containers/my-namespaces/my-collections'
+        './containers/my-namespaces/my-namespaces'
     ),
 );
 
@@ -147,12 +147,12 @@ export const Routes = props => {
             />
             <InsightsRoute
                 path={Paths.myCollections}
-                component={MyCollections}
+                component={ManageNamespace}
                 rootClass='root'
             />
             <InsightsRoute
                 path={Paths.myNamespaces}
-                component={ManageNamespace}
+                component={MyNamespaces}
                 rootClass='root'
             />
 

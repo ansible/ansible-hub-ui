@@ -5,11 +5,11 @@ import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
 import { BaseHeader, NotImplemented } from '../../components';
 
-class MyCollections extends React.Component<RouteComponentProps, {}> {
+class MyNamespaces extends React.Component<RouteComponentProps, {}> {
     render() {
         return (
             <React.Fragment>
-                <BaseHeader title='My Collections' />
+                <BaseHeader title='My Namespaces' />
                 <Main>
                     <Section className='body'>
                         <NotImplemented></NotImplemented>
@@ -20,4 +20,4 @@ class MyCollections extends React.Component<RouteComponentProps, {}> {
     }
 }
 
-export default withRouter(MyCollections);
+export default withRouter(MyNamespaces);

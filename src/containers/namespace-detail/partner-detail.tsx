@@ -5,12 +5,7 @@ import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
 import { CollectionListType, NamespaceType } from '../../api';
 
-import {
-    updateParams,
-    renderResources,
-    loadCollections,
-    loadAll,
-} from './shared-functions';
+import { renderResources, loadCollections, loadAll } from './shared-functions';
 
 import { CollectionList, PartnerHeader } from '../../components';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -35,9 +30,6 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
 
     // These methods are all shared with the manange namespace view, so they
     // are loaded from a shared library
-    get updateParams() {
-        return ParamHelper.updateParamsMixin();
-    }
 
     get renderResources() {
         return renderResources;
@@ -49,6 +41,10 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
 
     get loadAll() {
         return loadAll;
+    }
+
+    get updateParams() {
+        return ParamHelper.updateParamsMixin();
     }
 
     constructor(props) {
@@ -96,7 +92,7 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
                 <PartnerHeader
                     namespace={namespace}
                     breadcrumbs={[
-                        { url: Paths.partners, name: 'My Namespaces' },
+                        { url: Paths.partners, name: 'Partners' },
                         { name: namespace.name },
                     ]}
                     tabs={['Collections', 'Resources']}
