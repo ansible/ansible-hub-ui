@@ -7,18 +7,6 @@ import { CollectionAPI, NamespaceAPI, NamespaceType } from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
 import { Paths } from '../../paths';
 
-export function updateParams(params: object, dontLoadAPI?: boolean) {
-    this.setState({ params: params }, () => {
-        if (!dontLoadAPI) {
-            this.loadCollections();
-        }
-    });
-    this.props.history.push({
-        pathname: this.props.location.pathname,
-        search: '?' + ParamHelper.getQueryString(params),
-    });
-}
-
 export function renderResources(namespace: NamespaceType) {
     return (
         <div className='pf-c-content preview'>

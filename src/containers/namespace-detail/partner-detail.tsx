@@ -12,12 +12,7 @@ import {
     loadAll,
 } from './shared-functions';
 
-import {
-    CollectionList,
-    PartnerHeader,
-    Breadcrumbs,
-    Tabs,
-} from '../../components';
+import { CollectionList, PartnerHeader } from '../../components';
 import { ParamHelper } from '../../utilities/param-helper';
 import { Paths } from '../../paths';
 
@@ -41,7 +36,7 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
     // These methods are all shared with the manange namespace view, so they
     // are loaded from a shared library
     get updateParams() {
-        return updateParams;
+        return ParamHelper.updateParamsMixin();
     }
 
     get renderResources() {
@@ -62,6 +57,10 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
             'page',
             'page_size',
         ]);
+
+        if (!params['tab']) {
+            params['tab'] = 'collections';
+        }
 
         this.state = {
             collections: [],
@@ -96,28 +95,22 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
             <React.Fragment>
                 <PartnerHeader
                     namespace={namespace}
-                    breadcrumbs={
-                        <Breadcrumbs
-                            links={[
-                                { url: Paths.partners, name: 'Partners' },
-                                { name: namespace.name },
-                            ]}
-                        />
-                    }
-                    tabs={
-                        <Tabs
-                            tabs={['Collections', 'Resources']}
-                            params={params}
-                            updateParams={p => this.updateParams(p, true)}
-                        />
-                    }
+                    breadcrumbs={[
+                        { url: Paths.partners, name: 'My Namespaces' },
+                        { name: namespace.name },
+                    ]}
+                    tabs={['Collections', 'Resources']}
+                    params={params}
+                    updateParams={p => this.updateParams(p)}
                 ></PartnerHeader>
                 <Main>
                     <Section className='body'>
                         {params.tab.toLowerCase() === 'collections' ? (
                             <CollectionList
                                 updateParams={params =>
-                                    this.updateParams(params)
+                                    this.updateParams(params, () =>
+                                        this.loadCollections(),
+                                    )
                                 }
                                 params={params}
                                 collections={collections}
