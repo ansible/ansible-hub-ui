@@ -1,7 +1,12 @@
 import * as React from 'react';
 import './list.scss';
 
-import { DataList } from '@patternfly/react-core';
+import {
+    TextInput,
+    Button,
+    DropdownItem,
+    DataList,
+} from '@patternfly/react-core';
 
 import { CollectionListType } from '../../api';
 import {
@@ -9,6 +14,7 @@ import {
     Sort,
     Toolbar,
     Pagination,
+    StatefulDropdown
 } from '../../components';
 import { Constants } from '../../constants';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -24,7 +30,8 @@ interface IProps {
     itemCount: number;
 
     showNamespace?: boolean;
-    controls?: React.ReactNode;
+    showControls?: boolean;
+    handleControlClick?: (id, event) => void;
 }
 
 interface IState {
@@ -38,7 +45,13 @@ export class CollectionList extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { collections, params, updateParams, itemCount } = this.props;
+        const {
+            collections,
+            params,
+            updateParams,
+            itemCount,
+            showControls,
+        } = this.props;
 
         return (
             <React.Fragment>
@@ -68,7 +81,15 @@ export class CollectionList extends React.Component<IProps, IState> {
 
                 <DataList aria-label={'List of Collections'}>
                     {collections.map(c => (
-                        <CollectionListItem key={c.id} {...c} />
+                        <CollectionListItem
+                            controls={
+                                showControls
+                                    ? this.renderCollectionControls(c.id)
+                                    : null
+                            }
+                            key={c.id}
+                            {...c}
+                        />
                     ))}
                 </DataList>
 
@@ -97,4 +118,28 @@ export class CollectionList extends React.Component<IProps, IState> {
             );
         }
     }
+
+    private renderCollectionControls(id) {
+        return (
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Button
+                    onClick={() => this.props.handleControlClick(id, 'upload')}
+                    variant='secondary'
+                >
+                    Upload New Version
+                </Button>
+                <StatefulDropdown
+                    items={[
+                        <DropdownItem
+                            onClick={e =>
+                                this.props.handleControlClick(id, 'deprecate')
+                            }
+                            key='1'
+                        >
+                            Deprecate
+                        </DropdownItem>,
+                    ]}
+                />
+            </div>
+        );
 }

@@ -10,7 +10,7 @@ import { Paths } from '../../paths';
 export function renderResources(namespace: NamespaceType) {
     return (
         <div className='pf-c-content preview'>
-            <ReactMarkdown source={namespace.resources_page_src} />
+            <ReactMarkdown source={namespace.resources_page} />
         </div>
     );
 }

@@ -1,16 +1,25 @@
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import {
+    withRouter,
+    RouteComponentProps,
+    Redirect,
+    Link,
+} from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
-import { Button } from '@patternfly/react-core';
+import { Button, DropdownItem } from '@patternfly/react-core';
 
 import { CollectionListType, NamespaceType } from '../../api';
 
 import { renderResources, loadCollections, loadAll } from './shared-functions';
 
-import { CollectionList, PartnerHeader } from '../../components';
+import {
+    CollectionList,
+    PartnerHeader,
+    StatefulDropdown,
+} from '../../components';
 import { ParamHelper } from '../../utilities/param-helper';
-import { Paths } from '../../paths';
+import { Paths, formatPath } from '../../paths';
 
 interface IState {
     collections: CollectionListType[];
@@ -99,7 +108,7 @@ class ManageNamespace extends React.Component<RouteComponentProps, IState> {
                     tabs={['Collections', 'Resources']}
                     params={params}
                     updateParams={p => this.updateParams(p)}
-                    pageControls={<Button>Upload Collection</Button>}
+                    pageControls={this.renderPageControls()}
                 ></PartnerHeader>
                 <Main>
                     <Section className='body'>
@@ -113,6 +122,10 @@ class ManageNamespace extends React.Component<RouteComponentProps, IState> {
                                 params={params}
                                 collections={collections}
                                 itemCount={itemCount}
+                                showControls={true}
+                                handleControlClick={(id, v) =>
+                                    console.log(id, v)
+                                }
                             />
                         ) : (
                             this.renderResources(namespace)
@@ -120,6 +133,27 @@ class ManageNamespace extends React.Component<RouteComponentProps, IState> {
                     </Section>
                 </Main>
             </React.Fragment>
+        );
+    }
+
+    private renderPageControls() {
+        return (
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Button>Upload Collection</Button>
+                <StatefulDropdown
+                    items={[
+                        <DropdownItem key='1'>
+                            <Link
+                                to={formatPath(Paths.editNamespace, {
+                                    namespace: this.state.namespace.name,
+                                })}
+                            >
+                                Edit Namespace
+                            </Link>
+                        </DropdownItem>,
+                    ]}
+                />
+            </div>
         );
     }
 }

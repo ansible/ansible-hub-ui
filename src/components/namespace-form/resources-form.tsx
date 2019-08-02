@@ -20,14 +20,14 @@ export class ResourcesForm extends React.Component<IProps, {}> {
                 <div className='markdown-editor'>
                     <div className='column editor'>
                         <FormGroup
-                            fieldId='resources_page_src'
+                            fieldId='resources_page'
                             helperText='You can can customize the Resources tab on your profile by entering custom markdown here.'
                         >
                             Raw Markdown
                             <TextArea
                                 className='resources-editor'
-                                id='resources_page_src'
-                                value={namespace.resources_page_src}
+                                id='resources_page'
+                                value={namespace.resources_page}
                                 onChange={value => this.updateResources(value)}
                             />
                         </FormGroup>
@@ -37,7 +37,7 @@ export class ResourcesForm extends React.Component<IProps, {}> {
                         Preview
                         <div className='pf-c-content preview'>
                             <ReactMarkdown
-                                source={namespace.resources_page_src}
+                                source={namespace.resources_page}
                             />
                         </div>
                     </div>
@@ -48,7 +48,7 @@ export class ResourcesForm extends React.Component<IProps, {}> {
 
     private updateResources(data) {
         const update = { ...this.props.namespace };
-        update.resources_page_src = data;
+        update.resources_page = data;
         this.props.updateNamespace(update);
     }
 }

@@ -20,6 +20,7 @@ import { CollectionListType } from '../../api';
 
 interface IProps extends CollectionListType {
     showNamespace?: boolean;
+    controls?: React.ReactNode;
 }
 
 export class CollectionListItem extends React.Component<IProps, {}> {
@@ -30,6 +31,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
             latest_version,
             namespace,
             showNamespace,
+            controls,
         } = this.props;
 
         const cells = [];
@@ -96,6 +98,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
 
         cells.push(
             <DataListCell isFilled={false} alignRight key='stats'>
+                {controls ? <div className='entry'>{controls}</div> : null}
                 <div className='right-col entry'>
                     <NumericLabel number={download_count} label='Download' />
                 </div>

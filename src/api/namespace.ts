@@ -1,7 +1,7 @@
 import { BaseAPI } from './base';
 import { MockNamespace } from './mocked-responses/namespace';
 
-export class API extends BaseAPI {
+class API extends BaseAPI {
     apiPath = 'api/namespaces/';
 
     constructor() {
