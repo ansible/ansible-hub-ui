@@ -41,6 +41,7 @@ interface IState {
         page_size?: number;
         tab?: string;
         keywords?: string;
+        namespace?: string;
     };
     redirect: string;
     itemCount: number;
@@ -54,7 +55,12 @@ interface IProps extends RouteComponentProps {
 }
 
 export class NamespaceDetail extends React.Component<IProps, IState> {
-    nonAPIParams = ['tab'];
+    // todo: DON'T MERGE UNTIL NAMESPACE CAN BE QUERIED ON API
+    nonAPIParams = ['tab', 'namespace'];
+
+    // namespace is a positional url argument, so don't include it in the
+    // query params
+    nonQueryStringParams = ['namespace'];
 
     constructor(props) {
         super(props);
@@ -66,6 +72,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         if (!params['tab']) {
             params['tab'] = 'collections';
         }
+
+        params['namespace'] = props.match.params['namespace'];
 
         this.state = {
             collections: [],
@@ -221,7 +229,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     }
 
     private get updateParams() {
-        return ParamHelper.updateParamsMixin();
+        return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
     }
 
     private renderPageControls() {
