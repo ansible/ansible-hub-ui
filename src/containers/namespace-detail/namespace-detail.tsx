@@ -46,6 +46,7 @@ interface IState {
     itemCount: number;
     showImportModal: boolean;
     warning: string;
+    updateCollection: CollectionListType;
 }
 
 interface IProps extends RouteComponentProps {
@@ -54,52 +55,6 @@ interface IProps extends RouteComponentProps {
 
 export class NamespaceDetail extends React.Component<IProps, IState> {
     nonAPIParams = ['tab'];
-
-    renderResources(namespace: NamespaceType) {
-        return (
-            <div className='pf-c-content preview'>
-                <ReactMarkdown source={namespace.resources_page} />
-            </div>
-        );
-    }
-
-    loadCollections() {
-        CollectionAPI.list(
-            ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-        ).then(result => {
-            this.setState({
-                collections: result.data.data,
-                itemCount: result.data.meta.count,
-            });
-        });
-    }
-
-    // todo: DON'T MERGE THIS WITHOUT SWITCHING BACK TO THE ACTUAL API
-    loadAll() {
-        Promise.all([
-            CollectionAPI.list(
-                ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-                'api/internal/ui/collections/',
-            ),
-            NamespaceAPI.get(this.props.match.params['namespace']),
-        ])
-            .then(val => {
-                this.setState({
-                    // collections: val[0].data.data,
-                    // itemCount: val[0].data.meta.count,
-                    collections: val[0].data.results,
-                    itemCount: val[0].data.count,
-                    namespace: val[1].data,
-                });
-            })
-            .catch(response => {
-                this.setState({ redirect: Paths.notFound });
-            });
-    }
-
-    get updateParams() {
-        return ParamHelper.updateParamsMixin();
-    }
 
     constructor(props) {
         super(props);
@@ -120,6 +75,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             itemCount: 0,
             showImportModal: false,
             warning: '',
+            updateCollection: null,
         };
     }
 
@@ -136,6 +92,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             itemCount,
             showImportModal,
             warning,
+            updateCollection,
         } = this.state;
 
         if (redirect) {
@@ -154,6 +111,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     setOpen={(isOpen, warn) =>
                         this.toggleImportModal(isOpen, warn)
                     }
+                    collection={updateCollection}
                 />
                 {warning ? (
                     <Alert
@@ -196,8 +154,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                                 collections={collections}
                                 itemCount={itemCount}
                                 showControls={this.props.showControls}
-                                handleControlClick={(id, v) =>
-                                    console.log(id, v)
+                                handleControlClick={(id, action) =>
+                                    this.handleCollectionAction(id, action)
                                 }
                             />
                         ) : (
@@ -207,6 +165,63 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 </Main>
             </React.Fragment>
         );
+    }
+
+    private handleCollectionAction(id, action) {
+        if (action === 'upload') {
+            const collection = this.state.collections.find(x => x.id === id);
+
+            this.setState({
+                updateCollection: collection,
+                showImportModal: true,
+            });
+        }
+    }
+
+    private renderResources(namespace: NamespaceType) {
+        return (
+            <div className='pf-c-content preview'>
+                <ReactMarkdown source={namespace.resources_page} />
+            </div>
+        );
+    }
+
+    private loadCollections() {
+        CollectionAPI.list(
+            ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+        ).then(result => {
+            this.setState({
+                collections: result.data.data,
+                itemCount: result.data.meta.count,
+            });
+        });
+    }
+
+    // todo: DON'T MERGE THIS WITHOUT SWITCHING BACK TO THE ACTUAL API
+    private loadAll() {
+        Promise.all([
+            CollectionAPI.list(
+                ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+                'api/internal/ui/collections/',
+            ),
+            NamespaceAPI.get(this.props.match.params['namespace']),
+        ])
+            .then(val => {
+                this.setState({
+                    // collections: val[0].data.data,
+                    // itemCount: val[0].data.meta.count,
+                    collections: val[0].data.results,
+                    itemCount: val[0].data.count,
+                    namespace: val[1].data,
+                });
+            })
+            .catch(response => {
+                this.setState({ redirect: Paths.notFound });
+            });
+    }
+
+    private get updateParams() {
+        return ParamHelper.updateParamsMixin();
     }
 
     private renderPageControls() {
@@ -241,6 +256,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         const newState = { showImportModal: isOpen };
         if (warning) {
             newState['warning'] = warning;
+        }
+
+        if (!isOpen) {
+            newState['updateCollection'] = null;
         }
 
         this.setState(newState);

@@ -20,11 +20,11 @@ interface IProps {
     isOpen: boolean;
     setOpen: (isOpen, warnings?) => void;
     onUploadSuccess: (result) => void;
+
+    collection?: CollectionListType;
 }
 
 interface IState {
-    collection?: CollectionListType;
-
     file?: File;
     errors?: string;
     uploadProgress: number;
@@ -46,15 +46,9 @@ export class ImportModal extends React.Component<IProps, IState> {
         };
     }
     render() {
-        const { isOpen } = this.props;
+        const { isOpen, collection } = this.props;
 
-        const {
-            collection,
-            file,
-            errors,
-            uploadProgress,
-            uploadStatus,
-        } = this.state;
+        const { file, errors, uploadProgress, uploadStatus } = this.state;
         return (
             <Modal
                 isSmall

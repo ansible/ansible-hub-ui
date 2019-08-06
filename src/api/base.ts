@@ -18,7 +18,10 @@ export class BaseAPI {
         // The api uses offset/limit for pagination. I think this is confusing
         // for params on the front end, so we're going to use page/page size
         // for the URL params and just map it to whatever the api expects.
-        return this.http.get(path, { params: this.mapPageToOffset(params) });
+
+        // todo: DON'T MERGE WITHOUT UNCOMMENTING THIS
+        // return this.http.get(path, { params: this.mapPageToOffset(params) });
+        return this.http.get(path, { params: params });
     }
 
     get(id: string, apiPath?: string) {
