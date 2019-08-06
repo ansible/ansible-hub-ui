@@ -7,7 +7,12 @@ import {
     Link,
 } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
-import { Button, DropdownItem } from '@patternfly/react-core';
+import {
+    Button,
+    DropdownItem,
+    Alert,
+    AlertActionCloseButton,
+} from '@patternfly/react-core';
 
 import { CollectionListType, NamespaceType } from '../../api';
 
@@ -17,6 +22,7 @@ import {
     CollectionList,
     PartnerHeader,
     StatefulDropdown,
+    ImportModal,
 } from '../../components';
 import { ParamHelper } from '../../utilities/param-helper';
 import { Paths, formatPath } from '../../paths';
@@ -33,6 +39,8 @@ interface IState {
     };
     redirect: string;
     itemCount: number;
+    showImportModal: boolean;
+    warning: string;
 }
 
 class ManageNamespace extends React.Component<RouteComponentProps, IState> {
@@ -74,6 +82,8 @@ class ManageNamespace extends React.Component<RouteComponentProps, IState> {
             params: params,
             redirect: null,
             itemCount: 0,
+            showImportModal: false,
+            warning: '',
         };
     }
 
@@ -88,6 +98,8 @@ class ManageNamespace extends React.Component<RouteComponentProps, IState> {
             params,
             redirect,
             itemCount,
+            showImportModal,
+            warning,
         } = this.state;
 
         if (redirect) {
@@ -99,6 +111,31 @@ class ManageNamespace extends React.Component<RouteComponentProps, IState> {
         }
         return (
             <React.Fragment>
+                <ImportModal
+                    isOpen={showImportModal}
+                    onUploadSuccess={x => console.log(x)}
+                    // onCancel
+                    setOpen={(isOpen, warn) =>
+                        this.toggleImportModal(isOpen, warn)
+                    }
+                />
+                {warning ? (
+                    <Alert
+                        style={{
+                            position: 'fixed',
+                            right: '5px',
+                            top: '80px',
+                            zIndex: 300,
+                        }}
+                        variant='warning'
+                        title={warning}
+                        action={
+                            <AlertActionCloseButton
+                                onClose={() => this.setState({ warning: '' })}
+                            />
+                        }
+                    ></Alert>
+                ) : null}
                 <PartnerHeader
                     namespace={namespace}
                     breadcrumbs={[
@@ -139,7 +176,11 @@ class ManageNamespace extends React.Component<RouteComponentProps, IState> {
     private renderPageControls() {
         return (
             <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Button>Upload Collection</Button>
+                <Button
+                    onClick={() => this.setState({ showImportModal: true })}
+                >
+                    Upload Collection
+                </Button>
                 <StatefulDropdown
                     items={[
                         <DropdownItem key='1'>
@@ -155,6 +196,15 @@ class ManageNamespace extends React.Component<RouteComponentProps, IState> {
                 />
             </div>
         );
+    }
+
+    private toggleImportModal(isOpen: boolean, warning?: string) {
+        const newState = { showImportModal: isOpen };
+        if (warning) {
+            newState['warning'] = warning;
+        }
+
+        this.setState(newState);
     }
 }
 

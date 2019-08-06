@@ -26,17 +26,21 @@ export function loadCollections() {
     });
 }
 
+// todo: DON'T MERGE THIS WITHOUT SWITCHING BACK TO THE ACTUAL API
 export function loadAll() {
     Promise.all([
         CollectionAPI.list(
             ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+            'api/internal/ui/collections/'
         ),
         NamespaceAPI.get(this.props.match.params['namespace']),
     ])
         .then(val => {
             this.setState({
-                collections: val[0].data.data,
-                itemCount: val[0].data.meta.count,
+                // collections: val[0].data.data,
+                // itemCount: val[0].data.meta.count,
+                collections: val[0].data.results,
+                itemCount: val[0].data.count,
                 namespace: val[1].data,
             });
         })

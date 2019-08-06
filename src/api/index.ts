@@ -9,3 +9,4 @@ export {
     ImportMessageCodes,
 } from './response-types/import';
 export { ImportAPI } from './import';
+export { CollectionUploadType } from './response-types/collection';

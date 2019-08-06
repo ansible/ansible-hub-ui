@@ -1,4 +1,4 @@
-export class CollectionUpload {
+export class CollectionUploadType {
     id: number;
     file: File;
     sha256: string;
