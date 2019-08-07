@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash';
 
 export class ParamHelper {
     // Helper class for managing param object.
-    // Param object is just a dictionary of lists where the keys map to
+    // Param object is just a dictionary where the keys map to
     // parameter names that contain a value or list of values
 
     // Convert URLSearchParams object to param object
@@ -94,9 +94,13 @@ export class ParamHelper {
     }
 
     // Returns the query string for the set of parameters
-    static getQueryString(params: Object) {
+    static getQueryString(params: Object, ignoreParams?: string[]) {
         let paramString = '';
         for (const key of Object.keys(params)) {
+            // skip the param if its in the list of ignored params
+            if (ignoreParams.includes(key)) {
+                continue;
+            }
             if (Array.isArray(params[key])) {
                 for (const val of params[key]) {
                     paramString += key + '=' + encodeURIComponent(val) + '&';
@@ -109,5 +113,21 @@ export class ParamHelper {
         // Remove trailing '&'
         paramString = paramString.substring(0, paramString.length - 1);
         return paramString;
+    }
+
+    // Reusable function that can be included in a component to update it's
+    // internal state and page params at the same time
+    static updateParamsMixin(ignoreParams?: string[]) {
+        return function(params: object, callback?) {
+            this.setState({ params: params }, () => {
+                if (callback) {
+                    callback();
+                }
+            });
+            this.props.history.push({
+                pathname: this.props.location.pathname,
+                search: '?' + ParamHelper.getQueryString(params, ignoreParams),
+            });
+        };
     }
 }
