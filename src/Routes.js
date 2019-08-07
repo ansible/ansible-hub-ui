@@ -61,7 +61,7 @@ const MyCollections = asyncComponent(() =>
 
 const MyNamespaces = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */ './containers/my-namespaces/my-namespaces'
+        /* webpackChunkName: "Rules" */ './containers/namespace-list/my-namespaces'
     ),
 );
 
@@ -72,7 +72,9 @@ const PartnerDetail = asyncComponent(() =>
 );
 
 const Partners = asyncComponent(() =>
-    import(/* webpackChunkName: "Rules" */ './containers/partners/partners'),
+    import(
+        /* webpackChunkName: "Rules" */ './containers/namespace-list/partners'
+    ),
 );
 
 const MyImports = asyncComponent(() =>

@@ -17,7 +17,7 @@ export class ParamHelper {
             // It seems like there should be a better way to do this based off
             // of the interface for the parameters, but I can't figure out if
             // that's possible or not
-            if (numericTypes.includes(key)) {
+            if (numericTypes && numericTypes.includes(key)) {
                 v = Number(val);
             } else {
                 v = val;
@@ -98,7 +98,7 @@ export class ParamHelper {
         let paramString = '';
         for (const key of Object.keys(params)) {
             // skip the param if its in the list of ignored params
-            if (ignoreParams.includes(key)) {
+            if (ignoreParams && ignoreParams.includes(key)) {
                 continue;
             }
             if (Array.isArray(params[key])) {
@@ -126,7 +126,9 @@ export class ParamHelper {
             });
             this.props.history.push({
                 pathname: this.props.location.pathname,
-                search: '?' + ParamHelper.getQueryString(params, ignoreParams),
+                search:
+                    '?' +
+                    ParamHelper.getQueryString(params, ignoreParams || []),
             });
         };
     }

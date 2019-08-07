@@ -1,5 +1,5 @@
 import * as MockAdapter from 'axios-mock-adapter';
-import { NamespaceType } from '../../api';
+import { NamespaceType, NamespaceListType } from '../../api';
 
 export const redHat = {
     name: 'red_hat',
@@ -71,15 +71,43 @@ export class MockNamespace {
 
     constructor(http: any, apiPath: string) {
         this.mock = new MockAdapter(http, { delayResponse: 200 });
-        this.mock.onGet(apiPath).reply(200, this.getNSList());
+        this.mock.onGet(apiPath).reply(200, {
+            links: {},
+            meta: { count: 1 },
+            data: this.getNSList(),
+        });
         this.mock.onGet(apiPath + 'red_hat/').reply(200, this.getNSDetail());
         this.mock.onPut(apiPath + 'red_hat/').reply(204, this.ns1);
     }
 
     ns1 = redHat;
 
+    ns2 = {
+        name: 'cisco',
+        company: 'Cisco',
+        num_collections: 1,
+        avatar_url:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cisco_logo.svg/320px-Cisco_logo.svg.png',
+    };
+
+    ns3 = {
+        name: 'ansible',
+        company: 'Ansible',
+        num_collections: 90,
+        avatar_url:
+            'https://logos-download.com/wp-content/uploads/2016/10/Ansible_logo.png',
+    };
+
+    ns4 = {
+        name: 'google',
+        company: 'Google Cloud',
+        num_collections: 2,
+        avatar_url:
+            'https://cloud.google.com/_static/images/cloud/icons/favicons/onecloud/apple-icon.png',
+    };
+
     getNSList() {
-        return [this.ns1];
+        return [this.ns1, this.ns2, this.ns3, this.ns4];
     }
 
     getNSDetail() {

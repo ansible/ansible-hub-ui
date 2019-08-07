@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 export class NotImplemented extends React.Component<{}, {}> {
-    implementedLinks = ['/my-namespaces/edit/red_hat', '/red_hat'];
+    implementedLinks = ['/my-namespaces/edit/red_hat', '/red_hat', '/partners'];
 
     render() {
         return (

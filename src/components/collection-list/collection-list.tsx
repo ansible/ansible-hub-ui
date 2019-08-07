@@ -4,17 +4,11 @@ import './list.scss';
 import { DataList } from '@patternfly/react-core';
 
 import { CollectionListType } from '../../api';
-import { CollectionListItem, Sort } from '../../components';
+import { CollectionListItem, Sort, Toolbar } from '../../components';
 import { Constants } from '../../constants';
 import { ParamHelper } from '../../utilities/param-helper';
 
-import {
-    Toolbar,
-    ToolbarGroup,
-    ToolbarItem,
-    Pagination,
-    TextInput,
-} from '@patternfly/react-core';
+import { Pagination, TextInput } from '@patternfly/react-core';
 
 interface IProps {
     collections: CollectionListType[];
@@ -46,37 +40,18 @@ export class CollectionList extends React.Component<IProps, IState> {
         return (
             <React.Fragment>
                 <div className='controls top'>
-                    <Toolbar>
-                        <ToolbarGroup>
-                            <ToolbarItem>
-                                <TextInput
-                                    value={this.state.kwField}
-                                    onChange={k =>
-                                        this.setState({ kwField: k })
-                                    }
-                                    onKeyPress={e => this.handleEnter(e)}
-                                    type='search'
-                                    aria-label='search text input'
-                                    placeholder='Find collection by name'
-                                />
-                            </ToolbarItem>
-                        </ToolbarGroup>
-                        <ToolbarGroup>
-                            <ToolbarItem>
-                                <Sort
-                                    options={[
-                                        { title: 'Name', id: 'name' },
-                                        {
-                                            title: 'Last Updated',
-                                            id: 'created',
-                                        },
-                                    ]}
-                                    params={params}
-                                    updateParams={updateParams}
-                                />
-                            </ToolbarItem>
-                        </ToolbarGroup>
-                    </Toolbar>
+                    <Toolbar
+                        searchPlaceholder='Find collection by name'
+                        sortOptions={[
+                            { title: 'Name', id: 'name' },
+                            {
+                                title: 'Last Updated',
+                                id: 'created',
+                            },
+                        ]}
+                        updateParams={updateParams}
+                        params={params}
+                    />
 
                     <div>
                         {this.renderPagination('pagination-options-menu-top')}
