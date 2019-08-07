@@ -1,21 +1,19 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
-import { BaseHeader, NotImplemented } from '../../components';
+import { NamespaceList } from './namespace-list';
+import { Paths } from '../../paths';
 
 class MyNamespaces extends React.Component<RouteComponentProps, {}> {
     render() {
         return (
-            <React.Fragment>
-                <BaseHeader title='My Namespaces' />
-                <Main>
-                    <Section className='body'>
-                        <NotImplemented></NotImplemented>
-                    </Section>
-                </Main>
-            </React.Fragment>
+            <NamespaceList
+                {...this.props}
+                namespacePath={Paths.myCollections}
+                title='My Namespaces'
+                filterOwner={true}
+            />
         );
     }
 }
