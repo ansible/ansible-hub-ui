@@ -21,70 +21,86 @@ import { Paths } from './paths';
  */
 const EditNamespace = asyncComponent(() =>
     import(
-        /* webpackChunkName: "SamplePage" */ './containers/edit-namespace/namespace-form'
+        /* webpackChunkName: "namespace_detail" */
+        './containers/edit-namespace/namespace-form'
     ),
 );
 
 const CollectionDetail = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */ './containers/collection-detail/collection-detail'
+        /* webpackChunkName: "collection_detail" */
+        './containers/collection-detail/collection-detail'
     ),
 );
 
 const CollectionContent = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */ './containers/collection-detail/collection-content'
+        /* webpackChunkName: "collection_detail" */
+        './containers/collection-detail/collection-content'
     ),
 );
 
 const CollectionDocs = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */ './containers/collection-detail/collection-docs'
+        /* webpackChunkName: "collection_detail" */
+        './containers/collection-detail/collection-docs'
     ),
 );
 
 const CollectionContentDocs = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */ './containers/collection-detail/collection-content-docs'
+        /* webpackChunkName: "collection_detail" */
+        './containers/collection-detail/collection-content-docs'
     ),
 );
 
 const NotFound = asyncComponent(() =>
-    import(/* webpackChunkName: "Rules" */ './containers/not-found/not-found'),
+    import(
+        /* webpackChunkName: "not_found" */
+        './containers/not-found/not-found'
+    ),
 );
 
 const MyCollections = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */ './containers/my-namespaces/my-collections'
+        /* webpackChunkName: "Rules" */
+        './containers/my-namespaces/my-collections'
     ),
 );
 
 const MyNamespaces = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */ './containers/namespace-list/my-namespaces'
+        /* webpackChunkName: "Rules" */
+        './containers/namespace-list/my-namespaces'
     ),
 );
 
 const PartnerDetail = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */ './containers/partners/partner-detail'
+        /* webpackChunkName: "namespace_detail" */
+        './containers/partners/partner-detail'
     ),
 );
 
 const Partners = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */ './containers/namespace-list/partners'
+        /* webpackChunkName: "namespace_list" */
+        './containers/namespace-list/partners'
     ),
 );
 
 const MyImports = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */ './containers/my-imports/my-imports'
+        /* webpackChunkName: "my_imports" */
+        './containers/my-imports/my-imports'
     ),
 );
 
 const Search = asyncComponent(() =>
-    import(/* webpackChunkName: "Rules" */ './containers/search/search'),
+    import(
+        /* webpackChunkName: "search" */
+        './containers/search/search'
+    ),
 );
 
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
