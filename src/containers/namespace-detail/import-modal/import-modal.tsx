@@ -9,7 +9,7 @@ import {
     CollectionListType,
     CollectionAPI,
     CollectionUploadType,
-} from '../../api';
+} from '../../../api';
 
 enum Status {
     uploading = 'uploading',
@@ -52,7 +52,11 @@ export class ImportModal extends React.Component<IProps, IState> {
         return (
             <Modal
                 isSmall
-                title='Upload a new collection'
+                title={
+                    collection
+                        ? 'New version of ' + collection.name
+                        : 'New collection'
+                }
                 isOpen={isOpen}
                 onClose={() => this.handleClose()}
                 actions={[
@@ -74,12 +78,6 @@ export class ImportModal extends React.Component<IProps, IState> {
                 ]}
             >
                 <div className='upload-collection'>
-                    <h4>
-                        Upload
-                        {collection
-                            ? ' a new version of ' + collection.name
-                            : ''}
-                    </h4>
                     <form>
                         <input
                             disabled={uploadStatus !== Status.waiting}
@@ -149,6 +147,7 @@ export class ImportModal extends React.Component<IProps, IState> {
         // Selects the artifact that will be uploaded and performs some basic
         // preliminary checks on it.
         const newCollection = files[0];
+        const { collection } = this.props;
 
         if (files.length > 1) {
             this.setState({
@@ -157,6 +156,15 @@ export class ImportModal extends React.Component<IProps, IState> {
         } else if (!this.acceptedFileTypes.includes(newCollection.type)) {
             this.setState({
                 errors: 'Invalid file format.',
+                file: newCollection,
+                uploadProgress: 0,
+            });
+        } else if (
+            collection &&
+            collection.name !== newCollection.name.split('-')[1]
+        ) {
+            this.setState({
+                errors: `The file you have selected doesn't appear to match ${collection.name}`,
                 file: newCollection,
                 uploadProgress: 0,
             });

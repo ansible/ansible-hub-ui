@@ -27,8 +27,10 @@ import {
     CollectionList,
     PartnerHeader,
     StatefulDropdown,
-    ImportModal,
 } from '../../components';
+
+import { ImportModal } from './import-modal/import-modal';
+
 import { ParamHelper } from '../../utilities/param-helper';
 import { Paths, formatPath } from '../../paths';
 
