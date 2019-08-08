@@ -36,7 +36,11 @@ export class BaseAPI {
         return this.http.post(path, data);
     }
 
-    private mapPageToOffset(params) {
+    private mapPageToOffset(p) {
+        // Need to copy the object to make sure we aren't accidentally
+        // setting page state
+        const params = { ...p };
+
         const pageSize =
             parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
         const page = parseInt(params['page']) || 1;

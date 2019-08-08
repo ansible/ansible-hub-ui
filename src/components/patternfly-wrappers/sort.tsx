@@ -103,19 +103,25 @@ export class Sort extends React.Component<IProps, IState> {
         const { isExpanded } = this.state;
         return (
             <div className='sort-wrapper'>
-                <Select
-                    variant={SelectVariant.single}
-                    aria-label='Select Input'
-                    onToggle={e => this.onToggle(e)}
-                    onSelect={(_, name) => this.onSelect(name)}
-                    selections={this.getSelected(params).title}
-                    isExpanded={isExpanded}
-                    ariaLabelledBy='Sort results'
-                >
-                    {options.map(option => (
-                        <SelectOption key={option.id} value={option.title} />
-                    ))}
-                </Select>
+                {options.length > 1 ? (
+                    <Select
+                        variant={SelectVariant.single}
+                        aria-label='Select Input'
+                        onToggle={e => this.onToggle(e)}
+                        onSelect={(_, name) => this.onSelect(name)}
+                        selections={this.getSelected(params).title}
+                        isExpanded={isExpanded}
+                        ariaLabelledBy='Sort results'
+                    >
+                        {options.map(option => (
+                            <SelectOption
+                                key={option.id}
+                                value={option.title}
+                            />
+                        ))}
+                    </Select>
+                ) : null}
+
                 {this.getIsDescending(params) ? (
                     <SortAmountDownIcon
                         className='clickable asc-button'

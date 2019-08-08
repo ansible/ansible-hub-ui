@@ -1,0 +1,15 @@
+.card-layout {
+    display: flex;
+    flex-wrap: wrap;
+
+    .card-wrapper {
+        margin-right: 24px;
+        margin-bottom: 24px;
+    }
+}
+
+.toolbar {
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
