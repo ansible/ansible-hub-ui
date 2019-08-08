@@ -63,8 +63,8 @@ const NotFound = asyncComponent(() =>
 
 const MyNamespaces = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */
-        './containers/my-namespaces/my-namespaces'
+        /* webpackChunkName: "namespace_list" */
+        './containers/namespace-list/my-namespaces'
     ),
 );
 
