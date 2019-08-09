@@ -54,6 +54,7 @@ interface IState {
 
 interface IProps extends RouteComponentProps {
     showControls: boolean;
+    breadcrumbs: { name: string; url?: string }[];
 }
 
 export class NamespaceDetail extends React.Component<IProps, IState> {
@@ -105,6 +106,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             updateCollection,
         } = this.state;
 
+        const { breadcrumbs } = this.props;
+
         if (redirect) {
             return <Redirect to={redirect} />;
         }
@@ -116,7 +119,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             <React.Fragment>
                 <ImportModal
                     isOpen={showImportModal}
-                    onUploadSuccess={x => console.log(x)}
+                    onUploadSuccess={result =>
+                        this.setState({
+                            redirect: formatPath(Paths.myImportsNamespace, {
+                                namespace: namespace.name,
+                            }),
+                        })
+                    }
                     // onCancel
                     setOpen={(isOpen, warn) =>
                         this.toggleImportModal(isOpen, warn)
@@ -142,10 +151,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 ) : null}
                 <PartnerHeader
                     namespace={namespace}
-                    breadcrumbs={[
-                        { url: Paths.myNamespaces, name: 'My Namespaces' },
-                        { name: namespace.name },
-                    ]}
+                    breadcrumbs={breadcrumbs.concat([{ name: namespace.name }])}
                     tabs={['Collections', 'Resources']}
                     params={params}
                     updateParams={p => this.updateParams(p)}
