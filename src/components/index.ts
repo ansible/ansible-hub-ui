@@ -10,3 +10,4 @@ export { CollectionList } from './collection-list/collection-list';
 export { CollectionListItem } from './collection-list/collection-list-item';
 export { NamespaceCard } from './cards/namespace-card';
 export { Toolbar } from './patternfly-wrappers/toolbar';
+export { ImportConsole } from './my-imports/import-console';

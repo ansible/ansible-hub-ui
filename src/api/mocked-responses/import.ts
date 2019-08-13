@@ -66,6 +66,11 @@ export class MockImport {
         return {
             ...this.imports[0],
             job_id: '1',
+            error: {
+                code: 'dun-goofed',
+                description: 'ya dun goofed',
+                traceback: 'omg you reeally really dun goofed',
+            },
             imported_version: this.imports[0].version,
             messages: this.importMesages,
         };
@@ -76,12 +81,9 @@ class TaskGenerator extends RandomGenerator {
     static generate(): any[] {
         const l = [];
 
-        for (let i = 0; i < this.randNum(5); i++) {
+        for (let i = 0; i < this.randNum(20); i++) {
             l.push({
-                level:
-                    this.randNum(2) < 1
-                        ? ImportMessageCodes.success
-                        : ImportMessageCodes.error,
+                level: this.randNum(2) < 1 ? '' : ImportMessageCodes.error,
                 message: this.randString(40),
                 time: new Date().toString(),
             });
