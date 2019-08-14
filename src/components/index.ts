@@ -11,3 +11,4 @@ export { CollectionListItem } from './collection-list/collection-list-item';
 export { NamespaceCard } from './cards/namespace-card';
 export { Toolbar } from './patternfly-wrappers/toolbar';
 export { ImportConsole } from './my-imports/import-console';
+export { ImportList } from './my-imports/import-list';

@@ -2,16 +2,10 @@
 
 .selected-item {
     background-color: #edf8ff;
-    border-left-color: transparent;
-    border-right-color: transparent;
 }
 
 .status-icon {
     font-size: 12px;
-}
-
-.clickable {
-    cursor: pointer;
 }
 
 .sub-text {
@@ -47,6 +41,20 @@
 
 .import-list {
     margin-bottom: 50px;
+
+    .list-container {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        .left {
+            margin-right: 10px;
+        }
+        border-bottom: 1px solid #ededed;
+    }
+
+    .list-container:hover {
+        background-color: #edf8ff;
+    }
 }
 
 .import-console {
@@ -117,18 +125,16 @@
         .follow-active {
             color: $green;
         }
-
-        .message {
-            .error,
-            .failed {
-                color: $red;
-            }
-            .warning {
-                color: $warning;
-            }
-            .success {
-                color: $green;
-            }
-        }
     }
+}
+
+.error,
+.failed {
+    color: $red;
+}
+.warning {
+    color: $warning;
+}
+.success {
+    color: $green;
 }

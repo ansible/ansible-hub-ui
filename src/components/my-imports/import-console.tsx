@@ -4,6 +4,7 @@ import './my-imports.scss';
 import { Tooltip } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 
+import { formatPath, Paths } from '../../paths';
 import { ImportListType, ImportDetailType, PulpStatus } from '../../api';
 
 interface IProps {
@@ -56,7 +57,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
         }
 
         return (
-            <div className='import-console'>
+            <div className='import-console pf-c-content'>
                 {this.renderTitle(selectedImport)}
                 <div className='message-list'>
                     <div
@@ -117,7 +118,10 @@ export class ImportConsole extends React.Component<IProps, {}> {
                 <div className='title-container'>
                     <Link
                         className='title'
-                        to={`/${selectedImport.namespace.name}/${selectedImport.name}`}
+                        to={formatPath(Paths.collection, {
+                            namespace: selectedImport.namespace.name,
+                            collection: selectedImport.name,
+                        })}
                     >
                         {selectedImport.namespace.name}.{selectedImport.name}
                     </Link>
