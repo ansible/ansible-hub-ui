@@ -56,6 +56,16 @@ export class MockImport {
         return imports;
     }
 
+    updateImportDetail() {
+        if (this.importMesages.length < 60) {
+            for (let m of TaskGenerator.generate()) {
+                this.importMesages.push(m);
+            }
+        } else {
+            this.importDetail.state = PulpStatus.completed;
+        }
+    }
+
     getImportDetail() {
         // Mutate the list of messages so that new messages get added each
         // time this is called
@@ -84,7 +94,7 @@ class TaskGenerator extends RandomGenerator {
         for (let i = 0; i < this.randNum(20); i++) {
             l.push({
                 level: this.randNum(2) < 1 ? '' : ImportMessageCodes.error,
-                message: this.randString(40),
+                message: this.randString(150),
                 time: new Date().toString(),
             });
         }

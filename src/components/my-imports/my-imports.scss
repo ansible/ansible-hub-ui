@@ -40,8 +40,6 @@
 }
 
 .import-list {
-    margin-bottom: 50px;
-
     .list-container {
         display: flex;
         align-items: center;
@@ -54,6 +52,10 @@
 
     .list-container:hover {
         background-color: #edf8ff;
+    }
+
+    .search-box {
+        margin-bottom: 24px;
     }
 }
 

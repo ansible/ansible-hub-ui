@@ -15,7 +15,7 @@ export class API extends BaseAPI {
 
     get(id, path?) {
         // call this to generate more task messages
-        this.mock.getImportDetail();
+        this.mock.updateImportDetail();
         return super.get(id, path);
     }
 }

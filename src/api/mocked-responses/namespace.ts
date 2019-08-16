@@ -2,6 +2,7 @@ import * as MockAdapter from 'axios-mock-adapter';
 import { NamespaceType, NamespaceListType } from '../../api';
 
 export const redHat = {
+    id: 1,
     name: 'red_hat',
     company: 'Red Hat',
     avatar_url:
@@ -83,6 +84,7 @@ export class MockNamespace {
     ns1 = redHat;
 
     ns2 = {
+        id: 2,
         name: 'cisco',
         company: 'Cisco',
         num_collections: 1,
@@ -91,6 +93,7 @@ export class MockNamespace {
     };
 
     ns3 = {
+        id: 3,
         name: 'ansible',
         company: 'Ansible',
         num_collections: 90,
@@ -99,6 +102,7 @@ export class MockNamespace {
     };
 
     ns4 = {
+        id: 4,
         name: 'google',
         company: 'Google Cloud',
         num_collections: 2,

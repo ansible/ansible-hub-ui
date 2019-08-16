@@ -3,6 +3,7 @@ import './my-imports.scss';
 
 import { Tooltip } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
+import { Spinner } from '@redhat-cloud-services/frontend-components';
 
 import { formatPath, Paths } from '../../paths';
 import { ImportListType, ImportDetailType, PulpStatus } from '../../api';
@@ -11,7 +12,7 @@ interface IProps {
     task: ImportDetailType;
     followMessages: boolean;
     selectedImport: ImportListType;
-    noImportsExist: boolean;
+    apiError?: string;
 
     setFollowMessages: (follow: boolean) => void;
 }
@@ -35,26 +36,26 @@ export class ImportConsole extends React.Component<IProps, {}> {
     }
 
     render() {
-        const { selectedImport, task, noImportsExist } = this.props;
+        const { selectedImport, task, apiError } = this.props;
 
-        this.isLoading =
-            task.state === PulpStatus.running ||
-            task.state === PulpStatus.waiting;
-
-        if (!task.messages || !selectedImport) {
+        if (!task || !selectedImport) {
             return (
                 <div className='import-console'>
                     {selectedImport ? this.renderTitle(selectedImport) : null}
                     <div className='loading message-list'>
-                        {noImportsExist ? (
-                            <div className='message'>No data</div>
+                        {apiError ? (
+                            <div className='message'>{apiError}</div>
                         ) : (
-                            <div className='spinner spinner-inverse' />
+                            <Spinner centered={false} />
                         )}
                     </div>
                 </div>
             );
         }
+
+        this.isLoading =
+            selectedImport.state === PulpStatus.running ||
+            selectedImport.state === PulpStatus.waiting;
 
         return (
             <div className='import-console pf-c-content'>
@@ -130,14 +131,14 @@ export class ImportConsole extends React.Component<IProps, {}> {
                 <div className='title-bar'>
                     <div>
                         <span className='data-title'>Status: </span>
-                        {task.state}
+                        {selectedImport.state}
                     </div>
                     <div>
                         <span className='data-title'>Version: </span>
-                        {task.imported_version}
+                        {selectedImport.version}
                     </div>
 
-                    {task.error ? (
+                    {task && task.error ? (
                         <div>
                             <span className='data-title'>Error Message: </span>
                             {task.error.code}

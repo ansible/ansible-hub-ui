@@ -15,17 +15,7 @@ import {
     FormSelectOption,
 } from '@patternfly/react-core';
 import { InfoIcon } from '@patternfly/react-icons';
-
-// import {
-//     FormControl,
-//     ListView,
-//     ListViewItem,
-//     EmptyState,
-// } from 'patternfly-react';
-//
-// import { FilterOption } from '../../shared-types/pf-toolbar';
-// import { ParamFilter } from '../param-filter';
-// import { ParamPaginator } from '../param-paginator';
+import { Spinner } from '@redhat-cloud-services/frontend-components';
 
 import { PulpStatus, NamespaceType, ImportListType } from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -33,7 +23,6 @@ import { Constants } from '../../constants';
 
 interface IProps {
     namespaces: NamespaceType[];
-    selectedNS: NamespaceType;
     importList: ImportListType[];
     selectedImport: ImportListType;
     noImportsExist: boolean;
@@ -46,7 +35,6 @@ interface IProps {
     };
 
     selectImport: (x) => void;
-    selectNamespace: (ns) => void;
     updateParams: (filters) => void;
 }
 
@@ -68,7 +56,6 @@ export class ImportList extends React.Component<IProps, IState> {
             selectImport,
             importList,
             selectedImport,
-            selectedNS,
             namespaces,
             noImportsExist,
             numberOfResults,
@@ -83,7 +70,7 @@ export class ImportList extends React.Component<IProps, IState> {
 
         return (
             <div className='import-list'>
-                {this.renderNamespacePicker(namespaces, selectedNS)}
+                {this.renderNamespacePicker(namespaces)}
                 <TextInput
                     value={kwField}
                     onChange={k => this.setState({ kwField: k })}
@@ -91,6 +78,7 @@ export class ImportList extends React.Component<IProps, IState> {
                     type='search'
                     aria-label='search text input'
                     placeholder='Find Import'
+                    className='search-box'
                 />
                 <div>
                     {this.renderList(
@@ -153,7 +141,7 @@ export class ImportList extends React.Component<IProps, IState> {
         if (!importList) {
             return (
                 <div className='loading'>
-                    <div className='spinner' />
+                    <Spinner centered={true} />
                 </div>
             );
         }
@@ -230,24 +218,29 @@ export class ImportList extends React.Component<IProps, IState> {
         }
     }
 
-    private renderNamespacePicker(namespaces, selectedNS) {
-        if (!selectedNS) {
-            return null;
-        }
+    private renderNamespacePicker(namespaces) {
         return (
             <div className='namespace-selector-wrapper'>
                 <div className='label'>Namespace</div>
                 <div className='selector'>
                     <FormSelect
-                        onChange={val => this.props.selectNamespace(val)}
-                        value={selectedNS.id}
+                        onChange={val =>
+                            this.props.updateParams(
+                                ParamHelper.setParam(
+                                    this.props.params,
+                                    'namespace',
+                                    val,
+                                ),
+                            )
+                        }
+                        value={this.props.params.namespace}
                         aria-label='Select namespace'
                     >
                         {namespaces.map(ns => (
                             <FormSelectOption
-                                key={ns.id}
+                                key={ns.name}
                                 label={ns.name}
-                                value={ns.id}
+                                value={ns.name}
                             />
                         ))}
                     </FormSelect>

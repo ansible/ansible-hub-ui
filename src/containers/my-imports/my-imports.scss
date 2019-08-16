@@ -1,0 +1,13 @@
+@import '../../global-variables.scss';
+
+.page-container {
+    display: flex;
+    .import-list {
+        width: 400px;
+    }
+
+    .import-console {
+        flex-grow: 1;
+        margin-left: 10px;
+    }
+}
