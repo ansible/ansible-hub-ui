@@ -10,10 +10,12 @@
         height: 100px;
         margin: 10px;
         display: flex;
+        justify-content: center;
         align-items: center;
 
         img {
             object-fit: contain;
+            max-height: 100px;
         }
     }
 
@@ -21,3 +23,62 @@
         font-weight: bold;
     }
 }
+
+.collection-card-container {
+    width: 300px;
+    height: 270px;
+    margin-right: 24px;
+    margin-bottom: 24px;
+
+    // For some reason the PF Card components overrides all the defaults for
+    // divs
+    div {
+        display: block;
+    }
+
+    .name {
+        font-weight: bold;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .type-label {
+        font-size: var(--pf-global--FontSize--xs);
+        color: var(--pf-global--color--200);
+        text-transform: capitalize;
+    }
+
+    .type-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .logo-row {
+        display: flex;
+        justify-content: space-between;
+
+        $logo-dim: 40px;
+
+        .icon {
+            color: var(--pf-global--info-color--100);
+            margin-right: 3px;
+        }
+
+        .image-container {
+            width: $logo-dim;
+            height: $logo-dim;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                object-fit: contain;
+                max-height: $logo-dim;
+            }
+        }
+    }
+}
+
+// https://www.redhat.com/cms/managed-files/styles/wysiwyg_full_width/s3/Logo-RedHat-Hat-Color-CMYK%20%281%29.jpg?itok=Mf0Ff9jq
