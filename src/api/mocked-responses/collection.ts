@@ -1,6 +1,7 @@
 import * as MockAdapter from 'axios-mock-adapter';
 import { CollectionListType } from '../../api';
 import { redHat } from './namespace';
+import { RandomGenerator } from './generator';
 
 export class MockCollection {
     mock: any;
@@ -69,51 +70,7 @@ export class MockCollection {
     }
 }
 
-class CollectionGenerator {
-    static lipsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget nisl quis diam lacinia pretium. Donec pharetra varius erat in condimentum. Maecenas sed tortor fringilla, congue lectus sit amet, ultricies urna. Nam sodales mi quis lacus condimentum, id semper nunc ultrices. In sem orci, condimentum eu magna quis, faucibus ultricies metus. Nullam justo dolor, convallis sed lacinia eget, semper ac massa. Curabitur turpis metus, auctor sed tellus et, dictum aliquam velit.`;
-
-    static words = [
-        'believer',
-        'twice',
-        'harquebusier',
-        'southbridge',
-        'secularity',
-        'incubated',
-        'concussive',
-        'horologic',
-        'intermean',
-        'nonprinting',
-        'polemic',
-        'warta',
-        'ventriculogram',
-        'mispublished',
-        'salmonellae',
-        'rammishness',
-        'baber',
-        'promonarchist',
-        'clausula',
-    ];
-
-    static randNum(max) {
-        return Math.floor(Math.random() * max);
-    }
-
-    static randomDate(start, end) {
-        return new Date(
-            start.getTime() + Math.random() * (end.getTime() - start.getTime()),
-        );
-    }
-
-    static randWords(length) {
-        const w: string[] = [];
-
-        for (let i = 0; i < this.randNum(length); i++) {
-            w.push(this.words[this.randNum(this.words.length)]);
-        }
-
-        return w;
-    }
-
+class CollectionGenerator extends RandomGenerator {
     static generate(id, name, namespace): CollectionListType {
         const collection = {
             id: id,
@@ -125,7 +82,7 @@ class CollectionGenerator {
                 version: `${this.randNum(5)}.${this.randNum(10)}.${this.randNum(
                     100,
                 )}`,
-                created: this.randomDate(
+                created: this.randDate(
                     new Date(2016, 0, 1),
                     new Date(),
                 ).toString(),

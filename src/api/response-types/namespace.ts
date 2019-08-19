@@ -4,6 +4,7 @@ export class NamespaceLink {
 }
 
 export class NamespaceListType {
+    id: number;
     name: string;
     company: string;
     email: string;
