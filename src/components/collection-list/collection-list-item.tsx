@@ -6,6 +6,9 @@ import {
     DataListItemRow,
     DataListItemCells,
     DataListCell,
+    TextContent,
+    Text,
+    TextVariants,
 } from '@patternfly/react-core';
 
 import { Link } from 'react-router-dom';
@@ -54,6 +57,13 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                     >
                         {name}
                     </Link>
+                    {showNamespace ? (
+                        <TextContent>
+                            <Text component={TextVariants.small}>
+                                Provided by {namespace.company}
+                            </Text>
+                        </TextContent>
+                    ) : null}
                 </div>
                 <div className='entry'>
                     {latest_version.metadata.description}
