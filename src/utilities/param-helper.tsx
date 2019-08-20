@@ -85,9 +85,14 @@ export class ParamHelper {
 
     // Checks to see if a specific key value pair exists
     static paramExists(params: Object, key: string, value: string | number) {
-        if (params[key]) {
-            const i = params[key].indexOf(value);
-            return i !== -1;
+        const param = params[key];
+
+        if (param) {
+            if (Array.isArray(param)) {
+                return param.includes(value);
+            } else {
+                return param === value;
+            }
         } else {
             return false;
         }

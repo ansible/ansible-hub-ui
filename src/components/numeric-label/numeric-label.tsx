@@ -21,13 +21,15 @@ export class NumericLabel extends React.Component<IProps, {}> {
 
         return (
             <span>
-                {hideNumber ? null : this.roundNumber(convertedNum)}{' '}
+                {hideNumber ? null : NumericLabel.roundNumber(convertedNum)}{' '}
                 {label ? label + plural : null}
             </span>
         );
     }
 
-    private roundNumber(n: number): string {
+    // Make this a static property so that we can use this function outside of
+    // rendering the whole component
+    static roundNumber(n: number): string {
         if (n < 1000) {
             // returns 1 to 999
             return n.toString();

@@ -11,7 +11,7 @@ import {
 
 import { CertificateIcon } from '@patternfly/react-icons';
 
-import { NumericLabel } from '../../components';
+import { NumericLabel, Logo } from '../../components';
 import { CollectionListType } from '../../api';
 
 export class CollectionCard extends React.Component<CollectionListType> {
@@ -23,12 +23,11 @@ export class CollectionCard extends React.Component<CollectionListType> {
         return (
             <Card className='collection-card-container'>
                 <CardHead className='logo-row'>
-                    <div className='image-container'>
-                        <img
-                            src={namespace.avatar_url}
-                            alt={namespace.company + ' logo'}
-                        />
-                    </div>
+                    <Logo
+                        image={namespace.avatar_url}
+                        alt={namespace.company + ' logo'}
+                        size='40px'
+                    />
                     <TextContent>
                         <Text component={TextVariants.small}>
                             <CertificateIcon className='icon' /> Certified
@@ -73,7 +72,7 @@ export class CollectionCard extends React.Component<CollectionListType> {
 
     private renderTypeCount(type, count) {
         return (
-            <div>
+            <div key={type}>
                 <div>
                     <NumericLabel number={count} />
                 </div>

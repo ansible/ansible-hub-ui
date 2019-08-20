@@ -13,3 +13,6 @@ export { Toolbar } from './patternfly-wrappers/toolbar';
 export { ImportConsole } from './my-imports/import-console';
 export { ImportList } from './my-imports/import-list';
 export { CollectionCard } from './cards/collection-card';
+export { TagFilter } from './tags/tag-filter';
+export { CardListSwitcher } from './card-list-switcher/card-list-switcher';
+export { Logo } from './logo/logo';

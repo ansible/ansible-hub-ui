@@ -1,19 +1,7 @@
 @import '../../global-variables.scss';
 
-$image-height: 50px;
-
-.image-container {
-    width: 50px;
-    height: $image-height;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .image {
-    object-fit: contain;
-    padding-right: 10px;
-    max-height: $image-height;
+    padding-right: 16px;
 }
 
 .title-box {

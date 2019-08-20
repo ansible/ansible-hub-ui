@@ -3,7 +3,7 @@ import './cards.scss';
 
 import { Card } from '@patternfly/react-core';
 
-import { NumericLabel } from '../../components';
+import { NumericLabel, Logo } from '../../components';
 // Use snake case to match field types provided py python API so that the
 // spread operator can be used.
 interface IProps {
@@ -18,9 +18,12 @@ export class NamespaceCard extends React.Component<IProps, {}> {
         const { avatar_url, name, company, num_collections } = this.props;
         return (
             <Card className='ns-card-container'>
-                <div className='image-container'>
-                    <img src={avatar_url} alt={company + ' logo'} />
-                </div>
+                <Logo
+                    className='logo'
+                    image={avatar_url}
+                    alt={company + ' logo'}
+                    size='100px'
+                />
 
                 <div>
                     <div className='title'>{company}</div>

@@ -36,7 +36,9 @@ export class RandomGenerator {
     static randWords(length) {
         const w: string[] = [];
 
-        for (let i = 0; i < this.randNum(length); i++) {
+        const n = this.randNum(length);
+
+        for (let i = 0; i < n; i++) {
             w.push(this.words[this.randNum(this.words.length)]);
         }
 
