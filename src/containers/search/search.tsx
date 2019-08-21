@@ -25,6 +25,7 @@ import {
 } from '../../components';
 import { CollectionAPI, CollectionListType } from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
+import { Constants } from '../../constants';
 
 interface IState {
     collections: CollectionListType[];
@@ -48,6 +49,14 @@ class Search extends React.Component<RouteComponentProps, IState> {
             'page',
             'page_size',
         ]);
+
+        // Load view type from local storage if it's not set. This allows a
+        // user's view type preference to persist
+        if (!params['view_type']) {
+            params['view_type'] = localStorage.getItem(
+                Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
+            );
+        }
 
         this.state = {
             collections: [],
@@ -75,7 +84,19 @@ class Search extends React.Component<RouteComponentProps, IState> {
                     pageControls={
                         <CardListSwitcher
                             params={params}
-                            updateParams={p => this.updateParams(p)}
+                            updateParams={p =>
+                                this.updateParams(p, () =>
+                                    // Note, we have to use this.state.params instead
+                                    // of params in the callback because the callback
+                                    // executes before the page can re-run render
+                                    // which means params doesn't contain the most
+                                    // up to date state
+                                    localStorage.setItem(
+                                        Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
+                                        this.state.params.view_type,
+                                    ),
+                                )
+                            }
                         />
                     }
                     title='Collections'

@@ -124,11 +124,12 @@ export class ParamHelper {
     // internal state and page params at the same time
     static updateParamsMixin(ignoreParams?: string[]) {
         return function(params: object, callback?) {
-            this.setState({ params: params }, () => {
-                if (callback) {
-                    callback();
-                }
-            });
+            // Note. In the callback, make sure to reference the state as
+            // this.state instead of const { foo } = this.state.
+            // In the example above, foo only gets set to the latest state after
+            // the component re-runs render() and the callback typically gets
+            // executed before that happens
+            this.setState({ params: params }, callback);
             this.props.history.push({
                 pathname: this.props.location.pathname,
                 search:
