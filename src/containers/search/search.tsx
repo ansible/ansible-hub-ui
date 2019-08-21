@@ -3,7 +3,16 @@ import './search.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
-import { DataList } from '@patternfly/react-core';
+import {
+    DataList,
+    EmptyState,
+    EmptyStateIcon,
+    Title,
+    EmptyStateBody,
+    EmptyStateVariant,
+} from '@patternfly/react-core';
+
+import { WarningTriangleIcon } from '@patternfly/react-icons';
 
 import {
     BaseHeader,
@@ -117,9 +126,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
                                 tags={this.tags}
                             />
                         </div>
-                        {params.view_type === 'list'
-                            ? this.renderList(collections)
-                            : this.renderCards(collections)}
+
+                        {this.renderCollections(collections, params)}
                     </Section>
                     <Section className='body footer'>
                         <Pagination
@@ -134,6 +142,34 @@ class Search extends React.Component<RouteComponentProps, IState> {
                     </Section>
                 </Main>
             </React.Fragment>
+        );
+    }
+
+    private renderCollections(collections, params) {
+        if (collections.length === 0) {
+            return this.renderEmpty();
+        }
+        if (params.view_type === 'list') {
+            return this.renderList(collections);
+        } else {
+            return this.renderCards(collections);
+        }
+    }
+
+    private renderEmpty() {
+        return (
+            <EmptyState
+                style={{ flexGrow: 1 }}
+                variant={EmptyStateVariant.full}
+            >
+                <EmptyStateIcon icon={WarningTriangleIcon} />
+                <Title headingLevel='h2' size='lg'>
+                    No matches
+                </Title>
+                <EmptyStateBody>
+                    Please try adjusting your search query
+                </EmptyStateBody>
+            </EmptyState>
         );
     }
 
