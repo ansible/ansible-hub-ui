@@ -111,11 +111,11 @@ class EditNamespace extends React.Component<IProps, IState> {
                         >
                             <Tab
                                 eventKey={TabKeys.details}
-                                title='Edit Details'
+                                title='Edit details'
                             ></Tab>
                             <Tab
                                 eventKey={TabKeys.resources}
-                                title='Edit Resources'
+                                title='Edit resources'
                             ></Tab>
                         </Tabs>
                     }
