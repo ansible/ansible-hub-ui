@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './search.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
@@ -11,6 +12,7 @@ import {
     TagFilter,
     CardListSwitcher,
     CollectionListItem,
+    Pagination,
 } from '../../components';
 import { CollectionAPI, CollectionListType } from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -57,7 +59,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     }
 
     render() {
-        const { collections, params } = this.state;
+        const { collections, params, numberOfResults } = this.state;
         return (
             <React.Fragment>
                 <BaseHeader
@@ -67,12 +69,22 @@ class Search extends React.Component<RouteComponentProps, IState> {
                             updateParams={p => this.updateParams(p)}
                         />
                     }
-                    title='Search'
+                    title='Collections'
                 >
-                    <div style={{ marginBottom: '16px' }}>
+                    <div
+                        style={{
+                            marginBottom: '16px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                        }}
+                    >
                         <Toolbar
                             params={params}
-                            sortOptions={[{ id: 'name', title: 'Name' }]}
+                            sortOptions={[
+                                { id: 'name', title: 'Name' },
+                                { id: 'download_count', title: 'Downloads' },
+                                { id: 'best_match', title: 'Best Match' },
+                            ]}
                             updateParams={p =>
                                 this.updateParams(p, () =>
                                     this.queryCollections(),
@@ -80,23 +92,46 @@ class Search extends React.Component<RouteComponentProps, IState> {
                             }
                             searchPlaceholder='Search Collections'
                         />
-                    </div>
-                </BaseHeader>
-                <Main style={{ display: 'flex' }}>
-                    <div style={{ marginRight: '24px', minWidth: '150px' }}>
-                        <TagFilter
+                        <Pagination
                             params={params}
                             updateParams={p =>
                                 this.updateParams(p, () =>
                                     this.queryCollections(),
                                 )
                             }
-                            tags={this.tags}
+                            count={numberOfResults}
+                            isTop
                         />
                     </div>
-                    {params.view_type === 'list'
-                        ? this.renderList(collections)
-                        : this.renderCards(collections)}
+                </BaseHeader>
+                <Main>
+                    <Section className='collection-container'>
+                        <div className='sidebar'>
+                            <TagFilter
+                                params={params}
+                                updateParams={p =>
+                                    this.updateParams(p, () =>
+                                        this.queryCollections(),
+                                    )
+                                }
+                                tags={this.tags}
+                            />
+                        </div>
+                        {params.view_type === 'list'
+                            ? this.renderList(collections)
+                            : this.renderCards(collections)}
+                    </Section>
+                    <Section className='body footer'>
+                        <Pagination
+                            params={params}
+                            updateParams={p =>
+                                this.updateParams(p, () =>
+                                    this.queryCollections(),
+                                )
+                            }
+                            count={numberOfResults}
+                        />
+                    </Section>
                 </Main>
             </React.Fragment>
         );
@@ -104,7 +139,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
     private renderCards(collections) {
         return (
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <div className='cards'>
                 {collections.map(c => {
                     return <CollectionCard key={c.id} {...c} />;
                 })}
@@ -114,7 +149,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
     private renderList(collections) {
         return (
-            <div className='body'>
+            <div className='body list'>
                 <DataList aria-label={'List of Collections'}>
                     {collections.map(c => (
                         <CollectionListItem
@@ -132,7 +167,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
         CollectionAPI.list(
             ParamHelper.getReduced(this.state.params, ['view_type']),
         ).then(result => {
-            this.setState({ collections: result.data.data });
+            this.setState({
+                collections: result.data.data,
+                numberOfResults: result.data.meta.count,
+            });
         });
     }
 

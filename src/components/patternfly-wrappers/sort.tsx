@@ -1,7 +1,12 @@
 import * as React from 'react';
 import './sort.scss';
 
-import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
+import {
+    Select,
+    SelectOption,
+    SelectVariant,
+    Tooltip,
+} from '@patternfly/react-core';
 import { SortAmountDownIcon, SortAmountUpIcon } from '@patternfly/react-icons';
 
 import { ParamHelper } from '../../utilities/param-helper';
