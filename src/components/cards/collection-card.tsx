@@ -9,10 +9,13 @@ import {
     TextVariants,
 } from '@patternfly/react-core';
 
+import { Link } from 'react-router-dom';
+
 import { CertificateIcon } from '@patternfly/react-icons';
 
 import { NumericLabel, Logo } from '../../components';
 import { CollectionListType } from '../../api';
+import { formatPath, Paths } from '../../paths';
 
 export class CollectionCard extends React.Component<CollectionListType> {
     MAX_DESCRIPTION_LENGTH = 60;
@@ -35,7 +38,16 @@ export class CollectionCard extends React.Component<CollectionListType> {
                     </TextContent>
                 </CardHead>
                 <CardHead>
-                    <div className='name'>{name}</div>
+                    <div className='name'>
+                        <Link
+                            to={formatPath(Paths.collection, {
+                                collection: name,
+                                namespace: namespace.name,
+                            })}
+                        >
+                            {name}
+                        </Link>
+                    </div>
                     <div className='author'>
                         <TextContent>
                             <Text component={TextVariants.small}>
