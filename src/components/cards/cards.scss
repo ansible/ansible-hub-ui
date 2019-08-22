@@ -16,7 +16,7 @@
 
 .collection-card-container {
     width: 300px;
-    height: 270px;
+    height: 280px;
     margin-right: 24px;
     margin-bottom: 24px;
 
@@ -53,5 +53,9 @@
             color: var(--pf-global--info-color--100);
             margin-right: 3px;
         }
+    }
+
+    .description {
+        vertical-align: center;
     }
 }

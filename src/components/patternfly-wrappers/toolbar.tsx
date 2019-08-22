@@ -5,7 +5,12 @@ import {
     ToolbarGroup,
     ToolbarItem,
     TextInput,
+    InputGroup,
+    Button,
+    ButtonVariant,
 } from '@patternfly/react-core';
+
+import { SearchIcon } from '@patternfly/react-icons';
 
 import { ParamHelper } from '../../utilities/param-helper';
 import { Sort } from '../../components';
@@ -20,6 +25,7 @@ interface IProps {
 
     updateParams: (params) => void;
     searchPlaceholder: string;
+    extraInputs?: React.ReactNode[];
 }
 
 interface IState {
@@ -40,20 +46,30 @@ export class Toolbar extends React.Component<IProps, IState> {
             sortOptions,
             updateParams,
             searchPlaceholder,
+            extraInputs,
         } = this.props;
         const { kwField } = this.state;
         return (
             <ToolbarPF>
                 <ToolbarGroup>
                     <ToolbarItem>
-                        <TextInput
-                            value={kwField}
-                            onChange={k => this.setState({ kwField: k })}
-                            onKeyPress={e => this.handleEnter(e)}
-                            type='search'
-                            aria-label='search text input'
-                            placeholder={searchPlaceholder}
-                        />
+                        <InputGroup>
+                            <TextInput
+                                value={kwField}
+                                onChange={k => this.setState({ kwField: k })}
+                                onKeyPress={e => this.handleEnter(e)}
+                                type='search'
+                                aria-label='search text input'
+                                placeholder={searchPlaceholder}
+                            />
+                            <Button
+                                variant={ButtonVariant.tertiary}
+                                aria-label='search button'
+                                onClick={() => this.submitKeywords()}
+                            >
+                                <SearchIcon />
+                            </Button>
+                        </InputGroup>
                     </ToolbarItem>
                 </ToolbarGroup>
                 <ToolbarGroup>
@@ -65,19 +81,28 @@ export class Toolbar extends React.Component<IProps, IState> {
                         />
                     </ToolbarItem>
                 </ToolbarGroup>
+                {extraInputs.map((v, i) => (
+                    <ToolbarGroup key={i}>
+                        <ToolbarItem>{v}</ToolbarItem>
+                    </ToolbarGroup>
+                ))}
             </ToolbarPF>
         );
     }
 
     private handleEnter(e) {
         if (e.key === 'Enter') {
-            this.props.updateParams(
-                ParamHelper.setParam(
-                    this.props.params,
-                    'keywords',
-                    this.state.kwField,
-                ),
-            );
+            this.submitKeywords();
         }
+    }
+
+    private submitKeywords() {
+        this.props.updateParams(
+            ParamHelper.setParam(
+                this.props.params,
+                'keywords',
+                this.state.kwField,
+            ),
+        );
     }
 }

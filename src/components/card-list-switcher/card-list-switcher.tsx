@@ -10,12 +10,18 @@ interface IProps {
         view_type?: string;
     };
     updateParams: (params) => void;
+    size?: 'sm' | 'md' | 'lg' | 'xl';
+    className?: string;
 }
 
 export class CardListSwitcher extends React.Component<IProps> {
+    static defaultProps = {
+        size: 'sm',
+    };
+
     render() {
         let disp = this.props.params.view_type;
-        const { updateParams, params } = this.props;
+        const { updateParams, params, size, className } = this.props;
 
         if (!disp) {
             disp = 'card';
@@ -24,8 +30,9 @@ export class CardListSwitcher extends React.Component<IProps> {
         const iconClasses = 'icon clickable ';
 
         return (
-            <div>
+            <div className={className}>
                 <ThLargeIcon
+                    size={size}
                     className={
                         iconClasses + (disp === 'card' ? 'selected' : '')
                     }
@@ -36,6 +43,7 @@ export class CardListSwitcher extends React.Component<IProps> {
                     }
                 />
                 <ListIcon
+                    size={size}
                     className={
                         iconClasses + (disp === 'list' ? 'selected' : '')
                     }

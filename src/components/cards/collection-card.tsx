@@ -58,7 +58,7 @@ export class CollectionCard extends React.Component<CollectionListType> {
                         </TextContent>
                     </div>
                 </CardHead>
-                <CardBody>
+                <CardBody className='description'>
                     {this.getDescription(latest_version.metadata.description)}
                 </CardBody>
                 <CardFooter className='type-container'>
