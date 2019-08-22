@@ -1,5 +1,11 @@
 @import '../../global-variables.scss';
 
+.toolbar {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .collection-container {
     // Should be the height of the page minus the header and the footer.
     // This makes it so the footer stays at the bottom.
@@ -23,6 +29,10 @@
 
     .list {
         margin-bottom: 24px;
+    }
+
+    .empty {
+        flex-grow: 1;
     }
 }
 

@@ -23,12 +23,14 @@ export class CollectionCard extends React.Component<CollectionListType> {
     render() {
         const { name, description, latest_version, namespace } = this.props;
 
+        const company = namespace.company || namespace.name;
+
         return (
             <Card className='collection-card-container'>
                 <CardHead className='logo-row'>
                     <Logo
                         image={namespace.avatar_url}
-                        alt={namespace.company + ' logo'}
+                        alt={company + ' logo'}
                         size='40px'
                     />
                     <TextContent>
@@ -51,7 +53,7 @@ export class CollectionCard extends React.Component<CollectionListType> {
                     <div className='author'>
                         <TextContent>
                             <Text component={TextVariants.small}>
-                                Provided by {namespace.company}
+                                Provided by {company}
                             </Text>
                         </TextContent>
                     </div>
@@ -61,13 +63,12 @@ export class CollectionCard extends React.Component<CollectionListType> {
                 </CardBody>
                 <CardFooter className='type-container'>
                     {Object.keys(latest_version.content_summary.contents).map(
-                        k => {
-                            return this.renderTypeCount(
+                        k =>
+                            this.renderTypeCount(
                                 k,
                                 latest_version.content_summary.contents[k]
                                     .length,
-                            );
-                        },
+                            ),
                     )}
                 </CardFooter>
             </Card>

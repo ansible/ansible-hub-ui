@@ -34,11 +34,13 @@ export class CollectionListItem extends React.Component<IProps, {}> {
 
         const cells = [];
 
+        const company = namespace.company || namespace.name;
+
         if (showNamespace) {
             cells.push(
                 <DataListCell isFilled={false} alignRight={false} key='ns'>
                     <Logo
-                        alt={namespace.company + ' logo'}
+                        alt={company + ' logo'}
                         image={namespace.avatar_url}
                         size='50px'
                     />
@@ -60,7 +62,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                     {showNamespace ? (
                         <TextContent>
                             <Text component={TextVariants.small}>
-                                Provided by {namespace.company}
+                                Provided by {company}
                             </Text>
                         </TextContent>
                     ) : null}
@@ -75,19 +77,18 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                 </div>
                 <div className='entry pf-l-flex pf-m-wrap'>
                     {Object.keys(latest_version.content_summary.contents).map(
-                        k => {
-                            return (
-                                <div key={k}>
-                                    <NumericLabel
-                                        label={k}
-                                        number={
-                                            latest_version.content_summary
-                                                .contents[k].length
-                                        }
-                                    />
-                                </div>
-                            );
-                        },
+                        k => (
+                            <div key={k}>
+                                <NumericLabel
+                                    label={k}
+                                    number={
+                                        latest_version.content_summary.contents[
+                                            k
+                                        ].length
+                                    }
+                                />
+                            </div>
+                        ),
                     )}
                 </div>
             </DataListCell>,

@@ -101,13 +101,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
                     }
                     title='Collections'
                 >
-                    <div
-                        style={{
-                            marginBottom: '16px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                        }}
-                    >
+                    <div className='toolbar'>
                         <Toolbar
                             params={params}
                             sortOptions={[
@@ -179,10 +173,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
     private renderEmpty() {
         return (
-            <EmptyState
-                style={{ flexGrow: 1 }}
-                variant={EmptyStateVariant.full}
-            >
+            <EmptyState className='empty' variant={EmptyStateVariant.full}>
                 <EmptyStateIcon icon={WarningTriangleIcon} />
                 <Title headingLevel='h2' size='lg'>
                     No matches

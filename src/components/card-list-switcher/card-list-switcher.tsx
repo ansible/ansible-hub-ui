@@ -21,11 +21,13 @@ export class CardListSwitcher extends React.Component<IProps> {
             disp = 'card';
         }
 
+        const iconClasses = 'icon clickable ';
+
         return (
             <div>
                 <ThLargeIcon
                     className={
-                        'icon clickable ' + (disp === 'card' ? 'selected' : '')
+                        iconClasses + (disp === 'card' ? 'selected' : '')
                     }
                     onClick={() =>
                         updateParams(
@@ -35,7 +37,7 @@ export class CardListSwitcher extends React.Component<IProps> {
                 />
                 <ListIcon
                     className={
-                        'icon clickable ' + (disp === 'list' ? 'selected' : '')
+                        iconClasses + (disp === 'list' ? 'selected' : '')
                     }
                     onClick={() =>
                         updateParams(
