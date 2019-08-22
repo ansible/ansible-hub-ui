@@ -33,6 +33,10 @@ interface IState {
 }
 
 export class Toolbar extends React.Component<IProps, IState> {
+    static defaultProps = {
+        extraInputs: [],
+    };
+
     constructor(props) {
         super(props);
         this.state = {

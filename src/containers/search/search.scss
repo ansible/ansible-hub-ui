@@ -30,6 +30,13 @@
 
     .list {
         margin-bottom: 24px;
+
+        // Hack to hide the annoying line at the top of the data list.
+        overflow: hidden;
+        .data-list {
+            margin-top: -16px;
+            margin-bottom: -16px;
+        }
     }
 
     .empty {
