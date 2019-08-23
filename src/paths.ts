@@ -28,4 +28,5 @@ export enum Paths {
     namespace = '/:namespace',
     partners = '/partners',
     notFound = '/not-found',
+    token = '/token',
 }

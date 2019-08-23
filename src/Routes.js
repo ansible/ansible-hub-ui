@@ -96,6 +96,13 @@ const Search = asyncComponent(() =>
     ),
 );
 
+const TokenPage = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "settings" */
+        './containers/token/token'
+    ),
+);
+
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
     const root = document.getElementById('root');
     root.removeAttribute('class');
@@ -126,6 +133,11 @@ export const Routes = props => {
             <InsightsRoute
                 path={Paths.notFound}
                 component={NotFound}
+                rootClass='root'
+            />
+            <InsightsRoute
+                path={Paths.token}
+                component={TokenPage}
                 rootClass='root'
             />
             <InsightsRoute
