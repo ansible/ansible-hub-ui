@@ -10,7 +10,7 @@ class App extends Component {
         insights.chrome.init();
         // TODO change this to your appname
         // TODO should the sample app webpack just rewrite this automatically?
-        insights.chrome.identifyApp('insights');
+        insights.chrome.identifyApp('automation-hub');
         insights.chrome.navigation(buildNavigation());
 
         this.appNav = insights.chrome.on('APP_NAVIGATION', event =>

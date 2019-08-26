@@ -10,6 +10,6 @@ const localhost =
 module.exports = {
     routes: {
         '/apps/automation-hub': { host: `https://${localhost}:8002` },
-        '/insights/automation-hub': { host: `https://${localhost}:8002` },
+        '/ansible/automation-hub': { host: `https://${localhost}:8002` },
     },
 };
