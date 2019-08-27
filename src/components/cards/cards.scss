@@ -5,19 +5,57 @@
     align-items: center;
     flex-direction: row;
 
-    .image-container {
-        width: 100px;
-        height: 100px;
+    .logo {
         margin: 10px;
-        display: flex;
-        align-items: center;
-
-        img {
-            object-fit: contain;
-        }
     }
 
     .title {
         font-weight: bold;
+    }
+}
+
+.collection-card-container {
+    width: 300px;
+    height: 280px;
+    margin-right: 24px;
+    margin-bottom: 24px;
+
+    // For some reason the PF Card components overrides all the defaults for
+    // divs
+    div {
+        display: block;
+    }
+
+    .name {
+        font-weight: bold;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .type-label {
+        font-size: var(--pf-global--FontSize--xs);
+        color: var(--pf-global--color--200);
+        text-transform: capitalize;
+    }
+
+    .type-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .logo-row {
+        display: flex;
+        justify-content: space-between;
+
+        .icon {
+            color: var(--pf-global--info-color--100);
+            margin-right: 3px;
+        }
+    }
+
+    .description {
+        vertical-align: center;
     }
 }

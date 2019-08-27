@@ -9,6 +9,7 @@ export class NotImplemented extends React.Component<{}, {}> {
         '/partners',
         '/my-namespaces',
         '/my-imports',
+        '/',
     ];
 
     render() {

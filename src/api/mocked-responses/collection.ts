@@ -96,10 +96,10 @@ class CollectionGenerator extends RandomGenerator {
                 content_summary: {
                     total_count: this.randNum(20),
                     contents: {
-                        module: this.randWords(10),
-                        role: this.randWords(10),
-                        plugin: this.randWords(10),
-                        playbook: this.randWords(10),
+                        module: this.randWords(9999),
+                        role: this.randWords(999),
+                        plugin: this.randWords(99),
+                        playbook: this.randWords(9),
                     },
                 },
             },

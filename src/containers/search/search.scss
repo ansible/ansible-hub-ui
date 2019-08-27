@@ -1,0 +1,49 @@
+@import '../../global-variables.scss';
+
+.toolbar {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collection-container {
+    // Should be the height of the page minus the header and the footer.
+    // This makes it so the footer stays at the bottom.
+    min-height: calc(100vh - 285px);
+
+    @media (min-width: $breakpoint-md) {
+        display: flex;
+    }
+
+    .sidebar {
+        margin-right: 24px;
+        margin-bottom: 24px;
+        min-width: 150px;
+    }
+
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+    }
+
+    .list {
+        margin-bottom: 24px;
+
+        // Hack to hide the annoying line at the top of the data list.
+        overflow: hidden;
+        .data-list {
+            margin-top: -16px;
+            margin-bottom: -16px;
+        }
+    }
+
+    .empty {
+        flex-grow: 1;
+    }
+}
+
+.footer {
+    margin: 0px -24px -24px -24px;
+}

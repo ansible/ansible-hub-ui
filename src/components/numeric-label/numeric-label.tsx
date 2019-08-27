@@ -3,11 +3,12 @@ import * as React from 'react';
 interface IProps {
     number: number | string;
     label?: string;
+    hideNumber?: boolean;
 }
 
 export class NumericLabel extends React.Component<IProps, {}> {
     render() {
-        const { number, label } = this.props;
+        const { number, label, hideNumber } = this.props;
         let convertedNum: number;
 
         if (typeof number === 'string') {
@@ -20,12 +21,15 @@ export class NumericLabel extends React.Component<IProps, {}> {
 
         return (
             <span>
-                {this.roundNumber(convertedNum)} {label ? label + plural : null}
+                {hideNumber ? null : NumericLabel.roundNumber(convertedNum)}{' '}
+                {label ? label + plural : null}
             </span>
         );
     }
 
-    private roundNumber(n: number): string {
+    // Make this a static property so that we can use this function outside of
+    // rendering the whole component
+    static roundNumber(n: number): string {
         if (n < 1000) {
             // returns 1 to 999
             return n.toString();

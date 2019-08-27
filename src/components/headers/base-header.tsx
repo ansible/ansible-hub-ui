@@ -3,6 +3,8 @@ import './header.scss';
 
 import { PageHeaderTitle } from '@redhat-cloud-services/frontend-components';
 
+import { Logo } from '../../components';
+
 interface IProps {
     title: string;
     imageURL?: string;
@@ -30,13 +32,12 @@ export class BaseHeader extends React.Component<IProps, {}> {
                 <div className='column-section'>
                     <div className='title-box'>
                         {imageURL ? (
-                            <div className='image-container'>
-                                <img
-                                    className='image'
-                                    src={imageURL}
-                                    alt='Page logo'
-                                />
-                            </div>
+                            <Logo
+                                className='image'
+                                alt='Page Logo'
+                                image={imageURL}
+                                size='50px'
+                            />
                         ) : null}
                         <div>
                             <PageHeaderTitle title={title} />
