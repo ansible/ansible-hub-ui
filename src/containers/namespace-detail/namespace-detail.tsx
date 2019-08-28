@@ -213,21 +213,17 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         });
     }
 
-    // todo: DON'T MERGE THIS WITHOUT SWITCHING BACK TO THE ACTUAL API
     private loadAll() {
         Promise.all([
             CollectionAPI.list(
-                ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-                'api/internal/ui/collections/',
+                ParamHelper.getReduced(this.state.params, this.nonAPIParams)
             ),
             NamespaceAPI.get(this.props.match.params['namespace']),
         ])
             .then(val => {
                 this.setState({
-                    // collections: val[0].data.data,
-                    // itemCount: val[0].data.meta.count,
-                    collections: val[0].data.results,
-                    itemCount: val[0].data.count,
+                    collections: val[0].data.data,
+                    itemCount: val[0].data.meta.count,
                     namespace: val[1].data,
                 });
             })

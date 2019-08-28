@@ -55,7 +55,7 @@ View [AUTHORS](./AUTHORS) for a list contributors to Ansible Galaxy. Thanks ever
 
 Ansible Galaxy is an [Ansible by Red Hat](https://ansible.com) sponsored project.
 `,
-    useful_links: [
+    links: [
         { name: 'Red Hat', url: 'https://www.redhat.com' },
         {
             name: 'Cormier: "Ansible is a Platform"',

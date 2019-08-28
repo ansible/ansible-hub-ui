@@ -4,7 +4,7 @@ import { CollectionUploadType } from './response-types/collection';
 import axios from 'axios';
 
 class API extends BaseAPI {
-    apiPath = 'api/collections/';
+    apiPath = 'v3/_ui/collections/';
 
     constructor() {
         super();
@@ -34,8 +34,7 @@ class API extends BaseAPI {
             config['cancelToken'] = cancelToken.token;
         }
 
-        //todo: DON'T MERGE THIS WITHOUT UPDATING THE API PATHS
-        return this.http.post('api/v2/collections/', formData, config);
+        return this.http.post('v3/artifacts/collections/', formData, config);
     }
 
     getCancelToken() {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Constants } from '../constants';
 
 export class BaseAPI {
-    apiBaseURL = '/';
+    apiBaseURL = '/api/automation-hub/';
     apiPath: string;
     http: any;
 
@@ -19,9 +19,7 @@ export class BaseAPI {
         // for params on the front end, so we're going to use page/page size
         // for the URL params and just map it to whatever the api expects.
 
-        // todo: DON'T MERGE WITHOUT UNCOMMENTING THIS
-        // return this.http.get(path, { params: this.mapPageToOffset(params) });
-        return this.http.get(path, { params: params });
+        return this.http.get(path, { params: this.mapPageToOffset(params) });
     }
 
     get(id: string, apiPath?: string) {
