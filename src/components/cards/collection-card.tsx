@@ -21,7 +21,13 @@ export class CollectionCard extends React.Component<CollectionListType> {
     MAX_DESCRIPTION_LENGTH = 60;
 
     render() {
-        const { name, description, latest_version, namespace } = this.props;
+        const {
+            name,
+            description,
+            latest_version,
+            namespace,
+            content_summary,
+        } = this.props;
 
         const company = namespace.company || namespace.name;
 
@@ -62,13 +68,11 @@ export class CollectionCard extends React.Component<CollectionListType> {
                     {this.getDescription(latest_version.metadata.description)}
                 </CardBody>
                 <CardFooter className='type-container'>
-                    {Object.keys(latest_version.content_summary.contents).map(
-                        k =>
-                            this.renderTypeCount(
-                                k,
-                                latest_version.content_summary.contents[k]
-                                    .length,
-                            ),
+                    {Object.keys(content_summary.contents).map(k =>
+                        this.renderTypeCount(
+                            k,
+                            content_summary.contents[k].length,
+                        ),
                     )}
                 </CardFooter>
             </Card>

@@ -32,6 +32,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
             namespace,
             showNamespace,
             controls,
+            content_summary,
         } = this.props;
 
         const cells = [];
@@ -78,20 +79,14 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                     ))}
                 </div>
                 <div className='entry pf-l-flex pf-m-wrap'>
-                    {Object.keys(latest_version.content_summary.contents).map(
-                        k => (
-                            <div key={k}>
-                                <NumericLabel
-                                    label={k}
-                                    number={
-                                        latest_version.content_summary.contents[
-                                            k
-                                        ].length
-                                    }
-                                />
-                            </div>
-                        ),
-                    )}
+                    {Object.keys(content_summary.contents).map(k => (
+                        <div key={k}>
+                            <NumericLabel
+                                label={k}
+                                number={content_summary.contents[k].length}
+                            />
+                        </div>
+                    ))}
                 </div>
             </DataListCell>,
         );
