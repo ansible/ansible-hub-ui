@@ -10,3 +10,5 @@ export {
 } from './response-types/import';
 export { ImportAPI } from './import';
 export { CollectionUploadType } from './response-types/collection';
+export { UserAPI } from './user';
+export { UserAuth } from './response-types/user';
