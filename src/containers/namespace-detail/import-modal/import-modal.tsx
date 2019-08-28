@@ -198,18 +198,15 @@ export class ImportModal extends React.Component<IProps, IState> {
             .then(response => {
                 this.props.onUploadSuccess(response);
             })
-            .catch(error => {
-                console.log(error);
+            .catch(errors => {
                 let errorMessage = '';
 
                 // If request was canceled by the user
-                if (!axios.isCancel(error)) {
+                if (!axios.isCancel(errors)) {
                     // Upload fails
-                    // todo: DON'T MERGE UNTIL THIS IS SET TO USE api/v3 ERRORS
-                    // for (let err of error.response.data.errors) {
-                    //     errorMessage = errorMessage + ', ' + err;
-                    // }
-                    errorMessage = error.response.data.message;
+                    for (let err of errors.response.data.errors) {
+                        errorMessage = errorMessage + err.detail + ' ';
+                    }
                 }
 
                 this.setState({

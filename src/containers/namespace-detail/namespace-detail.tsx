@@ -58,8 +58,7 @@ interface IProps extends RouteComponentProps {
 }
 
 export class NamespaceDetail extends React.Component<IProps, IState> {
-    // todo: DON'T MERGE UNTIL NAMESPACE CAN BE QUERIED ON API
-    nonAPIParams = ['tab', 'namespace'];
+    nonAPIParams = ['tab'];
 
     // namespace is a positional url argument, so don't include it in the
     // query params
@@ -216,7 +215,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     private loadAll() {
         Promise.all([
             CollectionAPI.list(
-                ParamHelper.getReduced(this.state.params, this.nonAPIParams)
+                ParamHelper.getReduced(this.state.params, this.nonAPIParams),
             ),
             NamespaceAPI.get(this.props.match.params['namespace']),
         ])

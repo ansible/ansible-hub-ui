@@ -14,7 +14,7 @@ import {
     Sort,
     Toolbar,
     Pagination,
-    StatefulDropdown
+    StatefulDropdown,
 } from '../../components';
 import { Constants } from '../../constants';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -142,4 +142,5 @@ export class CollectionList extends React.Component<IProps, IState> {
                 />
             </div>
         );
+    }
 }
