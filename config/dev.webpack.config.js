@@ -18,4 +18,7 @@ const newWebpackConfig = {
 module.exports = {
     ...newWebpackConfig,
     plugins,
+    paths: {
+        public: resolve(__dirname, '../dist')
+    },
 };
