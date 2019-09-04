@@ -3,30 +3,51 @@ import './header.scss';
 
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 
-import { BaseHeader } from '../../components';
+import { BaseHeader, Tabs, Breadcrumbs } from '../../components';
 import { NamespaceType } from '../../api';
 
 interface IProps {
     namespace: NamespaceType;
-    tabs: React.ReactNode;
-    breadcrumbs: React.ReactNode;
+    tabs: string[];
+    breadcrumbs: {
+        url?: string;
+        name: string;
+    }[];
+    params: { tab?: string };
+    updateParams: (p) => void;
+
+    pageControls?: React.ReactNode;
 }
 
 export class PartnerHeader extends React.Component<IProps, {}> {
     render() {
-        const { namespace, breadcrumbs, tabs } = this.props;
+        const {
+            namespace,
+            breadcrumbs,
+            tabs,
+            pageControls,
+            params,
+            updateParams,
+        } = this.props;
         return (
             <BaseHeader
                 title={namespace.company}
                 imageURL={namespace.avatar_url}
-                breadcrumbs={breadcrumbs}
+                breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
+                pageControls={pageControls}
             >
                 {namespace.description ? (
                     <div>{namespace.description}</div>
                 ) : null}
 
                 <div className='tab-link-container'>
-                    <div className='tabs'>{tabs}</div>
+                    <div className='tabs'>
+                        <Tabs
+                            tabs={tabs}
+                            params={params}
+                            updateParams={p => updateParams(p)}
+                        />
+                    </div>
                     {namespace.useful_links.length > 0 ? (
                         <div className='links'>
                             <div>
