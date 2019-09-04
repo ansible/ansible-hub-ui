@@ -23,7 +23,7 @@ if ((process.env.NODE_ENV === 'production' && betaBranch) || process.env.BUILD_B
     release = 'beta';
 }
 
-const publicPath = `/${deploymentEnv}/Ansible/`;
+const publicPath = `/${deploymentEnv}/ansible/`;
 
 module.exports = {
     paths: {
