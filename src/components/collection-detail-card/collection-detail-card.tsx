@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './collection-detail-card.scss';
 
+import * as moment from 'moment';
 import { Link } from 'react-router-dom';
 
 import {
@@ -9,27 +10,39 @@ import {
     SplitItem,
     Grid,
     GridItem,
+    FormSelect,
+    FormSelectOption,
 } from '@patternfly/react-core';
 
 import { CollectionDetailType } from '../../api';
 import { Tag } from '../../components';
 import { Paths, formatPath } from '../../paths';
+import { ParamHelper } from '../../utilities/param-helper';
 
-export class CollectionDetailCard extends React.Component<
-    CollectionDetailType
-> {
+interface IProps extends CollectionDetailType {
+    params: {
+        version?: string;
+    };
+    updateParams: (params) => void;
+}
+
+export class CollectionDetailCard extends React.Component<IProps> {
     render() {
         const {
             name,
             description,
-            download_count,
             latest_version,
             namespace,
+            all_versions,
+            params,
+            updateParams,
         } = this.props;
 
-        console.log(this.props);
+        let installCommand = `ansible-galaxy install ${namespace.name}.${name}`;
 
-        const installCommand = `ansible-galaxy install ${namespace.name}.${name}`;
+        if (params.version) {
+            installCommand += `,version=${params.version}`;
+        }
 
         return (
             <div className='pf-c-content'>
@@ -37,8 +50,8 @@ export class CollectionDetailCard extends React.Component<
                 <Grid gutter='lg'>
                     <GridItem>{description}</GridItem>
                     <GridItem>
-                        {latest_version.metadata.tags.map(tag => (
-                            <Tag key={tag}>{tag}</Tag>
+                        {latest_version.metadata.tags.map((tag, i) => (
+                            <Tag key={i}>{tag}</Tag>
                         ))}
                     </GridItem>
                     <GridItem>
@@ -57,7 +70,40 @@ export class CollectionDetailCard extends React.Component<
                                 Install Version
                             </SplitItem>
                             <SplitItem isFilled>
-                                Dropdown blocked as part of #16
+                                <FormSelect
+                                    onChange={val =>
+                                        updateParams(
+                                            ParamHelper.setParam(
+                                                params,
+                                                'version',
+                                                val,
+                                            ),
+                                        )
+                                    }
+                                    value={
+                                        params.version
+                                            ? params.version
+                                            : latest_version.version
+                                    }
+                                    aria-label='Select collection version'
+                                >
+                                    {all_versions.map(v => (
+                                        <FormSelectOption
+                                            key={v.version}
+                                            value={v.version}
+                                            label={`${
+                                                v.version
+                                            } released ${moment(
+                                                v.created,
+                                            ).fromNow()} ${
+                                                v.version ===
+                                                latest_version.version
+                                                    ? '(latest)'
+                                                    : ''
+                                            }`}
+                                        />
+                                    ))}
+                                </FormSelect>
                             </SplitItem>
                         </Split>
                     </GridItem>

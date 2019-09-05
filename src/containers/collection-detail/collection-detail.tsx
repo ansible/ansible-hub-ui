@@ -5,7 +5,7 @@ import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
 import { BaseHeader, CollectionDetailCard } from '../../components';
 import { loadCollection, IBaseCollectionState } from './base';
-// import { withCollectionCommon } from './base';
+import { ParamHelper } from '../../utilities/param-helper';
 
 // renders collection level information
 class CollectionDetail extends React.Component<
@@ -14,9 +14,12 @@ class CollectionDetail extends React.Component<
 > {
     constructor(props) {
         super(props);
+
+        const params = ParamHelper.parseParamString(props.location.search);
+
         this.state = {
             collection: undefined,
-            params: {},
+            params: params,
         };
     }
 
@@ -36,7 +39,11 @@ class CollectionDetail extends React.Component<
                 <BaseHeader title='Collection Detail' />
                 <Main>
                     <Section className='body'>
-                        <CollectionDetailCard {...collection} />
+                        <CollectionDetailCard
+                            {...collection}
+                            updateParams={p => this.updateParams(p)}
+                            params={this.state.params}
+                        />
                     </Section>
                 </Main>
             </React.Fragment>
@@ -45,6 +52,10 @@ class CollectionDetail extends React.Component<
 
     get loadCollection() {
         return loadCollection;
+    }
+
+    get updateParams() {
+        return ParamHelper.updateParamsMixin();
     }
 }
 
