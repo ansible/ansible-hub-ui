@@ -5,6 +5,7 @@ import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
 import { BaseHeader, NotImplemented } from '../../components';
 
+// renders markdown files in collection docs/ directory
 class CollectionDocs extends React.Component<RouteComponentProps, {}> {
     render() {
         return (

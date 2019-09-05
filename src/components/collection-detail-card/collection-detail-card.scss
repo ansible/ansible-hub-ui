@@ -1,0 +1,38 @@
+.install-title {
+    min-width: 100px;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+pre {
+    background-color: #f6f8fa;
+    font-family: var(--pf-global--FontFamily--monospace);
+
+    // Patternfly does something that makes it so that fonts don't get inherited
+    // from the parent so it has to be overridden at every level.
+    code {
+        font-family: var(--pf-global--FontFamily--monospace);
+    }
+}
+
+.readme-container {
+    position: relative;
+    max-height: 300px;
+    min-height: 50px;
+    overflow: hidden;
+}
+
+.fade-out {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 1) 90%
+    );
+    width: 100%;
+    height: 50px;
+}

@@ -5,6 +5,7 @@ import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
 import { BaseHeader, NotImplemented } from '../../components';
 
+// renders docstrings for plugins and readmes for roles
 class CollectionContentDocs extends React.Component<RouteComponentProps, {}> {
     render() {
         return (

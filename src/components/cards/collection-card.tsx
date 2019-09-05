@@ -70,7 +70,7 @@ export class CollectionCard extends React.Component<IProps> {
                     </div>
                 </CardHead>
                 <CardBody className='description'>
-                    {this.getDescription(latest_version.metadata.description)}
+                    {this.getDescription(description)}
                 </CardBody>
                 <CardFooter className='type-container'>
                     {Object.keys(content_summary.contents).map(k =>
