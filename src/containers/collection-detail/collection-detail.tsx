@@ -3,9 +3,10 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
-import { BaseHeader, CollectionDetailCard } from '../../components';
+import { CollectionHeader, CollectionDetailCard } from '../../components';
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from '../../utilities/param-helper';
+import { formatPath, Paths } from '../../paths';
 
 // renders collection level information
 class CollectionDetail extends React.Component<
@@ -28,15 +29,35 @@ class CollectionDetail extends React.Component<
     }
 
     render() {
-        const { collection } = this.state;
+        const { collection, params } = this.state;
+
         if (!collection) {
             return null;
         }
 
+        const breadcrumbs = [
+            { url: Paths.partners, name: 'Partners' },
+            {
+                url: formatPath(Paths.namespace, {
+                    namespace: collection.namespace.name,
+                }),
+                name: collection.namespace.name,
+            },
+            {
+                name: collection.name,
+            },
+        ];
+
         // TODO: waiting for  #16 to merge to make collection header
         return (
             <React.Fragment>
-                <BaseHeader title='Collection Detail' />
+                <CollectionHeader
+                    collection={collection}
+                    params={params}
+                    updateParams={params => this.updateParams(params)}
+                    breadcrumbs={breadcrumbs}
+                    activeTab='details'
+                />
                 <Main>
                     <Section className='body'>
                         <CollectionDetailCard

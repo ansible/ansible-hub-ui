@@ -23,3 +23,4 @@ export { Pagination } from './patternfly-wrappers/pagination';
 export {
     CollectionDetailCard,
 } from './collection-detail-card/collection-detail-card';
+export { CollectionHeader } from './headers/collection-header';
