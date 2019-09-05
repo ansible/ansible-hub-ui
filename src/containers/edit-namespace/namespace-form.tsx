@@ -23,8 +23,7 @@ import {
 } from '@patternfly/react-core';
 
 import { Paths, formatPath } from '../../paths';
-
-import { Link } from 'react-router-dom';
+import { ParamHelper } from '../../utilities/param-helper';
 
 interface IState {
     namespace: NamespaceType;
@@ -33,8 +32,10 @@ interface IState {
     errorMessages: any;
     saving: boolean;
     redirect: string;
-    tab: TabKeys;
     unsavedData: boolean;
+    params: {
+        tab?: string;
+    };
 }
 
 enum TabKeys {
@@ -48,7 +49,11 @@ class EditNamespace extends React.Component<IProps, IState> {
     constructor(props) {
         super(props);
 
-        this.queryParams = new URLSearchParams(props.location.search);
+        const params = ParamHelper.parseParamString(props.location.search);
+
+        if (!params['tab']) {
+            params['tab'] = 'edit details';
+        }
 
         this.state = {
             namespace: null,
@@ -58,7 +63,7 @@ class EditNamespace extends React.Component<IProps, IState> {
             saving: false,
             redirect: null,
             unsavedData: false,
-            tab: parseInt(this.queryParams.get('tab')) || TabKeys.details,
+            params: params,
         };
     }
 
@@ -67,7 +72,13 @@ class EditNamespace extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { namespace, errorMessages, saving, redirect, tab } = this.state;
+        const {
+            namespace,
+            errorMessages,
+            saving,
+            redirect,
+            params,
+        } = this.state;
 
         if (redirect) {
             return <Redirect to={redirect} />;
@@ -80,49 +91,23 @@ class EditNamespace extends React.Component<IProps, IState> {
             <React.Fragment>
                 <PartnerHeader
                     namespace={namespace}
-                    breadcrumbs={
-                        <Breadcrumb>
-                            <BreadcrumbItem>
-                                <Link to={Paths.myNamespaces}>
-                                    My Namespaces
-                                </Link>
-                            </BreadcrumbItem>
-                            <BreadcrumbItem>
-                                <Link
-                                    to={formatPath(Paths.myCollections, {
-                                        namespace: namespace.name,
-                                    })}
-                                >
-                                    {namespace.name}
-                                </Link>
-                            </BreadcrumbItem>
-                            <BreadcrumbItem isActive>Edit</BreadcrumbItem>
-                        </Breadcrumb>
-                    }
-                    tabs={
-                        <Tabs
-                            activeKey={tab}
-                            onSelect={(_, key) =>
-                                // For some reason this function receives a
-                                // "ReactText" type, that has to be converted
-                                // into a string and then into a number
-                                this.updateTab(parseInt(key.toString()))
-                            }
-                        >
-                            <Tab
-                                eventKey={TabKeys.details}
-                                title='Edit details'
-                            ></Tab>
-                            <Tab
-                                eventKey={TabKeys.resources}
-                                title='Edit resources'
-                            ></Tab>
-                        </Tabs>
-                    }
+                    breadcrumbs={[
+                        { name: 'My Namespaces', url: Paths.myNamespaces },
+                        {
+                            name: namespace.name,
+                            url: formatPath(Paths.myCollections, {
+                                namespace: namespace.name,
+                            }),
+                        },
+                        { name: 'Edit' },
+                    ]}
+                    tabs={['Edit Details', 'Edit Resources']}
+                    params={params}
+                    updateParams={p => this.updateParams(p)}
                 ></PartnerHeader>
                 <Main>
                     <Section className='body'>
-                        {tab === TabKeys.details ? (
+                        {params.tab.toLowerCase() === 'edit details' ? (
                             <NamespaceForm
                                 namespace={namespace}
                                 errorMessages={errorMessages}
@@ -173,6 +158,10 @@ class EditNamespace extends React.Component<IProps, IState> {
         );
     }
 
+    get updateParams() {
+        return ParamHelper.updateParamsMixin();
+    }
+
     private loadNamespace() {
         NamespaceAPI.get(this.props.match.params['namespace'])
             .then(response => {
@@ -181,17 +170,6 @@ class EditNamespace extends React.Component<IProps, IState> {
             .catch(response => {
                 this.setState({ redirect: Paths.notFound });
             });
-    }
-
-    private updateTab(key: TabKeys) {
-        this.queryParams.set('tab', key.toString());
-
-        this.props.history.push({
-            pathname: this.props.location.pathname,
-            search: '?' + this.queryParams.toString(),
-        });
-
-        this.setState({ tab: key });
     }
 
     private saveNamespace() {
@@ -203,6 +181,9 @@ class EditNamespace extends React.Component<IProps, IState> {
                         errorMessages: {},
                         saving: false,
                         unsavedData: false,
+                        redirect: formatPath(Paths.myCollections, {
+                            namespace: this.state.namespace.name,
+                        }),
                     });
                 })
                 .catch(result => {
@@ -215,7 +196,11 @@ class EditNamespace extends React.Component<IProps, IState> {
     }
 
     private cancel() {
-        this.setState({ unsavedData: false }, () => this.loadNamespace());
+        this.setState({
+            redirect: formatPath(Paths.myCollections, {
+                namespace: this.state.namespace.name,
+            }),
+        });
     }
 
     private validateNamesace(namespace) {

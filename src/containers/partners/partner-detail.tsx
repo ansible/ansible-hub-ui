@@ -29,7 +29,7 @@ interface IState {
         sort?: string;
         page?: number;
         page_size?: number;
-        tab?: number;
+        tab?: string;
         keywords?: string;
     };
     redirect: string;
@@ -48,7 +48,7 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
         ]);
 
         if (!params['tab']) {
-            params['tab'] = 1;
+            params['tab'] = 'collections';
         }
 
         this.state = {
@@ -99,44 +99,19 @@ class PartnerDetail extends React.Component<RouteComponentProps, IState> {
             <React.Fragment>
                 <PartnerHeader
                     namespace={namespace}
-                    breadcrumbs={
-                        <Breadcrumb>
-                            <BreadcrumbItem>
-                                <Link to={Paths.partners}>Partners</Link>
-                            </BreadcrumbItem>
-                            <BreadcrumbItem isActive>
-                                {namespace.name}
-                            </BreadcrumbItem>
-                        </Breadcrumb>
-                    }
-                    tabs={
-                        <Tabs
-                            activeKey={params.tab}
-                            onSelect={(_, key) =>
-                                this.updateParams(
-                                    ParamHelper.setParam(
-                                        params,
-                                        'tab',
-                                        parseInt(key.toString()),
-                                    ),
-                                    true,
-                                )
-                            }
-                        >
-                            <Tab
-                                eventKey={TabKeys.collections}
-                                title='Collections'
-                            ></Tab>
-                            <Tab
-                                eventKey={TabKeys.resources}
-                                title='Resources'
-                            ></Tab>
-                        </Tabs>
-                    }
+                    breadcrumbs={[
+                        { name: 'Partners', url: Paths.partners },
+                        {
+                            name: namespace.name,
+                        },
+                    ]}
+                    tabs={['Collections', 'Resources']}
+                    params={params}
+                    updateParams={p => this.updateParams(p)}
                 ></PartnerHeader>
                 <Main>
                     <Section className='body'>
-                        {params.tab === TabKeys.collections ? (
+                        {params.tab.toLowerCase() === 'collections' ? (
                             <CollectionList
                                 updateParams={params =>
                                     this.updateParams(params)
