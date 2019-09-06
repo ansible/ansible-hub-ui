@@ -40,9 +40,14 @@
         }
     }
 
+    .list-container {
+        width: 100%;
+    }
+
     .list {
         margin-bottom: 24px;
         margin-left: 24px;
+        // padding: 15px;
 
         // Hack to hide the annoying line at the top of the data list.
         overflow: hidden;
