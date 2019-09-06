@@ -54,6 +54,17 @@ export class CollectionDetailCard extends React.Component<IProps> {
                             <Tag key={i}>{tag}</Tag>
                         ))}
                     </GridItem>
+
+                    <GridItem>
+                        <Split gutter='sm'>
+                            <SplitItem className='install-title'>
+                                License
+                            </SplitItem>
+                            <SplitItem isFilled>
+                                {latest_version.metadata.license}
+                            </SplitItem>
+                        </Split>
+                    </GridItem>
                     <GridItem>
                         <Split gutter='sm'>
                             <SplitItem className='install-title'>

@@ -5,8 +5,11 @@
 }
 
 pre {
-    background-color: #f6f8fa;
+    background-color: #f8f8f8;
+    border: 1px solid #e6e9e9;
     font-family: var(--pf-global--FontFamily--monospace);
+    display: block;
+    padding: 10px;
 
     // Patternfly does something that makes it so that fonts don't get inherited
     // from the parent so it has to be overridden at every level.

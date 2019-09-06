@@ -155,20 +155,19 @@ export const Routes = props => {
                 component={MyNamespaces}
                 rootClass='root'
             />
-
-            <InsightsRoute
-                path={Paths.collectionDocsIndex}
-                component={CollectionDocs}
-                rootClass='root'
-            />
             <InsightsRoute
                 path={Paths.collectionDocsPage}
                 component={CollectionDocs}
                 rootClass='root'
             />
             <InsightsRoute
+                path={Paths.collectionDocsIndex}
+                component={CollectionDocs}
+                rootClass='root'
+            />
+            <InsightsRoute
                 path={Paths.collectionContentDocs}
-                component={CollectionContentDocs}
+                component={CollectionDocs}
                 rootClass='root'
             />
             <InsightsRoute

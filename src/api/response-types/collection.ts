@@ -76,12 +76,12 @@ export class CollectionListType {
     };
 }
 
-class PluginContentType {
+export class PluginContentType {
     content_type: string;
     content_name: string;
     readme_filename: string;
     readme_html: string;
-    docs_strings: {
+    doc_strings: {
         doc: any;
         metadata: any;
         return: any;
@@ -98,6 +98,14 @@ class RoleContentType {
 
 class PlaybookContentType {
     // not supported yet
+    content_type: string;
+    content_name: string;
+}
+
+export class DocsBlobType {
+    collection_readme: RenderedFile;
+    documentation_files: RenderedFile[];
+    contents: (PluginContentType | RoleContentType | PlaybookContentType)[];
 }
 
 export class CollectionDetailType {
@@ -119,15 +127,7 @@ export class CollectionDetailType {
             repository: string;
         };
         created: string;
-        docs_blob: {
-            collection_readme: RenderedFile;
-            documentation_files: RenderedFile[];
-            contents: (
-                | PluginContentType
-                | RoleContentType
-                | PlaybookContentType)[];
-        };
-
+        docs_blob: DocsBlobType;
         contents: {
             name: string;
             content_type: string;

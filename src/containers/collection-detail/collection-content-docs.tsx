@@ -10,7 +10,7 @@ class CollectionContentDocs extends React.Component<RouteComponentProps, {}> {
     render() {
         return (
             <React.Fragment>
-                <BaseHeader title='Collection Content Docs' />
+                <BaseHeader title='Collection Docs' />
                 <Main>
                     <Section className='body'>
                         <NotImplemented></NotImplemented>

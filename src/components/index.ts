@@ -24,3 +24,5 @@ export {
     CollectionDetailCard,
 } from './collection-detail-card/collection-detail-card';
 export { CollectionHeader } from './headers/collection-header';
+export { TableOfContents } from './docs/table-of-contents';
+export { RenderPluginDoc } from './docs/render-plugin-doc';

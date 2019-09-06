@@ -1,0 +1,16 @@
+@import '../../global-variables.scss';
+
+.docs-container {
+    @media (min-width: $breakpoint-md) {
+        display: flex;
+    }
+
+    .sidebar {
+        margin: 0px 24px 24px -24px;
+        min-width: 250px;
+    }
+
+    .docs {
+        flex-grow: 1;
+    }
+}

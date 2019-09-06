@@ -1,7 +1,7 @@
 import { BaseAPI } from './base';
 import { MockCollection } from './mocked-responses/collection';
 import { CollectionDetailType, CollectionUploadType } from '../api';
-import { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 export class API extends BaseAPI {
     apiPath = 'v3/_ui/collections/';
@@ -12,7 +12,7 @@ export class API extends BaseAPI {
 
         // Comment this out to make an actual API request
         // mocked responses will be removed when a real API is available
-        // new MockCollection(this.http, this.apiPath);
+        new MockCollection(this.http, this.apiPath);
     }
 
     upload(
