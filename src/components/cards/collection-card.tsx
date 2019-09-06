@@ -17,7 +17,11 @@ import { NumericLabel, Logo } from '../../components';
 import { CollectionListType } from '../../api';
 import { formatPath, Paths } from '../../paths';
 
-export class CollectionCard extends React.Component<CollectionListType> {
+interface IProps extends CollectionListType {
+    className?: string;
+}
+
+export class CollectionCard extends React.Component<IProps> {
     MAX_DESCRIPTION_LENGTH = 60;
 
     render() {
@@ -27,12 +31,13 @@ export class CollectionCard extends React.Component<CollectionListType> {
             latest_version,
             namespace,
             content_summary,
+            className,
         } = this.props;
 
         const company = namespace.company || namespace.name;
 
         return (
-            <Card className='collection-card-container'>
+            <Card className={'collection-card-container ' + className}>
                 <CardHead className='logo-row'>
                     <Logo
                         image={namespace.avatar_url}

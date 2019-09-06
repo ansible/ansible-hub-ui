@@ -11,6 +11,7 @@ interface IProps {
     breadcrumbs?: React.ReactNode;
     pageControls?: React.ReactNode;
     children?: React.ReactNode;
+    className?: string;
 }
 
 export class BaseHeader extends React.Component<IProps, {}> {
@@ -21,9 +22,10 @@ export class BaseHeader extends React.Component<IProps, {}> {
             pageControls,
             children,
             breadcrumbs,
+            className,
         } = this.props;
         return (
-            <div className='background'>
+            <div className={'background ' + className}>
                 {breadcrumbs ? (
                     <div className='breadcrumb-container'>{breadcrumbs}</div>
                 ) : (
