@@ -14,7 +14,7 @@ export class NamespaceListType {
 }
 
 export class NamespaceType extends NamespaceListType {
-    resources_page: string;
+    resources: string;
     owners: any[];
     links: NamespaceLink[];
 }

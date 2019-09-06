@@ -196,7 +196,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     private renderResources(namespace: NamespaceType) {
         return (
             <div className='pf-c-content preview'>
-                <ReactMarkdown source={namespace.resources_page} />
+                <ReactMarkdown source={namespace.resources} />
             </div>
         );
     }
