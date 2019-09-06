@@ -16,7 +16,10 @@ import { ParamHelper } from '../../utilities/param-helper';
 import { Sort } from '../../components';
 
 interface IProps {
-    params: object;
+    params: {
+        sort?: string;
+        keywords?: string;
+    };
 
     sortOptions: {
         id: string;
@@ -40,7 +43,7 @@ export class Toolbar extends React.Component<IProps, IState> {
     constructor(props) {
         super(props);
         this.state = {
-            kwField: '',
+            kwField: props.params.keywords || '',
         };
     }
 
