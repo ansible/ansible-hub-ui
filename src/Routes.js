@@ -61,24 +61,24 @@ const NotFound = asyncComponent(() =>
     ),
 );
 
-const MyCollections = asyncComponent(() =>
+const MyNamespaces = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */
-        './containers/my-namespaces/my-collections'
+        /* webpackChunkName: "namespace_list" */
+        './containers/namespace-list/my-namespaces'
     ),
 );
 
-const MyNamespaces = asyncComponent(() =>
+const ManageNamespace = asyncComponent(() =>
     import(
-        /* webpackChunkName: "Rules" */
-        './containers/namespace-list/my-namespaces'
+        /* webpackChunkName: "namespace_detail" */
+        './containers/namespace-detail/manage-namespace'
     ),
 );
 
 const PartnerDetail = asyncComponent(() =>
     import(
         /* webpackChunkName: "namespace_detail" */
-        './containers/partners/partner-detail'
+        './containers/namespace-detail/partner-detail'
     ),
 );
 
@@ -147,7 +147,7 @@ export const Routes = props => {
             />
             <InsightsRoute
                 path={Paths.myCollections}
-                component={MyCollections}
+                component={ManageNamespace}
                 rootClass='root'
             />
             <InsightsRoute

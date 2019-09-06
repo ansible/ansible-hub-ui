@@ -20,6 +20,7 @@ import { CollectionListType } from '../../api';
 
 interface IProps extends CollectionListType {
     showNamespace?: boolean;
+    controls?: React.ReactNode;
 }
 
 export class CollectionListItem extends React.Component<IProps, {}> {
@@ -30,6 +31,8 @@ export class CollectionListItem extends React.Component<IProps, {}> {
             latest_version,
             namespace,
             showNamespace,
+            controls,
+            content_summary,
         } = this.props;
 
         const cells = [];
@@ -76,26 +79,21 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                     ))}
                 </div>
                 <div className='entry pf-l-flex pf-m-wrap'>
-                    {Object.keys(latest_version.content_summary.contents).map(
-                        k => (
-                            <div key={k}>
-                                <NumericLabel
-                                    label={k}
-                                    number={
-                                        latest_version.content_summary.contents[
-                                            k
-                                        ].length
-                                    }
-                                />
-                            </div>
-                        ),
-                    )}
+                    {Object.keys(content_summary.contents).map(k => (
+                        <div key={k}>
+                            <NumericLabel
+                                label={k}
+                                number={content_summary.contents[k].length}
+                            />
+                        </div>
+                    ))}
                 </div>
             </DataListCell>,
         );
 
         cells.push(
             <DataListCell isFilled={false} alignRight key='stats'>
+                {controls ? <div className='entry'>{controls}</div> : null}
                 <div className='right-col entry'>
                     <NumericLabel number={download_count} label='Download' />
                 </div>

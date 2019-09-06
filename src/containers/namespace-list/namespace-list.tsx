@@ -7,7 +7,7 @@ import { Pagination } from '@patternfly/react-core';
 
 import { ParamHelper } from '../../utilities/param-helper';
 import { BaseHeader, NamespaceCard, Toolbar } from '../../components';
-import { NamespaceAPI, NamespaceListType } from '../../api';
+import { NamespaceAPI, NamespaceListType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
 
 interface IState {
@@ -18,21 +18,19 @@ interface IState {
         sort?: string;
         page?: number;
         page_size?: number;
+        tenant?: string;
     };
 }
 
 interface IProps extends RouteComponentProps {
     title: string;
     namespacePath: Paths;
-
-    // TODO: when this is set to true, get the user's id/account/tennant/org or
-    // whatever we use to associate users with namespaces and filter the
-    // namespaces by that value
-    // Don't know what the APIs will look like for this yet
     filterOwner?: boolean;
 }
 
 export class NamespaceList extends React.Component<IProps, IState> {
+    nonURLParams = ['tenant'];
+
     constructor(props) {
         super(props);
         this.state = {
@@ -40,6 +38,26 @@ export class NamespaceList extends React.Component<IProps, IState> {
             itemCount: 0,
             params: ParamHelper.parseParamString(props.location.search),
         };
+    }
+
+    componentDidMount() {
+        if (this.props.filterOwner) {
+            UserAPI.getCachedUser()
+                .then(result => {
+                    this.setState(
+                        {
+                            params: {
+                                ...this.state.params,
+                                tenant: result.account_number,
+                            },
+                        },
+                        () => this.loadNamespaces(),
+                    );
+                })
+                .catch(r => console.log(r));
+        } else {
+            this.loadNamespaces();
+        }
     }
 
     render() {
@@ -111,10 +129,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
         );
     }
 
-    componentDidMount() {
-        this.loadNamespaces();
-    }
-
     private loadNamespaces() {
         NamespaceAPI.list(this.state.params).then(results => {
             this.setState({
@@ -125,6 +139,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     private get updateParams() {
-        return ParamHelper.updateParamsMixin();
+        return ParamHelper.updateParamsMixin(this.nonURLParams);
     }
 }

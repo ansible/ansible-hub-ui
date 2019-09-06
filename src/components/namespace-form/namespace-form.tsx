@@ -95,9 +95,9 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                     />
                 </FormGroup>
 
-                {namespace.useful_links.length > 0 ? (
-                    <FormGroup fieldId='useful_links' label='Useful Links'>
-                        {namespace.useful_links.map((link, index) =>
+                {namespace.links.length > 0 ? (
+                    <FormGroup fieldId='links' label='Useful Links'>
+                        {namespace.links.map((link, index) =>
                             this.renderLinkGroup(link, index),
                         )}
                     </FormGroup>
@@ -156,19 +156,19 @@ export class NamespaceForm extends React.Component<IProps, IState> {
 
     private updateLink(index, value, event) {
         const update = { ...this.props.namespace };
-        update.useful_links[index][event.target.id] = value;
+        update.links[index][event.target.id] = value;
         this.props.updateNamespace(update);
     }
 
     private removeLink(index) {
         const update = { ...this.props.namespace };
-        update.useful_links.splice(index, 1);
+        update.links.splice(index, 1);
         this.props.updateNamespace(update);
     }
 
     private addLink() {
         const update = { ...this.props.namespace };
-        update.useful_links.push({
+        update.links.push({
             name: this.state.newLinkName,
             url: this.state.newLinkURL,
         });

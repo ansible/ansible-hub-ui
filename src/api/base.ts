@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Constants } from '../constants';
 
 export class BaseAPI {
-    apiBaseURL = '/';
+    apiBaseURL = '/api/automation-hub/';
     apiPath: string;
     http: any;
 
@@ -18,6 +18,7 @@ export class BaseAPI {
         // The api uses offset/limit for pagination. I think this is confusing
         // for params on the front end, so we're going to use page/page size
         // for the URL params and just map it to whatever the api expects.
+
         return this.http.get(path, { params: this.mapPageToOffset(params) });
     }
 

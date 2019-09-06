@@ -1,4 +1,4 @@
-export class CollectionUpload {
+export class CollectionUploadType {
     id: number;
     file: File;
     sha256: string;
@@ -29,7 +29,6 @@ export class CollectionVersion {
         // repository?: string;
     };
     // contents: any;
-    content_summary?: ContentSummary;
     created: string;
     // modified: string;
     // readme_html: string;
@@ -45,6 +44,7 @@ export class CollectionListType {
     // community_survey_count: number;
     latest_version: CollectionVersion;
     // content_match?: ContentSummary;
+    content_summary?: ContentSummary;
 
     namespace: {
         id: number;

@@ -9,7 +9,7 @@ export const redHat = {
         'https://www.redhat.com/cms/managed-files/styles/wysiwyg_full_width/s3/Logo-RedHat-Hat-Color-CMYK%20%281%29.jpg?itok=Mf0Ff9jq',
     description:
         'We’re the world’s leading provider of enterprise open source solutions, using a community-powered approach to deliver high-performing Linux, cloud, container, and Kubernetes technologies. We help you standardize across environments, develop cloud-native applications, and integrate, automate, secure, and manage complex environments with award-winning support, training, and consulting services.',
-    resources_page_src: `[![Build Status](https://travis-ci.com/ansible/galaxy.svg?branch=devel)](https://travis-ci.com/ansible/galaxy)
+    resources: `[![Build Status](https://travis-ci.com/ansible/galaxy.svg?branch=devel)](https://travis-ci.com/ansible/galaxy)
 
 # Ansible Galaxy
 
@@ -55,8 +55,7 @@ View [AUTHORS](./AUTHORS) for a list contributors to Ansible Galaxy. Thanks ever
 
 Ansible Galaxy is an [Ansible by Red Hat](https://ansible.com) sponsored project.
 `,
-    resources_page_html: '',
-    useful_links: [
+    links: [
         { name: 'Red Hat', url: 'https://www.redhat.com' },
         {
             name: 'Cormier: "Ansible is a Platform"',
