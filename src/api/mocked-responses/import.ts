@@ -122,10 +122,7 @@ class ImportGenerator extends RandomGenerator {
                 new Date(2019, 0, 1),
                 new Date(),
             ).toString(),
-            namespace: {
-                id: 1,
-                name: 'red_hat',
-            },
+            namespace: 'red_hat',
             name: name,
             version: `${this.randNum(5)}.${this.randNum(10)}.${this.randNum(
                 100,

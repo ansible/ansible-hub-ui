@@ -18,7 +18,6 @@ export enum Paths {
     myCollections = '/my-namespaces/:namespace',
     myNamespaces = '/my-namespaces/',
     editNamespace = '/my-namespaces/edit/:namespace',
-    myImportsNamespace = '/my-imports/:namespace',
     myImports = '/my-imports',
     search = '/',
     collectionDocsPage = '/:namespace/:collection/docs/:page',

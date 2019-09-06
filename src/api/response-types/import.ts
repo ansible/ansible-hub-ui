@@ -19,10 +19,7 @@ export class ImportListType {
     state: PulpStatus;
     started_at: string;
     finished_at: string;
-    namespace: {
-        id: number;
-        name: string;
-    };
+    namespace: string;
     // Collection name
     name: string;
     version: string;

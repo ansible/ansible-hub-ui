@@ -72,8 +72,11 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
 
         this.polling = setInterval(() => {
             if (
-                this.state.selectedImportDetails.state === PulpStatus.running ||
-                this.state.selectedImportDetails.state === PulpStatus.waiting
+                this.state.selectedImportDetails &&
+                (this.state.selectedImportDetails.state ===
+                    PulpStatus.running ||
+                    this.state.selectedImportDetails.state ===
+                        PulpStatus.waiting)
             ) {
                 this.poll();
             }
@@ -121,7 +124,9 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                                     }
                                     updateParams={params => {
                                         this.updateParams(params, () =>
-                                            this.loadImportList(),
+                                            this.loadImportList(() =>
+                                                this.loadTaskDetails(),
+                                            ),
                                         );
                                     }}
                                 />
@@ -205,7 +210,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
 
                 if (this.state.params.namespace) {
                     selectedNS = namespaces.find(
-                        x => x.id === this.state.params.namespace,
+                        x => x.name === this.state.params.namespace,
                     );
                 }
 
