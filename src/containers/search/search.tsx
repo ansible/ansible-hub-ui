@@ -80,7 +80,29 @@ class Search extends React.Component<RouteComponentProps, IState> {
         const { collections, params, numberOfResults } = this.state;
         return (
             <React.Fragment>
-                <BaseHeader title='Collections'>
+                <BaseHeader
+                    className='header'
+                    title='Collections'
+                    pageControls={
+                        <CardListSwitcher
+                            size='sm'
+                            params={params}
+                            updateParams={p =>
+                                this.updateParams(p, () =>
+                                    // Note, we have to use this.state.params instead
+                                    // of params in the callback because the callback
+                                    // executes before the page can re-run render
+                                    // which means params doesn't contain the most
+                                    // up to date state
+                                    localStorage.setItem(
+                                        Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
+                                        this.state.params.view_type,
+                                    ),
+                                )
+                            }
+                        />
+                    }
+                >
                     <div className='toolbar'>
                         <Toolbar
                             params={params}
@@ -95,25 +117,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
                                 )
                             }
                             searchPlaceholder='Search Collections'
-                            extraInputs={[
-                                <CardListSwitcher
-                                    size='md'
-                                    params={params}
-                                    updateParams={p =>
-                                        this.updateParams(p, () =>
-                                            // Note, we have to use this.state.params instead
-                                            // of params in the callback because the callback
-                                            // executes before the page can re-run render
-                                            // which means params doesn't contain the most
-                                            // up to date state
-                                            localStorage.setItem(
-                                                Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-                                                this.state.params.view_type,
-                                            ),
-                                        )
-                                    }
-                                />,
-                            ]}
                         />
 
                         <Pagination
@@ -189,7 +192,9 @@ class Search extends React.Component<RouteComponentProps, IState> {
         return (
             <div className='cards'>
                 {collections.map(c => {
-                    return <CollectionCard key={c.id} {...c} />;
+                    return (
+                        <CollectionCard className='card' key={c.id} {...c} />
+                    );
                 })}
             </div>
         );
