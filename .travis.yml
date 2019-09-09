@@ -8,7 +8,7 @@ notifications:
 node_js:
 - '10'
 before_install:
-- openssl aes-256-cbc -K $encrypted_8cea5a62d3d8_key -iv $encrypted_8cea5a62d3d8_iv -in automation-hub_rsa_key.enc -out ./automation-hub_rsa_key -d
+- openssl aes-256-cbc -K $encrypted_8cea5a62d3d8_key -iv $encrypted_8cea5a62d3d8_iv -in .travis/automation-hub_rsa_key.enc -out ./automation-hub_rsa_key -d
 install:
 - npm ci
 jobs:
