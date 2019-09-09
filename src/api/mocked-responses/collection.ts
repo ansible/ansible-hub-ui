@@ -176,6 +176,16 @@ class CollectionGenerator extends RandomGenerator {
                                     description: [
                                         'This is the message to send to the sample module',
                                     ],
+                                    type: 'string',
+                                    required: true,
+                                    aliases: ['nombre', 'nametastic'],
+                                    // ini: [
+                                    //     {
+                                    //         section: 'callback_cgroupmemrecap',
+                                    //         key: 'max_mem_file',
+                                    //     },
+                                    // ],
+                                    // env: [{ name: 'CGROUP_MAX_FILE' }],
                                 },
                             ],
                             short_description:
