@@ -178,11 +178,6 @@ export const Routes = props => {
             />
 
             <InsightsRoute
-                path={Paths.myImportsNamespace}
-                component={MyImports}
-                rootClass='root'
-            />
-            <InsightsRoute
                 path={Paths.myImports}
                 component={MyImports}
                 rootClass='root'
