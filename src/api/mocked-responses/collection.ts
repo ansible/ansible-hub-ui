@@ -202,7 +202,7 @@ class CollectionGenerator extends RandomGenerator {
                             {
                                 name: 'fact',
                                 description: 'Actual facts',
-                                return: 'success',
+                                returned: 'success',
                                 type: 'str',
                                 sample:
                                     "Richard Stallman doesn't need to buy a bigger hard drive. He can compress data infinitely.",

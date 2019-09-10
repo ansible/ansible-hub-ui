@@ -9,87 +9,100 @@ interface IProps {
     plugin: PluginContentType;
 }
 
+class PluginOption {
+    name: string;
+    description: string[];
+    type: string;
+    required: boolean;
+    default?: string | number | boolean;
+    aliases?: string[];
+    subOptions?: PluginOption[];
+}
+
+class PluginDoc {
+    shortDescription: string;
+    description: string[];
+    options?: PluginOption[];
+    requirements?: string[];
+}
+
+class ReturnedValue {
+    name: string;
+    description: string;
+    returned: string;
+    type: string;
+    // if string: display the value, if object or list return JSON
+    sample: any;
+    contains: ReturnedValue[];
+}
+
+// Documentation for module doc string spec
+// https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_documenting.html
+
 export class RenderPluginDoc extends React.Component<IProps> {
     render() {
         const { plugin } = this.props;
 
-        let short_description, description, parameters;
+        const doc: PluginDoc = this.parseDocString(plugin);
+        const example: string = this.parseExamples(plugin);
+        const returnVals: ReturnedValue[] = this.parseReturn(plugin);
 
-        // None of these variables are guaranteed to exist, so to prevent
-        // type errors we're going to inspect the API response for each field
-        // the UI expects and if it exists, map it to a JSX expression.
-        if (plugin.doc_strings.doc) {
-            const doc = plugin.doc_strings.doc;
-
-            if (doc['short_description']) {
-                short_description = <div>{doc['short_description']}</div>;
-            }
-
-            if (doc['description']) {
-                description = (
-                    <React.Fragment>
-                        <h2>Synopsis</h2>
-                        <ul>
-                            {plugin.doc_strings.doc['description'].map(
-                                (d, i) => (
-                                    <li key={i}>{d}</li>
-                                ),
-                            )}
-                        </ul>
-                    </React.Fragment>
-                );
-            }
-
-            if (doc['options']) {
-                parameters = this.getParameters(
-                    doc['options'],
-                    plugin['content_type'],
-                );
-            }
-        }
-
-        // the JSX here shouldn't refer to the plugin variable at all
         return (
             <div className='pf-c-content'>
                 <h1>
                     {plugin.content_type} > {plugin.content_name}
                 </h1>
                 <br />
-                {short_description}
-                {description}
-                {parameters}
-
-                <h2>Examples</h2>
-                <pre>{plugin.doc_strings.examples}</pre>
-
-                <h2>Return Values</h2>
-                <table className='options-table'>
-                    <tbody>
-                        <tr>
-                            <th>Key</th>
-                            <th>Returned</th>
-                            <th>Description</th>
-                        </tr>
-                        {plugin.doc_strings.return.map((option, i) => (
-                            <tr key={i}>
-                                <td>
-                                    {option.name} <br /> ({option.type})
-                                </td>
-                                <td>{option.return}</td>
-                                <td>
-                                    {option.description}
-                                    <br />
-                                    sample: {option.sample}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                {this.renderShortDescription(doc)}
+                {this.renderDescription(doc)}
+                {this.renderParameters(doc.options, plugin.content_type)}
+                {this.renderExample(example)}
+                {this.renderReturnValues(returnVals)}
             </div>
         );
     }
 
-    private getParameters(parameters, content_type) {
+    private parseDocString(plugin: PluginContentType): PluginDoc {
+        // TODO: make the doc string match the desired output as closely as
+        // possible
+        return plugin.doc_strings.doc as PluginDoc;
+    }
+
+    private parseExamples(plugin: PluginContentType): string {
+        if (typeof plugin.doc_strings.examples === 'string') {
+            return plugin.doc_strings.examples;
+        } else {
+            return null;
+        }
+    }
+
+    private parseReturn(plugin: PluginContentType): ReturnedValue[] {
+        // TODO: make the return string match the desired output as closely as
+        // possible
+        return plugin.doc_strings.return;
+    }
+
+    private renderShortDescription(doc: PluginDoc) {
+        return <div>{doc['short_description']}</div>;
+    }
+
+    private renderDescription(doc: PluginDoc) {
+        return (
+            <React.Fragment>
+                <h2>Synopsis</h2>
+                <ul>
+                    {doc.description.map((d, i) => (
+                        <li key={i}>{d}</li>
+                    ))}
+                </ul>
+            </React.Fragment>
+        );
+    }
+
+    private renderParameters(parameters: PluginOption[], content_type: string) {
+        if (!parameters) {
+            return null;
+        }
         return (
             <React.Fragment>
                 <h2>Parameters</h2>
@@ -124,7 +137,7 @@ export class RenderPluginDoc extends React.Component<IProps> {
                                         {option['elements'] ? (
                                             <span>
                                                 {' '}
-                                                /{' '}
+                                                / elements =
                                                 {this.documentedType(
                                                     option['elements'],
                                                 )}
@@ -255,6 +268,62 @@ export class RenderPluginDoc extends React.Component<IProps> {
                         <span className='blue'>{defaul}</span>
                     </span>
                 ) : null}
+            </React.Fragment>
+        );
+    }
+
+    private renderExample(example: string) {
+        if (!example) {
+            return null;
+        }
+        return (
+            <React.Fragment>
+                <h2>Examples</h2>
+                <pre>{example}</pre>
+            </React.Fragment>
+        );
+    }
+
+    private renderReturnValues(returnV: ReturnedValue[]) {
+        if (!returnV) {
+            return null;
+        }
+        return (
+            <React.Fragment>
+                <h2>Return Values</h2>
+                <table className='options-table'>
+                    <tbody>
+                        <tr>
+                            <th>Key</th>
+                            <th>Returned</th>
+                            <th>Description</th>
+                        </tr>
+                        {returnV.map((option, i) => (
+                            <tr key={i}>
+                                <td>
+                                    {option.name} <br /> ({option.type})
+                                </td>
+                                <td>{option.returned}</td>
+                                <td>
+                                    {option.description}
+                                    <br />
+                                    sample:
+                                    {typeof option.sample === 'string' ? (
+                                        option.sample
+                                    ) : (
+                                        <pre>
+                                            {JSON.stringify(
+                                                option.sample,
+                                                null,
+                                                2,
+                                            )}
+                                        </pre>
+                                    )}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </React.Fragment>
         );
     }
