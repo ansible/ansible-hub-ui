@@ -24,6 +24,7 @@ class PluginDoc {
     description: string[];
     options?: PluginOption[];
     requirements?: string[];
+    notes?: string[];
 }
 
 class ReturnedValue {
@@ -55,7 +56,9 @@ export class RenderPluginDoc extends React.Component<IProps> {
                 <br />
                 {this.renderShortDescription(doc)}
                 {this.renderDescription(doc)}
+                {this.renderRequirements(doc)}
                 {this.renderParameters(doc.options, plugin.content_type)}
+                {this.renderNotes(doc)}
                 {this.renderExample(example)}
                 {this.renderReturnValues(returnVals)}
             </div>
@@ -65,10 +68,17 @@ export class RenderPluginDoc extends React.Component<IProps> {
     private parseDocString(plugin: PluginContentType): PluginDoc {
         // TODO: make the doc string match the desired output as closely as
         // possible
+        if (!plugin.doc_strings) {
+            return { description: [], shortDescription: '' } as PluginDoc;
+        }
         return plugin.doc_strings.doc as PluginDoc;
     }
 
     private parseExamples(plugin: PluginContentType): string {
+        if (!plugin.doc_strings) {
+            return null;
+        }
+
         if (typeof plugin.doc_strings.examples === 'string') {
             return plugin.doc_strings.examples;
         } else {
@@ -79,6 +89,21 @@ export class RenderPluginDoc extends React.Component<IProps> {
     private parseReturn(plugin: PluginContentType): ReturnedValue[] {
         // TODO: make the return string match the desired output as closely as
         // possible
+        const returnV = [] as ReturnedValue[];
+
+        if (!plugin.doc_strings) {
+            return null;
+        }
+
+        if (!plugin.doc_strings.return) {
+            return null;
+        }
+
+        for (let r of plugin.doc_strings.return) {
+            returnV.push({
+                ...r,
+            });
+        }
         return plugin.doc_strings.return;
     }
 
@@ -269,6 +294,40 @@ export class RenderPluginDoc extends React.Component<IProps> {
                     </span>
                 ) : null}
             </React.Fragment>
+        );
+    }
+
+    private renderNotes(doc: PluginDoc) {
+        if (!doc.notes) {
+            return null;
+        }
+
+        return (
+            <div>
+                <h2>Notes</h2>
+                <ul>
+                    {doc.notes.map((note, i) => (
+                        <li key={i}>{note}</li>
+                    ))}
+                </ul>
+            </div>
+        );
+    }
+
+    private renderRequirements(doc: PluginDoc) {
+        if (!doc.requirements) {
+            return null;
+        }
+
+        return (
+            <div>
+                <h2>Requirments</h2>
+                <ul>
+                    {doc.requirements.map((req, i) => (
+                        <li key={i}>{req}</li>
+                    ))}
+                </ul>
+            </div>
         );
     }
 

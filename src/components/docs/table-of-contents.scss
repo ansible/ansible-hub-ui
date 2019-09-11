@@ -1,4 +1,29 @@
 .toc-body {
     background-color: white;
-    padding: 8px;
+    padding: 16px;
+}
+
+.category-header {
+    font-weight: bold;
+    text-transform: capitalize;
+    margin-bottom: 8px;
+}
+
+.toc-nav {
+    ul {
+        list-style: none;
+        margin-left: 0px;
+        margin-top: 0px;
+        padding-left: 0px;
+    }
+
+    li {
+        padding-left: 16px;
+        border-top: 1px solid #d2d2d2;
+        padding-top: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    margin-bottom: 8px;
 }

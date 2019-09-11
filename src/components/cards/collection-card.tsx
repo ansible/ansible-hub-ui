@@ -27,7 +27,6 @@ export class CollectionCard extends React.Component<IProps> {
     render() {
         const {
             name,
-            description,
             latest_version,
             namespace,
             content_summary,
@@ -70,7 +69,7 @@ export class CollectionCard extends React.Component<IProps> {
                     </div>
                 </CardHead>
                 <CardBody className='description'>
-                    {this.getDescription(description)}
+                    {this.getDescription(latest_version.metadata.description)}
                 </CardBody>
                 <CardFooter className='type-container'>
                     {Object.keys(content_summary.contents).map(k =>
@@ -85,6 +84,9 @@ export class CollectionCard extends React.Component<IProps> {
     }
 
     private getDescription(d: string) {
+        if (!d) {
+            return '';
+        }
         if (d.length > this.MAX_DESCRIPTION_LENGTH) {
             return d.slice(0, this.MAX_DESCRIPTION_LENGTH) + '...';
         } else {

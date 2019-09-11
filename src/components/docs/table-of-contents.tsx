@@ -10,6 +10,8 @@ interface IProps {
     docs_blob: DocsBlobType;
     namespace: string;
     collection: string;
+    selectedName?: string;
+    selectedType?: string;
     className?: string;
 }
 
@@ -42,9 +44,15 @@ export class TableOfContents extends React.Component<IProps> {
 
         for (const file of docs_blob.documentation_files) {
             table.documentation.push({
-                display: file.filename.split('.')[0].replace('_', ' '),
+                display: this.capitalize(
+                    file.filename
+                        .split('.')[0]
+                        .split('_')
+                        .join(' '),
+                ),
                 url: formatPath(Paths.collectionDocsPage, {
                     ...baseUrlParams,
+                    // TODO: Find a better way to handle file extensions in urls
                     page: file.filename.replace('.', '-'),
                 }),
             });
@@ -77,33 +85,37 @@ export class TableOfContents extends React.Component<IProps> {
 
         return (
             <div className={'pf-c-content toc-body ' + className}>
-                <ul>
-                    {Object.keys(table).map(key =>
-                        table[key].length === 0
-                            ? null
-                            : this.renderLinks(table[key], key),
-                    )}
-                </ul>
+                {Object.keys(table).map(key =>
+                    table[key].length === 0
+                        ? null
+                        : this.renderLinks(table[key], key),
+                )}
             </div>
         );
     }
 
-    renderLinks(links, title) {
+    private renderLinks(links, title) {
         return (
-            <li key={title}>
-                {title}
-                <ul>
-                    {links.map(link => (
-                        <li key={link.url}>
-                            <Link to={link.url}>{link.display}</Link>
-                        </li>
-                    ))}
-                </ul>
-            </li>
+            <div key={title}>
+                <div className='category-header'>{title}</div>
+                <div className='toc-nav'>
+                    <ul>
+                        {links.map((link, i) => (
+                            <li key={i}>
+                                <Link to={link.url}>{link.display}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
         );
     }
 
-    getContentEntry(content, base) {
+    private capitalize(s: string) {
+        return s.slice(0, 1).toUpperCase() + s.slice(1);
+    }
+
+    private getContentEntry(content, base) {
         return {
             display: content.content_name,
             url: formatPath(Paths.collectionContentDocs, {
