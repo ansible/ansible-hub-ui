@@ -1,17 +1,29 @@
 @import '../../global-variables.scss';
 
+.main {
+    margin: 0px;
+    padding: 0px;
+}
+
+.header {
+    border-bottom: 1px solid #d8d8d8;
+}
+
 .docs-container {
     @media (min-width: $breakpoint-md) {
         display: flex;
     }
 
     .sidebar {
-        margin: 0px 24px 0px -24px;
-        min-width: 290px;
-        max-width: 290px;
+        // This width lines up the border nicely with the tabs
+        min-width: 294px;
+        max-width: 294px;
+        border-right: 1px solid #d8d8d8;
+        padding: 24px;
     }
 
     .docs {
         flex-grow: 1;
+        padding: 24px;
     }
 }

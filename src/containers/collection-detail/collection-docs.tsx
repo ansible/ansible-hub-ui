@@ -38,31 +38,31 @@ class CollectionDocs extends React.Component<
             return null;
         }
 
-        let displayHTML;
+        let displayHTML: string;
         let pluginData;
 
-        // TODO: THIS IS A HORRIBLE MESS OF SPAGHETTI
-        // DON'T LET ME GET MERGED UNTIL I'M FIXED
-        if (urlFields['page']) {
+        const contentType = urlFields['type'] || 'docs';
+        const contentName = urlFields['name'] || urlFields['page'] || null;
+
+        console.log(contentType);
+        console.log(contentName);
+
+        if (contentType === 'docs' && contentName) {
             displayHTML = collection.latest_version.docs_blob.documentation_files.find(
                 // TODO: insights crashes when you give it a .md page. Need to find
                 // a more elegant solution to this problem
                 x => x.filename.replace('.', '-') === urlFields['page'],
             ).html;
-        } else if (urlFields['type'] && urlFields['name']) {
+        } else if (contentName) {
             const content = collection.latest_version.docs_blob.contents.find(
                 x =>
-                    x.content_type === urlFields['type'] &&
-                    x.content_name === urlFields['name'],
+                    x.content_type === contentType &&
+                    x.content_name === contentName,
             );
 
-            if (urlFields['type'] === 'role') {
+            if (contentType === 'role') {
                 displayHTML = content['readme_html'];
             } else {
-                // displayHTML =
-                //     '<pre>' +
-                //     JSON.stringify(content['doc_strings']['doc'], null, 2) +
-                //     '</pre>';
                 pluginData = content;
             }
         } else {
@@ -96,14 +96,17 @@ class CollectionDocs extends React.Component<
                     updateParams={params => this.updateParams(params)}
                     breadcrumbs={breadcrumbs}
                     activeTab='documentation'
+                    className='header'
                 />
-                <Main>
+                <Main className='main'>
                     <Section className='docs-container'>
                         <TableOfContents
                             className='sidebar'
                             namespace={collection.namespace.name}
                             collection={collection.name}
                             docs_blob={collection.latest_version.docs_blob}
+                            selectedName={contentName}
+                            selectedType={contentType}
                         ></TableOfContents>
                         <div className='body docs pf-c-content'>
                             {displayHTML ? (

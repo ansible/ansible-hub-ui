@@ -80,7 +80,9 @@ export class RenderPluginDoc extends React.Component<IProps> {
         }
 
         if (typeof plugin.doc_strings.examples === 'string') {
-            return plugin.doc_strings.examples;
+            // the examples always seem to have an annoying new line at the top
+            // so just replace it here if it exists.
+            return plugin.doc_strings.examples.replace('\n', '');
         } else {
             return null;
         }
@@ -365,19 +367,24 @@ export class RenderPluginDoc extends React.Component<IProps> {
                                 <td>{option.returned}</td>
                                 <td>
                                     {option.description}
-                                    <br />
-                                    sample:
-                                    {typeof option.sample === 'string' ? (
-                                        option.sample
-                                    ) : (
-                                        <pre>
-                                            {JSON.stringify(
-                                                option.sample,
-                                                null,
-                                                2,
+                                    {option.sample ? (
+                                        <div>
+                                            <br />
+                                            sample:
+                                            {typeof option.sample ===
+                                            'string' ? (
+                                                option.sample
+                                            ) : (
+                                                <pre>
+                                                    {JSON.stringify(
+                                                        option.sample,
+                                                        null,
+                                                        2,
+                                                    )}
+                                                </pre>
                                             )}
-                                        </pre>
-                                    )}
+                                        </div>
+                                    ) : null}
                                 </td>
                             </tr>
                         ))}

@@ -21,6 +21,7 @@ interface IProps {
         name: string;
     }[];
     activeTab: string;
+    className?: string;
 }
 
 export class CollectionHeader extends React.Component<IProps> {
@@ -31,6 +32,7 @@ export class CollectionHeader extends React.Component<IProps> {
             updateParams,
             breadcrumbs,
             activeTab,
+            className,
         } = this.props;
 
         const urlKeys = [
@@ -42,6 +44,7 @@ export class CollectionHeader extends React.Component<IProps> {
 
         return (
             <BaseHeader
+                className={className}
                 title={collection.name}
                 imageURL={collection.namespace.avatar_url}
                 breadcrumbs={<Breadcrumbs links={breadcrumbs} />}

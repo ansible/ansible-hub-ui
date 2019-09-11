@@ -18,11 +18,19 @@ interface IProps {
 class DocsEntry {
     display: string;
     url?: string;
+    selected?: boolean;
 }
 
 export class TableOfContents extends React.Component<IProps> {
     render() {
-        const { docs_blob, namespace, collection, className } = this.props;
+        const {
+            docs_blob,
+            namespace,
+            collection,
+            className,
+            selectedName,
+            selectedType,
+        } = this.props;
 
         const baseUrlParams = {
             namespace: namespace,
@@ -40,9 +48,11 @@ export class TableOfContents extends React.Component<IProps> {
         table.documentation.push({
             display: 'Readme',
             url: formatPath(Paths.collectionDocsIndex, baseUrlParams),
+            selected: selectedType === 'docs' && !selectedName,
         });
 
         for (const file of docs_blob.documentation_files) {
+            const url = file.filename.replace('.', '-');
             table.documentation.push({
                 display: this.capitalize(
                     file.filename
@@ -53,8 +63,9 @@ export class TableOfContents extends React.Component<IProps> {
                 url: formatPath(Paths.collectionDocsPage, {
                     ...baseUrlParams,
                     // TODO: Find a better way to handle file extensions in urls
-                    page: file.filename.replace('.', '-'),
+                    page: url,
                 }),
+                selected: selectedType === 'docs' && selectedName === url,
             });
         }
 
@@ -97,12 +108,25 @@ export class TableOfContents extends React.Component<IProps> {
     private renderLinks(links, title) {
         return (
             <div key={title}>
-                <div className='category-header'>{title}</div>
+                <small className='category-header'>{title}</small>
                 <div className='toc-nav'>
                     <ul>
-                        {links.map((link, i) => (
-                            <li key={i}>
-                                <Link to={link.url}>{link.display}</Link>
+                        {links.map((link: DocsEntry, i) => (
+                            <li
+                                key={i}
+                                className={
+                                    (title !== 'documentation'
+                                        ? 'truncated '
+                                        : ' ') +
+                                    (link.selected ? 'selected' : '')
+                                }
+                            >
+                                <Link
+                                    className={link.selected ? 'selected' : ''}
+                                    to={link.url}
+                                >
+                                    {link.display}
+                                </Link>
                             </li>
                         ))}
                     </ul>
@@ -123,6 +147,9 @@ export class TableOfContents extends React.Component<IProps> {
                 type: content.content_type,
                 name: content.content_name,
             }),
+            selected:
+                this.props.selectedName === content.content_name &&
+                this.props.selectedType === content.content_type,
         };
     }
 }
