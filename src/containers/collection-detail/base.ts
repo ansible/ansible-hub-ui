@@ -7,11 +7,12 @@ export interface IBaseCollectionState {
     collection: CollectionDetailType;
 }
 
-export function loadCollection() {
+export function loadCollection(callback?: () => void) {
     CollectionAPI.getCached(
         this.props.match.params['namespace'],
         this.props.match.params['collection'],
     ).then(result => {
         this.setState({ collection: result });
+        callback();
     });
 }

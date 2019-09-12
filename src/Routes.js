@@ -47,13 +47,6 @@ const CollectionDocs = asyncComponent(() =>
     ),
 );
 
-const CollectionContentDocs = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "collection_detail" */
-        './containers/collection-detail/collection-content-docs'
-    ),
-);
-
 const NotFound = asyncComponent(() =>
     import(
         /* webpackChunkName: "not_found" */

@@ -18,12 +18,16 @@ class CollectionDocs extends React.Component<
     RouteComponentProps,
     IBaseCollectionState
 > {
+    docsRef: any;
+
     constructor(props) {
         super(props);
         this.state = {
             collection: undefined,
             params: {},
         };
+
+        this.docsRef = React.createRef();
     }
 
     componentDidMount() {
@@ -43,9 +47,6 @@ class CollectionDocs extends React.Component<
 
         const contentType = urlFields['type'] || 'docs';
         const contentName = urlFields['name'] || urlFields['page'] || null;
-
-        console.log(contentType);
-        console.log(contentName);
 
         if (contentType === 'docs' && contentName) {
             displayHTML = collection.latest_version.docs_blob.documentation_files.find(
@@ -88,6 +89,11 @@ class CollectionDocs extends React.Component<
             { name: 'Documentation' },
         ];
 
+        // scroll to top of page
+        if (this.docsRef.current) {
+            this.docsRef.current.scrollIntoView();
+        }
+
         return (
             <React.Fragment>
                 <CollectionHeader
@@ -108,7 +114,10 @@ class CollectionDocs extends React.Component<
                             selectedName={contentName}
                             selectedType={contentType}
                         ></TableOfContents>
-                        <div className='body docs pf-c-content'>
+                        <div
+                            className='body docs pf-c-content'
+                            ref={this.docsRef}
+                        >
                             {displayHTML ? (
                                 <div
                                     dangerouslySetInnerHTML={{
