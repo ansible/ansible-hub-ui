@@ -16,7 +16,7 @@ export function formatPath(path: Paths, data: any, params?: object) {
 
 export enum Paths {
     myCollections = '/my-namespaces/:namespace',
-    myNamespaces = '/my-namespaces/',
+    myNamespaces = '/my-namespaces',
     editNamespace = '/my-namespaces/edit/:namespace',
     myImports = '/my-imports',
     search = '/',
