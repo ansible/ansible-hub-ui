@@ -54,7 +54,9 @@ class CollectionDetail extends React.Component<
                 <CollectionHeader
                     collection={collection}
                     params={params}
-                    updateParams={params => this.updateParams(params)}
+                    updateParams={p =>
+                        this.updateParams(p, () => this.loadCollection(true))
+                    }
                     breadcrumbs={breadcrumbs}
                     activeTab='details'
                 />

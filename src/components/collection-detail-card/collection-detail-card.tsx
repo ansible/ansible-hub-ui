@@ -119,31 +119,33 @@ export class CollectionDetailCard extends React.Component<IProps> {
                         </Split>
                     </GridItem>
 
-                    <GridItem>
-                        <div className='readme-container'>
-                            <div
-                                className='pf-c-content'
-                                dangerouslySetInnerHTML={{
-                                    __html:
-                                        latest_version.docs_blob
-                                            .collection_readme.html,
-                                }}
-                            />
-                            <div className='fade-out'></div>
-                        </div>
-                        <Link
-                            to={formatPath(
-                                Paths.collectionDocsIndex,
-                                {
-                                    collection: name,
-                                    namespace: namespace.name,
-                                },
-                                params,
-                            )}
-                        >
-                            Load full readme
-                        </Link>
-                    </GridItem>
+                    {latest_version.docs_blob.collection_readme ? (
+                        <GridItem>
+                            <div className='readme-container'>
+                                <div
+                                    className='pf-c-content'
+                                    dangerouslySetInnerHTML={{
+                                        __html:
+                                            latest_version.docs_blob
+                                                .collection_readme.html,
+                                    }}
+                                />
+                                <div className='fade-out'></div>
+                            </div>
+                            <Link
+                                to={formatPath(
+                                    Paths.collectionDocsIndex,
+                                    {
+                                        collection: name,
+                                        namespace: namespace.name,
+                                    },
+                                    params,
+                                )}
+                            >
+                                Load full readme
+                            </Link>
+                        </GridItem>
+                    ) : null}
                 </Grid>
             </div>
         );

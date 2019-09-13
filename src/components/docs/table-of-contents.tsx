@@ -53,46 +53,50 @@ export class TableOfContents extends React.Component<IProps> {
             selected: selectedType === 'docs' && !selectedName,
         });
 
-        for (const file of docs_blob.documentation_files) {
-            const url = file.filename.replace('.', '-');
-            table.documentation.push({
-                display: this.capitalize(
-                    file.filename
-                        .split('.')[0]
-                        .split('_')
-                        .join(' '),
-                ),
-                url: formatPath(Paths.collectionDocsPage, {
-                    ...baseUrlParams,
-                    // TODO: Find a better way to handle file extensions in urls
-                    page: url,
-                }),
-                selected: selectedType === 'docs' && selectedName === url,
-            });
+        if (docs_blob.documentation_files) {
+            for (const file of docs_blob.documentation_files) {
+                const url = file.name.replace('.', '-');
+                table.documentation.push({
+                    display: this.capitalize(
+                        file.name
+                            .split('.')[0]
+                            .split('_')
+                            .join(' '),
+                    ),
+                    url: formatPath(Paths.collectionDocsPage, {
+                        ...baseUrlParams,
+                        // TODO: Find a better way to handle file extensions in urls
+                        page: url,
+                    }),
+                    selected: selectedType === 'docs' && selectedName === url,
+                });
+            }
         }
 
-        for (const content of docs_blob.contents) {
-            switch (content.content_type) {
-                case 'role':
-                    table.roles.push(
-                        this.getContentEntry(content, baseUrlParams),
-                    );
-                    break;
-                case 'module':
-                    table.modules.push(
-                        this.getContentEntry(content, baseUrlParams),
-                    );
-                    break;
-                case 'playbook':
-                    table.playbooks.push(
-                        this.getContentEntry(content, baseUrlParams),
-                    );
-                    break;
-                default:
-                    table.plugins.push(
-                        this.getContentEntry(content, baseUrlParams),
-                    );
-                    break;
+        if (docs_blob.contents) {
+            for (const content of docs_blob.contents) {
+                switch (content.content_type) {
+                    case 'role':
+                        table.roles.push(
+                            this.getContentEntry(content, baseUrlParams),
+                        );
+                        break;
+                    case 'module':
+                        table.modules.push(
+                            this.getContentEntry(content, baseUrlParams),
+                        );
+                        break;
+                    case 'playbook':
+                        table.playbooks.push(
+                            this.getContentEntry(content, baseUrlParams),
+                        );
+                        break;
+                    default:
+                        table.plugins.push(
+                            this.getContentEntry(content, baseUrlParams),
+                        );
+                        break;
+                }
             }
         }
 

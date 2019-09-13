@@ -71,6 +71,19 @@ export class RenderPluginDoc extends React.Component<IProps> {
         if (!plugin.doc_strings) {
             return { description: [], shortDescription: '' } as PluginDoc;
         }
+
+        const doc = { ...plugin.doc_strings.doc };
+
+        for (let op of doc.options) {
+            // Description is expected to be an array of strings. If its not,
+            // do what we can to make it one
+            if (typeof op.description === 'string') {
+                op.description = [op.description];
+            } else if (!op.description) {
+                op.description = [];
+            }
+        }
+
         return plugin.doc_strings.doc as PluginDoc;
     }
 

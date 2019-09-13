@@ -12,7 +12,7 @@ export class API extends BaseAPI {
 
         // Comment this out to make an actual API request
         // mocked responses will be removed when a real API is available
-        new MockCollection(this.http, this.apiPath);
+        // new MockCollection(this.http, this.apiPath);
     }
 
     upload(
@@ -50,8 +50,14 @@ export class API extends BaseAPI {
     // for the collection and replace the old cache with the new value.
     // This allows the collection page to be broken into separate components
     // and routed separately without fetching redundant data from the API
-    getCached(namespace, name): Promise<CollectionDetailType> {
+    getCached(
+        namespace,
+        name,
+        params?,
+        forceReload?: boolean,
+    ): Promise<CollectionDetailType> {
         if (
+            !forceReload &&
             this.cachedCollection &&
             this.cachedCollection.name === name &&
             this.cachedCollection.namespace.name === namespace
@@ -65,7 +71,10 @@ export class API extends BaseAPI {
             });
         } else {
             return new Promise((resolve, reject) => {
-                this.get(`${namespace}/${name}`)
+                this.http
+                    .get(`${this.apiPath}${namespace}/${name}/`, {
+                        params: params,
+                    })
                     .then(result => {
                         this.cachedCollection = result.data;
                         resolve(result.data);

@@ -16,6 +16,8 @@ import { CertificateIcon } from '@patternfly/react-icons';
 import { NumericLabel, Logo } from '../../components';
 import { CollectionListType } from '../../api';
 import { formatPath, Paths } from '../../paths';
+import { convertContentSummaryCounts } from '../../utilities';
+
 
 interface IProps extends CollectionListType {
     className?: string;
@@ -29,11 +31,13 @@ export class CollectionCard extends React.Component<IProps> {
             name,
             latest_version,
             namespace,
-            content_summary,
             className,
         } = this.props;
 
         const company = namespace.company || namespace.name;
+        const contentSummary = convertContentSummaryCounts(
+            latest_version.contents,
+        );
 
         return (
             <Card className={'collection-card-container ' + className}>
@@ -72,10 +76,10 @@ export class CollectionCard extends React.Component<IProps> {
                     {this.getDescription(latest_version.metadata.description)}
                 </CardBody>
                 <CardFooter className='type-container'>
-                    {Object.keys(content_summary.contents).map(k =>
+                    {Object.keys(contentSummary.contents).map(k =>
                         this.renderTypeCount(
                             k,
-                            content_summary.contents[k].length,
+                            contentSummary.contents[k],
                         ),
                     )}
                 </CardFooter>

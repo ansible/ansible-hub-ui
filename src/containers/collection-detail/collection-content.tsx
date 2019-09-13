@@ -69,7 +69,11 @@ class CollectionContent extends React.Component<
                             collection={collection.name}
                             namespace={collection.namespace.name}
                             params={params}
-                            updateParams={p => this.updateParams(p)}
+                            updateParams={p =>
+                                this.updateParams(p, () =>
+                                    this.loadCollection(true),
+                                )
+                            }
                         ></CollectionContentList>
                     </Section>
                 </Main>

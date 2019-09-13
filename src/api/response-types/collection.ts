@@ -4,16 +4,6 @@ export class CollectionUploadType {
     sha256: string;
 }
 
-class ContentSummary {
-    total_count: number;
-    contents: {
-        module: string[];
-        role: string[];
-        plugin: string[];
-        playbook: string[];
-    };
-}
-
 export class CollectionVersion {
     id: number;
     version: string;
@@ -21,12 +11,12 @@ export class CollectionVersion {
         tags: string[];
         description: string;
     };
-    content_summary?: ContentSummary;
     created: string;
+    contents: ContentSummaryType[];
 }
 
 class RenderedFile {
-    filename: string;
+    name: string;
     html: string;
 }
 
@@ -59,7 +49,6 @@ export class CollectionListType {
     // community_survey_count: number;
     latest_version: CollectionVersion;
     // content_match?: ContentSummary;
-    content_summary?: ContentSummary;
 
     namespace: {
         id: number;

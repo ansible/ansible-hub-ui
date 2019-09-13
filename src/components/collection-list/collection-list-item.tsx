@@ -17,6 +17,7 @@ import * as moment from 'moment';
 import { Paths, formatPath } from '../../paths';
 import { NumericLabel, Tag, Logo } from '../../components';
 import { CollectionListType } from '../../api';
+import { convertContentSummaryCounts } from '../../utilities';
 
 interface IProps extends CollectionListType {
     showNamespace?: boolean;
@@ -32,7 +33,6 @@ export class CollectionListItem extends React.Component<IProps, {}> {
             namespace,
             showNamespace,
             controls,
-            content_summary,
         } = this.props;
 
         const cells = [];
@@ -50,6 +50,10 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                 </DataListCell>,
             );
         }
+
+        const contentSummary = convertContentSummaryCounts(
+            latest_version.contents,
+        );
 
         cells.push(
             <DataListCell key='content'>
@@ -78,12 +82,12 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                         <Tag key={index}>{tag}</Tag>
                     ))}
                 </div>
-                <div className='entry pf-l-flex pf-m-wrap'>
-                    {Object.keys(content_summary.contents).map(k => (
+                <div className='entry pf-l-flex pf-m-wrap content'>
+                    {Object.keys(contentSummary.contents).map(k => (
                         <div key={k}>
                             <NumericLabel
                                 label={k}
-                                number={content_summary.contents[k].length}
+                                number={contentSummary.contents[k]}
                             />
                         </div>
                     ))}

@@ -54,7 +54,7 @@ class CollectionDocs extends React.Component<
             displayHTML = collection.latest_version.docs_blob.documentation_files.find(
                 // TODO: insights crashes when you give it a .md page. Need to find
                 // a more elegant solution to this problem
-                x => x.filename.replace('.', '-') === urlFields['page'],
+                x => x.name.replace('.', '-') === urlFields['page'],
             ).html;
         } else if (contentName) {
             const content = collection.latest_version.docs_blob.contents.find(
@@ -69,8 +69,12 @@ class CollectionDocs extends React.Component<
                 pluginData = content;
             }
         } else {
-            displayHTML =
-                collection.latest_version.docs_blob.collection_readme.html;
+            if (collection.latest_version.docs_blob.collection_readme) {
+                displayHTML =
+                    collection.latest_version.docs_blob.collection_readme.html;
+            } else {
+                displayHTML = 'This collection is missing a README';
+            }
         }
 
         const breadcrumbs = [
@@ -101,7 +105,9 @@ class CollectionDocs extends React.Component<
                 <CollectionHeader
                     collection={collection}
                     params={params}
-                    updateParams={params => this.updateParams(params)}
+                    updateParams={p =>
+                        this.updateParams(p, () => this.loadCollection(true))
+                    }
                     breadcrumbs={breadcrumbs}
                     activeTab='documentation'
                     className='header'
