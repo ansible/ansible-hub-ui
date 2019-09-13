@@ -323,7 +323,7 @@ export class RenderPluginDoc extends React.Component<IProps> {
 
         return (
             <div>
-                <h2>Requirments</h2>
+                <h2>Requirements</h2>
                 <ul>
                     {doc.requirements.map((req, i) => (
                         <li key={i}>{req}</li>
