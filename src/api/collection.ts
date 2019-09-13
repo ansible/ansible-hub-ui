@@ -12,7 +12,7 @@ export class API extends BaseAPI {
 
         // Comment this out to make an actual API request
         // mocked responses will be removed when a real API is available
-        new MockCollection(this.http, this.apiPath);
+        // new MockCollection(this.http, this.apiPath);
     }
 
     upload(
