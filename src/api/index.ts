@@ -6,7 +6,8 @@ export {
     CollectionDetailType,
     DocsBlobType,
     PluginContentType,
-    CollectionUploadType
+    CollectionUploadType,
+    ContentSummaryType,
 } from './response-types/collection';
 export {
     ImportListType,

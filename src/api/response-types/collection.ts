@@ -108,6 +108,12 @@ export class DocsBlobType {
     contents: (PluginContentType | RoleContentType | PlaybookContentType)[];
 }
 
+export class ContentSummaryType {
+    name: string;
+    content_type: string;
+    description: string;
+}
+
 export class CollectionDetailType {
     all_versions: {
         id: number;
@@ -128,11 +134,7 @@ export class CollectionDetailType {
         };
         created: string;
         docs_blob: DocsBlobType;
-        contents: {
-            name: string;
-            content_type: string;
-            description: string;
-        }[];
+        contents: ContentSummaryType[];
     };
 
     id: number;

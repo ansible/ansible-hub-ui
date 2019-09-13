@@ -22,7 +22,7 @@ interface IProps extends CollectionListType {
 }
 
 export class CollectionCard extends React.Component<IProps> {
-    MAX_DESCRIPTION_LENGTH = 60;
+    MAX_DESCRIPTION_LENGTH = 50;
 
     render() {
         const {

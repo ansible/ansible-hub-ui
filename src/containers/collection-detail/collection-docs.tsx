@@ -22,9 +22,11 @@ class CollectionDocs extends React.Component<
 
     constructor(props) {
         super(props);
+        const params = ParamHelper.parseParamString(props.location.search);
+
         this.state = {
             collection: undefined,
-            params: {},
+            params: params,
         };
 
         this.docsRef = React.createRef();
@@ -113,6 +115,7 @@ class CollectionDocs extends React.Component<
                             docs_blob={collection.latest_version.docs_blob}
                             selectedName={contentName}
                             selectedType={contentType}
+                            params={params}
                         ></TableOfContents>
                         <div
                             className='body docs pf-c-content'

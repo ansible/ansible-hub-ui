@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 
 import { DocsBlobType } from '../../api';
 import { Paths, formatPath } from '../../paths';
+import { ParamHelper } from '../../utilities/param-helper';
 
 interface IProps {
     docs_blob: DocsBlobType;
     namespace: string;
     collection: string;
+    params: object;
     selectedName?: string;
     selectedType?: string;
     className?: string;
@@ -123,7 +125,16 @@ export class TableOfContents extends React.Component<IProps> {
                             >
                                 <Link
                                     className={link.selected ? 'selected' : ''}
-                                    to={link.url}
+                                    to={
+                                        link.url +
+                                        (Object.keys(this.props.params)
+                                            .length != 0
+                                            ? '?' +
+                                              ParamHelper.getQueryString(
+                                                  this.props.params,
+                                              )
+                                            : '')
+                                    }
                                 >
                                     {link.display}
                                 </Link>

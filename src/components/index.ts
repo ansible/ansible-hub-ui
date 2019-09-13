@@ -26,3 +26,6 @@ export {
 export { CollectionHeader } from './headers/collection-header';
 export { TableOfContents } from './docs/table-of-contents';
 export { RenderPluginDoc } from './docs/render-plugin-doc';
+export {
+    CollectionContentList,
+} from './collection-content-list/collection-content-list';

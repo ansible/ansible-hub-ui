@@ -5,7 +5,7 @@ import { ParamHelper } from '../../utilities/param-helper';
 import { NumericLabel } from '../../components';
 
 interface IProps {
-    tags: { name: string; quantity: number }[];
+    tags: string[];
     params: {
         tags?: string | string[];
     };
@@ -25,17 +25,15 @@ export class TagFilter extends React.Component<IProps> {
                         style={{
                             marginLeft: '10px',
                         }}
-                        key={t.name}
-                        label={`${t.name} (${NumericLabel.roundNumber(
-                            t.quantity,
-                        )})`}
-                        id={t.name}
+                        key={t}
+                        label={t}
+                        id={t}
                         isChecked={ParamHelper.paramExists(
                             params,
                             this.tagParam,
-                            t.name,
+                            t,
                         )}
-                        onChange={checked => this.updateTags(t.name, checked)}
+                        onChange={checked => this.updateTags(t, checked)}
                     />
                 ))}
             </div>

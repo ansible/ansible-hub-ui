@@ -25,6 +25,8 @@ interface IProps {
 }
 
 export class CollectionHeader extends React.Component<IProps> {
+    ignorParams = ['showing', 'keyords'];
+
     render() {
         const {
             collection,
@@ -102,6 +104,8 @@ export class CollectionHeader extends React.Component<IProps> {
     renderTabs(active) {
         // We're not using the Tab react component because they don't support
         // links.
+        const { params } = this.props;
+
         return (
             <div className='pf-c-tabs' id='primary'>
                 <ul className='pf-c-tabs__list'>
@@ -112,10 +116,18 @@ export class CollectionHeader extends React.Component<IProps> {
                         }
                     >
                         <Link
-                            to={formatPath(Paths.collection, {
-                                namespace: this.props.collection.namespace.name,
-                                collection: this.props.collection.name,
-                            })}
+                            to={formatPath(
+                                Paths.collection,
+                                {
+                                    namespace: this.props.collection.namespace
+                                        .name,
+                                    collection: this.props.collection.name,
+                                },
+                                ParamHelper.getReduced(
+                                    params,
+                                    this.ignorParams,
+                                ),
+                            )}
                             className='pf-c-tabs__button'
                             id='details-tab'
                         >
@@ -129,10 +141,18 @@ export class CollectionHeader extends React.Component<IProps> {
                         }
                     >
                         <Link
-                            to={formatPath(Paths.collectionDocsIndex, {
-                                namespace: this.props.collection.namespace.name,
-                                collection: this.props.collection.name,
-                            })}
+                            to={formatPath(
+                                Paths.collectionDocsIndex,
+                                {
+                                    namespace: this.props.collection.namespace
+                                        .name,
+                                    collection: this.props.collection.name,
+                                },
+                                ParamHelper.getReduced(
+                                    params,
+                                    this.ignorParams,
+                                ),
+                            )}
                             className='pf-c-tabs__button'
                             id='documentation-tab'
                         >
@@ -146,10 +166,18 @@ export class CollectionHeader extends React.Component<IProps> {
                         }
                     >
                         <Link
-                            to={formatPath(Paths.collectionContentList, {
-                                namespace: this.props.collection.namespace.name,
-                                collection: this.props.collection.name,
-                            })}
+                            to={formatPath(
+                                Paths.collectionContentList,
+                                {
+                                    namespace: this.props.collection.namespace
+                                        .name,
+                                    collection: this.props.collection.name,
+                                },
+                                ParamHelper.getReduced(
+                                    params,
+                                    this.ignorParams,
+                                ),
+                            )}
                             className='pf-c-tabs__button'
                             id='contents-tab'
                         >

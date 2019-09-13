@@ -132,10 +132,14 @@ export class CollectionDetailCard extends React.Component<IProps> {
                             <div className='fade-out'></div>
                         </div>
                         <Link
-                            to={formatPath(Paths.collectionDocsIndex, {
-                                collection: name,
-                                namespace: namespace.name,
-                            })}
+                            to={formatPath(
+                                Paths.collectionDocsIndex,
+                                {
+                                    collection: name,
+                                    namespace: namespace.name,
+                                },
+                                params,
+                            )}
                         >
                             Load full readme
                         </Link>
