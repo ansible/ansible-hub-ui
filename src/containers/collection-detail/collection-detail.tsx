@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
-import { CollectionHeader, CollectionDetailCard } from '../../components';
+import { CollectionHeader, CollectionInfo } from '../../components';
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from '../../utilities/param-helper';
 import { formatPath, Paths } from '../../paths';
@@ -62,7 +62,7 @@ class CollectionDetail extends React.Component<
                 />
                 <Main>
                     <Section className='body'>
-                        <CollectionDetailCard
+                        <CollectionInfo
                             {...collection}
                             updateParams={p => this.updateParams(p)}
                             params={this.state.params}

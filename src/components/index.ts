@@ -20,12 +20,10 @@ export { TagFilter } from './tags/tag-filter';
 export { CardListSwitcher } from './card-list-switcher/card-list-switcher';
 export { Logo } from './logo/logo';
 export { Pagination } from './patternfly-wrappers/pagination';
-export {
-    CollectionDetailCard,
-} from './collection-detail-card/collection-detail-card';
+export { CollectionInfo } from './collection-detail/collection-info';
 export { CollectionHeader } from './headers/collection-header';
-export { TableOfContents } from './docs/table-of-contents';
-export { RenderPluginDoc } from './docs/render-plugin-doc';
+export { TableOfContents } from './collection-detail/table-of-contents';
+export { RenderPluginDoc } from './collection-detail/render-plugin-doc';
 export {
     CollectionContentList,
-} from './collection-content-list/collection-content-list';
+} from './collection-detail/collection-content-list';

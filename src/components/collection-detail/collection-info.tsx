@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './collection-detail-card.scss';
+import './collection-info.scss';
 
 import * as moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -26,7 +26,7 @@ interface IProps extends CollectionDetailType {
     updateParams: (params) => void;
 }
 
-export class CollectionDetailCard extends React.Component<IProps> {
+export class CollectionInfo extends React.Component<IProps> {
     render() {
         const {
             name,
@@ -45,7 +45,7 @@ export class CollectionDetailCard extends React.Component<IProps> {
         }
 
         return (
-            <div className='pf-c-content'>
+            <div className='pf-c-content info-panel'>
                 <h1>Info</h1>
                 <Grid gutter='lg'>
                     <GridItem>{description}</GridItem>

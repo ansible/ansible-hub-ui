@@ -5,6 +5,16 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
 import {
+    EmptyState,
+    EmptyStateBody,
+    EmptyStateVariant,
+    Title,
+    EmptyStateIcon,
+} from '@patternfly/react-core';
+
+import { WarningTriangleIcon } from '@patternfly/react-icons';
+
+import {
     CollectionHeader,
     TableOfContents,
     RenderPluginDoc,
@@ -44,6 +54,8 @@ class CollectionDocs extends React.Component<
             return null;
         }
 
+        // If the parser can't find anything that matches the URL, neither of
+        // these variables should be set
         let displayHTML: string;
         let pluginData;
 
@@ -51,29 +63,38 @@ class CollectionDocs extends React.Component<
         const contentName = urlFields['name'] || urlFields['page'] || null;
 
         if (contentType === 'docs' && contentName) {
-            displayHTML = collection.latest_version.docs_blob.documentation_files.find(
-                // TODO: insights crashes when you give it a .md page. Need to find
-                // a more elegant solution to this problem
-                x => x.name.replace('.', '-') === urlFields['page'],
-            ).html;
-        } else if (contentName) {
-            const content = collection.latest_version.docs_blob.contents.find(
-                x =>
-                    x.content_type === contentType &&
-                    x.content_name === contentName,
-            );
+            if (collection.latest_version.docs_blob.documentation_files) {
+                const file = collection.latest_version.docs_blob.documentation_files.find(
+                    // TODO: insights crashes when you give it a .md page. Need to find
+                    // a more elegant solution to this problem
+                    x => x.name.replace('.', '-') === urlFields['page'],
+                );
 
-            if (contentType === 'role') {
-                displayHTML = content['readme_html'];
-            } else {
-                pluginData = content;
+                if (file) {
+                    displayHTML = file.html;
+                }
+            }
+        } else if (contentName) {
+            // check if contents exists
+            if (collection.latest_version.docs_blob.contents) {
+                const content = collection.latest_version.docs_blob.contents.find(
+                    x =>
+                        x.content_type === contentType &&
+                        x.content_name === contentName,
+                );
+
+                if (content) {
+                    if (contentType === 'role') {
+                        displayHTML = content['readme_html'];
+                    } else {
+                        pluginData = content;
+                    }
+                }
             }
         } else {
             if (collection.latest_version.docs_blob.collection_readme) {
                 displayHTML =
                     collection.latest_version.docs_blob.collection_readme.html;
-            } else {
-                displayHTML = 'This collection is missing a README';
             }
         }
 
@@ -127,19 +148,41 @@ class CollectionDocs extends React.Component<
                             className='body docs pf-c-content'
                             ref={this.docsRef}
                         >
-                            {displayHTML ? (
-                                <div
-                                    dangerouslySetInnerHTML={{
-                                        __html: displayHTML,
-                                    }}
-                                ></div>
+                            {displayHTML || pluginData ? (
+                                // if neither variable is set, render not found
+                                displayHTML ? (
+                                    // if displayHTML is set, render it
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: displayHTML,
+                                        }}
+                                    ></div>
+                                ) : (
+                                    // if plugin data is set render it
+                                    <RenderPluginDoc plugin={pluginData} />
+                                )
                             ) : (
-                                <RenderPluginDoc plugin={pluginData} />
+                                this.renderNotFound(collection.name)
                             )}
                         </div>
                     </Section>
                 </Main>
             </React.Fragment>
+        );
+    }
+
+    private renderNotFound(collectionName) {
+        return (
+            <EmptyState className='empty' variant={EmptyStateVariant.full}>
+                <EmptyStateIcon icon={WarningTriangleIcon} />
+                <Title headingLevel='h2' size='lg'>
+                    Not Found
+                </Title>
+                <EmptyStateBody>
+                    The file you're looking for doesn't seem to be available in
+                    this version of {collectionName}.
+                </EmptyStateBody>
+            </EmptyState>
         );
     }
 
