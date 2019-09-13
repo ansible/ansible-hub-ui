@@ -58,7 +58,11 @@ class CollectionContent extends React.Component<
                 <CollectionHeader
                     collection={collection}
                     params={params}
-                    updateParams={params => this.updateParams(params)}
+                    updateParams={params =>
+                        this.updateParams(params, () =>
+                            this.loadCollection(true),
+                        )
+                    }
                     breadcrumbs={breadcrumbs}
                     activeTab='contents'
                 />
@@ -69,11 +73,7 @@ class CollectionContent extends React.Component<
                             collection={collection.name}
                             namespace={collection.namespace.name}
                             params={params}
-                            updateParams={p =>
-                                this.updateParams(p, () =>
-                                    this.loadCollection(true),
-                                )
-                            }
+                            updateParams={p => this.updateParams(p)}
                         ></CollectionContentList>
                     </Section>
                 </Main>
