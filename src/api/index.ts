@@ -1,7 +1,14 @@
 export { CollectionAPI } from './collection';
 export { NamespaceAPI } from './namespace';
 export { NamespaceType, NamespaceListType } from './response-types/namespace';
-export { CollectionListType } from './response-types/collection';
+export {
+    CollectionListType,
+    CollectionDetailType,
+    DocsBlobType,
+    PluginContentType,
+    CollectionUploadType,
+    ContentSummaryType,
+} from './response-types/collection';
 export {
     ImportListType,
     ImportDetailType,
@@ -9,6 +16,5 @@ export {
     ImportMessageCodes,
 } from './response-types/import';
 export { ImportAPI } from './import';
-export { CollectionUploadType } from './response-types/collection';
 export { UserAPI } from './user';
 export { UserAuth } from './response-types/user';

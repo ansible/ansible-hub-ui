@@ -40,7 +40,7 @@ interface IState {
 }
 
 class Search extends React.Component<RouteComponentProps, IState> {
-    tags: { name: string; quantity: number }[];
+    tags: string[];
 
     constructor(props) {
         super(props);
@@ -64,12 +64,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
             numberOfResults: 0,
         };
 
-        this.tags = [
-            { name: 'network', quantity: 10 },
-            { name: 'cloud', quantity: 99 },
-            { name: 'package', quantity: 90102 },
-            { name: 'security', quantity: 1 },
-        ];
+        this.tags = ['network', 'cloud', 'package', 'security'];
     }
 
     componentDidMount() {

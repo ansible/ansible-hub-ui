@@ -1,0 +1,36 @@
+.options-table {
+    td,
+    th {
+        border: 1px solid black;
+        padding: 5px;
+    }
+    ul {
+        margin-top: 0px;
+    }
+
+    small {
+        margin-bottom: 0px;
+    }
+
+    width: 100%;
+}
+
+.blue {
+    color: var(--pf-global--info-color--100);
+}
+
+.red {
+    color: var(--pf-global--danger-color--100);
+}
+
+.green {
+    color: var(--pf-global--success-color--200);
+}
+
+.option-name {
+    font-weight: bold;
+}
+
+.plugin-config {
+    margin-bottom: 16px;
+}

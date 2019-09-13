@@ -1,0 +1,50 @@
+.toc-body {
+    background-color: white;
+    padding: 16px;
+}
+
+.category-header {
+    text-transform: capitalize;
+}
+
+.toc-nav {
+    ul {
+        list-style: none;
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-bottom: 24px;
+        padding-left: 0px;
+    }
+
+    li {
+        padding-left: 0px;
+        padding-top: 0px;
+        margin-bottom: 8px;
+
+        a {
+            font-weight: normal;
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover,
+        a.selected {
+            color: var(--pf-global--link--Color--hover);
+            color: var(--pf-global--link--Color--hover);
+        }
+    }
+
+    li:hover,
+    li.selected {
+        border-left: 2px solid var(--pf-global--link--Color);
+        padding-left: 5px;
+        margin-left: -7px;
+    }
+
+    li.truncated {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    margin-bottom: 8px;
+}

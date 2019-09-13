@@ -1,0 +1,19 @@
+.content-table {
+    width: 100%;
+    th {
+        font-weight: bold;
+    }
+}
+
+.type-selector {
+    margin-left: 16px;
+    text-transform: capitalize;
+}
+
+.selected-item,
+.type-selector:hover {
+    border-bottom: 2px solid var(--pf-global--link--Color);
+    padding-bottom: 2px;
+    margin-bottom: -4px;
+    background-color: white;
+}

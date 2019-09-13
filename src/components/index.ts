@@ -20,3 +20,10 @@ export { TagFilter } from './tags/tag-filter';
 export { CardListSwitcher } from './card-list-switcher/card-list-switcher';
 export { Logo } from './logo/logo';
 export { Pagination } from './patternfly-wrappers/pagination';
+export { CollectionInfo } from './collection-detail/collection-info';
+export { CollectionHeader } from './headers/collection-header';
+export { TableOfContents } from './collection-detail/table-of-contents';
+export { RenderPluginDoc } from './collection-detail/render-plugin-doc';
+export {
+    CollectionContentList,
+} from './collection-detail/collection-content-list';

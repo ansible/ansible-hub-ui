@@ -1,10 +1,11 @@
 import { BaseAPI } from './base';
 import { MockCollection } from './mocked-responses/collection';
-import { CollectionUploadType } from './response-types/collection';
+import { CollectionDetailType, CollectionUploadType } from '../api';
 import axios from 'axios';
 
-class API extends BaseAPI {
+export class API extends BaseAPI {
     apiPath = 'v3/_ui/collections/';
+    cachedCollection: CollectionDetailType;
 
     constructor() {
         super();
@@ -42,6 +43,47 @@ class API extends BaseAPI {
         const source = CancelToken.source();
 
         return source;
+    }
+
+    // Caches the last collection returned from the server. If the requested
+    // collection matches the cache, return it, if it doesn't query the API
+    // for the collection and replace the old cache with the new value.
+    // This allows the collection page to be broken into separate components
+    // and routed separately without fetching redundant data from the API
+    getCached(
+        namespace,
+        name,
+        params?,
+        forceReload?: boolean,
+    ): Promise<CollectionDetailType> {
+        if (
+            !forceReload &&
+            this.cachedCollection &&
+            this.cachedCollection.name === name &&
+            this.cachedCollection.namespace.name === namespace
+        ) {
+            return new Promise((resolve, reject) => {
+                if (this.cachedCollection) {
+                    resolve(this.cachedCollection);
+                } else {
+                    reject(this.cachedCollection);
+                }
+            });
+        } else {
+            return new Promise((resolve, reject) => {
+                this.http
+                    .get(`${this.apiPath}${namespace}/${name}/`, {
+                        params: params,
+                    })
+                    .then(result => {
+                        this.cachedCollection = result.data;
+                        resolve(result.data);
+                    })
+                    .catch(result => {
+                        reject(result);
+                    });
+            });
+        }
     }
 }
 

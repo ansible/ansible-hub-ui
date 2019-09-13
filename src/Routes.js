@@ -47,13 +47,6 @@ const CollectionDocs = asyncComponent(() =>
     ),
 );
 
-const CollectionContentDocs = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "collection_detail" */
-        './containers/collection-detail/collection-content-docs'
-    ),
-);
-
 const NotFound = asyncComponent(() =>
     import(
         /* webpackChunkName: "not_found" */
@@ -155,20 +148,19 @@ export const Routes = props => {
                 component={MyNamespaces}
                 rootClass='root'
             />
-
-            <InsightsRoute
-                path={Paths.collectionDocsIndex}
-                component={CollectionDocs}
-                rootClass='root'
-            />
             <InsightsRoute
                 path={Paths.collectionDocsPage}
                 component={CollectionDocs}
                 rootClass='root'
             />
             <InsightsRoute
+                path={Paths.collectionDocsIndex}
+                component={CollectionDocs}
+                rootClass='root'
+            />
+            <InsightsRoute
                 path={Paths.collectionContentDocs}
-                component={CollectionContentDocs}
+                component={CollectionDocs}
                 rootClass='root'
             />
             <InsightsRoute

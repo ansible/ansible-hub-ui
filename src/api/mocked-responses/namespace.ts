@@ -66,6 +66,16 @@ Ansible Galaxy is an [Ansible by Red Hat](https://ansible.com) sponsored project
     num_collections: 10,
 } as NamespaceType;
 
+export const google = {
+    id: 4,
+    name: 'google',
+    company: 'Google Cloud',
+    num_collections: 2,
+    description: 'Google Cloud Platform',
+    avatar_url:
+        'https://cloud.google.com/_static/images/cloud/icons/favicons/onecloud/apple-icon.png',
+};
+
 export class MockNamespace {
     mock: any;
 
@@ -100,14 +110,7 @@ export class MockNamespace {
             'https://logos-download.com/wp-content/uploads/2016/10/Ansible_logo.png',
     };
 
-    ns4 = {
-        id: 4,
-        name: 'google',
-        company: 'Google Cloud',
-        num_collections: 2,
-        avatar_url:
-            'https://cloud.google.com/_static/images/cloud/icons/favicons/onecloud/apple-icon.png',
-    };
+    ns4 = google;
 
     getNSList() {
         return [this.ns1, this.ns2, this.ns3, this.ns4];
