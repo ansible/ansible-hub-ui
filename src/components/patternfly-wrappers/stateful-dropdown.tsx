@@ -35,6 +35,7 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
                 isPlain
                 dropdownItems={items}
                 position={DropdownPosition.right}
+                autoFocus={false}
             />
         );
     }

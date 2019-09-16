@@ -262,6 +262,17 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                             </Link>
                         </DropdownItem>,
                         <DropdownItem key='2'>
+                            <Link
+                                to={formatPath(
+                                    Paths.myImports,
+                                    {},
+                                    { namespace: this.state.namespace.name },
+                                )}
+                            >
+                                Imports
+                            </Link>
+                        </DropdownItem>,
+                        <DropdownItem key='3'>
                             <Link to={Paths.token} target='_blank'>
                                 Get API Token
                             </Link>
