@@ -1,7 +1,3 @@
-// (window as any).insights.chrome.auth
-//     .getUser()
-//     .then(x => console.log(x));
-
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
