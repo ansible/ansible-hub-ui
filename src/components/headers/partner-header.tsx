@@ -31,7 +31,7 @@ export class PartnerHeader extends React.Component<IProps, {}> {
         } = this.props;
         return (
             <BaseHeader
-                title={namespace.company}
+                title={namespace.company || namespace.name}
                 imageURL={namespace.avatar_url}
                 breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
                 pageControls={pageControls}

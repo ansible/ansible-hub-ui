@@ -6,7 +6,12 @@ import {
     Button,
     DropdownItem,
     DataList,
+    EmptyState,
+    EmptyStateIcon,
+    Title,
+    EmptyStateVariant,
 } from '@patternfly/react-core';
+import { WarningTriangleIcon } from '@patternfly/react-icons';
 
 import { CollectionListType } from '../../api';
 import {
@@ -80,17 +85,29 @@ export class CollectionList extends React.Component<IProps, IState> {
                 </div>
 
                 <DataList aria-label={'List of Collections'}>
-                    {collections.map(c => (
-                        <CollectionListItem
-                            controls={
-                                showControls
-                                    ? this.renderCollectionControls(c.id)
-                                    : null
-                            }
-                            key={c.id}
-                            {...c}
-                        />
-                    ))}
+                    {collections.length > 0 ? (
+                        collections.map(c => (
+                            <CollectionListItem
+                                controls={
+                                    showControls
+                                        ? this.renderCollectionControls(c.id)
+                                        : null
+                                }
+                                key={c.id}
+                                {...c}
+                            />
+                        ))
+                    ) : (
+                        <EmptyState
+                            className='empty'
+                            variant={EmptyStateVariant.full}
+                        >
+                            <EmptyStateIcon icon={WarningTriangleIcon} />
+                            <Title headingLevel='h2' size='lg'>
+                                No Collections Found
+                            </Title>
+                        </EmptyState>
+                    )}
                 </DataList>
 
                 <div className='controls bottom'>
