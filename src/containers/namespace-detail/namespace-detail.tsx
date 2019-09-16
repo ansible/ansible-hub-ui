@@ -261,6 +261,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                                 Edit Namespace
                             </Link>
                         </DropdownItem>,
+                        <DropdownItem key='2'>
+                            <Link to={Paths.token} target='_blank'>
+                                Get API Token
+                            </Link>
+                        </DropdownItem>,
                     ]}
                 />
             </div>
