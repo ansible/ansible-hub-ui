@@ -3,9 +3,13 @@ import './header.scss';
 
 import { Link } from 'react-router-dom';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import { FormSelect, FormSelectOption } from '@patternfly/react-core';
+import {
+    FormSelect,
+    FormSelectOption,
+    DropdownItem,
+} from '@patternfly/react-core';
 
-import { BaseHeader, Breadcrumbs } from '../../components';
+import { BaseHeader, Breadcrumbs, StatefulDropdown } from '../../components';
 import { CollectionDetailType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -51,27 +55,42 @@ export class CollectionHeader extends React.Component<IProps> {
                 imageURL={collection.namespace.avatar_url}
                 breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
                 pageControls={
-                    <FormSelect
-                        onChange={val =>
-                            updateParams(
-                                ParamHelper.setParam(params, 'version', val),
-                            )
-                        }
-                        value={
-                            params.version
-                                ? params.version
-                                : collection.latest_version.version
-                        }
-                        aria-label='Select collection version'
-                    >
-                        {collection.all_versions.map(v => (
-                            <FormSelectOption
-                                key={v.version}
-                                value={v.version}
-                                label={'v' + v.version}
-                            />
-                        ))}
-                    </FormSelect>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <FormSelect
+                            onChange={val =>
+                                updateParams(
+                                    ParamHelper.setParam(
+                                        params,
+                                        'version',
+                                        val,
+                                    ),
+                                )
+                            }
+                            value={
+                                params.version
+                                    ? params.version
+                                    : collection.latest_version.version
+                            }
+                            aria-label='Select collection version'
+                        >
+                            {collection.all_versions.map(v => (
+                                <FormSelectOption
+                                    key={v.version}
+                                    value={v.version}
+                                    label={'v' + v.version}
+                                />
+                            ))}
+                        </FormSelect>
+                        <StatefulDropdown
+                            items={[
+                                <DropdownItem key='1'>
+                                    <Link to={Paths.token} target='_blank'>
+                                        Get API Token
+                                    </Link>
+                                </DropdownItem>,
+                            ]}
+                        />
+                    </div>
                 }
             >
                 <div className='tab-link-container'>
