@@ -3,10 +3,14 @@ import './namespace-list.scss';
 
 import { RouteComponentProps, Link } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
-import { Pagination } from '@patternfly/react-core';
 
 import { ParamHelper } from '../../utilities/param-helper';
-import { BaseHeader, NamespaceCard, Toolbar } from '../../components';
+import {
+    BaseHeader,
+    NamespaceCard,
+    Toolbar,
+    Pagination,
+} from '../../components';
 import { NamespaceAPI, NamespaceListType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
 
@@ -33,10 +37,20 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     constructor(props) {
         super(props);
+
+        const params = ParamHelper.parseParamString(props.location.search, [
+            'page',
+            'page_size',
+        ]);
+
+        if (!params['page_size']) {
+            params['page_size'] = 50;
+        }
+
         this.state = {
             namespaces: undefined,
             itemCount: 0,
-            params: ParamHelper.parseParamString(props.location.search),
+            params: params,
         };
     }
 
@@ -84,25 +98,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
                         <div>
                             <Pagination
-                                itemCount={itemCount}
-                                perPage={params.page_size || 50}
-                                page={params.page || 1}
-                                onSetPage={(_, p) =>
-                                    this.updateParams(
-                                        ParamHelper.setParam(params, 'page', p),
-                                        () => this.loadNamespaces(),
-                                    )
-                                }
-                                onPerPageSelect={(_, p) => {
-                                    this.updateParams(
-                                        {
-                                            ...params,
-                                            page: 1,
-                                            page_size: p,
-                                        },
-                                        () => this.loadNamespaces(),
-                                    );
-                                }}
+                                params={params}
+                                updateParams={p => this.updateParams(p)}
+                                count={itemCount}
+                                isTop
                             />
                         </div>
                     </div>
