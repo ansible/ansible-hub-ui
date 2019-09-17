@@ -27,7 +27,7 @@ export class NamespaceCard extends React.Component<IProps, {}> {
 
                 <div>
                     <div className='title'>{company}</div>
-                    <div>{name}</div>
+                    <div className='ns-name'>{name}</div>
                     {
                         // TODO: current API doesn't provide collection count for namespaces
                         // <div>
