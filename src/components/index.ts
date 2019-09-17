@@ -28,3 +28,4 @@ export {
     CollectionContentList,
 } from './collection-detail/collection-content-list';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';
+export { LoadingPageWithHeader } from './loading/loading-collection-detail';

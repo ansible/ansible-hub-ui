@@ -3,7 +3,11 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
 
-import { CollectionHeader, CollectionInfo } from '../../components';
+import {
+    CollectionHeader,
+    CollectionInfo,
+    LoadingPageWithHeader,
+} from '../../components';
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from '../../utilities/param-helper';
 import { formatPath, Paths } from '../../paths';
@@ -32,7 +36,7 @@ class CollectionDetail extends React.Component<
         const { collection, params } = this.state;
 
         if (!collection) {
-            return null;
+            return <LoadingPageWithHeader></LoadingPageWithHeader>;
         }
 
         const breadcrumbs = [
@@ -48,7 +52,6 @@ class CollectionDetail extends React.Component<
             },
         ];
 
-        // TODO: waiting for  #16 to merge to make collection header
         return (
             <React.Fragment>
                 <CollectionHeader

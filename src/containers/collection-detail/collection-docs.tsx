@@ -18,6 +18,7 @@ import {
     CollectionHeader,
     TableOfContents,
     RenderPluginDoc,
+    LoadingPageWithHeader,
 } from '../../components';
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -51,7 +52,7 @@ class CollectionDocs extends React.Component<
         const urlFields = this.props.match.params;
 
         if (!collection) {
-            return null;
+            return <LoadingPageWithHeader></LoadingPageWithHeader>;
         }
 
         // If the parser can't find anything that matches the URL, neither of
