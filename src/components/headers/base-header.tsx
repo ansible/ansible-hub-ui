@@ -6,7 +6,7 @@ import { PageHeaderTitle } from '@redhat-cloud-services/frontend-components';
 import { Logo } from '../../components';
 
 interface IProps {
-    title: string | element;
+    title: string;
     imageURL?: string;
     breadcrumbs?: React.ReactNode;
     pageControls?: React.ReactNode;
