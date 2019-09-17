@@ -40,10 +40,9 @@ class App extends Component {
             insights.chrome.navigation(buildNavigation()),
         );
 
-        insights.chrome.auth.getUser().then(user => {
-            console.log(user);
-            this.setState({ currentUser: user });
-        });
+        insights.chrome.auth
+            .getUser()
+            .then(user => this.setState({ currentUser: user }));
     }
 
     componentWillUnmount() {

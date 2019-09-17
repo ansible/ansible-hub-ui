@@ -27,6 +27,7 @@ import {
     CollectionList,
     PartnerHeader,
     StatefulDropdown,
+    LoadingPageWithHeader,
 } from '../../components';
 
 import { ImportModal } from './import-modal/import-modal';
@@ -112,7 +113,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         }
 
         if (!namespace) {
-            return null;
+            return <LoadingPageWithHeader></LoadingPageWithHeader>;
         }
         return (
             <React.Fragment>

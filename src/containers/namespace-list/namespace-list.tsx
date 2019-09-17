@@ -10,6 +10,7 @@ import {
     NamespaceCard,
     Toolbar,
     Pagination,
+    LoadingPageWithHeader,
 } from '../../components';
 import { NamespaceAPI, NamespaceListType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
@@ -78,7 +79,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
         const { namespaces, params, itemCount } = this.state;
         const { title, namespacePath } = this.props;
         if (!namespaces) {
-            return null;
+            return <LoadingPageWithHeader></LoadingPageWithHeader>;
         }
 
         return (

@@ -22,6 +22,7 @@ import {
     CardListSwitcher,
     CollectionListItem,
     Pagination,
+    LoadingPageSpinner,
 } from '../../components';
 import { CollectionAPI, CollectionListType } from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -37,6 +38,7 @@ interface IState {
         tags?: string;
         view_type?: string;
     };
+    loading: boolean;
 }
 
 class Search extends React.Component<RouteComponentProps, IState> {
@@ -62,6 +64,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
             collections: [],
             params: params,
             numberOfResults: 0,
+            loading: true,
         };
 
         this.tags = ['network', 'cloud', 'package', 'security'];
@@ -72,7 +75,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
     }
 
     render() {
-        const { collections, params, numberOfResults } = this.state;
+        const { collections, params, numberOfResults, loading } = this.state;
+
         return (
             <React.Fragment>
                 <BaseHeader
@@ -103,7 +107,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
                             params={params}
                             sortOptions={[
                                 { id: 'name', title: 'Name' },
-                                { id: 'download_count', title: 'Downloads' },
+                                {
+                                    id: 'download_count',
+                                    title: 'Downloads',
+                                },
                                 { id: 'best_match', title: 'Best Match' },
                             ]}
                             updateParams={p =>
@@ -159,6 +166,9 @@ class Search extends React.Component<RouteComponentProps, IState> {
     }
 
     private renderCollections(collections, params) {
+        if (this.state.loading) {
+            return <LoadingPageSpinner></LoadingPageSpinner>;
+        }
         if (collections.length === 0) {
             return this.renderEmpty();
         }
@@ -217,12 +227,15 @@ class Search extends React.Component<RouteComponentProps, IState> {
     }
 
     private queryCollections() {
-        CollectionAPI.list(
-            ParamHelper.getReduced(this.state.params, ['view_type']),
-        ).then(result => {
-            this.setState({
-                collections: result.data.data,
-                numberOfResults: result.data.meta.count,
+        this.setState({ loading: true }, () => {
+            CollectionAPI.list(
+                ParamHelper.getReduced(this.state.params, ['view_type']),
+            ).then(result => {
+                this.setState({
+                    collections: result.data.data,
+                    numberOfResults: result.data.meta.count,
+                    loading: false,
+                });
             });
         });
     }
