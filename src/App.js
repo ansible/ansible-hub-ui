@@ -8,6 +8,14 @@ import './App.scss';
 class App extends Component {
     firstLoad = true;
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            currentUser: null,
+        };
+    }
+
     componentDidMount() {
         insights.chrome.init();
         insights.chrome.identifyApp('automation-hub');
@@ -31,6 +39,11 @@ class App extends Component {
         this.buildNav = this.props.history.listen(() =>
             insights.chrome.navigation(buildNavigation()),
         );
+
+        insights.chrome.auth.getUser().then(user => {
+            console.log(user);
+            this.setState({ currentUser: user });
+        });
     }
 
     componentWillUnmount() {
@@ -39,7 +52,14 @@ class App extends Component {
     }
 
     render() {
-        return <Routes childProps={this.props} />;
+        // Wait for the user data to load before any of the child components are
+        // rendered. This will prevent API calls from happening
+        // before the app can authenticate
+        if (!this.state.currentUser) {
+            return null;
+        } else {
+            return <Routes childProps={this.props} />;
+        }
     }
 }
 
