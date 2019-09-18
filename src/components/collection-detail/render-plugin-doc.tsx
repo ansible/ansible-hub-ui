@@ -72,8 +72,6 @@ export class RenderPluginDoc extends React.Component<IProps> {
             return { description: [], shortDescription: '' } as PluginDoc;
         }
 
-        console.log(plugin);
-
         const doc = { ...plugin.doc_strings.doc };
 
         if (doc.options) {
