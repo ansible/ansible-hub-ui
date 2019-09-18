@@ -74,17 +74,17 @@ export class RenderPluginDoc extends React.Component<IProps> {
 
         const doc = { ...plugin.doc_strings.doc };
 
-        for (let op of doc.options) {
-            // Description is expected to be an array of strings. If its not,
-            // do what we can to make it one
-            if (typeof op.description === 'string') {
-                op.description = [op.description];
-            } else if (!op.description) {
-                op.description = [];
+        if (doc.options) {
+            for (let op of doc.options) {
+                // Description is expected to be an array of strings. If its not,
+                // do what we can to make it one
+                op.description = this.ensureListofStrings(op.description);
             }
         }
 
-        return plugin.doc_strings.doc as PluginDoc;
+        doc.description = this.ensureListofStrings(doc.description);
+
+        return doc as PluginDoc;
     }
 
     private parseExamples(plugin: PluginContentType): string {
@@ -120,6 +120,16 @@ export class RenderPluginDoc extends React.Component<IProps> {
             });
         }
         return plugin.doc_strings.return;
+    }
+
+    private ensureListofStrings(v) {
+        if (typeof v === 'string') {
+            return [v];
+        } else if (!v) {
+            return [];
+        } else {
+            return v;
+        }
     }
 
     private renderShortDescription(doc: PluginDoc) {
