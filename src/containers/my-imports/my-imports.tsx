@@ -70,17 +70,19 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
             this.loadImportList(() => this.loadTaskDetails()),
         );
 
-        this.polling = setInterval(() => {
-            if (
-                this.state.selectedImportDetails &&
-                (this.state.selectedImportDetails.state ===
-                    PulpStatus.running ||
-                    this.state.selectedImportDetails.state ===
-                        PulpStatus.waiting)
-            ) {
-                this.poll();
-            }
-        }, 2000);
+        // TODO: disabling polling for now because it's hammering pulp and causing it crash
+
+        // this.polling = setInterval(() => {
+        //     if (
+        //         this.state.selectedImportDetails &&
+        //         (this.state.selectedImportDetails.state ===
+        //             PulpStatus.running ||
+        //             this.state.selectedImportDetails.state ===
+        //                 PulpStatus.waiting)
+        //     ) {
+        //         this.poll();
+        //     }
+        // }, 2000);
     }
 
     componentWillUnmount() {
