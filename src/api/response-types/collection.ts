@@ -113,6 +113,7 @@ export class CollectionDetailType {
         id: number;
         version: string;
         metadata: {
+            description: string;
             tags: string[];
             authors: string[];
             license: string;
