@@ -1,4 +1,6 @@
 import * as React from 'react';
+// had to declare *.svg in src/index.d.ts
+import DefaultLogo from '../../../static/images/default-logo.svg';
 
 interface IProps {
     // size should be css length measurment: '100px'
@@ -26,7 +28,7 @@ export class Logo extends React.Component<IProps> {
             >
                 <img
                     style={{ objectFit: 'contain', maxHeight: size }}
-                    src={image}
+                    src={image || DefaultLogo}
                     alt={alt}
                 />
             </div>

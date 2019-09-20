@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './not-found.scss';
+// had to declare *.gif in src/index.d.ts
 import RageTater from '../../../static/images/awx-spud.gif';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
