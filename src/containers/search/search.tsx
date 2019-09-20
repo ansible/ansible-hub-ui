@@ -229,7 +229,12 @@ class Search extends React.Component<RouteComponentProps, IState> {
     private queryCollections() {
         this.setState({ loading: true }, () => {
             CollectionAPI.list(
-                ParamHelper.getReduced(this.state.params, ['view_type']),
+                // TODO: ignoring tags and sort since they aren't supported yet
+                ParamHelper.getReduced(this.state.params, [
+                    'view_type',
+                    'tags',
+                    'sort',
+                ]),
             ).then(result => {
                 this.setState({
                     collections: result.data.data,
