@@ -53,7 +53,6 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     }
 
     componentDidCatch(error, info) {
-        // console.log(error);
         console.log(error);
         this.setState({ renderError: true });
     }
@@ -129,13 +128,17 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             return { description: [], shortDescription: '' } as PluginDoc;
         }
 
-        const doc = { ...plugin.doc_strings.doc };
+        const doc: PluginDoc = { ...plugin.doc_strings.doc };
 
         if (doc.options) {
             for (let op of doc.options) {
                 // Description is expected to be an array of strings. If its not,
                 // do what we can to make it one
                 op.description = this.ensureListofStrings(op.description);
+
+                if (typeof op.default === 'object') {
+                    op.default = JSON.stringify(op.default);
+                }
             }
         }
 
