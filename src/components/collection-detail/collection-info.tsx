@@ -30,7 +30,6 @@ export class CollectionInfo extends React.Component<IProps> {
     render() {
         const {
             name,
-            description,
             latest_version,
             namespace,
             all_versions,
@@ -48,7 +47,7 @@ export class CollectionInfo extends React.Component<IProps> {
             <div className='pf-c-content info-panel'>
                 <h1>Info</h1>
                 <Grid gutter='lg'>
-                    <GridItem>{description}</GridItem>
+                    <GridItem>{latest_version.metadata.description}</GridItem>
                     <GridItem>
                         {latest_version.metadata.tags.map((tag, i) => (
                             <Tag key={i}>{tag}</Tag>

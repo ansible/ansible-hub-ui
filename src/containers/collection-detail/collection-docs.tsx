@@ -145,15 +145,13 @@ class CollectionDocs extends React.Component<
                             selectedType={contentType}
                             params={params}
                         ></TableOfContents>
-                        <div
-                            className='body docs pf-c-content'
-                            ref={this.docsRef}
-                        >
+                        <div className='body docs' ref={this.docsRef}>
                             {displayHTML || pluginData ? (
                                 // if neither variable is set, render not found
                                 displayHTML ? (
                                     // if displayHTML is set, render it
                                     <div
+                                        className='pf-c-content'
                                         dangerouslySetInnerHTML={{
                                             __html: displayHTML,
                                         }}

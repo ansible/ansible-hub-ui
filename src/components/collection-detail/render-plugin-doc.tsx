@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './render-plugin-doc.scss';
 
-import { ChevronRightIcon } from '@patternfly/react-icons';
+import { Alert } from '@patternfly/react-core';
 
 import { PluginContentType } from '../../api';
 
@@ -40,7 +40,23 @@ class ReturnedValue {
 // Documentation for module doc string spec
 // https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_documenting.html
 
-export class RenderPluginDoc extends React.Component<IProps> {
+interface IState {
+    renderError: boolean;
+}
+
+export class RenderPluginDoc extends React.Component<IProps, IState> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            renderError: false,
+        };
+    }
+
+    componentDidCatch(error, info) {
+        console.log(error);
+        this.setState({ renderError: true });
+    }
+
     render() {
         const { plugin } = this.props;
 
@@ -48,37 +64,81 @@ export class RenderPluginDoc extends React.Component<IProps> {
         const example: string = this.parseExamples(plugin);
         const returnVals: ReturnedValue[] = this.parseReturn(plugin);
 
-        return (
-            <div className='pf-c-content'>
-                <h1>
-                    {plugin.content_type} > {plugin.content_name}
-                </h1>
-                <br />
-                {this.renderShortDescription(doc)}
-                {this.renderDescription(doc)}
-                {this.renderRequirements(doc)}
-                {this.renderParameters(doc.options, plugin.content_type)}
-                {this.renderNotes(doc)}
-                {this.renderExample(example)}
-                {this.renderReturnValues(returnVals)}
-            </div>
-        );
+        if (!this.state.renderError) {
+            return (
+                <div className='pf-c-content'>
+                    <h1>
+                        {plugin.content_type} > {plugin.content_name}
+                    </h1>
+                    <br />
+                    {this.renderShortDescription(doc)}
+                    {this.renderDescription(doc)}
+                    {this.renderRequirements(doc)}
+                    {this.renderParameters(doc.options, plugin.content_type)}
+                    {this.renderNotes(doc)}
+                    {this.renderExample(example)}
+                    {this.renderReturnValues(returnVals)}
+                </div>
+            );
+        } else {
+            // There's a good chance that something about the plugin doc data will
+            // be malformed since it isn't validated. When that hapens, show an
+            // error instead of crashing the whole app
+            return (
+                <React.Fragment>
+                    <Alert
+                        isInline
+                        variant='warning'
+                        title='Documentation Syntax Error: cannot parse plugin documention.'
+                    />
+                    <br />
+                    <div className='pf-c-content'>
+                        {plugin.content_type && plugin.content_name ? (
+                            <h1>
+                                {plugin.content_type} > {plugin.content_name}
+                            </h1>
+                        ) : null}
+                        <p>
+                            The documentation object for this plugin seems to
+                            contain invalid syntax that makes it impossible for
+                            Automation Hub to parse. You can still look at the
+                            unformatted documentation object bellow if you need
+                            to.
+                        </p>
+
+                        <h2>Unformatted Documentation</h2>
+
+                        <pre className='plugin-raw'>
+                            {JSON.stringify(plugin, null, 2)}
+                        </pre>
+                    </div>
+                </React.Fragment>
+            );
+        }
     }
 
     private parseDocString(plugin: PluginContentType): PluginDoc {
+        // TODO: if the parser can't figure out what to do with the object
+        // passed to it, it should throw an error that can be displayed to the
+        // user with the piece of the documention that's broken.
+
         // TODO: make the doc string match the desired output as closely as
         // possible
         if (!plugin.doc_strings) {
             return { description: [], shortDescription: '' } as PluginDoc;
         }
 
-        const doc = { ...plugin.doc_strings.doc };
+        const doc: PluginDoc = { ...plugin.doc_strings.doc };
 
         if (doc.options) {
             for (let op of doc.options) {
                 // Description is expected to be an array of strings. If its not,
                 // do what we can to make it one
                 op.description = this.ensureListofStrings(op.description);
+
+                if (typeof op.default === 'object') {
+                    op.default = JSON.stringify(op.default);
+                }
             }
         }
 
