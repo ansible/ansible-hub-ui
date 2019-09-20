@@ -6,3 +6,4 @@ declare module '@redhat-cloud-services/frontend-components';
 declare module 'axios-mock-adapter';
 declare module 'react-markdown';
 declare module '*.gif';
+declare module '*.svg';
