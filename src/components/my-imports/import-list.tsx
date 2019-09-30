@@ -25,8 +25,8 @@ interface IProps {
     namespaces: NamespaceType[];
     importList: ImportListType[];
     selectedImport: ImportListType;
-    noImportsExist: boolean;
     numberOfResults: number;
+    loading: boolean;
     params: {
         page_size?: number;
         page?: number;
@@ -57,10 +57,10 @@ export class ImportList extends React.Component<IProps, IState> {
             importList,
             selectedImport,
             namespaces,
-            noImportsExist,
             numberOfResults,
             params,
             updateParams,
+            loading,
         } = this.props;
 
         const { kwField } = this.state;
@@ -85,7 +85,7 @@ export class ImportList extends React.Component<IProps, IState> {
                         selectImport,
                         importList,
                         selectedImport,
-                        noImportsExist,
+                        loading,
                     )}
                 </div>
                 <Pagination
@@ -117,13 +117,15 @@ export class ImportList extends React.Component<IProps, IState> {
         this.props.updateParams(params);
     }
 
-    private renderList(
-        selectImport,
-        importList,
-        selectedImport,
-        noImportsExist,
-    ) {
-        if (noImportsExist) {
+    private renderList(selectImport, importList, selectedImport, loading) {
+        if (loading) {
+            return (
+                <div className='loading'>
+                    <Spinner centered={true} />
+                </div>
+            );
+        }
+        if (importList.length === 0) {
             return (
                 <EmptyState>
                     <EmptyStateIcon icon={InfoIcon} />
@@ -135,14 +137,6 @@ export class ImportList extends React.Component<IProps, IState> {
                         There have not been any imports on this namespace
                     </EmptyStateBody>
                 </EmptyState>
-            );
-        }
-
-        if (!importList) {
-            return (
-                <div className='loading'>
-                    <Spinner centered={true} />
-                </div>
             );
         }
 
