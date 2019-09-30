@@ -31,9 +31,10 @@ interface IState {
     };
     namespaces: NamespaceType[];
     resultsCount: number;
-    noImportsExist: boolean;
     importDetailError: string;
     followLogs: boolean;
+    loadingImports: boolean;
+    loadingImportDetails: boolean;
 }
 
 class MyImports extends React.Component<RouteComponentProps, IState> {
@@ -57,9 +58,10 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
             namespaces: [],
             selectedImportDetails: undefined,
             resultsCount: 0,
-            noImportsExist: false,
             importDetailError: '',
             followLogs: false,
+            loadingImports: true,
+            loadingImportDetails: true,
         };
     }
 
@@ -70,19 +72,19 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
             this.loadImportList(() => this.loadTaskDetails()),
         );
 
-        // TODO: disabling polling for now because it's hammering pulp and causing it crash
-
-        // this.polling = setInterval(() => {
-        //     if (
-        //         this.state.selectedImportDetails &&
-        //         (this.state.selectedImportDetails.state ===
-        //             PulpStatus.running ||
-        //             this.state.selectedImportDetails.state ===
-        //                 PulpStatus.waiting)
-        //     ) {
-        //         this.poll();
-        //     }
-        // }, 2000);
+        // TODO: setting polling to 10 sec for fest because it's hammering
+        // pulp
+        this.polling = setInterval(() => {
+            if (
+                this.state.selectedImportDetails &&
+                (this.state.selectedImportDetails.state ===
+                    PulpStatus.running ||
+                    this.state.selectedImportDetails.state ===
+                        PulpStatus.waiting)
+            ) {
+                this.poll();
+            }
+        }, 10000);
     }
 
     componentWillUnmount() {
@@ -97,7 +99,8 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
             namespaces,
             selectedImportDetails,
             resultsCount,
-            noImportsExist,
+            loadingImports,
+            loadingImportDetails,
             importDetailError,
             followLogs,
         } = this.state;
@@ -117,7 +120,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                                 <ImportList
                                     importList={importList}
                                     selectedImport={selectedImport}
-                                    noImportsExist={noImportsExist}
+                                    loading={loadingImports}
                                     numberOfResults={resultsCount}
                                     params={params}
                                     namespaces={namespaces}
@@ -126,8 +129,15 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                                     }
                                     updateParams={params => {
                                         this.updateParams(params, () =>
-                                            this.loadImportList(() =>
-                                                this.loadTaskDetails(),
+                                            this.setState(
+                                                {
+                                                    loadingImports: true,
+                                                    loadingImportDetails: true,
+                                                },
+                                                () =>
+                                                    this.loadImportList(() =>
+                                                        this.loadTaskDetails(),
+                                                    ),
                                             ),
                                         );
                                     }}
@@ -136,6 +146,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
 
                             <div className='import-console'>
                                 <ImportConsole
+                                    loading={loadingImportDetails}
                                     task={selectedImportDetails}
                                     followMessages={followLogs}
                                     setFollowMessages={isFollowing => {
@@ -159,12 +170,15 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
     }
 
     private selectImport(sImport) {
-        this.setState({ selectedImport: sImport }, () => {
-            this.topOfPage.current.scrollIntoView({
-                behavior: 'smooth',
-            });
-            this.loadTaskDetails();
-        });
+        this.setState(
+            { selectedImport: sImport, loadingImportDetails: true },
+            () => {
+                this.topOfPage.current.scrollIntoView({
+                    behavior: 'smooth',
+                });
+                this.loadTaskDetails();
+            },
+        );
     }
 
     private poll() {
@@ -244,6 +258,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                         importList: importList.data.data,
                         selectedImport: importList.data.data[0],
                         resultsCount: importList.data.meta.count,
+                        loadingImports: false,
                     },
                     callback,
                 );
@@ -255,7 +270,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
         if (!this.state.selectedImport) {
             this.setState({
                 importDetailError: 'No Data',
-                noImportsExist: true,
+                loadingImportDetails: false,
             });
         } else {
             ImportAPI.get(this.state.selectedImport.id)
@@ -263,7 +278,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                     this.setState(
                         {
                             importDetailError: '',
-                            noImportsExist: false,
+                            loadingImportDetails: false,
                             selectedImportDetails: result.data,
                         },
                         callback,
@@ -273,6 +288,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                     this.setState({
                         selectedImportDetails: undefined,
                         importDetailError: 'Error fetching import from API',
+                        loadingImportDetails: false,
                     });
                 });
         }

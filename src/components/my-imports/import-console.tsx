@@ -12,6 +12,7 @@ interface IProps {
     task: ImportDetailType;
     followMessages: boolean;
     selectedImport: ImportListType;
+    loading: boolean;
     apiError?: string;
 
     setFollowMessages: (follow: boolean) => void;
@@ -36,9 +37,9 @@ export class ImportConsole extends React.Component<IProps, {}> {
     }
 
     render() {
-        const { selectedImport, task, apiError } = this.props;
+        const { selectedImport, task, apiError, loading } = this.props;
 
-        if (!task || !selectedImport) {
+        if (loading || apiError) {
             return (
                 <div className='import-console'>
                     {selectedImport ? this.renderTitle(selectedImport) : null}
