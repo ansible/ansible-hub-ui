@@ -10,17 +10,7 @@ import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { PartnerHeader, NamespaceForm, ResourcesForm } from '../../components';
 import { NamespaceAPI, NamespaceType } from '../../api';
 
-interface IProps extends RouteComponentProps {}
-
-import {
-    Form,
-    ActionGroup,
-    Button,
-    Breadcrumb,
-    BreadcrumbItem,
-    Tab,
-    Tabs,
-} from '@patternfly/react-core';
+import { Form, ActionGroup, Button } from '@patternfly/react-core';
 
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -38,12 +28,7 @@ interface IState {
     };
 }
 
-enum TabKeys {
-    details = 1,
-    resources = 2,
-}
-
-class EditNamespace extends React.Component<IProps, IState> {
+class EditNamespace extends React.Component<RouteComponentProps, IState> {
     queryParams: URLSearchParams;
 
     constructor(props) {
@@ -144,7 +129,7 @@ class EditNamespace extends React.Component<IProps, IState> {
                                     Cancel
                                 </Button>
 
-                                {this.state.saving ? <Spinner></Spinner> : null}
+                                {saving ? <Spinner></Spinner> : null}
                             </ActionGroup>
                             {this.state.unsavedData ? (
                                 <div style={{ color: 'red' }}>
@@ -186,11 +171,19 @@ class EditNamespace extends React.Component<IProps, IState> {
                         }),
                     });
                 })
-                .catch(result => {
-                    this.setState({
-                        errorMessages: result.data,
-                        saving: false,
-                    });
+                .catch(error => {
+                    const result = error.response;
+                    if (result.status === 400) {
+                        const messages: any = {};
+                        for (const e of result.data.errors) {
+                            messages[e.source.parameter] = e.detail;
+                        }
+
+                        this.setState({
+                            errorMessages: messages,
+                            saving: false,
+                        });
+                    }
                 });
         });
     }

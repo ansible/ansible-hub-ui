@@ -30,8 +30,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
     }
 
     render() {
-        // TODO: Add error messages and validation
-        const { namespace } = this.props;
+        const { namespace, errorMessages } = this.props;
 
         if (!namespace) {
             return null;
@@ -55,7 +54,8 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                         <FormGroup
                             fieldId='company'
                             label='Company Name'
-                            isRequired
+                            helperTextInvalid={errorMessages['company']}
+                            isValid={!('company' in errorMessages)}
                         >
                             <TextInput
                                 isRequired
@@ -73,7 +73,12 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                     </div>
                 </div>
 
-                <FormGroup fieldId='avatar_url' label='Logo URL'>
+                <FormGroup
+                    fieldId='avatar_url'
+                    label='Logo URL'
+                    helperTextInvalid={errorMessages['avatar_url']}
+                    isValid={!('avatar_url' in errorMessages)}
+                >
                     <TextInput
                         id='avatar_url'
                         type='text'
@@ -84,7 +89,12 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                     />
                 </FormGroup>
 
-                <FormGroup fieldId='description' label='Description'>
+                <FormGroup
+                    fieldId='description'
+                    label='Description'
+                    helperTextInvalid={errorMessages['description']}
+                    isValid={!('description' in errorMessages)}
+                >
                     <TextArea
                         id='description'
                         type='text'
@@ -96,7 +106,16 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                 </FormGroup>
 
                 {namespace.links.length > 0 ? (
-                    <FormGroup fieldId='links' label='Useful Links'>
+                    <FormGroup
+                        fieldId='links'
+                        label='Useful Links'
+                        helperTextInvalid={
+                            errorMessages['name'] || errorMessages['url']
+                        }
+                        isValid={
+                            !('name' in errorMessages || 'url' in errorMessages)
+                        }
+                    >
                         {namespace.links.map((link, index) =>
                             this.renderLinkGroup(link, index),
                         )}
@@ -208,6 +227,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                 </div>
                 <div className='link-button'>
                     <MinusCircleIcon
+                        className='clickable'
                         onClick={() => this.removeLink(index)}
                         size='md'
                     />

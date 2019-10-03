@@ -6,6 +6,19 @@ import * as ReactMarkdown from 'react-markdown';
 
 import { NamespaceType } from '../../api';
 
+const placeholder = `## Custom Resources
+
+You can use this page to add any resources which you think might help your \
+users automate all the things.
+
+Consider using it for:
+
+- Links to blog posts
+- Training resources
+- Documentation
+- Cat gifs? If that's your thing :)
+`;
+
 interface IProps {
     namespace: NamespaceType;
 
@@ -15,6 +28,7 @@ interface IProps {
 export class ResourcesForm extends React.Component<IProps, {}> {
     render() {
         const { namespace } = this.props;
+
         return (
             <Form>
                 <div className='markdown-editor'>
@@ -29,6 +43,7 @@ export class ResourcesForm extends React.Component<IProps, {}> {
                                 id='resources'
                                 value={namespace.resources}
                                 onChange={value => this.updateResources(value)}
+                                placeholder={placeholder}
                             />
                         </FormGroup>
                     </div>
@@ -36,7 +51,11 @@ export class ResourcesForm extends React.Component<IProps, {}> {
                     <div className='column preview-container'>
                         Preview
                         <div className='pf-c-content preview'>
-                            <ReactMarkdown source={namespace.resources} />
+                            {namespace.resources ? (
+                                <ReactMarkdown source={namespace.resources} />
+                            ) : (
+                                <ReactMarkdown source={placeholder} />
+                            )}
                         </div>
                     </div>
                 </div>

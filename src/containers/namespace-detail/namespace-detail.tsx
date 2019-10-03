@@ -115,6 +115,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         if (!namespace) {
             return <LoadingPageWithHeader></LoadingPageWithHeader>;
         }
+
+        const tabs = ['Collections'];
+
+        if (namespace.resources) {
+            tabs.push('Resources');
+        }
+
         return (
             <React.Fragment>
                 <ImportModal
@@ -156,7 +163,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 <PartnerHeader
                     namespace={namespace}
                     breadcrumbs={breadcrumbs.concat([{ name: namespace.name }])}
-                    tabs={['Collections', 'Resources']}
+                    tabs={tabs}
                     params={params}
                     updateParams={p => this.updateParams(p)}
                     pageControls={this.renderPageControls()}
