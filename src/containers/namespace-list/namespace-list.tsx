@@ -12,7 +12,7 @@ import {
     Pagination,
     LoadingPageWithHeader,
 } from '../../components';
-import { NamespaceAPI, NamespaceListType, UserAPI } from '../../api';
+import { NamespaceAPI, NamespaceListType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 
 interface IState {
@@ -56,23 +56,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     componentDidMount() {
-        if (this.props.filterOwner) {
-            UserAPI.getCachedUser()
-                .then(result => {
-                    this.setState(
-                        {
-                            params: {
-                                ...this.state.params,
-                                tenant: result.account_number,
-                            },
-                        },
-                        () => this.loadNamespaces(),
-                    );
-                })
-                .catch(r => console.log(r));
-        } else {
-            this.loadNamespaces();
-        }
+        this.loadNamespaces();
     }
 
     render() {
@@ -130,7 +114,15 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     private loadNamespaces() {
-        NamespaceAPI.list(this.state.params).then(results => {
+        let apiFunc: any;
+
+        if (this.props.filterOwner) {
+            apiFunc = p => NamespaceAPI.getMyNamespaces(p);
+        } else {
+            apiFunc = p => NamespaceAPI.list(p);
+        }
+
+        apiFunc(this.state.params).then(results => {
             this.setState({
                 namespaces: results.data.data,
                 itemCount: results.data.meta.count,

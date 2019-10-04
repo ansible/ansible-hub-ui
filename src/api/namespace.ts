@@ -11,6 +11,10 @@ class API extends BaseAPI {
         // mocked responses will be removed when a real API is available
         // new MockNamespace(this.http, this.apiPath);
     }
+
+    getMyNamespaces(params: object) {
+        return this.list(params, 'v3/_ui/my-namespaces/');
+    }
 }
 
 export const NamespaceAPI = new API();
