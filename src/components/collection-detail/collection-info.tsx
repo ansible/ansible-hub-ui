@@ -37,10 +37,10 @@ export class CollectionInfo extends React.Component<IProps> {
             updateParams,
         } = this.props;
 
-        let installCommand = `ansible-galaxy install ${namespace.name}.${name}`;
+        let installCommand = `ansible-galaxy collection install ${namespace.name}.${name}`;
 
         if (params.version) {
-            installCommand += `,version=${params.version}`;
+            installCommand += `:${params.version}`;
         }
 
         return (
@@ -70,7 +70,14 @@ export class CollectionInfo extends React.Component<IProps> {
                                 Installation
                             </SplitItem>
                             <SplitItem isFilled>
-                                <ClipboardCopy>{installCommand}</ClipboardCopy>
+                                <ClipboardCopy isReadOnly>
+                                    {installCommand}
+                                </ClipboardCopy>
+                                <div>
+                                    <b>Note:</b> Installing collections with
+                                    ansible-galaxy is only supported in ansible
+                                    2.9+
+                                </div>
                             </SplitItem>
                         </Split>
                     </GridItem>
