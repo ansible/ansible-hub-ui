@@ -2,10 +2,30 @@ import * as React from 'react';
 import './table-of-contents.scss';
 
 import { Link } from 'react-router-dom';
+import { CaretDownIcon, CaretRightIcon } from '@patternfly/react-icons';
 
 import { DocsBlobType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
+
+class DocsEntry {
+    display: string;
+    name: string;
+    type: string;
+    url?: string;
+}
+
+interface IState {
+    table: {
+        documentation: DocsEntry[];
+        modules: DocsEntry[];
+        roles: DocsEntry[];
+        plugins: DocsEntry[];
+        playbooks: DocsEntry[];
+    };
+
+    collapsedCategories: string[];
+}
 
 interface IProps {
     docs_blob: DocsBlobType;
@@ -17,22 +37,15 @@ interface IProps {
     className?: string;
 }
 
-class DocsEntry {
-    display: string;
-    url?: string;
-    selected?: boolean;
-}
+export class TableOfContents extends React.Component<IProps, IState> {
+    // There's a lot of heavy processing that goes into formatting the table
+    // variable. To prevent running everything each time the component renders,
+    // we're moving the table variable into state and building it once when the
+    // component is loaded.
+    constructor(props) {
+        super(props);
 
-export class TableOfContents extends React.Component<IProps> {
-    render() {
-        const {
-            docs_blob,
-            namespace,
-            collection,
-            className,
-            selectedName,
-            selectedType,
-        } = this.props;
+        const { docs_blob, namespace, collection } = this.props;
 
         const baseUrlParams = {
             namespace: namespace,
@@ -50,7 +63,8 @@ export class TableOfContents extends React.Component<IProps> {
         table.documentation.push({
             display: 'Readme',
             url: formatPath(Paths.collectionDocsIndex, baseUrlParams),
-            selected: selectedType === 'docs' && !selectedName,
+            type: 'docs',
+            name: 'readme',
         });
 
         if (docs_blob.documentation_files) {
@@ -67,7 +81,9 @@ export class TableOfContents extends React.Component<IProps> {
                         ...baseUrlParams,
                         page: url,
                     }),
-                    selected: selectedType === 'docs' && selectedName === url,
+                    // selected: selectedType === 'docs' && selectedName === url,
+                    type: 'docs',
+                    name: url,
                 });
             }
         }
@@ -99,6 +115,18 @@ export class TableOfContents extends React.Component<IProps> {
             }
         }
 
+        // Sort docs
+        for (const k of Object.keys(table)) {
+            table[k].sort((a, b) => (a.display > b.display ? 1 : -1));
+        }
+
+        this.state = { table: table, collapsedCategories: [] };
+    }
+
+    render() {
+        const { className } = this.props;
+        const { table } = this.state;
+
         return (
             <div className={'pf-c-content toc-body ' + className}>
                 {Object.keys(table).map(key =>
@@ -110,10 +138,47 @@ export class TableOfContents extends React.Component<IProps> {
         );
     }
 
+    private toggleHeader(title) {
+        const i = this.state.collapsedCategories.findIndex(x => x === title);
+
+        if (i > -1) {
+            const newCollapsed = [...this.state.collapsedCategories];
+            newCollapsed.splice(i, 1);
+
+            this.setState({
+                collapsedCategories: newCollapsed,
+            });
+        } else {
+            this.setState({
+                collapsedCategories: this.state.collapsedCategories.concat([
+                    title,
+                ]),
+            });
+        }
+    }
+
     private renderLinks(links, title) {
+        if (this.state.collapsedCategories.includes(title)) {
+            return (
+                <div key={title}>
+                    <small
+                        className='category-header clickable'
+                        onClick={() => this.toggleHeader(title)}
+                    >
+                        <CaretRightIcon /> {title}
+                    </small>
+                </div>
+            );
+        }
+
         return (
             <div key={title}>
-                <small className='category-header'>{title}</small>
+                <small
+                    className='category-header clickable'
+                    onClick={() => this.toggleHeader(title)}
+                >
+                    <CaretDownIcon /> {title}
+                </small>
                 <div className='toc-nav'>
                     <ul>
                         {links.map((link: DocsEntry, i) => (
@@ -123,11 +188,13 @@ export class TableOfContents extends React.Component<IProps> {
                                     (title !== 'documentation'
                                         ? 'truncated '
                                         : ' ') +
-                                    (link.selected ? 'selected' : '')
+                                    (this.isSelected(link) ? 'selected' : '')
                                 }
                             >
                                 <Link
-                                    className={link.selected ? 'selected' : ''}
+                                    className={
+                                        this.isSelected(link) ? 'selected' : ''
+                                    }
                                     to={
                                         link.url +
                                         (Object.keys(this.props.params)
@@ -149,11 +216,25 @@ export class TableOfContents extends React.Component<IProps> {
         );
     }
 
+    private isSelected(entry: DocsEntry): boolean {
+        // the readme's url is always docs/, so load it when the name is null
+        if (!this.props.selectedName && entry.name === 'readme') {
+            return true;
+        }
+
+        return (
+            // selected name and type are the values found for type and name
+            // in the page url
+            this.props.selectedName === entry.name &&
+            this.props.selectedType === entry.type
+        );
+    }
+
     private capitalize(s: string) {
         return s.slice(0, 1).toUpperCase() + s.slice(1);
     }
 
-    private getContentEntry(content, base) {
+    private getContentEntry(content, base): DocsEntry {
         return {
             display: content.content_name,
             url: formatPath(Paths.collectionContentDocs, {
@@ -161,9 +242,8 @@ export class TableOfContents extends React.Component<IProps> {
                 type: content.content_type,
                 name: content.content_name,
             }),
-            selected:
-                this.props.selectedName === content.content_name &&
-                this.props.selectedType === content.content_type,
+            name: content.content_name,
+            type: content.content_type,
         };
     }
 }
