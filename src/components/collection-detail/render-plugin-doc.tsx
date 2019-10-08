@@ -35,6 +35,11 @@ class PluginDoc {
     options?: PluginOption[];
     requirements?: string[];
     notes?: string[];
+    deprecated?: {
+        removed_in?: string;
+        alternate?: string;
+        why?: string;
+    };
 }
 
 class ReturnedValue {
@@ -87,6 +92,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                     </h1>
                     <br />
                     {this.renderShortDescription(doc)}
+                    {this.renderDeprecated(doc, plugin.content_name)}
                     {this.renderDescription(doc)}
                     {this.renderRequirements(doc)}
                     {this.renderParameters(doc.options, plugin.content_type)}
@@ -342,6 +348,41 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         } else {
             return v;
         }
+    }
+
+    private renderDeprecated(doc: PluginDoc, pluginName: string) {
+        const isDeprecated = doc.deprecated || pluginName.startsWith('_');
+
+        if (!isDeprecated) {
+            return null;
+        }
+
+        const deprecated = doc.deprecated || {};
+
+        return (
+            <React.Fragment>
+                <h2>DEPRECATED</h2>
+                {deprecated.removed_in ? (
+                    <div>
+                        <b>Removed in version</b> {doc.deprecated.removed_in}
+                    </div>
+                ) : null}
+
+                <div>
+                    <b>Why: </b>
+                    {deprecated.why
+                        ? doc.deprecated.why
+                        : 'No reason specified.'}
+                </div>
+
+                <div>
+                    <b>Alternative: </b>
+                    {deprecated.why
+                        ? doc.deprecated.why
+                        : 'No alternatives specified.'}
+                </div>
+            </React.Fragment>
+        );
     }
 
     private renderShortDescription(doc: PluginDoc) {
