@@ -2,7 +2,7 @@ import * as React from 'react';
 import './table-of-contents.scss';
 
 import { Link } from 'react-router-dom';
-import { CaretDownIcon, CaretRightIcon } from '@patternfly/react-icons';
+import { CaretDownIcon, CaretLeftIcon } from '@patternfly/react-icons';
 
 import { DocsBlobType } from '../../api';
 import { Paths, formatPath } from '../../paths';
@@ -165,7 +165,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
                         className='category-header clickable'
                         onClick={() => this.toggleHeader(title)}
                     >
-                        <CaretRightIcon /> {title}
+                        {title} ({links.length}) <CaretLeftIcon />
                     </small>
                 </div>
             );
@@ -177,7 +177,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
                     className='category-header clickable'
                     onClick={() => this.toggleHeader(title)}
                 >
-                    <CaretDownIcon /> {title}
+                    {title} ({links.length}) <CaretDownIcon />
                 </small>
                 <div className='toc-nav'>
                     <ul>
