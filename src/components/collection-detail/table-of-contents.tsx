@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { DocsBlobType } from '../../api';
 import { Paths, formatPath } from '../../paths';
-import { ParamHelper } from '../../utilities/param-helper';
+import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
 
 interface IProps {
     docs_blob: DocsBlobType;
@@ -55,7 +55,7 @@ export class TableOfContents extends React.Component<IProps> {
 
         if (docs_blob.documentation_files) {
             for (const file of docs_blob.documentation_files) {
-                const url = file.name.replace('.', '-');
+                const url = sanitizeDocsUrls(file.name);
                 table.documentation.push({
                     display: this.capitalize(
                         file.name
@@ -65,7 +65,6 @@ export class TableOfContents extends React.Component<IProps> {
                     ),
                     url: formatPath(Paths.collectionDocsPage, {
                         ...baseUrlParams,
-                        // TODO: Find a better way to handle file extensions in urls
                         page: url,
                     }),
                     selected: selectedType === 'docs' && selectedName === url,
