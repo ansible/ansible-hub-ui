@@ -38,3 +38,11 @@
 .plugin-raw {
     white-space: pre-wrap;
 }
+
+.inline-code {
+    background-color: #e6e9e9;
+    font-family: var(--pf-global--FontFamily--monospace);
+    display: inline-block;
+    border-radius: 2px;
+    padding: 0px 2px 0px 2px;
+}

@@ -1,12 +1,22 @@
 import * as React from 'react';
 import './render-plugin-doc.scss';
 
+import { cloneDeep } from 'lodash';
 import { Alert } from '@patternfly/react-core';
+import { Link } from 'react-router-dom';
 
-import { PluginContentType } from '../../api';
+import { PluginContentType, ContentSummaryType } from '../../api';
+import { Paths, formatPath } from '../../paths';
+import { sanitizeDocsUrls } from '../../utilities';
 
 interface IProps {
     plugin: PluginContentType;
+    allContent: ContentSummaryType[];
+    collectionName: string;
+    namespaceName: string;
+    params: {
+        version?: string;
+    };
 }
 
 class PluginOption {
@@ -45,6 +55,11 @@ interface IState {
 }
 
 export class RenderPluginDoc extends React.Component<IProps, IState> {
+    // checks if I(), B(), M(), U(), L(), or C() exists. Returns type (ex: B)
+    // and value in parenthesis. Based off of formatters in ansible:
+    // https://github.com/ansible/ansible/blob/devel/hacking/build_library/build_ansible/jinja2/filters.py#L26
+    CUSTOM_FORMATTERS = /([IBMULC])\(([^)]+)\)/gm;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -182,6 +197,143 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         return plugin.doc_strings.return;
     }
 
+    // This functions similar to how string.replace() works, except it returns
+    // a react object instead of a string
+    private reactReplace(
+        text: string,
+        reg: RegExp,
+        replacement: (matches: string[]) => React.ReactNode,
+    ): React.ReactNode {
+        const fragments = [];
+
+        let match: string[];
+        let prevIndex = 0;
+        while ((match = reg.exec(text)) !== null) {
+            fragments.push(
+                text.substr(
+                    prevIndex,
+                    reg.lastIndex - prevIndex - match[0].length,
+                ),
+            );
+            fragments.push(replacement(match));
+            prevIndex = reg.lastIndex;
+        }
+
+        if (fragments.length === 0) {
+            return <span>{text}</span>;
+        }
+
+        // append any text after the last match
+        if (prevIndex != text.length - 1) {
+            fragments.push(text.substring(prevIndex));
+        }
+
+        return (
+            <span>
+                {fragments.map((x, i) => (
+                    <React.Fragment key={i}>{x}</React.Fragment>
+                ))}
+            </span>
+        );
+    }
+
+    private applyDocFormatters(text: string): React.ReactNode {
+        const {
+            collectionName,
+            namespaceName,
+            allContent,
+            params,
+        } = this.props;
+
+        const nstring = this.reactReplace(
+            text,
+            this.CUSTOM_FORMATTERS,
+            match => {
+                const fullMatch = match[0];
+                const type = match[1];
+                const textMatch = match[2];
+
+                switch (type) {
+                    case 'L':
+                        const url = textMatch.split(',');
+
+                        if (url[1].startsWith('http')) {
+                            return (
+                                <a href={url[1]} target='_blank'>
+                                    {url[0]}
+                                </a>
+                            );
+                        } else {
+                            // TODO: right now this will break if people put
+                            // ../ at the front of their urls. Need to find a
+                            // way to document this
+                            return (
+                                <Link
+                                    to={formatPath(
+                                        Paths.collectionDocsPage,
+                                        {
+                                            namespace: namespaceName,
+                                            collection: collectionName,
+                                            page: sanitizeDocsUrls(url[1]),
+                                        },
+                                        params,
+                                    )}
+                                >
+                                    {url[0]}
+                                </Link>
+                            );
+                        }
+                    case 'U':
+                        return (
+                            <a href={textMatch} target='_blank'>
+                                {textMatch}
+                            </a>
+                        );
+                    case 'I':
+                        return <i>{textMatch}</i>;
+                    case 'C':
+                        return <span className='inline-code'>{textMatch}</span>;
+                    case 'M':
+                        const module = allContent.find(
+                            x =>
+                                x.content_type === 'module' &&
+                                x.name === textMatch,
+                        );
+
+                        if (module) {
+                            // TODO: figure out how to make this use the Link
+                            // component so it doesn't reload the whole app
+                            return (
+                                <Link
+                                    to={formatPath(
+                                        Paths.collectionContentDocs,
+                                        {
+                                            namespace: namespaceName,
+                                            collection: collectionName,
+                                            type: module.content_type,
+                                            name: module.name,
+                                        },
+                                        params,
+                                    )}
+                                >
+                                    {textMatch}
+                                </Link>
+                            );
+                        } else {
+                            return textMatch;
+                        }
+                    case 'B':
+                        return <b>{textMatch}</b>;
+
+                    default:
+                        return fullMatch;
+                }
+            },
+        );
+
+        return nstring;
+    }
+
     private ensureListofStrings(v) {
         if (typeof v === 'string') {
             return [v];
@@ -202,7 +354,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                 <h2>Synopsis</h2>
                 <ul>
                     {doc.description.map((d, i) => (
-                        <li key={i}>{d}</li>
+                        <li key={i}>{this.applyDocFormatters(d)}</li>
                     ))}
                 </ul>
             </React.Fragment>
@@ -281,7 +433,9 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                                 }
                                 <td>
                                     {option.description.map((d, i) => (
-                                        <p key={i}>{d}</p>
+                                        <p key={i}>
+                                            {this.applyDocFormatters(d)}
+                                        </p>
                                     ))}
 
                                     {option['aliases'] ? (
@@ -392,7 +546,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                 <h2>Notes</h2>
                 <ul>
                     {doc.notes.map((note, i) => (
-                        <li key={i}>{note}</li>
+                        <li key={i}>{this.applyDocFormatters(note)}</li>
                     ))}
                 </ul>
             </div>
@@ -449,7 +603,9 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                                 </td>
                                 <td>{option.returned}</td>
                                 <td>
-                                    {option.description}
+                                    {this.applyDocFormatters(
+                                        option.description,
+                                    )}
                                     {option.sample ? (
                                         <div>
                                             <br />

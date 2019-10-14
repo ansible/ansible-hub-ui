@@ -21,7 +21,7 @@ import {
     LoadingPageWithHeader,
 } from '../../components';
 import { loadCollection, IBaseCollectionState } from './base';
-import { ParamHelper } from '../../utilities/param-helper';
+import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
 
 // renders markdown files in collection docs/ directory
@@ -66,9 +66,7 @@ class CollectionDocs extends React.Component<
         if (contentType === 'docs' && contentName) {
             if (collection.latest_version.docs_blob.documentation_files) {
                 const file = collection.latest_version.docs_blob.documentation_files.find(
-                    // TODO: insights crashes when you give it a .md page. Need to find
-                    // a more elegant solution to this problem
-                    x => x.name.replace('.', '-') === urlFields['page'],
+                    x => sanitizeDocsUrls(x.name) === urlFields['page'],
                 );
 
                 if (file) {
@@ -158,7 +156,17 @@ class CollectionDocs extends React.Component<
                                     ></div>
                                 ) : (
                                     // if plugin data is set render it
-                                    <RenderPluginDoc plugin={pluginData} />
+                                    <RenderPluginDoc
+                                        plugin={pluginData}
+                                        collectionName={collection.name}
+                                        namespaceName={
+                                            collection.namespace.name
+                                        }
+                                        allContent={
+                                            collection.latest_version.contents
+                                        }
+                                        params={params}
+                                    />
                                 )
                             ) : (
                                 this.renderNotFound(collection.name)
