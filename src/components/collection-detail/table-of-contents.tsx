@@ -1,8 +1,9 @@
 import * as React from 'react';
-import './table-of-contents.scss';
 
+import { capitalize } from 'lodash';
 import { Link } from 'react-router-dom';
-import { AngleDownIcon, AngleRightIcon } from '@patternfly/react-icons';
+
+import { Nav, NavExpandable, NavItem, NavList } from '@patternfly/react-core';
 
 import { DocsBlobType } from '../../api';
 import { Paths, formatPath } from '../../paths';
@@ -117,7 +118,17 @@ export class TableOfContents extends React.Component<IProps, IState> {
 
         // Sort docs
         for (const k of Object.keys(table)) {
-            table[k].sort((a, b) => (a.display > b.display ? 1 : -1));
+            table[k].sort((a, b) => {
+                // Make sure that anything starting with _ goes to the bottom
+                // of the list
+                if (a.display.startsWith('_') && !b.display.startsWith('_')) {
+                    return 1;
+                }
+                if (!a.display.startsWith('_') && b.display.startsWith('_')) {
+                    return -1;
+                }
+                return a.display > b.display ? 1 : -1;
+            });
         }
 
         this.state = { table: table, collapsedCategories: [] };
@@ -128,91 +139,62 @@ export class TableOfContents extends React.Component<IProps, IState> {
         const { table } = this.state;
 
         return (
-            <div className={'toc-body ' + className}>
-                {Object.keys(table).map(key =>
-                    table[key].length === 0
-                        ? null
-                        : this.renderLinks(table[key], key),
-                )}
+            <div className={className}>
+                <Nav>
+                    <NavList>
+                        {Object.keys(table).map(key =>
+                            table[key].length === 0
+                                ? null
+                                : this.renderLinks(table[key], key),
+                        )}
+                    </NavList>
+                </Nav>
             </div>
         );
-    }
-
-    private toggleHeader(title) {
-        const i = this.state.collapsedCategories.findIndex(x => x === title);
-
-        if (i > -1) {
-            const newCollapsed = [...this.state.collapsedCategories];
-            newCollapsed.splice(i, 1);
-
-            this.setState({
-                collapsedCategories: newCollapsed,
-            });
-        } else {
-            this.setState({
-                collapsedCategories: this.state.collapsedCategories.concat([
-                    title,
-                ]),
-            });
-        }
     }
 
     private renderLinks(links, title) {
         const isExpanded = !this.state.collapsedCategories.includes(title);
 
         return (
-            <div key={title}>
-                <div
-                    className='category-header clickable'
-                    onClick={() => this.toggleHeader(title)}
-                >
-                    <div>
-                        {title} ({links.length}){' '}
-                    </div>
-                    <div>
-                        {isExpanded ? <AngleDownIcon /> : <AngleRightIcon />}
-                    </div>
-                </div>
-                {isExpanded ? (
-                    <div className='toc-nav'>
-                        <ul>
-                            {links.map((link: DocsEntry, i) => (
-                                <li
-                                    key={i}
-                                    className={
-                                        (title !== 'documentation'
-                                            ? 'truncated '
-                                            : ' ') +
-                                        (this.isSelected(link)
-                                            ? 'selected'
-                                            : '')
-                                    }
-                                >
-                                    <Link
-                                        className={
-                                            this.isSelected(link)
-                                                ? 'selected'
-                                                : ''
-                                        }
-                                        to={
-                                            link.url +
-                                            (Object.keys(this.props.params)
-                                                .length != 0
-                                                ? '?' +
-                                                  ParamHelper.getQueryString(
-                                                      this.props.params,
-                                                  )
-                                                : '')
-                                        }
-                                    >
-                                        {link.display}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ) : null}
-            </div>
+            <NavExpandable
+                key={title}
+                title={capitalize(`${title} (${links.length})`)}
+                isExpanded={isExpanded}
+                isActive={this.getSelectedCategory() === title}
+            >
+                {links.map((link: DocsEntry, index) => (
+                    <NavItem key={index} isActive={this.isSelected(link)}>
+                        <Link
+                            style={{
+                                textOverflow: 'ellipses',
+                                overflow: 'hidden',
+                                whiteSpace: 'nowrap',
+                            }}
+                            to={
+                                link.url +
+                                (Object.keys(this.props.params).length != 0
+                                    ? '?' +
+                                      ParamHelper.getQueryString(
+                                          this.props.params,
+                                      )
+                                    : '')
+                            }
+                        >
+                            <span
+                                style={{
+                                    textOverflow: 'ellipsis',
+                                    overflow: 'hidden',
+                                    whiteSpace: 'nowrap',
+                                    display: 'block',
+                                }}
+                            >
+                                {link.display}
+                            </span>
+                        </Link>
+                    </NavItem>
+                ))}
+            </NavExpandable>
         );
     }
 
@@ -228,6 +210,23 @@ export class TableOfContents extends React.Component<IProps, IState> {
             this.props.selectedName === entry.name &&
             this.props.selectedType === entry.type
         );
+    }
+
+    private getSelectedCategory(): string {
+        const { selectedType } = this.props;
+        if (!selectedType || selectedType === 'docs') {
+            return 'documentation';
+        }
+
+        if (selectedType === 'role') {
+            return 'roles';
+        }
+
+        if (selectedType === 'module') {
+            return 'modules';
+        }
+
+        return 'plugins';
     }
 
     private capitalize(s: string) {
