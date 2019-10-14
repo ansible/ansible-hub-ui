@@ -10,6 +10,8 @@
 }
 
 .docs-container {
+    padding-top: 24px;
+    background-color: white;
     @media (min-width: $breakpoint-md) {
         display: flex;
     }
@@ -20,12 +22,14 @@
         max-width: 294px;
         border-right: 1px solid #d8d8d8;
         padding: 24px;
-        padding-top: 36px;
+        padding-top: 0px;
     }
 
     .docs {
         flex-grow: 1;
         padding: 24px;
+        padding-top: 0px;
+
         // make the height close to the height ofthe page so short docs don't
         // look weird
         min-height: calc(100vh - 250px);

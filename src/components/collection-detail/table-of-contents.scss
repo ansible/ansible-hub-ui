@@ -5,7 +5,9 @@
 
 .category-header {
     text-transform: capitalize;
-    margin-bottom: 0px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .toc-nav {

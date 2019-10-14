@@ -2,7 +2,7 @@ import * as React from 'react';
 import './table-of-contents.scss';
 
 import { Link } from 'react-router-dom';
-import { CaretDownIcon, CaretLeftIcon } from '@patternfly/react-icons';
+import { AngleDownIcon, AngleRightIcon } from '@patternfly/react-icons';
 
 import { DocsBlobType } from '../../api';
 import { Paths, formatPath } from '../../paths';
@@ -128,7 +128,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
         const { table } = this.state;
 
         return (
-            <div className={'pf-c-content toc-body ' + className}>
+            <div className={'toc-body ' + className}>
                 {Object.keys(table).map(key =>
                     table[key].length === 0
                         ? null
@@ -158,60 +158,60 @@ export class TableOfContents extends React.Component<IProps, IState> {
     }
 
     private renderLinks(links, title) {
-        if (this.state.collapsedCategories.includes(title)) {
-            return (
-                <div key={title}>
-                    <small
-                        className='category-header clickable'
-                        onClick={() => this.toggleHeader(title)}
-                    >
-                        {title} ({links.length}) <CaretLeftIcon />
-                    </small>
-                </div>
-            );
-        }
+        const isExpanded = !this.state.collapsedCategories.includes(title);
 
         return (
             <div key={title}>
-                <small
+                <div
                     className='category-header clickable'
                     onClick={() => this.toggleHeader(title)}
                 >
-                    {title} ({links.length}) <CaretDownIcon />
-                </small>
-                <div className='toc-nav'>
-                    <ul>
-                        {links.map((link: DocsEntry, i) => (
-                            <li
-                                key={i}
-                                className={
-                                    (title !== 'documentation'
-                                        ? 'truncated '
-                                        : ' ') +
-                                    (this.isSelected(link) ? 'selected' : '')
-                                }
-                            >
-                                <Link
+                    <div>
+                        {title} ({links.length}){' '}
+                    </div>
+                    <div>
+                        {isExpanded ? <AngleDownIcon /> : <AngleRightIcon />}
+                    </div>
+                </div>
+                {isExpanded ? (
+                    <div className='toc-nav'>
+                        <ul>
+                            {links.map((link: DocsEntry, i) => (
+                                <li
+                                    key={i}
                                     className={
-                                        this.isSelected(link) ? 'selected' : ''
-                                    }
-                                    to={
-                                        link.url +
-                                        (Object.keys(this.props.params)
-                                            .length != 0
-                                            ? '?' +
-                                              ParamHelper.getQueryString(
-                                                  this.props.params,
-                                              )
+                                        (title !== 'documentation'
+                                            ? 'truncated '
+                                            : ' ') +
+                                        (this.isSelected(link)
+                                            ? 'selected'
                                             : '')
                                     }
                                 >
-                                    {link.display}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                                    <Link
+                                        className={
+                                            this.isSelected(link)
+                                                ? 'selected'
+                                                : ''
+                                        }
+                                        to={
+                                            link.url +
+                                            (Object.keys(this.props.params)
+                                                .length != 0
+                                                ? '?' +
+                                                  ParamHelper.getQueryString(
+                                                      this.props.params,
+                                                  )
+                                                : '')
+                                        }
+                                    >
+                                        {link.display}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ) : null}
             </div>
         );
     }
