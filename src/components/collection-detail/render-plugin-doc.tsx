@@ -44,7 +44,7 @@ class PluginDoc {
 
 class ReturnedValue {
     name: string;
-    description: string;
+    description: string[];
     returned: string;
     type: string;
     // if string: display the value, if object or list return JSON
@@ -198,9 +198,10 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         for (let r of plugin.doc_strings.return) {
             returnV.push({
                 ...r,
+                description: this.ensureListofStrings(r.description),
             });
         }
-        return plugin.doc_strings.return;
+        return returnV;
     }
 
     // This functions similar to how string.replace() works, except it returns
@@ -644,9 +645,12 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                                 </td>
                                 <td>{option.returned}</td>
                                 <td>
-                                    {this.applyDocFormatters(
-                                        option.description,
-                                    )}
+                                    {option.description.map((d, i) => (
+                                        <p key={i}>
+                                            {this.applyDocFormatters(d)}
+                                        </p>
+                                    ))}
+
                                     {option.sample ? (
                                         <div>
                                             <br />
