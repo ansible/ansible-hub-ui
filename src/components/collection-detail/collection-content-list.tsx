@@ -6,7 +6,6 @@ import {
     TextInput,
     Toolbar,
     ToolbarGroup,
-    ToolbarSection,
     ToolbarItem,
 } from '@patternfly/react-core';
 
