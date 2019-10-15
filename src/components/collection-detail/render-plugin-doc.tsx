@@ -84,6 +84,16 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         const example: string = this.parseExamples(plugin);
         const returnVals: ReturnedValue[] = this.parseReturn(plugin);
 
+        const content: any = {
+          "synopsis": this.renderSynopsis(doc),
+          "parameters": this.renderParameters(doc.options, plugin.content_type),
+          "notes": this.renderNotes(doc),
+          "see-also": null,
+          "examples": this.renderExample(example),
+          "return-values": this.renderReturnValues(returnVals),
+          "status": null
+        }
+
         if (!this.state.renderError) {
             return (
                 <div className='pf-c-content'>
@@ -91,14 +101,15 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                         {plugin.content_type} > {plugin.content_name}
                     </h1>
                     <br />
+                    {this.renderTableOfContents(content)}
                     {this.renderShortDescription(doc)}
                     {this.renderDeprecated(doc, plugin.content_name)}
-                    {this.renderSynopsis(doc)}
+                    {content["synopsis"]}
                     {this.renderRequirements(doc)}
-                    {this.renderParameters(doc.options, plugin.content_type)}
-                    {this.renderNotes(doc)}
-                    {this.renderExample(example)}
-                    {this.renderReturnValues(returnVals)}
+                    {content["parameters"]}
+                    {content["notes"]}
+                    {content["examples"]}
+                    {content["return-values"]}
                 </div>
             );
         } else {
@@ -383,6 +394,38 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                 </div>
             </React.Fragment>
         );
+    }
+
+    private renderTableOfContents(content: any) {
+      return (
+            <ul>
+              {content["synopsis"] !== null &&
+                  <li>
+                      <Link to="#synopsis">Synopsis</Link>
+                  </li>
+              }
+              {content["parameters"] !== null &&
+                  <li>
+                      <Link to="#parameters">Parameters</Link>
+                  </li>
+              }
+              {content["notes"] !== null &&
+                  <li>
+                      <Link to="#notes">Notes</Link>
+                  </li>
+              }
+              {content["examples"] !== null &&
+                  <li>
+                      <Link to="#examples">Examples</Link>
+                  </li>
+              }
+              {content["return-values"] !== null &&
+                  <li>
+                      <Link to="#return-values">Return Values</Link>
+                  </li>
+              }
+            </ul>
+          );
     }
 
     private renderShortDescription(doc: PluginDoc) {
