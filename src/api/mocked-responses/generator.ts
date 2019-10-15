@@ -16,7 +16,7 @@ export class RandomGenerator {
         'compliance',
         'plugins',
         'modules',
-        'roles'
+        'roles',
     ];
 
     static randNum(max) {
