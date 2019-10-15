@@ -93,7 +93,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                     <br />
                     {this.renderShortDescription(doc)}
                     {this.renderDeprecated(doc, plugin.content_name)}
-                    {this.renderDescription(doc)}
+                    {this.renderSynopsis(doc)}
                     {this.renderRequirements(doc)}
                     {this.renderParameters(doc.options, plugin.content_type)}
                     {this.renderNotes(doc)}
@@ -389,7 +389,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         return <div>{doc['short_description']}</div>;
     }
 
-    private renderDescription(doc: PluginDoc) {
+    private renderSynopsis(doc: PluginDoc) {
         return (
             <React.Fragment>
                 <h2>Synopsis</h2>
