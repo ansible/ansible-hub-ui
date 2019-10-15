@@ -88,10 +88,8 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
           "synopsis": this.renderSynopsis(doc),
           "parameters": this.renderParameters(doc.options, plugin.content_type),
           "notes": this.renderNotes(doc),
-          "see-also": null,
           "examples": this.renderExample(example),
           "return-values": this.renderReturnValues(returnVals),
-          "status": null
         }
 
         if (!this.state.renderError) {
@@ -101,9 +99,9 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                         {plugin.content_type} > {plugin.content_name}
                     </h1>
                     <br />
-                    {this.renderTableOfContents(content)}
                     {this.renderShortDescription(doc)}
                     {this.renderDeprecated(doc, plugin.content_name)}
+                    {this.renderTableOfContents(content)}
                     {content["synopsis"]}
                     {this.renderRequirements(doc)}
                     {content["parameters"]}
