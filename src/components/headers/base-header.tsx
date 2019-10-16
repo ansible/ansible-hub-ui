@@ -36,7 +36,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
                         {imageURL ? (
                             <Logo
                                 className='image'
-                                alt='Page Logo'
+                                alt='Page logo'
                                 image={imageURL}
                                 size='50px'
                             />

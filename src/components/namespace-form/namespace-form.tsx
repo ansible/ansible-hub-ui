@@ -53,7 +53,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
 
                         <FormGroup
                             fieldId='company'
-                            label='Company Name'
+                            label='Company name'
                             helperTextInvalid={errorMessages['company']}
                             isValid={!('company' in errorMessages)}
                         >
@@ -108,7 +108,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                 {namespace.links.length > 0 ? (
                     <FormGroup
                         fieldId='links'
-                        label='Useful Links'
+                        label='Useful links'
                         helperTextInvalid={
                             errorMessages['name'] || errorMessages['url']
                         }
@@ -122,13 +122,13 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                     </FormGroup>
                 ) : null}
 
-                <FormGroup fieldId='add_link' label='Add Link'>
+                <FormGroup fieldId='add_link' label='Add link'>
                     <div className='useful-links'>
                         <div className='link-name'>
                             <TextInput
                                 id='name'
                                 type='text'
-                                placeholder='Link Text'
+                                placeholder='Link text'
                                 value={this.state.newLinkName}
                                 onChange={value => {
                                     this.setState({
@@ -141,7 +141,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                             <TextInput
                                 id='url'
                                 type='text'
-                                placeholder='Link Url'
+                                placeholder='Link URL'
                                 value={this.state.newLinkURL}
                                 onChange={value =>
                                     this.setState({
@@ -207,7 +207,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                     <TextInput
                         id='name'
                         type='text'
-                        placeholder='Link Text'
+                        placeholder='Link text'
                         value={link.name}
                         onChange={(value, event) =>
                             this.updateLink(index, value, event)

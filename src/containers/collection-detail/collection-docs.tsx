@@ -183,7 +183,7 @@ class CollectionDocs extends React.Component<
             <EmptyState className='empty' variant={EmptyStateVariant.full}>
                 <EmptyStateIcon icon={WarningTriangleIcon} />
                 <Title headingLevel='h2' size='lg'>
-                    Not Found
+                    Not found
                 </Title>
                 <EmptyStateBody>
                     The file you're looking for doesn't seem to be available in

@@ -111,14 +111,14 @@ class Search extends React.Component<RouteComponentProps, IState> {
                                     id: 'download_count',
                                     title: 'Downloads',
                                 },
-                                { id: 'best_match', title: 'Best Match' },
+                                { id: 'best_match', title: 'Best match' },
                             ]}
                             updateParams={p =>
                                 this.updateParams(p, () =>
                                     this.queryCollections(),
                                 )
                             }
-                            searchPlaceholder='Search Collections'
+                            searchPlaceholder='Search collections'
                         />
 
                         <Pagination

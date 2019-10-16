@@ -85,7 +85,7 @@ export class CollectionHeader extends React.Component<IProps> {
                             items={[
                                 <DropdownItem key='1'>
                                     <Link to={Paths.token} target='_blank'>
-                                        Get API Token
+                                        Get API token
                                     </Link>
                                 </DropdownItem>,
                             ]}

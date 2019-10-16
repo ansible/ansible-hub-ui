@@ -77,7 +77,7 @@ export class ImportList extends React.Component<IProps, IState> {
                     onKeyPress={e => this.handleEnter(e)}
                     type='search'
                     aria-label='search text input'
-                    placeholder='Find Import'
+                    placeholder='Find import'
                     className='search-box'
                 />
                 <div>
@@ -130,7 +130,7 @@ export class ImportList extends React.Component<IProps, IState> {
                 <EmptyState>
                     <EmptyStateIcon icon={InfoIcon} />
                     <Title size='lg' headingLevel='h5'>
-                        No Imports
+                        No imports
                     </Title>
 
                     <EmptyStateBody>

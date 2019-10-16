@@ -77,7 +77,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                 <PartnerHeader
                     namespace={namespace}
                     breadcrumbs={[
-                        { name: 'My Namespaces', url: Paths.myNamespaces },
+                        { name: 'My namespaces', url: Paths.myNamespaces },
                         {
                             name: namespace.name,
                             url: formatPath(Paths.myCollections, {
@@ -86,7 +86,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                         },
                         { name: 'Edit' },
                     ]}
-                    tabs={['Edit Details', 'Edit Resources']}
+                    tabs={['Edit details', 'Edit resources']}
                     params={params}
                     updateParams={p => this.updateParams(p)}
                 ></PartnerHeader>

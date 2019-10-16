@@ -72,7 +72,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
                         <Tooltip
                             position='left'
                             content={
-                                this.isLoading ? 'Follow Logs' : 'Scroll to End'
+                                this.isLoading ? 'Follow logs' : 'Scroll to end'
                             }
                         >
                             <span
@@ -141,7 +141,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
 
                     {task && task.error ? (
                         <div>
-                            <span className='data-title'>Error Message: </span>
+                            <span className='data-title'>Error message: </span>
                             {task.error.code}
                             <div>{task.error.description}</div>
                             <div>{task.error.traceback}</div>

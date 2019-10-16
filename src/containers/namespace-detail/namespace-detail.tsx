@@ -256,7 +256,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 <Button
                     onClick={() => this.setState({ showImportModal: true })}
                 >
-                    Upload Collection
+                    Upload collection
                 </Button>
                 <StatefulDropdown
                     items={[
@@ -266,7 +266,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                                     namespace: this.state.namespace.name,
                                 })}
                             >
-                                Edit Namespace
+                                Edit namespace
                             </Link>
                         </DropdownItem>,
                         <DropdownItem key='2'>
@@ -282,7 +282,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                         </DropdownItem>,
                         <DropdownItem key='3'>
                             <Link to={Paths.token} target='_blank'>
-                                Get API Token
+                                Get API token
                             </Link>
                         </DropdownItem>,
                     ]}

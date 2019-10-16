@@ -112,7 +112,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
         return (
             <React.Fragment>
                 <div ref={this.topOfPage}></div>
-                <BaseHeader title='My Imports' />
+                <BaseHeader title='My imports' />
                 <Main>
                     <Section className='body'>
                         <div className='page-container'>
@@ -269,7 +269,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
     private loadTaskDetails(callback?: () => void) {
         if (!this.state.selectedImport) {
             this.setState({
-                importDetailError: 'No Data',
+                importDetailError: 'No data',
                 loadingImportDetails: false,
             });
         } else {
