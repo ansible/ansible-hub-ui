@@ -395,35 +395,35 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     }
 
     private renderTableOfContents(content: any) {
-      return (
+        return (
             <ul>
-              {content["synopsis"] !== null &&
-                  <li>
-                      <Link to="#synopsis">Synopsis</Link>
-                  </li>
-              }
-              {content["parameters"] !== null &&
-                  <li>
-                      <Link to="#parameters">Parameters</Link>
-                  </li>
-              }
-              {content["notes"] !== null &&
-                  <li>
-                      <Link to="#notes">Notes</Link>
-                  </li>
-              }
-              {content["examples"] !== null &&
-                  <li>
-                      <Link to="#examples">Examples</Link>
-                  </li>
-              }
-              {content["return-values"] !== null &&
-                  <li>
-                      <Link to="#return-values">Return Values</Link>
-                  </li>
-              }
+                {content["synopsis"] !== null &&
+                    <li>
+                        <Link to="#synopsis">Synopsis</Link>
+                    </li>
+                }
+                {content["parameters"] !== null &&
+                    <li>
+                        <Link to="#parameters">Parameters</Link>
+                    </li>
+                }
+                {content["notes"] !== null &&
+                    <li>
+                        <Link to="#notes">Notes</Link>
+                    </li>
+                }
+                {content["examples"] !== null &&
+                    <li>
+                        <Link to="#examples">Examples</Link>
+                    </li>
+                }
+                {content["return-values"] !== null &&
+                    <li>
+                        <Link to="#return-values">Return Values</Link>
+                    </li>
+                }
             </ul>
-          );
+        );
     }
 
     private renderShortDescription(doc: PluginDoc) {
@@ -433,14 +433,12 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     private renderSynopsis(doc: PluginDoc) {
         return (
             <React.Fragment>
-                <div id="synopsis">
-                    <h2>Synopsis</h2>
-                    <ul>
-                        {doc.description.map((d, i) => (
-                            <li key={i}>{this.applyDocFormatters(d)}</li>
-                        ))}
-                    </ul>
-                </div>
+                <h2 id="synopsis">Synopsis</h2>
+                <ul>
+                    {doc.description.map((d, i) => (
+                        <li key={i}>{this.applyDocFormatters(d)}</li>
+                    ))}
+                </ul>
             </React.Fragment>
         );
     }
@@ -451,92 +449,90 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
         return (
             <React.Fragment>
-                <div id="parameters">
-                    <h2>Parameters</h2>
-                    <table className='options-table'>
-                        <tbody>
-                            <tr>
-                                <th>Parameter</th>
-                                <th>
-                                    Choices/<span className='blue'>Defaults</span>
-                                </th>
-                                {content_type !== 'module' ? (
-                                    <th>Configuration</th>
-                                ) : null}
-                                <th>Comments</th>
-                            </tr>
-                            {
-                                // TODO: add support for sub options. Example:
-                                //https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/network/fortios/fortios_dlp_fp_doc_source.py#L93}
-                                // TODO: do we need to display version added?
-                            }
-                            {parameters.map((option, i) => (
-                                <tr key={i}>
-                                    {
-                                        // PARAMETER --------------------------------
-                                    }
-                                    <td>
-                                        <span className='option-name'>
-                                            {option.name}
-                                        </span>
-                                        <small>
-                                            {this.documentedType(option['type'])}
-                                            {option['elements'] ? (
-                                                <span>
-                                                    {' '}
-                                                    / elements =
-                                                    {this.documentedType(
-                                                        option['elements'],
-                                                    )}
-                                                </span>
-                                            ) : null}
-                                            {option['required'] ? (
-                                                <span>
-                                                    {' '}
-                                                    /{' '}
-                                                    <span className='red'>
-                                                        required
-                                                    </span>
-                                                </span>
-                                            ) : null}
-                                        </small>
-                                    </td>
-                                    {
-                                        // CHOICES -------------------------------
-                                    }
-                                    <td>{this.renderChoices(option)}</td>
-                                    {
-                                        // CONFIGURATION (non module only) -------
-                                    }
-                                    {content_type !== 'module' ? (
-                                        <td>
-                                            {this.renderPluginConfiguration(option)}
-                                        </td>
-                                    ) : null}
-                                    {
-                                        // COMMENTS ------------------------------
-                                    }
-                                    <td>
-                                        {option.description.map((d, i) => (
-                                            <p key={i}>
-                                                {this.applyDocFormatters(d)}
-                                            </p>
-                                        ))}
-
-                                        {option['aliases'] ? (
-                                            <small>
-                                                <span className='green'>
-                                                    aliases:{' '}
-                                                    {option['aliases'].join(', ')}
-                                                </span>
-                                            </small>
+                <h2 id="parameters">Parameters</h2>
+                <table className='options-table'>
+                    <tbody>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>
+                                Choices/<span className='blue'>Defaults</span>
+                            </th>
+                            {content_type !== 'module' ? (
+                                <th>Configuration</th>
+                            ) : null}
+                            <th>Comments</th>
+                        </tr>
+                        {
+                            // TODO: add support for sub options. Example:
+                            //https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/network/fortios/fortios_dlp_fp_doc_source.py#L93}
+                            // TODO: do we need to display version added?
+                        }
+                        {parameters.map((option, i) => (
+                            <tr key={i}>
+                                {
+                                    // PARAMETER --------------------------------
+                                }
+                                <td>
+                                    <span className='option-name'>
+                                        {option.name}
+                                    </span>
+                                    <small>
+                                        {this.documentedType(option['type'])}
+                                        {option['elements'] ? (
+                                            <span>
+                                                {' '}
+                                                / elements =
+                                                {this.documentedType(
+                                                    option['elements'],
+                                                )}
+                                            </span>
                                         ) : null}
+                                        {option['required'] ? (
+                                            <span>
+                                                {' '}
+                                                /{' '}
+                                                <span className='red'>
+                                                    required
+                                                </span>
+                                            </span>
+                                        ) : null}
+                                    </small>
+                                </td>
+                                {
+                                    // CHOICES -------------------------------
+                                }
+                                <td>{this.renderChoices(option)}</td>
+                                {
+                                    // CONFIGURATION (non module only) -------
+                                }
+                                {content_type !== 'module' ? (
+                                    <td>
+                                        {this.renderPluginConfiguration(option)}
                                     </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                                ) : null}
+                                {
+                                    // COMMENTS ------------------------------
+                                }
+                                <td>
+                                    {option.description.map((d, i) => (
+                                        <p key={i}>
+                                            {this.applyDocFormatters(d)}
+                                        </p>
+                                    ))}
+
+                                    {option['aliases'] ? (
+                                        <small>
+                                            <span className='green'>
+                                                aliases:{' '}
+                                                {option['aliases'].join(', ')}
+                                            </span>
+                                        </small>
+                                    ) : null}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </React.Fragment>
         );
     }
@@ -628,14 +624,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
 
         return (
-            <div id="notes">
-                <h2>Notes</h2>
+            <React.Fragment>
+                <h2 id="notes">Notes</h2>
                 <ul>
                     {doc.notes.map((note, i) => (
                         <li key={i}>{this.applyDocFormatters(note)}</li>
                     ))}
                 </ul>
-            </div>
+            </React.Fragment>
         );
     }
 
@@ -645,14 +641,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
 
         return (
-            <div>
+            <React.Fragment>
                 <h2>Requirements</h2>
                 <ul>
                     {doc.requirements.map((req, i) => (
                         <li key={i}>{req}</li>
                     ))}
                 </ul>
-            </div>
+            </React.Fragment>
         );
     }
 
@@ -662,10 +658,8 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
         return (
             <React.Fragment>
-                <div id="examples">
-                    <h2>Examples</h2>
-                    <pre>{example}</pre>
-                </div>
+                <h2 id="examples">Examples</h2>
+                <pre>{example}</pre>
             </React.Fragment>
         );
     }
@@ -676,49 +670,47 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
         return (
             <React.Fragment>
-                <div id="return-values">
-                    <h2>Return Values</h2>
-                    <table className='options-table'>
-                        <tbody>
-                            <tr>
-                                <th>Key</th>
-                                <th>Returned</th>
-                                <th>Description</th>
+                <h2 id="return-values">Return Values</h2>
+                <table className='options-table'>
+                    <tbody>
+                        <tr>
+                            <th>Key</th>
+                            <th>Returned</th>
+                            <th>Description</th>
+                        </tr>
+                        {returnV.map((option, i) => (
+                            <tr key={i}>
+                                <td>
+                                    {option.name} <br /> ({option.type})
+                                </td>
+                                <td>{option.returned}</td>
+                                <td>
+                                    {this.applyDocFormatters(
+                                        option.description,
+                                    )}
+                                    {option.sample ? (
+                                        <div>
+                                            <br />
+                                            sample:
+                                            {typeof option.sample ===
+                                            'string' ? (
+                                                option.sample
+                                            ) : (
+                                                <pre>
+                                                    {JSON.stringify(
+                                                        option.sample,
+                                                        null,
+                                                        2,
+                                                    )}
+                                                </pre>
+                                            )}
+                                        </div>
+                                    ) : null}
+                                </td>
                             </tr>
-                            {returnV.map((option, i) => (
-                                <tr key={i}>
-                                    <td>
-                                        {option.name} <br /> ({option.type})
-                                    </td>
-                                    <td>{option.returned}</td>
-                                    <td>
-                                        {this.applyDocFormatters(
-                                            option.description,
-                                        )}
-                                        {option.sample ? (
-                                            <div>
-                                                <br />
-                                                sample:
-                                                {typeof option.sample ===
-                                                'string' ? (
-                                                    option.sample
-                                                ) : (
-                                                    <pre>
-                                                        {JSON.stringify(
-                                                            option.sample,
-                                                            null,
-                                                            2,
-                                                        )}
-                                                    </pre>
-                                                )}
-                                            </div>
-                                        ) : null}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                        ))}
+                    </tbody>
+                </table>
             </React.Fragment>
         );
     }
