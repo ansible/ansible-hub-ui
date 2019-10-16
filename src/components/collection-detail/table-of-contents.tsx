@@ -16,15 +16,15 @@ class DocsEntry {
     url?: string;
 }
 
-interface IState {
-    table: {
-        documentation: DocsEntry[];
-        modules: DocsEntry[];
-        roles: DocsEntry[];
-        plugins: DocsEntry[];
-        playbooks: DocsEntry[];
-    };
+class Table {
+    documentation: DocsEntry[];
+    modules: DocsEntry[];
+    roles: DocsEntry[];
+    plugins: DocsEntry[];
+    playbooks: DocsEntry[];
+}
 
+interface IState {
     collapsedCategories: string[];
 }
 
@@ -39,14 +39,50 @@ interface IProps {
 }
 
 export class TableOfContents extends React.Component<IProps, IState> {
-    // There's a lot of heavy processing that goes into formatting the table
-    // variable. To prevent running everything each time the component renders,
-    // we're moving the table variable into state and building it once when the
-    // component is loaded.
+    docsBlobCache: DocsBlobType;
+    tableCache: Table;
+
     constructor(props) {
         super(props);
 
-        const { docs_blob, namespace, collection } = this.props;
+        this.state = { collapsedCategories: [] };
+    }
+
+    render() {
+        const { className, docs_blob } = this.props;
+
+        // There's a lot of heavy processing that goes into formatting the table
+        // variable. To prevent running everything each time the component renders,
+        // cache the value as an object property.
+        // This is a lazy anti pattern. I should be using memoization or something
+        // like that, but the react docs recommend using a third party memoization
+        // library and I am not going to add extra dependencies just for this
+        // component https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization
+
+        if (!this.tableCache || this.docsBlobCache !== docs_blob) {
+            this.tableCache = this.parseLinks(docs_blob);
+            this.docsBlobCache = docs_blob;
+        }
+
+        const table = this.tableCache;
+
+        return (
+            <div className={className}>
+                <Nav>
+                    <NavList>
+                        {Object.keys(table).map(key =>
+                            table[key].length === 0
+                                ? null
+                                : this.renderLinks(table[key], key),
+                        )}
+                    </NavList>
+                </Nav>
+            </div>
+        );
+    }
+
+    private parseLinks(docs_blob: DocsBlobType): Table {
+        const { namespace, collection } = this.props;
 
         const baseUrlParams = {
             namespace: namespace,
@@ -131,26 +167,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
             });
         }
 
-        this.state = { table: table, collapsedCategories: [] };
-    }
-
-    render() {
-        const { className } = this.props;
-        const { table } = this.state;
-
-        return (
-            <div className={className}>
-                <Nav>
-                    <NavList>
-                        {Object.keys(table).map(key =>
-                            table[key].length === 0
-                                ? null
-                                : this.renderLinks(table[key], key),
-                        )}
-                    </NavList>
-                </Nav>
-            </div>
-        );
+        return table;
     }
 
     private renderLinks(links, title) {
