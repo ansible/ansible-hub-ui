@@ -6,7 +6,7 @@ import * as ReactMarkdown from 'react-markdown';
 
 import { NamespaceType } from '../../api';
 
-const placeholder = `## Custom Resources
+const placeholder = `## Custom resources
 
 You can use this page to add any resources which you think might help your \
 users automate all the things.

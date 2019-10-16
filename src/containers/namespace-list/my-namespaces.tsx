@@ -11,7 +11,7 @@ class MyNamespaces extends React.Component<RouteComponentProps, {}> {
             <NamespaceList
                 {...this.props}
                 namespacePath={Paths.myCollections}
-                title='My Namespaces'
+                title='My namespaces'
                 filterOwner={true}
             />
         );

@@ -13,7 +13,7 @@ class NotFound extends React.Component<RouteComponentProps, {}> {
     render() {
         return (
             <React.Fragment>
-                <BaseHeader title='404 - Page Not Found'></BaseHeader>
+                <BaseHeader title='404 - Page not found'></BaseHeader>
                 <Main>
                     <Section className='body'>
                         <Bullseye className='bullseye'>

@@ -66,7 +66,7 @@ export class CollectionList extends React.Component<IProps, IState> {
                         sortOptions={[
                             { title: 'Name', id: 'name' },
                             {
-                                title: 'Last Updated',
+                                title: 'Last updated',
                                 id: 'created',
                             },
                         ]}
@@ -104,7 +104,7 @@ export class CollectionList extends React.Component<IProps, IState> {
                         >
                             <EmptyStateIcon icon={WarningTriangleIcon} />
                             <Title headingLevel='h2' size='lg'>
-                                No Collections Found
+                                No collections found
                             </Title>
                         </EmptyState>
                     )}
@@ -143,7 +143,7 @@ export class CollectionList extends React.Component<IProps, IState> {
                     onClick={() => this.props.handleControlClick(id, 'upload')}
                     variant='secondary'
                 >
-                    Upload New Version
+                    Upload new version
                 </Button>
                 <StatefulDropdown
                     items={[

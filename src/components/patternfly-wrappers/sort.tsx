@@ -111,7 +111,7 @@ export class Sort extends React.Component<IProps, IState> {
                 {options.length > 1 ? (
                     <Select
                         variant={SelectVariant.single}
-                        aria-label='Select Input'
+                        aria-label='Select input'
                         onToggle={e => this.onToggle(e)}
                         onSelect={(_, name) => this.onSelect(name)}
                         selections={this.getSelected(params).title}

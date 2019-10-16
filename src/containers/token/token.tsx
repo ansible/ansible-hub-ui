@@ -40,10 +40,10 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
         return (
             <React.Fragment>
-                <BaseHeader title='Token Management'></BaseHeader>
+                <BaseHeader title='Token management'></BaseHeader>
                 <Main>
                     <Section className='body pf-c-content'>
-                        <h2>Offline Token</h2>
+                        <h2>Offline token</h2>
                         <p>
                             Use this token to authenticate the{' '}
                             <code>ansible-galaxy</code> client.
@@ -56,10 +56,10 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                             </div>
                         ) : (
                             <Button onClick={() => this.loadToken()}>
-                                Load Token
+                                Load token
                             </Button>
                         )}
-                        <h2>Manage Tokens</h2>
+                        <h2>Manage tokens</h2>
                         To remove an existing token, visit{' '}
                         <a
                             href='https://sso.redhat.com/auth/realms/redhat-external/account/'

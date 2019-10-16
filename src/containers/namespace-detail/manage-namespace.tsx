@@ -12,7 +12,7 @@ class ManageNamespace extends React.Component<RouteComponentProps> {
                 {...this.props}
                 showControls={true}
                 breadcrumbs={[
-                    { url: Paths.myNamespaces, name: 'My Namespaces' },
+                    { url: Paths.myNamespaces, name: 'My namespaces' },
                 ]}
             ></NamespaceDetail>
         );
