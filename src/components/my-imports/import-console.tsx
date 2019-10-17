@@ -143,8 +143,12 @@ export class ImportConsole extends React.Component<IProps, {}> {
                         <div>
                             <span className='data-title'>Error message: </span>
                             {task.error.code}
-                            <div>{task.error.description}</div>
-                            <div>{task.error.traceback}</div>
+                            <pre>
+                                <code>{task.error.description}</code>
+                            </pre>
+                            <pre>
+                                <code>{task.error.traceback}</code>
+                            </pre>
                         </div>
                     ) : null}
                 </div>
