@@ -4,6 +4,7 @@ import './render-plugin-doc.scss';
 import { cloneDeep } from 'lodash';
 import { Alert } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 import { PluginContentType, ContentSummaryType } from '../../api';
 import { Paths, formatPath } from '../../paths';
@@ -399,27 +400,27 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             <ul>
                 {content["synopsis"] !== null &&
                     <li>
-                        <Link to="#synopsis">Synopsis</Link>
+                        <HashLink to="#synopsis">Synopsis</HashLink>
                     </li>
                 }
                 {content["parameters"] !== null &&
                     <li>
-                        <Link to="#parameters">Parameters</Link>
+                        <HashLink to="#parameters">Parameters</HashLink>
                     </li>
                 }
                 {content["notes"] !== null &&
                     <li>
-                        <Link to="#notes">Notes</Link>
+                        <HashLink to="#notes">Notes</HashLink>
                     </li>
                 }
                 {content["examples"] !== null &&
                     <li>
-                        <Link to="#examples">Examples</Link>
+                        <HashLink to="#examples">Examples</HashLink>
                     </li>
                 }
                 {content["return-values"] !== null &&
                     <li>
-                        <Link to="#return-values">Return Values</Link>
+                        <HashLink to="#return-values">Return Values</HashLink>
                     </li>
                 }
             </ul>
