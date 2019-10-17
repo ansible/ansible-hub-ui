@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import './toolbar.scss';
+
 import {
     Toolbar as ToolbarPF,
     ToolbarGroup,
