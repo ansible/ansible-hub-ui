@@ -61,13 +61,6 @@ export class ImportModal extends React.Component<IProps, IState> {
                 onClose={() => this.handleClose()}
                 actions={[
                     <Button
-                        key='cancel'
-                        variant='secondary'
-                        onClick={() => this.handleClose()}
-                    >
-                        Cancel
-                    </Button>,
-                    <Button
                         key='confirm'
                         variant='primary'
                         onClick={() => this.saveFile()}
@@ -75,7 +68,15 @@ export class ImportModal extends React.Component<IProps, IState> {
                     >
                         Upload
                     </Button>,
+                    <Button
+                        key='cancel'
+                        variant='secondary'
+                        onClick={() => this.handleClose()}
+                    >
+                        Cancel
+                    </Button>,
                 ]}
+                isFooterLeftAligned
             >
                 <div className='upload-collection'>
                     <form>
