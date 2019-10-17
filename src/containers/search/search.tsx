@@ -105,14 +105,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
                     <div className='toolbar'>
                         <Toolbar
                             params={params}
-                            sortOptions={[
-                                { id: 'name', title: 'Name' },
-                                {
-                                    id: 'download_count',
-                                    title: 'Downloads',
-                                },
-                                { id: 'best_match', title: 'Best match' },
-                            ]}
                             updateParams={p =>
                                 this.updateParams(p, () =>
                                     this.queryCollections(),
@@ -229,11 +221,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
     private queryCollections() {
         this.setState({ loading: true }, () => {
             CollectionAPI.list(
-                // TODO: ignoring tags and sort since they aren't supported yet
                 ParamHelper.getReduced(this.state.params, [
                     'view_type',
-                    'tags',
-                    'sort',
                 ]),
             ).then(result => {
                 this.setState({

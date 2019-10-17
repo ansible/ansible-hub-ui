@@ -21,7 +21,7 @@ interface IProps {
         keywords?: string;
     };
 
-    sortOptions: {
+    sortOptions?: {
         id: string;
         title: string;
     }[];
@@ -79,15 +79,17 @@ export class Toolbar extends React.Component<IProps, IState> {
                         </InputGroup>
                     </ToolbarItem>
                 </ToolbarGroup>
-                <ToolbarGroup>
-                    <ToolbarItem>
-                        <Sort
-                            options={sortOptions}
-                            params={params}
-                            updateParams={updateParams}
-                        />
-                    </ToolbarItem>
-                </ToolbarGroup>
+                {sortOptions && (
+                    <ToolbarGroup>
+                        <ToolbarItem>
+                            <Sort
+                                options={sortOptions}
+                                params={params}
+                                updateParams={updateParams}
+                            />
+                        </ToolbarItem>
+                    </ToolbarGroup>
+                )}
                 {extraInputs.map((v, i) => (
                     <ToolbarGroup key={i}>
                         <ToolbarItem>{v}</ToolbarItem>

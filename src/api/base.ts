@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Constants } from '../constants';
+import { ParamHelper } from '../utilities';
 
 export class BaseAPI {
     apiBaseURL = '/api/automation-hub/';
@@ -9,6 +10,7 @@ export class BaseAPI {
     constructor() {
         this.http = axios.create({
             baseURL: this.apiBaseURL,
+            paramsSerializer: params => ParamHelper.getQueryString(params),
         });
     }
 
