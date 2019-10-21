@@ -4,6 +4,7 @@ import './render-plugin-doc.scss';
 import { cloneDeep } from 'lodash';
 import { Alert } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 import { PluginContentType, ContentSummaryType } from '../../api';
 import { Paths, formatPath } from '../../paths';
@@ -84,6 +85,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         const example: string = this.parseExamples(plugin);
         const returnVals: ReturnedValue[] = this.parseReturn(plugin);
 
+        const content: any = {
+          "synopsis": this.renderSynopsis(doc),
+          "parameters": this.renderParameters(doc.options, plugin.content_type),
+          "notes": this.renderNotes(doc),
+          "examples": this.renderExample(example),
+          "return-values": this.renderReturnValues(returnVals),
+        }
+
         if (!this.state.renderError) {
             return (
                 <div className='pf-c-content'>
@@ -93,12 +102,13 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                     <br />
                     {this.renderShortDescription(doc)}
                     {this.renderDeprecated(doc, plugin.content_name)}
-                    {this.renderDescription(doc)}
+                    {this.renderTableOfContents(content)}
+                    {content["synopsis"]}
                     {this.renderRequirements(doc)}
-                    {this.renderParameters(doc.options, plugin.content_type)}
-                    {this.renderNotes(doc)}
-                    {this.renderExample(example)}
-                    {this.renderReturnValues(returnVals)}
+                    {content["parameters"]}
+                    {content["notes"]}
+                    {content["examples"]}
+                    {content["return-values"]}
                 </div>
             );
         } else {
@@ -386,14 +396,46 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         );
     }
 
+    private renderTableOfContents(content: any) {
+        return (
+            <ul>
+                {content["synopsis"] !== null &&
+                    <li>
+                        <HashLink to="#synopsis">Synopsis</HashLink>
+                    </li>
+                }
+                {content["parameters"] !== null &&
+                    <li>
+                        <HashLink to="#parameters">Parameters</HashLink>
+                    </li>
+                }
+                {content["notes"] !== null &&
+                    <li>
+                        <HashLink to="#notes">Notes</HashLink>
+                    </li>
+                }
+                {content["examples"] !== null &&
+                    <li>
+                        <HashLink to="#examples">Examples</HashLink>
+                    </li>
+                }
+                {content["return-values"] !== null &&
+                    <li>
+                        <HashLink to="#return-values">Return Values</HashLink>
+                    </li>
+                }
+            </ul>
+        );
+    }
+
     private renderShortDescription(doc: PluginDoc) {
         return <div>{doc['short_description']}</div>;
     }
 
-    private renderDescription(doc: PluginDoc) {
+    private renderSynopsis(doc: PluginDoc) {
         return (
             <React.Fragment>
-                <h2>Synopsis</h2>
+                <h2 id="synopsis">Synopsis</h2>
                 <ul>
                     {doc.description.map((d, i) => (
                         <li key={i}>{this.applyDocFormatters(d)}</li>
@@ -409,7 +451,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
         return (
             <React.Fragment>
-                <h2>Parameters</h2>
+                <h2 id="parameters">Parameters</h2>
                 <table className='options-table'>
                     <tbody>
                         <tr>
@@ -584,14 +626,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
 
         return (
-            <div>
-                <h2>Notes</h2>
+            <React.Fragment>
+                <h2 id="notes">Notes</h2>
                 <ul>
                     {doc.notes.map((note, i) => (
                         <li key={i}>{this.applyDocFormatters(note)}</li>
                     ))}
                 </ul>
-            </div>
+            </React.Fragment>
         );
     }
 
@@ -601,14 +643,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
 
         return (
-            <div>
+            <React.Fragment>
                 <h2>Requirements</h2>
                 <ul>
                     {doc.requirements.map((req, i) => (
                         <li key={i}>{req}</li>
                     ))}
                 </ul>
-            </div>
+            </React.Fragment>
         );
     }
 
@@ -618,7 +660,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
         return (
             <React.Fragment>
-                <h2>Examples</h2>
+                <h2 id="examples">Examples</h2>
                 <pre>{example}</pre>
             </React.Fragment>
         );
@@ -630,7 +672,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
         return (
             <React.Fragment>
-                <h2>Return Values</h2>
+                <h2 id="return-values">Return Values</h2>
                 <table className='options-table'>
                     <tbody>
                         <tr>
