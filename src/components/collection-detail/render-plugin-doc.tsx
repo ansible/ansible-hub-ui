@@ -35,7 +35,6 @@ class PluginDoc {
     options?: PluginOption[];
     requirements?: string[];
     notes?: string[];
-    subOptionsMaxDepth?: number;
     deprecated?: {
         removed_in?: string;
         alternate?: string;
@@ -65,6 +64,8 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     // and value in parenthesis. Based off of formatters in ansible:
     // https://github.com/ansible/ansible/blob/devel/hacking/build_library/build_ansible/jinja2/filters.py#L26
     CUSTOM_FORMATTERS = /([IBMULC])\(([^)]+)\)/gm;
+    subOptionsMaxDepth: number;
+    returnContainMaxDepth: number;
 
     constructor(props) {
         super(props);
@@ -90,11 +91,14 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             parameters: this.renderParameters(
                 doc.options,
                 plugin.content_type,
-                doc.subOptionsMaxDepth,
+                this.subOptionsMaxDepth,
             ),
             notes: this.renderNotes(doc),
             examples: this.renderExample(example),
-            'return-values': this.renderReturnValues(returnVals),
+            'return-values': this.renderReturnValues(
+                returnVals,
+                this.returnContainMaxDepth,
+            ),
         };
 
         if (!this.state.renderError) {
@@ -192,8 +196,9 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
 
         doc.description = this.ensureListofStrings(doc.description);
+        this.subOptionsMaxDepth = maxDepth;
 
-        return { ...doc, subOptionsMaxDepth: maxDepth } as PluginDoc;
+        return doc;
     }
 
     private parseExamples(plugin: PluginContentType): string {
@@ -213,7 +218,6 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     private parseReturn(plugin: PluginContentType): ReturnedValue[] {
         // TODO: make the return string match the desired output as closely as
         // possible
-        const returnV = [] as ReturnedValue[];
 
         if (!plugin.doc_strings) {
             return null;
@@ -223,13 +227,29 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             return null;
         }
 
-        for (let r of plugin.doc_strings.return) {
-            returnV.push({
-                ...r,
-                description: this.ensureListofStrings(r.description),
-            });
-        }
-        return returnV;
+        let maxDepth = 0;
+
+        const parseReturnRecursive = (returnV: ReturnedValue[], depth) => {
+            if (depth > maxDepth) {
+                maxDepth = depth;
+            }
+            for (let ret of returnV) {
+                // Description is expected to be an array of strings. If its not,
+                // do what we can to make it one
+                ret.description = this.ensureListofStrings(ret.description);
+
+                // recursively parse sub options
+                if (ret.contains) {
+                    parseReturnRecursive(ret.contains, depth + 1);
+                }
+            }
+        };
+
+        const returnValues = [...plugin.doc_strings.return];
+        parseReturnRecursive(returnValues, 0);
+        this.returnContainMaxDepth = maxDepth;
+
+        return returnValues;
     }
 
     // This functions similar to how string.replace() works, except it returns
@@ -517,7 +537,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         parameters.forEach((option, i) => {
             const spacers = [];
             for (let x = 0; x < depth; x++) {
-                spacers.push(<td key={x} colSpan={1} className='spacer' />);
+                spacers.push(<td key={x} className='spacer' />);
             }
             output.push(
                 <tr key={`${option.name}${depth}`}>
@@ -719,7 +739,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         );
     }
 
-    private renderReturnValues(returnV: ReturnedValue[]) {
+    private renderReturnValues(returnV: ReturnedValue[], maxDepth: number) {
         if (!returnV) {
             return null;
         }
@@ -729,48 +749,73 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                 <table className='options-table'>
                     <tbody>
                         <tr>
-                            <th>Key</th>
+                            <th colSpan={maxDepth + 1}>Key</th>
                             <th>Returned</th>
                             <th>Description</th>
                         </tr>
-                        {returnV.map((option, i) => (
-                            <tr key={i}>
-                                <td>
-                                    {option.name} <br /> ({option.type})
-                                </td>
-                                <td>{option.returned}</td>
-                                <td>
-                                    {option.description.map((d, i) => (
-                                        <p key={i}>
-                                            {this.applyDocFormatters(d)}
-                                        </p>
-                                    ))}
-
-                                    {option.sample ? (
-                                        <div>
-                                            <br />
-                                            sample:
-                                            {typeof option.sample ===
-                                            'string' ? (
-                                                option.sample
-                                            ) : (
-                                                <pre>
-                                                    {JSON.stringify(
-                                                        option.sample,
-                                                        null,
-                                                        2,
-                                                    )}
-                                                </pre>
-                                            )}
-                                        </div>
-                                    ) : null}
-                                </td>
-                            </tr>
-                        ))}
+                        {this.renderReturnValueEntries(returnV, 0, maxDepth)}
                     </tbody>
                 </table>
             </React.Fragment>
         );
+    }
+
+    private renderReturnValueEntries(
+        returnValues: ReturnedValue[],
+        depth: number,
+        maxDepth: number,
+    ) {
+        let entries = [];
+
+        returnValues.forEach((option, i) => {
+            const spacers = [];
+            for (let x = 0; x < depth; x++) {
+                spacers.push(<td key={x} colSpan={1} className='spacer' />);
+            }
+            entries.push(
+                <tr key={`${option.name}${depth}`}>
+                    {spacers}
+                    <td
+                        colSpan={maxDepth + 1 - depth}
+                        className={option.contains ? 'parent' : ''}
+                    >
+                        {option.name} <br /> ({option.type})
+                    </td>
+                    <td>{option.returned}</td>
+                    <td>
+                        {option.description.map((d, i) => (
+                            <p key={i}>{this.applyDocFormatters(d)}</p>
+                        ))}
+
+                        {option.sample ? (
+                            <div>
+                                <br />
+                                sample:
+                                {typeof option.sample === 'string' ? (
+                                    option.sample
+                                ) : (
+                                    <pre>
+                                        {JSON.stringify(option.sample, null, 2)}
+                                    </pre>
+                                )}
+                            </div>
+                        ) : null}
+                    </td>
+                </tr>,
+            );
+
+            if (option.contains) {
+                entries = entries.concat(
+                    // recursively render values
+                    this.renderReturnValueEntries(
+                        option.contains,
+                        depth + 1,
+                        maxDepth,
+                    ),
+                );
+            }
+        });
+        return entries;
     }
 
     // https://github.com/ansible/ansible/blob/1b8aa798df6f6fa96ba5ea2a9dbf01b3f1de555c/hacking/build_library/build_ansible/jinja2/filters.py#L53

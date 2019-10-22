@@ -12,6 +12,11 @@
     small {
         margin-bottom: 0px;
     }
+
+    // ensures the bottom of the table always has a border even
+    // if there is a spacer at the bottom which might otherwise cause
+    // a gap
+    border-bottom: 1px solid black;
     width: 100%;
 
     .spacer {
