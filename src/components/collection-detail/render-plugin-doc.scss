@@ -3,6 +3,7 @@
     th {
         border: 1px solid black;
         padding: 5px;
+        vertical-align: top;
     }
     ul {
         margin-top: 0px;
@@ -11,8 +12,17 @@
     small {
         margin-bottom: 0px;
     }
-
     width: 100%;
+
+    .spacer {
+        width: 20px;
+        border-top: 0px;
+        border-bottom: 0px;
+    }
+
+    .parent {
+        border-bottom: 0px;
+    }
 }
 
 .blue {
