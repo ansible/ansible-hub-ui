@@ -30,7 +30,7 @@ class PluginOption {
 }
 
 class PluginDoc {
-    shortDescription: string;
+    short_description: string;
     description: string[];
     options?: PluginOption[];
     requirements?: string[];
@@ -86,11 +86,15 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             // componentDidCatch doesn't seem to be able to catch errors that
             // are thrown outside of return(), so we'll wrap everything in a
             // try just in case
+            let doc: PluginDoc;
+            let example: string;
+            let returnVals: ReturnedValue[];
+            let content: any;
             try {
-                const doc: PluginDoc = this.parseDocString(plugin);
-                const example: string = this.parseExamples(plugin);
-                const returnVals: ReturnedValue[] = this.parseReturn(plugin);
-                const content: any = {
+                doc = this.parseDocString(plugin);
+                example = this.parseExamples(plugin);
+                returnVals = this.parseReturn(plugin);
+                content = {
                     synopsis: this.renderSynopsis(doc),
                     parameters: this.renderParameters(
                         doc.options,
@@ -99,33 +103,36 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                     ),
                     notes: this.renderNotes(doc),
                     examples: this.renderExample(example),
-                    'return-values': this.renderReturnValues(
+                    returnValues: this.renderReturnValues(
                         returnVals,
                         this.returnContainMaxDepth,
                     ),
+                    shortDescription: this.renderShortDescription(doc),
+                    deprecated: this.renderDeprecated(doc, plugin.content_name),
+                    requirements: this.renderRequirements(doc),
                 };
-
-                return (
-                    <div className='pf-c-content'>
-                        <h1>
-                            {plugin.content_type} > {plugin.content_name}
-                        </h1>
-                        <br />
-                        {this.renderShortDescription(doc)}
-                        {this.renderDeprecated(doc, plugin.content_name)}
-                        {this.renderTableOfContents(content)}
-                        {content['synopsis']}
-                        {this.renderRequirements(doc)}
-                        {content['parameters']}
-                        {content['notes']}
-                        {content['examples']}
-                        {content['return-values']}
-                    </div>
-                );
             } catch (err) {
                 console.log(err);
                 return this.renderError(plugin);
             }
+
+            return (
+                <div className='pf-c-content'>
+                    <h1>
+                        {plugin.content_type} > {plugin.content_name}
+                    </h1>
+                    <br />
+                    {content.shortDescription}
+                    {content.deprecated}
+                    {this.renderTableOfContents(content)}
+                    {content.synopsis}
+                    {content.requirements}
+                    {content.parameters}
+                    {content.notes}
+                    {content.examples}
+                    {content.returnValues}
+                </div>
+            );
         } else {
             return this.renderError(plugin);
         }
@@ -174,7 +181,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         // TODO: make the doc string match the desired output as closely as
         // possible
         if (!plugin.doc_strings) {
-            return { description: [], shortDescription: '' } as PluginDoc;
+            return { description: [], short_description: '' } as PluginDoc;
         }
 
         const doc: PluginDoc = { ...plugin.doc_strings.doc };
@@ -467,7 +474,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                         <HashLink to='#examples'>Examples</HashLink>
                     </li>
                 )}
-                {content['return-values'] !== null && (
+                {content['returnValues'] !== null && (
                     <li>
                         <HashLink to='#return-values'>Return Values</HashLink>
                     </li>
@@ -477,7 +484,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     }
 
     private renderShortDescription(doc: PluginDoc) {
-        return <div>{doc['short_description']}</div>;
+        return <div>{doc.short_description}</div>;
     }
 
     private renderSynopsis(doc: PluginDoc) {
