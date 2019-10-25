@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './render-plugin-doc.scss';
 
-import { cloneDeep } from 'lodash';
 import { Alert } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
@@ -27,11 +26,11 @@ class PluginOption {
     required: boolean;
     default?: string | number | boolean;
     aliases?: string[];
-    subOptions?: PluginOption[];
+    suboptions?: PluginOption[];
 }
 
 class PluginDoc {
-    shortDescription: string;
+    short_description: string;
     description: string[];
     options?: PluginOption[];
     requirements?: string[];
@@ -65,6 +64,8 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     // and value in parenthesis. Based off of formatters in ansible:
     // https://github.com/ansible/ansible/blob/devel/hacking/build_library/build_ansible/jinja2/filters.py#L26
     CUSTOM_FORMATTERS = /([IBMULC])\(([^)]+)\)/gm;
+    subOptionsMaxDepth: number;
+    returnContainMaxDepth: number;
 
     constructor(props) {
         super(props);
@@ -81,71 +82,95 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     render() {
         const { plugin } = this.props;
 
-        const doc: PluginDoc = this.parseDocString(plugin);
-        const example: string = this.parseExamples(plugin);
-        const returnVals: ReturnedValue[] = this.parseReturn(plugin);
-
-        const content: any = {
-          "synopsis": this.renderSynopsis(doc),
-          "parameters": this.renderParameters(doc.options, plugin.content_type),
-          "notes": this.renderNotes(doc),
-          "examples": this.renderExample(example),
-          "return-values": this.renderReturnValues(returnVals),
-        }
-
         if (!this.state.renderError) {
+            // componentDidCatch doesn't seem to be able to catch errors that
+            // are thrown outside of return(), so we'll wrap everything in a
+            // try just in case
+            let doc: PluginDoc;
+            let example: string;
+            let returnVals: ReturnedValue[];
+            let content: any;
+            try {
+                doc = this.parseDocString(plugin);
+                example = this.parseExamples(plugin);
+                returnVals = this.parseReturn(plugin);
+                content = {
+                    synopsis: this.renderSynopsis(doc),
+                    parameters: this.renderParameters(
+                        doc.options,
+                        plugin.content_type,
+                        this.subOptionsMaxDepth,
+                    ),
+                    notes: this.renderNotes(doc),
+                    examples: this.renderExample(example),
+                    returnValues: this.renderReturnValues(
+                        returnVals,
+                        this.returnContainMaxDepth,
+                    ),
+                    shortDescription: this.renderShortDescription(doc),
+                    deprecated: this.renderDeprecated(doc, plugin.content_name),
+                    requirements: this.renderRequirements(doc),
+                };
+            } catch (err) {
+                console.log(err);
+                return this.renderError(plugin);
+            }
+
             return (
                 <div className='pf-c-content'>
                     <h1>
                         {plugin.content_type} > {plugin.content_name}
                     </h1>
                     <br />
-                    {this.renderShortDescription(doc)}
-                    {this.renderDeprecated(doc, plugin.content_name)}
+                    {content.shortDescription}
+                    {content.deprecated}
                     {this.renderTableOfContents(content)}
-                    {content["synopsis"]}
-                    {this.renderRequirements(doc)}
-                    {content["parameters"]}
-                    {content["notes"]}
-                    {content["examples"]}
-                    {content["return-values"]}
+                    {content.synopsis}
+                    {content.requirements}
+                    {content.parameters}
+                    {content.notes}
+                    {content.examples}
+                    {content.returnValues}
                 </div>
             );
         } else {
-            // There's a good chance that something about the plugin doc data will
-            // be malformed since it isn't validated. When that hapens, show an
-            // error instead of crashing the whole app
-            return (
-                <React.Fragment>
-                    <Alert
-                        isInline
-                        variant='warning'
-                        title='Documentation Syntax Error: cannot parse plugin documention.'
-                    />
-                    <br />
-                    <div className='pf-c-content'>
-                        {plugin.content_type && plugin.content_name ? (
-                            <h1>
-                                {plugin.content_type} > {plugin.content_name}
-                            </h1>
-                        ) : null}
-                        <p>
-                            The documentation object for this plugin seems to
-                            contain invalid syntax that makes it impossible for
-                            Automation Hub to parse. You can still look at the
-                            unformatted documentation object bellow if you need
-                            to.
-                        </p>
-
-                        <h2>Unformatted Documentation</h2>
-
-                        <pre className='plugin-raw'>
-                            {JSON.stringify(plugin, null, 2)}
-                        </pre>
-                    </div>
-                </React.Fragment>
-            );
+            return this.renderError(plugin);
         }
+    }
+
+    private renderError(plugin) {
+        // There's a good chance that something about the plugin doc data will
+        // be malformed since it isn't validated. When that hapens, show an
+        // error instead of crashing the whole app
+        return (
+            <React.Fragment>
+                <Alert
+                    isInline
+                    variant='warning'
+                    title='Documentation Syntax Error: cannot parse plugin documention.'
+                />
+                <br />
+                <div className='pf-c-content'>
+                    {plugin.content_type && plugin.content_name ? (
+                        <h1>
+                            {plugin.content_type} > {plugin.content_name}
+                        </h1>
+                    ) : null}
+                    <p>
+                        The documentation object for this plugin seems to
+                        contain invalid syntax that makes it impossible for
+                        Automation Hub to parse. You can still look at the
+                        unformatted documentation object bellow if you need to.
+                    </p>
+
+                    <h2>Unformatted Documentation</h2>
+
+                    <pre className='plugin-raw'>
+                        {JSON.stringify(plugin, null, 2)}
+                    </pre>
+                </div>
+            </React.Fragment>
+        );
     }
 
     private parseDocString(plugin: PluginContentType): PluginDoc {
@@ -156,13 +181,18 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         // TODO: make the doc string match the desired output as closely as
         // possible
         if (!plugin.doc_strings) {
-            return { description: [], shortDescription: '' } as PluginDoc;
+            return { description: [], short_description: '' } as PluginDoc;
         }
 
         const doc: PluginDoc = { ...plugin.doc_strings.doc };
 
-        if (doc.options) {
-            for (let op of doc.options) {
+        let maxDepth = 0;
+
+        const parseOptions = (options: PluginOption[], depth) => {
+            if (depth > maxDepth) {
+                maxDepth = depth;
+            }
+            for (let op of options) {
                 // Description is expected to be an array of strings. If its not,
                 // do what we can to make it one
                 op.description = this.ensureListofStrings(op.description);
@@ -170,12 +200,22 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                 if (typeof op.default === 'object') {
                     op.default = JSON.stringify(op.default);
                 }
+
+                // recursively parse sub options
+                if (op.suboptions) {
+                    parseOptions(op.suboptions, depth + 1);
+                }
             }
+        };
+
+        if (doc.options) {
+            parseOptions(doc.options, 0);
         }
 
         doc.description = this.ensureListofStrings(doc.description);
+        this.subOptionsMaxDepth = maxDepth;
 
-        return doc as PluginDoc;
+        return doc;
     }
 
     private parseExamples(plugin: PluginContentType): string {
@@ -195,7 +235,6 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     private parseReturn(plugin: PluginContentType): ReturnedValue[] {
         // TODO: make the return string match the desired output as closely as
         // possible
-        const returnV = [] as ReturnedValue[];
 
         if (!plugin.doc_strings) {
             return null;
@@ -205,13 +244,29 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             return null;
         }
 
-        for (let r of plugin.doc_strings.return) {
-            returnV.push({
-                ...r,
-                description: this.ensureListofStrings(r.description),
-            });
-        }
-        return returnV;
+        let maxDepth = 0;
+
+        const parseReturnRecursive = (returnV: ReturnedValue[], depth) => {
+            if (depth > maxDepth) {
+                maxDepth = depth;
+            }
+            for (let ret of returnV) {
+                // Description is expected to be an array of strings. If its not,
+                // do what we can to make it one
+                ret.description = this.ensureListofStrings(ret.description);
+
+                // recursively parse sub options
+                if (ret.contains) {
+                    parseReturnRecursive(ret.contains, depth + 1);
+                }
+            }
+        };
+
+        const returnValues = [...plugin.doc_strings.return];
+        parseReturnRecursive(returnValues, 0);
+        this.returnContainMaxDepth = maxDepth;
+
+        return returnValues;
     }
 
     // This functions similar to how string.replace() works, except it returns
@@ -399,43 +454,43 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     private renderTableOfContents(content: any) {
         return (
             <ul>
-                {content["synopsis"] !== null &&
+                {content['synopsis'] !== null && (
                     <li>
-                        <HashLink to="#synopsis">Synopsis</HashLink>
+                        <HashLink to='#synopsis'>Synopsis</HashLink>
                     </li>
-                }
-                {content["parameters"] !== null &&
+                )}
+                {content['parameters'] !== null && (
                     <li>
-                        <HashLink to="#parameters">Parameters</HashLink>
+                        <HashLink to='#parameters'>Parameters</HashLink>
                     </li>
-                }
-                {content["notes"] !== null &&
+                )}
+                {content['notes'] !== null && (
                     <li>
-                        <HashLink to="#notes">Notes</HashLink>
+                        <HashLink to='#notes'>Notes</HashLink>
                     </li>
-                }
-                {content["examples"] !== null &&
+                )}
+                {content['examples'] !== null && (
                     <li>
-                        <HashLink to="#examples">Examples</HashLink>
+                        <HashLink to='#examples'>Examples</HashLink>
                     </li>
-                }
-                {content["return-values"] !== null &&
+                )}
+                {content['returnValues'] !== null && (
                     <li>
-                        <HashLink to="#return-values">Return Values</HashLink>
+                        <HashLink to='#return-values'>Return Values</HashLink>
                     </li>
-                }
+                )}
             </ul>
         );
     }
 
     private renderShortDescription(doc: PluginDoc) {
-        return <div>{doc['short_description']}</div>;
+        return <div>{doc.short_description}</div>;
     }
 
     private renderSynopsis(doc: PluginDoc) {
         return (
             <React.Fragment>
-                <h2 id="synopsis">Synopsis</h2>
+                <h2 id='synopsis'>Synopsis</h2>
                 <ul>
                     {doc.description.map((d, i) => (
                         <li key={i}>{this.applyDocFormatters(d)}</li>
@@ -445,17 +500,30 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         );
     }
 
-    private renderParameters(parameters: PluginOption[], content_type: string) {
+    private renderParameters(
+        parameters: PluginOption[],
+        content_type: string,
+        maxDepth: number,
+    ) {
         if (!parameters) {
             return null;
         }
+
+        // render the entries first,
+        const paramEntries = this.renderParameterEntries(
+            parameters,
+            content_type,
+            0,
+            maxDepth,
+        );
+
         return (
             <React.Fragment>
-                <h2 id="parameters">Parameters</h2>
+                <h2 id='parameters'>Parameters</h2>
                 <table className='options-table'>
                     <tbody>
                         <tr>
-                            <th>Parameter</th>
+                            <th colSpan={maxDepth + 1}>Parameter</th>
                             <th>
                                 Choices/<span className='blue'>Defaults</span>
                             </th>
@@ -469,74 +537,96 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                             //https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/network/fortios/fortios_dlp_fp_doc_source.py#L93}
                             // TODO: do we need to display version added?
                         }
-                        {parameters.map((option, i) => (
-                            <tr key={i}>
-                                {
-                                    // PARAMETER --------------------------------
-                                }
-                                <td>
-                                    <span className='option-name'>
-                                        {option.name}
-                                    </span>
-                                    <small>
-                                        {this.documentedType(option['type'])}
-                                        {option['elements'] ? (
-                                            <span>
-                                                {' '}
-                                                / elements =
-                                                {this.documentedType(
-                                                    option['elements'],
-                                                )}
-                                            </span>
-                                        ) : null}
-                                        {option['required'] ? (
-                                            <span>
-                                                {' '}
-                                                /{' '}
-                                                <span className='red'>
-                                                    required
-                                                </span>
-                                            </span>
-                                        ) : null}
-                                    </small>
-                                </td>
-                                {
-                                    // CHOICES -------------------------------
-                                }
-                                <td>{this.renderChoices(option)}</td>
-                                {
-                                    // CONFIGURATION (non module only) -------
-                                }
-                                {content_type !== 'module' ? (
-                                    <td>
-                                        {this.renderPluginConfiguration(option)}
-                                    </td>
-                                ) : null}
-                                {
-                                    // COMMENTS ------------------------------
-                                }
-                                <td>
-                                    {option.description.map((d, i) => (
-                                        <p key={i}>
-                                            {this.applyDocFormatters(d)}
-                                        </p>
-                                    ))}
-
-                                    {option['aliases'] ? (
-                                        <small>
-                                            <span className='green'>
-                                                aliases:{' '}
-                                                {option['aliases'].join(', ')}
-                                            </span>
-                                        </small>
-                                    ) : null}
-                                </td>
-                            </tr>
-                        ))}
+                        {paramEntries}
                     </tbody>
                 </table>
             </React.Fragment>
         );
+    }
+
+    private renderParameterEntries(
+        parameters: PluginOption[],
+        content_type: string,
+        depth: number,
+        maxDepth: number,
+    ) {
+        let output = [];
+        parameters.forEach((option, i) => {
+            const spacers = [];
+            for (let x = 0; x < depth; x++) {
+                spacers.push(<td key={x} className='spacer' />);
+            }
+            output.push(
+                <tr key={`${option.name}${depth}`}>
+                    {
+                        // PARAMETER --------------------------------
+                    }
+                    {spacers}
+                    <td
+                        colSpan={maxDepth + 1 - depth}
+                        className={option.suboptions ? 'parent' : ''}
+                    >
+                        <span className='option-name'>{option.name}</span>
+                        <small>
+                            {this.documentedType(option['type'])}
+                            {option['elements'] ? (
+                                <span>
+                                    {' '}
+                                    / elements =
+                                    {this.documentedType(option['elements'])}
+                                </span>
+                            ) : null}
+                            {option['required'] ? (
+                                <span>
+                                    {' '}
+                                    / <span className='red'>required</span>
+                                </span>
+                            ) : null}
+                        </small>
+                    </td>
+                    {
+                        // CHOICES -------------------------------
+                    }
+                    <td>{this.renderChoices(option)}</td>
+                    {
+                        // CONFIGURATION (non module only) -------
+                    }
+                    {content_type !== 'module' ? (
+                        <td>{this.renderPluginConfiguration(option)}</td>
+                    ) : null}
+                    {
+                        // COMMENTS ------------------------------
+                    }
+                    <td>
+                        {option.description.map((d, i) => (
+                            <p key={i}>{this.applyDocFormatters(d)}</p>
+                        ))}
+
+                        {option['aliases'] ? (
+                            <small>
+                                <span className='green'>
+                                    aliases: {option['aliases'].join(', ')}
+                                </span>
+                            </small>
+                        ) : null}
+                    </td>
+                </tr>,
+            );
+
+            // recursively render sub options
+            if (option.suboptions) {
+                output = output.concat(
+                    this.renderParameterEntries(
+                        option.suboptions,
+                        content_type,
+                        depth + 1,
+                        maxDepth,
+                    ),
+                );
+            }
+        });
+
+        return output;
     }
 
     private renderPluginConfiguration(option) {
@@ -627,7 +717,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
 
         return (
             <React.Fragment>
-                <h2 id="notes">Notes</h2>
+                <h2 id='notes'>Notes</h2>
                 <ul>
                     {doc.notes.map((note, i) => (
                         <li key={i}>{this.applyDocFormatters(note)}</li>
@@ -660,64 +750,89 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         }
         return (
             <React.Fragment>
-                <h2 id="examples">Examples</h2>
+                <h2 id='examples'>Examples</h2>
                 <pre>{example}</pre>
             </React.Fragment>
         );
     }
 
-    private renderReturnValues(returnV: ReturnedValue[]) {
+    private renderReturnValues(returnV: ReturnedValue[], maxDepth: number) {
         if (!returnV) {
             return null;
         }
         return (
             <React.Fragment>
-                <h2 id="return-values">Return Values</h2>
+                <h2 id='return-values'>Return Values</h2>
                 <table className='options-table'>
                     <tbody>
                         <tr>
-                            <th>Key</th>
+                            <th colSpan={maxDepth + 1}>Key</th>
                             <th>Returned</th>
                             <th>Description</th>
                         </tr>
-                        {returnV.map((option, i) => (
-                            <tr key={i}>
-                                <td>
-                                    {option.name} <br /> ({option.type})
-                                </td>
-                                <td>{option.returned}</td>
-                                <td>
-                                    {option.description.map((d, i) => (
-                                        <p key={i}>
-                                            {this.applyDocFormatters(d)}
-                                        </p>
-                                    ))}
-
-                                    {option.sample ? (
-                                        <div>
-                                            <br />
-                                            sample:
-                                            {typeof option.sample ===
-                                            'string' ? (
-                                                option.sample
-                                            ) : (
-                                                <pre>
-                                                    {JSON.stringify(
-                                                        option.sample,
-                                                        null,
-                                                        2,
-                                                    )}
-                                                </pre>
-                                            )}
-                                        </div>
-                                    ) : null}
-                                </td>
-                            </tr>
-                        ))}
+                        {this.renderReturnValueEntries(returnV, 0, maxDepth)}
                     </tbody>
                 </table>
             </React.Fragment>
         );
+    }
+
+    private renderReturnValueEntries(
+        returnValues: ReturnedValue[],
+        depth: number,
+        maxDepth: number,
+    ) {
+        let entries = [];
+
+        returnValues.forEach((option, i) => {
+            const spacers = [];
+            for (let x = 0; x < depth; x++) {
+                spacers.push(<td key={x} colSpan={1} className='spacer' />);
+            }
+            entries.push(
+                <tr key={`${option.name}${depth}`}>
+                    {spacers}
+                    <td
+                        colSpan={maxDepth + 1 - depth}
+                        className={option.contains ? 'parent' : ''}
+                    >
+                        {option.name} <br /> ({option.type})
+                    </td>
+                    <td>{option.returned}</td>
+                    <td>
+                        {option.description.map((d, i) => (
+                            <p key={i}>{this.applyDocFormatters(d)}</p>
+                        ))}
+
+                        {option.sample ? (
+                            <div>
+                                <br />
+                                sample:
+                                {typeof option.sample === 'string' ? (
+                                    option.sample
+                                ) : (
+                                    <pre>
+                                        {JSON.stringify(option.sample, null, 2)}
+                                    </pre>
+                                )}
+                            </div>
+                        ) : null}
+                    </td>
+                </tr>,
+            );
+
+            if (option.contains) {
+                entries = entries.concat(
+                    // recursively render values
+                    this.renderReturnValueEntries(
+                        option.contains,
+                        depth + 1,
+                        maxDepth,
+                    ),
+                );
+            }
+        });
+        return entries;
     }
 
     // https://github.com/ansible/ansible/blob/1b8aa798df6f6fa96ba5ea2a9dbf01b3f1de555c/hacking/build_library/build_ansible/jinja2/filters.py#L53
