@@ -40,6 +40,7 @@ export class Pagination extends React.Component<IProps> {
                     updateParams({ ...params, page: 1, page_size: p });
                 }}
                 {...extraProps}
+                isCompact={isTop}
             />
         );
     }

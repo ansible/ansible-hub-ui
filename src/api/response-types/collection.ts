@@ -11,8 +11,17 @@ export class CollectionVersion {
         tags: string[];
         description: string;
     };
-    created: string;
+    created_at: string;
     contents: ContentSummaryType[];
+    certification: CertificationStatus;
+    namespace: string;
+    name: string;
+}
+
+export enum CertificationStatus {
+    certified = 'certified',
+    notCertified = 'not_certified',
+    needsReview = 'needs_review',
 }
 
 class RenderedFile {
@@ -20,23 +29,18 @@ class RenderedFile {
     html: string;
 }
 
-export class CollectionVersionDetail {
-    id: number;
-    version: string;
+export class CollectionVersionDetail extends CollectionVersion {
     metadata: {
+        description: string;
         tags: string[];
         authors: string[];
         license: string;
-        description: string;
         homepage: string;
         documentation: string;
         issues: string;
         repository: string;
     };
-    created: string;
-    collection_readme: RenderedFile;
-    documentation_files: RenderedFile[];
-    contents: (PluginContentType | RoleContentType | PlaybookContentType)[];
+    docs_blob: DocsBlobType;
 }
 
 export class CollectionListType {
@@ -45,23 +49,14 @@ export class CollectionListType {
     description: string;
     download_count: number;
     // deprecated: boolean;
-    // community_score: number;
-    // community_survey_count: number;
     latest_version: CollectionVersion;
-    // content_match?: ContentSummary;
 
     namespace: {
         id: number;
         description: string;
-        // active: boolean;
         name: string;
         avatar_url: string;
-        // location: string;
         company: string;
-        // email: string;
-        // html_url: string;
-        // is_vendor: boolean;
-        // owners: number[];
     };
 }
 
@@ -109,23 +104,7 @@ export class CollectionDetailType {
         version: string;
         created: string;
     }[];
-    latest_version: {
-        id: number;
-        version: string;
-        metadata: {
-            description: string;
-            tags: string[];
-            authors: string[];
-            license: string;
-            homepage: string;
-            documentation: string;
-            issues: string;
-            repository: string;
-        };
-        created: string;
-        docs_blob: DocsBlobType;
-        contents: ContentSummaryType[];
-    };
+    latest_version: CollectionVersionDetail;
 
     id: number;
     name: string;

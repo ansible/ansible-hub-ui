@@ -29,4 +29,5 @@ export enum Paths {
     partners = '/partners',
     notFound = '/not-found',
     token = '/token',
+    certificationDashboard = '/certification-dashboard',
 }

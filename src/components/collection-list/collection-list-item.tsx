@@ -102,7 +102,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                     <NumericLabel number={download_count} label='Download' />
                 </div>
                 <div className='entry'>
-                    Updated {moment(latest_version.created).fromNow()}
+                    Updated {moment(latest_version.created_at).fromNow()}
                 </div>
                 <div className='entry'>v{latest_version.version}</div>
             </DataListCell>,

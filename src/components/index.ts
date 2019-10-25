@@ -1,6 +1,5 @@
 export { Tag } from './tags/tag';
 export { NumericLabel } from './numeric-label/numeric-label';
-export { NotImplemented } from './not-implemented/not-implemented';
 export { NamespaceForm } from './namespace-form/namespace-form';
 export { ResourcesForm } from './namespace-form/resources-form';
 export { BaseHeader } from './headers/base-header';
