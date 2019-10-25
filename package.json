@@ -97,7 +97,9 @@
         "start": "NODE_ENV=development webpack-dev-server --config config/dev.webpack.config.js",
         "build:prod": "NODE_ENV=production webpack --config config/prod.webpack.config.js",
         "deploy": "npm-run-all build:prod test",
-        "verify": "npm-run-all build lint test"
+        "verify": "npm-run-all build lint test",
+        "test-prettier": "prettier -l 'src/**/*.scss' 'src/**/*.ts' 'src/**/*.tsx'",
+        "prettier": "prettier --write 'src/**/*.scss' 'src/**/*.ts' 'src/**/*.tsx'"
     },
     "insights": {
         "appname": "automation-hub"
