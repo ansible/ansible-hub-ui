@@ -11,12 +11,18 @@ import {
     ToolbarItem,
     Button,
     DropdownItem,
+    EmptyState,
+    EmptyStateIcon,
+    Title,
+    EmptyStateBody,
+    EmptyStateVariant,
 } from '@patternfly/react-core';
 
 import {
     InfoCircleIcon,
     ExclamationCircleIcon,
     CheckCircleIcon,
+    WarningTriangleIcon,
 } from '@patternfly/react-icons';
 
 import {
@@ -180,6 +186,20 @@ class CertificationDashboard extends React.Component<
     }
 
     private renderTable(versions) {
+        if (versions.length === 0) {
+            return (
+                <EmptyState className='empty' variant={EmptyStateVariant.full}>
+                    <EmptyStateIcon icon={WarningTriangleIcon} />
+                    <Title headingLevel='h2' size='lg'>
+                        No matches
+                    </Title>
+                    <EmptyStateBody>
+                        Please try adjusting your search query.
+                    </EmptyStateBody>
+                </EmptyState>
+            );
+        }
+
         return (
             <table
                 aria-label='Collection versions'
