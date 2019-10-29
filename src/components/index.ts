@@ -28,3 +28,5 @@ export {
 } from './collection-detail/collection-content-list';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';
 export { LoadingPageWithHeader } from './loading/loading-collection-detail';
+export { CompoundFilter } from './patternfly-wrappers/compound-filter';
+export { AppliedFilters } from './patternfly-wrappers/applied-filters';

@@ -9,10 +9,7 @@ import {
     Toolbar,
     ToolbarGroup,
     ToolbarItem,
-    TextInput,
-    InputGroup,
     Button,
-    ButtonVariant,
     DropdownItem,
 } from '@patternfly/react-core';
 
@@ -28,7 +25,14 @@ import {
     CertificationStatus,
 } from '../../api';
 import { ParamHelper } from '../../utilities';
-import { LoadingPageWithHeader, StatefulDropdown } from '../../components';
+import {
+    LoadingPageWithHeader,
+    StatefulDropdown,
+    CompoundFilter,
+    LoadingPageSpinner,
+    AppliedFilters,
+    Pagination,
+} from '../../components';
 import { Paths, formatPath } from '../../paths';
 
 interface IState {
@@ -41,6 +45,7 @@ interface IState {
     };
     versions: CollectionVersion[];
     itemCount: number;
+    loading: boolean;
 }
 
 class CertificationDashboard extends React.Component<
@@ -63,62 +68,137 @@ class CertificationDashboard extends React.Component<
             versions: undefined,
             itemCount: 0,
             params: params,
+            loading: true,
         };
     }
 
     componentDidMount() {
-        CollectionVersionAPI.list(this.state.params).then(result =>
-            this.setState({
-                versions: result.data.data,
-                itemCount: result.data.meta.count,
-            }),
-        );
+        this.queryCollections();
     }
 
     render() {
-        const { versions, params, itemCount } = this.state;
+        const { versions, params, itemCount, loading } = this.state;
 
         if (!versions) {
             return <LoadingPageWithHeader></LoadingPageWithHeader>;
         }
         return (
             <React.Fragment>
-                <BaseHeader title='Certification dashboard'>
-                    <div className='toolbar'>
-                        <Toolbar>
-                            <ToolbarGroup>
-                                <ToolbarItem>
-                                    <TextInput></TextInput>
-                                </ToolbarItem>
-                            </ToolbarGroup>
-                        </Toolbar>
-                    </div>
-                </BaseHeader>
+                <BaseHeader title='Certification dashboard'></BaseHeader>
                 <Main>
                     <Section className='body'>
-                        <table
-                            aria-label='Collection versions'
-                            className='content-table pf-c-table'
-                        >
-                            <thead>
-                                <tr aria-labelledby='headers'>
-                                    <th>Namespace</th>
-                                    <th>Collection</th>
-                                    <th>Version</th>
-                                    <th>Date created</th>
-                                    <th>Status</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {versions.map((version, i) =>
-                                    this.renderRow(version, i),
-                                )}
-                            </tbody>
-                        </table>
+                        <div className='toolbar'>
+                            <Toolbar>
+                                <ToolbarGroup>
+                                    <ToolbarItem>
+                                        <CompoundFilter
+                                            updateParams={p =>
+                                                this.updateParams(p, () =>
+                                                    this.queryCollections(),
+                                                )
+                                            }
+                                            params={params}
+                                            filterConfig={[
+                                                {
+                                                    id: 'namespace',
+                                                    title: 'Namespace',
+                                                },
+                                                {
+                                                    id: 'name',
+                                                    title: 'Collection Name',
+                                                },
+                                                {
+                                                    id: 'certification',
+                                                    title:
+                                                        'Certification Status',
+                                                    inputType: 'select',
+                                                    options: [
+                                                        {
+                                                            id: 'not_certified',
+                                                            title: 'Rejected',
+                                                        },
+                                                        {
+                                                            id: 'needs_review',
+                                                            title:
+                                                                'Needs Review',
+                                                        },
+                                                        {
+                                                            id: 'certified',
+                                                            title: 'Certified',
+                                                        },
+                                                    ],
+                                                },
+                                            ]}
+                                        />
+                                    </ToolbarItem>
+                                </ToolbarGroup>
+                            </Toolbar>
+
+                            <Pagination
+                                params={params}
+                                updateParams={p =>
+                                    this.updateParams(p, () =>
+                                        this.queryCollections(),
+                                    )
+                                }
+                                count={itemCount}
+                                isTop
+                            />
+                        </div>
+                        <div>
+                            <AppliedFilters
+                                updateParams={p =>
+                                    this.updateParams(p, () =>
+                                        this.queryCollections(),
+                                    )
+                                }
+                                params={params}
+                                ignoredParams={['page_size', 'page']}
+                            />
+                        </div>
+                        {loading ? (
+                            <LoadingPageSpinner />
+                        ) : (
+                            this.renderTable(versions)
+                        )}
+
+                        <div className='footer'>
+                            <Pagination
+                                params={params}
+                                updateParams={p =>
+                                    this.updateParams(p, () =>
+                                        this.queryCollections(),
+                                    )
+                                }
+                                count={itemCount}
+                            />
+                        </div>
                     </Section>
                 </Main>
             </React.Fragment>
+        );
+    }
+
+    private renderTable(versions) {
+        return (
+            <table
+                aria-label='Collection versions'
+                className='content-table pf-c-table'
+            >
+                <thead>
+                    <tr aria-labelledby='headers'>
+                        <th>Namespace</th>
+                        <th>Collection</th>
+                        <th>Version</th>
+                        <th>Date created</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {versions.map((version, i) => this.renderRow(version, i))}
+                </tbody>
+            </table>
         );
     }
 
@@ -184,7 +264,7 @@ class CertificationDashboard extends React.Component<
 
     private renderButtons(version: CollectionVersion) {
         const importsLink = (
-            <DropdownItem key={2} component='span'>
+            <DropdownItem key={1} component='span'>
                 <Link
                     to={formatPath(
                         Paths.myImports,
@@ -207,10 +287,10 @@ class CertificationDashboard extends React.Component<
                     <span>
                         <StatefulDropdown
                             items={[
-                                <DropdownItem isDisabled key={1}>
+                                <DropdownItem isDisabled key={2}>
                                     Certify
                                 </DropdownItem>,
-                                <DropdownItem className='rejected-icon' key={1}>
+                                <DropdownItem className='rejected-icon' key={3}>
                                     Reject
                                 </DropdownItem>,
                                 importsLink,
@@ -223,8 +303,8 @@ class CertificationDashboard extends React.Component<
                     <span>
                         <StatefulDropdown
                             items={[
-                                <DropdownItem key={1}>Certify</DropdownItem>,
-                                <DropdownItem isDisabled key={1}>
+                                <DropdownItem key={2}>Certify</DropdownItem>,
+                                <DropdownItem isDisabled key={3}>
                                     Reject
                                 </DropdownItem>,
                                 importsLink,
@@ -240,7 +320,7 @@ class CertificationDashboard extends React.Component<
                         </Button>
                         <StatefulDropdown
                             items={[
-                                <DropdownItem className='rejected-icon' key={1}>
+                                <DropdownItem className='rejected-icon' key={2}>
                                     Reject
                                 </DropdownItem>,
                                 importsLink,
@@ -249,6 +329,22 @@ class CertificationDashboard extends React.Component<
                     </span>
                 );
         }
+    }
+
+    private queryCollections() {
+        this.setState({ loading: true }, () => {
+            CollectionVersionAPI.list(this.state.params).then(result =>
+                this.setState({
+                    versions: result.data.data,
+                    itemCount: result.data.meta.count,
+                    loading: false,
+                }),
+            );
+        });
+    }
+
+    private get updateParams() {
+        return ParamHelper.updateParamsMixin();
     }
 }
 
