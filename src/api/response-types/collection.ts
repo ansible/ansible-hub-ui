@@ -5,7 +5,7 @@ export class CollectionUploadType {
 }
 
 export class CollectionVersion {
-    id: number;
+    id: string;
     version: string;
     metadata: {
         tags: string[];

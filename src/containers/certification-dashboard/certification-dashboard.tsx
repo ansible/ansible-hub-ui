@@ -4,7 +4,11 @@ import './certification-dashboard.scss';
 import * as moment from 'moment';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { BaseHeader } from '../../components';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import {
+    Main,
+    Section,
+    Spinner,
+} from '@redhat-cloud-services/frontend-components';
 import {
     Toolbar,
     ToolbarGroup,
@@ -52,6 +56,7 @@ interface IState {
     versions: CollectionVersion[];
     itemCount: number;
     loading: boolean;
+    updatingVersions: string[];
 }
 
 class CertificationDashboard extends React.Component<
@@ -74,11 +79,16 @@ class CertificationDashboard extends React.Component<
             params['sort'] = '-pulp_created';
         }
 
+        if (!params['certification']) {
+            params['certification'] = CertificationStatus.needsReview;
+        }
+
         this.state = {
             versions: undefined,
             itemCount: 0,
             params: params,
             loading: true,
+            updatingVersions: [],
         };
     }
 
@@ -226,8 +236,11 @@ class CertificationDashboard extends React.Component<
         );
     }
 
-    private renderStatus(status: CertificationStatus) {
-        switch (status) {
+    private renderStatus(version: CollectionVersion) {
+        if (this.state.updatingVersions.includes(version.id)) {
+            return <span className='fa status-icon fa-spin fa-spinner' />;
+        }
+        switch (version.certification) {
             case CertificationStatus.certified:
                 return (
                     <span>
@@ -276,7 +289,7 @@ class CertificationDashboard extends React.Component<
                     </Link>
                 </td>
                 <td>{moment(version.created_at).fromNow()}</td>
-                <td>{this.renderStatus(version.certification)}</td>
+                <td>{this.renderStatus(version)}</td>
                 <td>
                     <div className='control-column'>
                         <div>{this.renderButtons(version)}</div>
@@ -288,7 +301,7 @@ class CertificationDashboard extends React.Component<
 
     private renderButtons(version: CollectionVersion) {
         const importsLink = (
-            <DropdownItem key={1} component='span'>
+            <DropdownItem key='imports' component='span'>
                 <Link
                     to={formatPath(
                         Paths.myImports,
@@ -305,18 +318,45 @@ class CertificationDashboard extends React.Component<
             </DropdownItem>
         );
 
+        const certifyDropDown = (isDisabled: boolean) => (
+            <DropdownItem
+                onClick={() =>
+                    this.updateCertification(
+                        version,
+                        CertificationStatus.certified,
+                    )
+                }
+                isDisabled={isDisabled}
+                key='certify'
+            >
+                Certify
+            </DropdownItem>
+        );
+
+        const rejectDropDown = (isDisabled: boolean) => (
+            <DropdownItem
+                onClick={() =>
+                    this.updateCertification(
+                        version,
+                        CertificationStatus.notCertified,
+                    )
+                }
+                isDisabled={isDisabled}
+                className='rejected-icon'
+                key='reject'
+            >
+                Reject
+            </DropdownItem>
+        );
+
         switch (version.certification) {
             case CertificationStatus.certified:
                 return (
                     <span>
                         <StatefulDropdown
                             items={[
-                                <DropdownItem isDisabled key={2}>
-                                    Certify
-                                </DropdownItem>,
-                                <DropdownItem className='rejected-icon' key={3}>
-                                    Reject
-                                </DropdownItem>,
+                                certifyDropDown(true),
+                                rejectDropDown(false),
                                 importsLink,
                             ]}
                         />
@@ -327,10 +367,8 @@ class CertificationDashboard extends React.Component<
                     <span>
                         <StatefulDropdown
                             items={[
-                                <DropdownItem key={2}>Certify</DropdownItem>,
-                                <DropdownItem isDisabled key={3}>
-                                    Reject
-                                </DropdownItem>,
+                                certifyDropDown(false),
+                                rejectDropDown(true),
                                 importsLink,
                             ]}
                         />
@@ -339,32 +377,77 @@ class CertificationDashboard extends React.Component<
             case CertificationStatus.needsReview:
                 return (
                     <span>
-                        <Button>
+                        <Button
+                            onClick={() =>
+                                this.updateCertification(
+                                    version,
+                                    CertificationStatus.certified,
+                                )
+                            }
+                        >
                             <span>Certify</span>
                         </Button>
                         <StatefulDropdown
-                            items={[
-                                <DropdownItem className='rejected-icon' key={2}>
-                                    Reject
-                                </DropdownItem>,
-                                importsLink,
-                            ]}
+                            items={[rejectDropDown(false), importsLink]}
                         />
                     </span>
                 );
         }
     }
 
+    private updateCertification(version, certification) {
+        // Set the selected version to loading
+        this.setState(
+            {
+                updatingVersions: this.state.updatingVersions.concat([
+                    version.id,
+                ]),
+            },
+            () =>
+                // TODO: add error checking
+                // Perform the PUT request
+                CollectionVersionAPI.setCertifiation(
+                    version.namespace,
+                    version.name,
+                    version.version,
+                    certification,
+                ).then(() =>
+                    // Since pulp doesn't reply with the new object, perform a
+                    // second query to get the updated data
+                    CollectionVersionAPI.list({
+                        namespace: version.namespace,
+                        name: version.name,
+                        version: version.version,
+                    }).then(result => {
+                        const updatedVersion = result.data.data[0];
+                        const newVersionList = [...this.state.versions];
+                        const ind = newVersionList.findIndex(
+                            x => x.id === updatedVersion.id,
+                        );
+                        newVersionList[ind] = updatedVersion;
+
+                        this.setState({
+                            versions: newVersionList,
+                            updatingVersions: this.state.updatingVersions.filter(
+                                v => v != updatedVersion.id,
+                            ),
+                        });
+                    }),
+                ),
+        );
+    }
+
     private queryCollections() {
-        this.setState({ loading: true }, () => {
+        this.setState({ loading: true }, () =>
             CollectionVersionAPI.list(this.state.params).then(result =>
                 this.setState({
                     versions: result.data.data,
                     itemCount: result.data.meta.count,
                     loading: false,
+                    updatingVersions: [],
                 }),
-            );
-        });
+            ),
+        );
     }
 
     private get updateParams() {
