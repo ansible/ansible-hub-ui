@@ -238,6 +238,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
         this.setState({ loading: true }, () => {
             CollectionAPI.list({
                 ...ParamHelper.getReduced(this.state.params, ['view_type']),
+                deprecated: false,
                 certification: CertificationStatus.certified,
             }).then(result => {
                 this.setState({

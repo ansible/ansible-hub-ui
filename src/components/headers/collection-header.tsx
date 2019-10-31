@@ -7,6 +7,7 @@ import {
     FormSelect,
     FormSelectOption,
     DropdownItem,
+    Alert,
 } from '@patternfly/react-core';
 
 import { BaseHeader, Breadcrumbs, StatefulDropdown } from '../../components';
@@ -106,6 +107,13 @@ export class CollectionHeader extends React.Component<IProps> {
                     </div>
                 }
             >
+                {collection.deprecated && (
+                    <Alert
+                        variant='danger'
+                        isInline
+                        title='This collection has been deprecated.'
+                    />
+                )}
                 <div className='tab-link-container'>
                     <div className='tabs'>{this.renderTabs(activeTab)}</div>
                     <div className='links'>

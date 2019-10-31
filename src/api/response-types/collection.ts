@@ -48,7 +48,7 @@ export class CollectionListType {
     name: string;
     description: string;
     download_count: number;
-    // deprecated: boolean;
+    deprecated: boolean;
     latest_version: CollectionVersion;
 
     namespace: {
@@ -99,6 +99,7 @@ export class ContentSummaryType {
 }
 
 export class CollectionDetailType {
+    deprecated: boolean;
     all_versions: {
         id: string;
         version: string;

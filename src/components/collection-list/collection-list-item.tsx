@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import * as moment from 'moment';
 
 import { Paths, formatPath } from '../../paths';
-import { NumericLabel, Tag, Logo } from '../../components';
+import { NumericLabel, Tag, Logo, DeprecatedTag } from '../../components';
 import { CollectionListType } from '../../api';
 import { convertContentSummaryCounts } from '../../utilities';
 
@@ -33,6 +33,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
             namespace,
             showNamespace,
             controls,
+            deprecated,
         } = this.props;
 
         const cells = [];
@@ -66,6 +67,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                     >
                         {name}
                     </Link>
+                    {deprecated && <DeprecatedTag />}
                     {showNamespace ? (
                         <TextContent>
                             <Text component={TextVariants.small}>
