@@ -70,6 +70,10 @@ class CertificationDashboard extends React.Component<
             params['page_size'] = 10;
         }
 
+        if (!params['sort']) {
+            params['sort'] = '-pulp_created';
+        }
+
         this.state = {
             versions: undefined,
             itemCount: 0,
@@ -159,7 +163,7 @@ class CertificationDashboard extends React.Component<
                                     )
                                 }
                                 params={params}
-                                ignoredParams={['page_size', 'page']}
+                                ignoredParams={['page_size', 'page', 'sort']}
                             />
                         </div>
                         {loading ? (
