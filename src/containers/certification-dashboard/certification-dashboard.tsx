@@ -4,11 +4,7 @@ import './certification-dashboard.scss';
 import * as moment from 'moment';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { BaseHeader } from '../../components';
-import {
-    Main,
-    Section,
-    Spinner,
-} from '@redhat-cloud-services/frontend-components';
+import { Main, Section } from '@redhat-cloud-services/frontend-components';
 import {
     Toolbar,
     ToolbarGroup,
@@ -42,6 +38,7 @@ import {
     LoadingPageSpinner,
     AppliedFilters,
     Pagination,
+    Sort,
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
 
@@ -99,6 +96,16 @@ class CertificationDashboard extends React.Component<
     render() {
         const { versions, params, itemCount, loading } = this.state;
 
+        const sortOptions = [
+            {
+                id: 'pulp_created',
+                title: 'Date created',
+            },
+            { id: 'namespace', title: 'Namespace name' },
+            { id: 'version', title: 'Version number' },
+            { id: 'name', title: 'Collection name' },
+        ];
+
         if (!versions) {
             return <LoadingPageWithHeader></LoadingPageWithHeader>;
         }
@@ -149,6 +156,19 @@ class CertificationDashboard extends React.Component<
                                                     ],
                                                 },
                                             ]}
+                                        />
+                                    </ToolbarItem>
+                                </ToolbarGroup>
+                                <ToolbarGroup>
+                                    <ToolbarItem>
+                                        <Sort
+                                            options={sortOptions}
+                                            params={params}
+                                            updateParams={p =>
+                                                this.updateParams(p, () =>
+                                                    this.queryCollections(),
+                                                )
+                                            }
                                         />
                                     </ToolbarItem>
                                 </ToolbarGroup>
