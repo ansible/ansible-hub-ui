@@ -2,7 +2,12 @@ import * as React from 'react';
 import './certification-dashboard.scss';
 
 import * as moment from 'moment';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import {
+    withRouter,
+    RouteComponentProps,
+    Link,
+    Redirect,
+} from 'react-router-dom';
 import { BaseHeader } from '../../components';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
 import {
@@ -54,6 +59,7 @@ interface IState {
     itemCount: number;
     loading: boolean;
     updatingVersions: string[];
+    redirect: string;
 }
 
 class CertificationDashboard extends React.Component<
@@ -86,6 +92,7 @@ class CertificationDashboard extends React.Component<
             params: params,
             loading: true,
             updatingVersions: [],
+            redirect: undefined,
         };
     }
 
@@ -94,7 +101,11 @@ class CertificationDashboard extends React.Component<
     }
 
     render() {
-        const { versions, params, itemCount, loading } = this.state;
+        const { versions, params, itemCount, loading, redirect } = this.state;
+
+        if (redirect) {
+            return <Redirect to={redirect}></Redirect>;
+        }
 
         const sortOptions = [
             {
@@ -258,7 +269,7 @@ class CertificationDashboard extends React.Component<
 
     private renderStatus(version: CollectionVersion) {
         if (this.state.updatingVersions.includes(version.id)) {
-            return <span className='fa status-icon fa-spin fa-spinner' />;
+            return <span className='fa fa-lg fa-spin fa-spinner' />;
         }
         switch (version.certification) {
             case CertificationStatus.certified:
@@ -459,14 +470,21 @@ class CertificationDashboard extends React.Component<
 
     private queryCollections() {
         this.setState({ loading: true }, () =>
-            CollectionVersionAPI.list(this.state.params).then(result =>
-                this.setState({
-                    versions: result.data.data,
-                    itemCount: result.data.meta.count,
-                    loading: false,
-                    updatingVersions: [],
+            CollectionVersionAPI.list(this.state.params)
+                .then(result =>
+                    this.setState({
+                        versions: result.data.data,
+                        itemCount: result.data.meta.count,
+                        loading: false,
+                        updatingVersions: [],
+                    }),
+                )
+                .catch(error => {
+                    if (error.response && error.response.status === 403) {
+                        console.log(error.response);
+                        this.setState({ redirect: Paths.notFound });
+                    }
                 }),
-            ),
         );
     }
 
