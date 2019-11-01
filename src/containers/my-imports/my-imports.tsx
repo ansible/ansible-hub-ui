@@ -251,7 +251,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
     }
 
     private loadImportList(callback?: () => void) {
-        ImportAPI.list(this.state.params)
+        ImportAPI.list({ ...this.state.params, sort: '-created' })
             .then(importList => {
                 this.setState(
                     {
