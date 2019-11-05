@@ -14,10 +14,9 @@ import { Link } from 'react-router-dom';
 import { CertificateIcon } from '@patternfly/react-icons';
 
 import { NumericLabel, Logo } from '../../components';
-import { CollectionListType } from '../../api';
+import { CollectionListType, CertificationStatus } from '../../api';
 import { formatPath, Paths } from '../../paths';
 import { convertContentSummaryCounts } from '../../utilities';
-
 
 interface IProps extends CollectionListType {
     className?: string;
@@ -27,12 +26,7 @@ export class CollectionCard extends React.Component<IProps> {
     MAX_DESCRIPTION_LENGTH = 50;
 
     render() {
-        const {
-            name,
-            latest_version,
-            namespace,
-            className,
-        } = this.props;
+        const { name, latest_version, namespace, className } = this.props;
 
         const company = namespace.company || namespace.name;
         const contentSummary = convertContentSummaryCounts(
@@ -48,9 +42,12 @@ export class CollectionCard extends React.Component<IProps> {
                         size='40px'
                     />
                     <TextContent>
-                        <Text component={TextVariants.small}>
-                            <CertificateIcon className='icon' /> Certified
-                        </Text>
+                        {latest_version.certification ===
+                            CertificationStatus.certified && (
+                            <Text component={TextVariants.small}>
+                                <CertificateIcon className='icon' /> Certified
+                            </Text>
+                        )}
                     </TextContent>
                 </CardHead>
                 <CardHead>
@@ -77,10 +74,7 @@ export class CollectionCard extends React.Component<IProps> {
                 </CardBody>
                 <CardFooter className='type-container'>
                     {Object.keys(contentSummary.contents).map(k =>
-                        this.renderTypeCount(
-                            k,
-                            contentSummary.contents[k],
-                        ),
+                        this.renderTypeCount(k, contentSummary.contents[k]),
                     )}
                 </CardFooter>
             </Card>
