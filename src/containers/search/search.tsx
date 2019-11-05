@@ -24,7 +24,11 @@ import {
     Pagination,
     LoadingPageSpinner,
 } from '../../components';
-import { CollectionAPI, CollectionListType } from '../../api';
+import {
+    CollectionAPI,
+    CollectionListType,
+    CertificationStatus,
+} from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
 import { Constants } from '../../constants';
 
@@ -220,11 +224,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
     private queryCollections() {
         this.setState({ loading: true }, () => {
-            CollectionAPI.list(
-                ParamHelper.getReduced(this.state.params, [
-                    'view_type',
-                ]),
-            ).then(result => {
+            CollectionAPI.list({
+                ...ParamHelper.getReduced(this.state.params, ['view_type']),
+                certification: CertificationStatus.certified,
+            }).then(result => {
                 this.setState({
                     collections: result.data.data,
                     numberOfResults: result.data.meta.count,
