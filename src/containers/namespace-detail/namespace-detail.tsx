@@ -208,11 +208,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 });
                 break;
             case 'deprecate':
-                // TODO: handle errors
-                CollectionAPI.setDeprecation(
-                    collection,
-                    !collection.deprecated,
-                ).then(() => this.loadCollections());
+                CollectionAPI.setDeprecation(collection, !collection.deprecated)
+                    .then(() => this.loadCollections())
+                    .catch(error => {
+                        this.setState({
+                            warning: 'API Error: Failed to set deprecation.',
+                        });
+                    });
                 break;
         }
     }
