@@ -260,31 +260,43 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 </Button>
                 <StatefulDropdown
                     items={[
-                        <DropdownItem key='1'>
-                            <Link
-                                to={formatPath(Paths.editNamespace, {
-                                    namespace: this.state.namespace.name,
-                                })}
-                            >
-                                Edit namespace
-                            </Link>
-                        </DropdownItem>,
-                        <DropdownItem key='2'>
-                            <Link
-                                to={formatPath(
-                                    Paths.myImports,
-                                    {},
-                                    { namespace: this.state.namespace.name },
-                                )}
-                            >
-                                Imports
-                            </Link>
-                        </DropdownItem>,
-                        <DropdownItem key='3'>
-                            <Link to={Paths.token} target='_blank'>
-                                Get API token
-                            </Link>
-                        </DropdownItem>,
+                        <DropdownItem
+                            key='1'
+                            component={
+                                <Link
+                                    to={formatPath(Paths.editNamespace, {
+                                        namespace: this.state.namespace.name,
+                                    })}
+                                >
+                                    Edit namespace
+                                </Link>
+                            }
+                        />,
+                        <DropdownItem
+                            key='2'
+                            component={
+                                <Link
+                                    to={formatPath(
+                                        Paths.myImports,
+                                        {},
+                                        {
+                                            namespace: this.state.namespace
+                                                .name,
+                                        },
+                                    )}
+                                >
+                                    Imports
+                                </Link>
+                            }
+                        />,
+                        <DropdownItem
+                            key='3'
+                            component={
+                                <Link to={Paths.token} target='_blank'>
+                                    Get API token
+                                </Link>
+                            }
+                        />,
                     ]}
                 />
             </div>
