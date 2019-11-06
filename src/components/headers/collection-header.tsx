@@ -83,11 +83,14 @@ export class CollectionHeader extends React.Component<IProps> {
                         </FormSelect>
                         <StatefulDropdown
                             items={[
-                                <DropdownItem key='1'>
-                                    <Link to={Paths.token} target='_blank'>
-                                        Get API token
-                                    </Link>
-                                </DropdownItem>,
+                                <DropdownItem
+                                    key='1'
+                                    component={
+                                        <Link to={Paths.token} target='_blank'>
+                                            Get API token
+                                        </Link>
+                                    }
+                                />,
                             ]}
                         />
                     </div>
