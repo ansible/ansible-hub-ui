@@ -21,3 +21,5 @@ export { ImportAPI } from './import';
 export { UserAPI } from './user';
 export { UserAuth } from './response-types/user';
 export { CollectionVersionAPI } from './collection-version';
+export { MeAPI } from './me';
+export { MeType } from './response-types/me';

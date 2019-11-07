@@ -34,6 +34,8 @@ import {
     CollectionVersionAPI,
     CollectionVersion,
     CertificationStatus,
+    MeAPI,
+    MeType,
 } from '../../api';
 import { ParamHelper } from '../../utilities';
 import {
@@ -97,7 +99,14 @@ class CertificationDashboard extends React.Component<
     }
 
     componentDidMount() {
-        this.queryCollections();
+        MeAPI.get().then(response => {
+            const me: MeType = response.data;
+            if (!me.is_partner_engineer) {
+                this.setState({ redirect: Paths.notFound });
+            } else {
+                this.queryCollections();
+            }
+        });
     }
 
     render() {
@@ -470,21 +479,14 @@ class CertificationDashboard extends React.Component<
 
     private queryCollections() {
         this.setState({ loading: true }, () =>
-            CollectionVersionAPI.list(this.state.params)
-                .then(result =>
-                    this.setState({
-                        versions: result.data.data,
-                        itemCount: result.data.meta.count,
-                        loading: false,
-                        updatingVersions: [],
-                    }),
-                )
-                .catch(error => {
-                    if (error.response && error.response.status === 403) {
-                        console.log(error.response);
-                        this.setState({ redirect: Paths.notFound });
-                    }
+            CollectionVersionAPI.list(this.state.params).then(result =>
+                this.setState({
+                    versions: result.data.data,
+                    itemCount: result.data.meta.count,
+                    loading: false,
+                    updatingVersions: [],
                 }),
+            ),
         );
     }
 
