@@ -240,7 +240,7 @@ class CollectionGenerator extends RandomGenerator {
             latest_version: latest_version,
             all_versions: [
                 {
-                    id: 9,
+                    id: '9',
                     version: '1.0.0',
                     created: this.randDate(
                         new Date(2019, 0, 1),
