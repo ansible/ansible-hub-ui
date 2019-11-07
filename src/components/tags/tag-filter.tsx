@@ -21,20 +21,32 @@ export class TagFilter extends React.Component<IProps> {
             <div>
                 <div>Tags</div>
                 {tags.map(t => (
-                    <Checkbox
+                    <div
+                        key={t}
                         style={{
                             marginLeft: '10px',
+                            marginTop: '5px',
                         }}
-                        key={t}
-                        label={t}
-                        id={t}
-                        isChecked={ParamHelper.paramExists(
-                            params,
-                            this.tagParam,
-                            t,
-                        )}
-                        onChange={checked => this.updateTags(t, checked)}
-                    />
+                    >
+                        <Checkbox
+                            label={
+                                <span
+                                    style={{
+                                        textTransform: 'capitalize',
+                                    }}
+                                >
+                                    {t}
+                                </span>
+                            }
+                            id={t}
+                            isChecked={ParamHelper.paramExists(
+                                params,
+                                this.tagParam,
+                                t,
+                            )}
+                            onChange={checked => this.updateTags(t, checked)}
+                        />
+                    </div>
                 ))}
             </div>
         );

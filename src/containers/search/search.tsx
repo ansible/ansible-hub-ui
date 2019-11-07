@@ -67,7 +67,19 @@ class Search extends React.Component<RouteComponentProps, IState> {
             loading: true,
         };
 
-        this.tags = ['network', 'cloud', 'package', 'security'];
+        this.tags = [
+            'cloud',
+            'linux',
+            'network',
+            'storage',
+            'security',
+            'windows',
+            'infrastructure',
+            'monitoring',
+            'tools',
+            'database',
+            'application',
+        ];
     }
 
     componentDidMount() {
