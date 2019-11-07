@@ -142,6 +142,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                         this.toggleImportModal(isOpen, warn)
                     }
                     collection={updateCollection}
+                    namespace={namespace.name}
                 />
                 {warning ? (
                     <Alert
