@@ -14,8 +14,7 @@ export class API extends BaseAPI {
         version: string,
         certification: CertificationStatus,
     ) {
-        const path = 'v3/collections/';
-        const id = `${namespace}/${collection}/versions/${version}/certified`;
+        const id = `${namespace}/${collection}/${version}/certified`;
 
         return this.update(
             id,
@@ -25,7 +24,6 @@ export class API extends BaseAPI {
                 version: version,
                 certification: certification,
             },
-            path,
         );
     }
 }

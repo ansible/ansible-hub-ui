@@ -1,5 +1,5 @@
 export class CollectionUploadType {
-    id: number;
+    id: string;
     file: File;
     sha256: string;
 }
@@ -44,7 +44,7 @@ export class CollectionVersionDetail extends CollectionVersion {
 }
 
 export class CollectionListType {
-    id: number;
+    id: string;
     name: string;
     description: string;
     download_count: number;
@@ -100,13 +100,13 @@ export class ContentSummaryType {
 
 export class CollectionDetailType {
     all_versions: {
-        id: number;
+        id: string;
         version: string;
         created: string;
     }[];
     latest_version: CollectionVersionDetail;
 
-    id: number;
+    id: string;
     name: string;
     description: string;
     download_count: number;
