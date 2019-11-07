@@ -341,21 +341,24 @@ class CertificationDashboard extends React.Component<
 
     private renderButtons(version: CollectionVersion) {
         const importsLink = (
-            <DropdownItem key='imports' component='span'>
-                <Link
-                    to={formatPath(
-                        Paths.myImports,
-                        {},
-                        {
-                            namespace: version.namespace,
-                            name: version.name,
-                            version: version.version,
-                        },
-                    )}
-                >
-                    View Import Logs
-                </Link>
-            </DropdownItem>
+            <DropdownItem
+                key='imports'
+                component={
+                    <Link
+                        to={formatPath(
+                            Paths.myImports,
+                            {},
+                            {
+                                namespace: version.namespace,
+                                name: version.name,
+                                version: version.version,
+                            },
+                        )}
+                    >
+                        View Import Logs
+                    </Link>
+                }
+            />
         );
 
         const certifyDropDown = (isDisabled: boolean) => (
