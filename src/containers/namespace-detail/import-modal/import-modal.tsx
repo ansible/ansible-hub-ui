@@ -22,6 +22,7 @@ interface IProps {
     onUploadSuccess: (result) => void;
 
     collection?: CollectionListType;
+    namespace: string;
 }
 
 interface IState {
@@ -34,6 +35,7 @@ interface IState {
 export class ImportModal extends React.Component<IProps, IState> {
     acceptedFileTypes = ['application/x-gzip', 'application/gzip'];
     cancelToken: any;
+    COLLECTION_NAME_REGEX = /[0-9a-z_]+\-[0-9a-z_]+\-[0-9A-Za-z.+-]+/;
 
     constructor(props) {
         super(props);
@@ -160,12 +162,24 @@ export class ImportModal extends React.Component<IProps, IState> {
                 file: newCollection,
                 uploadProgress: 0,
             });
+        } else if (!this.COLLECTION_NAME_REGEX.test(newCollection.name)) {
+            this.setState({
+                errors: `Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'`,
+                file: newCollection,
+                uploadProgress: 0,
+            });
         } else if (
             collection &&
             collection.name !== newCollection.name.split('-')[1]
         ) {
             this.setState({
-                errors: `The file you have selected doesn't appear to match ${collection.name}`,
+                errors: `The collection you have selected doesn't appear to match ${collection.name}`,
+                file: newCollection,
+                uploadProgress: 0,
+            });
+        } else if (this.props.namespace != newCollection.name.split('-')[0]) {
+            this.setState({
+                errors: `The collection you have selected does not match this namespace.`,
                 file: newCollection,
                 uploadProgress: 0,
             });
@@ -205,8 +219,20 @@ export class ImportModal extends React.Component<IProps, IState> {
                 // If request was canceled by the user
                 if (!axios.isCancel(errors)) {
                     // Upload fails
-                    for (let err of errors.response.data.errors) {
-                        errorMessage = errorMessage + err.detail + ' ';
+                    if (errors.response.data.errors) {
+                        const messages = [];
+                        for (let err of errors.response.data.errors) {
+                            messages.push(
+                                err.detail ||
+                                    err.title ||
+                                    err.code ||
+                                    'API error. Status code: ' + err.status,
+                            );
+                        }
+                        errorMessage = messages.join(', ');
+                    } else {
+                        errorMessage =
+                            'API error. Status code: ' + errors.response.status;
                     }
                 }
 
