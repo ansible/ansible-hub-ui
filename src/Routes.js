@@ -103,6 +103,13 @@ const TokenPage = asyncComponent(() =>
     ),
 );
 
+const CertificationDashboard = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "settings" */
+        './containers/certification-dashboard/certification-dashboard'
+    ),
+);
+
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
     const root = document.getElementById('root');
     root.removeAttribute('class');
@@ -130,6 +137,11 @@ export const Routes = props => {
 
     return (
         <Switch>
+            <InsightsRoute
+                path={Paths.certificationDashboard}
+                component={CertificationDashboard}
+                rootClass='root'
+            />
             <InsightsRoute
                 path={Paths.notFound}
                 component={NotFound}
@@ -180,7 +192,6 @@ export const Routes = props => {
                 component={CollectionContent}
                 rootClass='root'
             />
-
             <InsightsRoute
                 path={Paths.myImports}
                 component={MyImports}

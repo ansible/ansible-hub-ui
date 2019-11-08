@@ -63,7 +63,7 @@ export class MockCollection {
         for (let i = 0; i < this.collectionNames.length; i++) {
             collections.push(
                 CollectionGenerator.generate(
-                    i,
+                    String(i),
                     this.collectionNames[i],
                     redHat,
                 ),
@@ -91,7 +91,7 @@ class CollectionGenerator extends RandomGenerator {
                 version: `${this.randNum(5)}.${this.randNum(10)}.${this.randNum(
                     100,
                 )}`,
-                created: this.randDate(
+                created_at: this.randDate(
                     new Date(2016, 0, 1),
                     new Date(),
                 ).toString(),
@@ -240,10 +240,7 @@ class CollectionGenerator extends RandomGenerator {
             latest_version: latest_version,
             all_versions: [
                 {
-                    ...collection.latest_version,
-                },
-                {
-                    id: 9,
+                    id: '9',
                     version: '1.0.0',
                     created: this.randDate(
                         new Date(2019, 0, 1),

@@ -7,7 +7,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
 import { Bullseye } from '@patternfly/react-core';
 
-import { BaseHeader, NotImplemented } from '../../components';
+import { BaseHeader } from '../../components';
 
 class NotFound extends React.Component<RouteComponentProps, {}> {
     render() {

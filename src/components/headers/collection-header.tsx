@@ -41,6 +41,20 @@ export class CollectionHeader extends React.Component<IProps> {
             className,
         } = this.props;
 
+        const all_versions = [...collection.all_versions];
+
+        const match = all_versions.find(
+            x => x.version === collection.latest_version.version,
+        );
+
+        if (!match) {
+            all_versions.push({
+                id: collection.latest_version.id,
+                version: collection.latest_version.version,
+                created: collection.latest_version.created_at,
+            });
+        }
+
         const urlKeys = [
             { key: 'documentation', name: 'Docs site' },
             { key: 'homepage', name: 'Website' },
@@ -66,14 +80,10 @@ export class CollectionHeader extends React.Component<IProps> {
                                     ),
                                 )
                             }
-                            value={
-                                params.version
-                                    ? params.version
-                                    : collection.latest_version.version
-                            }
+                            value={collection.latest_version.version}
                             aria-label='Select collection version'
                         >
-                            {collection.all_versions.map(v => (
+                            {all_versions.map(v => (
                                 <FormSelectOption
                                     key={v.version}
                                     value={v.version}
@@ -123,7 +133,7 @@ export class CollectionHeader extends React.Component<IProps> {
         );
     }
 
-    renderTabs(active) {
+    private renderTabs(active) {
         // We're not using the Tab react component because they don't support
         // links.
         const { params } = this.props;

@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 import { CertificateIcon } from '@patternfly/react-icons';
 
 import { NumericLabel, Logo } from '../../components';
-import { CollectionListType } from '../../api';
+import { CollectionListType, CertificationStatus } from '../../api';
 import { formatPath, Paths } from '../../paths';
 import { convertContentSummaryCounts } from '../../utilities';
 
@@ -42,9 +42,12 @@ export class CollectionCard extends React.Component<IProps> {
                         size='40px'
                     />
                     <TextContent>
-                        <Text component={TextVariants.small}>
-                            <CertificateIcon className='icon' /> Certified
-                        </Text>
+                        {latest_version.certification ===
+                            CertificationStatus.certified && (
+                            <Text component={TextVariants.small}>
+                                <CertificateIcon className='icon' /> Certified
+                            </Text>
+                        )}
                     </TextContent>
                 </CardHead>
                 <CardHead>
