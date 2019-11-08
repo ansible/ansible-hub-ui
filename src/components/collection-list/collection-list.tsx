@@ -10,18 +10,17 @@ import {
     EmptyStateIcon,
     Title,
     EmptyStateVariant,
+    EmptyStateBody,
 } from '@patternfly/react-core';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
 
 import { CollectionListType } from '../../api';
 import {
     CollectionListItem,
-    Sort,
     Toolbar,
     Pagination,
     StatefulDropdown,
 } from '../../components';
-import { Constants } from '../../constants';
 import { ParamHelper } from '../../utilities/param-helper';
 
 interface IProps {
@@ -106,6 +105,9 @@ export class CollectionList extends React.Component<IProps, IState> {
                             <Title headingLevel='h2' size='lg'>
                                 No collections found
                             </Title>
+                            <EmptyStateBody>
+                                Please try adjusting your search query.
+                            </EmptyStateBody>
                         </EmptyState>
                     )}
                 </DataList>
