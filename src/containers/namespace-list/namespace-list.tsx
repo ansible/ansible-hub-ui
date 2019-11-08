@@ -3,6 +3,14 @@ import './namespace-list.scss';
 
 import { RouteComponentProps, Link } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import {
+    EmptyState,
+    EmptyStateIcon,
+    Title,
+    EmptyStateBody,
+    EmptyStateVariant,
+} from '@patternfly/react-core';
+import { WarningTriangleIcon } from '@patternfly/react-icons';
 
 import { ParamHelper } from '../../utilities/param-helper';
 import {
@@ -92,22 +100,39 @@ export class NamespaceList extends React.Component<IProps, IState> {
                     </div>
                 </BaseHeader>
                 <Main>
-                    <Section className='card-layout'>
-                        {namespaces.map((ns, i) => (
-                            <div key={i} className='card-wrapper'>
-                                <Link
-                                    to={formatPath(namespacePath, {
-                                        namespace: ns.name,
-                                    })}
-                                >
-                                    <NamespaceCard
-                                        key={i}
-                                        {...ns}
-                                    ></NamespaceCard>
-                                </Link>
-                            </div>
-                        ))}
-                    </Section>
+                    {namespaces.length === 0 ? (
+                        <Section>
+                            <EmptyState
+                                className='empty'
+                                variant={EmptyStateVariant.full}
+                            >
+                                <EmptyStateIcon icon={WarningTriangleIcon} />
+                                <Title headingLevel='h2' size='lg'>
+                                    No matches
+                                </Title>
+                                <EmptyStateBody>
+                                    Please try adjusting your search query.
+                                </EmptyStateBody>
+                            </EmptyState>
+                        </Section>
+                    ) : (
+                        <Section className='card-layout'>
+                            {namespaces.map((ns, i) => (
+                                <div key={i} className='card-wrapper'>
+                                    <Link
+                                        to={formatPath(namespacePath, {
+                                            namespace: ns.name,
+                                        })}
+                                    >
+                                        <NamespaceCard
+                                            key={i}
+                                            {...ns}
+                                        ></NamespaceCard>
+                                    </Link>
+                                </div>
+                            ))}
+                        </Section>
+                    )}
                 </Main>
             </React.Fragment>
         );

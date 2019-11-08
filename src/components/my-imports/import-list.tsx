@@ -134,7 +134,7 @@ export class ImportList extends React.Component<IProps, IState> {
                     </Title>
 
                     <EmptyStateBody>
-                        There have not been any imports on this namespace
+                        There have not been any imports on this namespace.
                     </EmptyStateBody>
                 </EmptyState>
             );

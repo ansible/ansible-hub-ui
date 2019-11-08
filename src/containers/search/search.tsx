@@ -191,7 +191,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
                     No matches
                 </Title>
                 <EmptyStateBody>
-                    Please try adjusting your search query
+                    Please try adjusting your search query.
                 </EmptyStateBody>
             </EmptyState>
         );
