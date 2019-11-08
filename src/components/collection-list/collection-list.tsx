@@ -90,7 +90,7 @@ export class CollectionList extends React.Component<IProps, IState> {
                             <CollectionListItem
                                 controls={
                                     showControls
-                                        ? this.renderCollectionControls(c.id)
+                                        ? this.renderCollectionControls(c)
                                         : null
                                 }
                                 key={c.id}
@@ -136,11 +136,13 @@ export class CollectionList extends React.Component<IProps, IState> {
         }
     }
 
-    private renderCollectionControls(id) {
+    private renderCollectionControls(collection: CollectionListType) {
         return (
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Button
-                    onClick={() => this.props.handleControlClick(id, 'upload')}
+                    onClick={() =>
+                        this.props.handleControlClick(collection.id, 'upload')
+                    }
                     variant='secondary'
                 >
                     Upload new version
@@ -149,11 +151,16 @@ export class CollectionList extends React.Component<IProps, IState> {
                     items={[
                         <DropdownItem
                             onClick={e =>
-                                this.props.handleControlClick(id, 'deprecate')
+                                this.props.handleControlClick(
+                                    collection.id,
+                                    'deprecate',
+                                )
                             }
                             key='1'
                         >
-                            Deprecate
+                            {collection.deprecated
+                                ? 'Undeprecate'
+                                : 'Deprecate'}
                         </DropdownItem>,
                     ]}
                 />

@@ -198,13 +198,24 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     }
 
     private handleCollectionAction(id, action) {
-        if (action === 'upload') {
-            const collection = this.state.collections.find(x => x.id === id);
+        const collection = this.state.collections.find(x => x.id === id);
 
-            this.setState({
-                updateCollection: collection,
-                showImportModal: true,
-            });
+        switch (action) {
+            case 'upload':
+                this.setState({
+                    updateCollection: collection,
+                    showImportModal: true,
+                });
+                break;
+            case 'deprecate':
+                CollectionAPI.setDeprecation(collection, !collection.deprecated)
+                    .then(() => this.loadCollections())
+                    .catch(error => {
+                        this.setState({
+                            warning: 'API Error: Failed to set deprecation.',
+                        });
+                    });
+                break;
         }
     }
 
