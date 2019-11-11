@@ -27,6 +27,11 @@
         min-width: 190px;
         padding: 16px;
         padding-top: 24px;
+
+        @media (max-width: $breakpoint-md) {
+            margin-bottom: 24px;
+            margin-right: -24px;
+        }
     }
 
     .cards {
