@@ -41,10 +41,6 @@ export class CollectionContentList extends React.Component<IProps> {
         const showing = params.showing || 'all';
         const keywords = params.keywords || '';
 
-        // if (keywords === '' && showing === 'all') {
-        //     toShow = contents;
-        // } else {
-        // }
         for (let c of contents) {
             summary['all']++;
             if (summary[c.content_type]) {
@@ -78,6 +74,7 @@ export class CollectionContentList extends React.Component<IProps> {
                                             ),
                                         )
                                     }
+                                    aria-label='find-content'
                                     placeholder='Find content'
                                 />
                             </ToolbarItem>
