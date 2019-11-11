@@ -33,6 +33,7 @@ interface IState {
         page_size?: number;
         tenant?: string;
     };
+    hasPermission: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -60,15 +61,28 @@ export class NamespaceList extends React.Component<IProps, IState> {
             namespaces: undefined,
             itemCount: 0,
             params: params,
+            hasPermission: true,
         };
     }
 
     componentDidMount() {
-        this.loadNamespaces();
+        if (this.props.filterOwner) {
+            // Make a query with no params and see if it returns results to tell
+            // if the user can edit namespaces
+            NamespaceAPI.getMyNamespaces({}).then(results => {
+                if (results.data.meta.count !== 0) {
+                    this.loadNamespaces();
+                } else {
+                    this.setState({ hasPermission: false, namespaces: [] });
+                }
+            });
+        } else {
+            this.loadNamespaces();
+        }
     }
 
     render() {
-        const { namespaces, params, itemCount } = this.state;
+        const { namespaces, params, itemCount, hasPermission } = this.state;
         const { title, namespacePath } = this.props;
         if (!namespaces) {
             return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -108,10 +122,14 @@ export class NamespaceList extends React.Component<IProps, IState> {
                             >
                                 <EmptyStateIcon icon={WarningTriangleIcon} />
                                 <Title headingLevel='h2' size='lg'>
-                                    No matches
+                                    {hasPermission
+                                        ? 'No matches'
+                                        : 'No managed namespaces'}
                                 </Title>
                                 <EmptyStateBody>
-                                    Please try adjusting your search query.
+                                    {hasPermission
+                                        ? 'Please try adjusting your search query.'
+                                        : 'This account is not set up to manage any namespaces.'}
                                 </EmptyStateBody>
                             </EmptyState>
                         </Section>
