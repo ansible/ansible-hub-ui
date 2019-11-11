@@ -13,8 +13,11 @@ import {
     Pagination,
     FormSelect,
     FormSelectOption,
+    InputGroup,
+    Button,
+    ButtonVariant,
 } from '@patternfly/react-core';
-import { InfoIcon } from '@patternfly/react-icons';
+import { InfoIcon, SearchIcon } from '@patternfly/react-icons';
 import { Spinner } from '@redhat-cloud-services/frontend-components';
 
 import { PulpStatus, NamespaceType, ImportListType } from '../../api';
@@ -65,21 +68,28 @@ export class ImportList extends React.Component<IProps, IState> {
 
         const { kwField } = this.state;
 
-        const pageNumber = Number(params.page) || 1;
-        const pageSize = Number(params.page_size) || 10;
-
         return (
             <div className='import-list'>
                 {this.renderNamespacePicker(namespaces)}
-                <TextInput
-                    value={kwField}
-                    onChange={k => this.setState({ kwField: k })}
-                    onKeyPress={e => this.handleEnter(e)}
-                    type='search'
-                    aria-label='search text input'
-                    placeholder='Find import'
-                    className='search-box'
-                />
+                <InputGroup className='search-box'>
+                    <TextInput
+                        value={kwField}
+                        onChange={k => this.setState({ kwField: k })}
+                        onKeyPress={e => this.handleEnter(e)}
+                        type='search'
+                        aria-label='search text input'
+                        placeholder='Search imports'
+                    />
+
+                    <Button
+                        variant={ButtonVariant.control}
+                        aria-label='search button'
+                        onClick={() => this.submitSearch()}
+                    >
+                        <SearchIcon />
+                    </Button>
+                </InputGroup>
+
                 <div>
                     {this.renderList(
                         selectImport,
@@ -98,6 +108,7 @@ export class ImportList extends React.Component<IProps, IState> {
                     onPerPageSelect={(_, p) => {
                         updateParams({ ...params, page: 1, page_size: p });
                     }}
+                    isCompact={true}
                 />
             </div>
         );
@@ -171,14 +182,18 @@ export class ImportList extends React.Component<IProps, IState> {
 
     private handleEnter(e) {
         if (e.key === 'Enter') {
-            this.props.updateParams(
-                ParamHelper.setParam(
-                    this.props.params,
-                    'keywords',
-                    this.state.kwField,
-                ),
-            );
+            this.submitSearch();
         }
+    }
+
+    private submitSearch() {
+        this.props.updateParams(
+            ParamHelper.setParam(
+                this.props.params,
+                'keywords',
+                this.state.kwField,
+            ),
+        );
     }
 
     private renderDescription(item) {
