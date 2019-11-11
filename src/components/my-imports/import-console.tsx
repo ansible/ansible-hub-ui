@@ -93,6 +93,20 @@ export class ImportConsole extends React.Component<IProps, {}> {
                             </span>
                         </div>
                     ) : null}
+
+                    {task.state === PulpStatus.completed && (
+                        <div className='message'>
+                            <br />
+                            <span className='success'>Done</span>
+                        </div>
+                    )}
+
+                    {task.state === PulpStatus.failed && (
+                        <div className='message'>
+                            <br />
+                            <span className='failed'>Failed</span>
+                        </div>
+                    )}
                 </div>
                 <div
                     className='last-message'
@@ -103,7 +117,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
         );
     }
 
-    renderMessage(item, i) {
+    private renderMessage(item, i) {
         return (
             <div className='message' key={i}>
                 <span className={item.level.toLowerCase()}>
@@ -113,7 +127,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
         );
     }
 
-    renderTitle(selectedImport) {
+    private renderTitle(selectedImport) {
         const { task } = this.props;
         return (
             <div>
