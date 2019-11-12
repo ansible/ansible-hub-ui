@@ -16,15 +16,12 @@ export class API extends BaseAPI {
     ) {
         const id = `${namespace}/${collection}/${version}/certified`;
 
-        return this.update(
-            id,
-            {
-                namespace: namespace,
-                name: collection,
-                version: version,
-                certification: certification,
-            },
-        );
+        return this.update(id, {
+            namespace: namespace,
+            name: collection,
+            version: version,
+            certification: certification,
+        });
     }
 }
 

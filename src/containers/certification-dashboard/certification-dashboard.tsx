@@ -46,6 +46,9 @@ import {
     AppliedFilters,
     Pagination,
     Sort,
+    AlertList,
+    closeAlertMixin,
+    AlertType,
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
 
@@ -57,6 +60,7 @@ interface IState {
         page?: number;
         page_size?: number;
     };
+    alerts: AlertType[];
     versions: CollectionVersion[];
     itemCount: number;
     loading: boolean;
@@ -95,6 +99,7 @@ class CertificationDashboard extends React.Component<
             loading: true,
             updatingVersions: [],
             redirect: undefined,
+            alerts: [],
         };
     }
 
@@ -132,6 +137,10 @@ class CertificationDashboard extends React.Component<
         return (
             <React.Fragment>
                 <BaseHeader title='Certification dashboard'></BaseHeader>
+                <AlertList
+                    alerts={this.state.alerts}
+                    closeAlert={i => this.closeAlert(i)}
+                />
                 <Main>
                     <Section className='body'>
                         <div className='toolbar'>
@@ -447,36 +456,51 @@ class CertificationDashboard extends React.Component<
                 ]),
             },
             () =>
-                // TODO: add error checking
                 // Perform the PUT request
                 CollectionVersionAPI.setCertifiation(
                     version.namespace,
                     version.name,
                     version.version,
                     certification,
-                ).then(() =>
-                    // Since pulp doesn't reply with the new object, perform a
-                    // second query to get the updated data
-                    CollectionVersionAPI.list({
-                        namespace: version.namespace,
-                        name: version.name,
-                        version: version.version,
-                    }).then(result => {
-                        const updatedVersion = result.data.data[0];
-                        const newVersionList = [...this.state.versions];
-                        const ind = newVersionList.findIndex(
-                            x => x.id === updatedVersion.id,
-                        );
-                        newVersionList[ind] = updatedVersion;
+                )
+                    .then(() =>
+                        // Since pulp doesn't reply with the new object, perform a
+                        // second query to get the updated data
+                        CollectionVersionAPI.list({
+                            namespace: version.namespace,
+                            name: version.name,
+                            version: version.version,
+                        }).then(result => {
+                            const updatedVersion = result.data.data[0];
+                            const newVersionList = [...this.state.versions];
+                            const ind = newVersionList.findIndex(
+                                x => x.id === updatedVersion.id,
+                            );
+                            newVersionList[ind] = updatedVersion;
 
+                            this.setState({
+                                versions: newVersionList,
+                                updatingVersions: this.state.updatingVersions.filter(
+                                    v => v != updatedVersion.id,
+                                ),
+                            });
+                        }),
+                    )
+                    .catch(error => {
                         this.setState({
-                            versions: newVersionList,
                             updatingVersions: this.state.updatingVersions.filter(
-                                v => v != updatedVersion.id,
+                                v => v != version.id,
                             ),
+                            alerts: this.state.alerts.concat({
+                                variant: 'danger',
+                                title: `API Error: ${error.response.status}`,
+                                description:
+                                    `Could not update the certification ` +
+                                    `status for ${version.namespace}.` +
+                                    `${version.name}.${version.version}.`,
+                            }),
                         });
                     }),
-                ),
         );
     }
 
@@ -495,6 +519,10 @@ class CertificationDashboard extends React.Component<
 
     private get updateParams() {
         return ParamHelper.updateParamsMixin();
+    }
+
+    private get closeAlert() {
+        return closeAlertMixin('alerts');
     }
 }
 

@@ -31,3 +31,8 @@ export { LoadingPageWithHeader } from './loading/loading-collection-detail';
 export { CompoundFilter } from './patternfly-wrappers/compound-filter';
 export { AppliedFilters } from './patternfly-wrappers/applied-filters';
 export { DeprecatedTag } from './tags/deprecated-tag';
+export {
+    AlertList,
+    closeAlertMixin,
+    AlertType,
+} from './patternfly-wrappers/alert-list';
