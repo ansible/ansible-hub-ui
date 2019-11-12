@@ -70,7 +70,7 @@ export class Toolbar extends React.Component<IProps, IState> {
                                 placeholder={searchPlaceholder}
                             />
                             <Button
-                                variant={ButtonVariant.tertiary}
+                                variant={ButtonVariant.control}
                                 aria-label='search button'
                                 onClick={() => this.submitKeywords()}
                             >
