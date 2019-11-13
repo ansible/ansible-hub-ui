@@ -47,7 +47,7 @@ export class CollectionListType {
     id: string;
     name: string;
     description: string;
-    download_count: number;
+    // download_count: number;
     deprecated: boolean;
     latest_version: CollectionVersion;
 
@@ -110,7 +110,7 @@ export class CollectionDetailType {
     id: string;
     name: string;
     description: string;
-    download_count: number;
+    // download_count: number;
 
     namespace: {
         id: number;

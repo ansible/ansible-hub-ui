@@ -83,7 +83,7 @@ class CollectionGenerator extends RandomGenerator {
         const collection = {
             id: id,
             name: name,
-            download_count: this.randNum(10 ** (this.randNum(8) + 1)),
+            // download_count: this.randNum(10 ** (this.randNum(8) + 1)),
             namespace: namespace,
 
             latest_version: {
