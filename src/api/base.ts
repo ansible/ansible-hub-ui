@@ -12,6 +12,10 @@ export class BaseAPI {
             baseURL: this.apiBaseURL,
             paramsSerializer: params => ParamHelper.getQueryString(params),
         });
+
+        this.http.interceptors.request.use(request =>
+            this.authHandler(request),
+        );
     }
 
     list(params?: object, apiPath?: string) {
@@ -37,6 +41,14 @@ export class BaseAPI {
     create(data: any, apiPath?: string) {
         const path = apiPath || this.apiPath;
         return this.http.post(path, data);
+    }
+
+    private async authHandler(request) {
+        // This runs before every API request and ensures that the user is
+        // authenticated before the request is executed. On most calls it appears
+        // to only add ~10ms of latency.
+        await (window as any).insights.chrome.auth.getUser();
+        return request;
     }
 
     private mapPageToOffset(p) {
