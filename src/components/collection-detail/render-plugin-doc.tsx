@@ -515,6 +515,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             content_type,
             0,
             maxDepth,
+            '',
         );
 
         return (
@@ -549,15 +550,17 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         content_type: string,
         depth: number,
         maxDepth: number,
+        parent: string,
     ) {
         let output = [];
         parameters.forEach((option, i) => {
             const spacers = [];
+            const key = `${parent}-${option.name}`;
             for (let x = 0; x < depth; x++) {
                 spacers.push(<td key={x} className='spacer' />);
             }
             output.push(
-                <tr key={`${option.name}${depth}`}>
+                <tr key={key}>
                     {
                         // PARAMETER --------------------------------
                     }
@@ -621,6 +624,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                         content_type,
                         depth + 1,
                         maxDepth,
+                        key,
                     ),
                 );
             }
@@ -770,7 +774,12 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                             <th>Returned</th>
                             <th>Description</th>
                         </tr>
-                        {this.renderReturnValueEntries(returnV, 0, maxDepth)}
+                        {this.renderReturnValueEntries(
+                            returnV,
+                            0,
+                            maxDepth,
+                            '',
+                        )}
                     </tbody>
                 </table>
             </React.Fragment>
@@ -781,6 +790,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         returnValues: ReturnedValue[],
         depth: number,
         maxDepth: number,
+        parent: string,
     ) {
         let entries = [];
 
@@ -789,8 +799,9 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
             for (let x = 0; x < depth; x++) {
                 spacers.push(<td key={x} colSpan={1} className='spacer' />);
             }
+            const key = `${parent}-${option.name}`;
             entries.push(
-                <tr key={`${option.name}${depth}`}>
+                <tr key={key}>
                     {spacers}
                     <td
                         colSpan={maxDepth + 1 - depth}
@@ -828,6 +839,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                         option.contains,
                         depth + 1,
                         maxDepth,
+                        key,
                     ),
                 );
             }
