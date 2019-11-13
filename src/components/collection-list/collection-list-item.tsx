@@ -28,7 +28,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
     render() {
         const {
             name,
-            download_count,
+            // download_count,
             latest_version,
             namespace,
             showNamespace,
@@ -100,10 +100,15 @@ export class CollectionListItem extends React.Component<IProps, {}> {
         cells.push(
             <DataListCell isFilled={false} alignRight key='stats'>
                 {controls ? <div className='entry'>{controls}</div> : null}
+                {
+                    // <div className='right-col entry'>
+                    //     <NumericLabel
+                    //         number={download_count}
+                    //         label='Download'
+                    //     />
+                    // </div>
+                }
                 <div className='right-col entry'>
-                    <NumericLabel number={download_count} label='Download' />
-                </div>
-                <div className='entry'>
                     Updated {moment(latest_version.created_at).fromNow()}
                 </div>
                 <div className='entry'>v{latest_version.version}</div>
