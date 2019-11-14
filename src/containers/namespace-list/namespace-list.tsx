@@ -106,7 +106,11 @@ export class NamespaceList extends React.Component<IProps, IState> {
                         <div>
                             <Pagination
                                 params={params}
-                                updateParams={p => this.updateParams(p)}
+                                updateParams={p =>
+                                    this.updateParams(p, () =>
+                                        this.loadNamespaces(),
+                                    )
+                                }
                                 count={itemCount}
                                 isTop
                             />
