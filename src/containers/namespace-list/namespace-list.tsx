@@ -22,6 +22,7 @@ import {
 } from '../../components';
 import { NamespaceAPI, NamespaceListType } from '../../api';
 import { Paths, formatPath } from '../../paths';
+import { Constants } from '../../constants';
 
 interface IState {
     namespaces: NamespaceListType[];
@@ -54,7 +55,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
         ]);
 
         if (!params['page_size']) {
-            params['page_size'] = 50;
+            params['page_size'] = 24;
         }
 
         this.state = {
@@ -112,7 +113,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
                                     )
                                 }
                                 count={itemCount}
-                                isTop
+                                isCompact
+                                perPageOptions={
+                                    Constants.CARD_DEFAULT_PAGINATION_OPTIONS
+                                }
                             />
                         </div>
                     </div>

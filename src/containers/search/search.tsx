@@ -56,6 +56,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
             'page_size',
         ]);
 
+        if (!params['page_size']) {
+            params['page_size'] = Constants.CARD_DEFAULT_PAGE_SIZE;
+        }
+
         // Load view type from local storage if it's not set. This allows a
         // user's view type preference to persist
         if (!params['view_type']) {
@@ -137,6 +141,9 @@ class Search extends React.Component<RouteComponentProps, IState> {
                                 )
                             }
                             count={numberOfResults}
+                            perPageOptions={
+                                Constants.CARD_DEFAULT_PAGINATION_OPTIONS
+                            }
                             isTop
                         />
                     </div>
@@ -164,6 +171,9 @@ class Search extends React.Component<RouteComponentProps, IState> {
                                 this.updateParams(p, () =>
                                     this.queryCollections(),
                                 )
+                            }
+                            perPageOptions={
+                                Constants.CARD_DEFAULT_PAGINATION_OPTIONS
                             }
                             count={numberOfResults}
                         />
