@@ -16,11 +16,20 @@ interface IProps {
     };
     updateParams: (params) => void;
     isTop?: boolean;
+    isCompact?: boolean;
+    perPageOptions?: number[];
 }
 
 export class Pagination extends React.Component<IProps> {
     render() {
-        const { count, params, updateParams, isTop } = this.props;
+        const {
+            count,
+            params,
+            updateParams,
+            isTop,
+            perPageOptions,
+            isCompact,
+        } = this.props;
 
         const extraProps = {};
         if (!isTop) {
@@ -40,8 +49,18 @@ export class Pagination extends React.Component<IProps> {
                     updateParams({ ...params, page: 1, page_size: p });
                 }}
                 {...extraProps}
-                isCompact={isTop}
+                isCompact={isTop || isCompact}
+                perPageOptions={this.mapPerPageOptions(
+                    perPageOptions || Constants.DEFAULT_PAGINATION_OPTIONS,
+                )}
             />
         );
+    }
+
+    private mapPerPageOptions(options) {
+        return options.map(option => ({
+            title: String(option),
+            value: option,
+        }));
     }
 }
