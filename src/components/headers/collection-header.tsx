@@ -3,14 +3,9 @@ import './header.scss';
 
 import { Link } from 'react-router-dom';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import {
-    FormSelect,
-    FormSelectOption,
-    DropdownItem,
-    Alert,
-} from '@patternfly/react-core';
+import { FormSelect, FormSelectOption, Alert } from '@patternfly/react-core';
 
-import { BaseHeader, Breadcrumbs, StatefulDropdown } from '../../components';
+import { BaseHeader, Breadcrumbs, APIButton } from '../../components';
 import { CollectionDetailType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -71,6 +66,7 @@ export class CollectionHeader extends React.Component<IProps> {
                 breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
                 pageControls={
                     <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <APIButton style={{ marginRight: '8px' }} />
                         <FormSelect
                             onChange={val =>
                                 updateParams(
@@ -92,18 +88,6 @@ export class CollectionHeader extends React.Component<IProps> {
                                 />
                             ))}
                         </FormSelect>
-                        <StatefulDropdown
-                            items={[
-                                <DropdownItem
-                                    key='1'
-                                    component={
-                                        <Link to={Paths.token} target='_blank'>
-                                            Get API token
-                                        </Link>
-                                    }
-                                />,
-                            ]}
-                        />
                     </div>
                 }
             >

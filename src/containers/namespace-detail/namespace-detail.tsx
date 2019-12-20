@@ -29,6 +29,7 @@ import {
     PartnerHeader,
     StatefulDropdown,
     LoadingPageWithHeader,
+    APIButton,
 } from '../../components';
 
 import { ImportModal } from './import-modal/import-modal';
@@ -265,7 +266,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     private renderPageControls() {
         if (!this.props.showControls) {
-            return null;
+            return (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <APIButton style={{ marginLeft: '8px' }} />
+                </div>
+            );
         }
         return (
             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -274,6 +279,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 >
                     Upload collection
                 </Button>
+                <APIButton style={{ marginLeft: '8px' }} />
                 <StatefulDropdown
                     items={[
                         <DropdownItem
@@ -302,14 +308,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                                     )}
                                 >
                                     Imports
-                                </Link>
-                            }
-                        />,
-                        <DropdownItem
-                            key='3'
-                            component={
-                                <Link to={Paths.token} target='_blank'>
-                                    Get API token
                                 </Link>
                             }
                         />,
