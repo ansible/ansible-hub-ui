@@ -1,6 +1,7 @@
 export { Tag } from './tags/tag';
 export { NumericLabel } from './numeric-label/numeric-label';
 export { NamespaceForm } from './namespace-form/namespace-form';
+export { NamespaceModal } from './namespace-modal/namespace-modal';
 export { ResourcesForm } from './namespace-form/resources-form';
 export { BaseHeader } from './headers/base-header';
 export { PartnerHeader } from './headers/partner-header';

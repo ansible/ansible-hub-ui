@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Modal } from '@patternfly/react-core';
 import './namespace-list.scss';
 
 import { RouteComponentProps, Link } from 'react-router-dom';
@@ -18,11 +19,16 @@ import {
     NamespaceCard,
     Toolbar,
     Pagination,
+    NamespaceModal,
     LoadingPageWithHeader,
 } from '../../components';
+import { Form, FormGroup, ActionGroup } from '@patternfly/react-core';
+import { Button, ButtonVariant, InputGroup, TextInput } from '@patternfly/react-core';
+import { DataToolbar , DataToolbarItem, DataToolbarContent } from '@patternfly/react-core/dist/esm/experimental';
 import { NamespaceAPI, NamespaceListType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
+import { MeAPI, MeType } from '../../api';
 
 interface IState {
     namespaces: NamespaceListType[];
@@ -35,6 +41,8 @@ interface IState {
         tenant?: string;
     };
     hasPermission: boolean;
+    partnerEngineer: boolean;
+    isModalOpen: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -45,6 +53,8 @@ interface IProps extends RouteComponentProps {
 
 export class NamespaceList extends React.Component<IProps, IState> {
     nonURLParams = ['tenant'];
+    handleModalToggle;
+    handleSubmit;
 
     constructor(props) {
         super(props);
@@ -63,7 +73,17 @@ export class NamespaceList extends React.Component<IProps, IState> {
             itemCount: 0,
             params: params,
             hasPermission: true,
+            isModalOpen: false,
+            partnerEngineer: false,
         };
+
+        this.handleModalToggle = () => {
+          this.setState(({ isModalOpen }) => ({
+            isModalOpen: !isModalOpen
+          }));
+        };
+
+        this.isPartnerEngineer();
     }
 
     componentDidMount() {
@@ -83,11 +103,24 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { namespaces, params, itemCount, hasPermission } = this.state;
+        const { namespaces, params, itemCount, hasPermission, partnerEngineer } = this.state;
         const { title, namespacePath } = this.props;
+        const { isModalOpen } = this.state;
+
         if (!namespaces) {
             return <LoadingPageWithHeader></LoadingPageWithHeader>;
         }
+
+        const createButton = partnerEngineer && (
+            <React.Fragment>
+                <DataToolbarItem variant="separator" />
+                <DataToolbarItem>
+                    <Button variant="primary"
+                            onClick={this.handleModalToggle}
+                    >Create</Button>
+                </DataToolbarItem>
+            </React.Fragment>
+        );
 
         return (
             <React.Fragment>
@@ -103,7 +136,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
                                 )
                             }
                         />
-
                         <div>
                             <Pagination
                                 params={params}
@@ -118,6 +150,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
                                     Constants.CARD_DEFAULT_PAGINATION_OPTIONS
                                 }
                             />
+                        </div>
+                        <div className='create-button'>
+                            {createButton}
                         </div>
                     </div>
                 </BaseHeader>
@@ -159,6 +194,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
                             ))}
                         </Section>
                     )}
+                    <NamespaceModal
+                        isOpen={this.state.isModalOpen}
+                        toggleModal={this.handleModalToggle}
+                    ></NamespaceModal>
                 </Main>
             </React.Fragment>
         );
@@ -183,5 +222,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     private get updateParams() {
         return ParamHelper.updateParamsMixin(this.nonURLParams);
+    }
+
+    private isPartnerEngineer() {
+        MeAPI.get().then(response => {
+            const me: MeType = response.data;
+            this.setState({partnerEngineer: me.is_partner_engineer });
+        });
     }
 }
