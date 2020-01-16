@@ -2,6 +2,7 @@ import * as React from 'react';
 import './namespace-form.scss';
 
 import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
+import { Chip, ChipGroup, ChipGroupToolbarItem } from '@patternfly/react-core';
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
 import { NamespaceCard } from '../../components';
@@ -17,6 +18,8 @@ interface IProps {
 interface IState {
     newLinkName: string;
     newLinkURL: string;
+    namespaceGroups: Array<string>;
+    newNamespaceGroup: string;
 }
 
 export class NamespaceForm extends React.Component<IProps, IState> {
@@ -26,11 +29,14 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         this.state = {
             newLinkURL: '',
             newLinkName: '',
+            namespaceGroups: props.namespace.groups,
+            newNamespaceGroup: '',
         };
     }
 
     render() {
         const { namespace, errorMessages } = this.props;
+        const { namespaceGroups } = this.state;
 
         if (!namespace) {
             return null;
@@ -47,6 +53,52 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                                 type='text'
                                 value={namespace.name}
                             />
+                        </FormGroup>
+
+                        <br />
+
+                        <FormGroup
+                          fieldId='groups'
+                          label='Red Hat Accounts'
+                          helperTextInvalid={errorMessages['groups']}
+                          isValid={!('groups' in errorMessages)}
+                        >
+                            <br/>
+                            <ChipGroup>
+                                {namespaceGroups.map(group => (
+                                    <Chip key={group}onClick={() => this.deleteItem(group)}>
+                                        {group}
+                                    </Chip>
+                                ))}
+                            </ChipGroup>
+                            <div className='account-ids'>
+                                <div className='account-id'>
+                                    <TextInput
+                                        id='url'
+                                        type='text'
+                                        placeholder='Red Hat Account ID'
+                                        value={this.state.newNamespaceGroup}
+                                        onChange={value =>
+                                            this.setState({
+                                                newNamespaceGroup: value,
+                                            })
+                                        }
+                                        onKeyDown={e => {
+                                            if (e.key === 'Enter') {
+                                                this.addGroup();
+                                            }
+                                        }}
+                                    />
+                                </div>
+                                <div className='account-add'>
+                                    <div className='clickable account-button'>
+                                        <PlusCircleIcon
+                                            onClick={() => this.addGroup()}
+                                            size='md'
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </FormGroup>
 
                         <br />
@@ -198,6 +250,21 @@ export class NamespaceForm extends React.Component<IProps, IState> {
             },
             () => this.props.updateNamespace(update),
         );
+    }
+
+    private addGroup() {
+      let groups = this.state.namespaceGroups;
+      groups.push(this.state.newNamespaceGroup.trim());
+      this.setState({ namespaceGroups: groups, newNamespaceGroup: ''});
+    }
+
+    private deleteItem(id) {
+      const groups = this.state.namespaceGroups;
+      const index = groups.indexOf(id);
+      if (index !== -1) {
+        groups.splice(index, 1);
+        this.setState({ namespaceGroups: groups });
+      }
     }
 
     private renderLinkGroup(link, index) {
