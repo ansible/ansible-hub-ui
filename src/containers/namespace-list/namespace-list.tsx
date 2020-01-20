@@ -23,8 +23,17 @@ import {
     LoadingPageWithHeader,
 } from '../../components';
 import { Form, FormGroup, ActionGroup } from '@patternfly/react-core';
-import { Button, ButtonVariant, InputGroup, TextInput } from '@patternfly/react-core';
-import { DataToolbar , DataToolbarItem, DataToolbarContent } from '@patternfly/react-core/dist/esm/experimental';
+import {
+    Button,
+    ButtonVariant,
+    InputGroup,
+    TextInput,
+} from '@patternfly/react-core';
+import {
+    DataToolbar,
+    DataToolbarItem,
+    DataToolbarContent,
+} from '@patternfly/react-core/dist/esm/experimental';
 import { NamespaceAPI, NamespaceListType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
@@ -78,9 +87,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
         };
 
         this.handleModalToggle = () => {
-          this.setState(({ isModalOpen }) => ({
-            isModalOpen: !isModalOpen
-          }));
+            this.setState(({ isModalOpen }) => ({
+                isModalOpen: !isModalOpen,
+            }));
         };
 
         this.isPartnerEngineer();
@@ -103,7 +112,13 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { namespaces, params, itemCount, hasPermission, partnerEngineer } = this.state;
+        const {
+            namespaces,
+            params,
+            itemCount,
+            hasPermission,
+            partnerEngineer,
+        } = this.state;
         const { title, namespacePath } = this.props;
         const { isModalOpen } = this.state;
 
@@ -113,11 +128,11 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
         const createButton = partnerEngineer && (
             <React.Fragment>
-                <DataToolbarItem variant="separator" />
+                <DataToolbarItem variant='separator' />
                 <DataToolbarItem>
-                    <Button variant="primary"
-                            onClick={this.handleModalToggle}
-                    >Create</Button>
+                    <Button variant='primary' onClick={this.handleModalToggle}>
+                        Create
+                    </Button>
                 </DataToolbarItem>
             </React.Fragment>
         );
@@ -151,9 +166,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                                 }
                             />
                         </div>
-                        <div className='create-button'>
-                            {createButton}
-                        </div>
+                        <div className='create-button'>{createButton}</div>
                     </div>
                 </BaseHeader>
                 <Main>
@@ -227,7 +240,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     private isPartnerEngineer() {
         MeAPI.get().then(response => {
             const me: MeType = response.data;
-            this.setState({partnerEngineer: me.is_partner_engineer });
+            this.setState({ partnerEngineer: me.is_partner_engineer });
         });
     }
 }

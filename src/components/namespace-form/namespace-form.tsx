@@ -18,7 +18,7 @@ interface IProps {
 interface IState {
     newLinkName: string;
     newLinkURL: string;
-    namespaceGroups: Array<string>;
+    namespaceGroups: string[];
     newNamespaceGroup: string;
 }
 
@@ -58,15 +58,18 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                         <br />
 
                         <FormGroup
-                          fieldId='groups'
-                          label='Red Hat Accounts'
-                          helperTextInvalid={errorMessages['groups']}
-                          isValid={!('groups' in errorMessages)}
+                            fieldId='groups'
+                            label='Red Hat accounts'
+                            helperTextInvalid={errorMessages['groups']}
+                            isValid={!('groups' in errorMessages)}
                         >
-                            <br/>
+                            <br />
                             <ChipGroup>
                                 {namespaceGroups.map(group => (
-                                    <Chip key={group}onClick={() => this.deleteItem(group)}>
+                                    <Chip
+                                        key={group}
+                                        onClick={() => this.deleteItem(group)}
+                                    >
                                         {group}
                                     </Chip>
                                 ))}
@@ -76,7 +79,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                                     <TextInput
                                         id='url'
                                         type='text'
-                                        placeholder='Red Hat Account ID'
+                                        placeholder='Red Hat account ID'
                                         value={this.state.newNamespaceGroup}
                                         onChange={value =>
                                             this.setState({
@@ -253,18 +256,21 @@ export class NamespaceForm extends React.Component<IProps, IState> {
     }
 
     private addGroup() {
-      let groups = this.state.namespaceGroups;
-      groups.push(this.state.newNamespaceGroup.trim());
-      this.setState({ namespaceGroups: groups, newNamespaceGroup: ''});
+        let groups = this.state.namespaceGroups;
+        groups.push(this.state.newNamespaceGroup.trim());
+        this.setState({
+            namespaceGroups: groups,
+            newNamespaceGroup: '',
+        });
     }
 
     private deleteItem(id) {
-      const groups = this.state.namespaceGroups;
-      const index = groups.indexOf(id);
-      if (index !== -1) {
-        groups.splice(index, 1);
-        this.setState({ namespaceGroups: groups });
-      }
+        const groups = this.state.namespaceGroups;
+        const index = groups.indexOf(id);
+        if (index !== -1) {
+            groups.splice(index, 1);
+            this.setState({ namespaceGroups: groups });
+        }
     }
 
     private renderLinkGroup(link, index) {
