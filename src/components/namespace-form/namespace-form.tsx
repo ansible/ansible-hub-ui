@@ -256,7 +256,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
     }
 
     private addGroup() {
-        let groups = this.state.namespaceGroups;
+        let groups = [...this.state.namespaceGroups]
         groups.push(this.state.newNamespaceGroup.trim());
         this.setState({
             namespaceGroups: groups,
@@ -265,7 +265,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
     }
 
     private deleteItem(id) {
-        const groups = this.state.namespaceGroups;
+        let groups = [...this.state.namespaceGroups]
         const index = groups.indexOf(id);
         if (index !== -1) {
             groups.splice(index, 1);
