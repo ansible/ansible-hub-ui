@@ -139,7 +139,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
         return (
             <React.Fragment>
-                <BaseHeader title={title}>
+                <BaseHeader
+                    title={title}
+                    pageControls={
+                        <div className='create-button'>{createButton}</div>
+                    }
+                >
                     <div className='toolbar'>
                         <Toolbar
                             params={params}
@@ -166,7 +171,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
                                 }
                             />
                         </div>
-                        <div className='create-button'>{createButton}</div>
                     </div>
                 </BaseHeader>
                 <Main>
