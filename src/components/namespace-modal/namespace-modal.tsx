@@ -42,7 +42,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                 name: this.state.newNamespaceName,
                 groups: groups,
             };
-            NamespaceAPI.createNamespace(data)
+            NamespaceAPI.create(data)
                 .then(results => {
                     this.toggleModal();
                     this.setState({
