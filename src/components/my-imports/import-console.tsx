@@ -16,6 +16,7 @@ interface IProps {
     apiError?: string;
 
     setFollowMessages: (follow: boolean) => void;
+    hideCollectionName?: boolean;
 }
 
 export class ImportConsole extends React.Component<IProps, {}> {
@@ -128,20 +129,22 @@ export class ImportConsole extends React.Component<IProps, {}> {
     }
 
     private renderTitle(selectedImport) {
-        const { task } = this.props;
+        const { task, hideCollectionName } = this.props;
         return (
             <div>
-                <div className='title-container'>
-                    <Link
-                        className='title'
-                        to={formatPath(Paths.collection, {
-                            namespace: selectedImport.namespace,
-                            collection: selectedImport.name,
-                        })}
-                    >
-                        {selectedImport.namespace}.{selectedImport.name}
-                    </Link>
-                </div>
+                {!hideCollectionName && (
+                    <div className='title-container'>
+                        <Link
+                            className='title'
+                            to={formatPath(Paths.collection, {
+                                namespace: selectedImport.namespace,
+                                collection: selectedImport.name,
+                            })}
+                        >
+                            {selectedImport.namespace}.{selectedImport.name}
+                        </Link>
+                    </div>
+                )}
 
                 <div className='title-bar'>
                     <div>

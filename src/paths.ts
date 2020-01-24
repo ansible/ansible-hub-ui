@@ -24,6 +24,7 @@ export enum Paths {
     collectionDocsIndex = '/:namespace/:collection/docs',
     collectionContentDocs = '/:namespace/:collection/content/:type/:name',
     collectionContentList = '/:namespace/:collection/content',
+    collectionImportLog = '/:namespace/:collection/import-log',
     collection = '/:namespace/:collection',
     namespace = '/:namespace',
     partners = '/partners',
