@@ -215,7 +215,7 @@ Ex) [/src/api/System/getSystems.js](https://github.com/RedHatInsights/turbo-octo
 
 ### React-redux
 
-- [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)
+- [Provider](https://github.com/reduxjs/react-redux/blob/master/docs/api/Provider.md)
   - Makes the Redux store available to the connect()
 - [connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)
   - Connects a React component to a Redux store
