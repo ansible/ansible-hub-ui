@@ -73,72 +73,70 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         } = this.state;
 
         return (
-            <React.Fragment>
-                <Modal
-                    isLarge
-                    title='Create a new namespace'
-                    isOpen={this.props.isOpen}
-                    onClose={this.toggleModal}
-                    actions={[
-                        <Button
-                            key='confirm'
-                            variant='primary'
-                            onClick={this.handleSubmit}
-                        >
-                            Create
-                        </Button>,
-                        <Button
-                            key='cancel'
-                            variant='link'
-                            onClick={this.toggleModal}
-                        >
-                            Cancel
-                        </Button>,
-                    ]}
-                    isFooterLeftAligned
-                >
-                    <Form>
-                        <FormGroup
-                            label='Name'
+            <Modal
+                isLarge
+                title='Create a new namespace'
+                isOpen={this.props.isOpen}
+                onClose={this.toggleModal}
+                actions={[
+                    <Button
+                        key='confirm'
+                        variant='primary'
+                        onClick={this.handleSubmit}
+                    >
+                        Create
+                    </Button>,
+                    <Button
+                        key='cancel'
+                        variant='link'
+                        onClick={this.toggleModal}
+                    >
+                        Cancel
+                    </Button>,
+                ]}
+                isFooterLeftAligned
+            >
+                <Form>
+                    <FormGroup
+                        label='Name'
+                        isRequired
+                        fieldId='simple-form-name'
+                        helperText='Please provide the namespace name'
+                    >
+                        <TextInput
                             isRequired
-                            fieldId='simple-form-name'
-                            helperText='Please provide the namespace name'
-                        >
-                            <TextInput
-                                isRequired
-                                type='text'
-                                id='newNamespaceName'
-                                name='newNamespaceName'
-                                aria-describedby='simple-form-name-helper'
-                                value={newNamespaceName}
-                                onChange={value =>
-                                    this.setState({ newNamespaceName: value })
-                                }
-                            />
-                        </FormGroup>
-                        <FormGroup
-                            label='Red Hat Accounts'
-                            fieldId='groups'
-                            helperText='Please provide comma-separated Red Hat Account identifications'
-                            helperTextInvalid={errorMessages['groups']}
-                            isValid={!('groups' in errorMessages)}
-                        >
-                            <TextInput
-                                isRequired
-                                type='text'
-                                id='newNamespaceGroupIds'
-                                name='newNamespaceGroupIds'
-                                value={newNamespaceGroupIds}
-                                onChange={value =>
-                                    this.setState({
-                                        newNamespaceGroupIds: value,
-                                    })
-                                }
-                            />
-                        </FormGroup>
-                    </Form>
-                </Modal>
-            </React.Fragment>
+                            type='text'
+                            id='newNamespaceName'
+                            name='newNamespaceName'
+                            aria-describedby='simple-form-name-helper'
+                            value={newNamespaceName}
+                            onChange={value =>
+                                this.setState({ newNamespaceName: value })
+                            }
+                        />
+                    </FormGroup>
+                    <FormGroup
+                        label='Red Hat Accounts'
+                        fieldId='groups'
+                        helperText='Please provide comma-separated Red Hat Account identifications'
+                        helperTextInvalid={errorMessages['groups']}
+                        isValid={!('groups' in errorMessages)}
+                    >
+                        <TextInput
+                            isRequired
+                            type='text'
+                            id='newNamespaceGroupIds'
+                            name='newNamespaceGroupIds'
+                            value={newNamespaceGroupIds}
+                            onChange={value =>
+                                this.setState({
+                                    newNamespaceGroupIds: value,
+                                })
+                            }
+                        />
+                    </FormGroup>
+                </Form>
+            </Modal>
         );
     }
 }
