@@ -139,12 +139,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
         return (
             <React.Fragment>
-                <BaseHeader
-                    title={title}
-                    pageControls={
-                        <div className='create-button'>{createButton}</div>
-                    }
-                >
+                <BaseHeader title={title}>
                     <div className='toolbar'>
                         <Toolbar
                             params={params}
@@ -155,6 +150,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                                     this.loadNamespaces(),
                                 )
                             }
+                            extraInputs={[createButton]}
                         />
                         <div>
                             <Pagination
