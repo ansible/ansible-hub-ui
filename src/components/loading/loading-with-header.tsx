@@ -4,9 +4,10 @@ import {
     Skeleton,
     PageHeaderTitle,
     PageHeader,
-    Main,
     Section,
 } from '@redhat-cloud-services/frontend-components';
+
+import { Main } from '../../components';
 
 import { LoadingPageSpinner } from '../../components';
 

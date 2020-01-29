@@ -2,11 +2,11 @@ import * as React from 'react';
 import './my-imports.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import { Section } from '@redhat-cloud-services/frontend-components';
 import { Button } from '@patternfly/react-core';
 import { cloneDeep } from 'lodash';
 
-import { BaseHeader, ImportConsole, ImportList } from '../../components';
+import { BaseHeader, ImportConsole, ImportList, Main } from '../../components';
 
 import {
     ImportAPI,

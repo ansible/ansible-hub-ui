@@ -6,7 +6,7 @@ import {
     Redirect,
     Link,
 } from 'react-router-dom';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import { Section } from '@redhat-cloud-services/frontend-components';
 import {
     Button,
     DropdownItem,
@@ -29,6 +29,7 @@ import {
     PartnerHeader,
     StatefulDropdown,
     LoadingPageWithHeader,
+    Main,
     APIButton,
 } from '../../components';
 

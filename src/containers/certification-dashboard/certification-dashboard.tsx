@@ -8,8 +8,8 @@ import {
     Link,
     Redirect,
 } from 'react-router-dom';
-import { BaseHeader } from '../../components';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import { BaseHeader, Main } from '../../components';
+import { Section } from '@redhat-cloud-services/frontend-components';
 import {
     Toolbar,
     ToolbarGroup,

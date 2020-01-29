@@ -4,10 +4,10 @@ import './not-found.scss';
 import RageTater from '../../../static/images/awx-spud.gif';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import { Section } from '@redhat-cloud-services/frontend-components';
 import { Bullseye } from '@patternfly/react-core';
 
-import { BaseHeader } from '../../components';
+import { BaseHeader, Main } from '../../components';
 
 class NotFound extends React.Component<RouteComponentProps, {}> {
     render() {

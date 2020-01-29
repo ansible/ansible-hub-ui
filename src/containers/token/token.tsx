@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import { Section } from '@redhat-cloud-services/frontend-components';
 import { ClipboardCopy, Button } from '@patternfly/react-core';
 
-import { BaseHeader } from '../../components';
+import { BaseHeader, Main } from '../../components';
 
 interface IState {
     tokenData: {

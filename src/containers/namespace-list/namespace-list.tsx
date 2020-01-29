@@ -3,7 +3,7 @@ import { Modal } from '@patternfly/react-core';
 import './namespace-list.scss';
 
 import { RouteComponentProps, Link } from 'react-router-dom';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import { Section } from '@redhat-cloud-services/frontend-components';
 import {
     EmptyState,
     EmptyStateIcon,
@@ -21,6 +21,7 @@ import {
     Pagination,
     NamespaceModal,
     LoadingPageWithHeader,
+    Main,
 } from '../../components';
 import { Form, FormGroup, ActionGroup } from '@patternfly/react-core';
 import {
