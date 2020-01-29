@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Routes } from '../Routes';
+import '@patternfly/patternfly/patternfly.scss';
 import './app.scss';
 
 class App extends Component {
@@ -9,12 +10,12 @@ class App extends Component {
         super(props);
 
         this.state = {
-            currentUser: null,
+            currentUser: true,
         };
     }
 
     componentDidMount() {
-        console.log('app loaded')
+        console.log('app loaded');
     }
 
     render() {
