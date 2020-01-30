@@ -18,7 +18,6 @@ interface IProps {
 interface IState {
     newLinkName: string;
     newLinkURL: string;
-    namespaceGroups: string[];
     newNamespaceGroup: string;
 }
 
@@ -29,14 +28,12 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         this.state = {
             newLinkURL: '',
             newLinkName: '',
-            namespaceGroups: props.namespace.groups,
             newNamespaceGroup: '',
         };
     }
 
     render() {
         const { namespace, errorMessages } = this.props;
-        const { namespaceGroups } = this.state;
 
         if (!namespace) {
             return null;
@@ -65,7 +62,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                         >
                             <br />
                             <ChipGroup>
-                                {namespaceGroups.map(group => (
+                                {this.props.namespace.groups.map(group => (
                                     <Chip
                                         key={group}
                                         onClick={() => this.deleteItem(group)}
@@ -256,20 +253,20 @@ export class NamespaceForm extends React.Component<IProps, IState> {
     }
 
     private addGroup() {
-        let groups = [...this.state.namespaceGroups]
-        groups.push(this.state.newNamespaceGroup.trim());
-        this.setState({
-            namespaceGroups: groups,
-            newNamespaceGroup: '',
-        });
+        const update = { ...this.props.namespace };
+        update.groups.push('rh-identity-account:' + this.state.newNamespaceGroup.trim());
+        this.setState(
+          { newNamespaceGroup: '', },
+          () => this.props.updateNamespace(update)
+        );
     }
 
     private deleteItem(id) {
-        let groups = [...this.state.namespaceGroups]
-        const index = groups.indexOf(id);
+        const update = { ...this.props.namespace };
+        const index = update.groups.indexOf(id);
         if (index !== -1) {
-            groups.splice(index, 1);
-            this.setState({ namespaceGroups: groups });
+            update.groups.splice(index, 1);
+            this.props.updateNamespace(update);
         }
     }
 

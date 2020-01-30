@@ -11,6 +11,7 @@ export class NamespaceListType {
     avatar_url: string;
     description: string;
     num_collections: number;
+    groups: string[];
 }
 
 export class NamespaceType extends NamespaceListType {
