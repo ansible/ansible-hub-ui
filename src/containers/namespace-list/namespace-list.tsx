@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Modal } from '@patternfly/react-core';
 import './namespace-list.scss';
 
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
 import {
     EmptyState,
@@ -210,6 +210,14 @@ export class NamespaceList extends React.Component<IProps, IState> {
                     <NamespaceModal
                         isOpen={this.state.isModalOpen}
                         toggleModal={this.handleModalToggle}
+                        onCreateSuccess={result =>
+                            this.props.history.push(
+                                formatPath(
+                                    Paths.myCollections,
+                                    { namespace: result['name'] }
+                                ),
+                            )
+                        }
                     ></NamespaceModal>
                 </Main>
             </React.Fragment>
@@ -244,3 +252,5 @@ export class NamespaceList extends React.Component<IProps, IState> {
         });
     }
 }
+
+export default withRouter(NamespaceList);

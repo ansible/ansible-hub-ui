@@ -12,6 +12,7 @@ import { NamespaceAPI } from '../../api';
 interface IProps {
     isOpen: boolean;
     toggleModal: object;
+    onCreateSuccess: (result) => void;
 }
 
 interface IState {
@@ -50,7 +51,8 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                         newNamespaceGroupIds: '',
                         errorMessages: {},
                     });
-                    window.location.href = window.location + '/' + data['name'];
+                    console.log('component # data: ', data);
+                    this.props.onCreateSuccess(data);
                 })
                 .catch(error => {
                     const result = error.response;
