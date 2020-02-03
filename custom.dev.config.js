@@ -8,7 +8,7 @@ module.exports = webpackBase({
     API_BASE_PATH: '/api/automation-hub/',
 
     // Path on the host where the UI is found. EX: /apps/automation-hub
-    UI_BASE_PATH: '/beta/ansible/automation-hub/',
+    UI_BASE_PATH: '',
 
     // Determines if the app should be compiled to run on insights or on
     // another platform. Options: insights, standalone
