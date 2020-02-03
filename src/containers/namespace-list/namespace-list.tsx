@@ -62,7 +62,6 @@ interface IProps extends RouteComponentProps {
 
 export class NamespaceList extends React.Component<IProps, IState> {
     nonURLParams = ['tenant'];
-    handleModalToggle;
     handleSubmit;
 
     constructor(props) {
@@ -86,14 +85,14 @@ export class NamespaceList extends React.Component<IProps, IState> {
             partnerEngineer: false,
         };
 
-        this.handleModalToggle = () => {
-            this.setState(({ isModalOpen }) => ({
-                isModalOpen: !isModalOpen,
-            }));
-        };
-
         this.isPartnerEngineer();
     }
+
+    private handleModalToggle = () => {
+        this.setState(({ isModalOpen }) => ({
+            isModalOpen: !isModalOpen,
+        }));
+    };
 
     componentDidMount() {
         if (this.props.filterOwner) {

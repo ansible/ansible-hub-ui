@@ -22,7 +22,6 @@ interface IState {
 }
 
 export class NamespaceModal extends React.Component<IProps, IState> {
-    handleSubmit;
     toggleModal;
 
     constructor(props) {
@@ -34,37 +33,37 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             newNamespaceGroupIds: '',
             errorMessages: {},
         };
+    }
 
-        this.handleSubmit = event => {
-            const ids = this.state.newNamespaceGroupIds.split(',');
-            const groups = ids.map(id => id.trim());
-            groups.push('system:partner-engineers');
-            const data: any = {
-                name: this.state.newNamespaceName,
-                groups: groups,
-            };
-            NamespaceAPI.create(data)
-                .then(results => {
-                    this.toggleModal();
-                    this.setState({
-                        newNamespaceName: '',
-                        newNamespaceGroupIds: '',
-                        errorMessages: {},
-                    });
-                    console.log('component # data: ', data);
-                    this.props.onCreateSuccess(data);
-                })
-                .catch(error => {
-                    const result = error.response;
-                    if (result.status === 400) {
-                        const messages: any = {};
-                        for (const e of result.data.errors) {
-                            messages[e.source.parameter] = e.detail;
-                        }
-                        this.setState({ errorMessages: messages });
-                    }
-                });
+    private handleSubmit = event => {
+        const ids = this.state.newNamespaceGroupIds.split(',');
+        const groups = ids.map(id => id.trim());
+        groups.push('system:partner-engineers');
+        const data: any = {
+            name: this.state.newNamespaceName,
+            groups: groups,
         };
+        NamespaceAPI.create(data)
+            .then(results => {
+                this.toggleModal();
+                this.setState({
+                    newNamespaceName: '',
+                    newNamespaceGroupIds: '',
+                    errorMessages: {},
+                });
+                console.log('component # data: ', data);
+                this.props.onCreateSuccess(data);
+            })
+            .catch(error => {
+                const result = error.response;
+                if (result.status === 400) {
+                    const messages: any = {};
+                    for (const e of result.data.errors) {
+                        messages[e.source.parameter] = e.detail;
+                    }
+                    this.setState({ errorMessages: messages });
+                }
+            });
     }
 
     render() {
