@@ -64,7 +64,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                     this.setState({ errorMessages: messages });
                 }
             });
-    }
+    };
 
     render() {
         const {

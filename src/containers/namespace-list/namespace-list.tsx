@@ -211,10 +211,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
                         toggleModal={this.handleModalToggle}
                         onCreateSuccess={result =>
                             this.props.history.push(
-                                formatPath(
-                                    Paths.myCollections,
-                                    { namespace: result['name'] }
-                                ),
+                                formatPath(Paths.myCollections, {
+                                    namespace: result['name'],
+                                }),
                             )
                         }
                     ></NamespaceModal>

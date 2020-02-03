@@ -254,10 +254,11 @@ export class NamespaceForm extends React.Component<IProps, IState> {
 
     private addGroup() {
         const update = { ...this.props.namespace };
-        update.groups.push('rh-identity-account:' + this.state.newNamespaceGroup.trim());
-        this.setState(
-          { newNamespaceGroup: '', },
-          () => this.props.updateNamespace(update)
+        update.groups.push(
+            'rh-identity-account:' + this.state.newNamespaceGroup.trim(),
+        );
+        this.setState({ newNamespaceGroup: '' }, () =>
+            this.props.updateNamespace(update),
         );
     }
 
