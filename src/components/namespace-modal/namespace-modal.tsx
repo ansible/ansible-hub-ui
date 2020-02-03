@@ -102,7 +102,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                         label='Name'
                         isRequired
                         fieldId='simple-form-name'
-                        helperText='Please provide the namespace name'
+                        helperText='Please, provide the namespace name'
                     >
                         <TextInput
                             isRequired
@@ -117,9 +117,9 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                         />
                     </FormGroup>
                     <FormGroup
-                        label='Red Hat Accounts'
+                        label='Namespace owners'
                         fieldId='groups'
-                        helperText='Please provide comma-separated Red Hat Account identifications'
+                        helperText='Please, provide comma-separated Red Hat account identifications'
                         helperTextInvalid={errorMessages['groups']}
                         isValid={!('groups' in errorMessages)}
                     >

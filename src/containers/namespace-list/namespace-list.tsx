@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Modal } from '@patternfly/react-core';
 import './namespace-list.scss';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { RouteComponentProps, Link } from 'react-router-dom';
 import { Main, Section } from '@redhat-cloud-services/frontend-components';
 import {
     EmptyState,
@@ -84,8 +84,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
             isModalOpen: false,
             partnerEngineer: false,
         };
-
-        this.isPartnerEngineer();
     }
 
     private handleModalToggle = () => {
@@ -95,6 +93,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     };
 
     componentDidMount() {
+        this.isPartnerEngineer();
         if (this.props.filterOwner) {
             // Make a query with no params and see if it returns results to tell
             // if the user can edit namespaces
@@ -250,5 +249,3 @@ export class NamespaceList extends React.Component<IProps, IState> {
         });
     }
 }
-
-export default withRouter(NamespaceList);

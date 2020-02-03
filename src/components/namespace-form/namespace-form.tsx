@@ -55,55 +55,6 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                         <br />
 
                         <FormGroup
-                            fieldId='groups'
-                            label='Red Hat accounts'
-                            helperTextInvalid={errorMessages['groups']}
-                            isValid={!('groups' in errorMessages)}
-                        >
-                            <br />
-                            <ChipGroup>
-                                {this.props.namespace.groups.map(group => (
-                                    <Chip
-                                        key={group}
-                                        onClick={() => this.deleteItem(group)}
-                                    >
-                                        {group}
-                                    </Chip>
-                                ))}
-                            </ChipGroup>
-                            <div className='account-ids'>
-                                <div className='account-id'>
-                                    <TextInput
-                                        id='url'
-                                        type='text'
-                                        placeholder='Red Hat account ID'
-                                        value={this.state.newNamespaceGroup}
-                                        onChange={value =>
-                                            this.setState({
-                                                newNamespaceGroup: value,
-                                            })
-                                        }
-                                        onKeyDown={e => {
-                                            if (e.key === 'Enter') {
-                                                this.addGroup();
-                                            }
-                                        }}
-                                    />
-                                </div>
-                                <div className='account-add'>
-                                    <div className='clickable account-button'>
-                                        <PlusCircleIcon
-                                            onClick={() => this.addGroup()}
-                                            size='md'
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </FormGroup>
-
-                        <br />
-
-                        <FormGroup
                             fieldId='company'
                             label='Company name'
                             helperTextInvalid={errorMessages['company']}
@@ -124,6 +75,54 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                         <NamespaceCard {...namespace} />
                     </div>
                 </div>
+
+                <FormGroup
+                    fieldId='groups'
+                    label='Namespace owners'
+                    helperTextInvalid={errorMessages['groups']}
+                    isValid={!('groups' in errorMessages)}
+                >
+                    <br />
+
+                    <ChipGroup>
+                        {this.props.namespace.groups.map(group => (
+                            <Chip
+                                key={group}
+                                onClick={() => this.deleteItem(group)}
+                            >
+                                {group}
+                            </Chip>
+                        ))}
+                    </ChipGroup>
+
+                    <div className='account-ids'>
+                        <br />
+                        <TextInput
+                            id='url'
+                            type='text'
+                            placeholder='Red Hat account ID'
+                            value={this.state.newNamespaceGroup}
+                            onChange={value =>
+                                this.setState({
+                                    newNamespaceGroup: value,
+                                })
+                            }
+                            onKeyDown={e => {
+                                if (e.key === 'Enter') {
+                                    this.addGroup();
+                                }
+                            }}
+                        />
+                        <div className='account-add'>
+                            <div className='clickable account-button'>
+                                <PlusCircleIcon
+                                    onClick={() => this.addGroup()}
+                                    size='md'
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </FormGroup>
 
                 <FormGroup
                     fieldId='avatar_url'
