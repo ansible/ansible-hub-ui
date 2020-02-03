@@ -5,6 +5,8 @@ import { Section } from '@redhat-cloud-services/frontend-components';
 import { ClipboardCopy, Button } from '@patternfly/react-core';
 
 import { BaseHeader, Main } from '../../components';
+import { Constants } from '../../constants';
+import { UserAPI } from '../../api';
 
 interface IState {
     tokenData: {
@@ -29,10 +31,14 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
     }
 
     componentDidMount() {
-        // this function will fail if chrome.auth.doOffline() hasn't been called
-        (window as any).insights.chrome.auth.getOfflineToken().then(result => {
-            this.setState({ tokenData: result.data });
-        });
+        if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
+            // this function will fail if chrome.auth.doOffline() hasn't been called
+            (window as any).insights.chrome.auth
+                .getOfflineToken()
+                .then(result => {
+                    this.setState({ tokenData: result.data });
+                });
+        }
     }
 
     render() {
@@ -75,11 +81,17 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
     }
 
     private loadToken() {
-        (window as any).insights.chrome.auth
-            // doOffline cuases the page to refresh and will make the data
-            // available to getOfflineToken() when the component mounts after
-            // the reload
-            .doOffline();
+        if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
+            (window as any).insights.chrome.auth
+                // doOffline causes the page to refresh and will make the data
+                // available to getOfflineToken() when the component mounts after
+                // the reload
+                .doOffline();
+        } else {
+            UserAPI.getToken().then(result =>
+                this.setState({ tokenData: result }),
+            );
+        }
     }
 }
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './loaders/standalone-loader';
 
@@ -7,9 +7,9 @@ import App from './loaders/standalone-loader';
 // other than on the insights/cloud services environment)
 
 ReactDOM.render(
-        <Router>
-            <App />
-        </Router>,
+    <Router basename={UI_BASE_PATH}>
+        <App />
+    </Router>,
 
     document.getElementById('root'),
 );

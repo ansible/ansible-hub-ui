@@ -1,0 +1,82 @@
+/* global require, module, __dirname */
+const { resolve } = require('path');
+const config = require('@redhat-cloud-services/frontend-components-config');
+const TSOverrides = require('./webpack-ts-overrides');
+const commonWPconfig = require('./common.webpack.js');
+const webpack = require('webpack');
+
+// NOTE: This file is not meant to be consumed directly by weback. Instead it
+// should be imported, initialized with the following settings and exported like
+// a normal webpack config. See config/insights.prod.webpack.config.js for an
+// example
+
+// Default user defined settings
+const defaultConfigs = [
+    { name: 'API_HOST', default: '', scope: 'global' },
+    { name: 'API_BASE_PATH', default: '', scope: 'global' },
+    { name: 'UI_BASE_PATH', default: '', scope: 'global' },
+    { name: 'DEPLOYMENT_MODE', default: 'standalone', scope: 'global' },
+    { name: 'UI_USE_HTTPS', default: false, scope: 'webpack' },
+    { name: 'UI_DEBUG', default: false, scope: 'webpack' },
+    { name: 'TARGET_ENVIRONMENT', default: 'prod', scope: 'webpack' },
+];
+
+module.exports = inputConfigs => {
+    const customConfigs = {};
+    const globals = {};
+
+    defaultConfigs.forEach((item, i) => {
+        customConfigs[item.name] = inputConfigs[item.name] || item.default;
+        if (item.scope === 'global') {
+            globals[item.name] = inputConfigs[item.name] || item.default;
+            globals[item.name] = JSON.stringify(globals[item.name]);
+        }
+    });
+
+    const { config: webpackConfig, plugins } = config({
+        rootFolder: resolve(__dirname, '../'),
+        htmlPlugin: {targetEnv: customConfigs.DEPLOYMENT_MODE},
+        debug: customConfigs.UI_DEBUG,
+        https: customConfigs.UI_USE_HTTPS,
+    });
+
+    webpackConfig.serve = {
+        content: commonWPconfig.paths.public,
+        port: 8002,
+
+        // https://github.com/webpack-contrib/webpack-serve/blob/master/docs/addons/history-fallback.config.js
+        add: app => app.use(convert(history({}))),
+    };
+
+    if (customConfigs.TARGET_ENVIRONMENT === 'prod') {
+        webpackConfig.serve.prod = {
+            publicPath: commonWPconfig.paths.publicPath,
+        };
+    } else {
+        webpackConfig.serve.dev = {
+            publicPath: commonWPconfig.paths.publicPath,
+        };
+    }
+
+    // Override sections of the webpack config to work with TypeScript
+    const newWebpackConfig = {
+        ...webpackConfig,
+        ...TSOverrides,
+    };
+
+    if (customConfigs.DEPLOYMENT_MODE === 'standalone') {
+        console.log('Overriding app entry for standalone mode.');
+
+        const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
+        console.log(`New entry: ${newEntry}`);
+
+        newWebpackConfig.entry.App = newEntry;
+    }
+
+    plugins.push(new webpack.DefinePlugin(globals));
+
+    return {
+        ...newWebpackConfig,
+        plugins,
+    };
+};
