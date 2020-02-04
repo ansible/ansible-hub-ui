@@ -1,17 +1,22 @@
 // import PropTypes from 'prop-types';
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
-import { Routes } from '../Routes';
-import '@patternfly/patternfly/patternfly.scss';
 import './app.scss';
+import { withRouter, Link } from 'react-router-dom';
+
+import '@patternfly/patternfly/patternfly.scss';
 import {
     Page,
     PageHeader,
     PageSidebar,
+    Nav,
+    NavList,
+    NavItem,
     PageSection,
-    PageSectionVariants,
 } from '@patternfly/react-core';
+
+import { Routes } from '../Routes';
 import RageTater from '../../static/images/awx-spud.gif';
+import { Paths } from '../paths';
 
 interface IProps {
     history: any;
@@ -32,25 +37,45 @@ class App extends React.Component<IProps> {
         const Header = (
             <PageHeader
                 logo={
-                    <img
-                        style={{ height: '50px' }}
-                        src={RageTater}
-                        alt='AWX Spud'
-                    />
+                    <React.Fragment>
+                        <img
+                            style={{ height: '50px' }}
+                            src={RageTater}
+                            alt='AWX Spud'
+                        />
+                        Automation Hub
+                    </React.Fragment>
                 }
                 toolbar='Toolbar'
                 avatar=' | Avatar'
                 showNavToggle
-                isNavOpen={true}
-                onNavToggle={() => null}
             />
         );
         const Sidebar = (
-            <PageSidebar nav='Navigation' isNavOpen={true} theme='dark' />
+            <PageSidebar
+                theme='dark'
+                nav={
+                    <Nav theme='dark'>
+                        <NavList>
+                            <NavItem>
+                                <Link to={Paths.search}>Collections</Link>
+                            </NavItem>
+                            <NavItem>
+                                <Link to={Paths.partners}>Namespaces</Link>
+                            </NavItem>
+                            <NavItem>
+                                <Link to={Paths.myNamespaces}>
+                                    My Namespaces
+                                </Link>
+                            </NavItem>
+                        </NavList>
+                    </Nav>
+                }
+            />
         );
 
         return (
-            <Page header={Header} sidebar={Sidebar}>
+            <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
                 <Routes childProps={this.props} />
             </Page>
         );

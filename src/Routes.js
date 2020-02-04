@@ -4,6 +4,7 @@ import React from 'react';
 import asyncComponent from './utilities/asyncComponent';
 import some from 'lodash/some';
 import { Paths } from './paths';
+import { Constants } from './constants';
 
 /**
  * Aysnc imports of components
@@ -118,10 +119,12 @@ const CertificationDashboard = asyncComponent(() =>
 );
 
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
-    const root = document.getElementById('root');
-    root.removeAttribute('class');
-    root.classList.add(`page__${rootClass}`, 'pf-c-page__main');
-    root.setAttribute('role', 'main');
+    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
+        const root = document.getElementById('root');
+        root.removeAttribute('class');
+        root.classList.add(`page__${rootClass}`, 'pf-c-page__main');
+        root.setAttribute('role', 'main');
+    }
 
     return <Route {...rest} component={Component} />;
 };

@@ -6,6 +6,6 @@
         <%= htmlWebpackPlugin.options.targetEnv === 'insights' ? '<esi:include src="/@@env/chrome/snippets/head.html"/>' : null %>
     </head>
     <body>
-        <%= htmlWebpackPlugin.options.targetEnv === 'insights' ? '<esi:include src="/@@env/chrome/snippets/body.html"/>' : '<main id="root"/></main>' %>
+        <%= htmlWebpackPlugin.options.targetEnv === 'insights' ? '<esi:include src="/@@env/chrome/snippets/body.html"/>' : '<div id="root"></div>' %>
     </body>
 </html>

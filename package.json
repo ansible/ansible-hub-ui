@@ -95,7 +95,7 @@
         "lint:sass": "stylelint 'src/**/*.scss' --config .stylelintrc.json",
         "prod": "NODE_ENV=production webpack-dev-server --config custom.dev.config",
         "server:ctr": "node src/server/generateServerKey.js",
-        "start": "NODE_ENV=development webpack-dev-server --config config.js",
+        "start": "NODE_ENV=development webpack-dev-server --config custom.dev.config.js",
         "build:prod": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
         "deploy": "npm-run-all build:prod test test-prettier",
         "verify": "npm-run-all build lint test",
