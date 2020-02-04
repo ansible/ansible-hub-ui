@@ -103,6 +103,9 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                             type='text'
                             placeholder='Red Hat account ID'
                             value={this.state.newNamespaceGroup}
+                            isValid={
+                                !isNaN(Number(this.state.newNamespaceGroup))
+                            }
                             onChange={value =>
                                 this.setState({
                                     newNamespaceGroup: value,
@@ -254,6 +257,12 @@ export class NamespaceForm extends React.Component<IProps, IState> {
 
     private addGroup() {
         const update = { ...this.props.namespace };
+        if (
+            this.state.newNamespaceGroup.trim() == '' ||
+            isNaN(Number(this.state.newNamespaceGroup.trim()))
+        ) {
+            return;
+        }
         update.groups.push(
             'rh-identity-account:' + this.state.newNamespaceGroup.trim(),
         );

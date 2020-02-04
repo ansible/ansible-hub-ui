@@ -51,7 +51,6 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                     newNamespaceGroupIds: '',
                     errorMessages: {},
                 });
-                console.log('component # data: ', data);
                 this.props.onCreateSuccess(data);
             })
             .catch(error => {
