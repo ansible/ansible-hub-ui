@@ -1,4 +1,4 @@
-const webpackBase = require('./config/webpack.base.config')
+const webpackBase = require('./config/webpack.base.config');
 
 module.exports = webpackBase({
     // The host where the API lives. EX: https://localhost:5001
@@ -21,5 +21,5 @@ module.exports = webpackBase({
     UI_DEBUG: true,
 
     // Target compilation environment. Options: dev, prod
-    TARGET_ENVIRONMENT: 'dev'
-})
+    TARGET_ENVIRONMENT: 'dev',
+});
