@@ -208,6 +208,31 @@ export class CollectionHeader extends React.Component<IProps> {
                             Contents
                         </Link>
                     </li>
+                    <li
+                        className={
+                            'pf-c-tabs__item' +
+                            (active === 'import-log' ? ' pf-m-current' : '')
+                        }
+                    >
+                        <Link
+                            to={formatPath(
+                                Paths.collectionImportLog,
+                                {
+                                    namespace: this.props.collection.namespace
+                                        .name,
+                                    collection: this.props.collection.name,
+                                },
+                                ParamHelper.getReduced(
+                                    params,
+                                    this.ignorParams,
+                                ),
+                            )}
+                            className='pf-c-tabs__button'
+                            id='contents-tab'
+                        >
+                            Import log
+                        </Link>
+                    </li>
                 </ul>
             </div>
         );

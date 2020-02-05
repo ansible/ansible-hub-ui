@@ -13,7 +13,7 @@ import { ParamHelper } from '../../utilities/param-helper';
 import { formatPath, Paths } from '../../paths';
 
 // renders list of contents in a collection
-class CollectionContent extends React.Component<
+class CollectionImportLog extends React.Component<
     RouteComponentProps,
     IBaseCollectionState
 > {
@@ -94,4 +94,4 @@ class CollectionContent extends React.Component<
     }
 }
 
-export default withRouter(CollectionContent);
+export default withRouter(CollectionImportLog);
