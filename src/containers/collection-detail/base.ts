@@ -10,7 +10,7 @@ export interface IBaseCollectionState {
     collection: CollectionDetailType;
 }
 
-export function loadCollection(forceReload = false) {
+export function loadCollection(forceReload = false, callback = () => null) {
     CollectionAPI.getCached(
         this.props.match.params['namespace'],
         this.props.match.params['collection'],
@@ -18,7 +18,7 @@ export function loadCollection(forceReload = false) {
         forceReload,
     )
         .then(result => {
-            this.setState({ collection: result });
+            this.setState({ collection: result }, callback);
         })
         .catch(result => {
             this.props.history.push(Paths.notFound);
