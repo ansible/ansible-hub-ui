@@ -1,6 +1,7 @@
 export { Tag } from './tags/tag';
 export { NumericLabel } from './numeric-label/numeric-label';
 export { NamespaceForm } from './namespace-form/namespace-form';
+export { NamespaceModal } from './namespace-modal/namespace-modal';
 export { ResourcesForm } from './namespace-form/resources-form';
 export { BaseHeader } from './headers/base-header';
 export { PartnerHeader } from './headers/partner-header';
@@ -23,7 +24,9 @@ export { CollectionInfo } from './collection-detail/collection-info';
 export { CollectionHeader } from './headers/collection-header';
 export { TableOfContents } from './collection-detail/table-of-contents';
 export { RenderPluginDoc } from './collection-detail/render-plugin-doc';
-export { CollectionContentList } from './collection-detail/collection-content-list';
+export {
+    CollectionContentList,
+} from './collection-detail/collection-content-list';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';
 export { LoadingPageWithHeader } from './loading/loading-collection-detail';
 export { CompoundFilter } from './patternfly-wrappers/compound-filter';
