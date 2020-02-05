@@ -2,6 +2,7 @@ import * as React from 'react';
 import './namespace-form.scss';
 
 import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
+import { Chip, ChipGroup, ChipGroupToolbarItem } from '@patternfly/react-core';
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
 import { NamespaceCard } from '../../components';
@@ -17,6 +18,7 @@ interface IProps {
 interface IState {
     newLinkName: string;
     newLinkURL: string;
+    newNamespaceGroup: string;
 }
 
 export class NamespaceForm extends React.Component<IProps, IState> {
@@ -26,6 +28,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         this.state = {
             newLinkURL: '',
             newLinkName: '',
+            newNamespaceGroup: '',
         };
     }
 
@@ -72,6 +75,58 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                         <NamespaceCard {...namespace} />
                     </div>
                 </div>
+
+                <FormGroup
+                    fieldId='groups'
+                    label='Namespace owners'
+                    helperTextInvalid={errorMessages['groups']}
+                    isValid={!('groups' in errorMessages)}
+                >
+                    <br />
+
+                    <ChipGroup>
+                        {this.props.namespace.groups.map(group => (
+                            <Chip
+                                key={group}
+                                onClick={() => this.deleteItem(group)}
+                                isReadOnly={group === 'system:partner-engineers'}
+                            >
+                                {group.split(':')[1]}
+                            </Chip>
+                        ))}
+                    </ChipGroup>
+
+                    <div className='account-ids'>
+                        <br />
+                        <TextInput
+                            id='url'
+                            type='text'
+                            placeholder='Red Hat account ID'
+                            value={this.state.newNamespaceGroup}
+                            isValid={
+                                !isNaN(Number(this.state.newNamespaceGroup))
+                            }
+                            onChange={value =>
+                                this.setState({
+                                    newNamespaceGroup: value,
+                                })
+                            }
+                            onKeyDown={e => {
+                                if (e.key === 'Enter') {
+                                    this.addGroup();
+                                }
+                            }}
+                        />
+                        <div className='account-add'>
+                            <div className='clickable account-button'>
+                                <PlusCircleIcon
+                                    onClick={() => this.addGroup()}
+                                    size='md'
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </FormGroup>
 
                 <FormGroup
                     fieldId='avatar_url'
@@ -198,6 +253,31 @@ export class NamespaceForm extends React.Component<IProps, IState> {
             },
             () => this.props.updateNamespace(update),
         );
+    }
+
+    private addGroup() {
+        const update = { ...this.props.namespace };
+        if (
+            this.state.newNamespaceGroup.trim() == '' ||
+            isNaN(Number(this.state.newNamespaceGroup.trim()))
+        ) {
+            return;
+        }
+        update.groups.push(
+            'rh-identity-account:' + this.state.newNamespaceGroup.trim(),
+        );
+        this.setState({ newNamespaceGroup: '' }, () =>
+            this.props.updateNamespace(update),
+        );
+    }
+
+    private deleteItem(id) {
+        const update = { ...this.props.namespace };
+        const index = update.groups.indexOf(id);
+        if (index !== -1) {
+            update.groups.splice(index, 1);
+            this.props.updateNamespace(update);
+        }
     }
 
     private renderLinkGroup(link, index) {

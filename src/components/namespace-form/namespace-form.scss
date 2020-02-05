@@ -71,6 +71,27 @@
     }
 }
 
+.account-ids {
+    display: flex;
+    margin-bottom: 10px;
+
+    .account-id {
+        flex-grow: 1;
+    }
+
+    .account-add {
+        flex-grow: 2;
+        margin-left: 20px;
+        margin-top: 5px;
+    }
+
+    .account-button {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+    }
+}
+
 .resources-editor {
     height: 500px;
     resize: none;
