@@ -79,11 +79,6 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                 <div className='entry'>
                     {latest_version.metadata.description}
                 </div>
-                <div className='entry pf-l-flex pf-m-wrap'>
-                    {latest_version.metadata.tags.map((tag, index) => (
-                        <Tag key={index}>{tag}</Tag>
-                    ))}
-                </div>
                 <div className='entry pf-l-flex pf-m-wrap content'>
                     {Object.keys(contentSummary.contents).map(k => (
                         <div key={k}>
@@ -92,6 +87,11 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                                 number={contentSummary.contents[k]}
                             />
                         </div>
+                    ))}
+                </div>
+                <div className='entry pf-l-flex pf-m-wrap'>
+                    {latest_version.metadata.tags.map((tag, index) => (
+                        <Tag key={index}>{tag}</Tag>
                     ))}
                 </div>
             </DataListCell>,
