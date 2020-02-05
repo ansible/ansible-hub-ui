@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Modal } from '@patternfly/react-core';
 import { Form, FormGroup, ActionGroup } from '@patternfly/react-core';
+import { Badge } from '@patternfly/react-core';
 import {
     Button,
     ButtonVariant,
@@ -40,6 +41,13 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             newNamespaceGroupIdsValid: true,
             errorMessages: {},
         };
+    }
+
+    private newNamespaceGroups() {
+        const groups = this.state.newNamespaceGroupIds
+            .split(',')
+            .map(group => group.trim());
+        return groups;
     }
 
     private namespaceOwners() {
@@ -199,6 +207,12 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                         helperTextInvalid={this.state.errorMessages['groups']}
                         isValid={this.state.newNamespaceGroupIdsValid}
                     >
+                        &nbsp; &nbsp;
+                        {this.newNamespaceGroups().map(group => (
+                            <Badge key={group} isRead>
+                                {group.trim()}
+                            </Badge>
+                        ))}
                         <TextInput
                             isRequired
                             type='text'
