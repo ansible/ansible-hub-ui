@@ -10,9 +10,11 @@ import {
     Title,
     EmptyStateBody,
     EmptyStateVariant,
+    EmptyStateSecondaryActions,
+    Button,
 } from '@patternfly/react-core';
 
-import { WarningTriangleIcon } from '@patternfly/react-icons';
+import { SearchIcon } from '@patternfly/react-icons';
 
 import {
     BaseHeader,
@@ -201,13 +203,22 @@ class Search extends React.Component<RouteComponentProps, IState> {
     private renderEmpty() {
         return (
             <EmptyState className='empty' variant={EmptyStateVariant.full}>
-                <EmptyStateIcon icon={WarningTriangleIcon} />
+                <EmptyStateIcon icon={SearchIcon} />
                 <Title headingLevel='h2' size='lg'>
-                    No matches
+                    No results found
                 </Title>
                 <EmptyStateBody>
-                    Please try adjusting your search query.
+                    No results match the filter criteria. Remove all filters or
+                    clear all filters to show results.
                 </EmptyStateBody>
+                <Button
+                    variant='link'
+                    onClick={() =>
+                        this.updateParams({}, () => this.queryCollections())
+                    }
+                >
+                    Clear all filters
+                </Button>
             </EmptyState>
         );
     }
