@@ -238,7 +238,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     private renderList(collections) {
         return (
             <div className='list-container'>
-                <div className='body list'>
+                <div className='list'>
                     <DataList
                         className='data-list'
                         aria-label={'List of Collections'}
