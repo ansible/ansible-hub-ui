@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Checkbox } from '@patternfly/react-core';
 
 import { ParamHelper } from '../../utilities/param-helper';
-import { NumericLabel } from '../../components';
 
 interface IProps {
     tags: string[];
@@ -19,7 +18,9 @@ export class TagFilter extends React.Component<IProps> {
         const { tags, params } = this.props;
         return (
             <div>
-                <div>Tags</div>
+                <div className='pf-c-content'>
+                    <h4>Tags</h4>
+                </div>
                 {tags.map(t => (
                     <div
                         key={t}
