@@ -5,6 +5,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .pagination-container {
+        display: flex;
+        align-items: center;
+
+        .card-list-switcher {
+            margin-right: 16px;
+        }
+    }
 }
 
 .header {

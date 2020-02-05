@@ -100,29 +100,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
         return (
             <React.Fragment>
-                <BaseHeader
-                    className='header'
-                    title='Collections'
-                    pageControls={
-                        <CardListSwitcher
-                            size='sm'
-                            params={params}
-                            updateParams={p =>
-                                this.updateParams(p, () =>
-                                    // Note, we have to use this.state.params instead
-                                    // of params in the callback because the callback
-                                    // executes before the page can re-run render
-                                    // which means params doesn't contain the most
-                                    // up to date state
-                                    localStorage.setItem(
-                                        Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-                                        this.state.params.view_type,
-                                    ),
-                                )
-                            }
-                        />
-                    }
-                >
+                <BaseHeader className='header' title='Collections'>
                     <div className='toolbar'>
                         <Toolbar
                             params={params}
@@ -134,19 +112,41 @@ class Search extends React.Component<RouteComponentProps, IState> {
                             searchPlaceholder='Search collections'
                         />
 
-                        <Pagination
-                            params={params}
-                            updateParams={p =>
-                                this.updateParams(p, () =>
-                                    this.queryCollections(),
-                                )
-                            }
-                            count={numberOfResults}
-                            perPageOptions={
-                                Constants.CARD_DEFAULT_PAGINATION_OPTIONS
-                            }
-                            isTop
-                        />
+                        <div className='pagination-container'>
+                            <div className='card-list-switcher'>
+                                <CardListSwitcher
+                                    size='sm'
+                                    params={params}
+                                    updateParams={p =>
+                                        this.updateParams(p, () =>
+                                            // Note, we have to use this.state.params instead
+                                            // of params in the callback because the callback
+                                            // executes before the page can re-run render
+                                            // which means params doesn't contain the most
+                                            // up to date state
+                                            localStorage.setItem(
+                                                Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
+                                                this.state.params.view_type,
+                                            ),
+                                        )
+                                    }
+                                />
+                            </div>
+
+                            <Pagination
+                                params={params}
+                                updateParams={p =>
+                                    this.updateParams(p, () =>
+                                        this.queryCollections(),
+                                    )
+                                }
+                                count={numberOfResults}
+                                perPageOptions={
+                                    Constants.CARD_DEFAULT_PAGINATION_OPTIONS
+                                }
+                                isTop
+                            />
+                        </div>
                     </div>
                 </BaseHeader>
                 <Main>
