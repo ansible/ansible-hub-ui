@@ -12,9 +12,12 @@ import {
     GridItem,
     FormSelect,
     FormSelectOption,
+    Button,
 } from '@patternfly/react-core';
 
-import { CollectionDetailType } from '../../api';
+import { DownloadIcon } from '@patternfly/react-icons';
+
+import { CollectionDetailType, CollectionAPI } from '../../api';
 import { Tag } from '../../components';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -27,6 +30,13 @@ interface IProps extends CollectionDetailType {
 }
 
 export class CollectionInfo extends React.Component<IProps> {
+    downloadLinkRef: any;
+
+    constructor(props) {
+        super(props);
+        this.downloadLinkRef = React.createRef();
+    }
+
     render() {
         const {
             name,
@@ -77,6 +87,26 @@ export class CollectionInfo extends React.Component<IProps> {
                                     <b>Note:</b> Installing collections with
                                     ansible-galaxy is only supported in ansible
                                     2.9+
+                                </div>
+                                <div>
+                                    <a
+                                        ref={this.downloadLinkRef}
+                                        style={{ display: 'none' }}
+                                    ></a>
+                                    <Button
+                                        className='download-button'
+                                        variant='link'
+                                        icon={<DownloadIcon />}
+                                        onClick={() =>
+                                            this.download(
+                                                namespace,
+                                                name,
+                                                latest_version,
+                                            )
+                                        }
+                                    >
+                                        Download tarball
+                                    </Button>
                                 </div>
                             </SplitItem>
                         </Split>
@@ -155,5 +185,21 @@ export class CollectionInfo extends React.Component<IProps> {
                 </Grid>
             </div>
         );
+    }
+
+    private download(namespace, name, latest_version) {
+        CollectionAPI.getDownloadURL(
+            namespace.name,
+            name,
+            latest_version.version,
+        ).then((downloadURL: string) => {
+            // By getting a reference to a hidden <a> tag, setting the href and
+            // programmatically clicking it, we can hold off on making the api
+            // calls to get the download URL until it's actually needed. Clicking
+            // the <a> tag also gets around all the problems using a popup with
+            // window.open() causes.
+            this.downloadLinkRef.current.href = downloadURL;
+            this.downloadLinkRef.current.click();
+        });
     }
 }
