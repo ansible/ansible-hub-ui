@@ -89,7 +89,9 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                             <Chip
                                 key={group}
                                 onClick={() => this.deleteItem(group)}
-                                isReadOnly={group === 'system:partner-engineers'}
+                                isReadOnly={
+                                    group === 'system:partner-engineers'
+                                }
                             >
                                 {group.split(':')[1]}
                             </Chip>
