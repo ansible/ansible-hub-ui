@@ -73,7 +73,6 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
             { name: 'Import log' },
         ];
 
-        console.log(this.state);
         return (
             <React.Fragment>
                 <CollectionHeader
@@ -113,7 +112,6 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
                     sort: '-created',
                 })
                     .then(importListResult => {
-                        console.log(importListResult);
                         const importObj = importListResult.data.data[0];
                         ImportAPI.get(importObj.id)
                             .then(importDetailResult => {
