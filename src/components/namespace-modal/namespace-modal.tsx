@@ -35,9 +35,23 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         };
     }
 
-    private handleSubmit = event => {
+    private namespaceOwners() {
         const ids = this.state.newNamespaceGroupIds.split(',');
-        const groups = ids.map(id => id.trim());
+        return ids.map(id => id.trim());
+    }
+
+    private namespaceOwnersValid() {
+        const isNumber = currentValue => !isNaN(Number(currentValue));
+        const valid = this.namespaceOwners().every(isNumber);
+        if (!valid) {
+            const errorMessage = 'Provided identifications are not numbers';
+            this.state.errorMessages['groups'] = errorMessage;
+        }
+        return valid;
+    }
+
+    private handleSubmit = event => {
+        const groups = this.namespaceOwners();
         groups.push('system:partner-engineers');
         const data: any = {
             name: this.state.newNamespaceName,
@@ -120,7 +134,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                         fieldId='groups'
                         helperText='Please, provide comma-separated Red Hat account identifications'
                         helperTextInvalid={errorMessages['groups']}
-                        isValid={!('groups' in errorMessages)}
+                        isValid={this.namespaceOwnersValid()}
                     >
                         <TextInput
                             isRequired
