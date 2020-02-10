@@ -62,13 +62,6 @@ export class CollectionList extends React.Component<IProps, IState> {
                 <div className='controls top'>
                     <Toolbar
                         searchPlaceholder='Find collection by name'
-                        sortOptions={[
-                            { title: 'Name', id: 'name' },
-                            {
-                                title: 'Last updated',
-                                id: 'created',
-                            },
-                        ]}
                         updateParams={updateParams}
                         params={params}
                     />
