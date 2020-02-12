@@ -265,9 +265,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         ) {
             return;
         }
-        update.groups.push(
-            this.state.newNamespaceGroup.trim(),
-        );
+        update.groups.push(this.state.newNamespaceGroup.trim());
         this.setState({ newNamespaceGroup: '' }, () =>
             this.props.updateNamespace(update),
         );

@@ -56,13 +56,12 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         const valid = !!this.state.newNamespaceName.trim();
         if (!valid) {
             const errorMessage = 'Please, provide the namespace name';
-            this.setState( {newNamespaceNameValid: false} );
+            this.setState({ newNamespaceNameValid: false });
             this.state.errorMessages['name'] = errorMessage;
         } else {
-            this.setState( {newNamespaceNameValid: true} );
+            this.setState({ newNamespaceNameValid: true });
             delete this.state.errorMessages['name'];
         }
-
     }
 
     private handleSubmit = event => {
@@ -142,11 +141,13 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                             name='newNamespaceName'
                             value={newNamespaceName}
                             onChange={value => {
-                                this.setState({ newNamespaceName: value }, () => {
-                                    this.newNamespaceNameValid();
-                                });
-                              }
-                            }
+                                this.setState(
+                                    { newNamespaceName: value },
+                                    () => {
+                                        this.newNamespaceNameValid();
+                                    },
+                                );
+                            }}
                         />
                     </FormGroup>
                     <FormGroup
