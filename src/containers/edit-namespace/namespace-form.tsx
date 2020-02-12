@@ -209,11 +209,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
             }),
         });
     }
-
-    private validateNamesace(namespace) {
-        // TODO: add data validation once error format and validation checks
-        // are known
-    }
 }
 
 export default withRouter(EditNamespace);
