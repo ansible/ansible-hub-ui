@@ -17,6 +17,7 @@ interface IProps {
 
 interface IState {
     newNamespaceName: string;
+    newNamespaceNameValid: boolean;
     newNamespaceGroupIds: string;
     errorMessages: any;
 }
@@ -30,6 +31,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         this.toggleModal = this.props.toggleModal;
         this.state = {
             newNamespaceName: '',
+            newNamespaceNameValid: true,
             newNamespaceGroupIds: '',
             errorMessages: {},
         };
@@ -48,6 +50,19 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             this.state.errorMessages['groups'] = errorMessage;
         }
         return valid;
+    }
+
+    private newNamespaceNameValid() {
+        const valid = !!this.state.newNamespaceName.trim();
+        if (!valid) {
+            const errorMessage = 'Please, provide the namespace name';
+            this.setState( {newNamespaceNameValid: false} );
+            this.state.errorMessages['name'] = errorMessage;
+        } else {
+            this.setState( {newNamespaceNameValid: true} );
+            delete this.state.errorMessages['name'];
+        }
+
     }
 
     private handleSubmit = event => {
@@ -114,18 +129,23 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                     <FormGroup
                         label='Name'
                         isRequired
-                        fieldId='simple-form-name'
+                        fieldId='name'
                         helperText='Please, provide the namespace name'
+                        helperTextInvalid={errorMessages['name']}
+                        // This prop will be deprecated. You should use validated instead.
+                        isValid={this.state.newNamespaceNameValid}
                     >
                         <TextInput
                             isRequired
                             type='text'
                             id='newNamespaceName'
                             name='newNamespaceName'
-                            aria-describedby='simple-form-name-helper'
                             value={newNamespaceName}
-                            onChange={value =>
-                                this.setState({ newNamespaceName: value })
+                            onChange={value => {
+                                this.setState({ newNamespaceName: value }, () => {
+                                    this.newNamespaceNameValid();
+                                });
+                              }
                             }
                         />
                     </FormGroup>
