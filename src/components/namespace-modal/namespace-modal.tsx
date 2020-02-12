@@ -19,6 +19,7 @@ interface IState {
     newNamespaceName: string;
     newNamespaceNameValid: boolean;
     newNamespaceGroupIds: string;
+    newNamespaceGroupIdsValid: boolean;
     errorMessages: any;
 }
 
@@ -33,35 +34,57 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             newNamespaceName: '',
             newNamespaceNameValid: true,
             newNamespaceGroupIds: '',
+            newNamespaceGroupIdsValid: true,
             errorMessages: {},
         };
     }
 
     private namespaceOwners() {
+        if (this.state.newNamespaceGroupIds === '') {
+            return [];
+        }
         const ids = this.state.newNamespaceGroupIds.split(',');
         return ids.map(id => id.trim());
     }
 
     private namespaceOwnersValid() {
+        const error: any = this.state.errorMessages;
+
         const isNumber = currentValue => !isNaN(Number(currentValue));
         const valid = this.namespaceOwners().every(isNumber);
-        if (!valid) {
-            const errorMessage = 'Provided identifications are not numbers';
-            this.state.errorMessages['groups'] = errorMessage;
+
+        if (valid) {
+            delete error['groups'];
+        } else {
+            error['groups'] = 'Provided identifications are not numbers';
         }
-        return valid;
+
+        this.setState({
+            newNamespaceGroupIdsValid: !('groups' in error),
+            errorMessages: error,
+        });
     }
 
-    private newNamespaceNameValid() {
-        const valid = !!this.state.newNamespaceName.trim();
-        if (!valid) {
-            const errorMessage = 'Please, provide the namespace name';
-            this.setState({ newNamespaceNameValid: false });
-            this.state.errorMessages['name'] = errorMessage;
+    private newNamespaceNameIsValid() {
+        const error: any = this.state.errorMessages;
+        const name: string = this.state.newNamespaceName;
+
+        if (name == '') {
+            error['name'] = 'Please, provide the namespace name';
+        } else if (!/^[a-zA-Z0-9_]+$/.test(name)) {
+            error['name'] = 'Name can only contain [A-Za-z0-9_]';
+        } else if (name.length <= 2) {
+            error['name'] = 'Name must be longer than 2 characters';
+        } else if (name.startsWith('_')) {
+            error['name'] = "Name cannot begin with '_'";
         } else {
-            this.setState({ newNamespaceNameValid: true });
-            delete this.state.errorMessages['name'];
+            delete error['name'];
         }
+
+        this.setState({
+            newNamespaceNameValid: !('name' in error),
+            errorMessages: error,
+        });
     }
 
     private handleSubmit = event => {
@@ -83,13 +106,15 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             })
             .catch(error => {
                 const result = error.response;
-                if (result.status === 400) {
-                    const messages: any = {};
-                    for (const e of result.data.errors) {
-                        messages[e.source.parameter] = e.detail;
-                    }
-                    this.setState({ errorMessages: messages });
+                const messages: any = this.state.errorMessages;
+                for (const e of result.data.errors) {
+                    messages[e.source.parameter] = e.detail;
                 }
+                this.setState({
+                    errorMessages: messages,
+                    newNamespaceNameValid: !('name' in messages),
+                    newNamespaceGroupIdsValid: !('groups' in messages),
+                });
             });
     };
 
@@ -130,7 +155,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                         isRequired
                         fieldId='name'
                         helperText='Please, provide the namespace name'
-                        helperTextInvalid={errorMessages['name']}
+                        helperTextInvalid={this.state.errorMessages['name']}
                         // This prop will be deprecated. You should use validated instead.
                         isValid={this.state.newNamespaceNameValid}
                     >
@@ -144,7 +169,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                                 this.setState(
                                     { newNamespaceName: value },
                                     () => {
-                                        this.newNamespaceNameValid();
+                                        this.newNamespaceNameIsValid();
                                     },
                                 );
                             }}
@@ -154,8 +179,8 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                         label='Namespace owners'
                         fieldId='groups'
                         helperText='Please, provide comma-separated Red Hat account identifications'
-                        helperTextInvalid={errorMessages['groups']}
-                        isValid={this.namespaceOwnersValid()}
+                        helperTextInvalid={this.state.errorMessages['groups']}
+                        isValid={this.state.newNamespaceGroupIdsValid}
                     >
                         <TextInput
                             isRequired
@@ -163,11 +188,14 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                             id='newNamespaceGroupIds'
                             name='newNamespaceGroupIds'
                             value={newNamespaceGroupIds}
-                            onChange={value =>
-                                this.setState({
-                                    newNamespaceGroupIds: value,
-                                })
-                            }
+                            onChange={value => {
+                                this.setState(
+                                    { newNamespaceGroupIds: value },
+                                    () => {
+                                        this.namespaceOwnersValid();
+                                    },
+                                );
+                            }}
                         />
                     </FormGroup>
                 </Form>
