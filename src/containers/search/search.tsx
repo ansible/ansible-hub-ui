@@ -10,7 +10,6 @@ import {
     Title,
     EmptyStateBody,
     EmptyStateVariant,
-    EmptyStateSecondaryActions,
     Button,
 } from '@patternfly/react-core';
 
@@ -208,8 +207,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
                     No results found
                 </Title>
                 <EmptyStateBody>
-                    No results match the filter criteria. Remove all filters or
-                    clear all filters to show results.
+                    No results match the search criteria. Remove all filters to
+                    show results.
                 </EmptyStateBody>
                 <Button
                     variant='link'
@@ -217,7 +216,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
                         this.updateParams({}, () => this.queryCollections())
                     }
                 >
-                    Clear all filters
+                    Clear search
                 </Button>
             </EmptyState>
         );

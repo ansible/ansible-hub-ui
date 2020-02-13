@@ -12,7 +12,7 @@ import {
     EmptyStateVariant,
     EmptyStateBody,
 } from '@patternfly/react-core';
-import { WarningTriangleIcon } from '@patternfly/react-icons';
+import { SearchIcon } from '@patternfly/react-icons';
 
 import { CollectionListType } from '../../api';
 import {
@@ -94,13 +94,20 @@ export class CollectionList extends React.Component<IProps, IState> {
                             className='empty'
                             variant={EmptyStateVariant.full}
                         >
-                            <EmptyStateIcon icon={WarningTriangleIcon} />
+                            <EmptyStateIcon icon={SearchIcon} />
                             <Title headingLevel='h2' size='lg'>
-                                No collections found
+                                No results found
                             </Title>
                             <EmptyStateBody>
-                                Please try adjusting your search query.
+                                No results match the filter criteria. Remove all
+                                filters or clear all filters to show results.
                             </EmptyStateBody>
+                            <Button
+                                variant='link'
+                                onClick={() => updateParams({})}
+                            >
+                                Clear all filters
+                            </Button>
                         </EmptyState>
                     )}
                 </DataList>

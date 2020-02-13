@@ -10,7 +10,7 @@ import {
     EmptyStateBody,
     EmptyStateVariant,
 } from '@patternfly/react-core';
-import { WarningTriangleIcon } from '@patternfly/react-icons';
+import { SearchIcon } from '@patternfly/react-icons';
 
 import { ParamHelper } from '../../utilities/param-helper';
 import {
@@ -201,17 +201,38 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
         if (namespaces.length === 0) {
             return (
-                <EmptyState className='empty' variant={EmptyStateVariant.full}>
-                    <EmptyStateIcon icon={WarningTriangleIcon} />
-                    <Title headingLevel='h2' size='lg'>
-                        {hasPermission ? 'No matches' : 'No managed namespaces'}
-                    </Title>
-                    <EmptyStateBody>
-                        {hasPermission
-                            ? 'Please try adjusting your search query.'
-                            : 'This account is not set up to manage any namespaces.'}
-                    </EmptyStateBody>
-                </EmptyState>
+                <Section>
+                    <EmptyState
+                        className='empty'
+                        variant={EmptyStateVariant.full}
+                    >
+                        <EmptyStateIcon icon={SearchIcon} />
+                        <Title headingLevel='h2' size='lg'>
+                            {hasPermission
+                                ? 'No results found'
+                                : 'No managed namespaces'}
+                        </Title>
+                        <EmptyStateBody>
+                            {hasPermission
+                                ? 'No results match the filter criteria.' +
+                                  ' Remove all filters or clear all filters' +
+                                  ' to show results.'
+                                : 'This account is not set up to manage any namespaces.'}
+                        </EmptyStateBody>
+                        {hasPermission && (
+                            <Button
+                                variant='link'
+                                onClick={() =>
+                                    this.updateParams({}, () =>
+                                        this.loadNamespaces(),
+                                    )
+                                }
+                            >
+                                Clear all filters
+                            </Button>
+                        )}
+                    </EmptyState>
+                </Section>
             );
         }
 
