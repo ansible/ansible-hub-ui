@@ -93,7 +93,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                                     group === 'system:partner-engineers'
                                 }
                             >
-                                {group.split(':')[1]}
+                                {group}
                             </Chip>
                         ))}
                     </ChipGroup>
@@ -265,9 +265,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         ) {
             return;
         }
-        update.groups.push(
-            'rh-identity-account:' + this.state.newNamespaceGroup.trim(),
-        );
+        update.groups.push(this.state.newNamespaceGroup.trim());
         this.setState({ newNamespaceGroup: '' }, () =>
             this.props.updateNamespace(update),
         );
