@@ -143,7 +143,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                             sortOptions={[
                                 { title: 'Name', id: 'name', type: 'alpha' },
                             ]}
-                            searchPlaceholder={'Search ' + title}
+                            searchPlaceholder={'Search ' + title.toLowerCase()}
                             updateParams={p =>
                                 this.updateParams(p, () =>
                                     this.loadNamespaces(),
