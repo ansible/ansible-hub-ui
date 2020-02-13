@@ -5,8 +5,11 @@ import {
     Button,
     ButtonVariant,
     InputGroup,
+    Popover,
+    PopoverPosition,
     TextInput,
 } from '@patternfly/react-core';
+import { QuestionCircleIcon } from '@patternfly/react-icons';
 import { NamespaceAPI } from '../../api';
 
 interface IProps {
@@ -159,21 +162,35 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                         // This prop will be deprecated. You should use validated instead.
                         isValid={this.state.newNamespaceNameValid}
                     >
-                        <TextInput
-                            isRequired
-                            type='text'
-                            id='newNamespaceName'
-                            name='newNamespaceName'
-                            value={newNamespaceName}
-                            onChange={value => {
-                                this.setState(
-                                    { newNamespaceName: value },
-                                    () => {
-                                        this.newNamespaceNameIsValid();
-                                    },
-                                );
-                            }}
-                        />
+                        <InputGroup>
+                            <TextInput
+                                isRequired
+                                type='text'
+                                id='newNamespaceName'
+                                name='newNamespaceName'
+                                value={newNamespaceName}
+                                onChange={value => {
+                                    this.setState(
+                                        { newNamespaceName: value },
+                                        () => {
+                                            this.newNamespaceNameIsValid();
+                                        },
+                                    );
+                                }}
+                            />
+                            <Popover
+                                aria-label='popover example'
+                                position={PopoverPosition.top}
+                                bodyContent='Namespace names are limited to lowercase word characters ([a-zA-Z0-9_]), must have a minimum length of 2 characters and cannot start with an ‘_’.'
+                            >
+                                <Button
+                                    variant={ButtonVariant.control}
+                                    aria-label='popover for input'
+                                >
+                                    <QuestionCircleIcon />
+                                </Button>
+                            </Popover>
+                        </InputGroup>
                     </FormGroup>
                     <FormGroup
                         label='Namespace owners'
