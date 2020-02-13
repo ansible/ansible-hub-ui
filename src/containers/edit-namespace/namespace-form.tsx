@@ -147,9 +147,25 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         return ParamHelper.updateParamsMixin();
     }
 
+    private removeGroupsPrefix(groups) {
+        const partnerEngineerOwner = 'system:partner-engineers';
+        let unprefixedGroupOwners = [partnerEngineerOwner];
+        for (const owner of groups) {
+            if (owner == partnerEngineerOwner) {
+                continue;
+            }
+            // 'rh-identity-account', '<id>'
+            else unprefixedGroupOwners.push(owner.split(':')[1]);
+        }
+        return unprefixedGroupOwners;
+    }
+
     private loadNamespace() {
         NamespaceAPI.get(this.props.match.params['namespace'])
             .then(response => {
+                response.data.groups = this.removeGroupsPrefix(
+                    response.data.groups,
+                );
                 this.setState({ namespace: response.data });
             })
             .catch(response => {
@@ -194,11 +210,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                 namespace: this.state.namespace.name,
             }),
         });
-    }
-
-    private validateNamesace(namespace) {
-        // TODO: add data validation once error format and validation checks
-        // are known
     }
 }
 
