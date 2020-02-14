@@ -25,7 +25,7 @@ export { CollectionHeader } from './headers/collection-header';
 export { TableOfContents } from './collection-detail/table-of-contents';
 export { RenderPluginDoc } from './collection-detail/render-plugin-doc';
 export {
-    CollectionContentList,
+  CollectionContentList,
 } from './collection-detail/collection-content-list';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';
 export { LoadingPageWithHeader } from './loading/loading-with-header';
@@ -33,9 +33,9 @@ export { CompoundFilter } from './patternfly-wrappers/compound-filter';
 export { AppliedFilters } from './patternfly-wrappers/applied-filters';
 export { DeprecatedTag } from './tags/deprecated-tag';
 export {
-    AlertList,
-    closeAlertMixin,
-    AlertType,
+  AlertList,
+  closeAlertMixin,
+  AlertType,
 } from './patternfly-wrappers/alert-list';
 export { APIButton } from './api-button/api-button';
 export { Main } from './patternfly-wrappers/main';

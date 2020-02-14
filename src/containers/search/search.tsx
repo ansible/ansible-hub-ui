@@ -4,276 +4,253 @@ import './search.scss';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
-    DataList,
-    EmptyState,
-    EmptyStateIcon,
-    Title,
-    EmptyStateBody,
-    EmptyStateVariant,
-    Button,
+  DataList,
+  EmptyState,
+  EmptyStateIcon,
+  Title,
+  EmptyStateBody,
+  EmptyStateVariant,
+  Button,
 } from '@patternfly/react-core';
 
 import { SearchIcon } from '@patternfly/react-icons';
 
 import {
-    BaseHeader,
-    CollectionCard,
-    Toolbar,
-    TagFilter,
-    CardListSwitcher,
-    CollectionListItem,
-    Pagination,
-    LoadingPageSpinner,
-    Main,
+  BaseHeader,
+  CollectionCard,
+  Toolbar,
+  TagFilter,
+  CardListSwitcher,
+  CollectionListItem,
+  Pagination,
+  LoadingPageSpinner,
+  Main,
 } from '../../components';
 import {
-    CollectionAPI,
-    CollectionListType,
-    CertificationStatus,
+  CollectionAPI,
+  CollectionListType,
+  CertificationStatus,
 } from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
 import { Constants } from '../../constants';
 
 interface IState {
-    collections: CollectionListType[];
-    numberOfResults: number;
-    params: {
-        page?: number;
-        page_size?: number;
-        keywords?: string;
-        tags?: string;
-        view_type?: string;
-    };
-    loading: boolean;
+  collections: CollectionListType[];
+  numberOfResults: number;
+  params: {
+    page?: number;
+    page_size?: number;
+    keywords?: string;
+    tags?: string;
+    view_type?: string;
+  };
+  loading: boolean;
 }
 
 class Search extends React.Component<RouteComponentProps, IState> {
-    tags: string[];
+  tags: string[];
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        const params = ParamHelper.parseParamString(props.location.search, [
-            'page',
-            'page_size',
-        ]);
+    const params = ParamHelper.parseParamString(props.location.search, [
+      'page',
+      'page_size',
+    ]);
 
-        if (!params['page_size']) {
-            params['page_size'] = Constants.CARD_DEFAULT_PAGE_SIZE;
-        }
-
-        // Load view type from local storage if it's not set. This allows a
-        // user's view type preference to persist
-        if (!params['view_type']) {
-            params['view_type'] = localStorage.getItem(
-                Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-            );
-        }
-
-        this.state = {
-            collections: [],
-            params: params,
-            numberOfResults: 0,
-            loading: true,
-        };
-
-        this.tags = [
-            'cloud',
-            'linux',
-            'network',
-            'storage',
-            'security',
-            'windows',
-            'infrastructure',
-            'monitoring',
-            'tools',
-            'database',
-            'application',
-        ];
+    if (!params['page_size']) {
+      params['page_size'] = Constants.CARD_DEFAULT_PAGE_SIZE;
     }
 
-    componentDidMount() {
-        this.queryCollections();
+    // Load view type from local storage if it's not set. This allows a
+    // user's view type preference to persist
+    if (!params['view_type']) {
+      params['view_type'] = localStorage.getItem(
+        Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
+      );
     }
 
-    render() {
-        const { collections, params, numberOfResults, loading } = this.state;
+    this.state = {
+      collections: [],
+      params: params,
+      numberOfResults: 0,
+      loading: true,
+    };
 
-        return (
-            <React.Fragment>
-                <BaseHeader className='header' title='Collections'>
-                    <div className='toolbar'>
-                        <Toolbar
-                            params={params}
-                            updateParams={p =>
-                                this.updateParams(p, () =>
-                                    this.queryCollections(),
-                                )
-                            }
-                            searchPlaceholder='Search collections'
-                        />
+    this.tags = [
+      'cloud',
+      'linux',
+      'network',
+      'storage',
+      'security',
+      'windows',
+      'infrastructure',
+      'monitoring',
+      'tools',
+      'database',
+      'application',
+    ];
+  }
 
-                        <div className='pagination-container'>
-                            <div className='card-list-switcher'>
-                                <CardListSwitcher
-                                    size='sm'
-                                    params={params}
-                                    updateParams={p =>
-                                        this.updateParams(p, () =>
-                                            // Note, we have to use this.state.params instead
-                                            // of params in the callback because the callback
-                                            // executes before the page can re-run render
-                                            // which means params doesn't contain the most
-                                            // up to date state
-                                            localStorage.setItem(
-                                                Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-                                                this.state.params.view_type,
-                                            ),
-                                        )
-                                    }
-                                />
-                            </div>
+  componentDidMount() {
+    this.queryCollections();
+  }
 
-                            <Pagination
-                                params={params}
-                                updateParams={p =>
-                                    this.updateParams(p, () =>
-                                        this.queryCollections(),
-                                    )
-                                }
-                                count={numberOfResults}
-                                perPageOptions={
-                                    Constants.CARD_DEFAULT_PAGINATION_OPTIONS
-                                }
-                                isTop
-                            />
-                        </div>
-                    </div>
-                </BaseHeader>
-                <Main>
-                    <Section className='collection-container'>
-                        <div className='sidebar'>
-                            <TagFilter
-                                params={params}
-                                updateParams={p =>
-                                    this.updateParams(p, () =>
-                                        this.queryCollections(),
-                                    )
-                                }
-                                tags={this.tags}
-                            />
-                        </div>
+  render() {
+    const { collections, params, numberOfResults, loading } = this.state;
 
-                        {this.renderCollections(collections, params)}
-                    </Section>
-                    <Section className='body footer'>
-                        <Pagination
-                            params={params}
-                            updateParams={p =>
-                                this.updateParams(p, () =>
-                                    this.queryCollections(),
-                                )
-                            }
-                            perPageOptions={
-                                Constants.CARD_DEFAULT_PAGINATION_OPTIONS
-                            }
-                            count={numberOfResults}
-                        />
-                    </Section>
-                </Main>
-            </React.Fragment>
-        );
-    }
+    return (
+      <React.Fragment>
+        <BaseHeader className='header' title='Collections'>
+          <div className='toolbar'>
+            <Toolbar
+              params={params}
+              updateParams={p =>
+                this.updateParams(p, () => this.queryCollections())
+              }
+              searchPlaceholder='Search collections'
+            />
 
-    private renderCollections(collections, params) {
-        if (this.state.loading) {
-            return <LoadingPageSpinner></LoadingPageSpinner>;
-        }
-        if (collections.length === 0) {
-            return this.renderEmpty();
-        }
-        if (params.view_type === 'list') {
-            return this.renderList(collections);
-        } else {
-            return this.renderCards(collections);
-        }
-    }
+            <div className='pagination-container'>
+              <div className='card-list-switcher'>
+                <CardListSwitcher
+                  size='sm'
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () =>
+                      // Note, we have to use this.state.params instead
+                      // of params in the callback because the callback
+                      // executes before the page can re-run render
+                      // which means params doesn't contain the most
+                      // up to date state
+                      localStorage.setItem(
+                        Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
+                        this.state.params.view_type,
+                      ),
+                    )
+                  }
+                />
+              </div>
 
-    private renderEmpty() {
-        return (
-            <EmptyState className='empty' variant={EmptyStateVariant.full}>
-                <EmptyStateIcon icon={SearchIcon} />
-                <Title headingLevel='h2' size='lg'>
-                    No results found
-                </Title>
-                <EmptyStateBody>
-                    No results match the search criteria. Remove all filters to
-                    show results.
-                </EmptyStateBody>
-                <Button
-                    variant='link'
-                    onClick={() =>
-                        this.updateParams({}, () => this.queryCollections())
-                    }
-                >
-                    Clear search
-                </Button>
-            </EmptyState>
-        );
-    }
-
-    private renderCards(collections) {
-        return (
-            <div className='cards'>
-                {collections.map(c => {
-                    return (
-                        <CollectionCard className='card' key={c.id} {...c} />
-                    );
-                })}
+              <Pagination
+                params={params}
+                updateParams={p =>
+                  this.updateParams(p, () => this.queryCollections())
+                }
+                count={numberOfResults}
+                perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+                isTop
+              />
             </div>
-        );
-    }
-
-    private renderList(collections) {
-        return (
-            <div className='list-container'>
-                <div className='list'>
-                    <DataList
-                        className='data-list'
-                        aria-label={'List of Collections'}
-                    >
-                        {collections.map(c => (
-                            <CollectionListItem
-                                showNamespace={true}
-                                key={c.id}
-                                {...c}
-                            />
-                        ))}
-                    </DataList>
-                </div>
+          </div>
+        </BaseHeader>
+        <Main>
+          <Section className='collection-container'>
+            <div className='sidebar'>
+              <TagFilter
+                params={params}
+                updateParams={p =>
+                  this.updateParams(p, () => this.queryCollections())
+                }
+                tags={this.tags}
+              />
             </div>
-        );
-    }
 
-    private queryCollections() {
-        this.setState({ loading: true }, () => {
-            CollectionAPI.list({
-                ...ParamHelper.getReduced(this.state.params, ['view_type']),
-                deprecated: false,
-                certification: CertificationStatus.certified,
-            }).then(result => {
-                this.setState({
-                    collections: result.data.data,
-                    numberOfResults: result.data.meta.count,
-                    loading: false,
-                });
-            });
+            {this.renderCollections(collections, params)}
+          </Section>
+          <Section className='body footer'>
+            <Pagination
+              params={params}
+              updateParams={p =>
+                this.updateParams(p, () => this.queryCollections())
+              }
+              perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+              count={numberOfResults}
+            />
+          </Section>
+        </Main>
+      </React.Fragment>
+    );
+  }
+
+  private renderCollections(collections, params) {
+    if (this.state.loading) {
+      return <LoadingPageSpinner></LoadingPageSpinner>;
+    }
+    if (collections.length === 0) {
+      return this.renderEmpty();
+    }
+    if (params.view_type === 'list') {
+      return this.renderList(collections);
+    } else {
+      return this.renderCards(collections);
+    }
+  }
+
+  private renderEmpty() {
+    return (
+      <EmptyState className='empty' variant={EmptyStateVariant.full}>
+        <EmptyStateIcon icon={SearchIcon} />
+        <Title headingLevel='h2' size='lg'>
+          No results found
+        </Title>
+        <EmptyStateBody>
+          No results match the search criteria. Remove all filters to show
+          results.
+        </EmptyStateBody>
+        <Button
+          variant='link'
+          onClick={() => this.updateParams({}, () => this.queryCollections())}
+        >
+          Clear search
+        </Button>
+      </EmptyState>
+    );
+  }
+
+  private renderCards(collections) {
+    return (
+      <div className='cards'>
+        {collections.map(c => {
+          return <CollectionCard className='card' key={c.id} {...c} />;
+        })}
+      </div>
+    );
+  }
+
+  private renderList(collections) {
+    return (
+      <div className='list-container'>
+        <div className='list'>
+          <DataList className='data-list' aria-label={'List of Collections'}>
+            {collections.map(c => (
+              <CollectionListItem showNamespace={true} key={c.id} {...c} />
+            ))}
+          </DataList>
+        </div>
+      </div>
+    );
+  }
+
+  private queryCollections() {
+    this.setState({ loading: true }, () => {
+      CollectionAPI.list({
+        ...ParamHelper.getReduced(this.state.params, ['view_type']),
+        deprecated: false,
+        certification: CertificationStatus.certified,
+      }).then(result => {
+        this.setState({
+          collections: result.data.data,
+          numberOfResults: result.data.meta.count,
+          loading: false,
         });
-    }
+      });
+    });
+  }
 
-    private get updateParams() {
-        return ParamHelper.updateParamsMixin();
-    }
+  private get updateParams() {
+    return ParamHelper.updateParamsMixin();
+  }
 }
 
 export default withRouter(Search);

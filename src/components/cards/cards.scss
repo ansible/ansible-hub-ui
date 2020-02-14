@@ -1,67 +1,67 @@
 .ns-card-container {
-    width: 310px;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    padding: 16px;
+  width: 310px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 16px;
 
-    .logo {
-        margin: 10px;
-    }
+  .logo {
+    margin: 10px;
+  }
 
-    .title {
-        font-weight: bold;
-    }
+  .title {
+    font-weight: bold;
+  }
 
-    .ns-name {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        width: 180px;
-    }
+  .ns-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 180px;
+  }
 }
 
 .collection-card-container {
-    width: 280px;
-    height: 280px;
+  width: 280px;
+  height: 280px;
 
-    // For some reason the PF Card components overrides all the defaults for
-    // divs
-    div {
-        display: block;
+  // For some reason the PF Card components overrides all the defaults for
+  // divs
+  div {
+    display: block;
+  }
+
+  .name {
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .type-label {
+    font-size: var(--pf-global--FontSize--xs);
+    color: var(--pf-global--color--200);
+    text-transform: capitalize;
+  }
+
+  .type-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .logo-row {
+    display: flex;
+    justify-content: space-between;
+
+    .icon {
+      color: var(--pf-global--info-color--100);
+      margin-right: 3px;
     }
+  }
 
-    .name {
-        font-weight: bold;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        width: 100%;
-    }
-
-    .type-label {
-        font-size: var(--pf-global--FontSize--xs);
-        color: var(--pf-global--color--200);
-        text-transform: capitalize;
-    }
-
-    .type-container {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .logo-row {
-        display: flex;
-        justify-content: space-between;
-
-        .icon {
-            color: var(--pf-global--info-color--100);
-            margin-right: 3px;
-        }
-    }
-
-    .description {
-        vertical-align: center;
-    }
+  .description {
+    vertical-align: center;
+  }
 }
