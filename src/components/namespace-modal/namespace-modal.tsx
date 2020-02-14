@@ -28,12 +28,9 @@ interface IState {
 }
 
 export class NamespaceModal extends React.Component<IProps, IState> {
-  toggleModal;
-
   constructor(props) {
     super(props);
 
-    this.toggleModal = this.props.toggleModal;
     this.state = {
       newNamespaceName: '',
       newNamespaceNameValid: true,
@@ -100,12 +97,6 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     };
     NamespaceAPI.create(data)
       .then(results => {
-        this.toggleModal();
-        this.setState({
-          newNamespaceName: '',
-          newNamespaceGroupIds: '',
-          errorMessages: {},
-        });
         this.props.onCreateSuccess(data);
       })
       .catch(error => {
@@ -134,12 +125,16 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         isLarge
         title='Create a new namespace'
         isOpen={this.props.isOpen}
-        onClose={this.toggleModal}
+        onClose={() => this.props.toggleModal}
         actions={[
           <Button key='confirm' variant='primary' onClick={this.handleSubmit}>
             Create
           </Button>,
-          <Button key='cancel' variant='link' onClick={this.toggleModal}>
+          <Button
+            key='cancel'
+            variant='link'
+            onClick={() => this.props.toggleModal}
+          >
             Cancel
           </Button>,
         ]}
