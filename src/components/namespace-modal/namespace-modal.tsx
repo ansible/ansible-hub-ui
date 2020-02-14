@@ -12,6 +12,8 @@ import {
 } from '@patternfly/react-core';
 import { QuestionCircleIcon } from '@patternfly/react-icons';
 import { NamespaceAPI } from '../../api';
+import { Checkbox, Select, SelectOption, SelectVariant } from '@patternfly/react-core';
+
 
 interface IProps {
     isOpen: boolean;
@@ -25,6 +27,11 @@ interface IState {
     newNamespaceGroupIds: string;
     newNamespaceGroupIdsValid: boolean;
     errorMessages: any;
+    options: any[];
+    isExpanded: boolean;
+    selected: string[];
+    isCreatable: boolean;
+    hasOnCreateOption: boolean;
 }
 
 export class NamespaceModal extends React.Component<IProps, IState> {
@@ -40,14 +47,26 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             newNamespaceGroupIds: '',
             newNamespaceGroupIdsValid: true,
             errorMessages: {},
+            options: [
+              { value: 'system:partner-engineer', disabled: true },
+            ],
+            isExpanded: false,
+            selected: ['system:partner-engineer'],
+            isCreatable: true,
+            hasOnCreateOption: true
         };
     }
 
-    private newNamespaceGroups() {
-        const groups = this.state.newNamespaceGroupIds
-            .split(',')
-            .map(group => group.trim());
-        return groups;
+    private onCreateOption = newValue => {
+          this.setState({
+            options: [...this.state.options, { value: newValue }]
+          });
+    }
+
+    private onToggle = isExpanded => {
+          this.setState({
+            isExpanded
+          });
     }
 
     private namespaceOwners() {
@@ -56,6 +75,28 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         }
         const ids = this.state.newNamespaceGroupIds.split(',');
         return ids.map(id => id.trim());
+    }
+
+    private onSelect = (event, selection) => {
+          const { selected } = this.state;
+          if (selected.includes(selection)) {
+            this.setState(
+              prevState => ({ selected: prevState.selected.filter(item => item !== selection) }),
+              () => console.log('selections: ', this.state.selected)
+            );
+          } else {
+            this.setState(
+              prevState => ({ selected: [...prevState.selected, selection] }),
+              () => console.log('selections: ', this.state.selected)
+            );
+          }
+    }
+
+    private clearSelection = () => {
+          this.setState({
+            selected: [],
+            isExpanded: false
+          });
     }
 
     private namespaceOwnersValid() {
@@ -134,7 +175,9 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             newNamespaceName,
             newNamespaceGroupIds,
             errorMessages,
+            isExpanded, selected, isCreatable, hasOnCreateOption
         } = this.state;
+        const titleId = 'multi-typeahead-select-id';
 
         return (
             <Modal
@@ -207,27 +250,28 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                         helperTextInvalid={this.state.errorMessages['groups']}
                         isValid={this.state.newNamespaceGroupIdsValid}
                     >
-                        &nbsp; &nbsp;
-                        {this.newNamespaceGroups().map(group => (
-                            <Badge key={group} isRead>
-                                {group.trim()}
-                            </Badge>
-                        ))}
-                        <TextInput
-                            isRequired
-                            type='text'
-                            id='newNamespaceGroupIds'
-                            name='newNamespaceGroupIds'
-                            value={newNamespaceGroupIds}
-                            onChange={value => {
-                                this.setState(
-                                    { newNamespaceGroupIds: value },
-                                    () => {
-                                        this.namespaceOwnersValid();
-                                    },
-                                );
-                            }}
-                        />
+                      <div>
+                        <span id={titleId} hidden>
+                          Namespace owner
+                        </span>
+                        <Select
+                          variant={SelectVariant.typeaheadMulti}
+                          ariaLabelTypeAhead="Namespace owner"
+                          onToggle={this.onToggle}
+                          onSelect={this.onSelect}
+                          onClear={this.clearSelection}
+                          selections={this.state.selected}
+                          isExpanded={this.state.isExpanded}
+                          ariaLabelledBy={titleId}
+                          placeholderText="Namespace owner"
+                          isCreatable={this.state.isCreatable}
+                          onCreateOption={(this.state.hasOnCreateOption && this.onCreateOption) || undefined}
+                        >
+                          {this.state.options.map((option, index) => (
+                            <SelectOption isPlaceholder={option.disabled} isDisabled={option.disabled} key={index} value={option.value} />
+                          ))}
+                        </Select>
+                      </div>
                     </FormGroup>
                 </Form>
             </Modal>
