@@ -1,13 +1,14 @@
 import * as React from 'react';
 
-import {
-    Main,
-    Section,
-    Spinner,
-} from '@redhat-cloud-services/frontend-components';
+import { Section, Spinner } from '@redhat-cloud-services/frontend-components';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
-import { PartnerHeader, NamespaceForm, ResourcesForm } from '../../components';
+import {
+    PartnerHeader,
+    NamespaceForm,
+    ResourcesForm,
+    Main,
+} from '../../components';
 import { NamespaceAPI, NamespaceType } from '../../api';
 
 import { Form, ActionGroup, Button } from '@patternfly/react-core';

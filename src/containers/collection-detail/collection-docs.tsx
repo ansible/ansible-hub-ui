@@ -2,7 +2,7 @@ import * as React from 'react';
 import './collection-detail.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import { Section } from '@redhat-cloud-services/frontend-components';
 
 import {
     EmptyState,
@@ -19,6 +19,7 @@ import {
     TableOfContents,
     RenderPluginDoc,
     LoadingPageWithHeader,
+    Main,
 } from '../../components';
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';

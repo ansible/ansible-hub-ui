@@ -2,7 +2,7 @@ import * as React from 'react';
 import './search.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import { Section } from '@redhat-cloud-services/frontend-components';
 import {
     DataList,
     EmptyState,
@@ -23,6 +23,7 @@ import {
     CollectionListItem,
     Pagination,
     LoadingPageSpinner,
+    Main,
 } from '../../components';
 import {
     CollectionAPI,
