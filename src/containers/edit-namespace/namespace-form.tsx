@@ -203,6 +203,12 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                             errorMessages: messages,
                             saving: false,
                         });
+                    } else if (result.status === 403) {
+                        this.setState({
+                            redirect: formatPath(Paths.myNamespaces, {
+                                namespace: '',
+                            }),
+                        });
                     }
                 });
         });
