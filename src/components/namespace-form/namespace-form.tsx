@@ -16,6 +16,7 @@ interface IProps {
 }
 
 interface IState {
+    userId: string;
     newLinkName: string;
     newLinkURL: string;
     newNamespaceGroup: string;
@@ -26,10 +27,15 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         super(props);
 
         this.state = {
+            userId: '',
             newLinkURL: '',
             newLinkName: '',
             newNamespaceGroup: '',
         };
+    }
+
+    componentDidMount() {
+        this.userPermissions();
     }
 
     render() {
@@ -90,7 +96,8 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                                 key={group}
                                 onClick={() => this.deleteItem(group)}
                                 isReadOnly={
-                                    group === 'system:partner-engineers'
+                                    group === 'system:partner-engineers' ||
+                                    this.state.userId == group
                                 }
                             >
                                 {group}
@@ -222,6 +229,14 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                 </FormGroup>
             </Form>
         );
+    }
+
+    private userPermissions() {
+        (window as any).insights.chrome.auth.getUser().then(currentUser => {
+            this.setState({
+                userId: currentUser.identity.account_number,
+            });
+        });
     }
 
     private updateField(value, event) {
