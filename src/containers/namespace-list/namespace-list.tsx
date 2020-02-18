@@ -23,22 +23,12 @@ import {
     LoadingPageWithHeader,
     Main,
 } from '../../components';
-import { Form, FormGroup, ActionGroup } from '@patternfly/react-core';
-import {
-    Button,
-    ButtonVariant,
-    InputGroup,
-    TextInput,
-} from '@patternfly/react-core';
-import {
-    DataToolbar,
-    DataToolbarItem,
-    DataToolbarContent,
-} from '@patternfly/react-core/dist/esm/experimental';
+import { Button } from '@patternfly/react-core';
+import { DataToolbarItem } from '@patternfly/react-core/dist/esm/experimental';
 import { NamespaceAPI, NamespaceListType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
-import { MeAPI, MeType } from '../../api';
+import { UserAPI, MeType } from '../../api';
 
 interface IState {
     namespaces: NamespaceListType[];
@@ -244,7 +234,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     private isPartnerEngineer() {
-        MeAPI.get().then(response => {
+        UserAPI.isPartnerEngineer().then(response => {
             const me: MeType = response.data;
             this.setState({ partnerEngineer: me.is_partner_engineer });
         });
