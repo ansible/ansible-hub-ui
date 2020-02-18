@@ -12,13 +12,19 @@ const webpack = require('webpack');
 
 // Default user defined settings
 const defaultConfigs = [
+    // Global scope means that the variable will be available to the app itself
+    // as a constant after it is compiled
     { name: 'API_HOST', default: '', scope: 'global' },
     { name: 'API_BASE_PATH', default: '', scope: 'global' },
     { name: 'UI_BASE_PATH', default: '', scope: 'global' },
     { name: 'DEPLOYMENT_MODE', default: 'standalone', scope: 'global' },
+
+    // Webpack scope means the variable will only be available to webpack at
+    // build time
     { name: 'UI_USE_HTTPS', default: false, scope: 'webpack' },
     { name: 'UI_DEBUG', default: false, scope: 'webpack' },
     { name: 'TARGET_ENVIRONMENT', default: 'prod', scope: 'webpack' },
+    { name: 'UI_PORT', default: 8002, scope: 'webpack' },
 ];
 
 module.exports = inputConfigs => {
@@ -28,21 +34,27 @@ module.exports = inputConfigs => {
     defaultConfigs.forEach((item, i) => {
         customConfigs[item.name] = inputConfigs[item.name] || item.default;
         if (item.scope === 'global') {
-            globals[item.name] = inputConfigs[item.name] || item.default;
-            globals[item.name] = JSON.stringify(globals[item.name]);
+            globals[item.name] = JSON.stringify(
+                inputConfigs[item.name] || item.default,
+            );
         }
     });
 
     const { config: webpackConfig, plugins } = config({
         rootFolder: resolve(__dirname, '../'),
-        htmlPlugin: {targetEnv: customConfigs.DEPLOYMENT_MODE},
+        htmlPlugin: { targetEnv: customConfigs.DEPLOYMENT_MODE },
         debug: customConfigs.UI_DEBUG,
         https: customConfigs.UI_USE_HTTPS,
+
+        // defines port for dev server
+        port: customConfigs.UI_PORT,
     });
 
     webpackConfig.serve = {
         content: commonWPconfig.paths.public,
-        port: 8002,
+
+        // defines port for prod server
+        port: customConfigs.UI_PORT,
 
         // https://github.com/webpack-contrib/webpack-serve/blob/master/docs/addons/history-fallback.config.js
         add: app => app.use(convert(history({}))),

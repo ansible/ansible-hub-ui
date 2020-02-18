@@ -10,6 +10,9 @@ module.exports = webpackBase({
     // Path on the host where the UI is found. EX: /apps/automation-hub
     UI_BASE_PATH: '',
 
+    // Port that the UI is served over
+    UI_PORT: 8002,
+
     // Determines if the app should be compiled to run on insights or on
     // another platform. Options: insights, standalone
     DEPLOYMENT_MODE: 'insights',
