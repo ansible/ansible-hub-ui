@@ -32,7 +32,9 @@ export class NamespaceForm extends React.Component<IProps, IState> {
             newLinkName: '',
             newNamespaceGroup: '',
         };
+    }
 
+    componentDidMount() {
         this.userPermissions();
     }
 
