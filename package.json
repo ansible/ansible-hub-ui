@@ -46,6 +46,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.7.2",
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
         "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@babel/plugin-transform-runtime": "^7.6.2",
@@ -86,16 +87,16 @@
         "webpack-cli": "^3.3.10"
     },
     "scripts": {
-        "build": "webpack --config config/prod.webpack.config.js",
+        "build": "webpack --config config/insights.prod.webpack.config.js",
         "test": "jest --verbose",
         "lint": "npm-run-all lint:*",
         "lint:js": "eslint config src",
         "lint:js:fix": "eslint config src --fix",
         "lint:sass": "stylelint 'src/**/*.scss' --config .stylelintrc.json",
-        "prod": "NODE_ENV=production webpack-dev-server --config config/dev.webpack.config.js",
+        "prod": "NODE_ENV=production webpack-dev-server --config custom.dev.config",
         "server:ctr": "node src/server/generateServerKey.js",
-        "start": "NODE_ENV=development webpack-dev-server --config config/dev.webpack.config.js",
-        "build:prod": "NODE_ENV=production webpack --config config/prod.webpack.config.js",
+        "start": "NODE_ENV=development webpack-dev-server --config custom.dev.config.js",
+        "build:prod": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
         "deploy": "npm-run-all build:prod test test-prettier",
         "verify": "npm-run-all build lint test",
         "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier' && prettier -l 'src/**/*.scss' 'src/**/*.ts' 'src/**/*.tsx'",

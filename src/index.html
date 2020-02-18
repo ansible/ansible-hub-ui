@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Ansible Automation Hub</title>
-        <esi:include src="/@@env/chrome/snippets/head.html"/>
+        <%= htmlWebpackPlugin.options.targetEnv === 'insights' ? '<esi:include src="/@@env/chrome/snippets/head.html"/>' : null %>
     </head>
     <body>
-        <esi:include src="/@@env/chrome/snippets/body.html"/>
+        <%= htmlWebpackPlugin.options.targetEnv === 'insights' ? '<esi:include src="/@@env/chrome/snippets/body.html"/>' : '<div id="root"></div>' %>
     </body>
 </html>

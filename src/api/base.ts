@@ -3,7 +3,7 @@ import { Constants } from '../constants';
 import { ParamHelper } from '../utilities';
 
 export class BaseAPI {
-    apiBaseURL = '/api/automation-hub/';
+    apiBaseURL = API_HOST + API_BASE_PATH;
     apiPath: string;
     http: any;
 
@@ -47,7 +47,9 @@ export class BaseAPI {
         // This runs before every API request and ensures that the user is
         // authenticated before the request is executed. On most calls it appears
         // to only add ~10ms of latency.
-        await (window as any).insights.chrome.auth.getUser();
+        if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
+            await (window as any).insights.chrome.auth.getUser();
+        }
         return request;
     }
 

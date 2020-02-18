@@ -8,8 +8,8 @@ import {
     Link,
     Redirect,
 } from 'react-router-dom';
-import { BaseHeader } from '../../components';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import { BaseHeader, Main } from '../../components';
+import { Section } from '@redhat-cloud-services/frontend-components';
 import {
     Toolbar,
     ToolbarGroup,
@@ -34,7 +34,7 @@ import {
     CollectionVersionAPI,
     CollectionVersion,
     CertificationStatus,
-    MeAPI,
+    UserAPI,
     MeType,
 } from '../../api';
 import { ParamHelper } from '../../utilities';
@@ -104,7 +104,7 @@ class CertificationDashboard extends React.Component<
     }
 
     componentDidMount() {
-        MeAPI.get().then(response => {
+        UserAPI.isPartnerEngineer().then(response => {
             const me: MeType = response.data;
             if (!me.is_partner_engineer) {
                 this.setState({ redirect: Paths.notFound });

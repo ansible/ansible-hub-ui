@@ -4,9 +4,24 @@ Frontend for Ansible Automation Hub. The backend for this project can be [found 
 
 ## Setting up Your Dev Environment
 
+This app can be developed in standalone mode or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights) and requires access to the Red Hat VPN as well as the insights proxy. Standalone mode only requires a running instance of the galaxy API for the UI to connect to.
+
+### Develop in Standalone Mode
+
+To enable standalone mode set `DEPLOYMENT_MODE: 'standalone'` in [custom.dev.config.js](./custom.dev.config.js). Additionally you may need to specify `API_HOST` and `API_BASE_PATH` to match the location of your galaxy API server.
+
+Once standalone mode is configured, open a new terminal, navigate to your local copy of `ansible-hub-ui` and execute
+
+1. `npm install`
+2. `npm run start`
+
+### Develop in Insights Mode
+
+To enable insights mode set `DEPLOYMENT_MODE: 'insights'` in [custom.dev.config.js](./custom.dev.config.js).
+
 This app is part of the Red Hat cloud platform. Because of that the app needs to be loaded within the context of cloud.redhat.com. This is done by accessing the app via the [insights-proxy project](https://github.com/RedHatInsights/insights-proxy).
 
-### Set up Insights Proxy
+#### Set up Insights Proxy
 - Install docker
 - Clone this repo `git@github.com:RedHatInsights/insights-proxy.git` to your machine
 - Inside the `insights-proxy/` directory on your computer, run the following scripts
@@ -29,7 +44,7 @@ SPANDX_CONFIG=/path/to/ansible-hub-ui/profiles/local-frontend-and-api.js bash /p
 
 This should launch `insights-proxy`, which will redirect the routes defined in `profiles/local-frontend-and-api.js` to the automation hub UI running locally on your machine.
 
-#### NOTE
+##### NOTE
 
 If you are on a Mac, you might have to make a small change to the `insights-proxy/scripts/run.sh` script. Update this line
 
@@ -39,7 +54,7 @@ REALPATH=`python2 -c 'import os,sys;print os.path.realpath(sys.argv[1])' $SPANDX
 
 to use `python` instead of `python2`.
 
-### Run Automation Hub
+#### Run Automation Hub
 
 Once the insights proxy is running, open a new terminal, navigate to your local copy of `ansible-hub-ui` and execute
 
@@ -84,66 +99,6 @@ Insights Platform will deliver components and static assets through [npm](https:
 
 ## Technologies
 
-### Webpack
-
-#### Webpack.config.js
-
-This file exports an object with the configuration for webpack and webpack dev server.
-
-```Javascript
-{
-    mode: https://webpack.js.org/concepts/mode/,
-    devtool: https://webpack.js.org/configuration/devtool/,
-
-    // different bundle options.
-    // allows you to completely separate vendor code from app code and much more.
-    // https://webpack.js.org/plugins/split-chunks-plugin/
-    optimization: {
-        chunks: https://webpack.js.org/plugins/split-chunks-plugin/#optimization-splitchunks-chunks-all,
-        runtimeChunk: https://webpack.js.org/plugins/split-chunks-plugin/#optimization-runtimechunk,
-
-        // https://webpack.js.org/plugins/split-chunks-plugin/#configuring-cache-groups
-        cacheGroups: {
-
-            // bundles all vendor code needed to run the entry file
-            common_initial: {
-                test: // file regex: /[\\/]node_modules[\\/]/,
-                name: // filename: 'common.initial',
-                chunks: // chunk type initial, async, all
-            }
-        }
-    },
-
-    // each property of entry maps to the name of an entry file
-    // https://webpack.js.org/concepts/entry-points/
-    entry: {
-
-        // example bunde names
-        bundle1: 'src/entry1.js',
-        bundle2: 'src/entry2.js'
-    },
-
-    // bundle output options.
-    output: {
-            filename: https://webpack.js.org/configuration/output/#output-filename,
-            path: https://webpack.js.org/configuration/output/#output-path,
-            publicPath: https://webpack.js.org/configuration/output/#output-publicpath,
-            chunkFilename: https://webpack.js.org/configuration/output/#output-chunkfilename
-    },
-     module: {
-         rules: https://webpack.js.org/configuration/module/#module-rules
-     },
-
-     // An array of webpack plugins look at webpack.plugins.js
-     // https://webpack.js.org/plugins/
-     plugins: [],
-
-     // webpack dev serve options
-     // https://github.com/webpack/webpack-dev-server
-     devServer: {}
-}
-```
-
 ### React
 
 - High-Order Component
@@ -177,14 +132,3 @@ When setting up the routes, the page content is wrapped with a `.page__{pageName
   - navigate to a new location
 - [withRouter](https://reacttraining.com/react-router/web/api/withRouter)
   - passes updated match, location, and history props to the wrapped component whenever it renders
-
-## Running locally
-Have [insights-proxy](https://github.com/RedHatInsights/insights-proxy) installed under PROXY_PATH
-
-```shell
-SPANDX_CONFIG="./config/spandx.config.js" bash $PROXY_PATH/scripts/run.sh
-```
-
-### Testing - jest
-
-When you want to test your code with unit tests please use `jest` which is preconfigured in a way to colect codecoverage as well. If you want to see your coverage on server the travis config has been set in a way that it will send data to [codecov.io](https://codecov.io) the only thing you have to do is visit their website (register), enable your repository and add CODECOV_TOKEN to your travis web config (do not add it to .travis file, but trough [travis-ci.org](https://travis-ci.org/))

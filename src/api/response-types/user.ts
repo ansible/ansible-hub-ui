@@ -1,4 +1,4 @@
-export class UserAuth {
+export class UserAuthType {
     account_number: string;
     internal: {
         account_id: number;
@@ -15,4 +15,8 @@ export class UserAuth {
         locale: string;
         username: string;
     };
+}
+
+export class MeType {
+    is_partner_engineer: boolean;
 }
