@@ -3,7 +3,6 @@ import './my-imports.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { Button } from '@patternfly/react-core';
 import { cloneDeep } from 'lodash';
 
 import { BaseHeader, ImportConsole, ImportList, Main } from '../../components';
@@ -12,9 +11,9 @@ import {
     ImportAPI,
     ImportDetailType,
     ImportListType,
-    NamespaceAPI,
     NamespaceType,
     PulpStatus,
+    MyNamespaceAPI,
 } from '../../api';
 
 import { ParamHelper } from '../../utilities/param-helper';
@@ -221,7 +220,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
         // TODO: filter by namespaces by current user
         // TODO: We don't currently have a good way to display namespaces for
         // users that have a lot of namespaces (such as admins).
-        NamespaceAPI.getMyNamespaces({ page_size: 1000 })
+        MyNamespaceAPI.list({ page_size: 1000 })
             .then(result => {
                 const namespaces = result.data.data;
                 let selectedNS;
