@@ -9,7 +9,7 @@ import {
     ResourcesForm,
     Main,
 } from '../../components';
-import { MyNamespaceAPI, NamespaceType } from '../../api';
+import { MyNamespaceAPI, NamespaceType, UserAPI } from '../../api';
 import { Constants } from '../../constants';
 
 import { Form, ActionGroup, Button } from '@patternfly/react-core';
@@ -28,6 +28,7 @@ interface IState {
     params: {
         tab?: string;
     };
+    userId: string;
 }
 
 class EditNamespace extends React.Component<RouteComponentProps, IState> {
@@ -44,6 +45,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
 
         this.state = {
             namespace: null,
+            userId: '',
             newLinkURL: '',
             newLinkName: '',
             errorMessages: {},
@@ -55,7 +57,11 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     }
 
     componentDidMount() {
-        this.loadNamespace();
+        UserAPI.getUser().then(result => {
+            this.setState({ userId: result.account_number }, () =>
+                this.loadNamespace(),
+            );
+        });
     }
 
     render() {
@@ -65,6 +71,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
             saving,
             redirect,
             params,
+            userId,
         } = this.state;
 
         if (redirect) {
@@ -96,6 +103,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                     <Section className='body'>
                         {params.tab.toLowerCase() === 'edit details' ? (
                             <NamespaceForm
+                                userId={userId}
                                 namespace={namespace}
                                 errorMessages={errorMessages}
                                 updateNamespace={namespace =>
