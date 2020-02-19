@@ -11,6 +11,7 @@ import {
 } from '@patternfly/react-core';
 import { QuestionCircleIcon } from '@patternfly/react-icons';
 import { NamespaceAPI } from '../../api';
+import { Constants } from '../../constants';
 
 interface IProps {
     isOpen: boolean;
@@ -92,7 +93,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
 
     private handleSubmit = event => {
         const groups = this.namespaceOwners();
-        groups.push('system:partner-engineers');
+        groups.push(Constants.ADMIN_GROUP);
         const data: any = {
             name: this.state.newNamespaceName,
             groups: groups,
