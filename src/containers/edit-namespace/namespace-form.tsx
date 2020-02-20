@@ -150,10 +150,9 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     }
 
     private removeGroupsPrefix(groups) {
-        const partnerEngineerOwner = Constants.ADMIN_GROUP;
-        let unprefixedGroupOwners = [partnerEngineerOwner];
+        let unprefixedGroupOwners = [Constants.ADMIN_GROUP];
         for (const owner of groups) {
-            if (owner == partnerEngineerOwner) {
+            if (owner == Constants.ADMIN_GROUP) {
                 continue;
             }
             // 'rh-identity-account', '<id>'
