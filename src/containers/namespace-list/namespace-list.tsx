@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Modal } from '@patternfly/react-core';
 import './namespace-list.scss';
 
 import { RouteComponentProps, Link } from 'react-router-dom';
@@ -25,10 +24,15 @@ import {
 } from '../../components';
 import { Button } from '@patternfly/react-core';
 import { DataToolbarItem } from '@patternfly/react-core/dist/esm/experimental';
-import { NamespaceAPI, NamespaceListType } from '../../api';
+import {
+    NamespaceAPI,
+    NamespaceListType,
+    UserAPI,
+    MeType,
+    MyNamespaceAPI,
+} from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
-import { UserAPI, MeType } from '../../api';
 
 interface IState {
     namespaces: NamespaceListType[];
@@ -88,7 +92,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
         if (this.props.filterOwner) {
             // Make a query with no params and see if it returns results to tell
             // if the user can edit namespaces
-            NamespaceAPI.getMyNamespaces({}).then(results => {
+            MyNamespaceAPI.list({}).then(results => {
                 if (results.data.meta.count !== 0) {
                     this.loadNamespaces();
                 } else {
@@ -216,7 +220,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
         let apiFunc: any;
 
         if (this.props.filterOwner) {
-            apiFunc = p => NamespaceAPI.getMyNamespaces(p);
+            apiFunc = p => MyNamespaceAPI.list(p);
         } else {
             apiFunc = p => NamespaceAPI.list(p);
         }

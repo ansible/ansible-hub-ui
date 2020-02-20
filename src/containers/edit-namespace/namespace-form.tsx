@@ -9,7 +9,7 @@ import {
     ResourcesForm,
     Main,
 } from '../../components';
-import { NamespaceAPI, NamespaceType } from '../../api';
+import { MyNamespaceAPI, NamespaceType } from '../../api';
 
 import { Form, ActionGroup, Button } from '@patternfly/react-core';
 
@@ -162,7 +162,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     }
 
     private loadNamespace() {
-        NamespaceAPI.get(this.props.match.params['namespace'])
+        MyNamespaceAPI.get(this.props.match.params['namespace'])
             .then(response => {
                 response.data.groups = this.removeGroupsPrefix(
                     response.data.groups,
@@ -176,7 +176,10 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
 
     private saveNamespace() {
         this.setState({ saving: true }, () => {
-            NamespaceAPI.update(this.state.namespace.name, this.state.namespace)
+            MyNamespaceAPI.update(
+                this.state.namespace.name,
+                this.state.namespace,
+            )
                 .then(result => {
                     this.setState({
                         namespace: result.data,
