@@ -10,6 +10,7 @@ import {
     Main,
 } from '../../components';
 import { MyNamespaceAPI, NamespaceType } from '../../api';
+import { Constants } from '../../constants';
 
 import { Form, ActionGroup, Button } from '@patternfly/react-core';
 
@@ -149,10 +150,9 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     }
 
     private removeGroupsPrefix(groups) {
-        const partnerEngineerOwner = 'system:partner-engineers';
-        let unprefixedGroupOwners = [partnerEngineerOwner];
+        let unprefixedGroupOwners = [Constants.ADMIN_GROUP];
         for (const owner of groups) {
-            if (owner == partnerEngineerOwner) {
+            if (owner == Constants.ADMIN_GROUP) {
                 continue;
             }
             // 'rh-identity-account', '<id>'
