@@ -2,8 +2,9 @@ import * as React from 'react';
 import './namespace-form.scss';
 
 import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
-import { Chip, ChipGroup, ChipGroupToolbarItem } from '@patternfly/react-core';
+import { Chip, ChipGroup } from '@patternfly/react-core';
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
+import { Constants } from '../../constants';
 
 import { NamespaceCard } from '../../components';
 import { NamespaceType } from '../../api';
@@ -96,7 +97,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                                 key={group}
                                 onClick={() => this.deleteItem(group)}
                                 isReadOnly={
-                                    group === 'system:partner-engineers' ||
+                                    group === Constants.ADMIN_GROUP ||
                                     this.state.userId == group
                                 }
                             >
