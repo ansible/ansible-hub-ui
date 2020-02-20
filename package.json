@@ -70,6 +70,7 @@
         "eslint-config-prettier": "^2.10.0",
         "eslint-loader": "^2.2.1",
         "eslint-plugin-react": "^7.16.0",
+        "husky": "^4.2.3",
         "identity-obj-proxy": "^3.0.0",
         "jest": "^24.9.0",
         "node-sass": "^4.13.0",
@@ -104,5 +105,10 @@
     },
     "insights": {
         "appname": "automation-hub"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run prettier"
+        }
     }
 }
