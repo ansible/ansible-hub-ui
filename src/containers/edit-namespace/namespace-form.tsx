@@ -7,6 +7,9 @@ import {
     PartnerHeader,
     NamespaceForm,
     ResourcesForm,
+    AlertList,
+    closeAlertMixin,
+    AlertType,
     Main,
 } from '../../components';
 import { MyNamespaceAPI, NamespaceType } from '../../api';
@@ -25,6 +28,7 @@ interface IState {
     saving: boolean;
     redirect: string;
     unsavedData: boolean;
+    alerts: AlertType[];
     params: {
         tab?: string;
     };
@@ -43,6 +47,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         }
 
         this.state = {
+            alerts: [],
             namespace: null,
             newLinkURL: '',
             newLinkName: '',
@@ -92,6 +97,10 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                     params={params}
                     updateParams={p => this.updateParams(p)}
                 ></PartnerHeader>
+                <AlertList
+                    alerts={this.state.alerts}
+                    closeAlert={i => this.closeAlert(i)}
+                />
                 <Main>
                     <Section className='body'>
                         {params.tab.toLowerCase() === 'edit details' ? (
@@ -203,15 +212,22 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                             errorMessages: messages,
                             saving: false,
                         });
-                    } else if (result.status === 403) {
+                    } else if (result.status === 404) {
                         this.setState({
-                            redirect: formatPath(Paths.myNamespaces, {
-                                namespace: '',
+                            alerts: this.state.alerts.concat({
+                                variant: 'danger',
+                                title: `API Error: ${error.response.status}`,
+                                description:
+                                    `Not possible to proceed with the action.` +
+                                    `Plese contact the administrator of the namespace`,
                             }),
                         });
                     }
                 });
         });
+    }
+    private get closeAlert() {
+        return closeAlertMixin('alerts');
     }
 
     private cancel() {
