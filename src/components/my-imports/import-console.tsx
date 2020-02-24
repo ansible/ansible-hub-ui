@@ -136,10 +136,16 @@ export class ImportConsole extends React.Component<IProps, {}> {
                     <div className='title-container'>
                         <Link
                             className='title'
-                            to={formatPath(Paths.collection, {
-                                namespace: selectedImport.namespace,
-                                collection: selectedImport.name,
-                            })}
+                            to={formatPath(
+                                Paths.collection,
+                                {
+                                    namespace: selectedImport.namespace,
+                                    collection: selectedImport.name,
+                                },
+                                {
+                                    version: selectedImport.version,
+                                },
+                            )}
                         >
                             {selectedImport.namespace}.{selectedImport.name}
                         </Link>
