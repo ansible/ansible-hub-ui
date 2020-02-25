@@ -1,23 +1,24 @@
 import * as React from 'react';
 import './sort.scss';
 
+import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import {
-    Select,
-    SelectOption,
-    SelectVariant,
-    Tooltip,
-} from '@patternfly/react-core';
-import { SortAmountDownIcon, SortAmountUpIcon } from '@patternfly/react-icons';
+    SortAmountDownIcon,
+    SortAmountUpIcon,
+    SortAlphaDownIcon,
+    SortAlphaUpIcon,
+} from '@patternfly/react-icons';
 
 import { ParamHelper } from '../../utilities/param-helper';
 
-export class SortFieldOption {
+export class SortFieldType {
     id: string;
     title: string;
+    type: 'numeric' | 'alpha';
 }
 
 interface IProps {
-    options: SortFieldOption[];
+    options: SortFieldType[];
     params: object;
     updateParams: (params) => void;
     sortParamName?: string;
@@ -48,8 +49,16 @@ export class Sort extends React.Component<IProps, IState> {
     }
 
     private onSelect(name) {
-        const desc = this.getIsDescending(this.props.params) ? '-' : '';
+        let isDescending = this.getIsDescending(this.props.params);
+
         const option = this.props.options.find(i => i.title === name);
+
+        // Alphabetical sorting is inverted in Django, so flip it here to make
+        // things match up with the UI.
+        if (option.type === 'alpha') {
+            isDescending = !isDescending;
+        }
+        const desc = isDescending ? '-' : '';
 
         this.setState({ isExpanded: false }, () =>
             this.props.updateParams(
@@ -106,6 +115,20 @@ export class Sort extends React.Component<IProps, IState> {
     render() {
         const { options, params } = this.props;
         const { isExpanded } = this.state;
+
+        const selectedOption = this.getSelected(params);
+
+        let IconDesc;
+        let IconAsc;
+
+        if (selectedOption.type === 'alpha') {
+            IconAsc = SortAlphaDownIcon;
+            IconDesc = SortAlphaUpIcon;
+        } else {
+            IconDesc = SortAmountDownIcon;
+            IconAsc = SortAmountUpIcon;
+        }
+
         return (
             <div className='sort-wrapper'>
                 {options.length > 1 ? (
@@ -114,7 +137,7 @@ export class Sort extends React.Component<IProps, IState> {
                         aria-label='Select input'
                         onToggle={e => this.onToggle(e)}
                         onSelect={(_, name) => this.onSelect(name)}
-                        selections={this.getSelected(params).title}
+                        selections={selectedOption.title}
                         isExpanded={isExpanded}
                         ariaLabelledBy='Sort results'
                     >
@@ -128,13 +151,13 @@ export class Sort extends React.Component<IProps, IState> {
                 ) : null}
 
                 {this.getIsDescending(params) ? (
-                    <SortAmountDownIcon
+                    <IconDesc
                         className='clickable asc-button'
                         size='md'
                         onClick={() => this.setDescending()}
                     />
                 ) : (
-                    <SortAmountUpIcon
+                    <IconAsc
                         className='clickable asc-button'
                         size='md'
                         onClick={() => this.setDescending()}

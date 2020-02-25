@@ -9,7 +9,7 @@ export { CollectionList } from './collection-list/collection-list';
 export { CollectionListItem } from './collection-list/collection-list-item';
 export { NamespaceCard } from './cards/namespace-card';
 export { Breadcrumbs } from './patternfly-wrappers/breadcrumbs';
-export { Sort } from './patternfly-wrappers/sort';
+export { Sort, SortFieldType } from './patternfly-wrappers/sort';
 export { Tabs } from './patternfly-wrappers/tabs';
 export { StatefulDropdown } from './patternfly-wrappers/stateful-dropdown';
 export { Toolbar } from './patternfly-wrappers/toolbar';

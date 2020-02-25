@@ -15,16 +15,15 @@ import { SearchIcon } from '@patternfly/react-icons';
 import { ParamHelper } from '../../utilities/param-helper';
 import { Sort } from '../../components';
 
+import { SortFieldType } from './sort';
+
 interface IProps {
     params: {
         sort?: string;
         keywords?: string;
     };
 
-    sortOptions?: {
-        id: string;
-        title: string;
-    }[];
+    sortOptions?: SortFieldType[];
 
     updateParams: (params) => void;
     searchPlaceholder: string;

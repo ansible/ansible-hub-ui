@@ -49,6 +49,7 @@ import {
     AlertList,
     closeAlertMixin,
     AlertType,
+    SortFieldType,
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
 
@@ -121,14 +122,15 @@ class CertificationDashboard extends React.Component<
             return <Redirect to={redirect}></Redirect>;
         }
 
-        const sortOptions = [
+        const sortOptions: SortFieldType[] = [
             {
                 id: 'pulp_created',
                 title: 'Date created',
+                type: 'numeric',
             },
-            { id: 'namespace', title: 'Namespace name' },
-            { id: 'version', title: 'Version number' },
-            { id: 'name', title: 'Collection name' },
+            { id: 'namespace', title: 'Namespace name', type: 'alpha' },
+            { id: 'version', title: 'Version number', type: 'numeric' },
+            { id: 'name', title: 'Collection name', type: 'alpha' },
         ];
 
         if (!versions) {
