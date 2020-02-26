@@ -21,6 +21,7 @@ import {
     NamespaceModal,
     LoadingPageWithHeader,
     Main,
+    LoadingPageSpinner,
 } from '../../components';
 import { Button } from '@patternfly/react-core';
 import { DataToolbarItem } from '@patternfly/react-core/dist/esm/experimental';
@@ -47,6 +48,7 @@ interface IState {
     hasPermission: boolean;
     partnerEngineer: boolean;
     isModalOpen: boolean;
+    loading: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -78,6 +80,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             hasPermission: true,
             isModalOpen: false,
             partnerEngineer: false,
+            loading: true,
         };
     }
 
@@ -96,7 +99,11 @@ export class NamespaceList extends React.Component<IProps, IState> {
                 if (results.data.meta.count !== 0) {
                     this.loadNamespaces();
                 } else {
-                    this.setState({ hasPermission: false, namespaces: [] });
+                    this.setState({
+                        hasPermission: false,
+                        namespaces: [],
+                        loading: false,
+                    });
                 }
             });
         } else {
@@ -105,15 +112,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     render() {
-        const {
-            namespaces,
-            params,
-            itemCount,
-            hasPermission,
-            partnerEngineer,
-        } = this.state;
-        const { title, namespacePath } = this.props;
-        const { isModalOpen } = this.state;
+        const { namespaces, params, itemCount, partnerEngineer } = this.state;
+        const { title } = this.props;
 
         if (!namespaces) {
             return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -163,43 +163,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                     </div>
                 </BaseHeader>
                 <Main>
-                    {namespaces.length === 0 ? (
-                        <Section>
-                            <EmptyState
-                                className='empty'
-                                variant={EmptyStateVariant.full}
-                            >
-                                <EmptyStateIcon icon={WarningTriangleIcon} />
-                                <Title headingLevel='h2' size='lg'>
-                                    {hasPermission
-                                        ? 'No matches'
-                                        : 'No managed namespaces'}
-                                </Title>
-                                <EmptyStateBody>
-                                    {hasPermission
-                                        ? 'Please try adjusting your search query.'
-                                        : 'This account is not set up to manage any namespaces.'}
-                                </EmptyStateBody>
-                            </EmptyState>
-                        </Section>
-                    ) : (
-                        <Section className='card-layout'>
-                            {namespaces.map((ns, i) => (
-                                <div key={i} className='card-wrapper'>
-                                    <Link
-                                        to={formatPath(namespacePath, {
-                                            namespace: ns.name,
-                                        })}
-                                    >
-                                        <NamespaceCard
-                                            key={i}
-                                            {...ns}
-                                        ></NamespaceCard>
-                                    </Link>
-                                </div>
-                            ))}
-                        </Section>
-                    )}
+                    <Section>{this.renderBody()}</Section>
                     <NamespaceModal
                         isOpen={this.state.isModalOpen}
                         toggleModal={this.handleModalToggle}
@@ -216,6 +180,52 @@ export class NamespaceList extends React.Component<IProps, IState> {
         );
     }
 
+    private renderBody() {
+        const { namespaces, hasPermission } = this.state;
+        const { namespacePath } = this.props;
+        const { loading } = this.state;
+
+        if (loading) {
+            return (
+                <Section>
+                    <LoadingPageSpinner></LoadingPageSpinner>;
+                </Section>
+            );
+        }
+
+        if (namespaces.length === 0) {
+            return (
+                <EmptyState className='empty' variant={EmptyStateVariant.full}>
+                    <EmptyStateIcon icon={WarningTriangleIcon} />
+                    <Title headingLevel='h2' size='lg'>
+                        {hasPermission ? 'No matches' : 'No managed namespaces'}
+                    </Title>
+                    <EmptyStateBody>
+                        {hasPermission
+                            ? 'Please try adjusting your search query.'
+                            : 'This account is not set up to manage any namespaces.'}
+                    </EmptyStateBody>
+                </EmptyState>
+            );
+        }
+
+        return (
+            <Section className='card-layout'>
+                {namespaces.map((ns, i) => (
+                    <div key={i} className='card-wrapper'>
+                        <Link
+                            to={formatPath(namespacePath, {
+                                namespace: ns.name,
+                            })}
+                        >
+                            <NamespaceCard key={i} {...ns}></NamespaceCard>
+                        </Link>
+                    </div>
+                ))}
+            </Section>
+        );
+    }
+
     private loadNamespaces() {
         let apiFunc: any;
 
@@ -224,11 +234,13 @@ export class NamespaceList extends React.Component<IProps, IState> {
         } else {
             apiFunc = p => NamespaceAPI.list(p);
         }
-
-        apiFunc(this.state.params).then(results => {
-            this.setState({
-                namespaces: results.data.data,
-                itemCount: results.data.meta.count,
+        this.setState({ loading: true }, () => {
+            apiFunc(this.state.params).then(results => {
+                this.setState({
+                    namespaces: results.data.data,
+                    itemCount: results.data.meta.count,
+                    loading: false,
+                });
             });
         });
     }
