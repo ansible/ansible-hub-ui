@@ -107,7 +107,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
             this.loadCollection(forceReload, () => {
                 ImportAPI.list({
                     namespace: this.state.collection.namespace.name,
-                    collection: this.state.collection.name,
+                    name: this.state.collection.name,
                     version: this.state.collection.latest_version.version,
                     sort: '-created',
                 })
