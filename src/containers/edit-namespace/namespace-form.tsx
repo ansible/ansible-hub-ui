@@ -221,6 +221,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                                     `Not possible to proceed with the action.` +
                                     `Plese contact the administrator of the namespace`,
                             }),
+                            saving: false,
                         });
                     }
                 });
