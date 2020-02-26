@@ -21,7 +21,6 @@ class API extends BaseAPI {
             });
         } else if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
             return new Promise((resolve, reject) => {
-                // TODO: add user data when that's available in the api
                 resolve({} as UserAuthType);
             });
         }

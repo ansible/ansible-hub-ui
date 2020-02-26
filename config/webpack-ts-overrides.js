@@ -10,11 +10,6 @@ module.exports = {
                 use: [
                     { loader: 'source-map-loader' },
                     { loader: 'babel-loader' },
-                    // eslint really hates some of the things prettier does,
-                    // so we're disabling it here
-                    // TODO: Figure out how to disable the rules that prettier
-                    // breaks
-                    // { loader: 'eslint-loader' },
                 ],
             },
             {
