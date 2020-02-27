@@ -12,12 +12,12 @@ import { NamespaceType } from '../../api';
 interface IProps {
     namespace: NamespaceType;
     errorMessages: any;
+    userId: string;
 
     updateNamespace: (namespace) => void;
 }
 
 interface IState {
-    userId: string;
     newLinkName: string;
     newLinkURL: string;
     newNamespaceGroup: string;
@@ -28,19 +28,14 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         super(props);
 
         this.state = {
-            userId: '',
             newLinkURL: '',
             newLinkName: '',
             newNamespaceGroup: '',
         };
     }
 
-    componentDidMount() {
-        this.userPermissions();
-    }
-
     render() {
-        const { namespace, errorMessages } = this.props;
+        const { namespace, errorMessages, userId } = this.props;
 
         if (!namespace) {
             return null;
@@ -98,7 +93,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                                 onClick={() => this.deleteItem(group)}
                                 isReadOnly={
                                     group === Constants.ADMIN_GROUP ||
-                                    this.state.userId == group
+                                    userId === group
                                 }
                             >
                                 {group}
@@ -230,14 +225,6 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                 </FormGroup>
             </Form>
         );
-    }
-
-    private userPermissions() {
-        (window as any).insights.chrome.auth.getUser().then(currentUser => {
-            this.setState({
-                userId: currentUser.identity.account_number,
-            });
-        });
     }
 
     private updateField(value, event) {
