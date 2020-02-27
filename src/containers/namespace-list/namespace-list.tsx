@@ -73,6 +73,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
             params['page_size'] = 24;
         }
 
+        if (!params['sort']) {
+            params['sort'] = 'name';
+        }
+
         this.state = {
             namespaces: undefined,
             itemCount: 0,
@@ -136,7 +140,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
                     <div className='toolbar'>
                         <Toolbar
                             params={params}
-                            sortOptions={[{ title: 'Name', id: 'name' }]}
+                            sortOptions={[
+                                { title: 'Name', id: 'name', type: 'alpha' },
+                            ]}
                             searchPlaceholder={'Search ' + title}
                             updateParams={p =>
                                 this.updateParams(p, () =>
