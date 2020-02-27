@@ -1,11 +1,6 @@
 import * as React from 'react';
 
-import {
-    withRouter,
-    RouteComponentProps,
-    Redirect,
-    Link,
-} from 'react-router-dom';
+import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
     Button,
@@ -76,10 +71,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             'page_size',
         ]);
 
-        if (!params['tab']) {
-            params['tab'] = 'collections';
-        }
-
         params['namespace'] = props.match.params['namespace'];
 
         this.state = {
@@ -121,6 +112,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         }
 
         const tabs = ['Collections'];
+
+        const tab = params['tab'] || 'collections';
 
         if (namespace.resources) {
             tabs.push('Resources');
@@ -175,7 +168,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 ></PartnerHeader>
                 <Main>
                     <Section className='body'>
-                        {params.tab.toLowerCase() === 'collections' ? (
+                        {tab.toLowerCase() === 'collections' ? (
                             <CollectionList
                                 updateParams={params =>
                                     this.updateParams(params, () =>

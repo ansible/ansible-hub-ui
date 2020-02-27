@@ -10,9 +10,10 @@ import {
     Title,
     EmptyStateBody,
     EmptyStateVariant,
+    Button,
 } from '@patternfly/react-core';
 
-import { WarningTriangleIcon } from '@patternfly/react-icons';
+import { SearchIcon } from '@patternfly/react-icons';
 
 import {
     BaseHeader,
@@ -100,29 +101,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
         return (
             <React.Fragment>
-                <BaseHeader
-                    className='header'
-                    title='Collections'
-                    pageControls={
-                        <CardListSwitcher
-                            size='sm'
-                            params={params}
-                            updateParams={p =>
-                                this.updateParams(p, () =>
-                                    // Note, we have to use this.state.params instead
-                                    // of params in the callback because the callback
-                                    // executes before the page can re-run render
-                                    // which means params doesn't contain the most
-                                    // up to date state
-                                    localStorage.setItem(
-                                        Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-                                        this.state.params.view_type,
-                                    ),
-                                )
-                            }
-                        />
-                    }
-                >
+                <BaseHeader className='header' title='Collections'>
                     <div className='toolbar'>
                         <Toolbar
                             params={params}
@@ -134,19 +113,41 @@ class Search extends React.Component<RouteComponentProps, IState> {
                             searchPlaceholder='Search collections'
                         />
 
-                        <Pagination
-                            params={params}
-                            updateParams={p =>
-                                this.updateParams(p, () =>
-                                    this.queryCollections(),
-                                )
-                            }
-                            count={numberOfResults}
-                            perPageOptions={
-                                Constants.CARD_DEFAULT_PAGINATION_OPTIONS
-                            }
-                            isTop
-                        />
+                        <div className='pagination-container'>
+                            <div className='card-list-switcher'>
+                                <CardListSwitcher
+                                    size='sm'
+                                    params={params}
+                                    updateParams={p =>
+                                        this.updateParams(p, () =>
+                                            // Note, we have to use this.state.params instead
+                                            // of params in the callback because the callback
+                                            // executes before the page can re-run render
+                                            // which means params doesn't contain the most
+                                            // up to date state
+                                            localStorage.setItem(
+                                                Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
+                                                this.state.params.view_type,
+                                            ),
+                                        )
+                                    }
+                                />
+                            </div>
+
+                            <Pagination
+                                params={params}
+                                updateParams={p =>
+                                    this.updateParams(p, () =>
+                                        this.queryCollections(),
+                                    )
+                                }
+                                count={numberOfResults}
+                                perPageOptions={
+                                    Constants.CARD_DEFAULT_PAGINATION_OPTIONS
+                                }
+                                isTop
+                            />
+                        </div>
                     </div>
                 </BaseHeader>
                 <Main>
@@ -201,13 +202,22 @@ class Search extends React.Component<RouteComponentProps, IState> {
     private renderEmpty() {
         return (
             <EmptyState className='empty' variant={EmptyStateVariant.full}>
-                <EmptyStateIcon icon={WarningTriangleIcon} />
+                <EmptyStateIcon icon={SearchIcon} />
                 <Title headingLevel='h2' size='lg'>
-                    No matches
+                    No results found
                 </Title>
                 <EmptyStateBody>
-                    Please try adjusting your search query.
+                    No results match the search criteria. Remove all filters to
+                    show results.
                 </EmptyStateBody>
+                <Button
+                    variant='link'
+                    onClick={() =>
+                        this.updateParams({}, () => this.queryCollections())
+                    }
+                >
+                    Clear search
+                </Button>
             </EmptyState>
         );
     }
@@ -227,7 +237,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     private renderList(collections) {
         return (
             <div className='list-container'>
-                <div className='body list'>
+                <div className='list'>
                     <DataList
                         className='data-list'
                         aria-label={'List of Collections'}
