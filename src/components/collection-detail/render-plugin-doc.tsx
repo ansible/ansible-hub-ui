@@ -373,8 +373,6 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                         );
 
                         if (module) {
-                            // TODO: figure out how to make this use the Link
-                            // component so it doesn't reload the whole app
                             return (
                                 <Link
                                     to={formatPath(
@@ -533,11 +531,6 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
                             ) : null}
                             <th>Comments</th>
                         </tr>
-                        {
-                            // TODO: add support for sub options. Example:
-                            //https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/network/fortios/fortios_dlp_fp_doc_source.py#L93}
-                            // TODO: do we need to display version added?
-                        }
                         {paramEntries}
                     </tbody>
                 </table>
