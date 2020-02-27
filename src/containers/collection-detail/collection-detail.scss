@@ -33,5 +33,16 @@
         // make the height close to the height ofthe page so short docs don't
         // look weird
         min-height: calc(100vh - 250px);
+
+        table {
+            tr:nth-child(2n) {
+                background-color: #f2f2f2;
+            }
+            td,
+            th {
+                border: 1px solid #ccc;
+                padding: 5px;
+            }
+        }
     }
 }
