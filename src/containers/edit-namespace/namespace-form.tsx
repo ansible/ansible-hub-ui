@@ -217,9 +217,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                             alerts: this.state.alerts.concat({
                                 variant: 'danger',
                                 title: `API Error: ${error.response.status}`,
-                                description:
-                                    `Not possible to proceed with the action.` +
-                                    `Plese contact the administrator of the namespace`,
+                                description: `You don't have permissions to update this namespace.`,
                             }),
                             saving: false,
                         });
