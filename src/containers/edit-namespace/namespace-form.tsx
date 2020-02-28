@@ -7,6 +7,9 @@ import {
     PartnerHeader,
     NamespaceForm,
     ResourcesForm,
+    AlertList,
+    closeAlertMixin,
+    AlertType,
     Main,
 } from '../../components';
 import { MyNamespaceAPI, NamespaceType, UserAPI } from '../../api';
@@ -25,6 +28,7 @@ interface IState {
     saving: boolean;
     redirect: string;
     unsavedData: boolean;
+    alerts: AlertType[];
     params: {
         tab?: string;
     };
@@ -44,6 +48,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         }
 
         this.state = {
+            alerts: [],
             namespace: null,
             userId: '',
             newLinkURL: '',
@@ -99,6 +104,10 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                     params={params}
                     updateParams={p => this.updateParams(p)}
                 ></PartnerHeader>
+                <AlertList
+                    alerts={this.state.alerts}
+                    closeAlert={i => this.closeAlert(i)}
+                />
                 <Main>
                     <Section className='body'>
                         {params.tab.toLowerCase() === 'edit details' ? (
@@ -211,9 +220,21 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                             errorMessages: messages,
                             saving: false,
                         });
+                    } else if (result.status === 404) {
+                        this.setState({
+                            alerts: this.state.alerts.concat({
+                                variant: 'danger',
+                                title: `API Error: ${error.response.status}`,
+                                description: `You don't have permissions to update this namespace.`,
+                            }),
+                            saving: false,
+                        });
                     }
                 });
         });
+    }
+    private get closeAlert() {
+        return closeAlertMixin('alerts');
     }
 
     private cancel() {
