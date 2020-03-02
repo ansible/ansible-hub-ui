@@ -2,14 +2,14 @@ import * as MockAdapter from 'axios-mock-adapter';
 import { NamespaceType, NamespaceListType } from '../../api';
 
 export const redHat = {
-    id: 1,
-    name: 'red_hat',
-    company: 'Red Hat',
-    avatar_url:
-        'https://www.redhat.com/cms/managed-files/styles/wysiwyg_full_width/s3/Logo-RedHat-Hat-Color-CMYK%20%281%29.jpg?itok=Mf0Ff9jq',
-    description:
-        'We’re the world’s leading provider of enterprise open source solutions, using a community-powered approach to deliver high-performing Linux, cloud, container, and Kubernetes technologies. We help you standardize across environments, develop cloud-native applications, and integrate, automate, secure, and manage complex environments with award-winning support, training, and consulting services.',
-    resources: `[![Build Status](https://travis-ci.com/ansible/galaxy.svg?branch=devel)](https://travis-ci.com/ansible/galaxy)
+  id: 1,
+  name: 'red_hat',
+  company: 'Red Hat',
+  avatar_url:
+    'https://www.redhat.com/cms/managed-files/styles/wysiwyg_full_width/s3/Logo-RedHat-Hat-Color-CMYK%20%281%29.jpg?itok=Mf0Ff9jq',
+  description:
+    'We’re the world’s leading provider of enterprise open source solutions, using a community-powered approach to deliver high-performing Linux, cloud, container, and Kubernetes technologies. We help you standardize across environments, develop cloud-native applications, and integrate, automate, secure, and manage complex environments with award-winning support, training, and consulting services.',
+  resources: `[![Build Status](https://travis-ci.com/ansible/galaxy.svg?branch=devel)](https://travis-ci.com/ansible/galaxy)
 
 # Ansible Galaxy
 
@@ -55,68 +55,68 @@ View [AUTHORS](./AUTHORS) for a list contributors to Ansible Galaxy. Thanks ever
 
 Ansible Galaxy is an [Ansible by Red Hat](https://ansible.com) sponsored project.
 `,
-    links: [
-        { name: 'Red Hat', url: 'https://www.redhat.com' },
-        {
-            name: 'Cormier: "Ansible is a Platform"',
-            url: 'https://www.redhat.com',
-        },
-    ],
-    owners: [{ name: 'newswangerd' }],
-    num_collections: 10,
+  links: [
+    { name: 'Red Hat', url: 'https://www.redhat.com' },
+    {
+      name: 'Cormier: "Ansible is a Platform"',
+      url: 'https://www.redhat.com',
+    },
+  ],
+  owners: [{ name: 'newswangerd' }],
+  num_collections: 10,
 } as NamespaceType;
 
 export const google = {
-    id: 4,
-    name: 'google',
-    company: 'Google Cloud',
-    num_collections: 2,
-    description: 'Google Cloud Platform',
-    avatar_url:
-        'https://cloud.google.com/_static/images/cloud/icons/favicons/onecloud/apple-icon.png',
+  id: 4,
+  name: 'google',
+  company: 'Google Cloud',
+  num_collections: 2,
+  description: 'Google Cloud Platform',
+  avatar_url:
+    'https://cloud.google.com/_static/images/cloud/icons/favicons/onecloud/apple-icon.png',
 };
 
 export class MockNamespace {
-    mock: any;
+  mock: any;
 
-    constructor(http: any, apiPath: string) {
-        this.mock = new MockAdapter(http, { delayResponse: 200 });
-        this.mock.onGet(apiPath).reply(200, {
-            links: {},
-            meta: { count: 1 },
-            data: this.getNSList(),
-        });
-        this.mock.onGet(apiPath + 'red_hat/').reply(200, this.getNSDetail());
-        this.mock.onPut(apiPath + 'red_hat/').reply(204, this.ns1);
-    }
+  constructor(http: any, apiPath: string) {
+    this.mock = new MockAdapter(http, { delayResponse: 200 });
+    this.mock.onGet(apiPath).reply(200, {
+      links: {},
+      meta: { count: 1 },
+      data: this.getNSList(),
+    });
+    this.mock.onGet(apiPath + 'red_hat/').reply(200, this.getNSDetail());
+    this.mock.onPut(apiPath + 'red_hat/').reply(204, this.ns1);
+  }
 
-    ns1 = redHat;
+  ns1 = redHat;
 
-    ns2 = {
-        id: 2,
-        name: 'cisco',
-        company: 'Cisco',
-        num_collections: 1,
-        avatar_url:
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cisco_logo.svg/320px-Cisco_logo.svg.png',
-    };
+  ns2 = {
+    id: 2,
+    name: 'cisco',
+    company: 'Cisco',
+    num_collections: 1,
+    avatar_url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cisco_logo.svg/320px-Cisco_logo.svg.png',
+  };
 
-    ns3 = {
-        id: 3,
-        name: 'ansible',
-        company: 'Ansible',
-        num_collections: 90,
-        avatar_url:
-            'https://logos-download.com/wp-content/uploads/2016/10/Ansible_logo.png',
-    };
+  ns3 = {
+    id: 3,
+    name: 'ansible',
+    company: 'Ansible',
+    num_collections: 90,
+    avatar_url:
+      'https://logos-download.com/wp-content/uploads/2016/10/Ansible_logo.png',
+  };
 
-    ns4 = google;
+  ns4 = google;
 
-    getNSList() {
-        return [this.ns1, this.ns2, this.ns3, this.ns4];
-    }
+  getNSList() {
+    return [this.ns1, this.ns2, this.ns3, this.ns4];
+  }
 
-    getNSDetail() {
-        return this.ns1;
-    }
+  getNSDetail() {
+    return this.ns1;
+  }
 }

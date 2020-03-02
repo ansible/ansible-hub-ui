@@ -3,33 +3,33 @@
 @import '~@redhat-cloud-services/frontend-components/index.css';
 
 .body {
-    background-color: white;
-    padding: 16px;
+  background-color: white;
+  padding: 16px;
 }
 
 .clickable {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 // this was getting applied globally when it was in the collection-info.scss file
 // which means other components now rely on it, so I'm just going move it here
 // so that it's explicitly setting these styles globally.
 pre {
-    background-color: #f8f8f8;
-    border: 1px solid #e6e9e9;
-    font-family: var(--pf-global--FontFamily--monospace);
-    display: block;
-    padding: 10px;
+  background-color: #f8f8f8;
+  border: 1px solid #e6e9e9;
+  font-family: var(--pf-global--FontFamily--monospace);
+  display: block;
+  padding: 10px;
 
-    // Patternfly does something that makes it so that fonts don't get inherited
-    // from the parent so it has to be overridden at every level.
-    code {
-        font-family: var(--pf-global--FontFamily--monospace);
-    }
+  // Patternfly does something that makes it so that fonts don't get inherited
+  // from the parent so it has to be overridden at every level.
+  code {
+    font-family: var(--pf-global--FontFamily--monospace);
+  }
 }
 
 // Patternfly expects the root Page component to be the height of the browser window
 body,
 #root {
-    height: 100%;
+  height: 100%;
 }

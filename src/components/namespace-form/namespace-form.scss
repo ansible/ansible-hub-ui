@@ -1,98 +1,98 @@
 @import '../../global-variables.scss';
 .card-row {
-    @media (max-width: $breakpoint-md) {
-        flex-direction: column-reverse;
-    }
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column-reverse;
+  }
 
-    display: flex;
+  display: flex;
 
-    .fields {
-        flex-grow: 1;
-        margin-right: 15px;
-    }
+  .fields {
+    flex-grow: 1;
+    margin-right: 15px;
+  }
 
-    .card {
-        @media (min-width: $breakpoint-md) {
-            border-left: 24px solid #ededed;
-            border-bottom: 24px solid #ededed;
-            margin-top: -15px;
-            margin-right: -15px;
-        }
+  .card {
+    @media (min-width: $breakpoint-md) {
+      border-left: 24px solid #ededed;
+      border-bottom: 24px solid #ededed;
+      margin-top: -15px;
+      margin-right: -15px;
     }
+  }
 }
 
 .markdown-editor {
-    display: flex;
+  display: flex;
 
-    @media (max-width: $breakpoint-md) {
-        flex-direction: column-reverse;
-    }
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column-reverse;
+  }
 
-    .column {
-        flex-grow: 1;
-        margin-right: 15px;
-        margin-bottom: 15px;
-    }
+  .column {
+    flex-grow: 1;
+    margin-right: 15px;
+    margin-bottom: 15px;
+  }
 
-    .preview-container {
-        .preview {
-            overflow: scroll;
-            height: 500px;
-            border: 1px solid #ededed;
-            padding: 5px;
-        }
+  .preview-container {
+    .preview {
+      overflow: scroll;
+      height: 500px;
+      border: 1px solid #ededed;
+      padding: 5px;
     }
+  }
 
-    .editor {
-        // I don't know why, but just setting width causes this element to get
-        // shrunk whenever the preview window expands.
-        min-width: 500px;
-        max-width: 500px;
-    }
+  .editor {
+    // I don't know why, but just setting width causes this element to get
+    // shrunk whenever the preview window expands.
+    min-width: 500px;
+    max-width: 500px;
+  }
 }
 
 .useful-links {
+  display: flex;
+  margin-bottom: 10px;
+
+  .link-name {
+    flex-grow: 1;
+  }
+
+  .link-url {
+    flex-grow: 2;
+    margin-left: 20px;
+  }
+
+  .link-button {
     display: flex;
-    margin-bottom: 10px;
-
-    .link-name {
-        flex-grow: 1;
-    }
-
-    .link-url {
-        flex-grow: 2;
-        margin-left: 20px;
-    }
-
-    .link-button {
-        display: flex;
-        align-items: center;
-        margin-left: 10px;
-    }
+    align-items: center;
+    margin-left: 10px;
+  }
 }
 
 .account-ids {
+  display: flex;
+  margin-bottom: 10px;
+
+  .account-id {
+    flex-grow: 1;
+  }
+
+  .account-add {
+    flex-grow: 2;
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+
+  .account-button {
     display: flex;
-    margin-bottom: 10px;
-
-    .account-id {
-        flex-grow: 1;
-    }
-
-    .account-add {
-        flex-grow: 2;
-        margin-left: 20px;
-        margin-top: 5px;
-    }
-
-    .account-button {
-        display: flex;
-        align-items: center;
-        margin-left: 10px;
-    }
+    align-items: center;
+    margin-left: 10px;
+  }
 }
 
 .resources-editor {
-    height: 500px;
-    resize: none;
+  height: 500px;
+  resize: none;
 }

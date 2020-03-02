@@ -5,13 +5,13 @@ import { withRouter, Link } from 'react-router-dom';
 
 import '@patternfly/patternfly/patternfly.scss';
 import {
-    Page,
-    PageHeader,
-    PageSidebar,
-    Nav,
-    NavList,
-    NavItem,
-    PageSection,
+  Page,
+  PageHeader,
+  PageSidebar,
+  Nav,
+  NavList,
+  NavItem,
+  PageSection,
 } from '@patternfly/react-core';
 
 import { Routes } from '../Routes';
@@ -19,67 +19,61 @@ import RageTater from '../../static/images/awx-spud.gif';
 import { Paths } from '../paths';
 
 interface IProps {
-    history: any;
+  history: any;
 }
 
 class App extends React.Component<IProps> {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            currentUser: true,
-        };
-    }
+    this.state = {
+      currentUser: true,
+    };
+  }
 
-    componentDidMount() {}
+  componentDidMount() {}
 
-    render() {
-        const Header = (
-            <PageHeader
-                logo={
-                    <React.Fragment>
-                        <img
-                            style={{ height: '50px' }}
-                            src={RageTater}
-                            alt='AWX Spud'
-                        />
-                        Automation Hub
-                    </React.Fragment>
-                }
-                toolbar='Toolbar'
-                avatar=' | Avatar'
-                showNavToggle
-            />
-        );
-        const Sidebar = (
-            <PageSidebar
-                theme='dark'
-                nav={
-                    <Nav theme='dark'>
-                        <NavList>
-                            <NavItem>
-                                <Link to={Paths.search}>Collections</Link>
-                            </NavItem>
-                            <NavItem>
-                                <Link to={Paths.partners}>Namespaces</Link>
-                            </NavItem>
-                            <NavItem>
-                                <Link to={Paths.myNamespaces}>
-                                    My Namespaces
-                                </Link>
-                            </NavItem>
-                        </NavList>
-                    </Nav>
-                }
-            />
-        );
+  render() {
+    const Header = (
+      <PageHeader
+        logo={
+          <React.Fragment>
+            <img style={{ height: '50px' }} src={RageTater} alt='AWX Spud' />
+            Automation Hub
+          </React.Fragment>
+        }
+        toolbar='Toolbar'
+        avatar=' | Avatar'
+        showNavToggle
+      />
+    );
+    const Sidebar = (
+      <PageSidebar
+        theme='dark'
+        nav={
+          <Nav theme='dark'>
+            <NavList>
+              <NavItem>
+                <Link to={Paths.search}>Collections</Link>
+              </NavItem>
+              <NavItem>
+                <Link to={Paths.partners}>Namespaces</Link>
+              </NavItem>
+              <NavItem>
+                <Link to={Paths.myNamespaces}>My Namespaces</Link>
+              </NavItem>
+            </NavList>
+          </Nav>
+        }
+      />
+    );
 
-        return (
-            <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
-                <Routes childProps={this.props} />
-            </Page>
-        );
-    }
+    return (
+      <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
+        <Routes childProps={this.props} />
+      </Page>
+    );
+  }
 }
 
 /**

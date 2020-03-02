@@ -7,9 +7,9 @@ import App from './loaders/standalone-loader';
 // other than on the insights/cloud services environment)
 
 ReactDOM.render(
-    <Router basename={UI_BASE_PATH}>
-        <App />
-    </Router>,
+  <Router basename={UI_BASE_PATH}>
+    <App />
+  </Router>,
 
-    document.getElementById('root'),
+  document.getElementById('root'),
 );

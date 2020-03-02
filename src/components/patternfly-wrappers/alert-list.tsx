@@ -1,63 +1,59 @@
 import * as React from 'react';
 import {
-    Alert,
-    AlertActionCloseButton,
-    AlertProps,
+  Alert,
+  AlertActionCloseButton,
+  AlertProps,
 } from '@patternfly/react-core';
 
 interface IProps {
-    alerts: AlertType[];
-    closeAlert: (alertIndex) => void;
+  alerts: AlertType[];
+  closeAlert: (alertIndex) => void;
 }
 
 export class AlertType {
-    variant: AlertProps['variant'];
-    title: string;
-    description?: string;
+  variant: AlertProps['variant'];
+  title: string;
+  description?: string;
 }
 
 export class AlertList extends React.Component<IProps, {}> {
-    render() {
-        const { alerts, closeAlert } = this.props;
-        return (
-            <div
-                style={{
-                    position: 'fixed',
-                    right: '5px',
-                    top: '80px',
-                    zIndex: 300,
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}
-            >
-                {alerts.map((alert, i) => (
-                    <Alert
-                        style={{ marginBottom: '16px' }}
-                        key={i}
-                        title={alert.title}
-                        variant={alert.variant}
-                        action={
-                            <AlertActionCloseButton
-                                onClose={() => closeAlert(i)}
-                            />
-                        }
-                    >
-                        {alert.description}
-                    </Alert>
-                ))}
-            </div>
-        );
-    }
+  render() {
+    const { alerts, closeAlert } = this.props;
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          right: '5px',
+          top: '80px',
+          zIndex: 300,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        {alerts.map((alert, i) => (
+          <Alert
+            style={{ marginBottom: '16px' }}
+            key={i}
+            title={alert.title}
+            variant={alert.variant}
+            action={<AlertActionCloseButton onClose={() => closeAlert(i)} />}
+          >
+            {alert.description}
+          </Alert>
+        ))}
+      </div>
+    );
+  }
 }
 
 export function closeAlertMixin(alertStateVariable) {
-    return function(alertIndex) {
-        const newList = [...this.state['alerts']];
-        newList.splice(alertIndex, 1);
+  return function(alertIndex) {
+    const newList = [...this.state['alerts']];
+    newList.splice(alertIndex, 1);
 
-        const newState = {};
-        newState[alertStateVariable] = newList;
+    const newState = {};
+    newState[alertStateVariable] = newList;
 
-        this.setState(newState);
-    };
+    this.setState(newState);
+  };
 }

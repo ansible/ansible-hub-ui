@@ -1,48 +1,48 @@
 @import '../../global-variables.scss';
 
 .main {
-    margin: 0px;
-    padding: 0px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .header {
-    border-bottom: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
 }
 
 .docs-container {
-    padding-top: 24px;
-    background-color: white;
-    @media (min-width: $breakpoint-md) {
-        display: flex;
+  padding-top: 24px;
+  background-color: white;
+  @media (min-width: $breakpoint-md) {
+    display: flex;
+  }
+
+  .sidebar {
+    // This width lines up the border nicely with the tabs
+    min-width: 294px;
+    max-width: 294px;
+    border-right: 1px solid #d8d8d8;
+    padding: 0px;
+    padding-top: 0px;
+  }
+
+  .docs {
+    flex-grow: 1;
+    padding: 24px;
+    padding-top: 0px;
+
+    // make the height close to the height ofthe page so short docs don't
+    // look weird
+    min-height: calc(100vh - 250px);
+
+    table {
+      tr:nth-child(2n) {
+        background-color: #f2f2f2;
+      }
+      td,
+      th {
+        border: 1px solid #ccc;
+        padding: 5px;
+      }
     }
-
-    .sidebar {
-        // This width lines up the border nicely with the tabs
-        min-width: 294px;
-        max-width: 294px;
-        border-right: 1px solid #d8d8d8;
-        padding: 0px;
-        padding-top: 0px;
-    }
-
-    .docs {
-        flex-grow: 1;
-        padding: 24px;
-        padding-top: 0px;
-
-        // make the height close to the height ofthe page so short docs don't
-        // look weird
-        min-height: calc(100vh - 250px);
-
-        table {
-            tr:nth-child(2n) {
-                background-color: #f2f2f2;
-            }
-            td,
-            th {
-                border: 1px solid #ccc;
-                padding: 5px;
-            }
-        }
-    }
+  }
 }

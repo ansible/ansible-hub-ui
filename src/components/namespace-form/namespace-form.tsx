@@ -10,312 +10,287 @@ import { NamespaceCard } from '../../components';
 import { NamespaceType } from '../../api';
 
 interface IProps {
-    namespace: NamespaceType;
-    errorMessages: any;
-    userId: string;
+  namespace: NamespaceType;
+  errorMessages: any;
+  userId: string;
 
-    updateNamespace: (namespace) => void;
+  updateNamespace: (namespace) => void;
 }
 
 interface IState {
-    newLinkName: string;
-    newLinkURL: string;
-    newNamespaceGroup: string;
+  newLinkName: string;
+  newLinkURL: string;
+  newNamespaceGroup: string;
 }
 
 export class NamespaceForm extends React.Component<IProps, IState> {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            newLinkURL: '',
-            newLinkName: '',
-            newNamespaceGroup: '',
-        };
+    this.state = {
+      newLinkURL: '',
+      newLinkName: '',
+      newNamespaceGroup: '',
+    };
+  }
+
+  render() {
+    const { namespace, errorMessages, userId } = this.props;
+
+    if (!namespace) {
+      return null;
     }
+    return (
+      <Form>
+        <div className='card-row'>
+          <div className='fields'>
+            <FormGroup fieldId='name' label='Name' isRequired>
+              <TextInput
+                isRequired
+                isDisabled
+                id='name'
+                type='text'
+                value={namespace.name}
+              />
+            </FormGroup>
 
-    render() {
-        const { namespace, errorMessages, userId } = this.props;
+            <br />
 
-        if (!namespace) {
-            return null;
-        }
-        return (
-            <Form>
-                <div className='card-row'>
-                    <div className='fields'>
-                        <FormGroup fieldId='name' label='Name' isRequired>
-                            <TextInput
-                                isRequired
-                                isDisabled
-                                id='name'
-                                type='text'
-                                value={namespace.name}
-                            />
-                        </FormGroup>
+            <FormGroup
+              fieldId='company'
+              label='Company name'
+              helperTextInvalid={errorMessages['company']}
+              isValid={!('company' in errorMessages)}
+            >
+              <TextInput
+                isRequired
+                id='company'
+                type='text'
+                value={namespace.company}
+                onChange={(value, event) => this.updateField(value, event)}
+              />
+            </FormGroup>
+          </div>
+          <div className='card'>
+            <NamespaceCard {...namespace} />
+          </div>
+        </div>
 
-                        <br />
+        <FormGroup
+          fieldId='groups'
+          label='Namespace owners'
+          helperTextInvalid={errorMessages['groups']}
+          isValid={!('groups' in errorMessages)}
+        >
+          <br />
 
-                        <FormGroup
-                            fieldId='company'
-                            label='Company name'
-                            helperTextInvalid={errorMessages['company']}
-                            isValid={!('company' in errorMessages)}
-                        >
-                            <TextInput
-                                isRequired
-                                id='company'
-                                type='text'
-                                value={namespace.company}
-                                onChange={(value, event) =>
-                                    this.updateField(value, event)
-                                }
-                            />
-                        </FormGroup>
-                    </div>
-                    <div className='card'>
-                        <NamespaceCard {...namespace} />
-                    </div>
-                </div>
+          <ChipGroup>
+            {this.props.namespace.groups.map(group => (
+              <Chip
+                key={group}
+                onClick={() => this.deleteItem(group)}
+                isReadOnly={group === Constants.ADMIN_GROUP || userId === group}
+              >
+                {group}
+              </Chip>
+            ))}
+          </ChipGroup>
 
-                <FormGroup
-                    fieldId='groups'
-                    label='Namespace owners'
-                    helperTextInvalid={errorMessages['groups']}
-                    isValid={!('groups' in errorMessages)}
-                >
-                    <br />
-
-                    <ChipGroup>
-                        {this.props.namespace.groups.map(group => (
-                            <Chip
-                                key={group}
-                                onClick={() => this.deleteItem(group)}
-                                isReadOnly={
-                                    group === Constants.ADMIN_GROUP ||
-                                    userId === group
-                                }
-                            >
-                                {group}
-                            </Chip>
-                        ))}
-                    </ChipGroup>
-
-                    <div className='account-ids'>
-                        <br />
-                        <TextInput
-                            id='url'
-                            type='text'
-                            placeholder='Red Hat account ID'
-                            value={this.state.newNamespaceGroup}
-                            isValid={
-                                !isNaN(Number(this.state.newNamespaceGroup))
-                            }
-                            onChange={value =>
-                                this.setState({
-                                    newNamespaceGroup: value,
-                                })
-                            }
-                            onKeyDown={e => {
-                                if (e.key === 'Enter') {
-                                    this.addGroup();
-                                }
-                            }}
-                        />
-                        <div className='account-add'>
-                            <div className='clickable account-button'>
-                                <PlusCircleIcon
-                                    onClick={() => this.addGroup()}
-                                    size='md'
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </FormGroup>
-
-                <FormGroup
-                    fieldId='avatar_url'
-                    label='Logo URL'
-                    helperTextInvalid={errorMessages['avatar_url']}
-                    isValid={!('avatar_url' in errorMessages)}
-                >
-                    <TextInput
-                        id='avatar_url'
-                        type='text'
-                        value={namespace.avatar_url}
-                        onChange={(value, event) =>
-                            this.updateField(value, event)
-                        }
-                    />
-                </FormGroup>
-
-                <FormGroup
-                    fieldId='description'
-                    label='Description'
-                    helperTextInvalid={errorMessages['description']}
-                    isValid={!('description' in errorMessages)}
-                >
-                    <TextArea
-                        id='description'
-                        type='text'
-                        value={namespace.description}
-                        onChange={(value, event) =>
-                            this.updateField(value, event)
-                        }
-                    />
-                </FormGroup>
-
-                {namespace.links.length > 0 ? (
-                    <FormGroup
-                        fieldId='links'
-                        label='Useful links'
-                        helperTextInvalid={
-                            errorMessages['name'] || errorMessages['url']
-                        }
-                        isValid={
-                            !('name' in errorMessages || 'url' in errorMessages)
-                        }
-                    >
-                        {namespace.links.map((link, index) =>
-                            this.renderLinkGroup(link, index),
-                        )}
-                    </FormGroup>
-                ) : null}
-
-                <FormGroup fieldId='add_link' label='Add link'>
-                    <div className='useful-links'>
-                        <div className='link-name'>
-                            <TextInput
-                                id='name'
-                                type='text'
-                                placeholder='Link text'
-                                value={this.state.newLinkName}
-                                onChange={value => {
-                                    this.setState({
-                                        newLinkName: value,
-                                    });
-                                }}
-                            />
-                        </div>
-                        <div className='link-url'>
-                            <TextInput
-                                id='url'
-                                type='text'
-                                placeholder='Link URL'
-                                value={this.state.newLinkURL}
-                                onChange={value =>
-                                    this.setState({
-                                        newLinkURL: value,
-                                    })
-                                }
-                                onKeyDown={e => {
-                                    if (e.key === 'Enter') {
-                                        this.addLink();
-                                    }
-                                }}
-                            />
-                        </div>
-                        <div className='clickable link-button'>
-                            <PlusCircleIcon
-                                onClick={() => this.addLink()}
-                                size='md'
-                            />
-                        </div>
-                    </div>
-                </FormGroup>
-            </Form>
-        );
-    }
-
-    private updateField(value, event) {
-        const update = { ...this.props.namespace };
-        update[event.target.id] = value;
-        this.props.updateNamespace(update);
-    }
-
-    private updateLink(index, value, event) {
-        const update = { ...this.props.namespace };
-        update.links[index][event.target.id] = value;
-        this.props.updateNamespace(update);
-    }
-
-    private removeLink(index) {
-        const update = { ...this.props.namespace };
-        update.links.splice(index, 1);
-        this.props.updateNamespace(update);
-    }
-
-    private addLink() {
-        const update = { ...this.props.namespace };
-        update.links.push({
-            name: this.state.newLinkName,
-            url: this.state.newLinkURL,
-        });
-        this.setState(
-            {
-                newLinkURL: '',
-                newLinkName: '',
-            },
-            () => this.props.updateNamespace(update),
-        );
-    }
-
-    private addGroup() {
-        const update = { ...this.props.namespace };
-        if (
-            this.state.newNamespaceGroup.trim() == '' ||
-            isNaN(Number(this.state.newNamespaceGroup.trim()))
-        ) {
-            return;
-        }
-        update.groups.push(this.state.newNamespaceGroup.trim());
-        this.setState({ newNamespaceGroup: '' }, () =>
-            this.props.updateNamespace(update),
-        );
-    }
-
-    private deleteItem(id) {
-        const update = { ...this.props.namespace };
-        const index = update.groups.indexOf(id);
-        if (index !== -1) {
-            update.groups.splice(index, 1);
-            this.props.updateNamespace(update);
-        }
-    }
-
-    private renderLinkGroup(link, index) {
-        return (
-            <div className='useful-links' key={index}>
-                <div className='link-name'>
-                    <TextInput
-                        id='name'
-                        type='text'
-                        placeholder='Link text'
-                        value={link.name}
-                        onChange={(value, event) =>
-                            this.updateLink(index, value, event)
-                        }
-                    />
-                </div>
-                <div className='link-url'>
-                    <TextInput
-                        id='url'
-                        type='text'
-                        placeholder='Link URL'
-                        value={link.url}
-                        onChange={(value, event) =>
-                            this.updateLink(index, value, event)
-                        }
-                    />
-                </div>
-                <div className='link-button'>
-                    <MinusCircleIcon
-                        className='clickable'
-                        onClick={() => this.removeLink(index)}
-                        size='md'
-                    />
-                </div>
+          <div className='account-ids'>
+            <br />
+            <TextInput
+              id='url'
+              type='text'
+              placeholder='Red Hat account ID'
+              value={this.state.newNamespaceGroup}
+              isValid={!isNaN(Number(this.state.newNamespaceGroup))}
+              onChange={value =>
+                this.setState({
+                  newNamespaceGroup: value,
+                })
+              }
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  this.addGroup();
+                }
+              }}
+            />
+            <div className='account-add'>
+              <div className='clickable account-button'>
+                <PlusCircleIcon onClick={() => this.addGroup()} size='md' />
+              </div>
             </div>
-        );
+          </div>
+        </FormGroup>
+
+        <FormGroup
+          fieldId='avatar_url'
+          label='Logo URL'
+          helperTextInvalid={errorMessages['avatar_url']}
+          isValid={!('avatar_url' in errorMessages)}
+        >
+          <TextInput
+            id='avatar_url'
+            type='text'
+            value={namespace.avatar_url}
+            onChange={(value, event) => this.updateField(value, event)}
+          />
+        </FormGroup>
+
+        <FormGroup
+          fieldId='description'
+          label='Description'
+          helperTextInvalid={errorMessages['description']}
+          isValid={!('description' in errorMessages)}
+        >
+          <TextArea
+            id='description'
+            type='text'
+            value={namespace.description}
+            onChange={(value, event) => this.updateField(value, event)}
+          />
+        </FormGroup>
+
+        {namespace.links.length > 0 ? (
+          <FormGroup
+            fieldId='links'
+            label='Useful links'
+            helperTextInvalid={errorMessages['name'] || errorMessages['url']}
+            isValid={!('name' in errorMessages || 'url' in errorMessages)}
+          >
+            {namespace.links.map((link, index) =>
+              this.renderLinkGroup(link, index),
+            )}
+          </FormGroup>
+        ) : null}
+
+        <FormGroup fieldId='add_link' label='Add link'>
+          <div className='useful-links'>
+            <div className='link-name'>
+              <TextInput
+                id='name'
+                type='text'
+                placeholder='Link text'
+                value={this.state.newLinkName}
+                onChange={value => {
+                  this.setState({
+                    newLinkName: value,
+                  });
+                }}
+              />
+            </div>
+            <div className='link-url'>
+              <TextInput
+                id='url'
+                type='text'
+                placeholder='Link URL'
+                value={this.state.newLinkURL}
+                onChange={value =>
+                  this.setState({
+                    newLinkURL: value,
+                  })
+                }
+                onKeyDown={e => {
+                  if (e.key === 'Enter') {
+                    this.addLink();
+                  }
+                }}
+              />
+            </div>
+            <div className='clickable link-button'>
+              <PlusCircleIcon onClick={() => this.addLink()} size='md' />
+            </div>
+          </div>
+        </FormGroup>
+      </Form>
+    );
+  }
+
+  private updateField(value, event) {
+    const update = { ...this.props.namespace };
+    update[event.target.id] = value;
+    this.props.updateNamespace(update);
+  }
+
+  private updateLink(index, value, event) {
+    const update = { ...this.props.namespace };
+    update.links[index][event.target.id] = value;
+    this.props.updateNamespace(update);
+  }
+
+  private removeLink(index) {
+    const update = { ...this.props.namespace };
+    update.links.splice(index, 1);
+    this.props.updateNamespace(update);
+  }
+
+  private addLink() {
+    const update = { ...this.props.namespace };
+    update.links.push({
+      name: this.state.newLinkName,
+      url: this.state.newLinkURL,
+    });
+    this.setState(
+      {
+        newLinkURL: '',
+        newLinkName: '',
+      },
+      () => this.props.updateNamespace(update),
+    );
+  }
+
+  private addGroup() {
+    const update = { ...this.props.namespace };
+    if (
+      this.state.newNamespaceGroup.trim() == '' ||
+      isNaN(Number(this.state.newNamespaceGroup.trim()))
+    ) {
+      return;
     }
+    update.groups.push(this.state.newNamespaceGroup.trim());
+    this.setState({ newNamespaceGroup: '' }, () =>
+      this.props.updateNamespace(update),
+    );
+  }
+
+  private deleteItem(id) {
+    const update = { ...this.props.namespace };
+    const index = update.groups.indexOf(id);
+    if (index !== -1) {
+      update.groups.splice(index, 1);
+      this.props.updateNamespace(update);
+    }
+  }
+
+  private renderLinkGroup(link, index) {
+    return (
+      <div className='useful-links' key={index}>
+        <div className='link-name'>
+          <TextInput
+            id='name'
+            type='text'
+            placeholder='Link text'
+            value={link.name}
+            onChange={(value, event) => this.updateLink(index, value, event)}
+          />
+        </div>
+        <div className='link-url'>
+          <TextInput
+            id='url'
+            type='text'
+            placeholder='Link URL'
+            value={link.url}
+            onChange={(value, event) => this.updateLink(index, value, event)}
+          />
+        </div>
+        <div className='link-button'>
+          <MinusCircleIcon
+            className='clickable'
+            onClick={() => this.removeLink(index)}
+            size='md'
+          />
+        </div>
+      </div>
+    );
+  }
 }

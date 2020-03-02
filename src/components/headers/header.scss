@@ -1,74 +1,74 @@
 @import '../../global-variables.scss';
 
 .image {
-    padding-right: 16px;
+  padding-right: 16px;
 }
 
 .title-box {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .column-section {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 
-    .header-right {
-        align-items: right;
-    }
+  .header-right {
+    align-items: right;
+  }
 }
 
 .background {
-    background-color: white;
-    padding: 0px 24px 0px 24px;
+  background-color: white;
+  padding: 0px 24px 0px 24px;
 }
 
 .placeholder {
-    height: 24px;
+  height: 24px;
 }
 
 .breadcrumb-container {
-    padding-top: 10px;
-    padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .header-bottom {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
 .tab-link-container {
-    display: flex;
-    margin-top: 10px;
+  display: flex;
+  margin-top: 10px;
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column-reverse;
+  }
+
+  .tabs {
+    flex-grow: 0;
+  }
+
+  .links {
+    @media (min-width: $breakpoint-md) {
+      justify-content: flex-end;
+    }
     @media (max-width: $breakpoint-md) {
-        flex-direction: column-reverse;
+      margin-bottom: 10px;
     }
 
-    .tabs {
-        flex-grow: 0;
+    flex-grow: 1;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    div {
+      @media (min-width: $breakpoint-md) {
+        margin-left: 20px;
+      }
+
+      @media (max-width: $breakpoint-md) {
+        margin-right: 20px;
+      }
     }
-
-    .links {
-        @media (min-width: $breakpoint-md) {
-            justify-content: flex-end;
-        }
-        @media (max-width: $breakpoint-md) {
-            margin-bottom: 10px;
-        }
-
-        flex-grow: 1;
-
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-
-        div {
-            @media (min-width: $breakpoint-md) {
-                margin-left: 20px;
-            }
-
-            @media (max-width: $breakpoint-md) {
-                margin-right: 20px;
-            }
-        }
-    }
+  }
 }

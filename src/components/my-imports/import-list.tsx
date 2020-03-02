@@ -5,17 +5,17 @@ import * as moment from 'moment';
 import { cloneDeep } from 'lodash';
 
 import {
-    EmptyState,
-    EmptyStateIcon,
-    EmptyStateBody,
-    Title,
-    TextInput,
-    Pagination,
-    FormSelect,
-    FormSelectOption,
-    InputGroup,
-    Button,
-    ButtonVariant,
+  EmptyState,
+  EmptyStateIcon,
+  EmptyStateBody,
+  Title,
+  TextInput,
+  Pagination,
+  FormSelect,
+  FormSelectOption,
+  InputGroup,
+  Button,
+  ButtonVariant,
 } from '@patternfly/react-core';
 import { InfoIcon, SearchIcon } from '@patternfly/react-icons';
 import { Spinner } from '@redhat-cloud-services/frontend-components';
@@ -25,236 +25,213 @@ import { ParamHelper } from '../../utilities/param-helper';
 import { Constants } from '../../constants';
 
 interface IProps {
-    namespaces: NamespaceType[];
-    importList: ImportListType[];
-    selectedImport: ImportListType;
-    numberOfResults: number;
-    loading: boolean;
-    params: {
-        page_size?: number;
-        page?: number;
-        keyword?: string;
-        namespace?: string;
-    };
+  namespaces: NamespaceType[];
+  importList: ImportListType[];
+  selectedImport: ImportListType;
+  numberOfResults: number;
+  loading: boolean;
+  params: {
+    page_size?: number;
+    page?: number;
+    keyword?: string;
+    namespace?: string;
+  };
 
-    selectImport: (x) => void;
-    updateParams: (filters) => void;
+  selectImport: (x) => void;
+  updateParams: (filters) => void;
 }
 
 interface IState {
-    kwField: string;
+  kwField: string;
 }
 
 export class ImportList extends React.Component<IProps, IState> {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            kwField: '',
-        };
+    this.state = {
+      kwField: '',
+    };
+  }
+
+  render() {
+    const {
+      selectImport,
+      importList,
+      selectedImport,
+      namespaces,
+      numberOfResults,
+      params,
+      updateParams,
+      loading,
+    } = this.props;
+
+    const { kwField } = this.state;
+
+    return (
+      <div className='import-list'>
+        {this.renderNamespacePicker(namespaces)}
+        <InputGroup className='search-box'>
+          <TextInput
+            value={kwField}
+            onChange={k => this.setState({ kwField: k })}
+            onKeyPress={e => this.handleEnter(e)}
+            type='search'
+            aria-label='search text input'
+            placeholder='Search imports'
+          />
+
+          <Button
+            variant={ButtonVariant.control}
+            aria-label='search button'
+            onClick={() => this.submitSearch()}
+          >
+            <SearchIcon />
+          </Button>
+        </InputGroup>
+
+        <div>
+          {this.renderList(selectImport, importList, selectedImport, loading)}
+        </div>
+        <Pagination
+          itemCount={numberOfResults}
+          perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
+          page={params.page || 1}
+          onSetPage={(_, p) =>
+            updateParams(ParamHelper.setParam(params, 'page', p))
+          }
+          onPerPageSelect={(_, p) => {
+            updateParams({ ...params, page: 1, page_size: p });
+          }}
+          isCompact={true}
+        />
+      </div>
+    );
+  }
+
+  private setPageSize(size) {
+    const params = cloneDeep(this.props.params);
+
+    params['page_size'] = size;
+    params['page'] = 1;
+    this.props.updateParams(params);
+  }
+
+  private setPageNumber(pageNum) {
+    const params = cloneDeep(this.props.params);
+    params['page'] = pageNum;
+    this.props.updateParams(params);
+  }
+
+  private renderList(selectImport, importList, selectedImport, loading) {
+    if (loading) {
+      return (
+        <div className='loading'>
+          <Spinner centered={true} />
+        </div>
+      );
+    }
+    if (importList.length === 0) {
+      return (
+        <EmptyState>
+          <EmptyStateIcon icon={InfoIcon} />
+          <Title size='lg' headingLevel='h5'>
+            No imports
+          </Title>
+
+          <EmptyStateBody>
+            There have not been any imports on this namespace.
+          </EmptyStateBody>
+        </EmptyState>
+      );
     }
 
-    render() {
-        const {
-            selectImport,
-            importList,
-            selectedImport,
-            namespaces,
-            numberOfResults,
-            params,
-            updateParams,
-            loading,
-        } = this.props;
-
-        const { kwField } = this.state;
-
-        return (
-            <div className='import-list'>
-                {this.renderNamespacePicker(namespaces)}
-                <InputGroup className='search-box'>
-                    <TextInput
-                        value={kwField}
-                        onChange={k => this.setState({ kwField: k })}
-                        onKeyPress={e => this.handleEnter(e)}
-                        type='search'
-                        aria-label='search text input'
-                        placeholder='Search imports'
-                    />
-
-                    <Button
-                        variant={ButtonVariant.control}
-                        aria-label='search button'
-                        onClick={() => this.submitSearch()}
-                    >
-                        <SearchIcon />
-                    </Button>
-                </InputGroup>
-
-                <div>
-                    {this.renderList(
-                        selectImport,
-                        importList,
-                        selectedImport,
-                        loading,
-                    )}
-                </div>
-                <Pagination
-                    itemCount={numberOfResults}
-                    perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
-                    page={params.page || 1}
-                    onSetPage={(_, p) =>
-                        updateParams(ParamHelper.setParam(params, 'page', p))
-                    }
-                    onPerPageSelect={(_, p) => {
-                        updateParams({ ...params, page: 1, page_size: p });
-                    }}
-                    isCompact={true}
-                />
+    return (
+      <div>
+        {importList.map(item => {
+          return (
+            <div
+              onClick={() => selectImport(item)}
+              key={item.id}
+              className={
+                item.type === selectedImport.type &&
+                item.id === selectedImport.id
+                  ? 'clickable list-container selected-item'
+                  : 'clickable list-container'
+              }
+            >
+              <div className='left'>
+                <i className={this.getStatusClass(item.state)} />
+              </div>
+              <div className='right'>{this.renderDescription(item)}</div>
             </div>
-        );
+          );
+        })}
+      </div>
+    );
+  }
+
+  private handleEnter(e) {
+    if (e.key === 'Enter') {
+      this.submitSearch();
     }
+  }
 
-    private setPageSize(size) {
-        const params = cloneDeep(this.props.params);
+  private submitSearch() {
+    this.props.updateParams(
+      ParamHelper.setParam(this.props.params, 'keywords', this.state.kwField),
+    );
+  }
 
-        params['page_size'] = size;
-        params['page'] = 1;
-        this.props.updateParams(params);
+  private renderDescription(item) {
+    return (
+      <div>
+        <div>
+          {item.name} {item.version ? 'v' + item.version : ''}
+        </div>
+        <div className='sub-text'>
+          Status: {item.state}{' '}
+          {item.finished_at ? moment(item.finished_at).fromNow() : null}
+        </div>
+      </div>
+    );
+  }
+
+  private getStatusClass(state) {
+    const statusClass = 'fa status-icon ';
+
+    switch (state) {
+      case PulpStatus.running:
+        return statusClass + 'fa-spin fa-spinner warning';
+      case PulpStatus.waiting:
+        return statusClass + 'fa-spin fa-spinner warning';
+      case PulpStatus.completed:
+        return statusClass + 'fa-circle success';
+      default:
+        return statusClass + 'fa-circle failed';
     }
+  }
 
-    private setPageNumber(pageNum) {
-        const params = cloneDeep(this.props.params);
-        params['page'] = pageNum;
-        this.props.updateParams(params);
-    }
-
-    private renderList(selectImport, importList, selectedImport, loading) {
-        if (loading) {
-            return (
-                <div className='loading'>
-                    <Spinner centered={true} />
-                </div>
-            );
-        }
-        if (importList.length === 0) {
-            return (
-                <EmptyState>
-                    <EmptyStateIcon icon={InfoIcon} />
-                    <Title size='lg' headingLevel='h5'>
-                        No imports
-                    </Title>
-
-                    <EmptyStateBody>
-                        There have not been any imports on this namespace.
-                    </EmptyStateBody>
-                </EmptyState>
-            );
-        }
-
-        return (
-            <div>
-                {importList.map(item => {
-                    return (
-                        <div
-                            onClick={() => selectImport(item)}
-                            key={item.id}
-                            className={
-                                item.type === selectedImport.type &&
-                                item.id === selectedImport.id
-                                    ? 'clickable list-container selected-item'
-                                    : 'clickable list-container'
-                            }
-                        >
-                            <div className='left'>
-                                <i
-                                    className={this.getStatusClass(item.state)}
-                                />
-                            </div>
-                            <div className='right'>
-                                {this.renderDescription(item)}
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
-        );
-    }
-
-    private handleEnter(e) {
-        if (e.key === 'Enter') {
-            this.submitSearch();
-        }
-    }
-
-    private submitSearch() {
-        this.props.updateParams(
-            ParamHelper.setParam(
-                this.props.params,
-                'keywords',
-                this.state.kwField,
-            ),
-        );
-    }
-
-    private renderDescription(item) {
-        return (
-            <div>
-                <div>
-                    {item.name} {item.version ? 'v' + item.version : ''}
-                </div>
-                <div className='sub-text'>
-                    Status: {item.state}{' '}
-                    {item.finished_at
-                        ? moment(item.finished_at).fromNow()
-                        : null}
-                </div>
-            </div>
-        );
-    }
-
-    private getStatusClass(state) {
-        const statusClass = 'fa status-icon ';
-
-        switch (state) {
-            case PulpStatus.running:
-                return statusClass + 'fa-spin fa-spinner warning';
-            case PulpStatus.waiting:
-                return statusClass + 'fa-spin fa-spinner warning';
-            case PulpStatus.completed:
-                return statusClass + 'fa-circle success';
-            default:
-                return statusClass + 'fa-circle failed';
-        }
-    }
-
-    private renderNamespacePicker(namespaces) {
-        return (
-            <div className='namespace-selector-wrapper'>
-                <div className='label'>Namespace</div>
-                <div className='selector'>
-                    <FormSelect
-                        onChange={val =>
-                            this.props.updateParams(
-                                ParamHelper.setParam(
-                                    this.props.params,
-                                    'namespace',
-                                    val,
-                                ),
-                            )
-                        }
-                        value={this.props.params.namespace}
-                        aria-label='Select namespace'
-                    >
-                        {namespaces.map(ns => (
-                            <FormSelectOption
-                                key={ns.name}
-                                label={ns.name}
-                                value={ns.name}
-                            />
-                        ))}
-                    </FormSelect>
-                </div>
-            </div>
-        );
-    }
+  private renderNamespacePicker(namespaces) {
+    return (
+      <div className='namespace-selector-wrapper'>
+        <div className='label'>Namespace</div>
+        <div className='selector'>
+          <FormSelect
+            onChange={val =>
+              this.props.updateParams(
+                ParamHelper.setParam(this.props.params, 'namespace', val),
+              )
+            }
+            value={this.props.params.namespace}
+            aria-label='Select namespace'
+          >
+            {namespaces.map(ns => (
+              <FormSelectOption key={ns.name} label={ns.name} value={ns.name} />
+            ))}
+          </FormSelect>
+        </div>
+      </div>
+    );
+  }
 }

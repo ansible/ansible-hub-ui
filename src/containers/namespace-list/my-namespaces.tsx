@@ -6,16 +6,16 @@ import { NamespaceList } from './namespace-list';
 import { Paths } from '../../paths';
 
 class MyNamespaces extends React.Component<RouteComponentProps, {}> {
-    render() {
-        return (
-            <NamespaceList
-                {...this.props}
-                namespacePath={Paths.myCollections}
-                title='My namespaces'
-                filterOwner={true}
-            />
-        );
-    }
+  render() {
+    return (
+      <NamespaceList
+        {...this.props}
+        namespacePath={Paths.myCollections}
+        title='My namespaces'
+        filterOwner={true}
+      />
+    );
+  }
 }
 
 export default withRouter(MyNamespaces);
