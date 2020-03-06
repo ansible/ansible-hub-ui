@@ -19,7 +19,6 @@ import {
   BaseHeader,
   CollectionCard,
   Toolbar,
-  TagFilter,
   CardListSwitcher,
   CollectionListItem,
   Pagination,
@@ -145,19 +144,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
           </div>
         </BaseHeader>
         <Main>
-          <Section className='collection-container'>
-            <div className='sidebar'>
-              <TagFilter
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
-                tags={this.tags}
-              />
-            </div>
-
-            {this.renderCollections(collections, params)}
-          </Section>
           <Section className='body footer'>
             <Pagination
               params={params}
