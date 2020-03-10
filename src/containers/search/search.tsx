@@ -8,6 +8,12 @@ import {
   EmptyState,
   EmptyStateIcon,
   Title,
+  Toolbar,
+  ToolbarGroup,
+  Chip,
+  ChipGroup,
+  ChipGroupToolbarItem,
+  ToolbarItem,
   EmptyStateBody,
   EmptyStateVariant,
   Button,
@@ -18,12 +24,14 @@ import { SearchIcon } from '@patternfly/react-icons';
 import {
   BaseHeader,
   CollectionCard,
-  Toolbar,
   CardListSwitcher,
   CollectionListItem,
+  CompoundFilter,
   Pagination,
   LoadingPageSpinner,
   Main,
+  Sort,
+  SortFieldType,
 } from '../../components';
 import {
   CollectionAPI,
@@ -40,7 +48,8 @@ interface IState {
     page?: number;
     page_size?: number;
     keywords?: string;
-    tags?: string;
+    tag?: string[];
+    sync?: string[];
     view_type?: string;
   };
   loading: boolean;
@@ -59,6 +68,14 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
     if (!params['page_size']) {
       params['page_size'] = Constants.CARD_DEFAULT_PAGE_SIZE;
+    }
+
+    if (!params['tag']) {
+      params['tag'] = [];
+    }
+
+    if (!params['sync']) {
+      params['sync'] = [];
     }
 
     // Load view type from local storage if it's not set. This allows a
@@ -98,17 +115,93 @@ class Search extends React.Component<RouteComponentProps, IState> {
   render() {
     const { collections, params, numberOfResults, loading } = this.state;
 
+    const sortOptions: SortFieldType[] = [
+      { id: 'name', title: 'Collection name', type: 'alpha' },
+    ];
+
     return (
       <React.Fragment>
         <BaseHeader className='header' title='Collections'>
           <div className='toolbar'>
-            <Toolbar
-              params={params}
-              updateParams={p =>
-                this.updateParams(p, () => this.queryCollections())
-              }
-              searchPlaceholder='Search collections'
-            />
+            <Toolbar>
+              <ToolbarGroup>
+                <ToolbarItem>
+                  <CompoundFilter
+                    updateParams={p =>
+                      this.updateParams(p, () => this.queryCollections())
+                    }
+                    params={params}
+                    filterConfig={[
+                      {
+                        id: 'collection',
+                        title: 'Collection',
+                      },
+                      {
+                        id: 'tag',
+                        title: 'Tag',
+                        inputType: 'multiple',
+                        options: this.tags.map(tag => ({
+                          id: tag,
+                          title: tag[0].toUpperCase() + tag.slice(1),
+                        })),
+                      },
+                      {
+                        id: 'sync',
+                        title: 'Sync Status',
+                        inputType: 'multiple',
+                        options: [
+                          {
+                            id: 'on',
+                            title: 'Sync on',
+                          },
+                          {
+                            id: 'off',
+                            title: 'Sync off',
+                          },
+                        ],
+                      },
+                    ]}
+                  />
+                </ToolbarItem>
+              </ToolbarGroup>
+              <ToolbarGroup>
+                <ToolbarItem>
+                  <Sort
+                    options={sortOptions}
+                    params={params}
+                    updateParams={p =>
+                      this.updateParams(p, () => this.queryCollections())
+                    }
+                  />
+                </ToolbarItem>
+              </ToolbarGroup>
+            </Toolbar>
+            <Toolbar>
+              <ToolbarGroup>
+                <ChipGroup withToolbar>
+                  <ChipGroupToolbarItem key={'Tags'} categoryName={'Tags'}>
+                    {this.state.params.tag.map(chip => (
+                      <Chip
+                        key={chip}
+                        onClick={() => this.deleteItem('tag', chip)}
+                      >
+                        {chip}
+                      </Chip>
+                    ))}
+                  </ChipGroupToolbarItem>
+                  <ChipGroupToolbarItem key={'Sync'} categoryName={'Sync'}>
+                    {this.state.params.sync.map(chip => (
+                      <Chip
+                        key={chip}
+                        onClick={() => this.deleteItem('sync', chip)}
+                      >
+                        {chip}
+                      </Chip>
+                    ))}
+                  </ChipGroupToolbarItem>
+                </ChipGroup>
+              </ToolbarGroup>
+            </Toolbar>
 
             <div className='pagination-container'>
               <div className='card-list-switcher'>
@@ -144,6 +237,9 @@ class Search extends React.Component<RouteComponentProps, IState> {
           </div>
         </BaseHeader>
         <Main>
+          <Section className='collection-container'>
+            {this.renderCollections(collections, params)}
+          </Section>
           <Section className='body footer'>
             <Pagination
               params={params}
@@ -233,6 +329,16 @@ class Search extends React.Component<RouteComponentProps, IState> {
       });
     });
   }
+
+  private deleteItem = (category, id) => {
+    const copyOfParams = Object.assign([], this.state.params);
+    const index = copyOfParams[category].indexOf(id);
+    copyOfParams[category].splice(index, 1);
+    this.setState({
+      params: copyOfParams,
+    });
+    this.updateParams(this.state.params, () => this.queryCollections());
+  };
 
   private get updateParams() {
     return ParamHelper.updateParamsMixin();
