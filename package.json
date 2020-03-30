@@ -89,6 +89,7 @@
     },
     "scripts": {
         "build": "webpack --config config/insights.prod.webpack.config.js",
+        "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
         "test": "jest --verbose",
         "lint": "npm-run-all lint:*",
         "lint:js": "eslint config src",
