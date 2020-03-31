@@ -77,12 +77,15 @@ module.exports = inputConfigs => {
     };
 
     if (customConfigs.DEPLOYMENT_MODE === 'standalone') {
-        console.log('Overriding app entry for standalone mode.');
+        console.log('Overriding configs for standalone mode.');
 
         const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
-        console.log(`New entry: ${newEntry}`);
+        const newPubPath = ''
+        console.log(`New entry.App: ${newEntry}`);
+        console.log(`New output.publicPath: ${newPubPath}`);
 
         newWebpackConfig.entry.App = newEntry;
+        newWebpackConfig.output.publicPath = newPubPath;
     }
 
     plugins.push(new webpack.DefinePlugin(globals));
