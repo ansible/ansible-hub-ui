@@ -1,16 +1,13 @@
 import * as React from 'react';
 
 import {
-  OptionsMenu,
-  OptionsMenuItem,
-  OptionsMenuPosition,
-  OptionsMenuToggle,
   TextInput,
   InputGroup,
   Button,
   ButtonVariant,
   DropdownItem,
   Select,
+  SelectGroup,
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
@@ -100,30 +97,30 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     switch (selectedFilter.inputType) {
       case 'multiple':
         const options = selectedFilter.options.map(option => (
-          <OptionsMenuItem
-            onSelect={this.onSelect}
-            isSelected={this.filterApplied(option.id)}
-            id={option.id}
-            key={option.id}
-          >
-            {option.title}
-          </OptionsMenuItem>
+          <SelectOption key={option.id} value={option.title} />
         ));
 
-        const toggle = (
-          <OptionsMenuToggle
-            onToggle={this.onToggle}
-            toggleTemplate={'Filter by ' + selectedFilter.id}
-          />
-        );
+        const toggle = [
+          <SelectGroup
+            label={'Filter by ' + selectedFilter.id}
+            key={selectedFilter.id}
+          >
+            {options}
+          </SelectGroup>,
+        ];
+
         return (
-          <OptionsMenu
-            id='options-menu-align-right-example'
-            position={OptionsMenuPosition.right}
-            menuItems={options}
-            toggle={toggle}
-            isOpen={this.state.isOpen}
-          />
+          <Select
+            variant={SelectVariant.checkbox}
+            onToggle={this.onToggle}
+            onSelect={this.onSelect}
+            isExpanded={this.state.isOpen}
+            placeholderText={'Filter by ' + selectedFilter.id}
+            selections={this.props.params[this.state.selectedFilter.id]}
+            isGrouped
+          >
+            {toggle}
+          </Select>
         );
       case 'select':
         return (
