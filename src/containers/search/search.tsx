@@ -75,7 +75,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     }
 
     if (!params['sync']) {
-      params['sync'] = [];
+      params['sync'] = ['Sync on'];
     }
 
     // Load view type from local storage if it's not set. This allows a
@@ -147,7 +147,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
                       },
                       {
                         id: 'sync',
-                        title: 'Sync Status',
+                        title: 'Sync status',
                         inputType: 'multiple',
                         options: [
                           {
