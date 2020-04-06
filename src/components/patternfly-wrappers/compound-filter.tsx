@@ -210,10 +210,4 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     }
     this.submitFilter();
   };
-
-  private clearSelection = () => {
-    this.setState({
-      isOpen: false,
-    });
-  };
 }

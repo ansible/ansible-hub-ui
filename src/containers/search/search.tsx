@@ -176,32 +176,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
                 </ToolbarItem>
               </ToolbarGroup>
             </Toolbar>
-            <Toolbar>
-              <ToolbarGroup>
-                <ChipGroup withToolbar>
-                  <ChipGroupToolbarItem key={'Tags'} categoryName={'Tags'}>
-                    {this.state.params.tag.map(chip => (
-                      <Chip
-                        key={chip}
-                        onClick={() => this.deleteItem('tag', chip)}
-                      >
-                        {chip}
-                      </Chip>
-                    ))}
-                  </ChipGroupToolbarItem>
-                  <ChipGroupToolbarItem key={'Sync'} categoryName={'Sync'}>
-                    {this.state.params.sync.map(chip => (
-                      <Chip
-                        key={chip}
-                        onClick={() => this.deleteItem('sync', chip)}
-                      >
-                        {chip}
-                      </Chip>
-                    ))}
-                  </ChipGroupToolbarItem>
-                </ChipGroup>
-              </ToolbarGroup>
-            </Toolbar>
 
             <div className='pagination-container'>
               <div className='card-list-switcher'>
@@ -235,6 +209,40 @@ class Search extends React.Component<RouteComponentProps, IState> {
               />
             </div>
           </div>
+
+          {this.anyFilterApplied() && (
+            <div className='toolbar'>
+              <Toolbar>
+                <ToolbarGroup>
+                  <ChipGroup withToolbar>
+                    <ChipGroupToolbarItem key={'Tags'} categoryName={'Tags'}>
+                      {this.state.params.tag.map(chip => (
+                        <Chip
+                          key={chip}
+                          onClick={() => this.deleteItem('tag', chip)}
+                        >
+                          {chip}
+                        </Chip>
+                      ))}
+                    </ChipGroupToolbarItem>
+                    <ChipGroupToolbarItem key={'Sync'} categoryName={'Sync'}>
+                      {this.state.params.sync.map(chip => (
+                        <Chip
+                          key={chip}
+                          onClick={() => this.deleteItem('sync', chip)}
+                        >
+                          {chip}
+                        </Chip>
+                      ))}
+                    </ChipGroupToolbarItem>
+                  </ChipGroup>
+                </ToolbarGroup>
+                <Button variant='link' isInline onClick={this.clearSelection}>
+                  Clear filters
+                </Button>
+              </Toolbar>
+            </div>
+          )}
         </BaseHeader>
         <Main>
           <Section className='collection-container'>
@@ -338,6 +346,25 @@ class Search extends React.Component<RouteComponentProps, IState> {
       params: copyOfParams,
     });
     this.updateParams(this.state.params, () => this.queryCollections());
+  };
+
+  private anyFilterApplied = () => {
+    if (
+      (typeof this.state.params['tag'] !== 'undefined' &&
+        this.state.params['tag'].length > 0) ||
+      (typeof this.state.params['sync'] !== 'undefined' &&
+        this.state.params['sync'].length > 0)
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  private clearSelection = () => {
+    const params = Object.assign({}, this.state.params);
+    params['tag'] = [];
+    params['sync'] = [];
+    this.updateParams(params, () => this.queryCollections());
   };
 
   private get updateParams() {
