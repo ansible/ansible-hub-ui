@@ -11,11 +11,10 @@ import {
   Nav,
   NavList,
   NavItem,
-  PageSection,
 } from '@patternfly/react-core';
 
 import { Routes } from '../Routes';
-import RageTater from '../../static/images/awx-spud.gif';
+import Logo from '../../static/images/galaxy_logo.svg';
 import { Paths } from '../paths';
 
 interface IProps {
@@ -38,8 +37,7 @@ class App extends React.Component<IProps> {
       <PageHeader
         logo={
           <React.Fragment>
-            <img style={{ height: '50px' }} src={RageTater} alt='AWX Spud' />
-            Automation Hub
+            <img style={{ height: '35px' }} src={Logo} alt='Galaxy Logo' />
           </React.Fragment>
         }
         toolbar='Toolbar'

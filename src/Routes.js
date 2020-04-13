@@ -21,117 +21,117 @@ import { Constants } from './constants';
  *
  */
 const EditNamespace = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "namespace_detail" */
-        './containers/edit-namespace/namespace-form'
-    ),
+  import(
+    /* webpackChunkName: "namespace_detail" */
+    './containers/edit-namespace/namespace-form'
+  ),
 );
 
 const CollectionDetail = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "collection_detail" */
-        './containers/collection-detail/collection-detail'
-    ),
+  import(
+    /* webpackChunkName: "collection_detail" */
+    './containers/collection-detail/collection-detail'
+  ),
 );
 
 const CollectionContent = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "collection_detail" */
-        './containers/collection-detail/collection-content'
-    ),
+  import(
+    /* webpackChunkName: "collection_detail" */
+    './containers/collection-detail/collection-content'
+  ),
 );
 
 const CollectionDocs = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "collection_detail" */
-        './containers/collection-detail/collection-docs'
-    ),
+  import(
+    /* webpackChunkName: "collection_detail" */
+    './containers/collection-detail/collection-docs'
+  ),
 );
 
 const CollectionImportLog = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "collection_detail" */
-        './containers/collection-detail/collection-import-log'
-    ),
+  import(
+    /* webpackChunkName: "collection_detail" */
+    './containers/collection-detail/collection-import-log'
+  ),
 );
 
 const NotFound = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "not_found" */
-        './containers/not-found/not-found'
-    ),
+  import(
+    /* webpackChunkName: "not_found" */
+    './containers/not-found/not-found'
+  ),
 );
 
 const MyNamespaces = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "namespace_list" */
-        './containers/namespace-list/my-namespaces'
-    ),
+  import(
+    /* webpackChunkName: "namespace_list" */
+    './containers/namespace-list/my-namespaces'
+  ),
 );
 
 const ManageNamespace = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "namespace_detail" */
-        './containers/namespace-detail/manage-namespace'
-    ),
+  import(
+    /* webpackChunkName: "namespace_detail" */
+    './containers/namespace-detail/manage-namespace'
+  ),
 );
 
 const PartnerDetail = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "namespace_detail" */
-        './containers/namespace-detail/partner-detail'
-    ),
+  import(
+    /* webpackChunkName: "namespace_detail" */
+    './containers/namespace-detail/partner-detail'
+  ),
 );
 
 const Partners = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "namespace_list" */
-        './containers/namespace-list/partners'
-    ),
+  import(
+    /* webpackChunkName: "namespace_list" */
+    './containers/namespace-list/partners'
+  ),
 );
 
 const MyImports = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "my_imports" */
-        './containers/my-imports/my-imports'
-    ),
+  import(
+    /* webpackChunkName: "my_imports" */
+    './containers/my-imports/my-imports'
+  ),
 );
 
 const Search = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "search" */
-        './containers/search/search'
-    ),
+  import(
+    /* webpackChunkName: "search" */
+    './containers/search/search'
+  ),
 );
 
 const TokenPage = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "settings" */
-        './containers/token/token'
-    ),
+  import(
+    /* webpackChunkName: "settings" */
+    './containers/token/token'
+  ),
 );
 
 const CertificationDashboard = asyncComponent(() =>
-    import(
-        /* webpackChunkName: "settings" */
-        './containers/certification-dashboard/certification-dashboard'
-    ),
+  import(
+    /* webpackChunkName: "settings" */
+    './containers/certification-dashboard/certification-dashboard'
+  ),
 );
 
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-        const root = document.getElementById('root');
-        root.removeAttribute('class');
-        root.classList.add(`page__${rootClass}`, 'pf-c-page__main');
-        root.setAttribute('role', 'main');
-    }
+  if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
+    const root = document.getElementById('root');
+    root.removeAttribute('class');
+    root.classList.add(`page__${rootClass}`, 'pf-c-page__main');
+    root.setAttribute('role', 'main');
+  }
 
-    return <Route {...rest} component={Component} />;
+  return <Route {...rest} component={Component} />;
 };
 
 InsightsRoute.propTypes = {
-    component: PropTypes.func,
-    rootClass: PropTypes.string,
+  component: PropTypes.func,
+  rootClass: PropTypes.string,
 };
 
 /**
@@ -143,98 +143,92 @@ InsightsRoute.propTypes = {
  *      component - component to be rendered when a route has been chosen.
  */
 export const Routes = props => {
-    const path = props.childProps.location.pathname;
+  const path = props.childProps.location.pathname;
 
-    return (
-        <Switch>
-            <InsightsRoute
-                path={Paths.certificationDashboard}
-                component={CertificationDashboard}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.notFound}
-                component={NotFound}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.token}
-                component={TokenPage}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.partners}
-                component={Partners}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.editNamespace}
-                component={EditNamespace}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.myCollections}
-                component={ManageNamespace}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.myNamespaces}
-                component={MyNamespaces}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.collectionDocsPage}
-                component={CollectionDocs}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.collectionDocsIndex}
-                component={CollectionDocs}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.collectionContentDocs}
-                component={CollectionDocs}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.collectionContentList}
-                component={CollectionContent}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.collectionImportLog}
-                component={CollectionImportLog}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.myImports}
-                component={MyImports}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.collection}
-                component={CollectionDetail}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.namespace}
-                component={PartnerDetail}
-                rootClass='root'
-            />
-            <InsightsRoute
-                path={Paths.search}
-                component={Search}
-                rootClass='root'
-            />
-            {/* Finally, catch all unmatched routes */}
-            <Route
-                render={() =>
-                    some(Paths, p => p === path) ? null : (
-                        <Redirect to={Paths.notFound} />
-                    )
-                }
-            />
-        </Switch>
-    );
+  return (
+    <Switch>
+      <InsightsRoute
+        path={Paths.certificationDashboard}
+        component={CertificationDashboard}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.notFound}
+        component={NotFound}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.token}
+        component={TokenPage}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.partners}
+        component={Partners}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.editNamespace}
+        component={EditNamespace}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.myCollections}
+        component={ManageNamespace}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.myNamespaces}
+        component={MyNamespaces}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionDocsPage}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionDocsIndex}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionContentDocs}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionContentList}
+        component={CollectionContent}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionImportLog}
+        component={CollectionImportLog}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.myImports}
+        component={MyImports}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collection}
+        component={CollectionDetail}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.namespace}
+        component={PartnerDetail}
+        rootClass='root'
+      />
+      <InsightsRoute path={Paths.search} component={Search} rootClass='root' />
+      {/* Finally, catch all unmatched routes */}
+      <Route
+        render={() =>
+          some(Paths, p => p === path) ? null : <Redirect to={Paths.notFound} />
+        }
+      />
+    </Switch>
+  );
 };
