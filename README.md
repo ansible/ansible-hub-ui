@@ -8,14 +8,16 @@ This app can be developed in standalone mode or insights mode. Insights mode com
 
 ### Develop in Standalone Mode
 
-To enable standalone mode set `DEPLOYMENT_MODE: 'standalone'` in [custom.dev.config.js](./custom.dev.config.js). Additionally you may need to specify `API_HOST` and `API_BASE_PATH` to match the location of your galaxy API server.
+1. Clone the [galaxy_ng](https://github.com/ansible/galaxy_ng) repo and follow the instructions for starting up the API.
+2. Install node. Node v13+ are known to work. Older versions may work as well.
+3. `npm install`
+4. `npm run start-standalone`
 
-Once standalone mode is configured, open a new terminal, navigate to your local copy of `ansible-hub-ui` and execute
-
-1. `npm install`
-2. `npm run start`
+The app will run on http://localhost:8002 and proxy requests for `api/automation-hub` to the api on `http://localhost:5001`.
 
 ### Develop in Insights Mode
+
+**NOTE:** This option is only available to Red Hat employees who have access to the Red Hat VPN. Community contributors should follow setup for [standalone mode](#develop-in-standalone-mode)
 
 To enable insights mode set `DEPLOYMENT_MODE: 'insights'` in [custom.dev.config.js](./custom.dev.config.js).
 
@@ -80,7 +82,7 @@ To access the app, visit: https://ci.foo.redhat.com:1337/insights/automation-hub
 ### How it works
 
 - any push to the `{REPO}` `master` branch will deploy to a `{REPO}-build` `ci-beta` branch
-- any push to the `{REPO}` `ci-stable` branch will deploy to a `{REPO}-build` `ci-stable` branch
+- any push to the `{REPO}` `master-stable` branch will deploy to a `{REPO}-build` `ci-stable` branch
 - any push to the `{REPO}` `qa-beta` branch will deploy to a `{REPO}-build` `qa-beta` branch
 - any push to the `{REPO}` `qa-stable` branch will deploy to a `{REPO}-build` `qa-stable` branch
 - any push to the `{REPO}` `prod-beta` branch will deploy to a `{REPO}-build` `prod-beta` branch
