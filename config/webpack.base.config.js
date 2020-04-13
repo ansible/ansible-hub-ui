@@ -85,7 +85,7 @@ module.exports = inputConfigs => {
     console.log('Overriding configs for standalone mode.');
 
     const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
-    const newPubPath = '';
+    const newPubPath = '/';
     console.log(`New entry.App: ${newEntry}`);
     console.log(`New output.publicPath: ${newPubPath}`);
 
