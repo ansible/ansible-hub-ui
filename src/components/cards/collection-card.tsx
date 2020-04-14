@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  Badge,
   Card,
   CardHead,
   CardBody,
@@ -10,8 +11,6 @@ import {
 } from '@patternfly/react-core';
 
 import { Link } from 'react-router-dom';
-
-import { CertificateIcon } from '@patternfly/react-icons';
 
 import { NumericLabel, Logo } from '../../components';
 import { CollectionListType, CertificationStatus } from '../../api';
@@ -42,7 +41,7 @@ export class CollectionCard extends React.Component<IProps> {
           <TextContent>
             {latest_version.certification === CertificationStatus.certified && (
               <Text component={TextVariants.small}>
-                <CertificateIcon className='icon' /> Certified
+                <Badge isRead>Certified</Badge>
               </Text>
             )}
           </TextContent>
