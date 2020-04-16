@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import * as moment from 'moment';
 
 import { Paths, formatPath } from '../../paths';
-import { NumericLabel, Tag, Logo, DeprecatedTag } from '../../components';
+import { NumericLabel, Tag, Logo, Sync, DeprecatedTag } from '../../components';
 import { CollectionListType } from '../../api';
 import { convertContentSummaryCounts } from '../../utilities';
 
@@ -90,6 +90,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
 
     cells.push(
       <DataListCell isFilled={false} alignRight key='stats'>
+        <Sync collection={name} namespace={namespace.name} />
         {controls ? <div className='entry'>{controls}</div> : null}
         {
           // <div className='right-col entry'>

@@ -13,7 +13,7 @@ import {
 
 import { Link } from 'react-router-dom';
 
-import { NumericLabel, Logo } from '../../components';
+import { NumericLabel, Logo, Sync } from '../../components';
 import { CollectionListType, CertificationStatus } from '../../api';
 import { formatPath, Paths } from '../../paths';
 import { convertContentSummaryCounts } from '../../utilities';
@@ -67,10 +67,13 @@ export class CollectionCard extends React.Component<IProps> {
         <CardBody className='description'>
           {this.getDescription(latest_version.metadata.description)}
         </CardBody>
-        <CardFooter className='type-container'>
+        <CardBody className='type-container'>
           {Object.keys(contentSummary.contents).map(k =>
             this.renderTypeCount(k, contentSummary.contents[k]),
           )}
+        </CardBody>
+        <CardFooter className='sync-switch-card'>
+          <Sync collection={name} namespace={namespace.name} />
         </CardFooter>
       </Card>
     );
