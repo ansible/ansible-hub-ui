@@ -26,6 +26,7 @@ const defaultConfigs = [
   { name: 'TARGET_ENVIRONMENT', default: 'prod', scope: 'webpack' },
   { name: 'UI_PORT', default: 8002, scope: 'webpack' },
   { name: 'WEBPACK_PROXY', default: undefined, scope: 'webpack' },
+  { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
 ];
 
 module.exports = inputConfigs => {
@@ -81,16 +82,18 @@ module.exports = inputConfigs => {
     newWebpackConfig.devServer.proxy = customConfigs.WEBPACK_PROXY;
   }
 
+  if (customConfigs.WEBPACK_PUBLIC_PATH) {
+    console.log(`New output.publicPath: ${customConfigs.WEBPACK_PUBLIC_PATH}`);
+    newWebpackConfig.output.publicPath = customConfigs.WEBPACK_PUBLIC_PATH;
+  }
+
   if (customConfigs.DEPLOYMENT_MODE === 'standalone') {
     console.log('Overriding configs for standalone mode.');
 
     const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
     const newPubPath = '/';
     console.log(`New entry.App: ${newEntry}`);
-    console.log(`New output.publicPath: ${newPubPath}`);
-
     newWebpackConfig.entry.App = newEntry;
-    newWebpackConfig.output.publicPath = newPubPath;
   }
 
   plugins.push(new webpack.DefinePlugin(globals));
