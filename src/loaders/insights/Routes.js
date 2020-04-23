@@ -19,6 +19,13 @@ import { Paths } from 'src/paths';
  *         see the difference with DashboardMap and InventoryDeployments.
  *
  */
+const MaintenancePage = asyncComponent(() =>
+  import(
+    /* webpackChunkName: "namespace_detail" */
+    './containers/maintenance/maintenance-page'
+  ),
+);
+
 const EditNamespace = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_detail" */
@@ -148,6 +155,8 @@ InsightsRoute.propTypes = {
  */
 export const Routes = props => {
   const path = props.childProps.location.pathname;
+
+  return <MaintenancePage></MaintenancePage>;
 
   return (
     <Switch>
