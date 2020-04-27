@@ -161,27 +161,17 @@ class CollectionDocs extends React.Component<
                   // if plugin data is set render it
                   <RenderPluginDoc
                     plugin={pluginData}
-                    renderModuleLink={moduleName => (
-                      <Link
-                        to={formatPath(
-                          Paths.collectionContentDocs,
-                          {
-                            namespace: collection.namespace.name,
-                            collection: collection.name,
-                            type: 'module',
-                            name: moduleName,
-                          },
-                          params,
-                        )}
-                      >
-                        {moduleName}
-                      </Link>
-                    )}
-                    renderDocLink={(name, href) => (
-                      <a href={href} target='_blank'>
-                        {name}
-                      </a>
-                    )}
+                    renderModuleLink={moduleName =>
+                      this.renderModuleLink(
+                        moduleName,
+                        collection,
+                        params,
+                        collection.latest_version.contents,
+                      )
+                    }
+                    renderDocLink={(name, href) =>
+                      this.renderDocLink(name, href, collection, params)
+                    }
                     renderTableOfContentsLink={(title, section) => (
                       <HashLink to={'#' + section}>{title}</HashLink>
                     )}
@@ -198,6 +188,62 @@ class CollectionDocs extends React.Component<
         </Main>
       </React.Fragment>
     );
+  }
+
+  private renderDocLink(name, href, collection, params) {
+    if (href.startsWith('http')) {
+      return (
+        <a href={href} target='_blank'>
+          {name}
+        </a>
+      );
+    } else {
+      // TODO: right now this will break if people put
+      // ../ at the front of their urls. Need to find a
+      // way to document this
+      return (
+        <Link
+          to={formatPath(
+            Paths.collectionDocsPage,
+            {
+              namespace: collection.namespace.name,
+              collection: collection.name,
+              page: sanitizeDocsUrls(href),
+            },
+            params,
+          )}
+        >
+          {name}
+        </Link>
+      );
+    }
+  }
+
+  private renderModuleLink(moduleName, collection, params, allContent) {
+    const module = allContent.find(
+      x => x.content_type === 'module' && x.name === moduleName,
+    );
+
+    if (module) {
+      return (
+        <Link
+          to={formatPath(
+            Paths.collectionContentDocs,
+            {
+              namespace: collection.namespace.name,
+              collection: collection.name,
+              type: 'module',
+              name: moduleName,
+            },
+            params,
+          )}
+        >
+          {moduleName}
+        </Link>
+      );
+    } else {
+      return moduleName;
+    }
   }
 
   private renderNotFound(collectionName) {
