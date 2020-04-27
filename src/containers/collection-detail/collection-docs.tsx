@@ -1,8 +1,9 @@
 import * as React from 'react';
 import './collection-detail.scss';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
+import { HashLink } from 'react-router-hash-link';
 
 import {
   EmptyState,
@@ -10,6 +11,7 @@ import {
   EmptyStateVariant,
   Title,
   EmptyStateIcon,
+  Alert,
 } from '@patternfly/react-core';
 
 import { WarningTriangleIcon } from '@patternfly/react-icons';
@@ -17,10 +19,13 @@ import { WarningTriangleIcon } from '@patternfly/react-icons';
 import {
   CollectionHeader,
   TableOfContents,
-  RenderPluginDoc,
+  // RenderPluginDoc,
   LoadingPageWithHeader,
   Main,
 } from '../../components';
+
+import { RenderPluginDoc } from 'ansible-react-doc';
+
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
@@ -142,13 +147,12 @@ class CollectionDocs extends React.Component<
               selectedType={contentType}
               params={params}
             ></TableOfContents>
-            <div className='body docs' ref={this.docsRef}>
+            <div className='body docs pf-c-content' ref={this.docsRef}>
               {displayHTML || pluginData ? (
                 // if neither variable is set, render not found
                 displayHTML ? (
                   // if displayHTML is set, render it
                   <div
-                    className='pf-c-content'
                     dangerouslySetInnerHTML={{
                       __html: displayHTML,
                     }}
@@ -157,10 +161,33 @@ class CollectionDocs extends React.Component<
                   // if plugin data is set render it
                   <RenderPluginDoc
                     plugin={pluginData}
-                    collectionName={collection.name}
-                    namespaceName={collection.namespace.name}
-                    allContent={collection.latest_version.contents}
-                    params={params}
+                    renderModuleLink={moduleName => (
+                      <Link
+                        to={formatPath(
+                          Paths.collectionContentDocs,
+                          {
+                            namespace: collection.namespace.name,
+                            collection: collection.name,
+                            type: 'module',
+                            name: moduleName,
+                          },
+                          params,
+                        )}
+                      >
+                        {moduleName}
+                      </Link>
+                    )}
+                    renderDocLink={(name, href) => (
+                      <a href={href} target='_blank'>
+                        {name}
+                      </a>
+                    )}
+                    renderTableOfContentsLink={(title, section) => (
+                      <HashLink to={'#' + section}>{title}</HashLink>
+                    )}
+                    renderWarning={text => (
+                      <Alert isInline variant='warning' title={text} />
+                    )}
                   />
                 )
               ) : (
