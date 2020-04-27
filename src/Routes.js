@@ -20,13 +20,6 @@ import { Constants } from './constants';
  *         see the difference with DashboardMap and InventoryDeployments.
  *
  */
-const MaintenancePage = asyncComponent(() =>
-  import(
-    /* webpackChunkName: "namespace_detail" */
-    './containers/maintenance/maintenance-page'
-  ),
-);
-
 const EditNamespace = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_detail" */
@@ -153,90 +146,89 @@ export const Routes = props => {
   const path = props.childProps.location.pathname;
 
   return (
-    <MaintenancePage></MaintenancePage>
-    // <Switch>
-    //   <InsightsRoute
-    //     path={Paths.certificationDashboard}
-    //     component={CertificationDashboard}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.notFound}
-    //     component={NotFound}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.token}
-    //     component={TokenPage}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.partners}
-    //     component={Partners}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.editNamespace}
-    //     component={EditNamespace}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.myCollections}
-    //     component={ManageNamespace}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.myNamespaces}
-    //     component={MyNamespaces}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.collectionDocsPage}
-    //     component={CollectionDocs}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.collectionDocsIndex}
-    //     component={CollectionDocs}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.collectionContentDocs}
-    //     component={CollectionDocs}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.collectionContentList}
-    //     component={CollectionContent}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.collectionImportLog}
-    //     component={CollectionImportLog}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.myImports}
-    //     component={MyImports}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.collection}
-    //     component={CollectionDetail}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute
-    //     path={Paths.namespace}
-    //     component={PartnerDetail}
-    //     rootClass='root'
-    //   />
-    //   <InsightsRoute path={Paths.search} component={Search} rootClass='root' />
-    //   {/* Finally, catch all unmatched routes */}
-    //   <Route
-    //     render={() =>
-    //       some(Paths, p => p === path) ? null : <Redirect to={Paths.notFound} />
-    //     }
-    //   />
-    // </Switch>
+    <Switch>
+      <InsightsRoute
+        path={Paths.certificationDashboard}
+        component={CertificationDashboard}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.notFound}
+        component={NotFound}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.token}
+        component={TokenPage}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.partners}
+        component={Partners}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.editNamespace}
+        component={EditNamespace}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.myCollections}
+        component={ManageNamespace}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.myNamespaces}
+        component={MyNamespaces}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionDocsPage}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionDocsIndex}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionContentDocs}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionContentList}
+        component={CollectionContent}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionImportLog}
+        component={CollectionImportLog}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.myImports}
+        component={MyImports}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collection}
+        component={CollectionDetail}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.namespace}
+        component={PartnerDetail}
+        rootClass='root'
+      />
+      <InsightsRoute path={Paths.search} component={Search} rootClass='root' />
+      {/* Finally, catch all unmatched routes */}
+      <Route
+        render={() =>
+          some(Paths, p => p === path) ? null : <Redirect to={Paths.notFound} />
+        }
+      />
+    </Switch>
   );
 };
