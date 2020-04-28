@@ -8,7 +8,7 @@ module.exports = webpackBase({
   API_BASE_PATH: '/api/automation-hub/',
 
   // Path on the host where the UI is found. EX: /apps/automation-hub
-  UI_BASE_PATH: '',
+  UI_BASE_PATH: '/ui/',
 
   // Port that the UI is served over
   UI_PORT: 8002,

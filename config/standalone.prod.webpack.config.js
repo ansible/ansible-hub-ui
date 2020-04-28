@@ -4,7 +4,7 @@ const webpackBase = require('./webpack.base.config');
 module.exports = webpackBase({
   API_HOST: '',
   API_BASE_PATH: '/api/automation-hub/',
-  UI_BASE_PATH: '',
+  UI_BASE_PATH: '/ui/',
   DEPLOYMENT_MODE: 'standalone',
   UI_USE_HTTPS: false,
   UI_DEBUG: false,
