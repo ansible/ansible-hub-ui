@@ -24,7 +24,7 @@ import {
   Main,
 } from '../../components';
 
-import { RenderPluginDoc } from 'ansible-react-doc';
+import { RenderPluginDoc } from 'galaxy-doc-builder';
 
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
