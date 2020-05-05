@@ -32,6 +32,7 @@ import {
   Main,
   Sort,
   SortFieldType,
+  AppliedFilters,
 } from '../../components';
 import {
   CollectionAPI,
@@ -68,14 +69,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
     if (!params['page_size']) {
       params['page_size'] = Constants.CARD_DEFAULT_PAGE_SIZE;
-    }
-
-    if (!params['tag']) {
-      params['tag'] = [];
-    }
-
-    if (!params['sync']) {
-      params['sync'] = ['Sync on'];
     }
 
     // Load view type from local storage if it's not set. This allows a
@@ -122,127 +115,104 @@ class Search extends React.Component<RouteComponentProps, IState> {
     return (
       <React.Fragment>
         <BaseHeader className='header' title='Collections'>
-          <div className='toolbar'>
-            <Toolbar>
-              <ToolbarGroup>
-                <ToolbarItem>
-                  <CompoundFilter
-                    updateParams={p =>
-                      this.updateParams(p, () => this.queryCollections())
-                    }
-                    params={params}
-                    filterConfig={[
-                      {
-                        id: 'collection',
-                        title: 'Collection',
-                      },
-                      {
-                        id: 'tag',
-                        title: 'Tag',
-                        inputType: 'multiple',
-                        options: this.tags.map(tag => ({
-                          id: tag,
-                          title: tag[0].toUpperCase() + tag.slice(1),
-                        })),
-                      },
-                      {
-                        id: 'sync',
-                        title: 'Sync status',
-                        inputType: 'multiple',
-                        options: [
-                          {
-                            id: 'on',
-                            title: 'Sync on',
-                          },
-                          {
-                            id: 'off',
-                            title: 'Sync off',
-                          },
-                        ],
-                      },
-                    ]}
-                  />
-                </ToolbarItem>
-              </ToolbarGroup>
-              <ToolbarGroup>
-                <ToolbarItem>
-                  <Sort
-                    options={sortOptions}
-                    params={params}
-                    updateParams={p =>
-                      this.updateParams(p, () => this.queryCollections())
-                    }
-                  />
-                </ToolbarItem>
-              </ToolbarGroup>
-            </Toolbar>
-
-            <div className='pagination-container'>
-              <div className='card-list-switcher'>
-                <CardListSwitcher
-                  size='sm'
-                  params={params}
-                  updateParams={p =>
-                    this.updateParams(p, () =>
-                      // Note, we have to use this.state.params instead
-                      // of params in the callback because the callback
-                      // executes before the page can re-run render
-                      // which means params doesn't contain the most
-                      // up to date state
-                      localStorage.setItem(
-                        Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-                        this.state.params.view_type,
-                      ),
-                    )
-                  }
-                />
-              </div>
-
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
-                count={numberOfResults}
-                perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
-                isTop
-              />
-            </div>
-          </div>
-
-          {this.anyFilterApplied() && (
+          <div className='toolbar-wrapper'>
             <div className='toolbar'>
               <Toolbar>
                 <ToolbarGroup>
-                  <ChipGroup withToolbar>
-                    <ChipGroupToolbarItem key={'Tags'} categoryName={'Tags'}>
-                      {this.state.params.tag.map(chip => (
-                        <Chip
-                          key={chip}
-                          onClick={() => this.deleteItem('tag', chip)}
-                        >
-                          {chip}
-                        </Chip>
-                      ))}
-                    </ChipGroupToolbarItem>
-                    <ChipGroupToolbarItem key={'Sync'} categoryName={'Sync'}>
-                      {this.state.params.sync.map(chip => (
-                        <Chip
-                          key={chip}
-                          onClick={() => this.deleteItem('sync', chip)}
-                        >
-                          {chip}
-                        </Chip>
-                      ))}
-                    </ChipGroupToolbarItem>
-                  </ChipGroup>
+                  <ToolbarItem>
+                    <CompoundFilter
+                      updateParams={p =>
+                        this.updateParams(p, () => this.queryCollections())
+                      }
+                      params={params}
+                      filterConfig={[
+                        {
+                          id: 'collection',
+                          title: 'Collection',
+                        },
+                        {
+                          id: 'tag',
+                          title: 'Tag',
+                          inputType: 'multiple',
+                          options: this.tags.map(tag => ({
+                            id: tag,
+                            title: tag[0].toUpperCase() + tag.slice(1),
+                          })),
+                        },
+                        {
+                          id: 'sync',
+                          title: 'Sync status',
+                          inputType: 'multiple',
+                          options: [
+                            {
+                              id: 'on',
+                              title: 'Sync on',
+                            },
+                            {
+                              id: 'off',
+                              title: 'Sync off',
+                            },
+                          ],
+                        },
+                      ]}
+                    />
+                  </ToolbarItem>
                 </ToolbarGroup>
-                <Button variant='link' isInline onClick={this.clearSelection}>
-                  Clear filters
-                </Button>
+                <ToolbarGroup>
+                  <ToolbarItem>
+                    <Sort
+                      options={sortOptions}
+                      params={params}
+                      updateParams={p =>
+                        this.updateParams(p, () => this.queryCollections())
+                      }
+                    />
+                  </ToolbarItem>
+                </ToolbarGroup>
               </Toolbar>
+
+              <div className='pagination-container'>
+                <div className='card-list-switcher'>
+                  <CardListSwitcher
+                    size='sm'
+                    params={params}
+                    updateParams={p =>
+                      this.updateParams(p, () =>
+                        // Note, we have to use this.state.params instead
+                        // of params in the callback because the callback
+                        // executes before the page can re-run render
+                        // which means params doesn't contain the most
+                        // up to date state
+                        localStorage.setItem(
+                          Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
+                          this.state.params.view_type,
+                        ),
+                      )
+                    }
+                  />
+                </div>
+
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryCollections())
+                  }
+                  count={numberOfResults}
+                  perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+                  isTop
+                />
+              </div>
             </div>
-          )}
+            <div className='applied-filters'>
+              <AppliedFilters
+                updateParams={p =>
+                  this.updateParams(p, () => this.queryCollections())
+                }
+                params={params}
+                ignoredParams={['page_size', 'page', 'sort', 'view_type']}
+              />
+            </div>
+          </div>
         </BaseHeader>
         <Main>
           <Section className='collection-container'>
@@ -337,35 +307,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
       });
     });
   }
-
-  private deleteItem = (category, id) => {
-    const copyOfParams = Object.assign([], this.state.params);
-    const index = copyOfParams[category].indexOf(id);
-    copyOfParams[category].splice(index, 1);
-    this.setState({
-      params: copyOfParams,
-    });
-    this.updateParams(this.state.params, () => this.queryCollections());
-  };
-
-  private anyFilterApplied = () => {
-    if (
-      (typeof this.state.params['tag'] !== 'undefined' &&
-        this.state.params['tag'].length > 0) ||
-      (typeof this.state.params['sync'] !== 'undefined' &&
-        this.state.params['sync'].length > 0)
-    ) {
-      return true;
-    }
-    return false;
-  };
-
-  private clearSelection = () => {
-    const params = Object.assign({}, this.state.params);
-    params['tag'] = [];
-    params['sync'] = [];
-    this.updateParams(params, () => this.queryCollections());
-  };
 
   private get updateParams() {
     return ParamHelper.updateParamsMixin();

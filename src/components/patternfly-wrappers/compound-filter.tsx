@@ -55,8 +55,8 @@ export class CompoundFilter extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { params, filterConfig } = this.props;
-    const { selectedFilter, inputText } = this.state;
+    const { filterConfig } = this.props;
+    const { selectedFilter } = this.state;
 
     const filterOptions = filterConfig.map(v => (
       <DropdownItem
@@ -113,7 +113,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
           <Select
             variant={SelectVariant.checkbox}
             onToggle={this.onToggle}
-            onSelect={this.onSelect}
+            onSelect={this.onSelectMultiple}
             isExpanded={this.state.isOpen}
             placeholderText={'Filter by ' + selectedFilter.id}
             selections={this.props.params[this.state.selectedFilter.id]}
@@ -165,24 +165,24 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     }
   }
 
+  private submitMultiple(newValues: string[]) {
+    this.props.updateParams(
+      ParamHelper.setParam(
+        this.props.params,
+        this.state.selectedFilter.id,
+        newValues,
+      ),
+    );
+  }
+
   private submitFilter() {
-    if (this.state.selectedFilter.inputType === 'multiple') {
-      this.props.updateParams(
-        ParamHelper.setParam(
-          this.props.params,
-          this.state.selectedFilter.id,
-          this.props.params[this.state.selectedFilter.id],
-        ),
-      );
-    } else {
-      this.props.updateParams(
-        ParamHelper.setParam(
-          this.props.params,
-          this.state.selectedFilter.id,
-          this.state.inputText,
-        ),
-      );
-    }
+    this.props.updateParams(
+      ParamHelper.setParam(
+        this.props.params,
+        this.state.selectedFilter.id,
+        this.state.inputText,
+      ),
+    );
   }
 
   private onToggle = () => {
@@ -191,23 +191,21 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     });
   };
 
-  private filterApplied = filter => {
-    return this.props.params[this.state.selectedFilter.id].includes(filter);
-  };
+  private onSelectMultiple = event => {
+    let newParams = this.props.params[this.state.selectedFilter.id];
+    if (!newParams) {
+      newParams = [];
+    }
 
-  private onSelect = event => {
-    let selected = event.currentTarget.id;
-    let newSelection = Object.assign({}, this.props.params);
-    if (this.filterApplied(selected)) {
-      const index = newSelection[this.state.selectedFilter.id].indexOf(
-        selected,
-      );
+    const selectedID = event.currentTarget.id;
+    if (newParams.includes(selectedID)) {
+      const index = newParams.indexOf(selectedID);
       if (index > -1) {
-        newSelection[this.state.selectedFilter.id].splice(index, 1);
+        newParams.splice(index, 1);
       }
     } else {
-      newSelection[this.state.selectedFilter.id].push(selected);
+      newParams.push(selectedID);
     }
-    this.submitFilter();
+    this.submitMultiple(newParams);
   };
 }
