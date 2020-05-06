@@ -97,7 +97,10 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     switch (selectedFilter.inputType) {
       case 'multiple':
         const options = selectedFilter.options.map(option => (
-          <SelectOption key={option.id} value={option.title} />
+          // patternfly does not allow for us to set a display name aside from the ID
+          // which unfortunately means that multiple select will ignore the human readable
+          // option.title
+          <SelectOption key={option.id} value={option.id} />
         ));
 
         const toggle = [

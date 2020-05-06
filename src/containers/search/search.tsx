@@ -10,9 +10,6 @@ import {
   Title,
   Toolbar,
   ToolbarGroup,
-  Chip,
-  ChipGroup,
-  ChipGroupToolbarItem,
   ToolbarItem,
   EmptyStateBody,
   EmptyStateVariant,
@@ -49,7 +46,7 @@ interface IState {
     page?: number;
     page_size?: number;
     keywords?: string;
-    tag?: string[];
+    tags?: string[];
     sync?: string[];
     view_type?: string;
   };
@@ -131,7 +128,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
                           title: 'Collection',
                         },
                         {
-                          id: 'tag',
+                          id: 'tags',
                           title: 'Tag',
                           inputType: 'multiple',
                           options: this.tags.map(tag => ({
