@@ -47,7 +47,6 @@ interface IState {
     page_size?: number;
     keywords?: string;
     tags?: string[];
-    sync?: string[];
     view_type?: string;
   };
   loading: boolean;
@@ -82,8 +81,16 @@ class Search extends React.Component<RouteComponentProps, IState> {
       numberOfResults: 0,
       loading: true,
     };
+  }
 
-    this.tags = [
+  componentDidMount() {
+    this.queryCollections();
+  }
+
+  render() {
+    const { collections, params, numberOfResults, loading } = this.state;
+
+    const tags = [
       'cloud',
       'linux',
       'network',
@@ -96,14 +103,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
       'database',
       'application',
     ];
-  }
-
-  componentDidMount() {
-    this.queryCollections();
-  }
-
-  render() {
-    const { collections, params, numberOfResults, loading } = this.state;
 
     const sortOptions: SortFieldType[] = [
       { id: 'name', title: 'Collection name', type: 'alpha' },
@@ -133,23 +132,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
                           inputType: 'multiple',
                           options: this.tags.map(tag => ({
                             id: tag,
-                            title: tag[0].toUpperCase() + tag.slice(1),
+                            title: tag,
                           })),
-                        },
-                        {
-                          id: 'sync',
-                          title: 'Sync status',
-                          inputType: 'multiple',
-                          options: [
-                            {
-                              id: 'on',
-                              title: 'Sync on',
-                            },
-                            {
-                              id: 'off',
-                              title: 'Sync off',
-                            },
-                          ],
                         },
                       ]}
                     />
