@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 
 interface IProps {
+  /** List of links to display in the breadcrumb */
   links: {
     name: string;
     url?: string;

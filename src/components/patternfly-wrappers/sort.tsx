@@ -18,9 +18,16 @@ export class SortFieldType {
 }
 
 interface IProps {
+  /** List of sort options that the user can pick from */
   options: SortFieldType[];
+
+  /** Current page params */
   params: object;
+
+  /** Sets the current page params to p */
   updateParams: (params) => void;
+
+  /** Specify the name of the parameter that contains sort information */
   sortParamName?: string;
 }
 

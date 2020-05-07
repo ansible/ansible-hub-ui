@@ -5,14 +5,26 @@ import {
   DropdownPosition,
   KebabToggle,
   DropdownToggle,
+  DropdownItem,
 } from '@patternfly/react-core';
 
 interface IProps {
+  /** List of patternfly DropdownItem components */
   items: React.ReactNodeArray;
+
+  /** Callback fired when the user selects an item */
   onSelect?: (event) => void;
+
+  /** If not specified, dropdown button will be a kebab */
   toggleType?: string;
+
+  /** Text to display on the component when it's not expanded*/
   defaultText?: React.ReactNode;
+
+  /** Specifies if the dropdown should be aligned to the left or the right of the toggle button*/
   position?: 'left' | 'right';
+
+  /** Toggles between plain and normal patternfly styling */
   isPlain?: boolean;
 }
 

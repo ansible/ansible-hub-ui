@@ -9,14 +9,25 @@ import { Constants } from '../../constants';
 import { ParamHelper } from '../../utilities/param-helper';
 
 interface IProps {
+  /** Number of total items returned by the query */
   count: number;
+
+  /** Current page params **/
   params: {
     page_size?: number;
     page?: number;
   };
+
+  /** Sets the current page params to p */
   updateParams: (params) => void;
+
+  /** Applies the correct styling for pagination at the top of the page*/
   isTop?: boolean;
+
+  /** Applies styling to make pagination compact */
   isCompact?: boolean;
+
+  /** Options for the number of items that can be displayed per page */
   perPageOptions?: number[];
 }
 

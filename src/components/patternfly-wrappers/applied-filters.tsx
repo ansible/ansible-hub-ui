@@ -10,12 +10,19 @@ import {
 import { ParamHelper } from '../../utilities';
 
 interface IProps {
+  /** Sets the current page params to p */
   updateParams: (p) => void;
+
+  /** Current page params */
   params: object;
+
+  /** A list of params that shouldn't get displayed */
   ignoredParams?: string[];
 
-  // If k from param[k] is in nice names, use niceNames[k] instead of k
-  // when displaying the param field name
+  /**
+   * If k from param[k] is in nice names, use niceNames[k] instead of k
+   * when displaying the param field name
+   */
   niceNames?: object;
 }
 

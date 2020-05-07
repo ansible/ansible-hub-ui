@@ -6,7 +6,10 @@ import {
 } from '@patternfly/react-core';
 
 interface IProps {
+  /** List of alerts to display */
   alerts: AlertType[];
+
+  /** Callback to close the alert at the given index */
   closeAlert: (alertIndex) => void;
 }
 
