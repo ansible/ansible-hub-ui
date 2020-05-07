@@ -118,6 +118,13 @@ const CertificationDashboard = asyncComponent(() =>
   ),
 );
 
+const LoginPage = asyncComponent(() =>
+  import(
+    /* webpackChunkName: "settings" */
+    './containers/login/login'
+  ),
+);
+
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
   if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
     const root = document.getElementById('root');
@@ -180,6 +187,11 @@ export const Routes = props => {
       <InsightsRoute
         path={Paths.myNamespaces}
         component={MyNamespaces}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.login}
+        component={LoginPage}
         rootClass='root'
       />
       <InsightsRoute
