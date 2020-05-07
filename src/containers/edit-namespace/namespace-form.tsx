@@ -12,7 +12,7 @@ import {
   AlertType,
   Main,
 } from '../../components';
-import { MyNamespaceAPI, NamespaceType, ActiveUser } from '../../api';
+import { MyNamespaceAPI, NamespaceType, ActiveUserAPI } from '../../api';
 import { Constants } from '../../constants';
 
 import { Form, ActionGroup, Button } from '@patternfly/react-core';
@@ -62,7 +62,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    ActiveUser.getUser().then(result => {
+    ActiveUserAPI.getUser().then(result => {
       this.setState({ userId: result.account_number }, () =>
         this.loadNamespace(),
       );

@@ -51,4 +51,4 @@ class API extends BaseAPI {
   }
 }
 
-export const ActiveUser = new API();
+export const ActiveUserAPI = new API();
