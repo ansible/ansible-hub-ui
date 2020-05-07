@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Constants } from '../constants';
 import { ParamHelper } from '../utilities';
+import * as Cookies from 'js-cookie';
 
 export class BaseAPI {
   apiBaseURL = API_HOST + API_BASE_PATH;
@@ -8,9 +9,15 @@ export class BaseAPI {
   http: any;
 
   constructor() {
+    let headers = {};
+    if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
+      headers['X-CSRFToken'] = Cookies.get('csrftoken');
+    }
+
     this.http = axios.create({
       baseURL: this.apiBaseURL,
       paramsSerializer: params => ParamHelper.getQueryString(params),
+      headers: headers,
     });
 
     this.http.interceptors.request.use(request => this.authHandler(request));

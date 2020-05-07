@@ -6,7 +6,7 @@
     "private": true,
     "dependencies": {
         "@babel/runtime": "^7.7.2",
-        "@patternfly/patternfly": "^2.40.13",
+        "@patternfly/patternfly": "^2.71.4",
         "@patternfly/react-core": "^3.120.8",
         "@redhat-cloud-services/frontend-components": "^0.0.32",
         "@redhat-cloud-services/frontend-components-utilities": "^0.0.10",
@@ -16,6 +16,7 @@
         "@types/react-router-dom": "^4.3.5",
         "axios": "^0.19.0",
         "classnames": "^2.2.5",
+        "js-cookie": "^2.2.1",
         "moment": "^2.24.0",
         "react": "^16.11.0",
         "react-dom": "^16.11.0",

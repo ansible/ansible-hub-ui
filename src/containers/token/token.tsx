@@ -82,7 +82,9 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
         // the reload
         .doOffline();
     } else {
-      ActiveUser.getToken().then(result => this.setState({ tokenData: result }));
+      ActiveUser.getToken().then(result =>
+        this.setState({ tokenData: result }),
+      );
     }
   }
 }
