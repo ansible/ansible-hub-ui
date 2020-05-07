@@ -55,6 +55,7 @@
         "@babel/preset-flow": "^7.9.0",
         "@babel/preset-react": "^7.9.4",
         "@redhat-cloud-services/frontend-components-config": "0.0.7",
+        "@sambego/storybook-state": "^2.0.1",
         "@storybook/addon-info": "^5.3.18",
         "@storybook/react": "^5.3.18",
         "awesome-typescript-loader": "^5.2.1",

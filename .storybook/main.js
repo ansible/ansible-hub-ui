@@ -4,6 +4,7 @@ const custom = require('../config/webpack-ts-overrides');
 
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
+  addons: ['@sambego/storybook-state'],
   webpackFinal: config => {
     config.module = custom.module;
     config.plugins.push(
