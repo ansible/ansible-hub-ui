@@ -28,7 +28,7 @@ import { DataToolbarItem } from '@patternfly/react-core/dist/esm/experimental';
 import {
   NamespaceAPI,
   NamespaceListType,
-  UserAPI,
+  ActiveUser,
   MeType,
   MyNamespaceAPI,
 } from '../../api';
@@ -262,7 +262,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   private isPartnerEngineer() {
-    UserAPI.isPartnerEngineer().then(response => {
+    ActiveUser.isPartnerEngineer().then(response => {
       const me: MeType = response.data;
       this.setState({ partnerEngineer: me.is_partner_engineer });
     });

@@ -40,6 +40,15 @@ class API extends BaseAPI {
       });
     }
   }
+
+  login(username, password) {
+    // call this to generate more task messages
+    // this.mock.updateImportDetail();
+    return this.http.post('auth/login/', {
+      username: username,
+      password: password,
+    });
+  }
 }
 
-export const UserAPI = new API();
+export const ActiveUser = new API();

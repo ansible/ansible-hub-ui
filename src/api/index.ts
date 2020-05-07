@@ -18,7 +18,7 @@ export {
   ImportMessageCodes,
 } from './response-types/import';
 export { ImportAPI } from './import';
-export { UserAPI } from './user';
+export { ActiveUser } from './user';
 export { UserAuthType, MeType } from './response-types/user';
 export { CollectionVersionAPI } from './collection-version';
 export { MyNamespaceAPI } from './my-namespace';
