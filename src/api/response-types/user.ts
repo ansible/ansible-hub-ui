@@ -1,4 +1,4 @@
-export class UserAuthType {
+export class InsightsUserType {
   account_number: string;
   internal: {
     account_id: number;

@@ -6,7 +6,7 @@ import { ClipboardCopy, Button } from '@patternfly/react-core';
 
 import { BaseHeader, Main } from '../../components';
 import { Constants } from '../../constants';
-import { ActiveUserAPI } from '../../api';
+import { AuthAPI } from '../../api';
 
 interface IState {
   tokenData: {
@@ -82,9 +82,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
         // the reload
         .doOffline();
     } else {
-      ActiveUserAPI.getToken().then(result =>
-        this.setState({ tokenData: result }),
-      );
+      AuthAPI.getToken().then(result => this.setState({ tokenData: result }));
     }
   }
 }

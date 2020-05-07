@@ -20,34 +20,12 @@ class API extends BaseAPI {
           .catch(result => reject(result));
       });
     } else if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      return new Promise((resolve, reject) => {
-        resolve({} as UserAuthType);
-      });
+      return super.list();
     }
   }
 
   isPartnerEngineer() {
     return this.http.get(this.apiPath);
-  }
-
-  // insights has some asinine way of loading tokens that involves forcing the
-  // page to refresh before loading the token that can't be done witha single
-  // API request.
-  getToken(): Promise<any> {
-    if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      return new Promise((resolve, reject) => {
-        resolve({ refresh_token: 'FAKE TEMPORARY TOKEN!!!!' });
-      });
-    }
-  }
-
-  login(username, password) {
-    // call this to generate more task messages
-    // this.mock.updateImportDetail();
-    return this.http.post('auth/login/', {
-      username: username,
-      password: password,
-    });
   }
 }
 
