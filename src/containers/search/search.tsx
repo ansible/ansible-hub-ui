@@ -130,7 +130,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
                           id: 'tags',
                           title: 'Tag',
                           inputType: 'multiple',
-                          options: this.tags.map(tag => ({
+                          options: tags.map(tag => ({
                             id: tag,
                             title: tag,
                           })),
