@@ -13,7 +13,6 @@ interface IState {
   showHelperText: boolean;
   usernameValue: string;
   passwordValue: string;
-  isRememberMeChecked: boolean;
   redirect?: string;
 }
 
@@ -26,14 +25,11 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
       showHelperText: false,
       usernameValue: '',
       passwordValue: '',
-      isRememberMeChecked: false,
     };
 
     const params = ParamHelper.parseParamString(this.props.location.search);
     this.redirectPage = params['next'] || Paths.search;
   }
-
-  componentDidMount() {}
 
   render() {
     if (this.state.redirect) {

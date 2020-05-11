@@ -42,7 +42,7 @@ class App extends React.Component<RouteComponentProps, IState> {
     let dropdownItems = [];
     let userName: string;
 
-    if (this.state.user) {
+    if (user) {
       if (user.first_name || user.last_name) {
         userName = user.first_name + ' ' + user.last_name;
       } else {
@@ -77,7 +77,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         }
         toolbar={
           <div>
-            {!this.state.user ? (
+            {!user ? (
               <Link
                 to={formatPath(
                   Paths.login,
