@@ -7,7 +7,7 @@ import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import Logo from '../../../static/images/galaxy_logo.svg';
 import { ParamHelper } from '../../utilities/';
 import { Paths } from '../../paths';
-import { AuthAPI } from '../../api';
+import { ActiveUserAPI } from '../../api';
 
 interface IState {
   showHelperText: boolean;
@@ -41,10 +41,10 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
     }
 
     const helperText = (
-      <div style={{ color: 'var(--pf-global--danger-color--100)' }}>
+      <span style={{ color: 'var(--pf-global--danger-color--100)' }}>
         <ExclamationCircleIcon />
         {'   '}Invalid login credentials.
-      </div>
+      </span>
     );
     const loginForm = (
       <LoginForm
@@ -82,8 +82,12 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
   //   this.setState({ isRememberMeChecked: !this.state.isRememberMeChecked });
   // };
   private onLoginButtonClick = event => {
-    AuthAPI.login(this.state.usernameValue, this.state.passwordValue)
-      .then(result => this.setState({ redirect: this.redirectPage }))
+    ActiveUserAPI.login(this.state.usernameValue, this.state.passwordValue)
+      .then(result => {
+        ActiveUserAPI.getUser(true).then(() =>
+          this.setState({ redirect: this.redirectPage }),
+        );
+      })
       .catch(result =>
         this.setState({ passwordValue: '', showHelperText: true }),
       );

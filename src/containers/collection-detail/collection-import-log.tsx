@@ -1,13 +1,14 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Main, Section } from '@redhat-cloud-services/frontend-components';
+import { Section } from '@redhat-cloud-services/frontend-components';
 
 import { ImportAPI, ImportDetailType, ImportListType } from '../../api';
 import {
   CollectionHeader,
   LoadingPageWithHeader,
   ImportConsole,
+  Main,
 } from '../../components';
 
 import { loadCollection, IBaseCollectionState } from './base';
