@@ -9,15 +9,9 @@ export class BaseAPI {
   http: any;
 
   constructor() {
-    let headers = {};
-    if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      headers['X-CSRFToken'] = Cookies.get('csrftoken');
-    }
-
     this.http = axios.create({
       baseURL: this.apiBaseURL,
       paramsSerializer: params => ParamHelper.getQueryString(params),
-      headers: headers,
     });
 
     this.http.interceptors.request.use(request => this.authHandler(request));
@@ -54,6 +48,9 @@ export class BaseAPI {
     // to only add ~10ms of latency.
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       await (window as any).insights.chrome.auth.getUser();
+    }
+    if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
+      request.headers['X-CSRFToken'] = Cookies.get('csrftoken');
     }
     return request;
   }
