@@ -8,7 +8,7 @@ class API extends BaseAPI {
     super();
   }
 
-  getUser(forceRefresh = false): Promise<any> {
+  getUser(): Promise<any> {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       return new Promise((resolve, reject) => {
         (window as any).insights.chrome.auth

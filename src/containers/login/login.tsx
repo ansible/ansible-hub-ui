@@ -75,16 +75,15 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
   private handleUsernameChange = value => {
     this.setState({ usernameValue: value });
   };
+
   private handlePasswordChange = passwordValue => {
     this.setState({ passwordValue });
   };
-  // private onRememberMeClick = () => {
-  //   this.setState({ isRememberMeChecked: !this.state.isRememberMeChecked });
-  // };
+
   private onLoginButtonClick = event => {
     ActiveUserAPI.login(this.state.usernameValue, this.state.passwordValue)
       .then(result => {
-        ActiveUserAPI.getUser(true).then(() =>
+        ActiveUserAPI.getUser().then(() =>
           this.setState({ redirect: this.redirectPage }),
         );
       })
