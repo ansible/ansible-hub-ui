@@ -1,10 +1,9 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React from 'react';
-import asyncComponent from './utilities/asyncComponent';
+import asyncComponent from '../../utilities/asyncComponent';
 import some from 'lodash/some';
-import { Paths } from './paths';
-import { Constants } from './constants';
+import { Paths } from '../../paths';
 
 /**
  * Aysnc imports of components
@@ -23,115 +22,106 @@ import { Constants } from './constants';
 const EditNamespace = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_detail" */
-    './containers/edit-namespace/namespace-form'
+    '../../containers/edit-namespace/edit-namespace'
   ),
 );
 
 const CollectionDetail = asyncComponent(() =>
   import(
     /* webpackChunkName: "collection_detail" */
-    './containers/collection-detail/collection-detail'
+    '../../containers/collection-detail/collection-detail'
   ),
 );
 
 const CollectionContent = asyncComponent(() =>
   import(
     /* webpackChunkName: "collection_detail" */
-    './containers/collection-detail/collection-content'
+    '../../containers/collection-detail/collection-content'
   ),
 );
 
 const CollectionDocs = asyncComponent(() =>
   import(
     /* webpackChunkName: "collection_detail" */
-    './containers/collection-detail/collection-docs'
+    '../../containers/collection-detail/collection-docs'
   ),
 );
 
 const CollectionImportLog = asyncComponent(() =>
   import(
     /* webpackChunkName: "collection_detail" */
-    './containers/collection-detail/collection-import-log'
+    '../../containers/collection-detail/collection-import-log'
   ),
 );
 
 const NotFound = asyncComponent(() =>
   import(
     /* webpackChunkName: "not_found" */
-    './containers/not-found/not-found'
+    '../../containers/not-found/not-found'
   ),
 );
 
 const MyNamespaces = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_list" */
-    './containers/namespace-list/my-namespaces'
+    '../../containers/namespace-list/my-namespaces'
   ),
 );
 
 const ManageNamespace = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_detail" */
-    './containers/namespace-detail/manage-namespace'
+    '../../containers/namespace-detail/manage-namespace'
   ),
 );
 
 const PartnerDetail = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_detail" */
-    './containers/namespace-detail/partner-detail'
+    '../../containers/namespace-detail/partner-detail'
   ),
 );
 
 const Partners = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_list" */
-    './containers/namespace-list/partners'
+    '../../containers/namespace-list/partners'
   ),
 );
 
 const MyImports = asyncComponent(() =>
   import(
     /* webpackChunkName: "my_imports" */
-    './containers/my-imports/my-imports'
+    '../../containers/my-imports/my-imports'
   ),
 );
 
 const Search = asyncComponent(() =>
   import(
     /* webpackChunkName: "search" */
-    './containers/search/search'
+    '../../containers/search/search'
   ),
 );
 
 const TokenPage = asyncComponent(() =>
   import(
     /* webpackChunkName: "settings" */
-    './containers/token/token'
+    '../../containers/token/token'
   ),
 );
 
 const CertificationDashboard = asyncComponent(() =>
   import(
     /* webpackChunkName: "settings" */
-    './containers/certification-dashboard/certification-dashboard'
-  ),
-);
-
-const LoginPage = asyncComponent(() =>
-  import(
-    /* webpackChunkName: "settings" */
-    './containers/login/login'
+    '../../containers/certification-dashboard/certification-dashboard'
   ),
 );
 
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
-  if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-    const root = document.getElementById('root');
-    root.removeAttribute('class');
-    root.classList.add(`page__${rootClass}`, 'pf-c-page__main');
-    root.setAttribute('role', 'main');
-  }
+  const root = document.getElementById('root');
+  root.removeAttribute('class');
+  root.classList.add(`page__${rootClass}`, 'pf-c-page__main');
+  root.setAttribute('role', 'main');
 
   return <Route {...rest} component={Component} />;
 };
@@ -187,11 +177,6 @@ export const Routes = props => {
       <InsightsRoute
         path={Paths.myNamespaces}
         component={MyNamespaces}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.login}
-        component={LoginPage}
         rootClass='root'
       />
       <InsightsRoute

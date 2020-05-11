@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Routes } from '../Routes';
-import './app.scss';
+import { Routes } from './Routes';
+import '../app.scss';
 
 class App extends Component {
   firstLoad = true;

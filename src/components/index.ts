@@ -24,9 +24,7 @@ export { CollectionInfo } from './collection-detail/collection-info';
 export { CollectionHeader } from './headers/collection-header';
 export { TableOfContents } from './collection-detail/table-of-contents';
 export { RenderPluginDoc } from './collection-detail/render-plugin-doc';
-export {
-  CollectionContentList,
-} from './collection-detail/collection-content-list';
+export { CollectionContentList } from './collection-detail/collection-content-list';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';
 export { LoadingPageWithHeader } from './loading/loading-with-header';
 export { CompoundFilter } from './patternfly-wrappers/compound-filter';
