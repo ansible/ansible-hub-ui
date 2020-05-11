@@ -33,8 +33,6 @@ class App extends React.Component<RouteComponentProps, IState> {
     };
   }
 
-  // componentDidMount() {}
-
   private setUser = user => {
     this.setState({ user: user });
   };
@@ -123,6 +121,9 @@ class App extends React.Component<RouteComponentProps, IState> {
       />
     );
 
+    // TODO: Provide user and setUser as part of a configuration context when
+    // we have more configurations so that they can be accessd by the rest of the
+    // app
     // Hide navs on login page
     if (this.props.location.pathname === Paths.login) {
       return <Routes user={this.state.user} setUser={this.setUser} />;
@@ -136,7 +137,4 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 }
 
-/**
- * withRouter: https://reacttraining.com/react-router/web/api/withRouter
- */
 export default withRouter(App);
