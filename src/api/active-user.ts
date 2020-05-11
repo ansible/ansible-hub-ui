@@ -1,11 +1,8 @@
-import { UserAuthType } from '../api';
 import { BaseAPI } from './base';
 import { Constants } from '../constants';
 
 class API extends BaseAPI {
   apiPath = 'v3/_ui/me/';
-
-  private userCache: any;
 
   constructor() {
     super();
@@ -23,13 +20,9 @@ class API extends BaseAPI {
       });
     } else if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
       return new Promise((resolve, reject) => {
-        if (this.userCache && !forceRefresh) {
-          resolve(this.userCache);
-        }
         super
           .list()
           .then(result => {
-            this.userCache = result.data;
             resolve(result.data);
           })
           .catch(result => reject(result));
@@ -51,18 +44,14 @@ class API extends BaseAPI {
     return this.http.post('v3/_ui/auth/token/', {});
   }
 
+  // Note: This does not reset the app's authentication state. That has to be done
+  // separately by setting the user state in the app's root component
   logout() {
-    return new Promise((resolve, reject) => {
-      this.http
-        .post('v3/_ui/auth/logout/', {})
-        .then(result => {
-          this.userCache = undefined;
-          resolve(result);
-        })
-        .catch(result => result);
-    });
+    return this.http.post('v3/_ui/auth/logout/', {});
   }
 
+  // Note: This does not reset the app's authentication state. That has to be done
+  // separately by setting the user state in the app's root component
   login(username, password) {
     return this.http.post('v3/_ui/auth/login/', {
       username: username,
