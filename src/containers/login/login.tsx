@@ -10,9 +10,9 @@ import { Paths } from '../../paths';
 import { ActiveUserAPI } from '../../api';
 
 interface IState {
-  showHelperText: boolean;
   usernameValue: string;
   passwordValue: string;
+  errorMessage: string;
   redirect?: string;
 }
 
@@ -22,7 +22,7 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      showHelperText: false,
+      errorMessage: undefined,
       usernameValue: '',
       passwordValue: '',
     };
@@ -39,12 +39,13 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
     const helperText = (
       <span style={{ color: 'var(--pf-global--danger-color--100)' }}>
         <ExclamationCircleIcon />
-        {'   '}Invalid login credentials.
+        {'   '}
+        {this.state.errorMessage}
       </span>
     );
     const loginForm = (
       <LoginForm
-        showHelperText={this.state.showHelperText}
+        showHelperText={!!this.state.errorMessage}
         helperText={helperText}
         usernameLabel='Username'
         usernameValue={this.state.usernameValue}
@@ -79,13 +80,28 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
   private onLoginButtonClick = event => {
     ActiveUserAPI.login(this.state.usernameValue, this.state.passwordValue)
       .then(result => {
-        ActiveUserAPI.getUser().then(() =>
-          this.setState({ redirect: this.redirectPage }),
-        );
+        ActiveUserAPI.getUser()
+          .then(() => this.setState({ redirect: this.redirectPage }))
+          .catch(() =>
+            this.setState({
+              passwordValue: '',
+              errorMessage: 'Failed to retrieve user data.',
+            }),
+          );
       })
-      .catch(result =>
-        this.setState({ passwordValue: '', showHelperText: true }),
-      );
+      .catch(result => {
+        if (result.response.status.toString().startsWith('5')) {
+          this.setState({
+            passwordValue: '',
+            errorMessage: 'Server error. Please come back later.',
+          });
+        } else {
+          this.setState({
+            passwordValue: '',
+            errorMessage: 'Invalid login credentials.',
+          });
+        }
+      });
 
     event.preventDefault();
   };
