@@ -1,4 +1,4 @@
-export class UserAuthType {
+export class InsightsUserAuthType {
   account_number: string;
   internal: {
     account_id: number;
@@ -15,6 +15,16 @@ export class UserAuthType {
     locale: string;
     username: string;
   };
+}
+
+export class UserAuthType {
+  id: number;
+  username: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  groups: { id: number; name: string }[];
+  is_partner_engineer: boolean;
 }
 
 export class MeType {

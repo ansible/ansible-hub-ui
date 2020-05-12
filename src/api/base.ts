@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Constants } from '../constants';
 import { ParamHelper } from '../utilities';
+import * as Cookies from 'js-cookie';
 
 export class BaseAPI {
   apiBaseURL = API_HOST + API_BASE_PATH;
@@ -47,6 +48,9 @@ export class BaseAPI {
     // to only add ~10ms of latency.
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       await (window as any).insights.chrome.auth.getUser();
+    }
+    if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
+      request.headers['X-CSRFToken'] = Cookies.get('csrftoken');
     }
     return request;
   }

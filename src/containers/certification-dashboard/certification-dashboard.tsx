@@ -34,7 +34,7 @@ import {
   CollectionVersionAPI,
   CollectionVersion,
   CertificationStatus,
-  UserAPI,
+  ActiveUserAPI,
   MeType,
 } from '../../api';
 import { ParamHelper } from '../../utilities';
@@ -105,7 +105,7 @@ class CertificationDashboard extends React.Component<
   }
 
   componentDidMount() {
-    UserAPI.isPartnerEngineer().then(response => {
+    ActiveUserAPI.isPartnerEngineer().then(response => {
       const me: MeType = response.data;
       if (!me.is_partner_engineer) {
         this.setState({ redirect: Paths.notFound });

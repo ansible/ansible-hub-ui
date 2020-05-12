@@ -19,6 +19,8 @@ export enum Paths {
   myNamespaces = '/my-namespaces',
   editNamespace = '/my-namespaces/edit/:namespace',
   myImports = '/my-imports',
+  login = '/login',
+  logout = '/logout',
   search = '/',
   collectionDocsPage = '/:namespace/:collection/docs/:page',
   collectionDocsIndex = '/:namespace/:collection/docs',
