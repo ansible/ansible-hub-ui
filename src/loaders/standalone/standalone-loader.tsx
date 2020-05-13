@@ -118,6 +118,9 @@ class App extends React.Component<RouteComponentProps, IState> {
               <NavItem>
                 <Link to={Paths.token}>API Token</Link>
               </NavItem>
+              <NaveItem>
+                <Link to={Paths.userList}>Users</Link>
+              </NaveItem>
             </NavList>
           </Nav>
         }
