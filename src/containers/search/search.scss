@@ -1,17 +1,22 @@
 @import '../../global-variables.scss';
 
-.toolbar {
+.toolbar-wrapper {
   padding-bottom: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .pagination-container {
+  .applied-filters {
+    margin-top: 12px;
+  }
+  .toolbar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
 
-    .card-list-switcher {
-      margin-right: 24px;
+    .pagination-container {
+      display: flex;
+      align-items: center;
+
+      .card-list-switcher {
+        margin-right: 24px;
+      }
     }
   }
 }
@@ -27,20 +32,6 @@
 
   @media (min-width: $breakpoint-md) {
     display: flex;
-  }
-
-  .sidebar {
-    margin-left: -24px;
-    margin-top: -24px;
-    background-color: white;
-    min-width: 190px;
-    padding: 24px;
-    padding-top: 24px;
-
-    @media (max-width: $breakpoint-md) {
-      margin-bottom: 24px;
-      margin-right: -24px;
-    }
   }
 
   .cards {
