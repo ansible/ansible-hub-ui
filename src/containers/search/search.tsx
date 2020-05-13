@@ -8,6 +8,9 @@ import {
   EmptyState,
   EmptyStateIcon,
   Title,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
   EmptyStateBody,
   EmptyStateVariant,
   Button,
@@ -18,13 +21,15 @@ import { SearchIcon } from '@patternfly/react-icons';
 import {
   BaseHeader,
   CollectionCard,
-  Toolbar,
-  TagFilter,
   CardListSwitcher,
   CollectionListItem,
+  CompoundFilter,
   Pagination,
   LoadingPageSpinner,
   Main,
+  Sort,
+  SortFieldType,
+  AppliedFilters,
 } from '../../components';
 import {
   CollectionAPI,
@@ -41,7 +46,7 @@ interface IState {
     page?: number;
     page_size?: number;
     keywords?: string;
-    tags?: string;
+    tags?: string[];
     view_type?: string;
   };
   loading: boolean;
@@ -76,8 +81,16 @@ class Search extends React.Component<RouteComponentProps, IState> {
       numberOfResults: 0,
       loading: true,
     };
+  }
 
-    this.tags = [
+  componentDidMount() {
+    this.queryCollections();
+  }
+
+  render() {
+    const { collections, params, numberOfResults, loading } = this.state;
+
+    const tags = [
       'cloud',
       'linux',
       'network',
@@ -90,72 +103,100 @@ class Search extends React.Component<RouteComponentProps, IState> {
       'database',
       'application',
     ];
-  }
 
-  componentDidMount() {
-    this.queryCollections();
-  }
-
-  render() {
-    const { collections, params, numberOfResults, loading } = this.state;
+    const sortOptions: SortFieldType[] = [
+      { id: 'name', title: 'Collection name', type: 'alpha' },
+    ];
 
     return (
       <React.Fragment>
         <BaseHeader className='header' title='Collections'>
-          <div className='toolbar'>
-            <Toolbar
-              params={params}
-              updateParams={p =>
-                this.updateParams(p, () => this.queryCollections())
-              }
-              searchPlaceholder='Search collections'
-            />
+          <div className='toolbar-wrapper'>
+            <div className='toolbar'>
+              <Toolbar>
+                <ToolbarGroup>
+                  <ToolbarItem>
+                    <CompoundFilter
+                      updateParams={p =>
+                        this.updateParams(p, () => this.queryCollections())
+                      }
+                      params={params}
+                      filterConfig={[
+                        {
+                          id: 'collection',
+                          title: 'Collection',
+                        },
+                        {
+                          id: 'tags',
+                          title: 'Tag',
+                          inputType: 'multiple',
+                          options: tags.map(tag => ({
+                            id: tag,
+                            title: tag,
+                          })),
+                        },
+                      ]}
+                    />
+                  </ToolbarItem>
+                </ToolbarGroup>
+                <ToolbarGroup>
+                  <ToolbarItem>
+                    <Sort
+                      options={sortOptions}
+                      params={params}
+                      updateParams={p =>
+                        this.updateParams(p, () => this.queryCollections())
+                      }
+                    />
+                  </ToolbarItem>
+                </ToolbarGroup>
+              </Toolbar>
 
-            <div className='pagination-container'>
-              <div className='card-list-switcher'>
-                <CardListSwitcher
-                  size='sm'
+              <div className='pagination-container'>
+                <div className='card-list-switcher'>
+                  <CardListSwitcher
+                    size='sm'
+                    params={params}
+                    updateParams={p =>
+                      this.updateParams(p, () =>
+                        // Note, we have to use this.state.params instead
+                        // of params in the callback because the callback
+                        // executes before the page can re-run render
+                        // which means params doesn't contain the most
+                        // up to date state
+                        localStorage.setItem(
+                          Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
+                          this.state.params.view_type,
+                        ),
+                      )
+                    }
+                  />
+                </div>
+
+                <Pagination
                   params={params}
                   updateParams={p =>
-                    this.updateParams(p, () =>
-                      // Note, we have to use this.state.params instead
-                      // of params in the callback because the callback
-                      // executes before the page can re-run render
-                      // which means params doesn't contain the most
-                      // up to date state
-                      localStorage.setItem(
-                        Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-                        this.state.params.view_type,
-                      ),
-                    )
+                    this.updateParams(p, () => this.queryCollections())
                   }
+                  count={numberOfResults}
+                  perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+                  isTop
                 />
               </div>
-
-              <Pagination
-                params={params}
+            </div>
+            <div className='applied-filters'>
+              <AppliedFilters
                 updateParams={p =>
                   this.updateParams(p, () => this.queryCollections())
                 }
-                count={numberOfResults}
-                perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
-                isTop
+                params={params}
+                ignoredParams={['page_size', 'page', 'sort', 'view_type']}
               />
             </div>
           </div>
         </BaseHeader>
         <Main>
           <Section className='collection-container'>
-            <div className='sidebar'>
-              <TagFilter
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
-                tags={this.tags}
-              />
-            </div>
-
             {this.renderCollections(collections, params)}
           </Section>
           <Section className='body footer'>

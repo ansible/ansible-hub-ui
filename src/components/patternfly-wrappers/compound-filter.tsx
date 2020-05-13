@@ -6,6 +6,10 @@ import {
   Button,
   ButtonVariant,
   DropdownItem,
+  Select,
+  SelectGroup,
+  SelectOption,
+  SelectVariant,
 } from '@patternfly/react-core';
 
 import { FilterIcon, SearchIcon } from '@patternfly/react-icons';
@@ -17,7 +21,7 @@ class FilterOption {
   id: string;
   title: string;
   placeholder?: string;
-  inputType?: 'text-field' | 'select';
+  inputType?: 'text-field' | 'select' | 'multiple';
   options?: { id: string; title: string }[];
 }
 
@@ -30,6 +34,10 @@ interface IProps {
 interface IState {
   selectedFilter: FilterOption;
   inputText: string;
+  isExpanded: boolean;
+  isCreatable: boolean;
+  isOpen: boolean;
+  hasOnCreateOption: boolean;
 }
 
 export class CompoundFilter extends React.Component<IProps, IState> {
@@ -39,12 +47,16 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     this.state = {
       selectedFilter: props.filterConfig[0],
       inputText: '',
+      isExpanded: false,
+      isCreatable: false,
+      isOpen: false,
+      hasOnCreateOption: false,
     };
   }
 
   render() {
-    const { params, filterConfig } = this.props;
-    const { selectedFilter, inputText } = this.state;
+    const { filterConfig } = this.props;
+    const { selectedFilter } = this.state;
 
     const filterOptions = filterConfig.map(v => (
       <DropdownItem
@@ -83,6 +95,36 @@ export class CompoundFilter extends React.Component<IProps, IState> {
 
   private renderInput(selectedFilter: FilterOption) {
     switch (selectedFilter.inputType) {
+      case 'multiple':
+        const options = selectedFilter.options.map(option => (
+          // patternfly does not allow for us to set a display name aside from the ID
+          // which unfortunately means that multiple select will ignore the human readable
+          // option.title
+          <SelectOption key={option.id} value={option.id} />
+        ));
+
+        const toggle = [
+          <SelectGroup
+            label={'Filter by ' + selectedFilter.id}
+            key={selectedFilter.id}
+          >
+            {options}
+          </SelectGroup>,
+        ];
+
+        return (
+          <Select
+            variant={SelectVariant.checkbox}
+            onToggle={this.onToggle}
+            onSelect={this.onSelectMultiple}
+            isExpanded={this.state.isOpen}
+            placeholderText={'Filter by ' + selectedFilter.id}
+            selections={this.props.params[this.state.selectedFilter.id]}
+            isGrouped
+          >
+            {toggle}
+          </Select>
+        );
       case 'select':
         return (
           <StatefulDropdown
@@ -126,6 +168,16 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     }
   }
 
+  private submitMultiple(newValues: string[]) {
+    this.props.updateParams(
+      ParamHelper.setParam(
+        this.props.params,
+        this.state.selectedFilter.id,
+        newValues,
+      ),
+    );
+  }
+
   private submitFilter() {
     this.props.updateParams(
       ParamHelper.setParam(
@@ -135,4 +187,28 @@ export class CompoundFilter extends React.Component<IProps, IState> {
       ),
     );
   }
+
+  private onToggle = () => {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  };
+
+  private onSelectMultiple = event => {
+    let newParams = this.props.params[this.state.selectedFilter.id];
+    if (!newParams) {
+      newParams = [];
+    }
+
+    const selectedID = event.currentTarget.id;
+    if (newParams.includes(selectedID)) {
+      const index = newParams.indexOf(selectedID);
+      if (index > -1) {
+        newParams.splice(index, 1);
+      }
+    } else {
+      newParams.push(selectedID);
+    }
+    this.submitMultiple(newParams);
+  };
 }
