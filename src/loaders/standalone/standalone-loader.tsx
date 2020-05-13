@@ -18,11 +18,11 @@ import {
 import { Routes } from './routes';
 import Logo from '../../../static/images/galaxy_logo.svg';
 import { Paths, formatPath } from '../../paths';
-import { ActiveUserAPI, UserAuthType } from '../../api';
+import { ActiveUserAPI, UserType } from '../../api';
 import { StatefulDropdown } from '../../components';
 
 interface IState {
-  user: UserAuthType;
+  user: UserType;
 }
 
 class App extends React.Component<RouteComponentProps, IState> {

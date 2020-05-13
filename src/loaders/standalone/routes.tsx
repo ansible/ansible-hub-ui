@@ -18,13 +18,13 @@ import {
   Search,
   TokenPageStandalone,
 } from '../../containers';
-import { ActiveUserAPI, UserAuthType } from '../../api';
+import { ActiveUserAPI, UserType } from '../../api';
 
 import { Paths, formatPath } from '../../paths';
 
 interface UserProps {
-  setUser: (user: UserAuthType) => void;
-  user?: UserAuthType;
+  setUser: (user: UserType) => void;
+  user?: UserType;
 }
 
 interface IProps extends RouteComponentProps, UserProps {
