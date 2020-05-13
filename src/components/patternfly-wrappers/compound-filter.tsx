@@ -26,8 +26,13 @@ class FilterOption {
 }
 
 interface IProps {
+  /** Configures the options that the filter displays */
   filterConfig: FilterOption[];
+
+  /** Current page params */
   params: any;
+
+  /** Sets the current page params to p */
   updateParams: (params) => void;
 }
 

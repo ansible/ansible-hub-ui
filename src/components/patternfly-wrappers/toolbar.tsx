@@ -18,15 +18,22 @@ import { Sort } from '../../components';
 import { SortFieldType } from './sort';
 
 interface IProps {
+  /** Current page params */
   params: {
     sort?: string;
     keywords?: string;
   };
 
+  /** List of sort options that the user can pick from */
   sortOptions?: SortFieldType[];
 
+  /** Sets the current page params to p */
   updateParams: (params) => void;
+
+  /** Search bar placeholder text*/
   searchPlaceholder: string;
+
+  /** Extra set of customizeable inputs that appear to right of sort*/
   extraInputs?: React.ReactNode[];
 }
 

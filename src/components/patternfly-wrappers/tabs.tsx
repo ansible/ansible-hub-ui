@@ -5,8 +5,13 @@ import { Tab, Tabs as PFTabs } from '@patternfly/react-core';
 import { ParamHelper } from '../../utilities/param-helper';
 
 interface IProps {
+  /** List of names for tabs */
   tabs: string[];
+
+  /** Current page params */
   params: { tab?: string };
+
+  /** Sets the current page params to p */
   updateParams: (params) => void;
 }
 
