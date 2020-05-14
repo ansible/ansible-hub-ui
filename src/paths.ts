@@ -34,4 +34,7 @@ export enum Paths {
   token = '/token',
   certificationDashboard = '/certification-dashboard',
   userList = '/users',
+  newUser = '/users/new',
+  editUser = '/users/:userID/edit',
+  userDetail = '/users/:userID',
 }

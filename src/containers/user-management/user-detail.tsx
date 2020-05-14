@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+
+import { Button } from '@patternfly/react-core';
 
 import { LoadingPageWithHeader } from '../../components';
 import { UserFormPage } from './user-form-page';
@@ -11,7 +13,7 @@ interface IState {
   errorMessages: object;
 }
 
-class UserEdit extends React.Component<RouteComponentProps, IState> {
+class UserDetail extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
 
@@ -35,25 +37,31 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
         user={user}
         breadcrumbs={[
           { url: Paths.userList, name: 'Users' },
-          {
-            url: formatPath(Paths.userDetail, { userID: user.id }),
-            name: user.username,
-          },
-          { name: 'Edit' },
+          { name: user.username },
         ]}
-        title='Edit user'
+        title='User details'
         errorMessages={errorMessages}
         updateUser={user => this.setState({ user: user })}
-        saveUser={this.saveUser}
+        isReadonly
+        extraControls={
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <div>
+              <Link
+                to={formatPath(Paths.editUser, {
+                  userID: user.id,
+                })}
+              >
+                <Button>Edit</Button>
+              </Link>
+            </div>
+            <div style={{ marginLeft: '8px' }}>
+              <Button variant='secondary'>Delete</Button>
+            </div>
+          </div>
+        }
       ></UserFormPage>
     );
   }
-  private saveUser = () => {
-    const { user } = this.state;
-    UserAPI.update(user.id.toString(), user).then(result =>
-      console.log(result),
-    );
-  };
 }
 
-export default withRouter(UserEdit);
+export default withRouter(UserDetail);

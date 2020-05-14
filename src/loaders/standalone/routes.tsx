@@ -18,6 +18,8 @@ import {
   Search,
   TokenPageStandalone,
   UserList,
+  EditUser,
+  UserDetail,
 } from '../../containers';
 import { ActiveUserAPI, UserType } from '../../api';
 
@@ -74,6 +76,8 @@ class AuthHandler extends React.Component<IProps, IState> {
 
 export class Routes extends React.Component<UserProps> {
   routes = [
+    { comp: EditUser, path: Paths.editUser },
+    { comp: UserDetail, path: Paths.userDetail },
     { comp: UserList, path: Paths.userList },
     { comp: CertificationDashboard, path: Paths.certificationDashboard },
     { comp: NotFound, path: Paths.notFound },

@@ -7,7 +7,6 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom';
-import { BaseHeader, Main } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
@@ -43,6 +42,8 @@ import {
   closeAlertMixin,
   AlertType,
   SortFieldType,
+  BaseHeader,
+  Main,
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
 
@@ -223,16 +224,29 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(user: UserType, index: number) {
     return (
       <tr aria-labelledby={user.username} key={index}>
-        <td>{user.username}</td>
+        <td>
+          <Link to={formatPath(Paths.userDetail, { userID: user.id })}>
+            {user.username}
+          </Link>
+        </td>
         <td>{user.email}</td>
         <td>{user.last_name}</td>
         <td>{user.first_name}</td>
         <td>
           <StatefulDropdown
             items={[
-              <DropdownItem key='edit' onClick={() => console.log('edit')}>
-                Edit
-              </DropdownItem>,
+              <DropdownItem
+                key='edit'
+                component={
+                  <Link
+                    to={formatPath(Paths.editUser, {
+                      userID: user.id,
+                    })}
+                  >
+                    Edit
+                  </Link>
+                }
+              />,
               <DropdownItem key='delete' onClick={() => console.log('edit')}>
                 Delete
               </DropdownItem>,

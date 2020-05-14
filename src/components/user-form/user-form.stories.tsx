@@ -27,10 +27,22 @@ const store = new Store({
 });
 
 export const basic = () => {
-  console.log(store.state);
   return (
     <State store={store}>
       <UserForm
+        user={store.get('user')}
+        updateUser={u => store.set({ user: u })}
+        errorMessages={{ first_name: 'it broke' }}
+      ></UserForm>
+    </State>
+  );
+};
+
+export const ReadOnly = () => {
+  return (
+    <State store={store}>
+      <UserForm
+        isReadonly={true}
         user={store.get('user')}
         updateUser={u => store.set({ user: u })}
         errorMessages={{ first_name: 'it broke' }}

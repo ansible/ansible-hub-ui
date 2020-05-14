@@ -1,6 +1,12 @@
 import * as React from 'react';
 
-import { Form, FormGroup, TextInput } from '@patternfly/react-core';
+import {
+  Form,
+  FormGroup,
+  TextInput,
+  ActionGroup,
+  Button,
+} from '@patternfly/react-core';
 
 import { UserType } from '../../api';
 
@@ -12,15 +18,24 @@ interface IProps {
   updateUser: (user: UserType) => void;
 
   /** List of errors from the API */
-  errorMessages: { [key: string]: string };
+  errorMessages: object;
 
   /** List of fields to mark as required */
   requiredFields?: string[];
+
+  /** Disables the form */
+  isReadonly?: boolean;
+
+  /** Saves the current user */
+  saveUser?: () => void;
 }
 
 export class UserForm extends React.Component<IProps> {
+  public static defaultProps = {
+    isReadonly: false,
+  };
   render() {
-    const { user, errorMessages } = this.props;
+    const { user, errorMessages, isReadonly, saveUser } = this.props;
     const formFields = [
       { id: 'first_name', title: 'First name' },
       { id: 'last_name', title: 'Last name' },
@@ -39,6 +54,7 @@ export class UserForm extends React.Component<IProps> {
             isValid={!(v.id in errorMessages)}
           >
             <TextInput
+              isDisabled={isReadonly}
               id={v.id}
               value={user[v.id]}
               onChange={this.updateField}
@@ -46,13 +62,17 @@ export class UserForm extends React.Component<IProps> {
             />
           </FormGroup>
         ))}
+        {!isReadonly && (
+          <ActionGroup>
+            <Button onClick={() => saveUser()}>Save</Button>
+            <Button variant='link'>Cancel</Button>
+          </ActionGroup>
+        )}
       </Form>
     );
   }
 
   private updateField = (value, event) => {
-    // console.log(value);
-    // console.log(event);
     const update = { ...this.props.user };
     update[event.target.id] = value;
     this.props.updateUser(update);
