@@ -24,7 +24,9 @@ export class UserType {
   last_name?: string;
   email?: string;
   groups: { id: number; name: string }[];
-  is_partner_engineer: boolean;
+  is_partner_engineer?: boolean;
+  date_joined?: string;
+  password?: string;
 }
 
 export class MeType {

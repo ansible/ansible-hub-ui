@@ -36,3 +36,4 @@ export {
 } from './patternfly-wrappers/alert-list';
 export { APIButton } from './api-button/api-button';
 export { Main } from './patternfly-wrappers/main';
+export { UserForm } from './user-form/user-form';

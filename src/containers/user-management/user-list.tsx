@@ -146,6 +146,11 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                     />
                   </ToolbarItem>
                 </ToolbarGroup>
+                <ToolbarGroup>
+                  <ToolbarItem>
+                    <Button>Create user</Button>
+                  </ToolbarItem>
+                </ToolbarGroup>
               </Toolbar>
 
               <Pagination
@@ -207,6 +212,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
             <th>Email</th>
             <th>Last name</th>
             <th>First name</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>{users.map((user, i) => this.renderTableRow(user, i))}</tbody>
@@ -221,6 +227,18 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>{user.email}</td>
         <td>{user.last_name}</td>
         <td>{user.first_name}</td>
+        <td>
+          <StatefulDropdown
+            items={[
+              <DropdownItem key='edit' onClick={() => console.log('edit')}>
+                Edit
+              </DropdownItem>,
+              <DropdownItem key='delete' onClick={() => console.log('edit')}>
+                Delete
+              </DropdownItem>,
+            ]}
+          ></StatefulDropdown>
+        </td>
       </tr>
     );
   }
