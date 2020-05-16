@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cx from 'classnames';
 import './header.scss';
 
 import { PageHeaderTitle } from '@redhat-cloud-services/frontend-components';
@@ -25,7 +26,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
       className,
     } = this.props;
     return (
-      <div className={'background ' + className}>
+      <div className={cx('background', className)}>
         {breadcrumbs ? (
           <div className='breadcrumb-container'>{breadcrumbs}</div>
         ) : (

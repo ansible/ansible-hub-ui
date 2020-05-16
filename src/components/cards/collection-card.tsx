@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cx from 'classnames';
 import {
   Card,
   CardHead,
@@ -32,7 +33,7 @@ export class CollectionCard extends React.Component<IProps> {
     const contentSummary = convertContentSummaryCounts(latest_version.contents);
 
     return (
-      <Card className={'collection-card-container ' + className}>
+      <Card className={cx('collection-card-container', className)}>
         <CardHead className='logo-row'>
           <Logo
             image={namespace.avatar_url}

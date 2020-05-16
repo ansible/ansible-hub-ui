@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cx from 'classnames';
 import './collection-content-list.scss';
 
 import { Link } from 'react-router-dom';
@@ -77,10 +78,11 @@ export class CollectionContentList extends React.Component<IProps> {
               {Object.keys(summary).map(key => (
                 <ToolbarItem
                   key={key}
-                  className={
-                    'clickable type-selector' +
-                    (key === showing ? ' selected-item' : '')
-                  }
+                  className={cx({
+                    clickable: true,
+                    'selected-item': key === showing,
+                    'type-selector': true,
+                  })}
                   onClick={() =>
                     updateParams(ParamHelper.setParam(params, 'showing', key))
                   }
