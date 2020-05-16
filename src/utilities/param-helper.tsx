@@ -100,7 +100,7 @@ export class ParamHelper {
 
   // Returns the query string for the set of parameters
   static getQueryString(params: Object, ignoreParams?: string[]) {
-    let paramString = '';
+    let paramString = []
     for (const key of Object.keys(params)) {
       // skip the param if its in the list of ignored params
       if (ignoreParams && ignoreParams.includes(key)) {
@@ -108,16 +108,14 @@ export class ParamHelper {
       }
       if (Array.isArray(params[key])) {
         for (const val of params[key]) {
-          paramString += key + '=' + encodeURIComponent(val) + '&';
+          paramString.push(key + '=' + encodeURIComponent(val));
         }
       } else {
-        paramString += key + '=' + params[key] + '&';
+        paramString.push(key + '=' + encodeURIComponent(params[key]));
       }
     }
 
-    // Remove trailing '&'
-    paramString = paramString.substring(0, paramString.length - 1);
-    return paramString;
+    return paramString.join('&');
   }
 
   // Reusable function that can be included in a component to update it's
