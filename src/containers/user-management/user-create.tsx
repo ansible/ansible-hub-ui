@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-import { LoadingPageWithHeader } from '../../components';
 import { UserFormPage, mapErrorMessages } from './user-form-page';
 import { UserType, UserAPI } from '../../api';
-import { Paths, formatPath } from '../../paths';
+import { Paths } from '../../paths';
 
 interface IState {
   user: UserType;

@@ -1,18 +1,5 @@
 import * as React from 'react';
 
-import {
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-  Button,
-  DropdownItem,
-  EmptyState,
-  EmptyStateIcon,
-  Title,
-  EmptyStateBody,
-  EmptyStateVariant,
-} from '@patternfly/react-core';
-
 import { Section } from '@redhat-cloud-services/frontend-components';
 
 import { BaseHeader, Main, Breadcrumbs, UserForm } from '../../components';

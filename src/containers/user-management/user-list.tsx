@@ -21,17 +21,11 @@ import {
   EmptyStateVariant,
 } from '@patternfly/react-core';
 
-import {
-  InfoCircleIcon,
-  ExclamationCircleIcon,
-  CheckCircleIcon,
-  WarningTriangleIcon,
-} from '@patternfly/react-icons';
+import { WarningTriangleIcon } from '@patternfly/react-icons';
 
-import { ActiveUserAPI, MeType, UserAPI, UserType } from '../../api';
+import { UserAPI, UserType } from '../../api';
 import { ParamHelper } from '../../utilities';
 import {
-  LoadingPageWithHeader,
   StatefulDropdown,
   CompoundFilter,
   LoadingPageSpinner,
@@ -116,6 +110,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     if (redirect) {
       return <Redirect to={redirect}></Redirect>;
     }
+
     return (
       <React.Fragment>
         <AlertList
@@ -244,6 +239,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
             <th>Email</th>
             <th>Last name</th>
             <th>First name</th>
+            <th>Created</th>
             <th></th>
           </tr>
         </thead>
@@ -263,6 +259,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>{user.email}</td>
         <td>{user.last_name}</td>
         <td>{user.first_name}</td>
+        <td>{moment(user.date_joined).fromNow()}</td>
         <td>
           <StatefulDropdown
             items={[
