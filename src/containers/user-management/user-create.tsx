@@ -22,7 +22,9 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
         last_name: '',
         email: '',
         password: '',
-        groups: [],
+        // TODO: add group management to the form
+        // defaulting to the admin for now to make testing easier.
+        groups: [{ id: 1, name: 'system:partner-engineer' }],
       },
       errorMessages: {},
     };
