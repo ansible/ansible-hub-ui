@@ -42,6 +42,11 @@ export class BaseAPI {
     return this.http.post(path, data);
   }
 
+  delete(id: string | number, apiPath?: string) {
+    const path = apiPath || this.apiPath;
+    return this.http.delete(path + id + '/');
+  }
+
   private async authHandler(request) {
     // This runs before every API request and ensures that the user is
     // authenticated before the request is executed. On most calls it appears

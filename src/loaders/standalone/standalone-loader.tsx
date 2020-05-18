@@ -18,11 +18,11 @@ import {
 import { Routes } from './routes';
 import Logo from '../../../static/images/galaxy_logo.svg';
 import { Paths, formatPath } from '../../paths';
-import { ActiveUserAPI, UserAuthType } from '../../api';
+import { ActiveUserAPI, UserType } from '../../api';
 import { StatefulDropdown } from '../../components';
 
 interface IState {
-  user: UserAuthType;
+  user: UserType;
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -118,6 +118,16 @@ class App extends React.Component<RouteComponentProps, IState> {
               <NavItem>
                 <Link to={Paths.token}>API Token</Link>
               </NavItem>
+              {user && user.is_partner_engineer && (
+                <>
+                  <NavItem>
+                    <Link to={Paths.userList}>Users</Link>
+                  </NavItem>
+                  <NavItem>
+                    <Link to={Paths.certificationDashboard}>Certification</Link>
+                  </NavItem>
+                </>
+              )}
             </NavList>
           </Nav>
         }

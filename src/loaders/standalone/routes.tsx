@@ -17,14 +17,18 @@ import {
   NotFound,
   Search,
   TokenPageStandalone,
+  UserList,
+  EditUser,
+  UserDetail,
+  UserCreate,
 } from '../../containers';
-import { ActiveUserAPI, UserAuthType } from '../../api';
+import { ActiveUserAPI, UserType } from '../../api';
 
 import { Paths, formatPath } from '../../paths';
 
 interface UserProps {
-  setUser: (user: UserAuthType) => void;
-  user?: UserAuthType;
+  setUser: (user: UserType) => void;
+  user?: UserType;
 }
 
 interface IProps extends RouteComponentProps, UserProps {
@@ -73,6 +77,10 @@ class AuthHandler extends React.Component<IProps, IState> {
 
 export class Routes extends React.Component<UserProps> {
   routes = [
+    { comp: UserCreate, path: Paths.createUser },
+    { comp: EditUser, path: Paths.editUser },
+    { comp: UserDetail, path: Paths.userDetail },
+    { comp: UserList, path: Paths.userList },
     { comp: CertificationDashboard, path: Paths.certificationDashboard },
     { comp: NotFound, path: Paths.notFound },
     { comp: TokenPageStandalone, path: Paths.token },
