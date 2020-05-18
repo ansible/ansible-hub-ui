@@ -45,6 +45,8 @@ import {
   BaseHeader,
   Main,
 } from '../../components';
+import { DeleteUserModal } from './delete-user-modal';
+
 import { Paths, formatPath } from '../../paths';
 
 interface IState {
@@ -56,6 +58,9 @@ interface IState {
   users: UserType[];
   loading: boolean;
   itemCount: number;
+  deleteUser: UserType;
+  showDeleteModal: boolean;
+  alerts: AlertType[];
 }
 
 class UserList extends React.Component<RouteComponentProps, IState> {
@@ -71,22 +76,32 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       params['page_size'] = 10;
     }
 
-    this.state = { params: params, users: [], loading: true, itemCount: 0 };
+    this.state = {
+      deleteUser: undefined,
+      showDeleteModal: false,
+      params: params,
+      users: [],
+      loading: true,
+      itemCount: 0,
+      alerts: [],
+    };
   }
 
   componentDidMount() {
-    ActiveUserAPI.isPartnerEngineer().then(response => {
-      const me: MeType = response.data;
-      if (!me.is_partner_engineer) {
-        this.setState({ redirect: Paths.notFound });
-      } else {
-        this.queryUsers();
-      }
-    });
+    this.queryUsers();
   }
 
   render() {
-    const { users, params, itemCount, loading, redirect } = this.state;
+    const {
+      users,
+      params,
+      itemCount,
+      loading,
+      redirect,
+      showDeleteModal,
+      deleteUser,
+      alerts,
+    } = this.state;
     const sortOptions: SortFieldType[] = [
       {
         id: 'username',
@@ -103,6 +118,20 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     }
     return (
       <React.Fragment>
+        <AlertList
+          alerts={alerts}
+          closeAlert={i => this.closeAlert(i)}
+        ></AlertList>
+        <DeleteUserModal
+          isOpen={showDeleteModal}
+          closeModal={this.closeModal}
+          user={deleteUser}
+          addAlert={(text, variant) =>
+            this.setState({
+              alerts: alerts.concat([{ title: text, variant: variant }]),
+            })
+          }
+        ></DeleteUserModal>
         <BaseHeader title='Users'></BaseHeader>
         <Main>
           <Section className='body'>
@@ -249,7 +278,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                   </Link>
                 }
               />,
-              <DropdownItem key='delete' onClick={() => console.log('edit')}>
+              <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
                 Delete
               </DropdownItem>,
             ]}
@@ -258,6 +287,23 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       </tr>
     );
   }
+
+  private deleteUser = user => {
+    this.setState({ deleteUser: user, showDeleteModal: true });
+  };
+
+  private closeModal = didDelete =>
+    this.setState(
+      {
+        deleteUser: undefined,
+        showDeleteModal: false,
+      },
+      () => {
+        if (didDelete) {
+          this.queryUsers();
+        }
+      },
+    );
 
   private queryUsers() {
     this.setState({ loading: true }, () =>

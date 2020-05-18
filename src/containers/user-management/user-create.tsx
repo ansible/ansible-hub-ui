@@ -30,7 +30,6 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const { user, errorMessages } = this.state;
-    console.log(user);
     return (
       <UserFormPage
         user={user}
