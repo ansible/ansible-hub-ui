@@ -16,7 +16,7 @@ import {
   Partners,
   NotFound,
   Search,
-  TokenPage,
+  TokenPageStandalone,
 } from '../../containers';
 import { ActiveUserAPI, UserAuthType } from '../../api';
 
@@ -75,7 +75,7 @@ export class Routes extends React.Component<UserProps> {
   routes = [
     { comp: CertificationDashboard, path: Paths.certificationDashboard },
     { comp: NotFound, path: Paths.notFound },
-    { comp: TokenPage, path: Paths.token },
+    { comp: TokenPageStandalone, path: Paths.token },
     { comp: Partners, path: Paths.partners },
     { comp: EditNamespace, path: Paths.editNamespace },
     { comp: ManageNamespace, path: Paths.myCollections },

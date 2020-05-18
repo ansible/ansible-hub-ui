@@ -106,7 +106,7 @@ const Search = asyncComponent(() =>
 const TokenPage = asyncComponent(() =>
   import(
     /* webpackChunkName: "settings" */
-    '../../containers/token/token'
+    '../../containers/token/token-insights'
   ),
 );
 

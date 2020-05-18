@@ -12,4 +12,5 @@ export { default as MyNamespaces } from './namespace-list/my-namespaces';
 export { default as Partners } from './namespace-list/my-namespaces';
 export { default as NotFound } from './not-found/not-found';
 export { default as Search } from './search/search';
-export { default as TokenPage } from './token/token';
+export { default as TokenPageStandalone } from './token/token-standalone';
+export { default as TokenPageInsights } from './token/token-standalone';
