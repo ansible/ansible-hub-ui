@@ -115,6 +115,9 @@ class App extends React.Component<RouteComponentProps, IState> {
               <NavItem>
                 <Link to={Paths.myNamespaces}>My Namespaces</Link>
               </NavItem>
+              <NavItem>
+                <Link to={Paths.token}>API Token</Link>
+              </NavItem>
             </NavList>
           </Nav>
         }
