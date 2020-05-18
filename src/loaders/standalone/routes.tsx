@@ -20,6 +20,7 @@ import {
   UserList,
   EditUser,
   UserDetail,
+  UserCreate,
 } from '../../containers';
 import { ActiveUserAPI, UserType } from '../../api';
 
@@ -76,6 +77,7 @@ class AuthHandler extends React.Component<IProps, IState> {
 
 export class Routes extends React.Component<UserProps> {
   routes = [
+    { comp: UserCreate, path: Paths.createUser },
     { comp: EditUser, path: Paths.editUser },
     { comp: UserDetail, path: Paths.userDetail },
     { comp: UserList, path: Paths.userList },

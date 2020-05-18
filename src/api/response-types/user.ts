@@ -18,7 +18,7 @@ export class InsightsUserType {
 }
 
 export class UserType {
-  id: number;
+  id?: number;
   username: string;
   first_name?: string;
   last_name?: string;

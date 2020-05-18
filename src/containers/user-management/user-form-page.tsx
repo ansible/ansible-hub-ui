@@ -28,6 +28,15 @@ interface IProps {
   updateUser: (user: UserType) => void;
   saveUser?: () => void;
   extraControls?: React.ReactNode;
+  onCancel?: () => void;
+}
+
+export function mapErrorMessages(err) {
+  const messages: any = {};
+  for (const e of err.response.data.errors) {
+    messages[e.source.parameter] = e.detail;
+  }
+  return messages;
 }
 
 export class UserFormPage extends React.Component<IProps> {
@@ -44,6 +53,7 @@ export class UserFormPage extends React.Component<IProps> {
       saveUser,
       isReadonly,
       extraControls,
+      onCancel,
     } = this.props;
 
     return (
@@ -61,6 +71,7 @@ export class UserFormPage extends React.Component<IProps> {
               updateUser={updateUser}
               errorMessages={errorMessages}
               saveUser={saveUser}
+              onCancel={onCancel}
             ></UserForm>
           </Section>
         </Main>

@@ -28,6 +28,9 @@ interface IProps {
 
   /** Saves the current user */
   saveUser?: () => void;
+
+  /** Action to take when the user presses the cancel button */
+  onCancel?: () => void;
 }
 
 export class UserForm extends React.Component<IProps> {
@@ -35,7 +38,7 @@ export class UserForm extends React.Component<IProps> {
     isReadonly: false,
   };
   render() {
-    const { user, errorMessages, isReadonly, saveUser } = this.props;
+    const { user, errorMessages, isReadonly, saveUser, onCancel } = this.props;
     const formFields = [
       { id: 'first_name', title: 'First name' },
       { id: 'last_name', title: 'Last name' },
@@ -65,7 +68,9 @@ export class UserForm extends React.Component<IProps> {
         {!isReadonly && (
           <ActionGroup>
             <Button onClick={() => saveUser()}>Save</Button>
-            <Button variant='link'>Cancel</Button>
+            <Button onClick={() => onCancel()} variant='link'>
+              Cancel
+            </Button>
           </ActionGroup>
         )}
       </Form>

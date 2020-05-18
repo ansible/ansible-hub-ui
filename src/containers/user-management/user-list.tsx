@@ -149,7 +149,9 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                 </ToolbarGroup>
                 <ToolbarGroup>
                   <ToolbarItem>
-                    <Button>Create user</Button>
+                    <Link to={Paths.createUser}>
+                      <Button>Create user</Button>
+                    </Link>
                   </ToolbarItem>
                 </ToolbarGroup>
               </Toolbar>

@@ -118,9 +118,16 @@ class App extends React.Component<RouteComponentProps, IState> {
               <NavItem>
                 <Link to={Paths.token}>API Token</Link>
               </NavItem>
-              <NaveItem>
-                <Link to={Paths.userList}>Users</Link>
-              </NaveItem>
+              {user && user.is_partner_engineer && (
+                <>
+                  <NavItem>
+                    <Link to={Paths.userList}>Users</Link>
+                  </NavItem>
+                  <NavItem>
+                    <Link to={Paths.certificationDashboard}>Certification</Link>
+                  </NavItem>
+                </>
+              )}
             </NavList>
           </Nav>
         }

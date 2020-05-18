@@ -11,37 +11,34 @@ interface IState {
   errorMessages: object;
 }
 
-class UserEdit extends React.Component<RouteComponentProps, IState> {
+class UserCreate extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
 
-    this.state = { user: undefined, errorMessages: {} };
-  }
-
-  componentDidMount() {
-    const id = this.props.match.params['userID'];
-    UserAPI.get(id).then(result => this.setState({ user: result.data }));
+    this.state = {
+      user: {
+        username: '',
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        groups: [],
+      },
+      errorMessages: {},
+    };
   }
 
   render() {
     const { user, errorMessages } = this.state;
-
-    if (!user) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
-    }
-
+    console.log(user);
     return (
       <UserFormPage
         user={user}
         breadcrumbs={[
           { url: Paths.userList, name: 'Users' },
-          {
-            url: formatPath(Paths.userDetail, { userID: user.id }),
-            name: user.username,
-          },
-          { name: 'Edit' },
+          { name: 'Create new user' },
         ]}
-        title='Edit user'
+        title='Create new user'
         errorMessages={errorMessages}
         updateUser={user => this.setState({ user: user })}
         saveUser={this.saveUser}
@@ -51,7 +48,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
   }
   private saveUser = () => {
     const { user } = this.state;
-    UserAPI.update(user.id.toString(), user)
+    UserAPI.create(user)
       .then(result => this.props.history.push(Paths.userList))
       .catch(err => {
         this.setState({ errorMessages: mapErrorMessages(err) });
@@ -59,4 +56,4 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
   };
 }
 
-export default withRouter(UserEdit);
+export default withRouter(UserCreate);
