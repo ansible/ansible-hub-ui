@@ -33,12 +33,34 @@ interface IProps {
   onCancel?: () => void;
 }
 
-export class UserForm extends React.Component<IProps> {
+interface IState {
+  passwordConfirm: string;
+}
+
+export class UserForm extends React.Component<IProps, IState> {
   public static defaultProps = {
     isReadonly: false,
+    requiredFields: ['username', 'password'],
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      passwordConfirm: '',
+    };
+  }
+
   render() {
-    const { user, errorMessages, isReadonly, saveUser, onCancel } = this.props;
+    const {
+      user,
+      errorMessages,
+      isReadonly,
+      saveUser,
+      onCancel,
+      requiredFields,
+    } = this.props;
+    const { passwordConfirm } = this.state;
     const formFields = [
       { id: 'first_name', title: 'First name' },
       { id: 'last_name', title: 'Last name' },
@@ -50,6 +72,7 @@ export class UserForm extends React.Component<IProps> {
       <Form>
         {formFields.map(v => (
           <FormGroup
+            isRequired={requiredFields.includes(v.id)}
             key={v.id}
             fieldId={v.id}
             label={v.title}
@@ -65,9 +88,34 @@ export class UserForm extends React.Component<IProps> {
             />
           </FormGroup>
         ))}
+
+        <FormGroup
+          fieldId={'password-confirm'}
+          label={'Password confirmation'}
+          helperTextInvalid={'Passwords do not match'}
+          isValid={user.password == '' || user.password === passwordConfirm}
+        >
+          <TextInput
+            isDisabled={isReadonly}
+            id={'password-confirm'}
+            value={passwordConfirm}
+            onChange={(value, event) => {
+              this.setState({ passwordConfirm: value });
+            }}
+            type='password'
+          />
+        </FormGroup>
+
         {!isReadonly && (
           <ActionGroup>
-            <Button onClick={() => saveUser()}>Save</Button>
+            <Button
+              isDisabled={
+                !(user.password == '' || user.password === passwordConfirm)
+              }
+              onClick={() => saveUser()}
+            >
+              Save
+            </Button>
             <Button onClick={() => onCancel()} variant='link'>
               Cancel
             </Button>
