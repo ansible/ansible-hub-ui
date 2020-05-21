@@ -18,14 +18,6 @@ interface IProps {
   onCancel?: () => void;
 }
 
-export function mapErrorMessages(err) {
-  const messages: any = {};
-  for (const e of err.response.data.errors) {
-    messages[e.source.parameter] = e.detail;
-  }
-  return messages;
-}
-
 export class UserFormPage extends React.Component<IProps> {
   public static defaultProps = {
     extraControls: null,

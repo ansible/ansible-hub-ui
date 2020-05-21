@@ -18,7 +18,7 @@ import { Constants } from '../../constants';
 import { Form, ActionGroup, Button } from '@patternfly/react-core';
 
 import { Paths, formatPath } from '../../paths';
-import { ParamHelper } from '../../utilities/param-helper';
+import { ParamHelper, mapErrorMessages } from '../../utilities';
 
 interface IState {
   namespace: NamespaceType;
@@ -198,13 +198,8 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         .catch(error => {
           const result = error.response;
           if (result.status === 400) {
-            const messages: any = {};
-            for (const e of result.data.errors) {
-              messages[e.source.parameter] = e.detail;
-            }
-
             this.setState({
-              errorMessages: messages,
+              errorMessages: mapErrorMessages(error),
               saving: false,
             });
           } else if (result.status === 404) {
