@@ -66,7 +66,12 @@ export class UserForm extends React.Component<IProps, IState> {
       { id: 'last_name', title: 'Last name' },
       { id: 'email', title: 'Email' },
       { id: 'username', title: 'Username' },
-      { id: 'password', title: 'Password', type: 'password' },
+      {
+        id: 'password',
+        title: 'Password',
+        type: 'password',
+        placeholder: '••••••••••••••••••••••',
+      },
     ];
     return (
       <Form>
@@ -82,18 +87,18 @@ export class UserForm extends React.Component<IProps, IState> {
             <TextInput
               isDisabled={isReadonly}
               id={v.id}
+              placeholder={v.placeholder}
               value={user[v.id]}
               onChange={this.updateField}
               type={(v.type as any) || 'text'}
             />
           </FormGroup>
         ))}
-
         <FormGroup
           fieldId={'password-confirm'}
           label={'Password confirmation'}
           helperTextInvalid={'Passwords do not match'}
-          isValid={user.password == '' || user.password === passwordConfirm}
+          isValid={this.isPassSame(user.password, passwordConfirm)}
         >
           <TextInput
             isDisabled={isReadonly}
@@ -105,13 +110,10 @@ export class UserForm extends React.Component<IProps, IState> {
             type='password'
           />
         </FormGroup>
-
         {!isReadonly && (
           <ActionGroup>
             <Button
-              isDisabled={
-                !(user.password == '' || user.password === passwordConfirm)
-              }
+              isDisabled={!this.isPassSame(user.password, passwordConfirm)}
               onClick={() => saveUser()}
             >
               Save
@@ -123,6 +125,10 @@ export class UserForm extends React.Component<IProps, IState> {
         )}
       </Form>
     );
+  }
+
+  private isPassSame(pass, confirm) {
+    return !pass || pass === '' || pass === confirm;
   }
 
   private updateField = (value, event) => {

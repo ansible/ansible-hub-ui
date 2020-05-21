@@ -54,6 +54,10 @@ class App extends React.Component<RouteComponentProps, IState> {
           Username: {user.username}
         </DropdownItem>,
         <DropdownSeparator key='separator' />,
+        <DropdownItem
+          key='profile'
+          component={<Link to={Paths.userProfileSettings}>My profile</Link>}
+        ></DropdownItem>,
 
         <DropdownItem
           key='logout'

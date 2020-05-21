@@ -21,6 +21,7 @@ import {
   EditUser,
   UserDetail,
   UserCreate,
+  UserProfile,
 } from '../../containers';
 import { ActiveUserAPI, UserType } from '../../api';
 
@@ -77,6 +78,7 @@ class AuthHandler extends React.Component<IProps, IState> {
 
 export class Routes extends React.Component<UserProps> {
   routes = [
+    { comp: UserProfile, path: Paths.userProfileSettings },
     { comp: UserCreate, path: Paths.createUser },
     { comp: EditUser, path: Paths.editUser },
     { comp: UserDetail, path: Paths.userDetail },
