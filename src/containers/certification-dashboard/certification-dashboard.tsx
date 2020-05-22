@@ -45,7 +45,6 @@ import {
   LoadingPageSpinner,
   AppliedFilters,
   Pagination,
-  Sort,
   AlertList,
   closeAlertMixin,
   AlertType,
@@ -187,17 +186,6 @@ class CertificationDashboard extends React.Component<
                     />
                   </ToolbarItem>
                 </ToolbarGroup>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <Sort
-                      options={sortOptions}
-                      params={params}
-                      updateParams={p =>
-                        this.updateParams(p, () => this.queryCollections())
-                      }
-                    />
-                  </ToolbarItem>
-                </ToolbarGroup>
               </Toolbar>
 
               <Pagination
@@ -286,39 +274,21 @@ class CertificationDashboard extends React.Component<
     };
 
     return (
-      <div id={'must_be_one_object'}>
-        <table
-            aria-label='Collection versions'
-            className='content-table pf-c-table'
-        >
-          <SortTable options={sortTableOptions}
-                     params={params}
-                     updateParams={p =>
-            this.updateParams(p, () => this.queryCollections())
-          } />
-          <tbody>
-          {versions.map((version, i) => this.renderRow(version, i))}
-          </tbody>
-        </table>
       <table
         aria-label='Collection versions'
         className='content-table pf-c-table'
       >
-        <thead>
-          <tr aria-labelledby='headers'>
-            <th>Namespace</th>
-            <th>Collection</th>
-            <th>Version</th>
-            <th>Date created</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
+        <SortTable
+          options={sortTableOptions}
+          params={params}
+          updateParams={p =>
+            this.updateParams(p, () => this.queryCollections())
+          }
+        />
         <tbody>
           {versions.map((version, i) => this.renderRow(version, i))}
         </tbody>
       </table>
-      </div>
     );
   }
 
