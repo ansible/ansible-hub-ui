@@ -11,8 +11,9 @@ import {
   closeAlertMixin,
 } from '../../components';
 import { UserType, ActiveUserAPI } from '../../api';
-import { Paths, formatPath } from '../../paths';
+import { Paths } from '../../paths';
 import { mapErrorMessages } from '../../utilities';
+import { AppContext } from '../../loaders/standalone/app-context';
 
 interface IState {
   user: UserType;
@@ -94,14 +95,17 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
   private saveUser = () => {
     const { user } = this.state;
     ActiveUserAPI.saveUser(user)
-      .then(result =>
-        this.setState({
-          inEditMode: false,
-          alerts: this.state.alerts.concat([
-            { variant: 'success', title: 'Profile saved.' },
-          ]),
-        }),
-      )
+      .then(result => {
+        this.setState(
+          {
+            inEditMode: false,
+            alerts: this.state.alerts.concat([
+              { variant: 'success', title: 'Profile saved.' },
+            ]),
+          },
+          () => this.context.setUser(result.data),
+        );
+      })
       .catch(err => {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });
@@ -113,3 +117,8 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
 }
 
 export default withRouter(UserProfile);
+
+// For some reason react complains about setting context type in the class itself.
+// I think that it happens because withRouter confuses react into thinking that the
+// component is a functional compent when it's actually a class component.
+UserProfile.contextType = AppContext;

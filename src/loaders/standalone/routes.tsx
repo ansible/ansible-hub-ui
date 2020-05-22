@@ -38,9 +38,9 @@ interface IState {
 
 class AuthHandler extends React.Component<IProps, IState> {
   static contextType = AppContext;
-  constructor(props) {
+  constructor(props, context) {
     super(props);
-    this.state = { isLoading: !props.user };
+    this.state = { isLoading: !context.user };
   }
   componentDidMount() {
     const { user, setUser } = this.context;
