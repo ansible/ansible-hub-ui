@@ -29,6 +29,7 @@ export { LoadingPageWithHeader } from './loading/loading-with-header';
 export { CompoundFilter } from './patternfly-wrappers/compound-filter';
 export { AppliedFilters } from './patternfly-wrappers/applied-filters';
 export { DeprecatedTag } from './tags/deprecated-tag';
+export { SortTable } from './sort-table/sort-table';
 export {
   AlertList,
   closeAlertMixin,

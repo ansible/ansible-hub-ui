@@ -50,6 +50,7 @@ import {
   closeAlertMixin,
   AlertType,
   SortFieldType,
+  SortTable,
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
 
@@ -217,7 +218,7 @@ class CertificationDashboard extends React.Component<
                 ignoredParams={['page_size', 'page', 'sort']}
               />
             </div>
-            {loading ? <LoadingPageSpinner /> : this.renderTable(versions)}
+            {loading ? <LoadingPageSpinner /> : this.renderTable(versions, params)}
 
             <div className='footer'>
               <Pagination
@@ -234,7 +235,8 @@ class CertificationDashboard extends React.Component<
     );
   }
 
-  private renderTable(versions) {
+  private renderTable(versions, params) {
+
     if (versions.length === 0) {
       return (
         <EmptyState className='empty' variant={EmptyStateVariant.full}>
@@ -248,8 +250,56 @@ class CertificationDashboard extends React.Component<
         </EmptyState>
       );
     }
+    let sortTableOptions = {
+      headers: [
+        {
+          title: 'Namespace',
+          type: 'upAlpha',
+          id: 'namespace',
+        },
+        {
+          title: 'Collection',
+          type: 'upAlpha',
+          id: 'collection',
+        },
+        {
+          title: 'Version',
+          type: 'upAmount',
+          id: 'version',
+        },
+        {
+          title: 'Date created',
+          type: 'upAmount',
+          id: 'date',
+        },
+        {
+          title: 'Status',
+          type: '',
+          id: 'status',
+        },
+        {
+          title: '',
+          type: '',
+          id: 'certify',
+        },
+      ],
+    };
 
     return (
+      <div id={'must_be_one_object'}>
+        <table
+            aria-label='Collection versions'
+            className='content-table pf-c-table'
+        >
+          <SortTable options={sortTableOptions}
+                     params={params}
+                     updateParams={p =>
+            this.updateParams(p, () => this.queryCollections())
+          } />
+          <tbody>
+          {versions.map((version, i) => this.renderRow(version, i))}
+          </tbody>
+        </table>
       <table
         aria-label='Collection versions'
         className='content-table pf-c-table'
@@ -268,6 +318,7 @@ class CertificationDashboard extends React.Component<
           {versions.map((version, i) => this.renderRow(version, i))}
         </tbody>
       </table>
+      </div>
     );
   }
 
