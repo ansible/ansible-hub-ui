@@ -5,6 +5,7 @@
     "author": "Red Hat, Inc.",
     "private": true,
     "dependencies": {
+        "@ansible/galaxy-doc-builder": "^1.0.0-alpha1",
         "@babel/runtime": "^7.9.6",
         "@patternfly/patternfly": "^2.71.6",
         "@patternfly/react-core": "^3.153.13",
@@ -27,7 +28,6 @@
         "react-router-hash-link": "^1.2.2",
         "redux": "^3.7.2",
         "redux-logger": "^3.0.6",
-        "galaxy-doc-builder": "github:ansible-community/galaxy-doc-builder",
         "redux-promise-middleware": "^5.1.1"
     },
     "jest": {

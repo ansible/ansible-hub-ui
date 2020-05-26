@@ -19,12 +19,11 @@ import { WarningTriangleIcon } from '@patternfly/react-icons';
 import {
   CollectionHeader,
   TableOfContents,
-  // RenderPluginDoc,
   LoadingPageWithHeader,
   Main,
 } from '../../components';
 
-import { RenderPluginDoc } from 'galaxy-doc-builder';
+import { RenderPluginDoc } from '@ansible/galaxy-doc-builder';
 
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
