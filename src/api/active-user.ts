@@ -41,7 +41,7 @@ class API extends BaseAPI {
         );
       });
     }
-    return this.http.post('v3/_ui/auth/token/', {});
+    return this.http.post('v3/auth/token/', {});
   }
 
   // Note: This does not reset the app's authentication state. That has to be done
