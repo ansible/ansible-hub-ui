@@ -5,6 +5,7 @@
     "author": "Red Hat, Inc.",
     "private": true,
     "dependencies": {
+        "@ansible/galaxy-doc-builder": "^1.0.0-alpha1",
         "@babel/runtime": "^7.9.6",
         "@patternfly/patternfly": "^2.71.6",
         "@patternfly/react-core": "^3.153.13",
