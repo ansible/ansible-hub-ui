@@ -1,10 +1,9 @@
 import * as React from 'react';
 
 import {
-  SortAmountDownIcon,
-  SortAmountUpIcon,
-  SortAlphaDownIcon,
-  SortAlphaUpIcon,
+  LongArrowAltUpIcon,
+  LongArrowAltDownIcon,
+  ArrowsAltVIcon,
 } from '@patternfly/react-icons';
 import { ParamHelper } from '../../utilities';
 
@@ -12,15 +11,16 @@ interface IProps {
   options: object;
   params: object;
   updateParams: (params) => void;
-  sortParamName?: string;
 }
 
 export class SortTable extends React.Component<IProps> {
-  private sort(id) {
-    console.log('ID: ' + id);
-    debugger;
+  private sort(type, id) {
     this.props.updateParams(
-      ParamHelper.setParam(this.props.params, 'sort', (false ? '-' : '') + id),
+      ParamHelper.setParam(
+        this.props.params,
+        'sort',
+        (type.includes('up') ? '-' : '') + id,
+      ),
     );
   }
   private getIcon(type, id) {
@@ -29,29 +29,27 @@ export class SortTable extends React.Component<IProps> {
     }
     let Icon;
     switch (type) {
-      case 'downAlpha':
-        Icon = SortAlphaDownIcon;
+      case 'down':
+        Icon = LongArrowAltDownIcon;
         break;
-      case 'upAlpha':
-        Icon = SortAlphaUpIcon;
+      case 'up':
+        Icon = LongArrowAltUpIcon;
         break;
-      case 'downAmount':
-        Icon = SortAmountDownIcon;
-        break;
-      case 'upAmount':
-        Icon = SortAmountUpIcon;
+      case 'none':
+        Icon = ArrowsAltVIcon;
     }
     return (
       <Icon
         className='clickable asc-button'
         size='sm'
-        onClick={() => this.sort(id)}
+        onClick={() => this.sort(type, id)}
       />
     );
   }
+
   private getHeaderItem(item) {
     return (
-      <th id={item.id}>
+      <th key={item.id}>
         {item.title} {this.getIcon(item.type, item.id)}
       </th>
     );

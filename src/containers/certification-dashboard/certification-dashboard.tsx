@@ -206,7 +206,11 @@ class CertificationDashboard extends React.Component<
                 ignoredParams={['page_size', 'page', 'sort']}
               />
             </div>
-            {loading ? <LoadingPageSpinner /> : this.renderTable(versions, params)}
+            {loading ? (
+              <LoadingPageSpinner />
+            ) : (
+              this.renderTable(versions, params)
+            )}
 
             <div className='footer'>
               <Pagination
@@ -224,7 +228,6 @@ class CertificationDashboard extends React.Component<
   }
 
   private renderTable(versions, params) {
-
     if (versions.length === 0) {
       return (
         <EmptyState className='empty' variant={EmptyStateVariant.full}>
@@ -242,22 +245,22 @@ class CertificationDashboard extends React.Component<
       headers: [
         {
           title: 'Namespace',
-          type: 'upAlpha',
+          type: 'none',
           id: 'namespace',
         },
         {
           title: 'Collection',
-          type: 'upAlpha',
+          type: 'none',
           id: 'collection',
         },
         {
           title: 'Version',
-          type: 'upAmount',
+          type: 'none',
           id: 'version',
         },
         {
           title: 'Date created',
-          type: 'upAmount',
+          type: 'none',
           id: 'date',
         },
         {
@@ -272,6 +275,11 @@ class CertificationDashboard extends React.Component<
         },
       ],
     };
+
+    let changedHeader = sortTableOptions.headers.find(
+      e => e.id === params.sort.replace('-', ''),
+    );
+    changedHeader.type = params.sort.includes('-') ? 'down' : 'up';
 
     return (
       <table
