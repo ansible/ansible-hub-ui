@@ -6,6 +6,7 @@ import {
   ArrowsAltVIcon,
 } from '@patternfly/react-icons';
 import { ParamHelper } from '../../utilities';
+import './sort-table.scss';
 
 interface IProps {
   options: object;
@@ -40,9 +41,9 @@ export class SortTable extends React.Component<IProps> {
     }
     return (
       <Icon
-        className='clickable asc-button'
         size='sm'
         onClick={() => this.sort(type, id)}
+        className={'clickable ' + (type == 'none' ? 'inactive' : 'active')}
       />
     );
   }
