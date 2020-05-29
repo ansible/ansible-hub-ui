@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cx from 'classnames';
 import './header.scss';
 
 import { Link } from 'react-router-dom';
@@ -127,9 +128,10 @@ export class CollectionHeader extends React.Component<IProps> {
       <div className='pf-c-tabs' id='primary'>
         <ul className='pf-c-tabs__list'>
           <li
-            className={
-              'pf-c-tabs__item' + (active === 'details' ? ' pf-m-current' : '')
-            }
+            className={cx({
+              'pf-c-tabs__item': true,
+              'pf-m-current': active === 'details',
+            })}
           >
             <Link
               to={formatPath(
@@ -147,10 +149,10 @@ export class CollectionHeader extends React.Component<IProps> {
             </Link>
           </li>
           <li
-            className={
-              'pf-c-tabs__item' +
-              (active === 'documentation' ? ' pf-m-current' : '')
-            }
+            className={cx({
+              'pf-c-tabs__item': true,
+              'pf-m-current': active === 'documentation',
+            })}
           >
             <Link
               to={formatPath(
@@ -168,9 +170,10 @@ export class CollectionHeader extends React.Component<IProps> {
             </Link>
           </li>
           <li
-            className={
-              'pf-c-tabs__item' + (active === 'contents' ? ' pf-m-current' : '')
-            }
+            className={cx({
+              'pf-c-tabs__item': true,
+              'pf-m-current': active === 'contents',
+            })}
           >
             <Link
               to={formatPath(
@@ -188,10 +191,10 @@ export class CollectionHeader extends React.Component<IProps> {
             </Link>
           </li>
           <li
-            className={
-              'pf-c-tabs__item' +
-              (active === 'import-log' ? ' pf-m-current' : '')
-            }
+            className={cx({
+              'pf-c-tabs__item': true,
+              'pf-m-current': active === 'import-log',
+            })}
           >
             <Link
               to={formatPath(

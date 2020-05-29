@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cx from 'classnames';
 import './my-imports.scss';
 
 import * as moment from 'moment';
@@ -153,12 +154,13 @@ export class ImportList extends React.Component<IProps, IState> {
             <div
               onClick={() => selectImport(item)}
               key={item.id}
-              className={
-                item.type === selectedImport.type &&
-                item.id === selectedImport.id
-                  ? 'clickable list-container selected-item'
-                  : 'clickable list-container'
-              }
+              className={cx({
+                clickable: true,
+                'list-container': true,
+                'selected-item':
+                  item.type === selectedImport.type &&
+                  item.id === selectedImport.id,
+              })}
             >
               <div className='left'>
                 <i className={this.getStatusClass(item.state)} />

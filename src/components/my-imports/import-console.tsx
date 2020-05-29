@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cx from 'classnames';
 import './my-imports.scss';
 
 import { Tooltip } from '@patternfly/react-core';
@@ -64,11 +65,10 @@ export class ImportConsole extends React.Component<IProps, {}> {
         {this.renderTitle(selectedImport)}
         <div className='message-list'>
           <div
-            className={
-              this.props.followMessages
-                ? 'log-follow-button follow-active'
-                : 'log-follow-button'
-            }
+            className={cx({
+              'follow-active': this.props.followMessages,
+              'log-follow-button': true,
+            })}
           >
             <Tooltip
               position='left'

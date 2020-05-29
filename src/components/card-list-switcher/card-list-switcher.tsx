@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cx from 'classnames';
 import './switcher.scss';
 
 import { ListIcon, ThLargeIcon } from '@patternfly/react-icons';
@@ -27,20 +28,20 @@ export class CardListSwitcher extends React.Component<IProps> {
       disp = 'card';
     }
 
-    const iconClasses = 'icon clickable ';
+    const iconClasses = ['icon', 'clickable'];
 
     return (
       <div className={className}>
         <ThLargeIcon
           size={size}
-          className={iconClasses + (disp === 'card' ? 'selected' : '')}
+          className={cx(iconClasses, { selected: disp === 'card' })}
           onClick={() =>
             updateParams(ParamHelper.setParam(params, 'view_type', 'card'))
           }
         />
         <ListIcon
           size={size}
-          className={iconClasses + (disp === 'list' ? 'selected' : '')}
+          className={cx(iconClasses, { selected: disp === 'list' })}
           onClick={() =>
             updateParams(ParamHelper.setParam(params, 'view_type', 'list'))
           }
