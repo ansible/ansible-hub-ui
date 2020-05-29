@@ -37,4 +37,5 @@ export enum Paths {
   createUser = '/users/create',
   editUser = '/users/:userID/edit',
   userDetail = '/users/:userID',
+  userProfileSettings = '/settings/user-profile',
 }

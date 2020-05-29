@@ -21,17 +21,14 @@ import {
   EditUser,
   UserDetail,
   UserCreate,
+  UserProfile,
 } from '../../containers';
-import { ActiveUserAPI, UserType } from '../../api';
+import { ActiveUserAPI } from '../../api';
 
 import { Paths, formatPath } from '../../paths';
+import { AppContext } from './app-context';
 
-interface UserProps {
-  setUser: (user: UserType) => void;
-  user?: UserType;
-}
-
-interface IProps extends RouteComponentProps, UserProps {
+interface IProps extends RouteComponentProps {
   Component: any;
   noAuth: boolean;
 }
@@ -40,15 +37,17 @@ interface IState {
 }
 
 class AuthHandler extends React.Component<IProps, IState> {
-  constructor(props) {
+  static contextType = AppContext;
+  constructor(props, context) {
     super(props);
-    this.state = { isLoading: !props.user };
+    this.state = { isLoading: !context.user };
   }
   componentDidMount() {
-    if (!this.props.user) {
+    const { user, setUser } = this.context;
+    if (!user) {
       ActiveUserAPI.getUser()
         .then(result => {
-          this.props.setUser(result);
+          setUser(result);
           this.setState({ isLoading: false });
         })
         .catch(() => this.setState({ isLoading: false }));
@@ -57,7 +56,8 @@ class AuthHandler extends React.Component<IProps, IState> {
 
   render() {
     const { isLoading } = this.state;
-    const { Component, noAuth, user, ...props } = this.props;
+    const { Component, noAuth, ...props } = this.props;
+    const { user } = this.context;
 
     if (isLoading) {
       return null;
@@ -75,8 +75,9 @@ class AuthHandler extends React.Component<IProps, IState> {
   }
 }
 
-export class Routes extends React.Component<UserProps> {
+export class Routes extends React.Component<{}> {
   routes = [
+    { comp: UserProfile, path: Paths.userProfileSettings },
     { comp: UserCreate, path: Paths.createUser },
     { comp: EditUser, path: Paths.editUser },
     { comp: UserDetail, path: Paths.userDetail },
@@ -108,8 +109,6 @@ export class Routes extends React.Component<UserProps> {
             key={index}
             render={props => (
               <AuthHandler
-                user={this.props.user}
-                setUser={this.props.setUser}
                 noAuth={route.noAuth}
                 Component={route.comp}
                 {...props}

@@ -20,6 +20,7 @@ import Logo from '../../../static/images/galaxy_logo.svg';
 import { Paths, formatPath } from '../../paths';
 import { ActiveUserAPI, UserType } from '../../api';
 import { StatefulDropdown } from '../../components';
+import { AppContext } from './app-context';
 
 interface IState {
   user: UserType;
@@ -32,10 +33,6 @@ class App extends React.Component<RouteComponentProps, IState> {
       user: undefined,
     };
   }
-
-  private setUser = user => {
-    this.setState({ user: user });
-  };
 
   render() {
     const { user } = this.state;
@@ -54,6 +51,10 @@ class App extends React.Component<RouteComponentProps, IState> {
           Username: {user.username}
         </DropdownItem>,
         <DropdownSeparator key='separator' />,
+        <DropdownItem
+          key='profile'
+          component={<Link to={Paths.userProfileSettings}>My profile</Link>}
+        ></DropdownItem>,
 
         <DropdownItem
           key='logout'
@@ -134,20 +135,34 @@ class App extends React.Component<RouteComponentProps, IState> {
       />
     );
 
-    // TODO: Provide user and setUser as part of a configuration context when
-    // we have more configurations so that they can be accessd by the rest of the
-    // app
     // Hide navs on login page
     if (this.props.location.pathname === Paths.login) {
-      return <Routes user={this.state.user} setUser={this.setUser} />;
+      return this.ctx(<Routes />);
     }
 
-    return (
+    return this.ctx(
       <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
-        <Routes user={this.state.user} setUser={this.setUser} />
-      </Page>
+        <Routes />
+      </Page>,
     );
   }
+
+  private ctx(component) {
+    return (
+      <AppContext.Provider
+        value={{
+          user: this.state.user,
+          setUser: this.setUser,
+        }}
+      >
+        {component}
+      </AppContext.Provider>
+    );
+  }
+
+  private setUser = user => {
+    this.setState({ user: user });
+  };
 }
 
 export default withRouter(App);

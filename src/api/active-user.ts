@@ -20,14 +20,18 @@ class API extends BaseAPI {
       });
     } else if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
       return new Promise((resolve, reject) => {
-        super
-          .list()
+        this.http
+          .get(this.apiPath)
           .then(result => {
             resolve(result.data);
           })
           .catch(result => reject(result));
       });
     }
+  }
+
+  saveUser(data) {
+    return this.http.put(this.apiPath, data);
   }
 
   // insights has some asinine way of loading tokens that involves forcing the

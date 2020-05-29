@@ -8,8 +8,8 @@ import {
   AlertType,
   AlertList,
   closeAlertMixin,
+  UserFormPage,
 } from '../../components';
-import { UserFormPage } from './user-form-page';
 import { UserType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { DeleteUserModal } from './delete-user-modal';

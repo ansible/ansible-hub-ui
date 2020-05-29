@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-import { LoadingPageWithHeader } from '../../components';
-import { UserFormPage, mapErrorMessages } from './user-form-page';
+import { LoadingPageWithHeader, UserFormPage } from '../../components';
+import { mapErrorMessages } from '../../utilities';
 import { UserType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
 

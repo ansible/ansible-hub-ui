@@ -156,6 +156,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
       default:
         return (
           <TextInput
+            aria-label={selectedFilter.id}
             placeholder={
               selectedFilter.placeholder || `Filter by ${selectedFilter.title}`
             }
