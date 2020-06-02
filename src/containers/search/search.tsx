@@ -139,17 +139,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
                     />
                   </ToolbarItem>
                 </ToolbarGroup>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <Sort
-                      options={sortOptions}
-                      params={params}
-                      updateParams={p =>
-                        this.updateParams(p, () => this.queryCollections())
-                      }
-                    />
-                  </ToolbarItem>
-                </ToolbarGroup>
               </Toolbar>
 
               <div className='pagination-container'>
