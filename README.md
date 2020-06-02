@@ -1,8 +1,14 @@
 # Ansible Automation Hub UI
 
-Frontend for Ansible Automation Hub. The backend for this project can be [found here](https://github.com/ansible/galaxy-dev/)
+Frontend for Ansible Automation Hub. The backend for this project can be [found here](https://github.com/ansible/galaxy_ng/)
 
-## Setting up Your Dev Environment
+# Setting up Your Dev Environment
+
+## Develop using Docker Compose (Recommended)
+
+This project can now be run as a container alongside the API. Just follow the instructions on the [ansibe/galaxy_ng wiki](https://github.com/ansible/galaxy_ng/wiki/Development-Setup).
+
+## Develop without containers
 
 This app can be developed in standalone mode or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights) and requires access to the Red Hat VPN as well as the insights proxy. Standalone mode only requires a running instance of the galaxy API for the UI to connect to.
 
@@ -24,6 +30,7 @@ To enable insights mode set `DEPLOYMENT_MODE: 'insights'` in [custom.dev.config.
 This app is part of the Red Hat cloud platform. Because of that the app needs to be loaded within the context of cloud.redhat.com. This is done by accessing the app via the [insights-proxy project](https://github.com/RedHatInsights/insights-proxy).
 
 #### Set up Insights Proxy
+
 - Install docker
 - Clone this repo `git@github.com:RedHatInsights/insights-proxy.git` to your machine
 - Inside the `insights-proxy/` directory on your computer, run the following scripts
@@ -65,15 +72,6 @@ Once the insights proxy is running, open a new terminal, navigate to your local 
 
 To access the app, visit: https://ci.foo.redhat.com:1337/insights/automation-hub
 
-### Testing
-
-- `npm run verify` will run linters and tests
-- Travis is used to test the build for this code.
-  - You are always notified on failed builds
-  - You are only notified on successful builds if the build before it failed
-  - By default, both `push` events as well as `pull_request` events send notifications
-  - Travis is defaulted to notify #insights-bots
-
 ## Deploying
 
 - The Platform team is using Travis to deploy the application
@@ -98,39 +96,3 @@ To access the app, visit: https://ci.foo.redhat.com:1337/insights/automation-hub
 ## Insights Components
 
 Insights Platform will deliver components and static assets through [npm](https://www.npmjs.com/package/@red-hat-insights/insights-frontend-components). ESI tags are used to import the [chroming](https://github.com/RedHatInsights/insights-chrome) which takes care of the header, sidebar, and footer.
-
-## Technologies
-
-### React
-
-- High-Order Component
-
-  - a [higher-order component](https://reactjs.org/docs/higher-order-components.html) is a function that takes a component and returns a new component
-    - Ex) [asyncComponent.js](https://github.com/RedHatInsights/insights-frontend-starter-app/src/Utils/asyncComponent.js)
-
-- [Smart/Presentational Components](https://medium.com/@thejasonfile/dumb-components-and-smart-components-e7b33a698d43)
-  - Smart components have access to the redux state
-  - Presentational components do not have access to the redux state
-  - Smart Components === insights-frontend/app/js/states
-  - Presentational Components === insights-frontend/app/js/components
-
-- [State and lifecycle within class components](https://reactjs.org/docs/state-and-lifecycle.html)
-  - article contains:
-    - Adding Lifecycle Methods to a Class
-    - Adding Local State to a Class
-    - State Updates May Be Asynchronous
-    - State Updates are Merged
-
-### React-router-dom
-
-When setting up the routes, the page content is wrapped with a `.page__{pageName}` class, applied to the `#root` ID that is determined by the `rootClass` in the `Routes.js` which lets you easily reference the page in the styling.
-
-- [BrowserRouter](https://reacttraining.com/react-router/web/api/BrowserRouter)
-  - A `<Router>` that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL
-- [Route](https://reacttraining.com/react-router/web/api/Route)
-- [Switch](https://reacttraining.com/react-router/web/api/Switch)
-  - Renders the first child `<Route>` or `<Redirect>` that matches the location.
-- [Redirect](https://reacttraining.com/react-router/web/api/Redirect)
-  - navigate to a new location
-- [withRouter](https://reacttraining.com/react-router/web/api/withRouter)
-  - passes updated match, location, and history props to the wrapped component whenever it renders
