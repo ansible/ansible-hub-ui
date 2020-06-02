@@ -5,7 +5,7 @@ FROM node:13-alpine
 WORKDIR /hub/
 
 RUN mkdir -p /hub/app/ && \
-    apk add git
+    apk add --no-cache git
 
 # install npm in /hub and mount the app in /hub/app so that the installed node_modules
 # doesn't trample node_modules on your computer. see https://www.docker.com/blog/keep-nodejs-rockin-in-docker/ for details
