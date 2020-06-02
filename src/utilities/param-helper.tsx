@@ -100,7 +100,7 @@ export class ParamHelper {
 
   // Returns the query string for the set of parameters
   static getQueryString(params: Object, ignoreParams?: string[]) {
-    let paramString = []
+    let paramString = [];
     for (const key of Object.keys(params)) {
       // skip the param if its in the list of ignored params
       if (ignoreParams && ignoreParams.includes(key)) {
