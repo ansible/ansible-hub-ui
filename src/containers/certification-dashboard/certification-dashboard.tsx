@@ -45,11 +45,11 @@ import {
   LoadingPageSpinner,
   AppliedFilters,
   Pagination,
-  Sort,
   AlertList,
   closeAlertMixin,
   AlertType,
   SortFieldType,
+  SortTable,
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
 
@@ -186,17 +186,6 @@ class CertificationDashboard extends React.Component<
                     />
                   </ToolbarItem>
                 </ToolbarGroup>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <Sort
-                      options={sortOptions}
-                      params={params}
-                      updateParams={p =>
-                        this.updateParams(p, () => this.queryCollections())
-                      }
-                    />
-                  </ToolbarItem>
-                </ToolbarGroup>
               </Toolbar>
 
               <Pagination
@@ -217,7 +206,11 @@ class CertificationDashboard extends React.Component<
                 ignoredParams={['page_size', 'page', 'sort']}
               />
             </div>
-            {loading ? <LoadingPageSpinner /> : this.renderTable(versions)}
+            {loading ? (
+              <LoadingPageSpinner />
+            ) : (
+              this.renderTable(versions, params)
+            )}
 
             <div className='footer'>
               <Pagination
@@ -234,7 +227,7 @@ class CertificationDashboard extends React.Component<
     );
   }
 
-  private renderTable(versions) {
+  private renderTable(versions, params) {
     if (versions.length === 0) {
       return (
         <EmptyState className='empty' variant={EmptyStateVariant.full}>
@@ -248,22 +241,53 @@ class CertificationDashboard extends React.Component<
         </EmptyState>
       );
     }
+    let sortTableOptions = {
+      headers: [
+        {
+          title: 'Namespace',
+          type: 'alpha',
+          id: 'namespace',
+        },
+        {
+          title: 'Collection',
+          type: 'alpha',
+          id: 'collection',
+        },
+        {
+          title: 'Version',
+          type: 'number',
+          id: 'version',
+        },
+        {
+          title: 'Date created',
+          type: 'number',
+          id: 'pulp_created',
+        },
+        {
+          title: 'Status',
+          type: 'none',
+          id: 'status',
+        },
+        {
+          title: '',
+          type: 'none',
+          id: 'certify',
+        },
+      ],
+    };
 
     return (
       <table
         aria-label='Collection versions'
         className='content-table pf-c-table'
       >
-        <thead>
-          <tr aria-labelledby='headers'>
-            <th>Namespace</th>
-            <th>Collection</th>
-            <th>Version</th>
-            <th>Date created</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
+        <SortTable
+          options={sortTableOptions}
+          params={params}
+          updateParams={p =>
+            this.updateParams(p, () => this.queryCollections())
+          }
+        />
         <tbody>
           {versions.map((version, i) => this.renderRow(version, i))}
         </tbody>
