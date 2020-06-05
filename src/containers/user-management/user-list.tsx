@@ -87,7 +87,6 @@ class UserList extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const {
-      users,
       params,
       itemCount,
       loading,
@@ -103,7 +102,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         type: 'alpha',
       },
       { id: 'email', title: 'Email', type: 'alpha' },
-      { id: 'first_name', title: 'Fist name', type: 'alpha' },
+      { id: 'first_name', title: 'First name', type: 'alpha' },
       { id: 'last_name', title: 'Last name', type: 'alpha' },
     ];
 
