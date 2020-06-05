@@ -9,7 +9,13 @@ import { ParamHelper } from '../../utilities';
 import './sort-table.scss';
 
 interface IProps {
-  options: object;
+  options: {
+    headers: {
+      title: string;
+      type: string;
+      id: string;
+    }[];
+  };
   params: object;
   updateParams: (params) => void;
 }
