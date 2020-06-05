@@ -261,7 +261,7 @@ class CertificationDashboard extends React.Component<
         {
           title: 'Date created',
           type: 'number',
-          id: 'date',
+          id: 'pulp_created',
         },
         {
           title: 'Status',
