@@ -22,34 +22,41 @@ interface IProps {
 
 export class SortTable extends React.Component<IProps> {
   private sort(type, id) {
+    let isDescending = this.props.params['sort'].includes('-');
+    // Alphabetical sorting is inverted in Django, so flip it here to make
+    // things match up with the UI.
+    if (type == 'alpha') {
+      isDescending = !isDescending;
+    }
     this.props.updateParams(
       ParamHelper.setParam(
         this.props.params,
         'sort',
-        (type.includes('up') ? '-' : '') + id,
+        (isDescending ? '' : '-') + id,
       ),
     );
   }
   private getIcon(type, id) {
-    if (type == '') {
+    if (type == 'none') {
       return;
     }
     let Icon;
-    switch (type) {
-      case 'down':
-        Icon = LongArrowAltDownIcon;
-        break;
-      case 'up':
-        Icon = LongArrowAltUpIcon;
-        break;
-      case 'none':
-        Icon = ArrowsAltVIcon;
+    let activeIcon = id == this.props.params['sort'].replace('-', '');
+    if (activeIcon) {
+      let isDescending = this.props.params['sort'].includes('-');
+      if (type == 'alpha') {
+        isDescending = !isDescending;
+      }
+      Icon = isDescending ? LongArrowAltDownIcon : LongArrowAltUpIcon;
+    } else {
+      Icon = ArrowsAltVIcon;
     }
+
     return (
       <Icon
         size='sm'
         onClick={() => this.sort(type, id)}
-        className={'clickable ' + (type == 'none' ? 'inactive' : 'active')}
+        className={'clickable ' + (activeIcon ? 'active' : 'inactive')}
       />
     );
   }

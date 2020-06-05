@@ -245,41 +245,36 @@ class CertificationDashboard extends React.Component<
       headers: [
         {
           title: 'Namespace',
-          type: 'none',
+          type: 'alpha',
           id: 'namespace',
         },
         {
           title: 'Collection',
-          type: 'none',
+          type: 'alpha',
           id: 'collection',
         },
         {
           title: 'Version',
-          type: 'none',
+          type: 'number',
           id: 'version',
         },
         {
           title: 'Date created',
-          type: 'none',
+          type: 'number',
           id: 'date',
         },
         {
           title: 'Status',
-          type: '',
+          type: 'none',
           id: 'status',
         },
         {
           title: '',
-          type: '',
+          type: 'none',
           id: 'certify',
         },
       ],
     };
-
-    let changedHeader = sortTableOptions.headers.find(
-      e => e.id === params.sort.replace('-', ''),
-    );
-    changedHeader.type = params.sort.includes('-') ? 'down' : 'up';
 
     return (
       <table
