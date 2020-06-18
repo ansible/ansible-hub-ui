@@ -93,7 +93,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     const tags = [
       'cloud',
       'linux',
-      'network',
+      'networking',
       'storage',
       'security',
       'windows',
