@@ -104,10 +104,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
       'application',
     ];
 
-    const sortOptions: SortFieldType[] = [
-      { id: 'name', title: 'Collection name', type: 'alpha' },
-    ];
-
     return (
       <React.Fragment>
         <BaseHeader className='header' title='Collections'>
@@ -136,17 +132,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
                           })),
                         },
                       ]}
-                    />
-                  </ToolbarItem>
-                </ToolbarGroup>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <Sort
-                      options={sortOptions}
-                      params={params}
-                      updateParams={p =>
-                        this.updateParams(p, () => this.queryCollections())
-                      }
                     />
                   </ToolbarItem>
                 </ToolbarGroup>
