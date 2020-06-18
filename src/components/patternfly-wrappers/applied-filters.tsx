@@ -1,11 +1,6 @@
 import * as React from 'react';
 
-import {
-  Badge,
-  Chip,
-  ChipGroup,
-  ChipGroupToolbarItem,
-} from '@patternfly/react-core';
+import { Chip, ChipGroup, ChipGroupToolbarItem } from '@patternfly/react-core';
 
 import { ParamHelper } from '../../utilities';
 
