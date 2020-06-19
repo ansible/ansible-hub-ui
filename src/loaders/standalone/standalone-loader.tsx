@@ -76,7 +76,7 @@ class App extends React.Component<RouteComponentProps, IState> {
             <img style={{ height: '35px' }} src={Logo} alt='Galaxy Logo' />
           </React.Fragment>
         }
-        toolbar={
+        headerTools={
           <div>
             {!user ? (
               <Link
@@ -97,7 +97,6 @@ class App extends React.Component<RouteComponentProps, IState> {
             )}
           </div>
         }
-        avatar=''
         showNavToggle
       />
     );
