@@ -104,10 +104,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
       'application',
     ];
 
-    const sortOptions: SortFieldType[] = [
-      { id: 'name', title: 'Collection name', type: 'alpha' },
-    ];
-
     return (
       <React.Fragment>
         <BaseHeader className='header' title='Collections'>
@@ -123,8 +119,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
                       params={params}
                       filterConfig={[
                         {
-                          id: 'collection',
-                          title: 'Collection',
+                          id: 'keywords',
+                          title: 'Keywords',
                         },
                         {
                           id: 'tags',
