@@ -131,7 +131,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
 
     return (
       <Modal
-        isLarge
+        variant='large'
         title='Create a new namespace'
         isOpen={this.props.isOpen}
         onClose={this.toggleModal}
@@ -143,7 +143,6 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             Cancel
           </Button>,
         ]}
-        isFooterLeftAligned
       >
         <Form>
           <FormGroup

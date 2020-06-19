@@ -29,7 +29,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
     }
     return (
       <Modal
-        isSmall
+        variant='small'
         onClose={() => closeModal(false)}
         isOpen={isOpen}
         title={''}
