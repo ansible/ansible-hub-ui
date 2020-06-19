@@ -153,7 +153,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             helperText='Please, provide the namespace name'
             helperTextInvalid={this.state.errorMessages['name']}
             // This prop will be deprecated. You should use validated instead.
-            isValid={this.state.newNamespaceNameValid}
+            validated={this.toError(this.state.newNamespaceNameValid)}
           >
             <InputGroup>
               <TextInput
@@ -187,7 +187,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             fieldId='groups'
             helperText='Please, provide comma-separated Red Hat account identifications'
             helperTextInvalid={this.state.errorMessages['groups']}
-            isValid={this.state.newNamespaceGroupIdsValid}
+            validated={this.toError(this.state.newNamespaceGroupIdsValid)}
           >
             <TextInput
               isRequired
@@ -205,5 +205,13 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         </Form>
       </Modal>
     );
+  }
+
+  private toError(validated: boolean) {
+    if (validated) {
+      return 'success';
+    } else {
+      return 'error';
+    }
   }
 }

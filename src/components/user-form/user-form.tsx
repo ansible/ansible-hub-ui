@@ -82,7 +82,7 @@ export class UserForm extends React.Component<IProps, IState> {
             fieldId={v.id}
             label={v.title}
             helperTextInvalid={errorMessages[v.id]}
-            isValid={!(v.id in errorMessages)}
+            validated={this.toError(!(v.id in errorMessages))}
           >
             <TextInput
               isDisabled={isReadonly}
@@ -98,7 +98,9 @@ export class UserForm extends React.Component<IProps, IState> {
           fieldId={'password-confirm'}
           label={'Password confirmation'}
           helperTextInvalid={'Passwords do not match'}
-          isValid={this.isPassSame(user.password, passwordConfirm)}
+          validated={this.toError(
+            this.isPassSame(user.password, passwordConfirm),
+          )}
         >
           <TextInput
             isDisabled={isReadonly}
@@ -125,6 +127,14 @@ export class UserForm extends React.Component<IProps, IState> {
         )}
       </Form>
     );
+  }
+
+  private toError(validated: boolean) {
+    if (validated) {
+      return 'success';
+    } else {
+      return 'error';
+    }
   }
 
   private isPassSame(pass, confirm) {
