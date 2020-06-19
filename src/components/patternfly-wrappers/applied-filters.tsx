@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Chip, ChipGroup, ChipGroupToolbarItem } from '@patternfly/react-core';
+import { Chip, ChipGroup } from '@patternfly/react-core';
 
 import { ParamHelper } from '../../utilities';
 
@@ -31,11 +31,11 @@ export class AppliedFilters extends React.Component<IProps, {}> {
     const { params, ignoredParams } = this.props;
 
     return (
-      <ChipGroup withToolbar>
+      <>
         {Object.keys(ParamHelper.getReduced(params, ignoredParams)).map(key =>
           this.renderGroup(key),
         )}
-      </ChipGroup>
+      </>
     );
   }
 
@@ -51,7 +51,7 @@ export class AppliedFilters extends React.Component<IProps, {}> {
     }
 
     return (
-      <ChipGroupToolbarItem categoryName={niceNames[key] || key} key={key}>
+      <ChipGroup categoryName={(niceNames[key] || key) as any} key={key}>
         {chips.map((v, i) => (
           <Chip
             key={i}
@@ -62,7 +62,7 @@ export class AppliedFilters extends React.Component<IProps, {}> {
             {v}
           </Chip>
         ))}
-      </ChipGroupToolbarItem>
+      </ChipGroup>
     );
   }
 }
