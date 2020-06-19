@@ -122,7 +122,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             variant={SelectVariant.checkbox}
             onToggle={this.onToggle}
             onSelect={this.onSelectMultiple}
-            isExpanded={this.state.isOpen}
+            isOpen={this.state.isOpen}
             placeholderText={'Filter by ' + selectedFilter.id}
             selections={this.props.params[this.state.selectedFilter.id]}
             isGrouped
