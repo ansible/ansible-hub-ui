@@ -24,7 +24,7 @@ import {
   LoadingPageSpinner,
 } from '../../components';
 import { Button } from '@patternfly/react-core';
-import { DataToolbarItem } from '@patternfly/react-core/dist/esm/experimental';
+import { ToolbarItem } from '@patternfly/react-core';
 import {
   NamespaceAPI,
   NamespaceListType,
@@ -125,12 +125,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     const createButton = partnerEngineer && (
       <React.Fragment>
-        <DataToolbarItem variant='separator' />
-        <DataToolbarItem>
+        <ToolbarItem variant='separator' />
+        <ToolbarItem>
           <Button variant='primary' onClick={this.handleModalToggle}>
             Create
           </Button>
-        </DataToolbarItem>
+        </ToolbarItem>
       </React.Fragment>
     );
 
