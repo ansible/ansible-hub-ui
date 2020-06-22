@@ -51,18 +51,20 @@ export class AppliedFilters extends React.Component<IProps, {}> {
     }
 
     return (
-      <ChipGroup categoryName={(niceNames[key] || key) as any} key={key}>
-        {chips.map((v, i) => (
-          <Chip
-            key={i}
-            onClick={() =>
-              updateParams(ParamHelper.deleteParam(params, key, v))
-            }
-          >
-            {v}
-          </Chip>
-        ))}
-      </ChipGroup>
+      <div style={{ display: 'inline', marginRight: '8px' }} key={key}>
+        <ChipGroup categoryName={(niceNames[key] || key) as any}>
+          {chips.map((v, i) => (
+            <Chip
+              key={i}
+              onClick={() =>
+                updateParams(ParamHelper.deleteParam(params, key, v))
+              }
+            >
+              {v}
+            </Chip>
+          ))}
+        </ChipGroup>
+      </div>
     );
   }
 }
