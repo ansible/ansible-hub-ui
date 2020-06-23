@@ -8,24 +8,29 @@ interface IProps {
   image: string;
   alt: string;
   className?: string;
+  unlockWidth?: boolean;
 }
 
 export class Logo extends React.Component<IProps> {
   render() {
-    const { size, image, alt, className } = this.props;
+    const { size, image, alt, className, unlockWidth } = this.props;
+
+    const style = {
+      height: size,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    };
+
+    if (unlockWidth) {
+      style['minWidth'] = size;
+    } else {
+      style['width'] = size;
+    }
 
     // use inline css so we can set size
     return (
-      <div
-        className={className}
-        style={{
-          width: size,
-          height: size,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <div className={className} style={style}>
         <img
           style={{ objectFit: 'contain', maxHeight: size }}
           src={image || DefaultLogo}

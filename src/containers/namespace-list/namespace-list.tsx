@@ -226,13 +226,13 @@ export class NamespaceList extends React.Component<IProps, IState> {
       <Section className='card-layout'>
         {namespaces.map((ns, i) => (
           <div key={i} className='card-wrapper'>
-            <Link
-              to={formatPath(namespacePath, {
+            <NamespaceCard
+              namespaceURL={formatPath(namespacePath, {
                 namespace: ns.name,
               })}
-            >
-              <NamespaceCard key={i} {...ns}></NamespaceCard>
-            </Link>
+              key={i}
+              {...ns}
+            ></NamespaceCard>
           </div>
         ))}
       </Section>

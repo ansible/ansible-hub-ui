@@ -1,34 +1,49 @@
 import * as React from 'react';
 import './cards.scss';
 
-import { Card } from '@patternfly/react-core';
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  CardHeaderMain,
+  CardTitle,
+} from '@patternfly/react-core';
 
-import { NumericLabel, Logo } from '../../components';
+import { Link } from 'react-router-dom';
+
+import { Logo } from '../../components';
 // Use snake case to match field types provided py python API so that the
 // spread operator can be used.
 interface IProps {
   avatar_url: string;
   name: string;
   company: string;
-  num_collections: string | number;
+  namespaceURL?: string;
 }
 
 export class NamespaceCard extends React.Component<IProps, {}> {
   render() {
-    const { avatar_url, name, company, num_collections } = this.props;
+    const { avatar_url, name, company, namespaceURL } = this.props;
     return (
       <Card className='ns-card-container'>
-        <Logo
-          className='logo'
-          image={avatar_url}
-          alt={company + ' logo'}
-          size='100px'
-        />
-
-        <div>
-          <div className='title'>{company}</div>
-          <div className='ns-name'>{name}</div>
-        </div>
+        <CardHeader>
+          <CardHeaderMain>
+            <Logo
+              unlockWidth
+              image={avatar_url}
+              alt={company + ' logo'}
+              size='50px'
+            />
+          </CardHeaderMain>
+        </CardHeader>
+        <CardTitle>{company || name}</CardTitle>
+        <CardBody>{name}</CardBody>
+        {namespaceURL && (
+          <CardFooter>
+            <Link to={namespaceURL}>View collections</Link>
+          </CardFooter>
+        )}
       </Card>
     );
   }
