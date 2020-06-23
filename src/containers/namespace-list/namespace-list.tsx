@@ -59,7 +59,6 @@ interface IProps extends RouteComponentProps {
 
 export class NamespaceList extends React.Component<IProps, IState> {
   nonURLParams = ['tenant'];
-  handleSubmit;
 
   constructor(props) {
     super(props);
@@ -123,16 +122,18 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const createButton = partnerEngineer && (
-      <React.Fragment>
-        <ToolbarItem variant='separator' />
-        <ToolbarItem>
+    let extra = [];
+
+    if (partnerEngineer) {
+      extra.push(<ToolbarItem key='separator' variant='separator' />);
+      extra.push(
+        <ToolbarItem key='create-button'>
           <Button variant='primary' onClick={this.handleModalToggle}>
             Create
           </Button>
-        </ToolbarItem>
-      </React.Fragment>
-    );
+        </ToolbarItem>,
+      );
+    }
 
     return (
       <React.Fragment>
@@ -145,7 +146,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
               updateParams={p =>
                 this.updateParams(p, () => this.loadNamespaces())
               }
-              extraInputs={[createButton]}
+              extraInputs={extra}
             />
             <div>
               <Pagination

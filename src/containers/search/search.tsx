@@ -27,8 +27,6 @@ import {
   Pagination,
   LoadingPageSpinner,
   Main,
-  Sort,
-  SortFieldType,
   AppliedFilters,
 } from '../../components';
 import {
