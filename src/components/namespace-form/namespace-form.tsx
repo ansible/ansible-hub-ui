@@ -63,6 +63,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
               validated={this.toError(!('company' in errorMessages))}
             >
               <TextInput
+                validated={this.toError(!('company' in errorMessages))}
                 isRequired
                 id='company'
                 type='text'
@@ -80,7 +81,10 @@ export class NamespaceForm extends React.Component<IProps, IState> {
           fieldId='groups'
           label='Namespace owners'
           helperTextInvalid={errorMessages['groups']}
-          validated={this.toError(!('groups' in errorMessages))}
+          validated={this.toError(
+            !isNaN(Number(this.state.newNamespaceGroup)) &&
+              !('groups' in errorMessages),
+          )}
         >
           <br />
 
@@ -104,7 +108,8 @@ export class NamespaceForm extends React.Component<IProps, IState> {
               placeholder='Red Hat account ID'
               value={this.state.newNamespaceGroup}
               validated={this.toError(
-                !isNaN(Number(this.state.newNamespaceGroup)),
+                !isNaN(Number(this.state.newNamespaceGroup)) &&
+                  !('groups' in errorMessages),
               )}
               onChange={value =>
                 this.setState({
@@ -132,6 +137,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
           validated={this.toError(!('avatar_url' in errorMessages))}
         >
           <TextInput
+            validated={this.toError(!('avatar_url' in errorMessages))}
             id='avatar_url'
             type='text'
             value={namespace.avatar_url}
@@ -146,6 +152,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
           validated={this.toError(!('description' in errorMessages))}
         >
           <TextArea
+            validated={this.toError(!('description' in errorMessages))}
             id='description'
             type='text'
             value={namespace.description}
@@ -158,9 +165,6 @@ export class NamespaceForm extends React.Component<IProps, IState> {
             fieldId='links'
             label='Useful links'
             helperTextInvalid={errorMessages['name'] || errorMessages['url']}
-            validated={this.toError(
-              !('name' in errorMessages || 'url' in errorMessages),
-            )}
           >
             {namespace.links.map((link, index) =>
               this.renderLinkGroup(link, index),
@@ -212,7 +216,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
 
   private toError(validated: boolean) {
     if (validated) {
-      return 'success';
+      return 'default';
     } else {
       return 'error';
     }

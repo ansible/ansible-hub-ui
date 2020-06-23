@@ -81,10 +81,11 @@ export class UserForm extends React.Component<IProps, IState> {
             key={v.id}
             fieldId={v.id}
             label={v.title}
-            helperTextInvalid={errorMessages[v.id]}
             validated={this.toError(!(v.id in errorMessages))}
+            helperTextInvalid={errorMessages[v.id]}
           >
             <TextInput
+              validated={this.toError(!(v.id in errorMessages))}
               isDisabled={isReadonly}
               id={v.id}
               placeholder={v.placeholder}
@@ -103,6 +104,9 @@ export class UserForm extends React.Component<IProps, IState> {
           )}
         >
           <TextInput
+            validated={this.toError(
+              this.isPassSame(user.password, passwordConfirm),
+            )}
             isDisabled={isReadonly}
             id={'password-confirm'}
             value={passwordConfirm}
@@ -131,7 +135,7 @@ export class UserForm extends React.Component<IProps, IState> {
 
   private toError(validated: boolean) {
     if (validated) {
-      return 'success';
+      return 'default';
     } else {
       return 'error';
     }
