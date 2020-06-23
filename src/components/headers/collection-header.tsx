@@ -127,92 +127,74 @@ export class CollectionHeader extends React.Component<IProps> {
     return (
       <div className='pf-c-tabs' id='primary'>
         <ul className='pf-c-tabs__list'>
-          <li
-            className={cx({
-              'pf-c-tabs__item': true,
-              'pf-m-current': active === 'details',
-            })}
-          >
-            <Link
-              to={formatPath(
-                Paths.collection,
-                {
-                  namespace: this.props.collection.namespace.name,
-                  collection: this.props.collection.name,
-                },
-                ParamHelper.getReduced(params, this.ignorParams),
-              )}
-              className='pf-c-tabs__button'
-              id='details-tab'
-            >
-              Details
-            </Link>
-          </li>
-          <li
-            className={cx({
-              'pf-c-tabs__item': true,
-              'pf-m-current': active === 'documentation',
-            })}
-          >
-            <Link
-              to={formatPath(
-                Paths.collectionDocsIndex,
-                {
-                  namespace: this.props.collection.namespace.name,
-                  collection: this.props.collection.name,
-                },
-                ParamHelper.getReduced(params, this.ignorParams),
-              )}
-              className='pf-c-tabs__button'
-              id='documentation-tab'
-            >
-              Documentation
-            </Link>
-          </li>
-          <li
-            className={cx({
-              'pf-c-tabs__item': true,
-              'pf-m-current': active === 'contents',
-            })}
-          >
-            <Link
-              to={formatPath(
-                Paths.collectionContentList,
-                {
-                  namespace: this.props.collection.namespace.name,
-                  collection: this.props.collection.name,
-                },
-                ParamHelper.getReduced(params, this.ignorParams),
-              )}
-              className='pf-c-tabs__button'
-              id='contents-tab'
-            >
-              Contents
-            </Link>
-          </li>
-          <li
-            className={cx({
-              'pf-c-tabs__item': true,
-              'pf-m-current': active === 'import-log',
-            })}
-          >
-            <Link
-              to={formatPath(
-                Paths.collectionImportLog,
-                {
-                  namespace: this.props.collection.namespace.name,
-                  collection: this.props.collection.name,
-                },
-                ParamHelper.getReduced(params, this.ignorParams),
-              )}
-              className='pf-c-tabs__button'
-              id='contents-tab'
-            >
-              Import log
-            </Link>
-          </li>
+          {this.renderTab(
+            active === 'details',
+            'Details',
+            formatPath(
+              Paths.collection,
+              {
+                namespace: this.props.collection.namespace.name,
+                collection: this.props.collection.name,
+              },
+              ParamHelper.getReduced(params, this.ignorParams),
+            ),
+          )}
+
+          {this.renderTab(
+            active === 'documentation',
+            'Documentation',
+            formatPath(
+              Paths.collectionDocsIndex,
+              {
+                namespace: this.props.collection.namespace.name,
+                collection: this.props.collection.name,
+              },
+              ParamHelper.getReduced(params, this.ignorParams),
+            ),
+          )}
+
+          {this.renderTab(
+            active === 'contents',
+            'Contents',
+            formatPath(
+              Paths.collectionContentList,
+              {
+                namespace: this.props.collection.namespace.name,
+                collection: this.props.collection.name,
+              },
+              ParamHelper.getReduced(params, this.ignorParams),
+            ),
+          )}
+
+          {this.renderTab(
+            active === 'import-log',
+            'Import log',
+            formatPath(
+              Paths.collectionImportLog,
+              {
+                namespace: this.props.collection.namespace.name,
+                collection: this.props.collection.name,
+              },
+              ParamHelper.getReduced(params, this.ignorParams),
+            ),
+          )}
         </ul>
       </div>
+    );
+  }
+
+  private renderTab(active, title, link) {
+    return (
+      <li
+        className={cx({
+          'pf-c-tabs__item': true,
+          'pf-m-current': active,
+        })}
+      >
+        <Link to={link} className='pf-c-tabs__link' id='details-tab'>
+          <span className='pf-c-tabs__item-text'>{title}</span>
+        </Link>
+      </li>
     );
   }
 }

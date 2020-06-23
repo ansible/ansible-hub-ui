@@ -79,8 +79,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       userId,
     } = this.state;
 
-    console.log(namespace);
-
     if (redirect) {
       return <Redirect to={redirect} />;
     }
