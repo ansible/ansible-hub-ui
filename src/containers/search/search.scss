@@ -1,6 +1,13 @@
 @import '../../global-variables.scss';
 
 .search-page {
+  height: 100%;
+  // subtract height of chrome
+  // min-height: calc(100vh - 76px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   .toolbar-wrapper {
     .toolbar {
       display: flex;
@@ -23,14 +30,9 @@
   }
 
   .collection-container {
-    // Should be the height of the page minus the header and the footer.
-    // This makes it so the footer stays at the bottom.
-    min-height: calc(100vh - 285px);
+    padding-top: 24px;
 
-    @media (min-width: $breakpoint-md) {
-      display: flex;
-    }
-
+    flex-grow: 1;
     .cards {
       display: flex;
       flex-wrap: wrap;
@@ -49,6 +51,7 @@
     .list {
       margin-bottom: 24px;
       margin-left: 24px;
+      margin-right: 24px;
       padding-top: 16px;
       padding-bottom: 16px;
 
@@ -67,6 +70,6 @@
 
   .footer {
     border-top: 1px solid #d8d8d8;
-    margin: 0px -24px -24px -24px;
+    flex-shrink: 0;
   }
 }

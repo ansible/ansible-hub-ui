@@ -187,21 +187,19 @@ class Search extends React.Component<RouteComponentProps, IState> {
             </div>
           </div>
         </BaseHeader>
-        <Main>
-          <Section className='collection-container'>
-            {this.renderCollections(collections, params)}
-          </Section>
-          <Section className='footer'>
-            <Pagination
-              params={params}
-              updateParams={p =>
-                this.updateParams(p, () => this.queryCollections())
-              }
-              perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
-              count={numberOfResults}
-            />
-          </Section>
-        </Main>
+        <Section className='collection-container'>
+          {this.renderCollections(collections, params)}
+        </Section>
+        <Section className='footer'>
+          <Pagination
+            params={params}
+            updateParams={p =>
+              this.updateParams(p, () => this.queryCollections())
+            }
+            perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+            count={numberOfResults}
+          />
+        </Section>
       </div>
     );
   }
