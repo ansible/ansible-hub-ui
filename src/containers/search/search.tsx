@@ -14,6 +14,7 @@ import {
   EmptyStateBody,
   EmptyStateVariant,
   Button,
+  ToolbarContent,
 } from '@patternfly/react-core';
 
 import { SearchIcon } from '@patternfly/react-icons';
@@ -103,36 +104,53 @@ class Search extends React.Component<RouteComponentProps, IState> {
     ];
 
     return (
-      <React.Fragment>
+      <div className='search-page'>
         <BaseHeader className='header' title='Collections'>
           <div className='toolbar-wrapper'>
             <div className='toolbar'>
               <Toolbar>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <CompoundFilter
-                      updateParams={p =>
-                        this.updateParams(p, () => this.queryCollections())
-                      }
-                      params={params}
-                      filterConfig={[
-                        {
-                          id: 'keywords',
-                          title: 'Keywords',
-                        },
-                        {
-                          id: 'tags',
-                          title: 'Tag',
-                          inputType: 'multiple',
-                          options: tags.map(tag => ({
-                            id: tag,
-                            title: tag,
-                          })),
-                        },
-                      ]}
-                    />
-                  </ToolbarItem>
-                </ToolbarGroup>
+                <ToolbarContent>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <CompoundFilter
+                        updateParams={p =>
+                          this.updateParams(p, () => this.queryCollections())
+                        }
+                        params={params}
+                        filterConfig={[
+                          {
+                            id: 'keywords',
+                            title: 'Keywords',
+                          },
+                          {
+                            id: 'tags',
+                            title: 'Tag',
+                            inputType: 'multiple',
+                            options: tags.map(tag => ({
+                              id: tag,
+                              title: tag,
+                            })),
+                          },
+                        ]}
+                      />
+                      <ToolbarItem>
+                        <AppliedFilters
+                          style={{ marginTop: '16px' }}
+                          updateParams={p =>
+                            this.updateParams(p, () => this.queryCollections())
+                          }
+                          params={params}
+                          ignoredParams={[
+                            'page_size',
+                            'page',
+                            'sort',
+                            'view_type',
+                          ]}
+                        />
+                      </ToolbarItem>
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                </ToolbarContent>
               </Toolbar>
 
               <div className='pagination-container'>
@@ -167,22 +185,13 @@ class Search extends React.Component<RouteComponentProps, IState> {
                 />
               </div>
             </div>
-            <div className='applied-filters'>
-              <AppliedFilters
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
-                params={params}
-                ignoredParams={['page_size', 'page', 'sort', 'view_type']}
-              />
-            </div>
           </div>
         </BaseHeader>
         <Main>
           <Section className='collection-container'>
             {this.renderCollections(collections, params)}
           </Section>
-          <Section className='body footer'>
+          <Section className='footer'>
             <Pagination
               params={params}
               updateParams={p =>
@@ -193,7 +202,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
             />
           </Section>
         </Main>
-      </React.Fragment>
+      </div>
     );
   }
 

@@ -143,7 +143,7 @@ class CertificationDashboard extends React.Component<
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
         />
-        <Main>
+        <Main className='certification-dashboard'>
           <Section className='body'>
             <div className='toolbar'>
               <Toolbar>

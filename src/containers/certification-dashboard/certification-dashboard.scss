@@ -1,31 +1,33 @@
-.toolbar {
-  padding-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
-}
+.certification-dasboard {
+  .toolbar {
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
 
-.certified-icon {
-  color: var(--pf-global--success-color--100);
-}
+  .certified-icon {
+    color: var(--pf-global--success-color--100);
+  }
 
-.rejected-icon {
-  color: var(--pf-global--danger-color--100);
-}
+  .rejected-icon {
+    color: var(--pf-global--danger-color--100);
+  }
 
-.needs-review-icon {
-  color: var(--pf-global--info-color--100);
-}
+  .needs-review-icon {
+    color: var(--pf-global--info-color--100);
+  }
 
-.control-column {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
+  .control-column {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
 
-.footer {
-  padding-top: 16px;
-}
+  .footer {
+    padding-top: 16px;
+  }
 
-.updating-spinner {
-  color: var(--pf-global--info-color--100);
+  .updating-spinner {
+    color: var(--pf-global--info-color--100);
+  }
 }

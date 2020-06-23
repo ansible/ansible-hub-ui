@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Chip, ChipGroup } from '@patternfly/react-core';
+import { Chip, ChipGroup, Button } from '@patternfly/react-core';
 
 import { ParamHelper } from '../../utilities';
 
@@ -19,6 +19,8 @@ interface IProps {
    * when displaying the param field name
    */
   niceNames?: object;
+  style?: React.CSSProperties;
+  className?: string;
 }
 
 export class AppliedFilters extends React.Component<IProps, {}> {
@@ -28,15 +30,22 @@ export class AppliedFilters extends React.Component<IProps, {}> {
   };
 
   render() {
-    const { params, ignoredParams } = this.props;
+    const { params, ignoredParams, className, style } = this.props;
 
-    return (
-      <>
-        {Object.keys(ParamHelper.getReduced(params, ignoredParams)).map(key =>
-          this.renderGroup(key),
-        )}
-      </>
-    );
+    if (Object.keys(ParamHelper.getReduced(params, ignoredParams)).length > 0) {
+      return (
+        <div className={className} style={style}>
+          {Object.keys(ParamHelper.getReduced(params, ignoredParams)).map(key =>
+            this.renderGroup(key),
+          )}
+          <Button onClick={this.clearAllFilters} variant='link'>
+            Clear all filters
+          </Button>
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 
   private renderGroup(key: string) {
@@ -67,4 +76,17 @@ export class AppliedFilters extends React.Component<IProps, {}> {
       </div>
     );
   }
+
+  private clearAllFilters = () => {
+    let params = this.props.params;
+    const deleteKeys = Object.keys(
+      ParamHelper.getReduced(params, this.props.ignoredParams),
+    );
+
+    for (const key of deleteKeys) {
+      params = ParamHelper.deleteParam(params, key);
+    }
+
+    this.props.updateParams(params);
+  };
 }
