@@ -131,7 +131,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
 
     return (
       <Modal
-        isLarge
+        variant='large'
         title='Create a new namespace'
         isOpen={this.props.isOpen}
         onClose={this.toggleModal}
@@ -143,7 +143,6 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             Cancel
           </Button>,
         ]}
-        isFooterLeftAligned
       >
         <Form>
           <FormGroup
@@ -152,11 +151,11 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             fieldId='name'
             helperText='Please, provide the namespace name'
             helperTextInvalid={this.state.errorMessages['name']}
-            // This prop will be deprecated. You should use validated instead.
-            isValid={this.state.newNamespaceNameValid}
+            validated={this.toError(this.state.newNamespaceNameValid)}
           >
             <InputGroup>
               <TextInput
+                validated={this.toError(this.state.newNamespaceNameValid)}
                 isRequired
                 type='text'
                 id='newNamespaceName'
@@ -187,9 +186,10 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             fieldId='groups'
             helperText='Please, provide comma-separated Red Hat account identifications'
             helperTextInvalid={this.state.errorMessages['groups']}
-            isValid={this.state.newNamespaceGroupIdsValid}
+            validated={this.toError(this.state.newNamespaceGroupIdsValid)}
           >
             <TextInput
+              validated={this.toError(this.state.newNamespaceGroupIdsValid)}
               isRequired
               type='text'
               id='newNamespaceGroupIds'
@@ -205,5 +205,13 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         </Form>
       </Modal>
     );
+  }
+
+  private toError(validated: boolean) {
+    if (validated) {
+      return 'default';
+    } else {
+      return 'error';
+    }
   }
 }

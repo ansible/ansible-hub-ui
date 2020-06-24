@@ -12,6 +12,7 @@ import {
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
+  ToolbarContent,
   Button,
   DropdownItem,
   EmptyState,
@@ -131,52 +132,54 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           <Section className='body'>
             <div className='toolbar'>
               <Toolbar>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <CompoundFilter
-                      updateParams={p =>
-                        this.updateParams(p, () => this.queryUsers())
-                      }
-                      params={params}
-                      filterConfig={[
-                        {
-                          id: 'username',
-                          title: 'Username',
-                        },
-                        {
-                          id: 'first_name',
-                          title: 'First name',
-                        },
-                        {
-                          id: 'last_name',
-                          title: 'Last name',
-                        },
-                        {
-                          id: 'email',
-                          title: 'Email',
-                        },
-                      ]}
-                    />
-                  </ToolbarItem>
-                </ToolbarGroup>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <Sort
-                      options={sortOptions}
-                      params={params}
-                      updateParams={p =>
-                        this.updateParams(p, () => this.queryUsers())
-                      }
-                    />
-                  </ToolbarItem>
-                </ToolbarGroup>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <Link to={Paths.createUser}>
-                      <Button>Create user</Button>
-                    </Link>
-                  </ToolbarItem>
-                </ToolbarGroup>
+                <ToolbarContent>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <CompoundFilter
+                        updateParams={p =>
+                          this.updateParams(p, () => this.queryUsers())
+                        }
+                        params={params}
+                        filterConfig={[
+                          {
+                            id: 'username',
+                            title: 'Username',
+                          },
+                          {
+                            id: 'first_name',
+                            title: 'First name',
+                          },
+                          {
+                            id: 'last_name',
+                            title: 'Last name',
+                          },
+                          {
+                            id: 'email',
+                            title: 'Email',
+                          },
+                        ]}
+                      />
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <Sort
+                        options={sortOptions}
+                        params={params}
+                        updateParams={p =>
+                          this.updateParams(p, () => this.queryUsers())
+                        }
+                      />
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <Link to={Paths.createUser}>
+                        <Button>Create user</Button>
+                      </Link>
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                </ToolbarContent>
               </Toolbar>
 
               <Pagination

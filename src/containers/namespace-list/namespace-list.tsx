@@ -24,7 +24,7 @@ import {
   LoadingPageSpinner,
 } from '../../components';
 import { Button } from '@patternfly/react-core';
-import { DataToolbarItem } from '@patternfly/react-core/dist/esm/experimental';
+import { ToolbarItem } from '@patternfly/react-core';
 import {
   NamespaceAPI,
   NamespaceListType,
@@ -59,7 +59,6 @@ interface IProps extends RouteComponentProps {
 
 export class NamespaceList extends React.Component<IProps, IState> {
   nonURLParams = ['tenant'];
-  handleSubmit;
 
   constructor(props) {
     super(props);
@@ -123,16 +122,18 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const createButton = partnerEngineer && (
-      <React.Fragment>
-        <DataToolbarItem variant='separator' />
-        <DataToolbarItem>
+    let extra = [];
+
+    if (partnerEngineer) {
+      extra.push(<ToolbarItem key='separator' variant='separator' />);
+      extra.push(
+        <ToolbarItem key='create-button'>
           <Button variant='primary' onClick={this.handleModalToggle}>
             Create
           </Button>
-        </DataToolbarItem>
-      </React.Fragment>
-    );
+        </ToolbarItem>,
+      );
+    }
 
     return (
       <React.Fragment>
@@ -145,7 +146,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
               updateParams={p =>
                 this.updateParams(p, () => this.loadNamespaces())
               }
-              extraInputs={[createButton]}
+              extraInputs={extra}
             />
             <div>
               <Pagination
@@ -225,13 +226,13 @@ export class NamespaceList extends React.Component<IProps, IState> {
       <Section className='card-layout'>
         {namespaces.map((ns, i) => (
           <div key={i} className='card-wrapper'>
-            <Link
-              to={formatPath(namespacePath, {
+            <NamespaceCard
+              namespaceURL={formatPath(namespacePath, {
                 namespace: ns.name,
               })}
-            >
-              <NamespaceCard key={i} {...ns}></NamespaceCard>
-            </Link>
+              key={i}
+              {...ns}
+            ></NamespaceCard>
           </div>
         ))}
       </Section>

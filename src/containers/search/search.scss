@@ -1,74 +1,75 @@
 @import '../../global-variables.scss';
 
-.toolbar-wrapper {
-  padding-bottom: 24px;
-  .applied-filters {
-    margin-top: 12px;
-  }
-  .toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.search-page {
+  height: 100%;
+  // subtract height of chrome
+  // min-height: calc(100vh - 76px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-    .pagination-container {
+  .toolbar-wrapper {
+    .toolbar {
       display: flex;
+      justify-content: space-between;
       align-items: center;
 
-      .card-list-switcher {
-        margin-right: 24px;
+      .pagination-container {
+        display: flex;
+        align-items: center;
+
+        .card-list-switcher {
+          margin-right: 24px;
+        }
       }
     }
   }
-}
 
-.header {
-  border-bottom: 1px solid #d8d8d8;
-}
-
-.collection-container {
-  // Should be the height of the page minus the header and the footer.
-  // This makes it so the footer stays at the bottom.
-  min-height: calc(100vh - 285px);
-
-  @media (min-width: $breakpoint-md) {
-    display: flex;
+  .header {
+    border-bottom: 1px solid #d8d8d8;
   }
 
-  .cards {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
+  .collection-container {
+    padding-top: 24px;
 
-    .card {
-      margin-left: 24px;
-      margin-bottom: 24px;
-    }
-  }
-
-  .list-container {
-    width: 100%;
-  }
-
-  .list {
-    margin-bottom: 24px;
-    margin-left: 24px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-
-    // Hack to hide the annoying line at the top of the data list.
-    overflow: hidden;
-    .data-list {
-      margin-top: -17px;
-      margin-bottom: -17px;
-    }
-  }
-
-  .empty {
     flex-grow: 1;
-  }
-}
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
 
-.footer {
-  border-top: 1px solid #d8d8d8;
-  margin: 0px -24px -24px -24px;
+      .card {
+        margin-left: 24px;
+        margin-bottom: 24px;
+      }
+    }
+
+    .list-container {
+      width: 100%;
+    }
+
+    .list {
+      margin-bottom: 24px;
+      margin-left: 24px;
+      margin-right: 24px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+
+      // Hack to hide the annoying line at the top of the data list.
+      overflow: hidden;
+      .data-list {
+        margin-top: -17px;
+        margin-bottom: -17px;
+      }
+    }
+
+    .empty {
+      flex-grow: 1;
+    }
+  }
+
+  .footer {
+    border-top: 1px solid #d8d8d8;
+    flex-shrink: 0;
+  }
 }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import cx from 'classnames';
 import {
   Card,
-  CardHead,
+  CardHeader,
   CardBody,
   CardFooter,
   TextContent,
@@ -34,7 +34,7 @@ export class CollectionCard extends React.Component<IProps> {
 
     return (
       <Card className={cx('collection-card-container', className)}>
-        <CardHead className='logo-row'>
+        <CardHeader className='logo-row'>
           <Logo
             image={namespace.avatar_url}
             alt={company + ' logo'}
@@ -47,8 +47,8 @@ export class CollectionCard extends React.Component<IProps> {
               </Text>
             )}
           </TextContent>
-        </CardHead>
-        <CardHead>
+        </CardHeader>
+        <CardHeader>
           <div className='name'>
             <Link
               to={formatPath(Paths.collection, {
@@ -64,7 +64,7 @@ export class CollectionCard extends React.Component<IProps> {
               <Text component={TextVariants.small}>Provided by {company}</Text>
             </TextContent>
           </div>
-        </CardHead>
+        </CardHeader>
         <CardBody className='description'>
           {this.getDescription(latest_version.metadata.description)}
         </CardBody>

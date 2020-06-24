@@ -53,7 +53,7 @@ export class ImportModal extends React.Component<IProps, IState> {
     const { file, errors, uploadProgress, uploadStatus } = this.state;
     return (
       <Modal
-        isSmall
+        variant='small'
         title={
           collection ? 'New version of ' + collection.name : 'New collection'
         }
@@ -76,7 +76,6 @@ export class ImportModal extends React.Component<IProps, IState> {
             Cancel
           </Button>,
         ]}
-        isFooterLeftAligned
       >
         <div className='upload-collection'>
           <form>

@@ -68,7 +68,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
 
     return (
       <div className={className}>
-        <Nav>
+        <Nav theme='light'>
           <NavList>
             {Object.keys(table).map(key =>
               table[key].length === 0

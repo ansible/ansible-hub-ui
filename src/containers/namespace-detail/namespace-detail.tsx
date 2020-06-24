@@ -149,7 +149,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             }}
             variant='warning'
             title={warning}
-            action={
+            actionClose={
               <AlertActionCloseButton
                 onClose={() => this.setState({ warning: '' })}
               />

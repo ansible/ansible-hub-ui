@@ -56,7 +56,7 @@ export class CollectionInfo extends React.Component<IProps> {
     return (
       <div className='pf-c-content info-panel'>
         <h1>Info</h1>
-        <Grid gutter='lg'>
+        <Grid hasGutter={true}>
           <GridItem>{latest_version.metadata.description}</GridItem>
           <GridItem>
             {latest_version.metadata.tags.map((tag, i) => (
@@ -65,13 +65,13 @@ export class CollectionInfo extends React.Component<IProps> {
           </GridItem>
 
           <GridItem>
-            <Split gutter='sm'>
+            <Split hasGutter={true}>
               <SplitItem className='install-title'>License</SplitItem>
               <SplitItem isFilled>{latest_version.metadata.license}</SplitItem>
             </Split>
           </GridItem>
           <GridItem>
-            <Split gutter='sm'>
+            <Split hasGutter={true}>
               <SplitItem className='install-title'>Installation</SplitItem>
               <SplitItem isFilled>
                 <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
@@ -96,7 +96,7 @@ export class CollectionInfo extends React.Component<IProps> {
             </Split>
           </GridItem>
           <GridItem>
-            <Split gutter='sm'>
+            <Split hasGutter={true}>
               <SplitItem className='install-tile'>Install Version</SplitItem>
               <SplitItem isFilled>
                 <FormSelect

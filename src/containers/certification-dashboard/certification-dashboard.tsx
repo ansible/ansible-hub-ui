@@ -143,7 +143,7 @@ class CertificationDashboard extends React.Component<
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
         />
-        <Main>
+        <Main className='certification-dashboard'>
           <Section className='body'>
             <div className='toolbar'>
               <Toolbar>
@@ -303,19 +303,28 @@ class CertificationDashboard extends React.Component<
       case CertificationStatus.certified:
         return (
           <span>
-            <CheckCircleIcon className='certified-icon' /> Certified
+            <CheckCircleIcon
+              style={{ color: 'var(--pf-global--success-color--100)' }}
+            />{' '}
+            Certified
           </span>
         );
       case CertificationStatus.notCertified:
         return (
           <span>
-            <ExclamationCircleIcon className='rejected-icon' /> Rejected
+            <ExclamationCircleIcon
+              style={{ color: 'var(--pf-global--danger-color--100)' }}
+            />{' '}
+            Rejected
           </span>
         );
       case CertificationStatus.needsReview:
         return (
           <span>
-            <InfoCircleIcon className='needs-review-icon' /> Needs Review
+            <InfoCircleIcon
+              style={{ color: 'var(--pf-global--info-color--100)' }}
+            />{' '}
+            Needs Review
           </span>
         );
     }

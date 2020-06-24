@@ -39,7 +39,9 @@ export class AlertList extends React.Component<IProps, {}> {
             key={i}
             title={alert.title}
             variant={alert.variant}
-            action={<AlertActionCloseButton onClose={() => closeAlert(i)} />}
+            actionClose={
+              <AlertActionCloseButton onClose={() => closeAlert(i)} />
+            }
           >
             {alert.description}
           </Alert>

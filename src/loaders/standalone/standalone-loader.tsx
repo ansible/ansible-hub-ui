@@ -8,6 +8,7 @@ import {
   Page,
   PageHeader,
   PageSidebar,
+  PageHeaderTools,
   Nav,
   NavList,
   NavItem,
@@ -76,8 +77,8 @@ class App extends React.Component<RouteComponentProps, IState> {
             <img style={{ height: '35px' }} src={Logo} alt='Galaxy Logo' />
           </React.Fragment>
         }
-        toolbar={
-          <div>
+        headerTools={
+          <PageHeaderTools>
             {!user ? (
               <Link
                 to={formatPath(
@@ -95,9 +96,8 @@ class App extends React.Component<RouteComponentProps, IState> {
                 items={dropdownItems}
               ></StatefulDropdown>
             )}
-          </div>
+          </PageHeaderTools>
         }
-        avatar=''
         showNavToggle
       />
     );

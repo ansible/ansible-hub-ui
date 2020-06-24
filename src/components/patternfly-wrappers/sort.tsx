@@ -145,8 +145,8 @@ export class Sort extends React.Component<IProps, IState> {
             onToggle={e => this.onToggle(e)}
             onSelect={(_, name) => this.onSelect(name)}
             selections={selectedOption.title}
-            isExpanded={isExpanded}
-            ariaLabelledBy='Sort results'
+            isOpen={isExpanded}
+            aria-labelledby='Sort results'
           >
             {options.map(option => (
               <SelectOption key={option.id} value={option.title} />
