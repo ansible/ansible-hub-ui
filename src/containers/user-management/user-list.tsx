@@ -32,7 +32,7 @@ import {
   LoadingPageSpinner,
   AppliedFilters,
   Pagination,
-  Sort,
+  SortTable,
   AlertList,
   closeAlertMixin,
   AlertType,
@@ -163,17 +163,6 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                   </ToolbarGroup>
                   <ToolbarGroup>
                     <ToolbarItem>
-                      <Sort
-                        options={sortOptions}
-                        params={params}
-                        updateParams={p =>
-                          this.updateParams(p, () => this.queryUsers())
-                        }
-                      />
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                  <ToolbarGroup>
-                    <ToolbarItem>
                       <Link to={Paths.createUser}>
                         <Button>Create user</Button>
                       </Link>
@@ -200,7 +189,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                 ignoredParams={['page_size', 'page', 'sort']}
               />
             </div>
-            {loading ? <LoadingPageSpinner /> : this.renderTable()}
+            {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
 
             <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
               <Pagination
@@ -217,7 +206,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderTable() {
+  private renderTable(params) {
     const { users } = this.state;
     if (users.length === 0) {
       return (
@@ -233,18 +222,48 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       );
     }
 
+    let sortTableOptions = {
+      headers: [
+        {
+          title: 'Username',
+          type: 'alpha',
+          id: 'username',
+        },
+        {
+          title: 'Email',
+          type: 'alpha',
+          id: 'email',
+        },
+        {
+          title: 'Last name',
+          type: 'alpha',
+          id: 'last_name',
+        },
+        {
+          title: 'First name',
+          type: 'alpha',
+          id: 'first_name',
+        },
+        {
+          title: 'Created',
+          type: 'none',
+          id: 'created',
+        },
+        {
+          title: '',
+          type: 'none',
+          id: 'kebab',
+        },
+      ],
+    };
+
     return (
       <table aria-label='User list' className='content-table pf-c-table'>
-        <thead>
-          <tr aria-labelledby='headers'>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Last name</th>
-            <th>First name</th>
-            <th>Created</th>
-            <th></th>
-          </tr>
-        </thead>
+        <SortTable
+          options={sortTableOptions}
+          params={params}
+          updateParams={p => this.updateParams(p, () => this.queryUsers())}
+        />
         <tbody>{users.map((user, i) => this.renderTableRow(user, i))}</tbody>
       </table>
     );
