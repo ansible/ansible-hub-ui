@@ -38,7 +38,9 @@ export class SortTable extends React.Component<IProps> {
       return;
     }
     let Icon;
-    let activeIcon = id == this.props.params['sort'].replace('-', '');
+    let activeIcon =
+      !!this.props.params['sort'] &&
+      id == this.props.params['sort'].replace('-', '');
     let isMinus = false;
     if (activeIcon) {
       isMinus = this.props.params['sort'].includes('-');
