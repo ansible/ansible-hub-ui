@@ -246,8 +246,8 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         },
         {
           title: 'Created',
-          type: 'none',
-          id: 'created',
+          type: 'numeric',
+          id: 'date_joined',
         },
         {
           title: '',
