@@ -111,7 +111,8 @@
         "verify": "npm-run-all build lint test",
         "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier' prettier -l 'src/**' 'config/**'",
         "prettier": "prettier --write 'src/**' 'config/**'",
-        "storybook": "start-storybook"
+        "storybook": "start-storybook",
+        "eslint": "eslint \"./**/*.tsx\""
     },
     "insights": {
         "appname": "automation-hub"

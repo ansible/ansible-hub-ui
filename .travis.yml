@@ -27,6 +27,8 @@ jobs:
         secure: "on9iBXtLJjI3x9toeGgpDzCvXQhQKnh2P8KA2CS96rKU2iln1d4Um097YlQAAMcQs9sD+VMW/DCeCvpSsvNQ3pvBK6hLfZC2IIK01BtlJwepb22cX/hl228lKMMwMJCyxT6Nb8oteCYkiImQbnJrqNZf8pfQMs5zF8iyPm2AV3iVh6CPcSpbc4/JmJpTJ8QWoFdPGGmLurvJf64Y1F5L3zUPPDc8571xU5DtjZtrgVBuZVdPsDb0WcBOj0AoPXFQHqz38G11cc7jf+laBdeCxTX2++u94G7aCqfvE0aE6HdeJDunijJamp/JrfM0khO+n4VxMrwa055wI1da7whNCouO9Jmj8XKjcLWmWP2kKLpg1ViZXOtWQ8GyQ6gozLsROYO8CCgVZu5kDlg9ra8ZLZ/rgvH25wO5/QKoXtBZHplekASiT4sDJ5JmmQ0OSQUHLOB7UVbJKHAJkybQ5qv7K7Ifhs67bUkWZbu6w0FXVaMJ0irZOu8zXFDx5lsk2kn+fFXrEOr2kBgHHf5lz/p49Qks4We44dXSv6eJRTJfOrh/vd97UywaElEGH7iEzTPrSsdAp25QjJRG3OXPHJytiJvrfA7hv3dK6hhwr2tSGzNyglTF1git47gt9qbaFSOcro32w6omln/68k699gcUIJbkUzxo6aM0Ygo5FaOwBFY="
       on:
         tags: true
+script:
+  - npm run eslint
 env:
   global:
   - REPO="git@github.com:RedHatInsights/ansible-hub-ui-build.git"
