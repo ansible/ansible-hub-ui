@@ -13,20 +13,21 @@ import {
 
 import { Link } from 'react-router-dom';
 
-import { NumericLabel, Logo, Sync } from '../../components';
+import { NumericLabel, Logo } from '../../components';
 import { CollectionListType, CertificationStatus } from '../../api';
 import { formatPath, Paths } from '../../paths';
 import { convertContentSummaryCounts } from '../../utilities';
 
 interface IProps extends CollectionListType {
   className?: string;
+  footer?: React.ReactNode;
 }
 
 export class CollectionCard extends React.Component<IProps> {
-  MAX_DESCRIPTION_LENGTH = 50;
+  MAX_DESCRIPTION_LENGTH = 60;
 
   render() {
-    const { name, latest_version, namespace, className } = this.props;
+    const { name, latest_version, namespace, className, footer } = this.props;
 
     const company = namespace.company || namespace.name;
     const contentSummary = convertContentSummaryCounts(latest_version.contents);
@@ -64,17 +65,17 @@ export class CollectionCard extends React.Component<IProps> {
             </TextContent>
           </div>
         </CardHeader>
-        <CardBody className='description'>
-          {this.getDescription(latest_version.metadata.description)}
+        <CardBody>
+          <div className='description'>
+            {this.getDescription(latest_version.metadata.description)}
+          </div>
         </CardBody>
         <CardBody className='type-container'>
           {Object.keys(contentSummary.contents).map(k =>
             this.renderTypeCount(k, contentSummary.contents[k]),
           )}
         </CardBody>
-        <CardFooter className='sync-switch-card'>
-          <Sync collection={name} namespace={namespace.name} />
-        </CardFooter>
+        {footer && <CardFooter>{footer}</CardFooter>}
       </Card>
     );
   }

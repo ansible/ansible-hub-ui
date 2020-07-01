@@ -15,7 +15,7 @@
 
 .collection-card-container {
   width: 280px;
-  height: 340px;
+  // height: 340px;
 
   // For some reason the PF Card components overrides all the defaults for
   // divs
@@ -53,6 +53,7 @@
   }
 
   .description {
-    vertical-align: center;
+    height: 48px;
+    overflow: hidden;
   }
 }

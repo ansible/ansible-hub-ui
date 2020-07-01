@@ -23,4 +23,5 @@ export { UserType, MeType } from './response-types/user';
 export { CollectionVersionAPI } from './collection-version';
 export { MyNamespaceAPI } from './my-namespace';
 export { UserAPI } from './user';
-export { SyncListAPI } from './synclist';
+export { MySyncListAPI } from './my-synclist';
+export { SyncListType } from './response-types/synclists';
