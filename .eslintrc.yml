@@ -30,7 +30,7 @@ rules:
     - error
     - always
     - objectsInArrays: false
-  comma-dangle: 2
+  comma-dangle: 1
   comma-spacing:
     - 2
     - after: true
