@@ -329,10 +329,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
   private getSynclist() {
     MySyncListAPI.list().then(result => {
+      // ignore results if more than 1 is returned
+      // TODO: should we throw an error for this or just ignore it?
       if (result.data.meta.count === 1) {
         this.setState({ synclist: result.data.data[0] });
-      } else {
-        console.log('it dun broke');
       }
     });
   }
