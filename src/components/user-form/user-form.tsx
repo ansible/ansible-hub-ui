@@ -15,7 +15,7 @@ interface IProps {
   user: UserType;
 
   /** Updates the current user object with the new user object */
-  updateUser: (user: UserType) => void;
+  updateUser: (user: UserType, errorMesssages: object) => void;
 
   /** List of errors from the API */
   errorMessages: object;
@@ -147,7 +147,11 @@ export class UserForm extends React.Component<IProps, IState> {
 
   private updateField = (value, event) => {
     const update = { ...this.props.user };
+    const errorMessages = { ...this.props.errorMessages };
     update[event.target.id] = value;
-    this.props.updateUser(update);
+    if (event.target.id in errorMessages) {
+      delete errorMessages[event.target.id];
+    }
+    this.props.updateUser(update, errorMessages);
   };
 }

@@ -41,7 +41,9 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
         ]}
         title='Create new user'
         errorMessages={errorMessages}
-        updateUser={user => this.setState({ user: user })}
+        updateUser={(user, errorMessages) =>
+          this.setState({ user: user, errorMessages: errorMessages })
+        }
         saveUser={this.saveUser}
         onCancel={() => this.props.history.push(Paths.userList)}
       ></UserFormPage>

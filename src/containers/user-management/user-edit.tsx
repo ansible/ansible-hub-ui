@@ -45,7 +45,9 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
         ]}
         title='Edit user'
         errorMessages={errorMessages}
-        updateUser={user => this.setState({ user: user })}
+        updateUser={(user, errorMessages) =>
+          this.setState({ user: user, errorMessages: errorMessages })
+        }
         saveUser={this.saveUser}
         onCancel={() => this.props.history.push(Paths.userList)}
       ></UserFormPage>
