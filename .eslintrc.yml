@@ -47,7 +47,7 @@ rules:
     - never
   indent:
     - error
-    - 4
+    - 2
     - SwitchCase: 1
       MemberExpression: 0
       ImportDeclaration: 1
