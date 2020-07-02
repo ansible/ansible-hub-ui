@@ -2,8 +2,6 @@
 
 .search-page {
   height: 100%;
-  // subtract height of chrome
-  // min-height: calc(100vh - 76px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

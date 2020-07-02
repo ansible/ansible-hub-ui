@@ -123,7 +123,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             onToggle={this.onToggle}
             onSelect={this.onSelectMultiple}
             isOpen={this.state.isOpen}
-            placeholderText={'Filter by ' + selectedFilter.id}
+            placeholderText={'Filter by ' + selectedFilter.id.toLowerCase()}
             selections={this.props.params[this.state.selectedFilter.id]}
             isGrouped
           >
@@ -158,7 +158,8 @@ export class CompoundFilter extends React.Component<IProps, IState> {
           <TextInput
             aria-label={selectedFilter.id}
             placeholder={
-              selectedFilter.placeholder || `Filter by ${selectedFilter.title}`
+              selectedFilter.placeholder ||
+              `Filter by ${selectedFilter.title.toLowerCase()}`
             }
             value={this.state.inputText}
             onChange={k => this.setState({ inputText: k })}
