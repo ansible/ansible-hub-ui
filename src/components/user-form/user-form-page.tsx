@@ -12,7 +12,7 @@ interface IProps {
   errorMessages: object;
   isReadonly?: boolean;
 
-  updateUser: (user: UserType) => void;
+  updateUser: (user: UserType, errorMessages: object) => void;
   saveUser?: () => void;
   extraControls?: React.ReactNode;
   onCancel?: () => void;
