@@ -88,11 +88,13 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     this.queryCollections();
-    this.getSynclist();
+
+    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE)
+      this.getSynclist();
   }
 
   render() {
-    const { collections, params, numberOfResults, loading } = this.state;
+    const { collections, params, numberOfResults } = this.state;
 
     const tags = [
       'cloud',
@@ -333,6 +335,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
       // TODO: should we throw an error for this or just ignore it?
       if (result.data.meta.count === 1) {
         this.setState({ synclist: result.data.data[0] });
+      } else {
+        console.error(
+          `my-synclist returned ${result.data.meta.count} synclists`,
+        );
       }
     });
   }
