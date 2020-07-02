@@ -116,7 +116,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
   render() {
     const { namespaces, params, itemCount, partnerEngineer } = this.state;
-    const { title } = this.props;
+    const { title, filterOwner } = this.props;
 
     if (!namespaces) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -124,8 +124,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     let extra = [];
 
-    if (partnerEngineer) {
-      extra.push(<ToolbarItem key='separator' variant='separator' />);
+    if (partnerEngineer && filterOwner) {
       extra.push(
         <ToolbarItem key='create-button'>
           <Button variant='primary' onClick={this.handleModalToggle}>
@@ -136,7 +135,18 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     return (
-      <React.Fragment>
+      <div className='namespace-page'>
+        <NamespaceModal
+          isOpen={this.state.isModalOpen}
+          toggleModal={this.handleModalToggle}
+          onCreateSuccess={result =>
+            this.props.history.push(
+              formatPath(Paths.myCollections, {
+                namespace: result['name'],
+              }),
+            )
+          }
+        ></NamespaceModal>
         <BaseHeader title={title}>
           <div className='toolbar'>
             <Toolbar
@@ -161,21 +171,18 @@ export class NamespaceList extends React.Component<IProps, IState> {
             </div>
           </div>
         </BaseHeader>
-        <Main>
-          <Section>{this.renderBody()}</Section>
-          <NamespaceModal
-            isOpen={this.state.isModalOpen}
-            toggleModal={this.handleModalToggle}
-            onCreateSuccess={result =>
-              this.props.history.push(
-                formatPath(Paths.myCollections, {
-                  namespace: result['name'],
-                }),
-              )
+        <Section className='card-area'>{this.renderBody()}</Section>
+        <Section className='footer'>
+          <Pagination
+            params={params}
+            updateParams={p =>
+              this.updateParams(p, () => this.loadNamespaces())
             }
-          ></NamespaceModal>
-        </Main>
-      </React.Fragment>
+            perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+            count={itemCount}
+          />
+        </Section>
+      </div>
     );
   }
 
