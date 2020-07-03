@@ -43,7 +43,6 @@ import {
   AlertList,
   closeAlertMixin,
   AlertType,
-  SortFieldType,
   SortTable,
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
