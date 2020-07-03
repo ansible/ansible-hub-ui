@@ -146,6 +146,25 @@ class CertificationDashboard extends React.Component<
                           id: 'name',
                           title: 'Collection Name',
                         },
+                        {
+                          id: 'repository',
+                          title: 'Repository',
+                          inputType: 'select',
+                          options: [
+                            {
+                              id: 'rejected',
+                              title: 'Rejected',
+                            },
+                            {
+                              id: 'staging',
+                              title: 'Needs Review',
+                            },
+                            {
+                              id: 'automation-hub',
+                              title: 'Certified',
+                            },
+                          ],
+                        },
                       ]}
                     />
                   </ToolbarItem>
