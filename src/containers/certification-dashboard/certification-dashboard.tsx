@@ -310,7 +310,7 @@ class CertificationDashboard extends React.Component<
     const certifyDropDown = (isDisabled: boolean) => (
       <DropdownItem
         onClick={() =>
-          this.updateCertification(version, CertificationStatus.certified)
+          this.updateCertification(version, 'rejected', 'automation-hub')
         }
         isDisabled={isDisabled}
         key='certify'
@@ -322,7 +322,7 @@ class CertificationDashboard extends React.Component<
     const rejectDropDown = (isDisabled: boolean) => (
       <DropdownItem
         onClick={() =>
-          this.updateCertification(version, CertificationStatus.notCertified)
+          this.updateCertification(version, 'automation-hub', 'rejected')
         }
         isDisabled={isDisabled}
         className='rejected-icon'
@@ -362,7 +362,7 @@ class CertificationDashboard extends React.Component<
           <span>
             <Button
               onClick={() =>
-                this.updateCertification(version, CertificationStatus.certified)
+                this.updateCertification(version, 'staging', 'automation-hub')
               }
             >
               <span>Certify</span>
@@ -373,19 +373,20 @@ class CertificationDashboard extends React.Component<
     }
   }
 
-  private updateCertification(version, certification) {
+  private updateCertification(version, originalRepo, destinationRepo) {
+    debugger;
     // Set the selected version to loading
     this.setState(
       {
         updatingVersions: this.state.updatingVersions.concat([version.id]),
       },
       () =>
-        // Perform the PUT request
-        CollectionVersionAPI.setCertifiation(
+        CollectionVersionAPI.setRepository(
           version.namespace,
           version.name,
           version.version,
-          certification,
+          'automation-hub',
+          'rejected',
         )
           .then(() =>
             // Since pulp doesn't reply with the new object, perform a

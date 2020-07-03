@@ -23,6 +23,18 @@ export class API extends BaseAPI {
       certification: certification,
     });
   }
+
+  setRepository(
+    namespace: string,
+    name: string,
+    version: string,
+    originalRepo: string,
+    destinationRepo: string,
+  ) {
+    const path = `v3/collections/${namespace}/${name}/versions/${version}/move/${originalRepo}/${destinationRepo}/`;
+    const data = {};
+    return this.create(data, path);
+  }
 }
 
 export const CollectionVersionAPI = new API();
