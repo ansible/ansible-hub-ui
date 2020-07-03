@@ -89,10 +89,6 @@ class CertificationDashboard extends React.Component<
       params['sort'] = '-pulp_created';
     }
 
-    if (!params['certification']) {
-      params['certification'] = CertificationStatus.needsReview;
-    }
-
     this.state = {
       versions: undefined,
       itemCount: 0,
@@ -151,25 +147,6 @@ class CertificationDashboard extends React.Component<
                         {
                           id: 'name',
                           title: 'Collection Name',
-                        },
-                        {
-                          id: 'certification',
-                          title: 'Certification Status',
-                          inputType: 'select',
-                          options: [
-                            {
-                              id: 'not_certified',
-                              title: 'Rejected',
-                            },
-                            {
-                              id: 'needs_review',
-                              title: 'Needs Review',
-                            },
-                            {
-                              id: 'certified',
-                              title: 'Certified',
-                            },
-                          ],
                         },
                       ]}
                     />
@@ -253,11 +230,6 @@ class CertificationDashboard extends React.Component<
           id: 'pulp_created',
         },
         {
-          title: 'Status',
-          type: 'none',
-          id: 'status',
-        },
-        {
           title: '',
           type: 'none',
           id: 'certify',
@@ -282,41 +254,6 @@ class CertificationDashboard extends React.Component<
         </tbody>
       </table>
     );
-  }
-
-  private renderStatus(version: CollectionVersion) {
-    if (this.state.updatingVersions.includes(version.id)) {
-      return <span className='fa fa-lg fa-spin fa-spinner' />;
-    }
-    switch (version.certification) {
-      case CertificationStatus.certified:
-        return (
-          <span>
-            <CheckCircleIcon
-              style={{ color: 'var(--pf-global--success-color--100)' }}
-            />{' '}
-            Certified
-          </span>
-        );
-      case CertificationStatus.notCertified:
-        return (
-          <span>
-            <ExclamationCircleIcon
-              style={{ color: 'var(--pf-global--danger-color--100)' }}
-            />{' '}
-            Rejected
-          </span>
-        );
-      case CertificationStatus.needsReview:
-        return (
-          <span>
-            <InfoCircleIcon
-              style={{ color: 'var(--pf-global--info-color--100)' }}
-            />{' '}
-            Needs Review
-          </span>
-        );
-    }
   }
 
   private renderRow(version: CollectionVersion, index) {
@@ -344,7 +281,6 @@ class CertificationDashboard extends React.Component<
           </Link>
         </td>
         <td>{moment(version.created_at).fromNow()}</td>
-        <td>{this.renderStatus(version)}</td>
         <td>
           <div className='control-column'>
             <div>{this.renderButtons(version)}</div>
@@ -499,14 +435,15 @@ class CertificationDashboard extends React.Component<
 
   private queryCollections() {
     this.setState({ loading: true }, () =>
-      CollectionVersionAPI.list(this.state.params).then(result =>
+      CollectionVersionAPI.list(this.state.params).then(result => {
+        debugger;
         this.setState({
           versions: result.data.data,
           itemCount: result.data.meta.count,
           loading: false,
           updatingVersions: [],
-        }),
-      ),
+        });
+      }),
     );
   }
 
