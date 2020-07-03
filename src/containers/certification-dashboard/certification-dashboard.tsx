@@ -23,12 +23,7 @@ import {
   EmptyStateVariant,
 } from '@patternfly/react-core';
 
-import {
-  InfoCircleIcon,
-  ExclamationCircleIcon,
-  CheckCircleIcon,
-  WarningTriangleIcon,
-} from '@patternfly/react-icons';
+import { WarningTriangleIcon } from '@patternfly/react-icons';
 
 import {
   CollectionVersionAPI,
