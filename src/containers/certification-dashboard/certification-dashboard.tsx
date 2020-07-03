@@ -83,6 +83,10 @@ class CertificationDashboard extends React.Component<
       params['sort'] = '-pulp_created';
     }
 
+    if (!params['repository']) {
+      params['repository'] = 'staging';
+    }
+
     this.state = {
       versions: undefined,
       itemCount: 0,
