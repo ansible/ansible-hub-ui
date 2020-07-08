@@ -16,12 +16,19 @@ export class CollectionVersion {
   certification: CertificationStatus;
   namespace: string;
   name: string;
+  repository_list: string[];
 }
 
 export enum CertificationStatus {
   certified = 'certified',
   notCertified = 'not_certified',
   needsReview = 'needs_review',
+}
+
+export enum RepositoryStatus {
+  certified = 'automation-hub',
+  notCertified = 'rejected',
+  needsReview = 'staging',
 }
 
 class RenderedFile {

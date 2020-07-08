@@ -28,7 +28,7 @@ import { WarningTriangleIcon } from '@patternfly/react-icons';
 import {
   CollectionVersionAPI,
   CollectionVersion,
-  CertificationStatus,
+  RepositoryStatus,
   ActiveUserAPI,
   MeType,
 } from '../../api';
@@ -152,15 +152,15 @@ class CertificationDashboard extends React.Component<
                           inputType: 'select',
                           options: [
                             {
-                              id: 'rejected',
+                              id: RepositoryStatus.notCertified,
                               title: 'Rejected',
                             },
                             {
-                              id: 'staging',
+                              id: RepositoryStatus.needsReview,
                               title: 'Needs Review',
                             },
                             {
-                              id: 'automation-hub',
+                              id: RepositoryStatus.certified,
                               title: 'Certified',
                             },
                           ],
@@ -247,6 +247,11 @@ class CertificationDashboard extends React.Component<
           id: 'pulp_created',
         },
         {
+          title: 'Repository',
+          type: 'none',
+          id: 'repository',
+        },
+        {
           title: '',
           type: 'none',
           id: 'certify',
@@ -298,6 +303,7 @@ class CertificationDashboard extends React.Component<
           </Link>
         </td>
         <td>{moment(version.created_at).fromNow()}</td>
+        <td>{version.repository_list}</td>
         <td>
           <div className='control-column'>
             <div>{this.renderButtons(version)}</div>
@@ -329,10 +335,14 @@ class CertificationDashboard extends React.Component<
       />
     );
 
-    const certifyDropDown = (isDisabled: boolean) => (
+    const certifyDropDown = (isDisabled: boolean, originalRepo) => (
       <DropdownItem
         onClick={() =>
-          this.updateCertification(version, 'rejected', 'automation-hub')
+          this.updateCertification(
+            version,
+            originalRepo,
+            RepositoryStatus.certified,
+          )
         }
         isDisabled={isDisabled}
         key='certify'
@@ -341,10 +351,14 @@ class CertificationDashboard extends React.Component<
       </DropdownItem>
     );
 
-    const rejectDropDown = (isDisabled: boolean) => (
+    const rejectDropDown = (isDisabled: boolean, originalRepo) => (
       <DropdownItem
         onClick={() =>
-          this.updateCertification(version, 'automation-hub', 'rejected')
+          this.updateCertification(
+            version,
+            originalRepo,
+            RepositoryStatus.notCertified,
+          )
         }
         isDisabled={isDisabled}
         className='rejected-icon'
@@ -354,44 +368,54 @@ class CertificationDashboard extends React.Component<
       </DropdownItem>
     );
 
-    switch (version.certification) {
-      case CertificationStatus.certified:
-        return (
-          <span>
-            <StatefulDropdown
-              items={[
-                certifyDropDown(true),
-                rejectDropDown(false),
-                importsLink,
-              ]}
-            />
-          </span>
-        );
-      case CertificationStatus.notCertified:
-        return (
-          <span>
-            <StatefulDropdown
-              items={[
-                certifyDropDown(false),
-                rejectDropDown(true),
-                importsLink,
-              ]}
-            />
-          </span>
-        );
-      case CertificationStatus.needsReview:
-        return (
-          <span>
-            <Button
-              onClick={() =>
-                this.updateCertification(version, 'staging', 'automation-hub')
-              }
-            >
-              <span>Certify</span>
-            </Button>
-            <StatefulDropdown items={[rejectDropDown(false), importsLink]} />
-          </span>
-        );
+    if (version.repository_list.includes(RepositoryStatus.certified)) {
+      return (
+        <span>
+          <StatefulDropdown
+            items={[
+              certifyDropDown(true, RepositoryStatus.certified),
+              rejectDropDown(false, RepositoryStatus.certified),
+              importsLink,
+            ]}
+          />
+        </span>
+      );
+    }
+    if (version.repository_list.includes(RepositoryStatus.notCertified)) {
+      return (
+        <span>
+          <StatefulDropdown
+            items={[
+              certifyDropDown(false, RepositoryStatus.notCertified),
+              rejectDropDown(true, RepositoryStatus.notCertified),
+              importsLink,
+            ]}
+          />
+        </span>
+      );
+    }
+    if (version.repository_list.includes(RepositoryStatus.needsReview)) {
+      return (
+        <span>
+          <Button
+            onClick={() =>
+              this.updateCertification(
+                version,
+                RepositoryStatus.needsReview,
+                RepositoryStatus.certified,
+              )
+            }
+          >
+            <span>Certify</span>
+          </Button>
+          <StatefulDropdown
+            items={[
+              rejectDropDown(false, RepositoryStatus.needsReview),
+              importsLink,
+            ]}
+          />
+        </span>
+      );
     }
   }
 
@@ -407,8 +431,8 @@ class CertificationDashboard extends React.Component<
           version.namespace,
           version.name,
           version.version,
-          'automation-hub',
-          'rejected',
+          originalRepo,
+          destinationRepo,
         )
           .then(() =>
             // Since pulp doesn't reply with the new object, perform a
@@ -454,7 +478,6 @@ class CertificationDashboard extends React.Component<
   private queryCollections() {
     this.setState({ loading: true }, () =>
       CollectionVersionAPI.list(this.state.params).then(result => {
-        debugger;
         this.setState({
           versions: result.data.data,
           itemCount: result.data.meta.count,

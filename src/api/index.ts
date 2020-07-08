@@ -10,6 +10,7 @@ export {
   ContentSummaryType,
   CollectionVersion,
   CertificationStatus,
+  RepositoryStatus,
 } from './response-types/collection';
 export {
   ImportListType,
