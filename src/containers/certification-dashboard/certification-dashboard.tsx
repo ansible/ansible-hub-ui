@@ -420,7 +420,6 @@ class CertificationDashboard extends React.Component<
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {
-    debugger;
     // Set the selected version to loading
     this.setState(
       {
@@ -437,23 +436,9 @@ class CertificationDashboard extends React.Component<
           .then(() =>
             // Since pulp doesn't reply with the new object, perform a
             // second query to get the updated data
-            CollectionVersionAPI.list({
-              namespace: version.namespace,
-              name: version.name,
-              version: version.version,
-            }).then(result => {
-              const updatedVersion = result.data.data[0];
-              const newVersionList = [...this.state.versions];
-              const ind = newVersionList.findIndex(
-                x => x.id === updatedVersion.id,
-              );
-              newVersionList[ind] = updatedVersion;
-
+            CollectionVersionAPI.list(this.state.params).then(result => {
               this.setState({
-                versions: newVersionList,
-                updatingVersions: this.state.updatingVersions.filter(
-                  v => v != updatedVersion.id,
-                ),
+                versions: result.data.data,
               });
             }),
           )
