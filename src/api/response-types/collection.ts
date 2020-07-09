@@ -25,12 +25,6 @@ export enum CertificationStatus {
   needsReview = 'needs_review',
 }
 
-export enum RepositoryStatus {
-  certified = 'automation-hub',
-  notCertified = 'rejected',
-  needsReview = 'staging',
-}
-
 class RenderedFile {
   name: string;
   html: string;

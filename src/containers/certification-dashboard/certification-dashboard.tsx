@@ -28,7 +28,6 @@ import { WarningTriangleIcon } from '@patternfly/react-icons';
 import {
   CollectionVersionAPI,
   CollectionVersion,
-  RepositoryStatus,
   ActiveUserAPI,
   MeType,
 } from '../../api';
@@ -46,6 +45,7 @@ import {
   SortTable,
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
+import { Constants } from '../../constants';
 
 interface IState {
   params: {
@@ -67,6 +67,13 @@ class CertificationDashboard extends React.Component<
   RouteComponentProps,
   IState
 > {
+  certified =
+    DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+      ? 'automation-hub'
+      : 'published';
+  notCertified = 'rejected';
+  needsReview = 'staging';
+
   constructor(props) {
     super(props);
 
@@ -152,15 +159,15 @@ class CertificationDashboard extends React.Component<
                           inputType: 'select',
                           options: [
                             {
-                              id: RepositoryStatus.notCertified,
+                              id: this.notCertified,
                               title: 'Rejected',
                             },
                             {
-                              id: RepositoryStatus.needsReview,
+                              id: this.needsReview,
                               title: 'Needs Review',
                             },
                             {
-                              id: RepositoryStatus.certified,
+                              id: this.certified,
                               title: 'Certified',
                             },
                           ],
@@ -338,11 +345,7 @@ class CertificationDashboard extends React.Component<
     const certifyDropDown = (isDisabled: boolean, originalRepo) => (
       <DropdownItem
         onClick={() =>
-          this.updateCertification(
-            version,
-            originalRepo,
-            RepositoryStatus.certified,
-          )
+          this.updateCertification(version, originalRepo, this.certified)
         }
         isDisabled={isDisabled}
         key='certify'
@@ -354,11 +357,7 @@ class CertificationDashboard extends React.Component<
     const rejectDropDown = (isDisabled: boolean, originalRepo) => (
       <DropdownItem
         onClick={() =>
-          this.updateCertification(
-            version,
-            originalRepo,
-            RepositoryStatus.notCertified,
-          )
+          this.updateCertification(version, originalRepo, this.notCertified)
         }
         isDisabled={isDisabled}
         className='rejected-icon'
@@ -368,51 +367,48 @@ class CertificationDashboard extends React.Component<
       </DropdownItem>
     );
 
-    if (version.repository_list.includes(RepositoryStatus.certified)) {
+    if (version.repository_list.includes(this.certified)) {
       return (
         <span>
           <StatefulDropdown
             items={[
-              certifyDropDown(true, RepositoryStatus.certified),
-              rejectDropDown(false, RepositoryStatus.certified),
+              certifyDropDown(true, this.certified),
+              rejectDropDown(false, this.certified),
               importsLink,
             ]}
           />
         </span>
       );
     }
-    if (version.repository_list.includes(RepositoryStatus.notCertified)) {
+    if (version.repository_list.includes(this.notCertified)) {
       return (
         <span>
           <StatefulDropdown
             items={[
-              certifyDropDown(false, RepositoryStatus.notCertified),
-              rejectDropDown(true, RepositoryStatus.notCertified),
+              certifyDropDown(false, this.notCertified),
+              rejectDropDown(true, this.notCertified),
               importsLink,
             ]}
           />
         </span>
       );
     }
-    if (version.repository_list.includes(RepositoryStatus.needsReview)) {
+    if (version.repository_list.includes(this.needsReview)) {
       return (
         <span>
           <Button
             onClick={() =>
               this.updateCertification(
                 version,
-                RepositoryStatus.needsReview,
-                RepositoryStatus.certified,
+                this.needsReview,
+                this.certified,
               )
             }
           >
             <span>Certify</span>
           </Button>
           <StatefulDropdown
-            items={[
-              rejectDropDown(false, RepositoryStatus.needsReview),
-              importsLink,
-            ]}
+            items={[rejectDropDown(false, this.needsReview), importsLink]}
           />
         </span>
       );
