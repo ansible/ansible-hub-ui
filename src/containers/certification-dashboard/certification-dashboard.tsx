@@ -23,7 +23,12 @@ import {
   EmptyStateVariant,
 } from '@patternfly/react-core';
 
-import { WarningTriangleIcon } from '@patternfly/react-icons';
+import {
+  InfoCircleIcon,
+  ExclamationCircleIcon,
+  CheckCircleIcon,
+  WarningTriangleIcon,
+} from '@patternfly/react-icons';
 
 import {
   CollectionVersionAPI,
@@ -254,6 +259,11 @@ class CertificationDashboard extends React.Component<
           id: 'pulp_created',
         },
         {
+          title: 'Status',
+          type: 'none',
+          id: 'status',
+        },
+        {
           title: 'Repository',
           type: 'none',
           id: 'repository',
@@ -285,6 +295,39 @@ class CertificationDashboard extends React.Component<
     );
   }
 
+  private renderStatus(version: CollectionVersion) {
+    if (version.repository_list.includes(this.certified)) {
+      return (
+        <span>
+          <CheckCircleIcon
+            style={{ color: 'var(--pf-global--success-color--100)' }}
+          />{' '}
+          Certified
+        </span>
+      );
+    }
+    if (version.repository_list.includes(this.notCertified)) {
+      return (
+        <span>
+          <ExclamationCircleIcon
+            style={{ color: 'var(--pf-global--danger-color--100)' }}
+          />{' '}
+          Rejected
+        </span>
+      );
+    }
+    if (version.repository_list.includes(this.needsReview)) {
+      return (
+        <span>
+          <InfoCircleIcon
+            style={{ color: 'var(--pf-global--info-color--100)' }}
+          />{' '}
+          Needs Review
+        </span>
+      );
+    }
+  }
+
   private renderRow(version: CollectionVersion, index) {
     return (
       <tr
@@ -310,6 +353,7 @@ class CertificationDashboard extends React.Component<
           </Link>
         </td>
         <td>{moment(version.created_at).fromNow()}</td>
+        <td>{this.renderStatus(version)}</td>
         <td>{version.repository_list}</td>
         <td>
           <div className='control-column'>
