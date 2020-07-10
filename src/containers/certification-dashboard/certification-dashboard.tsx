@@ -463,7 +463,7 @@ class CertificationDashboard extends React.Component<
     // Set the selected version to loading
     this.setState(
       {
-        updatingVersions: this.state.updatingVersions.concat([version.id]),
+        updatingVersions: [],
       },
       () =>
         CollectionVersionAPI.setRepository(
@@ -484,9 +484,7 @@ class CertificationDashboard extends React.Component<
           )
           .catch(error => {
             this.setState({
-              updatingVersions: this.state.updatingVersions.filter(
-                v => v != version.id,
-              ),
+              updatingVersions: [],
               alerts: this.state.alerts.concat({
                 variant: 'danger',
                 title: `API Error: ${error.response.status}`,
