@@ -264,11 +264,6 @@ class CertificationDashboard extends React.Component<
           id: 'status',
         },
         {
-          title: 'Repository',
-          type: 'none',
-          id: 'repository',
-        },
-        {
           title: '',
           type: 'none',
           id: 'certify',
@@ -354,7 +349,6 @@ class CertificationDashboard extends React.Component<
         </td>
         <td>{moment(version.created_at).fromNow()}</td>
         <td>{this.renderStatus(version)}</td>
-        <td>{version.repository_list}</td>
         <td>
           <div className='control-column'>
             <div>{this.renderButtons(version)}</div>
