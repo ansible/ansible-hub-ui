@@ -7,6 +7,11 @@ import {
   DropdownItem,
   Alert,
   AlertActionCloseButton,
+  ButtonVariant,
+  TextInput,
+  Form,
+  FormGroup,
+  ActionGroup,
 } from '@patternfly/react-core';
 
 import * as ReactMarkdown from 'react-markdown';
@@ -111,13 +116,15 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const tabs = ['Collections'];
+    const tabs = ['Collections', 'Configuration'];
 
     const tab = params['tab'] || 'collections';
 
     if (namespace.resources) {
       tabs.push('Resources');
     }
+
+    const repositoryUrl = 'inbound-' + namespace.name;
 
     return (
       <React.Fragment>
@@ -179,6 +186,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   this.handleCollectionAction(id, action)
                 }
               />
+            ) : (
+              this.renderResources(namespace)
+            )}
+            {tab.toLowerCase() === 'configuration' ? (
+              <div>{repositoryUrl}</div>
             ) : (
               this.renderResources(namespace)
             )}
