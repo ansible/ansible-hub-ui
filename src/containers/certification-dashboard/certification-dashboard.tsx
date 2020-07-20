@@ -64,7 +64,7 @@ interface IState {
   versions: CollectionVersion[];
   itemCount: number;
   loading: boolean;
-  updatingVersions: string[];
+  updatingVersions: CollectionVersion[];
   redirect: string;
 }
 
@@ -284,6 +284,9 @@ class CertificationDashboard extends React.Component<
   }
 
   private renderStatus(version: CollectionVersion) {
+    if (this.state.updatingVersions.includes(version)) {
+      return <span className='fa fa-lg fa-spin fa-spinner' />;
+    }
     if (version.repository_list.includes(Constants.CERTIFIED)) {
       return (
         <span>
@@ -352,6 +355,9 @@ class CertificationDashboard extends React.Component<
   }
 
   private renderButtons(version: CollectionVersion) {
+    if (this.state.updatingVersions.includes(version)) {
+      return;
+    }
     const importsLink = (
       <DropdownItem
         key='imports'
@@ -467,11 +473,12 @@ class CertificationDashboard extends React.Component<
           .then(() =>
             // Since pulp doesn't reply with the new object, perform a
             // second query to get the updated data
-            CollectionVersionAPI.list(this.state.params).then(result => {
+            {
               this.setState({
-                versions: result.data.data,
+                updatingVersions: [version],
               });
-            }),
+              this.waitForUpdate(version, originalRepo, destinationRepo);
+            },
           )
           .catch(error => {
             this.setState({
@@ -487,6 +494,22 @@ class CertificationDashboard extends React.Component<
             });
           }),
     );
+  }
+  // TODO to be replaced by waiting on task to be done
+  private waitForUpdate(version, originalRepo, destinationRepo) {
+    return CollectionVersionAPI.list(this.state.params).then(async result => {
+      var changed = result.data.data.find(
+        v => v.namespace == version.namespace && v.version === version.version,
+      );
+      if (changed.repository_list.includes(originalRepo)) {
+        this.waitForUpdate(version, originalRepo, destinationRepo);
+      } else {
+        this.setState({
+          versions: result.data.data,
+          updatingVersions: [],
+        });
+      }
+    });
   }
 
   private queryCollections() {
