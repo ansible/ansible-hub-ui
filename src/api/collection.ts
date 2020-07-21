@@ -34,6 +34,7 @@ export class API extends BaseAPI {
   }
 
   upload(
+    repositoryPath: String,
     data: CollectionUploadType,
     progressCallback: (e) => void,
     cancelToken?: any,
@@ -52,8 +53,11 @@ export class API extends BaseAPI {
     if (cancelToken) {
       config['cancelToken'] = cancelToken.token;
     }
-
-    return this.http.post('v3/artifacts/collections/', formData, config);
+    return this.http.post(
+      'content/' + repositoryPath + '/v3/artifacts/collections/',
+      formData,
+      config,
+    );
   }
 
   getCancelToken() {
