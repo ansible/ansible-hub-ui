@@ -7,11 +7,6 @@ import {
   DropdownItem,
   Alert,
   AlertActionCloseButton,
-  ButtonVariant,
-  TextInput,
-  Form,
-  FormGroup,
-  ActionGroup,
 } from '@patternfly/react-core';
 
 import * as ReactMarkdown from 'react-markdown';
