@@ -24,6 +24,7 @@ import {
   UserProfile,
   GroupList,
   GroupDetail,
+  RepositoryList,
 } from '../../containers';
 import { ActiveUserAPI } from '../../api';
 import { AppContext } from '../app-context';
@@ -81,6 +82,7 @@ export class Routes extends React.Component<{}> {
   routes = [
     { comp: GroupList, path: Paths.groupList },
     { comp: GroupDetail, path: Paths.groupDetail },
+    { comp: RepositoryList, path: Paths.repositories },
     //{ comp: GroupCreate, path: Paths.createGroup },
     { comp: UserProfile, path: Paths.userProfileSettings },
     { comp: UserCreate, path: Paths.createUser },

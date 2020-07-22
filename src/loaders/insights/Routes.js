@@ -117,6 +117,13 @@ const CertificationDashboard = asyncComponent(() =>
   ),
 );
 
+const Repository = asyncComponent(() =>
+  import(
+    /* webpackChunkName: "repository-list" */
+    '../../containers/repositories/repository-list'
+  ),
+);
+
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
   const root = document.getElementById('root');
   root.removeAttribute('class');
@@ -144,6 +151,11 @@ export const Routes = props => {
 
   return (
     <Switch>
+      <InsightsRoute
+        path={Paths.repositories}
+        component={Repository}
+        rootClass='root'
+      />
       <InsightsRoute
         path={Paths.certificationDashboard}
         component={CertificationDashboard}
