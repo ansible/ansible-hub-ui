@@ -40,4 +40,5 @@ export enum Paths {
   editUser = '/users/:userID/edit',
   userDetail = '/users/:userID',
   userProfileSettings = '/settings/user-profile',
+  repositories = '/repositories',
 }
