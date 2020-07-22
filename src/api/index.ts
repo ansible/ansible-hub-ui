@@ -28,3 +28,4 @@ export { SyncListType } from './response-types/synclists';
 export { TaskAPI } from './task';
 export { GroupObjectPermissionType } from './response-types/permissions';
 export { GroupAPI } from './group';
+export { RepositoryAPI } from './repositories';

@@ -127,6 +127,9 @@ class App extends React.Component<RouteComponentProps, IState> {
                   <Link to={Paths.certificationDashboard}>Certification</Link>
                 </NavItem>
               )}
+                  <NavItem>
+                    <Link to={Paths.repositories}>Repo Management</Link>
+                  </NavItem>
             </NavList>
           </Nav>
         }

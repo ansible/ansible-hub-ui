@@ -22,6 +22,7 @@ import {
   UserDetail,
   UserCreate,
   UserProfile,
+  RepositoryList,
 } from '../../containers';
 import { ActiveUserAPI } from '../../api';
 import { AppContext } from '../app-context';
@@ -77,6 +78,7 @@ class AuthHandler extends React.Component<IProps, IState> {
 
 export class Routes extends React.Component<{}> {
   routes = [
+    { comp: RepositoryList, path: Paths.repositories },
     { comp: UserProfile, path: Paths.userProfileSettings },
     { comp: UserCreate, path: Paths.createUser },
     { comp: EditUser, path: Paths.editUser },
