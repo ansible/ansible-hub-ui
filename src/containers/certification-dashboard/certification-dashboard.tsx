@@ -35,6 +35,7 @@ import {
   CollectionVersion,
   ActiveUserAPI,
   MeType,
+  TaskAPI,
 } from '../../api';
 import { ParamHelper } from '../../utilities';
 import {
@@ -470,14 +471,14 @@ class CertificationDashboard extends React.Component<
           originalRepo,
           destinationRepo,
         )
-          .then(() =>
+          .then(result =>
             // Since pulp doesn't reply with the new object, perform a
             // second query to get the updated data
             {
               this.setState({
                 updatingVersions: [version],
               });
-              this.waitForUpdate(version, originalRepo, destinationRepo);
+              this.waitForUpdate(result.data.remove_task_id, version);
             },
           )
           .catch(error => {
@@ -495,18 +496,34 @@ class CertificationDashboard extends React.Component<
           }),
     );
   }
-  // TODO to be replaced by waiting on task to be done
-  private waitForUpdate(version, originalRepo, destinationRepo) {
-    return CollectionVersionAPI.list(this.state.params).then(async result => {
-      var changed = result.data.data.find(
-        v => v.namespace == version.namespace && v.version === version.version,
-      );
-      if (changed.repository_list.includes(originalRepo)) {
-        this.waitForUpdate(version, originalRepo, destinationRepo);
+
+  private waitForUpdate(result, version) {
+    const taskId = result;
+    return TaskAPI.get(taskId).then(async result => {
+      if (result.data.state === 'waiting' || result.data.state === 'running') {
+        await new Promise(r => setTimeout(r, 500));
+        this.waitForUpdate(taskId, version);
+      }
+      if (result.data.state === 'completed') {
+        return CollectionVersionAPI.list(this.state.params).then(
+          async result => {
+            this.setState({
+              versions: result.data.data,
+              updatingVersions: [],
+            });
+          },
+        );
       } else {
         this.setState({
-          versions: result.data.data,
           updatingVersions: [],
+          alerts: this.state.alerts.concat({
+            variant: 'danger',
+            title: `API Error: 500`,
+            description:
+              `Could not update the certification ` +
+              `status for ${version.namespace}.` +
+              `${version.name}.${version.version}.`,
+          }),
         });
       }
     });
