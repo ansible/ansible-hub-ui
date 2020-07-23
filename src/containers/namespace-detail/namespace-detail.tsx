@@ -119,7 +119,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       tabs.push('Resources');
     }
 
-    const repositoryUrl = 'content/inbound-' + namespace.name;
+    const repositoryUrl =
+      window.location.href.split('/ui')[0].replace('8002', '5001') +
+      '/api/automation-hub/content/inbound-' +
+      namespace.name +
+      '/v3/collections';
 
     return (
       <React.Fragment>
