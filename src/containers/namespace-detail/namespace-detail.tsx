@@ -122,7 +122,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     const repositoryUrl =
       window.location.href.split('/ui')[0].replace('8002', '5001') +
-      '/api/automation-hub/content/inbound-' +
+      CollectionAPI.apiBaseURL +
+      'content/inbound-' +
       namespace.name +
       '/v3/collections';
 
