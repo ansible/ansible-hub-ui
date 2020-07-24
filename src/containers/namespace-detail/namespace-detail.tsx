@@ -7,6 +7,7 @@ import {
   DropdownItem,
   Alert,
   AlertActionCloseButton,
+  ClipboardCopy,
 } from '@patternfly/react-core';
 
 import * as ReactMarkdown from 'react-markdown';
@@ -111,7 +112,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const tabs = ['Collections', 'Configuration'];
+    const tabs = ['Collections', 'CLI Configuration'];
 
     const tab = params['tab'] || 'collections';
 
@@ -188,8 +189,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             ) : (
               this.renderResources(namespace)
             )}
-            {tab.toLowerCase() === 'configuration' ? (
-              <div>{repositoryUrl}</div>
+            {tab.toLowerCase() === 'cli configuration' ? (
+              <div>
+                <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
+                <div>
+                  <b>Note:</b> Use this URL to configure ansible-galaxy to
+                  upload collections to.
+                </div>
+              </div>
             ) : (
               this.renderResources(namespace)
             )}
