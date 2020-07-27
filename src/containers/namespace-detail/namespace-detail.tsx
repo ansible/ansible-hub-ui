@@ -112,8 +112,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const tabs = ['Collections', 'CLI Configuration'];
+    const tabs = ['Collections'];
 
+    if (this.props.showControls) {
+      tabs.push('CLI Configuration');
+    }
     const tab = params['tab'] || 'collections';
 
     if (namespace.resources) {
