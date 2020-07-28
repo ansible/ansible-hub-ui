@@ -15,6 +15,7 @@ import {
   EmptyStateVariant,
   Button,
   ToolbarContent,
+  Switch,
 } from '@patternfly/react-core';
 
 import { SearchIcon } from '@patternfly/react-icons';
@@ -27,13 +28,14 @@ import {
   CompoundFilter,
   Pagination,
   LoadingPageSpinner,
-  Main,
   AppliedFilters,
 } from '../../components';
 import {
   CollectionAPI,
   CollectionListType,
   CertificationStatus,
+  SyncListType,
+  MySyncListAPI,
 } from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
 import { Constants } from '../../constants';
@@ -49,6 +51,7 @@ interface IState {
     view_type?: string;
   };
   loading: boolean;
+  synclist: SyncListType;
 }
 
 class Search extends React.Component<RouteComponentProps, IState> {
@@ -79,15 +82,19 @@ class Search extends React.Component<RouteComponentProps, IState> {
       params: params,
       numberOfResults: 0,
       loading: true,
+      synclist: undefined,
     };
   }
 
   componentDidMount() {
     this.queryCollections();
+
+    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE)
+      this.getSynclist();
   }
 
   render() {
-    const { collections, params, numberOfResults, loading } = this.state;
+    const { collections, params, numberOfResults } = this.state;
 
     const tags = [
       'cloud',
@@ -243,10 +250,64 @@ class Search extends React.Component<RouteComponentProps, IState> {
     return (
       <div className='cards'>
         {collections.map(c => {
-          return <CollectionCard className='card' key={c.id} {...c} />;
+          return (
+            <CollectionCard
+              className='card'
+              key={c.id}
+              {...c}
+              footer={this.renderSyncToggle(c.name, c.namespace.name)}
+            />
+          );
         })}
       </div>
     );
+  }
+
+  private renderSyncToggle(name: string, namespace: string): React.ReactNode {
+    const { synclist } = this.state;
+    if (!synclist) {
+      return null;
+    }
+    return (
+      <Switch
+        id={namespace + '.' + name}
+        className='sync-toggle'
+        label='Sync'
+        isChecked={this.isCollectionSynced(name, namespace)}
+        onChange={() => this.toggleCollectionSync(name, namespace)}
+      />
+    );
+  }
+
+  private toggleCollectionSync(name: string, namespace: string) {
+    const synclist = { ...this.state.synclist };
+
+    const colIndex = synclist.collections.findIndex(
+      el => el.name === name && el.namespace === namespace,
+    );
+
+    if (colIndex < 0) {
+      synclist.collections.push({ name: name, namespace: namespace });
+    } else {
+      synclist.collections.splice(colIndex, 1);
+    }
+
+    MySyncListAPI.update(synclist.id, synclist).then(response => {
+      this.setState({ synclist: response.data });
+    });
+  }
+
+  private isCollectionSynced(name: string, namespace: string): boolean {
+    const { synclist } = this.state;
+    const found = synclist.collections.find(
+      el => el.name === name && el.namespace === namespace,
+    );
+
+    if (synclist.policy === 'allowlist') {
+      return !(found === undefined);
+    } else {
+      return found === undefined;
+    }
   }
 
   private renderList(collections) {
@@ -255,12 +316,31 @@ class Search extends React.Component<RouteComponentProps, IState> {
         <div className='list'>
           <DataList className='data-list' aria-label={'List of Collections'}>
             {collections.map(c => (
-              <CollectionListItem showNamespace={true} key={c.id} {...c} />
+              <CollectionListItem
+                showNamespace={true}
+                key={c.id}
+                {...c}
+                controls={this.renderSyncToggle(c.name, c.namespace.name)}
+              />
             ))}
           </DataList>
         </div>
       </div>
     );
+  }
+
+  private getSynclist() {
+    MySyncListAPI.list().then(result => {
+      // ignore results if more than 1 is returned
+      // TODO: should we throw an error for this or just ignore it?
+      if (result.data.meta.count === 1) {
+        this.setState({ synclist: result.data.data[0] });
+      } else {
+        console.error(
+          `my-synclist returned ${result.data.meta.count} synclists`,
+        );
+      }
+    });
   }
 
   private queryCollections() {
