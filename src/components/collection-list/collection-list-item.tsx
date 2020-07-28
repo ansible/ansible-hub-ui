@@ -91,14 +91,6 @@ export class CollectionListItem extends React.Component<IProps, {}> {
     cells.push(
       <DataListCell isFilled={false} alignRight key='stats'>
         {controls ? <div className='entry'>{controls}</div> : null}
-        {
-          // <div className='right-col entry'>
-          //     <NumericLabel
-          //         number={download_count}
-          //         label='Download'
-          //     />
-          // </div>
-        }
         <div className='right-col entry'>
           Updated {moment(latest_version.created_at).fromNow()}
         </div>
