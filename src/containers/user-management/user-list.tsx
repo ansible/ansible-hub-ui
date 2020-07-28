@@ -96,16 +96,6 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       deleteUser,
       alerts,
     } = this.state;
-    const sortOptions: SortFieldType[] = [
-      {
-        id: 'username',
-        title: 'Username',
-        type: 'alpha',
-      },
-      { id: 'email', title: 'Email', type: 'alpha' },
-      { id: 'first_name', title: 'First name', type: 'alpha' },
-      { id: 'last_name', title: 'Last name', type: 'alpha' },
-    ];
 
     if (redirect) {
       return <Redirect to={redirect}></Redirect>;
