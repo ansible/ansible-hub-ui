@@ -27,7 +27,7 @@ interface IProps {
   isReadonly?: boolean;
 
   /** Saves the current user */
-  saveUser?: () => void;
+  saveUser?: (boolean) => void;
 
   /** Action to take when the user presses the cancel button */
   onCancel?: () => void;
@@ -98,19 +98,18 @@ export class UserForm extends React.Component<IProps, IState> {
         <FormGroup
           fieldId={'password-confirm'}
           label={'Password confirmation'}
-          helperTextInvalid={'Passwords do not match'}
-          validated={this.toError(
-            this.isPassSame(user.password, passwordConfirm),
-          )}
+          validated={this.toError(!('password-confirm' in errorMessages))}
+          helperTextInvalid={errorMessages['password-confirm']}
         >
           <TextInput
-            validated={this.toError(
-              this.isPassSame(user.password, passwordConfirm),
-            )}
             isDisabled={isReadonly}
+            validated={this.toError(!('password-confirm' in errorMessages))}
             id={'password-confirm'}
             value={passwordConfirm}
-            onChange={(value, event) => {
+            onChange={value => {
+              if ('password-confirm' in errorMessages) {
+                delete errorMessages['password-confirm'];
+              }
               this.setState({ passwordConfirm: value });
             }}
             type='password'
@@ -119,8 +118,11 @@ export class UserForm extends React.Component<IProps, IState> {
         {!isReadonly && (
           <ActionGroup>
             <Button
-              isDisabled={!this.isPassSame(user.password, passwordConfirm)}
-              onClick={() => saveUser()}
+              onClick={() =>
+                saveUser(
+                  user.password !== '' && user.password === passwordConfirm,
+                )
+              }
             >
               Save
             </Button>
@@ -139,10 +141,6 @@ export class UserForm extends React.Component<IProps, IState> {
     } else {
       return 'error';
     }
-  }
-
-  private isPassSame(pass, confirm) {
-    return !pass || pass === '' || pass === confirm;
   }
 
   private updateField = (value, event) => {

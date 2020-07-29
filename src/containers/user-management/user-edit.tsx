@@ -53,7 +53,13 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
       ></UserFormPage>
     );
   }
-  private saveUser = () => {
+  private saveUser = passwordsMatch => {
+    if (!passwordsMatch) {
+      this.setState({
+        errorMessages: { 'password-confirm': 'Passwords do not match' },
+      });
+      return;
+    }
     const { user } = this.state;
     UserAPI.update(user.id.toString(), user)
       .then(result => this.props.history.push(Paths.userList))
