@@ -136,7 +136,12 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         isOpen={this.props.isOpen}
         onClose={this.toggleModal}
         actions={[
-          <Button key='confirm' variant='primary' onClick={this.handleSubmit}>
+          <Button
+            key='confirm'
+            variant='primary'
+            onClick={this.handleSubmit}
+            isDisabled={!newNamespaceName}
+          >
             Create
           </Button>,
           <Button key='cancel' variant='link' onClick={this.toggleModal}>
