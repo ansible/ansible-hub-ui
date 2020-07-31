@@ -119,7 +119,10 @@ export class UserForm extends React.Component<IProps, IState> {
         {!isReadonly && (
           <ActionGroup>
             <Button
-              isDisabled={!this.isPassSame(user.password, passwordConfirm)}
+              isDisabled={
+                !this.isPassSame(user.password, passwordConfirm) ||
+                !this.requiredFilled(user)
+              }
               onClick={() => saveUser()}
             >
               Save
@@ -143,6 +146,10 @@ export class UserForm extends React.Component<IProps, IState> {
 
   private isPassSame(pass, confirm) {
     return !pass || pass === '' || pass === confirm;
+  }
+
+  private requiredFilled(user) {
+    return !!user.password && !!user.username;
   }
 
   private updateField = (value, event) => {
