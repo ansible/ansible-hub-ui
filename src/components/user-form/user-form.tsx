@@ -110,7 +110,7 @@ export class UserForm extends React.Component<IProps, IState> {
             isDisabled={isReadonly}
             id={'password-confirm'}
             value={passwordConfirm}
-            onChange={(value, event) => {
+            onChange={value => {
               this.setState({ passwordConfirm: value });
             }}
             type='password'
