@@ -123,12 +123,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
   };
 
   render() {
-    const {
-      newNamespaceName,
-      newNamespaceGroupIds,
-      errorMessages,
-    } = this.state;
-
+    const { newNamespaceName, newNamespaceGroupIds } = this.state;
     return (
       <Modal
         variant='large'
