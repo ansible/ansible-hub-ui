@@ -7,6 +7,7 @@ import {
   DropdownItem,
   Alert,
   AlertActionCloseButton,
+  ClipboardCopy,
 } from '@patternfly/react-core';
 
 import * as ReactMarkdown from 'react-markdown';
@@ -113,11 +114,22 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     const tabs = ['Collections'];
 
+    if (this.props.showControls) {
+      tabs.push('CLI Configuration');
+    }
     const tab = params['tab'] || 'collections';
 
     if (namespace.resources) {
       tabs.push('Resources');
     }
+
+    const repositoryUrl = !!API_HOST
+      ? API_HOST
+      : window.location.origin +
+        API_BASE_PATH +
+        'content/inbound-' +
+        namespace.name +
+        '/';
 
     return (
       <React.Fragment>
@@ -179,6 +191,25 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   this.handleCollectionAction(id, action)
                 }
               />
+            ) : (
+              this.renderResources(namespace)
+            )}
+            {tab.toLowerCase() === 'cli configuration' ? (
+              <div>
+                <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
+                <div>
+                  <b>Note:</b> Use this URL to configure ansible-galaxy to
+                  upload collections to this namespace. More information on
+                  ansible-galaxy configurations can be found{' '}
+                  <a
+                    href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
+                    target='_blank'
+                  >
+                    here
+                  </a>
+                  .
+                </div>
+              </div>
             ) : (
               this.renderResources(namespace)
             )}
