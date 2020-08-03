@@ -123,12 +123,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       tabs.push('Resources');
     }
 
-    const repositoryUrl =
-      window.location.href.split('/ui')[0].replace('8002', '5001') +
-      CollectionAPI.apiBaseURL +
-      'content/inbound-' +
-      namespace.name +
-      '/v3/collections';
+    const repositoryUrl = !!API_HOST
+      ? API_HOST
+      : window.location.origin +
+        API_BASE_PATH +
+        'content/inbound-' +
+        namespace.name +
+        '/v3/collections/';
 
     return (
       <React.Fragment>
@@ -198,7 +199,15 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
                 <div>
                   <b>Note:</b> Use this URL to configure ansible-galaxy to
-                  upload collections to.
+                  upload collections to this namespace. More information on
+                  ansible-galaxy configurations can be found{' '}
+                  <a
+                    href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
+                    target='_blank'
+                  >
+                    here
+                  </a>
+                  .
                 </div>
               </div>
             ) : (
