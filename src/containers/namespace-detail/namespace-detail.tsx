@@ -129,7 +129,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         API_BASE_PATH +
         'content/inbound-' +
         namespace.name +
-        '/v3/collections/';
+        '/';
 
     return (
       <React.Fragment>
