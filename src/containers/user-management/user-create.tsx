@@ -24,7 +24,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
         password: '',
         // TODO: add group management to the form
         // defaulting to the admin for now to make testing easier.
-        groups: [{ id: 1, name: 'system:partner-engineer' }],
+        groups: [{ id: 1, name: 'system:partner-engineers' }],
       },
       errorMessages: {},
     };
