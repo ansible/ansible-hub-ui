@@ -1,15 +1,14 @@
 import * as React from 'react';
-import './import-modal.scss';
 import axios from 'axios';
 
 import { Modal, Button } from '@patternfly/react-core';
-import { FolderOpenIcon, SpinnerIcon } from '@patternfly/react-icons';
 
 import {
   CollectionListType,
   CollectionAPI,
   CollectionUploadType,
 } from '../../../api';
+import { UploadInput } from '../../../components/upload_input/upload_input';
 
 enum Status {
   uploading = 'uploading',
@@ -77,36 +76,13 @@ export class ImportModal extends React.Component<IProps, IState> {
           </Button>,
         ]}
       >
-        <div className='upload-collection'>
-          <form>
-            <input
-              disabled={uploadStatus !== Status.waiting}
-              className='upload-file'
-              type='file'
-              id='collection-widget'
-              onChange={e => this.handleFileUpload(e.target.files)}
-            />
-            <label className='upload-file-label' htmlFor='collection-widget'>
-              <div className='upload-box'>
-                <div className='upload-button'>{this.renderFileIcon()}</div>
-                <div className='upload-text'>
-                  {file != null ? file.name : 'Select file'}
-                  <div
-                    className='loading-bar'
-                    style={{
-                      width: uploadProgress * 100 + '%',
-                    }}
-                  />
-                </div>
-              </div>
-            </label>
-          </form>
-          {errors ? (
-            <span className='file-error-messages'>
-              <i className='pficon-error-circle-o' /> {errors}
-            </span>
-          ) : null}
-        </div>
+        <UploadInput
+          uploadStatus={uploadStatus}
+          uploadProgress={uploadProgress}
+          handleFileUpload={files => this.handleFileUpload(files)}
+          fileName={!!file ? file.name : null}
+          errors={errors}
+        />
       </Modal>
     );
   }
@@ -127,20 +103,12 @@ export class ImportModal extends React.Component<IProps, IState> {
     return true;
   }
 
-  private renderFileIcon() {
-    switch (this.state.uploadStatus) {
-      case Status.uploading:
-        return <SpinnerIcon className='fa-spin'></SpinnerIcon>;
-      default:
-        return <FolderOpenIcon></FolderOpenIcon>;
-    }
-  }
-
   private handleFileUpload(files) {
+    const { namespace, collection } = this.props;
+
     // Selects the artifact that will be uploaded and performs some basic
     // preliminary checks on it.
     const newCollection = files[0];
-    const { collection } = this.props;
 
     if (files.length > 1) {
       this.setState({
@@ -167,7 +135,7 @@ export class ImportModal extends React.Component<IProps, IState> {
         file: newCollection,
         uploadProgress: 0,
       });
-    } else if (this.props.namespace != newCollection.name.split('-')[0]) {
+    } else if (namespace != newCollection.name.split('-')[0]) {
       this.setState({
         errors: `The collection you have selected does not match this namespace.`,
         file: newCollection,
