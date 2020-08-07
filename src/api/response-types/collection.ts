@@ -16,6 +16,7 @@ export class CollectionVersion {
   certification: CertificationStatus;
   namespace: string;
   name: string;
+  repository_list: string[];
 }
 
 export enum CertificationStatus {

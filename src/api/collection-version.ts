@@ -1,5 +1,4 @@
 import { BaseAPI } from './base';
-import { CertificationStatus } from '../api';
 
 export class API extends BaseAPI {
   apiPath = 'v3/_ui/collection-versions/';
@@ -8,20 +7,15 @@ export class API extends BaseAPI {
     super();
   }
 
-  setCertifiation(
+  setRepository(
     namespace: string,
-    collection: string,
+    name: string,
     version: string,
-    certification: CertificationStatus,
+    originalRepo: string,
+    destinationRepo: string,
   ) {
-    const id = `${namespace}/${collection}/${version}/certified`;
-
-    return this.update(id, {
-      namespace: namespace,
-      name: collection,
-      version: version,
-      certification: certification,
-    });
+    const path = `v3/collections/${namespace}/${name}/versions/${version}/move/${originalRepo}/${destinationRepo}/`;
+    return this.create({}, path);
   }
 }
 
