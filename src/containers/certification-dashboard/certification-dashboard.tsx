@@ -503,8 +503,7 @@ class CertificationDashboard extends React.Component<
       if (result.data.state === 'waiting' || result.data.state === 'running') {
         await new Promise(r => setTimeout(r, 500));
         this.waitForUpdate(taskId, version);
-      }
-      if (result.data.state === 'completed') {
+      } else if (result.data.state === 'completed') {
         return CollectionVersionAPI.list(this.state.params).then(
           async result => {
             this.setState({
