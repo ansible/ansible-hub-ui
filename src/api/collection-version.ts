@@ -15,8 +15,7 @@ export class API extends BaseAPI {
     destinationRepo: string,
   ) {
     const path = `v3/collections/${namespace}/${name}/versions/${version}/move/${originalRepo}/${destinationRepo}/`;
-    const data = {};
-    return this.create(data, path);
+    return this.create({}, path);
   }
 }
 
