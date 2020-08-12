@@ -14,7 +14,7 @@ import {
 import { Link } from 'react-router-dom';
 
 import { NumericLabel, Logo } from '../../components';
-import { CollectionListType, CertificationStatus } from '../../api';
+import { CollectionListType } from '../../api';
 import { formatPath, Paths } from '../../paths';
 import { convertContentSummaryCounts } from '../../utilities';
 
@@ -41,7 +41,7 @@ export class CollectionCard extends React.Component<IProps> {
             size='40px'
           />
           <TextContent>
-            {latest_version.certification === CertificationStatus.certified && (
+            {!latest_version.repository_list && (
               <Text component={TextVariants.small}>
                 <Badge isRead>Certified</Badge>
               </Text>

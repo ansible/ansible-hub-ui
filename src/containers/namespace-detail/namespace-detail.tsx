@@ -17,7 +17,6 @@ import {
   CollectionAPI,
   NamespaceAPI,
   NamespaceType,
-  CertificationStatus,
 } from '../../api';
 
 import {
@@ -59,7 +58,6 @@ interface IProps extends RouteComponentProps {
 
 export class NamespaceDetail extends React.Component<IProps, IState> {
   nonAPIParams = ['tab'];
-  persistentParams = { certification: CertificationStatus.certified };
 
   // namespace is a positional url argument, so don't include it in the
   // query params
@@ -252,7 +250,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private loadCollections() {
     CollectionAPI.list({
       ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-      ...this.persistentParams,
     }).then(result => {
       this.setState({
         collections: result.data.data,
@@ -265,7 +262,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     Promise.all([
       CollectionAPI.list({
         ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-        ...this.persistentParams,
       }),
       NamespaceAPI.get(this.props.match.params['namespace']),
     ])

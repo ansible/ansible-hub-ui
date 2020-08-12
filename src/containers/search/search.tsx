@@ -33,7 +33,6 @@ import {
 import {
   CollectionAPI,
   CollectionListType,
-  CertificationStatus,
   SyncListType,
   MySyncListAPI,
 } from '../../api';
@@ -348,7 +347,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
       CollectionAPI.list({
         ...ParamHelper.getReduced(this.state.params, ['view_type']),
         deprecated: false,
-        certification: CertificationStatus.certified,
       }).then(result => {
         this.setState({
           collections: result.data.data,
