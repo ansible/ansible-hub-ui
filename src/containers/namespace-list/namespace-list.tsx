@@ -46,7 +46,7 @@ interface IState {
     tenant?: string;
   };
   hasPermission: boolean;
-  partnerEngineer: boolean;
+  activeUser: MeType;
   isModalOpen: boolean;
   loading: boolean;
 }
@@ -82,7 +82,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       params: params,
       hasPermission: true,
       isModalOpen: false,
-      partnerEngineer: false,
+      activeUser: null,
       loading: true,
     };
   }
@@ -115,7 +115,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { namespaces, params, itemCount, partnerEngineer } = this.state;
+    const { namespaces, params, itemCount, activeUser } = this.state;
     const { title, filterOwner } = this.props;
 
     if (!namespaces) {
@@ -124,7 +124,11 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     let extra = [];
 
-    if (partnerEngineer && filterOwner) {
+    if (
+      !!activeUser &&
+      activeUser.model_permissions.add_namespace &&
+      filterOwner
+    ) {
       extra.push(
         <ToolbarItem key='create-button'>
           <Button variant='primary' onClick={this.handleModalToggle}>
@@ -272,7 +276,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
   private isPartnerEngineer() {
     ActiveUserAPI.isPartnerEngineer().then(response => {
       const me: MeType = response.data;
-      this.setState({ partnerEngineer: me.is_partner_engineer });
+      this.setState({ activeUser: me });
     });
   }
 }
