@@ -38,10 +38,13 @@ export class UserType {
   is_partner_engineer?: boolean;
   date_joined?: string;
   password?: string;
-  model_permissions: Permissions;
 }
 
 export class MeType {
   is_partner_engineer: boolean;
+  username: string;
+  first_name?: string;
+  last_name?: string;
   model_permissions: Permissions;
+  groups: { id: number; name: string }[];
 }

@@ -108,8 +108,8 @@ class CertificationDashboard extends React.Component<
     ActiveUserAPI.isPartnerEngineer().then(response => {
       const me: MeType = response.data;
       if (
-        !!me ||
-        !!me.model_permissions ||
+        !me ||
+        !me.model_permissions ||
         !me.model_permissions.move_collection
       ) {
         this.setState({ redirect: Paths.notFound });
