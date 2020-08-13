@@ -119,7 +119,7 @@ class App extends React.Component<RouteComponentProps, IState> {
               <NavItem>
                 <Link to={Paths.token}>API Token</Link>
               </NavItem>
-              {user && user.is_partner_engineer && (
+              {!!user && user.model_permissions.view_user && (
                 <>
                   <NavItem>
                     <Link to={Paths.userList}>Users</Link>

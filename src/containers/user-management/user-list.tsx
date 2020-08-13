@@ -24,7 +24,7 @@ import {
 
 import { WarningTriangleIcon } from '@patternfly/react-icons';
 
-import { UserAPI, UserType } from '../../api';
+import { ActiveUserAPI, MeType, UserAPI, UserType } from '../../api';
 import { ParamHelper } from '../../utilities';
 import {
   StatefulDropdown,
@@ -56,6 +56,7 @@ interface IState {
   deleteUser: UserType;
   showDeleteModal: boolean;
   alerts: AlertType[];
+  activeUser: MeType;
 }
 
 class UserList extends React.Component<RouteComponentProps, IState> {
@@ -79,11 +80,20 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       loading: true,
       itemCount: 0,
       alerts: [],
+      activeUser: null,
     };
   }
 
   componentDidMount() {
-    this.queryUsers();
+    ActiveUserAPI.isPartnerEngineer().then(response => {
+      const me: MeType = response.data;
+      this.setState({ activeUser: me });
+      if (!me || !me.model_permissions.view_user) {
+        this.setState({ redirect: Paths.notFound });
+      } else {
+        this.queryUsers();
+      }
+    });
   }
 
   render() {
@@ -95,6 +105,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       showDeleteModal,
       deleteUser,
       alerts,
+      activeUser,
     } = this.state;
 
     if (redirect) {
@@ -151,13 +162,15 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                       />
                     </ToolbarItem>
                   </ToolbarGroup>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <Link to={Paths.createUser}>
-                        <Button>Create user</Button>
-                      </Link>
-                    </ToolbarItem>
-                  </ToolbarGroup>
+                  {!!activeUser && activeUser.model_permissions.add_user ? (
+                    <ToolbarGroup>
+                      <ToolbarItem>
+                        <Link to={Paths.createUser}>
+                          <Button>Create user</Button>
+                        </Link>
+                      </ToolbarItem>
+                    </ToolbarGroup>
+                  ) : null}
                 </ToolbarContent>
               </Toolbar>
 
@@ -260,6 +273,36 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderTableRow(user: UserType, index: number) {
+    const dropdownItems = [];
+    if (
+      !!this.state.activeUser &&
+      this.state.activeUser.model_permissions.change_user
+    ) {
+      dropdownItems.push(
+        <DropdownItem
+          key='edit'
+          component={
+            <Link
+              to={formatPath(Paths.editUser, {
+                userID: user.id,
+              })}
+            >
+              Edit
+            </Link>
+          }
+        />,
+      );
+    }
+    if (
+      !!this.state.activeUser &&
+      this.state.activeUser.model_permissions.delete_user
+    ) {
+      dropdownItems.push(
+        <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
+          Delete
+        </DropdownItem>,
+      );
+    }
     return (
       <tr aria-labelledby={user.username} key={index}>
         <td>
@@ -272,25 +315,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>{user.first_name}</td>
         <td>{moment(user.date_joined).fromNow()}</td>
         <td>
-          <StatefulDropdown
-            items={[
-              <DropdownItem
-                key='edit'
-                component={
-                  <Link
-                    to={formatPath(Paths.editUser, {
-                      userID: user.id,
-                    })}
-                  >
-                    Edit
-                  </Link>
-                }
-              />,
-              <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
-                Delete
-              </DropdownItem>,
-            ]}
-          ></StatefulDropdown>
+          <StatefulDropdown items={dropdownItems}></StatefulDropdown>
         </td>
       </tr>
     );

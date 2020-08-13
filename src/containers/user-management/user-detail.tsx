@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 
 import { Button } from '@patternfly/react-core';
 
@@ -10,7 +15,7 @@ import {
   closeAlertMixin,
   UserFormPage,
 } from '../../components';
-import { UserType, UserAPI } from '../../api';
+import { UserType, UserAPI, ActiveUserAPI, MeType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { DeleteUserModal } from './delete-user-modal';
 
@@ -19,6 +24,7 @@ interface IState {
   errorMessages: object;
   showDeleteModal: boolean;
   alerts: AlertType[];
+  activeUser: MeType;
 }
 
 class UserDetail extends React.Component<RouteComponentProps, IState> {
@@ -30,21 +36,36 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
       errorMessages: {},
       alerts: [],
       showDeleteModal: false,
+      activeUser: null,
     };
   }
 
   componentDidMount() {
     const id = this.props.match.params['userID'];
+    ActiveUserAPI.isPartnerEngineer().then(response => {
+      const me: MeType = response.data;
+      this.setState({ activeUser: me });
+    });
     UserAPI.get(id)
       .then(result => this.setState({ user: result.data }))
       .catch(() => this.props.history.push(Paths.notFound));
   }
 
   render() {
-    const { user, errorMessages, alerts, showDeleteModal } = this.state;
+    const {
+      user,
+      errorMessages,
+      alerts,
+      showDeleteModal,
+      activeUser,
+    } = this.state;
 
     if (!user) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
+    }
+
+    if (!!activeUser && !activeUser.model_permissions.view_user) {
+      return <Redirect to={Paths.notFound}></Redirect>;
     }
 
     return (
@@ -75,23 +96,27 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
           isReadonly
           extraControls={
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <div>
-                <Link
-                  to={formatPath(Paths.editUser, {
-                    userID: user.id,
-                  })}
-                >
-                  <Button>Edit</Button>
-                </Link>
-              </div>
-              <div style={{ marginLeft: '8px' }}>
-                <Button
-                  variant='secondary'
-                  onClick={() => this.setState({ showDeleteModal: true })}
-                >
-                  Delete
-                </Button>
-              </div>
+              {!!activeUser && activeUser.model_permissions.change_user ? (
+                <div>
+                  <Link
+                    to={formatPath(Paths.editUser, {
+                      userID: user.id,
+                    })}
+                  >
+                    <Button>Edit</Button>
+                  </Link>
+                </div>
+              ) : null}
+              {!!activeUser && activeUser.model_permissions.delete_user ? (
+                <div style={{ marginLeft: '8px' }}>
+                  <Button
+                    variant='secondary'
+                    onClick={() => this.setState({ showDeleteModal: true })}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              ) : null}
             </div>
           }
         ></UserFormPage>
