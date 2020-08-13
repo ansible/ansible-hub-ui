@@ -31,4 +31,14 @@ export class UserType {
 
 export class MeType {
   is_partner_engineer: boolean;
+  model_permissions: {
+    add_namespace: boolean;
+    upload_to_namespace: boolean;
+    change_namespace: boolean;
+    move_collection: boolean;
+    view_user: boolean;
+    delete_user: boolean;
+    change_user: boolean;
+    add_user: boolean;
+  };
 }
