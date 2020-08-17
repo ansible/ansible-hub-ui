@@ -73,7 +73,7 @@ class App extends React.Component<RouteComponentProps, IState> {
     }
 
     if (!activeUser) {
-      ActiveUserAPI.isPartnerEngineer().then(response => {
+      ActiveUserAPI.getActiveUser().then(response => {
         this.setActiveUser(response.data);
       });
     }

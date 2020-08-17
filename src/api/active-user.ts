@@ -77,7 +77,7 @@ class API extends BaseAPI {
     });
   }
 
-  isPartnerEngineer() {
+  getActiveUser() {
     return this.http.get(this.apiPath);
   }
 }
