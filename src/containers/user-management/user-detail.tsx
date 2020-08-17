@@ -18,13 +18,14 @@ import {
 import { UserType, UserAPI, ActiveUserAPI, MeType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { DeleteUserModal } from './delete-user-modal';
+import { AppContext } from '../../loaders/standalone/app-context';
+import { NamespaceList } from '../namespace-list/namespace-list';
 
 interface IState {
   user: UserType;
   errorMessages: object;
   showDeleteModal: boolean;
   alerts: AlertType[];
-  activeUser: MeType;
 }
 
 class UserDetail extends React.Component<RouteComponentProps, IState> {
@@ -36,29 +37,20 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
       errorMessages: {},
       alerts: [],
       showDeleteModal: false,
-      activeUser: null,
     };
   }
 
   componentDidMount() {
     const id = this.props.match.params['userID'];
-    ActiveUserAPI.isPartnerEngineer().then(response => {
-      const me: MeType = response.data;
-      this.setState({ activeUser: me });
-    });
     UserAPI.get(id)
       .then(result => this.setState({ user: result.data }))
       .catch(() => this.props.history.push(Paths.notFound));
   }
 
   render() {
-    const {
-      user,
-      errorMessages,
-      alerts,
-      showDeleteModal,
-      activeUser,
-    } = this.state;
+    const { user, errorMessages, alerts, showDeleteModal } = this.state;
+
+    const { activeUser } = this.context;
 
     if (!user) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -142,3 +134,5 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
 }
 
 export default withRouter(UserDetail);
+
+UserDetail.contextType = AppContext;

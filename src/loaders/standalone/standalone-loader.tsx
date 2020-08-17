@@ -25,6 +25,7 @@ import { AppContext } from './app-context';
 
 interface IState {
   user: MeType;
+  activeUser: MeType;
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -32,11 +33,12 @@ class App extends React.Component<RouteComponentProps, IState> {
     super(props);
     this.state = {
       user: undefined,
+      activeUser: undefined,
     };
   }
 
   render() {
-    const { user } = this.state;
+    const { user, activeUser } = this.state;
     let dropdownItems = [];
     let userName: string;
 
@@ -68,6 +70,12 @@ class App extends React.Component<RouteComponentProps, IState> {
           Logout
         </DropdownItem>,
       ];
+    }
+
+    if (!activeUser) {
+      ActiveUserAPI.isPartnerEngineer().then(response => {
+        this.setActiveUser(response.data);
+      });
     }
 
     const Header = (
@@ -119,7 +127,7 @@ class App extends React.Component<RouteComponentProps, IState> {
               <NavItem>
                 <Link to={Paths.token}>API Token</Link>
               </NavItem>
-              {!!user && user.model_permissions.view_user && (
+              {!!activeUser && activeUser.model_permissions.view_user && (
                 <>
                   <NavItem>
                     <Link to={Paths.userList}>Users</Link>
@@ -153,6 +161,8 @@ class App extends React.Component<RouteComponentProps, IState> {
         value={{
           user: this.state.user,
           setUser: this.setUser,
+          activeUser: this.state.activeUser,
+          setActiveUser: this.setActiveUser,
         }}
       >
         {component}
@@ -162,6 +172,12 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   private setUser = user => {
     this.setState({ user: user });
+  };
+
+  private setActiveUser = activeUser => {
+    console.log('SETACTIVEUSER');
+    console.log(activeUser);
+    this.setState({ activeUser: activeUser });
   };
 }
 

@@ -25,15 +25,10 @@ import {
 } from '../../components';
 import { Button } from '@patternfly/react-core';
 import { ToolbarItem } from '@patternfly/react-core';
-import {
-  NamespaceAPI,
-  NamespaceListType,
-  ActiveUserAPI,
-  MeType,
-  MyNamespaceAPI,
-} from '../../api';
+import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
+import { AppContext } from '../../loaders/standalone/app-context';
 
 interface IState {
   namespaces: NamespaceListType[];
@@ -46,7 +41,6 @@ interface IState {
     tenant?: string;
   };
   hasPermission: boolean;
-  activeUser: MeType;
   isModalOpen: boolean;
   loading: boolean;
 }
@@ -82,7 +76,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
       params: params,
       hasPermission: true,
       isModalOpen: false,
-      activeUser: null,
       loading: true,
     };
   }
@@ -94,7 +87,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
   };
 
   componentDidMount() {
-    this.isPartnerEngineer();
     if (this.props.filterOwner) {
       // Make a query with no params and see if it returns results to tell
       // if the user can edit namespaces
@@ -115,8 +107,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { namespaces, params, itemCount, activeUser } = this.state;
+    const { namespaces, params, itemCount } = this.state;
     const { title, filterOwner } = this.props;
+    const { activeUser } = this.context;
 
     if (!namespaces) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -272,11 +265,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
   private get updateParams() {
     return ParamHelper.updateParamsMixin(this.nonURLParams);
   }
-
-  private isPartnerEngineer() {
-    ActiveUserAPI.isPartnerEngineer().then(response => {
-      const me: MeType = response.data;
-      this.setState({ activeUser: me });
-    });
-  }
 }
+
+NamespaceList.contextType = AppContext;

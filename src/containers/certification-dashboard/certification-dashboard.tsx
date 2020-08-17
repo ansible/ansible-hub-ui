@@ -52,6 +52,7 @@ import {
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
+import { AppContext } from '../../loaders/standalone/app-context';
 
 interface IState {
   params: {
@@ -105,18 +106,15 @@ class CertificationDashboard extends React.Component<
   }
 
   componentDidMount() {
-    ActiveUserAPI.isPartnerEngineer().then(response => {
-      const me: MeType = response.data;
-      if (
-        !me ||
-        !me.model_permissions ||
-        !me.model_permissions.move_collection
-      ) {
-        this.setState({ redirect: Paths.notFound });
-      } else {
-        this.queryCollections();
-      }
-    });
+    if (
+      !this.context.activeUser ||
+      !this.context.activeUser.model_permissions ||
+      !this.context.activeUser.model_permissions.move_collection
+    ) {
+      this.setState({ redirect: Paths.notFound });
+    } else {
+      this.queryCollections();
+    }
   }
 
   render() {
@@ -555,3 +553,5 @@ class CertificationDashboard extends React.Component<
 }
 
 export default withRouter(CertificationDashboard);
+
+CertificationDashboard.contextType = AppContext;

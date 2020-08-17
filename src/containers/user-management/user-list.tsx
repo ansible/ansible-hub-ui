@@ -43,6 +43,7 @@ import {
 import { DeleteUserModal } from './delete-user-modal';
 
 import { Paths, formatPath } from '../../paths';
+import { AppContext } from '../../loaders/standalone/app-context';
 
 interface IState {
   params: {
@@ -56,7 +57,6 @@ interface IState {
   deleteUser: UserType;
   showDeleteModal: boolean;
   alerts: AlertType[];
-  activeUser: MeType;
 }
 
 class UserList extends React.Component<RouteComponentProps, IState> {
@@ -80,20 +80,18 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       loading: true,
       itemCount: 0,
       alerts: [],
-      activeUser: null,
     };
   }
 
   componentDidMount() {
-    ActiveUserAPI.isPartnerEngineer().then(response => {
-      const me: MeType = response.data;
-      this.setState({ activeUser: me });
-      if (!me || !me.model_permissions.view_user) {
-        this.setState({ redirect: Paths.notFound });
-      } else {
-        this.queryUsers();
-      }
-    });
+    if (
+      !this.context.activeUser ||
+      !this.context.activeUser.model_permissions.view_user
+    ) {
+      this.setState({ redirect: Paths.notFound });
+    } else {
+      this.queryUsers();
+    }
   }
 
   render() {
@@ -105,8 +103,9 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       showDeleteModal,
       deleteUser,
       alerts,
-      activeUser,
     } = this.state;
+
+    const { activeUser } = this.context;
 
     if (redirect) {
       return <Redirect to={redirect}></Redirect>;
@@ -275,8 +274,8 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(user: UserType, index: number) {
     const dropdownItems = [];
     if (
-      !!this.state.activeUser &&
-      this.state.activeUser.model_permissions.change_user
+      !!this.context.activeUser &&
+      this.context.activeUser.model_permissions.change_user
     ) {
       dropdownItems.push(
         <DropdownItem
@@ -294,8 +293,8 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       );
     }
     if (
-      !!this.state.activeUser &&
-      this.state.activeUser.model_permissions.delete_user
+      !!this.context.activeUser &&
+      this.context.activeUser.model_permissions.delete_user
     ) {
       dropdownItems.push(
         <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
@@ -360,3 +359,5 @@ class UserList extends React.Component<RouteComponentProps, IState> {
 }
 
 export default withRouter(UserList);
+
+UserList.contextType = AppContext;
