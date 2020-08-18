@@ -32,8 +32,8 @@ class App extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      user: undefined,
-      activeUser: undefined,
+      user: null,
+      activeUser: null,
     };
   }
 
@@ -63,7 +63,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           key='logout'
           onClick={() =>
             ActiveUserAPI.logout().then(() =>
-              this.setState({ user: undefined }),
+              this.setState({ user: null, activeUser: null }),
             )
           }
         >
@@ -175,8 +175,6 @@ class App extends React.Component<RouteComponentProps, IState> {
   };
 
   private setActiveUser = activeUser => {
-    console.log('SETACTIVEUSER');
-    console.log(activeUser);
     this.setState({ activeUser: activeUser });
   };
 }
