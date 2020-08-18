@@ -15,11 +15,10 @@ import {
   closeAlertMixin,
   UserFormPage,
 } from '../../components';
-import { UserType, UserAPI, ActiveUserAPI, MeType } from '../../api';
+import { UserType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { DeleteUserModal } from './delete-user-modal';
 import { AppContext } from '../../loaders/standalone/app-context';
-import { NamespaceList } from '../namespace-list/namespace-list';
 
 interface IState {
   user: UserType;

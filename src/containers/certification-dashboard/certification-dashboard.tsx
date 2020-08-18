@@ -30,13 +30,7 @@ import {
   WarningTriangleIcon,
 } from '@patternfly/react-icons';
 
-import {
-  CollectionVersionAPI,
-  CollectionVersion,
-  ActiveUserAPI,
-  MeType,
-  TaskAPI,
-} from '../../api';
+import { CollectionVersionAPI, CollectionVersion, TaskAPI } from '../../api';
 import { ParamHelper } from '../../utilities';
 import {
   LoadingPageWithHeader,

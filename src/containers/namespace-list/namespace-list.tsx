@@ -20,7 +20,6 @@ import {
   Pagination,
   NamespaceModal,
   LoadingPageWithHeader,
-  Main,
   LoadingPageSpinner,
 } from '../../components';
 import { Button } from '@patternfly/react-core';

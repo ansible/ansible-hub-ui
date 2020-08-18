@@ -56,7 +56,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
   private saveUser = () => {
     const { user } = this.state;
     UserAPI.update(user.id.toString(), user)
-      .then(result => this.props.history.push(Paths.userList))
+      .then(() => this.props.history.push(Paths.userList))
       .catch(err => {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });

@@ -24,7 +24,7 @@ import {
 
 import { WarningTriangleIcon } from '@patternfly/react-icons';
 
-import { ActiveUserAPI, MeType, UserAPI, UserType } from '../../api';
+import { UserAPI, UserType } from '../../api';
 import { ParamHelper } from '../../utilities';
 import {
   StatefulDropdown,
@@ -36,7 +36,6 @@ import {
   AlertList,
   closeAlertMixin,
   AlertType,
-  SortFieldType,
   BaseHeader,
   Main,
 } from '../../components';
