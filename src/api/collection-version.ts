@@ -1,7 +1,7 @@
 import { BaseAPI } from './base';
 
 export class API extends BaseAPI {
-  apiPath = 'v3/_ui/collection-versions/';
+  apiPath = this.getUIPath('collection-versions/');
 
   constructor() {
     super();
