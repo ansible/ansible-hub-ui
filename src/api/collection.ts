@@ -1,5 +1,5 @@
 import { BaseAPI } from './base';
-import { MockCollection } from './mocked-responses/collection';
+// import { MockCollection } from './mocked-responses/collection';
 import {
   CollectionDetailType,
   CollectionListType,
@@ -8,7 +8,7 @@ import {
 import axios from 'axios';
 
 export class API extends BaseAPI {
-  apiPath = 'v3/_ui/collections/';
+  apiPath = this.getUIPath('collections/');
   cachedCollection: CollectionDetailType;
 
   constructor() {

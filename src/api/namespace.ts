@@ -2,7 +2,7 @@ import { BaseAPI } from './base';
 import { MockNamespace } from './mocked-responses/namespace';
 
 class API extends BaseAPI {
-  apiPath = 'v3/_ui/namespaces/';
+  apiPath = this.getUIPath('namespaces/');
 
   constructor() {
     super();

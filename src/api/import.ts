@@ -1,8 +1,8 @@
 import { BaseAPI } from './base';
-import { MockImport } from './mocked-responses/import';
+// import { MockImport } from './mocked-responses/import';
 
 export class API extends BaseAPI {
-  apiPath = 'v3/_ui/imports/collections/';
+  apiPath = this.getUIPath('imports/collections/');
   mock: any;
 
   constructor() {
