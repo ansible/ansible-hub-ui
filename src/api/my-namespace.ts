@@ -1,7 +1,7 @@
 import { BaseAPI } from './base';
 
 class API extends BaseAPI {
-  apiPath = 'v3/_ui/my-namespaces/';
+  apiPath = this.getUIPath('my-namespaces/');
 
   constructor() {
     super();

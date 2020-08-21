@@ -4,7 +4,10 @@ import { ParamHelper } from '../utilities';
 import * as Cookies from 'js-cookie';
 
 export class BaseAPI {
+  UI_API_VERSION = 'v1';
+
   apiBaseURL = API_HOST + API_BASE_PATH;
+
   apiPath: string;
   http: any;
 
@@ -15,6 +18,12 @@ export class BaseAPI {
     });
 
     this.http.interceptors.request.use(request => this.authHandler(request));
+  }
+
+  // Use this function to get paths in the _ui API. That will ensure the API version
+  // gets updated when it changes
+  getUIPath(url: string) {
+    return `_ui/${this.UI_API_VERSION}/${url}`;
   }
 
   list(params?: object, apiPath?: string) {
