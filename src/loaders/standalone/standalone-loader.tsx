@@ -19,13 +19,12 @@ import {
 import { Routes } from './routes';
 import Logo from '../../../static/images/galaxy_logo.svg';
 import { Paths, formatPath } from '../../paths';
-import { ActiveUserAPI, MeType } from '../../api';
+import { ActiveUserAPI, UserType } from '../../api';
 import { StatefulDropdown } from '../../components';
-import { AppContext } from './app-context';
+import { AppContext } from '../app-context';
 
 interface IState {
-  user: MeType;
-  activeUser: MeType;
+  user: UserType;
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -33,12 +32,11 @@ class App extends React.Component<RouteComponentProps, IState> {
     super(props);
     this.state = {
       user: null,
-      activeUser: null,
     };
   }
 
   render() {
-    const { user, activeUser } = this.state;
+    const { user } = this.state;
     let dropdownItems = [];
     let userName: string;
 
@@ -62,20 +60,12 @@ class App extends React.Component<RouteComponentProps, IState> {
         <DropdownItem
           key='logout'
           onClick={() =>
-            ActiveUserAPI.logout().then(() =>
-              this.setState({ user: null, activeUser: null }),
-            )
+            ActiveUserAPI.logout().then(() => this.setState({ user: null }))
           }
         >
           Logout
         </DropdownItem>,
       ];
-    }
-
-    if (!activeUser) {
-      ActiveUserAPI.getActiveUser().then(response => {
-        this.setActiveUser(response.data);
-      });
     }
 
     const Header = (
@@ -127,7 +117,7 @@ class App extends React.Component<RouteComponentProps, IState> {
               <NavItem>
                 <Link to={Paths.token}>API Token</Link>
               </NavItem>
-              {!!activeUser && activeUser.model_permissions.view_user && (
+              {!!user && user.model_permissions.view_user && (
                 <>
                   <NavItem>
                     <Link to={Paths.userList}>Users</Link>
@@ -161,8 +151,6 @@ class App extends React.Component<RouteComponentProps, IState> {
         value={{
           user: this.state.user,
           setUser: this.setUser,
-          activeUser: this.state.activeUser,
-          setActiveUser: this.setActiveUser,
         }}
       >
         {component}
@@ -172,10 +160,6 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   private setUser = user => {
     this.setState({ user: user });
-  };
-
-  private setActiveUser = activeUser => {
-    this.setState({ activeUser: activeUser });
   };
 }
 

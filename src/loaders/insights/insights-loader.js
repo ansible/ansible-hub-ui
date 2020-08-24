@@ -4,8 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Routes } from './Routes';
 import '../app.scss';
-import { AppContext } from '../standalone/app-context';
-import { ActiveUserAPI } from '../../api';
+import { AppContext } from '../app-context';
 
 class App extends Component {
   firstLoad = true;
@@ -15,7 +14,6 @@ class App extends Component {
 
     this.state = {
       user: null,
-      activeUser: null,
     };
   }
 
@@ -43,14 +41,7 @@ class App extends Component {
       insights.chrome.navigation(buildNavigation()),
     );
 
-    insights.chrome.auth.getUser().then(user => {
-      this.setState({ user: user }), console.log('API user');
-    });
-    ActiveUserAPI.getActiveUser().then(user => {
-      console.log('API activeuser');
-      console.log(user);
-      this.setState({ activeUser: user });
-    });
+    insights.chrome.auth.getUser().then(user => this.setState({ user: user }));
   }
 
   componentWillUnmount() {
@@ -62,18 +53,14 @@ class App extends Component {
     // Wait for the user data to load before any of the child components are
     // rendered. This will prevent API calls from happening
     // before the app can authenticate
-    console.log('RENDER');
-    console.log(this.state.activeUser);
     if (!this.state.user) {
       return null;
     } else {
       return (
         <AppContext.Provider
           value={{
-            user: this.state.activeUser,
+            user: this.state.user,
             setUser: this.setUser,
-            activeUser: this.state.activeUser,
-            setActiveUser: this.setActiveUser,
           }}
         >
           <Routes childProps={this.props} />
@@ -83,10 +70,6 @@ class App extends Component {
   }
   setUser = user => {
     this.setState({ user: user });
-  };
-
-  setActiveUser = activeUser => {
-    this.setState({ activeUser: activeUser });
   };
 }
 

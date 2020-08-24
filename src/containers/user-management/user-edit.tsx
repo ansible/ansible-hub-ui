@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { LoadingPageWithHeader, UserFormPage } from '../../components';
 import { mapErrorMessages } from '../../utilities';
 import { UserType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   user: UserType;
@@ -30,6 +31,14 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
 
     if (!user) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
+    }
+
+    if (
+      !this.context.user ||
+      !this.context.user.model_permissions ||
+      !this.context.user.model_permissions.change_user
+    ) {
+      return <Redirect to={Paths.notFound}></Redirect>;
     }
 
     return (
@@ -62,5 +71,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
       });
   };
 }
+
+UserEdit.contextType = AppContext;
 
 export default withRouter(UserEdit);

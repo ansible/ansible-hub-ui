@@ -76,27 +76,6 @@ class API extends BaseAPI {
         .catch(err => reject(err));
     });
   }
-  getActiveUser(): Promise<any> {
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      return new Promise((resolve, reject) => {
-        this.http
-          .get(this.apiPath)
-          .then(result => {
-            resolve(result.data);
-          })
-          .catch(result => reject(result));
-      });
-    } else if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      return new Promise((resolve, reject) => {
-        this.http
-          .get(this.apiPath)
-          .then(result => {
-            resolve(result.data);
-          })
-          .catch(result => reject(result));
-      });
-    }
-  }
 }
 
 export const ActiveUserAPI = new API();

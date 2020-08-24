@@ -46,7 +46,7 @@ import {
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
-import { AppContext } from '../../loaders/standalone/app-context';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   params: {
@@ -101,9 +101,9 @@ class CertificationDashboard extends React.Component<
 
   componentDidMount() {
     if (
-      !this.context.activeUser ||
-      !this.context.activeUser.model_permissions ||
-      !this.context.activeUser.model_permissions.move_collection
+      !this.context.user ||
+      !this.context.user.model_permissions ||
+      !this.context.user.model_permissions.move_collection
     ) {
       this.setState({ redirect: Paths.notFound });
     } else {

@@ -42,7 +42,7 @@ import {
 import { DeleteUserModal } from './delete-user-modal';
 
 import { Paths, formatPath } from '../../paths';
-import { AppContext } from '../../loaders/standalone/app-context';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   params: {
@@ -83,10 +83,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    if (
-      !this.context.activeUser ||
-      !this.context.activeUser.model_permissions.view_user
-    ) {
+    if (!this.context.user || !this.context.user.model_permissions.view_user) {
       this.setState({ redirect: Paths.notFound });
     } else {
       this.queryUsers();
@@ -104,7 +101,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       alerts,
     } = this.state;
 
-    const { activeUser } = this.context;
+    const { user } = this.context;
 
     if (redirect) {
       return <Redirect to={redirect}></Redirect>;
@@ -160,7 +157,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                       />
                     </ToolbarItem>
                   </ToolbarGroup>
-                  {!!activeUser && activeUser.model_permissions.add_user ? (
+                  {!!user && user.model_permissions.add_user ? (
                     <ToolbarGroup>
                       <ToolbarItem>
                         <Link to={Paths.createUser}>
@@ -273,8 +270,8 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(user: UserType, index: number) {
     const dropdownItems = [];
     if (
-      !!this.context.activeUser &&
-      this.context.activeUser.model_permissions.change_user
+      !!this.context.user &&
+      this.context.user.model_permissions.change_user
     ) {
       dropdownItems.push(
         <DropdownItem
@@ -292,8 +289,8 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       );
     }
     if (
-      !!this.context.activeUser &&
-      this.context.activeUser.model_permissions.delete_user
+      !!this.context.user &&
+      this.context.user.model_permissions.delete_user
     ) {
       dropdownItems.push(
         <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>

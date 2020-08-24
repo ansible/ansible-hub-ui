@@ -27,7 +27,7 @@ import { ToolbarItem } from '@patternfly/react-core';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
-import { AppContext } from '../../loaders/standalone/app-context';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   namespaces: NamespaceListType[];
@@ -108,7 +108,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
   render() {
     const { namespaces, params, itemCount } = this.state;
     const { title, filterOwner } = this.props;
-    const { activeUser } = this.context;
+    const { user } = this.context;
 
     if (!namespaces) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -116,11 +116,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     let extra = [];
 
-    if (
-      !!activeUser &&
-      activeUser.model_permissions.add_namespace &&
-      filterOwner
-    ) {
+    if (!!user && user.model_permissions.add_namespace && filterOwner) {
       extra.push(
         <ToolbarItem key='create-button'>
           <Button variant='primary' onClick={this.handleModalToggle}>

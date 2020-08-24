@@ -37,6 +37,7 @@ export class UserType {
   groups: { id: number; name: string }[];
   date_joined?: string;
   password?: string;
+  model_permissions?: Permissions;
 }
 
 export class MeType {

@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { UserFormPage } from '../../components';
 import { mapErrorMessages } from '../../utilities';
 import { UserType, UserAPI } from '../../api';
 import { Paths } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   user: UserType;
@@ -32,6 +33,13 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const { user, errorMessages } = this.state;
+    if (
+      !this.context.user ||
+      !this.context.user.model_permissions ||
+      !this.context.user.model_permissions.add_user
+    ) {
+      return <Redirect to={Paths.notFound}></Redirect>;
+    }
     return (
       <UserFormPage
         user={user}
@@ -58,5 +66,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
       });
   };
 }
+
+UserCreate.contextType = AppContext;
 
 export default withRouter(UserCreate);

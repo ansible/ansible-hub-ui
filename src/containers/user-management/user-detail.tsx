@@ -18,10 +18,10 @@ import {
 import { UserType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { DeleteUserModal } from './delete-user-modal';
-import { AppContext } from '../../loaders/standalone/app-context';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
-  user: UserType;
+  userDetail: UserType;
   errorMessages: object;
   showDeleteModal: boolean;
   alerts: AlertType[];
@@ -32,7 +32,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
     super(props);
 
     this.state = {
-      user: undefined,
+      userDetail: undefined,
       errorMessages: {},
       alerts: [],
       showDeleteModal: false,
@@ -42,20 +42,20 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
   componentDidMount() {
     const id = this.props.match.params['userID'];
     UserAPI.get(id)
-      .then(result => this.setState({ user: result.data }))
+      .then(result => this.setState({ userDetail: result.data }))
       .catch(() => this.props.history.push(Paths.notFound));
   }
 
   render() {
-    const { user, errorMessages, alerts, showDeleteModal } = this.state;
+    const { userDetail, errorMessages, alerts, showDeleteModal } = this.state;
 
-    const { activeUser } = this.context;
+    const { user } = this.context;
 
-    if (!user) {
+    if (!userDetail) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    if (!!activeUser && !activeUser.model_permissions.view_user) {
+    if (!!user && !user.model_permissions.view_user) {
       return <Redirect to={Paths.notFound}></Redirect>;
     }
 
@@ -68,7 +68,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
         <DeleteUserModal
           isOpen={showDeleteModal}
           closeModal={this.closeModal}
-          user={user}
+          user={userDetail}
           addAlert={(text, variant) =>
             this.setState({
               alerts: alerts.concat([{ title: text, variant: variant }]),
@@ -76,29 +76,29 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
           }
         ></DeleteUserModal>
         <UserFormPage
-          user={user}
+          user={userDetail}
           breadcrumbs={[
             { url: Paths.userList, name: 'Users' },
-            { name: user.username },
+            { name: userDetail.username },
           ]}
           title='User details'
           errorMessages={errorMessages}
-          updateUser={user => this.setState({ user: user })}
+          updateUser={user => this.setState({ userDetail: user })}
           isReadonly
           extraControls={
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              {!!activeUser && activeUser.model_permissions.change_user ? (
+              {!!user && user.model_permissions.change_user ? (
                 <div>
                   <Link
                     to={formatPath(Paths.editUser, {
-                      userID: user.id,
+                      userID: userDetail.id,
                     })}
                   >
                     <Button>Edit</Button>
                   </Link>
                 </div>
               ) : null}
-              {!!activeUser && activeUser.model_permissions.delete_user ? (
+              {!!user && user.model_permissions.delete_user ? (
                 <div style={{ marginLeft: '8px' }}>
                   <Button
                     variant='secondary'
