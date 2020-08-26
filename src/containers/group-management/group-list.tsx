@@ -198,7 +198,15 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(group: any, index: number) {
     return (
       <tr aria-labelledby={group.name} key={index}>
-        <td>{group.name}</td>
+        <td>
+          <Link
+            to={formatPath(Paths.groupDetail, {
+              group: group.id,
+            })}
+          >
+            {group.name}
+          </Link>
+        </td>
         <td>
           <StatefulDropdown
             items={[
@@ -207,7 +215,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                 component={
                   <Link
                     to={formatPath(Paths.editUser, {
-                      groupID: group.id,
+                      group: group.id,
                     })}
                   >
                     Edit
