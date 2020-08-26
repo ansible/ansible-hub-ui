@@ -30,6 +30,10 @@ class API extends BaseAPI {
     }
   }
 
+  getActiveUser() {
+    return this.http.get(this.apiPath);
+  }
+
   saveUser(data) {
     return this.http.put(this.apiPath, data);
   }
@@ -75,10 +79,6 @@ class API extends BaseAPI {
         })
         .catch(err => reject(err));
     });
-  }
-
-  isPartnerEngineer() {
-    return this.http.get(this.apiPath);
   }
 }
 

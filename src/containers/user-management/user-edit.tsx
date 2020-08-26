@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { LoadingPageWithHeader, UserFormPage } from '../../components';
 import { mapErrorMessages } from '../../utilities';
 import { UserType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   user: UserType;
@@ -32,6 +33,13 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
+    if (
+      !this.context.user ||
+      !this.context.user.model_permissions.change_user
+    ) {
+      return <Redirect to={Paths.notFound}></Redirect>;
+    }
+
     return (
       <UserFormPage
         user={user}
@@ -56,11 +64,13 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
   private saveUser = () => {
     const { user } = this.state;
     UserAPI.update(user.id.toString(), user)
-      .then(result => this.props.history.push(Paths.userList))
+      .then(() => this.props.history.push(Paths.userList))
       .catch(err => {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });
   };
 }
+
+UserEdit.contextType = AppContext;
 
 export default withRouter(UserEdit);

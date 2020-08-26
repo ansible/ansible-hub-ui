@@ -36,13 +36,13 @@ import {
   AlertList,
   closeAlertMixin,
   AlertType,
-  SortFieldType,
   BaseHeader,
   Main,
 } from '../../components';
 import { DeleteUserModal } from './delete-user-modal';
 
 import { Paths, formatPath } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   params: {
@@ -83,7 +83,11 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    this.queryUsers();
+    if (!this.context.user || !this.context.user.model_permissions.view_user) {
+      this.setState({ redirect: Paths.notFound });
+    } else {
+      this.queryUsers();
+    }
   }
 
   render() {
@@ -96,6 +100,8 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       deleteUser,
       alerts,
     } = this.state;
+
+    const { user } = this.context;
 
     if (redirect) {
       return <Redirect to={redirect}></Redirect>;
@@ -151,13 +157,15 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                       />
                     </ToolbarItem>
                   </ToolbarGroup>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <Link to={Paths.createUser}>
-                        <Button>Create user</Button>
-                      </Link>
-                    </ToolbarItem>
-                  </ToolbarGroup>
+                  {!!user && user.model_permissions.add_user ? (
+                    <ToolbarGroup>
+                      <ToolbarItem>
+                        <Link to={Paths.createUser}>
+                          <Button>Create user</Button>
+                        </Link>
+                      </ToolbarItem>
+                    </ToolbarGroup>
+                  ) : null}
                 </ToolbarContent>
               </Toolbar>
 
@@ -260,6 +268,36 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderTableRow(user: UserType, index: number) {
+    const dropdownItems = [];
+    if (
+      !!this.context.user &&
+      this.context.user.model_permissions.change_user
+    ) {
+      dropdownItems.push(
+        <DropdownItem
+          key='edit'
+          component={
+            <Link
+              to={formatPath(Paths.editUser, {
+                userID: user.id,
+              })}
+            >
+              Edit
+            </Link>
+          }
+        />,
+      );
+    }
+    if (
+      !!this.context.user &&
+      this.context.user.model_permissions.delete_user
+    ) {
+      dropdownItems.push(
+        <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
+          Delete
+        </DropdownItem>,
+      );
+    }
     return (
       <tr aria-labelledby={user.username} key={index}>
         <td>
@@ -272,25 +310,9 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>{user.first_name}</td>
         <td>{moment(user.date_joined).fromNow()}</td>
         <td>
-          <StatefulDropdown
-            items={[
-              <DropdownItem
-                key='edit'
-                component={
-                  <Link
-                    to={formatPath(Paths.editUser, {
-                      userID: user.id,
-                    })}
-                  >
-                    Edit
-                  </Link>
-                }
-              />,
-              <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
-                Delete
-              </DropdownItem>,
-            ]}
-          ></StatefulDropdown>
+          {dropdownItems.length > 0 ? (
+            <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+          ) : null}
         </td>
       </tr>
     );
@@ -335,3 +357,5 @@ class UserList extends React.Component<RouteComponentProps, IState> {
 }
 
 export default withRouter(UserList);
+
+UserList.contextType = AppContext;

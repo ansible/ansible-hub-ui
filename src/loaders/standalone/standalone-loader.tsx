@@ -21,7 +21,7 @@ import Logo from '../../../static/images/galaxy_logo.svg';
 import { Paths, formatPath } from '../../paths';
 import { ActiveUserAPI, UserType } from '../../api';
 import { StatefulDropdown } from '../../components';
-import { AppContext } from './app-context';
+import { AppContext } from '../app-context';
 
 interface IState {
   user: UserType;
@@ -31,7 +31,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      user: undefined,
+      user: null,
     };
   }
 
@@ -60,9 +60,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         <DropdownItem
           key='logout'
           onClick={() =>
-            ActiveUserAPI.logout().then(() =>
-              this.setState({ user: undefined }),
-            )
+            ActiveUserAPI.logout().then(() => this.setState({ user: null }))
           }
         >
           Logout
@@ -119,15 +117,15 @@ class App extends React.Component<RouteComponentProps, IState> {
               <NavItem>
                 <Link to={Paths.token}>API Token</Link>
               </NavItem>
-              {user && user.is_partner_engineer && (
-                <>
-                  <NavItem>
-                    <Link to={Paths.userList}>Users</Link>
-                  </NavItem>
-                  <NavItem>
-                    <Link to={Paths.certificationDashboard}>Certification</Link>
-                  </NavItem>
-                </>
+              {!!user && user.model_permissions.view_user && (
+                <NavItem>
+                  <Link to={Paths.userList}>Users</Link>
+                </NavItem>
+              )}
+              {!!user && user.model_permissions.move_collection && (
+                <NavItem>
+                  <Link to={Paths.certificationDashboard}>Certification</Link>
+                </NavItem>
               )}
             </NavList>
           </Nav>

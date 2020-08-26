@@ -17,6 +17,17 @@ export class InsightsUserType {
   };
 }
 
+export class Permissions {
+  add_namespace: boolean;
+  upload_to_namespace: boolean;
+  change_namespace: boolean;
+  move_collection: boolean;
+  view_user: boolean;
+  delete_user: boolean;
+  change_user: boolean;
+  add_user: boolean;
+}
+
 export class UserType {
   id?: number;
   username: string;
@@ -24,11 +35,15 @@ export class UserType {
   last_name?: string;
   email?: string;
   groups: { id: number; name: string }[];
-  is_partner_engineer?: boolean;
   date_joined?: string;
   password?: string;
+  model_permissions?: Permissions;
 }
 
 export class MeType {
-  is_partner_engineer: boolean;
+  username: string;
+  first_name?: string;
+  last_name?: string;
+  model_permissions: Permissions;
+  groups: { id: number; name: string }[];
 }
