@@ -13,6 +13,7 @@ interface IProps {
     href: string;
     name: string;
   };
+  menuAppendTo?: 'parent' | 'inline';
 }
 
 interface IState {
@@ -33,6 +34,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
 
     return (
       <Select
+        menuAppendTo={this.props.menuAppendTo}
         onClear={() => this.props.loadResults('')}
         onSelect={this.onSelect}
         onToggle={this.onToggle}

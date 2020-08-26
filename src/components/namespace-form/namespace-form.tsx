@@ -6,7 +6,7 @@ import { Chip, ChipGroup } from '@patternfly/react-core';
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 import { Constants } from '../../constants';
 
-import { NamespaceCard } from '../../components';
+import { NamespaceCard, ObjectPerissionField } from '../../components';
 import { NamespaceType } from '../../api';
 
 interface IProps {
@@ -88,46 +88,15 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         >
           <br />
 
-          <ChipGroup>
-            {this.props.namespace.groups.map(group => (
-              <Chip
-                key={group}
-                onClick={() => this.deleteItem(group)}
-                isReadOnly={group === Constants.ADMIN_GROUP || userId === group}
-              >
-                {group}
-              </Chip>
-            ))}
-          </ChipGroup>
-
-          <div className='account-ids'>
-            <br />
-            <TextInput
-              id='url'
-              type='text'
-              placeholder='Red Hat account ID'
-              value={this.state.newNamespaceGroup}
-              validated={this.toError(
-                !isNaN(Number(this.state.newNamespaceGroup)) &&
-                  !('groups' in errorMessages),
-              )}
-              onChange={value =>
-                this.setState({
-                  newNamespaceGroup: value,
-                })
-              }
-              onKeyDown={e => {
-                if (e.key === 'Enter') {
-                  this.addGroup();
-                }
-              }}
-            />
-            <div className='account-add'>
-              <div className='clickable account-button'>
-                <PlusCircleIcon onClick={() => this.addGroup()} size='md' />
-              </div>
-            </div>
-          </div>
+          <ObjectPerissionField
+            groups={namespace.groups}
+            availablePermissions={['change_namespace', 'upload_to_namespace']}
+            setGroups={g => {
+              const newNS = { ...namespace };
+              newNS.groups = g;
+              this.props.updateNamespace(newNS);
+            }}
+          ></ObjectPerissionField>
         </FormGroup>
 
         <FormGroup
@@ -253,29 +222,6 @@ export class NamespaceForm extends React.Component<IProps, IState> {
       },
       () => this.props.updateNamespace(update),
     );
-  }
-
-  private addGroup() {
-    const update = { ...this.props.namespace };
-    if (
-      this.state.newNamespaceGroup.trim() == '' ||
-      isNaN(Number(this.state.newNamespaceGroup.trim()))
-    ) {
-      return;
-    }
-    update.groups.push(this.state.newNamespaceGroup.trim());
-    this.setState({ newNamespaceGroup: '' }, () =>
-      this.props.updateNamespace(update),
-    );
-  }
-
-  private deleteItem(id) {
-    const update = { ...this.props.namespace };
-    const index = update.groups.indexOf(id);
-    if (index !== -1) {
-      update.groups.splice(index, 1);
-      this.props.updateNamespace(update);
-    }
   }
 
   private renderLinkGroup(link, index) {

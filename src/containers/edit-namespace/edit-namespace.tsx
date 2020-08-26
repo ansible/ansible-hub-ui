@@ -158,25 +158,13 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     return ParamHelper.updateParamsMixin();
   }
 
-  private removeGroupsPrefix(groups) {
-    let unprefixedGroupOwners = [Constants.ADMIN_GROUP];
-    for (const owner of groups) {
-      if (owner == Constants.ADMIN_GROUP) {
-        continue;
-      }
-      // 'rh-identity-account', '<id>'
-      else unprefixedGroupOwners.push(owner.split(':')[1]);
-    }
-    return unprefixedGroupOwners;
-  }
-
   private loadNamespace() {
     MyNamespaceAPI.get(this.props.match.params['namespace'])
       .then(response => {
-        response.data.groups = this.removeGroupsPrefix(response.data.groups);
         this.setState({ namespace: response.data });
       })
       .catch(response => {
+        console.log(response);
         this.setState({ redirect: Paths.notFound });
       });
   }
