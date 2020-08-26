@@ -24,9 +24,9 @@ import {
   UserProfile,
 } from '../../containers';
 import { ActiveUserAPI } from '../../api';
+import { AppContext } from '../app-context';
 
 import { Paths, formatPath } from '../../paths';
-import { AppContext } from './app-context';
 
 interface IProps extends RouteComponentProps {
   Component: any;

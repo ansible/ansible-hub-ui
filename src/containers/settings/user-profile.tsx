@@ -13,7 +13,7 @@ import {
 import { UserType, ActiveUserAPI } from '../../api';
 import { Paths } from '../../paths';
 import { mapErrorMessages } from '../../utilities';
-import { AppContext } from '../../loaders/standalone/app-context';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   user: UserType;

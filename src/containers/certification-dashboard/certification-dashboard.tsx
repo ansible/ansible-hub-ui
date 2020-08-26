@@ -30,13 +30,7 @@ import {
   WarningTriangleIcon,
 } from '@patternfly/react-icons';
 
-import {
-  CollectionVersionAPI,
-  CollectionVersion,
-  ActiveUserAPI,
-  MeType,
-  TaskAPI,
-} from '../../api';
+import { CollectionVersionAPI, CollectionVersion, TaskAPI } from '../../api';
 import { ParamHelper } from '../../utilities';
 import {
   LoadingPageWithHeader,
@@ -52,6 +46,7 @@ import {
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   params: {
@@ -105,14 +100,14 @@ class CertificationDashboard extends React.Component<
   }
 
   componentDidMount() {
-    ActiveUserAPI.isPartnerEngineer().then(response => {
-      const me: MeType = response.data;
-      if (!me.is_partner_engineer) {
-        this.setState({ redirect: Paths.notFound });
-      } else {
-        this.queryCollections();
-      }
-    });
+    if (
+      !this.context.user ||
+      !this.context.user.model_permissions.move_collection
+    ) {
+      this.setState({ redirect: Paths.notFound });
+    } else {
+      this.queryCollections();
+    }
   }
 
   render() {
@@ -551,3 +546,5 @@ class CertificationDashboard extends React.Component<
 }
 
 export default withRouter(CertificationDashboard);
+
+CertificationDashboard.contextType = AppContext;
