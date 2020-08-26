@@ -58,7 +58,7 @@ class App extends Component {
     // Wait for the user data to load before any of the child components are
     // rendered. This will prevent API calls from happening
     // before the app can authenticate
-    if (!this.state.user) {
+    if (!this.state.user || !this.state.activeUser) {
       return null;
     } else {
       return (
