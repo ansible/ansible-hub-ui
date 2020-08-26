@@ -35,7 +35,6 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
 
     if (
       !this.context.user ||
-      !this.context.user.model_permissions ||
       !this.context.user.model_permissions.change_user
     ) {
       return <Redirect to={Paths.notFound}></Redirect>;

@@ -310,7 +310,9 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>{user.first_name}</td>
         <td>{moment(user.date_joined).fromNow()}</td>
         <td>
-          <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+          {dropdownItems.length > 0 ? (
+            <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+          ) : null}
         </td>
       </tr>
     );

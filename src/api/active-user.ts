@@ -30,6 +30,10 @@ class API extends BaseAPI {
     }
   }
 
+  getActiveUser() {
+    return this.http.get(this.apiPath);
+  }
+
   saveUser(data) {
     return this.http.put(this.apiPath, data);
   }

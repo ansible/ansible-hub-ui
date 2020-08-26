@@ -118,14 +118,14 @@ class App extends React.Component<RouteComponentProps, IState> {
                 <Link to={Paths.token}>API Token</Link>
               </NavItem>
               {!!user && user.model_permissions.view_user && (
-                <>
-                  <NavItem>
-                    <Link to={Paths.userList}>Users</Link>
-                  </NavItem>
-                  <NavItem>
-                    <Link to={Paths.certificationDashboard}>Certification</Link>
-                  </NavItem>
-                </>
+                <NavItem>
+                  <Link to={Paths.userList}>Users</Link>
+                </NavItem>
+              )}
+              {!!user && user.model_permissions.move_collection && (
+                <NavItem>
+                  <Link to={Paths.certificationDashboard}>Certification</Link>
+                </NavItem>
               )}
             </NavList>
           </Nav>

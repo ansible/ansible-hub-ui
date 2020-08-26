@@ -33,11 +33,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const { user, errorMessages } = this.state;
-    if (
-      !this.context.user ||
-      !this.context.user.model_permissions ||
-      !this.context.user.model_permissions.add_user
-    ) {
+    if (!this.context.user || !this.context.user.model_permissions.add_user) {
       return <Redirect to={Paths.notFound}></Redirect>;
     }
     return (

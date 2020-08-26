@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Routes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
+import { ActiveUserAPI } from '../../api';
 
 class App extends Component {
   firstLoad = true;
@@ -14,6 +15,7 @@ class App extends Component {
 
     this.state = {
       user: null,
+      activeUser: null,
     };
   }
 
@@ -42,6 +44,9 @@ class App extends Component {
     );
 
     insights.chrome.auth.getUser().then(user => this.setState({ user: user }));
+    ActiveUserAPI.getActiveUser().then(result =>
+      this.setState({ activeUser: result.data }),
+    );
   }
 
   componentWillUnmount() {
@@ -59,8 +64,8 @@ class App extends Component {
       return (
         <AppContext.Provider
           value={{
-            user: this.state.user,
-            setUser: this.setUser,
+            user: this.state.activeUser,
+            setUser: this.setActiveUser,
           }}
         >
           <Routes childProps={this.props} />
@@ -68,8 +73,8 @@ class App extends Component {
       );
     }
   }
-  setUser = user => {
-    this.setState({ user: user });
+  setActiveUser = user => {
+    this.setState({ activeUser: user });
   };
 }
 
