@@ -2,9 +2,7 @@ import * as React from 'react';
 import './namespace-form.scss';
 
 import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
-import { Chip, ChipGroup } from '@patternfly/react-core';
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
-import { Constants } from '../../constants';
 
 import { NamespaceCard, ObjectPerissionField } from '../../components';
 import { NamespaceType } from '../../api';

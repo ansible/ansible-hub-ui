@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  Checkbox,
-  Select,
-  SelectOption,
-  SelectVariant,
-} from '@patternfly/react-core';
+import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 
 interface IProps {
   availablePermissions: string[];

@@ -86,8 +86,6 @@ export class ObjectPerissionField extends React.Component<IProps, IState> {
   }
 
   private setPermissions(perms, group) {
-    console.log(perms);
-    console.log(group);
     const newGroups = [...this.props.groups];
     const selectedGroup = newGroups.find(g => g.id === group.id);
     selectedGroup.object_permissions = perms;

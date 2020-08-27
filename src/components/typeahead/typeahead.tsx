@@ -6,9 +6,12 @@ interface IProps {
   loadResults: (filter: string) => void;
   onSelect: (event, selection, isPlaceholder) => void;
 
-  selections?: { name: string; id: number | string };
+  selections?: { name: string; id: number | string }[];
+  multiple?: boolean;
   placeholderText?: string;
+  onClear?: () => void;
 
+  isDisabled?: boolean;
   endLink?: {
     href: string;
     name: string;
@@ -30,24 +33,41 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
   }
 
   render() {
+    let selected = null;
+    if (this.props.selections) {
+      selected = this.props.selections.map(group => group.name);
+    }
+
     const { isOpen } = this.state;
+    const variant = this.props.multiple
+      ? SelectVariant.typeaheadMulti
+      : SelectVariant.typeahead;
 
     return (
       <Select
         menuAppendTo={this.props.menuAppendTo}
-        onClear={() => this.props.loadResults('')}
+        onClear={this.onClear}
         onSelect={this.onSelect}
         onToggle={this.onToggle}
-        variant={SelectVariant.typeahead}
+        variant={variant}
+        selections={selected}
         isOpen={isOpen}
         hasInlineFilter
         onFilter={this.onFilter}
         placeholderText={this.props.placeholderText}
+        isDisabled={this.props.isDisabled}
       >
         {this.getOptions()}
       </Select>
     );
   }
+
+  private onClear = () => {
+    this.props.loadResults('');
+    if (this.props.onClear) {
+      this.props.onClear();
+    }
+  };
 
   private getOptions() {
     const options = [];
@@ -74,11 +94,13 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
   private onSelect = (event, selection, isPlaceholder) => {
     this.props.onSelect(event, selection, isPlaceholder);
 
-    this.setState(
-      {
-        isOpen: false,
-      },
-      () => this.props.loadResults(''),
-    );
+    if (!this.props.multiple) {
+      this.setState(
+        {
+          isOpen: false,
+        },
+        () => this.props.loadResults(''),
+      );
+    }
   };
 }
