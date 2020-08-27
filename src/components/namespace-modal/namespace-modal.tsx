@@ -10,8 +10,9 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { QuestionCircleIcon } from '@patternfly/react-icons';
-import { NamespaceAPI } from '../../api';
-import { Constants } from '../../constants';
+import { NamespaceAPI, GroupObjectPermissionType } from '../../api';
+
+import { ObjectPermissionField } from '../../components';
 
 interface IProps {
   isOpen: boolean;
@@ -22,8 +23,7 @@ interface IProps {
 interface IState {
   newNamespaceName: string;
   newNamespaceNameValid: boolean;
-  newNamespaceGroupIds: string;
-  newNamespaceGroupIdsValid: boolean;
+  newGroups: GroupObjectPermissionType[];
   errorMessages: any;
 }
 
@@ -37,36 +37,9 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     this.state = {
       newNamespaceName: '',
       newNamespaceNameValid: true,
-      newNamespaceGroupIds: '',
-      newNamespaceGroupIdsValid: true,
+      newGroups: [],
       errorMessages: {},
     };
-  }
-
-  private namespaceOwners() {
-    if (this.state.newNamespaceGroupIds === '') {
-      return [];
-    }
-    const ids = this.state.newNamespaceGroupIds.split(',');
-    return ids.map(id => id.trim());
-  }
-
-  private namespaceOwnersValid() {
-    const error: any = this.state.errorMessages;
-
-    const isNumber = currentValue => !isNaN(Number(currentValue));
-    const valid = this.namespaceOwners().every(isNumber);
-
-    if (valid) {
-      delete error['groups'];
-    } else {
-      error['groups'] = 'Provided identifications are not numbers';
-    }
-
-    this.setState({
-      newNamespaceGroupIdsValid: !('groups' in error),
-      errorMessages: error,
-    });
   }
 
   private newNamespaceNameIsValid() {
@@ -92,18 +65,16 @@ export class NamespaceModal extends React.Component<IProps, IState> {
   }
 
   private handleSubmit = event => {
-    const groups = this.namespaceOwners();
-    groups.push(Constants.ADMIN_GROUP);
     const data: any = {
       name: this.state.newNamespaceName,
-      groups: groups,
+      groups: this.state.newGroups,
     };
     NamespaceAPI.create(data)
       .then(results => {
         this.toggleModal();
         this.setState({
           newNamespaceName: '',
-          newNamespaceGroupIds: '',
+          newGroups: [],
           errorMessages: {},
         });
         this.props.onCreateSuccess(data);
@@ -117,13 +88,12 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         this.setState({
           errorMessages: messages,
           newNamespaceNameValid: !('name' in messages),
-          newNamespaceGroupIdsValid: !('groups' in messages),
         });
       });
   };
 
   render() {
-    const { newNamespaceName, newNamespaceGroupIds } = this.state;
+    const { newNamespaceName, newGroups } = this.state;
     return (
       <Modal
         variant='large'
@@ -184,22 +154,13 @@ export class NamespaceModal extends React.Component<IProps, IState> {
           <FormGroup
             label='Namespace owners'
             fieldId='groups'
-            helperText='Please, provide comma-separated Red Hat account identifications'
             helperTextInvalid={this.state.errorMessages['groups']}
-            validated={this.toError(this.state.newNamespaceGroupIdsValid)}
           >
-            <TextInput
-              validated={this.toError(this.state.newNamespaceGroupIdsValid)}
-              isRequired
-              type='text'
-              id='newNamespaceGroupIds'
-              name='newNamespaceGroupIds'
-              value={newNamespaceGroupIds}
-              onChange={value => {
-                this.setState({ newNamespaceGroupIds: value }, () => {
-                  this.namespaceOwnersValid();
-                });
-              }}
+            <ObjectPermissionField
+              availablePermissions={['change_namespace', 'upload_to_namespace']}
+              groups={newGroups}
+              setGroups={g => this.setState({ newGroups: g })}
+              menuAppendTo='parent'
             />
           </FormGroup>
         </Form>
