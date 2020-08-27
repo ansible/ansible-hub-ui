@@ -12,7 +12,7 @@ import {
 import { QuestionCircleIcon } from '@patternfly/react-icons';
 import { NamespaceAPI, GroupObjectPermissionType } from '../../api';
 
-import { ObjectPerissionField } from '../../components';
+import { ObjectPermissionField } from '../../components';
 
 interface IProps {
   isOpen: boolean;
@@ -156,7 +156,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             fieldId='groups'
             helperTextInvalid={this.state.errorMessages['groups']}
           >
-            <ObjectPerissionField
+            <ObjectPermissionField
               availablePermissions={['change_namespace', 'upload_to_namespace']}
               groups={newGroups}
               setGroups={g => this.setState({ newGroups: g })}

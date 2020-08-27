@@ -4,7 +4,7 @@ import './namespace-form.scss';
 import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
-import { NamespaceCard, ObjectPerissionField } from '../../components';
+import { NamespaceCard, ObjectPermissionField } from '../../components';
 import { NamespaceType } from '../../api';
 
 interface IProps {
@@ -86,7 +86,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         >
           <br />
 
-          <ObjectPerissionField
+          <ObjectPermissionField
             groups={namespace.groups}
             availablePermissions={['change_namespace', 'upload_to_namespace']}
             setGroups={g => {
@@ -94,7 +94,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
               newNS.groups = g;
               this.props.updateNamespace(newNS);
             }}
-          ></ObjectPerissionField>
+          ></ObjectPermissionField>
         </FormGroup>
 
         <FormGroup

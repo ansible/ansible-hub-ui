@@ -164,7 +164,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         this.setState({ namespace: response.data });
       })
       .catch(response => {
-        console.log(response);
         this.setState({ redirect: Paths.notFound });
       });
   }

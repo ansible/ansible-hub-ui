@@ -18,7 +18,7 @@ interface IState {
   searchGroups: { name: string; id: number | string }[];
 }
 
-export class ObjectPerissionField extends React.Component<IProps, IState> {
+export class ObjectPermissionField extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
