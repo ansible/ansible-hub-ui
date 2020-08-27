@@ -191,9 +191,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   this.handleCollectionAction(id, action)
                 }
               />
-            ) : (
-              this.renderResources(namespace)
-            )}
+            ) : null}
             {tab.toLowerCase() === 'cli configuration' ? (
               <div>
                 <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
@@ -210,9 +208,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   .
                 </div>
               </div>
-            ) : (
-              this.renderResources(namespace)
-            )}
+            ) : null}
+            {tab.toLowerCase() === 'resources'
+              ? this.renderResources(namespace)
+              : null}
           </Section>
         </Main>
       </React.Fragment>
