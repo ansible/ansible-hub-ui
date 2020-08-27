@@ -16,6 +16,8 @@ interface IProps {
   saveUser?: () => void;
   extraControls?: React.ReactNode;
   onCancel?: () => void;
+  isNewUser?: boolean;
+  isMe?: boolean;
 }
 
 export class UserFormPage extends React.Component<IProps> {
@@ -33,6 +35,8 @@ export class UserFormPage extends React.Component<IProps> {
       isReadonly,
       extraControls,
       onCancel,
+      isNewUser,
+      isMe,
     } = this.props;
 
     return (
@@ -45,12 +49,14 @@ export class UserFormPage extends React.Component<IProps> {
           <Section className='body'>
             {extraControls}
             <UserForm
+              isMe={isMe}
               isReadonly={isReadonly}
               user={user}
               updateUser={updateUser}
               errorMessages={errorMessages}
               saveUser={saveUser}
               onCancel={onCancel}
+              isNewUser={isNewUser}
             ></UserForm>
           </Section>
         </Main>

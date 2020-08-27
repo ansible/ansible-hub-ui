@@ -50,6 +50,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
         }
         saveUser={this.saveUser}
         onCancel={() => this.props.history.push(Paths.userList)}
+        isNewUser={true}
       ></UserFormPage>
     );
   }
