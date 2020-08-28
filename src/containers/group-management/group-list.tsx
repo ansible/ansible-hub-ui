@@ -15,6 +15,7 @@ import {
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
+  CreateGroupModal,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -28,6 +29,10 @@ import {
   EmptyStateBody,
   EmptyStateIcon,
   EmptyStateVariant,
+  FormGroup,
+  Modal,
+  Spinner,
+  TextInput,
   Title,
   Toolbar,
   ToolbarContent,
@@ -47,6 +52,7 @@ interface IState {
   itemCount: number;
   alerts: AlertType[];
   groups: any[];
+  createModalVisible: boolean;
 }
 
 class GroupList extends React.Component<RouteComponentProps, IState> {
@@ -68,6 +74,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       itemCount: 0,
       alerts: [],
       groups: [],
+      createModalVisible: false,
     };
   }
 
@@ -76,7 +83,13 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { redirect, itemCount, params, loading } = this.state;
+    const {
+      redirect,
+      itemCount,
+      params,
+      loading,
+      createModalVisible,
+    } = this.state;
 
     if (redirect) {
       return <Redirect to={redirect}></Redirect>;
@@ -84,6 +97,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
     return (
       <React.Fragment>
+        {createModalVisible ? this.renderCreateModal() : null}
         <BaseHeader title='Groups'></BaseHeader>
         <Main>
           <Section className='body'>
@@ -112,7 +126,13 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                   </ToolbarGroup>
                   <ToolbarGroup>
                     <ToolbarItem>
-                      <Button>Create</Button>
+                      <Button
+                        onClick={() =>
+                          this.setState({ createModalVisible: true })
+                        }
+                      >
+                        Create
+                      </Button>
                     </ToolbarItem>
                   </ToolbarGroup>
                 </ToolbarContent>
@@ -150,6 +170,24 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         </Main>
       </React.Fragment>
     );
+  }
+
+  private renderCreateModal() {
+    return (
+      <CreateGroupModal
+        onCancel={() => this.setState({ createModalVisible: false })}
+        onSave={value => this.saveGroup(value)}
+      />
+    );
+  }
+
+  private saveGroup(value) {
+    GroupAPI.create({ name: value }).then(result => {
+      this.setState({
+        redirect: '/group/' + result.data.id,
+        createModalVisible: false,
+      });
+    });
   }
 
   private renderTable(params) {
