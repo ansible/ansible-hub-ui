@@ -278,7 +278,10 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   }
 
   private deleteGroup(group) {
-    console.log('DELETE GROUP: ' + group.name);
+    GroupAPI.delete(group.id).then(() => {
+      this.setState({ loading: true });
+      this.queryGroups();
+    });
   }
 
   private queryGroups() {
