@@ -11,11 +11,13 @@ import { Section } from '@redhat-cloud-services/frontend-components';
 import { GroupAPI } from '../../api';
 import { ParamHelper } from '../../utilities';
 import {
+  AlertList,
   AlertType,
   AppliedFilters,
   BaseHeader,
+  closeAlertMixin,
   CompoundFilter,
-  CreateGroupModal,
+  GroupModal,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -29,17 +31,17 @@ import {
   EmptyStateBody,
   EmptyStateIcon,
   EmptyStateVariant,
-  FormGroup,
   Modal,
-  Spinner,
-  TextInput,
   Title,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { WarningTriangleIcon } from '@patternfly/react-icons';
+import {
+  WarningTriangleIcon,
+  ExclamationTriangleIcon,
+} from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
 
 interface IState {
@@ -53,6 +55,9 @@ interface IState {
   alerts: AlertType[];
   groups: any[];
   createModalVisible: boolean;
+  deleteModalVisible: boolean;
+  editModalVisible: boolean;
+  selectedGroup: any;
 }
 
 class GroupList extends React.Component<RouteComponentProps, IState> {
@@ -75,6 +80,9 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       alerts: [],
       groups: [],
       createModalVisible: false,
+      deleteModalVisible: false,
+      editModalVisible: false,
+      selectedGroup: null,
     };
   }
 
@@ -89,6 +97,9 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       params,
       loading,
       createModalVisible,
+      deleteModalVisible,
+      editModalVisible,
+      alerts,
     } = this.state;
 
     if (redirect) {
@@ -97,7 +108,13 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
     return (
       <React.Fragment>
+        <AlertList
+          alerts={alerts}
+          closeAlert={i => this.closeAlert(i)}
+        ></AlertList>
         {createModalVisible ? this.renderCreateModal() : null}
+        {deleteModalVisible ? this.renderDeleteModal() : null}
+        {editModalVisible ? this.renderEditModal() : null}
         <BaseHeader title='Groups'></BaseHeader>
         <Main>
           <Section className='body'>
@@ -174,10 +191,59 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
   private renderCreateModal() {
     return (
-      <CreateGroupModal
+      <GroupModal
         onCancel={() => this.setState({ createModalVisible: false })}
         onSave={value => this.saveGroup(value)}
       />
+    );
+  }
+
+  private renderEditModal() {
+    return (
+      <GroupModal
+        onCancel={() => this.setState({ editModalVisible: false })}
+        onSave={value => this.editGroup(value)}
+        group={this.state.selectedGroup}
+      />
+    );
+  }
+
+  private renderDeleteModal() {
+    return (
+      <Modal
+        variant='small'
+        onClose={() => this.setState({ deleteModalVisible: false })}
+        isOpen={true}
+        title={''}
+        children={null}
+        header={
+          <span className='pf-c-content'>
+            <h2>
+              <ExclamationTriangleIcon
+                size='sm'
+                style={{ color: 'var(--pf-global--warning-color--100)' }}
+              />{' '}
+              Delete user?
+            </h2>{' '}
+          </span>
+        }
+        actions={[
+          <Button
+            key='delete'
+            variant='danger'
+            onClick={() => this.selectedGroup(this.state.selectedGroup)}
+          >
+            Delete
+          </Button>,
+          <Button
+            key='cancel'
+            variant='link'
+            onClick={() => this.setState({ deleteModalVisible: false })}
+          >
+            Cancel
+          </Button>,
+        ]}
+      ></Modal>
     );
   }
 
@@ -188,6 +254,35 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         createModalVisible: false,
       });
     });
+  }
+
+  private editGroup(value) {
+    GroupAPI.update(this.state.selectedGroup.id.toString(), {
+      name: value,
+      pulp_href: this.state.selectedGroup.pulp_href,
+      id: this.state.selectedGroup.id,
+    })
+      .then(result => {
+        this.setState({
+          redirect: '/group/' + result.data.id,
+          editModalVisible: false,
+          selectedGroup: null,
+        });
+      })
+      .catch(() =>
+        this.setState({
+          editModalVisible: false,
+          selectedGroup: null,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: null,
+              description: 'Error editing group.',
+            },
+          ],
+        }),
+      );
   }
 
   private renderTable(params) {
@@ -250,19 +345,23 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             items={[
               <DropdownItem
                 key='edit'
-                component={
-                  <Link
-                    to={formatPath(Paths.editUser, {
-                      group: group.id,
-                    })}
-                  >
-                    Edit
-                  </Link>
+                onClick={() =>
+                  this.setState({
+                    editModalVisible: true,
+                    selectedGroup: group,
+                  })
                 }
-              />,
+              >
+                Edit
+              </DropdownItem>,
               <DropdownItem
                 key='delete'
-                onClick={() => this.deleteGroup(group)}
+                onClick={() =>
+                  this.setState({
+                    selectedGroup: group,
+                    deleteModalVisible: true,
+                  })
+                }
               >
                 Delete
               </DropdownItem>,
@@ -277,11 +376,40 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     return ParamHelper.updateParamsMixin();
   }
 
-  private deleteGroup(group) {
-    GroupAPI.delete(group.id).then(() => {
-      this.setState({ loading: true });
-      this.queryGroups();
-    });
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
+
+  private selectedGroup(group) {
+    GroupAPI.delete(group.id)
+      .then(() => {
+        this.setState({
+          loading: true,
+          selectedGroup: null,
+          deleteModalVisible: false,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'success',
+              title: null,
+              description: 'Successfully deleted group.',
+            },
+          ],
+        });
+        this.queryGroups();
+      })
+      .catch(() =>
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: null,
+              description: 'Error deleting group.',
+            },
+          ],
+        }),
+      );
   }
 
   private queryGroups() {

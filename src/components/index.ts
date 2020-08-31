@@ -41,4 +41,4 @@ export { UserFormPage } from './user-form/user-form-page';
 export { ObjectPermissionField } from './permissions/obect-permission-field';
 export { PermissionChipSelector } from './permissions/permission-chip-selector';
 export { APISearchTypeAhead } from './typeahead/typeahead';
-export { CreateGroupModal } from './group-management/create-group-modal';
+export { GroupModal } from './group-management/group-modal';

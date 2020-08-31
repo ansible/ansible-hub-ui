@@ -4,37 +4,41 @@ import { Button, FormGroup, Modal, TextInput } from '@patternfly/react-core';
 interface IProps {
   onCancel?: () => void;
   onSave?: (string) => void;
+  group?: any;
 }
 
 interface IState {
   name: string;
 }
 
-export class CreateGroupModal extends React.Component<IProps, IState> {
+export class GroupModal extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
-
     this.state = {
-      name: '',
+      name: !this.props.group.name ? '' : this.props.group.name,
     };
   }
   render() {
     const { onCancel, onSave } = this.props;
     return (
       <Modal
-        variant='default'
+        variant='small'
         onClose={() => onCancel()}
         isOpen={true}
         title={''}
         header={<h2>Create a group</h2>}
+        aria-label='group-modal'
         actions={[
           <Button
-            isDisabled={this.state.name.length === 0}
+            isDisabled={
+              this.state.name.length === 0 ||
+              this.state.name === this.props.group.name
+            }
             key='create'
             variant='primary'
             onClick={() => onSave(this.state.name)}
           >
-            Create
+            {!this.props.group ? 'Create' : 'Save'}
           </Button>,
           <Button key='cancel' variant='link' onClick={() => onCancel()}>
             Cancel
@@ -44,6 +48,7 @@ export class CreateGroupModal extends React.Component<IProps, IState> {
         <FormGroup isRequired={true} key='name' fieldId='name' label='Name'>
           <TextInput
             id='group_name'
+            value={this.state.name}
             onChange={value => this.setState({ name: value })}
             type='text'
           />
