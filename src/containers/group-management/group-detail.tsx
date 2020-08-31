@@ -295,7 +295,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private queryUsers() {
     UserAPI.list({
       ...this.state.params,
-      ...{ group__name: this.state.group.name },
+      ...{ groups__name: this.state.group.name },
     }).then(result =>
       this.setState({
         users: result.data.data,
