@@ -4,9 +4,12 @@ import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 
 import {
+  AlertList,
+  AlertType,
   AppliedFilters,
   BaseHeader,
   Breadcrumbs,
+  closeAlertMixin,
   CompoundFilter,
   LoadingPageWithHeader,
   Main,
@@ -39,6 +42,7 @@ interface IState {
   params: { id: string; tab: string; page?: number; page_size?: number };
   users: UserType[];
   itemCount: number;
+  alerts: AlertType[];
 }
 
 class GroupDetail extends React.Component<RouteComponentProps, IState> {
@@ -73,6 +77,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         page_size: params['page_size'],
       },
       itemCount: 0,
+      alerts: [],
     };
   }
 
@@ -83,7 +88,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { group, params } = this.state;
+    const { group, params, alerts } = this.state;
 
     const tabs = ['Permissions', 'Users'];
 
@@ -96,6 +101,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     }
     return (
       <React.Fragment>
+        <AlertList
+          alerts={alerts}
+          closeAlert={i => this.closeAlert(i)}
+        ></AlertList>
         <BaseHeader
           title={group.name}
           breadcrumbs={
@@ -304,11 +313,43 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     );
   }
   private deleteUser(user) {
-    console.log('DELETE: ' + user.name);
+    user.groups = user.groups.filter(group => {
+      return group.id != this.state.params.id;
+    });
+    UserAPI.update(user.id, user)
+      .then(() => {
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'success',
+              title: null,
+              description: 'Successfully removed a user from a group.',
+            },
+          ],
+        });
+        this.queryUsers();
+      })
+      .catch(() =>
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: null,
+              description: 'Error removing a user from a group.',
+            },
+          ],
+        }),
+      );
   }
 
   private get updateParams() {
     return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 }
 
