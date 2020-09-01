@@ -64,7 +64,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       'page',
       'page_size',
     ]);
-    console.log(params);
 
     if (!params['page_size']) {
       params['page_size'] = 10;
@@ -192,13 +191,26 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             const selectedUser = this.state.options.find(
               x => x.name === selection,
             );
-            const newOptions = this.state.options.filter(
-              x => x.name !== selection,
-            );
-            this.setState({
-              selected: [...this.state.selected, selectedUser],
-              options: newOptions,
-            });
+            if (selectedUser) {
+              const newOptions = this.state.options.filter(
+                x => x.name !== selection,
+              );
+              this.setState({
+                selected: [...this.state.selected, selectedUser],
+                options: newOptions,
+              });
+            } else {
+              const deselectedUser = this.state.selected.find(
+                x => x.name === selection,
+              );
+              const newSelected = this.state.selected.filter(
+                x => x.name !== selection,
+              );
+              this.setState({
+                selected: newSelected,
+                options: [...this.state.options, deselectedUser],
+              });
+            }
           }}
           placeholderText='Select groups'
           selections={this.state.selected}
