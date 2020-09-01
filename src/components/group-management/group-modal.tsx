@@ -15,7 +15,10 @@ export class GroupModal extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      name: !this.props.group.name ? '' : this.props.group.name,
+      name:
+        !this.props.group || !this.props.group.name
+          ? ''
+          : this.props.group.name,
     };
   }
   render() {
@@ -32,7 +35,7 @@ export class GroupModal extends React.Component<IProps, IState> {
           <Button
             isDisabled={
               this.state.name.length === 0 ||
-              this.state.name === this.props.group.name
+              (this.props.group && this.state.name === this.props.group.name)
             }
             key='create'
             variant='primary'

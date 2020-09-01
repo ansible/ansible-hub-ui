@@ -6,6 +6,7 @@ import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   AlertList,
   AlertType,
+  APISearchTypeAhead,
   AppliedFilters,
   BaseHeader,
   Breadcrumbs,
@@ -28,6 +29,8 @@ import {
   EmptyStateBody,
   EmptyStateIcon,
   EmptyStateVariant,
+  Modal,
+  Select,
   Title,
   Toolbar,
   ToolbarContent,
@@ -43,6 +46,10 @@ interface IState {
   users: UserType[];
   itemCount: number;
   alerts: AlertType[];
+  addModalVisible: boolean;
+  options: { id: number; name: string }[];
+  selected: { id: number; name: string }[];
+  loading: boolean;
 }
 
 class GroupDetail extends React.Component<RouteComponentProps, IState> {
@@ -78,6 +85,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       },
       itemCount: 0,
       alerts: [],
+      addModalVisible: false,
+      options: undefined,
+      selected: [],
+      loading: false,
     };
   }
 
@@ -88,11 +99,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { group, params, alerts } = this.state;
+    const { group, params, alerts, addModalVisible, loading } = this.state;
 
     const tabs = ['Permissions', 'Users'];
 
-    if (!group) {
+    if (!group || loading) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
     if (this.state.params.tab == 'users' && !this.state.users) {
@@ -105,6 +116,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           alerts={alerts}
           closeAlert={i => this.closeAlert(i)}
         ></AlertList>
+        {addModalVisible ? this.renderAddModal() : null}
         <BaseHeader
           title={group.name}
           breadcrumbs={
@@ -135,6 +147,108 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           )}
         </Main>
       </React.Fragment>
+    );
+  }
+
+  private renderAddModal() {
+    if (this.state.options === undefined) {
+      this.loadOptions();
+      return null;
+    }
+    return (
+      <Modal
+        variant='large'
+        onClose={() => this.setState({ addModalVisible: false })}
+        isOpen={true}
+        title={''}
+        header={
+          <span className='pf-c-content'>
+            <h2>Add selected users to group</h2>{' '}
+          </span>
+        }
+        actions={[
+          <Button
+            key='add'
+            variant='primary'
+            onClick={() =>
+              this.addUserToGroup(this.state.selected, this.state.group)
+            }
+          >
+            Add
+          </Button>,
+          <Button
+            key='cancel'
+            variant='link'
+            onClick={() => this.setState({ addModalVisible: false })}
+          >
+            Cancel
+          </Button>,
+        ]}
+      >
+        <APISearchTypeAhead
+          results={this.state.options}
+          loadResults={this.loadResults}
+          onSelect={(event, selection) => {
+            const selectedUser = this.state.options.find(
+              x => x.name === selection,
+            );
+            const newOptions = this.state.options.filter(
+              x => x.name !== selection,
+            );
+            this.setState({
+              selected: [...this.state.selected, selectedUser],
+              options: newOptions,
+            });
+          }}
+          placeholderText='Select groups'
+          selections={this.state.selected}
+          menuAppendTo={'parent'}
+          multiple={true}
+          onClear={() =>
+            this.setState({
+              selected: [],
+              options: [...this.state.options, ...this.state.selected],
+            })
+          }
+          isDisabled={false}
+        />
+      </Modal>
+    );
+  }
+
+  private addUserToGroup(selectedUsers, group) {
+    const allPromises = [];
+    selectedUsers.forEach(user => {
+      UserAPI.get(user.id.toString()).then(result => {
+        const newUser = result.data;
+        newUser.groups = newUser.groups.concat(group);
+        allPromises.push(UserAPI.update(user.id.toString(), newUser));
+      });
+    });
+    Promise.all(allPromises)
+      .then(() => {
+        this.setState({ addModalVisible: false, loading: true });
+        this.queryUsers();
+      })
+      .catch(() => this.setState({ addModalVisible: false }));
+  }
+
+  private loadOptions() {
+    UserAPI.list().then(result => {
+      const options = result.data.data.filter(user => {
+        return !this.state.users.find(u => u.id === user.id);
+      });
+      const a = [];
+      options.forEach(option =>
+        a.push({ id: option.id, name: option.username }),
+      );
+      this.setState({ options: a });
+    });
+  }
+
+  private loadResults(name) {
+    UserAPI.list({ username__contains: name, page_size: 5 }).then(result =>
+      this.setState({ options: result.data.data }),
     );
   }
 
@@ -178,9 +292,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               </ToolbarGroup>
               <ToolbarGroup>
                 <ToolbarItem>
-                  <Link to={Paths.createUser}>
-                    <Button>Add users</Button>
-                  </Link>
+                  <Button
+                    onClick={() => this.setState({ addModalVisible: true })}
+                  >
+                    Add users
+                  </Button>
                 </ToolbarItem>
               </ToolbarGroup>
             </ToolbarContent>
@@ -309,6 +425,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       this.setState({
         users: result.data.data,
         itemCount: result.data.data.length,
+        loading: false,
       }),
     );
   }
