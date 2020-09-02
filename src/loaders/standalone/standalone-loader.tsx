@@ -122,6 +122,9 @@ class App extends React.Component<RouteComponentProps, IState> {
                   <Link to={Paths.userList}>Users</Link>
                 </NavItem>
               )}
+              <NavItem>
+                <Link to={Paths.groupList}>Groups</Link>
+              </NavItem>
               {!!user && user.model_permissions.move_collection && (
                 <NavItem>
                   <Link to={Paths.certificationDashboard}>Certification</Link>
