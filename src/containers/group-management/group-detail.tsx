@@ -212,7 +212,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               });
             }
           }}
-          placeholderText='Select groups'
+          placeholderText='Select users'
           selections={this.state.selected}
           menuAppendTo={'parent'}
           multiple={true}
@@ -307,7 +307,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                   <Button
                     onClick={() => this.setState({ addModalVisible: true })}
                   >
-                    Add users
+                    Add
                   </Button>
                 </ToolbarItem>
               </ToolbarGroup>
@@ -421,7 +421,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           <StatefulDropdown
             items={[
               <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
-                Remove this User from Group
+                Remove
               </DropdownItem>,
             ]}
           ></StatefulDropdown>
