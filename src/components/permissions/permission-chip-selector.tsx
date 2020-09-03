@@ -5,7 +5,9 @@ interface IProps {
   availablePermissions: string[];
   selectedPermissions: string[];
   setSelected: (selected: string[]) => void;
-
+  isDisabled?: boolean;
+  onSelect?: (event, selection) => void;
+  onClear?: () => void;
   menuAppendTo?: 'parent' | 'inline';
 }
 
@@ -26,11 +28,14 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         variant={SelectVariant.typeaheadMulti}
         typeAheadAriaLabel='Select permissions'
         onToggle={this.onToggle}
-        onSelect={this.onSelect}
-        onClear={this.clearSelection}
+        onSelect={!!this.props.onSelect ? this.props.onSelect : this.onSelect}
+        onClear={
+          !!this.props.onClear ? this.props.onClear : this.clearSelection
+        }
         selections={this.props.selectedPermissions}
         isOpen={this.state.isOpen}
-        placeholderText='Select permissions'
+        placeholderText={!!this.props.isDisabled ? '' : 'Select permissions'}
+        isDisabled={!!this.props.isDisabled}
       >
         {this.props.availablePermissions.map((option, index) => (
           <SelectOption key={index} value={option} />

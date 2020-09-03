@@ -15,4 +15,66 @@ export class Constants {
       : 'published';
   static NOTCERTIFIED = 'rejected';
   static NEEDSREVIEW = 'staging';
+  static PERMISSIONS = [
+    {
+      name: 'namespaces',
+      id: 1,
+      object_permissions: [
+        'galaxy.add_namespace',
+        'galaxy.change_namespace',
+        'galaxy.upload_to_namespace',
+      ],
+    },
+    {
+      name: 'collections',
+      id: 2,
+      object_permissions: ['ansible.modify_ansible_repo_content'],
+    },
+    {
+      name: 'users',
+      id: 3,
+      object_permissions: [
+        'galaxy.view_user',
+        'galaxy.delete_user',
+        'galaxy.add_user',
+        'galaxy.change_user',
+      ],
+    },
+    {
+      name: 'groups',
+      id: 4,
+      object_permissions: [
+        'galaxy.view_group',
+        'galaxy.delete_group',
+        'galaxy.add_group',
+        'galaxy.change_group',
+      ],
+    },
+    {
+      name: 'remotes',
+      id: 5,
+      object_permissions: [
+        'ansible.change_collectionremote',
+        'ansible.view_collectionremote',
+      ],
+    },
+    {
+      name: 'distribution',
+      id: 6,
+      object_permissions: [
+        'ansible.change_ansibledistribution',
+        'ansible.view_ansibledistribution',
+      ],
+    },
+    {
+      name: 'synclists',
+      id: 7,
+      object_permissions: [
+        'galaxy.delete_synclist',
+        'galaxy.change_synclist',
+        'galaxy.view_synclist',
+        'galaxy.add_synclist',
+      ],
+    },
+  ];
 }

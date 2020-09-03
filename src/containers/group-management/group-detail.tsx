@@ -15,6 +15,7 @@ import {
   LoadingPageWithHeader,
   Main,
   Pagination,
+  PermissionChipSelector,
   SortTable,
   StatefulDropdown,
   Tabs,
@@ -29,14 +30,16 @@ import {
   EmptyStateBody,
   EmptyStateIcon,
   EmptyStateVariant,
+  Flex,
+  FlexItem,
   Modal,
-  Select,
   Title,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { Constants } from '../../constants';
 import * as moment from 'moment';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
 
@@ -49,6 +52,9 @@ interface IState {
   addModalVisible: boolean;
   options: { id: number; name: string }[];
   selected: { id: number; name: string }[];
+  editPermissions: boolean;
+  permissions: string[];
+  originalPermissions: { id: number; name: string }[];
   loading: boolean;
 }
 
@@ -87,6 +93,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       addModalVisible: false,
       options: undefined,
       selected: [],
+      editPermissions: false,
+      permissions: [],
+      originalPermissions: [],
       loading: false,
     };
   }
@@ -94,6 +103,16 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   componentDidMount() {
     GroupAPI.get(this.state.params.id).then(result => {
       this.setState({ group: result.data });
+    });
+    GroupAPI.getPermissions(this.state.params.id).then(result => {
+      let originalPerms = [];
+      result.data.data.forEach(p =>
+        originalPerms.push({ id: p.id, name: p.permission }),
+      );
+      this.setState({
+        originalPermissions: originalPerms,
+        permissions: result.data.data.map(x => x.permission),
+      });
     });
   }
 
@@ -117,7 +136,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         ></AlertList>
         {addModalVisible ? this.renderAddModal() : null}
         <BaseHeader
-          title={group.name}
+          title={
+            this.state.editPermissions && this.state.params.tab == 'permissions'
+              ? 'Edit group permissions'
+              : group.name
+          }
           breadcrumbs={
             <Breadcrumbs
               links={[
@@ -126,7 +149,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               ]}
             />
           }
-          pageControls={null}
+          pageControls={this.renderControls()}
         >
           <div className='tab-link-container'>
             <div className='tabs'>
@@ -139,13 +162,108 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           </div>
         </BaseHeader>
         <Main>
-          {this.state.params.tab == 'users' ? (
-            this.renderUsers(this.state.users)
-          ) : (
-            <Section className='body'></Section>
-          )}
+          {this.state.params.tab == 'users'
+            ? this.renderUsers(this.state.users)
+            : null}
+          {this.state.params.tab == 'permissions'
+            ? this.renderPermissions()
+            : null}
         </Main>
       </React.Fragment>
+    );
+  }
+  private renderControls() {
+    if (this.state.params.tab == 'users') {
+      return null;
+    }
+    return this.state.editPermissions ? (
+      <ToolbarItem>
+        <Button
+          onClick={() => {
+            // Add permissions
+            this.state.permissions.forEach(permission => {
+              if (
+                !this.state.originalPermissions.find(p => p.name === permission)
+              ) {
+                GroupAPI.addPermission(this.state.group.id, {
+                  permission: permission,
+                });
+              }
+            });
+            //Remove permissions
+            this.state.originalPermissions.forEach(original => {
+              if (!this.state.permissions.includes(original.name)) {
+                GroupAPI.removePermission(this.state.group.id, original.id);
+              }
+            });
+            this.setState({ editPermissions: false });
+          }}
+        >
+          Save
+        </Button>
+        <Button
+          variant='link'
+          onClick={() => this.setState({ editPermissions: false })}
+        >
+          Cancel
+        </Button>
+      </ToolbarItem>
+    ) : (
+      <ToolbarItem>
+        <Button onClick={() => this.setState({ editPermissions: true })}>
+          Edit
+        </Button>
+      </ToolbarItem>
+    );
+  }
+  private renderPermissions() {
+    const groups = Constants.PERMISSIONS;
+    const selectedPermissions = this.state.permissions;
+    return (
+      <Section className='body'>
+        <div>
+          {groups.map(group => (
+            <Flex
+              style={{ marginTop: '16px' }}
+              alignItems={{ default: 'alignItemsCenter' }}
+              key={group.name}
+            >
+              <FlexItem style={{ minWidth: '200px' }}>{group.name}</FlexItem>
+              <FlexItem grow={{ default: 'grow' }}>
+                <PermissionChipSelector
+                  availablePermissions={group.object_permissions.filter(
+                    perm =>
+                      !selectedPermissions.find(selected => selected === perm),
+                  )}
+                  selectedPermissions={selectedPermissions.filter(selected =>
+                    group.object_permissions.find(perm => selected === perm),
+                  )}
+                  setSelected={perms => this.setState({ permissions: perms })}
+                  menuAppendTo='inline'
+                  isDisabled={!this.state.editPermissions}
+                  onSelect={(event, selection) => {
+                    const newPerms = new Set(this.state.permissions);
+                    if (newPerms.has(selection)) {
+                      newPerms.delete(selection);
+                    } else {
+                      newPerms.add(selection);
+                    }
+                    this.setState({ permissions: Array.from(newPerms) });
+                  }}
+                  onClear={() => {
+                    const clearedPerms = group.object_permissions;
+                    this.setState({
+                      permissions: this.state.permissions.filter(
+                        x => !clearedPerms.includes(x),
+                      ),
+                    });
+                  }}
+                />
+              </FlexItem>
+            </Flex>
+          ))}
+        </div>
+      </Section>
     );
   }
 
@@ -187,19 +305,26 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       >
         <APISearchTypeAhead
           results={this.state.options}
-          loadResults={(name) => UserAPI.list({ username__contains: name, page_size: 5 }).then(result => {
-            let filteredUsers = [];
-            result.data.data.forEach(user => {
-              filteredUsers.push({
-                id: user.id,
-                name: user.username
-              })
-            });
-            filteredUsers = filteredUsers.filter(x => !this.state.selected.find(s => s.name === x.name) && !this.state.users.find(u => u.id === x.id));
-            this.setState({
-              options: filteredUsers
-            });
-          })
+          loadResults={name =>
+            UserAPI.list({ username__contains: name, page_size: 5 }).then(
+              result => {
+                let filteredUsers = [];
+                result.data.data.forEach(user => {
+                  filteredUsers.push({
+                    id: user.id,
+                    name: user.username,
+                  });
+                });
+                filteredUsers = filteredUsers.filter(
+                  x =>
+                    !this.state.selected.find(s => s.name === x.name) &&
+                    !this.state.users.find(u => u.id === x.id),
+                );
+                this.setState({
+                  options: filteredUsers,
+                });
+              },
+            )
           }
           onSelect={(event, selection) => {
             const selectedUser = this.state.options.find(
