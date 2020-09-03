@@ -30,7 +30,7 @@ import {
 
 import { ImportModal } from './import-modal/import-modal';
 
-import { ParamHelper } from '../../utilities/param-helper';
+import { ParamHelper, getRepoUrl } from '../../utilities';
 import { Paths, formatPath } from '../../paths';
 
 interface IState {
@@ -121,13 +121,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       tabs.push('Resources');
     }
 
-    const repositoryUrl = !!API_HOST
-      ? API_HOST
-      : window.location.origin +
-        API_BASE_PATH +
-        'content/inbound-' +
-        namespace.name +
-        '/';
+    const repositoryUrl = getRepoUrl('inbound-' + namespace.name);
 
     return (
       <React.Fragment>
