@@ -133,10 +133,6 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                             id: 'name',
                             title: 'Group',
                           },
-                          {
-                            id: 'description',
-                            title: 'Description',
-                          },
                         ]}
                       />
                     </ToolbarItem>
@@ -223,7 +219,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                 size='sm'
                 style={{ color: 'var(--pf-global--warning-color--100)' }}
               />{' '}
-              Delete user?
+              Delete Group?
             </h2>{' '}
           </span>
         }
@@ -341,32 +337,18 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           </Link>
         </td>
         <td>
-          <StatefulDropdown
-            items={[
-              <DropdownItem
-                key='edit'
-                onClick={() =>
-                  this.setState({
-                    editModalVisible: true,
-                    selectedGroup: group,
-                  })
-                }
-              >
-                Edit
-              </DropdownItem>,
-              <DropdownItem
-                key='delete'
-                onClick={() =>
-                  this.setState({
-                    selectedGroup: group,
-                    deleteModalVisible: true,
-                  })
-                }
-              >
-                Delete
-              </DropdownItem>,
-            ]}
-          ></StatefulDropdown>
+          <Button
+            key='delete'
+            variant='danger'
+            onClick={() =>
+              this.setState({
+                selectedGroup: group,
+                deleteModalVisible: true,
+              })
+            }
+          >
+            Delete
+          </Button>
         </td>
       </tr>
     );
