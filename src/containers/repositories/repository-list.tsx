@@ -8,28 +8,22 @@ import {
   LoadingPageSpinner,
   Main,
   Pagination,
-  SortTable,
   Tabs,
+  RemoteRepositoryTable,
+  LocalRepositoryTable,
+  RemoteForm,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import {
-  Button,
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  EmptyStateVariant,
-  Modal,
-  Title,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
-import { WarningTriangleIcon, WrenchIcon } from '@patternfly/react-icons';
-import { ParamHelper } from '../../utilities';
-import { RepositoryForm } from '../../components/repositories/repository-form';
-import { RemoteRepositoryTable } from '../../components/repositories/remote-repository-table';
-import { LocalRepositoryTable } from '../../components/repositories/local-repository-table';
+import { Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
+import { ParamHelper, mapErrorMessages } from '../../utilities';
 import { Constants } from '../../constants';
+import {
+  RemoteAPI,
+  RemoteType,
+  DistributionAPI,
+  MyDistributionAPI,
+  DistributionType,
+} from '../../api';
 
 export class Repository {
   name: string;
@@ -48,10 +42,11 @@ interface IState {
   };
   itemCount: number;
   loading: boolean;
-  showRepoFormModal: boolean;
-  repositoryFromId: string;
-  repositoryType: string;
-  repository: Repository;
+  showRemoteFormModal: boolean;
+  errorMessages: Object;
+
+  content: RemoteType[] | DistributionType[];
+  remoteToEdit: RemoteType;
 }
 
 class RepositoryList extends React.Component<RouteComponentProps, IState> {
@@ -69,6 +64,10 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       params['page_size'] = 10;
     }
 
+    if (!params['tab']) {
+      params['tab'] = 'local';
+    }
+
     if (
       !params['tab'] &&
       DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE
@@ -80,75 +79,70 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       itemCount: 1,
       params: params,
       loading: false,
-      showRepoFormModal: false,
-      repositoryFromId: 'new',
-      repositoryType: 'typeCertified',
-      repository: {
-        name: '',
-        url: '',
-        token: '',
-        ssoUrl: '',
-        yaml: '',
-        sync: false,
-      },
+      showRemoteFormModal: false,
+      content: [],
+      remoteToEdit: undefined,
+      errorMessages: {},
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.loadContent();
+  }
 
   render() {
     const {
       params,
       itemCount,
       loading,
-      repository,
-      repositoryType,
+      content,
+      remoteToEdit,
+      showRemoteFormModal,
+      errorMessages,
     } = this.state;
     //TODO get repo data
 
     const tabs = ['Local', 'Remote'];
     return (
       <React.Fragment>
-        <Modal
-          variant='small'
-          title={
-            this.state.repositoryFromId === 'new' ? 'Add repo' : 'Edit repo'
-          }
-          isOpen={this.state.showRepoFormModal}
-          onClose={() => this.setState({ showRepoFormModal: false })}
-          actions={[
-            <Button
-              key='confirm'
-              variant='primary'
-              isDisabled={
-                !repository.name ||
-                !repository.url ||
-                !repository.token ||
-                (repositoryType === 'typeCertified' && !repository.ssoUrl) ||
-                (repositoryType === 'typeCommunity' && !repository.yaml)
-              }
-              onClick={() => console.log('TO BE SAVED')}
-            >
-              {this.state.repositoryFromId === 'new' ? 'Add' : 'Save'}
-            </Button>,
-            <Button
-              key='cancel'
-              variant='secondary'
-              onClick={() => this.setState({ showRepoFormModal: false })}
-            >
-              Cancel
-            </Button>,
-          ]}
-        >
-          <RepositoryForm
-            repositoryId={'new'}
-            updateRepository={repository =>
-              this.setState({ repository: repository })
+        <RemoteForm
+          remote={remoteToEdit}
+          updateRemote={(r: RemoteType) => this.setState({ remoteToEdit: r })}
+          saveRemote={() => {
+            const { remoteToEdit } = this.state;
+
+            try {
+              const distro_path =
+                remoteToEdit.repositories[0].distributions[0].base_path;
+              RemoteAPI.update(distro_path, remoteToEdit)
+                .then(r => {
+                  this.setState(
+                    {
+                      errorMessages: {},
+                      showRemoteFormModal: false,
+                      remoteToEdit: undefined,
+                    },
+                    () => this.loadContent(),
+                  );
+                })
+                .catch(err =>
+                  this.setState({ errorMessages: mapErrorMessages(err) }),
+                );
+            } catch {
+              this.setState({
+                errorMessages: {
+                  __nofield:
+                    "Can't update remote without a distribution attached to it.",
+                },
+              });
             }
-            updateType={type => this.setState({ repositoryType: type })}
-            repository={this.state.repository}
-          />
-        </Modal>
+          }}
+          errorMessages={errorMessages}
+          showModal={showRemoteFormModal}
+          closeModal={() =>
+            this.setState({ showRemoteFormModal: false, errorMessages: {} })
+          }
+        />
         <BaseHeader title='Repo Management'>
           {DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE ? (
             <div className='header-bottom'>
@@ -157,7 +151,13 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
                   <Tabs
                     tabs={tabs}
                     params={params}
-                    updateParams={p => this.updateParams(p)}
+                    updateParams={p => {
+                      // empty the content before updating the params to prevent
+                      // rendering from breaking when the wrong content is loaded
+                      this.setState({ content: [] }, () =>
+                        this.updateParams(p, () => this.loadContent()),
+                      );
+                    }}
                   />
                 </div>
               </div>
@@ -166,193 +166,86 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
         </BaseHeader>
         <Main className='repository-list'>
           <Section className='body'>
-            {this.renderContent(params, loading, itemCount)}
+            {this.renderContent(params, loading, itemCount, content)}
           </Section>
         </Main>
       </React.Fragment>
     );
   }
 
-  private renderContent(params, loading, itemCount) {
-    if (!!params.tab && params.tab.toLowerCase() === 'local') {
+  private renderContent(params, loading, itemCount, content) {
+    // Dont show remotes on insights
+    if (
+      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ||
+      (!!params.tab && params.tab.toLowerCase() === 'local')
+    ) {
       return (
         <div>
-          <div className='toolbar'>
-            <Toolbar>
-              <ToolbarGroup>
-                <ToolbarItem>
-                  <CompoundFilter
-                    updateParams={p =>
-                      this.updateParams(p, () => console.log(p))
-                    }
-                    params={params}
-                    filterConfig={[
-                      {
-                        id: 'repository',
-                        title: 'Repo',
-                      },
-                    ]}
-                  />
-                </ToolbarItem>
-                <ToolbarItem>
-                  <Button
-                    variant='primary'
-                    onClick={() =>
-                      this.setState({
-                        showRepoFormModal: true,
-                        repositoryFromId: 'new',
-                      })
-                    }
-                  >
-                    Add repo
-                  </Button>
-                </ToolbarItem>
-              </ToolbarGroup>
-            </Toolbar>
-            <Pagination
-              params={params}
-              updateParams={p => console.log(p)}
-              count={itemCount}
-              isTop
-            />
-          </div>
           {loading ? (
             <LoadingPageSpinner />
           ) : (
             <LocalRepositoryTable
-              repositories={[
-                {
-                  name: 'Remote one',
-                  count: 1,
-                  url: 'www.this-is-gonna-be-one-long-url.com',
-                },
-              ]}
+              repositories={content}
               updateParams={this.updateParams}
             />
           )}
-          <div className='footer'>
-            <Pagination
-              params={params}
-              updateParams={p => console.log(p)}
-              count={itemCount}
-            />
-          </div>
         </div>
       );
     }
     if (!!params.tab && params.tab.toLowerCase() === 'remote') {
       return (
         <div>
-          <div className='toolbar'>
-            <Toolbar>
-              <ToolbarGroup>
-                <ToolbarItem>
-                  <CompoundFilter
-                    updateParams={p =>
-                      this.updateParams(p, () => console.log(p))
-                    }
-                    params={params}
-                    filterConfig={[
-                      {
-                        id: 'repository',
-                        title: 'Repo',
-                      },
-                    ]}
-                  />
-                </ToolbarItem>
-                <ToolbarItem>
-                  <Button
-                    variant='primary'
-                    onClick={() =>
-                      this.setState({
-                        showRepoFormModal: true,
-                        repositoryFromId: 'new',
-                      })
-                    }
-                  >
-                    Add repo
-                  </Button>
-                </ToolbarItem>
-              </ToolbarGroup>
-            </Toolbar>
-            <Pagination
-              params={params}
-              updateParams={p => console.log(p)}
-              count={itemCount}
-              isTop
-            />
-          </div>
           {loading ? (
             <LoadingPageSpinner />
           ) : (
             <RemoteRepositoryTable
-              repositories={[{ name: 'Remote one', count: 1 }]}
+              repositories={content}
               updateParams={this.updateParams}
+              editRemote={(remote: RemoteType) => {
+                this.setState({
+                  remoteToEdit: remote,
+                  showRemoteFormModal: true,
+                });
+              }}
+              syncRemote={distro =>
+                RemoteAPI.sync(distro).then(result => this.loadContent())
+              }
             />
           )}
-          <div className='footer'>
-            <Pagination
-              params={params}
-              updateParams={p => console.log(p)}
-              count={itemCount}
-            />
-          </div>
         </div>
       );
     }
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      return (
-        <div>
-          <div className='toolbar'>
-            <Toolbar>
-              <ToolbarGroup>
-                <ToolbarItem>
-                  <CompoundFilter
-                    updateParams={p =>
-                      this.updateParams(p, () => console.log(p))
-                    }
-                    params={params}
-                    filterConfig={[
-                      {
-                        id: 'repository',
-                        title: 'Repo',
-                      },
-                    ]}
-                  />
-                </ToolbarItem>
-              </ToolbarGroup>
-            </Toolbar>
-            <Pagination
-              params={params}
-              updateParams={p => console.log(p)}
-              count={itemCount}
-              isTop
-            />
-          </div>
-          {loading ? (
-            <LoadingPageSpinner />
-          ) : (
-            <LocalRepositoryTable
-              repositories={[
-                {
-                  name: 'Remote one',
-                  count: 1,
-                  url: 'www.this-is-gonna-be-one-long-url.com',
-                },
-              ]}
-              updateParams={this.updateParams}
-            />
-          )}
-          <div className='footer'>
-            <Pagination
-              params={params}
-              updateParams={p => console.log(p)}
-              count={itemCount}
-            />
-          </div>
-        </div>
-      );
-    }
+  }
+
+  private loadContent() {
+    const { params } = this.state;
+    this.setState({ loading: true }, () => {
+      if (params['tab'] == 'remote') {
+        RemoteAPI.list(
+          ParamHelper.getReduced(params, this.nonQueryStringParams),
+        ).then(result => {
+          this.setState({
+            loading: false,
+            content: result.data.data,
+            itemCount: result.data.meta.count,
+          });
+        });
+      } else {
+        let APIClass = DistributionAPI;
+
+        if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
+          APIClass = MyDistributionAPI;
+        }
+
+        APIClass.list().then(result => {
+          this.setState({
+            loading: false,
+            content: result.data.data,
+            itemCount: result.data.meta.count,
+          });
+        });
+      }
+    });
   }
 
   private get updateParams() {

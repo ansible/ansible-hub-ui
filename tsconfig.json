@@ -9,7 +9,8 @@
         "allowJs": true,
         "lib": ["es2018", "dom"],
         "moduleResolution": "node",
-        "noImplicitAny": false
+        "noImplicitAny": false,
+        "allowSyntheticDefaultImports": true
     },
     "include": ["./src/"],
     "exclude": ["node_modules"]

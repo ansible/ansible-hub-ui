@@ -1,7 +1,8 @@
 import * as React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import {
-  Button,
   DropdownItem,
   EmptyState,
   EmptyStateBody,
@@ -14,6 +15,8 @@ import { WarningTriangleIcon, WrenchIcon } from '@patternfly/react-icons';
 import { SortTable, StatefulDropdown } from '..';
 import * as moment from 'moment';
 import { Constants } from '../../constants';
+import { getRepoUrl } from '../../utilities';
+import { Paths, formatPath } from '../../paths';
 
 interface IProps {
   repositories: {}[];
@@ -48,23 +51,28 @@ export class LocalRepositoryTable extends React.Component<IProps> {
     let sortTableOptions = {
       headers: [
         {
-          title: 'Repo name',
-          type: 'alpha',
+          title: 'Distribution name',
+          type: 'none',
+          id: 'distribution',
+        },
+        {
+          title: 'Repository name',
+          type: 'none',
           id: 'repository',
         },
         {
           title: 'Content count',
-          type: 'number',
+          type: 'none',
           id: 'content',
         },
         {
           title: 'Last updated',
-          type: 'number',
+          type: 'none',
           id: 'updated_at',
         },
         {
           title: 'URL',
-          type: 'alpha',
+          type: 'none',
           id: 'url',
         },
         {
@@ -92,37 +100,40 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           updateParams={p => console.log(p)}
         />
         <tbody>
-          {repositories.map(repository => this.renderRow(repository))}
+          {repositories.map(distribution => this.renderRow(distribution))}
         </tbody>
       </table>
     );
   }
 
-  private renderRow(repository) {
+  private renderRow(distribution) {
     return (
-      <tr key={repository.name}>
-        <td>{repository.name}</td>
-        <td>{repository.count}</td>
+      <tr key={distribution.name}>
+        <td>{distribution.name}</td>
+        <td>{distribution.repository.name}</td>
+        <td>{distribution.repository.content_count}</td>
         {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? null : (
           <td>
-            {!!repository.updated_at
-              ? moment(repository.updated_at).fromNow()
+            {!!distribution.repository.pulp_last_updated
+              ? moment(distribution.repository.pulp_last_updated).fromNow()
               : '---'}
           </td>
         )}
         <td>
-          <ClipboardCopy isReadOnly>{repository.url}</ClipboardCopy>
+          <ClipboardCopy isReadOnly>
+            {getRepoUrl(distribution.base_path) + 'v3/collections'}
+          </ClipboardCopy>
         </td>
         <td>
           <span>
             <StatefulDropdown
               items={[
                 <DropdownItem
-                  key='token'
-                  onClick={() => console.log('TODO Get token')}
-                >
-                  Get token
-                </DropdownItem>,
+                  key='2'
+                  component={
+                    <Link to={formatPath(Paths.token, {})}>Get token</Link>
+                  }
+                />,
               ]}
             />
           </span>
