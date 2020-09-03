@@ -159,6 +159,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         variant='large'
         onClose={() => this.setState({ addModalVisible: false })}
         isOpen={true}
+        aria-label='add-user-modal'
         title={''}
         header={
           <span className='pf-c-content'>
@@ -186,7 +187,20 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       >
         <APISearchTypeAhead
           results={this.state.options}
-          loadResults={this.loadResults}
+          loadResults={(name) => UserAPI.list({ username__contains: name, page_size: 5 }).then(result => {
+            let filteredUsers = [];
+            result.data.data.forEach(user => {
+              filteredUsers.push({
+                id: user.id,
+                name: user.username
+              })
+            });
+            filteredUsers = filteredUsers.filter(x => !this.state.selected.find(s => s.name === x.name) && !this.state.users.find(u => u.id === x.id));
+            this.setState({
+              options: filteredUsers
+            });
+          })
+          }
           onSelect={(event, selection) => {
             const selectedUser = this.state.options.find(
               x => x.name === selection,
@@ -256,12 +270,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       );
       this.setState({ options: a });
     });
-  }
-
-  private loadResults(name) {
-    UserAPI.list({ username__contains: name, page_size: 5 }).then(result =>
-      this.setState({ options: result.data.data }),
-    );
   }
 
   private renderUsers(users) {
