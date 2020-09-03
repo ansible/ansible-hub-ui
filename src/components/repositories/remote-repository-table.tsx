@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as moment from 'moment';
 
 import {
   Button,
@@ -8,14 +9,26 @@ import {
   EmptyStateIcon,
   EmptyStateVariant,
   Title,
+  Tooltip,
+  Popover,
 } from '@patternfly/react-core';
-import { WarningTriangleIcon, WrenchIcon } from '@patternfly/react-icons';
+import {
+  WarningTriangleIcon,
+  WrenchIcon,
+  QuestionCircleIcon,
+  ExclamationCircleIcon,
+} from '@patternfly/react-icons';
+
+import { RemoteType } from '../../api';
 import { SortTable, StatefulDropdown } from '..';
-import * as moment from 'moment';
+
+import { Constants } from '../../constants';
 
 interface IProps {
-  repositories: {}[];
+  repositories: RemoteType[];
   updateParams: (p) => void;
+  editRemote: (r: RemoteType) => void;
+  syncRemote: (distribution: string) => void;
 }
 
 export class RemoteRepositoryTable extends React.Component<IProps> {
@@ -32,15 +45,11 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
           <Title headingLevel='h2' size='lg'>
             No remote repos
           </Title>
-          <EmptyStateBody>Configure a remote repo</EmptyStateBody>
-          <Button onClick={() => console.log('BUTTON CLICKED')}>
-            <span>Add repo</span>
-          </Button>
         </EmptyState>
       );
     }
     // TODO only with search
-    if (repositories.length === 0 && false) {
+    if (repositories.length === 0) {
       return (
         <EmptyState className='empty' variant={EmptyStateVariant.full}>
           <EmptyStateIcon icon={WarningTriangleIcon} />
@@ -61,44 +70,34 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
     let sortTableOptions = {
       headers: [
         {
-          title: 'Repo name',
-          type: 'alpha',
+          title: 'Remote name',
+          type: 'none',
+          id: 'remote',
+        },
+        {
+          title: 'Repositories',
+          type: 'none',
           id: 'repository',
         },
         {
-          title: 'Content count',
-          type: 'number',
-          id: 'content',
-        },
-        {
           title: 'Last updated',
-          type: 'number',
+          type: 'none',
           id: 'updated_at',
         },
         {
-          title: 'Token status',
-          type: 'number',
-          id: 'token',
-        },
-        {
           title: 'Last synced',
-          type: 'alpha',
+          type: 'none',
           id: 'last_sync_task.finished_at',
         },
         {
           title: 'Sync status',
-          type: 'alpha',
+          type: 'none',
           id: 'last_sync_task.error',
         },
         {
           title: '',
           type: 'none',
-          id: 'buttons',
-        },
-        {
-          title: '',
-          type: 'none',
-          id: 'kebab',
+          id: 'controls',
         },
       ],
     };
@@ -111,49 +110,138 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={p => console.log(p)}
+          updateParams={p => null}
         />
         <tbody>
-          {repositories.map(repository => this.renderRow(repository))}
+          {repositories.map((remote, i) => this.renderRow(remote, i))}
         </tbody>
       </table>
     );
   }
 
-  private renderRow(repository) {
+  private renderRow(remote, i) {
     return (
-      <tr>
-        <td>{repository.name}</td>
-        <td>{repository.count}</td>
+      <tr key={i}>
+        <td>{remote.name}</td>
+        <td>{remote.repositories.map(r => r.name).join(', ')}</td>
         <td>
-          {!!repository.updated_at
-            ? moment(repository.updated_at).fromNow()
+          {!!remote.updated_at ? moment(remote.updated_at).fromNow() : '---'}
+        </td>
+        <td>
+          {!!remote.last_sync_task
+            ? moment(remote.last_sync_task.finished_at).fromNow()
             : '---'}
         </td>
-        <td>Active/Expired</td>
+        <td>{this.renderStatus(remote)}</td>
         <td>
-          {!!repository.last_sync_task
-            ? moment(repository.last_sync_task).fromNow()
-            : '---'}
-        </td>
-        <td>TODO icon Idle/In progress/Failed</td>
-        <td>
-          <Button variant='secondary'>Configure</Button>
-        </td>
-        <td>
-          <span>
-            <StatefulDropdown
-              items={[
-                <DropdownItem
-                  onClick={() => console.log('TODO Edit action -> fires modal')}
-                >
-                  Edit
-                </DropdownItem>,
-              ]}
-            />
-          </span>
+          {remote.repositories.length === 0 ? (
+            <Tooltip content='There are no repos associated with this remote.'>
+              <Button variant='plain'>
+                <ExclamationCircleIcon />
+              </Button>
+            </Tooltip>
+          ) : (
+            <>
+              {this.getConfigureOrSyncButton(remote)}
+              <span>
+                <StatefulDropdown
+                  items={[
+                    <DropdownItem
+                      key='edit'
+                      onClick={() => this.props.editRemote(remote)}
+                    >
+                      Edit
+                    </DropdownItem>,
+                  ]}
+                />
+              </span>
+            </>
+          )}
         </td>
       </tr>
     );
+  }
+
+  private renderStatus(remote) {
+    if (!remote.last_sync_task) {
+      return '---';
+    }
+
+    let errorMessage = null;
+    if (remote['last_sync_task']['error']) {
+      errorMessage = (
+        <Popover bodyContent={remote.last_sync_task.error['description']}>
+          <Button variant='plain'>
+            <QuestionCircleIcon />
+          </Button>
+        </Popover>
+      );
+    }
+
+    return (
+      <>
+        {remote.last_sync_task.state} {errorMessage}
+      </>
+    );
+  }
+
+  private getConfigureOrSyncButton(remote: RemoteType) {
+    const configButton = (
+      <Button onClick={() => this.props.editRemote(remote)} variant='secondary'>
+        Configure
+      </Button>
+    );
+
+    const syncButton = (
+      <>
+        <Button
+          isDisabled={remote.repositories.length === 0}
+          onClick={() =>
+            this.props.syncRemote(
+              remote.repositories[0].distributions[0].base_path,
+            )
+          }
+          variant='secondary'
+        >
+          Sync
+        </Button>
+      </>
+    );
+
+    let remoteType = 'none';
+
+    for (const host of Constants.UPSTREAM_HOSTS) {
+      if (remote.url.includes(host)) {
+        remoteType = 'community';
+        break;
+      }
+    }
+
+    for (const host of Constants.DOWNSTREAM_HOSTS) {
+      if (remote.url.includes(host)) {
+        remoteType = 'certified';
+        break;
+      }
+    }
+
+    if (
+      remoteType === 'community' &&
+      remote.url &&
+      remote.name &&
+      remote.requirements_file
+    ) {
+      return syncButton;
+    }
+
+    if (
+      remoteType === 'certified' &&
+      remote.url &&
+      remote.name &&
+      remote.auth_url
+    ) {
+      return syncButton;
+    }
+
+    return configButton;
   }
 }
