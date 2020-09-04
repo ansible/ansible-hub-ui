@@ -22,6 +22,8 @@ import {
   UserDetail,
   UserCreate,
   UserProfile,
+  GroupList,
+  GroupDetail,
 } from '../../containers';
 import { ActiveUserAPI } from '../../api';
 import { AppContext } from '../app-context';
@@ -77,6 +79,9 @@ class AuthHandler extends React.Component<IProps, IState> {
 
 export class Routes extends React.Component<{}> {
   routes = [
+    { comp: GroupList, path: Paths.groupList },
+    { comp: GroupDetail, path: Paths.groupDetail },
+    //{ comp: GroupCreate, path: Paths.createGroup },
     { comp: UserProfile, path: Paths.userProfileSettings },
     { comp: UserCreate, path: Paths.createUser },
     { comp: EditUser, path: Paths.editUser },
