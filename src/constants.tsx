@@ -18,7 +18,6 @@ export class Constants {
   static PERMISSIONS = [
     {
       name: 'namespaces',
-      id: 1,
       object_permissions: [
         'galaxy.add_namespace',
         'galaxy.change_namespace',
@@ -27,12 +26,10 @@ export class Constants {
     },
     {
       name: 'collections',
-      id: 2,
       object_permissions: ['ansible.modify_ansible_repo_content'],
     },
     {
       name: 'users',
-      id: 3,
       object_permissions: [
         'galaxy.view_user',
         'galaxy.delete_user',
@@ -42,7 +39,6 @@ export class Constants {
     },
     {
       name: 'groups',
-      id: 4,
       object_permissions: [
         'galaxy.view_group',
         'galaxy.delete_group',
@@ -52,7 +48,6 @@ export class Constants {
     },
     {
       name: 'remotes',
-      id: 5,
       object_permissions: [
         'ansible.change_collectionremote',
         'ansible.view_collectionremote',
@@ -60,7 +55,6 @@ export class Constants {
     },
     {
       name: 'distribution',
-      id: 6,
       object_permissions: [
         'ansible.change_ansibledistribution',
         'ansible.view_ansibledistribution',
@@ -68,7 +62,6 @@ export class Constants {
     },
     {
       name: 'synclists',
-      id: 7,
       object_permissions: [
         'galaxy.delete_synclist',
         'galaxy.change_synclist',

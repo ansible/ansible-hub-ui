@@ -8,7 +8,9 @@ class API extends BaseAPI {
   }
 
   getPermissions(id) {
-    return this.http.get(this.apiPath + id + '/model-permissions');
+    return this.http.get(
+      this.apiPath + id + '/model-permissions/?limit=100000&offset=0',
+    );
   }
 
   addPermission(id, data) {

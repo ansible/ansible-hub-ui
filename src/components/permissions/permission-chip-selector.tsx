@@ -34,7 +34,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         }
         selections={this.props.selectedPermissions}
         isOpen={this.state.isOpen}
-        placeholderText={!!this.props.isDisabled ? '' : 'Select permissions'}
+        placeholderText={this.placeholderText()}
         isDisabled={!!this.props.isDisabled}
       >
         {this.props.availablePermissions.map((option, index) => (
@@ -42,6 +42,13 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         ))}
       </Select>
     );
+  }
+
+  private placeholderText() {
+    if (!this.props.isDisabled) {
+      return 'Select permissions';
+    }
+    return this.props.selectedPermissions.length === 0 ? 'No permission' : '';
   }
 
   private clearSelection = () => {

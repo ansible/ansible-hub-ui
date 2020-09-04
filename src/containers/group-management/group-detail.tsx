@@ -187,13 +187,40 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               ) {
                 GroupAPI.addPermission(this.state.group.id, {
                   permission: permission,
-                });
+                }).catch(() =>
+                  this.setState({
+                    alerts: [
+                      ...this.state.alerts,
+                      {
+                        variant: 'danger',
+                        title: null,
+                        description:
+                          'Permission ' + permission + ' was not added',
+                      },
+                    ],
+                  }),
+                );
               }
             });
             //Remove permissions
             this.state.originalPermissions.forEach(original => {
               if (!this.state.permissions.includes(original.name)) {
-                GroupAPI.removePermission(this.state.group.id, original.id);
+                GroupAPI.removePermission(
+                  this.state.group.id,
+                  original.id,
+                ).catch(() =>
+                  this.setState({
+                    alerts: [
+                      ...this.state.alerts,
+                      {
+                        variant: 'danger',
+                        title: null,
+                        description:
+                          'Permission ' + original.name + ' was not removed.',
+                      },
+                    ],
+                  }),
+                );
               }
             });
             this.setState({ editPermissions: false });
