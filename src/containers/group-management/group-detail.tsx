@@ -42,11 +42,13 @@ import {
 import { Constants } from '../../constants';
 import * as moment from 'moment';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
+import { InsightsUserType } from '../../api/response-types/user';
 
 interface IState {
   group: any;
   params: { id: string; tab: string; page?: number; page_size?: number };
   users: UserType[];
+  allUsers: UserType[];
   itemCount: number;
   alerts: AlertType[];
   addModalVisible: boolean;
@@ -82,6 +84,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     this.state = {
       group: null,
       users: null,
+      allUsers: null,
       params: {
         id: id,
         tab: params['tab'],
@@ -397,15 +400,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private addUserToGroup(selectedUsers, group) {
     const allPromises = [];
     selectedUsers.forEach(user => {
-      UserAPI.get(user.id.toString()).then(result => {
-        const newUser = result.data;
-        newUser.groups = newUser.groups.concat(group);
-        allPromises.push(UserAPI.update(user.id.toString(), newUser));
-      });
+      const newUser = this.state.allUsers.find(x => x.id == user.id);
+      newUser.groups = newUser.groups.concat(group);
+      allPromises.push(UserAPI.update(user.id.toString(), newUser));
     });
     Promise.all(allPromises)
       .then(() => {
-        this.setState({ addModalVisible: false, loading: true });
         this.queryUsers();
       })
       .catch(() => this.setState({ addModalVisible: false }));
@@ -420,7 +420,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       options.forEach(option =>
         a.push({ id: option.id, name: option.username }),
       );
-      this.setState({ options: a });
+      this.setState({ options: a, allUsers: result.data.data });
     });
   }
 
@@ -597,6 +597,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       this.setState({
         users: result.data.data,
         itemCount: result.data.data.length,
+        addModalVisible: false,
         loading: false,
       }),
     );
