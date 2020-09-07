@@ -10,6 +10,9 @@
 .clickable {
   cursor: pointer;
 }
+.nav-select {
+  background-color: transparent;
+}
 
 // this was getting applied globally when it was in the collection-info.scss file
 // which means other components now rely on it, so I'm just going move it here

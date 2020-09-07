@@ -14,6 +14,9 @@ import {
   NavItem,
   DropdownItem,
   DropdownSeparator,
+  NavGroup,
+  Select,
+  SelectOption,
 } from '@patternfly/react-core';
 
 import { Routes } from './routes';
@@ -25,6 +28,8 @@ import { AppContext } from '../app-context';
 
 interface IState {
   user: UserType;
+  selectExpanded: boolean;
+  selectedRepo: string;
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -32,6 +37,8 @@ class App extends React.Component<RouteComponentProps, IState> {
     super(props);
     this.state = {
       user: null,
+      selectExpanded: false,
+      selectedRepo: 'Red Hat Certified',
     };
   }
 
@@ -105,34 +112,59 @@ class App extends React.Component<RouteComponentProps, IState> {
         nav={
           <Nav theme='dark'>
             <NavList>
-              <NavItem>
-                <Link to={Paths.search}>Collections</Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths.partners}>Namespaces</Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths.myNamespaces}>My Namespaces</Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths.token}>API Token</Link>
-              </NavItem>
-              {!!user && user.model_permissions.view_user && (
-                <NavItem>
-                  <Link to={Paths.userList}>Users</Link>
+              <NavGroup title='Content'>
+                <NavItem className={'nav-select'}>
+                  <Select
+                    className='nav-select'
+                    isOpen={this.state.selectExpanded}
+                    selections={this.state.selectedRepo}
+                    onToggle={isExpanded => {
+                      console.log('Expand ' + isExpanded);
+                      this.setState({ selectExpanded: isExpanded });
+                    }}
+                    onSelect={(event, value) =>
+                      this.setState({ selectedRepo: value.toString() })
+                    }
+                  >
+                    <SelectOption
+                      key={'rh-certified'}
+                      value={'Red Hat Certified'}
+                    />
+                    <SelectOption key={'published'} value={'Published'} />
+                    <SelectOption key={'community'} value={'Community'} />
+                  </Select>
                 </NavItem>
-              )}
-              <NavItem>
-                <Link to={Paths.groupList}>Groups</Link>
-              </NavItem>
-              {!!user && user.model_permissions.move_collection && (
                 <NavItem>
-                  <Link to={Paths.certificationDashboard}>Certification</Link>
+                  <Link to={Paths.search}>Collections</Link>
                 </NavItem>
-              )}
-              <NavItem>
-                <Link to={Paths.repositories}>Repo Management</Link>
-              </NavItem>
+                <NavItem>
+                  <Link to={Paths.partners}>Namespaces</Link>
+                </NavItem>
+                <NavItem>
+                  <Link to={Paths.myNamespaces}>My Namespaces</Link>
+                </NavItem>
+              </NavGroup>
+              <NavGroup title='Configuration'>
+                <NavItem>
+                  <Link to={Paths.token}>API Token</Link>
+                </NavItem>
+                {!!user && user.model_permissions.view_user && (
+                  <NavItem>
+                    <Link to={Paths.userList}>Users</Link>
+                  </NavItem>
+                )}
+                <NavItem>
+                  <Link to={Paths.groupList}>Groups</Link>
+                </NavItem>
+                {!!user && user.model_permissions.move_collection && (
+                  <NavItem>
+                    <Link to={Paths.certificationDashboard}>Certification</Link>
+                  </NavItem>
+                )}
+                <NavItem>
+                    <Link to={Paths.repositories}>Repo Management</Link>
+                </NavItem>
+              </NavGroup>
             </NavList>
           </Nav>
         }
@@ -157,6 +189,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         value={{
           user: this.state.user,
           setUser: this.setUser,
+          selectedRepo: this.state.selectedRepo,
         }}
       >
         {component}
