@@ -28,6 +28,7 @@ import { RenderPluginDoc } from '@ansible/galaxy-doc-builder';
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 // renders markdown files in collection docs/ directory
 class CollectionDocs extends React.Component<
@@ -49,7 +50,7 @@ class CollectionDocs extends React.Component<
   }
 
   componentDidMount() {
-    this.loadCollection();
+    this.loadCollection(this.context.selectedRepo);
   }
 
   render() {
@@ -129,7 +130,9 @@ class CollectionDocs extends React.Component<
           collection={collection}
           params={params}
           updateParams={p =>
-            this.updateParams(p, () => this.loadCollection(true))
+            this.updateParams(p, () =>
+              this.loadCollection(this.context.selectedRepo, true),
+            )
           }
           breadcrumbs={breadcrumbs}
           activeTab='documentation'
@@ -270,3 +273,5 @@ class CollectionDocs extends React.Component<
 }
 
 export default withRouter(CollectionDocs);
+
+CollectionDocs.contextType = AppContext;

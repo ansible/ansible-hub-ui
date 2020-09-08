@@ -12,6 +12,7 @@ import {
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from '../../utilities/param-helper';
 import { formatPath, Paths } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 // renders collection level information
 class CollectionDetail extends React.Component<
@@ -30,7 +31,7 @@ class CollectionDetail extends React.Component<
   }
 
   componentDidMount() {
-    this.loadCollection();
+    this.loadCollection(this.context.selectedRepo);
   }
 
   render() {
@@ -59,7 +60,9 @@ class CollectionDetail extends React.Component<
           collection={collection}
           params={params}
           updateParams={p =>
-            this.updateParams(p, () => this.loadCollection(true))
+            this.updateParams(p, () =>
+              this.loadCollection(this.context.selectedRepo, true),
+            )
           }
           breadcrumbs={breadcrumbs}
           activeTab='details'
@@ -87,3 +90,5 @@ class CollectionDetail extends React.Component<
 }
 
 export default withRouter(CollectionDetail);
+
+CollectionDetail.contextType = AppContext;

@@ -14,6 +14,7 @@ import {
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from '../../utilities/param-helper';
 import { formatPath, Paths } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState extends IBaseCollectionState {
   loadingImports: boolean;
@@ -105,7 +106,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
   private loadData(forceReload = false) {
     const failMsg = 'Could not load import log';
     this.setState({ loadingImports: true }, () => {
-      this.loadCollection(forceReload, () => {
+      this.loadCollection(this.context.selectedRepo, forceReload, () => {
         ImportAPI.list({
           namespace: this.state.collection.namespace.name,
           name: this.state.collection.name,
@@ -150,3 +151,5 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
 }
 
 export default withRouter(CollectionImportLog);
+
+CollectionImportLog.contextType = AppContext;

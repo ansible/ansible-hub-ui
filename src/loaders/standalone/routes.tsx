@@ -79,6 +79,8 @@ class AuthHandler extends React.Component<IProps, IState> {
 }
 
 export class Routes extends React.Component<{}> {
+  static contextType = AppContext;
+
   routes = [
     { comp: GroupList, path: Paths.groupList },
     { comp: GroupDetail, path: Paths.groupDetail },

@@ -85,6 +85,7 @@ export class API extends BaseAPI {
   getCached(
     namespace,
     name,
+    repo,
     params?,
     forceReload?: boolean,
   ): Promise<CollectionDetailType> {
@@ -104,7 +105,7 @@ export class API extends BaseAPI {
     } else {
       return new Promise((resolve, reject) => {
         this.http
-          .get(`${this.apiPath}${namespace}/${name}/`, {
+          .get(`_ui/v1/repo/${repo}/${namespace}/${name}/`, {
             params: params,
           })
           .then(result => {
