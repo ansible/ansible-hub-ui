@@ -116,8 +116,10 @@ class App extends React.Component<RouteComponentProps, IState> {
                 <NavItem className={'nav-select'}>
                   <Select
                     className='nav-select'
+                    variant='single'
                     isOpen={this.state.selectExpanded}
                     selections={this.state.selectedRepo}
+                    isPlain={false}
                     onToggle={isExpanded => {
                       console.log('Expand ' + isExpanded);
                       this.setState({ selectExpanded: isExpanded });
