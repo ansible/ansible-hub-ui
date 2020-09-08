@@ -32,6 +32,8 @@ import { ImportModal } from './import-modal/import-modal';
 
 import { ParamHelper, getRepoUrl } from '../../utilities';
 import { Paths, formatPath } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
+import { Constants } from '../../constants';
 
 interface IState {
   collections: CollectionListType[];
@@ -241,9 +243,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private loadCollections() {
-    CollectionAPI.list({
-      ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-    }).then(result => {
+    CollectionAPI.list(
+      {
+        ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+      },
+      Constants.REPOSITORYNAMES[this.context.selectedRepo],
+    ).then(result => {
       this.setState({
         collections: result.data.data,
         itemCount: result.data.meta.count,
@@ -253,9 +258,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   private loadAll() {
     Promise.all([
-      CollectionAPI.list({
-        ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-      }),
+      CollectionAPI.list(
+        {
+          ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+        },
+        Constants.REPOSITORYNAMES[this.context.selectedRepo],
+      ),
       NamespaceAPI.get(this.props.match.params['namespace']),
     ])
       .then(val => {
@@ -337,3 +345,5 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     this.setState(newState);
   }
 }
+
+NamespaceDetail.contextType = AppContext;

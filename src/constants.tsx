@@ -70,11 +70,15 @@ export class Constants {
       ],
     },
   ];
-
   static UPSTREAM_HOSTS = [
     'galaxy.ansible.com',
     'galaxy-dev.ansible.com',
     'galaxy-qa.ansible.com',
   ];
   static DOWNSTREAM_HOSTS = ['cloud.redhat.com'];
+  static REPOSITORYNAMES = {
+    'Red Hat Certified': 'rh-certified',
+    Community: 'community',
+    Published: 'published',
+  };
 }

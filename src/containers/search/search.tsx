@@ -38,6 +38,7 @@ import {
 } from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
 import { Constants } from '../../constants';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   collections: CollectionListType[];
@@ -348,7 +349,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
       CollectionAPI.list({
         ...ParamHelper.getReduced(this.state.params, ['view_type']),
         deprecated: false,
-      }).then(result => {
+      }, Constants.REPOSITORYNAMES[this.context.selectedRepo],
+      ).then(result => {
         this.setState({
           collections: result.data.data,
           numberOfResults: result.data.meta.count,
@@ -364,3 +366,5 @@ class Search extends React.Component<RouteComponentProps, IState> {
 }
 
 export default withRouter(Search);
+
+Search.contextType = AppContext;

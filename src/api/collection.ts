@@ -19,6 +19,11 @@ export class API extends BaseAPI {
     // new MockCollection(this.http, this.apiPath);
   }
 
+  list(params?: {}, repo?: string) {
+    const path = '_ui/v1/repo/' + repo + '/';
+    return this.http.get(path, params);
+  }
+
   setDeprecation(collection: CollectionListType, isDeprecated: boolean) {
     const path = 'v3/collections/';
 
