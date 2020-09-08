@@ -24,6 +24,11 @@ export class API extends BaseAPI {
     return this.http.get(path, params);
   }
 
+  listByNamespace(namespace: string, params?: {}, repo?: string) {
+    const path = '_ui/v1/repo/' + repo + '/?namespace=' + namespace;
+    return this.http.get(path, params);
+  }
+
   setDeprecation(collection: CollectionListType, isDeprecated: boolean) {
     const path = 'v3/collections/';
 
