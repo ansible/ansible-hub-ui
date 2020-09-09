@@ -87,7 +87,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       loading: true,
       synclist: undefined,
       redirect: false,
-      repo: undefined,
+      repo: props.location.pathname.split('/')[2],
     };
   }
 
