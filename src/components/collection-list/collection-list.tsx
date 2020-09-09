@@ -36,6 +36,7 @@ interface IProps {
   showNamespace?: boolean;
   showControls?: boolean;
   handleControlClick?: (id, event) => void;
+  repo?: string;
 }
 
 interface IState {
@@ -55,6 +56,7 @@ export class CollectionList extends React.Component<IProps, IState> {
       updateParams,
       itemCount,
       showControls,
+      repo,
     } = this.props;
 
     return (
@@ -85,6 +87,7 @@ export class CollectionList extends React.Component<IProps, IState> {
                 }
                 key={c.id}
                 {...c}
+                repo={repo}
               />
             ))
           ) : (

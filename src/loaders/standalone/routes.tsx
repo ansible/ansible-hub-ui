@@ -104,10 +104,17 @@ export class Routes extends React.Component<{}> {
     { comp: CollectionDocs, path: Paths.collectionContentDocs },
     { comp: CollectionContent, path: Paths.collectionContentList },
     { comp: CollectionImportLog, path: Paths.collectionImportLog },
+    { comp: CollectionDocs, path: Paths.collectionDocsPageByRepo },
+    { comp: CollectionDocs, path: Paths.collectionDocsIndexByRepo },
+    { comp: CollectionDocs, path: Paths.collectionContentDocsByRepo },
+    { comp: CollectionContent, path: Paths.collectionContentListByRepo },
+    { comp: CollectionImportLog, path: Paths.collectionImportLogByRepo },
     { comp: MyImports, path: Paths.myImports },
     { comp: CollectionDetail, path: Paths.collection },
+    { comp: CollectionDetail, path: Paths.collectionByRepo },
     { comp: PartnerDetail, path: Paths.namespace },
     { comp: Search, path: Paths.search },
+    { comp: Search, path: Paths.searchByRepo },
   ];
 
   render() {

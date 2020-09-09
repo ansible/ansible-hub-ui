@@ -18,10 +18,12 @@ import { Paths, formatPath } from '../../paths';
 import { NumericLabel, Tag, Logo, DeprecatedTag } from '../../components';
 import { CollectionListType } from '../../api';
 import { convertContentSummaryCounts } from '../../utilities';
+import { Constants } from '../../constants';
 
 interface IProps extends CollectionListType {
   showNamespace?: boolean;
   controls?: React.ReactNode;
+  repo?: string;
 }
 
 export class CollectionListItem extends React.Component<IProps, {}> {
@@ -34,6 +36,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
       showNamespace,
       controls,
       deprecated,
+      repo,
     } = this.props;
 
     const cells = [];
@@ -54,17 +57,22 @@ export class CollectionListItem extends React.Component<IProps, {}> {
 
     const contentSummary = convertContentSummaryCounts(latest_version.contents);
 
+    const path =
+      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+        ? formatPath(Paths.collection, {
+            collection: name,
+            namespace: namespace.name,
+          })
+        : formatPath(Paths.collectionByRepo, {
+            collection: name,
+            namespace: namespace.name,
+            repo: Constants.REPOSITORYNAMES[repo],
+          });
+
     cells.push(
       <DataListCell key='content'>
         <div>
-          <Link
-            to={formatPath(Paths.collection, {
-              namespace: namespace.name,
-              collection: name,
-            })}
-          >
-            {name}
-          </Link>
+          <Link to={path}>{name}</Link>
           {deprecated && <DeprecatedTag />}
           {showNamespace ? (
             <TextContent>

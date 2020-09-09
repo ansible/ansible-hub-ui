@@ -85,6 +85,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
           }
           breadcrumbs={breadcrumbs}
           activeTab='import-log'
+          repo={this.context.selectedRepo}
         />
         <Main>
           <Section className='body'>

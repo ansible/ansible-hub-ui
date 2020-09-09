@@ -256,6 +256,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
               key={c.id}
               {...c}
               footer={this.renderSyncToggle(c.name, c.namespace.name)}
+              repo={this.context.selectedRepo}
             />
           );
         })}
@@ -322,6 +323,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
                 key={c.id}
                 {...c}
                 controls={this.renderSyncToggle(c.name, c.namespace.name)}
+                repo={this.context.selectedRepo}
               />
             ))}
           </DataList>

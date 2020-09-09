@@ -17,20 +17,40 @@ import { NumericLabel, Logo } from '../../components';
 import { CollectionListType } from '../../api';
 import { formatPath, Paths } from '../../paths';
 import { convertContentSummaryCounts } from '../../utilities';
+import { Constants } from '../../constants';
 
 interface IProps extends CollectionListType {
   className?: string;
   footer?: React.ReactNode;
+  repo?: string;
 }
 
 export class CollectionCard extends React.Component<IProps> {
   MAX_DESCRIPTION_LENGTH = 60;
 
   render() {
-    const { name, latest_version, namespace, className, footer } = this.props;
+    const {
+      name,
+      latest_version,
+      namespace,
+      className,
+      footer,
+      repo,
+    } = this.props;
 
     const company = namespace.company || namespace.name;
     const contentSummary = convertContentSummaryCounts(latest_version.contents);
+    const path =
+      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+        ? formatPath(Paths.collection, {
+            collection: name,
+            namespace: namespace.name,
+          })
+        : formatPath(Paths.collectionByRepo, {
+            collection: name,
+            namespace: namespace.name,
+            repo: Constants.REPOSITORYNAMES[repo],
+          });
 
     return (
       <Card className={cx('collection-card-container', className)}>
@@ -51,14 +71,7 @@ export class CollectionCard extends React.Component<IProps> {
         </CardHeader>
         <CardHeader>
           <div className='name'>
-            <Link
-              to={formatPath(Paths.collection, {
-                collection: name,
-                namespace: namespace.name,
-              })}
-            >
-              {name}
-            </Link>
+            <Link to={path}>{name}</Link>
           </div>
           <div className='author'>
             <TextContent>

@@ -184,6 +184,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 handleControlClick={(id, action) =>
                   this.handleCollectionAction(id, action)
                 }
+                repo={this.context.selectedRepo}
               />
             ) : null}
             {tab.toLowerCase() === 'cli configuration' ? (

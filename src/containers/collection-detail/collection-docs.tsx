@@ -29,6 +29,7 @@ import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
+import { Constants } from '../../constants';
 
 // renders markdown files in collection docs/ directory
 class CollectionDocs extends React.Component<
@@ -137,6 +138,7 @@ class CollectionDocs extends React.Component<
           breadcrumbs={breadcrumbs}
           activeTab='documentation'
           className='header'
+          repo={this.context.selectedRepo}
         />
         <Main className='main'>
           <Section className='docs-container'>
@@ -200,24 +202,31 @@ class CollectionDocs extends React.Component<
         </a>
       );
     } else {
+      const path =
+        DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+          ? formatPath(
+              Paths.collectionDocsPage,
+              {
+                namespace: collection.namespace.name,
+                collection: collection.name,
+                page: sanitizeDocsUrls(href),
+              },
+              params,
+            )
+          : formatPath(
+              Paths.collectionDocsPageByRepo,
+              {
+                namespace: collection.namespace.name,
+                collection: collection.name,
+                page: sanitizeDocsUrls(href),
+                repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+              },
+              params,
+            );
       // TODO: right now this will break if people put
       // ../ at the front of their urls. Need to find a
       // way to document this
-      return (
-        <Link
-          to={formatPath(
-            Paths.collectionDocsPage,
-            {
-              namespace: collection.namespace.name,
-              collection: collection.name,
-              page: sanitizeDocsUrls(href),
-            },
-            params,
-          )}
-        >
-          {name}
-        </Link>
-      );
+      return <Link to={path}>{name}</Link>;
     }
   }
 
@@ -227,22 +236,30 @@ class CollectionDocs extends React.Component<
     );
 
     if (module) {
-      return (
-        <Link
-          to={formatPath(
-            Paths.collectionContentDocs,
-            {
-              namespace: collection.namespace.name,
-              collection: collection.name,
-              type: 'module',
-              name: moduleName,
-            },
-            params,
-          )}
-        >
-          {moduleName}
-        </Link>
-      );
+      const path =
+        DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+          ? formatPath(
+              Paths.collectionContentDocs,
+              {
+                namespace: collection.namespace.name,
+                collection: collection.name,
+                type: 'module',
+                name: moduleName,
+              },
+              params,
+            )
+          : formatPath(
+              Paths.collectionContentDocs,
+              {
+                namespace: collection.namespace.name,
+                collection: collection.name,
+                type: 'module',
+                name: moduleName,
+                repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+              },
+              params,
+            );
+      return <Link to={path}>{moduleName}</Link>;
     } else {
       return moduleName;
     }

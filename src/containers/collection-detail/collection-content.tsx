@@ -71,6 +71,7 @@ class CollectionContent extends React.Component<
           }
           breadcrumbs={breadcrumbs}
           activeTab='contents'
+          repo={this.context.selectedRepo}
         />
         <Main>
           <Section className='body'>

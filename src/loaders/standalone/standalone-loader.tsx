@@ -25,6 +25,7 @@ import { Paths, formatPath } from '../../paths';
 import { ActiveUserAPI, UserType } from '../../api';
 import { StatefulDropdown } from '../../components';
 import { AppContext } from '../app-context';
+import { Constants } from '../../constants';
 
 interface IState {
   user: UserType;
@@ -137,7 +138,14 @@ class App extends React.Component<RouteComponentProps, IState> {
                   </Select>
                 </NavItem>
                 <NavItem>
-                  <Link to={Paths.search}>Collections</Link>
+                  <Link
+                    to={Paths.searchByRepo.replace(
+                      ':repo',
+                      Constants.REPOSITORYNAMES[this.state.selectedRepo],
+                    )}
+                  >
+                    Collections
+                  </Link>
                 </NavItem>
                 <NavItem>
                   <Link to={Paths.partners}>Namespaces</Link>
@@ -192,6 +200,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           user: this.state.user,
           setUser: this.setUser,
           selectedRepo: this.state.selectedRepo,
+          setRepo: this.setRepo,
         }}
       >
         {component}
@@ -201,6 +210,10 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   private setUser = user => {
     this.setState({ user: user });
+  };
+
+  private setRepo = repo => {
+    this.setState({ selectedRepo: repo });
   };
 }
 
