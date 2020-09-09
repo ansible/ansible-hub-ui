@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './search.scss';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   DataList,
@@ -39,6 +39,7 @@ import {
 import { ParamHelper } from '../../utilities/param-helper';
 import { Constants } from '../../constants';
 import { AppContext } from '../../loaders/app-context';
+import { Paths } from '../../paths';
 
 interface IState {
   collections: CollectionListType[];
@@ -52,6 +53,8 @@ interface IState {
   };
   loading: boolean;
   synclist: SyncListType;
+  redirect: boolean;
+  repo: string;
 }
 
 class Search extends React.Component<RouteComponentProps, IState> {
@@ -83,10 +86,30 @@ class Search extends React.Component<RouteComponentProps, IState> {
       numberOfResults: 0,
       loading: true,
       synclist: undefined,
+      redirect: false,
+      repo: undefined,
     };
   }
 
   componentDidMount() {
+    const { repo } = this.state;
+    if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
+      if (!repo) {
+        this.context.setRepo(Constants.DEAFAULTREPO);
+        this.setState({ repo: Constants.DEAFAULTREPO });
+      } else if (!Constants.ALLOWEDREPOS.includes(repo)) {
+        this.setState({ redirect: true });
+      } else if (
+        repo !== Constants.REPOSITORYNAMES[this.context.selectedRepo]
+      ) {
+        const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
+          key => Constants.REPOSITORYNAMES[key] === repo,
+        );
+        this.context.setRepo(newRepoName);
+        this.setState({ repo: newRepoName });
+      }
+    }
+
     this.queryCollections();
 
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE)
@@ -94,7 +117,11 @@ class Search extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { collections, params, numberOfResults } = this.state;
+    const { collections, params, numberOfResults, redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to={Paths.notFound} />;
+    }
 
     const tags = [
       'cloud',

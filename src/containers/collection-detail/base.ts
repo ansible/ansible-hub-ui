@@ -9,6 +9,8 @@ export interface IBaseCollectionState {
     keywords?: string;
   };
   collection: CollectionDetailType;
+  repo?: string;
+  redirect?: boolean;
 }
 
 export function loadCollection(

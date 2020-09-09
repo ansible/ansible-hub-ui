@@ -81,4 +81,7 @@ export class Constants {
     Community: 'community',
     Published: 'published',
   };
+
+  static ALLOWEDREPOS = ['automation-hub', 'community', 'published'];
+  static DEAFAULTREPO = 'Red Hat Certified';
 }

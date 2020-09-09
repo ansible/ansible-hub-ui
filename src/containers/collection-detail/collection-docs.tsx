@@ -1,7 +1,12 @@
 import * as React from 'react';
 import './collection-detail.scss';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { HashLink } from 'react-router-hash-link';
 
@@ -45,23 +50,45 @@ class CollectionDocs extends React.Component<
     this.state = {
       collection: undefined,
       params: params,
+      repo: props.match.params.repo,
     };
 
     this.docsRef = React.createRef();
   }
 
   componentDidMount() {
+    const { repo } = this.state;
+    if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
+      if (!repo) {
+        this.context.setRepo(Constants.DEAFAULTREPO);
+        this.setState({ repo: Constants.DEAFAULTREPO });
+      } else if (!Constants.ALLOWEDREPOS.includes(repo)) {
+        this.setState({ redirect: true });
+      } else if (
+        repo !== Constants.REPOSITORYNAMES[this.context.selectedRepo]
+      ) {
+        const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
+          key => Constants.REPOSITORYNAMES[key] === repo,
+        );
+        this.context.setRepo(newRepoName);
+        this.setState({ repo: newRepoName });
+      }
+    }
+
     this.loadCollection(this.context.selectedRepo);
   }
 
   render() {
-    const { params, collection } = this.state;
+    const { params, collection, redirect } = this.state;
     const urlFields = this.props.match.params;
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
+    if (redirect) {
+      return <Redirect to={Paths.notFound} />;
+    }
     // If the parser can't find anything that matches the URL, neither of
     // these variables should be set
     let displayHTML: string;
