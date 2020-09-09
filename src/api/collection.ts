@@ -4,7 +4,9 @@ import {
   CollectionDetailType,
   CollectionListType,
   CollectionUploadType,
+  UserType,
 } from '../api';
+import { Constants } from '../constants';
 import axios from 'axios';
 
 export class API extends BaseAPI {
@@ -20,11 +22,17 @@ export class API extends BaseAPI {
   }
 
   list(params?: {}, repo?: string) {
-    const path = '_ui/v1/repo/' + repo + '/';
+    const path =
+      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+        ? this.apiPath
+        : '_ui/v1/repo/' + repo + '/';
     return this.http.get(path, params);
   }
 
   listByNamespace(namespace: string, params?: {}, repo?: string) {
+    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
+      return this.list(params);
+    }
     const path = '_ui/v1/repo/' + repo + '/?namespace=' + namespace;
     return this.http.get(path, params);
   }
@@ -89,6 +97,10 @@ export class API extends BaseAPI {
     params?,
     forceReload?: boolean,
   ): Promise<CollectionDetailType> {
+    const path =
+      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+        ? `${this.apiPath}${namespace}/${name}/`
+        : `_ui/v1/repo/${repo}/${namespace}/${name}/`;
     if (
       !forceReload &&
       this.cachedCollection &&
@@ -105,7 +117,7 @@ export class API extends BaseAPI {
     } else {
       return new Promise((resolve, reject) => {
         this.http
-          .get(`_ui/v1/repo/${repo}/${namespace}/${name}/`, {
+          .get(path, {
             params: params,
           })
           .then(result => {
