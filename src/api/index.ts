@@ -9,7 +9,6 @@ export {
   CollectionUploadType,
   ContentSummaryType,
   CollectionVersion,
-  CertificationStatus,
 } from './response-types/collection';
 export {
   ImportListType,
