@@ -97,6 +97,7 @@ export class Routes extends React.Component<{}> {
     { comp: Partners, path: Paths.partners },
     { comp: EditNamespace, path: Paths.editNamespace },
     { comp: ManageNamespace, path: Paths.myCollections },
+    { comp: ManageNamespace, path: Paths.myCollectionsByRepo },
     { comp: MyNamespaces, path: Paths.myNamespaces },
     { comp: LoginPage, path: Paths.login, noAuth: true },
     { comp: CollectionDocs, path: Paths.collectionDocsPage },

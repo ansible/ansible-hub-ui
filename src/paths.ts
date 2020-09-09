@@ -18,6 +18,7 @@ export enum Paths {
   groupList = '/group-list',
   groupDetail = '/group/:group',
   myCollections = '/my-namespaces/:namespace',
+  myCollectionsByRepo = '/repo/:repo/my-namespaces/:namespace',
   myNamespaces = '/my-namespaces',
   editNamespace = '/my-namespaces/edit/:namespace',
   myImports = '/my-imports',
