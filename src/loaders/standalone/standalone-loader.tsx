@@ -122,18 +122,32 @@ class App extends React.Component<RouteComponentProps, IState> {
                     selections={this.state.selectedRepo}
                     isPlain={false}
                     onToggle={isExpanded => {
-                      console.log('Expand ' + isExpanded);
                       this.setState({ selectExpanded: isExpanded });
                     }}
-                    onSelect={(event, value) =>
-                      this.setState({ selectedRepo: value.toString() })
-                    }
+                    onSelect={(event, value) => {
+                      const originalRepo = this.state.selectedRepo;
+                      this.setState({
+                        selectedRepo: value.toString(),
+                        selectExpanded: false,
+                      });
+                      if (
+                        location.href.includes(
+                          Constants.REPOSITORYNAMES[originalRepo],
+                        )
+                      ) {
+                        let newUrl = location.href.replace(
+                          Constants.REPOSITORYNAMES[originalRepo],
+                          Constants.REPOSITORYNAMES[value.toString()],
+                        );
+                        location.href = newUrl;
+                      }
+                    }}
                   >
+                    <SelectOption key={'published'} value={'Published'} />
                     <SelectOption
                       key={'rh-certified'}
                       value={'Red Hat Certified'}
                     />
-                    <SelectOption key={'published'} value={'Published'} />
                     <SelectOption key={'community'} value={'Community'} />
                   </Select>
                 </NavItem>
