@@ -294,6 +294,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
     MySyncListAPI.update(synclist.id, synclist).then(response => {
       this.setState({ synclist: response.data });
+      MySyncListAPI.curate(synclist.id).then(() => null);
     });
   }
 
@@ -303,7 +304,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       el => el.name === name && el.namespace === namespace,
     );
 
-    if (synclist.policy === 'allowlist') {
+    if (synclist.policy === 'include') {
       return !(found === undefined);
     } else {
       return found === undefined;
