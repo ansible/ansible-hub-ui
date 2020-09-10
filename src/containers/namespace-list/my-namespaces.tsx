@@ -8,14 +8,10 @@ import { Constants } from '../../constants';
 
 class MyNamespaces extends React.Component<RouteComponentProps, {}> {
   render() {
-    const path =
-      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-        ? Paths.myCollections
-        : Paths.myCollectionsByRepo;
     return (
       <NamespaceList
         {...this.props}
-        namespacePath={path}
+        namespacePath={Paths.myCollectionsByRepo}
         title='My namespaces'
         filterOwner={true}
       />

@@ -40,17 +40,6 @@ export class CollectionCard extends React.Component<IProps> {
 
     const company = namespace.company || namespace.name;
     const contentSummary = convertContentSummaryCounts(latest_version.contents);
-    const path =
-      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-        ? formatPath(Paths.collection, {
-            collection: name,
-            namespace: namespace.name,
-          })
-        : formatPath(Paths.collectionByRepo, {
-            collection: name,
-            namespace: namespace.name,
-            repo: Constants.REPOSITORYNAMES[repo],
-          });
 
     return (
       <Card className={cx('collection-card-container', className)}>
@@ -71,7 +60,15 @@ export class CollectionCard extends React.Component<IProps> {
         </CardHeader>
         <CardHeader>
           <div className='name'>
-            <Link to={path}>{name}</Link>
+            <Link
+              to={formatPath(Paths.collectionByRepo, {
+                collection: name,
+                namespace: namespace.name,
+                repo: Constants.REPOSITORYNAMES[repo],
+              })}
+            >
+              {name}
+            </Link>
           </div>
           <div className='author'>
             <TextContent>
