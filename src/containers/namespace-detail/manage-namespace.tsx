@@ -5,7 +5,11 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { NamespaceDetail } from './namespace-detail';
 import { Paths } from '../../paths';
 
-class ManageNamespace extends React.Component<RouteComponentProps> {
+interface IProps extends RouteComponentProps {
+  selectedRepo: string;
+}
+
+class ManageNamespace extends React.Component<IProps> {
   render() {
     return (
       <NamespaceDetail

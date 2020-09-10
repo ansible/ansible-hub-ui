@@ -36,11 +36,12 @@ import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
 import { Constants } from '../../constants';
 
+interface IProps extends RouteComponentProps {
+  selectedRepo: string;
+}
+
 // renders markdown files in collection docs/ directory
-class CollectionDocs extends React.Component<
-  RouteComponentProps,
-  IBaseCollectionState
-> {
+class CollectionDocs extends React.Component<IProps, IBaseCollectionState> {
   docsRef: any;
 
   constructor(props) {
@@ -76,6 +77,12 @@ class CollectionDocs extends React.Component<
     }
 
     this.loadCollection(this.context.selectedRepo);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedRepo !== this.props.selectedRepo) {
+      this.loadCollection(this.context.selectedRepo);
+    }
   }
 
   render() {

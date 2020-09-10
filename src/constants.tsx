@@ -77,7 +77,7 @@ export class Constants {
   ];
   static DOWNSTREAM_HOSTS = ['cloud.redhat.com'];
   static REPOSITORYNAMES = {
-    'Red Hat Certified': 'rh-certified',
+    'Red Hat Certified': 'automation-hub',
     Community: 'community',
     Published: 'published',
     'Automation Hub': 'automation-hub',

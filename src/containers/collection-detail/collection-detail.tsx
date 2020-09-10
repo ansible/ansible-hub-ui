@@ -15,9 +15,12 @@ import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
 import { Constants } from '../../constants';
 
+interface IProps extends RouteComponentProps {
+  selectedRepo: string;
+}
 // renders collection level information
 class CollectionDetail extends React.Component<
-  RouteComponentProps,
+  IProps,
   IBaseCollectionState,
   Redirect
 > {
@@ -53,6 +56,12 @@ class CollectionDetail extends React.Component<
       }
     }
     this.loadCollection(this.context.selectedRepo);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedRepo !== this.props.selectedRepo) {
+      this.loadCollection(this.context.selectedRepo);
+    }
   }
 
   render() {

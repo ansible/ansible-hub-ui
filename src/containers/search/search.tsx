@@ -55,13 +55,19 @@ interface IState {
   synclist: SyncListType;
   redirect: boolean;
   repo: string;
+  selectedRepo: string;
 }
 
-class Search extends React.Component<RouteComponentProps, IState> {
+interface IProps extends RouteComponentProps {
+  selectedRepo: string;
+}
+
+class Search extends React.Component<IProps, IState> {
   tags: string[];
 
   constructor(props) {
     super(props);
+    console.log(props);
 
     const params = ParamHelper.parseParamString(props.location.search, [
       'page',
@@ -88,6 +94,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       synclist: undefined,
       redirect: false,
       repo: props.location.pathname.split('/')[2],
+      selectedRepo: props.selectedRepo,
     };
   }
 
@@ -114,6 +121,12 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE)
       this.getSynclist();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedRepo !== this.props.selectedRepo) {
+      this.queryCollections();
+    }
   }
 
   render() {

@@ -143,7 +143,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                       }
                     }}
                   >
-                    <SelectOption key={'published'} value={'Published'} />
+                    <SelectOption key={'published'} value={'Published'}/>
                     <SelectOption
                       key={'rh-certified'}
                       value={'Red Hat Certified'}
@@ -202,7 +202,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
     return this.ctx(
       <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
-        <Routes />
+        <Routes selectedRepo={this.state.selectedRepo} />
       </Page>,
     );
   }

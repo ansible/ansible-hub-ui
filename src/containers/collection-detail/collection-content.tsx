@@ -15,11 +15,12 @@ import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
 import { Constants } from '../../constants';
 
+interface IProps extends RouteComponentProps {
+  selectedRepo: string;
+}
+
 // renders list of contents in a collection
-class CollectionContent extends React.Component<
-  RouteComponentProps,
-  IBaseCollectionState
-> {
+class CollectionContent extends React.Component<IProps, IBaseCollectionState> {
   constructor(props) {
     super(props);
 
@@ -51,6 +52,12 @@ class CollectionContent extends React.Component<
       }
     }
     this.loadCollection(this.context.selectedRepo);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedRepo !== this.props.selectedRepo) {
+      this.loadCollection(this.context.selectedRepo);
+    }
   }
 
   render() {

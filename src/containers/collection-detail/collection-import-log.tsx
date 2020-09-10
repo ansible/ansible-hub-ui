@@ -24,7 +24,11 @@ interface IState extends IBaseCollectionState {
   apiError: string;
 }
 
-class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
+interface IProps extends RouteComponentProps {
+  selectedRepo: string;
+}
+
+class CollectionImportLog extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
@@ -60,6 +64,12 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
       }
     }
     this.loadData();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedRepo !== this.props.selectedRepo) {
+      this.loadData();
+    }
   }
 
   render() {

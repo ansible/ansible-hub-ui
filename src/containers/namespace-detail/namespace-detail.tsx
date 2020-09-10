@@ -57,6 +57,7 @@ interface IState {
 interface IProps extends RouteComponentProps {
   showControls: boolean;
   breadcrumbs: { name: string; url?: string }[];
+  selectedRepo: string;
 }
 
 export class NamespaceDetail extends React.Component<IProps, IState> {
@@ -107,6 +108,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       }
     }
     this.loadAll();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedRepo !== this.props.selectedRepo) {
+      this.loadAll();
+    }
   }
 
   render() {

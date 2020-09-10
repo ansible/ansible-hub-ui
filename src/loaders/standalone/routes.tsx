@@ -34,6 +34,7 @@ import { Paths, formatPath } from '../../paths';
 interface IProps extends RouteComponentProps {
   Component: any;
   noAuth: boolean;
+  selectedRepo: string;
 }
 interface IState {
   isLoading: boolean;
@@ -73,12 +74,13 @@ class AuthHandler extends React.Component<IProps, IState> {
         ></Redirect>
       );
     }
-
-    return <Component {...props}></Component>;
+    return (
+      <Component selectedRepo={this.props.selectedRepo} {...props}></Component>
+    );
   }
 }
 
-export class Routes extends React.Component<{}> {
+export class Routes extends React.Component<any> {
   static contextType = AppContext;
 
   routes = [
@@ -128,6 +130,7 @@ export class Routes extends React.Component<{}> {
               <AuthHandler
                 noAuth={route.noAuth}
                 Component={route.comp}
+                selectedRepo={this.props.selectedRepo}
                 {...props}
               ></AuthHandler>
             )}
