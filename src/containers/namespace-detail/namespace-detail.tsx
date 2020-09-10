@@ -263,8 +263,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private loadCollections() {
-    CollectionAPI.listByNamespace(
-      this.state.params.namespace,
+    CollectionAPI.list(
       {
         ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
       },
@@ -279,8 +278,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   private loadAll() {
     Promise.all([
-      CollectionAPI.listByNamespace(
-        this.state.params.namespace,
+      CollectionAPI.list(
         {
           ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
         },

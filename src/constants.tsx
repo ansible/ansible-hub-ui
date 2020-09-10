@@ -80,8 +80,14 @@ export class Constants {
     'Red Hat Certified': 'rh-certified',
     Community: 'community',
     Published: 'published',
+    'Automation Hub': 'automation-hub',
   };
 
-  static ALLOWEDREPOS = ['automation-hub', 'community', 'published'];
-  static DEAFAULTREPO = 'Red Hat Certified';
+  static ALLOWEDREPOS = [
+    'automation-hub',
+    'community',
+    'published',
+    'rh-certified',
+  ];
+  static DEAFAULTREPO = 'Published';
 }

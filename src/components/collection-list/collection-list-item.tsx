@@ -57,22 +57,18 @@ export class CollectionListItem extends React.Component<IProps, {}> {
 
     const contentSummary = convertContentSummaryCounts(latest_version.contents);
 
-    const path =
-      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-        ? formatPath(Paths.collection, {
-            collection: name,
-            namespace: namespace.name,
-          })
-        : formatPath(Paths.collectionByRepo, {
-            collection: name,
-            namespace: namespace.name,
-            repo: Constants.REPOSITORYNAMES[repo],
-          });
-
     cells.push(
       <DataListCell key='content'>
         <div>
-          <Link to={path}>{name}</Link>
+          <Link
+            to={formatPath(Paths.collectionByRepo, {
+              collection: name,
+              namespace: namespace.name,
+              repo: Constants.REPOSITORYNAMES[repo],
+            })}
+          >
+            {name}
+          </Link>
           {deprecated && <DeprecatedTag />}
           {showNamespace ? (
             <TextContent>

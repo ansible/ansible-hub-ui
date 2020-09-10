@@ -229,31 +229,25 @@ class CollectionDocs extends React.Component<
         </a>
       );
     } else {
-      const path =
-        DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-          ? formatPath(
-              Paths.collectionDocsPage,
-              {
-                namespace: collection.namespace.name,
-                collection: collection.name,
-                page: sanitizeDocsUrls(href),
-              },
-              params,
-            )
-          : formatPath(
-              Paths.collectionDocsPageByRepo,
-              {
-                namespace: collection.namespace.name,
-                collection: collection.name,
-                page: sanitizeDocsUrls(href),
-                repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
-              },
-              params,
-            );
       // TODO: right now this will break if people put
       // ../ at the front of their urls. Need to find a
       // way to document this
-      return <Link to={path}>{name}</Link>;
+      return (
+        <Link
+          to={formatPath(
+            Paths.collectionDocsPageByRepo,
+            {
+              namespace: collection.namespace.name,
+              collection: collection.name,
+              page: sanitizeDocsUrls(href),
+              repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+            },
+            params,
+          )}
+        >
+          {name}
+        </Link>
+      );
     }
   }
 
@@ -263,30 +257,23 @@ class CollectionDocs extends React.Component<
     );
 
     if (module) {
-      const path =
-        DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-          ? formatPath(
-              Paths.collectionContentDocs,
-              {
-                namespace: collection.namespace.name,
-                collection: collection.name,
-                type: 'module',
-                name: moduleName,
-              },
-              params,
-            )
-          : formatPath(
-              Paths.collectionContentDocs,
-              {
-                namespace: collection.namespace.name,
-                collection: collection.name,
-                type: 'module',
-                name: moduleName,
-                repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
-              },
-              params,
-            );
-      return <Link to={path}>{moduleName}</Link>;
+      return (
+        <Link
+          to={formatPath(
+            Paths.collectionContentDocsByRepo,
+            {
+              namespace: collection.namespace.name,
+              collection: collection.name,
+              type: 'module',
+              name: moduleName,
+              repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+            },
+            params,
+          )}
+        >
+          {moduleName}
+        </Link>
+      );
     } else {
       return moduleName;
     }

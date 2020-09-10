@@ -125,104 +125,64 @@ export class CollectionHeader extends React.Component<IProps> {
     // We're not using the Tab react component because they don't support
     // links.
     const { params, repo } = this.props;
-    let collectionPath;
-    let collectionDocsIndexPath;
-    let collectionContentListPath;
-    let collectionImportLog;
-
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      collectionPath = formatPath(
-        Paths.collection,
-        {
-          namespace: this.props.collection.namespace.name,
-          collection: this.props.collection.name,
-        },
-        ParamHelper.getReduced(params, this.ignorParams),
-      );
-      collectionDocsIndexPath = formatPath(
-        Paths.collectionDocsIndex,
-        {
-          namespace: this.props.collection.namespace.name,
-          collection: this.props.collection.name,
-        },
-        ParamHelper.getReduced(params, this.ignorParams),
-      );
-      collectionContentListPath = formatPath(
-        Paths.collectionContentList,
-        {
-          namespace: this.props.collection.namespace.name,
-          collection: this.props.collection.name,
-        },
-        ParamHelper.getReduced(params, this.ignorParams),
-      );
-      collectionImportLog = formatPath(
-        Paths.collectionImportLog,
-        {
-          namespace: this.props.collection.namespace.name,
-          collection: this.props.collection.name,
-        },
-        ParamHelper.getReduced(params, this.ignorParams),
-      );
-    } else {
-      collectionPath = formatPath(
-        Paths.collectionByRepo,
-        {
-          namespace: this.props.collection.namespace.name,
-          collection: this.props.collection.name,
-          repo: Constants.REPOSITORYNAMES[repo],
-        },
-        ParamHelper.getReduced(params, this.ignorParams),
-      );
-      collectionDocsIndexPath = formatPath(
-        Paths.collectionDocsIndexByRepo,
-        {
-          namespace: this.props.collection.namespace.name,
-          collection: this.props.collection.name,
-          repo: Constants.REPOSITORYNAMES[repo],
-        },
-        ParamHelper.getReduced(params, this.ignorParams),
-      );
-      collectionContentListPath = formatPath(
-        Paths.collectionContentListByRepo,
-        {
-          namespace: this.props.collection.namespace.name,
-          collection: this.props.collection.name,
-          repo: Constants.REPOSITORYNAMES[repo],
-        },
-        ParamHelper.getReduced(params, this.ignorParams),
-      );
-      collectionImportLog = formatPath(
-        Paths.collectionImportLogByRepo,
-        {
-          namespace: this.props.collection.namespace.name,
-          collection: this.props.collection.name,
-          repo: Constants.REPOSITORYNAMES[repo],
-        },
-        ParamHelper.getReduced(params, this.ignorParams),
-      );
-    }
 
     return (
       <div className='pf-c-tabs' id='primary'>
         <ul className='pf-c-tabs__list'>
-          {this.renderTab(active === 'details', 'Details', collectionPath)}
+          {this.renderTab(
+            active === 'details',
+            'Details',
+            formatPath(
+              Paths.collectionByRepo,
+              {
+                namespace: this.props.collection.namespace.name,
+                collection: this.props.collection.name,
+                repo: Constants.REPOSITORYNAMES[repo],
+              },
+              ParamHelper.getReduced(params, this.ignorParams),
+            ),
+          )}
 
           {this.renderTab(
             active === 'documentation',
             'Documentation',
-            collectionDocsIndexPath,
+            formatPath(
+              Paths.collectionDocsIndexByRepo,
+              {
+                namespace: this.props.collection.namespace.name,
+                collection: this.props.collection.name,
+                repo: Constants.REPOSITORYNAMES[repo],
+              },
+              ParamHelper.getReduced(params, this.ignorParams),
+            ),
           )}
 
           {this.renderTab(
             active === 'contents',
             'Contents',
-            collectionContentListPath,
+            formatPath(
+              Paths.collectionContentListByRepo,
+              {
+                namespace: this.props.collection.namespace.name,
+                collection: this.props.collection.name,
+                repo: Constants.REPOSITORYNAMES[repo],
+              },
+              ParamHelper.getReduced(params, this.ignorParams),
+            ),
           )}
 
           {this.renderTab(
             active === 'import-log',
             'Import log',
-            collectionImportLog,
+            formatPath(
+              Paths.collectionImportLogByRepo,
+              {
+                namespace: this.props.collection.namespace.name,
+                collection: this.props.collection.name,
+                repo: Constants.REPOSITORYNAMES[repo],
+              },
+              ParamHelper.getReduced(params, this.ignorParams),
+            ),
           )}
         </ul>
       </div>
