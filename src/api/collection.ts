@@ -20,8 +20,10 @@ export class API extends BaseAPI {
     // new MockCollection(this.http, this.apiPath);
   }
 
-  list(params?: {}, repo?: string) {
-    const path = '_ui/v1/repo/' + repo + '/';
+  list(params?: any, repo?: string) {
+    const path = !params.namespace
+      ? '_ui/v1/repo/' + repo + '/'
+      : '_ui/v1/repo/' + repo + '/?namespace=' + params.namespace;
     return this.http.get(path, params);
   }
 
