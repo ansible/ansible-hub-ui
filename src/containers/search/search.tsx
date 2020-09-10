@@ -294,6 +294,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
     MySyncListAPI.update(synclist.id, synclist).then(response => {
       this.setState({ synclist: response.data });
+      MySyncListAPI.curate(synclist.id).then(() => null);
     });
   }
 
