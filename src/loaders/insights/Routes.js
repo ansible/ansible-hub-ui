@@ -197,31 +197,6 @@ export const Routes = props => {
         rootClass='root'
       />
       <InsightsRoute
-        path={Paths.collectionDocsPage}
-        component={CollectionDocs}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionDocsIndex}
-        component={CollectionDocs}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionContentDocs}
-        component={CollectionDocs}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionContentList}
-        component={CollectionContent}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionImportLog}
-        component={CollectionImportLog}
-        rootClass='root'
-      />
-      <InsightsRoute
         path={Paths.collectionDocsPageByRepo}
         component={CollectionDocs}
         rootClass='root'
@@ -247,6 +222,41 @@ export const Routes = props => {
         rootClass='root'
       />
       <InsightsRoute
+        path={Paths.collectionByRepo}
+        component={CollectionDetail}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.searchByRepo}
+        component={Search}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionDocsPage}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionDocsIndex}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionContentDocs}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionContentList}
+        component={CollectionContent}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionImportLog}
+        component={CollectionImportLog}
+        rootClass='root'
+      />
+      <InsightsRoute
         path={Paths.myImports}
         component={MyImports}
         rootClass='root'
@@ -257,21 +267,11 @@ export const Routes = props => {
         rootClass='root'
       />
       <InsightsRoute
-        path={Paths.collectionByRepo}
-        component={CollectionDetail}
-        rootClass='root'
-      />
-      <InsightsRoute
         path={Paths.namespace}
         component={PartnerDetail}
         rootClass='root'
       />
       <InsightsRoute path={Paths.search} component={Search} rootClass='root' />
-      <InsightsRoute
-        path={Paths.searchByRepo}
-        component={Search}
-        rootClass='root'
-      />
       {/* Finally, catch all unmatched routes */}
       <Route
         render={() =>

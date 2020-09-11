@@ -9,7 +9,7 @@ import {
 import axios from 'axios';
 
 export class API extends BaseAPI {
-  apiPath = this.getUIPath('collections/');
+  apiPath = this.getUIPath('repo/');
   cachedCollection: CollectionDetailType;
 
   constructor() {
@@ -21,7 +21,7 @@ export class API extends BaseAPI {
   }
 
   list(params?: any, repo?: string) {
-    const path = '_ui/v1/repo/' + repo + '/';
+    const path = this.apiPath + repo + '/';
     return super.list(params, path);
   }
 
@@ -85,7 +85,7 @@ export class API extends BaseAPI {
     params?,
     forceReload?: boolean,
   ): Promise<CollectionDetailType> {
-    const path = `_ui/v1/repo/${repo}/${namespace}/${name}/`;
+    const path = `${this.apiPath}${repo}/${namespace}/${name}/`;
     if (
       !forceReload &&
       this.cachedCollection &&

@@ -51,8 +51,6 @@ class CollectionImportLog extends React.Component<IProps, IState> {
       if (!repo) {
         this.context.setRepo(Constants.DEAFAULTREPO);
         this.setState({ repo: Constants.DEAFAULTREPO });
-      } else if (!Constants.ALLOWEDREPOS.includes(repo)) {
-        this.setState({ redirect: true });
       } else if (
         repo !== Constants.REPOSITORYNAMES[this.context.selectedRepo]
       ) {
@@ -63,12 +61,28 @@ class CollectionImportLog extends React.Component<IProps, IState> {
         this.setState({ repo: newRepoName });
       }
     }
+    if (!!repo && !Constants.ALLOWEDREPOS.includes(repo)) {
+      this.setState({ redirect: true });
+    }
     this.loadData();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.selectedRepo !== this.props.selectedRepo) {
       this.loadData();
+    }
+    if (
+      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
+      !location.href.includes('repo')
+    ) {
+      location.href =
+        location.origin +
+        location.pathname.replace(
+          '/ui/',
+          '/ui/repo/' +
+            Constants.REPOSITORYNAMES[this.context.selectedRepo] +
+            '/',
+        );
     }
   }
 

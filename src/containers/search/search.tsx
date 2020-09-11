@@ -104,8 +104,6 @@ class Search extends React.Component<IProps, IState> {
       if (!repo) {
         this.context.setRepo(Constants.DEAFAULTREPO);
         this.setState({ repo: Constants.DEAFAULTREPO });
-      } else if (!Constants.ALLOWEDREPOS.includes(repo)) {
-        this.setState({ redirect: true });
       } else if (
         repo !== Constants.REPOSITORYNAMES[this.context.selectedRepo]
       ) {
@@ -117,6 +115,10 @@ class Search extends React.Component<IProps, IState> {
       }
     }
 
+    if (!!repo && !Constants.ALLOWEDREPOS.includes(repo)) {
+      this.setState({ redirect: true });
+    }
+
     this.queryCollections();
 
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE)
@@ -126,6 +128,17 @@ class Search extends React.Component<IProps, IState> {
   componentDidUpdate(prevProps) {
     if (prevProps.selectedRepo !== this.props.selectedRepo) {
       this.queryCollections();
+    }
+    if (
+      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
+      !location.href.includes('repo')
+    ) {
+      location.href =
+        location.origin +
+        location.pathname.replace(
+          '/',
+          '/repo/' + Constants.REPOSITORYNAMES[this.context.selectedRepo] + '/',
+        );
     }
   }
 
