@@ -4,11 +4,12 @@ import {
   CollectionDetailType,
   CollectionListType,
   CollectionUploadType,
+  UserType,
 } from '../api';
 import axios from 'axios';
 
 export class API extends BaseAPI {
-  apiPath = this.getUIPath('collections/');
+  apiPath = this.getUIPath('repo/');
   cachedCollection: CollectionDetailType;
 
   constructor() {
@@ -17,6 +18,11 @@ export class API extends BaseAPI {
     // Comment this out to make an actual API request
     // mocked responses will be removed when a real API is available
     // new MockCollection(this.http, this.apiPath);
+  }
+
+  list(params?: any, repo?: string) {
+    const path = this.apiPath + repo + '/';
+    return super.list(params, path);
   }
 
   setDeprecation(collection: CollectionListType, isDeprecated: boolean) {
@@ -75,9 +81,11 @@ export class API extends BaseAPI {
   getCached(
     namespace,
     name,
+    repo,
     params?,
     forceReload?: boolean,
   ): Promise<CollectionDetailType> {
+    const path = `${this.apiPath}${repo}/${namespace}/${name}/`;
     if (
       !forceReload &&
       this.cachedCollection &&
@@ -94,7 +102,7 @@ export class API extends BaseAPI {
     } else {
       return new Promise((resolve, reject) => {
         this.http
-          .get(`${this.apiPath}${namespace}/${name}/`, {
+          .get(path, {
             params: params,
           })
           .then(result => {

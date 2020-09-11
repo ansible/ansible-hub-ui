@@ -228,6 +228,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             <NamespaceCard
               namespaceURL={formatPath(namespacePath, {
                 namespace: ns.name,
+                repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
               })}
               key={i}
               {...ns}

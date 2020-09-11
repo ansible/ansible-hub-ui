@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 
 import {
@@ -12,12 +12,15 @@ import {
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from '../../utilities/param-helper';
 import { formatPath, Paths } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
+import { Constants } from '../../constants';
+
+interface IProps extends RouteComponentProps {
+  selectedRepo: string;
+}
 
 // renders list of contents in a collection
-class CollectionContent extends React.Component<
-  RouteComponentProps,
-  IBaseCollectionState
-> {
+class CollectionContent extends React.Component<IProps, IBaseCollectionState> {
   constructor(props) {
     super(props);
 
@@ -26,18 +29,46 @@ class CollectionContent extends React.Component<
     this.state = {
       collection: undefined,
       params: params,
+      repo: props.match.params.repo,
     };
   }
 
   componentDidMount() {
-    this.loadCollection();
+    const { repo } = this.state;
+    if (!!repo && !Constants.ALLOWEDREPOS.includes(repo)) {
+      this.setState({ redirect: true });
+    }
+    this.loadCollection(this.context.selectedRepo);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedRepo !== this.props.selectedRepo) {
+      this.loadCollection(this.context.selectedRepo);
+    }
+    if (
+      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
+      !location.href.includes('repo')
+    ) {
+      location.href =
+        location.origin +
+        location.pathname.replace(
+          '/ui/',
+          '/ui/repo/' +
+            Constants.REPOSITORYNAMES[this.context.selectedRepo] +
+            '/',
+        );
+    }
   }
 
   render() {
-    const { collection, params } = this.state;
+    const { collection, params, redirect } = this.state;
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
+    }
+
+    if (redirect) {
+      return <Redirect to={Paths.notFound} />;
     }
 
     const breadcrumbs = [
@@ -64,10 +95,13 @@ class CollectionContent extends React.Component<
           collection={collection}
           params={params}
           updateParams={params =>
-            this.updateParams(params, () => this.loadCollection(true))
+            this.updateParams(params, () =>
+              this.loadCollection(this.context.selectedRepo, true),
+            )
           }
           breadcrumbs={breadcrumbs}
           activeTab='contents'
+          repo={this.context.selectedRepo}
         />
         <Main>
           <Section className='body'>
@@ -94,3 +128,5 @@ class CollectionContent extends React.Component<
 }
 
 export default withRouter(CollectionContent);
+
+CollectionContent.contextType = AppContext;

@@ -10,6 +10,7 @@ import { BaseHeader, Breadcrumbs, APIButton } from '../../components';
 import { CollectionDetailType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper } from '../../utilities/param-helper';
+import { Constants } from '../../constants';
 
 interface IProps {
   collection: CollectionDetailType;
@@ -23,6 +24,7 @@ interface IProps {
   }[];
   activeTab: string;
   className?: string;
+  repo?: string;
 }
 
 export class CollectionHeader extends React.Component<IProps> {
@@ -122,7 +124,7 @@ export class CollectionHeader extends React.Component<IProps> {
   private renderTabs(active) {
     // We're not using the Tab react component because they don't support
     // links.
-    const { params } = this.props;
+    const { params, repo } = this.props;
 
     return (
       <div className='pf-c-tabs' id='primary'>
@@ -131,10 +133,11 @@ export class CollectionHeader extends React.Component<IProps> {
             active === 'details',
             'Details',
             formatPath(
-              Paths.collection,
+              Paths.collectionByRepo,
               {
                 namespace: this.props.collection.namespace.name,
                 collection: this.props.collection.name,
+                repo: Constants.REPOSITORYNAMES[repo],
               },
               ParamHelper.getReduced(params, this.ignorParams),
             ),
@@ -144,10 +147,11 @@ export class CollectionHeader extends React.Component<IProps> {
             active === 'documentation',
             'Documentation',
             formatPath(
-              Paths.collectionDocsIndex,
+              Paths.collectionDocsIndexByRepo,
               {
                 namespace: this.props.collection.namespace.name,
                 collection: this.props.collection.name,
+                repo: Constants.REPOSITORYNAMES[repo],
               },
               ParamHelper.getReduced(params, this.ignorParams),
             ),
@@ -157,10 +161,11 @@ export class CollectionHeader extends React.Component<IProps> {
             active === 'contents',
             'Contents',
             formatPath(
-              Paths.collectionContentList,
+              Paths.collectionContentListByRepo,
               {
                 namespace: this.props.collection.namespace.name,
                 collection: this.props.collection.name,
+                repo: Constants.REPOSITORYNAMES[repo],
               },
               ParamHelper.getReduced(params, this.ignorParams),
             ),
@@ -170,10 +175,11 @@ export class CollectionHeader extends React.Component<IProps> {
             active === 'import-log',
             'Import log',
             formatPath(
-              Paths.collectionImportLog,
+              Paths.collectionImportLogByRepo,
               {
                 namespace: this.props.collection.namespace.name,
                 collection: this.props.collection.name,
+                repo: Constants.REPOSITORYNAMES[repo],
               },
               ParamHelper.getReduced(params, this.ignorParams),
             ),
