@@ -7,7 +7,14 @@ import { Link } from 'react-router-dom';
 import { Spinner } from '@redhat-cloud-services/frontend-components';
 
 import { formatPath, Paths } from '../../paths';
-import { ImportListType, ImportDetailType, PulpStatus } from '../../api';
+import {
+  ImportListType,
+  ImportDetailType,
+  PulpStatus,
+  CollectionVersion,
+} from '../../api';
+
+import { Constants } from '../../constants';
 
 interface IProps {
   task: ImportDetailType;
@@ -18,6 +25,7 @@ interface IProps {
 
   setFollowMessages: (follow: boolean) => void;
   hideCollectionName?: boolean;
+  collectionVersion?: CollectionVersion;
 }
 
 export class ImportConsole extends React.Component<IProps, {}> {
@@ -119,33 +127,55 @@ export class ImportConsole extends React.Component<IProps, {}> {
   }
 
   private renderTitle(selectedImport) {
-    const { task, hideCollectionName } = this.props;
+    const { task, hideCollectionName, collectionVersion } = this.props;
+
+    let collectionHead: any = `${selectedImport.namespace}.${selectedImport.name}`;
+    let approvalStatus = 'waiting for approval';
+
+    if (collectionVersion) {
+      const rlist = collectionVersion.repository_list;
+      if (rlist.includes(Constants.NOTCERTIFIED)) {
+        approvalStatus = 'rejected';
+      } else if (rlist.includes(Constants.NEEDSREVIEW)) {
+        approvalStatus = 'waiting for approval';
+      } else {
+        approvalStatus = 'approved';
+      }
+
+      collectionHead = (
+        <Link
+          className='title'
+          to={formatPath(
+            Paths.collectionByRepo,
+            {
+              namespace: selectedImport.namespace,
+              collection: selectedImport.name,
+              repo: rlist[0],
+            },
+            {
+              version: selectedImport.version,
+            },
+          )}
+        >
+          {selectedImport.namespace}.{selectedImport.name}
+        </Link>
+      );
+    }
+
     return (
       <div>
         {!hideCollectionName && (
-          <div className='title-container'>
-            <Link
-              className='title'
-              to={formatPath(
-                Paths.collection,
-                {
-                  namespace: selectedImport.namespace,
-                  collection: selectedImport.name,
-                },
-                {
-                  version: selectedImport.version,
-                },
-              )}
-            >
-              {selectedImport.namespace}.{selectedImport.name}
-            </Link>
-          </div>
+          <div className='title-container'>{collectionHead}</div>
         )}
 
         <div className='title-bar'>
           <div>
             <span className='data-title'>Status: </span>
             {selectedImport.state}
+          </div>
+          <div>
+            <span className='data-title'>Approval status: </span>
+            {approvalStatus}
           </div>
           <div>
             <span className='data-title'>Version: </span>
