@@ -227,6 +227,11 @@ export const Routes = props => {
         rootClass='root'
       />
       <InsightsRoute
+        path={Paths.namespace}
+        component={PartnerDetail}
+        rootClass='root'
+      />
+      <InsightsRoute
         path={Paths.searchByRepo}
         component={Search}
         rootClass='root'

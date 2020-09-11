@@ -1,7 +1,6 @@
 import * as React from 'react';
 import cx from 'classnames';
 import {
-  Badge,
   Card,
   CardHeader,
   CardBody,

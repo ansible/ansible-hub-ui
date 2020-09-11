@@ -1,12 +1,7 @@
 import * as React from 'react';
 import './collection-detail.scss';
 
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { HashLink } from 'react-router-hash-link';
 
@@ -36,12 +31,11 @@ import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
 import { Constants } from '../../constants';
 
-interface IProps extends RouteComponentProps {
-  selectedRepo: string;
-}
-
 // renders markdown files in collection docs/ directory
-class CollectionDocs extends React.Component<IProps, IBaseCollectionState> {
+class CollectionDocs extends React.Component<
+  RouteComponentProps,
+  IBaseCollectionState
+> {
   docsRef: any;
 
   constructor(props) {
@@ -51,50 +45,23 @@ class CollectionDocs extends React.Component<IProps, IBaseCollectionState> {
     this.state = {
       collection: undefined,
       params: params,
-      repo: props.match.params.repo,
     };
 
     this.docsRef = React.createRef();
   }
 
   componentDidMount() {
-    const { repo } = this.state;
-    if (!!repo && !Constants.ALLOWEDREPOS.includes(repo)) {
-      this.setState({ redirect: true });
-    }
     this.loadCollection(this.context.selectedRepo);
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.selectedRepo !== this.props.selectedRepo) {
-      this.loadCollection(this.context.selectedRepo);
-    }
-    if (
-      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
-      !location.href.includes('repo')
-    ) {
-      location.href =
-        location.origin +
-        location.pathname.replace(
-          '/ui/',
-          '/ui/repo/' +
-            Constants.REPOSITORYNAMES[this.context.selectedRepo] +
-            '/',
-        );
-    }
-  }
-
   render() {
-    const { params, collection, redirect } = this.state;
+    const { params, collection } = this.state;
     const urlFields = this.props.match.params;
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    if (redirect) {
-      return <Redirect to={Paths.notFound} />;
-    }
     // If the parser can't find anything that matches the URL, neither of
     // these variables should be set
     let displayHTML: string;
@@ -138,15 +105,17 @@ class CollectionDocs extends React.Component<IProps, IBaseCollectionState> {
     const breadcrumbs = [
       { url: Paths.partners, name: 'Partners' },
       {
-        url: formatPath(Paths.namespace, {
+        url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
+          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
         }),
         name: collection.namespace.name,
       },
       {
-        url: formatPath(Paths.collection, {
+        url: formatPath(Paths.collectionByRepo, {
           namespace: collection.namespace.name,
           collection: collection.name,
+          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
         }),
         name: collection.name,
       },
