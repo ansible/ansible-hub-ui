@@ -42,6 +42,12 @@ class CollectionDetail extends React.Component<
     if (!!repo && !Constants.ALLOWEDREPOS.includes(repo)) {
       this.setState({ redirect: true });
     }
+    if (repo !== Constants.REPOSITORYNAMES[this.context.selectedRepo]) {
+      const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
+        key => Constants.REPOSITORYNAMES[key] === repo,
+      );
+      this.loadCollection(newRepoName);
+    }
     this.loadCollection(this.context.selectedRepo);
   }
 
