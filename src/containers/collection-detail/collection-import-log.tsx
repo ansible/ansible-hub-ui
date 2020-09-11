@@ -47,20 +47,6 @@ class CollectionImportLog extends React.Component<IProps, IState> {
 
   componentDidMount() {
     const { repo } = this.state;
-    if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      if (!repo) {
-        this.context.setRepo(Constants.DEAFAULTREPO);
-        this.setState({ repo: Constants.DEAFAULTREPO });
-      } else if (
-        repo !== Constants.REPOSITORYNAMES[this.context.selectedRepo]
-      ) {
-        const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
-          key => Constants.REPOSITORYNAMES[key] === repo,
-        );
-        this.context.setRepo(newRepoName);
-        this.setState({ repo: newRepoName });
-      }
-    }
     if (!!repo && !Constants.ALLOWEDREPOS.includes(repo)) {
       this.setState({ redirect: true });
     }

@@ -1,7 +1,12 @@
 // import PropTypes from 'prop-types';
 import * as React from 'react';
 import '../app.scss';
-import { withRouter, Link, RouteComponentProps } from 'react-router-dom';
+import {
+  withRouter,
+  Link,
+  RouteComponentProps,
+  matchPath,
+} from 'react-router-dom';
 
 import '@patternfly/patternfly/patternfly.scss';
 import {
@@ -41,6 +46,21 @@ class App extends React.Component<RouteComponentProps, IState> {
       selectExpanded: false,
       selectedRepo: 'Published',
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    const match = matchPath(this.props.location.pathname, {
+      path: '/repo/:repo',
+    });
+    if (match && Constants.ALLOWEDREPOS.includes(match.params['repo'])) {
+      const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
+        key => Constants.REPOSITORYNAMES[key] === match.params['repo'],
+      );
+
+      if (newRepoName !== this.state.selectedRepo) {
+        this.setState({ selectedRepo: newRepoName });
+      }
+    }
   }
 
   render() {
