@@ -10,7 +10,7 @@ class Partners extends React.Component<RouteComponentProps, {}> {
     return (
       <NamespaceList
         {...this.props}
-        namespacePath={Paths.myCollectionsByRepo}
+        namespacePath={Paths.namespaceByRepo}
         title='Partners'
       />
     );
