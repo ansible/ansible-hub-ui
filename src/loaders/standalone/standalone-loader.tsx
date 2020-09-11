@@ -186,7 +186,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                   </NavItem>
                 )}
                 <NavItem>
-                    <Link to={Paths.repositories}>Repo Management</Link>
+                  <Link to={Paths.repositories}>Repo Management</Link>
                 </NavItem>
               </NavGroup>
             </NavList>

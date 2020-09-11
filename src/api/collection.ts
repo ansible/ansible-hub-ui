@@ -21,10 +21,8 @@ export class API extends BaseAPI {
   }
 
   list(params?: any, repo?: string) {
-    const path = !params.namespace
-      ? '_ui/v1/repo/' + repo + '/'
-      : '_ui/v1/repo/' + repo + '/?namespace=' + params.namespace;
-    return this.http.get(path, params);
+    const path = '_ui/v1/repo/' + repo + '/';
+    return super.list(params, path);
   }
 
   setDeprecation(collection: CollectionListType, isDeprecated: boolean) {

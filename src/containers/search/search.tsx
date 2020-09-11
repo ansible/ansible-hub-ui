@@ -375,10 +375,12 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
   private queryCollections() {
     this.setState({ loading: true }, () => {
-      CollectionAPI.list({
-        ...ParamHelper.getReduced(this.state.params, ['view_type']),
-        deprecated: false,
-      }, Constants.REPOSITORYNAMES[this.context.selectedRepo],
+      CollectionAPI.list(
+        {
+          ...ParamHelper.getReduced(this.state.params, ['view_type']),
+          deprecated: false,
+        },
+        Constants.REPOSITORYNAMES[this.context.selectedRepo],
       ).then(result => {
         this.setState({
           collections: result.data.data,
