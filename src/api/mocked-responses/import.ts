@@ -119,6 +119,7 @@ class ImportGenerator extends RandomGenerator {
       namespace: 'red_hat',
       name: name,
       version: `${this.randNum(5)}.${this.randNum(10)}.${this.randNum(100)}`,
+      collectionRepo: 'repo',
     };
   }
 }

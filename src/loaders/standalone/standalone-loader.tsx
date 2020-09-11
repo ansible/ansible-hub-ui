@@ -52,10 +52,16 @@ class App extends React.Component<RouteComponentProps, IState> {
     const match = matchPath(this.props.location.pathname, {
       path: '/repo/:repo',
     });
-    if (match && Constants.ALLOWEDREPOS.includes(match.params['repo'])) {
-      const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
+    if (match) {
+      let newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
         key => Constants.REPOSITORYNAMES[key] === match.params['repo'],
       );
+
+      // allowing the repo to go through even if isn't one that we support so
+      // that 404s bubble up naturally from the child components.
+      if (!newRepoName) {
+        newRepoName = match.params['repo'];
+      }
 
       if (newRepoName !== this.state.selectedRepo) {
         this.setState({ selectedRepo: newRepoName });
@@ -146,21 +152,21 @@ class App extends React.Component<RouteComponentProps, IState> {
                     }}
                     onSelect={(event, value) => {
                       const originalRepo = this.state.selectedRepo;
-                      this.setState({
-                        selectedRepo: value.toString(),
-                        selectExpanded: false,
-                      });
-                      if (
-                        location.href.includes(
-                          Constants.REPOSITORYNAMES[originalRepo],
-                        )
-                      ) {
-                        let newUrl = location.href.replace(
-                          Constants.REPOSITORYNAMES[originalRepo],
-                          Constants.REPOSITORYNAMES[value.toString()],
-                        );
-                        location.href = newUrl;
-                      }
+                      this.setState(
+                        {
+                          selectedRepo: value.toString(),
+                          selectExpanded: false,
+                        },
+                        () => {
+                          this.props.history.push(
+                            formatPath(Paths.searchByRepo, {
+                              repo: Constants.REPOSITORYNAMES[value.toString()],
+                            }),
+                          );
+                          // history.go(0) forces a reload of the page
+                          this.props.history.go(0);
+                        },
+                      );
                     }}
                   >
                     <SelectOption key={'published'} value={'Published'} />

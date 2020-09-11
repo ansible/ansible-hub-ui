@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './search.scss';
 
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   DataList,
@@ -53,21 +53,13 @@ interface IState {
   };
   loading: boolean;
   synclist: SyncListType;
-  redirect: boolean;
-  repo: string;
-  selectedRepo: string;
 }
 
-interface IProps extends RouteComponentProps {
-  selectedRepo: string;
-}
-
-class Search extends React.Component<IProps, IState> {
+class Search extends React.Component<RouteComponentProps, IState> {
   tags: string[];
 
   constructor(props) {
     super(props);
-    console.log(props);
 
     const params = ParamHelper.parseParamString(props.location.search, [
       'page',
@@ -92,62 +84,18 @@ class Search extends React.Component<IProps, IState> {
       numberOfResults: 0,
       loading: true,
       synclist: undefined,
-      redirect: false,
-      repo: props.location.pathname.split('/')[2],
-      selectedRepo: props.selectedRepo,
     };
   }
 
   componentDidMount() {
-    const { repo } = this.state;
-    if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      if (!repo) {
-        this.context.setRepo(Constants.DEAFAULTREPO);
-        this.setState({ repo: Constants.DEAFAULTREPO });
-      } else if (
-        repo !== Constants.REPOSITORYNAMES[this.context.selectedRepo]
-      ) {
-        const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
-          key => Constants.REPOSITORYNAMES[key] === repo,
-        );
-        this.context.setRepo(newRepoName);
-        this.setState({ repo: newRepoName });
-      }
-    }
-
-    if (!!repo && !Constants.ALLOWEDREPOS.includes(repo)) {
-      this.setState({ redirect: true });
-    }
-
     this.queryCollections();
 
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE)
       this.getSynclist();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.selectedRepo !== this.props.selectedRepo) {
-      this.queryCollections();
-    }
-    if (
-      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
-      !location.href.includes('repo')
-    ) {
-      location.href =
-        location.origin +
-        location.pathname.replace(
-          '/',
-          '/repo/' + Constants.REPOSITORYNAMES[this.context.selectedRepo] + '/',
-        );
-    }
-  }
-
   render() {
-    const { collections, params, numberOfResults, redirect } = this.state;
-
-    if (redirect) {
-      return <Redirect to={Paths.notFound} />;
-    }
+    const { collections, params, numberOfResults } = this.state;
 
     const tags = [
       'cloud',

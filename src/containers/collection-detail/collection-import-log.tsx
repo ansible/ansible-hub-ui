@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 
 import { ImportAPI, ImportDetailType, ImportListType } from '../../api';
@@ -24,11 +24,7 @@ interface IState extends IBaseCollectionState {
   apiError: string;
 }
 
-interface IProps extends RouteComponentProps {
-  selectedRepo: string;
-}
-
-class CollectionImportLog extends React.Component<IProps, IState> {
+class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
 
@@ -41,35 +37,11 @@ class CollectionImportLog extends React.Component<IProps, IState> {
       selectedImportDetail: undefined,
       selectedImport: undefined,
       apiError: undefined,
-      repo: props.match.params.repo,
     };
   }
 
   componentDidMount() {
-    const { repo } = this.state;
-    if (!!repo && !Constants.ALLOWEDREPOS.includes(repo)) {
-      this.setState({ redirect: true });
-    }
     this.loadData();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.selectedRepo !== this.props.selectedRepo) {
-      this.loadData();
-    }
-    if (
-      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
-      !location.href.includes('repo')
-    ) {
-      location.href =
-        location.origin +
-        location.pathname.replace(
-          '/ui/',
-          '/ui/repo/' +
-            Constants.REPOSITORYNAMES[this.context.selectedRepo] +
-            '/',
-        );
-    }
   }
 
   render() {
@@ -80,29 +52,26 @@ class CollectionImportLog extends React.Component<IProps, IState> {
       selectedImportDetail,
       selectedImport,
       apiError,
-      redirect,
     } = this.state;
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    if (redirect) {
-      return <Redirect to={Paths.notFound} />;
-    }
-
     const breadcrumbs = [
       { url: Paths.partners, name: 'Partners' },
       {
-        url: formatPath(Paths.namespace, {
+        url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
+          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
         }),
         name: collection.namespace.name,
       },
       {
-        url: formatPath(Paths.collection, {
+        url: formatPath(Paths.collectionByRepo, {
           namespace: collection.namespace.name,
           collection: collection.name,
+          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
         }),
         name: collection.name,
       },
