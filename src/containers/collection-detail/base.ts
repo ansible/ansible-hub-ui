@@ -1,5 +1,6 @@
 import { CollectionDetailType, CollectionAPI } from '../../api';
 import { Paths } from '../../paths';
+import { Constants } from '../../constants';
 
 export interface IBaseCollectionState {
   params: {
@@ -8,12 +9,19 @@ export interface IBaseCollectionState {
     keywords?: string;
   };
   collection: CollectionDetailType;
+  repo?: string;
+  redirect?: boolean;
 }
 
-export function loadCollection(forceReload = false, callback = () => null) {
+export function loadCollection(
+  repo,
+  forceReload = false,
+  callback = () => null,
+) {
   CollectionAPI.getCached(
     this.props.match.params['namespace'],
     this.props.match.params['collection'],
+    Constants.REPOSITORYNAMES[repo],
     this.state.params,
     forceReload,
   )

@@ -326,10 +326,11 @@ class CertificationDashboard extends React.Component<
         <td>
           <Link
             to={formatPath(
-              Paths.collection,
+              Paths.collectionByRepo,
               {
                 namespace: version.namespace,
                 collection: version.name,
+                repo: version.repository_list[0],
               },
               {
                 version: version.version,

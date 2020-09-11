@@ -17,17 +17,26 @@ import { NumericLabel, Logo } from '../../components';
 import { CollectionListType } from '../../api';
 import { formatPath, Paths } from '../../paths';
 import { convertContentSummaryCounts } from '../../utilities';
+import { Constants } from '../../constants';
 
 interface IProps extends CollectionListType {
   className?: string;
   footer?: React.ReactNode;
+  repo?: string;
 }
 
 export class CollectionCard extends React.Component<IProps> {
   MAX_DESCRIPTION_LENGTH = 60;
 
   render() {
-    const { name, latest_version, namespace, className, footer } = this.props;
+    const {
+      name,
+      latest_version,
+      namespace,
+      className,
+      footer,
+      repo,
+    } = this.props;
 
     const company = namespace.company || namespace.name;
     const contentSummary = convertContentSummaryCounts(latest_version.contents);
@@ -52,9 +61,10 @@ export class CollectionCard extends React.Component<IProps> {
         <CardHeader>
           <div className='name'>
             <Link
-              to={formatPath(Paths.collection, {
+              to={formatPath(Paths.collectionByRepo, {
                 collection: name,
                 namespace: namespace.name,
+                repo: Constants.REPOSITORYNAMES[repo],
               })}
             >
               {name}

@@ -1,7 +1,12 @@
 // import PropTypes from 'prop-types';
 import * as React from 'react';
 import '../app.scss';
-import { withRouter, Link, RouteComponentProps } from 'react-router-dom';
+import {
+  withRouter,
+  Link,
+  RouteComponentProps,
+  matchPath,
+} from 'react-router-dom';
 
 import '@patternfly/patternfly/patternfly.scss';
 import {
@@ -14,6 +19,9 @@ import {
   NavItem,
   DropdownItem,
   DropdownSeparator,
+  NavGroup,
+  Select,
+  SelectOption,
 } from '@patternfly/react-core';
 
 import { Routes } from './routes';
@@ -22,9 +30,12 @@ import { Paths, formatPath } from '../../paths';
 import { ActiveUserAPI, UserType } from '../../api';
 import { StatefulDropdown } from '../../components';
 import { AppContext } from '../app-context';
+import { Constants } from '../../constants';
 
 interface IState {
   user: UserType;
+  selectExpanded: boolean;
+  selectedRepo: string;
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -32,7 +43,24 @@ class App extends React.Component<RouteComponentProps, IState> {
     super(props);
     this.state = {
       user: null,
+      selectExpanded: false,
+      selectedRepo: 'Published',
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    const match = matchPath(this.props.location.pathname, {
+      path: '/repo/:repo',
+    });
+    if (match && Constants.ALLOWEDREPOS.includes(match.params['repo'])) {
+      const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
+        key => Constants.REPOSITORYNAMES[key] === match.params['repo'],
+      );
+
+      if (newRepoName !== this.state.selectedRepo) {
+        this.setState({ selectedRepo: newRepoName });
+      }
+    }
   }
 
   render() {
@@ -105,34 +133,82 @@ class App extends React.Component<RouteComponentProps, IState> {
         nav={
           <Nav theme='dark'>
             <NavList>
-              <NavItem>
-                <Link to={Paths.search}>Collections</Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths.partners}>Namespaces</Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths.myNamespaces}>My Namespaces</Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths.token}>API Token</Link>
-              </NavItem>
-              {!!user && user.model_permissions.view_user && (
-                <NavItem>
-                  <Link to={Paths.userList}>Users</Link>
+              <NavGroup title='Content'>
+                <NavItem className={'nav-select'}>
+                  <Select
+                    className='nav-select'
+                    variant='single'
+                    isOpen={this.state.selectExpanded}
+                    selections={this.state.selectedRepo}
+                    isPlain={false}
+                    onToggle={isExpanded => {
+                      this.setState({ selectExpanded: isExpanded });
+                    }}
+                    onSelect={(event, value) => {
+                      const originalRepo = this.state.selectedRepo;
+                      this.setState({
+                        selectedRepo: value.toString(),
+                        selectExpanded: false,
+                      });
+                      if (
+                        location.href.includes(
+                          Constants.REPOSITORYNAMES[originalRepo],
+                        )
+                      ) {
+                        let newUrl = location.href.replace(
+                          Constants.REPOSITORYNAMES[originalRepo],
+                          Constants.REPOSITORYNAMES[value.toString()],
+                        );
+                        location.href = newUrl;
+                      }
+                    }}
+                  >
+                    <SelectOption key={'published'} value={'Published'} />
+                    <SelectOption
+                      key={'rh-certified'}
+                      value={'Red Hat Certified'}
+                    />
+                    <SelectOption key={'community'} value={'Community'} />
+                  </Select>
                 </NavItem>
-              )}
-              <NavItem>
-                <Link to={Paths.groupList}>Groups</Link>
-              </NavItem>
-              {!!user && user.model_permissions.move_collection && (
                 <NavItem>
-                  <Link to={Paths.certificationDashboard}>Certification</Link>
+                  <Link
+                    to={Paths.searchByRepo.replace(
+                      ':repo',
+                      Constants.REPOSITORYNAMES[this.state.selectedRepo],
+                    )}
+                  >
+                    Collections
+                  </Link>
                 </NavItem>
-              )}
-              <NavItem>
-                <Link to={Paths.repositories}>Repo Management</Link>
-              </NavItem>
+                <NavItem>
+                  <Link to={Paths.partners}>Namespaces</Link>
+                </NavItem>
+                <NavItem>
+                  <Link to={Paths.myNamespaces}>My Namespaces</Link>
+                </NavItem>
+              </NavGroup>
+              <NavGroup title='Configuration'>
+                <NavItem>
+                  <Link to={Paths.token}>API Token</Link>
+                </NavItem>
+                {!!user && user.model_permissions.view_user && (
+                  <NavItem>
+                    <Link to={Paths.userList}>Users</Link>
+                  </NavItem>
+                )}
+                <NavItem>
+                  <Link to={Paths.groupList}>Groups</Link>
+                </NavItem>
+                {!!user && user.model_permissions.move_collection && (
+                  <NavItem>
+                    <Link to={Paths.certificationDashboard}>Certification</Link>
+                  </NavItem>
+                )}
+                <NavItem>
+                  <Link to={Paths.repositories}>Repo Management</Link>
+                </NavItem>
+              </NavGroup>
             </NavList>
           </Nav>
         }
@@ -146,7 +222,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
     return this.ctx(
       <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
-        <Routes />
+        <Routes selectedRepo={this.state.selectedRepo} />
       </Page>,
     );
   }
@@ -157,6 +233,8 @@ class App extends React.Component<RouteComponentProps, IState> {
         value={{
           user: this.state.user,
           setUser: this.setUser,
+          selectedRepo: this.state.selectedRepo,
+          setRepo: this.setRepo,
         }}
       >
         {component}
@@ -166,6 +244,10 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   private setUser = user => {
     this.setState({ user: user });
+  };
+
+  private setRepo = repo => {
+    this.setState({ selectedRepo: repo });
   };
 }
 

@@ -1,7 +1,12 @@
 import * as React from 'react';
 import './collection-detail.scss';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { HashLink } from 'react-router-hash-link';
 
@@ -28,12 +33,15 @@ import { RenderPluginDoc } from '@ansible/galaxy-doc-builder';
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
+import { Constants } from '../../constants';
+
+interface IProps extends RouteComponentProps {
+  selectedRepo: string;
+}
 
 // renders markdown files in collection docs/ directory
-class CollectionDocs extends React.Component<
-  RouteComponentProps,
-  IBaseCollectionState
-> {
+class CollectionDocs extends React.Component<IProps, IBaseCollectionState> {
   docsRef: any;
 
   constructor(props) {
@@ -43,23 +51,50 @@ class CollectionDocs extends React.Component<
     this.state = {
       collection: undefined,
       params: params,
+      repo: props.match.params.repo,
     };
 
     this.docsRef = React.createRef();
   }
 
   componentDidMount() {
-    this.loadCollection();
+    const { repo } = this.state;
+    if (!!repo && !Constants.ALLOWEDREPOS.includes(repo)) {
+      this.setState({ redirect: true });
+    }
+    this.loadCollection(this.context.selectedRepo);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedRepo !== this.props.selectedRepo) {
+      this.loadCollection(this.context.selectedRepo);
+    }
+    if (
+      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
+      !location.href.includes('repo')
+    ) {
+      location.href =
+        location.origin +
+        location.pathname.replace(
+          '/ui/',
+          '/ui/repo/' +
+            Constants.REPOSITORYNAMES[this.context.selectedRepo] +
+            '/',
+        );
+    }
   }
 
   render() {
-    const { params, collection } = this.state;
+    const { params, collection, redirect } = this.state;
     const urlFields = this.props.match.params;
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
+    if (redirect) {
+      return <Redirect to={Paths.notFound} />;
+    }
     // If the parser can't find anything that matches the URL, neither of
     // these variables should be set
     let displayHTML: string;
@@ -129,11 +164,14 @@ class CollectionDocs extends React.Component<
           collection={collection}
           params={params}
           updateParams={p =>
-            this.updateParams(p, () => this.loadCollection(true))
+            this.updateParams(p, () =>
+              this.loadCollection(this.context.selectedRepo, true),
+            )
           }
           breadcrumbs={breadcrumbs}
           activeTab='documentation'
           className='header'
+          repo={this.context.selectedRepo}
         />
         <Main className='main'>
           <Section className='docs-container'>
@@ -203,11 +241,12 @@ class CollectionDocs extends React.Component<
       return (
         <Link
           to={formatPath(
-            Paths.collectionDocsPage,
+            Paths.collectionDocsPageByRepo,
             {
               namespace: collection.namespace.name,
               collection: collection.name,
               page: sanitizeDocsUrls(href),
+              repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
             },
             params,
           )}
@@ -227,12 +266,13 @@ class CollectionDocs extends React.Component<
       return (
         <Link
           to={formatPath(
-            Paths.collectionContentDocs,
+            Paths.collectionContentDocsByRepo,
             {
               namespace: collection.namespace.name,
               collection: collection.name,
               type: 'module',
               name: moduleName,
+              repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
             },
             params,
           )}
@@ -270,3 +310,5 @@ class CollectionDocs extends React.Component<
 }
 
 export default withRouter(CollectionDocs);
+
+CollectionDocs.contextType = AppContext;
