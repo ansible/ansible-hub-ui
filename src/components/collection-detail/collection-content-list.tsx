@@ -13,6 +13,8 @@ import {
 import { ContentSummaryType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper } from '../../utilities/param-helper';
+import { AppContext } from '../../loaders/app-context';
+import { Constants } from '../../constants';
 
 interface IProps {
   contents: ContentSummaryType[];
@@ -27,6 +29,7 @@ interface IProps {
 
 export class CollectionContentList extends React.Component<IProps> {
   ignoredParams = ['keywords', 'showing'];
+  static contextType = AppContext;
 
   render() {
     const {
@@ -107,12 +110,14 @@ export class CollectionContentList extends React.Component<IProps> {
                 <td>
                   <Link
                     to={formatPath(
-                      Paths.collectionContentDocs,
+                      Paths.collectionContentDocsByRepo,
                       {
                         collection: collection,
                         namespace: namespace,
                         type: content.content_type,
                         name: content.name,
+                        repo:
+                          Constants.REPOSITORYNAMES[this.context.selectedRepo],
                       },
                       ParamHelper.getReduced(params, this.ignoredParams),
                     )}

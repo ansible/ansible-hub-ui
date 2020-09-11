@@ -14,6 +14,8 @@ import {
   NamespaceType,
   PulpStatus,
   MyNamespaceAPI,
+  CollectionVersion,
+  CollectionVersionAPI,
 } from '../../api';
 
 import { ParamHelper } from '../../utilities/param-helper';
@@ -22,6 +24,7 @@ interface IState {
   selectedImport: ImportListType;
   importList: ImportListType[];
   selectedImportDetails: ImportDetailType;
+  selectedCollectionVersion: CollectionVersion;
   params: {
     page_size?: number;
     page?: number;
@@ -61,6 +64,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
       followLogs: false,
       loadingImports: true,
       loadingImportDetails: true,
+      selectedCollectionVersion: undefined,
     };
   }
 
@@ -98,6 +102,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
       loadingImportDetails,
       importDetailError,
       followLogs,
+      selectedCollectionVersion,
     } = this.state;
 
     if (!importList) {
@@ -146,6 +151,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                   }}
                   selectedImport={selectedImport}
                   apiError={importDetailError}
+                  collectionVersion={selectedCollectionVersion}
                 />
               </div>
             </div>
@@ -262,8 +268,31 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
               importDetailError: '',
               loadingImportDetails: false,
               selectedImportDetails: result.data,
+              selectedCollectionVersion: undefined,
             },
-            callback,
+            () => {
+              const importDeets = this.state.selectedImportDetails;
+
+              // have to use list instead of get because repository_list isn't
+              // available on collection version details
+              CollectionVersionAPI.list({
+                namespace: importDeets.namespace,
+                name: importDeets.name,
+                version: importDeets.version,
+              })
+                .then(result => {
+                  if (result.data.meta.count === 1) {
+                    this.setState({
+                      selectedCollectionVersion: result.data.data[0],
+                    });
+                  }
+                })
+                .finally(() => {
+                  if (callback) {
+                    callback();
+                  }
+                });
+            },
           );
         })
         .catch(result => {

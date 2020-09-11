@@ -21,6 +21,8 @@ import { CollectionDetailType, CollectionAPI } from '../../api';
 import { Tag } from '../../components';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper } from '../../utilities/param-helper';
+import { AppContext } from '../../loaders/app-context';
+import { Constants } from '../../constants';
 
 interface IProps extends CollectionDetailType {
   params: {
@@ -31,6 +33,7 @@ interface IProps extends CollectionDetailType {
 
 export class CollectionInfo extends React.Component<IProps> {
   downloadLinkRef: any;
+  static contextType = AppContext;
 
   constructor(props) {
     super(props);
@@ -137,10 +140,11 @@ export class CollectionInfo extends React.Component<IProps> {
               </div>
               <Link
                 to={formatPath(
-                  Paths.collectionDocsIndex,
+                  Paths.collectionDocsIndexByRepo,
                   {
                     collection: name,
                     namespace: namespace.name,
+                    repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
                   },
                   params,
                 )}

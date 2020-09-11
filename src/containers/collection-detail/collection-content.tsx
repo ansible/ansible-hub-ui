@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 
 import {
@@ -15,12 +15,11 @@ import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
 import { Constants } from '../../constants';
 
-interface IProps extends RouteComponentProps {
-  selectedRepo: string;
-}
-
 // renders list of contents in a collection
-class CollectionContent extends React.Component<IProps, IBaseCollectionState> {
+class CollectionContent extends React.Component<
+  RouteComponentProps,
+  IBaseCollectionState
+> {
   constructor(props) {
     super(props);
 
@@ -29,60 +28,34 @@ class CollectionContent extends React.Component<IProps, IBaseCollectionState> {
     this.state = {
       collection: undefined,
       params: params,
-      repo: props.match.params.repo,
     };
   }
 
   componentDidMount() {
-    const { repo } = this.state;
-    if (!!repo && !Constants.ALLOWEDREPOS.includes(repo)) {
-      this.setState({ redirect: true });
-    }
     this.loadCollection(this.context.selectedRepo);
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.selectedRepo !== this.props.selectedRepo) {
-      this.loadCollection(this.context.selectedRepo);
-    }
-    if (
-      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
-      !location.href.includes('repo')
-    ) {
-      location.href =
-        location.origin +
-        location.pathname.replace(
-          '/ui/',
-          '/ui/repo/' +
-            Constants.REPOSITORYNAMES[this.context.selectedRepo] +
-            '/',
-        );
-    }
-  }
-
   render() {
-    const { collection, params, redirect } = this.state;
+    const { collection, params } = this.state;
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    if (redirect) {
-      return <Redirect to={Paths.notFound} />;
-    }
-
     const breadcrumbs = [
       { url: Paths.partners, name: 'Partners' },
       {
-        url: formatPath(Paths.namespace, {
+        url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
+          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
         }),
         name: collection.namespace.name,
       },
       {
-        url: formatPath(Paths.collection, {
+        url: formatPath(Paths.collectionByRepo, {
           namespace: collection.namespace.name,
           collection: collection.name,
+          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
         }),
         name: collection.name,
       },
