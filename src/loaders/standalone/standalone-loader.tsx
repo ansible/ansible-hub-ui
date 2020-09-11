@@ -143,7 +143,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                       }
                     }}
                   >
-                    <SelectOption key={'published'} value={'Published'}/>
+                    <SelectOption key={'published'} value={'Published'} />
                     <SelectOption
                       key={'rh-certified'}
                       value={'Red Hat Certified'}
