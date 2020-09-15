@@ -8,6 +8,7 @@ import {
   TextContent,
   Text,
   TextVariants,
+  Badge,
 } from '@patternfly/react-core';
 
 import { Link } from 'react-router-dom';
@@ -16,6 +17,7 @@ import { NumericLabel, Logo } from '../../components';
 import { CollectionListType } from '../../api';
 import { formatPath, Paths } from '../../paths';
 import { convertContentSummaryCounts } from '../../utilities';
+import { Constants } from '../../constants';
 
 interface IProps extends CollectionListType {
   className?: string;
@@ -47,14 +49,7 @@ export class CollectionCard extends React.Component<IProps> {
             alt={company + ' logo'}
             size='40px'
           />
-          <TextContent>
-            {/* (
-              TODO: re add certification flag when multi repo is finished
-              <Text component={TextVariants.small}>
-                <Badge isRead>Certified</Badge>
-              </Text>
-            )*/}
-          </TextContent>
+          <TextContent>{this.getCertification(repo)}</TextContent>
         </CardHeader>
         <CardHeader>
           <div className='name'>
@@ -87,6 +82,18 @@ export class CollectionCard extends React.Component<IProps> {
         {footer && <CardFooter>{footer}</CardFooter>}
       </Card>
     );
+  }
+
+  private getCertification(repo) {
+    if (repo === Constants.CERTIFIED_REPO) {
+      return (
+        <Text component={TextVariants.small}>
+          <Badge isRead>Certified</Badge>
+        </Text>
+      );
+    }
+
+    return null;
   }
 
   private getDescription(d: string) {
