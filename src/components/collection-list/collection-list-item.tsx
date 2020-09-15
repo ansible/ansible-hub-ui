@@ -18,7 +18,6 @@ import { Paths, formatPath } from '../../paths';
 import { NumericLabel, Tag, Logo, DeprecatedTag } from '../../components';
 import { CollectionListType } from '../../api';
 import { convertContentSummaryCounts } from '../../utilities';
-import { Constants } from '../../constants';
 
 interface IProps extends CollectionListType {
   showNamespace?: boolean;
@@ -64,7 +63,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
             to={formatPath(Paths.collectionByRepo, {
               collection: name,
               namespace: namespace.name,
-              repo: Constants.REPOSITORYNAMES[repo],
+              repo: repo,
             })}
           >
             {name}

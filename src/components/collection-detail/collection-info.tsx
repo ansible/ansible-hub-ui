@@ -22,7 +22,6 @@ import { Tag } from '../../components';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper } from '../../utilities/param-helper';
 import { AppContext } from '../../loaders/app-context';
-import { Constants } from '../../constants';
 
 interface IProps extends CollectionDetailType {
   params: {
@@ -144,7 +143,7 @@ export class CollectionInfo extends React.Component<IProps> {
                   {
                     collection: name,
                     namespace: namespace.name,
-                    repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+                    repo: this.context.selectedRepo,
                   },
                   params,
                 )}

@@ -13,7 +13,6 @@ import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from '../../utilities/param-helper';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
-import { Constants } from '../../constants';
 
 // renders list of contents in a collection
 class CollectionContent extends React.Component<
@@ -47,7 +46,7 @@ class CollectionContent extends React.Component<
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
-          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+          repo: this.context.selectedRepo,
         }),
         name: collection.namespace.name,
       },
@@ -55,7 +54,7 @@ class CollectionContent extends React.Component<
         url: formatPath(Paths.collectionByRepo, {
           namespace: collection.namespace.name,
           collection: collection.name,
-          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+          repo: this.context.selectedRepo,
         }),
         name: collection.name,
       },

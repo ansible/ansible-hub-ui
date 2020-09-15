@@ -53,18 +53,8 @@ class App extends React.Component<RouteComponentProps, IState> {
       path: '/repo/:repo',
     });
     if (match) {
-      let newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
-        key => Constants.REPOSITORYNAMES[key] === match.params['repo'],
-      );
-
-      // allowing the repo to go through even if isn't one that we support so
-      // that 404s bubble up naturally from the child components.
-      if (!newRepoName) {
-        newRepoName = match.params['repo'];
-      }
-
-      if (newRepoName !== this.state.selectedRepo) {
-        this.setState({ selectedRepo: newRepoName });
+      if (match.params['repo'] !== this.state.selectedRepo) {
+        this.setState({ selectedRepo: match.params['repo'] });
       }
     }
   }
@@ -145,7 +135,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                     className='nav-select'
                     variant='single'
                     isOpen={this.state.selectExpanded}
-                    selections={this.state.selectedRepo}
+                    selections={this.getRepoName(this.state.selectedRepo)}
                     isPlain={false}
                     onToggle={isExpanded => {
                       this.setState({ selectExpanded: isExpanded });
@@ -160,7 +150,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                         () => {
                           this.props.history.push(
                             formatPath(Paths.searchByRepo, {
-                              repo: Constants.REPOSITORYNAMES[value.toString()],
+                              repo: this.getRepoBasePath(value.toString()),
                             }),
                           );
                           // history.go(0) forces a reload of the page
@@ -179,10 +169,9 @@ class App extends React.Component<RouteComponentProps, IState> {
                 </NavItem>
                 <NavItem>
                   <Link
-                    to={Paths.searchByRepo.replace(
-                      ':repo',
-                      Constants.REPOSITORYNAMES[this.state.selectedRepo],
-                    )}
+                    to={formatPath(Paths.searchByRepo, {
+                      repo: this.state.selectedRepo,
+                    })}
                   >
                     Collections
                   </Link>
@@ -231,6 +220,27 @@ class App extends React.Component<RouteComponentProps, IState> {
         <Routes selectedRepo={this.state.selectedRepo} />
       </Page>,
     );
+  }
+
+  private getRepoBasePath(repoName) {
+    if (Constants.REPOSITORYNAMES[repoName]) {
+      return Constants.REPOSITORYNAMES[repoName];
+    }
+
+    return repoName;
+  }
+
+  private getRepoName(basePath) {
+    const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
+      key => Constants.REPOSITORYNAMES[key] === basePath,
+    );
+
+    // allowing the repo to go through even if isn't one that we support so
+    // that 404s bubble up naturally from the child components.
+    if (!newRepoName) {
+      return basePath;
+    }
+    return newRepoName;
   }
 
   private ctx(component) {

@@ -14,7 +14,6 @@ import { ContentSummaryType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper } from '../../utilities/param-helper';
 import { AppContext } from '../../loaders/app-context';
-import { Constants } from '../../constants';
 
 interface IProps {
   contents: ContentSummaryType[];
@@ -116,8 +115,7 @@ export class CollectionContentList extends React.Component<IProps> {
                         namespace: namespace,
                         type: content.content_type,
                         name: content.name,
-                        repo:
-                          Constants.REPOSITORYNAMES[this.context.selectedRepo],
+                        repo: this.context.selectedRepo,
                       },
                       ParamHelper.getReduced(params, this.ignoredParams),
                     )}

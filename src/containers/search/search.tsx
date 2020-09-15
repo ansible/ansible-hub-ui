@@ -39,7 +39,6 @@ import {
 import { ParamHelper } from '../../utilities/param-helper';
 import { Constants } from '../../constants';
 import { AppContext } from '../../loaders/app-context';
-import { Paths } from '../../paths';
 
 interface IState {
   collections: CollectionListType[];
@@ -354,7 +353,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
           ...ParamHelper.getReduced(this.state.params, ['view_type']),
           deprecated: false,
         },
-        Constants.REPOSITORYNAMES[this.context.selectedRepo],
+        this.context.selectedRepo,
       ).then(result => {
         this.setState({
           collections: result.data.data,
