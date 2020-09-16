@@ -10,7 +10,6 @@ import { BaseHeader, Breadcrumbs, APIButton } from '../../components';
 import { CollectionDetailType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper } from '../../utilities/param-helper';
-import { Constants } from '../../constants';
 
 interface IProps {
   collection: CollectionDetailType;
@@ -137,7 +136,7 @@ export class CollectionHeader extends React.Component<IProps> {
               {
                 namespace: this.props.collection.namespace.name,
                 collection: this.props.collection.name,
-                repo: Constants.REPOSITORYNAMES[repo],
+                repo: repo,
               },
               ParamHelper.getReduced(params, this.ignorParams),
             ),
@@ -151,7 +150,7 @@ export class CollectionHeader extends React.Component<IProps> {
               {
                 namespace: this.props.collection.namespace.name,
                 collection: this.props.collection.name,
-                repo: Constants.REPOSITORYNAMES[repo],
+                repo: repo,
               },
               ParamHelper.getReduced(params, this.ignorParams),
             ),
@@ -165,7 +164,7 @@ export class CollectionHeader extends React.Component<IProps> {
               {
                 namespace: this.props.collection.namespace.name,
                 collection: this.props.collection.name,
-                repo: Constants.REPOSITORYNAMES[repo],
+                repo: repo,
               },
               ParamHelper.getReduced(params, this.ignorParams),
             ),
@@ -179,7 +178,7 @@ export class CollectionHeader extends React.Component<IProps> {
               {
                 namespace: this.props.collection.namespace.name,
                 collection: this.props.collection.name,
-                repo: Constants.REPOSITORYNAMES[repo],
+                repo: repo,
               },
               ParamHelper.getReduced(params, this.ignorParams),
             ),

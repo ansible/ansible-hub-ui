@@ -29,7 +29,6 @@ import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
-import { Constants } from '../../constants';
 
 // renders markdown files in collection docs/ directory
 class CollectionDocs extends React.Component<
@@ -107,7 +106,7 @@ class CollectionDocs extends React.Component<
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
-          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+          repo: this.context.selectedRepo,
         }),
         name: collection.namespace.name,
       },
@@ -115,7 +114,7 @@ class CollectionDocs extends React.Component<
         url: formatPath(Paths.collectionByRepo, {
           namespace: collection.namespace.name,
           collection: collection.name,
-          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+          repo: this.context.selectedRepo,
         }),
         name: collection.name,
       },
@@ -215,7 +214,7 @@ class CollectionDocs extends React.Component<
               namespace: collection.namespace.name,
               collection: collection.name,
               page: sanitizeDocsUrls(href),
-              repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+              repo: this.context.selectedRepo,
             },
             params,
           )}
@@ -241,7 +240,7 @@ class CollectionDocs extends React.Component<
               collection: collection.name,
               type: 'module',
               name: moduleName,
-              repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+              repo: this.context.selectedRepo,
             },
             params,
           )}

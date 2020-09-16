@@ -15,7 +15,6 @@ import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from '../../utilities/param-helper';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
-import { Constants } from '../../constants';
 
 interface IState extends IBaseCollectionState {
   loadingImports: boolean;
@@ -63,7 +62,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
-          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+          repo: this.context.selectedRepo,
         }),
         name: collection.namespace.name,
       },
@@ -71,7 +70,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
         url: formatPath(Paths.collectionByRepo, {
           namespace: collection.namespace.name,
           collection: collection.name,
-          repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+          repo: this.context.selectedRepo,
         }),
         name: collection.name,
       },
