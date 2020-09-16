@@ -116,11 +116,13 @@ export class API extends BaseAPI {
     }
   }
 
-  getDownloadURL(namespace, name, version) {
+  getDownloadURL(distro_base_path, namespace, name, version) {
     // UI API doesn't have tarball download link, so query it separately here
     return new Promise((resolve, reject) => {
       this.http
-        .get(`v3/collections/${namespace}/${name}/versions/${version}/`)
+        .get(
+          `content/${distro_base_path}/v3/collections/${namespace}/${name}/versions/${version}/`,
+        )
         .then(result => {
           resolve(result.data['download_url']);
         })
