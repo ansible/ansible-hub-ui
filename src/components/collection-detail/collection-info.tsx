@@ -88,7 +88,12 @@ export class CollectionInfo extends React.Component<IProps> {
                     variant='link'
                     icon={<DownloadIcon />}
                     onClick={() =>
-                      this.download(namespace, name, latest_version)
+                      this.download(
+                        this.context.selectedRepo,
+                        namespace,
+                        name,
+                        latest_version,
+                      )
                     }
                   >
                     Download tarball
@@ -157,8 +162,9 @@ export class CollectionInfo extends React.Component<IProps> {
     );
   }
 
-  private download(namespace, name, latest_version) {
+  private download(reponame, namespace, name, latest_version) {
     CollectionAPI.getDownloadURL(
+      reponame,
       namespace.name,
       name,
       latest_version.version,
