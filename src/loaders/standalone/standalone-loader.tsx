@@ -44,7 +44,7 @@ class App extends React.Component<RouteComponentProps, IState> {
     this.state = {
       user: null,
       selectExpanded: false,
-      selectedRepo: 'Published',
+      selectedRepo: 'published',
     };
   }
 
@@ -144,7 +144,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                       const originalRepo = this.state.selectedRepo;
                       this.setState(
                         {
-                          selectedRepo: value.toString(),
+                          selectedRepo: this.getRepoBasePath(value.toString()),
                           selectExpanded: false,
                         },
                         () => {
