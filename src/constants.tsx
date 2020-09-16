@@ -43,7 +43,8 @@ export class Constants {
         'galaxy.change_user',
       ],
     },
-    {
+    /* Hide until pulp fix
+   {
       name: 'groups',
       object_permissions: [
         'galaxy.view_group',
@@ -51,7 +52,7 @@ export class Constants {
         'galaxy.add_group',
         'galaxy.change_group',
       ],
-    },
+    },*/
     {
       name: 'remotes',
       object_permissions: [
