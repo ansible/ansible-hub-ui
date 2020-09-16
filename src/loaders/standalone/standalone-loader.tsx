@@ -144,7 +144,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                       const originalRepo = this.state.selectedRepo;
                       this.setState(
                         {
-                          selectedRepo: value.toString(),
+                          selectedRepo: this.getRepoBasePath(value.toString()),
                           selectExpanded: false,
                         },
                         () => {
