@@ -33,7 +33,6 @@ import { ImportModal } from './import-modal/import-modal';
 import { ParamHelper, getRepoUrl } from '../../utilities';
 import { Paths, formatPath } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
-import { Constants } from '../../constants';
 
 interface IState {
   collections: CollectionListType[];
@@ -248,7 +247,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       {
         ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
       },
-      Constants.REPOSITORYNAMES[this.context.selectedRepo],
+      this.context.selectedRepo,
     ).then(result => {
       this.setState({
         collections: result.data.data,
@@ -263,7 +262,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         {
           ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
         },
-        Constants.REPOSITORYNAMES[this.context.selectedRepo],
+        this.context.selectedRepo,
       ),
       NamespaceAPI.get(this.props.match.params['namespace']),
     ])

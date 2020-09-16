@@ -16,7 +16,7 @@ class App extends Component {
     this.state = {
       user: null,
       activeUser: null,
-      selectedRepo: 'Automation Hub',
+      selectedRepo: 'automation-hub',
     };
   }
 
@@ -67,7 +67,7 @@ class App extends Component {
           value={{
             user: this.state.activeUser,
             setUser: this.setActiveUser,
-            selectedRepo: 'Automation Hub',
+            selectedRepo: this.state.selectedRepo,
           }}
         >
           <Routes childProps={this.props} />

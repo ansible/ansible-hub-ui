@@ -9,10 +9,16 @@ export class Constants {
   static readonly STANDALONE_DEPLOYMENT_MODE = 'standalone';
 
   static readonly ADMIN_GROUP = 'system:partner-engineers';
-  static CERTIFIED =
+  static PUBLISHED =
     DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
       ? 'automation-hub'
       : 'published';
+
+  static CERTIFIED_REPO =
+    DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+      ? 'automation-hub'
+      : 'rh-certified';
+
   static NOTCERTIFIED = 'rejected';
   static NEEDSREVIEW = 'staging';
   static PERMISSIONS = [

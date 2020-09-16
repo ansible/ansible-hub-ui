@@ -9,7 +9,6 @@ import { DocsBlobType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
 import { AppContext } from '../../loaders/app-context';
-import { Constants } from '../../constants';
 
 class DocsEntry {
   display: string;
@@ -90,7 +89,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
     const baseUrlParams = {
       namespace: namespace,
       collection: collection,
-      repo: Constants.REPOSITORYNAMES[this.context.selectedRepo],
+      repo: this.context.selectedRepo,
     };
 
     const table = {

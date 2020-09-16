@@ -161,7 +161,7 @@ class CertificationDashboard extends React.Component<
                               title: 'Needs Review',
                             },
                             {
-                              id: Constants.CERTIFIED,
+                              id: Constants.PUBLISHED,
                               title: 'Certified',
                             },
                           ],
@@ -283,7 +283,7 @@ class CertificationDashboard extends React.Component<
     if (this.state.updatingVersions.includes(version)) {
       return <span className='fa fa-lg fa-spin fa-spinner' />;
     }
-    if (version.repository_list.includes(Constants.CERTIFIED)) {
+    if (version.repository_list.includes(Constants.PUBLISHED)) {
       return (
         <span>
           <CheckCircleIcon
@@ -379,7 +379,7 @@ class CertificationDashboard extends React.Component<
     const certifyDropDown = (isDisabled: boolean, originalRepo) => (
       <DropdownItem
         onClick={() =>
-          this.updateCertification(version, originalRepo, Constants.CERTIFIED)
+          this.updateCertification(version, originalRepo, Constants.PUBLISHED)
         }
         isDisabled={isDisabled}
         key='certify'
@@ -405,13 +405,13 @@ class CertificationDashboard extends React.Component<
       </DropdownItem>
     );
 
-    if (version.repository_list.includes(Constants.CERTIFIED)) {
+    if (version.repository_list.includes(Constants.PUBLISHED)) {
       return (
         <span>
           <StatefulDropdown
             items={[
-              certifyDropDown(true, Constants.CERTIFIED),
-              rejectDropDown(false, Constants.CERTIFIED),
+              certifyDropDown(true, Constants.PUBLISHED),
+              rejectDropDown(false, Constants.PUBLISHED),
               importsLink,
             ]}
           />
@@ -439,7 +439,7 @@ class CertificationDashboard extends React.Component<
               this.updateCertification(
                 version,
                 Constants.NEEDSREVIEW,
-                Constants.CERTIFIED,
+                Constants.PUBLISHED,
               )
             }
           >
