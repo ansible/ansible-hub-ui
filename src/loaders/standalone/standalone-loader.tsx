@@ -44,7 +44,7 @@ class App extends React.Component<RouteComponentProps, IState> {
     this.state = {
       user: null,
       selectExpanded: false,
-      selectedRepo: 'Published',
+      selectedRepo: 'published',
     };
   }
 
