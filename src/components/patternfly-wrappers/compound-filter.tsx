@@ -207,7 +207,8 @@ export class CompoundFilter extends React.Component<IProps, IState> {
       newParams = [];
     }
 
-    const selectedID = event.currentTarget.id;
+    // TODO: Remove this replace after patternfly fixes the pf-random-id issue
+    const selectedID = event.currentTarget.id.replace(/pf-random-id-\d+-/, '');
     if (newParams.includes(selectedID)) {
       const index = newParams.indexOf(selectedID);
       if (index > -1) {
