@@ -28,6 +28,7 @@ export { TaskAPI } from './task';
 export { GroupObjectPermissionType } from './response-types/permissions';
 export { GroupAPI } from './group';
 export { RemoteAPI } from './remotes';
+export { ApplicationInfoAPI } from './application-info';
 export { RemoteType } from './response-types/remote';
 export { DistributionAPI } from './distribution';
 export { MyDistributionAPI } from './my-distribution';
