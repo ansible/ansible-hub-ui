@@ -195,7 +195,10 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
     const syncButton = (
       <>
         <Button
-          isDisabled={remote.repositories.length === 0}
+          isDisabled={
+            remote.repositories.length === 0 ||
+            ['running', 'waiting'].includes(remote.last_sync_task.state)
+          }
           onClick={() =>
             this.props.syncRemote(
               remote.repositories[0].distributions[0].base_path,
