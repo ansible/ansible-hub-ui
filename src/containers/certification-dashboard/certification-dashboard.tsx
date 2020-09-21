@@ -162,7 +162,7 @@ class CertificationDashboard extends React.Component<
                             },
                             {
                               id: Constants.PUBLISHED,
-                              title: 'Certified',
+                              title: 'Approved',
                             },
                           ],
                         },
