@@ -261,25 +261,22 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               <FlexItem style={{ minWidth: '200px' }}>{group.name}</FlexItem>
               <FlexItem grow={{ default: 'grow' }}>
                 <PermissionChipSelector
-                  availablePermissions={group.object_permissions.filter(
-                    perm =>
-                      !selectedPermissions.find(selected => selected === perm),
-                  )}
-                  selectedPermissions={selectedPermissions.filter(selected =>
-                    group.object_permissions.find(perm => selected === perm),
-                  )}
+                  availablePermissions={group.object_permissions
+                    .filter(
+                      perm =>
+                        !selectedPermissions.find(
+                          selected => selected === perm,
+                        ),
+                    )
+                    .map(value => this.getHumanPermission(value))}
+                  selectedPermissions={selectedPermissions
+                    .filter(selected =>
+                      group.object_permissions.find(perm => selected === perm),
+                    )
+                    .map(value => this.getHumanPermission(value))}
                   setSelected={perms => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
                   isDisabled={!this.state.editPermissions}
-                  onSelect={(event, selection) => {
-                    const newPerms = new Set(this.state.permissions);
-                    if (newPerms.has(selection)) {
-                      newPerms.delete(selection);
-                    } else {
-                      newPerms.add(selection);
-                    }
-                    this.setState({ permissions: Array.from(newPerms) });
-                  }}
                   onClear={() => {
                     const clearedPerms = group.object_permissions;
                     this.setState({
@@ -288,6 +285,15 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                       ),
                     });
                   }}
+                  onSelect={(event, selection) => {
+                    const newPerms = new Set(this.state.permissions);
+                    if (newPerms.has(this.getPermissionCode(selection))) {
+                      newPerms.delete(this.getPermissionCode(selection));
+                    } else {
+                      newPerms.add(this.getPermissionCode(selection));
+                    }
+                    this.setState({ permissions: Array.from(newPerms) });
+                  }}
                 />
               </FlexItem>
             </Flex>
@@ -295,6 +301,16 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         </div>
       </Section>
     );
+  }
+
+  private getPermissionCode(permission) {
+    return Object.keys(Constants.HUMAN_PERMISSIONS).find(
+      key => Constants.HUMAN_PERMISSIONS[key] === permission,
+    );
+  }
+
+  private getHumanPermission(permission) {
+    return Constants.HUMAN_PERMISSIONS[permission];
   }
 
   private renderAddModal() {
