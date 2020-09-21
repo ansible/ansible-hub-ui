@@ -25,10 +25,9 @@ import {
 } from '@patternfly/react-core';
 
 import { Routes } from './routes';
-import Logo from '../../../static/images/galaxy_logo.svg';
 import { Paths, formatPath } from '../../paths';
 import { ActiveUserAPI, UserType } from '../../api';
-import { StatefulDropdown } from '../../components';
+import { SmallLogo, StatefulDropdown } from '../../components';
 import { AppContext } from '../app-context';
 import { Constants } from '../../constants';
 
@@ -94,11 +93,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
     const Header = (
       <PageHeader
-        logo={
-          <React.Fragment>
-            <img style={{ height: '35px' }} src={Logo} alt='Galaxy Logo' />
-          </React.Fragment>
-        }
+        logo={<SmallLogo alt='Galaxy Logo'></SmallLogo>}
         headerTools={
           <PageHeaderTools>
             {!user ? (
