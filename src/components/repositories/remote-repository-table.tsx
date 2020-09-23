@@ -128,7 +128,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
           {!!remote.updated_at ? moment(remote.updated_at).fromNow() : '---'}
         </td>
         <td>
-          {!!remote.last_sync_task
+          {!!remote.last_sync_task && !!remote.last_sync_task.finished_at
             ? moment(remote.last_sync_task.finished_at).fromNow()
             : '---'}
         </td>
@@ -197,7 +197,8 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         <Button
           isDisabled={
             remote.repositories.length === 0 ||
-            ['running', 'waiting'].includes(remote.last_sync_task.state)
+            (remote.last_sync_task &&
+              ['running', 'waiting'].includes(remote.last_sync_task.state))
           }
           onClick={() =>
             this.props.syncRemote(
