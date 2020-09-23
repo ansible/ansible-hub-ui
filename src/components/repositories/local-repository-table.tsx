@@ -11,7 +11,7 @@ import {
   Title,
   ClipboardCopy,
 } from '@patternfly/react-core';
-import { WarningTriangleIcon, WrenchIcon } from '@patternfly/react-icons';
+import { WarningTriangleIcon } from '@patternfly/react-icons';
 import { SortTable, StatefulDropdown } from '..';
 import * as moment from 'moment';
 import { Constants } from '../../constants';
@@ -71,9 +71,14 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           id: 'updated_at',
         },
         {
-          title: 'URL',
+          title: 'Sync URL',
           type: 'none',
-          id: 'url',
+          id: 'pulp_url',
+        },
+        {
+          title: 'Ansible CLI URL',
+          type: 'none',
+          id: 'ansible_cli_url',
         },
         {
           title: '',
@@ -122,6 +127,11 @@ export class LocalRepositoryTable extends React.Component<IProps> {
         <td>
           <ClipboardCopy isReadOnly>
             {getRepoUrl(distribution.base_path) + 'v3/collections'}
+          </ClipboardCopy>
+        </td>
+        <td>
+          <ClipboardCopy isReadOnly>
+            {getRepoUrl(distribution.base_path)}
           </ClipboardCopy>
         </td>
         <td>
