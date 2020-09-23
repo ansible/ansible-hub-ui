@@ -21,7 +21,7 @@ import {
   Tabs,
 } from '../../components';
 import { GroupAPI, UserAPI, UserType } from '../../api';
-import { ParamHelper, getPermission } from '../../utilities';
+import { ParamHelper, twoWayMapper } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
 import {
   Button,
@@ -269,14 +269,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                         ),
                     )
                     .map(value =>
-                      getPermission(value, Constants.HUMAN_PERMISSIONS),
+                      twoWayMapper(value, Constants.HUMAN_PERMISSIONS),
                     )}
                   selectedPermissions={selectedPermissions
                     .filter(selected =>
                       group.object_permissions.find(perm => selected === perm),
                     )
                     .map(value =>
-                      getPermission(value, Constants.HUMAN_PERMISSIONS),
+                      twoWayMapper(value, Constants.HUMAN_PERMISSIONS),
                     )}
                   setSelected={perms => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
@@ -293,15 +293,15 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                     const newPerms = new Set(this.state.permissions);
                     if (
                       newPerms.has(
-                        getPermission(selection, Constants.HUMAN_PERMISSIONS),
+                        twoWayMapper(selection, Constants.HUMAN_PERMISSIONS),
                       )
                     ) {
                       newPerms.delete(
-                        getPermission(selection, Constants.HUMAN_PERMISSIONS),
+                        twoWayMapper(selection, Constants.HUMAN_PERMISSIONS),
                       );
                     } else {
                       newPerms.add(
-                        getPermission(selection, Constants.HUMAN_PERMISSIONS),
+                        twoWayMapper(selection, Constants.HUMAN_PERMISSIONS),
                       );
                     }
                     this.setState({ permissions: Array.from(newPerms) });
