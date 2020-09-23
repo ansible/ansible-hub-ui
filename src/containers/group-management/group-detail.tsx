@@ -268,12 +268,16 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                           selected => selected === perm,
                         ),
                     )
-                    .map(value => getPermission(value))}
+                    .map(value =>
+                      getPermission(value, Constants.HUMAN_PERMISSIONS),
+                    )}
                   selectedPermissions={selectedPermissions
                     .filter(selected =>
                       group.object_permissions.find(perm => selected === perm),
                     )
-                    .map(value => getPermission(value))}
+                    .map(value =>
+                      getPermission(value, Constants.HUMAN_PERMISSIONS),
+                    )}
                   setSelected={perms => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
                   isDisabled={!this.state.editPermissions}
@@ -287,10 +291,18 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                   }}
                   onSelect={(event, selection) => {
                     const newPerms = new Set(this.state.permissions);
-                    if (newPerms.has(getPermission(selection))) {
-                      newPerms.delete(getPermission(selection));
+                    if (
+                      newPerms.has(
+                        getPermission(selection, Constants.HUMAN_PERMISSIONS),
+                      )
+                    ) {
+                      newPerms.delete(
+                        getPermission(selection, Constants.HUMAN_PERMISSIONS),
+                      );
                     } else {
-                      newPerms.add(getPermission(selection));
+                      newPerms.add(
+                        getPermission(selection, Constants.HUMAN_PERMISSIONS),
+                      );
                     }
                     this.setState({ permissions: Array.from(newPerms) });
                   }}

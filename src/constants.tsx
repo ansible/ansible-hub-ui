@@ -99,6 +99,10 @@ export class Constants {
     'galaxy.view_synclist': 'View synclist',
     'galaxy.add_synclist': 'Add synclist',
   };
+  static GROUP_HUMAN_PERMISSIONS = {
+    change_namespace: 'Change namespace',
+    upload_to_namespace: 'Upload to namespace',
+  };
   static UPSTREAM_HOSTS = [
     'galaxy.ansible.com',
     'galaxy-dev.ansible.com',
