@@ -9,14 +9,11 @@ export class Constants {
   static readonly STANDALONE_DEPLOYMENT_MODE = 'standalone';
 
   static readonly ADMIN_GROUP = 'system:partner-engineers';
-  static PUBLISHED =
-    DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-      ? 'automation-hub'
-      : 'published';
+  static PUBLISHED = 'published';
 
   static CERTIFIED_REPO =
     DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-      ? 'automation-hub'
+      ? 'published'
       : 'rh-certified';
 
   static NOTCERTIFIED = 'rejected';
@@ -87,14 +84,7 @@ export class Constants {
     'Red Hat Certified': 'rh-certified',
     Community: 'community',
     Published: 'published',
-    'Automation Hub': 'automation-hub',
   };
 
-  static ALLOWEDREPOS = [
-    'automation-hub',
-    'community',
-    'published',
-    'rh-certified',
-  ];
-  static DEAFAULTREPO = 'Published';
+  static ALLOWEDREPOS = ['community', 'published', 'rh-certified'];
 }
