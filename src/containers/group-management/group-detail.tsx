@@ -21,7 +21,7 @@ import {
   Tabs,
 } from '../../components';
 import { GroupAPI, UserAPI, UserType } from '../../api';
-import { ParamHelper } from '../../utilities';
+import { ParamHelper, getPermission } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
 import {
   Button,
@@ -268,12 +268,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                           selected => selected === perm,
                         ),
                     )
-                    .map(value => this.getHumanPermission(value))}
+                    .map(value => getPermission(value))}
                   selectedPermissions={selectedPermissions
                     .filter(selected =>
                       group.object_permissions.find(perm => selected === perm),
                     )
-                    .map(value => this.getHumanPermission(value))}
+                    .map(value => getPermission(value))}
                   setSelected={perms => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
                   isDisabled={!this.state.editPermissions}
@@ -287,10 +287,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                   }}
                   onSelect={(event, selection) => {
                     const newPerms = new Set(this.state.permissions);
-                    if (newPerms.has(this.getPermissionCode(selection))) {
-                      newPerms.delete(this.getPermissionCode(selection));
+                    if (newPerms.has(getPermission(selection))) {
+                      newPerms.delete(getPermission(selection));
                     } else {
-                      newPerms.add(this.getPermissionCode(selection));
+                      newPerms.add(getPermission(selection));
                     }
                     this.setState({ permissions: Array.from(newPerms) });
                   }}
@@ -301,16 +301,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         </div>
       </Section>
     );
-  }
-
-  private getPermissionCode(permission) {
-    return Object.keys(Constants.HUMAN_PERMISSIONS).find(
-      key => Constants.HUMAN_PERMISSIONS[key] === permission,
-    );
-  }
-
-  private getHumanPermission(permission) {
-    return Constants.HUMAN_PERMISSIONS[permission];
   }
 
   private renderAddModal() {
