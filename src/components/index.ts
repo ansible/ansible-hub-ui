@@ -18,7 +18,6 @@ export { ImportList } from './my-imports/import-list';
 export { CollectionCard } from './cards/collection-card';
 export { CardListSwitcher } from './card-list-switcher/card-list-switcher';
 export { Logo } from './logo/logo';
-export { LargeLogo } from './logo/large-logo';
 export { SmallLogo } from './logo/small-logo';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { CollectionInfo } from './collection-detail/collection-info';
