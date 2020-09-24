@@ -95,7 +95,7 @@ export class Routes extends React.Component<any> {
     { comp: CertificationDashboard, path: Paths.certificationDashboard },
     { comp: NotFound, path: Paths.notFound },
     { comp: TokenPageStandalone, path: Paths.token },
-    { comp: Partners, path: Paths.partners },
+    { comp: Partners, path: Paths[NAMESPACE_TERM] },
     { comp: EditNamespace, path: Paths.editNamespace },
     { comp: ManageNamespace, path: Paths.myCollections },
     { comp: ManageNamespace, path: Paths.myCollectionsByRepo },
