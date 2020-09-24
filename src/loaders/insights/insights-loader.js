@@ -16,7 +16,7 @@ class App extends Component {
     this.state = {
       user: null,
       activeUser: null,
-      selectedRepo: 'automation-hub',
+      selectedRepo: 'published',
     };
   }
 
