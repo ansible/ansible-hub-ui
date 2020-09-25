@@ -124,6 +124,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         nav={
           <Nav theme='dark'>
             <NavList>
+              <NavItem className={'nav-title'}>{APPLICATION_NAME}</NavItem>
               <NavItem className={'nav-select'}>
                 <Select
                   className='nav-select'
