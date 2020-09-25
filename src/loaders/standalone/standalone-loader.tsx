@@ -190,7 +190,7 @@ class App extends React.Component<RouteComponentProps, IState> {
               </NavItem>
               {!!user && user.model_permissions.move_collection && (
                 <NavItem>
-                  <Link to={Paths.certificationDashboard}>Certification</Link>
+                  <Link to={Paths.certificationDashboard}>Approval</Link>
                 </NavItem>
               )}
               <NavItem>
