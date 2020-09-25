@@ -21,7 +21,7 @@ import {
   Tabs,
 } from '../../components';
 import { GroupAPI, UserAPI, UserType } from '../../api';
-import { ParamHelper } from '../../utilities';
+import { ParamHelper, twoWayMapper } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
 import {
   Button,
@@ -261,25 +261,26 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               <FlexItem style={{ minWidth: '200px' }}>{group.name}</FlexItem>
               <FlexItem grow={{ default: 'grow' }}>
                 <PermissionChipSelector
-                  availablePermissions={group.object_permissions.filter(
-                    perm =>
-                      !selectedPermissions.find(selected => selected === perm),
-                  )}
-                  selectedPermissions={selectedPermissions.filter(selected =>
-                    group.object_permissions.find(perm => selected === perm),
-                  )}
+                  availablePermissions={group.object_permissions
+                    .filter(
+                      perm =>
+                        !selectedPermissions.find(
+                          selected => selected === perm,
+                        ),
+                    )
+                    .map(value =>
+                      twoWayMapper(value, Constants.HUMAN_PERMISSIONS),
+                    )}
+                  selectedPermissions={selectedPermissions
+                    .filter(selected =>
+                      group.object_permissions.find(perm => selected === perm),
+                    )
+                    .map(value =>
+                      twoWayMapper(value, Constants.HUMAN_PERMISSIONS),
+                    )}
                   setSelected={perms => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
                   isDisabled={!this.state.editPermissions}
-                  onSelect={(event, selection) => {
-                    const newPerms = new Set(this.state.permissions);
-                    if (newPerms.has(selection)) {
-                      newPerms.delete(selection);
-                    } else {
-                      newPerms.add(selection);
-                    }
-                    this.setState({ permissions: Array.from(newPerms) });
-                  }}
                   onClear={() => {
                     const clearedPerms = group.object_permissions;
                     this.setState({
@@ -287,6 +288,23 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                         x => !clearedPerms.includes(x),
                       ),
                     });
+                  }}
+                  onSelect={(event, selection) => {
+                    const newPerms = new Set(this.state.permissions);
+                    if (
+                      newPerms.has(
+                        twoWayMapper(selection, Constants.HUMAN_PERMISSIONS),
+                      )
+                    ) {
+                      newPerms.delete(
+                        twoWayMapper(selection, Constants.HUMAN_PERMISSIONS),
+                      );
+                    } else {
+                      newPerms.add(
+                        twoWayMapper(selection, Constants.HUMAN_PERMISSIONS),
+                      );
+                    }
+                    this.setState({ permissions: Array.from(newPerms) });
                   }}
                 />
               </FlexItem>

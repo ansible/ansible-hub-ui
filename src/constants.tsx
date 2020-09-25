@@ -73,6 +73,32 @@ export class Constants {
       ],
     },
   ];
+  static HUMAN_PERMISSIONS = {
+    'galaxy.add_namespace': 'Add namespace',
+    'galaxy.change_namespace': 'Change namespace',
+    'galaxy.upload_to_namespace': 'Upload to namespace',
+    'ansible.modify_ansible_repo_content': 'Modify Ansible repo content',
+    'galaxy.view_user': 'View user',
+    'galaxy.delete_user': 'Delete user',
+    'galaxy.add_user': 'Add user',
+    'galaxy.change_user': 'Change user',
+    'galaxy.view_group': 'View group',
+    'galaxy.delete_group': 'Delete group',
+    'galaxy.add_group': 'Add group',
+    'galaxy.change_group': 'Change group',
+    'ansible.change_collectionremote': 'Change collection remote',
+    'ansible.view_collectionremote': 'View collection remote',
+    'ansible.change_ansibledistribution': 'Change Ansible distribution',
+    'ansible.view_ansibledistribution': 'View Ansible distribution',
+    'galaxy.delete_synclist': 'Delete synclist',
+    'galaxy.change_synclist': 'Change synclist',
+    'galaxy.view_synclist': 'View synclist',
+    'galaxy.add_synclist': 'Add synclist',
+  };
+  static GROUP_HUMAN_PERMISSIONS = {
+    change_namespace: 'Change namespace',
+    upload_to_namespace: 'Upload to namespace',
+  };
   static UPSTREAM_HOSTS = [
     'galaxy.ansible.com',
     'galaxy-dev.ansible.com',
