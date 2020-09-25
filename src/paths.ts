@@ -44,7 +44,7 @@ export enum Paths {
   namespaces = '/namespaces',
   notFound = '/not-found',
   token = '/token',
-  certificationDashboard = '/certifkaication-dashboard',
+  approvalDashboard = '/approval-dashboard',
   userList = '/users',
   createUser = '/users/create',
   editUser = '/users/:userID/edit',

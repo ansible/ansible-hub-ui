@@ -157,7 +157,7 @@ export const Routes = props => {
         rootClass='root'
       />
       <InsightsRoute
-        path={Paths.certificationDashboard}
+        path={Paths.approvalDashboard}
         component={CertificationDashboard}
         rootClass='root'
       />

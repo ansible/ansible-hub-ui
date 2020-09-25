@@ -92,7 +92,7 @@ export class Routes extends React.Component<any> {
     { comp: EditUser, path: Paths.editUser },
     { comp: UserDetail, path: Paths.userDetail },
     { comp: UserList, path: Paths.userList },
-    { comp: CertificationDashboard, path: Paths.certificationDashboard },
+    { comp: CertificationDashboard, path: Paths.approvalDashboard },
     { comp: NotFound, path: Paths.notFound },
     { comp: TokenPageStandalone, path: Paths.token },
     { comp: Partners, path: Paths[NAMESPACE_TERM] },
