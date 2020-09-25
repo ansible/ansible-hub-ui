@@ -5,6 +5,8 @@ import { TrashIcon } from '@patternfly/react-icons';
 
 import { GroupObjectPermissionType, GroupAPI } from '../../api';
 import { APISearchTypeAhead, PermissionChipSelector } from '../../components';
+import { twoWayMapper } from '../../utilities';
+import { Constants } from '../../constants';
 
 interface IProps {
   groups: GroupObjectPermissionType[];
@@ -55,8 +57,12 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
               <FlexItem style={{ minWidth: '200px' }}>{group.name}</FlexItem>
               <FlexItem grow={{ default: 'grow' }}>
                 <PermissionChipSelector
-                  availablePermissions={availablePermissions}
-                  selectedPermissions={group.object_permissions}
+                  availablePermissions={availablePermissions.map(perm =>
+                    twoWayMapper(perm, Constants.GROUP_HUMAN_PERMISSIONS),
+                  )}
+                  selectedPermissions={group.object_permissions.map(perm =>
+                    twoWayMapper(perm, Constants.GROUP_HUMAN_PERMISSIONS),
+                  )}
                   setSelected={perms => this.setPermissions(perms, group)}
                   menuAppendTo={this.props.menuAppendTo}
                 />
@@ -88,7 +94,9 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
   private setPermissions(perms, group) {
     const newGroups = [...this.props.groups];
     const selectedGroup = newGroups.find(g => g.id === group.id);
-    selectedGroup.object_permissions = perms;
+    selectedGroup.object_permissions = perms.map(perm =>
+      twoWayMapper(perm, Constants.GROUP_HUMAN_PERMISSIONS),
+    );
 
     this.props.setGroups(newGroups);
   }
