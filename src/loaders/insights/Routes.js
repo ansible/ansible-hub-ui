@@ -85,7 +85,7 @@ const PartnerDetail = asyncComponent(() =>
 const Partners = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_list" */
-    '../../containers/namespace-list/partners'
+    '../../containers/namespace-list/' + NAMESPACE_TERM
   ),
 );
 
@@ -157,7 +157,7 @@ export const Routes = props => {
         rootClass='root'
       />
       <InsightsRoute
-        path={Paths.certificationDashboard}
+        path={Paths.approvalDashboard}
         component={CertificationDashboard}
         rootClass='root'
       />
@@ -172,7 +172,7 @@ export const Routes = props => {
         rootClass='root'
       />
       <InsightsRoute
-        path={Paths.partners}
+        path={Paths[NAMESPACE_TERM]}
         component={Partners}
         rootClass='root'
       />

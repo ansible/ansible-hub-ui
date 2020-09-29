@@ -11,8 +11,21 @@
   cursor: pointer;
 }
 li.pf-c-nav__item.nav-select > div > button {
-  background-color: transparent;
+  background-color: black;
   color: #f8f8f8;
+}
+#page-sidebar > div {
+  padding-top: 0px;
+}
+#page-sidebar {
+  border-top-style: solid;
+  border-top-width: var(--pf-global--BorderWidth--sm);
+  border-top-color: var(--pf-global--palette--black-800);
+}
+section.pf-c-nav__section.nav-title > h2 {
+  height: 50px;
+  font-size: var(--pf-c-nav__link--FontSize);
+  font-weight: var(--pf-c-nav__link--FontWeight);
 }
 // this was getting applied globally when it was in the collection-info.scss file
 // which means other components now rely on it, so I'm just going move it here

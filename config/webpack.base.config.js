@@ -18,6 +18,8 @@ const defaultConfigs = [
   { name: 'API_BASE_PATH', default: '', scope: 'global' },
   { name: 'UI_BASE_PATH', default: '', scope: 'global' },
   { name: 'DEPLOYMENT_MODE', default: 'standalone', scope: 'global' },
+  { name: 'NAMESPACE_TERM', default: 'namespaces', scope: 'global' },
+  { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
 
   // Webpack scope means the variable will only be available to webpack at
   // build time
@@ -44,7 +46,10 @@ module.exports = inputConfigs => {
 
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
-    htmlPlugin: { targetEnv: customConfigs.DEPLOYMENT_MODE },
+    htmlPlugin: {
+      targetEnv: customConfigs.DEPLOYMENT_MODE,
+      applicationName: customConfigs.APPLICATION_NAME,
+    },
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
 

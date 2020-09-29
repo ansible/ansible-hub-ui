@@ -16,6 +16,7 @@ module.exports = webpackBase({
   // Determines if the app should be compiled to run on insights or on
   // another platform. Options: insights, standalone
   DEPLOYMENT_MODE: 'insights',
+  NAMESPACE_TERM: 'partners',
 
   // Serve the UI over http or https. Options: true, false
   UI_USE_HTTPS: true,

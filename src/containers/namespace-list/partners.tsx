@@ -3,15 +3,16 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { NamespaceList } from './namespace-list';
 import { Paths } from '../../paths';
-import { Constants } from '../../constants';
 
 class Partners extends React.Component<RouteComponentProps, {}> {
   render() {
+    var name = NAMESPACE_TERM.charAt(0).toUpperCase() + NAMESPACE_TERM.slice(1);
+
     return (
       <NamespaceList
         {...this.props}
         namespacePath={Paths.namespaceByRepo}
-        title='Partners'
+        title={name}
       />
     );
   }

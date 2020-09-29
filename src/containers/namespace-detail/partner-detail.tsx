@@ -10,11 +10,13 @@ interface IProps extends RouteComponentProps {
 }
 class PartnerDetail extends React.Component<IProps> {
   render() {
+    var name = NAMESPACE_TERM.charAt(0).toUpperCase() + NAMESPACE_TERM.slice(1);
+
     return (
       <NamespaceDetail
         {...this.props}
         showControls={false}
-        breadcrumbs={[{ url: Paths.partners, name: 'Partners' }]}
+        breadcrumbs={[{ url: Paths[NAMESPACE_TERM], name: name }]}
       ></NamespaceDetail>
     );
   }
