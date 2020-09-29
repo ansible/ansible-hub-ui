@@ -122,7 +122,7 @@ class CertificationDashboard extends React.Component<
     }
     return (
       <React.Fragment>
-        <BaseHeader title='Certification dashboard'></BaseHeader>
+        <BaseHeader title='Approval dashboard'></BaseHeader>
         <AlertList
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
@@ -162,7 +162,7 @@ class CertificationDashboard extends React.Component<
                             },
                             {
                               id: Constants.PUBLISHED,
-                              title: 'Certified',
+                              title: 'Approved',
                             },
                           ],
                         },
@@ -289,7 +289,7 @@ class CertificationDashboard extends React.Component<
           <CheckCircleIcon
             style={{ color: 'var(--pf-global--success-color--100)' }}
           />{' '}
-          Certified
+          Approved
         </span>
       );
     }

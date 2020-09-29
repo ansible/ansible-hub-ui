@@ -14,3 +14,5 @@ declare var API_HOST;
 declare var API_BASE_PATH;
 declare var UI_BASE_PATH;
 declare var DEPLOYMENT_MODE;
+declare var NAMESPACE_TERM;
+declare var APPLICATION_NAME;

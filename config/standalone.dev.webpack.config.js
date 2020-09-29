@@ -21,6 +21,8 @@ module.exports = webpackBase({
   // another platform. Options: insights, standalone
   DEPLOYMENT_MODE: 'standalone',
 
+  NAMESPACE_TERM: 'namespaces',
+
   // Serve the UI over http or https. Options: true, false
   UI_USE_HTTPS: false,
 

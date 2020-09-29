@@ -52,13 +52,15 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
       selectedImport,
       apiError,
     } = this.state;
+    const name =
+      NAMESPACE_TERM.charAt(0).toUpperCase() + NAMESPACE_TERM.slice(1);
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
     const breadcrumbs = [
-      { url: Paths.partners, name: 'Partners' },
+      { url: Paths[NAMESPACE_TERM], name: name },
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
