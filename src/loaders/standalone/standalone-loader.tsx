@@ -1,6 +1,7 @@
 // import PropTypes from 'prop-types';
 import * as React from 'react';
 import '../app.scss';
+import { detect } from 'detect-browser';
 import {
   withRouter,
   Link,
@@ -22,19 +23,31 @@ import {
   NavGroup,
   Select,
   SelectOption,
+  AboutModal,
+  Dropdown,
+  TextContent,
+  TextList,
+  TextListVariants,
+  TextListItem,
+  TextListItemVariants,
 } from '@patternfly/react-core';
 
 import { Routes } from './routes';
 import { Paths, formatPath } from '../../paths';
-import { ActiveUserAPI, UserType } from '../../api';
+import { ActiveUserAPI, UserType, ApplicationInfoAPI } from '../../api';
 import { SmallLogo, StatefulDropdown } from '../../components';
 import { AppContext } from '../app-context';
 import { Constants } from '../../constants';
+import { QuestionCircleIcon } from '@patternfly/react-icons';
+import Logo from '../../../static/images/logo_large.svg';
 
 interface IState {
   user: UserType;
   selectExpanded: boolean;
   selectedRepo: string;
+  aboutModalVisible: boolean;
+  toggleOpen: boolean;
+  applicationInfo: { server_version: string; pulp_ansible_version: string };
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -44,6 +57,9 @@ class App extends React.Component<RouteComponentProps, IState> {
       user: null,
       selectExpanded: false,
       selectedRepo: 'published',
+      aboutModalVisible: false,
+      toggleOpen: false,
+      applicationInfo: { server_version: '', pulp_ansible_version: '' },
     };
   }
 
@@ -58,9 +74,22 @@ class App extends React.Component<RouteComponentProps, IState> {
     }
   }
 
+  componentDidMount() {
+    ApplicationInfoAPI.get('').then(result => {
+      this.setState({
+        applicationInfo: {
+          server_version: result.data.server_version,
+          pulp_ansible_version: result.data.pulp_ansible_version,
+        },
+      });
+    });
+  }
+
   render() {
     const { user } = this.state;
-    let dropdownItems = [];
+    let aboutModal = null;
+    let dropdownItems,
+      dropdownItemsCog = [];
     let userName: string;
 
     if (user) {
@@ -69,6 +98,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       } else {
         userName = user.username;
       }
+      const browser = detect();
 
       dropdownItems = [
         <DropdownItem isDisabled key='username'>
@@ -89,6 +119,97 @@ class App extends React.Component<RouteComponentProps, IState> {
           Logout
         </DropdownItem>,
       ];
+      dropdownItemsCog = [
+        <DropdownItem
+          key='customer_support'
+          onClick={() =>
+            window.open('https://access.redhat.com/support', '_blank')
+          }
+        >
+          Customer Support
+        </DropdownItem>,
+        <DropdownItem
+          key='training'
+          onClick={() =>
+            window.open(
+              'https://www.ansible.com/resources/webinars-training',
+              '_blank',
+            )
+          }
+        >
+          Training
+        </DropdownItem>,
+        <DropdownItem
+          key='documentation'
+          onClick={() =>
+            window.open(
+              'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/1.0/',
+              '_blank',
+            )
+          }
+        >
+          Documentation
+        </DropdownItem>,
+        <DropdownItem
+          key='about'
+          onClick={() =>
+            this.setState({ aboutModalVisible: true, toggleOpen: false })
+          }
+        >
+          About
+        </DropdownItem>,
+      ];
+      aboutModal = (
+        <AboutModal
+          isOpen={this.state.aboutModalVisible}
+          trademark=''
+          brandImageSrc={Logo}
+          onClose={() => this.setState({ aboutModalVisible: false })}
+          brandImageAlt='Galaxy Logo'
+          productName={APPLICATION_NAME}
+        >
+          <TextContent>
+            <TextList component={TextListVariants.dl}>
+              <TextListItem component={TextListItemVariants.dt}>
+                Server version
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dd}>
+                {this.state.applicationInfo.server_version}
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dt}>
+                Pulp Ansible Version
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dd}>
+                {this.state.applicationInfo.pulp_ansible_version}
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dt}>
+                Username
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dd}>
+                {userName}
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dt}>
+                User Groups
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dd}>
+                {user.groups.map(group => group.name).join()}
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dt}>
+                Browser Version
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dd}>
+                {browser.name + ' ' + browser.version}
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dt}>
+                Browser OS
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dd}>
+                {browser.os}
+              </TextListItem>
+            </TextList>
+          </TextContent>
+        </AboutModal>
+      );
     }
 
     const Header = (
@@ -107,11 +228,27 @@ class App extends React.Component<RouteComponentProps, IState> {
                 Login
               </Link>
             ) : (
-              <StatefulDropdown
-                defaultText={userName}
-                toggleType='dropdown'
-                items={dropdownItems}
-              ></StatefulDropdown>
+              <div>
+                <Dropdown
+                  toggle={
+                    <QuestionCircleIcon
+                      className={'clickable'}
+                      onClick={() =>
+                        this.setState({ toggleOpen: !this.state.toggleOpen })
+                      }
+                    />
+                  }
+                  isOpen={this.state.toggleOpen}
+                  dropdownItems={dropdownItemsCog}
+                  position={'right'}
+                  className={'question-mark-dropdown clickable'}
+                />
+                <StatefulDropdown
+                  defaultText={userName}
+                  toggleType='dropdown'
+                  items={dropdownItems}
+                ></StatefulDropdown>
+              </div>
             )}
           </PageHeaderTools>
         }
@@ -212,6 +349,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
     return this.ctx(
       <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
+        {aboutModal}
         <Routes selectedRepo={this.state.selectedRepo} />
       </Page>,
     );

@@ -27,6 +27,9 @@ section.pf-c-nav__section.nav-title > h2 {
   font-size: var(--pf-c-nav__link--FontSize);
   font-weight: var(--pf-c-nav__link--FontWeight);
 }
+.question-mark-dropdown {
+  padding-right: 10px;
+}
 // this was getting applied globally when it was in the collection-info.scss file
 // which means other components now rely on it, so I'm just going move it here
 // so that it's explicitly setting these styles globally.
