@@ -22,11 +22,9 @@ import {
   Main,
   Pagination,
   SortTable,
-  StatefulDropdown,
 } from '../../components';
 import {
   Button,
-  DropdownItem,
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
@@ -43,6 +41,7 @@ import {
   ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   params: {
@@ -102,6 +101,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       alerts,
     } = this.state;
 
+    const { user } = this.context;
+
     if (redirect) {
       return <Redirect to={redirect}></Redirect>;
     }
@@ -137,17 +138,19 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                       />
                     </ToolbarItem>
                   </ToolbarGroup>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <Button
-                        onClick={() =>
-                          this.setState({ createModalVisible: true })
-                        }
-                      >
-                        Create
-                      </Button>
-                    </ToolbarItem>
-                  </ToolbarGroup>
+                  {!!user && user.model_permissions.add_group && (
+                    <ToolbarGroup>
+                      <ToolbarItem>
+                        <Button
+                          onClick={() =>
+                            this.setState({ createModalVisible: true })
+                          }
+                        >
+                          Create
+                        </Button>
+                      </ToolbarItem>
+                    </ToolbarGroup>
+                  )}
                 </ToolbarContent>
               </Toolbar>
 
@@ -406,5 +409,6 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     );
   }
 }
+GroupList.contextType = AppContext;
 
 export default withRouter(GroupList);

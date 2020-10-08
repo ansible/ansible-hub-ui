@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './namespace-list.scss';
 
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   EmptyState,
