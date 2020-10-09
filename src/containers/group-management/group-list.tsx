@@ -328,6 +328,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderTableRow(group: any, index: number) {
+    const { user } = this.context;
     return (
       <tr aria-labelledby={group.name} key={index}>
         <td>
@@ -339,20 +340,22 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             {group.name}
           </Link>
         </td>
-        <td>
-          <Button
-            key='delete'
-            variant='danger'
-            onClick={() =>
-              this.setState({
-                selectedGroup: group,
-                deleteModalVisible: true,
-              })
-            }
-          >
-            Delete
-          </Button>
-        </td>
+        {!!user && user.model_permissions.delete_group && (
+          <td>
+            <Button
+              key='delete'
+              variant='danger'
+              onClick={() =>
+                this.setState({
+                  selectedGroup: group,
+                  deleteModalVisible: true,
+                })
+              }
+            >
+              Delete
+            </Button>
+          </td>
+        )}
       </tr>
     );
   }

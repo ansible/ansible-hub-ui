@@ -27,6 +27,7 @@ export class Permissions {
   view_distribution: boolean;
   view_group: boolean;
   view_user: boolean;
+  delete_group: boolean;
   delete_user: boolean;
   change_user: boolean;
   add_user: boolean;
