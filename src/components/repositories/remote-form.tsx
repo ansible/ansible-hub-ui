@@ -220,6 +220,125 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </Flex>
           </FormGroup>
         )}
+        <FormGroup
+          fieldId={'username'}
+          label={'Username'}
+          isRequired={requiredFields.includes('username')}
+          validated={this.toError(!('username' in errorMessages))}
+          helperTextInvalid={errorMessages['username']}
+        >
+          <TextInput
+            validated={this.toError(!('username' in errorMessages))}
+            isRequired={requiredFields.includes('username')}
+            isDisabled={disabledFields.includes('username')}
+            id='username'
+            type='text'
+            value={'remote.username' || ''}
+            onChange={(value, event) => console.log('TODO username')}
+          />
+        </FormGroup>
+        <FormGroup
+          fieldId={'password'}
+          label={'Password'}
+          isRequired={requiredFields.includes('password')}
+          validated={this.toError(!('password' in errorMessages))}
+          helperTextInvalid={errorMessages['password']}
+        >
+          <TextInput
+            validated={this.toError(!('password' in errorMessages))}
+            isRequired={requiredFields.includes('password')}
+            isDisabled={disabledFields.includes('password')}
+            id='password'
+            type='text'
+            value={'remote.password' || ''}
+            onChange={(value, event) => console.log('TODO password')}
+          />
+        </FormGroup>
+        <FormGroup
+          fieldId={'proxy_url'}
+          label={'Proxy URL'}
+          isRequired={requiredFields.includes('proxy_url')}
+          validated={this.toError(!('proxy_url' in errorMessages))}
+          helperTextInvalid={errorMessages['proxy_url']}
+        >
+          <TextInput
+            validated={this.toError(!('proxy_url' in errorMessages))}
+            isRequired={requiredFields.includes('proxy_url')}
+            isDisabled={disabledFields.includes('proxy_url')}
+            id='proxy_url'
+            type='text'
+            value={'remote.proxy_url' || ''}
+            onChange={(value, event) => console.log('TODO proxy_url')}
+          />
+        </FormGroup>
+        <FormGroup
+          fieldId={'tls_validation'}
+          label={'TLS validation'}
+          isRequired={requiredFields.includes('tls_validation')}
+          validated={this.toError(!('tls_validation' in errorMessages))}
+          helperTextInvalid={errorMessages['tls_validation']}
+        >
+          <TextInput
+            validated={this.toError(!('tls_validation' in errorMessages))}
+            isRequired={requiredFields.includes('tls_validation')}
+            isDisabled={disabledFields.includes('tls_validation')}
+            id='tls_validation'
+            type='text'
+            value={'remote.tls_validation' || ''}
+            onChange={(value, event) => console.log('TODO tls_validation')}
+          />
+        </FormGroup>
+        <FormGroup
+          fieldId={'client_key'}
+          label={'Client key'}
+          isRequired={requiredFields.includes('client_key')}
+          validated={this.toError(!('client_key' in errorMessages))}
+          helperTextInvalid={errorMessages['client_key']}
+        >
+          <TextInput
+            validated={this.toError(!('client_key' in errorMessages))}
+            isRequired={requiredFields.includes('client_key')}
+            isDisabled={disabledFields.includes('client_key')}
+            id='client_key'
+            type='text'
+            value={'remote.client_key' || ''}
+            onChange={(value, event) => console.log('TODO client_key')}
+          />
+        </FormGroup>
+        <FormGroup
+          fieldId={'client_cert'}
+          label={'Client certification'}
+          isRequired={requiredFields.includes('client_cert')}
+          validated={this.toError(!('client_cert' in errorMessages))}
+          helperTextInvalid={errorMessages['client_cert']}
+        >
+          <TextInput
+            validated={this.toError(!('client_cert' in errorMessages))}
+            isRequired={requiredFields.includes('client_cert')}
+            isDisabled={disabledFields.includes('client_cert')}
+            id='client_cert'
+            type='text'
+            value={'remote.client_cert' || ''}
+            onChange={(value, event) => console.log('TODO client_cert')}
+          />
+        </FormGroup>
+        <FormGroup
+          fieldId={'ca_cert'}
+          label={'CA certification'}
+          isRequired={requiredFields.includes('ca_cert')}
+          validated={this.toError(!('ca_cert' in errorMessages))}
+          helperTextInvalid={errorMessages['ca_cert']}
+        >
+          <TextInput
+            validated={this.toError(!('ca_cert' in errorMessages))}
+            isRequired={requiredFields.includes('ca_cert')}
+            isDisabled={disabledFields.includes('ca_cert')}
+            id='ca_cert'
+            type='text'
+            value={'remote.ca_cert' || ''}
+            onChange={(value, event) => console.log('TODO ca_cert')}
+          />
+        </FormGroup>
 
         {errorMessages['__nofield'] ? (
           <span
