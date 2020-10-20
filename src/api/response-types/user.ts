@@ -23,6 +23,7 @@ export class Permissions {
   upload_to_namespace: boolean;
   change_distribution: boolean;
   change_namespace: boolean;
+  change_remote: boolean;
   move_collection: boolean;
   view_distribution: boolean;
   view_group: boolean;

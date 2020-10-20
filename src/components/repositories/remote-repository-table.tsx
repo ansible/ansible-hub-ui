@@ -144,7 +144,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
             </Tooltip>
           ) : (
             !!user &&
-            user.model_permissions.change_distribution && (
+            user.model_permissions.change_remote && (
               <>
                 {this.getConfigureOrSyncButton(remote)}
                 <span>
@@ -191,6 +191,10 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
   }
 
   private getConfigureOrSyncButton(remote: RemoteType) {
+    const { user } = this.props;
+    if (!!user && !user.model_permissions.change_remote) {
+      return null;
+    }
     const configButton = (
       <Button onClick={() => this.props.editRemote(remote)} variant='secondary'>
         Configure
