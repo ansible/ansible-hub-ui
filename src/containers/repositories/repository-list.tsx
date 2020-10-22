@@ -4,17 +4,14 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import {
   BaseHeader,
-  CompoundFilter,
   LoadingPageSpinner,
   Main,
-  Pagination,
   Tabs,
   RemoteRepositoryTable,
   LocalRepositoryTable,
   RemoteForm,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import { ParamHelper, mapErrorMessages } from '../../utilities';
 import { Constants } from '../../constants';
 import {
@@ -24,6 +21,7 @@ import {
   MyDistributionAPI,
   DistributionType,
 } from '../../api';
+import { AppContext } from '../../loaders/app-context';
 
 export class Repository {
   name: string;
@@ -100,7 +98,6 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       showRemoteFormModal,
       errorMessages,
     } = this.state;
-    //TODO get repo data
 
     const tabs = ['Local', 'Remote'];
     return (
@@ -174,6 +171,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderContent(params, loading, itemCount, content) {
+    const { user } = this.context;
     // Dont show remotes on insights
     if (
       DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ||
@@ -210,6 +208,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
               syncRemote={distro =>
                 RemoteAPI.sync(distro).then(result => this.loadContent())
               }
+              user={user}
             />
           )}
         </div>
@@ -252,5 +251,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
     return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
   }
 }
+
+RepositoryList.contextType = AppContext;
 
 export default withRouter(RepositoryList);

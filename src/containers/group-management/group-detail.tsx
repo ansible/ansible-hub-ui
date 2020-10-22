@@ -43,6 +43,7 @@ import { Constants } from '../../constants';
 import * as moment from 'moment';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
 import { InsightsUserType } from '../../api/response-types/user';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   group: any;
@@ -176,6 +177,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     );
   }
   private renderControls() {
+    const { user } = this.context;
+
     if (this.state.params.tab == 'users') {
       return null;
     }
@@ -238,13 +241,13 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           Cancel
         </Button>
       </ToolbarItem>
-    ) : (
+    ) : !!user && user.model_permissions.change_group ? (
       <ToolbarItem>
         <Button onClick={() => this.setState({ editPermissions: true })}>
           Edit
         </Button>
       </ToolbarItem>
-    );
+    ) : null;
   }
   private renderPermissions() {
     const groups = Constants.PERMISSIONS;
@@ -444,6 +447,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   private renderUsers(users) {
     const { params, itemCount } = this.state;
+    const { user } = this.context;
     if (!params['sort']) {
       params['sort'] = 'username';
     }
@@ -480,15 +484,17 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                   />
                 </ToolbarItem>
               </ToolbarGroup>
-              <ToolbarGroup>
-                <ToolbarItem>
-                  <Button
-                    onClick={() => this.setState({ addModalVisible: true })}
-                  >
-                    Add
-                  </Button>
-                </ToolbarItem>
-              </ToolbarGroup>
+              {!!user && user.model_permissions.change_group && (
+                <ToolbarGroup>
+                  <ToolbarItem>
+                    <Button
+                      onClick={() => this.setState({ addModalVisible: true })}
+                    >
+                      Add
+                    </Button>
+                  </ToolbarItem>
+                </ToolbarGroup>
+              )}
             </ToolbarContent>
           </Toolbar>
 
@@ -584,6 +590,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderTableRow(user: UserType, index: number) {
+    const currentUser = this.context.user;
     return (
       <tr aria-labelledby={user.username} key={index}>
         <td>
@@ -596,13 +603,19 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <td>{user.first_name}</td>
         <td>{moment(user.date_joined).fromNow()}</td>
         <td>
-          <StatefulDropdown
-            items={[
-              <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
-                Remove
-              </DropdownItem>,
-            ]}
-          ></StatefulDropdown>
+          {' '}
+          {!!currentUser && currentUser.model_permissions.change_group && (
+            <StatefulDropdown
+              items={[
+                <DropdownItem
+                  key='delete'
+                  onClick={() => this.deleteUser(user)}
+                >
+                  Remove
+                </DropdownItem>,
+              ]}
+            ></StatefulDropdown>
+          )}
         </td>
       </tr>
     );
@@ -660,5 +673,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     return closeAlertMixin('alerts');
   }
 }
+GroupDetail.contextType = AppContext;
 
 export default withRouter(GroupDetail);

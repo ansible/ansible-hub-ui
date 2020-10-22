@@ -4,7 +4,6 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { NamespaceList } from './namespace-list';
 import { Paths } from '../../paths';
-import { Constants } from '../../constants';
 
 class MyNamespaces extends React.Component<RouteComponentProps, {}> {
   render() {
