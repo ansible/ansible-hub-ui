@@ -6,6 +6,7 @@ import { Routes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
 import { ActiveUserAPI } from '../../api';
+import { Paths } from '../../paths';
 
 const DEFAULT_REPO = 'published';
 
@@ -62,12 +63,12 @@ class App extends Component {
     // view repositories other than "published", but all other views are locked
     // to "published"
     // We do this because there is not currently a way to toggle repositories
-    // in automation hub on cloud.redhat.com, so it's important to ensure the use
+    // in automation hub on cloud.redhat.com, so it's important to ensure the user
     // always lands on the published repo
 
     // check if the URL matches the base path for the collection detail page
     const match = matchPath(this.props.location.pathname, {
-      path: '/repo/:repo/:namespace/:collection',
+      path: Paths.collectionByRepo,
     });
 
     if (match) {

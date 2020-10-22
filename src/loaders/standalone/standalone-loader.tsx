@@ -65,7 +65,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   componentDidUpdate(prevProps) {
     const match = matchPath(this.props.location.pathname, {
-      path: '/repo/:repo',
+      path: Paths.searchByRepo,
     });
     if (match) {
       if (match.params['repo'] !== this.state.selectedRepo) {
