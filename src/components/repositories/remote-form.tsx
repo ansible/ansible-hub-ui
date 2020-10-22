@@ -10,6 +10,7 @@ import {
   FlexItem,
   Button,
   Modal,
+  Checkbox,
 } from '@patternfly/react-core';
 
 import { DownloadIcon } from '@patternfly/react-icons';
@@ -113,7 +114,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             id='name'
             type='text'
             value={remote.name || ''}
-            onChange={(value, event) => this.updateRemote(value, 'name')}
+            onChange={value => this.updateRemote(value, 'name')}
           />
         </FormGroup>
         <FormGroup
@@ -130,7 +131,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             id='url'
             type='text'
             value={remote.url || ''}
-            onChange={(value, event) => this.updateRemote(value, 'url')}
+            onChange={value => this.updateRemote(value, 'url')}
           />
         </FormGroup>
         {!disabledFields.includes('token') && (
@@ -148,7 +149,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               type='password'
               id='token'
               value={remote.token || ''}
-              onChange={(value, event) => this.updateRemote(value, 'token')}
+              onChange={value => this.updateRemote(value, 'token')}
             />
           </FormGroup>
         )}
@@ -167,7 +168,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               id='ssoUrl'
               type='text'
               value={this.props.remote.auth_url || ''}
-              onChange={(value, event) => this.updateRemote(value, 'auth_url')}
+              onChange={value => this.updateRemote(value, 'auth_url')}
             />
           </FormGroup>
         )}
@@ -192,7 +193,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   filename={this.state.uploadedFileName}
                   value={this.props.remote.requirements_file || ''}
                   hideDefaultPreview
-                  onChange={(value, filename, event) => {
+                  onChange={(value, filename) => {
                     this.setState({ uploadedFileName: filename }, () =>
                       this.updateRemote(value, 'requirements_file'),
                     );
@@ -233,8 +234,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
             isDisabled={disabledFields.includes('username')}
             id='username'
             type='text'
-            value={'remote.username' || ''}
-            onChange={(value, event) => console.log('TODO username')}
+            value={remote.username || ''}
+            onChange={value => this.updateRemote(value, 'username')}
           />
         </FormGroup>
         <FormGroup
@@ -249,9 +250,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
             isRequired={requiredFields.includes('password')}
             isDisabled={disabledFields.includes('password')}
             id='password'
-            type='text'
-            value={'remote.password' || ''}
-            onChange={(value, event) => console.log('TODO password')}
+            type='password'
+            value={remote.password || ''}
+            onChange={value => this.updateRemote(value, 'password')}
           />
         </FormGroup>
         <FormGroup
@@ -267,8 +268,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
             isDisabled={disabledFields.includes('proxy_url')}
             id='proxy_url'
             type='text'
-            value={'remote.proxy_url' || ''}
-            onChange={(value, event) => console.log('TODO proxy_url')}
+            value={remote.proxy_url || ''}
+            onChange={value => this.updateRemote(value, 'proxy_url')}
           />
         </FormGroup>
         <FormGroup
@@ -278,14 +279,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
           validated={this.toError(!('tls_validation' in errorMessages))}
           helperTextInvalid={errorMessages['tls_validation']}
         >
-          <TextInput
-            validated={this.toError(!('tls_validation' in errorMessages))}
-            isRequired={requiredFields.includes('tls_validation')}
-            isDisabled={disabledFields.includes('tls_validation')}
+          <Checkbox
+            onChange={value => this.updateRemote(value, 'tls_validation')}
             id='tls_validation'
-            type='text'
-            value={'remote.tls_validation' || ''}
-            onChange={(value, event) => console.log('TODO tls_validation')}
+            isChecked={remote.tls_validation}
           />
         </FormGroup>
         <FormGroup
@@ -301,8 +298,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
             isDisabled={disabledFields.includes('client_key')}
             id='client_key'
             type='text'
-            value={'remote.client_key' || ''}
-            onChange={(value, event) => console.log('TODO client_key')}
+            value={remote.client_key || ''}
+            onChange={value => this.updateRemote(value, 'client_key')}
           />
         </FormGroup>
         <FormGroup
@@ -318,8 +315,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
             isDisabled={disabledFields.includes('client_cert')}
             id='client_cert'
             type='text'
-            value={'remote.client_cert' || ''}
-            onChange={(value, event) => console.log('TODO client_cert')}
+            value={remote.client_cert || ''}
+            onChange={value => this.updateRemote(value, 'client_cert')}
           />
         </FormGroup>
         <FormGroup
@@ -335,8 +332,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
             isDisabled={disabledFields.includes('ca_cert')}
             id='ca_cert'
             type='text'
-            value={'remote.ca_cert' || ''}
-            onChange={(value, event) => console.log('TODO ca_cert')}
+            value={remote.ca_cert || ''}
+            onChange={value => this.updateRemote(value, 'ca_cert')}
           />
         </FormGroup>
 
