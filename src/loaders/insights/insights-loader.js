@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, matchPath } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Routes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
 import { ActiveUserAPI } from '../../api';
+
+const DEFAULT_REPO = 'published';
 
 class App extends Component {
   firstLoad = true;
@@ -16,7 +18,7 @@ class App extends Component {
     this.state = {
       user: null,
       activeUser: null,
-      selectedRepo: 'published',
+      selectedRepo: DEFAULT_REPO,
     };
   }
 
@@ -53,6 +55,34 @@ class App extends Component {
   componentWillUnmount() {
     this.appNav();
     this.buildNav();
+  }
+
+  componentDidUpdate(prevProps) {
+    // This is sort of a dirty hack to make it so that collection details can
+    // view repositories other than "published", but all other views are locked
+    // to "published"
+    // We do this because there is not currently a way to toggle repositories
+    // in automation hub on cloud.redhat.com, so it's important to ensure the use
+    // always lands on the published repo
+
+    // check if the URL matches the base path for the collection detail page
+    const match = matchPath(this.props.location.pathname, {
+      path: '/repo/:repo/:namespace/:collection',
+    });
+
+    if (match) {
+      // if the URL matches, allow the repo to be switched to the repo defined in
+      // the url
+      if (match.params['repo'] !== this.state.selectedRepo) {
+        this.setState({ selectedRepo: match.params['repo'] });
+      }
+    } else {
+      // For all other URLs, switch the global state back to the "publised" repo
+      // if the repo is set to anything else.
+      if (this.state.selectedRepo !== DEFAULT_REPO) {
+        this.setState({ selectedRepo: DEFAULT_REPO });
+      }
+    }
   }
 
   render() {
