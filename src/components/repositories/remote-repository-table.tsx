@@ -19,7 +19,7 @@ import {
   ExclamationCircleIcon,
 } from '@patternfly/react-icons';
 
-import { RemoteType } from '../../api';
+import { RemoteType, UserType } from '../../api';
 import { SortTable, StatefulDropdown } from '..';
 
 import { Constants } from '../../constants';
@@ -29,6 +29,7 @@ interface IProps {
   updateParams: (p) => void;
   editRemote: (r: RemoteType) => void;
   syncRemote: (distribution: string) => void;
+  user: UserType;
 }
 
 export class RemoteRepositoryTable extends React.Component<IProps> {
@@ -120,6 +121,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
   }
 
   private renderRow(remote, i) {
+    const { user } = this.props;
     return (
       <tr key={i}>
         <td>{remote.name}</td>
@@ -141,21 +143,24 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
               </Button>
             </Tooltip>
           ) : (
-            <>
-              {this.getConfigureOrSyncButton(remote)}
-              <span>
-                <StatefulDropdown
-                  items={[
-                    <DropdownItem
-                      key='edit'
-                      onClick={() => this.props.editRemote(remote)}
-                    >
-                      Edit
-                    </DropdownItem>,
-                  ]}
-                />
-              </span>
-            </>
+            !!user &&
+            user.model_permissions.change_remote && (
+              <>
+                {this.getConfigureOrSyncButton(remote)}
+                <span>
+                  <StatefulDropdown
+                    items={[
+                      <DropdownItem
+                        key='edit'
+                        onClick={() => this.props.editRemote(remote)}
+                      >
+                        Edit
+                      </DropdownItem>,
+                    ]}
+                  />
+                </span>
+              </>
+            )
           )}
         </td>
       </tr>
@@ -186,6 +191,10 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
   }
 
   private getConfigureOrSyncButton(remote: RemoteType) {
+    const { user } = this.props;
+    if (!!user && !user.model_permissions.change_remote) {
+      return null;
+    }
     const configButton = (
       <Button onClick={() => this.props.editRemote(remote)} variant='secondary'>
         Configure

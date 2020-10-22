@@ -18,12 +18,19 @@ export class InsightsUserType {
 }
 
 export class Permissions {
+  add_group: boolean;
   add_namespace: boolean;
   upload_to_namespace: boolean;
+  change_distribution: boolean;
   change_namespace: boolean;
+  change_remote: boolean;
   move_collection: boolean;
+  view_distribution: boolean;
+  view_group: boolean;
   view_user: boolean;
+  delete_group: boolean;
   delete_user: boolean;
+  change_group: boolean;
   change_user: boolean;
   add_user: boolean;
 }
