@@ -71,6 +71,10 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       params['page_size'] = 10;
     }
 
+    if (!params['sort']) {
+      params['sort'] = 'username';
+    }
+
     this.state = {
       deleteUser: undefined,
       showDeleteModal: false,
