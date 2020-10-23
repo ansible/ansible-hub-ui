@@ -11,6 +11,7 @@ import {
   Button,
   Modal,
   Checkbox,
+  ExpandableSection,
 } from '@patternfly/react-core';
 
 import { DownloadIcon } from '@patternfly/react-icons';
@@ -200,7 +201,6 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   }}
                 />
               </FlexItem>
-
               <FlexItem>
                 <Button
                   isDisabled={!this.props.remote.requirements_file}
@@ -221,122 +221,126 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </Flex>
           </FormGroup>
         )}
-        <FormGroup
-          fieldId={'username'}
-          label={'Username'}
-          isRequired={requiredFields.includes('username')}
-          validated={this.toError(!('username' in errorMessages))}
-          helperTextInvalid={errorMessages['username']}
+        <ExpandableSection
+          toggleTextExpanded='Show Less'
+          toggleTextCollapsed='Show More'
         >
-          <TextInput
-            validated={this.toError(!('username' in errorMessages))}
+          <FormGroup
+            fieldId={'username'}
+            label={'Username'}
             isRequired={requiredFields.includes('username')}
-            isDisabled={disabledFields.includes('username')}
-            id='username'
-            type='text'
-            value={remote.username || ''}
-            onChange={value => this.updateRemote(value, 'username')}
-          />
-        </FormGroup>
-        <FormGroup
-          fieldId={'password'}
-          label={'Password'}
-          isRequired={requiredFields.includes('password')}
-          validated={this.toError(!('password' in errorMessages))}
-          helperTextInvalid={errorMessages['password']}
-        >
-          <TextInput
-            validated={this.toError(!('password' in errorMessages))}
+            validated={this.toError(!('username' in errorMessages))}
+            helperTextInvalid={errorMessages['username']}
+          >
+            <TextInput
+              validated={this.toError(!('username' in errorMessages))}
+              isRequired={requiredFields.includes('username')}
+              isDisabled={disabledFields.includes('username')}
+              id='username'
+              type='text'
+              value={remote.username || ''}
+              onChange={value => this.updateRemote(value, 'username')}
+            />
+          </FormGroup>
+          <FormGroup
+            fieldId={'password'}
+            label={'Password'}
             isRequired={requiredFields.includes('password')}
-            isDisabled={disabledFields.includes('password')}
-            id='password'
-            type='password'
-            value={remote.password || ''}
-            onChange={value => this.updateRemote(value, 'password')}
-          />
-        </FormGroup>
-        <FormGroup
-          fieldId={'proxy_url'}
-          label={'Proxy URL'}
-          isRequired={requiredFields.includes('proxy_url')}
-          validated={this.toError(!('proxy_url' in errorMessages))}
-          helperTextInvalid={errorMessages['proxy_url']}
-        >
-          <TextInput
-            validated={this.toError(!('proxy_url' in errorMessages))}
+            validated={this.toError(!('password' in errorMessages))}
+            helperTextInvalid={errorMessages['password']}
+          >
+            <TextInput
+              validated={this.toError(!('password' in errorMessages))}
+              isRequired={requiredFields.includes('password')}
+              isDisabled={disabledFields.includes('password')}
+              id='password'
+              type='password'
+              value={remote.password || ''}
+              onChange={value => this.updateRemote(value, 'password')}
+            />
+          </FormGroup>
+          <FormGroup
+            fieldId={'proxy_url'}
+            label={'Proxy URL'}
             isRequired={requiredFields.includes('proxy_url')}
-            isDisabled={disabledFields.includes('proxy_url')}
-            id='proxy_url'
-            type='text'
-            value={remote.proxy_url || ''}
-            onChange={value => this.updateRemote(value, 'proxy_url')}
-          />
-        </FormGroup>
-        <FormGroup
-          fieldId={'tls_validation'}
-          label={'TLS validation'}
-          isRequired={requiredFields.includes('tls_validation')}
-          validated={this.toError(!('tls_validation' in errorMessages))}
-          helperTextInvalid={errorMessages['tls_validation']}
-        >
-          <Checkbox
-            onChange={value => this.updateRemote(value, 'tls_validation')}
-            id='tls_validation'
-            isChecked={remote.tls_validation}
-          />
-        </FormGroup>
-        <FormGroup
-          fieldId={'client_key'}
-          label={'Client key'}
-          isRequired={requiredFields.includes('client_key')}
-          validated={this.toError(!('client_key' in errorMessages))}
-          helperTextInvalid={errorMessages['client_key']}
-        >
-          <TextInput
-            validated={this.toError(!('client_key' in errorMessages))}
+            validated={this.toError(!('proxy_url' in errorMessages))}
+            helperTextInvalid={errorMessages['proxy_url']}
+          >
+            <TextInput
+              validated={this.toError(!('proxy_url' in errorMessages))}
+              isRequired={requiredFields.includes('proxy_url')}
+              isDisabled={disabledFields.includes('proxy_url')}
+              id='proxy_url'
+              type='text'
+              value={remote.proxy_url || ''}
+              onChange={value => this.updateRemote(value, 'proxy_url')}
+            />
+          </FormGroup>
+          <FormGroup
+            fieldId={'tls_validation'}
+            label={'TLS validation'}
+            isRequired={requiredFields.includes('tls_validation')}
+            validated={this.toError(!('tls_validation' in errorMessages))}
+            helperTextInvalid={errorMessages['tls_validation']}
+          >
+            <Checkbox
+              onChange={value => this.updateRemote(value, 'tls_validation')}
+              id='tls_validation'
+              isChecked={remote.tls_validation}
+            />
+          </FormGroup>
+          <FormGroup
+            fieldId={'client_key'}
+            label={'Client key'}
             isRequired={requiredFields.includes('client_key')}
-            isDisabled={disabledFields.includes('client_key')}
-            id='client_key'
-            type='text'
-            value={remote.client_key || ''}
-            onChange={value => this.updateRemote(value, 'client_key')}
-          />
-        </FormGroup>
-        <FormGroup
-          fieldId={'client_cert'}
-          label={'Client certification'}
-          isRequired={requiredFields.includes('client_cert')}
-          validated={this.toError(!('client_cert' in errorMessages))}
-          helperTextInvalid={errorMessages['client_cert']}
-        >
-          <TextInput
-            validated={this.toError(!('client_cert' in errorMessages))}
+            validated={this.toError(!('client_key' in errorMessages))}
+            helperTextInvalid={errorMessages['client_key']}
+          >
+            <TextInput
+              validated={this.toError(!('client_key' in errorMessages))}
+              isRequired={requiredFields.includes('client_key')}
+              isDisabled={disabledFields.includes('client_key')}
+              id='client_key'
+              type='text'
+              value={remote.client_key || ''}
+              onChange={value => this.updateRemote(value, 'client_key')}
+            />
+          </FormGroup>
+          <FormGroup
+            fieldId={'client_cert'}
+            label={'Client certification'}
             isRequired={requiredFields.includes('client_cert')}
-            isDisabled={disabledFields.includes('client_cert')}
-            id='client_cert'
-            type='text'
-            value={remote.client_cert || ''}
-            onChange={value => this.updateRemote(value, 'client_cert')}
-          />
-        </FormGroup>
-        <FormGroup
-          fieldId={'ca_cert'}
-          label={'CA certification'}
-          isRequired={requiredFields.includes('ca_cert')}
-          validated={this.toError(!('ca_cert' in errorMessages))}
-          helperTextInvalid={errorMessages['ca_cert']}
-        >
-          <TextInput
-            validated={this.toError(!('ca_cert' in errorMessages))}
+            validated={this.toError(!('client_cert' in errorMessages))}
+            helperTextInvalid={errorMessages['client_cert']}
+          >
+            <TextInput
+              validated={this.toError(!('client_cert' in errorMessages))}
+              isRequired={requiredFields.includes('client_cert')}
+              isDisabled={disabledFields.includes('client_cert')}
+              id='client_cert'
+              type='text'
+              value={remote.client_cert || ''}
+              onChange={value => this.updateRemote(value, 'client_cert')}
+            />
+          </FormGroup>
+          <FormGroup
+            fieldId={'ca_cert'}
+            label={'CA certification'}
             isRequired={requiredFields.includes('ca_cert')}
-            isDisabled={disabledFields.includes('ca_cert')}
-            id='ca_cert'
-            type='text'
-            value={remote.ca_cert || ''}
-            onChange={value => this.updateRemote(value, 'ca_cert')}
-          />
-        </FormGroup>
-
+            validated={this.toError(!('ca_cert' in errorMessages))}
+            helperTextInvalid={errorMessages['ca_cert']}
+          >
+            <TextInput
+              validated={this.toError(!('ca_cert' in errorMessages))}
+              isRequired={requiredFields.includes('ca_cert')}
+              isDisabled={disabledFields.includes('ca_cert')}
+              id='ca_cert'
+              type='text'
+              value={remote.ca_cert || ''}
+              onChange={value => this.updateRemote(value, 'ca_cert')}
+            />
+          </FormGroup>
+        </ExpandableSection>
         {errorMessages['__nofield'] ? (
           <span
             style={{
