@@ -1,6 +1,10 @@
 export { CollectionAPI } from './collection';
 export { NamespaceAPI } from './namespace';
-export { NamespaceType, NamespaceListType } from './response-types/namespace';
+export {
+  NamespaceType,
+  NamespaceListType,
+  NamespaceLinkType,
+} from './response-types/namespace';
 export {
   CollectionListType,
   CollectionDetailType,
