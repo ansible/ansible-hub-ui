@@ -123,17 +123,23 @@ export class NamespaceForm extends React.Component<IProps, IState> {
           />
         </FormGroup>
 
-        {namespace.links.length > 0 ? (
-          <FormGroup
-            fieldId='links'
-            label='Useful links'
-            helperTextInvalid={errorMessages['name'] || errorMessages['url']}
-          >
-            {namespace.links.map((link, index) =>
-              this.renderLinkGroup(link, index),
-            )}
-          </FormGroup>
-        ) : null}
+        <FormGroup
+          fieldId='links'
+          label='Useful links'
+          helperTextInvalid={errorMessages['name'] || errorMessages['url']}
+        >
+          {namespace.links.map((link, index) =>
+            this.renderLinkGroup(link, index),
+          )}
+
+          {namespace.links.length === 0 && (
+            <PlusCircleIcon
+              className='clickable'
+              onClick={() => this.addLink()}
+              size='sm'
+            />
+          )}
+        </FormGroup>
       </Form>
     );
   }
