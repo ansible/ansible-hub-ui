@@ -29,23 +29,35 @@ interface IProps {
 }
 
 interface IState {
-  uploadedFileName: string;
+  uploadedRequirementFilename: string;
+  uploadedClientKeyFilename: string;
+  uploadedClientCertFilename: string;
+  uploadedCaCertFilename: string;
 }
 
 export class RemoteForm extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
-    let requirementsFilename = '';
+    let requirementsFilename,
+      clientCertFilename,
+      clientKeyFilename,
+      caCertFilename = '';
 
     if (props.remote) {
       requirementsFilename = props.remote.requirements_file
         ? 'requirements.yml'
         : '';
+      clientKeyFilename = props.remote.client_key ? 'client_key.yml' : '';
+      clientCertFilename = props.remote.client_cert ? 'client_cert.yml' : '';
+      caCertFilename = props.remote.ca_cert ? 'ca_cert.yml' : '';
     }
 
     this.state = {
-      uploadedFileName: requirementsFilename,
+      uploadedRequirementFilename: requirementsFilename,
+      uploadedClientKeyFilename: clientKeyFilename,
+      uploadedClientCertFilename: clientCertFilename,
+      uploadedCaCertFilename: caCertFilename,
     };
   }
 
@@ -54,6 +66,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
     if (!remote) {
       return null;
     }
+    console.log('REMOTE');
+    console.log(remote);
     const remoteType = this.getRemoteType(remote.url);
 
     let requiredFields = ['name', 'url'];
@@ -191,12 +205,13 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   isRequired={requiredFields.includes('requirements_file')}
                   id='yaml'
                   type='text'
-                  filename={this.state.uploadedFileName}
+                  filename={this.state.uploadedRequirementFilename}
                   value={this.props.remote.requirements_file || ''}
                   hideDefaultPreview
                   onChange={(value, filename) => {
-                    this.setState({ uploadedFileName: filename }, () =>
-                      this.updateRemote(value, 'requirements_file'),
+                    this.setState(
+                      { uploadedRequirementFilename: filename },
+                      () => this.updateRemote(value, 'requirements_file'),
                     );
                   }}
                 />
@@ -209,7 +224,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                       new Blob([this.props.remote.requirements_file], {
                         type: 'text/plain;charset=utf-8',
                       }),
-                      this.state.uploadedFileName,
+                      this.state.uploadedRequirementFilename,
                     );
                   }}
                   variant='plain'
@@ -296,15 +311,24 @@ export class RemoteForm extends React.Component<IProps, IState> {
             validated={this.toError(!('client_key' in errorMessages))}
             helperTextInvalid={errorMessages['client_key']}
           >
-            <TextInput
-              validated={this.toError(!('client_key' in errorMessages))}
-              isRequired={requiredFields.includes('client_key')}
-              isDisabled={disabledFields.includes('client_key')}
-              id='client_key'
-              type='text'
-              value={remote.client_key || ''}
-              onChange={value => this.updateRemote(value, 'client_key')}
-            />
+            <Flex>
+              <FlexItem grow={{ default: 'grow' }}>
+                <FileUpload
+                  validated={this.toError(!('client_key' in errorMessages))}
+                  isRequired={requiredFields.includes('client_key')}
+                  id='yaml'
+                  type='text'
+                  filename={this.state.uploadedClientKeyFilename}
+                  value={this.props.remote.client_key || ''}
+                  hideDefaultPreview
+                  onChange={(value, filename) => {
+                    this.setState({ uploadedClientKeyFilename: filename }, () =>
+                      this.updateRemote(value, 'client_key'),
+                    );
+                  }}
+                />
+              </FlexItem>
+            </Flex>
           </FormGroup>
           <FormGroup
             fieldId={'client_cert'}
@@ -313,15 +337,25 @@ export class RemoteForm extends React.Component<IProps, IState> {
             validated={this.toError(!('client_cert' in errorMessages))}
             helperTextInvalid={errorMessages['client_cert']}
           >
-            <TextInput
-              validated={this.toError(!('client_cert' in errorMessages))}
-              isRequired={requiredFields.includes('client_cert')}
-              isDisabled={disabledFields.includes('client_cert')}
-              id='client_cert'
-              type='text'
-              value={remote.client_cert || ''}
-              onChange={value => this.updateRemote(value, 'client_cert')}
-            />
+            <Flex>
+              <FlexItem grow={{ default: 'grow' }}>
+                <FileUpload
+                  validated={this.toError(!('client_cert' in errorMessages))}
+                  isRequired={requiredFields.includes('client_cert')}
+                  id='yaml'
+                  type='text'
+                  filename={this.state.uploadedClientCertFilename}
+                  value={this.props.remote.client_cert || ''}
+                  hideDefaultPreview
+                  onChange={(value, filename) => {
+                    this.setState(
+                      { uploadedClientCertFilename: filename },
+                      () => this.updateRemote(value, 'client_cert'),
+                    );
+                  }}
+                />
+              </FlexItem>
+            </Flex>
           </FormGroup>
           <FormGroup
             fieldId={'ca_cert'}
@@ -330,15 +364,24 @@ export class RemoteForm extends React.Component<IProps, IState> {
             validated={this.toError(!('ca_cert' in errorMessages))}
             helperTextInvalid={errorMessages['ca_cert']}
           >
-            <TextInput
-              validated={this.toError(!('ca_cert' in errorMessages))}
-              isRequired={requiredFields.includes('ca_cert')}
-              isDisabled={disabledFields.includes('ca_cert')}
-              id='ca_cert'
-              type='text'
-              value={remote.ca_cert || ''}
-              onChange={value => this.updateRemote(value, 'ca_cert')}
-            />
+            <Flex>
+              <FlexItem grow={{ default: 'grow' }}>
+                <FileUpload
+                  validated={this.toError(!('ca_cert' in errorMessages))}
+                  isRequired={requiredFields.includes('ca_cert')}
+                  id='yaml'
+                  type='text'
+                  filename={this.state.uploadedCaCertFilename}
+                  value={this.props.remote.ca_cert || ''}
+                  hideDefaultPreview
+                  onChange={(value, filename) => {
+                    this.setState({ uploadedCaCertFilename: filename }, () =>
+                      this.updateRemote(value, 'ca_cert'),
+                    );
+                  }}
+                />
+              </FlexItem>
+            </Flex>
           </FormGroup>
         </ExpandableSection>
         {errorMessages['__nofield'] ? (
