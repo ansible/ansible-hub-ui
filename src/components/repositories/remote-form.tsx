@@ -328,6 +328,23 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   }}
                 />
               </FlexItem>
+              <FlexItem>
+                <Button
+                  isDisabled={!this.props.remote.client_key}
+                  onClick={() => {
+                    FileSaver.saveAs(
+                      new Blob([this.props.remote.client_key], {
+                        type: 'text/plain;charset=utf-8',
+                      }),
+                      this.state.uploadedClientKeyFilename,
+                    );
+                  }}
+                  variant='plain'
+                  aria-label='Download client key file'
+                >
+                  <DownloadIcon />
+                </Button>
+              </FlexItem>
             </Flex>
           </FormGroup>
           <FormGroup
@@ -355,6 +372,23 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   }}
                 />
               </FlexItem>
+              <FlexItem>
+                <Button
+                  isDisabled={!this.props.remote.client_cert}
+                  onClick={() => {
+                    FileSaver.saveAs(
+                      new Blob([this.props.remote.client_cert], {
+                        type: 'text/plain;charset=utf-8',
+                      }),
+                      this.state.uploadedClientCertFilename,
+                    );
+                  }}
+                  variant='plain'
+                  aria-label='Download client certification file'
+                >
+                  <DownloadIcon />
+                </Button>
+              </FlexItem>
             </Flex>
           </FormGroup>
           <FormGroup
@@ -380,6 +414,23 @@ export class RemoteForm extends React.Component<IProps, IState> {
                     );
                   }}
                 />
+              </FlexItem>
+              <FlexItem>
+                <Button
+                  isDisabled={!this.props.remote.ca_cert}
+                  onClick={() => {
+                    FileSaver.saveAs(
+                      new Blob([this.props.remote.ca_cert], {
+                        type: 'text/plain;charset=utf-8',
+                      }),
+                      this.state.uploadedCaCertFilename,
+                    );
+                  }}
+                  variant='plain'
+                  aria-label='Download CA certification file'
+                >
+                  <DownloadIcon />
+                </Button>
               </FlexItem>
             </Flex>
           </FormGroup>
