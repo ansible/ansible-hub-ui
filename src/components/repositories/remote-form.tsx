@@ -38,19 +38,22 @@ interface IState {
 export class RemoteForm extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
-
-    let requirementsFilename,
+    let [
+      requirementsFilename,
       clientCertFilename,
       clientKeyFilename,
-      caCertFilename = '';
+      caCertFilename,
+    ] = Array(4).fill('');
 
-    if (props.remote) {
-      requirementsFilename = props.remote.requirements_file
+    if (!!props.remote) {
+      requirementsFilename = this.props.remote.requirements_file
         ? 'requirements.yml'
         : '';
-      clientKeyFilename = props.remote.client_key ? 'client_key.yml' : '';
-      clientCertFilename = props.remote.client_cert ? 'client_cert.yml' : '';
-      caCertFilename = props.remote.ca_cert ? 'ca_cert.yml' : '';
+      clientKeyFilename = this.props.remote.client_key ? 'client_key.yml' : '';
+      clientCertFilename = this.props.remote.client_cert
+        ? 'client_cert.yml'
+        : '';
+      caCertFilename = this.props.remote.ca_cert ? 'ca_cert.yml' : '';
     }
 
     this.state = {
@@ -66,8 +69,6 @@ export class RemoteForm extends React.Component<IProps, IState> {
     if (!remote) {
       return null;
     }
-    console.log('REMOTE');
-    console.log(remote);
     const remoteType = this.getRemoteType(remote.url);
 
     let requiredFields = ['name', 'url'];
