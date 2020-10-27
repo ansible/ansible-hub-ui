@@ -1,12 +1,3 @@
-var admin_menu = [
-    'Collections',
-    'Namespaces',
-    'My Namespaces',
-    'API Token',
-    'Users',
-    'Certification',
-]
-
 describe('Hub User Management Tests', () => {
     var host = Cypress.env("host")
     var username = Cypress.env("username")
@@ -14,11 +5,6 @@ describe('Hub User Management Tests', () => {
 
     beforeEach(() => {
         cy.visit(host)
-
-        // let e = cy.contains('div', 'Username').first()
-        // cy.log(1)
-        // Array.prototype.forEach.call(e, () => cy.log(`${p} = ${e}`))
-        // cy.log(2)
 
         cy.contains('.pf-c-form__group', 'Username').find('input').first().type(username)
         cy.contains('.pf-c-form__group', 'Password').find('input').first().type(`${password}{enter}`)
@@ -88,7 +74,7 @@ describe('Hub User Management Tests', () => {
             cy.contains('.pf-c-page__header-tools .pf-c-dropdown', 'admin').click()
             cy.contains('Logout').click()
 
-            cy.visit('https://192.168.1.200')
+            cy.visit(host)
 
             cy.contains('.pf-c-form__group', 'Username').find('input').first().type(username)
             cy.contains('.pf-c-form__group', 'Password').find('input').first().type(`${password}{enter}`)
