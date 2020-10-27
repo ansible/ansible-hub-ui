@@ -188,8 +188,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         }
       }
 
-      console.log(setLinks);
-
       namespace.links = setLinks;
 
       MyNamespaceAPI.update(this.state.namespace.name, namespace)

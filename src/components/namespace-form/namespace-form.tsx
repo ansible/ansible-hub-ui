@@ -126,7 +126,10 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         <FormGroup
           fieldId='links'
           label='Useful links'
-          helperTextInvalid={errorMessages['name'] || errorMessages['url']}
+          helperTextInvalid={this.getLinksErrorText(errorMessages)}
+          validated={this.toError(
+            !('links__url' in errorMessages || 'links__name' in errorMessages),
+          )}
         >
           {namespace.links.map((link, index) =>
             this.renderLinkGroup(link, index),
@@ -142,6 +145,18 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         </FormGroup>
       </Form>
     );
+  }
+
+  private getLinksErrorText(errorMessages): string {
+    const msg: string[] = [];
+    if ('links__name' in errorMessages) {
+      msg.push('Text: ' + errorMessages['links__name']);
+    }
+    if ('links__url' in errorMessages) {
+      msg.push('URL: ' + errorMessages['links__url']);
+    }
+
+    return msg.join(' ');
   }
 
   private toError(validated: boolean) {
