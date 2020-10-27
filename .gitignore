@@ -18,3 +18,7 @@ yarn-error.log*
 
 .DS_Store
 coverage
+
+# testing
+test/cypress/videos/*
+test/cypress.env.json

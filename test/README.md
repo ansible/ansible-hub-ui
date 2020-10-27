@@ -11,6 +11,10 @@ Simple install the requisite test dependencies. These are separate from the proj
 
 ## Run the Tests
 
+Firsts must be run from inside the test/ directory.
+
+    cd test
+
 The tests can be run in two modes: CLI or GUI. To run the tests in headless CLI mode:
 
     node_modules/.bin/cypress open
@@ -19,6 +23,8 @@ To run the tests in GUI mode, which opens the Cypress interface and an embedded 
 observe and inspect test runs:
 
     node_modules/.bin/cypress run
+
+After the tests have run you can view a video recording of the run is test/cypress/videos.
 
 ## Learn more
 
