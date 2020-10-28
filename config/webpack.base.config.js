@@ -49,6 +49,7 @@ module.exports = inputConfigs => {
     htmlPlugin: {
       targetEnv: customConfigs.DEPLOYMENT_MODE,
       applicationName: customConfigs.APPLICATION_NAME,
+      favicon: 'static/images/favicon.ico',
     },
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
