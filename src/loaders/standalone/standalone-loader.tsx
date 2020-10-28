@@ -64,9 +64,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidUpdate(prevProps) {
-    const match = matchPath(this.props.location.pathname, {
-      path: Paths.searchByRepo,
-    });
+    const match = this.isRepoURL(this.props.location.pathname);
     if (match) {
       if (match.params['repo'] !== this.state.selectedRepo) {
         this.setState({ selectedRepo: match.params['repo'] });
@@ -86,7 +84,18 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { user } = this.state;
+    const { user, selectedRepo } = this.state;
+
+    // block the page from rendering if we're on a repo route and the repo in the
+    // url doesn't match the current state
+    // This gives componentDidUpdate a chance to recognize that route has chnaged
+    // and update the internal state to match the route before any pages can
+    // redirect the URL to a 404 state.
+    const match = this.isRepoURL(this.props.location.pathname);
+    if (match && match.params['repo'] !== selectedRepo) {
+      return null;
+    }
+
     let aboutModal = null;
     let dropdownItems,
       dropdownItemsCog = [];
@@ -357,6 +366,12 @@ class App extends React.Component<RouteComponentProps, IState> {
         <Routes selectedRepo={this.state.selectedRepo} />
       </Page>,
     );
+  }
+
+  private isRepoURL(location) {
+    return matchPath(location, {
+      path: Paths.searchByRepo,
+    });
   }
 
   private getRepoBasePath(repoName) {

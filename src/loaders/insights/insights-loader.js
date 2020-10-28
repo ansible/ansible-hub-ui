@@ -67,9 +67,7 @@ class App extends Component {
     // always lands on the published repo
 
     // check if the URL matches the base path for the collection detail page
-    const match = matchPath(this.props.location.pathname, {
-      path: Paths.collectionByRepo,
-    });
+    const match = this.isRepoURL(this.props.location.pathname);
 
     if (match) {
       // if the URL matches, allow the repo to be switched to the repo defined in
@@ -87,6 +85,16 @@ class App extends Component {
   }
 
   render() {
+    // block the page from rendering if we're on a repo route and the repo in the
+    // url doesn't match the current state
+    // This gives componentDidUpdate a chance to recognize that route has chnaged
+    // and update the internal state to match the route before any pages can
+    // redirect the URL to a 404 state.
+    const match = this.isRepoURL(this.props.location.pathname);
+    if (match && match.params['repo'] !== this.state.selectedRepo) {
+      return null;
+    }
+
     // Wait for the user data to load before any of the child components are
     // rendered. This will prevent API calls from happening
     // before the app can authenticate
@@ -108,6 +116,12 @@ class App extends Component {
   }
   setActiveUser = user => {
     this.setState({ activeUser: user });
+  };
+
+  isRepoURL = location => {
+    return matchPath(location, {
+      path: Paths.collectionByRepo,
+    });
   };
 }
 
