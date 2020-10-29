@@ -2,7 +2,7 @@ import * as React from 'react';
 import './namespace-form.scss';
 
 import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
-import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
+import { PlusCircleIcon, TrashIcon } from '@patternfly/react-icons';
 
 import { NamespaceCard, ObjectPermissionField } from '../../components';
 import { NamespaceType } from '../../api';
@@ -16,8 +16,6 @@ interface IProps {
 }
 
 interface IState {
-  newLinkName: string;
-  newLinkURL: string;
   newNamespaceGroup: string;
 }
 
@@ -26,8 +24,6 @@ export class NamespaceForm extends React.Component<IProps, IState> {
     super(props);
 
     this.state = {
-      newLinkURL: '',
-      newLinkName: '',
       newNamespaceGroup: '',
     };
   }
@@ -127,58 +123,40 @@ export class NamespaceForm extends React.Component<IProps, IState> {
           />
         </FormGroup>
 
-        {namespace.links.length > 0 ? (
-          <FormGroup
-            fieldId='links'
-            label='Useful links'
-            helperTextInvalid={errorMessages['name'] || errorMessages['url']}
-          >
-            {namespace.links.map((link, index) =>
-              this.renderLinkGroup(link, index),
-            )}
-          </FormGroup>
-        ) : null}
+        <FormGroup
+          fieldId='links'
+          label='Useful links'
+          helperTextInvalid={this.getLinksErrorText(errorMessages)}
+          validated={this.toError(
+            !('links__url' in errorMessages || 'links__name' in errorMessages),
+          )}
+        >
+          {namespace.links.map((link, index) =>
+            this.renderLinkGroup(link, index),
+          )}
 
-        <FormGroup fieldId='add_link' label='Add link'>
-          <div className='useful-links'>
-            <div className='link-name'>
-              <TextInput
-                id='name'
-                type='text'
-                placeholder='Link text'
-                value={this.state.newLinkName}
-                onChange={value => {
-                  this.setState({
-                    newLinkName: value,
-                  });
-                }}
-              />
-            </div>
-            <div className='link-url'>
-              <TextInput
-                id='url'
-                type='text'
-                placeholder='Link URL'
-                value={this.state.newLinkURL}
-                onChange={value =>
-                  this.setState({
-                    newLinkURL: value,
-                  })
-                }
-                onKeyDown={e => {
-                  if (e.key === 'Enter') {
-                    this.addLink();
-                  }
-                }}
-              />
-            </div>
-            <div className='clickable link-button'>
-              <PlusCircleIcon onClick={() => this.addLink()} size='md' />
-            </div>
-          </div>
+          {namespace.links.length === 0 && (
+            <PlusCircleIcon
+              className='clickable'
+              onClick={() => this.addLink()}
+              size='sm'
+            />
+          )}
         </FormGroup>
       </Form>
     );
+  }
+
+  private getLinksErrorText(errorMessages): string {
+    const msg: string[] = [];
+    if ('links__name' in errorMessages) {
+      msg.push('Text: ' + errorMessages['links__name']);
+    }
+    if ('links__url' in errorMessages) {
+      msg.push('URL: ' + errorMessages['links__url']);
+    }
+
+    return msg.join(' ');
   }
 
   private toError(validated: boolean) {
@@ -210,19 +188,15 @@ export class NamespaceForm extends React.Component<IProps, IState> {
   private addLink() {
     const update = { ...this.props.namespace };
     update.links.push({
-      name: this.state.newLinkName,
-      url: this.state.newLinkURL,
+      name: '',
+      url: '',
     });
-    this.setState(
-      {
-        newLinkURL: '',
-        newLinkName: '',
-      },
-      () => this.props.updateNamespace(update),
-    );
+
+    this.props.updateNamespace(update);
   }
 
   private renderLinkGroup(link, index) {
+    const last = index === this.props.namespace.links.length - 1;
     return (
       <div className='useful-links' key={index}>
         <div className='link-name'>
@@ -244,11 +218,23 @@ export class NamespaceForm extends React.Component<IProps, IState> {
           />
         </div>
         <div className='link-button'>
-          <MinusCircleIcon
-            className='clickable'
-            onClick={() => this.removeLink(index)}
-            size='md'
-          />
+          <div className='link-container'>
+            <TrashIcon
+              className='clickable'
+              onClick={() => this.removeLink(index)}
+              size='sm'
+            />
+          </div>
+
+          <div className='link-container'>
+            {last && (
+              <PlusCircleIcon
+                className='clickable'
+                onClick={() => this.addLink()}
+                size='sm'
+              />
+            )}
+          </div>
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 import { GroupObjectPermissionType } from './permissions';
 
-export class NamespaceLink {
+export class NamespaceLinkType {
   name: string;
   url: string;
 }
@@ -19,5 +19,5 @@ export class NamespaceType extends NamespaceListType {
   groups: GroupObjectPermissionType[];
   resources: string;
   owners: any[];
-  links: NamespaceLink[];
+  links: NamespaceLinkType[];
 }
