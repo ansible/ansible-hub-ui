@@ -17,6 +17,13 @@ export class RemoteType {
   requirements_file: string;
   updated_at: string;
   created_at: string;
+  username: string;
+  password: string;
+  proxy_url: string;
+  tls_validation: boolean;
+  client_key: string;
+  client_cert: string;
+  ca_cert: string;
 
   repositories: {
     name: string;

@@ -16,12 +16,33 @@ class API extends BaseAPI {
       'auth_url',
       'token',
       'requirements_file',
+      'tls_validation',
     ]) {
       reducedData[field] = remote[field];
     }
+    for (const field of [
+      'username',
+      'password',
+      'proxy_url',
+      'tls_validation',
+      'client_key',
+      'client_cert',
+      'ca_cert',
+    ]) {
+      if (!!remote[field]) {
+        reducedData[field] = remote[field];
+      }
+    }
 
-    if (reducedData['requirements_file'] === '') {
-      reducedData['requirements_file'] = null;
+    for (const field of [
+      'requirements_file',
+      'client_key',
+      'client_cert',
+      'ca_cert',
+    ]) {
+      if (reducedData[field] === '') {
+        reducedData[field] = null;
+      }
     }
 
     return this.http.put(

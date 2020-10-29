@@ -102,44 +102,46 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
     const tabs = ['Local', 'Remote'];
     return (
       <React.Fragment>
-        <RemoteForm
-          remote={remoteToEdit}
-          updateRemote={(r: RemoteType) => this.setState({ remoteToEdit: r })}
-          saveRemote={() => {
-            const { remoteToEdit } = this.state;
+        {remoteToEdit && showRemoteFormModal && (
+          <RemoteForm
+            remote={remoteToEdit}
+            updateRemote={(r: RemoteType) => this.setState({ remoteToEdit: r })}
+            saveRemote={() => {
+              const { remoteToEdit } = this.state;
 
-            try {
-              const distro_path =
-                remoteToEdit.repositories[0].distributions[0].base_path;
-              RemoteAPI.update(distro_path, remoteToEdit)
-                .then(r => {
-                  this.setState(
-                    {
-                      errorMessages: {},
-                      showRemoteFormModal: false,
-                      remoteToEdit: undefined,
-                    },
-                    () => this.loadContent(),
+              try {
+                const distro_path =
+                  remoteToEdit.repositories[0].distributions[0].base_path;
+                RemoteAPI.update(distro_path, remoteToEdit)
+                  .then(r => {
+                    this.setState(
+                      {
+                        errorMessages: {},
+                        showRemoteFormModal: false,
+                        remoteToEdit: undefined,
+                      },
+                      () => this.loadContent(),
+                    );
+                  })
+                  .catch(err =>
+                    this.setState({ errorMessages: mapErrorMessages(err) }),
                   );
-                })
-                .catch(err =>
-                  this.setState({ errorMessages: mapErrorMessages(err) }),
-                );
-            } catch {
-              this.setState({
-                errorMessages: {
-                  __nofield:
-                    "Can't update remote without a distribution attached to it.",
-                },
-              });
+              } catch {
+                this.setState({
+                  errorMessages: {
+                    __nofield:
+                      "Can't update remote without a distribution attached to it.",
+                  },
+                });
+              }
+            }}
+            errorMessages={errorMessages}
+            showModal={showRemoteFormModal}
+            closeModal={() =>
+              this.setState({ showRemoteFormModal: false, errorMessages: {} })
             }
-          }}
-          errorMessages={errorMessages}
-          showModal={showRemoteFormModal}
-          closeModal={() =>
-            this.setState({ showRemoteFormModal: false, errorMessages: {} })
-          }
-        />
+          />
+        )}
         <BaseHeader title='Repo Management'>
           {DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE ? (
             <div className='header-bottom'>
