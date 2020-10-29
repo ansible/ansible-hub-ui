@@ -238,8 +238,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
           </FormGroup>
         )}
         <ExpandableSection
-          toggleTextExpanded='Show Less'
-          toggleTextCollapsed='Show More'
+          toggleTextExpanded='Hide advanced options'
+          toggleTextCollapsed='Show advanced options'
         >
           <FormGroup
             fieldId={'username'}
