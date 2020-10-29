@@ -17,12 +17,12 @@ Firsts must be run from inside the test/ directory.
 
 The tests can be run in two modes: CLI or GUI. To run the tests in headless CLI mode:
 
-    node_modules/.bin/cypress open
+    npm run cypress:headless
 
 To run the tests in GUI mode, which opens the Cypress interface and an embedded browser in which to
 observe and inspect test runs:
 
-    node_modules/.bin/cypress run
+    npm run cypress
 
 After the tests have run you can view a video recording of the run is test/cypress/videos.
 

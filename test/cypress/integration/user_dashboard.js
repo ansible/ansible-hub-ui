@@ -38,6 +38,7 @@ describe('Hub User Management Tests', () => {
             cy.server()
             cy.route('POST', '/api/galaxy/v3/_ui/users/').as('post')
             cy.contains('Save').click()
+            cy.wait('@post')
 
             cy.contains('[aria-labelledby=test]', "Test F")
         })
