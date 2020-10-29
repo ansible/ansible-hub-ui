@@ -13,9 +13,7 @@ describe('Hub User Management Tests', () => {
     })
 
     it('User table lists users', () => {
-        cy.contains('.body', "autohubtest1")
-        cy.contains('.body', "autohubtest2")
-        cy.contains('.body', "admin")
+        cy.contains('[aria-label="User list"] [aria-labelledby=admin]', "admin")
     })
 
     describe("Creation and management of users", () => {
@@ -45,10 +43,8 @@ describe('Hub User Management Tests', () => {
         })
 
         afterEach(() => {
-            cy.get('.pf-c-page__header-tools .pf-c-dropdown button').then(dd => {
-                dd.click()
-                cy.contains('Logout').click()
-            })
+            cy.get('.pf-c-page__header-tools .pf-c-dropdown button').click()
+            cy.contains('Logout').click()
 
             cy.contains('.pf-c-form__group', 'Username').find('input').first().type(username)
             cy.contains('.pf-c-form__group', 'Password').find('input').first().type(`${password}{enter}`)
@@ -66,21 +62,6 @@ describe('Hub User Management Tests', () => {
             cy.contains('[aria-labelledby=test]', "test@example.com")
 
             cy.contains('.body', "Test F").not()
-        })
-
-        it('Can edit users', () => {
-            var username = "test"
-
-            cy.contains('.pf-c-page__header-tools .pf-c-dropdown', 'admin').click()
-            cy.contains('Logout').click()
-
-            cy.visit(host)
-
-            cy.contains('.pf-c-form__group', 'Username').find('input').first().type(username)
-            cy.contains('.pf-c-form__group', 'Password').find('input').first().type(`${password}{enter}`)
-
-            // Test user does not have permission to manage users
-            cy.contains('#page-sidebar a', 'Users').should('not.exist')
         })
     })
 })
