@@ -20,14 +20,16 @@ export class API extends BaseAPI {
     return super.list(params, path);
   }
 
-  setDeprecation(collection: CollectionListType, isDeprecated: boolean) {
-    const path = 'v3/collections/';
+  setDeprecation(
+    collection: CollectionListType,
+    isDeprecated: boolean,
+    repo: string,
+  ) {
+    const path = `content/${repo}/v3/collections/`;
 
-    return this.update(
+    return this.patch(
       `${collection.namespace.name}/${collection.name}`,
       {
-        name: collection.name,
-        namespace: collection.namespace.name,
         deprecated: isDeprecated,
       },
       path,
