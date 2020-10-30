@@ -8,26 +8,35 @@ import {
   TextContent,
   Text,
   TextVariants,
+  Badge,
 } from '@patternfly/react-core';
 
 import { Link } from 'react-router-dom';
 
-import { CertificateIcon } from '@patternfly/react-icons';
-
 import { NumericLabel, Logo } from '../../components';
-import { CollectionListType, CertificationStatus } from '../../api';
+import { CollectionListType } from '../../api';
 import { formatPath, Paths } from '../../paths';
 import { convertContentSummaryCounts } from '../../utilities';
+import { Constants } from '../../constants';
 
 interface IProps extends CollectionListType {
   className?: string;
+  footer?: React.ReactNode;
+  repo?: string;
 }
 
 export class CollectionCard extends React.Component<IProps> {
-  MAX_DESCRIPTION_LENGTH = 50;
+  MAX_DESCRIPTION_LENGTH = 60;
 
   render() {
-    const { name, latest_version, namespace, className } = this.props;
+    const {
+      name,
+      latest_version,
+      namespace,
+      className,
+      footer,
+      repo,
+    } = this.props;
 
     const company = namespace.company || namespace.name;
     const contentSummary = convertContentSummaryCounts(latest_version.contents);
@@ -40,20 +49,15 @@ export class CollectionCard extends React.Component<IProps> {
             alt={company + ' logo'}
             size='40px'
           />
-          <TextContent>
-            {latest_version.certification === CertificationStatus.certified && (
-              <Text component={TextVariants.small}>
-                <CertificateIcon className='icon' /> Certified
-              </Text>
-            )}
-          </TextContent>
+          <TextContent>{this.getCertification(repo)}</TextContent>
         </CardHeader>
         <CardHeader>
           <div className='name'>
             <Link
-              to={formatPath(Paths.collection, {
+              to={formatPath(Paths.collectionByRepo, {
                 collection: name,
                 namespace: namespace.name,
+                repo: repo,
               })}
             >
               {name}
@@ -65,16 +69,31 @@ export class CollectionCard extends React.Component<IProps> {
             </TextContent>
           </div>
         </CardHeader>
-        <CardBody className='description'>
-          {this.getDescription(latest_version.metadata.description)}
+        <CardBody>
+          <div className='description'>
+            {this.getDescription(latest_version.metadata.description)}
+          </div>
         </CardBody>
-        <CardFooter className='type-container'>
+        <CardBody className='type-container'>
           {Object.keys(contentSummary.contents).map(k =>
             this.renderTypeCount(k, contentSummary.contents[k]),
           )}
-        </CardFooter>
+        </CardBody>
+        {footer && <CardFooter>{footer}</CardFooter>}
       </Card>
     );
+  }
+
+  private getCertification(repo) {
+    if (repo === Constants.CERTIFIED_REPO) {
+      return (
+        <Text component={TextVariants.small}>
+          <Badge isRead>Certified</Badge>
+        </Text>
+      );
+    }
+
+    return null;
   }
 
   private getDescription(d: string) {

@@ -22,6 +22,7 @@ import { convertContentSummaryCounts } from '../../utilities';
 interface IProps extends CollectionListType {
   showNamespace?: boolean;
   controls?: React.ReactNode;
+  repo?: string;
 }
 
 export class CollectionListItem extends React.Component<IProps, {}> {
@@ -34,6 +35,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
       showNamespace,
       controls,
       deprecated,
+      repo,
     } = this.props;
 
     const cells = [];
@@ -58,9 +60,10 @@ export class CollectionListItem extends React.Component<IProps, {}> {
       <DataListCell key='content'>
         <div>
           <Link
-            to={formatPath(Paths.collection, {
-              namespace: namespace.name,
+            to={formatPath(Paths.collectionByRepo, {
               collection: name,
+              namespace: namespace.name,
+              repo: repo,
             })}
           >
             {name}
@@ -91,14 +94,6 @@ export class CollectionListItem extends React.Component<IProps, {}> {
     cells.push(
       <DataListCell isFilled={false} alignRight key='stats'>
         {controls ? <div className='entry'>{controls}</div> : null}
-        {
-          // <div className='right-col entry'>
-          //     <NumericLabel
-          //         number={download_count}
-          //         label='Download'
-          //     />
-          // </div>
-        }
         <div className='right-col entry'>
           Updated {moment(latest_version.created_at).fromNow()}
         </div>

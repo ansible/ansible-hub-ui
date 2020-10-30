@@ -8,6 +8,7 @@ import { Nav, NavExpandable, NavItem, NavList } from '@patternfly/react-core';
 import { DocsBlobType } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
+import { AppContext } from '../../loaders/app-context';
 
 class DocsEntry {
   display: string;
@@ -41,6 +42,7 @@ interface IProps {
 export class TableOfContents extends React.Component<IProps, IState> {
   docsBlobCache: DocsBlobType;
   tableCache: Table;
+  static contextType = AppContext;
 
   constructor(props) {
     super(props);
@@ -87,6 +89,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
     const baseUrlParams = {
       namespace: namespace,
       collection: collection,
+      repo: this.context.selectedRepo,
     };
 
     const table = {
@@ -99,7 +102,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
 
     table.documentation.push({
       display: 'Readme',
-      url: formatPath(Paths.collectionDocsIndex, baseUrlParams),
+      url: formatPath(Paths.collectionDocsIndexByRepo, baseUrlParams),
       type: 'docs',
       name: 'readme',
     });
@@ -114,7 +117,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
               .split('_')
               .join(' '),
           ),
-          url: formatPath(Paths.collectionDocsPage, {
+          url: formatPath(Paths.collectionDocsPageByRepo, {
             ...baseUrlParams,
             page: url,
           }),
@@ -242,7 +245,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
   private getContentEntry(content, base): DocsEntry {
     return {
       display: content.content_name,
-      url: formatPath(Paths.collectionContentDocs, {
+      url: formatPath(Paths.collectionContentDocsByRepo, {
         ...base,
         type: content.content_type,
         name: content.content_name,

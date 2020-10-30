@@ -1,16 +1,11 @@
 import { BaseAPI } from './base';
-import { MockImport } from './mocked-responses/import';
 
 export class API extends BaseAPI {
-  apiPath = 'v3/_ui/imports/collections/';
+  apiPath = this.getUIPath('imports/collections/');
   mock: any;
 
   constructor() {
     super();
-
-    // Comment this out to make an actual API request
-    // mocked responses will be removed when a real API is available
-    // this.mock = new MockImport(this.http, this.apiPath);
   }
 
   get(id, path?) {

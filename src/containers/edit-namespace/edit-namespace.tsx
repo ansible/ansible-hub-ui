@@ -12,8 +12,12 @@ import {
   AlertType,
   Main,
 } from '../../components';
-import { MyNamespaceAPI, NamespaceType, ActiveUserAPI } from '../../api';
-import { Constants } from '../../constants';
+import {
+  MyNamespaceAPI,
+  NamespaceType,
+  ActiveUserAPI,
+  NamespaceLinkType,
+} from '../../api';
 
 import { Form, ActionGroup, Button } from '@patternfly/react-core';
 
@@ -158,22 +162,13 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     return ParamHelper.updateParamsMixin();
   }
 
-  private removeGroupsPrefix(groups) {
-    let unprefixedGroupOwners = [Constants.ADMIN_GROUP];
-    for (const owner of groups) {
-      if (owner == Constants.ADMIN_GROUP) {
-        continue;
-      }
-      // 'rh-identity-account', '<id>'
-      else unprefixedGroupOwners.push(owner.split(':')[1]);
-    }
-    return unprefixedGroupOwners;
-  }
-
   private loadNamespace() {
     MyNamespaceAPI.get(this.props.match.params['namespace'])
       .then(response => {
-        response.data.groups = this.removeGroupsPrefix(response.data.groups);
+        // Add an empty link to the end of the links array to create an empty field
+        // on the link edit form for adding new links
+        const emptyLink: NamespaceLinkType = { name: '', url: '' };
+        response.data.links.push(emptyLink);
         this.setState({ namespace: response.data });
       })
       .catch(response => {
@@ -183,7 +178,19 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
 
   private saveNamespace() {
     this.setState({ saving: true }, () => {
-      MyNamespaceAPI.update(this.state.namespace.name, this.state.namespace)
+      const namespace = { ...this.state.namespace };
+      const setLinks: NamespaceLinkType[] = [];
+
+      // remove any empty links from the list before saving
+      for (const link of namespace.links) {
+        if (link.url !== '' || link.name !== '') {
+          setLinks.push(link);
+        }
+      }
+
+      namespace.links = setLinks;
+
+      MyNamespaceAPI.update(this.state.namespace.name, namespace)
         .then(result => {
           this.setState({
             namespace: result.data,

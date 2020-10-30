@@ -10,10 +10,15 @@ export interface IBaseCollectionState {
   collection: CollectionDetailType;
 }
 
-export function loadCollection(forceReload = false, callback = () => null) {
+export function loadCollection(
+  repo,
+  forceReload = false,
+  callback = () => null,
+) {
   CollectionAPI.getCached(
     this.props.match.params['namespace'],
     this.props.match.params['collection'],
+    repo,
     this.state.params,
     forceReload,
   )

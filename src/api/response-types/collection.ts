@@ -13,15 +13,9 @@ export class CollectionVersion {
   };
   created_at: string;
   contents: ContentSummaryType[];
-  certification: CertificationStatus;
   namespace: string;
   name: string;
-}
-
-export enum CertificationStatus {
-  certified = 'certified',
-  notCertified = 'not_certified',
-  needsReview = 'needs_review',
+  repository_list: string[];
 }
 
 class RenderedFile {

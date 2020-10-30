@@ -4,7 +4,10 @@ import { ParamHelper } from '../utilities';
 import * as Cookies from 'js-cookie';
 
 export class BaseAPI {
+  UI_API_VERSION = 'v1';
+
   apiBaseURL = API_HOST + API_BASE_PATH;
+
   apiPath: string;
   http: any;
 
@@ -17,34 +20,44 @@ export class BaseAPI {
     this.http.interceptors.request.use(request => this.authHandler(request));
   }
 
-  list(params?: object, apiPath?: string) {
-    const path = apiPath || this.apiPath;
+  // Use this function to get paths in the _ui API. That will ensure the API version
+  // gets updated when it changes
+  getUIPath(url: string) {
+    return `_ui/${this.UI_API_VERSION}/${url}`;
+  }
 
+  list(params?: object, apiPath?: string) {
     // The api uses offset/limit for pagination. I think this is confusing
     // for params on the front end, so we're going to use page/page size
     // for the URL params and just map it to whatever the api expects.
 
-    return this.http.get(path, { params: this.mapPageToOffset(params) });
+    return this.http.get(this.getPath(apiPath), {
+      params: this.mapPageToOffset(params),
+    });
   }
 
   get(id: string, apiPath?: string) {
-    const path = apiPath || this.apiPath;
-    return this.http.get(path + id + '/');
+    return this.http.get(this.getPath(apiPath) + id + '/');
   }
 
-  update(id: string, data: any, apiPath?: string) {
-    const path = apiPath || this.apiPath;
-    return this.http.put(path + id + '/', data);
+  update(id: string | number, data: any, apiPath?: string) {
+    return this.http.put(this.getPath(apiPath) + id + '/', data);
   }
 
   create(data: any, apiPath?: string) {
-    const path = apiPath || this.apiPath;
-    return this.http.post(path, data);
+    return this.http.post(this.getPath(apiPath), data);
   }
 
   delete(id: string | number, apiPath?: string) {
-    const path = apiPath || this.apiPath;
-    return this.http.delete(path + id + '/');
+    return this.http.delete(this.getPath(apiPath) + id + '/');
+  }
+
+  patch(id: string | number, data: any, apiPath?: string) {
+    return this.http.patch(this.getPath(apiPath) + id + '/', data);
+  }
+
+  private getPath(apiPath: string) {
+    return apiPath || this.apiPath;
   }
 
   private async authHandler(request) {

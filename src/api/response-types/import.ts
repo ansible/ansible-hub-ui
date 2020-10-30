@@ -23,6 +23,7 @@ export class ImportListType {
   // Collection name
   name: string;
   version: string;
+  collectionRepo: string;
 }
 
 export class ImportDetailType extends ImportListType {

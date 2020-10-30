@@ -12,6 +12,7 @@ import {
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from '../../utilities/param-helper';
 import { formatPath, Paths } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 // renders list of contents in a collection
 class CollectionContent extends React.Component<
@@ -30,28 +31,32 @@ class CollectionContent extends React.Component<
   }
 
   componentDidMount() {
-    this.loadCollection();
+    this.loadCollection(this.context.selectedRepo);
   }
 
   render() {
     const { collection, params } = this.state;
+    const name =
+      NAMESPACE_TERM.charAt(0).toUpperCase() + NAMESPACE_TERM.slice(1);
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
     const breadcrumbs = [
-      { url: Paths.partners, name: 'Partners' },
+      { url: Paths[NAMESPACE_TERM], name: name },
       {
-        url: formatPath(Paths.namespace, {
+        url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
+          repo: this.context.selectedRepo,
         }),
         name: collection.namespace.name,
       },
       {
-        url: formatPath(Paths.collection, {
+        url: formatPath(Paths.collectionByRepo, {
           namespace: collection.namespace.name,
           collection: collection.name,
+          repo: this.context.selectedRepo,
         }),
         name: collection.name,
       },
@@ -64,10 +69,13 @@ class CollectionContent extends React.Component<
           collection={collection}
           params={params}
           updateParams={params =>
-            this.updateParams(params, () => this.loadCollection(true))
+            this.updateParams(params, () =>
+              this.loadCollection(this.context.selectedRepo, true),
+            )
           }
           breadcrumbs={breadcrumbs}
           activeTab='contents'
+          repo={this.context.selectedRepo}
         />
         <Main>
           <Section className='body'>
@@ -94,3 +102,5 @@ class CollectionContent extends React.Component<
 }
 
 export default withRouter(CollectionContent);
+
+CollectionContent.contextType = AppContext;

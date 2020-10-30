@@ -7,6 +7,7 @@ import {
   DropdownItem,
   Alert,
   AlertActionCloseButton,
+  ClipboardCopy,
 } from '@patternfly/react-core';
 
 import * as ReactMarkdown from 'react-markdown';
@@ -16,7 +17,6 @@ import {
   CollectionAPI,
   NamespaceAPI,
   NamespaceType,
-  CertificationStatus,
 } from '../../api';
 
 import {
@@ -30,8 +30,9 @@ import {
 
 import { ImportModal } from './import-modal/import-modal';
 
-import { ParamHelper } from '../../utilities/param-helper';
+import { ParamHelper, getRepoUrl } from '../../utilities';
 import { Paths, formatPath } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   collections: CollectionListType[];
@@ -58,7 +59,6 @@ interface IProps extends RouteComponentProps {
 
 export class NamespaceDetail extends React.Component<IProps, IState> {
   nonAPIParams = ['tab'];
-  persistentParams = { certification: CertificationStatus.certified };
 
   // namespace is a positional url argument, so don't include it in the
   // query params
@@ -113,11 +113,16 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     const tabs = ['Collections'];
 
+    if (this.props.showControls) {
+      tabs.push('CLI Configuration');
+    }
     const tab = params['tab'] || 'collections';
 
     if (namespace.resources) {
       tabs.push('Resources');
     }
+
+    const repositoryUrl = getRepoUrl('inbound-' + namespace.name);
 
     return (
       <React.Fragment>
@@ -178,10 +183,29 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 handleControlClick={(id, action) =>
                   this.handleCollectionAction(id, action)
                 }
+                repo={this.context.selectedRepo}
               />
-            ) : (
-              this.renderResources(namespace)
-            )}
+            ) : null}
+            {tab.toLowerCase() === 'cli configuration' ? (
+              <div>
+                <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
+                <div>
+                  <b>Note:</b> Use this URL to configure ansible-galaxy to
+                  upload collections to this namespace. More information on
+                  ansible-galaxy configurations can be found{' '}
+                  <a
+                    href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
+                    target='_blank'
+                  >
+                    here
+                  </a>
+                  .
+                </div>
+              </div>
+            ) : null}
+            {tab.toLowerCase() === 'resources'
+              ? this.renderResources(namespace)
+              : null}
           </Section>
         </Main>
       </React.Fragment>
@@ -199,7 +223,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         });
         break;
       case 'deprecate':
-        CollectionAPI.setDeprecation(collection, !collection.deprecated)
+        CollectionAPI.setDeprecation(
+          collection,
+          !collection.deprecated,
+          this.context.selectedRepo,
+        )
           .then(() => this.loadCollections())
           .catch(error => {
             this.setState({
@@ -219,10 +247,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private loadCollections() {
-    CollectionAPI.list({
-      ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-      ...this.persistentParams,
-    }).then(result => {
+    CollectionAPI.list(
+      {
+        ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+      },
+      this.context.selectedRepo,
+    ).then(result => {
       this.setState({
         collections: result.data.data,
         itemCount: result.data.meta.count,
@@ -232,10 +262,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   private loadAll() {
     Promise.all([
-      CollectionAPI.list({
-        ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
-        ...this.persistentParams,
-      }),
+      CollectionAPI.list(
+        {
+          ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
+        },
+        this.context.selectedRepo,
+      ),
       NamespaceAPI.get(this.props.match.params['namespace']),
     ])
       .then(val => {
@@ -317,3 +349,5 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     this.setState(newState);
   }
 }
+
+NamespaceDetail.contextType = AppContext;

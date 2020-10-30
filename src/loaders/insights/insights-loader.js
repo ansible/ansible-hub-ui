@@ -1,9 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, matchPath } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Routes } from './Routes';
 import '../app.scss';
+import { AppContext } from '../app-context';
+import { ActiveUserAPI } from '../../api';
+import { Paths } from '../../paths';
+
+const DEFAULT_REPO = 'published';
 
 class App extends Component {
   firstLoad = true;
@@ -12,7 +17,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentUser: null,
+      user: null,
+      activeUser: null,
+      selectedRepo: DEFAULT_REPO,
     };
   }
 
@@ -40,9 +47,10 @@ class App extends Component {
       insights.chrome.navigation(buildNavigation()),
     );
 
-    insights.chrome.auth
-      .getUser()
-      .then(user => this.setState({ currentUser: user }));
+    insights.chrome.auth.getUser().then(user => this.setState({ user: user }));
+    ActiveUserAPI.getActiveUser().then(result =>
+      this.setState({ activeUser: result.data }),
+    );
   }
 
   componentWillUnmount() {
@@ -50,16 +58,71 @@ class App extends Component {
     this.buildNav();
   }
 
+  componentDidUpdate(prevProps) {
+    // This is sort of a dirty hack to make it so that collection details can
+    // view repositories other than "published", but all other views are locked
+    // to "published"
+    // We do this because there is not currently a way to toggle repositories
+    // in automation hub on cloud.redhat.com, so it's important to ensure the user
+    // always lands on the published repo
+
+    // check if the URL matches the base path for the collection detail page
+    const match = this.isRepoURL(this.props.location.pathname);
+
+    if (match) {
+      // if the URL matches, allow the repo to be switched to the repo defined in
+      // the url
+      if (match.params['repo'] !== this.state.selectedRepo) {
+        this.setState({ selectedRepo: match.params['repo'] });
+      }
+    } else {
+      // For all other URLs, switch the global state back to the "publised" repo
+      // if the repo is set to anything else.
+      if (this.state.selectedRepo !== DEFAULT_REPO) {
+        this.setState({ selectedRepo: DEFAULT_REPO });
+      }
+    }
+  }
+
   render() {
+    // block the page from rendering if we're on a repo route and the repo in the
+    // url doesn't match the current state
+    // This gives componentDidUpdate a chance to recognize that route has chnaged
+    // and update the internal state to match the route before any pages can
+    // redirect the URL to a 404 state.
+    const match = this.isRepoURL(this.props.location.pathname);
+    if (match && match.params['repo'] !== this.state.selectedRepo) {
+      return null;
+    }
+
     // Wait for the user data to load before any of the child components are
     // rendered. This will prevent API calls from happening
     // before the app can authenticate
-    if (!this.state.currentUser) {
+    if (!this.state.user || !this.state.activeUser) {
       return null;
     } else {
-      return <Routes childProps={this.props} />;
+      return (
+        <AppContext.Provider
+          value={{
+            user: this.state.activeUser,
+            setUser: this.setActiveUser,
+            selectedRepo: this.state.selectedRepo,
+          }}
+        >
+          <Routes childProps={this.props} />
+        </AppContext.Provider>
+      );
     }
   }
+  setActiveUser = user => {
+    this.setState({ activeUser: user });
+  };
+
+  isRepoURL = location => {
+    return matchPath(location, {
+      path: Paths.collectionByRepo,
+    });
+  };
 }
 
 App.propTypes = {

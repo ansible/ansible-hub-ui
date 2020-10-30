@@ -22,15 +22,19 @@ import {
   UserDetail,
   UserCreate,
   UserProfile,
+  GroupList,
+  GroupDetail,
+  RepositoryList,
 } from '../../containers';
 import { ActiveUserAPI } from '../../api';
+import { AppContext } from '../app-context';
 
 import { Paths, formatPath } from '../../paths';
-import { AppContext } from './app-context';
 
 interface IProps extends RouteComponentProps {
   Component: any;
   noAuth: boolean;
+  selectedRepo: string;
 }
 interface IState {
   isLoading: boolean;
@@ -70,26 +74,41 @@ class AuthHandler extends React.Component<IProps, IState> {
         ></Redirect>
       );
     }
-
-    return <Component {...props}></Component>;
+    return (
+      <Component selectedRepo={this.props.selectedRepo} {...props}></Component>
+    );
   }
 }
 
-export class Routes extends React.Component<{}> {
+export class Routes extends React.Component<any> {
+  static contextType = AppContext;
+
   routes = [
+    { comp: GroupList, path: Paths.groupList },
+    { comp: GroupDetail, path: Paths.groupDetail },
+    { comp: RepositoryList, path: Paths.repositories },
     { comp: UserProfile, path: Paths.userProfileSettings },
     { comp: UserCreate, path: Paths.createUser },
     { comp: EditUser, path: Paths.editUser },
     { comp: UserDetail, path: Paths.userDetail },
     { comp: UserList, path: Paths.userList },
-    { comp: CertificationDashboard, path: Paths.certificationDashboard },
+    { comp: CertificationDashboard, path: Paths.approvalDashboard },
     { comp: NotFound, path: Paths.notFound },
     { comp: TokenPageStandalone, path: Paths.token },
-    { comp: Partners, path: Paths.partners },
+    { comp: Partners, path: Paths[NAMESPACE_TERM] },
     { comp: EditNamespace, path: Paths.editNamespace },
     { comp: ManageNamespace, path: Paths.myCollections },
+    { comp: ManageNamespace, path: Paths.myCollectionsByRepo },
     { comp: MyNamespaces, path: Paths.myNamespaces },
     { comp: LoginPage, path: Paths.login, noAuth: true },
+    { comp: CollectionDocs, path: Paths.collectionDocsPageByRepo },
+    { comp: CollectionDocs, path: Paths.collectionDocsIndexByRepo },
+    { comp: CollectionDocs, path: Paths.collectionContentDocsByRepo },
+    { comp: CollectionContent, path: Paths.collectionContentListByRepo },
+    { comp: CollectionImportLog, path: Paths.collectionImportLogByRepo },
+    { comp: CollectionDetail, path: Paths.collectionByRepo },
+    { comp: PartnerDetail, path: Paths.namespaceByRepo },
+    { comp: Search, path: Paths.searchByRepo },
     { comp: CollectionDocs, path: Paths.collectionDocsPage },
     { comp: CollectionDocs, path: Paths.collectionDocsIndex },
     { comp: CollectionDocs, path: Paths.collectionContentDocs },
@@ -111,6 +130,7 @@ export class Routes extends React.Component<{}> {
               <AuthHandler
                 noAuth={route.noAuth}
                 Component={route.comp}
+                selectedRepo={this.props.selectedRepo}
                 {...props}
               ></AuthHandler>
             )}

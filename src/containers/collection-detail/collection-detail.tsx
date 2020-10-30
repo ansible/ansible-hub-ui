@@ -12,6 +12,7 @@ import {
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from '../../utilities/param-helper';
 import { formatPath, Paths } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 // renders collection level information
 class CollectionDetail extends React.Component<
@@ -30,21 +31,24 @@ class CollectionDetail extends React.Component<
   }
 
   componentDidMount() {
-    this.loadCollection();
+    this.loadCollection(this.context.selectedRepo);
   }
 
   render() {
     const { collection, params } = this.state;
+    const name =
+      NAMESPACE_TERM.charAt(0).toUpperCase() + NAMESPACE_TERM.slice(1);
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
     const breadcrumbs = [
-      { url: Paths.partners, name: 'Partners' },
+      { url: Paths[NAMESPACE_TERM], name: name },
       {
-        url: formatPath(Paths.namespace, {
+        url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
+          repo: this.context.selectedRepo,
         }),
         name: collection.namespace.name,
       },
@@ -59,10 +63,13 @@ class CollectionDetail extends React.Component<
           collection={collection}
           params={params}
           updateParams={p =>
-            this.updateParams(p, () => this.loadCollection(true))
+            this.updateParams(p, () =>
+              this.loadCollection(this.context.selectedRepo, true),
+            )
           }
           breadcrumbs={breadcrumbs}
           activeTab='details'
+          repo={this.context.selectedRepo}
         />
         <Main>
           <Section className='body'>
@@ -87,3 +94,5 @@ class CollectionDetail extends React.Component<
 }
 
 export default withRouter(CollectionDetail);
+
+CollectionDetail.contextType = AppContext;

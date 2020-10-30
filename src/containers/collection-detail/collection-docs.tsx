@@ -28,6 +28,7 @@ import { RenderPluginDoc } from '@ansible/galaxy-doc-builder';
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
+import { AppContext } from '../../loaders/app-context';
 
 // renders markdown files in collection docs/ directory
 class CollectionDocs extends React.Component<
@@ -49,12 +50,14 @@ class CollectionDocs extends React.Component<
   }
 
   componentDidMount() {
-    this.loadCollection();
+    this.loadCollection(this.context.selectedRepo);
   }
 
   render() {
     const { params, collection } = this.state;
     const urlFields = this.props.match.params;
+    const name =
+      NAMESPACE_TERM.charAt(0).toUpperCase() + NAMESPACE_TERM.slice(1);
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -101,17 +104,19 @@ class CollectionDocs extends React.Component<
     }
 
     const breadcrumbs = [
-      { url: Paths.partners, name: 'Partners' },
+      { url: Paths[NAMESPACE_TERM], name: name },
       {
-        url: formatPath(Paths.namespace, {
+        url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
+          repo: this.context.selectedRepo,
         }),
         name: collection.namespace.name,
       },
       {
-        url: formatPath(Paths.collection, {
+        url: formatPath(Paths.collectionByRepo, {
           namespace: collection.namespace.name,
           collection: collection.name,
+          repo: this.context.selectedRepo,
         }),
         name: collection.name,
       },
@@ -129,11 +134,14 @@ class CollectionDocs extends React.Component<
           collection={collection}
           params={params}
           updateParams={p =>
-            this.updateParams(p, () => this.loadCollection(true))
+            this.updateParams(p, () =>
+              this.loadCollection(this.context.selectedRepo, true),
+            )
           }
           breadcrumbs={breadcrumbs}
           activeTab='documentation'
           className='header'
+          repo={this.context.selectedRepo}
         />
         <Main className='main'>
           <Section className='docs-container'>
@@ -203,11 +211,12 @@ class CollectionDocs extends React.Component<
       return (
         <Link
           to={formatPath(
-            Paths.collectionDocsPage,
+            Paths.collectionDocsPageByRepo,
             {
               namespace: collection.namespace.name,
               collection: collection.name,
               page: sanitizeDocsUrls(href),
+              repo: this.context.selectedRepo,
             },
             params,
           )}
@@ -227,12 +236,13 @@ class CollectionDocs extends React.Component<
       return (
         <Link
           to={formatPath(
-            Paths.collectionContentDocs,
+            Paths.collectionContentDocsByRepo,
             {
               namespace: collection.namespace.name,
               collection: collection.name,
               type: 'module',
               name: moduleName,
+              repo: this.context.selectedRepo,
             },
             params,
           )}
@@ -270,3 +280,5 @@ class CollectionDocs extends React.Component<
 }
 
 export default withRouter(CollectionDocs);
+
+CollectionDocs.contextType = AppContext;

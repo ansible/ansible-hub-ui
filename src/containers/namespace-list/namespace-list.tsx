@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './namespace-list.scss';
 
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   EmptyState,
@@ -20,20 +20,14 @@ import {
   Pagination,
   NamespaceModal,
   LoadingPageWithHeader,
-  Main,
   LoadingPageSpinner,
 } from '../../components';
 import { Button } from '@patternfly/react-core';
 import { ToolbarItem } from '@patternfly/react-core';
-import {
-  NamespaceAPI,
-  NamespaceListType,
-  ActiveUserAPI,
-  MeType,
-  MyNamespaceAPI,
-} from '../../api';
+import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   namespaces: NamespaceListType[];
@@ -46,7 +40,6 @@ interface IState {
     tenant?: string;
   };
   hasPermission: boolean;
-  partnerEngineer: boolean;
   isModalOpen: boolean;
   loading: boolean;
 }
@@ -82,7 +75,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
       params: params,
       hasPermission: true,
       isModalOpen: false,
-      partnerEngineer: false,
       loading: true,
     };
   }
@@ -94,7 +86,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
   };
 
   componentDidMount() {
-    this.isPartnerEngineer();
     if (this.props.filterOwner) {
       // Make a query with no params and see if it returns results to tell
       // if the user can edit namespaces
@@ -115,8 +106,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { namespaces, params, itemCount, partnerEngineer } = this.state;
+    const { namespaces, params, itemCount } = this.state;
     const { title, filterOwner } = this.props;
+    const { user } = this.context;
 
     if (!namespaces) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -124,7 +116,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     let extra = [];
 
-    if (partnerEngineer && filterOwner) {
+    if (!!user && user.model_permissions.add_namespace && filterOwner) {
       extra.push(
         <ToolbarItem key='create-button'>
           <Button variant='primary' onClick={this.handleModalToggle}>
@@ -236,6 +228,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             <NamespaceCard
               namespaceURL={formatPath(namespacePath, {
                 namespace: ns.name,
+                repo: this.context.selectedRepo,
               })}
               key={i}
               {...ns}
@@ -268,11 +261,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
   private get updateParams() {
     return ParamHelper.updateParamsMixin(this.nonURLParams);
   }
-
-  private isPartnerEngineer() {
-    ActiveUserAPI.isPartnerEngineer().then(response => {
-      const me: MeType = response.data;
-      this.setState({ partnerEngineer: me.is_partner_engineer });
-    });
-  }
 }
+
+NamespaceList.contextType = AppContext;

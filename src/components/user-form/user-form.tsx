@@ -8,7 +8,9 @@ import {
   Button,
 } from '@patternfly/react-core';
 
-import { UserType } from '../../api';
+import { APISearchTypeAhead } from '../../components';
+
+import { UserType, GroupAPI } from '../../api';
 
 interface IProps {
   /** User to edit */
@@ -31,10 +33,13 @@ interface IProps {
 
   /** Action to take when the user presses the cancel button */
   onCancel?: () => void;
+  isNewUser?: boolean;
+  isMe?: boolean;
 }
 
 interface IState {
   passwordConfirm: string;
+  searchGroups: any[];
 }
 
 export class UserForm extends React.Component<IProps, IState> {
@@ -48,7 +53,12 @@ export class UserForm extends React.Component<IProps, IState> {
 
     this.state = {
       passwordConfirm: '',
+      searchGroups: [],
     };
+  }
+
+  componentDidMount() {
+    this.loadGroups('');
   }
 
   render() {
@@ -59,6 +69,8 @@ export class UserForm extends React.Component<IProps, IState> {
       saveUser,
       onCancel,
       requiredFields,
+      isNewUser,
+      isMe,
     } = this.props;
     const { passwordConfirm } = this.state;
     const formFields = [
@@ -70,7 +82,7 @@ export class UserForm extends React.Component<IProps, IState> {
         id: 'password',
         title: 'Password',
         type: 'password',
-        placeholder: '••••••••••••••••••••••',
+        placeholder: isNewUser ? '' : '••••••••••••••••••••••',
       },
     ];
     return (
@@ -104,22 +116,44 @@ export class UserForm extends React.Component<IProps, IState> {
           )}
         >
           <TextInput
+            placeholder={isNewUser ? '' : '••••••••••••••••••••••'}
             validated={this.toError(
               this.isPassSame(user.password, passwordConfirm),
             )}
             isDisabled={isReadonly}
             id={'password-confirm'}
             value={passwordConfirm}
-            onChange={(value, event) => {
+            onChange={value => {
               this.setState({ passwordConfirm: value });
             }}
             type='password'
           />
         </FormGroup>
+        <FormGroup
+          fieldId='groups'
+          label='Groups'
+          helperTextInvalid={errorMessages['groups']}
+          validated={this.toError(!('groups' in errorMessages))}
+        >
+          <APISearchTypeAhead
+            results={this.state.searchGroups}
+            loadResults={this.loadGroups}
+            onSelect={this.onSelectGroup}
+            placeholderText='Select groups'
+            selections={user.groups}
+            multiple={true}
+            onClear={this.clearGroups}
+            isDisabled={isReadonly || isMe}
+          />
+        </FormGroup>
+
         {!isReadonly && (
           <ActionGroup>
             <Button
-              isDisabled={!this.isPassSame(user.password, passwordConfirm)}
+              isDisabled={
+                !this.isPassSame(user.password, passwordConfirm) ||
+                !this.requiredFilled(user)
+              }
               onClick={() => saveUser()}
             >
               Save
@@ -133,6 +167,36 @@ export class UserForm extends React.Component<IProps, IState> {
     );
   }
 
+  private clearGroups = () => {
+    const newUser = { ...this.props.user };
+    newUser.groups = [];
+    this.props.updateUser(newUser, this.props.errorMessages);
+  };
+
+  private onSelectGroup = (event, selection, isPlaceholder) => {
+    const { user } = this.props;
+
+    const newUser = { ...user };
+
+    const i = user.groups.findIndex(g => g.name === selection);
+    if (i === -1) {
+      const addedGroup = this.state.searchGroups.find(
+        g => g.name === selection,
+      );
+      user.groups.push(addedGroup);
+    } else {
+      user.groups.splice(i, 1);
+    }
+
+    this.props.updateUser(newUser, this.props.errorMessages);
+  };
+
+  private loadGroups = name => {
+    GroupAPI.list({ name__contains: name, page_size: 5 }).then(result =>
+      this.setState({ searchGroups: result.data.data }),
+    );
+  };
+
   private toError(validated: boolean) {
     if (validated) {
       return 'default';
@@ -143,6 +207,14 @@ export class UserForm extends React.Component<IProps, IState> {
 
   private isPassSame(pass, confirm) {
     return !pass || pass === '' || pass === confirm;
+  }
+
+  private requiredFilled(user) {
+    if (this.props.isNewUser) {
+      return !!user.password && !!user.username;
+    } else {
+      return !!user.username;
+    }
   }
 
   private updateField = (value, event) => {

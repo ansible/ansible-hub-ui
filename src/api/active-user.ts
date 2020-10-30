@@ -2,7 +2,7 @@ import { BaseAPI } from './base';
 import { Constants } from '../constants';
 
 class API extends BaseAPI {
-  apiPath = 'v3/_ui/me/';
+  apiPath = this.getUIPath('me/');
 
   constructor() {
     super();
@@ -30,6 +30,10 @@ class API extends BaseAPI {
     }
   }
 
+  getActiveUser() {
+    return this.http.get(this.apiPath);
+  }
+
   saveUser(data) {
     return this.http.put(this.apiPath, data);
   }
@@ -51,13 +55,13 @@ class API extends BaseAPI {
   // Note: This does not reset the app's authentication state. That has to be done
   // separately by setting the user state in the app's root component
   logout() {
-    return this.http.post('v3/_ui/auth/logout/', {});
+    return this.http.post(this.getUIPath('auth/logout/'), {});
   }
 
   // Note: This does not reset the app's authentication state. That has to be done
   // separately by setting the user state in the app's root component
   login(username, password) {
-    const loginURL = 'v3/_ui/auth/login/';
+    const loginURL = this.getUIPath('auth/login/');
 
     return new Promise((resolve, reject) => {
       // Make a get request to the login endpoint to set CSRF tokens before making
@@ -75,10 +79,6 @@ class API extends BaseAPI {
         })
         .catch(err => reject(err));
     });
-  }
-
-  isPartnerEngineer() {
-    return this.http.get(this.apiPath);
   }
 }
 

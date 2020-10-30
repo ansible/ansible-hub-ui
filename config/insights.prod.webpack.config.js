@@ -6,6 +6,7 @@ module.exports = webpackBase({
   API_BASE_PATH: '/api/automation-hub/',
   UI_BASE_PATH: '',
   DEPLOYMENT_MODE: 'insights',
+  NAMESPACE_TERM: 'partners',
   UI_USE_HTTPS: false,
   UI_DEBUG: false,
   TARGET_ENVIRONMENT: 'prod',

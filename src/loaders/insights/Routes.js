@@ -85,7 +85,7 @@ const PartnerDetail = asyncComponent(() =>
 const Partners = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_list" */
-    '../../containers/namespace-list/partners'
+    '../../containers/namespace-list/' + NAMESPACE_TERM
   ),
 );
 
@@ -117,6 +117,13 @@ const CertificationDashboard = asyncComponent(() =>
   ),
 );
 
+const Repository = asyncComponent(() =>
+  import(
+    /* webpackChunkName: "repository-list" */
+    '../../containers/repositories/repository-list'
+  ),
+);
+
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
   const root = document.getElementById('root');
   root.removeAttribute('class');
@@ -145,7 +152,12 @@ export const Routes = props => {
   return (
     <Switch>
       <InsightsRoute
-        path={Paths.certificationDashboard}
+        path={Paths.repositories}
+        component={Repository}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.approvalDashboard}
         component={CertificationDashboard}
         rootClass='root'
       />
@@ -160,7 +172,7 @@ export const Routes = props => {
         rootClass='root'
       />
       <InsightsRoute
-        path={Paths.partners}
+        path={Paths[NAMESPACE_TERM]}
         component={Partners}
         rootClass='root'
       />
@@ -175,8 +187,53 @@ export const Routes = props => {
         rootClass='root'
       />
       <InsightsRoute
+        path={Paths.myCollectionsByRepo}
+        component={ManageNamespace}
+        rootClass='root'
+      />
+      <InsightsRoute
         path={Paths.myNamespaces}
         component={MyNamespaces}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionDocsPageByRepo}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionDocsIndexByRepo}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionContentDocsByRepo}
+        component={CollectionDocs}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionContentListByRepo}
+        component={CollectionContent}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionImportLogByRepo}
+        component={CollectionImportLog}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionByRepo}
+        component={CollectionDetail}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.namespaceByRepo}
+        component={PartnerDetail}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.searchByRepo}
+        component={Search}
         rootClass='root'
       />
       <InsightsRoute

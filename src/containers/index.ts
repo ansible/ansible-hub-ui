@@ -19,3 +19,6 @@ export { default as EditUser } from './user-management/user-edit';
 export { default as UserDetail } from './user-management/user-detail';
 export { default as UserCreate } from './user-management/user-create';
 export { default as UserProfile } from './settings/user-profile';
+export { default as GroupList } from './group-management/group-list';
+export { default as GroupDetail } from './group-management/group-detail';
+export { default as RepositoryList } from './repositories/repository-list';

@@ -33,6 +33,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
         onClose={() => closeModal(false)}
         isOpen={isOpen}
         title={''}
+        aria-label='delete-user-confirmation'
         header={
           <span className='pf-c-content'>
             <h2>

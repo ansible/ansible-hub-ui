@@ -5,6 +5,7 @@ declare module '@redhat-cloud-services/frontend-components';
 declare module 'axios-mock-adapter';
 declare module 'react-markdown';
 declare module 'react-router-hash-link';
+declare module 'file-saver';
 declare module '*.gif';
 declare module '*.svg';
 
@@ -13,3 +14,5 @@ declare var API_HOST;
 declare var API_BASE_PATH;
 declare var UI_BASE_PATH;
 declare var DEPLOYMENT_MODE;
+declare var NAMESPACE_TERM;
+declare var APPLICATION_NAME;

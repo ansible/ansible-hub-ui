@@ -13,7 +13,7 @@ import {
 import { UserType, ActiveUserAPI } from '../../api';
 import { Paths } from '../../paths';
 import { mapErrorMessages } from '../../utilities';
-import { AppContext } from '../../loaders/standalone/app-context';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   user: UserType;
@@ -62,6 +62,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
           closeAlert={i => this.closeAlert(i)}
         ></AlertList>
         <UserFormPage
+          isMe={true}
           user={user}
           breadcrumbs={[{ name: 'Settings' }, { name: 'My profile' }]}
           title='My profile'

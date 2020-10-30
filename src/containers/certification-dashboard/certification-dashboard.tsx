@@ -30,13 +30,7 @@ import {
   WarningTriangleIcon,
 } from '@patternfly/react-icons';
 
-import {
-  CollectionVersionAPI,
-  CollectionVersion,
-  CertificationStatus,
-  ActiveUserAPI,
-  MeType,
-} from '../../api';
+import { CollectionVersionAPI, CollectionVersion, TaskAPI } from '../../api';
 import { ParamHelper } from '../../utilities';
 import {
   LoadingPageWithHeader,
@@ -48,10 +42,11 @@ import {
   AlertList,
   closeAlertMixin,
   AlertType,
-  SortFieldType,
   SortTable,
 } from '../../components';
 import { Paths, formatPath } from '../../paths';
+import { Constants } from '../../constants';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   params: {
@@ -65,7 +60,7 @@ interface IState {
   versions: CollectionVersion[];
   itemCount: number;
   loading: boolean;
-  updatingVersions: string[];
+  updatingVersions: CollectionVersion[];
   redirect: string;
 }
 
@@ -89,8 +84,8 @@ class CertificationDashboard extends React.Component<
       params['sort'] = '-pulp_created';
     }
 
-    if (!params['certification']) {
-      params['certification'] = CertificationStatus.needsReview;
+    if (!params['repository']) {
+      params['repository'] = 'staging';
     }
 
     this.state = {
@@ -105,14 +100,14 @@ class CertificationDashboard extends React.Component<
   }
 
   componentDidMount() {
-    ActiveUserAPI.isPartnerEngineer().then(response => {
-      const me: MeType = response.data;
-      if (!me.is_partner_engineer) {
-        this.setState({ redirect: Paths.notFound });
-      } else {
-        this.queryCollections();
-      }
-    });
+    if (
+      !this.context.user ||
+      !this.context.user.model_permissions.move_collection
+    ) {
+      this.setState({ redirect: Paths.notFound });
+    } else {
+      this.queryCollections();
+    }
   }
 
   render() {
@@ -122,23 +117,12 @@ class CertificationDashboard extends React.Component<
       return <Redirect to={redirect}></Redirect>;
     }
 
-    const sortOptions: SortFieldType[] = [
-      {
-        id: 'pulp_created',
-        title: 'Date created',
-        type: 'numeric',
-      },
-      { id: 'namespace', title: 'Namespace name', type: 'alpha' },
-      { id: 'version', title: 'Version number', type: 'numeric' },
-      { id: 'name', title: 'Collection name', type: 'alpha' },
-    ];
-
     if (!versions) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
     return (
       <React.Fragment>
-        <BaseHeader title='Certification dashboard'></BaseHeader>
+        <BaseHeader title='Approval dashboard'></BaseHeader>
         <AlertList
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
@@ -164,21 +148,21 @@ class CertificationDashboard extends React.Component<
                           title: 'Collection Name',
                         },
                         {
-                          id: 'certification',
-                          title: 'Certification Status',
+                          id: 'repository',
+                          title: 'Repository',
                           inputType: 'select',
                           options: [
                             {
-                              id: 'not_certified',
+                              id: Constants.NOTCERTIFIED,
                               title: 'Rejected',
                             },
                             {
-                              id: 'needs_review',
+                              id: Constants.NEEDSREVIEW,
                               title: 'Needs Review',
                             },
                             {
-                              id: 'certified',
-                              title: 'Certified',
+                              id: Constants.PUBLISHED,
+                              title: 'Approved',
                             },
                           ],
                         },
@@ -296,37 +280,38 @@ class CertificationDashboard extends React.Component<
   }
 
   private renderStatus(version: CollectionVersion) {
-    if (this.state.updatingVersions.includes(version.id)) {
+    if (this.state.updatingVersions.includes(version)) {
       return <span className='fa fa-lg fa-spin fa-spinner' />;
     }
-    switch (version.certification) {
-      case CertificationStatus.certified:
-        return (
-          <span>
-            <CheckCircleIcon
-              style={{ color: 'var(--pf-global--success-color--100)' }}
-            />{' '}
-            Certified
-          </span>
-        );
-      case CertificationStatus.notCertified:
-        return (
-          <span>
-            <ExclamationCircleIcon
-              style={{ color: 'var(--pf-global--danger-color--100)' }}
-            />{' '}
-            Rejected
-          </span>
-        );
-      case CertificationStatus.needsReview:
-        return (
-          <span>
-            <InfoCircleIcon
-              style={{ color: 'var(--pf-global--info-color--100)' }}
-            />{' '}
-            Needs Review
-          </span>
-        );
+    if (version.repository_list.includes(Constants.PUBLISHED)) {
+      return (
+        <span>
+          <CheckCircleIcon
+            style={{ color: 'var(--pf-global--success-color--100)' }}
+          />{' '}
+          Approved
+        </span>
+      );
+    }
+    if (version.repository_list.includes(Constants.NOTCERTIFIED)) {
+      return (
+        <span>
+          <ExclamationCircleIcon
+            style={{ color: 'var(--pf-global--danger-color--100)' }}
+          />{' '}
+          Rejected
+        </span>
+      );
+    }
+    if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
+      return (
+        <span>
+          <InfoCircleIcon
+            style={{ color: 'var(--pf-global--info-color--100)' }}
+          />{' '}
+          Needs Review
+        </span>
+      );
     }
   }
 
@@ -341,10 +326,11 @@ class CertificationDashboard extends React.Component<
         <td>
           <Link
             to={formatPath(
-              Paths.collection,
+              Paths.collectionByRepo,
               {
                 namespace: version.namespace,
                 collection: version.name,
+                repo: version.repository_list[0],
               },
               {
                 version: version.version,
@@ -366,6 +352,9 @@ class CertificationDashboard extends React.Component<
   }
 
   private renderButtons(version: CollectionVersion) {
+    if (this.state.updatingVersions.includes(version)) {
+      return;
+    }
     const importsLink = (
       <DropdownItem
         key='imports'
@@ -387,22 +376,26 @@ class CertificationDashboard extends React.Component<
       />
     );
 
-    const certifyDropDown = (isDisabled: boolean) => (
+    const certifyDropDown = (isDisabled: boolean, originalRepo) => (
       <DropdownItem
         onClick={() =>
-          this.updateCertification(version, CertificationStatus.certified)
+          this.updateCertification(version, originalRepo, Constants.PUBLISHED)
         }
         isDisabled={isDisabled}
         key='certify'
       >
-        Certify
+        Approve
       </DropdownItem>
     );
 
-    const rejectDropDown = (isDisabled: boolean) => (
+    const rejectDropDown = (isDisabled: boolean, originalRepo) => (
       <DropdownItem
         onClick={() =>
-          this.updateCertification(version, CertificationStatus.notCertified)
+          this.updateCertification(
+            version,
+            originalRepo,
+            Constants.NOTCERTIFIED,
+          )
         }
         isDisabled={isDisabled}
         className='rejected-icon'
@@ -412,89 +405,81 @@ class CertificationDashboard extends React.Component<
       </DropdownItem>
     );
 
-    switch (version.certification) {
-      case CertificationStatus.certified:
-        return (
-          <span>
-            <StatefulDropdown
-              items={[
-                certifyDropDown(true),
-                rejectDropDown(false),
-                importsLink,
-              ]}
-            />
-          </span>
-        );
-      case CertificationStatus.notCertified:
-        return (
-          <span>
-            <StatefulDropdown
-              items={[
-                certifyDropDown(false),
-                rejectDropDown(true),
-                importsLink,
-              ]}
-            />
-          </span>
-        );
-      case CertificationStatus.needsReview:
-        return (
-          <span>
-            <Button
-              onClick={() =>
-                this.updateCertification(version, CertificationStatus.certified)
-              }
-            >
-              <span>Certify</span>
-            </Button>
-            <StatefulDropdown items={[rejectDropDown(false), importsLink]} />
-          </span>
-        );
+    if (version.repository_list.includes(Constants.PUBLISHED)) {
+      return (
+        <span>
+          <StatefulDropdown
+            items={[
+              certifyDropDown(true, Constants.PUBLISHED),
+              rejectDropDown(false, Constants.PUBLISHED),
+              importsLink,
+            ]}
+          />
+        </span>
+      );
+    }
+    if (version.repository_list.includes(Constants.NOTCERTIFIED)) {
+      return (
+        <span>
+          <StatefulDropdown
+            items={[
+              certifyDropDown(false, Constants.NOTCERTIFIED),
+              rejectDropDown(true, Constants.NOTCERTIFIED),
+              importsLink,
+            ]}
+          />
+        </span>
+      );
+    }
+    if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
+      return (
+        <span>
+          <Button
+            onClick={() =>
+              this.updateCertification(
+                version,
+                Constants.NEEDSREVIEW,
+                Constants.PUBLISHED,
+              )
+            }
+          >
+            <span>Approve</span>
+          </Button>
+          <StatefulDropdown
+            items={[rejectDropDown(false, Constants.NEEDSREVIEW), importsLink]}
+          />
+        </span>
+      );
     }
   }
 
-  private updateCertification(version, certification) {
+  private updateCertification(version, originalRepo, destinationRepo) {
     // Set the selected version to loading
     this.setState(
       {
-        updatingVersions: this.state.updatingVersions.concat([version.id]),
+        updatingVersions: [],
       },
       () =>
-        // Perform the PUT request
-        CollectionVersionAPI.setCertifiation(
+        CollectionVersionAPI.setRepository(
           version.namespace,
           version.name,
           version.version,
-          certification,
+          originalRepo,
+          destinationRepo,
         )
-          .then(() =>
+          .then(result =>
             // Since pulp doesn't reply with the new object, perform a
             // second query to get the updated data
-            CollectionVersionAPI.list({
-              namespace: version.namespace,
-              name: version.name,
-              version: version.version,
-            }).then(result => {
-              const updatedVersion = result.data.data[0];
-              const newVersionList = [...this.state.versions];
-              const ind = newVersionList.findIndex(
-                x => x.id === updatedVersion.id,
-              );
-              newVersionList[ind] = updatedVersion;
-
+            {
               this.setState({
-                versions: newVersionList,
-                updatingVersions: this.state.updatingVersions.filter(
-                  v => v != updatedVersion.id,
-                ),
+                updatingVersions: [version],
               });
-            }),
+              this.waitForUpdate(result.data.remove_task_id, version);
+            },
           )
           .catch(error => {
             this.setState({
-              updatingVersions: this.state.updatingVersions.filter(
-                v => v != version.id,
-              ),
+              updatingVersions: [],
               alerts: this.state.alerts.concat({
                 variant: 'danger',
                 title: `API Error: ${error.response.status}`,
@@ -508,16 +493,47 @@ class CertificationDashboard extends React.Component<
     );
   }
 
+  private waitForUpdate(result, version) {
+    const taskId = result;
+    return TaskAPI.get(taskId).then(async result => {
+      if (result.data.state === 'waiting' || result.data.state === 'running') {
+        await new Promise(r => setTimeout(r, 500));
+        this.waitForUpdate(taskId, version);
+      } else if (result.data.state === 'completed') {
+        return CollectionVersionAPI.list(this.state.params).then(
+          async result => {
+            this.setState({
+              versions: result.data.data,
+              updatingVersions: [],
+            });
+          },
+        );
+      } else {
+        this.setState({
+          updatingVersions: [],
+          alerts: this.state.alerts.concat({
+            variant: 'danger',
+            title: `API Error: 500`,
+            description:
+              `Could not update the certification ` +
+              `status for ${version.namespace}.` +
+              `${version.name}.${version.version}.`,
+          }),
+        });
+      }
+    });
+  }
+
   private queryCollections() {
     this.setState({ loading: true }, () =>
-      CollectionVersionAPI.list(this.state.params).then(result =>
+      CollectionVersionAPI.list(this.state.params).then(result => {
         this.setState({
           versions: result.data.data,
           itemCount: result.data.meta.count,
           loading: false,
           updatingVersions: [],
-        }),
-      ),
+        });
+      }),
     );
   }
 
@@ -531,3 +547,5 @@ class CertificationDashboard extends React.Component<
 }
 
 export default withRouter(CertificationDashboard);
+
+CertificationDashboard.contextType = AppContext;

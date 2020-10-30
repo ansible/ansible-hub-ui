@@ -1,7 +1,7 @@
 import { BaseAPI } from './base';
 
 export class API extends BaseAPI {
-  apiPath = 'v3/_ui/users/';
+  apiPath = this.getUIPath('users/');
   mock: any;
 
   constructor() {

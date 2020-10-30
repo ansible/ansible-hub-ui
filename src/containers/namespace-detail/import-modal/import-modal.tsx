@@ -192,6 +192,7 @@ export class ImportModal extends React.Component<IProps, IState> {
     this.cancelToken = CollectionAPI.getCancelToken();
 
     CollectionAPI.upload(
+      'inbound-' + this.props.namespace,
       artifact,
       e => {
         this.setState({

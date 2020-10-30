@@ -1,6 +1,10 @@
 export { CollectionAPI } from './collection';
 export { NamespaceAPI } from './namespace';
-export { NamespaceType, NamespaceListType } from './response-types/namespace';
+export {
+  NamespaceType,
+  NamespaceListType,
+  NamespaceLinkType,
+} from './response-types/namespace';
 export {
   CollectionListType,
   CollectionDetailType,
@@ -9,7 +13,6 @@ export {
   CollectionUploadType,
   ContentSummaryType,
   CollectionVersion,
-  CertificationStatus,
 } from './response-types/collection';
 export {
   ImportListType,
@@ -23,3 +26,14 @@ export { UserType, MeType } from './response-types/user';
 export { CollectionVersionAPI } from './collection-version';
 export { MyNamespaceAPI } from './my-namespace';
 export { UserAPI } from './user';
+export { MySyncListAPI } from './my-synclist';
+export { SyncListType } from './response-types/synclists';
+export { TaskAPI } from './task';
+export { GroupObjectPermissionType } from './response-types/permissions';
+export { GroupAPI } from './group';
+export { RemoteAPI } from './remotes';
+export { ApplicationInfoAPI } from './application-info';
+export { RemoteType } from './response-types/remote';
+export { DistributionAPI } from './distribution';
+export { MyDistributionAPI } from './my-distribution';
+export { DistributionType } from './response-types/distribution';
