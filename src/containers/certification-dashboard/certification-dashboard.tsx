@@ -384,7 +384,7 @@ class CertificationDashboard extends React.Component<
         isDisabled={isDisabled}
         key='certify'
       >
-        Certify
+        Approve
       </DropdownItem>
     );
 
@@ -443,7 +443,7 @@ class CertificationDashboard extends React.Component<
               )
             }
           >
-            <span>Certify</span>
+            <span>Approve</span>
           </Button>
           <StatefulDropdown
             items={[rejectDropDown(false, Constants.NEEDSREVIEW), importsLink]}

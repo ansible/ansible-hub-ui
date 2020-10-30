@@ -61,7 +61,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               href='https://sso.redhat.com/auth/realms/redhat-external/account/'
               target='_blank'
             >
-              Red Hat SSO account managment
+              Red Hat SSO account management
             </a>
             .
           </Section>
