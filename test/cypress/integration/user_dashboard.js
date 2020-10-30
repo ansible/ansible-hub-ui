@@ -36,7 +36,7 @@ describe('Hub User Management Tests', () => {
             cy.contains('div', 'Password confirmation').findnear('input').first().type(user.password)
 
             cy.server()
-            cy.route('POST', '/api/automation-hub/_ui/v1/users/').as('createUser')
+            cy.route('POST', Cypress.env("prefix") + '_ui/v1/users/').as('createUser')
             cy.contains('Save').click()
             cy.wait('@createUser')
 
