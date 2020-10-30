@@ -34,11 +34,11 @@ describe('Hub User Management Tests', () => {
             cy.contains('div', 'Username').findnear('input').first().type(user.username)
             cy.contains('div', 'Password').findnear('input').first().type(user.password)
             cy.contains('div', 'Password confirmation').findnear('input').first().type(user.password)
-      
+
             cy.server()
-            cy.route('POST', '/api/galaxy/v3/_ui/users/').as('post')
+            cy.route('POST', '/api/automation-hub/_ui/v1/users/').as('createUser')
             cy.contains('Save').click()
-            cy.wait('@post')
+            cy.wait('@createUser')
 
             cy.contains('[aria-labelledby=test]', "Test F")
         })
@@ -49,7 +49,7 @@ describe('Hub User Management Tests', () => {
 
             cy.contains('.pf-c-form__group', 'Username').find('input').first().type(username)
             cy.contains('.pf-c-form__group', 'Password').find('input').first().type(`${password}{enter}`)
-    
+
             cy.contains('#page-sidebar a', 'Users').click()
 
             cy.get('[aria-labelledby=test] [aria-label=Actions]').click({"force": true})
