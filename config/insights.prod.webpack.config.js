@@ -10,4 +10,5 @@ module.exports = webpackBase({
   UI_USE_HTTPS: false,
   UI_DEBUG: false,
   TARGET_ENVIRONMENT: 'prod',
+  APPLICATION_NAME: 'Automation Hub',
 });

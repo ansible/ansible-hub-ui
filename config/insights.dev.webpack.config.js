@@ -17,6 +17,7 @@ module.exports = webpackBase({
   // another platform. Options: insights, standalone
   DEPLOYMENT_MODE: 'insights',
   NAMESPACE_TERM: 'partners',
+  APPLICATION_NAME: 'Automation Hub',
 
   // Serve the UI over http or https. Options: true, false
   UI_USE_HTTPS: true,
