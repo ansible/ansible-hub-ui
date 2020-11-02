@@ -122,8 +122,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const { group, params, alerts, addModalVisible, loading } = this.state;
+    const { user } = this.context;
 
-    const tabs = ['Permissions', 'Users'];
+    const tabs = ['Permissions'];
+    if (!!user && user.model_permissions.view_user) {
+      tabs.push('Users');
+    }
 
     if (!group || loading) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
