@@ -82,6 +82,7 @@
         "postcss": "^7.0.32",
         "prettier": "^1.19.1",
         "prop-types": "^15.7.2",
+        "react-docgen-typescript-loader": "^3.7.2",
         "source-map-loader": "^0.2.4",
         "stylelint": "^9.10.1",
         "stylelint-config-recommended-scss": "^3.3.0",
