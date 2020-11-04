@@ -10,6 +10,8 @@ import {
   EmptyStateVariant,
   Title,
   ClipboardCopy,
+  Button,
+  Popover,
 } from '@patternfly/react-core';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
 import { SortTable, StatefulDropdown } from '..';
@@ -81,6 +83,11 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           id: 'ansible_cli_url',
         },
         {
+          title: 'CLI configuration',
+          type: 'none',
+          id: 'cli_config',
+        },
+        {
           title: '',
           type: 'none',
           id: 'kebab',
@@ -133,6 +140,18 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           <ClipboardCopy isReadOnly>
             {getRepoUrl(distribution.base_path)}
           </ClipboardCopy>
+        </td>
+        <td>
+          <Popover
+            bodyContent={
+              <ClipboardCopy isReadOnly>
+                galaxy] server_list = published "[galaxy_server"published]
+                url=/content/published token=&lt;put your token here&gt;
+              </ClipboardCopy>
+            }
+          >
+            <Button>CLI Config</Button>
+          </Popover>
         </td>
         <td>
           <span>
