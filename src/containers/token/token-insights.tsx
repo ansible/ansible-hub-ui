@@ -5,6 +5,7 @@ import { Section } from '@redhat-cloud-services/frontend-components';
 import { ClipboardCopy, Button } from '@patternfly/react-core';
 
 import { BaseHeader, Main } from '../../components';
+import { getRepoUrl } from '../../utilities';
 
 interface IState {
   tokenData: {
@@ -40,7 +41,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
     return (
       <React.Fragment>
-        <BaseHeader title='Token management'></BaseHeader>
+        <BaseHeader title='Connect to Hub'></BaseHeader>
         <Main>
           <Section className='body pf-c-content'>
             <h2>Offline token</h2>
@@ -61,9 +62,19 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               href='https://sso.redhat.com/auth/realms/redhat-external/account/'
               target='_blank'
             >
-              Red Hat SSO account managment
+              Red Hat SSO account management
             </a>
             .
+          </Section>
+          <Section className='body pf-c-content'>
+            <h2>Server URL</h2>
+            <p>Use this URL to do something.</p>
+            <ClipboardCopy isReadOnly>{getRepoUrl('')}</ClipboardCopy>
+          </Section>
+          <Section className='body pf-c-content'>
+            <h2>SSO URL</h2>
+            <p>Use this URL to do something.</p>
+            <ClipboardCopy isReadOnly>{getRepoUrl('')}</ClipboardCopy>
           </Section>
         </Main>
       </React.Fragment>
