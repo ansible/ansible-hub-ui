@@ -11,4 +11,5 @@ module.exports = webpackBase({
   UI_DEBUG: false,
   TARGET_ENVIRONMENT: 'prod',
   APPLICATION_NAME: 'Automation Hub',
+  USE_FAVICON: false,
 });

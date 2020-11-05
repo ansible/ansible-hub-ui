@@ -16,8 +16,16 @@ module.exports = webpackBase({
   // Determines if the app should be compiled to run on insights or on
   // another platform. Options: insights, standalone
   DEPLOYMENT_MODE: 'insights',
+
+  // Determines the title of the "namespaces" page
   NAMESPACE_TERM: 'partners',
+
+  // Determines the title of the app
   APPLICATION_NAME: 'Automation Hub',
+
+  // Disables custom favicons. Used to turn off our favicon so we inherit
+  // the correct one from cloud.redhat.com
+  USE_FAVICON: false,
 
   // Serve the UI over http or https. Options: true, false
   UI_USE_HTTPS: true,

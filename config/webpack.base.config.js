@@ -29,6 +29,7 @@ const defaultConfigs = [
   { name: 'UI_PORT', default: 8002, scope: 'webpack' },
   { name: 'WEBPACK_PROXY', default: undefined, scope: 'webpack' },
   { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
+  { name: 'USE_FAVICON', default: true, scope: 'webpack' },
 ];
 
 module.exports = inputConfigs => {
@@ -44,13 +45,21 @@ module.exports = inputConfigs => {
     }
   });
 
+  const htmlPluginConfig = {
+    targetEnv: customConfigs.DEPLOYMENT_MODE,
+    applicationName: customConfigs.APPLICATION_NAME,
+  };
+
+  // being able to turn off the favicon is useful for deploying to insights mode
+  // cloud.redhat.com sets it's own favicon and ours tends to override it if we
+  // set one
+  if (customConfigs.USE_FAVICON) {
+    htmlPluginConfig['favicon'] = 'static/images/favicon.ico';
+  }
+
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
-    htmlPlugin: {
-      targetEnv: customConfigs.DEPLOYMENT_MODE,
-      applicationName: customConfigs.APPLICATION_NAME,
-      favicon: 'static/images/favicon.ico',
-    },
+    htmlPlugin: htmlPluginConfig,
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
 
