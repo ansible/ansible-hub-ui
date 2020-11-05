@@ -10,8 +10,6 @@ import {
   EmptyStateVariant,
   Title,
   ClipboardCopy,
-  Button,
-  Popover,
 } from '@patternfly/react-core';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
 import { SortTable, StatefulDropdown } from '..';
@@ -142,16 +140,12 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           </ClipboardCopy>
         </td>
         <td>
-          <Popover
-            bodyContent={
-              <ClipboardCopy isReadOnly>
-                galaxy] server_list = published "[galaxy_server"published]
-                url=/content/published token=&lt;put your token here&gt;
-              </ClipboardCopy>
-            }
-          >
-            <Button>CLI Config</Button>
-          </Popover>
+          <ClipboardCopy isCode isReadOnly variant={'expansion'}>
+            [galaxy]&#13;&#10; server_list = {distribution.repository.name}
+            &#13;&#10; "[galaxy_server"{distribution.repository.name}]&#13;&#10;
+            url={getRepoUrl(distribution.base_path)}content/published&#13;&#10;
+            token=&lt;put your token here&gt;
+          </ClipboardCopy>
         </td>
         <td>
           <span>
