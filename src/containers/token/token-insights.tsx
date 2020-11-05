@@ -74,7 +74,9 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           <Section className='body pf-c-content'>
             <h2>SSO URL</h2>
             <p>Use this URL to do something.</p>
-            <ClipboardCopy isReadOnly>{getRepoUrl('')}</ClipboardCopy>
+            <ClipboardCopy isReadOnly>
+              https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+            </ClipboardCopy>
           </Section>
         </Main>
       </React.Fragment>
