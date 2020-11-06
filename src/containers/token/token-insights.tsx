@@ -69,7 +69,9 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           <Section className='body pf-c-content'>
             <h2>Server URL</h2>
             <p>Use this URL to do something.</p>
-            <ClipboardCopy isReadOnly>{getRepoUrl('')}</ClipboardCopy>
+            <ClipboardCopy isReadOnly>
+              {getRepoUrl('').replace('//', '')}
+            </ClipboardCopy>
           </Section>
           <Section className='body pf-c-content'>
             <h2>SSO URL</h2>
