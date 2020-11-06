@@ -68,14 +68,20 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           </Section>
           <Section className='body pf-c-content'>
             <h2>Server URL</h2>
-            <p>Use this URL to do something.</p>
+            <p>
+              Use this URL to configure Galaxy server in your the{' '}
+              <code>ansible-galaxy</code> client.
+            </p>
             <ClipboardCopy isReadOnly>
               {getRepoUrl('').replace('//', '')}
             </ClipboardCopy>
           </Section>
           <Section className='body pf-c-content'>
             <h2>SSO URL</h2>
-            <p>Use this URL to do something.</p>
+            <p>
+              Use this URL to authenticate the <code>ansible-galaxy</code>{' '}
+              client.{' '}
+            </p>
             <ClipboardCopy isReadOnly>
               https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
             </ClipboardCopy>
