@@ -4,5 +4,7 @@ export function getRepoUrl(distributionPath: string) {
   // Otherwise use the host that the UI is served from
   const host = !!API_HOST ? API_HOST : window.location.origin;
 
-  return `${host}${API_BASE_PATH}content/${distributionPath}/`;
+  return !!distributionPath
+    ? `${host}${API_BASE_PATH}content/${distributionPath}/`
+    : `${host}${API_BASE_PATH}`;
 }

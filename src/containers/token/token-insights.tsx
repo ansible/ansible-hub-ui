@@ -72,9 +72,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               Use this URL to configure Galaxy server in your the{' '}
               <code>ansible-galaxy</code> client.
             </p>
-            <ClipboardCopy isReadOnly>
-              {getRepoUrl('').replace('//', '')}
-            </ClipboardCopy>
+            <ClipboardCopy isReadOnly>{getRepoUrl('')}</ClipboardCopy>
           </Section>
           <Section className='body pf-c-content'>
             <h2>SSO URL</h2>

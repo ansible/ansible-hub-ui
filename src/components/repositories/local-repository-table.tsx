@@ -71,7 +71,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           id: 'updated_at',
         },
         {
-          title: 'Ansible CLI URL',
+          title: 'Repo URL',
           type: 'none',
           id: 'ansible_cli_url',
         },
@@ -112,6 +112,15 @@ export class LocalRepositoryTable extends React.Component<IProps> {
   }
 
   private renderRow(distribution) {
+    const cliConfig = [
+      '[galaxy]',
+      `server_list = ${distribution.repository.name}_repo`,
+      '',
+      `[galaxy_server.${distribution.repository.name}_repo]`,
+      `url=${getRepoUrl(distribution.base_path)}`,
+      'token=<put your token here>',
+    ];
+
     return (
       <tr key={distribution.name}>
         <td>{distribution.name}</td>
@@ -132,10 +141,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
         {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? null : (
           <td>
             <ClipboardCopy isCode isReadOnly variant={'expansion'}>
-              [galaxy]&#13;&#10; server_list = {distribution.repository.name}
-              &#13;&#10; [galaxy_server_{distribution.repository.name}
-              ]&#13;&#10; url={getRepoUrl(distribution.base_path)}
-              content/published&#13;&#10; token=&lt;put your token here&gt;
+              {cliConfig.join('\n')}
             </ClipboardCopy>
           </td>
         )}
