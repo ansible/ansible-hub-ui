@@ -344,11 +344,9 @@ class App extends React.Component<RouteComponentProps, IState> {
                   <Link to={Paths.approvalDashboard}>Approval</Link>
                 </NavItem>
               )}
-              {!!user && user.model_permissions.view_distribution && (
-                <NavItem>
-                  <Link to={Paths.repositories}>Repo Management</Link>
-                </NavItem>
-              )}
+              <NavItem>
+                <Link to={Paths.repositories}>Repo Management</Link>
+              </NavItem>
             </NavList>
           </Nav>
         }
