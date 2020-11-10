@@ -5,7 +5,7 @@ describe('Hub Menu Tests', () => {
 
     beforeEach(() => {
         cy.visit(host);
-    })
+    });
 
     it('admin user sees complete menu', () => {
         cy.login(adminUsername, adminPassword);
@@ -13,15 +13,22 @@ describe('Hub Menu Tests', () => {
         menuItems.forEach(item => cy.menuItem(item));
     });
 
-    it('a user without permissions sees limited menu', () => {
-        var menuItems = [ 'Collections', 'Namespaces', 'API Token', 'Repo Management' ];
-        cy.login(adminUsername, adminPassword);
+    describe('', () => {
         var username = 'nopermission';
         var password = 'n0permissi0n';
-        cy.createUser(username, password);
-        cy.logout();
-        cy.login(username, password);
-        menuItems.forEach(item => cy.menuItem(item));
-        cy.deleteUser(username);
+
+        beforeEach(() => {
+            cy.login(adminUsername, adminPassword);
+            cy.createUser(username, password);
+        });
+        afterEach(() => {
+            cy.deleteUser(username);
+        });
+        it('a user without permissions sees limited menu', () => {
+            var menuItems = [ 'Collections', 'Namespaces', 'API Token', 'Repo Management' ];
+            cy.logout();
+            cy.login(username, password);
+            menuItems.forEach(item => cy.menuItem(item));
+        });
     });
-})
+});
