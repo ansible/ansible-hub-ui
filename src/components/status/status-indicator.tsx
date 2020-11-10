@@ -13,6 +13,7 @@ import { PulpStatus } from '../../api';
 
 interface IProps {
   status: PulpStatus;
+  type?: 'primary' | 'secondary';
 }
 
 interface LabelPropType {
@@ -22,9 +23,20 @@ interface LabelPropType {
 }
 
 export class StatusIndicator extends React.Component<IProps, {}> {
+  static defaultProps = {
+    type: 'primary',
+  };
+
+  typeToVariantMap = {
+    primary: 'outline',
+    secondary: 'filled',
+  };
+
   render() {
     let labelProps: LabelPropType;
-    switch (this.props.status) {
+    const { status, type } = this.props;
+
+    switch (status) {
       case PulpStatus.waiting:
         labelProps = {
           color: 'blue',
@@ -68,7 +80,7 @@ export class StatusIndicator extends React.Component<IProps, {}> {
 
     return (
       <Label
-        variant='outline'
+        variant={this.typeToVariantMap[type] as any}
         color={labelProps.color as any}
         icon={labelProps.icon}
       >
