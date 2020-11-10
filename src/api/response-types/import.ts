@@ -1,11 +1,4 @@
-export enum PulpStatus {
-  waiting = 'waiting',
-  skipped = 'skipped',
-  running = 'running',
-  completed = 'completed',
-  failed = 'failed',
-  canceled = 'canceled',
-}
+import { PulpStatus } from './pulp';
 
 export enum ImportMessageCodes {
   error = 'error',

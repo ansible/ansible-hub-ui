@@ -19,27 +19,58 @@ import {
   ExclamationCircleIcon,
 } from '@patternfly/react-icons';
 
-import { RemoteType, UserType } from '../../api';
+import { RemoteType, UserType, PulpStatus } from '../../api';
 import { SortTable, StatefulDropdown } from '..';
+import { StatusIndicator } from '../../components';
 
 import { Constants } from '../../constants';
 
 interface IProps {
-  repositories: RemoteType[];
+  remotes: RemoteType[];
   updateParams: (p) => void;
   editRemote: (r: RemoteType) => void;
   syncRemote: (distribution: string) => void;
   user: UserType;
+  refreshRemotes: () => void;
 }
 
 export class RemoteRepositoryTable extends React.Component<IProps> {
+  polling: any;
+  refreshOnStatuses = [PulpStatus.waiting, PulpStatus.running];
+
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    this.polling = setInterval(() => {
+      const { remotes } = this.props;
+      let refresh = false;
+      for (const remote of remotes) {
+        for (const repo of remote.repositories) {
+          if (repo.last_sync_task) {
+            if (this.refreshOnStatuses.includes(repo.last_sync_task.state)) {
+              refresh = true;
+              break;
+            }
+          }
+        }
+      }
+
+      if (refresh) {
+        this.props.refreshRemotes();
+      } else {
+      }
+    }, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.polling);
+  }
+
   render() {
-    const { repositories } = this.props;
-    if (repositories.length == 0) {
+    const { remotes } = this.props;
+    if (remotes.length == 0) {
       return (
         <EmptyState className='empty' variant={EmptyStateVariant.full}>
           <EmptyStateIcon icon={WrenchIcon} />
@@ -50,7 +81,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
       );
     }
     // TODO only with search
-    if (repositories.length === 0) {
+    if (remotes.length === 0) {
       return (
         <EmptyState className='empty' variant={EmptyStateVariant.full}>
           <EmptyStateIcon icon={WarningTriangleIcon} />
@@ -63,10 +94,10 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         </EmptyState>
       );
     }
-    return this.renderTable(repositories);
+    return this.renderTable(remotes);
   }
 
-  private renderTable(repositories) {
+  private renderTable(remotes) {
     const params = { sort: 'repository' };
     let sortTableOptions = {
       headers: [
@@ -113,9 +144,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
           params={params}
           updateParams={p => null}
         />
-        <tbody>
-          {repositories.map((remote, i) => this.renderRow(remote, i))}
-        </tbody>
+        <tbody>{remotes.map((remote, i) => this.renderRow(remote, i))}</tbody>
       </table>
     );
   }
@@ -185,7 +214,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
     return (
       <>
-        {remote.last_sync_task.state} {errorMessage}
+        <StatusIndicator status={remote.last_sync_task.state} /> {errorMessage}
       </>
     );
   }
