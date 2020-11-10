@@ -71,14 +71,14 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           id: 'updated_at',
         },
         {
-          title: 'Sync URL',
-          type: 'none',
-          id: 'pulp_url',
-        },
-        {
-          title: 'Ansible CLI URL',
+          title: 'Repo URL',
           type: 'none',
           id: 'ansible_cli_url',
+        },
+        {
+          title: 'CLI configuration',
+          type: 'none',
+          id: 'cli_config',
         },
         {
           title: '',
@@ -90,7 +90,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
 
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       sortTableOptions.headers = sortTableOptions.headers.filter(object => {
-        return object.id !== 'updated_at';
+        return object.id !== 'updated_at' && object.id !== 'cli_config';
       });
     }
 
@@ -112,6 +112,15 @@ export class LocalRepositoryTable extends React.Component<IProps> {
   }
 
   private renderRow(distribution) {
+    const cliConfig = [
+      '[galaxy]',
+      `server_list = ${distribution.repository.name}_repo`,
+      '',
+      `[galaxy_server.${distribution.repository.name}_repo]`,
+      `url=${getRepoUrl(distribution.base_path)}`,
+      'token=<put your token here>',
+    ];
+
     return (
       <tr key={distribution.name}>
         <td>{distribution.name}</td>
@@ -126,14 +135,16 @@ export class LocalRepositoryTable extends React.Component<IProps> {
         )}
         <td>
           <ClipboardCopy isReadOnly>
-            {getRepoUrl(distribution.base_path) + 'v3/collections'}
-          </ClipboardCopy>
-        </td>
-        <td>
-          <ClipboardCopy isReadOnly>
             {getRepoUrl(distribution.base_path)}
           </ClipboardCopy>
         </td>
+        {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? null : (
+          <td>
+            <ClipboardCopy isCode isReadOnly variant={'expansion'}>
+              {cliConfig.join('\n')}
+            </ClipboardCopy>
+          </td>
+        )}
         <td>
           <span>
             <StatefulDropdown
