@@ -45,6 +45,7 @@ export class UserType {
   date_joined?: string;
   password?: string;
   model_permissions?: Permissions;
+  is_superuser?: boolean;
 }
 
 export class MeType {

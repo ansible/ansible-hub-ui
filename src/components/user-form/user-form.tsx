@@ -6,7 +6,11 @@ import {
   TextInput,
   ActionGroup,
   Button,
+  Tooltip,
+  Checkbox,
 } from '@patternfly/react-core';
+
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 
 import { APISearchTypeAhead } from '../../components';
 
@@ -144,6 +148,28 @@ export class UserForm extends React.Component<IProps, IState> {
             multiple={true}
             onClear={this.clearGroups}
             isDisabled={isReadonly || isMe}
+          />
+        </FormGroup>
+
+        <FormGroup
+          fieldId='is_superuser'
+          label='Super user'
+          labelIcon={
+            <Tooltip
+              content={
+                'Super users have all system permissions regardless of' +
+                ' their group. Adding new super users is not permitted.'
+              }
+            >
+              <OutlinedQuestionCircleIcon size='sm' />
+            </Tooltip>
+          }
+        >
+          <Checkbox
+            id='is_superuser'
+            isDisabled
+            isChecked={user.is_superuser}
+            label='Is super user'
           />
         </FormGroup>
 

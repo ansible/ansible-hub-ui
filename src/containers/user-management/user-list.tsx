@@ -20,9 +20,11 @@ import {
   Title,
   EmptyStateBody,
   EmptyStateVariant,
+  Label,
+  Tooltip,
 } from '@patternfly/react-core';
 
-import { WarningTriangleIcon } from '@patternfly/react-icons';
+import { WarningTriangleIcon, UserPlusIcon } from '@patternfly/react-icons';
 
 import { UserAPI, UserType } from '../../api';
 import { ParamHelper } from '../../utilities';
@@ -247,6 +249,11 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           id: 'first_name',
         },
         {
+          id: 'groups',
+          title: 'Groups',
+          type: 'none',
+        },
+        {
           title: 'Created',
           type: 'numeric',
           id: 'date_joined',
@@ -308,10 +315,23 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           <Link to={formatPath(Paths.userDetail, { userID: user.id })}>
             {user.username}
           </Link>
+
+          {user.is_superuser && (
+            <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
+              <Label icon={<UserPlusIcon />} color='orange'>
+                Super user
+              </Label>
+            </Tooltip>
+          )}
         </td>
         <td>{user.email}</td>
         <td>{user.last_name}</td>
         <td>{user.first_name}</td>
+        <td>
+          {user.groups.map(g => (
+            <Label>{g.name}</Label>
+          ))}
+        </td>
         <td>{moment(user.date_joined).fromNow()}</td>
         <td>
           {dropdownItems.length > 0 ? (
