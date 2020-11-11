@@ -5,7 +5,6 @@ import {
   DropdownPosition,
   KebabToggle,
   DropdownToggle,
-  DropdownItem,
 } from '@patternfly/react-core';
 
 interface IProps {
@@ -15,8 +14,8 @@ interface IProps {
   /** Callback fired when the user selects an item */
   onSelect?: (event) => void;
 
-  /** If not specified, dropdown button will be a kebab */
-  toggleType?: string;
+  /** If not specified, dropdown button will be a kebab. icon simply removes the dropdown indicator */
+  toggleType?: 'dropdown' | 'icon' | 'kebab';
 
   /** Text to display on the component when it's not expanded*/
   defaultText?: React.ReactNode;
@@ -36,6 +35,7 @@ interface IState {
 export class StatefulDropdown extends React.Component<IProps, IState> {
   static defaultProps = {
     isPlain: true,
+    toggleType: 'kebab',
   };
 
   constructor(props) {
@@ -73,7 +73,18 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
               : defaultText || 'Dropdown'}
           </DropdownToggle>
         );
-      default:
+      case 'icon':
+        return (
+          <DropdownToggle
+            toggleIndicator={null}
+            onToggle={e => this.onToggle(e)}
+          >
+            {this.state.selected
+              ? this.state.selected
+              : defaultText || 'Dropdown'}
+          </DropdownToggle>
+        );
+      case 'kebab':
         return <KebabToggle onToggle={e => this.onToggle(e)} />;
     }
   }
