@@ -109,7 +109,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
         //redirect to login page when password is changed
         if (user.password) {
           this.props.history.push(Paths.login);
-        };
+        }
       })
       .catch(err => {
         this.setState({ errorMessages: mapErrorMessages(err) });
