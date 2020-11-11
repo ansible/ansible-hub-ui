@@ -199,7 +199,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
             <LoadingPageSpinner />
           ) : (
             <RemoteRepositoryTable
-              repositories={content}
+              remotes={content}
               updateParams={this.updateParams}
               editRemote={(remote: RemoteType) => {
                 this.setState({
@@ -211,6 +211,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
                 RemoteAPI.sync(distro).then(result => this.loadContent())
               }
               user={user}
+              refreshRemotes={this.refreshContent}
             />
           )}
         </div>
@@ -218,9 +219,13 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
     }
   }
 
-  private loadContent() {
+  private refreshContent = () => {
+    this.loadContent(false);
+  };
+
+  private loadContent = (showLoading = true) => {
     const { params } = this.state;
-    this.setState({ loading: true }, () => {
+    this.setState({ loading: showLoading }, () => {
       if (params['tab'] == 'remote') {
         RemoteAPI.list(
           ParamHelper.getReduced(params, this.nonQueryStringParams),
@@ -247,7 +252,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
         });
       }
     });
-  }
+  };
 
   private get updateParams() {
     return ParamHelper.updateParamsMixin(this.nonQueryStringParams);

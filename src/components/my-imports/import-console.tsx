@@ -14,6 +14,8 @@ import {
   CollectionVersion,
 } from '../../api';
 
+import { StatusIndicator } from '../../components';
+
 import { Constants } from '../../constants';
 
 interface IProps {
@@ -173,7 +175,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
         <div className='title-bar'>
           <div>
             <span className='data-title'>Status: </span>
-            {selectedImport.state}
+            <StatusIndicator type='secondary' status={selectedImport.state} />
           </div>
           <div>
             <span className='data-title'>Approval status: </span>

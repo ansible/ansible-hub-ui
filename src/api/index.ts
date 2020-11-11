@@ -17,9 +17,9 @@ export {
 export {
   ImportListType,
   ImportDetailType,
-  PulpStatus,
   ImportMessageCodes,
 } from './response-types/import';
+export { PulpStatus } from './response-types/pulp';
 export { ImportAPI } from './import';
 export { ActiveUserAPI } from './active-user';
 export { UserType, MeType } from './response-types/user';

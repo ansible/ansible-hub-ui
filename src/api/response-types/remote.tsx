@@ -1,5 +1,7 @@
+import { PulpStatus } from './pulp';
+
 class LastSyncType {
-  state: string;
+  state: PulpStatus;
   started_at: string;
   finished_at: string;
   error: {
