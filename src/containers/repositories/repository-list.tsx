@@ -254,6 +254,5 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
   }
 }
 
-RepositoryList.contextType = AppContext;
-
 export default withRouter(RepositoryList);
+RepositoryList.contextType = AppContext;
