@@ -677,6 +677,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     return closeAlertMixin('alerts');
   }
 }
-GroupDetail.contextType = AppContext;
 
 export default withRouter(GroupDetail);
+GroupDetail.contextType = AppContext;

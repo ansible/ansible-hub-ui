@@ -71,6 +71,5 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
   };
 }
 
-UserEdit.contextType = AppContext;
-
 export default withRouter(UserEdit);
+UserEdit.contextType = AppContext;
