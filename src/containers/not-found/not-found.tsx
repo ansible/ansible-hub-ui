@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './not-found.scss';
 // had to declare *.gif in src/index.d.ts
-import RageTater from '../../../static/images/awx-spud.gif';
+import NotFoundImage from '../../../static/images/not_found.svg';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
@@ -18,7 +18,7 @@ class NotFound extends React.Component<RouteComponentProps, {}> {
           <Section className='body'>
             <Bullseye className='bullseye'>
               <div className='bullseye-center'>
-                <img src={RageTater} alt='AWX Spud' />
+                <img src={NotFoundImage} alt='AWX Spud' />
                 <div>We couldn't find the page you're looking for!</div>
                 <div className='pf-c-content'>
                   <span className='four-oh-four'>404</span>
