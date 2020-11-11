@@ -158,7 +158,7 @@ export class UserForm extends React.Component<IProps, IState> {
             <Tooltip
               content={
                 'Super users have all system permissions regardless of' +
-                ' their group. Super user status can only be granted via the terminal.'
+                ' their group. Adding new super users is not permitted.'
               }
             >
               <OutlinedQuestionCircleIcon size='sm' />
