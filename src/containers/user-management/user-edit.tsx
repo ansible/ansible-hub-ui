@@ -64,7 +64,14 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
   private saveUser = () => {
     const { user } = this.state;
     UserAPI.update(user.id.toString(), user)
-      .then(() => this.props.history.push(Paths.userList))
+      .then(() => {
+        //redirect to login page when password of logged user is changed
+        if (this.context.user.id === user.id && user.password) {
+          this.props.history.push(Paths.login);
+        } else {
+          this.props.history.push(Paths.userList);
+        }
+      })
       .catch(err => {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });
