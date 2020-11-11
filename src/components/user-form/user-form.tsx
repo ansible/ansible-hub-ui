@@ -10,7 +10,7 @@ import {
   Checkbox,
 } from '@patternfly/react-core';
 
-import { QuestionCircleIcon } from '@patternfly/react-icons';
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 
 import { APISearchTypeAhead } from '../../components';
 
@@ -161,7 +161,7 @@ export class UserForm extends React.Component<IProps, IState> {
                 ' their group. Super user status can only be granted via the terminal.'
               }
             >
-              <QuestionCircleIcon size='sm' />
+              <OutlinedQuestionCircleIcon size='sm' />
             </Tooltip>
           }
         >
