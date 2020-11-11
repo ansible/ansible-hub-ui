@@ -238,25 +238,17 @@ class App extends React.Component<RouteComponentProps, IState> {
               </Link>
             ) : (
               <div>
-                <Dropdown
-                  toggle={
-                    <QuestionCircleIcon
-                      className={'clickable'}
-                      onClick={() =>
-                        this.setState({ toggleOpen: !this.state.toggleOpen })
-                      }
-                    />
-                  }
-                  isOpen={this.state.toggleOpen}
-                  dropdownItems={dropdownItemsCog}
-                  position={'right'}
-                  className={'question-mark-dropdown clickable'}
+                <StatefulDropdown
+                  items={dropdownItemsCog}
+                  defaultText={<QuestionCircleIcon />}
+                  toggleType='icon'
                 />
+
                 <StatefulDropdown
                   defaultText={userName}
                   toggleType='dropdown'
                   items={dropdownItems}
-                ></StatefulDropdown>
+                />
               </div>
             )}
           </PageHeaderTools>

@@ -412,6 +412,6 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     );
   }
 }
-GroupList.contextType = AppContext;
 
 export default withRouter(GroupList);
+GroupList.contextType = AppContext;

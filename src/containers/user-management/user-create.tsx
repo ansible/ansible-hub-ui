@@ -62,6 +62,5 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
   };
 }
 
-UserCreate.contextType = AppContext;
-
 export default withRouter(UserCreate);
+UserCreate.contextType = AppContext;
