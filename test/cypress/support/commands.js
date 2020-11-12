@@ -42,9 +42,9 @@ Cypress.Commands.add('menuItem', {}, (name) => {
 });
 
 Cypress.Commands.add('logout', {}, () => {
-    cy.get('.pf-c-page__header-tools .pf-c-dropdown button').click();
-    cy.contains('Logout').click()}
-);
+    cy.get('div.pf-c-page__header-tools > div > div:nth-child(2) > button').click();
+    cy.contains('Logout').click();
+});
 Cypress.Commands.add('login', {}, (username, password) => {
     cy.contains('.pf-c-form__group', 'Username').find('input').first().type(username);
     cy.contains('.pf-c-form__group', 'Password').find('input').first().type(`${password}{enter}`);
@@ -78,8 +78,7 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
     var adminUsername = Cypress.env('username');
     var adminPassword = Cypress.env('password');
 
-    cy.get('.pf-c-page__header-tools .pf-c-dropdown button').click();
-    cy.contains('Logout').click();
+    cy.logout();
 
     cy.contains('.pf-c-form__group', 'Username').find('input').first().type(adminUsername);
     cy.contains('.pf-c-form__group', 'Password').find('input').first().type(`${adminPassword}{enter}`);
