@@ -223,11 +223,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         });
         break;
       case 'deprecate':
-        CollectionAPI.setDeprecation(
-          collection,
-          !collection.deprecated,
-          this.context.selectedRepo,
-        )
+        CollectionAPI.setDeprecation(collection, !collection.deprecated)
           .then(() => this.loadCollections())
           .catch(error => {
             this.setState({
