@@ -92,6 +92,34 @@ Cypress.Commands.add('createGroup', {}, (name => {
     cy.wait('@createGroup');
 });
 
+Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
+    cy.contains('#page-sidebar a', 'Groups').click({'force': true});
+    cy.get(`[aria-labelledby=${groupName}] a`).click({'force': true});
+    cy.contains('button', 'Edit').click({'force': true});
+    permissions.forEach(permissionElement => {
+        cy.get(`.pf-l-flex.pf-m-align-items-center.${permissionElement.group} [aria-label="Options menu"]`).click({'force': true});
+        permissionElement.permissions.forEach(permission => {
+            cy.contains('button', permission).click({'force': true});
+        })
+    });
+    cy.contains('button', 'Save').click({'force': true});
+});
+
+Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
+    var allPerms = [{
+        group: 'namespaces', permissions: ['Add namespace', 'Change namespace', 'Upload to namespace']
+    }, {
+        group: 'collections', permissions: ['Modify Ansible repo content']
+    },{
+        group: 'users', permissions: ['View user', 'Delete user', 'Add user', 'Change user']
+    },{
+        group: 'groups', permissions: ['View group', 'Delete group', 'Add group', 'Change group']
+    },{
+        group: 'remotes', permissions: ['Change collection remote', 'View collection remote']
+    }];
+    cy.addPermissions(groupName, allPerms);
+});
+
 Cypress.Commands.add('deleteUser', {}, (username) => {
     let adminUsername = Cypress.env('username');
     let adminPassword = Cypress.env('password');

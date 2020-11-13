@@ -353,7 +353,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             {group.name}
           </Link>
         </td>
-        <td >
+        <td>
           {!!user && user.model_permissions.delete_group && (
             <Button
               aria-label={'Delete'}

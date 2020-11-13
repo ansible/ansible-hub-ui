@@ -12,7 +12,8 @@ describe('Hub Group Management Tests', () => {
         cy.login(adminUsername, adminPassword);
         cy.createGroup(name);
         cy.contains(name).should('exist');
-        cy.deleteGroup(name);
-        cy.contains(name).should('not.exist');
+        cy.addAllPermissions(name);
+        //cy.deleteGroup(name);
+        //cy.contains(name).should('not.exist');
     });
 });
