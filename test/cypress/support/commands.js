@@ -40,7 +40,6 @@ Cypress.Commands.add('containsnear', {}, (...args) => {
 Cypress.Commands.add('menuItem', {}, (name) => {
     return cy.contains('#page-sidebar a', name);
 });
-
 Cypress.Commands.add('logout', {}, () => {
     cy.server();
     cy.route('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
@@ -80,6 +79,19 @@ Cypress.Commands.add('createUser', {}, (username, password, firstName = null, la
     cy.contains('Save').click();
 });
 
+Cypress.Commands.add('createGroup', {}, (name => {
+    cy.contains('#page-sidebar a', 'Groups').click();
+
+    cy.contains('Create').click();
+
+    cy.contains('div', 'Name *').findnear('input').first().type(name);
+
+    cy.server();
+    cy.route('POST', Cypress.env('prefix') + '_ui/v1/groups/').as('createGroup');
+    cy.contains('[role=dialog] button', 'Create').click();
+    cy.wait('@createGroup');
+});
+
 Cypress.Commands.add('deleteUser', {}, (username) => {
     let adminUsername = Cypress.env('username');
     let adminPassword = Cypress.env('password');
@@ -92,4 +104,16 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
     cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click();
     cy.containsnear(`[aria-labelledby=${username}] [aria-label=Actions]`, 'Delete').click();
     cy.contains('[role=dialog] button', 'Delete').click();
+});
+
+Cypress.Commands.add('deleteGroup', {}, (name) => {
+    var adminUsername = Cypress.env('username');
+    var adminPassword = Cypress.env('password');
+
+    cy.logout();
+    cy.login(adminUsername, adminPassword);
+
+    cy.contains('#page-sidebar a', 'Groups').click();
+    cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click({'force': true});
+    cy.contains('[role=dialog] button', 'Delete').click({'force': true});
 });
