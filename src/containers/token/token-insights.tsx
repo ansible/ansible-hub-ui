@@ -58,7 +58,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           <Section className='body pf-c-content'>
             <h2>Connect the ansible-galaxy client</h2>
             <p>
-              Documentation how to configure the <code>ansible-galaxy</code>{' '}
+              Documentation on how to configure the <code>ansible-galaxy</code>{' '}
               client can be found{' '}
               <a
                 href='https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/1.0/html/getting_started_with_red_hat_ansible_automation_hub/proc-configure-automation-hub-server'
