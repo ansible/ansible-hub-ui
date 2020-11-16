@@ -45,6 +45,31 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
         <BaseHeader title='Connect to Hub'></BaseHeader>
         <Main>
           <Section className='body pf-c-content'>
+            <h2>Connect Private Automation Hub</h2>
+            <p>
+              Use the <Link to={Paths.repositories}>Repostory Management</Link>{' '}
+              page to sync collections curated by your organization to the Red
+              Hat Certified repository in your private Automation Hub. Users
+              with the correct permissions can use the sync toggles on the{' '}
+              <Link to={Paths.search}>Collections</Link> page to control which
+              collections are added to their organization's sync repository.
+            </p>
+          </Section>
+          <Section className='body pf-c-content'>
+            <h2>Connect the ansible-galaxy client</h2>
+            <p>
+              Documentation how to configure the <code>ansible-galaxy</code>{' '}
+              client can be found{' '}
+              <a
+                href='https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/1.0/html/getting_started_with_red_hat_ansible_automation_hub/proc-configure-automation-hub-server'
+                target='_blank'
+              >
+                here
+              </a>
+              . Use the following parameters to configure the client.
+            </p>
+          </Section>
+          <Section className='body pf-c-content'>
             <h2>Offline token</h2>
             <p>
               Use this token to authenticate clients that need to download
@@ -85,17 +110,6 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             <ClipboardCopy isReadOnly>
               https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
             </ClipboardCopy>
-          </Section>
-          <Section className='body pf-c-content'>
-            <h2>Connect Private Automation Hub</h2>
-            <p>
-              Use the <Link to={Paths.repositories}>Repostory Management</Link>{' '}
-              page to sync collections curated by your organization to the Red
-              Hat Certified repository in your private Automation Hub. Users
-              with the correct permissions can use the sync toggles on the{' '}
-              <Link to={Paths.search}>Collections</Link> page to control which
-              collections are added to their organization's sync repository.
-            </p>
           </Section>
         </Main>
       </React.Fragment>
