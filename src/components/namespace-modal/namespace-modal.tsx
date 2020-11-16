@@ -93,7 +93,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
   };
 
   render() {
-    const { newNamespaceName, newGroups } = this.state;
+    const { newNamespaceName, newGroups, newNamespaceNameValid } = this.state;
     return (
       <Modal
         variant='large'
@@ -105,7 +105,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             key='confirm'
             variant='primary'
             onClick={this.handleSubmit}
-            isDisabled={!newNamespaceName}
+            isDisabled={!newNamespaceName || !newNamespaceNameValid}
           >
             Create
           </Button>,
