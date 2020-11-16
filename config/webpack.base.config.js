@@ -37,7 +37,12 @@ module.exports = inputConfigs => {
   const globals = {};
 
   defaultConfigs.forEach((item, i) => {
-    customConfigs[item.name] = inputConfigs[item.name] || item.default;
+    // == will match null and undefined, but not false
+    if (inputConfigs[item.name] == null) {
+      customConfigs[item.name] = item.default;
+    } else {
+      customConfigs[item.name] = inputConfigs[item.name];
+    }
     if (item.scope === 'global') {
       globals[item.name] = JSON.stringify(
         inputConfigs[item.name] || item.default,
