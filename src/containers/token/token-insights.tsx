@@ -48,8 +48,8 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             <h2>Offline token</h2>
             <p>
               Use this token to authenticate clients that need to download
-              content from Automation Hub. This token grants the user access to
-              all apps on cloud.redhat.com, so keep it safe.
+              content from Automation Hub. This is a secret token used to
+              protect your content. Store your API token in a secure location.
             </p>
             {tokenData ? (
               <div>
@@ -89,11 +89,10 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           <Section className='body pf-c-content'>
             <h2>Connect Private Automation Hub</h2>
             <p>
-              The repository provided on the{' '}
-              <Link to={Paths.repositories}>Repostory Management</Link> page can
-              be used to sync collections into the Red Hat certified repository
-              in private Automation Hub. Users with the correct permissions can
-              use the sync toggles on the{' '}
+              Use the <Link to={Paths.repositories}>Repostory Management</Link>{' '}
+              page to sync collections curated by your organization to the Red
+              Hat Certified repository in your private Automation Hub. Users
+              with the correct permissions can use the sync toggles on the{' '}
               <Link to={Paths.search}>Collections</Link> page to control which
               collections are added to their organization's sync repository.
             </p>
