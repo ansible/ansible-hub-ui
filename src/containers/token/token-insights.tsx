@@ -61,7 +61,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               Documentation on how to configure the <code>ansible-galaxy</code>{' '}
               client can be found{' '}
               <a
-                href='https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/1.0/html/getting_started_with_red_hat_ansible_automation_hub/proc-configure-automation-hub-server'
+                href='https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/'
                 target='_blank'
               >
                 here
@@ -100,6 +100,11 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               download content from Automation Hub.
             </p>
             <ClipboardCopy isReadOnly>{getRepoUrl('')}</ClipboardCopy>
+            <p>
+              Note: this URL contains all collections in Hub. To connect to your
+              organization's sync repository use the URL found on{' '}
+              <Link to={Paths.repositories}>Repostory Management</Link>.
+            </p>
           </Section>
           <Section className='body pf-c-content'>
             <h2>SSO URL</h2>
