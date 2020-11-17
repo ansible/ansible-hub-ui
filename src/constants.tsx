@@ -105,7 +105,12 @@ export class Constants {
     'galaxy-dev.ansible.com',
     'galaxy-qa.ansible.com',
   ];
-  static DOWNSTREAM_HOSTS = ['cloud.redhat.com'];
+  static DOWNSTREAM_HOSTS = [
+    'cloud.redhat.com',
+    'cloud.stage.redhat.com',
+    'ci.cloud.redhat.com',
+    'qa.cloud.redhat.com',
+  ];
   static REPOSITORYNAMES = {
     'Red Hat Certified': 'rh-certified',
     Community: 'community',
