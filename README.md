@@ -83,6 +83,7 @@ To access the app, visit: https://ci.foo.redhat.com:1337/insights/automation-hub
 - any push to the `{REPO}` `master-stable` branch will deploy to a `{REPO}-build` `ci-stable` branch
 - any push to the `{REPO}` `qa-beta` branch will deploy to a `{REPO}-build` `qa-beta` branch
 - any push to the `{REPO}` `qa-stable` branch will deploy to a `{REPO}-build` `qa-stable` branch
+  - `qa-{beta|stable}` also deploy to cloud.stage.redhat.com
 - any push to the `{REPO}` `prod-beta` branch will deploy to a `{REPO}-build` `prod-beta` branch
 - any push to the `{REPO}` `prod-stable` branch will deploy to a `{REPO}-build` `prod-stable` branch
 - Pull requests (based on master) will not be pushed to `{REPO}-build` `master` branch
