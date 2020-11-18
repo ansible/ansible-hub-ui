@@ -343,6 +343,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           <Button
             key='add'
             variant='primary'
+            isDisabled={this.state.selected.length === 0}
             onClick={() =>
               this.addUserToGroup(this.state.selected, this.state.group)
             }
