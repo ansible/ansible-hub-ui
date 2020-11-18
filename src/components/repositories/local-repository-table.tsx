@@ -152,7 +152,9 @@ export class LocalRepositoryTable extends React.Component<IProps> {
                 <DropdownItem
                   key='2'
                   component={
-                    <Link to={formatPath(Paths.token, {})}>Get token</Link>
+                    <Link to={formatPath(Paths.token, {})} target='_blank'>
+                      Get token
+                    </Link>
                   }
                 />,
               ]}
