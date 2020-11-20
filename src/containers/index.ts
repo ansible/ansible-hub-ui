@@ -22,3 +22,4 @@ export { default as UserProfile } from './settings/user-profile';
 export { default as GroupList } from './group-management/group-list';
 export { default as GroupDetail } from './group-management/group-detail';
 export { default as RepositoryList } from './repositories/repository-list';
+export { AboutModalWindow } from './about-modal/about-modal';
