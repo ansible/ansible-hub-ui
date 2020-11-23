@@ -57,6 +57,7 @@ interface IState {
   deleteModalVisible: boolean;
   editModalVisible: boolean;
   selectedGroup: any;
+  groupError: string;
 }
 
 class GroupList extends React.Component<RouteComponentProps, IState> {
@@ -82,6 +83,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       deleteModalVisible: false,
       editModalVisible: false,
       selectedGroup: null,
+      groupError: null,
     };
   }
 
@@ -191,8 +193,12 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderCreateModal() {
     return (
       <GroupModal
-        onCancel={() => this.setState({ createModalVisible: false })}
+        onCancel={() =>
+          this.setState({ createModalVisible: false, groupError: null })
+        }
         onSave={value => this.saveGroup(value)}
+        onChange={() => this.setState({ groupError: null })}
+        errorMessage={this.state.groupError}
       />
     );
   }
@@ -200,9 +206,13 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderEditModal() {
     return (
       <GroupModal
-        onCancel={() => this.setState({ editModalVisible: false })}
+        onCancel={() =>
+          this.setState({ editModalVisible: false, groupError: null })
+        }
         onSave={value => this.editGroup(value)}
+        onChange={() => this.setState({ groupError: null })}
         group={this.state.selectedGroup}
+        errorMessage={this.state.groupError}
       />
     );
   }
@@ -247,12 +257,16 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   }
 
   private saveGroup(value) {
-    GroupAPI.create({ name: value }).then(result => {
-      this.setState({
-        redirect: '/group/' + result.data.id,
-        createModalVisible: false,
-      });
-    });
+    GroupAPI.create({ name: value })
+      .then(result => {
+        this.setState({
+          redirect: '/group/' + result.data.id,
+          createModalVisible: false,
+        });
+      })
+      .catch(error =>
+        this.setState({ groupError: error.response.data.errors[0].detail }),
+      );
   }
 
   private editGroup(value) {
