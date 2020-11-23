@@ -1,7 +1,6 @@
 // import PropTypes from 'prop-types';
 import * as React from 'react';
 import '../app.scss';
-import { detect } from 'detect-browser';
 import {
   withRouter,
   Link,
@@ -23,19 +22,13 @@ import {
   NavGroup,
   Select,
   SelectOption,
-  AboutModal,
-  Dropdown,
-  TextContent,
-  TextList,
-  TextListVariants,
-  TextListItem,
-  TextListItemVariants,
 } from '@patternfly/react-core';
 
 import { Routes } from './routes';
 import { Paths, formatPath } from '../../paths';
-import { ActiveUserAPI, UserType, ApplicationInfoAPI } from '../../api';
+import { ActiveUserAPI, UserType } from '../../api';
 import { SmallLogo, StatefulDropdown } from '../../components';
+import { AboutModalWindow } from '../../containers';
 import { AppContext } from '../app-context';
 import { Constants } from '../../constants';
 import { QuestionCircleIcon } from '@patternfly/react-icons';
@@ -47,7 +40,6 @@ interface IState {
   selectedRepo: string;
   aboutModalVisible: boolean;
   toggleOpen: boolean;
-  applicationInfo: { server_version: string; pulp_ansible_version: string };
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -59,7 +51,6 @@ class App extends React.Component<RouteComponentProps, IState> {
       selectedRepo: 'published',
       aboutModalVisible: false,
       toggleOpen: false,
-      applicationInfo: { server_version: '', pulp_ansible_version: '' },
     };
   }
 
@@ -70,17 +61,6 @@ class App extends React.Component<RouteComponentProps, IState> {
         this.setState({ selectedRepo: match.params['repo'] });
       }
     }
-  }
-
-  componentDidMount() {
-    ApplicationInfoAPI.get('').then(result => {
-      this.setState({
-        applicationInfo: {
-          server_version: result.data.server_version,
-          pulp_ansible_version: result.data.pulp_ansible_version,
-        },
-      });
-    });
   }
 
   render() {
@@ -107,7 +87,6 @@ class App extends React.Component<RouteComponentProps, IState> {
       } else {
         userName = user.username;
       }
-      const browser = detect();
 
       dropdownItems = [
         <DropdownItem isDisabled key='username'>
@@ -169,55 +148,16 @@ class App extends React.Component<RouteComponentProps, IState> {
         </DropdownItem>,
       ];
       aboutModal = (
-        <AboutModal
+        <AboutModalWindow
           isOpen={this.state.aboutModalVisible}
           trademark=''
           brandImageSrc={Logo}
           onClose={() => this.setState({ aboutModalVisible: false })}
           brandImageAlt='Galaxy Logo'
           productName={APPLICATION_NAME}
-        >
-          <TextContent>
-            <TextList component={TextListVariants.dl}>
-              <TextListItem component={TextListItemVariants.dt}>
-                Server version
-              </TextListItem>
-              <TextListItem component={TextListItemVariants.dd}>
-                {this.state.applicationInfo.server_version}
-              </TextListItem>
-              <TextListItem component={TextListItemVariants.dt}>
-                Pulp Ansible Version
-              </TextListItem>
-              <TextListItem component={TextListItemVariants.dd}>
-                {this.state.applicationInfo.pulp_ansible_version}
-              </TextListItem>
-              <TextListItem component={TextListItemVariants.dt}>
-                Username
-              </TextListItem>
-              <TextListItem component={TextListItemVariants.dd}>
-                {userName}
-              </TextListItem>
-              <TextListItem component={TextListItemVariants.dt}>
-                User Groups
-              </TextListItem>
-              <TextListItem component={TextListItemVariants.dd}>
-                {user.groups.map(group => group.name).join()}
-              </TextListItem>
-              <TextListItem component={TextListItemVariants.dt}>
-                Browser Version
-              </TextListItem>
-              <TextListItem component={TextListItemVariants.dd}>
-                {browser.name + ' ' + browser.version}
-              </TextListItem>
-              <TextListItem component={TextListItemVariants.dt}>
-                Browser OS
-              </TextListItem>
-              <TextListItem component={TextListItemVariants.dd}>
-                {browser.os}
-              </TextListItem>
-            </TextList>
-          </TextContent>
-        </AboutModal>
+          user={user}
+          userName={userName}
+        ></AboutModalWindow>
       );
     }
 
@@ -360,7 +300,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
     return this.ctx(
       <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
-        {aboutModal}
+        {this.state.aboutModalVisible && aboutModal}
         <Routes selectedRepo={this.state.selectedRepo} />
       </Page>,
     );
