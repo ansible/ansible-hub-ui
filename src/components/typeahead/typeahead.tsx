@@ -76,6 +76,16 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
       options.push(<SelectOption key={option.id} value={option.name} />);
     }
 
+    if (options.length === 0) {
+      options.push(
+        <SelectOption
+          key={'not_found'}
+          value={'Not found'}
+          isDisabled={true}
+        />,
+      );
+    }
+
     return options;
   }
 
