@@ -37,9 +37,17 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         placeholderText={this.placeholderText()}
         isDisabled={!!this.props.isDisabled}
       >
-        {this.props.availablePermissions.map((option, index) => (
-          <SelectOption key={index} value={option} />
-        ))}
+        {this.props.availablePermissions.length === 0
+          ? [
+              <SelectOption
+                isDisabled={true}
+                key={'not_found'}
+                value={'Not found'}
+              />,
+            ]
+          : this.props.availablePermissions.map((option, index) => (
+              <SelectOption key={index} value={option} />
+            ))}
       </Select>
     );
   }
