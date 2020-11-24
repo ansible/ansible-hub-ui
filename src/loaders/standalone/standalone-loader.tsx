@@ -55,12 +55,11 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidUpdate(prevProps) {
-    const match = this.isRepoURL(this.props.location.pathname);
-    if (match) {
-      if (match.params['repo'] !== this.state.selectedRepo) {
-        this.setState({ selectedRepo: match.params['repo'] });
-      }
-    }
+    this.setRepoToURL();
+  }
+
+  componentDidMount() {
+    this.setRepoToURL();
   }
 
   render() {
@@ -304,6 +303,15 @@ class App extends React.Component<RouteComponentProps, IState> {
         <Routes selectedRepo={this.state.selectedRepo} />
       </Page>,
     );
+  }
+
+  private setRepoToURL() {
+    const match = this.isRepoURL(this.props.location.pathname);
+    if (match) {
+      if (match.params['repo'] !== this.state.selectedRepo) {
+        this.setState({ selectedRepo: match.params['repo'] });
+      }
+    }
   }
 
   private isRepoURL(location) {
