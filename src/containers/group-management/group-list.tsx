@@ -7,9 +7,8 @@ import {
   Link,
 } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
-
 import { GroupAPI } from '../../api';
-import { ParamHelper } from '../../utilities';
+import { mapErrorMessages, ParamHelper } from '../../utilities';
 import {
   AlertList,
   AlertType,
@@ -57,7 +56,7 @@ interface IState {
   deleteModalVisible: boolean;
   editModalVisible: boolean;
   selectedGroup: any;
-  groupError: string;
+  groupError: any;
 }
 
 class GroupList extends React.Component<RouteComponentProps, IState> {
@@ -264,9 +263,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           createModalVisible: false,
         });
       })
-      .catch(error =>
-        this.setState({ groupError: error.response.data.errors[0].detail }),
-      );
+      .catch(error => this.setState({ groupError: mapErrorMessages(error) }));
   }
 
   private editGroup(value) {

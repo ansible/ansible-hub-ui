@@ -12,12 +12,11 @@ interface IProps {
   onSave?: (string) => void;
   onChange?: () => void;
   group?: any;
-  errorMessage?: string;
+  errorMessage?: any;
 }
 
 interface IState {
   name: string;
-  errorMessage: string;
 }
 
 export class GroupModal extends React.Component<IProps, IState> {
@@ -28,17 +27,7 @@ export class GroupModal extends React.Component<IProps, IState> {
         !this.props.group || !this.props.group.name
           ? ''
           : this.props.group.name,
-      errorMessage: this.props.errorMessage,
     };
-  }
-  componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<IState>,
-    snapshot?: any,
-  ): void {
-    if (prevState.errorMessage !== this.props.errorMessage) {
-      this.setState({ errorMessage: this.props.errorMessage });
-    }
   }
 
   render() {
@@ -76,19 +65,20 @@ export class GroupModal extends React.Component<IProps, IState> {
             key='name'
             fieldId='name'
             label='Name'
-            helperTextInvalid={this.state.errorMessage}
-            validated={this.toError(!this.state.errorMessage)}
+            helperTextInvalid={
+              !this.props.errorMessage ? null : this.props.errorMessage.name
+            }
+            validated={this.toError(!this.props.errorMessage)}
           >
             <TextInput
               id='group_name'
               value={this.state.name}
-              onChange={value =>
-              {
-                this.setState({ name: value});
+              onChange={value => {
+                this.setState({ name: value });
                 onChange();
               }}
               type='text'
-              validated={this.toError(!this.state.errorMessage)}
+              validated={this.toError(!this.props.errorMessage)}
             />
           </FormGroup>
         </Form>
