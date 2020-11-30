@@ -42,12 +42,11 @@ export class GroupModal extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { onCancel, onSave } = this.props;
+    const { onCancel, onSave, onChange } = this.props;
     return (
       <Modal
         variant='small'
         onClose={() => {
-          this.setState({ name: '', errorMessage: null });
           onCancel();
         }}
         isOpen={true}
@@ -84,8 +83,10 @@ export class GroupModal extends React.Component<IProps, IState> {
               id='group_name'
               value={this.state.name}
               onChange={value =>
-                this.setState({ name: value, errorMessage: null })
-              }
+              {
+                this.setState({ name: value});
+                onChange();
+              }}
               type='text'
               validated={this.toError(!this.state.errorMessage)}
             />
