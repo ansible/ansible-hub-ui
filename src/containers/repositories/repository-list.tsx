@@ -112,6 +112,12 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
               try {
                 const distro_path =
                   remoteToEdit.repositories[0].distributions[0].base_path;
+
+                // Pulp complains about auth_url = null, so make sure the auth_url
+                // property is unset if its null or empty.
+                if (!remoteToEdit['auth_url']) {
+                  delete remoteToEdit['auth_url'];
+                }
                 RemoteAPI.update(distro_path, remoteToEdit)
                   .then(r => {
                     this.setState(
