@@ -1,15 +1,8 @@
 import * as React from 'react';
-import { Modal } from '@patternfly/react-core';
-import { Form, FormGroup, ActionGroup } from '@patternfly/react-core';
-import {
-  Button,
-  ButtonVariant,
-  InputGroup,
-  Popover,
-  PopoverPosition,
-  TextInput,
-} from '@patternfly/react-core';
-import { QuestionCircleIcon } from '@patternfly/react-icons';
+import { Modal, Tooltip } from '@patternfly/react-core';
+import { Form, FormGroup } from '@patternfly/react-core';
+import { Button, InputGroup, TextInput } from '@patternfly/react-core';
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 import { NamespaceAPI, GroupObjectPermissionType } from '../../api';
 
 import { ObjectPermissionField } from '../../components';
@@ -122,6 +115,16 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             helperText='Please, provide the namespace name'
             helperTextInvalid={this.state.errorMessages['name']}
             validated={this.toError(this.state.newNamespaceNameValid)}
+            labelIcon={
+              <Tooltip
+                position='top'
+                content={
+                  'Namespace names are limited to lowercase word characters ([a-zA-Z0-9_]), must have a minimum length of 2 characters and cannot start with an ‘_’.'
+                }
+              >
+                <OutlinedQuestionCircleIcon />
+              </Tooltip>
+            }
           >
             <InputGroup>
               <TextInput
@@ -137,18 +140,6 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                   });
                 }}
               />
-              <Popover
-                aria-label='popover example'
-                position={PopoverPosition.top}
-                bodyContent='Namespace names are limited to lowercase word characters ([a-zA-Z0-9_]), must have a minimum length of 2 characters and cannot start with an ‘_’.'
-              >
-                <Button
-                  variant={ButtonVariant.control}
-                  aria-label='popover for input'
-                >
-                  <QuestionCircleIcon />
-                </Button>
-              </Popover>
             </InputGroup>
           </FormGroup>
           <FormGroup
