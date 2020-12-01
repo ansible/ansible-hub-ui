@@ -99,6 +99,23 @@ export class UserForm extends React.Component<IProps, IState> {
             label={v.title}
             validated={this.toError(!(v.id in errorMessages))}
             helperTextInvalid={errorMessages[v.id]}
+            labelIcon={
+              v.id === 'password' && (
+                <Tooltip
+                  position='top'
+                  content={
+                    <div>
+                      Password must contain at least 9 characters. Password
+                      cannot contain a user's attributes such as a name,
+                      username, etc. Password cannot be too common like
+                      "password123" Password cannot be just numbers.
+                    </div>
+                  }
+                >
+                  <OutlinedQuestionCircleIcon />
+                </Tooltip>
+              )
+            }
           >
             <TextInput
               validated={this.toError(!(v.id in errorMessages))}
