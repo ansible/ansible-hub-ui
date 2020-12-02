@@ -10,7 +10,7 @@ import {
 interface IProps {
   onCancel?: () => void;
   onSave?: (string) => void;
-  onChange?: () => void;
+  clearErrors?: () => void;
   group?: any;
   errorMessage?: any;
 }
@@ -31,7 +31,7 @@ export class GroupModal extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { onCancel, onSave, onChange } = this.props;
+    const { onCancel, onSave, clearErrors } = this.props;
     return (
       <Modal
         variant='small'
@@ -75,7 +75,7 @@ export class GroupModal extends React.Component<IProps, IState> {
               value={this.state.name}
               onChange={value => {
                 this.setState({ name: value });
-                onChange();
+                clearErrors();
               }}
               type='text'
               validated={this.toError(!this.props.errorMessage)}

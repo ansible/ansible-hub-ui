@@ -196,7 +196,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           this.setState({ createModalVisible: false, groupError: null })
         }
         onSave={value => this.saveGroup(value)}
-        onChange={() => this.setState({ groupError: null })}
+        clearErrors={() => this.setState({ groupError: null })}
         errorMessage={this.state.groupError}
       />
     );
@@ -209,7 +209,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           this.setState({ editModalVisible: false, groupError: null })
         }
         onSave={value => this.editGroup(value)}
-        onChange={() => this.setState({ groupError: null })}
+        clearErrors={() => this.setState({ groupError: null })}
         group={this.state.selectedGroup}
         errorMessage={this.state.groupError}
       />
@@ -259,7 +259,9 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     GroupAPI.create({ name: value })
       .then(result => {
         this.setState({
-          redirect: '/group/' + result.data.id,
+          redirect: formatPath(Paths.groupDetail, {
+            group: result.data.id,
+          }),
           createModalVisible: false,
         });
       })
