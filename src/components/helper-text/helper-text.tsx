@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Popover, PopoverPosition, Button } from '@patternfly/react-core';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
+import './helper-text.scss';
 
 interface IProps {
   /** Value to display in the tag */
@@ -15,7 +16,7 @@ export class HelperText extends React.Component<IProps, {}> {
         position={PopoverPosition.top}
         bodyContent={this.props.content}
       >
-        <Button iconPosition={'left'} variant={'plain'} padding={'0px'}>
+        <Button iconPosition={'left'} variant={'plain'} className={'helper'}>
           <OutlinedQuestionCircleIcon />
         </Button>
       </Popover>
