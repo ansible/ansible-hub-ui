@@ -5,7 +5,7 @@ import { Button, InputGroup, TextInput } from '@patternfly/react-core';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 import { NamespaceAPI, GroupObjectPermissionType } from '../../api';
 
-import { ObjectPermissionField } from '../../components';
+import { HelperText, ObjectPermissionField } from '../../components';
 
 interface IProps {
   isOpen: boolean;
@@ -116,14 +116,11 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             helperTextInvalid={this.state.errorMessages['name']}
             validated={this.toError(this.state.newNamespaceNameValid)}
             labelIcon={
-              <Tooltip
-                position='top'
+              <HelperText
                 content={
-                  'Namespace names are limited to lowercase word characters ([a-zA-Z0-9_]), must have a minimum length of 2 characters and cannot start with an ‘_’.'
+                  'Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’.'
                 }
-              >
-                <OutlinedQuestionCircleIcon />
-              </Tooltip>
+              />
             }
           >
             <InputGroup>
