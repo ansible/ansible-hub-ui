@@ -103,7 +103,7 @@ export class UserForm extends React.Component<IProps, IState> {
               v.id === 'password' && (
                 <HelperText
                   content={
-                    'Password must contain at least 9 characters. Password cannot contain a user\'s attributes such as a name, username, etc. Password cannot be too common like"password123" Password cannot be just numbers.'
+                    'Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions.'
                   }
                 />
               )
