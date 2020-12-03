@@ -1,10 +1,18 @@
 import * as React from 'react';
-import { Button, FormGroup, Modal, TextInput } from '@patternfly/react-core';
+import {
+  Button,
+  Form,
+  FormGroup,
+  Modal,
+  TextInput,
+} from '@patternfly/react-core';
 
 interface IProps {
   onCancel?: () => void;
   onSave?: (string) => void;
+  clearErrors?: () => void;
   group?: any;
+  errorMessage?: any;
 }
 
 interface IState {
@@ -21,12 +29,15 @@ export class GroupModal extends React.Component<IProps, IState> {
           : this.props.group.name,
     };
   }
+
   render() {
-    const { onCancel, onSave } = this.props;
+    const { onCancel, onSave, clearErrors } = this.props;
     return (
       <Modal
         variant='small'
-        onClose={() => onCancel()}
+        onClose={() => {
+          onCancel();
+        }}
         isOpen={true}
         title={''}
         header={<h2>Create a group</h2>}
@@ -48,15 +59,34 @@ export class GroupModal extends React.Component<IProps, IState> {
           </Button>,
         ]}
       >
-        <FormGroup isRequired={true} key='name' fieldId='name' label='Name'>
-          <TextInput
-            id='group_name'
-            value={this.state.name}
-            onChange={value => this.setState({ name: value })}
-            type='text'
-          />
-        </FormGroup>
+        <Form>
+          <FormGroup
+            isRequired={true}
+            key='name'
+            fieldId='name'
+            label='Name'
+            helperTextInvalid={
+              !this.props.errorMessage ? null : this.props.errorMessage.name
+            }
+            validated={this.toError(!this.props.errorMessage)}
+          >
+            <TextInput
+              id='group_name'
+              value={this.state.name}
+              onChange={value => {
+                this.setState({ name: value });
+                clearErrors();
+              }}
+              type='text'
+              validated={this.toError(!this.props.errorMessage)}
+            />
+          </FormGroup>
+        </Form>
       </Modal>
     );
+  }
+
+  private toError(validated: boolean) {
+    return validated ? 'default' : 'error';
   }
 }
