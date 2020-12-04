@@ -128,10 +128,13 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
     cy.login(adminUsername, adminPassword);
 
     cy.contains('#page-sidebar a', 'Users').click();
-
-    cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click();
-    cy.containsnear(`[aria-labelledby=${username}] [aria-label=Actions]`, 'Delete').click();
-    cy.contains('[role=dialog] button', 'Delete').click();
+    cy.server();
+    cy.route('DELETE', Cypress.env('prefix') + '_ui/v1/users/**').as('deleteUser');
+    cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click({'force': true});
+    cy.containsnear(`[aria-labelledby=${username}] [aria-label=Actions]`, 'Delete').click({'force': true});
+    cy.contains('[role=dialog] button', 'Delete').click({'force': true});
+    cy.wait('@deleteUser');
+    cy.get('@deleteUser').should('have.property', 'status', 204);
 });
 
 Cypress.Commands.add('deleteGroup', {}, (name) => {
@@ -142,6 +145,10 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
     cy.login(adminUsername, adminPassword);
 
     cy.contains('#page-sidebar a', 'Groups').click();
+    cy.server();
+    cy.route('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as('deleteGroup');
     cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click({'force': true});
     cy.contains('[role=dialog] button', 'Delete').click({'force': true});
+    cy.wait('@deleteGroup');
+    cy.get('@deleteGroup').should('have.property', 'status', 204);
 });
