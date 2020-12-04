@@ -20,7 +20,7 @@ import {
 } from '@patternfly/react-icons';
 
 import { RemoteType, UserType, PulpStatus } from '../../api';
-import { SortTable, StatefulDropdown } from '..';
+import { HelperText, SortTable, StatefulDropdown } from '..';
 import { StatusIndicator } from '../../components';
 
 import { Constants } from '../../constants';
@@ -204,11 +204,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
     let errorMessage = null;
     if (remote['last_sync_task']['error']) {
       errorMessage = (
-        <Popover bodyContent={remote.last_sync_task.error['description']}>
-          <Button variant='plain'>
-            <QuestionCircleIcon />
-          </Button>
-        </Popover>
+        <HelperText content={remote.last_sync_task.error['description']} />
       );
     }
 

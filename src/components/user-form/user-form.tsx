@@ -12,7 +12,7 @@ import {
 
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 
-import { APISearchTypeAhead } from '../../components';
+import { APISearchTypeAhead, HelperText } from '../../components';
 
 import { UserType, GroupAPI } from '../../api';
 
@@ -99,6 +99,15 @@ export class UserForm extends React.Component<IProps, IState> {
             label={v.title}
             validated={this.toError(!(v.id in errorMessages))}
             helperTextInvalid={errorMessages[v.id]}
+            labelIcon={
+              v.id === 'password' && (
+                <HelperText
+                  content={
+                    'Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions.'
+                  }
+                />
+              )
+            }
           >
             <TextInput
               validated={this.toError(!(v.id in errorMessages))}
@@ -155,14 +164,12 @@ export class UserForm extends React.Component<IProps, IState> {
           fieldId='is_superuser'
           label='Super user'
           labelIcon={
-            <Tooltip
+            <HelperText
               content={
                 'Super users have all system permissions regardless of' +
                 ' their group. Adding new super users is not permitted.'
               }
-            >
-              <OutlinedQuestionCircleIcon size='sm' />
-            </Tooltip>
+            />
           }
         >
           <Checkbox
