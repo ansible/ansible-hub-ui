@@ -93,32 +93,36 @@ Cypress.Commands.add('createGroup', {}, (name => {
 });
 
 Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
-    cy.contains('#page-sidebar a', 'Groups').click({'force': true});
-    cy.get(`[aria-labelledby=${groupName}] a`).click({'force': true});
-    cy.contains('button', 'Edit').click({'force': true});
+    cy.contains('#page-sidebar a', 'Groups').click();
+    cy.get(`[aria-labelledby=${groupName}] a`).click();
+    cy.contains('button', 'Edit').click();
     permissions.forEach(permissionElement => {
-        cy.get(`.pf-l-flex.pf-m-align-items-center.${permissionElement.group} [aria-label="Options menu"]`).click({'force': true});
+        // closes previously open dropdowns
+        cy.get('h1').click();
+        cy.get(`.pf-l-flex.pf-m-align-items-center.${permissionElement.group} [aria-label="Options menu"]`).click();
         permissionElement.permissions.forEach(permission => {
-            cy.contains('button', permission).click({'force': true});
+            cy.contains('button', permission).click();
         })
     });
-    cy.contains('button', 'Save').click({'force': true});
+    cy.contains('button', 'Save').click();
 });
 
 Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
-    cy.contains('#page-sidebar a', 'Groups').click({'force': true});
-    cy.get(`[aria-labelledby=${groupName}] a`).click({'force': true});
-    cy.contains('button', 'Edit').click({'force': true});
+    cy.contains('#page-sidebar a', 'Groups').click();
+    cy.get(`[aria-labelledby=${groupName}] a`).click();
+    cy.contains('button', 'Edit').click();
     permissions.forEach(permissionElement => {
+        // closes previously open dropdowns
+        cy.get('h1').click();
         if (permissionElement.permissions.length > 3) {
             // Make sure all permissions are visible
-            cy.containsnear(`.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `, '1 more').first().click({'force': true});
+            cy.containsnear(`.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `, '1 more').first().click();
         }
         permissionElement.permissions.forEach(permission => {
-            cy.containsnear(`.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `, permission).findnear('button').first().click({'force': true});
+            cy.containsnear(`.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `, permission).findnear('button').first().click();
         });
     });
-    cy.contains('button', 'Save').click({'force': true});
+    cy.contains('button', 'Save').click();
 });
 
 Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
@@ -137,22 +141,22 @@ Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
 });
 
 Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
-    cy.contains('#page-sidebar a', 'Groups').click({'force': true});
-    cy.get(`[aria-labelledby=${groupName}] a`).click({'force': true});
-    cy.contains('button', 'Users').click({'force': true});
-    cy.contains('button', 'Add').click({'force': true});
+    cy.contains('#page-sidebar a', 'Groups').click();
+    cy.get(`[aria-labelledby=${groupName}] a`).click();
+    cy.contains('button', 'Users').click();
+    cy.contains('button', 'Add').click();
     cy.get('input.pf-c-select__toggle-typeahead').type(userName);
-    cy.contains('button', userName).click({'force': true});
-    cy.contains('footer > button', 'Add').click({'force': true});
+    cy.contains('button', userName).click();
+    cy.contains('footer > button', 'Add').click();
     cy.get(`[aria-labelledby=${userName}]`).should('exist');
 });
 
 Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
-    cy.contains('#page-sidebar a', 'Groups').click({'force': true});
-    cy.get(`[aria-labelledby=${groupName}] a`).click({'force': true});
-    cy.contains('button', 'Users').click({'force': true});
-    cy.get(`[aria-labelledby=${userName}] [aria-label=Actions]`).click({'force': true});
-    cy.containsnear(`[aria-labelledby=${userName}] [aria-label=Actions]`, 'Remove').click({'force': true});
+    cy.contains('#page-sidebar a', 'Groups').click();
+    cy.get(`[aria-labelledby=${groupName}] a`).click();
+    cy.contains('button', 'Users').click();
+    cy.get(`[aria-labelledby=${userName}] [aria-label=Actions]`).click();
+    cy.containsnear(`[aria-labelledby=${userName}] [aria-label=Actions]`, 'Remove').click();
     cy.contains(userName).should('not.exist');
 });
 
@@ -166,9 +170,9 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
     cy.contains('#page-sidebar a', 'Users').click();
     cy.server();
     cy.route('DELETE', Cypress.env('prefix') + '_ui/v1/users/**').as('deleteUser');
-    cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click({'force': true});
-    cy.containsnear(`[aria-labelledby=${username}] [aria-label=Actions]`, 'Delete').click({'force': true});
-    cy.contains('[role=dialog] button', 'Delete').click({'force': true});
+    cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click();
+    cy.containsnear(`[aria-labelledby=${username}] [aria-label=Actions]`, 'Delete').click();
+    cy.contains('[role=dialog] button', 'Delete').click();
     cy.wait('@deleteUser');
     cy.get('@deleteUser').should('have.property', 'status', 204);
 });
@@ -183,8 +187,8 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
     cy.contains('#page-sidebar a', 'Groups').click();
     cy.server();
     cy.route('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as('deleteGroup');
-    cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click({'force': true});
-    cy.contains('[role=dialog] button', 'Delete').click({'force': true});
+    cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click();
+    cy.contains('[role=dialog] button', 'Delete').click();
     cy.wait('@deleteGroup');
     cy.get('@deleteGroup').should('have.property', 'status', 204);
 });

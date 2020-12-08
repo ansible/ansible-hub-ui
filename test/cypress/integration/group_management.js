@@ -7,7 +7,7 @@ describe('Hub Group Management Tests', () => {
         cy.visit(host);
     });
 
-    it.skip('admin user can create and delete a group', () => {
+    it('admin user can create and delete a group', () => {
         var name = 'testGroup';
         cy.login(adminUsername, adminPassword);
         cy.createGroup(name);
@@ -29,7 +29,7 @@ describe('Hub Group Management Tests', () => {
         cy.deleteUser(userName);
     });
 
-    it.skip('admin user can edit a group', () => {
+    it('admin user can edit a group', () => {
         var name = 'testGroup';
         cy.login(adminUsername, adminPassword);
         cy.createGroup(name);
