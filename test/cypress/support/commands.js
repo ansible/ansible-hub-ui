@@ -68,7 +68,10 @@ Cypress.Commands.add('createUser', {}, (username, password, firstName = null, la
     cy.contains('div', 'Password').findnear('input').first().type(user.password);
     cy.contains('div', 'Password confirmation').findnear('input').first().type(user.password);
 
+    cy.server();
+    cy.route('POST', Cypress.env('prefix') + '_ui/v1/users/').as('createUser');
     cy.contains('Save').click();
+    cy.wait('@createUser');
 });
 
 Cypress.Commands.add('deleteUser', {}, (username) => {
