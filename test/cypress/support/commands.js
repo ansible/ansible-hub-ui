@@ -42,8 +42,11 @@ Cypress.Commands.add('menuItem', {}, (name) => {
 });
 
 Cypress.Commands.add('logout', {}, () => {
-    cy.get('div.pf-c-page__header-tools > div > div:nth-child(2) > button').click();
-    cy.contains('Logout').click();
+    cy.server();
+    cy.route('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
+    cy.get('[aria-label="user-dropdown"] button').click();
+    cy.get('[aria-label="logout"]').click();
+    cy.wait('@me');
 });
 Cypress.Commands.add('login', {}, (username, password) => {
     cy.contains('.pf-c-form__group', 'Username').find('input').first().type(username);
@@ -70,8 +73,10 @@ Cypress.Commands.add('createUser', {}, (username, password, firstName = null, la
 
     cy.server();
     cy.route('POST', Cypress.env('prefix') + '_ui/v1/users/').as('createUser');
+    cy.route('GET', Cypress.env('prefix') + '_ui/v1/users/*').as('reloadUsers');
     cy.contains('Save').click();
     cy.wait('@createUser');
+    cy.wait('@reloadUsers');
 });
 
 Cypress.Commands.add('deleteUser', {}, (username) => {

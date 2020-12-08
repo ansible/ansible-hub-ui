@@ -121,6 +121,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
         <DropdownItem
           key='logout'
+          aria-label={'logout'}
           onClick={() =>
             ActiveUserAPI.logout().then(() => this.setState({ user: null }))
           }
@@ -242,12 +243,14 @@ class App extends React.Component<RouteComponentProps, IState> {
                   items={dropdownItemsCog}
                   defaultText={<QuestionCircleIcon />}
                   toggleType='icon'
+                  ariaLabel={'cog-dropdown'}
                 />
 
                 <StatefulDropdown
                   defaultText={userName}
                   toggleType='dropdown'
                   items={dropdownItems}
+                  ariaLabel={'user-dropdown'}
                 />
               </div>
             )}
