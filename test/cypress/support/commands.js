@@ -42,12 +42,21 @@ Cypress.Commands.add('menuItem', {}, (name) => {
 });
 
 Cypress.Commands.add('logout', {}, () => {
+    cy.server();
+    cy.route('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
     cy.get('[aria-label="user-dropdown"] button').click();
     cy.get('[aria-label="logout"]').click();
+    cy.wait('@me');
 });
+
 Cypress.Commands.add('login', {}, (username, password) => {
+    cy.server();
+    cy.route('POST', Cypress.env('prefix') + '_ui/v1/auth/login/').as('login');
+    cy.route('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
     cy.get('#pf-login-username-id').type(username);
     cy.get('#pf-login-password-id').type(`${password}{enter}`);
+    cy.wait('@login');
+    cy.wait('@me');
 });
 
 Cypress.Commands.add('createUser', {}, (username, password, firstName = null, lastName = null, email = null) => {
