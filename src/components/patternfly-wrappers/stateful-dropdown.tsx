@@ -25,6 +25,8 @@ interface IProps {
 
   /** Toggles between plain and normal patternfly styling */
   isPlain?: boolean;
+
+  ariaLabel?: string;
 }
 
 interface IState {
@@ -48,7 +50,14 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
 
   render() {
     const { isOpen } = this.state;
-    const { items, toggleType, defaultText, position, isPlain } = this.props;
+    const {
+      items,
+      toggleType,
+      defaultText,
+      position,
+      isPlain,
+      ariaLabel,
+    } = this.props;
 
     return (
       <Dropdown
@@ -59,6 +68,7 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
         dropdownItems={items}
         position={position || DropdownPosition.right}
         autoFocus={false}
+        aria-label={ariaLabel}
       />
     );
   }
