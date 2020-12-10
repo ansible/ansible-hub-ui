@@ -17,6 +17,7 @@ class API extends BaseAPI {
       'token',
       'requirements_file',
       'tls_validation',
+      'download_concurrency',
     ]) {
       reducedData[field] = remote[field];
     }
@@ -28,6 +29,7 @@ class API extends BaseAPI {
       'client_key',
       'client_cert',
       'ca_cert',
+      'download_concurrency',
     ]) {
       if (!!remote[field]) {
         reducedData[field] = remote[field];
