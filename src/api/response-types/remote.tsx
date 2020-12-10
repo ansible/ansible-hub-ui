@@ -37,4 +37,5 @@ export class RemoteType {
     }[];
   }[];
   last_sync_task: LastSyncType;
+  download_concurrency: number;
 }
