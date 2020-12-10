@@ -435,6 +435,22 @@ export class RemoteForm extends React.Component<IProps, IState> {
               </FlexItem>
             </Flex>
           </FormGroup>
+          <FormGroup
+            fieldId={'download_concurrency'}
+            label={'Download concurrency'}
+            validated={remote.download_concurrency > 0 ? 'default' : 'error'}
+            helperTextInvalid={'Number must be greater than 0'}
+          >
+            <TextInput
+              id='download_concurrency'
+              type='number'
+              value={remote.download_concurrency}
+              validated={remote.download_concurrency > 0 ? 'default' : 'error'}
+              onChange={value =>
+                this.updateRemote(parseInt(value), 'download_concurrency')
+              }
+            />
+          </FormGroup>
         </ExpandableSection>
         {errorMessages['__nofield'] ? (
           <span
@@ -456,6 +472,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
       if (!remote[field] || remote[field] === '') {
         return false;
       }
+    }
+    if (remote.download_concurrency < 1) {
+      return false;
     }
     return true;
   }

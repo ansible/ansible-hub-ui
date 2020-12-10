@@ -15,7 +15,6 @@ import {
 import {
   WarningTriangleIcon,
   WrenchIcon,
-  QuestionCircleIcon,
   ExclamationCircleIcon,
 } from '@patternfly/react-icons';
 
