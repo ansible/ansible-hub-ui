@@ -435,6 +435,19 @@ export class RemoteForm extends React.Component<IProps, IState> {
               </FlexItem>
             </Flex>
           </FormGroup>
+          <FormGroup
+            fieldId={'download_concurrency'}
+            label={'Download concurrency'}
+          >
+            <TextInput
+              id='download_concurrency'
+              type='number'
+              value={remote.download_concurrency || 0}
+              onChange={value =>
+                this.updateRemote(parseInt(value), 'download_concurrency')
+              }
+            />
+          </FormGroup>
         </ExpandableSection>
         {errorMessages['__nofield'] ? (
           <span
