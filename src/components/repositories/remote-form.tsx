@@ -439,7 +439,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             fieldId={'download_concurrency'}
             label={'Download concurrency'}
             validated={remote.download_concurrency > 0 ? 'default' : 'error'}
-            helperTextInvalid={'Number must be bigger than 0'}
+            helperTextInvalid={'Number must be greater than 0'}
           >
             <TextInput
               id='download_concurrency'
