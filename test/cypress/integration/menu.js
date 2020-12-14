@@ -25,10 +25,12 @@ describe('Hub Menu Tests', () => {
             cy.deleteUser(username);
         });
         it('a user without permissions sees limited menu', () => {
-            let menuItems = [ 'Collections', 'Namespaces', 'API Token', 'Repo Management' ];
+            let menuItems = [ 'Collections', 'Namespaces', 'My Namespaces', 'API Token', 'Repo Management' ];
+            let menuMissingItems = [ 'Users', 'Groups', 'Approval' ];
             cy.logout();
             cy.login(username, password);
             menuItems.forEach(item => cy.menuItem(item));
+            menuMissingItems.forEach(item => cy.menuItem(item).should('not.exist'));
         });
     });
 });
