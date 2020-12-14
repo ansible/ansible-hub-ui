@@ -1,4 +1,4 @@
-describe('Hub Menu Tests', () => {
+describe('Repo Management tests', () => {
     let host = Cypress.env('host');
     let adminUsername = Cypress.env('username');
     let adminPassword = Cypress.env('password');
