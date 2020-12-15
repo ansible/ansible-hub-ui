@@ -6,11 +6,10 @@ import {
   TextInput,
   ActionGroup,
   Button,
-  Tooltip,
+  Label,
   Checkbox,
+  LabelGroup,
 } from '@patternfly/react-core';
-
-import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 
 import { APISearchTypeAhead, HelperText } from '../../components';
 
@@ -142,24 +141,33 @@ export class UserForm extends React.Component<IProps, IState> {
             type='password'
           />
         </FormGroup>
-        <FormGroup
-          fieldId='groups'
-          label='Groups'
-          helperTextInvalid={errorMessages['groups']}
-          validated={this.toError(!('groups' in errorMessages))}
-        >
-          <APISearchTypeAhead
-            results={this.state.searchGroups}
-            loadResults={this.loadGroups}
-            onSelect={this.onSelectGroup}
-            placeholderText='Select groups'
-            selections={user.groups}
-            multiple={true}
-            onClear={this.clearGroups}
-            isDisabled={isReadonly || isMe}
-          />
-        </FormGroup>
-
+        {isMe ? (
+          <FormGroup fieldId={'groups'} label={'Groups'}>
+            {user.groups.length === 0 ? (
+              <Label> No groups</Label>
+            ) : (
+              user.groups.map(group => <Label>{group.name}</Label>)
+            )}
+          </FormGroup>
+        ) : (
+          <FormGroup
+            fieldId='groups'
+            label='Groups'
+            helperTextInvalid={errorMessages['groups']}
+            validated={this.toError(!('groups' in errorMessages))}
+          >
+            <APISearchTypeAhead
+              results={this.state.searchGroups}
+              loadResults={this.loadGroups}
+              onSelect={this.onSelectGroup}
+              placeholderText='Select groups'
+              selections={user.groups}
+              multiple={true}
+              onClear={this.clearGroups}
+              isDisabled={isReadonly}
+            />
+          </FormGroup>
+        )}
         <FormGroup
           fieldId='is_superuser'
           label='Super user'
