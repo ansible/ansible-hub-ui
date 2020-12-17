@@ -178,7 +178,7 @@ export class UserForm extends React.Component<IProps, IState> {
           </FormGroup>
         )}
         {user.is_superuser && (
-          <FormGroup fieldId='is_superuser' label='Super user'>
+          <FormGroup fieldId='is_superuser' label='User type'>
             <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
               <Label icon={<UserPlusIcon />} color='orange'>
                 Super user
