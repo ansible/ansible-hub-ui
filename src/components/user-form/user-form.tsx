@@ -6,9 +6,9 @@ import {
   TextInput,
   ActionGroup,
   Button,
-  Label,
+  Chip,
   Checkbox,
-  LabelGroup,
+  ChipGroup,
 } from '@patternfly/react-core';
 
 import { APISearchTypeAhead, HelperText } from '../../components';
@@ -144,9 +144,16 @@ export class UserForm extends React.Component<IProps, IState> {
         {isMe ? (
           <FormGroup fieldId={'groups'} label={'Groups'}>
             {user.groups.length === 0 ? (
-              <Label> No groups</Label>
+              'No groups'
             ) : (
-              user.groups.map(group => <Label>{group.name}</Label>)
+              <ChipGroup>
+                {' '}
+                {user.groups.map(group => (
+                  <Chip isReadOnly cellPadding={'1px'}>
+                    {group.name}
+                  </Chip>
+                ))}{' '}
+              </ChipGroup>
             )}
           </FormGroup>
         ) : (
@@ -168,26 +175,27 @@ export class UserForm extends React.Component<IProps, IState> {
             />
           </FormGroup>
         )}
-        <FormGroup
-          fieldId='is_superuser'
-          label='Super user'
-          labelIcon={
-            <HelperText
-              content={
-                'Super users have all system permissions regardless of' +
-                ' their group. Adding new super users is not permitted.'
-              }
+        {user.is_superuser && (
+          <FormGroup
+            fieldId='is_superuser'
+            label='Super user'
+            labelIcon={
+              <HelperText
+                content={
+                  'Super users have all system permissions regardless of' +
+                  ' their group. Adding new super users is not permitted.'
+                }
+              />
+            }
+          >
+            <Checkbox
+              id='is_superuser'
+              isDisabled
+              isChecked={user.is_superuser}
+              label='Is super user'
             />
-          }
-        >
-          <Checkbox
-            id='is_superuser'
-            isDisabled
-            isChecked={user.is_superuser}
-            label='Is super user'
-          />
-        </FormGroup>
-
+          </FormGroup>
+        )}
         {!isReadonly && (
           <ActionGroup>
             <Button
