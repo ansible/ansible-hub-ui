@@ -7,9 +7,11 @@ import {
   ActionGroup,
   Button,
   Chip,
-  Checkbox,
   ChipGroup,
+  Label,
+  Tooltip,
 } from '@patternfly/react-core';
+import { UserPlusIcon } from '@patternfly/react-icons';
 
 import { APISearchTypeAhead, HelperText } from '../../components';
 
@@ -176,24 +178,12 @@ export class UserForm extends React.Component<IProps, IState> {
           </FormGroup>
         )}
         {user.is_superuser && (
-          <FormGroup
-            fieldId='is_superuser'
-            label='Super user'
-            labelIcon={
-              <HelperText
-                content={
-                  'Super users have all system permissions regardless of' +
-                  ' their group. Adding new super users is not permitted.'
-                }
-              />
-            }
-          >
-            <Checkbox
-              id='is_superuser'
-              isDisabled
-              isChecked={user.is_superuser}
-              label='Is super user'
-            />
+          <FormGroup fieldId='is_superuser' label='Super user'>
+            <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
+              <Label icon={<UserPlusIcon />} color='orange'>
+                Super user
+              </Label>
+            </Tooltip>
           </FormGroup>
         )}
         {!isReadonly && (
