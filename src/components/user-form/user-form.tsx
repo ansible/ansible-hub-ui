@@ -145,9 +145,7 @@ export class UserForm extends React.Component<IProps, IState> {
         </FormGroup>
         {isMe ? (
           <FormGroup fieldId={'groups'} label={'Groups'}>
-            {user.groups.length === 0 ? (
-              'No groups'
-            ) : (
+            {user.groups.length !== 0 && (
               <ChipGroup>
                 {' '}
                 {user.groups.map(group => (
