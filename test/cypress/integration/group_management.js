@@ -30,23 +30,14 @@ describe('Hub Group Management Tests', () => {
 
     it('admin user can add/remove permissions to/from a group', () => {
         let name = 'testGroup';
+        let permissionTypes = [ 'namespaces', 'collections', 'users', 'groups', 'remotes' ];
         cy.login(adminUsername, adminPassword);
         cy.createGroup(name);
         cy.contains(name).should('exist');
         cy.addAllPermissions(name);
-        [ 'namespaces', 'collections', 'users', 'groups', 'remotes' ].forEach(permGroup => cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}  [placeholder="No permission"]`).should('not.exist'));;
-        cy.removePermissions(name, [{
-            group: 'namespaces', permissions: ['Add namespace', 'Change namespace', 'Upload to namespace']
-        }, {
-            group: 'collections', permissions: ['Modify Ansible repo content']
-        },{
-            group: 'users', permissions: ['View user', 'Delete user', 'Add user', 'Change user']
-        },{
-            group: 'groups', permissions: ['View group', 'Delete group', 'Add group', 'Change group']
-        },{
-            group: 'remotes', permissions: ['Change collection remote', 'View collection remote']
-        }]);
-        [ 'namespaces', 'collections', 'users', 'groups', 'remotes' ].forEach(permGroup => cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}  [placeholder="No permission"]`).should('exist'));;
+        permissionTypes.forEach(permGroup => cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}  [placeholder="No permission"]`).should('not.exist'));;
+        cy.removeAllPermissions(name);
+        permissionTypes.forEach(permGroup => cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}  [placeholder="No permission"]`).should('exist'));;
         cy.deleteGroup(name);
         cy.contains(name).should('not.exist');
     });
