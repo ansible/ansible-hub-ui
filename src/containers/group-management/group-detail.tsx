@@ -264,6 +264,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               style={{ marginTop: '16px' }}
               alignItems={{ default: 'alignItemsCenter' }}
               key={group.name}
+              className={group.name}
             >
               <FlexItem style={{ minWidth: '200px' }}>{group.name}</FlexItem>
               <FlexItem grow={{ default: 'grow' }}>
