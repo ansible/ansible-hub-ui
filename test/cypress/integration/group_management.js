@@ -7,19 +7,18 @@ describe('Hub Group Management Tests', () => {
         cy.visit(host);
     });
 
-    it('admin user can create and delete a group', () => {
-        var name = 'testGroup';
+    it('admin user can create/delete a group', () => {
+        let name = 'testGroup';
         cy.login(adminUsername, adminPassword);
         cy.createGroup(name);
         cy.contains(name).should('exist');
-        cy.addAllPermissions(name);
         cy.deleteGroup(name);
         cy.contains(name).should('not.exist');
     });
 
-    it('admin user can add a user toa  group', () => {
-        var groupName = 'testGroup';
-        var userName = 'testUser';
+    it('admin user can add/remove a user to/from a group', () => {
+        let groupName = 'testGroup';
+        let userName = 'testUser';
         cy.login(adminUsername, adminPassword);
         cy.createGroup(groupName);
         cy.createUser(userName);
@@ -29,12 +28,13 @@ describe('Hub Group Management Tests', () => {
         cy.deleteUser(userName);
     });
 
-    it('admin user can edit a group', () => {
-        var name = 'testGroup';
+    it('admin user can add/remove permissions to/from a group', () => {
+        let name = 'testGroup';
         cy.login(adminUsername, adminPassword);
         cy.createGroup(name);
         cy.contains(name).should('exist');
         cy.addAllPermissions(name);
+        [ 'namespaces', 'collections', 'users', 'groups', 'remotes' ].forEach(permGroup => cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}  [placeholder="No permission"]`).should('not.exist'));;
         cy.removePermissions(name, [{
             group: 'namespaces', permissions: ['Add namespace', 'Change namespace', 'Upload to namespace']
         }, {

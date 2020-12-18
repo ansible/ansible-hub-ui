@@ -76,7 +76,11 @@ Cypress.Commands.add('createUser', {}, (username, password = null, firstName = n
     cy.get('#password').type(user.password);
     cy.get('#password-confirm').type(user.password);
 
+    cy.server();
+    cy.route('POST', Cypress.env('prefix') + '_ui/v1/users/').as('createUser');
+
     cy.contains('Save').click();
+    cy.wait('@createUser');
 });
 
 Cypress.Commands.add('createGroup', {}, (name => {
@@ -93,8 +97,11 @@ Cypress.Commands.add('createGroup', {}, (name => {
 });
 
 Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
+    cy.server();
+    cy.route('GET', Cypress.env('prefix') + '_ui/v1/groups/*/model-permissions/*').as('groups');
     cy.contains('#page-sidebar a', 'Groups').click();
     cy.get(`[aria-labelledby=${groupName}] a`).click();
+    cy.wait('@groups');
     cy.contains('button', 'Edit').click();
     permissions.forEach(permissionElement => {
         // closes previously open dropdowns
@@ -125,18 +132,23 @@ Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
     cy.contains('button', 'Save').click();
 });
 
+const allPerms = [{
+    group: 'namespaces', permissions: ['Add namespace', 'Change namespace', 'Upload to namespace']
+}, {
+    group: 'collections', permissions: ['Modify Ansible repo content']
+},{
+    group: 'users', permissions: ['View user', 'Delete user', 'Add user', 'Change user']
+},{
+    group: 'groups', permissions: ['View group', 'Delete group', 'Add group', 'Change group']
+},{
+    group: 'remotes', permissions: ['Change collection remote', 'View collection remote']
+}];
+
+Cypress.Commands.add('removeAllPermissions', {}, (groupName) => {
+    cy.removePermissions(groupName, allPerms);
+});
+
 Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
-    var allPerms = [{
-        group: 'namespaces', permissions: ['Add namespace', 'Change namespace', 'Upload to namespace']
-    }, {
-        group: 'collections', permissions: ['Modify Ansible repo content']
-    },{
-        group: 'users', permissions: ['View user', 'Delete user', 'Add user', 'Change user']
-    },{
-        group: 'groups', permissions: ['View group', 'Delete group', 'Add group', 'Change group']
-    },{
-        group: 'remotes', permissions: ['Change collection remote', 'View collection remote']
-    }];
     cy.addPermissions(groupName, allPerms);
 });
 
@@ -147,6 +159,8 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
     cy.contains('button', 'Add').click();
     cy.get('input.pf-c-select__toggle-typeahead').type(userName);
     cy.contains('button', userName).click();
+    // closes previously open dropdown
+    cy.get('[aria-label="Options menu"]').click();
     cy.contains('footer > button', 'Add').click();
     cy.get(`[aria-labelledby=${userName}]`).should('exist');
 });
