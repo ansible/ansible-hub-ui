@@ -12,7 +12,7 @@ import {
   ClipboardCopy,
 } from '@patternfly/react-core';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
-import { SortTable, StatefulDropdown } from '..';
+import { EmptyStateFilter, SortTable, StatefulDropdown } from '..';
 import * as moment from 'moment';
 import { Constants } from '../../constants';
 import { getRepoUrl } from '../../utilities';
@@ -31,17 +31,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
   render() {
     const { repositories } = this.props;
     if (repositories.length === 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WarningTriangleIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No matches
-          </Title>
-          <EmptyStateBody>
-            Please try adjusting your search query.
-          </EmptyStateBody>
-        </EmptyState>
-      );
+      return <EmptyStateFilter />;
     }
     return this.renderTable(repositories);
   }

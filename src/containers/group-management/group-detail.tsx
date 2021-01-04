@@ -12,6 +12,7 @@ import {
   Breadcrumbs,
   closeAlertMixin,
   CompoundFilter,
+  EmptyStateFilter,
   LoadingPageWithHeader,
   Main,
   Pagination,
@@ -26,14 +27,9 @@ import { formatPath, Paths } from '../../paths';
 import {
   Button,
   DropdownItem,
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  EmptyStateVariant,
   Flex,
   FlexItem,
   Modal,
-  Title,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -41,7 +37,6 @@ import {
 } from '@patternfly/react-core';
 import { Constants } from '../../constants';
 import * as moment from 'moment';
-import { WarningTriangleIcon } from '@patternfly/react-icons';
 import { InsightsUserType } from '../../api/response-types/user';
 import { AppContext } from '../../loaders/app-context';
 
@@ -535,15 +530,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     if (users.length === 0) {
       return (
         <Section className='body'>
-          <EmptyState className='empty' variant={EmptyStateVariant.full}>
-            <EmptyStateIcon icon={WarningTriangleIcon} />
-            <Title headingLevel='h2' size='lg'>
-              No matches
-            </Title>
-            <EmptyStateBody>
-              Please try adjusting your search query.
-            </EmptyStateBody>
-          </EmptyState>
+          <EmptyStateFilter />
         </Section>
       );
     }

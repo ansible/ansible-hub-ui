@@ -8,7 +8,7 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom';
-import { BaseHeader, Main } from '../../components';
+import { BaseHeader, EmptyStateFilter, Main } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
@@ -16,18 +16,12 @@ import {
   ToolbarItem,
   Button,
   DropdownItem,
-  EmptyState,
-  EmptyStateIcon,
-  Title,
-  EmptyStateBody,
-  EmptyStateVariant,
 } from '@patternfly/react-core';
 
 import {
   InfoCircleIcon,
   ExclamationCircleIcon,
   CheckCircleIcon,
-  WarningTriangleIcon,
 } from '@patternfly/react-icons';
 
 import { CollectionVersionAPI, CollectionVersion, TaskAPI } from '../../api';
@@ -213,17 +207,7 @@ class CertificationDashboard extends React.Component<
 
   private renderTable(versions, params) {
     if (versions.length === 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WarningTriangleIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No matches
-          </Title>
-          <EmptyStateBody>
-            Please try adjusting your search query.
-          </EmptyStateBody>
-        </EmptyState>
-      );
+      return <EmptyStateFilter />;
     }
     let sortTableOptions = {
       headers: [

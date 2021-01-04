@@ -16,6 +16,7 @@ import {
   BaseHeader,
   closeAlertMixin,
   CompoundFilter,
+  EmptyStateFilter,
   GroupModal,
   LoadingPageSpinner,
   Main,
@@ -24,21 +25,13 @@ import {
 } from '../../components';
 import {
   Button,
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  EmptyStateVariant,
   Modal,
-  Title,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import {
-  WarningTriangleIcon,
-  ExclamationTriangleIcon,
-} from '@patternfly/react-icons';
+import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
 
@@ -304,17 +297,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderTable(params) {
     const { groups } = this.state;
     if (groups.length === 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WarningTriangleIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No matches
-          </Title>
-          <EmptyStateBody>
-            Please try adjusting your search query.
-          </EmptyStateBody>
-        </EmptyState>
-      );
+      return <EmptyStateFilter />;
     }
 
     let sortTableOptions = {

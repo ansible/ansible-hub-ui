@@ -15,16 +15,11 @@ import {
   ToolbarContent,
   Button,
   DropdownItem,
-  EmptyState,
-  EmptyStateIcon,
-  Title,
-  EmptyStateBody,
-  EmptyStateVariant,
   Label,
   Tooltip,
 } from '@patternfly/react-core';
 
-import { WarningTriangleIcon, UserPlusIcon } from '@patternfly/react-icons';
+import { UserPlusIcon } from '@patternfly/react-icons';
 
 import { UserAPI, UserType } from '../../api';
 import { ParamHelper } from '../../utilities';
@@ -40,6 +35,7 @@ import {
   AlertType,
   BaseHeader,
   Main,
+  EmptyStateFilter,
 } from '../../components';
 import { DeleteUserModal } from './delete-user-modal';
 
@@ -215,17 +211,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   private renderTable(params) {
     const { users } = this.state;
     if (users.length === 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WarningTriangleIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No matches
-          </Title>
-          <EmptyStateBody>
-            Please try adjusting your search query.
-          </EmptyStateBody>
-        </EmptyState>
-      );
+      return <EmptyStateFilter />;
     }
 
     let sortTableOptions = {

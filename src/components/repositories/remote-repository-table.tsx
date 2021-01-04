@@ -5,21 +5,15 @@ import {
   Button,
   DropdownItem,
   EmptyState,
-  EmptyStateBody,
   EmptyStateIcon,
   EmptyStateVariant,
   Title,
   Tooltip,
-  Popover,
 } from '@patternfly/react-core';
-import {
-  WarningTriangleIcon,
-  WrenchIcon,
-  ExclamationCircleIcon,
-} from '@patternfly/react-icons';
+import { WrenchIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import { RemoteType, UserType, PulpStatus } from '../../api';
-import { HelperText, SortTable, StatefulDropdown } from '..';
+import { EmptyStateFilter, HelperText, SortTable, StatefulDropdown } from '..';
 import { StatusIndicator } from '../../components';
 
 import { Constants } from '../../constants';
@@ -81,17 +75,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
     }
     // TODO only with search
     if (remotes.length === 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WarningTriangleIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No matches
-          </Title>
-          <EmptyStateBody>
-            Please try adjusting your search query.
-          </EmptyStateBody>
-        </EmptyState>
-      );
+      return <EmptyStateFilter />;
     }
     return this.renderTable(remotes);
   }
