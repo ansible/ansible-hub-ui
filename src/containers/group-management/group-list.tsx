@@ -1,11 +1,6 @@
 import * as React from 'react';
 
-import {
-  withRouter,
-  RouteComponentProps,
-  Redirect,
-  Link,
-} from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { GroupAPI } from '../../api';
 import { mapErrorMessages, ParamHelper } from '../../utilities';
@@ -17,6 +12,7 @@ import {
   closeAlertMixin,
   CompoundFilter,
   EmptyStateFilter,
+  EmptyStateUnauthorised,
   GroupModal,
   LoadingPageSpinner,
   Main,
@@ -101,10 +97,6 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
     const { user } = this.context;
 
-    if (redirect) {
-      return <Redirect to={redirect}></Redirect>;
-    }
-
     return (
       <React.Fragment>
         <AlertList
@@ -115,73 +107,77 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         {deleteModalVisible ? this.renderDeleteModal() : null}
         {editModalVisible ? this.renderEditModal() : null}
         <BaseHeader title='Groups'></BaseHeader>
-        <Main>
-          <Section className='body'>
-            <div className='toolbar'>
-              <Toolbar>
-                <ToolbarContent>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <CompoundFilter
-                        updateParams={p =>
-                          this.updateParams(p, () => this.queryGroups())
-                        }
-                        params={params}
-                        filterConfig={[
-                          {
-                            id: 'name',
-                            title: 'Group',
-                          },
-                        ]}
-                      />
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                  {!!user && user.model_permissions.add_group && (
+        {redirect ? (
+          <EmptyStateUnauthorised />
+        ) : (
+          <Main>
+            <Section className='body'>
+              <div className='toolbar'>
+                <Toolbar>
+                  <ToolbarContent>
                     <ToolbarGroup>
                       <ToolbarItem>
-                        <Button
-                          onClick={() =>
-                            this.setState({ createModalVisible: true })
+                        <CompoundFilter
+                          updateParams={p =>
+                            this.updateParams(p, () => this.queryGroups())
                           }
-                        >
-                          Create
-                        </Button>
+                          params={params}
+                          filterConfig={[
+                            {
+                              id: 'name',
+                              title: 'Group',
+                            },
+                          ]}
+                        />
                       </ToolbarItem>
                     </ToolbarGroup>
-                  )}
-                </ToolbarContent>
-              </Toolbar>
+                    {!!user && user.model_permissions.add_group && (
+                      <ToolbarGroup>
+                        <ToolbarItem>
+                          <Button
+                            onClick={() =>
+                              this.setState({ createModalVisible: true })
+                            }
+                          >
+                            Create
+                          </Button>
+                        </ToolbarItem>
+                      </ToolbarGroup>
+                    )}
+                  </ToolbarContent>
+                </Toolbar>
 
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryGroups())
-                }
-                count={itemCount}
-                isTop
-              />
-            </div>
-            <div>
-              <AppliedFilters
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryGroups())
-                }
-                params={params}
-                ignoredParams={['page_size', 'page', 'sort']}
-              />
-            </div>
-            {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
-            <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryGroups())
-                }
-                count={itemCount}
-              />
-            </div>
-          </Section>
-        </Main>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryGroups())
+                  }
+                  count={itemCount}
+                  isTop
+                />
+              </div>
+              <div>
+                <AppliedFilters
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryGroups())
+                  }
+                  params={params}
+                  ignoredParams={['page_size', 'page', 'sort']}
+                />
+              </div>
+              {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryGroups())
+                  }
+                  count={itemCount}
+                />
+              </div>
+            </Section>
+          </Main>
+        )}
       </React.Fragment>
     );
   }

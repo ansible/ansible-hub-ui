@@ -1,7 +1,13 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-import { LoadingPageWithHeader, UserFormPage } from '../../components';
+import {
+  BaseHeader,
+  Breadcrumbs,
+  EmptyStateUnauthorised,
+  LoadingPageWithHeader,
+  UserFormPage,
+} from '../../components';
 import { mapErrorMessages } from '../../utilities';
 import { UserType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
@@ -33,32 +39,38 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    if (
-      !this.context.user ||
-      !this.context.user.model_permissions.change_user
-    ) {
-      return <Redirect to={Paths.notFound}></Redirect>;
-    }
+    const redirect =
+      !this.context.user || !this.context.user.model_permissions.change_user;
+    const title = 'Edit user';
+    const breadcrumbs = [
+      { url: Paths.userList, name: 'Users' },
+      {
+        url: formatPath(Paths.userDetail, { userID: user.id }),
+        name: user.username,
+      },
+      { name: 'Edit' },
+    ];
 
-    return (
+    return redirect ? (
+      <React.Fragment>
+        <BaseHeader
+          breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
+          title={title}
+        ></BaseHeader>
+        <EmptyStateUnauthorised />
+      </React.Fragment>
+    ) : (
       <UserFormPage
         user={user}
-        breadcrumbs={[
-          { url: Paths.userList, name: 'Users' },
-          {
-            url: formatPath(Paths.userDetail, { userID: user.id }),
-            name: user.username,
-          },
-          { name: 'Edit' },
-        ]}
-        title='Edit user'
+        breadcrumbs={breadcrumbs}
+        title={title}
         errorMessages={errorMessages}
         updateUser={(user, errorMessages) =>
           this.setState({ user: user, errorMessages: errorMessages })
         }
         saveUser={this.saveUser}
         onCancel={() => this.props.history.push(Paths.userList)}
-      ></UserFormPage>
+      />
     );
   }
   private saveUser = () => {

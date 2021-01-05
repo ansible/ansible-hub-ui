@@ -1,12 +1,7 @@
 import * as React from 'react';
 
 import * as moment from 'moment';
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
@@ -35,7 +30,8 @@ import {
   AlertType,
   BaseHeader,
   Main,
-  EmptyStateFilter,
+  EmptyStateNoData,
+  EmptyStateUnauthorised,
 } from '../../components';
 import { DeleteUserModal } from './delete-user-modal';
 
@@ -105,10 +101,6 @@ class UserList extends React.Component<RouteComponentProps, IState> {
 
     const { user } = this.context;
 
-    if (redirect) {
-      return <Redirect to={redirect}></Redirect>;
-    }
-
     return (
       <React.Fragment>
         <AlertList
@@ -128,82 +120,86 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           }
         ></DeleteUserModal>
         <BaseHeader title='Users'></BaseHeader>
-        <Main>
-          <Section className='body'>
-            <div className='toolbar'>
-              <Toolbar>
-                <ToolbarContent>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <CompoundFilter
-                        updateParams={p =>
-                          this.updateParams(p, () => this.queryUsers())
-                        }
-                        params={params}
-                        filterConfig={[
-                          {
-                            id: 'username',
-                            title: 'Username',
-                          },
-                          {
-                            id: 'first_name',
-                            title: 'First name',
-                          },
-                          {
-                            id: 'last_name',
-                            title: 'Last name',
-                          },
-                          {
-                            id: 'email',
-                            title: 'Email',
-                          },
-                        ]}
-                      />
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                  {!!user && user.model_permissions.add_user ? (
+        {redirect ? (
+          <EmptyStateUnauthorised />
+        ) : (
+          <Main>
+            <Section className='body'>
+              <div className='toolbar'>
+                <Toolbar>
+                  <ToolbarContent>
                     <ToolbarGroup>
                       <ToolbarItem>
-                        <Link to={Paths.createUser}>
-                          <Button>Create user</Button>
-                        </Link>
+                        <CompoundFilter
+                          updateParams={p =>
+                            this.updateParams(p, () => this.queryUsers())
+                          }
+                          params={params}
+                          filterConfig={[
+                            {
+                              id: 'username',
+                              title: 'Username',
+                            },
+                            {
+                              id: 'first_name',
+                              title: 'First name',
+                            },
+                            {
+                              id: 'last_name',
+                              title: 'Last name',
+                            },
+                            {
+                              id: 'email',
+                              title: 'Email',
+                            },
+                          ]}
+                        />
                       </ToolbarItem>
                     </ToolbarGroup>
-                  ) : null}
-                </ToolbarContent>
-              </Toolbar>
+                    {!!user && user.model_permissions.add_user ? (
+                      <ToolbarGroup>
+                        <ToolbarItem>
+                          <Link to={Paths.createUser}>
+                            <Button>Create user</Button>
+                          </Link>
+                        </ToolbarItem>
+                      </ToolbarGroup>
+                    ) : null}
+                  </ToolbarContent>
+                </Toolbar>
 
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryUsers())
-                }
-                count={itemCount}
-                isTop
-              />
-            </div>
-            <div>
-              <AppliedFilters
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryUsers())
-                }
-                params={params}
-                ignoredParams={['page_size', 'page', 'sort']}
-              />
-            </div>
-            {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryUsers())
+                  }
+                  count={itemCount}
+                  isTop
+                />
+              </div>
+              <div>
+                <AppliedFilters
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryUsers())
+                  }
+                  params={params}
+                  ignoredParams={['page_size', 'page', 'sort']}
+                />
+              </div>
+              {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
 
-            <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryUsers())
-                }
-                count={itemCount}
-              />
-            </div>
-          </Section>
-        </Main>
+              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryUsers())
+                  }
+                  count={itemCount}
+                />
+              </div>
+            </Section>
+          </Main>
+        )}
       </React.Fragment>
     );
   }
@@ -211,7 +207,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   private renderTable(params) {
     const { users } = this.state;
     if (users.length === 0) {
-      return <EmptyStateFilter />;
+      return <EmptyStateNoData />;
     }
 
     let sortTableOptions = {

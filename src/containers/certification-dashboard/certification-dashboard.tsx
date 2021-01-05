@@ -2,13 +2,13 @@ import * as React from 'react';
 import './certification-dashboard.scss';
 
 import * as moment from 'moment';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
-import { BaseHeader, EmptyStateFilter, Main } from '../../components';
+  BaseHeader,
+  EmptyStateFilter,
+  EmptyStateUnauthorised,
+  Main,
+} from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
@@ -107,10 +107,6 @@ class CertificationDashboard extends React.Component<
   render() {
     const { versions, params, itemCount, loading, redirect } = this.state;
 
-    if (redirect) {
-      return <Redirect to={redirect}></Redirect>;
-    }
-
     if (!versions) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
@@ -121,86 +117,90 @@ class CertificationDashboard extends React.Component<
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
         />
-        <Main className='certification-dashboard'>
-          <Section className='body'>
-            <div className='toolbar'>
-              <Toolbar>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <CompoundFilter
-                      updateParams={p =>
-                        this.updateParams(p, () => this.queryCollections())
-                      }
-                      params={params}
-                      filterConfig={[
-                        {
-                          id: 'namespace',
-                          title: 'Namespace',
-                        },
-                        {
-                          id: 'name',
-                          title: 'Collection Name',
-                        },
-                        {
-                          id: 'repository',
-                          title: 'Repository',
-                          inputType: 'select',
-                          options: [
-                            {
-                              id: Constants.NOTCERTIFIED,
-                              title: 'Rejected',
-                            },
-                            {
-                              id: Constants.NEEDSREVIEW,
-                              title: 'Needs Review',
-                            },
-                            {
-                              id: Constants.PUBLISHED,
-                              title: 'Approved',
-                            },
-                          ],
-                        },
-                      ]}
-                    />
-                  </ToolbarItem>
-                </ToolbarGroup>
-              </Toolbar>
+        {redirect ? (
+          <EmptyStateUnauthorised />
+        ) : (
+          <Main className='certification-dashboard'>
+            <Section className='body'>
+              <div className='toolbar'>
+                <Toolbar>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <CompoundFilter
+                        updateParams={p =>
+                          this.updateParams(p, () => this.queryCollections())
+                        }
+                        params={params}
+                        filterConfig={[
+                          {
+                            id: 'namespace',
+                            title: 'Namespace',
+                          },
+                          {
+                            id: 'name',
+                            title: 'Collection Name',
+                          },
+                          {
+                            id: 'repository',
+                            title: 'Repository',
+                            inputType: 'select',
+                            options: [
+                              {
+                                id: Constants.NOTCERTIFIED,
+                                title: 'Rejected',
+                              },
+                              {
+                                id: Constants.NEEDSREVIEW,
+                                title: 'Needs Review',
+                              },
+                              {
+                                id: Constants.PUBLISHED,
+                                title: 'Approved',
+                              },
+                            ],
+                          },
+                        ]}
+                      />
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                </Toolbar>
 
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
-                count={itemCount}
-                isTop
-              />
-            </div>
-            <div>
-              <AppliedFilters
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
-                params={params}
-                ignoredParams={['page_size', 'page', 'sort']}
-              />
-            </div>
-            {loading ? (
-              <LoadingPageSpinner />
-            ) : (
-              this.renderTable(versions, params)
-            )}
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryCollections())
+                  }
+                  count={itemCount}
+                  isTop
+                />
+              </div>
+              <div>
+                <AppliedFilters
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryCollections())
+                  }
+                  params={params}
+                  ignoredParams={['page_size', 'page', 'sort']}
+                />
+              </div>
+              {loading ? (
+                <LoadingPageSpinner />
+              ) : (
+                this.renderTable(versions, params)
+              )}
 
-            <div className='footer'>
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
-                count={itemCount}
-              />
-            </div>
-          </Section>
-        </Main>
+              <div className='footer'>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryCollections())
+                  }
+                  count={itemCount}
+                />
+              </div>
+            </Section>
+          </Main>
+        )}
       </React.Fragment>
     );
   }

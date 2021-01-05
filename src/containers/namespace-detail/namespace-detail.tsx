@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
+import { RouteComponentProps, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Button,
@@ -26,6 +26,7 @@ import {
   LoadingPageWithHeader,
   Main,
   APIButton,
+  EmptyStateUnauthorised,
 } from '../../components';
 
 import { ImportModal } from './import-modal/import-modal';
@@ -103,10 +104,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     const { breadcrumbs } = this.props;
 
-    if (redirect) {
-      return <Redirect to={redirect} />;
-    }
-
     if (!namespace) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
@@ -169,45 +166,49 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           updateParams={p => this.updateParams(p)}
           pageControls={this.renderPageControls()}
         ></PartnerHeader>
-        <Main>
-          <Section className='body'>
-            {tab.toLowerCase() === 'collections' ? (
-              <CollectionList
-                updateParams={params =>
-                  this.updateParams(params, () => this.loadCollections())
-                }
-                params={params}
-                collections={collections}
-                itemCount={itemCount}
-                showControls={this.props.showControls}
-                handleControlClick={(id, action) =>
-                  this.handleCollectionAction(id, action)
-                }
-                repo={this.context.selectedRepo}
-              />
-            ) : null}
-            {tab.toLowerCase() === 'cli configuration' ? (
-              <div>
-                <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
+        {redirect ? (
+          <EmptyStateUnauthorised />
+        ) : (
+          <Main>
+            <Section className='body'>
+              {tab.toLowerCase() === 'collections' ? (
+                <CollectionList
+                  updateParams={params =>
+                    this.updateParams(params, () => this.loadCollections())
+                  }
+                  params={params}
+                  collections={collections}
+                  itemCount={itemCount}
+                  showControls={this.props.showControls}
+                  handleControlClick={(id, action) =>
+                    this.handleCollectionAction(id, action)
+                  }
+                  repo={this.context.selectedRepo}
+                />
+              ) : null}
+              {tab.toLowerCase() === 'cli configuration' ? (
                 <div>
-                  <b>Note:</b> Use this URL to configure ansible-galaxy to
-                  upload collections to this namespace. More information on
-                  ansible-galaxy configurations can be found{' '}
-                  <a
-                    href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
-                    target='_blank'
-                  >
-                    here
-                  </a>
-                  .
+                  <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
+                  <div>
+                    <b>Note:</b> Use this URL to configure ansible-galaxy to
+                    upload collections to this namespace. More information on
+                    ansible-galaxy configurations can be found{' '}
+                    <a
+                      href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
+                      target='_blank'
+                    >
+                      here
+                    </a>
+                    .
+                  </div>
                 </div>
-              </div>
-            ) : null}
-            {tab.toLowerCase() === 'resources'
-              ? this.renderResources(namespace)
-              : null}
-          </Section>
-        </Main>
+              ) : null}
+              {tab.toLowerCase() === 'resources'
+                ? this.renderResources(namespace)
+                : null}
+            </Section>
+          </Main>
+        )}
       </React.Fragment>
     );
   }

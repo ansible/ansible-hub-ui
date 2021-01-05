@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Section, Spinner } from '@redhat-cloud-services/frontend-components';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import {
   PartnerHeader,
@@ -11,6 +11,7 @@ import {
   closeAlertMixin,
   AlertType,
   Main,
+  EmptyStateUnauthorised,
 } from '../../components';
 import {
   MyNamespaceAPI,
@@ -83,10 +84,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       userId,
     } = this.state;
 
-    if (redirect) {
-      return <Redirect to={redirect} />;
-    }
-
     if (!namespace) {
       return null;
     }
@@ -112,48 +109,55 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
         />
-        <Main>
-          <Section className='body'>
-            {params.tab.toLowerCase() === 'edit details' ? (
-              <NamespaceForm
-                userId={userId}
-                namespace={namespace}
-                errorMessages={errorMessages}
-                updateNamespace={namespace =>
-                  this.setState({
-                    namespace: namespace,
-                    unsavedData: true,
-                  })
-                }
-              />
-            ) : (
-              <ResourcesForm
-                updateNamespace={namespace =>
-                  this.setState({
-                    namespace: namespace,
-                    unsavedData: true,
-                  })
-                }
-                namespace={namespace}
-              />
-            )}
-            <Form>
-              <ActionGroup>
-                <Button variant='primary' onClick={() => this.saveNamespace()}>
-                  Save
-                </Button>
-                <Button variant='secondary' onClick={() => this.cancel()}>
-                  Cancel
-                </Button>
+        {redirect ? (
+          <EmptyStateUnauthorised />
+        ) : (
+          <Main>
+            <Section className='body'>
+              {params.tab.toLowerCase() === 'edit details' ? (
+                <NamespaceForm
+                  userId={userId}
+                  namespace={namespace}
+                  errorMessages={errorMessages}
+                  updateNamespace={namespace =>
+                    this.setState({
+                      namespace: namespace,
+                      unsavedData: true,
+                    })
+                  }
+                />
+              ) : (
+                <ResourcesForm
+                  updateNamespace={namespace =>
+                    this.setState({
+                      namespace: namespace,
+                      unsavedData: true,
+                    })
+                  }
+                  namespace={namespace}
+                />
+              )}
+              <Form>
+                <ActionGroup>
+                  <Button
+                    variant='primary'
+                    onClick={() => this.saveNamespace()}
+                  >
+                    Save
+                  </Button>
+                  <Button variant='secondary' onClick={() => this.cancel()}>
+                    Cancel
+                  </Button>
 
-                {saving ? <Spinner></Spinner> : null}
-              </ActionGroup>
-              {this.state.unsavedData ? (
-                <div style={{ color: 'red' }}>You have unsaved changes</div>
-              ) : null}
-            </Form>
-          </Section>
-        </Main>
+                  {saving ? <Spinner></Spinner> : null}
+                </ActionGroup>
+                {this.state.unsavedData ? (
+                  <div style={{ color: 'red' }}>You have unsaved changes</div>
+                ) : null}
+              </Form>
+            </Section>
+          </Main>
+        )}
       </React.Fragment>
     );
   }
