@@ -8,6 +8,7 @@ ENV CYPRESS_PASSWORD="p@ssword1"
 WORKDIR .
 RUN mkdir /e2e
 COPY entrypoint.sh /entrypoint.sh
-
+COPY package.json /e2e/package.json
 WORKDIR /e2e
+
 ENTRYPOINT /entrypoint.sh
