@@ -8,8 +8,7 @@ describe('Repo Management tests', () => {
     });
 
     it('admin user sees download_concurrency in remote config', () => {
-        let urljoin = require('url-join');
-        let fullUrl = (host + '/ui/repositories?page_size=10&tab=remote')
+        let fullUrl = host + '/ui/repositories?page_size=10&tab=remote'
         cy.login(adminUsername, adminPassword);
         cy.visit(fullUrl);
         cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
