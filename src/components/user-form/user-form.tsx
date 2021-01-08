@@ -6,11 +6,12 @@ import {
   TextInput,
   ActionGroup,
   Button,
+  Chip,
+  ChipGroup,
+  Label,
   Tooltip,
-  Checkbox,
 } from '@patternfly/react-core';
-
-import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
+import { UserPlusIcon } from '@patternfly/react-icons';
 
 import { APISearchTypeAhead, HelperText } from '../../components';
 
@@ -142,44 +143,47 @@ export class UserForm extends React.Component<IProps, IState> {
             type='password'
           />
         </FormGroup>
-        <FormGroup
-          fieldId='groups'
-          label='Groups'
-          helperTextInvalid={errorMessages['groups']}
-          validated={this.toError(!('groups' in errorMessages))}
-        >
-          <APISearchTypeAhead
-            results={this.state.searchGroups}
-            loadResults={this.loadGroups}
-            onSelect={this.onSelectGroup}
-            placeholderText='Select groups'
-            selections={user.groups}
-            multiple={true}
-            onClear={this.clearGroups}
-            isDisabled={isReadonly || isMe}
-          />
-        </FormGroup>
-
-        <FormGroup
-          fieldId='is_superuser'
-          label='Super user'
-          labelIcon={
-            <HelperText
-              content={
-                'Super users have all system permissions regardless of' +
-                ' their group. Adding new super users is not permitted.'
-              }
+        {isMe ? (
+          <FormGroup fieldId={'groups'} label={'Groups'}>
+            {user.groups.length !== 0 && (
+              <ChipGroup>
+                {' '}
+                {user.groups.map(group => (
+                  <Chip isReadOnly cellPadding={'1px'}>
+                    {group.name}
+                  </Chip>
+                ))}{' '}
+              </ChipGroup>
+            )}
+          </FormGroup>
+        ) : (
+          <FormGroup
+            fieldId='groups'
+            label='Groups'
+            helperTextInvalid={errorMessages['groups']}
+            validated={this.toError(!('groups' in errorMessages))}
+          >
+            <APISearchTypeAhead
+              results={this.state.searchGroups}
+              loadResults={this.loadGroups}
+              onSelect={this.onSelectGroup}
+              placeholderText='Select groups'
+              selections={user.groups}
+              multiple={true}
+              onClear={this.clearGroups}
+              isDisabled={isReadonly}
             />
-          }
-        >
-          <Checkbox
-            id='is_superuser'
-            isDisabled
-            isChecked={user.is_superuser}
-            label='Is super user'
-          />
-        </FormGroup>
-
+          </FormGroup>
+        )}
+        {user.is_superuser && (
+          <FormGroup fieldId='is_superuser' label='User type'>
+            <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
+              <Label icon={<UserPlusIcon />} color='orange'>
+                Super user
+              </Label>
+            </Tooltip>
+          </FormGroup>
+        )}
         {!isReadonly && (
           <ActionGroup>
             <Button
