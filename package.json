@@ -67,7 +67,7 @@
         "prop-types": "^15.7.2",
         "react-docgen-typescript-loader": "^3.7.2",
         "source-map-loader": "^0.2.4",
-        "stylelint": "^9.10.1",
+        "stylelint": "^13.8.0",
         "stylelint-config-recommended-scss": "^3.3.0",
         "stylelint-scss": "^3.18.0",
         "typescript": "^3.9.7",
