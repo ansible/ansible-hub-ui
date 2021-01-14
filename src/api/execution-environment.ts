@@ -6,10 +6,6 @@ class API extends PulpAPI {
   constructor() {
     super();
   }
-
-  list() {
-    return this.http.get(this.apiPath);
-  }
 }
 
 export const ExecutionEnvironmentAPI = new API();
