@@ -180,7 +180,7 @@ class ExecutionEnvironmentList extends React.Component<
         },
         {
           title: 'Description',
-          type: 'alpha',
+          type: 'none',
           id: 'description',
         },
         {
