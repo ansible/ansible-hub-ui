@@ -25,6 +25,7 @@ import {
   GroupList,
   GroupDetail,
   RepositoryList,
+  ExecutionEnvironmentList,
 } from '../../containers';
 import { ActiveUserAPI } from '../../api';
 import { AppContext } from '../app-context';
@@ -84,6 +85,7 @@ export class Routes extends React.Component<any> {
   static contextType = AppContext;
 
   routes = [
+    { comp: ExecutionEnvironmentList, path: Paths.executionEnvironments },
     { comp: GroupList, path: Paths.groupList },
     { comp: GroupDetail, path: Paths.groupDetail },
     { comp: RepositoryList, path: Paths.repositories },

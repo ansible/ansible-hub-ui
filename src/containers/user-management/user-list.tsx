@@ -26,7 +26,7 @@ import {
 
 import { WarningTriangleIcon, UserPlusIcon } from '@patternfly/react-icons';
 
-import { UserAPI, UserType } from '../../api';
+import { UserAPI, UserType, ExecutionEnvironmentAPI } from '../../api';
 import { ParamHelper } from '../../utilities';
 import {
   StatefulDropdown,
@@ -97,6 +97,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
+    ExecutionEnvironmentAPI.list({ sort: '-name', page_size: 5, page: 3 });
     const {
       params,
       itemCount,
