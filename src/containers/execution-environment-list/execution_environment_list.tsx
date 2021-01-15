@@ -109,8 +109,8 @@ class ExecutionEnvironmentList extends React.Component<
                         params={params}
                         filterConfig={[
                           {
-                            id: 'Name',
-                            title: 'name',
+                            id: 'name',
+                            title: 'Name',
                           },
                         ]}
                       />
