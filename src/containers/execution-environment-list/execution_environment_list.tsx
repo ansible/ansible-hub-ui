@@ -57,7 +57,7 @@ class ExecutionEnvironmentList extends React.Component<
     }
 
     if (!params['sort']) {
-      params['sort'] = 'username';
+      params['sort'] = 'name';
     }
 
     this.state = {
@@ -84,6 +84,10 @@ class ExecutionEnvironmentList extends React.Component<
   render() {
     const { params, itemCount, loading, alerts } = this.state;
 
+    if (!params['sort']) {
+      params['sort'] = 'name';
+    }
+
     return (
       <React.Fragment>
         <AlertList
@@ -107,10 +111,6 @@ class ExecutionEnvironmentList extends React.Component<
                           {
                             id: 'Name',
                             title: 'name',
-                          },
-                          {
-                            id: 'description',
-                            title: 'Description',
                           },
                         ]}
                       />
@@ -176,7 +176,7 @@ class ExecutionEnvironmentList extends React.Component<
         {
           title: 'Name',
           type: 'alpha',
-          id: 'username',
+          id: 'name',
         },
         {
           title: 'Description',
@@ -219,8 +219,8 @@ class ExecutionEnvironmentList extends React.Component<
     this.setState({ loading: true }, () =>
       ExecutionEnvironmentAPI.list(this.state.params).then(result =>
         this.setState({
-          items: result.data.data,
-          itemCount: result.data.meta.count,
+          items: result.data.results,
+          itemCount: result.data.count,
           loading: false,
         }),
       ),
