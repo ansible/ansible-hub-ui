@@ -94,7 +94,7 @@ class ExecutionEnvironmentList extends React.Component<
           alerts={alerts}
           closeAlert={i => this.closeAlert(i)}
         ></AlertList>
-        <BaseHeader title='TODO Execution Environments'></BaseHeader>
+        <BaseHeader title='Container Registry'></BaseHeader>
         <Main>
           <Section className='body'>
             <div className='toolbar'>
@@ -110,7 +110,7 @@ class ExecutionEnvironmentList extends React.Component<
                         filterConfig={[
                           {
                             id: 'name',
-                            title: 'Name',
+                            title: 'Container repository name',
                           },
                         ]}
                       />
@@ -174,7 +174,7 @@ class ExecutionEnvironmentList extends React.Component<
     let sortTableOptions = {
       headers: [
         {
-          title: 'Name',
+          title: 'Container repository name',
           type: 'alpha',
           id: 'name',
         },

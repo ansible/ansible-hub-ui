@@ -290,9 +290,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                 <Link to={Paths.repositories}>Repo Management</Link>
               </NavItem>
               <NavItem>
-                <Link to={Paths.executionEnvironments}>
-                  TODO Execution Env.
-                </Link>
+                <Link to={Paths.executionEnvironments}>Container Registry</Link>
               </NavItem>
             </NavList>
           </Nav>
