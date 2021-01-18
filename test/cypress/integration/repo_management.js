@@ -8,15 +8,14 @@ describe('Repo Management tests', () => {
     });
 
     it('admin user sees download_concurrency in remote config', () => {
-        cy.url().then((url) => {
-            let scheme = url.split('://')[0];
-            cy.login(adminUsername, adminPassword);
-            cy.visit(`${scheme}://${host}/ui/repositories?page_size=10&tab=remote`);
-            cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
-            cy.contains('Edit').click();
-            cy.contains('Show advanced options').click();
-            cy.get('#download_concurrency').should('exist');
-        });
+        let urljoin = require('url-join');
+        let fullUrl = (host + '/ui/repositories?page_size=10&tab=remote')
+        cy.login(adminUsername, adminPassword);
+        cy.visit(fullUrl);
+        cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
+        cy.contains('Edit').click();
+        cy.contains('Show advanced options').click();
+        cy.get('#download_concurrency').should('exist');
     });
     it('remote proxy config can be saved and deleted.', () => {
         cy.login(adminUsername, adminPassword);

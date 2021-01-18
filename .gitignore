@@ -17,9 +17,10 @@ yarn-debug.log*
 yarn-error.log*
 
 .DS_Store
-coverage
+coverages
 
 # testing
+test/cypress/screenshots/*
 test/cypress/videos/*
 test/cypress.env.json
 test/results
