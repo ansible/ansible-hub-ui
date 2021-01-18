@@ -14,8 +14,9 @@ WORKDIR /e2e
 
 RUN npm ci
 
+ADD cypress /e2e/cypress
 COPY entrypoint.sh /entrypoint.sh
 COPY cypress.json /e2e/
-ADD cypress /e2e/cypress
+COPY cypress.*.json /e2e/
 
 ENTRYPOINT /entrypoint.sh
