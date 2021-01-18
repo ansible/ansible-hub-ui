@@ -14,15 +14,9 @@ WORKDIR /e2e
 
 RUN npm ci
 
-<<<<<<< HEAD
 ADD cypress /e2e/cypress
 COPY entrypoint.sh /entrypoint.sh
 COPY cypress.json /e2e/
 COPY cypress.*.json /e2e/
-=======
-COPY entrypoint.sh /entrypoint.sh
-COPY cypress.json /e2e/
-ADD cypress /e2e/cypress
->>>>>>> 6bb8d41... Updates to handle runner config and dependencies better:
 
 ENTRYPOINT /entrypoint.sh
