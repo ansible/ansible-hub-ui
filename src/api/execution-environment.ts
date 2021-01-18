@@ -1,7 +1,7 @@
 import { PulpAPI } from './pulp';
 
 class API extends PulpAPI {
-  apiPath = 'distributions/container/container/';
+  apiPath = 'repositories/container/container-push/';
 
   constructor() {
     super();
