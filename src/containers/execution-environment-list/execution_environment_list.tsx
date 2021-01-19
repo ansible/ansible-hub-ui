@@ -12,6 +12,7 @@ import {
   Title,
   EmptyStateBody,
   EmptyStateVariant,
+  Tooltip,
 } from '@patternfly/react-core';
 import { ExecutionEnvironmentAPI } from '../../api';
 import { ParamHelper } from '../../utilities';
@@ -155,7 +156,6 @@ class ExecutionEnvironmentList extends React.Component<
   }
 
   private renderTable(params) {
-    debugger;
     const { items } = this.state;
     if (items.length === 0) {
       return (
@@ -206,10 +206,13 @@ class ExecutionEnvironmentList extends React.Component<
   }
 
   private renderTableRow(item: any, index: number) {
+    const description = item.description;
     return (
       <tr aria-labelledby={item.name} key={index}>
         <td>{item.name}</td>
-        <td>{item.description}</td>
+        <Tooltip content={description}>
+          <td className={'pf-m-truncate'}>{description}</td>
+        </Tooltip>
         <td>{moment(item.pulp_created).fromNow()}</td>
       </tr>
     );
