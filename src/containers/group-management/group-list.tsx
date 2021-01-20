@@ -72,6 +72,10 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       params['page_size'] = 10;
     }
 
+    if (!params['sort']) {
+      params['sort'] = 'name';
+    }
+
     this.state = {
       params: params,
       loading: true,
