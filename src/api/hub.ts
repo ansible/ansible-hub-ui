@@ -22,10 +22,6 @@ export class HubAPI extends BaseAPI {
     // setting page state
     const params = { ...p };
 
-    const sort = params['sort'];
-    params['ordering'] = sort;
-    delete params['sort'];
-
     const pageSize =
       parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
     const page = parseInt(params['page']) || 1;
