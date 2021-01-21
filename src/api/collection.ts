@@ -1,13 +1,12 @@
-import { BaseAPI } from './base';
+import { HubAPI } from './hub';
 import {
   CollectionDetailType,
   CollectionListType,
   CollectionUploadType,
-  UserType,
 } from '../api';
 import axios from 'axios';
 
-export class API extends BaseAPI {
+export class API extends HubAPI {
   apiPath = this.getUIPath('repo/');
   cachedCollection: CollectionDetailType;
 

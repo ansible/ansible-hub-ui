@@ -4,26 +4,26 @@ import { ParamHelper } from '../utilities';
 import * as Cookies from 'js-cookie';
 
 export class BaseAPI {
-  UI_API_VERSION = 'v1';
-
-  apiBaseURL = API_HOST + API_BASE_PATH;
-
   apiPath: string;
   http: any;
 
   constructor() {
     this.http = axios.create({
-      baseURL: this.apiBaseURL,
+      baseURL: this.apiBaseURL(),
       paramsSerializer: params => ParamHelper.getQueryString(params),
     });
 
     this.http.interceptors.request.use(request => this.authHandler(request));
   }
 
+  apiBaseURL() {
+    return '';
+  }
+
   // Use this function to get paths in the _ui API. That will ensure the API version
   // gets updated when it changes
   getUIPath(url: string) {
-    return `_ui/${this.UI_API_VERSION}/${url}`;
+    return url;
   }
 
   list(params?: object, apiPath?: string) {
@@ -73,21 +73,7 @@ export class BaseAPI {
     return request;
   }
 
-  private mapPageToOffset(p) {
-    // Need to copy the object to make sure we aren't accidentally
-    // setting page state
-    const params = { ...p };
-
-    const pageSize =
-      parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
-    const page = parseInt(params['page']) || 1;
-
-    delete params['page'];
-    delete params['page_size'];
-
-    params['offset'] = page * pageSize - pageSize;
-    params['limit'] = pageSize;
-
-    return params;
+  public mapPageToOffset(p) {
+    return p;
   }
 }

@@ -1,22 +1,27 @@
 import { Constants } from '../constants';
 import { BaseAPI } from './base';
 
-export class PulpAPI extends BaseAPI {
+export class HubAPI extends BaseAPI {
+  UI_API_VERSION = 'v1';
+
   apiPath: string;
   http: any;
 
-  constructor() {
-    super();
-    console.log(this.http);
+  // Use this function to get paths in the _ui API. That will ensure the API version
+  // gets updated when it changes
+  getUIPath(url: string) {
+    return `_ui/${this.UI_API_VERSION}/${url}`;
   }
 
   apiBaseURL() {
-    return '/pulp/api/v3/';
+    return API_HOST + API_BASE_PATH;
   }
 
   public mapPageToOffset(p) {
-    // replace sort with ordering
+    // Need to copy the object to make sure we aren't accidentally
+    // setting page state
     const params = { ...p };
+
     const sort = params['sort'];
     params['ordering'] = sort;
     delete params['sort'];
