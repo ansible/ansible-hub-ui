@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { GroupAPI } from '../../api';
-import { mapErrorMessages, ParamHelper } from '../../utilities';
+import { filterIsSet, mapErrorMessages, ParamHelper } from '../../utilities';
 import {
   AlertList,
   AlertType,
@@ -12,6 +12,7 @@ import {
   closeAlertMixin,
   CompoundFilter,
   EmptyStateFilter,
+  EmptyStateNoData,
   EmptyStateUnauthorised,
   GroupModal,
   LoadingPageSpinner,
@@ -293,7 +294,11 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderTable(params) {
     const { groups } = this.state;
     if (groups.length === 0) {
-      return <EmptyStateFilter />;
+      return filterIsSet(params, ['name']) ? (
+        <EmptyStateFilter />
+      ) : (
+        <EmptyStateNoData />
+      );
     }
 
     let sortTableOptions = {

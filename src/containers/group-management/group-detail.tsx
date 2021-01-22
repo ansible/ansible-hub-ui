@@ -13,6 +13,7 @@ import {
   closeAlertMixin,
   CompoundFilter,
   EmptyStateFilter,
+  EmptyStateNoData,
   LoadingPageWithHeader,
   Main,
   Pagination,
@@ -22,7 +23,7 @@ import {
   Tabs,
 } from '../../components';
 import { GroupAPI, UserAPI, UserType } from '../../api';
-import { ParamHelper, twoWayMapper } from '../../utilities';
+import { filterIsSet, ParamHelper, twoWayMapper } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
 import {
   Button,
@@ -528,10 +529,15 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private renderUsersTable(users) {
     const { params } = this.state;
     if (users.length === 0) {
-      return (
-        <Section className='body'>
-          <EmptyStateFilter />
-        </Section>
+      return filterIsSet(params, [
+        'username',
+        'first_name',
+        'last_name',
+        'email',
+      ]) ? (
+        <EmptyStateFilter />
+      ) : (
+        <EmptyStateNoData />
       );
     }
 

@@ -3,14 +3,6 @@ import './namespace-list.scss';
 
 import { RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import {
-  EmptyState,
-  EmptyStateIcon,
-  Title,
-  EmptyStateBody,
-  EmptyStateVariant,
-} from '@patternfly/react-core';
-import { SearchIcon } from '@patternfly/react-icons';
 
 import { ParamHelper } from '../../utilities/param-helper';
 import {
@@ -21,6 +13,8 @@ import {
   NamespaceModal,
   LoadingPageWithHeader,
   LoadingPageSpinner,
+  EmptyStateFilter,
+  EmptyStateNoData,
 } from '../../components';
 import { Button } from '@patternfly/react-core';
 import { ToolbarItem } from '@patternfly/react-core';
@@ -28,6 +22,7 @@ import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
 import { AppContext } from '../../loaders/app-context';
+import { filterIsSet } from '../../utilities';
 
 interface IState {
   namespaces: NamespaceListType[];
@@ -194,29 +189,11 @@ export class NamespaceList extends React.Component<IProps, IState> {
     if (namespaces.length === 0) {
       return (
         <Section>
-          <EmptyState className='empty' variant={EmptyStateVariant.full}>
-            <EmptyStateIcon icon={SearchIcon} />
-            <Title headingLevel='h2' size='lg'>
-              {hasPermission ? 'No results found' : 'No managed namespaces'}
-            </Title>
-            <EmptyStateBody>
-              {hasPermission
-                ? 'No results match the filter criteria.' +
-                  ' Remove all filters or clear all filters' +
-                  ' to show results.'
-                : 'This account is not set up to manage any namespaces.'}
-            </EmptyStateBody>
-            {hasPermission && (
-              <Button
-                variant='link'
-                onClick={() =>
-                  this.updateParams({}, () => this.loadNamespaces())
-                }
-              >
-                Clear all filters
-              </Button>
-            )}
-          </EmptyState>
+          {filterIsSet(this.state.params, ['keywords']) ? (
+            <EmptyStateFilter />
+          ) : (
+            <EmptyStateNoData />
+          )}
         </Section>
       );
     }

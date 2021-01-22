@@ -5,20 +5,12 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   DataList,
-  EmptyState,
-  EmptyStateIcon,
-  Title,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
-  EmptyStateBody,
-  EmptyStateVariant,
-  Button,
   ToolbarContent,
   Switch,
 } from '@patternfly/react-core';
-
-import { SearchIcon } from '@patternfly/react-icons';
 
 import {
   BaseHeader,
@@ -29,6 +21,8 @@ import {
   Pagination,
   LoadingPageSpinner,
   AppliedFilters,
+  EmptyStateFilter,
+  EmptyStateNoData,
 } from '../../components';
 import {
   CollectionAPI,
@@ -39,6 +33,7 @@ import {
 import { ParamHelper } from '../../utilities/param-helper';
 import { Constants } from '../../constants';
 import { AppContext } from '../../loaders/app-context';
+import { filterIsSet } from '../../utilities';
 
 interface IState {
   collections: CollectionListType[];
@@ -216,34 +211,17 @@ class Search extends React.Component<RouteComponentProps, IState> {
       return <LoadingPageSpinner></LoadingPageSpinner>;
     }
     if (collections.length === 0) {
-      return this.renderEmpty();
+      return filterIsSet(params, ['keywords', 'tags']) ? (
+        <EmptyStateFilter />
+      ) : (
+        <EmptyStateNoData />
+      );
     }
     if (params.view_type === 'list') {
       return this.renderList(collections);
     } else {
       return this.renderCards(collections);
     }
-  }
-
-  private renderEmpty() {
-    return (
-      <EmptyState className='empty' variant={EmptyStateVariant.full}>
-        <EmptyStateIcon icon={SearchIcon} />
-        <Title headingLevel='h2' size='lg'>
-          No results found
-        </Title>
-        <EmptyStateBody>
-          No results match the search criteria. Remove all filters to show
-          results.
-        </EmptyStateBody>
-        <Button
-          variant='link'
-          onClick={() => this.updateParams({}, () => this.queryCollections())}
-        >
-          Clear search
-        </Button>
-      </EmptyState>
-    );
   }
 
   private renderCards(collections) {

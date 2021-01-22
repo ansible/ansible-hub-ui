@@ -6,6 +6,7 @@ import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   BaseHeader,
   EmptyStateFilter,
+  EmptyStateNoData,
   EmptyStateUnauthorised,
   Main,
 } from '../../components';
@@ -25,7 +26,7 @@ import {
 } from '@patternfly/react-icons';
 
 import { CollectionVersionAPI, CollectionVersion, TaskAPI } from '../../api';
-import { ParamHelper } from '../../utilities';
+import { filterIsSet, ParamHelper } from '../../utilities';
 import {
   LoadingPageWithHeader,
   StatefulDropdown,
@@ -207,7 +208,11 @@ class CertificationDashboard extends React.Component<
 
   private renderTable(versions, params) {
     if (versions.length === 0) {
-      return <EmptyStateFilter />;
+      return filterIsSet(params, ['namespace', 'name', 'repository']) ? (
+        <EmptyStateFilter />
+      ) : (
+        <EmptyStateNoData />
+      );
     }
     let sortTableOptions = {
       headers: [

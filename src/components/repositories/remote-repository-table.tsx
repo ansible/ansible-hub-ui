@@ -1,19 +1,11 @@
 import * as React from 'react';
 import * as moment from 'moment';
 
-import {
-  Button,
-  DropdownItem,
-  EmptyState,
-  EmptyStateIcon,
-  EmptyStateVariant,
-  Title,
-  Tooltip,
-} from '@patternfly/react-core';
-import { WrenchIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
+import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import { RemoteType, UserType, PulpStatus } from '../../api';
-import { EmptyStateFilter, HelperText, SortTable, StatefulDropdown } from '..';
+import { EmptyStateNoData, HelperText, SortTable, StatefulDropdown } from '..';
 import { StatusIndicator } from '../../components';
 
 import { Constants } from '../../constants';
@@ -63,19 +55,8 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
   render() {
     const { remotes } = this.props;
-    if (remotes.length == 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WrenchIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No remote repos
-          </Title>
-        </EmptyState>
-      );
-    }
-    // TODO only with search
-    if (remotes.length === 0) {
-      return <EmptyStateFilter />;
+    if (remotes.length !== 0) {
+      return <EmptyStateNoData />;
     }
     return this.renderTable(remotes);
   }

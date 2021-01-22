@@ -17,7 +17,7 @@ import {
 import { UserPlusIcon } from '@patternfly/react-icons';
 
 import { UserAPI, UserType } from '../../api';
-import { ParamHelper } from '../../utilities';
+import { ParamHelper, filterIsSet } from '../../utilities';
 import {
   StatefulDropdown,
   CompoundFilter,
@@ -32,6 +32,7 @@ import {
   Main,
   EmptyStateNoData,
   EmptyStateUnauthorised,
+  EmptyStateFilter,
 } from '../../components';
 import { DeleteUserModal } from './delete-user-modal';
 
@@ -207,7 +208,16 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   private renderTable(params) {
     const { users } = this.state;
     if (users.length === 0) {
-      return <EmptyStateNoData />;
+      return filterIsSet(params, [
+        'username',
+        'first_name',
+        'last_name',
+        'email',
+      ]) ? (
+        <EmptyStateFilter />
+      ) : (
+        <EmptyStateNoData />
+      );
     }
 
     let sortTableOptions = {

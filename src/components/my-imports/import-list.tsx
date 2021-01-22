@@ -6,10 +6,6 @@ import * as moment from 'moment';
 import { cloneDeep } from 'lodash';
 
 import {
-  EmptyState,
-  EmptyStateIcon,
-  EmptyStateBody,
-  Title,
   TextInput,
   Pagination,
   FormSelect,
@@ -18,12 +14,13 @@ import {
   Button,
   ButtonVariant,
 } from '@patternfly/react-core';
-import { InfoIcon, SearchIcon } from '@patternfly/react-icons';
+import { SearchIcon } from '@patternfly/react-icons';
 import { Spinner } from '@redhat-cloud-services/frontend-components';
 
 import { PulpStatus, NamespaceType, ImportListType } from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
 import { Constants } from '../../constants';
+import { EmptyStateNoData } from '..';
 
 interface IProps {
   namespaces: NamespaceType[];
@@ -133,18 +130,7 @@ export class ImportList extends React.Component<IProps, IState> {
       );
     }
     if (importList.length === 0) {
-      return (
-        <EmptyState>
-          <EmptyStateIcon icon={InfoIcon} />
-          <Title size='lg' headingLevel='h5'>
-            No imports
-          </Title>
-
-          <EmptyStateBody>
-            There have not been any imports on this namespace.
-          </EmptyStateBody>
-        </EmptyState>
-      );
+      return <EmptyStateNoData />;
     }
 
     return (
