@@ -7,30 +7,20 @@ export class PulpAPI extends BaseAPI {
 
   constructor() {
     super();
-    console.log(this.http);
   }
 
   apiBaseURL() {
     return '/pulp/api/v3/';
   }
 
-  public mapPageToOffset(p) {
-    // replace sort with ordering
-    const params = { ...p };
-    const sort = params['sort'];
-    params['ordering'] = sort;
-    delete params['sort'];
+  list(params?: object, apiPath?: string) {
+    // Pulp specific: replace sort with ordering
+    let modifiedParams = this.mapPageToOffset(params);
+    modifiedParams['ordering'] = params['sort'];
+    delete modifiedParams['sort'];
 
-    const pageSize =
-      parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
-    const page = parseInt(params['page']) || 1;
-
-    delete params['page'];
-    delete params['page_size'];
-
-    params['offset'] = page * pageSize - pageSize;
-    params['limit'] = pageSize;
-
-    return params;
+    return this.http.get(this.getPath(apiPath), {
+      params: modifiedParams,
+    });
   }
 }

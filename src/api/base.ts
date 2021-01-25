@@ -20,6 +20,24 @@ export class BaseAPI {
     return '';
   }
 
+  public mapPageToOffset(p) {
+    // Need to copy the object to make sure we aren't accidentally
+    // setting page state
+    const params = { ...p };
+
+    const pageSize =
+      parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
+    const page = parseInt(params['page']) || 1;
+
+    delete params['page'];
+    delete params['page_size'];
+
+    params['offset'] = page * pageSize - pageSize;
+    params['limit'] = pageSize;
+
+    return params;
+  }
+
   list(params?: object, apiPath?: string) {
     // The api uses offset/limit for pagination. I think this is confusing
     // for params on the front end, so we're going to use page/page size
@@ -50,7 +68,7 @@ export class BaseAPI {
     return this.http.patch(this.getPath(apiPath) + id + '/', data);
   }
 
-  private getPath(apiPath: string) {
+  getPath(apiPath: string) {
     return apiPath || this.apiPath;
   }
 
@@ -65,9 +83,5 @@ export class BaseAPI {
       request.headers['X-CSRFToken'] = Cookies.get('csrftoken');
     }
     return request;
-  }
-
-  public mapPageToOffset(p) {
-    return p;
   }
 }

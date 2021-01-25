@@ -16,22 +16,4 @@ export class HubAPI extends BaseAPI {
   apiBaseURL() {
     return API_HOST + API_BASE_PATH;
   }
-
-  public mapPageToOffset(p) {
-    // Need to copy the object to make sure we aren't accidentally
-    // setting page state
-    const params = { ...p };
-
-    const pageSize =
-      parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
-    const page = parseInt(params['page']) || 1;
-
-    delete params['page'];
-    delete params['page_size'];
-
-    params['offset'] = page * pageSize - pageSize;
-    params['limit'] = pageSize;
-
-    return params;
-  }
 }
