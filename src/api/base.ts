@@ -20,12 +20,6 @@ export class BaseAPI {
     return '';
   }
 
-  // Use this function to get paths in the _ui API. That will ensure the API version
-  // gets updated when it changes
-  getUIPath(url: string) {
-    return url;
-  }
-
   list(params?: object, apiPath?: string) {
     // The api uses offset/limit for pagination. I think this is confusing
     // for params on the front end, so we're going to use page/page size
