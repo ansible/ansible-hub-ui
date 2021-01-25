@@ -21,6 +21,7 @@ import {
   TableOfContents,
   LoadingPageWithHeader,
   Main,
+  EmptyStateNoData,
 } from '../../components';
 
 import { RenderPluginDoc } from '@ansible/galaxy-doc-builder';
@@ -257,16 +258,13 @@ class CollectionDocs extends React.Component<
 
   private renderNotFound(collectionName) {
     return (
-      <EmptyState className='empty' variant={EmptyStateVariant.full}>
-        <EmptyStateIcon icon={WarningTriangleIcon} />
-        <Title headingLevel='h2' size='lg'>
-          Not found
-        </Title>
-        <EmptyStateBody>
-          The file you're looking for doesn't seem to be available in this
-          version of {collectionName}.
-        </EmptyStateBody>
-      </EmptyState>
+      <EmptyStateNoData
+        title={'Not found'}
+        description={
+          "The file you're looking for doesn't seem to be available in this version of " +
+          collectionName
+        }
+      />
     );
   }
 
