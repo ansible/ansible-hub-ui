@@ -7,17 +7,13 @@ export class BaseAPI {
   apiPath: string;
   http: any;
 
-  constructor() {
+  constructor(apiBaseUrl) {
     this.http = axios.create({
-      baseURL: this.apiBaseURL(),
+      baseURL: apiBaseUrl,
       paramsSerializer: params => ParamHelper.getQueryString(params),
     });
 
     this.http.interceptors.request.use(request => this.authHandler(request));
-  }
-
-  apiBaseURL() {
-    return '';
   }
 
   public mapPageToOffset(p) {

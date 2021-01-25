@@ -1,4 +1,3 @@
-import { Constants } from '../constants';
 import { BaseAPI } from './base';
 
 export class PulpAPI extends BaseAPI {
@@ -6,11 +5,7 @@ export class PulpAPI extends BaseAPI {
   http: any;
 
   constructor() {
-    super();
-  }
-
-  apiBaseURL() {
-    return '/pulp/api/v3/';
+    super('/pulp/api/v3/');
   }
 
   list(params?: object, apiPath?: string) {
