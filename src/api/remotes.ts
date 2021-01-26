@@ -41,8 +41,9 @@ class API extends BaseAPI {
       'client_key',
       'client_cert',
       'ca_cert',
+      'proxy_url',
     ]) {
-      if (reducedData[field] === '') {
+      if (reducedData[field] === '' || reducedData[field] === undefined) {
         reducedData[field] = null;
       }
     }
