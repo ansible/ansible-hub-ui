@@ -5,11 +5,8 @@ import {
   EmptyStateIcon,
   EmptyStateVariant,
   Title,
-  EmptyStatePrimary,
-  Button,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
-
 interface IProps {}
 
 export class EmptyStateFilter extends React.Component<IProps> {
@@ -24,14 +21,6 @@ export class EmptyStateFilter extends React.Component<IProps> {
           No results match the filter criteria. Remove all filters or clear all
           filters to show results.
         </EmptyStateBody>
-        <EmptyStatePrimary>
-          <Button
-            variant='link'
-            onClick={() => console.log('TODO clear search')}
-          >
-            Clear all filters
-          </Button>
-        </EmptyStatePrimary>
       </EmptyState>
     );
   }
