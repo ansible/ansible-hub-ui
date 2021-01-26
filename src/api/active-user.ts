@@ -1,7 +1,7 @@
-import { BaseAPI } from './base';
 import { Constants } from '../constants';
+import { HubAPI } from './hub';
 
-class API extends BaseAPI {
+class API extends HubAPI {
   apiPath = this.getUIPath('me/');
 
   constructor() {

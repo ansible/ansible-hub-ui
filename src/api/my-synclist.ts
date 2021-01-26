@@ -1,6 +1,6 @@
-import { BaseAPI } from './base';
+import { HubAPI } from './hub';
 
-class API extends BaseAPI {
+class API extends HubAPI {
   apiPath = this.getUIPath('my-synclists/');
 
   constructor() {

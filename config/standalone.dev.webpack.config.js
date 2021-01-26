@@ -37,5 +37,6 @@ module.exports = webpackBase({
   // used to get around CORS requirements when running in dev mode
   WEBPACK_PROXY: {
     '/api/automation-hub/': `http://${proxyHost}:${proxyPort}`,
+    '/pulp/api/': `http://${proxyHost}:${proxyPort}`,
   },
 });

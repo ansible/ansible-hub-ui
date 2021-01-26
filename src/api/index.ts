@@ -37,3 +37,4 @@ export { RemoteType } from './response-types/remote';
 export { DistributionAPI } from './distribution';
 export { MyDistributionAPI } from './my-distribution';
 export { DistributionType } from './response-types/distribution';
+export { ExecutionEnvironmentAPI } from './execution-environment';

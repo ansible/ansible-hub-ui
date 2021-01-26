@@ -1,6 +1,6 @@
-import { BaseAPI } from './base';
+import { HubAPI } from './hub';
 
-export class API extends BaseAPI {
+export class API extends HubAPI {
   apiPath = 'v3/tasks/';
 
   constructor() {

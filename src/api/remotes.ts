@@ -1,7 +1,7 @@
-import { BaseAPI } from './base';
+import { HubAPI } from './hub';
 import { RemoteType } from '.';
 
-class API extends BaseAPI {
+class API extends HubAPI {
   apiPath = this.getUIPath('remotes/');
 
   constructor() {
