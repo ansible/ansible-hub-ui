@@ -130,7 +130,12 @@ export class ImportList extends React.Component<IProps, IState> {
       );
     }
     if (importList.length === 0) {
-      return <EmptyStateNoData />;
+      return (
+        <EmptyStateNoData
+          title={'No imports'}
+          description={'There have not been any imports on this namespace.'}
+        />
+      );
     }
 
     return (

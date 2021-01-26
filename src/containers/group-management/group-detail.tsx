@@ -537,7 +537,18 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       ]) ? (
         <EmptyStateFilter />
       ) : (
-        <EmptyStateNoData />
+        <EmptyStateNoData
+          title={'No users added to this group'}
+          description={'Users will appear once added to this group'}
+          button={
+            <Button
+              variant='primary'
+              onClick={() => this.setState({ addModalVisible: true })}
+            >
+              Add
+            </Button>
+          }
+        />
       );
     }
 

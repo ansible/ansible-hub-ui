@@ -174,9 +174,19 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   private renderBody() {
-    const { namespaces, hasPermission } = this.state;
+    const { namespaces, loading } = this.state;
     const { namespacePath } = this.props;
-    const { loading } = this.state;
+    const noDataTitle = Constants.STANDALONE_DEPLOYMENT_MODE
+      ? 'No namespaces yet'
+      : 'No managed namespaces yet';
+    const noDataDescription = Constants.STANDALONE_DEPLOYMENT_MODE
+      ? 'Namespaces will appear once created.'
+      : 'This account is not set up to manage any namespaces. ';
+    const noDataButton = Constants.STANDALONE_DEPLOYMENT_MODE ? (
+      <Button variant='primary' onClick={() => this.handleModalToggle}>
+        Create
+      </Button>
+    ) : null;
 
     if (loading) {
       return (
@@ -192,7 +202,11 @@ export class NamespaceList extends React.Component<IProps, IState> {
           {filterIsSet(this.state.params, ['keywords']) ? (
             <EmptyStateFilter />
           ) : (
-            <EmptyStateNoData />
+            <EmptyStateNoData
+              title={noDataTitle}
+              description={noDataDescription}
+              button={noDataButton}
+            />
           )}
         </Section>
       );

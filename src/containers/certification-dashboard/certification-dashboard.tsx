@@ -211,7 +211,10 @@ class CertificationDashboard extends React.Component<
       return filterIsSet(params, ['namespace', 'name', 'repository']) ? (
         <EmptyStateFilter />
       ) : (
-        <EmptyStateNoData />
+        <EmptyStateNoData
+          title={'No managed collections yet'}
+          description={'Collections will appear once uploaded'}
+        />
       );
     }
     let sortTableOptions = {

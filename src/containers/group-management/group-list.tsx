@@ -297,7 +297,18 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       return filterIsSet(params, ['name']) ? (
         <EmptyStateFilter />
       ) : (
-        <EmptyStateNoData />
+        <EmptyStateNoData
+          title={'No groups yet'}
+          description={'Groups will appear once created'}
+          button={
+            <Button
+              variant='primary'
+              onClick={() => this.setState({ createModalVisible: true })}
+            >
+              Create
+            </Button>
+          }
+        />
       );
     }
 

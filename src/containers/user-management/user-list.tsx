@@ -216,7 +216,15 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       ]) ? (
         <EmptyStateFilter />
       ) : (
-        <EmptyStateNoData />
+        <EmptyStateNoData
+          title={'No users yet'}
+          description={'Users will appear once created'}
+          button={
+            <Link to={Paths.createUser}>
+              <Button variant={'primary'}>Create</Button>
+            </Link>
+          }
+        />
       );
     }
 

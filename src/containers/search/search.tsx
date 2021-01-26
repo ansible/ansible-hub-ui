@@ -214,7 +214,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
       return filterIsSet(params, ['keywords', 'tags']) ? (
         <EmptyStateFilter />
       ) : (
-        <EmptyStateNoData />
+        <EmptyStateNoData
+          title={'No collections yet'}
+          description={'Collections will appear once uploaded'}
+        />
       );
     }
     if (params.view_type === 'list') {

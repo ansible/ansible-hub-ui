@@ -22,7 +22,12 @@ export class LocalRepositoryTable extends React.Component<IProps> {
   render() {
     const { repositories } = this.props;
     if (repositories.length === 0) {
-      return <EmptyStateNoData />;
+      return (
+        <EmptyStateNoData
+          title={'No local repositories yet'}
+          description={''}
+        />
+      );
     }
     return this.renderTable(repositories);
   }

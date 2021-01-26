@@ -56,7 +56,12 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
   render() {
     const { remotes } = this.props;
     if (remotes.length !== 0) {
-      return <EmptyStateNoData />;
+      return (
+        <EmptyStateNoData
+          title={'No remote repositories yet'}
+          description={''}
+        />
+      );
     }
     return this.renderTable(remotes);
   }
