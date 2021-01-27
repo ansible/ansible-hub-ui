@@ -71,15 +71,7 @@ class ExecutionEnvironmentList extends React.Component<
   }
 
   componentDidMount() {
-    this.setState({ loading: true }, () =>
-      ExecutionEnvironmentAPI.list(this.state.params).then(result => {
-        this.setState({
-          items: result.data.results,
-          itemCount: result.data.count,
-          loading: false,
-        });
-      }),
-    );
+    this.queryEnvironments();
   }
 
   render() {
@@ -188,6 +180,11 @@ class ExecutionEnvironmentList extends React.Component<
           type: 'numeric',
           id: 'pulp_created',
         },
+        {
+          title: 'Last modified',
+          type: 'none',
+          id: 'pulp_modified',
+        },
       ],
     };
 
@@ -210,10 +207,15 @@ class ExecutionEnvironmentList extends React.Component<
     return (
       <tr aria-labelledby={item.name} key={index}>
         <td>{item.name}</td>
-        <Tooltip content={description}>
-          <td className={'pf-m-truncate'}>{description}</td>
-        </Tooltip>
+        {description ? (
+          <Tooltip content={description}>
+            <td className={'pf-m-truncate'}>{description}</td>
+          </Tooltip>
+        ) : (
+          <td></td>
+        )}
         <td>{moment(item.pulp_created).fromNow()}</td>
+        <td>{moment(item.last_modified).fromNow()}</td>
       </tr>
     );
   }
