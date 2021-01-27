@@ -450,8 +450,27 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private renderUsers(users) {
     const { params, itemCount } = this.state;
     const { user } = this.context;
+    const noData =
+      itemCount === 0 &&
+      !filterIsSet(params, ['username', 'first_name', 'last_name', 'email']);
     if (!params['sort']) {
       params['sort'] = 'username';
+    }
+    if (noData) {
+      return (
+        <EmptyStateNoData
+          title={'No users added to this group'}
+          description={'Users will appear once added to this group'}
+          button={
+            <Button
+              variant='primary'
+              onClick={() => this.setState({ addModalVisible: true })}
+            >
+              Add
+            </Button>
+          }
+        />
+      );
     }
     return (
       <Section className='body'>
@@ -529,27 +548,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private renderUsersTable(users) {
     const { params } = this.state;
     if (users.length === 0) {
-      return filterIsSet(params, [
-        'username',
-        'first_name',
-        'last_name',
-        'email',
-      ]) ? (
-        <EmptyStateFilter />
-      ) : (
-        <EmptyStateNoData
-          title={'No users added to this group'}
-          description={'Users will appear once added to this group'}
-          button={
-            <Button
-              variant='primary'
-              onClick={() => this.setState({ addModalVisible: true })}
-            >
-              Add
-            </Button>
-          }
-        />
-      );
+      return <EmptyStateFilter />;
     }
 
     let sortTableOptions = {

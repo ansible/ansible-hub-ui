@@ -94,9 +94,11 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       deleteModalVisible,
       editModalVisible,
       alerts,
+      groups,
     } = this.state;
 
     const { user } = this.context;
+    const noData = groups.length === 0 && !filterIsSet(params, ['name']);
 
     return (
       <React.Fragment>
@@ -110,6 +112,19 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         <BaseHeader title='Groups'></BaseHeader>
         {redirect ? (
           <EmptyStateUnauthorised />
+        ) : noData ? (
+          <EmptyStateNoData
+            title={'No groups yet'}
+            description={'Groups will appear once created'}
+            button={
+              <Button
+                variant='primary'
+                onClick={() => this.setState({ createModalVisible: true })}
+              >
+                Create
+              </Button>
+            }
+          />
         ) : (
           <Main>
             <Section className='body'>
@@ -294,22 +309,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderTable(params) {
     const { groups } = this.state;
     if (groups.length === 0) {
-      return filterIsSet(params, ['name']) ? (
-        <EmptyStateFilter />
-      ) : (
-        <EmptyStateNoData
-          title={'No groups yet'}
-          description={'Groups will appear once created'}
-          button={
-            <Button
-              variant='primary'
-              onClick={() => this.setState({ createModalVisible: true })}
-            >
-              Create
-            </Button>
-          }
-        />
-      );
+      return <EmptyStateFilter />;
     }
 
     let sortTableOptions = {
