@@ -18,20 +18,14 @@ export class PulpAPI extends BaseAPI {
       .get(this.getPath(apiPath), {
         params: modifiedParams,
       })
-      .then(results => {
-        let calls = [];
-        results.data.results.forEach(result => {
-          calls.push(
+      .then(results =>
+        Promise.all(
+          results.data.results.map(result =>
             this.http
               .get(result.latest_version_href.replace('/pulp/api/v3/', ''), {})
-              .then(data => {
-                result['last_modified'] = data.data.pulp_created;
-              }),
-          );
-        });
-        return Promise.all(calls).then(() => {
-          return results;
-        });
-      });
+              .then(data => (result['last_modified'] = data.data.pulp_created)),
+          ),
+        ).then(() => results),
+      );
   }
 }
