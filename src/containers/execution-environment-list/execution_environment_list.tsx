@@ -14,7 +14,7 @@ import {
   EmptyStateVariant,
   Tooltip,
 } from '@patternfly/react-core';
-import { ExecutionEnvironmentAPI } from '../../api';
+import { ExecutionEnvironmentAPI, ExecutionEnvironmentType } from '../../api';
 import { ParamHelper } from '../../utilities';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
 import {
@@ -36,7 +36,7 @@ interface IState {
     page_size?: number;
   };
   loading: boolean;
-  items: any[];
+  items: ExecutionEnvironmentType[];
   itemCount: number;
   alerts: AlertType[];
 }
@@ -96,9 +96,10 @@ class ExecutionEnvironmentList extends React.Component<
                   <ToolbarGroup>
                     <ToolbarItem>
                       <CompoundFilter
-                        updateParams={p =>
-                          this.updateParams(p, () => this.queryEnvironments())
-                        }
+                        updateParams={p => {
+                          p['page'] = 1;
+                          this.updateParams(p, () => this.queryEnvironments());
+                        }}
                         params={params}
                         filterConfig={[
                           {
