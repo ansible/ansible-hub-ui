@@ -1,5 +1,6 @@
 import { HubAPI } from './hub';
 import { RemoteType } from '.';
+import { clearSetFieldsFromRequest } from '../utilities';
 
 class API extends HubAPI {
   apiPath = this.getUIPath('remotes/');
@@ -8,50 +9,36 @@ class API extends HubAPI {
     super();
   }
 
-  update(distribution, remote: RemoteType) {
-    const reducedData = {};
-    for (const field of [
-      'url',
-      'name',
-      'auth_url',
-      'token',
-      'requirements_file',
-      'tls_validation',
-      'download_concurrency',
-    ]) {
-      reducedData[field] = remote[field];
-    }
-    for (const field of [
-      'username',
-      'password',
-      'proxy_url',
-      'tls_validation',
-      'client_key',
-      'client_cert',
-      'ca_cert',
-      'download_concurrency',
-    ]) {
-      if (!!remote[field]) {
-        reducedData[field] = remote[field];
-      }
-    }
+  // removes unchanged values and write only fields before
+  // can't override the base class update method because this function takes a
+  // third parameter and update only takes 2
+  smartUpdate(distribution, remote: RemoteType, unModifiedRemote: RemoteType) {
+    // Deletes any write only fields from the object that are market as is_set.
+    // This is to prevent accidentally clearing fields that weren't updated.
 
-    for (const field of [
-      'requirements_file',
-      'client_key',
-      'client_cert',
-      'ca_cert',
-      'proxy_url',
-    ]) {
-      if (reducedData[field] === '' || reducedData[field] === undefined) {
-        reducedData[field] = null;
-      }
+    // TODO: clearing set fields from the response will be unnecesary if the API
+    // stops returning field: null on write only fields
+    const reducedData: RemoteType = clearSetFieldsFromRequest(
+      remote,
+      remote.write_only_fields,
+    ) as RemoteType;
+
+    // Pulp complains if auth_url gets sent with a request that doesn't include a
+    // valid token, even if the token exists in the database and isn't being changed.
+    // To solve this issue, simply delete auth_url from the request if it hasn't
+    // been updated by the user.
+    if (reducedData.auth_url === unModifiedRemote.auth_url) {
+      delete reducedData['auth_url'];
     }
 
     return this.http.put(
       `content/${distribution}/v3/sync/config/`,
       reducedData,
     );
+  }
+
+  update(id, obj) {
+    throw 'use smartUpdate()';
   }
 
   sync(distribution) {

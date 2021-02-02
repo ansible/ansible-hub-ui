@@ -14,10 +14,13 @@ import {
   ExpandableSection,
 } from '@patternfly/react-core';
 
+import { WriteOnlyField } from '../../components';
+
 import { DownloadIcon } from '@patternfly/react-icons';
 
-import { RemoteType } from '../../api';
+import { RemoteType, WriteOnlyFieldType } from '../../api';
 import { Constants } from '../../constants';
+import { isFieldSet } from '../../utilities';
 
 interface IProps {
   updateRemote: (remote) => void;
@@ -158,15 +161,19 @@ export class RemoteForm extends React.Component<IProps, IState> {
             validated={this.toError(!('token' in errorMessages))}
             helperTextInvalid={errorMessages['token']}
           >
-            <TextInput
-              validated={this.toError(!('token' in errorMessages))}
-              isRequired={requiredFields.includes('token')}
-              placeholder='••••••••••••••••••••••'
-              type='password'
-              id='token'
-              value={remote.token || ''}
-              onChange={value => this.updateRemote(value, 'token')}
-            />
+            <WriteOnlyField
+              isValueSet={isFieldSet('token', remote.write_only_fields)}
+              onClear={() => this.updateIsSet('token', false)}
+            >
+              <TextInput
+                validated={this.toError(!('token' in errorMessages))}
+                isRequired={requiredFields.includes('token')}
+                type='password'
+                id='token'
+                value={remote.token || ''}
+                onChange={value => this.updateRemote(value, 'token')}
+              />
+            </WriteOnlyField>
           </FormGroup>
         )}
 
@@ -265,15 +272,20 @@ export class RemoteForm extends React.Component<IProps, IState> {
             validated={this.toError(!('password' in errorMessages))}
             helperTextInvalid={errorMessages['password']}
           >
-            <TextInput
-              validated={this.toError(!('password' in errorMessages))}
-              isRequired={requiredFields.includes('password')}
-              isDisabled={disabledFields.includes('password')}
-              id='password'
-              type='password'
-              value={remote.password || ''}
-              onChange={value => this.updateRemote(value, 'password')}
-            />
+            <WriteOnlyField
+              isValueSet={isFieldSet('password', remote.write_only_fields)}
+              onClear={() => this.updateIsSet('password', false)}
+            >
+              <TextInput
+                validated={this.toError(!('password' in errorMessages))}
+                isRequired={requiredFields.includes('password')}
+                isDisabled={disabledFields.includes('password')}
+                id='password'
+                type='password'
+                value={remote.password || ''}
+                onChange={value => this.updateRemote(value, 'password')}
+              />
+            </WriteOnlyField>
           </FormGroup>
           <FormGroup
             fieldId={'proxy_url'}
@@ -312,41 +324,25 @@ export class RemoteForm extends React.Component<IProps, IState> {
             validated={this.toError(!('client_key' in errorMessages))}
             helperTextInvalid={errorMessages['client_key']}
           >
-            <Flex>
-              <FlexItem grow={{ default: 'grow' }}>
-                <FileUpload
-                  validated={this.toError(!('client_key' in errorMessages))}
-                  isRequired={requiredFields.includes('client_key')}
-                  id='yaml'
-                  type='text'
-                  filename={this.state.uploadedClientKeyFilename}
-                  value={this.props.remote.client_key || ''}
-                  hideDefaultPreview
-                  onChange={(value, filename) => {
-                    this.setState({ uploadedClientKeyFilename: filename }, () =>
-                      this.updateRemote(value, 'client_key'),
-                    );
-                  }}
-                />
-              </FlexItem>
-              <FlexItem>
-                <Button
-                  isDisabled={!this.props.remote.client_key}
-                  onClick={() => {
-                    FileSaver.saveAs(
-                      new Blob([this.props.remote.client_key], {
-                        type: 'text/plain;charset=utf-8',
-                      }),
-                      this.state.uploadedClientKeyFilename,
-                    );
-                  }}
-                  variant='plain'
-                  aria-label='Download client key file'
-                >
-                  <DownloadIcon />
-                </Button>
-              </FlexItem>
-            </Flex>
+            <WriteOnlyField
+              isValueSet={isFieldSet('client_key', remote.write_only_fields)}
+              onClear={() => this.updateIsSet('client_key', false)}
+            >
+              <FileUpload
+                validated={this.toError(!('client_key' in errorMessages))}
+                isRequired={requiredFields.includes('client_key')}
+                id='yaml'
+                type='text'
+                filename={this.state.uploadedClientKeyFilename}
+                value={this.props.remote.client_key || ''}
+                hideDefaultPreview
+                onChange={(value, filename) => {
+                  this.setState({ uploadedClientKeyFilename: filename }, () =>
+                    this.updateRemote(value, 'client_key'),
+                  );
+                }}
+              />
+            </WriteOnlyField>
           </FormGroup>
           <FormGroup
             fieldId={'client_cert'}
@@ -493,6 +489,25 @@ export class RemoteForm extends React.Component<IProps, IState> {
     }
 
     return 'none';
+  }
+
+  private updateIsSet(fieldName: string, value: boolean) {
+    const writeOnlyFields = this.props.remote.write_only_fields;
+    const newFields: WriteOnlyFieldType[] = [];
+
+    for (const field of writeOnlyFields) {
+      if (field.name === fieldName) {
+        field.is_set = value;
+      }
+
+      newFields.push(field);
+    }
+
+    const update = { ...this.props.remote };
+    update.write_only_fields = newFields;
+    update[fieldName] = null;
+
+    this.props.updateRemote(update);
   }
 
   private updateRemote(value, field) {
