@@ -15,7 +15,7 @@ export function formatPath(path: Paths, data: any, params?: object) {
 }
 
 export enum Paths {
-  executionEnvironments = '/execution-environments',
+  executionEnvironments = '/containers',
   groupList = '/group-list',
   groupDetail = '/group/:group',
   myCollections = '/my-namespaces/:namespace',
