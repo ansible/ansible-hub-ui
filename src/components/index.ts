@@ -52,3 +52,4 @@ export { WriteOnlyField } from './patternfly-wrappers/write-only-field';
 export { EmptyStateFilter } from './empty-state/empty-state-filter';
 export { EmptyStateUnauthorised } from './empty-state/empty-state-unauthorised';
 export { EmptyStateNoData } from './empty-state/empty-state-no-data';
+export { EmptyStateCustom } from './empty-state/empty-state-custom';

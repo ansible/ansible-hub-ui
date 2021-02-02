@@ -5,23 +5,14 @@ import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { HashLink } from 'react-router-hash-link';
 
-import {
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateVariant,
-  Title,
-  EmptyStateIcon,
-  Alert,
-} from '@patternfly/react-core';
-
-import { WarningTriangleIcon } from '@patternfly/react-icons';
+import { Alert } from '@patternfly/react-core';
 
 import {
   CollectionHeader,
   TableOfContents,
   LoadingPageWithHeader,
   Main,
-  EmptyStateNoData,
+  EmptyStateCustom,
 } from '../../components';
 
 import { RenderPluginDoc } from '@ansible/galaxy-doc-builder';
@@ -30,6 +21,8 @@ import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
+
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 // renders markdown files in collection docs/ directory
 class CollectionDocs extends React.Component<
@@ -156,7 +149,7 @@ class CollectionDocs extends React.Component<
               params={params}
             ></TableOfContents>
             <div className='body docs pf-c-content' ref={this.docsRef}>
-              {displayHTML || pluginData ? (
+              {!(displayHTML || pluginData) ? (
                 // if neither variable is set, render not found
                 displayHTML ? (
                   // if displayHTML is set, render it
@@ -258,12 +251,12 @@ class CollectionDocs extends React.Component<
 
   private renderNotFound(collectionName) {
     return (
-      <EmptyStateNoData
+      <EmptyStateCustom
         title={'Not found'}
         description={
-          "The file you're looking for doesn't seem to be available in this version of " +
-          collectionName
+          'The file is not available for this version of ' + collectionName
         }
+        icon={ExclamationCircleIcon}
       />
     );
   }
