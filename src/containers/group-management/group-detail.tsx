@@ -459,7 +459,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     if (noData) {
       return (
         <EmptyStateNoData
-          title={'No users added to this group'}
+          title={'No users yet'}
           description={'Users will appear once added to this group'}
           button={
             <Button
