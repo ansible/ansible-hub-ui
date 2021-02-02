@@ -7,7 +7,7 @@ import {
   EmptyStateVariant,
   Title,
 } from '@patternfly/react-core';
-import { AddCircleOIcon, SearchIcon } from '@patternfly/react-icons';
+import { PlusCircleIcon, SearchIcon } from '@patternfly/react-icons';
 import { ReactElement } from 'react';
 
 interface IProps {
@@ -21,7 +21,7 @@ export class EmptyStateNoData extends React.Component<IProps> {
     return (
       <EmptyState variant={EmptyStateVariant.small}>
         <EmptyStateIcon
-          icon={this.props.button ? AddCircleOIcon : SearchIcon}
+          icon={this.props.button ? PlusCircleIcon : SearchIcon}
         />
         <Title headingLevel='h4' size='lg'>
           {this.props.title ? this.props.title : 'No stuff yet'}
