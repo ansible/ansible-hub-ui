@@ -12,8 +12,8 @@ import { ReactElement } from 'react';
 
 interface IProps {
   button?: ReactElement;
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
 }
 
 export class EmptyStateNoData extends React.Component<IProps> {
@@ -24,13 +24,9 @@ export class EmptyStateNoData extends React.Component<IProps> {
           icon={this.props.button ? PlusCircleIcon : SearchIcon}
         />
         <Title headingLevel='h4' size='lg'>
-          {this.props.title ? this.props.title : 'No stuff yet'}
+          {this.props.title}
         </Title>
-        <EmptyStateBody>
-          {this.props.description
-            ? this.props.description
-            : 'Specific message?'}
-        </EmptyStateBody>
+        <EmptyStateBody>{this.props.description}</EmptyStateBody>
         {this.props.button && (
           <EmptyStatePrimary>{this.props.button}</EmptyStatePrimary>
         )}
