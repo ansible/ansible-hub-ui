@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { RouteComponentProps, Link, Redirect } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Button,
@@ -106,6 +106,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     if (!namespace) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
+    }
+
+    if (redirect && redirect !== Paths.notFound) {
+      return <Redirect to={redirect} />;
     }
 
     const tabs = ['Collections'];

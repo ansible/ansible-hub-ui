@@ -39,7 +39,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const redirect =
+    const notAuthorised =
       !this.context.user || !this.context.user.model_permissions.change_user;
     const title = 'Edit user';
     const breadcrumbs = [
@@ -51,7 +51,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
       { name: 'Edit' },
     ];
 
-    return redirect ? (
+    return notAuthorised ? (
       <React.Fragment>
         <BaseHeader
           breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}

@@ -1,7 +1,12 @@
 import * as React from 'react';
 
 import * as moment from 'moment';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
@@ -101,6 +106,10 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     } = this.state;
 
     const { user } = this.context;
+
+    if (redirect && redirect !== Paths.notFound) {
+      return <Redirect to={redirect} />;
+    }
 
     return (
       <React.Fragment>

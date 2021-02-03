@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Section, Spinner } from '@redhat-cloud-services/frontend-components';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import {
   PartnerHeader,
@@ -86,6 +86,10 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
 
     if (!namespace) {
       return null;
+    }
+
+    if (redirect && redirect !== Paths.notFound) {
+      return <Redirect to={redirect} />;
     }
     return (
       <React.Fragment>

@@ -36,7 +36,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const { user, errorMessages } = this.state;
-    const redirect =
+    const notAutthorised =
       !this.context.user || !this.context.user.model_permissions.add_user;
     const breadcrumbs = [
       { url: Paths.userList, name: 'Users' },
@@ -44,7 +44,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
     ];
     const title = 'Create new user';
 
-    return redirect ? (
+    return notAutthorised ? (
       <React.Fragment>
         <BaseHeader
           breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}

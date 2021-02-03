@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { GroupAPI } from '../../api';
 import { filterIsSet, mapErrorMessages, ParamHelper } from '../../utilities';
@@ -99,6 +104,10 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
     const { user } = this.context;
     const noData = groups.length === 0 && !filterIsSet(params, ['name']);
+
+    if (redirect && redirect !== Paths.notFound) {
+      return <Redirect to={redirect} />;
+    }
 
     return (
       <React.Fragment>

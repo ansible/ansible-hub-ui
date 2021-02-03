@@ -53,7 +53,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const redirect = !!user && !user.model_permissions.view_user;
+    const notAuthorised = !!user && !user.model_permissions.view_user;
     const breadcrumbs = [
       { url: Paths.userList, name: 'Users' },
       { name: userDetail.username },
@@ -78,7 +78,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
             })
           }
         ></DeleteUserModal>
-        {redirect ? (
+        {notAuthorised ? (
           <React.Fragment>
             <BaseHeader
               breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
