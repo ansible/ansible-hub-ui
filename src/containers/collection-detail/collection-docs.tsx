@@ -149,7 +149,7 @@ class CollectionDocs extends React.Component<
               params={params}
             ></TableOfContents>
             <div className='body docs pf-c-content' ref={this.docsRef}>
-              {!(displayHTML || pluginData) ? (
+              {displayHTML || pluginData ? (
                 // if neither variable is set, render not found
                 displayHTML ? (
                   // if displayHTML is set, render it
