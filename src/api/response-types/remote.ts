@@ -15,18 +15,20 @@ export class RemoteType {
   name: string;
   url: string;
   auth_url: string;
-  token: string;
+  token?: string;
   policy: string;
   requirements_file: string;
   updated_at: string;
   created_at: string;
   username: string;
-  password: string;
-  proxy_url: string;
-  tls_validation: boolean;
-  client_key: string;
-  client_cert: string;
-  ca_cert: string;
+  password?: string;
+  proxy_url?: string;
+  proxy_password?: string;
+  proxy_username?: string;
+  tls_validation?: boolean;
+  client_key?: string;
+  client_cert?: string;
+  ca_cert?: string;
 
   write_only_fields: WriteOnlyFieldType[];
 

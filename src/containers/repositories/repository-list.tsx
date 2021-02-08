@@ -48,7 +48,7 @@ interface IState {
 }
 
 class RepositoryList extends React.Component<RouteComponentProps, IState> {
-  nonQueryStringParams = ['repository', 'tab'];
+  nonQueryStringParams = ['repository'];
   // Used to save a copy of the remote before it's edited. This can be used to determine
   // which fields were changed when a user hits save.
   unModifiedRemote: RemoteType;

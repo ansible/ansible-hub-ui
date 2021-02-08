@@ -14,7 +14,7 @@ import {
   ExpandableSection,
 } from '@patternfly/react-core';
 
-import { WriteOnlyField } from '../../components';
+import { WriteOnlyField, HelperText } from '../../components';
 
 import { DownloadIcon } from '@patternfly/react-icons';
 
@@ -139,6 +139,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
         <FormGroup
           fieldId={'url'}
           label={'URL'}
+          labelIcon={
+            <HelperText content='The URL of an external content source.' />
+          }
           isRequired={requiredFields.includes('url')}
           validated={this.toError(!('url' in errorMessages))}
           helperTextInvalid={errorMessages['url']}
@@ -157,6 +160,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
           <FormGroup
             fieldId={'token'}
             label={'Token'}
+            labelIcon={
+              <HelperText content='Token for authenticating to the server URL.' />
+            }
             isRequired={requiredFields.includes('token')}
             validated={this.toError(!('token' in errorMessages))}
             helperTextInvalid={errorMessages['token']}
@@ -181,6 +187,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           <FormGroup
             fieldId={'auth_url'}
             label={'SSO URL'}
+            labelIcon={<HelperText content='Single sign on URL.' />}
             isRequired={requiredFields.includes('auth_url')}
             validated={this.toError(!('auth_url' in errorMessages))}
             helperTextInvalid={errorMessages['auth_url']}
@@ -200,6 +207,23 @@ export class RemoteForm extends React.Component<IProps, IState> {
           <FormGroup
             fieldId={'yaml'}
             label={'YAML requirements'}
+            labelIcon={
+              <HelperText
+                content={
+                  <>
+                    This uses the same{' '}
+                    <a
+                      target='_blank'
+                      href='https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file'
+                    >
+                      requirements.yml
+                    </a>{' '}
+                    format as the ansible-galaxy CLI with the caveat that roles
+                    aren't supported and the source parameter is not supported.
+                  </>
+                }
+              />
+            }
             isRequired={requiredFields.includes('requirements_file')}
             validated={this.toError(!('requirements_file' in errorMessages))}
             helperTextInvalid={errorMessages['requirements_file']}
@@ -251,6 +275,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
           <FormGroup
             fieldId={'username'}
             label={'Username'}
+            labelIcon={
+              <HelperText content='The username to be used for authentication when syncing. This is not required when using a token.' />
+            }
             isRequired={requiredFields.includes('username')}
             validated={this.toError(!('username' in errorMessages))}
             helperTextInvalid={errorMessages['username']}
@@ -268,6 +295,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
           <FormGroup
             fieldId={'password'}
             label={'Password'}
+            labelIcon={
+              <HelperText content='The password to be used for authentication when syncing. This is not required when using a token.' />
+            }
             isRequired={requiredFields.includes('password')}
             validated={this.toError(!('password' in errorMessages))}
             helperTextInvalid={errorMessages['password']}
@@ -304,9 +334,57 @@ export class RemoteForm extends React.Component<IProps, IState> {
               onChange={value => this.updateRemote(value, 'proxy_url')}
             />
           </FormGroup>
+
+          <FormGroup
+            fieldId={'proxy_username'}
+            label={'Proxy username'}
+            isRequired={requiredFields.includes('proxy_username')}
+            validated={this.toError(!('proxy_username' in errorMessages))}
+            helperTextInvalid={errorMessages['proxy_username']}
+          >
+            <TextInput
+              validated={this.toError(!('proxy_username' in errorMessages))}
+              isRequired={requiredFields.includes('proxy_username')}
+              isDisabled={disabledFields.includes('proxy_username')}
+              id='proxy_username'
+              type='text'
+              value={remote.proxy_username || ''}
+              onChange={value => this.updateRemote(value, 'proxy_username')}
+            />
+          </FormGroup>
+
+          <FormGroup
+            fieldId={'proxy_password'}
+            label={'Proxy password'}
+            isRequired={requiredFields.includes('proxy_password')}
+            validated={this.toError(!('proxy_password' in errorMessages))}
+            helperTextInvalid={errorMessages['proxy_password']}
+          >
+            <WriteOnlyField
+              isValueSet={isFieldSet(
+                'proxy_password',
+                remote.write_only_fields,
+              )}
+              onClear={() => this.updateIsSet('proxy_password', false)}
+            >
+              <TextInput
+                validated={this.toError(!('proxy_password' in errorMessages))}
+                isRequired={requiredFields.includes('proxy_password')}
+                isDisabled={disabledFields.includes('proxy_password')}
+                id='proxy_password'
+                type='text'
+                value={remote.proxy_password || ''}
+                onChange={value => this.updateRemote(value, 'proxy_password')}
+              />
+            </WriteOnlyField>
+          </FormGroup>
+
           <FormGroup
             fieldId={'tls_validation'}
             label={'TLS validation'}
+            labelIcon={
+              <HelperText content='If selected, TLS peer validation must be performed.' />
+            }
             isRequired={requiredFields.includes('tls_validation')}
             validated={this.toError(!('tls_validation' in errorMessages))}
             helperTextInvalid={errorMessages['tls_validation']}
@@ -320,6 +398,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
           <FormGroup
             fieldId={'client_key'}
             label={'Client key'}
+            labelIcon={
+              <HelperText content='A PEM encoded private key used for authentication.' />
+            }
             isRequired={requiredFields.includes('client_key')}
             validated={this.toError(!('client_key' in errorMessages))}
             helperTextInvalid={errorMessages['client_key']}
@@ -346,7 +427,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
           </FormGroup>
           <FormGroup
             fieldId={'client_cert'}
-            label={'Client certification'}
+            label={'Client certificate'}
+            labelIcon={
+              <HelperText content='A PEM encoded client certificate used for authentication.' />
+            }
             isRequired={requiredFields.includes('client_cert')}
             validated={this.toError(!('client_cert' in errorMessages))}
             helperTextInvalid={errorMessages['client_cert']}
@@ -390,7 +474,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
           </FormGroup>
           <FormGroup
             fieldId={'ca_cert'}
-            label={'CA certification'}
+            label={'CA certificate'}
+            labelIcon={
+              <HelperText content='A PEM encoded client certificate used for authentication.' />
+            }
             isRequired={requiredFields.includes('ca_cert')}
             validated={this.toError(!('ca_cert' in errorMessages))}
             helperTextInvalid={errorMessages['ca_cert']}
@@ -434,6 +521,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
           <FormGroup
             fieldId={'download_concurrency'}
             label={'Download concurrency'}
+            labelIcon={
+              <HelperText content='Total number of simultaneous connections.' />
+            }
             validated={remote.download_concurrency > 0 ? 'default' : 'error'}
             helperTextInvalid={'Number must be greater than 0'}
           >
