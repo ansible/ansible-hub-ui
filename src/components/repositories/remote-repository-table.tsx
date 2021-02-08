@@ -5,7 +5,7 @@ import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import { RemoteType, UserType, PulpStatus } from '../../api';
-import { EmptyStateNoData, HelperText, SortTable, StatefulDropdown } from '..';
+import { HelperText, SortTable, StatefulDropdown } from '..';
 import { StatusIndicator } from '../../components';
 
 import { Constants } from '../../constants';
@@ -55,14 +55,6 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
   render() {
     const { remotes } = this.props;
-    if (remotes.length !== 0) {
-      return (
-        <EmptyStateNoData
-          title={'No remote repositories yet'}
-          description={''}
-        />
-      );
-    }
     return this.renderTable(remotes);
   }
 

@@ -10,6 +10,7 @@ import {
   RemoteRepositoryTable,
   LocalRepositoryTable,
   RemoteForm,
+  EmptyStateNoData,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { ParamHelper, mapErrorMessages } from '../../utilities';
@@ -171,11 +172,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
             </div>
           ) : null}
         </BaseHeader>
-        <Main className='repository-list'>
-          <Section className='body'>
-            {this.renderContent(params, loading, itemCount, content)}
-          </Section>
-        </Main>
+        {this.renderContent(params, loading, itemCount, content)}
       </React.Fragment>
     );
   }
@@ -188,36 +185,50 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       (!!params.tab && params.tab.toLowerCase() === 'local')
     ) {
       return (
-        <div>
-          {loading ? (
-            <LoadingPageSpinner />
-          ) : (
-            <LocalRepositoryTable
-              repositories={content}
-              updateParams={this.updateParams}
-            />
-          )}
-        </div>
+        <Main className='repository-list'>
+          <Section className='body'>
+            {loading ? (
+              <LoadingPageSpinner />
+            ) : (
+              <LocalRepositoryTable
+                repositories={content}
+                updateParams={this.updateParams}
+              />
+            )}
+          </Section>
+        </Main>
       );
     }
     if (!!params.tab && params.tab.toLowerCase() === 'remote') {
-      return (
-        <div>
-          {loading ? (
-            <LoadingPageSpinner />
-          ) : (
-            <RemoteRepositoryTable
-              remotes={content}
-              updateParams={this.updateParams}
-              editRemote={this.selectRemoteToEdit}
-              syncRemote={distro =>
-                RemoteAPI.sync(distro).then(result => this.loadContent())
-              }
-              user={user}
-              refreshRemotes={this.refreshContent}
-            />
-          )}
-        </div>
+      return content.length === 0 ? (
+        <EmptyStateNoData
+          title={'No remote repositories yet'}
+          description={'Remote repositories will appear once added'}
+        />
+      ) : (
+        <Main className='repository-list'>
+          <Section className='body'>
+            {loading ? (
+              <LoadingPageSpinner />
+            ) : (
+              <RemoteRepositoryTable
+                remotes={content}
+                updateParams={this.updateParams}
+                editRemote={(remote: RemoteType) => {
+                  this.setState({
+                    remoteToEdit: remote,
+                    showRemoteFormModal: true,
+                  });
+                }}
+                syncRemote={distro =>
+                  RemoteAPI.sync(distro).then(result => this.loadContent())
+                }
+                user={user}
+                refreshRemotes={this.refreshContent}
+              />
+            )}
+          </Section>
+        </Main>
       );
     }
   }
