@@ -135,58 +135,65 @@ export class NamespaceList extends React.Component<IProps, IState> {
           }
         ></NamespaceModal>
         <BaseHeader title={title}>
-          <div className='toolbar'>
-            <Toolbar
-              params={params}
-              sortOptions={[{ title: 'Name', id: 'name', type: 'alpha' }]}
-              searchPlaceholder={'Search ' + title.toLowerCase()}
-              updateParams={p =>
-                this.updateParams(p, () => this.loadNamespaces())
-              }
-              extraInputs={extra}
-            />
-            <div>
-              <Pagination
+          {filterIsSet(this.state.params, ['keywords']) ||
+          namespaces.length !== 0 ? (
+            <div className='toolbar'>
+              <Toolbar
                 params={params}
+                sortOptions={[{ title: 'Name', id: 'name', type: 'alpha' }]}
+                searchPlaceholder={'Search ' + title.toLowerCase()}
                 updateParams={p =>
                   this.updateParams(p, () => this.loadNamespaces())
                 }
-                count={itemCount}
-                isCompact
-                perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+                extraInputs={extra}
               />
+              <div>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.loadNamespaces())
+                  }
+                  count={itemCount}
+                  isCompact
+                  perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+                />
+              </div>
             </div>
-          </div>
+          ) : null}
         </BaseHeader>
         <Section className='card-area'>{this.renderBody()}</Section>
-        <Section className='footer'>
-          <Pagination
-            params={params}
-            updateParams={p =>
-              this.updateParams(p, () => this.loadNamespaces())
-            }
-            perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
-            count={itemCount}
-          />
-        </Section>
+        {filterIsSet(this.state.params, ['keywords']) ||
+        namespaces.length !== 0 ? (
+          <Section className='footer'>
+            <Pagination
+              params={params}
+              updateParams={p =>
+                this.updateParams(p, () => this.loadNamespaces())
+              }
+              perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+              count={itemCount}
+            />
+          </Section>
+        ) : null}
       </div>
     );
   }
 
   private renderBody() {
     const { namespaces, loading } = this.state;
-    const { namespacePath } = this.props;
+    const { namespacePath, filterOwner } = this.props;
     const noDataTitle = Constants.STANDALONE_DEPLOYMENT_MODE
       ? 'No namespaces yet'
       : 'No managed namespaces yet';
     const noDataDescription = Constants.STANDALONE_DEPLOYMENT_MODE
-      ? 'Namespaces will appear once created.'
-      : 'This account is not set up to manage any namespaces. ';
-    const noDataButton = Constants.STANDALONE_DEPLOYMENT_MODE ? (
-      <Button variant='primary' onClick={() => this.handleModalToggle}>
-        Create
-      </Button>
-    ) : null;
+      ? 'Namespaces will appear once created'
+      : 'This account is not set up to manage any namespaces';
+    const noDataButton =
+      Constants.STANDALONE_DEPLOYMENT_MODE && filterOwner ? (
+        <Button variant='primary' onClick={() => this.handleModalToggle()}>
+          Create
+        </Button>
+      ) : null;
 
     if (loading) {
       return (
