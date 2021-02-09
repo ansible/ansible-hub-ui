@@ -9,7 +9,7 @@ export function mapErrorMessages(err) {
     } else {
       // some error responses are too cool to have a
       // parameter set on them >:(
-      messages['__nofield'] = e.detail;
+      messages['__nofield'] = e.detail || e.title;
     }
   }
   return messages;
