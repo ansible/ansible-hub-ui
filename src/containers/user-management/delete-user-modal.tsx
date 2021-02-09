@@ -3,6 +3,7 @@ import { Modal, Button, Spinner } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import { UserType, UserAPI } from '../../api';
 import { mapErrorMessages } from '../../utilities';
+import { AppContext } from '../../loaders/app-context';
 
 interface IState {
   isWaitingForResponse: boolean;
@@ -16,6 +17,8 @@ interface IProps {
 }
 
 export class DeleteUserModal extends React.Component<IProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -48,7 +51,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
         }
         actions={[
           <Button
-            isDisabled={isWaitingForResponse}
+            isDisabled={isWaitingForResponse || this.isUserSelfOrAdmin(user)}
             key='delete'
             variant='danger'
             onClick={() => this.deleteUser()}
@@ -60,10 +63,28 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
           </Button>,
         ]}
       >
-        {user.username} will be permanently deleted.
+        {this.getActionDescription(user)}
       </Modal>
     );
   }
+
+  private getActionDescription(user: UserType) {
+    if (user.is_superuser) {
+      return 'Deleting super users is not allowed.';
+    } else if (user.id === this.context.user.id) {
+      return 'Deleting yourself is not allowed.';
+    }
+
+    return `${user.username} will be permanently deleted.`;
+  }
+
+  private isUserSelfOrAdmin = (user: UserType): boolean => {
+    if (user.is_superuser || user.id === this.context.user.id) {
+      return true;
+    }
+
+    return false;
+  };
 
   private deleteUser = () => {
     this.setState({ isWaitingForResponse: true }, () =>
