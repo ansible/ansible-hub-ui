@@ -3,6 +3,12 @@
 These are the integration tests for Ansible Hub UI. Please run the tests before commiting or merging
 new UI functionality, or before changes to existing functionality.
 
+## Run the Tests in Docker
+
+To run the tests very quickly without any pre-requisite setup (other than Docker) simply do:
+
+    npm test
+
 ## Setup the Tests
 
 ### Install test dependencies
@@ -24,7 +30,7 @@ The tests need to know details about the instance of Automation Hub that it's ru
 
 *note*: the api root for the docker development environment of ansible/galaxy_ng is `api/automation-hub/`.
 
-## Run the Tests
+## Run the Tests Directly
 
 Tests must be run from inside the test/ directory.
 
