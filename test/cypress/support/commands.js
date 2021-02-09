@@ -97,7 +97,7 @@ Cypress.Commands.add('createGroup', {}, (name) => {
     cy.route('POST', Cypress.env('prefix') + '_ui/v1/groups/').as('createGroup');
     cy.contains('[role=dialog] button', 'Create').click();
     cy.wait('@createGroup');
-});
+}));
 
 Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
     cy.server();
