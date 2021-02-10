@@ -39,3 +39,4 @@ export { MyDistributionAPI } from './my-distribution';
 export { DistributionType } from './response-types/distribution';
 export { ExecutionEnvironmentAPI } from './execution-environment';
 export { ExecutionEnvironmentType } from './response-types/execution-environment';
+export { WriteOnlyFieldType } from './response-types/write-only-field';

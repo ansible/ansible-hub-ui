@@ -49,6 +49,9 @@ interface IState {
 
 class RepositoryList extends React.Component<RouteComponentProps, IState> {
   nonQueryStringParams = ['repository'];
+  // Used to save a copy of the remote before it's edited. This can be used to determine
+  // which fields were changed when a user hits save.
+  unModifiedRemote: RemoteType;
 
   constructor(props) {
     super(props);
@@ -113,12 +116,11 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
                 const distro_path =
                   remoteToEdit.repositories[0].distributions[0].base_path;
 
-                // Pulp complains about auth_url = null, so make sure the auth_url
-                // property is unset if its null or empty.
-                if (!remoteToEdit['auth_url']) {
-                  delete remoteToEdit['auth_url'];
-                }
-                RemoteAPI.update(distro_path, remoteToEdit)
+                RemoteAPI.smartUpdate(
+                  distro_path,
+                  remoteToEdit,
+                  this.unModifiedRemote,
+                )
                   .then(r => {
                     this.setState(
                       {
@@ -207,12 +209,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
             <RemoteRepositoryTable
               remotes={content}
               updateParams={this.updateParams}
-              editRemote={(remote: RemoteType) => {
-                this.setState({
-                  remoteToEdit: remote,
-                  showRemoteFormModal: true,
-                });
-              }}
+              editRemote={this.selectRemoteToEdit}
               syncRemote={distro =>
                 RemoteAPI.sync(distro).then(result => this.loadContent())
               }
@@ -224,6 +221,18 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       );
     }
   }
+
+  private selectRemoteToEdit = (remote: RemoteType) => {
+    // save a copy of the remote to diff against
+    this.unModifiedRemote = { ...remote };
+
+    this.setState({
+      // create a copy of the remote to pass to the edit form, so that the
+      // list of remotes doesn't get updated by accident.
+      remoteToEdit: { ...remote },
+      showRemoteFormModal: true,
+    });
+  };
 
   private refreshContent = () => {
     this.loadContent(false);
