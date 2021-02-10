@@ -7,9 +7,22 @@ new UI functionality, or before changes to existing functionality.
 
 To run the tests very quickly without any pre-requisite setup (other than Docker) simply do:
 
-    npm test
+    npm run test
 
-## Setup the Tests
+### Configuring the Test Container
+
+The test container, by default, runs tests against `http://localhost:8002/`, the default location a development environment for galaxy_ng. The default settings are below and can be changed by setting these environment variables.
+
+    HUB_ADMIN_USERNAME = "admin"
+    HUB_ADMIN_PASSWORD = "admin"
+    HUB_SERVER = "localhost:8002"
+    HUB_UI_LOCATION = "${SCRIPTDIR}/../"
+    CYPRESS_PREFIX = "/api/automation-hub/"
+    CYPRESS_BASE_URL = "http://localhost:8002"
+
+
+
+## Setup the Tests Natively
 
 ### Install test dependencies
 
