@@ -1,9 +1,9 @@
 #!/bin/bash
 
-echo "HOST =" $CYPRESS_HOST
-echo "USERNAME =" $CYPRESS_USERNAME
-echo "PASSWORD =" $CYPRESS_PASSWORD
-echo "BASE_URL =" $CYPRESS_BASE_URL
+echo "CYPRESS_HOST = '$CYPRESS_HOST'"
+echo "CYPRESS_USERNAME = '$CYPRESS_USERNAME'"
+echo "CYPRESS_PASSWORD = '$CYPRESS_PASSWORD'"
+echo "CYPRESS_BASE_URL = '$CYPRESS_BASE_URL'"
 
 if [[ "$CYPRESS_HOST" = "" ]]; then
     unset CYPRESS_HOST
@@ -26,9 +26,5 @@ if [[ -z "$CYPRESS_BASE_URL" ]]; then
         export CYPRESS_BASE_URL="http://$CYPRESS_HOST/"
     fi
 fi
-
-pwd
-ls -l /e2e/
-cat /e2e/cypress.env.json
 
 npx cypress run --browser chrome
