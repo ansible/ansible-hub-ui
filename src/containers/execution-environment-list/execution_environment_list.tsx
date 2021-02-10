@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as moment from 'moment';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
@@ -25,6 +25,8 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
 } from 'src/components';
+
+import { formatPath, Paths } from '../../paths';
 
 interface IState {
   params: {
@@ -203,7 +205,15 @@ class ExecutionEnvironmentList extends React.Component<
     const description = item.description;
     return (
       <tr aria-labelledby={item.name} key={index}>
-        <td>{item.name}</td>
+        <td>
+          <Link
+            to={formatPath(Paths.executionEnvironmentDetail, {
+              container: item.name,
+            })}
+          >
+            {item.name}
+          </Link>
+        </td>
         {description ? (
           <Tooltip content={description}>
             <td className={'pf-m-truncate'}>{description}</td>
