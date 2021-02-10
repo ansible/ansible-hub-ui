@@ -79,11 +79,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
   }
 
   private isUserSelfOrAdmin = (user: UserType): boolean => {
-    if (user.is_superuser || user.id === this.context.user.id) {
-      return true;
-    }
-
-    return false;
+    return user.is_superuser || user.id === this.context.user.id;
   };
 
   private deleteUser = () => {
