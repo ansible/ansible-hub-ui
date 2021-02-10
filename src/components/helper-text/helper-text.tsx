@@ -5,7 +5,7 @@ import './helper-text.scss';
 
 interface IProps {
   /** Value to display in the tag */
-  content: string;
+  content: React.ReactNode;
 }
 
 export class HelperText extends React.Component<IProps, {}> {
