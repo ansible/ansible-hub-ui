@@ -48,3 +48,4 @@ export { RemoteRepositoryTable } from './repositories/remote-repository-table';
 export { LocalRepositoryTable } from './repositories/local-repository-table';
 export { StatusIndicator } from './status/status-indicator';
 export { HelperText } from './helper-text/helper-text';
+export { WriteOnlyField } from './patternfly-wrappers/write-only-field';
