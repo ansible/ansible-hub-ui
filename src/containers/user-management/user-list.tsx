@@ -123,9 +123,11 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           isOpen={showDeleteModal}
           closeModal={this.closeModal}
           user={deleteUser}
-          addAlert={(text, variant) =>
+          addAlert={(text, variant, description = undefined) =>
             this.setState({
-              alerts: alerts.concat([{ title: text, variant: variant }]),
+              alerts: alerts.concat([
+                { title: text, variant: variant, description: description },
+              ]),
             })
           }
         ></DeleteUserModal>
@@ -329,7 +331,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>{user.first_name}</td>
         <td>
           {user.groups.map(g => (
-            <Label>{g.name}</Label>
+            <Label key={g.id}>{g.name}</Label>
           ))}
         </td>
         <td>{moment(user.date_joined).fromNow()}</td>

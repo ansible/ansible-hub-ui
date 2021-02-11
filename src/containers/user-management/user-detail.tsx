@@ -69,9 +69,11 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
           isOpen={showDeleteModal}
           closeModal={this.closeModal}
           user={userDetail}
-          addAlert={(text, variant) =>
+          addAlert={(text, variant, description = undefined) =>
             this.setState({
-              alerts: alerts.concat([{ title: text, variant: variant }]),
+              alerts: alerts.concat([
+                { title: text, variant: variant, description: description },
+              ]),
             })
           }
         ></DeleteUserModal>
