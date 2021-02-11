@@ -83,7 +83,7 @@ Cypress.Commands.add('createUser', {}, (username, password = null, firstName = n
     cy.wait('@createUser');
 });
 
-Cypress.Commands.add('createGroup', {}, (name => {
+Cypress.Commands.add('createGroup', {}, (name) => {
     cy.contains('#page-sidebar a', 'Groups').click();
 
     cy.contains('Create').click();
