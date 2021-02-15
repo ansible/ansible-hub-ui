@@ -86,7 +86,11 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    this.queryGroups();
+    if (!this.context.user || !this.context.user.model_permissions.view_group) {
+      this.setState({ redirect: Paths.notFound });
+    } else {
+      this.queryGroups();
+    }
   }
 
   render() {

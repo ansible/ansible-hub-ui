@@ -16,32 +16,41 @@ import { AppContext } from '../../loaders/app-context';
 interface IState {
   user: UserType;
   errorMessages: object;
+  unauthorised: boolean;
 }
 
 class UserEdit extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
 
-    this.state = { user: undefined, errorMessages: {} };
+    this.state = { user: undefined, errorMessages: {}, unauthorised: false };
   }
 
   componentDidMount() {
     const id = this.props.match.params['userID'];
+
     UserAPI.get(id)
-      .then(result => this.setState({ user: result.data }))
-      .catch(() => this.props.history.push(Paths.notFound));
+      .then(result => this.setState({ user: result.data, unauthorised: false }))
+      .catch(() => this.setState({ unauthorised: true }));
   }
 
   render() {
-    const { user, errorMessages } = this.state;
+    const { user, errorMessages, unauthorised } = this.state;
+    const title = 'Edit user';
+
+    if (unauthorised) {
+      return (
+        <React.Fragment>
+          <BaseHeader title={title}></BaseHeader>
+          <EmptyStateUnauthorised />
+        </React.Fragment>
+      );
+    }
 
     if (!user) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const notAuthorised =
-      !this.context.user || !this.context.user.model_permissions.change_user;
-    const title = 'Edit user';
     const breadcrumbs = [
       { url: Paths.userList, name: 'Users' },
       {
@@ -51,15 +60,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
       { name: 'Edit' },
     ];
 
-    return notAuthorised ? (
-      <React.Fragment>
-        <BaseHeader
-          breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
-          title={title}
-        ></BaseHeader>
-        <EmptyStateUnauthorised />
-      </React.Fragment>
-    ) : (
+    return (
       <UserFormPage
         user={user}
         breadcrumbs={breadcrumbs}

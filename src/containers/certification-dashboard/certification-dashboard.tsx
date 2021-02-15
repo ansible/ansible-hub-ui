@@ -108,9 +108,10 @@ class CertificationDashboard extends React.Component<
   render() {
     const { versions, params, itemCount, loading, redirect } = this.state;
 
-    if (!versions) {
+    if (!versions && !redirect) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
+
     return (
       <React.Fragment>
         <BaseHeader title='Approval dashboard'></BaseHeader>
