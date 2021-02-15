@@ -106,12 +106,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     const { breadcrumbs } = this.props;
 
-    if (!namespace) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+    if (redirect) {
+      return <Redirect to={redirect} />;
     }
 
-    if (redirect && redirect !== Paths.notFound) {
-      return <Redirect to={redirect} />;
+    if (!namespace) {
+      return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
     const tabs = ['Collections'];
@@ -174,67 +174,63 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           updateParams={p => this.updateParams(p)}
           pageControls={this.renderPageControls()}
         ></PartnerHeader>
-        {redirect ? (
-          <EmptyStateUnauthorised />
-        ) : (
-          <Main>
-            {tab.toLowerCase() === 'collections' ? (
-              noData ? (
-                <EmptyStateNoData
-                  title={'No collections yet'}
-                  description={'Collections will appear once uploaded'}
-                  button={
-                    this.props.showControls && (
-                      <Button
-                        onClick={() => this.setState({ showImportModal: true })}
-                      >
-                        Upload collection
-                      </Button>
-                    )
-                  }
-                />
-              ) : (
-                <Section className='body'>
-                  <CollectionList
-                    updateParams={params =>
-                      this.updateParams(params, () => this.loadCollections())
-                    }
-                    params={params}
-                    collections={collections}
-                    itemCount={itemCount}
-                    showControls={this.props.showControls}
-                    handleControlClick={(id, action) =>
-                      this.handleCollectionAction(id, action)
-                    }
-                    repo={this.context.selectedRepo}
-                  />
-                </Section>
-              )
-            ) : null}
-            {tab.toLowerCase() === 'cli configuration' ? (
-              <Section className='body'>
-                <div>
-                  <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
-                  <div>
-                    <b>Note:</b> Use this URL to configure ansible-galaxy to
-                    upload collections to this namespace. More information on
-                    ansible-galaxy configurations can be found{' '}
-                    <a
-                      href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
-                      target='_blank'
+        <Main>
+          {tab.toLowerCase() === 'collections' ? (
+            noData ? (
+              <EmptyStateNoData
+                title={'No collections yet'}
+                description={'Collections will appear once uploaded'}
+                button={
+                  this.props.showControls && (
+                    <Button
+                      onClick={() => this.setState({ showImportModal: true })}
                     >
-                      here
-                    </a>
-                    .
-                  </div>
-                </div>
+                      Upload collection
+                    </Button>
+                  )
+                }
+              />
+            ) : (
+              <Section className='body'>
+                <CollectionList
+                  updateParams={params =>
+                    this.updateParams(params, () => this.loadCollections())
+                  }
+                  params={params}
+                  collections={collections}
+                  itemCount={itemCount}
+                  showControls={this.props.showControls}
+                  handleControlClick={(id, action) =>
+                    this.handleCollectionAction(id, action)
+                  }
+                  repo={this.context.selectedRepo}
+                />
               </Section>
-            ) : null}
-            {tab.toLowerCase() === 'resources'
-              ? this.renderResources(namespace)
-              : null}
-          </Main>
-        )}
+            )
+          ) : null}
+          {tab.toLowerCase() === 'cli configuration' ? (
+            <Section className='body'>
+              <div>
+                <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
+                <div>
+                  <b>Note:</b> Use this URL to configure ansible-galaxy to
+                  upload collections to this namespace. More information on
+                  ansible-galaxy configurations can be found{' '}
+                  <a
+                    href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
+                    target='_blank'
+                  >
+                    here
+                  </a>
+                  .
+                </div>
+              </div>
+            </Section>
+          ) : null}
+          {tab.toLowerCase() === 'resources'
+            ? this.renderResources(namespace)
+            : null}
+        </Main>
       </React.Fragment>
     );
   }
