@@ -21,6 +21,10 @@ import {
   ToolbarItem,
   ClipboardCopy,
   DropdownItem,
+  FlexItem,
+  Flex,
+  Title,
+  BackgroundImage,
 } from '@patternfly/react-core';
 import { Paths } from '../../paths';
 
@@ -112,12 +116,92 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   renderActivity() {
+    const instructions =
+      './compose down -v\n' +
+      './compose up -d postgres redis\n' +
+      './compose run --rm api manage migrate\n' +
+      './compose run --rm -e PULP_FIXTURE_DIRS=\'["/src/galaxy_ng/dev/automation-hub"]\' api manage loaddata initial_data.json\n' +
+      './compose down';
     return (
-      <React.Fragment>
-        <Section className='body card-area'>Activity</Section>
-        <Section className='body card-area'> REcent build </Section>{' '}
-        <Section className='body card-area'> Instructions </Section>{' '}
-      </React.Fragment>
+      <Flex>
+        <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
+          <FlexItem>
+            <Section className='body card-area'>
+              <Title headingLevel='h2' size='lg'>
+                Activity
+              </Title>
+              <table aria-label='Images' className='content-table pf-c-table'>
+                <thead>
+                  <tr aria-labelledby='headers'>
+                    <th>Change</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Stuff</th>
+                    <th>2 days ago</th>
+                  </tr>
+                  <tr>
+                    <th>Stuff</th>
+                    <th>2 days ago</th>
+                  </tr>
+                  <tr>
+                    <th>Stuff</th>
+                    <th>2 days ago</th>
+                  </tr>
+                  <tr>
+                    <th>Stuff</th>
+                    <th>2 days ago</th>
+                  </tr>
+                  <tr>
+                    <th>Stuff</th>
+                    <th>2 days ago</th>
+                  </tr>
+                  <tr>
+                    <th>Stuff</th>
+                    <th>2 days ago</th>
+                  </tr>
+                  <tr>
+                    <th>Stuff</th>
+                    <th>2 days ago</th>
+                  </tr>
+                  <tr>
+                    <th>Stuff</th>
+                    <th>2 days ago</th>
+                  </tr>
+                </tbody>
+              </table>
+            </Section>
+          </FlexItem>
+        </Flex>
+
+        <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
+          <FlexItem>
+            <Section className='body card-area'>
+              {' '}
+              <Title headingLevel='h2' size='lg'>
+                Recent build
+              </Title>{' '}
+              <img
+                src='https://www.grapecity.com/componentone/docs/win/online-flexchart/images/discrete-heatmap.png'
+                alt='Galaxy NG'
+              />{' '}
+            </Section>{' '}
+          </FlexItem>
+          <FlexItem>
+            <Section className='body card-area'>
+              {' '}
+              <Title headingLevel='h2' size='lg'>
+                Instructions
+              </Title>
+              <ClipboardCopy isCode isReadOnly variant={'expansion'}>
+                {instructions}
+              </ClipboardCopy>
+            </Section>
+          </FlexItem>
+        </Flex>
+      </Flex>
     );
   }
 
