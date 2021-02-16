@@ -181,18 +181,6 @@ class ExecutionEnvironmentDetail extends React.Component<
             <Section className='body card-area'>
               {' '}
               <Title headingLevel='h2' size='lg'>
-                Recent build
-              </Title>{' '}
-              <img
-                src='https://www.grapecity.com/componentone/docs/win/online-flexchart/images/discrete-heatmap.png'
-                alt='Galaxy NG'
-              />{' '}
-            </Section>{' '}
-          </FlexItem>
-          <FlexItem>
-            <Section className='body card-area'>
-              {' '}
-              <Title headingLevel='h2' size='lg'>
                 Instructions
               </Title>
               <ClipboardCopy isCode isReadOnly variant={'expansion'}>
