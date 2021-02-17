@@ -1,12 +1,5 @@
 // Checks that at least one filter is set
+import { some } from 'lodash';
 export function filterIsSet(params, filters) {
-  let filterSet = false;
-
-  filters.forEach(filter => {
-    if (filter in params) {
-      filterSet = true;
-    }
-  });
-
-  return filterSet;
+  return some(filters, filter => filter in params);
 }
