@@ -3,15 +3,18 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
+  EmptyStatePrimary,
   EmptyStateVariant,
   Title,
 } from '@patternfly/react-core';
 import { ComponentClass } from 'react';
+import { ReactElement } from 'react';
 
 interface IProps {
   icon?: ComponentClass;
   title: string;
   description: string;
+  button?: ReactElement;
 }
 
 export class EmptyStateCustom extends React.Component<IProps> {
@@ -23,6 +26,9 @@ export class EmptyStateCustom extends React.Component<IProps> {
           {this.props.title}
         </Title>
         <EmptyStateBody>{this.props.description}</EmptyStateBody>
+        {this.props.button && (
+          <EmptyStatePrimary>{this.props.button}</EmptyStatePrimary>
+        )}
       </EmptyState>
     );
   }
