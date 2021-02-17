@@ -31,6 +31,12 @@ class API extends HubAPI {
       delete reducedData['auth_url'];
     }
 
+    for (const field of Object.keys(reducedData)) {
+      if (reducedData[field] === '') {
+        reducedData[field] = null;
+      }
+    }
+
     return this.http.put(
       `content/${distribution}/v3/sync/config/`,
       reducedData,
