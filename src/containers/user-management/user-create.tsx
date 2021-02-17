@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import {
   BaseHeader,
   Breadcrumbs,
-  EmptyStateUnauthorised,
+  EmptyStateUnauthorized,
   UserFormPage,
 } from '../../components';
 import { mapErrorMessages } from '../../utilities';
@@ -50,7 +50,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
           breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
           title={title}
         ></BaseHeader>
-        <EmptyStateUnauthorised />
+        <EmptyStateUnauthorized />
       </React.Fragment>
     ) : (
       <UserFormPage

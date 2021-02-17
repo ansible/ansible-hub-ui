@@ -12,7 +12,7 @@ import { LockIcon } from '@patternfly/react-icons';
 
 interface IProps {}
 
-export class EmptyStateUnauthorised extends React.Component<IProps> {
+export class EmptyStateUnauthorized extends React.Component<IProps> {
   render() {
     return (
       <EmptyState variant={EmptyStateVariant.xs}>

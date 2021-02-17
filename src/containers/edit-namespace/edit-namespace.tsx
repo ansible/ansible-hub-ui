@@ -11,7 +11,7 @@ import {
   closeAlertMixin,
   AlertType,
   Main,
-  EmptyStateUnauthorised,
+  EmptyStateUnauthorized,
 } from '../../components';
 import {
   MyNamespaceAPI,
@@ -114,7 +114,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
           closeAlert={i => this.closeAlert(i)}
         />
         {redirect ? (
-          <EmptyStateUnauthorised />
+          <EmptyStateUnauthorized />
         ) : (
           <Main>
             <Section className='body'>

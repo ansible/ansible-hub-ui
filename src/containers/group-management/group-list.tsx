@@ -18,7 +18,7 @@ import {
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
-  EmptyStateUnauthorised,
+  EmptyStateUnauthorized,
   GroupModal,
   LoadingPageSpinner,
   Main,
@@ -124,7 +124,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         {editModalVisible ? this.renderEditModal() : null}
         <BaseHeader title='Groups'></BaseHeader>
         {redirect ? (
-          <EmptyStateUnauthorised />
+          <EmptyStateUnauthorized />
         ) : noData ? (
           <EmptyStateNoData
             title={'No groups yet'}

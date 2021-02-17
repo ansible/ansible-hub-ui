@@ -36,7 +36,7 @@ import {
   BaseHeader,
   Main,
   EmptyStateNoData,
-  EmptyStateUnauthorised,
+  EmptyStateUnauthorized,
   EmptyStateFilter,
 } from '../../components';
 import { DeleteUserModal } from './delete-user-modal';
@@ -131,7 +131,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         ></DeleteUserModal>
         <BaseHeader title='Users'></BaseHeader>
         {redirect ? (
-          <EmptyStateUnauthorised />
+          <EmptyStateUnauthorized />
         ) : (
           <Main>
             <Section className='body'>

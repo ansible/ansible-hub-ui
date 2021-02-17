@@ -7,7 +7,7 @@ import {
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
-  EmptyStateUnauthorised,
+  EmptyStateUnauthorized,
   Main,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
@@ -120,7 +120,7 @@ class CertificationDashboard extends React.Component<
           closeAlert={i => this.closeAlert(i)}
         />
         {redirect ? (
-          <EmptyStateUnauthorised />
+          <EmptyStateUnauthorized />
         ) : (
           <Main className='certification-dashboard'>
             <Section className='body'>

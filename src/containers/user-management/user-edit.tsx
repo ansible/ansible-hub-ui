@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import {
   BaseHeader,
   Breadcrumbs,
-  EmptyStateUnauthorised,
+  EmptyStateUnauthorized,
   LoadingPageWithHeader,
   UserFormPage,
 } from '../../components';
@@ -16,33 +16,33 @@ import { AppContext } from '../../loaders/app-context';
 interface IState {
   user: UserType;
   errorMessages: object;
-  unauthorised: boolean;
+  unauthorized: boolean;
 }
 
 class UserEdit extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
 
-    this.state = { user: undefined, errorMessages: {}, unauthorised: false };
+    this.state = { user: undefined, errorMessages: {}, unauthorized: false };
   }
 
   componentDidMount() {
     const id = this.props.match.params['userID'];
 
     UserAPI.get(id)
-      .then(result => this.setState({ user: result.data, unauthorised: false }))
-      .catch(() => this.setState({ unauthorised: true }));
+      .then(result => this.setState({ user: result.data, unauthorized: false }))
+      .catch(() => this.setState({ unauthorized: true }));
   }
 
   render() {
-    const { user, errorMessages, unauthorised } = this.state;
+    const { user, errorMessages, unauthorized } = this.state;
     const title = 'Edit user';
 
-    if (unauthorised) {
+    if (unauthorized) {
       return (
         <React.Fragment>
           <BaseHeader title={title}></BaseHeader>
-          <EmptyStateUnauthorised />
+          <EmptyStateUnauthorized />
         </React.Fragment>
       );
     }

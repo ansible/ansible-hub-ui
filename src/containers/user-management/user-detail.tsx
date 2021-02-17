@@ -9,7 +9,7 @@ import {
   AlertList,
   closeAlertMixin,
   UserFormPage,
-  EmptyStateUnauthorised,
+  EmptyStateUnauthorized,
   BaseHeader,
   Breadcrumbs,
 } from '../../components';
@@ -53,7 +53,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const notAuthorised = !!user && !user.model_permissions.view_user;
+    const notAuthorized = !!user && !user.model_permissions.view_user;
     const breadcrumbs = [
       { url: Paths.userList, name: 'Users' },
       { name: userDetail.username },
@@ -78,13 +78,13 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
             })
           }
         ></DeleteUserModal>
-        {notAuthorised ? (
+        {notAuthorized ? (
           <React.Fragment>
             <BaseHeader
               breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
               title={title}
             ></BaseHeader>
-            <EmptyStateUnauthorised />{' '}
+            <EmptyStateUnauthorized />{' '}
           </React.Fragment>
         ) : (
           <UserFormPage

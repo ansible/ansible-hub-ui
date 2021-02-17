@@ -26,7 +26,7 @@ import {
   LoadingPageWithHeader,
   Main,
   APIButton,
-  EmptyStateUnauthorised,
+  EmptyStateUnauthorized,
   EmptyStateFilter,
   EmptyStateNoData,
 } from '../../components';
