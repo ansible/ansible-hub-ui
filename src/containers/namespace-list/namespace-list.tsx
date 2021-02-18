@@ -104,6 +104,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
     const { namespaces, params, itemCount } = this.state;
     const { title, filterOwner } = this.props;
     const { user } = this.context;
+    const noData =
+      !filterIsSet(this.state.params, ['keywords']) && namespaces.length === 0;
 
     if (!namespaces) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -135,8 +137,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           }
         ></NamespaceModal>
         <BaseHeader title={title}>
-          {filterIsSet(this.state.params, ['keywords']) ||
-          namespaces.length !== 0 ? (
+          {noData ? null : (
             <div className='toolbar'>
               <Toolbar
                 params={params}
@@ -159,11 +160,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
                 />
               </div>
             </div>
-          ) : null}
+          )}
         </BaseHeader>
         <Section className='card-area'>{this.renderBody()}</Section>
-        {filterIsSet(this.state.params, ['keywords']) ||
-        namespaces.length !== 0 ? (
+        {noData ? null : (
           <Section className='footer'>
             <Pagination
               params={params}
@@ -174,7 +174,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
               count={itemCount}
             />
           </Section>
-        ) : null}
+        )}
       </div>
     );
   }
