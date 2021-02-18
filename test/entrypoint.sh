@@ -1,23 +1,27 @@
 #!/bin/bash
 
-echo "CYPRESS_HOST = '$CYPRESS_HOST'"
-echo "CYPRESS_USERNAME = '$CYPRESS_USERNAME'"
-echo "CYPRESS_PASSWORD = '$CYPRESS_PASSWORD'"
-echo "CYPRESS_BASE_URL = '$CYPRESS_BASE_URL'"
 
-if [[ "$CYPRESS_HOST" = "" ]]; then
+if [[ ! -z "$CYPRESS_HOST" ]]; then
+    echo "CYPRESS_HOST = '$CYPRESS_HOST'"
+else
     unset CYPRESS_HOST
 fi
 
-if [[ "$CYPRESS_BASE_URL" = "" ]]; then
+if [[ ! -z "$CYPRESS_USERNAME" ]]; then
+    echo "CYPRESS_USERNAME = '$CYPRESS_USERNAME'"
+else
     unset CYPRESS_BASE_URL
 fi
 
-if [[ "$CYPRESS_USERNAME" = "" ]]; then
+if [[ ! -z "$CYPRESS_PASSWORD" ]]; then
+    echo "CYPRESS_PASSWORD = '$CYPRESS_PASSWORD'"
+else
     unset CYPRESS_USERNAME
 fi
 
-if [[ "$CYPRESS_PASSWORD" = "" ]]; then
+if [[ ! -z "$CYPRESS_BASE_URL" ]]; then
+    echo "CYPRESS_BASE_URL = '$CYPRESS_BASE_URL'"
+else
     unset CYPRESS_PASSWORD
 fi
 

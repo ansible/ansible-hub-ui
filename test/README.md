@@ -11,15 +11,18 @@ To run the tests very quickly without any pre-requisite setup (other than Docker
 
 ### Configuring the Test Container
 
-The test container, by default, runs tests against `http://localhost:8002/`, the default location a development environment for galaxy_ng. The default settings are below and can be changed by setting these environment variables.
+The test container, by default, runs tests against `http://localhost:8002/`, the default location a development environment for galaxy_ng.
 
-    HUB_ADMIN_USERNAME = "admin"
-    HUB_ADMIN_PASSWORD = "admin"
+A `cypress.env.json` in your test directory will be copied into the container to configure your tests.
+
+The settings can be changed by setting these environment variables.
+
     HUB_SERVER = "localhost:8002"
     HUB_UI_LOCATION = "${SCRIPTDIR}/../"
     CYPRESS_PREFIX = "/api/automation-hub/"
     CYPRESS_BASE_URL = "http://localhost:8002"
-
+    CYPRESS_USERNAME = "admin"
+    CYPRESS_PASSWORD = "admin"
 
 
 ## Setup the Tests Natively
