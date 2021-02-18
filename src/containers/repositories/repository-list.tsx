@@ -214,12 +214,9 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
               <RemoteRepositoryTable
                 remotes={content}
                 updateParams={this.updateParams}
-                editRemote={(remote: RemoteType) => {
-                  this.setState({
-                    remoteToEdit: remote,
-                    showRemoteFormModal: true,
-                  });
-                }}
+                editRemote={(remote: RemoteType) =>
+                  this.selectRemoteToEdit(remote)
+                }
                 syncRemote={distro =>
                   RemoteAPI.sync(distro).then(result => this.loadContent())
                 }
