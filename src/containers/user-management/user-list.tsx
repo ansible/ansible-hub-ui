@@ -56,6 +56,7 @@ interface IState {
   deleteUser: UserType;
   showDeleteModal: boolean;
   alerts: AlertType[];
+  unauthorized: boolean;
 }
 
 class UserList extends React.Component<RouteComponentProps, IState> {
@@ -83,12 +84,13 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       loading: true,
       itemCount: 0,
       alerts: [],
+      unauthorized: false,
     };
   }
 
   componentDidMount() {
     if (!this.context.user || !this.context.user.model_permissions.view_user) {
-      this.setState({ redirect: Paths.notFound });
+      this.setState({ unauthorized: true });
     } else {
       this.queryUsers();
     }
@@ -103,11 +105,12 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       showDeleteModal,
       deleteUser,
       alerts,
+      unauthorized,
     } = this.state;
 
     const { user } = this.context;
 
-    if (redirect && redirect !== Paths.notFound) {
+    if (redirect) {
       return <Redirect to={redirect} />;
     }
 
@@ -130,7 +133,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           }
         ></DeleteUserModal>
         <BaseHeader title='Users'></BaseHeader>
-        {redirect ? (
+        {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : (
           <Main>

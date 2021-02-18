@@ -52,6 +52,7 @@ interface IState {
   editModalVisible: boolean;
   selectedGroup: any;
   groupError: any;
+  unauthorized: boolean;
 }
 
 class GroupList extends React.Component<RouteComponentProps, IState> {
@@ -82,12 +83,13 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       editModalVisible: false,
       selectedGroup: null,
       groupError: null,
+      unauthorized: false,
     };
   }
 
   componentDidMount() {
     if (!this.context.user || !this.context.user.model_permissions.view_group) {
-      this.setState({ redirect: Paths.notFound });
+      this.setState({ unauthorized: true });
     } else {
       this.queryGroups();
     }
@@ -104,12 +106,13 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       editModalVisible,
       alerts,
       groups,
+      unauthorized,
     } = this.state;
 
     const { user } = this.context;
     const noData = groups.length === 0 && !filterIsSet(params, ['name']);
 
-    if (redirect && redirect !== Paths.notFound) {
+    if (redirect) {
       return <Redirect to={redirect} />;
     }
 
@@ -123,7 +126,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         {deleteModalVisible ? this.renderDeleteModal() : null}
         {editModalVisible ? this.renderEditModal() : null}
         <BaseHeader title='Groups'></BaseHeader>
-        {redirect ? (
+        {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : noData ? (
           <EmptyStateNoData

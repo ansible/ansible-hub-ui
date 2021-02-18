@@ -38,6 +38,7 @@ interface IState {
     tab?: string;
   };
   userId: string;
+  unauthorized: boolean;
 }
 
 class EditNamespace extends React.Component<RouteComponentProps, IState> {
@@ -63,6 +64,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       redirect: null,
       unsavedData: false,
       params: params,
+      unauthorized: false,
     };
   }
 
@@ -82,13 +84,14 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       redirect,
       params,
       userId,
+      unauthorized,
     } = this.state;
 
     if (!namespace) {
       return null;
     }
 
-    if (redirect && redirect !== Paths.notFound) {
+    if (redirect) {
       return <Redirect to={redirect} />;
     }
     return (
@@ -113,7 +116,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
         />
-        {redirect ? (
+        {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : (
           <Main>
@@ -180,7 +183,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         this.setState({ namespace: response.data });
       })
       .catch(response => {
-        this.setState({ redirect: Paths.notFound });
+        this.setState({ unauthorized: true });
       });
   }
 
