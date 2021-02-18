@@ -30,7 +30,7 @@ describe('Repo Management tests', () => {
         cy.get('input[id="proxy_password"]').type('test');
         cy.route('PUT', Cypress.env('prefix') + 'content/community/v3/sync/config/').as('saveConfig');
         cy.contains('Save').click();
-        cy.wait('@saveConfig');
+        cy.wait('@saveConfig').its('status').should('eq', 200);
 
         // verify values have been saved properly.
         cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
@@ -47,7 +47,7 @@ describe('Repo Management tests', () => {
         cy.get('input[id="proxy_username"]').clear();
         cy.route('PUT', Cypress.env('prefix') + 'content/community/v3/sync/config/').as('saveConfig');
         cy.contains('Save').click();
-        cy.wait('@saveConfig');
+        cy.wait('@saveConfig').its('status').should('eq', 200);
 
         // verify the values have been deleted
         cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
