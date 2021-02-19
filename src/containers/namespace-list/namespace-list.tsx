@@ -105,7 +105,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
     const { title, filterOwner } = this.props;
     const { user } = this.context;
     const noData =
-      !filterIsSet(this.state.params, ['keywords']) && namespaces.length === 0;
+      !filterIsSet(this.state.params, ['keywords']) &&
+      namespaces !== undefined &&
+      namespaces.length === 0;
 
     if (!namespaces) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
