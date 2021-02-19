@@ -56,7 +56,7 @@ interface IState {
   itemCount: number;
   loading: boolean;
   updatingVersions: CollectionVersion[];
-  redirect: string;
+  unauthorized: boolean;
 }
 
 class CertificationDashboard extends React.Component<
@@ -89,8 +89,8 @@ class CertificationDashboard extends React.Component<
       params: params,
       loading: true,
       updatingVersions: [],
-      redirect: undefined,
       alerts: [],
+      unauthorized: false,
     };
   }
 
@@ -99,16 +99,16 @@ class CertificationDashboard extends React.Component<
       !this.context.user ||
       !this.context.user.model_permissions.move_collection
     ) {
-      this.setState({ redirect: Paths.notFound });
+      this.setState({ unauthorized: true });
     } else {
       this.queryCollections();
     }
   }
 
   render() {
-    const { versions, params, itemCount, loading, redirect } = this.state;
+    const { versions, params, itemCount, loading, unauthorized } = this.state;
 
-    if (!versions && !redirect) {
+    if (!versions && !unauthorized) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
@@ -119,7 +119,7 @@ class CertificationDashboard extends React.Component<
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
         />
-        {redirect ? (
+        {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : (
           <Main className='certification-dashboard'>
