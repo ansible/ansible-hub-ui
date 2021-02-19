@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 
 import { Button } from '@patternfly/react-core';
 
@@ -14,6 +9,9 @@ import {
   AlertList,
   closeAlertMixin,
   UserFormPage,
+  EmptyStateUnauthorized,
+  BaseHeader,
+  Breadcrumbs,
 } from '../../components';
 import { UserType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
@@ -55,9 +53,12 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    if (!!user && !user.model_permissions.view_user) {
-      return <Redirect to={Paths.notFound}></Redirect>;
-    }
+    const notAuthorized = !!user && !user.model_permissions.view_user;
+    const breadcrumbs = [
+      { url: Paths.userList, name: 'Users' },
+      { name: userDetail.username },
+    ];
+    const title = 'User details';
 
     return (
       <>
@@ -77,42 +78,49 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
             })
           }
         ></DeleteUserModal>
-        <UserFormPage
-          user={userDetail}
-          breadcrumbs={[
-            { url: Paths.userList, name: 'Users' },
-            { name: userDetail.username },
-          ]}
-          title='User details'
-          errorMessages={errorMessages}
-          updateUser={user => this.setState({ userDetail: user })}
-          isReadonly
-          extraControls={
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              {!!user && user.model_permissions.change_user ? (
-                <div>
-                  <Link
-                    to={formatPath(Paths.editUser, {
-                      userID: userDetail.id,
-                    })}
-                  >
-                    <Button>Edit</Button>
-                  </Link>
-                </div>
-              ) : null}
-              {!!user && user.model_permissions.delete_user ? (
-                <div style={{ marginLeft: '8px' }}>
-                  <Button
-                    variant='secondary'
-                    onClick={() => this.setState({ showDeleteModal: true })}
-                  >
-                    Delete
-                  </Button>
-                </div>
-              ) : null}
-            </div>
-          }
-        ></UserFormPage>
+        {notAuthorized ? (
+          <React.Fragment>
+            <BaseHeader
+              breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
+              title={title}
+            ></BaseHeader>
+            <EmptyStateUnauthorized />{' '}
+          </React.Fragment>
+        ) : (
+          <UserFormPage
+            user={userDetail}
+            breadcrumbs={breadcrumbs}
+            title={title}
+            errorMessages={errorMessages}
+            updateUser={user => this.setState({ userDetail: user })}
+            isReadonly
+            extraControls={
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                {!!user && user.model_permissions.change_user ? (
+                  <div>
+                    <Link
+                      to={formatPath(Paths.editUser, {
+                        userID: userDetail.id,
+                      })}
+                    >
+                      <Button>Edit</Button>
+                    </Link>
+                  </div>
+                ) : null}
+                {!!user && user.model_permissions.delete_user ? (
+                  <div style={{ marginLeft: '8px' }}>
+                    <Button
+                      variant='secondary'
+                      onClick={() => this.setState({ showDeleteModal: true })}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                ) : null}
+              </div>
+            }
+          ></UserFormPage>
+        )}
       </>
     );
   }

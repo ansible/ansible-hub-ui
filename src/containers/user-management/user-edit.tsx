@@ -1,7 +1,13 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-import { LoadingPageWithHeader, UserFormPage } from '../../components';
+import {
+  BaseHeader,
+  Breadcrumbs,
+  EmptyStateUnauthorized,
+  LoadingPageWithHeader,
+  UserFormPage,
+} from '../../components';
 import { mapErrorMessages } from '../../utilities';
 import { UserType, UserAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
@@ -10,55 +16,62 @@ import { AppContext } from '../../loaders/app-context';
 interface IState {
   user: UserType;
   errorMessages: object;
+  unauthorized: boolean;
 }
 
 class UserEdit extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
 
-    this.state = { user: undefined, errorMessages: {} };
+    this.state = { user: undefined, errorMessages: {}, unauthorized: false };
   }
 
   componentDidMount() {
     const id = this.props.match.params['userID'];
+
     UserAPI.get(id)
-      .then(result => this.setState({ user: result.data }))
-      .catch(() => this.props.history.push(Paths.notFound));
+      .then(result => this.setState({ user: result.data, unauthorized: false }))
+      .catch(() => this.setState({ unauthorized: true }));
   }
 
   render() {
-    const { user, errorMessages } = this.state;
+    const { user, errorMessages, unauthorized } = this.state;
+    const title = 'Edit user';
+
+    if (unauthorized) {
+      return (
+        <React.Fragment>
+          <BaseHeader title={title}></BaseHeader>
+          <EmptyStateUnauthorized />
+        </React.Fragment>
+      );
+    }
 
     if (!user) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    if (
-      !this.context.user ||
-      !this.context.user.model_permissions.change_user
-    ) {
-      return <Redirect to={Paths.notFound}></Redirect>;
-    }
+    const breadcrumbs = [
+      { url: Paths.userList, name: 'Users' },
+      {
+        url: formatPath(Paths.userDetail, { userID: user.id }),
+        name: user.username,
+      },
+      { name: 'Edit' },
+    ];
 
     return (
       <UserFormPage
         user={user}
-        breadcrumbs={[
-          { url: Paths.userList, name: 'Users' },
-          {
-            url: formatPath(Paths.userDetail, { userID: user.id }),
-            name: user.username,
-          },
-          { name: 'Edit' },
-        ]}
-        title='Edit user'
+        breadcrumbs={breadcrumbs}
+        title={title}
         errorMessages={errorMessages}
         updateUser={(user, errorMessages) =>
           this.setState({ user: user, errorMessages: errorMessages })
         }
         saveUser={this.saveUser}
         onCancel={() => this.props.history.push(Paths.userList)}
-      ></UserFormPage>
+      />
     );
   }
   private saveUser = () => {

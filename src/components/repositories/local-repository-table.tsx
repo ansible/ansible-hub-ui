@@ -2,17 +2,8 @@ import * as React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import {
-  DropdownItem,
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  EmptyStateVariant,
-  Title,
-  ClipboardCopy,
-} from '@patternfly/react-core';
-import { WarningTriangleIcon } from '@patternfly/react-icons';
-import { SortTable, StatefulDropdown } from '..';
+import { DropdownItem, ClipboardCopy } from '@patternfly/react-core';
+import { EmptyStateNoData, SortTable, StatefulDropdown } from '..';
 import * as moment from 'moment';
 import { Constants } from '../../constants';
 import { getRepoUrl } from '../../utilities';
@@ -32,15 +23,10 @@ export class LocalRepositoryTable extends React.Component<IProps> {
     const { repositories } = this.props;
     if (repositories.length === 0) {
       return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WarningTriangleIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No matches
-          </Title>
-          <EmptyStateBody>
-            Please try adjusting your search query.
-          </EmptyStateBody>
-        </EmptyState>
+        <EmptyStateNoData
+          title={'No local repositories yet'}
+          description={''}
+        />
       );
     }
     return this.renderTable(repositories);

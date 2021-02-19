@@ -1,22 +1,8 @@
 import * as React from 'react';
 import * as moment from 'moment';
 
-import {
-  Button,
-  DropdownItem,
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  EmptyStateVariant,
-  Title,
-  Tooltip,
-  Popover,
-} from '@patternfly/react-core';
-import {
-  WarningTriangleIcon,
-  WrenchIcon,
-  ExclamationCircleIcon,
-} from '@patternfly/react-icons';
+import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import { RemoteType, UserType, PulpStatus } from '../../api';
 import { HelperText, SortTable, StatefulDropdown } from '..';
@@ -69,30 +55,6 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
   render() {
     const { remotes } = this.props;
-    if (remotes.length == 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WrenchIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No remote repos
-          </Title>
-        </EmptyState>
-      );
-    }
-    // TODO only with search
-    if (remotes.length === 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WarningTriangleIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No matches
-          </Title>
-          <EmptyStateBody>
-            Please try adjusting your search query.
-          </EmptyStateBody>
-        </EmptyState>
-      );
-    }
     return this.renderTable(remotes);
   }
 

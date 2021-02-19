@@ -5,20 +5,12 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   DataList,
-  EmptyState,
-  EmptyStateIcon,
-  Title,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
-  EmptyStateBody,
-  EmptyStateVariant,
-  Button,
   ToolbarContent,
   Switch,
 } from '@patternfly/react-core';
-
-import { SearchIcon } from '@patternfly/react-icons';
 
 import {
   BaseHeader,
@@ -29,6 +21,8 @@ import {
   Pagination,
   LoadingPageSpinner,
   AppliedFilters,
+  EmptyStateFilter,
+  EmptyStateNoData,
 } from '../../components';
 import {
   CollectionAPI,
@@ -39,6 +33,7 @@ import {
 import { ParamHelper } from '../../utilities/param-helper';
 import { Constants } from '../../constants';
 import { AppContext } from '../../loaders/app-context';
+import { filterIsSet } from '../../utilities';
 
 interface IState {
   collections: CollectionListType[];
@@ -95,6 +90,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const { collections, params, numberOfResults } = this.state;
+    const noData =
+      collections.length === 0 && !filterIsSet(params, ['keywords', 'tags']);
 
     const tags = [
       'cloud',
@@ -113,100 +110,113 @@ class Search extends React.Component<RouteComponentProps, IState> {
     return (
       <div className='search-page'>
         <BaseHeader className='header' title='Collections'>
-          <div className='toolbar-wrapper'>
-            <div className='toolbar'>
-              <Toolbar>
-                <ToolbarContent>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <CompoundFilter
-                        updateParams={p =>
-                          this.updateParams(p, () => this.queryCollections())
-                        }
-                        params={params}
-                        filterConfig={[
-                          {
-                            id: 'keywords',
-                            title: 'Keywords',
-                          },
-                          {
-                            id: 'tags',
-                            title: 'Tag',
-                            inputType: 'multiple',
-                            options: tags.map(tag => ({
-                              id: tag,
-                              title: tag,
-                            })),
-                          },
-                        ]}
-                      />
+          {!noData && (
+            <div className='toolbar-wrapper'>
+              <div className='toolbar'>
+                <Toolbar>
+                  <ToolbarContent>
+                    <ToolbarGroup>
                       <ToolbarItem>
-                        <AppliedFilters
-                          style={{ marginTop: '16px' }}
+                        <CompoundFilter
                           updateParams={p =>
                             this.updateParams(p, () => this.queryCollections())
                           }
                           params={params}
-                          ignoredParams={[
-                            'page_size',
-                            'page',
-                            'sort',
-                            'view_type',
+                          filterConfig={[
+                            {
+                              id: 'keywords',
+                              title: 'Keywords',
+                            },
+                            {
+                              id: 'tags',
+                              title: 'Tag',
+                              inputType: 'multiple',
+                              options: tags.map(tag => ({
+                                id: tag,
+                                title: tag,
+                              })),
+                            },
                           ]}
                         />
+                        <ToolbarItem>
+                          <AppliedFilters
+                            style={{ marginTop: '16px' }}
+                            updateParams={p =>
+                              this.updateParams(p, () =>
+                                this.queryCollections(),
+                              )
+                            }
+                            params={params}
+                            ignoredParams={[
+                              'page_size',
+                              'page',
+                              'sort',
+                              'view_type',
+                            ]}
+                          />
+                        </ToolbarItem>
                       </ToolbarItem>
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                </ToolbarContent>
-              </Toolbar>
+                    </ToolbarGroup>
+                  </ToolbarContent>
+                </Toolbar>
 
-              <div className='pagination-container'>
-                <div className='card-list-switcher'>
-                  <CardListSwitcher
-                    size='sm'
+                <div className='pagination-container'>
+                  <div className='card-list-switcher'>
+                    <CardListSwitcher
+                      size='sm'
+                      params={params}
+                      updateParams={p =>
+                        this.updateParams(p, () =>
+                          // Note, we have to use this.state.params instead
+                          // of params in the callback because the callback
+                          // executes before the page can re-run render
+                          // which means params doesn't contain the most
+                          // up to date state
+                          localStorage.setItem(
+                            Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
+                            this.state.params.view_type,
+                          ),
+                        )
+                      }
+                    />
+                  </div>
+
+                  <Pagination
                     params={params}
                     updateParams={p =>
-                      this.updateParams(p, () =>
-                        // Note, we have to use this.state.params instead
-                        // of params in the callback because the callback
-                        // executes before the page can re-run render
-                        // which means params doesn't contain the most
-                        // up to date state
-                        localStorage.setItem(
-                          Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-                          this.state.params.view_type,
-                        ),
-                      )
+                      this.updateParams(p, () => this.queryCollections())
                     }
+                    count={numberOfResults}
+                    perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+                    isTop
                   />
                 </div>
-
-                <Pagination
-                  params={params}
-                  updateParams={p =>
-                    this.updateParams(p, () => this.queryCollections())
-                  }
-                  count={numberOfResults}
-                  perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
-                  isTop
-                />
               </div>
             </div>
-          </div>
+          )}
         </BaseHeader>
-        <Section className='collection-container'>
-          {this.renderCollections(collections, params)}
-        </Section>
-        <Section className='footer'>
-          <Pagination
-            params={params}
-            updateParams={p =>
-              this.updateParams(p, () => this.queryCollections())
-            }
-            perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
-            count={numberOfResults}
+        {noData ? (
+          <EmptyStateNoData
+            title={'No collections yet'}
+            description={'Collections will appear once uploaded'}
           />
-        </Section>
+        ) : (
+          <React.Fragment>
+            <Section className='collection-container'>
+              {this.renderCollections(collections, params)}
+            </Section>
+            <Section className='footer'>
+              <Pagination
+                params={params}
+                updateParams={p =>
+                  this.updateParams(p, () => this.queryCollections())
+                }
+                perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+                count={numberOfResults}
+              />
+            </Section>
+          </React.Fragment>
+        )}
       </div>
     );
   }
@@ -216,34 +226,13 @@ class Search extends React.Component<RouteComponentProps, IState> {
       return <LoadingPageSpinner></LoadingPageSpinner>;
     }
     if (collections.length === 0) {
-      return this.renderEmpty();
+      return <EmptyStateFilter />;
     }
     if (params.view_type === 'list') {
       return this.renderList(collections);
     } else {
       return this.renderCards(collections);
     }
-  }
-
-  private renderEmpty() {
-    return (
-      <EmptyState className='empty' variant={EmptyStateVariant.full}>
-        <EmptyStateIcon icon={SearchIcon} />
-        <Title headingLevel='h2' size='lg'>
-          No results found
-        </Title>
-        <EmptyStateBody>
-          No results match the search criteria. Remove all filters to show
-          results.
-        </EmptyStateBody>
-        <Button
-          variant='link'
-          onClick={() => this.updateParams({}, () => this.queryCollections())}
-        >
-          Clear search
-        </Button>
-      </EmptyState>
-    );
   }
 
   private renderCards(collections) {

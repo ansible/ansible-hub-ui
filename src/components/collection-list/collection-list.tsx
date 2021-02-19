@@ -1,18 +1,7 @@
 import * as React from 'react';
 import './list.scss';
 
-import {
-  TextInput,
-  Button,
-  DropdownItem,
-  DataList,
-  EmptyState,
-  EmptyStateIcon,
-  Title,
-  EmptyStateVariant,
-  EmptyStateBody,
-} from '@patternfly/react-core';
-import { SearchIcon } from '@patternfly/react-icons';
+import { Button, DropdownItem, DataList } from '@patternfly/react-core';
 
 import { CollectionListType } from '../../api';
 import {
@@ -20,6 +9,7 @@ import {
   Toolbar,
   Pagination,
   StatefulDropdown,
+  EmptyStateFilter,
 } from '../../components';
 import { ParamHelper } from '../../utilities/param-helper';
 
@@ -91,19 +81,7 @@ export class CollectionList extends React.Component<IProps, IState> {
               />
             ))
           ) : (
-            <EmptyState className='empty' variant={EmptyStateVariant.full}>
-              <EmptyStateIcon icon={SearchIcon} />
-              <Title headingLevel='h2' size='lg'>
-                No results found
-              </Title>
-              <EmptyStateBody>
-                No results match the filter criteria. Remove all filters or
-                clear all filters to show results.
-              </EmptyStateBody>
-              <Button variant='link' onClick={() => updateParams({})}>
-                Clear all filters
-              </Button>
-            </EmptyState>
+            <EmptyStateFilter />
           )}
         </DataList>
 

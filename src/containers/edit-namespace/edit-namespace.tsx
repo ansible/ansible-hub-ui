@@ -11,6 +11,7 @@ import {
   closeAlertMixin,
   AlertType,
   Main,
+  EmptyStateUnauthorized,
 } from '../../components';
 import {
   MyNamespaceAPI,
@@ -37,6 +38,7 @@ interface IState {
     tab?: string;
   };
   userId: string;
+  unauthorized: boolean;
 }
 
 class EditNamespace extends React.Component<RouteComponentProps, IState> {
@@ -62,6 +64,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       redirect: null,
       unsavedData: false,
       params: params,
+      unauthorized: false,
     };
   }
 
@@ -81,14 +84,15 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       redirect,
       params,
       userId,
+      unauthorized,
     } = this.state;
-
-    if (redirect) {
-      return <Redirect to={redirect} />;
-    }
 
     if (!namespace) {
       return null;
+    }
+
+    if (redirect) {
+      return <Redirect to={redirect} />;
     }
     return (
       <React.Fragment>
@@ -112,48 +116,55 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
         />
-        <Main>
-          <Section className='body'>
-            {params.tab.toLowerCase() === 'edit details' ? (
-              <NamespaceForm
-                userId={userId}
-                namespace={namespace}
-                errorMessages={errorMessages}
-                updateNamespace={namespace =>
-                  this.setState({
-                    namespace: namespace,
-                    unsavedData: true,
-                  })
-                }
-              />
-            ) : (
-              <ResourcesForm
-                updateNamespace={namespace =>
-                  this.setState({
-                    namespace: namespace,
-                    unsavedData: true,
-                  })
-                }
-                namespace={namespace}
-              />
-            )}
-            <Form>
-              <ActionGroup>
-                <Button variant='primary' onClick={() => this.saveNamespace()}>
-                  Save
-                </Button>
-                <Button variant='secondary' onClick={() => this.cancel()}>
-                  Cancel
-                </Button>
+        {unauthorized ? (
+          <EmptyStateUnauthorized />
+        ) : (
+          <Main>
+            <Section className='body'>
+              {params.tab.toLowerCase() === 'edit details' ? (
+                <NamespaceForm
+                  userId={userId}
+                  namespace={namespace}
+                  errorMessages={errorMessages}
+                  updateNamespace={namespace =>
+                    this.setState({
+                      namespace: namespace,
+                      unsavedData: true,
+                    })
+                  }
+                />
+              ) : (
+                <ResourcesForm
+                  updateNamespace={namespace =>
+                    this.setState({
+                      namespace: namespace,
+                      unsavedData: true,
+                    })
+                  }
+                  namespace={namespace}
+                />
+              )}
+              <Form>
+                <ActionGroup>
+                  <Button
+                    variant='primary'
+                    onClick={() => this.saveNamespace()}
+                  >
+                    Save
+                  </Button>
+                  <Button variant='secondary' onClick={() => this.cancel()}>
+                    Cancel
+                  </Button>
 
-                {saving ? <Spinner></Spinner> : null}
-              </ActionGroup>
-              {this.state.unsavedData ? (
-                <div style={{ color: 'red' }}>You have unsaved changes</div>
-              ) : null}
-            </Form>
-          </Section>
-        </Main>
+                  {saving ? <Spinner></Spinner> : null}
+                </ActionGroup>
+                {this.state.unsavedData ? (
+                  <div style={{ color: 'red' }}>You have unsaved changes</div>
+                ) : null}
+              </Form>
+            </Section>
+          </Main>
+        )}
       </React.Fragment>
     );
   }
@@ -172,7 +183,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         this.setState({ namespace: response.data });
       })
       .catch(response => {
-        this.setState({ redirect: Paths.notFound });
+        this.setState({ unauthorized: true });
       });
   }
 

@@ -12,6 +12,8 @@ import {
   Breadcrumbs,
   closeAlertMixin,
   CompoundFilter,
+  EmptyStateFilter,
+  EmptyStateNoData,
   LoadingPageWithHeader,
   Main,
   Pagination,
@@ -21,19 +23,14 @@ import {
   Tabs,
 } from '../../components';
 import { GroupAPI, UserAPI, UserType } from '../../api';
-import { ParamHelper, twoWayMapper } from '../../utilities';
+import { filterIsSet, ParamHelper, twoWayMapper } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
 import {
   Button,
   DropdownItem,
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  EmptyStateVariant,
   Flex,
   FlexItem,
   Modal,
-  Title,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -41,7 +38,6 @@ import {
 } from '@patternfly/react-core';
 import { Constants } from '../../constants';
 import * as moment from 'moment';
-import { WarningTriangleIcon } from '@patternfly/react-icons';
 import { InsightsUserType } from '../../api/response-types/user';
 import { AppContext } from '../../loaders/app-context';
 
@@ -454,8 +450,27 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private renderUsers(users) {
     const { params, itemCount } = this.state;
     const { user } = this.context;
+    const noData =
+      itemCount === 0 &&
+      !filterIsSet(params, ['username', 'first_name', 'last_name', 'email']);
     if (!params['sort']) {
       params['sort'] = 'username';
+    }
+    if (noData) {
+      return (
+        <EmptyStateNoData
+          title={'No users yet'}
+          description={'Users will appear once added to this group'}
+          button={
+            <Button
+              variant='primary'
+              onClick={() => this.setState({ addModalVisible: true })}
+            >
+              Add
+            </Button>
+          }
+        />
+      );
     }
     return (
       <Section className='body'>
@@ -533,19 +548,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private renderUsersTable(users) {
     const { params } = this.state;
     if (users.length === 0) {
-      return (
-        <Section className='body'>
-          <EmptyState className='empty' variant={EmptyStateVariant.full}>
-            <EmptyStateIcon icon={WarningTriangleIcon} />
-            <Title headingLevel='h2' size='lg'>
-              No matches
-            </Title>
-            <EmptyStateBody>
-              Please try adjusting your search query.
-            </EmptyStateBody>
-          </EmptyState>
-        </Section>
-      );
+      return <EmptyStateFilter />;
     }
 
     let sortTableOptions = {

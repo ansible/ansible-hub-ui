@@ -15,19 +15,14 @@ import {
   ToolbarContent,
   Button,
   DropdownItem,
-  EmptyState,
-  EmptyStateIcon,
-  Title,
-  EmptyStateBody,
-  EmptyStateVariant,
   Label,
   Tooltip,
 } from '@patternfly/react-core';
 
-import { WarningTriangleIcon, UserPlusIcon } from '@patternfly/react-icons';
+import { UserPlusIcon } from '@patternfly/react-icons';
 
 import { UserAPI, UserType } from '../../api';
-import { ParamHelper } from '../../utilities';
+import { ParamHelper, filterIsSet } from '../../utilities';
 import {
   StatefulDropdown,
   CompoundFilter,
@@ -40,6 +35,9 @@ import {
   AlertType,
   BaseHeader,
   Main,
+  EmptyStateNoData,
+  EmptyStateUnauthorized,
+  EmptyStateFilter,
 } from '../../components';
 import { DeleteUserModal } from './delete-user-modal';
 
@@ -58,6 +56,7 @@ interface IState {
   deleteUser: UserType;
   showDeleteModal: boolean;
   alerts: AlertType[];
+  unauthorized: boolean;
 }
 
 class UserList extends React.Component<RouteComponentProps, IState> {
@@ -85,12 +84,13 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       loading: true,
       itemCount: 0,
       alerts: [],
+      unauthorized: false,
     };
   }
 
   componentDidMount() {
     if (!this.context.user || !this.context.user.model_permissions.view_user) {
-      this.setState({ redirect: Paths.notFound });
+      this.setState({ unauthorized: true });
     } else {
       this.queryUsers();
     }
@@ -105,12 +105,13 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       showDeleteModal,
       deleteUser,
       alerts,
+      unauthorized,
     } = this.state;
 
     const { user } = this.context;
 
     if (redirect) {
-      return <Redirect to={redirect}></Redirect>;
+      return <Redirect to={redirect} />;
     }
 
     return (
@@ -132,82 +133,86 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           }
         ></DeleteUserModal>
         <BaseHeader title='Users'></BaseHeader>
-        <Main>
-          <Section className='body'>
-            <div className='toolbar'>
-              <Toolbar>
-                <ToolbarContent>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <CompoundFilter
-                        updateParams={p =>
-                          this.updateParams(p, () => this.queryUsers())
-                        }
-                        params={params}
-                        filterConfig={[
-                          {
-                            id: 'username',
-                            title: 'Username',
-                          },
-                          {
-                            id: 'first_name',
-                            title: 'First name',
-                          },
-                          {
-                            id: 'last_name',
-                            title: 'Last name',
-                          },
-                          {
-                            id: 'email',
-                            title: 'Email',
-                          },
-                        ]}
-                      />
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                  {!!user && user.model_permissions.add_user ? (
+        {unauthorized ? (
+          <EmptyStateUnauthorized />
+        ) : (
+          <Main>
+            <Section className='body'>
+              <div className='toolbar'>
+                <Toolbar>
+                  <ToolbarContent>
                     <ToolbarGroup>
                       <ToolbarItem>
-                        <Link to={Paths.createUser}>
-                          <Button>Create user</Button>
-                        </Link>
+                        <CompoundFilter
+                          updateParams={p =>
+                            this.updateParams(p, () => this.queryUsers())
+                          }
+                          params={params}
+                          filterConfig={[
+                            {
+                              id: 'username',
+                              title: 'Username',
+                            },
+                            {
+                              id: 'first_name',
+                              title: 'First name',
+                            },
+                            {
+                              id: 'last_name',
+                              title: 'Last name',
+                            },
+                            {
+                              id: 'email',
+                              title: 'Email',
+                            },
+                          ]}
+                        />
                       </ToolbarItem>
                     </ToolbarGroup>
-                  ) : null}
-                </ToolbarContent>
-              </Toolbar>
+                    {!!user && user.model_permissions.add_user ? (
+                      <ToolbarGroup>
+                        <ToolbarItem>
+                          <Link to={Paths.createUser}>
+                            <Button>Create user</Button>
+                          </Link>
+                        </ToolbarItem>
+                      </ToolbarGroup>
+                    ) : null}
+                  </ToolbarContent>
+                </Toolbar>
 
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryUsers())
-                }
-                count={itemCount}
-                isTop
-              />
-            </div>
-            <div>
-              <AppliedFilters
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryUsers())
-                }
-                params={params}
-                ignoredParams={['page_size', 'page', 'sort']}
-              />
-            </div>
-            {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryUsers())
+                  }
+                  count={itemCount}
+                  isTop
+                />
+              </div>
+              <div>
+                <AppliedFilters
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryUsers())
+                  }
+                  params={params}
+                  ignoredParams={['page_size', 'page', 'sort']}
+                />
+              </div>
+              {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
 
-            <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryUsers())
-                }
-                count={itemCount}
-              />
-            </div>
-          </Section>
-        </Main>
+              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryUsers())
+                  }
+                  count={itemCount}
+                />
+              </div>
+            </Section>
+          </Main>
+        )}
       </React.Fragment>
     );
   }
@@ -215,16 +220,23 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   private renderTable(params) {
     const { users } = this.state;
     if (users.length === 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WarningTriangleIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No matches
-          </Title>
-          <EmptyStateBody>
-            Please try adjusting your search query.
-          </EmptyStateBody>
-        </EmptyState>
+      return filterIsSet(params, [
+        'username',
+        'first_name',
+        'last_name',
+        'email',
+      ]) ? (
+        <EmptyStateFilter />
+      ) : (
+        <EmptyStateNoData
+          title={'No users yet'}
+          description={'Users will appear once created'}
+          button={
+            <Link to={Paths.createUser}>
+              <Button variant={'primary'}>Create</Button>
+            </Link>
+          }
+        />
       );
     }
 

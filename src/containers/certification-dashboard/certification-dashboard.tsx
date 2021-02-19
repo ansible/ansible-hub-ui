@@ -2,13 +2,14 @@ import * as React from 'react';
 import './certification-dashboard.scss';
 
 import * as moment from 'moment';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
-import { BaseHeader, Main } from '../../components';
+  BaseHeader,
+  EmptyStateFilter,
+  EmptyStateNoData,
+  EmptyStateUnauthorized,
+  Main,
+} from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
@@ -16,22 +17,16 @@ import {
   ToolbarItem,
   Button,
   DropdownItem,
-  EmptyState,
-  EmptyStateIcon,
-  Title,
-  EmptyStateBody,
-  EmptyStateVariant,
 } from '@patternfly/react-core';
 
 import {
   InfoCircleIcon,
   ExclamationCircleIcon,
   CheckCircleIcon,
-  WarningTriangleIcon,
 } from '@patternfly/react-icons';
 
 import { CollectionVersionAPI, CollectionVersion, TaskAPI } from '../../api';
-import { ParamHelper } from '../../utilities';
+import { filterIsSet, ParamHelper } from '../../utilities';
 import {
   LoadingPageWithHeader,
   StatefulDropdown,
@@ -61,7 +56,7 @@ interface IState {
   itemCount: number;
   loading: boolean;
   updatingVersions: CollectionVersion[];
-  redirect: string;
+  unauthorized: boolean;
 }
 
 class CertificationDashboard extends React.Component<
@@ -94,8 +89,8 @@ class CertificationDashboard extends React.Component<
       params: params,
       loading: true,
       updatingVersions: [],
-      redirect: undefined,
       alerts: [],
+      unauthorized: false,
     };
   }
 
@@ -104,22 +99,19 @@ class CertificationDashboard extends React.Component<
       !this.context.user ||
       !this.context.user.model_permissions.move_collection
     ) {
-      this.setState({ redirect: Paths.notFound });
+      this.setState({ unauthorized: true });
     } else {
       this.queryCollections();
     }
   }
 
   render() {
-    const { versions, params, itemCount, loading, redirect } = this.state;
+    const { versions, params, itemCount, loading, unauthorized } = this.state;
 
-    if (redirect) {
-      return <Redirect to={redirect}></Redirect>;
-    }
-
-    if (!versions) {
+    if (!versions && !unauthorized) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
+
     return (
       <React.Fragment>
         <BaseHeader title='Approval dashboard'></BaseHeader>
@@ -127,102 +119,103 @@ class CertificationDashboard extends React.Component<
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
         />
-        <Main className='certification-dashboard'>
-          <Section className='body'>
-            <div className='toolbar'>
-              <Toolbar>
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <CompoundFilter
-                      updateParams={p =>
-                        this.updateParams(p, () => this.queryCollections())
-                      }
-                      params={params}
-                      filterConfig={[
-                        {
-                          id: 'namespace',
-                          title: 'Namespace',
-                        },
-                        {
-                          id: 'name',
-                          title: 'Collection Name',
-                        },
-                        {
-                          id: 'repository',
-                          title: 'Repository',
-                          inputType: 'select',
-                          options: [
-                            {
-                              id: Constants.NOTCERTIFIED,
-                              title: 'Rejected',
-                            },
-                            {
-                              id: Constants.NEEDSREVIEW,
-                              title: 'Needs Review',
-                            },
-                            {
-                              id: Constants.PUBLISHED,
-                              title: 'Approved',
-                            },
-                          ],
-                        },
-                      ]}
-                    />
-                  </ToolbarItem>
-                </ToolbarGroup>
-              </Toolbar>
+        {unauthorized ? (
+          <EmptyStateUnauthorized />
+        ) : (
+          <Main className='certification-dashboard'>
+            <Section className='body'>
+              <div className='toolbar'>
+                <Toolbar>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <CompoundFilter
+                        updateParams={p =>
+                          this.updateParams(p, () => this.queryCollections())
+                        }
+                        params={params}
+                        filterConfig={[
+                          {
+                            id: 'namespace',
+                            title: 'Namespace',
+                          },
+                          {
+                            id: 'name',
+                            title: 'Collection Name',
+                          },
+                          {
+                            id: 'repository',
+                            title: 'Repository',
+                            inputType: 'select',
+                            options: [
+                              {
+                                id: Constants.NOTCERTIFIED,
+                                title: 'Rejected',
+                              },
+                              {
+                                id: Constants.NEEDSREVIEW,
+                                title: 'Needs Review',
+                              },
+                              {
+                                id: Constants.PUBLISHED,
+                                title: 'Approved',
+                              },
+                            ],
+                          },
+                        ]}
+                      />
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                </Toolbar>
 
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
-                count={itemCount}
-                isTop
-              />
-            </div>
-            <div>
-              <AppliedFilters
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
-                params={params}
-                ignoredParams={['page_size', 'page', 'sort']}
-              />
-            </div>
-            {loading ? (
-              <LoadingPageSpinner />
-            ) : (
-              this.renderTable(versions, params)
-            )}
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryCollections())
+                  }
+                  count={itemCount}
+                  isTop
+                />
+              </div>
+              <div>
+                <AppliedFilters
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryCollections())
+                  }
+                  params={params}
+                  ignoredParams={['page_size', 'page', 'sort']}
+                />
+              </div>
+              {loading ? (
+                <LoadingPageSpinner />
+              ) : (
+                this.renderTable(versions, params)
+              )}
 
-            <div className='footer'>
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryCollections())
-                }
-                count={itemCount}
-              />
-            </div>
-          </Section>
-        </Main>
+              <div className='footer'>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryCollections())
+                  }
+                  count={itemCount}
+                />
+              </div>
+            </Section>
+          </Main>
+        )}
       </React.Fragment>
     );
   }
 
   private renderTable(versions, params) {
     if (versions.length === 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WarningTriangleIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No matches
-          </Title>
-          <EmptyStateBody>
-            Please try adjusting your search query.
-          </EmptyStateBody>
-        </EmptyState>
+      return filterIsSet(params, ['namespace', 'name', 'repository']) ? (
+        <EmptyStateFilter />
+      ) : (
+        <EmptyStateNoData
+          title={'No managed collections yet'}
+          description={'Collections will appear once uploaded'}
+        />
       );
     }
     let sortTableOptions = {

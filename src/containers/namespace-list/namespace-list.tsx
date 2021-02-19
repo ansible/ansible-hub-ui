@@ -3,14 +3,6 @@ import './namespace-list.scss';
 
 import { RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import {
-  EmptyState,
-  EmptyStateIcon,
-  Title,
-  EmptyStateBody,
-  EmptyStateVariant,
-} from '@patternfly/react-core';
-import { SearchIcon } from '@patternfly/react-icons';
 
 import { ParamHelper } from '../../utilities/param-helper';
 import {
@@ -21,6 +13,8 @@ import {
   NamespaceModal,
   LoadingPageWithHeader,
   LoadingPageSpinner,
+  EmptyStateFilter,
+  EmptyStateNoData,
 } from '../../components';
 import { Button } from '@patternfly/react-core';
 import { ToolbarItem } from '@patternfly/react-core';
@@ -28,6 +22,7 @@ import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from '../../api';
 import { Paths, formatPath } from '../../paths';
 import { Constants } from '../../constants';
 import { AppContext } from '../../loaders/app-context';
+import { filterIsSet } from '../../utilities';
 
 interface IState {
   namespaces: NamespaceListType[];
@@ -109,6 +104,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
     const { namespaces, params, itemCount } = this.state;
     const { title, filterOwner } = this.props;
     const { user } = this.context;
+    const noData =
+      !filterIsSet(this.state.params, ['keywords']) &&
+      namespaces !== undefined &&
+      namespaces.length === 0;
 
     if (!namespaces) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -140,48 +139,63 @@ export class NamespaceList extends React.Component<IProps, IState> {
           }
         ></NamespaceModal>
         <BaseHeader title={title}>
-          <div className='toolbar'>
-            <Toolbar
-              params={params}
-              sortOptions={[{ title: 'Name', id: 'name', type: 'alpha' }]}
-              searchPlaceholder={'Search ' + title.toLowerCase()}
-              updateParams={p =>
-                this.updateParams(p, () => this.loadNamespaces())
-              }
-              extraInputs={extra}
-            />
-            <div>
-              <Pagination
+          {noData ? null : (
+            <div className='toolbar'>
+              <Toolbar
                 params={params}
+                sortOptions={[{ title: 'Name', id: 'name', type: 'alpha' }]}
+                searchPlaceholder={'Search ' + title.toLowerCase()}
                 updateParams={p =>
                   this.updateParams(p, () => this.loadNamespaces())
                 }
-                count={itemCount}
-                isCompact
-                perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+                extraInputs={extra}
               />
+              <div>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.loadNamespaces())
+                  }
+                  count={itemCount}
+                  isCompact
+                  perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </BaseHeader>
         <Section className='card-area'>{this.renderBody()}</Section>
-        <Section className='footer'>
-          <Pagination
-            params={params}
-            updateParams={p =>
-              this.updateParams(p, () => this.loadNamespaces())
-            }
-            perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
-            count={itemCount}
-          />
-        </Section>
+        {noData ? null : (
+          <Section className='footer'>
+            <Pagination
+              params={params}
+              updateParams={p =>
+                this.updateParams(p, () => this.loadNamespaces())
+              }
+              perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
+              count={itemCount}
+            />
+          </Section>
+        )}
       </div>
     );
   }
 
   private renderBody() {
-    const { namespaces, hasPermission } = this.state;
-    const { namespacePath } = this.props;
-    const { loading } = this.state;
+    const { namespaces, loading } = this.state;
+    const { namespacePath, filterOwner } = this.props;
+    const noDataTitle = Constants.STANDALONE_DEPLOYMENT_MODE
+      ? 'No namespaces yet'
+      : 'No managed namespaces yet';
+    const noDataDescription = Constants.STANDALONE_DEPLOYMENT_MODE
+      ? 'Namespaces will appear once created'
+      : 'This account is not set up to manage any namespaces';
+    const noDataButton =
+      Constants.STANDALONE_DEPLOYMENT_MODE && filterOwner ? (
+        <Button variant='primary' onClick={() => this.handleModalToggle()}>
+          Create
+        </Button>
+      ) : null;
 
     if (loading) {
       return (
@@ -194,29 +208,15 @@ export class NamespaceList extends React.Component<IProps, IState> {
     if (namespaces.length === 0) {
       return (
         <Section>
-          <EmptyState className='empty' variant={EmptyStateVariant.full}>
-            <EmptyStateIcon icon={SearchIcon} />
-            <Title headingLevel='h2' size='lg'>
-              {hasPermission ? 'No results found' : 'No managed namespaces'}
-            </Title>
-            <EmptyStateBody>
-              {hasPermission
-                ? 'No results match the filter criteria.' +
-                  ' Remove all filters or clear all filters' +
-                  ' to show results.'
-                : 'This account is not set up to manage any namespaces.'}
-            </EmptyStateBody>
-            {hasPermission && (
-              <Button
-                variant='link'
-                onClick={() =>
-                  this.updateParams({}, () => this.loadNamespaces())
-                }
-              >
-                Clear all filters
-              </Button>
-            )}
-          </EmptyState>
+          {filterIsSet(this.state.params, ['keywords']) ? (
+            <EmptyStateFilter />
+          ) : (
+            <EmptyStateNoData
+              title={noDataTitle}
+              description={noDataDescription}
+              button={noDataButton}
+            />
+          )}
         </Section>
       );
     }

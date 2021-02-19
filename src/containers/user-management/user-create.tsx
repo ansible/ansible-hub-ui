@@ -1,7 +1,12 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-import { UserFormPage } from '../../components';
+import {
+  BaseHeader,
+  Breadcrumbs,
+  EmptyStateUnauthorized,
+  UserFormPage,
+} from '../../components';
 import { mapErrorMessages } from '../../utilities';
 import { UserType, UserAPI } from '../../api';
 import { Paths } from '../../paths';
@@ -31,17 +36,27 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const { user, errorMessages } = this.state;
-    if (!this.context.user || !this.context.user.model_permissions.add_user) {
-      return <Redirect to={Paths.notFound}></Redirect>;
-    }
-    return (
+    const notAuthorised =
+      !this.context.user || !this.context.user.model_permissions.add_user;
+    const breadcrumbs = [
+      { url: Paths.userList, name: 'Users' },
+      { name: 'Create new user' },
+    ];
+    const title = 'Create new user';
+
+    return notAuthorised ? (
+      <React.Fragment>
+        <BaseHeader
+          breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
+          title={title}
+        ></BaseHeader>
+        <EmptyStateUnauthorized />
+      </React.Fragment>
+    ) : (
       <UserFormPage
         user={user}
-        breadcrumbs={[
-          { url: Paths.userList, name: 'Users' },
-          { name: 'Create new user' },
-        ]}
-        title='Create new user'
+        breadcrumbs={breadcrumbs}
+        title={title}
         errorMessages={errorMessages}
         updateUser={(user, errorMessages) =>
           this.setState({ user: user, errorMessages: errorMessages })

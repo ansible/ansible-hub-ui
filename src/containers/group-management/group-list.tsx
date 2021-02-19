@@ -3,12 +3,12 @@ import * as React from 'react';
 import {
   withRouter,
   RouteComponentProps,
-  Redirect,
   Link,
+  Redirect,
 } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { GroupAPI } from '../../api';
-import { mapErrorMessages, ParamHelper } from '../../utilities';
+import { filterIsSet, mapErrorMessages, ParamHelper } from '../../utilities';
 import {
   AlertList,
   AlertType,
@@ -16,6 +16,9 @@ import {
   BaseHeader,
   closeAlertMixin,
   CompoundFilter,
+  EmptyStateFilter,
+  EmptyStateNoData,
+  EmptyStateUnauthorized,
   GroupModal,
   LoadingPageSpinner,
   Main,
@@ -24,21 +27,13 @@ import {
 } from '../../components';
 import {
   Button,
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  EmptyStateVariant,
   Modal,
-  Title,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import {
-  WarningTriangleIcon,
-  ExclamationTriangleIcon,
-} from '@patternfly/react-icons';
+import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
 
@@ -57,6 +52,7 @@ interface IState {
   editModalVisible: boolean;
   selectedGroup: any;
   groupError: any;
+  unauthorized: boolean;
 }
 
 class GroupList extends React.Component<RouteComponentProps, IState> {
@@ -87,11 +83,16 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       editModalVisible: false,
       selectedGroup: null,
       groupError: null,
+      unauthorized: false,
     };
   }
 
   componentDidMount() {
-    this.queryGroups();
+    if (!this.context.user || !this.context.user.model_permissions.view_group) {
+      this.setState({ unauthorized: true });
+    } else {
+      this.queryGroups();
+    }
   }
 
   render() {
@@ -104,12 +105,15 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       deleteModalVisible,
       editModalVisible,
       alerts,
+      groups,
+      unauthorized,
     } = this.state;
 
     const { user } = this.context;
+    const noData = groups.length === 0 && !filterIsSet(params, ['name']);
 
     if (redirect) {
-      return <Redirect to={redirect}></Redirect>;
+      return <Redirect to={redirect} />;
     }
 
     return (
@@ -122,73 +126,90 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         {deleteModalVisible ? this.renderDeleteModal() : null}
         {editModalVisible ? this.renderEditModal() : null}
         <BaseHeader title='Groups'></BaseHeader>
-        <Main>
-          <Section className='body'>
-            <div className='toolbar'>
-              <Toolbar>
-                <ToolbarContent>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <CompoundFilter
-                        updateParams={p =>
-                          this.updateParams(p, () => this.queryGroups())
-                        }
-                        params={params}
-                        filterConfig={[
-                          {
-                            id: 'name',
-                            title: 'Group',
-                          },
-                        ]}
-                      />
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                  {!!user && user.model_permissions.add_group && (
+        {unauthorized ? (
+          <EmptyStateUnauthorized />
+        ) : noData ? (
+          <EmptyStateNoData
+            title={'No groups yet'}
+            description={'Groups will appear once created'}
+            button={
+              <Button
+                variant='primary'
+                onClick={() => this.setState({ createModalVisible: true })}
+              >
+                Create
+              </Button>
+            }
+          />
+        ) : (
+          <Main>
+            <Section className='body'>
+              <div className='toolbar'>
+                <Toolbar>
+                  <ToolbarContent>
                     <ToolbarGroup>
                       <ToolbarItem>
-                        <Button
-                          onClick={() =>
-                            this.setState({ createModalVisible: true })
+                        <CompoundFilter
+                          updateParams={p =>
+                            this.updateParams(p, () => this.queryGroups())
                           }
-                        >
-                          Create
-                        </Button>
+                          params={params}
+                          filterConfig={[
+                            {
+                              id: 'name',
+                              title: 'Group',
+                            },
+                          ]}
+                        />
                       </ToolbarItem>
                     </ToolbarGroup>
-                  )}
-                </ToolbarContent>
-              </Toolbar>
+                    {!!user && user.model_permissions.add_group && (
+                      <ToolbarGroup>
+                        <ToolbarItem>
+                          <Button
+                            onClick={() =>
+                              this.setState({ createModalVisible: true })
+                            }
+                          >
+                            Create
+                          </Button>
+                        </ToolbarItem>
+                      </ToolbarGroup>
+                    )}
+                  </ToolbarContent>
+                </Toolbar>
 
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryGroups())
-                }
-                count={itemCount}
-                isTop
-              />
-            </div>
-            <div>
-              <AppliedFilters
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryGroups())
-                }
-                params={params}
-                ignoredParams={['page_size', 'page', 'sort']}
-              />
-            </div>
-            {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
-            <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryGroups())
-                }
-                count={itemCount}
-              />
-            </div>
-          </Section>
-        </Main>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryGroups())
+                  }
+                  count={itemCount}
+                  isTop
+                />
+              </div>
+              <div>
+                <AppliedFilters
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryGroups())
+                  }
+                  params={params}
+                  ignoredParams={['page_size', 'page', 'sort']}
+                />
+              </div>
+              {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryGroups())
+                  }
+                  count={itemCount}
+                />
+              </div>
+            </Section>
+          </Main>
+        )}
       </React.Fragment>
     );
   }
@@ -304,17 +325,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderTable(params) {
     const { groups } = this.state;
     if (groups.length === 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WarningTriangleIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No matches
-          </Title>
-          <EmptyStateBody>
-            Please try adjusting your search query.
-          </EmptyStateBody>
-        </EmptyState>
-      );
+      return <EmptyStateFilter />;
     }
 
     let sortTableOptions = {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
+import { RouteComponentProps, Link, Redirect } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Button,
@@ -26,11 +26,14 @@ import {
   LoadingPageWithHeader,
   Main,
   APIButton,
+  EmptyStateUnauthorized,
+  EmptyStateFilter,
+  EmptyStateNoData,
 } from '../../components';
 
 import { ImportModal } from './import-modal/import-modal';
 
-import { ParamHelper, getRepoUrl } from '../../utilities';
+import { ParamHelper, getRepoUrl, filterIsSet } from '../../utilities';
 import { Paths, formatPath } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
 
@@ -124,6 +127,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     const repositoryUrl = getRepoUrl('inbound-' + namespace.name);
 
+    const noData = itemCount === 0 && !filterIsSet(params, ['keywords']);
+
     return (
       <React.Fragment>
         <ImportModal
@@ -170,23 +175,41 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           pageControls={this.renderPageControls()}
         ></PartnerHeader>
         <Main>
-          <Section className='body'>
-            {tab.toLowerCase() === 'collections' ? (
-              <CollectionList
-                updateParams={params =>
-                  this.updateParams(params, () => this.loadCollections())
+          {tab.toLowerCase() === 'collections' ? (
+            noData ? (
+              <EmptyStateNoData
+                title={'No collections yet'}
+                description={'Collections will appear once uploaded'}
+                button={
+                  this.props.showControls && (
+                    <Button
+                      onClick={() => this.setState({ showImportModal: true })}
+                    >
+                      Upload collection
+                    </Button>
+                  )
                 }
-                params={params}
-                collections={collections}
-                itemCount={itemCount}
-                showControls={this.props.showControls}
-                handleControlClick={(id, action) =>
-                  this.handleCollectionAction(id, action)
-                }
-                repo={this.context.selectedRepo}
               />
-            ) : null}
-            {tab.toLowerCase() === 'cli configuration' ? (
+            ) : (
+              <Section className='body'>
+                <CollectionList
+                  updateParams={params =>
+                    this.updateParams(params, () => this.loadCollections())
+                  }
+                  params={params}
+                  collections={collections}
+                  itemCount={itemCount}
+                  showControls={this.props.showControls}
+                  handleControlClick={(id, action) =>
+                    this.handleCollectionAction(id, action)
+                  }
+                  repo={this.context.selectedRepo}
+                />
+              </Section>
+            )
+          ) : null}
+          {tab.toLowerCase() === 'cli configuration' ? (
+            <Section className='body'>
               <div>
                 <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
                 <div>
@@ -202,11 +225,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   .
                 </div>
               </div>
-            ) : null}
-            {tab.toLowerCase() === 'resources'
-              ? this.renderResources(namespace)
-              : null}
-          </Section>
+            </Section>
+          ) : null}
+          {tab.toLowerCase() === 'resources'
+            ? this.renderResources(namespace)
+            : null}
         </Main>
       </React.Fragment>
     );
@@ -287,6 +310,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private renderPageControls() {
+    const { collections } = this.state;
     if (!this.props.showControls) {
       return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -296,9 +320,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     }
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Button onClick={() => this.setState({ showImportModal: true })}>
-          Upload collection
-        </Button>
+        {' '}
+        {collections.length !== 0 && (
+          <Button onClick={() => this.setState({ showImportModal: true })}>
+            Upload collection
+          </Button>
+        )}
         <APIButton style={{ marginLeft: '8px' }} />
         <StatefulDropdown
           items={[

@@ -7,16 +7,10 @@ import {
   ToolbarGroup,
   ToolbarItem,
   ToolbarContent,
-  EmptyState,
-  EmptyStateIcon,
-  Title,
-  EmptyStateBody,
-  EmptyStateVariant,
   Tooltip,
 } from '@patternfly/react-core';
 import { ExecutionEnvironmentAPI, ExecutionEnvironmentType } from '../../api';
-import { ParamHelper } from '../../utilities';
-import { WarningTriangleIcon } from '@patternfly/react-icons';
+import { filterIsSet, ParamHelper } from '../../utilities';
 import {
   CompoundFilter,
   LoadingPageSpinner,
@@ -28,6 +22,8 @@ import {
   AlertType,
   BaseHeader,
   Main,
+  EmptyStateFilter,
+  EmptyStateNoData,
 } from '../../components';
 
 interface IState {
@@ -75,7 +71,8 @@ class ExecutionEnvironmentList extends React.Component<
   }
 
   render() {
-    const { params, itemCount, loading, alerts } = this.state;
+    const { params, itemCount, loading, alerts, items } = this.state;
+    const noData = items.length === 0 && !filterIsSet(params, ['name']);
 
     if (!params['sort']) {
       params['sort'] = 'name';
@@ -88,62 +85,71 @@ class ExecutionEnvironmentList extends React.Component<
           closeAlert={i => this.closeAlert(i)}
         ></AlertList>
         <BaseHeader title='Container Registry'></BaseHeader>
-        <Main>
-          <Section className='body'>
-            <div className='toolbar'>
-              <Toolbar>
-                <ToolbarContent>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <CompoundFilter
-                        updateParams={p => {
-                          p['page'] = 1;
-                          this.updateParams(p, () => this.queryEnvironments());
-                        }}
-                        params={params}
-                        filterConfig={[
-                          {
-                            id: 'name',
-                            title: 'Container repository name',
-                          },
-                        ]}
-                      />
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                </ToolbarContent>
-              </Toolbar>
+        {noData ? (
+          <EmptyStateNoData
+            title={'No container registries'}
+            description={'Container registries will appear once uploaded'}
+          />
+        ) : (
+          <Main>
+            <Section className='body'>
+              <div className='toolbar'>
+                <Toolbar>
+                  <ToolbarContent>
+                    <ToolbarGroup>
+                      <ToolbarItem>
+                        <CompoundFilter
+                          updateParams={p => {
+                            p['page'] = 1;
+                            this.updateParams(p, () =>
+                              this.queryEnvironments(),
+                            );
+                          }}
+                          params={params}
+                          filterConfig={[
+                            {
+                              id: 'name',
+                              title: 'Container repository name',
+                            },
+                          ]}
+                        />
+                      </ToolbarItem>
+                    </ToolbarGroup>
+                  </ToolbarContent>
+                </Toolbar>
 
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryEnvironments())
-                }
-                count={itemCount}
-                isTop
-              />
-            </div>
-            <div>
-              <AppliedFilters
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryEnvironments())
-                }
-                params={params}
-                ignoredParams={['page_size', 'page', 'sort']}
-              />
-            </div>
-            {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryEnvironments())
+                  }
+                  count={itemCount}
+                  isTop
+                />
+              </div>
+              <div>
+                <AppliedFilters
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryEnvironments())
+                  }
+                  params={params}
+                  ignoredParams={['page_size', 'page', 'sort']}
+                />
+              </div>
+              {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
 
-            <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () => this.queryEnvironments())
-                }
-                count={itemCount}
-              />
-            </div>
-          </Section>
-        </Main>
+              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryEnvironments())
+                  }
+                  count={itemCount}
+                />
+              </div>
+            </Section>
+          </Main>
+        )}
       </React.Fragment>
     );
   }
@@ -151,17 +157,7 @@ class ExecutionEnvironmentList extends React.Component<
   private renderTable(params) {
     const { items } = this.state;
     if (items.length === 0) {
-      return (
-        <EmptyState className='empty' variant={EmptyStateVariant.full}>
-          <EmptyStateIcon icon={WarningTriangleIcon} />
-          <Title headingLevel='h2' size='lg'>
-            No matches
-          </Title>
-          <EmptyStateBody>
-            Please try adjusting your search query.
-          </EmptyStateBody>
-        </EmptyState>
-      );
+      return <EmptyStateFilter />;
     }
 
     let sortTableOptions = {
