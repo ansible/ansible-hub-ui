@@ -38,7 +38,7 @@ These are separate from the project's own dependencies. Run the following from t
 The tests need to know details about the instance of Automation Hub that it's running against. Create a file named `cypress.env.json` in the test/ directory, and use the below example as a template.
 
     {
-        "host":"http://localhost:8002/",
+        "baseUrl":"http://localhost:8002/",
         "prefix":"<api root>",
         "username": "<your username here>",
         "password": "<your password here>"
