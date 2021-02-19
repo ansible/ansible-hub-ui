@@ -87,7 +87,9 @@ Cypress.Commands.add('createUser', {}, (username, password = null, firstName = n
 });
 
 Cypress.Commands.add('createGroup', {}, (name) => {
+    cy.route('GET', Cypress.env('prefix') + '_ui/v1/groups/?sort=name&offset=0&limit=10').as('createGroup');
     cy.contains('#page-sidebar a', 'Groups').click();
+    cy.wait('@createGroup');
 
     cy.contains('Create').click();
 
