@@ -175,12 +175,12 @@ class ExecutionEnvironmentList extends React.Component<
         {
           title: 'Created',
           type: 'numeric',
-          id: 'pulp_created',
+          id: 'created',
         },
         {
           title: 'Last modified',
-          type: 'none',
-          id: 'pulp_modified',
+          type: 'alpha',
+          id: 'updated',
         },
       ],
     };
@@ -211,8 +211,8 @@ class ExecutionEnvironmentList extends React.Component<
         ) : (
           <td></td>
         )}
-        <td>{moment(item.pulp_created).fromNow()}</td>
-        <td>{moment(item.last_modified).fromNow()}</td>
+        <td>{moment(item.created).fromNow()}</td>
+        <td>{moment(item.updated).fromNow()}</td>
       </tr>
     );
   }
@@ -221,8 +221,8 @@ class ExecutionEnvironmentList extends React.Component<
     this.setState({ loading: true }, () =>
       ExecutionEnvironmentAPI.list(this.state.params).then(result =>
         this.setState({
-          items: result.data.results,
-          itemCount: result.data.count,
+          items: result.data.data,
+          itemCount: result.data.meta.count,
           loading: false,
         }),
       ),
