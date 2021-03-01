@@ -1,8 +1,9 @@
 @import '../../global-variables.scss';
 
 .truncated {
-  max-height: 1rem;
+  max-height: 3rem;
   text-overflow: ellipsis;
+  overflow: hidden;
 }
 .edit-button {
   float: right;

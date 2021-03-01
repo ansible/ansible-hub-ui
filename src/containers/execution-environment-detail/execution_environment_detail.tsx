@@ -33,7 +33,7 @@ import { Paths } from '../../paths';
 import { ImagesAPI } from '../../api';
 import { pickBy } from 'lodash';
 import * as moment from 'moment';
-import './execution-environment-deatil.scss';
+import './execution-environment-detail.scss';
 
 interface IState {
   loading: boolean;
@@ -112,7 +112,7 @@ class ExecutionEnvironmentDetail extends React.Component<
           }
         >
           <Popover bodyContent={description}>
-            <div className={''}>{description}</div>
+            <p className={'truncated'}>{description}</p>
           </Popover>
           <span />
           <div className='tab-link-container'>
