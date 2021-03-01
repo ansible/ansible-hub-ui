@@ -1,6 +1,6 @@
 describe('Repo Management tests', () => {
     let urljoin = require('url-join');
-    let baseUrl = Cypress.env('baseUrl');
+    let baseUrl = Cypress.config().baseUrl;
     let remoteRepoUrl = urljoin(baseUrl, 'ui/repositories?page_size=10&tab=remote');
     let adminUsername = Cypress.env('username');
     let adminPassword = Cypress.env('password');

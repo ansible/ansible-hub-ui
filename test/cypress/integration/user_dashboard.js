@@ -1,5 +1,5 @@
 describe('Hub User Management Tests', () => {
-    let baseUrl = Cypress.env('baseUrl');
+    let baseUrl = Cypress.config().baseUrl;
     let adminUsername = Cypress.env('username');
     let adminPassword = Cypress.env('password');
     let username = 'test';

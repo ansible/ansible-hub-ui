@@ -1,5 +1,5 @@
 describe('My Profile Tests', () => {
-    var baseUrl = Cypress.env('baseUrl');
+    var baseUrl = Cypress.config().baseUrl;
     var adminUsername = Cypress.env('username');
     var adminPassword = Cypress.env('password');
 
