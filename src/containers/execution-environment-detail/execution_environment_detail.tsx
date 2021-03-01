@@ -78,6 +78,7 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   componentDidMount() {
+    this.queryImages(this.state.container.name);
     this.setState({ loading: false });
   }
 
@@ -279,6 +280,17 @@ class ExecutionEnvironmentDetail extends React.Component<
               <Title headingLevel='h2' size='lg'>
                 Activity
               </Title>
+
+              <Pagination
+                params={params}
+                updateParams={p =>
+                  this.updateParams(p, () =>
+                    this.queryImages(this.state.container.name),
+                  )
+                }
+                count={1}
+                isTop
+              />
               <table aria-label='Images' className='content-table pf-c-table'>
                 <thead>
                   <tr aria-labelledby='headers'>
@@ -321,20 +333,17 @@ class ExecutionEnvironmentDetail extends React.Component<
                   </tr>
                 </tbody>
               </table>
-            </Section>
-          </FlexItem>
-        </Flex>
-
-        <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
-          <FlexItem>
-            <Section className='body card-area'>
-              {' '}
-              <Title headingLevel='h2' size='lg'>
-                Instructions
-              </Title>
-              <ClipboardCopy isCode isReadOnly variant={'expansion'}>
-                {instructions}
-              </ClipboardCopy>
+              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () =>
+                      this.queryImages(this.state.container.name),
+                    )
+                  }
+                  count={1}
+                />
+              </div>
             </Section>
           </FlexItem>
         </Flex>
@@ -393,7 +402,9 @@ class ExecutionEnvironmentDetail extends React.Component<
                 <ToolbarItem>
                   <CompoundFilter
                     updateParams={p =>
-                      this.updateParams(p, () => this.queryImages())
+                      this.updateParams(p, () =>
+                        this.queryImages(this.state.container.name),
+                      )
                     }
                     params={params}
                     filterConfig={[
@@ -409,8 +420,12 @@ class ExecutionEnvironmentDetail extends React.Component<
           </Toolbar>
           <Pagination
             params={params}
-            updateParams={p => this.updateParams(p, () => this.queryImages())}
-            count={1}
+            updateParams={p =>
+              this.updateParams(p, () =>
+                this.queryImages(this.state.container.name),
+              )
+            }
+            count={this.state.images.length}
             isTop
           />
         </div>
@@ -425,7 +440,11 @@ class ExecutionEnvironmentDetail extends React.Component<
           <SortTable
             options={sortTableOptions}
             params={params}
-            updateParams={p => this.updateParams(p, () => this.queryImages())}
+            updateParams={p =>
+              this.updateParams(p, () =>
+                this.queryImages(this.state.container.name),
+              )
+            }
           />
           <tbody>
             {images.map((image, i) => this.renderTableRow(image, i))}
@@ -434,8 +453,12 @@ class ExecutionEnvironmentDetail extends React.Component<
         <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
           <Pagination
             params={params}
-            updateParams={p => this.updateParams(p, () => this.queryImages())}
-            count={1}
+            updateParams={p =>
+              this.updateParams(p, () =>
+                this.queryImages(this.state.container.name),
+              )
+            }
+            count={this.state.images.length}
           />
         </div>
       </Section>
@@ -450,10 +473,14 @@ class ExecutionEnvironmentDetail extends React.Component<
             <Tag key={tag}>{tag}</Tag>
           ))}
         </td>
-        <td>{image.published}</td>
+        <td>{moment(image.pulp_created).fromNow()}</td>
         <td>{image.layers}</td>
         <td>{image.size}</td>
-        <td>{image.id}</td>
+        <td>
+          <Popover position={PopoverPosition.top} bodyContent={image.digest}>
+            <div>{image.digest.slice(0, 8)}</div>
+          </Popover>
+        </td>
         <td>
           <ClipboardCopy isCode isReadOnly variant={'expansion'}>
             Here goes instructions.{' '}
@@ -481,8 +508,28 @@ class ExecutionEnvironmentDetail extends React.Component<
     );
   }
 
-  queryImages() {
-    console.log('QUERY IMAGES');
+  queryImages(name) {
+    this.setState({ loading: true }, () =>
+      ImagesAPI.list(name).then(result => {
+        let images = [];
+        result.data.data.forEach(object => {
+          let image = pickBy(object, function(value, key) {
+            return ['digest', 'tags', 'pulp_created'].includes(key);
+          });
+          image['layers'] = object.layers.length;
+          let size = 0;
+          object.layers.forEach(layer => (size += layer.size));
+          image['size'] = size;
+          console.log(image);
+          console.log(object);
+          images.push(image);
+        });
+        this.setState({
+          images: images,
+          loading: false,
+        });
+      }),
+    );
   }
 
   private get updateParams() {
