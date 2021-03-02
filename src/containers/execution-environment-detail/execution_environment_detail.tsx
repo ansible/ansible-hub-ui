@@ -29,6 +29,10 @@ import {
   PopoverPosition,
   Button,
   Tooltip,
+  Modal,
+  FormGroup,
+  TextInput,
+  Form,
 } from '@patternfly/react-core';
 import { Paths } from '../../paths';
 import { ImagesAPI } from '../../api';
@@ -42,6 +46,7 @@ interface IState {
   images: any[];
   params: { id: string; tab: string; page?: number; page_size?: number };
   markdownEditing: boolean;
+  containerEditing: boolean;
 }
 
 class ExecutionEnvironmentDetail extends React.Component<
@@ -75,6 +80,7 @@ class ExecutionEnvironmentDetail extends React.Component<
         page_size: 1,
       },
       markdownEditing: false,
+      containerEditing: false,
     };
   }
 
@@ -84,7 +90,7 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   render() {
-    const { params } = this.state;
+    const { params, containerEditing } = this.state;
     const tabs = ['Detail', 'Activity', 'Images'];
     const description =
       'Hello everyone,\n' +
@@ -98,6 +104,7 @@ class ExecutionEnvironmentDetail extends React.Component<
       '          From my understanding, setting the config like below in the daemon.json should be enough to use specific subnets.';
     return (
       <React.Fragment>
+        {containerEditing ? this.renderEditModal() : null}
         <BaseHeader
           title={this.state.container.name}
           breadcrumbs={
@@ -111,6 +118,7 @@ class ExecutionEnvironmentDetail extends React.Component<
               ]}
             />
           }
+          pageControls={this.renderPageControls()}
         >
           <Tooltip content={description}>
             <p className={'truncated'}>{description}</p>
@@ -135,6 +143,100 @@ class ExecutionEnvironmentDetail extends React.Component<
     );
   }
 
+  renderPageControls() {
+    return (
+      <ToolbarItem>
+        <Button onClick={() => this.setState({ containerEditing: true })}>
+          Edit
+        </Button>
+      </ToolbarItem>
+    );
+  }
+
+  renderEditModal() {
+    return (
+      <Modal
+        variant='small'
+        onClose={() => this.setState({ containerEditing: false })}
+        isOpen={true}
+        title={'Edit image'}
+        actions={[
+          <Button
+            key='save'
+            variant='primary'
+            onClick={() => {
+              console.log('SAVE');
+              this.setState({ containerEditing: false });
+            }}
+          >
+            Save
+          </Button>,
+          <Button
+            key='cancel'
+            variant='link'
+            onClick={() => this.setState({ containerEditing: false })}
+          >
+            Cancel
+          </Button>,
+        ]}
+      >
+        <Form>
+          <FormGroup
+            isRequired={true}
+            key='username'
+            fieldId='username'
+            label='Username'
+          >
+            <TextInput
+              id='username'
+              value={'pppp'}
+              onChange={value => {}}
+              type='text'
+            />
+          </FormGroup>
+          <FormGroup
+            isRequired={true}
+            key='password'
+            fieldId='password'
+            label='Password'
+          >
+            <TextInput
+              id='poassword'
+              value={'ppppp'}
+              onChange={value => {}}
+              type='password'
+            />
+          </FormGroup>
+          <FormGroup
+            isRequired={true}
+            key='proxy_url'
+            fieldId='proxy_url'
+            label='Proxy URL'
+          >
+            <TextInput
+              id='proxy_url'
+              value={'ppppp'}
+              onChange={value => {}}
+              type='text'
+            />
+          </FormGroup>
+          <FormGroup
+            isRequired={true}
+            key='proxy_port'
+            fieldId='proxy_port'
+            label='Proxy port'
+          >
+            <TextInput
+              id='proxy_port'
+              value={'ppppp'}
+              onChange={value => {}}
+              type='text'
+            />
+          </FormGroup>
+        </Form>
+      </Modal>
+    );
+  }
   renderDetail() {
     const instructions =
       './compose down -v\n' +
