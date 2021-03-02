@@ -28,6 +28,7 @@ import {
   Popover,
   PopoverPosition,
   Button,
+  Tooltip,
 } from '@patternfly/react-core';
 import { Paths } from '../../paths';
 import { ImagesAPI } from '../../api';
@@ -111,9 +112,9 @@ class ExecutionEnvironmentDetail extends React.Component<
             />
           }
         >
-          <Popover bodyContent={description}>
+          <Tooltip content={description}>
             <p className={'truncated'}>{description}</p>
-          </Popover>
+          </Tooltip>
           <span />
           <div className='tab-link-container'>
             <div className='tabs'>
@@ -175,7 +176,7 @@ class ExecutionEnvironmentDetail extends React.Component<
             <MarkdownEditor
               text={this.state.container.readme}
               placeholder={this.state.markdownEditing ? 'Here goes README' : ''}
-              helperText={this.state.markdownEditing ? 'Please add README' : ''}
+              helperText={''}
               updateText={value =>
                 this.setState({
                   container: { name: this.state.container.name, readme: value },
