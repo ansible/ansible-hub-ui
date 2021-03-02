@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { GroupAPI } from '../../api';
+import { DeleteModal } from '../../components/delete-modal/delete-modal';
 import { filterIsSet, mapErrorMessages, ParamHelper } from '../../utilities';
 import {
   AlertList,
@@ -27,13 +28,11 @@ import {
 } from '../../components';
 import {
   Button,
-  Modal,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
 
@@ -242,41 +241,16 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderDeleteModal() {
+    const name = this.state.selectedGroup && this.state.selectedGroup.name;
+
     return (
-      <Modal
-        variant='small'
-        onClose={() => this.setState({ deleteModalVisible: false })}
-        isOpen={true}
-        title={''}
-        children={null}
-        header={
-          <span className='pf-c-content'>
-            <h2>
-              <ExclamationTriangleIcon
-                size='sm'
-                style={{ color: 'var(--pf-global--warning-color--100)' }}
-              />{' '}
-              Delete Group?
-            </h2>{' '}
-          </span>
-        }
-        actions={[
-          <Button
-            key='delete'
-            variant='danger'
-            onClick={() => this.selectedGroup(this.state.selectedGroup)}
-          >
-            Delete
-          </Button>,
-          <Button
-            key='cancel'
-            variant='link'
-            onClick={() => this.setState({ deleteModalVisible: false })}
-          >
-            Cancel
-          </Button>,
-        ]}
-      ></Modal>
+      <DeleteModal
+        cancelAction={() => this.setState({ deleteModalVisible: false })}
+        deleteAction={() => this.selectedGroup(this.state.selectedGroup)}
+        title='Delete group?'
+      >
+        <b>{name}</b> will be permanently deleted.
+      </DeleteModal>
     );
   }
 
