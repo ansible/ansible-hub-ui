@@ -40,6 +40,7 @@ import { Constants } from '../../constants';
 import * as moment from 'moment';
 import { InsightsUserType } from '../../api/response-types/user';
 import { AppContext } from '../../loaders/app-context';
+import { DeleteModal } from '../../components/delete-modal/delete-modal';
 
 interface IState {
   group: any;
@@ -52,6 +53,7 @@ interface IState {
   options: { id: number; name: string }[];
   selected: { id: number; name: string }[];
   editPermissions: boolean;
+  showDeleteModal: boolean;
   permissions: string[];
   originalPermissions: { id: number; name: string }[];
   loading: boolean;
@@ -94,6 +96,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       options: undefined,
       selected: [],
       editPermissions: false,
+      showDeleteModal: false,
       permissions: [],
       originalPermissions: [],
       loading: false,
@@ -117,7 +120,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { group, params, alerts, addModalVisible, loading } = this.state;
+    const {
+      addModalVisible,
+      alerts,
+      group,
+      loading,
+      params,
+      showDeleteModal,
+    } = this.state;
     const { user } = this.context;
 
     const tabs = ['Permissions'];
@@ -139,6 +149,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           closeAlert={i => this.closeAlert(i)}
         ></AlertList>
         {addModalVisible ? this.renderAddModal() : null}
+        {showDeleteModal ? this.renderDeleteModal() : null}
         <BaseHeader
           title={
             this.state.editPermissions && this.state.params.tab == 'permissions'
@@ -241,11 +252,21 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           Cancel
         </Button>
       </ToolbarItem>
-    ) : !!user && user.model_permissions.change_group ? (
+    ) : !!user ? (
       <ToolbarItem>
-        <Button onClick={() => this.setState({ editPermissions: true })}>
-          Edit
-        </Button>
+        {user.model_permissions.change_group ? (
+          <Button onClick={() => this.setState({ editPermissions: true })}>
+            Edit
+          </Button>
+        ) : null}{' '}
+        {user.model_permissions.delete_group ? (
+          <Button
+            onClick={() => this.setState({ showDeleteModal: true })}
+            variant='secondary'
+          >
+            Delete
+          </Button>
+        ) : null}
       </ToolbarItem>
     ) : null;
   }
@@ -417,6 +438,49 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           isDisabled={false}
         />
       </Modal>
+    );
+  }
+
+  private renderDeleteModal() {
+    const group = this.state.group;
+    const deleteAction = () => {
+      GroupAPI.delete(group.id)
+        .then(() => {
+          this.setState({
+            showDeleteModal: false,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'success',
+                title: null,
+                description: 'Successfully deleted group.',
+              },
+            ],
+          });
+          this.props.history.push(Paths.groupList);
+        })
+        .catch(() =>
+          this.setState({
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: null,
+                description: 'Error deleting group.',
+              },
+            ],
+          }),
+        );
+    };
+
+    return (
+      <DeleteModal
+        cancelAction={() => this.setState({ showDeleteModal: false })}
+        deleteAction={deleteAction}
+        title='Delete group?'
+      >
+        <b>{group.name}</b> will be permanently deleted.
+      </DeleteModal>
     );
   }
 
