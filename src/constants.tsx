@@ -125,6 +125,31 @@ export class Constants {
   static GROUP_HUMAN_PERMISSIONS = {
     change_namespace: 'Change namespace',
     upload_to_namespace: 'Upload to namespace',
+    'container.add_containernamespace': 'Create new execution environments',
+    'container.namespace_pull_containerdistribution':
+      'Pull private execution environments',
+    'container.namespace_change_containerdistribution':
+      'Change execution environments',
+    'container.namespace_view_containerdistribution':
+      'View private execution environments',
+    'container.namespace_modify_content_containerpushrepository':
+      'Change image tags',
+    'container.change_containernamespace':
+      'Change execution environment namespace permissions',
+    'container.namespace_push_containerdistribution':
+      'Push to existing execution environments',
+    'container.view_containernamespace': "View container's namespace",
+    'container.delete_containernamespace': "Delete container's namespace",
+    'container.namespace_delete_containerdistribution':
+      "Delete container's distribution",
+    'container.namespace_view_containerpushrepository':
+      "View container's repository",
+    'container.namespace_add_containerdistribution': 'Add distribution',
+    'container.change_containerdistribution': 'Change',
+    'container.delete_containerdistribution': 'Delete',
+    'container.push_containerdistribution': 'Push',
+    'container.pull_containerdistribution': 'Pull',
+    'container.view_containerdistribution': 'View',
   };
   static UPSTREAM_HOSTS = [
     'galaxy.ansible.com',

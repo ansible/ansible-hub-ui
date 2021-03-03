@@ -61,10 +61,12 @@ export class BaseAPI {
   }
 
   patch(id: string | number, data: any, apiPath?: string) {
+    console.log('PATCH');
     return this.http.patch(this.getPath(apiPath) + id + '/', data);
   }
 
   getPath(apiPath: string) {
+    console.log(apiPath || this.apiPath);
     return apiPath || this.apiPath;
   }
 

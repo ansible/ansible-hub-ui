@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Main, EmptyStateNoData, MarkdownEditor } from '../../components';
+import {
+  Main,
+  MarkdownEditor,
+  EmptyStateNoData,
+} from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   ClipboardCopy,
@@ -9,15 +14,27 @@ import {
   Title,
   Button,
 } from '@patternfly/react-core';
-import { ExecutionEnvironmentAPI } from '../../api';
 import './execution-environment-detail.scss';
 import { withContainerRepo, IDetailSharedProps } from './base';
+import {
+  ExecutionEnvironmentAPI,
+  GroupObjectPermissionType,
+  ExecutionEnvironmentNamespaceAPI,
+} from '../../api';
+import './execution-environment-detail.scss';
+import { RepositoryForm } from '../../components';
+import { ContainerDistributionAPI } from 'src/api/container-distribution';
 
 interface IState {
   loading: boolean;
   readme: string;
+  editing: boolean;
   markdownEditing: boolean;
   redirect: string;
+  distribution_id: string;
+  groups: GroupObjectPermissionType[];
+  description: string;
+  namespace: any;
 }
 
 class ExecutionEnvironmentDetail extends React.Component<
@@ -30,8 +47,13 @@ class ExecutionEnvironmentDetail extends React.Component<
     this.state = {
       loading: true,
       readme: '',
+      editing: false,
       markdownEditing: false,
       redirect: null,
+      distribution_id: '',
+      groups: [],
+      description: '',
+      namespace: {},
     };
   }
 
@@ -40,7 +62,30 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   render() {
-    return <Main>{this.renderDetail()}</Main>;
+    return <Main><RepositoryForm
+        name={this.props.match.params['container']}
+        selectedGroups={this.state.groups}
+        description={this.state.description}
+        onSave={(description, selectedGroups) => {
+            let promises = [];
+            promises.push(
+                ContainerDistributionAPI.patch(this.state.distribution_id, {
+                    description: description,
+                }),
+            );
+            promises.push(
+                ExecutionEnvironmentNamespaceAPI.update(
+                    this.state.namespace.name,
+                    { groups: selectedGroups },
+                ),
+            );
+
+            Promise.all(promises).then(() =>
+                this.setState({ editing: false, description: description }),
+            );
+        }}
+        onCancel={() => this.setState({ editing: false })}
+    />{this.renderDetail()}</Main>;
   }
 
   renderDetail() {

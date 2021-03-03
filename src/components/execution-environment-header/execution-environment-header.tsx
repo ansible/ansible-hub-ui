@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Tooltip } from '@patternfly/react-core';
+import { Tooltip, Button } from '@patternfly/react-core';
 import { Paths } from 'src/paths';
 import { BaseHeader, Breadcrumbs, Tabs } from 'src/components';
 import { ContainerRepositoryType } from 'src/api';
@@ -12,6 +12,7 @@ interface IProps {
 }
 
 export class ExecutionEnvironmentHeader extends React.Component<IProps> {
+
   render() {
     const tabs = ['Detail', 'Activity', 'Images'];
     return (
@@ -27,6 +28,15 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
               { name: this.props.container.name },
             ]}
           />
+        }
+        pageControls={
+          <Button
+            variant='primary'
+            onClick={() => this.props.updateState({ editing: true })}
+          >
+            {' '}
+            Edit{' '}
+          </Button>
         }
       >
         <Tooltip content={this.props.container.description}>
