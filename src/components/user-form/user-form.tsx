@@ -27,9 +27,6 @@ interface IProps {
   /** List of errors from the API */
   errorMessages: object;
 
-  /** List of fields to mark as required */
-  requiredFields?: string[];
-
   /** Disables the form */
   isReadonly?: boolean;
 
@@ -50,7 +47,6 @@ interface IState {
 export class UserForm extends React.Component<IProps, IState> {
   public static defaultProps = {
     isReadonly: false,
-    requiredFields: ['username', 'password'],
   };
 
   constructor(props) {
@@ -73,7 +69,6 @@ export class UserForm extends React.Component<IProps, IState> {
       isReadonly,
       saveUser,
       onCancel,
-      requiredFields,
       isNewUser,
       isMe,
     } = this.props;
@@ -90,6 +85,8 @@ export class UserForm extends React.Component<IProps, IState> {
         placeholder: isNewUser ? '' : '••••••••••••••••••••••',
       },
     ];
+    const requiredFields = ['username', ...(isNewUser ? ['password'] : [])];
+
     return (
       <Form>
         {formFields.map(v => (
@@ -125,6 +122,7 @@ export class UserForm extends React.Component<IProps, IState> {
           fieldId={'password-confirm'}
           label={'Password confirmation'}
           helperTextInvalid={'Passwords do not match'}
+          isRequired={isNewUser || !!user.password}
           validated={this.toError(
             this.isPassSame(user.password, passwordConfirm),
           )}
@@ -188,7 +186,7 @@ export class UserForm extends React.Component<IProps, IState> {
           <ActionGroup>
             <Button
               isDisabled={
-                !this.isPassSame(user.password, passwordConfirm) ||
+                !this.isPassValid(user.password, passwordConfirm) ||
                 !this.requiredFilled(user)
               }
               onClick={() => saveUser()}
@@ -242,8 +240,14 @@ export class UserForm extends React.Component<IProps, IState> {
     }
   }
 
+  // confirm is empty, or matches password
   private isPassSame(pass, confirm) {
-    return !pass || pass === '' || pass === confirm;
+    return !confirm || pass === confirm;
+  }
+
+  // both passwords missing, or both match
+  private isPassValid(pass, confirm) {
+    return !(pass || confirm) || pass === confirm;
   }
 
   private requiredFilled(user) {
