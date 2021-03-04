@@ -30,7 +30,10 @@ import {
   DropdownItem,
   Flex,
   FlexItem,
+  List,
+  ListItem,
   Modal,
+  Spinner,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -446,7 +449,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderGroupDeleteModal() {
-    const group = this.state.group;
+    const { group, users, itemCount } = this.state;
+
     const deleteAction = () => {
       GroupAPI.delete(group.id)
         .then(() => {
@@ -477,6 +481,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         );
     };
 
+    if (!users) {
+      this.queryUsers();
+    }
+
     return (
       <DeleteModal
         cancelAction={() => this.setState({ showDeleteModal: false })}
@@ -484,6 +492,27 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         title='Delete group?'
       >
         <b>{group.name}</b> will be permanently deleted.
+        <p>&nbsp;</p>
+        <div>
+          {users && itemCount > 0 && (
+            <>
+              <p>These users will lose access to the group content:</p>
+              <List>
+                {users.map(u => (
+                  <ListItem key={u.username}>
+                    <b>{u.username}</b>
+                  </ListItem>
+                ))}
+              </List>
+            </>
+          )}
+          {users && !itemCount && <p>No users will be affected.</p>}
+          {!users && (
+            <p>
+              Checking for affected users... <Spinner size='sm' />
+            </p>
+          )}
+        </div>
       </DeleteModal>
     );
   }
