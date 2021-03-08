@@ -493,7 +493,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <b>{group.name}</b> will be permanently deleted.
         <p>&nbsp;</p>
         <div>
-          {users && itemCount > 0 && (
+          {users && itemCount > 10 && (
+            <p>Deleting this group will affect {itemCount} users.</p>
+          )}
+          {users && itemCount > 0 && itemCount <= 10 && (
             <>
               <p>These users will lose access to the group content:</p>
               <List>
