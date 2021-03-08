@@ -29,17 +29,20 @@ import {
   PopoverPosition,
   Button,
   Tooltip,
+  Label,
 } from '@patternfly/react-core';
 import { Paths } from '../../paths';
-import { ImagesAPI } from '../../api';
+import { ImagesAPI, ActivitiesAPI } from '../../api';
 import { pickBy } from 'lodash';
 import * as moment from 'moment';
 import './execution-environment-detail.scss';
+import { TagIcon } from '@patternfly/react-icons';
 
 interface IState {
   loading: boolean;
   container: any;
   images: any[];
+  activities: any[];
   params: { id: string; tab: string; page?: number; page_size?: number };
   markdownEditing: boolean;
 }
@@ -67,6 +70,7 @@ class ExecutionEnvironmentDetail extends React.Component<
     this.state = {
       loading: true,
       images: [],
+      activities: [],
       container: { name: this.props.match.params['container'], readme: '' },
       params: {
         id: this.props.match.params['container'],
@@ -80,6 +84,7 @@ class ExecutionEnvironmentDetail extends React.Component<
 
   componentDidMount() {
     this.queryImages(this.state.container.name);
+    this.queryActivities(this.state.container.name);
     this.setState({ loading: false });
   }
 
@@ -272,79 +277,43 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   renderActivity() {
-    const { params } = this.state;
+    const { params, activities } = this.state;
     return (
       <Flex>
         <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
           <FlexItem>
-            <Section className='body card-area'>
-              <Title headingLevel='h2' size='lg'>
-                Activity
-              </Title>
-
-              <Pagination
-                params={params}
-                updateParams={p =>
-                  this.updateParams(p, () =>
-                    this.queryImages(this.state.container.name),
-                  )
-                }
-                count={1}
-                isTop
-              />
-              <table aria-label='Images' className='content-table pf-c-table'>
-                <thead>
-                  <tr aria-labelledby='headers'>
-                    <th>Change</th>
-                    <th>Date</th>
-                  </tr>
-                </thead>
+            <Section className='body'>
+              <table
+                aria-label='Activities'
+                className='content-table pf-c-table'
+              >
+                <SortTable
+                  options={{
+                    headers: [
+                      { title: 'Change', type: 'none', id: 'change' },
+                      { title: 'Date', type: 'none', id: 'date' },
+                    ],
+                  }}
+                  params={params}
+                  updateParams={() => {}}
+                />
                 <tbody>
-                  <tr>
-                    <th>Stuff</th>
-                    <th>2 days ago</th>
-                  </tr>
-                  <tr>
-                    <th>Stuff</th>
-                    <th>2 days ago</th>
-                  </tr>
-                  <tr>
-                    <th>Stuff</th>
-                    <th>2 days ago</th>
-                  </tr>
-                  <tr>
-                    <th>Stuff</th>
-                    <th>2 days ago</th>
-                  </tr>
-                  <tr>
-                    <th>Stuff</th>
-                    <th>2 days ago</th>
-                  </tr>
-                  <tr>
-                    <th>Stuff</th>
-                    <th>2 days ago</th>
-                  </tr>
-                  <tr>
-                    <th>Stuff</th>
-                    <th>2 days ago</th>
-                  </tr>
-                  <tr>
-                    <th>Stuff</th>
-                    <th>2 days ago</th>
-                  </tr>
+                  {activities.map((action, i) => {
+                    return (
+                      <tr key={i}>
+                        <th>{action.action}</th>
+                        <Tooltip
+                          content={moment(action.created).format(
+                            'MMMM Do YYYY',
+                          )}
+                        >
+                          <th>{moment(action.created).fromNow()}</th>
+                        </Tooltip>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
-              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                <Pagination
-                  params={params}
-                  updateParams={p =>
-                    this.updateParams(p, () =>
-                      this.queryImages(this.state.container.name),
-                    )
-                  }
-                  count={1}
-                />
-              </div>
             </Section>
           </FlexItem>
         </Flex>
@@ -471,10 +440,14 @@ class ExecutionEnvironmentDetail extends React.Component<
       <tr key={index}>
         <td>
           {image.tags.map(tag => (
-            <Tag key={tag}>{tag}</Tag>
+            <Label variant='outline' icon={<TagIcon />}>
+              {tag}
+            </Label>
           ))}
         </td>
-        <td>{moment(image.pulp_created).fromNow()}</td>
+        <Tooltip content={moment(image.pulp_created).format('MMMM Do YYYY')}>
+          <td>{moment(image.pulp_created).fromNow()}</td>
+        </Tooltip>
         <td>{image.layers}</td>
         <td>{image.size}</td>
         <td>
@@ -521,8 +494,6 @@ class ExecutionEnvironmentDetail extends React.Component<
           let size = 0;
           object.layers.forEach(layer => (size += layer.size));
           image['size'] = size;
-          console.log(image);
-          console.log(object);
           images.push(image);
         });
         this.setState({
@@ -531,6 +502,73 @@ class ExecutionEnvironmentDetail extends React.Component<
         });
       }),
     );
+  }
+
+  queryActivities(name) {
+    this.setState({ loading: true }, () => {
+      ActivitiesAPI.list(name).then(result => {
+        let activities = [];
+        result.data.data.forEach(activity => {
+          {
+            activity.added.forEach(action => {
+              let activityDescription;
+              if (action.pulp_type === 'container.tag') {
+                let removed = activity.removed.find(item => {
+                  return item.tag_name === action.tag_name;
+                });
+                if (!!removed) {
+                  activityDescription =
+                    action.tag_name +
+                    ' was moved to ' +
+                    action.manifest_digest +
+                    ' from ' +
+                    removed.manifest_digest;
+                } else {
+                  activityDescription =
+                    action.tag_name + ' was added to ' + action.manifest_digest;
+                }
+              } else {
+                activityDescription = action.manifest_digest + ' was added';
+              }
+              activities.push({
+                created: activity.pulp_created,
+                action: activityDescription,
+              });
+            });
+            activity.removed.forEach(action => {
+              let activityDescription;
+              if (action.pulp_type === 'container.tag') {
+                if (
+                  !activity.added.find(item => {
+                    return item.tag_name === action.tag_name;
+                  })
+                ) {
+                  activityDescription =
+                    action.tag_name +
+                    ' was removed from ' +
+                    action.manifest_digest;
+                } else {
+                  // skip one added as moved
+                  return;
+                }
+              } else {
+                activityDescription = action.manifest_digest + ' was removed';
+              }
+              activities.push({
+                created: activity.pulp_created,
+                action: activityDescription,
+              });
+            });
+          }
+        });
+        let lastActivity = activities[activities.length - 1];
+        activities.push({
+          created: lastActivity.created,
+          action: this.state.container.name + ' was added/created',
+        });
+        this.setState({ activities: activities });
+      });
+    });
   }
 
   private get updateParams() {
