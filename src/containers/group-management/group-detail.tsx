@@ -47,7 +47,13 @@ import { DeleteModal } from '../../components/delete-modal/delete-modal';
 
 interface IState {
   group: any;
-  params: { id: string; tab: string; page?: number; page_size?: number };
+  params: {
+    id: string;
+    page?: number;
+    page_size?: number;
+    sort?: string;
+    tab: string;
+  };
   users: UserType[];
   allUsers: UserType[];
   itemCount: number;
@@ -76,23 +82,16 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       'page_size',
     ]);
 
-    if (!params['page_size']) {
-      params['page_size'] = 10;
-    }
-
-    if (!params['tab']) {
-      params['tab'] = 'permissions';
-    }
-
     this.state = {
       group: null,
       users: null,
       allUsers: null,
       params: {
         id: id,
-        tab: params['tab'],
         page: 0,
-        page_size: params['page_size'],
+        page_size: params['page_size'] || 10,
+        sort: params['sort'] || 'username',
+        tab: params['tab'] || 'permissions',
       },
       itemCount: 0,
       alerts: [],
@@ -565,9 +564,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const noData =
       itemCount === 0 &&
       !filterIsSet(params, ['username', 'first_name', 'last_name', 'email']);
-    if (!params['sort']) {
-      params['sort'] = 'username';
-    }
+
     if (noData) {
       return (
         <EmptyStateNoData
@@ -584,6 +581,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         />
       );
     }
+
     return (
       <Section className='body'>
         <div className='toolbar'>
@@ -749,7 +747,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     }).then(result =>
       this.setState({
         users: result.data.data,
-        itemCount: result.data.data.length,
+        itemCount: result.data.meta.count,
         addModalVisible: false,
         loading: false,
       }),
