@@ -30,10 +30,7 @@ import {
   DropdownItem,
   Flex,
   FlexItem,
-  List,
-  ListItem,
   Modal,
-  Spinner,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -43,6 +40,7 @@ import { Constants } from '../../constants';
 import * as moment from 'moment';
 import { InsightsUserType } from '../../api/response-types/user';
 import { AppContext } from '../../loaders/app-context';
+import { DeleteGroupModal } from './delete-group-modal';
 import { DeleteModal } from '../../components/delete-modal/delete-modal';
 
 interface IState {
@@ -485,37 +483,13 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     }
 
     return (
-      <DeleteModal
+      <DeleteGroupModal
+        count={itemCount}
         cancelAction={() => this.setState({ showDeleteModal: false })}
         deleteAction={deleteAction}
-        title='Delete group?'
-      >
-        <b>{group.name}</b> will be permanently deleted.
-        <p>&nbsp;</p>
-        <div>
-          {users && itemCount > 10 && (
-            <p>Deleting this group will affect {itemCount} users.</p>
-          )}
-          {users && itemCount > 0 && itemCount <= 10 && (
-            <>
-              <p>These users will lose access to the group content:</p>
-              <List>
-                {users.map(u => (
-                  <ListItem key={u.username}>
-                    <b>{u.username}</b>
-                  </ListItem>
-                ))}
-              </List>
-            </>
-          )}
-          {users && !itemCount && <p>No users will be affected.</p>}
-          {!users && (
-            <p>
-              Checking for affected users... <Spinner size='sm' />
-            </p>
-          )}
-        </div>
-      </DeleteModal>
+        name={group.name}
+        users={users}
+      />
     );
   }
 

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import { UserType, UserAPI } from '../../api';
 import { mapErrorMessages } from '../../utilities';
 import { AppContext } from '../../loaders/app-context';
