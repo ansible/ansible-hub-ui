@@ -241,6 +241,10 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
       return syncButton;
     }
 
+    if (remoteType === 'none' && remote.url) {
+      return syncButton;
+    }
+
     return configButton;
   }
 }
