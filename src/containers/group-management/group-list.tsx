@@ -7,7 +7,8 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { GroupAPI } from '../../api';
+import { GroupAPI, UserAPI, UserType } from '../../api';
+import { DeleteGroupModal } from './delete-group-modal';
 import { filterIsSet, mapErrorMessages, ParamHelper } from '../../utilities';
 import {
   AlertList,
@@ -27,13 +28,11 @@ import {
 } from '../../components';
 import {
   Button,
-  Modal,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from '../../loaders/app-context';
 
@@ -48,6 +47,8 @@ interface IState {
   alerts: AlertType[];
   groups: any[];
   createModalVisible: boolean;
+  deleteModalCount?: number;
+  deleteModalUsers?: UserType[];
   deleteModalVisible: boolean;
   editModalVisible: boolean;
   selectedGroup: any;
@@ -242,41 +243,42 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderDeleteModal() {
+    const name = this.state.selectedGroup && this.state.selectedGroup.name;
+    const { deleteModalUsers: users, deleteModalCount: count } = this.state;
+
+    if (!users) {
+      this.queryUsers();
+    }
+
     return (
-      <Modal
-        variant='small'
-        onClose={() => this.setState({ deleteModalVisible: false })}
-        isOpen={true}
-        title={''}
-        children={null}
-        header={
-          <span className='pf-c-content'>
-            <h2>
-              <ExclamationTriangleIcon
-                size='sm'
-                style={{ color: 'var(--pf-global--warning-color--100)' }}
-              />{' '}
-              Delete Group?
-            </h2>{' '}
-          </span>
-        }
-        actions={[
-          <Button
-            key='delete'
-            variant='danger'
-            onClick={() => this.selectedGroup(this.state.selectedGroup)}
-          >
-            Delete
-          </Button>,
-          <Button
-            key='cancel'
-            variant='link'
-            onClick={() => this.setState({ deleteModalVisible: false })}
-          >
-            Cancel
-          </Button>,
-        ]}
-      ></Modal>
+      <DeleteGroupModal
+        count={count}
+        cancelAction={() => this.hideDeleteModal()}
+        deleteAction={() => this.selectedGroup(this.state.selectedGroup)}
+        name={name}
+        users={users}
+      />
+    );
+  }
+
+  private hideDeleteModal() {
+    this.setState({
+      deleteModalCount: null,
+      deleteModalUsers: null,
+      deleteModalVisible: false,
+    });
+  }
+
+  private queryUsers() {
+    UserAPI.list({
+      groups__name: this.state.selectedGroup.name,
+      page: 0,
+      page_size: 10,
+    }).then(result =>
+      this.setState({
+        deleteModalUsers: result.data.data,
+        deleteModalCount: result.data.meta.count,
+      }),
     );
   }
 
@@ -400,10 +402,10 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private selectedGroup(group) {
     GroupAPI.delete(group.id)
       .then(() => {
+        this.hideDeleteModal();
         this.setState({
           loading: true,
           selectedGroup: null,
-          deleteModalVisible: false,
           alerts: [
             ...this.state.alerts,
             {

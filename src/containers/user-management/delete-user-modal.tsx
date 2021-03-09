@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Modal, Button, Spinner } from '@patternfly/react-core';
-import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import { UserType, UserAPI } from '../../api';
 import { mapErrorMessages } from '../../utilities';
 import { AppContext } from '../../loaders/app-context';
+import { DeleteModal } from '../../components/delete-modal/delete-modal';
 
 interface IState {
   isWaitingForResponse: boolean;
@@ -28,43 +27,20 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
   render() {
     const { isOpen, user, closeModal } = this.props;
     const { isWaitingForResponse } = this.state;
-    if (!user) {
+    if (!user || !isOpen) {
       return null;
     }
+
     return (
-      <Modal
-        variant='small'
-        onClose={() => closeModal(false)}
-        isOpen={isOpen}
-        title={''}
-        aria-label='delete-user-confirmation'
-        header={
-          <span className='pf-c-content'>
-            <h2>
-              <ExclamationTriangleIcon
-                size='sm'
-                style={{ color: 'var(--pf-global--warning-color--100)' }}
-              />{' '}
-              Delete user?
-            </h2>{' '}
-          </span>
-        }
-        actions={[
-          <Button
-            isDisabled={isWaitingForResponse || this.isUserSelfOrAdmin(user)}
-            key='delete'
-            variant='danger'
-            onClick={() => this.deleteUser()}
-          >
-            Delete {isWaitingForResponse && <Spinner size='sm'></Spinner>}
-          </Button>,
-          <Button key='cancel' variant='link' onClick={() => closeModal(false)}>
-            Cancel
-          </Button>,
-        ]}
+      <DeleteModal
+        cancelAction={() => closeModal(false)}
+        deleteAction={() => this.deleteUser()}
+        isDisabled={isWaitingForResponse || this.isUserSelfOrAdmin(user)}
+        spinner={isWaitingForResponse}
+        title='Delete user?'
       >
         {this.getActionDescription(user)}
-      </Modal>
+      </DeleteModal>
     );
   }
 
@@ -75,7 +51,11 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
       return 'Deleting yourself is not allowed.';
     }
 
-    return `${user.username} will be permanently deleted.`;
+    return (
+      <>
+        <b>{user.username}</b> will be permanently deleted.
+      </>
+    );
   }
 
   private isUserSelfOrAdmin = (user: UserType): boolean => {

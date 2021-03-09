@@ -6,6 +6,9 @@
 # ide config
 .idea/
 
+# vim swap
+.*.sw[po]
+
 # dependencies
 node_modules
 

@@ -163,15 +163,16 @@ class App extends React.Component<RouteComponentProps, IState> {
 
     const Header = (
       <PageHeader
-        logo={
+        logo={<SmallLogo alt={APPLICATION_NAME}></SmallLogo>}
+        logoComponent={({ children }) => (
           <Link
             to={formatPath(Paths.searchByRepo, {
               repo: this.state.selectedRepo,
             })}
           >
-            <SmallLogo alt={APPLICATION_NAME}></SmallLogo>
+            {children}
           </Link>
-        }
+        )}
         headerTools={
           <PageHeaderTools>
             {!user ? (

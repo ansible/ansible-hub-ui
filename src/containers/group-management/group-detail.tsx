@@ -40,10 +40,18 @@ import { Constants } from '../../constants';
 import * as moment from 'moment';
 import { InsightsUserType } from '../../api/response-types/user';
 import { AppContext } from '../../loaders/app-context';
+import { DeleteGroupModal } from './delete-group-modal';
+import { DeleteModal } from '../../components/delete-modal/delete-modal';
 
 interface IState {
   group: any;
-  params: { id: string; tab: string; page?: number; page_size?: number };
+  params: {
+    id: string;
+    page?: number;
+    page_size?: number;
+    sort?: string;
+    tab: string;
+  };
   users: UserType[];
   allUsers: UserType[];
   itemCount: number;
@@ -52,6 +60,8 @@ interface IState {
   options: { id: number; name: string }[];
   selected: { id: number; name: string }[];
   editPermissions: boolean;
+  showDeleteModal: boolean;
+  showUserRemoveModal: UserType | null;
   permissions: string[];
   originalPermissions: { id: number; name: string }[];
   loading: boolean;
@@ -70,23 +80,16 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       'page_size',
     ]);
 
-    if (!params['page_size']) {
-      params['page_size'] = 10;
-    }
-
-    if (!params['tab']) {
-      params['tab'] = 'permissions';
-    }
-
     this.state = {
       group: null,
       users: null,
       allUsers: null,
       params: {
         id: id,
-        tab: params['tab'],
         page: 0,
-        page_size: params['page_size'],
+        page_size: params['page_size'] || 10,
+        sort: params['sort'] || 'username',
+        tab: params['tab'] || 'permissions',
       },
       itemCount: 0,
       alerts: [],
@@ -94,6 +97,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       options: undefined,
       selected: [],
       editPermissions: false,
+      showDeleteModal: false,
+      showUserRemoveModal: null,
       permissions: [],
       originalPermissions: [],
       loading: false,
@@ -117,7 +122,15 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { group, params, alerts, addModalVisible, loading } = this.state;
+    const {
+      addModalVisible,
+      alerts,
+      group,
+      loading,
+      params,
+      showDeleteModal,
+      showUserRemoveModal,
+    } = this.state;
     const { user } = this.context;
 
     const tabs = ['Permissions'];
@@ -139,6 +152,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           closeAlert={i => this.closeAlert(i)}
         ></AlertList>
         {addModalVisible ? this.renderAddModal() : null}
+        {showDeleteModal ? this.renderGroupDeleteModal() : null}
+        {showUserRemoveModal ? this.renderUserRemoveModal() : null}
         <BaseHeader
           title={
             this.state.editPermissions && this.state.params.tab == 'permissions'
@@ -241,11 +256,21 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           Cancel
         </Button>
       </ToolbarItem>
-    ) : !!user && user.model_permissions.change_group ? (
+    ) : !!user ? (
       <ToolbarItem>
-        <Button onClick={() => this.setState({ editPermissions: true })}>
-          Edit
-        </Button>
+        {user.model_permissions.change_group ? (
+          <Button onClick={() => this.setState({ editPermissions: true })}>
+            Edit
+          </Button>
+        ) : null}{' '}
+        {user.model_permissions.delete_group ? (
+          <Button
+            onClick={() => this.setState({ showDeleteModal: true })}
+            variant='secondary'
+          >
+            Delete
+          </Button>
+        ) : null}
       </ToolbarItem>
     ) : null;
   }
@@ -420,6 +445,69 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     );
   }
 
+  private renderGroupDeleteModal() {
+    const { group, users, itemCount } = this.state;
+
+    const deleteAction = () => {
+      GroupAPI.delete(group.id)
+        .then(() => {
+          this.setState({
+            showDeleteModal: false,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'success',
+                title: null,
+                description: 'Successfully deleted group.',
+              },
+            ],
+          });
+          this.props.history.push(Paths.groupList);
+        })
+        .catch(() =>
+          this.setState({
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: null,
+                description: 'Error deleting group.',
+              },
+            ],
+          }),
+        );
+    };
+
+    if (!users) {
+      this.queryUsers();
+    }
+
+    return (
+      <DeleteGroupModal
+        count={itemCount}
+        cancelAction={() => this.setState({ showDeleteModal: false })}
+        deleteAction={deleteAction}
+        name={group.name}
+        users={users}
+      />
+    );
+  }
+
+  private renderUserRemoveModal() {
+    const group = this.state.group;
+    const user = this.state.showUserRemoveModal as UserType;
+
+    return (
+      <DeleteModal
+        cancelAction={() => this.setState({ showUserRemoveModal: null })}
+        deleteAction={() => this.deleteUser(user)}
+        title='Remove user from group?'
+      >
+        <b>{user.username}</b> will be removed from <b>{group.name}</b>.
+      </DeleteModal>
+    );
+  }
+
   private addUserToGroup(selectedUsers, group) {
     const allPromises = [];
     selectedUsers.forEach(user => {
@@ -453,9 +541,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const noData =
       itemCount === 0 &&
       !filterIsSet(params, ['username', 'first_name', 'last_name', 'email']);
-    if (!params['sort']) {
-      params['sort'] = 'username';
-    }
+
     if (noData) {
       return (
         <EmptyStateNoData
@@ -472,6 +558,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         />
       );
     }
+
     return (
       <Section className='body'>
         <div className='toolbar'>
@@ -618,7 +705,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               items={[
                 <DropdownItem
                   key='delete'
-                  onClick={() => this.deleteUser(user)}
+                  onClick={() => this.setState({ showUserRemoveModal: user })}
                 >
                   Remove
                 </DropdownItem>,
@@ -629,6 +716,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       </tr>
     );
   }
+
   private queryUsers() {
     UserAPI.list({
       ...this.state.params,
@@ -636,16 +724,18 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     }).then(result =>
       this.setState({
         users: result.data.data,
-        itemCount: result.data.data.length,
+        itemCount: result.data.meta.count,
         addModalVisible: false,
         loading: false,
       }),
     );
   }
+
   private deleteUser(user) {
     user.groups = user.groups.filter(group => {
       return group.id != this.state.params.id;
     });
+
     UserAPI.update(user.id, user)
       .then(() => {
         this.setState({
@@ -657,6 +747,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               description: 'Successfully removed a user from a group.',
             },
           ],
+          showUserRemoveModal: null,
         });
         this.queryUsers();
       })
