@@ -7,7 +7,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { GroupAPI, UserAPI } from '../../api';
+import { GroupAPI, UserAPI, UserType } from '../../api';
 import { DeleteGroupModal } from './delete-group-modal';
 import { filterIsSet, mapErrorMessages, ParamHelper } from '../../utilities';
 import {
@@ -48,7 +48,7 @@ interface IState {
   groups: any[];
   createModalVisible: boolean;
   deleteModalCount?: number;
-  deleteModalUsers?: any[];
+  deleteModalUsers?: UserType[];
   deleteModalVisible: boolean;
   editModalVisible: boolean;
   selectedGroup: any;

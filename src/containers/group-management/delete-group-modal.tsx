@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { List, ListItem, Spinner } from '@patternfly/react-core';
 import { DeleteModal } from '../../components/delete-modal/delete-modal';
+import { UserType } from '../../api';
 
 interface IProps {
   count?: number;
   cancelAction: () => void;
   deleteAction: () => void;
   name: string;
-  users?: any[];
+  users?: UserType[];
 }
 
 export class DeleteGroupModal extends React.Component<IProps> {
