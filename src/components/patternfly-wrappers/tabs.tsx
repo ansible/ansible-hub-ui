@@ -13,22 +13,31 @@ interface IProps {
 
   /** Sets the current page params to p */
   updateParams: (params) => void;
+
+  /** Disables tab controls */
+  isDisabled?: boolean;
 }
 
 export class Tabs extends React.Component<IProps> {
   render() {
-    const { tabs, params, updateParams } = this.props;
+    const { tabs, params, updateParams, isDisabled } = this.props;
     return (
       <PFTabs
         activeKey={this.getActiveTab()}
         onSelect={(_, key) =>
+          !isDisabled &&
           updateParams(
             ParamHelper.setParam(params, 'tab', tabs[key].toLowerCase()),
           )
         }
       >
         {tabs.map((tab, i) => (
-          <Tab key={i} eventKey={i} title={tab} />
+          <Tab
+            key={i}
+            eventKey={i}
+            title={tab}
+            className={isDisabled ? 'disabled' : null}
+          />
         ))}
       </PFTabs>
     );

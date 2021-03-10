@@ -47,6 +47,11 @@
     flex-grow: 0;
   }
 
+  // Tabs isDisabled
+  .pf-c-tabs__item.disabled .pf-c-tabs__link {
+    cursor: not-allowed;
+  }
+
   .links {
     @media (min-width: $breakpoint-md) {
       justify-content: flex-end;
