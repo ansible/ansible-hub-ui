@@ -125,11 +125,13 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const {
       addModalVisible,
       alerts,
+      editPermissions,
       group,
       loading,
       params,
       showDeleteModal,
       showUserRemoveModal,
+      users,
     } = this.state;
     const { user } = this.context;
 
@@ -141,7 +143,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     if (!group || loading) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
-    if (this.state.params.tab == 'users' && !this.state.users) {
+    if (params.tab == 'users' && !users) {
       this.queryUsers();
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
@@ -156,7 +158,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         {showUserRemoveModal ? this.renderUserRemoveModal() : null}
         <BaseHeader
           title={
-            this.state.editPermissions && this.state.params.tab == 'permissions'
+            editPermissions && params.tab == 'permissions'
               ? 'Edit group permissions'
               : group.name
           }
@@ -181,12 +183,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           </div>
         </BaseHeader>
         <Main>
-          {this.state.params.tab == 'permissions'
-            ? this.renderPermissions()
-            : null}
-          {this.state.params.tab == 'users'
-            ? this.renderUsers(this.state.users)
-            : null}
+          {params.tab == 'permissions' ? this.renderPermissions() : null}
+          {params.tab == 'users' ? this.renderUsers(users) : null}
         </Main>
       </React.Fragment>
     );
