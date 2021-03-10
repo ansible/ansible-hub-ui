@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { resolve } = require('path');
 
 module.exports = {
   devtool: 'source-map',
@@ -56,5 +57,9 @@ module.exports = {
   resolve: {
     // changed from extensions: [".js", ".jsx"]
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    // imports relative to repo root
+    alias: {
+      src: resolve(__dirname, '../src'),
+    },
   },
 };
