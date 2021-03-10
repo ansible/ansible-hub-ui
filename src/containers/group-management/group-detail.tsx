@@ -301,7 +301,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                     )
                     .map(value =>
                       twoWayMapper(value, Constants.HUMAN_PERMISSIONS),
-                    )}
+                    )
+                    .sort()}
                   selectedPermissions={selectedPermissions
                     .filter(selected =>
                       group.object_permissions.find(perm => selected === perm),
