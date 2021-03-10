@@ -3,7 +3,29 @@
 These are the integration tests for Ansible Hub UI. Please run the tests before commiting or merging
 new UI functionality, or before changes to existing functionality.
 
-## Setup the Tests
+## Run the Tests in Docker
+
+To run the tests very quickly without any pre-requisite setup (other than Docker) simply do:
+
+    npm run test
+
+### Configuring the Test Container
+
+The test container, by default, runs tests against `http://localhost:8002/`, the default location a development environment for galaxy_ng.
+
+A `cypress.env.json` in your test directory will be copied into the container to configure your tests.
+
+The settings can be changed by setting these environment variables.
+
+    HUB_SERVER = "localhost:8002"
+    HUB_UI_LOCATION = "${SCRIPTDIR}/../"
+    CYPRESS_PREFIX = "/api/automation-hub/"
+    CYPRESS_BASE_URL = "http://localhost:8002"
+    CYPRESS_USERNAME = "admin"
+    CYPRESS_PASSWORD = "admin"
+
+
+## Setup the Tests Natively
 
 ### Install test dependencies
 
@@ -16,7 +38,7 @@ These are separate from the project's own dependencies. Run the following from t
 The tests need to know details about the instance of Automation Hub that it's running against. Create a file named `cypress.env.json` in the test/ directory, and use the below example as a template.
 
     {
-        "host":"http://localhost:8002/",
+        "baseUrl":"http://localhost:8002/",
         "prefix":"<api root>",
         "username": "<your username here>",
         "password": "<your password here>"
@@ -24,7 +46,7 @@ The tests need to know details about the instance of Automation Hub that it's ru
 
 *note*: the api root for the docker development environment of ansible/galaxy_ng is `api/automation-hub/`.
 
-## Run the Tests
+## Run the Tests Directly
 
 Tests must be run from inside the test/ directory.
 
