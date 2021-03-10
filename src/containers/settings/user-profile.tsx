@@ -9,11 +9,11 @@ import {
   AlertType,
   AlertList,
   closeAlertMixin,
-} from '../../components';
-import { UserType, ActiveUserAPI } from '../../api';
-import { Paths } from '../../paths';
-import { mapErrorMessages } from '../../utilities';
-import { AppContext } from '../../loaders/app-context';
+} from 'src/components';
+import { UserType, ActiveUserAPI } from 'src/api';
+import { Paths } from 'src/paths';
+import { mapErrorMessages } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   user: UserType;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 // had to declare *.svg in src/index.d.ts
-import DefaultLogo from '../../../static/images/default-logo.svg';
+import DefaultLogo from 'src/../static/images/default-logo.svg';
 
 interface IProps {
   // size should be css length measurment: '100px'

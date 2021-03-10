@@ -7,9 +7,9 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { GroupAPI, UserAPI, UserType } from '../../api';
+import { GroupAPI, UserAPI, UserType } from 'src/api';
 import { DeleteGroupModal } from './delete-group-modal';
-import { filterIsSet, mapErrorMessages, ParamHelper } from '../../utilities';
+import { filterIsSet, mapErrorMessages, ParamHelper } from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -25,7 +25,7 @@ import {
   Main,
   Pagination,
   SortTable,
-} from '../../components';
+} from 'src/components';
 import {
   Button,
   Toolbar,
@@ -33,8 +33,8 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { formatPath, Paths } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+import { formatPath, Paths } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   params: {

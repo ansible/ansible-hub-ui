@@ -8,11 +8,11 @@ import {
   CollectionContentList,
   LoadingPageWithHeader,
   Main,
-} from '../../components';
+} from 'src/components';
 import { loadCollection, IBaseCollectionState } from './base';
-import { ParamHelper } from '../../utilities/param-helper';
-import { formatPath, Paths } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { formatPath, Paths } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 
 // renders list of contents in a collection
 class CollectionContent extends React.Component<

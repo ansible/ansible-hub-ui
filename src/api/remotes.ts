@@ -1,6 +1,6 @@
 import { HubAPI } from './hub';
 import { RemoteType } from '.';
-import { clearSetFieldsFromRequest } from '../utilities';
+import { clearSetFieldsFromRequest } from 'src/utilities';
 
 class API extends HubAPI {
   apiPath = this.getUIPath('remotes/');

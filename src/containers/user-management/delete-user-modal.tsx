@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { UserType, UserAPI } from '../../api';
-import { mapErrorMessages } from '../../utilities';
-import { AppContext } from '../../loaders/app-context';
-import { DeleteModal } from '../../components/delete-modal/delete-modal';
+import { UserType, UserAPI } from 'src/api';
+import { mapErrorMessages } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
+import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 interface IState {
   isWaitingForResponse: boolean;

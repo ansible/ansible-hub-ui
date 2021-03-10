@@ -4,7 +4,7 @@ import './header.scss';
 
 import { PageHeaderTitle } from '@redhat-cloud-services/frontend-components';
 
-import { Logo } from '../../components';
+import { Logo } from 'src/components';
 
 interface IProps {
   title: string;

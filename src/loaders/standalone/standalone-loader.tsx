@@ -25,14 +25,14 @@ import {
 } from '@patternfly/react-core';
 
 import { Routes } from './routes';
-import { Paths, formatPath } from '../../paths';
-import { ActiveUserAPI, UserType } from '../../api';
-import { SmallLogo, StatefulDropdown } from '../../components';
-import { AboutModalWindow } from '../../containers';
+import { Paths, formatPath } from 'src/paths';
+import { ActiveUserAPI, UserType } from 'src/api';
+import { SmallLogo, StatefulDropdown } from 'src/components';
+import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
-import { Constants } from '../../constants';
+import { Constants } from 'src/constants';
 import { QuestionCircleIcon } from '@patternfly/react-icons';
-import Logo from '../../../static/images/logo_large.svg';
+import Logo from 'src/../static/images/logo_large.svg';
 
 interface IState {
   user: UserType;

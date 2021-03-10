@@ -21,10 +21,10 @@ import {
   SortTable,
   StatefulDropdown,
   Tabs,
-} from '../../components';
-import { GroupAPI, UserAPI, UserType } from '../../api';
-import { filterIsSet, ParamHelper, twoWayMapper } from '../../utilities';
-import { formatPath, Paths } from '../../paths';
+} from 'src/components';
+import { GroupAPI, UserAPI, UserType } from 'src/api';
+import { filterIsSet, ParamHelper, twoWayMapper } from 'src/utilities';
+import { formatPath, Paths } from 'src/paths';
 import {
   Button,
   DropdownItem,
@@ -36,12 +36,12 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { Constants } from '../../constants';
+import { Constants } from 'src/constants';
 import * as moment from 'moment';
-import { InsightsUserType } from '../../api/response-types/user';
-import { AppContext } from '../../loaders/app-context';
+import { InsightsUserType } from 'src/api/response-types/user';
+import { AppContext } from 'src/loaders/app-context';
 import { DeleteGroupModal } from './delete-group-modal';
-import { DeleteModal } from '../../components/delete-modal/delete-modal';
+import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 interface IState {
   group: any;

@@ -3,18 +3,18 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 
-import { ImportAPI, ImportDetailType, ImportListType } from '../../api';
+import { ImportAPI, ImportDetailType, ImportListType } from 'src/api';
 import {
   CollectionHeader,
   LoadingPageWithHeader,
   ImportConsole,
   Main,
-} from '../../components';
+} from 'src/components';
 
 import { loadCollection, IBaseCollectionState } from './base';
-import { ParamHelper } from '../../utilities/param-helper';
-import { formatPath, Paths } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { formatPath, Paths } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState extends IBaseCollectionState {
   loadingImports: boolean;

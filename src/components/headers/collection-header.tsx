@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { FormSelect, FormSelectOption, Alert } from '@patternfly/react-core';
 
-import { BaseHeader, Breadcrumbs, APIButton } from '../../components';
-import { CollectionDetailType } from '../../api';
-import { Paths, formatPath } from '../../paths';
-import { ParamHelper } from '../../utilities/param-helper';
+import { BaseHeader, Breadcrumbs, APIButton } from 'src/components';
+import { CollectionDetailType } from 'src/api';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper } from 'src/utilities/param-helper';
 
 interface IProps {
   collection: CollectionDetailType;

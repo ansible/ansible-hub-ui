@@ -9,7 +9,7 @@ import {
   ExclamationCircleIcon,
 } from '@patternfly/react-icons';
 
-import { PulpStatus } from '../../api';
+import { PulpStatus } from 'src/api';
 
 interface IProps {
   status: PulpStatus;

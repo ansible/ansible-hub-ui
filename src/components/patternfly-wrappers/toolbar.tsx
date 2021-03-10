@@ -13,8 +13,8 @@ import {
 
 import { SearchIcon } from '@patternfly/react-icons';
 
-import { ParamHelper } from '../../utilities/param-helper';
-import { Sort } from '../../components';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { Sort } from 'src/components';
 
 import { SortFieldType } from './sort';
 

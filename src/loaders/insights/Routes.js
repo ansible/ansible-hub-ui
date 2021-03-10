@@ -1,9 +1,9 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React from 'react';
-import asyncComponent from '../../utilities/asyncComponent';
+import asyncComponent from 'src/utilities/asyncComponent';
 import some from 'lodash/some';
-import { Paths } from '../../paths';
+import { Paths } from 'src/paths';
 
 /**
  * Aysnc imports of components

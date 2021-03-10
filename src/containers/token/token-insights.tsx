@@ -4,9 +4,9 @@ import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { ClipboardCopy, Button } from '@patternfly/react-core';
 
-import { Paths } from '../../paths';
-import { BaseHeader, Main } from '../../components';
-import { getRepoUrl } from '../../utilities';
+import { Paths } from 'src/paths';
+import { BaseHeader, Main } from 'src/components';
+import { getRepoUrl } from 'src/utilities';
 
 interface IState {
   tokenData: {

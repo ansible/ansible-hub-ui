@@ -17,9 +17,9 @@ import {
 import { SearchIcon } from '@patternfly/react-icons';
 import { Spinner } from '@redhat-cloud-services/frontend-components';
 
-import { PulpStatus, NamespaceType, ImportListType } from '../../api';
-import { ParamHelper } from '../../utilities/param-helper';
-import { Constants } from '../../constants';
+import { PulpStatus, NamespaceType, ImportListType } from 'src/api';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { Constants } from 'src/constants';
 import { EmptyStateNoData } from '..';
 
 interface IProps {

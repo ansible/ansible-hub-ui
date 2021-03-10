@@ -21,8 +21,8 @@ import {
 
 import { UserPlusIcon } from '@patternfly/react-icons';
 
-import { UserAPI, UserType } from '../../api';
-import { ParamHelper, filterIsSet } from '../../utilities';
+import { UserAPI, UserType } from 'src/api';
+import { ParamHelper, filterIsSet } from 'src/utilities';
 import {
   StatefulDropdown,
   CompoundFilter,
@@ -38,11 +38,11 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   EmptyStateFilter,
-} from '../../components';
+} from 'src/components';
 import { DeleteUserModal } from './delete-user-modal';
 
-import { Paths, formatPath } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   params: {

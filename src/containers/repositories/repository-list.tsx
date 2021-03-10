@@ -11,18 +11,18 @@ import {
   LocalRepositoryTable,
   RemoteForm,
   EmptyStateNoData,
-} from '../../components';
+} from 'src/components';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { ParamHelper, mapErrorMessages } from '../../utilities';
-import { Constants } from '../../constants';
+import { ParamHelper, mapErrorMessages } from 'src/utilities';
+import { Constants } from 'src/constants';
 import {
   RemoteAPI,
   RemoteType,
   DistributionAPI,
   MyDistributionAPI,
   DistributionType,
-} from '../../api';
-import { AppContext } from '../../loaders/app-context';
+} from 'src/api';
+import { AppContext } from 'src/loaders/app-context';
 
 export class Repository {
   name: string;

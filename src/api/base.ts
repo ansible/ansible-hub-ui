@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Constants } from '../constants';
-import { ParamHelper } from '../utilities';
+import { Constants } from 'src/constants';
+import { ParamHelper } from 'src/utilities';
 import * as Cookies from 'js-cookie';
 
 export class BaseAPI {

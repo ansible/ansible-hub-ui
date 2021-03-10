@@ -1,4 +1,4 @@
-import { Constants } from '../constants';
+import { Constants } from 'src/constants';
 import { HubAPI } from './hub';
 
 class API extends HubAPI {

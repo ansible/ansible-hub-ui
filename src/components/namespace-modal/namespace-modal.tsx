@@ -3,9 +3,9 @@ import { Modal, Tooltip } from '@patternfly/react-core';
 import { Form, FormGroup } from '@patternfly/react-core';
 import { Button, InputGroup, TextInput } from '@patternfly/react-core';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
-import { NamespaceAPI, GroupObjectPermissionType } from '../../api';
+import { NamespaceAPI, GroupObjectPermissionType } from 'src/api';
 
-import { HelperText, ObjectPermissionField } from '../../components';
+import { HelperText, ObjectPermissionField } from 'src/components';
 
 interface IProps {
   isOpen: boolean;

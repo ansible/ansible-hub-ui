@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LoadingPageWithHeader } from '../components';
+import { LoadingPageWithHeader } from 'src/components';
 
 /**
  * Webpack allows loading components asynchronously by using import().

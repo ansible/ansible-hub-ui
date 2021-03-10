@@ -23,17 +23,17 @@ import {
   AppliedFilters,
   EmptyStateFilter,
   EmptyStateNoData,
-} from '../../components';
+} from 'src/components';
 import {
   CollectionAPI,
   CollectionListType,
   SyncListType,
   MySyncListAPI,
-} from '../../api';
-import { ParamHelper } from '../../utilities/param-helper';
-import { Constants } from '../../constants';
-import { AppContext } from '../../loaders/app-context';
-import { filterIsSet } from '../../utilities';
+} from 'src/api';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
+import { filterIsSet } from 'src/utilities';
 
 interface IState {
   collections: CollectionListType[];

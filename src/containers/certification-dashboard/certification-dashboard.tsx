@@ -9,7 +9,7 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   Main,
-} from '../../components';
+} from 'src/components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
@@ -25,8 +25,8 @@ import {
   CheckCircleIcon,
 } from '@patternfly/react-icons';
 
-import { CollectionVersionAPI, CollectionVersion, TaskAPI } from '../../api';
-import { filterIsSet, ParamHelper } from '../../utilities';
+import { CollectionVersionAPI, CollectionVersion, TaskAPI } from 'src/api';
+import { filterIsSet, ParamHelper } from 'src/utilities';
 import {
   LoadingPageWithHeader,
   StatefulDropdown,
@@ -38,10 +38,10 @@ import {
   closeAlertMixin,
   AlertType,
   SortTable,
-} from '../../components';
-import { Paths, formatPath } from '../../paths';
-import { Constants } from '../../constants';
-import { AppContext } from '../../loaders/app-context';
+} from 'src/components';
+import { Paths, formatPath } from 'src/paths';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   params: {

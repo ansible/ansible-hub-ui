@@ -4,7 +4,7 @@ import './namespace-form.scss';
 import { Form, FormGroup, TextArea } from '@patternfly/react-core';
 import * as ReactMarkdown from 'react-markdown';
 
-import { NamespaceType } from '../../api';
+import { NamespaceType } from 'src/api';
 
 const placeholder = `## Custom resources
 
