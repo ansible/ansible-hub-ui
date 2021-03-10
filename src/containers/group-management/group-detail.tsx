@@ -181,16 +181,17 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           </div>
         </BaseHeader>
         <Main>
-          {this.state.params.tab == 'users'
-            ? this.renderUsers(this.state.users)
-            : null}
           {this.state.params.tab == 'permissions'
             ? this.renderPermissions()
+            : null}
+          {this.state.params.tab == 'users'
+            ? this.renderUsers(this.state.users)
             : null}
         </Main>
       </React.Fragment>
     );
   }
+
   private renderControls() {
     const { user } = this.context;
 
