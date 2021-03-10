@@ -312,7 +312,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                     )}
                   setSelected={perms => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
-                  isDisabled={!editPermissions}
+                  isViewOnly={!editPermissions}
                   onClear={() => {
                     const clearedPerms = group.object_permissions;
                     this.setState({
