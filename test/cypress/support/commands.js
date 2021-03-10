@@ -176,6 +176,7 @@ Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
     cy.contains('button', 'Users').click();
     cy.get(`[aria-labelledby=${userName}] [aria-label=Actions]`).click();
     cy.containsnear(`[aria-labelledby=${userName}] [aria-label=Actions]`, 'Remove').click();
+    cy.contains('button', 'Delete').click();
     cy.contains(userName).should('not.exist');
 });
 
