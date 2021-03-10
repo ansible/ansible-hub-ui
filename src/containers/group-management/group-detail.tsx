@@ -194,41 +194,23 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   private renderControls() {
     const { user } = this.context;
+    const { editPermissions } = this.state;
 
-    if (this.state.params.tab == 'users') {
+    if (!user || !user.model_permissions.delete_group) {
       return null;
     }
-    return this.state.editPermissions ? (
+
+    return (
       <ToolbarItem>
         <Button
-          onClick={this.actionSavePermissions}
+          isDisabled={editPermissions}
+          onClick={() => this.setState({ showDeleteModal: true })}
+          variant='secondary'
         >
-          Save
-        </Button>
-        <Button
-          variant='link'
-          onClick={() => this.setState({ editPermissions: false })}
-        >
-          Cancel
+          Delete
         </Button>
       </ToolbarItem>
-    ) : !!user ? (
-      <ToolbarItem>
-        {user.model_permissions.change_group ? (
-          <Button onClick={() => this.setState({ editPermissions: true })}>
-            Edit
-          </Button>
-        ) : null}{' '}
-        {user.model_permissions.delete_group ? (
-          <Button
-            onClick={() => this.setState({ showDeleteModal: true })}
-            variant='secondary'
-          >
-            Delete
-          </Button>
-        ) : null}
-      </ToolbarItem>
-    ) : null;
+    );
   }
 
   private actionSavePermissions() {
@@ -277,9 +259,29 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   private renderPermissions() {
     const groups = Constants.PERMISSIONS;
-    const selectedPermissions = this.state.permissions;
+    const { editPermissions, permissions: selectedPermissions } = this.state;
+    const { user } = this.context;
+
     return (
       <Section className='body'>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          {!editPermissions && user.model_permissions.change_group && (
+            <Button onClick={() => this.setState({ editPermissions: true })}>
+              Edit
+            </Button>
+          )}
+          {editPermissions && (
+            <>
+              <Button onClick={() => this.actionSavePermissions()}>Save</Button>
+              <Button
+                variant='link'
+                onClick={() => this.setState({ editPermissions: false })}
+              >
+                Cancel
+              </Button>
+            </>
+          )}
+        </div>
         <div>
           {groups.map(group => (
             <Flex
@@ -310,7 +312,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                     )}
                   setSelected={perms => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
-                  isDisabled={!this.state.editPermissions}
+                  isDisabled={!editPermissions}
                   onClear={() => {
                     const clearedPerms = group.object_permissions;
                     this.setState({
