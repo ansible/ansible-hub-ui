@@ -1,10 +1,10 @@
 describe('My Profile Tests', () => {
-    var host = Cypress.env('host');
+    var baseUrl = Cypress.config().baseUrl;
     var adminUsername = Cypress.env('username');
     var adminPassword = Cypress.env('password');
 
     beforeEach(() => {
-        cy.visit(host);
+        cy.visit(baseUrl);
         cy.login(adminUsername, adminPassword);
         // open the dropdown labeled with the username and then...
         cy.get('[aria-label="user-dropdown"] button').click();

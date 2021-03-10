@@ -18,6 +18,7 @@
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
+  require('./console-logger').install(on)
 
   // in plugins file
   on('task', {

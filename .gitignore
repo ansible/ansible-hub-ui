@@ -20,5 +20,7 @@ yarn-error.log*
 coverage
 
 # testing
+test/cypress/screenshots/*
 test/cypress/videos/*
 test/cypress.env.json
+test/results
