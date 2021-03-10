@@ -201,52 +201,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     return this.state.editPermissions ? (
       <ToolbarItem>
         <Button
-          onClick={() => {
-            // Add permissions
-            this.state.permissions.forEach(permission => {
-              if (
-                !this.state.originalPermissions.find(p => p.name === permission)
-              ) {
-                GroupAPI.addPermission(this.state.group.id, {
-                  permission: permission,
-                }).catch(() =>
-                  this.setState({
-                    alerts: [
-                      ...this.state.alerts,
-                      {
-                        variant: 'danger',
-                        title: null,
-                        description:
-                          'Permission ' + permission + ' was not added',
-                      },
-                    ],
-                  }),
-                );
-              }
-            });
-            //Remove permissions
-            this.state.originalPermissions.forEach(original => {
-              if (!this.state.permissions.includes(original.name)) {
-                GroupAPI.removePermission(
-                  this.state.group.id,
-                  original.id,
-                ).catch(() =>
-                  this.setState({
-                    alerts: [
-                      ...this.state.alerts,
-                      {
-                        variant: 'danger',
-                        title: null,
-                        description:
-                          'Permission ' + original.name + ' was not removed.',
-                      },
-                    ],
-                  }),
-                );
-              }
-            });
-            this.setState({ editPermissions: false });
-          }}
+          onClick={this.actionSavePermissions}
         >
           Save
         </Button>
@@ -275,6 +230,51 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       </ToolbarItem>
     ) : null;
   }
+
+  private actionSavePermissions() {
+    const { group, originalPermissions, permissions } = this.state;
+
+    // Add permissions
+    permissions.forEach(permission => {
+      if (!originalPermissions.find(p => p.name === permission)) {
+        GroupAPI.addPermission(group.id, {
+          permission: permission,
+        }).catch(() =>
+          this.setState({
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: null,
+                description: `Permission ${permission} was not added`,
+              },
+            ],
+          }),
+        );
+      }
+    });
+
+    // Remove permissions
+    originalPermissions.forEach(original => {
+      if (!permissions.includes(original.name)) {
+        GroupAPI.removePermission(group.id, original.id).catch(() =>
+          this.setState({
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: null,
+                description: `Permission ${original.name} was not removed.`,
+              },
+            ],
+          }),
+        );
+      }
+    });
+
+    this.setState({ editPermissions: false });
+  }
+
   private renderPermissions() {
     const groups = Constants.PERMISSIONS;
     const selectedPermissions = this.state.permissions;
