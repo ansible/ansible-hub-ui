@@ -26,10 +26,12 @@ import { GroupAPI, UserAPI, UserType } from '../../api';
 import { filterIsSet, ParamHelper, twoWayMapper } from '../../utilities';
 import { formatPath, Paths } from '../../paths';
 import {
+  ActionGroup,
   Button,
   DropdownItem,
   Flex,
   FlexItem,
+  Form,
   Modal,
   Toolbar,
   ToolbarContent,
@@ -270,17 +272,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               Edit
             </Button>
           )}
-          {editPermissions && (
-            <>
-              <Button onClick={() => this.actionSavePermissions()}>Save</Button>
-              <Button
-                variant='link'
-                onClick={() => this.setState({ editPermissions: false })}
-              >
-                Cancel
-              </Button>
-            </>
-          )}
         </div>
         <div>
           {groups.map(group => (
@@ -344,6 +335,24 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             </Flex>
           ))}
         </div>
+        {editPermissions && (
+          <Form>
+            <ActionGroup>
+              <Button
+                variant='primary'
+                onClick={() => this.actionSavePermissions()}
+              >
+                Save
+              </Button>
+              <Button
+                variant='secondary'
+                onClick={() => this.setState({ editPermissions: false })}
+              >
+                Cancel
+              </Button>
+            </ActionGroup>
+          </Form>
+        )}
       </Section>
     );
   }
