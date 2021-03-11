@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {
-  List,
-  ListItem,
-  ListVariant,
+  Label,
+  LabelGroup,
   Select,
   SelectOption,
   SelectVariant,
@@ -35,11 +34,11 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         ? this.props.selectedPermissions
         : [this.placeholderText()];
       return (
-        <List variant={ListVariant.inline}>
+        <LabelGroup>
           {items.map(text => (
-            <ListItem key={text}>{text}</ListItem>
+            <Label key={text}>{text}</Label>
           ))}
-        </List>
+        </LabelGroup>
       );
     }
 
