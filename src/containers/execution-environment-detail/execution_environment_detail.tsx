@@ -517,18 +517,31 @@ class ExecutionEnvironmentDetail extends React.Component<
                   return item.tag_name === action.tag_name;
                 });
                 if (!!removed) {
-                  activityDescription =
-                    action.tag_name +
-                    ' was moved to ' +
-                    action.manifest_digest +
-                    ' from ' +
-                    removed.manifest_digest;
+                  activityDescription = (
+                    <React.Fragment>
+                      <Label variant='outline' icon={<TagIcon />}>
+                        {action.tag_name}
+                      </Label>{' '}
+                      was moved to <Label>{action.manifest_digest}</Label> from
+                      <Label>{removed.manifest_digest}</Label>
+                    </React.Fragment>
+                  );
                 } else {
-                  activityDescription =
-                    action.tag_name + ' was added to ' + action.manifest_digest;
+                  activityDescription = (
+                    <React.Fragment>
+                      <Label variant='outline' icon={<TagIcon />}>
+                        {action.tag_name}
+                      </Label>{' '}
+                      was added to <Label>{action.manifest_digest}</Label>
+                    </React.Fragment>
+                  );
                 }
               } else {
-                activityDescription = action.manifest_digest + ' was added';
+                activityDescription = (
+                  <React.Fragment>
+                    <Label>{action.manifest_digest}</Label> was added
+                  </React.Fragment>
+                );
               }
               activities.push({
                 created: activity.pulp_created,
@@ -543,16 +556,24 @@ class ExecutionEnvironmentDetail extends React.Component<
                     return item.tag_name === action.tag_name;
                   })
                 ) {
-                  activityDescription =
-                    action.tag_name +
-                    ' was removed from ' +
-                    action.manifest_digest;
+                  activityDescription = (
+                    <React.Fragment>
+                      <Label variant='outline' icon={<TagIcon />}>
+                        {action.tag_name}
+                      </Label>{' '}
+                      was removed from <Label>{action.manifest_digest}</Label>
+                    </React.Fragment>
+                  );
                 } else {
                   // skip one added as moved
                   return;
                 }
               } else {
-                activityDescription = action.manifest_digest + ' was removed';
+                activityDescription = (
+                  <React.Fragment>
+                    <Label>{action.manifest_digest}</Label> was removed
+                  </React.Fragment>
+                );
               }
               activities.push({
                 created: activity.pulp_created,
@@ -564,7 +585,11 @@ class ExecutionEnvironmentDetail extends React.Component<
         let lastActivity = activities[activities.length - 1];
         activities.push({
           created: lastActivity.created,
-          action: this.state.container.name + ' was added/created',
+          action: (
+            <React.Fragment>
+              <b>{this.state.container.name}</b> was added
+            </React.Fragment>
+          ),
         });
         this.setState({ activities: activities });
       });
