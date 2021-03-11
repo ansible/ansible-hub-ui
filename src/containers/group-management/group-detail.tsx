@@ -176,6 +176,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             <div className='tabs'>
               <Tabs
                 isDisabled={editPermissions}
+                disabledTitle='Please finish editing permissions first.'
                 tabs={tabs}
                 params={params}
                 updateParams={p => this.updateParams(p)}

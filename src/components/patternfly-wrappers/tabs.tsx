@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Tab, Tabs as PFTabs } from '@patternfly/react-core';
+import { Tab, Tabs as PFTabs, TabTitleText } from '@patternfly/react-core';
 
 import { ParamHelper } from '../../utilities/param-helper';
 
@@ -16,11 +16,18 @@ interface IProps {
 
   /** Disables tab controls */
   isDisabled?: boolean;
+  disabledTitle?: string;
 }
 
 export class Tabs extends React.Component<IProps> {
   render() {
-    const { tabs, params, updateParams, isDisabled } = this.props;
+    const {
+      tabs,
+      params,
+      updateParams,
+      isDisabled,
+      disabledTitle,
+    } = this.props;
     return (
       <PFTabs
         activeKey={this.getActiveTab()}
@@ -35,7 +42,11 @@ export class Tabs extends React.Component<IProps> {
           <Tab
             key={i}
             eventKey={i}
-            title={tab}
+            title={
+              <TabTitleText title={isDisabled ? disabledTitle : null}>
+                {tab}
+              </TabTitleText>
+            }
             className={isDisabled ? 'disabled' : null}
           />
         ))}
