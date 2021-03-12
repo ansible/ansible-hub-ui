@@ -12,6 +12,7 @@ import {
   StatefulDropdown,
   Tabs,
   Tag,
+  EmptyStateNoData,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { ParamHelper } from '../../utilities';
@@ -91,16 +92,7 @@ class ExecutionEnvironmentDetail extends React.Component<
   render() {
     const { params } = this.state;
     const tabs = ['Detail', 'Activity', 'Images'];
-    const description =
-      'Hello everyone,\n' +
-      '\n' +
-      '          First of all, thank you in advance for your help!\n' +
-      '\n' +
-      '          After running into some network issues with one of our machines running docker, we noticed that the bridge networks that are created (in an automated way or by using docker compose) may be assigned with a subnet that interferes with the one in our local network, and thus making some machine that has to be accessed from one of the container unreachable.\n' +
-      '\n' +
-      '          Therefore, I have seen that it should be possible to define custom subnet pools for bridge networks that do not specify subnet in their configuration. This would avoid conflict as explained above.\n' +
-      '\n' +
-      '          From my understanding, setting the config like below in the daemon.json should be enough to use specific subnets.';
+    const description = '';
     return (
       <React.Fragment>
         <BaseHeader
@@ -165,30 +157,35 @@ class ExecutionEnvironmentDetail extends React.Component<
           <Section className='body pf-c-content'>
             <Title headingLevel='h2' size='lg'>
               README
-              {!this.state.markdownEditing && (
+              {!this.state.markdownEditing && this.state.container.readme && (
                 <Button
                   className={'edit-button'}
                   variant={'primary'}
                   onClick={() => {
                     this.setState({ markdownEditing: true });
-                    console.log('Edit');
                   }}
                 >
                   Edit
                 </Button>
               )}
             </Title>
-            <MarkdownEditor
-              text={this.state.container.readme}
-              placeholder={this.state.markdownEditing ? 'Here goes README' : ''}
-              helperText={''}
-              updateText={value =>
-                this.setState({
-                  container: { name: this.state.container.name, readme: value },
-                })
-              }
-              editing={this.state.markdownEditing}
-            />
+            {!this.state.markdownEditing && !this.state.container.readme ?
+                <EmptyStateNoData title={"No README"}
+                                  description={"Add README file by using RAW MAkdown editor"}
+                                  button={<Button variant='primary' onClick={() => this.setState({ markdownEditing: true })}>Add</Button>}/> :
+                  <MarkdownEditor
+                      text={this.state.container.readme}
+                      placeholder={this.state.markdownEditing ? 'Here goes README' : ''}
+                      helperText={''}
+                      updateText={value =>
+                          this.setState({
+                            container: { name: this.state.container.name, readme: value },
+                          })
+                      }
+                      editing={this.state.markdownEditing}
+                  />
+                  }
+
             {this.state.markdownEditing && (
               <React.Fragment>
                 <Button
@@ -278,40 +275,43 @@ class ExecutionEnvironmentDetail extends React.Component<
 
   renderActivity() {
     const { params, activities } = this.state;
+    if (activities.length === 0) {
+      return (<EmptyStateNoData title={'No activities yet'} description={'Activities will appear once you push something'}/>)
+    }
     return (
       <Flex>
         <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
           <FlexItem>
             <Section className='body'>
               <table
-                aria-label='Activities'
-                className='content-table pf-c-table'
+                  aria-label='Activities'
+                  className='content-table pf-c-table'
               >
                 <SortTable
-                  options={{
-                    headers: [
-                      { title: 'Change', type: 'none', id: 'change' },
-                      { title: 'Date', type: 'none', id: 'date' },
-                    ],
-                  }}
-                  params={params}
-                  updateParams={() => {}}
+                    options={{
+                      headers: [
+                        { title: 'Change', type: 'none', id: 'change' },
+                        { title: 'Date', type: 'none', id: 'date' },
+                      ],
+                    }}
+                    params={params}
+                    updateParams={() => {}}
                 />
                 <tbody>
-                  {activities.map((action, i) => {
-                    return (
+                {activities.map((action, i) => {
+                  return (
                       <tr key={i}>
                         <th>{action.action}</th>
                         <Tooltip
-                          content={moment(action.created).format(
-                            'MMMM Do YYYY',
-                          )}
+                            content={moment(action.created).format(
+                                'MMMM Do YYYY',
+                            )}
                         >
                           <th>{moment(action.created).fromNow()}</th>
                         </Tooltip>
                       </tr>
-                    );
-                  })}
+                  );
+                })}
                 </tbody>
               </table>
             </Section>
@@ -323,6 +323,9 @@ class ExecutionEnvironmentDetail extends React.Component<
 
   renderImages() {
     const { params, images } = this.state;
+    if (images.length === 0) {
+      return (<EmptyStateNoData title={'No images yet'} description={'Images will appear once uploaded'} />)
+    }
     const sortTableOptions = {
       headers: [
         {
@@ -583,7 +586,8 @@ class ExecutionEnvironmentDetail extends React.Component<
           }
         });
         let lastActivity = activities[activities.length - 1];
-        activities.push({
+        if (!!lastActivity) {
+          activities.push({
           created: lastActivity.created,
           action: (
             <React.Fragment>
@@ -591,6 +595,7 @@ class ExecutionEnvironmentDetail extends React.Component<
             </React.Fragment>
           ),
         });
+        };
         this.setState({ activities: activities });
       });
     });
