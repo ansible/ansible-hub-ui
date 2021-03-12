@@ -1,11 +1,18 @@
 import * as React from 'react';
-import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
+import {
+  Label,
+  LabelGroup,
+  Select,
+  SelectOption,
+  SelectVariant,
+} from '@patternfly/react-core';
 
 interface IProps {
   availablePermissions: string[];
   selectedPermissions: string[];
   setSelected: (selected: string[]) => void;
   isDisabled?: boolean;
+  isViewOnly?: boolean;
   onSelect?: (event, selection) => void;
   onClear?: () => void;
   menuAppendTo?: 'parent' | 'inline';
@@ -22,6 +29,19 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
   }
 
   render() {
+    if (this.props.isViewOnly) {
+      const items = this.props.selectedPermissions.length
+        ? this.props.selectedPermissions
+        : [this.placeholderText()];
+      return (
+        <LabelGroup>
+          {items.map(text => (
+            <Label key={text}>{text}</Label>
+          ))}
+        </LabelGroup>
+      );
+    }
+
     return (
       <Select
         menuAppendTo={this.props.menuAppendTo}
@@ -53,7 +73,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
   }
 
   private placeholderText() {
-    if (!this.props.isDisabled) {
+    if (!this.props.isDisabled && !this.props.isViewOnly) {
       return 'Select permissions';
     }
     return this.props.selectedPermissions.length === 0 ? 'No permission' : '';
