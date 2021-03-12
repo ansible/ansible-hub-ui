@@ -169,22 +169,37 @@ class ExecutionEnvironmentDetail extends React.Component<
                 </Button>
               )}
             </Title>
-            {!this.state.markdownEditing && !this.state.container.readme ?
-                <EmptyStateNoData title={"No README"}
-                                  description={"Add README file by using RAW MAkdown editor"}
-                                  button={<Button variant='primary' onClick={() => this.setState({ markdownEditing: true })}>Add</Button>}/> :
-                  <MarkdownEditor
-                      text={this.state.container.readme}
-                      placeholder={this.state.markdownEditing ? 'Here goes README' : ''}
-                      helperText={''}
-                      updateText={value =>
-                          this.setState({
-                            container: { name: this.state.container.name, readme: value },
-                          })
-                      }
-                      editing={this.state.markdownEditing}
-                  />
-                  }
+            {!this.state.markdownEditing && !this.state.container.readme ? (
+              <EmptyStateNoData
+                title={'No README'}
+                description={'Add README file by using RAW MAkdown editor'}
+                button={
+                  <Button
+                    variant='primary'
+                    onClick={() => this.setState({ markdownEditing: true })}
+                  >
+                    Add
+                  </Button>
+                }
+              />
+            ) : (
+              <MarkdownEditor
+                text={this.state.container.readme}
+                placeholder={
+                  this.state.markdownEditing ? 'Here goes README' : ''
+                }
+                helperText={''}
+                updateText={value =>
+                  this.setState({
+                    container: {
+                      name: this.state.container.name,
+                      readme: value,
+                    },
+                  })
+                }
+                editing={this.state.markdownEditing}
+              />
+            )}
 
             {this.state.markdownEditing && (
               <React.Fragment>
@@ -276,42 +291,44 @@ class ExecutionEnvironmentDetail extends React.Component<
   renderActivity() {
     const { params, activities } = this.state;
     if (activities.length === 0) {
-      return (<EmptyStateNoData title={'No activities yet'} description={'Activities will appear once you push something'}/>)
+      return (
+        <EmptyStateNoData
+          title={'No activities yet'}
+          description={'Activities will appear once you push something'}
+        />
+      );
     }
     return (
       <Flex>
         <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
           <FlexItem>
             <Section className='body'>
-              <table
-                  aria-label='Activities'
-                  className='content-table pf-c-table'
-              >
+              <table aria-label='Activities' className='pf-c-table'>
                 <SortTable
-                    options={{
-                      headers: [
-                        { title: 'Change', type: 'none', id: 'change' },
-                        { title: 'Date', type: 'none', id: 'date' },
-                      ],
-                    }}
-                    params={params}
-                    updateParams={() => {}}
+                  options={{
+                    headers: [
+                      { title: 'Change', type: 'none', id: 'change' },
+                      { title: 'Date', type: 'none', id: 'date' },
+                    ],
+                  }}
+                  params={params}
+                  updateParams={() => {}}
                 />
                 <tbody>
-                {activities.map((action, i) => {
-                  return (
+                  {activities.map((action, i) => {
+                    return (
                       <tr key={i}>
                         <th>{action.action}</th>
                         <Tooltip
-                            content={moment(action.created).format(
-                                'MMMM Do YYYY',
-                            )}
+                          content={moment(action.created).format(
+                            'MMMM Do YYYY',
+                          )}
                         >
                           <th>{moment(action.created).fromNow()}</th>
                         </Tooltip>
                       </tr>
-                  );
-                })}
+                    );
+                  })}
                 </tbody>
               </table>
             </Section>
@@ -324,7 +341,12 @@ class ExecutionEnvironmentDetail extends React.Component<
   renderImages() {
     const { params, images } = this.state;
     if (images.length === 0) {
-      return (<EmptyStateNoData title={'No images yet'} description={'Images will appear once uploaded'} />)
+      return (
+        <EmptyStateNoData
+          title={'No images yet'}
+          description={'Images will appear once uploaded'}
+        />
+      );
     }
     const sortTableOptions = {
       headers: [
@@ -455,7 +477,7 @@ class ExecutionEnvironmentDetail extends React.Component<
         <td>{image.size}</td>
         <td>
           <Popover position={PopoverPosition.top} bodyContent={image.digest}>
-            <div>{image.digest.slice(0, 8)}</div>
+            <Label color='blue'>{image.digest.slice(0, 8)}</Label>
           </Popover>
         </td>
         <td>
@@ -525,8 +547,9 @@ class ExecutionEnvironmentDetail extends React.Component<
                       <Label variant='outline' icon={<TagIcon />}>
                         {action.tag_name}
                       </Label>{' '}
-                      was moved to <Label>{action.manifest_digest}</Label> from
-                      <Label>{removed.manifest_digest}</Label>
+                      was moved to{' '}
+                      <Label color='blue'>{action.manifest_digest}</Label> from
+                      <Label color='blue'>{removed.manifest_digest}</Label>
                     </React.Fragment>
                   );
                 } else {
@@ -535,14 +558,16 @@ class ExecutionEnvironmentDetail extends React.Component<
                       <Label variant='outline' icon={<TagIcon />}>
                         {action.tag_name}
                       </Label>{' '}
-                      was added to <Label>{action.manifest_digest}</Label>
+                      was added to{' '}
+                      <Label color='blue'>{action.manifest_digest}</Label>
                     </React.Fragment>
                   );
                 }
               } else {
                 activityDescription = (
                   <React.Fragment>
-                    <Label>{action.manifest_digest}</Label> was added
+                    <Label color='blue'>{action.manifest_digest}</Label> was
+                    added
                   </React.Fragment>
                 );
               }
@@ -564,7 +589,8 @@ class ExecutionEnvironmentDetail extends React.Component<
                       <Label variant='outline' icon={<TagIcon />}>
                         {action.tag_name}
                       </Label>{' '}
-                      was removed from <Label>{action.manifest_digest}</Label>
+                      was removed from{' '}
+                      <Label color='blue'>{action.manifest_digest}</Label>
                     </React.Fragment>
                   );
                 } else {
@@ -574,7 +600,8 @@ class ExecutionEnvironmentDetail extends React.Component<
               } else {
                 activityDescription = (
                   <React.Fragment>
-                    <Label>{action.manifest_digest}</Label> was removed
+                    <Label color='blue'>{action.manifest_digest}</Label> was
+                    removed
                   </React.Fragment>
                 );
               }
@@ -588,14 +615,14 @@ class ExecutionEnvironmentDetail extends React.Component<
         let lastActivity = activities[activities.length - 1];
         if (!!lastActivity) {
           activities.push({
-          created: lastActivity.created,
-          action: (
-            <React.Fragment>
-              <b>{this.state.container.name}</b> was added
-            </React.Fragment>
-          ),
-        });
-        };
+            created: lastActivity.created,
+            action: (
+              <React.Fragment>
+                {this.state.container.name} was added
+              </React.Fragment>
+            ),
+          });
+        }
         this.setState({ activities: activities });
       });
     });
