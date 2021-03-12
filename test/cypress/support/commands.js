@@ -116,6 +116,8 @@ Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
             cy.contains('button', permission).click();
         })
     });
+    // need to click outside dropdown to make save button clickable
+    cy.contains('Edit group permissions').click();
     cy.contains('button', 'Save').click();
 });
 

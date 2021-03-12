@@ -34,10 +34,17 @@ describe('Hub Group Management Tests', () => {
         cy.login(adminUsername, adminPassword);
         cy.createGroup(name);
         cy.contains(name).should('exist');
+
         cy.addAllPermissions(name);
-        permissionTypes.forEach(permGroup => cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}  [placeholder="No permission"]`).should('not.exist'));;
+        permissionTypes.forEach((permGroup) => {
+            cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}`).contains('span', 'No permission').should('not.exist');
+        });
+
         cy.removeAllPermissions(name);
-        permissionTypes.forEach(permGroup => cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}  [placeholder="No permission"]`).should('exist'));;
+        permissionTypes.forEach((permGroup) => {
+            cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}`).contains('span', 'No permission').should('exist');
+        });
+
         cy.deleteGroup(name);
         cy.contains(name).should('not.exist');
     });
