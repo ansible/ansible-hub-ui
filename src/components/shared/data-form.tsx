@@ -39,21 +39,24 @@ export class DataForm extends React.Component<IProps> {
         <FormGroup
           fieldId={field.id}
           helperTextInvalid={errorMessages[field.id]}
-          isRequired={requiredFields.includes(field.id)}
+          isRequired={!isReadonly && requiredFields.includes(field.id)}
           key={field.id}
           label={field.title}
-          labelIcon={field.formGroupLabelIcon as any}
-          validated={validated}
+          labelIcon={!isReadonly && (field.formGroupLabelIcon as any)}
+          validated={isReadonly ? 'default' : validated}
         >
-          <TextInput
-            id={field.id}
-            isDisabled={isReadonly}
-            onChange={updateField}
-            placeholder={field.placeholder}
-            type={(field.type as any) || 'text'}
-            validated={validated}
-            value={model[field.id]}
-          />
+          {isReadonly ? (
+            model[field.id]
+          ) : (
+            <TextInput
+              id={field.id}
+              onChange={updateField}
+              placeholder={field.placeholder}
+              type={(field.type as any) || 'text'}
+              validated={validated}
+              value={model[field.id]}
+            />
+          )}
         </FormGroup>
       );
     });
