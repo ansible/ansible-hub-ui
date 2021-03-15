@@ -133,12 +133,7 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   renderDetail() {
-    const instructions =
-      './compose down -v\n' +
-      './compose up -d postgres redis\n' +
-      './compose run --rm api manage migrate\n' +
-      './compose run --rm -e PULP_FIXTURE_DIRS=\'["/src/galaxy_ng/dev/automation-hub"]\' api manage loaddata initial_data.json\n' +
-      './compose down';
+    const instructions = 'podman pull ' + this.state.container.name + ':latest';
 
     return (
       <Flex direction={{ default: 'column' }}>
@@ -461,6 +456,7 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   private renderTableRow(image: any, index: number) {
+    let instruction = image.tags.length === 0 ? image.digest : image.tags[0];
     return (
       <tr key={index}>
         <td>
@@ -482,7 +478,7 @@ class ExecutionEnvironmentDetail extends React.Component<
         </td>
         <td>
           <ClipboardCopy isCode isReadOnly variant={'expansion'}>
-            Here goes instructions.{' '}
+            {'podman pull ' + instruction}
           </ClipboardCopy>
         </td>
         <td>
