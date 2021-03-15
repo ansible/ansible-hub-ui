@@ -183,8 +183,8 @@ export class UserForm extends React.Component<IProps, IState> {
     );
 
     const formSuffix = [
-      passwordConfirmGroup,
-      isMe ? readonlyGroups : editGroups,
+      !isReadonly && passwordConfirmGroup,
+      isMe || isReadonly ? readonlyGroups : editGroups,
       user.is_superuser && superuserLabel,
       !isReadonly && formButtons,
     ];
