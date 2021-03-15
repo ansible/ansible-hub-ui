@@ -13,14 +13,14 @@ import {
   LoadingPageWithHeader,
   Main,
   EmptyStateCustom,
-} from '../../components';
+} from 'src/components';
 
 import { RenderPluginDoc } from '@ansible/galaxy-doc-builder';
 
 import { loadCollection, IBaseCollectionState } from './base';
-import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
-import { formatPath, Paths } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
+import { formatPath, Paths } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 

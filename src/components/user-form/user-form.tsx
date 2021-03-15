@@ -13,9 +13,9 @@ import {
 } from '@patternfly/react-core';
 import { UserPlusIcon } from '@patternfly/react-icons';
 
-import { APISearchTypeAhead, HelperText } from '../../components';
+import { APISearchTypeAhead, HelperText } from 'src/components';
 
-import { UserType, GroupAPI } from '../../api';
+import { UserType, GroupAPI } from 'src/api';
 
 interface IProps {
   /** User to edit */

@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { Section } from '@redhat-cloud-services/frontend-components';
 
-import { BaseHeader, Main, Breadcrumbs, UserForm } from '../../components';
-import { UserType } from '../../api';
+import { BaseHeader, Main, Breadcrumbs, UserForm } from 'src/components';
+import { UserType } from 'src/api';
 
 interface IProps {
   title: string;

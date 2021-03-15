@@ -1,17 +1,21 @@
 {
-    "compilerOptions": {
-        "outDir": "./dist/",
-        "sourceMap": true,
-        "strictNullChecks": false,
-        "module": "es6",
-        "jsx": "react",
-        "target": "es5",
-        "allowJs": true,
-        "lib": ["es2018", "dom"],
-        "moduleResolution": "node",
-        "noImplicitAny": false,
-        "allowSyntheticDefaultImports": true
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "jsx": "react",
+    "lib": ["es2018", "dom"],
+    "module": "es6",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "outDir": "./dist/",
+    "paths": {
+      "src/*": ["src/*"]
     },
-    "include": ["./src/"],
-    "exclude": ["node_modules"]
+    "sourceMap": true,
+    "strictNullChecks": false,
+    "target": "es5"
+  },
+  "include": ["./src/"],
+  "exclude": ["node_modules"]
 }

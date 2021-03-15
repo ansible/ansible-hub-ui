@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { Routes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
-import { ActiveUserAPI } from '../../api';
-import { Paths } from '../../paths';
+import { ActiveUserAPI } from 'src/api';
+import { Paths } from 'src/paths';
 
 const DEFAULT_REPO = 'published';
 

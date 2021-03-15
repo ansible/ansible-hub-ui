@@ -9,8 +9,8 @@ import {
   ToolbarContent,
   Tooltip,
 } from '@patternfly/react-core';
-import { ExecutionEnvironmentAPI, ExecutionEnvironmentType } from '../../api';
-import { filterIsSet, ParamHelper } from '../../utilities';
+import { ExecutionEnvironmentAPI, ExecutionEnvironmentType } from 'src/api';
+import { filterIsSet, ParamHelper } from 'src/utilities';
 import {
   CompoundFilter,
   LoadingPageSpinner,
@@ -24,7 +24,7 @@ import {
   Main,
   EmptyStateFilter,
   EmptyStateNoData,
-} from '../../components';
+} from 'src/components';
 
 interface IState {
   params: {

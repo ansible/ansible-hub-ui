@@ -14,13 +14,13 @@ import {
   ExpandableSection,
 } from '@patternfly/react-core';
 
-import { WriteOnlyField, HelperText } from '../../components';
+import { WriteOnlyField, HelperText } from 'src/components';
 
 import { DownloadIcon } from '@patternfly/react-icons';
 
-import { RemoteType, WriteOnlyFieldType } from '../../api';
-import { Constants } from '../../constants';
-import { isFieldSet } from '../../utilities';
+import { RemoteType, WriteOnlyFieldType } from 'src/api';
+import { Constants } from 'src/constants';
+import { isFieldSet } from 'src/utilities';
 
 interface IProps {
   updateRemote: (remote) => void;

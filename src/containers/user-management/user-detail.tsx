@@ -12,11 +12,11 @@ import {
   EmptyStateUnauthorized,
   BaseHeader,
   Breadcrumbs,
-} from '../../components';
-import { UserType, UserAPI } from '../../api';
-import { Paths, formatPath } from '../../paths';
+} from 'src/components';
+import { UserType, UserAPI } from 'src/api';
+import { Paths, formatPath } from 'src/paths';
 import { DeleteUserModal } from './delete-user-modal';
-import { AppContext } from '../../loaders/app-context';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   userDetail: UserType;

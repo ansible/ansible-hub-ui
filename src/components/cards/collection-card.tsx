@@ -13,11 +13,11 @@ import {
 
 import { Link } from 'react-router-dom';
 
-import { NumericLabel, Logo } from '../../components';
-import { CollectionListType } from '../../api';
-import { formatPath, Paths } from '../../paths';
-import { convertContentSummaryCounts } from '../../utilities';
-import { Constants } from '../../constants';
+import { NumericLabel, Logo } from 'src/components';
+import { CollectionListType } from 'src/api';
+import { formatPath, Paths } from 'src/paths';
+import { convertContentSummaryCounts } from 'src/utilities';
+import { Constants } from 'src/constants';
 
 interface IProps extends CollectionListType {
   className?: string;

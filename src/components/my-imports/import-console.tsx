@@ -6,17 +6,17 @@ import { Tooltip } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 import { Spinner } from '@redhat-cloud-services/frontend-components';
 
-import { formatPath, Paths } from '../../paths';
+import { formatPath, Paths } from 'src/paths';
 import {
   ImportListType,
   ImportDetailType,
   PulpStatus,
   CollectionVersion,
-} from '../../api';
+} from 'src/api';
 
-import { StatusIndicator } from '../../components';
+import { StatusIndicator } from 'src/components';
 
-import { Constants } from '../../constants';
+import { Constants } from 'src/constants';
 
 interface IProps {
   task: ImportDetailType;

@@ -4,10 +4,10 @@ import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { LoginForm, LoginPage as PFLoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
-import Logo from '../../../static/images/logo_large.svg';
-import { ParamHelper } from '../../utilities/';
-import { Paths } from '../../paths';
-import { ActiveUserAPI } from '../../api';
+import Logo from 'src/../static/images/logo_large.svg';
+import { ParamHelper } from 'src/utilities/';
+import { Paths } from 'src/paths';
+import { ActiveUserAPI } from 'src/api';
 
 interface IState {
   usernameValue: string;

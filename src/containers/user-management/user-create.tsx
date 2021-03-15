@@ -6,11 +6,11 @@ import {
   Breadcrumbs,
   EmptyStateUnauthorized,
   UserFormPage,
-} from '../../components';
-import { mapErrorMessages } from '../../utilities';
-import { UserType, UserAPI } from '../../api';
-import { Paths } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+} from 'src/components';
+import { mapErrorMessages } from 'src/utilities';
+import { UserType, UserAPI } from 'src/api';
+import { Paths } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   user: UserType;

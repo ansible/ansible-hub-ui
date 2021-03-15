@@ -12,18 +12,18 @@ import {
   AlertType,
   Main,
   EmptyStateUnauthorized,
-} from '../../components';
+} from 'src/components';
 import {
   MyNamespaceAPI,
   NamespaceType,
   ActiveUserAPI,
   NamespaceLinkType,
-} from '../../api';
+} from 'src/api';
 
 import { Form, ActionGroup, Button } from '@patternfly/react-core';
 
-import { Paths, formatPath } from '../../paths';
-import { ParamHelper, mapErrorMessages } from '../../utilities';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, mapErrorMessages } from 'src/utilities';
 
 interface IState {
   namespace: NamespaceType;

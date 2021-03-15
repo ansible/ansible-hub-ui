@@ -4,7 +4,7 @@ import './namespace-list.scss';
 import { RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 
-import { ParamHelper } from '../../utilities/param-helper';
+import { ParamHelper } from 'src/utilities/param-helper';
 import {
   BaseHeader,
   NamespaceCard,
@@ -15,14 +15,14 @@ import {
   LoadingPageSpinner,
   EmptyStateFilter,
   EmptyStateNoData,
-} from '../../components';
+} from 'src/components';
 import { Button } from '@patternfly/react-core';
 import { ToolbarItem } from '@patternfly/react-core';
-import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from '../../api';
-import { Paths, formatPath } from '../../paths';
-import { Constants } from '../../constants';
-import { AppContext } from '../../loaders/app-context';
-import { filterIsSet } from '../../utilities';
+import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
+import { Paths, formatPath } from 'src/paths';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
+import { filterIsSet } from 'src/utilities';
 
 interface IState {
   namespaces: NamespaceListType[];

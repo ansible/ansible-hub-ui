@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { List, ListItem, Spinner } from '@patternfly/react-core';
-import { DeleteModal } from '../../components/delete-modal/delete-modal';
-import { UserType } from '../../api';
+import { DeleteModal } from 'src/components/delete-modal/delete-modal';
+import { UserType } from 'src/api';
 
 interface IProps {
   count?: number;

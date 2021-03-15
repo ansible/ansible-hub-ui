@@ -26,11 +26,11 @@ import {
   GroupDetail,
   RepositoryList,
   ExecutionEnvironmentList,
-} from '../../containers';
-import { ActiveUserAPI } from '../../api';
+} from 'src/containers';
+import { ActiveUserAPI } from 'src/api';
 import { AppContext } from '../app-context';
 
-import { Paths, formatPath } from '../../paths';
+import { Paths, formatPath } from 'src/paths';
 
 interface IProps extends RouteComponentProps {
   Component: any;

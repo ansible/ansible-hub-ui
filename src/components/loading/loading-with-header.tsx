@@ -7,9 +7,9 @@ import {
   Section,
 } from '@redhat-cloud-services/frontend-components';
 
-import { Main } from '../../components';
+import { Main } from 'src/components';
 
-import { LoadingPageSpinner } from '../../components';
+import { LoadingPageSpinner } from 'src/components';
 
 export class LoadingPageWithHeader extends React.Component<{}> {
   render() {

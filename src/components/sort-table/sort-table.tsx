@@ -5,7 +5,7 @@ import {
   LongArrowAltDownIcon,
   ArrowsAltVIcon,
 } from '@patternfly/react-icons';
-import { ParamHelper } from '../../utilities';
+import { ParamHelper } from 'src/utilities';
 import './sort-table.scss';
 
 interface IProps {

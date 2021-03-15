@@ -3,7 +3,7 @@ import {
   CollectionDetailType,
   CollectionListType,
   CollectionUploadType,
-} from '../api';
+} from 'src/api';
 import axios from 'axios';
 
 export class API extends HubAPI {
