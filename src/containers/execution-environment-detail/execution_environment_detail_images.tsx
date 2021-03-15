@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './execution-environment-detail.scss';
 
-import * as moment from 'moment';
 import { pickBy } from 'lodash';
 import { ImagesAPI, ContainerManifestType } from '../../api';
 import { formatPath, Paths } from '../../paths';
@@ -17,7 +16,6 @@ import {
   ToolbarGroup,
   ToolbarItem,
   ClipboardCopy,
-  Tooltip,
   DropdownItem,
   LabelGroup,
 } from '@patternfly/react-core';
@@ -25,7 +23,6 @@ import {
 import {
   AppliedFilters,
   CompoundFilter,
-  Main,
   Pagination,
   SortTable,
   EmptyStateNoData,
@@ -36,6 +33,7 @@ import {
   AlertList,
   closeAlertMixin,
   AlertType,
+  DateComponent,
 } from '../../components';
 
 import { TagManifestModal } from './tag-manifest-modal';
@@ -300,9 +298,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             ))}
           </LabelGroup>
         </td>
-        <Tooltip content={moment(image.pulp_created).format('MMMM Do YYYY')}>
-          <td>{moment(image.pulp_created).fromNow()}</td>
-        </Tooltip>
+        <DateComponent date={image.pulp_created} isRow={true} />
         <td>{image.layers}</td>
         <td>{getHumanSize(image.size)}</td>
         <td>

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as moment from 'moment';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
@@ -24,8 +23,8 @@ import {
   Main,
   EmptyStateFilter,
   EmptyStateNoData,
+  DateComponent,
 } from 'src/components';
-
 import { formatPath, Paths } from '../../paths';
 
 interface IState {
@@ -224,8 +223,8 @@ class ExecutionEnvironmentList extends React.Component<
         ) : (
           <td></td>
         )}
-        <td>{moment(item.created).fromNow()}</td>
-        <td>{moment(item.updated).fromNow()}</td>
+        <DateComponent date={item.created} isRow={true} />
+        <DateComponent date={item.updated} isRow={true} />
       </tr>
     );
   }

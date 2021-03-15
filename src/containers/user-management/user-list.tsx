@@ -1,6 +1,4 @@
 import * as React from 'react';
-
-import * as moment from 'moment';
 import {
   withRouter,
   RouteComponentProps,
@@ -39,6 +37,7 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   EmptyStateFilter,
+  DateComponent,
 } from 'src/components';
 import { DeleteUserModal } from './delete-user-modal';
 
@@ -352,7 +351,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
             ))}
           </LabelGroup>
         </td>
-        <td>{moment(user.date_joined).fromNow()}</td>
+        <DateComponent date={user.date_joined} isRow={true} />
         <td>
           {dropdownItems.length > 0 ? (
             <StatefulDropdown items={dropdownItems}></StatefulDropdown>

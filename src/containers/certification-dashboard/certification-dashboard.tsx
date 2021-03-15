@@ -1,10 +1,9 @@
 import * as React from 'react';
 import './certification-dashboard.scss';
-
-import * as moment from 'moment';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   BaseHeader,
+  DateComponent,
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
@@ -333,7 +332,7 @@ class CertificationDashboard extends React.Component<
             {version.version}
           </Link>
         </td>
-        <td>{moment(version.created_at).fromNow()}</td>
+        <DateComponent date={version.created_at} isRow={true} />
         <td>{this.renderStatus(version)}</td>
         <td>
           <div className='control-column'>

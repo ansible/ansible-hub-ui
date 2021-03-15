@@ -1,11 +1,10 @@
 import * as React from 'react';
-import * as moment from 'moment';
 
 import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import { RemoteType, UserType, PulpStatus } from 'src/api';
-import { HelperText, SortTable, StatefulDropdown } from '..';
+import { DateComponent, HelperText, SortTable, StatefulDropdown } from '..';
 import { StatusIndicator } from 'src/components';
 
 import { Constants } from 'src/constants';
@@ -116,14 +115,19 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
       <tr key={i}>
         <td>{remote.name}</td>
         <td>{remote.repositories.map(r => r.name).join(', ')}</td>
-        <td>
-          {!!remote.updated_at ? moment(remote.updated_at).fromNow() : '---'}
-        </td>
-        <td>
-          {!!remote.last_sync_task && !!remote.last_sync_task.finished_at
-            ? moment(remote.last_sync_task.finished_at).fromNow()
-            : '---'}
-        </td>
+        {!!remote.updated_at ? (
+          <DateComponent date={remote.updated_at} isRow={true} />
+        ) : (
+          <td>{'---'}</td>
+        )}
+        {!!remote.last_sync_task && !!remote.last_sync_task.finished_at ? (
+          <DateComponent
+            date={remote.last_sync_task.finished_at}
+            isRow={true}
+          />
+        ) : (
+          <td>{'---'}</td>
+        )}
         <td>{this.renderStatus(remote)}</td>
         <td>
           {remote.repositories.length === 0 ? (

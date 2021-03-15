@@ -1,17 +1,16 @@
 import * as React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import {
-  Main,
   SortTable,
   EmptyStateNoData,
   ShaLabel,
   TagLabel,
+  DateComponent,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { FlexItem, Flex, Tooltip, Label } from '@patternfly/react-core';
+import { FlexItem, Flex } from '@patternfly/react-core';
 import { formatPath, Paths } from '../../paths';
 import { ActivitiesAPI } from '../../api';
-import * as moment from 'moment';
 import './execution-environment-detail.scss';
 
 import { withContainerRepo, IDetailSharedProps } from './base';
@@ -74,14 +73,8 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   {activities.map((action, i) => {
                     return (
                       <tr key={i}>
-                        <th>{action.action}</th>
-                        <Tooltip
-                          content={moment(action.created).format(
-                            'MMMM Do YYYY',
-                          )}
-                        >
-                          <th>{moment(action.created).fromNow()}</th>
-                        </Tooltip>
+                        <td>{action.action}</td>
+                        <DateComponent date={action.created} isRow={true} />
                       </tr>
                     );
                   })}
