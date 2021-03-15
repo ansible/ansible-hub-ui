@@ -456,7 +456,10 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   private renderTableRow(image: any, index: number) {
-    let instruction = image.tags.length === 0 ? image.digest : image.tags[0];
+    let instruction =
+      image.tags.length === 0
+        ? image.digest
+        : this.state.container.name + ':' + image.tags[0];
     return (
       <tr key={index}>
         <td>
