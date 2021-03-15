@@ -78,7 +78,7 @@ export class UserForm extends React.Component<IProps, IState> {
       { id: 'first_name', title: 'First name' },
       { id: 'last_name', title: 'Last name' },
       { id: 'email', title: 'Email' },
-      {
+      !isReadonly && {
         id: 'password',
         title: 'Password',
         type: 'password',

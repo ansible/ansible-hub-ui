@@ -33,6 +33,10 @@ export class DataForm extends React.Component<IProps> {
     } = this.props;
 
     const fields = formFields.map(field => {
+      if (!field) {
+        return <></>;
+      }
+
       const validated = field.id in errorMessages ? 'error' : 'default';
 
       return (
