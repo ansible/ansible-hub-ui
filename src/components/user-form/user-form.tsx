@@ -74,10 +74,10 @@ export class UserForm extends React.Component<IProps, IState> {
     } = this.props;
     const { passwordConfirm } = this.state;
     const formFields = [
+      { id: 'username', title: 'Username' },
       { id: 'first_name', title: 'First name' },
       { id: 'last_name', title: 'Last name' },
       { id: 'email', title: 'Email' },
-      { id: 'username', title: 'Username' },
       {
         id: 'password',
         title: 'Password',
