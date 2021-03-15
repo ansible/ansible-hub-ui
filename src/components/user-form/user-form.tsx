@@ -94,12 +94,13 @@ export class UserForm extends React.Component<IProps, IState> {
     ];
     const requiredFields = ['username', ...(isNewUser ? ['password'] : [])];
 
-    const passwordConfirmGroup = (
+    const passwordConfirmGroup = () => (
       <FormGroup
-        fieldId={'password-confirm'}
-        label={'Password confirmation'}
-        helperTextInvalid={'Passwords do not match'}
+        fieldId='password-confirm'
+        helperTextInvalid='Passwords do not match'
         isRequired={isNewUser || !!user.password}
+        key='confirm-group'
+        label='Password confirmation'
         validated={this.toError(
           this.isPassSame(user.password, passwordConfirm),
         )}
@@ -110,7 +111,7 @@ export class UserForm extends React.Component<IProps, IState> {
             this.isPassSame(user.password, passwordConfirm),
           )}
           isDisabled={isReadonly}
-          id={'password-confirm'}
+          id='password-confirm'
           value={passwordConfirm}
           onChange={value => {
             this.setState({ passwordConfirm: value });
@@ -120,13 +121,13 @@ export class UserForm extends React.Component<IProps, IState> {
       </FormGroup>
     );
 
-    const readonlyGroups = (
-      <FormGroup fieldId={'groups'} label={'Groups'}>
+    const readonlyGroups = () => (
+      <FormGroup fieldId='groups' key='readonlyGroups' label='Groups'>
         {user.groups.length !== 0 && (
           <ChipGroup>
             {' '}
             {user.groups.map(group => (
-              <Chip isReadOnly cellPadding={'1px'}>
+              <Chip isReadOnly cellPadding={'1px'} key={group.name}>
                 {group.name}
               </Chip>
             ))}{' '}
@@ -135,11 +136,12 @@ export class UserForm extends React.Component<IProps, IState> {
       </FormGroup>
     );
 
-    const editGroups = (
+    const editGroups = () => (
       <FormGroup
         fieldId='groups'
-        label='Groups'
         helperTextInvalid={errorMessages['groups']}
+        key='editGroups'
+        label='Groups'
         validated={this.toError(!('groups' in errorMessages))}
       >
         <APISearchTypeAhead
@@ -156,7 +158,7 @@ export class UserForm extends React.Component<IProps, IState> {
     );
 
     const superuserLabel = (
-      <FormGroup fieldId='is_superuser' label='User type'>
+      <FormGroup fieldId='is_superuser' key='superuserLabel' label='User type'>
         <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
           <Label icon={<UserPlusIcon />} color='orange'>
             Super user
@@ -165,7 +167,7 @@ export class UserForm extends React.Component<IProps, IState> {
       </FormGroup>
     );
 
-    const formButtons = (
+    const formButtons = () => (
       <ActionGroup>
         <Button
           isDisabled={
@@ -183,10 +185,10 @@ export class UserForm extends React.Component<IProps, IState> {
     );
 
     const formSuffix = [
-      !isReadonly && passwordConfirmGroup,
-      isMe || isReadonly ? readonlyGroups : editGroups,
+      !isReadonly && passwordConfirmGroup(),
+      isMe || isReadonly ? readonlyGroups() : editGroups(),
       user.is_superuser && superuserLabel,
-      !isReadonly && formButtons,
+      !isReadonly && formButtons(),
     ];
 
     return (
