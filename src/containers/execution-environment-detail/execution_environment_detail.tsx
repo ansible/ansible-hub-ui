@@ -324,11 +324,6 @@ class ExecutionEnvironmentDetail extends React.Component<
           type: 'none',
           id: 'instructions',
         },
-        {
-          title: '',
-          type: 'none',
-          id: 'kebab',
-        },
       ],
     };
 
@@ -432,24 +427,6 @@ class ExecutionEnvironmentDetail extends React.Component<
           <ClipboardCopy isCode isReadOnly variant={'expansion'}>
             {'podman pull ' + instruction}
           </ClipboardCopy>
-        </td>
-        <td>
-          <StatefulDropdown
-            items={[
-              <DropdownItem
-                key='download'
-                onClick={() => console.log('Download manifest')}
-              >
-                Download manifest
-              </DropdownItem>,
-              <DropdownItem
-                key='manage'
-                onClick={() => console.log('Manage tags')}
-              >
-                Manage tags
-              </DropdownItem>,
-            ]}
-          ></StatefulDropdown>{' '}
         </td>
       </tr>
     );
