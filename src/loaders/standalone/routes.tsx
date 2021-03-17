@@ -28,7 +28,7 @@ import {
   ExecutionEnvironmentList,
   ExecutionEnvironmentDetail,
 } from 'src/containers';
-
+import { ActiveUserAPI } from 'src/api';
 import { AppContext } from '../app-context';
 
 import { Paths, formatPath } from 'src/paths';

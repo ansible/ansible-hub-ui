@@ -33,11 +33,7 @@ import {
   Label,
 } from '@patternfly/react-core';
 import { Paths } from '../../paths';
-import {
-  ImagesAPI,
-  ActivitiesAPI,
-  ExecutionEnvironmentAPI,
-} from '../../api';
+import { ImagesAPI, ActivitiesAPI, ExecutionEnvironmentAPI } from '../../api';
 import { pickBy } from 'lodash';
 import * as moment from 'moment';
 import './execution-environment-detail.scss';
