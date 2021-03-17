@@ -33,7 +33,11 @@ import {
   Label,
 } from '@patternfly/react-core';
 import { Paths } from '../../paths';
-import { ImagesAPI, ActivitiesAPI } from '../../api';
+import {
+  ImagesAPI,
+  ActivitiesAPI,
+  ExecutionEnvironmentAPI,
+} from '../../api';
 import { pickBy } from 'lodash';
 import * as moment from 'moment';
 import './execution-environment-detail.scss';
@@ -42,6 +46,7 @@ import { TagIcon } from '@patternfly/react-icons';
 interface IState {
   loading: boolean;
   container: any;
+  readme: string;
   images: any[];
   activities: any[];
   params: { id: string; tab: string; page?: number; page_size?: number };
@@ -72,7 +77,8 @@ class ExecutionEnvironmentDetail extends React.Component<
       loading: true,
       images: [],
       activities: [],
-      container: { name: this.props.match.params['container'], readme: '' },
+      container: { name: this.props.match.params['container'] },
+      readme: '',
       params: {
         id: this.props.match.params['container'],
         tab: params['tab'],
@@ -86,6 +92,7 @@ class ExecutionEnvironmentDetail extends React.Component<
   componentDidMount() {
     this.queryImages(this.state.container.name);
     this.queryActivities(this.state.container.name);
+    this.queryReadme(this.state.container.name);
     this.setState({ loading: false });
   }
 
@@ -152,7 +159,7 @@ class ExecutionEnvironmentDetail extends React.Component<
           <Section className='body pf-c-content'>
             <Title headingLevel='h2' size='lg'>
               README
-              {!this.state.markdownEditing && this.state.container.readme && (
+              {!this.state.markdownEditing && this.state.readme && (
                 <Button
                   className={'edit-button'}
                   variant={'primary'}
@@ -164,7 +171,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                 </Button>
               )}
             </Title>
-            {!this.state.markdownEditing && !this.state.container.readme ? (
+            {!this.state.markdownEditing && !this.state.readme ? (
               <EmptyStateNoData
                 title={'No README'}
                 description={'Add README file by using RAW MAkdown editor'}
@@ -179,17 +186,14 @@ class ExecutionEnvironmentDetail extends React.Component<
               />
             ) : (
               <MarkdownEditor
-                text={this.state.container.readme}
+                text={this.state.readme}
                 placeholder={
                   this.state.markdownEditing ? 'Here goes README' : ''
                 }
                 helperText={''}
                 updateText={value =>
                   this.setState({
-                    container: {
-                      name: this.state.container.name,
-                      readme: value,
-                    },
+                    readme: value,
                   })
                 }
                 editing={this.state.markdownEditing}
@@ -201,77 +205,22 @@ class ExecutionEnvironmentDetail extends React.Component<
                 <Button
                   variant={'primary'}
                   onClick={() =>
-                    this.setState({
-                      markdownEditing: false,
-                      container: {
-                        name: this.state.container.name,
-                        readme:
-                          '## Table of Contents\n' +
-                          '1. [General Info](#general-info)\n' +
-                          '2. [Technologies](#technologies)\n' +
-                          '3. [Installation](#installation)\n' +
-                          '4. [Collaboration](#collaboration)\n' +
-                          '5. [FAQs](#faqs)\n' +
-                          '### General Info\n' +
-                          '***\n' +
-                          'Write down general information about your project. It is a good idea to always put a project status in the readme file. This is where you can add it. \n' +
-                          '### Screenshot\n' +
-                          '![Image text](https://www.united-internet.de/fileadmin/user_upload/Brands/Downloads/Logo_IONOS_by.jpg)\n' +
-                          '## Technologies\n' +
-                          '***\n' +
-                          'A list of technologies used within the project:\n' +
-                          '* [Technology name](https://example.com): Version 12.3 \n' +
-                          '* [Technology name](https://example.com): Version 2.34\n' +
-                          '* [Library name](https://example.com): Version 1234\n' +
-                          '## Installation\n' +
-                          '***\n' +
-                          'A little intro about the installation. \n' +
-                          '```\n' +
-                          '$ git clone https://example.com\n' +
-                          '$ cd ../path/to/the/file\n' +
-                          '$ npm install\n' +
-                          '$ npm start\n' +
-                          '```\n' +
-                          'Side information: To use the application in a special environment use ```lorem ipsum``` to start\n' +
-                          '## Collaboration\n' +
-                          '***\n' +
-                          'Give instructions on how to collaborate with your project.\n' +
-                          '> Maybe you want to write a quote in this part. \n' +
-                          '> Should it encompass several lines?\n' +
-                          '> This is how you do it.\n' +
-                          '## FAQs\n' +
-                          '***' +
-                          'A list of frequently asked questions\n' +
-                          '1. **This is a question in bold**\n' +
-                          'Answer to the first question with _italic words_. \n' +
-                          '2. __Second question in bold__ \n' +
-                          'To answer this question, we use an unordered list:\n' +
-                          '* First point\n' +
-                          '* Second Point\n' +
-                          '* Third point\n' +
-                          '3. **Third question in bold**\n' +
-                          'Answer to the third question with *italic words*.\n' +
-                          '4. **Fourth question in bold**\n' +
-                          '| Headline 1 in the tablehead | Headline 2 in the tablehead | Headline 3 in the tablehead |\n' +
-                          '|:--------------|:-------------:|--------------:|\n' +
-                          '| text-align left | text-align center | text-align right |',
-                      },
-                    })
+                    this.saveReadme(
+                      this.state.container.name,
+                      this.state.readme,
+                    )
                   }
                 >
                   Save
                 </Button>
                 <Button
                   variant={'link'}
-                  onClick={() =>
+                  onClick={() => {
                     this.setState({
                       markdownEditing: false,
-                      container: {
-                        name: this.state.container.name,
-                        readme: '',
-                      },
-                    })
-                  }
+                    });
+                    this.queryReadme(this.state.container.name);
+                  }}
                 >
                   Cancel
                 </Button>
@@ -503,6 +452,29 @@ class ExecutionEnvironmentDetail extends React.Component<
           ></StatefulDropdown>{' '}
         </td>
       </tr>
+    );
+  }
+
+  queryReadme(name) {
+    this.setState({ loading: true }, () =>
+      ExecutionEnvironmentAPI.readme(name).then(result => {
+        console.log(result);
+        this.setState({
+          readme: result.data.text,
+          loading: false,
+        });
+      }),
+    );
+  }
+
+  saveReadme(name, readme) {
+    this.setState({ loading: true }, () =>
+      ExecutionEnvironmentAPI.saveReadme(name, { text: readme }).then(() => {
+        this.setState({
+          markdownEditing: false,
+          loading: false,
+        });
+      }),
     );
   }
 

@@ -6,6 +6,14 @@ class API extends HubAPI {
   constructor() {
     super();
   }
+
+  readme(name) {
+    return this.http.get(this.apiPath + name + '/_content/readme/');
+  }
+
+  saveReadme(name, readme) {
+    return this.http.put(this.apiPath + name + '/_content/readme/', readme);
+  }
 }
 
 export const ExecutionEnvironmentAPI = new API();
