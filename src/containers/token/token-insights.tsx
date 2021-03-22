@@ -47,7 +47,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           <Section className='body pf-c-content'>
             <h2>Connect Private Automation Hub</h2>
             <p>
-              Use the <Link to={Paths.repositories}>Repostory Management</Link>{' '}
+              Use the <Link to={Paths.repositories}>Repository Management</Link>{' '}
               page to sync collections curated by your organization to the Red
               Hat Certified repository in your private Automation Hub. Users
               with the correct permissions can use the sync toggles on the{' '}
@@ -84,14 +84,14 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               <Button onClick={() => this.loadToken()}>Load token</Button>
             )}
             <h2>Manage tokens</h2>
-            To remove an existing token, visit{' '}
+            To revoke a token or see all of your tokens, visit the{' '}
             <a
-              href='https://sso.redhat.com/auth/realms/redhat-external/account/'
+              href='https://sso.redhat.com/auth/realms/redhat-external/account/applications'
               target='_blank'
             >
-              Red Hat SSO account management
-            </a>
-            .
+              offline API token management
+            </a>{' '}
+            page.
           </Section>
           <Section className='body pf-c-content'>
             <h2>Server URL</h2>
