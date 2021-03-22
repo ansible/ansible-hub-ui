@@ -103,7 +103,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             <p>
               Note: this URL contains all collections in Hub. To connect to your
               organization's sync repository use the URL found on{' '}
-              <Link to={Paths.repositories}>Repostory Management</Link>.
+              <Link to={Paths.repositories}>Repository Management</Link>.
             </p>
           </Section>
           <Section className='body pf-c-content'>
