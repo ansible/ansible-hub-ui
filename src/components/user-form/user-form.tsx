@@ -123,16 +123,9 @@ export class UserForm extends React.Component<IProps, IState> {
 
     const readonlyGroups = () => (
       <FormGroup fieldId='groups' key='readonlyGroups' label='Groups'>
-        {user.groups.length !== 0 && (
-          <ChipGroup>
-            {' '}
-            {user.groups.map(group => (
-              <Chip isReadOnly cellPadding={'1px'} key={group.name}>
-                {group.name}
-              </Chip>
-            ))}{' '}
-          </ChipGroup>
-        )}
+        {user.groups.map(group => (
+          <Label key={group.name}>{group.name}</Label>
+        ))}
       </FormGroup>
     );
 
