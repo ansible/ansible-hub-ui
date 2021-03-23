@@ -34,6 +34,7 @@ export class CollectionVersionDetail extends CollectionVersion {
     issues: string;
     repository: string;
   };
+  requires_ansible?: string;
   docs_blob: DocsBlobType;
 }
 
