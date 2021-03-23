@@ -10,7 +10,8 @@ describe('My Profile Tests', () => {
         cy.get('[aria-label="user-dropdown"] button').click();
         // a little hacky, but basically
         // just click the one link that says 'My profile'.
-        cy.get('a').contains('My profile').click(); 
+        cy.get('a').contains('My profile').click();
+        cy.get('button:contains("Edit")').click();
     });
 
     it('only has input fields for name, email, username, password and pass confirmation', () => {
