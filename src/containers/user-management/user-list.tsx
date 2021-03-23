@@ -248,9 +248,9 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           id: 'username',
         },
         {
-          title: 'Email',
+          title: 'First name',
           type: 'alpha',
-          id: 'email',
+          id: 'first_name',
         },
         {
           title: 'Last name',
@@ -258,9 +258,9 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           id: 'last_name',
         },
         {
-          title: 'First name',
+          title: 'Email',
           type: 'alpha',
-          id: 'first_name',
+          id: 'email',
         },
         {
           id: 'groups',
@@ -331,16 +331,19 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           </Link>
 
           {user.is_superuser && (
-            <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
-              <Label icon={<UserPlusIcon />} color='orange'>
-                Super user
-              </Label>
-            </Tooltip>
+            <>
+              {' '}
+              <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
+                <Label icon={<UserPlusIcon />} color='orange'>
+                  Super user
+                </Label>
+              </Tooltip>
+            </>
           )}
         </td>
-        <td>{user.email}</td>
-        <td>{user.last_name}</td>
         <td>{user.first_name}</td>
+        <td>{user.last_name}</td>
+        <td>{user.email}</td>
         <td>
           {user.groups.map(g => (
             <Label key={g.id}>{g.name}</Label>
