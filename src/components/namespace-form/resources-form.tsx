@@ -40,7 +40,6 @@ export class ResourcesForm extends React.Component<IProps, {}> {
   }
 
   private updateResources(data) {
-    console.log('Data: ' + data);
     const update = { ...this.props.namespace };
     update.resources = data;
     this.props.updateNamespace(update);

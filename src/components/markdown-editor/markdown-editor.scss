@@ -22,10 +22,7 @@
   }
 
   .editor {
-    // I don't know why, but just setting width causes this element to get
-    // shrunk whenever the preview window expands.
-    min-width: 500px;
-    max-width: 500px;
+    flex-shrink: 0;
   }
 }
 .resources-editor {

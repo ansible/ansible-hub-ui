@@ -9,7 +9,6 @@ import {
   MarkdownEditor,
   Pagination,
   SortTable,
-  StatefulDropdown,
   Tabs,
   Tag,
   EmptyStateNoData,
@@ -22,7 +21,6 @@ import {
   ToolbarGroup,
   ToolbarItem,
   ClipboardCopy,
-  DropdownItem,
   FlexItem,
   Flex,
   Title,
@@ -41,9 +39,10 @@ import { TagIcon } from '@patternfly/react-icons';
 
 interface IState {
   loading: boolean;
-  container: any;
+  container: {name: string};
   readme: string;
   images: any[];
+  numberOfImages: number;
   activities: any[];
   params: { id: string; tab: string; page?: number; page_size?: number };
   markdownEditing: boolean;
@@ -72,6 +71,7 @@ class ExecutionEnvironmentDetail extends React.Component<
     this.state = {
       loading: true,
       images: [],
+      numberOfImages: 0,
       activities: [],
       container: { name: this.props.match.params['container'] },
       readme: '',
@@ -170,7 +170,7 @@ class ExecutionEnvironmentDetail extends React.Component<
             {!this.state.markdownEditing && !this.state.readme ? (
               <EmptyStateNoData
                 title={'No README'}
-                description={'Add README file by using RAW MAkdown editor'}
+                description={'Add README file by using RAW Makdown editor'}
                 button={
                   <Button
                     variant='primary'
@@ -183,9 +183,7 @@ class ExecutionEnvironmentDetail extends React.Component<
             ) : (
               <MarkdownEditor
                 text={this.state.readme}
-                placeholder={
-                  this.state.markdownEditing ? 'Here goes README' : ''
-                }
+                placeholder={''}
                 helperText={''}
                 updateText={value =>
                   this.setState({
@@ -355,7 +353,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                 this.queryImages(this.state.container.name),
               )
             }
-            count={this.state.images.length}
+            count={this.state.numberOfImages}
             isTop
           />
         </div>
@@ -388,7 +386,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                 this.queryImages(this.state.container.name),
               )
             }
-            count={this.state.images.length}
+            count={this.state.numberOfImages}
           />
         </div>
       </Section>
@@ -404,7 +402,7 @@ class ExecutionEnvironmentDetail extends React.Component<
       <tr key={index}>
         <td>
           {image.tags.map(tag => (
-            <Label variant='outline' icon={<TagIcon />}>
+            <Label variant='outline' key={tag} icon={<TagIcon />}>
               {tag}
             </Label>
           ))}
@@ -431,7 +429,6 @@ class ExecutionEnvironmentDetail extends React.Component<
   queryReadme(name) {
     this.setState({ loading: true }, () =>
       ExecutionEnvironmentAPI.readme(name).then(result => {
-        console.log(result);
         this.setState({
           readme: result.data.text,
           loading: false,
@@ -468,6 +465,7 @@ class ExecutionEnvironmentDetail extends React.Component<
         this.setState({
           images: images,
           loading: false,
+          numberOfImages: result.data.meta.count,
         });
       }),
     );
