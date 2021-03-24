@@ -7,8 +7,10 @@ class API extends HubAPI {
     super();
   }
 
-  list(id) {
-    return this.http.get(this.apiPath + id + '/_content/images/');
+  list(id, params) {
+    return this.http.get(this.apiPath + id + '/_content/images/', {
+      params: this.mapPageToOffset(params),
+    });
   }
 }
 

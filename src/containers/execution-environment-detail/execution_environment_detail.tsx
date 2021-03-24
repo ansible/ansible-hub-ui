@@ -39,7 +39,7 @@ import { TagIcon } from '@patternfly/react-icons';
 
 interface IState {
   loading: boolean;
-  container: {name: string};
+  container: { name: string };
   readme: string;
   images: any[];
   numberOfImages: number;
@@ -64,6 +64,10 @@ class ExecutionEnvironmentDetail extends React.Component<
       params['page_size'] = 10;
     }
 
+    if (!params['page']) {
+      params['page'] = 1;
+    }
+
     if (!params['tab']) {
       params['tab'] = 'detail';
     }
@@ -78,8 +82,8 @@ class ExecutionEnvironmentDetail extends React.Component<
       params: {
         id: this.props.match.params['container'],
         tab: params['tab'],
-        page: 1,
-        page_size: 1,
+        page: params['page'],
+        page_size: params['page_size'],
       },
       markdownEditing: false,
     };
@@ -359,7 +363,11 @@ class ExecutionEnvironmentDetail extends React.Component<
         </div>
         <div>
           <AppliedFilters
-            updateParams={() => console.log('update params and queryImages')}
+            updateParams={p =>
+              this.updateParams(p, () =>
+                this.queryImages(this.state.container.name),
+              )
+            }
             params={params}
             ignoredParams={['page_size', 'page', 'sort', 'id', 'tab']}
           />
@@ -450,7 +458,7 @@ class ExecutionEnvironmentDetail extends React.Component<
 
   queryImages(name) {
     this.setState({ loading: true }, () =>
-      ImagesAPI.list(name).then(result => {
+      ImagesAPI.list(name, this.state.params).then(result => {
         let images = [];
         result.data.data.forEach(object => {
           let image = pickBy(object, function(value, key) {
