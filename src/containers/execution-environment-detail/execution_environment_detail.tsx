@@ -12,9 +12,10 @@ import {
   Tabs,
   Tag,
   EmptyStateNoData,
+  EmptyStateFilter,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { ParamHelper } from '../../utilities';
+import { filterIsSet, ParamHelper } from '../../utilities';
 import {
   Toolbar,
   ToolbarContent,
@@ -284,7 +285,7 @@ class ExecutionEnvironmentDetail extends React.Component<
 
   renderImages() {
     const { params, images } = this.state;
-    if (images.length === 0) {
+    if (images.length === 0 && !filterIsSet(params, ['tag'])) {
       return (
         <EmptyStateNoData
           title={'No images yet'}
@@ -374,20 +375,24 @@ class ExecutionEnvironmentDetail extends React.Component<
             ignoredParams={['page_size', 'page', 'sort', 'id', 'tab']}
           />
         </div>
-        <table aria-label='Images' className='content-table pf-c-table'>
-          <SortTable
-            options={sortTableOptions}
-            params={params}
-            updateParams={p =>
-              this.updateParams(p, () =>
-                this.queryImages(this.state.container.name),
-              )
-            }
-          />
-          <tbody>
-            {images.map((image, i) => this.renderTableRow(image, i))}
-          </tbody>
-        </table>
+        {images.length === 0 && filterIsSet(params, ['tag']) ? (
+          <EmptyStateFilter />
+        ) : (
+          <table aria-label='Images' className='content-table pf-c-table'>
+            <SortTable
+              options={sortTableOptions}
+              params={params}
+              updateParams={p =>
+                this.updateParams(p, () =>
+                  this.queryImages(this.state.container.name),
+                )
+              }
+            />
+            <tbody>
+              {images.map((image, i) => this.renderTableRow(image, i))}
+            </tbody>
+          </table>
+        )}
         <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
           <Pagination
             params={params}
