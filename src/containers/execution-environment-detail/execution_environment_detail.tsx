@@ -90,10 +90,12 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   componentDidMount() {
-    this.queryImages(this.state.container.name);
-    this.queryActivities(this.state.container.name);
-    this.queryReadme(this.state.container.name);
-    this.setState({ loading: false });
+    const { container } = this.state;
+    const all = [];
+    all.push(this.queryReadme(container.name));
+    all.push(this.queryActivities(container.name));
+    all.push(this.queryImages(this.state.container.name));
+    Promise.all(all).then(() => this.setState({ loading: false }));
   }
 
   render() {
@@ -439,7 +441,6 @@ class ExecutionEnvironmentDetail extends React.Component<
       ExecutionEnvironmentAPI.readme(name).then(result => {
         this.setState({
           readme: result.data.text,
-          loading: false,
         });
       }),
     );
@@ -472,7 +473,6 @@ class ExecutionEnvironmentDetail extends React.Component<
         });
         this.setState({
           images: images,
-          loading: false,
           numberOfImages: result.data.meta.count,
         });
       }),
