@@ -103,5 +103,9 @@
         "hooks": {
             "pre-commit": "npm run prettier"
         }
+    },
+    "engines": {
+        "node": ">=12, <15",
+        "npm": "<7"
     }
 }
