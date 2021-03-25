@@ -143,7 +143,8 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   renderDetail() {
-    const instructions = 'podman pull ' + this.state.container.name + ':latest';
+    const instructions =
+      'podman pull localhost:5001/' + this.state.container.name + ':latest';
 
     return (
       <Flex direction={{ default: 'column' }}>
@@ -151,11 +152,9 @@ class ExecutionEnvironmentDetail extends React.Component<
           <Section className='body card-area'>
             {' '}
             <Title headingLevel='h2' size='lg'>
-              Instructions
+              Pull this image
             </Title>
-            <ClipboardCopy isCode isReadOnly variant={'expansion'}>
-              {instructions}
-            </ClipboardCopy>
+            <ClipboardCopy isReadOnly>{instructions}</ClipboardCopy>
           </Section>
         </FlexItem>
         <FlexItem>
@@ -433,8 +432,8 @@ class ExecutionEnvironmentDetail extends React.Component<
           </Popover>
         </td>
         <td>
-          <ClipboardCopy isCode isReadOnly variant={'expansion'}>
-            {'podman pull ' + instruction}
+          <ClipboardCopy isReadOnly>
+            {'podman pull localhost:5001/' + instruction}
           </ClipboardCopy>
         </td>
       </tr>
