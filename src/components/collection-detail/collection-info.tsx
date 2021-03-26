@@ -134,7 +134,7 @@ export class CollectionInfo extends React.Component<IProps> {
             <Split hasGutter={true}>
               <SplitItem className='install-title'>Requires Ansible</SplitItem>
               <SplitItem isFilled>
-                {latest_version.requires_ansible || 'No'}
+                {latest_version.requires_ansible || 'unspecified'}
               </SplitItem>
             </Split>
           </GridItem>
