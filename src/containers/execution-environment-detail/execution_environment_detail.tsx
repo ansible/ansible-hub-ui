@@ -15,7 +15,7 @@ import {
   EmptyStateFilter,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { filterIsSet, ParamHelper } from '../../utilities';
+import { filterIsSet, ParamHelper, truncateSha } from '../../utilities';
 import {
   Toolbar,
   ToolbarContent,
@@ -320,9 +320,9 @@ class ExecutionEnvironmentDetail extends React.Component<
           id: 'size',
         },
         {
-          title: 'Image',
+          title: 'Digest',
           type: 'none',
-          id: 'image',
+          id: 'digest',
         },
         {
           title: '',
@@ -437,7 +437,7 @@ class ExecutionEnvironmentDetail extends React.Component<
         <td>{image.size}</td>
         <td>
           <Popover position={PopoverPosition.top} bodyContent={image.digest}>
-            <Label color='blue'>{image.digest.slice(0, 8)}</Label>
+            <Label color='blue'>{truncateSha(image.digest)}</Label>
           </Popover>
         </td>
         <td>
@@ -514,8 +514,13 @@ class ExecutionEnvironmentDetail extends React.Component<
                         {action.tag_name}
                       </Label>{' '}
                       was moved to{' '}
-                      <Label color='blue'>{action.manifest_digest}</Label> from
-                      <Label color='blue'>{removed.manifest_digest}</Label>
+                      <Label color='blue'>
+                        {truncateSha(action.manifest_digest)}
+                      </Label>{' '}
+                      from
+                      <Label color='blue'>
+                        {truncateSha(removed.manifest_digest)}
+                      </Label>
                     </React.Fragment>
                   );
                 } else {
@@ -525,15 +530,19 @@ class ExecutionEnvironmentDetail extends React.Component<
                         {action.tag_name}
                       </Label>{' '}
                       was added to{' '}
-                      <Label color='blue'>{action.manifest_digest}</Label>
+                      <Label color='blue'>
+                        {truncateSha(action.manifest_digest)}
+                      </Label>
                     </React.Fragment>
                   );
                 }
               } else {
                 activityDescription = (
                   <React.Fragment>
-                    <Label color='blue'>{action.manifest_digest}</Label> was
-                    added
+                    <Label color='blue'>
+                      {truncateSha(action.manifest_digest)}
+                    </Label>{' '}
+                    was added
                   </React.Fragment>
                 );
               }
@@ -556,7 +565,9 @@ class ExecutionEnvironmentDetail extends React.Component<
                         {action.tag_name}
                       </Label>{' '}
                       was removed from{' '}
-                      <Label color='blue'>{action.manifest_digest}</Label>
+                      <Label color='blue'>
+                        {truncateSha(action.manifest_digest)}
+                      </Label>
                     </React.Fragment>
                   );
                 } else {
@@ -566,8 +577,10 @@ class ExecutionEnvironmentDetail extends React.Component<
               } else {
                 activityDescription = (
                   <React.Fragment>
-                    <Label color='blue'>{action.manifest_digest}</Label> was
-                    removed
+                    <Label color='blue'>
+                      {truncateSha(action.manifest_digest)}
+                    </Label>{' '}
+                    was removed
                   </React.Fragment>
                 );
               }
