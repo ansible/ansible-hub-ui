@@ -160,7 +160,6 @@ class ExecutionEnvironmentDetail extends React.Component<
         <FlexItem>
           <Section className='body pf-c-content'>
             <Title headingLevel='h2' size='lg'>
-              README
               {!this.state.markdownEditing && this.state.readme && (
                 <Button
                   className={'edit-button'}
@@ -176,7 +175,9 @@ class ExecutionEnvironmentDetail extends React.Component<
             {!this.state.markdownEditing && !this.state.readme ? (
               <EmptyStateNoData
                 title={'No README'}
-                description={'Add README file by using RAW Makdown editor'}
+                description={
+                  'Add a README with instructions for using this container.'
+                }
                 button={
                   <Button
                     variant='primary'
