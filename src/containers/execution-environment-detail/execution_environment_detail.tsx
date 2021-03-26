@@ -45,7 +45,7 @@ interface IState {
   images: any[];
   numberOfImages: number;
   activities: any[];
-  params: { id: string; tab: string; page?: number; page_size?: number };
+  params: { tab: string; page?: number; page_size?: number };
   markdownEditing: boolean;
 }
 
@@ -53,6 +53,8 @@ class ExecutionEnvironmentDetail extends React.Component<
   RouteComponentProps,
   IState
 > {
+  nonQueryStringParams = ['tab'];
+
   constructor(props) {
     super(props);
 
@@ -81,7 +83,6 @@ class ExecutionEnvironmentDetail extends React.Component<
       container: { name: this.props.match.params['container'] },
       readme: '',
       params: {
-        id: this.props.match.params['container'],
         tab: params['tab'],
         page: params['page'],
         page_size: params['page_size'],
@@ -285,7 +286,10 @@ class ExecutionEnvironmentDetail extends React.Component<
 
   renderImages() {
     const { params, images } = this.state;
-    if (images.length === 0 && !filterIsSet(params, ['tag'])) {
+    if (
+      images.length === 0 &&
+      !filterIsSet(params, ['tag', 'digest__icontains'])
+    ) {
       return (
         <EmptyStateNoData
           title={'No images yet'}
@@ -346,6 +350,10 @@ class ExecutionEnvironmentDetail extends React.Component<
                       {
                         id: 'tag',
                         title: 'Tag',
+                      },
+                      {
+                        id: 'digest__icontains',
+                        title: 'Digest',
                       },
                     ]}
                   />
@@ -464,7 +472,10 @@ class ExecutionEnvironmentDetail extends React.Component<
 
   queryImages(name) {
     this.setState({ loading: true }, () =>
-      ImagesAPI.list(name, this.state.params).then(result => {
+      ImagesAPI.list(
+        name,
+        ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
+      ).then(result => {
         let images = [];
         result.data.data.forEach(object => {
           let image = pickBy(object, function(value, key) {
@@ -584,7 +595,7 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   private get updateParams() {
-    return ParamHelper.updateParamsMixin();
+    return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
   }
 }
 
