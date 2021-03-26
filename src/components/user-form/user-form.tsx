@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import {
-  Form,
   FormGroup,
   TextInput,
   ActionGroup,
@@ -14,6 +13,7 @@ import {
 import { UserPlusIcon } from '@patternfly/react-icons';
 
 import { APISearchTypeAhead, HelperText } from 'src/components';
+import { DataForm } from 'src/components/shared/data-form';
 
 import { UserType, GroupAPI } from 'src/api';
 
@@ -74,131 +74,126 @@ export class UserForm extends React.Component<IProps, IState> {
     } = this.props;
     const { passwordConfirm } = this.state;
     const formFields = [
+      { id: 'username', title: 'Username' },
       { id: 'first_name', title: 'First name' },
       { id: 'last_name', title: 'Last name' },
       { id: 'email', title: 'Email' },
-      { id: 'username', title: 'Username' },
-      {
+      !isReadonly && {
         id: 'password',
         title: 'Password',
         type: 'password',
         placeholder: isNewUser ? '' : '••••••••••••••••••••••',
+        formGroupLabelIcon: (
+          <HelperText
+            content={
+              'Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions.'
+            }
+          />
+        ),
       },
     ];
     const requiredFields = ['username', ...(isNewUser ? ['password'] : [])];
 
-    return (
-      <Form>
-        {formFields.map(v => (
-          <FormGroup
-            isRequired={requiredFields.includes(v.id)}
-            key={v.id}
-            fieldId={v.id}
-            label={v.title}
-            validated={this.toError(!(v.id in errorMessages))}
-            helperTextInvalid={errorMessages[v.id]}
-            labelIcon={
-              v.id === 'password' && (
-                <HelperText
-                  content={
-                    'Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions.'
-                  }
-                />
-              )
-            }
-          >
-            <TextInput
-              validated={this.toError(!(v.id in errorMessages))}
-              isDisabled={isReadonly}
-              id={v.id}
-              placeholder={v.placeholder}
-              value={user[v.id]}
-              onChange={this.updateField}
-              type={(v.type as any) || 'text'}
-            />
-          </FormGroup>
-        ))}
-        <FormGroup
-          fieldId={'password-confirm'}
-          label={'Password confirmation'}
-          helperTextInvalid={'Passwords do not match'}
-          isRequired={isNewUser || !!user.password}
+    const passwordConfirmGroup = () => (
+      <FormGroup
+        fieldId='password-confirm'
+        helperTextInvalid='Passwords do not match'
+        isRequired={isNewUser || !!user.password}
+        key='confirm-group'
+        label='Password confirmation'
+        validated={this.toError(
+          this.isPassSame(user.password, passwordConfirm),
+        )}
+      >
+        <TextInput
+          placeholder={isNewUser ? '' : '••••••••••••••••••••••'}
           validated={this.toError(
             this.isPassSame(user.password, passwordConfirm),
           )}
+          isDisabled={isReadonly}
+          id='password-confirm'
+          value={passwordConfirm}
+          onChange={value => {
+            this.setState({ passwordConfirm: value });
+          }}
+          type='password'
+        />
+      </FormGroup>
+    );
+
+    const readonlyGroups = () => (
+      <FormGroup fieldId='groups' key='readonlyGroups' label='Groups'>
+        {user.groups.map(group => (
+          <Label key={group.name}>{group.name}</Label>
+        ))}
+      </FormGroup>
+    );
+
+    const editGroups = () => (
+      <FormGroup
+        fieldId='groups'
+        helperTextInvalid={errorMessages['groups']}
+        key='editGroups'
+        label='Groups'
+        validated={this.toError(!('groups' in errorMessages))}
+      >
+        <APISearchTypeAhead
+          results={this.state.searchGroups}
+          loadResults={this.loadGroups}
+          onSelect={this.onSelectGroup}
+          placeholderText='Select groups'
+          selections={user.groups}
+          multiple={true}
+          onClear={this.clearGroups}
+          isDisabled={isReadonly}
+        />
+      </FormGroup>
+    );
+
+    const superuserLabel = (
+      <FormGroup fieldId='is_superuser' key='superuserLabel' label='User type'>
+        <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
+          <Label icon={<UserPlusIcon />} color='orange'>
+            Super user
+          </Label>
+        </Tooltip>
+      </FormGroup>
+    );
+
+    const formButtons = () => (
+      <ActionGroup>
+        <Button
+          isDisabled={
+            !this.isPassValid(user.password, passwordConfirm) ||
+            !this.requiredFilled(user)
+          }
+          onClick={() => saveUser()}
         >
-          <TextInput
-            placeholder={isNewUser ? '' : '••••••••••••••••••••••'}
-            validated={this.toError(
-              this.isPassSame(user.password, passwordConfirm),
-            )}
-            isDisabled={isReadonly}
-            id={'password-confirm'}
-            value={passwordConfirm}
-            onChange={value => {
-              this.setState({ passwordConfirm: value });
-            }}
-            type='password'
-          />
-        </FormGroup>
-        {isMe ? (
-          <FormGroup fieldId={'groups'} label={'Groups'}>
-            {user.groups.length !== 0 && (
-              <ChipGroup>
-                {' '}
-                {user.groups.map(group => (
-                  <Chip isReadOnly cellPadding={'1px'}>
-                    {group.name}
-                  </Chip>
-                ))}{' '}
-              </ChipGroup>
-            )}
-          </FormGroup>
-        ) : (
-          <FormGroup
-            fieldId='groups'
-            label='Groups'
-            helperTextInvalid={errorMessages['groups']}
-            validated={this.toError(!('groups' in errorMessages))}
-          >
-            <APISearchTypeAhead
-              results={this.state.searchGroups}
-              loadResults={this.loadGroups}
-              onSelect={this.onSelectGroup}
-              placeholderText='Select groups'
-              selections={user.groups}
-              multiple={true}
-              onClear={this.clearGroups}
-              isDisabled={isReadonly}
-            />
-          </FormGroup>
-        )}
-        {user.is_superuser && (
-          <FormGroup fieldId='is_superuser' label='User type'>
-            <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
-              <Label icon={<UserPlusIcon />} color='orange'>
-                Super user
-              </Label>
-            </Tooltip>
-          </FormGroup>
-        )}
-        {!isReadonly && (
-          <ActionGroup>
-            <Button
-              isDisabled={
-                !this.isPassValid(user.password, passwordConfirm) ||
-                !this.requiredFilled(user)
-              }
-              onClick={() => saveUser()}
-            >
-              Save
-            </Button>
-            <Button onClick={() => onCancel()} variant='link'>
-              Cancel
-            </Button>
-          </ActionGroup>
-        )}
-      </Form>
+          Save
+        </Button>
+        <Button onClick={() => onCancel()} variant='link'>
+          Cancel
+        </Button>
+      </ActionGroup>
+    );
+
+    const formSuffix = [
+      !isReadonly && passwordConfirmGroup(),
+      isMe || isReadonly ? readonlyGroups() : editGroups(),
+      user.is_superuser && superuserLabel,
+      !isReadonly && formButtons(),
+    ];
+
+    return (
+      <DataForm
+        errorMessages={errorMessages}
+        formFields={formFields}
+        formSuffix={<>{formSuffix}</>}
+        isReadonly={isReadonly}
+        model={user}
+        requiredFields={requiredFields}
+        updateField={(v, e) => this.updateField(v, e)}
+      />
     );
   }
 

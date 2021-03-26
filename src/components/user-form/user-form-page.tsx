@@ -43,11 +43,11 @@ export class UserFormPage extends React.Component<IProps> {
       <React.Fragment>
         <BaseHeader
           breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
+          pageControls={extraControls}
           title={title}
         ></BaseHeader>
         <Main>
           <Section className='body'>
-            {extraControls}
             <UserForm
               isMe={isMe}
               isReadonly={isReadonly}
