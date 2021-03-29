@@ -537,6 +537,28 @@ export class RemoteForm extends React.Component<IProps, IState> {
               }
             />
           </FormGroup>
+          <FormGroup
+            fieldId={'rate_limit'}
+            label={'Rate Limit'}
+            labelIcon={
+              <HelperText content='Limits total download rate in requests per second.' />
+            }
+            validated={
+              Number.isInteger(remote.rate_limit) || remote.rate_limit === null
+                ? 'default'
+                : 'error'
+            }
+            helperTextInvalid={'Must be an integer.'}
+          >
+            <TextInput
+              id='rate_limit'
+              type='number'
+              value={remote.rate_limit}
+              onChange={value =>
+                this.updateRemote(parseInt(value), 'rate_limit')
+              }
+            />
+          </FormGroup>
         </ExpandableSection>
         {errorMessages['__nofield'] ? (
           <span

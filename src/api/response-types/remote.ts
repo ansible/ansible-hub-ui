@@ -15,6 +15,7 @@ export class RemoteType {
   name: string;
   url: string;
   auth_url: string;
+  rate_limit: number;
   token?: string;
   policy: string;
   requirements_file: string;
