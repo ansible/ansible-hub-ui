@@ -24,4 +24,6 @@ export { default as GroupDetail } from './group-management/group-detail';
 export { default as RepositoryList } from './repositories/repository-list';
 export { default as ExecutionEnvironmentList } from './execution-environment-list/execution_environment_list';
 export { default as ExecutionEnvironmentDetail } from './execution-environment-detail/execution_environment_detail';
+export { default as ExecutionEnvironmentDetailActivities } from './execution-environment-detail/execution_environment_detail_activities';
+export { default as ExecutionEnvironmentDetailImages } from './execution-environment-detail/execution_environment_detail_images';
 export { AboutModalWindow } from './about-modal/about-modal';

@@ -27,6 +27,8 @@ import {
   RepositoryList,
   ExecutionEnvironmentList,
   ExecutionEnvironmentDetail,
+  ExecutionEnvironmentDetailActivities,
+  ExecutionEnvironmentDetailImages,
 } from 'src/containers';
 import { ActiveUserAPI } from 'src/api';
 import { AppContext } from '../app-context';
@@ -86,6 +88,14 @@ export class Routes extends React.Component<any> {
   static contextType = AppContext;
 
   routes = [
+    {
+      comp: ExecutionEnvironmentDetailActivities,
+      path: Paths.executionEnvironmentDetailActivities,
+    },
+    {
+      comp: ExecutionEnvironmentDetailImages,
+      path: Paths.executionEnvironmentDetailImages,
+    },
     {
       comp: ExecutionEnvironmentDetail,
       path: Paths.executionEnvironmentDetail,
