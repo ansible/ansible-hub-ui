@@ -51,7 +51,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   RouteComponentProps,
   IState
 > {
-  nonQueryStringParams = ['tab'];
+  nonQueryStringParams = [];
 
   constructor(props) {
     super(props);
@@ -64,16 +64,16 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     if (!params['page_size']) {
       params['page_size'] = 10;
     }
+    if (!params['page']) {
+      params['page'] = 1;
+    }
 
     this.state = {
       loading: true,
       images: [],
       numberOfImages: 0,
       container: { name: this.props.match.params['container'] },
-      params: {
-        page: params['page'],
-        page_size: params['page_size'],
-      },
+      params: params,
       redirect: null,
     };
   }
