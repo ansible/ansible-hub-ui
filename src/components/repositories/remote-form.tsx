@@ -552,11 +552,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
           >
             <TextInput
               id='rate_limit'
-              type='number'
               value={remote.rate_limit}
-              onChange={value =>
-                this.updateRemote(parseInt(value), 'rate_limit')
-              }
+              onChange={value => this.updateRemote(value, 'rate_limit')}
             />
           </FormGroup>
         </ExpandableSection>
