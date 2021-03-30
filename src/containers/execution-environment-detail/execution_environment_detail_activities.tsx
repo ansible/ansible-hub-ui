@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import {
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
 import {
   Main,
   SortTable,
@@ -123,6 +128,23 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
   }
 
   queryActivities(name) {
+    const manifestLink = digestOrTag =>
+      formatPath(Paths.executionEnvironmentManifest, {
+        container: name,
+        digest: digestOrTag,
+      });
+
+    const ShaLink = ({ digest }) => (
+      <Link to={manifestLink(digest)}>
+        <ShaLabel digest={digest} />
+      </Link>
+    );
+    const TagLink = ({ tag }) => (
+      <Link to={manifestLink(tag)}>
+        <TagLabel tag={tag} />
+      </Link>
+    );
+
     this.setState({ loading: true }, () => {
       ActivitiesAPI.list(name)
         .then(result => {
@@ -138,23 +160,23 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   if (!!removed) {
                     activityDescription = (
                       <React.Fragment>
-                        <TagLabel tag={action.tag_name} /> was moved to{' '}
-                        <ShaLabel digest={action.manifest_digest} /> from
-                        <ShaLabel digest={removed.manifest_digest} />
+                        <TagLink tag={action.tag_name} /> was moved to{' '}
+                        <ShaLink digest={action.manifest_digest} /> from
+                        <ShaLink digest={removed.manifest_digest} />
                       </React.Fragment>
                     );
                   } else {
                     activityDescription = (
                       <React.Fragment>
-                        <TagLabel tag={action.tag_name} /> was added to{' '}
-                        <ShaLabel digest={action.manifest_digest} />
+                        <TagLink tag={action.tag_name} /> was added to{' '}
+                        <ShaLink digest={action.manifest_digest} />
                       </React.Fragment>
                     );
                   }
                 } else {
                   activityDescription = (
                     <React.Fragment>
-                      <ShaLabel digest={action.manifest_digest} /> was added
+                      <ShaLink digest={action.manifest_digest} /> was added
                     </React.Fragment>
                   );
                 }
@@ -174,7 +196,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                     activityDescription = (
                       <React.Fragment>
                         <TagLabel tag={action.tag_name} /> was removed from{' '}
-                        <ShaLabel digest={action.manifest_digest} />
+                        <ShaLink digest={action.manifest_digest} />
                       </React.Fragment>
                     );
                   } else {

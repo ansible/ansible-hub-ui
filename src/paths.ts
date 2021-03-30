@@ -19,6 +19,7 @@ export enum Paths {
   executionEnvironmentDetailImages = '/containers/:container+/_content/images',
   executionEnvironmentDetail = '/containers/:container+',
   executionEnvironments = '/containers',
+  executionEnvironmentManifest = '/containers/:container+/_content/images/:digest',
   groupList = '/group-list',
   groupDetail = '/group/:group',
   myCollections = '/my-namespaces/:namespace',
