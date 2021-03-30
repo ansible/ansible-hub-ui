@@ -14,7 +14,12 @@ import {
   EmptyStateFilter,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { filterIsSet, ParamHelper, truncateSha } from '../../utilities';
+import {
+  filterIsSet,
+  ParamHelper,
+  truncateSha,
+  getHumanSize,
+} from '../../utilities';
 import {
   Toolbar,
   ToolbarContent,
@@ -283,7 +288,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           <td>{moment(image.pulp_created).fromNow()}</td>
         </Tooltip>
         <td>{image.layers}</td>
-        <td>{image.size}</td>
+        <td>{getHumanSize(image.size)}</td>
         <td>
           <Popover position={PopoverPosition.top} bodyContent={image.digest}>
             <Label color='blue'>{truncateSha(image.digest)}</Label>
