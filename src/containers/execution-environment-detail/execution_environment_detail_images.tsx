@@ -13,6 +13,7 @@ import {
   EmptyStateNoData,
   EmptyStateFilter,
   ShaLabel,
+  TagLabel,
   ExecutionEnvironmentHeader,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
@@ -31,7 +32,6 @@ import { ExecutionEnvironmentAPI, ImagesAPI } from '../../api';
 import { pickBy } from 'lodash';
 import * as moment from 'moment';
 import './execution-environment-detail.scss';
-import { TagIcon } from '@patternfly/react-icons';
 
 interface IState {
   loading: boolean;
@@ -256,9 +256,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       <tr key={index}>
         <td>
           {image.tags.map(tag => (
-            <Label variant='outline' key={tag} icon={<TagIcon />}>
-              {tag}
-            </Label>
+            <TagLabel key={tag} tag={tag} />
           ))}
         </td>
         <Tooltip content={moment(image.pulp_created).format('MMMM Do YYYY')}>

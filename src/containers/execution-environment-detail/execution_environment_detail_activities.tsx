@@ -5,6 +5,7 @@ import {
   SortTable,
   EmptyStateNoData,
   ShaLabel,
+  TagLabel,
   ExecutionEnvironmentHeader,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
@@ -13,7 +14,6 @@ import { formatPath, Paths } from '../../paths';
 import { ActivitiesAPI } from '../../api';
 import * as moment from 'moment';
 import './execution-environment-detail.scss';
-import { TagIcon } from '@patternfly/react-icons';
 
 interface IState {
   loading: boolean;
@@ -138,10 +138,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   if (!!removed) {
                     activityDescription = (
                       <React.Fragment>
-                        <Label variant='outline' icon={<TagIcon />}>
-                          {action.tag_name}
-                        </Label>{' '}
-                        was moved to{' '}
+                        <TagLabel tag={action.tag_name} /> was moved to{' '}
                         <ShaLabel digest={action.manifest_digest} /> from
                         <ShaLabel digest={removed.manifest_digest} />
                       </React.Fragment>
@@ -149,10 +146,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   } else {
                     activityDescription = (
                       <React.Fragment>
-                        <Label variant='outline' icon={<TagIcon />}>
-                          {action.tag_name}
-                        </Label>{' '}
-                        was added to{' '}
+                        <TagLabel tag={action.tag_name} /> was added to{' '}
                         <ShaLabel digest={action.manifest_digest} />
                       </React.Fragment>
                     );
@@ -179,10 +173,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   ) {
                     activityDescription = (
                       <React.Fragment>
-                        <Label variant='outline' icon={<TagIcon />}>
-                          {action.tag_name}
-                        </Label>{' '}
-                        was removed from{' '}
+                        <TagLabel tag={action.tag_name} /> was removed from{' '}
                         <ShaLabel digest={action.manifest_digest} />
                       </React.Fragment>
                     );
