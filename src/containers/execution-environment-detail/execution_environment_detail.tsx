@@ -116,6 +116,9 @@ class ExecutionEnvironmentDetail extends React.Component<
           <Section className='body card-area'>
             {' '}
             <Title headingLevel='h2' size='lg'>
+              Instructions
+            </Title>
+            <Title headingLevel='h3' size='md'>
               Pull this image
             </Title>
             <ClipboardCopy isReadOnly>{instructions}</ClipboardCopy>

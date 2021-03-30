@@ -12,22 +12,16 @@ import {
   Tag,
   EmptyStateNoData,
   EmptyStateFilter,
+  ShaLabel,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import {
-  filterIsSet,
-  ParamHelper,
-  truncateSha,
-  getHumanSize,
-} from '../../utilities';
+import { filterIsSet, ParamHelper, getHumanSize } from '../../utilities';
 import {
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
   ClipboardCopy,
-  Popover,
-  PopoverPosition,
   Tooltip,
   Label,
 } from '@patternfly/react-core';
@@ -290,9 +284,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         <td>{image.layers}</td>
         <td>{getHumanSize(image.size)}</td>
         <td>
-          <Popover position={PopoverPosition.top} bodyContent={image.digest}>
-            <Label color='blue'>{truncateSha(image.digest)}</Label>
-          </Popover>
+          <ShaLabel digest={image.digest} />
         </td>
         <td>
           <ClipboardCopy isReadOnly>

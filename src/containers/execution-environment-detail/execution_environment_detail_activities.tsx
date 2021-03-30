@@ -7,9 +7,9 @@ import {
   SortTable,
   Tabs,
   EmptyStateNoData,
+  ShaLabel,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { truncateSha } from '../../utilities';
 import { FlexItem, Flex, Tooltip, Label } from '@patternfly/react-core';
 import { formatPath, Paths } from '../../paths';
 import { ActivitiesAPI } from '../../api';
@@ -167,14 +167,9 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                       <Label variant='outline' icon={<TagIcon />}>
                         {action.tag_name}
                       </Label>{' '}
-                      was moved to{' '}
-                      <Label color='blue'>
-                        {truncateSha(action.manifest_digest)}
-                      </Label>{' '}
+                      was moved to <ShaLabel digest={action.manifest_digest} />{' '}
                       from
-                      <Label color='blue'>
-                        {truncateSha(removed.manifest_digest)}
-                      </Label>
+                      <ShaLabel digest={removed.manifest_digest} />
                     </React.Fragment>
                   );
                 } else {
@@ -183,20 +178,14 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                       <Label variant='outline' icon={<TagIcon />}>
                         {action.tag_name}
                       </Label>{' '}
-                      was added to{' '}
-                      <Label color='blue'>
-                        {truncateSha(action.manifest_digest)}
-                      </Label>
+                      was added to <ShaLabel digest={action.manifest_digest} />
                     </React.Fragment>
                   );
                 }
               } else {
                 activityDescription = (
                   <React.Fragment>
-                    <Label color='blue'>
-                      {truncateSha(action.manifest_digest)}
-                    </Label>{' '}
-                    was added
+                    <ShaLabel digest={action.manifest_digest} /> was added
                   </React.Fragment>
                 );
               }
@@ -219,9 +208,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                         {action.tag_name}
                       </Label>{' '}
                       was removed from{' '}
-                      <Label color='blue'>
-                        {truncateSha(action.manifest_digest)}
-                      </Label>
+                      <ShaLabel digest={action.manifest_digest} />
                     </React.Fragment>
                   );
                 } else {
@@ -231,10 +218,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
               } else {
                 activityDescription = (
                   <React.Fragment>
-                    <Label color='blue'>
-                      {truncateSha(action.manifest_digest)}
-                    </Label>{' '}
-                    was removed
+                    <ShaLabel digest={action.manifest_digest} /> was removed
                   </React.Fragment>
                 );
               }
