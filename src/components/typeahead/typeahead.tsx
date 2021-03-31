@@ -90,8 +90,10 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
   }
 
   private onFilter = evt => {
-    const textInput = evt.target.value;
-    this.props.loadResults(textInput);
+    if (evt !== null) {
+      const textInput = evt.target.value;
+      this.props.loadResults(textInput);
+    }
     return this.getOptions();
   };
 
