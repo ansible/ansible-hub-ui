@@ -270,6 +270,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   private renderTableRow(image: any, index: number) {
+    const url = window.location.href
+      .split('://')[1]
+      .split('/ui')[0]
+      .replace('8002', '5001');
     let instruction =
       image.tags.length === 0
         ? image.digest
@@ -293,7 +297,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         </td>
         <td>
           <ClipboardCopy isReadOnly>
-            {'podman pull localhost:5001/' + instruction}
+            {'podman pull ' + url + '/' + instruction}
           </ClipboardCopy>
         </td>
       </tr>

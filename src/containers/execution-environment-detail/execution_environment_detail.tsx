@@ -107,8 +107,12 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   renderDetail() {
+    const url = window.location.href
+      .split('://')[1]
+      .split('/ui')[0]
+      .replace('8002', '5001');
     const instructions =
-      'podman pull localhost:5001/' + this.state.container.name + ':latest';
+      'podman pull ' + url + '/' + this.state.container.name + ':latest';
 
     return (
       <Flex direction={{ default: 'column' }}>
