@@ -35,7 +35,12 @@ import { TagIcon } from '@patternfly/react-icons';
 interface IState {
   loading: boolean;
   container: { name: string };
-  images: any[];
+  images: {
+    digest: string;
+    tags: string[];
+    pulp_created: string;
+    size: number;
+  }[];
   numberOfImages: number;
   params: { page?: number; page_size?: number };
   redirect: string;

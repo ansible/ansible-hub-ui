@@ -20,7 +20,7 @@ import { TagIcon } from '@patternfly/react-icons';
 interface IState {
   loading: boolean;
   container: { name: string };
-  activities: any[];
+  activities: { created: string; action: React.ReactFragment }[];
   redirect: string;
 }
 
