@@ -7,6 +7,7 @@ import {
   MarkdownEditor,
   Tabs,
   EmptyStateNoData,
+  ExecutionEnvironmentHeader,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
@@ -23,7 +24,6 @@ import './execution-environment-detail.scss';
 
 interface IState {
   loading: boolean;
-  container: { name: string };
   readme: string;
   markdownEditing: boolean;
   redirect: string;
@@ -38,7 +38,6 @@ class ExecutionEnvironmentDetail extends React.Component<
 
     this.state = {
       loading: true,
-      container: { name: this.props.match.params['container'] },
       readme: '',
       markdownEditing: false,
       redirect: null,
@@ -46,19 +45,15 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   componentDidMount() {
-    const { container } = this.state;
-    this.queryReadme(container.name);
+    this.queryReadme(this.props.match.params['container']);
   }
 
   render() {
-    const tabs = ['Detail', 'Activity', 'Images'];
-    const description = '';
-
     if (this.state.redirect === 'activity') {
       return (
         <Redirect
           to={formatPath(Paths.executionEnvironmentDetailActivities, {
-            container: this.state.container.name,
+            container: this.props.match.params['container'],
           })}
         />
       );
@@ -66,52 +61,31 @@ class ExecutionEnvironmentDetail extends React.Component<
       return (
         <Redirect
           to={formatPath(Paths.executionEnvironmentDetailImages, {
-            container: this.state.container.name,
+            container: this.props.match.params['container'],
           })}
         />
       );
     }
     return (
       <React.Fragment>
-        <BaseHeader
-          title={this.state.container.name}
-          breadcrumbs={
-            <Breadcrumbs
-              links={[
-                {
-                  url: Paths.executionEnvironments,
-                  name: 'Container Registry',
-                },
-                { name: this.state.container.name },
-              ]}
-            />
-          }
-        >
-          <Tooltip content={description}>
-            <p className={'truncated'}>{description}</p>
-          </Tooltip>
-          <span />
-          <div className='tab-link-container'>
-            <div className='tabs'>
-              <Tabs
-                tabs={tabs}
-                params={{ tab: 'detail' }}
-                updateParams={p => this.setState({ redirect: p.tab })}
-              />
-            </div>
-          </div>
-        </BaseHeader>
+        <ExecutionEnvironmentHeader
+          id={this.props.match.params['container']}
+          updateParams={p => this.setState({ redirect: p.tab })}
+          tab='detail'
+        />
         <Main>{this.renderDetail()}</Main>
       </React.Fragment>
     );
   }
 
   renderDetail() {
-    const url = window.location.href
-      .split('://')[1]
-      .split('/ui')[0];
+    const url = window.location.href.split('://')[1].split('/ui')[0];
     const instructions =
-      'podman pull ' + url + '/' + this.state.container.name + ':latest';
+      'podman pull ' +
+      url +
+      '/' +
+      this.props.match.params['container'] +
+      ':latest';
 
     return (
       <Flex direction={{ default: 'column' }}>
@@ -177,7 +151,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                   variant={'primary'}
                   onClick={() =>
                     this.saveReadme(
-                      this.state.container.name,
+                      this.props.match.params['container'],
                       this.state.readme,
                     )
                   }
@@ -190,7 +164,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                     this.setState({
                       markdownEditing: false,
                     });
-                    this.queryReadme(this.state.container.name);
+                    this.queryReadme(this.props.match.params['container']);
                   }}
                 >
                   Cancel

@@ -1,13 +1,11 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import {
-  BaseHeader,
-  Breadcrumbs,
   Main,
   SortTable,
-  Tabs,
   EmptyStateNoData,
   ShaLabel,
+  ExecutionEnvironmentHeader,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { FlexItem, Flex, Tooltip, Label } from '@patternfly/react-core';
@@ -19,7 +17,6 @@ import { TagIcon } from '@patternfly/react-icons';
 
 interface IState {
   loading: boolean;
-  container: { name: string };
   activities: { created: string; action: React.ReactFragment }[];
   redirect: string;
 }
@@ -34,24 +31,20 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
     this.state = {
       loading: true,
       activities: [],
-      container: { name: this.props.match.params['container'] },
       redirect: null,
     };
   }
 
   componentDidMount() {
-    const { container } = this.state;
-    this.queryActivities(container.name);
+    this.queryActivities(this.props.match.params['container']);
   }
 
   render() {
-    const tabs = ['Detail', 'Activity', 'Images'];
-    const description = '';
     if (this.state.redirect === 'detail') {
       return (
         <Redirect
           to={formatPath(Paths.executionEnvironmentDetail, {
-            container: this.state.container.name,
+            container: this.props.match.params['container'],
           })}
         />
       );
@@ -59,41 +52,18 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
       return (
         <Redirect
           to={formatPath(Paths.executionEnvironmentDetailImages, {
-            container: this.state.container.name,
+            container: this.props.match.params['container'],
           })}
         />
       );
     }
     return (
       <React.Fragment>
-        <BaseHeader
-          title={this.state.container.name}
-          breadcrumbs={
-            <Breadcrumbs
-              links={[
-                {
-                  url: Paths.executionEnvironments,
-                  name: 'Container Registry',
-                },
-                { name: this.state.container.name },
-              ]}
-            />
-          }
-        >
-          <Tooltip content={description}>
-            <p className={'truncated'}>{description}</p>
-          </Tooltip>
-          <span />
-          <div className='tab-link-container'>
-            <div className='tabs'>
-              <Tabs
-                tabs={tabs}
-                params={{ tab: 'activity' }}
-                updateParams={p => this.setState({ redirect: p.tab })}
-              />
-            </div>
-          </div>
-        </BaseHeader>
+        <ExecutionEnvironmentHeader
+          id={this.props.match.params['container']}
+          updateParams={p => this.setState({ redirect: p.tab })}
+          tab='activity'
+        />
         <Main>{this.renderActivity()}</Main>
       </React.Fragment>
     );
@@ -235,7 +205,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
             created: lastActivity.created,
             action: (
               <React.Fragment>
-                {this.state.container.name} was added
+                {this.props.match.params['container']} was added
               </React.Fragment>
             ),
           });

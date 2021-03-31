@@ -13,6 +13,7 @@ import {
   EmptyStateNoData,
   EmptyStateFilter,
   ShaLabel,
+  ExecutionEnvironmentHeader,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { filterIsSet, ParamHelper, getHumanSize } from '../../utilities';
@@ -26,7 +27,7 @@ import {
   Label,
 } from '@patternfly/react-core';
 import { formatPath, Paths } from '../../paths';
-import { ImagesAPI } from '../../api';
+import { ExecutionEnvironmentAPI, ImagesAPI } from '../../api';
 import { pickBy } from 'lodash';
 import * as moment from 'moment';
 import './execution-environment-detail.scss';
@@ -34,7 +35,6 @@ import { TagIcon } from '@patternfly/react-icons';
 
 interface IState {
   loading: boolean;
-  container: { name: string };
   images: {
     digest: string;
     tags: string[];
@@ -51,6 +51,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   IState
 > {
   nonQueryStringParams = [];
+  containerName = this.props.match.params['container'];
 
   constructor(props) {
     super(props);
@@ -71,25 +72,21 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       loading: true,
       images: [],
       numberOfImages: 0,
-      container: { name: this.props.match.params['container'] },
       params: params,
       redirect: null,
     };
   }
 
   componentDidMount() {
-    const { container } = this.state;
-    this.queryImages(container.name);
+    this.queryImages(this.containerName);
   }
 
   render() {
-    const tabs = ['Detail', 'Activity', 'Images'];
-    const description = '';
     if (this.state.redirect === 'activity') {
       return (
         <Redirect
           to={formatPath(Paths.executionEnvironmentDetailActivities, {
-            container: this.state.container.name,
+            container: this.props.match.params['container'],
           })}
         />
       );
@@ -97,41 +94,18 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       return (
         <Redirect
           to={formatPath(Paths.executionEnvironmentDetail, {
-            container: this.state.container.name,
+            container: this.props.match.params['container'],
           })}
         />
       );
     }
     return (
       <React.Fragment>
-        <BaseHeader
-          title={this.state.container.name}
-          breadcrumbs={
-            <Breadcrumbs
-              links={[
-                {
-                  url: Paths.executionEnvironments,
-                  name: 'Container Registry',
-                },
-                { name: this.state.container.name },
-              ]}
-            />
-          }
-        >
-          <Tooltip content={description}>
-            <p className={'truncated'}>{description}</p>
-          </Tooltip>
-          <span />
-          <div className='tab-link-container'>
-            <div className='tabs'>
-              <Tabs
-                tabs={tabs}
-                params={{ tab: 'images' }}
-                updateParams={p => this.setState({ redirect: p.tab })}
-              />
-            </div>
-          </div>
-        </BaseHeader>
+        <ExecutionEnvironmentHeader
+          id={this.props.match.params['container']}
+          updateParams={p => this.setState({ redirect: p.tab })}
+          tab='images'
+        />
         <Main>{this.renderImages()}</Main>
       </React.Fragment>
     );
@@ -195,7 +169,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
                   <CompoundFilter
                     updateParams={p =>
                       this.updateParams(p, () =>
-                        this.queryImages(this.state.container.name),
+                        this.queryImages(this.props.match.params['container']),
                       )
                     }
                     params={params}
@@ -218,7 +192,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             params={params}
             updateParams={p =>
               this.updateParams(p, () =>
-                this.queryImages(this.state.container.name),
+                this.queryImages(this.props.match.params['container']),
               )
             }
             count={this.state.numberOfImages}
@@ -229,7 +203,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           <AppliedFilters
             updateParams={p =>
               this.updateParams(p, () =>
-                this.queryImages(this.state.container.name),
+                this.queryImages(this.props.match.params['container']),
               )
             }
             params={params}
@@ -245,7 +219,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               params={params}
               updateParams={p =>
                 this.updateParams(p, () =>
-                  this.queryImages(this.state.container.name),
+                  this.queryImages(this.props.match.params['container']),
                 )
               }
             />
@@ -259,7 +233,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             params={params}
             updateParams={p =>
               this.updateParams(p, () =>
-                this.queryImages(this.state.container.name),
+                this.queryImages(this.props.match.params['container']),
               )
             }
             count={this.state.numberOfImages}
@@ -270,13 +244,11 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   private renderTableRow(image: any, index: number) {
-    const url = window.location.href
-      .split('://')[1]
-      .split('/ui')[0];
+    const url = window.location.href.split('://')[1].split('/ui')[0];
     let instruction =
       image.tags.length === 0
         ? image.digest
-        : this.state.container.name + ':' + image.tags[0];
+        : this.props.match.params['container'] + ':' + image.tags[0];
     return (
       <tr key={index}>
         <td>
