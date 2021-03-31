@@ -8,7 +8,7 @@ class API extends HubAPI {
   }
 
   list(id) {
-    return this.http.get(this.apiPath + id + '/_content/history/');
+    return super.list({}, this.apiPath + id + '/_content/history/');
   }
 }
 
