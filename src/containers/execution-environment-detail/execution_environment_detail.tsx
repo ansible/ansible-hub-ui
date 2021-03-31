@@ -109,8 +109,7 @@ class ExecutionEnvironmentDetail extends React.Component<
   renderDetail() {
     const url = window.location.href
       .split('://')[1]
-      .split('/ui')[0]
-      .replace('8002', '5001');
+      .split('/ui')[0];
     const instructions =
       'podman pull ' + url + '/' + this.state.container.name + ':latest';
 
