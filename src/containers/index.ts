@@ -26,4 +26,5 @@ export { default as ExecutionEnvironmentList } from './execution-environment-lis
 export { default as ExecutionEnvironmentDetail } from './execution-environment-detail/execution_environment_detail';
 export { default as ExecutionEnvironmentDetailActivities } from './execution-environment-detail/execution_environment_detail_activities';
 export { default as ExecutionEnvironmentDetailImages } from './execution-environment-detail/execution_environment_detail_images';
+export { default as ExecutionEnvironmentManifest } from './execution-environment-manifest/execution-environment-manifest';
 export { AboutModalWindow } from './about-modal/about-modal';

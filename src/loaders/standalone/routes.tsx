@@ -29,6 +29,7 @@ import {
   ExecutionEnvironmentDetail,
   ExecutionEnvironmentDetailActivities,
   ExecutionEnvironmentDetailImages,
+  ExecutionEnvironmentManifest,
 } from 'src/containers';
 import { ActiveUserAPI } from 'src/api';
 import { AppContext } from '../app-context';
@@ -87,10 +88,15 @@ class AuthHandler extends React.Component<IProps, IState> {
 export class Routes extends React.Component<any> {
   static contextType = AppContext;
 
+  // Note: must be ordered from most specific to least specific
   routes = [
     {
       comp: ExecutionEnvironmentDetailActivities,
       path: Paths.executionEnvironmentDetailActivities,
+    },
+    {
+      comp: ExecutionEnvironmentManifest,
+      path: Paths.executionEnvironmentManifest,
     },
     {
       comp: ExecutionEnvironmentDetailImages,
