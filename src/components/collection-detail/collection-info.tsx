@@ -130,6 +130,18 @@ export class CollectionInfo extends React.Component<IProps> {
               </SplitItem>
             </Split>
           </GridItem>
+          {latest_version.requires_ansible && (
+            <GridItem>
+              <Split hasGutter={true}>
+                <SplitItem className='install-title'>
+                  Requires Ansible
+                </SplitItem>
+                <SplitItem isFilled>
+                  {latest_version.requires_ansible}
+                </SplitItem>
+              </Split>
+            </GridItem>
+          )}
 
           {latest_version.docs_blob.collection_readme ? (
             <GridItem>
