@@ -3,6 +3,7 @@ import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import {
   BaseHeader,
   Breadcrumbs,
+  LoadingPageWithHeader,
   Main,
   ShaLabel,
   TagLabel,
@@ -10,21 +11,30 @@ import {
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   ClipboardCopy,
+  DataList,
+  DataListItem,
+  DataListItemRow,
+  DataListItemCells,
+  DataListCell,
   Flex,
   FlexItem,
   LabelGroup,
   Title,
 } from '@patternfly/react-core';
+import { sum } from 'lodash';
 import { Paths, formatPath } from '../../paths';
-import { ImagesAPI, ActivitiesAPI, ExecutionEnvironmentAPI } from '../../api'; // TODO
+import { ExecutionEnvironmentAPI } from '../../api';
+import { getHumanSize } from 'src/utilities';
 import './execution-environment-manifest.scss';
 
 interface IState {
   container: { name: string };
   digest: string;
+  environment: string[];
   labels: string[];
-  layers: any[]; // FIXME
+  layers: { text: string; size: string }[];
   loading: boolean;
+  size: number;
 }
 
 class ExecutionEnvironmentManifest extends React.Component<
@@ -36,10 +46,12 @@ class ExecutionEnvironmentManifest extends React.Component<
 
     this.state = {
       container: { name: this.props.match.params['container'] },
-      digest: this.props.match.params['digest'],
+      digest: this.props.match.params['digest'], // digest or tag until loading done
+      environment: [],
       labels: [],
       layers: [],
       loading: true,
+      size: 0,
     };
   }
 
@@ -59,7 +71,20 @@ class ExecutionEnvironmentManifest extends React.Component<
   }
 
   render() {
-    const { container, digest, labels, layers, loading } = this.state;
+    const {
+      container,
+      digest,
+      environment,
+      labels,
+      layers,
+      loading,
+      size,
+    } = this.state;
+
+    if (loading) {
+      return <LoadingPageWithHeader></LoadingPageWithHeader>;
+    }
+
     return (
       <>
         <BaseHeader
@@ -86,7 +111,7 @@ class ExecutionEnvironmentManifest extends React.Component<
         >
           <div>
             <ShaLabel digest={digest} />
-            {/* FIXME: better way? */}
+            {/* custom class hides the associated input and inlines the button after the label */}
             <ClipboardCopy
               isReadOnly
               className='clipboard-hide-input clipboard-inline'
@@ -95,11 +120,13 @@ class ExecutionEnvironmentManifest extends React.Component<
             </ClipboardCopy>
           </div>
 
-          <LabelGroup>
+          <LabelGroup numLabels={6}>
             {labels.map(label => (
               <TagLabel tag={label} key={label} />
             ))}
           </LabelGroup>
+
+          <div>Size: {size}</div>
         </BaseHeader>
 
         <Main>
@@ -109,6 +136,42 @@ class ExecutionEnvironmentManifest extends React.Component<
                 <Title headingLevel='h2' size='lg'>
                   Image layers
                 </Title>
+
+                <DataList aria-label='Image layers'>
+                  {layers.map(({ text, size }, index) => (
+                    <DataListItem key={index}>
+                      <DataListItemRow>
+                        <DataListItemCells
+                          dataListCells={[
+                            <DataListCell key='primary content'>
+                              <code>{text}</code>
+                            </DataListCell>,
+                            size && (
+                              <DataListCell key='secondary content'>
+                                {size}
+                              </DataListCell>
+                            ),
+                          ]}
+                        />
+                      </DataListItemRow>
+                    </DataListItem>
+                  ))}
+                </DataList>
+              </Section>
+            </FlexItem>
+
+            <FlexItem>
+              <Section className='body'>
+                <Title headingLevel='h2' size='lg'>
+                  Environment
+                </Title>
+
+                {environment.map((line, index) => (
+                  <>
+                    <code key={index}>{line}</code>
+                    <br />
+                  </>
+                ))}
               </Section>
             </FlexItem>
           </Flex>
@@ -117,16 +180,32 @@ class ExecutionEnvironmentManifest extends React.Component<
     );
   }
 
-  query(name) {
-    // FIXME
-    return Promise.resolve({
-      labels: ['focal', 'groovy', 'matcha'],
-      layers: ['ADD file'],
-    });
-    ExecutionEnvironmentAPI.readme(name).then(result => ({
-      labels: [],
-      layers: [],
-    }));
+  query({ container, digest: digestOrTag }) {
+    return ExecutionEnvironmentAPI.image(container.name, digestOrTag).then(
+      ({ data: { config_blob, digest, layers, tags } }) => {
+        const sizes = layers.map(l => l.size);
+        const total = sum(sizes); // TODO total or last? or max?
+
+        // convert '/bin/sh -c #(nop)  CMD ["sh"]' to 'CMD ["sh"]'
+        // but keep anything without #(nop) unchanged
+        const parseNop = str => str.replace(/^.*#\(nop\)\s+(.*)/, '$1');
+
+        const history = config_blob.data.history.map(
+          ({ created_by, empty_layer = false }) => ({
+            text: parseNop(created_by),
+            size: empty_layer ? null : getHumanSize(sizes.shift()), // TODO is the order right? maybe not
+          }),
+        );
+
+        return {
+          digest,
+          environment: config_blob.data.config.Env || [],
+          labels: tags || [],
+          layers: history,
+          size: getHumanSize(total),
+        };
+      },
+    );
   }
 }
 
