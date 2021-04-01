@@ -59,11 +59,12 @@ export class Constants {
     {
       name: 'execution environments',
       object_permissions: [
-        'container.pull_containerdistribution',
-        'container.change_containerdistribution',
-        'container.view_containerdistribution',
-        'container.modify_content_containerpushrepository',
+        'container.namespace_pull_containerdistribution',
+        'container.namespace_change_containerdistribution',
+        'container.namespace_view_containerdistribution',
+        'container.namespace_modify_content_containerpushrepository',
         'container.change_containernamespace',
+        'container.container.namespace_push_containerdistribution',
         'container.add_containernamespace',
       ],
     },
@@ -108,14 +109,18 @@ export class Constants {
     'galaxy.view_synclist': 'View synclist',
     'galaxy.add_synclist': 'Add synclist',
     'container.add_containernamespace': 'Create new execution environments',
-    'container.pull_containerdistribution':
+    'container.namespace_pull_containerdistribution':
       'Pull private execution environments',
-    'container.change_containerdistribution': 'Change execution environments',
-    'container.view_containerdistribution':
+    'container.namespace_change_containerdistribution':
+      'Change execution environments',
+    'container.namespace_view_containerdistribution':
       'View private execution environments',
-    'container.modify_content_containerpushrepository': 'Change image tags',
+    'container.namespace_modify_content_containerpushrepository':
+      'Change image tags',
     'container.change_containernamespace':
       'Change execution environment namespace permissions',
+    'container.container.namespace_push_containerdistribution':
+      'Push to existing execution environments',
   };
   static GROUP_HUMAN_PERMISSIONS = {
     change_namespace: 'Change namespace',
