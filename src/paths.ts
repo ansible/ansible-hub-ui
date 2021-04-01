@@ -4,7 +4,7 @@ export function formatPath(path: Paths, data: any, params?: object) {
   let url = path as string;
 
   for (const k of Object.keys(data)) {
-    url = url.replace(':' + k, data[k]);
+    url = url.replace(':' + k + '+', data[k]).replace(':' + k, data[k]);
   }
 
   if (params) {
@@ -15,9 +15,9 @@ export function formatPath(path: Paths, data: any, params?: object) {
 }
 
 export enum Paths {
-  executionEnvironmentDetailActivities = '/containers/:container/_content/activity',
-  executionEnvironmentDetailImages = '/containers/:container/_content/images',
-  executionEnvironmentDetail = '/containers/:container',
+  executionEnvironmentDetailActivities = '/containers/:container+/_content/activity',
+  executionEnvironmentDetailImages = '/containers/:container+/_content/images',
+  executionEnvironmentDetail = '/containers/:container+',
   executionEnvironments = '/containers',
   groupList = '/group-list',
   groupDetail = '/group/:group',

@@ -208,7 +208,7 @@ class ExecutionEnvironmentList extends React.Component<
         <td>
           <Link
             to={formatPath(Paths.executionEnvironmentDetail, {
-              container: item.name,
+              container: item.pulp.distribution.base_path,
             })}
           >
             {item.name}

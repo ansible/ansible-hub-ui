@@ -98,12 +98,15 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           })}
         />
       );
+    } else if (this.state.redirect === 'notFound') {
+      return <Redirect to={Paths.notFound} />;
     }
+
     return (
       <React.Fragment>
         <ExecutionEnvironmentHeader
           id={this.props.match.params['container']}
-          updateParams={p => this.setState({ redirect: p.tab })}
+          updateState={change => this.setState(change)}
           tab='images'
         />
         <Main>{this.renderImages()}</Main>
@@ -280,23 +283,25 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       ImagesAPI.list(
         name,
         ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
-      ).then(result => {
-        let images = [];
-        result.data.data.forEach(object => {
-          let image = pickBy(object, function(value, key) {
-            return ['digest', 'tags', 'pulp_created'].includes(key);
+      )
+        .then(result => {
+          let images = [];
+          result.data.data.forEach(object => {
+            let image = pickBy(object, function(value, key) {
+              return ['digest', 'tags', 'pulp_created'].includes(key);
+            });
+            image['layers'] = object.layers.length;
+            let size = 0;
+            object.layers.forEach(layer => (size += layer.size));
+            image['size'] = size;
+            images.push(image);
           });
-          image['layers'] = object.layers.length;
-          let size = 0;
-          object.layers.forEach(layer => (size += layer.size));
-          image['size'] = size;
-          images.push(image);
-        });
-        this.setState({
-          images: images,
-          numberOfImages: result.data.meta.count,
-        });
-      }),
+          this.setState({
+            images: images,
+            numberOfImages: result.data.meta.count,
+          });
+        })
+        .catch(error => this.setState({ redirect: 'notFound' })),
     );
   }
 

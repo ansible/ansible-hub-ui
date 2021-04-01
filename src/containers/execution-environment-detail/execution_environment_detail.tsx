@@ -65,12 +65,15 @@ class ExecutionEnvironmentDetail extends React.Component<
           })}
         />
       );
+    } else if (this.state.redirect === 'notFound') {
+      return <Redirect to={Paths.notFound} />;
     }
+
     return (
       <React.Fragment>
         <ExecutionEnvironmentHeader
           id={this.props.match.params['container']}
-          updateParams={p => this.setState({ redirect: p.tab })}
+          updateState={change => this.setState(change)}
           tab='detail'
         />
         <Main>{this.renderDetail()}</Main>
@@ -179,12 +182,14 @@ class ExecutionEnvironmentDetail extends React.Component<
 
   queryReadme(name) {
     this.setState({ loading: true }, () =>
-      ExecutionEnvironmentAPI.readme(name).then(result => {
-        this.setState({
-          readme: result.data.text,
-          loading: false,
-        });
-      }),
+      ExecutionEnvironmentAPI.readme(name)
+        .then(result => {
+          this.setState({
+            readme: result.data.text,
+            loading: false,
+          });
+        })
+        .catch(error => this.setState({ redirect: 'notFound' })),
     );
   }
 

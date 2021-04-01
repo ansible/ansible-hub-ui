@@ -7,7 +7,7 @@ import { ExecutionEnvironmentAPI } from 'src/api';
 interface IProps {
   id: string;
   tab: string;
-  updateParams: (any) => void;
+  updateState: (any) => void;
 }
 
 interface IState {
@@ -19,15 +19,17 @@ export class ExecutionEnvironmentHeader extends React.Component<
   IState
 > {
   componentDidMount() {
-    ExecutionEnvironmentAPI.get(this.props.id).then(result => {
-      this.setState({
-        container: {
-          name: result.data.name,
-          description: result.data.description,
-          namespace: result.data.namespace,
-        },
-      });
-    });
+    ExecutionEnvironmentAPI.get(this.props.id)
+      .then(result => {
+        this.setState({
+          container: {
+            name: result.data.name,
+            description: result.data.description,
+            namespace: result.data.namespace,
+          },
+        });
+      })
+      .catch(error => this.props.updateState({ redirect: 'notFound' }));
   }
   constructor(props) {
     super(props);
@@ -63,7 +65,7 @@ export class ExecutionEnvironmentHeader extends React.Component<
             <Tabs
               tabs={tabs}
               params={{ tab: this.props.tab }}
-              updateParams={p => this.props.updateParams(p)}
+              updateParams={p => this.props.updateState({ redirect: p.tab })}
             />
           </div>
         </div>

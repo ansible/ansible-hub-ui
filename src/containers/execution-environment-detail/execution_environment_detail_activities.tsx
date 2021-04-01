@@ -56,12 +56,15 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
           })}
         />
       );
+    } else if (this.state.redirect === 'notFound') {
+      return <Redirect to={Paths.notFound} />;
     }
+
     return (
       <React.Fragment>
         <ExecutionEnvironmentHeader
           id={this.props.match.params['container']}
-          updateParams={p => this.setState({ redirect: p.tab })}
+          updateState={change => this.setState(change)}
           tab='activity'
         />
         <Main>{this.renderActivity()}</Main>
@@ -121,97 +124,100 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
 
   queryActivities(name) {
     this.setState({ loading: true }, () => {
-      ActivitiesAPI.list(name).then(result => {
-        let activities = [];
-        result.data.data.forEach(activity => {
-          {
-            activity.added.forEach(action => {
-              let activityDescription;
-              if (action.pulp_type === 'container.tag') {
-                let removed = activity.removed.find(item => {
-                  return item.tag_name === action.tag_name;
-                });
-                if (!!removed) {
-                  activityDescription = (
-                    <React.Fragment>
-                      <Label variant='outline' icon={<TagIcon />}>
-                        {action.tag_name}
-                      </Label>{' '}
-                      was moved to <ShaLabel digest={action.manifest_digest} />{' '}
-                      from
-                      <ShaLabel digest={removed.manifest_digest} />
-                    </React.Fragment>
-                  );
-                } else {
-                  activityDescription = (
-                    <React.Fragment>
-                      <Label variant='outline' icon={<TagIcon />}>
-                        {action.tag_name}
-                      </Label>{' '}
-                      was added to <ShaLabel digest={action.manifest_digest} />
-                    </React.Fragment>
-                  );
-                }
-              } else {
-                activityDescription = (
-                  <React.Fragment>
-                    <ShaLabel digest={action.manifest_digest} /> was added
-                  </React.Fragment>
-                );
-              }
-              activities.push({
-                created: activity.pulp_created,
-                action: activityDescription,
-              });
-            });
-            activity.removed.forEach(action => {
-              let activityDescription;
-              if (action.pulp_type === 'container.tag') {
-                if (
-                  !activity.added.find(item => {
+      ActivitiesAPI.list(name)
+        .then(result => {
+          let activities = [];
+          result.data.data.forEach(activity => {
+            {
+              activity.added.forEach(action => {
+                let activityDescription;
+                if (action.pulp_type === 'container.tag') {
+                  let removed = activity.removed.find(item => {
                     return item.tag_name === action.tag_name;
-                  })
-                ) {
+                  });
+                  if (!!removed) {
+                    activityDescription = (
+                      <React.Fragment>
+                        <Label variant='outline' icon={<TagIcon />}>
+                          {action.tag_name}
+                        </Label>{' '}
+                        was moved to{' '}
+                        <ShaLabel digest={action.manifest_digest} /> from
+                        <ShaLabel digest={removed.manifest_digest} />
+                      </React.Fragment>
+                    );
+                  } else {
+                    activityDescription = (
+                      <React.Fragment>
+                        <Label variant='outline' icon={<TagIcon />}>
+                          {action.tag_name}
+                        </Label>{' '}
+                        was added to{' '}
+                        <ShaLabel digest={action.manifest_digest} />
+                      </React.Fragment>
+                    );
+                  }
+                } else {
                   activityDescription = (
                     <React.Fragment>
-                      <Label variant='outline' icon={<TagIcon />}>
-                        {action.tag_name}
-                      </Label>{' '}
-                      was removed from{' '}
-                      <ShaLabel digest={action.manifest_digest} />
+                      <ShaLabel digest={action.manifest_digest} /> was added
                     </React.Fragment>
                   );
-                } else {
-                  // skip one added as moved
-                  return;
                 }
-              } else {
-                activityDescription = (
-                  <React.Fragment>
-                    <ShaLabel digest={action.manifest_digest} /> was removed
-                  </React.Fragment>
-                );
-              }
-              activities.push({
-                created: activity.pulp_created,
-                action: activityDescription,
+                activities.push({
+                  created: activity.pulp_created,
+                  action: activityDescription,
+                });
               });
+              activity.removed.forEach(action => {
+                let activityDescription;
+                if (action.pulp_type === 'container.tag') {
+                  if (
+                    !activity.added.find(item => {
+                      return item.tag_name === action.tag_name;
+                    })
+                  ) {
+                    activityDescription = (
+                      <React.Fragment>
+                        <Label variant='outline' icon={<TagIcon />}>
+                          {action.tag_name}
+                        </Label>{' '}
+                        was removed from{' '}
+                        <ShaLabel digest={action.manifest_digest} />
+                      </React.Fragment>
+                    );
+                  } else {
+                    // skip one added as moved
+                    return;
+                  }
+                } else {
+                  activityDescription = (
+                    <React.Fragment>
+                      <ShaLabel digest={action.manifest_digest} /> was removed
+                    </React.Fragment>
+                  );
+                }
+                activities.push({
+                  created: activity.pulp_created,
+                  action: activityDescription,
+                });
+              });
+            }
+          });
+          let lastActivity = activities[activities.length - 1];
+          if (!!lastActivity) {
+            activities.push({
+              created: lastActivity.created,
+              action: (
+                <React.Fragment>
+                  {this.props.match.params['container']} was added
+                </React.Fragment>
+              ),
             });
           }
-        });
-        let lastActivity = activities[activities.length - 1];
-        if (!!lastActivity) {
-          activities.push({
-            created: lastActivity.created,
-            action: (
-              <React.Fragment>
-                {this.props.match.params['container']} was added
-              </React.Fragment>
-            ),
-          });
-        }
-        this.setState({ activities: activities, loading: false });
-      });
+          this.setState({ activities: activities, loading: false });
+        })
+        .catch(error => this.setState({ redirect: 'notFound' }));
     });
   }
 }
