@@ -3,4 +3,5 @@ export class ExecutionEnvironmentType {
   name: string;
   description: string;
   updated: string;
+  pulp: { distribution: { base_path: string } };
 }
