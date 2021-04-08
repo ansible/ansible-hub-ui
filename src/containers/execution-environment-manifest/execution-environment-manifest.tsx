@@ -34,6 +34,7 @@ interface IState {
   labels: string[];
   layers: { text: string; size: string }[];
   loading: boolean;
+  selectedLayer: string;
   size: number;
 }
 
@@ -51,6 +52,7 @@ class ExecutionEnvironmentManifest extends React.Component<
       labels: [],
       layers: [],
       loading: true,
+      selectedLayer: 'layer-0',
       size: 0,
     };
   }
@@ -78,12 +80,15 @@ class ExecutionEnvironmentManifest extends React.Component<
       labels,
       layers,
       loading,
+      selectedLayer,
       size,
     } = this.state;
 
     if (loading) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
+
+    const command = (layers[selectedLayer.split(/-/)[1]] || {}).text;
 
     return (
       <>
@@ -137,9 +142,15 @@ class ExecutionEnvironmentManifest extends React.Component<
                   Image layers
                 </Title>
 
-                <DataList aria-label='Image layers'>
+                <DataList
+                  aria-label='Image layers'
+                  onSelectDataListItem={id =>
+                    this.setState({ selectedLayer: id })
+                  }
+                  selectedDataListItemId={selectedLayer}
+                >
                   {layers.map(({ text, size }, index) => (
-                    <DataListItem key={index}>
+                    <DataListItem key={index} id={`layer-${index}`}>
                       <DataListItemRow>
                         <DataListItemCells
                           dataListCells={[
@@ -160,6 +171,16 @@ class ExecutionEnvironmentManifest extends React.Component<
                     </DataListItem>
                   ))}
                 </DataList>
+              </Section>
+            </FlexItem>
+
+            <FlexItem>
+              <Section className='body'>
+                <Title headingLevel='h2' size='lg'>
+                  Command
+                </Title>
+
+                <code>{command}</code>
               </Section>
             </FlexItem>
 
