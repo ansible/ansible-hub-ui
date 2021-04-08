@@ -184,25 +184,23 @@ class ExecutionEnvironmentManifest extends React.Component<
     return ExecutionEnvironmentAPI.image(container.name, digestOrTag).then(
       ({ data: { config_blob, digest, layers, tags } }) => {
         const sizes = layers.map(l => l.size);
-        const total = sum(sizes); // TODO total or last? or max?
+        const size = getHumanSize(sum(sizes));
 
         // convert '/bin/sh -c #(nop)  CMD ["sh"]' to 'CMD ["sh"]'
         // but keep anything without #(nop) unchanged
         const parseNop = str => str.replace(/^.*#\(nop\)\s+(.*)/, '$1');
 
-        const history = config_blob.data.history.map(
-          ({ created_by, empty_layer = false }) => ({
-            text: parseNop(created_by),
-            size: empty_layer ? null : getHumanSize(sizes.shift()), // TODO is the order right? maybe not
-          }),
-        );
+        const history = config_blob.data.history.map(({ created_by }) => ({
+          text: parseNop(created_by),
+          // FIXME: size, but no correspondence between the order of history (which have the commands) and layers (which have sizes)
+        }));
 
         return {
           digest,
           environment: config_blob.data.config.Env || [],
           labels: tags || [],
           layers: history,
-          size: getHumanSize(total),
+          size,
         };
       },
     );
