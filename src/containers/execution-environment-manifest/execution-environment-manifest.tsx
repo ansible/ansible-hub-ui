@@ -143,7 +143,10 @@ class ExecutionEnvironmentManifest extends React.Component<
                       <DataListItemRow>
                         <DataListItemCells
                           dataListCells={[
-                            <DataListCell key='primary content'>
+                            <DataListCell
+                              key='primary content'
+                              className='single-line-ellipsis'
+                            >
                               <code>{text}</code>
                             </DataListCell>,
                             size && (

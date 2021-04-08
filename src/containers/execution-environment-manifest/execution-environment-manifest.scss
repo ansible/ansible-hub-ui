@@ -4,3 +4,9 @@
 .clipboard-inline {
   display: inline-block;
 }
+
+.single-line-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
