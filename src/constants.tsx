@@ -64,7 +64,7 @@ export class Constants {
         'container.namespace_view_containerdistribution',
         'container.namespace_modify_content_containerpushrepository',
         'container.change_containernamespace',
-        'container.container.namespace_push_containerdistribution',
+        'container.namespace_push_containerdistribution',
         'container.add_containernamespace',
       ],
     },
@@ -119,7 +119,7 @@ export class Constants {
       'Change image tags',
     'container.change_containernamespace':
       'Change execution environment namespace permissions',
-    'container.container.namespace_push_containerdistribution':
+    'container.namespace_push_containerdistribution':
       'Push to existing execution environments',
   };
   static GROUP_HUMAN_PERMISSIONS = {
