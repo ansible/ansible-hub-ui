@@ -135,8 +135,8 @@ class ExecutionEnvironmentManifest extends React.Component<
         </BaseHeader>
 
         <Main>
-          <Flex direction={{ default: 'column' }}>
-            <FlexItem>
+          <Flex>
+            <FlexItem className='layers-max-width'>
               <Section className='body'>
                 <Title headingLevel='h2' size='lg'>
                   Image layers
@@ -174,30 +174,35 @@ class ExecutionEnvironmentManifest extends React.Component<
               </Section>
             </FlexItem>
 
-            <FlexItem>
-              <Section className='body'>
-                <Title headingLevel='h2' size='lg'>
-                  Command
-                </Title>
+            <Flex
+              direction={{ default: 'column' }}
+              className='layers-max-width'
+            >
+              <FlexItem>
+                <Section className='body'>
+                  <Title headingLevel='h2' size='lg'>
+                    Command
+                  </Title>
 
-                <code>{command}</code>
-              </Section>
-            </FlexItem>
+                  <code>{command}</code>
+                </Section>
+              </FlexItem>
 
-            <FlexItem>
-              <Section className='body'>
-                <Title headingLevel='h2' size='lg'>
-                  Environment
-                </Title>
+              <FlexItem>
+                <Section className='body'>
+                  <Title headingLevel='h2' size='lg'>
+                    Environment
+                  </Title>
 
-                {environment.map((line, index) => (
-                  <>
-                    <code key={index}>{line}</code>
-                    <br />
-                  </>
-                ))}
-              </Section>
-            </FlexItem>
+                  {environment.map((line, index) => (
+                    <>
+                      <code key={index}>{line}</code>
+                      <br />
+                    </>
+                  ))}
+                </Section>
+              </FlexItem>
+            </Flex>
           </Flex>
         </Main>
       </>
