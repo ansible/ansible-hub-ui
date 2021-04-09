@@ -56,6 +56,19 @@ export class Constants {
         'ansible.view_collectionremote',
       ],
     },
+    {
+      name: 'execution environments',
+      object_permissions: [
+        'container.namespace_pull_containerdistribution',
+        'container.namespace_change_containerdistribution',
+        'container.namespace_view_containerdistribution',
+        'container.namespace_modify_content_containerpushrepository',
+        'container.change_containernamespace',
+        'container.namespace_push_containerdistribution',
+        'container.add_containernamespace',
+      ],
+    },
+
     // These aren't currently used. Removing them to reduce confusion in the UI
     // {
     //   name: 'distribution',
@@ -95,6 +108,19 @@ export class Constants {
     'galaxy.change_synclist': 'Change synclist',
     'galaxy.view_synclist': 'View synclist',
     'galaxy.add_synclist': 'Add synclist',
+    'container.add_containernamespace': 'Create new execution environments',
+    'container.namespace_pull_containerdistribution':
+      'Pull private execution environments',
+    'container.namespace_change_containerdistribution':
+      'Change execution environments',
+    'container.namespace_view_containerdistribution':
+      'View private execution environments',
+    'container.namespace_modify_content_containerpushrepository':
+      'Change image tags',
+    'container.change_containernamespace':
+      'Change execution environment namespace permissions',
+    'container.namespace_push_containerdistribution':
+      'Push to existing execution environments',
   };
   static GROUP_HUMAN_PERMISSIONS = {
     change_namespace: 'Change namespace',

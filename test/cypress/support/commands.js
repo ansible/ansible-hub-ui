@@ -126,15 +126,15 @@ Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
     cy.get(`[aria-labelledby=${groupName}] a`).click();
     cy.contains('button', 'Edit').click();
     permissions.forEach(permissionElement => {
-        // closes previously open dropdowns
-        cy.get('h1').click();
         if (permissionElement.permissions.length > 3) {
             // Make sure all permissions are visible
-            cy.containsnear(`.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `, '1 more').first().click();
+            cy.containsnear(`.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `, 'more').first().click();
         }
         permissionElement.permissions.forEach(permission => {
             cy.containsnear(`.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `, permission).findnear('button').first().click();
         });
+        // closes previously open dropdowns
+        cy.get('h1').click();
     });
     cy.contains('button', 'Save').click();
 });
@@ -149,6 +149,8 @@ const allPerms = [{
     group: 'groups', permissions: ['View group', 'Delete group', 'Add group', 'Change group']
 },{
     group: 'remotes', permissions: ['Change collection remote', 'View collection remote']
+}, {
+    group: 'execution.environments', permissions: ['Change execution environment namespace permissions', 'Change execution environments', 'Change image tags', 'Pull private execution environments', 'View private execution environments']
 }];
 
 Cypress.Commands.add('removeAllPermissions', {}, (groupName) => {

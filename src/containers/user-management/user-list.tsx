@@ -17,6 +17,7 @@ import {
   DropdownItem,
   Label,
   Tooltip,
+  LabelGroup,
 } from '@patternfly/react-core';
 
 import { UserPlusIcon } from '@patternfly/react-icons';
@@ -345,9 +346,11 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>{user.last_name}</td>
         <td>{user.email}</td>
         <td>
-          {user.groups.map(g => (
-            <Label key={g.id}>{g.name}</Label>
-          ))}
+          <LabelGroup>
+            {user.groups.map(g => (
+              <Label key={g.id}>{g.name}</Label>
+            ))}
+          </LabelGroup>
         </td>
         <td>{moment(user.date_joined).fromNow()}</td>
         <td>
