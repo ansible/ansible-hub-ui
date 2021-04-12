@@ -195,10 +195,10 @@ class ExecutionEnvironmentManifest extends React.Component<
                   </Title>
 
                   {environment.map((line, index) => (
-                    <>
-                      <code key={index}>{line}</code>
+                    <React.Fragment key={index}>
+                      <code>{line}</code>
                       <br />
-                    </>
+                    </React.Fragment>
                   ))}
                 </Section>
               </FlexItem>
