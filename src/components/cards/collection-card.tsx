@@ -39,7 +39,9 @@ export class CollectionCard extends React.Component<IProps> {
     } = this.props;
 
     const company = namespace.company || namespace.name;
-    const contentSummary = convertContentSummaryCounts(latest_version.contents);
+    const contentSummary = convertContentSummaryCounts(
+      latest_version.metadata.contents,
+    );
 
     return (
       <Card className={cx('collection-card-container', className)}>

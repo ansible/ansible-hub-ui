@@ -17,7 +17,7 @@ function filterListItem(item: CollectionListType) {
     ...item,
     latest_version: {
       ...item.latest_version,
-      contents: filterContents(item.latest_version.contents), // deprecated
+      contents: null, // deprecated
       metadata: {
         ...item.latest_version.metadata,
         contents: filterContents(item.latest_version.metadata.contents),
@@ -31,7 +31,7 @@ function filterDetailItem(item: CollectionDetailType) {
     ...item,
     latest_version: {
       ...item.latest_version,
-      contents: filterContents(item.latest_version.contents), // deprecated
+      contents: null, // deprecated
       docs_blob: {
         ...item.latest_version.docs_blob,
         contents: filterContents(item.latest_version.docs_blob.contents),

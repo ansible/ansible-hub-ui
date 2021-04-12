@@ -13,7 +13,7 @@ export class CollectionVersion {
     tags: string[];
   };
   created_at: string;
-  contents: ContentSummaryType[]; // deprecated
+  // contents: ContentSummaryType[]; // deprecated
   namespace: string;
   name: string;
   repository_list: string[];

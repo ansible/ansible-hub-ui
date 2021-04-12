@@ -167,7 +167,7 @@ class CollectionDocs extends React.Component<
                         moduleName,
                         collection,
                         params,
-                        collection.latest_version.contents,
+                        collection.latest_version.metadata.contents,
                       )
                     }
                     renderDocLink={(name, href) =>

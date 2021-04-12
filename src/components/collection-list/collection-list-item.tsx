@@ -54,7 +54,9 @@ export class CollectionListItem extends React.Component<IProps, {}> {
       );
     }
 
-    const contentSummary = convertContentSummaryCounts(latest_version.contents);
+    const contentSummary = convertContentSummaryCounts(
+      latest_version.metadata.contents,
+    );
 
     cells.push(
       <DataListCell key='content'>
