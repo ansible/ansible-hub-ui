@@ -126,7 +126,7 @@ class ExecutionEnvironmentManifest extends React.Component<
             ))}
           </LabelGroup>
 
-          <div>Size: {size}</div>
+          <div style={{ padding: '4px 0' }}>Size: {size}</div>
         </BaseHeader>
 
         <Main>
