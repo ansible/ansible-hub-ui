@@ -115,7 +115,9 @@ class ExecutionEnvironmentManifest extends React.Component<
           }
         >
           <div>
-            <ClipboardCopy isReadOnly>{digest}</ClipboardCopy>
+            <ClipboardCopy className='eco-clipboard-copy' isReadOnly>
+              {digest}
+            </ClipboardCopy>
           </div>
 
           <LabelGroup numLabels={6}>

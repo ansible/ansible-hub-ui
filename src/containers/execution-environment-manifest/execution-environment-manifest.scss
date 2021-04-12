@@ -7,3 +7,32 @@
 .layers-max-width {
   max-width: 45%;
 }
+
+.eco-clipboard-copy {
+  display: inline-block;
+
+  .pf-c-clipboard-copy__group {
+    align-items: baseline;
+  }
+
+  input {
+    width: 37em;
+    border: none;
+    background: transparent !important;
+    text-overflow: ellipsis;
+    padding: var(--custom-override);
+    margin: var(--custom-override);
+  }
+
+  button {
+    padding: 0;
+    margin-left: 5px !important;
+    color: var(--pf-global--Color--200) !important;
+  }
+
+  .pf-c-button::after {
+    border: none !important;
+    padding: var(--custom-override);
+    margin: var(--custom-override);
+  }
+}
