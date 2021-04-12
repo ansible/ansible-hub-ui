@@ -1,28 +1,21 @@
 import * as React from 'react';
+import './execution-environment-detail.scss';
+
+import * as moment from 'moment';
+import { pickBy } from 'lodash';
+import { ImagesAPI, ContainerManifestType } from '../../api';
+import { formatPath, Paths } from '../../paths';
+import { filterIsSet, ParamHelper, getHumanSize } from '../../utilities';
+
 import {
   Link,
   Redirect,
   RouteComponentProps,
   withRouter,
 } from 'react-router-dom';
-import {
-  AppliedFilters,
-  BaseHeader,
-  Breadcrumbs,
-  CompoundFilter,
-  Main,
-  Pagination,
-  SortTable,
-  Tabs,
-  Tag,
-  EmptyStateNoData,
-  EmptyStateFilter,
-  ShaLabel,
-  TagLabel,
-  ExecutionEnvironmentHeader,
-} from '../../components';
+
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { filterIsSet, ParamHelper, getHumanSize } from '../../utilities';
+
 import {
   Toolbar,
   ToolbarContent,
@@ -30,25 +23,35 @@ import {
   ToolbarItem,
   ClipboardCopy,
   Tooltip,
-  Label,
+  DropdownItem,
+  InputGroup,
 } from '@patternfly/react-core';
-import { formatPath, Paths } from '../../paths';
-import { ExecutionEnvironmentAPI, ImagesAPI } from '../../api';
-import { pickBy } from 'lodash';
-import * as moment from 'moment';
-import './execution-environment-detail.scss';
+
+import {
+  AppliedFilters,
+  CompoundFilter,
+  Main,
+  Pagination,
+  SortTable,
+  EmptyStateNoData,
+  EmptyStateFilter,
+  ShaLabel,
+  TagLabel,
+  ExecutionEnvironmentHeader,
+  StatefulDropdown,
+} from '../../components';
+
+import { TagManifestModal } from './tag-manifest-modal';
 
 interface IState {
   loading: boolean;
-  images: {
-    digest: string;
-    tags: string[];
-    pulp_created: string;
-    size: number;
-  }[];
+  images: ContainerManifestType[];
   numberOfImages: number;
   params: { page?: number; page_size?: number };
   redirect: string;
+
+  // ID for manifest that is open in the manage tags modal.
+  manageTagsMannifestDigest: string;
 }
 
 class ExecutionEnvironmentDetailImages extends React.Component<
@@ -79,6 +82,8 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       numberOfImages: 0,
       params: params,
       redirect: null,
+      manageTagsMannifestDigest:
+        'sha256:5536fe9ae41ce59722c5253cfcd5ada65b7a77d41a9a49fdee272357a3388ec4',
     };
   }
 
@@ -120,7 +125,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   renderImages() {
-    const { params, images } = this.state;
+    const { params, images, manageTagsMannifestDigest } = this.state;
     if (
       images.length === 0 &&
       !filterIsSet(params, ['tag', 'digest__icontains'])
@@ -164,11 +169,25 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           type: 'none',
           id: 'instructions',
         },
+        {
+          title: '',
+          type: 'none',
+          id: 'controls',
+        },
       ],
     };
 
     return (
       <Section className='body'>
+        <TagManifestModal
+          isOpen={!!manageTagsMannifestDigest}
+          closeModal={() => this.setState({ manageTagsMannifestDigest: null })}
+          containerManifest={images.find(
+            el => el.digest === manageTagsMannifestDigest,
+          )}
+          reloadManifests={() => null}
+        />
+
         <div className='toolbar'>
           <Toolbar>
             <ToolbarContent>
@@ -274,6 +293,17 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       image.tags.length === 0
         ? image.digest
         : this.props.match.params['container'] + ':' + image.tags[0];
+    const dropdownItems = [
+      <DropdownItem
+        key='edit-tags'
+        onClick={() => {
+          this.setState({ manageTagsMannifestDigest: image.digest });
+        }}
+      >
+        Edit tags
+      </DropdownItem>,
+    ];
+
     return (
       <tr key={index}>
         <td>
@@ -293,6 +323,9 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           <ClipboardCopy isReadOnly>
             {'podman pull ' + url + '/' + instruction}
           </ClipboardCopy>
+        </td>
+        <td>
+          <StatefulDropdown items={dropdownItems}></StatefulDropdown>
         </td>
       </tr>
     );
