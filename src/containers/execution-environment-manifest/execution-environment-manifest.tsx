@@ -115,14 +115,7 @@ class ExecutionEnvironmentManifest extends React.Component<
           }
         >
           <div>
-            <ShaLabel digest={digest} />
-            {/* custom class hides the associated input and inlines the button after the label */}
-            <ClipboardCopy
-              isReadOnly
-              className='clipboard-hide-input clipboard-inline'
-            >
-              {digest}
-            </ClipboardCopy>
+            <ClipboardCopy isReadOnly>{digest}</ClipboardCopy>
           </div>
 
           <LabelGroup numLabels={6}>
