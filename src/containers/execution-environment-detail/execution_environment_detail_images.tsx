@@ -185,8 +185,8 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           containerManifest={images.find(
             el => el.digest === manageTagsMannifestDigest,
           )}
-          reloadManifests={() => null}
-          repository={this.containerName}
+          reloadManifests={() => this.queryImages(this.containerName)}
+          repositoryName={this.containerName}
         />
 
         <div className='toolbar'>

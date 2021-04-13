@@ -41,7 +41,9 @@ export { ExecutionEnvironmentAPI } from './execution-environment';
 export {
   ExecutionEnvironmentType,
   ContainerManifestType,
+  ContainerRepositoryType,
 } from './response-types/execution-environment';
 export { WriteOnlyFieldType } from './response-types/write-only-field';
 export { ImagesAPI } from './images';
 export { ActivitiesAPI } from './activities';
+export { ContainerTagAPI } from './container-tag';

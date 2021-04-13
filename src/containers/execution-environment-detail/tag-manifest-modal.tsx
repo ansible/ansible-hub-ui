@@ -16,7 +16,16 @@ import {
 
 import { TagIcon } from '@patternfly/react-icons';
 
-import { ContainerManifestType, ExecutionEnvironmentAPI } from 'src/api';
+import {
+  ContainerManifestType,
+  ExecutionEnvironmentAPI,
+  ContainerTagAPI,
+  ContainerRepositoryType,
+  TaskAPI,
+  PulpStatus,
+} from 'src/api';
+
+import { parsePulpIDFromURL } from 'src/utilities';
 
 interface IState {
   tagsToAdd: string[];
@@ -25,6 +34,8 @@ interface IState {
   tagInForm: string;
   verifyingTag: boolean;
   tagToVerify: string;
+  pendingTasks: Number;
+  tagInFormError: string;
 }
 
 interface IProps {
@@ -32,22 +43,10 @@ interface IProps {
   closeModal: () => void;
   containerManifest: ContainerManifestType;
   reloadManifests: () => void;
-  repository: string;
+  repositoryName: string;
 }
 
-/*
-Add:
-  - GET: _content/images/<tag>/
-  - if image exists, ask for confirmation
-  - post to tag endpoint
-  - ping tasking system and wait until the task is marked as done
-  - when task is done, refresh image list on parent component
-
-Delete:
-  - post to tag endpoint
-  - ping tasking system and wait until the task is marked as done
-  - when task is done, refresh image list on parent component
-*/
+const VALID_TAG_REGEX = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 
 export class TagManifestModal extends React.Component<IProps, IState> {
   constructor(props) {
@@ -59,6 +58,8 @@ export class TagManifestModal extends React.Component<IProps, IState> {
       tagInForm: '',
       verifyingTag: false,
       tagToVerify: '',
+      pendingTasks: 0,
+      tagInFormError: undefined,
     };
   }
 
@@ -72,6 +73,8 @@ export class TagManifestModal extends React.Component<IProps, IState> {
       verifyingTag,
       tagsToAdd,
       tagsToRemove,
+      pendingTasks,
+      tagInFormError,
     } = this.state;
     if (!containerManifest) {
       return null;
@@ -81,8 +84,8 @@ export class TagManifestModal extends React.Component<IProps, IState> {
       <Modal
         actions={[
           <Button
-            key='delete'
-            onClick={() => console.log('saved')}
+            key='save'
+            onClick={() => this.saveTags()}
             isDisabled={
               isSaving || (tagsToAdd.length <= 0 && tagsToRemove.length <= 0)
             }
@@ -90,7 +93,12 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             Save
             {isSaving && <Spinner size='sm'></Spinner>}
           </Button>,
-          <Button key='cancel' onClick={() => closeModal()} variant='link'>
+          <Button
+            isDisabled={isSaving}
+            key='cancel'
+            onClick={() => closeModal()}
+            variant='link'
+          >
             Cancel
           </Button>,
         ]}
@@ -100,15 +108,21 @@ export class TagManifestModal extends React.Component<IProps, IState> {
         variant='small'
       >
         <Form>
-          <FormGroup fieldId='add-new-tag' label='Add new tag'>
+          <FormGroup
+            validated={!!tagInFormError ? 'error' : 'default'}
+            helperTextInvalid={tagInFormError}
+            fieldId='add-new-tag'
+            label='Add new tag'
+          >
             <InputGroup>
               <TextInput
+                validated={!!tagInFormError ? 'error' : 'default'}
                 type='text'
                 id='add-new-tag'
                 name='add-new-tag'
                 value={tagInForm}
                 onChange={val => this.setState({ tagInForm: val })}
-                isDisabled={!!tagToVerify || verifyingTag}
+                isDisabled={!!tagToVerify || verifyingTag || isSaving}
                 onKeyUp={e => {
                   if (e.key === 'Enter') {
                     this.verifyAndAddTag();
@@ -119,7 +133,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                 aria-label='add new tag to image'
                 variant='secondary'
                 onClick={this.verifyAndAddTag}
-                isDisabled={!!tagToVerify || verifyingTag}
+                isDisabled={!!tagToVerify || verifyingTag || isSaving}
               >
                 Add {verifyingTag && <Spinner size='sm'></Spinner>}
               </Button>
@@ -155,8 +169,9 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             <LabelGroup id='remove-tag' defaultIsOpen={true}>
               {this.getCurrentTags().map(tag => (
                 <Label
+                  disabled={isSaving}
                   icon={<TagIcon />}
-                  onClose={() => this.removeTag(tag)}
+                  onClose={isSaving ? undefined : () => this.removeTag(tag)}
                   key={tag}
                 >
                   {tag}
@@ -164,9 +179,113 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               ))}
             </LabelGroup>
           </FormGroup>
+          {pendingTasks > 0 && (
+            <Alert
+              isInline
+              variant='info'
+              title={<>Waiting for {pendingTasks} task(s) to finish.</>}
+            >
+              It's safe to close this window. These tasks will finish in the
+              background.
+            </Alert>
+          )}
         </Form>
       </Modal>
     );
+  }
+
+  private validateTagName(tag) {
+    return tag.match(VALID_TAG_REGEX);
+  }
+
+  private handleFailedTag = (tag, error) => {
+    console.log(tag);
+    console.log(error.response.data);
+  };
+
+  private saveTags() {
+    const { containerManifest } = this.props;
+    const promises = [];
+
+    this.setState({ isSaving: true }, () => {
+      ExecutionEnvironmentAPI.get(this.props.repositoryName).then(result => {
+        const repository: ContainerRepositoryType = result.data;
+
+        for (const tag of this.state.tagsToRemove) {
+          promises.push(
+            ContainerTagAPI.untag(
+              repository.pulp.repository.pulp_id,
+              tag,
+              containerManifest.digest,
+            ).catch(e => this.handleFailedTag(tag, e)),
+          );
+        }
+
+        for (const tag of this.state.tagsToAdd) {
+          promises.push(
+            ContainerTagAPI.tag(
+              repository.pulp.repository.pulp_id,
+              tag,
+              containerManifest.digest,
+            ).catch(e => this.handleFailedTag(tag, e)),
+          );
+        }
+
+        if (promises.length > 0) {
+          Promise.all(promises.map(p => p.catch(this.handleFailedTag))).then(
+            results => {
+              const tasks = [];
+              for (const r of results) {
+                if (r) {
+                  tasks.push(parsePulpIDFromURL(r.data.task));
+                }
+              }
+
+              this.waitForTasks(tasks);
+            },
+          );
+        } else {
+          this.setState({ isSaving: false });
+        }
+      });
+    });
+  }
+
+  private waitForTasks(taskUrls) {
+    const pending = new Set(taskUrls);
+
+    const queryTasks = () => {
+      const promises = [];
+      for (const task of Array.from(pending)) {
+        promises.push(TaskAPI.get(task as string));
+      }
+
+      Promise.all(promises).then(async results => {
+        for (const r of results) {
+          const status = r.data.state;
+          if (
+            status === PulpStatus.completed ||
+            status === PulpStatus.skipped ||
+            status === PulpStatus.failed ||
+            status === PulpStatus.canceled
+          ) {
+            pending.delete(r.data.pulp_id);
+          }
+        }
+        if (pending.size > 0) {
+          // wait 5 seconds and then refresn
+          this.setState({ pendingTasks: pending.size });
+          await new Promise(r => setTimeout(r, 5000));
+          queryTasks();
+        } else {
+          this.setState({ isSaving: false, pendingTasks: 0 }, () =>
+            this.props.reloadManifests(),
+          );
+        }
+      });
+    };
+
+    this.setState({ pendingTasks: pending.size }, queryTasks);
   }
 
   private verifyAndAddTag = () => {
@@ -177,15 +296,27 @@ export class TagManifestModal extends React.Component<IProps, IState> {
   };
 
   private verifyTag(tag: string) {
-    ExecutionEnvironmentAPI.image(this.props.repository, tag)
-      .then(result => {
-        this.setState({ tagToVerify: tag, verifyingTag: false });
-      })
-      .catch(err => {
-        this.setState({ tagInForm: '', verifyingTag: false }, () =>
-          this.addTag(tag),
-        );
+    if (!this.validateTagName(tag)) {
+      this.setState({
+        verifyingTag: false,
+        tagInFormError:
+          'A tag may contain lowercase and uppercase ASCII ' +
+          'alphabetic characters, digits, underscores, periods, and dashes. A tag must not ' +
+          'start with a period or a dash.',
       });
+    } else {
+      this.setState({ tagInFormError: undefined }, () => {
+        ExecutionEnvironmentAPI.image(this.props.repositoryName, tag)
+          .then(result => {
+            this.setState({ tagToVerify: tag, verifyingTag: false });
+          })
+          .catch(err => {
+            this.setState({ tagInForm: '', verifyingTag: false }, () =>
+              this.addTag(tag),
+            );
+          });
+      });
+    }
   }
 
   private addTag(tag: string) {
