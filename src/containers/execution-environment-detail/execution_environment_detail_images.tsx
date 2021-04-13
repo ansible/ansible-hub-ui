@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import {
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
 import {
   AppliedFilters,
   BaseHeader,
@@ -13,6 +18,7 @@ import {
   EmptyStateNoData,
   EmptyStateFilter,
   ShaLabel,
+  TagLabel,
   ExecutionEnvironmentHeader,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
@@ -31,7 +37,6 @@ import { ExecutionEnvironmentAPI, ImagesAPI } from '../../api';
 import { pickBy } from 'lodash';
 import * as moment from 'moment';
 import './execution-environment-detail.scss';
-import { TagIcon } from '@patternfly/react-icons';
 
 interface IState {
   loading: boolean;
@@ -247,6 +252,23 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   private renderTableRow(image: any, index: number) {
+    const manifestLink = digestOrTag =>
+      formatPath(Paths.executionEnvironmentManifest, {
+        container: this.props.match.params['container'],
+        digest: digestOrTag,
+      });
+
+    const ShaLink = ({ digest }) => (
+      <Link to={manifestLink(digest)}>
+        <ShaLabel digest={digest} />
+      </Link>
+    );
+    const TagLink = ({ tag }) => (
+      <Link to={manifestLink(tag)}>
+        <TagLabel tag={tag} />
+      </Link>
+    );
+
     const url = window.location.href.split('://')[1].split('/ui')[0];
     let instruction =
       image.tags.length === 0
@@ -256,9 +278,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       <tr key={index}>
         <td>
           {image.tags.map(tag => (
-            <Label variant='outline' key={tag} icon={<TagIcon />}>
-              {tag}
-            </Label>
+            <TagLink key={tag} tag={tag} />
           ))}
         </td>
         <Tooltip content={moment(image.pulp_created).format('MMMM Do YYYY')}>
@@ -267,7 +287,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         <td>{image.layers}</td>
         <td>{getHumanSize(image.size)}</td>
         <td>
-          <ShaLabel digest={image.digest} />
+          <ShaLink digest={image.digest} />
         </td>
         <td>
           <ClipboardCopy isReadOnly>

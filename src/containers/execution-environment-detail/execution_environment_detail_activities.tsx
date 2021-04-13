@@ -1,10 +1,16 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import {
+  Link,
+  Redirect,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
 import {
   Main,
   SortTable,
   EmptyStateNoData,
   ShaLabel,
+  TagLabel,
   ExecutionEnvironmentHeader,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
@@ -13,7 +19,6 @@ import { formatPath, Paths } from '../../paths';
 import { ActivitiesAPI } from '../../api';
 import * as moment from 'moment';
 import './execution-environment-detail.scss';
-import { TagIcon } from '@patternfly/react-icons';
 
 interface IState {
   loading: boolean;
@@ -123,6 +128,23 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
   }
 
   queryActivities(name) {
+    const manifestLink = digestOrTag =>
+      formatPath(Paths.executionEnvironmentManifest, {
+        container: name,
+        digest: digestOrTag,
+      });
+
+    const ShaLink = ({ digest }) => (
+      <Link to={manifestLink(digest)}>
+        <ShaLabel digest={digest} />
+      </Link>
+    );
+    const TagLink = ({ tag }) => (
+      <Link to={manifestLink(tag)}>
+        <TagLabel tag={tag} />
+      </Link>
+    );
+
     this.setState({ loading: true }, () => {
       ActivitiesAPI.list(name)
         .then(result => {
@@ -138,29 +160,23 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   if (!!removed) {
                     activityDescription = (
                       <React.Fragment>
-                        <Label variant='outline' icon={<TagIcon />}>
-                          {action.tag_name}
-                        </Label>{' '}
-                        was moved to{' '}
-                        <ShaLabel digest={action.manifest_digest} /> from
-                        <ShaLabel digest={removed.manifest_digest} />
+                        <TagLink tag={action.tag_name} /> was moved to{' '}
+                        <ShaLink digest={action.manifest_digest} /> from
+                        <ShaLink digest={removed.manifest_digest} />
                       </React.Fragment>
                     );
                   } else {
                     activityDescription = (
                       <React.Fragment>
-                        <Label variant='outline' icon={<TagIcon />}>
-                          {action.tag_name}
-                        </Label>{' '}
-                        was added to{' '}
-                        <ShaLabel digest={action.manifest_digest} />
+                        <TagLink tag={action.tag_name} /> was added to{' '}
+                        <ShaLink digest={action.manifest_digest} />
                       </React.Fragment>
                     );
                   }
                 } else {
                   activityDescription = (
                     <React.Fragment>
-                      <ShaLabel digest={action.manifest_digest} /> was added
+                      <ShaLink digest={action.manifest_digest} /> was added
                     </React.Fragment>
                   );
                 }
@@ -179,11 +195,8 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   ) {
                     activityDescription = (
                       <React.Fragment>
-                        <Label variant='outline' icon={<TagIcon />}>
-                          {action.tag_name}
-                        </Label>{' '}
-                        was removed from{' '}
-                        <ShaLabel digest={action.manifest_digest} />
+                        <TagLabel tag={action.tag_name} /> was removed from{' '}
+                        <ShaLink digest={action.manifest_digest} />
                       </React.Fragment>
                     );
                   } else {
