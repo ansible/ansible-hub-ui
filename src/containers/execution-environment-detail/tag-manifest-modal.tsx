@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { AlertType } from 'src/components';
+
 import {
   Button,
   Modal,
@@ -44,7 +46,24 @@ interface IProps {
   containerManifest: ContainerManifestType;
   reloadManifests: () => void;
   repositoryName: string;
+  onAlert: (alert: AlertType) => void;
 }
+
+interface ITagPromises {
+  tag: string;
+  promise: Promise<any>;
+}
+
+interface ITaskUrls {
+  tag: string;
+  task: string;
+}
+
+/* TODO
+
+Hide modal when user doesn't have perms
+
+*/
 
 const VALID_TAG_REGEX = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 
@@ -58,9 +77,26 @@ export class TagManifestModal extends React.Component<IProps, IState> {
       tagInForm: '',
       verifyingTag: false,
       tagToVerify: '',
-      pendingTasks: 0,
       tagInFormError: undefined,
+      pendingTasks: 0,
     };
+  }
+
+  componentDidUpdate(prevProps: IProps) {
+    // if the containtainer manifest changes, reset the state
+
+    if (this.props.containerManifest !== prevProps.containerManifest) {
+      // Don't reset pending tasks and isSaving. This will prevent the user from
+      // editing another image while one is already being updated
+      this.setState({
+        tagsToAdd: [],
+        tagsToRemove: [],
+        tagInForm: '',
+        verifyingTag: false,
+        tagToVerify: '',
+        tagInFormError: undefined,
+      });
+    }
   }
 
   render() {
@@ -198,52 +234,74 @@ export class TagManifestModal extends React.Component<IProps, IState> {
     return tag.match(VALID_TAG_REGEX);
   }
 
-  private handleFailedTag = (tag, error) => {
-    console.log(tag);
-    console.log(error.response.data);
+  private handleFailedTag = (tag, error, operation) => {
+    let msg = undefined;
+
+    if (error.response.data['tag']) {
+      msg = error.response.data.tag.join(' ');
+    }
+
+    if (error.response.data['detail']) {
+      msg = error.response.data['detail'];
+    }
+
+    this.props.onAlert({
+      variant: 'danger',
+      title: `Failed to ${operation} tag "${tag}".`,
+      description: msg,
+    });
   };
 
   private saveTags() {
     const { containerManifest } = this.props;
-    const promises = [];
+
+    interface ITagPromises {
+      tag: string;
+      promise: Promise<any>;
+    }
+
+    const promises: ITagPromises[] = [];
 
     this.setState({ isSaving: true }, () => {
       ExecutionEnvironmentAPI.get(this.props.repositoryName).then(result => {
         const repository: ContainerRepositoryType = result.data;
 
         for (const tag of this.state.tagsToRemove) {
-          promises.push(
-            ContainerTagAPI.untag(
+          promises.push({
+            tag: tag,
+            promise: ContainerTagAPI.untag(
               repository.pulp.repository.pulp_id,
               tag,
               containerManifest.digest,
-            ).catch(e => this.handleFailedTag(tag, e)),
-          );
+            ).catch(e => this.handleFailedTag(tag, e, 'remove')),
+          });
         }
 
         for (const tag of this.state.tagsToAdd) {
-          promises.push(
-            ContainerTagAPI.tag(
+          promises.push({
+            tag: tag,
+            promise: ContainerTagAPI.tag(
               repository.pulp.repository.pulp_id,
               tag,
               containerManifest.digest,
-            ).catch(e => this.handleFailedTag(tag, e)),
-          );
+            ).catch(e => this.handleFailedTag(tag, e, 'add')),
+          });
         }
 
         if (promises.length > 0) {
-          Promise.all(promises.map(p => p.catch(this.handleFailedTag))).then(
-            results => {
-              const tasks = [];
-              for (const r of results) {
-                if (r) {
-                  tasks.push(parsePulpIDFromURL(r.data.task));
-                }
+          Promise.all(promises.map(p => p.promise)).then(results => {
+            const tasks: ITaskUrls[] = [];
+            for (const r in results) {
+              if (results[r]) {
+                tasks.push({
+                  tag: promises[r].tag,
+                  task: parsePulpIDFromURL(results[r].data.task),
+                });
               }
+            }
 
-              this.waitForTasks(tasks);
-            },
-          );
+            this.waitForTasks(tasks);
+          });
         } else {
           this.setState({ isSaving: false });
         }
@@ -251,8 +309,8 @@ export class TagManifestModal extends React.Component<IProps, IState> {
     });
   }
 
-  private waitForTasks(taskUrls) {
-    const pending = new Set(taskUrls);
+  private waitForTasks(taskUrls: ITaskUrls[]) {
+    const pending = new Set(taskUrls.map(i => i.task));
 
     const queryTasks = () => {
       const promises = [];
@@ -270,6 +328,19 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             status === PulpStatus.canceled
           ) {
             pending.delete(r.data.pulp_id);
+
+            if (
+              status === PulpStatus.skipped ||
+              status === PulpStatus.failed ||
+              status === PulpStatus.canceled
+            ) {
+              const tag = taskUrls.find(e => e.task === r.data.pulp_id);
+              this.props.onAlert({
+                variant: 'danger',
+                title: `Task to change tag "${tag.tag} could not be description"`,
+                description: `Reason: task ${r.data.state}`,
+              });
+            }
           }
         }
         if (pending.size > 0) {

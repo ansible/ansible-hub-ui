@@ -24,7 +24,6 @@ import {
   ClipboardCopy,
   Tooltip,
   DropdownItem,
-  InputGroup,
 } from '@patternfly/react-core';
 
 import {
@@ -39,6 +38,9 @@ import {
   TagLabel,
   ExecutionEnvironmentHeader,
   StatefulDropdown,
+  AlertList,
+  closeAlertMixin,
+  AlertType,
 } from '../../components';
 
 import { TagManifestModal } from './tag-manifest-modal';
@@ -49,6 +51,7 @@ interface IState {
   numberOfImages: number;
   params: { page?: number; page_size?: number };
   redirect: string;
+  alerts: AlertType[];
 
   // ID for manifest that is open in the manage tags modal.
   manageTagsMannifestDigest: string;
@@ -82,8 +85,8 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       numberOfImages: 0,
       params: params,
       redirect: null,
-      manageTagsMannifestDigest:
-        'sha256:5536fe9ae41ce59722c5253cfcd5ada65b7a77d41a9a49fdee272357a3388ec4',
+      manageTagsMannifestDigest: undefined,
+      alerts: [],
     };
   }
 
@@ -179,6 +182,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
     return (
       <Section className='body'>
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={i => this.closeAlert(i)}
+        />
         <TagManifestModal
           isOpen={!!manageTagsMannifestDigest}
           closeModal={() => this.setState({ manageTagsMannifestDigest: null })}
@@ -187,6 +194,9 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           )}
           reloadManifests={() => this.queryImages(this.containerName)}
           repositoryName={this.containerName}
+          onAlert={alert => {
+            this.setState({ alerts: this.state.alerts.concat(alert) });
+          }}
         />
 
         <div className='toolbar'>
@@ -361,6 +371,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
   private get updateParams() {
     return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 }
 
