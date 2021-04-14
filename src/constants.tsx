@@ -108,61 +108,47 @@ export class Constants {
     'galaxy.change_synclist': 'Change synclist',
     'galaxy.view_synclist': 'View synclist',
     'galaxy.add_synclist': 'Add synclist',
-    'container.add_containernamespace': 'Create new execution environments',
-    'container.namespace_pull_containerdistribution':
-      'Pull private execution environments',
-    'container.namespace_change_containerdistribution':
-      'Change execution environments',
-    'container.namespace_view_containerdistribution':
-      'View private execution environments',
-    'container.namespace_modify_content_containerpushrepository':
-      'Change image tags',
-    'container.change_containernamespace':
+    add_containernamespace: 'Create new execution environments',
+    namespace_pull_containerdistribution: 'Pull private execution environments',
+    namespace_change_containerdistribution: 'Change execution environments',
+    namespace_view_containerdistribution: 'View private execution environments',
+    namespace_modify_content_containerpushrepository: 'Change image tags',
+    change_containernamespace:
       'Change execution environment namespace permissions',
-    'container.namespace_push_containerdistribution':
+    namespace_push_containerdistribution:
       'Push to existing execution environments',
   };
   static GROUP_HUMAN_PERMISSIONS = {
     change_namespace: 'Change namespace',
     upload_to_namespace: 'Upload to namespace',
-    'container.add_containernamespace': 'Create new execution environments',
-    'container.namespace_pull_containerdistribution':
-      'Pull private execution environments',
-    'container.namespace_change_containerdistribution':
-      'Change execution environments',
-    'container.namespace_view_containerdistribution':
-      'View private execution environments',
-    'container.namespace_modify_content_containerpushrepository':
-      'Change image tags',
-    'container.change_containernamespace':
+    add_containernamespace: 'Create new execution environments',
+    namespace_pull_containerdistribution: 'Pull private execution environments',
+    namespace_change_containerdistribution: 'Change execution environments',
+    namespace_view_containerdistribution: 'View private execution environments',
+    namespace_modify_content_containerpushrepository: 'Change image tags',
+    change_containernamespace:
       'Change execution environment namespace permissions',
-    'container.namespace_push_containerdistribution':
+    namespace_push_containerdistribution:
       'Push to existing execution environments',
-    'container.view_containernamespace': "View container's namespace",
-    'container.delete_containernamespace': "Delete container's namespace",
-    'container.namespace_delete_containerdistribution':
-      "Delete container's distribution",
-    'container.namespace_view_containerpushrepository':
-      "View container's repository",
-    'container.namespace_add_containerdistribution': 'Add distribution',
-    'container.change_containerdistribution': 'Change distribution',
-    'container.delete_containerdistribution': 'Delete distribution',
-    'container.push_containerdistribution': 'Push distribution',
-    'container.pull_containerdistribution': 'Pull distribution',
-    'container.view_containerdistribution': 'View distribution',
+    view_containernamespace: "View container's namespace",
+    delete_containernamespace: "Delete container's namespace",
+    namespace_delete_containerdistribution: "Delete container's distribution",
+    namespace_view_containerpushrepository: "View container's repository",
+    namespace_add_containerdistribution: 'Add distribution',
+    change_containerdistribution: 'Change distribution',
+    delete_containerdistribution: 'Delete distribution',
+    push_containerdistribution: 'Push distribution',
+    pull_containerdistribution: 'Pull distribution',
+    view_containerdistribution: 'View distribution',
   };
   static CONTAINER_NAMESPACE_PERMISSIONS = [
-    'container.view_containernamespace',
-    'container.delete_containernamespace',
-    'container.namespace_delete_containerdistribution',
-    'container.namespace_view_containerpushrepository',
-    'container.change_containernamespace',
-    'container.namespace_add_containerdistribution',
-    'container.namespace_view_containerdistribution',
-    'container.namespace_pull_containerdistribution',
-    'container.namespace_push_containerdistribution',
-    'container.namespace_change_containerdistribution',
-    'container.namespace_modify_content_containerpushrepository',
+    'namespace_delete_containerdistribution',
+    'namespace_view_containerpushrepository',
+    'change_containernamespace',
+    'namespace_view_containerdistribution',
+    'namespace_push_containerdistribution',
+    'namespace_change_containerdistribution',
+    'namespace_modify_content_containerpushrepository',
   ];
   static UPSTREAM_HOSTS = [
     'galaxy.ansible.com',
