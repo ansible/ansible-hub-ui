@@ -7,12 +7,7 @@ import { ImagesAPI, ContainerManifestType } from '../../api';
 import { formatPath, Paths } from '../../paths';
 import { filterIsSet, ParamHelper, getHumanSize } from '../../utilities';
 
-import {
-  Link,
-  Redirect,
-  RouteComponentProps,
-  withRouter,
-} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { Section } from '@redhat-cloud-services/frontend-components';
 
@@ -36,7 +31,6 @@ import {
   EmptyStateFilter,
   ShaLabel,
   TagLabel,
-  ExecutionEnvironmentHeader,
   StatefulDropdown,
   AlertList,
   closeAlertMixin,
@@ -152,6 +146,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       ],
     };
 
+    const canEditTags = this.props.containerRepository.namespace.my_permissions.includes(
+      'container.namespace_modify_content_containerpushrepository',
+    );
+
     return (
       <Section className='body'>
         <AlertList
@@ -171,6 +169,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           onAlert={alert => {
             this.setState({ alerts: this.state.alerts.concat(alert) });
           }}
+          containerRepository={this.props.containerRepository}
         />
 
         <div className='toolbar'>
@@ -236,7 +235,9 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               }
             />
             <tbody>
-              {images.map((image, i) => this.renderTableRow(image, i))}
+              {images.map((image, i) =>
+                this.renderTableRow(image, i, canEditTags),
+              )}
             </tbody>
           </table>
         )}
@@ -255,7 +256,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     );
   }
 
-  private renderTableRow(image: any, index: number) {
+  private renderTableRow(image: any, index: number, canEditTags: boolean) {
     const manifestLink = digestOrTag =>
       formatPath(Paths.executionEnvironmentManifest, {
         container: this.props.match.params['container'],
@@ -309,8 +310,11 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             {'podman pull ' + url + '/' + instruction}
           </ClipboardCopy>
         </td>
+
         <td>
-          <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+          {canEditTags && (
+            <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+          )}
         </td>
       </tr>
     );

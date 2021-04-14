@@ -1,14 +1,6 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-import {
-  BaseHeader,
-  Breadcrumbs,
-  Main,
-  MarkdownEditor,
-  Tabs,
-  EmptyStateNoData,
-  ExecutionEnvironmentHeader,
-} from '../../components';
+import { withRouter } from 'react-router-dom';
+import { Main, EmptyStateNoData, MarkdownEditor } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   ClipboardCopy,
@@ -16,9 +8,7 @@ import {
   Flex,
   Title,
   Button,
-  Tooltip,
 } from '@patternfly/react-core';
-import { formatPath, Paths } from '../../paths';
 import { ExecutionEnvironmentAPI } from '../../api';
 import './execution-environment-detail.scss';
 import { withContainerRepo, IDetailSharedProps } from './base';
@@ -62,6 +52,11 @@ class ExecutionEnvironmentDetail extends React.Component<
       this.props.containerRepository.name +
       ':latest';
 
+    const { containerRepository } = this.props;
+    const canEdit = containerRepository.namespace.my_permissions.includes(
+      'container.change_containernamespace',
+    );
+
     return (
       <Flex direction={{ default: 'column' }}>
         <FlexItem>
@@ -79,7 +74,7 @@ class ExecutionEnvironmentDetail extends React.Component<
         <FlexItem>
           <Section className='body pf-c-content'>
             <Title headingLevel='h2' size='lg'>
-              {!this.state.markdownEditing && this.state.readme && (
+              {!this.state.markdownEditing && this.state.readme && canEdit && (
                 <Button
                   className={'edit-button'}
                   variant={'primary'}
@@ -98,12 +93,14 @@ class ExecutionEnvironmentDetail extends React.Component<
                   'Add a README with instructions for using this container.'
                 }
                 button={
-                  <Button
-                    variant='primary'
-                    onClick={() => this.setState({ markdownEditing: true })}
-                  >
-                    Add
-                  </Button>
+                  canEdit ? (
+                    <Button
+                      variant='primary'
+                      onClick={() => this.setState({ markdownEditing: true })}
+                    >
+                      Add
+                    </Button>
+                  ) : null
                 }
               />
             ) : (

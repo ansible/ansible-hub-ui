@@ -47,6 +47,7 @@ interface IProps {
   reloadManifests: () => void;
   repositoryName: string;
   onAlert: (alert: AlertType) => void;
+  containerRepository: ContainerRepositoryType;
 }
 
 interface ITagPromises {
@@ -58,12 +59,6 @@ interface ITaskUrls {
   tag: string;
   task: string;
 }
-
-/* TODO
-
-Hide modal when user doesn't have perms
-
-*/
 
 const VALID_TAG_REGEX = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 
@@ -263,49 +258,48 @@ export class TagManifestModal extends React.Component<IProps, IState> {
     const promises: ITagPromises[] = [];
 
     this.setState({ isSaving: true }, () => {
-      ExecutionEnvironmentAPI.get(this.props.repositoryName).then(result => {
-        const repository: ContainerRepositoryType = result.data;
+      const repository: ContainerRepositoryType = this.props
+        .containerRepository;
 
-        for (const tag of this.state.tagsToRemove) {
-          promises.push({
-            tag: tag,
-            promise: ContainerTagAPI.untag(
-              repository.pulp.repository.pulp_id,
-              tag,
-              containerManifest.digest,
-            ).catch(e => this.handleFailedTag(tag, e, 'remove')),
-          });
-        }
+      for (const tag of this.state.tagsToRemove) {
+        promises.push({
+          tag: tag,
+          promise: ContainerTagAPI.untag(
+            repository.pulp.repository.pulp_id,
+            tag,
+            containerManifest.digest,
+          ).catch(e => this.handleFailedTag(tag, e, 'remove')),
+        });
+      }
 
-        for (const tag of this.state.tagsToAdd) {
-          promises.push({
-            tag: tag,
-            promise: ContainerTagAPI.tag(
-              repository.pulp.repository.pulp_id,
-              tag,
-              containerManifest.digest,
-            ).catch(e => this.handleFailedTag(tag, e, 'add')),
-          });
-        }
+      for (const tag of this.state.tagsToAdd) {
+        promises.push({
+          tag: tag,
+          promise: ContainerTagAPI.tag(
+            repository.pulp.repository.pulp_id,
+            tag,
+            containerManifest.digest,
+          ).catch(e => this.handleFailedTag(tag, e, 'add')),
+        });
+      }
 
-        if (promises.length > 0) {
-          Promise.all(promises.map(p => p.promise)).then(results => {
-            const tasks: ITaskUrls[] = [];
-            for (const r in results) {
-              if (results[r]) {
-                tasks.push({
-                  tag: promises[r].tag,
-                  task: parsePulpIDFromURL(results[r].data.task),
-                });
-              }
+      if (promises.length > 0) {
+        Promise.all(promises.map(p => p.promise)).then(results => {
+          const tasks: ITaskUrls[] = [];
+          for (const r in results) {
+            if (results[r]) {
+              tasks.push({
+                tag: promises[r].tag,
+                task: parsePulpIDFromURL(results[r].data.task),
+              });
             }
+          }
 
-            this.waitForTasks(tasks);
-          });
-        } else {
-          this.setState({ isSaving: false });
-        }
-      });
+          this.waitForTasks(tasks);
+        });
+      } else {
+        this.setState({ isSaving: false });
+      }
     });
   }
 

@@ -1,17 +1,11 @@
 import * as React from 'react';
-import {
-  Link,
-  Redirect,
-  RouteComponentProps,
-  withRouter,
-} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import {
   Main,
   SortTable,
   EmptyStateNoData,
   ShaLabel,
   TagLabel,
-  ExecutionEnvironmentHeader,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import { FlexItem, Flex, Tooltip, Label } from '@patternfly/react-core';
