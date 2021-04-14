@@ -80,7 +80,7 @@ class CollectionContent extends React.Component<
         <Main>
           <Section className='body'>
             <CollectionContentList
-              contents={collection.latest_version.contents}
+              contents={collection.latest_version.metadata.contents}
               collection={collection.name}
               namespace={collection.namespace.name}
               params={params}

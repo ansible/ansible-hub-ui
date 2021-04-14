@@ -8,11 +8,12 @@ export class CollectionVersion {
   id: string;
   version: string;
   metadata: {
-    tags: string[];
+    contents: ContentSummaryType[];
     description: string;
+    tags: string[];
   };
   created_at: string;
-  contents: ContentSummaryType[];
+  // contents: ContentSummaryType[]; // deprecated
   namespace: string;
   name: string;
   repository_list: string[];
@@ -25,6 +26,7 @@ class RenderedFile {
 
 export class CollectionVersionDetail extends CollectionVersion {
   metadata: {
+    contents: ContentSummaryType[];
     description: string;
     tags: string[];
     authors: string[];

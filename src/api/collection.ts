@@ -6,6 +6,44 @@ import {
 } from 'src/api';
 import axios from 'axios';
 
+function filterContents(contents) {
+  return contents.filter(
+    item => !['doc_fragments', 'module_utils'].includes(item.content_type),
+  );
+}
+
+function filterListItem(item: CollectionListType) {
+  return {
+    ...item,
+    latest_version: {
+      ...item.latest_version,
+      contents: null, // deprecated
+      metadata: {
+        ...item.latest_version.metadata,
+        contents: filterContents(item.latest_version.metadata.contents),
+      },
+    },
+  };
+}
+
+function filterDetailItem(item: CollectionDetailType) {
+  return {
+    ...item,
+    latest_version: {
+      ...item.latest_version,
+      contents: null, // deprecated
+      docs_blob: {
+        ...item.latest_version.docs_blob,
+        contents: filterContents(item.latest_version.docs_blob.contents),
+      },
+      metadata: {
+        ...item.latest_version.metadata,
+        contents: filterContents(item.latest_version.metadata.contents),
+      },
+    },
+  };
+}
+
 export class API extends HubAPI {
   apiPath = this.getUIPath('repo/');
   cachedCollection: CollectionDetailType;
@@ -16,7 +54,14 @@ export class API extends HubAPI {
 
   list(params?: any, repo?: string) {
     const path = this.apiPath + repo + '/';
-    return super.list(params, path);
+    return super.list(params, path).then(response => ({
+      ...response,
+      data: {
+        ...response.data,
+        // remove module_utils, doc_fragments from each item
+        data: response.data.data.map(filterListItem),
+      },
+    }));
   }
 
   setDeprecation(
@@ -81,35 +126,26 @@ export class API extends HubAPI {
     params?,
     forceReload?: boolean,
   ): Promise<CollectionDetailType> {
-    const path = `${this.apiPath}${repo}/${namespace}/${name}/`;
     if (
       !forceReload &&
       this.cachedCollection &&
       this.cachedCollection.name === name &&
       this.cachedCollection.namespace.name === namespace
     ) {
-      return new Promise((resolve, reject) => {
-        if (this.cachedCollection) {
-          resolve(this.cachedCollection);
-        } else {
-          reject(this.cachedCollection);
-        }
-      });
-    } else {
-      return new Promise((resolve, reject) => {
-        this.http
-          .get(path, {
-            params: params,
-          })
-          .then(result => {
-            this.cachedCollection = result.data;
-            resolve(result.data);
-          })
-          .catch(result => {
-            reject(result);
-          });
-      });
+      return Promise.resolve(this.cachedCollection);
     }
+
+    const path = `${this.apiPath}${repo}/${namespace}/${name}/`;
+    return this.http
+      .get(path, {
+        params: params,
+      })
+      .then(result => {
+        // remove module_utils, doc_fragments from item
+        const item = filterDetailItem(result.data);
+        this.cachedCollection = item;
+        return item;
+      });
   }
 
   getDownloadURL(distro_base_path, namespace, name, version) {
