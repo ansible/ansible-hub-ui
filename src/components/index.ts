@@ -35,7 +35,6 @@ export {
   closeAlertMixin,
   AlertType,
 } from './patternfly-wrappers/alert-list';
-export { APIButton } from './api-button/api-button';
 export { Main } from './patternfly-wrappers/main';
 export { UserForm } from './user-form/user-form';
 export { UserFormPage } from './user-form/user-form-page';

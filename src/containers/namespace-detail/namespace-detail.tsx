@@ -25,7 +25,6 @@ import {
   StatefulDropdown,
   LoadingPageWithHeader,
   Main,
-  APIButton,
   EmptyStateUnauthorized,
   EmptyStateFilter,
   EmptyStateNoData,
@@ -312,11 +311,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private renderPageControls() {
     const { collections } = this.state;
     if (!this.props.showControls) {
-      return (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <APIButton style={{ marginLeft: '8px' }} />
-        </div>
-      );
+      return <div style={{ display: 'flex', alignItems: 'center' }}></div>;
     }
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -326,7 +321,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             Upload collection
           </Button>
         )}
-        <APIButton style={{ marginLeft: '8px' }} />
         <StatefulDropdown
           items={[
             <DropdownItem
