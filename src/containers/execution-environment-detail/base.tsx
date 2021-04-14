@@ -1,18 +1,25 @@
 import * as React from 'react';
 
 import { RouteComponentProps, Redirect } from 'react-router-dom';
-import { ExecutionEnvironmentAPI, ContainerRepositoryType } from 'src/api';
+import {
+  ExecutionEnvironmentAPI,
+  ContainerRepositoryType,
+  ContainerDistributionAPI,
+  ExecutionEnvironmentNamespaceAPI
+} from 'src/api';
 import { formatPath, Paths } from '../../paths';
-
+import { Button } from '@patternfly/react-core';
 import {
   LoadingPageWithHeader,
   ExecutionEnvironmentHeader,
+  Main, RepositoryForm,
 } from 'src/components';
 
 interface IState {
   repo: ContainerRepositoryType;
   loading: boolean;
   redirect: string;
+  editing: boolean;
 }
 
 export interface IDetailSharedProps extends RouteComponentProps {
@@ -29,6 +36,7 @@ export function withContainerRepo(WrappedComponent) {
         repo: undefined,
         loading: true,
         redirect: undefined,
+        editing: false,
       };
     }
     componentDidMount() {
@@ -77,11 +85,42 @@ export function withContainerRepo(WrappedComponent) {
             updateState={change => this.setState(change)}
             tab={this.getTab()}
             container={this.state.repo}
-          />
+            pageControls={
+              <Button onClick={() => this.setState({ editing: true })}>
+                Edit
+              </Button>
+            }
+          /><Main>
+          {this.state.editing && (<RepositoryForm
+            name={this.props.match.params['container']}
+            selectedGroups={[]}
+            description={this.state.repo.description}
+            onSave={(description, selectedGroups) => {
+              let promises = [];
+              promises.push(
+                  ContainerDistributionAPI.patch(this.state.repo.pulp.distribution.pulp_id, {
+                    description: description,
+                  }),
+              );
+              promises.push(
+                  ExecutionEnvironmentNamespaceAPI.update(
+                      this.state.repo.namespace.name,
+                      { groups: selectedGroups },
+                  ),
+              );
+
+              Promise.all(promises).then(() =>
+                  Promise.all(promises).then(() =>
+                      this.setState({ editing: false}),
+                  );
+            }}
+            onCancel={() => this.setState({ editing: false })}
+        />)}
           <WrappedComponent
             containerRepository={this.state.repo}
+            editing={this.state.editing}
             {...this.props}
-          />
+          /></Main>
         </React.Fragment>
       );
     }

@@ -9,6 +9,7 @@ interface IProps {
   tab: string;
   updateState: (any) => void;
   container: ContainerRepositoryType;
+  pageControls?: React.ReactElement;
 }
 
 export class ExecutionEnvironmentHeader extends React.Component<IProps> {
@@ -29,15 +30,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
             ]}
           />
         }
-        pageControls={
-          <Button
-            variant='primary'
-            onClick={() => this.props.updateState({ editing: true })}
-          >
-            {' '}
-            Edit{' '}
-          </Button>
-        }
+        pageControls={this.props.pageControls}
       >
         <Tooltip content={this.props.container.description}>
           <p className={'truncated'}>{this.props.container.description}</p>

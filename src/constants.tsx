@@ -145,12 +145,25 @@ export class Constants {
     'container.namespace_view_containerpushrepository':
       "View container's repository",
     'container.namespace_add_containerdistribution': 'Add distribution',
-    'container.change_containerdistribution': 'Change',
-    'container.delete_containerdistribution': 'Delete',
-    'container.push_containerdistribution': 'Push',
-    'container.pull_containerdistribution': 'Pull',
-    'container.view_containerdistribution': 'View',
+    'container.change_containerdistribution': 'Change distribution',
+    'container.delete_containerdistribution': 'Delete distribution',
+    'container.push_containerdistribution': 'Push distribution',
+    'container.pull_containerdistribution': 'Pull distribution',
+    'container.view_containerdistribution': 'View distribution',
   };
+  static CONTAINER_NAMESPACE_PERMISSIONS = [
+    'container.view_containernamespace',
+    'container.delete_containernamespace',
+    'container.namespace_delete_containerdistribution',
+    'container.namespace_view_containerpushrepository',
+    'container.change_containernamespace',
+    'container.namespace_add_containerdistribution',
+    'container.namespace_view_containerdistribution',
+    'container.namespace_pull_containerdistribution',
+    'container.namespace_push_containerdistribution',
+    'container.namespace_change_containerdistribution',
+    'container.namespace_modify_content_containerpushrepository',
+  ];
   static UPSTREAM_HOSTS = [
     'galaxy.ansible.com',
     'galaxy-dev.ansible.com',

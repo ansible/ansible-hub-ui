@@ -9,6 +9,7 @@ import {
 } from '@patternfly/react-core';
 import { ObjectPermissionField } from 'src/components';
 import { GroupObjectPermissionType } from 'src/api';
+import { Constants } from 'src/constants';
 
 interface IProps {
   name: string;
@@ -75,19 +76,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           <FormGroup key='groups' fieldId='groups' label='Groups with access'>
             <ObjectPermissionField
               groups={this.state.selectedGroups}
-              availablePermissions={[
-                'container.view_containernamespace',
-                'container.delete_containernamespace',
-                'container.namespace_delete_containerdistribution',
-                'container.namespace_view_containerpushrepository',
-                'container.change_containernamespace',
-                'container.namespace_add_containerdistribution',
-                'container.namespace_view_containerdistribution',
-                'container.namespace_pull_containerdistribution',
-                'container.namespace_push_containerdistribution',
-                'container.namespace_change_containerdistribution',
-                'container.namespace_modify_content_containerpushrepository',
-              ]}
+              availablePermissions={Constants.CONTAINER_NAMESPACE_PERMISSIONS}
               setGroups={g => this.setState({ selectedGroups: g })}
             ></ObjectPermissionField>
           </FormGroup>
