@@ -161,7 +161,7 @@ export class UserForm extends React.Component<IProps, IState> {
       >
         <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
           <Switch
-            isDisabled={!this.context.user.is_superuser}
+            isDisabled={!this.context.user.is_superuser || isReadonly}
             label='Super user'
             labelOff='Not a super user'
             isChecked={user.is_superuser}
