@@ -21,6 +21,7 @@ import {
 import { formatPath, Paths } from '../../paths';
 import { ExecutionEnvironmentAPI } from '../../api';
 import './execution-environment-detail.scss';
+import { withContainerRepo, IDetailSharedProps } from './base';
 
 interface IState {
   loading: boolean;
@@ -30,7 +31,7 @@ interface IState {
 }
 
 class ExecutionEnvironmentDetail extends React.Component<
-  RouteComponentProps,
+  IDetailSharedProps,
   IState
 > {
   constructor(props) {
@@ -45,40 +46,11 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   componentDidMount() {
-    this.queryReadme(this.props.match.params['container']);
+    this.queryReadme(this.props.containerRepository.name);
   }
 
   render() {
-    if (this.state.redirect === 'activity') {
-      return (
-        <Redirect
-          to={formatPath(Paths.executionEnvironmentDetailActivities, {
-            container: this.props.match.params['container'],
-          })}
-        />
-      );
-    } else if (this.state.redirect === 'images') {
-      return (
-        <Redirect
-          to={formatPath(Paths.executionEnvironmentDetailImages, {
-            container: this.props.match.params['container'],
-          })}
-        />
-      );
-    } else if (this.state.redirect === 'notFound') {
-      return <Redirect to={Paths.notFound} />;
-    }
-
-    return (
-      <React.Fragment>
-        <ExecutionEnvironmentHeader
-          id={this.props.match.params['container']}
-          updateState={change => this.setState(change)}
-          tab='detail'
-        />
-        <Main>{this.renderDetail()}</Main>
-      </React.Fragment>
-    );
+    return <Main>{this.renderDetail()}</Main>;
   }
 
   renderDetail() {
@@ -87,7 +59,7 @@ class ExecutionEnvironmentDetail extends React.Component<
       'podman pull ' +
       url +
       '/' +
-      this.props.match.params['container'] +
+      this.props.containerRepository.name +
       ':latest';
 
     return (
@@ -154,7 +126,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                   variant={'primary'}
                   onClick={() =>
                     this.saveReadme(
-                      this.props.match.params['container'],
+                      this.props.containerRepository.name,
                       this.state.readme,
                     )
                   }
@@ -167,7 +139,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                     this.setState({
                       markdownEditing: false,
                     });
-                    this.queryReadme(this.props.match.params['container']);
+                    this.queryReadme(this.props.containerRepository.name);
                   }}
                 >
                   Cancel
@@ -205,4 +177,4 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 }
 
-export default withRouter(ExecutionEnvironmentDetail);
+export default withRouter(withContainerRepo(ExecutionEnvironmentDetail));

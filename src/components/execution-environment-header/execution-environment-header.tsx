@@ -2,48 +2,21 @@ import * as React from 'react';
 import { Tooltip } from '@patternfly/react-core';
 import { Paths } from 'src/paths';
 import { BaseHeader, Breadcrumbs, Tabs } from 'src/components';
-import { ExecutionEnvironmentAPI } from 'src/api';
+import { ContainerRepositoryType } from 'src/api';
 
 interface IProps {
   id: string;
   tab: string;
   updateState: (any) => void;
+  container: ContainerRepositoryType;
 }
 
-interface IState {
-  container: { name: string; description: string; namespace: string };
-}
-
-export class ExecutionEnvironmentHeader extends React.Component<
-  IProps,
-  IState
-> {
-  componentDidMount() {
-    ExecutionEnvironmentAPI.get(this.props.id)
-      .then(result => {
-        this.setState({
-          container: {
-            name: result.data.name,
-            description: result.data.description,
-            namespace: result.data.namespace,
-          },
-        });
-      })
-      .catch(error => this.props.updateState({ redirect: 'notFound' }));
-  }
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      container: { name: '', description: '', namespace: '' },
-    };
-  }
-
+export class ExecutionEnvironmentHeader extends React.Component<IProps> {
   render() {
     const tabs = ['Detail', 'Activity', 'Images'];
     return (
       <BaseHeader
-        title={this.state.container.name}
+        title={this.props.container.name}
         breadcrumbs={
           <Breadcrumbs
             links={[
@@ -51,13 +24,13 @@ export class ExecutionEnvironmentHeader extends React.Component<
                 url: Paths.executionEnvironments,
                 name: 'Container Registry',
               },
-              { name: this.state.container.name },
+              { name: this.props.container.name },
             ]}
           />
         }
       >
-        <Tooltip content={this.state.container.description}>
-          <p className={'truncated'}>{this.state.container.description}</p>
+        <Tooltip content={this.props.container.description}>
+          <p className={'truncated'}>{this.props.container.description}</p>
         </Tooltip>
         <span />
         <div className='tab-link-container'>

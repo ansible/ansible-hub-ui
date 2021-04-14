@@ -20,6 +20,8 @@ import { ActivitiesAPI } from '../../api';
 import * as moment from 'moment';
 import './execution-environment-detail.scss';
 
+import { withContainerRepo, IDetailSharedProps } from './base';
+
 interface IState {
   loading: boolean;
   activities: { created: string; action: React.ReactFragment }[];
@@ -27,7 +29,7 @@ interface IState {
 }
 
 class ExecutionEnvironmentDetailActivities extends React.Component<
-  RouteComponentProps,
+  IDetailSharedProps,
   IState
 > {
   constructor(props) {
@@ -41,40 +43,11 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
   }
 
   componentDidMount() {
-    this.queryActivities(this.props.match.params['container']);
+    this.queryActivities(this.props.containerRepository.name);
   }
 
   render() {
-    if (this.state.redirect === 'detail') {
-      return (
-        <Redirect
-          to={formatPath(Paths.executionEnvironmentDetail, {
-            container: this.props.match.params['container'],
-          })}
-        />
-      );
-    } else if (this.state.redirect === 'images') {
-      return (
-        <Redirect
-          to={formatPath(Paths.executionEnvironmentDetailImages, {
-            container: this.props.match.params['container'],
-          })}
-        />
-      );
-    } else if (this.state.redirect === 'notFound') {
-      return <Redirect to={Paths.notFound} />;
-    }
-
-    return (
-      <React.Fragment>
-        <ExecutionEnvironmentHeader
-          id={this.props.match.params['container']}
-          updateState={change => this.setState(change)}
-          tab='activity'
-        />
-        <Main>{this.renderActivity()}</Main>
-      </React.Fragment>
-    );
+    return <Main>{this.renderActivity()}</Main>;
   }
 
   renderActivity() {
@@ -223,7 +196,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
               created: lastActivity.created,
               action: (
                 <React.Fragment>
-                  {this.props.match.params['container']} was added
+                  {this.props.containerRepository.name} was added
                 </React.Fragment>
               ),
             });
@@ -235,4 +208,6 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
   }
 }
 
-export default withRouter(ExecutionEnvironmentDetailActivities);
+export default withRouter(
+  withContainerRepo(ExecutionEnvironmentDetailActivities),
+);

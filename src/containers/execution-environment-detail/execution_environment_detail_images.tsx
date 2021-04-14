@@ -45,6 +45,8 @@ import {
 
 import { TagManifestModal } from './tag-manifest-modal';
 
+import { withContainerRepo, IDetailSharedProps } from './base';
+
 interface IState {
   loading: boolean;
   images: ContainerManifestType[];
@@ -58,11 +60,10 @@ interface IState {
 }
 
 class ExecutionEnvironmentDetailImages extends React.Component<
-  RouteComponentProps,
+  IDetailSharedProps,
   IState
 > {
   nonQueryStringParams = [];
-  containerName = this.props.match.params['container'];
 
   constructor(props) {
     super(props);
@@ -91,40 +92,11 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   componentDidMount() {
-    this.queryImages(this.containerName);
+    this.queryImages(this.props.containerRepository.name);
   }
 
   render() {
-    if (this.state.redirect === 'activity') {
-      return (
-        <Redirect
-          to={formatPath(Paths.executionEnvironmentDetailActivities, {
-            container: this.props.match.params['container'],
-          })}
-        />
-      );
-    } else if (this.state.redirect === 'detail') {
-      return (
-        <Redirect
-          to={formatPath(Paths.executionEnvironmentDetail, {
-            container: this.props.match.params['container'],
-          })}
-        />
-      );
-    } else if (this.state.redirect === 'notFound') {
-      return <Redirect to={Paths.notFound} />;
-    }
-
-    return (
-      <React.Fragment>
-        <ExecutionEnvironmentHeader
-          id={this.props.match.params['container']}
-          updateState={change => this.setState(change)}
-          tab='images'
-        />
-        <Main>{this.renderImages()}</Main>
-      </React.Fragment>
-    );
+    return <Main>{this.renderImages()}</Main>;
   }
 
   renderImages() {
@@ -192,8 +164,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           containerManifest={images.find(
             el => el.digest === manageTagsMannifestDigest,
           )}
-          reloadManifests={() => this.queryImages(this.containerName)}
-          repositoryName={this.containerName}
+          reloadManifests={() =>
+            this.queryImages(this.props.containerRepository.name)
+          }
+          repositoryName={this.props.containerRepository.name}
           onAlert={alert => {
             this.setState({ alerts: this.state.alerts.concat(alert) });
           }}
@@ -378,4 +352,4 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 }
 
-export default withRouter(ExecutionEnvironmentDetailImages);
+export default withRouter(withContainerRepo(ExecutionEnvironmentDetailImages));
