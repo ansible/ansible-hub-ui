@@ -9,7 +9,6 @@ import {
   Tooltip,
   Switch,
 } from '@patternfly/react-core';
-import { UserPlusIcon } from '@patternfly/react-icons';
 
 import { APISearchTypeAhead, HelperText } from 'src/components';
 import { DataForm } from 'src/components/shared/data-form';
