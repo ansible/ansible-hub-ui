@@ -51,7 +51,7 @@ interface IState {
   alerts: AlertType[];
 
   // ID for manifest that is open in the manage tags modal.
-  manageTagsMannifestDigest: string;
+  manageTagsManifestDigest: string;
 }
 
 class ExecutionEnvironmentDetailImages extends React.Component<
@@ -81,7 +81,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       numberOfImages: 0,
       params: params,
       redirect: null,
-      manageTagsMannifestDigest: undefined,
+      manageTagsManifestDigest: undefined,
       alerts: [],
     };
   }
@@ -95,7 +95,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   renderImages() {
-    const { params, images, manageTagsMannifestDigest } = this.state;
+    const { params, images, manageTagsManifestDigest } = this.state;
     if (
       images.length === 0 &&
       !filterIsSet(params, ['tag', 'digest__icontains'])
@@ -158,10 +158,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           closeAlert={i => this.closeAlert(i)}
         />
         <TagManifestModal
-          isOpen={!!manageTagsMannifestDigest}
-          closeModal={() => this.setState({ manageTagsMannifestDigest: null })}
+          isOpen={!!manageTagsManifestDigest}
+          closeModal={() => this.setState({ manageTagsManifestDigest: null })}
           containerManifest={images.find(
-            el => el.digest === manageTagsMannifestDigest,
+            el => el.digest === manageTagsManifestDigest,
           )}
           reloadManifests={() =>
             this.queryImages(this.props.containerRepository.name)
@@ -284,7 +284,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       <DropdownItem
         key='edit-tags'
         onClick={() => {
-          this.setState({ manageTagsMannifestDigest: image.digest });
+          this.setState({ manageTagsManifestDigest: image.digest });
         }}
       >
         Edit tags

@@ -370,7 +370,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
         tagInFormError:
           'A tag may contain lowercase and uppercase ASCII ' +
           'alphabetic characters, digits, underscores, periods, and dashes. A tag must not ' +
-          'start with a period or a dash.',
+          'start with a period, underscore, or a dash.',
       });
     } else {
       this.setState({ tagInFormError: undefined }, () => {
