@@ -40,7 +40,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     const { description, selectedGroups } = this.state;
     return (
       <Modal
-        variant='small'
+        variant='large'
         onClose={onCancel}
         isOpen={true}
         title={'Edit repository'}

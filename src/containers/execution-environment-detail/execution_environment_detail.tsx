@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { EmptyStateNoData, MarkdownEditor } from '../../components';
-import {
-  MarkdownEditor,
-  EmptyStateNoData,
-} from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   ClipboardCopy,
@@ -15,10 +11,7 @@ import {
 } from '@patternfly/react-core';
 import './execution-environment-detail.scss';
 import { withContainerRepo, IDetailSharedProps } from './base';
-import {
-  ExecutionEnvironmentAPI,
-  GroupObjectPermissionType,
-} from '../../api';
+import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from '../../api';
 import './execution-environment-detail.scss';
 
 interface IState {

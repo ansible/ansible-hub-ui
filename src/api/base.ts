@@ -65,7 +65,6 @@ export class BaseAPI {
   }
 
   getPath(apiPath: string) {
-    console.log(apiPath || this.apiPath);
     return apiPath || this.apiPath;
   }
 

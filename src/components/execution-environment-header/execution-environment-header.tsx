@@ -13,7 +13,6 @@ interface IProps {
 }
 
 export class ExecutionEnvironmentHeader extends React.Component<IProps> {
-
   render() {
     const tabs = ['Detail', 'Activity', 'Images'];
     return (

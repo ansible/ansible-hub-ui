@@ -5,14 +5,16 @@ import {
   ExecutionEnvironmentAPI,
   ContainerRepositoryType,
   ContainerDistributionAPI,
-  ExecutionEnvironmentNamespaceAPI
+  ExecutionEnvironmentNamespaceAPI,
+  GroupObjectPermissionType,
 } from 'src/api';
 import { formatPath, Paths } from '../../paths';
 import { Button } from '@patternfly/react-core';
 import {
   LoadingPageWithHeader,
   ExecutionEnvironmentHeader,
-  Main, RepositoryForm,
+  Main,
+  RepositoryForm,
 } from 'src/components';
 
 interface IState {
@@ -20,6 +22,7 @@ interface IState {
   loading: boolean;
   redirect: string;
   editing: boolean;
+  selectedGroups: GroupObjectPermissionType[];
 }
 
 export interface IDetailSharedProps extends RouteComponentProps {
@@ -37,12 +40,21 @@ export function withContainerRepo(WrappedComponent) {
         loading: true,
         redirect: undefined,
         editing: false,
+        selectedGroups: [],
       };
     }
     componentDidMount() {
       ExecutionEnvironmentAPI.get(this.props.match.params['container'])
         .then(result => {
-          this.setState({ loading: false, repo: result.data });
+          const repo = result;
+          ExecutionEnvironmentNamespaceAPI.get(result.data.namespace.name).then(
+            result =>
+              this.setState({
+                loading: false,
+                repo: repo.data,
+                selectedGroups: result.data.groups,
+              }),
+          );
         })
         .catch(e => this.setState({ redirect: 'notFound' }));
     }
@@ -90,37 +102,42 @@ export function withContainerRepo(WrappedComponent) {
                 Edit
               </Button>
             }
-          /><Main>
-          {this.state.editing && (<RepositoryForm
-            name={this.props.match.params['container']}
-            selectedGroups={[]}
-            description={this.state.repo.description}
-            onSave={(description, selectedGroups) => {
-              let promises = [];
-              promises.push(
-                  ContainerDistributionAPI.patch(this.state.repo.pulp.distribution.pulp_id, {
-                    description: description,
-                  }),
-              );
-              promises.push(
-                  ExecutionEnvironmentNamespaceAPI.update(
+          />
+          <Main>
+            {this.state.editing && (
+              <RepositoryForm
+                name={this.props.match.params['container']}
+                selectedGroups={this.state.selectedGroups}
+                description={this.state.repo.description}
+                onSave={(description, selectedGroups) => {
+                  let promises = [];
+                  promises.push(
+                    ContainerDistributionAPI.patch(
+                      this.state.repo.pulp.distribution.pulp_id,
+                      {
+                        description: description,
+                      },
+                    ),
+                  );
+                  promises.push(
+                    ExecutionEnvironmentNamespaceAPI.update(
                       this.state.repo.namespace.name,
                       { groups: selectedGroups },
-                  ),
-              );
-
-              Promise.all(promises).then(() =>
-                  Promise.all(promises).then(() =>
-                      this.setState({ editing: false}),
+                    ),
                   );
-            }}
-            onCancel={() => this.setState({ editing: false })}
-        />)}
-          <WrappedComponent
-            containerRepository={this.state.repo}
-            editing={this.state.editing}
-            {...this.props}
-          /></Main>
+                  Promise.all(promises).then(() =>
+                    this.setState({ editing: false }),
+                  );
+                }}
+                onCancel={() => this.setState({ editing: false })}
+              />
+            )}
+            <WrappedComponent
+              containerRepository={this.state.repo}
+              editing={this.state.editing}
+              {...this.props}
+            />
+          </Main>
         </React.Fragment>
       );
     }
