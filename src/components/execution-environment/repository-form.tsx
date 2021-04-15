@@ -4,7 +4,6 @@ import {
   Form,
   FormGroup,
   Modal,
-  Switch,
   TextInput,
 } from '@patternfly/react-core';
 import { ObjectPermissionField } from 'src/components';
@@ -78,6 +77,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
               groups={this.state.selectedGroups}
               availablePermissions={Constants.CONTAINER_NAMESPACE_PERMISSIONS}
               setGroups={g => this.setState({ selectedGroups: g })}
+              menuAppendTo='parent'
             ></ObjectPermissionField>
           </FormGroup>
         </Form>
