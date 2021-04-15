@@ -84,13 +84,11 @@ class AuthHandler extends React.Component<
     // to check for an active user.
     const { user } = this.context;
     if (!user) {
-      ActiveUserAPI.getUser()
-        .then(userResponse => {
-          FeatureFlagsAPI.get().then(flagsResponse => {
-            this.props.updateInitialData(userResponse, flagsResponse.data, () =>
-              this.setState({ isLoading: false }),
-            );
-          });
+      Promise.all([ActiveUserAPI.getUser(), FeatureFlagsAPI.get()])
+        .then(response => {
+          this.props.updateInitialData(response[0], response[1].data, () =>
+            this.setState({ isLoading: false }),
+          );
         })
         .catch(() => this.setState({ isLoading: false }));
     }
@@ -99,7 +97,7 @@ class AuthHandler extends React.Component<
   render() {
     const { isLoading } = this.state;
     const { Component, noAuth, ...props } = this.props;
-    const { user, featureFlags } = this.context;
+    const { user } = this.context;
 
     if (isLoading) {
       return null;
