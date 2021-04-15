@@ -31,33 +31,66 @@ import {
   ExecutionEnvironmentDetailImages,
   ExecutionEnvironmentManifest,
 } from 'src/containers';
-import { ActiveUserAPI } from 'src/api';
+import {
+  ActiveUserAPI,
+  FeatureFlagsAPI,
+  FeatureFlagsType,
+  UserType,
+} from 'src/api';
 import { AppContext } from '../app-context';
 
 import { Paths, formatPath } from 'src/paths';
 
-interface IProps extends RouteComponentProps {
+interface IRoutesProps {
+  updateInitialData: (
+    user: UserType,
+    flags: FeatureFlagsType,
+    callback?: () => void,
+  ) => void;
+}
+
+interface IAuthHandlerProps extends RouteComponentProps {
   Component: any;
   noAuth: boolean;
-  selectedRepo: string;
+  updateInitialData: (
+    user: UserType,
+    flags: FeatureFlagsType,
+    callback?: () => void,
+  ) => void;
+  isDisabled: boolean;
 }
-interface IState {
+interface IAuthHandlerState {
   isLoading: boolean;
 }
 
-class AuthHandler extends React.Component<IProps, IState> {
+interface IRouteConfig {
+  comp: any;
+  path: string;
+  noAuth?: boolean;
+  isDisabled?: boolean;
+}
+
+class AuthHandler extends React.Component<
+  IAuthHandlerProps,
+  IAuthHandlerState
+> {
   static contextType = AppContext;
   constructor(props, context) {
     super(props);
     this.state = { isLoading: !context.user };
   }
   componentDidMount() {
-    const { user, setUser } = this.context;
+    // This component is mounted on every route change, so it's a good place
+    // to check for an active user.
+    const { user } = this.context;
     if (!user) {
       ActiveUserAPI.getUser()
-        .then(result => {
-          setUser(result);
-          this.setState({ isLoading: false });
+        .then(userResponse => {
+          FeatureFlagsAPI.get().then(flagsResponse => {
+            this.props.updateInitialData(userResponse, flagsResponse.data, () =>
+              this.setState({ isLoading: false }),
+            );
+          });
         })
         .catch(() => this.setState({ isLoading: false }));
     }
@@ -66,7 +99,7 @@ class AuthHandler extends React.Component<IProps, IState> {
   render() {
     const { isLoading } = this.state;
     const { Component, noAuth, ...props } = this.props;
-    const { user } = this.context;
+    const { user, featureFlags } = this.context;
 
     if (isLoading) {
       return null;
@@ -79,81 +112,102 @@ class AuthHandler extends React.Component<IProps, IState> {
         ></Redirect>
       );
     }
-    return (
-      <Component selectedRepo={this.props.selectedRepo} {...props}></Component>
-    );
+
+    // only enforce this if feature flags are set. Otherwise the container
+    // registry will always return a 404 on the first load.
+    if (this.props.isDisabled) {
+      return <Redirect to={Paths.notFound}></Redirect>;
+    }
+
+    return <Component {...props}></Component>;
   }
 }
 
-export class Routes extends React.Component<any> {
+export class Routes extends React.Component<IRoutesProps> {
   static contextType = AppContext;
 
   // Note: must be ordered from most specific to least specific
-  routes = [
-    {
-      comp: ExecutionEnvironmentDetailActivities,
-      path: Paths.executionEnvironmentDetailActivities,
-    },
-    {
-      comp: ExecutionEnvironmentManifest,
-      path: Paths.executionEnvironmentManifest,
-    },
-    {
-      comp: ExecutionEnvironmentDetailImages,
-      path: Paths.executionEnvironmentDetailImages,
-    },
-    {
-      comp: ExecutionEnvironmentDetail,
-      path: Paths.executionEnvironmentDetail,
-    },
-    { comp: ExecutionEnvironmentList, path: Paths.executionEnvironments },
-    { comp: GroupList, path: Paths.groupList },
-    { comp: GroupDetail, path: Paths.groupDetail },
-    { comp: RepositoryList, path: Paths.repositories },
-    { comp: UserProfile, path: Paths.userProfileSettings },
-    { comp: UserCreate, path: Paths.createUser },
-    { comp: EditUser, path: Paths.editUser },
-    { comp: UserDetail, path: Paths.userDetail },
-    { comp: UserList, path: Paths.userList },
-    { comp: CertificationDashboard, path: Paths.approvalDashboard },
-    { comp: NotFound, path: Paths.notFound },
-    { comp: TokenPageStandalone, path: Paths.token },
-    { comp: Partners, path: Paths[NAMESPACE_TERM] },
-    { comp: EditNamespace, path: Paths.editNamespace },
-    { comp: ManageNamespace, path: Paths.myCollections },
-    { comp: ManageNamespace, path: Paths.myCollectionsByRepo },
-    { comp: MyNamespaces, path: Paths.myNamespaces },
-    { comp: LoginPage, path: Paths.login, noAuth: true },
-    { comp: CollectionDocs, path: Paths.collectionDocsPageByRepo },
-    { comp: CollectionDocs, path: Paths.collectionDocsIndexByRepo },
-    { comp: CollectionDocs, path: Paths.collectionContentDocsByRepo },
-    { comp: CollectionContent, path: Paths.collectionContentListByRepo },
-    { comp: CollectionImportLog, path: Paths.collectionImportLogByRepo },
-    { comp: CollectionDetail, path: Paths.collectionByRepo },
-    { comp: PartnerDetail, path: Paths.namespaceByRepo },
-    { comp: Search, path: Paths.searchByRepo },
-    { comp: CollectionDocs, path: Paths.collectionDocsPage },
-    { comp: CollectionDocs, path: Paths.collectionDocsIndex },
-    { comp: CollectionDocs, path: Paths.collectionContentDocs },
-    { comp: CollectionContent, path: Paths.collectionContentList },
-    { comp: CollectionImportLog, path: Paths.collectionImportLog },
-    { comp: MyImports, path: Paths.myImports },
-    { comp: CollectionDetail, path: Paths.collection },
-    { comp: PartnerDetail, path: Paths.namespace },
-    { comp: Search, path: Paths.search },
-  ];
+  getRoutes(): IRouteConfig[] {
+    const { featureFlags } = this.context;
+    let isContainerDisabled = true;
+    if (featureFlags) {
+      isContainerDisabled = !featureFlags.execution_environments;
+    }
+    return [
+      {
+        comp: ExecutionEnvironmentDetailActivities,
+        path: Paths.executionEnvironmentDetailActivities,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        comp: ExecutionEnvironmentManifest,
+        path: Paths.executionEnvironmentManifest,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        comp: ExecutionEnvironmentDetailImages,
+        path: Paths.executionEnvironmentDetailImages,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        comp: ExecutionEnvironmentDetail,
+        path: Paths.executionEnvironmentDetail,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        comp: ExecutionEnvironmentList,
+        path: Paths.executionEnvironments,
+        isDisabled: isContainerDisabled,
+      },
+      { comp: GroupList, path: Paths.groupList },
+      { comp: GroupDetail, path: Paths.groupDetail },
+      { comp: RepositoryList, path: Paths.repositories },
+      { comp: UserProfile, path: Paths.userProfileSettings },
+      { comp: UserCreate, path: Paths.createUser },
+      { comp: EditUser, path: Paths.editUser },
+      { comp: UserDetail, path: Paths.userDetail },
+      { comp: UserList, path: Paths.userList },
+      { comp: CertificationDashboard, path: Paths.approvalDashboard },
+      { comp: NotFound, path: Paths.notFound },
+      { comp: TokenPageStandalone, path: Paths.token },
+      { comp: Partners, path: Paths[NAMESPACE_TERM] },
+      { comp: EditNamespace, path: Paths.editNamespace },
+      { comp: ManageNamespace, path: Paths.myCollections },
+      { comp: ManageNamespace, path: Paths.myCollectionsByRepo },
+      { comp: MyNamespaces, path: Paths.myNamespaces },
+      { comp: LoginPage, path: Paths.login, noAuth: true },
+      { comp: CollectionDocs, path: Paths.collectionDocsPageByRepo },
+      { comp: CollectionDocs, path: Paths.collectionDocsIndexByRepo },
+      { comp: CollectionDocs, path: Paths.collectionContentDocsByRepo },
+      { comp: CollectionContent, path: Paths.collectionContentListByRepo },
+      { comp: CollectionImportLog, path: Paths.collectionImportLogByRepo },
+      { comp: CollectionDetail, path: Paths.collectionByRepo },
+      { comp: PartnerDetail, path: Paths.namespaceByRepo },
+      { comp: Search, path: Paths.searchByRepo },
+      { comp: CollectionDocs, path: Paths.collectionDocsPage },
+      { comp: CollectionDocs, path: Paths.collectionDocsIndex },
+      { comp: CollectionDocs, path: Paths.collectionContentDocs },
+      { comp: CollectionContent, path: Paths.collectionContentList },
+      { comp: CollectionImportLog, path: Paths.collectionImportLog },
+      { comp: MyImports, path: Paths.myImports },
+      { comp: CollectionDetail, path: Paths.collection },
+      { comp: PartnerDetail, path: Paths.namespace },
+      { comp: Search, path: Paths.search },
+    ];
+  }
 
   render() {
     return (
       <Switch>
-        {this.routes.map((route, index) => (
+        {this.getRoutes().map((route, index) => (
           <Route
             key={index}
             render={props => (
               <AuthHandler
+                updateInitialData={this.props.updateInitialData}
                 noAuth={route.noAuth}
                 Component={route.comp}
-                selectedRepo={this.props.selectedRepo}
+                isDisabled={route.isDisabled}
                 {...props}
               ></AuthHandler>
             )}
