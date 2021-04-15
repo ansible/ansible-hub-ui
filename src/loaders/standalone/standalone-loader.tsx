@@ -26,7 +26,7 @@ import {
 
 import { Routes } from './routes';
 import { Paths, formatPath } from 'src/paths';
-import { ActiveUserAPI, UserType } from 'src/api';
+import { ActiveUserAPI, UserType, FeatureFlagsType } from 'src/api';
 import { SmallLogo, StatefulDropdown } from 'src/components';
 import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
@@ -40,6 +40,7 @@ interface IState {
   selectedRepo: string;
   aboutModalVisible: boolean;
   toggleOpen: boolean;
+  featureFlags: FeatureFlagsType;
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -51,6 +52,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       selectedRepo: 'published',
       aboutModalVisible: false,
       toggleOpen: false,
+      featureFlags: null,
     };
   }
 
@@ -63,7 +65,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { user, selectedRepo } = this.state;
+    const { user, selectedRepo, featureFlags } = this.state;
 
     // block the page from rendering if we're on a repo route and the repo in the
     // url doesn't match the current state
@@ -290,9 +292,13 @@ class App extends React.Component<RouteComponentProps, IState> {
               <NavItem>
                 <Link to={Paths.repositories}>Repo Management</Link>
               </NavItem>
-              <NavItem>
-                <Link to={Paths.executionEnvironments}>Container Registry</Link>
-              </NavItem>
+              {featureFlags && featureFlags.execution_environments && (
+                <NavItem>
+                  <Link to={Paths.executionEnvironments}>
+                    Container Registry
+                  </Link>
+                </NavItem>
+              )}
             </NavList>
           </Nav>
         }
@@ -301,16 +307,27 @@ class App extends React.Component<RouteComponentProps, IState> {
 
     // Hide navs on login page
     if (this.props.location.pathname === Paths.login) {
-      return this.ctx(<Routes />);
+      return this.ctx(<Routes updateInitialData={this.updateInitialData} />);
     }
 
     return this.ctx(
       <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
         {this.state.aboutModalVisible && aboutModal}
-        <Routes selectedRepo={this.state.selectedRepo} />
+        <Routes updateInitialData={this.updateInitialData} />
       </Page>,
     );
   }
+
+  private updateInitialData = (
+    user: UserType,
+    flags: FeatureFlagsType,
+    callback?: () => void,
+  ) =>
+    this.setState({ user: user, featureFlags: flags }, () => {
+      if (callback) {
+        callback();
+      }
+    });
 
   private setRepoToURL() {
     const match = this.isRepoURL(this.props.location.pathname);
@@ -356,6 +373,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           setUser: this.setUser,
           selectedRepo: this.state.selectedRepo,
           setRepo: this.setRepo,
+          featureFlags: this.state.featureFlags,
         }}
       >
         {component}
@@ -363,8 +381,12 @@ class App extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private setUser = user => {
-    this.setState({ user: user });
+  private setUser = (user: UserType, callback?: () => void) => {
+    this.setState({ user: user }, () => {
+      if (callback) {
+        callback();
+      }
+    });
   };
 
   private setRepo = repo => {
