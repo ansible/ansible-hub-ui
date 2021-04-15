@@ -158,10 +158,15 @@ export class UserForm extends React.Component<IProps, IState> {
         key='superuserLabel'
         label='User type'
         helperTextInvalid={errorMessages['is_superuser']}
+        helperText={this.getSuperUserHelperText(user)}
       >
         <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
           <Switch
-            isDisabled={!this.context.user.is_superuser || isReadonly}
+            isDisabled={
+              !this.context.user.is_superuser ||
+              isReadonly ||
+              this.context.user.id === user.id
+            }
             label='Super user'
             labelOff='Not a super user'
             isChecked={user.is_superuser}
@@ -208,6 +213,17 @@ export class UserForm extends React.Component<IProps, IState> {
         updateField={(v, e) => this.updateField(v, e)}
       />
     );
+  }
+
+  private getSuperUserHelperText(user) {
+    if (!this.context.user.is_superuser) {
+      return 'Requires super user permissions to edit.';
+    }
+    if (this.context.user.id === user.id) {
+      return "Super users can't disable themselves.";
+    }
+
+    return null;
   }
 
   private clearGroups = () => {
