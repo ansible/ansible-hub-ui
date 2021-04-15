@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { FormSelect, FormSelectOption, Alert } from '@patternfly/react-core';
 
-import { BaseHeader, Breadcrumbs, APIButton } from 'src/components';
+import { BaseHeader, Breadcrumbs } from 'src/components';
 import { CollectionDetailType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -68,7 +68,6 @@ export class CollectionHeader extends React.Component<IProps> {
         breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
         pageControls={
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <APIButton style={{ marginRight: '8px' }} />
             <FormSelect
               onChange={val =>
                 updateParams(ParamHelper.setParam(params, 'version', val))
