@@ -29,6 +29,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
         email: '',
         password: '',
         groups: [],
+        is_superuser: false,
       },
       errorMessages: {},
     };

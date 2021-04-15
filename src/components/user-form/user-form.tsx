@@ -5,17 +5,16 @@ import {
   TextInput,
   ActionGroup,
   Button,
-  Chip,
-  ChipGroup,
   Label,
   Tooltip,
+  Switch,
 } from '@patternfly/react-core';
-import { UserPlusIcon } from '@patternfly/react-icons';
 
 import { APISearchTypeAhead, HelperText } from 'src/components';
 import { DataForm } from 'src/components/shared/data-form';
 
 import { UserType, GroupAPI } from 'src/api';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IProps {
   /** User to edit */
@@ -48,6 +47,7 @@ export class UserForm extends React.Component<IProps, IState> {
   public static defaultProps = {
     isReadonly: false,
   };
+  static contextType = AppContext;
 
   constructor(props) {
     super(props);
@@ -151,17 +151,34 @@ export class UserForm extends React.Component<IProps, IState> {
     );
 
     const superuserLabel = (
-      <FormGroup fieldId='is_superuser' key='superuserLabel' label='User type'>
+      <FormGroup
+        validated={this.toError(!('is_superuser' in errorMessages))}
+        fieldId='is_superuser'
+        key='superuserLabel'
+        label='User type'
+        helperTextInvalid={errorMessages['is_superuser']}
+        helperText={this.getSuperUserHelperText(user)}
+      >
         <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
-          <Label icon={<UserPlusIcon />} color='orange'>
-            Super user
-          </Label>
+          <Switch
+            isDisabled={
+              !this.context.user.is_superuser ||
+              isReadonly ||
+              this.context.user.id === user.id
+            }
+            label='Super user'
+            labelOff='Not a super user'
+            isChecked={user.is_superuser}
+            onChange={e =>
+              this.updateUserFieldByName(!user.is_superuser, 'is_superuser')
+            }
+          ></Switch>
         </Tooltip>
       </FormGroup>
     );
 
     const formButtons = () => (
-      <ActionGroup>
+      <ActionGroup key='actions'>
         <Button
           isDisabled={
             !this.isPassValid(user.password, passwordConfirm) ||
@@ -171,7 +188,7 @@ export class UserForm extends React.Component<IProps, IState> {
         >
           Save
         </Button>
-        <Button onClick={() => onCancel()} variant='link'>
+        <Button key='cancel' onClick={() => onCancel()} variant='link'>
           Cancel
         </Button>
       </ActionGroup>
@@ -180,7 +197,7 @@ export class UserForm extends React.Component<IProps, IState> {
     const formSuffix = [
       !isReadonly && passwordConfirmGroup(),
       isMe || isReadonly ? readonlyGroups() : editGroups(),
-      user.is_superuser && superuserLabel,
+      superuserLabel,
       !isReadonly && formButtons(),
     ];
 
@@ -195,6 +212,17 @@ export class UserForm extends React.Component<IProps, IState> {
         updateField={(v, e) => this.updateField(v, e)}
       />
     );
+  }
+
+  private getSuperUserHelperText(user) {
+    if (!this.context.user.is_superuser) {
+      return 'Requires super user permissions to edit.';
+    }
+    if (this.context.user.id === user.id) {
+      return "Super users can't disable themselves.";
+    }
+
+    return null;
   }
 
   private clearGroups = () => {
@@ -253,13 +281,18 @@ export class UserForm extends React.Component<IProps, IState> {
     }
   }
 
-  private updateField = (value, event) => {
-    const update = { ...this.props.user };
+  private updateUserFieldByName(value, field) {
     const errorMessages = { ...this.props.errorMessages };
-    update[event.target.id] = value;
-    if (event.target.id in errorMessages) {
-      delete errorMessages[event.target.id];
+
+    const update = { ...this.props.user };
+    update[field] = value;
+    if (field in errorMessages) {
+      delete errorMessages[field];
     }
     this.props.updateUser(update, errorMessages);
+  }
+
+  private updateField = (value, event) => {
+    this.updateUserFieldByName(value, event.target.id);
   };
 }
