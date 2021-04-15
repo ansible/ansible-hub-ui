@@ -19,6 +19,7 @@ import {
   ClipboardCopy,
   Tooltip,
   DropdownItem,
+  LabelGroup,
 } from '@patternfly/react-core';
 
 import {
@@ -293,9 +294,11 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     return (
       <tr key={index}>
         <td>
-          {image.tags.map(tag => (
-            <TagLink key={tag} tag={tag} />
-          ))}
+          <LabelGroup>
+            {image.tags.map(tag => (
+              <TagLink key={tag} tag={tag} />
+            ))}
+          </LabelGroup>
         </td>
         <Tooltip content={moment(image.pulp_created).format('MMMM Do YYYY')}>
           <td>{moment(image.pulp_created).fromNow()}</td>
