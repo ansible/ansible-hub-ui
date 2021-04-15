@@ -1,28 +1,16 @@
 import * as React from 'react';
-import {
-  Link,
-  Redirect,
-  RouteComponentProps,
-  withRouter,
-} from 'react-router-dom';
-import {
-  AppliedFilters,
-  BaseHeader,
-  Breadcrumbs,
-  CompoundFilter,
-  Main,
-  Pagination,
-  SortTable,
-  Tabs,
-  Tag,
-  EmptyStateNoData,
-  EmptyStateFilter,
-  ShaLabel,
-  TagLabel,
-  ExecutionEnvironmentHeader,
-} from '../../components';
-import { Section } from '@redhat-cloud-services/frontend-components';
+import './execution-environment-detail.scss';
+
+import * as moment from 'moment';
+import { pickBy } from 'lodash';
+import { ImagesAPI, ContainerManifestType } from '../../api';
+import { formatPath, Paths } from '../../paths';
 import { filterIsSet, ParamHelper, getHumanSize } from '../../utilities';
+
+import { Link, withRouter } from 'react-router-dom';
+
+import { Section } from '@redhat-cloud-services/frontend-components';
+
 import {
   Toolbar,
   ToolbarContent,
@@ -30,33 +18,47 @@ import {
   ToolbarItem,
   ClipboardCopy,
   Tooltip,
-  Label,
+  DropdownItem,
+  LabelGroup,
 } from '@patternfly/react-core';
-import { formatPath, Paths } from '../../paths';
-import { ExecutionEnvironmentAPI, ImagesAPI } from '../../api';
-import { pickBy } from 'lodash';
-import * as moment from 'moment';
-import './execution-environment-detail.scss';
+
+import {
+  AppliedFilters,
+  CompoundFilter,
+  Main,
+  Pagination,
+  SortTable,
+  EmptyStateNoData,
+  EmptyStateFilter,
+  ShaLabel,
+  TagLabel,
+  StatefulDropdown,
+  AlertList,
+  closeAlertMixin,
+  AlertType,
+} from '../../components';
+
+import { TagManifestModal } from './tag-manifest-modal';
+
+import { withContainerRepo, IDetailSharedProps } from './base';
 
 interface IState {
   loading: boolean;
-  images: {
-    digest: string;
-    tags: string[];
-    pulp_created: string;
-    size: number;
-  }[];
+  images: ContainerManifestType[];
   numberOfImages: number;
   params: { page?: number; page_size?: number };
   redirect: string;
+  alerts: AlertType[];
+
+  // ID for manifest that is open in the manage tags modal.
+  manageTagsManifestDigest: string;
 }
 
 class ExecutionEnvironmentDetailImages extends React.Component<
-  RouteComponentProps,
+  IDetailSharedProps,
   IState
 > {
   nonQueryStringParams = [];
-  containerName = this.props.match.params['container'];
 
   constructor(props) {
     super(props);
@@ -79,48 +81,21 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       numberOfImages: 0,
       params: params,
       redirect: null,
+      manageTagsManifestDigest: undefined,
+      alerts: [],
     };
   }
 
   componentDidMount() {
-    this.queryImages(this.containerName);
+    this.queryImages(this.props.containerRepository.name);
   }
 
   render() {
-    if (this.state.redirect === 'activity') {
-      return (
-        <Redirect
-          to={formatPath(Paths.executionEnvironmentDetailActivities, {
-            container: this.props.match.params['container'],
-          })}
-        />
-      );
-    } else if (this.state.redirect === 'detail') {
-      return (
-        <Redirect
-          to={formatPath(Paths.executionEnvironmentDetail, {
-            container: this.props.match.params['container'],
-          })}
-        />
-      );
-    } else if (this.state.redirect === 'notFound') {
-      return <Redirect to={Paths.notFound} />;
-    }
-
-    return (
-      <React.Fragment>
-        <ExecutionEnvironmentHeader
-          id={this.props.match.params['container']}
-          updateState={change => this.setState(change)}
-          tab='images'
-        />
-        <Main>{this.renderImages()}</Main>
-      </React.Fragment>
-    );
+    return <Main>{this.renderImages()}</Main>;
   }
 
   renderImages() {
-    const { params, images } = this.state;
+    const { params, images, manageTagsManifestDigest } = this.state;
     if (
       images.length === 0 &&
       !filterIsSet(params, ['tag', 'digest__icontains'])
@@ -164,11 +139,40 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           type: 'none',
           id: 'instructions',
         },
+        {
+          title: '',
+          type: 'none',
+          id: 'controls',
+        },
       ],
     };
 
+    const canEditTags = this.props.containerRepository.namespace.my_permissions.includes(
+      'container.namespace_modify_content_containerpushrepository',
+    );
+
     return (
       <Section className='body'>
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={i => this.closeAlert(i)}
+        />
+        <TagManifestModal
+          isOpen={!!manageTagsManifestDigest}
+          closeModal={() => this.setState({ manageTagsManifestDigest: null })}
+          containerManifest={images.find(
+            el => el.digest === manageTagsManifestDigest,
+          )}
+          reloadManifests={() =>
+            this.queryImages(this.props.containerRepository.name)
+          }
+          repositoryName={this.props.containerRepository.name}
+          onAlert={alert => {
+            this.setState({ alerts: this.state.alerts.concat(alert) });
+          }}
+          containerRepository={this.props.containerRepository}
+        />
+
         <div className='toolbar'>
           <Toolbar>
             <ToolbarContent>
@@ -232,7 +236,9 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               }
             />
             <tbody>
-              {images.map((image, i) => this.renderTableRow(image, i))}
+              {images.map((image, i) =>
+                this.renderTableRow(image, i, canEditTags),
+              )}
             </tbody>
           </table>
         )}
@@ -251,7 +257,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     );
   }
 
-  private renderTableRow(image: any, index: number) {
+  private renderTableRow(image: any, index: number, canEditTags: boolean) {
     const manifestLink = digestOrTag =>
       formatPath(Paths.executionEnvironmentManifest, {
         container: this.props.match.params['container'],
@@ -274,12 +280,25 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       image.tags.length === 0
         ? image.digest
         : this.props.match.params['container'] + ':' + image.tags[0];
+    const dropdownItems = [
+      <DropdownItem
+        key='edit-tags'
+        onClick={() => {
+          this.setState({ manageTagsManifestDigest: image.digest });
+        }}
+      >
+        Edit tags
+      </DropdownItem>,
+    ];
+
     return (
       <tr key={index}>
         <td>
-          {image.tags.map(tag => (
-            <TagLink key={tag} tag={tag} />
-          ))}
+          <LabelGroup>
+            {image.tags.map(tag => (
+              <TagLink key={tag} tag={tag} />
+            ))}
+          </LabelGroup>
         </td>
         <Tooltip content={moment(image.pulp_created).format('MMMM Do YYYY')}>
           <td>{moment(image.pulp_created).fromNow()}</td>
@@ -293,6 +312,12 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           <ClipboardCopy isReadOnly>
             {'podman pull ' + url + '/' + instruction}
           </ClipboardCopy>
+        </td>
+
+        <td>
+          {canEditTags && (
+            <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+          )}
         </td>
       </tr>
     );
@@ -328,6 +353,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   private get updateParams() {
     return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
   }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
 }
 
-export default withRouter(ExecutionEnvironmentDetailImages);
+export default withRouter(withContainerRepo(ExecutionEnvironmentDetailImages));

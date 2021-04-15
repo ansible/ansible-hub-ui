@@ -1,14 +1,6 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-import {
-  BaseHeader,
-  Breadcrumbs,
-  Main,
-  MarkdownEditor,
-  Tabs,
-  EmptyStateNoData,
-  ExecutionEnvironmentHeader,
-} from '../../components';
+import { withRouter } from 'react-router-dom';
+import { Main, EmptyStateNoData, MarkdownEditor } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   ClipboardCopy,
@@ -16,11 +8,10 @@ import {
   Flex,
   Title,
   Button,
-  Tooltip,
 } from '@patternfly/react-core';
-import { formatPath, Paths } from '../../paths';
 import { ExecutionEnvironmentAPI } from '../../api';
 import './execution-environment-detail.scss';
+import { withContainerRepo, IDetailSharedProps } from './base';
 
 interface IState {
   loading: boolean;
@@ -30,7 +21,7 @@ interface IState {
 }
 
 class ExecutionEnvironmentDetail extends React.Component<
-  RouteComponentProps,
+  IDetailSharedProps,
   IState
 > {
   constructor(props) {
@@ -45,40 +36,11 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   componentDidMount() {
-    this.queryReadme(this.props.match.params['container']);
+    this.queryReadme(this.props.containerRepository.name);
   }
 
   render() {
-    if (this.state.redirect === 'activity') {
-      return (
-        <Redirect
-          to={formatPath(Paths.executionEnvironmentDetailActivities, {
-            container: this.props.match.params['container'],
-          })}
-        />
-      );
-    } else if (this.state.redirect === 'images') {
-      return (
-        <Redirect
-          to={formatPath(Paths.executionEnvironmentDetailImages, {
-            container: this.props.match.params['container'],
-          })}
-        />
-      );
-    } else if (this.state.redirect === 'notFound') {
-      return <Redirect to={Paths.notFound} />;
-    }
-
-    return (
-      <React.Fragment>
-        <ExecutionEnvironmentHeader
-          id={this.props.match.params['container']}
-          updateState={change => this.setState(change)}
-          tab='detail'
-        />
-        <Main>{this.renderDetail()}</Main>
-      </React.Fragment>
-    );
+    return <Main>{this.renderDetail()}</Main>;
   }
 
   renderDetail() {
@@ -87,8 +49,13 @@ class ExecutionEnvironmentDetail extends React.Component<
       'podman pull ' +
       url +
       '/' +
-      this.props.match.params['container'] +
+      this.props.containerRepository.name +
       ':latest';
+
+    const { containerRepository } = this.props;
+    const canEdit = containerRepository.namespace.my_permissions.includes(
+      'container.change_containernamespace',
+    );
 
     return (
       <Flex direction={{ default: 'column' }}>
@@ -107,7 +74,7 @@ class ExecutionEnvironmentDetail extends React.Component<
         <FlexItem>
           <Section className='body pf-c-content'>
             <Title headingLevel='h2' size='lg'>
-              {!this.state.markdownEditing && this.state.readme && (
+              {!this.state.markdownEditing && this.state.readme && canEdit && (
                 <Button
                   className={'edit-button'}
                   variant={'primary'}
@@ -126,12 +93,14 @@ class ExecutionEnvironmentDetail extends React.Component<
                   'Add a README with instructions for using this container.'
                 }
                 button={
-                  <Button
-                    variant='primary'
-                    onClick={() => this.setState({ markdownEditing: true })}
-                  >
-                    Add
-                  </Button>
+                  canEdit ? (
+                    <Button
+                      variant='primary'
+                      onClick={() => this.setState({ markdownEditing: true })}
+                    >
+                      Add
+                    </Button>
+                  ) : null
                 }
               />
             ) : (
@@ -154,7 +123,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                   variant={'primary'}
                   onClick={() =>
                     this.saveReadme(
-                      this.props.match.params['container'],
+                      this.props.containerRepository.name,
                       this.state.readme,
                     )
                   }
@@ -167,7 +136,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                     this.setState({
                       markdownEditing: false,
                     });
-                    this.queryReadme(this.props.match.params['container']);
+                    this.queryReadme(this.props.containerRepository.name);
                   }}
                 >
                   Cancel
@@ -205,4 +174,4 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 }
 
-export default withRouter(ExecutionEnvironmentDetail);
+export default withRouter(withContainerRepo(ExecutionEnvironmentDetail));

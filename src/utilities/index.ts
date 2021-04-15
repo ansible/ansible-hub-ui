@@ -8,3 +8,4 @@ export { isFieldSet, clearSetFieldsFromRequest } from './write-only-fields';
 export { filterIsSet } from './filter-is-set';
 export { truncateSha } from './truncate_sha';
 export { getHumanSize } from './get_human_size';
+export { parsePulpIDFromURL } from './parse-pulp-id';
