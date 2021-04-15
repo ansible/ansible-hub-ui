@@ -102,9 +102,13 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
   }
 
   private loadGroups = name => {
-    GroupAPI.list({ name__contains: name }).then(result =>
-      this.setState({ searchGroups: result.data.data }),
-    );
+    GroupAPI.list({ name__contains: name }).then(result => {
+      const added = this.props.groups.map(group => group.name);
+      const groups = result.data.data.filter(
+        group => !added.includes(group.name),
+      );
+      this.setState({ searchGroups: groups });
+    });
   };
 
   private onSelect = (event, selection, isPlaceholder) => {
