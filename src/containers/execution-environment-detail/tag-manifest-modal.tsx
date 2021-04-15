@@ -138,7 +138,11 @@ export class TagManifestModal extends React.Component<IProps, IState> {
         title='Manage tags'
         variant='small'
       >
-        <Form>
+        {/*
+        The Form component will reload the page when it's "submitted" which causes the page
+        to reload when the user hits "enter" or clicks "Show Less" on the LabelGroup
+        */}
+        <Form onSubmit={e => e.preventDefault()}>
           <FormGroup
             validated={!!tagInFormError ? 'error' : 'default'}
             helperTextInvalid={tagInFormError}
@@ -150,7 +154,6 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                 validated={!!tagInFormError ? 'error' : 'default'}
                 type='text'
                 id='add-new-tag'
-                name='add-new-tag'
                 value={tagInForm}
                 onChange={val => this.setState({ tagInForm: val })}
                 isDisabled={!!tagToVerify || verifyingTag || isSaving}
