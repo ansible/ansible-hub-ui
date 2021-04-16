@@ -12,7 +12,7 @@ interface IProps {
   groups: GroupObjectPermissionType[];
   availablePermissions: string[];
   setGroups: (groups: GroupObjectPermissionType[]) => void;
-
+  isDisabled?: boolean;
   menuAppendTo?: 'parent' | 'inline';
 }
 
@@ -44,6 +44,7 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
           onSelect={this.onSelect}
           placeholderText='Find a group'
           menuAppendTo={this.props.menuAppendTo}
+          isDisabled={!!this.props.isDisabled}
         />
         <br />
         <br />
@@ -55,7 +56,7 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
               key={group.name}
             >
               <FlexItem style={{ minWidth: '200px' }}>{group.name}</FlexItem>
-              <FlexItem grow={{ default: 'grow' }}>
+              <FlexItem grow={{ default: 'grow' }} style={{ width: '90%' }}>
                 <PermissionChipSelector
                   availablePermissions={availablePermissions.map(perm =>
                     twoWayMapper(perm, Constants.GROUP_HUMAN_PERMISSIONS),

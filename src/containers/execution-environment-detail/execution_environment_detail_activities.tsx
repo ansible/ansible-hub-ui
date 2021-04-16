@@ -41,7 +41,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
   }
 
   render() {
-    return <Main>{this.renderActivity()}</Main>;
+    return this.renderActivity();
   }
 
   renderActivity() {

@@ -49,3 +49,5 @@ export { ActivitiesAPI } from './activities';
 export { ContainerTagAPI } from './container-tag';
 export { FeatureFlagsType } from './response-types/feature-flags';
 export { FeatureFlagsAPI } from './feature-flags';
+export { ContainerDistributionAPI } from './container-distribution';
+export { ExecutionEnvironmentNamespaceAPI } from './execution-environment-namespace';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Tooltip } from '@patternfly/react-core';
+import { Tooltip, Button } from '@patternfly/react-core';
 import { Paths } from 'src/paths';
 import { BaseHeader, Breadcrumbs, Tabs } from 'src/components';
 import { ContainerRepositoryType } from 'src/api';
@@ -9,6 +9,7 @@ interface IProps {
   tab: string;
   updateState: (any) => void;
   container: ContainerRepositoryType;
+  pageControls?: React.ReactElement;
 }
 
 export class ExecutionEnvironmentHeader extends React.Component<IProps> {
@@ -28,6 +29,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
             ]}
           />
         }
+        pageControls={this.props.pageControls}
       >
         <Tooltip content={this.props.container.description}>
           <p className={'truncated'}>{this.props.container.description}</p>

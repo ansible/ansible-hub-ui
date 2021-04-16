@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Main, EmptyStateNoData, MarkdownEditor } from '../../components';
+import { EmptyStateNoData, MarkdownEditor } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   ClipboardCopy,
@@ -9,15 +9,20 @@ import {
   Title,
   Button,
 } from '@patternfly/react-core';
-import { ExecutionEnvironmentAPI } from '../../api';
 import './execution-environment-detail.scss';
 import { withContainerRepo, IDetailSharedProps } from './base';
+import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from '../../api';
+import './execution-environment-detail.scss';
 
 interface IState {
   loading: boolean;
   readme: string;
   markdownEditing: boolean;
   redirect: string;
+  distribution_id: string;
+  groups: GroupObjectPermissionType[];
+  description: string;
+  namespace: any;
 }
 
 class ExecutionEnvironmentDetail extends React.Component<
@@ -32,6 +37,10 @@ class ExecutionEnvironmentDetail extends React.Component<
       readme: '',
       markdownEditing: false,
       redirect: null,
+      distribution_id: '',
+      groups: [],
+      description: '',
+      namespace: {},
     };
   }
 
@@ -40,7 +49,7 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   render() {
-    return <Main>{this.renderDetail()}</Main>;
+    return this.renderDetail();
   }
 
   renderDetail() {

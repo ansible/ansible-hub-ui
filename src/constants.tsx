@@ -108,24 +108,46 @@ export class Constants {
     'galaxy.change_synclist': 'Change synclist',
     'galaxy.view_synclist': 'View synclist',
     'galaxy.add_synclist': 'Add synclist',
-    'container.add_containernamespace': 'Create new execution environments',
-    'container.namespace_pull_containerdistribution':
-      'Pull private execution environments',
-    'container.namespace_change_containerdistribution':
-      'Change execution environments',
-    'container.namespace_view_containerdistribution':
-      'View private execution environments',
+    'container.add_containernamespace': 'Create new containers',
+    'container.namespace_pull_containerdistribution': 'Pull private containers',
+    'container.namespace_change_containerdistribution': 'Change containers',
+    'container.namespace_view_containerdistribution': 'View private containers',
     'container.namespace_modify_content_containerpushrepository':
       'Change image tags',
     'container.change_containernamespace':
-      'Change execution environment namespace permissions',
+      'Change container namespace permissions',
     'container.namespace_push_containerdistribution':
-      'Push to existing execution environments',
+      'Push to existing containers',
   };
   static GROUP_HUMAN_PERMISSIONS = {
     change_namespace: 'Change namespace',
     upload_to_namespace: 'Upload to namespace',
+    add_containernamespace: 'Create new containers',
+    namespace_pull_containerdistribution: 'Pull private containers',
+    namespace_change_containerdistribution: 'Change containers',
+    namespace_view_containerdistribution: 'View private containers',
+    namespace_modify_content_containerpushrepository: 'Change image tags',
+    change_containernamespace: 'Change container namespace permissions',
+    namespace_push_containerdistribution: 'Push to existing containers',
+    view_containernamespace: "View container's namespace",
+    delete_containernamespace: "Delete container's namespace",
+    namespace_delete_containerdistribution: "Delete container's distribution",
+    namespace_view_containerpushrepository: "View container's repository",
+    namespace_add_containerdistribution: 'Add distribution',
+    change_containerdistribution: 'Change distribution',
+    delete_containerdistribution: 'Delete distribution',
+    push_containerdistribution: 'Push distribution',
+    pull_containerdistribution: 'Pull distribution',
+    view_containerdistribution: 'View distribution',
   };
+  static CONTAINER_NAMESPACE_PERMISSIONS = [
+    'namespace_delete_containerdistribution',
+    'namespace_view_containerpushrepository',
+    'change_containernamespace',
+    'namespace_push_containerdistribution',
+    'namespace_change_containerdistribution',
+    'namespace_modify_content_containerpushrepository',
+  ];
   static UPSTREAM_HOSTS = [
     'galaxy.ansible.com',
     'galaxy-dev.ansible.com',

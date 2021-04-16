@@ -91,7 +91,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   render() {
-    return <Main>{this.renderImages()}</Main>;
+    return this.renderImages();
   }
 
   renderImages() {
