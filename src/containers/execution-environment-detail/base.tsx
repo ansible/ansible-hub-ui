@@ -7,6 +7,7 @@ import {
   ContainerDistributionAPI,
   ExecutionEnvironmentNamespaceAPI,
   GroupObjectPermissionType,
+  TaskAPI,
 } from 'src/api';
 import { formatPath, Paths } from '../../paths';
 import { Button } from '@patternfly/react-core';
@@ -134,9 +135,18 @@ export function withContainerRepo(WrappedComponent) {
                     );
                   }
                   Promise.all(promises)
-                    .then(() => {
+                    .then(results => {
+                      let task = results.find(x => x.data && x.data.task);
                       this.setState({ editing: false, loading: true });
-                      this.loadRepo();
+                      if (!!task) {
+                        this.waitForTask(
+                          task.data.task.split('tasks/')[1].replace('/', ''),
+                        ).then(() => {
+                          this.loadRepo();
+                        });
+                      } else {
+                        this.loadRepo();
+                      }
                     })
                     .catch(() =>
                       this.setState({
@@ -209,6 +219,17 @@ export function withContainerRepo(WrappedComponent) {
       }
 
       return 'detail';
+    }
+
+    private waitForTask(task) {
+      return TaskAPI.get(task).then(async result => {
+        if (result.data.state === 'completed') {
+        } else {
+          // wait half a second
+          await new Promise(r => setTimeout(r, 500));
+          this.waitForTask(task);
+        }
+      });
     }
     private get closeAlert() {
       return closeAlertMixin('alerts');
