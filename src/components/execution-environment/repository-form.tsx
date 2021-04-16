@@ -16,6 +16,7 @@ interface IProps {
   selectedGroups: GroupObjectPermissionType[];
   onSave: (string, []) => void;
   onCancel: () => void;
+  permissions: string[];
 }
 
 interface IState {
@@ -68,6 +69,9 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             <TextInput
               id='description'
               value={description}
+              isDisabled={this.props.permissions.includes(
+                'namespace_change_containerdistribution',
+              )}
               onChange={value => this.setState({ description: value })}
               type='text'
             />
@@ -78,6 +82,9 @@ export class RepositoryForm extends React.Component<IProps, IState> {
               availablePermissions={Constants.CONTAINER_NAMESPACE_PERMISSIONS}
               setGroups={g => this.setState({ selectedGroups: g })}
               menuAppendTo='parent'
+              isDisabled={this.props.permissions.includes(
+                'change_containernamespace',
+              )}
             ></ObjectPermissionField>
           </FormGroup>
         </Form>

@@ -141,7 +141,6 @@ export class Constants {
     'namespace_delete_containerdistribution',
     'namespace_view_containerpushrepository',
     'change_containernamespace',
-    'namespace_view_containerdistribution',
     'namespace_push_containerdistribution',
     'namespace_change_containerdistribution',
     'namespace_modify_content_containerpushrepository',
