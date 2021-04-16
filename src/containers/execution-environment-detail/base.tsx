@@ -85,6 +85,7 @@ export function withContainerRepo(WrappedComponent) {
       if (this.state.loading) {
         return <LoadingPageWithHeader />;
       }
+      const permissions = this.state.repo.namespace.my_permissions;
       return (
         <React.Fragment>
           <AlertList
@@ -97,9 +98,14 @@ export function withContainerRepo(WrappedComponent) {
             tab={this.getTab()}
             container={this.state.repo}
             pageControls={
-              <Button onClick={() => this.setState({ editing: true })}>
-                Edit
-              </Button>
+              permissions.includes(
+                'container.namespace_change_containerdistribution',
+              ) ||
+              permissions.includes('container.change_containernamespace') ? (
+                <Button onClick={() => this.setState({ editing: true })}>
+                  Edit
+                </Button>
+              ) : null
             }
           />
           <Main>
@@ -108,7 +114,7 @@ export function withContainerRepo(WrappedComponent) {
                 name={this.props.match.params['container']}
                 selectedGroups={cloneDeep(this.state.selectedGroups)}
                 description={this.state.repo.description}
-                permissions={this.state.repo.namespace.my_permissions}
+                permissions={permissions}
                 onSave={(description, selectedGroups) => {
                   let promises = [];
                   if (description !== this.state.repo.description) {
@@ -153,7 +159,7 @@ export function withContainerRepo(WrappedComponent) {
                         editing: false,
                         alerts: this.state.alerts.concat({
                           variant: 'danger',
-                          title: "Error: changes weren't save",
+                          title: "Error: changes weren't saved",
                         }),
                       }),
                     );
@@ -224,7 +230,7 @@ export function withContainerRepo(WrappedComponent) {
 
     private waitForTask(task) {
       return TaskAPI.get(task).then(result => {
-        if (result.data.state === 'completed') {
+        if (result.data.state !== 'completed') {
           return new Promise(r => setTimeout(r, 500)).then(() =>
             this.waitForTask(task),
           );
