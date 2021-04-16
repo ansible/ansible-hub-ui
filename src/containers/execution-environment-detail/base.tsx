@@ -196,13 +196,14 @@ export function withContainerRepo(WrappedComponent) {
       ExecutionEnvironmentAPI.get(this.props.match.params['container'])
         .then(result => {
           const repo = result;
-          ExecutionEnvironmentNamespaceAPI.get(result.data.namespace.name).then(
-            result =>
-              this.setState({
-                loading: false,
-                repo: repo.data,
-                selectedGroups: result.data.groups,
-              }),
+          return ExecutionEnvironmentNamespaceAPI.get(
+            result.data.namespace.name,
+          ).then(result =>
+            this.setState({
+              loading: false,
+              repo: repo.data,
+              selectedGroups: result.data.groups,
+            }),
           );
         })
         .catch(e => this.setState({ redirect: 'notFound' }));
@@ -222,12 +223,11 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private waitForTask(task) {
-      return TaskAPI.get(task).then(async result => {
+      return TaskAPI.get(task).then(result => {
         if (result.data.state === 'completed') {
-        } else {
-          // wait half a second
-          await new Promise(r => setTimeout(r, 500));
-          this.waitForTask(task);
+          return new Promise(r => setTimeout(r, 500)).then(() =>
+            this.waitForTask(task),
+          );
         }
       });
     }
