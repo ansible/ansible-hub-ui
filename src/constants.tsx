@@ -108,13 +108,16 @@ export class Constants {
     'galaxy.change_synclist': 'Change synclist',
     'galaxy.view_synclist': 'View synclist',
     'galaxy.add_synclist': 'Add synclist',
-    add_containernamespace: 'Create new containers',
-    namespace_pull_containerdistribution: 'Pull private containers',
-    namespace_change_containerdistribution: 'Change containers',
-    namespace_view_containerdistribution: 'View private containers',
-    namespace_modify_content_containerpushrepository: 'Change image tags',
-    change_containernamespace: 'Change container namespace permissions',
-    namespace_push_containerdistribution: 'Push to existing containers',
+    'container.add_containernamespace': 'Create new containers',
+    'container.namespace_pull_containerdistribution': 'Pull private containers',
+    'container.namespace_change_containerdistribution': 'Change containers',
+    'container.namespace_view_containerdistribution': 'View private containers',
+    'container.namespace_modify_content_containerpushrepository':
+      'Change image tags',
+    'container.change_containernamespace':
+      'Change container namespace permissions',
+    'container.namespace_push_containerdistribution':
+      'Push to existing containers',
   };
   static GROUP_HUMAN_PERMISSIONS = {
     change_namespace: 'Change namespace',
