@@ -21,7 +21,6 @@ interface IProps {
 
 interface IState {
   description: string;
-  availableGroups: GroupObjectPermissionType[];
   selectedGroups: GroupObjectPermissionType[];
 }
 
@@ -30,7 +29,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     super(props);
     this.state = {
       description: this.props.description,
-      availableGroups: [],
       selectedGroups: this.props.selectedGroups,
     };
   }
