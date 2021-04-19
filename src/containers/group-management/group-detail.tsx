@@ -562,12 +562,15 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           title={'No users yet'}
           description={'Users will appear once added to this group'}
           button={
-            <Button
-              variant='primary'
-              onClick={() => this.setState({ addModalVisible: true })}
-            >
-              Add
-            </Button>
+            !!user &&
+            user.model_permissions.change_group && (
+              <Button
+                variant='primary'
+                onClick={() => this.setState({ addModalVisible: true })}
+              >
+                Add
+              </Button>
+            )
           }
         />
       );
