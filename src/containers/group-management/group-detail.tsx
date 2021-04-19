@@ -221,16 +221,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         GroupAPI.addPermission(group.id, {
           permission: permission,
         }).catch(() =>
-          this.setState({
-            alerts: [
-              ...this.state.alerts,
-              {
-                variant: 'danger',
-                title: null,
-                description: `Permission ${permission} was not added`,
-              },
-            ],
-          }),
+          this.addAlert(
+            `Permission ${permission} was not added.`,
+            'danger',
+          ),
         );
       }
     });
@@ -239,16 +233,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     originalPermissions.forEach(original => {
       if (!permissions.includes(original.name)) {
         GroupAPI.removePermission(group.id, original.id).catch(() =>
-          this.setState({
-            alerts: [
-              ...this.state.alerts,
-              {
-                variant: 'danger',
-                title: null,
-                description: `Permission ${original.name} was not removed.`,
-              },
-            ],
-          }),
+          this.addAlert(
+            `Permission ${original.name} was not removed.`,
+            'danger',
+          ),
         );
       }
     });
@@ -463,28 +451,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         .then(() => {
           this.setState({
             showDeleteModal: false,
-            alerts: [
-              ...this.state.alerts,
-              {
-                variant: 'success',
-                title: null,
-                description: 'Successfully deleted group.',
-              },
-            ],
           });
+          this.addAlert('Successfully deleted group.', 'success');
           this.props.history.push(Paths.groupList);
         })
         .catch(() =>
-          this.setState({
-            alerts: [
-              ...this.state.alerts,
-              {
-                variant: 'danger',
-                title: null,
-                description: 'Error deleting group.',
-              },
-            ],
-          }),
+          this.addAlert('Error deleting group.', 'danger'),
         );
     };
 
@@ -542,6 +514,19 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         a.push({ id: option.id, name: option.username }),
       );
       this.setState({ options: a, allUsers: result.data.data });
+    });
+  }
+
+  private addAlert(title, variant, description?) {
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          description,
+          title,
+          variant,
+        },
+      ],
     });
   }
 
@@ -748,29 +733,13 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     UserAPI.update(user.id, user)
       .then(() => {
         this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'success',
-              title: null,
-              description: 'Successfully removed a user from a group.',
-            },
-          ],
           showUserRemoveModal: null,
         });
+        this.addAlert('Successfully removed a user from a group.', 'success');
         this.queryUsers();
       })
       .catch(() =>
-        this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: null,
-              description: 'Error removing a user from a group.',
-            },
-          ],
-        }),
+        this.addAlert('Error removing user from a group.', 'danger'),
       );
   }
 
