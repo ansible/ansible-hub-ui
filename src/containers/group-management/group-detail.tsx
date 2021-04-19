@@ -106,19 +106,25 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    GroupAPI.get(this.state.params.id).then(result => {
-      this.setState({ group: result.data });
-    });
-    GroupAPI.getPermissions(this.state.params.id).then(result => {
-      let originalPerms = [];
-      result.data.data.forEach(p =>
-        originalPerms.push({ id: p.id, name: p.permission }),
+    GroupAPI.get(this.state.params.id)
+      .then(result => {
+        this.setState({ group: result.data });
+      })
+      .catch(e => this.addAlert('Error loading group.', 'danger', e.message));
+
+    GroupAPI.getPermissions(this.state.params.id)
+      .then(result => {
+        this.setState({
+          originalPermissions: result.data.data.map(p => ({
+            id: p.id,
+            name: p.permission,
+          })),
+          permissions: result.data.data.map(x => x.permission),
+        });
+      })
+      .catch(e =>
+        this.addAlert('Error loading permissions.', 'danger', e.message),
       );
-      this.setState({
-        originalPermissions: originalPerms,
-        permissions: result.data.data.map(x => x.permission),
-      });
-    });
   }
 
   render() {
@@ -139,13 +145,23 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       tabs.push('Users');
     }
 
+    if (!group && alerts && alerts.length) {
+      return (
+        <AlertList
+          alerts={alerts}
+          closeAlert={i => this.closeAlert(i)}
+        ></AlertList>
+      );
+    }
     if (!group) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
+
     if (params.tab == 'users' && !users) {
       this.queryUsers();
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
+
     return (
       <React.Fragment>
         <AlertList
@@ -220,10 +236,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       if (!originalPermissions.find(p => p.name === permission)) {
         GroupAPI.addPermission(group.id, {
           permission: permission,
-        }).catch(() =>
+        }).catch(e =>
           this.addAlert(
             `Permission ${permission} was not added.`,
             'danger',
+            e.message,
           ),
         );
       }
@@ -232,10 +249,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     // Remove permissions
     originalPermissions.forEach(original => {
       if (!permissions.includes(original.name)) {
-        GroupAPI.removePermission(group.id, original.id).catch(() =>
+        GroupAPI.removePermission(group.id, original.id).catch(e =>
           this.addAlert(
             `Permission ${original.name} was not removed.`,
             'danger',
+            e.message,
           ),
         );
       }
@@ -455,8 +473,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           this.addAlert('Successfully deleted group.', 'success');
           this.props.history.push(Paths.groupList);
         })
-        .catch(() =>
-          this.addAlert('Error deleting group.', 'danger'),
+        .catch(e =>
+          this.addAlert('Error deleting group.', 'danger', e.message),
         );
     };
 
@@ -738,8 +756,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         this.addAlert('Successfully removed a user from a group.', 'success');
         this.queryUsers();
       })
-      .catch(() =>
-        this.addAlert('Error removing user from a group.', 'danger'),
+      .catch(e =>
+        this.addAlert('Error removing user from a group.', 'danger', e.message),
       );
   }
 
