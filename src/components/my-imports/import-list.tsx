@@ -3,7 +3,6 @@ import cx from 'classnames';
 import './my-imports.scss';
 
 import * as moment from 'moment';
-import { cloneDeep } from 'lodash';
 
 import {
   TextInput,
@@ -105,20 +104,6 @@ export class ImportList extends React.Component<IProps, IState> {
         />
       </div>
     );
-  }
-
-  private setPageSize(size) {
-    const params = cloneDeep(this.props.params);
-
-    params['page_size'] = size;
-    params['page'] = 1;
-    this.props.updateParams(params);
-  }
-
-  private setPageNumber(pageNum) {
-    const params = cloneDeep(this.props.params);
-    params['page'] = pageNum;
-    this.props.updateParams(params);
   }
 
   private renderList(selectImport, importList, selectedImport, loading) {
