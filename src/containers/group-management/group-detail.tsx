@@ -66,7 +66,6 @@ interface IState {
   showUserRemoveModal: UserType | null;
   permissions: string[];
   originalPermissions: { id: number; name: string }[];
-  loading: boolean;
 }
 
 class GroupDetail extends React.Component<RouteComponentProps, IState> {
@@ -103,7 +102,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       showUserRemoveModal: null,
       permissions: [],
       originalPermissions: [],
-      loading: false,
     };
   }
 
@@ -129,7 +127,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       alerts,
       editPermissions,
       group,
-      loading,
       params,
       showDeleteModal,
       showUserRemoveModal,
@@ -142,7 +139,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       tabs.push('Users');
     }
 
-    if (!group || loading) {
+    if (!group) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
     if (params.tab == 'users' && !users) {
@@ -739,7 +736,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         users: result.data.data,
         itemCount: result.data.meta.count,
         addModalVisible: false,
-        loading: false,
       }),
     );
   }
