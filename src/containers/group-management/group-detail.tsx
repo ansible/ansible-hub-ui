@@ -366,7 +366,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       return null;
     }
 
-    const close = () => this.setState({ addModalVisible: false });
+    const close = () => this.setState({ addModalVisible: false, selected: [] });
 
     return (
       <Modal
