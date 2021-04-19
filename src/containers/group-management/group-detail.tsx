@@ -365,10 +365,13 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       this.loadOptions();
       return null;
     }
+
+    const close = () => this.setState({ addModalVisible: false });
+
     return (
       <Modal
         variant='large'
-        onClose={() => this.setState({ addModalVisible: false })}
+        onClose={close}
         isOpen={true}
         aria-label='add-user-modal'
         title={''}
@@ -383,16 +386,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             variant='primary'
             isDisabled={this.state.selected.length === 0}
             onClick={() =>
-              this.addUserToGroup(this.state.selected, this.state.group)
+              this.addUserToGroup(this.state.selected, this.state.group).then(
+                close,
+              )
             }
           >
             Add
           </Button>,
-          <Button
-            key='cancel'
-            variant='link'
-            onClick={() => this.setState({ addModalVisible: false })}
-          >
+          <Button key='cancel' variant='link' onClick={close}>
             Cancel
           </Button>,
         ]}
@@ -520,7 +521,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         });
       }),
     )
-      .catch(e => { this.setState({ addModalVisible: false })); this.addAlert('Error updating users.', 'danger', e.message)); })
+      .catch(e => this.addAlert('Error updating users.', 'danger', e.message))
       .then(() => this.queryUsers());
   }
 
@@ -739,7 +740,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         this.setState({
           users: result.data.data,
           itemCount: result.data.meta.count,
-          addModalVisible: false,
         }),
       )
       .catch(e => this.addAlert('Error loading users.', 'danger', e.message));
