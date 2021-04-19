@@ -400,8 +400,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <APISearchTypeAhead
           results={this.state.options}
           loadResults={name =>
-            UserAPI.list({ username__contains: name, page_size: 5 }).then(
-              result => {
+            UserAPI.list({ username__contains: name, page_size: 5 })
+              .then(result => {
                 let filteredUsers = [];
                 result.data.data.forEach(user => {
                   filteredUsers.push({
@@ -417,8 +417,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                 this.setState({
                   options: filteredUsers,
                 });
-              },
-            )
+              })
+              .catch(e =>
+                this.addAlert('Error loading users.', 'danger', e.message),
+              )
           }
           onSelect={(event, selection) => {
             const selectedUser = this.state.options.find(
@@ -509,30 +511,28 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private addUserToGroup(selectedUsers, group) {
-    const allPromises = [];
-    selectedUsers.forEach(user => {
-      const newUser = this.state.allUsers.find(x => x.id == user.id);
-      newUser.groups = newUser.groups.concat(group);
-      allPromises.push(UserAPI.update(user.id.toString(), newUser));
-    });
-    Promise.all(allPromises)
-      .then(() => {
-        this.queryUsers();
-      })
-      .catch(() => this.setState({ addModalVisible: false }));
+    return Promise.all(
+      selectedUsers.map(({ id }) => {
+        const user = this.state.allUsers.find(x => x.id === id);
+        return UserAPI.update(id.toString(), {
+          ...user,
+          groups: [...user.groups, group],
+        });
+      }),
+    )
+      .catch(e => { this.setState({ addModalVisible: false })); this.addAlert('Error updating users.', 'danger', e.message)); })
+      .then(() => this.queryUsers());
   }
 
   private loadOptions() {
-    UserAPI.list().then(result => {
-      const options = result.data.data.filter(user => {
-        return !this.state.users.find(u => u.id === user.id);
-      });
-      const a = [];
-      options.forEach(option =>
-        a.push({ id: option.id, name: option.username }),
-      );
-      this.setState({ options: a, allUsers: result.data.data });
-    });
+    UserAPI.list()
+      .then(result => {
+        const options = result.data.data
+          .filter(user => !this.state.users.find(u => u.id === user.id))
+          .map(option => ({ id: option.id, name: option.username }));
+        this.setState({ options, allUsers: result.data.data });
+      })
+      .catch(e => this.addAlert('Error loading users.', 'danger', e.message));
   }
 
   private addAlert(title, variant, description?) {
@@ -734,13 +734,15 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     UserAPI.list({
       ...this.state.params,
       ...{ groups__name: this.state.group.name },
-    }).then(result =>
-      this.setState({
-        users: result.data.data,
-        itemCount: result.data.meta.count,
-        addModalVisible: false,
-      }),
-    );
+    })
+      .then(result =>
+        this.setState({
+          users: result.data.data,
+          itemCount: result.data.meta.count,
+          addModalVisible: false,
+        }),
+      )
+      .catch(e => this.addAlert('Error loading users.', 'danger', e.message));
   }
 
   private deleteUser(user) {
