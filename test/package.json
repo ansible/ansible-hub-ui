@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cypress:chrome":"cypress run --browser chrome --headless",
-    "cypress:chromium":"cypress run --browser chromium-browser --headless",
-    "cypress:firefox":"cypress run --browser firefox --headless",
-    "cypress":"cypress open"
+    "cypress:chrome": "cypress run --browser chrome --headless",
+    "cypress:chromium": "cypress run --browser chromium-browser --headless",
+    "cypress:firefox": "cypress run --browser firefox --headless",
+    "cypress": "cypress open"
   },
   "author": "",
   "license": "ISC",
