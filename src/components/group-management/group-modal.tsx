@@ -59,7 +59,12 @@ export class GroupModal extends React.Component<IProps, IState> {
           </Button>,
         ]}
       >
-        <Form>
+        <Form
+          onSubmit={e => {
+            e.preventDefault();
+            onSave(this.state.name);
+          }}
+        >
           <FormGroup
             isRequired={true}
             key='name'
