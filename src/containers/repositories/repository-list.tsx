@@ -152,7 +152,8 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
           />
         )}
         <BaseHeader title='Repo Management'>
-          {DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE ? (
+          {DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
+          !loading ? (
             <div className='header-bottom'>
               <div className='tab-link-container'>
                 <div className='tabs'>
@@ -172,7 +173,11 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
             </div>
           ) : null}
         </BaseHeader>
-        {this.renderContent(params, loading, itemCount, content)}
+        {loading ? (
+          <LoadingPageSpinner />
+        ) : (
+          this.renderContent(params, loading, itemCount, content)
+        )}
       </React.Fragment>
     );
   }
