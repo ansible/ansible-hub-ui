@@ -87,69 +87,72 @@ class ExecutionEnvironmentList extends React.Component<
           closeAlert={i => this.closeAlert(i)}
         ></AlertList>
         <BaseHeader title='Container Registry'></BaseHeader>
-        {noData ? (
+        {noData && !loading ? (
           <EmptyStateNoData
             title={'No container registries'}
             description={'Container registries will appear once uploaded'}
           />
         ) : (
           <Main>
-            <Section className='body'>
-              <div className='toolbar'>
-                <Toolbar>
-                  <ToolbarContent>
-                    <ToolbarGroup>
-                      <ToolbarItem>
-                        <CompoundFilter
-                          updateParams={p => {
-                            p['page'] = 1;
-                            this.updateParams(p, () =>
-                              this.queryEnvironments(),
-                            );
-                          }}
-                          params={params}
-                          filterConfig={[
-                            {
-                              id: 'name',
-                              title: 'Container repository name',
-                            },
-                          ]}
-                        />
-                      </ToolbarItem>
-                    </ToolbarGroup>
-                  </ToolbarContent>
-                </Toolbar>
+            {loading ? (
+              <LoadingPageSpinner />
+            ) : (
+              <Section className='body'>
+                <div className='toolbar'>
+                  <Toolbar>
+                    <ToolbarContent>
+                      <ToolbarGroup>
+                        <ToolbarItem>
+                          <CompoundFilter
+                            updateParams={p => {
+                              p['page'] = 1;
+                              this.updateParams(p, () =>
+                                this.queryEnvironments(),
+                              );
+                            }}
+                            params={params}
+                            filterConfig={[
+                              {
+                                id: 'name',
+                                title: 'Container repository name',
+                              },
+                            ]}
+                          />
+                        </ToolbarItem>
+                      </ToolbarGroup>
+                    </ToolbarContent>
+                  </Toolbar>
 
-                <Pagination
-                  params={params}
-                  updateParams={p =>
-                    this.updateParams(p, () => this.queryEnvironments())
-                  }
-                  count={itemCount}
-                  isTop
-                />
-              </div>
-              <div>
-                <AppliedFilters
-                  updateParams={p =>
-                    this.updateParams(p, () => this.queryEnvironments())
-                  }
-                  params={params}
-                  ignoredParams={['page_size', 'page', 'sort']}
-                />
-              </div>
-              {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
-
-              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                <Pagination
-                  params={params}
-                  updateParams={p =>
-                    this.updateParams(p, () => this.queryEnvironments())
-                  }
-                  count={itemCount}
-                />
-              </div>
-            </Section>
+                  <Pagination
+                    params={params}
+                    updateParams={p =>
+                      this.updateParams(p, () => this.queryEnvironments())
+                    }
+                    count={itemCount}
+                    isTop
+                  />
+                </div>
+                <div>
+                  <AppliedFilters
+                    updateParams={p =>
+                      this.updateParams(p, () => this.queryEnvironments())
+                    }
+                    params={params}
+                    ignoredParams={['page_size', 'page', 'sort']}
+                  />
+                </div>
+                {this.renderTable(params)}
+                <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
+                  <Pagination
+                    params={params}
+                    updateParams={p =>
+                      this.updateParams(p, () => this.queryEnvironments())
+                    }
+                    count={itemCount}
+                  />
+                </div>
+              </Section>
+            )}
           </Main>
         )}
       </React.Fragment>
