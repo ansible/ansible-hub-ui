@@ -10,17 +10,19 @@ import {
 
 import '@patternfly/patternfly/patternfly.scss';
 import {
-  Page,
-  PageHeader,
-  PageSidebar,
-  PageHeaderTools,
-  Nav,
-  NavList,
-  NavItem,
   DropdownItem,
   DropdownSeparator,
+  Nav,
+  NavExpandable,
   NavGroup,
+  NavItem,
+  NavList,
+  Page,
+  PageHeader,
+  PageHeaderTools,
+  PageSidebar,
 } from '@patternfly/react-core';
+import { some } from 'lodash';
 
 import { Routes } from './routes';
 import { Paths, formatPath } from 'src/paths';
@@ -206,6 +208,107 @@ class App extends React.Component<RouteComponentProps, IState> {
         showNavToggle
       />
     );
+
+    const menuItem = (name, options = {}) => ({
+      ...options,
+      type: 'item',
+      name,
+    });
+    const menuSection = (name, options = {}, items = []) => ({
+      ...options,
+      type: 'section',
+      name,
+      items,
+    });
+
+    const menu =
+      featureFlags && user
+        ? [
+            menuSection('Collections', {}, [
+              menuItem('Collections', {
+                url: formatPath(Paths.searchByRepo, {
+                  repo: this.state.selectedRepo,
+                }),
+              }),
+              menuItem('Namespaces', {
+                url: Paths[NAMESPACE_TERM],
+              }),
+              menuItem('My Namespaces', {
+                url: Paths.myNamespaces,
+              }),
+              menuItem('Repository Management', {
+                url: Paths.repositories,
+              }),
+              menuItem('API Token', {
+                url: Paths.token,
+              }),
+              menuItem('Approval', {
+                condition: user.model_permissions.move_collection,
+                url: Paths.approvalDashboard,
+              }),
+            ]),
+            menuItem('Container Registry', {
+              condition: featureFlags.execution_environments,
+              url: Paths.executionEnvironments,
+            }),
+            menuItem('Documentation', {
+              // TODO
+              condition: false,
+            }),
+            menuSection('User Access', {}, [
+              menuItem('Users', {
+                condition: user.model_permissions.view_user,
+                url: Paths.userList,
+              }),
+              menuItem('Groups', {
+                condition: user.model_permissions.view_group,
+                url: Paths.groupList,
+              }),
+            ]),
+          ]
+        : [];
+
+    const activateMenu = items => {
+      items.forEach(
+        item =>
+          (item.active =
+            item.type === 'section'
+              ? activateMenu(item.items)
+              : this.props.location.pathname.startsWith(item.url)),
+      );
+      return some(items, 'active');
+    };
+    activateMenu(menu);
+
+    const ItemOrSection = ({ item }) =>
+      item.type === 'section' ? (
+        <MenuSection section={item} />
+      ) : (
+        <MenuItem item={item} />
+      );
+    const MenuItem = ({ item }) =>
+      !('condition' in item) || !!item.condition ? (
+        <NavItem isActive={item.active}>
+          <Link to={item.url}>{item.name}</Link>
+        </NavItem>
+      ) : null;
+    const Menu = ({ items }) => (
+      <>
+        {items.map(item => (
+          <ItemOrSection key={item.name} item={item} />
+        ))}
+      </>
+    );
+    const MenuSection = ({ section }) => (
+      <NavExpandable
+        title={section.name}
+        isActive={section.active}
+        isExpanded={section.active}
+      >
+        <Menu items={section.items} />
+      </NavExpandable>
+    );
+
     const Sidebar = (
       <PageSidebar
         theme='dark'
@@ -216,49 +319,8 @@ class App extends React.Component<RouteComponentProps, IState> {
                 className={'nav-title'}
                 title={APPLICATION_NAME}
               ></NavGroup>
-              <NavItem>
-                <Link
-                  to={formatPath(Paths.searchByRepo, {
-                    repo: this.state.selectedRepo,
-                  })}
-                >
-                  Collections
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths[NAMESPACE_TERM]}>Namespaces</Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths.myNamespaces}>My Namespaces</Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths.token}>API Token</Link>
-              </NavItem>
-              {!!user && user.model_permissions.view_user && (
-                <NavItem>
-                  <Link to={Paths.userList}>Users</Link>
-                </NavItem>
-              )}
-              {!!user && user.model_permissions.view_group && (
-                <NavItem>
-                  <Link to={Paths.groupList}>Groups</Link>
-                </NavItem>
-              )}
-              {!!user && user.model_permissions.move_collection && (
-                <NavItem>
-                  <Link to={Paths.approvalDashboard}>Approval</Link>
-                </NavItem>
-              )}
-              <NavItem>
-                <Link to={Paths.repositories}>Repo Management</Link>
-              </NavItem>
-              {featureFlags && featureFlags.execution_environments && (
-                <NavItem>
-                  <Link to={Paths.executionEnvironments}>
-                    Container Registry
-                  </Link>
-                </NavItem>
-              )}
+
+              <Menu items={menu} />
             </NavList>
           </Nav>
         }
