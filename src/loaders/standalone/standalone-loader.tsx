@@ -20,8 +20,6 @@ import {
   DropdownItem,
   DropdownSeparator,
   NavGroup,
-  Select,
-  SelectOption,
 } from '@patternfly/react-core';
 
 import { Routes } from './routes';
@@ -30,7 +28,6 @@ import { ActiveUserAPI, UserType, FeatureFlagsType } from 'src/api';
 import { SmallLogo, StatefulDropdown } from 'src/components';
 import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
-import { Constants } from 'src/constants';
 import { QuestionCircleIcon } from '@patternfly/react-icons';
 import Logo from 'src/../static/images/logo_large.svg';
 
@@ -219,43 +216,6 @@ class App extends React.Component<RouteComponentProps, IState> {
                 className={'nav-title'}
                 title={APPLICATION_NAME}
               ></NavGroup>
-              <NavItem className={'nav-select'}>
-                <Select
-                  className='nav-select'
-                  variant='single'
-                  isOpen={this.state.selectExpanded}
-                  selections={this.getRepoName(this.state.selectedRepo)}
-                  isPlain={false}
-                  onToggle={isExpanded => {
-                    this.setState({ selectExpanded: isExpanded });
-                  }}
-                  onSelect={(event, value) => {
-                    const originalRepo = this.state.selectedRepo;
-                    this.setState(
-                      {
-                        selectedRepo: this.getRepoBasePath(value.toString()),
-                        selectExpanded: false,
-                      },
-                      () => {
-                        this.props.history.push(
-                          formatPath(Paths.searchByRepo, {
-                            repo: this.getRepoBasePath(value.toString()),
-                          }),
-                        );
-                        // history.go(0) forces a reload of the page
-                        this.props.history.go(0);
-                      },
-                    );
-                  }}
-                >
-                  <SelectOption key={'published'} value={'Published'} />
-                  <SelectOption
-                    key={'rh-certified'}
-                    value={'Red Hat Certified'}
-                  />
-                  <SelectOption key={'community'} value={'Community'} />
-                </Select>
-              </NavItem>
               <NavItem>
                 <Link
                   to={formatPath(Paths.searchByRepo, {
@@ -344,27 +304,6 @@ class App extends React.Component<RouteComponentProps, IState> {
     });
   }
 
-  private getRepoBasePath(repoName) {
-    if (Constants.REPOSITORYNAMES[repoName]) {
-      return Constants.REPOSITORYNAMES[repoName];
-    }
-
-    return repoName;
-  }
-
-  private getRepoName(basePath) {
-    const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
-      key => Constants.REPOSITORYNAMES[key] === basePath,
-    );
-
-    // allowing the repo to go through even if isn't one that we support so
-    // that 404s bubble up naturally from the child components.
-    if (!newRepoName) {
-      return basePath;
-    }
-    return newRepoName;
-  }
-
   private ctx(component) {
     return (
       <AppContext.Provider
@@ -389,8 +328,13 @@ class App extends React.Component<RouteComponentProps, IState> {
     });
   };
 
-  private setRepo = repo => {
-    this.setState({ selectedRepo: repo });
+  private setRepo = (path: string, callback?: () => void) => {
+    // this.setState({ selectedRepo: repo }, () => {
+    if (callback) {
+      this.props.history.push(path);
+      callback();
+    }
+    // });
   };
 }
 

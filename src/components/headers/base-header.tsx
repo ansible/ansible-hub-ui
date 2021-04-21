@@ -13,6 +13,7 @@ interface IProps {
   pageControls?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
+  contextSelector?: React.ReactNode;
 }
 
 export class BaseHeader extends React.Component<IProps, {}> {
@@ -24,11 +25,17 @@ export class BaseHeader extends React.Component<IProps, {}> {
       children,
       breadcrumbs,
       className,
+      contextSelector,
     } = this.props;
     return (
       <div className={cx('background', className)}>
         {breadcrumbs ? (
           <div className='breadcrumb-container'>{breadcrumbs}</div>
+        ) : (
+          <div className='placeholder' />
+        )}
+        {contextSelector ? (
+          <div className='breadcrumb-container'>{contextSelector}</div>
         ) : (
           <div className='placeholder' />
         )}
