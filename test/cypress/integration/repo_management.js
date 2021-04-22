@@ -17,7 +17,10 @@ describe('Repo Management tests', () => {
         cy.contains('Show advanced options').click();
         cy.get('#download_concurrency').should('exist');
     });
-    it('remote proxy config can be saved and deleted.', () => {
+    /* Needs more work to handle uploading a requirements.yml
+     * when you want to save the remote proxy config.
+     */
+    it.skip('remote proxy config can be saved and deleted.', () => {
         cy.login(adminUsername, adminPassword);
         cy.visit(remoteRepoUrl);
         cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
