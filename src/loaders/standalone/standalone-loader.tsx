@@ -22,6 +22,10 @@ import {
   PageHeaderTools,
   PageSidebar,
 } from '@patternfly/react-core';
+import {
+  ExternalLinkAltIcon,
+  QuestionCircleIcon,
+} from '@patternfly/react-icons';
 import { some } from 'lodash';
 
 import { Routes } from './routes';
@@ -30,7 +34,6 @@ import { ActiveUserAPI, UserType, FeatureFlagsType } from 'src/api';
 import { SmallLogo, StatefulDropdown } from 'src/components';
 import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
-import { QuestionCircleIcon } from '@patternfly/react-icons';
 import Logo from 'src/../static/images/logo_large.svg';
 
 interface IState {
@@ -77,8 +80,8 @@ class App extends React.Component<RouteComponentProps, IState> {
     }
 
     let aboutModal = null;
-    let dropdownItems,
-      dropdownItemsCog = [];
+    let docsDropdownItems = [];
+    let userDropdownItems = [];
     let userName: string;
 
     if (user) {
@@ -88,7 +91,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         userName = user.username;
       }
 
-      dropdownItems = [
+      userDropdownItems = [
         <DropdownItem isDisabled key='username'>
           Username: {user.username}
         </DropdownItem>,
@@ -108,36 +111,21 @@ class App extends React.Component<RouteComponentProps, IState> {
           Logout
         </DropdownItem>,
       ];
-      dropdownItemsCog = [
+
+      docsDropdownItems = [
         <DropdownItem
           key='customer_support'
-          onClick={() =>
-            window.open('https://access.redhat.com/support', '_blank')
-          }
+          href='https://access.redhat.com/support'
+          target='_blank'
         >
-          Customer Support
+          Customer Support <ExternalLinkAltIcon />
         </DropdownItem>,
         <DropdownItem
           key='training'
-          onClick={() =>
-            window.open(
-              'https://www.ansible.com/resources/webinars-training',
-              '_blank',
-            )
-          }
+          href='https://www.ansible.com/resources/webinars-training'
+          target='_blank'
         >
-          Training
-        </DropdownItem>,
-        <DropdownItem
-          key='documentation'
-          onClick={() =>
-            window.open(
-              'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
-              '_blank',
-            )
-          }
-        >
-          Documentation
+          Training <ExternalLinkAltIcon />
         </DropdownItem>,
         <DropdownItem
           key='about'
@@ -148,6 +136,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           About
         </DropdownItem>,
       ];
+
       aboutModal = (
         <AboutModalWindow
           isOpen={this.state.aboutModalVisible}
@@ -189,17 +178,16 @@ class App extends React.Component<RouteComponentProps, IState> {
             ) : (
               <div>
                 <StatefulDropdown
-                  items={dropdownItemsCog}
+                  ariaLabel={'docs-dropdown'}
                   defaultText={<QuestionCircleIcon />}
+                  items={docsDropdownItems}
                   toggleType='icon'
-                  ariaLabel={'cog-dropdown'}
                 />
-
                 <StatefulDropdown
-                  defaultText={userName}
-                  toggleType='dropdown'
-                  items={dropdownItems}
                   ariaLabel={'user-dropdown'}
+                  defaultText={userName}
+                  items={userDropdownItems}
+                  toggleType='dropdown'
                 />
               </div>
             )}
@@ -252,8 +240,9 @@ class App extends React.Component<RouteComponentProps, IState> {
               url: Paths.executionEnvironments,
             }),
             menuItem('Documentation', {
-              // TODO
-              condition: false,
+              url:
+                'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
+              external: true,
             }),
             menuSection('User Access', {}, [
               menuItem('Users', {
@@ -288,8 +277,22 @@ class App extends React.Component<RouteComponentProps, IState> {
       );
     const MenuItem = ({ item }) =>
       !('condition' in item) || !!item.condition ? (
-        <NavItem isActive={item.active}>
-          <Link to={item.url}>{item.name}</Link>
+        <NavItem
+          isActive={item.active}
+          onClick={() => item.onclick && item.onclick()}
+        >
+          {item.url && item.external ? (
+            <a href={item.url} target='_blank'>
+              {item.name}
+              <ExternalLinkAltIcon
+                style={{ position: 'absolute', right: '32px' }}
+              />
+            </a>
+          ) : item.url ? (
+            <Link to={item.url}>{item.name}</Link>
+          ) : (
+            item.name
+          )}
         </NavItem>
       ) : null;
     const Menu = ({ items }) => (
