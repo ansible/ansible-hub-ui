@@ -93,11 +93,8 @@ Cypress.Commands.add('createGroup', {}, (name) => {
 
     cy.contains('Create').click();
 
-    cy.contains('div', 'Name *').findnear('input').first().type(name);
-
-    cy.server();
     cy.route('POST', Cypress.env('prefix') + '_ui/v1/groups/').as('createGroup');
-    cy.contains('[role=dialog] button', 'Create').click();
+    cy.contains('div', 'Name *').findnear('input').first().type(`${name}{enter}`);
     cy.wait('@createGroup');
 });
 
