@@ -26,7 +26,7 @@ import {
   ExternalLinkAltIcon,
   QuestionCircleIcon,
 } from '@patternfly/react-icons';
-import { some } from 'lodash';
+import { reject, some } from 'lodash';
 
 import { Routes } from './routes';
 import { Paths, formatPath } from 'src/paths';
@@ -43,6 +43,7 @@ interface IState {
   aboutModalVisible: boolean;
   toggleOpen: boolean;
   featureFlags: FeatureFlagsType;
+  menuExpandedSections: string[];
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -55,6 +56,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       aboutModalVisible: false,
       toggleOpen: false,
       featureFlags: null,
+      menuExpandedSections: [],
     };
   }
 
@@ -67,7 +69,12 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { user, selectedRepo, featureFlags } = this.state;
+    const {
+      featureFlags,
+      menuExpandedSections,
+      selectedRepo,
+      user,
+    } = this.state;
 
     // block the page from rendering if we're on a repo route and the repo in the
     // url doesn't match the current state
@@ -279,7 +286,10 @@ class App extends React.Component<RouteComponentProps, IState> {
       !('condition' in item) || !!item.condition ? (
         <NavItem
           isActive={item.active}
-          onClick={() => item.onclick && item.onclick()}
+          onClick={e => {
+            item.onclick && item.onclick();
+            e.stopPropagation();
+          }}
         >
           {item.url && item.external ? (
             <a href={item.url} target='_blank'>
@@ -305,18 +315,34 @@ class App extends React.Component<RouteComponentProps, IState> {
     const MenuSection = ({ section }) => (
       <NavExpandable
         title={section.name}
+        groupId={section.name}
         isActive={section.active}
-        isExpanded={section.active}
+        isExpanded={menuExpandedSections.includes(section.name)}
       >
         <Menu items={section.items} />
       </NavExpandable>
     );
 
+    const onToggle = ({ groupId, isExpanded }) => {
+      console.log(
+        'onToggle',
+        { groupId, isExpanded },
+        isExpanded
+          ? [...menuExpandedSections, groupId]
+          : reject(menuExpandedSections, name => name === groupId),
+      );
+      this.setState({
+        menuExpandedSections: isExpanded
+          ? [...menuExpandedSections, groupId]
+          : reject(menuExpandedSections, name => name === groupId),
+      });
+    };
+
     const Sidebar = (
       <PageSidebar
         theme='dark'
         nav={
-          <Nav theme='dark'>
+          <Nav theme='dark' onToggle={onToggle}>
             <NavList>
               <NavGroup
                 className={'nav-title'}
