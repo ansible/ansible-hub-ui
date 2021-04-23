@@ -66,6 +66,14 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     this.setRepoToURL();
+
+    const menu = this.menu();
+    this.activateMenu(menu);
+    this.setState({
+      menuExpandedSections: menu
+        .filter(i => i.type === 'section' && i.active)
+        .map(i => i.name),
+    });
   }
 
   render() {
@@ -204,77 +212,8 @@ class App extends React.Component<RouteComponentProps, IState> {
       />
     );
 
-    const menuItem = (name, options = {}) => ({
-      ...options,
-      type: 'item',
-      name,
-    });
-    const menuSection = (name, options = {}, items = []) => ({
-      ...options,
-      type: 'section',
-      name,
-      items,
-    });
-
-    const menu =
-      featureFlags && user
-        ? [
-            menuSection('Collections', {}, [
-              menuItem('Collections', {
-                url: formatPath(Paths.searchByRepo, {
-                  repo: this.state.selectedRepo,
-                }),
-              }),
-              menuItem('Namespaces', {
-                url: Paths[NAMESPACE_TERM],
-              }),
-              menuItem('My Namespaces', {
-                url: Paths.myNamespaces,
-              }),
-              menuItem('Repository Management', {
-                url: Paths.repositories,
-              }),
-              menuItem('API Token', {
-                url: Paths.token,
-              }),
-              menuItem('Approval', {
-                condition: user.model_permissions.move_collection,
-                url: Paths.approvalDashboard,
-              }),
-            ]),
-            menuItem('Container Registry', {
-              condition: featureFlags.execution_environments,
-              url: Paths.executionEnvironments,
-            }),
-            menuItem('Documentation', {
-              url:
-                'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
-              external: true,
-            }),
-            menuSection('User Access', {}, [
-              menuItem('Users', {
-                condition: user.model_permissions.view_user,
-                url: Paths.userList,
-              }),
-              menuItem('Groups', {
-                condition: user.model_permissions.view_group,
-                url: Paths.groupList,
-              }),
-            ]),
-          ]
-        : [];
-
-    const activateMenu = items => {
-      items.forEach(
-        item =>
-          (item.active =
-            item.type === 'section'
-              ? activateMenu(item.items)
-              : this.props.location.pathname.startsWith(item.url)),
-      );
-      return some(items, 'active');
-    };
-    activateMenu(menu);
+    const menu = this.menu();
+    this.activateMenu(menu);
 
     const ItemOrSection = ({ item }) =>
       item.type === 'section' ? (
@@ -283,7 +222,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         <MenuItem item={item} />
       );
     const MenuItem = ({ item }) =>
-      !('condition' in item) || !!item.condition ? (
+      item.condition({ user, featureFlags }) ? (
         <NavItem
           isActive={item.active}
           onClick={e => {
@@ -312,25 +251,19 @@ class App extends React.Component<RouteComponentProps, IState> {
         ))}
       </>
     );
-    const MenuSection = ({ section }) => (
-      <NavExpandable
-        title={section.name}
-        groupId={section.name}
-        isActive={section.active}
-        isExpanded={menuExpandedSections.includes(section.name)}
-      >
-        <Menu items={section.items} />
-      </NavExpandable>
-    );
+    const MenuSection = ({ section }) =>
+      section.condition({ user, featureFlags }) ? (
+        <NavExpandable
+          title={section.name}
+          groupId={section.name}
+          isActive={section.active}
+          isExpanded={menuExpandedSections.includes(section.name)}
+        >
+          <Menu items={section.items} />
+        </NavExpandable>
+      ) : null;
 
     const onToggle = ({ groupId, isExpanded }) => {
-      console.log(
-        'onToggle',
-        { groupId, isExpanded },
-        isExpanded
-          ? [...menuExpandedSections, groupId]
-          : reject(menuExpandedSections, name => name === groupId),
-      );
       this.setState({
         menuExpandedSections: isExpanded
           ? [...menuExpandedSections, groupId]
@@ -349,7 +282,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                 title={APPLICATION_NAME}
               ></NavGroup>
 
-              <Menu items={menu} />
+              {user && featureFlags && <Menu items={menu} />}
             </NavList>
           </Nav>
         }
@@ -367,6 +300,78 @@ class App extends React.Component<RouteComponentProps, IState> {
         <Routes updateInitialData={this.updateInitialData} />
       </Page>,
     );
+  }
+
+  private menu(): any[] {
+    const menuItem = (name, options = {}) => ({
+      condition: () => true,
+      ...options,
+      type: 'item',
+      name,
+    });
+    const menuSection = (name, options = {}, items = []) => ({
+      condition: (...params) => some(items, item => item.condition(...params)), // any visible items inside
+      ...options,
+      type: 'section',
+      name,
+      items,
+    });
+
+    return [
+      menuSection('Collections', {}, [
+        menuItem('Collections', {
+          url: formatPath(Paths.searchByRepo, {
+            repo: this.state.selectedRepo,
+          }),
+        }),
+        menuItem('Namespaces', {
+          url: Paths[NAMESPACE_TERM],
+        }),
+        menuItem('My Namespaces', {
+          url: Paths.myNamespaces,
+        }),
+        menuItem('Repository Management', {
+          url: Paths.repositories,
+        }),
+        menuItem('API Token', {
+          url: Paths.token,
+        }),
+        menuItem('Approval', {
+          condition: ({ user }) => user.model_permissions.move_collection,
+          url: Paths.approvalDashboard,
+        }),
+      ]),
+      menuItem('Container Registry', {
+        condition: ({ featureFlags }) => featureFlags.execution_environments,
+        url: Paths.executionEnvironments,
+      }),
+      menuItem('Documentation', {
+        url:
+          'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
+        external: true,
+      }),
+      menuSection('User Access', {}, [
+        menuItem('Users', {
+          condition: ({ user }) => user.model_permissions.view_user,
+          url: Paths.userList,
+        }),
+        menuItem('Groups', {
+          condition: ({ user }) => user.model_permissions.view_group,
+          url: Paths.groupList,
+        }),
+      ]),
+    ];
+  }
+
+  private activateMenu(items) {
+    items.forEach(
+      item =>
+        (item.active =
+          item.type === 'section'
+            ? this.activateMenu(item.items)
+            : this.props.location.pathname.startsWith(item.url)),
+    );
+    return some(items, 'active');
   }
 
   private updateInitialData = (
