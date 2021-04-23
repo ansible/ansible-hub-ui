@@ -95,7 +95,6 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
   render() {
     const {
       params,
-      itemCount,
       loading,
       content,
       remoteToEdit,
@@ -173,16 +172,12 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
             </div>
           ) : null}
         </BaseHeader>
-        {loading ? (
-          <LoadingPageSpinner />
-        ) : (
-          this.renderContent(params, loading, itemCount, content)
-        )}
+        {loading ? <LoadingPageSpinner /> : this.renderContent(params, content)}
       </React.Fragment>
     );
   }
 
-  private renderContent(params, loading, itemCount, content) {
+  private renderContent(params, content) {
     const { user } = this.context;
     // Dont show remotes on insights
     if (
@@ -192,14 +187,10 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       return (
         <Main className='repository-list'>
           <Section className='body'>
-            {loading ? (
-              <LoadingPageSpinner />
-            ) : (
-              <LocalRepositoryTable
-                repositories={content}
-                updateParams={this.updateParams}
-              />
-            )}
+            <LocalRepositoryTable
+              repositories={content}
+              updateParams={this.updateParams}
+            />
           </Section>
         </Main>
       );
@@ -213,22 +204,18 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       ) : (
         <Main className='repository-list'>
           <Section className='body'>
-            {loading ? (
-              <LoadingPageSpinner />
-            ) : (
-              <RemoteRepositoryTable
-                remotes={content}
-                updateParams={this.updateParams}
-                editRemote={(remote: RemoteType) =>
-                  this.selectRemoteToEdit(remote)
-                }
-                syncRemote={distro =>
-                  RemoteAPI.sync(distro).then(result => this.loadContent())
-                }
-                user={user}
-                refreshRemotes={this.refreshContent}
-              />
-            )}
+            <RemoteRepositoryTable
+              remotes={content}
+              updateParams={this.updateParams}
+              editRemote={(remote: RemoteType) =>
+                this.selectRemoteToEdit(remote)
+              }
+              syncRemote={distro =>
+                RemoteAPI.sync(distro).then(result => this.loadContent())
+              }
+              user={user}
+              refreshRemotes={this.refreshContent}
+            />
           </Section>
         </Main>
       );
