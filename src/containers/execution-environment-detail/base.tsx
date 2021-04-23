@@ -111,7 +111,8 @@ export function withContainerRepo(WrappedComponent) {
           <Main>
             {this.state.editing && (
               <RepositoryForm
-                name={this.props.match.params['container']}
+                name={this.state.repo.name}
+                namespace={this.state.repo.namespace.name}
                 selectedGroups={cloneDeep(this.state.selectedGroups)}
                 description={this.state.repo.description}
                 permissions={permissions}
