@@ -47,7 +47,6 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
           isDisabled={!!this.props.isDisabled}
         />
         <br />
-        <br />
         <div>
           {groups.map((group, i) => (
             <Flex

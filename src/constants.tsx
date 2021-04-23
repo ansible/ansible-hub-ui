@@ -124,16 +124,16 @@ export class Constants {
     upload_to_namespace: 'Upload to namespace',
     add_containernamespace: 'Create new containers',
     namespace_pull_containerdistribution: 'Pull private containers',
-    namespace_change_containerdistribution: 'Change containers',
+    namespace_change_containerdistribution: 'Update container information',
     namespace_view_containerdistribution: 'View private containers',
     namespace_modify_content_containerpushrepository: 'Change image tags',
     change_containernamespace: 'Change container namespace permissions',
-    namespace_push_containerdistribution: 'Push to existing containers',
+    namespace_push_containerdistribution: 'Push images to existing containers',
     view_containernamespace: "View container's namespace",
     delete_containernamespace: "Delete container's namespace",
     namespace_delete_containerdistribution: "Delete container's distribution",
     namespace_view_containerpushrepository: "View container's repository",
-    namespace_add_containerdistribution: 'Add distribution',
+    namespace_add_containerdistribution: 'Push new containers',
     change_containerdistribution: 'Change distribution',
     delete_containerdistribution: 'Delete distribution',
     push_containerdistribution: 'Push distribution',
@@ -141,12 +141,11 @@ export class Constants {
     view_containerdistribution: 'View distribution',
   };
   static CONTAINER_NAMESPACE_PERMISSIONS = [
-    'namespace_delete_containerdistribution',
-    'namespace_view_containerpushrepository',
     'change_containernamespace',
     'namespace_push_containerdistribution',
     'namespace_change_containerdistribution',
     'namespace_modify_content_containerpushrepository',
+    'namespace_add_containerdistribution',
   ];
   static UPSTREAM_HOSTS = [
     'galaxy.ansible.com',

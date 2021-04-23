@@ -12,6 +12,7 @@ import { Constants } from 'src/constants';
 
 interface IProps {
   name: string;
+  namespace: string;
   description: string;
   selectedGroups: GroupObjectPermissionType[];
   onSave: (string, []) => void;
@@ -34,7 +35,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { name, onSave, onCancel } = this.props;
+    const { name, onSave, onCancel, namespace } = this.props;
     const { description, selectedGroups } = this.state;
     return (
       <Modal
@@ -59,6 +60,14 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           <FormGroup key='name' fieldId='name' label='Name'>
             <TextInput id='name' value={name} isDisabled={true} type='text' />
           </FormGroup>
+          <FormGroup key='name' fieldId='name' label='Container namespace'>
+            <TextInput
+              id='name'
+              value={namespace}
+              isDisabled={true}
+              type='text'
+            />
+          </FormGroup>
           <FormGroup
             key='description'
             fieldId='description'
@@ -77,6 +86,10 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             />
           </FormGroup>
           <FormGroup key='groups' fieldId='groups' label='Groups with access'>
+            <div className='pf-c-form__helper-text'>
+              Adding groups provides access to all repositories in the "
+              {namespace}" container namespace.
+            </div>
             <ObjectPermissionField
               groups={this.state.selectedGroups}
               availablePermissions={Constants.CONTAINER_NAMESPACE_PERMISSIONS}
