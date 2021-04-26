@@ -66,7 +66,6 @@ interface IState {
   showUserRemoveModal: UserType | null;
   permissions: string[];
   originalPermissions: { id: number; name: string }[];
-  loading: boolean;
 }
 
 class GroupDetail extends React.Component<RouteComponentProps, IState> {
@@ -103,24 +102,29 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       showUserRemoveModal: null,
       permissions: [],
       originalPermissions: [],
-      loading: false,
     };
   }
 
   componentDidMount() {
-    GroupAPI.get(this.state.params.id).then(result => {
-      this.setState({ group: result.data });
-    });
-    GroupAPI.getPermissions(this.state.params.id).then(result => {
-      let originalPerms = [];
-      result.data.data.forEach(p =>
-        originalPerms.push({ id: p.id, name: p.permission }),
+    GroupAPI.get(this.state.params.id)
+      .then(result => {
+        this.setState({ group: result.data });
+      })
+      .catch(e => this.addAlert('Error loading group.', 'danger', e.message));
+
+    GroupAPI.getPermissions(this.state.params.id)
+      .then(result => {
+        this.setState({
+          originalPermissions: result.data.data.map(p => ({
+            id: p.id,
+            name: p.permission,
+          })),
+          permissions: result.data.data.map(x => x.permission),
+        });
+      })
+      .catch(e =>
+        this.addAlert('Error loading permissions.', 'danger', e.message),
       );
-      this.setState({
-        originalPermissions: originalPerms,
-        permissions: result.data.data.map(x => x.permission),
-      });
-    });
   }
 
   render() {
@@ -129,7 +133,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       alerts,
       editPermissions,
       group,
-      loading,
       params,
       showDeleteModal,
       showUserRemoveModal,
@@ -142,13 +145,23 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       tabs.push('Users');
     }
 
-    if (!group || loading) {
+    if (!group && alerts && alerts.length) {
+      return (
+        <AlertList
+          alerts={alerts}
+          closeAlert={i => this.closeAlert(i)}
+        ></AlertList>
+      );
+    }
+    if (!group) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
+
     if (params.tab == 'users' && !users) {
       this.queryUsers();
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
+
     return (
       <React.Fragment>
         <AlertList
@@ -223,17 +236,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       if (!originalPermissions.find(p => p.name === permission)) {
         GroupAPI.addPermission(group.id, {
           permission: permission,
-        }).catch(() =>
-          this.setState({
-            alerts: [
-              ...this.state.alerts,
-              {
-                variant: 'danger',
-                title: null,
-                description: `Permission ${permission} was not added`,
-              },
-            ],
-          }),
+        }).catch(e =>
+          this.addAlert(
+            `Permission ${permission} was not added.`,
+            'danger',
+            e.message,
+          ),
         );
       }
     });
@@ -241,17 +249,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     // Remove permissions
     originalPermissions.forEach(original => {
       if (!permissions.includes(original.name)) {
-        GroupAPI.removePermission(group.id, original.id).catch(() =>
-          this.setState({
-            alerts: [
-              ...this.state.alerts,
-              {
-                variant: 'danger',
-                title: null,
-                description: `Permission ${original.name} was not removed.`,
-              },
-            ],
-          }),
+        GroupAPI.removePermission(group.id, original.id).catch(e =>
+          this.addAlert(
+            `Permission ${original.name} was not removed.`,
+            'danger',
+            e.message,
+          ),
         );
       }
     });
@@ -362,10 +365,13 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       this.loadOptions();
       return null;
     }
+
+    const close = () => this.setState({ addModalVisible: false, selected: [] });
+
     return (
       <Modal
         variant='large'
-        onClose={() => this.setState({ addModalVisible: false })}
+        onClose={close}
         isOpen={true}
         aria-label='add-user-modal'
         title={''}
@@ -380,16 +386,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             variant='primary'
             isDisabled={this.state.selected.length === 0}
             onClick={() =>
-              this.addUserToGroup(this.state.selected, this.state.group)
+              this.addUserToGroup(this.state.selected, this.state.group).then(
+                close,
+              )
             }
           >
             Add
           </Button>,
-          <Button
-            key='cancel'
-            variant='link'
-            onClick={() => this.setState({ addModalVisible: false })}
-          >
+          <Button key='cancel' variant='link' onClick={close}>
             Cancel
           </Button>,
         ]}
@@ -397,8 +401,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <APISearchTypeAhead
           results={this.state.options}
           loadResults={name =>
-            UserAPI.list({ username__contains: name, page_size: 5 }).then(
-              result => {
+            UserAPI.list({ username__contains: name, page_size: 5 })
+              .then(result => {
                 let filteredUsers = [];
                 result.data.data.forEach(user => {
                   filteredUsers.push({
@@ -414,8 +418,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                 this.setState({
                   options: filteredUsers,
                 });
-              },
-            )
+              })
+              .catch(e =>
+                this.addAlert('Error loading users.', 'danger', e.message),
+              )
           }
           onSelect={(event, selection) => {
             const selectedUser = this.state.options.find(
@@ -466,28 +472,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         .then(() => {
           this.setState({
             showDeleteModal: false,
-            alerts: [
-              ...this.state.alerts,
-              {
-                variant: 'success',
-                title: null,
-                description: 'Successfully deleted group.',
-              },
-            ],
           });
+          this.addAlert('Successfully deleted group.', 'success');
           this.props.history.push(Paths.groupList);
         })
-        .catch(() =>
-          this.setState({
-            alerts: [
-              ...this.state.alerts,
-              {
-                variant: 'danger',
-                title: null,
-                description: 'Error deleting group.',
-              },
-            ],
-          }),
+        .catch(e =>
+          this.addAlert('Error deleting group.', 'danger', e.message),
         );
     };
 
@@ -522,29 +512,40 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private addUserToGroup(selectedUsers, group) {
-    const allPromises = [];
-    selectedUsers.forEach(user => {
-      const newUser = this.state.allUsers.find(x => x.id == user.id);
-      newUser.groups = newUser.groups.concat(group);
-      allPromises.push(UserAPI.update(user.id.toString(), newUser));
-    });
-    Promise.all(allPromises)
-      .then(() => {
-        this.queryUsers();
-      })
-      .catch(() => this.setState({ addModalVisible: false }));
+    return Promise.all(
+      selectedUsers.map(({ id }) => {
+        const user = this.state.allUsers.find(x => x.id === id);
+        return UserAPI.update(id.toString(), {
+          ...user,
+          groups: [...user.groups, group],
+        });
+      }),
+    )
+      .catch(e => this.addAlert('Error updating users.', 'danger', e.message))
+      .then(() => this.queryUsers());
   }
 
   private loadOptions() {
-    UserAPI.list().then(result => {
-      const options = result.data.data.filter(user => {
-        return !this.state.users.find(u => u.id === user.id);
-      });
-      const a = [];
-      options.forEach(option =>
-        a.push({ id: option.id, name: option.username }),
-      );
-      this.setState({ options: a, allUsers: result.data.data });
+    UserAPI.list()
+      .then(result => {
+        const options = result.data.data
+          .filter(user => !this.state.users.find(u => u.id === user.id))
+          .map(option => ({ id: option.id, name: option.username }));
+        this.setState({ options, allUsers: result.data.data });
+      })
+      .catch(e => this.addAlert('Error loading users.', 'danger', e.message));
+  }
+
+  private addAlert(title, variant, description?) {
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          description,
+          title,
+          variant,
+        },
+      ],
     });
   }
 
@@ -561,12 +562,15 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           title={'No users yet'}
           description={'Users will appear once added to this group'}
           button={
-            <Button
-              variant='primary'
-              onClick={() => this.setState({ addModalVisible: true })}
-            >
-              Add
-            </Button>
+            !!user &&
+            user.model_permissions.change_group && (
+              <Button
+                variant='primary'
+                onClick={() => this.setState({ addModalVisible: true })}
+              >
+                Add
+              </Button>
+            )
           }
         />
       );
@@ -734,14 +738,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     UserAPI.list({
       ...this.state.params,
       ...{ groups__name: this.state.group.name },
-    }).then(result =>
-      this.setState({
-        users: result.data.data,
-        itemCount: result.data.meta.count,
-        addModalVisible: false,
-        loading: false,
-      }),
-    );
+    })
+      .then(result =>
+        this.setState({
+          users: result.data.data,
+          itemCount: result.data.meta.count,
+        }),
+      )
+      .catch(e => this.addAlert('Error loading users.', 'danger', e.message));
   }
 
   private deleteUser(user) {
@@ -752,29 +756,13 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     UserAPI.update(user.id, user)
       .then(() => {
         this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'success',
-              title: null,
-              description: 'Successfully removed a user from a group.',
-            },
-          ],
           showUserRemoveModal: null,
         });
+        this.addAlert('Successfully removed a user from a group.', 'success');
         this.queryUsers();
       })
-      .catch(() =>
-        this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: null,
-              description: 'Error removing a user from a group.',
-            },
-          ],
-        }),
+      .catch(e =>
+        this.addAlert('Error removing user from a group.', 'danger', e.message),
       );
   }
 
