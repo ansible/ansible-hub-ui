@@ -118,7 +118,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
             <RepoSelector
               selectedRepo={this.context.selectedRepo}
               path={Paths.searchByRepo}
-              onUpdateRepo={() => this.queryCollections()}
             />
           }
         >

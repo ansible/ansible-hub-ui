@@ -38,7 +38,6 @@ import Logo from 'src/../static/images/logo_large.svg';
 
 interface IState {
   user: UserType;
-  selectExpanded: boolean;
   selectedRepo: string;
   aboutModalVisible: boolean;
   toggleOpen: boolean;
@@ -51,7 +50,6 @@ class App extends React.Component<RouteComponentProps, IState> {
     super(props);
     this.state = {
       user: null,
-      selectExpanded: false,
       selectedRepo: 'published',
       aboutModalVisible: false,
       toggleOpen: false,
@@ -424,13 +422,8 @@ class App extends React.Component<RouteComponentProps, IState> {
     });
   };
 
-  private setRepo = (path: string, callback?: () => void) => {
-    // this.setState({ selectedRepo: repo }, () => {
-    if (callback) {
-      this.props.history.push(path);
-      callback();
-    }
-    // });
+  private setRepo = (path: string) => {
+    this.props.history.push(path);
   };
 }
 
