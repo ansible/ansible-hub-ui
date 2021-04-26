@@ -31,13 +31,9 @@ export class RepoSelector extends React.Component<IProps, IState> {
         <FlexItem>
           <Select
             className='nav-select'
-            variant='single'
+            isDisabled={this.props.isDisabled}
             isOpen={this.state.selectExpanded}
-            selections={this.getRepoName(this.props.selectedRepo)}
             isPlain={false}
-            onToggle={isExpanded => {
-              this.setState({ selectExpanded: isExpanded });
-            }}
             onSelect={(event, value) => {
               const originalRepo = this.props.selectedRepo;
               const newRepo = this.getRepoBasePath(value.toString());
@@ -49,6 +45,11 @@ export class RepoSelector extends React.Component<IProps, IState> {
                 this.context.setRepo(path);
               }
             }}
+            onToggle={isExpanded => {
+              this.setState({ selectExpanded: isExpanded });
+            }}
+            selections={this.getRepoName(this.props.selectedRepo)}
+            variant='single'
           >
             <SelectOption key={'published'} value={'Published'} />
             <SelectOption key={'rh-certified'} value={'Red Hat Certified'} />
