@@ -10,6 +10,7 @@ interface IProps {
   // Path of the component that's using the component. This is required so that
   // the url for the repo can be updated correctly.
   path: Paths;
+  pathParams?: any;
   isDisabled?: boolean;
 }
 
@@ -41,7 +42,10 @@ export class RepoSelector extends React.Component<IProps, IState> {
               this.setState({ selectExpanded: false });
 
               if (newRepo !== originalRepo) {
-                const path = formatPath(this.props.path, { repo: newRepo });
+                const path = formatPath(this.props.path, {
+                  ...this.props.pathParams,
+                  repo: newRepo,
+                });
                 this.context.setRepo(path);
               }
             }}
