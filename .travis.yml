@@ -14,7 +14,7 @@ jobs:
   - stage: Deploy cloud.redhat.com
     script: npm run deploy && curl -sSL https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh | bash -s
     if: tag IS blank
-  - stage: Standalone release
+  - stage: Stable release
     if: tag IS NOT blank
     # Disable tests because cypress isn't currently configured to work in travis
     script: echo "npm test temporarily disabled"
@@ -25,14 +25,37 @@ jobs:
       provider: releases
       file: automation-hub-ui-dist.tar.gz
       skip_cleanup: true
-      api_key:
-        secure: "on9iBXtLJjI3x9toeGgpDzCvXQhQKnh2P8KA2CS96rKU2iln1d4Um097YlQAAMcQs9sD+VMW/DCeCvpSsvNQ3pvBK6hLfZC2IIK01BtlJwepb22cX/hl228lKMMwMJCyxT6Nb8oteCYkiImQbnJrqNZf8pfQMs5zF8iyPm2AV3iVh6CPcSpbc4/JmJpTJ8QWoFdPGGmLurvJf64Y1F5L3zUPPDc8571xU5DtjZtrgVBuZVdPsDb0WcBOj0AoPXFQHqz38G11cc7jf+laBdeCxTX2++u94G7aCqfvE0aE6HdeJDunijJamp/JrfM0khO+n4VxMrwa055wI1da7whNCouO9Jmj8XKjcLWmWP2kKLpg1ViZXOtWQ8GyQ6gozLsROYO8CCgVZu5kDlg9ra8ZLZ/rgvH25wO5/QKoXtBZHplekASiT4sDJ5JmmQ0OSQUHLOB7UVbJKHAJkybQ5qv7K7Ifhs67bUkWZbu6w0FXVaMJ0irZOu8zXFDx5lsk2kn+fFXrEOr2kBgHHf5lz/p49Qks4We44dXSv6eJRTJfOrh/vd97UywaElEGH7iEzTPrSsdAp25QjJRG3OXPHJytiJvrfA7hv3dK6hhwr2tSGzNyglTF1git47gt9qbaFSOcro32w6omln/68k699gcUIJbkUzxo6aM0Ygo5FaOwBFY="
+      api_key: $RH_GALAXY_DROID_GITHUB_TOKEN
       on:
         tags: true
+
+  # Updates the "dev" github release whenever new changes are merged into master. This provides an up to date
+  # tarball that https://github.com/ansible/galaxy_ng can use
+  - stage: Dev release
+    if: branch = master
+    # Disable tests because cypress isn't currently configured to work in travis
+    script: echo "npm test temporarily disabled"
+    before_deploy:
+      - git config --local user.name "Travis CI"
+      - git config --local user.email "builds@travis-ci.com"
+      - export TRAVIS_TAG=dev
+      # update the dev tag
+      - git tag -f $TRAVIS_TAG
+      - git push -fq https://rh-galaxy-droid:$RH_GALAXY_DROID_GITHUB_TOKEN@github.com/ansible/ansible-hub-ui --tags
+      - npm run build-standalone
+      - tar -C dist/ -czvf automation-hub-ui-dist.tar.gz .
+    deploy:
+      provider: releases
+      file: automation-hub-ui-dist.tar.gz
+      overwrite: true
+      skip_cleanup: true
+      api_key: $RH_GALAXY_DROID_GITHUB_TOKEN
+      on:
+        branch: master
+
   - stage: Generate package manifest
     script: .travis/update_manifest.sh
-    env:
-      - secure: "3aUFCaUdLT4vK+DX+adqYcUyxlrb5SJRsn5iNLLc3ixY/o03CRfy0YQVFUBLPWovjwGoXJ4Q7VjC06ciI2vJGiKXtGzgYpFSDtD09tkvHaT9mcaMIqHEJl4SqRYhJa/AeWM5hfTX3gXQug5vJoKMsJnnJNc8FbQ/yuEW3ZpfVLA0HJ3G3RceZE1c0lPctgzN0jy1Qh35ikatQkcitbxPaEToXKfm7Cw0lvR6GfIIGoqYKeL+yT40QIAZBk6j6WLSp5uJHAJ/8Xu3CAThzbrtpjYpPu7N0wxBfqzNx9NL+RzYsqPeXU0Vz803i4rVnG7CRioVRTq9fAl2D3X4PxSCm1cMu+2/Rhx8F5V4MRAt2gTzK/sN6bnP1AV1CusuuC+Z8MfeGFWOUkPV41kZqMeo5nHgPZHQPas/ejWoCf144FmaZNoqgeuVphDtOgurP8UVrwmbvFkF21+BirMvLSJY1wowb6FXvwYLfR0dDAgsGgu9b7D2sHnmOdWml0CVhVuMXho41Kmt1QWzkgvrGjEWoTfEVt/NwTUpRnXra62BZGzSnKstaOs1IEE7bk/85RGLHlRzmlb8UIdLzwfdMkc1cHUvNur1Mhl5DgKXa98sAd9sIj8LOrLwHQUpPS8SFhvn34YNphST6549IyAJLlqVUCy8pgi/itG+w3QlWCRQ+80="
+
 env:
   global:
   - REPO="git@github.com:RedHatInsights/ansible-hub-ui-build.git"
