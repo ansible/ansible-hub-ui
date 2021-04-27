@@ -1,9 +1,17 @@
 import * as React from 'react';
 
-import { Flex, FlexItem, Select, SelectOption } from '@patternfly/react-core';
+import {
+  Flex,
+  FlexItem,
+  InputGroup,
+  InputGroupText,
+  Select,
+  SelectOption,
+} from '@patternfly/react-core';
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import './repo-selector.scss';
 
 interface IProps {
   selectedRepo: string;
@@ -30,35 +38,43 @@ export class RepoSelector extends React.Component<IProps, IState> {
     return (
       <Flex>
         <FlexItem>
-          <Select
-            className='nav-select'
-            isDisabled={this.props.isDisabled}
-            isOpen={this.state.selectExpanded}
-            isPlain={false}
-            onSelect={(event, value) => {
-              const originalRepo = this.props.selectedRepo;
-              const newRepo = this.getRepoBasePath(value.toString());
+          <InputGroup>
+            <InputGroupText
+              variant='plain'
+              className='input-group-text-no-wrap'
+            >
+              Filter by repository
+            </InputGroupText>
+            <Select
+              className='nav-select'
+              isDisabled={this.props.isDisabled}
+              isOpen={this.state.selectExpanded}
+              isPlain={false}
+              onSelect={(event, value) => {
+                const originalRepo = this.props.selectedRepo;
+                const newRepo = this.getRepoBasePath(value.toString());
 
-              this.setState({ selectExpanded: false });
+                this.setState({ selectExpanded: false });
 
-              if (newRepo !== originalRepo) {
-                const path = formatPath(this.props.path, {
-                  ...this.props.pathParams,
-                  repo: newRepo,
-                });
-                this.context.setRepo(path);
-              }
-            }}
-            onToggle={isExpanded => {
-              this.setState({ selectExpanded: isExpanded });
-            }}
-            selections={this.getRepoName(this.props.selectedRepo)}
-            variant='single'
-          >
-            <SelectOption key={'published'} value={'Published'} />
-            <SelectOption key={'rh-certified'} value={'Red Hat Certified'} />
-            <SelectOption key={'community'} value={'Community'} />
-          </Select>
+                if (newRepo !== originalRepo) {
+                  const path = formatPath(this.props.path, {
+                    ...this.props.pathParams,
+                    repo: newRepo,
+                  });
+                  this.context.setRepo(path);
+                }
+              }}
+              onToggle={isExpanded => {
+                this.setState({ selectExpanded: isExpanded });
+              }}
+              selections={this.getRepoName(this.props.selectedRepo)}
+              variant='single'
+            >
+              <SelectOption key={'published'} value={'Published'} />
+              <SelectOption key={'rh-certified'} value={'Red Hat Certified'} />
+              <SelectOption key={'community'} value={'Community'} />
+            </Select>
+          </InputGroup>
         </FlexItem>
       </Flex>
     );
