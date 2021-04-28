@@ -28,6 +28,7 @@ import {
   EmptyStateUnauthorized,
   EmptyStateFilter,
   EmptyStateNoData,
+  RepoSelector,
 } from 'src/components';
 
 import { ImportModal } from './import-modal/import-modal';
@@ -172,6 +173,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           params={params}
           updateParams={p => this.updateParams(p)}
           pageControls={this.renderPageControls()}
+          contextSelector={
+            <RepoSelector
+              selectedRepo={this.context.selectedRepo}
+              path={this.props.match.path as any} // Paths.namespaceByRepo or Paths.myCollectionsByRepo
+              pathParams={{ namespace: namespace.name }}
+            />
+          }
         ></PartnerHeader>
         <Main>
           {tab.toLowerCase() === 'collections' ? (

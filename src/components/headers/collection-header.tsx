@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { FormSelect, FormSelectOption, Alert } from '@patternfly/react-core';
 
-import { BaseHeader, Breadcrumbs } from 'src/components';
+import { BaseHeader, Breadcrumbs, RepoSelector } from 'src/components';
 import { CollectionDetailType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -65,6 +65,13 @@ export class CollectionHeader extends React.Component<IProps> {
         className={className}
         title={collection.name}
         imageURL={collection.namespace.avatar_url}
+        contextSelector={
+          <RepoSelector
+            selectedRepo={this.context.selectedRepo}
+            path={Paths.searchByRepo}
+            isDisabled
+          />
+        }
         breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
         pageControls={
           <div style={{ display: 'flex', alignItems: 'center' }}>

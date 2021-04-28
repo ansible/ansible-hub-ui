@@ -22,7 +22,7 @@ describe('Hub User Management Tests', () => {
         beforeEach(() => {
             cy.visit(baseUrl);
             cy.login(adminUsername, adminPassword);
-            cy.contains('#page-sidebar a', 'Users').click();
+            cy.menuGo('User Access > Users');
         });
 
         it('User table lists users', () => {
@@ -34,7 +34,7 @@ describe('Hub User Management Tests', () => {
         beforeEach(() => {
             cy.visit(baseUrl);
             cy.login(adminUsername, adminPassword);
-            cy.contains('#page-sidebar a', 'Users').click();
+            cy.menuGo('User Access > Users');
         });
 
         afterEach(() => {
@@ -59,7 +59,7 @@ describe('Hub User Management Tests', () => {
         });
 
         function attemptToDelete(toDelete) {
-            cy.contains('#page-sidebar a', 'Users').click();
+            cy.menuGo('User Access > Users');
             cy.get(`[aria-labelledby=${toDelete}] [aria-label=Actions]`).click();
             cy.containsnear(`[aria-labelledby=${toDelete}] [aria-label=Actions]`, 'Delete').click();
             cy.get('footer > button:contains("Delete")').should('be.disabled');
@@ -80,7 +80,7 @@ describe('Hub User Management Tests', () => {
             attemptToDelete(adminUsername);
         });
     });
-    
+
     after(() => {
         cy.login(adminUsername, adminPassword);
         cy.deleteUser(username);
