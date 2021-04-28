@@ -39,9 +39,21 @@ Cypress.Commands.add('containsnear', {}, (...args) => {
     cy.log('constainsnear requires selector and content parameters');
 });
 
-Cypress.Commands.add('menuItem', {}, (name) => {
-    return cy.contains('#page-sidebar a', name);
+Cypress.Commands.add('menuPresent', {}, (name) => {
+    const last = name.split(' > ').pop();
+    return cy.contains('#page-sidebar a', last).should('exist');
 });
+
+Cypress.Commands.add('menuMissing', {}, (name) => {
+    const last = name.split(' > ').pop();
+    return cy.contains('#page-sidebar a', last).should('not.exist');
+});
+
+Cypress.Commands.add('menuGo', {}, (name) => {
+    const last = name.split(' > ').pop();
+    return cy.contains('#page-sidebar a', last).click({ force: true });
+});
+
 Cypress.Commands.add('logout', {}, () => {
     cy.server();
     cy.route('GET', urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/')).as('me');
@@ -62,7 +74,7 @@ Cypress.Commands.add('login', {}, (username, password) => {
 });
 
 Cypress.Commands.add('createUser', {}, (username, password = null, firstName = null, lastName = null, email = null) => {
-    cy.contains('#page-sidebar a', 'Users').click();
+    cy.menuGo('User Access > Users');
 
     const user = {
         firstName: firstName || 'First Name',
@@ -88,7 +100,7 @@ Cypress.Commands.add('createUser', {}, (username, password = null, firstName = n
 
 Cypress.Commands.add('createGroup', {}, (name) => {
     cy.route('GET', Cypress.env('prefix') + '_ui/v1/groups/?sort=name&offset=0&limit=10').as('createGroup');
-    cy.contains('#page-sidebar a', 'Groups').click();
+    cy.menuGo('User Access > Groups');
     cy.wait('@createGroup');
 
     cy.contains('Create').click();
@@ -101,7 +113,7 @@ Cypress.Commands.add('createGroup', {}, (name) => {
 Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
     cy.server();
     cy.route('GET', Cypress.env('prefix') + '_ui/v1/groups/*/model-permissions/*').as('groups');
-    cy.contains('#page-sidebar a', 'Groups').click();
+    cy.menuGo('User Access > Groups');
     cy.get(`[aria-labelledby=${groupName}] a`).click();
     cy.wait('@groups');
     cy.contains('button', 'Edit').click();
@@ -119,7 +131,7 @@ Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
 });
 
 Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
-    cy.contains('#page-sidebar a', 'Groups').click();
+    cy.menuGo('User Access > Groups');
     cy.get(`[aria-labelledby=${groupName}] a`).click();
     cy.contains('button', 'Edit').click();
     permissions.forEach(permissionElement => {
@@ -159,7 +171,7 @@ Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
 });
 
 Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
-    cy.contains('#page-sidebar a', 'Groups').click();
+    cy.menuGo('User Access > Groups');
     cy.get(`[aria-labelledby=${groupName}] a`).click();
     cy.contains('button', 'Users').click();
     cy.contains('button', 'Add').click();
@@ -172,7 +184,7 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
 });
 
 Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
-    cy.contains('#page-sidebar a', 'Groups').click();
+    cy.menuGo('User Access > Groups');
     cy.get(`[aria-labelledby=${groupName}] a`).click();
     cy.contains('button', 'Users').click();
     cy.get(`[aria-labelledby=${userName}] [aria-label=Actions]`).click();
@@ -181,6 +193,7 @@ Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
     cy.contains(userName).should('not.exist');
 });
 
+// FIXME: createUser doesn't change logins, deleteUser does => TODO consistency
 Cypress.Commands.add('deleteUser', {}, (username) => {
     let adminUsername = Cypress.env('username');
     let adminPassword = Cypress.env('password');
@@ -188,7 +201,7 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
     cy.logout();
     cy.login(adminUsername, adminPassword);
 
-    cy.contains('#page-sidebar a', 'Users').click();
+    cy.menuGo('User Access > Users');
     cy.server();
     cy.route('DELETE', Cypress.env('prefix') + '_ui/v1/users/**').as('deleteUser');
     cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click();
@@ -205,7 +218,7 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
     cy.logout();
     cy.login(adminUsername, adminPassword);
 
-    cy.contains('#page-sidebar a', 'Groups').click();
+    cy.menuGo('User Access > Groups');
     cy.server();
     cy.route('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as('deleteGroup');
     cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click();

@@ -23,6 +23,7 @@ import {
   AppliedFilters,
   EmptyStateFilter,
   EmptyStateNoData,
+  RepoSelector,
 } from 'src/components';
 import {
   CollectionAPI,
@@ -34,6 +35,7 @@ import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { filterIsSet } from 'src/utilities';
+import { Paths } from 'src/paths';
 
 interface IState {
   collections: CollectionListType[];
@@ -109,7 +111,16 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
     return (
       <div className='search-page'>
-        <BaseHeader className='header' title='Collections'>
+        <BaseHeader
+          className='header'
+          title='Collections'
+          contextSelector={
+            <RepoSelector
+              selectedRepo={this.context.selectedRepo}
+              path={Paths.searchByRepo}
+            />
+          }
+        >
           {!noData && (
             <div className='toolbar-wrapper'>
               <div className='toolbar'>
