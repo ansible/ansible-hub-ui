@@ -17,16 +17,18 @@ interface IProps {
   updateParams: (p) => void;
 
   pageControls?: React.ReactNode;
+  contextSelector?: React.ReactNode;
 }
 
 export class PartnerHeader extends React.Component<IProps, {}> {
   render() {
     const {
-      namespace,
       breadcrumbs,
-      tabs,
+      contextSelector,
+      namespace,
       pageControls,
       params,
+      tabs,
       updateParams,
     } = this.props;
     return (
@@ -35,6 +37,7 @@ export class PartnerHeader extends React.Component<IProps, {}> {
         imageURL={namespace.avatar_url}
         breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
         pageControls={pageControls}
+        contextSelector={contextSelector}
       >
         {namespace.description ? <div>{namespace.description}</div> : null}
 

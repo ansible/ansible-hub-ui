@@ -10,19 +10,23 @@ import {
 
 import '@patternfly/patternfly/patternfly.scss';
 import {
-  Page,
-  PageHeader,
-  PageSidebar,
-  PageHeaderTools,
-  Nav,
-  NavList,
-  NavItem,
   DropdownItem,
   DropdownSeparator,
+  Nav,
+  NavExpandable,
   NavGroup,
-  Select,
-  SelectOption,
+  NavItem,
+  NavList,
+  Page,
+  PageHeader,
+  PageHeaderTools,
+  PageSidebar,
 } from '@patternfly/react-core';
+import {
+  ExternalLinkAltIcon,
+  QuestionCircleIcon,
+} from '@patternfly/react-icons';
+import { reject, some } from 'lodash';
 
 import { Routes } from './routes';
 import { Paths, formatPath } from 'src/paths';
@@ -30,17 +34,15 @@ import { ActiveUserAPI, UserType, FeatureFlagsType } from 'src/api';
 import { SmallLogo, StatefulDropdown } from 'src/components';
 import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
-import { Constants } from 'src/constants';
-import { QuestionCircleIcon } from '@patternfly/react-icons';
 import Logo from 'src/../static/images/logo_large.svg';
 
 interface IState {
   user: UserType;
-  selectExpanded: boolean;
   selectedRepo: string;
   aboutModalVisible: boolean;
   toggleOpen: boolean;
   featureFlags: FeatureFlagsType;
+  menuExpandedSections: string[];
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -48,11 +50,11 @@ class App extends React.Component<RouteComponentProps, IState> {
     super(props);
     this.state = {
       user: null,
-      selectExpanded: false,
       selectedRepo: 'published',
       aboutModalVisible: false,
       toggleOpen: false,
       featureFlags: null,
+      menuExpandedSections: [],
     };
   }
 
@@ -62,10 +64,23 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     this.setRepoToURL();
+
+    const menu = this.menu();
+    this.activateMenu(menu);
+    this.setState({
+      menuExpandedSections: menu
+        .filter(i => i.type === 'section' && i.active)
+        .map(i => i.name),
+    });
   }
 
   render() {
-    const { user, selectedRepo, featureFlags } = this.state;
+    const {
+      featureFlags,
+      menuExpandedSections,
+      selectedRepo,
+      user,
+    } = this.state;
 
     // block the page from rendering if we're on a repo route and the repo in the
     // url doesn't match the current state
@@ -78,8 +93,8 @@ class App extends React.Component<RouteComponentProps, IState> {
     }
 
     let aboutModal = null;
-    let dropdownItems,
-      dropdownItemsCog = [];
+    let docsDropdownItems = [];
+    let userDropdownItems = [];
     let userName: string;
 
     if (user) {
@@ -89,7 +104,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         userName = user.username;
       }
 
-      dropdownItems = [
+      userDropdownItems = [
         <DropdownItem isDisabled key='username'>
           Username: {user.username}
         </DropdownItem>,
@@ -109,36 +124,21 @@ class App extends React.Component<RouteComponentProps, IState> {
           Logout
         </DropdownItem>,
       ];
-      dropdownItemsCog = [
+
+      docsDropdownItems = [
         <DropdownItem
           key='customer_support'
-          onClick={() =>
-            window.open('https://access.redhat.com/support', '_blank')
-          }
+          href='https://access.redhat.com/support'
+          target='_blank'
         >
-          Customer Support
+          Customer Support <ExternalLinkAltIcon />
         </DropdownItem>,
         <DropdownItem
           key='training'
-          onClick={() =>
-            window.open(
-              'https://www.ansible.com/resources/webinars-training',
-              '_blank',
-            )
-          }
+          href='https://www.ansible.com/resources/webinars-training'
+          target='_blank'
         >
-          Training
-        </DropdownItem>,
-        <DropdownItem
-          key='documentation'
-          onClick={() =>
-            window.open(
-              'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
-              '_blank',
-            )
-          }
-        >
-          Documentation
+          Training <ExternalLinkAltIcon />
         </DropdownItem>,
         <DropdownItem
           key='about'
@@ -149,6 +149,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           About
         </DropdownItem>,
       ];
+
       aboutModal = (
         <AboutModalWindow
           isOpen={this.state.aboutModalVisible}
@@ -190,17 +191,16 @@ class App extends React.Component<RouteComponentProps, IState> {
             ) : (
               <div>
                 <StatefulDropdown
-                  items={dropdownItemsCog}
+                  ariaLabel={'docs-dropdown'}
                   defaultText={<QuestionCircleIcon />}
+                  items={docsDropdownItems}
                   toggleType='icon'
-                  ariaLabel={'cog-dropdown'}
                 />
-
                 <StatefulDropdown
-                  defaultText={userName}
-                  toggleType='dropdown'
-                  items={dropdownItems}
                   ariaLabel={'user-dropdown'}
+                  defaultText={userName}
+                  items={userDropdownItems}
+                  toggleType='dropdown'
                 />
               </div>
             )}
@@ -209,96 +209,78 @@ class App extends React.Component<RouteComponentProps, IState> {
         showNavToggle
       />
     );
+
+    const menu = this.menu();
+    this.activateMenu(menu);
+
+    const ItemOrSection = ({ item }) =>
+      item.type === 'section' ? (
+        <MenuSection section={item} />
+      ) : (
+        <MenuItem item={item} />
+      );
+    const MenuItem = ({ item }) =>
+      item.condition({ user, featureFlags }) ? (
+        <NavItem
+          isActive={item.active}
+          onClick={e => {
+            item.onclick && item.onclick();
+            e.stopPropagation();
+          }}
+        >
+          {item.url && item.external ? (
+            <a href={item.url} target='_blank'>
+              {item.name}
+              <ExternalLinkAltIcon
+                style={{ position: 'absolute', right: '32px' }}
+              />
+            </a>
+          ) : item.url ? (
+            <Link to={item.url}>{item.name}</Link>
+          ) : (
+            item.name
+          )}
+        </NavItem>
+      ) : null;
+    const Menu = ({ items }) => (
+      <>
+        {items.map(item => (
+          <ItemOrSection key={item.name} item={item} />
+        ))}
+      </>
+    );
+    const MenuSection = ({ section }) =>
+      section.condition({ user, featureFlags }) ? (
+        <NavExpandable
+          title={section.name}
+          groupId={section.name}
+          isActive={section.active}
+          isExpanded={menuExpandedSections.includes(section.name)}
+        >
+          <Menu items={section.items} />
+        </NavExpandable>
+      ) : null;
+
+    const onToggle = ({ groupId, isExpanded }) => {
+      this.setState({
+        menuExpandedSections: isExpanded
+          ? [...menuExpandedSections, groupId]
+          : reject(menuExpandedSections, name => name === groupId),
+      });
+    };
+
     const Sidebar = (
       <PageSidebar
         theme='dark'
         nav={
-          <Nav theme='dark'>
+          <Nav theme='dark' onToggle={onToggle}>
             <NavList>
               <NavGroup
                 className={'nav-title'}
                 title={APPLICATION_NAME}
               ></NavGroup>
-              <NavItem className={'nav-select'}>
-                <Select
-                  className='nav-select'
-                  variant='single'
-                  isOpen={this.state.selectExpanded}
-                  selections={this.getRepoName(this.state.selectedRepo)}
-                  isPlain={false}
-                  onToggle={isExpanded => {
-                    this.setState({ selectExpanded: isExpanded });
-                  }}
-                  onSelect={(event, value) => {
-                    const originalRepo = this.state.selectedRepo;
-                    this.setState(
-                      {
-                        selectedRepo: this.getRepoBasePath(value.toString()),
-                        selectExpanded: false,
-                      },
-                      () => {
-                        this.props.history.push(
-                          formatPath(Paths.searchByRepo, {
-                            repo: this.getRepoBasePath(value.toString()),
-                          }),
-                        );
-                        // history.go(0) forces a reload of the page
-                        this.props.history.go(0);
-                      },
-                    );
-                  }}
-                >
-                  <SelectOption key={'published'} value={'Published'} />
-                  <SelectOption
-                    key={'rh-certified'}
-                    value={'Red Hat Certified'}
-                  />
-                  <SelectOption key={'community'} value={'Community'} />
-                </Select>
-              </NavItem>
-              <NavItem>
-                <Link
-                  to={formatPath(Paths.searchByRepo, {
-                    repo: this.state.selectedRepo,
-                  })}
-                >
-                  Collections
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths[NAMESPACE_TERM]}>Namespaces</Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths.myNamespaces}>My Namespaces</Link>
-              </NavItem>
-              <NavItem>
-                <Link to={Paths.token}>API Token</Link>
-              </NavItem>
-              {!!user && user.model_permissions.view_user && (
-                <NavItem>
-                  <Link to={Paths.userList}>Users</Link>
-                </NavItem>
-              )}
-              {!!user && user.model_permissions.view_group && (
-                <NavItem>
-                  <Link to={Paths.groupList}>Groups</Link>
-                </NavItem>
-              )}
-              {!!user && user.model_permissions.move_collection && (
-                <NavItem>
-                  <Link to={Paths.approvalDashboard}>Approval</Link>
-                </NavItem>
-              )}
-              <NavItem>
-                <Link to={Paths.repositories}>Repo Management</Link>
-              </NavItem>
-              {featureFlags && featureFlags.execution_environments && (
-                <NavItem>
-                  <Link to={Paths.executionEnvironments}>
-                    Container Registry
-                  </Link>
-                </NavItem>
-              )}
+
+              {user && featureFlags && <Menu items={menu} />}
             </NavList>
           </Nav>
         }
@@ -316,6 +298,78 @@ class App extends React.Component<RouteComponentProps, IState> {
         <Routes updateInitialData={this.updateInitialData} />
       </Page>,
     );
+  }
+
+  private menu(): any[] {
+    const menuItem = (name, options = {}) => ({
+      condition: () => true,
+      ...options,
+      type: 'item',
+      name,
+    });
+    const menuSection = (name, options = {}, items = []) => ({
+      condition: (...params) => some(items, item => item.condition(...params)), // any visible items inside
+      ...options,
+      type: 'section',
+      name,
+      items,
+    });
+
+    return [
+      menuSection('Collections', {}, [
+        menuItem('Collections', {
+          url: formatPath(Paths.searchByRepo, {
+            repo: this.state.selectedRepo,
+          }),
+        }),
+        menuItem('Namespaces', {
+          url: Paths[NAMESPACE_TERM],
+        }),
+        menuItem('My Namespaces', {
+          url: Paths.myNamespaces,
+        }),
+        menuItem('Repository Management', {
+          url: Paths.repositories,
+        }),
+        menuItem('API Token', {
+          url: Paths.token,
+        }),
+        menuItem('Approval', {
+          condition: ({ user }) => user.model_permissions.move_collection,
+          url: Paths.approvalDashboard,
+        }),
+      ]),
+      menuItem('Container Registry', {
+        condition: ({ featureFlags }) => featureFlags.execution_environments,
+        url: Paths.executionEnvironments,
+      }),
+      menuItem('Documentation', {
+        url:
+          'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
+        external: true,
+      }),
+      menuSection('User Access', {}, [
+        menuItem('Users', {
+          condition: ({ user }) => user.model_permissions.view_user,
+          url: Paths.userList,
+        }),
+        menuItem('Groups', {
+          condition: ({ user }) => user.model_permissions.view_group,
+          url: Paths.groupList,
+        }),
+      ]),
+    ];
+  }
+
+  private activateMenu(items) {
+    items.forEach(
+      item =>
+        (item.active =
+          item.type === 'section'
+            ? this.activateMenu(item.items)
+            : this.props.location.pathname.startsWith(item.url)),
+    );
+    return some(items, 'active');
   }
 
   private updateInitialData = (
@@ -344,27 +398,6 @@ class App extends React.Component<RouteComponentProps, IState> {
     });
   }
 
-  private getRepoBasePath(repoName) {
-    if (Constants.REPOSITORYNAMES[repoName]) {
-      return Constants.REPOSITORYNAMES[repoName];
-    }
-
-    return repoName;
-  }
-
-  private getRepoName(basePath) {
-    const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
-      key => Constants.REPOSITORYNAMES[key] === basePath,
-    );
-
-    // allowing the repo to go through even if isn't one that we support so
-    // that 404s bubble up naturally from the child components.
-    if (!newRepoName) {
-      return basePath;
-    }
-    return newRepoName;
-  }
-
   private ctx(component) {
     return (
       <AppContext.Provider
@@ -389,8 +422,8 @@ class App extends React.Component<RouteComponentProps, IState> {
     });
   };
 
-  private setRepo = repo => {
-    this.setState({ selectedRepo: repo });
+  private setRepo = (path: string) => {
+    this.props.history.push(path);
   };
 }
 
