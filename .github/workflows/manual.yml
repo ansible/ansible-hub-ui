@@ -19,12 +19,14 @@ jobs:
         path: 'pulp-oci-images'   
     - working-directory: 'pulp-oci-images'
       run: |
-        sed -i 's/galaxy-ng\${GALAXY_NG_VERSION}/git+https:\/\/github.com\/ansible\/galaxy_ng.git/' pulp_galaxy_ng/Containerfile
+        sed -i.bak -e '/^ARG/d' -e 's/\${.*}//' -e 's/galaxy-ng/git+https:\/\/github.com\/ansible\/galaxy_ng.git/' pulp_galaxy_ng/Containerfile
+        diff -Naur pulp_galaxy_ng/Containerfile{.bak,} || true
         wget https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz
         docker build --file pulp_ci_centos/Containerfile --tag pulp/pulp-ci-centos:latest .
         docker build --file pulp/Containerfile --tag pulp/pulp:latest .
         docker build --file pulp_galaxy_ng/Containerfile --tag pulp/pulp-galaxy-ng:latest .
-    
+       
+        
 #    - uses: actions/checkout@v2
 #      with:
 #        repository: 'ansible/galaxy_ng'
