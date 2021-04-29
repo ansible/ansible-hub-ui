@@ -21,47 +21,50 @@ jobs:
       run: |
         sed -i.bak -e '/^ARG/d' -e 's/\${.*}//' -e 's/galaxy-ng/git+https:\/\/github.com\/ansible\/galaxy_ng.git/' pulp_galaxy_ng/Containerfile
         diff -Naur pulp_galaxy_ng/Containerfile{.bak,} || true
-        wget https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz
-        docker build --file pulp_ci_centos/Containerfile --tag pulp/pulp-ci-centos:latest .
-        docker build --file pulp/Containerfile --tag pulp/pulp:latest .
-        docker build --file pulp_galaxy_ng/Containerfile --tag pulp/pulp-galaxy-ng:latest .
-       
         
-#    - uses: actions/checkout@v2
-#      with:
-#        repository: 'ansible/galaxy_ng'
-#        path: 'galaxy_ng'
-#    - working-directory: 'galaxy_ng'
-#      run: |
-#        cp .compose.env.example .compose.env
-#        ./compose build
-#
-#    - uses: actions/checkout@v2
-#      with:
-#        path: 'ansible-hub-ui'
-#    - uses: actions/setup-node@v2
-#      with:
-#        node-version: '14'
-#    - working-directory: 'ansible-hub-ui'
-#      run: 'npm ci'
-#    - working-directory: 'ansible-hub-ui/test'
-#      run: |
-#        npm ci
-#        echo -e '{\n  "prefix": "/api/automation-hub/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
-#
-#    - working-directory: 'galaxy_ng'
-#      run: |
-#        ./compose up -d postgres redis
-#        ./compose run --rm api manage migrate
-#        ./compose down
-#
-#    - working-directory: 'galaxy_ng'
-#      run: ./compose up -d
-#    - working-directory: 'ansible-hub-ui'
-#      run: |
-#        # FIXME nowatch, or build-standalone+nginx?
-#        npm run start-standalone &
-#        cd test/
-#        sleep 2m
-#        npm run cypress:chrome
-#
+        # TODO not needed, already prebuilt? (except galaxy)
+        #wget https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz
+        #docker build --file pulp_ci_centos/Containerfile --tag pulp/pulp-ci-centos:latest .
+        #docker build --file pulp/Containerfile --tag pulp/pulp:latest .
+        docker build --file pulp_galaxy_ng/Containerfile --tag pulp/pulp-galaxy-ng:latest .
+        
+        mkdir settings pulp_storage pgsql containers
+        echo "
+          CONTENT_ORIGIN='http://localhost:5001'
+          ANSIBLE_API_HOSTNAME='http://localhost:5001'
+          ANSIBLE_CONTENT_HOSTNAME='http://localhost:5001/pulp/content'
+          TOKEN_AUTH_DISABLED=True
+        " >> settings/settings.py
+       
+        docker run \
+             --detach \
+             --publish 5001:80 \
+             --name pulp \
+             --volume "$(pwd)/settings":/etc/pulp \
+             --volume "$(pwd)/pulp_storage":/var/lib/pulp \
+             --volume "$(pwd)/pgsql":/var/lib/pgsql \
+             --volume "$(pwd)/containers":/var/lib/containers \
+             --device /dev/fuse \
+             pulp/pulp
+             
+    - uses: actions/checkout@v2
+      with:
+        path: 'ansible-hub-ui'
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - working-directory: 'ansible-hub-ui'
+      run: |
+        # FIXME migrations? manage migrate
+        # FIXME nowatch, or build-standalone+nginx?
+        # FIXME wait-for-http
+
+        npm ci
+        (
+          cd test/
+          npm ci
+          echo -e '{\n  "prefix": "/api/automation-hub/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
+        )
+
+        npm run start-standalone &
+        ( cd test/ ; npm run cypress:chrome )
