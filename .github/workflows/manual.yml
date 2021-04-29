@@ -15,27 +15,46 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        repository: 'pulp/pulp-oci-images'
-        path: 'pulp-oci-images'   
-    - working-directory: 'pulp-oci-images'
-      run: |
-        sed -i.bak -e '/^ARG/d' -e 's/\${.*}//' -e 's/galaxy-ng/git+https:\/\/github.com\/ansible\/galaxy_ng.git/' pulp_galaxy_ng/Containerfile
-        diff -Naur pulp_galaxy_ng/Containerfile{.bak,} || true
+        path: 'ansible-hub-ui'
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - run: |
+        echo wait-for-http `which wait-for-http`
+        echo wait-for-tcp `which wait-for-tcp`
         
-        # TODO not needed, already prebuilt? (except galaxy)
-        #wget https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz
-        #docker build --file pulp_ci_centos/Containerfile --tag pulp/pulp-ci-centos:latest .
-        #docker build --file pulp/Containerfile --tag pulp/pulp:latest .
-        docker build --file pulp_galaxy_ng/Containerfile --tag pulp/pulp-galaxy-ng:latest .
+        mkdir pulp_galaxy_ng
+        cd pulp_galaxy_ng
+        
+        echo '\
+          FROM pulp/pulp-ci-centos:latest
+          
+          RUN pip3 install --upgrade \
+            requests \
+            git+https://github.com/ansible/galaxy_ng.git
+          
+          RUN mkdir -p /etc/nginx/pulp/
+          RUN ln /usr/local/lib/python3.6/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
+          RUN ln /usr/local/lib/python3.6/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
+          RUN ln /usr/local/lib/python3.6/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
+        ' > Containerfile
+        
+        docker build --file Containerfile --tag pulp/pulp-galaxy-ng:latest .
         
         mkdir settings pulp_storage pgsql containers
-        echo "
-          CONTENT_ORIGIN='http://localhost:5001'
+        echo "\
           ANSIBLE_API_HOSTNAME='http://localhost:5001'
-          ANSIBLE_CONTENT_HOSTNAME='http://localhost:5001/pulp/content'
+          ANSIBLE_CONTENT_HOSTNAME='http://localhost:5001/api/automation-hub/v3/artifacts/collections'
+          CONTENT_ORIGIN='http://localhost:5001'
+          GALAXY_API_PATH_PREFIX='/api/automation-hub/'
+          GALAXY_AUTHENTICATION_CLASSES=['galaxy_ng.app.auth.auth.RHIdentityAuthentication']
+          GALAXY_DEPLOYMENT_MODE='standalone'
+          PULP_CONTENT_PATH_PREFIX='/api/automation-hub/v3/artifacts/collections/'
+          RH_ENTITLEMENT_REQUIRED='insights'
           TOKEN_AUTH_DISABLED=True
-        " >> settings/settings.py
-       
+          X_PULP_CONTENT_HOST='localhost'
+        " > settings/settings.py
+
         docker run \
              --detach \
              --publish 5001:80 \
@@ -45,26 +64,26 @@ jobs:
              --volume "$(pwd)/pgsql":/var/lib/pgsql \
              --volume "$(pwd)/containers":/var/lib/containers \
              --device /dev/fuse \
-             pulp/pulp
-             
-    - uses: actions/checkout@v2
-      with:
-        path: 'ansible-hub-ui'
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-    - working-directory: 'ansible-hub-ui'
-      run: |
-        # FIXME migrations? manage migrate
-        # FIXME nowatch, or build-standalone+nginx?
-        # FIXME wait-for-http
+             pulp/pulp-galaxy-ng:latest
+         
+         sleep 5m
+         docker exec -it pulp bash -c 'pip install django_extensions' # pulpcore-manager show_urls
+         docker exec -it pulp bash -c 'pulpcore-manager reset-admin-password --password admin' || echo ERR $?
+         curl -v http://localhost:5001/api/automation-hub/
+         curl http://localhost:5001/ui/
 
-        npm ci
-        (
-          cd test/
-          npm ci
-          echo -e '{\n  "prefix": "/api/automation-hub/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
-        )
-
-        npm run start-standalone &
-        ( cd test/ ; npm run cypress:chrome )
+         
+#    - working-directory: 'ansible-hub-ui'
+#      run: |
+#        # FIXME build-standalone, move to pulp_storage/assets/galaxy_ng +-
+#        # FIXME wait-for-http
+#
+#        npm ci
+#        (
+#          cd test/
+#          npm ci
+#          echo -e '{\n  "prefix": "/api/automation-hub/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
+#        )
+#
+#        npm run start-standalone &
+#        ( cd test/ ; npm run cypress:chrome )
