@@ -19,10 +19,8 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '14'
-    - run: |
-        echo wait-for-http `which wait-for-http`
-        echo wait-for-tcp `which wait-for-tcp`
-        
+    - name: "Build pulp-galaxy-ng (with galaxy_ng master)"
+      run: |
         mkdir pulp_galaxy_ng
         cd pulp_galaxy_ng
         
@@ -40,24 +38,26 @@ jobs:
         ' > Containerfile
         
         docker build --file Containerfile --tag pulp/pulp-galaxy-ng:latest .
-        
+    - name: "Configure and run pulp-galaxy-ng"
+      working-directory: 'pulp_galaxy_ng'
+      run: |        
         mkdir settings pulp_storage pgsql containers
         echo "\
-          ANSIBLE_API_HOSTNAME='http://localhost:5001'
-          ANSIBLE_CONTENT_HOSTNAME='http://localhost:5001/api/automation-hub/v3/artifacts/collections'
-          CONTENT_ORIGIN='http://localhost:5001'
-          GALAXY_API_PATH_PREFIX='/api/automation-hub/'
-          GALAXY_AUTHENTICATION_CLASSES=['galaxy_ng.app.auth.auth.RHIdentityAuthentication']
+          ANSIBLE_API_HOSTNAME='http://localhost:8002'
+          ANSIBLE_CONTENT_HOSTNAME='http://localhost:8002/api/galaxy/v3/artifacts/collections'
+          CONTENT_ORIGIN='http://localhost:8002'
+          GALAXY_API_PATH_PREFIX='/api/galaxy/'
+          GALAXY_AUTHENTICATION_CLASSES=['rest_framework.authentication.SessionAuthentication', 'rest_framework.authentication.TokenAuthentication']
           GALAXY_DEPLOYMENT_MODE='standalone'
-          PULP_CONTENT_PATH_PREFIX='/api/automation-hub/v3/artifacts/collections/'
+          PULP_CONTENT_PATH_PREFIX='/api/galaxy/v3/artifacts/collections/'
           RH_ENTITLEMENT_REQUIRED='insights'
           TOKEN_AUTH_DISABLED=True
           X_PULP_CONTENT_HOST='localhost'
-        " > settings/settings.py
+        " | sed 's/^\s\+//' > settings/settings.py
 
         docker run \
              --detach \
-             --publish 5001:80 \
+             --publish 8002:80 \
              --name pulp \
              --volume "$(pwd)/settings":/etc/pulp \
              --volume "$(pwd)/pulp_storage":/var/lib/pulp \
@@ -65,25 +65,19 @@ jobs:
              --volume "$(pwd)/containers":/var/lib/containers \
              --device /dev/fuse \
              pulp/pulp-galaxy-ng:latest
-         
-         sleep 5m
-         docker exec -it pulp bash -c 'pip install django_extensions' # pulpcore-manager show_urls
-         docker exec -it pulp bash -c 'pulpcore-manager reset-admin-password --password admin' || echo ERR $?
-         curl -v http://localhost:5001/api/automation-hub/
-         curl http://localhost:5001/ui/
-
-         
-#    - working-directory: 'ansible-hub-ui'
-#      run: |
-#        # FIXME build-standalone, move to pulp_storage/assets/galaxy_ng +-
-#        # FIXME wait-for-http
-#
-#        npm ci
-#        (
-#          cd test/
-#          npm ci
-#          echo -e '{\n  "prefix": "/api/automation-hub/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
-#        )
-#
-#        npm run start-standalone &
-#        ( cd test/ ; npm run cypress:chrome )
+    - name: "Build standalone UI (with ansible-hub-ui current branch)"
+      working-directory: 'ansible-hub-ui'
+      run: |
+        npm ci
+        npm run build-standalone
+        sudo rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
+        sudo mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
+    - name: "Finish up and run cypress"
+      working-directory: 'ansible-hub-ui/test'
+      run: |        
+        #docker exec pulp pip install django_extensions
+        docker exec pulp pulpcore-manager reset-admin-password --password admin
+        
+        npm ci
+        echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
+        npm run cypress:chrome
