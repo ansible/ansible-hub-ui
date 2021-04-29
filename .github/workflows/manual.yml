@@ -21,6 +21,9 @@ jobs:
         node-version: '14'
     - name: "Build pulp-galaxy-ng (with galaxy_ng master)"
       run: |
+        echo buildah `buildah --version`
+        echo podman `podman --version`
+        
         mkdir pulp_galaxy_ng
         cd pulp_galaxy_ng
         
@@ -37,7 +40,7 @@ jobs:
           RUN ln /usr/local/lib/python3.6/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
         ' > Containerfile
         
-        docker build --file Containerfile --tag pulp/pulp-galaxy-ng:latest .
+        buildah bud --file Containerfile --tag pulp/pulp-galaxy-ng:latest .
     - name: "Configure and run pulp-galaxy-ng"
       working-directory: 'pulp_galaxy_ng'
       run: |        
@@ -55,7 +58,7 @@ jobs:
           X_PULP_CONTENT_HOST='localhost'
         " | sed 's/^\s\+//' > settings/settings.py
 
-        docker run \
+        podman run \
              --detach \
              --publish 8002:80 \
              --name pulp \
@@ -70,13 +73,13 @@ jobs:
       run: |
         npm ci
         npm run build-standalone
-        sudo rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
-        sudo mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
+        rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
+        mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
     - name: "Finish up and run cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |        
-        #docker exec pulp pip install django_extensions
-        docker exec pulp pulpcore-manager reset-admin-password --password admin
+        #podman exec pulp pip install django_extensions
+        podman exec pulp pulpcore-manager reset-admin-password --password admin
         
         npm ci
         echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
