@@ -21,8 +21,8 @@ jobs:
         node-version: '14'
     - name: "Build pulp-galaxy-ng (with galaxy_ng master)"
       run: |
-        echo buildah `buildah --version`
-        echo podman `podman --version`
+        echo jq `jq --version`
+        echo SHA`GET https://api.github.com/repos/ansible/galaxy_ng/branches/master | jq -r .commit.sha`
         
         mkdir pulp_galaxy_ng
         cd pulp_galaxy_ng
@@ -84,3 +84,11 @@ jobs:
         npm ci
         echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
         npm run cypress:chrome
+        
+    - uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+        name: screenshots_and_videos
+        path: |
+          ansible-hub-ui/test/cypress/screenshots
+          ansible-hub-ui/test/cypress/videos
