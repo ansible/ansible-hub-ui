@@ -1,13 +1,15 @@
-name: Manual workflow
+name: Cypress
 
 on:
+  # allow running manually
   workflow_dispatch:
-#  pull_request:
-#    branches: [ $default-branch stable-* ]
-#  push:
-#    branches: [ $default-branch stable-* ]
-#  schedule:
-#    - cron:  '30 5 * * *'
+  pull_request:
+    branches: [ $default-branch stable-* ]
+  push:
+    branches: [ $default-branch stable-* ]
+  # daily on $default-branch
+  schedule:
+    - cron:  '30 5 * * *'
 
 jobs:
   cypress:
@@ -28,14 +30,14 @@ jobs:
 
     - run: "mkdir pulp_galaxy_ng"
 
-    - name: "Cache container image for pulp_galaxy_ng ${{ env.GALAXY_NG_COMMIT }}"
+    - name: "Cache container image for pulp_galaxy_ng ${{ env.SHORT_BRANCH }} ${{ env.GALAXY_NG_COMMIT }}"
       id: cache-containers
       uses: actions/cache@v2
       with:
         path: pulp_galaxy_ng/image
         key: ${{ runner.os }}-containers-${{ env.GALAXY_NG_COMMIT }}
 
-    - name: "Build pulp-galaxy-ng (with galaxy_ng ${{ env.SHORT_BRANCH }})"
+    - name: "Build pulp-galaxy-ng"
       if: steps.cache-containers.outputs.cache-hit != 'true'
       working-directory: 'pulp_galaxy_ng'
       run: |
@@ -55,15 +57,14 @@ jobs:
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
         podman save localhost/pulp/pulp-galaxy-ng:latest -o image
 
-    - name: "Load pulp-galaxy-ng (with galaxy_ng ${{ env.SHORT_BRANCH }})"
+    - name: "Load pulp-galaxy-ng from cache"
       if: steps.cache-containers.outputs.cache-hit == 'true'
       working-directory: 'pulp_galaxy_ng'
-      run: |
-        podman load -i image
+      run: podman load -i image
 
     - name: "Configure and run pulp-galaxy-ng"
       working-directory: 'pulp_galaxy_ng'
-      run: |        
+      run: |
         mkdir settings pulp_storage pgsql containers
         echo "\
           ANSIBLE_API_HOSTNAME='http://localhost:8002'
@@ -77,7 +78,7 @@ jobs:
           TOKEN_AUTH_DISABLED=True
           X_PULP_CONTENT_HOST='localhost'
         " | sed 's/^\s\+//' > settings/settings.py
-
+        
         podman run \
              --detach \
              --publish 8002:80 \
@@ -109,7 +110,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-${{ env.SHORT_BRANCH }}-
           ${{ runner.os }}-node-
-        
+
     - name: "Build standalone UI"
       working-directory: 'ansible-hub-ui'
       run: |
@@ -120,7 +121,7 @@ jobs:
 
     - name: "Finish up and run cypress"
       working-directory: 'ansible-hub-ui/test'
-      run: |        
+      run: |
         # podman exec pulp pip install django_extensions
         podman exec pulp pulpcore-manager reset-admin-password --password admin
         
@@ -128,7 +129,7 @@ jobs:
         echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
         
         npm run cypress:chrome
-        
+
     - uses: actions/upload-artifact@v2
       if: failure()
       with:
@@ -139,5 +140,4 @@ jobs:
 
     - name: "Kill container"
       if: always()
-      run: |
-        podman kill pulp
+      run: podman kill pulp
