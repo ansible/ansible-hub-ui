@@ -130,9 +130,14 @@ jobs:
         npm run cypress:chrome
         
     - uses: actions/upload-artifact@v2
-      if: failure() # or always()
+      if: failure()
       with:
         name: screenshots_and_videos
         path: |
           ansible-hub-ui/test/cypress/screenshots
           ansible-hub-ui/test/cypress/videos
+
+    - name: "Kill container"
+      if: always()
+      run: |
+        podman kill pulp
