@@ -12,27 +12,39 @@ on:
 jobs:
   cypress:
     runs-on: ubuntu-latest
+    env:
+      # base of a PR, or pushed-to branch outside PRs, or master
+      BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/master' }}
+
     steps:
-    - uses: actions/checkout@v2
-      with:
-        path: 'ansible-hub-ui'
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-    - name: "Build pulp-galaxy-ng (with galaxy_ng master)"
+
+    - name: "Set env.SHORT_BRANCH, env.GALAXY_NG_COMMIT"
       run: |
-        echo jq `jq --version`
-        echo SHA`GET https://api.github.com/repos/ansible/galaxy_ng/branches/master | jq -r .commit.sha`
+        SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
+        GALAXY_NG_COMMIT=`GET https://api.github.com/repos/ansible/galaxy_ng/branches/${SHORT_BRANCH} | jq -r .commit.sha`
         
-        mkdir pulp_galaxy_ng
-        cd pulp_galaxy_ng
-        
+        echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
+        echo "GALAXY_NG_COMMIT=${GALAXY_NG_COMMIT}" >> $GITHUB_ENV
+
+    - run: "mkdir pulp_galaxy_ng"
+
+    - name: "Cache container image for pulp_galaxy_ng ${{ env.GALAXY_NG_COMMIT }}"
+      id: cache-containers
+      uses: actions/cache@v2
+      with:
+        path: pulp_galaxy_ng/image
+        key: ${{ runner.os }}-containers-${{ env.GALAXY_NG_COMMIT }}
+
+    - name: "Build pulp-galaxy-ng (with galaxy_ng ${{ env.SHORT_BRANCH }})"
+      if: steps.cache-containers.outputs.cache-hit != 'true'
+      working-directory: 'pulp_galaxy_ng'
+      run: |
         echo '\
-          FROM pulp/pulp-ci-centos:latest
+          FROM docker.io/pulp/pulp-ci-centos:latest
           
           RUN pip3 install --upgrade \
             requests \
-            git+https://github.com/ansible/galaxy_ng.git
+            git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
           
           RUN mkdir -p /etc/nginx/pulp/
           RUN ln /usr/local/lib/python3.6/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
@@ -40,7 +52,15 @@ jobs:
           RUN ln /usr/local/lib/python3.6/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
         ' > Containerfile
         
-        buildah bud --file Containerfile --tag pulp/pulp-galaxy-ng:latest .
+        buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
+        podman save localhost/pulp/pulp-galaxy-ng:latest -o image
+
+    - name: "Load pulp-galaxy-ng (with galaxy_ng ${{ env.SHORT_BRANCH }})"
+      if: steps.cache-containers.outputs.cache-hit == 'true'
+      working-directory: 'pulp_galaxy_ng'
+      run: |
+        podman load -i image
+
     - name: "Configure and run pulp-galaxy-ng"
       working-directory: 'pulp_galaxy_ng'
       run: |        
@@ -67,26 +87,50 @@ jobs:
              --volume "$(pwd)/pgsql":/var/lib/pgsql \
              --volume "$(pwd)/containers":/var/lib/containers \
              --device /dev/fuse \
-             pulp/pulp-galaxy-ng:latest
-    - name: "Build standalone UI (with ansible-hub-ui current branch)"
+             localhost/pulp/pulp-galaxy-ng:latest
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v2
+      with:
+        path: 'ansible-hub-ui'
+
+    - name: "Install node 14"
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: "Cache ~/.npm & ~/.cache/Cypress"
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.npm
+          ~/.cache/Cypress
+        key: ${{ runner.os }}-node-${{ env.SHORT_BRANCH }}-${{ hashFiles('ansible-hub-ui/**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-${{ env.SHORT_BRANCH }}-
+          ${{ runner.os }}-node-
+        
+    - name: "Build standalone UI"
       working-directory: 'ansible-hub-ui'
       run: |
         npm ci
         npm run build-standalone
         rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
         mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
+
     - name: "Finish up and run cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |        
-        #podman exec pulp pip install django_extensions
+        # podman exec pulp pip install django_extensions
         podman exec pulp pulpcore-manager reset-admin-password --password admin
         
         npm ci
         echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
+        
         npm run cypress:chrome
         
     - uses: actions/upload-artifact@v2
-      if: failure()
+      if: failure() # or always()
       with:
         name: screenshots_and_videos
         path: |
