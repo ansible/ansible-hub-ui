@@ -223,8 +223,12 @@ class ExecutionEnvironmentList extends React.Component<
         ) : (
           <td></td>
         )}
-        <DateComponent date={item.created} isRow={true} />
-        <DateComponent date={item.updated} isRow={true} />
+        <td>
+          <DateComponent date={item.created} />
+        </td>
+        <td>
+          <DateComponent date={item.updated} />
+        </td>
       </tr>
     );
   }

@@ -332,7 +332,9 @@ class CertificationDashboard extends React.Component<
             {version.version}
           </Link>
         </td>
-        <DateComponent date={version.created_at} isRow={true} />
+        <td>
+          <DateComponent date={version.created_at} />
+        </td>
         <td>{this.renderStatus(version)}</td>
         <td>
           <div className='control-column'>

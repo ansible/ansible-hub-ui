@@ -74,7 +74,9 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                     return (
                       <tr key={i}>
                         <td>{action.action}</td>
-                        <DateComponent date={action.created} isRow={true} />
+                        <td>
+                          <DateComponent date={action.created} />
+                        </td>
                       </tr>
                     );
                   })}

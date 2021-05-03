@@ -713,7 +713,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <td>{user.email}</td>
         <td>{user.last_name}</td>
         <td>{user.first_name}</td>
-        <DateComponent date={user.date_joined} isRow={true} />
+        <td>
+          <DateComponent date={user.date_joined} />
+        </td>
         <td>
           {' '}
           {!!currentUser && currentUser.model_permissions.change_group && (

@@ -116,15 +116,16 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         <td>{remote.name}</td>
         <td>{remote.repositories.map(r => r.name).join(', ')}</td>
         {!!remote.updated_at ? (
-          <DateComponent date={remote.updated_at} isRow={true} />
+          <td>
+            <DateComponent date={remote.updated_at} />
+          </td>
         ) : (
           <td>{'---'}</td>
         )}
         {!!remote.last_sync_task && !!remote.last_sync_task.finished_at ? (
-          <DateComponent
-            date={remote.last_sync_task.finished_at}
-            isRow={true}
-          />
+          <td>
+            <DateComponent date={remote.last_sync_task.finished_at} />
+          </td>
         ) : (
           <td>{'---'}</td>
         )}

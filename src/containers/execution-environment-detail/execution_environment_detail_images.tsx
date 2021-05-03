@@ -298,7 +298,9 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             ))}
           </LabelGroup>
         </td>
-        <DateComponent date={image.pulp_created} isRow={true} />
+        <td>
+          <DateComponent date={image.pulp_created} />
+        </td>
         <td>{image.layers}</td>
         <td>{getHumanSize(image.size)}</td>
         <td>
