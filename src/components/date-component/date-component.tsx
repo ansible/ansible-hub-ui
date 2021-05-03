@@ -11,7 +11,7 @@ export class DateComponent extends React.Component<IProps> {
     const { date } = this.props;
     console.log(date);
     return (
-      <Tooltip content={moment(date).format('MMMM Do YYYY, HH:mm:Z')}>
+      <Tooltip content={moment(date).format('DD MMMM YYYY, HH:mm Z')}>
         <div>{moment(date).fromNow()}</div>
       </Tooltip>
     );
