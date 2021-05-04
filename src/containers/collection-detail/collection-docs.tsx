@@ -192,13 +192,13 @@ class CollectionDocs extends React.Component<
   }
 
   private renderDocLink(name, href, collection, params) {
-    if (href.startsWith('http')) {
+    if (!!href && href.startsWith('http')) {
       return (
         <a href={href} target='_blank'>
           {name}
         </a>
       );
-    } else {
+    } else if (!!href) {
       // TODO: right now this will break if people put
       // ../ at the front of their urls. Need to find a
       // way to document this
@@ -218,6 +218,8 @@ class CollectionDocs extends React.Component<
           {name}
         </Link>
       );
+    } else {
+      return null;
     }
   }
 
