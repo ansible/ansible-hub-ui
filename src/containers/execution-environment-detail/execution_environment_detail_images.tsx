@@ -39,6 +39,7 @@ import {
 import { TagManifestModal } from './tag-manifest-modal';
 
 import { withContainerRepo, IDetailSharedProps } from './base';
+import './execution-environment-detail_images.scss';
 
 interface IState {
   loading: boolean;
@@ -292,7 +293,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     return (
       <tr key={index}>
         <td>
-          <LabelGroup>
+          <LabelGroup className={'tags-column'}>
             {image.tags.sort().map(tag => (
               <TagLink key={tag} tag={tag} />
             ))}
