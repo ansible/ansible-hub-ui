@@ -293,7 +293,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       <tr key={index}>
         <td>
           <LabelGroup>
-            {image.tags.map(tag => (
+            {image.tags.sort().map(tag => (
               <TagLink key={tag} tag={tag} />
             ))}
           </LabelGroup>
