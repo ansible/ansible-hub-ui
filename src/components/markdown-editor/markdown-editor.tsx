@@ -24,6 +24,7 @@ export class MarkdownEditor extends React.Component<IProps, {}> {
               <FormGroup fieldId='resources' helperText={helperText}>
                 Raw Markdown
                 <TextArea
+                  aria-label={'Markdown editor'}
                   className='resources-editor'
                   id='resources'
                   value={text}
