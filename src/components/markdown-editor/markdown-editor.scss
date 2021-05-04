@@ -22,7 +22,8 @@
   }
 
   .editor {
-    flex-shrink: 0;
+    min-width: 500px;
+    max-width: 500px;
   }
 }
 .resources-editor {
