@@ -8,7 +8,10 @@ class API extends HubAPI {
   }
 
   list(id) {
-    return super.list({}, this.apiPath + id + '/_content/history/');
+    return super.list(
+      { page: 0, page_size: 100 },
+      this.apiPath + id + '/_content/history/',
+    );
   }
 }
 
