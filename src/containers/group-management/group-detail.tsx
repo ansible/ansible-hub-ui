@@ -12,6 +12,7 @@ import {
   Breadcrumbs,
   closeAlertMixin,
   CompoundFilter,
+  DateComponent,
   EmptyStateFilter,
   EmptyStateNoData,
   LoadingPageWithHeader,
@@ -39,8 +40,6 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { Constants } from 'src/constants';
-import * as moment from 'moment';
-import { InsightsUserType } from 'src/api/response-types/user';
 import { AppContext } from 'src/loaders/app-context';
 import { DeleteGroupModal } from './delete-group-modal';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
@@ -714,7 +713,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <td>{user.email}</td>
         <td>{user.last_name}</td>
         <td>{user.first_name}</td>
-        <td>{moment(user.date_joined).fromNow()}</td>
+        <td>
+          <DateComponent date={user.date_joined} />
+        </td>
         <td>
           {' '}
           {!!currentUser && currentUser.model_permissions.change_group && (

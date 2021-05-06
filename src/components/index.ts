@@ -58,3 +58,4 @@ export { TagLabel } from './tag-label/tag-label';
 export { ExecutionEnvironmentHeader } from './execution-environment-header/execution-environment-header';
 export { RepositoryForm } from './execution-environment/repository-form';
 export { RepoSelector } from './repo-selector/repo-selector';
+export { DateComponent } from './date-component/date-component';

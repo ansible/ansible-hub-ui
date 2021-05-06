@@ -3,8 +3,12 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import { DropdownItem, ClipboardCopy } from '@patternfly/react-core';
-import { EmptyStateNoData, SortTable, StatefulDropdown } from '..';
-import * as moment from 'moment';
+import {
+  DateComponent,
+  EmptyStateNoData,
+  SortTable,
+  StatefulDropdown,
+} from '..';
 import { Constants } from 'src/constants';
 import { getRepoUrl } from 'src/utilities';
 import { Paths, formatPath } from 'src/paths';
@@ -112,12 +116,14 @@ export class LocalRepositoryTable extends React.Component<IProps> {
         <td>{distribution.name}</td>
         <td>{distribution.repository.name}</td>
         <td>{distribution.repository.content_count}</td>
-        {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? null : (
+        {DEPLOYMENT_MODE ===
+        Constants.INSIGHTS_DEPLOYMENT_MODE ? null : !!distribution.repository
+            .pulp_last_updated ? (
           <td>
-            {!!distribution.repository.pulp_last_updated
-              ? moment(distribution.repository.pulp_last_updated).fromNow()
-              : '---'}
+            <DateComponent date={distribution.repository.pulp_last_updated} />
           </td>
+        ) : (
+          <td>{'---'}</td>
         )}
         <td>
           <ClipboardCopy isReadOnly>

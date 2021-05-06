@@ -12,10 +12,15 @@ import {
 } from '@patternfly/react-core';
 
 import { Link } from 'react-router-dom';
-import * as moment from 'moment';
 
 import { Paths, formatPath } from 'src/paths';
-import { NumericLabel, Tag, Logo, DeprecatedTag } from 'src/components';
+import {
+  NumericLabel,
+  Tag,
+  Logo,
+  DeprecatedTag,
+  DateComponent,
+} from 'src/components';
 import { CollectionListType } from 'src/api';
 import { convertContentSummaryCounts } from 'src/utilities';
 
@@ -97,7 +102,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
       <DataListCell isFilled={false} alignRight key='stats'>
         {controls ? <div className='entry'>{controls}</div> : null}
         <div className='right-col entry'>
-          Updated {moment(latest_version.created_at).fromNow()}
+          Updated <DateComponent date={latest_version.created_at} />
         </div>
         <div className='entry'>v{latest_version.version}</div>
       </DataListCell>,
