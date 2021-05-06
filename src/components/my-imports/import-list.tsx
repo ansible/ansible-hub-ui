@@ -2,7 +2,6 @@ import * as React from 'react';
 import cx from 'classnames';
 import './my-imports.scss';
 
-import * as moment from 'moment';
 import { cloneDeep } from 'lodash';
 
 import {
@@ -20,7 +19,7 @@ import { Spinner } from '@redhat-cloud-services/frontend-components';
 import { PulpStatus, NamespaceType, ImportListType } from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
-import { EmptyStateNoData } from '..';
+import { DateComponent, EmptyStateNoData } from '..';
 
 interface IProps {
   namespaces: NamespaceType[];
@@ -184,7 +183,7 @@ export class ImportList extends React.Component<IProps, IState> {
         </div>
         <div className='sub-text'>
           Status: {item.state}{' '}
-          {item.finished_at ? moment(item.finished_at).fromNow() : null}
+          {item.finished_at ? <DateComponent date={item.finished_at} /> : null}
         </div>
       </div>
     );
