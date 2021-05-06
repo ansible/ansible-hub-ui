@@ -7,6 +7,7 @@ import {
   ToolbarItem,
   ToolbarContent,
   Tooltip,
+  Button,
 } from '@patternfly/react-core';
 import { ExecutionEnvironmentAPI, ExecutionEnvironmentType } from 'src/api';
 import { filterIsSet, ParamHelper } from 'src/utilities';
@@ -88,8 +89,23 @@ class ExecutionEnvironmentList extends React.Component<
         <BaseHeader title='Container Registry'></BaseHeader>
         {noData && !loading ? (
           <EmptyStateNoData
-            title={'No container registries'}
-            description={'Container registries will appear once uploaded'}
+            title={'No container repositories yet'}
+            description={
+              'You currently have no container repositories. Add a container repository via the CLI to get started.'
+            }
+            button={
+              <Button
+                variant='link'
+                onClick={() =>
+                  window.open(
+                    'https://https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.0/html/managing_containers_in_private_automation_hub/index',
+                    '_blank',
+                  )
+                }
+              >
+                Push private images
+              </Button>
+            }
           />
         ) : (
           <Main>
