@@ -25,7 +25,6 @@ export class MarkdownEditor extends React.Component<IProps, {}> {
                 Raw Markdown
                 <TextArea
                   aria-label={'Markdown editor'}
-                  className='resources-editor'
                   id='resources'
                   value={text}
                   onChange={value => updateText(value)}
