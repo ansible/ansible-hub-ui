@@ -22,7 +22,7 @@ import {
 
 import { Form, ActionGroup, Button } from '@patternfly/react-core';
 
-import { Paths, formatPath } from 'src/paths';
+import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { ParamHelper, mapErrorMessages } from 'src/utilities';
 
 interface IState {
@@ -99,7 +99,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         <PartnerHeader
           namespace={namespace}
           breadcrumbs={[
-            { name: 'My namespaces', url: Paths.myNamespaces },
+            namespaceBreadcrumb,
             {
               name: namespace.name,
               url: formatPath(Paths.myCollections, {
