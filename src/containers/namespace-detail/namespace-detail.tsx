@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-import { RouteComponentProps, Link, Redirect } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Button,
@@ -16,6 +21,7 @@ import {
   CollectionListType,
   CollectionAPI,
   NamespaceAPI,
+  MyNamespaceAPI,
   NamespaceType,
 } from 'src/api';
 
@@ -34,7 +40,7 @@ import {
 import { ImportModal } from './import-modal/import-modal';
 
 import { ParamHelper, getRepoUrl, filterIsSet } from 'src/utilities';
-import { Paths, formatPath } from 'src/paths';
+import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
@@ -53,11 +59,11 @@ interface IState {
   showImportModal: boolean;
   warning: string;
   updateCollection: CollectionListType;
+  showControls: boolean;
 }
 
 interface IProps extends RouteComponentProps {
-  showControls: boolean;
-  breadcrumbs: { name: string; url?: string }[];
+  selectedRepo: string;
 }
 
 export class NamespaceDetail extends React.Component<IProps, IState> {
@@ -85,6 +91,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       showImportModal: false,
       warning: '',
       updateCollection: null,
+      showControls: false, // becomes true when my-namespaces doesn't 404
     };
   }
 
@@ -104,8 +111,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       updateCollection,
     } = this.state;
 
-    const { breadcrumbs } = this.props;
-
     if (redirect) {
       return <Redirect to={redirect} />;
     }
@@ -116,7 +121,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     const tabs = ['Collections'];
 
-    if (this.props.showControls) {
+    if (this.state.showControls) {
       tabs.push('CLI Configuration');
     }
     const tab = params['tab'] || 'collections';
@@ -168,7 +173,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         ) : null}
         <PartnerHeader
           namespace={namespace}
-          breadcrumbs={breadcrumbs.concat([{ name: namespace.name }])}
+          breadcrumbs={[namespaceBreadcrumb, { name: namespace.name }]}
           tabs={tabs}
           params={params}
           updateParams={p => this.updateParams(p)}
@@ -188,7 +193,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 title={'No collections yet'}
                 description={'Collections will appear once uploaded'}
                 button={
-                  this.props.showControls && (
+                  this.state.showControls && (
                     <Button
                       onClick={() => this.setState({ showImportModal: true })}
                     >
@@ -206,7 +211,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   params={params}
                   collections={collections}
                   itemCount={itemCount}
-                  showControls={this.props.showControls}
+                  showControls={this.state.showControls}
                   handleControlClick={(id, action) =>
                     this.handleCollectionAction(id, action)
                   }
@@ -299,12 +304,18 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         this.context.selectedRepo,
       ),
       NamespaceAPI.get(this.props.match.params['namespace']),
+      MyNamespaceAPI.get(this.props.match.params['namespace']).catch(
+        // expecting 404 - it just means we can not edit the namespace (unless both NamespaceAPI and MyNamespaceAPI fail)
+        e =>
+          e.response && e.response.status === 404 ? null : Promise.reject(e),
+      ),
     ])
       .then(val => {
         this.setState({
           collections: val[0].data.data,
           itemCount: val[0].data.meta.count,
           namespace: val[1].data,
+          showControls: !!val[2],
         });
       })
       .catch(response => {
@@ -318,7 +329,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   private renderPageControls() {
     const { collections } = this.state;
-    if (!this.props.showControls) {
+    if (!this.state.showControls) {
       return <div style={{ display: 'flex', alignItems: 'center' }}></div>;
     }
     return (
@@ -380,3 +391,5 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 }
 
 NamespaceDetail.contextType = AppContext;
+
+export default withRouter(NamespaceDetail);
