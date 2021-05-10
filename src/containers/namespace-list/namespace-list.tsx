@@ -7,19 +7,19 @@ import { Section } from '@redhat-cloud-services/frontend-components';
 import { ParamHelper } from 'src/utilities/param-helper';
 import {
   BaseHeader,
-  NamespaceCard,
-  Toolbar,
-  Pagination,
-  NamespaceModal,
-  LoadingPageWithHeader,
-  LoadingPageSpinner,
   EmptyStateFilter,
   EmptyStateNoData,
+  LinkTabs,
+  LoadingPageSpinner,
+  LoadingPageWithHeader,
+  NamespaceCard,
+  NamespaceModal,
+  Pagination,
+  Toolbar,
 } from 'src/components';
-import { Button } from '@patternfly/react-core';
-import { ToolbarItem } from '@patternfly/react-core';
+import { Button, Switch, ToolbarItem } from '@patternfly/react-core';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
-import { Paths, formatPath } from 'src/paths';
+import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { filterIsSet } from 'src/utilities';
@@ -40,7 +40,6 @@ interface IState {
 }
 
 interface IProps extends RouteComponentProps {
-  title: string;
   namespacePath: Paths;
   filterOwner?: boolean;
 }
@@ -102,7 +101,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
   render() {
     const { namespaces, params, itemCount } = this.state;
-    const { title, filterOwner } = this.props;
+    const { filterOwner } = this.props;
     const { user } = this.context;
     const noData =
       !filterIsSet(this.state.params, ['keywords']) &&
@@ -115,7 +114,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     let extra = [];
 
-    if (!!user && user.model_permissions.add_namespace && filterOwner) {
+    if (!!user && user.model_permissions.add_namespace) {
       extra.push(
         <ToolbarItem key='create-button'>
           <Button variant='primary' onClick={this.handleModalToggle}>
@@ -124,6 +123,11 @@ export class NamespaceList extends React.Component<IProps, IState> {
         </ToolbarItem>,
       );
     }
+
+    const title = namespaceBreadcrumb.name;
+    const search = filterOwner
+      ? 'Search my namespaces'
+      : 'Search all ' + title.toLowerCase();
 
     return (
       <div className='namespace-page'>
@@ -139,12 +143,30 @@ export class NamespaceList extends React.Component<IProps, IState> {
           }
         ></NamespaceModal>
         <BaseHeader title={title}>
+          <div className='tab-link-container'>
+            <div className='tabs'>
+              <LinkTabs
+                tabs={[
+                  {
+                    title: 'All',
+                    link: Paths.namespaces,
+                    active: !filterOwner,
+                  },
+                  {
+                    title: 'My namespaces',
+                    link: Paths.myNamespaces,
+                    active: filterOwner,
+                  },
+                ]}
+              />
+            </div>
+          </div>
           {noData ? null : (
             <div className='toolbar'>
               <Toolbar
                 params={params}
                 sortOptions={[{ title: 'Name', id: 'name', type: 'alpha' }]}
-                searchPlaceholder={'Search ' + title.toLowerCase()}
+                searchPlaceholder={search}
                 updateParams={p =>
                   this.updateParams(p, () => this.loadNamespaces())
                 }

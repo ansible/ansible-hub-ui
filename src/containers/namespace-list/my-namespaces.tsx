@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { NamespaceList } from './namespace-list';
@@ -11,7 +10,6 @@ class MyNamespaces extends React.Component<RouteComponentProps, {}> {
       <NamespaceList
         {...this.props}
         namespacePath={Paths.myCollectionsByRepo}
-        title='My namespaces'
         filterOwner={true}
       />
     );
