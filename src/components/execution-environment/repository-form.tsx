@@ -5,6 +5,7 @@ import {
   FormGroup,
   Modal,
   TextInput,
+  TextArea,
 } from '@patternfly/react-core';
 import { ObjectPermissionField } from 'src/components';
 import { GroupObjectPermissionType } from 'src/api';
@@ -73,7 +74,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             fieldId='description'
             label='Description'
           >
-            <TextInput
+            <TextArea
               id='description'
               value={description}
               isDisabled={
@@ -83,6 +84,8 @@ export class RepositoryForm extends React.Component<IProps, IState> {
               }
               onChange={value => this.setState({ description: value })}
               type='text'
+              resizeOrientation={'vertical'}
+              autoResize={true}
             />
           </FormGroup>
           <FormGroup key='groups' fieldId='groups' label='Groups with access'>

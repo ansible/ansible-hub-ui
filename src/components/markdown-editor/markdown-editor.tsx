@@ -22,9 +22,9 @@ export class MarkdownEditor extends React.Component<IProps, {}> {
           {editing && (
             <div className='column editor'>
               <FormGroup fieldId='resources' helperText={helperText}>
-                Raw Markdown
+                <div id='markdown-title'>Raw Markdown</div>
                 <TextArea
-                  className='resources-editor'
+                  aria-labelledby='markdown-title'
                   id='resources'
                   value={text}
                   onChange={value => updateText(value)}

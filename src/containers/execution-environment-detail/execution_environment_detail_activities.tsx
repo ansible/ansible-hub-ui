@@ -8,7 +8,7 @@ import {
   DateComponent,
 } from '../../components';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import { FlexItem, Flex } from '@patternfly/react-core';
+import { FlexItem, Flex, Button } from '@patternfly/react-core';
 import { formatPath, Paths } from '../../paths';
 import { ActivitiesAPI } from '../../api';
 import './execution-environment-detail.scss';
@@ -19,6 +19,7 @@ interface IState {
   loading: boolean;
   activities: { created: string; action: React.ReactFragment }[];
   redirect: string;
+  page: number;
 }
 
 class ExecutionEnvironmentDetailActivities extends React.Component<
@@ -32,6 +33,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
       loading: true,
       activities: [],
       redirect: null,
+      page: 0,
     };
   }
 
@@ -74,9 +76,13 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                     return (
                       <tr key={i}>
                         <td>{action.action}</td>
-                        <td>
-                          <DateComponent date={action.created} />
-                        </td>
+                        {!!action.created ? (
+                          <td>
+                            <DateComponent date={action.created} />
+                          </td>
+                        ) : (
+                          <td></td>
+                        )}
                       </tr>
                     );
                   })}
@@ -108,7 +114,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
     );
 
     this.setState({ loading: true }, () => {
-      ActivitiesAPI.list(name)
+      ActivitiesAPI.list(name, this.state.page)
         .then(result => {
           let activities = [];
           result.data.data.forEach(activity => {
@@ -179,18 +185,38 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
               });
             }
           });
-          let lastActivity = activities[activities.length - 1];
-          if (!!lastActivity) {
+          if (!!result.data.links.next) {
+            this.setState({ page: this.state.page + 1 });
             activities.push({
-              created: lastActivity.created,
+              created: '',
               action: (
-                <React.Fragment>
-                  {this.props.containerRepository.name} was added
-                </React.Fragment>
+                <Button
+                  variant={'link'}
+                  onClick={() => this.queryActivities(name)}
+                >
+                  {' '}
+                  Load more{' '}
+                </Button>
               ),
             });
+          } else {
+            let lastActivity = activities[activities.length - 1];
+            if (!!lastActivity) {
+              activities.push({
+                created: lastActivity.created,
+                action: (
+                  <React.Fragment>
+                    {this.props.containerRepository.name} was added
+                  </React.Fragment>
+                ),
+              });
+            }
           }
-          this.setState({ activities: activities, loading: false });
+          // remove last activity (Load more button) and add newly fetched activities
+          this.setState({
+            activities: this.state.activities.slice(0, -1).concat(activities),
+            loading: false,
+          });
         })
         .catch(error => this.setState({ redirect: 'notFound' }));
     });
