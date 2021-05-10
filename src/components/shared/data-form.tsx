@@ -17,6 +17,7 @@ interface IProps {
   model: any;
   requiredFields: string[];
   updateField: (value, event) => void;
+  onSave: () => void;
 }
 
 export class DataForm extends React.Component<IProps> {
@@ -66,7 +67,12 @@ export class DataForm extends React.Component<IProps> {
     });
 
     return (
-      <Form>
+      <Form
+        onSubmit={e => {
+          e.preventDefault();
+          this.props.onSave();
+        }}
+      >
         {formPrefix}
         {fields}
         {formSuffix}

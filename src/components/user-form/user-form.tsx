@@ -180,6 +180,7 @@ export class UserForm extends React.Component<IProps, IState> {
     const formButtons = () => (
       <ActionGroup key='actions'>
         <Button
+          type='submit'
           isDisabled={
             !this.isPassValid(user.password, passwordConfirm) ||
             !this.requiredFilled(user)
@@ -210,6 +211,7 @@ export class UserForm extends React.Component<IProps, IState> {
         model={user}
         requiredFields={requiredFields}
         updateField={(v, e) => this.updateField(v, e)}
+        onSave={() => this.props.saveUser()}
       />
     );
   }
