@@ -2,11 +2,15 @@ import * as React from 'react';
 import cx from 'classnames';
 import './header.scss';
 
-import { Link } from 'react-router-dom';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { FormSelect, FormSelectOption, Alert } from '@patternfly/react-core';
 
-import { BaseHeader, Breadcrumbs, RepoSelector } from 'src/components';
+import {
+  BaseHeader,
+  Breadcrumbs,
+  LinkTabs,
+  RepoSelector,
+} from 'src/components';
 import { CollectionDetailType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -27,7 +31,7 @@ interface IProps {
 }
 
 export class CollectionHeader extends React.Component<IProps> {
-  ignorParams = ['showing', 'keyords'];
+  ignoreParams = ['showing', 'keyords'];
 
   render() {
     const {
@@ -114,7 +118,7 @@ export class CollectionHeader extends React.Component<IProps> {
 
               return (
                 <div className='link' key={link.key}>
-                  <a href={l} target='blank'>
+                  <a href={l} target='_blank'>
                     {link.name}
                   </a>
                 </div>
@@ -127,85 +131,42 @@ export class CollectionHeader extends React.Component<IProps> {
   }
 
   private renderTabs(active) {
-    // We're not using the Tab react component because they don't support
-    // links.
     const { params, repo } = this.props;
 
-    return (
-      <div className='pf-c-tabs' id='primary'>
-        <ul className='pf-c-tabs__list'>
-          {this.renderTab(
-            active === 'details',
-            'Details',
-            formatPath(
-              Paths.collectionByRepo,
-              {
-                namespace: this.props.collection.namespace.name,
-                collection: this.props.collection.name,
-                repo: repo,
-              },
-              ParamHelper.getReduced(params, this.ignorParams),
-            ),
-          )}
+    const pathParams = {
+      namespace: this.props.collection.namespace.name,
+      collection: this.props.collection.name,
+      repo: repo,
+    };
+    const reduced = ParamHelper.getReduced(params, this.ignoreParams);
 
-          {this.renderTab(
-            active === 'documentation',
-            'Documentation',
-            formatPath(
-              Paths.collectionDocsIndexByRepo,
-              {
-                namespace: this.props.collection.namespace.name,
-                collection: this.props.collection.name,
-                repo: repo,
-              },
-              ParamHelper.getReduced(params, this.ignorParams),
-            ),
-          )}
+    const tabs = [
+      {
+        active: active === 'details',
+        title: 'Details',
+        link: formatPath(Paths.collectionByRepo, pathParams, reduced),
+      },
+      {
+        active: active === 'documentation',
+        title: 'Documentation',
+        link: formatPath(Paths.collectionDocsIndexByRepo, pathParams, reduced),
+      },
+      {
+        active: active === 'contents',
+        title: 'Contents',
+        link: formatPath(
+          Paths.collectionContentListByRepo,
+          pathParams,
+          reduced,
+        ),
+      },
+      {
+        active: active === 'import-log',
+        title: 'Import log',
+        link: formatPath(Paths.collectionImportLogByRepo, pathParams, reduced),
+      },
+    ];
 
-          {this.renderTab(
-            active === 'contents',
-            'Contents',
-            formatPath(
-              Paths.collectionContentListByRepo,
-              {
-                namespace: this.props.collection.namespace.name,
-                collection: this.props.collection.name,
-                repo: repo,
-              },
-              ParamHelper.getReduced(params, this.ignorParams),
-            ),
-          )}
-
-          {this.renderTab(
-            active === 'import-log',
-            'Import log',
-            formatPath(
-              Paths.collectionImportLogByRepo,
-              {
-                namespace: this.props.collection.namespace.name,
-                collection: this.props.collection.name,
-                repo: repo,
-              },
-              ParamHelper.getReduced(params, this.ignorParams),
-            ),
-          )}
-        </ul>
-      </div>
-    );
-  }
-
-  private renderTab(active, title, link) {
-    return (
-      <li
-        className={cx({
-          'pf-c-tabs__item': true,
-          'pf-m-current': active,
-        })}
-      >
-        <Link to={link} className='pf-c-tabs__link' id='details-tab'>
-          <span className='pf-c-tabs__item-text'>{title}</span>
-        </Link>
-      </li>
-    );
+    return <LinkTabs tabs={tabs} />;
   }
 }

@@ -71,14 +71,14 @@ const MyNamespaces = asyncComponent(() =>
 const ManageNamespace = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_detail" */
-    '../../containers/namespace-detail/manage-namespace'
+    '../../containers/namespace-detail/namespace-detail'
   ),
 );
 
 const PartnerDetail = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_detail" */
-    '../../containers/namespace-detail/partner-detail'
+    '../../containers/namespace-detail/namespace-detail'
   ),
 );
 

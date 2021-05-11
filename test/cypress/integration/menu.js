@@ -5,7 +5,6 @@ describe('Hub Menu Tests', () => {
     let menuItems = [
         'Collections > Collections',
         'Collections > Namespaces',
-        'Collections > My Namespaces',
         'Collections > Repository Management',
         'Collections > API Token',
         'Collections > Approval',
@@ -30,7 +29,6 @@ describe('Hub Menu Tests', () => {
         let visibleMenuItems = [
             'Collections > Collections',
             'Collections > Namespaces',
-            'Collections > My Namespaces',
             'Collections > Repository Management',
             'Collections > API Token',
             'Container Registry',

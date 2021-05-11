@@ -19,7 +19,7 @@ import { RenderPluginDoc } from '@ansible/galaxy-doc-builder';
 
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
-import { formatPath, Paths } from 'src/paths';
+import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
@@ -50,8 +50,6 @@ class CollectionDocs extends React.Component<
   render() {
     const { params, collection } = this.state;
     const urlFields = this.props.match.params;
-    const name =
-      NAMESPACE_TERM.charAt(0).toUpperCase() + NAMESPACE_TERM.slice(1);
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -98,7 +96,7 @@ class CollectionDocs extends React.Component<
     }
 
     const breadcrumbs = [
-      { url: Paths[NAMESPACE_TERM], name: name },
+      namespaceBreadcrumb,
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
