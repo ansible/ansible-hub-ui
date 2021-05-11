@@ -42,6 +42,7 @@ interface IState {
   kwField: string;
 }
 
+// FIXME: only used in collection-list & namespace-list, other Toolbar is unrelated; merge
 export class Toolbar extends React.Component<IProps, IState> {
   static defaultProps = {
     extraInputs: [],
@@ -111,8 +112,13 @@ export class Toolbar extends React.Component<IProps, IState> {
   }
 
   private submitKeywords() {
-    this.props.updateParams(
-      ParamHelper.setParam(this.props.params, 'keywords', this.state.kwField),
-    );
+    this.props.updateParams({
+      ...ParamHelper.setParam(
+        this.props.params,
+        'keywords',
+        this.state.kwField,
+      ),
+      page: 1, // always reset the page when searching
+    });
   }
 }

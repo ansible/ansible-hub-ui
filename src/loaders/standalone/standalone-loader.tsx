@@ -325,9 +325,6 @@ class App extends React.Component<RouteComponentProps, IState> {
         menuItem('Namespaces', {
           url: Paths[NAMESPACE_TERM],
         }),
-        menuItem('My Namespaces', {
-          url: Paths.myNamespaces,
-        }),
         menuItem('Repository Management', {
           url: Paths.repositories,
         }),

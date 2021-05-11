@@ -19,6 +19,7 @@ interface IProps {
   disabledTitle?: string;
 }
 
+// FIXME: use LinkTabs, switch from ?tab to routes, rename to Tabs
 export class Tabs extends React.Component<IProps> {
   render() {
     const {

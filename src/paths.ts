@@ -57,3 +57,11 @@ export enum Paths {
   userProfileSettings = '/settings/user-profile',
   repositories = '/repositories',
 }
+
+export const namespaceBreadcrumb = {
+  name: {
+    namespaces: 'Namespaces',
+    partners: 'Partners',
+  }[NAMESPACE_TERM],
+  url: Paths[NAMESPACE_TERM],
+};

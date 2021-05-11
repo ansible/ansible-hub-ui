@@ -6,8 +6,7 @@ export { default as CollectionImportLog } from './collection-detail/collection-i
 export { default as EditNamespace } from './edit-namespace/edit-namespace';
 export { default as LoginPage } from './login/login';
 export { default as MyImports } from './my-imports/my-imports';
-export { default as ManageNamespace } from './namespace-detail/manage-namespace';
-export { default as PartnerDetail } from './namespace-detail/partner-detail';
+export { default as NamespaceDetail } from './namespace-detail/namespace-detail';
 export { default as MyNamespaces } from './namespace-list/my-namespaces';
 export { default as Partners } from './namespace-list/partners';
 export { default as NotFound } from './not-found/not-found';
