@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 import { Link } from 'react-router-dom';
 
-interface IProps {
+export interface IProps {
   /** List of tabs */
   tabs: {
     active?: boolean;

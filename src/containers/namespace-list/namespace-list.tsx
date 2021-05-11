@@ -44,6 +44,8 @@ interface IProps extends RouteComponentProps {
   filterOwner?: boolean;
 }
 
+const isStandalone = DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE;
+
 export class NamespaceList extends React.Component<IProps, IState> {
   nonURLParams = ['tenant'];
 
@@ -114,7 +116,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     let extra = [];
 
-    if (!!user && user.model_permissions.add_namespace) {
+    if (isStandalone && user?.model_permissions?.add_namespace) {
       extra.push(
         <ToolbarItem key='create-button'>
           <Button variant='primary' onClick={this.handleModalToggle}>
@@ -205,15 +207,17 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
   private renderBody() {
     const { namespaces, loading } = this.state;
-    const { namespacePath, filterOwner } = this.props;
-    const noDataTitle = Constants.STANDALONE_DEPLOYMENT_MODE
+    const { namespacePath } = this.props;
+    const { user } = this.context;
+
+    const noDataTitle = isStandalone
       ? 'No namespaces yet'
       : 'No managed namespaces yet';
-    const noDataDescription = Constants.STANDALONE_DEPLOYMENT_MODE
+    const noDataDescription = isStandalone
       ? 'Namespaces will appear once created'
       : 'This account is not set up to manage any namespaces';
     const noDataButton =
-      Constants.STANDALONE_DEPLOYMENT_MODE && filterOwner ? (
+      isStandalone && user?.model_permissions?.add_namespace ? (
         <Button variant='primary' onClick={() => this.handleModalToggle()}>
           Create
         </Button>
