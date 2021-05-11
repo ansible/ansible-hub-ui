@@ -11,6 +11,7 @@ export { NamespaceCard } from './cards/namespace-card';
 export { Breadcrumbs } from './patternfly-wrappers/breadcrumbs';
 export { Sort, SortFieldType } from './patternfly-wrappers/sort';
 export { Tabs } from './patternfly-wrappers/tabs';
+export { LinkTabs } from './patternfly-wrappers/link-tabs';
 export { StatefulDropdown } from './patternfly-wrappers/stateful-dropdown';
 export { Toolbar } from './patternfly-wrappers/toolbar';
 export { ImportConsole } from './my-imports/import-console';

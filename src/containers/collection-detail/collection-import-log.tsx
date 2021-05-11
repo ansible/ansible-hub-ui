@@ -13,7 +13,7 @@ import {
 
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from 'src/utilities/param-helper';
-import { formatPath, Paths } from 'src/paths';
+import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 
 interface IState extends IBaseCollectionState {
@@ -52,15 +52,13 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
       selectedImport,
       apiError,
     } = this.state;
-    const name =
-      NAMESPACE_TERM.charAt(0).toUpperCase() + NAMESPACE_TERM.slice(1);
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
     const breadcrumbs = [
-      { url: Paths[NAMESPACE_TERM], name: name },
+      namespaceBreadcrumb,
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,
