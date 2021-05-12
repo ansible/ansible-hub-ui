@@ -1,0 +1,143 @@
+name: Cypress
+
+on:
+  # allow running manually
+  workflow_dispatch:
+  pull_request:
+    branches: [ $default-branch stable-* ]
+  push:
+    branches: [ $default-branch stable-* ]
+  # daily on $default-branch
+  schedule:
+    - cron:  '30 5 * * *'
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+    env:
+      # base of a PR, or pushed-to branch outside PRs, or master
+      BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/master' }}
+
+    steps:
+
+    - name: "Set env.SHORT_BRANCH, env.GALAXY_NG_COMMIT"
+      run: |
+        SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
+        GALAXY_NG_COMMIT=`GET https://api.github.com/repos/ansible/galaxy_ng/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+        
+        echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
+        echo "GALAXY_NG_COMMIT=${GALAXY_NG_COMMIT}" >> $GITHUB_ENV
+
+    - run: "mkdir pulp_galaxy_ng"
+
+    - name: "Cache container image for pulp_galaxy_ng ${{ env.SHORT_BRANCH }} ${{ env.GALAXY_NG_COMMIT }}"
+      id: cache-containers
+      uses: actions/cache@v2
+      with:
+        path: pulp_galaxy_ng/image
+        key: ${{ runner.os }}-containers-${{ env.GALAXY_NG_COMMIT }}
+
+    - name: "Build pulp-galaxy-ng"
+      if: steps.cache-containers.outputs.cache-hit != 'true'
+      working-directory: 'pulp_galaxy_ng'
+      run: |
+        echo '\
+          FROM docker.io/pulp/pulp-ci-centos:latest
+          
+          RUN pip3 install --upgrade \
+            requests \
+            git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
+          
+          RUN mkdir -p /etc/nginx/pulp/
+          RUN ln /usr/local/lib/python3.6/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
+          RUN ln /usr/local/lib/python3.6/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
+          RUN ln /usr/local/lib/python3.6/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
+        ' > Containerfile
+        
+        buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
+        podman save localhost/pulp/pulp-galaxy-ng:latest -o image
+
+    - name: "Load pulp-galaxy-ng from cache"
+      if: steps.cache-containers.outputs.cache-hit == 'true'
+      working-directory: 'pulp_galaxy_ng'
+      run: podman load -i image
+
+    - name: "Configure and run pulp-galaxy-ng"
+      working-directory: 'pulp_galaxy_ng'
+      run: |
+        mkdir settings pulp_storage pgsql containers
+        echo "\
+          ANSIBLE_API_HOSTNAME='http://localhost:8002'
+          ANSIBLE_CONTENT_HOSTNAME='http://localhost:8002/api/galaxy/v3/artifacts/collections'
+          CONTENT_ORIGIN='http://localhost:8002'
+          GALAXY_API_PATH_PREFIX='/api/galaxy/'
+          GALAXY_AUTHENTICATION_CLASSES=['rest_framework.authentication.SessionAuthentication', 'rest_framework.authentication.TokenAuthentication']
+          GALAXY_DEPLOYMENT_MODE='standalone'
+          PULP_CONTENT_PATH_PREFIX='/api/galaxy/v3/artifacts/collections/'
+          RH_ENTITLEMENT_REQUIRED='insights'
+          TOKEN_AUTH_DISABLED=True
+          X_PULP_CONTENT_HOST='localhost'
+        " | sed 's/^\s\+//' > settings/settings.py
+        
+        podman run \
+             --detach \
+             --publish 8002:80 \
+             --name pulp \
+             --volume "$(pwd)/settings":/etc/pulp \
+             --volume "$(pwd)/pulp_storage":/var/lib/pulp \
+             --volume "$(pwd)/pgsql":/var/lib/pgsql \
+             --volume "$(pwd)/containers":/var/lib/containers \
+             --device /dev/fuse \
+             localhost/pulp/pulp-galaxy-ng:latest
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v2
+      with:
+        path: 'ansible-hub-ui'
+
+    - name: "Install node 14"
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: "Cache ~/.npm & ~/.cache/Cypress"
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.npm
+          ~/.cache/Cypress
+        key: ${{ runner.os }}-node-${{ env.SHORT_BRANCH }}-${{ hashFiles('ansible-hub-ui/**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-${{ env.SHORT_BRANCH }}-
+          ${{ runner.os }}-node-
+
+    - name: "Build standalone UI"
+      working-directory: 'ansible-hub-ui'
+      run: |
+        npm ci
+        npm run build-standalone
+        rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
+        mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
+
+    - name: "Finish up and run cypress"
+      working-directory: 'ansible-hub-ui/test'
+      run: |
+        # podman exec pulp pip install django_extensions
+        podman exec pulp pulpcore-manager reset-admin-password --password admin
+        
+        npm ci
+        echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
+        
+        npm run cypress:chrome
+
+    - uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+        name: screenshots_and_videos
+        path: |
+          ansible-hub-ui/test/cypress/screenshots
+          ansible-hub-ui/test/cypress/videos
+
+    - name: "Kill container"
+      if: always()
+      run: podman kill pulp
