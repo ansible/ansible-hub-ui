@@ -317,6 +317,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               />
             </WriteOnlyField>
           </FormGroup>
+          <br />
           <FormGroup
             fieldId={'proxy_url'}
             label={'Proxy URL'}
