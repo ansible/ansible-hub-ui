@@ -4,9 +4,9 @@ on:
   # allow running manually
   workflow_dispatch:
   pull_request:
-    branches: [ master stable-* ]
+    branches: [ 'master', 'stable-*' ]
   push:
-    branches: [ master stable-* ]
+    branches: [ 'master', 'stable-*' ]
   # daily on master
   schedule:
     - cron:  '30 5 * * *'
