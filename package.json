@@ -13,7 +13,7 @@
         "@redhat-cloud-services/frontend-components": "^2.4.22",
         "@redhat-cloud-services/frontend-components-utilities": "^2.2.7",
         "@types/node": "^12.19.6",
-        "@types/react": "^16.14.1",
+        "@types/react": "^17.0.5",
         "@types/react-dom": "^16.9.10",
         "@types/react-router-dom": "^5.1.7",
         "axios": "~0.21.1",
