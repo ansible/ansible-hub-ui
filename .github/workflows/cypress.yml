@@ -41,6 +41,7 @@ jobs:
       if: steps.cache-containers.outputs.cache-hit != 'true'
       working-directory: 'pulp_galaxy_ng'
       run: |
+        echo '# Containerfile'
         echo '\
           FROM docker.io/pulp/pulp-ci-centos:latest
           
@@ -53,7 +54,7 @@ jobs:
           RUN ln /usr/local/lib/python3.6/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
           RUN ln /usr/local/lib/python3.6/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
           RUN ln /usr/local/lib/python3.6/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
-        ' > Containerfile
+        ' | tee Containerfile
         
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
         podman save localhost/pulp/pulp-galaxy-ng:latest -o image
@@ -67,6 +68,7 @@ jobs:
       working-directory: 'pulp_galaxy_ng'
       run: |
         mkdir settings pulp_storage pgsql containers
+        echo '# settings/settings.py'
         echo "\
           ANSIBLE_API_HOSTNAME='http://localhost:8002'
           ANSIBLE_CONTENT_HOSTNAME='http://localhost:8002/api/galaxy/v3/artifacts/collections'
@@ -78,7 +80,7 @@ jobs:
           RH_ENTITLEMENT_REQUIRED='insights'
           TOKEN_AUTH_DISABLED=True
           X_PULP_CONTENT_HOST='localhost'
-        " | sed 's/^\s\+//' > settings/settings.py
+        " | sed 's/^\s\+//' | tee settings/settings.py
         
         podman run \
              --detach \
@@ -117,7 +119,14 @@ jobs:
       run: |
         npm ci
         npm run build-standalone
+        if [ ! -d  ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng ]; then
+          echo "WARNING: pulp_galaxy_ng/pulp_storage/assets/galaxy_ng does not exist"
+          podman ps
+          sleep 1m
+          ls -l ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng || echo still nothing
+        fi
         rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
+        mkdir -p ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
         mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
 
     - name: "Finish up and run cypress"
@@ -129,6 +138,7 @@ jobs:
         npm ci
         echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
         
+        curl -v http://localhost:8002/api/galaxy
         npm run cypress:chrome
 
     - uses: actions/upload-artifact@v2
