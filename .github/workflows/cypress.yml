@@ -119,14 +119,7 @@ jobs:
       run: |
         npm ci
         npm run build-standalone
-        if [ ! -d  ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng ]; then
-          echo "WARNING: pulp_galaxy_ng/pulp_storage/assets/galaxy_ng does not exist"
-          podman ps
-          sleep 1m
-          ls -l ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng || echo still nothing
-        fi
         rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
-        mkdir -p ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
         mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
 
     - name: "Finish up and run cypress"
@@ -138,7 +131,6 @@ jobs:
         npm ci
         echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
         
-        curl -v http://localhost:8002/api/galaxy
         npm run cypress:chrome
 
     - uses: actions/upload-artifact@v2
