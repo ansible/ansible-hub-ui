@@ -272,291 +272,295 @@ export class RemoteForm extends React.Component<IProps, IState> {
           toggleTextExpanded='Hide advanced options'
           toggleTextCollapsed='Show advanced options'
         >
-          <FormGroup
-            fieldId={'username'}
-            label={'Username'}
-            labelIcon={
-              <HelperText content='The username to be used for authentication when syncing. This is not required when using a token.' />
-            }
-            isRequired={requiredFields.includes('username')}
-            validated={this.toError(!('username' in errorMessages))}
-            helperTextInvalid={errorMessages['username']}
-          >
-            <TextInput
-              validated={this.toError(!('username' in errorMessages))}
-              isRequired={requiredFields.includes('username')}
-              isDisabled={disabledFields.includes('username')}
-              id='username'
-              type='text'
-              value={remote.username || ''}
-              onChange={value => this.updateRemote(value, 'username')}
-            />
-          </FormGroup>
-          <FormGroup
-            fieldId={'password'}
-            label={'Password'}
-            labelIcon={
-              <HelperText content='The password to be used for authentication when syncing. This is not required when using a token.' />
-            }
-            isRequired={requiredFields.includes('password')}
-            validated={this.toError(!('password' in errorMessages))}
-            helperTextInvalid={errorMessages['password']}
-          >
-            <WriteOnlyField
-              isValueSet={isFieldSet('password', remote.write_only_fields)}
-              onClear={() => this.updateIsSet('password', false)}
-            >
-              <TextInput
-                validated={this.toError(!('password' in errorMessages))}
-                isRequired={requiredFields.includes('password')}
-                isDisabled={disabledFields.includes('password')}
-                id='password'
-                type='password'
-                value={remote.password || ''}
-                onChange={value => this.updateRemote(value, 'password')}
-              />
-            </WriteOnlyField>
-          </FormGroup>
-          <br />
-          <FormGroup
-            fieldId={'proxy_url'}
-            label={'Proxy URL'}
-            isRequired={requiredFields.includes('proxy_url')}
-            validated={this.toError(!('proxy_url' in errorMessages))}
-            helperTextInvalid={errorMessages['proxy_url']}
-          >
-            <TextInput
-              validated={this.toError(!('proxy_url' in errorMessages))}
-              isRequired={requiredFields.includes('proxy_url')}
-              isDisabled={disabledFields.includes('proxy_url')}
-              id='proxy_url'
-              type='text'
-              value={remote.proxy_url || ''}
-              onChange={value => this.updateRemote(value, 'proxy_url')}
-            />
-          </FormGroup>
-
-          <FormGroup
-            fieldId={'proxy_username'}
-            label={'Proxy username'}
-            isRequired={requiredFields.includes('proxy_username')}
-            validated={this.toError(!('proxy_username' in errorMessages))}
-            helperTextInvalid={errorMessages['proxy_username']}
-          >
-            <TextInput
-              validated={this.toError(!('proxy_username' in errorMessages))}
-              isRequired={requiredFields.includes('proxy_username')}
-              isDisabled={disabledFields.includes('proxy_username')}
-              id='proxy_username'
-              type='text'
-              value={remote.proxy_username || ''}
-              onChange={value => this.updateRemote(value, 'proxy_username')}
-            />
-          </FormGroup>
-
-          <FormGroup
-            fieldId={'proxy_password'}
-            label={'Proxy password'}
-            isRequired={requiredFields.includes('proxy_password')}
-            validated={this.toError(!('proxy_password' in errorMessages))}
-            helperTextInvalid={errorMessages['proxy_password']}
-          >
-            <WriteOnlyField
-              isValueSet={isFieldSet(
-                'proxy_password',
-                remote.write_only_fields,
-              )}
-              onClear={() => this.updateIsSet('proxy_password', false)}
-            >
-              <TextInput
-                validated={this.toError(!('proxy_password' in errorMessages))}
-                isRequired={requiredFields.includes('proxy_password')}
-                isDisabled={disabledFields.includes('proxy_password')}
-                id='proxy_password'
-                type='text'
-                value={remote.proxy_password || ''}
-                onChange={value => this.updateRemote(value, 'proxy_password')}
-              />
-            </WriteOnlyField>
-          </FormGroup>
-
-          <FormGroup
-            fieldId={'tls_validation'}
-            label={'TLS validation'}
-            labelIcon={
-              <HelperText content='If selected, TLS peer validation must be performed.' />
-            }
-            isRequired={requiredFields.includes('tls_validation')}
-            validated={this.toError(!('tls_validation' in errorMessages))}
-            helperTextInvalid={errorMessages['tls_validation']}
-          >
-            <Checkbox
-              onChange={value => this.updateRemote(value, 'tls_validation')}
-              id='tls_validation'
-              isChecked={remote.tls_validation}
-            />
-          </FormGroup>
-          <FormGroup
-            fieldId={'client_key'}
-            label={'Client key'}
-            labelIcon={
-              <HelperText content='A PEM encoded private key used for authentication.' />
-            }
-            isRequired={requiredFields.includes('client_key')}
-            validated={this.toError(!('client_key' in errorMessages))}
-            helperTextInvalid={errorMessages['client_key']}
-          >
-            <WriteOnlyField
-              isValueSet={isFieldSet('client_key', remote.write_only_fields)}
-              onClear={() => this.updateIsSet('client_key', false)}
-            >
-              <FileUpload
-                validated={this.toError(!('client_key' in errorMessages))}
-                isRequired={requiredFields.includes('client_key')}
-                id='yaml'
-                type='text'
-                filename={this.state.uploadedClientKeyFilename}
-                value={this.props.remote.client_key || ''}
-                hideDefaultPreview
-                onChange={(value, filename) => {
-                  this.setState({ uploadedClientKeyFilename: filename }, () =>
-                    this.updateRemote(value, 'client_key'),
-                  );
-                }}
-              />
-            </WriteOnlyField>
-          </FormGroup>
-          <FormGroup
-            fieldId={'client_cert'}
-            label={'Client certificate'}
-            labelIcon={
-              <HelperText content='A PEM encoded client certificate used for authentication.' />
-            }
-            isRequired={requiredFields.includes('client_cert')}
-            validated={this.toError(!('client_cert' in errorMessages))}
-            helperTextInvalid={errorMessages['client_cert']}
-          >
-            <Flex>
-              <FlexItem grow={{ default: 'grow' }}>
-                <FileUpload
-                  validated={this.toError(!('client_cert' in errorMessages))}
-                  isRequired={requiredFields.includes('client_cert')}
-                  id='yaml'
-                  type='text'
-                  filename={this.state.uploadedClientCertFilename}
-                  value={this.props.remote.client_cert || ''}
-                  hideDefaultPreview
-                  onChange={(value, filename) => {
-                    this.setState(
-                      { uploadedClientCertFilename: filename },
-                      () => this.updateRemote(value, 'client_cert'),
-                    );
-                  }}
-                />
-              </FlexItem>
-              <FlexItem>
-                <Button
-                  isDisabled={!this.props.remote.client_cert}
-                  onClick={() => {
-                    FileSaver.saveAs(
-                      new Blob([this.props.remote.client_cert], {
-                        type: 'text/plain;charset=utf-8',
-                      }),
-                      this.state.uploadedClientCertFilename,
-                    );
-                  }}
-                  variant='plain'
-                  aria-label='Download client certification file'
-                >
-                  <DownloadIcon />
-                </Button>
-              </FlexItem>
-            </Flex>
-          </FormGroup>
-          <FormGroup
-            fieldId={'ca_cert'}
-            label={'CA certificate'}
-            labelIcon={
-              <HelperText content='A PEM encoded client certificate used for authentication.' />
-            }
-            isRequired={requiredFields.includes('ca_cert')}
-            validated={this.toError(!('ca_cert' in errorMessages))}
-            helperTextInvalid={errorMessages['ca_cert']}
-          >
-            <Flex>
-              <FlexItem grow={{ default: 'grow' }}>
-                <FileUpload
-                  validated={this.toError(!('ca_cert' in errorMessages))}
-                  isRequired={requiredFields.includes('ca_cert')}
-                  id='yaml'
-                  type='text'
-                  filename={this.state.uploadedCaCertFilename}
-                  value={this.props.remote.ca_cert || ''}
-                  hideDefaultPreview
-                  onChange={(value, filename) => {
-                    this.setState({ uploadedCaCertFilename: filename }, () =>
-                      this.updateRemote(value, 'ca_cert'),
-                    );
-                  }}
-                />
-              </FlexItem>
-              <FlexItem>
-                <Button
-                  isDisabled={!this.props.remote.ca_cert}
-                  onClick={() => {
-                    FileSaver.saveAs(
-                      new Blob([this.props.remote.ca_cert], {
-                        type: 'text/plain;charset=utf-8',
-                      }),
-                      this.state.uploadedCaCertFilename,
-                    );
-                  }}
-                  variant='plain'
-                  aria-label='Download CA certification file'
-                >
-                  <DownloadIcon />
-                </Button>
-              </FlexItem>
-            </Flex>
-          </FormGroup>
-          <FormGroup
-            fieldId={'download_concurrency'}
-            label={'Download concurrency'}
-            labelIcon={
-              <HelperText content='Total number of simultaneous connections.' />
-            }
-            validated={remote.download_concurrency > 0 ? 'default' : 'error'}
-            helperTextInvalid={'Number must be greater than 0'}
-          >
-            <TextInput
-              id='download_concurrency'
-              type='number'
-              value={remote.download_concurrency}
-              validated={remote.download_concurrency > 0 ? 'default' : 'error'}
-              onChange={value =>
-                this.updateRemote(parseInt(value), 'download_concurrency')
+          <div className='pf-c-form'>
+            <FormGroup
+              fieldId={'username'}
+              label={'Username'}
+              labelIcon={
+                <HelperText content='The username to be used for authentication when syncing. This is not required when using a token.' />
               }
-            />
-          </FormGroup>
-          <FormGroup
-            fieldId={'rate_limit'}
-            label={'Rate Limit'}
-            labelIcon={
-              <HelperText content='Limits total download rate in requests per second.' />
-            }
-            validated={
-              Number.isInteger(remote.rate_limit) || remote.rate_limit === null
-                ? 'default'
-                : 'error'
-            }
-            helperTextInvalid={'Must be an integer.'}
-          >
-            <TextInput
-              id='rate_limit'
-              value={remote.rate_limit}
-              onChange={value => this.updateRemote(value, 'rate_limit')}
-            />
-          </FormGroup>
+              isRequired={requiredFields.includes('username')}
+              validated={this.toError(!('username' in errorMessages))}
+              helperTextInvalid={errorMessages['username']}
+            >
+              <TextInput
+                validated={this.toError(!('username' in errorMessages))}
+                isRequired={requiredFields.includes('username')}
+                isDisabled={disabledFields.includes('username')}
+                id='username'
+                type='text'
+                value={remote.username || ''}
+                onChange={value => this.updateRemote(value, 'username')}
+              />
+            </FormGroup>
+            <FormGroup
+              fieldId={'password'}
+              label={'Password'}
+              labelIcon={
+                <HelperText content='The password to be used for authentication when syncing. This is not required when using a token.' />
+              }
+              isRequired={requiredFields.includes('password')}
+              validated={this.toError(!('password' in errorMessages))}
+              helperTextInvalid={errorMessages['password']}
+            >
+              <WriteOnlyField
+                isValueSet={isFieldSet('password', remote.write_only_fields)}
+                onClear={() => this.updateIsSet('password', false)}
+              >
+                <TextInput
+                  validated={this.toError(!('password' in errorMessages))}
+                  isRequired={requiredFields.includes('password')}
+                  isDisabled={disabledFields.includes('password')}
+                  id='password'
+                  type='password'
+                  value={remote.password || ''}
+                  onChange={value => this.updateRemote(value, 'password')}
+                />
+              </WriteOnlyField>
+            </FormGroup>
+            <FormGroup
+              fieldId={'proxy_url'}
+              label={'Proxy URL'}
+              isRequired={requiredFields.includes('proxy_url')}
+              validated={this.toError(!('proxy_url' in errorMessages))}
+              helperTextInvalid={errorMessages['proxy_url']}
+            >
+              <TextInput
+                validated={this.toError(!('proxy_url' in errorMessages))}
+                isRequired={requiredFields.includes('proxy_url')}
+                isDisabled={disabledFields.includes('proxy_url')}
+                id='proxy_url'
+                type='text'
+                value={remote.proxy_url || ''}
+                onChange={value => this.updateRemote(value, 'proxy_url')}
+              />
+            </FormGroup>
+
+            <FormGroup
+              fieldId={'proxy_username'}
+              label={'Proxy username'}
+              isRequired={requiredFields.includes('proxy_username')}
+              validated={this.toError(!('proxy_username' in errorMessages))}
+              helperTextInvalid={errorMessages['proxy_username']}
+            >
+              <TextInput
+                validated={this.toError(!('proxy_username' in errorMessages))}
+                isRequired={requiredFields.includes('proxy_username')}
+                isDisabled={disabledFields.includes('proxy_username')}
+                id='proxy_username'
+                type='text'
+                value={remote.proxy_username || ''}
+                onChange={value => this.updateRemote(value, 'proxy_username')}
+              />
+            </FormGroup>
+
+            <FormGroup
+              fieldId={'proxy_password'}
+              label={'Proxy password'}
+              isRequired={requiredFields.includes('proxy_password')}
+              validated={this.toError(!('proxy_password' in errorMessages))}
+              helperTextInvalid={errorMessages['proxy_password']}
+            >
+              <WriteOnlyField
+                isValueSet={isFieldSet(
+                  'proxy_password',
+                  remote.write_only_fields,
+                )}
+                onClear={() => this.updateIsSet('proxy_password', false)}
+              >
+                <TextInput
+                  validated={this.toError(!('proxy_password' in errorMessages))}
+                  isRequired={requiredFields.includes('proxy_password')}
+                  isDisabled={disabledFields.includes('proxy_password')}
+                  id='proxy_password'
+                  type='text'
+                  value={remote.proxy_password || ''}
+                  onChange={value => this.updateRemote(value, 'proxy_password')}
+                />
+              </WriteOnlyField>
+            </FormGroup>
+
+            <FormGroup
+              fieldId={'tls_validation'}
+              label={'TLS validation'}
+              labelIcon={
+                <HelperText content='If selected, TLS peer validation must be performed.' />
+              }
+              isRequired={requiredFields.includes('tls_validation')}
+              validated={this.toError(!('tls_validation' in errorMessages))}
+              helperTextInvalid={errorMessages['tls_validation']}
+            >
+              <Checkbox
+                onChange={value => this.updateRemote(value, 'tls_validation')}
+                id='tls_validation'
+                isChecked={remote.tls_validation}
+              />
+            </FormGroup>
+            <FormGroup
+              fieldId={'client_key'}
+              label={'Client key'}
+              labelIcon={
+                <HelperText content='A PEM encoded private key used for authentication.' />
+              }
+              isRequired={requiredFields.includes('client_key')}
+              validated={this.toError(!('client_key' in errorMessages))}
+              helperTextInvalid={errorMessages['client_key']}
+            >
+              <WriteOnlyField
+                isValueSet={isFieldSet('client_key', remote.write_only_fields)}
+                onClear={() => this.updateIsSet('client_key', false)}
+              >
+                <FileUpload
+                  validated={this.toError(!('client_key' in errorMessages))}
+                  isRequired={requiredFields.includes('client_key')}
+                  id='yaml'
+                  type='text'
+                  filename={this.state.uploadedClientKeyFilename}
+                  value={this.props.remote.client_key || ''}
+                  hideDefaultPreview
+                  onChange={(value, filename) => {
+                    this.setState({ uploadedClientKeyFilename: filename }, () =>
+                      this.updateRemote(value, 'client_key'),
+                    );
+                  }}
+                />
+              </WriteOnlyField>
+            </FormGroup>
+            <FormGroup
+              fieldId={'client_cert'}
+              label={'Client certificate'}
+              labelIcon={
+                <HelperText content='A PEM encoded client certificate used for authentication.' />
+              }
+              isRequired={requiredFields.includes('client_cert')}
+              validated={this.toError(!('client_cert' in errorMessages))}
+              helperTextInvalid={errorMessages['client_cert']}
+            >
+              <Flex>
+                <FlexItem grow={{ default: 'grow' }}>
+                  <FileUpload
+                    validated={this.toError(!('client_cert' in errorMessages))}
+                    isRequired={requiredFields.includes('client_cert')}
+                    id='yaml'
+                    type='text'
+                    filename={this.state.uploadedClientCertFilename}
+                    value={this.props.remote.client_cert || ''}
+                    hideDefaultPreview
+                    onChange={(value, filename) => {
+                      this.setState(
+                        { uploadedClientCertFilename: filename },
+                        () => this.updateRemote(value, 'client_cert'),
+                      );
+                    }}
+                  />
+                </FlexItem>
+                <FlexItem>
+                  <Button
+                    isDisabled={!this.props.remote.client_cert}
+                    onClick={() => {
+                      FileSaver.saveAs(
+                        new Blob([this.props.remote.client_cert], {
+                          type: 'text/plain;charset=utf-8',
+                        }),
+                        this.state.uploadedClientCertFilename,
+                      );
+                    }}
+                    variant='plain'
+                    aria-label='Download client certification file'
+                  >
+                    <DownloadIcon />
+                  </Button>
+                </FlexItem>
+              </Flex>
+            </FormGroup>
+            <FormGroup
+              fieldId={'ca_cert'}
+              label={'CA certificate'}
+              labelIcon={
+                <HelperText content='A PEM encoded client certificate used for authentication.' />
+              }
+              isRequired={requiredFields.includes('ca_cert')}
+              validated={this.toError(!('ca_cert' in errorMessages))}
+              helperTextInvalid={errorMessages['ca_cert']}
+            >
+              <Flex>
+                <FlexItem grow={{ default: 'grow' }}>
+                  <FileUpload
+                    validated={this.toError(!('ca_cert' in errorMessages))}
+                    isRequired={requiredFields.includes('ca_cert')}
+                    id='yaml'
+                    type='text'
+                    filename={this.state.uploadedCaCertFilename}
+                    value={this.props.remote.ca_cert || ''}
+                    hideDefaultPreview
+                    onChange={(value, filename) => {
+                      this.setState({ uploadedCaCertFilename: filename }, () =>
+                        this.updateRemote(value, 'ca_cert'),
+                      );
+                    }}
+                  />
+                </FlexItem>
+                <FlexItem>
+                  <Button
+                    isDisabled={!this.props.remote.ca_cert}
+                    onClick={() => {
+                      FileSaver.saveAs(
+                        new Blob([this.props.remote.ca_cert], {
+                          type: 'text/plain;charset=utf-8',
+                        }),
+                        this.state.uploadedCaCertFilename,
+                      );
+                    }}
+                    variant='plain'
+                    aria-label='Download CA certification file'
+                  >
+                    <DownloadIcon />
+                  </Button>
+                </FlexItem>
+              </Flex>
+            </FormGroup>
+            <FormGroup
+              fieldId={'download_concurrency'}
+              label={'Download concurrency'}
+              labelIcon={
+                <HelperText content='Total number of simultaneous connections.' />
+              }
+              validated={remote.download_concurrency > 0 ? 'default' : 'error'}
+              helperTextInvalid={'Number must be greater than 0'}
+            >
+              <TextInput
+                id='download_concurrency'
+                type='number'
+                value={remote.download_concurrency}
+                validated={
+                  remote.download_concurrency > 0 ? 'default' : 'error'
+                }
+                onChange={value =>
+                  this.updateRemote(parseInt(value), 'download_concurrency')
+                }
+              />
+            </FormGroup>
+            <FormGroup
+              fieldId={'rate_limit'}
+              label={'Rate Limit'}
+              labelIcon={
+                <HelperText content='Limits total download rate in requests per second.' />
+              }
+              validated={
+                Number.isInteger(remote.rate_limit) ||
+                remote.rate_limit === null
+                  ? 'default'
+                  : 'error'
+              }
+              helperTextInvalid={'Must be an integer.'}
+            >
+              <TextInput
+                id='rate_limit'
+                value={remote.rate_limit}
+                onChange={value => this.updateRemote(value, 'rate_limit')}
+              />
+            </FormGroup>
+          </div>
         </ExpandableSection>
         {errorMessages['__nofield'] ? (
           <span
