@@ -140,4 +140,6 @@ jobs:
 
     - name: "Kill container"
       if: always()
-      run: podman kill pulp
+      run: |
+        podman logs pulp
+        podman kill pulp
