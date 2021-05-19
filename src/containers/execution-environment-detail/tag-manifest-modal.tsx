@@ -334,7 +334,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               const tag = taskUrls.find(e => e.task === r.data.pulp_id);
               this.props.onAlert({
                 variant: 'danger',
-                title: `Task to change tag "${tag.tag} could not be description"`,
+                title: `Task to change tag "${tag.tag}" could not be completed.`,
                 description: `Reason: task ${r.data.state}`,
               });
             }
