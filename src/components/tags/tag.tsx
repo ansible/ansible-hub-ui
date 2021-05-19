@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './tag.scss';
 
-import { Chip } from '@patternfly/react-core';
+import { Label } from '@patternfly/react-core';
 
 interface IProps {
   /** Value to display in the tag */
@@ -11,9 +11,9 @@ interface IProps {
 export class Tag extends React.Component<IProps, {}> {
   render() {
     return (
-      <Chip className='tag' isReadOnly>
+      <Label className='tag' readOnly>
         {this.props.children}
-      </Chip>
+      </Label>
     );
   }
 }
