@@ -37,9 +37,9 @@ export class MarkdownEditor extends React.Component<IProps, {}> {
             {editing && 'Preview'}
             <div className={editing ? 'pf-c-content preview' : 'pf-c-content'}>
               {text ? (
-                <ReactMarkdown source={text} />
+                <ReactMarkdown children={text} />
               ) : (
-                <ReactMarkdown source={placeholder} />
+                <ReactMarkdown children={placeholder} />
               )}
             </div>
           </div>
