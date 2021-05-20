@@ -10,10 +10,6 @@ interface IProps {
 
 export class Tag extends React.Component<IProps, {}> {
   render() {
-    return (
-      <Label className='tag' readOnly>
-        {this.props.children}
-      </Label>
-    );
+    return <Label readOnly>{this.props.children}</Label>;
   }
 }
