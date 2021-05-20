@@ -234,3 +234,19 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
     cy.wait('@deleteGroup');
     cy.get('@deleteGroup').should('have.property', 'status', 204);
 });
+
+// GalaxyKit Integration
+
+Cypress.Commands.add('galaxykit', {}, (args) => {
+    var adminUsername = Cypress.env('username');
+    var adminPassword = Cypress.env('password');
+    var server = Cypress.config().baseUrl + Cypress.env('prefix');
+
+    cy.exec(`galaxykit -s ${server} -u ${adminUsername} -p ${adminPassword} ${args}`, (error, stdout) => {
+        if (error) {
+            throw new Error(`Galaxykit failed: ${error}`)
+        } else {
+            console.log(stdout);
+        }
+    });
+});
