@@ -74,6 +74,34 @@ export class CollectionInfo extends React.Component<IProps> {
           </GridItem>
           <GridItem>
             <Split hasGutter={true}>
+              <SplitItem className='install-tile'>Install Version</SplitItem>
+              <SplitItem isFilled>
+                <FormSelect
+                  onChange={val =>
+                    updateParams(ParamHelper.setParam(params, 'version', val))
+                  }
+                  value={
+                    params.version ? params.version : latest_version.version
+                  }
+                  aria-label='Select collection version'
+                >
+                  {all_versions.map(v => (
+                    <FormSelectOption
+                      key={v.version}
+                      value={v.version}
+                      label={`${v.version} released ${moment(
+                        v.created,
+                      ).fromNow()} ${
+                        v.version === latest_version.version ? '(latest)' : ''
+                      }`}
+                    />
+                  ))}
+                </FormSelect>
+              </SplitItem>
+            </Split>
+          </GridItem>
+          <GridItem>
+            <Split hasGutter={true}>
               <SplitItem className='install-title'>Installation</SplitItem>
               <SplitItem isFilled>
                 <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
@@ -102,34 +130,7 @@ export class CollectionInfo extends React.Component<IProps> {
               </SplitItem>
             </Split>
           </GridItem>
-          <GridItem>
-            <Split hasGutter={true}>
-              <SplitItem className='install-tile'>Install Version</SplitItem>
-              <SplitItem isFilled>
-                <FormSelect
-                  onChange={val =>
-                    updateParams(ParamHelper.setParam(params, 'version', val))
-                  }
-                  value={
-                    params.version ? params.version : latest_version.version
-                  }
-                  aria-label='Select collection version'
-                >
-                  {all_versions.map(v => (
-                    <FormSelectOption
-                      key={v.version}
-                      value={v.version}
-                      label={`${v.version} released ${moment(
-                        v.created,
-                      ).fromNow()} ${
-                        v.version === latest_version.version ? '(latest)' : ''
-                      }`}
-                    />
-                  ))}
-                </FormSelect>
-              </SplitItem>
-            </Split>
-          </GridItem>
+         
           {latest_version.requires_ansible && (
             <GridItem>
               <Split hasGutter={true}>
