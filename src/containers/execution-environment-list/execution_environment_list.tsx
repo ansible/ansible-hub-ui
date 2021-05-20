@@ -26,6 +26,7 @@ import {
   EmptyStateNoData,
   DateComponent,
 } from 'src/components';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
 
 interface IState {
@@ -75,6 +76,19 @@ class ExecutionEnvironmentList extends React.Component<
   render() {
     const { params, itemCount, loading, alerts, items } = this.state;
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
+    const pushImagesButton = (
+      <Button
+        variant='link'
+        onClick={() =>
+          window.open(
+            'https://https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.0/html/managing_containers_in_private_automation_hub/index',
+            '_blank',
+          )
+        }
+      >
+        Push private images <ExternalLinkAltIcon />
+      </Button>
+    );
 
     if (!params['sort']) {
       params['sort'] = 'name';
@@ -93,19 +107,7 @@ class ExecutionEnvironmentList extends React.Component<
             description={
               'You currently have no container repositories. Add a container repository via the CLI to get started.'
             }
-            button={
-              <Button
-                variant='link'
-                onClick={() =>
-                  window.open(
-                    'https://https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.0/html/managing_containers_in_private_automation_hub/index',
-                    '_blank',
-                  )
-                }
-              >
-                Push private images
-              </Button>
-            }
+            button={pushImagesButton}
           />
         ) : (
           <Main>
@@ -134,6 +136,7 @@ class ExecutionEnvironmentList extends React.Component<
                             ]}
                           />
                         </ToolbarItem>
+                        <ToolbarItem>{pushImagesButton}</ToolbarItem>
                       </ToolbarGroup>
                     </ToolbarContent>
                   </Toolbar>
