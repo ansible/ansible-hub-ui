@@ -142,8 +142,8 @@ export class CollectionHeader extends React.Component<IProps> {
 
     const tabs = [
       {
-        active: active === 'details',
-        title: 'Details',
+        active: active === 'install',
+        title: 'Install',
         link: formatPath(Paths.collectionByRepo, pathParams, reduced),
       },
       {
