@@ -86,7 +86,7 @@ class ExecutionEnvironmentList extends React.Component<
           )
         }
       >
-        Push private images <ExternalLinkAltIcon />
+        Push container images <ExternalLinkAltIcon />
       </Button>
     );
 
