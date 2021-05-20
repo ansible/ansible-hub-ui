@@ -130,7 +130,6 @@ export class CollectionInfo extends React.Component<IProps> {
               </SplitItem>
             </Split>
           </GridItem>
-         
           {latest_version.requires_ansible && (
             <GridItem>
               <Split hasGutter={true}>
