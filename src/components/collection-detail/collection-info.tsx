@@ -165,7 +165,7 @@ export class CollectionInfo extends React.Component<IProps> {
                   params,
                 )}
               >
-                Load full readme
+                Go to documentation
               </Link>
             </GridItem>
           ) : null}
