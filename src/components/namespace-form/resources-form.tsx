@@ -52,9 +52,9 @@ export class ResourcesForm extends React.Component<IProps, {}> {
             Preview
             <div className='pf-c-content preview'>
               {namespace.resources ? (
-                <ReactMarkdown source={namespace.resources} />
+                <ReactMarkdown children={namespace.resources} />
               ) : (
-                <ReactMarkdown source={placeholder} />
+                <ReactMarkdown children={placeholder} />
               )}
             </div>
           </div>
