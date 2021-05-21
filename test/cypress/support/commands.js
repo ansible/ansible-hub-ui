@@ -242,7 +242,7 @@ Cypress.Commands.add('galaxykit', {}, (args) => {
     var adminPassword = Cypress.env('password');
     var server = Cypress.config().baseUrl + Cypress.env('prefix');
 
-    cy.exec(`galaxykit -s '${server}' -u '${adminUsername}' -p '${adminPassword}' ${args}`, (error, stdout) => {
+    return cy.exec(`galaxykit -s '${server}' -u '${adminUsername}' -p '${adminPassword}' ${args}`, (error, stdout) => {
         if (error) {
             throw new Error(`Galaxykit failed: ${error}`)
         } else {
@@ -250,4 +250,36 @@ Cypress.Commands.add('galaxykit', {}, (args) => {
             console.log(stdout);
         }
     });
+});
+
+Cypress.Commands.add('deleteTestUsers', {}, (args) => {
+    var adminUsername = Cypress.env('username');
+    var adminPassword = Cypress.env('password');
+    var server = Cypress.config().baseUrl + Cypress.env('prefix');
+
+    var users = cy.exec(`galaxykit -s '${server}' -u '${adminUsername}' -p '${adminPassword}' user list`) 
+    users.then((result) => {
+        var stdout = result.stdout;
+        var lines = stdout.split('\n');
+        lines.forEach(line => {
+            var username = line.split(' ')[0];
+            cy.galaxykit(`user delete ${username}`)
+        });
+    })
+});
+
+Cypress.Commands.add('deleteTestGroups', {}, (args) => {
+    var adminUsername = Cypress.env('username');
+    var adminPassword = Cypress.env('password');
+    var server = Cypress.config().baseUrl + Cypress.env('prefix');
+
+    var p = cy.exec(`galaxykit -s '${server}' -u '${adminUsername}' -p '${adminPassword}' group list`) 
+    p.then((result) => {
+        var stdout = result.stdout;
+        var lines = stdout.split('\n');
+        lines.forEach(line => {
+            var name = line.split(' ')[0];
+            cy.galaxykit(`group delete ${name}`)
+        });
+    })
 });
