@@ -6,25 +6,25 @@ import {
   ToolbarGroup,
   ToolbarItem,
   ToolbarContent,
-  Tooltip,
   Button,
 } from '@patternfly/react-core';
 import { ExecutionEnvironmentAPI, ExecutionEnvironmentType } from 'src/api';
 import { filterIsSet, ParamHelper } from 'src/utilities';
 import {
-  CompoundFilter,
-  LoadingPageSpinner,
-  AppliedFilters,
-  Pagination,
-  SortTable,
   AlertList,
-  closeAlertMixin,
   AlertType,
+  AppliedFilters,
   BaseHeader,
-  Main,
+  CompoundFilter,
+  DateComponent,
   EmptyStateFilter,
   EmptyStateNoData,
-  DateComponent,
+  LoadingPageSpinner,
+  Main,
+  Pagination,
+  SortTable,
+  Tooltip,
+  closeAlertMixin,
 } from 'src/components';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
@@ -236,9 +236,9 @@ class ExecutionEnvironmentList extends React.Component<
           </Link>
         </td>
         {description ? (
-          <Tooltip content={description}>
-            <td className={'pf-m-truncate'}>{description}</td>
-          </Tooltip>
+          <td className={'pf-m-truncate'}>
+            <Tooltip content={description}>{description}</Tooltip>
+          </td>
         ) : (
           <td></td>
         )}
