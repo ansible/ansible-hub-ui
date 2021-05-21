@@ -57,7 +57,7 @@ export class CollectionInfo extends React.Component<IProps> {
 
     return (
       <div className='pf-c-content info-panel'>
-        <h1>Info</h1>
+        <h1>Install</h1>
         <Grid hasGutter={true}>
           <GridItem>{latest_version.metadata.description}</GridItem>
           <GridItem>
