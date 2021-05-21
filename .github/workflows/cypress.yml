@@ -20,6 +20,10 @@ jobs:
 
     steps:
 
+    - name: "Install galaxykit dependency"
+      run: |
+        pip install git+https://github.com/hendersonreed/galaxykit.git@aah-487-namespace-and-cli
+
     - name: "Set env.SHORT_BRANCH, env.GALAXY_NG_COMMIT"
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
