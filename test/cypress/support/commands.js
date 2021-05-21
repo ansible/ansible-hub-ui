@@ -265,7 +265,11 @@ Cypress.Commands.add('deleteTestUsers', {}, (args) => {
         var lines = stdout.split('\n');
         lines.forEach(line => {
             var username = line.split(' ')[0];
+<<<<<<< HEAD
             cy.galaxykit(`user delete ${username}`, {failOnNonZeroExit: false})
+=======
+            cy.galaxykit(`user delete ${username}`)
+>>>>>>> c5ac932... Use galaxykit to clear test users and groups before running user dashboard tests
         });
     })
 });
@@ -274,15 +278,24 @@ Cypress.Commands.add('deleteTestGroups', {}, (args) => {
     var adminUsername = Cypress.env('username');
     var adminPassword = Cypress.env('password');
     var server = Cypress.config().baseUrl + Cypress.env('prefix');
+<<<<<<< HEAD
     var cmd = `galaxykit -s '${server}' -u '${adminUsername}' -p '${adminPassword}' group list`;
 
     var p = cy.exec(cmd);
+=======
+
+    var p = cy.exec(`galaxykit -s '${server}' -u '${adminUsername}' -p '${adminPassword}' group list`) 
+>>>>>>> c5ac932... Use galaxykit to clear test users and groups before running user dashboard tests
     p.then((result) => {
         var stdout = result.stdout;
         var lines = stdout.split('\n');
         lines.forEach(line => {
             var name = line.split(' ')[0];
+<<<<<<< HEAD
             cy.galaxykit(`group delete ${name}`, {failOnNonZeroExit: false})
+=======
+            cy.galaxykit(`group delete ${name}`)
+>>>>>>> c5ac932... Use galaxykit to clear test users and groups before running user dashboard tests
         });
     })
 });
