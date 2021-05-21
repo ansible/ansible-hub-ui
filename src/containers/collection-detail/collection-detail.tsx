@@ -66,7 +66,7 @@ class CollectionDetail extends React.Component<
             )
           }
           breadcrumbs={breadcrumbs}
-          activeTab='details'
+          activeTab='install'
           repo={this.context.selectedRepo}
         />
         <Main>
