@@ -24,6 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import shell from 'shell-escape-tag'
 var urljoin = require('url-join');
 
 Cypress.Commands.add('findnear', {prevSubject: true}, (subject, selector) => {
@@ -237,11 +238,23 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
 
 // GalaxyKit Integration
 
-Cypress.Commands.add('galaxykit', {}, (args, options) => {
+Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
+    var options = {}
     var adminUsername = Cypress.env('username');
     var adminPassword = Cypress.env('password');
     var server = Cypress.config().baseUrl + Cypress.env('prefix');
-    var cmd = `galaxykit -s '${server}' -u '${adminUsername}' -p '${adminPassword}' ${args}`;
+    var cmd = shell`galaxykit -s ${server} -u ${adminUsername} -p ${adminPassword}`;
+
+    if (args.length >= 1) {
+        if (typeof args[args.length - 1] == "object") {
+            options = args.splice(args.length - 1, 1)[0];
+        }
+    }
+
+    cmd += " " + operation;
+    Array.prototype.forEach.call(args, (arg) => {
+        cmd += " " + shell`${arg}`;
+    })
 
     return cy.exec(cmd, options, (error, stdout) => {
         if (error) {
@@ -274,7 +287,7 @@ Cypress.Commands.add('deleteTestGroups', {}, (args) => {
     var adminUsername = Cypress.env('username');
     var adminPassword = Cypress.env('password');
     var server = Cypress.config().baseUrl + Cypress.env('prefix');
-    var cmd = `galaxykit -s '${server}' -u '${adminUsername}' -p '${adminPassword}' group list`;
+    var cmd = shell`galaxykit -s ${server} -u ${adminUsername} -p ${adminPassword} group list`;
 
     var p = cy.exec(cmd);
     p.then((result) => {
