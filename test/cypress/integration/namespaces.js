@@ -8,7 +8,7 @@ describe('Namespaces Page Tests', () => {
         cy.galaxykit("-i group create", "testGroup2")
 
         cy.galaxykit("-i user create", "testUser2", "p@ssword1")
-        cy.galaxykit("user member add", "testUser2", "testGroup2")
+        cy.galaxykit("user group add", "testUser2", "testGroup2")
 
         cy.galaxykit("-i namespace create", "testns1")
         cy.galaxykit("-i namespace create", "testns2")
