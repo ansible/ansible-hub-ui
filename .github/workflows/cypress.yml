@@ -22,7 +22,7 @@ jobs:
 
     - name: "Install galaxykit dependency"
       run: |
-        pip install git+https://github.com/hendersonreed/galaxykit.git@aah-487-namespace-and-cli
+        pip install galaxykit.git==0.1.0
 
     - name: "Set env.SHORT_BRANCH, env.GALAXY_NG_COMMIT"
       run: |
