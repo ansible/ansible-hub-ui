@@ -9,6 +9,7 @@ import {
   Text,
   TextVariants,
   Badge,
+  Tooltip,
 } from '@patternfly/react-core';
 
 import { Link } from 'react-router-dom';
@@ -72,9 +73,17 @@ export class CollectionCard extends React.Component<IProps> {
           </div>
         </CardHeader>
         <CardBody>
-          <div className='description'>
-            {this.getDescription(latest_version.metadata.description)}
-          </div>
+          <Tooltip
+            content={
+              <div>
+                {this.getDescription(latest_version.metadata.description)}
+              </div>
+            }
+          >
+            <div className='description'>
+              {this.getDescription(latest_version.metadata.description)}
+            </div>
+          </Tooltip>
         </CardBody>
         <CardBody className='type-container'>
           {Object.keys(contentSummary.contents).map(k =>
