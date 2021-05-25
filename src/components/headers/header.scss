@@ -18,6 +18,20 @@
   }
 }
 
+.install-version-column {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+}
+
+.install-version-dropdown {
+  width: 136px;
+}
+
+.last-updated {
+  color: grey;
+}
+
 .background {
   background-color: white;
   padding: 0px 24px 0px 24px;

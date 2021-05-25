@@ -37,6 +37,16 @@ export class BaseHeader extends React.Component<IProps, {}> {
         )}
         {!breadcrumbs && !contextSelector && <div className='placeholder' />}
 
+        <div>
+          {' '}
+          {pageControls ? (
+            <div className='install-version-column'>
+              <span>Version</span>
+              <div className='install-version-dropdown'>{pageControls}</div>
+              <span className="last-updated">Last updated [exact time]</span>
+            </div>
+          ) : null}
+        </div>
         <div className='column-section'>
           <div className='title-box'>
             {imageURL ? (
@@ -51,10 +61,6 @@ export class BaseHeader extends React.Component<IProps, {}> {
               <PageHeaderTitle title={title} />
             </div>
           </div>
-
-          {pageControls ? (
-            <div className='header-right'>{pageControls}</div>
-          ) : null}
         </div>
 
         {children ? (
