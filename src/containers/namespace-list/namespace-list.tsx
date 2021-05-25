@@ -56,7 +56,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     ]);
 
     if (!params['page_size']) {
-      params['page_size'] = 24;
+      params['page_size'] = 20;
     }
 
     if (!params['sort']) {
