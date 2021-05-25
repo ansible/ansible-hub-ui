@@ -97,6 +97,9 @@ Cypress.Commands.add('createUser', {}, (username, password = null, firstName = n
 
     cy.contains('Save').click();
     cy.wait('@createUser');
+
+    // The API responded, but the user list page hasn't loaded, wait 100ms.
+    cy.wait(100);
 });
 
 Cypress.Commands.add('createGroup', {}, (name) => {
@@ -278,7 +281,9 @@ Cypress.Commands.add('deleteTestUsers', {}, (args) => {
         var lines = stdout.split('\n');
         lines.forEach(line => {
             var username = line.split(' ')[0];
-            cy.galaxykit(`user delete ${username}`, {failOnNonZeroExit: false})
+            if (username.trim().length > 0) {
+                cy.galaxykit(`user delete ${username}`, {failOnNonZeroExit: false})
+            }
         });
     })
 });
@@ -295,7 +300,9 @@ Cypress.Commands.add('deleteTestGroups', {}, (args) => {
         var lines = stdout.split('\n');
         lines.forEach(line => {
             var name = line.split(' ')[0];
-            cy.galaxykit(`group delete ${name}`, {failOnNonZeroExit: false})
+            if (name.trim().length > 0) {
+                cy.galaxykit(`group delete ${name}`, {failOnNonZeroExit: false})
+            }
         });
     })
 });
