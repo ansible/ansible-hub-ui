@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 interface IProps {
+  className?: string;
   number: number | string;
   label?: string;
   hideNumber?: boolean;
@@ -8,7 +9,7 @@ interface IProps {
 
 export class NumericLabel extends React.Component<IProps, {}> {
   render() {
-    const { number, label, hideNumber } = this.props;
+    const { className, number, label, hideNumber } = this.props;
     let convertedNum: number;
 
     if (typeof number === 'string') {
@@ -20,10 +21,12 @@ export class NumericLabel extends React.Component<IProps, {}> {
     const plural = number === 1 ? '' : 's';
 
     return (
-      <span>
-        {hideNumber ? null : NumericLabel.roundNumber(convertedNum)}{' '}
-        {label ? label + plural : null}
-      </span>
+      <div>
+        <span>
+          {hideNumber ? null : NumericLabel.roundNumber(convertedNum)}{' '}
+        </span>
+        <span className={className}>{label ? label + plural : null}</span>
+      </div>
     );
   }
 

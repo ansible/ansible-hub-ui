@@ -86,7 +86,11 @@ export class CollectionListItem extends React.Component<IProps, {}> {
         <div className='entry pf-l-flex pf-m-wrap content'>
           {Object.keys(contentSummary.contents).map(k => (
             <div key={k}>
-              <NumericLabel label={k} number={contentSummary.contents[k]} />
+              <NumericLabel
+                className='numeric-label-capitalize-text'
+                label={k}
+                number={contentSummary.contents[k]}
+              />
             </div>
           ))}
         </div>
