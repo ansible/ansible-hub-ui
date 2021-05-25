@@ -87,7 +87,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
           {Object.keys(contentSummary.contents).map(k => (
             <div key={k}>
               <NumericLabel
-                className='type-label'
+                className='numeric-label-capitalize-text'
                 label={k}
                 number={contentSummary.contents[k]}
               />
