@@ -71,3 +71,36 @@ After the tests have run you can view a video recording of the run is test/cypre
 
 See Cypress documentation:
     https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Folder-Structure
+
+## GalaxyKit Integration
+
+In order to help manage test data, our Cypress setup includes wrappers around the galaxykit command. The galakxykit command is an interface to the GalaxyNG API.
+
+You can install the dependency on your machine with pip, the Python dependency manager:
+
+    pip install galaxykit
+
+At this time, galaxykit is exposed in three commands: galaxykit, deleteTestUsers, and deleteTestGroups.
+
+### cy.deleteTestUsers()
+
+This command will delete any users in the system with the word "test" in their name.
+
+### cy.deleteTestGroups()
+
+This command will delete any groups in the system with the word "test" in the name.
+
+### cy.galaxykit(command, ...args)
+
+This low-level wrapper allows you to call any sub-command of the galaxykit tool. Extra parameters will be escaped safely for the shell.
+
+You may use these commands:
+
+* cy.galaxykit("user create", username, password)
+* cy.galaxykit("user delete", username)
+* cy.galaxykit("user group add", username)
+* cy.galaxykit("group create", name)
+* cy.galaxykit("group delete", name)
+* cy.galaxykit("namespace create", name, [initial group])
+* cy.galaxykit("namespace addgroup", namespace, group)
+* cy.galaxykit("namespace removegroup", namespace, group)
