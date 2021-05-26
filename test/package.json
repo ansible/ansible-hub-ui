@@ -17,6 +17,7 @@
     "cypress-log-to-output": "^1.1.2"
   },
   "dependencies": {
+    "shell-escape-tag": "^2.0.2",
     "url-join": "^4.0.1"
   }
 }
