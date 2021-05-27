@@ -44,7 +44,7 @@ export class CollectionHeader extends React.Component<IProps> {
       activeTab,
       className,
     } = this.props;
-    
+
     const all_versions = [...collection.all_versions];
 
     const match = all_versions.find(
