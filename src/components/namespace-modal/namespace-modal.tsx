@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Modal, Tooltip } from '@patternfly/react-core';
+import { Modal } from '@patternfly/react-core';
 import { Form, FormGroup } from '@patternfly/react-core';
 import { Button, InputGroup, TextInput } from '@patternfly/react-core';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
