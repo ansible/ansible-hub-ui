@@ -6,6 +6,9 @@ describe('Hub User Management Tests', () => {
     let password = 'p@ssword1';
 
     before(() => {
+        cy.deleteTestUsers();
+        cy.deleteTestGroups();
+
         cy.visit(baseUrl);
         cy.login(adminUsername, adminPassword);
 
