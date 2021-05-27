@@ -44,7 +44,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
             <div className='install-version-column'>
               <span>Version</span>
               <div className='install-version-dropdown'>{pageControls}</div>
-              <span className="last-updated">Last updated [exact time]</span>
+              <span className='last-updated'>Last updated [exact time]</span>
             </div>
           ) : null}
         </div>
