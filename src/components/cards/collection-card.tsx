@@ -73,13 +73,7 @@ export class CollectionCard extends React.Component<IProps> {
           </div>
         </CardHeader>
         <CardBody>
-          <Tooltip
-            content={
-              <div>
-                {latest_version.metadata.description}
-              </div>
-            }
-          >
+          <Tooltip content={<div>{latest_version.metadata.description}</div>}>
             <div className='description'>
               {this.getDescription(latest_version.metadata.description)}
             </div>
