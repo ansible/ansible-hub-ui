@@ -14,6 +14,7 @@ interface IProps {
   children?: React.ReactNode;
   className?: string;
   contextSelector?: React.ReactNode;
+  versionControl?: React.ReactNode;
 }
 
 export class BaseHeader extends React.Component<IProps, {}> {
