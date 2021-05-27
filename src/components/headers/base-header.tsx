@@ -63,6 +63,13 @@ export class BaseHeader extends React.Component<IProps, {}> {
             </div>
           </div>
         </div>
+        {versionControl ? (
+          <div className='install-version-column'>
+            <span>Version</span>
+            <div className='install-version-dropdown'>{versionControl}</div>
+            <span className='last-updated'>Last updated [exact time]</span>
+          </div>
+        ) : null}
 
         {children ? (
           <div className='header-bottom'>{children}</div>
