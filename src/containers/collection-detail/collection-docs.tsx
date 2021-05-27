@@ -2,7 +2,6 @@ import * as React from 'react';
 import './collection-detail.scss';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import { HashLink } from 'react-router-hash-link';
 
 import { Alert } from '@patternfly/react-core';
@@ -136,7 +135,7 @@ class CollectionDocs extends React.Component<
           repo={this.context.selectedRepo}
         />
         <Main className='main'>
-          <Section className='docs-container'>
+          <section className='docs-container'>
             <TableOfContents
               className='sidebar'
               namespace={collection.namespace.name}
@@ -183,7 +182,7 @@ class CollectionDocs extends React.Component<
                 this.renderNotFound(collection.name)
               )}
             </div>
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

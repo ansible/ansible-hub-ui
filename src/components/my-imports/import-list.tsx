@@ -9,9 +9,9 @@ import {
   InputGroup,
   Button,
   ButtonVariant,
+  Spinner,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
-import { Spinner } from '@redhat-cloud-services/frontend-components';
 
 import { PulpStatus, NamespaceType, ImportListType } from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -107,7 +107,7 @@ export class ImportList extends React.Component<IProps, IState> {
     if (loading) {
       return (
         <div className='loading'>
-          <Spinner centered={true} />
+          <Spinner />
         </div>
       );
     }

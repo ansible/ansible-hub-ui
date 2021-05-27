@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { EmptyStateNoData, MarkdownEditor } from '../../components';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   ClipboardCopy,
   FlexItem,
@@ -69,7 +68,7 @@ class ExecutionEnvironmentDetail extends React.Component<
     return (
       <Flex direction={{ default: 'column' }}>
         <FlexItem>
-          <Section className='body card-area'>
+          <section className='body card-area'>
             {' '}
             <Title headingLevel='h2' size='lg'>
               Instructions
@@ -78,10 +77,10 @@ class ExecutionEnvironmentDetail extends React.Component<
               Pull this image
             </Title>
             <ClipboardCopy isReadOnly>{instructions}</ClipboardCopy>
-          </Section>
+          </section>
         </FlexItem>
         <FlexItem>
-          <Section className='body pf-c-content'>
+          <section className='body pf-c-content'>
             <Title headingLevel='h2' size='lg'>
               {!this.state.markdownEditing && this.state.readme && canEdit && (
                 <Button
@@ -152,7 +151,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                 </Button>
               </React.Fragment>
             )}
-          </Section>
+          </section>
         </FlexItem>
       </Flex>
     );

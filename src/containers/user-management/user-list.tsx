@@ -5,7 +5,6 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
   ToolbarGroup,
@@ -137,7 +136,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           <EmptyStateUnauthorized />
         ) : (
           <Main>
-            <Section className='body'>
+            <section className='body'>
               <div className='toolbar'>
                 <Toolbar>
                   <ToolbarContent>
@@ -210,7 +209,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                   count={itemCount}
                 />
               </div>
-            </Section>
+            </section>
           </Main>
         )}
       </React.Fragment>

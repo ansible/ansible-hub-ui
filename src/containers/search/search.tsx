@@ -2,8 +2,15 @@ import * as React from 'react';
 import './search.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import { DataList, Switch } from '@patternfly/react-core';
+import {
+  DataList,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
+  ToolbarContent,
+  Switch,
+} from '@patternfly/react-core';
 
 import {
   BaseHeader,
@@ -151,11 +158,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
           />
         ) : (
           <React.Fragment>
-            <Section className='collection-container'>
+            <section className='collection-container'>
               {this.renderCollections(collections, params, updateParams)}
-            </Section>
-            <Section className='footer'>
-              <Pagination
+            </section>
+            <section className='footer'><Pagination
                 params={params}
                 updateParams={p =>
                   this.updateParams(p, () => this.queryCollections())
@@ -163,7 +169,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
                 perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
                 count={numberOfResults}
               />
-            </Section>
+            </section>
           </React.Fragment>
         )}
       </div>

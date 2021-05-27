@@ -7,7 +7,6 @@ import {
   TagLabel,
   DateComponent,
 } from '../../components';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import { FlexItem, Flex, Button } from '@patternfly/react-core';
 import { formatPath, Paths } from '../../paths';
 import { ActivitiesAPI } from '../../api';
@@ -59,7 +58,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
       <Flex>
         <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
           <FlexItem>
-            <Section className='body'>
+            <section className='body'>
               <table aria-label='Activities' className='pf-c-table'>
                 <SortTable
                   options={{
@@ -88,7 +87,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   })}
                 </tbody>
               </table>
-            </Section>
+            </section>
           </FlexItem>
         </Flex>
       </Flex>

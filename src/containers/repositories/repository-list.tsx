@@ -12,7 +12,6 @@ import {
   RemoteForm,
   EmptyStateNoData,
 } from 'src/components';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import { ParamHelper, mapErrorMessages } from 'src/utilities';
 import { Constants } from 'src/constants';
 import {
@@ -186,12 +185,12 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
     ) {
       return (
         <Main className='repository-list'>
-          <Section className='body'>
+          <section className='body'>
             <LocalRepositoryTable
               repositories={content}
               updateParams={this.updateParams}
             />
-          </Section>
+          </section>
         </Main>
       );
     }
@@ -203,7 +202,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
         />
       ) : (
         <Main className='repository-list'>
-          <Section className='body'>
+          <section className='body'>
             <RemoteRepositoryTable
               remotes={content}
               updateParams={this.updateParams}
@@ -216,7 +215,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
               user={user}
               refreshRemotes={this.refreshContent}
             />
-          </Section>
+          </section>
         </Main>
       );
     }

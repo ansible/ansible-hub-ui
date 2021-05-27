@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import { ClipboardCopy, Button } from '@patternfly/react-core';
 
 import { Paths } from 'src/paths';
@@ -44,7 +43,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
       <React.Fragment>
         <BaseHeader title='Connect to Hub'></BaseHeader>
         <Main>
-          <Section className='body pf-c-content'>
+          <section className='body pf-c-content'>
             <h2>Connect Private Automation Hub</h2>
             <p>
               Use the <Link to={Paths.repositories}>Repository Management</Link>{' '}
@@ -54,8 +53,8 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               <Link to={Paths.search}>Collections</Link> page to control which
               collections are added to their organization's sync repository.
             </p>
-          </Section>
-          <Section className='body pf-c-content'>
+          </section>
+          <section className='body pf-c-content'>
             <h2>Connect the ansible-galaxy client</h2>
             <p>
               Documentation on how to configure the <code>ansible-galaxy</code>{' '}
@@ -68,8 +67,8 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               </a>
               . Use the following parameters to configure the client.
             </p>
-          </Section>
-          <Section className='body pf-c-content'>
+          </section>
+          <section className='body pf-c-content'>
             <h2>Offline token</h2>
             <p>
               Use this token to authenticate clients that need to download
@@ -92,8 +91,8 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               offline API token management
             </a>{' '}
             page.
-          </Section>
-          <Section className='body pf-c-content'>
+          </section>
+          <section className='body pf-c-content'>
             <h2>Server URL</h2>
             <p>
               Use this URL to configure the API endpoints that clients need to
@@ -105,8 +104,8 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               organization's sync repository use the URL found on{' '}
               <Link to={Paths.repositories}>Repository Management</Link>.
             </p>
-          </Section>
-          <Section className='body pf-c-content'>
+          </section>
+          <section className='body pf-c-content'>
             <h2>SSO URL</h2>
             <p>
               Use this URL to configure the authentication URLs that clients
@@ -115,7 +114,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             <ClipboardCopy isReadOnly>
               https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
             </ClipboardCopy>
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

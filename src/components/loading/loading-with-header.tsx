@@ -4,7 +4,6 @@ import {
   Skeleton,
   PageHeaderTitle,
   PageHeader,
-  Section,
 } from '@redhat-cloud-services/frontend-components';
 
 import { Main } from 'src/components';
@@ -21,9 +20,9 @@ export class LoadingPageWithHeader extends React.Component<{}> {
           ></PageHeaderTitle>
         </PageHeader>
         <Main>
-          <Section>
+          <section>
             <LoadingPageSpinner></LoadingPageSpinner>
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

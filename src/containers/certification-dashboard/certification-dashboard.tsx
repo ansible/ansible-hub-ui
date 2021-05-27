@@ -9,7 +9,6 @@ import {
   EmptyStateUnauthorized,
   Main,
 } from 'src/components';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
   ToolbarGroup,
@@ -122,7 +121,7 @@ class CertificationDashboard extends React.Component<
           <EmptyStateUnauthorized />
         ) : (
           <Main className='certification-dashboard'>
-            <Section className='body'>
+            <section className='body'>
               <div className='toolbar'>
                 <Toolbar>
                   <ToolbarGroup>
@@ -199,7 +198,7 @@ class CertificationDashboard extends React.Component<
                   count={itemCount}
                 />
               </div>
-            </Section>
+            </section>
           </Main>
         )}
       </React.Fragment>

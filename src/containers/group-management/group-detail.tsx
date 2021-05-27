@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 
 import {
   AlertList,
@@ -267,7 +266,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const { user } = this.context;
 
     return (
-      <Section className='body'>
+      <section className='body'>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           {!editPermissions && user.model_permissions.change_group && (
             <Button onClick={() => this.setState({ editPermissions: true })}>
@@ -355,7 +354,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             </ActionGroup>
           </Form>
         )}
-      </Section>
+      </section>
     );
   }
 
@@ -576,7 +575,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     }
 
     return (
-      <Section className='body'>
+      <section className='body'>
         <div className='toolbar'>
           <Toolbar>
             <ToolbarContent>
@@ -644,7 +643,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             count={itemCount}
           />
         </div>{' '}
-      </Section>
+      </section>
     );
   }
 

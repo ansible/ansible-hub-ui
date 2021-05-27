@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { Section, Spinner } from '@redhat-cloud-services/frontend-components';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import {
@@ -20,7 +19,7 @@ import {
   NamespaceLinkType,
 } from 'src/api';
 
-import { Form, ActionGroup, Button } from '@patternfly/react-core';
+import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
 
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { ParamHelper, mapErrorMessages } from 'src/utilities';
@@ -120,7 +119,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
           <EmptyStateUnauthorized />
         ) : (
           <Main>
-            <Section className='body'>
+            <section className='body'>
               {params.tab.toLowerCase() === 'edit details' ? (
                 <NamespaceForm
                   userId={userId}
@@ -162,7 +161,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                   <div style={{ color: 'red' }}>You have unsaved changes</div>
                 ) : null}
               </Form>
-            </Section>
+            </section>
           </Main>
         )}
       </React.Fragment>

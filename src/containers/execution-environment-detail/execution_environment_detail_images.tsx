@@ -8,8 +8,6 @@ import { filterIsSet, ParamHelper, getHumanSize } from '../../utilities';
 
 import { Link, withRouter } from 'react-router-dom';
 
-import { Section } from '@redhat-cloud-services/frontend-components';
-
 import {
   Toolbar,
   ToolbarContent,
@@ -151,7 +149,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     );
 
     return (
-      <Section className='body'>
+      <section className='body'>
         <AlertList
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
@@ -252,7 +250,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             count={this.state.numberOfImages}
           />
         </div>
-      </Section>
+      </section>
     );
   }
 

@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import {
   BaseHeader,
   Breadcrumbs,
   LoadingPageWithHeader,
   Main,
-  ShaLabel,
   TagLabel,
 } from '../../components';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   ClipboardCopy,
   DataList,
@@ -132,7 +130,7 @@ class ExecutionEnvironmentManifest extends React.Component<
         <Main>
           <Flex>
             <FlexItem className='layers-max-width'>
-              <Section className='body'>
+              <section className='body'>
                 <Title headingLevel='h2' size='lg'>
                   Image layers
                 </Title>
@@ -166,7 +164,7 @@ class ExecutionEnvironmentManifest extends React.Component<
                     </DataListItem>
                   ))}
                 </DataList>
-              </Section>
+              </section>
             </FlexItem>
 
             <Flex
@@ -174,17 +172,17 @@ class ExecutionEnvironmentManifest extends React.Component<
               className='layers-max-width'
             >
               <FlexItem>
-                <Section className='body'>
+                <section className='body'>
                   <Title headingLevel='h2' size='lg'>
                     Command
                   </Title>
 
                   <code>{command}</code>
-                </Section>
+                </section>
               </FlexItem>
 
               <FlexItem>
-                <Section className='body'>
+                <section className='body'>
                   <Title headingLevel='h2' size='lg'>
                     Environment
                   </Title>
@@ -195,7 +193,7 @@ class ExecutionEnvironmentManifest extends React.Component<
                       <br />
                     </React.Fragment>
                   ))}
-                </Section>
+                </section>
               </FlexItem>
             </Flex>
           </Flex>

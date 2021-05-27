@@ -2,7 +2,6 @@ import * as React from 'react';
 import './namespace-list.scss';
 
 import { RouteComponentProps } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 
 import { ParamHelper } from 'src/utilities/param-helper';
 import {
@@ -17,7 +16,7 @@ import {
   Pagination,
   Toolbar,
 } from 'src/components';
-import { Button, Switch, ToolbarItem } from '@patternfly/react-core';
+import { Button, ToolbarItem } from '@patternfly/react-core';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { Constants } from 'src/constants';
@@ -186,9 +185,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
             </div>
           )}
         </BaseHeader>
-        <Section className='card-area'>{this.renderBody()}</Section>
+        <section className='card-area'>{this.renderBody()}</section>
         {noData ? null : (
-          <Section className='footer'>
+          <section className='footer'>
             <Pagination
               params={params}
               updateParams={p =>
@@ -197,7 +196,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
               perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
               count={itemCount}
             />
-          </Section>
+          </section>
         )}
       </div>
     );
@@ -221,15 +220,15 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     if (loading) {
       return (
-        <Section>
+        <section>
           <LoadingPageSpinner></LoadingPageSpinner>;
-        </Section>
+        </section>
       );
     }
 
     if (namespaces.length === 0) {
       return (
-        <Section>
+        <section>
           {filterIsSet(this.state.params, ['keywords']) ? (
             <EmptyStateFilter />
           ) : (
@@ -239,12 +238,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
               button={noDataButton}
             />
           )}
-        </Section>
+        </section>
       );
     }
 
     return (
-      <Section className='card-layout'>
+      <section className='card-layout'>
         {namespaces.map((ns, i) => (
           <div key={i} className='card-wrapper'>
             <NamespaceCard
@@ -257,7 +256,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             ></NamespaceCard>
           </div>
         ))}
-      </Section>
+      </section>
     );
   }
 
