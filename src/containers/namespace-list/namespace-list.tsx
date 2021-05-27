@@ -149,9 +149,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                 tabs={[
                   {
                     title: 'All',
-                    link: Constants.INSIGHTS_DEPLOYMENT_MODE
-                      ? Paths.partners
-                      : Paths.namespaces,
+                    link: Paths[NAMESPACE_TERM],
                     active: !filterOwner,
                   },
                   {
