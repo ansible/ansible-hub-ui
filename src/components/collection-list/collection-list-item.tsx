@@ -6,6 +6,7 @@ import {
   DataListItemRow,
   DataListItemCells,
   DataListCell,
+  LabelGroup,
   TextContent,
   Text,
   TextVariants,
@@ -95,9 +96,11 @@ export class CollectionListItem extends React.Component<IProps, {}> {
           ))}
         </div>
         <div className='entry pf-l-flex pf-m-wrap'>
+          <LabelGroup>
           {latest_version.metadata.tags.map((tag, index) => (
             <Tag key={index}>{tag}</Tag>
           ))}
+          </LabelGroup>
         </div>
       </DataListCell>,
     );
