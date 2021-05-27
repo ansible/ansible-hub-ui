@@ -31,7 +31,6 @@ export class BaseHeader extends React.Component<IProps, {}> {
       contextSelector,
       versionControl,
     } = this.props;
-    console.log(latestVersion);
     return (
       <div className={cx('background', className)}>
         {contextSelector && (
@@ -64,7 +63,9 @@ export class BaseHeader extends React.Component<IProps, {}> {
           <div className='install-version-column'>
             <span>Version</span>
             <div className='install-version-dropdown'>{versionControl}</div>
-            <span className='last-updated'>Last updated {latestVersion}</span>
+            {latestVersion ? (
+              <span className='last-updated'>Last updated {latestVersion}</span>
+            ) : null}
           </div>
         ) : null}
 
