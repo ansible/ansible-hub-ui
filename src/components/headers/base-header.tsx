@@ -26,6 +26,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
       breadcrumbs,
       className,
       contextSelector,
+      versionControl,
     } = this.props;
     return (
       <div className={cx('background', className)}>

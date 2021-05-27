@@ -79,8 +79,8 @@ export class CollectionHeader extends React.Component<IProps> {
           />
         }
         breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
-        pageControls={
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+        versionControl={
+          <div>
             <FormSelect
               onChange={val =>
                 updateParams(ParamHelper.setParam(params, 'version', val))
