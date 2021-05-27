@@ -68,6 +68,7 @@ export class CollectionHeader extends React.Component<IProps> {
 
     return (
       <BaseHeader
+        latestVersion={collection.latest_version.created_at}
         className={className}
         title={collection.name}
         imageURL={collection.namespace.avatar_url}

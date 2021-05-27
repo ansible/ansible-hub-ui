@@ -9,6 +9,7 @@ import { Logo } from 'src/components';
 interface IProps {
   title: string;
   imageURL?: string;
+  latestVersion?: string;
   breadcrumbs?: React.ReactNode;
   pageControls?: React.ReactNode;
   children?: React.ReactNode;
@@ -22,6 +23,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
     const {
       title,
       imageURL,
+      latestVersion,
       pageControls,
       children,
       breadcrumbs,
@@ -29,6 +31,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
       contextSelector,
       versionControl,
     } = this.props;
+    console.log(latestVersion);
     return (
       <div className={cx('background', className)}>
         {contextSelector && (
@@ -39,16 +42,6 @@ export class BaseHeader extends React.Component<IProps, {}> {
         )}
         {!breadcrumbs && !contextSelector && <div className='placeholder' />}
 
-        <div>
-          {' '}
-          {pageControls ? (
-            <div className='install-version-column'>
-              <span>Version</span>
-              <div className='install-version-dropdown'>{pageControls}</div>
-              <span className='last-updated'>Last updated [exact time]</span>
-            </div>
-          ) : null}
-        </div>
         <div className='column-section'>
           <div className='title-box'>
             {imageURL ? (
@@ -63,12 +56,15 @@ export class BaseHeader extends React.Component<IProps, {}> {
               <PageHeaderTitle title={title} />
             </div>
           </div>
+          {pageControls ? (
+            <div className='header-right'>{pageControls}</div>
+          ) : null}
         </div>
         {versionControl ? (
           <div className='install-version-column'>
             <span>Version</span>
             <div className='install-version-dropdown'>{versionControl}</div>
-            <span className='last-updated'>Last updated [exact time]</span>
+            <span className='last-updated'>Last updated {latestVersion}</span>
           </div>
         ) : null}
 
