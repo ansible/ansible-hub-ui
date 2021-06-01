@@ -7,9 +7,13 @@ import {
 import axios from 'axios';
 
 function filterContents(contents) {
-  return contents.filter(
-    item => !['doc_fragments', 'module_utils'].includes(item.content_type),
-  );
+  if (contents) {
+    return contents.filter(
+      item => !['doc_fragments', 'module_utils'].includes(item.content_type),
+    );
+  }
+
+  return contents;
 }
 
 function filterListItem(item: CollectionListType) {
