@@ -3,7 +3,13 @@ import * as React from 'react';
 import { capitalize } from 'lodash';
 import { Link } from 'react-router-dom';
 
-import { Nav, NavExpandable, NavItem, NavList, TextInput } from '@patternfly/react-core';
+import {
+  Nav,
+  NavExpandable,
+  NavItem,
+  NavList,
+  TextInput,
+} from '@patternfly/react-core';
 
 import { DocsBlobType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
@@ -73,9 +79,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
       <div className={className}>
         <TextInput
           value={this.state.searchBarValue}
-          onChange={val =>
-            this.setState({searchBarValue: val})    
-          }
+          onChange={val => this.setState({ searchBarValue: val })}
           aria-label='find-content'
           placeholder='Filter by keyword'
         />
@@ -176,7 +180,9 @@ export class TableOfContents extends React.Component<IProps, IState> {
 
   private renderLinks(links: DocsEntry[], title, filterString: string) {
     const isExpanded = !this.state.collapsedCategories.includes(title);
-    const filteredLinks = links.filter((link) => link.display.indexOf(filterString) > -1);
+    const filteredLinks = links.filter(
+      link => link.display.indexOf(filterString) > -1,
+    );
     return (
       <NavExpandable
         key={title}
