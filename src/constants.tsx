@@ -57,11 +57,13 @@ export class Constants {
       ],
     },
     {
-      name: 'execution environments',
+      name: 'containers',
       object_permissions: [
-        'container.namespace_pull_containerdistribution',
+        // Turning off private container permissions since they aren't supported yet
+        // 'container.namespace_pull_containerdistribution',
+        // 'container.namespace_view_containerdistribution',
+
         'container.namespace_change_containerdistribution',
-        'container.namespace_view_containerdistribution',
         'container.namespace_modify_content_containerpushrepository',
         'container.change_containernamespace',
         'container.namespace_push_containerdistribution',
