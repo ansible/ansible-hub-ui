@@ -3,7 +3,7 @@ import * as React from 'react';
 import { capitalize } from 'lodash';
 import { Link } from 'react-router-dom';
 
-import { Nav, NavExpandable, NavItem, NavList } from '@patternfly/react-core';
+import { Nav, NavExpandable, NavItem, NavList, TextInput } from '@patternfly/react-core';
 
 import { DocsBlobType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
@@ -27,6 +27,7 @@ class Table {
 
 interface IState {
   collapsedCategories: string[];
+  searchBarValue: string;
 }
 
 interface IProps {
@@ -47,7 +48,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
-    this.state = { collapsedCategories: [] };
+    this.state = { collapsedCategories: [], searchBarValue: '' };
   }
 
   render() {
@@ -70,12 +71,20 @@ export class TableOfContents extends React.Component<IProps, IState> {
 
     return (
       <div className={className}>
+        <TextInput
+          value={this.state.searchBarValue}
+          onChange={val =>
+            this.setState({searchBarValue: val})    
+          }
+          aria-label='find-content'
+          placeholder='Filter by keyword'
+        />
         <Nav theme='light'>
           <NavList>
             {Object.keys(table).map(key =>
               table[key].length === 0
                 ? null
-                : this.renderLinks(table[key], key),
+                : this.renderLinks(table[key], key, this.state.searchBarValue),
             )}
           </NavList>
         </Nav>
@@ -165,9 +174,9 @@ export class TableOfContents extends React.Component<IProps, IState> {
     return table;
   }
 
-  private renderLinks(links, title) {
+  private renderLinks(links: DocsEntry[], title, filterString: string) {
     const isExpanded = !this.state.collapsedCategories.includes(title);
-
+    const filteredLinks = links.filter((link) => link.display.indexOf(filterString) > -1);
     return (
       <NavExpandable
         key={title}
@@ -175,7 +184,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
         isExpanded={isExpanded}
         isActive={this.getSelectedCategory() === title}
       >
-        {links.map((link: DocsEntry, index) => (
+        {filteredLinks.map((link: DocsEntry, index) => (
           <NavItem key={index} isActive={this.isSelected(link)}>
             <Link
               style={{
