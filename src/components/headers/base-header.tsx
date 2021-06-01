@@ -9,7 +9,6 @@ import { Logo } from 'src/components';
 interface IProps {
   title: string;
   imageURL?: string;
-  latestVersion?: string;
   breadcrumbs?: React.ReactNode;
   pageControls?: React.ReactNode;
   children?: React.ReactNode;
@@ -23,7 +22,6 @@ export class BaseHeader extends React.Component<IProps, {}> {
     const {
       title,
       imageURL,
-      latestVersion,
       pageControls,
       children,
       breadcrumbs,
@@ -59,15 +57,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
             <div className='header-right'>{pageControls}</div>
           ) : null}
         </div>
-        {versionControl ? (
-          <div className='install-version-column'>
-            <span>Version</span>
-            <div className='install-version-dropdown'>{versionControl}</div>
-            {latestVersion ? (
-              <span className='last-updated'>Last updated {latestVersion}</span>
-            ) : null}
-          </div>
-        ) : null}
+        {versionControl ? <>{versionControl}</> : null}
 
         {children ? (
           <div className='header-bottom'>{children}</div>

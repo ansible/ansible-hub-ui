@@ -20,6 +20,7 @@ interface IProps {
   collection: CollectionDetailType;
   params: {
     version?: string;
+    latestVersion?: string;
   };
   updateParams: (params) => void;
   breadcrumbs: {
@@ -66,9 +67,10 @@ export class CollectionHeader extends React.Component<IProps> {
       { key: 'repository', name: 'Repo' },
     ];
 
+    const latestVersion = collection.latest_version.created_at;
+
     return (
       <BaseHeader
-        latestVersion={collection.latest_version.created_at}
         className={className}
         title={collection.name}
         imageURL={collection.namespace.avatar_url}
@@ -81,22 +83,28 @@ export class CollectionHeader extends React.Component<IProps> {
         }
         breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
         versionControl={
-          <div>
-            <FormSelect
-              onChange={val =>
-                updateParams(ParamHelper.setParam(params, 'version', val))
-              }
-              value={collection.latest_version.version}
-              aria-label='Select collection version'
-            >
-              {all_versions.map(v => (
-                <FormSelectOption
-                  key={v.version}
-                  value={v.version}
-                  label={'v' + v.version}
-                />
-              ))}
-            </FormSelect>
+          <div className='install-version-column'>
+            <span>Version</span>
+            <div className='install-version-dropdown'>
+              <FormSelect
+                onChange={val =>
+                  updateParams(ParamHelper.setParam(params, 'version', val))
+                }
+                value={collection.latest_version.version}
+                aria-label='Select collection version'
+              >
+                {all_versions.map(v => (
+                  <FormSelectOption
+                    key={v.version}
+                    value={v.version}
+                    label={'v' + v.version}
+                  />
+                ))}
+              </FormSelect>
+            </div>
+            {latestVersion ? (
+              <span className='last-updated'>Last updated {latestVersion}</span>
+            ) : null}
           </div>
         }
       >
