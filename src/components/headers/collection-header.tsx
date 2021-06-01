@@ -4,6 +4,7 @@ import './header.scss';
 
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { FormSelect, FormSelectOption, Alert } from '@patternfly/react-core';
+import { AppContext } from 'src/loaders/app-context';
 
 import {
   BaseHeader,
@@ -32,6 +33,7 @@ interface IProps {
 
 export class CollectionHeader extends React.Component<IProps> {
   ignoreParams = ['showing', 'keyords'];
+  static contextType = AppContext;
 
   render() {
     const {
