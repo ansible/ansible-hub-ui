@@ -22,7 +22,7 @@ import { Paths } from 'src/paths';
 const MaintenancePage = asyncComponent(() =>
   import(
     /* webpackChunkName: "namespace_detail" */
-    './containers/maintenance/maintenance-page'
+    '../../containers/maintenance/maintenance-page'
   ),
 );
 
