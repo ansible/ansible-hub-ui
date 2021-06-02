@@ -26,7 +26,7 @@ class App extends Component {
   componentDidMount() {
     insights.chrome.init();
     insights.chrome.identifyApp('automation-hub');
-    insights.chrome.navigation(buildNavigation());
+    //insights.chrome.navigation(buildNavigation());
 
     // This listens for insights navigation events, so this will fire
     // when items in the nav are clicked or the app is loaded for the first
@@ -43,9 +43,9 @@ class App extends Component {
         this.firstLoad = false;
       }
     });
-    this.buildNav = this.props.history.listen(() =>
+    /*this.buildNav = this.props.history.listen(() =>
       insights.chrome.navigation(buildNavigation()),
-    );
+    );*/
 
     insights.chrome.auth.getUser().then(user => this.setState({ user: user }));
     ActiveUserAPI.getActiveUser().then(result =>
