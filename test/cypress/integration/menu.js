@@ -58,3 +58,12 @@ describe('Hub Menu Tests', () => {
     });
   });
 });
+
+it('documentation tab links to external url', () => {
+    cy.menuPresent('Documentation')
+    .should(
+      'have.attr',
+      'href',
+      'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/1.2/',
+    );
+  });
