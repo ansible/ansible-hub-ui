@@ -104,7 +104,10 @@ export class CollectionHeader extends React.Component<IProps> {
               </FormSelect>
             </div>
             {latestVersion ? (
-              <span className='last-updated'>Last updated <DateComponent date={latestVersion}></DateComponent></span>
+              <span className='last-updated'>
+                Last updated{' '}
+                <DateComponent date={latestVersion}></DateComponent>
+              </span>
             ) : null}
           </div>
         }
