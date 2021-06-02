@@ -15,6 +15,7 @@ import {
 import { CollectionDetailType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
+import { DateComponent } from '../date-component/date-component';
 
 interface IProps {
   collection: CollectionDetailType;
@@ -103,7 +104,7 @@ export class CollectionHeader extends React.Component<IProps> {
               </FormSelect>
             </div>
             {latestVersion ? (
-              <span className='last-updated'>Last updated {latestVersion}</span>
+              <span className='last-updated'>Last updated <DateComponent date={latestVersion}></DateComponent></span>
             ) : null}
           </div>
         }
