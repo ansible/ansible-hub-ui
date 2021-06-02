@@ -190,7 +190,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
   private renderLinks(links: DocsEntry[], title, filterString: string) {
     const isExpanded = !this.state.collapsedCategories.includes(title);
     const filteredLinks = links.filter(
-      link => link.display.indexOf(filterString) > -1,
+      link => link.display.includes(filterString)
     );
     return (
       <NavExpandable
