@@ -67,3 +67,21 @@ it('documentation tab links to external url', () => {
       'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/1.2/',
     );
   });
+
+describe('menu', () => {
+    describe('links', () => {
+        it('has Documentation tab') () => {
+            cy.menuPresent('Documentation')
+            .should(
+                'have.attr',
+                'href',
+                'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/1.2/',
+              );
+        }
+        it('should redirect to ~' () => {
+            const documentTab = cy.get('a.pf-c-nav')
+            documentTab.click()
+            check url
+        })
+    })
+})
