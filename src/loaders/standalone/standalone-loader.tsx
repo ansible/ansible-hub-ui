@@ -344,7 +344,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         url:
           'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
         external: true,
-        id: "documentation-tab",
+        id: 'documentation-tab',
       }),
       menuSection('User Access', {}, [
         menuItem('Users', {
