@@ -58,7 +58,10 @@ export class TableOfContents extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
-    this.state = { collapsedCategories: [], searchBarValue: this.props.params.keywords || '' };
+    this.state = {
+      collapsedCategories: [],
+      searchBarValue: this.props.params.keywords || '',
+    };
   }
 
   render() {
@@ -86,7 +89,10 @@ export class TableOfContents extends React.Component<IProps, IState> {
             <ToolbarItem>
               <TextInput
                 value={this.state.searchBarValue}
-                onChange={val => {this.setState({ searchBarValue: val}); (ParamHelper.setParam(params, 'keywords', val))}}
+                onChange={val => {
+                  this.setState({ searchBarValue: val });
+                  ParamHelper.setParam(params, 'keywords', val);
+                }}
                 aria-label='find-content'
                 placeholder='Find content'
               />
