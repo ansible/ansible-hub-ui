@@ -43,7 +43,7 @@ interface IProps {
   docs_blob: DocsBlobType;
   namespace: string;
   collection: string;
-  params: object;
+  params: {keywords?: string};
   selectedName?: string;
   selectedType?: string;
   className?: string;
