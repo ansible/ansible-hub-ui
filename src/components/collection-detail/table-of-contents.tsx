@@ -43,10 +43,11 @@ interface IProps {
   docs_blob: DocsBlobType;
   namespace: string;
   collection: string;
-  params: {keywords?: string};
+  params: { keywords?: string };
   selectedName?: string;
   selectedType?: string;
   className?: string;
+  updateParams: (p) => void;
 }
 
 export class TableOfContents extends React.Component<IProps, IState> {
@@ -57,11 +58,11 @@ export class TableOfContents extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
-    this.state = { collapsedCategories: [], searchBarValue: '' };
+    this.state = { collapsedCategories: [], searchBarValue: this.props.params.keywords || '' };
   }
 
   render() {
-    const { className, docs_blob } = this.props;
+    const { className, docs_blob, updateParams, params } = this.props;
 
     // There's a lot of heavy processing that goes into formatting the table
     // variable. To prevent running everything each time the component renders,
@@ -85,7 +86,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
             <ToolbarItem>
               <TextInput
                 value={this.state.searchBarValue}
-                onChange={val => this.setState({ searchBarValue: val })}
+                onChange={val => {this.setState({ searchBarValue: val}); (ParamHelper.setParam(params, 'keywords', val))}}
                 aria-label='find-content'
                 placeholder='Find content'
               />
