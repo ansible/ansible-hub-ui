@@ -14,6 +14,7 @@ interface IProps {
   children?: React.ReactNode;
   className?: string;
   contextSelector?: React.ReactNode;
+  versionControl?: React.ReactNode;
 }
 
 export class BaseHeader extends React.Component<IProps, {}> {
@@ -26,6 +27,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
       breadcrumbs,
       className,
       contextSelector,
+      versionControl,
     } = this.props;
     return (
       <div className={cx('background', className)}>
@@ -51,11 +53,11 @@ export class BaseHeader extends React.Component<IProps, {}> {
               <PageHeaderTitle title={title} />
             </div>
           </div>
-
           {pageControls ? (
             <div className='header-right'>{pageControls}</div>
           ) : null}
         </div>
+        {versionControl ? <>{versionControl}</> : null}
 
         {children ? (
           <div className='header-bottom'>{children}</div>

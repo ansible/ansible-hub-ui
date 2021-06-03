@@ -15,11 +15,13 @@ import {
 import { CollectionDetailType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
+import { DateComponent } from '../date-component/date-component';
 
 interface IProps {
   collection: CollectionDetailType;
   params: {
     version?: string;
+    latestVersion?: string;
   };
   updateParams: (params) => void;
   breadcrumbs: {
@@ -66,6 +68,8 @@ export class CollectionHeader extends React.Component<IProps> {
       { key: 'repository', name: 'Repo' },
     ];
 
+    const latestVersion = collection.latest_version.created_at;
+
     return (
       <BaseHeader
         className={className}
@@ -79,23 +83,32 @@ export class CollectionHeader extends React.Component<IProps> {
           />
         }
         breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
-        pageControls={
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <FormSelect
-              onChange={val =>
-                updateParams(ParamHelper.setParam(params, 'version', val))
-              }
-              value={collection.latest_version.version}
-              aria-label='Select collection version'
-            >
-              {all_versions.map(v => (
-                <FormSelectOption
-                  key={v.version}
-                  value={v.version}
-                  label={'v' + v.version}
-                />
-              ))}
-            </FormSelect>
+        versionControl={
+          <div className='install-version-column'>
+            <span>Version</span>
+            <div className='install-version-dropdown'>
+              <FormSelect
+                onChange={val =>
+                  updateParams(ParamHelper.setParam(params, 'version', val))
+                }
+                value={collection.latest_version.version}
+                aria-label='Select collection version'
+              >
+                {all_versions.map(v => (
+                  <FormSelectOption
+                    key={v.version}
+                    value={v.version}
+                    label={'v' + v.version}
+                  />
+                ))}
+              </FormSelect>
+            </div>
+            {latestVersion ? (
+              <span className='last-updated'>
+                Last updated{' '}
+                <DateComponent date={latestVersion}></DateComponent>
+              </span>
+            ) : null}
           </div>
         }
       >
