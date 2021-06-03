@@ -229,7 +229,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           }}
         >
           {item.url && item.external ? (
-            <a href={item.url} target='_blank'>
+            <a href={item.url} data-cy={item['data-cy']} target='_blank'>
               {item.name}
               <ExternalLinkAltIcon
                 style={{ position: 'absolute', right: '32px' }}
@@ -344,7 +344,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         url:
           'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
         external: true,
-        id: 'documentation-tab',
+        'data-cy': 'documentation-tab',
       }),
       menuSection('User Access', {}, [
         menuItem('Users', {
