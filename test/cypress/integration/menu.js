@@ -79,7 +79,7 @@ describe('menu', () => {
               );
         }
         it('should redirect to ~' () => {
-            const documentTab = cy.get('a.pf-c-nav')
+            const documentTab = cy.get('#OUIA-Generated-NavItem-7')
             documentTab.click()
             check url
         })
