@@ -143,7 +143,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
       } else if (rlist.includes(Constants.PUBLISHED)) {
         approvalStatus = 'approved';
       } else {
-        approvalStatus = 'could not be determined';
+        approvalStatus = 'could not be determined yet';
       }
 
       collectionHead = (
