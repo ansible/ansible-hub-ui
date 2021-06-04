@@ -144,11 +144,7 @@ class CollectionDocs extends React.Component<
               selectedName={contentName}
               selectedType={contentType}
               params={params}
-              updateParams={p =>
-                this.updateParams(p, () =>
-                  this.loadCollection(this.context.selectedRepo, true),
-                )
-              }
+              updateParams={p => this.updateParams(p)}
             ></TableOfContents>
             <div className='body docs pf-c-content' ref={this.docsRef}>
               {displayHTML || pluginData ? (

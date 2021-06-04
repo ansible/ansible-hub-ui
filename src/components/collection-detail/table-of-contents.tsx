@@ -36,7 +36,6 @@ class Table {
 
 interface IState {
   collapsedCategories: string[];
-  searchBarValue: string;
 }
 
 interface IProps {
@@ -60,7 +59,6 @@ export class TableOfContents extends React.Component<IProps, IState> {
 
     this.state = {
       collapsedCategories: [],
-      searchBarValue: this.props.params.keywords || '',
     };
   }
 
@@ -88,10 +86,9 @@ export class TableOfContents extends React.Component<IProps, IState> {
           <ToolbarGroup>
             <ToolbarItem>
               <TextInput
-                value={this.state.searchBarValue}
+                value={params.keywords}
                 onChange={val => {
-                  this.setState({ searchBarValue: val });
-                  ParamHelper.setParam(params, 'keywords', val);
+                  updateParams(ParamHelper.setParam(params, 'keywords', val));
                 }}
                 aria-label='find-content'
                 placeholder='Find content'
@@ -104,7 +101,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
             {Object.keys(table).map(key =>
               table[key].length === 0
                 ? null
-                : this.renderLinks(table[key], key, this.state.searchBarValue),
+                : this.renderLinks(table[key], key, this.props.params.keywords),
             )}
           </NavList>
         </Nav>
