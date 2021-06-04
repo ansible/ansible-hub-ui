@@ -37,10 +37,10 @@ export class NamespaceCard extends React.Component<IProps, {}> {
             />
           </CardHeaderMain>
         </CardHeader>
-        <CardTitle className={"wrap"}>{company || name}</CardTitle>
-        <CardBody className={"wrap"}>{name}</CardBody>
+        <CardTitle className={'wrap'}>{company || name}</CardTitle>
+        <CardBody className={'wrap'}>{name}</CardBody>
         {namespaceURL && (
-          <CardFooter className={"wrap"}>
+          <CardFooter className={'wrap'}>
             <Link to={namespaceURL}>View collections</Link>
           </CardFooter>
         )}
@@ -48,5 +48,3 @@ export class NamespaceCard extends React.Component<IProps, {}> {
     );
   }
 }
-
-
