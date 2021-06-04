@@ -40,8 +40,8 @@ export class NamespaceCard extends React.Component<IProps, {}> {
           </CardHeaderMain>
         </CardHeader>
         <Tooltip content={<CardTitle>{company || name}</CardTitle>}>
-        <CardTitle>{this.getDescription(company || name)}</CardTitle>
-          </Tooltip>
+          <CardTitle>{this.getDescription(company || name)}</CardTitle>
+        </Tooltip>
         <CardBody className={'wrap'}>{name}</CardBody>
         {namespaceURL && (
           <CardFooter className={'wrap'}>
