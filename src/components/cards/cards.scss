@@ -1,11 +1,16 @@
 .ns-card-container {
   width: 300px;
-  flex-wrap: wrap;
+  height: 280px;
 
   .title {
     font-weight: bold;
   }
 
+  .wrap {
+    width: 300px;
+    word-break: break-word;
+  }
+  
   .ns-name {
     text-overflow: ellipsis;
     overflow: hidden;
