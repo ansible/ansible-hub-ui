@@ -163,7 +163,18 @@ const allPerms = [{
 },{
     group: 'remotes', permissions: ['Change collection remote', 'View collection remote']
 }, {
-    group: 'execution.environments', permissions: ['Change execution environment namespace permissions', 'Change execution environments', 'Change image tags', 'Pull private execution environments', 'View private execution environments']
+    group: 'containers',
+    permissions: [
+        // Turning off private container permissions since they aren't supported yet
+        // 'Pull private containers', // container.namespace_pull_containerdistribution
+        // 'View private containers', // container.namespace_view_containerdistribution
+
+        'Change container namespace permissions',
+        'Change containers',
+        'Change image tags',
+        'Create new containers',
+        'Push to existing containers',
+    ],
 }];
 
 Cypress.Commands.add('removeAllPermissions', {}, (groupName) => {
