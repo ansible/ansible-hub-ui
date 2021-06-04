@@ -8,11 +8,11 @@ import {
 } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
 import {
-  Button,
-  DropdownItem,
   Alert,
   AlertActionCloseButton,
+  Button,
   ClipboardCopy,
+  DropdownItem,
 } from '@patternfly/react-core';
 
 import * as ReactMarkdown from 'react-markdown';
@@ -27,14 +27,14 @@ import {
 
 import {
   CollectionList,
-  PartnerHeader,
-  StatefulDropdown,
+  CollectionFilter,
+  EmptyStateNoData,
   LoadingPageWithHeader,
   Main,
-  EmptyStateUnauthorized,
-  EmptyStateFilter,
-  EmptyStateNoData,
+  Pagination,
+  PartnerHeader,
   RepoSelector,
+  StatefulDropdown,
 } from 'src/components';
 
 import { ImportModal } from './import-modal/import-modal';
@@ -134,6 +134,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     const noData = itemCount === 0 && !filterIsSet(params, ['keywords']);
 
+    const updateParams = params =>
+      this.updateParams(params, () => this.loadCollections());
+
     return (
       <React.Fragment>
         <ImportModal
@@ -185,6 +188,35 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               pathParams={{ namespace: namespace.name }}
             />
           }
+          filters={
+            tab.toLowerCase() === 'collections' ? (
+              <div className='toolbar-wrapper namespace-detail'>
+                <div className='toolbar'>
+                  <CollectionFilter
+                    ignoredParams={[
+                      'namespace',
+                      'page',
+                      'page_size',
+                      'sort',
+                      'tab',
+                      'view_type',
+                    ]}
+                    params={params}
+                    updateParams={updateParams}
+                  />
+
+                  <div className='pagination-container'>
+                    <Pagination
+                      params={params}
+                      updateParams={updateParams}
+                      count={itemCount}
+                      isTop
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : null
+          }
         ></PartnerHeader>
         <Main>
           {tab.toLowerCase() === 'collections' ? (
@@ -205,9 +237,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             ) : (
               <Section className='body'>
                 <CollectionList
-                  updateParams={params =>
-                    this.updateParams(params, () => this.loadCollections())
-                  }
+                  updateParams={updateParams}
                   params={params}
                   collections={collections}
                   itemCount={itemCount}

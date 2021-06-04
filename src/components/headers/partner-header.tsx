@@ -18,6 +18,7 @@ interface IProps {
 
   pageControls?: React.ReactNode;
   contextSelector?: React.ReactNode;
+  filters?: React.ReactNode;
 }
 
 export class PartnerHeader extends React.Component<IProps, {}> {
@@ -25,6 +26,7 @@ export class PartnerHeader extends React.Component<IProps, {}> {
     const {
       breadcrumbs,
       contextSelector,
+      filters,
       namespace,
       pageControls,
       params,
@@ -38,6 +40,7 @@ export class PartnerHeader extends React.Component<IProps, {}> {
         breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
         pageControls={pageControls}
         contextSelector={contextSelector}
+        className='header'
       >
         {namespace.description ? <div>{namespace.description}</div> : null}
 
@@ -66,6 +69,8 @@ export class PartnerHeader extends React.Component<IProps, {}> {
             </div>
           ) : null}
         </div>
+
+        {filters || null}
       </BaseHeader>
     );
   }

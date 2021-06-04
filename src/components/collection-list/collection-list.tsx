@@ -6,7 +6,6 @@ import { Button, DropdownItem, DataList } from '@patternfly/react-core';
 import { CollectionListType } from 'src/api';
 import {
   CollectionListItem,
-  Toolbar,
   Pagination,
   StatefulDropdown,
   EmptyStateFilter,
@@ -42,23 +41,6 @@ export class CollectionList extends React.Component<IProps> {
 
     return (
       <React.Fragment>
-        <div className='controls top'>
-          <Toolbar
-            searchPlaceholder='Find collection by name'
-            updateParams={updateParams}
-            params={params}
-          />
-
-          <div>
-            <Pagination
-              params={params}
-              updateParams={p => updateParams(p)}
-              count={itemCount}
-              isTop
-            />
-          </div>
-        </div>
-
         <DataList aria-label={'List of Collections'}>
           {collections.length > 0 ? (
             collections.map(c => (
