@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './collection-filter.scss';
 import {
   Toolbar,
   ToolbarContent,
