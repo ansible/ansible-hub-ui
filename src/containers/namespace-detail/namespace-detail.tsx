@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './namespace-detail.scss';
 
 import {
   withRouter,
