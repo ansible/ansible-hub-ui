@@ -12,6 +12,7 @@ export { CollectionCard } from './cards/collection-card';
 export { CollectionContentList } from './collection-detail/collection-content-list';
 export { CollectionHeader } from './headers/collection-header';
 export { CollectionInfo } from './collection-detail/collection-info';
+export { CollectionFilter } from './collection-list/collection-filter';
 export { CollectionList } from './collection-list/collection-list';
 export { CollectionListItem } from './collection-list/collection-list-item';
 export { CompoundFilter } from './patternfly-wrappers/compound-filter';
