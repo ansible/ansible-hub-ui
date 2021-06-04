@@ -29,16 +29,7 @@ interface IProps {
   repo?: string;
 }
 
-interface IState {
-  kwField: string;
-}
-
-export class CollectionList extends React.Component<IProps, IState> {
-  constructor(props) {
-    super(props);
-    this.state = { kwField: props.params['keywords'] || '' };
-  }
-
+export class CollectionList extends React.Component<IProps> {
   render() {
     const {
       collections,
@@ -97,14 +88,6 @@ export class CollectionList extends React.Component<IProps, IState> {
         </div>
       </React.Fragment>
     );
-  }
-
-  private handleEnter(e) {
-    if (e.key === 'Enter') {
-      this.props.updateParams(
-        ParamHelper.setParam(this.props.params, 'keywords', this.state.kwField),
-      );
-    }
   }
 
   private renderCollectionControls(collection: CollectionListType) {
