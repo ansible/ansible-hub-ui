@@ -167,4 +167,18 @@ export class Constants {
   };
 
   static ALLOWEDREPOS = ['community', 'published', 'rh-certified'];
+
+  static COLLECTION_FILTER_TAGS = [
+    'application',
+    'cloud',
+    'database',
+    'infrastructure',
+    'linux',
+    'monitoring',
+    'networking',
+    'security',
+    'storage',
+    'tools',
+    'windows',
+  ];
 }

@@ -7,6 +7,7 @@ import {
 } from '@patternfly/react-core';
 
 import { AppliedFilters, CompoundFilter } from 'src/components';
+import { Constants } from 'src/constants';
 
 interface IProps {
   ignoredParams: string[];
@@ -18,20 +19,6 @@ export class CollectionFilter extends React.Component<IProps> {
   render() {
     const { ignoredParams, params, updateParams } = this.props;
 
-    const tags = [
-      'cloud',
-      'linux',
-      'networking',
-      'storage',
-      'security',
-      'windows',
-      'infrastructure',
-      'monitoring',
-      'tools',
-      'database',
-      'application',
-    ];
-
     const filterConfig = [
       {
         id: 'keywords',
@@ -41,7 +28,7 @@ export class CollectionFilter extends React.Component<IProps> {
         id: 'tags',
         title: 'Tag',
         inputType: 'multiple' as 'multiple',
-        options: tags.map(tag => ({
+        options: Constants.COLLECTION_FILTER_TAGS.map(tag => ({
           id: tag,
           title: tag,
         })),
