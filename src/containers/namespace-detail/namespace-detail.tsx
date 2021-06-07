@@ -138,6 +138,15 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     const updateParams = params =>
       this.updateParams(params, () => this.loadCollections());
 
+    const ignoredParams = [
+      'namespace',
+      'page',
+      'page_size',
+      'sort',
+      'tab',
+      'view_type',
+    ];
+
     return (
       <React.Fragment>
         <ImportModal
@@ -194,14 +203,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               <div className='toolbar-wrapper namespace-detail'>
                 <div className='toolbar'>
                   <CollectionFilter
-                    ignoredParams={[
-                      'namespace',
-                      'page',
-                      'page_size',
-                      'sort',
-                      'tab',
-                      'view_type',
-                    ]}
+                    ignoredParams={ignoredParams}
                     params={params}
                     updateParams={updateParams}
                   />
@@ -240,6 +242,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 <CollectionList
                   updateParams={updateParams}
                   params={params}
+                  ignoredParams={ignoredParams}
                   collections={collections}
                   itemCount={itemCount}
                   showControls={this.state.showControls}

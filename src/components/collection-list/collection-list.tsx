@@ -21,6 +21,7 @@ interface IProps {
   };
   updateParams: (params) => void;
   itemCount: number;
+  ignoredParams: string[];
 
   showNamespace?: boolean;
   showControls?: boolean;
@@ -28,12 +29,14 @@ interface IProps {
   repo?: string;
 }
 
+// only used in namespace detail, collections uses individual items
 export class CollectionList extends React.Component<IProps> {
   render() {
     const {
       collections,
       params,
       updateParams,
+      ignoredParams,
       itemCount,
       showControls,
       repo,
@@ -54,7 +57,15 @@ export class CollectionList extends React.Component<IProps> {
               />
             ))
           ) : (
-            <EmptyStateFilter />
+            <EmptyStateFilter
+              clearAllFilters={() => {
+                ParamHelper.clearAllFilters({
+                  params,
+                  ignoredParams,
+                  updateParams,
+                });
+              }}
+            />
           )}
         </DataList>
 
