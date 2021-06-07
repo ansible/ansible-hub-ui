@@ -56,27 +56,16 @@ describe('Hub Menu Tests', () => {
       visibleMenuItems.forEach(item => cy.menuPresent(item));
       missingMenuItems.forEach(item => cy.menuMissing(item));
     });
-  });
-});
 
-describe('menu', () => {
-  describe('links', () => {
     it('has Documentation tab', () => {
+      cy.login(username, password);
       cy.menuPresent('Documentation').should(
         'have.attr',
         'href',
-        'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/1.2/',
+        'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
       );
-    });
-    it('should redirect to ~', () => {
-      const documentTab = cy.get('[data-cy=documentation-tab]');
-      documentTab.click();
-      documentTab
-        .url()
-        .should(
-          'eq',
-          'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/1.2/',
-        );
     });
   });
 });
+
+
