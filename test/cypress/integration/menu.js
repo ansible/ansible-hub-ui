@@ -69,8 +69,7 @@ describe('menu', () => {
       );
     });
     it('should redirect to ~', () => {
-      const documentTab = cy.get('#OUIA-Generated-NavItem-7')
-      // const documentTab = cy.get('[data-cy=documentation-tab]');
+      const documentTab = cy.get('[data-cy=documentation-tab]');
       documentTab.click();
       documentTab
         .url()
