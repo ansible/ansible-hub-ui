@@ -152,7 +152,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
         ) : (
           <React.Fragment>
             <Section className='collection-container'>
-              {this.renderCollections(collections, params)}
+              {this.renderCollections(collections, params, updateParams)}
             </Section>
             <Section className='footer'>
               <Pagination
@@ -170,12 +170,22 @@ class Search extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderCollections(collections, params) {
+  private renderCollections(collections, params, updateParams) {
     if (this.state.loading) {
       return <LoadingPageSpinner></LoadingPageSpinner>;
     }
     if (collections.length === 0) {
-      return <EmptyStateFilter />;
+      return (
+        <EmptyStateFilter
+          clearAllFilters={() => {
+            ParamHelper.clearAllFilters({
+              params,
+              ignoredParams: ['page', 'page_size', 'sort', 'view_type'],
+              updateParams,
+            });
+          }}
+        />
+      );
     }
     if (params.view_type === 'list') {
       return this.renderList(collections);
