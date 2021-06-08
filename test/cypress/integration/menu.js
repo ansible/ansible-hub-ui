@@ -51,6 +51,12 @@ describe('Hub Menu Tests', () => {
       cy.logout();
     });
 
+    it('creates new namespace', () => {
+      cy.login(adminUsername, adminPassword);
+      const createNamespaceButton = cy.get('[data-cy=create-namespace]')
+      createNamespaceButton.click()
+    })
+
     describe('user without permissions', () => {
         let username = 'nopermission';
         let password = 'n0permissi0n';
@@ -85,11 +91,6 @@ describe('Hub Menu Tests', () => {
             missingMenuItems.forEach(item => cy.menuMissing(item));
         });
 
-        it('creates new namespace', () => {
-          cy.login(username, password);
-          const createNamespaceButton = cy.get('[data-cy=create-namespace]')
-          createNamespaceButton.click()
-        })
     });
 
     it('has Documentation tab', () => {
