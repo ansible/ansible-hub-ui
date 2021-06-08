@@ -24,7 +24,6 @@ The settings can be changed by setting these environment variables.
     CYPRESS_USERNAME = "admin"
     CYPRESS_PASSWORD = "admin"
 
-
 ## Setup the Tests Natively
 
 ### Install test dependencies
