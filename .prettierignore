@@ -1,3 +1,8 @@
 src/index.html
 *.json
 .*.sw[po]
+*.xml
+*.sh
+Dockerfile
+.DS_Store
+*.md
