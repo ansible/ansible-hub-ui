@@ -87,6 +87,8 @@ describe('Hub Menu Tests', () => {
 
         it('creates new namespace', () => {
           cy.login(username, password);
+          const createNamespaceButton = cy.get('[data-cy=create-namespace]')
+          createNamespaceButton.click()
         })
     });
 

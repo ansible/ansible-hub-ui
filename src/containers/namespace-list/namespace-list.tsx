@@ -214,7 +214,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       : 'This account is not set up to manage any namespaces';
 
     const noDataButton = user?.model_permissions?.add_namespace ? (
-      <Button variant='primary' onClick={() => this.handleModalToggle()}>
+      <Button variant='primary' data-cy='create-namespace' onClick={() => this.handleModalToggle()}>
         Create
       </Button>
     ) : null;
