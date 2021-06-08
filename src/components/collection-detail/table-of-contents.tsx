@@ -87,7 +87,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
           <ToolbarGroup>
             <ToolbarItem>
               <TextInput
-              ref={this.props.searchBarRef}
+                ref={this.props.searchBarRef}
                 value={params.keywords}
                 onChange={val => {
                   updateParams(ParamHelper.setParam(params, 'keywords', val));
