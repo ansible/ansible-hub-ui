@@ -4,9 +4,9 @@ on:
   # allow running manually
   workflow_dispatch:
   pull_request:
-    branches: [ 'master', 'stable-*' ]
+    branches: [ 'master', 'stable-4.2', 'stable-4.3' ]
   push:
-    branches: [ 'master', 'stable-*' ]
+    branches: [ 'master', 'stable-4.2', 'stable-4.3' ]
   # daily on master
   schedule:
     - cron:  '30 5 * * *'
@@ -126,6 +126,7 @@ jobs:
         rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
         mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
         podman exec pulp bash -c "s6-svc -r /var/run/s6/services/pulpcore-api" # apply changes, api also serves static assets
+        git log -2 --oneline
 
     - name: "Finish up and run cypress"
       working-directory: 'ansible-hub-ui/test'
