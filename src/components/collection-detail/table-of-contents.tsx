@@ -47,6 +47,7 @@ interface IProps {
   selectedType?: string;
   className?: string;
   updateParams: (p) => void;
+  searchBarRef?: React.Ref<HTMLInputElement>;
 }
 
 export class TableOfContents extends React.Component<IProps, IState> {
@@ -86,6 +87,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
           <ToolbarGroup>
             <ToolbarItem>
               <TextInput
+              ref={this.props.searchBarRef}
                 value={params.keywords}
                 onChange={val => {
                   updateParams(ParamHelper.setParam(params, 'keywords', val));
