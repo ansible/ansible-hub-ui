@@ -53,10 +53,12 @@ describe('Hub Menu Tests', () => {
 
     it('creates new namespace', () => {
       cy.login(adminUsername, adminPassword);
-      cy.on('uncaught:exception', (err, runnable) => {
-        return false
-    })
-      const createNamespaceButton = cy.get('.create-namespace')
+    //   cy.on('uncaught:exception', (err, runnable) => {
+    //     return false
+    // })
+    const collectionTab = cy.get('[data-cy=collections]')
+    collectionTab.click()
+      const createNamespaceButton = cy.get('[data-cy=create-namespace]')
       createNamespaceButton.click()
     })
 

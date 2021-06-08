@@ -321,6 +321,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           url: formatPath(Paths.searchByRepo, {
             repo: this.state.selectedRepo,
           }),
+          'data-cy':'collections',
         }),
         menuItem('Namespaces', {
           url: Paths[NAMESPACE_TERM],
