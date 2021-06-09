@@ -1,4 +1,4 @@
-name: Cypress
+name: "Cypress on stable-4.2"
 
 on:
   # allow running manually
