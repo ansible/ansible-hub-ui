@@ -46,7 +46,8 @@ export class BaseHeader extends React.Component<IProps, {}> {
                 className='image'
                 alt='Page logo'
                 image={imageURL}
-                size='50px'
+                size='40px'
+                unlockWidth={true}
               />
             ) : null}
             <div>
