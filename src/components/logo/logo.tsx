@@ -1,3 +1,4 @@
+import { cellWidth } from '@patternfly/react-table';
 import * as React from 'react';
 // had to declare *.svg in src/index.d.ts
 import DefaultLogo from 'src/../static/images/default-logo.svg';
@@ -5,6 +6,7 @@ import DefaultLogo from 'src/../static/images/default-logo.svg';
 interface IProps {
   // size should be css length measurment: '100px'
   size: string;
+  width?: string;
   image: string;
   alt: string;
   className?: string;
@@ -13,13 +15,14 @@ interface IProps {
 
 export class Logo extends React.Component<IProps> {
   render() {
-    const { size, image, alt, className, unlockWidth } = this.props;
+    const { size, image, alt, className, unlockWidth, width } = this.props;
 
     const style = {
       height: size,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      width: width,
     };
 
     if (unlockWidth) {

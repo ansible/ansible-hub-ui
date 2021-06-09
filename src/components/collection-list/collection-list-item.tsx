@@ -56,6 +56,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
             image={namespace.avatar_url}
             size='40px'
             unlockWidth={true}
+            width='97px'
           />
         </DataListCell>,
       );
