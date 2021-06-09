@@ -14,6 +14,6 @@ export class HubAPI extends BaseAPI {
   // Use this function to get paths in the _ui API. That will ensure the API version
   // gets updated when it changes
   getUIPath(url: string) {
-    return `_ui/${this.UI_API_VERSION}/${url}`;
+    return `typo/_ui/${this.UI_API_VERSION}/${url}`;
   }
 }

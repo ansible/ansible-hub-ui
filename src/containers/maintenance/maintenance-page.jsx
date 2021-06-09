@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Main } from '../../components';
 
 import {
@@ -11,7 +10,11 @@ import {
 } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 
-class MaintenancePage extends React.Component<RouteComponentProps, {}> {
+class MaintenancePage extends React.Component {
+  componentDidMount() {
+    insights.chrome.init();
+    insights.chrome.identifyApp('automation-hub');
+  }
   render() {
     return (
       <React.Fragment>
@@ -38,4 +41,4 @@ class MaintenancePage extends React.Component<RouteComponentProps, {}> {
   }
 }
 
-export default withRouter(MaintenancePage);
+export default MaintenancePage;
