@@ -9,7 +9,7 @@ export class EmptyStateFilter extends React.Component<IProps> {
       <EmptyStateCustom
         title={'No results found'}
         description={
-          'No results match the filter criteria. Remove all filters or clear all filters to show results.'
+          'No results match the filter criteria. Try changing your filter settings.'
         }
         icon={SearchIcon}
       />
