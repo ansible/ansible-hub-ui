@@ -5,21 +5,8 @@
   display: flex;
   flex-direction: column;
 
-  .toolbar-wrapper {
-    .toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .pagination-container {
-        display: flex;
-        align-items: center;
-
-        .card-list-switcher {
-          margin-right: 24px;
-        }
-      }
-    }
+  .toolbar-wrapper .toolbar .pagination-container .card-list-switcher {
+    margin-right: 24px;
   }
 
   .header {
@@ -67,6 +54,10 @@
     .empty {
       flex-grow: 1;
     }
+  }
+
+  .pf-c-toolbar__content {
+    padding-left: 0px;
   }
 
   .footer {

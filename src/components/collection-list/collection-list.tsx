@@ -6,7 +6,6 @@ import { Button, DropdownItem, DataList } from '@patternfly/react-core';
 import { CollectionListType } from 'src/api';
 import {
   CollectionListItem,
-  Toolbar,
   Pagination,
   StatefulDropdown,
   EmptyStateFilter,
@@ -22,6 +21,7 @@ interface IProps {
   };
   updateParams: (params) => void;
   itemCount: number;
+  ignoredParams: string[];
 
   showNamespace?: boolean;
   showControls?: boolean;
@@ -29,21 +29,14 @@ interface IProps {
   repo?: string;
 }
 
-interface IState {
-  kwField: string;
-}
-
-export class CollectionList extends React.Component<IProps, IState> {
-  constructor(props) {
-    super(props);
-    this.state = { kwField: props.params['keywords'] || '' };
-  }
-
+// only used in namespace detail, collections uses individual items
+export class CollectionList extends React.Component<IProps> {
   render() {
     const {
       collections,
       params,
       updateParams,
+      ignoredParams,
       itemCount,
       showControls,
       repo,
@@ -51,23 +44,6 @@ export class CollectionList extends React.Component<IProps, IState> {
 
     return (
       <React.Fragment>
-        <div className='controls top'>
-          <Toolbar
-            searchPlaceholder='Find collection by name'
-            updateParams={updateParams}
-            params={params}
-          />
-
-          <div>
-            <Pagination
-              params={params}
-              updateParams={p => updateParams(p)}
-              count={itemCount}
-              isTop
-            />
-          </div>
-        </div>
-
         <DataList aria-label={'List of Collections'}>
           {collections.length > 0 ? (
             collections.map(c => (
@@ -81,7 +57,15 @@ export class CollectionList extends React.Component<IProps, IState> {
               />
             ))
           ) : (
-            <EmptyStateFilter />
+            <EmptyStateFilter
+              clearAllFilters={() => {
+                ParamHelper.clearAllFilters({
+                  params,
+                  ignoredParams,
+                  updateParams,
+                });
+              }}
+            />
           )}
         </DataList>
 
@@ -97,14 +81,6 @@ export class CollectionList extends React.Component<IProps, IState> {
         </div>
       </React.Fragment>
     );
-  }
-
-  private handleEnter(e) {
-    if (e.key === 'Enter') {
-      this.props.updateParams(
-        ParamHelper.setParam(this.props.params, 'keywords', this.state.kwField),
-      );
-    }
   }
 
   private renderCollectionControls(collection: CollectionListType) {

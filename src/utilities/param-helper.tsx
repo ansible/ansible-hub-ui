@@ -134,4 +134,17 @@ export class ParamHelper {
       });
     };
   }
+
+  // removes any params not in ignoredParams from params and calls updateParams with it
+  static clearAllFilters({ params, ignoredParams, updateParams }) {
+    const deleteKeys = Object.keys(
+      ParamHelper.getReduced(params, ignoredParams),
+    );
+
+    for (const key of deleteKeys) {
+      params = ParamHelper.deleteParam(params, key);
+    }
+
+    updateParams(params);
+  }
 }

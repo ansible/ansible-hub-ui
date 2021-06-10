@@ -78,15 +78,7 @@ export class AppliedFilters extends React.Component<IProps, {}> {
   }
 
   private clearAllFilters = () => {
-    let params = this.props.params;
-    const deleteKeys = Object.keys(
-      ParamHelper.getReduced(params, this.props.ignoredParams),
-    );
-
-    for (const key of deleteKeys) {
-      params = ParamHelper.deleteParam(params, key);
-    }
-
-    this.props.updateParams(params);
+    const { params, ignoredParams, updateParams } = this.props;
+    ParamHelper.clearAllFilters({ params, ignoredParams, updateParams });
   };
 }

@@ -3,26 +3,18 @@ import './search.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Section } from '@redhat-cloud-services/frontend-components';
-import {
-  DataList,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-  ToolbarContent,
-  Switch,
-} from '@patternfly/react-core';
+import { DataList, Switch } from '@patternfly/react-core';
 
 import {
   BaseHeader,
-  CollectionCard,
   CardListSwitcher,
+  CollectionCard,
+  CollectionFilter,
   CollectionListItem,
-  CompoundFilter,
-  Pagination,
-  LoadingPageSpinner,
-  AppliedFilters,
   EmptyStateFilter,
   EmptyStateNoData,
+  LoadingPageSpinner,
+  Pagination,
   RepoSelector,
 } from 'src/components';
 import {
@@ -95,19 +87,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
     const noData =
       collections.length === 0 && !filterIsSet(params, ['keywords', 'tags']);
 
-    const tags = [
-      'cloud',
-      'linux',
-      'networking',
-      'storage',
-      'security',
-      'windows',
-      'infrastructure',
-      'monitoring',
-      'tools',
-      'database',
-      'application',
-    ];
+    const updateParams = p =>
+      this.updateParams(p, () => this.queryCollections());
 
     return (
       <div className='search-page'>
@@ -124,52 +105,11 @@ class Search extends React.Component<RouteComponentProps, IState> {
           {!noData && (
             <div className='toolbar-wrapper'>
               <div className='toolbar'>
-                <Toolbar>
-                  <ToolbarContent>
-                    <ToolbarGroup>
-                      <ToolbarItem>
-                        <CompoundFilter
-                          updateParams={p =>
-                            this.updateParams(p, () => this.queryCollections())
-                          }
-                          params={params}
-                          filterConfig={[
-                            {
-                              id: 'keywords',
-                              title: 'Keywords',
-                            },
-                            {
-                              id: 'tags',
-                              title: 'Tag',
-                              inputType: 'multiple',
-                              options: tags.map(tag => ({
-                                id: tag,
-                                title: tag,
-                              })),
-                            },
-                          ]}
-                        />
-                        <ToolbarItem>
-                          <AppliedFilters
-                            style={{ marginTop: '16px' }}
-                            updateParams={p =>
-                              this.updateParams(p, () =>
-                                this.queryCollections(),
-                              )
-                            }
-                            params={params}
-                            ignoredParams={[
-                              'page_size',
-                              'page',
-                              'sort',
-                              'view_type',
-                            ]}
-                          />
-                        </ToolbarItem>
-                      </ToolbarItem>
-                    </ToolbarGroup>
-                  </ToolbarContent>
-                </Toolbar>
+                <CollectionFilter
+                  ignoredParams={['page', 'page_size', 'sort', 'view_type']}
+                  params={params}
+                  updateParams={updateParams}
+                />
 
                 <div className='pagination-container'>
                   <div className='card-list-switcher'>
@@ -194,9 +134,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
                   <Pagination
                     params={params}
-                    updateParams={p =>
-                      this.updateParams(p, () => this.queryCollections())
-                    }
+                    updateParams={updateParams}
                     count={numberOfResults}
                     perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
                     isTop
@@ -214,7 +152,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
         ) : (
           <React.Fragment>
             <Section className='collection-container'>
-              {this.renderCollections(collections, params)}
+              {this.renderCollections(collections, params, updateParams)}
             </Section>
             <Section className='footer'>
               <Pagination
@@ -232,12 +170,22 @@ class Search extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderCollections(collections, params) {
+  private renderCollections(collections, params, updateParams) {
     if (this.state.loading) {
       return <LoadingPageSpinner></LoadingPageSpinner>;
     }
     if (collections.length === 0) {
-      return <EmptyStateFilter />;
+      return (
+        <EmptyStateFilter
+          clearAllFilters={() => {
+            ParamHelper.clearAllFilters({
+              params,
+              ignoredParams: ['page', 'page_size', 'sort', 'view_type'],
+              updateParams,
+            });
+          }}
+        />
+      );
     }
     if (params.view_type === 'list') {
       return this.renderList(collections);
