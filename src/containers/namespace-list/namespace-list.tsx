@@ -26,6 +26,7 @@ import { filterIsSet } from 'src/utilities';
 
 interface IState {
   namespaces: NamespaceListType[];
+  myNamespaces: Set<string>;
   itemCount: number;
   params: {
     name?: string;
@@ -65,6 +66,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     this.state = {
       namespaces: undefined,
+      myNamespaces: new Set([]),
       itemCount: 0,
       params: params,
       hasPermission: true,
@@ -204,7 +206,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   private renderBody() {
-    const { namespaces, loading } = this.state;
+    const { namespaces, myNamespaces, loading } = this.state;
     const { namespacePath, filterOwner } = this.props;
     const { user } = this.context;
 
@@ -253,6 +255,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                 repo: this.context.selectedRepo,
               })}
               key={i}
+              editable={myNamespaces.has(ns.name)}
               {...ns}
             ></NamespaceCard>
           </div>
@@ -262,17 +265,19 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   private loadNamespaces() {
-    let apiFunc: any;
+    const { params } = this.state;
 
-    if (this.props.filterOwner) {
-      apiFunc = p => MyNamespaceAPI.list(p);
-    } else {
-      apiFunc = p => NamespaceAPI.list(p);
-    }
     this.setState({ loading: true }, () => {
-      apiFunc(this.state.params).then(results => {
+      Promise.all([
+        NamespaceAPI.list(params),
+        MyNamespaceAPI.list(params).catch(e => console.log({ e })),
+      ]).then(([namespaces, myNamespaces]) => {
+        const myNames = (myNamespaces?.data?.data || []).map(n => n.name);
+        const results = this.props.filterOwner ? myNamespaces : namespaces;
+
         this.setState({
           namespaces: results.data.data,
+          myNamespaces: new Set(myNames),
           itemCount: results.data.meta.count,
           loading: false,
         });

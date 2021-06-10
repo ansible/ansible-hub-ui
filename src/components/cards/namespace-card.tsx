@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardHeaderMain,
   CardTitle,
+  Label,
 } from '@patternfly/react-core';
 
 import { Link } from 'react-router-dom';
@@ -20,11 +21,16 @@ interface IProps {
   name: string;
   company: string;
   namespaceURL?: string;
+  editable?: boolean;
 }
 
 export class NamespaceCard extends React.Component<IProps, {}> {
   render() {
-    const { avatar_url, name, company, namespaceURL } = this.props;
+    const { avatar_url, name, company, namespaceURL, editable } = this.props;
+
+    const heading = company || name;
+    const body = name;
+
     return (
       <Card className='ns-card-container'>
         <CardHeader>
@@ -37,13 +43,16 @@ export class NamespaceCard extends React.Component<IProps, {}> {
             />
           </CardHeaderMain>
         </CardHeader>
-        <CardTitle>{company || name}</CardTitle>
-        <CardBody>{name}</CardBody>
-        {namespaceURL && (
-          <CardFooter>
-            <Link to={namespaceURL}>View collections</Link>
-          </CardFooter>
-        )}
+        <CardTitle>
+          {namespaceURL ? <Link to={namespaceURL}>{heading}</Link> : heading}
+        </CardTitle>
+        <CardBody>{body}</CardBody>
+        <CardFooter>
+          {editable && <Label>My namespace</Label>}
+          {editable || (
+            <span style={{ display: 'inline-block', height: '22px' }}></span>
+          ) /* constant footer height */}
+        </CardFooter>
       </Card>
     );
   }
