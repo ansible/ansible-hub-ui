@@ -18,6 +18,8 @@ jobs:
       TRAVIS_EVENT_TYPE: "push"
       TRAVIS_PULL_REQUEST: "false"
       TRAVIS_TAG: ""
+      encrypted__iv: ${{ secrets.encrypted__iv }}
+      encrypted__key: ${{ secrets.encrypted__key }}
 
     steps:
 
