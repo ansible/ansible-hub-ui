@@ -1,0 +1,52 @@
+name: "Stable release"
+
+on:
+  push:
+    tags:
+    - '[0-9]+.[0-9]+.**'
+    - '!dev'
+    - '!**cloud**'
+
+jobs:
+  stable:
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: "--max-old-space-size=4096 --max_old_space_size=4096"
+
+    steps:
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v2
+
+    - name: "Set TRAVIS_COMMIT_MESSAGE"
+      run: |
+        TRAVIS_COMMIT_MESSAGE=`git log -1 --format=%B`
+        echo -e "TRAVIS_COMMIT_MESSAGE<<EOF\n${TRAVIS_COMMIT_MESSAGE}\nEOF" >> $GITHUB_ENV
+
+    - name: "Install node 14"
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: "Cache ~/.npm"
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ env.GITHUB_REF }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-${{ env.GITHUB_REF }}-
+          ${{ runner.os }}-node-
+
+    - name: "Build a tarball"
+      run: |
+        npm ci
+        npm run build-standalone
+        tar -C dist/ -czvf automation-hub-ui-dist.tar.gz .
+
+    - name: "Release"
+      uses: softprops/action-gh-release@v1
+      with:
+        files: "automation-hub-ui-dist.tar.gz"
+        body: ${{ env.TRAVIS_COMMIT_MESSAGE }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
