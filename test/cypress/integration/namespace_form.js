@@ -14,8 +14,8 @@ describe('creating a new namespace', () => {
     });
     const collectionTab = cy.menuPresent('Namespaces');
     collectionTab.click({ force: true });
-    const createNamespaceButton = cy.get('[data-cy=create-namespace]');
-    createNamespaceButton.click();
+    const createButton = cy.get('[data-cy=create-namespace]');
+    createButton.click();
     cy.get('#pf-modal-part-2 #newNamespaceName').type('my3newnamespace24');
     const message = cy.get('.pf-c-form__helper-text');
     message.should('have.text', 'Please, provide the namespace name');
@@ -37,8 +37,8 @@ describe('creating a new namespace', () => {
     });
     const collectionTab = cy.menuPresent('Namespaces');
     collectionTab.click({ force: true });
-    const createNamespaceButton = cy.get('[data-cy=create-namespace]');
-    createNamespaceButton.click();
+    const createButton = cy.get('[data-cy=create-namespace]');
+    createButton.click();
     const create = cy.get('[data-cy=create]');
     create.should('be.disabled');
     // before typing anything
