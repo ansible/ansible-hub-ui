@@ -103,7 +103,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
             {Object.keys(table).map(key =>
               table[key].length === 0
                 ? null
-                : this.renderLinks(table[key], key, this.props.params.keywords),
+                : this.renderLinks(table[key], key, this.props.params.keywords || ''),
             )}
           </NavList>
         </Nav>
@@ -196,8 +196,10 @@ export class TableOfContents extends React.Component<IProps, IState> {
   private renderLinks(links: DocsEntry[], title, filterString: string) {
     const isExpanded = !this.state.collapsedCategories.includes(title);
     const filteredLinks = links.filter(link =>
-      link.display.includes(filterString),
+      link.display.toLowerCase().includes(filterString.toLowerCase()),
     );
+    console.log('filterstring: ', filterString);
+    console.log(links);
     return (
       <NavExpandable
         key={title}
