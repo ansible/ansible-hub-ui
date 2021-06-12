@@ -103,7 +103,11 @@ export class TableOfContents extends React.Component<IProps, IState> {
             {Object.keys(table).map(key =>
               table[key].length === 0
                 ? null
-                : this.renderLinks(table[key], key, this.props.params.keywords || ''),
+                : this.renderLinks(
+                    table[key],
+                    key,
+                    this.props.params.keywords || '',
+                  ),
             )}
           </NavList>
         </Nav>
