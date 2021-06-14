@@ -1,0 +1,34 @@
+name: "Generate package manifest"
+
+on:
+  workflow_dispatch: # allow running manually
+  push:
+    branches: [ 'master', 'stable-prod' ]
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    env:
+      MANIFESTS_GIT_EMAIL: ansible-hub-ui+manifests@example.com
+      MANIFESTS_GIT_USER: rh-galaxy-droid
+      NODE_OPTIONS: "--max-old-space-size=4096 --max_old_space_size=4096"
+      RH_GALAXY_DROID_GITHUB_TOKEN: ${{ secrets.RH_GALAXY_DROID_GITHUB_TOKEN }}
+      TRAVIS_PULL_REQUEST: "false"
+
+    steps:
+
+    - name: "Set TRAVIS_BRANCH"
+      run: |
+        TRAVIS_BRANCH=`sed 's/^refs\/heads\///' <<< $GITHUB_REF`
+        echo "TRAVIS_BRANCH=${TRAVIS_BRANCH}" >> $GITHUB_ENV
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v2
+
+    - name: "Install node 14"
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: "Run update_manifest.sh"
+      run: .travis/update_manifest.sh

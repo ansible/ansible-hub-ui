@@ -32,7 +32,7 @@ fi
 if [[ "${TRAVIS_BRANCH}" == 'master' ]]; then
     manifests_branch='master'
 elif [[ "${TRAVIS_BRANCH}" == 'stable-prod' ]]; then
-    manifests_branch='stable'
+    manifests_branch='stable' # FIXME: no such branch
 else
     log_message "Ignoring manifest update for branch '${TRAVIS_BRANCH}'."
     exit 0

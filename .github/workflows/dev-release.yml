@@ -1,0 +1,58 @@
+# Updates the "dev" github release whenever new changes are merged into master.
+# This provides an up to date tarball that https://github.com/ansible/galaxy_ng can use.
+name: "Dev release"
+
+on:
+  workflow_dispatch: # allow running manually
+  push:
+    branches: [ 'master' ]
+
+jobs:
+  dev:
+    runs-on: ubuntu-latest
+    env:
+      BRANCH: 'master' # for webpack
+      NODE_OPTIONS: "--max-old-space-size=4096 --max_old_space_size=4096"
+      RH_GALAXY_DROID_GITHUB_TOKEN: ${{ secrets.RH_GALAXY_DROID_GITHUB_TOKEN }}
+
+    steps:
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v2
+
+    - name: "Install node 14"
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: "Update the dev tag"
+      run: |
+        git config --local user.name "rh-galaxy-droid"
+        git config --local user.email "ansible-hub-ui+dev@example.com"
+        git tag -f dev
+        git push -fq https://rh-galaxy-droid:$RH_GALAXY_DROID_GITHUB_TOKEN@github.com/ansible/ansible-hub-ui --tags
+
+    - name: "Cache ~/.npm"
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ env.GITHUB_REF }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-${{ env.GITHUB_REF }}-
+          ${{ runner.os }}-node-
+
+    - name: "Build a tarball"
+      run: |
+        npm ci
+        npm run build-standalone
+        tar -C dist/ -czvf automation-hub-ui-dist.tar.gz .
+
+    - name: "Release"
+      uses: softprops/action-gh-release@v1
+      with:
+        body: "This is a special release that provides an up to date build off of the latest changes in the master branch. The automation-hub-ui-dist.tar.gz artifact provided here corresponds to the latest version of master."
+        files: "automation-hub-ui-dist.tar.gz"
+        name: "UI Dev Release"
+        prerelease: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
