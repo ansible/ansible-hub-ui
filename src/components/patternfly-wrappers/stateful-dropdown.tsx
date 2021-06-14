@@ -69,6 +69,7 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
         position={position || DropdownPosition.right}
         autoFocus={false}
         aria-label={ariaLabel}
+        // data-cy='edit-button'
       />
     );
   }
@@ -95,7 +96,7 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
           </DropdownToggle>
         );
       case 'kebab':
-        return <KebabToggle onToggle={e => this.onToggle(e)} />;
+        return <KebabToggle data-cy='edit-button' onToggle={e => this.onToggle(e)} />;
     }
   }
 
