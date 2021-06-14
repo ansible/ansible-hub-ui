@@ -52,6 +52,7 @@ jobs:
       with:
         body: "This is a special release that provides an up to date build off of the latest changes in the master branch. The automation-hub-ui-dist.tar.gz artifact provided here corresponds to the latest version of master."
         files: "automation-hub-ui-dist.tar.gz"
+        input_tag_name: 'dev'
         name: "UI Dev Release"
         prerelease: true
       env:
