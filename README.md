@@ -74,20 +74,19 @@ To access the app, visit: https://ci.foo.redhat.com:1337/insights/automation-hub
 
 ## Deploying
 
-- The Platform team is using Travis to deploy the application
-  - The Platform team will help you set up the Travis instance if this is the route you are wanting to take
+We're using Github Actions for deployment.
 
 ### How it works
 
-- any push to the `{REPO}` `master` branch will deploy to a `{REPO}-build` `ci-beta` branch
-- any push to the `{REPO}` `master-stable` branch will deploy to a `{REPO}-build` `ci-stable` branch
-- any push to the `{REPO}` `qa-beta` branch will deploy to a `{REPO}-build` `qa-beta` branch
-- any push to the `{REPO}` `qa-stable` branch will deploy to a `{REPO}-build` `qa-stable` branch
+- any push to the `ansible-hub-ui` `master` branch will deploy to a `ansible-hub-ui-build` `ci-beta` branch
+- any push to the `ansible-hub-ui` `master-stable` branch will deploy to a `ansible-hub-ui-build` `ci-stable` branch
+- any push to the `ansible-hub-ui` `qa-beta` branch will deploy to a `ansible-hub-ui-build` `qa-beta` branch
+- any push to the `ansible-hub-ui` `qa-stable` branch will deploy to a `ansible-hub-ui-build` `qa-stable` branch
   - `qa-{beta|stable}` also deploy to cloud.stage.redhat.com
-- any push to the `{REPO}` `prod-beta` branch will deploy to a `{REPO}-build` `prod-beta` branch
-- any push to the `{REPO}` `prod-stable` branch will deploy to a `{REPO}-build` `prod-stable` branch
-- Pull requests (based on master) will not be pushed to `{REPO}-build` `master` branch
-  - If the PR is accepted and merged, master will be rebuilt and will deploy to `{REPO}-build` `ci-beta` branch
+- any push to the `ansible-hub-ui` `prod-beta` branch will deploy to a `ansible-hub-ui-build` `prod-beta` branch
+- any push to the `ansible-hub-ui` `prod-stable` branch will deploy to a `ansible-hub-ui-build` `prod-stable` branch
+- Pull requests (based on master) will not be pushed to `ansible-hub-ui-build` `master` branch
+  - If the PR is accepted and merged, master will be rebuilt and will deploy to `ansible-hub-ui-build` `ci-beta` branch
 
 ## Patternfly
 
