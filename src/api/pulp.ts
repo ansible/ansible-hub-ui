@@ -5,6 +5,6 @@ export class PulpAPI extends BaseAPI {
   http: any;
 
   constructor() {
-    super('typo/pulp/api/v3/');
+    super('/pulp/api/v3/');
   }
 }
