@@ -1,3 +1,1 @@
-describe('Edit a namespace', () => {
-    
-})
+describe('Edit a namespace', () => {});
