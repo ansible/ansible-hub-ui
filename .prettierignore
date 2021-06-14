@@ -6,3 +6,5 @@ src/index.html
 Dockerfile
 .DS_Store
 *.md
+*.png
+*.mp4
