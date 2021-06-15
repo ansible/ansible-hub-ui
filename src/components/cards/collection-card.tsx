@@ -51,6 +51,7 @@ export class CollectionCard extends React.Component<IProps> {
             image={namespace.avatar_url}
             alt={company + ' logo'}
             size='40px'
+            unlockWidth={true}
           />
           <TextContent>{this.getCertification(repo)}</TextContent>
         </CardHeader>

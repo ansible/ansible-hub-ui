@@ -54,7 +54,9 @@ export class CollectionListItem extends React.Component<IProps, {}> {
           <Logo
             alt={company + ' logo'}
             image={namespace.avatar_url}
-            size='50px'
+            size='40px'
+            unlockWidth={true}
+            width='97px'
           />
         </DataListCell>,
       );
