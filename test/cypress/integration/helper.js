@@ -1,10 +1,7 @@
-
-
 describe('Edit a namespace', () => {
   let baseUrl = Cypress.config().baseUrl;
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
-
 
   let createNamespace = () => {
     return cy.galaxykit('-i namespace create', 'testns1');
@@ -12,8 +9,7 @@ describe('Edit a namespace', () => {
 
   let chooseCard = () => {
     let card = document.querySelectorAll('.ns-card-container');
-    return card.find('.pf-c-card')
-  
+    return card.find('.pf-c-card');
   };
 
   beforeEach(() => {

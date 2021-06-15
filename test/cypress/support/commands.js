@@ -27,9 +27,9 @@
 import shell from 'shell-escape-tag';
 var urljoin = require('url-join');
 
-Cypress.Commands.add('dataCy', (value) => {
-  return cy.get(`[data-cy=${value}]`)
-})
+Cypress.Commands.add('dataCy', value => {
+  return cy.get(`[data-cy=${value}]`);
+});
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
