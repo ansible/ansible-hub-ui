@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardHeaderMain,
   CardTitle,
+  Tooltip,
 } from '@patternfly/react-core';
 
 import { Link } from 'react-router-dom';
@@ -23,6 +24,7 @@ interface IProps {
 }
 
 export class NamespaceCard extends React.Component<IProps, {}> {
+  MAX_DESCRIPTION_LENGTH = 26;
   render() {
     const { avatar_url, name, company, namespaceURL } = this.props;
     return (
@@ -37,8 +39,13 @@ export class NamespaceCard extends React.Component<IProps, {}> {
             />
           </CardHeaderMain>
         </CardHeader>
-        <CardTitle>{company || name}</CardTitle>
-        <CardBody>{name}</CardBody>
+        <Tooltip content={company || name}>
+          <CardTitle>{this.getDescription(company || name)}</CardTitle>
+        </Tooltip>
+        <Tooltip content={name}>
+          <CardBody>{this.getDescription(name)}</CardBody>
+        </Tooltip>
+
         {namespaceURL && (
           <CardFooter>
             <Link to={namespaceURL}>View collections</Link>
@@ -46,5 +53,16 @@ export class NamespaceCard extends React.Component<IProps, {}> {
         )}
       </Card>
     );
+  }
+
+  private getDescription(d: string) {
+    if (!d) {
+      return '';
+    }
+    if (d.length > this.MAX_DESCRIPTION_LENGTH) {
+      return d.slice(0, this.MAX_DESCRIPTION_LENGTH) + '...';
+    } else {
+      return d;
+    }
   }
 }
