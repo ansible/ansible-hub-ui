@@ -7,9 +7,9 @@ describe('Edit a namespace', () => {
     return cy.galaxykit('-i namespace create', 'testns1');
   };
 
-  let chooseCard = () => {
-    let card = document.querySelectorAll('.ns-card-container');
-    return card.find('.pf-c-card');
+  let viewNamespaceDetail = () => {
+    let link = cy.get('a[href*="ui/repo/published/testns1"]').click();
+    return link
   };
 
   beforeEach(() => {
@@ -22,13 +22,11 @@ describe('Edit a namespace', () => {
     cy.menuGo('Collections > Namespaces');
   });
 
-  it.only('finds namespace card', () => {
-    chooseCard();
+  it.only('clicks link to namespace detail', () => {
+    viewNamespaceDetail();
   });
 
-  it('finds testns1', () => {
-    cy.contains('testns1');
-  });
+
 
   //   it('clicks the kebab button', () => {
   //       cy.get('[data-cy=kebab-toggle]').click()
