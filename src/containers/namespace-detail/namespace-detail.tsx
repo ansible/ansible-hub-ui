@@ -375,7 +375,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </Button>
         )}
         <StatefulDropdown
-          data-cy='edit-button'
           items={[
             <DropdownItem
               key='1'
