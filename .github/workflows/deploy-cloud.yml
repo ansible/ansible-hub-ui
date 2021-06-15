@@ -1,4 +1,4 @@
-name: "Deploy cloud.redhat.com"
+name: "Deploy cloud.redhat.com from prod-stable"
 
 on:
   workflow_dispatch: # allow running manually
