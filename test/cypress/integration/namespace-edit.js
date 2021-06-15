@@ -1,54 +1,84 @@
-let baseUrl = Cypress.config().baseUrl;
-let adminUsername = Cypress.env('username');
-let adminPassword = Cypress.env('password');
+describe('Edit a namespace', () => {
+  let baseUrl = Cypress.config().baseUrl;
+  let adminUsername = Cypress.env('username');
+  let adminPassword = Cypress.env('password');
 
-beforeEach(() => {
-  cy.visit(baseUrl);
-});
+  let createNamespace = () => {
+    return cy.galaxykit('-i namespace create', 'testns1');
+  };
+  let viewNamespaceDetail = () => {
+    let link = cy.get('a[href*="ui/repo/published/testns1"]').click();
+    return link;
+  };
+  let kebabToggle = () => {
+    let kebab = cy.get('#pf-dropdown-toggle-id-11');
+    return kebab.click();
+  };
+  let editNamespace = () => {
+    return cy.contains('Edit namespace').click();
+  };
 
-describe('edit an existing namespace', () => {
-  beforeEach('login', () => {
+  let saveButton = () => {
+    return cy.contains('Save').click();
+  };
+  let getUrl = () => {
+    return cy.url();
+  };
+  let checkName = () => {
+    return cy.get('#name').should('be.disabled');
+  };
+  let getCompanyName = () => {
+    return cy.get('#company');
+  };
+  let checkCompanyName = () => {
+    getCompanyName()
+      .clear()
+      .type(
+        'This name is too long vaðlaheiðarvegavinnuverkfærageymsluskúraútidyralyklakippuhringur',
+      );
+    saveButton();
+    let helperText = cy.get('#company-helper');
+    helperText.should(
+      'have.text',
+      'Ensure this field has no more than 64 characters.',
+    );
+  };
+
+  let saveCompanyName = () => {
+    getCompanyName()
+      .clear()
+      .type('Company name');
+    saveButton();
+    getUrl().should('eq', 'http://localhost:8002/ui/my-namespaces/testns1');
+  };
+  beforeEach(() => {
+    cy.visit(baseUrl);
     cy.login(adminUsername, adminPassword);
     cy.on('uncaught:exception', (err, runnable) => {
       return false;
     });
-    const collectionTab = cy.menuPresent('Namespaces');
-    collectionTab.click({ force: true });
+    createNamespace();
+    cy.menuGo('Collections > Namespaces');
+    viewNamespaceDetail();
+    kebabToggle();
+    editNamespace();
   });
-  describe('create a namespace', () => {
-    it.only('creates a new namespace', () => {
-      const createNamespaceButton = cy.get('[data-cy=create-namespace]');
-      createNamespaceButton.click();
-      cy.get('#pf-modal-part-2 #newNamespaceName').type('mynewnamespace11');
-      const message = cy.get('.pf-c-form__helper-text');
-      message.should('have.text', 'Please, provide the namespace name');
-      const create = cy.get('[data-cy=create]');
-      create.should('be.enabled');
-      create.click();
-      const url = cy.url();
-      url.should(
-        'eq',
-        'http://localhost:8002/ui/my-namespaces/mynewnamespace11',
-      );
-    });
-  });
-  describe('edit a namespace', () => {
-    it.only('finds individual card', () => {
-      cy.get('.pf-c-card__title').contains('Arista');
-    });
-    it('finds editing page', () => {
-      cy.get('[data-cy=view-collections]').click();
+
+  describe('the name field', () => {
+    it('tests that the name field is disabled from editing', () => {
+      checkName();
     });
   });
 
-  //   describe('test all fields', () => {
-  //     it.only('tests first field', () => {
-
-  //     });
-  //   });
-
-  //   describe('add and removes links', () => {
-  //     it('adds a link', () => {});
-  //     it('removes a link', () => {});
-  //   });
+  describe('the company name field', () => {
+    it('tests the company name for errors', () => {
+      checkCompanyName();
+    });
+    it('saves a new company name', () => {
+      saveCompanyName();
+    });
+    it('checks field in namespace detail', () => {
+      cy.get('.pf-c-title').contains('Company name');
+    });
+  });
 });
