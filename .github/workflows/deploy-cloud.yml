@@ -21,7 +21,7 @@ jobs:
 
     steps:
 
-    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+    - name: "Checkout ansible-hub-ui (prod-stable)"
       uses: actions/checkout@v2
 
     - name: "Set BRANCH, TRAVIS_BRANCH, TRAVIS_BUILD_NUMBER, TRAVIS_WEB_URL, TRAVIS_COMMIT_MESSAGE"
