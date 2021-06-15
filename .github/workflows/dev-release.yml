@@ -43,7 +43,7 @@ jobs:
 
     - name: "Build a tarball"
       run: |
-        npm ci
+        npm ci || npm install
         npm run build-standalone
         tar -C dist/ -czvf automation-hub-ui-dist.tar.gz .
 
