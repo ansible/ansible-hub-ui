@@ -22,11 +22,8 @@ describe('Edit a namespace', () => {
     cy.menuGo('Collections > Namespaces');
   });
 
-  it.only('clicks link to namespace detail', () => {
+  it('deletes testns1 namespace', () => {
     viewNamespaceDetail();
+    kebabToggle();
   });
-
-  //   it('clicks the kebab button', () => {
-  //       cy.get('[data-cy=kebab-toggle]').click()
-  //   });
 });
