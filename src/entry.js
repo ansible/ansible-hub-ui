@@ -5,15 +5,11 @@ import { Provider } from 'react-redux';
 import { init } from './store';
 import App from './loaders/insights/insights-loader';
 import getBaseName from './utilities/getBaseName';
+import MaintenancePage from './containers/maintenance/maintenance-page';
 
 // Entrypoint for compiling the app to run in insights production mode.
 
 ReactDOM.render(
-  <Provider store={init().getStore()}>
-    <Router basename={getBaseName(window.location.pathname)}>
-      <App />
-    </Router>
-  </Provider>,
-
+  <MaintenancePage></MaintenancePage>,
   document.getElementById('root'),
 );
