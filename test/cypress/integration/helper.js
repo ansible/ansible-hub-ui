@@ -9,7 +9,7 @@ describe('Edit a namespace', () => {
 
   let viewNamespaceDetail = () => {
     let link = cy.get('a[href*="ui/repo/published/testns1"]').click();
-    return link
+    return link;
   };
 
   beforeEach(() => {
@@ -25,8 +25,6 @@ describe('Edit a namespace', () => {
   it.only('clicks link to namespace detail', () => {
     viewNamespaceDetail();
   });
-
-
 
   //   it('clicks the kebab button', () => {
   //       cy.get('[data-cy=kebab-toggle]').click()
