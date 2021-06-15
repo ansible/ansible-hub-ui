@@ -74,20 +74,24 @@ To access the app, visit: https://ci.foo.redhat.com:1337/insights/automation-hub
 
 ## Deploying
 
-- The Platform team is using Travis to deploy the application
-  - The Platform team will help you set up the Travis instance if this is the route you are wanting to take
+We're using Github Actions for deployment.
 
 ### How it works
 
-- any push to the `{REPO}` `master` branch will deploy to a `{REPO}-build` `ci-beta` branch
-- any push to the `{REPO}` `master-stable` branch will deploy to a `{REPO}-build` `ci-stable` branch
-- any push to the `{REPO}` `qa-beta` branch will deploy to a `{REPO}-build` `qa-beta` branch
-- any push to the `{REPO}` `qa-stable` branch will deploy to a `{REPO}-build` `qa-stable` branch
-  - `qa-{beta|stable}` also deploy to cloud.stage.redhat.com
-- any push to the `{REPO}` `prod-beta` branch will deploy to a `{REPO}-build` `prod-beta` branch
-- any push to the `{REPO}` `prod-stable` branch will deploy to a `{REPO}-build` `prod-stable` branch
-- Pull requests (based on master) will not be pushed to `{REPO}-build` `master` branch
-  - If the PR is accepted and merged, master will be rebuilt and will deploy to `{REPO}-build` `ci-beta` branch
+The Github Action invokes the [RedHatInsights/insights-frontend-builder-common//bootstrap.sh](https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh) script, which builds the local branch and pushes the results to [RedHatInsights/ansible-hub-ui-build](https://github.com/RedHatInsights/ansible-hub-ui-build/branches). There, a separate Jenkins process awaits.
+
+- any push to the `master` branch will deploy to `ansible-hub-ui-build` branches `ci-beta` and `qa-beta`
+- any push to the `master-stable` branch will deploy to `ansible-hub-ui-build` branches `ci-stable` and `qa-stable`
+- any push to the `prod-beta` branch will deploy to a `ansible-hub-ui-build` `prod-beta` branch
+- any push to the `prod-stable` branch will deploy to a `ansible-hub-ui-build` `prod-stable` branch
+- the `ansible-hub-ui-build` `master` branch is not used, as PRs against `master` end up in `ci-beta` and `qa-beta`
+
+- `ci-beta` builds end up on `ci.cloud.redhat.com/beta`
+- `ci-stable` builds end up on `ci.cloud.redhat.com`
+- `qa-beta` builds end up on `qa.cloud.redhat.com/beta`
+- `qa-stable` builds end up on `qa.cloud.redhat.com`
+- `prod-beta` builds end up on `cloud.redhat.com/beta`
+- `prod-stable` builds end up on `cloud.redhat.com`
 
 ## Patternfly
 
