@@ -56,5 +56,16 @@ describe('Hub Menu Tests', () => {
       visibleMenuItems.forEach(item => cy.menuPresent(item));
       missingMenuItems.forEach(item => cy.menuMissing(item));
     });
+
+    it('has Documentation tab', () => {
+      cy.login(username, password);
+      cy.menuPresent('Documentation').should(
+        'have.attr',
+        'href',
+        'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
+      );
+    });
   });
 });
+
+
