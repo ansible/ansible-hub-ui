@@ -8,6 +8,7 @@ import {
   NavExpandable,
   NavItem,
   NavList,
+  SearchInput,
   TextInput,
   Toolbar,
   ToolbarGroup,
@@ -86,12 +87,13 @@ export class TableOfContents extends React.Component<IProps, IState> {
         <Toolbar>
           <ToolbarGroup>
             <ToolbarItem>
-              <TextInput
+              <SearchInput
                 ref={this.props.searchBarRef}
                 value={params.keywords}
                 onChange={val => {
                   updateParams(ParamHelper.setParam(params, 'keywords', val));
                 }}
+                onClear={ () => updateParams(ParamHelper.setParam(params, 'keywords', ''))}
                 aria-label='find-content'
                 placeholder='Find content'
               />

@@ -4,6 +4,7 @@ import './collection-content-list.scss';
 
 import { Link } from 'react-router-dom';
 import {
+  SearchInput,
   TextInput,
   Toolbar,
   ToolbarGroup,
@@ -65,11 +66,12 @@ export class CollectionContentList extends React.Component<IProps> {
           <Toolbar>
             <ToolbarGroup>
               <ToolbarItem>
-                <TextInput
+                <SearchInput
                   value={params.keywords || ''}
                   onChange={val =>
                     updateParams(ParamHelper.setParam(params, 'keywords', val))
                   }
+                  onClear={ () => updateParams(ParamHelper.setParam(params, 'keywords', ''))}
                   aria-label='find-content'
                   placeholder='Find content'
                 />
