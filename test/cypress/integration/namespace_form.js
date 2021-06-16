@@ -33,6 +33,7 @@ describe('A namespace form', () => {
     });
     createNamespace();
     cy.menuGo('Collections > Namespaces');
+    cy.wait(5000);
     getCreateNamespace().click();
   });
 
