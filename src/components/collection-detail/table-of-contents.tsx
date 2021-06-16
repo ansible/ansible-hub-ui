@@ -202,8 +202,6 @@ export class TableOfContents extends React.Component<IProps, IState> {
     const filteredLinks = links.filter(link =>
       link.display.toLowerCase().includes(filterString.toLowerCase()),
     );
-    console.log('filterstring: ', filterString);
-    console.log(links);
     return (
       <NavExpandable
         key={title}
