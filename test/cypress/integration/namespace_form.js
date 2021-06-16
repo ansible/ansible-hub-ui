@@ -58,15 +58,13 @@ describe('A namespace form', () => {
     getCreateButton().should('be.disabled');
     clearInput();
   });
-  it(
-    ('should give message if input begins with underscore',
+  it('should give message if input begins with underscore',
     () => {
       getInputBox().type('_namespace');
       getMessage().should("have.text', 'Name cannot begin with '_'");
       getCreateButton().should('be.disabled');
       clearInput();
-    })
-  );
+    });
   it('should give message if name already exists', () => {
     getInputBox().type('testns1');
     getCreateButton().click();
