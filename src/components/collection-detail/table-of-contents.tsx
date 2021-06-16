@@ -93,7 +93,9 @@ export class TableOfContents extends React.Component<IProps, IState> {
                 onChange={val => {
                   updateParams(ParamHelper.setParam(params, 'keywords', val));
                 }}
-                onClear={ () => updateParams(ParamHelper.setParam(params, 'keywords', ''))}
+                onClear={() =>
+                  updateParams(ParamHelper.setParam(params, 'keywords', ''))
+                }
                 aria-label='find-content'
                 placeholder='Find content'
               />

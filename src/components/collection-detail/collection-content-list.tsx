@@ -71,7 +71,9 @@ export class CollectionContentList extends React.Component<IProps> {
                   onChange={val =>
                     updateParams(ParamHelper.setParam(params, 'keywords', val))
                   }
-                  onClear={ () => updateParams(ParamHelper.setParam(params, 'keywords', ''))}
+                  onClear={() =>
+                    updateParams(ParamHelper.setParam(params, 'keywords', ''))
+                  }
                   aria-label='find-content'
                   placeholder='Find content'
                 />
