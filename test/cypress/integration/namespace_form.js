@@ -2,15 +2,28 @@ describe('A namespace form', () => {
   let baseUrl = Cypress.config().baseUrl;
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
-  
-  
-  let getCreateNamespace = () => {return cy.get('[data-cy=create-namespace]');};
-  let getMessage = () => {return cy.get('.pf-c-form__helper-text');};
-  let getCreateButton = () => {return cy.get('[data-cy=create]');};
-  let getInputBox = () => {return cy.get('#pf-modal-part-2 #newNamespaceName');};
-  let clearInput = () => {return  cy.get('#pf-modal-part-2 #newNamespaceName').clear();}
-  let createNamespace = () => {return cy.galaxykit("-i namespace create", "testns1");}
-  let getUrl = () => {return cy.url()};
+
+  let getCreateNamespace = () => {
+    return cy.get('[data-cy=create-namespace]');
+  };
+  let getMessage = () => {
+    return cy.get('.pf-c-form__helper-text');
+  };
+  let getCreateButton = () => {
+    return cy.get('[data-cy=create]');
+  };
+  let getInputBox = () => {
+    return cy.get('#pf-modal-part-2 #newNamespaceName');
+  };
+  let clearInput = () => {
+    return cy.get('#pf-modal-part-2 #newNamespaceName').clear();
+  };
+  let createNamespace = () => {
+    return cy.galaxykit('-i namespace create', 'testns1');
+  };
+  let getUrl = () => {
+    return cy.url();
+  };
 
   beforeEach(() => {
     cy.visit(baseUrl);
@@ -45,33 +58,36 @@ describe('A namespace form', () => {
     getCreateButton().should('be.disabled');
     clearInput();
   });
-  if('should give message if input begins with underscore', () => {
-    getInputBox().type('_namespace');
-    getMessage().should("have.text', 'Name cannot begin with '_'");
-    getCreateButton().should('be.disabled');
-    clearInput();
-  });
-  it('should give message if name already exists', () => {  
+  if (
+    ('should give message if input begins with underscore',
+    () => {
+      getInputBox().type('_namespace');
+      getMessage().should("have.text', 'Name cannot begin with '_'");
+      getCreateButton().should('be.disabled');
+      clearInput();
+    })
+  );
+  it('should give message if name already exists', () => {
     getInputBox().type('testns1');
-    getCreateButton().click();    
+    getCreateButton().click();
     getCreateButton().should('be.disabled');
-    getMessage().should('have.text', 'A namespace named testns1 already exists.');    
+    getMessage().should(
+      'have.text',
+      'A namespace named testns1 already exists.',
+    );
     clearInput();
   });
 
-// Note: the next test should work the first time, but not on rerun. to reset DB via CLI (from galaxy_ng dir):
+  // Note: the next test should work the first time, but not on rerun. to reset DB via CLI (from galaxy_ng dir):
 
-// ./compose down --volume
-// ./compose up -d postgres redis
-// ./compose run --rm api manage migrate
-// ./compose run --rm -e PULP_FIXTURE_DIRS='["/src/galaxy_ng/dev/automation-hub"]' api manage loaddata initial_data.json
+  // ./compose down --volume
+  // ./compose up -d postgres redis
+  // ./compose run --rm api manage migrate
+  // ./compose run --rm -e PULP_FIXTURE_DIRS='["/src/galaxy_ng/dev/automation-hub"]' api manage loaddata initial_data.json
 
   it('creates a new namespace with no error messages', () => {
     getInputBox().type('testns2');
-    getCreateButton().click();   
-    getUrl().should(
-          'eq',
-          'http://localhost:8002/ui/my-namespaces/testns2',
-        );
+    getCreateButton().click();
+    getUrl().should('eq', 'http://localhost:8002/ui/my-namespaces/testns2');
   });
-})
+});
