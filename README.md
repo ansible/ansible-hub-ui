@@ -93,6 +93,15 @@ The Github Action invokes the [RedHatInsights/insights-frontend-builder-common//
 - `prod-beta` builds end up on `cloud.redhat.com/beta`
 - `prod-stable` builds end up on `cloud.redhat.com`
 
+### Workflows
+
+- `master`: `cypress`, `deploy-cloud`, `dev-release`, `stable-release`, `update-manifest`
+- `master-stable`: `deploy-cloud`
+- `prod-beta`: `deploy-cloud`
+- `prod-stable`: `deploy-cloud`
+- `stable-4.2`: `stable-release`
+- `stable-4.3`: `cypress`, `stable-release`
+
 ## Patternfly
 
 - This project imports Patternfly components:
