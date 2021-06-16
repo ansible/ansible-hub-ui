@@ -51,56 +51,10 @@ describe('Hub Menu Tests', () => {
       cy.logout();
     });
 
-    it('creates new namespace', () => {
-      cy.login(adminUsername, adminPassword);
-      cy.on('uncaught:exception', (err, runnable) => {
-        return false
-    })
-    const collectionTab = cy.menuPresent('Namespaces')
-
-    collectionTab.click({ force: true})
-      const createNamespaceButton = cy.get('[data-cy=create-namespace]')
-      createNamespaceButton.click()
-      const create = cy.get('[data-cy=create]')
-      create.click()
-    })
-
-    
-
-    describe('user without permissions', () => {
-        let username = 'nopermission';
-        let password = 'n0permissi0n';
-        let visibleMenuItems = [
-            'Collections > Collections',
-            'Collections > Namespaces',
-            'Collections > Repository Management',
-            'Collections > API Token',
-            'Container Registry',
-            'Documentation',
-        ];
-        let missingMenuItems = [
-            'User Access > Users',
-            'User Access > Groups',
-            'Collections > Approval',
-        ];
-
-        beforeEach(() => {
-            cy.login(adminUsername, adminPassword);
-            cy.createUser(username, password);
-            cy.logout();
-        });
-
-        afterEach(() => {
-            cy.deleteUser(username);
-            cy.logout();
-        });
-
-        it('sees limited menu', () => {
-            cy.login(username, password);
-            visibleMenuItems.forEach(item => cy.menuPresent(item));
-            missingMenuItems.forEach(item => cy.menuMissing(item));
-        });
-
+    it('sees limited menu', () => {
+      cy.login(username, password);
+      visibleMenuItems.forEach(item => cy.menuPresent(item));
+      missingMenuItems.forEach(item => cy.menuMissing(item));
     });
 
     it('has Documentation tab', () => {
@@ -113,5 +67,7 @@ describe('Hub Menu Tests', () => {
     });
   });
 });
+
+
 
 
