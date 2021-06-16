@@ -1,4 +1,4 @@
-name: "Deploy cloud.redhat.com"
+name: "Deploy cloud.redhat.com from prod-beta"
 
 on:
   workflow_dispatch: # allow running manually
@@ -24,7 +24,7 @@ jobs:
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v2
 
-    - name: "Set BRANCH, TRAVIS_BRANCH, TRAVIS_COMMIT_MESSAGE"
+    - name: "Set BRANCH, TRAVIS_BRANCH, TRAVIS_BUILD_NUMBER, TRAVIS_WEB_URL, TRAVIS_COMMIT_MESSAGE"
       run: |
         TRAVIS_BRANCH=`sed 's/^refs\/heads\///' <<< $GITHUB_REF`
         TRAVIS_BUILD_NUMBER=$GITHUB_RUN_NUMBER
@@ -52,6 +52,7 @@ jobs:
 
     - name: "Build and deploy"
       run: |
-        npm ci
+        npm cache verify
+        npm ci || npm install
         npm run deploy && curl -sSL https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh | bash -s
 
