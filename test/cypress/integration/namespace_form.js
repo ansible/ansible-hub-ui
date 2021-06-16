@@ -58,7 +58,7 @@ describe('A namespace form', () => {
     getCreateButton().should('be.disabled');
     clearInput();
   });
-  if (
+  it(
     ('should give message if input begins with underscore',
     () => {
       getInputBox().type('_namespace');
