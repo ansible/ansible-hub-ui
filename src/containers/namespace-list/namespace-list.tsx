@@ -117,10 +117,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     if (user?.model_permissions?.add_namespace) {
       extra.push(
         <ToolbarItem key='create-button'>
-          <Button
-            variant='primary'
-            onClick={this.handleModalToggle}
-          >
+          <Button variant='primary' onClick={this.handleModalToggle}>
             Create
           </Button>
         </ToolbarItem>,
