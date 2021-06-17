@@ -119,7 +119,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
         <ToolbarItem key='create-button'>
           <Button
             variant='primary'
-            data-cy='create-namespace'
             onClick={this.handleModalToggle}
           >
             Create

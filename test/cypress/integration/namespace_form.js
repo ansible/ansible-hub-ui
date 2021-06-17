@@ -4,13 +4,13 @@ describe('A namespace form', () => {
   let adminPassword = Cypress.env('password');
 
   let getCreateNamespace = () => {
-    return cy.get('[data-cy=create-namespace]');
+    return cy.get('.pf-c-button.pf-m-primary');
   };
   let getMessage = () => {
     return cy.get('.pf-c-form__helper-text');
   };
   let getCreateButton = () => {
-    return cy.get('[data-cy=create]');
+    return cy.get('.pf-c-button.pf-m-primary.submit-button');
   };
   let getInputBox = () => {
     return cy.get('#pf-modal-part-2 #newNamespaceName');
@@ -33,7 +33,6 @@ describe('A namespace form', () => {
     });
     createNamespace();
     cy.menuGo('Collections > Namespaces');
-    cy.wait(5000);
     getCreateNamespace().click();
   });
 
