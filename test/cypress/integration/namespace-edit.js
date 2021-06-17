@@ -7,12 +7,10 @@ describe('Edit a namespace', () => {
     return cy.galaxykit('-i namespace create', 'testns1');
   };
   let viewNamespaceDetail = () => {
-    let link = cy.get('a[href*="ui/repo/published/testns1"]').click();
-    return link;
+    return cy.get('a[href*="ui/repo/published/testns1"]').click();
   };
   let kebabToggle = () => {
-    let kebab = cy.get('#pf-dropdown-toggle-id-11');
-    return kebab.click();
+    return cy.get('#pf-dropdown-toggle-id-11').click();
   };
   let editNamespace = () => {
     return cy.contains('Edit namespace').click();
@@ -51,7 +49,7 @@ describe('Edit a namespace', () => {
     saveButton();
     getUrl().should('eq', 'http://localhost:8002/ui/my-namespaces/testns1');
   };
-  beforeEach(() => {
+  before(() => {
     cy.visit(baseUrl);
     cy.login(adminUsername, adminPassword);
     cy.on('uncaught:exception', (err, runnable) => {
@@ -64,21 +62,14 @@ describe('Edit a namespace', () => {
     editNamespace();
   });
 
-  describe('the name field', () => {
-    it('tests that the name field is disabled from editing', () => {
-      checkName();
-    });
+  it('tests that the name field is disabled from editing', () => {
+    checkName();
   });
-
-  describe('the company name field', () => {
-    it('tests the company name for errors', () => {
-      checkCompanyName();
-    });
-    it('saves a new company name', () => {
-      saveCompanyName();
-    });
-    it('checks field in namespace detail', () => {
-      cy.get('.pf-c-title').contains('Company name');
-    });
+  it('tests the company name for errors', () => {
+    checkCompanyName();
+  });
+  it('saves a new company name', () => {
+    saveCompanyName();
+    cy.get('.pf-c-title').should('contain', 'Company name');
   });
 });

@@ -69,7 +69,6 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
         position={position || DropdownPosition.right}
         autoFocus={false}
         aria-label={ariaLabel}
-        // data-cy='edit-button'
       />
     );
   }

@@ -28,7 +28,7 @@ export class NamespaceCard extends React.Component<IProps, {}> {
   render() {
     const { avatar_url, name, company, namespaceURL } = this.props;
     return (
-      <Card data-cy='ns-card' className='ns-card-container'>
+      <Card className='ns-card-container'>
         <CardHeader>
           <CardHeaderMain>
             <Logo
@@ -48,7 +48,7 @@ export class NamespaceCard extends React.Component<IProps, {}> {
 
         {namespaceURL && (
           <CardFooter>
-            <Link data-cy='view-collections' to={namespaceURL}>
+            <Link to={namespaceURL}>
               View collections
             </Link>
           </CardFooter>
