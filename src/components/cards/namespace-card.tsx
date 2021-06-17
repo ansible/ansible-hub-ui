@@ -48,9 +48,7 @@ export class NamespaceCard extends React.Component<IProps, {}> {
 
         {namespaceURL && (
           <CardFooter>
-            <Link to={namespaceURL}>
-              View collections
-            </Link>
+            <Link to={namespaceURL}>View collections</Link>
           </CardFooter>
         )}
       </Card>
