@@ -48,12 +48,12 @@ jobs:
         tar -C dist/ -czvf automation-hub-ui-dist.tar.gz .
 
     - name: "Release"
-      uses: softprops/action-gh-release@v1
-      with:
-        body: "This is a special release that provides an up to date build off of the latest changes in the master branch. The automation-hub-ui-dist.tar.gz artifact provided here corresponds to the latest version of master."
-        files: "automation-hub-ui-dist.tar.gz"
-        tag_name: 'dev'
-        name: "UI Dev Release"
-        prerelease: true
+      run: |
+        gh release create -p "$RELEASE_TAG" --title "$RELEASE_NAME" --notes "$RELEASE_BODY" || true # may already exist
+        gh release upload "$RELEASE_TAG" "$RELEASE_FILE" --clobber
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RELEASE_NAME: "UI Dev Release"
+        RELEASE_BODY: "This is a special release that provides an up to date build off of the latest changes in the master branch. The automation-hub-ui-dist.tar.gz artifact provided here corresponds to the latest version of master."
+        RELEASE_FILE: 'automation-hub-ui-dist.tar.gz'
+        RELEASE_TAG: 'dev'

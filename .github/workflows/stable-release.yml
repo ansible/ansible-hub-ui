@@ -18,10 +18,12 @@ jobs:
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v2
 
-    - name: "Set TRAVIS_COMMIT_MESSAGE"
+    - name: "Set TRAVIS_COMMIT_MESSAGE, RELEASE_TAG"
       run: |
         TRAVIS_COMMIT_MESSAGE=`git log -1 --format=%B`
+        RELEASE_TAG=`sed 's/^refs\/tags\///' <<< $GITHUB_REF`
         echo -e "TRAVIS_COMMIT_MESSAGE<<EOF\n${TRAVIS_COMMIT_MESSAGE}\nEOF" >> $GITHUB_ENV
+        echo "RELEASE_TAG=${RELEASE_TAG}" >> $GITHUB_ENV
 
     - name: "Install node 14"
       uses: actions/setup-node@v2
@@ -44,9 +46,8 @@ jobs:
         tar -C dist/ -czvf automation-hub-ui-dist.tar.gz .
 
     - name: "Release"
-      uses: softprops/action-gh-release@v1
-      with:
-        files: "automation-hub-ui-dist.tar.gz"
-        body: ${{ env.TRAVIS_COMMIT_MESSAGE }}
+      run: |
+        gh release create "$RELEASE_TAG" --notes "$TRAVIS_COMMIT_MESSAGE" "$RELEASE_FILE"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RELEASE_FILE: 'automation-hub-ui-dist.tar.gz'
