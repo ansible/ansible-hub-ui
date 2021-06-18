@@ -95,7 +95,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         onClose={this.toggleModal}
         actions={[
           <Button
-            className='submit-button'
+            aria-label='Submit'
             key='confirm'
             variant='primary'
             onClick={this.handleSubmit}
