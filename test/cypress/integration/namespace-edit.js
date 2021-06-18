@@ -111,14 +111,17 @@ describe('Edit a namespace', () => {
     saveButton().click();
     cy.get('.header-bottom').should('contain', 'A namespace description');
   };
-  
+
   let getLinksField = () => {
-    cy.get('input').invoke('attr', 'placeholder').should('contain', 'Link text').click();
-  }
-  
+    cy.get('input')
+      .invoke('attr', 'placeholder')
+      .should('contain', 'Link text')
+      .click();
+  };
+
   let checkLinksField = () => {
     getLinksField();
-  }
+  };
 
   beforeEach(() => {
     cy.visit(baseUrl);
@@ -154,5 +157,5 @@ describe('Edit a namespace', () => {
   });
   it.only('tests the Links field', () => {
     checkLinksField();
-  })
+  });
 });
