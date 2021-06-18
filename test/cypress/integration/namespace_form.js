@@ -10,7 +10,7 @@ describe('A namespace form', () => {
     return cy.get('.pf-c-form__helper-text');
   };
   let getCreateButton = () => {
-    return cy.get('.pf-c-button.pf-m-primary.submit-button');
+    return cy.get('.pf-c-modal-box__footer .pf-m-primary');
   };
   let getInputBox = () => {
     return cy.get('#pf-modal-part-2 #newNamespaceName');
