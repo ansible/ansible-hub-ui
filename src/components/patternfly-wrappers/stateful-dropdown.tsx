@@ -95,11 +95,7 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
           </DropdownToggle>
         );
       case 'kebab':
-        return (
-          <KebabToggle
-            onToggle={e => this.onToggle(e)}
-          />
-        );
+        return <KebabToggle onToggle={e => this.onToggle(e)} />;
     }
   }
 
