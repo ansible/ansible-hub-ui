@@ -112,15 +112,37 @@ describe('Edit a namespace', () => {
     cy.get('.header-bottom').should('contain', 'A namespace description');
   };
 
-  let getLinksField = () => {
-    cy.get('input')
-      .invoke('attr', 'placeholder')
-      .should('contain', 'Link text')
-      .click();
+  let getTextField = () => {
+    return cy.get('.link-text').click()
   };
+  let getUrlField = () => {
+    return cy.get('.url-input').click();
+  }
+  let linksHelper = () => {
+    return cy.get('#links-helper');
+  }
+  let checkLink = () => {
+    cy.get('div.link > a').should('contain', 'Link to Shaiah\'s website').and('have.attr', 'href', 'https://shaiahwren.com/');
+  }
 
   let checkLinksField = () => {
-    getLinksField();
+    getTextField().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
+    getUrlField().type('shaiahwren.com');
+    saveButton().click();
+    linksHelper().should('contain', 'Text: Ensure this field has no more than 32 characters.')
+    getTextField().clear();
+    saveButton().click();
+    linksHelper().should('contain', 'Text: This field may not be blank.')
+    getTextField().type('Link to Shaiah\'s website');
+    getUrlField().clear();
+    saveButton().click();
+    linksHelper().should('contain', 'URL: This field may not be blank.')
+    getUrlField().type('shaiahwren.com');
+    saveButton().click();
+    linksHelper().should('contain', 'URL: \'shaiahwren.com\' is not a valid url.');
+    getUrlField().clear().type('https://shaiahwren.com/');
+    saveButton().click();
+    checkLink();
   };
 
   beforeEach(() => {
@@ -158,4 +180,7 @@ describe('Edit a namespace', () => {
   it.only('tests the Links field', () => {
     checkLinksField();
   });
+  it('removes a link', () => {
+    
+  })
 });
