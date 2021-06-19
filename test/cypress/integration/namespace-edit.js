@@ -54,8 +54,6 @@ describe('Edit a namespace', () => {
   let getOwnersField = () => {
     return cy
       .get('.pf-c-form-control.pf-c-select__toggle-typeahead')
-      .click()
-      .type('abcde');
   };
   let getDropdownItem = () => {
     return cy.get('.pf-c-select__menu-item');
@@ -64,7 +62,7 @@ describe('Edit a namespace', () => {
     return cy.get('.pf-c-button.pf-m-plain.pf-c-select__toggle-clear').click();
   };
   let checkOwnersField = () => {
-    getOwnersField();
+    getOwnersField().click().type('abcde');
     getDropdownItem().should('contain', 'Not found');
     clearField();
     getDropdownItem().click();
@@ -181,7 +179,7 @@ describe('Edit a namespace', () => {
     saveCompanyName();
     cy.get('.pf-c-title').should('contain', 'Company name');
   });
-  it('tests the namespace owners field', () => {
+  it.only('tests the namespace owners field', () => {
     checkOwnersField();
   });
   it('tests the Logo URL field', () => {
