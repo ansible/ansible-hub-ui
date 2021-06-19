@@ -52,8 +52,7 @@ describe('Edit a namespace', () => {
     getUrl().should('eq', 'http://localhost:8002/ui/my-namespaces/testns1');
   };
   let getOwnersField = () => {
-    return cy
-      .get('.pf-c-form-control.pf-c-select__toggle-typeahead')
+    return cy.get('.pf-c-form-control.pf-c-select__toggle-typeahead');
   };
   let getDropdownItem = () => {
     return cy.get('.pf-c-select__menu-item');
@@ -62,7 +61,9 @@ describe('Edit a namespace', () => {
     return cy.get('.pf-c-button.pf-m-plain.pf-c-select__toggle-clear').click();
   };
   let checkOwnersField = () => {
-    getOwnersField().click().type('abcde');
+    getOwnersField()
+      .click()
+      .type('abcde');
     getDropdownItem().should('contain', 'Not found');
     clearField();
     getDropdownItem().click();
