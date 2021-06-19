@@ -116,7 +116,7 @@ describe('Edit a namespace', () => {
     return cy.get('.link-text').click();
   };
   let getUrlField = () => {
-    return cy.get('.url-input').click();
+    return cy.get('div.useful-links div.link-url #url').click();
   };
   let linksHelper = () => {
     return cy.get('#links-helper');
