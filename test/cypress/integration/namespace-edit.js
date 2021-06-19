@@ -55,7 +55,7 @@ describe('Edit a namespace', () => {
     return cy.get('.pf-c-form-control.pf-c-select__toggle-typeahead');
   };
   let getDropdownItem = () => {
-    return cy.get('.pf-c-select__menu-item');
+    return cy.get('.pf-c-select__menu-wrapper');
   };
   let clearField = () => {
     return cy.get('.pf-c-button.pf-m-plain.pf-c-select__toggle-clear').click();
