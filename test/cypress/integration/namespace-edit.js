@@ -10,7 +10,10 @@ describe('Edit a namespace', () => {
     return cy.get('a[href*="ui/repo/published/testns1"]').click();
   };
   let kebabToggle = () => {
-    return cy.get('#pf-dropdown-toggle-id-11').click();
+    return cy
+      .get('button[id^=pf-dropdown-toggle-id-] > svg')
+      .parent()
+      .click();
   };
   let editNamespace = () => {
     return cy.contains('Edit namespace').click();
@@ -45,7 +48,7 @@ describe('Edit a namespace', () => {
     getCompanyName()
       .clear()
       .type('Company name');
-    saveButton();
+    saveButton().click();
     getUrl().should('eq', 'http://localhost:8002/ui/my-namespaces/testns1');
   };
   let getOwnersField = () => {
@@ -187,7 +190,7 @@ describe('Edit a namespace', () => {
   it('tests the Description field', () => {
     checkDescField();
   });
-  it.only('tests the Links field', () => {
+  it('tests the Links field', () => {
     checkLinksField();
   });
   it('removes a link', () => {});
