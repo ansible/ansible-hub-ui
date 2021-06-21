@@ -75,16 +75,10 @@ describe('A namespace form', () => {
     clearInput();
   });
 
-  // Note: the next test should work the first time, but not on rerun. to reset DB via CLI (from galaxy_ng dir):
-
-  // ./compose down --volume
-  // ./compose up -d postgres redis
-  // ./compose run --rm api manage migrate
-  // ./compose run --rm -e PULP_FIXTURE_DIRS='["/src/galaxy_ng/dev/automation-hub"]' api manage loaddata initial_data.json
-
   it('creates a new namespace with no error messages', () => {
-    getInputBox().type('testns2');
+    let id = parseInt(Math.random() * 1000000);
+    getInputBox().type(`testns_${id}`);
     getCreateButton().click();
-    getUrl().should('eq', 'http://localhost:8002/ui/my-namespaces/testns2');
+    getUrl().should('eq', `http://localhost:8002/ui/my-namespaces/testns_${id}`);
   });
 });
