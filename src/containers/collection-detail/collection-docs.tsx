@@ -197,17 +197,18 @@ class CollectionDocs extends React.Component<
     );
   }
 
- 
- 
- executeScroll() {
-   this.docsRef.current.scrollIntoView()
- }
-
+  executeScroll() {
+    this.docsRef.current.scrollIntoView();
+  }
 
   private renderDocLink(name, href, collection, params) {
     if (!!href && href.startsWith('http')) {
       return (
-        <a href={href} target='_blank' onClick={this.docsRef.current.scrollIntoView()}>
+        <a
+          href={href}
+          target='_blank'
+          onClick={this.docsRef.current.scrollIntoView()}
+        >
           {name}
         </a>
       );
