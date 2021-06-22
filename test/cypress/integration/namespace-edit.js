@@ -22,9 +22,7 @@ describe('Edit a namespace', () => {
   let saveButton = () => {
     return cy.contains('Save');
   };
-  let getUrl = () => {
-    return cy.url();
-  };
+
   let checkName = () => {
     return cy.get('#name').should('be.disabled');
   };
@@ -49,7 +47,7 @@ describe('Edit a namespace', () => {
       .clear()
       .type('Company name');
     saveButton().click();
-    getUrl().should('eq', 'http://localhost:8002/ui/my-namespaces/testns1');
+    cy.url().should('eq', 'http://localhost:8002/ui/my-namespaces/testns1');
   };
   let getOwnersField = () => {
     return cy.get('.pf-c-form-control.pf-c-select__toggle-typeahead');
@@ -115,7 +113,7 @@ describe('Edit a namespace', () => {
   };
 
   let getLinkTextField = () => {
-    return cy.get('.link-text').click();
+    return cy.get('div.useful-links > div.link-name > input').invoke('attr', 'placeholder', 'Link text').click();
   };
   let getUrlField = () => {
     return cy.get('div.useful-links div.link-url #url').click();

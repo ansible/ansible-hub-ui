@@ -203,7 +203,6 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         <div className='link-name'>
           <TextInput
             id='name'
-            className='link-text'
             type='text'
             placeholder='Link text'
             value={link.name}
