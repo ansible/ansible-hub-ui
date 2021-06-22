@@ -85,7 +85,7 @@ describe('Edit a namespace', () => {
         'https://www.logotaglines.com/wp-content/uploads/2018/01/IBM-Logo-Tagline.jpg',
       );
     saveButton().click();
-    cy.get('.logo-image').should(
+    cy.get('div.title-box > div.image > img').should(
       'have.attr',
       'src',
       'https://www.logotaglines.com/wp-content/uploads/2018/01/IBM-Logo-Tagline.jpg',
@@ -114,7 +114,7 @@ describe('Edit a namespace', () => {
     cy.get('.header-bottom').should('contain', 'A namespace description');
   };
 
-  let getTextField = () => {
+  let getLinkTextField = () => {
     return cy.get('.link-text').click();
   };
   let getUrlField = () => {
@@ -125,34 +125,34 @@ describe('Edit a namespace', () => {
   };
   let checkLink = () => {
     cy.get('div.link > a')
-      .should('contain', "Link to Shaiah's website")
-      .and('have.attr', 'href', 'https://shaiahwren.com/');
+      .should('contain', "Link to example website")
+      .and('have.attr', 'href', 'https://example.com/');
   };
 
   let checkLinksField = () => {
-    getTextField().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
-    getUrlField().type('shaiahwren.com');
+    getLinkTextField().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
+    getUrlField().type('example.com');
     saveButton().click();
     linksHelper().should(
       'contain',
       'Text: Ensure this field has no more than 32 characters.',
     );
-    getTextField().clear();
+    getLinkTextField().clear();
     saveButton().click();
     linksHelper().should('contain', 'Text: This field may not be blank.');
-    getTextField().type("Link to Shaiah's website");
+    getLinkTextField().type("Link to example website");
     getUrlField().clear();
     saveButton().click();
     linksHelper().should('contain', 'URL: This field may not be blank.');
-    getUrlField().type('shaiahwren.com');
+    getUrlField().type('example.com');
     saveButton().click();
     linksHelper().should(
       'contain',
-      "URL: 'shaiahwren.com' is not a valid url.",
+      "URL: 'example.com' is not a valid url.",
     );
     getUrlField()
       .clear()
-      .type('https://shaiahwren.com/');
+      .type('https://example.com/');
     saveButton().click();
     checkLink();
   };

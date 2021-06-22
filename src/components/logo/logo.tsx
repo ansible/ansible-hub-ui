@@ -35,7 +35,6 @@ export class Logo extends React.Component<IProps> {
     return (
       <div className={className} style={style}>
         <img
-          className='logo-image'
           style={{ objectFit: 'contain', maxHeight: size }}
           src={image || DefaultLogo}
           alt={alt}
