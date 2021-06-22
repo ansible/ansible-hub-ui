@@ -125,7 +125,7 @@ describe('Edit a namespace', () => {
   };
   let checkLink = () => {
     cy.get('div.link > a')
-      .should('contain', "Link to example website")
+      .should('contain', 'Link to example website')
       .and('have.attr', 'href', 'https://example.com/');
   };
 
@@ -140,16 +140,13 @@ describe('Edit a namespace', () => {
     getLinkTextField().clear();
     saveButton().click();
     linksHelper().should('contain', 'Text: This field may not be blank.');
-    getLinkTextField().type("Link to example website");
+    getLinkTextField().type('Link to example website');
     getUrlField().clear();
     saveButton().click();
     linksHelper().should('contain', 'URL: This field may not be blank.');
     getUrlField().type('example.com');
     saveButton().click();
-    linksHelper().should(
-      'contain',
-      "URL: 'example.com' is not a valid url.",
-    );
+    linksHelper().should('contain', "URL: 'example.com' is not a valid url.");
     getUrlField()
       .clear()
       .type('https://example.com/');
