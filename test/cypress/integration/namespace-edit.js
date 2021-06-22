@@ -157,6 +157,47 @@ describe('Edit a namespace', () => {
     checkLink();
   };
 
+  let trashButton = () => {
+    return cy.get(
+      'div.useful-links:first-child > div.link-button > div.link-container > svg > path[d^=M432]',
+    );
+  };
+
+  let removeLink = () => {
+    trashButton().click();
+    saveButton().click();
+  };
+
+  let getEditTab = () => {
+    return cy
+      .get(
+        'ul.pf-c-tabs__list > li.pf-c-tabs__item > button > span.pf-c-tabs__item-text',
+      )
+      .contains('Edit resources')
+      .click();
+  };
+
+  getTextField = () => {
+    return cy.get('div.pf-c-form__group-control > textarea.pf-c-form-control');
+  };
+  let editReadme = () => {
+    getEditTab();
+    getTextField()
+      .invoke('attr', 'placeholder')
+      .should(
+        'contain',
+        '## Custom resources\n\nYou can use this page to add any resources which you think might help your users automate all the things.',
+      );
+    getTextField()
+      .click()
+      .type('Editing the readme file');
+    saveButton().click();
+    kebabToggle();
+    editNamespace();
+    getEditTab();
+    getTextField().should('contain', 'Editing the readme file');
+  };
+
   beforeEach(() => {
     cy.visit(baseUrl);
     cy.login(adminUsername, adminPassword);
@@ -180,7 +221,7 @@ describe('Edit a namespace', () => {
     saveCompanyName();
     cy.get('.pf-c-title').should('contain', 'Company name');
   });
-  it.only('tests the namespace owners field', () => {
+  it('tests the namespace owners field', () => {
     checkOwnersField();
   });
   it('tests the Logo URL field', () => {
@@ -192,5 +233,10 @@ describe('Edit a namespace', () => {
   it('tests the Links field', () => {
     checkLinksField();
   });
-  it('removes a link', () => {});
+  it('removes a link', () => {
+    removeLink();
+  });
+  it('edits namespace resources', () => {
+    editReadme();
+  });
 });
