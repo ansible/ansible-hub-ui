@@ -116,12 +116,14 @@ class CollectionDocs extends React.Component<
     ];
 
     // scroll to top of page
-    if (
-      this.docsRef.current &&
-      this.searchBarRef.current !== window.document.activeElement
-    ) {
-      this.docsRef.current.scrollIntoView();
-    }
+
+    // if (
+    //   this.docsRef.current
+    //   // &&
+    //   // this.searchBarRef.current !== window.document.activeElement
+    // ) {
+    //   this.docsRef.current.scrollIntoView();
+    // }
 
     return (
       <React.Fragment>
@@ -195,10 +197,17 @@ class CollectionDocs extends React.Component<
     );
   }
 
+ 
+ 
+ executeScroll() {
+   this.docsRef.current.scrollIntoView()
+ }
+
+
   private renderDocLink(name, href, collection, params) {
     if (!!href && href.startsWith('http')) {
       return (
-        <a href={href} target='_blank'>
+        <a href={href} target='_blank' onClick={this.docsRef.current.scrollIntoView()}>
           {name}
         </a>
       );
