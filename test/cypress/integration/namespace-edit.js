@@ -113,7 +113,10 @@ describe('Edit a namespace', () => {
   };
 
   let getLinkTextField = () => {
-    return cy.get('div.useful-links > div.link-name > input').invoke('attr', 'placeholder', 'Link text').click();
+    return cy
+      .get('div.useful-links > div.link-name > input')
+      .invoke('attr', 'placeholder', 'Link text')
+      .click();
   };
   let getUrlField = () => {
     return cy.get('div.useful-links div.link-url #url').click();
