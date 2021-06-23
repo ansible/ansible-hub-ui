@@ -115,7 +115,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     let extra = [];
 
-    if (!!user && user.model_permissions.add_namespace && filterOwner) {
+    if (user?.model_permissions?.add_namespace) {
       extra.push(
         <ToolbarItem key='create-button'>
           <Button variant='primary' onClick={this.handleModalToggle}>
@@ -184,18 +184,19 @@ export class NamespaceList extends React.Component<IProps, IState> {
   private renderBody() {
     const { namespaces, loading } = this.state;
     const { namespacePath, filterOwner } = this.props;
+    const { user } = this.context;
+
     const noDataTitle = Constants.STANDALONE_DEPLOYMENT_MODE
       ? 'No namespaces yet'
       : 'No managed namespaces yet';
     const noDataDescription = Constants.STANDALONE_DEPLOYMENT_MODE
       ? 'Namespaces will appear once created'
       : 'This account is not set up to manage any namespaces';
-    const noDataButton =
-      Constants.STANDALONE_DEPLOYMENT_MODE && filterOwner ? (
-        <Button variant='primary' onClick={() => this.handleModalToggle()}>
-          Create
-        </Button>
-      ) : null;
+    const noDataButton = user?.model_permissions?.add_namespace ? (
+      <Button variant='primary' onClick={() => this.handleModalToggle()}>
+        Create
+      </Button>
+    ) : null;
 
     if (loading) {
       return (
