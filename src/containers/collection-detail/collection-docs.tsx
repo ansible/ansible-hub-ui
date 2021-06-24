@@ -123,7 +123,6 @@ class CollectionDocs extends React.Component<
     // ) {
     //   this.docsRef.current.scrollIntoView();
     // }
-  
 
     return (
       <React.Fragment>
@@ -201,14 +200,12 @@ class CollectionDocs extends React.Component<
     this.docsRef.current.scrollIntoView();
   };
 
-
-
   private renderDocLink(name, href, collection, params) {
     if (!!href && href.startsWith('http')) {
       return (
         <a href={href} target='_blank'>
           {name}
-          </a>
+        </a>
       );
     } else if (!!href) {
       // TODO: right now this will break if people put
