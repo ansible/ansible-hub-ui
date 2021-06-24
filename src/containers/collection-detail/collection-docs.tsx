@@ -29,7 +29,7 @@ class CollectionDocs extends React.Component<
   IBaseCollectionState
 > {
   docsRef: any;
-  searchBarRef: React.RefObject<HTMLInputElement>;
+  // searchBarRef: React.RefObject<HTMLInputElement>;
   constructor(props) {
     super(props);
     const params = ParamHelper.parseParamString(props.location.search);
@@ -38,9 +38,8 @@ class CollectionDocs extends React.Component<
       collection: undefined,
       params: params,
     };
-
     this.docsRef = React.createRef();
-    this.searchBarRef = React.createRef();
+    // this.searchBarRef = React.createRef();
   }
 
   componentDidMount() {
@@ -151,7 +150,7 @@ class CollectionDocs extends React.Component<
               selectedType={contentType}
               params={params}
               updateParams={p => this.updateParams(p)}
-              searchBarRef={this.searchBarRef}
+              // searchBarRef={this.searchBarRef}
             ></TableOfContents>
 
             <div className='body docs pf-c-content' ref={this.docsRef}>
@@ -196,13 +195,11 @@ class CollectionDocs extends React.Component<
       </React.Fragment>
     );
   }
-
   executeScroll = () => {
     setTimeout(function() {
       this.docsRef.current.scrollIntoView();
     }, 5000);
   };
-
   private renderDocLink(name, href, collection, params) {
     if (!!href && href.startsWith('http')) {
       return (
@@ -226,7 +223,6 @@ class CollectionDocs extends React.Component<
             },
             params,
           )}
-          onClick={this.executeScroll}
         >
           {name}
         </Link>
