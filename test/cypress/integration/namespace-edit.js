@@ -20,9 +20,11 @@ describe('Edit a namespace', () => {
       .invoke('attr', 'placeholder', 'Link text')
       .click();
   };
+
   let getUrlField = () => {
     return cy.get('div.useful-links div.link-url #url').click();
   };
+
   let linksHelper = () => {
     return cy.get('#links-helper');
   };
@@ -53,6 +55,7 @@ describe('Edit a namespace', () => {
   it('tests that the name field is disabled from editing', () => {
     return cy.get('#name').should('be.disabled');
   });
+
   it('tests the company name for errors', () => {
     cy.get('#company')
       .clear()
@@ -66,6 +69,7 @@ describe('Edit a namespace', () => {
       'Ensure this field has no more than 64 characters.',
     );
   });
+
   it('saves a new company name', () => {
     cy.get('#company')
       .clear()
@@ -74,6 +78,7 @@ describe('Edit a namespace', () => {
     cy.url().should('eq', 'http://localhost:8002/ui/my-namespaces/testns1');
     cy.get('.pf-c-title').should('contain', 'Company name');
   });
+
   it('tests the namespace owners field', () => {
     cy.get('.pf-c-form-control.pf-c-select__toggle-typeahead')
       .click()
@@ -83,6 +88,7 @@ describe('Edit a namespace', () => {
     cy.get('.pf-c-select__menu-wrapper').click();
     saveButton().click();
   });
+
   it('tests the Logo URL field', () => {
     cy.get('#avatar_url')
       .clear()
@@ -101,6 +107,7 @@ describe('Edit a namespace', () => {
       'https://www.logotaglines.com/wp-content/uploads/2018/01/IBM-Logo-Tagline.jpg',
     );
   });
+
   it('tests the Description field', () => {
     cy.get('#description').type(`
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas magna velit, tempor at interdum viverra, egestas quis libero. Aenean arcu magna, sodales ut dictum accumsan, consectetur vitae mi. Maecenas efficitur ipsum a orci condimentum, in lobortis turpis accumsan. Vivamus non libero varius, vulputate nunc vitae, posuere risus. In ut malesuada magna. Cras ac rhoncus mi. Nulla tempus semper interdum. Aliquam scelerisque, purus quis vestibulum finibus, dolor augue dictum erat, id commodo justo quam non metus.`);
@@ -115,6 +122,7 @@ describe('Edit a namespace', () => {
     saveButton().click();
     cy.get('.header-bottom').should('contain', 'A namespace description');
   });
+
   it('tests the Links field', () => {
     getLinkTextField().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
     getUrlField().type('example.com');
@@ -141,12 +149,14 @@ describe('Edit a namespace', () => {
       .should('contain', 'Link to example website')
       .and('have.attr', 'href', 'https://example.com/');
   });
+
   it('removes a link', () => {
     cy.get(
       'div.useful-links:first-child > div.link-button > div.link-container > svg > path[d^=M432]',
     ).click();
     saveButton().click();
   });
+
   it('edits namespace resources', () => {
     getEditTab();
     getTextField()
