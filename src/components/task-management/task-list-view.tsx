@@ -9,11 +9,10 @@ import {
   ToolbarItem,
   ToolbarContent,
   Button,
-  
 } from '@patternfly/react-core';
 import { ParamHelper } from '../../utilities';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
-import { 
+import {
   AlertList,
   AlertType,
   AppliedFilters,
@@ -27,9 +26,10 @@ import {
   Pagination,
   SortTable,
   Tooltip,
-  closeAlertMixin,  } from 'src/components';
+  closeAlertMixin,
+} from 'src/components';
 
-  interface IState {
+interface IState {
   params: {
     page?: number;
     page_size?: number;
@@ -68,10 +68,8 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     };
   }
 
-
-  
-// My fetch attempt, pretty sure it's not working...
-//Is there somewhere we need to add our tasks path /ui/task_management with react router?
+  // My fetch attempt, pretty sure it's not working...
+  //Is there somewhere we need to add our tasks path /ui/task_management with react router?
 
   fetchData = async () => {
     const res = await axios.get('http://pulp/pulp/api/v3/tasks/');
@@ -87,15 +85,13 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       params['sort'] = 'name';
     }
 
-  
     return (
       <React.Fragment>
-          <AlertList
+        <AlertList
           alerts={alerts}
           closeAlert={i => this.closeAlert(i)}
         ></AlertList>
         <BaseHeader title='Task Management'></BaseHeader>
-
         //Is something like this 'noData' state applicable for the tasks?
         {noData && !loading ? (
           <EmptyStateNoData
@@ -121,7 +117,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                             updateParams={p => {
                               p['page'] = 1;
                               this.updateParams(p, () =>
-                              // rather than query environments, this would be something like query tasks...
+                                // rather than query environments, this would be something like query tasks...
                                 this.queryEnvironments(),
                               );
                             }}
@@ -178,120 +174,126 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     );
   }
 
+  // Will we be using something like this for renderTable?
+  private renderTable(params) {
+    const { items } = this.state;
+    if (items.length === 0) {
+      return <EmptyStateFilter />;
+    }
 
+    let sortTableOptions = {
+      headers: [
+        {
+          title: 'Task name',
+          type: 'alpha',
+          id: 'name',
+        },
+        {
+          title: 'State',
+          type: 'alpha',
+          id: 'state',
+        },
+        {
+          title: 'Error',
+          type: 'alpha',
+          id: 'error',
+        },
+        {
+          title: 'Date created',
+          type: 'none',
+          id: 'pulp_created',
+        },
+        {
+          title: 'Started at',
+          type: 'none',
+          id: 'started_at',
+        },
+        {
+          title: 'Finished at',
+          type: 'none',
+          id: 'finished_at',
+        },
+        {
+          title: 'Progress reports',
+          type: 'none',
+          id: 'progress_reports',
+        },
+        {
+          title: 'Parent task',
+          type: 'none',
+          id: 'parent_task',
+        },
+        {
+          title: 'Child tasks',
+          type: 'none',
+          id: 'child_tasks',
+        },
+      ],
+    };
 
-// Will we be using something like this for renderTable?
-private renderTable(params) {
-  const { items } = this.state;
-  if (items.length === 0) {
-    return <EmptyStateFilter />;
+    return (
+      <table aria-label='Task list' className='content-table pf-c-table'>
+        <SortTable
+          options={sortTableOptions}
+          params={params}
+          updateParams={p =>
+            //How would this be different for the task list? Does this refer to the API call / setState down on 229?
+            this.updateParams(p, () => this.queryEnvironments())
+          }
+        />
+        <tbody>{items.map((user, i) => this.renderTableRow(user, i))}</tbody>
+      </table>
+    );
   }
 
-
-let sortTableOptions = {
-  headers: [
-    {
-      title: 'Task name',
-      type: 'alpha',
-      id: 'name',
-    },
-    {
-      title: 'State',
-      type: 'alpha',
-      id: 'state',
-    },
-    {
-      title: 'Error',
-      type: 'alpha',
-      id: 'error',
-    },
-    {
-      title: 'Date created',
-      type: 'none',
-      id: 'pulp_created',
-    },
-    {
-      title: 'Started at',
-      type: 'none',
-      id: 'started_at',
-    },
-    {
-      title: 'Finished at',
-      type: 'none',
-      id: 'finished_at',
-    },
-    {
-      title: 'Progress reports',
-      type: 'none',
-      id: 'progress_reports',
-    },
-    {
-      title: 'Parent task',
-      type: 'none',
-      id: 'parent_task',
-    },
-    {
-      title: 'Child tasks',
-      type: 'none',
-      id: 'child_tasks',
-    },
-  ],
-};
-
-return (
-  <table aria-label='Task list' className='content-table pf-c-table'>
-    <SortTable
-      options={sortTableOptions}
-      params={params}
-      updateParams={p =>
-        //How would this be different for the task list? Does this refer to the API call / setState down on 229?
-        this.updateParams(p, () => this.queryEnvironments())
-      }
-    />
-    <tbody>{items.map((user, i) => this.renderTableRow(user, i))}</tbody>
-  </table>
-);
-}   
-
-private renderTableRow(item: any, index: number) {
-  const { name, pulp_href, state, error, pulp_created, started_at, finished_at, progress_reports, parent_task, child_tasks } = item;
-  return (
-    <tr aria-labelledby={name} key={index}>
-      <td>
-        <Link
-        //this path would be to the task detail, correct? Or to the pulp_href
-          to={formatPath(Paths.executionEnvironmentDetail, {
-            container: item.pulp.distribution.base_path,
-          })}
-        >
-          {name}
-        </Link>
-      </td>
-      <td>
-       {state}
-      </td>
-      // error is an object. Is this the proper way to render it?
-      {error ? (
-        <td className={'pf-m-truncate'}>
-          <Tooltip content={error}>{error}</Tooltip>
-        </td>
-      ) : (
-        <td></td>
-      )}
-      <td>
-        <DateComponent date={pulp_created} />
-      </td>
-      <td>
-        <DateComponent date={started_at} />
-      </td>
-      {finished_at ? (
+  private renderTableRow(item: any, index: number) {
+    const {
+      name,
+      pulp_href,
+      state,
+      error,
+      pulp_created,
+      started_at,
+      finished_at,
+      progress_reports,
+      parent_task,
+      child_tasks,
+    } = item;
+    return (
+      <tr aria-labelledby={name} key={index}>
         <td>
-          <DateComponent date={finished_at}/>
+          <Link
+            //this path would be to the task detail, correct? Or to the pulp_href
+            to={formatPath(Paths.executionEnvironmentDetail, {
+              container: item.pulp.distribution.base_path,
+            })}
+          >
+            {name}
+          </Link>
         </td>
-      ) : (
-        <td></td>
-      )}
-           {progress_reports ? (
+        <td>{state}</td>
+        // error is an object. Is this the proper way to render it?
+        {error ? (
+          <td className={'pf-m-truncate'}>
+            <Tooltip content={error}>{error}</Tooltip>
+          </td>
+        ) : (
+          <td></td>
+        )}
+        <td>
+          <DateComponent date={pulp_created} />
+        </td>
+        <td>
+          <DateComponent date={started_at} />
+        </td>
+        {finished_at ? (
+          <td>
+            <DateComponent date={finished_at} />
+          </td>
+        ) : (
+          <td></td>
+        )}
+        {progress_reports ? (
           <td className={'pf-m-truncate'}>
             //given this is an Array, is this the proper way to render it?
             <Tooltip content={progress_reports}>{progress_reports}</Tooltip>
@@ -299,29 +301,28 @@ private renderTableRow(item: any, index: number) {
         ) : (
           <td></td>
         )}
-    </tr>
-    
-  );
-};
+      </tr>
+    );
+  }
 
-// This must be where we call the pulp API and set the state appropriately. 
-private queryEnvironments() {
-  this.setState({ loading: true }, () =>
-    ExecutionEnvironmentAPI.list(this.state.params).then(result =>
-      this.setState({
-        items: result.data.data,
-        itemCount: result.data.meta.count,
-        loading: false,
-      }),
-    ),
-  );
-}
+  // This must be where we call the pulp API and set the state appropriately.
+  private queryEnvironments() {
+    this.setState({ loading: true }, () =>
+      ExecutionEnvironmentAPI.list(this.state.params).then(result =>
+        this.setState({
+          items: result.data.data,
+          itemCount: result.data.meta.count,
+          loading: false,
+        }),
+      ),
+    );
+  }
 
-private get updateParams() {
-  return ParamHelper.updateParamsMixin();
-}
+  private get updateParams() {
+    return ParamHelper.updateParamsMixin();
+  }
 
-private get closeAlert() {
-  return closeAlertMixin('alerts');
-}
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
 }
