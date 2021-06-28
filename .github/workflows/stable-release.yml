@@ -1,5 +1,6 @@
 name: "Stable release from stable-4.3"
 
+# creating a release creates a tag as well; this expects the release to exist
 on:
   push:
     tags:
@@ -18,11 +19,9 @@ jobs:
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v2
 
-    - name: "Set TRAVIS_COMMIT_MESSAGE, RELEASE_TAG"
+    - name: "Set RELEASE_TAG"
       run: |
-        TRAVIS_COMMIT_MESSAGE=`git log -1 --format=%B`
         RELEASE_TAG=`sed 's/^refs\/tags\///' <<< $GITHUB_REF`
-        echo -e "TRAVIS_COMMIT_MESSAGE<<EOF\n${TRAVIS_COMMIT_MESSAGE}\nEOF" >> $GITHUB_ENV
         echo "RELEASE_TAG=${RELEASE_TAG}" >> $GITHUB_ENV
 
     - name: "Install node 14"
@@ -47,7 +46,7 @@ jobs:
 
     - name: "Release"
       run: |
-        gh release create "$RELEASE_TAG" --notes "$TRAVIS_COMMIT_MESSAGE" "$RELEASE_FILE"
+        gh release upload "$RELEASE_TAG" "$RELEASE_FILE" --clobber
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         RELEASE_FILE: 'automation-hub-ui-dist.tar.gz'
