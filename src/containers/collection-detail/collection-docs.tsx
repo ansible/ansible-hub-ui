@@ -117,8 +117,7 @@ class CollectionDocs extends React.Component<
     // scroll to top of page
 
     if (
-      this.docsRef.current
-      &&
+      this.docsRef.current &&
       this.searchBarRef.current !== window.document.activeElement
     ) {
       this.docsRef.current.scrollIntoView();
