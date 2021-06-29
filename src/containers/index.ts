@@ -27,3 +27,4 @@ export { default as ExecutionEnvironmentDetailActivities } from './execution-env
 export { default as ExecutionEnvironmentDetailImages } from './execution-environment-detail/execution_environment_detail_images';
 export { default as ExecutionEnvironmentManifest } from './execution-environment-manifest/execution-environment-manifest';
 export { AboutModalWindow } from './about-modal/about-modal';
+export { default as TaskListView } from './task-management/task-list-view';
