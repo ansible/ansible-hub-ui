@@ -29,6 +29,7 @@ import {
   ExecutionEnvironmentDetailActivities,
   ExecutionEnvironmentDetailImages,
   ExecutionEnvironmentManifest,
+  TaskListView,
 } from 'src/containers';
 import {
   ActiveUserAPI,
@@ -155,6 +156,10 @@ export class Routes extends React.Component<IRoutesProps> {
         comp: ExecutionEnvironmentList,
         path: Paths.executionEnvironments,
         isDisabled: isContainerDisabled,
+      },
+      {
+        comp: TaskListView,
+        path: Paths.taskList,
       },
       { comp: GroupList, path: Paths.groupList },
       { comp: GroupDetail, path: Paths.groupDetail },
