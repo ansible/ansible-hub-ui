@@ -1,12 +1,12 @@
 describe('Hub User Management Tests', () => {
-    let host = Cypress.env('host');
+    let baseUrl = Cypress.config().baseUrl;
     let adminUsername = Cypress.env('username');
     let adminPassword = Cypress.env('password');
     let username = 'test';
     let password = 'p@ssword1';
 
     before(() => {
-        cy.visit(host);
+        cy.visit(baseUrl);
         cy.login(adminUsername, adminPassword);
 
         cy.createUser(username, password, 'Test F', 'Test L', 'test@example.com');
@@ -20,7 +20,7 @@ describe('Hub User Management Tests', () => {
 
     describe('basic check of user page', () => {
         beforeEach(() => {
-            cy.visit(host);
+            cy.visit(baseUrl);
             cy.login(adminUsername, adminPassword);
             cy.contains('#page-sidebar a', 'Users').click();
         });
@@ -32,7 +32,7 @@ describe('Hub User Management Tests', () => {
 
     describe('Creation and management of users', () => {
         beforeEach(() => {
-            cy.visit(host);
+            cy.visit(baseUrl);
             cy.login(adminUsername, adminPassword);
             cy.contains('#page-sidebar a', 'Users').click();
         });
@@ -52,7 +52,7 @@ describe('Hub User Management Tests', () => {
 
     describe('prevents super-user and self deletion', () => {
         beforeEach(() => {
-            cy.visit(host);
+            cy.visit(baseUrl);
         });
         afterEach(() => {
             cy.logout();

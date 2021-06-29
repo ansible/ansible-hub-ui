@@ -13,6 +13,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^4.11.0"
+    "cypress": "^4.11.0",
+    "cypress-log-to-output": "^1.1.2"
+  },
+  "dependencies": {
+    "url-join": "^4.0.1"
   }
 }

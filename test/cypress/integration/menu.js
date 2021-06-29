@@ -1,10 +1,10 @@
 describe('Hub Menu Tests', () => {
-    let host = Cypress.env('host');
+    let baseUrl = Cypress.config().baseUrl;
     let adminUsername = Cypress.env('username');
     let adminPassword = Cypress.env('password');
 
     beforeEach(() => {
-        cy.visit(host);
+        cy.visit(baseUrl);
     });
 
     it('admin user sees complete menu', () => {

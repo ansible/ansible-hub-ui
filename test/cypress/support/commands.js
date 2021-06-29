@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+var urljoin = require('url-join');
+
 Cypress.Commands.add('findnear', {prevSubject: true}, (subject, selector) => {
     return subject.closest(`*:has(${selector})`).find(selector);
 });
@@ -42,16 +44,17 @@ Cypress.Commands.add('menuItem', {}, (name) => {
 });
 Cypress.Commands.add('logout', {}, () => {
     cy.server();
-    cy.route('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
+    cy.route('GET', urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/')).as('me');
     cy.get('[aria-label="user-dropdown"] button').click();
     cy.get('[aria-label="logout"]').click();
     cy.wait('@me');
 });
 
 Cypress.Commands.add('login', {}, (username, password) => {
+    let loginUrl = urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/auth/login/');
     cy.server();
-    cy.route('POST', Cypress.env('prefix') + '_ui/v1/auth/login/').as('login');
-    cy.route('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
+    cy.route('POST', loginUrl).as('login');
+    cy.route('GET', urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/')).as('me');
     cy.get('#pf-login-username-id').type(username);
     cy.get('#pf-login-password-id').type(`${password}{enter}`);
     cy.wait('@login');
@@ -84,7 +87,9 @@ Cypress.Commands.add('createUser', {}, (username, password = null, firstName = n
 });
 
 Cypress.Commands.add('createGroup', {}, (name) => {
+    cy.route('GET', Cypress.env('prefix') + '_ui/v1/groups/?sort=name&offset=0&limit=10').as('createGroup');
     cy.contains('#page-sidebar a', 'Groups').click();
+    cy.wait('@createGroup');
 
     cy.contains('Create').click();
 
