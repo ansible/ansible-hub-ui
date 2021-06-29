@@ -28,9 +28,6 @@ describe('A namespace form', () => {
   beforeEach(() => {
     cy.visit(baseUrl);
     cy.login(adminUsername, adminPassword);
-    cy.on('uncaught:exception', (err, runnable) => {
-      return false;
-    });
     createNamespace();
     cy.menuGo('Collections > Namespaces');
     getCreateNamespace().click();
