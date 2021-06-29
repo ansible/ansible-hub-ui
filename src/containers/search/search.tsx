@@ -4,15 +4,6 @@ import './search.scss';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { DataList, Switch } from '@patternfly/react-core';
 import {
-  DataList,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-  ToolbarContent,
-  Switch,
-} from '@patternfly/react-core';
-
-import {
   BaseHeader,
   CardListSwitcher,
   CollectionCard,
@@ -161,7 +152,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
             <section className='collection-container'>
               {this.renderCollections(collections, params, updateParams)}
             </section>
-            <section className='footer'><Pagination
+            <section className='footer'>
+              <Pagination
                 params={params}
                 updateParams={p =>
                   this.updateParams(p, () => this.queryCollections())
