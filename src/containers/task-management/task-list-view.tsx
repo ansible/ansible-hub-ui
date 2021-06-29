@@ -75,7 +75,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     return (
       <React.Fragment>
         <BaseHeader title={'Task Management'} />
-        <Main>{ this.renderTable() }</Main>
+        <Main>{this.renderTable()}</Main>
       </React.Fragment>
     );
     //   const { params, itemCount, loading, alerts } = this.state;
