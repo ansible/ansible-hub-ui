@@ -79,6 +79,9 @@ describe('A namespace form', () => {
     let id = parseInt(Math.random() * 1000000);
     getInputBox().type(`testns_${id}`);
     getCreateButton().click();
-    getUrl().should('eq', `http://localhost:8002/ui/my-namespaces/testns_${id}`);
+    getUrl().should(
+      'eq',
+      `http://localhost:8002/ui/my-namespaces/testns_${id}`,
+    );
   });
 });
