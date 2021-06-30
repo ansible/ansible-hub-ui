@@ -71,10 +71,13 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    TaskManagementAPI.list().then((result) => {
+    TaskManagementAPI.list().then(result => {
       console.log(result.data.results);
-      this.setState({items: result.data.results, itemCount: result.data.count})
-    })
+      this.setState({
+        items: result.data.results,
+        itemCount: result.data.count,
+      });
+    });
   }
 
   // My fetch attempt, pretty sure it's not working...
@@ -360,7 +363,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
           title: 'Finished at',
           type: 'none',
           id: 'finished_at',
-        }
+        },
       ],
     };
 
@@ -380,19 +383,16 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderTableRow() {
-   
-      return (
-        <tr aria-labelledby={item.name} key={index}>
-          <td>{item.name}</td>
-          <td>{item.state}</td>
-          <td>{item.error}</td>
-          <td>{item.pulp_created}</td>
-          <td>{item.started_at}</td>
-          <td>{item.finished_at}</td>
-        </tr>
-      );
-
-   
+    return (
+      <tr aria-labelledby={item.name} key={index}>
+        <td>{item.name}</td>
+        <td>{item.state}</td>
+        <td>{item.error}</td>
+        <td>{item.pulp_created}</td>
+        <td>{item.started_at}</td>
+        <td>{item.finished_at}</td>
+      </tr>
+    );
   }
 }
 
