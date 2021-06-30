@@ -117,6 +117,8 @@ module.exports = inputConfigs => {
   }
 
   plugins.push(new webpack.DefinePlugin(globals));
+  console.log("PLUGIN");
+  console.log({...newWebpackConfig, plugins});
 
   return {
     ...newWebpackConfig,
