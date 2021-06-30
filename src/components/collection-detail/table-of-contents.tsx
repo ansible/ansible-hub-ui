@@ -209,7 +209,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
     return (
       <NavExpandable
         key={title}
-        title={capitalize(`${title} (${links.length})`)}
+        title={capitalize(`${title} (${filteredLinks.length})`)}
         isExpanded={isExpanded}
         isActive={this.getSelectedCategory() === title}
       >
