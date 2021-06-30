@@ -28,13 +28,12 @@ if (
 }
 
 const publicPath = `/${deploymentEnv}/ansible/`;
-console.log("PROCESS.ENV:");
+console.log('PROCESS.ENV:');
 console.log(process.env.NODE_ENV);
 console.log(process.env.BUILD_BETA);
 console.log(process.env.BRANCH);
 console.log(gitRevisionPlugin.branch());
 console.log(publicPath);
-
 
 module.exports = {
   paths: {

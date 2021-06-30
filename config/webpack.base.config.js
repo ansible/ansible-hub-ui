@@ -49,6 +49,8 @@ module.exports = inputConfigs => {
       );
     }
   });
+  console.log('defaultConfigs:');
+  console.log(defaultConfigs);
 
   const htmlPluginConfig = {
     targetEnv: customConfigs.DEPLOYMENT_MODE,
@@ -117,8 +119,12 @@ module.exports = inputConfigs => {
   }
 
   plugins.push(new webpack.DefinePlugin(globals));
-  console.log("PLUGIN");
-  console.log({...newWebpackConfig, plugins});
+  console.log('CONFIG:');
+  console.log(config);
+  console.log('NEWWEBPACKCONFIG:');
+  console.log({ ...newWebpackConfig });
+  console.log('PLUGINS:');
+  console.log(plugins);
 
   return {
     ...newWebpackConfig,
