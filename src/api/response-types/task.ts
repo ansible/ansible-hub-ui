@@ -5,6 +5,4 @@ export class TaskType {
   started_at: string;
   finished_at: string;
   error: string;
-  parent_task: string;
-  child_tasks: string;
 }

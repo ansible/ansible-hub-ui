@@ -28,6 +28,8 @@ import {
   Tooltip,
   closeAlertMixin,
 } from 'src/components';
+import { TaskManagementAPI } from 'src/api';
+import { TaskType } from 'src/api/response-types/task';
 
 interface IState {
   params: {
@@ -36,7 +38,7 @@ interface IState {
   };
   loading: boolean;
   //What would 'items' be here? The list of tasks from the API?
-  items: Array<string>;
+  items: Array<TaskType>;
   itemCount: number;
   alerts: AlertType[];
 }
@@ -66,6 +68,13 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       itemCount: 0,
       alerts: [],
     };
+  }
+
+  componentDidMount() {
+    TaskManagementAPI.list().then((result) => {
+      console.log(result.data.results);
+      this.setState({items: result.data.results, itemCount: result.data.count})
+    })
   }
 
   // My fetch attempt, pretty sure it's not working...
@@ -351,22 +360,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
           title: 'Finished at',
           type: 'none',
           id: 'finished_at',
-        },
-        {
-          title: 'Progress reports',
-          type: 'none',
-          id: 'progress_reports',
-        },
-        {
-          title: 'Parent task',
-          type: 'none',
-          id: 'parent_task',
-        },
-        {
-          title: 'Child tasks',
-          type: 'none',
-          id: 'child_tasks',
-        },
+        }
       ],
     };
 
@@ -386,16 +380,19 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderTableRow() {
-    return (
-      <tr>
-        <td>Name</td>
-        <td>State</td>
-        <td>Started at</td>
-        <td>Finished at</td>
-        <td>Parent task</td>
-        <td>Child tasks</td>
-      </tr>
-    );
+   
+      return (
+        <tr aria-labelledby={item.name} key={index}>
+          <td>{item.name}</td>
+          <td>{item.state}</td>
+          <td>{item.error}</td>
+          <td>{item.pulp_created}</td>
+          <td>{item.started_at}</td>
+          <td>{item.finished_at}</td>
+        </tr>
+      );
+
+   
   }
 }
 
