@@ -74,6 +74,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
         <FormGroup
           fieldId='groups'
           label='Namespace owners'
+          className='namespace-owners'
           helperTextInvalid={errorMessages['groups']}
           validated={this.toError(
             !isNaN(Number(this.state.newNamespaceGroup)) &&
