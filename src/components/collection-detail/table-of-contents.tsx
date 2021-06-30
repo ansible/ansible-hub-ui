@@ -9,7 +9,6 @@ import {
   NavItem,
   NavList,
   SearchInput,
-  TextInput,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
