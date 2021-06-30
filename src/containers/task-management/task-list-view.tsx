@@ -327,7 +327,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderTable() {
-    const items = [];
+    const { items } = this.state;
     // if (items.length === 0) {
     //   return <EmptyStateFilter />;
     // }
@@ -377,20 +377,27 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
             console.log('Table')
           }
         />
-        <tbody>{this.renderTableRow()}</tbody>
+        <tbody>{items.map((item, i) => this.renderTableRow(item, i))}</tbody>
       </table>
     );
   }
 
-  private renderTableRow() {
+  private renderTableRow(item: any, index: number) {
+    const { name, state, error, pulp_created, started_at, finished_at } = item;
     return (
-      <tr aria-labelledby={item.name} key={index}>
-        <td>{item.name}</td>
-        <td>{item.state}</td>
-        <td>{item.error}</td>
-        <td>{item.pulp_created}</td>
-        <td>{item.started_at}</td>
-        <td>{item.finished_at}</td>
+      <tr aria-labelledby={name} key={index}>
+        <td>{name}</td>
+        <td>{state}</td>
+        <td>{error}</td>
+        <td>
+          <DateComponent date={pulp_created} />
+        </td>
+        <td>
+          <DateComponent date={started_at} />
+        </td>
+        <td>
+          <DateComponent date={finished_at} />
+        </td>
       </tr>
     );
   }
