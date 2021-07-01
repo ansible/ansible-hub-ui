@@ -4,7 +4,6 @@ import './not-found.scss';
 import NotFoundImage from 'src/../static/images/not_found.svg';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import { Bullseye } from '@patternfly/react-core';
 
 import { BaseHeader, Main } from 'src/components';
@@ -15,7 +14,7 @@ class NotFound extends React.Component<RouteComponentProps, {}> {
       <React.Fragment>
         <BaseHeader title='404 - Page not found'></BaseHeader>
         <Main>
-          <Section className='body'>
+          <section className='body'>
             <Bullseye className='bullseye'>
               <div className='bullseye-center'>
                 <img src={NotFoundImage} alt='AWX Spud' />
@@ -25,7 +24,7 @@ class NotFound extends React.Component<RouteComponentProps, {}> {
                 </div>
               </div>
             </Bullseye>
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

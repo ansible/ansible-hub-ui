@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
   ToolbarGroup,
@@ -114,7 +113,7 @@ class ExecutionEnvironmentList extends React.Component<
             {loading ? (
               <LoadingPageSpinner />
             ) : (
-              <Section className='body'>
+              <section className='body'>
                 <div className='toolbar'>
                   <Toolbar>
                     <ToolbarContent>
@@ -169,7 +168,7 @@ class ExecutionEnvironmentList extends React.Component<
                     count={itemCount}
                   />
                 </div>
-              </Section>
+              </section>
             )}
           </Main>
         )}

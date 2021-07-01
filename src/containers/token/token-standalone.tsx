@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import { ClipboardCopy, Button } from '@patternfly/react-core';
 
 import { BaseHeader, Main } from 'src/components';
@@ -27,7 +26,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
       <React.Fragment>
         <BaseHeader title='Token management'></BaseHeader>
         <Main>
-          <Section className='body pf-c-content'>
+          <section className='body pf-c-content'>
             <h2>API token</h2>
             <p>
               Use this token to authenticate the <code>ansible-galaxy</code>{' '}
@@ -49,7 +48,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                 <Button onClick={() => this.loadToken()}>Load token</Button>
               </div>
             )}
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

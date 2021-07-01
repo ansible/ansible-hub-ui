@@ -7,7 +7,6 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Alert,
   AlertActionCloseButton,
@@ -29,11 +28,11 @@ import {
 import {
   CollectionList,
   CollectionFilter,
-  EmptyStateNoData,
   LoadingPageWithHeader,
   Main,
   Pagination,
   PartnerHeader,
+  EmptyStateNoData,
   RepoSelector,
   StatefulDropdown,
 } from 'src/components';
@@ -238,7 +237,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 }
               />
             ) : (
-              <Section className='body'>
+              <section className='body'>
                 <CollectionList
                   updateParams={updateParams}
                   params={params}
@@ -251,11 +250,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   }
                   repo={this.context.selectedRepo}
                 />
-              </Section>
+              </section>
             )
           ) : null}
           {tab.toLowerCase() === 'cli configuration' ? (
-            <Section className='body'>
+            <section className='body'>
               <div>
                 <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
                 <div>
@@ -271,7 +270,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   .
                 </div>
               </div>
-            </Section>
+            </section>
           ) : null}
           {tab.toLowerCase() === 'resources'
             ? this.renderResources(namespace)

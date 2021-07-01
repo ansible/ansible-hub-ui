@@ -2,9 +2,8 @@ import * as React from 'react';
 import cx from 'classnames';
 import './my-imports.scss';
 
-import { Tooltip } from '@patternfly/react-core';
+import { Tooltip, Spinner } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
-import { Spinner } from '@redhat-cloud-services/frontend-components';
 
 import { formatPath, Paths } from 'src/paths';
 import {
@@ -56,11 +55,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
         <div className='import-console'>
           {selectedImport ? this.renderTitle(selectedImport) : null}
           <div className='loading message-list'>
-            {apiError ? (
-              <div className='message'>{apiError}</div>
-            ) : (
-              <Spinner centered={false} />
-            )}
+            {apiError ? <div className='message'>{apiError}</div> : <Spinner />}
           </div>
         </div>
       );

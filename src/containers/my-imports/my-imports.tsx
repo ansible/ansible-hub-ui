@@ -2,7 +2,6 @@ import * as React from 'react';
 import './my-imports.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import { cloneDeep } from 'lodash';
 
 import { BaseHeader, ImportConsole, ImportList, Main } from 'src/components';
@@ -114,7 +113,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
         <div ref={this.topOfPage}></div>
         <BaseHeader title='My imports' />
         <Main>
-          <Section className='body'>
+          <section className='body'>
             <div className='page-container'>
               <div className='import-list'>
                 <ImportList
@@ -155,7 +154,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                 />
               </div>
             </div>
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );
