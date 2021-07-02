@@ -2,7 +2,6 @@ import axios from 'axios';
 import * as React from 'react';
 import * as moment from 'moment';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
   ToolbarGroup,
