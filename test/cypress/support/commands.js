@@ -56,31 +56,32 @@ Cypress.Commands.add('menuGo', {}, name => {
 });
 
 Cypress.Commands.add('logout', {}, () => {
-  cy.server();
+  /*cy.server();
   cy.route(
     'GET',
     urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
   ).as('me');
   cy.get('[aria-label="user-dropdown"] button').click();
   cy.get('[aria-label="logout"]').click();
-  cy.wait('@me');
+  cy.wait('@me');*/
+  cy.clearCookie('sessionid');
+  cy.clearCookie('csrftoken');
+  cy.visit(Cypress.config().baseUrl);
 });
 
 let user_tokens = {};
 
 Cypress.Commands.add('login', {}, (username, password) => {
-  debugger;
-
   //let user_tokens = localStorage.getItem(username);
+  cy.server();
 
-  //if (!user_tokens[username])
-  if (true) {
+  if (!user_tokens[username]) {
     let loginUrl = urljoin(
       Cypress.config().baseUrl,
       Cypress.env('prefix'),
       '_ui/v1/auth/login/',
     );
-    cy.server();
+
     cy.route('POST', loginUrl).as('login');
     cy.route(
       'GET',
@@ -90,7 +91,7 @@ Cypress.Commands.add('login', {}, (username, password) => {
     cy.get('#pf-login-password-id').type(`${password}{enter}`);
     cy.wait('@login');
     cy.wait('@me');
-    /*cy.getCookies().then(cookies => {
+    cy.getCookies().then(cookies => {
       let sessionid;
       let csrftoken;
 
@@ -100,20 +101,15 @@ Cypress.Commands.add('login', {}, (username, password) => {
         if (cookie.name == 'csrftoken') csrftoken = cookie.value;
       }
 
-      debugger;
       user_tokens[username] = {};
       user_tokens[username].sessionid = sessionid;
       user_tokens[username].csrftoken = csrftoken;
-
-      //var obj = {sessionid : sessionid, csrftoken : csrftoken};
-      //localStorage.setItem(username, JSON.stringify({sessionid : sessionid, csrftoken : csrftoken}));
-    });*/
+    });
   } else {
     cy.then(() => {
-      debugger;
-      //var tokens = JSON.parse(user_tokens);
-      cy.setCookie('sessionid', user_tokens[username].sessionid);
       cy.setCookie('csrftoken', user_tokens[username].csrftoken);
+      cy.setCookie('sessionid', user_tokens[username].sessionid);
+      cy.visit(Cypress.config().baseUrl);
     });
   }
 });
@@ -146,7 +142,11 @@ Cypress.Commands.add(
     cy.get('#password-confirm').type(user.password);
 
     cy.server();
-    cy.route('POST', Cypress.env('prefix') + '_ui/v1/users/').as('createUser');
+    cy.route('POST', Cypress.env('prefix') + '_ui/v1/users/')
+      .as('createUser')
+      .then(() => {
+        debugger;
+      });
 
     cy.contains('Save').click();
     cy.wait('@createUser');
