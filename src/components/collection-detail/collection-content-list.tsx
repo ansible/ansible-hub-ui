@@ -50,7 +50,7 @@ export class CollectionContentList extends React.Component<IProps> {
       // if (summary[c.content_type]) {
       //   summary[c.content_type]++;
       // } else {
-        // summary[c.content_type] = 1;
+      // summary[c.content_type] = 1;
       // }
 
       const typeMatch = showing === 'all' ? true : c.content_type === showing;
@@ -66,7 +66,6 @@ export class CollectionContentList extends React.Component<IProps> {
         }
       }
     }
-
 
     return (
       <div>
