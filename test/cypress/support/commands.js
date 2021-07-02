@@ -90,7 +90,7 @@ Cypress.Commands.add('login', {}, (username, password) => {
     cy.get('#pf-login-password-id').type(`${password}{enter}`);
     cy.wait('@login');
     cy.wait('@me');
-    cy.getCookies().then(cookies => {
+    /*cy.getCookies().then(cookies => {
       let sessionid;
       let csrftoken;
 
@@ -107,7 +107,7 @@ Cypress.Commands.add('login', {}, (username, password) => {
 
       //var obj = {sessionid : sessionid, csrftoken : csrftoken};
       //localStorage.setItem(username, JSON.stringify({sessionid : sessionid, csrftoken : csrftoken}));
-    });
+    });*/
   } else {
     cy.then(() => {
       debugger;
