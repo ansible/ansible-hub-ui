@@ -66,22 +66,62 @@ Cypress.Commands.add('logout', {}, () => {
   cy.wait('@me');
 });
 
+
+let user_tokens = {};
+
 Cypress.Commands.add('login', {}, (username, password) => {
-  let loginUrl = urljoin(
-    Cypress.config().baseUrl,
-    Cypress.env('prefix'),
-    '_ui/v1/auth/login/',
-  );
-  cy.server();
-  cy.route('POST', loginUrl).as('login');
-  cy.route(
-    'GET',
-    urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
-  ).as('me');
-  cy.get('#pf-login-username-id').type(username);
-  cy.get('#pf-login-password-id').type(`${password}{enter}`);
-  cy.wait('@login');
-  cy.wait('@me');
+  debugger;  
+  
+  //let user_tokens = localStorage.getItem(username);
+  
+  //if (!user_tokens[username])
+  if (true)
+  {
+    let loginUrl = urljoin(
+        Cypress.config().baseUrl,
+        Cypress.env('prefix'),
+        '_ui/v1/auth/login/',
+    );
+    cy.server();
+    cy.route('POST', loginUrl).as('login');
+    cy.route(
+        'GET',
+        urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
+    ).as('me');
+    cy.get('#pf-login-username-id').type(username);
+    cy.get('#pf-login-password-id').type(`${password}{enter}`);
+    cy.wait('@login');
+    cy.wait('@me');
+    cy.getCookies().then((cookies) => {
+        
+		let sessionid;
+		let csrftoken;
+		
+        for (var i in cookies)
+        {
+			var cookie = cookies[i];
+			if (cookie.name == "sessionid") sessionid = cookie.value;
+			if (cookie.name == "csrftoken") csrftoken = cookie.value;			 
+        }
+        
+        debugger;
+		user_tokens[username] = {};
+		user_tokens[username].sessionid = sessionid;
+		user_tokens[username].csrftoken = csrftoken;
+		
+        //var obj = {sessionid : sessionid, csrftoken : csrftoken};
+        //localStorage.setItem(username, JSON.stringify({sessionid : sessionid, csrftoken : csrftoken}));
+    });
+    
+  }else
+  {
+	cy.then(() => {
+		debugger;
+		//var tokens = JSON.parse(user_tokens);
+		cy.setCookie("sessionid", user_tokens[username].sessionid);
+		cy.setCookie("csrftoken", user_tokens[username].csrftoken);
+	});
+  }
 });
 
 Cypress.Commands.add(
