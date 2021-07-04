@@ -46,24 +46,15 @@ export class CollectionContentList extends React.Component<IProps> {
     const keywords = params.keywords || '';
 
     for (let c of contents) {
-      // summary['all']++;
-      // if (summary[c.content_type]) {
-      //   summary[c.content_type]++;
-      // } else {
-      // summary[c.content_type] = 1;
-      // }
-
       const typeMatch = showing === 'all' ? true : c.content_type === showing;
+      if (!summary[c.content_type]) {
+        summary[c.content_type] = 0;
+      }
 
       if (typeMatch && c.name.match(keywords)) {
         toShow.push(c);
-        if (summary[c.content_type]) {
-          summary[c.content_type]++;
-          summary['all']++;
-        } else {
-          summary[c.content_type] = 1;
-          summary['all']++;
-        }
+        summary[c.content_type]++;
+        summary['all']++;
       }
     }
 
