@@ -72,7 +72,7 @@
         "stylelint-scss": "^3.18.0",
         "typescript": "^3.9.7",
         "webpack": "^4.44.2",
-        "webpack-bundle-analyzer": "^3.9.0",
+        "webpack-bundle-analyzer": "^4.4.2",
         "webpack-cli": "^3.3.12"
     },
     "scripts": {
