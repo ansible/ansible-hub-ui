@@ -353,7 +353,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={user.date_joined} />
         </td>
-        <td>
+        <td style={{paddingRight: '0px', textAlign: 'right'}}>
           {dropdownItems.length > 0 ? (
             <StatefulDropdown items={dropdownItems}></StatefulDropdown>
           ) : null}
