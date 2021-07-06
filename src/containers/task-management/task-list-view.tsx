@@ -387,24 +387,23 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     return (
       <tr aria-labelledby={name} key={index}>
         <td>{name}</td>
-        { state === 'failed' ? (
-            <td>
+        {state === 'failed' ? (
+          <td>
             <Label color='red'>{state}</Label>
           </td>
         ) : state === 'completed' ? (
           <td>
-          <Label color='green'>{state}</Label>
-        </td>
+            <Label color='green'>{state}</Label>
+          </td>
         ) : state === 'running' ? (
           <td>
-          <Label color='blue'>{state}</Label>
-        </td>
-        ) :
-        <td>
-        <Label>{state}</Label>
-      </td>
-        }
-      
+            <Label color='blue'>{state}</Label>
+          </td>
+        ) : (
+          <td>
+            <Label>{state}</Label>
+          </td>
+        )}
 
         <td>{error}</td>
         <td>
