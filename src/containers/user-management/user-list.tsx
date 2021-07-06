@@ -1,4 +1,6 @@
 import * as React from 'react';
+import './user-management.scss';
+
 import {
   withRouter,
   RouteComponentProps,
@@ -59,6 +61,8 @@ interface IState {
 }
 
 class UserList extends React.Component<RouteComponentProps, IState> {
+  compoundFilterRef = React.createRef<CompoundFilter>();
+
   constructor(props) {
     super(props);
 
@@ -165,6 +169,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                               title: 'Email',
                             },
                           ]}
+                          ref={this.compoundFilterRef}
                         />
                       </ToolbarItem>
                     </ToolbarGroup>
@@ -172,7 +177,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                       <ToolbarGroup>
                         <ToolbarItem>
                           <Link to={Paths.createUser}>
-                            <Button>Create user</Button>
+                            <Button>Create</Button>
                           </Link>
                         </ToolbarItem>
                       </ToolbarGroup>
@@ -196,11 +201,12 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                   }
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
+                  onClear={this.clearTextInput}
                 />
               </div>
               {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
 
-              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
+              <div style={{ paddingTop: '24px' }}>
                 <Pagination
                   params={params}
                   updateParams={p =>
@@ -353,7 +359,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={user.date_joined} />
         </td>
-        <td style={{paddingRight: '0px', textAlign: 'right'}}>
+        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
           {dropdownItems.length > 0 ? (
             <StatefulDropdown items={dropdownItems}></StatefulDropdown>
           ) : null}
@@ -398,6 +404,10 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   private get closeAlert() {
     return closeAlertMixin('alerts');
   }
+
+  private clearTextInput = () => {
+    this.compoundFilterRef.current.onClear();
+  };
 }
 
 export default withRouter(UserList);

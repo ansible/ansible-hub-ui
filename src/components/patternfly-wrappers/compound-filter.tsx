@@ -34,6 +34,9 @@ interface IProps {
 
   /** Sets the current page params to p */
   updateParams: (params) => void;
+
+  /** Ref to Parent Component */
+  ref?: React.RefObject<React.Component>;
 }
 
 interface IState {
@@ -218,5 +221,9 @@ export class CompoundFilter extends React.Component<IProps, IState> {
       newParams.push(selectedID);
     }
     this.submitMultiple(newParams);
+  };
+
+  onClear = () => {
+    this.setState({ inputText: '' });
   };
 }
