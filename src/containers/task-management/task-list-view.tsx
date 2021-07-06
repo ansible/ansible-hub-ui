@@ -8,6 +8,7 @@ import {
   ToolbarItem,
   ToolbarContent,
   Button,
+  Label,
 } from '@patternfly/react-core';
 import { ParamHelper } from '../../utilities';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
@@ -386,7 +387,25 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     return (
       <tr aria-labelledby={name} key={index}>
         <td>{name}</td>
-        <td>{state}</td>
+        { state === 'failed' ? (
+            <td>
+            <Label color='red'>{state}</Label>
+          </td>
+        ) : state === 'completed' ? (
+          <td>
+          <Label color='green'>{state}</Label>
+        </td>
+        ) : state === 'running' ? (
+          <td>
+          <Label color='blue'>{state}</Label>
+        </td>
+        ) :
+        <td>
+        <Label>{state}</Label>
+      </td>
+        }
+      
+
         <td>{error}</td>
         <td>
           <DateComponent date={pulp_created} />
