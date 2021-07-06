@@ -11,7 +11,7 @@ import {
   Label,
 } from '@patternfly/react-core';
 import { ParamHelper } from '../../utilities';
-import { WarningTriangleIcon } from '@patternfly/react-icons';
+import { WarningTriangleIcon, CheckCircleIcon, ExclamationCircleIcon, SyncAltIcon, OutlinedClockIcon} from '@patternfly/react-icons';
 import {
   AlertList,
   AlertType,
@@ -389,21 +389,24 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <td>{name}</td>
         {state === 'failed' ? (
           <td>
-            <Label color='red'>{state}</Label>
+            <Label variant='outline' color='red' icon={<ExclamationCircleIcon />}>{state}</Label>
           </td>
         ) : state === 'completed' ? (
           <td>
-            <Label color='green'>{state}</Label>
+            <Label variant='outline' color='green' icon={<CheckCircleIcon />}>{state}</Label>
           </td>
         ) : state === 'running' ? (
           <td>
-            <Label color='blue'>{state}</Label>
+            <Label variant='outline' color='blue' icon={<SyncAltIcon />}>{state}</Label>
           </td>
-        ) : (
+        ) : state === 'waiting' ? (
           <td>
-            <Label>{state}</Label>
+            <Label variant='outline' color='grey' icon={<OutlinedClockIcon />}>{state}</Label>
           </td>
-        )}
+        ) :    <td>
+        <Label variant='outline'>{state}</Label>
+      </td>
+     }
 
         <td>{error}</td>
         <td>
