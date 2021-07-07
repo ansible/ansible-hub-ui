@@ -10,7 +10,7 @@ updates:
     target-branch: 'stable-4.3'
     schedule:
       interval: 'weekly'
-    commit_message:
+    commit-message:
       prefix: '[stable-4.3] '
 
   - package-ecosystem: 'npm'
@@ -18,5 +18,5 @@ updates:
     target-branch: 'stable-4.2'
     schedule:
       interval: 'weekly'
-    commit_message:
+    commit-message:
       prefix: '[stable-4.2] '
