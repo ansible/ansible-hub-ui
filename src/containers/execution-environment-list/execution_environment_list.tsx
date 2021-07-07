@@ -80,7 +80,7 @@ class ExecutionEnvironmentList extends React.Component<
         variant='link'
         onClick={() =>
           window.open(
-            'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.0/html/managing_containers_in_private_automation_hub/index',
+            'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.0-ea/html-single/managing_containers_in_private_automation_hub/index',
             '_blank',
           )
         }
