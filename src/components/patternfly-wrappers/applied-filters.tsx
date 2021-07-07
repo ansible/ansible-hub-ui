@@ -21,7 +21,6 @@ interface IProps {
   niceNames?: object;
   style?: React.CSSProperties;
   className?: string;
-
   onClear?: () => void;
 }
 
