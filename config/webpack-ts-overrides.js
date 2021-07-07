@@ -41,10 +41,7 @@ module.exports = {
       // changed from { test: /\.jsx?$/, use: { loader: 'babel-loader' } },
       {
         test: /src\/.*\.(t|j)sx?$/,
-        use: [
-          { loader: 'awesome-typescript-loader' },
-          { loader: 'react-docgen-typescript-loader' },
-        ],
+        loader: 'ts-loader',
       },
       // addition - add source-map support
       {
