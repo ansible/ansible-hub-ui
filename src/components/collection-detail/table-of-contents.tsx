@@ -3,7 +3,16 @@ import * as React from 'react';
 import { capitalize } from 'lodash';
 import { Link } from 'react-router-dom';
 
-import { Nav, NavExpandable, NavItem, NavList } from '@patternfly/react-core';
+import {
+  Nav,
+  NavExpandable,
+  NavItem,
+  NavList,
+  SearchInput,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
+} from '@patternfly/react-core';
 
 import { DocsBlobType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
@@ -33,10 +42,12 @@ interface IProps {
   docs_blob: DocsBlobType;
   namespace: string;
   collection: string;
-  params: object;
+  params: { keywords?: string };
   selectedName?: string;
   selectedType?: string;
   className?: string;
+  updateParams: (p) => void;
+  searchBarRef?: React.Ref<HTMLInputElement>;
 }
 
 export class TableOfContents extends React.Component<IProps, IState> {
@@ -47,11 +58,13 @@ export class TableOfContents extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
-    this.state = { collapsedCategories: [] };
+    this.state = {
+      collapsedCategories: [],
+    };
   }
 
   render() {
-    const { className, docs_blob } = this.props;
+    const { className, docs_blob, updateParams, params } = this.props;
 
     // There's a lot of heavy processing that goes into formatting the table
     // variable. To prevent running everything each time the component renders,
@@ -70,12 +83,34 @@ export class TableOfContents extends React.Component<IProps, IState> {
 
     return (
       <div className={className}>
+        <Toolbar>
+          <ToolbarGroup>
+            <ToolbarItem>
+              <SearchInput
+                ref={this.props.searchBarRef}
+                value={params.keywords}
+                onChange={val => {
+                  updateParams(ParamHelper.setParam(params, 'keywords', val));
+                }}
+                onClear={() =>
+                  updateParams(ParamHelper.setParam(params, 'keywords', ''))
+                }
+                aria-label='find-content'
+                placeholder='Find content'
+              />
+            </ToolbarItem>
+          </ToolbarGroup>
+        </Toolbar>
         <Nav theme='light'>
           <NavList>
             {Object.keys(table).map(key =>
               table[key].length === 0
                 ? null
-                : this.renderLinks(table[key], key),
+                : this.renderLinks(
+                    table[key],
+                    key,
+                    this.props.params.keywords || '',
+                  ),
             )}
           </NavList>
         </Nav>
@@ -165,17 +200,19 @@ export class TableOfContents extends React.Component<IProps, IState> {
     return table;
   }
 
-  private renderLinks(links, title) {
+  private renderLinks(links: DocsEntry[], title, filterString: string) {
     const isExpanded = !this.state.collapsedCategories.includes(title);
-
+    const filteredLinks = links.filter(link =>
+      link.display.toLowerCase().includes(filterString.toLowerCase()),
+    );
     return (
       <NavExpandable
         key={title}
-        title={capitalize(`${title} (${links.length})`)}
+        title={capitalize(`${title} (${filteredLinks.length})`)}
         isExpanded={isExpanded}
         isActive={this.getSelectedCategory() === title}
       >
-        {links.map((link: DocsEntry, index) => (
+        {filteredLinks.map((link: DocsEntry, index) => (
           <NavItem key={index} isActive={this.isSelected(link)}>
             <Link
               style={{

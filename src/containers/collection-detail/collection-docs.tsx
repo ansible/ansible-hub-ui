@@ -4,7 +4,7 @@ import './collection-detail.scss';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
-import { Alert } from '@patternfly/react-core';
+import { Alert, TextInputBase } from '@patternfly/react-core';
 
 import {
   CollectionHeader,
@@ -29,7 +29,7 @@ class CollectionDocs extends React.Component<
   IBaseCollectionState
 > {
   docsRef: any;
-
+  searchBarRef: React.RefObject<HTMLInputElement>;
   constructor(props) {
     super(props);
     const params = ParamHelper.parseParamString(props.location.search);
@@ -38,8 +38,8 @@ class CollectionDocs extends React.Component<
       collection: undefined,
       params: params,
     };
-
     this.docsRef = React.createRef();
+    this.searchBarRef = React.createRef();
   }
 
   componentDidMount() {
@@ -115,9 +115,13 @@ class CollectionDocs extends React.Component<
     ];
 
     // scroll to top of page
-    if (this.docsRef.current) {
-      this.docsRef.current.scrollIntoView();
-    }
+
+    // if (
+    //   this.docsRef.current &&
+    //   this.searchBarRef.current !== window.document.activeElement
+    // ) {
+    //   this.docsRef.current.scrollIntoView();
+    // }
 
     return (
       <React.Fragment>
@@ -144,7 +148,10 @@ class CollectionDocs extends React.Component<
               selectedName={contentName}
               selectedType={contentType}
               params={params}
+              updateParams={p => this.updateParams(p)}
+              searchBarRef={this.searchBarRef}
             ></TableOfContents>
+
             <div className='body docs pf-c-content' ref={this.docsRef}>
               {displayHTML || pluginData ? (
                 // if neither variable is set, render not found

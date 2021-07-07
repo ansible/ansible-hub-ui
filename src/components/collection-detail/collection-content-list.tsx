@@ -4,6 +4,7 @@ import './collection-content-list.scss';
 
 import { Link } from 'react-router-dom';
 import {
+  SearchInput,
   TextInput,
   Toolbar,
   ToolbarGroup,
@@ -45,17 +46,15 @@ export class CollectionContentList extends React.Component<IProps> {
     const keywords = params.keywords || '';
 
     for (let c of contents) {
-      summary['all']++;
-      if (summary[c.content_type]) {
-        summary[c.content_type]++;
-      } else {
-        summary[c.content_type] = 1;
-      }
-
       const typeMatch = showing === 'all' ? true : c.content_type === showing;
+      if (!summary[c.content_type]) {
+        summary[c.content_type] = 0;
+      }
 
       if (typeMatch && c.name.match(keywords)) {
         toShow.push(c);
+        summary[c.content_type]++;
+        summary['all']++;
       }
     }
 
@@ -65,10 +64,13 @@ export class CollectionContentList extends React.Component<IProps> {
           <Toolbar>
             <ToolbarGroup>
               <ToolbarItem>
-                <TextInput
+                <SearchInput
                   value={params.keywords || ''}
                   onChange={val =>
                     updateParams(ParamHelper.setParam(params, 'keywords', val))
+                  }
+                  onClear={() =>
+                    updateParams(ParamHelper.setParam(params, 'keywords', ''))
                   }
                   aria-label='find-content'
                   placeholder='Find content'
