@@ -1,5 +1,6 @@
-import ReducerRegistry from '@redhat-cloud-services/frontend-components-utilities/files/ReducerRegistry';
+import ReducerRegistry from '@redhat-cloud-services/frontend-components-utilities/ReducerRegistry';
 import promise from 'redux-promise-middleware';
+
 let registry;
 
 export function init(...middleware) {
