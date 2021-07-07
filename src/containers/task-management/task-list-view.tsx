@@ -109,56 +109,56 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     return (
       <React.Fragment>
         <BaseHeader title={'Task Management'} />
-        <Main>{loading ? <LoadingPageSpinner /> :
-        <section>
-          <div className="toolbar">
-               <Toolbar>
-               <ToolbarContent>
-                 <ToolbarGroup>
-                   <ToolbarItem>
-                     <CompoundFilter
-                       updateParams={p => {
-                         p['page'] = 1;
-                         this.updateParams(p, () =>
-                           this.queryTasks(),
-                         );
-                       }}
-                       params={params}
-                       filterConfig={[
-                         {
-                           id: 'name',
-                           title: 'Task name',
-                         },
-                       ]}
-                     />
-                   </ToolbarItem>
-                 </ToolbarGroup>
-               </ToolbarContent>
-             </Toolbar>
+        <Main>
+          {loading ? (
+            <LoadingPageSpinner />
+          ) : (
+            <section>
+              <div className='toolbar'>
+                <Toolbar>
+                  <ToolbarContent>
+                    <ToolbarGroup>
+                      <ToolbarItem>
+                        <CompoundFilter
+                          updateParams={p => {
+                            p['page'] = 1;
+                            this.updateParams(p, () => this.queryTasks());
+                          }}
+                          params={params}
+                          filterConfig={[
+                            {
+                              id: 'name',
+                              title: 'Task name',
+                            },
+                          ]}
+                        />
+                      </ToolbarItem>
+                    </ToolbarGroup>
+                  </ToolbarContent>
+                </Toolbar>
 
-            <Pagination
-            params={params}
-            updateParams={p =>
-              this.updateParams(p, () => this.queryTasks())
-            }
-            count={itemCount}
-            isTop
-          />
-          </div>
-          <div>
-          <AppliedFilters
-                    updateParams={p =>
-                      this.updateParams(p, () => this.queryTasks())
-                    }
-                    params={params}
-                    ignoredParams={['page_size', 'page', 'sort']}
-                  />
-
-          </div>
-        
-        this.renderTable()
-        </section>
-        }</Main>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryTasks())
+                  }
+                  count={itemCount}
+                  isTop
+                />
+              </div>
+              <div>
+                <AppliedFilters
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryTasks())
+                  }
+                  params={params}
+                  ignoredParams={['page_size', 'page', 'sort']}
+                />
+              </div>
+              this.renderTable()
+            </section>
+          )}
+        </Main>
       </React.Fragment>
     );
   }
@@ -291,7 +291,6 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   private get updateParams() {
     return ParamHelper.updateParamsMixin();
   }
-
 }
 
 export default withRouter(TaskListView);
