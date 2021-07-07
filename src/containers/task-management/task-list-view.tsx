@@ -83,8 +83,6 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       });
     });
   }
-
-
   render() {
     return (
       <React.Fragment>
@@ -92,7 +90,6 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <Main>{this.renderTable()}</Main>
       </React.Fragment>
     );
-
   }
 
   private renderTable() {
