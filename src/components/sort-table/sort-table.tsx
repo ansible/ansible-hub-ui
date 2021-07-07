@@ -14,6 +14,7 @@ interface IProps {
       title: string;
       type: string;
       id: string;
+      className?: string;
     }[];
   };
   params: object;
@@ -64,7 +65,7 @@ export class SortTable extends React.Component<IProps> {
 
   private getHeaderItem(item) {
     return (
-      <th key={item.id}>
+      <th key={item.id} className={item?.className}>
         {item.title} {this.getIcon(item.type, item.id)}
       </th>
     );

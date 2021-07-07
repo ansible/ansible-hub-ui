@@ -256,6 +256,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           title: 'First name',
           type: 'alpha',
           id: 'first_name',
+          className: 'pf-m-wrap'
         },
         {
           title: 'Last name',
