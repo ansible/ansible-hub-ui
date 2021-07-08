@@ -27,7 +27,7 @@ The app will run on http://localhost:8002 and proxy requests for `api/automation
 
 To enable insights mode set `DEPLOYMENT_MODE: 'insights'` in [custom.dev.config.js](./custom.dev.config.js).
 
-This app is part of the Red Hat cloud platform. Because of that the app needs to be loaded within the context of cloud.redhat.com. This is done by accessing the app via the [insights-proxy project](https://github.com/RedHatInsights/insights-proxy).
+This app is part of the Red Hat cloud platform. Because of that the app needs to be loaded within the context of console.redhat.com. This is done by accessing the app via the [insights-proxy project](https://github.com/RedHatInsights/insights-proxy).
 
 #### Set up Insights Proxy
 
@@ -86,12 +86,12 @@ The Github Action invokes the [RedHatInsights/insights-frontend-builder-common//
 - any push to the `prod-stable` branch will deploy to a `ansible-hub-ui-build` `prod-stable` branch
 - the `ansible-hub-ui-build` `master` branch is not used, as PRs against `master` end up in `ci-beta` and `qa-beta`
 
-- `ci-beta` builds end up on `ci.cloud.redhat.com/beta`
-- `ci-stable` builds end up on `ci.cloud.redhat.com`
-- `qa-beta` builds end up on `qa.cloud.redhat.com/beta`
-- `qa-stable` builds end up on `qa.cloud.redhat.com`
-- `prod-beta` builds end up on `cloud.redhat.com/beta`
-- `prod-stable` builds end up on `cloud.redhat.com`
+- `ci-beta` builds end up on `ci.console.redhat.com/beta`
+- `ci-stable` builds end up on `ci.console.redhat.com`
+- `qa-beta` builds end up on `qa.console.redhat.com/beta`
+- `qa-stable` builds end up on `qa.console.redhat.com`
+- `prod-beta` builds end up on `console.redhat.com/beta`
+- `prod-stable` builds end up on `console.redhat.com`
 
 ### Workflows
 
