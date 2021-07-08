@@ -121,7 +121,7 @@ jobs:
     - name: "Build standalone UI"
       working-directory: 'ansible-hub-ui'
       run: |
-        npm ci || npm install
+        npm install
         npm run build-standalone
         rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
         mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
@@ -133,10 +133,14 @@ jobs:
         # podman exec pulp pip install django_extensions
         podman exec pulp pulpcore-manager reset-admin-password --password admin
         
-        npm ci || npm install
+        npm install
         echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
         
         npm run cypress:chrome
+
+    - name: "Fail if npm install had to change package-lock.json"
+      working-directory: 'ansible-hub-ui'
+      run: 'git diff --exit-code package-lock.json'
 
     - uses: actions/upload-artifact@v2
       if: failure()
