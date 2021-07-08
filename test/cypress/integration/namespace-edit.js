@@ -80,12 +80,20 @@ describe('Edit a namespace', () => {
   });
 
   it('tests the namespace owners field', () => {
+    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
+      'autocomplete',
+    );
+
     cy.get('.pf-c-form-control.pf-c-select__toggle-typeahead')
       .click()
       .type('abcde');
+    cy.wait('@autocomplete');
     cy.get('.pf-c-select__menu-wrapper').should('contain', 'Not found');
+
     cy.get('.pf-c-button.pf-m-plain.pf-c-select__toggle-clear').click();
-    cy.get('.pf-c-select__menu-wrapper').click();
+    cy.wait('@autocomplete');
+    cy.get('.pf-c-select__menu-wrapper').click(); // first group available
+
     saveButton().click();
   });
 
