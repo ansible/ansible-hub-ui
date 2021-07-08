@@ -185,7 +185,6 @@ export class UserForm extends React.Component<IProps, IState> {
             !this.isPassValid(user.password, passwordConfirm) ||
             !this.requiredFilled(user)
           }
-          onClick={() => saveUser()}
         >
           Save
         </Button>
