@@ -55,18 +55,54 @@ Cypress.Commands.add('menuGo', {}, name => {
   return cy.contains('#page-sidebar a', last).click({ force: true });
 });
 
-Cypress.Commands.add('logout', {}, () => {
-  /*cy.server();
+Cypress.Commands.add('manual_logout', {}, () => {
+  cy.server();
   cy.route(
     'GET',
     urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
   ).as('me');
   cy.get('[aria-label="user-dropdown"] button').click();
   cy.get('[aria-label="logout"]').click();
-  cy.wait('@me');*/
+  cy.wait('@me');
+});
+
+Cypress.Commands.add('logout', {}, () => {
   cy.clearCookie('sessionid');
   cy.clearCookie('csrftoken');
   cy.visit(Cypress.config().baseUrl);
+});
+
+Cypress.Commands.add('manual_login', {}, (username, password) => {
+	cy.server();
+	let loginUrl = urljoin(
+      Cypress.config().baseUrl,
+      Cypress.env('prefix'),
+      '_ui/v1/auth/login/',
+    );
+
+    cy.route('POST', loginUrl).as('login');
+    cy.route(
+      'GET',
+      urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
+    ).as('me');
+    cy.get('#pf-login-username-id').type(username);
+    cy.get('#pf-login-password-id').type(`${password}{enter}`);
+    cy.wait('@login');
+    cy.wait('@me');
+    cy.getCookies().then(cookies => {
+      let sessionid;
+      let csrftoken;
+
+      for (var i in cookies) {
+        var cookie = cookies[i];
+        if (cookie.name == 'sessionid') sessionid = cookie.value;
+        if (cookie.name == 'csrftoken') csrftoken = cookie.value;
+      }
+
+      user_tokens[username] = {};
+      user_tokens[username].sessionid = sessionid;
+      user_tokens[username].csrftoken = csrftoken;
+    });
 });
 
 let user_tokens = {};
