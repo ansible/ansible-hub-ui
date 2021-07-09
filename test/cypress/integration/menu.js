@@ -55,7 +55,7 @@ describe('Hub Menu Tests', () => {
       cy.login(username, password);
       visibleMenuItems.forEach(item => cy.menuPresent(item));
       missingMenuItems.forEach(item => cy.menuMissing(item));
-	  cy.logout();
+      cy.logout();
     });
 
     it('has Documentation tab', () => {
@@ -65,7 +65,7 @@ describe('Hub Menu Tests', () => {
         'href',
         'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
       );
-	  cy.logout();
+      cy.logout();
     });
   });
 });
