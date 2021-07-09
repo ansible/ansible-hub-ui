@@ -73,36 +73,22 @@ Cypress.Commands.add('logout', {}, () => {
 });
 
 Cypress.Commands.add('manual_login', {}, (username, password) => {
-	cy.server();
-	let loginUrl = urljoin(
-      Cypress.config().baseUrl,
-      Cypress.env('prefix'),
-      '_ui/v1/auth/login/',
-    );
+  cy.server();
+  let loginUrl = urljoin(
+    Cypress.config().baseUrl,
+    Cypress.env('prefix'),
+    '_ui/v1/auth/login/',
+  );
 
-    cy.route('POST', loginUrl).as('login');
-    cy.route(
-      'GET',
-      urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
-    ).as('me');
-    cy.get('#pf-login-username-id').type(username);
-    cy.get('#pf-login-password-id').type(`${password}{enter}`);
-    cy.wait('@login');
-    cy.wait('@me');
-    cy.getCookies().then(cookies => {
-      let sessionid;
-      let csrftoken;
-
-      for (var i in cookies) {
-        var cookie = cookies[i];
-        if (cookie.name == 'sessionid') sessionid = cookie.value;
-        if (cookie.name == 'csrftoken') csrftoken = cookie.value;
-      }
-
-      user_tokens[username] = {};
-      user_tokens[username].sessionid = sessionid;
-      user_tokens[username].csrftoken = csrftoken;
-    });
+  cy.route('POST', loginUrl).as('login');
+  cy.route(
+    'GET',
+    urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
+  ).as('me');
+  cy.get('#pf-login-username-id').type(username);
+  cy.get('#pf-login-password-id').type(`${password}{enter}`);
+  cy.wait('@login');
+  cy.wait('@me');
 });
 
 let user_tokens = {};
@@ -179,10 +165,7 @@ Cypress.Commands.add(
 
     cy.server();
     cy.route('POST', Cypress.env('prefix') + '_ui/v1/users/')
-      .as('createUser')
-      .then(() => {
-        debugger;
-      });
+      .as('createUser');
 
     cy.contains('Save').click();
     cy.wait('@createUser');
