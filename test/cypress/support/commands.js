@@ -74,6 +74,11 @@ Cypress.Commands.add('logout', {}, () => {
 
 Cypress.Commands.add('manual_login', {}, (username, password) => {
   cy.server();
+  login(username, password);
+});
+
+function login(username, password)
+{
   let loginUrl = urljoin(
     Cypress.config().baseUrl,
     Cypress.env('prefix'),
@@ -89,7 +94,7 @@ Cypress.Commands.add('manual_login', {}, (username, password) => {
   cy.get('#pf-login-password-id').type(`${password}{enter}`);
   cy.wait('@login');
   cy.wait('@me');
-});
+}
 
 let user_tokens = {};
 
@@ -98,21 +103,7 @@ Cypress.Commands.add('login', {}, (username, password) => {
   cy.server();
 
   if (!user_tokens[username]) {
-    let loginUrl = urljoin(
-      Cypress.config().baseUrl,
-      Cypress.env('prefix'),
-      '_ui/v1/auth/login/',
-    );
-
-    cy.route('POST', loginUrl).as('login');
-    cy.route(
-      'GET',
-      urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
-    ).as('me');
-    cy.get('#pf-login-username-id').type(username);
-    cy.get('#pf-login-password-id').type(`${password}{enter}`);
-    cy.wait('@login');
-    cy.wait('@me');
+    login(username, password);
     cy.getCookies().then(cookies => {
       let sessionid;
       let csrftoken;
@@ -164,8 +155,7 @@ Cypress.Commands.add(
     cy.get('#password-confirm').type(user.password);
 
     cy.server();
-    cy.route('POST', Cypress.env('prefix') + '_ui/v1/users/')
-      .as('createUser');
+    cy.route('POST', Cypress.env('prefix') + '_ui/v1/users/').as('createUser');
 
     cy.contains('Save').click();
     cy.wait('@createUser');
