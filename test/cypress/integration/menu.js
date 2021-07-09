@@ -40,13 +40,13 @@ describe('Hub Menu Tests', () => {
       'Collections > Approval',
     ];
 
-    beforeEach(() => {
+    before(() => {
       cy.login(adminUsername, adminPassword);
       cy.createUser(username, password);
       cy.logout();
     });
 
-    afterEach(() => {
+    after(() => {
       cy.deleteUser(username);
       cy.logout();
     });
@@ -55,6 +55,7 @@ describe('Hub Menu Tests', () => {
       cy.login(username, password);
       visibleMenuItems.forEach(item => cy.menuPresent(item));
       missingMenuItems.forEach(item => cy.menuMissing(item));
+	  cy.logout();
     });
 
     it('has Documentation tab', () => {
@@ -64,6 +65,7 @@ describe('Hub Menu Tests', () => {
         'href',
         'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
       );
+	  cy.logout();
     });
   });
 });
