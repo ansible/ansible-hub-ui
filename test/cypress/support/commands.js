@@ -55,7 +55,7 @@ Cypress.Commands.add('menuGo', {}, name => {
   return cy.contains('#page-sidebar a', last).click({ force: true });
 });
 
-Cypress.Commands.add('logout', {}, () => {
+Cypress.Commands.add('manual_logout', {}, () => {
   cy.server();
   cy.route(
     'GET',
@@ -66,13 +66,24 @@ Cypress.Commands.add('logout', {}, () => {
   cy.wait('@me');
 });
 
-Cypress.Commands.add('login', {}, (username, password) => {
+Cypress.Commands.add('logout', {}, () => {
+  cy.clearCookie('sessionid');
+  cy.clearCookie('csrftoken');
+  cy.visit(Cypress.config().baseUrl);
+});
+
+Cypress.Commands.add('manual_login', {}, (username, password) => {
+  cy.server();
+  login(username, password);
+});
+
+function login(username, password) {
   let loginUrl = urljoin(
     Cypress.config().baseUrl,
     Cypress.env('prefix'),
     '_ui/v1/auth/login/',
   );
-  cy.server();
+
   cy.route('POST', loginUrl).as('login');
   cy.route(
     'GET',
@@ -82,6 +93,37 @@ Cypress.Commands.add('login', {}, (username, password) => {
   cy.get('#pf-login-password-id').type(`${password}{enter}`);
   cy.wait('@login');
   cy.wait('@me');
+}
+
+let user_tokens = {};
+
+Cypress.Commands.add('login', {}, (username, password) => {
+  //let user_tokens = localStorage.getItem(username);
+  cy.server();
+
+  if (!user_tokens[username]) {
+    login(username, password);
+    cy.getCookies().then(cookies => {
+      let sessionid;
+      let csrftoken;
+
+      for (var i in cookies) {
+        var cookie = cookies[i];
+        if (cookie.name == 'sessionid') sessionid = cookie.value;
+        if (cookie.name == 'csrftoken') csrftoken = cookie.value;
+      }
+
+      user_tokens[username] = {};
+      user_tokens[username].sessionid = sessionid;
+      user_tokens[username].csrftoken = csrftoken;
+    });
+  } else {
+    cy.then(() => {
+      cy.setCookie('csrftoken', user_tokens[username].csrftoken);
+      cy.setCookie('sessionid', user_tokens[username].sessionid);
+      cy.visit(Cypress.config().baseUrl);
+    });
+  }
 });
 
 Cypress.Commands.add(
