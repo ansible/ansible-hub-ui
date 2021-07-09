@@ -77,8 +77,7 @@ Cypress.Commands.add('manual_login', {}, (username, password) => {
   login(username, password);
 });
 
-function login(username, password)
-{
+function login(username, password) {
   let loginUrl = urljoin(
     Cypress.config().baseUrl,
     Cypress.env('prefix'),
