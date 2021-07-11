@@ -42,10 +42,6 @@ describe('Hub User Management Tests', () => {
       cy.menuGo('User Access > Users');
     });
 
-    afterEach(() => {
-      cy.logout();
-    });
-
     it('Can create new users', () => {
       cy.contains('[aria-labelledby=test]', 'Test F');
       cy.contains('[aria-labelledby=test]', 'Test L');
@@ -58,9 +54,6 @@ describe('Hub User Management Tests', () => {
   describe('prevents super-user and self deletion', () => {
     beforeEach(() => {
       cy.visit(baseUrl);
-    });
-    afterEach(() => {
-      cy.logout();
     });
 
     function attemptToDelete(toDelete) {
@@ -87,11 +80,5 @@ describe('Hub User Management Tests', () => {
       cy.login(adminUsername, adminPassword);
       attemptToDelete(adminUsername);
     });
-  });
-
-  after(() => {
-    cy.login(adminUsername, adminPassword);
-    cy.deleteUser(username);
-    cy.deleteGroup('delete-user');
   });
 });

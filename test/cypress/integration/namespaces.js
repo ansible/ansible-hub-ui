@@ -1,9 +1,11 @@
 describe('Namespaces Page Tests', () => {
   var baseUrl = Cypress.config().baseUrl;
-  var adminUsername = Cypress.env('username');
-  var adminPassword = Cypress.env('password');
 
   before(() => {
+    cy.deleteTestUsers();
+    cy.deleteTestGroups();
+    // TODO: cy.deleteTestNamespaces();
+
     cy.galaxykit('-i group create', 'testGroup1');
     cy.galaxykit('-i group create', 'testGroup2');
 
@@ -16,15 +18,6 @@ describe('Namespaces Page Tests', () => {
     cy.galaxykit('namespace addgroup', 'testns2', 'testGroup2');
   });
 
-  beforeEach(() => {
-    cy.visit(baseUrl);
-    // cy.login(adminUsername, adminPassword);
-  });
-
-  // afterEach(() => {
-  //     cy.logout();
-  // })
-
   it('can navigate to pubic namespace list', () => {
     cy.login('testUser2', 'p@ssword1');
     cy.menuGo('Collections > Namespaces');
@@ -36,6 +29,7 @@ describe('Namespaces Page Tests', () => {
   it('can navigate to personal namespace list', () => {
     cy.login('testUser2', 'p@ssword1');
     cy.menuGo('Collections > Namespaces');
+
     cy.contains('My namespaces').click();
 
     cy.contains('testns2').should('exist');
