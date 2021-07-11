@@ -284,9 +284,15 @@ Cypress.Commands.add('deleteUser', {}, username => {
     `[aria-labelledby=${username}] [aria-label=Actions]`,
     'Delete',
   ).click();
+
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/users/?*').as('userList');
+
   cy.contains('[role=dialog] button', 'Delete').click();
   cy.wait('@deleteUser');
   cy.get('@deleteUser').should('have.property', 'status', 204);
+
+  // Wait for navigation
+  cy.wait('@userList');
 });
 
 Cypress.Commands.add('deleteGroup', {}, name => {
