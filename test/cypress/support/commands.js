@@ -67,6 +67,7 @@ Cypress.Commands.add('logout', {}, () => {
 });
 
 Cypress.Commands.add('login', {}, (username, password) => {
+  cy.visit('/ui/login');
   let loginUrl = urljoin(
     Cypress.config().baseUrl,
     Cypress.env('prefix'),
