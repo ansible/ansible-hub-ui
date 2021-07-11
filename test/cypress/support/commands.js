@@ -277,8 +277,9 @@ Cypress.Commands.add('deleteUser', {}, username => {
   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/users/?*').as('userList');
 
   cy.contains('[role=dialog] button', 'Delete').click();
-  cy.wait('@deleteUser');
-  cy.get('@deleteUser').should('have.property', 'status', 204);
+  cy.wait('@deleteUser').then(({ request, response }) => {
+    expect(response.statusCode).to.eq(204);
+  });
 
   // Wait for navigation
   cy.wait('@userList');
@@ -297,8 +298,9 @@ Cypress.Commands.add('deleteGroup', {}, name => {
   );
   cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click();
   cy.contains('[role=dialog] button', 'Delete').click();
-  cy.wait('@deleteGroup');
-  cy.get('@deleteGroup').should('have.property', 'status', 204);
+  cy.wait('@deleteGroup').then(({ request, response }) => {
+    expect(response.statusCode).to.eq(204);
+  });
 });
 
 // GalaxyKit Integration
