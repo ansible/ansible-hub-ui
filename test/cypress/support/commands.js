@@ -117,8 +117,8 @@ Cypress.Commands.add(
     cy.contains('Save').click();
     cy.wait('@createUser');
 
-    // The API responded, but the user list page hasn't loaded, wait 100ms.
-    cy.wait(100);
+    // Wait for navigation
+    cy.contains('.pf-c-title', 'Users');
   },
 );
 
