@@ -97,7 +97,7 @@ describe('Edit a namespace', () => {
 
     cy.get('.pf-c-button.pf-m-plain.pf-c-select__toggle-clear').click();
     cy.wait('@autocomplete');
-    cy.get('.pf-c-select__menu-wrapper').click(); // first group available
+    cy.contains('namespace-owner-autocomplete').click();
 
     saveButton().click();
   });
