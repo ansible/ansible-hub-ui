@@ -56,29 +56,18 @@ Cypress.Commands.add('menuGo', {}, name => {
 });
 
 Cypress.Commands.add('logout', {}, () => {
-  cy.server();
-  cy.route(
-    'GET',
-    urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
-  ).as('me');
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
   cy.get('[aria-label="user-dropdown"] button').click();
   cy.get('[aria-label="logout"]').click();
   cy.wait('@me');
 });
 
 Cypress.Commands.add('login', {}, (username, password) => {
-  cy.visit('/ui/login');
-  let loginUrl = urljoin(
-    Cypress.config().baseUrl,
-    Cypress.env('prefix'),
-    '_ui/v1/auth/login/',
+  cy.intercept('POST', Cypress.env('prefix') + '_ui/v1/auth/login/').as(
+    'login',
   );
-  cy.server();
-  cy.route('POST', loginUrl).as('login');
-  cy.route(
-    'GET',
-    urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
-  ).as('me');
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
+  cy.visit('/ui/login');
   cy.get('#pf-login-username-id').type(username);
   cy.get('#pf-login-password-id').type(`${password}{enter}`);
   cy.wait('@login');
@@ -112,8 +101,9 @@ Cypress.Commands.add(
     cy.get('#password').type(user.password);
     cy.get('#password-confirm').type(user.password);
 
-    cy.server();
-    cy.route('POST', Cypress.env('prefix') + '_ui/v1/users/').as('createUser');
+    cy.intercept('POST', Cypress.env('prefix') + '_ui/v1/users/').as(
+      'createUser',
+    );
 
     cy.contains('Save').click();
     cy.wait('@createUser');
@@ -124,26 +114,26 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('createGroup', {}, name => {
-  cy.route(
-    'GET',
-    Cypress.env('prefix') + '_ui/v1/groups/?sort=name&offset=0&limit=10',
-  ).as('createGroup');
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
+    'loadGroups',
+  );
   cy.menuGo('User Access > Groups');
-  cy.wait('@createGroup');
+  cy.wait('@loadGroups');
 
   cy.contains('Create').click();
 
-  cy.route('POST', Cypress.env('prefix') + '_ui/v1/groups/').as('createGroup');
+  cy.intercept('POST', Cypress.env('prefix') + '_ui/v1/groups/').as(
+    'submitGroup',
+  );
   cy.contains('div', 'Name *')
     .findnear('input')
     .first()
     .type(`${name}{enter}`);
-  cy.wait('@createGroup');
+  cy.wait('@submitGroup');
 });
 
 Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
-  cy.server();
-  cy.route(
+  cy.intercept(
     'GET',
     Cypress.env('prefix') + '_ui/v1/groups/*/model-permissions/*',
   ).as('groups');
@@ -275,8 +265,7 @@ Cypress.Commands.add('deleteUser', {}, username => {
   cy.login(adminUsername, adminPassword);
 
   cy.menuGo('User Access > Users');
-  cy.server();
-  cy.route('DELETE', Cypress.env('prefix') + '_ui/v1/users/**').as(
+  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/users/**').as(
     'deleteUser',
   );
   cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click();
@@ -303,8 +292,7 @@ Cypress.Commands.add('deleteGroup', {}, name => {
   cy.login(adminUsername, adminPassword);
 
   cy.menuGo('User Access > Groups');
-  cy.server();
-  cy.route('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
+  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
     'deleteGroup',
   );
   cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click();

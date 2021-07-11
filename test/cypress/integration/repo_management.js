@@ -20,7 +20,8 @@ describe('Repo Management tests', () => {
     cy.contains('Show advanced options').click();
     cy.get('#download_concurrency').should('exist');
   });
-  /* Needs more work to handle uploading a requirements.yml
+
+  /* FIXME: Needs more work to handle uploading a requirements.yml
    * when you want to save the remote proxy config.
    */
   it.skip('remote proxy config can be saved and deleted.', () => {
@@ -36,7 +37,7 @@ describe('Repo Management tests', () => {
     cy.get('input[id="proxy_url"]').type('https://example.org');
     cy.get('input[id="proxy_username"]').type('test');
     cy.get('input[id="proxy_password"]').type('test');
-    cy.route(
+    cy.intercept(
       'PUT',
       Cypress.env('prefix') + 'content/community/v3/sync/config/',
     ).as('saveConfig');
@@ -60,10 +61,6 @@ describe('Repo Management tests', () => {
       .click({ multiple: true });
     cy.get('input[id="proxy_url"]').clear();
     cy.get('input[id="proxy_username"]').clear();
-    cy.route(
-      'PUT',
-      Cypress.env('prefix') + 'content/community/v3/sync/config/',
-    ).as('saveConfig');
     cy.contains('Save').click();
     cy.wait('@saveConfig')
       .its('status')
