@@ -42,6 +42,11 @@ describe('Edit a namespace', () => {
     return cy.get('div.pf-c-form__group-control > textarea.pf-c-form-control');
   };
 
+  before(() => {
+    cy.deleteTestGroups();
+    cy.galaxykit('-i group create', 'namespace-owner-autocomplete');
+  });
+
   beforeEach(() => {
     cy.visit(baseUrl);
     cy.login(adminUsername, adminPassword);
@@ -53,7 +58,7 @@ describe('Edit a namespace', () => {
   });
 
   it('tests that the name field is disabled from editing', () => {
-    return cy.get('#name').should('be.disabled');
+    cy.get('#name').should('be.disabled');
   });
 
   it('tests the company name for errors', () => {
