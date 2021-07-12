@@ -29,7 +29,7 @@ export class CollectionFilter extends React.Component<IProps> {
         id: 'tags',
         title: 'Tag',
         inputType: 'multiple' as 'multiple',
-        options: Constants.COLLECTION_FILTER_TAGS.map(tag => ({
+        options: Constants.COLLECTION_FILTER_TAGS.map((tag) => ({
           id: tag,
           title: tag,
         })),

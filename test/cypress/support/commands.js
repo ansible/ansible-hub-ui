@@ -40,17 +40,17 @@ Cypress.Commands.add('containsnear', {}, (...args) => {
   cy.log('constainsnear requires selector and content parameters');
 });
 
-Cypress.Commands.add('menuPresent', {}, name => {
+Cypress.Commands.add('menuPresent', {}, (name) => {
   const last = name.split(' > ').pop();
   return cy.contains('#page-sidebar a', last).should('exist');
 });
 
-Cypress.Commands.add('menuMissing', {}, name => {
+Cypress.Commands.add('menuMissing', {}, (name) => {
   const last = name.split(' > ').pop();
   return cy.contains('#page-sidebar a', last).should('not.exist');
 });
 
-Cypress.Commands.add('menuGo', {}, name => {
+Cypress.Commands.add('menuGo', {}, (name) => {
   const last = name.split(' > ').pop();
   return cy.contains('#page-sidebar a', last).click({ force: true });
 });
@@ -113,7 +113,7 @@ Cypress.Commands.add(
   },
 );
 
-Cypress.Commands.add('createGroup', {}, name => {
+Cypress.Commands.add('createGroup', {}, (name) => {
   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
     'loadGroups',
   );
@@ -125,10 +125,7 @@ Cypress.Commands.add('createGroup', {}, name => {
   cy.intercept('POST', Cypress.env('prefix') + '_ui/v1/groups/').as(
     'submitGroup',
   );
-  cy.contains('div', 'Name *')
-    .findnear('input')
-    .first()
-    .type(`${name}{enter}`);
+  cy.contains('div', 'Name *').findnear('input').first().type(`${name}{enter}`);
   cy.wait('@submitGroup');
 });
 
@@ -141,13 +138,13 @@ Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
   cy.get(`[aria-labelledby=${groupName}] a`).click();
   cy.wait('@groups');
   cy.contains('button', 'Edit').click();
-  permissions.forEach(permissionElement => {
+  permissions.forEach((permissionElement) => {
     // closes previously open dropdowns
     cy.get('h1').click();
     cy.get(
       `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} [aria-label="Options menu"]`,
     ).click();
-    permissionElement.permissions.forEach(permission => {
+    permissionElement.permissions.forEach((permission) => {
       cy.contains('button', permission).click();
     });
   });
@@ -160,7 +157,7 @@ Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
   cy.menuGo('User Access > Groups');
   cy.get(`[aria-labelledby=${groupName}] a`).click();
   cy.contains('button', 'Edit').click();
-  permissions.forEach(permissionElement => {
+  permissions.forEach((permissionElement) => {
     if (permissionElement.permissions.length > 3) {
       // Make sure all permissions are visible
       cy.containsnear(
@@ -170,7 +167,7 @@ Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
         .first()
         .click();
     }
-    permissionElement.permissions.forEach(permission => {
+    permissionElement.permissions.forEach((permission) => {
       cy.containsnear(
         `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `,
         permission,
@@ -222,11 +219,11 @@ const allPerms = [
   },
 ];
 
-Cypress.Commands.add('removeAllPermissions', {}, groupName => {
+Cypress.Commands.add('removeAllPermissions', {}, (groupName) => {
   cy.removePermissions(groupName, allPerms);
 });
 
-Cypress.Commands.add('addAllPermissions', {}, groupName => {
+Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
   cy.addPermissions(groupName, allPerms);
 });
 
@@ -257,7 +254,7 @@ Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
 });
 
 // FIXME: createUser doesn't change logins, deleteUser does => TODO consistency
-Cypress.Commands.add('deleteUser', {}, username => {
+Cypress.Commands.add('deleteUser', {}, (username) => {
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
 
@@ -285,7 +282,7 @@ Cypress.Commands.add('deleteUser', {}, username => {
   cy.wait('@userList');
 });
 
-Cypress.Commands.add('deleteGroup', {}, name => {
+Cypress.Commands.add('deleteGroup', {}, (name) => {
   var adminUsername = Cypress.env('username');
   var adminPassword = Cypress.env('password');
 
@@ -324,20 +321,20 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
       return Promise.reject(new Error(`Galaxykit failed: ${stderr}`));
     }
 
-    return stdout.split('\n').filter(s => !!s);
+    return stdout.split('\n').filter((s) => !!s);
   });
 });
 
-const col1 = line => line.split(/\s+/)[0].trim();
+const col1 = (line) => line.split(/\s+/)[0].trim();
 
 Cypress.Commands.add('deleteTestUsers', {}, () => {
-  cy.galaxykit('user list').then(lines => {
-    lines.map(col1).forEach(user => cy.galaxykit('-i user delete', user));
+  cy.galaxykit('user list').then((lines) => {
+    lines.map(col1).forEach((user) => cy.galaxykit('-i user delete', user));
   });
 });
 
 Cypress.Commands.add('deleteTestGroups', {}, () => {
-  cy.galaxykit('group list').then(lines => {
-    lines.map(col1).forEach(group => cy.galaxykit('-i group delete', group));
+  cy.galaxykit('group list').then((lines) => {
+    lines.map(col1).forEach((group) => cy.galaxykit('-i group delete', group));
   });
 });

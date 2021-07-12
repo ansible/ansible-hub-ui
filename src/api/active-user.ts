@@ -15,17 +15,17 @@ class API extends HubAPI {
           .getUser()
           // we don't care about entitlements stuff in the UI, so just
           // return the user's identity
-          .then(result => resolve(result.identity))
-          .catch(result => reject(result));
+          .then((result) => resolve(result.identity))
+          .catch((result) => reject(result));
       });
     } else if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
       return new Promise((resolve, reject) => {
         this.http
           .get(this.apiPath)
-          .then(result => {
+          .then((result) => {
             resolve(result.data);
           })
-          .catch(result => reject(result));
+          .catch((result) => reject(result));
       });
     }
   }
@@ -74,10 +74,10 @@ class API extends HubAPI {
               username: username,
               password: password,
             })
-            .then(response => resolve(response))
-            .catch(err => reject(err));
+            .then((response) => resolve(response))
+            .catch((err) => reject(err));
         })
-        .catch(err => reject(err));
+        .catch((err) => reject(err));
     });
   }
 }

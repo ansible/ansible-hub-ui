@@ -64,9 +64,10 @@ class CollectionDocs extends React.Component<
 
     if (contentType === 'docs' && contentName) {
       if (collection.latest_version.docs_blob.documentation_files) {
-        const file = collection.latest_version.docs_blob.documentation_files.find(
-          x => sanitizeDocsUrls(x.name) === urlFields['page'],
-        );
+        const file =
+          collection.latest_version.docs_blob.documentation_files.find(
+            (x) => sanitizeDocsUrls(x.name) === urlFields['page'],
+          );
 
         if (file) {
           displayHTML = file.html;
@@ -76,7 +77,8 @@ class CollectionDocs extends React.Component<
       // check if contents exists
       if (collection.latest_version.docs_blob.contents) {
         const content = collection.latest_version.docs_blob.contents.find(
-          x => x.content_type === contentType && x.content_name === contentName,
+          (x) =>
+            x.content_type === contentType && x.content_name === contentName,
         );
 
         if (content) {
@@ -128,7 +130,7 @@ class CollectionDocs extends React.Component<
         <CollectionHeader
           collection={collection}
           params={params}
-          updateParams={p =>
+          updateParams={(p) =>
             this.updateParams(p, () =>
               this.loadCollection(this.context.selectedRepo, true),
             )
@@ -148,7 +150,7 @@ class CollectionDocs extends React.Component<
               selectedName={contentName}
               selectedType={contentType}
               params={params}
-              updateParams={p => this.updateParams(p)}
+              updateParams={(p) => this.updateParams(p)}
               searchBarRef={this.searchBarRef}
             ></TableOfContents>
 
@@ -166,7 +168,7 @@ class CollectionDocs extends React.Component<
                   // if plugin data is set render it
                   <RenderPluginDoc
                     plugin={pluginData}
-                    renderModuleLink={moduleName =>
+                    renderModuleLink={(moduleName) =>
                       this.renderModuleLink(
                         moduleName,
                         collection,
@@ -180,7 +182,7 @@ class CollectionDocs extends React.Component<
                     renderTableOfContentsLink={(title, section) => (
                       <HashLink to={'#' + section}>{title}</HashLink>
                     )}
-                    renderWarning={text => (
+                    renderWarning={(text) => (
                       <Alert isInline variant='warning' title={text} />
                     )}
                   />
@@ -229,7 +231,7 @@ class CollectionDocs extends React.Component<
 
   private renderModuleLink(moduleName, collection, params, allContent) {
     const module = allContent.find(
-      x => x.content_type === 'module' && x.name === moduleName,
+      (x) => x.content_type === 'module' && x.name === moduleName,
     );
 
     if (module) {

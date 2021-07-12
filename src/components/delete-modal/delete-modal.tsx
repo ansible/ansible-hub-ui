@@ -12,14 +12,8 @@ interface IProps {
 
 export class DeleteModal extends React.Component<IProps> {
   render() {
-    const {
-      cancelAction,
-      children,
-      deleteAction,
-      isDisabled,
-      title,
-      spinner,
-    } = this.props;
+    const { cancelAction, children, deleteAction, isDisabled, title, spinner } =
+      this.props;
 
     return (
       <Modal

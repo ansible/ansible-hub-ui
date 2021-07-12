@@ -22,10 +22,10 @@ export function loadCollection(
     this.state.params,
     forceReload,
   )
-    .then(result => {
+    .then((result) => {
       this.setState({ collection: result }, callback);
     })
-    .catch(result => {
+    .catch((result) => {
       this.props.history.push(Paths.notFound);
     });
 }

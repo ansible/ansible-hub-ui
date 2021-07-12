@@ -113,7 +113,7 @@ export class UserForm extends React.Component<IProps, IState> {
           isDisabled={isReadonly}
           id='password-confirm'
           value={passwordConfirm}
-          onChange={value => {
+          onChange={(value) => {
             this.setState({ passwordConfirm: value });
           }}
           type='password'
@@ -123,7 +123,7 @@ export class UserForm extends React.Component<IProps, IState> {
 
     const readonlyGroups = () => (
       <FormGroup fieldId='groups' key='readonlyGroups' label='Groups'>
-        {user.groups.map(group => (
+        {user.groups.map((group) => (
           <Label key={group.name}>{group.name}</Label>
         ))}
       </FormGroup>
@@ -169,7 +169,7 @@ export class UserForm extends React.Component<IProps, IState> {
             label='Super user'
             labelOff='Not a super user'
             isChecked={user.is_superuser}
-            onChange={e =>
+            onChange={(e) =>
               this.updateUserFieldByName(!user.is_superuser, 'is_superuser')
             }
           ></Switch>
@@ -238,10 +238,10 @@ export class UserForm extends React.Component<IProps, IState> {
 
     const newUser = { ...user };
 
-    const i = user.groups.findIndex(g => g.name === selection);
+    const i = user.groups.findIndex((g) => g.name === selection);
     if (i === -1) {
       const addedGroup = this.state.searchGroups.find(
-        g => g.name === selection,
+        (g) => g.name === selection,
       );
       user.groups.push(addedGroup);
     } else {
@@ -251,8 +251,8 @@ export class UserForm extends React.Component<IProps, IState> {
     this.props.updateUser(newUser, this.props.errorMessages);
   };
 
-  private loadGroups = name => {
-    GroupAPI.list({ name__contains: name, page_size: 5 }).then(result =>
+  private loadGroups = (name) => {
+    GroupAPI.list({ name__contains: name, page_size: 5 }).then((result) =>
       this.setState({ searchGroups: result.data.data }),
     );
   };

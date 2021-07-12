@@ -84,7 +84,7 @@ class AuthHandler extends React.Component<
     const { user } = this.context;
     if (!user) {
       Promise.all([ActiveUserAPI.getUser(), FeatureFlagsAPI.get()])
-        .then(response => {
+        .then((response) => {
           this.props.updateInitialData(response[0], response[1].data, () =>
             this.setState({ isLoading: false }),
           );
@@ -199,7 +199,7 @@ export class Routes extends React.Component<IRoutesProps> {
         {this.getRoutes().map((route, index) => (
           <Route
             key={index}
-            render={props => (
+            render={(props) => (
               <AuthHandler
                 updateInitialData={this.props.updateInitialData}
                 noAuth={route.noAuth}
