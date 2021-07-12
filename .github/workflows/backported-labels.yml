@@ -30,7 +30,8 @@ jobs:
 
     - name: "Add ${{ env.LABEL }} to #${{ env.PR }}"
       if: ${{ env.PR }}
-      run: |
-        gh pr edit "$PR" --add-label "$LABEL"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: actions-ecosystem/action-add-labels@v1
+      with:
+        labels: ${{ env.LABEL }}
+        number: ${{ env.PR }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
