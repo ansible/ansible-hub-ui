@@ -21,7 +21,6 @@ interface IProps {
   niceNames?: object;
   style?: React.CSSProperties;
   className?: string;
-  onClear?: () => void;
 }
 
 export class AppliedFilters extends React.Component<IProps, {}> {
@@ -79,8 +78,7 @@ export class AppliedFilters extends React.Component<IProps, {}> {
   }
 
   private clearAllFilters = () => {
-    const { params, ignoredParams, updateParams, onClear } = this.props;
+    const { params, ignoredParams, updateParams } = this.props;
     ParamHelper.clearAllFilters({ params, ignoredParams, updateParams });
-    onClear && onClear();
   };
 }

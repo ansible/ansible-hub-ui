@@ -61,8 +61,6 @@ interface IState {
 }
 
 class UserList extends React.Component<RouteComponentProps, IState> {
-  compoundFilterRef = React.createRef<CompoundFilter>();
-
   constructor(props) {
     super(props);
 
@@ -141,7 +139,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         ) : (
           <Main>
             <section className='body'>
-              <div className='toolbar'>
+              <div className='user-list-toolbar'>
                 <Toolbar>
                   <ToolbarContent>
                     <ToolbarGroup>
@@ -169,7 +167,6 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                               title: 'Email',
                             },
                           ]}
-                          ref={this.compoundFilterRef}
                         />
                       </ToolbarItem>
                     </ToolbarGroup>
@@ -201,7 +198,6 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                   }
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
-                  onClear={this.clearTextInput}
                 />
               </div>
               {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
@@ -403,10 +399,6 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   private get closeAlert() {
     return closeAlertMixin('alerts');
   }
-
-  private clearTextInput = () => {
-    this.compoundFilterRef.current.onClear();
-  };
 }
 
 export default withRouter(UserList);
