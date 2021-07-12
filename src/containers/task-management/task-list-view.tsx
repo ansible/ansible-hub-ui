@@ -1,18 +1,17 @@
 import axios from 'axios';
 import * as React from 'react';
 import * as moment from 'moment';
+import './task.scss';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
   ToolbarContent,
-  Button,
   Label,
 } from '@patternfly/react-core';
 import { ParamHelper } from '../../utilities';
 import {
-  WarningTriangleIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
   SyncAltIcon,
@@ -76,27 +75,6 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     this.queryTasks();
-    // TaskManagementAPI.list().then(result => {
-    //   console.log(result.data.results);
-    //   this.setState({
-    //     items: result.data.results,
-    //     itemCount: result.data.count,
-    //     loading: false,
-    //   });
-    // });
-  }
-
-  private queryTasks() {
-    this.setState({ loading: true }, () => {
-      TaskManagementAPI.list().then(result => {
-        console.log(result.data.results);
-        this.setState({
-          items: result.data.results,
-          itemCount: result.data.count,
-          loading: false,
-        });
-      });
-    });
   }
 
   render() {
@@ -113,7 +91,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
           {loading ? (
             <LoadingPageSpinner />
           ) : (
-            <section>
+            <section className='body'>
               <div className='toolbar'>
                 <Toolbar>
                   <ToolbarContent>
@@ -129,6 +107,10 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                             {
                               id: 'name',
                               title: 'Task name',
+                            },
+                            {
+                              id: 'state',
+                              title: 'Status',
                             },
                           ]}
                         />
@@ -155,7 +137,16 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                   ignoredParams={['page_size', 'page', 'sort']}
                 />
               </div>
-              this.renderTable()
+              {this.renderTable(params)}
+              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
+                  <Pagination
+                    params={params}
+                    updateParams={p =>
+                      this.updateParams(p, () => this.queryTasks())
+                    }
+                    count={itemCount}
+                  />
+                </div>
             </section>
           )}
         </Main>
@@ -163,11 +154,11 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderTable() {
+  private renderTable(params) {
     const { items } = this.state;
-    // if (items.length === 0) {
-    //   return <EmptyStateFilter />;
-    // }
+    if (items.length === 0) {
+      return <EmptyStateFilter />;
+    }
 
     let sortTableOptions = {
       headers: [
@@ -183,12 +174,12 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         },
         {
           title: 'Error',
-          type: 'alpha',
+          type: 'none',
           id: 'error',
         },
         {
           title: 'Created on',
-          type: 'none',
+          type: 'alpha',
           id: 'pulp_created',
         },
         {
@@ -208,10 +199,9 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       <table aria-label='Task list' className='content-table pf-c-table'>
         <SortTable
           options={sortTableOptions}
-          params={{}}
+          params={params}
           updateParams={p =>
-            //How would this be different for the task list? Does this refer to the API call / setState down on 229?
-            console.log('Table')
+            this.updateParams(p, () => this.queryTasks())
           }
         />
         <tbody>{items.map((item, i) => this.renderTableRow(item, i))}</tbody>
@@ -272,21 +262,18 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  // private statusLabel({state}) {
-  //   Switch(state) {
-  //     case 'completed':
-  //       return (
-  //         <td>
-  //            <Label>{state}</Label>
-  //         </td>
-  //       )
-  //     default:
-  //       return (
-  //          <td></td>
-  //       )
-  //     }
-  //     </td>
-  // }
+  private queryTasks() {
+    this.setState({ loading: true }, () => {
+      TaskManagementAPI.list().then(result => {
+        console.log(result.data.results);
+        this.setState({
+          items: result.data.results,
+          itemCount: result.data.count,
+          loading: false,
+        });
+      });
+    });
+  }
 
   private get updateParams() {
     return ParamHelper.updateParamsMixin();
