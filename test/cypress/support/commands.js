@@ -56,28 +56,18 @@ Cypress.Commands.add('menuGo', {}, name => {
 });
 
 Cypress.Commands.add('logout', {}, () => {
-  cy.server();
-  cy.route(
-    'GET',
-    urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
-  ).as('me');
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
   cy.get('[aria-label="user-dropdown"] button').click();
   cy.get('[aria-label="logout"]').click();
   cy.wait('@me');
 });
 
 Cypress.Commands.add('login', {}, (username, password) => {
-  let loginUrl = urljoin(
-    Cypress.config().baseUrl,
-    Cypress.env('prefix'),
-    '_ui/v1/auth/login/',
+  cy.intercept('POST', Cypress.env('prefix') + '_ui/v1/auth/login/').as(
+    'login',
   );
-  cy.server();
-  cy.route('POST', loginUrl).as('login');
-  cy.route(
-    'GET',
-    urljoin(Cypress.config().baseUrl, Cypress.env('prefix'), '_ui/v1/me/'),
-  ).as('me');
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
+  cy.visit('/ui/login');
   cy.get('#pf-login-username-id').type(username);
   cy.get('#pf-login-password-id').type(`${password}{enter}`);
   cy.wait('@login');
@@ -111,38 +101,39 @@ Cypress.Commands.add(
     cy.get('#password').type(user.password);
     cy.get('#password-confirm').type(user.password);
 
-    cy.server();
-    cy.route('POST', Cypress.env('prefix') + '_ui/v1/users/').as('createUser');
+    cy.intercept('POST', Cypress.env('prefix') + '_ui/v1/users/').as(
+      'createUser',
+    );
 
     cy.contains('Save').click();
     cy.wait('@createUser');
 
-    // The API responded, but the user list page hasn't loaded, wait 100ms.
-    cy.wait(100);
+    // Wait for navigation
+    cy.contains('.pf-c-title', 'Users');
   },
 );
 
 Cypress.Commands.add('createGroup', {}, name => {
-  cy.route(
-    'GET',
-    Cypress.env('prefix') + '_ui/v1/groups/?sort=name&offset=0&limit=10',
-  ).as('createGroup');
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
+    'loadGroups',
+  );
   cy.menuGo('User Access > Groups');
-  cy.wait('@createGroup');
+  cy.wait('@loadGroups');
 
   cy.contains('Create').click();
 
-  cy.route('POST', Cypress.env('prefix') + '_ui/v1/groups/').as('createGroup');
+  cy.intercept('POST', Cypress.env('prefix') + '_ui/v1/groups/').as(
+    'submitGroup',
+  );
   cy.contains('div', 'Name *')
     .findnear('input')
     .first()
     .type(`${name}{enter}`);
-  cy.wait('@createGroup');
+  cy.wait('@submitGroup');
 });
 
 Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
-  cy.server();
-  cy.route(
+  cy.intercept(
     'GET',
     Cypress.env('prefix') + '_ui/v1/groups/*/model-permissions/*',
   ).as('groups');
@@ -274,8 +265,7 @@ Cypress.Commands.add('deleteUser', {}, username => {
   cy.login(adminUsername, adminPassword);
 
   cy.menuGo('User Access > Users');
-  cy.server();
-  cy.route('DELETE', Cypress.env('prefix') + '_ui/v1/users/**').as(
+  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/users/**').as(
     'deleteUser',
   );
   cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click();
@@ -283,9 +273,16 @@ Cypress.Commands.add('deleteUser', {}, username => {
     `[aria-labelledby=${username}] [aria-label=Actions]`,
     'Delete',
   ).click();
+
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/users/?*').as('userList');
+
   cy.contains('[role=dialog] button', 'Delete').click();
-  cy.wait('@deleteUser');
-  cy.get('@deleteUser').should('have.property', 'status', 204);
+  cy.wait('@deleteUser').then(({ request, response }) => {
+    expect(response.statusCode).to.eq(204);
+  });
+
+  // Wait for navigation
+  cy.wait('@userList');
 });
 
 Cypress.Commands.add('deleteGroup', {}, name => {
@@ -296,80 +293,51 @@ Cypress.Commands.add('deleteGroup', {}, name => {
   cy.login(adminUsername, adminPassword);
 
   cy.menuGo('User Access > Groups');
-  cy.server();
-  cy.route('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
+  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
     'deleteGroup',
   );
   cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click();
   cy.contains('[role=dialog] button', 'Delete').click();
-  cy.wait('@deleteGroup');
-  cy.get('@deleteGroup').should('have.property', 'status', 204);
+  cy.wait('@deleteGroup').then(({ request, response }) => {
+    expect(response.statusCode).to.eq(204);
+  });
 });
 
 // GalaxyKit Integration
-
+/// cy.galaxykit(operation, ...args, options = {}) .. only args get escaped; yields an array of nonempty lines on success
 Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
-  var options = {};
-  var adminUsername = Cypress.env('username');
-  var adminPassword = Cypress.env('password');
-  var server = Cypress.config().baseUrl + Cypress.env('prefix');
-  var cmd = shell`galaxykit -s ${server} -u ${adminUsername} -p ${adminPassword}`;
+  const adminUsername = Cypress.env('username');
+  const adminPassword = Cypress.env('password');
+  const server = Cypress.config().baseUrl + Cypress.env('prefix');
+  const options =
+    args.length >= 1 && typeof args[args.length - 1] == 'object'
+      ? args.splice(args.length - 1, 1)[0]
+      : [];
+  const cmd = shell`galaxykit -s ${server} -u ${adminUsername} -p ${adminPassword} ${shell.preserve(
+    operation,
+  )} ${args}`;
 
-  if (args.length >= 1) {
-    if (typeof args[args.length - 1] == 'object') {
-      options = args.splice(args.length - 1, 1)[0];
+  return cy.exec(cmd, options).then(({ code, stderr, stdout }) => {
+    console.log(`RUN ${cmd}`, options, { code, stderr, stdout });
+
+    if (stderr) {
+      return Promise.reject(new Error(`Galaxykit failed: ${stderr}`));
     }
-  }
 
-  cmd += ' ' + operation;
-  Array.prototype.forEach.call(args, arg => {
-    cmd += ' ' + shell`${arg}`;
-  });
-
-  return cy.exec(cmd, options, (error, stdout) => {
-    if (error) {
-      throw new Error(`Galaxykit failed: ${error}`);
-    } else {
-      console.log(`RUN galaxykit ${args}`);
-      console.log(stdout);
-    }
+    return stdout.split('\n').filter(s => !!s);
   });
 });
 
-Cypress.Commands.add('deleteTestUsers', {}, args => {
-  var adminUsername = Cypress.env('username');
-  var adminPassword = Cypress.env('password');
-  var server = Cypress.config().baseUrl + Cypress.env('prefix');
-  var cmd = `galaxykit -s '${server}' -u '${adminUsername}' -p '${adminPassword}' user list`;
+const col1 = line => line.split(/\s+/)[0].trim();
 
-  var users = cy.exec(cmd);
-  users.then(result => {
-    var stdout = result.stdout;
-    var lines = stdout.split('\n');
-    lines.forEach(line => {
-      var username = line.split(' ')[0];
-      if (username.trim().length > 0) {
-        cy.galaxykit(`user delete ${username}`, { failOnNonZeroExit: false });
-      }
-    });
+Cypress.Commands.add('deleteTestUsers', {}, () => {
+  cy.galaxykit('user list').then(lines => {
+    lines.map(col1).forEach(user => cy.galaxykit('-i user delete', user));
   });
 });
 
-Cypress.Commands.add('deleteTestGroups', {}, args => {
-  var adminUsername = Cypress.env('username');
-  var adminPassword = Cypress.env('password');
-  var server = Cypress.config().baseUrl + Cypress.env('prefix');
-  var cmd = shell`galaxykit -s ${server} -u ${adminUsername} -p ${adminPassword} group list`;
-
-  var p = cy.exec(cmd);
-  p.then(result => {
-    var stdout = result.stdout;
-    var lines = stdout.split('\n');
-    lines.forEach(line => {
-      var name = line.split(' ')[0];
-      if (name.trim().length > 0) {
-        cy.galaxykit(`group delete ${name}`, { failOnNonZeroExit: false });
-      }
-    });
+Cypress.Commands.add('deleteTestGroups', {}, () => {
+  cy.galaxykit('group list').then(lines => {
+    lines.map(col1).forEach(group => cy.galaxykit('-i group delete', group));
   });
 });

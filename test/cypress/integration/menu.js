@@ -14,10 +14,6 @@ describe('Hub Menu Tests', () => {
     'User Access > Groups',
   ];
 
-  beforeEach(() => {
-    cy.visit(baseUrl);
-  });
-
   it('admin user sees complete menu', () => {
     cy.login(adminUsername, adminPassword);
     menuItems.forEach(item => cy.menuPresent(item));
@@ -26,6 +22,12 @@ describe('Hub Menu Tests', () => {
   describe('user without permissions', () => {
     let username = 'nopermission';
     let password = 'n0permissi0n';
+
+    before(() => {
+      cy.deleteTestUsers();
+      cy.galaxykit('user create', username, password);
+    });
+
     let visibleMenuItems = [
       'Collections > Collections',
       'Collections > Namespaces',
@@ -39,17 +41,6 @@ describe('Hub Menu Tests', () => {
       'User Access > Groups',
       'Collections > Approval',
     ];
-
-    beforeEach(() => {
-      cy.login(adminUsername, adminPassword);
-      cy.createUser(username, password);
-      cy.logout();
-    });
-
-    afterEach(() => {
-      cy.deleteUser(username);
-      cy.logout();
-    });
 
     it('sees limited menu', () => {
       cy.login(username, password);

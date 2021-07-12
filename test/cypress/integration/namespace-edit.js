@@ -42,6 +42,11 @@ describe('Edit a namespace', () => {
     return cy.get('div.pf-c-form__group-control > textarea.pf-c-form-control');
   };
 
+  before(() => {
+    cy.deleteTestGroups();
+    cy.galaxykit('-i group create', 'namespace-owner-autocomplete');
+  });
+
   beforeEach(() => {
     cy.visit(baseUrl);
     cy.login(adminUsername, adminPassword);
@@ -53,7 +58,7 @@ describe('Edit a namespace', () => {
   });
 
   it('tests that the name field is disabled from editing', () => {
-    return cy.get('#name').should('be.disabled');
+    cy.get('#name').should('be.disabled');
   });
 
   it('tests the company name for errors', () => {
@@ -80,12 +85,20 @@ describe('Edit a namespace', () => {
   });
 
   it('tests the namespace owners field', () => {
+    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
+      'autocomplete',
+    );
+
     cy.get('.pf-c-form-control.pf-c-select__toggle-typeahead')
       .click()
       .type('abcde');
+    cy.wait('@autocomplete');
     cy.get('.pf-c-select__menu-wrapper').should('contain', 'Not found');
+
     cy.get('.pf-c-button.pf-m-plain.pf-c-select__toggle-clear').click();
-    cy.get('.pf-c-select__menu-wrapper').click();
+    cy.wait('@autocomplete');
+    cy.contains('namespace-owner-autocomplete').click();
+
     saveButton().click();
   });
 
