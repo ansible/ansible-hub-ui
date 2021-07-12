@@ -139,14 +139,14 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
               </div>
               {this.renderTable(params)}
               <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                  <Pagination
-                    params={params}
-                    updateParams={p =>
-                      this.updateParams(p, () => this.queryTasks())
-                    }
-                    count={itemCount}
-                  />
-                </div>
+                <Pagination
+                  params={params}
+                  updateParams={p =>
+                    this.updateParams(p, () => this.queryTasks())
+                  }
+                  count={itemCount}
+                />
+              </div>
             </section>
           )}
         </Main>
@@ -200,9 +200,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={p =>
-            this.updateParams(p, () => this.queryTasks())
-          }
+          updateParams={p => this.updateParams(p, () => this.queryTasks())}
         />
         <tbody>{items.map((item, i) => this.renderTableRow(item, i))}</tbody>
       </table>
