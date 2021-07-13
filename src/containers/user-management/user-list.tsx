@@ -1,4 +1,6 @@
 import * as React from 'react';
+import './user-management.scss';
+
 import {
   withRouter,
   RouteComponentProps,
@@ -137,7 +139,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         ) : (
           <Main>
             <section className='body'>
-              <div className='toolbar'>
+              <div className='user-list-toolbar'>
                 <Toolbar>
                   <ToolbarContent>
                     <ToolbarGroup>
@@ -172,7 +174,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                       <ToolbarGroup>
                         <ToolbarItem>
                           <Link to={Paths.createUser}>
-                            <Button>Create user</Button>
+                            <Button>Create</Button>
                           </Link>
                         </ToolbarItem>
                       </ToolbarGroup>
@@ -200,15 +202,13 @@ class UserList extends React.Component<RouteComponentProps, IState> {
               </div>
               {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
 
-              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                <Pagination
-                  params={params}
-                  updateParams={p =>
-                    this.updateParams(p, () => this.queryUsers())
-                  }
-                  count={itemCount}
-                />
-              </div>
+              <Pagination
+                params={params}
+                updateParams={p =>
+                  this.updateParams(p, () => this.queryUsers())
+                }
+                count={itemCount}
+              />
             </section>
           </Main>
         )}
@@ -250,6 +250,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           title: 'First name',
           type: 'alpha',
           id: 'first_name',
+          className: 'pf-m-wrap',
         },
         {
           title: 'Last name',
@@ -353,7 +354,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={user.date_joined} />
         </td>
-        <td>
+        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
           {dropdownItems.length > 0 ? (
             <StatefulDropdown items={dropdownItems}></StatefulDropdown>
           ) : null}

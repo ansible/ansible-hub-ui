@@ -93,7 +93,7 @@ Cypress.Commands.add(
       email: email || 'firstName@example.com',
       password: password || 'I am a complicated passw0rd',
     };
-    cy.contains('Create user').click();
+    cy.contains('Create').click();
     cy.get('#first_name').type(user.firstName);
     cy.get('#last_name').type(user.lastName);
     cy.get('#email').type(user.email);
