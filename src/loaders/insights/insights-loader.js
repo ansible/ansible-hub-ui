@@ -63,7 +63,7 @@ class App extends Component {
     // view repositories other than "published", but all other views are locked
     // to "published"
     // We do this because there is not currently a way to toggle repositories
-    // in automation hub on cloud.redhat.com, so it's important to ensure the user
+    // in automation hub on console.redhat.com, so it's important to ensure the user
     // always lands on the published repo
 
     // check if the URL matches the base path for the collection detail page

@@ -56,7 +56,7 @@ module.exports = inputConfigs => {
   };
 
   // being able to turn off the favicon is useful for deploying to insights mode
-  // cloud.redhat.com sets it's own favicon and ours tends to override it if we
+  // console.redhat.com sets its own favicon and ours tends to override it if we
   // set one
   if (customConfigs.USE_FAVICON) {
     htmlPluginConfig['favicon'] = 'static/images/favicon.ico';
