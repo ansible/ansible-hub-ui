@@ -92,7 +92,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
             <LoadingPageSpinner />
           ) : (
             <section className='body'>
-              <div className='toolbar'>
+              <div className='task-list'>
                 <Toolbar>
                   <ToolbarContent>
                     <ToolbarGroup>
@@ -134,7 +134,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                     this.updateParams(p, () => this.queryTasks())
                   }
                   params={params}
-                  ignoredParams={['page_size', 'page', 'sort']}
+                  ignoredParams={['page_size', 'page', 'sort', 'ordering']}
                 />
               </div>
               {this.renderTable(params)}
@@ -168,29 +168,24 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
           id: 'name',
         },
         {
-          title: 'Status',
-          type: 'alpha',
-          id: 'state',
-        },
-        {
-          title: 'Error',
-          type: 'none',
-          id: 'error',
-        },
-        {
           title: 'Created on',
-          type: 'alpha',
+          type: 'numeric',
           id: 'pulp_created',
         },
         {
           title: 'Started at',
-          type: 'none',
+          type: 'numeric',
           id: 'started_at',
         },
         {
           title: 'Finished at',
-          type: 'none',
+          type: 'numeric',
           id: 'finished_at',
+        },
+        {
+          title: 'Status',
+          type: 'alpha',
+          id: 'state',
         },
       ],
     };
@@ -208,10 +203,19 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderTableRow(item: any, index: number) {
-    const { name, state, error, pulp_created, started_at, finished_at } = item;
+    const { name, state, pulp_created, started_at, finished_at } = item;
     return (
       <tr aria-labelledby={name} key={index}>
         <td>{name}</td>
+        <td>
+          <DateComponent date={pulp_created} />
+        </td>
+        <td>
+          <DateComponent date={started_at} />
+        </td>
+        <td>
+          <DateComponent date={finished_at} />
+        </td>
         {state === 'failed' ? (
           <td>
             <Label
@@ -246,24 +250,15 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
           </td>
         )}
 
-        <td>{error}</td>
-        <td>
-          <DateComponent date={pulp_created} />
-        </td>
-        <td>
-          <DateComponent date={started_at} />
-        </td>
-        <td>
-          <DateComponent date={finished_at} />
-        </td>
+        
+       
       </tr>
     );
   }
 
   private queryTasks() {
     this.setState({ loading: true }, () => {
-      TaskManagementAPI.list().then(result => {
-        console.log(result.data.results);
+      TaskManagementAPI.list(this.state.params).then(result => {
         this.setState({
           items: result.data.results,
           itemCount: result.data.count,
