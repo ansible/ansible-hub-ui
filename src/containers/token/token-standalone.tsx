@@ -1,13 +1,20 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { ClipboardCopy, Button } from '@patternfly/react-core';
+import {
+  ClipboardCopy,
+  ClipboardCopyVariant,
+  Button,
+  Alert,
+  AlertActionCloseButton,
+} from '@patternfly/react-core';
 
 import { BaseHeader, Main } from 'src/components';
 import { ActiveUserAPI } from 'src/api';
 
 interface IState {
   token: string;
+  showWarningMessage: boolean;
 }
 
 class TokenPage extends React.Component<RouteComponentProps, IState> {
@@ -16,16 +23,40 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
     this.state = {
       token: undefined,
+      showWarningMessage: false,
     };
   }
 
   render() {
-    const { token } = this.state;
+    const { token, showWarningMessage } = this.state;
+    const renewTokenCmd = `curl https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token -d grant_type=refresh_token -d client_id="{{ user_name }}" -d refresh_token=\"{{ user_token }}\" --fail --silent --show-error --output /dev/null`;
 
     return (
       <React.Fragment>
         <BaseHeader title='Token management'></BaseHeader>
         <Main>
+          {showWarningMessage && (
+            <div style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+              <Alert
+                isInline
+                variant='warning'
+                title='The token will expire after 30 days of inactivity. To renew the token, run the command below.'
+                actionClose={
+                  <AlertActionCloseButton
+                    onClose={() => this.setState({ showWarningMessage: false })}
+                  />
+                }
+              >
+                <ClipboardCopy
+                  isCode
+                  isReadOnly
+                  variant={ClipboardCopyVariant.expansion}
+                >
+                  {renewTokenCmd}
+                </ClipboardCopy>
+              </Alert>
+            </div>
+          )}
           <section className='body pf-c-content'>
             <h2>API token</h2>
             <p>
@@ -56,7 +87,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
   private loadToken() {
     ActiveUserAPI.getToken().then(result =>
-      this.setState({ token: result.data.token }),
+      this.setState({ token: result.data.token, showWarningMessage: true }),
     );
   }
 }
