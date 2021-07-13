@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './group-management.scss';
 
 import {
   withRouter,
@@ -144,7 +145,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         ) : (
           <Main>
             <section className='body'>
-              <div className='toolbar'>
+              <div className='group-list-toolbar'>
                 <Toolbar>
                   <ToolbarContent>
                     <ToolbarGroup>
