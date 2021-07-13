@@ -33,14 +33,8 @@ interface IProps {
 
 export class Pagination extends React.Component<IProps> {
   render() {
-    const {
-      count,
-      params,
-      updateParams,
-      isTop,
-      perPageOptions,
-      isCompact,
-    } = this.props;
+    const { count, params, updateParams, isTop, perPageOptions, isCompact } =
+      this.props;
 
     const extraProps = {};
     if (!isTop) {
@@ -69,7 +63,7 @@ export class Pagination extends React.Component<IProps> {
   }
 
   private mapPerPageOptions(options) {
-    return options.map(option => ({
+    return options.map((option) => ({
       title: String(option),
       value: option,
     }));

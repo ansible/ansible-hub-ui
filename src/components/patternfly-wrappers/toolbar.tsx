@@ -72,8 +72,8 @@ export class Toolbar extends React.Component<IProps, IState> {
               <InputGroup>
                 <TextInput
                   value={kwField}
-                  onChange={k => this.setState({ kwField: k })}
-                  onKeyPress={e => this.handleEnter(e)}
+                  onChange={(k) => this.setState({ kwField: k })}
+                  onKeyPress={(e) => this.handleEnter(e)}
                   type='search'
                   aria-label='search text input'
                   placeholder={searchPlaceholder}

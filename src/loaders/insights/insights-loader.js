@@ -31,7 +31,7 @@ class App extends Component {
     // This listens for insights navigation events, so this will fire
     // when items in the nav are clicked or the app is loaded for the first
     // time
-    this.appNav = insights.chrome.on('APP_NAVIGATION', event => {
+    this.appNav = insights.chrome.on('APP_NAVIGATION', (event) => {
       // We want to be able to navigate between routes when users click
       // on the nav, so rewriting the entire route is acceptable, however,
       // we also need to avoid rewriting the route when the page is
@@ -47,8 +47,10 @@ class App extends Component {
       insights.chrome.navigation(buildNavigation()),
     );
 
-    insights.chrome.auth.getUser().then(user => this.setState({ user: user }));
-    ActiveUserAPI.getActiveUser().then(result =>
+    insights.chrome.auth
+      .getUser()
+      .then((user) => this.setState({ user: user }));
+    ActiveUserAPI.getActiveUser().then((result) =>
       this.setState({ activeUser: result.data }),
     );
   }
@@ -114,11 +116,11 @@ class App extends Component {
       );
     }
   }
-  setActiveUser = user => {
+  setActiveUser = (user) => {
     this.setState({ activeUser: user });
   };
 
-  isRepoURL = location => {
+  isRepoURL = (location) => {
     return matchPath(location, {
       path: Paths.collectionByRepo,
     });
@@ -147,7 +149,7 @@ function buildNavigation() {
       title: 'Rules',
       id: 'rules',
     },
-  ].map(item => ({
+  ].map((item) => ({
     ...item,
     active: item.id === currentPath,
   }));

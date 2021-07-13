@@ -33,7 +33,7 @@ export class DataForm extends React.Component<IProps> {
       updateField,
     } = this.props;
 
-    const fields = formFields.map(field => {
+    const fields = formFields.map((field) => {
       if (!field) {
         return null;
       }
@@ -68,7 +68,7 @@ export class DataForm extends React.Component<IProps> {
 
     return (
       <Form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           this.props.onSave();
         }}

@@ -57,13 +57,13 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
               <FlexItem style={{ minWidth: '200px' }}>{group.name}</FlexItem>
               <FlexItem grow={{ default: 'grow' }} style={{ width: '90%' }}>
                 <PermissionChipSelector
-                  availablePermissions={availablePermissions.map(perm =>
+                  availablePermissions={availablePermissions.map((perm) =>
                     twoWayMapper(perm, Constants.GROUP_HUMAN_PERMISSIONS),
                   )}
-                  selectedPermissions={group.object_permissions.map(perm =>
+                  selectedPermissions={group.object_permissions.map((perm) =>
                     twoWayMapper(perm, Constants.GROUP_HUMAN_PERMISSIONS),
                   )}
-                  setSelected={perms => this.setPermissions(perms, group)}
+                  setSelected={(perms) => this.setPermissions(perms, group)}
                   menuAppendTo={this.props.menuAppendTo}
                 />
               </FlexItem>
@@ -93,19 +93,19 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
 
   private setPermissions(perms, group) {
     const newGroups = [...this.props.groups];
-    const selectedGroup = newGroups.find(g => g.id === group.id);
-    selectedGroup.object_permissions = perms.map(perm =>
+    const selectedGroup = newGroups.find((g) => g.id === group.id);
+    selectedGroup.object_permissions = perms.map((perm) =>
       twoWayMapper(perm, Constants.GROUP_HUMAN_PERMISSIONS),
     );
 
     this.props.setGroups(newGroups);
   }
 
-  private loadGroups = name => {
-    GroupAPI.list({ name__contains: name }).then(result => {
-      const added = this.props.groups.map(group => group.name);
+  private loadGroups = (name) => {
+    GroupAPI.list({ name__contains: name }).then((result) => {
+      const added = this.props.groups.map((group) => group.name);
       const groups = result.data.data.filter(
-        group => !added.includes(group.name),
+        (group) => !added.includes(group.name),
       );
       this.setState({ searchGroups: groups });
     });
@@ -114,7 +114,9 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
   private onSelect = (event, selection, isPlaceholder) => {
     const newGroups = [...this.props.groups];
 
-    const addedGroup = this.state.searchGroups.find(g => g.name === selection);
+    const addedGroup = this.state.searchGroups.find(
+      (g) => g.name === selection,
+    );
 
     newGroups.push({
       id: addedGroup.id as number,

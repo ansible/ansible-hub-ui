@@ -31,7 +31,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     // this function will fail if chrome.auth.doOffline() hasn't been called
-    (window as any).insights.chrome.auth.getOfflineToken().then(result => {
+    (window as any).insights.chrome.auth.getOfflineToken().then((result) => {
       this.setState({ tokenData: result.data });
     });
   }

@@ -102,7 +102,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={p => null}
+          updateParams={(p) => null}
         />
         <tbody>{remotes.map((remote, i) => this.renderRow(remote, i))}</tbody>
       </table>
@@ -114,7 +114,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
     return (
       <tr key={i}>
         <td>{remote.name}</td>
-        <td>{remote.repositories.map(r => r.name).join(', ')}</td>
+        <td>{remote.repositories.map((r) => r.name).join(', ')}</td>
         {!!remote.updated_at ? (
           <td>
             <DateComponent date={remote.updated_at} />
