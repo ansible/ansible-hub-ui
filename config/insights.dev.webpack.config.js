@@ -24,7 +24,7 @@ module.exports = webpackBase({
   APPLICATION_NAME: 'Automation Hub',
 
   // Disables custom favicons. Used to turn off our favicon so we inherit
-  // the correct one from cloud.redhat.com
+  // the correct one from console.redhat.com
   USE_FAVICON: false,
 
   // Serve the UI over http or https. Options: true, false
