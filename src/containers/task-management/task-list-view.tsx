@@ -249,9 +249,6 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
             <Label variant='outline'>{state}</Label>
           </td>
         )}
-
-        
-       
       </tr>
     );
   }
