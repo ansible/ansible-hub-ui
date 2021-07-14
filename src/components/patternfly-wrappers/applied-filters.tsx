@@ -69,7 +69,7 @@ export class AppliedFilters extends React.Component<IProps, {}> {
                 updateParams(ParamHelper.deleteParam(params, key, v))
               }
             >
-              {v}
+              {niceNames[v] || v}
             </Chip>
           ))}
         </ChipGroup>

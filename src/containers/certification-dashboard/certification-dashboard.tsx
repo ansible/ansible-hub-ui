@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './certification-dashboard.scss';
+
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   BaseHeader,
@@ -22,6 +23,7 @@ import {
   ExclamationCircleIcon,
   CheckCircleIcon,
 } from '@patternfly/react-icons';
+import _ from 'lodash';
 
 import { CollectionVersionAPI, CollectionVersion, TaskAPI } from 'src/api';
 import { filterIsSet, ParamHelper } from 'src/utilities';
@@ -77,8 +79,8 @@ class CertificationDashboard extends React.Component<
       params['sort'] = '-pulp_created';
     }
 
-    if (!params['repository']) {
-      params['repository'] = 'staging';
+    if (!params['status']) {
+      params['status'] = 'staging';
     }
 
     this.state = {
@@ -141,8 +143,8 @@ class CertificationDashboard extends React.Component<
                             title: 'Collection Name',
                           },
                           {
-                            id: 'repository',
-                            title: 'Repository',
+                            id: 'status',
+                            title: 'Status',
                             inputType: 'select',
                             options: [
                               {
@@ -181,6 +183,7 @@ class CertificationDashboard extends React.Component<
                   }
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
+                  niceNames={{ staging: 'Needs review' }}
                 />
               </div>
               {loading ? (
@@ -207,7 +210,7 @@ class CertificationDashboard extends React.Component<
 
   private renderTable(versions, params) {
     if (versions.length === 0) {
-      return filterIsSet(params, ['namespace', 'name', 'repository']) ? (
+      return filterIsSet(params, ['namespace', 'name', 'status']) ? (
         <EmptyStateFilter />
       ) : (
         <EmptyStateNoData
@@ -518,8 +521,19 @@ class CertificationDashboard extends React.Component<
   }
 
   private queryCollections() {
+    const updatedCollectionParams =
+      'status' in this.state.params
+        ? _.omit(
+            {
+              repository: this.state.params['status'],
+              ...this.state.params,
+            },
+            ['status'],
+          )
+        : this.state.params;
+
     this.setState({ loading: true }, () =>
-      CollectionVersionAPI.list(this.state.params).then(result => {
+      CollectionVersionAPI.list(updatedCollectionParams).then(result => {
         this.setState({
           versions: result.data.data,
           itemCount: result.data.meta.count,
