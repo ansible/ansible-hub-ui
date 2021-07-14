@@ -95,12 +95,23 @@ The Github Action invokes the [RedHatInsights/insights-frontend-builder-common//
 
 ### Workflows
 
-- `master`: `cypress`, `deploy-cloud`, `dev-release`, `stable-release`, `update-manifest`
+List of all workflows:
+
+- `backported-labels`: Add a backported-* label when a PR is backported to stable-*; on patchback merges
+- `cypress`: Run Cypress integration tests; on PRs, pushes and cron
+- `deploy-cloud`: Deploy to c.r.c; when the relevant branch is updated
+- `dev-release`: Build and upload to github releases, update `dev` tag; when master is updated
+- `stable-release`: Build and upload to github releases; when a stable release is created
+- `update-manifest`: Update https://github.com/RedHatInsights/manifests ; when master is updated
+
+List by branches:
+
+- `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `stable-release`, `update-manifest`
 - `master-stable`: `deploy-cloud`
 - `prod-beta`: `deploy-cloud`
 - `prod-stable`: `deploy-cloud`
-- `stable-4.2`: `stable-release`
-- `stable-4.3`: `cypress`, `stable-release`
+- `stable-4.2`: `backported-labels`, `stable-release`
+- `stable-4.3`: `backported-labels`, `cypress`, `stable-release`
 
 ## Patternfly
 
