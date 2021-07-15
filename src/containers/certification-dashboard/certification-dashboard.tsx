@@ -23,7 +23,7 @@ import {
   ExclamationCircleIcon,
   CheckCircleIcon,
 } from '@patternfly/react-icons';
-import _ from 'lodash';
+import { omit } from 'lodash';
 
 import { CollectionVersionAPI, CollectionVersion, TaskAPI } from 'src/api';
 import { filterIsSet, ParamHelper } from 'src/utilities';
@@ -523,7 +523,7 @@ class CertificationDashboard extends React.Component<
   private queryCollections() {
     const updatedCollectionParams =
       'status' in this.state.params
-        ? _.omit(
+        ? omit(
             {
               repository: this.state.params['status'],
               ...this.state.params,
