@@ -27,7 +27,7 @@ The app will run on http://localhost:8002 and proxy requests for `api/automation
 
 To enable insights mode set `DEPLOYMENT_MODE: 'insights'` in [custom.dev.config.js](./custom.dev.config.js).
 
-This app is part of the Red Hat cloud platform. Because of that the app needs to be loaded within the context of cloud.redhat.com. This is done by accessing the app via the [insights-proxy project](https://github.com/RedHatInsights/insights-proxy).
+This app is part of the Red Hat cloud platform. Because of that the app needs to be loaded within the context of console.redhat.com. This is done by accessing the app via the [insights-proxy project](https://github.com/RedHatInsights/insights-proxy).
 
 #### Set up Insights Proxy
 
