@@ -5,6 +5,6 @@ export function getRepoUrl(distributionPath: string) {
   const host = !!API_HOST ? API_HOST : window.location.origin;
 
   return !!distributionPath
-    ? `${host}${API_BASE_PATH}content/${distributionPath}/`
+    ? `${host}${API_BASE_PATH}content/inbound-${distributionPath}/`
     : `${host}${API_BASE_PATH}`;
 }
