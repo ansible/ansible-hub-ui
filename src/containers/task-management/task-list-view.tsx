@@ -1,8 +1,6 @@
-import axios from 'axios';
 import * as React from 'react';
-import * as moment from 'moment';
 import './task.scss';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import {
   Toolbar,
   ToolbarGroup,
@@ -10,7 +8,7 @@ import {
   ToolbarContent,
   Label,
 } from '@patternfly/react-core';
-import { ParamHelper } from '../../utilities';
+import { ParamHelper, filterIsSet } from '../../utilities';
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
@@ -18,8 +16,6 @@ import {
   OutlinedClockIcon,
 } from '@patternfly/react-icons';
 import {
-  AlertList,
-  AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -30,8 +26,6 @@ import {
   Main,
   Pagination,
   SortTable,
-  Tooltip,
-  closeAlertMixin,
 } from 'src/components';
 import { TaskManagementAPI } from 'src/api';
 import { TaskType } from 'src/api/response-types/task';
@@ -44,7 +38,6 @@ interface IState {
   loading: boolean;
   items: Array<TaskType>;
   itemCount: number;
-  alerts: AlertType[];
 }
 
 export class TaskListView extends React.Component<RouteComponentProps, IState> {
@@ -69,7 +62,6 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       items: [],
       loading: true,
       itemCount: 0,
-      alerts: [],
     };
   }
 
@@ -78,7 +70,9 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { params, itemCount, loading, alerts, items } = this.state;
+    const { params, itemCount, loading, items } = this.state;
+    const noData =
+      items.length === 0 && !filterIsSet(params, ['name__contains', 'state']);
 
     if (!params['sort']) {
       params['sort'] = 'name';
@@ -87,69 +81,95 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     return (
       <React.Fragment>
         <BaseHeader title={'Task Management'} />
-        <Main>
-          {loading ? (
-            <LoadingPageSpinner />
-          ) : (
-            <section className='body'>
-              <div className='task-list'>
-                <Toolbar>
-                  <ToolbarContent>
-                    <ToolbarGroup>
-                      <ToolbarItem>
-                        <CompoundFilter
-                          updateParams={p => {
-                            p['page'] = 1;
-                            this.updateParams(p, () => this.queryTasks());
-                          }}
-                          params={params}
-                          filterConfig={[
-                            {
-                              id: 'name',
-                              title: 'Task name',
-                            },
-                            {
-                              id: 'state',
-                              title: 'Status',
-                            },
-                          ]}
-                        />
-                      </ToolbarItem>
-                    </ToolbarGroup>
-                  </ToolbarContent>
-                </Toolbar>
-
-                <Pagination
-                  params={params}
-                  updateParams={p =>
-                    this.updateParams(p, () => this.queryTasks())
-                  }
-                  count={itemCount}
-                  isTop
-                />
-              </div>
-              <div>
-                <AppliedFilters
-                  updateParams={p =>
-                    this.updateParams(p, () => this.queryTasks())
-                  }
-                  params={params}
-                  ignoredParams={['page_size', 'page', 'sort', 'ordering']}
-                />
-              </div>
-              {this.renderTable(params)}
-              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                <Pagination
-                  params={params}
-                  updateParams={p =>
-                    this.updateParams(p, () => this.queryTasks())
-                  }
-                  count={itemCount}
-                />
-              </div>
-            </section>
-          )}
-        </Main>
+        {noData && !loading ? (
+          <EmptyStateNoData
+            title={'No tasks yet'}
+            description={'Tasks will appear once created.'}
+          />
+        ) : (
+          <Main>
+            {loading ? (
+              <LoadingPageSpinner />
+            ) : (
+              <section className='body'>
+                <div className='task-list'>
+                  <Toolbar>
+                    <ToolbarContent>
+                      <ToolbarGroup>
+                        <ToolbarItem>
+                          <CompoundFilter
+                            updateParams={p => {
+                              p['page'] = 1;
+                              this.updateParams(p, () => this.queryTasks());
+                            }}
+                            params={params}
+                            filterConfig={[
+                              {
+                                id: 'name__contains',
+                                title: 'Task name',
+                              },
+                              {
+                                id: 'state',
+                                title: 'Status',
+                                inputType: 'select',
+                                options: [
+                                  {
+                                    id: 'completed',
+                                    title: 'Completed',
+                                  },
+                                  {
+                                    id: 'failed',
+                                    title: 'Failed',
+                                  },
+                                  {
+                                    id: 'running',
+                                    title: 'Running',
+                                  },
+                                  {
+                                    id: 'waiting',
+                                    title: 'Waiting',
+                                  },
+                                ],
+                              },
+                            ]}
+                          />
+                        </ToolbarItem>
+                      </ToolbarGroup>
+                    </ToolbarContent>
+                  </Toolbar>
+                  <Pagination
+                    params={params}
+                    updateParams={p =>
+                      this.updateParams(p, () => this.queryTasks())
+                    }
+                    count={itemCount}
+                    isTop
+                  />
+                </div>
+                <div>
+                  <AppliedFilters
+                    updateParams={p =>
+                      this.updateParams(p, () => this.queryTasks())
+                    }
+                    params={params}
+                    ignoredParams={['page_size', 'page', 'sort', 'ordering']}
+                    niceNames={{ name__contains: 'Name', state: 'Status' }}
+                  />
+                </div>
+                {this.renderTable(params)}
+                <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
+                  <Pagination
+                    params={params}
+                    updateParams={p =>
+                      this.updateParams(p, () => this.queryTasks())
+                    }
+                    count={itemCount}
+                  />
+                </div>
+              </section>
+            )}
+          </Main>
+        )}
       </React.Fragment>
     );
   }
@@ -159,7 +179,6 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     if (items.length === 0) {
       return <EmptyStateFilter />;
     }
-
     let sortTableOptions = {
       headers: [
         {
@@ -195,7 +214,10 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={p => this.updateParams(p, () => this.queryTasks())}
+          updateParams={p => {
+            p['page'] = 1;
+            this.updateParams(p, () => this.queryTasks());
+          }}
         />
         <tbody>{items.map((item, i) => this.renderTableRow(item, i))}</tbody>
       </table>
@@ -216,7 +238,23 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={finished_at} />
         </td>
-        {state === 'failed' ? (
+        {this.statusLabel({ state })}
+      </tr>
+    );
+  }
+
+  private statusLabel({ state }) {
+    switch (state) {
+      case 'completed':
+        return (
+          <td>
+            <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
+              {state}
+            </Label>
+          </td>
+        );
+      case 'failed':
+        return (
           <td>
             <Label
               variant='outline'
@@ -226,31 +264,30 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
               {state}
             </Label>
           </td>
-        ) : state === 'completed' ? (
-          <td>
-            <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-              {state}
-            </Label>
-          </td>
-        ) : state === 'running' ? (
+        );
+      case 'running':
+        return (
           <td>
             <Label variant='outline' color='blue' icon={<SyncAltIcon />}>
               {state}
             </Label>
           </td>
-        ) : state === 'waiting' ? (
+        );
+      case 'waiting':
+        return (
           <td>
             <Label variant='outline' color='grey' icon={<OutlinedClockIcon />}>
               {state}
             </Label>
           </td>
-        ) : (
+        );
+      default:
+        return (
           <td>
             <Label variant='outline'>{state}</Label>
           </td>
-        )}
-      </tr>
-    );
+        );
+    }
   }
 
   private queryTasks() {

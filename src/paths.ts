@@ -56,7 +56,7 @@ export enum Paths {
   userDetail = '/users/:userID',
   userProfileSettings = '/settings/user-profile',
   repositories = '/repositories',
-  taskList = '/task-list',
+  taskList = '/tasks',
 }
 
 export const namespaceBreadcrumb = {
