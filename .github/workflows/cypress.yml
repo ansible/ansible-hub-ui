@@ -55,9 +55,9 @@ jobs:
             git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
           
           RUN mkdir -p /etc/nginx/pulp/
-          RUN ln /usr/local/lib/python3.6/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
-          RUN ln /usr/local/lib/python3.6/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
-          RUN ln /usr/local/lib/python3.6/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
+          RUN ln /usr/local/lib/python3.8/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
+          RUN ln /usr/local/lib/python3.8/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
+          RUN ln /usr/local/lib/python3.8/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
         ' | tee Containerfile
         
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
