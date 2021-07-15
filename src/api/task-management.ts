@@ -3,10 +3,6 @@ import { PulpAPI } from './pulp';
 export class API extends PulpAPI {
   apiPath = 'tasks/';
 
-  constructor() {
-    super();
-  }
-
   list(params) {
     let changedParams = { ...params };
     if (changedParams['sort']) {
