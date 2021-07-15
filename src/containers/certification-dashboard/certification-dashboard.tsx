@@ -183,7 +183,13 @@ class CertificationDashboard extends React.Component<
                   }
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
-                  niceNames={{ staging: 'Needs review' }}
+                  niceValues={{
+                    status: {
+                      [Constants.PUBLISHED]: 'Approved',
+                      [Constants.NEEDSREVIEW]: 'Needs Review',
+                      [Constants.NOTCERTIFIED]: 'Rejected',
+                    },
+                  }}
                 />
               </div>
               {loading ? (

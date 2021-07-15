@@ -19,6 +19,7 @@ interface IProps {
    * when displaying the param field name
    */
   niceNames?: object;
+  niceValues?: object;
   style?: React.CSSProperties;
   className?: string;
 }
@@ -49,7 +50,7 @@ export class AppliedFilters extends React.Component<IProps, {}> {
   }
 
   private renderGroup(key: string) {
-    const { niceNames, params, updateParams } = this.props;
+    const { niceNames, niceValues, params, updateParams } = this.props;
 
     let chips;
 
@@ -69,7 +70,7 @@ export class AppliedFilters extends React.Component<IProps, {}> {
                 updateParams(ParamHelper.deleteParam(params, key, v))
               }
             >
-              {niceNames[v] || v}
+              {niceValues?.[key]?.[v] || v}
             </Chip>
           ))}
         </ChipGroup>
