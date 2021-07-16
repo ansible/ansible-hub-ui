@@ -340,6 +340,9 @@ class App extends React.Component<RouteComponentProps, IState> {
         condition: ({ featureFlags }) => featureFlags.execution_environments,
         url: Paths.executionEnvironments,
       }),
+      menuItem('Task Management', {
+        url: Paths.taskList,
+      }),
       menuItem('Documentation', {
         url:
           'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
