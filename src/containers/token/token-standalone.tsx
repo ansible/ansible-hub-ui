@@ -59,7 +59,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             )}
 
             <div
-              className='f-c-content'
+              className='pf-c-content'
               style={{ paddingTop: 'var(--pf-global--spacer--md)' }}
             >
               <span>
