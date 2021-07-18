@@ -15,7 +15,6 @@ import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   token: string;
-  showWarningMessage: boolean;
 }
 
 class TokenPage extends React.Component<RouteComponentProps, IState> {
@@ -24,41 +23,18 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
     this.state = {
       token: undefined,
-      showWarningMessage: false,
     };
   }
 
   render() {
     const { user } = this.context;
-    const { token, showWarningMessage } = this.state;
-    const renewTokenCmd = `curl https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token -d grant_type=refresh_token -d client_id="${user.username}" -d refresh_token=\"${token}\" --fail --silent --show-error --output /dev/null`;
+    const { token } = this.state;
+    const renewTokenCmd = `curl https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token -d grant_type=refresh_token -d client_id="${user.username}" -d refresh_token=\"${token ?? '{{ user_token }}'}\" --fail --silent --show-error --output /dev/null`;
 
     return (
       <React.Fragment>
         <BaseHeader title='Token management'></BaseHeader>
         <Main>
-          {showWarningMessage && (
-            <div style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
-              <Alert
-                isInline
-                variant='warning'
-                title='The token will expire after 30 days of inactivity. To renew the token, run the command below.'
-                actionClose={
-                  <AlertActionCloseButton
-                    onClose={() => this.setState({ showWarningMessage: false })}
-                  />
-                }
-              >
-                <ClipboardCopy
-                  isCode
-                  isReadOnly
-                  variant={ClipboardCopyVariant.expansion}
-                >
-                  {renewTokenCmd}
-                </ClipboardCopy>
-              </Alert>
-            </div>
-          )}
           <section className='body pf-c-content'>
             <h2>API token</h2>
             <p>
@@ -81,6 +57,23 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                 <Button onClick={() => this.loadToken()}>Load token</Button>
               </div>
             )}
+
+            <div
+              className='f-c-content'
+              style={{ paddingTop: 'var(--pf-global--spacer--md)' }}
+            >
+              <span>
+                The token will expire after 30 days of inactivity. To renew the
+                token, run the command below.
+              </span>
+              <ClipboardCopy
+                isCode
+                isReadOnly
+                variant={ClipboardCopyVariant.expansion}
+              >
+                {renewTokenCmd}
+              </ClipboardCopy>
+            </div>
           </section>
         </Main>
       </React.Fragment>
@@ -89,7 +82,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
   private loadToken() {
     ActiveUserAPI.getToken().then(result =>
-      this.setState({ token: result.data.token, showWarningMessage: true }),
+      this.setState({ token: result.data.token }),
     );
   }
 }
