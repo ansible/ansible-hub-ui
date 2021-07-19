@@ -71,6 +71,31 @@ After the tests have run you can view a video recording of the run is test/cypre
 See Cypress documentation:
     https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Folder-Structure
 
+# Guidelines
+
+Please start by reading [Cypress best practices](https://docs.cypress.io/guides/references/best-practices).
+
+`before`:
+  * start with cleanup, see `cy.deleteTestUsers()` etc
+  * initialize dependencies using `cy.galaxykit` (or helpers, do not use the UI); see GalaxyKit Integration section below
+
+`beforeEach`:
+  * use for `cy.login` + `cy.visit('/')` if all tests use the same login, then individual tests can start with `cy.menuGo`
+
+`it`:
+  * start with `cy.login` (only) if necessary
+  * do `cy.visit` or `cy.menuGo` to ensure the right place
+
+`it` + UI helpers:
+  * always make sure to wait for the last thing that happens automatically when initiating a user action
+  * for example, when adding a user, waiting for the API response is not enough, since the UI then redirects to the user list screen => wait for the Users list screen to finish loading
+
+`after` / `afterEach`:
+  * don't use; won't run after failures anyway
+  * consider doing galaxykit based cleanup from `after` as well as in `before`
+    * only a convenience to declutter
+    * can't rely on it
+
 ## GalaxyKit Integration
 
 In order to help manage test data, our Cypress setup includes wrappers around the galaxykit command. The galakxykit command is an interface to the GalaxyNG API.
