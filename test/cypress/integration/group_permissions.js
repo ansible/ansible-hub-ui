@@ -42,15 +42,15 @@ describe('Group Permissions Tests', () => {
     addTestGroup('baseGroup', []);
     addTestGroup('allGroup', []);
 
-    addTestGroup('group2', []);
-    addTestGroup('group3', ['View group']);
-    addTestGroup('group4', ['View group', 'Add group', 'Change group']);
+    //addTestGroup('group2', []);
+    //addTestGroup('group3', ['View group']);
+    //addTestGroup('group4', ['View group', 'Add group', 'Change group']);
     addTestGroup('group5', ['View group', 'Delete group']);
 
-    addTestUser('user1', null);
-    addTestUser('user2', 'group2');
-    addTestUser('user3', 'group3');
-    addTestUser('user4', 'group4');
+    //addTestUser('user1', null);
+    //addTestUser('user2', 'group2');
+    //addTestUser('user3', 'group3');
+    //addTestUser('user4', 'group4');
     addTestUser('user5', 'group5');
   });
 
@@ -99,7 +99,9 @@ describe('Group Permissions Tests', () => {
 
         if (canDeleteGroups) {
           cy.contains('button', 'Delete').click();
-          cy.contains('button', 'Cancel').click();
+          //cy.contains('button', 'Cancel').click();
+          cy.contains('button', 'Delete').click();
+          //cy.contains('button', 'Delete').click({force : true});
         } else {
           cy.contains('button', 'Delete').should('not.exist');
         }
