@@ -5,8 +5,6 @@ import {
   ClipboardCopy,
   ClipboardCopyVariant,
   Button,
-  Alert,
-  AlertActionCloseButton,
 } from '@patternfly/react-core';
 
 import { BaseHeader, Main } from 'src/components';
@@ -59,7 +57,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             )}
 
             <div
-              className='f-c-content'
+              className='pf-c-content'
               style={{ paddingTop: 'var(--pf-global--spacer--md)' }}
             >
               <span>
