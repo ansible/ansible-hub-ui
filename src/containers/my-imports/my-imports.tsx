@@ -75,10 +75,13 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
     );
 
     this.polling = setInterval(() => {
+      const { selectedImport, selectedImportDetails } = this.state;
+      const allowedStates = [PulpStatus.running, PulpStatus.waiting];
+
+      // selectedImportDetails can be failed while selectedImport is still running, poll() updates selectedImport
       if (
-        this.state.selectedImportDetails &&
-        (this.state.selectedImportDetails.state === PulpStatus.running ||
-          this.state.selectedImportDetails.state === PulpStatus.waiting)
+        allowedStates.includes(selectedImportDetails?.state) ||
+        allowedStates.includes(selectedImport?.state)
       ) {
         this.poll();
       }
