@@ -152,7 +152,7 @@ export const Routes = props => {
   return (
     <Switch>
       <InsightsRoute
-        path={Paths.repositories}
+        path={'automation-' + Paths.repositories}
         component={Repository}
         rootClass='root'
       />
@@ -167,12 +167,12 @@ export const Routes = props => {
         rootClass='root'
       />
       <InsightsRoute
-        path={Paths.token}
+        path={'automation-' + Paths.token}
         component={TokenPage}
         rootClass='root'
       />
       <InsightsRoute
-        path={Paths[NAMESPACE_TERM]}
+        path={'automation-' + Paths[NAMESPACE_TERM]}
         component={Partners}
         rootClass='root'
       />
@@ -192,7 +192,7 @@ export const Routes = props => {
         rootClass='root'
       />
       <InsightsRoute
-        path={Paths.myNamespaces}
+        path={'automation-' + Paths.myNamespaces}
         component={MyNamespaces}
         rootClass='root'
       />
