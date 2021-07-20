@@ -151,19 +151,19 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                           params={params}
                           filterConfig={[
                             {
-                              id: 'username',
+                              id: 'username__contains',
                               title: 'Username',
                             },
                             {
-                              id: 'first_name',
+                              id: 'first_name__contains',
                               title: 'First name',
                             },
                             {
-                              id: 'last_name',
+                              id: 'last_name__contains',
                               title: 'Last name',
                             },
                             {
-                              id: 'email',
+                              id: 'email__contains',
                               title: 'Email',
                             },
                           ]}
@@ -198,6 +198,12 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                   }
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
+                  niceNames={{
+                    username__contains: 'Username',
+                    first_name__contains: 'First name',
+                    last_name__contains: 'Last name',
+                    email__contains: 'Email',
+                  }}
                 />
               </div>
               {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
