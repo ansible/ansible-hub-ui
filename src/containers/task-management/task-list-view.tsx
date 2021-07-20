@@ -2,14 +2,13 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './task.scss';
 import { Constants } from 'src/constants';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   Button,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
   ToolbarContent,
-  Label,
 } from '@patternfly/react-core';
 import { ParamHelper, filterIsSet, twoWayMapper } from '../../utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
@@ -33,10 +32,12 @@ import {
   Main,
   Pagination,
   SortTable,
+  TaskStatus,
 } from 'src/components';
 import { TaskManagementAPI } from 'src/api';
 import { TaskType } from 'src/api/response-types/task';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
+import { formatPath, Paths } from 'src/paths';
 
 interface IState {
   params: {
@@ -244,12 +245,24 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderTableRow(item: TaskType, index: number) {
-    const { name, state, pulp_created, started_at, finished_at } = item;
-    const { user } = this.context;
+  private renderTableRow(item: any, index: number) {
+    const {
+      name,
+      state,
+      pulp_created,
+      started_at,
+      finished_at,
+      pulp_href,
+    } = item;
+    let splitedHref = pulp_href.split('/');
+    let taskId = splitedHref[splitedHref.length - 2];
     return (
       <tr aria-labelledby={name} key={index}>
-        <td>{Constants.TASK_NAMES[name] || name}</td>
+        <td>
+          <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
+            {Constants.TASK_NAMES[name] || name}
+          </Link>
+        </td>
         <td>
           <DateComponent date={pulp_created} />
         </td>
@@ -259,7 +272,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={finished_at} />
         </td>
-        <td>{this.statusLabel({ state })}</td>
+        <td><TaskStatus state={state}/></td>
         <td>{this.cancelButton(state, item)}</td>
       </tr>
     );
@@ -299,37 +312,6 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
             {t`Stop task`}
           </Button>
         );
-    }
-  }
-
-  private statusLabel({ state }) {
-    switch (state) {
-      case 'completed':
-        return (
-          <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-            {twoWayMapper(state, Constants.HUMAN_STATUS)}
-          </Label>
-        );
-      case 'failed':
-        return (
-          <Label variant='outline' color='red' icon={<ExclamationCircleIcon />}>
-            {twoWayMapper(state, Constants.HUMAN_STATUS)}
-          </Label>
-        );
-      case 'running':
-        return (
-          <Label variant='outline' color='blue' icon={<SyncAltIcon />}>
-            {twoWayMapper(state, Constants.HUMAN_STATUS)}
-          </Label>
-        );
-      case 'waiting':
-        return (
-          <Label variant='outline' color='grey' icon={<OutlinedClockIcon />}>
-            {twoWayMapper(state, Constants.HUMAN_STATUS)}
-          </Label>
-        );
-      default:
-        return <Label variant='outline'>{state}</Label>;
     }
   }
 

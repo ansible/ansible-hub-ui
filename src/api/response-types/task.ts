@@ -4,5 +4,11 @@ export class TaskType {
   name: string;
   started_at: string;
   finished_at: string;
-  error: string;
+  error: { traceback: string; description: string };
+  pulp_href: string;
+  progress_report: any[];
+  task_group: any;
+  parent_task: any;
+  child_tasks: any[];
+  reserved_resources_record: any[];
 }

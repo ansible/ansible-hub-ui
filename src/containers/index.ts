@@ -26,5 +26,6 @@ export { default as ExecutionEnvironmentDetail } from './execution-environment-d
 export { default as ExecutionEnvironmentDetailActivities } from './execution-environment-detail/execution_environment_detail_activities';
 export { default as ExecutionEnvironmentDetailImages } from './execution-environment-detail/execution_environment_detail_images';
 export { default as ExecutionEnvironmentManifest } from './execution-environment-manifest/execution-environment-manifest';
+export { default as TaskDetail } from './task-management/task_detail';
 export { AboutModalWindow } from './about-modal/about-modal';
 export { default as TaskListView } from './task-management/task-list-view';
