@@ -8,6 +8,7 @@ describe('Test cookieLogin for cookie storage', () => {
 
   before(() => {
     cy.login(adminUsername, adminPassword);
+	cy.visit('');
     cy.deleteTestUsers();
     cy.galaxykit('user create', username, password);
     cy.logout();

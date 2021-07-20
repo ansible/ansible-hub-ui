@@ -91,7 +91,6 @@ Cypress.Commands.add('logout', {}, () => {
   cy.get('[aria-label="user-dropdown"] button').click();
   cy.get('[aria-label="logout"]').click();
   cy.wait('@me');
-  cy.wait(2000);
 });
 
 Cypress.Commands.add('login', {}, (username, password) => {
