@@ -9,16 +9,16 @@ describe('Group Permissions Tests', () => {
   function addTestUser(user, group) {
     cy.galaxykit('user create', user, user + 'Password');
     if (group != null) {
-	  cy.galaxykit('user group add', user, group);
-	}
+      cy.galaxykit('user group add', user, group);
+    }
   }
 
   function addTestGroup(group, permissions) {
-	cy.wait(1000);
+    cy.wait(1000);
     cy.createGroup(group);
-	cy.wait(1000);
+    cy.wait(1000);
     //cy.galaxykit('-i group create', group);
-	cy.addPermissions(group, [{ group: 'groups', permissions: permissions }]);
+    cy.addPermissions(group, [{ group: 'groups', permissions: permissions }]);
   }
 
   before(() => {
@@ -31,17 +31,22 @@ describe('Group Permissions Tests', () => {
     //addTestGroup('baseGroup', []);
     //addTestGroup('group2', []);
     //addTestGroup('group3', ['View group']);
-    addTestGroup('group4', ['View group', 'Delete group', 'Add group', 'Change group']);
+    addTestGroup('group4', [
+      'View group',
+      'Delete group',
+      'Add group',
+      'Change group',
+    ]);
 
     //addTestUser('user1', null);
     //addTestUser('user2', 'group2');
     //addTestUser('user3', 'group3');
     addTestUser('user4', 'group4');
-	cy.logout();
+    cy.logout();
   });
-  
+
   it('beforeAll', () => {});
-  
+
   /*
   it('it cant see groups', () => {
 	// test user without any group at all
@@ -118,20 +123,24 @@ describe('Group Permissions Tests', () => {
 	});
 	cy.wait(2000);
   });*/
-  
+
   it('can change group', () => {
-	let user = 'user4';
-	cy.login(user, user + 'Password');
-	cy.wait(2000);
-	
-	cy.menuGo('User Access > Groups');
-	cy.contains('a', 'group4').click();
-	cy.contains('button', 'Edit').click();
-	
-	cy.contains('Add group').siblings('button[aria-label=Remove]').click();
-	cy.contains('button', 'Save').click();
-	
-	cy.contains('button', 'Edit').click();
-	cy.contains('div', 'groups').get('[aria-label="Select permissions"]').type('Add group');
+    let user = 'user4';
+    cy.login(user, user + 'Password');
+    cy.wait(2000);
+
+    cy.menuGo('User Access > Groups');
+    cy.contains('a', 'group4').click();
+    cy.contains('button', 'Edit').click();
+
+    cy.contains('Add group')
+      .siblings('button[aria-label=Remove]')
+      .click();
+    cy.contains('button', 'Save').click();
+
+    cy.contains('button', 'Edit').click();
+    cy.contains('div', 'groups')
+      .get('[aria-label="Select permissions"]')
+      .type('Add group');
   });
 });
