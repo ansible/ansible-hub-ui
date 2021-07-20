@@ -10,26 +10,24 @@ describe('Test cookieLogin for cookie storage', () => {
     cy.login(adminUsername, adminPassword);
     cy.deleteTestUsers();
     cy.galaxykit('user create', username, password);
-	cy.logout();
+    cy.logout();
   });
 
   it('can login manually and logout as admin or different user', () => {
-	cy.login(username, password);
+    cy.login(username, password);
     cy.contains(username);
     cy.logout();
-	// the wait is important here, otherwise it will creat occasional test fails
-	cy.wait(2000);
+    // the wait is important here, otherwise it will creat occasional test fails
+    cy.wait(2000);
     cy.login(adminUsername, adminPassword);
     cy.contains(adminUsername);
   });
 
-  
   it('can login as user and store cookie', () => {
     cy.cookieLogin(username, password);
     cy.contains(username);
   });
 
-  
   it('can login as admin and store cookie', () => {
     cy.cookieLogin(adminUsername, adminUsername);
     cy.contains(adminUsername);
@@ -46,7 +44,7 @@ describe('Test cookieLogin for cookie storage', () => {
   });
 
   it('can cookieLogin without cookie removal between its as admin or different user', () => {
-	cy.cookieLogin(username, password);
+    cy.cookieLogin(username, password);
     cy.contains(username);
 
     cy.cookieLogin(adminUsername, adminPassword);
