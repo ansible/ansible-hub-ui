@@ -1,91 +1,78 @@
 describe('Test cookieLogin for cookie storage', () => {
-  let baseUrl = Cypress.config().baseUrl;
+  //let baseUrl = Cypress.config().baseUrl;
+  let baseUrl = '/';
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
   let username = 'nopermission';
   let password = 'n0permissi0n';
 
   before(() => {
-    cy.visit(baseUrl);
     cy.login(adminUsername, adminPassword);
     cy.deleteTestUsers();
     cy.galaxykit('user create', username, password);
-    cy.logout();
+	cy.logout();
   });
 
-  it('Test manual login and logout as admin or different user', () => {
-    cy.visit(baseUrl);
-    cy.login(username, password);
-    cy.visit(baseUrl);
+  it('can login manually and logout as admin or different user', () => {
+	cy.login(username, password);
     cy.contains(username);
     cy.logout();
+	// the wait is important here, otherwise it will creat occasional test fails
+	cy.wait(2000);
     cy.login(adminUsername, adminPassword);
-    cy.visit(baseUrl);
     cy.contains(adminUsername);
-    cy.logout();
   });
 
-  it('Test login1 user', () => {
+  
+  it('can login as user and store cookie', () => {
     cy.cookieLogin(username, password);
-    cy.visit(baseUrl);
     cy.contains(username);
   });
 
-  it('Test login2 admin', () => {
+  
+  it('can login as admin and store cookie', () => {
     cy.cookieLogin(adminUsername, adminUsername);
-    cy.visit(baseUrl);
     cy.contains(adminUsername);
   });
 
-  it('Test login3 user', () => {
+  it('it can switch back to user using cookie storage', () => {
     cy.cookieLogin(username, password);
-    cy.visit(baseUrl);
     cy.contains(username);
   });
 
-  it('Test login4 admin', () => {
+  it('it can switch back to admin using cookie storage', () => {
     cy.cookieLogin(adminUsername, adminUsername);
-    cy.visit(baseUrl);
     cy.contains(adminUsername);
   });
 
-  it('Test cookieLogin without logout and cookie removal as admin or different user', () => {
-    cy.cookieLogin(username, password);
-    cy.visit(baseUrl);
+  it('can cookieLogin without cookie removal between its as admin or different user', () => {
+	cy.cookieLogin(username, password);
     cy.contains(username);
 
     cy.cookieLogin(adminUsername, adminPassword);
-    cy.visit(baseUrl);
     cy.contains(adminUsername);
 
     cy.cookieLogin(username, password);
-    cy.visit(baseUrl);
     cy.contains(username);
 
     cy.cookieLogin(adminUsername, adminPassword);
-    cy.visit(baseUrl);
     cy.contains(adminUsername);
   });
 
-  it('Test cookieLogin with logout and cookie removal as admin or different user', () => {
+  it('can cookieLogin with logout as admin or different user - this will force to login manualy every time', () => {
     cy.cookieLogin(username, password);
-    cy.visit(baseUrl);
     cy.contains(username);
     cy.cookieLogout();
 
     cy.cookieLogin(adminUsername, adminPassword);
-    cy.visit(baseUrl);
     cy.contains(adminUsername);
     cy.cookieLogout();
 
     cy.cookieLogin(username, password);
-    cy.visit(baseUrl);
     cy.contains(username);
     cy.cookieLogout();
 
     cy.cookieLogin(adminUsername, adminPassword);
-    cy.visit(baseUrl);
     cy.contains(adminUsername);
-    cy.cookieLogout();
   });
 });
