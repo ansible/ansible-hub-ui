@@ -50,7 +50,6 @@ jobs:
           FROM docker.io/pulp/pulp-ci-centos:latest
 
           RUN pip3 install --upgrade \
-            "click<8.0" \
             requests \
             git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
 
