@@ -17,8 +17,6 @@ describe('Test cookieLogin for cookie storage', () => {
     cy.login(username, password);
     cy.contains(username);
     cy.logout();
-    // the wait is important here, otherwise it will creat occasional test fails
-    cy.wait(2000);
     cy.login(adminUsername, adminPassword);
     cy.contains(adminUsername);
   });
