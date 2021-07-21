@@ -129,7 +129,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         <BaseHeader title={_`Groups`}></BaseHeader>
         {unauthorized ? (
           <EmptyStateUnauthorized />
-        ) : noData ? (
+        ) : loading ? (<LoadingPageSpinner />) : noData ? (
           <EmptyStateNoData
             title={_`No groups yet`}
             description={_`Groups will appear once created`}
