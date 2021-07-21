@@ -9,10 +9,12 @@ import getBaseName from './utilities/getBaseName';
 
 // Entrypoint for compiling the app to run in insights dev mode.
 
+const basename = getBaseName(window.location.pathname)
+
 ReactDOM.render(
   <Provider store={init(logger).getStore()}>
-    <Router basename={getBaseName(window.location.pathname)}>
-      <App />
+    <Router basename={basename}>
+      <App basename={basename} />
     </Router>
   </Provider>,
 
