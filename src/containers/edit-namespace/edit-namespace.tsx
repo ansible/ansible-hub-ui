@@ -158,7 +158,9 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                   {saving ? <Spinner></Spinner> : null}
                 </ActionGroup>
                 {this.state.unsavedData ? (
-                  <div style={{ color: 'red' }}>You have unsaved changes</div>
+                  <div
+                    style={{ color: 'red' }}
+                  >{_`You have unsaved changes`}</div>
                 ) : null}
               </Form>
             </section>

@@ -174,7 +174,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                       <ToolbarGroup>
                         <ToolbarItem>
                           <Link to={Paths.createUser}>
-                            <Button>Create</Button>
+                            <Button>{_`Create`}</Button>
                           </Link>
                         </ToolbarItem>
                       </ToolbarGroup>
@@ -238,7 +238,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           description={_`Users will appear once created`}
           button={
             <Link to={Paths.createUser}>
-              <Button variant={'primary'}>Create</Button>
+              <Button variant={'primary'}>{_`Create`}</Button>
             </Link>
           }
         />

@@ -111,7 +111,9 @@ class App extends React.Component<RouteComponentProps, IState> {
         <DropdownSeparator key='separator' />,
         <DropdownItem
           key='profile'
-          component={<Link to={Paths.userProfileSettings}>My profile</Link>}
+          component={
+            <Link to={Paths.userProfileSettings}>{_`My profile`}</Link>
+          }
         ></DropdownItem>,
 
         <DropdownItem

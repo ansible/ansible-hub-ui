@@ -40,7 +40,7 @@ export class GroupModal extends React.Component<IProps, IState> {
         }}
         isOpen={true}
         title={''}
-        header={<h2>Create a group</h2>}
+        header={<h2>{_`Create a group`}</h2>}
         aria-label='group-modal'
         actions={[
           <Button

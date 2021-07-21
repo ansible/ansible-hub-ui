@@ -85,7 +85,7 @@ export class CollectionHeader extends React.Component<IProps> {
         breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
         versionControl={
           <div className='install-version-column'>
-            <span>Version</span>
+            <span>{_`Version`}</span>
             <div className='install-version-dropdown'>
               <FormSelect
                 onChange={val =>

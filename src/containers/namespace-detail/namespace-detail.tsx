@@ -258,7 +258,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               <div>
                 <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
                 <div>
-                  <b>Note:</b> Use this URL to configure ansible-galaxy to
+                  <b>{_`Note:`}</b> Use this URL to configure ansible-galaxy to
                   upload collections to this namespace. More information on
                   ansible-galaxy configurations can be found{' '}
                   <a

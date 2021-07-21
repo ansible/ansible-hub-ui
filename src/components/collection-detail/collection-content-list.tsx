@@ -78,7 +78,7 @@ export class CollectionContentList extends React.Component<IProps> {
               </ToolbarItem>
             </ToolbarGroup>
             <ToolbarGroup>
-              <ToolbarItem>Showing:</ToolbarItem>
+              <ToolbarItem>{_`Showing:`}</ToolbarItem>
               {Object.keys(summary).map(key => (
                 <ToolbarItem
                   key={key}
@@ -100,9 +100,9 @@ export class CollectionContentList extends React.Component<IProps> {
         <table className='content-table pf-c-table pf-m-compact'>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Description</th>
+              <th>{_`Name`}</th>
+              <th>{_`Type`}</th>
+              <th>{_`Description`}</th>
             </tr>
           </thead>
           <tbody>

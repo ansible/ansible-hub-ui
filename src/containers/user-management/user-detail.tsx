@@ -103,7 +103,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
                         userID: userDetail.id,
                       })}
                     >
-                      <Button>Edit</Button>
+                      <Button>{_`Edit`}</Button>
                     </Link>
                   </div>
                 ) : null}

@@ -190,7 +190,7 @@ export class ImportList extends React.Component<IProps, IState> {
   private renderNamespacePicker(namespaces) {
     return (
       <div className='namespace-selector-wrapper'>
-        <div className='label'>Namespace</div>
+        <div className='label'>{_`Namespace`}</div>
         <div className='selector'>
           <FormSelect
             onChange={val =>

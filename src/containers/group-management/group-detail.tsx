@@ -375,7 +375,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         title={''}
         header={
           <span className='pf-c-content'>
-            <h2>Add selected users to group</h2>{' '}
+            <h2>{_`Add selected users to group`}</h2>{' '}
           </span>
         }
         actions={[

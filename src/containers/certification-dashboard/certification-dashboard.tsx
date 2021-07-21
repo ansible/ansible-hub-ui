@@ -447,7 +447,7 @@ class CertificationDashboard extends React.Component<
               )
             }
           >
-            <span>Approve</span>
+            <span>{_`Approve`}</span>
           </Button>
           <StatefulDropdown
             items={[rejectDropDown(false, Constants.NEEDSREVIEW), importsLink]}

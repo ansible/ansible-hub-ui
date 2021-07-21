@@ -57,7 +57,7 @@ export class CollectionInfo extends React.Component<IProps> {
 
     return (
       <div className='pf-c-content info-panel'>
-        <h1>Install</h1>
+        <h1>{_`Install`}</h1>
         <Grid hasGutter={true}>
           <GridItem>{latest_version.metadata.description}</GridItem>
           <GridItem>
@@ -68,13 +68,13 @@ export class CollectionInfo extends React.Component<IProps> {
 
           <GridItem>
             <Split hasGutter={true}>
-              <SplitItem className='install-title'>License</SplitItem>
+              <SplitItem className='install-title'>{_`License`}</SplitItem>
               <SplitItem isFilled>{latest_version.metadata.license}</SplitItem>
             </Split>
           </GridItem>
           <GridItem>
             <Split hasGutter={true}>
-              <SplitItem className='install-tile'>Install Version</SplitItem>
+              <SplitItem className='install-tile'>{_`Install Version`}</SplitItem>
               <SplitItem isFilled>
                 <FormSelect
                   onChange={val =>
@@ -102,12 +102,12 @@ export class CollectionInfo extends React.Component<IProps> {
           </GridItem>
           <GridItem>
             <Split hasGutter={true}>
-              <SplitItem className='install-title'>Installation</SplitItem>
+              <SplitItem className='install-title'>{_`Installation`}</SplitItem>
               <SplitItem isFilled>
                 <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
                 <div>
-                  <b>Note:</b> Installing collections with ansible-galaxy is
-                  only supported in ansible 2.9+
+                  <b>{_`Note:`}</b> Installing collections with ansible-galaxy
+                  is only supported in ansible 2.9+
                 </div>
                 <div>
                   <a ref={this.downloadLinkRef} style={{ display: 'none' }}></a>

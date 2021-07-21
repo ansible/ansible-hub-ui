@@ -92,21 +92,21 @@ export class ImportConsole extends React.Component<IProps, {}> {
 
           {task.messages.length === 0 ? (
             <div className='message'>
-              <span className='error'>No task messages available</span>
+              <span className='error'>{_`No task messages available`}</span>
             </div>
           ) : null}
 
           {task.state === PulpStatus.completed && (
             <div className='message'>
               <br />
-              <span className='success'>Done</span>
+              <span className='success'>{_`Done`}</span>
             </div>
           )}
 
           {task.state === PulpStatus.failed && (
             <div className='message'>
               <br />
-              <span className='failed'>Failed</span>
+              <span className='failed'>{_`Failed`}</span>
             </div>
           )}
         </div>
@@ -169,21 +169,21 @@ export class ImportConsole extends React.Component<IProps, {}> {
 
         <div className='title-bar'>
           <div>
-            <span className='data-title'>Status: </span>
+            <span className='data-title'>{_`Status: `}</span>
             <StatusIndicator type='secondary' status={selectedImport.state} />
           </div>
           <div>
-            <span className='data-title'>Approval status: </span>
+            <span className='data-title'>{_`Approval status: `}</span>
             {approvalStatus}
           </div>
           <div>
-            <span className='data-title'>Version: </span>
+            <span className='data-title'>{_`Version: `}</span>
             {selectedImport.version}
           </div>
 
           {task && task.error ? (
             <div>
-              <span className='data-title'>Error message: </span>
+              <span className='data-title'>{_`Error message: `}</span>
               {task.error.code}
               <pre>
                 <code>{task.error.description}</code>
