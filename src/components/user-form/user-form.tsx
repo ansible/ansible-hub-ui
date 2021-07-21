@@ -85,9 +85,7 @@ export class UserForm extends React.Component<IProps, IState> {
         placeholder: isNewUser ? '' : '••••••••••••••••••••••',
         formGroupLabelIcon: (
           <HelperText
-            content={
-              'Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions.'
-            }
+            content={_`Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions.`}
           />
         ),
       },

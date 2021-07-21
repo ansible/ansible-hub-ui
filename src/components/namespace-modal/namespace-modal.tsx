@@ -117,9 +117,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             validated={this.toError(this.state.newNamespaceNameValid)}
             labelIcon={
               <HelperText
-                content={
-                  'Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’.'
-                }
+                content={_`Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’.`}
               />
             }
           >
