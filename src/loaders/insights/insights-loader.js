@@ -26,26 +26,25 @@ class App extends Component {
   componentDidMount() {
     insights.chrome.init();
     insights.chrome.identifyApp('automation-hub');
-    insights.chrome.navigation(buildNavigation());
 
     // This listens for insights navigation events, so this will fire
     // when items in the nav are clicked or the app is loaded for the first
     // time
     this.appNav = insights.chrome.on('APP_NAVIGATION', event => {
+      const to = event.domEvent.href
+        ? event.domEvent.href.replace(this.props.basename, '')
+        : event.navId;
       // We want to be able to navigate between routes when users click
       // on the nav, so rewriting the entire route is acceptable, however,
       // we also need to avoid rewriting the route when the page is
       // loaded for the first time, so ignore this the first time it's
       // called.
       if (!this.firstLoad) {
-        this.props.history.push(`/${event.navId}`);
+        this.props.history.push(to === '' ? '/' : to);
       } else {
         this.firstLoad = false;
       }
     });
-    this.buildNav = this.props.history.listen(() =>
-      insights.chrome.navigation(buildNavigation()),
-    );
 
     insights.chrome.auth.getUser().then(user => this.setState({ user: user }));
     ActiveUserAPI.getActiveUser().then(result =>
@@ -55,7 +54,6 @@ class App extends Component {
 
   componentWillUnmount() {
     this.appNav();
-    this.buildNav();
   }
 
   componentDidUpdate(prevProps) {
@@ -135,20 +133,3 @@ App.propTypes = {
  *          https://reactjs.org/docs/higher-order-components.html
  */
 export default withRouter(connect()(App));
-
-function buildNavigation() {
-  const currentPath = window.location.pathname.split('/').slice(-1)[0];
-  return [
-    {
-      title: 'Actions',
-      id: 'actions',
-    },
-    {
-      title: 'Rules',
-      id: 'rules',
-    },
-  ].map(item => ({
-    ...item,
-    active: item.id === currentPath,
-  }));
-}
