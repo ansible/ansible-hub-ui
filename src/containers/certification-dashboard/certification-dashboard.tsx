@@ -79,8 +79,8 @@ class CertificationDashboard extends React.Component<
       params['sort'] = '-pulp_created';
     }
 
-    if (!params['status']) {
-      params['status'] = 'staging';
+    if (!params['repository']) {
+      params['repository'] = 'staging';
     }
 
     this.state = {
@@ -143,7 +143,7 @@ class CertificationDashboard extends React.Component<
                             title: 'Collection Name',
                           },
                           {
-                            id: 'status',
+                            id: 'repository',
                             title: 'Status',
                             inputType: 'select',
                             options: [
@@ -184,11 +184,14 @@ class CertificationDashboard extends React.Component<
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
                   niceValues={{
-                    status: {
+                    repository: {
                       [Constants.PUBLISHED]: 'Approved',
                       [Constants.NEEDSREVIEW]: 'Needs Review',
                       [Constants.NOTCERTIFIED]: 'Rejected',
                     },
+                  }}
+                  niceNames={{
+                    repository: 'status',
                   }}
                 />
               </div>
@@ -216,7 +219,7 @@ class CertificationDashboard extends React.Component<
 
   private renderTable(versions, params) {
     if (versions.length === 0) {
-      return filterIsSet(params, ['namespace', 'name', 'status']) ? (
+      return filterIsSet(params, ['namespace', 'name', 'repository']) ? (
         <EmptyStateFilter />
       ) : (
         <EmptyStateNoData
@@ -527,19 +530,8 @@ class CertificationDashboard extends React.Component<
   }
 
   private queryCollections() {
-    const updatedCollectionParams =
-      'status' in this.state.params
-        ? omit(
-            {
-              repository: this.state.params['status'],
-              ...this.state.params,
-            },
-            ['status'],
-          )
-        : this.state.params;
-
     this.setState({ loading: true }, () =>
-      CollectionVersionAPI.list(updatedCollectionParams).then(result => {
+      CollectionVersionAPI.list(this.state.params).then(result => {
         this.setState({
           versions: result.data.data,
           itemCount: result.data.meta.count,
