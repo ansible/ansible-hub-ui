@@ -59,7 +59,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               Use the{' '}
               <Link to={Paths.repositories}>{_`Repository Management`}</Link>{' '}
               page to sync collections curated by your organization to the Red
-              {_`Hat Certified repository in your private Automation Hub. Users`}
+              Hat Certified repository in your private Automation Hub. Users
               with the correct permissions can use the sync toggles on the{' '}
               <Link to={Paths.search}>{_`Collections`}</Link> page to control
               which collections are added to their organization's sync

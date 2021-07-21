@@ -8,9 +8,7 @@ interface IProps {
   /** Function to set the value to null */
   onClear: () => void;
 
-  /**
-    {_`Component to display when the user is allowed to update this field.`}
-   */
+  /** Component to display when the user is allowed to update this field. */
   children: any;
 }
 

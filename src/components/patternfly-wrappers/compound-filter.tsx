@@ -170,7 +170,8 @@ export class CompoundFilter extends React.Component<IProps, IState> {
   }
 
   private handleEnter(e) {
-    if (e.key === _`Enter`) {
+    // l10n: don't translate
+    if (e.key === 'Enter') {
       this.submitFilter();
     }
   }

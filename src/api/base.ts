@@ -76,7 +76,7 @@ export class BaseAPI {
       await (window as any).insights.chrome.auth.getUser();
     }
     if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      request.headers[_`X-CSRFToken`] = Cookies.get('csrftoken');
+      request.headers['X-CSRFToken'] = Cookies.get('csrftoken');
     }
     return request;
   }

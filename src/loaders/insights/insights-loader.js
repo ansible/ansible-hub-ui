@@ -30,7 +30,7 @@ class App extends Component {
     // This listens for insights navigation events, so this will fire
     // when items in the nav are clicked or the app is loaded for the first
     // time
-    this.appNav = insights.chrome.on(_`APP_NAVIGATION`, event => {
+    this.appNav = insights.chrome.on('APP_NAVIGATION', event => {
       const to = event.domEvent.href
         ? event.domEvent.href.replace(this.props.basename, '')
         : event.navId;

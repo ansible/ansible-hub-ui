@@ -106,8 +106,8 @@ export class CollectionInfo extends React.Component<IProps> {
               <SplitItem isFilled>
                 <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
                 <div>
-                  <b>{_`Note:`}</b> Installing collections with ansible-galaxy
-                  is only supported in ansible 2.9+
+                  <b>Note:</b> Installing collections with ansible-galaxy is
+                  only supported in ansible 2.9+
                 </div>
                 <div>
                   <a ref={this.downloadLinkRef} style={{ display: 'none' }}></a>

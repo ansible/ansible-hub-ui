@@ -9,7 +9,7 @@ export function isFieldSet(
     console.log(field);
     return field.is_set;
   } else {
-    throw _`Field ${name} is not in writeOnlyFields`;
+    throw `Field ${name} is not in writeOnlyFields`;
   }
 }
 
