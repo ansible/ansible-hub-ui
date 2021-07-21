@@ -177,7 +177,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             <Alert
               variant='warning'
               isInline
-              title='This tag already exists on another image. Do you want to move it to this image?'
+              title={_`This tag already exists on another image. Do you want to move it to this image?`}
               actionLinks={
                 <>
                   <AlertActionLink

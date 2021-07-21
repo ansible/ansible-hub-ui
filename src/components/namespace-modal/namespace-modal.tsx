@@ -42,7 +42,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     if (name == '') {
       error['name'] = _`Please, provide the namespace name`;
     } else if (!/^[a-zA-Z0-9_]+$/.test(name)) {
-      error['name'] = 'Name can only contain [A-Za-z0-9_]';
+      error['name'] = _`Name can only contain [A-Za-z0-9_]`;
     } else if (name.length <= 2) {
       error['name'] = _`Name must be longer than 2 characters`;
     } else if (name.startsWith('_')) {

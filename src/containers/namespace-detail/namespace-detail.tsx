@@ -299,7 +299,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           .then(() => this.loadCollections())
           .catch(error => {
             this.setState({
-              warning: 'API Error: Failed to set deprecation.',
+              warning: _`API Error: Failed to set deprecation.`,
             });
           });
         break;

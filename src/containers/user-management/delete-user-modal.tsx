@@ -37,7 +37,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
         deleteAction={() => this.deleteUser()}
         isDisabled={isWaitingForResponse || this.isUserSelfOrAdmin(user)}
         spinner={isWaitingForResponse}
-        title='Delete user?'
+        title={_`Delete user?`}
       >
         {this.getActionDescription(user)}
       </DeleteModal>

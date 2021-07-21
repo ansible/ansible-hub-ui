@@ -19,7 +19,7 @@ export class DeleteGroupModal extends React.Component<IProps> {
       <DeleteModal
         cancelAction={cancelAction}
         deleteAction={deleteAction}
-        title='Delete group?'
+        title={_`Delete group?`}
       >
         <b>{name}</b> will be permanently deleted.
         <p>&nbsp;</p>

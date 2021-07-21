@@ -217,12 +217,12 @@ export class ImportModal extends React.Component<IProps, IState> {
                 err.detail ||
                   err.title ||
                   err.code ||
-                  'API error. Status code: ' + err.status,
+                  _`API error. Status code: ` + err.status,
               );
             }
             errorMessage = messages.join(', ');
           } else {
-            errorMessage = 'API error. Status code: ' + errors.response.status;
+            errorMessage = _`API error. Status code: ` + errors.response.status;
           }
         }
 

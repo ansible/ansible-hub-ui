@@ -502,7 +502,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       <DeleteModal
         cancelAction={() => this.setState({ showUserRemoveModal: null })}
         deleteAction={() => this.deleteUser(user)}
-        title='Remove user from group?'
+        title={_`Remove user from group?`}
       >
         <b>{user.username}</b> will be removed from <b>{group.name}</b>.
       </DeleteModal>
