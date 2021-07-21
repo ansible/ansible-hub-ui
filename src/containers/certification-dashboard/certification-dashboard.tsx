@@ -23,7 +23,6 @@ import {
   ExclamationCircleIcon,
   CheckCircleIcon,
 } from '@patternfly/react-icons';
-import { omit } from 'lodash';
 
 import { CollectionVersionAPI, CollectionVersion, TaskAPI } from 'src/api';
 import { filterIsSet, ParamHelper } from 'src/utilities';
