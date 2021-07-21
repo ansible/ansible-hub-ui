@@ -72,7 +72,7 @@ export class ImportList extends React.Component<IProps, IState> {
             onKeyPress={e => this.handleEnter(e)}
             type='search'
             aria-label='search text input'
-            placeholder='Search imports'
+            placeholder={_`Search imports`}
           />
 
           <Button
@@ -199,7 +199,7 @@ export class ImportList extends React.Component<IProps, IState> {
               )
             }
             value={this.props.params.namespace}
-            aria-label='Select namespace'
+            aria-label={_`Select namespace`}
           >
             {namespaces.map(ns => (
               <FormSelectOption key={ns.name} label={ns.name} value={ns.name} />

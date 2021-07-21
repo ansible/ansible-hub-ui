@@ -90,7 +90,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     return (
       <Modal
         variant='large'
-        title='Create a new namespace'
+        title={_`Create a new namespace`}
         isOpen={this.props.isOpen}
         onClose={this.toggleModal}
         actions={[
@@ -109,10 +109,10 @@ export class NamespaceModal extends React.Component<IProps, IState> {
       >
         <Form>
           <FormGroup
-            label='Name'
+            label={_`Name`}
             isRequired
             fieldId='name'
-            helperText='Please, provide the namespace name'
+            helperText={_`Please, provide the namespace name`}
             helperTextInvalid={this.state.errorMessages['name']}
             validated={this.toError(this.state.newNamespaceNameValid)}
             labelIcon={
@@ -140,7 +140,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             </InputGroup>
           </FormGroup>
           <FormGroup
-            label='Namespace owners'
+            label={_`Namespace owners`}
             fieldId='groups'
             helperTextInvalid={this.state.errorMessages['groups']}
           >

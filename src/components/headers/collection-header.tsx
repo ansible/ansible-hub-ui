@@ -92,7 +92,7 @@ export class CollectionHeader extends React.Component<IProps> {
                   updateParams(ParamHelper.setParam(params, 'version', val))
                 }
                 value={collection.latest_version.version}
-                aria-label='Select collection version'
+                aria-label={_`Select collection version`}
               >
                 {all_versions.map(v => (
                   <FormSelectOption
@@ -116,7 +116,7 @@ export class CollectionHeader extends React.Component<IProps> {
           <Alert
             variant='danger'
             isInline
-            title='This collection has been deprecated.'
+            title={_`This collection has been deprecated.`}
           />
         )}
         <div className='tab-link-container'>

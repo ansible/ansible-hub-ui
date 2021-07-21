@@ -24,7 +24,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
     return (
       <React.Fragment>
-        <BaseHeader title='Token management'></BaseHeader>
+        <BaseHeader title={_`Token management`}></BaseHeader>
         <Main>
           <section className='body pf-c-content'>
             <h2>API token</h2>

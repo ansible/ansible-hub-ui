@@ -83,7 +83,7 @@ export class CollectionInfo extends React.Component<IProps> {
                   value={
                     params.version ? params.version : latest_version.version
                   }
-                  aria-label='Select collection version'
+                  aria-label={_`Select collection version`}
                 >
                   {all_versions.map(v => (
                     <FormSelectOption

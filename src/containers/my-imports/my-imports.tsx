@@ -114,7 +114,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
     return (
       <React.Fragment>
         <div ref={this.topOfPage}></div>
-        <BaseHeader title='My imports' />
+        <BaseHeader title={_`My imports`} />
         <Main>
           <section className='body'>
             <div className='page-container'>

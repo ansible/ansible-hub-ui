@@ -135,7 +135,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
         ]}
         isOpen={isOpen}
         onClose={() => closeModal()}
-        title='Manage tags'
+        title={_`Manage tags`}
         variant='small'
       >
         {/*
@@ -147,7 +147,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             validated={!!tagInFormError ? 'error' : 'default'}
             helperTextInvalid={tagInFormError}
             fieldId='add-new-tag'
-            label='Add new tag'
+            label={_`Add new tag`}
           >
             <InputGroup>
               <TextInput
@@ -199,7 +199,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             />
           )}
 
-          <FormGroup fieldId='remove-tag' label='Current tags'>
+          <FormGroup fieldId='remove-tag' label={_`Current tags`}>
             <LabelGroup id='remove-tag' defaultIsOpen={true}>
               {this.getCurrentTags().map(tag => (
                 <Label

@@ -149,7 +149,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
             }
           />
         )}
-        <BaseHeader title='Repo Management'>
+        <BaseHeader title={_`Repo Management`}>
           {DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
           !loading ? (
             <div className='header-bottom'>

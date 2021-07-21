@@ -136,7 +136,7 @@ class ExecutionEnvironmentManifest extends React.Component<
                 </Title>
 
                 <DataList
-                  aria-label='Image layers'
+                  aria-label={_`Image layers`}
                   onSelectDataListItem={id =>
                     this.setState({ selectedLayer: id })
                   }

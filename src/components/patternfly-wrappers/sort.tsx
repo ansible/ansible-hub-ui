@@ -141,12 +141,12 @@ export class Sort extends React.Component<IProps, IState> {
         {options.length > 1 ? (
           <Select
             variant={SelectVariant.single}
-            aria-label='Select input'
+            aria-label={_`Select input`}
             onToggle={e => this.onToggle(e)}
             onSelect={(_, name) => this.onSelect(name)}
             selections={selectedOption.title}
             isOpen={isExpanded}
-            aria-labelledby='Sort results'
+            aria-labelledby={_`Sort results`}
           >
             {options.map(option => (
               <SelectOption key={option.id} value={option.title} />

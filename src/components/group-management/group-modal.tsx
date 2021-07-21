@@ -69,7 +69,7 @@ export class GroupModal extends React.Component<IProps, IState> {
             isRequired={true}
             key='name'
             fieldId='name'
-            label='Name'
+            label={_`Name`}
             helperTextInvalid={
               !this.props.errorMessage ? null : this.props.errorMessage.name
             }

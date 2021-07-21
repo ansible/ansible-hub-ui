@@ -89,7 +89,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
     return (
       <Modal
         isOpen={this.props.showModal}
-        title='Edit remote'
+        title={_`Edit remote`}
         variant='small'
         onClose={() => this.props.closeModal()}
         actions={[
@@ -140,7 +140,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           fieldId={'url'}
           label={'URL'}
           labelIcon={
-            <HelperText content='The URL of an external content source.' />
+            <HelperText content={_`The URL of an external content source.`} />
           }
           isRequired={requiredFields.includes('url')}
           validated={this.toError(!('url' in errorMessages))}
@@ -161,7 +161,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
             fieldId={'token'}
             label={'Token'}
             labelIcon={
-              <HelperText content='Token for authenticating to the server URL.' />
+              <HelperText
+                content={_`Token for authenticating to the server URL.`}
+              />
             }
             isRequired={requiredFields.includes('token')}
             validated={this.toError(!('token' in errorMessages))}
@@ -187,7 +189,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           <FormGroup
             fieldId={'auth_url'}
             label={'SSO URL'}
-            labelIcon={<HelperText content='Single sign on URL.' />}
+            labelIcon={<HelperText content={_`Single sign on URL.`} />}
             isRequired={requiredFields.includes('auth_url')}
             validated={this.toError(!('auth_url' in errorMessages))}
             helperTextInvalid={errorMessages['auth_url']}
@@ -260,7 +262,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                     );
                   }}
                   variant='plain'
-                  aria-label='Download requirements file'
+                  aria-label={_`Download requirements file`}
                 >
                   <DownloadIcon />
                 </Button>
@@ -269,15 +271,17 @@ export class RemoteForm extends React.Component<IProps, IState> {
           </FormGroup>
         )}
         <ExpandableSection
-          toggleTextExpanded='Hide advanced options'
-          toggleTextCollapsed='Show advanced options'
+          toggleTextExpanded={_`Hide advanced options`}
+          toggleTextCollapsed={_`Show advanced options`}
         >
           <div className='pf-c-form'>
             <FormGroup
               fieldId={'username'}
               label={'Username'}
               labelIcon={
-                <HelperText content='The username to be used for authentication when syncing. This is not required when using a token.' />
+                <HelperText
+                  content={_`The username to be used for authentication when syncing. This is not required when using a token.`}
+                />
               }
               isRequired={requiredFields.includes('username')}
               validated={this.toError(!('username' in errorMessages))}
@@ -297,7 +301,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
               fieldId={'password'}
               label={'Password'}
               labelIcon={
-                <HelperText content='The password to be used for authentication when syncing. This is not required when using a token.' />
+                <HelperText
+                  content={_`The password to be used for authentication when syncing. This is not required when using a token.`}
+                />
               }
               isRequired={requiredFields.includes('password')}
               validated={this.toError(!('password' in errorMessages))}
@@ -384,7 +390,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
               fieldId={'tls_validation'}
               label={'TLS validation'}
               labelIcon={
-                <HelperText content='If selected, TLS peer validation must be performed.' />
+                <HelperText
+                  content={_`If selected, TLS peer validation must be performed.`}
+                />
               }
               isRequired={requiredFields.includes('tls_validation')}
               validated={this.toError(!('tls_validation' in errorMessages))}
@@ -400,7 +408,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
               fieldId={'client_key'}
               label={'Client key'}
               labelIcon={
-                <HelperText content='A PEM encoded private key used for authentication.' />
+                <HelperText
+                  content={_`A PEM encoded private key used for authentication.`}
+                />
               }
               isRequired={requiredFields.includes('client_key')}
               validated={this.toError(!('client_key' in errorMessages))}
@@ -430,7 +440,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
               fieldId={'client_cert'}
               label={'Client certificate'}
               labelIcon={
-                <HelperText content='A PEM encoded client certificate used for authentication.' />
+                <HelperText
+                  content={_`A PEM encoded client certificate used for authentication.`}
+                />
               }
               isRequired={requiredFields.includes('client_cert')}
               validated={this.toError(!('client_cert' in errorMessages))}
@@ -466,7 +478,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                       );
                     }}
                     variant='plain'
-                    aria-label='Download client certification file'
+                    aria-label={_`Download client certification file`}
                   >
                     <DownloadIcon />
                   </Button>
@@ -477,7 +489,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
               fieldId={'ca_cert'}
               label={'CA certificate'}
               labelIcon={
-                <HelperText content='A PEM encoded client certificate used for authentication.' />
+                <HelperText
+                  content={_`A PEM encoded client certificate used for authentication.`}
+                />
               }
               isRequired={requiredFields.includes('ca_cert')}
               validated={this.toError(!('ca_cert' in errorMessages))}
@@ -512,7 +526,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                       );
                     }}
                     variant='plain'
-                    aria-label='Download CA certification file'
+                    aria-label={_`Download CA certification file`}
                   >
                     <DownloadIcon />
                   </Button>
@@ -523,7 +537,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
               fieldId={'download_concurrency'}
               label={'Download concurrency'}
               labelIcon={
-                <HelperText content='Total number of simultaneous connections.' />
+                <HelperText
+                  content={_`Total number of simultaneous connections.`}
+                />
               }
               validated={remote.download_concurrency > 0 ? 'default' : 'error'}
               helperTextInvalid={'Number must be greater than 0'}
@@ -544,7 +560,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
               fieldId={'rate_limit'}
               label={'Rate Limit'}
               labelIcon={
-                <HelperText content='Limits total download rate in requests per second.' />
+                <HelperText
+                  content={_`Limits total download rate in requests per second.`}
+                />
               }
               validated={
                 Number.isInteger(remote.rate_limit) ||

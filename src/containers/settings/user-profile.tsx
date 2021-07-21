@@ -65,7 +65,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
           isMe={true}
           user={user}
           breadcrumbs={[{ name: 'Settings' }, { name: 'My profile' }]}
-          title='My profile'
+          title={_`My profile`}
           errorMessages={errorMessages}
           updateUser={user => this.setState({ user: user })}
           saveUser={this.saveUser}

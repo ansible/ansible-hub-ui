@@ -86,7 +86,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
 
     return (
       <table
-        aria-label='Collection versions'
+        aria-label={_`Collection versions`}
         className='content-table pf-c-table'
       >
         <SortTable

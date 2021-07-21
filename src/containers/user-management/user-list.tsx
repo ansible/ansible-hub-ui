@@ -133,7 +133,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
             })
           }
         ></DeleteUserModal>
-        <BaseHeader title='Users'></BaseHeader>
+        <BaseHeader title={_`Users`}></BaseHeader>
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : (
@@ -287,7 +287,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     };
 
     return (
-      <table aria-label='User list' className='content-table pf-c-table'>
+      <table aria-label={_`User list`} className='content-table pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -339,7 +339,9 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           {user.is_superuser && (
             <>
               {' '}
-              <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
+              <Tooltip
+                content={_`Super users have all system permissions regardless of what groups they are in.`}
+              >
                 <Label icon={<UserPlusIcon />} color='orange'>
                   Super user
                 </Label>

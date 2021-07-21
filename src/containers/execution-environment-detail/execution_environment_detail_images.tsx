@@ -222,7 +222,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         {images.length === 0 && filterIsSet(params, ['tag']) ? (
           <EmptyStateFilter />
         ) : (
-          <table aria-label='Images' className='content-table pf-c-table'>
+          <table aria-label={_`Images`} className='content-table pf-c-table'>
             <SortTable
               options={sortTableOptions}
               params={params}

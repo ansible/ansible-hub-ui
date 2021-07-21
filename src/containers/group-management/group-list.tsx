@@ -126,7 +126,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         {createModalVisible ? this.renderCreateModal() : null}
         {deleteModalVisible ? this.renderDeleteModal() : null}
         {editModalVisible ? this.renderEditModal() : null}
-        <BaseHeader title='Groups'></BaseHeader>
+        <BaseHeader title={_`Groups`}></BaseHeader>
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : noData ? (
@@ -346,7 +346,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     };
 
     return (
-      <table aria-label='Group list' className='content-table pf-c-table'>
+      <table aria-label={_`Group list`} className='content-table pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}

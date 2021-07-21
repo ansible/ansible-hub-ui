@@ -113,7 +113,7 @@ class CertificationDashboard extends React.Component<
 
     return (
       <React.Fragment>
-        <BaseHeader title='Approval dashboard'></BaseHeader>
+        <BaseHeader title={_`Approval dashboard`}></BaseHeader>
         <AlertList
           alerts={this.state.alerts}
           closeAlert={i => this.closeAlert(i)}
@@ -264,7 +264,7 @@ class CertificationDashboard extends React.Component<
 
     return (
       <table
-        aria-label='Collection versions'
+        aria-label={_`Collection versions`}
         className='content-table pf-c-table'
       >
         <SortTable

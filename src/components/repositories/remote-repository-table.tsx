@@ -96,7 +96,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
     return (
       <table
-        aria-label='Collection versions'
+        aria-label={_`Collection versions`}
         className='content-table pf-c-table'
       >
         <SortTable
@@ -132,7 +132,9 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         <td>{this.renderStatus(remote)}</td>
         <td>
           {remote.repositories.length === 0 ? (
-            <Tooltip content='There are no repos associated with this remote.'>
+            <Tooltip
+              content={_`There are no repos associated with this remote.`}
+            >
               <Button variant='plain'>
                 <ExclamationCircleIcon />
               </Button>

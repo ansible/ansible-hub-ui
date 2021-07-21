@@ -210,7 +210,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     };
 
     return (
-      <table aria-label='Task list' className='content-table pf-c-table'>
+      <table aria-label={_`Task list`} className='content-table pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}

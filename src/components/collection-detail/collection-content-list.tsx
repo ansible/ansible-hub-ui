@@ -73,7 +73,7 @@ export class CollectionContentList extends React.Component<IProps> {
                     updateParams(ParamHelper.setParam(params, 'keywords', ''))
                   }
                   aria-label='find-content'
-                  placeholder='Find content'
+                  placeholder={_`Find content`}
                 />
               </ToolbarItem>
             </ToolbarGroup>

@@ -92,7 +92,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       <div className='search-page'>
         <BaseHeader
           className='header'
-          title='Collections'
+          title={_`Collections`}
           contextSelector={
             <RepoSelector
               selectedRepo={this.context.selectedRepo}
@@ -219,7 +219,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       <Switch
         id={namespace + '.' + name}
         className='sync-toggle'
-        label='Sync'
+        label={_`Sync`}
         isChecked={this.isCollectionSynced(name, namespace)}
         onChange={() => this.toggleCollectionSync(name, namespace)}
       />

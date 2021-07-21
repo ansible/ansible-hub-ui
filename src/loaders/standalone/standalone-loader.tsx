@@ -156,7 +156,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           trademark=''
           brandImageSrc={Logo}
           onClose={() => this.setState({ aboutModalVisible: false })}
-          brandImageAlt='Galaxy Logo'
+          brandImageAlt={_`Galaxy Logo`}
           productName={APPLICATION_NAME}
           user={user}
           userName={userName}

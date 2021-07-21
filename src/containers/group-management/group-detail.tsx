@@ -189,7 +189,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             <div className='tabs'>
               <Tabs
                 isDisabled={editPermissions}
-                disabledTitle='Please finish editing permissions first.'
+                disabledTitle={_`Please finish editing permissions first.`}
                 tabs={tabs}
                 params={params}
                 updateParams={p => this.updateParams(p)}
@@ -446,7 +446,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               });
             }
           }}
-          placeholderText='Select users'
+          placeholderText={_`Select users`}
           selections={this.state.selected}
           menuAppendTo={'parent'}
           multiple={true}
@@ -689,7 +689,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     };
 
     return (
-      <table aria-label='User list' className='content-table pf-c-table'>
+      <table aria-label={_`User list`} className='content-table pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}

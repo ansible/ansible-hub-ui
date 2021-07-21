@@ -51,7 +51,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
     return (
       <React.Fragment>
-        <BaseHeader title='Connect to Hub'></BaseHeader>
+        <BaseHeader title={_`Connect to Hub`}></BaseHeader>
         <Main>
           <section className='body pf-c-content'>
             <h2>Connect Private Automation Hub</h2>

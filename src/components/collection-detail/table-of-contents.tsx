@@ -96,7 +96,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
                   updateParams(ParamHelper.setParam(params, 'keywords', ''))
                 }
                 aria-label='find-content'
-                placeholder='Find content'
+                placeholder={_`Find content`}
               />
             </ToolbarItem>
           </ToolbarGroup>

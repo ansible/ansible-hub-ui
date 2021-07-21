@@ -42,7 +42,7 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
           results={this.state.searchGroups}
           loadResults={this.loadGroups}
           onSelect={this.onSelect}
-          placeholderText='Find a group'
+          placeholderText={_`Find a group`}
           menuAppendTo={this.props.menuAppendTo}
           isDisabled={!!this.props.isDisabled}
         />

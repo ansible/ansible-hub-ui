@@ -47,10 +47,10 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
       <LoginForm
         showHelperText={!!this.state.errorMessage}
         helperText={helperText}
-        usernameLabel='Username'
+        usernameLabel={_`Username`}
         usernameValue={this.state.usernameValue}
         onChangeUsername={this.handleUsernameChange}
-        passwordLabel='Password'
+        passwordLabel={_`Password`}
         passwordValue={this.state.passwordValue}
         onChangePassword={this.handlePasswordChange}
         onLoginButtonClick={this.onLoginButtonClick}
@@ -61,7 +61,7 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
         style={{
           backgroundColor: 'var(--pf-global--BackgroundColor--dark-100)',
         }}
-        loginTitle='Log in to your account'
+        loginTitle={_`Log in to your account`}
         brandImgSrc={Logo}
       >
         {loginForm}
