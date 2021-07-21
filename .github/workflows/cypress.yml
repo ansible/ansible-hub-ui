@@ -47,7 +47,7 @@ jobs:
       run: |
         echo '# Containerfile'
         echo '\
-          FROM docker.io/pulp/pulp-ci-centos:latest
+          FROM docker.io/pulp/pulp-ci-centos:python36
           
           RUN pip3 install --upgrade \
             "click<8.0" \
