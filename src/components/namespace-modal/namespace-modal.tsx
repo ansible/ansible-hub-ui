@@ -40,11 +40,11 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     const name: string = this.state.newNamespaceName;
 
     if (name == '') {
-      error['name'] = 'Please, provide the namespace name';
+      error['name'] = _`Please, provide the namespace name`;
     } else if (!/^[a-zA-Z0-9_]+$/.test(name)) {
       error['name'] = 'Name can only contain [A-Za-z0-9_]';
     } else if (name.length <= 2) {
-      error['name'] = 'Name must be longer than 2 characters';
+      error['name'] = _`Name must be longer than 2 characters`;
     } else if (name.startsWith('_')) {
       error['name'] = "Name cannot begin with '_'";
     } else {

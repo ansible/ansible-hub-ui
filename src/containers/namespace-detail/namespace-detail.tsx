@@ -119,15 +119,15 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const tabs = ['Collections'];
+    const tabs = [_`Collections`];
 
     if (this.state.showControls) {
-      tabs.push('CLI Configuration');
+      tabs.push(_`CLI Configuration`);
     }
     const tab = params['tab'] || 'collections';
 
     if (namespace.resources) {
-      tabs.push('Resources');
+      tabs.push(_`Resources`);
     }
 
     const repositoryUrl = getRepoUrl('inbound-' + namespace.name);
@@ -224,8 +224,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           {tab.toLowerCase() === 'collections' ? (
             noData ? (
               <EmptyStateNoData
-                title={'No collections yet'}
-                description={'Collections will appear once uploaded'}
+                title={_`No collections yet`}
+                description={_`Collections will appear once uploaded`}
                 button={
                   this.state.showControls && (
                     <Button

@@ -46,9 +46,9 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
 
   private getActionDescription(user: UserType) {
     if (user.is_superuser) {
-      return 'Deleting super users is not allowed.';
+      return _`Deleting super users is not allowed.`;
     } else if (user.id === this.context.user.id) {
-      return 'Deleting yourself is not allowed.';
+      return _`Deleting yourself is not allowed.`;
     }
 
     return (
@@ -68,7 +68,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
         .then(() => this.waitForDeleteConfirm(this.props.user.id))
         .catch(err => {
           this.props.addAlert(
-            'Error deleting user.',
+            _`Error deleting user.`,
             'danger',
             mapErrorMessages(err)['__nofield'],
           );
@@ -89,10 +89,10 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
       })
       .catch(err => {
         if (err.response.status === 404) {
-          this.props.addAlert('Successfully deleted user.', 'success');
+          this.props.addAlert(_`Successfully deleted user.`, 'success');
           this.props.closeModal(true);
         } else {
-          this.props.addAlert('Error deleting user.', 'danger');
+          this.props.addAlert(_`Error deleting user.`, 'danger');
         }
 
         this.setState({ isWaitingForResponse: false });

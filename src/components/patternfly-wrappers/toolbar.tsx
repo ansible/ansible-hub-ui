@@ -106,7 +106,7 @@ export class Toolbar extends React.Component<IProps, IState> {
   }
 
   private handleEnter(e) {
-    if (e.key === 'Enter') {
+    if (e.key === _`Enter`) {
       this.submitKeywords();
     }
   }

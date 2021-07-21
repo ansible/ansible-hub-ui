@@ -55,7 +55,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       <Modal
         variant='small'
         title={
-          collection ? 'New version of ' + collection.name : 'New collection'
+          collection ? _`New version of ` + collection.name : _`New collection`
         }
         isOpen={isOpen}
         onClose={() => this.handleClose()}
@@ -90,7 +90,7 @@ export class ImportModal extends React.Component<IProps, IState> {
               <div className='upload-box'>
                 <div className='upload-button'>{this.renderFileIcon()}</div>
                 <div className='upload-text'>
-                  {file != null ? file.name : 'Select file'}
+                  {file != null ? file.name : _`Select file`}
                   <div
                     className='loading-bar'
                     style={{
@@ -144,11 +144,11 @@ export class ImportModal extends React.Component<IProps, IState> {
 
     if (files.length > 1) {
       this.setState({
-        errors: 'Please select no more than one file.',
+        errors: _`Please select no more than one file.`,
       });
     } else if (!this.acceptedFileTypes.includes(newCollection.type)) {
       this.setState({
-        errors: 'Invalid file format.',
+        errors: _`Invalid file format.`,
         file: newCollection,
         uploadProgress: 0,
       });
@@ -239,7 +239,7 @@ export class ImportModal extends React.Component<IProps, IState> {
   handleClose() {
     let msg = null;
     if (this.cancelToken && this.state.uploadStatus === Status.uploading) {
-      msg = 'Collection upload canceled';
+      msg = _`Collection upload canceled`;
       this.cancelToken.cancel(msg);
     }
 

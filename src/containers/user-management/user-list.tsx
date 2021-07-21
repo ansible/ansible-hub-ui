@@ -152,19 +152,19 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                           filterConfig={[
                             {
                               id: 'username__contains',
-                              title: 'Username',
+                              title: _`Username`,
                             },
                             {
                               id: 'first_name__contains',
-                              title: 'First name',
+                              title: _`First name`,
                             },
                             {
                               id: 'last_name__contains',
-                              title: 'Last name',
+                              title: _`Last name`,
                             },
                             {
                               id: 'email__contains',
-                              title: 'Email',
+                              title: _`Email`,
                             },
                           ]}
                         />
@@ -234,8 +234,8 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <EmptyStateFilter />
       ) : (
         <EmptyStateNoData
-          title={'No users yet'}
-          description={'Users will appear once created'}
+          title={_`No users yet`}
+          description={_`Users will appear once created`}
           button={
             <Link to={Paths.createUser}>
               <Button variant={'primary'}>Create</Button>
@@ -248,33 +248,33 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     let sortTableOptions = {
       headers: [
         {
-          title: 'Username',
+          title: _`Username`,
           type: 'alpha',
           id: 'username__contains',
         },
         {
-          title: 'First name',
+          title: _`First name`,
           type: 'alpha',
           id: 'first_name__contains',
           className: 'pf-m-wrap',
         },
         {
-          title: 'Last name',
+          title: _`Last name`,
           type: 'alpha',
           id: 'last_name__contains',
         },
         {
-          title: 'Email',
+          title: _`Email`,
           type: 'alpha',
           id: 'email__contains',
         },
         {
           id: 'groups',
-          title: 'Groups',
+          title: _`Groups`,
           type: 'none',
         },
         {
-          title: 'Created',
+          title: _`Created`,
           type: 'numeric',
           id: 'date_joined',
         },

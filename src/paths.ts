@@ -73,8 +73,8 @@ window._ = (strings, ...args) => {
 
 export const namespaceBreadcrumb = {
   name: {
-    namespaces: 'Namespaces',
-    partners: 'Partners',
+    namespaces: _`Namespaces`,
+    partners: _`Partners`,
   }[NAMESPACE_TERM],
   url: Paths[NAMESPACE_TERM],
 };

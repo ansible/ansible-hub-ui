@@ -96,10 +96,8 @@ class ExecutionEnvironmentDetail extends React.Component<
             </Title>
             {!this.state.markdownEditing && !this.state.readme ? (
               <EmptyStateNoData
-                title={'No README'}
-                description={
-                  'Add a README with instructions for using this container.'
-                }
+                title={_`No README`}
+                description={_`Add a README with instructions for using this container.`}
                 button={
                   canEdit ? (
                     <Button

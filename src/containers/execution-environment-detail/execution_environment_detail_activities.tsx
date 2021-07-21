@@ -49,8 +49,8 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
     if (activities.length === 0) {
       return (
         <EmptyStateNoData
-          title={'No activities yet'}
-          description={'Activities will appear once you push something'}
+          title={_`No activities yet`}
+          description={_`Activities will appear once you push something`}
         />
       );
     }
@@ -63,8 +63,8 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                 <SortTable
                   options={{
                     headers: [
-                      { title: 'Change', type: 'none', id: 'change' },
-                      { title: 'Date', type: 'none', id: 'date' },
+                      { title: _`Change`, type: 'none', id: 'change' },
+                      { title: _`Date`, type: 'none', id: 'date' },
                     ],
                   }}
                   params={{}}

@@ -77,7 +77,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
           >
             <Tooltip
               position='left'
-              content={this.isLoading ? 'Follow logs' : 'Scroll to end'}
+              content={this.isLoading ? _`Follow logs` : _`Scroll to end`}
             >
               <span
                 onClick={() => this.handleScrollClick()}

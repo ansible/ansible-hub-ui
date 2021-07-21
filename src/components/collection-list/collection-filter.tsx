@@ -23,11 +23,11 @@ export class CollectionFilter extends React.Component<IProps> {
     const filterConfig = [
       {
         id: 'keywords',
-        title: 'Keywords',
+        title: _`Keywords`,
       },
       {
         id: 'tags',
-        title: 'Tag',
+        title: _`Tag`,
         inputType: 'multiple' as 'multiple',
         options: Constants.COLLECTION_FILTER_TAGS.map(tag => ({
           id: tag,

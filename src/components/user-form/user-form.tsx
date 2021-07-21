@@ -74,13 +74,13 @@ export class UserForm extends React.Component<IProps, IState> {
     } = this.props;
     const { passwordConfirm } = this.state;
     const formFields = [
-      { id: 'username', title: 'Username' },
-      { id: 'first_name', title: 'First name' },
-      { id: 'last_name', title: 'Last name' },
-      { id: 'email', title: 'Email' },
+      { id: 'username', title: _`Username` },
+      { id: 'first_name', title: _`First name` },
+      { id: 'last_name', title: _`Last name` },
+      { id: 'email', title: _`Email` },
       !isReadonly && {
         id: 'password',
-        title: 'Password',
+        title: _`Password`,
         type: 'password',
         placeholder: isNewUser ? '' : '••••••••••••••••••••••',
         formGroupLabelIcon: (
@@ -219,7 +219,7 @@ export class UserForm extends React.Component<IProps, IState> {
 
   private getSuperUserHelperText(user) {
     if (!this.context.user.is_superuser) {
-      return 'Requires super user permissions to edit.';
+      return _`Requires super user permissions to edit.`;
     }
     if (this.context.user.id === user.id) {
       return "Super users can't disable themselves.";

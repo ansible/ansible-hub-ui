@@ -80,11 +80,11 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
 
     return (
       <React.Fragment>
-        <BaseHeader title={'Task Management'} />
+        <BaseHeader title={_`Task Management`} />
         {noData && !loading ? (
           <EmptyStateNoData
-            title={'No tasks yet'}
-            description={'Tasks will appear once created.'}
+            title={_`No tasks yet`}
+            description={_`Tasks will appear once created.`}
           />
         ) : (
           <Main>
@@ -106,28 +106,28 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                             filterConfig={[
                               {
                                 id: 'name__contains',
-                                title: 'Task name',
+                                title: _`Task name`,
                               },
                               {
                                 id: 'state',
-                                title: 'Status',
+                                title: _`Status`,
                                 inputType: 'select',
                                 options: [
                                   {
                                     id: 'completed',
-                                    title: 'Completed',
+                                    title: _`Completed`,
                                   },
                                   {
                                     id: 'failed',
-                                    title: 'Failed',
+                                    title: _`Failed`,
                                   },
                                   {
                                     id: 'running',
-                                    title: 'Running',
+                                    title: _`Running`,
                                   },
                                   {
                                     id: 'waiting',
-                                    title: 'Waiting',
+                                    title: _`Waiting`,
                                   },
                                 ],
                               },
@@ -153,7 +153,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                     }
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort', 'ordering']}
-                    niceNames={{ name__contains: 'Name', state: 'Status' }}
+                    niceNames={{ name__contains: _`Name`, state: _`Status` }}
                   />
                 </div>
                 {this.renderTable(params)}
@@ -182,27 +182,27 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     let sortTableOptions = {
       headers: [
         {
-          title: 'Task name',
+          title: _`Task name`,
           type: 'alpha',
           id: 'name',
         },
         {
-          title: 'Created on',
+          title: _`Created on`,
           type: 'numeric',
           id: 'pulp_created',
         },
         {
-          title: 'Started at',
+          title: _`Started at`,
           type: 'numeric',
           id: 'started_at',
         },
         {
-          title: 'Finished at',
+          title: _`Finished at`,
           type: 'numeric',
           id: 'finished_at',
         },
         {
-          title: 'Status',
+          title: _`Status`,
           type: 'alpha',
           id: 'state',
         },

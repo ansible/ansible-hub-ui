@@ -52,7 +52,7 @@ export class GroupModal extends React.Component<IProps, IState> {
             variant='primary'
             onClick={() => onSave(this.state.name)}
           >
-            {!this.props.group ? 'Create' : 'Save'}
+            {!this.props.group ? _`Create` : _`Save`}
           </Button>,
           <Button key='cancel' variant='link' onClick={() => onCancel()}>
             Cancel

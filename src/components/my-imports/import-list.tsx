@@ -114,8 +114,8 @@ export class ImportList extends React.Component<IProps, IState> {
     if (importList.length === 0) {
       return (
         <EmptyStateNoData
-          title={'No imports'}
-          description={'There have not been any imports on this namespace.'}
+          title={_`No imports`}
+          description={_`There have not been any imports on this namespace.`}
         />
       );
     }
@@ -147,7 +147,7 @@ export class ImportList extends React.Component<IProps, IState> {
   }
 
   private handleEnter(e) {
-    if (e.key === 'Enter') {
+    if (e.key === _`Enter`) {
       this.submitSearch();
     }
   }

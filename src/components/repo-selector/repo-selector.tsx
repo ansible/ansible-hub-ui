@@ -74,9 +74,9 @@ export class RepoSelector extends React.Component<IProps, IState> {
               selections={this.getRepoName(this.props.selectedRepo)}
               variant='single'
             >
-              <SelectOption key={'published'} value={'Published'} />
-              <SelectOption key={'rh-certified'} value={'Red Hat Certified'} />
-              <SelectOption key={'community'} value={'Community'} />
+              <SelectOption key={'published'} value={_`Published`} />
+              <SelectOption key={'rh-certified'} value={_`Red Hat Certified`} />
+              <SelectOption key={'community'} value={_`Community`} />
             </Select>
           </InputGroup>
         </FlexItem>

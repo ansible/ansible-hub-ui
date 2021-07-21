@@ -316,44 +316,44 @@ class App extends React.Component<RouteComponentProps, IState> {
     });
 
     return [
-      menuSection('Collections', {}, [
-        menuItem('Collections', {
+      menuSection(_`Collections`, {}, [
+        menuItem(_`Collections`, {
           url: formatPath(Paths.searchByRepo, {
             repo: this.state.selectedRepo,
           }),
         }),
-        menuItem('Namespaces', {
+        menuItem(_`Namespaces`, {
           url: Paths[NAMESPACE_TERM],
         }),
-        menuItem('Repository Management', {
+        menuItem(_`Repository Management`, {
           url: Paths.repositories,
         }),
-        menuItem('API Token', {
+        menuItem(_`API Token`, {
           url: Paths.token,
         }),
-        menuItem('Approval', {
+        menuItem(_`Approval`, {
           condition: ({ user }) => user.model_permissions.move_collection,
           url: Paths.approvalDashboard,
         }),
       ]),
-      menuItem('Container Registry', {
+      menuItem(_`Container Registry`, {
         condition: ({ featureFlags }) => featureFlags.execution_environments,
         url: Paths.executionEnvironments,
       }),
-      menuItem('Task Management', {
+      menuItem(_`Task Management`, {
         url: Paths.taskList,
       }),
-      menuItem('Documentation', {
+      menuItem(_`Documentation`, {
         url:
           'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
         external: true,
       }),
-      menuSection('User Access', {}, [
-        menuItem('Users', {
+      menuSection(_`User Access`, {}, [
+        menuItem(_`Users`, {
           condition: ({ user }) => user.model_permissions.view_user,
           url: Paths.userList,
         }),
-        menuItem('Groups', {
+        menuItem(_`Groups`, {
           condition: ({ user }) => user.model_permissions.view_group,
           url: Paths.groupList,
         }),

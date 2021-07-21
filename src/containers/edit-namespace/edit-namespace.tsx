@@ -105,9 +105,9 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                 namespace: namespace.name,
               }),
             },
-            { name: 'Edit' },
+            { name: _`Edit` },
           ]}
-          tabs={['Edit details', 'Edit resources']}
+          tabs={[_`Edit details`, _`Edit resources`]}
           params={params}
           updateParams={p => this.updateParams(p)}
         ></PartnerHeader>

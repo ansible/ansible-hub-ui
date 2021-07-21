@@ -158,7 +158,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                 onChange={val => this.setState({ tagInForm: val })}
                 isDisabled={!!tagToVerify || verifyingTag || isSaving}
                 onKeyUp={e => {
-                  if (e.key === 'Enter') {
+                  if (e.key === _`Enter`) {
                     this.verifyAndAddTag();
                   }
                 }}
@@ -368,15 +368,14 @@ export class TagManifestModal extends React.Component<IProps, IState> {
       this.setState({
         verifyingTag: false,
         tagInFormError:
-          'A tag may contain lowercase and uppercase ASCII ' +
+          _`A tag may contain lowercase and uppercase ASCII ` +
           'alphabetic characters, digits, underscores, periods, and dashes. A tag must not ' +
           'start with a period, underscore, or a dash.',
       });
     } else if (this.getCurrentTags().includes(tag)) {
       this.setState({
         verifyingTag: false,
-        tagInFormError:
-          'This tag is already selected for this image. You cannot add it twice.',
+        tagInFormError: _`This tag is already selected for this image. You cannot add it twice.`,
       });
     } else {
       this.setState({ tagInFormError: undefined }, () => {

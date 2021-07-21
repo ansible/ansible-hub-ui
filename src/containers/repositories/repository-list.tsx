@@ -101,7 +101,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       errorMessages,
     } = this.state;
 
-    const tabs = ['Local', 'Remote'];
+    const tabs = [_`Local`, _`Remote`];
     return (
       <React.Fragment>
         {remoteToEdit && showRemoteFormModal && (
@@ -197,8 +197,8 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
     if (!!params.tab && params.tab.toLowerCase() === 'remote') {
       return content.length === 0 ? (
         <EmptyStateNoData
-          title={'No remote repositories yet'}
-          description={'Remote repositories will appear once added'}
+          title={_`No remote repositories yet`}
+          description={_`Remote repositories will appear once added`}
         />
       ) : (
         <Main className='repository-list'>

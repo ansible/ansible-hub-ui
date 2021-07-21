@@ -136,7 +136,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
     };
 
     table.documentation.push({
-      display: 'Readme',
+      display: _`Readme`,
       url: formatPath(Paths.collectionDocsIndexByRepo, baseUrlParams),
       type: 'docs',
       name: 'readme',

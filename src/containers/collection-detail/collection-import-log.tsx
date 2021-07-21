@@ -73,7 +73,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
         }),
         name: collection.name,
       },
-      { name: 'Import log' },
+      { name: _`Import log` },
     ];
 
     return (
@@ -106,7 +106,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadData(forceReload = false) {
-    const failMsg = 'Could not load import log';
+    const failMsg = _`Could not load import log`;
     this.setState({ loadingImports: true }, () => {
       this.loadCollection(this.context.selectedRepo, forceReload, () => {
         ImportAPI.list({

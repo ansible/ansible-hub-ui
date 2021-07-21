@@ -131,8 +131,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           <EmptyStateUnauthorized />
         ) : noData ? (
           <EmptyStateNoData
-            title={'No groups yet'}
-            description={'Groups will appear once created'}
+            title={_`No groups yet`}
+            description={_`Groups will appear once created`}
             button={
               <Button
                 variant='primary'
@@ -158,7 +158,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                           filterConfig={[
                             {
                               id: 'name',
-                              title: 'Group',
+                              title: _`Group`,
                             },
                           ]}
                         />
@@ -317,7 +317,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             {
               variant: 'danger',
               title: null,
-              description: 'Error editing group.',
+              description: _`Error editing group.`,
             },
           ],
         }),
@@ -333,7 +333,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     let sortTableOptions = {
       headers: [
         {
-          title: 'Group',
+          title: _`Group`,
           type: 'alpha',
           id: 'name',
         },
@@ -373,7 +373,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         <td>
           {!!user && user.model_permissions.delete_group && (
             <Button
-              aria-label={'Delete'}
+              aria-label={_`Delete`}
               key='delete'
               variant='danger'
               onClick={() =>
@@ -411,7 +411,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             {
               variant: 'success',
               title: null,
-              description: 'Successfully deleted group.',
+              description: _`Successfully deleted group.`,
             },
           ],
         });
@@ -424,7 +424,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             {
               variant: 'danger',
               title: null,
-              description: 'Error deleting group.',
+              description: _`Error deleting group.`,
             },
           ],
         }),

@@ -135,28 +135,28 @@ class CertificationDashboard extends React.Component<
                         filterConfig={[
                           {
                             id: 'namespace',
-                            title: 'Namespace',
+                            title: _`Namespace`,
                           },
                           {
                             id: 'name',
-                            title: 'Collection Name',
+                            title: _`Collection Name`,
                           },
                           {
                             id: 'repository',
-                            title: 'Status',
+                            title: _`Status`,
                             inputType: 'select',
                             options: [
                               {
                                 id: Constants.NOTCERTIFIED,
-                                title: 'Rejected',
+                                title: _`Rejected`,
                               },
                               {
                                 id: Constants.NEEDSREVIEW,
-                                title: 'Needs Review',
+                                title: _`Needs Review`,
                               },
                               {
                                 id: Constants.PUBLISHED,
-                                title: 'Approved',
+                                title: _`Approved`,
                               },
                             ],
                           },
@@ -184,13 +184,13 @@ class CertificationDashboard extends React.Component<
                   ignoredParams={['page_size', 'page', 'sort']}
                   niceValues={{
                     repository: {
-                      [Constants.PUBLISHED]: 'Approved',
-                      [Constants.NEEDSREVIEW]: 'Needs Review',
-                      [Constants.NOTCERTIFIED]: 'Rejected',
+                      [Constants.PUBLISHED]: _`Approved`,
+                      [Constants.NEEDSREVIEW]: _`Needs Review`,
+                      [Constants.NOTCERTIFIED]: _`Rejected`,
                     },
                   }}
                   niceNames={{
-                    repository: 'Status',
+                    repository: _`Status`,
                   }}
                 />
               </div>
@@ -222,35 +222,35 @@ class CertificationDashboard extends React.Component<
         <EmptyStateFilter />
       ) : (
         <EmptyStateNoData
-          title={'No managed collections yet'}
-          description={'Collections will appear once uploaded'}
+          title={_`No managed collections yet`}
+          description={_`Collections will appear once uploaded`}
         />
       );
     }
     let sortTableOptions = {
       headers: [
         {
-          title: 'Namespace',
+          title: _`Namespace`,
           type: 'alpha',
           id: 'namespace',
         },
         {
-          title: 'Collection',
+          title: _`Collection`,
           type: 'alpha',
           id: 'collection',
         },
         {
-          title: 'Version',
+          title: _`Version`,
           type: 'number',
           id: 'version',
         },
         {
-          title: 'Date created',
+          title: _`Date created`,
           type: 'number',
           id: 'pulp_created',
         },
         {
-          title: 'Status',
+          title: _`Status`,
           type: 'none',
           id: 'status',
         },

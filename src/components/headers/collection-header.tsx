@@ -62,10 +62,10 @@ export class CollectionHeader extends React.Component<IProps> {
     }
 
     const urlKeys = [
-      { key: 'documentation', name: 'Docs site' },
-      { key: 'homepage', name: 'Website' },
-      { key: 'issues', name: 'Issue tracker' },
-      { key: 'repository', name: 'Repo' },
+      { key: 'documentation', name: _`Docs site` },
+      { key: 'homepage', name: _`Website` },
+      { key: 'issues', name: _`Issue tracker` },
+      { key: 'repository', name: _`Repo` },
     ];
 
     const latestVersion = collection.latest_version.created_at;
@@ -158,17 +158,17 @@ export class CollectionHeader extends React.Component<IProps> {
     const tabs = [
       {
         active: active === 'install',
-        title: 'Install',
+        title: _`Install`,
         link: formatPath(Paths.collectionByRepo, pathParams, reduced),
       },
       {
         active: active === 'documentation',
-        title: 'Documentation',
+        title: _`Documentation`,
         link: formatPath(Paths.collectionDocsIndexByRepo, pathParams, reduced),
       },
       {
         active: active === 'contents',
-        title: 'Contents',
+        title: _`Contents`,
         link: formatPath(
           Paths.collectionContentListByRepo,
           pathParams,
@@ -177,7 +177,7 @@ export class CollectionHeader extends React.Component<IProps> {
       },
       {
         active: active === 'import-log',
-        title: 'Import log',
+        title: _`Import log`,
         link: formatPath(Paths.collectionImportLogByRepo, pathParams, reduced),
       },
     ];

@@ -91,12 +91,12 @@ class ExecutionEnvironmentManifest extends React.Component<
     return (
       <>
         <BaseHeader
-          title={'Image layers'}
+          title={_`Image layers`}
           breadcrumbs={
             <Breadcrumbs
               links={[
                 {
-                  name: 'Container Registry',
+                  name: _`Container Registry`,
                   url: Paths.executionEnvironments,
                 },
                 {

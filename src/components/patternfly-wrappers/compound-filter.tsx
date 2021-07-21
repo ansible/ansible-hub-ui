@@ -110,7 +110,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
 
         const toggle = [
           <SelectGroup
-            label={'Filter by ' + selectedFilter.id}
+            label={_`Filter by ` + selectedFilter.id}
             key={selectedFilter.id}
           >
             {options}
@@ -123,7 +123,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             onToggle={this.onToggle}
             onSelect={this.onSelectMultiple}
             isOpen={this.state.isOpen}
-            placeholderText={'Filter by ' + selectedFilter.id.toLowerCase()}
+            placeholderText={_`Filter by ` + selectedFilter.id.toLowerCase()}
             selections={this.props.params[this.state.selectedFilter.id]}
             isGrouped
           >
@@ -170,7 +170,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
   }
 
   private handleEnter(e) {
-    if (e.key === 'Enter') {
+    if (e.key === _`Enter`) {
       this.submitFilter();
     }
   }

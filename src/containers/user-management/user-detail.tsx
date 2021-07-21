@@ -55,10 +55,10 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
 
     const notAuthorized = !!user && !user.model_permissions.view_user;
     const breadcrumbs = [
-      { url: Paths.userList, name: 'Users' },
+      { url: Paths.userList, name: _`Users` },
       { name: userDetail.username },
     ];
-    const title = 'User details';
+    const title = _`User details`;
 
     return (
       <>

@@ -44,7 +44,7 @@ export class CollectionList extends React.Component<IProps> {
 
     return (
       <React.Fragment>
-        <DataList aria-label={'List of Collections'}>
+        <DataList aria-label={_`List of Collections`}>
           {collections.length > 0 ? (
             collections.map(c => (
               <CollectionListItem
@@ -100,7 +100,7 @@ export class CollectionList extends React.Component<IProps> {
               }
               key='1'
             >
-              {collection.deprecated ? 'Undeprecate' : 'Deprecate'}
+              {collection.deprecated ? _`Undeprecate` : _`Deprecate`}
             </DropdownItem>,
           ]}
         />

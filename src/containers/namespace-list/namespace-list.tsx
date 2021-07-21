@@ -125,8 +125,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     const title = namespaceBreadcrumb.name;
     const search = filterOwner
-      ? 'Search my namespaces'
-      : 'Search all ' + title.toLowerCase();
+      ? _`Search my namespaces`
+      : _`Search all ` + title.toLowerCase();
 
     return (
       <div className='namespace-page'>
@@ -147,12 +147,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
               <LinkTabs
                 tabs={[
                   {
-                    title: 'All',
+                    title: _`All`,
                     link: Paths[NAMESPACE_TERM],
                     active: !filterOwner,
                   },
                   {
-                    title: 'My namespaces',
+                    title: _`My namespaces`,
                     link: Paths.myNamespaces,
                     active: filterOwner,
                   },
@@ -164,7 +164,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             <div className='toolbar'>
               <Toolbar
                 params={params}
-                sortOptions={[{ title: 'Name', id: 'name', type: 'alpha' }]}
+                sortOptions={[{ title: _`Name`, id: 'name', type: 'alpha' }]}
                 searchPlaceholder={search}
                 updateParams={p =>
                   this.updateParams(p, () => this.loadNamespaces())
@@ -207,10 +207,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
     const { namespacePath, filterOwner } = this.props;
     const { user } = this.context;
 
-    const noDataTitle = 'No namespaces yet';
+    const noDataTitle = _`No namespaces yet`;
     const noDataDescription = !filterOwner
-      ? 'Namespaces will appear once created'
-      : 'This account is not set up to manage any namespaces';
+      ? _`Namespaces will appear once created`
+      : _`This account is not set up to manage any namespaces`;
 
     const noDataButton = user?.model_permissions?.add_namespace ? (
       <Button variant='primary' onClick={() => this.handleModalToggle()}>

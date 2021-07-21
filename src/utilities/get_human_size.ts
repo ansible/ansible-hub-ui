@@ -1,4 +1,4 @@
-const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+const units = ['bytes', _`KB`, _`MB`, _`GB`, _`TB`, _`PB`, _`EB`, _`ZB`, _`YB`];
 
 export function getHumanSize(x) {
   let l = 0,

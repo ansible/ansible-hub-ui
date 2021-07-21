@@ -62,27 +62,27 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
     let sortTableOptions = {
       headers: [
         {
-          title: 'Remote name',
+          title: _`Remote name`,
           type: 'none',
           id: 'remote',
         },
         {
-          title: 'Repositories',
+          title: _`Repositories`,
           type: 'none',
           id: 'repository',
         },
         {
-          title: 'Last updated',
+          title: _`Last updated`,
           type: 'none',
           id: 'updated_at',
         },
         {
-          title: 'Last synced',
+          title: _`Last synced`,
           type: 'none',
           id: 'last_sync_task.finished_at',
         },
         {
-          title: 'Sync status',
+          title: _`Sync status`,
           type: 'none',
           id: 'last_sync_task.error',
         },

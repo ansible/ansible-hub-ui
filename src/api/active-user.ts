@@ -45,7 +45,7 @@ class API extends HubAPI {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       return new Promise((resolve, reject) => {
         reject(
-          'Use window.chrome.insights.auth to get tokens for insights deployments',
+          _`Use window.chrome.insights.auth to get tokens for insights deployments`,
         );
       });
     }

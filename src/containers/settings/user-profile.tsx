@@ -64,7 +64,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
         <UserFormPage
           isMe={true}
           user={user}
-          breadcrumbs={[{ name: 'Settings' }, { name: 'My profile' }]}
+          breadcrumbs={[{ name: _`Settings` }, { name: _`My profile` }]}
           title={_`My profile`}
           errorMessages={errorMessages}
           updateUser={user => this.setState({ user: user })}
@@ -101,7 +101,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
           {
             inEditMode: false,
             alerts: this.state.alerts.concat([
-              { variant: 'success', title: 'Profile saved.' },
+              { variant: 'success', title: _`Profile saved.` },
             ]),
           },
           () => this.context.setUser(result.data),
