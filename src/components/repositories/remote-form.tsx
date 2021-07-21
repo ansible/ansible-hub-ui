@@ -99,14 +99,14 @@ export class RemoteForm extends React.Component<IProps, IState> {
             variant='primary'
             onClick={() => this.props.saveRemote()}
           >
-            Save
+            {_`Save`}
           </Button>,
           <Button
             key='cancel'
             variant='secondary'
             onClick={() => this.props.closeModal()}
           >
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
       >

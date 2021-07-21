@@ -188,10 +188,10 @@ export class UserForm extends React.Component<IProps, IState> {
             !this.requiredFilled(user)
           }
         >
-          Save
+          {_`Save`}
         </Button>
         <Button key='cancel' onClick={() => onCancel()} variant='link'>
-          Cancel
+          {_`Cancel`}
         </Button>
       </ActionGroup>
     );

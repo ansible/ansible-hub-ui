@@ -113,7 +113,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
                       variant='secondary'
                       onClick={() => this.setState({ showDeleteModal: true })}
                     >
-                      Delete
+                      {_`Delete`}
                     </Button>
                   </div>
                 ) : null}

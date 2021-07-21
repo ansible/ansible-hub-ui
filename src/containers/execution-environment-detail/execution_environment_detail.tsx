@@ -71,10 +71,10 @@ class ExecutionEnvironmentDetail extends React.Component<
           <section className='body card-area'>
             {' '}
             <Title headingLevel='h2' size='lg'>
-              Instructions
+              {_`Instructions`}
             </Title>
             <Title headingLevel='h3' size='md'>
-              Pull this image
+              {_`Pull this image`}
             </Title>
             <ClipboardCopy isReadOnly>{instructions}</ClipboardCopy>
           </section>
@@ -90,7 +90,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                     this.setState({ markdownEditing: true });
                   }}
                 >
-                  Edit
+                  {_`Edit`}
                 </Button>
               )}
             </Title>
@@ -104,7 +104,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                       variant='primary'
                       onClick={() => this.setState({ markdownEditing: true })}
                     >
-                      Add
+                      {_`Add`}
                     </Button>
                   ) : null
                 }
@@ -134,7 +134,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                     )
                   }
                 >
-                  Save
+                  {_`Save`}
                 </Button>
                 <Button
                   variant={'link'}
@@ -145,7 +145,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                     this.queryReadme(this.props.containerRepository.name);
                   }}
                 >
-                  Cancel
+                  {_`Cancel`}
                 </Button>
               </React.Fragment>
             )}

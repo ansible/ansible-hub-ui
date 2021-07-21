@@ -66,14 +66,14 @@ export class ImportModal extends React.Component<IProps, IState> {
             onClick={() => this.saveFile()}
             isDisabled={!this.canUpload()}
           >
-            Upload
+            {_`Upload`}
           </Button>,
           <Button
             key='cancel'
             variant='secondary'
             onClick={() => this.handleClose()}
           >
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
       >

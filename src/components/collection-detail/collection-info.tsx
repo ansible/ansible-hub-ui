@@ -124,7 +124,7 @@ export class CollectionInfo extends React.Component<IProps> {
                       )
                     }
                   >
-                    Download tarball
+                    {_`Download tarball`}
                   </Button>
                 </div>
               </SplitItem>
@@ -134,7 +134,7 @@ export class CollectionInfo extends React.Component<IProps> {
             <GridItem>
               <Split hasGutter={true}>
                 <SplitItem className='install-title'>
-                  Requires Ansible
+                  {_`Requires Ansible`}
                 </SplitItem>
                 <SplitItem isFilled>
                   {latest_version.requires_ansible}
@@ -165,7 +165,7 @@ export class CollectionInfo extends React.Component<IProps> {
                   params,
                 )}
               >
-                Go to documentation
+                {_`Go to documentation`}
               </Link>
             </GridItem>
           ) : null}

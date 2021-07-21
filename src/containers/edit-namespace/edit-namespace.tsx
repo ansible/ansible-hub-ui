@@ -149,10 +149,10 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                     variant='primary'
                     onClick={() => this.saveNamespace()}
                   >
-                    Save
+                    {_`Save`}
                   </Button>
                   <Button variant='secondary' onClick={() => this.cancel()}>
-                    Cancel
+                    {_`Cancel`}
                   </Button>
 
                   {saving ? <Spinner></Spinner> : null}

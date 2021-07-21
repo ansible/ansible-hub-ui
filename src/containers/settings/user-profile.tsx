@@ -82,7 +82,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <div>
                   <Button onClick={() => this.setState({ inEditMode: true })}>
-                    Edit
+                    {_`Edit`}
                   </Button>
                 </div>
               </div>

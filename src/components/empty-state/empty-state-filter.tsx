@@ -17,7 +17,7 @@ export class EmptyStateFilter extends React.Component<IProps> {
         button={
           this.props.clearAllFilters ? (
             <Button onClick={this.props.clearAllFilters} variant='link'>
-              Clear all filters
+              {_`Clear all filters`}
             </Button>
           ) : null
         }

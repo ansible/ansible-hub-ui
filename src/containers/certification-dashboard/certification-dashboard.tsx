@@ -291,7 +291,7 @@ class CertificationDashboard extends React.Component<
           <CheckCircleIcon
             style={{ color: 'var(--pf-global--success-color--100)' }}
           />{' '}
-          Approved
+          {_`Approved`}
         </span>
       );
     }
@@ -301,7 +301,7 @@ class CertificationDashboard extends React.Component<
           <ExclamationCircleIcon
             style={{ color: 'var(--pf-global--danger-color--100)' }}
           />{' '}
-          Rejected
+          {_`Rejected`}
         </span>
       );
     }
@@ -311,7 +311,7 @@ class CertificationDashboard extends React.Component<
           <InfoCircleIcon
             style={{ color: 'var(--pf-global--info-color--100)' }}
           />{' '}
-          Needs Review
+          {_`Needs Review`}
         </span>
       );
     }
@@ -374,7 +374,7 @@ class CertificationDashboard extends React.Component<
               },
             )}
           >
-            View Import Logs
+            {_`View Import Logs`}
           </Link>
         }
       />
@@ -388,7 +388,7 @@ class CertificationDashboard extends React.Component<
         isDisabled={isDisabled}
         key='certify'
       >
-        Approve
+        {_`Approve`}
       </DropdownItem>
     );
 
@@ -405,7 +405,7 @@ class CertificationDashboard extends React.Component<
         className='rejected-icon'
         key='reject'
       >
-        Reject
+        {_`Reject`}
       </DropdownItem>
     );
 

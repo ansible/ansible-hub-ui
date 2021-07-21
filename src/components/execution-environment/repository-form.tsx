@@ -50,10 +50,10 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             variant='primary'
             onClick={() => onSave(description, selectedGroups)}
           >
-            Save
+            {_`Save`}
           </Button>,
           <Button key='cancel' variant='link' onClick={onCancel}>
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
       >

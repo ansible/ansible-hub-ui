@@ -100,10 +100,10 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             onClick={this.handleSubmit}
             isDisabled={!newNamespaceName || !newNamespaceNameValid}
           >
-            Create
+            {_`Create`}
           </Button>,
           <Button key='cancel' variant='link' onClick={this.toggleModal}>
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
       >

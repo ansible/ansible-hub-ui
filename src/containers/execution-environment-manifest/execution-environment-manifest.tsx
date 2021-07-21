@@ -132,7 +132,7 @@ class ExecutionEnvironmentManifest extends React.Component<
             <FlexItem className='layers-max-width'>
               <section className='body'>
                 <Title headingLevel='h2' size='lg'>
-                  Image layers
+                  {_`Image layers`}
                 </Title>
 
                 <DataList
@@ -174,7 +174,7 @@ class ExecutionEnvironmentManifest extends React.Component<
               <FlexItem>
                 <section className='body'>
                   <Title headingLevel='h2' size='lg'>
-                    Command
+                    {_`Command`}
                   </Title>
 
                   <code>{command}</code>
@@ -184,7 +184,7 @@ class ExecutionEnvironmentManifest extends React.Component<
               <FlexItem>
                 <section className='body'>
                   <Title headingLevel='h2' size='lg'>
-                    Environment
+                    {_`Environment`}
                   </Title>
 
                   {environment.map((line, index) => (

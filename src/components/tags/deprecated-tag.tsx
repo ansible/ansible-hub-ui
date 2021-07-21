@@ -17,7 +17,7 @@ export class DeprecatedTag extends React.Component<{}, {}> {
           borderRadius: '3px',
         }}
       >
-        DEPRECATED
+        {_`DEPRECATED`}
       </div>
     );
   }

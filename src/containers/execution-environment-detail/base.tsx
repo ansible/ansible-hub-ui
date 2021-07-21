@@ -103,7 +103,7 @@ export function withContainerRepo(WrappedComponent) {
               ) ||
               permissions.includes('container.change_containernamespace') ? (
                 <Button onClick={() => this.setState({ editing: true })}>
-                  Edit
+                  {_`Edit`}
                 </Button>
               ) : null
             }

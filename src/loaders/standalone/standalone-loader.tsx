@@ -123,7 +123,7 @@ class App extends React.Component<RouteComponentProps, IState> {
             ActiveUserAPI.logout().then(() => this.setState({ user: null }))
           }
         >
-          Logout
+          {_`Logout`}
         </DropdownItem>,
       ];
 
@@ -148,7 +148,7 @@ class App extends React.Component<RouteComponentProps, IState> {
             this.setState({ aboutModalVisible: true, toggleOpen: false })
           }
         >
-          About
+          {_`About`}
         </DropdownItem>,
       ];
 
@@ -188,7 +188,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                   { next: this.props.location.pathname },
                 )}
               >
-                Login
+                {_`Login`}
               </Link>
             ) : (
               <div>

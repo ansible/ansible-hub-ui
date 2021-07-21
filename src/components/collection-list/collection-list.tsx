@@ -90,7 +90,7 @@ export class CollectionList extends React.Component<IProps> {
           onClick={() => this.props.handleControlClick(collection.id, 'upload')}
           variant='secondary'
         >
-          Upload new version
+          {_`Upload new version`}
         </Button>
         <StatefulDropdown
           items={[

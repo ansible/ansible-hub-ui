@@ -117,7 +117,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       extra.push(
         <ToolbarItem key='create-button'>
           <Button variant='primary' onClick={this.handleModalToggle}>
-            Create
+            {_`Create`}
           </Button>
         </ToolbarItem>,
       );
@@ -214,7 +214,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     const noDataButton = user?.model_permissions?.add_namespace ? (
       <Button variant='primary' onClick={() => this.handleModalToggle()}>
-        Create
+        {_`Create`}
       </Button>
     ) : null;
 

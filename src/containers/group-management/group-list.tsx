@@ -138,7 +138,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                 variant='primary'
                 onClick={() => this.setState({ createModalVisible: true })}
               >
-                Create
+                {_`Create`}
               </Button>
             }
           />
@@ -172,7 +172,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                               this.setState({ createModalVisible: true })
                             }
                           >
-                            Create
+                            {_`Create`}
                           </Button>
                         </ToolbarItem>
                       </ToolbarGroup>
@@ -383,7 +383,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                 })
               }
             >
-              Delete
+              {_`Delete`}
             </Button>
           )}
         </td>

@@ -313,7 +313,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                 userID: user.id,
               })}
             >
-              Edit
+              {_`Edit`}
             </Link>
           }
         />,
@@ -325,7 +325,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     ) {
       dropdownItems.push(
         <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
-          Delete
+          {_`Delete`}
         </DropdownItem>,
       );
     }
@@ -343,7 +343,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                 content={_`Super users have all system permissions regardless of what groups they are in.`}
               >
                 <Label icon={<UserPlusIcon />} color='orange'>
-                  Super user
+                  {_`Super user`}
                 </Label>
               </Tooltip>
             </>

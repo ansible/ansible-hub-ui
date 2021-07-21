@@ -59,7 +59,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               Use the{' '}
               <Link to={Paths.repositories}>{_`Repository Management`}</Link>{' '}
               page to sync collections curated by your organization to the Red
-              Hat Certified repository in your private Automation Hub. Users
+              {_`Hat Certified repository in your private Automation Hub. Users`}
               with the correct permissions can use the sync toggles on the{' '}
               <Link to={Paths.search}>{_`Collections`}</Link> page to control
               which collections are added to their organization's sync
@@ -83,7 +83,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           <section className='body pf-c-content'>
             <h2>{_`Offline token`}</h2>
             <p>
-              Use this token to authenticate clients that need to download
+              {_`Use this token to authenticate clients that need to download`}
               content from Automation Hub. This is a secret token used to
               protect your content. Store your API token in a secure location.
             </p>
@@ -123,12 +123,12 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           <section className='body pf-c-content'>
             <h2>{_`Server URL`}</h2>
             <p>
-              Use this URL to configure the API endpoints that clients need to
+              {_`Use this URL to configure the API endpoints that clients need to`}
               download content from Automation Hub.
             </p>
             <ClipboardCopy isReadOnly>{getRepoUrl('')}</ClipboardCopy>
             <p>
-              Note: this URL contains all collections in Hub. To connect to your
+              {_`Note: this URL contains all collections in Hub. To connect to your`}
               organization's sync repository use the URL found on{' '}
               <Link to={Paths.repositories}>{_`Repository Management`}</Link>.
             </p>
@@ -136,7 +136,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           <section className='body pf-c-content'>
             <h2>{_`SSO URL`}</h2>
             <p>
-              Use this URL to configure the authentication URLs that clients
+              {_`Use this URL to configure the authentication URLs that clients`}
               need to download content from Automation Hub.
             </p>
             <ClipboardCopy isReadOnly>

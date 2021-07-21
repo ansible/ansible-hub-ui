@@ -67,37 +67,37 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
         <TextContent>
           <TextList component={TextListVariants.dl}>
             <TextListItem component={TextListItemVariants.dt}>
-              Server version
+              {_`Server version`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {this.state.applicationInfo.server_version}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              Pulp Ansible Version
+              {_`Pulp Ansible Version`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {this.state.applicationInfo.pulp_ansible_version}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              Username
+              {_`Username`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {userName}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              User Groups
+              {_`User Groups`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {user.groups.map(group => group.name).join()}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              Browser Version
+              {_`Browser Version`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {browser.name + ' ' + browser.version}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              Browser OS
+              {_`Browser OS`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {browser.os}

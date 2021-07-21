@@ -151,7 +151,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
                         key='edit'
                         onClick={() => this.props.editRemote(remote)}
                       >
-                        Edit
+                        {_`Edit`}
                       </DropdownItem>,
                     ]}
                   />
@@ -190,7 +190,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
     }
     const configButton = (
       <Button onClick={() => this.props.editRemote(remote)} variant='secondary'>
-        Configure
+        {_`Configure`}
       </Button>
     );
 
@@ -209,7 +209,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
           }
           variant='secondary'
         >
-          Sync
+          {_`Sync`}
         </Button>
       </>
     );

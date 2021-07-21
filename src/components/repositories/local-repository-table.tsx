@@ -145,7 +145,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
                   key='2'
                   component={
                     <Link to={formatPath(Paths.token, {})} target='_blank'>
-                      Get token
+                      {_`Get token`}
                     </Link>
                   }
                 />,

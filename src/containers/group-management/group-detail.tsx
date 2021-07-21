@@ -220,7 +220,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           onClick={() => this.setState({ showDeleteModal: true })}
           variant='secondary'
         >
-          Delete
+          {_`Delete`}
         </Button>
       </ToolbarItem>
     );
@@ -270,7 +270,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           {!editPermissions && user.model_permissions.change_group && (
             <Button onClick={() => this.setState({ editPermissions: true })}>
-              Edit
+              {_`Edit`}
             </Button>
           )}
         </div>
@@ -343,13 +343,13 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                 variant='primary'
                 onClick={() => this.actionSavePermissions()}
               >
-                Save
+                {_`Save`}
               </Button>
               <Button
                 variant='secondary'
                 onClick={() => this.setState({ editPermissions: false })}
               >
-                Cancel
+                {_`Cancel`}
               </Button>
             </ActionGroup>
           </Form>
@@ -389,10 +389,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               )
             }
           >
-            Add
+            {_`Add`}
           </Button>,
           <Button key='cancel' variant='link' onClick={close}>
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
       >
@@ -566,7 +566,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                 variant='primary'
                 onClick={() => this.setState({ addModalVisible: true })}
               >
-                Add
+                {_`Add`}
               </Button>
             )
           }
@@ -613,7 +613,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                     <Button
                       onClick={() => this.setState({ addModalVisible: true })}
                     >
-                      Add
+                      {_`Add`}
                     </Button>
                   </ToolbarItem>
                 </ToolbarGroup>
@@ -724,7 +724,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                   key='delete'
                   onClick={() => this.setState({ showUserRemoveModal: user })}
                 >
-                  Remove
+                  {_`Remove`}
                 </DropdownItem>,
               ]}
             ></StatefulDropdown>

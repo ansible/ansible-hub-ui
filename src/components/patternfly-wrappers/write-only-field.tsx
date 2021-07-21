@@ -9,7 +9,7 @@ interface IProps {
   onClear: () => void;
 
   /**
-    Component to display when the user is allowed to update this field.
+    {_`Component to display when the user is allowed to update this field.`}
    */
   children: any;
 }
@@ -32,7 +32,7 @@ export class WriteOnlyField extends React.Component<IProps> {
         />
         {isValueSet && (
           <Button onClick={() => onClear()} variant='control'>
-            Clear
+            {_`Clear`}
           </Button>
         )}
       </InputGroup>

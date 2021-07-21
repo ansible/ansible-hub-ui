@@ -121,7 +121,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               isSaving || (tagsToAdd.length <= 0 && tagsToRemove.length <= 0)
             }
           >
-            Save
+            {_`Save`}
             {isSaving && <Spinner size='sm'></Spinner>}
           </Button>,
           <Button
@@ -130,7 +130,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             onClick={() => closeModal()}
             variant='link'
           >
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
         isOpen={isOpen}
@@ -187,12 +187,12 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                       )
                     }
                   >
-                    Yes
+                    {_`Yes`}
                   </AlertActionLink>
                   <AlertActionLink
                     onClick={() => this.setState({ tagToVerify: '' })}
                   >
-                    No
+                    {_`No`}
                   </AlertActionLink>
                 </>
               }
@@ -219,7 +219,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               variant='info'
               title={<>Waiting for {pendingTasks} task(s) to finish.</>}
             >
-              It's safe to close this window. These tasks will finish in the
+              {_`It's safe to close this window. These tasks will finish in the`}
               background.
             </Alert>
           )}

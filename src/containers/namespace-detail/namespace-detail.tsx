@@ -231,7 +231,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     <Button
                       onClick={() => this.setState({ showImportModal: true })}
                     >
-                      Upload collection
+                      {_`Upload collection`}
                     </Button>
                   )
                 }
@@ -370,7 +370,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         {' '}
         {collections.length !== 0 && (
           <Button onClick={() => this.setState({ showImportModal: true })}>
-            Upload collection
+            {_`Upload collection`}
           </Button>
         )}
         <StatefulDropdown
@@ -383,7 +383,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     namespace: this.state.namespace.name,
                   })}
                 >
-                  Edit namespace
+                  {_`Edit namespace`}
                 </Link>
               }
             />,
@@ -399,7 +399,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     },
                   )}
                 >
-                  Imports
+                  {_`Imports`}
                 </Link>
               }
             />,
