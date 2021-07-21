@@ -8,8 +8,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /src\/.*\.js$/,
-        exclude: /(node_modules|bower_components)/i,
+        test: /src\/.*\.(js|jsx|ts|tsx)$/,
         use: [{ loader: 'source-map-loader' }, { loader: 'babel-loader' }],
       },
       {
@@ -24,19 +23,6 @@ module.exports = {
         test: /\.(woff(2)?|ttf|jpg|png|eot|gif|svg)(\?v=\d+\.\d+\.\d+)?$/,
         type: 'asset/resource',
         generator: { filename: 'fonts/[name][ext][query]' },
-      },
-
-      // TypeScript configs
-      // changed from { test: /\.jsx?$/, use: { loader: 'babel-loader' } },
-      {
-        test: /src\/.*\.(t|j)sx?$/,
-        loader: 'ts-loader',
-      },
-      // addition - add source-map support
-      {
-        enforce: 'pre',
-        test: /src\/.*\.js$/,
-        loader: 'source-map-loader',
       },
     ],
   },
