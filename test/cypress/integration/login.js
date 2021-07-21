@@ -48,23 +48,9 @@ describe('Test cookieLogin for cookie storage', () => {
 
     cy.cookieLogin(adminUsername, adminPassword);
     cy.contains(adminUsername);
-
-    cy.cookieLogin(username, password);
-    cy.contains(username);
-
-    cy.cookieLogin(adminUsername, adminPassword);
-    cy.contains(adminUsername);
   });
 
   it('can cookieLogin with logout as admin or different user - this will force to login manualy every time', () => {
-    cy.cookieLogin(username, password);
-    cy.contains(username);
-    cy.cookieLogout();
-
-    cy.cookieLogin(adminUsername, adminPassword);
-    cy.contains(adminUsername);
-    cy.cookieLogout();
-
     cy.cookieLogin(username, password);
     cy.contains(username);
     cy.cookieLogout();
