@@ -136,8 +136,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
               } catch {
                 this.setState({
                   errorMessages: {
-                    __nofield:
-                      "Can't update remote without a distribution attached to it.",
+                    __nofield: _`Can't update remote without a distribution attached to it.`,
                   },
                 });
               }

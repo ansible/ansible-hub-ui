@@ -140,7 +140,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
       >
         {/*
         The Form component will reload the page when it's "submitted" which causes the page
-        to reload when the user hits "enter" or clicks "Show Less" on the LabelGroup
+        to reload when the user hits "enter" or clicks _`Show Less` on the LabelGroup
         */}
         <Form onSubmit={e => e.preventDefault()}>
           <FormGroup

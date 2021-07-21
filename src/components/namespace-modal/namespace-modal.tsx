@@ -46,7 +46,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     } else if (name.length <= 2) {
       error['name'] = _`Name must be longer than 2 characters`;
     } else if (name.startsWith('_')) {
-      error['name'] = "Name cannot begin with '_'";
+      error['name'] = _`Name cannot begin with '_'`;
     } else {
       delete error['name'];
     }

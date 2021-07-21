@@ -160,7 +160,7 @@ export function withContainerRepo(WrappedComponent) {
                         editing: false,
                         alerts: this.state.alerts.concat({
                           variant: 'danger',
-                          title: "Error: changes weren't saved",
+                          title: _`Error: changes weren't saved`,
                         }),
                       }),
                     );

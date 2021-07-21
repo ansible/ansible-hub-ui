@@ -222,7 +222,7 @@ export class UserForm extends React.Component<IProps, IState> {
       return _`Requires super user permissions to edit.`;
     }
     if (this.context.user.id === user.id) {
-      return "Super users can't disable themselves.";
+      return _`Super users can't disable themselves.`;
     }
 
     return null;
