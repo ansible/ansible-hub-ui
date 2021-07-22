@@ -9,7 +9,7 @@ import getBaseName from './utilities/getBaseName';
 
 // Entrypoint for compiling the app to run in insights dev mode.
 
-const basename = getBaseName(window.location.pathname)
+const basename = getBaseName(window.location.pathname);
 
 ReactDOM.render(
   <Provider store={init(logger).getStore()}>

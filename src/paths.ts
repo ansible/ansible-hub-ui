@@ -14,6 +14,19 @@ export function formatPath(path: Paths, data: any, params?: object) {
   }
 }
 
+// FIXME: temporary global for l10n
+window._ = (strings, ...args) => {
+  strings = Array.from(strings);
+  const last = strings.pop();
+
+  const parts = [
+    ...strings.map((s, i) => '>>' + s + '<<' + args[i]),
+    '>>' + last + '<<',
+  ];
+
+  return parts.join('');
+};
+
 export enum Paths {
   executionEnvironmentDetailActivities = '/containers/:container+/_content/activity',
   executionEnvironmentDetailImages = '/containers/:container+/_content/images',

@@ -211,15 +211,15 @@ export class RemoteForm extends React.Component<IProps, IState> {
               <HelperText
                 content={
                   <>
-                    This uses the same{' '}
+                    {_`This uses the same`}{' '}
                     <a
                       target='_blank'
                       href='https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file'
                     >
                       requirements.yml
                     </a>{' '}
-                    format as the ansible-galaxy CLI with the caveat that roles
-                    aren't supported and the source parameter is not supported.
+                    {_`format as the ansible-galaxy CLI with the caveat that roles
+                       aren't supported and the source parameter is not supported.`}
                   </>
                 }
               />

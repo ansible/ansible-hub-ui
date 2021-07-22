@@ -217,10 +217,10 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             <Alert
               isInline
               variant='info'
-              title={<>Waiting for {pendingTasks} task(s) to finish.</>}
+              title={<>{_`Waiting for {pendingTasks} task(s) to finish.`}</>}
             >
-              It's safe to close this window. These tasks will finish in the
-              background.
+              {_`It's safe to close this window. These tasks will finish in the
+              background.`}
             </Alert>
           )}
         </Form>
@@ -245,7 +245,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
 
     this.props.onAlert({
       variant: 'danger',
-      title: `Failed to ${operation} tag "${tag}".`,
+      title: _`Failed to ${operation} tag "${tag}".`,
       description: msg,
     });
   };
@@ -334,8 +334,8 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               const tag = taskUrls.find(e => e.task === r.data.pulp_id);
               this.props.onAlert({
                 variant: 'danger',
-                title: `Task to change tag "${tag.tag}" could not be completed.`,
-                description: `Reason: task ${r.data.state}`,
+                title: _`Task to change tag "${tag.tag}" could not be completed.`,
+                description: _`Reason: task ${r.data.state}`,
               });
             }
           }
@@ -368,9 +368,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
       this.setState({
         verifyingTag: false,
         tagInFormError:
-          'A tag may contain lowercase and uppercase ASCII ' +
-          'alphabetic characters, digits, underscores, periods, and dashes. A tag must not ' +
-          'start with a period, underscore, or a dash.',
+            {_`A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash.`},
       });
     } else if (this.getCurrentTags().includes(tag)) {
       this.setState({
