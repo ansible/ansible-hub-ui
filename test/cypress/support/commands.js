@@ -63,8 +63,8 @@ Cypress.Commands.add('cookieLogout', {}, () => {
 
 let user_tokens = {};
 
-Cypress.Commands.add('getUserTokens', {}, (func) => {
-	func(user_tokens);
+Cypress.Commands.add('getUserTokens', {}, func => {
+  func(user_tokens);
 });
 
 Cypress.Commands.add('cookieLogin', {}, (username, password) => {
