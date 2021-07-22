@@ -94,7 +94,8 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               style={{ paddingTop: 'var(--pf-global--spacer--md)' }}
             >
               <span>
-                Run the command below periodically to prevent your token from expiring.
+                The token will expire after 30 days of inactivity. Run the
+                command below periodically to prevent your token from expiring.
               </span>
               <ClipboardCopy
                 isCode
