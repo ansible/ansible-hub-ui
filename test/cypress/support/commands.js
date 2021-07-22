@@ -58,9 +58,14 @@ Cypress.Commands.add('menuGo', {}, name => {
 Cypress.Commands.add('cookieLogout', {}, () => {
   cy.clearCookie('sessionid');
   cy.clearCookie('csrftoken');
+  user_tokens = {};
 });
 
 let user_tokens = {};
+
+Cypress.Commands.add('getUserTokens', {}, (func) => {
+	func(user_tokens);
+});
 
 Cypress.Commands.add('cookieLogin', {}, (username, password) => {
   if (!user_tokens[username]) {

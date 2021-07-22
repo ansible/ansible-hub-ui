@@ -1,6 +1,4 @@
 describe('Test cookieLogin for cookie storage', () => {
-  //let baseUrl = Cypress.config().baseUrl;
-  let baseUrl = '/';
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
   let username = 'nopermission';
@@ -8,7 +6,6 @@ describe('Test cookieLogin for cookie storage', () => {
 
   before(() => {
     cy.login(adminUsername, adminPassword);
-    cy.visit('');
     cy.deleteTestUsers();
     cy.galaxykit('user create', username, password);
     cy.logout();
@@ -54,7 +51,22 @@ describe('Test cookieLogin for cookie storage', () => {
     cy.cookieLogin(username, password);
     cy.contains(username);
     cy.cookieLogout();
+	cy.getCookies().then(cookies => {
+		let sessionid = null;
+		let csrftoken = null;
 
+		cookies.forEach(cookie => {
+			if (cookie.name == 'sessionid') sessionid = cookie.value;
+			if (cookie.name == 'csrftoken') csrftoken = cookie.value;
+		});
+		
+		cy.expect(sessionid).to.be.null;
+		cy.expect(csrftoken).to.be.null;
+	});
+	cy.getUserTokens((user_tokens) =>
+	{
+		cy.expect(user_tokens).to.eql({});
+	});
     cy.cookieLogin(adminUsername, adminPassword);
     cy.contains(adminUsername);
   });
