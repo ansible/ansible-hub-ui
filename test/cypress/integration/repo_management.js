@@ -20,7 +20,7 @@ describe('Repo Management tests', () => {
     cy.contains('Show advanced options').click();
     cy.get('#download_concurrency').should('exist');
   });
-  
+
   it('can see table in repo tabs and it shows data correctly', () => {
     cy.visit(localRepoUrl);
     cy.get('[aria-labelledby="headers"]').contains('Distribution name');
