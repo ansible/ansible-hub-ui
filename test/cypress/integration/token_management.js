@@ -12,7 +12,7 @@ describe('Token Management Tests', () => {
     cy.login(adminUsername, adminPassword);
   });
 
-  it('user can generatecy.visit token', () => {
+  it('user can load token', () => {
     cy.visit('/ui/token');
     cy.intercept('POST', Cypress.env('prefix') + 'v3/auth/token/').as(
       'tokenPost',
