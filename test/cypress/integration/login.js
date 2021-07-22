@@ -1,14 +1,12 @@
-describe('Test cookieLogin for cookie storage', () => {
+describe('Login helpers', () => {
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
   let username = 'nopermission';
   let password = 'n0permissi0n';
 
   before(() => {
-    cy.login(adminUsername, adminPassword);
     cy.deleteTestUsers();
     cy.galaxykit('user create', username, password);
-    cy.logout();
   });
 
   it('can login manually and logout as admin or different user', () => {
@@ -56,8 +54,12 @@ describe('Test cookieLogin for cookie storage', () => {
       let csrftoken = null;
 
       cookies.forEach(cookie => {
-        if (cookie.name == 'sessionid') sessionid = cookie.value;
-        if (cookie.name == 'csrftoken') csrftoken = cookie.value;
+        if (cookie.name == 'sessionid') {
+          sessionid = cookie.value;
+        }
+        if (cookie.name == 'csrftoken') {
+          csrftoken = cookie.value;
+        }
       });
 
       cy.expect(sessionid).to.be.null;

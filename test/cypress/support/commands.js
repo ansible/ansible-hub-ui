@@ -75,8 +75,12 @@ Cypress.Commands.add('cookieLogin', {}, (username, password) => {
       let csrftoken;
 
       cookies.forEach(cookie => {
-        if (cookie.name == 'sessionid') sessionid = cookie.value;
-        if (cookie.name == 'csrftoken') csrftoken = cookie.value;
+        if (cookie.name == 'sessionid') {
+          sessionid = cookie.value;
+        }
+        if (cookie.name == 'csrftoken') {
+          csrftoken = cookie.value;
+        }
       });
 
       user_tokens[username] = { sessionid, csrftoken };
@@ -87,7 +91,7 @@ Cypress.Commands.add('cookieLogin', {}, (username, password) => {
 
     cy.setCookie('csrftoken', csrftoken);
     cy.setCookie('sessionid', sessionid);
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit('/');
   }
 });
 
