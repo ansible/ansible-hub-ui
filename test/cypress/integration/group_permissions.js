@@ -39,7 +39,6 @@ describe('Group Permissions Tests', () => {
     addTestUser('user2', 'group2');
     addTestUser('user3', 'group3');
     addTestUser('user4', 'group4');
-    cy.logout();
   });
 
   it('beforeAll', () => {});
