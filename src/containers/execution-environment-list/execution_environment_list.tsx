@@ -1,4 +1,6 @@
 import * as React from 'react';
+import './execution-environment.scss';
+
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   Toolbar,
@@ -114,7 +116,7 @@ class ExecutionEnvironmentList extends React.Component<
               <LoadingPageSpinner />
             ) : (
               <section className='body'>
-                <div className='toolbar'>
+                <div className='container-list-toolbar'>
                   <Toolbar>
                     <ToolbarContent>
                       <ToolbarGroup>
