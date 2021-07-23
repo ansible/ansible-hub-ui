@@ -151,19 +151,19 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                           params={params}
                           filterConfig={[
                             {
-                              id: 'username',
+                              id: 'username__contains',
                               title: 'Username',
                             },
                             {
-                              id: 'first_name',
+                              id: 'first_name__contains',
                               title: 'First name',
                             },
                             {
-                              id: 'last_name',
+                              id: 'last_name__contains',
                               title: 'Last name',
                             },
                             {
-                              id: 'email',
+                              id: 'email__contains',
                               title: 'Email',
                             },
                           ]}
@@ -198,6 +198,12 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                   }
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
+                  niceNames={{
+                    username__contains: 'Username',
+                    first_name__contains: 'First name',
+                    last_name__contains: 'Last name',
+                    email__contains: 'Email',
+                  }}
                 />
               </div>
               {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
@@ -220,10 +226,10 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     const { users } = this.state;
     if (users.length === 0) {
       return filterIsSet(params, [
-        'username',
-        'first_name',
-        'last_name',
-        'email',
+        'username__contains',
+        'first_name__contains',
+        'last_name__contains',
+        'email__contains',
       ]) ? (
         <EmptyStateFilter />
       ) : (
@@ -244,23 +250,23 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         {
           title: 'Username',
           type: 'alpha',
-          id: 'username',
+          id: 'username__contains',
         },
         {
           title: 'First name',
           type: 'alpha',
-          id: 'first_name',
+          id: 'first_name__contains',
           className: 'pf-m-wrap',
         },
         {
           title: 'Last name',
           type: 'alpha',
-          id: 'last_name',
+          id: 'last_name__contains',
         },
         {
           title: 'Email',
           type: 'alpha',
-          id: 'email',
+          id: 'email__contains',
         },
         {
           id: 'groups',
