@@ -40,6 +40,15 @@
 }
 
 .import-list {
+  & > div {
+    margin-bottom: 16px;
+  }
+  .pf-c-toolbar {
+    padding: 0;
+  }
+  .pf-c-toolbar__content-section {
+    margin: 0;
+  }
   .list-container {
     display: flex;
     align-items: center;
