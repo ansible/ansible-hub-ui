@@ -21,7 +21,6 @@ describe('Token Management Tests', () => {
     cy.contains('Load token').click();
     cy.get('.pf-c-clipboard-copy').should('exist');
 
-    cy.server();
     cy.wait('@tokenPost')
       .its('response.body.token')
       .then(token => {
