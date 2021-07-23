@@ -155,10 +155,16 @@ export class Constants {
     'galaxy-qa.ansible.com',
   ];
   static DOWNSTREAM_HOSTS = [
+    // FIXME 2021-09: remove obsolete cloud* references
     'cloud.redhat.com',
     'cloud.stage.redhat.com',
     'ci.cloud.redhat.com',
     'qa.cloud.redhat.com',
+
+    'console.redhat.com',
+    'console.stage.redhat.com',
+    'ci.console.redhat.com',
+    'qa.console.redhat.com',
   ];
   static REPOSITORYNAMES = {
     'Red Hat Certified': 'rh-certified',
