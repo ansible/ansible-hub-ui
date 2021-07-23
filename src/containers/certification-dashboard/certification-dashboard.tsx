@@ -486,9 +486,9 @@ class CertificationDashboard extends React.Component<
               updatingVersions: [],
               alerts: this.state.alerts.concat({
                 variant: 'danger',
-                title: `API Error: ${error.response.status}`,
+                title: _`API Error: ${error.response.status}`,
                 description:
-                  `Could not update the certification ` +
+                  _`Could not update the certification ` +
                   `status for ${version.namespace}.` +
                   `${version.name}.${version.version}.`,
               }),
@@ -517,9 +517,9 @@ class CertificationDashboard extends React.Component<
           updatingVersions: [],
           alerts: this.state.alerts.concat({
             variant: 'danger',
-            title: `API Error: 500`,
+            title: _`API Error: 500`,
             description:
-              `Could not update the certification ` +
+              _`Could not update the certification ` +
               `status for ${version.namespace}.` +
               `${version.name}.${version.version}.`,
           }),

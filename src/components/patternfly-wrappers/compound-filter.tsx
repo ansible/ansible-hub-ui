@@ -159,7 +159,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             aria-label={selectedFilter.id}
             placeholder={
               selectedFilter.placeholder ||
-              `Filter by ${selectedFilter.title.toLowerCase()}`
+              _`Filter by ${selectedFilter.title.toLowerCase()}`
             }
             value={this.state.inputText}
             onChange={k => this.setState({ inputText: k })}

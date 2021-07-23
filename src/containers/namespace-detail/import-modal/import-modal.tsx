@@ -154,7 +154,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       });
     } else if (!this.COLLECTION_NAME_REGEX.test(newCollection.name)) {
       this.setState({
-        errors: `Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'`,
+        errors: _`Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'`,
         file: newCollection,
         uploadProgress: 0,
       });
@@ -163,13 +163,13 @@ export class ImportModal extends React.Component<IProps, IState> {
       collection.name !== newCollection.name.split('-')[1]
     ) {
       this.setState({
-        errors: `The collection you have selected doesn't appear to match ${collection.name}`,
+        errors: _`The collection you have selected doesn't appear to match ${collection.name}`,
         file: newCollection,
         uploadProgress: 0,
       });
     } else if (this.props.namespace != newCollection.name.split('-')[0]) {
       this.setState({
-        errors: `The collection you have selected does not match this namespace.`,
+        errors: _`The collection you have selected does not match this namespace.`,
         file: newCollection,
         uploadProgress: 0,
       });

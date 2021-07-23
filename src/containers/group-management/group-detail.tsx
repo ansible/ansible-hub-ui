@@ -236,7 +236,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           permission: permission,
         }).catch(e =>
           this.addAlert(
-            `Permission ${permission} was not added.`,
+            _`Permission ${permission} was not added.`,
             'danger',
             e.message,
           ),
@@ -249,7 +249,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       if (!permissions.includes(original.name)) {
         GroupAPI.removePermission(group.id, original.id).catch(e =>
           this.addAlert(
-            `Permission ${original.name} was not removed.`,
+            _`Permission ${original.name} was not removed.`,
             'danger',
             e.message,
           ),
