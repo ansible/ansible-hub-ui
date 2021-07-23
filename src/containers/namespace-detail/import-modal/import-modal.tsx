@@ -231,7 +231,7 @@ export class ImportModal extends React.Component<IProps, IState> {
           errors: errorMessage,
         });
       })
-      .finally(_ => {
+      .finally(() => {
         this.cancelToken = null;
       });
   }

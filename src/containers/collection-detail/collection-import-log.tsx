@@ -94,7 +94,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
               loading={loadingImports}
               task={selectedImportDetail}
               followMessages={false}
-              setFollowMessages={_ => null}
+              setFollowMessages={() => null}
               selectedImport={selectedImport}
               apiError={apiError}
               hideCollectionName={true}
