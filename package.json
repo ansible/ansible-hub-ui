@@ -90,8 +90,9 @@
         "build:prod": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
         "deploy": "npm-run-all build:prod test-prettier",
         "verify": "npm-run-all build lint",
-        "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier' prettier -l 'src/**' 'config/**'",
-        "prettier": "prettier --write 'src/**' 'config/**'",
+        "prettier": "prettier --write 'src/**' 'config/**' 'test/**'",
+        "prettier:check": "prettier -l 'src/**' 'config/**' 'test/**'",
+        "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier'; npm run prettier:check",
         "test-build": "test/scripts/ctn-build.sh",
         "test-run": "test/scripts/ctn-run.sh",
         "test": "npm run test-build && npm run test-run"
