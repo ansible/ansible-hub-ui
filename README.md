@@ -101,17 +101,18 @@ List of all workflows:
 - `cypress`: Run Cypress integration tests; on PRs, pushes and cron
 - `deploy-cloud`: Deploy to c.r.c; when the relevant branch is updated
 - `dev-release`: Build and upload to github releases, update `dev` tag; when master is updated
+- `pr-checks`: Check for linter errors, obsolete package-lock.json and merge commits; on PRs only
 - `stable-release`: Build and upload to github releases; when a stable release is created
 - `update-manifest`: Update https://github.com/RedHatInsights/manifests ; when master is updated
 
 List by branches:
 
-- `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `stable-release`, `update-manifest`
+- `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `pr-checks`, `stable-release`, `update-manifest`
 - `master-stable`: `deploy-cloud`
 - `prod-beta`: `deploy-cloud`
 - `prod-stable`: `deploy-cloud`
-- `stable-4.2`: `backported-labels`, `stable-release`
-- `stable-4.3`: `backported-labels`, `cypress`, `stable-release`
+- `stable-4.2`: `backported-labels`, `pr-checks`, `stable-release`
+- `stable-4.3`: `backported-labels`, `cypress`, `pr-checks`, `stable-release`
 
 ## Patternfly
 
