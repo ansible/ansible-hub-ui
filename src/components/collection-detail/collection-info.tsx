@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { Link } from 'react-router-dom';
 
 import {
+  Banner,
   ClipboardCopy,
   Split,
   SplitItem,
@@ -55,6 +56,8 @@ export class CollectionInfo extends React.Component<IProps> {
       installCommand += `:${params.version}`;
     }
 
+    const cloudWarning = document.location.hostname.match('cloud.redhat.com');
+
     return (
       <div className='pf-c-content info-panel'>
         <h1>Info</h1>
@@ -81,24 +84,35 @@ export class CollectionInfo extends React.Component<IProps> {
                   <b>Note:</b> Installing collections with ansible-galaxy is
                   only supported in ansible 2.9+
                 </div>
-                <div>
-                  <a ref={this.downloadLinkRef} style={{ display: 'none' }}></a>
-                  <Button
-                    className='download-button'
-                    variant='link'
-                    icon={<DownloadIcon />}
-                    onClick={() =>
-                      this.download(
-                        this.context.selectedRepo,
-                        namespace,
-                        name,
-                        latest_version,
-                      )
-                    }
-                  >
-                    Download tarball
-                  </Button>
-                </div>
+                {cloudWarning ? (
+                  <Banner variant='warning'>
+                    Please log in to{' '}
+                    <a href='https://console.redhat.com/'>console.redhat.com</a>{' '}
+                    for downloads to work.
+                  </Banner>
+                ) : (
+                  <div>
+                    <a
+                      ref={this.downloadLinkRef}
+                      style={{ display: 'none' }}
+                    ></a>
+                    <Button
+                      className='download-button'
+                      variant='link'
+                      icon={<DownloadIcon />}
+                      onClick={() =>
+                        this.download(
+                          this.context.selectedRepo,
+                          namespace,
+                          name,
+                          latest_version,
+                        )
+                      }
+                    >
+                      Download tarball
+                    </Button>
+                  </div>
+                )}
               </SplitItem>
             </Split>
           </GridItem>
