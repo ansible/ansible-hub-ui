@@ -33,6 +33,20 @@ jobs:
         # run linters
         npm run lint
 
+  merge-commits:
+    runs-on: ubuntu-latest
+    steps:
+
+    # need to checkout out head, the merge commit won't have any merges in history
+    # also need more than 1 commit, assuming no PR will have more than 128
+    - name: "Checkout ansible-hub-ui HEAD"
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 128
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: "Ensure no merge commits"
+      run: |
         # fail on merge commits in the PR
         # since squash&merge doesn't create merge commits,
         # and the last non-squash merges were in Jul 2019,
