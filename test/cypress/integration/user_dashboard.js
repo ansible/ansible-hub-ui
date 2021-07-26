@@ -10,7 +10,7 @@ describe('Hub User Management Tests', () => {
     cy.deleteTestGroups();
 
     cy.visit(baseUrl);
-    cy.login(adminUsername, adminPassword);
+    cy.cookieLogin(adminUsername, adminPassword);
 
     cy.createUser(username, password, 'Test F', 'Test L', 'test@example.com');
     cy.contains('[aria-labelledby=test]', 'Test F');
@@ -20,13 +20,13 @@ describe('Hub User Management Tests', () => {
       { group: 'users', permissions: ['View user', 'Delete user'] },
     ]);
     cy.addUserToGroup('delete-user', username);
-    cy.logout();
+    cy.cookieLogout();
   });
 
   describe('basic check of user page', () => {
     beforeEach(() => {
       cy.visit(baseUrl);
-      cy.login(adminUsername, adminPassword);
+      cy.cookieLogin(adminUsername, adminPassword);
       cy.menuGo('User Access > Users');
     });
 
@@ -38,7 +38,7 @@ describe('Hub User Management Tests', () => {
   describe('Creation and management of users', () => {
     beforeEach(() => {
       cy.visit(baseUrl);
-      cy.login(adminUsername, adminPassword);
+      cy.cookieLogin(adminUsername, adminPassword);
       cy.menuGo('User Access > Users');
     });
 
@@ -68,16 +68,16 @@ describe('Hub User Management Tests', () => {
     }
 
     it("an ordinary user can't delete themselves", () => {
-      cy.login(username, password);
+      cy.cookieLogin(username, password);
       attemptToDelete(username);
     });
     it("an ordinary user can't delete the super-user", () => {
-      cy.login(username, password);
+      cy.cookieLogin(username, password);
       attemptToDelete(adminUsername);
     });
 
     it("the super-user can't delete themselves", () => {
-      cy.login(adminUsername, adminPassword);
+      cy.cookieLogin(adminUsername, adminPassword);
       attemptToDelete(adminUsername);
     });
   });

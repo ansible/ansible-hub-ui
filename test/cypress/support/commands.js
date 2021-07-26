@@ -55,6 +55,46 @@ Cypress.Commands.add('menuGo', {}, name => {
   return cy.contains('#page-sidebar a', last).click({ force: true });
 });
 
+Cypress.Commands.add('cookieLogout', {}, () => {
+  cy.clearCookie('sessionid');
+  cy.clearCookie('csrftoken');
+  user_tokens = {};
+});
+
+let user_tokens = {};
+
+Cypress.Commands.add('getUserTokens', {}, func => {
+  func(user_tokens);
+});
+
+Cypress.Commands.add('cookieLogin', {}, (username, password) => {
+  if (!user_tokens[username]) {
+    cy.login(username, password);
+    cy.getCookies().then(cookies => {
+      let sessionid;
+      let csrftoken;
+
+      cookies.forEach(cookie => {
+        if (cookie.name == 'sessionid') {
+          sessionid = cookie.value;
+        }
+        if (cookie.name == 'csrftoken') {
+          csrftoken = cookie.value;
+        }
+      });
+
+      user_tokens[username] = { sessionid, csrftoken };
+    });
+  } else {
+    let csrftoken = user_tokens[username].csrftoken;
+    let sessionid = user_tokens[username].sessionid;
+
+    cy.setCookie('csrftoken', csrftoken);
+    cy.setCookie('sessionid', sessionid);
+    cy.visit('/');
+  }
+});
+
 Cypress.Commands.add('logout', {}, () => {
   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
   cy.get('[aria-label="user-dropdown"] button').click();
