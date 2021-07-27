@@ -31,18 +31,23 @@ class App extends Component {
     // when items in the nav are clicked or the app is loaded for the first
     // time
     this.appNav = insights.chrome.on('APP_NAVIGATION', event => {
-      const to = event.domEvent?.href
-        ? event.domEvent.href.replace(this.props.basename, '')
-        : event.navId;
-      // We want to be able to navigate between routes when users click
-      // on the nav, so rewriting the entire route is acceptable, however,
-      // we also need to avoid rewriting the route when the page is
-      // loaded for the first time, so ignore this the first time it's
-      // called.
-      if (!this.firstLoad) {
-        this.props.history.push(to === '' ? '/' : to);
-      } else {
-        this.firstLoad = false;
+      if (typeof event?.domEvent === 'object') {
+        const to = event.domEvent.href
+          ? event.domEvent.href.replace(
+              this.props.basename.replace(/^\/beta\//, '/'),
+              '',
+            )
+          : event.navId;
+        // We want to be able to navigate between routes when users click
+        // on the nav, so rewriting the entire route is acceptable, however,
+        // we also need to avoid rewriting the route when the page is
+        // loaded for the first time, so ignore this the first time it's
+        // called.
+        if (!this.firstLoad) {
+          this.props.history.push(to === '' ? '/' : to);
+        } else {
+          this.firstLoad = false;
+        }
       }
     });
 
@@ -125,6 +130,7 @@ class App extends Component {
 
 App.propTypes = {
   history: PropTypes.object,
+  basename: PropTypes.string.isRequired,
 };
 
 /**
