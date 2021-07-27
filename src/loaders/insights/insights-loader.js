@@ -11,8 +11,6 @@ import { Paths } from 'src/paths';
 const DEFAULT_REPO = 'published';
 
 class App extends Component {
-  firstLoad = true;
-
   constructor(props) {
     super(props);
 
@@ -31,24 +29,23 @@ class App extends Component {
     // when items in the nav are clicked or the app is loaded for the first
     // time
     this.appNav = insights.chrome.on('APP_NAVIGATION', event => {
-      if (typeof event?.domEvent === 'object') {
-        const to = event.domEvent.href
-          ? event.domEvent.href.replace(
-              this.props.basename.replace(/^\/beta\//, '/'),
-              '',
-            )
-          : event.navId;
-        // We want to be able to navigate between routes when users click
-        // on the nav, so rewriting the entire route is acceptable, however,
-        // we also need to avoid rewriting the route when the page is
-        // loaded for the first time, so ignore this the first time it's
-        // called.
-        if (!this.firstLoad) {
-          this.props.history.push(to === '' ? '/' : to);
-        } else {
-          this.firstLoad = false;
-        }
+      console.debug({
+        domEvent: event?.domEvent,
+        basename: this.props.basename,
+        navId: event?.navId,
+      });
+
+      if (!event?.domEvent) {
+        return;
       }
+
+      const to = event.domEvent.href
+        ? event.domEvent.href.replace(
+            this.props.basename.replace(/^\/beta\//, '/'),
+            '',
+          )
+        : event.navId;
+      this.props.history.push(to === '' ? '/' : to);
     });
 
     insights.chrome.auth.getUser().then(user => this.setState({ user: user }));
