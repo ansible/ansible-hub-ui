@@ -29,23 +29,30 @@ class App extends Component {
     // when items in the nav are clicked or the app is loaded for the first
     // time
     this.appNav = insights.chrome.on('APP_NAVIGATION', event => {
-      console.debug({
-        domEvent: event?.domEvent,
-        basename: this.props.basename,
-        navId: event?.navId,
-      });
-
+      // might be undefined early in the load, or may not happen at all
       if (!event?.domEvent) {
         return;
       }
 
-      const to = event.domEvent.href
-        ? event.domEvent.href.replace(
-            this.props.basename.replace(/^\/beta\//, '/'),
-            '',
-          )
-        : event.navId;
-      this.props.history.push(to === '' ? '/' : to);
+      // basename is either `/ansible/automation-hub` or `/beta/ansible/automation-hub`, no trailing /
+      // menu events don't have the /beta, converting
+      const basename = this.props.basename.replace(/^\/beta\//, '/');
+
+      if (event.domEvent.href) {
+        // prod-beta
+        // domEvent: has the right href, always starts with /ansible/ansible-hub, no /beta prefix
+        // (navId: corresponds to the last url component, but not the same one, ansible-hub means /ansible/ansible-hub, partners means /ansible/ansible-hub/partners)
+
+        // go to the href, relative to our *actual* basename (basename has no trailing /, so a path will start with / unless empty
+        this.props.history.push(
+          event.domEvent.href.replace(basename, '') || '/',
+        );
+      } else {
+        // prod-stable
+        // (domEvent is a react event, no href (there is an absolute url in domEvent.target.href))
+        // navId: corresponds to the first url component after prefix, "" means /ansible/ansible-hub, partners means /ansible/ansible-hub/partners
+        this.props.history.push(`/${event.navId}`);
+      }
     });
 
     insights.chrome.auth.getUser().then(user => this.setState({ user: user }));
