@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './task.scss';
+import { Constants } from 'src/constants';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import {
   Toolbar,
@@ -228,7 +229,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     const { name, state, pulp_created, started_at, finished_at } = item;
     return (
       <tr aria-labelledby={name} key={index}>
-        <td>{name}</td>
+        <td>{Constants.TASK_NAMES[name] || name}</td>
         <td>
           <DateComponent date={pulp_created} />
         </td>
