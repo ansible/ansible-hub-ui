@@ -190,7 +190,7 @@ class CertificationDashboard extends React.Component<
                     },
                   }}
                   niceNames={{
-                    repository: 'status',
+                    repository: 'Status',
                   }}
                 />
               </div>
