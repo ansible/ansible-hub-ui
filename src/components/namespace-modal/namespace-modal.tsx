@@ -40,13 +40,13 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     const name: string = this.state.newNamespaceName;
 
     if (name == '') {
-      error['name'] = 'Please, provide the namespace name';
+      error['name'] = _`Please, provide the namespace name`;
     } else if (!/^[a-zA-Z0-9_]+$/.test(name)) {
-      error['name'] = 'Name can only contain [A-Za-z0-9_]';
+      error['name'] = _`Name can only contain [A-Za-z0-9_]`;
     } else if (name.length <= 2) {
-      error['name'] = 'Name must be longer than 2 characters';
+      error['name'] = _`Name must be longer than 2 characters`;
     } else if (name.startsWith('_')) {
-      error['name'] = "Name cannot begin with '_'";
+      error['name'] = _`Name cannot begin with '_'`;
     } else {
       delete error['name'];
     }
@@ -90,7 +90,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     return (
       <Modal
         variant='large'
-        title='Create a new namespace'
+        title={_`Create a new namespace`}
         isOpen={this.props.isOpen}
         onClose={this.toggleModal}
         actions={[
@@ -100,26 +100,24 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             onClick={this.handleSubmit}
             isDisabled={!newNamespaceName || !newNamespaceNameValid}
           >
-            Create
+            {_`Create`}
           </Button>,
           <Button key='cancel' variant='link' onClick={this.toggleModal}>
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
       >
         <Form>
           <FormGroup
-            label='Name'
+            label={_`Name`}
             isRequired
             fieldId='name'
-            helperText='Please, provide the namespace name'
+            helperText={_`Please, provide the namespace name`}
             helperTextInvalid={this.state.errorMessages['name']}
             validated={this.toError(this.state.newNamespaceNameValid)}
             labelIcon={
               <HelperText
-                content={
-                  'Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’.'
-                }
+                content={_`Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’.`}
               />
             }
           >
@@ -140,7 +138,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             </InputGroup>
           </FormGroup>
           <FormGroup
-            label='Namespace owners'
+            label={_`Namespace owners`}
             fieldId='groups'
             helperTextInvalid={this.state.errorMessages['groups']}
           >

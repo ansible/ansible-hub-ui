@@ -14,7 +14,7 @@ interface IProps {
 
 export class ExecutionEnvironmentHeader extends React.Component<IProps> {
   render() {
-    const tabs = ['Detail', 'Activity', 'Images'];
+    const tabs = [_`Detail`, _`Activity`, _`Images`];
     return (
       <BaseHeader
         title={this.props.container.name}
@@ -23,7 +23,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
             links={[
               {
                 url: Paths.executionEnvironments,
-                name: 'Container Registry',
+                name: _`Container Registry`,
               },
               { name: this.props.container.name },
             ]}

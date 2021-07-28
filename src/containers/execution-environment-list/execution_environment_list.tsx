@@ -101,13 +101,11 @@ class ExecutionEnvironmentList extends React.Component<
           alerts={alerts}
           closeAlert={i => this.closeAlert(i)}
         ></AlertList>
-        <BaseHeader title='Container Registry'></BaseHeader>
+        <BaseHeader title={_`Container Registry`}></BaseHeader>
         {noData && !loading ? (
           <EmptyStateNoData
-            title={'No container repositories yet'}
-            description={
-              'You currently have no container repositories. Add a container repository via the CLI to get started.'
-            }
+            title={_`No container repositories yet`}
+            description={_`You currently have no container repositories. Add a container repository via the CLI to get started.`}
             button={pushImagesButton}
           />
         ) : (
@@ -132,7 +130,7 @@ class ExecutionEnvironmentList extends React.Component<
                             filterConfig={[
                               {
                                 id: 'name',
-                                title: 'Container repository name',
+                                title: _`Container repository name`,
                               },
                             ]}
                           />
@@ -187,22 +185,22 @@ class ExecutionEnvironmentList extends React.Component<
     let sortTableOptions = {
       headers: [
         {
-          title: 'Container repository name',
+          title: _`Container repository name`,
           type: 'alpha',
           id: 'name',
         },
         {
-          title: 'Description',
+          title: _`Description`,
           type: 'alpha',
           id: 'description',
         },
         {
-          title: 'Created',
+          title: _`Created`,
           type: 'numeric',
           id: 'created',
         },
         {
-          title: 'Last modified',
+          title: _`Last modified`,
           type: 'alpha',
           id: 'updated',
         },
@@ -210,7 +208,7 @@ class ExecutionEnvironmentList extends React.Component<
     };
 
     return (
-      <table aria-label='User list' className='content-table pf-c-table'>
+      <table aria-label={_`User list`} className='content-table pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}

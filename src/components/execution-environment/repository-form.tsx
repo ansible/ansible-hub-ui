@@ -43,25 +43,25 @@ export class RepositoryForm extends React.Component<IProps, IState> {
         variant='large'
         onClose={onCancel}
         isOpen={true}
-        title={'Edit repository'}
+        title={_`Edit repository`}
         actions={[
           <Button
             key='save'
             variant='primary'
             onClick={() => onSave(description, selectedGroups)}
           >
-            Save
+            {_`Save`}
           </Button>,
           <Button key='cancel' variant='link' onClick={onCancel}>
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
       >
         <Form>
-          <FormGroup key='name' fieldId='name' label='Name'>
+          <FormGroup key='name' fieldId='name' label={_`Name`}>
             <TextInput id='name' value={name} isDisabled={true} type='text' />
           </FormGroup>
-          <FormGroup key='name' fieldId='name' label='Container namespace'>
+          <FormGroup key='name' fieldId='name' label={_`Container namespace`}>
             <TextInput
               id='name'
               value={namespace}
@@ -72,7 +72,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           <FormGroup
             key='description'
             fieldId='description'
-            label='Description'
+            label={_`Description`}
           >
             <TextArea
               id='description'
@@ -88,7 +88,11 @@ export class RepositoryForm extends React.Component<IProps, IState> {
               autoResize={true}
             />
           </FormGroup>
-          <FormGroup key='groups' fieldId='groups' label='Groups with access'>
+          <FormGroup
+            key='groups'
+            fieldId='groups'
+            label={_`Groups with access`}
+          >
             <div className='pf-c-form__helper-text'>
               Adding groups provides access to all repositories in the "
               {namespace}" container namespace.

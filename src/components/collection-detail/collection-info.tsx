@@ -57,7 +57,7 @@ export class CollectionInfo extends React.Component<IProps> {
 
     return (
       <div className='pf-c-content info-panel'>
-        <h1>Install</h1>
+        <h1>{_`Install`}</h1>
         <Grid hasGutter={true}>
           <GridItem>{latest_version.metadata.description}</GridItem>
           <GridItem>
@@ -68,13 +68,13 @@ export class CollectionInfo extends React.Component<IProps> {
 
           <GridItem>
             <Split hasGutter={true}>
-              <SplitItem className='install-title'>License</SplitItem>
+              <SplitItem className='install-title'>{_`License`}</SplitItem>
               <SplitItem isFilled>{latest_version.metadata.license}</SplitItem>
             </Split>
           </GridItem>
           <GridItem>
             <Split hasGutter={true}>
-              <SplitItem className='install-tile'>Install Version</SplitItem>
+              <SplitItem className='install-tile'>{_`Install Version`}</SplitItem>
               <SplitItem isFilled>
                 <FormSelect
                   onChange={val =>
@@ -83,7 +83,7 @@ export class CollectionInfo extends React.Component<IProps> {
                   value={
                     params.version ? params.version : latest_version.version
                   }
-                  aria-label='Select collection version'
+                  aria-label={_`Select collection version`}
                 >
                   {all_versions.map(v => (
                     <FormSelectOption
@@ -102,7 +102,7 @@ export class CollectionInfo extends React.Component<IProps> {
           </GridItem>
           <GridItem>
             <Split hasGutter={true}>
-              <SplitItem className='install-title'>Installation</SplitItem>
+              <SplitItem className='install-title'>{_`Installation`}</SplitItem>
               <SplitItem isFilled>
                 <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
                 <div>
@@ -124,7 +124,7 @@ export class CollectionInfo extends React.Component<IProps> {
                       )
                     }
                   >
-                    Download tarball
+                    {_`Download tarball`}
                   </Button>
                 </div>
               </SplitItem>
@@ -134,7 +134,7 @@ export class CollectionInfo extends React.Component<IProps> {
             <GridItem>
               <Split hasGutter={true}>
                 <SplitItem className='install-title'>
-                  Requires Ansible
+                  {_`Requires Ansible`}
                 </SplitItem>
                 <SplitItem isFilled>
                   {latest_version.requires_ansible}
@@ -165,7 +165,7 @@ export class CollectionInfo extends React.Component<IProps> {
                   params,
                 )}
               >
-                Go to documentation
+                {_`Go to documentation`}
               </Link>
             </GridItem>
           ) : null}

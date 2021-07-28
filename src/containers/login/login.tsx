@@ -47,10 +47,10 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
       <LoginForm
         showHelperText={!!this.state.errorMessage}
         helperText={helperText}
-        usernameLabel='Username'
+        usernameLabel={_`Username`}
         usernameValue={this.state.usernameValue}
         onChangeUsername={this.handleUsernameChange}
-        passwordLabel='Password'
+        passwordLabel={_`Password`}
         passwordValue={this.state.passwordValue}
         onChangePassword={this.handlePasswordChange}
         onLoginButtonClick={this.onLoginButtonClick}
@@ -61,7 +61,7 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
         style={{
           backgroundColor: 'var(--pf-global--BackgroundColor--dark-100)',
         }}
-        loginTitle='Log in to your account'
+        loginTitle={_`Log in to your account`}
         brandImgSrc={Logo}
       >
         {loginForm}
@@ -85,7 +85,7 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
           .catch(() =>
             this.setState({
               passwordValue: '',
-              errorMessage: 'Failed to retrieve user data.',
+              errorMessage: _`Failed to retrieve user data.`,
             }),
           );
       })
@@ -93,12 +93,12 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
         if (result.response.status.toString().startsWith('5')) {
           this.setState({
             passwordValue: '',
-            errorMessage: 'Server error. Please come back later.',
+            errorMessage: _`Server error. Please come back later.`,
           });
         } else {
           this.setState({
             passwordValue: '',
-            errorMessage: 'Invalid login credentials.',
+            errorMessage: _`Invalid login credentials.`,
           });
         }
       });

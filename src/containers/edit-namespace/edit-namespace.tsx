@@ -105,9 +105,9 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                 namespace: namespace.name,
               }),
             },
-            { name: 'Edit' },
+            { name: _`Edit` },
           ]}
-          tabs={['Edit details', 'Edit resources']}
+          tabs={[_`Edit details`, _`Edit resources`]}
           params={params}
           updateParams={p => this.updateParams(p)}
         ></PartnerHeader>
@@ -149,16 +149,18 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                     variant='primary'
                     onClick={() => this.saveNamespace()}
                   >
-                    Save
+                    {_`Save`}
                   </Button>
                   <Button variant='secondary' onClick={() => this.cancel()}>
-                    Cancel
+                    {_`Cancel`}
                   </Button>
 
                   {saving ? <Spinner></Spinner> : null}
                 </ActionGroup>
                 {this.state.unsavedData ? (
-                  <div style={{ color: 'red' }}>You have unsaved changes</div>
+                  <div
+                    style={{ color: 'red' }}
+                  >{_`You have unsaved changes`}</div>
                 ) : null}
               </Form>
             </section>
@@ -223,8 +225,8 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
             this.setState({
               alerts: this.state.alerts.concat({
                 variant: 'danger',
-                title: `API Error: ${error.response.status}`,
-                description: `You don't have permissions to update this namespace.`,
+                title: _`API Error: ${error.response.status}`,
+                description: _`You don't have permissions to update this namespace.`,
               }),
               saving: false,
             });

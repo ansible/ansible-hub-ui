@@ -62,10 +62,10 @@ export class CollectionHeader extends React.Component<IProps> {
     }
 
     const urlKeys = [
-      { key: 'documentation', name: 'Docs site' },
-      { key: 'homepage', name: 'Website' },
-      { key: 'issues', name: 'Issue tracker' },
-      { key: 'repository', name: 'Repo' },
+      { key: 'documentation', name: _`Docs site` },
+      { key: 'homepage', name: _`Website` },
+      { key: 'issues', name: _`Issue tracker` },
+      { key: 'repository', name: _`Repo` },
     ];
 
     const latestVersion = collection.latest_version.created_at;
@@ -85,14 +85,14 @@ export class CollectionHeader extends React.Component<IProps> {
         breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
         versionControl={
           <div className='install-version-column'>
-            <span>Version</span>
+            <span>{_`Version`}</span>
             <div className='install-version-dropdown'>
               <FormSelect
                 onChange={val =>
                   updateParams(ParamHelper.setParam(params, 'version', val))
                 }
                 value={collection.latest_version.version}
-                aria-label='Select collection version'
+                aria-label={_`Select collection version`}
               >
                 {all_versions.map(v => (
                   <FormSelectOption
@@ -116,7 +116,7 @@ export class CollectionHeader extends React.Component<IProps> {
           <Alert
             variant='danger'
             isInline
-            title='This collection has been deprecated.'
+            title={_`This collection has been deprecated.`}
           />
         )}
         <div className='tab-link-container'>
@@ -158,17 +158,17 @@ export class CollectionHeader extends React.Component<IProps> {
     const tabs = [
       {
         active: active === 'install',
-        title: 'Install',
+        title: _`Install`,
         link: formatPath(Paths.collectionByRepo, pathParams, reduced),
       },
       {
         active: active === 'documentation',
-        title: 'Documentation',
+        title: _`Documentation`,
         link: formatPath(Paths.collectionDocsIndexByRepo, pathParams, reduced),
       },
       {
         active: active === 'contents',
-        title: 'Contents',
+        title: _`Contents`,
         link: formatPath(
           Paths.collectionContentListByRepo,
           pathParams,
@@ -177,7 +177,7 @@ export class CollectionHeader extends React.Component<IProps> {
       },
       {
         active: active === 'import-log',
-        title: 'Import log',
+        title: _`Import log`,
         link: formatPath(Paths.collectionImportLogByRepo, pathParams, reduced),
       },
     ];

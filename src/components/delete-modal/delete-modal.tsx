@@ -30,11 +30,11 @@ export class DeleteModal extends React.Component<IProps> {
             variant='danger'
             isDisabled={isDisabled}
           >
-            Delete
+            {_`Delete`}
             {spinner && <Spinner size='sm'></Spinner>}
           </Button>,
           <Button key='cancel' onClick={cancelAction} variant='link'>
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
         isOpen={true}

@@ -55,7 +55,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       <Modal
         variant='small'
         title={
-          collection ? 'New version of ' + collection.name : 'New collection'
+          collection ? _`New version of ` + collection.name : _`New collection`
         }
         isOpen={isOpen}
         onClose={() => this.handleClose()}
@@ -66,14 +66,14 @@ export class ImportModal extends React.Component<IProps, IState> {
             onClick={() => this.saveFile()}
             isDisabled={!this.canUpload()}
           >
-            Upload
+            {_`Upload`}
           </Button>,
           <Button
             key='cancel'
             variant='secondary'
             onClick={() => this.handleClose()}
           >
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
       >
@@ -90,7 +90,7 @@ export class ImportModal extends React.Component<IProps, IState> {
               <div className='upload-box'>
                 <div className='upload-button'>{this.renderFileIcon()}</div>
                 <div className='upload-text'>
-                  {file != null ? file.name : 'Select file'}
+                  {file != null ? file.name : _`Select file`}
                   <div
                     className='loading-bar'
                     style={{
@@ -144,17 +144,17 @@ export class ImportModal extends React.Component<IProps, IState> {
 
     if (files.length > 1) {
       this.setState({
-        errors: 'Please select no more than one file.',
+        errors: _`Please select no more than one file.`,
       });
     } else if (!this.acceptedFileTypes.includes(newCollection.type)) {
       this.setState({
-        errors: 'Invalid file format.',
+        errors: _`Invalid file format.`,
         file: newCollection,
         uploadProgress: 0,
       });
     } else if (!this.COLLECTION_NAME_REGEX.test(newCollection.name)) {
       this.setState({
-        errors: `Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'`,
+        errors: _`Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'`,
         file: newCollection,
         uploadProgress: 0,
       });
@@ -163,13 +163,13 @@ export class ImportModal extends React.Component<IProps, IState> {
       collection.name !== newCollection.name.split('-')[1]
     ) {
       this.setState({
-        errors: `The collection you have selected doesn't appear to match ${collection.name}`,
+        errors: _`The collection you have selected doesn't appear to match ${collection.name}`,
         file: newCollection,
         uploadProgress: 0,
       });
     } else if (this.props.namespace != newCollection.name.split('-')[0]) {
       this.setState({
-        errors: `The collection you have selected does not match this namespace.`,
+        errors: _`The collection you have selected does not match this namespace.`,
         file: newCollection,
         uploadProgress: 0,
       });
@@ -217,12 +217,12 @@ export class ImportModal extends React.Component<IProps, IState> {
                 err.detail ||
                   err.title ||
                   err.code ||
-                  'API error. Status code: ' + err.status,
+                  _`API error. Status code: ` + err.status,
               );
             }
             errorMessage = messages.join(', ');
           } else {
-            errorMessage = 'API error. Status code: ' + errors.response.status;
+            errorMessage = _`API error. Status code: ` + errors.response.status;
           }
         }
 
@@ -231,7 +231,7 @@ export class ImportModal extends React.Component<IProps, IState> {
           errors: errorMessage,
         });
       })
-      .finally(_ => {
+      .finally(() => {
         this.cancelToken = null;
       });
   }
@@ -239,7 +239,7 @@ export class ImportModal extends React.Component<IProps, IState> {
   handleClose() {
     let msg = null;
     if (this.cancelToken && this.state.uploadStatus === Status.uploading) {
-      msg = 'Collection upload canceled';
+      msg = _`Collection upload canceled`;
       this.cancelToken.cancel(msg);
     }
 

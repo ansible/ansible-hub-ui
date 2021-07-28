@@ -28,7 +28,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
     if (repositories.length === 0) {
       return (
         <EmptyStateNoData
-          title={'No local repositories yet'}
+          title={_`No local repositories yet`}
           description={''}
         />
       );
@@ -41,32 +41,32 @@ export class LocalRepositoryTable extends React.Component<IProps> {
     let sortTableOptions = {
       headers: [
         {
-          title: 'Distribution name',
+          title: _`Distribution name`,
           type: 'none',
           id: 'distribution',
         },
         {
-          title: 'Repository name',
+          title: _`Repository name`,
           type: 'none',
           id: 'repository',
         },
         {
-          title: 'Content count',
+          title: _`Content count`,
           type: 'none',
           id: 'content',
         },
         {
-          title: 'Last updated',
+          title: _`Last updated`,
           type: 'none',
           id: 'updated_at',
         },
         {
-          title: 'Repo URL',
+          title: _`Repo URL`,
           type: 'none',
           id: 'ansible_cli_url',
         },
         {
-          title: 'CLI configuration',
+          title: _`CLI configuration`,
           type: 'none',
           id: 'cli_config',
         },
@@ -86,7 +86,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
 
     return (
       <table
-        aria-label='Collection versions'
+        aria-label={_`Collection versions`}
         className='content-table pf-c-table'
       >
         <SortTable
@@ -145,7 +145,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
                   key='2'
                   component={
                     <Link to={formatPath(Paths.token, {})} target='_blank'>
-                      Get token
+                      {_`Get token`}
                     </Link>
                   }
                 />,

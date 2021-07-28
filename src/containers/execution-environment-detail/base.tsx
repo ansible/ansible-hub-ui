@@ -103,7 +103,7 @@ export function withContainerRepo(WrappedComponent) {
               ) ||
               permissions.includes('container.change_containernamespace') ? (
                 <Button onClick={() => this.setState({ editing: true })}>
-                  Edit
+                  {_`Edit`}
                 </Button>
               ) : null
             }
@@ -160,7 +160,7 @@ export function withContainerRepo(WrappedComponent) {
                         editing: false,
                         alerts: this.state.alerts.concat({
                           variant: 'danger',
-                          title: "Error: changes weren't saved",
+                          title: _`Error: changes weren't saved`,
                         }),
                       }),
                     );

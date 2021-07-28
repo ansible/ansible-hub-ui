@@ -111,7 +111,7 @@ class CollectionDocs extends React.Component<
         }),
         name: collection.name,
       },
-      { name: 'Documentation' },
+      { name: _`Documentation` },
     ];
 
     // scroll to top of page
@@ -258,9 +258,9 @@ class CollectionDocs extends React.Component<
   private renderNotFound(collectionName) {
     return (
       <EmptyStateCustom
-        title={'Not found'}
+        title={_`Not found`}
         description={
-          'The file is not available for this version of ' + collectionName
+          _`The file is not available for this version of ` + collectionName
         }
         icon={ExclamationCircleIcon}
       />

@@ -46,7 +46,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
       <Select
         menuAppendTo={this.props.menuAppendTo}
         variant={SelectVariant.typeaheadMulti}
-        typeAheadAriaLabel='Select permissions'
+        typeAheadAriaLabel={_`Select permissions`}
         onToggle={this.onToggle}
         onSelect={!!this.props.onSelect ? this.props.onSelect : this.onSelect}
         onClear={
@@ -62,7 +62,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
               <SelectOption
                 isDisabled={true}
                 key={'not_found'}
-                value={'Not found'}
+                value={_`Not found`}
               />,
             ]
           : this.props.availablePermissions.map((option, index) => (
@@ -74,9 +74,9 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
 
   private placeholderText() {
     if (!this.props.isDisabled && !this.props.isViewOnly) {
-      return 'Select permissions';
+      return _`Select permissions`;
     }
-    return this.props.selectedPermissions.length === 0 ? 'No permission' : '';
+    return this.props.selectedPermissions.length === 0 ? _`No permission` : '';
   }
 
   private clearSelection = () => {

@@ -101,7 +101,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       errorMessages,
     } = this.state;
 
-    const tabs = ['Local', 'Remote'];
+    const tabs = [_`Local`, _`Remote`];
     return (
       <React.Fragment>
         {remoteToEdit && showRemoteFormModal && (
@@ -136,8 +136,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
               } catch {
                 this.setState({
                   errorMessages: {
-                    __nofield:
-                      "Can't update remote without a distribution attached to it.",
+                    __nofield: _`Can't update remote without a distribution attached to it.`,
                   },
                 });
               }
@@ -149,7 +148,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
             }
           />
         )}
-        <BaseHeader title='Repo Management'>
+        <BaseHeader title={_`Repo Management`}>
           {DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
           !loading ? (
             <div className='header-bottom'>
@@ -197,8 +196,8 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
     if (!!params.tab && params.tab.toLowerCase() === 'remote') {
       return content.length === 0 ? (
         <EmptyStateNoData
-          title={'No remote repositories yet'}
-          description={'Remote repositories will appear once added'}
+          title={_`No remote repositories yet`}
+          description={_`Remote repositories will appear once added`}
         />
       ) : (
         <Main className='repository-list'>

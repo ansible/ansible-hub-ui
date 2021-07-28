@@ -121,7 +121,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               isSaving || (tagsToAdd.length <= 0 && tagsToRemove.length <= 0)
             }
           >
-            Save
+            {_`Save`}
             {isSaving && <Spinner size='sm'></Spinner>}
           </Button>,
           <Button
@@ -130,12 +130,12 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             onClick={() => closeModal()}
             variant='link'
           >
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
         isOpen={isOpen}
         onClose={() => closeModal()}
-        title='Manage tags'
+        title={_`Manage tags`}
         variant='small'
       >
         {/*
@@ -147,7 +147,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             validated={!!tagInFormError ? 'error' : 'default'}
             helperTextInvalid={tagInFormError}
             fieldId='add-new-tag'
-            label='Add new tag'
+            label={_`Add new tag`}
           >
             <InputGroup>
               <TextInput
@@ -158,6 +158,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                 onChange={val => this.setState({ tagInForm: val })}
                 isDisabled={!!tagToVerify || verifyingTag || isSaving}
                 onKeyUp={e => {
+                  // l10n: don't translate
                   if (e.key === 'Enter') {
                     this.verifyAndAddTag();
                   }
@@ -177,7 +178,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             <Alert
               variant='warning'
               isInline
-              title='This tag already exists on another image. Do you want to move it to this image?'
+              title={_`This tag already exists on another image. Do you want to move it to this image?`}
               actionLinks={
                 <>
                   <AlertActionLink
@@ -187,19 +188,19 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                       )
                     }
                   >
-                    Yes
+                    {_`Yes`}
                   </AlertActionLink>
                   <AlertActionLink
                     onClick={() => this.setState({ tagToVerify: '' })}
                   >
-                    No
+                    {_`No`}
                   </AlertActionLink>
                 </>
               }
             />
           )}
 
-          <FormGroup fieldId='remove-tag' label='Current tags'>
+          <FormGroup fieldId='remove-tag' label={_`Current tags`}>
             <LabelGroup id='remove-tag' defaultIsOpen={true}>
               {this.getCurrentTags().map(tag => (
                 <Label
@@ -219,7 +220,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               variant='info'
               title={<>Waiting for {pendingTasks} task(s) to finish.</>}
             >
-              It's safe to close this window. These tasks will finish in the
+              {_`It's safe to close this window. These tasks will finish in the`}
               background.
             </Alert>
           )}
@@ -245,7 +246,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
 
     this.props.onAlert({
       variant: 'danger',
-      title: `Failed to ${operation} tag "${tag}".`,
+      title: _`Failed to ${operation} tag "${tag}".`,
       description: msg,
     });
   };
@@ -334,8 +335,8 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               const tag = taskUrls.find(e => e.task === r.data.pulp_id);
               this.props.onAlert({
                 variant: 'danger',
-                title: `Task to change tag "${tag.tag}" could not be completed.`,
-                description: `Reason: task ${r.data.state}`,
+                title: _`Task to change tag "${tag.tag}" could not be completed.`,
+                description: _`Reason: task ${r.data.state}`,
               });
             }
           }
@@ -368,15 +369,14 @@ export class TagManifestModal extends React.Component<IProps, IState> {
       this.setState({
         verifyingTag: false,
         tagInFormError:
-          'A tag may contain lowercase and uppercase ASCII ' +
+          _`A tag may contain lowercase and uppercase ASCII ` +
           'alphabetic characters, digits, underscores, periods, and dashes. A tag must not ' +
           'start with a period, underscore, or a dash.',
       });
     } else if (this.getCurrentTags().includes(tag)) {
       this.setState({
         verifyingTag: false,
-        tagInFormError:
-          'This tag is already selected for this image. You cannot add it twice.',
+        tagInFormError: _`This tag is already selected for this image. You cannot add it twice.`,
       });
     } else {
       this.setState({ tagInFormError: undefined }, () => {

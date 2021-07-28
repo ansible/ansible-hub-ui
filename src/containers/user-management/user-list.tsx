@@ -133,7 +133,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
             })
           }
         ></DeleteUserModal>
-        <BaseHeader title='Users'></BaseHeader>
+        <BaseHeader title={_`Users`}></BaseHeader>
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : (
@@ -152,19 +152,19 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                           filterConfig={[
                             {
                               id: 'username__contains',
-                              title: 'Username',
+                              title: _`Username`,
                             },
                             {
                               id: 'first_name__contains',
-                              title: 'First name',
+                              title: _`First name`,
                             },
                             {
                               id: 'last_name__contains',
-                              title: 'Last name',
+                              title: _`Last name`,
                             },
                             {
                               id: 'email__contains',
-                              title: 'Email',
+                              title: _`Email`,
                             },
                           ]}
                         />
@@ -174,7 +174,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                       <ToolbarGroup>
                         <ToolbarItem>
                           <Link to={Paths.createUser}>
-                            <Button>Create</Button>
+                            <Button>{_`Create`}</Button>
                           </Link>
                         </ToolbarItem>
                       </ToolbarGroup>
@@ -234,11 +234,11 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <EmptyStateFilter />
       ) : (
         <EmptyStateNoData
-          title={'No users yet'}
-          description={'Users will appear once created'}
+          title={_`No users yet`}
+          description={_`Users will appear once created`}
           button={
             <Link to={Paths.createUser}>
-              <Button variant={'primary'}>Create</Button>
+              <Button variant={'primary'}>{_`Create`}</Button>
             </Link>
           }
         />
@@ -248,33 +248,33 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     let sortTableOptions = {
       headers: [
         {
-          title: 'Username',
+          title: _`Username`,
           type: 'alpha',
           id: 'username__contains',
         },
         {
-          title: 'First name',
+          title: _`First name`,
           type: 'alpha',
           id: 'first_name__contains',
           className: 'pf-m-wrap',
         },
         {
-          title: 'Last name',
+          title: _`Last name`,
           type: 'alpha',
           id: 'last_name__contains',
         },
         {
-          title: 'Email',
+          title: _`Email`,
           type: 'alpha',
           id: 'email__contains',
         },
         {
           id: 'groups',
-          title: 'Groups',
+          title: _`Groups`,
           type: 'none',
         },
         {
-          title: 'Created',
+          title: _`Created`,
           type: 'numeric',
           id: 'date_joined',
         },
@@ -287,7 +287,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     };
 
     return (
-      <table aria-label='User list' className='content-table pf-c-table'>
+      <table aria-label={_`User list`} className='content-table pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -313,7 +313,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                 userID: user.id,
               })}
             >
-              Edit
+              {_`Edit`}
             </Link>
           }
         />,
@@ -325,7 +325,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     ) {
       dropdownItems.push(
         <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
-          Delete
+          {_`Delete`}
         </DropdownItem>,
       );
     }
@@ -339,9 +339,11 @@ class UserList extends React.Component<RouteComponentProps, IState> {
           {user.is_superuser && (
             <>
               {' '}
-              <Tooltip content='Super users have all system permissions regardless of what groups they are in.'>
+              <Tooltip
+                content={_`Super users have all system permissions regardless of what groups they are in.`}
+              >
                 <Label icon={<UserPlusIcon />} color='orange'>
-                  Super user
+                  {_`Super user`}
                 </Label>
               </Tooltip>
             </>

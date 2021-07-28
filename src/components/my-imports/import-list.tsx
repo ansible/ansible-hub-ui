@@ -72,7 +72,7 @@ export class ImportList extends React.Component<IProps, IState> {
             onKeyPress={e => this.handleEnter(e)}
             type='search'
             aria-label='search text input'
-            placeholder='Search imports'
+            placeholder={_`Search imports`}
           />
 
           <Button
@@ -114,8 +114,8 @@ export class ImportList extends React.Component<IProps, IState> {
     if (importList.length === 0) {
       return (
         <EmptyStateNoData
-          title={'No imports'}
-          description={'There have not been any imports on this namespace.'}
+          title={_`No imports`}
+          description={_`There have not been any imports on this namespace.`}
         />
       );
     }
@@ -147,6 +147,7 @@ export class ImportList extends React.Component<IProps, IState> {
   }
 
   private handleEnter(e) {
+    // l10n: don't translate
     if (e.key === 'Enter') {
       this.submitSearch();
     }
@@ -190,7 +191,7 @@ export class ImportList extends React.Component<IProps, IState> {
   private renderNamespacePicker(namespaces) {
     return (
       <div className='namespace-selector-wrapper'>
-        <div className='label'>Namespace</div>
+        <div className='label'>{_`Namespace`}</div>
         <div className='selector'>
           <FormSelect
             onChange={val =>
@@ -199,7 +200,7 @@ export class ImportList extends React.Component<IProps, IState> {
               )
             }
             value={this.props.params.namespace}
-            aria-label='Select namespace'
+            aria-label={_`Select namespace`}
           >
             {namespaces.map(ns => (
               <FormSelectOption key={ns.name} label={ns.name} value={ns.name} />

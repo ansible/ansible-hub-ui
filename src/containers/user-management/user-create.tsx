@@ -40,10 +40,10 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
     const notAuthorised =
       !this.context.user || !this.context.user.model_permissions.add_user;
     const breadcrumbs = [
-      { url: Paths.userList, name: 'Users' },
-      { name: 'Create new user' },
+      { url: Paths.userList, name: _`Users` },
+      { name: _`Create new user` },
     ];
-    const title = 'Create new user';
+    const title = _`Create new user`;
 
     return notAuthorised ? (
       <React.Fragment>

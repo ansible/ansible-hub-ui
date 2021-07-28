@@ -59,10 +59,22 @@ export enum Paths {
   taskList = '/tasks',
 }
 
+// FIXME: temporary global for l10n ; do localStorage.test_l10n = true in the console
+window._ = (strings, ...args) => {
+  strings = Array.from(strings);
+  const last = strings.pop();
+  const mark =
+    window.localStorage.test_l10n === 'true' ? s => '»' + s + '«' : s => s;
+
+  const parts = [...strings.map((s, i) => mark(s) + args[i]), mark(last)];
+
+  return parts.join('');
+};
+
 export const namespaceBreadcrumb = {
   name: {
-    namespaces: 'Namespaces',
-    partners: 'Partners',
+    namespaces: _`Namespaces`,
+    partners: _`Partners`,
   }[NAMESPACE_TERM],
   url: Paths[NAMESPACE_TERM],
 };

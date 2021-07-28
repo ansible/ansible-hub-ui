@@ -57,7 +57,7 @@ class CollectionContent extends React.Component<
         }),
         name: collection.name,
       },
-      { name: 'Content' },
+      { name: _`Content` },
     ];
 
     return (

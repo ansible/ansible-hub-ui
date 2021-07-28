@@ -36,7 +36,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const { user, errorMessages, unauthorized } = this.state;
-    const title = 'Edit user';
+    const title = _`Edit user`;
 
     if (unauthorized) {
       return (
@@ -52,12 +52,12 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
     }
 
     const breadcrumbs = [
-      { url: Paths.userList, name: 'Users' },
+      { url: Paths.userList, name: _`Users` },
       {
         url: formatPath(Paths.userDetail, { userID: user.id }),
         name: user.username,
       },
-      { name: 'Edit' },
+      { name: _`Edit` },
     ];
 
     return (

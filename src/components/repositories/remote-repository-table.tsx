@@ -62,27 +62,27 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
     let sortTableOptions = {
       headers: [
         {
-          title: 'Remote name',
+          title: _`Remote name`,
           type: 'none',
           id: 'remote',
         },
         {
-          title: 'Repositories',
+          title: _`Repositories`,
           type: 'none',
           id: 'repository',
         },
         {
-          title: 'Last updated',
+          title: _`Last updated`,
           type: 'none',
           id: 'updated_at',
         },
         {
-          title: 'Last synced',
+          title: _`Last synced`,
           type: 'none',
           id: 'last_sync_task.finished_at',
         },
         {
-          title: 'Sync status',
+          title: _`Sync status`,
           type: 'none',
           id: 'last_sync_task.error',
         },
@@ -96,7 +96,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
     return (
       <table
-        aria-label='Collection versions'
+        aria-label={_`Collection versions`}
         className='content-table pf-c-table'
       >
         <SortTable
@@ -132,7 +132,9 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         <td>{this.renderStatus(remote)}</td>
         <td>
           {remote.repositories.length === 0 ? (
-            <Tooltip content='There are no repos associated with this remote.'>
+            <Tooltip
+              content={_`There are no repos associated with this remote.`}
+            >
               <Button variant='plain'>
                 <ExclamationCircleIcon />
               </Button>
@@ -149,7 +151,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
                         key='edit'
                         onClick={() => this.props.editRemote(remote)}
                       >
-                        Edit
+                        {_`Edit`}
                       </DropdownItem>,
                     ]}
                   />
@@ -188,7 +190,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
     }
     const configButton = (
       <Button onClick={() => this.props.editRemote(remote)} variant='secondary'>
-        Configure
+        {_`Configure`}
       </Button>
     );
 
@@ -207,7 +209,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
           }
           variant='secondary'
         >
-          Sync
+          {_`Sync`}
         </Button>
       </>
     );

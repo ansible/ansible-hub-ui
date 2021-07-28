@@ -40,7 +40,7 @@ export class GroupModal extends React.Component<IProps, IState> {
         }}
         isOpen={true}
         title={''}
-        header={<h2>Create a group</h2>}
+        header={<h2>{_`Create a group`}</h2>}
         aria-label='group-modal'
         actions={[
           <Button
@@ -52,10 +52,10 @@ export class GroupModal extends React.Component<IProps, IState> {
             variant='primary'
             onClick={() => onSave(this.state.name)}
           >
-            {!this.props.group ? 'Create' : 'Save'}
+            {!this.props.group ? _`Create` : _`Save`}
           </Button>,
           <Button key='cancel' variant='link' onClick={() => onCancel()}>
-            Cancel
+            {_`Cancel`}
           </Button>,
         ]}
       >
@@ -69,7 +69,7 @@ export class GroupModal extends React.Component<IProps, IState> {
             isRequired={true}
             key='name'
             fieldId='name'
-            label='Name'
+            label={_`Name`}
             helperTextInvalid={
               !this.props.errorMessage ? null : this.props.errorMessage.name
             }

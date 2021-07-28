@@ -91,12 +91,12 @@ class ExecutionEnvironmentManifest extends React.Component<
     return (
       <>
         <BaseHeader
-          title={'Image layers'}
+          title={_`Image layers`}
           breadcrumbs={
             <Breadcrumbs
               links={[
                 {
-                  name: 'Container Registry',
+                  name: _`Container Registry`,
                   url: Paths.executionEnvironments,
                 },
                 {
@@ -132,11 +132,11 @@ class ExecutionEnvironmentManifest extends React.Component<
             <FlexItem className='layers-max-width'>
               <section className='body'>
                 <Title headingLevel='h2' size='lg'>
-                  Image layers
+                  {_`Image layers`}
                 </Title>
 
                 <DataList
-                  aria-label='Image layers'
+                  aria-label={_`Image layers`}
                   onSelectDataListItem={id =>
                     this.setState({ selectedLayer: id })
                   }
@@ -174,7 +174,7 @@ class ExecutionEnvironmentManifest extends React.Component<
               <FlexItem>
                 <section className='body'>
                   <Title headingLevel='h2' size='lg'>
-                    Command
+                    {_`Command`}
                   </Title>
 
                   <code>{command}</code>
@@ -184,7 +184,7 @@ class ExecutionEnvironmentManifest extends React.Component<
               <FlexItem>
                 <section className='body'>
                   <Title headingLevel='h2' size='lg'>
-                    Environment
+                    {_`Environment`}
                   </Title>
 
                   {environment.map((line, index) => (

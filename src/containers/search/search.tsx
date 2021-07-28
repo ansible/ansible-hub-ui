@@ -92,7 +92,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       <div className='search-page'>
         <BaseHeader
           className='header'
-          title='Collections'
+          title={_`Collections`}
           contextSelector={
             <RepoSelector
               selectedRepo={this.context.selectedRepo}
@@ -144,8 +144,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
         </BaseHeader>
         {noData ? (
           <EmptyStateNoData
-            title={'No collections yet'}
-            description={'Collections will appear once uploaded'}
+            title={_`No collections yet`}
+            description={_`Collections will appear once uploaded`}
           />
         ) : (
           <React.Fragment>
@@ -219,7 +219,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       <Switch
         id={namespace + '.' + name}
         className='sync-toggle'
-        label='Sync'
+        label={_`Sync`}
         isChecked={this.isCollectionSynced(name, namespace)}
         onChange={() => this.toggleCollectionSync(name, namespace)}
       />
@@ -262,7 +262,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     return (
       <div className='list-container'>
         <div className='list'>
-          <DataList className='data-list' aria-label={'List of Collections'}>
+          <DataList className='data-list' aria-label={_`List of Collections`}>
             {collections.map(c => (
               <CollectionListItem
                 showNamespace={true}
