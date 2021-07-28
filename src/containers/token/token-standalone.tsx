@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { ClipboardCopy, Button } from '@patternfly/react-core';
+import { Button, ClipboardCopy } from '@patternfly/react-core';
 
 import { BaseHeader, Main } from 'src/components';
 import { ActiveUserAPI } from 'src/api';

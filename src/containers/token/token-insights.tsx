@@ -1,11 +1,16 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { ClipboardCopy, Button } from '@patternfly/react-core';
+import {
+  ClipboardCopy,
+  ClipboardCopyVariant,
+  Button,
+} from '@patternfly/react-core';
 
 import { Paths } from 'src/paths';
 import { BaseHeader, Main } from 'src/components';
 import { getRepoUrl } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   tokenData: {
@@ -37,7 +42,9 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
+    const { user } = this.context;
     const { tokenData } = this.state;
+    const renewTokenCmd = `curl https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token -d grant_type=refresh_token -d client_id="${user.username}" -d refresh_token=\"${tokenData?.refresh_token ?? '{{ user_token }}'}\" --fail --silent --show-error --output /dev/null`;
 
     return (
       <React.Fragment>
@@ -82,6 +89,22 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             ) : (
               <Button onClick={() => this.loadToken()}>Load token</Button>
             )}
+            <div
+              className='pf-c-content'
+              style={{ paddingTop: 'var(--pf-global--spacer--md)' }}
+            >
+              <span>
+                The token will expire after 30 days of inactivity. Run the
+                command below periodically to prevent your token from expiring.
+              </span>
+              <ClipboardCopy
+                isCode
+                isReadOnly
+                variant={ClipboardCopyVariant.expansion}
+              >
+                {renewTokenCmd}
+              </ClipboardCopy>
+            </div>
             <h2>Manage tokens</h2>
             To revoke a token or see all of your tokens, visit the{' '}
             <a
@@ -130,3 +153,4 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 }
 
 export default withRouter(TokenPage);
+TokenPage.contextType = AppContext;
