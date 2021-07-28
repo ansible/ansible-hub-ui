@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './certification-dashboard.scss';
+
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   BaseHeader,
@@ -142,7 +143,7 @@ class CertificationDashboard extends React.Component<
                           },
                           {
                             id: 'repository',
-                            title: 'Repository',
+                            title: 'Status',
                             inputType: 'select',
                             options: [
                               {
@@ -181,6 +182,16 @@ class CertificationDashboard extends React.Component<
                   }
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
+                  niceValues={{
+                    repository: {
+                      [Constants.PUBLISHED]: 'Approved',
+                      [Constants.NEEDSREVIEW]: 'Needs Review',
+                      [Constants.NOTCERTIFIED]: 'Rejected',
+                    },
+                  }}
+                  niceNames={{
+                    repository: 'Status',
+                  }}
                 />
               </div>
               {loading ? (

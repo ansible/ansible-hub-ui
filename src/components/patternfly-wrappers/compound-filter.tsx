@@ -135,7 +135,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
           <StatefulDropdown
             toggleType='dropdown'
             defaultText={
-              this.state.inputText ||
+              this.selectTitleById(this.state.inputText, selectedFilter) ||
               selectedFilter.placeholder ||
               selectedFilter.title
             }
@@ -219,4 +219,10 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     }
     this.submitMultiple(newParams);
   };
+
+  private selectTitleById(inputText: string, selectedFilter: FilterOption) {
+    if (!inputText || !selectedFilter?.options) return inputText;
+
+    return selectedFilter.options.find(opt => opt.id === inputText).title;
+  }
 }
