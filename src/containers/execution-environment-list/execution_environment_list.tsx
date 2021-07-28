@@ -91,10 +91,6 @@ class ExecutionEnvironmentList extends React.Component<
       </Button>
     );
 
-    if (!params['sort']) {
-      params['sort'] = 'name';
-    }
-
     return (
       <React.Fragment>
         <AlertList
