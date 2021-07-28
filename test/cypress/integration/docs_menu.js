@@ -2,11 +2,6 @@ describe('Token Management Tests', () => {
   const adminUsername = Cypress.env('username');
   const adminPassword = Cypress.env('password');
 
-  before(() => {
-    cy.deleteTestUsers();
-    cy.galaxykit('user create', adminUsername, adminPassword);
-  });
-
   beforeEach(() => {
     cy.visit('/');
     cy.login(adminUsername, adminPassword);
