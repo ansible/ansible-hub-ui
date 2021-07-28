@@ -138,10 +138,6 @@ jobs:
 
         npm run cypress:chrome
 
-    - name: "Fail if npm install had to change package-lock.json"
-      working-directory: 'ansible-hub-ui'
-      run: 'git diff --exit-code package-lock.json'
-
     - uses: actions/upload-artifact@v2
       if: failure()
       with:

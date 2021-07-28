@@ -1,0 +1,55 @@
+name: "PR checks"
+
+on:
+  pull_request:
+    branches: [ 'master', 'stable-*' ]
+
+jobs:
+  pr-checks:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v2
+
+    - name: "Install node 14"
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+        cache: 'npm'
+
+    - name: "Checks"
+      run: |
+        # fail if npm install had to change package-lock.json
+        npm install
+        git diff --exit-code package-lock.json
+
+        # same in test/
+        pushd test/
+        npm install
+        git diff --exit-code package-lock.json
+        popd
+
+        # run linters
+        npm run lint
+
+  merge-commits:
+    runs-on: ubuntu-latest
+    steps:
+
+    # need to checkout out head, the merge commit won't have any merges in history
+    # also need more than 1 commit, assuming no PR will have more than 128
+    - name: "Checkout ansible-hub-ui HEAD"
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 128
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: "Ensure no merge commits"
+      run: |
+        # fail on merge commits in the PR
+        # since squash&merge doesn't create merge commits,
+        # and the last non-squash merges were in Jul 2019,
+        # we can just look for any merge commits since 2020
+        count=`git log --min-parents=2 --since 2020-01-01 | tee /dev/stderr | wc -l`
+        [ "$count" = 0 ]
