@@ -16,3 +16,6 @@ declare var UI_BASE_PATH;
 declare var DEPLOYMENT_MODE;
 declare var NAMESPACE_TERM;
 declare var APPLICATION_NAME;
+
+// HACK: ensure l10n marked strings can be backported without breaking
+declare var _;

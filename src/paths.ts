@@ -58,6 +58,9 @@ export enum Paths {
   repositories = '/repositories',
 }
 
+// HACK: ensure l10n marked strings can be backported without breaking
+window._ = String.raw;
+
 export const namespaceBreadcrumb = {
   name: {
     namespaces: 'Namespaces',
