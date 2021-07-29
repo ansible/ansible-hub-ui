@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { Link } from 'react-router-dom';
 
 import {
+  Banner,
   ClipboardCopy,
   Split,
   SplitItem,
@@ -54,6 +55,9 @@ export class CollectionInfo extends React.Component<IProps> {
     if (params.version) {
       installCommand += `:${params.version}`;
     }
+
+    // FIXME: remove once cloud.redhat.com is not serving the UI
+    const cloudWarning = document.location.hostname.match('cloud.redhat.com');
 
     return (
       <div className='pf-c-content info-panel'>
@@ -109,6 +113,13 @@ export class CollectionInfo extends React.Component<IProps> {
                   <b>Note:</b> Installing collections with ansible-galaxy is
                   only supported in ansible 2.9+
                 </div>
+                {cloudWarning && (
+                  <Banner variant='warning'>
+                    Please log in to{' '}
+                    <a href='https://console.redhat.com/'>console.redhat.com</a>{' '}
+                    for downloads to work.
+                  </Banner>
+                )}
                 <div>
                   <a ref={this.downloadLinkRef} style={{ display: 'none' }}></a>
                   <Button
