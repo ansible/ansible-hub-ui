@@ -66,7 +66,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
     this.setState({ isWaitingForResponse: true }, () =>
       UserAPI.delete(this.props.user.id)
         .then(() => this.waitForDeleteConfirm(this.props.user.id))
-        .catch(err => {
+        .catch((err) => {
           this.props.addAlert(
             _`Error deleting user.`,
             'danger',
@@ -82,12 +82,12 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
   // modal
   private waitForDeleteConfirm(user) {
     UserAPI.get(user)
-      .then(async result => {
+      .then(async (result) => {
         // wait half a second
-        await new Promise(r => setTimeout(r, 500));
+        await new Promise((r) => setTimeout(r, 500));
         this.waitForDeleteConfirm(user);
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.response.status === 404) {
           this.props.addAlert(_`Successfully deleted user.`, 'success');
           this.props.closeModal(true);

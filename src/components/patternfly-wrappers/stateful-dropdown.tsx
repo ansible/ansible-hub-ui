@@ -50,18 +50,12 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
 
   render() {
     const { isOpen } = this.state;
-    const {
-      items,
-      toggleType,
-      defaultText,
-      position,
-      isPlain,
-      ariaLabel,
-    } = this.props;
+    const { items, toggleType, defaultText, position, isPlain, ariaLabel } =
+      this.props;
 
     return (
       <Dropdown
-        onSelect={e => this.onSelect(e)}
+        onSelect={(e) => this.onSelect(e)}
         toggle={this.renderToggle(toggleType, defaultText)}
         isOpen={isOpen}
         isPlain={isPlain}
@@ -77,7 +71,7 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
     switch (toggleType) {
       case 'dropdown':
         return (
-          <DropdownToggle onToggle={e => this.onToggle(e)}>
+          <DropdownToggle onToggle={(e) => this.onToggle(e)}>
             {this.state.selected
               ? this.state.selected
               : defaultText || _`Dropdown`}
@@ -87,7 +81,7 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
         return (
           <DropdownToggle
             toggleIndicator={null}
-            onToggle={e => this.onToggle(e)}
+            onToggle={(e) => this.onToggle(e)}
           >
             {this.state.selected
               ? this.state.selected
@@ -95,7 +89,7 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
           </DropdownToggle>
         );
       case 'kebab':
-        return <KebabToggle onToggle={e => this.onToggle(e)} />;
+        return <KebabToggle onToggle={(e) => this.onToggle(e)} />;
     }
   }
 

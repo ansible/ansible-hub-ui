@@ -68,8 +68,8 @@ export class ImportList extends React.Component<IProps, IState> {
         <InputGroup className='search-box'>
           <TextInput
             value={kwField}
-            onChange={k => this.setState({ kwField: k })}
-            onKeyPress={e => this.handleEnter(e)}
+            onChange={(k) => this.setState({ kwField: k })}
+            onKeyPress={(e) => this.handleEnter(e)}
             type='search'
             aria-label='search text input'
             placeholder={_`Search imports`}
@@ -122,7 +122,7 @@ export class ImportList extends React.Component<IProps, IState> {
 
     return (
       <div>
-        {importList.map(item => {
+        {importList.map((item) => {
           return (
             <div
               onClick={() => selectImport(item)}
@@ -194,7 +194,7 @@ export class ImportList extends React.Component<IProps, IState> {
         <div className='label'>{_`Namespace`}</div>
         <div className='selector'>
           <FormSelect
-            onChange={val =>
+            onChange={(val) =>
               this.props.updateParams(
                 ParamHelper.setParam(this.props.params, 'namespace', val),
               )
@@ -202,7 +202,7 @@ export class ImportList extends React.Component<IProps, IState> {
             value={this.props.params.namespace}
             aria-label={_`Select namespace`}
           >
-            {namespaces.map(ns => (
+            {namespaces.map((ns) => (
               <FormSelectOption key={ns.name} label={ns.name} value={ns.name} />
             ))}
           </FormSelect>

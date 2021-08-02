@@ -121,7 +121,7 @@ export class ParamHelper {
   // Reusable function that can be included in a component to update it's
   // internal state and page params at the same time
   static updateParamsMixin(ignoreParams?: string[]) {
-    return function(params: object, callback?) {
+    return function (params: object, callback?) {
       // Note. In the callback, make sure to reference the state as
       // this.state instead of const { foo } = this.state.
       // In the example above, foo only gets set to the latest state after
