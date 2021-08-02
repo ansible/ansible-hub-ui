@@ -1,11 +1,6 @@
 describe('Repo Management tests', () => {
-  let urljoin = require('url-join');
-  let baseUrl = Cypress.config().baseUrl;
-  let remoteRepoUrl = urljoin(
-    baseUrl,
-    'ui/repositories?page_size=10&tab=remote',
-  );
-  let localRepoUrl = urljoin(baseUrl, 'ui/repositories?page_size=10');
+  let remoteRepoUrl = '/ui/repositories?page_size=10&tab=remote';
+  let localRepoUrl = '/ui/repositories?page_size=10';
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
 
@@ -37,7 +32,7 @@ describe('Repo Management tests', () => {
     cy.get('button')
       .contains('Remote')
       .parent()
-      .click({ force: true });
+      .click();
     cy.get('[aria-labelledby="headers"]').contains('Remote name');
     cy.get('[aria-labelledby="headers"]').contains('Repositories');
     cy.get('[aria-labelledby="headers"]').contains('Last updated');
