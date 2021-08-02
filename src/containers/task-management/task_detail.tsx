@@ -69,13 +69,14 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
           title={Constants.TASK_NAMES[task.name] || task.name}
           breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
           pageControls={
-            <Button
-              variant='secondary'
-              onClick={() => console.log('CANCEL TASK')}
-              disabled={true}
-            >
-              {_`Cancel task`}
-            </Button>
+            ['running', 'waiting'].includes(task.state) && (
+              <Button
+                variant='secondary'
+                onClick={() => console.log('CANCEL TASK')}
+              >
+                {_`Cancel task`}
+              </Button>
+            )
           }
           status={<TaskStatus state={task.state} />}
         ></BaseHeader>
