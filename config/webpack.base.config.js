@@ -2,7 +2,6 @@
 const { resolve } = require('path');
 const config = require('@redhat-cloud-services/frontend-components-config');
 const TSOverrides = require('./webpack-ts-overrides');
-const commonWPconfig = require('./common.webpack.js');
 const webpack = require('webpack');
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
@@ -72,12 +71,6 @@ module.exports = (inputConfigs) => {
     port: customConfigs.UI_PORT,
   });
 
-  webpackConfig.devServer = {
-    contentBase: commonWPconfig.paths.public,
-    historyApiFallback: true,
-    port: customConfigs.UI_PORT,
-  };
-
   // Override sections of the webpack config to work with TypeScript
   const newWebpackConfig = {
     ...webpackConfig,
@@ -97,7 +90,6 @@ module.exports = (inputConfigs) => {
     console.log('Overriding configs for standalone mode.');
 
     const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
-    const newPubPath = '/';
     console.log(`New entry.App: ${newEntry}`);
     newWebpackConfig.entry.App = newEntry;
   }
