@@ -186,14 +186,14 @@ export class Constants {
   ];
 
   static TASK_NAMES = {
-    'galaxy_ng.app.tasks.promotion._remove_content_from_repository': _`Galaxy NG: Remove content from repository`,
-    'galaxy_ng.app.tasks.publishing.import_and_auto_approve': _`Galaxy NG: Import and auto approve`,
-    'galaxy_ng.app.tasks.curate_synclist_repository': _`Galaxy NG: Curate synclist repository`,
-    'galaxy_ng.app.tasks': _`Galaxy NG: Tasks`,
-    'galaxy_ng.app.tasks.import_and_move_to_staging': _`Galaxy NG: Import and move to staging`,
-    'galaxy_ng.app.tasks.import_and_auto_approve': _`Galaxy NG: Import and auto approve`,
-    'galaxy_ng.app.tasks.curate_all_synclist_repository': _`Galaxy NG: Curate all synclist repository`,
-    'galaxy_ng.app.tasks.synclist.curate_synclist_repository_batch': _`Galaxy NG: Curate synclist repository batch`,
+    'galaxy_ng.app.tasks.promotion._remove_content_from_repository': _`Remove content from repository`,
+    'galaxy_ng.app.tasks.publishing.import_and_auto_approve': _`Import and auto approve`,
+    'galaxy_ng.app.tasks.curate_synclist_repository': _`Curate synclist repository`,
+    'galaxy_ng.app.tasks': _`Tasks`,
+    'galaxy_ng.app.tasks.import_and_move_to_staging': _`Import and move to staging`,
+    'galaxy_ng.app.tasks.import_and_auto_approve': _`Import and auto approve`,
+    'galaxy_ng.app.tasks.curate_all_synclist_repository': _`Curate all synclist repository`,
+    'galaxy_ng.app.tasks.synclist.curate_synclist_repository_batch': _`Curate synclist repository batch`,
     'pulp_ansible.app.tasks.collections.sync': _`Pulp Ansible: Collections sync`,
     'pulp_ansible.app.tasks.copy.copy_content': _`Pulp ansible: Copy content`,
     'pulp_ansible.app.tasks.collections.collection_sync': _`Pulp ansible: collection sync`,
