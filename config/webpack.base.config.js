@@ -72,25 +72,11 @@ module.exports = (inputConfigs) => {
     port: customConfigs.UI_PORT,
   });
 
-  webpackConfig.serve = {
-    content: commonWPconfig.paths.public,
-
-    // defines port for prod server
+  webpackConfig.devServer = {
+    contentBase: commonWPconfig.paths.public,
+    historyApiFallback: true,
     port: customConfigs.UI_PORT,
-
-    // https://github.com/webpack-contrib/webpack-serve/blob/master/docs/addons/history-fallback.config.js
-    add: (app) => app.use(convert(history({}))),
   };
-
-  if (customConfigs.TARGET_ENVIRONMENT === 'prod') {
-    webpackConfig.serve.prod = {
-      publicPath: commonWPconfig.paths.publicPath,
-    };
-  } else {
-    webpackConfig.serve.dev = {
-      publicPath: commonWPconfig.paths.publicPath,
-    };
-  }
 
   // Override sections of the webpack config to work with TypeScript
   const newWebpackConfig = {
