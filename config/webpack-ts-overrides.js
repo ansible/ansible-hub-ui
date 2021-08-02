@@ -26,15 +26,8 @@ module.exports = {
       },
       {
         test: /\.(woff(2)?|ttf|jpg|png|eot|gif|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/',
-            },
-          },
-        ],
+        type: 'asset/resource',
+        generator: { filename: 'fonts/[name][ext][query]' },
       },
 
       // TypeScript configs
