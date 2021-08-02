@@ -189,7 +189,6 @@ export class Constants {
     'galaxy_ng.app.tasks.promotion._remove_content_from_repository': _`Remove content from repository`,
     'galaxy_ng.app.tasks.publishing.import_and_auto_approve': _`Import and auto approve`,
     'galaxy_ng.app.tasks.curate_synclist_repository': _`Curate synclist repository`,
-    'galaxy_ng.app.tasks': _`Tasks`,
     'galaxy_ng.app.tasks.import_and_move_to_staging': _`Import and move to staging`,
     'galaxy_ng.app.tasks.import_and_auto_approve': _`Import and auto approve`,
     'galaxy_ng.app.tasks.curate_all_synclist_repository': _`Curate all synclist repository`,
