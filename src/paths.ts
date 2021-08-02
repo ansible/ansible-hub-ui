@@ -52,3 +52,6 @@ export enum Paths {
   userProfileSettings = '/settings/user-profile',
   repositories = '/repositories',
 }
+
+// HACK: ensure l10n marked strings can be backported without breaking
+window._ = String.raw;
