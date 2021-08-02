@@ -28,7 +28,7 @@ jobs:
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
         GALAXY_NG_COMMIT=`GET https://api.github.com/repos/ansible/galaxy_ng/branches/${SHORT_BRANCH} | jq -r .commit.sha`
-        
+
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "GALAXY_NG_COMMIT=${GALAXY_NG_COMMIT}" >> $GITHUB_ENV
 
@@ -48,18 +48,18 @@ jobs:
         echo '# Containerfile'
         echo '\
           FROM docker.io/pulp/pulp-ci-centos:python36
-          
+
           RUN pip3 install --upgrade \
             "click<8.0" \
             requests \
             git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
-          
+
           RUN mkdir -p /etc/nginx/pulp/
-          RUN ln /usr/local/lib/python3.6/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
-          RUN ln /usr/local/lib/python3.6/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
-          RUN ln /usr/local/lib/python3.6/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
+          RUN ln /usr/local/lib/python*/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
+          RUN ln /usr/local/lib/python*/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
+          RUN ln /usr/local/lib/python*/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
         ' | tee Containerfile
-        
+
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
         podman save localhost/pulp/pulp-galaxy-ng:latest -o image
 
@@ -85,7 +85,7 @@ jobs:
           TOKEN_AUTH_DISABLED=True
           X_PULP_CONTENT_HOST='localhost'
         " | sed 's/^\s\+//' | tee settings/settings.py
-        
+
         podman run \
              --detach \
              --publish 8002:80 \
@@ -121,7 +121,7 @@ jobs:
     - name: "Build standalone UI"
       working-directory: 'ansible-hub-ui'
       run: |
-        npm ci || npm install
+        npm install
         npm run build-standalone
         rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
         mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
@@ -132,10 +132,10 @@ jobs:
       run: |
         # podman exec pulp pip install django_extensions
         podman exec pulp pulpcore-manager reset-admin-password --password admin
-        
-        npm ci || npm install
+
+        npm install
         echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
-        
+
         npm run cypress:chrome
 
     - uses: actions/upload-artifact@v2
