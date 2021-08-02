@@ -64,7 +64,7 @@ window._ = (strings, ...args) => {
   strings = Array.from(strings);
   const last = strings.pop();
   const mark =
-    window.localStorage.test_l10n === 'true' ? s => '»' + s + '«' : s => s;
+    window.localStorage.test_l10n === 'true' ? (s) => '»' + s + '«' : (s) => s;
 
   const parts = [...strings.map((s, i) => mark(s) + args[i]), mark(last)];
 

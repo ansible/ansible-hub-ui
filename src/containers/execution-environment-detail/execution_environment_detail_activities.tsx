@@ -95,7 +95,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
   }
 
   queryActivities(name) {
-    const manifestLink = digestOrTag =>
+    const manifestLink = (digestOrTag) =>
       formatPath(Paths.executionEnvironmentManifest, {
         container: name,
         digest: digestOrTag,
@@ -114,14 +114,14 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
 
     this.setState({ loading: true }, () => {
       ActivitiesAPI.list(name, this.state.page)
-        .then(result => {
+        .then((result) => {
           let activities = [];
-          result.data.data.forEach(activity => {
+          result.data.data.forEach((activity) => {
             {
-              activity.added.forEach(action => {
+              activity.added.forEach((action) => {
                 let activityDescription;
                 if (action.pulp_type === 'container.tag') {
-                  let removed = activity.removed.find(item => {
+                  let removed = activity.removed.find((item) => {
                     return item.tag_name === action.tag_name;
                   });
                   if (!!removed) {
@@ -152,11 +152,11 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   action: activityDescription,
                 });
               });
-              activity.removed.forEach(action => {
+              activity.removed.forEach((action) => {
                 let activityDescription;
                 if (action.pulp_type === 'container.tag') {
                   if (
-                    !activity.added.find(item => {
+                    !activity.added.find((item) => {
                       return item.tag_name === action.tag_name;
                     })
                   ) {
@@ -217,7 +217,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
             loading: false,
           });
         })
-        .catch(error => this.setState({ redirect: 'notFound' }));
+        .catch((error) => this.setState({ redirect: 'notFound' }));
     });
   }
 }

@@ -35,7 +35,7 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    ApplicationInfoAPI.get('').then(result => {
+    ApplicationInfoAPI.get('').then((result) => {
       this.setState({
         applicationInfo: {
           server_version: result.data.server_version,
@@ -46,14 +46,8 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
   }
 
   render() {
-    const {
-      isOpen,
-      onClose,
-      brandImageAlt,
-      productName,
-      user,
-      userName,
-    } = this.props;
+    const { isOpen, onClose, brandImageAlt, productName, user, userName } =
+      this.props;
     const browser = detect();
     return (
       <AboutModal
@@ -88,7 +82,7 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
               {_`User Groups`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
-              {user.groups.map(group => group.name).join()}
+              {user.groups.map((group) => group.name).join()}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
               {_`Browser Version`}

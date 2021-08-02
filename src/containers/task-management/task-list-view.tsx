@@ -99,7 +99,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                       <ToolbarGroup>
                         <ToolbarItem>
                           <CompoundFilter
-                            updateParams={p => {
+                            updateParams={(p) => {
                               p['page'] = 1;
                               this.updateParams(p, () => this.queryTasks());
                             }}
@@ -140,7 +140,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                   </Toolbar>
                   <Pagination
                     params={params}
-                    updateParams={p =>
+                    updateParams={(p) =>
                       this.updateParams(p, () => this.queryTasks())
                     }
                     count={itemCount}
@@ -149,7 +149,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                 </div>
                 <div>
                   <AppliedFilters
-                    updateParams={p =>
+                    updateParams={(p) =>
                       this.updateParams(p, () => this.queryTasks())
                     }
                     params={params}
@@ -161,7 +161,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                 <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
                   <Pagination
                     params={params}
-                    updateParams={p =>
+                    updateParams={(p) =>
                       this.updateParams(p, () => this.queryTasks())
                     }
                     count={itemCount}
@@ -215,7 +215,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={p => {
+          updateParams={(p) => {
             p['page'] = 1;
             this.updateParams(p, () => this.queryTasks());
           }}
@@ -293,7 +293,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
 
   private queryTasks() {
     this.setState({ loading: true }, () => {
-      TaskManagementAPI.list(this.state.params).then(result => {
+      TaskManagementAPI.list(this.state.params).then((result) => {
         this.setState({
           items: result.data.results,
           itemCount: result.data.count,

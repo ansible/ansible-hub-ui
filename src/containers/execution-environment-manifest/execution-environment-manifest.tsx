@@ -57,9 +57,9 @@ class ExecutionEnvironmentManifest extends React.Component<
 
   componentDidMount() {
     const { container, digest } = this.state;
-    const whileLoading = callback =>
+    const whileLoading = (callback) =>
       this.setState({ loading: true }, () =>
-        callback().then(data => this.setState({ loading: false, ...data })),
+        callback().then((data) => this.setState({ loading: false, ...data })),
       );
 
     whileLoading(() =>
@@ -119,7 +119,7 @@ class ExecutionEnvironmentManifest extends React.Component<
           </div>
 
           <LabelGroup numLabels={6}>
-            {labels.map(label => (
+            {labels.map((label) => (
               <TagLabel tag={label} key={label} />
             ))}
           </LabelGroup>
@@ -137,7 +137,7 @@ class ExecutionEnvironmentManifest extends React.Component<
 
                 <DataList
                   aria-label={_`Image layers`}
-                  onSelectDataListItem={id =>
+                  onSelectDataListItem={(id) =>
                     this.setState({ selectedLayer: id })
                   }
                   selectedDataListItemId={selectedLayer}
@@ -205,12 +205,12 @@ class ExecutionEnvironmentManifest extends React.Component<
   query({ container, digest: digestOrTag }) {
     return ExecutionEnvironmentAPI.image(container.name, digestOrTag).then(
       ({ data: { config_blob, digest, layers, tags } }) => {
-        const sizes = layers.map(l => l.size);
+        const sizes = layers.map((l) => l.size);
         const size = getHumanSize(sum(sizes));
 
         // convert '/bin/sh -c #(nop)  CMD ["sh"]' to 'CMD ["sh"]'
         // but keep anything without #(nop) unchanged
-        const parseNop = str => str.replace(/^.*#\(nop\)\s+(.*)/, '$1');
+        const parseNop = (str) => str.replace(/^.*#\(nop\)\s+(.*)/, '$1');
 
         const history = config_blob.data.history.map(({ created_by }) => ({
           text: parseNop(created_by),

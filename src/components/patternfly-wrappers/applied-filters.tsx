@@ -36,8 +36,8 @@ export class AppliedFilters extends React.Component<IProps, {}> {
     if (Object.keys(ParamHelper.getReduced(params, ignoredParams)).length > 0) {
       return (
         <div className={className} style={style}>
-          {Object.keys(ParamHelper.getReduced(params, ignoredParams)).map(key =>
-            this.renderGroup(key),
+          {Object.keys(ParamHelper.getReduced(params, ignoredParams)).map(
+            (key) => this.renderGroup(key),
           )}
           <Button onClick={this.clearAllFilters} variant='link'>
             {_`Clear all filters`}
