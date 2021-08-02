@@ -12,6 +12,6 @@ describe('API Token Tests', () => {
 
     cy.get('[aria-label="Copyable input"]')
       .invoke('val')
-      .should('match', /[0-9a-f]{40}?/);
+      .should('match', /^[0-9a-f]{40}$/);
   });
 });
