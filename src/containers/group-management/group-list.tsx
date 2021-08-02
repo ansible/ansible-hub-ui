@@ -134,12 +134,15 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             title={_`No groups yet`}
             description={_`Groups will appear once created`}
             button={
-              <Button
-                variant='primary'
-                onClick={() => this.setState({ createModalVisible: true })}
-              >
-                {_`Create`}
-              </Button>
+              !!user &&
+              user.model_permissions.add_group && (
+                <Button
+                  variant='primary'
+                  onClick={() => this.setState({ createModalVisible: true })}
+                >
+                  {_`Create`}
+                </Button>
+              )
             }
           />
         ) : (
