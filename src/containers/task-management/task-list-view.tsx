@@ -33,6 +33,7 @@ import {
   Pagination,
   SortTable,
   TaskStatus,
+  Tooltip,
 } from 'src/components';
 import { TaskManagementAPI } from 'src/api';
 import { TaskType } from 'src/api/response-types/task';
@@ -260,7 +261,9 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       <tr aria-labelledby={name} key={index}>
         <td>
           <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
-            {Constants.TASK_NAMES[name] || name}
+            <Tooltip content={name}>
+              {Constants.TASK_NAMES[name] || name}
+            </Tooltip>
           </Link>
         </td>
         <td>

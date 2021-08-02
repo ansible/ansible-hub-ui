@@ -8,6 +8,7 @@ import {
   LoadingPageSpinner,
   Main,
   TaskStatus,
+  Tooltip,
 } from 'src/components';
 import {
   Button,
@@ -24,6 +25,7 @@ import { CubesIcon } from '@patternfly/react-icons';
 import { TaskType } from 'src/api/response-types/task';
 import { TaskManagementAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
+import { Constants } from 'src/constants';
 
 interface IState {
   loading: boolean;
@@ -64,7 +66,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
     ) : (
       <React.Fragment>
         <BaseHeader
-          title={task.name}
+          title={Constants.TASK_NAMES[task.name] || task.name}
           breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
           pageControls={
             <Button
@@ -93,7 +95,9 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                     <DescriptionListGroup>
                       <DescriptionListTerm>{_`Task name`}</DescriptionListTerm>
                       <DescriptionListDescription>
-                        {task.name}
+                        <Tooltip content={task.name}>
+                          {Constants.TASK_NAMES[task.name] || task.name}
+                        </Tooltip>
                       </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup>
