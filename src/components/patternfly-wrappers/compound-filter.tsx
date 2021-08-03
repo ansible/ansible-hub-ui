@@ -91,6 +91,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
         <Button
           onClick={() => this.submitFilter()}
           variant={ButtonVariant.control}
+          isDisabled={!this.state.inputText}
         >
           <SearchIcon></SearchIcon>
         </Button>
