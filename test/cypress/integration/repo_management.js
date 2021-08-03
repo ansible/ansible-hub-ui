@@ -29,10 +29,7 @@ describe('Repo Management tests', () => {
     cy.contains('rejected');
     cy.contains('rh-certified');
     cy.contains('staging');
-    cy.get('button')
-      .contains('Remote')
-      .parent()
-      .click();
+    cy.get('button').contains('Remote').parent().click();
     cy.get('[aria-labelledby="headers"]').contains('Remote name');
     cy.get('[aria-labelledby="headers"]').contains('Repositories');
     cy.get('[aria-labelledby="headers"]').contains('Last updated');
