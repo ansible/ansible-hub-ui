@@ -27,6 +27,7 @@ describe('Group Permissions Tests', () => {
       'Add group',
       'Change group',
     ]);
+	cy.addPermissions('group4', [{ group: 'users', permissions: ['View user'] }]);
     addTestUser('user1', null);
     addTestUser('user2', 'group2');
     addTestUser('user3', 'group3');
@@ -37,40 +38,27 @@ describe('Group Permissions Tests', () => {
     // test user without any group at all
     let user = 'user1';
     cy.login(user, user + 'Password');
+	cy.visit('/ui/group_list');
     cy.contains('Groups').should('not.exist');
     cy.logout();
 
     // test user in group with no privilleges
     user = 'user2';
     cy.login(user, user + 'Password');
+	cy.visit('/ui/group_list');
     cy.contains('Groups').should('not.exist');
   });
 
-  it('can view groups', () => {
+  it('can view groups, can not change groups, can not add groups, can not delete groups', () => {
     let user = 'user3';
     cy.login(user, user + 'Password');
     cy.menuGo('User Access > Groups');
     cy.contains('Groups');
-  });
-
-  it('can not change groups', () => {
-    let user = 'user3';
-    cy.login(user, user + 'Password');
-    cy.menuGo('User Access > Groups');
+	cy.menuGo('User Access > Groups');
     cy.contains('button', 'Edit').should('not.exist');
-  });
-
-  it('can not add groups', () => {
-    let user = 'user3';
-    cy.login(user, user + 'Password');
-    cy.menuGo('User Access > Groups');
+	cy.menuGo('User Access > Groups');
     cy.contains('button', 'View').should('not.exist');
-  });
-
-  it('can not delete groups', () => {
-    let user = 'user3';
-    cy.login(user, user + 'Password');
-    cy.menuGo('User Access > Groups');
+	 cy.menuGo('User Access > Groups');
     cy.contains('button', 'Delete').should('not.exist');
   });
 
@@ -80,13 +68,12 @@ describe('Group Permissions Tests', () => {
     cy.createGroup('NewGroup');
   });
 
-  it.skip('can delete group', () => {
+  it('can delete group', () => {
     // this is not working yet, API is returning error, however group is still deleted
     // The group should be deleted, because user has rights for it, API should not return error
     // The problem is probably at API side.
     let user = 'user4';
     cy.login(user, user + 'Password');
-
     cy.menuGo('User Access > Groups');
     cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
       'deleteGroup',

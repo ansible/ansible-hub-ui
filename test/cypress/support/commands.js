@@ -169,6 +169,17 @@ Cypress.Commands.add('createGroup', {}, (name) => {
   cy.wait('@submitGroup');
 });
 
+
+/*
+ * Input
+ * groupName 	: name of the group you want to add permissions
+ * permissions 	: array of object {group, permissions}
+ * 					group 		: groups, users, collections and so on
+ * 					permissions : array of permissions (depends on the group) - for example View user, Add user for users, Add group, 
+ * 									Change group for groups
+ *					 
+ * 
+ * */
 Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
   cy.intercept(
     'GET',
