@@ -1,24 +1,46 @@
 describe('Repo Management tests', () => {
-  let urljoin = require('url-join');
-  let baseUrl = Cypress.config().baseUrl;
-  let remoteRepoUrl = urljoin(
-    baseUrl,
-    'ui/repositories?page_size=10&tab=remote',
-  );
+  let remoteRepoUrl = '/ui/repositories?page_size=10&tab=remote';
+  let localRepoUrl = '/ui/repositories?page_size=10';
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
 
   beforeEach(() => {
-    cy.visit(baseUrl);
+    cy.login(adminUsername, adminPassword);
   });
 
   it('admin user sees download_concurrency in remote config', () => {
-    cy.login(adminUsername, adminPassword);
     cy.visit(remoteRepoUrl);
     cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
     cy.get('#download_concurrency').should('exist');
+  });
+
+  it('can see table in repo tabs and it shows data correctly', () => {
+    cy.visit(localRepoUrl);
+    cy.get('[aria-labelledby="headers"]').contains('Distribution name');
+    cy.get('[aria-labelledby="headers"]').contains('Repository name');
+    cy.get('[aria-labelledby="headers"]').contains('Content count');
+    cy.get('[aria-labelledby="headers"]').contains('Last updated');
+    cy.get('[aria-labelledby="headers"]').contains('Repo URL');
+    cy.get('[aria-labelledby="headers"]').contains('CLI configuration');
+    cy.contains('community');
+    cy.contains('published');
+    cy.contains('rejected');
+    cy.contains('rh-certified');
+    cy.contains('staging');
+    cy.get('button')
+      .contains('Remote')
+      .parent()
+      .click();
+    cy.get('[aria-labelledby="headers"]').contains('Remote name');
+    cy.get('[aria-labelledby="headers"]').contains('Repositories');
+    cy.get('[aria-labelledby="headers"]').contains('Last updated');
+    cy.get('[aria-labelledby="headers"]').contains('Last sync');
+    cy.get('[aria-labelledby="headers"]').contains('Sync status');
+
+    cy.contains('Configure');
+    cy.contains('Sync');
   });
 
   /* FIXME: Needs more work to handle uploading a requirements.yml
