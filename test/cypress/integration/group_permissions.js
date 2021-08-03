@@ -27,7 +27,9 @@ describe('Group Permissions Tests', () => {
       'Add group',
       'Change group',
     ]);
-	cy.addPermissions('group4', [{ group: 'users', permissions: ['View user'] }]);
+    cy.addPermissions('group4', [
+      { group: 'users', permissions: ['View user'] },
+    ]);
     addTestUser('user1', null);
     addTestUser('user2', 'group2');
     addTestUser('user3', 'group3');
@@ -38,14 +40,14 @@ describe('Group Permissions Tests', () => {
     // test user without any group at all
     let user = 'user1';
     cy.login(user, user + 'Password');
-	cy.visit('/ui/group_list');
+    cy.visit('/ui/group_list');
     cy.contains('Groups').should('not.exist');
     cy.logout();
 
     // test user in group with no privilleges
     user = 'user2';
     cy.login(user, user + 'Password');
-	cy.visit('/ui/group_list');
+    cy.visit('/ui/group_list');
     cy.contains('Groups').should('not.exist');
   });
 
@@ -54,11 +56,11 @@ describe('Group Permissions Tests', () => {
     cy.login(user, user + 'Password');
     cy.menuGo('User Access > Groups');
     cy.contains('Groups');
-	cy.menuGo('User Access > Groups');
+    cy.menuGo('User Access > Groups');
     cy.contains('button', 'Edit').should('not.exist');
-	cy.menuGo('User Access > Groups');
+    cy.menuGo('User Access > Groups');
     cy.contains('button', 'View').should('not.exist');
-	 cy.menuGo('User Access > Groups');
+    cy.menuGo('User Access > Groups');
     cy.contains('button', 'Delete').should('not.exist');
   });
 
