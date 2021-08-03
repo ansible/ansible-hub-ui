@@ -90,11 +90,11 @@ export function withContainerRepo(WrappedComponent) {
         <React.Fragment>
           <AlertList
             alerts={this.state.alerts}
-            closeAlert={(i) => this.closeAlert(i)}
+            closeAlert={i => this.closeAlert(i)}
           />
           <ExecutionEnvironmentHeader
             id={this.props.match.params['container']}
-            updateState={(change) => this.setState(change)}
+            updateState={change => this.setState(change)}
             tab={this.getTab()}
             container={this.state.repo}
             pageControls={
@@ -142,8 +142,8 @@ export function withContainerRepo(WrappedComponent) {
                     );
                   }
                   Promise.all(promises)
-                    .then((results) => {
-                      let task = results.find((x) => x.data && x.data.task);
+                    .then(results => {
+                      let task = results.find(x => x.data && x.data.task);
                       this.setState({ editing: false, loading: true });
                       if (!!task) {
                         this.waitForTask(
@@ -201,11 +201,11 @@ export function withContainerRepo(WrappedComponent) {
 
     private loadRepo() {
       ExecutionEnvironmentAPI.get(this.props.match.params['container'])
-        .then((result) => {
+        .then(result => {
           const repo = result;
           return ExecutionEnvironmentNamespaceAPI.get(
             result.data.namespace.name,
-          ).then((result) =>
+          ).then(result =>
             this.setState({
               loading: false,
               repo: repo.data,
@@ -213,7 +213,7 @@ export function withContainerRepo(WrappedComponent) {
             }),
           );
         })
-        .catch((e) => this.setState({ redirect: 'notFound' }));
+        .catch(e => this.setState({ redirect: 'notFound' }));
     }
 
     private getTab() {
@@ -230,9 +230,9 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private waitForTask(task) {
-      return TaskAPI.get(task).then((result) => {
+      return TaskAPI.get(task).then(result => {
         if (result.data.state !== 'completed') {
-          return new Promise((r) => setTimeout(r, 500)).then(() =>
+          return new Promise(r => setTimeout(r, 500)).then(() =>
             this.waitForTask(task),
           );
         }

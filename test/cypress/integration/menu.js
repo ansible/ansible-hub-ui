@@ -26,8 +26,7 @@ describe('Hub Menu Tests', () => {
 
   it('admin user sees complete menu', () => {
     cy.cookieLogin(adminUsername, adminPassword);
-
-    menuItems.forEach((item) => cy.menuPresent(item));
+    menuItems.forEach(item => cy.menuPresent(item));
   });
 
   describe('user without permissions', () => {
@@ -48,9 +47,8 @@ describe('Hub Menu Tests', () => {
 
     it('sees limited menu', () => {
       cy.cookieLogin(username, password);
-
-      visibleMenuItems.forEach((item) => cy.menuPresent(item));
-      missingMenuItems.forEach((item) => cy.menuMissing(item));
+      visibleMenuItems.forEach(item => cy.menuPresent(item));
+      missingMenuItems.forEach(item => cy.menuMissing(item));
     });
 
     it('has Documentation tab', () => {

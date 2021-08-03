@@ -154,7 +154,7 @@ export class ImportList extends React.Component<IProps, IState> {
 
     return (
       <div>
-        {importList.map((item) => {
+        {importList.map(item => {
           return (
             <div
               onClick={() => selectImport(item)}
@@ -225,7 +225,7 @@ export class ImportList extends React.Component<IProps, IState> {
             value={this.props.params.namespace}
             aria-label={_`Select namespace`}
           >
-            {namespaces.map((ns) => (
+            {namespaces.map(ns => (
               <FormSelectOption key={ns.name} label={ns.name} value={ns.name} />
             ))}
           </FormSelect>

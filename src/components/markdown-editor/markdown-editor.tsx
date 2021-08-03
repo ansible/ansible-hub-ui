@@ -27,7 +27,7 @@ export class MarkdownEditor extends React.Component<IProps, {}> {
                   aria-labelledby='markdown-title'
                   id='resources'
                   value={text}
-                  onChange={(value) => updateText(value)}
+                  onChange={value => updateText(value)}
                   placeholder={placeholder}
                 />
               </FormGroup>

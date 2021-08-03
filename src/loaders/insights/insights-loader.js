@@ -28,7 +28,7 @@ class App extends Component {
     // This listens for insights navigation events, so this will fire
     // when items in the nav are clicked or the app is loaded for the first
     // time
-    this.appNav = insights.chrome.on('APP_NAVIGATION', (event) => {
+    this.appNav = insights.chrome.on('APP_NAVIGATION', event => {
       // might be undefined early in the load, or may not happen at all
       if (!event?.domEvent) {
         return;
@@ -56,10 +56,8 @@ class App extends Component {
       }
     });
 
-    insights.chrome.auth
-      .getUser()
-      .then((user) => this.setState({ user: user }));
-    ActiveUserAPI.getActiveUser().then((result) =>
+    insights.chrome.auth.getUser().then(user => this.setState({ user: user }));
+    ActiveUserAPI.getActiveUser().then(result =>
       this.setState({ activeUser: result.data }),
     );
   }
@@ -124,11 +122,11 @@ class App extends Component {
       );
     }
   }
-  setActiveUser = (user) => {
+  setActiveUser = user => {
     this.setState({ activeUser: user });
   };
 
-  isRepoURL = (location) => {
+  isRepoURL = location => {
     return matchPath(location, {
       path: Paths.collectionByRepo,
     });

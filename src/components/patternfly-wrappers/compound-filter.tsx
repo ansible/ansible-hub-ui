@@ -63,7 +63,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     const { filterConfig } = this.props;
     const { selectedFilter } = this.state;
 
-    const filterOptions = filterConfig.map((v) => (
+    const filterOptions = filterConfig.map(v => (
       <DropdownItem
         onClick={() => this.setState({ selectedFilter: v, inputText: '' })}
         key={v.id}
@@ -102,7 +102,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
   private renderInput(selectedFilter: FilterOption) {
     switch (selectedFilter.inputType) {
       case 'multiple':
-        const options = selectedFilter.options.map((option) => (
+        const options = selectedFilter.options.map(option => (
           // patternfly does not allow for us to set a display name aside from the ID
           // which unfortunately means that multiple select will ignore the human readable
           // option.title
@@ -163,8 +163,8 @@ export class CompoundFilter extends React.Component<IProps, IState> {
               _`Filter by ${selectedFilter.title.toLowerCase()}`
             }
             value={this.state.inputText}
-            onChange={(k) => this.setState({ inputText: k })}
-            onKeyPress={(e) => this.handleEnter(e)}
+            onChange={k => this.setState({ inputText: k })}
+            onKeyPress={e => this.handleEnter(e)}
           />
         );
     }
@@ -203,7 +203,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     });
   };
 
-  private onSelectMultiple = (event) => {
+  private onSelectMultiple = event => {
     let newParams = this.props.params[this.state.selectedFilter.id];
     if (!newParams) {
       newParams = [];
@@ -225,6 +225,6 @@ export class CompoundFilter extends React.Component<IProps, IState> {
   private selectTitleById(inputText: string, selectedFilter: FilterOption) {
     if (!inputText || !selectedFilter?.options) return inputText;
 
-    return selectedFilter.options.find((opt) => opt.id === inputText).title;
+    return selectedFilter.options.find(opt => opt.id === inputText).title;
   }
 }

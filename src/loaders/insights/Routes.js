@@ -146,7 +146,7 @@ InsightsRoute.propTypes = {
  *      path - https://prod.foo.redhat.com:1337/insights/advisor/rules
  *      component - component to be rendered when a route has been chosen.
  */
-export const Routes = (props) => {
+export const Routes = props => {
   const path = props.childProps.location.pathname;
 
   return (
@@ -280,9 +280,7 @@ export const Routes = (props) => {
       {/* Finally, catch all unmatched routes */}
       <Route
         render={() =>
-          some(Paths, (p) => p === path) ? null : (
-            <Redirect to={Paths.notFound} />
-          )
+          some(Paths, p => p === path) ? null : <Redirect to={Paths.notFound} />
         }
       />
     </Switch>

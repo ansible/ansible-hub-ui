@@ -68,7 +68,7 @@ export class RepoSelector extends React.Component<IProps, IState> {
                   this.context.setRepo(path);
                 }
               }}
-              onToggle={(isExpanded) => {
+              onToggle={isExpanded => {
                 this.setState({ selectExpanded: isExpanded });
               }}
               selections={this.getRepoName(this.props.selectedRepo)}
@@ -86,7 +86,7 @@ export class RepoSelector extends React.Component<IProps, IState> {
 
   private getRepoName(basePath) {
     const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
-      (key) => Constants.REPOSITORYNAMES[key] === basePath,
+      key => Constants.REPOSITORYNAMES[key] === basePath,
     );
 
     // allowing the repo to go through even if isn't one that we support so

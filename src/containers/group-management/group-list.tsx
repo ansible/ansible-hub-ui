@@ -121,7 +121,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       <React.Fragment>
         <AlertList
           alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          closeAlert={i => this.closeAlert(i)}
         ></AlertList>
         {createModalVisible ? this.renderCreateModal() : null}
         {deleteModalVisible ? this.renderDeleteModal() : null}
@@ -156,7 +156,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                     <ToolbarGroup>
                       <ToolbarItem>
                         <CompoundFilter
-                          updateParams={(p) =>
+                          updateParams={p =>
                             this.updateParams(p, () => this.queryGroups())
                           }
                           params={params}
@@ -187,7 +187,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
+                  updateParams={p =>
                     this.updateParams(p, () => this.queryGroups())
                   }
                   count={itemCount}
@@ -196,7 +196,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
               </div>
               <div>
                 <AppliedFilters
-                  updateParams={(p) =>
+                  updateParams={p =>
                     this.updateParams(p, () => this.queryGroups())
                   }
                   params={params}
@@ -207,7 +207,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
               <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
+                  updateParams={p =>
                     this.updateParams(p, () => this.queryGroups())
                   }
                   count={itemCount}
@@ -226,7 +226,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         onCancel={() =>
           this.setState({ createModalVisible: false, groupError: null })
         }
-        onSave={(value) => this.saveGroup(value)}
+        onSave={value => this.saveGroup(value)}
         clearErrors={() => this.setState({ groupError: null })}
         errorMessage={this.state.groupError}
       />
@@ -239,7 +239,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         onCancel={() =>
           this.setState({ editModalVisible: false, groupError: null })
         }
-        onSave={(value) => this.editGroup(value)}
+        onSave={value => this.editGroup(value)}
         clearErrors={() => this.setState({ groupError: null })}
         group={this.state.selectedGroup}
         errorMessage={this.state.groupError}
@@ -254,7 +254,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     if (!users) {
       this.queryUsers();
     }
-
+    console.log({ users });
     return (
       <DeleteGroupModal
         count={count}
@@ -279,7 +279,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       groups__name: this.state.selectedGroup.name,
       page: 0,
       page_size: 10,
-    }).then((result) =>
+    }).then(result =>
       this.setState({
         deleteModalUsers: result.data.data,
         deleteModalCount: result.data.meta.count,
@@ -289,7 +289,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
   private saveGroup(value) {
     GroupAPI.create({ name: value })
-      .then((result) => {
+      .then(result => {
         this.setState({
           redirect: formatPath(Paths.groupDetail, {
             group: result.data.id,
@@ -297,7 +297,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           createModalVisible: false,
         });
       })
-      .catch((error) => this.setState({ groupError: mapErrorMessages(error) }));
+      .catch(error => this.setState({ groupError: mapErrorMessages(error) }));
   }
 
   private editGroup(value) {
@@ -306,7 +306,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       pulp_href: this.state.selectedGroup.pulp_href,
       id: this.state.selectedGroup.id,
     })
-      .then((result) => {
+      .then(result => {
         this.setState({
           redirect: '/group/' + result.data.id,
           editModalVisible: false,
@@ -355,7 +355,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={(p) => this.updateParams(p, () => this.queryGroups())}
+          updateParams={p => this.updateParams(p, () => this.queryGroups())}
         />
         <tbody>{groups.map((group, i) => this.renderTableRow(group, i))}</tbody>
       </table>
@@ -438,7 +438,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
   private queryGroups() {
     this.setState({ loading: true }, () =>
-      GroupAPI.list(this.state.params).then((result) =>
+      GroupAPI.list(this.state.params).then(result =>
         this.setState({
           groups: result.data.data,
           itemCount: result.data.meta.count,

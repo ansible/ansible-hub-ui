@@ -60,7 +60,7 @@ export class GroupModal extends React.Component<IProps, IState> {
         ]}
       >
         <Form
-          onSubmit={(e) => {
+          onSubmit={e => {
             e.preventDefault();
             onSave(this.state.name);
           }}
@@ -78,7 +78,7 @@ export class GroupModal extends React.Component<IProps, IState> {
             <TextInput
               id='group_name'
               value={this.state.name}
-              onChange={(value) => {
+              onChange={value => {
                 this.setState({ name: value });
                 clearErrors();
               }}

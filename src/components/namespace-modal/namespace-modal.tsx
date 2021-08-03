@@ -57,13 +57,13 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     });
   }
 
-  private handleSubmit = (event) => {
+  private handleSubmit = event => {
     const data: any = {
       name: this.state.newNamespaceName,
       groups: this.state.newGroups,
     };
     NamespaceAPI.create(data)
-      .then((results) => {
+      .then(results => {
         this.toggleModal();
         this.setState({
           newNamespaceName: '',
@@ -72,7 +72,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
         });
         this.props.onCreateSuccess(data);
       })
-      .catch((error) => {
+      .catch(error => {
         const result = error.response;
         const messages: any = this.state.errorMessages;
         for (const e of result.data.errors) {
@@ -129,7 +129,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                 id='newNamespaceName'
                 name='newNamespaceName'
                 value={newNamespaceName}
-                onChange={(value) => {
+                onChange={value => {
                   this.setState({ newNamespaceName: value }, () => {
                     this.newNamespaceNameIsValid();
                   });
@@ -145,7 +145,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             <ObjectPermissionField
               availablePermissions={['change_namespace', 'upload_to_namespace']}
               groups={newGroups}
-              setGroups={(g) => this.setState({ newGroups: g })}
+              setGroups={g => this.setState({ newGroups: g })}
               menuAppendTo='parent'
             />
           </FormGroup>

@@ -142,7 +142,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
         The Form component will reload the page when it's "submitted" which causes the page
         to reload when the user hits "enter" or clicks "Show Less" on the LabelGroup
         */}
-        <Form onSubmit={(e) => e.preventDefault()}>
+        <Form onSubmit={e => e.preventDefault()}>
           <FormGroup
             validated={!!tagInFormError ? 'error' : 'default'}
             helperTextInvalid={tagInFormError}
@@ -155,9 +155,9 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                 type='text'
                 id='add-new-tag'
                 value={tagInForm}
-                onChange={(val) => this.setState({ tagInForm: val })}
+                onChange={val => this.setState({ tagInForm: val })}
                 isDisabled={!!tagToVerify || verifyingTag || isSaving}
-                onKeyUp={(e) => {
+                onKeyUp={e => {
                   // l10n: don't translate
                   if (e.key === 'Enter') {
                     this.verifyAndAddTag();
@@ -202,7 +202,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
 
           <FormGroup fieldId='remove-tag' label={_`Current tags`}>
             <LabelGroup id='remove-tag' defaultIsOpen={true}>
-              {this.getCurrentTags().map((tag) => (
+              {this.getCurrentTags().map(tag => (
                 <Label
                   disabled={isSaving}
                   icon={<TagIcon />}
@@ -262,8 +262,8 @@ export class TagManifestModal extends React.Component<IProps, IState> {
     const promises: ITagPromises[] = [];
 
     this.setState({ isSaving: true }, () => {
-      const repository: ContainerRepositoryType =
-        this.props.containerRepository;
+      const repository: ContainerRepositoryType = this.props
+        .containerRepository;
 
       for (const tag of this.state.tagsToRemove) {
         promises.push({
@@ -272,7 +272,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             repository.pulp.repository.pulp_id,
             tag,
             containerManifest.digest,
-          ).catch((e) => this.handleFailedTag(tag, e, 'remove')),
+          ).catch(e => this.handleFailedTag(tag, e, 'remove')),
         });
       }
 
@@ -283,12 +283,12 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             repository.pulp.repository.pulp_id,
             tag,
             containerManifest.digest,
-          ).catch((e) => this.handleFailedTag(tag, e, 'add')),
+          ).catch(e => this.handleFailedTag(tag, e, 'add')),
         });
       }
 
       if (promises.length > 0) {
-        Promise.all(promises.map((p) => p.promise)).then((results) => {
+        Promise.all(promises.map(p => p.promise)).then(results => {
           const tasks: ITaskUrls[] = [];
           for (const r in results) {
             if (results[r]) {
@@ -308,7 +308,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
   }
 
   private waitForTasks(taskUrls: ITaskUrls[]) {
-    const pending = new Set(taskUrls.map((i) => i.task));
+    const pending = new Set(taskUrls.map(i => i.task));
 
     const queryTasks = () => {
       const promises = [];
@@ -316,7 +316,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
         promises.push(TaskAPI.get(task as string));
       }
 
-      Promise.all(promises).then(async (results) => {
+      Promise.all(promises).then(async results => {
         for (const r of results) {
           const status = r.data.state;
           if (
@@ -332,7 +332,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               status === PulpStatus.failed ||
               status === PulpStatus.canceled
             ) {
-              const tag = taskUrls.find((e) => e.task === r.data.pulp_id);
+              const tag = taskUrls.find(e => e.task === r.data.pulp_id);
               this.props.onAlert({
                 variant: 'danger',
                 title: _`Task to change tag "${tag.tag}" could not be completed.`,
@@ -344,7 +344,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
         if (pending.size > 0) {
           // wait 5 seconds and then refresn
           this.setState({ pendingTasks: pending.size });
-          await new Promise((r) => setTimeout(r, 5000));
+          await new Promise(r => setTimeout(r, 5000));
           queryTasks();
         } else {
           this.setState({ isSaving: false, pendingTasks: 0 }, () =>
@@ -381,10 +381,10 @@ export class TagManifestModal extends React.Component<IProps, IState> {
     } else {
       this.setState({ tagInFormError: undefined }, () => {
         ExecutionEnvironmentAPI.image(this.props.repositoryName, tag)
-          .then((result) => {
+          .then(result => {
             this.setState({ tagToVerify: tag, verifyingTag: false });
           })
-          .catch((err) => {
+          .catch(err => {
             this.setState({ tagInForm: '', verifyingTag: false }, () =>
               this.addTag(tag),
             );

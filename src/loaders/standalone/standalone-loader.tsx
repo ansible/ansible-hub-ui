@@ -69,14 +69,18 @@ class App extends React.Component<RouteComponentProps, IState> {
     this.activateMenu(menu);
     this.setState({
       menuExpandedSections: menu
-        .filter((i) => i.type === 'section' && i.active)
-        .map((i) => i.name),
+        .filter(i => i.type === 'section' && i.active)
+        .map(i => i.name),
     });
   }
 
   render() {
-    const { featureFlags, menuExpandedSections, selectedRepo, user } =
-      this.state;
+    const {
+      featureFlags,
+      menuExpandedSections,
+      selectedRepo,
+      user,
+    } = this.state;
 
     // block the page from rendering if we're on a repo route and the repo in the
     // url doesn't match the current state
@@ -221,7 +225,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       item.condition({ user, featureFlags }) ? (
         <NavItem
           isActive={item.active}
-          onClick={(e) => {
+          onClick={e => {
             item.onclick && item.onclick();
             e.stopPropagation();
           }}
@@ -242,7 +246,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       ) : null;
     const Menu = ({ items }) => (
       <>
-        {items.map((item) => (
+        {items.map(item => (
           <ItemOrSection key={item.name} item={item} />
         ))}
       </>
@@ -263,7 +267,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       this.setState({
         menuExpandedSections: isExpanded
           ? [...menuExpandedSections, groupId]
-          : reject(menuExpandedSections, (name) => name === groupId),
+          : reject(menuExpandedSections, name => name === groupId),
       });
     };
 
@@ -306,8 +310,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       name,
     });
     const menuSection = (name, options = {}, items = []) => ({
-      condition: (...params) =>
-        some(items, (item) => item.condition(...params)), // any visible items inside
+      condition: (...params) => some(items, item => item.condition(...params)), // any visible items inside
       ...options,
       type: 'section',
       name,
@@ -343,7 +346,8 @@ class App extends React.Component<RouteComponentProps, IState> {
         url: Paths.taskList,
       }),
       menuItem(_`Documentation`, {
-        url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
+        url:
+          'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
         external: true,
       }),
       menuSection(_`User Access`, {}, [
@@ -361,7 +365,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   private activateMenu(items) {
     items.forEach(
-      (item) =>
+      item =>
         (item.active =
           item.type === 'section'
             ? this.activateMenu(item.items)

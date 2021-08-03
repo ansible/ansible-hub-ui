@@ -52,7 +52,7 @@ export class AlertList extends React.Component<IProps, {}> {
 }
 
 export function closeAlertMixin(alertStateVariable) {
-  return function (alertIndex) {
+  return function(alertIndex) {
     const newList = [...this.state['alerts']];
     newList.splice(alertIndex, 1);
 

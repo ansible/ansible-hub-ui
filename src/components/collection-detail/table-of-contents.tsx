@@ -89,7 +89,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
               <SearchInput
                 ref={this.props.searchBarRef}
                 value={params.keywords}
-                onChange={(val) => {
+                onChange={val => {
                   updateParams(ParamHelper.setParam(params, 'keywords', val));
                 }}
                 onClear={() =>
@@ -103,7 +103,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
         </Toolbar>
         <Nav theme='light'>
           <NavList>
-            {Object.keys(table).map((key) =>
+            {Object.keys(table).map(key =>
               table[key].length === 0
                 ? null
                 : this.renderLinks(
@@ -147,7 +147,10 @@ export class TableOfContents extends React.Component<IProps, IState> {
         const url = sanitizeDocsUrls(file.name);
         table.documentation.push({
           display: this.capitalize(
-            file.name.split('.')[0].split('_').join(' '),
+            file.name
+              .split('.')[0]
+              .split('_')
+              .join(' '),
           ),
           url: formatPath(Paths.collectionDocsPageByRepo, {
             ...baseUrlParams,
@@ -199,7 +202,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
 
   private renderLinks(links: DocsEntry[], title, filterString: string) {
     const isExpanded = !this.state.collapsedCategories.includes(title);
-    const filteredLinks = links.filter((link) =>
+    const filteredLinks = links.filter(link =>
       link.display.toLowerCase().includes(filterString.toLowerCase()),
     );
     return (

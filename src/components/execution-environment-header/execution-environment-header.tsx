@@ -40,7 +40,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
             <Tabs
               tabs={tabs}
               params={{ tab: this.props.tab }}
-              updateParams={(p) => this.props.updateState({ redirect: p.tab })}
+              updateParams={p => this.props.updateState({ redirect: p.tab })}
             />
           </div>
         </div>

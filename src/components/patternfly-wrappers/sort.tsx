@@ -58,7 +58,7 @@ export class Sort extends React.Component<IProps, IState> {
   private onSelect(name) {
     let isDescending = this.getIsDescending(this.props.params);
 
-    const option = this.props.options.find((i) => i.title === name);
+    const option = this.props.options.find(i => i.title === name);
 
     // Alphabetical sorting is inverted in Django, so flip it here to make
     // things match up with the UI.
@@ -114,7 +114,7 @@ export class Sort extends React.Component<IProps, IState> {
       sort = sort.substring(1, sort.length);
     }
 
-    const option = this.props.options.find((x) => x.id === sort);
+    const option = this.props.options.find(x => x.id === sort);
 
     return option ? option : def;
   }
@@ -142,13 +142,13 @@ export class Sort extends React.Component<IProps, IState> {
           <Select
             variant={SelectVariant.single}
             aria-label={_`Select input`}
-            onToggle={(e) => this.onToggle(e)}
+            onToggle={e => this.onToggle(e)}
             onSelect={(_, name) => this.onSelect(name)}
             selections={selectedOption.title}
             isOpen={isExpanded}
             aria-labelledby={_`Sort results`}
           >
-            {options.map((option) => (
+            {options.map(option => (
               <SelectOption key={option.id} value={option.title} />
             ))}
           </Select>

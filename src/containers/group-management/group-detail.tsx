@@ -105,24 +105,22 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     GroupAPI.get(this.state.params.id)
-      .then((result) => {
+      .then(result => {
         this.setState({ group: result.data });
       })
-      .catch((e) =>
-        this.addAlert(_`Error loading group.`, 'danger', e.message),
-      );
+      .catch(e => this.addAlert(_`Error loading group.`, 'danger', e.message));
 
     GroupAPI.getPermissions(this.state.params.id)
-      .then((result) => {
+      .then(result => {
         this.setState({
-          originalPermissions: result.data.data.map((p) => ({
+          originalPermissions: result.data.data.map(p => ({
             id: p.id,
             name: p.permission,
           })),
-          permissions: result.data.data.map((x) => x.permission),
+          permissions: result.data.data.map(x => x.permission),
         });
       })
-      .catch((e) =>
+      .catch(e =>
         this.addAlert(_`Error loading permissions.`, 'danger', e.message),
       );
   }
@@ -149,7 +147,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       return (
         <AlertList
           alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          closeAlert={i => this.closeAlert(i)}
         ></AlertList>
       );
     }
@@ -166,7 +164,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       <React.Fragment>
         <AlertList
           alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          closeAlert={i => this.closeAlert(i)}
         ></AlertList>
         {addModalVisible ? this.renderAddModal() : null}
         {showDeleteModal ? this.renderGroupDeleteModal() : null}
@@ -194,7 +192,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                 disabledTitle={_`Please finish editing permissions first.`}
                 tabs={tabs}
                 params={params}
-                updateParams={(p) => this.updateParams(p)}
+                updateParams={p => this.updateParams(p)}
               />
             </div>
           </div>
@@ -232,11 +230,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const { group, originalPermissions, permissions } = this.state;
 
     // Add permissions
-    permissions.forEach((permission) => {
-      if (!originalPermissions.find((p) => p.name === permission)) {
+    permissions.forEach(permission => {
+      if (!originalPermissions.find(p => p.name === permission)) {
         GroupAPI.addPermission(group.id, {
           permission: permission,
-        }).catch((e) =>
+        }).catch(e =>
           this.addAlert(
             _`Permission ${permission} was not added.`,
             'danger',
@@ -247,9 +245,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     });
 
     // Remove permissions
-    originalPermissions.forEach((original) => {
+    originalPermissions.forEach(original => {
       if (!permissions.includes(original.name)) {
-        GroupAPI.removePermission(group.id, original.id).catch((e) =>
+        GroupAPI.removePermission(group.id, original.id).catch(e =>
           this.addAlert(
             _`Permission ${original.name} was not removed.`,
             'danger',
@@ -277,7 +275,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           )}
         </div>
         <div>
-          {groups.map((group) => (
+          {groups.map(group => (
             <Flex
               style={{ marginTop: '16px' }}
               alignItems={{ default: 'alignItemsCenter' }}
@@ -289,32 +287,30 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                 <PermissionChipSelector
                   availablePermissions={group.object_permissions
                     .filter(
-                      (perm) =>
+                      perm =>
                         !selectedPermissions.find(
-                          (selected) => selected === perm,
+                          selected => selected === perm,
                         ),
                     )
-                    .map((value) =>
+                    .map(value =>
                       twoWayMapper(value, Constants.HUMAN_PERMISSIONS),
                     )
                     .sort()}
                   selectedPermissions={selectedPermissions
-                    .filter((selected) =>
-                      group.object_permissions.find(
-                        (perm) => selected === perm,
-                      ),
+                    .filter(selected =>
+                      group.object_permissions.find(perm => selected === perm),
                     )
-                    .map((value) =>
+                    .map(value =>
                       twoWayMapper(value, Constants.HUMAN_PERMISSIONS),
                     )}
-                  setSelected={(perms) => this.setState({ permissions: perms })}
+                  setSelected={perms => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
                   isViewOnly={!editPermissions}
                   onClear={() => {
                     const clearedPerms = group.object_permissions;
                     this.setState({
                       permissions: this.state.permissions.filter(
-                        (x) => !clearedPerms.includes(x),
+                        x => !clearedPerms.includes(x),
                       ),
                     });
                   }}
@@ -402,36 +398,36 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       >
         <APISearchTypeAhead
           results={this.state.options}
-          loadResults={(name) =>
+          loadResults={name =>
             UserAPI.list({ username__contains: name, page_size: 5 })
-              .then((result) => {
+              .then(result => {
                 let filteredUsers = [];
-                result.data.data.forEach((user) => {
+                result.data.data.forEach(user => {
                   filteredUsers.push({
                     id: user.id,
                     name: user.username,
                   });
                 });
                 filteredUsers = filteredUsers.filter(
-                  (x) =>
-                    !this.state.selected.find((s) => s.name === x.name) &&
-                    !this.state.users.find((u) => u.id === x.id),
+                  x =>
+                    !this.state.selected.find(s => s.name === x.name) &&
+                    !this.state.users.find(u => u.id === x.id),
                 );
                 this.setState({
                   options: filteredUsers,
                 });
               })
-              .catch((e) =>
+              .catch(e =>
                 this.addAlert(_`Error loading users.`, 'danger', e.message),
               )
           }
           onSelect={(event, selection) => {
             const selectedUser = this.state.options.find(
-              (x) => x.name === selection,
+              x => x.name === selection,
             );
             if (selectedUser) {
               const newOptions = this.state.options.filter(
-                (x) => x.name !== selection,
+                x => x.name !== selection,
               );
               this.setState({
                 selected: [...this.state.selected, selectedUser],
@@ -439,10 +435,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               });
             } else {
               const deselectedUser = this.state.selected.find(
-                (x) => x.name === selection,
+                x => x.name === selection,
               );
               const newSelected = this.state.selected.filter(
-                (x) => x.name !== selection,
+                x => x.name !== selection,
               );
               this.setState({
                 selected: newSelected,
@@ -478,7 +474,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           this.addAlert(_`Successfully deleted group.`, 'success');
           this.props.history.push(Paths.groupList);
         })
-        .catch((e) =>
+        .catch(e =>
           this.addAlert(_`Error deleting group.`, 'danger', e.message),
         );
     };
@@ -516,30 +512,26 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private addUserToGroup(selectedUsers, group) {
     return Promise.all(
       selectedUsers.map(({ id }) => {
-        const user = this.state.allUsers.find((x) => x.id === id);
+        const user = this.state.allUsers.find(x => x.id === id);
         return UserAPI.update(id.toString(), {
           ...user,
           groups: [...user.groups, group],
         });
       }),
     )
-      .catch((e) =>
-        this.addAlert(_`Error updating users.`, 'danger', e.message),
-      )
+      .catch(e => this.addAlert(_`Error updating users.`, 'danger', e.message))
       .then(() => this.queryUsers());
   }
 
   private loadOptions() {
     UserAPI.list()
-      .then((result) => {
+      .then(result => {
         const options = result.data.data
-          .filter((user) => !this.state.users.find((u) => u.id === user.id))
-          .map((option) => ({ id: option.id, name: option.username }));
+          .filter(user => !this.state.users.find(u => u.id === user.id))
+          .map(option => ({ id: option.id, name: option.username }));
         this.setState({ options, allUsers: result.data.data });
       })
-      .catch((e) =>
-        this.addAlert(_`Error loading users.`, 'danger', e.message),
-      );
+      .catch(e => this.addAlert(_`Error loading users.`, 'danger', e.message));
   }
 
   private addAlert(title, variant, description?) {
@@ -590,7 +582,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               <ToolbarGroup>
                 <ToolbarItem>
                   <CompoundFilter
-                    updateParams={(p) =>
+                    updateParams={p =>
                       this.updateParams(p, () => this.queryUsers())
                     }
                     params={params}
@@ -631,14 +623,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
           <Pagination
             params={params}
-            updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
+            updateParams={p => this.updateParams(p, () => this.queryUsers())}
             count={itemCount}
             isTop
           />
         </div>
         <div>
           <AppliedFilters
-            updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
+            updateParams={p => this.updateParams(p, () => this.queryUsers())}
             params={params}
             ignoredParams={['page_size', 'page', 'sort', 'id', 'tab']}
           />
@@ -647,7 +639,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
           <Pagination
             params={params}
-            updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
+            updateParams={p => this.updateParams(p, () => this.queryUsers())}
             count={itemCount}
           />
         </div>{' '}
@@ -701,7 +693,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
+          updateParams={p => this.updateParams(p, () => this.queryUsers())}
         />
         <tbody>{users.map((user, i) => this.renderTableRow(user, i))}</tbody>
       </table>
@@ -747,19 +739,17 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       ...this.state.params,
       ...{ groups__name: this.state.group.name },
     })
-      .then((result) =>
+      .then(result =>
         this.setState({
           users: result.data.data,
           itemCount: result.data.meta.count,
         }),
       )
-      .catch((e) =>
-        this.addAlert(_`Error loading users.`, 'danger', e.message),
-      );
+      .catch(e => this.addAlert(_`Error loading users.`, 'danger', e.message));
   }
 
   private deleteUser(user) {
-    user.groups = user.groups.filter((group) => {
+    user.groups = user.groups.filter(group => {
       return group.id != this.state.params.id;
     });
 
@@ -771,7 +761,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         this.addAlert(_`Successfully removed a user from a group.`, 'success');
         this.queryUsers();
       })
-      .catch((e) =>
+      .catch(e =>
         this.addAlert(
           _`Error removing user from a group.`,
           'danger',

@@ -84,7 +84,7 @@ export class ImportModal extends React.Component<IProps, IState> {
               className='upload-file'
               type='file'
               id='collection-widget'
-              onChange={(e) => this.handleFileUpload(e.target.files)}
+              onChange={e => this.handleFileUpload(e.target.files)}
             />
             <label className='upload-file-label' htmlFor='collection-widget'>
               <div className='upload-box'>
@@ -194,17 +194,17 @@ export class ImportModal extends React.Component<IProps, IState> {
     CollectionAPI.upload(
       'inbound-' + this.props.namespace,
       artifact,
-      (e) => {
+      e => {
         this.setState({
           uploadProgress: e.loaded / e.total,
         });
       },
       this.cancelToken,
     )
-      .then((response) => {
+      .then(response => {
         this.props.onUploadSuccess(response);
       })
-      .catch((errors) => {
+      .catch(errors => {
         let errorMessage = '';
 
         // If request was canceled by the user
