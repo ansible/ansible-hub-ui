@@ -18,7 +18,7 @@ describe('Group Permissions Tests', () => {
   before(() => {
     cy.deleteTestUsers();
     cy.deleteTestGroups();
-    cy.login(adminUsername, adminPassword);
+    cy.cookieLogin(adminUsername, adminPassword);
     addTestGroup('group2', []);
     addTestGroup('group3', ['View group']);
     addTestGroup('group4', [
