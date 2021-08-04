@@ -1,5 +1,4 @@
 describe('A namespace form', () => {
-  let baseUrl = Cypress.config().baseUrl;
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
 
@@ -26,8 +25,8 @@ describe('A namespace form', () => {
   };
 
   beforeEach(() => {
-    cy.visit(baseUrl);
-    cy.login(adminUsername, adminPassword);
+    cy.visit('/');
+    cy.cookieLogin(adminUsername, adminPassword);
     createNamespace();
     cy.menuGo('Collections > Namespaces');
     getCreateNamespace().click();
