@@ -67,43 +67,43 @@ Cypress.Commands.add('getUserTokens', {}, (func) => {
   func(user_tokens);
 });
 
-function cookieManualLogin(username, password)
-{
-    cy.login(username, password);
-    cy.getCookies().then((cookies) => {
-      let sessionid;
-      let csrftoken;
+function cookieManualLogin(username, password) {
+  cy.login(username, password);
+  cy.getCookies().then((cookies) => {
+    let sessionid;
+    let csrftoken;
 
-      cookies.forEach((cookie) => {
-        if (cookie.name == 'sessionid') {
-          sessionid = cookie.value;
-        }
-        if (cookie.name == 'csrftoken') {
-          csrftoken = cookie.value;
-        }
-      });
+    cookies.forEach((cookie) => {
+      if (cookie.name == 'sessionid') {
+        sessionid = cookie.value;
+      }
+      if (cookie.name == 'csrftoken') {
+        csrftoken = cookie.value;
+      }
+    });
 
-      user_tokens[username] = { sessionid, csrftoken };
-	});
+    user_tokens[username] = { sessionid, csrftoken };
+  });
 }
 
 Cypress.Commands.add('cookieLogin', {}, (username, password) => {
   if (!user_tokens[username]) {
-	cookieManualLogin(username, password);
-  }
-  else {
-	let csrftoken = user_tokens[username].csrftoken;
-	let sessionid = user_tokens[username].sessionid;
-	cy.setCookie('csrftoken', csrftoken);
-	cy.setCookie('sessionid', sessionid);
-	cy.visit('/');
-	cy.request({url: '/api/automation-hub/_ui/v1/me/', failOnStatusCode: false}).then((response) => {
-		if (response.statusText != 'OK')
-		{
-			delete user_tokens[username];
-			cookieManualLogin(username, password);	
-		}
-	});
+    cookieManualLogin(username, password);
+  } else {
+    let csrftoken = user_tokens[username].csrftoken;
+    let sessionid = user_tokens[username].sessionid;
+    cy.setCookie('csrftoken', csrftoken);
+    cy.setCookie('sessionid', sessionid);
+    cy.visit('/');
+    cy.request({
+      url: '/api/automation-hub/_ui/v1/me/',
+      failOnStatusCode: false,
+    }).then((response) => {
+      if (response.statusText != 'OK') {
+        delete user_tokens[username];
+        cookieManualLogin(username, password);
+      }
+    });
   }
 });
 

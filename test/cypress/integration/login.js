@@ -77,10 +77,10 @@ describe('Login helpers', () => {
 
     let userName = 'testUser12345';
     for (var i = 0; i <= 1; i++) {
-	  cy.galaxykit('user create', userName, userName);
-	  cy.cookieLogin(userName, userName);
-	  cy.visit('/');
-	  cy.contains(userName);
+      cy.galaxykit('user create', userName, userName);
+      cy.cookieLogin(userName, userName);
+      cy.visit('/');
+      cy.contains(userName);
       cy.deleteTestUsers();
     }
   });
