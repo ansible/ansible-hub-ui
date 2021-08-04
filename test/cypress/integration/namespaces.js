@@ -19,7 +19,7 @@ describe('Namespaces Page Tests', () => {
   });
 
   it('can navigate to pubic namespace list', () => {
-    cy.login('testUser2', 'p@ssword1');
+    cy.cookieLogin('testUser2', 'p@ssword1');
     cy.menuGo('Collections > Namespaces');
 
     cy.contains('testns2').should('exist');
@@ -27,7 +27,7 @@ describe('Namespaces Page Tests', () => {
   });
 
   it('can navigate to personal namespace list', () => {
-    cy.login('testUser2', 'p@ssword1');
+    cy.cookieLogin('testUser2', 'p@ssword1');
     cy.menuGo('Collections > Namespaces');
 
     cy.contains('My namespaces').click();
