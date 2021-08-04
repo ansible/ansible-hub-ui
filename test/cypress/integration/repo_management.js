@@ -5,7 +5,7 @@ describe('Repo Management tests', () => {
   let adminPassword = Cypress.env('password');
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.cookieLogin(adminUsername, adminPassword);
   });
 
   it('admin user sees download_concurrency in remote config', () => {
