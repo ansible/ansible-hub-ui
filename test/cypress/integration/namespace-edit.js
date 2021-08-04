@@ -46,7 +46,7 @@ describe('Edit a namespace', () => {
 
   beforeEach(() => {
     cy.visit(baseUrl);
-    cy.login(adminUsername, adminPassword);
+    cy.cookieLogin(adminUsername, adminPassword);
     cy.galaxykit('-i namespace create', 'testns1');
     cy.menuGo('Collections > Namespaces');
     cy.get('a[href*="ui/repo/published/testns1"]').click();
