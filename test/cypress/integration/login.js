@@ -9,7 +9,7 @@ describe('Login helpers', () => {
     cy.galaxykit('user create', username, password);
   });
 
-  /*it('can login manually and logout as admin or different user', () => {
+  it('can login manually and logout as admin or different user', () => {
     cy.login(username, password);
     cy.contains(username);
     cy.logout();
@@ -70,22 +70,18 @@ describe('Login helpers', () => {
     });
     cy.cookieLogin(adminUsername, adminPassword);
     cy.contains(adminUsername);
-  });*/
+  });
 
   it('can login again to user that has been deleted and created again', () => {
     cy.deleteTestUsers();
-    cy.deleteTestGroups();
-    let groupName = 'testGroup';
-    let userName = 'testUser12345';
 
+    let userName = 'testUser12345';
     for (var i = 0; i <= 1; i++) {
-      cy.cookieLogin(adminUsername, adminPassword);
-      cy.createGroup(groupName);
-      cy.createUser(userName, userName);
-      cy.addUserToGroup(groupName, userName);
-      cy.cookieLogin(userName, userName);
+	  cy.galaxykit('user create', userName, userName);
+	  cy.cookieLogin(userName, userName);
+	  cy.visit('/');
+	  cy.contains(userName);
       cy.deleteTestUsers();
-      cy.deleteTestGroups();
     }
   });
 });

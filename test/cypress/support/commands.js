@@ -67,8 +67,8 @@ Cypress.Commands.add('getUserTokens', {}, (func) => {
   func(user_tokens);
 });
 
-Cypress.Commands.add('cookieLogin', {}, (username, password) => {
-  if (!user_tokens[username]) {
+function cookieManualLogin(username, password)
+{
     cy.login(username, password);
     cy.getCookies().then((cookies) => {
       let sessionid;
@@ -84,14 +84,26 @@ Cypress.Commands.add('cookieLogin', {}, (username, password) => {
       });
 
       user_tokens[username] = { sessionid, csrftoken };
-    });
-  } else {
-    let csrftoken = user_tokens[username].csrftoken;
-    let sessionid = user_tokens[username].sessionid;
+	});
+}
 
-    cy.setCookie('csrftoken', csrftoken);
-    cy.setCookie('sessionid', sessionid);
-    cy.visit('/');
+Cypress.Commands.add('cookieLogin', {}, (username, password) => {
+  if (!user_tokens[username]) {
+	cookieManualLogin(username, password);
+  }
+  else {
+	let csrftoken = user_tokens[username].csrftoken;
+	let sessionid = user_tokens[username].sessionid;
+	cy.setCookie('csrftoken', csrftoken);
+	cy.setCookie('sessionid', sessionid);
+	cy.visit('/');
+	cy.request({url: '/api/automation-hub/_ui/v1/me/', failOnStatusCode: false}).then((response) => {
+		if (response.statusText != 'OK')
+		{
+			delete user_tokens[username];
+			cookieManualLogin(username, password);	
+		}
+	});
   }
 });
 
