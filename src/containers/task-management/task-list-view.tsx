@@ -55,7 +55,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     }
 
     if (!params['sort']) {
-      params['sort'] = 'name';
+      params['sort'] = 'created_by';
     }
 
     this.state = {
@@ -74,10 +74,6 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     const { params, itemCount, loading, items } = this.state;
     const noData =
       items.length === 0 && !filterIsSet(params, ['name__contains', 'state']);
-
-    if (!params['sort']) {
-      params['sort'] = 'name';
-    }
 
     return (
       <React.Fragment>
