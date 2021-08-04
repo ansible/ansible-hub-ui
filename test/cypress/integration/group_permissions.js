@@ -40,14 +40,14 @@ describe('Group Permissions Tests', () => {
     // test user without any group at all
     let user = 'user1';
     cy.login(user, user + 'Password');
-    cy.visit('/ui/group_list');
+    cy.visit(groupsUrl);
     cy.contains('Groups').should('not.exist');
     cy.logout();
 
     // test user in group with no privilleges
     user = 'user2';
     cy.login(user, user + 'Password');
-    cy.visit('/ui/group_list');
+    cy.visit(groupsUrl);
     cy.contains('Groups').should('not.exist');
   });
 
