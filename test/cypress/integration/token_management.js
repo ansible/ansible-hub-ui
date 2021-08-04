@@ -9,7 +9,7 @@ describe('Token Management Tests', () => {
 
   beforeEach(() => {
     cy.visit('/');
-    cy.login(adminUsername, adminPassword);
+    cy.cookieLogin(adminUsername, adminPassword);
   });
 
   it('user can load token', () => {
