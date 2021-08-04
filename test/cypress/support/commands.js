@@ -95,15 +95,22 @@ Cypress.Commands.add('cookieLogin', {}, (username, password) => {
     cy.setCookie('csrftoken', csrftoken);
     cy.setCookie('sessionid', sessionid);
     cy.visit('/');
-    cy.request({
-      url: '/api/automation-hub/_ui/v1/me/',
-      failOnStatusCode: false,
-    }).then((response) => {
-      if (response.statusText != 'OK') {
-        delete user_tokens[username];
-        cookieManualLogin(username, password);
-      }
-    });
+    
+	// we must test if the user is really still available, because
+	// normal users (different than admin) can be deleted during test, so we must
+	// relogin manualy
+	if (username != 'admin')
+	{
+		cy.request({
+		url: '/api/automation-hub/_ui/v1/me/',
+		failOnStatusCode: false,
+		}).then((response) => {
+		if (response.statusText != 'OK') {
+			delete user_tokens[username];
+			cookieManualLogin(username, password);
+		}
+		});
+	}
   }
 });
 
