@@ -1,5 +1,4 @@
 describe('Edit a namespace', () => {
-  let baseUrl = Cypress.config().baseUrl;
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
 
@@ -45,7 +44,6 @@ describe('Edit a namespace', () => {
   });
 
   beforeEach(() => {
-    cy.visit(baseUrl);
     cy.login(adminUsername, adminPassword);
     cy.galaxykit('-i namespace create', 'testns1');
     cy.menuGo('Collections > Namespaces');

@@ -1,7 +1,6 @@
 // This tests the filter on user page. Should apply partial matchMedia.
 
 describe('Search for users', () => {
-  let baseUrl = Cypress.config().baseUrl;
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
 
@@ -53,7 +52,6 @@ describe('Search for users', () => {
   };
 
   beforeEach(() => {
-    cy.visit(baseUrl);
     cy.login(adminUsername, adminPassword);
     cy.menuGo('User Access > Users');
   });

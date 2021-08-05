@@ -1,6 +1,4 @@
 describe('Namespaces Page Tests', () => {
-  var baseUrl = Cypress.config().baseUrl;
-
   before(() => {
     cy.deleteTestUsers();
     cy.deleteTestGroups();

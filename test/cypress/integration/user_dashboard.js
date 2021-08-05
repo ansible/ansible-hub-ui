@@ -1,5 +1,4 @@
 describe('Hub User Management Tests', () => {
-  let baseUrl = Cypress.config().baseUrl;
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
   let username = 'test';
@@ -9,7 +8,6 @@ describe('Hub User Management Tests', () => {
     cy.deleteTestUsers();
     cy.deleteTestGroups();
 
-    cy.visit(baseUrl);
     cy.cookieLogin(adminUsername, adminPassword);
 
     cy.createUser(username, password, 'Test F', 'Test L', 'test@example.com');
@@ -25,7 +23,6 @@ describe('Hub User Management Tests', () => {
 
   describe('basic check of user page', () => {
     beforeEach(() => {
-      cy.visit(baseUrl);
       cy.cookieLogin(adminUsername, adminPassword);
       cy.menuGo('User Access > Users');
     });
@@ -37,7 +34,6 @@ describe('Hub User Management Tests', () => {
 
   describe('Creation and management of users', () => {
     beforeEach(() => {
-      cy.visit(baseUrl);
       cy.cookieLogin(adminUsername, adminPassword);
       cy.menuGo('User Access > Users');
     });
@@ -52,10 +48,6 @@ describe('Hub User Management Tests', () => {
   });
 
   describe('prevents super-user and self deletion', () => {
-    beforeEach(() => {
-      cy.visit(baseUrl);
-    });
-
     function attemptToDelete(toDelete) {
       cy.menuGo('User Access > Users');
       cy.get(`[aria-labelledby=${toDelete}] [aria-label=Actions]`).click();
@@ -71,6 +63,7 @@ describe('Hub User Management Tests', () => {
       cy.cookieLogin(username, password);
       attemptToDelete(username);
     });
+
     it("an ordinary user can't delete the super-user", () => {
       cy.cookieLogin(username, password);
       attemptToDelete(adminUsername);
