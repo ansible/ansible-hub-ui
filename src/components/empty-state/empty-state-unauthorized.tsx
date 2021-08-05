@@ -9,7 +9,7 @@ export class EmptyStateUnauthorized extends React.Component<IProps> {
     return (
       <EmptyStateCustom
         icon={LockIcon}
-        title={_`You do not have have access to Automation Hub`}
+        title={_`You do not have access to Automation Hub`}
         description={_`Contact you organization administrator for more information.`}
       />
     );
