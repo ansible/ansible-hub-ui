@@ -55,6 +55,36 @@ Cypress.Commands.add('menuGo', {}, (name) => {
   return cy.contains('#page-sidebar a', last).click({ force: true });
 });
 
+Cypress.Commands.add('apiLogin', {}, (username, password) => {
+  let loginUrl = '/api/automation-hub/_ui/v1/auth/login/';
+  cy.request('GET', loginUrl).then((response) => {
+	cy.getCookie('csrftoken').then((csrftoken) => {
+		cy
+		.request({method:'POST',url: loginUrl, body : {username: username, password: password}, headers:{'X-CSRFToken' : csrftoken.value}});
+	});	
+  });
+  cy.visit('/');
+});
+
+Cypress.Commands.add('manualLogin', {}, (username, password) => {
+  cy.intercept('POST', Cypress.env('prefix') + '_ui/v1/auth/login/').as(
+    'login',
+  );
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
+  cy.visit('/ui/login');
+  cy.get('#pf-login-username-id').type(username);
+  cy.get('#pf-login-password-id').type(`${password}{enter}`);
+  cy.wait('@login');
+  cy.wait('@me');
+});
+
+
+Cypress.Commands.add('cookieLogout', {}, () => {
+  cy.clearCookie('sessionid');
+  cy.clearCookie('csrftoken');
+  user_tokens = {};
+});
+
 let user_tokens = {};
 
 Cypress.Commands.add('cookieReset', {}, () => {
@@ -97,15 +127,7 @@ Cypress.Commands.add('logout', {}, () => {
 });
 
 Cypress.Commands.add('login', {}, (username, password) => {
-  cy.intercept('POST', Cypress.env('prefix') + '_ui/v1/auth/login/').as(
-    'login',
-  );
-  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
-  cy.visit('/ui/login');
-  cy.get('#pf-login-username-id').type(username);
-  cy.get('#pf-login-password-id').type(`${password}{enter}`);
-  cy.wait('@login');
-  cy.wait('@me');
+  cy.apiLogin(username, password);
 });
 
 Cypress.Commands.add(
