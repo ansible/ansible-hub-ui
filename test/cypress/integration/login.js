@@ -19,12 +19,11 @@ describe('Login helpers', () => {
     cy.contains(adminUsername);
   });
 
-  
   it('can use apiLogin', () => {
-	cy.apiLogin('admin', 'admin');
-	cy.contains('admin');
-	
-	cy.apiLogin(username, password);
-	cy.contains(username);
+    cy.apiLogin('admin', 'admin');
+    cy.contains('admin');
+
+    cy.apiLogin(username, password);
+    cy.contains(username);
   });
 });

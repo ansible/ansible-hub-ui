@@ -58,10 +58,14 @@ Cypress.Commands.add('menuGo', {}, (name) => {
 Cypress.Commands.add('apiLogin', {}, (username, password) => {
   let loginUrl = '/api/automation-hub/_ui/v1/auth/login/';
   cy.request('GET', loginUrl).then((response) => {
-	cy.getCookie('csrftoken').then((csrftoken) => {
-		cy
-		.request({method:'POST',url: loginUrl, body : {username: username, password: password}, headers:{'X-CSRFToken' : csrftoken.value}});
-	});	
+    cy.getCookie('csrftoken').then((csrftoken) => {
+      cy.request({
+        method: 'POST',
+        url: loginUrl,
+        body: { username: username, password: password },
+        headers: { 'X-CSRFToken': csrftoken.value },
+      });
+    });
   });
   cy.visit('/');
 });
@@ -77,7 +81,6 @@ Cypress.Commands.add('manualLogin', {}, (username, password) => {
   cy.wait('@login');
   cy.wait('@me');
 });
-
 
 Cypress.Commands.add('cookieLogout', {}, () => {
   cy.clearCookie('sessionid');
