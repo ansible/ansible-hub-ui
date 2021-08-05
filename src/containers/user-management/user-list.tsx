@@ -250,23 +250,24 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         {
           title: _`Username`,
           type: 'alpha',
-          id: 'username__contains',
+          id: 'username',
         },
         {
           title: _`First name`,
           type: 'alpha',
-          id: 'first_name__contains',
+          id: 'first_name',
           className: 'pf-m-wrap',
         },
         {
           title: _`Last name`,
           type: 'alpha',
-          id: 'last_name__contains',
+          id: 'last_name',
+          className: 'pf-m-wrap',
         },
         {
           title: _`Email`,
           type: 'alpha',
-          id: 'email__contains',
+          id: 'email',
         },
         {
           id: 'groups',
