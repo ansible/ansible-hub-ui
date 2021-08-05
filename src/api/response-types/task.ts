@@ -8,7 +8,7 @@ export class TaskType {
   pulp_href: string;
   progress_report: any[];
   task_group: any;
-  parent_task: any;
+  parent_task: string;
   child_tasks: any[];
   reserved_resources_record: any[];
 }

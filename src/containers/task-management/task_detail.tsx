@@ -48,12 +48,18 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
   componentDidMount() {
     this.loadContent();
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params['task'] !== this.props.match.params['task']) {
+      this.setState({ loading: true });
+      this.loadContent();
+    }
+  }
 
   render() {
     const { loading, task, parentTask, childTasks } = this.state;
     const breadcrumbs = [
       { url: Paths.taskList, name: _`Task management` },
-      { name: !!task ? task.name : '' },
+      { name: !!task ? Constants.TASK_NAMES[task.name] || task.name : '' },
     ];
     let parentTaskId = null;
     if (!!parentTask) {
@@ -138,7 +144,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                               task: parentTaskId,
                             })}
                           >
-                            {parentTask.name}
+                            {Constants.TASK_NAMES[parentTask.name] ||
+                              parentTask.name}
                           </Link>
                         ) : (
                           _`No parent task`
@@ -154,13 +161,17 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                               let childTaskId =
                                 splitedHref[splitedHref.length - 2];
                               return (
-                                <Link
-                                  to={formatPath(Paths.taskDetail, {
-                                    task: childTaskId,
-                                  })}
-                                >
-                                  {childTask.name}
-                                </Link>
+                                <React.Fragment>
+                                  <Link
+                                    to={formatPath(Paths.taskDetail, {
+                                      task: childTaskId,
+                                    })}
+                                  >
+                                    {Constants.TASK_NAMES[childTask.name] ||
+                                      childTask.name}
+                                  </Link>
+                                  <br />
+                                </React.Fragment>
                               );
                             })
                           : _`No child task`}
@@ -197,8 +208,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                     ) : (
                       <EmptyStateCustom
                         icon={CubesIcon}
-                        title={_`There's no progress report.`}
-                        description={_`There's no progress report.`}
+                        title={_`There is no progress report.`}
+                        description={_`There is no progress report.`}
                       />
                     )}
                   </section>
@@ -228,23 +239,37 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
   private loadContent() {
     let taskId = this.props.match.params['task'];
     return TaskManagementAPI.get(taskId).then(result => {
+      let allRelatedTasks = [];
+      let parenTask = null;
+      let childTasks = [];
       if (!!result.data.parent_task) {
-        let original = result.data;
-        return TaskManagementAPI.get(taskId).then(result => {
-          this.setState({
-            loading: false,
-            task: original,
-            parentTask: result.data,
-          });
-        });
-      } else {
-        if (!!result.data.child_tasks.length) {
-          console.log(result.data.child_tasks);
-          this.setState({ loading: false, task: result.data });
-        } else {
-          this.setState({ loading: false, task: result.data });
-        }
+        let splitedHref = result.data.parent_task.split('/');
+        let parentTaskId = splitedHref[splitedHref.length - 2];
+        allRelatedTasks.push(
+          TaskManagementAPI.get(parentTaskId).then(result => {
+            parenTask = result.data;
+          }),
+        );
       }
+      if (!!result.data.child_tasks.length) {
+        result.data.child_tasks.forEach(child => {
+          let splitedHref = child.split('/');
+          let childTaskId = splitedHref[splitedHref.length - 2];
+          allRelatedTasks.push(
+            TaskManagementAPI.get(childTaskId).then(result => {
+              childTasks.push(result.data);
+            }),
+          );
+        });
+      }
+      return Promise.all(allRelatedTasks).then(() => {
+        this.setState({
+          task: result.data,
+          childTasks: childTasks,
+          parentTask: parenTask,
+          loading: false,
+        });
+      });
     });
   }
 }
