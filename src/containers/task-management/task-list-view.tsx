@@ -154,7 +154,10 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                     }
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort', 'ordering']}
-                    niceNames={{ name__contains: _`Name`, state: _`Status` }}
+                    niceNames={{
+                      name__contains: _`Task name`,
+                      state: _`Status`,
+                    }}
                   />
                 </div>
                 {this.renderTable(params)}
