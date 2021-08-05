@@ -14,12 +14,11 @@ describe('Group Permissions Tests', () => {
     cy.galaxykit('-i group create', group);
     cy.addPermissions(group, [{ group: 'groups', permissions: permissions }]);
   }
-  
-  function groupsNotVisible()
-  {
-	  cy.contains('group2').should('not.exist');
-	  cy.contains('group3').should('not.exist');
-	  cy.contains('group4').should('not.exist');
+
+  function groupsNotVisible() {
+    cy.contains('group2').should('not.exist');
+    cy.contains('group3').should('not.exist');
+    cy.contains('group4').should('not.exist');
   }
 
   before(() => {
@@ -48,13 +47,13 @@ describe('Group Permissions Tests', () => {
     let user = 'user1';
     cy.login(user, user + 'Password');
     cy.visit(groupsUrl);
-	groupsNotVisible();
-	
+    groupsNotVisible();
+
     // test user in group with no privilleges
     user = 'user2';
     cy.login(user, user + 'Password');
     cy.visit(groupsUrl);
-	groupsNotVisible();
+    groupsNotVisible();
   });
 
   it('can view groups, can not change groups, can not add groups, can not delete groups', () => {
@@ -77,9 +76,6 @@ describe('Group Permissions Tests', () => {
   });
 
   it('can delete group', () => {
-    // this is not working yet, API is returning error, however group is still deleted
-    // The group should be deleted, because user has rights for it, API should not return error
-    // The problem is probably at API side.
     let user = 'user4';
     cy.login(user, user + 'Password');
     cy.menuGo('User Access > Groups');
