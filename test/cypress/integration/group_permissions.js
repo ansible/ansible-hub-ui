@@ -1,7 +1,6 @@
 describe('Group Permissions Tests', () => {
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
-  let groupsUrl = '/ui/group-list';
 
   function addTestUser(user, group) {
     cy.galaxykit('user create', user, user + 'Password');
@@ -50,21 +49,18 @@ describe('Group Permissions Tests', () => {
 
   it("it can't view groups", () => {
     // test user without any group at all
-    let user = 'user1';
-    cy.login(user, user + 'Password');
-    cy.visit(groupsUrl);
+    cy.login('user1', 'user1Password');
+    cy.visit('/ui/groups');
     groupsNotVisible();
 
     // test user in group with no privilleges
-    user = 'user2';
-    cy.login(user, user + 'Password');
-    cy.visit(groupsUrl);
+    cy.login('user2', 'user2Password');
+    cy.visit('/ui/groups');
     groupsNotVisible();
   });
 
   it('can view groups, can not change groups, can not add groups, can not delete groups', () => {
-    let user = 'user3';
-    cy.login(user, user + 'Password');
+    cy.login('user3', 'user3Password');
     cy.menuGo('User Access > Groups');
 
     cy.contains('Groups');
@@ -74,14 +70,13 @@ describe('Group Permissions Tests', () => {
   });
 
   it('can add group', () => {
-    let user = 'user4';
-    cy.login(user, user + 'Password');
+    cy.login('user4', 'user4Password');
+
     cy.createGroup('NewGroup');
   });
 
   it('can delete group', () => {
-    let user = 'user4';
-    cy.login(user, user + 'Password');
+    cy.login('user4', 'user4Password');
     cy.menuGo('User Access > Groups');
 
     cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
@@ -95,8 +90,8 @@ describe('Group Permissions Tests', () => {
   });
 
   it('can change group', () => {
-    let user = 'user4';
-    cy.login(user, user + 'Password');
+    cy.login('user4', 'user4Password');
+
     cy.removePermissions('group4', [
       { group: 'groups', permissions: ['Change group'] },
     ]);
