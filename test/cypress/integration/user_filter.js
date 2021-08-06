@@ -1,9 +1,17 @@
 // This tests the filter on user page. Should apply partial matchMedia.
 
 describe('Search for users', () => {
-  let baseUrl = Cypress.config().baseUrl;
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
+
+  before(() => {
+    cy.deleteTestUsers();
+  });
+
+  beforeEach(() => {
+    cy.login(adminUsername, adminPassword);
+    cy.menuGo('User Access > Users');
+  });
 
   let usernamefilterInput = () => {
     return cy.get('input[aria-label="username__contains"]').click();
@@ -52,28 +60,20 @@ describe('Search for users', () => {
       .should('have.text', 'No results found');
   };
 
-  beforeEach(() => {
-    cy.visit(baseUrl);
-    cy.login(adminUsername, adminPassword);
-    cy.menuGo('User Access > Users');
-  });
-
-  it('should have title', () => {
+  it('filters users', () => {
+    // should have title
     cy.get('.pf-c-title').should('have.text', 'Users');
-  });
 
-  it('creates a new user', () => {
-    cy.get('.pf-c-toolbar__item > a').click();
-    cy.get('#username').type('new_user');
-    cy.get('#first_name').type('first_name');
-    cy.get('#last_name').type('last_name');
-    cy.get('#email').type('new_user@example.com');
-    cy.get('#password').type('veryhardpassword');
-    cy.get('#password-confirm').type('veryhardpassword');
-    cy.get('.pf-c-button.pf-m-primary').contains('Save').click();
-  });
+    // creates a new user
+    cy.createUser(
+      'new_user',
+      'veryhardpassword',
+      'first_name',
+      'last_name',
+      'new_user@example.com',
+    );
 
-  it('filters by username', () => {
+    // filters by username
     usernamefilterInput().type('new_user');
     search();
     checkUserEntry();
@@ -83,9 +83,11 @@ describe('Search for users', () => {
     usernamefilterInput().clear().type('new_userrrrr');
     search();
     emptyState();
-  });
+    cy.contains('.pf-c-chip-group.pf-m-category', 'Username')
+      .get('button[data-ouia-component-id=close]')
+      .click();
 
-  it('filters by first name', () => {
+    // filters by first name
     filterDropdown();
     chooseField().contains('First name').click();
     firstnamefilterInput().type('first_name');
@@ -97,9 +99,11 @@ describe('Search for users', () => {
     firstnamefilterInput().clear().type('first_nammmmm');
     search();
     emptyState();
-  });
+    cy.contains('.pf-c-chip-group.pf-m-category', 'First name')
+      .get('button[data-ouia-component-id=close]')
+      .click();
 
-  it('filters by last name', () => {
+    // filters by last name
     filterDropdown();
     chooseField().contains('Last name').click();
     lastnamefilterInput().type('last_name');
@@ -111,9 +115,11 @@ describe('Search for users', () => {
     lastnamefilterInput().clear().type('last_nammmmm');
     search();
     emptyState();
-  });
+    cy.contains('.pf-c-chip-group.pf-m-category', 'Last name')
+      .get('button[data-ouia-component-id=close]')
+      .click();
 
-  it('filters by email', () => {
+    // filters by email
     filterDropdown();
     chooseField().contains('Email').click();
     emailfilterInput().type('new_user@example.com');
@@ -125,5 +131,8 @@ describe('Search for users', () => {
     emailfilterInput().clear().type('new_user@example.commmm');
     search();
     emptyState();
+    cy.contains('.pf-c-chip-group.pf-m-category', 'Email')
+      .get('button[data-ouia-component-id=close]')
+      .click();
   });
 });

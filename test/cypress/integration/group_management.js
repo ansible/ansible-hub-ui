@@ -1,19 +1,20 @@
 describe('Hub Group Management Tests', () => {
-  var baseUrl = Cypress.config().baseUrl;
   var adminUsername = Cypress.env('username');
   var adminPassword = Cypress.env('password');
 
   beforeEach(() => {
     cy.deleteTestGroups();
     cy.deleteTestUsers();
-    cy.visit(baseUrl);
+
+    cy.login(adminUsername, adminPassword);
   });
 
   it('admin user can create/delete a group', () => {
     let name = 'testGroup';
-    cy.login(adminUsername, adminPassword);
+
     cy.createGroup(name);
     cy.contains(name).should('exist');
+
     cy.deleteGroup(name);
     cy.contains(name).should('not.exist');
   });
@@ -21,10 +22,11 @@ describe('Hub Group Management Tests', () => {
   it('admin user can add/remove a user to/from a group', () => {
     let groupName = 'testGroup';
     let userName = 'testUser';
-    cy.login(adminUsername, adminPassword);
+
     cy.createGroup(groupName);
     cy.createUser(userName);
     cy.addUserToGroup(groupName, userName);
+
     cy.removeUserFromGroup(groupName, userName);
     cy.deleteGroup(groupName);
     cy.deleteUser(userName);
@@ -39,9 +41,8 @@ describe('Hub Group Management Tests', () => {
       'groups',
       'remotes',
     ];
-    cy.login(adminUsername, adminPassword);
+
     cy.createGroup(name);
-    cy.contains(name).should('exist');
 
     cy.addAllPermissions(name);
     permissionTypes.forEach((permGroup) => {
@@ -58,6 +59,5 @@ describe('Hub Group Management Tests', () => {
     });
 
     cy.deleteGroup(name);
-    cy.contains(name).should('not.exist');
   });
 });

@@ -1,5 +1,4 @@
 describe('A namespace form', () => {
-  let baseUrl = Cypress.config().baseUrl;
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
 
@@ -26,7 +25,6 @@ describe('A namespace form', () => {
   };
 
   beforeEach(() => {
-    cy.visit(baseUrl);
     cy.login(adminUsername, adminPassword);
     createNamespace();
     cy.menuGo('Collections > Namespaces');
@@ -37,30 +35,35 @@ describe('A namespace form', () => {
     getMessage().should('have.text', 'Please, provide the namespace name');
     getCreateButton().should('be.disabled');
   });
+
   it('should give message if input is empty', () => {
     getInputBox().type(' ');
     getMessage().should('have.text', 'Name can only contain [A-Za-z0-9_]');
     getCreateButton().should('be.disabled');
     clearInput();
   });
+
   it('should give message if input has incorrect characters', () => {
     getInputBox().type('!/^[a-zA-Z0-9_]+$/.');
     getMessage().should('have.text', 'Name can only contain [A-Za-z0-9_]');
     getCreateButton().should('be.disabled');
     clearInput();
   });
+
   it('should give message if input is shorter than 3 characters', () => {
     getInputBox().type('na');
     getMessage().should('have.text', 'Name must be longer than 2 characters');
     getCreateButton().should('be.disabled');
     clearInput();
   });
+
   it('should give message if input begins with underscore', () => {
     getInputBox().type('_namespace');
     getMessage().should('have.text', "Name cannot begin with '_'");
     getCreateButton().should('be.disabled');
     clearInput();
   });
+
   it('should give message if name already exists', () => {
     getInputBox().type('testns1');
     getCreateButton().click();
@@ -76,9 +79,6 @@ describe('A namespace form', () => {
     let id = parseInt(Math.random() * 1000000);
     getInputBox().type(`testns_${id}`);
     getCreateButton().click();
-    getUrl().should(
-      'eq',
-      `http://localhost:8002/ui/my-namespaces/testns_${id}`,
-    );
+    getUrl().should('match', /\/ui\/my-namespaces\/testns_/);
   });
 });
