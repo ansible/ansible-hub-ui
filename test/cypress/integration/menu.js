@@ -11,6 +11,7 @@ describe('Hub Menu Tests', () => {
     'Collections > API Token',
     'Collections > Approval',
     'Container Registry',
+    'Task Management',
     'Documentation',
     'User Access > Users',
     'User Access > Groups',
@@ -36,6 +37,7 @@ describe('Hub Menu Tests', () => {
       'Collections > Repository Management',
       'Collections > API Token',
       'Container Registry',
+      'Task Management',
       'Documentation',
     ];
     let missingMenuItems = [
