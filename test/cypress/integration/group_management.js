@@ -43,7 +43,6 @@ describe('Hub Group Management Tests', () => {
     ];
 
     cy.createGroup(name);
-    cy.contains(name).should('exist');
 
     cy.addAllPermissions(name);
     permissionTypes.forEach((permGroup) => {
@@ -60,6 +59,5 @@ describe('Hub Group Management Tests', () => {
     });
 
     cy.deleteGroup(name);
-    cy.contains(name).should('not.exist');
   });
 });

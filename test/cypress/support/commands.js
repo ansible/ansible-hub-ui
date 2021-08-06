@@ -167,18 +167,17 @@ Cypress.Commands.add('createGroup', {}, (name) => {
   );
   cy.contains('div', 'Name *').findnear('input').first().type(`${name}{enter}`);
   cy.wait('@submitGroup');
+
+  // Wait for the list to update
+  cy.contains(name).should('exist');
 });
 
 /*
- * Input
- * groupName 	: name of the group you want to add permissions
- * permissions 	: array of object {group, permissions}
- * 					group 		: groups, users, collections and so on
- * 					permissions : array of permissions (depends on the group) - for example View user, Add user for users, Add group,
- * 									Change group for groups
- *
- *
- * */
+ * groupName: name of the group you want to add permissions to
+ * permissions: array of {group, permissions}
+ *   group: permission group, one of names from PERMISSIONS; namespaces | collections | users | groups | remotes | containers
+ *   permissions: array of HUMAN_PERMISSIONS values (of the right group) - eg. "View user"
+ */
 Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
   cy.intercept(
     'GET',
@@ -201,6 +200,8 @@ Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
   // need to click outside dropdown to make save button clickable
   cy.contains('Edit group permissions').click();
   cy.contains('button', 'Save').click();
+  // wait for for update
+  cy.contains('button', 'Edit');
 });
 
 Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
@@ -230,6 +231,8 @@ Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
     cy.get('h1').click();
   });
   cy.contains('button', 'Save').click();
+  // wait for for update
+  cy.contains('button', 'Edit');
 });
 
 const allPerms = [
@@ -343,11 +346,18 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
   cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
     'deleteGroup',
   );
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/**').as(
+    'listGroups',
+  );
   cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click();
   cy.contains('[role=dialog] button', 'Delete').click();
   cy.wait('@deleteGroup').then(({ request, response }) => {
     expect(response.statusCode).to.eq(204);
   });
+
+  // Wait for list reload
+  cy.wait('@listGroups');
+  cy.contains(name).should('not.exist');
 });
 
 // GalaxyKit Integration
