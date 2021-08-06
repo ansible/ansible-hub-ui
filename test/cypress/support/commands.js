@@ -55,16 +55,10 @@ Cypress.Commands.add('menuGo', {}, (name) => {
   return cy.contains('#page-sidebar a', last).click({ force: true });
 });
 
-Cypress.Commands.add('cookieLogout', {}, () => {
-  cy.clearCookie('sessionid');
-  cy.clearCookie('csrftoken');
-  user_tokens = {};
-});
-
 let user_tokens = {};
 
-Cypress.Commands.add('getUserTokens', {}, (func) => {
-  func(user_tokens);
+Cypress.Commands.add('cookieReset', {}, () => {
+  user_tokens = {};
 });
 
 Cypress.Commands.add('cookieLogin', {}, (username, password) => {

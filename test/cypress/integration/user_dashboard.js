@@ -7,6 +7,7 @@ describe('Hub User Management Tests', () => {
   before(() => {
     cy.deleteTestUsers();
     cy.deleteTestGroups();
+    cy.cookieReset();
 
     cy.cookieLogin(adminUsername, adminPassword);
 
@@ -18,7 +19,6 @@ describe('Hub User Management Tests', () => {
       { group: 'users', permissions: ['View user', 'Delete user'] },
     ]);
     cy.addUserToGroup('delete-user', username);
-    cy.cookieLogout();
   });
 
   describe('basic check of user page', () => {

@@ -6,6 +6,8 @@ describe('Login helpers', () => {
 
   before(() => {
     cy.deleteTestUsers();
+    cy.cookieReset();
+
     cy.galaxykit('user create', username, password);
   });
 
@@ -41,33 +43,6 @@ describe('Login helpers', () => {
     cy.cookieLogin(username, password);
     cy.contains(username);
 
-    cy.cookieLogin(adminUsername, adminPassword);
-    cy.contains(adminUsername);
-  });
-
-  it('can cookieLogin with logout as admin or different user - this will force to login manualy every time', () => {
-    cy.cookieLogin(username, password);
-    cy.contains(username);
-    cy.cookieLogout();
-    cy.getCookies().then((cookies) => {
-      let sessionid = null;
-      let csrftoken = null;
-
-      cookies.forEach((cookie) => {
-        if (cookie.name == 'sessionid') {
-          sessionid = cookie.value;
-        }
-        if (cookie.name == 'csrftoken') {
-          csrftoken = cookie.value;
-        }
-      });
-
-      cy.expect(sessionid).to.be.null;
-      cy.expect(csrftoken).to.be.null;
-    });
-    cy.getUserTokens((user_tokens) => {
-      cy.expect(user_tokens).to.eql({});
-    });
     cy.cookieLogin(adminUsername, adminPassword);
     cy.contains(adminUsername);
   });
