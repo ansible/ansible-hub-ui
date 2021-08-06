@@ -6,6 +6,11 @@ updates:
       interval: 'weekly'
 
   - package-ecosystem: 'npm'
+    directory: '/test'
+    schedule:
+      interval: 'weekly'
+
+  - package-ecosystem: 'npm'
     directory: '/'
     target-branch: 'stable-4.3'
     schedule:
