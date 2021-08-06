@@ -5,14 +5,16 @@ describe('Group Permissions Tests', () => {
 
   function addTestUser(user, group) {
     cy.galaxykit('user create', user, user + 'Password');
-    if (group != null) {
+    if (group) {
       cy.galaxykit('user group add', user, group);
     }
   }
 
   function addTestGroup(group, permissions) {
     cy.galaxykit('-i group create', group);
-    cy.addPermissions(group, [{ group: 'groups', permissions: permissions }]);
+    if (permissions) {
+      cy.addPermissions(group, [{ group: 'groups', permissions }]);
+    }
   }
 
   function groupsNotVisible() {
@@ -24,8 +26,10 @@ describe('Group Permissions Tests', () => {
   before(() => {
     cy.deleteTestUsers();
     cy.deleteTestGroups();
+
     cy.cookieLogin(adminUsername, adminPassword);
-    addTestGroup('group2', []);
+
+    addTestGroup('group2');
     addTestGroup('group3', ['View group']);
     addTestGroup('group4', [
       'View group',
@@ -36,7 +40,9 @@ describe('Group Permissions Tests', () => {
     cy.addPermissions('group4', [
       { group: 'users', permissions: ['View user'] },
     ]);
-    addTestUser('user1', null);
+    addTestGroup('DeleteGroup');
+
+    addTestUser('user1');
     addTestUser('user2', 'group2');
     addTestUser('user3', 'group3');
     addTestUser('user4', 'group4');
@@ -82,7 +88,7 @@ describe('Group Permissions Tests', () => {
     cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
       'deleteGroup',
     );
-    cy.get(`[aria-labelledby=${'NewGroup'}] [aria-label=Delete]`).click();
+    cy.contains('tr', 'DeleteGroup').find('[aria-label=Delete]').click();
     cy.contains('[role=dialog] button', 'Delete').click();
     cy.wait('@deleteGroup').then(({ request, response }) => {
       expect(response.statusCode).to.eq(204);
