@@ -1,6 +1,6 @@
 describe('Repo Management tests', () => {
-  let remoteRepoUrl = '/ui/repositories?page_size=10&tab=remote';
-  let localRepoUrl = '/ui/repositories?page_size=10';
+  let remoteRepoUrl = '/ui/repositories?tab=remote';
+  let localRepoUrl = '/ui/repositories';
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
 
