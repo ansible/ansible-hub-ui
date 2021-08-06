@@ -66,12 +66,10 @@ describe('Group Permissions Tests', () => {
     let user = 'user3';
     cy.login(user, user + 'Password');
     cy.menuGo('User Access > Groups');
+
     cy.contains('Groups');
-    cy.menuGo('User Access > Groups');
     cy.contains('button', 'Edit').should('not.exist');
-    cy.menuGo('User Access > Groups');
     cy.contains('button', 'View').should('not.exist');
-    cy.menuGo('User Access > Groups');
     cy.contains('button', 'Delete').should('not.exist');
   });
 
@@ -85,6 +83,7 @@ describe('Group Permissions Tests', () => {
     let user = 'user4';
     cy.login(user, user + 'Password');
     cy.menuGo('User Access > Groups');
+
     cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
       'deleteGroup',
     );
