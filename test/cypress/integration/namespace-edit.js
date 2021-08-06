@@ -73,7 +73,7 @@ describe('Edit a namespace', () => {
   it('saves a new company name', () => {
     cy.get('#company').clear().type('Company name');
     saveButton().click();
-    cy.url().should('eq', 'http://localhost:8002/ui/my-namespaces/testns1');
+    cy.url().should('match', /\/ui\/my-namespaces\/testns1/);
     cy.get('.pf-c-title').should('contain', 'Company name');
   });
 
@@ -96,20 +96,13 @@ describe('Edit a namespace', () => {
   });
 
   it('tests the Logo URL field', () => {
+    const url = 'https://example.com/';
     cy.get('#avatar_url').clear().type('abcde');
     saveButton().click();
     cy.get('#avatar_url-helper').should('have.text', 'Enter a valid URL.');
-    cy.get('#avatar_url')
-      .clear()
-      .type(
-        'https://www.logotaglines.com/wp-content/uploads/2018/01/IBM-Logo-Tagline.jpg',
-      );
+    cy.get('#avatar_url').clear().type(url);
     saveButton().click();
-    cy.get('div.title-box > div.image > img').should(
-      'have.attr',
-      'src',
-      'https://www.logotaglines.com/wp-content/uploads/2018/01/IBM-Logo-Tagline.jpg',
-    );
+    cy.get('div.title-box > div.image > img').should('have.attr', 'src', url);
   });
 
   it('tests the Description field', () => {
@@ -152,7 +145,7 @@ describe('Edit a namespace', () => {
 
   it('removes a link', () => {
     cy.get(
-      'div.useful-links:first-child > div.link-button > div.link-container > svg > path[d^=M432]',
+      'div.useful-links:first-child > div.link-button > div.link-container > svg',
     ).click();
     saveButton().click();
   });
