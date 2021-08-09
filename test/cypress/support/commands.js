@@ -184,11 +184,11 @@ Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
   permissions.forEach((permissionElement) => {
     permissionElement.permissions.forEach((permission) => {
       // closes previously open dropdowns
-	  cy.get('h1').click();
+      cy.get('h1').click();
       cy.get(
         `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} [aria-label="Options menu"]`,
       ).click();
-	  cy.contains('button', permission).click();
+      cy.contains('button', permission).click();
     });
   });
   // need to click outside dropdown to make save button clickable
@@ -283,7 +283,7 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.contains('button', userName).click();
   // closes previously open dropdown
   cy.get('[aria-label="Options menu"]').click();
-  cy.contains('footer > button', 'Add').click({force:true});
+  cy.contains('footer > button', 'Add').click({ force: true });
   cy.get(`[aria-labelledby=${userName}]`).should('exist');
 });
 
