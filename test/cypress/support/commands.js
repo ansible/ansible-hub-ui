@@ -56,7 +56,7 @@ Cypress.Commands.add('menuGo', {}, (name) => {
 });
 
 Cypress.Commands.add('apiLogin', {}, (username, password) => {
-  let loginUrl = '/api/automation-hub/_ui/v1/auth/login/';
+  let loginUrl = Cypress.env('prefix') + '_ui/v1/auth/login/';
   cy.request('GET', loginUrl).then((response) => {
     cy.getCookie('csrftoken').then((csrftoken) => {
       cy.request({
