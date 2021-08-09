@@ -58,7 +58,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadToken() {
-    ActiveUserAPI.getToken().then(result =>
+    ActiveUserAPI.getToken().then((result) =>
       this.setState({ token: result.data.token }),
     );
   }

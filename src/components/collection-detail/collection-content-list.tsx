@@ -32,13 +32,8 @@ export class CollectionContentList extends React.Component<IProps> {
   static contextType = AppContext;
 
   render() {
-    const {
-      contents,
-      collection,
-      namespace,
-      params,
-      updateParams,
-    } = this.props;
+    const { contents, collection, namespace, params, updateParams } =
+      this.props;
 
     let toShow: ContentSummaryType[] = [];
     const summary = { all: 0 };
@@ -66,7 +61,7 @@ export class CollectionContentList extends React.Component<IProps> {
               <ToolbarItem>
                 <SearchInput
                   value={params.keywords || ''}
-                  onChange={val =>
+                  onChange={(val) =>
                     updateParams(ParamHelper.setParam(params, 'keywords', val))
                   }
                   onClear={() =>
@@ -79,7 +74,7 @@ export class CollectionContentList extends React.Component<IProps> {
             </ToolbarGroup>
             <ToolbarGroup>
               <ToolbarItem>{_`Showing:`}</ToolbarItem>
-              {Object.keys(summary).map(key => (
+              {Object.keys(summary).map((key) => (
                 <ToolbarItem
                   key={key}
                   className={cx({

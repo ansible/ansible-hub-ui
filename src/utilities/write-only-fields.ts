@@ -4,7 +4,7 @@ export function isFieldSet(
   name: string,
   writeOnlyFields: WriteOnlyFieldType[],
 ) {
-  const field = writeOnlyFields.find(el => el.name === name);
+  const field = writeOnlyFields.find((el) => el.name === name);
   if (field) {
     console.log(field);
     return field.is_set;

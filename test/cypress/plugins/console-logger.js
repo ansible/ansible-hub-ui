@@ -7,7 +7,7 @@ let recordLogs;
 let messageLog = [];
 
 const severityColors = {
-  verbose: a => a,
+  verbose: (a) => a,
   info: chalk.blue,
   warning: chalk.yellow,
   error: chalk.red,
@@ -41,16 +41,8 @@ function logEntry(params) {
     return;
   }
 
-  const {
-    level,
-    source,
-    text,
-    timestamp,
-    url,
-    lineNumber,
-    stackTrace,
-    args,
-  } = params.entry;
+  const { level, source, text, timestamp, url, lineNumber, stackTrace, args } =
+    params.entry;
   const color = severityColors[level];
   const icon = severityIcons[level];
 
@@ -61,7 +53,7 @@ function logEntry(params) {
   log(color(logMessage));
   recordLogMessage(logMessage);
 
-  const logAdditional = msg => {
+  const logAdditional = (msg) => {
     let additionalLogMessage = `${prefixSpacer}${msg}`;
     log(color(additionalLogMessage));
     recordLogMessage(additionalLogMessage);
@@ -142,7 +134,7 @@ function isChrome(browser) {
 
 function ensureRdpPort(args) {
   const existing = args.find(
-    arg => arg.slice(0, 23) === '--remote-debugging-port',
+    (arg) => arg.slice(0, 23) === '--remote-debugging-port',
   );
 
   if (existing) {
@@ -173,7 +165,7 @@ function browserLaunchHandler(browser = {}, launchOptions) {
     new CDP({
       port: rdp,
     })
-      .then(cdp => {
+      .then((cdp) => {
         debugLog('Connected to Chrome Debugging Protocol');
 
         /** captures logs from the browser */

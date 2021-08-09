@@ -10,9 +10,8 @@ import {
   ToolbarContent,
   Label,
 } from '@patternfly/react-core';
-import { formatPath, Paths } from 'src/paths';
-import { ParamHelper, filterIsSet, mapErrorMessages } from '../../utilities';
-import { DeleteGroupModal } from '../group-management/delete-group-modal';
+import { ParamHelper, filterIsSet } from '../../utilities';
+import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
@@ -29,7 +28,6 @@ import {
   DateComponent,
   EmptyStateFilter,
   EmptyStateNoData,
-  GroupModal,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -49,8 +47,6 @@ interface IState {
   itemCount: number;
   alerts: AlertType[];
   cancelModalVisible: boolean;
-  redirect?: string;
-  taskError: any;
   selectedTask: TaskType;
 }
 
@@ -77,8 +73,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       loading: true,
       itemCount: 0,
       alerts: [],
-      cancelModalVisible: false, 
-      taskError: null,
+      cancelModalVisible: false,
       selectedTask: null,
     };
   }
@@ -88,14 +83,8 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const {
-      params,
-      itemCount,
-      loading,
-      items,
-      alerts,
-      cancelModalVisible,
-    } = this.state;
+    const { params, itemCount, loading, items, alerts, cancelModalVisible } =
+      this.state;
 
     const noData =
       items.length === 0 && !filterIsSet(params, ['name__contains', 'state']);
@@ -104,7 +93,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       <React.Fragment>
         <AlertList
           alerts={alerts}
-          closeAlert={i => this.closeAlert(i)}
+          closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader title={_`Task Management`} />
@@ -125,7 +114,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                       <ToolbarGroup>
                         <ToolbarItem>
                           <CompoundFilter
-                            updateParams={p => {
+                            updateParams={(p) => {
                               p['page'] = 1;
                               this.updateParams(p, () => this.queryTasks());
                             }}
@@ -166,7 +155,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                   </Toolbar>
                   <Pagination
                     params={params}
-                    updateParams={p =>
+                    updateParams={(p) =>
                       this.updateParams(p, () => this.queryTasks())
                     }
                     count={itemCount}
@@ -175,7 +164,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                 </div>
                 <div>
                   <AppliedFilters
-                    updateParams={p =>
+                    updateParams={(p) =>
                       this.updateParams(p, () => this.queryTasks())
                     }
                     params={params}
@@ -190,7 +179,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                 <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
                   <Pagination
                     params={params}
-                    updateParams={p =>
+                    updateParams={(p) =>
                       this.updateParams(p, () => this.queryTasks())
                     }
                     count={itemCount}
@@ -244,7 +233,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={p => {
+          updateParams={(p) => {
             p['page'] = 1;
             this.updateParams(p, () => this.queryTasks());
           }}
@@ -269,52 +258,46 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={finished_at} />
         </td>
-        {this.statusLabel({ state })}
-        {this.cancelButton( state, item )}
+        <td>{this.statusLabel({ state })}</td>
+        <td>{this.cancelButton(state, item)}</td>
       </tr>
     );
   }
 
-  private cancelButton( state, selectedTask ) {
+  private cancelButton(state, selectedTask) {
     switch (state) {
       case 'running':
         return (
-          <td>
-            <Button
-              variant='secondary'
-              aria-label={_`Delete`}
-              key='delete'
-              onClick={() =>
-                this.setState({
-                  cancelModalVisible: true,
-                  selectedTask: selectedTask,
-                })
-              }
-            >
-              {_`Stop task`}
-            </Button>
-          </td>
+          <Button
+            variant='secondary'
+            aria-label={_`Delete`}
+            key='delete'
+            onClick={() =>
+              this.setState({
+                cancelModalVisible: true,
+                selectedTask: selectedTask,
+              })
+            }
+          >
+            {_`Stop task`}
+          </Button>
         );
       case 'waiting':
         return (
-          <td>
-            <Button
-              variant='secondary'
-              aria-label={_`Delete`}
-              key='delete'
-              onClick={() =>
-                this.setState({
-                  cancelModalVisible: true,
-                  selectedTask: selectedTask,
-                })
-              }
-            >
-              {_`Stop task`}
-            </Button>
-          </td>
+          <Button
+            variant='secondary'
+            aria-label={_`Delete`}
+            key='delete'
+            onClick={() =>
+              this.setState({
+                cancelModalVisible: true,
+                selectedTask: selectedTask,
+              })
+            }
+          >
+            {_`Stop task`}
+          </Button>
         );
-      default:
-        return <td></td>;
     }
   }
 
@@ -322,65 +305,51 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     switch (state) {
       case 'completed':
         return (
-          <td>
-            <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-              {state}
-            </Label>
-          </td>
+          <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
+            {state}
+          </Label>
         );
       case 'failed':
         return (
-          <td>
-            <Label
-              variant='outline'
-              color='red'
-              icon={<ExclamationCircleIcon />}
-            >
-              {state}
-            </Label>
-          </td>
+          <Label variant='outline' color='red' icon={<ExclamationCircleIcon />}>
+            {state}
+          </Label>
         );
       case 'running':
         return (
-          <td>
-            <Label variant='outline' color='blue' icon={<SyncAltIcon />}>
-              {state}
-            </Label>
-          </td>
+          <Label variant='outline' color='blue' icon={<SyncAltIcon />}>
+            {state}
+          </Label>
         );
       case 'waiting':
         return (
-          <td>
-            <Label variant='outline' color='grey' icon={<OutlinedClockIcon />}>
-              {state}
-            </Label>
-          </td>
+          <Label variant='outline' color='grey' icon={<OutlinedClockIcon />}>
+            {state}
+          </Label>
         );
       default:
-        return (
-          <td>
-            <Label variant='outline'>{state}</Label>
-          </td>
-        );
+        return <Label variant='outline'>{state}</Label>;
     }
   }
 
   private renderCancelModal() {
-    const name = Constants.TASK_NAMES[this.state.selectedTask.name] || this.state.selectedTask.name;
-    console.log('task name: ', this.state.items);
+    const name =
+      Constants.TASK_NAMES[this.state.selectedTask.name] ||
+      this.state.selectedTask.name;
     return (
       <DeleteModal
-        cancelAction={() => this.setState({cancelModalVisible: false})}
-        deleteAction={() => this.selectedTask(this.state.selectedTask)}
+        cancelAction={() => this.setState({ cancelModalVisible: false })}
+        deleteAction={() => this.selectedTask(this.state.selectedTask, name)}
         title={_`Stop task?`}
         children={_`${name} will be cancelled.`}
       />
     );
   }
 
-  private selectedTask(task) {
-    const name = Constants.TASK_NAMES[this.state.selectedTask.name] || this.state.selectedTask.name
-    TaskManagementAPI.patch(task.pulp_href.split('/').at(-2), {state: 'canceled'})
+  private selectedTask(task, name) {
+    TaskManagementAPI.patch(parsePulpIDFromURL(task.pulp_href), {
+      state: 'canceled',
+    })
       .then(() => {
         this.setState({
           loading: true,
@@ -413,15 +382,13 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       );
   }
 
-
   private get closeAlert() {
     return closeAlertMixin('alerts');
   }
 
-
   private queryTasks() {
     this.setState({ loading: true }, () => {
-      TaskManagementAPI.list(this.state.params).then(result => {
+      TaskManagementAPI.list(this.state.params).then((result) => {
         this.setState({
           items: result.data.results,
           itemCount: result.data.count,
