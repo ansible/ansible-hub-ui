@@ -126,9 +126,16 @@ jobs:
       run: |
         npm install
         npm run build-standalone
+
+        # save the App.*.js hash for later verification
+        BUILD_HASH=`ls dist/js/App*js | cut -d. -f2`
+        echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
+
         rm -rf ../pulp_galaxy_ng/static/galaxy_ng/ || true
         mv -v dist/ ../pulp_galaxy_ng/static/galaxy_ng
-        podman exec pulp bash -c "s6-svc -r /var/run/s6/services/pulpcore-api" # apply changes, api also serves static assets
+
+        # apply changes, runs collectstatic and serves static assets
+        podman exec pulp bash -c "s6-svc -r /var/run/s6/services/pulpcore-api"
 
     - name: "Finish up and run cypress"
       working-directory: 'ansible-hub-ui/test'
@@ -140,13 +147,8 @@ jobs:
         npm install
         echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
 
-        echo;echo index.html
-        curl http://localhost:8002/static/galaxy_ng/index.html
-        echo;echo App-good
-        curl http://localhost:8002/static/galaxy_ng/js/App.e400d1830cf70196db07.js
-        echo;echo App-bad
-        curl http://localhost:8002/static/galaxy_ng/js/App.fbd114cdb000ec6fd762.js
-        echo
+        # ensure index.html uses the new js
+        curl http://localhost:8002/static/galaxy_ng/index.html | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
 
         npm run cypress:chrome
 
