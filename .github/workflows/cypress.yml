@@ -70,7 +70,7 @@ jobs:
     - name: "Configure and run pulp-galaxy-ng"
       working-directory: 'pulp_galaxy_ng'
       run: |
-        mkdir settings pulp_storage pgsql containers
+        mkdir settings static
         echo '# settings/settings.py'
         echo "\
           ANSIBLE_API_HOSTNAME='http://localhost:8002'
@@ -90,9 +90,10 @@ jobs:
              --publish 8002:80 \
              --name pulp \
              --volume "$(pwd)/settings":/etc/pulp \
-             --volume "$(pwd)/pulp_storage":/var/lib/pulp \
-             --volume "$(pwd)/pgsql":/var/lib/pgsql \
-             --volume "$(pwd)/containers":/var/lib/containers \
+             --volume "$(pwd)/static":/usr/local/lib/python3.8/site-packages/galaxy_ng/app/static \
+             --tmpfs /var/lib/pulp \
+             --tmpfs /var/lib/pgsql \
+             --tmpfs /var/lib/containers \
              --device /dev/fuse \
              localhost/pulp/pulp-galaxy-ng:latest
 
@@ -122,11 +123,11 @@ jobs:
       run: |
         npm install
         npm run build-standalone
-        rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
-        mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
-        podman exec pulp bash -c "ls -l /var/run/s6/services/pulpcore-api/"
-        podman exec pulp bash -c "cat /var/run/s6/services/pulpcore-api/run"
-        podman exec pulp bash -c "sed -i 's/collectstatic --clear/collectstatic/' /var/run/s6/services/pulpcore-api/run"
+        rm -rf ../pulp_galaxy_ng/static/galaxy_ng/ || true
+        mv -v dist/ ../pulp_galaxy_ng/static/galaxy_ng
+        #podman exec pulp bash -c "ls -l /var/run/s6/services/pulpcore-api/"
+        #podman exec pulp bash -c "cat /var/run/s6/services/pulpcore-api/run"
+        #podman exec pulp bash -c "sed -i 's/collectstatic --clear/collectstatic/' /var/run/s6/services/pulpcore-api/run"
         podman exec pulp bash -c "s6-svc -r /var/run/s6/services/pulpcore-api" # apply changes, api also serves static assets
 
     - name: "Finish up and run cypress"
