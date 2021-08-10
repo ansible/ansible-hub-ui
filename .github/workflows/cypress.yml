@@ -39,7 +39,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: pulp_galaxy_ng/image
-        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}
+        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-788
 
     - name: "Build pulp-galaxy-ng"
       if: steps.cache-container.outputs.cache-hit != 'true'
@@ -57,6 +57,9 @@ jobs:
           RUN ln /usr/local/lib/python*/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
           RUN ln /usr/local/lib/python*/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
           RUN ln /usr/local/lib/python*/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
+
+          RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
+          RUN ln -sv /galaxy_ng_static /usr/local/lib/python3.8/site-packages/galaxy_ng/app/static
         ' | tee Containerfile
 
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
@@ -90,7 +93,7 @@ jobs:
              --publish 8002:80 \
              --name pulp \
              --volume "$(pwd)/settings":/etc/pulp \
-             --volume "$(pwd)/static":/usr/local/lib/python3.8/site-packages/galaxy_ng/app/static \
+             --volume "$(pwd)/static":/galaxy_ng_static \
              --tmpfs /var/lib/pulp \
              --tmpfs /var/lib/pgsql \
              --tmpfs /var/lib/containers \
@@ -125,9 +128,6 @@ jobs:
         npm run build-standalone
         rm -rf ../pulp_galaxy_ng/static/galaxy_ng/ || true
         mv -v dist/ ../pulp_galaxy_ng/static/galaxy_ng
-        #podman exec pulp bash -c "ls -l /var/run/s6/services/pulpcore-api/"
-        #podman exec pulp bash -c "cat /var/run/s6/services/pulpcore-api/run"
-        #podman exec pulp bash -c "sed -i 's/collectstatic --clear/collectstatic/' /var/run/s6/services/pulpcore-api/run"
         podman exec pulp bash -c "s6-svc -r /var/run/s6/services/pulpcore-api" # apply changes, api also serves static assets
 
     - name: "Finish up and run cypress"
