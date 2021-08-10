@@ -138,8 +138,6 @@ jobs:
         npm install
         echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
 
-        npm run cypress:chrome
-
         echo;echo index.html
         curl http://localhost:8002/static/galaxy_ng/index.html
         echo;echo App-good
@@ -147,6 +145,8 @@ jobs:
         echo;echo App-bad
         curl http://localhost:8002/static/galaxy_ng/js/App.fbd114cdb000ec6fd762.js
         echo
+
+        npm run cypress:chrome
 
     - uses: actions/upload-artifact@v2
       if: failure()
