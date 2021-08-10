@@ -134,6 +134,7 @@ jobs:
       run: |
         # podman exec pulp pip install django_extensions
         podman exec pulp pulpcore-manager reset-admin-password --password admin
+        podman exec pulp pulpcore-manager findstatic galaxy_ng/index.html --verbosity=2
 
         npm install
         echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
