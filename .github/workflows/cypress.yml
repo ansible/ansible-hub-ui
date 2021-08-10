@@ -140,6 +140,14 @@ jobs:
 
         npm run cypress:chrome
 
+        echo;echo index.html
+        curl http://localhost:8002/static/galaxy_ng/index.html
+        echo;echo App-good
+        curl http://localhost:8002/static/galaxy_ng/js/App.e400d1830cf70196db07.js
+        echo;echo App-bad
+        curl http://localhost:8002/static/galaxy_ng/js/App.fbd114cdb000ec6fd762.js
+        echo
+
     - uses: actions/upload-artifact@v2
       if: failure()
       with:
