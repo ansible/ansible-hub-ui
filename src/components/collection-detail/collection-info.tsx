@@ -105,7 +105,11 @@ export class CollectionInfo extends React.Component<IProps> {
             <Split hasGutter={true}>
               <SplitItem className='install-title'>{t`Installation`}</SplitItem>
               <SplitItem isFilled>
-                <ClipboardCopy isReadOnly hoverTip={_`To be translated`}>
+                <ClipboardCopy
+                  isReadOnly
+                  hoverTip={_`Copy to clipboard`}
+                  clickTip={_`Successfully copied to clipboard!`}
+                >
                   {installCommand}
                 </ClipboardCopy>
                 <div>
