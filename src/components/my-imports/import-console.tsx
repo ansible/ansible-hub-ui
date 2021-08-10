@@ -128,18 +128,18 @@ export class ImportConsole extends React.Component<IProps, {}> {
     const { task, hideCollectionName, collectionVersion } = this.props;
 
     let collectionHead: any = `${selectedImport.namespace}.${selectedImport.name}`;
-    let approvalStatus = 'waiting for import to finish';
+    let approvalStatus = _`waiting for import to finish`;
 
     if (collectionVersion) {
       const rlist = collectionVersion.repository_list;
       if (rlist.includes(Constants.NOTCERTIFIED)) {
-        approvalStatus = 'rejected';
+        approvalStatus = _`rejected`;
       } else if (rlist.includes(Constants.NEEDSREVIEW)) {
-        approvalStatus = 'waiting for approval';
+        approvalStatus = _`waiting for approval`;
       } else if (rlist.includes(Constants.PUBLISHED)) {
-        approvalStatus = 'approved';
+        approvalStatus = _`approved`;
       } else {
-        approvalStatus = 'could not be determined yet';
+        approvalStatus = _`could not be determined yet`;
       }
 
       collectionHead = (

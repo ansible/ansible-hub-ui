@@ -105,7 +105,9 @@ export class CollectionInfo extends React.Component<IProps> {
             <Split hasGutter={true}>
               <SplitItem className='install-title'>{t`Installation`}</SplitItem>
               <SplitItem isFilled>
-                <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
+                <ClipboardCopy isReadOnly hoverTip={_`To be translated`}>
+                  {installCommand}
+                </ClipboardCopy>
                 <div>
                   <Trans>
                     <b>Note:</b> Installing collections with ansible-galaxy is

@@ -103,7 +103,8 @@ class App extends React.Component<RouteComponentProps, IState> {
 
       userDropdownItems = [
         <DropdownItem isDisabled key='username'>
-          Username: {user.username}
+          {_`Username: `}
+          {user.username}
         </DropdownItem>,
         <DropdownSeparator key='separator' />,
         <DropdownItem
@@ -130,14 +131,16 @@ class App extends React.Component<RouteComponentProps, IState> {
           href='https://access.redhat.com/support'
           target='_blank'
         >
-          Customer Support <ExternalLinkAltIcon />
+          {_`Customer Support `}
+          <ExternalLinkAltIcon />
         </DropdownItem>,
         <DropdownItem
           key='training'
           href='https://www.ansible.com/resources/webinars-training'
           target='_blank'
         >
-          Training <ExternalLinkAltIcon />
+          {_`Training  `}
+          <ExternalLinkAltIcon />
         </DropdownItem>,
         <DropdownItem
           key='about'

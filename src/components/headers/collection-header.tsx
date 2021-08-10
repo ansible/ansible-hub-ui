@@ -106,7 +106,7 @@ export class CollectionHeader extends React.Component<IProps> {
             </div>
             {latestVersion ? (
               <span className='last-updated'>
-                Last updated{' '}
+                {_`Last updated`}{' '}
                 <DateComponent date={latestVersion}></DateComponent>
               </span>
             ) : null}
