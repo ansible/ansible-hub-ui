@@ -59,7 +59,7 @@ class CollectionDetail extends React.Component<
         <CollectionHeader
           collection={collection}
           params={params}
-          updateParams={(p) =>
+          updateParams={p =>
             this.updateParams(p, () =>
               this.loadCollection(this.context.selectedRepo, true),
             )
@@ -72,7 +72,7 @@ class CollectionDetail extends React.Component<
           <section className='body'>
             <CollectionInfo
               {...collection}
-              updateParams={(p) => this.updateParams(p)}
+              updateParams={p => this.updateParams(p)}
               params={this.state.params}
             />
           </section>

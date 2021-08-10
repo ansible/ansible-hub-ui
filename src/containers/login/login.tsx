@@ -69,17 +69,17 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private handleUsernameChange = (value) => {
+  private handleUsernameChange = value => {
     this.setState({ usernameValue: value });
   };
 
-  private handlePasswordChange = (passwordValue) => {
+  private handlePasswordChange = passwordValue => {
     this.setState({ passwordValue });
   };
 
-  private onLoginButtonClick = (event) => {
+  private onLoginButtonClick = event => {
     ActiveUserAPI.login(this.state.usernameValue, this.state.passwordValue)
-      .then((result) => {
+      .then(result => {
         ActiveUserAPI.getUser()
           .then(() => this.setState({ redirect: this.redirectPage }))
           .catch(() =>
@@ -89,7 +89,7 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
             }),
           );
       })
-      .catch((result) => {
+      .catch(result => {
         if (result.response.status.toString().startsWith('5')) {
           this.setState({
             passwordValue: '',

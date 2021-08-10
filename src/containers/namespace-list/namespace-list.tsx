@@ -82,7 +82,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     if (this.props.filterOwner) {
       // Make a query with no params and see if it returns results to tell
       // if the user can edit namespaces
-      MyNamespaceAPI.list({}).then((results) => {
+      MyNamespaceAPI.list({}).then(results => {
         if (results.data.meta.count !== 0) {
           this.loadNamespaces();
         } else {
@@ -133,7 +133,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
         <NamespaceModal
           isOpen={this.state.isModalOpen}
           toggleModal={this.handleModalToggle}
-          onCreateSuccess={(result) =>
+          onCreateSuccess={result =>
             this.props.history.push(
               formatPath(Paths.myCollections, {
                 namespace: result['name'],
@@ -166,7 +166,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                 params={params}
                 sortOptions={[{ title: _`Name`, id: 'name', type: 'alpha' }]}
                 searchPlaceholder={search}
-                updateParams={(p) =>
+                updateParams={p =>
                   this.updateParams(p, () => this.loadNamespaces())
                 }
                 extraInputs={extra}
@@ -174,7 +174,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
               <div>
                 <Pagination
                   params={params}
-                  updateParams={(p) =>
+                  updateParams={p =>
                     this.updateParams(p, () => this.loadNamespaces())
                   }
                   count={itemCount}
@@ -190,7 +190,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           <section className='footer'>
             <Pagination
               params={params}
-              updateParams={(p) =>
+              updateParams={p =>
                 this.updateParams(p, () => this.loadNamespaces())
               }
               perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
@@ -264,12 +264,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
     let apiFunc: any;
 
     if (this.props.filterOwner) {
-      apiFunc = (p) => MyNamespaceAPI.list(p);
+      apiFunc = p => MyNamespaceAPI.list(p);
     } else {
-      apiFunc = (p) => NamespaceAPI.list(p);
+      apiFunc = p => NamespaceAPI.list(p);
     }
     this.setState({ loading: true }, () => {
-      apiFunc(this.state.params).then((results) => {
+      apiFunc(this.state.params).then(results => {
         this.setState({
           namespaces: results.data.data,
           itemCount: results.data.meta.count,

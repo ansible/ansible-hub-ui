@@ -51,11 +51,11 @@ describe('Login helpers', () => {
     cy.cookieLogin(username, password);
     cy.contains(username);
     cy.cookieLogout();
-    cy.getCookies().then((cookies) => {
+    cy.getCookies().then(cookies => {
       let sessionid = null;
       let csrftoken = null;
 
-      cookies.forEach((cookie) => {
+      cookies.forEach(cookie => {
         if (cookie.name == 'sessionid') {
           sessionid = cookie.value;
         }
@@ -67,7 +67,7 @@ describe('Login helpers', () => {
       cy.expect(sessionid).to.be.null;
       cy.expect(csrftoken).to.be.null;
     });
-    cy.getUserTokens((user_tokens) => {
+    cy.getUserTokens(user_tokens => {
       cy.expect(user_tokens).to.eql({});
     });
     cy.cookieLogin(adminUsername, adminPassword);

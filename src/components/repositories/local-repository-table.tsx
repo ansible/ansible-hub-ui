@@ -79,7 +79,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
     };
 
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      sortTableOptions.headers = sortTableOptions.headers.filter((object) => {
+      sortTableOptions.headers = sortTableOptions.headers.filter(object => {
         return object.id !== 'updated_at' && object.id !== 'cli_config';
       });
     }
@@ -92,10 +92,10 @@ export class LocalRepositoryTable extends React.Component<IProps> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={(p) => console.log(p)}
+          updateParams={p => console.log(p)}
         />
         <tbody>
-          {repositories.map((distribution) => this.renderRow(distribution))}
+          {repositories.map(distribution => this.renderRow(distribution))}
         </tbody>
       </table>
     );

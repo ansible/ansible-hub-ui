@@ -31,7 +31,7 @@ export class DeleteGroupModal extends React.Component<IProps> {
             <>
               <p>{_`These users will lose access to the group content:`}</p>
               <List>
-                {users.map((u) => (
+                {users.map(u => (
                   <ListItem key={u.username}>
                     <b>{u.username}</b>
                   </ListItem>

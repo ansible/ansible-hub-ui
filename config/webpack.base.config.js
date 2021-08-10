@@ -32,7 +32,7 @@ const defaultConfigs = [
   { name: 'USE_FAVICON', default: true, scope: 'webpack' },
 ];
 
-module.exports = (inputConfigs) => {
+module.exports = inputConfigs => {
   const customConfigs = {};
   const globals = {};
 
@@ -79,7 +79,7 @@ module.exports = (inputConfigs) => {
     port: customConfigs.UI_PORT,
 
     // https://github.com/webpack-contrib/webpack-serve/blob/master/docs/addons/history-fallback.config.js
-    add: (app) => app.use(convert(history({}))),
+    add: app => app.use(convert(history({}))),
   };
 
   if (customConfigs.TARGET_ENVIRONMENT === 'prod') {

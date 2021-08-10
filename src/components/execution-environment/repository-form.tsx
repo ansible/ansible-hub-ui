@@ -82,7 +82,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                   'container.namespace_change_containerdistribution',
                 )
               }
-              onChange={(value) => this.setState({ description: value })}
+              onChange={value => this.setState({ description: value })}
               type='text'
               resizeOrientation={'vertical'}
               autoResize={true}
@@ -100,7 +100,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             <ObjectPermissionField
               groups={this.state.selectedGroups}
               availablePermissions={Constants.CONTAINER_NAMESPACE_PERMISSIONS}
-              setGroups={(g) => this.setState({ selectedGroups: g })}
+              setGroups={g => this.setState({ selectedGroups: g })}
               menuAppendTo='parent'
               isDisabled={
                 !this.props.permissions.includes(

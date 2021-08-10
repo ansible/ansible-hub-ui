@@ -30,9 +30,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
     const id = this.props.match.params['userID'];
 
     UserAPI.get(id)
-      .then((result) =>
-        this.setState({ user: result.data, unauthorized: false }),
-      )
+      .then(result => this.setState({ user: result.data, unauthorized: false }))
       .catch(() => this.setState({ unauthorized: true }));
   }
 
@@ -87,7 +85,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
           this.props.history.push(Paths.userList);
         }
       })
-      .catch((err) => {
+      .catch(err => {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });
   };

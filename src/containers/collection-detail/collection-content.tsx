@@ -65,7 +65,7 @@ class CollectionContent extends React.Component<
         <CollectionHeader
           collection={collection}
           params={params}
-          updateParams={(params) =>
+          updateParams={params =>
             this.updateParams(params, () =>
               this.loadCollection(this.context.selectedRepo, true),
             )
@@ -81,7 +81,7 @@ class CollectionContent extends React.Component<
               collection={collection.name}
               namespace={collection.namespace.name}
               params={params}
-              updateParams={(p) => this.updateParams(p)}
+              updateParams={p => this.updateParams(p)}
             ></CollectionContentList>
           </section>
         </Main>

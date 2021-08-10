@@ -23,7 +23,7 @@ describe('Token Management Tests', () => {
 
     cy.wait('@tokenPost')
       .its('response.body.token')
-      .then((token) => {
+      .then(token => {
         cy.get('[aria-label="Copyable input"]').should('have.value', token);
       });
   });

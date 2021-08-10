@@ -18,7 +18,7 @@ export class LinkTabs extends React.Component<IProps> {
     return (
       <div className='pf-c-tabs'>
         <ul className='pf-c-tabs__list'>
-          {this.props.tabs.map((tab) => this.renderTab(tab))}
+          {this.props.tabs.map(tab => this.renderTab(tab))}
         </ul>
       </div>
     );

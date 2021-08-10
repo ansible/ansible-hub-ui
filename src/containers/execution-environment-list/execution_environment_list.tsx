@@ -95,7 +95,7 @@ class ExecutionEnvironmentList extends React.Component<
       <React.Fragment>
         <AlertList
           alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          closeAlert={i => this.closeAlert(i)}
         ></AlertList>
         <BaseHeader title={_`Container Registry`}></BaseHeader>
         {noData && !loading ? (
@@ -116,7 +116,7 @@ class ExecutionEnvironmentList extends React.Component<
                       <ToolbarGroup>
                         <ToolbarItem>
                           <CompoundFilter
-                            updateParams={(p) => {
+                            updateParams={p => {
                               p['page'] = 1;
                               this.updateParams(p, () =>
                                 this.queryEnvironments(),
@@ -138,7 +138,7 @@ class ExecutionEnvironmentList extends React.Component<
 
                   <Pagination
                     params={params}
-                    updateParams={(p) =>
+                    updateParams={p =>
                       this.updateParams(p, () => this.queryEnvironments())
                     }
                     count={itemCount}
@@ -147,7 +147,7 @@ class ExecutionEnvironmentList extends React.Component<
                 </div>
                 <div>
                   <AppliedFilters
-                    updateParams={(p) =>
+                    updateParams={p =>
                       this.updateParams(p, () => this.queryEnvironments())
                     }
                     params={params}
@@ -158,7 +158,7 @@ class ExecutionEnvironmentList extends React.Component<
                 <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
                   <Pagination
                     params={params}
-                    updateParams={(p) =>
+                    updateParams={p =>
                       this.updateParams(p, () => this.queryEnvironments())
                     }
                     count={itemCount}
@@ -208,7 +208,7 @@ class ExecutionEnvironmentList extends React.Component<
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={(p) =>
+          updateParams={p =>
             this.updateParams(p, () => this.queryEnvironments())
           }
         />
@@ -249,7 +249,7 @@ class ExecutionEnvironmentList extends React.Component<
 
   private queryEnvironments() {
     this.setState({ loading: true }, () =>
-      ExecutionEnvironmentAPI.list(this.state.params).then((result) =>
+      ExecutionEnvironmentAPI.list(this.state.params).then(result =>
         this.setState({
           items: result.data.data,
           itemCount: result.data.meta.count,

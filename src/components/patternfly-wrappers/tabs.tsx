@@ -22,8 +22,13 @@ interface IProps {
 // FIXME: use LinkTabs, switch from ?tab to routes, rename to Tabs
 export class Tabs extends React.Component<IProps> {
   render() {
-    const { tabs, params, updateParams, isDisabled, disabledTitle } =
-      this.props;
+    const {
+      tabs,
+      params,
+      updateParams,
+      isDisabled,
+      disabledTitle,
+    } = this.props;
     return (
       <PFTabs
         activeKey={this.getActiveTab()}
@@ -54,7 +59,7 @@ export class Tabs extends React.Component<IProps> {
     const { params, tabs } = this.props;
     if (params.tab) {
       const i = tabs.findIndex(
-        (x) => x.toLowerCase() === params.tab.toLowerCase(),
+        x => x.toLowerCase() === params.tab.toLowerCase(),
       );
 
       // If tab is not found, default to the first tab.

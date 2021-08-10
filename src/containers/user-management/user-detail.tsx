@@ -40,7 +40,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
   componentDidMount() {
     const id = this.props.match.params['userID'];
     UserAPI.get(id)
-      .then((result) => this.setState({ userDetail: result.data }))
+      .then(result => this.setState({ userDetail: result.data }))
       .catch(() => this.props.history.push(Paths.notFound));
   }
 
@@ -64,7 +64,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
       <>
         <AlertList
           alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
+          closeAlert={i => this.closeAlert(i)}
         ></AlertList>
         <DeleteUserModal
           isOpen={showDeleteModal}
@@ -92,7 +92,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
             breadcrumbs={breadcrumbs}
             title={title}
             errorMessages={errorMessages}
-            updateUser={(user) => this.setState({ userDetail: user })}
+            updateUser={user => this.setState({ userDetail: user })}
             isReadonly
             extraControls={
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -125,7 +125,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private closeModal = (didDelete) =>
+  private closeModal = didDelete =>
     this.setState(
       {
         showDeleteModal: false,
