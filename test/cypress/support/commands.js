@@ -281,9 +281,7 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.contains('button', 'Add').click();
   cy.get('input.pf-c-select__toggle-typeahead').type(userName);
   cy.contains('button', userName).click();
-  // closes previously open dropdown
-  cy.get('[aria-label="Options menu"]').click();
-  cy.contains('footer > button', 'Add').click({ force: true });
+  cy.contains('footer > button', 'Add').click();
   cy.get(`[aria-labelledby=${userName}]`).should('exist');
 });
 
@@ -368,7 +366,6 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
     operation,
   )} ${args}`;
 
-  cy.log(cmd);
   return cy.exec(cmd, options).then(({ code, stderr, stdout }) => {
     console.log(`RUN ${cmd}`, options, { code, stderr, stdout });
 
