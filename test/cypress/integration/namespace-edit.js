@@ -87,8 +87,9 @@ describe('Edit a namespace', () => {
       .type('abcde');
     cy.wait('@autocomplete');
     cy.get('.pf-c-select__menu-wrapper').should('contain', 'Not found');
-
     cy.get('.pf-c-button.pf-m-plain.pf-c-select__toggle-clear').click();
+
+    cy.get('.pf-c-form-control.pf-c-select__toggle-typeahead').click();
     cy.wait('@autocomplete');
     cy.contains('namespace-owner-autocomplete').click();
 
