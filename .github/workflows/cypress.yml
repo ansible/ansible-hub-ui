@@ -124,6 +124,9 @@ jobs:
         npm run build-standalone
         rm -rf ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng/
         mv -v dist/ ../pulp_galaxy_ng/pulp_storage/assets/galaxy_ng
+        podman exec pulp bash -c "ls -l /var/run/s6/services/pulpcore-api/"
+        podman exec pulp bash -c "cat /var/run/s6/services/pulpcore-api/run"
+        podman exec pulp bash -c "sed -i 's/collectstatic --clear/collectstatic/' /var/run/s6/services/pulpcore-api/run"
         podman exec pulp bash -c "s6-svc -r /var/run/s6/services/pulpcore-api" # apply changes, api also serves static assets
 
     - name: "Finish up and run cypress"
