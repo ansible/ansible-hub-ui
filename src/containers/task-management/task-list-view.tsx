@@ -235,13 +235,9 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={started_at} />
         </td>
-        {finished_at === null ? (
-          <td></td>
-        ) : (
-          <td>
-            <DateComponent date={finished_at} />
-          </td>
-        )}
+        <td>
+          <DateComponent date={finished_at} />
+        </td>
         {this.statusLabel({ state })}
       </tr>
     );
