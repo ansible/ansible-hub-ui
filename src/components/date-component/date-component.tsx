@@ -9,10 +9,13 @@ interface IProps {
 export class DateComponent extends React.Component<IProps> {
   render() {
     const { date } = this.props;
+
     return (
-      <Tooltip content={moment(date).format('DD MMMM YYYY, HH:mm Z')}>
-        {moment(date).fromNow()}
-      </Tooltip>
+      date && (
+        <Tooltip content={moment(date).format('DD MMMM YYYY, HH:mm Z')}>
+          {moment(date).fromNow()}
+        </Tooltip>
+      )
     );
   }
 }
