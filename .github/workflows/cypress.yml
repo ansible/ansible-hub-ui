@@ -39,7 +39,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: pulp_galaxy_ng/image
-        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-788
+        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post788
 
     - name: "Build pulp-galaxy-ng"
       if: steps.cache-container.outputs.cache-hit != 'true'
