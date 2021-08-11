@@ -57,9 +57,9 @@ Cypress.Commands.add('menuGo', {}, name => {
 
 let user_tokens = {};
 
-Cypress.Commands.add('getUserTokens', {}, func => {
-  func(user_tokens);
-});
+Cypress.Commands.add('cookieReset', {}, () => {
+  user_tokens = {};
+})
 
 Cypress.Commands.add('cookieLogin', {}, (username, password) => {
   if (!user_tokens[username]) {

@@ -254,6 +254,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     if (!users) {
       this.queryUsers();
     }
+    
     return (
       <DeleteGroupModal
         count={count}

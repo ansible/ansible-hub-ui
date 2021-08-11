@@ -26,6 +26,7 @@ describe('Hub Menu Tests', () => {
 
   it('admin user sees complete menu', () => {
     cy.cookieLogin(adminUsername, adminPassword);
+    
     menuItems.forEach(item => cy.menuPresent(item));
   });
 

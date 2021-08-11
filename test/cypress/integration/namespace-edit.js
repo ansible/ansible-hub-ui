@@ -102,6 +102,7 @@ describe('Edit a namespace', () => {
   });
 
   it('tests the Logo URL field', () => {
+    const url = 'https://example.com/';
     cy.get('#avatar_url')
       .clear()
       .type('abcde');
