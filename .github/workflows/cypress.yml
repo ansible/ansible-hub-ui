@@ -59,7 +59,7 @@ jobs:
           RUN ln /usr/local/lib/python*/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
 
           RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
-          RUN ln -sv /galaxy_ng_static /usr/local/lib/python*/site-packages/galaxy_ng/app/static
+          RUN ln -sv /galaxy_ng_static `ls -d /usr/local/lib/python*/site-packages/galaxy_ng/app/`static
         ' | tee Containerfile
 
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
