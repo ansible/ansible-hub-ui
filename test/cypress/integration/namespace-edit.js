@@ -3,10 +3,7 @@ describe('Edit a namespace', () => {
   let adminPassword = Cypress.env('password');
 
   let kebabToggle = () => {
-    return cy
-      .get('button[id^=pf-dropdown-toggle-id-] > svg')
-      .parent()
-      .click();
+    return cy.get('button[id^=pf-dropdown-toggle-id-] > svg').parent().click();
   };
 
   let saveButton = () => {
@@ -74,9 +71,7 @@ describe('Edit a namespace', () => {
   });
 
   it('saves a new company name', () => {
-    cy.get('#company')
-      .clear()
-      .type('Company name');
+    cy.get('#company').clear().type('Company name');
     saveButton().click();
     cy.url().should('match', /\/ui\/my-namespaces\/testns1/);
     cy.get('.pf-c-title').should('contain', 'Company name');
@@ -103,9 +98,7 @@ describe('Edit a namespace', () => {
 
   it('tests the Logo URL field', () => {
     const url = 'https://example.com/';
-    cy.get('#avatar_url')
-      .clear()
-      .type('abcde');
+    cy.get('#avatar_url').clear().type('abcde');
     saveButton().click();
     cy.get('#avatar_url-helper').should('have.text', 'Enter a valid URL.');
     cy.get('#avatar_url').clear().type(url);
@@ -121,9 +114,7 @@ describe('Edit a namespace', () => {
       'have.text',
       'Ensure this field has no more than 256 characters.',
     );
-    cy.get('#description')
-      .clear()
-      .type('A namespace description');
+    cy.get('#description').clear().type('A namespace description');
     saveButton().click();
     cy.get('.header-bottom').should('contain', 'A namespace description');
   });
@@ -146,9 +137,7 @@ describe('Edit a namespace', () => {
     getUrlField().type('example.com');
     saveButton().click();
     linksHelper().should('contain', "URL: 'example.com' is not a valid url.");
-    getUrlField()
-      .clear()
-      .type('https://example.com/');
+    getUrlField().clear().type('https://example.com/');
     saveButton().click();
     cy.get('div.link > a')
       .should('contain', 'Link to example website')
@@ -170,9 +159,7 @@ describe('Edit a namespace', () => {
         'contain',
         '## Custom resources\n\nYou can use this page to add any resources which you think might help your users automate all the things.',
       );
-    getTextField()
-      .click()
-      .type('Editing the readme file');
+    getTextField().click().type('Editing the readme file');
     saveButton().click();
     kebabToggle();
     cy.contains('Edit namespace').click();

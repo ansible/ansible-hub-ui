@@ -9,7 +9,7 @@ import axios from 'axios';
 function filterContents(contents) {
   if (contents) {
     return contents.filter(
-      item => !['doc_fragments', 'module_utils'].includes(item.content_type),
+      (item) => !['doc_fragments', 'module_utils'].includes(item.content_type),
     );
   }
 
@@ -58,7 +58,7 @@ export class API extends HubAPI {
 
   list(params?: any, repo?: string) {
     const path = this.apiPath + repo + '/';
-    return super.list(params, path).then(response => ({
+    return super.list(params, path).then((response) => ({
       ...response,
       data: {
         ...response.data,
@@ -144,7 +144,7 @@ export class API extends HubAPI {
       .get(path, {
         params: params,
       })
-      .then(result => {
+      .then((result) => {
         // remove module_utils, doc_fragments from item
         const item = filterDetailItem(result.data);
         this.cachedCollection = item;
@@ -159,10 +159,10 @@ export class API extends HubAPI {
         .get(
           `content/${distro_base_path}/v3/collections/${namespace}/${name}/versions/${version}/`,
         )
-        .then(result => {
+        .then((result) => {
           resolve(result.data['download_url']);
         })
-        .catch(err => reject(err));
+        .catch((err) => reject(err));
     });
   }
 }

@@ -39,7 +39,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
   componentDidMount() {
     const id = this.props.match.params['userID'];
     ActiveUserAPI.getUser()
-      .then(result => {
+      .then((result) => {
         // The api doesn't return a value for the password, so set a blank one here
         // to keep react from getting confused
         result.password = '';
@@ -59,7 +59,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
       <>
         <AlertList
           alerts={alerts}
-          closeAlert={i => this.closeAlert(i)}
+          closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
         <UserFormPage
           isMe={true}
@@ -67,7 +67,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
           breadcrumbs={[{ name: _`Settings` }, { name: _`My profile` }]}
           title={_`My profile`}
           errorMessages={errorMessages}
-          updateUser={user => this.setState({ user: user })}
+          updateUser={(user) => this.setState({ user: user })}
           saveUser={this.saveUser}
           isReadonly={!inEditMode}
           onCancel={() =>
@@ -96,7 +96,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
   private saveUser = () => {
     const { user } = this.state;
     ActiveUserAPI.saveUser(user)
-      .then(result => {
+      .then((result) => {
         this.setState(
           {
             inEditMode: false,
@@ -111,7 +111,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
           this.props.history.push(Paths.login);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });
   };

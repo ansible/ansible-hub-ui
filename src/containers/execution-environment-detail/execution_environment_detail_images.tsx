@@ -144,27 +144,28 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       ],
     };
 
-    const canEditTags = this.props.containerRepository.namespace.my_permissions.includes(
-      'container.namespace_modify_content_containerpushrepository',
-    );
+    const canEditTags =
+      this.props.containerRepository.namespace.my_permissions.includes(
+        'container.namespace_modify_content_containerpushrepository',
+      );
 
     return (
       <section className='body'>
         <AlertList
           alerts={this.state.alerts}
-          closeAlert={i => this.closeAlert(i)}
+          closeAlert={(i) => this.closeAlert(i)}
         />
         <TagManifestModal
           isOpen={!!manageTagsManifestDigest}
           closeModal={() => this.setState({ manageTagsManifestDigest: null })}
           containerManifest={images.find(
-            el => el.digest === manageTagsManifestDigest,
+            (el) => el.digest === manageTagsManifestDigest,
           )}
           reloadManifests={() =>
             this.queryImages(this.props.containerRepository.name)
           }
           repositoryName={this.props.containerRepository.name}
-          onAlert={alert => {
+          onAlert={(alert) => {
             this.setState({ alerts: this.state.alerts.concat(alert) });
           }}
           containerRepository={this.props.containerRepository}
@@ -176,7 +177,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               <ToolbarGroup>
                 <ToolbarItem>
                   <CompoundFilter
-                    updateParams={p =>
+                    updateParams={(p) =>
                       this.updateParams(p, () =>
                         this.queryImages(this.props.match.params['container']),
                       )
@@ -199,7 +200,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           </Toolbar>
           <Pagination
             params={params}
-            updateParams={p =>
+            updateParams={(p) =>
               this.updateParams(p, () =>
                 this.queryImages(this.props.match.params['container']),
               )
@@ -210,7 +211,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         </div>
         <div>
           <AppliedFilters
-            updateParams={p =>
+            updateParams={(p) =>
               this.updateParams(p, () =>
                 this.queryImages(this.props.match.params['container']),
               )
@@ -226,7 +227,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             <SortTable
               options={sortTableOptions}
               params={params}
-              updateParams={p =>
+              updateParams={(p) =>
                 this.updateParams(p, () =>
                   this.queryImages(this.props.match.params['container']),
                 )
@@ -242,7 +243,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
           <Pagination
             params={params}
-            updateParams={p =>
+            updateParams={(p) =>
               this.updateParams(p, () =>
                 this.queryImages(this.props.match.params['container']),
               )
@@ -255,7 +256,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   private renderTableRow(image: any, index: number, canEditTags: boolean) {
-    const manifestLink = digestOrTag =>
+    const manifestLink = (digestOrTag) =>
       formatPath(Paths.executionEnvironmentManifest, {
         container: this.props.match.params['container'],
         digest: digestOrTag,
@@ -292,7 +293,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       <tr key={index}>
         <td>
           <LabelGroup className={'tags-column'}>
-            {image.tags.sort().map(tag => (
+            {image.tags.sort().map((tag) => (
               <TagLink key={tag} tag={tag} />
             ))}
           </LabelGroup>
@@ -326,15 +327,15 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         name,
         ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
       )
-        .then(result => {
+        .then((result) => {
           let images = [];
-          result.data.data.forEach(object => {
-            let image = pickBy(object, function(value, key) {
+          result.data.data.forEach((object) => {
+            let image = pickBy(object, function (value, key) {
               return ['digest', 'tags', 'pulp_created'].includes(key);
             });
             image['layers'] = object.layers.length;
             let size = 0;
-            object.layers.forEach(layer => (size += layer.size));
+            object.layers.forEach((layer) => (size += layer.size));
             image['size'] = size;
             images.push(image);
           });
@@ -343,7 +344,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             numberOfImages: result.data.meta.count,
           });
         })
-        .catch(error => this.setState({ redirect: 'notFound' })),
+        .catch((error) => this.setState({ redirect: 'notFound' })),
     );
   }
 

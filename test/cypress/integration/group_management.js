@@ -45,14 +45,14 @@ describe('Hub Group Management Tests', () => {
     cy.createGroup(name);
 
     cy.addAllPermissions(name);
-    permissionTypes.forEach(permGroup => {
+    permissionTypes.forEach((permGroup) => {
       cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}`)
         .contains('span', 'No permission')
         .should('not.exist');
     });
 
     cy.removeAllPermissions(name);
-    permissionTypes.forEach(permGroup => {
+    permissionTypes.forEach((permGroup) => {
       cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}`)
         .contains('span', 'No permission')
         .should('exist');

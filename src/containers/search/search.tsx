@@ -85,7 +85,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     const noData =
       collections.length === 0 && !filterIsSet(params, ['keywords', 'tags']);
 
-    const updateParams = p =>
+    const updateParams = (p) =>
       this.updateParams(p, () => this.queryCollections());
 
     return (
@@ -114,7 +114,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
                     <CardListSwitcher
                       size='sm'
                       params={params}
-                      updateParams={p =>
+                      updateParams={(p) =>
                         this.updateParams(p, () =>
                           // Note, we have to use this.state.params instead
                           // of params in the callback because the callback
@@ -155,7 +155,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
             <section className='footer'>
               <Pagination
                 params={params}
-                updateParams={p =>
+                updateParams={(p) =>
                   this.updateParams(p, () => this.queryCollections())
                 }
                 perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
@@ -195,7 +195,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
   private renderCards(collections) {
     return (
       <div className='cards'>
-        {collections.map(c => {
+        {collections.map((c) => {
           return (
             <CollectionCard
               className='card'
@@ -230,7 +230,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     const synclist = { ...this.state.synclist };
 
     const colIndex = synclist.collections.findIndex(
-      el => el.name === name && el.namespace === namespace,
+      (el) => el.name === name && el.namespace === namespace,
     );
 
     if (colIndex < 0) {
@@ -239,7 +239,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       synclist.collections.splice(colIndex, 1);
     }
 
-    MySyncListAPI.update(synclist.id, synclist).then(response => {
+    MySyncListAPI.update(synclist.id, synclist).then((response) => {
       this.setState({ synclist: response.data });
       MySyncListAPI.curate(synclist.id).then(() => null);
     });
@@ -248,7 +248,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
   private isCollectionSynced(name: string, namespace: string): boolean {
     const { synclist } = this.state;
     const found = synclist.collections.find(
-      el => el.name === name && el.namespace === namespace,
+      (el) => el.name === name && el.namespace === namespace,
     );
 
     if (synclist.policy === 'include') {
@@ -263,7 +263,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       <div className='list-container'>
         <div className='list'>
           <DataList className='data-list' aria-label={_`List of Collections`}>
-            {collections.map(c => (
+            {collections.map((c) => (
               <CollectionListItem
                 showNamespace={true}
                 key={c.id}
@@ -279,7 +279,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
   }
 
   private getSynclist() {
-    MySyncListAPI.list().then(result => {
+    MySyncListAPI.list().then((result) => {
       // ignore results if more than 1 is returned
       // TODO: should we throw an error for this or just ignore it?
       if (result.data.meta.count === 1) {
@@ -300,7 +300,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
           deprecated: false,
         },
         this.context.selectedRepo,
-      ).then(result => {
+      ).then((result) => {
         this.setState({
           collections: result.data.data,
           numberOfResults: result.data.meta.count,

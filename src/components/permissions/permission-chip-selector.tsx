@@ -35,7 +35,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         : [this.placeholderText()];
       return (
         <LabelGroup>
-          {items.map(text => (
+          {items.map((text) => (
             <Label key={text}>{text}</Label>
           ))}
         </LabelGroup>
@@ -83,7 +83,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
     this.props.setSelected([]);
   };
 
-  private onToggle = isOpen => {
+  private onToggle = (isOpen) => {
     this.setState({
       isOpen: isOpen,
     });
