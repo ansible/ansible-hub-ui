@@ -2,21 +2,18 @@ import * as React from 'react';
 import cx from 'classnames';
 import './my-imports.scss';
 import {
-  TextInput,
   Pagination,
   FormSelect,
   FormSelectOption,
-  InputGroup,
-  Button,
-  ButtonVariant,
   Spinner,
+  Toolbar,
 } from '@patternfly/react-core';
-import { SearchIcon } from '@patternfly/react-icons';
-
+import { AppliedFilters, CompoundFilter } from 'src/components';
 import { PulpStatus, NamespaceType, ImportListType } from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
+import { filterIsSet } from 'src/utilities';
 import { Constants } from 'src/constants';
-import { DateComponent, EmptyStateNoData } from '..';
+import { DateComponent, EmptyStateNoData, EmptyStateFilter } from '..';
 
 interface IProps {
   namespaces: NamespaceType[];
@@ -60,29 +57,59 @@ export class ImportList extends React.Component<IProps, IState> {
       loading,
     } = this.props;
 
-    const { kwField } = this.state;
-
     return (
       <div className='import-list'>
         {this.renderNamespacePicker(namespaces)}
-        <InputGroup className='search-box'>
-          <TextInput
-            value={kwField}
-            onChange={(k) => this.setState({ kwField: k })}
-            onKeyPress={(e) => this.handleEnter(e)}
-            type='search'
-            aria-label='search text input'
-            placeholder={_`Search imports`}
+        <Toolbar>
+          <CompoundFilter
+            updateParams={(p) => {
+              p['page'] = 1;
+              this.props.updateParams(p);
+            }}
+            params={params}
+            filterConfig={[
+              {
+                id: 'keywords',
+                title: _`Name`,
+              },
+              {
+                id: 'state',
+                title: _`Status`,
+                inputType: 'select',
+                options: [
+                  {
+                    id: 'completed',
+                    title: _`Completed`,
+                  },
+                  {
+                    id: 'failed',
+                    title: _`Failed`,
+                  },
+                  {
+                    id: 'running',
+                    title: _`Running`,
+                  },
+                  {
+                    id: 'waiting',
+                    title: _`Waiting`,
+                  },
+                ],
+              },
+            ]}
           />
-
-          <Button
-            variant={ButtonVariant.control}
-            aria-label='search button'
-            onClick={() => this.submitSearch()}
-          >
-            <SearchIcon />
-          </Button>
-        </InputGroup>
+        </Toolbar>
+        <AppliedFilters
+          updateParams={(p) => {
+            p['page'] = 1;
+            this.props.updateParams(p);
+          }}
+          params={params}
+          ignoredParams={['page_size', 'page', 'sort', 'ordering', 'namespace']}
+          niceNames={{
+            keywords: _`Name`,
+            state: _`Status`,
+          }}
+        />
 
         <div>
           {this.renderList(selectImport, importList, selectedImport, loading)}
@@ -111,13 +138,18 @@ export class ImportList extends React.Component<IProps, IState> {
         </div>
       );
     }
-    if (importList.length === 0) {
+    if (
+      importList.length === 0 &&
+      !filterIsSet(this.props.params, ['keywords', 'state'])
+    ) {
       return (
         <EmptyStateNoData
           title={_`No imports`}
           description={_`There have not been any imports on this namespace.`}
         />
       );
+    } else if (importList.length === 0) {
+      return <EmptyStateFilter />;
     }
 
     return (
@@ -143,19 +175,6 @@ export class ImportList extends React.Component<IProps, IState> {
           );
         })}
       </div>
-    );
-  }
-
-  private handleEnter(e) {
-    // l10n: don't translate
-    if (e.key === 'Enter') {
-      this.submitSearch();
-    }
-  }
-
-  private submitSearch() {
-    this.props.updateParams(
-      ParamHelper.setParam(this.props.params, 'keywords', this.state.kwField),
     );
   }
 
@@ -194,11 +213,15 @@ export class ImportList extends React.Component<IProps, IState> {
         <div className='label'>{_`Namespace`}</div>
         <div className='selector'>
           <FormSelect
-            onChange={(val) =>
-              this.props.updateParams(
-                ParamHelper.setParam(this.props.params, 'namespace', val),
-              )
-            }
+            onChange={(val) => {
+              const params = ParamHelper.setParam(
+                this.props.params,
+                'namespace',
+                val,
+              );
+              params['page'] = 1;
+              this.props.updateParams(params);
+            }}
             value={this.props.params.namespace}
             aria-label={_`Select namespace`}
           >
