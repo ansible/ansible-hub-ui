@@ -79,8 +79,8 @@
         "build": "webpack --config config/insights.prod.webpack.config.js",
         "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
         "lint": "npm-run-all lint:*",
-        "lint:js": "eslint config src",
-        "lint:js:fix": "eslint config src --fix",
+        "lint:js": "npm run prettier:check",
+        "lint:js:fix": "npm run prettier",
         "lint:sass": "stylelint 'src/**/*.scss' --config .stylelintrc.json",
         "prod": "NODE_ENV=production webpack-dev-server --config custom.dev.config",
         "server:ctr": "node src/server/generateServerKey.js",
@@ -89,8 +89,9 @@
         "build:prod": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
         "deploy": "npm-run-all build:prod test-prettier",
         "verify": "npm-run-all build lint",
-        "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier' prettier -l 'src/**' 'config/**'",
-        "prettier": "prettier --write 'src/**' 'config/**'"
+        "prettier": "prettier --write 'src/**' 'config/**'",
+        "prettier:check": "prettier -l 'src/**' 'config/**'",
+        "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier'; npm run prettier:check"
     },
     "insights": {
         "appname": "automation-hub"
