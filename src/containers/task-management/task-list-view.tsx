@@ -3,6 +3,7 @@ import './task.scss';
 import { Constants } from 'src/constants';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import {
+  Button,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
@@ -10,6 +11,7 @@ import {
   Label,
 } from '@patternfly/react-core';
 import { ParamHelper, filterIsSet } from '../../utilities';
+import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
@@ -17,8 +19,11 @@ import {
   OutlinedClockIcon,
 } from '@patternfly/react-icons';
 import {
+  AlertList,
+  AlertType,
   AppliedFilters,
   BaseHeader,
+  closeAlertMixin,
   CompoundFilter,
   DateComponent,
   EmptyStateFilter,
@@ -30,6 +35,7 @@ import {
 } from 'src/components';
 import { TaskManagementAPI } from 'src/api';
 import { TaskType } from 'src/api/response-types/task';
+import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 interface IState {
   params: {
@@ -39,6 +45,9 @@ interface IState {
   loading: boolean;
   items: Array<TaskType>;
   itemCount: number;
+  alerts: AlertType[];
+  cancelModalVisible: boolean;
+  selectedTask: TaskType;
 }
 
 export class TaskListView extends React.Component<RouteComponentProps, IState> {
@@ -63,6 +72,9 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       items: [],
       loading: true,
       itemCount: 0,
+      alerts: [],
+      cancelModalVisible: false,
+      selectedTask: null,
     };
   }
 
@@ -71,12 +83,19 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { params, itemCount, loading, items } = this.state;
+    const { params, itemCount, loading, items, alerts, cancelModalVisible } =
+      this.state;
+
     const noData =
       items.length === 0 && !filterIsSet(params, ['name__contains', 'state']);
 
     return (
       <React.Fragment>
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        ></AlertList>
+        {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader title={_`Task Management`} />
         {noData && !loading ? (
           <EmptyStateNoData
@@ -224,8 +243,9 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderTableRow(item: any, index: number) {
+  private renderTableRow(item: TaskType, index: number) {
     const { name, state, pulp_created, started_at, finished_at } = item;
+    const { user } = this.context;
     return (
       <tr aria-labelledby={name} key={index}>
         <td>{Constants.TASK_NAMES[name] || name}</td>
@@ -238,56 +258,132 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={finished_at} />
         </td>
-        {this.statusLabel({ state })}
+        <td>{this.statusLabel({ state })}</td>
+        <td>{this.cancelButton(state, item)}</td>
       </tr>
     );
+  }
+
+  private cancelButton(state, selectedTask) {
+    switch (state) {
+      case 'running':
+        return (
+          <Button
+            variant='secondary'
+            aria-label={_`Delete`}
+            key='delete'
+            onClick={() =>
+              this.setState({
+                cancelModalVisible: true,
+                selectedTask: selectedTask,
+              })
+            }
+          >
+            {_`Stop task`}
+          </Button>
+        );
+      case 'waiting':
+        return (
+          <Button
+            variant='secondary'
+            aria-label={_`Delete`}
+            key='delete'
+            onClick={() =>
+              this.setState({
+                cancelModalVisible: true,
+                selectedTask: selectedTask,
+              })
+            }
+          >
+            {_`Stop task`}
+          </Button>
+        );
+    }
   }
 
   private statusLabel({ state }) {
     switch (state) {
       case 'completed':
         return (
-          <td>
-            <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-              {state}
-            </Label>
-          </td>
+          <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
+            {state}
+          </Label>
         );
       case 'failed':
         return (
-          <td>
-            <Label
-              variant='outline'
-              color='red'
-              icon={<ExclamationCircleIcon />}
-            >
-              {state}
-            </Label>
-          </td>
+          <Label variant='outline' color='red' icon={<ExclamationCircleIcon />}>
+            {state}
+          </Label>
         );
       case 'running':
         return (
-          <td>
-            <Label variant='outline' color='blue' icon={<SyncAltIcon />}>
-              {state}
-            </Label>
-          </td>
+          <Label variant='outline' color='blue' icon={<SyncAltIcon />}>
+            {state}
+          </Label>
         );
       case 'waiting':
         return (
-          <td>
-            <Label variant='outline' color='grey' icon={<OutlinedClockIcon />}>
-              {state}
-            </Label>
-          </td>
+          <Label variant='outline' color='grey' icon={<OutlinedClockIcon />}>
+            {state}
+          </Label>
         );
       default:
-        return (
-          <td>
-            <Label variant='outline'>{state}</Label>
-          </td>
-        );
+        return <Label variant='outline'>{state}</Label>;
     }
+  }
+
+  private renderCancelModal() {
+    const name =
+      Constants.TASK_NAMES[this.state.selectedTask.name] ||
+      this.state.selectedTask.name;
+    return (
+      <DeleteModal
+        cancelAction={() => this.setState({ cancelModalVisible: false })}
+        deleteAction={() => this.selectedTask(this.state.selectedTask, name)}
+        title={_`Stop task?`}
+        children={_`${name} will be cancelled.`}
+      />
+    );
+  }
+
+  private selectedTask(task, name) {
+    TaskManagementAPI.patch(parsePulpIDFromURL(task.pulp_href), {
+      state: 'canceled',
+    })
+      .then(() => {
+        this.setState({
+          loading: true,
+          selectedTask: null,
+          cancelModalVisible: false,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'success',
+              title: name,
+              description: _`Successfully stopped task.`,
+            },
+          ],
+        });
+        this.queryTasks();
+      })
+      .catch(() =>
+        this.setState({
+          loading: true,
+          cancelModalVisible: false,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: name,
+              description: _`Error stopping task.`,
+            },
+          ],
+        }),
+      );
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 
   private queryTasks() {
