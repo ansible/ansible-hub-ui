@@ -123,7 +123,7 @@ export class UserForm extends React.Component<IProps, IState> {
       <FormGroup
         fieldId='groups'
         key='readonlyGroups'
-        label={_`Groups test`}
+        label={_`Groups`}
         aria-labelledby='readonly-groups'
       >
         {user.groups.map((group) => (
