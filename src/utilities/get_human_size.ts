@@ -1,4 +1,6 @@
-const units = [`bytes`, 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+import { t } from '@lingui/macro';
+
+const units = [t`bytes`, 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
 export function getHumanSize(x) {
   let l = 0,
