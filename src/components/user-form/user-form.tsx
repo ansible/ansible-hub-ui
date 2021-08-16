@@ -120,7 +120,12 @@ export class UserForm extends React.Component<IProps, IState> {
     );
 
     const readonlyGroups = () => (
-      <FormGroup fieldId='groups' key='readonlyGroups' label={_`Groups`}>
+      <FormGroup
+        fieldId='groups'
+        key='readonlyGroups'
+        label={_`Groups test`}
+        aria-labelledby='readonly-groups'
+      >
         {user.groups.map((group) => (
           <Label key={group.name}>{group.name}</Label>
         ))}
