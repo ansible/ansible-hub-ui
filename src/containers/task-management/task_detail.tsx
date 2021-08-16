@@ -203,8 +203,30 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                       {_`Progress message`}
                     </Title>
                     <br />
-                    {!!task.progress_report ? (
-                      task.progress_report
+                    {!!task.progress_reports ? (
+                      task.progress_reports.map(report => {
+                        return (
+                          <CodeBlock>
+                            <DescriptionList isHorizontal>
+                              {Object.keys(report).map(key => {
+                                return (
+                                  !!report[key] && (
+                                    <DescriptionListGroup>
+                                      <DescriptionListTerm>
+                                        {' '}
+                                        {key}{' '}
+                                      </DescriptionListTerm>
+                                      <DescriptionListDescription>
+                                        {report[key]}
+                                      </DescriptionListDescription>
+                                    </DescriptionListGroup>
+                                  )
+                                );
+                              })}
+                            </DescriptionList>
+                          </CodeBlock>
+                        );
+                      })
                     ) : (
                       <EmptyStateCustom
                         icon={CubesIcon}

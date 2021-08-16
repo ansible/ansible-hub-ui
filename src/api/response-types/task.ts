@@ -6,7 +6,7 @@ export class TaskType {
   finished_at: string;
   error: { traceback: string; description: string };
   pulp_href: string;
-  progress_report: any[];
+  progress_reports: any[];
   task_group: any;
   parent_task: string;
   child_tasks: any[];
