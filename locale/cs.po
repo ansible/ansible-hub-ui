@@ -9,4 +9,4 @@ msgstr ""
 
 #: src/utilities/get_human_size.ts:3
 msgid "bytes"
-msgstr ""
+msgstr "byty"

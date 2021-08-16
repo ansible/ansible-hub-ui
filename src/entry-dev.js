@@ -6,6 +6,7 @@ import { init } from './store';
 import App from './loaders/insights/insights-loader';
 import logger from 'redux-logger';
 import getBaseName from './utilities/getBaseName';
+import 'src/l10n';
 
 // Entrypoint for compiling the app to run in insights dev mode.
 

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { init } from './store';
 import App from './loaders/insights/insights-loader';
 import getBaseName from './utilities/getBaseName';
+import 'src/l10n';
 
 // Entrypoint for compiling the app to run in insights production mode.
 
