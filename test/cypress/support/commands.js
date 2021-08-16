@@ -62,7 +62,7 @@ Cypress.Commands.add('apiLogin', {}, (username, password) => {
       cy.request({
         method: 'POST',
         url: loginUrl,
-        body: { username: username, password: password },
+        body: { username, password },
         headers: { 'X-CSRFToken': csrftoken.value },
       });
     });
