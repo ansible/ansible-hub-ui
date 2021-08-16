@@ -1,6 +1,8 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { resolve } = require('path');
 
+const isBuild = process.env.NODE_ENV === 'production';
+
 module.exports = {
   devtool: 'source-map',
   module: {
@@ -11,17 +13,11 @@ module.exports = {
         use: [{ loader: 'source-map-loader' }, { loader: 'babel-loader' }],
       },
       {
-        test: /\.s?[ac]ss$/,
+        test: /\.(css|scss|sass)$/,
         use: [
-          process.env.NODE_ENV === 'production'
-            ? 'style-loader'
-            : MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'sass-loader',
-          },
+          isBuild ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'sass-loader',
         ],
       },
       {
