@@ -26,6 +26,7 @@ import { TaskType } from 'src/api/response-types/task';
 import { TaskManagementAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { Constants } from 'src/constants';
+import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 
 interface IState {
   loading: boolean;
@@ -63,8 +64,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
     ];
     let parentTaskId = null;
     if (!!parentTask) {
-      let splitedHref = parentTask.pulp_href.split('/');
-      parentTaskId = splitedHref[splitedHref.length - 2];
+      parentTaskId = parsePulpIDFromURL(parentTask.pulp_href);
     }
 
     return loading ? (
@@ -156,10 +156,10 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                       <DescriptionListTerm>{_`Child tasks`}</DescriptionListTerm>
                       <DescriptionListDescription>
                         {!!childTasks.length
-                          ? childTasks.map(childTask => {
-                              let splitedHref = childTask.pulp_href.split('/');
-                              let childTaskId =
-                                splitedHref[splitedHref.length - 2];
+                          ? childTasks.map((childTask) => {
+                              let childTaskId = parsePulpIDFromURL(
+                                childTask.pulp_href,
+                              );
                               return (
                                 <React.Fragment>
                                   <Link
@@ -204,11 +204,11 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                     </Title>
                     <br />
                     {!!task.progress_reports ? (
-                      task.progress_reports.map(report => {
+                      task.progress_reports.map((report) => {
                         return (
                           <CodeBlock>
                             <DescriptionList isHorizontal>
-                              {Object.keys(report).map(key => {
+                              {Object.keys(report).map((key) => {
                                 return (
                                   !!report[key] && (
                                     <DescriptionListGroup>
@@ -260,25 +260,23 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
 
   private loadContent() {
     let taskId = this.props.match.params['task'];
-    return TaskManagementAPI.get(taskId).then(result => {
+    return TaskManagementAPI.get(taskId).then((result) => {
       let allRelatedTasks = [];
       let parenTask = null;
       let childTasks = [];
       if (!!result.data.parent_task) {
-        let splitedHref = result.data.parent_task.split('/');
-        let parentTaskId = splitedHref[splitedHref.length - 2];
+        let parentTaskId = parsePulpIDFromURL(result.data.parent_task);
         allRelatedTasks.push(
-          TaskManagementAPI.get(parentTaskId).then(result => {
+          TaskManagementAPI.get(parentTaskId).then((result) => {
             parenTask = result.data;
           }),
         );
       }
       if (!!result.data.child_tasks.length) {
-        result.data.child_tasks.forEach(child => {
-          let splitedHref = child.split('/');
-          let childTaskId = splitedHref[splitedHref.length - 2];
+        result.data.child_tasks.forEach((child) => {
+          let childTaskId = parsePulpIDFromURL(child);
           allRelatedTasks.push(
-            TaskManagementAPI.get(childTaskId).then(result => {
+            TaskManagementAPI.get(childTaskId).then((result) => {
               childTasks.push(result.data);
             }),
           );

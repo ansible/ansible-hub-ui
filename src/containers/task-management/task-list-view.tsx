@@ -13,12 +13,6 @@ import {
 import { ParamHelper, filterIsSet, twoWayMapper } from '../../utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 import {
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-  SyncAltIcon,
-  OutlinedClockIcon,
-} from '@patternfly/react-icons';
-import {
   AlertList,
   AlertType,
   AppliedFilters,
@@ -247,14 +241,8 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderTableRow(item: any, index: number) {
-    const {
-      name,
-      state,
-      pulp_created,
-      started_at,
-      finished_at,
-      pulp_href,
-    } = item;
+    const { name, state, pulp_created, started_at, finished_at, pulp_href } =
+      item;
     let splitedHref = pulp_href.split('/');
     let taskId = splitedHref[splitedHref.length - 2];
     return (
@@ -275,7 +263,9 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={finished_at} />
         </td>
-        <td><TaskStatus state={state}/></td>
+        <td>
+          <TaskStatus state={state} />
+        </td>
         <td>{this.cancelButton(state, item)}</td>
       </tr>
     );
