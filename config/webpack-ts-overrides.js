@@ -34,4 +34,7 @@ module.exports = {
       src: resolve(__dirname, '../src'),
     },
   },
+  watchOptions: {
+    ignored: ['**/.*.sw[po]'],
+  },
 };
