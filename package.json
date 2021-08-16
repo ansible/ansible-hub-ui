@@ -66,24 +66,24 @@
     "scripts": {
         "build": "webpack --config config/insights.prod.webpack.config.js",
         "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
+        "build:prod": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
+        "deploy": "npm-run-all build:prod test-prettier",
         "lint": "npm-run-all lint:*",
         "lint:js": "npm run prettier:check",
         "lint:js:fix": "npm run prettier",
         "lint:sass": "stylelint 'src/**/*.scss' --config .stylelintrc.json",
+        "prettier": "prettier --write 'src/**' 'config/**' 'test/**'",
+        "prettier:check": "prettier -l 'src/**' 'config/**' 'test/**'",
         "prod": "NODE_ENV=production webpack serve --config custom.dev.config",
         "server:ctr": "node src/server/generateServerKey.js",
         "start": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/insights.dev.webpack.config.js",
-        "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
         "start-pulp": "NODE_ENV=development API_PROXY_PORT=8080 API_BASE_PATH='/api/galaxy/' webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
-        "build:prod": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
-        "deploy": "npm-run-all build:prod test-prettier",
-        "verify": "npm-run-all build lint",
-        "prettier": "prettier --write 'src/**' 'config/**' 'test/**'",
-        "prettier:check": "prettier -l 'src/**' 'config/**' 'test/**'",
-        "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier'; npm run prettier:check",
+        "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
+        "test": "npm run test-build && npm run test-run",
         "test-build": "test/scripts/ctn-build.sh",
+        "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier'; npm run prettier:check",
         "test-run": "test/scripts/ctn-run.sh",
-        "test": "npm run test-build && npm run test-run"
+        "verify": "npm-run-all build lint"
     },
     "insights": {
         "appname": "automation-hub"
