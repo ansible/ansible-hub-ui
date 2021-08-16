@@ -89,6 +89,13 @@ export class Constants {
     //   ],
     // },
   ];
+  static USER_GROUP_MGMT_PERMISSIONS = [
+    'galaxy.delete_user',
+    'galaxy.add_user',
+    'galaxy.change_user',
+    'galaxy.delete_group',
+    'galaxy.add_group',
+  ];
   static HUMAN_PERMISSIONS = {
     'galaxy.add_namespace': _`Add namespace`,
     'galaxy.change_namespace': _`Change namespace`,

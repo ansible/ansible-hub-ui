@@ -14,5 +14,6 @@ declare var UI_BASE_PATH;
 declare var DEPLOYMENT_MODE;
 declare var NAMESPACE_TERM;
 declare var APPLICATION_NAME;
+declare var UI_EXTERNAL_LOGIN_URI;
 
 declare var _;
