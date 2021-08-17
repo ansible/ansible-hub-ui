@@ -120,15 +120,15 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const tabs = [t`Collections`];
+    const tabs = [{ id: 'collections', name: t`Collections` }];
 
     if (this.state.showControls) {
-      tabs.push(t`CLI Configuration`);
+      tabs.push({ id: 'cli-configuration', name: t`CLI Configuration` });
     }
     const tab = params['tab'] || 'collections';
 
     if (namespace.resources) {
-      tabs.push(t`Resources`);
+      tabs.push({ id: 'resources', name: t`Resources` });
     }
 
     const repositoryUrl = getRepoUrl('inbound-' + namespace.name);
@@ -146,6 +146,15 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       'tab',
       'view_type',
     ];
+
+    const docsAnsibleLink = (
+      <a
+        href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
+        target='_blank'
+      >
+        here
+      </a>
+    );
 
     return (
       <React.Fragment>
@@ -254,7 +263,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               </section>
             )
           ) : null}
-          {tab.toLowerCase() === 'cli configuration' ? (
+          {tab.toLowerCase() === 'cli-configuration' ? (
             <section className='body'>
               <div>
                 <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>

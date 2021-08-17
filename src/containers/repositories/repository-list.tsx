@@ -102,7 +102,10 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       errorMessages,
     } = this.state;
 
-    const tabs = [t`Local`, t`Remote`];
+    const tabs = [
+      { id: 'local', name: t`Local` },
+      { id: 'remote', name: t`Remote` },
+    ];
     return (
       <React.Fragment>
         {remoteToEdit && showRemoteFormModal && (

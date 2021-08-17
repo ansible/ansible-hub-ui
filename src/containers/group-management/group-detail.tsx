@@ -153,9 +153,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     } = this.state;
     const { user } = this.context;
 
-    const tabs = [t`Permissions`];
+    const tabs = [{ id: 'permissions', name: t`Permissions` }];
     if (!!user && user.model_permissions.view_user) {
-      tabs.push(t`Users`);
+      tabs.push({ id: 'users', name: t`Users` });
     }
 
     if (!group && alerts && alerts.length) {
