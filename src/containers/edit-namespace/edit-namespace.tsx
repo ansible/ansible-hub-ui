@@ -50,7 +50,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     const params = ParamHelper.parseParamString(props.location.search);
 
     if (!params['tab']) {
-      params['tab'] = 'edit details';
+      params['tab'] = 'edit-details';
     }
 
     this.state = {
@@ -87,6 +87,11 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       unauthorized,
     } = this.state;
 
+    const tabs = [
+      { id: 'edit-details', name: t`Edit details` },
+      { id: 'edit-resources', name: t`Edit resources` },
+    ];
+
     if (!namespace) {
       return null;
     }
@@ -108,7 +113,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
             },
             { name: t`Edit` },
           ]}
-          tabs={[t`Edit details`, t`Edit resources`]}
+          tabs={tabs}
           params={params}
           updateParams={(p) => this.updateParams(p)}
         ></PartnerHeader>
@@ -121,7 +126,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         ) : (
           <Main>
             <section className='body'>
-              {params.tab.toLowerCase() === 'edit details' ? (
+              {params.tab.toLowerCase() === 'edit-details' ? (
                 <NamespaceForm
                   userId={userId}
                   namespace={namespace}
