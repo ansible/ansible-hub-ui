@@ -146,6 +146,12 @@ export class Constants {
     push_containerdistribution: t`Push distribution`,
     pull_containerdistribution: t`Pull distribution`,
     view_containerdistribution: t`View distribution`,
+    namespaces: t`Namespaces`,
+    collections: t`Collections`,
+    users: t`Users`,
+    groups: t`Groups`,
+    remotes: t`Remotes`,
+    containers: t`Containers`,
   };
   static CONTAINER_NAMESPACE_PERMISSIONS = [
     'change_containernamespace',

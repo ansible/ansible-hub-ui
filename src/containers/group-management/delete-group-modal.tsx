@@ -15,6 +15,7 @@ interface IProps {
 export class DeleteGroupModal extends React.Component<IProps> {
   render() {
     const { cancelAction, count, deleteAction, name, users } = this.props;
+    const nameBold = <b>{name}</b>;
 
     return (
       <DeleteModal
