@@ -9,38 +9,74 @@ import { Label } from '@patternfly/react-core';
 
 interface IProps {
   state: string;
+  className?: string;
 }
 
 export class TaskStatus extends React.Component<IProps, {}> {
   render() {
-    const { state } = this.props;
+    const { state, className } = this.props;
     switch (state) {
       case 'completed':
         return (
-          <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-            {state}
+          <Label
+            variant='outline'
+            className={className}
+            color='green'
+            icon={<CheckCircleIcon />}
+          >
+            {_`Completed`}
           </Label>
         );
       case 'failed':
         return (
-          <Label variant='outline' color='red' icon={<ExclamationCircleIcon />}>
-            {state}
+          <Label
+            variant='outline'
+            className={className}
+            color='red'
+            icon={<ExclamationCircleIcon />}
+          >
+            {_`Failed`}
           </Label>
         );
       case 'running':
         return (
-          <Label variant='outline' color='blue' icon={<SyncAltIcon />}>
-            {state}
+          <Label
+            variant='outline'
+            className={className}
+            color='blue'
+            icon={<SyncAltIcon />}
+          >
+            {_`Running`}
           </Label>
         );
       case 'waiting':
         return (
-          <Label variant='outline' color='grey' icon={<OutlinedClockIcon />}>
-            {state}
+          <Label
+            variant='outline'
+            className={className}
+            color='grey'
+            icon={<OutlinedClockIcon />}
+          >
+            {_`Waiting`}
+          </Label>
+        );
+      case 'canceled':
+        return (
+          <Label
+            variant='outline'
+            className={className}
+            color='orange'
+            icon={<ExclamationCircleIcon />}
+          >
+            {_`Canceled`}
           </Label>
         );
       default:
-        return <Label variant='outline'>{state}</Label>;
+        return (
+          <Label variant='outline' className={className}>
+            {state}
+          </Label>
+        );
     }
   }
 }
