@@ -2,9 +2,9 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Button, ClipboardCopy } from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 
-import { BaseHeader, Main } from 'src/components';
+import { BaseHeader, Main, ClipboardCopy } from 'src/components';
 import { ActiveUserAPI } from 'src/api';
 
 interface IState {

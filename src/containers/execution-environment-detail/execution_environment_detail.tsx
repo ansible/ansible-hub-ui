@@ -1,14 +1,12 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
-import { EmptyStateNoData, MarkdownEditor } from '../../components';
 import {
+  EmptyStateNoData,
+  MarkdownEditor,
   ClipboardCopy,
-  FlexItem,
-  Flex,
-  Title,
-  Button,
-} from '@patternfly/react-core';
+} from '../../components';
+import { FlexItem, Flex, Title, Button } from '@patternfly/react-core';
 import './execution-environment-detail.scss';
 import { withContainerRepo, IDetailSharedProps } from './base';
 import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from '../../api';

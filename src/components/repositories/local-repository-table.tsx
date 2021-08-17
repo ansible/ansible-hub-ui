@@ -3,12 +3,13 @@ import * as React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { DropdownItem, ClipboardCopy } from '@patternfly/react-core';
+import { DropdownItem } from '@patternfly/react-core';
 import {
   DateComponent,
   EmptyStateNoData,
   SortTable,
   StatefulDropdown,
+  ClipboardCopy,
 } from '..';
 import { Constants } from 'src/constants';
 import { getRepoUrl } from 'src/utilities';

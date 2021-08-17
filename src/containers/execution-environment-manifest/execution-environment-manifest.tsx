@@ -7,9 +7,9 @@ import {
   LoadingPageWithHeader,
   Main,
   TagLabel,
+  ClipboardCopy,
 } from '../../components';
 import {
-  ClipboardCopy,
   DataList,
   DataListItem,
   DataListItemRow,

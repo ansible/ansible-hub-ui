@@ -6,7 +6,6 @@ import * as moment from 'moment';
 import { Link } from 'react-router-dom';
 
 import {
-  ClipboardCopy,
   Split,
   SplitItem,
   Grid,
@@ -19,7 +18,7 @@ import {
 import { DownloadIcon } from '@patternfly/react-icons';
 
 import { CollectionDetailType, CollectionAPI } from 'src/api';
-import { Tag } from 'src/components';
+import { Tag, ClipboardCopy } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { AppContext } from 'src/loaders/app-context';
@@ -105,13 +104,7 @@ export class CollectionInfo extends React.Component<IProps> {
             <Split hasGutter={true}>
               <SplitItem className='install-title'>{t`Installation`}</SplitItem>
               <SplitItem isFilled>
-                <ClipboardCopy
-                  isReadOnly
-                  hoverTip={_`Copy to clipboard`}
-                  clickTip={_`Successfully copied to clipboard!`}
-                >
-                  {installCommand}
-                </ClipboardCopy>
+                <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
                 <div>
                   <Trans>
                     <b>Note:</b> Installing collections with ansible-galaxy is

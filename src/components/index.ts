@@ -62,3 +62,4 @@ export { Tooltip } from './patternfly-wrappers/tooltip';
 export { UserForm } from './user-form/user-form';
 export { UserFormPage } from './user-form/user-form-page';
 export { WriteOnlyField } from './patternfly-wrappers/write-only-field';
+export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';

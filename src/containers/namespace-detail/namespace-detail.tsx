@@ -12,7 +12,6 @@ import {
   Alert,
   AlertActionCloseButton,
   Button,
-  ClipboardCopy,
   DropdownItem,
 } from '@patternfly/react-core';
 
@@ -36,6 +35,7 @@ import {
   EmptyStateNoData,
   RepoSelector,
   StatefulDropdown,
+  ClipboardCopy,
 } from 'src/components';
 
 import { ImportModal } from './import-modal/import-modal';

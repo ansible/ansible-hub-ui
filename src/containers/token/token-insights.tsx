@@ -2,14 +2,10 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import {
-  ClipboardCopy,
-  ClipboardCopyVariant,
-  Button,
-} from '@patternfly/react-core';
+import { ClipboardCopyVariant, Button } from '@patternfly/react-core';
 
 import { Paths } from 'src/paths';
-import { BaseHeader, Main } from 'src/components';
+import { BaseHeader, Main, ClipboardCopy } from 'src/components';
 import { getRepoUrl } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 
