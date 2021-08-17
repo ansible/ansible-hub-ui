@@ -234,4 +234,11 @@ export class Constants {
     'pulpcore.app.tasks.repository.add_and_remove': t`Pulpcore: Add and remove`,
     'pulpcore.plugin.tasking.add_and_remove': t`Pulpcore: Add or remove`,
   };
+
+  static HUMAN_STATUS = {
+    completed: _`Completed`,
+    failed: _`Failed`,
+    running: _`Running`,
+    waiting: _`Waiting`,
+  };
 }
