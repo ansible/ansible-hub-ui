@@ -151,12 +151,12 @@ Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
   cy.wait('@groups');
   cy.contains('button', 'Edit').click();
   permissions.forEach(permissionElement => {
-    // closes previously open dropdowns
-    cy.get('h1').click();
-    cy.get(
-      `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} [aria-label="Options menu"]`,
-    ).click();
     permissionElement.permissions.forEach(permission => {
+      // closes previously open dropdowns
+      cy.get('h1').click();
+      cy.get(
+        `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} [aria-label="Options menu"]`,
+      ).click();
       cy.contains('button', permission).click();
     });
   });
@@ -246,8 +246,6 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.contains('button', 'Add').click();
   cy.get('input.pf-c-select__toggle-typeahead').type(userName);
   cy.contains('button', userName).click();
-  // closes previously open dropdown
-  cy.get('[aria-label="Options menu"]').click();
   cy.contains('footer > button', 'Add').click();
   cy.get(`[aria-labelledby=${userName}]`).should('exist');
 });
