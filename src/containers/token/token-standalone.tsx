@@ -23,7 +23,8 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
   render() {
     const { token } = this.state;
 
-    const code = `\<code\>ansible-galaxy\<\/code\> `;
+    const code = <code>ansible-galaxy</code>;
+
     return (
       <React.Fragment>
         <BaseHeader title={t`Token management`}></BaseHeader>

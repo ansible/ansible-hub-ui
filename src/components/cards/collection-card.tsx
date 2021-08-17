@@ -65,8 +65,7 @@ export class CollectionCard extends React.Component<IProps> {
           <div className='author'>
             <TextContent>
               <Text component={TextVariants.small}>
-                {_`Provided by `}
-                {company}
+                {_`Provided by ${company}`}
               </Text>
             </TextContent>
           </div>

@@ -82,8 +82,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
           {showNamespace ? (
             <TextContent>
               <Text component={TextVariants.small}>
-                {_`Provided by `}
-                {company}
+                {_`Provided by ${company}`}
               </Text>
             </TextContent>
           ) : null}
