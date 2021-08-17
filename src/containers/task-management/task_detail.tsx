@@ -31,6 +31,7 @@ import { TaskManagementAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { Constants } from 'src/constants';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+import { capitalize } from 'lodash';
 
 interface IState {
   loading: boolean;
@@ -220,7 +221,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                 {!task.error && (
                   <section className='body card-area'>
                     <Title headingLevel='h2' size='lg'>
-                      {_`Progress message`}
+                      {_`Progress messages`}
                     </Title>
                     <br />
                     {!!task.progress_reports ? (
@@ -233,8 +234,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                                   !!report[key] && (
                                     <DescriptionListGroup>
                                       <DescriptionListTerm>
-                                        {' '}
-                                        {key}{' '}
+                                        {capitalize(key)}
                                       </DescriptionListTerm>
                                       <DescriptionListDescription>
                                         {report[key]}
@@ -250,8 +250,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                     ) : (
                       <EmptyStateCustom
                         icon={CubesIcon}
-                        title={_`There is no progress report.`}
-                        description={_`There is no progress report.`}
+                        title={_`There is no progress message.`}
+                        description={_`There is no progress message.`}
                       />
                     )}
                   </section>
