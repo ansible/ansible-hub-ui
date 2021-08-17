@@ -12,6 +12,7 @@
     "paths": {
       "src/*": ["src/*"]
     },
+    "skipLibCheck": true,
     "sourceMap": true,
     "strictNullChecks": false,
     "target": "es5"
