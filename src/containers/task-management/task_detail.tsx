@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import {
+  AlertList,
+  AlertType,
   BaseHeader,
   Breadcrumbs,
+  closeAlertMixin,
+  ConfirmModal,
   DateComponent,
   EmptyStateCustom,
   LoadingPageSpinner,
@@ -33,6 +37,8 @@ interface IState {
   task: TaskType;
   parentTask: TaskType;
   childTasks: TaskType[];
+  alerts: AlertType[];
+  cancelModalVisible: boolean;
 }
 
 class TaskDetail extends React.Component<RouteComponentProps, IState> {
@@ -43,6 +49,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       task: null,
       parentTask: null,
       childTasks: [],
+      alerts: [],
+      cancelModalVisible: false,
     };
   }
 
@@ -57,7 +65,14 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { loading, task, parentTask, childTasks } = this.state;
+    const {
+      loading,
+      task,
+      parentTask,
+      childTasks,
+      cancelModalVisible,
+      alerts,
+    } = this.state;
     const breadcrumbs = [
       { url: Paths.taskList, name: _`Task management` },
       { name: !!task ? Constants.TASK_NAMES[task.name] || task.name : '' },
@@ -71,6 +86,11 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       <LoadingPageSpinner />
     ) : (
       <React.Fragment>
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        ></AlertList>
+        {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader
           title={Constants.TASK_NAMES[task.name] || task.name}
           breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
@@ -78,13 +98,13 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             ['running', 'waiting'].includes(task.state) && (
               <Button
                 variant='secondary'
-                onClick={() => console.log('CANCEL TASK')}
+                onClick={() => this.setState({ cancelModalVisible: true })}
               >
                 {_`Cancel task`}
               </Button>
             )
           }
-          status={<TaskStatus state={task.state} />}
+          status={<TaskStatus className={'task-status'} state={task.state} />}
         ></BaseHeader>
         <Main>
           <Flex>
@@ -258,6 +278,57 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
     );
   }
 
+  private renderCancelModal() {
+    const name =
+      Constants.TASK_NAMES[this.state.task.name] || this.state.task.name;
+    return (
+      <ConfirmModal
+        cancelAction={() => this.setState({ cancelModalVisible: false })}
+        confirmAction={() => this.cancelTask()}
+        title={_`Stop task`}
+        children={_`${name} will stop running.`}
+        confirmButtonTitle={_`Yes, stop`}
+      />
+    );
+  }
+
+  private cancelTask() {
+    const { task } = this.state;
+    const name = Constants.TASK_NAMES[task.name] || task.name;
+    TaskManagementAPI.patch(parsePulpIDFromURL(task.pulp_href), {
+      state: 'canceled',
+    })
+      .then(() => {
+        this.setState({
+          loading: true,
+          cancelModalVisible: false,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'success',
+              title: name,
+              description: _`Successfully stopped task.`,
+            },
+          ],
+        });
+        this.loadContent();
+      })
+      .catch(() =>
+        this.setState({
+          loading: true,
+          cancelModalVisible: false,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: name,
+              description: _`Error stopping task.`,
+            },
+          ],
+        }),
+      );
+  }
+
   private loadContent() {
     let taskId = this.props.match.params['task'];
     return TaskManagementAPI.get(taskId).then((result) => {
@@ -291,6 +362,10 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
         });
       });
     });
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 }
 

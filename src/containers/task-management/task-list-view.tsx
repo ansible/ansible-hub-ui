@@ -18,6 +18,7 @@ import {
   AppliedFilters,
   BaseHeader,
   closeAlertMixin,
+  ConfirmModal,
   CompoundFilter,
   DateComponent,
   EmptyStateFilter,
@@ -31,7 +32,6 @@ import {
 } from 'src/components';
 import { TaskManagementAPI } from 'src/api';
 import { TaskType } from 'src/api/response-types/task';
-import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 import { formatPath, Paths } from 'src/paths';
 
 interface IState {
@@ -313,11 +313,13 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       Constants.TASK_NAMES[this.state.selectedTask.name] ||
       this.state.selectedTask.name;
     return (
-      <DeleteModal
+      <ConfirmModal
         cancelAction={() => this.setState({ cancelModalVisible: false })}
         deleteAction={() => this.selectedTask(this.state.selectedTask, name)}
         title={t`Stop task?`}
         children={t`${name} will be cancelled.`}
+        confirmAction={() => this.selectedTask(this.state.selectedTask, name)}
+        confirmButtonTitle={_`Yes, stop`}
       />
     );
   }
