@@ -1,6 +1,6 @@
 describe('Group Table Tests for Sorting, Paging and Filtering', () => {
   let items = [];
-  let prefix = 'group_table_test';
+  let prefix = 'group_test';
   let selector = '.body:first';
 
   before(() => {

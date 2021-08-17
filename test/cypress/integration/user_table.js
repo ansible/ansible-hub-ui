@@ -1,6 +1,6 @@
 describe('User Table Tests for Sorting, Paging and Filtering', () => {
   let items = [];
-  let prefix = 'user_table_test';
+  let prefix = 'user_test';
   let selector = '.body:first';
 
   before(() => {

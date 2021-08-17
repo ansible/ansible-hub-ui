@@ -1,6 +1,6 @@
 describe('Namespaces Table Tests for Sorting, Paging and Filtering', () => {
   let items = [];
-  let prefix = 'namespace_table_test';
+  let prefix = 'namespace_test';
   let selector = '.namespace-page';
 
   before(() => {
