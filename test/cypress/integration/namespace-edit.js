@@ -91,8 +91,15 @@ describe('Edit a namespace', () => {
     cy.get('.pf-c-select__menu-wrapper').should('contain', 'Not found');
     cy.get('.pf-c-button.pf-m-plain.pf-c-select__toggle-clear').click();
 
-    cy.get('.pf-c-form-control.pf-c-select__toggle-typeahead').click();
+    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
+      'autocomplete',
+    );
+
+    cy.get('.pf-c-form-control.pf-c-select__toggle-typeahead')
+      .click()
+      .type('namespace-owner-autocomplete');
     cy.wait('@autocomplete');
+
     cy.contains('namespace-owner-autocomplete').click();
 
     saveButton().click();
