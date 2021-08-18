@@ -51,6 +51,8 @@ export class CollectionInfo extends React.Component<IProps> {
 
     let installCommand = `ansible-galaxy collection install ${namespace.name}.${name}`;
 
+    moment.locale(navigator.language);
+
     if (params.version) {
       installCommand += `:${params.version}`;
     }
