@@ -1,6 +1,14 @@
 describe('My Profile Tests', () => {
-  var adminUsername = Cypress.env('username');
-  var adminPassword = Cypress.env('password');
+  const adminUsername = Cypress.env('username');
+  const adminPassword = Cypress.env('password');
+
+  const username = 'nopermission';
+  const password = 'n0permissi0n';
+
+  before(() => {
+    cy.deleteTestUsers();
+    cy.galaxykit('user create', username, password);
+  });
 
   beforeEach(() => {
     cy.login(adminUsername, adminPassword);
@@ -28,5 +36,101 @@ describe('My Profile Tests', () => {
         expect(inputs).to.include($el.attr('id'));
       });
     });
+  });
+
+  it('superuser cannot change its superuser rights', () => {
+    cy.get('.pf-c-switch__input').should('be.disabled');
+  });
+
+  it('user cannot set superusers rights', () => {
+    cy.login(username, password);
+
+    cy.get('[aria-label="user-dropdown"] button').click();
+    cy.get('a').contains('My profile').click();
+
+    cy.get('.pf-c-switch__input').should('be.disabled');
+  });
+
+  it('email must be email', () => {
+    cy.login(username, password);
+
+    cy.get('[aria-label="user-dropdown"] button').click();
+    cy.get('a').contains('My profile').click();
+    cy.get('button:contains("Edit")').click();
+
+    cy.get('#email').clear().type('test{enter}');
+    cy.get('#email-helper').should('contain', 'Enter a valid email address.');
+
+    cy.get('#email').type('@example');
+    cy.get('#email-helper').should('contain', 'Enter a valid email address.');
+
+    cy.get('#email').type('.com{enter}');
+
+    cy.get('[aria-label="Success Alert"]').should('be.visible');
+  });
+
+  it('password validations', () => {
+    cy.login(username, password);
+
+    cy.get('[aria-label="user-dropdown"] button').click();
+    cy.get('a').contains('My profile').click();
+    cy.get('button:contains("Edit")').click();
+
+    cy.get('#password').clear().type('12345');
+    cy.get('#password-confirm').clear().type('12345');
+    cy.contains('Save').click();
+    cy.get('#password-helper').contains('This password is entirely numeric.');
+
+    cy.get('#password').clear().type('pwd12345');
+    cy.get('#password-confirm').clear().type('pwd12345');
+    cy.contains('Save').click();
+    cy.get('#password-helper').contains(
+      'This password is too short. It must contain at least 9 characters.',
+    );
+
+    cy.get('#password-confirm').clear().type('pwd123456');
+    cy.get('#password-confirm-helper').should(
+      'contain',
+      'Passwords do not match',
+    );
+
+    cy.get('#password').clear().type(password);
+    cy.get('#password-confirm').clear().type(password);
+
+    cy.get('#password-confirm-helper').should('not.exist');
+  });
+
+  it('groups input is readonly', () => {
+    cy.get('[aria-labelledby=readonly-groups]')
+      .find('input')
+      .should('not.exist');
+  });
+
+  it('user can save form', () => {
+    cy.intercept('PUT', Cypress.env('prefix') + '_ui/v1/me/').as('saveForm');
+
+    cy.contains('Save').click();
+    cy.get('[aria-label="Success Alert"]').contains('Profile saved');
+
+    cy.wait('@saveForm').its('response.statusCode').should('eq', 200);
+
+    cy.get('[aria-label="Success Alert"]').contains('Profile saved.');
+  });
+
+  it('user can cancel form', () => {
+    cy.get('#username').clear().type('administrator');
+    cy.get('#first_name').clear().type('First Name');
+    cy.get('#last_name').clear().type('Last Name');
+    cy.get('#email').clear().type('administrator@example.com');
+
+    cy.get('.pf-c-button').contains('Cancel').click();
+
+    cy.get('[aria-labelledby=username]').should('not.contain', 'administrator');
+    cy.get('[aria-labelledby=first_name]').should('not.contain', 'First Name');
+    cy.get('[aria-labelledby=last_name]').should('not.contain', 'Last Name');
+    cy.get('[aria-labelledby=email]').should(
+      'not.contain',
+      'administrator@example.com',
+    );
   });
 });
