@@ -243,8 +243,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(item: any, index: number) {
     const { name, state, pulp_created, started_at, finished_at, pulp_href } =
       item;
-    let splitedHref = pulp_href.split('/');
-    let taskId = splitedHref[splitedHref.length - 2];
+    let taskId = parsePulpIDFromURL(pulp_href);
     return (
       <tr aria-labelledby={name} key={index}>
         <td>

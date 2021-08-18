@@ -333,13 +333,13 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
     let taskId = this.props.match.params['task'];
     return TaskManagementAPI.get(taskId).then((result) => {
       let allRelatedTasks = [];
-      let parenTask = null;
+      let parentTask = null;
       let childTasks = [];
       if (!!result.data.parent_task) {
         let parentTaskId = parsePulpIDFromURL(result.data.parent_task);
         allRelatedTasks.push(
           TaskManagementAPI.get(parentTaskId).then((result) => {
-            parenTask = result.data;
+            parentTask = result.data;
           }),
         );
       }
@@ -356,8 +356,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       return Promise.all(allRelatedTasks).then(() => {
         this.setState({
           task: result.data,
-          childTasks: childTasks,
-          parentTask: parenTask,
+          childTasks,
+          parentTask,
           loading: false,
         });
       });
