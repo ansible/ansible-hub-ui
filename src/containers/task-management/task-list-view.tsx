@@ -64,7 +64,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     }
 
     if (!params['sort']) {
-      params['sort'] = 'created_by';
+      params['sort'] = '-pulp_created';
     }
 
     this.state = {
