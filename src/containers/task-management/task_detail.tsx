@@ -40,6 +40,7 @@ interface IState {
   childTasks: TaskType[];
   alerts: AlertType[];
   cancelModalVisible: boolean;
+  taskName: string;
 }
 
 class TaskDetail extends React.Component<RouteComponentProps, IState> {
@@ -52,6 +53,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       childTasks: [],
       alerts: [],
       cancelModalVisible: false,
+      taskName: '',
     };
   }
 
@@ -73,10 +75,11 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       childTasks,
       cancelModalVisible,
       alerts,
+      taskName,
     } = this.state;
     const breadcrumbs = [
       { url: Paths.taskList, name: _`Task management` },
-      { name: !!task ? Constants.TASK_NAMES[task.name] || task.name : '' },
+      { name: !!task ? taskName : '' },
     ];
     let parentTaskId = null;
     if (!!parentTask) {
@@ -93,7 +96,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
         ></AlertList>
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader
-          title={Constants.TASK_NAMES[task.name] || task.name}
+          title={taskName}
           breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
           pageControls={
             ['running', 'waiting'].includes(task.state) && (
@@ -123,9 +126,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                     <DescriptionListGroup>
                       <DescriptionListTerm>{_`Task name`}</DescriptionListTerm>
                       <DescriptionListDescription>
-                        <Tooltip content={task.name}>
-                          {Constants.TASK_NAMES[task.name] || task.name}
-                        </Tooltip>
+                        <Tooltip content={task.name}>{taskName}</Tooltip>
                       </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup>
@@ -279,8 +280,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderCancelModal() {
-    const name =
-      Constants.TASK_NAMES[this.state.task.name] || this.state.task.name;
+    const name = this.state.taskName;
     return (
       <ConfirmModal
         cancelAction={() => this.setState({ cancelModalVisible: false })}
@@ -293,8 +293,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private cancelTask() {
-    const { task } = this.state;
-    const name = Constants.TASK_NAMES[task.name] || task.name;
+    const { task, taskName } = this.state;
     TaskManagementAPI.patch(parsePulpIDFromURL(task.pulp_href), {
       state: 'canceled',
     })
@@ -306,7 +305,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'success',
-              title: name,
+              title: taskName,
               description: _`Successfully stopped task.`,
             },
           ],
@@ -321,7 +320,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: name,
+              title: taskName,
               description: _`Error stopping task.`,
             },
           ],
@@ -359,6 +358,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
           childTasks,
           parentTask,
           loading: false,
+          taskName: Constants.TASK_NAMES[result.data.name] || result.data.name,
         });
       });
     });
