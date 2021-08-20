@@ -54,4 +54,18 @@ describe('Group list tests for sorting, paging and filtering', () => {
     cy.get('.body:first').contains('group_test0');
     cy.get('.body:first').contains('group_test1').should('not.exist');
   });
+
+  it('set page size is working', () => {
+    cy.visit('/ui/group-list');
+    cy.get('.body:first')
+      .get('button[aria-label="Items per page"]:first')
+      .click();
+    cy.get('.body:first').contains('20 per page').click();
+
+    range(20).forEach((i) => {
+      cy.get('.body:first').contains(items[i].name);
+    });
+
+    cy.get('.body:first').contains(items[20].name).should('not.exist');
+  });
 });
