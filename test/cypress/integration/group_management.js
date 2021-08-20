@@ -4,6 +4,12 @@ describe('Hub Group Management Tests', () => {
 
   beforeEach(() => {
     cy.deleteTestGroups();
+    cy.deleteTestGroups();
+    cy.deleteTestGroups();
+    cy.deleteTestGroups();
+    cy.deleteTestUsers();
+    cy.deleteTestUsers();
+    cy.deleteTestUsers();
     cy.deleteTestUsers();
 
     cy.login(adminUsername, adminPassword);
