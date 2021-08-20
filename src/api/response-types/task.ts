@@ -10,5 +10,5 @@ export class TaskType {
   task_group: any;
   parent_task: string;
   child_tasks: any[];
-  reserved_resources_record: any[];
+  reserved_resources_record: string[];
 }

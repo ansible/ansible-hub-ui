@@ -27,7 +27,7 @@ import {
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
 import { TaskType } from 'src/api/response-types/task';
-import { TaskManagementAPI } from 'src/api';
+import { GenericPulpAPI, TaskManagementAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { Constants } from 'src/constants';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
@@ -41,6 +41,7 @@ interface IState {
   alerts: AlertType[];
   cancelModalVisible: boolean;
   taskName: string;
+  resources: { name: string; type: string }[];
 }
 
 class TaskDetail extends React.Component<RouteComponentProps, IState> {
@@ -54,6 +55,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       alerts: [],
       cancelModalVisible: false,
       taskName: '',
+      resources: [],
     };
   }
 
@@ -76,6 +78,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       cancelModalVisible,
       alerts,
       taskName,
+      resources,
     } = this.state;
     const breadcrumbs = [
       { url: Paths.taskList, name: _`Task management` },
@@ -208,8 +211,27 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                     {_`Reserve resources`}
                   </Title>
                   <br />
-                  {!!task.reserved_resources_record
-                    ? task.reserved_resources_record
+                  {!!resources.length
+                    ? resources.map((resource) => {
+                        return (
+                          <CodeBlock>
+                            <DescriptionList isHorizontal>
+                              <DescriptionListGroup>
+                                <DescriptionListTerm>{_`Type`}</DescriptionListTerm>
+                                <DescriptionListDescription>
+                                  {resource.type}
+                                </DescriptionListDescription>
+                              </DescriptionListGroup>
+                              <DescriptionListGroup>
+                                <DescriptionListTerm>{_`Name`}</DescriptionListTerm>
+                                <DescriptionListDescription>
+                                  {resource.name}
+                                </DescriptionListDescription>
+                              </DescriptionListGroup>
+                            </DescriptionList>
+                          </CodeBlock>
+                        );
+                      })
                     : _`There's no resource record`}
                 </section>
               </FlexItem>
@@ -225,7 +247,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                       {_`Progress messages`}
                     </Title>
                     <br />
-                    {!!task.progress_reports ? (
+                    {!!task.progress_reports.length ? (
                       task.progress_reports.map((report) => {
                         return (
                           <CodeBlock>
@@ -334,6 +356,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       let allRelatedTasks = [];
       let parentTask = null;
       let childTasks = [];
+      let resources = [];
       if (!!result.data.parent_task) {
         let parentTaskId = parsePulpIDFromURL(result.data.parent_task);
         allRelatedTasks.push(
@@ -352,6 +375,17 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
           );
         });
       }
+      if (!!result.data.reserved_resources_record.length) {
+        result.data.reserved_resources_record.forEach((resource) => {
+          let type = resource.split('/')[4];
+          let url = resource.replace('/pulp/api/v3/', '');
+          allRelatedTasks.push(
+            GenericPulpAPI.get(url).then((result) =>
+              resources.push({ name: result.data.name, type }),
+            ),
+          );
+        });
+      }
       return Promise.all(allRelatedTasks).then(() => {
         this.setState({
           task: result.data,
@@ -359,6 +393,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
           parentTask,
           loading: false,
           taskName: Constants.TASK_NAMES[result.data.name] || result.data.name,
+          resources,
         });
       });
     });
