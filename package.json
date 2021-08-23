@@ -18,7 +18,7 @@
         "@types/react-router-dom": "^5.1.8",
         "axios": "~0.21.1",
         "classnames": "^2.2.5",
-        "csstype": "^3.0.5",
+        "csstype": "^3.0.8",
         "detect-browser": "^5.2.0",
         "file-saver": "^2.0.5",
         "js-cookie": "^2.2.1",
