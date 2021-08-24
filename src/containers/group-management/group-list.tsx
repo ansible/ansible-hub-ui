@@ -321,8 +321,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: null,
-              description: _`Error editing group.`,
+              title: _`Error editing group.`,
             },
           ],
         }),
@@ -415,8 +414,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'success',
-              title: null,
-              description: _`Successfully deleted group.`,
+              title: _`Successfully deleted group.`,
             },
           ],
         });
@@ -428,8 +426,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: null,
-              description: _`Error deleting group.`,
+              title: _`Error deleting group.`,
             },
           ],
         }),
