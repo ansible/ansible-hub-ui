@@ -211,28 +211,31 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                     {_`Reserve resources`}
                   </Title>
                   <br />
-                  {!!resources.length
-                    ? resources.map((resource) => {
+                  {!!resources.length ? (
+                    <DescriptionList isHorizontal>
+                      {resources.map((resource) => {
                         return (
-                          <CodeBlock>
-                            <DescriptionList isHorizontal>
-                              <DescriptionListGroup>
-                                <DescriptionListTerm>{_`Type`}</DescriptionListTerm>
-                                <DescriptionListDescription>
-                                  {resource.type}
-                                </DescriptionListDescription>
-                              </DescriptionListGroup>
-                              <DescriptionListGroup>
-                                <DescriptionListTerm>{_`Name`}</DescriptionListTerm>
-                                <DescriptionListDescription>
-                                  {resource.name}
-                                </DescriptionListDescription>
-                              </DescriptionListGroup>
-                            </DescriptionList>
-                          </CodeBlock>
+                          <React.Fragment>
+                            <hr />
+                            <DescriptionListGroup>
+                              <DescriptionListTerm>{_`Type`}</DescriptionListTerm>
+                              <DescriptionListDescription>
+                                {resource.type}
+                              </DescriptionListDescription>
+                            </DescriptionListGroup>
+                            <DescriptionListGroup>
+                              <DescriptionListTerm>{_`Name`}</DescriptionListTerm>
+                              <DescriptionListDescription>
+                                {resource.name}
+                              </DescriptionListDescription>
+                            </DescriptionListGroup>
+                          </React.Fragment>
                         );
-                      })
-                    : _`There's no resource record`}
+                      })}
+                    </DescriptionList>
+                  ) : (
+                    _`There's no resource record`
+                  )}
                 </section>
               </FlexItem>
             </Flex>
@@ -248,10 +251,11 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                     </Title>
                     <br />
                     {!!task.progress_reports.length ? (
-                      task.progress_reports.map((report) => {
-                        return (
-                          <CodeBlock>
-                            <DescriptionList isHorizontal>
+                      <DescriptionList isHorizontal>
+                        {task.progress_reports.reverse().map((report) => {
+                          return (
+                            <React.Fragment>
+                              <hr />
                               {Object.keys(report).map((key) => {
                                 return (
                                   !!report[key] && (
@@ -265,11 +269,11 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                                     </DescriptionListGroup>
                                   )
                                 );
-                              })}
-                            </DescriptionList>
-                          </CodeBlock>
-                        );
-                      })
+                              })}{' '}
+                            </React.Fragment>
+                          );
+                        })}
+                      </DescriptionList>
                     ) : (
                       <EmptyStateCustom
                         icon={CubesIcon}
