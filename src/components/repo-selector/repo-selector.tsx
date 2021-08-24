@@ -40,6 +40,8 @@ export class RepoSelector extends React.Component<IProps, IState> {
       return null;
     }
 
+    const repoNames = Constants.REPOSITORYNAMES;
+
     return (
       <Flex>
         <FlexItem>
@@ -55,9 +57,9 @@ export class RepoSelector extends React.Component<IProps, IState> {
               isDisabled={this.props.isDisabled}
               isOpen={this.state.selectExpanded}
               isPlain={false}
-              onSelect={(event, value) => {
+              onSelect={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const originalRepo = this.props.selectedRepo;
-                const newRepo = this.getRepoBasePath(value.toString());
+                const newRepo = this.getRepoBasePath(event.target.name);
 
                 this.setState({ selectExpanded: false });
 
@@ -75,9 +77,13 @@ export class RepoSelector extends React.Component<IProps, IState> {
               selections={this.getRepoName(this.props.selectedRepo)}
               variant='single'
             >
-              <SelectOption key={'published'} value={t`Published`} />
-              <SelectOption key={'rh-certified'} value={t`Red Hat Certified`} />
-              <SelectOption key={'community'} value={t`Community`} />
+              {Object.keys(repoNames).map((option) => (
+                <SelectOption
+                  name={option}
+                  key={option}
+                  value={repoNames[option]}
+                />
+              ))}
             </Select>
           </InputGroup>
         </FlexItem>
@@ -85,7 +91,7 @@ export class RepoSelector extends React.Component<IProps, IState> {
     );
   }
 
-  private getRepoName(basePath) {
+  private getRepoBasePath(basePath) {
     const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
       (key) => Constants.REPOSITORYNAMES[key] === basePath,
     );
@@ -98,7 +104,7 @@ export class RepoSelector extends React.Component<IProps, IState> {
     return newRepoName;
   }
 
-  private getRepoBasePath(repoName) {
+  private getRepoName(repoName) {
     if (Constants.REPOSITORYNAMES[repoName]) {
       return Constants.REPOSITORYNAMES[repoName];
     }

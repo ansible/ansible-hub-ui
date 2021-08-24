@@ -177,10 +177,11 @@ export class Constants {
     'ci.console.redhat.com',
     'qa.console.redhat.com',
   ];
+
   static REPOSITORYNAMES = {
-    'Red Hat Certified': 'rh-certified',
-    Community: 'community',
-    Published: 'published',
+    published: t`Published`,
+    'rh-certified': t`Red Hat Certified`,
+    community: t`Community`,
   };
 
   static ALLOWEDREPOS = ['community', 'published', 'rh-certified'];
@@ -236,9 +237,9 @@ export class Constants {
   };
 
   static HUMAN_STATUS = {
-    completed: _`Completed`,
-    failed: _`Failed`,
-    running: _`Running`,
-    waiting: _`Waiting`,
+    completed: t`Completed`,
+    failed: t`Failed`,
+    running: t`Running`,
+    waiting: t`Waiting`,
   };
 }
