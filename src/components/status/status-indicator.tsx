@@ -15,6 +15,7 @@ import { PulpStatus } from 'src/api';
 interface IProps {
   status: PulpStatus;
   type?: 'primary' | 'secondary';
+  className?: string;
 }
 
 interface LabelPropType {
@@ -84,6 +85,7 @@ export class StatusIndicator extends React.Component<IProps, {}> {
         variant={this.typeToVariantMap[type] as any}
         color={labelProps.color as any}
         icon={labelProps.icon}
+        className={this.props.className}
       >
         {labelProps.text}
       </Label>

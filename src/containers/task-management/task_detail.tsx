@@ -11,7 +11,7 @@ import {
   EmptyStateCustom,
   LoadingPageSpinner,
   Main,
-  TaskStatus,
+  StatusIndicator,
   Tooltip,
 } from 'src/components';
 import {
@@ -111,8 +111,10 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
               </Button>
             )
           }
-          status={<TaskStatus className={'task-status'} state={task.state} />}
-        ></BaseHeader>
+          status={
+            <StatusIndicator className={'task-status'} status={task.state} />
+          }
+        />
         <Main>
           <Flex>
             <Flex

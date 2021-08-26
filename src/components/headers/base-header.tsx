@@ -53,7 +53,10 @@ export class BaseHeader extends React.Component<IProps, {}> {
               />
             ) : null}
             <div>
-              <Title headingLevel='h1' size='2xl' children={[title, status]} />
+              <Title headingLevel='h1' size='2xl'>
+                {' '}
+                {title} {status}{' '}
+              </Title>
             </div>
           </div>
           {pageControls ? (

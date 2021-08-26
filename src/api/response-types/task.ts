@@ -1,6 +1,8 @@
+import { PulpStatus } from 'src/api';
+
 export class TaskType {
   pulp_created: string;
-  state: string;
+  state: PulpStatus;
   name: string;
   started_at: string;
   finished_at: string;

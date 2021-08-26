@@ -27,8 +27,8 @@ import {
   Main,
   Pagination,
   SortTable,
-  TaskStatus,
   Tooltip,
+  StatusIndicator,
 } from 'src/components';
 import { TaskManagementAPI } from 'src/api';
 import { TaskType } from 'src/api/response-types/task';
@@ -263,7 +263,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
           <DateComponent date={finished_at} />
         </td>
         <td>
-          <TaskStatus state={state} />
+          <StatusIndicator status={state} />
         </td>
         <td>{this.cancelButton(state, item)}</td>
       </tr>
