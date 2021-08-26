@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './task.scss';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import {
   AlertList,
@@ -295,7 +296,9 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                       <Title headingLevel='h3'>{_`Description`}</Title>
                       <CodeBlock>{task.error.description}</CodeBlock>
                       <Title headingLevel='h3'>{_`Traceback`}</Title>
-                      <CodeBlock>{task.error.traceback}</CodeBlock>
+                      <CodeBlock className={'code-block'}>
+                        {task.error.traceback}
+                      </CodeBlock>
                     </React.Fragment>
                   </section>
                 )}
