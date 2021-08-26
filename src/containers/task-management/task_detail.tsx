@@ -364,18 +364,22 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       if (!!result.data.parent_task) {
         let parentTaskId = parsePulpIDFromURL(result.data.parent_task);
         allRelatedTasks.push(
-          TaskManagementAPI.get(parentTaskId).then((result) => {
-            parentTask = result.data;
-          }),
+          TaskManagementAPI.get(parentTaskId)
+            .then((result) => {
+              parentTask = result.data;
+            })
+            .catch(() => {}),
         );
       }
       if (!!result.data.child_tasks.length) {
         result.data.child_tasks.forEach((child) => {
           let childTaskId = parsePulpIDFromURL(child);
           allRelatedTasks.push(
-            TaskManagementAPI.get(childTaskId).then((result) => {
-              childTasks.push(result.data);
-            }),
+            TaskManagementAPI.get(childTaskId)
+              .then((result) => {
+                childTasks.push(result.data);
+              })
+              .catch(() => {}),
           );
         });
       }
@@ -384,9 +388,15 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
           let type = resource.split('/')[4];
           let url = resource.replace('/pulp/api/v3/', '');
           allRelatedTasks.push(
-            GenericPulpAPI.get(url).then((result) =>
-              resources.push({ name: result.data.name, type }),
-            ),
+            GenericPulpAPI.get(url)
+              .then((result) => {
+                if (!!result.data.name) {
+                  resources.push({ name: result.data.name, type });
+                } else {
+                  resources.push({ type });
+                }
+              })
+              .catch(() => {}),
           );
         });
       }
