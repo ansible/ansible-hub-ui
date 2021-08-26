@@ -60,6 +60,7 @@ interface IState {
   params: { page?: number; page_size?: number };
   redirect: string;
   alerts: AlertType[];
+  inputText: string;
 
   // ID for manifest that is open in the manage tags modal.
   manageTagsManifestDigest: string;
@@ -106,6 +107,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       confirmDelete: false,
       expandedImage: null,
       isDeletionPending: false,
+      inputText: '',
     };
   }
 
@@ -255,6 +257,8 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               <ToolbarGroup>
                 <ToolbarItem>
                   <CompoundFilter
+                    inputText={this.state.inputText}
+                    onChange={(text) => this.setState({ inputText: text })}
                     updateParams={(p) =>
                       this.updateParams(p, () =>
                         this.queryImages(this.props.match.params['container']),
@@ -289,11 +293,12 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         </div>
         <div>
           <AppliedFilters
-            updateParams={(p) =>
+            updateParams={(p) => {
               this.updateParams(p, () =>
                 this.queryImages(this.props.match.params['container']),
-              )
-            }
+              );
+              this.setState({ inputText: '' });
+            }}
             params={params}
             ignoredParams={['page_size', 'page', 'sort', 'id', 'tab']}
           />

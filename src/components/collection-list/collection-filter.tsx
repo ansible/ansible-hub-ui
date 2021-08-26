@@ -17,7 +17,19 @@ interface IProps {
   updateParams: (p) => void;
 }
 
-export class CollectionFilter extends React.Component<IProps> {
+interface IState {
+  inputText: string;
+}
+
+export class CollectionFilter extends React.Component<IProps, IState> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      inputText: '',
+    };
+  }
+
   render() {
     const { ignoredParams, params, updateParams } = this.props;
 
@@ -43,6 +55,8 @@ export class CollectionFilter extends React.Component<IProps> {
           <ToolbarGroup>
             <ToolbarItem>
               <CompoundFilter
+                inputText={this.state.inputText}
+                onChange={(text) => this.setState({ inputText: text })}
                 updateParams={updateParams}
                 params={params}
                 filterConfig={filterConfig}
