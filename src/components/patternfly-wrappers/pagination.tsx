@@ -62,7 +62,7 @@ export class Pagination extends React.Component<IProps> {
         titles={{
           ofWord: _`of`,
           perPageSuffix: _`per page`,
-          items: _`items`,
+          items: null,
         }}
         toggleTemplate={(props) => <ToggleTemplate ofWord={_`of`} {...props} />}
       />
