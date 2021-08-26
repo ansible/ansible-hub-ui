@@ -191,6 +191,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                               return (
                                 <React.Fragment>
                                   <Link
+                                    key={childTaskId}
                                     to={formatPath(Paths.taskDetail, {
                                       task: childTaskId,
                                     })}
@@ -216,9 +217,9 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                   <br />
                   {!!resources.length ? (
                     <DescriptionList isHorizontal>
-                      {resources.map((resource) => {
+                      {resources.map((resource, index) => {
                         return (
-                          <React.Fragment>
+                          <React.Fragment key={resource.type + index}>
                             <hr />
                             <DescriptionListGroup>
                               <DescriptionListTerm>{_`Type`}</DescriptionListTerm>
@@ -226,12 +227,14 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                                 {resource.type}
                               </DescriptionListDescription>
                             </DescriptionListGroup>
-                            <DescriptionListGroup>
-                              <DescriptionListTerm>{_`Name`}</DescriptionListTerm>
-                              <DescriptionListDescription>
-                                {resource.name}
-                              </DescriptionListDescription>
-                            </DescriptionListGroup>
+                            {resource.name && (
+                              <DescriptionListGroup>
+                                <DescriptionListTerm>{_`Name`}</DescriptionListTerm>
+                                <DescriptionListDescription>
+                                  {resource.name}
+                                </DescriptionListDescription>
+                              </DescriptionListGroup>
+                            )}
                           </React.Fragment>
                         );
                       })}
@@ -255,27 +258,29 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                     <br />
                     {!!task.progress_reports.length ? (
                       <DescriptionList isHorizontal>
-                        {task.progress_reports.reverse().map((report) => {
-                          return (
-                            <React.Fragment>
-                              <hr />
-                              {Object.keys(report).map((key) => {
-                                return (
-                                  !!report[key] && (
-                                    <DescriptionListGroup>
-                                      <DescriptionListTerm>
-                                        {capitalize(key)}
-                                      </DescriptionListTerm>
-                                      <DescriptionListDescription>
-                                        {report[key]}
-                                      </DescriptionListDescription>
-                                    </DescriptionListGroup>
-                                  )
-                                );
-                              })}{' '}
-                            </React.Fragment>
-                          );
-                        })}
+                        {task.progress_reports
+                          .reverse()
+                          .map((report, index) => {
+                            return (
+                              <React.Fragment key={index}>
+                                <hr />
+                                {Object.keys(report).map((key, index) => {
+                                  return (
+                                    !!report[key] && (
+                                      <DescriptionListGroup key={key + index}>
+                                        <DescriptionListTerm>
+                                          {capitalize(key)}
+                                        </DescriptionListTerm>
+                                        <DescriptionListDescription>
+                                          {report[key]}
+                                        </DescriptionListDescription>
+                                      </DescriptionListGroup>
+                                    )
+                                  );
+                                })}{' '}
+                              </React.Fragment>
+                            );
+                          })}
                       </DescriptionList>
                     ) : (
                       <EmptyStateCustom
@@ -373,7 +378,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             .then((result) => {
               parentTask = result.data;
             })
-            .catch(() => {}),
+            .catch(() => {return true}),
         );
       }
       if (!!result.data.child_tasks.length) {
@@ -384,7 +389,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
               .then((result) => {
                 childTasks.push(result.data);
               })
-              .catch(() => {}),
+              .catch(() => {return true}),
           );
         });
       }
@@ -401,7 +406,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                   resources.push({ type });
                 }
               })
-              .catch(() => {}),
+              .catch(() => {return true}),
           );
         });
       }
@@ -414,8 +419,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
           taskName: Constants.TASK_NAMES[result.data.name] || result.data.name,
           resources,
         });
-      });
-    });
+      }).catch(() => console.log("ALL ERROR"));
+    }).catch(() => "THERE's no Task");
   }
 
   private get closeAlert() {
