@@ -4,6 +4,7 @@ const webpackBase = require('./webpack.base.config');
 const proxyHost = process.env.API_PROXY_HOST || 'localhost';
 const proxyPort = process.env.API_PROXY_PORT || '5001';
 const apiBasePath = process.env.API_BASE_PATH || '/api/automation-hub/';
+const uiExternalLoginURI = process.env.UI_EXTERNAL_LOGIN_URI || '/login';
 
 module.exports = webpackBase({
   // The host where the API lives. EX: https://localhost:5001
@@ -32,6 +33,9 @@ module.exports = webpackBase({
 
   // Target compilation environment. Options: dev, prod
   TARGET_ENVIRONMENT: 'dev',
+
+  // Login URI to allow stand alone with and without keycloak
+  UI_EXTERNAL_LOGIN_URI: uiExternalLoginURI,
 
   // Value for webpack.devServer.proxy
   // https://webpack.js.org/configuration/dev-server/#devserverproxy

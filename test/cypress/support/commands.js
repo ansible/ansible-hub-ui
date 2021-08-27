@@ -74,12 +74,14 @@ Cypress.Commands.add('manualLogin', {}, (username, password) => {
   cy.intercept('POST', Cypress.env('prefix') + '_ui/v1/auth/login/').as(
     'login',
   );
-  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/feature-flags/').as(
+    'feature-flags',
+  );
   cy.visit('/ui/login');
   cy.get('#pf-login-username-id').type(username);
   cy.get('#pf-login-password-id').type(`${password}{enter}`);
   cy.wait('@login');
-  cy.wait('@me');
+  cy.wait('@feature-flags');
 });
 
 Cypress.Commands.add('cookieLogout', {}, () => {
@@ -123,10 +125,12 @@ Cypress.Commands.add('cookieLogin', {}, (username, password) => {
 });
 
 Cypress.Commands.add('logout', {}, () => {
-  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/me/').as('me');
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/feature-flags/').as(
+    'feature-flags',
+  );
   cy.get('[aria-label="user-dropdown"] button').click();
   cy.get('[aria-label="logout"]').click();
-  cy.wait('@me');
+  cy.wait('@feature-flags');
 });
 
 Cypress.Commands.add('login', {}, (username, password) => {

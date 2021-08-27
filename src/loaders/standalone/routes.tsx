@@ -84,11 +84,16 @@ class AuthHandler extends React.Component<
     // to check for an active user.
     const { user } = this.context;
     if (!user) {
-      Promise.all([ActiveUserAPI.getUser(), FeatureFlagsAPI.get()])
-        .then((response) => {
-          this.props.updateInitialData(response[0], response[1].data, () =>
-            this.setState({ isLoading: false }),
-          );
+      FeatureFlagsAPI.get()
+        .then((featureFlagResponse) => {
+          this.props.updateInitialData(null, featureFlagResponse.data);
+          return ActiveUserAPI.getUser().then((userResponse) => {
+            this.props.updateInitialData(
+              userResponse,
+              featureFlagResponse.data,
+              () => this.setState({ isLoading: false }),
+            );
+          });
         })
         .catch(() => this.setState({ isLoading: false }));
     }
@@ -97,13 +102,22 @@ class AuthHandler extends React.Component<
   render() {
     const { isLoading } = this.state;
     const { Component, noAuth, ...props } = this.props;
-    const { user } = this.context;
+    const { user, featureFlags } = this.context;
+
+    let isExternalAuth = false;
+    if (featureFlags) {
+      isExternalAuth = featureFlags.external_authentication;
+    }
 
     if (isLoading) {
       return null;
     }
 
     if (!user && !noAuth) {
+      if (isExternalAuth && UI_EXTERNAL_LOGIN_URI) {
+        window.location.replace(UI_EXTERNAL_LOGIN_URI);
+        return <div></div>;
+      }
       return (
         <Redirect
           to={formatPath(Paths.login, {}, { next: props.location.pathname })}
@@ -128,8 +142,10 @@ export class Routes extends React.Component<IRoutesProps> {
   getRoutes(): IRouteConfig[] {
     const { featureFlags } = this.context;
     let isContainerDisabled = true;
+    let isUserMgmtDisabled = false;
     if (featureFlags) {
       isContainerDisabled = !featureFlags.execution_environments;
+      isUserMgmtDisabled = featureFlags.external_authentication;
     }
     return [
       {
@@ -165,8 +181,12 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: GroupDetail, path: Paths.groupDetail },
       { comp: RepositoryList, path: Paths.repositories },
       { comp: UserProfile, path: Paths.userProfileSettings },
-      { comp: UserCreate, path: Paths.createUser },
-      { comp: EditUser, path: Paths.editUser },
+      {
+        comp: UserCreate,
+        path: Paths.createUser,
+        isDisabled: isUserMgmtDisabled,
+      },
+      { comp: EditUser, path: Paths.editUser, isDisabled: isUserMgmtDisabled },
       { comp: UserDetail, path: Paths.userDetail },
       { comp: UserList, path: Paths.userList },
       { comp: CertificationDashboard, path: Paths.approvalDashboard },

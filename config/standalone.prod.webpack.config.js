@@ -10,5 +10,6 @@ module.exports = webpackBase({
   UI_USE_HTTPS: false,
   UI_DEBUG: false,
   TARGET_ENVIRONMENT: 'prod',
+  UI_EXTERNAL_LOGIN_URI: '/login',
   WEBPACK_PUBLIC_PATH: '/static/galaxy_ng/',
 });

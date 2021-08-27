@@ -20,6 +20,7 @@ const defaultConfigs = [
   { name: 'DEPLOYMENT_MODE', default: 'standalone', scope: 'global' },
   { name: 'NAMESPACE_TERM', default: 'namespaces', scope: 'global' },
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
+  { name: 'UI_EXTERNAL_LOGIN_URI', default: '/login', scope: 'global' },
 
   // Webpack scope means the variable will only be available to webpack at
   // build time

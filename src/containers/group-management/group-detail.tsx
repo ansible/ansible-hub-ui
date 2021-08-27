@@ -265,7 +265,19 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private renderPermissions() {
     const groups = Constants.PERMISSIONS;
     const { editPermissions, permissions: selectedPermissions } = this.state;
-    const { user } = this.context;
+    const { user, featureFlags } = this.context;
+    let isUserMgmtDisabled = false;
+    let filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
+    if (featureFlags) {
+      isUserMgmtDisabled = featureFlags.external_authentication;
+    }
+    if (isUserMgmtDisabled) {
+      Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
+        if (filteredPermissions.hasOwnProperty(perm)) {
+          delete filteredPermissions[perm];
+        }
+      });
+    }
 
     return (
       <section className='body'>
@@ -294,9 +306,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                           (selected) => selected === perm,
                         ),
                     )
-                    .map((value) =>
-                      twoWayMapper(value, Constants.HUMAN_PERMISSIONS),
-                    )
+                    .map((value) => twoWayMapper(value, filteredPermissions))
                     .sort()}
                   selectedPermissions={selectedPermissions
                     .filter((selected) =>
@@ -304,9 +314,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                         (perm) => selected === perm,
                       ),
                     )
-                    .map((value) =>
-                      twoWayMapper(value, Constants.HUMAN_PERMISSIONS),
-                    )}
+                    .map((value) => twoWayMapper(value, filteredPermissions))}
                   setSelected={(perms) => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
                   isViewOnly={!editPermissions}
@@ -321,16 +329,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                   onSelect={(event, selection) => {
                     const newPerms = new Set(this.state.permissions);
                     if (
-                      newPerms.has(
-                        twoWayMapper(selection, Constants.HUMAN_PERMISSIONS),
-                      )
+                      newPerms.has(twoWayMapper(selection, filteredPermissions))
                     ) {
                       newPerms.delete(
-                        twoWayMapper(selection, Constants.HUMAN_PERMISSIONS),
+                        twoWayMapper(selection, filteredPermissions),
                       );
                     } else {
                       newPerms.add(
-                        twoWayMapper(selection, Constants.HUMAN_PERMISSIONS),
+                        twoWayMapper(selection, filteredPermissions),
                       );
                     }
                     this.setState({ permissions: Array.from(newPerms) });
@@ -557,10 +563,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   private renderUsers(users) {
     const { params, itemCount } = this.state;
-    const { user } = this.context;
+    const { user, featureFlags } = this.context;
     const noData =
       itemCount === 0 &&
       !filterIsSet(params, ['username', 'first_name', 'last_name', 'email']);
+    let isUserMgmtDisabled = false;
+    if (featureFlags) {
+      isUserMgmtDisabled = featureFlags.external_authentication;
+    }
 
     if (noData) {
       return (
@@ -569,7 +579,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           description={_`Users will appear once added to this group`}
           button={
             !!user &&
-            user.model_permissions.change_group && (
+            user.model_permissions.change_group &&
+            !isUserMgmtDisabled && (
               <Button
                 variant='primary'
                 onClick={() => this.setState({ addModalVisible: true })}
@@ -615,17 +626,19 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                   />
                 </ToolbarItem>
               </ToolbarGroup>
-              {!!user && user.model_permissions.change_group && (
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <Button
-                      onClick={() => this.setState({ addModalVisible: true })}
-                    >
-                      {_`Add`}
-                    </Button>
-                  </ToolbarItem>
-                </ToolbarGroup>
-              )}
+              {!!user &&
+                user.model_permissions.change_group &&
+                !isUserMgmtDisabled && (
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <Button
+                        onClick={() => this.setState({ addModalVisible: true })}
+                      >
+                        {_`Add`}
+                      </Button>
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                )}
             </ToolbarContent>
           </Toolbar>
 
@@ -710,6 +723,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   private renderTableRow(user: UserType, index: number) {
     const currentUser = this.context.user;
+    const { featureFlags } = this.context;
+    let isUserMgmtDisabled = false;
+    if (featureFlags) {
+      isUserMgmtDisabled = featureFlags.external_authentication;
+    }
     return (
       <tr aria-labelledby={user.username} key={index}>
         <td>
@@ -725,18 +743,20 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         </td>
         <td>
           {' '}
-          {!!currentUser && currentUser.model_permissions.change_group && (
-            <StatefulDropdown
-              items={[
-                <DropdownItem
-                  key='delete'
-                  onClick={() => this.setState({ showUserRemoveModal: user })}
-                >
-                  {_`Remove`}
-                </DropdownItem>,
-              ]}
-            ></StatefulDropdown>
-          )}
+          {!!currentUser &&
+            currentUser.model_permissions.change_group &&
+            !isUserMgmtDisabled && (
+              <StatefulDropdown
+                items={[
+                  <DropdownItem
+                    key='delete'
+                    onClick={() => this.setState({ showUserRemoveModal: user })}
+                  >
+                    {_`Remove`}
+                  </DropdownItem>,
+                ]}
+              ></StatefulDropdown>
+            )}
         </td>
       </tr>
     );

@@ -46,7 +46,6 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const { userDetail, errorMessages, alerts, showDeleteModal } = this.state;
-
     const { user } = this.context;
 
     if (!userDetail) {
