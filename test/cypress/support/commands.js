@@ -350,6 +350,7 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
 
   // Wait for navigation
   cy.wait('@userList');
+  cy.contains(username).should('not.exist');
 });
 
 Cypress.Commands.add('deleteGroup', {}, (name) => {
