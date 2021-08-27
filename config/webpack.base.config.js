@@ -3,6 +3,7 @@ const { resolve } = require('path');
 const config = require('@redhat-cloud-services/frontend-components-config');
 const TSOverrides = require('./webpack-ts-overrides');
 const webpack = require('webpack');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
 // should be imported, initialized with the following settings and exported like
@@ -95,6 +96,7 @@ module.exports = (inputConfigs) => {
   }
 
   plugins.push(new webpack.DefinePlugin(globals));
+  plugins.push(new ForkTsCheckerWebpackPlugin());
 
   return {
     ...newWebpackConfig,
