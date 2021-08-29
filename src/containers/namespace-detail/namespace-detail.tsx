@@ -13,6 +13,7 @@ import {
   AlertActionCloseButton,
   Button,
   DropdownItem,
+  Tooltip,
 } from '@patternfly/react-core';
 
 import * as ReactMarkdown from 'react-markdown';
@@ -390,8 +391,23 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 </Link>
               }
             />,
-            <DropdownItem
+            <Tooltip
               key='2'
+              content={
+                <>
+                  Cannot delete namespace until <br />
+                  collections' dependencies have <br />
+                  been deleted
+                </>
+              }
+              position='left'
+            >
+              <DropdownItem
+                component={<Link to={'not-found'}>{_`Delete namespace`}</Link>}
+              />
+            </Tooltip>,
+            <DropdownItem
+              key='3'
               component={
                 <Link
                   to={formatPath(
