@@ -329,7 +329,7 @@ Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
 
 Cypress.Commands.add('deleteUser', {}, (username) => {
   cy.menuGo('User Access > Users');
-  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/users/**').as(
+  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/users/*').as(
     'deleteUser',
   );
   cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click();
@@ -352,10 +352,10 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
 
 Cypress.Commands.add('deleteGroup', {}, (name) => {
   cy.menuGo('User Access > Groups');
-  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
+  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/*').as(
     'deleteGroup',
   );
-  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/**').as(
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
     'listGroups',
   );
   cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click();
