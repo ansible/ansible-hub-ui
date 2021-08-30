@@ -366,61 +366,75 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
 
   private loadContent() {
     let taskId = this.props.match.params['task'];
-    return TaskManagementAPI.get(taskId).then((result) => {
-      let allRelatedTasks = [];
-      let parentTask = null;
-      let childTasks = [];
-      let resources = [];
-      if (!!result.data.parent_task) {
-        let parentTaskId = parsePulpIDFromURL(result.data.parent_task);
-        allRelatedTasks.push(
-          TaskManagementAPI.get(parentTaskId)
-            .then((result) => {
-              parentTask = result.data;
-            })
-            .catch(() => {return true}),
-        );
-      }
-      if (!!result.data.child_tasks.length) {
-        result.data.child_tasks.forEach((child) => {
-          let childTaskId = parsePulpIDFromURL(child);
+    return TaskManagementAPI.get(taskId)
+      .then((result) => {
+        let allRelatedTasks = [];
+        let parentTask = null;
+        let childTasks = [];
+        let resources = [];
+        if (!!result.data.parent_task) {
+          let parentTaskId = parsePulpIDFromURL(result.data.parent_task);
           allRelatedTasks.push(
-            TaskManagementAPI.get(childTaskId)
+            TaskManagementAPI.get(parentTaskId)
               .then((result) => {
-                childTasks.push(result.data);
+                parentTask = result.data;
               })
-              .catch(() => {return true}),
+              .catch(() => {
+                return true;
+              }),
           );
+        }
+        if (!!result.data.child_tasks.length) {
+          result.data.child_tasks.forEach((child) => {
+            let childTaskId = parsePulpIDFromURL(child);
+            allRelatedTasks.push(
+              TaskManagementAPI.get(childTaskId)
+                .then((result) => {
+                  childTasks.push(result.data);
+                })
+                .catch(() => {
+                  return true;
+                }),
+            );
+          });
+        }
+        if (!!result.data.reserved_resources_record.length) {
+          result.data.reserved_resources_record.forEach((resource) => {
+            let url = resource.replace('/pulp/api/v3/', '');
+            let id = parsePulpIDFromURL(url);
+            let type = !!id
+              ? resource.split('/')[4]
+              : resource.split('/').at(-2);
+            if (!!id) {
+              allRelatedTasks.push(
+                GenericPulpAPI.get(url)
+                  .then((result) => {
+                    resources.push({ name: result.data.name, type });
+                  })
+                  .catch(() => {
+                    return true;
+                  }),
+              );
+            } else {
+              resources.push({ type });
+            }
+          });
+        }
+        return Promise.all(allRelatedTasks).then(() => {
+          this.setState({
+            task: result.data,
+            childTasks,
+            parentTask,
+            loading: false,
+            taskName:
+              Constants.TASK_NAMES[result.data.name] || result.data.name,
+            resources,
+          });
         });
-      }
-      if (!!result.data.reserved_resources_record.length) {
-        result.data.reserved_resources_record.forEach((resource) => {
-          let type = resource.split('/')[4];
-          let url = resource.replace('/pulp/api/v3/', '');
-          allRelatedTasks.push(
-            GenericPulpAPI.get(url)
-              .then((result) => {
-                if (!!result.data.name) {
-                  resources.push({ name: result.data.name, type });
-                } else {
-                  resources.push({ type });
-                }
-              })
-              .catch(() => {return true}),
-          );
-        });
-      }
-      return Promise.all(allRelatedTasks).then(() => {
-        this.setState({
-          task: result.data,
-          childTasks,
-          parentTask,
-          loading: false,
-          taskName: Constants.TASK_NAMES[result.data.name] || result.data.name,
-          resources,
-        });
-      }).catch(() => console.log("ALL ERROR"));
-    }).catch(() => "THERE's no Task");
+      })
+      .catch(() => {
+        this.props.history.push(Paths.notFound);
+      });
   }
 
   private get closeAlert() {
