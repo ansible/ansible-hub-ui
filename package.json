@@ -27,7 +27,7 @@
         "react-dom": "^16.14.0",
         "react-markdown": "^6.0.2",
         "react-redux": "^7.2.4",
-        "react-router-dom": "^5.2.0",
+        "react-router-dom": "^5.2.1",
         "react-router-hash-link": "^2.4.3",
         "redux": "^4.1.1",
         "redux-logger": "^3.0.6",
