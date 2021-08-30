@@ -348,7 +348,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
         });
         this.loadContent();
       })
-      .catch(() =>
+      .catch(() => {
         this.setState({
           loading: true,
           cancelModalVisible: false,
@@ -360,8 +360,9 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
               description: _`Error stopping task.`,
             },
           ],
-        }),
-      );
+        });
+        this.loadContent();
+      });
   }
 
   private loadContent() {
