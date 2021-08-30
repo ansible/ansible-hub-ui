@@ -36,6 +36,10 @@ describe('User list tests for sorting, paging and filtering', () => {
     cy.contains('Created');
   });
 
+  it('table contains some time informations for new users', () => {
+    cy.contains('a few seconds ago');
+  });
+
   it('items are sorted alphabetically and paging is working', () => {
     cy.get('.body:first').contains(items[0].name);
 
@@ -46,18 +50,18 @@ describe('User list tests for sorting, paging and filtering', () => {
     cy.get('.body:first').contains(items[20].name);
   });
 
-  it('sorting is working', () => {
-    cy.get('.body:first').contains('th').get('svg:first').click();
+  it('sorting is working for username', () => {
+    cy.get('.body:first').get('[data-cy="sort_username"]').click();
     cy.get('.body:first').contains(items[20].name);
     cy.get('.body:first').contains(items[0].name).should('not.exist');
   });
 
   it('filter is working', () => {
     cy.get('.body:first')
-      .get('[placeholder="Filter by group"]:first')
-      .type('group_test0{enter}');
-    cy.get('.body:first').contains('group_test0');
-    cy.get('.body:first').contains('group_test1').should('not.exist');
+      .get('[aria-label="username__contains"]:first')
+      .type('user_test0{enter}');
+    cy.get('.body:first').contains('user_test0');
+    cy.get('.body:first').contains('user_test1').should('not.exist');
   });
 
   it('set page size is working', () => {
