@@ -327,16 +327,9 @@ Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
   cy.contains(userName).should('not.exist');
 });
 
-// FIXME: createUser doesn't change logins, deleteUser does => TODO consistency
 Cypress.Commands.add('deleteUser', {}, (username) => {
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
-
-  cy.logout();
-  cy.login(adminUsername, adminPassword);
-
   cy.menuGo('User Access > Users');
-  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/users/**').as(
+  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/users/*').as(
     'deleteUser',
   );
   cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click();
@@ -358,17 +351,11 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
 });
 
 Cypress.Commands.add('deleteGroup', {}, (name) => {
-  var adminUsername = Cypress.env('username');
-  var adminPassword = Cypress.env('password');
-
-  cy.logout();
-  cy.login(adminUsername, adminPassword);
-
   cy.menuGo('User Access > Groups');
-  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
+  cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/*').as(
     'deleteGroup',
   );
-  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/**').as(
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
     'listGroups',
   );
   cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click();
