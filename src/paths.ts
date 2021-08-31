@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import { ParamHelper } from './utilities/param-helper';
 
 export function formatPath(path: Paths, data: any, params?: object) {
@@ -73,8 +74,8 @@ window._ = (strings, ...args) => {
 
 export const namespaceBreadcrumb = {
   name: {
-    namespaces: _`Namespaces`,
-    partners: _`Partners`,
+    namespaces: t`Namespaces`,
+    partners: t`Partners`,
   }[NAMESPACE_TERM],
   url: Paths[NAMESPACE_TERM],
 };

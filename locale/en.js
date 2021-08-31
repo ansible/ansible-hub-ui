@@ -1,1 +1,1 @@
-/*eslint-disable*/module.exports={messages:{"bytes":"bytes"}};
+/*eslint-disable*/module.exports={messages:{"Namespaces":"Namespaces","Partners":"Partners","{n, plural, one {# byte} other {# bytes}}":[["n","plural",{one:["#"," byte"],other:["#"," bytes"]}]]}};

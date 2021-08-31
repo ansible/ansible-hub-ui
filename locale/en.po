@@ -6,7 +6,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
-#: src/utilities/get_human_size.ts:3
-msgid "bytes"
-msgstr "bytes"
+#: src/paths.ts:77
+msgid "Namespaces"
+msgstr "Namespaces"
+
+#: src/paths.ts:78
+msgid "Partners"
+msgstr "Partners"
+
+#: src/utilities/get_human_size.ts:14
+msgid "{n, plural, one {# byte} other {# bytes}}"
+msgstr "{n, plural, one {# byte} other {# bytes}}"
