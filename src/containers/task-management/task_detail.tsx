@@ -108,7 +108,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                 variant='secondary'
                 onClick={() => this.setState({ cancelModalVisible: true })}
               >
-                {_`Cancel task`}
+                {_`Stop task`}
               </Button>
             )
           }
