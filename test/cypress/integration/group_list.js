@@ -22,50 +22,45 @@ describe('Group list tests for sorting, paging and filtering', () => {
 
   beforeEach(() => {
     cy.login(adminUsername, adminPassword);
+    cy.visit('/ui/group-list');
   });
 
   it('table contains all columns', () => {
-    cy.contains('Group');
+    cy.get('tr[aria-labelledby="headers"] th').contains('Group');
   });
 
   it('items are sorted alphabetically and paging is working', () => {
-    cy.visit('/ui/group-list');
-    cy.get('.body:first').contains(items[0].name);
+    cy.get('.body').contains(items[0].name);
 
-    cy.get('.body:first').get('[aria-label="Go to next page"]:first').click();
-    cy.get('.body:first').contains(items[10].name);
+    cy.get('.body').get('[aria-label="Go to next page"]:first').click();
+    cy.get('.body').contains(items[10].name);
 
-    cy.get('.body:first').get('[aria-label="Go to next page"]:first').click();
-    cy.get('.body:first').contains(items[20].name);
+    cy.get('.body').get('[aria-label="Go to next page"]:first').click();
+    cy.get('.body').contains(items[20].name);
   });
 
   it('sorting is working', () => {
-    cy.visit('/ui/group-list');
-    cy.get('.body:first').get('[data-cy="sort_name"]').click();
-    cy.get('.body:first').contains(items[20].name);
-    cy.get('.body:first').contains(items[0].name).should('not.exist');
+    cy.get('.body').get('[data-cy="sort_name"]').click();
+    cy.get('.body tbody tr:first td:first').contains(items[20].name);
+    cy.get('.body').contains(items[0].name).should('not.exist');
   });
 
   it('filter is working', () => {
-    cy.visit('/ui/group-list');
-    cy.get('.body:first')
+    cy.get('.body')
       .get('[placeholder="Filter by group"]:first')
       .type('group_test0{enter}');
-    cy.get('.body:first').contains('group_test0');
-    cy.get('.body:first').contains('group_test1').should('not.exist');
+    cy.get('.body').contains('group_test0');
+    cy.get('.body').contains('group_test1').should('not.exist');
   });
 
   it('set page size is working', () => {
-    cy.visit('/ui/group-list');
-    cy.get('.body:first')
-      .get('button[aria-label="Items per page"]:first')
-      .click();
-    cy.get('.body:first').contains('20 per page').click();
+    cy.get('.body').get('button[aria-label="Items per page"]:first').click();
+    cy.get('.body').contains('20 per page').click();
 
     range(20).forEach((i) => {
-      cy.get('.body:first').contains(items[i].name);
+      cy.get('.body').contains(items[i].name);
     });
 
-    cy.get('.body:first').contains(items[20].name).should('not.exist');
+    cy.get('.body').contains(items[20].name).should('not.exist');
   });
 });
