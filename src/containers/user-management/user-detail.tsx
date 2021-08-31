@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Link, Redirect } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 
 import { Button } from '@patternfly/react-core';
 
@@ -42,16 +47,14 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
     const id = this.props.match.params['userID'];
     UserAPI.get(id)
       .then((result) => this.setState({ userDetail: result.data }))
-      .catch(() => this.props.history.push(Paths.notFound));
+      .catch(() => this.setState({ redirect: Paths.notFound }));
   }
 
   render() {
-	  
-	if (this.state.redirect) {
+    if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />;
     }
-    
-    
+
     const { userDetail, errorMessages, alerts, showDeleteModal } = this.state;
     const { user } = this.context;
 
@@ -138,7 +141,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
       },
       () => {
         if (didDelete) {
-          this.props.history.push(Paths.userList);
+          this.setState({ redirect: Paths.userList });
         }
       },
     );
