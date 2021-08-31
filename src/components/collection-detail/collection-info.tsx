@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './collection-info.scss';
 
@@ -107,8 +107,10 @@ export class CollectionInfo extends React.Component<IProps> {
               <SplitItem isFilled>
                 <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
                 <div>
-                  <b>Note:</b> Installing collections with ansible-galaxy is
-                  only supported in ansible 2.9+
+                  <Trans>
+                    <b>Note:</b> Installing collections with ansible-galaxy is
+                    only supported in ansible 2.9+
+                  </Trans>
                 </div>
                 <div>
                   <a ref={this.downloadLinkRef} style={{ display: 'none' }}></a>

@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './namespace-detail.scss';
 
@@ -259,16 +259,18 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               <div>
                 <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
                 <div>
-                  <b>Note:</b> Use this URL to configure ansible-galaxy to
-                  upload collections to this namespace. More information on
-                  ansible-galaxy configurations can be found{' '}
-                  <a
-                    href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
-                    target='_blank'
-                  >
-                    here
-                  </a>
-                  .
+                  <Trans>
+                    <b>Note:</b> Use this URL to configure ansible-galaxy to
+                    upload collections to this namespace. More information on
+                    ansible-galaxy configurations can be found{' '}
+                    <a
+                      href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
+                      target='_blank'
+                    >
+                      here
+                    </a>
+                    .
+                  </Trans>
                 </div>
               </div>
             </section>

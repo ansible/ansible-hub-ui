@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { UserType, UserAPI } from 'src/api';
 import { mapErrorMessages } from 'src/utilities';
@@ -53,9 +53,9 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
     }
 
     return (
-      <>
+      <Trans>
         <b>{user.username}</b> will be permanently deleted.
-      </>
+      </Trans>
     );
   }
 

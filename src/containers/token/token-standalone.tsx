@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -30,18 +30,23 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           <section className='body pf-c-content'>
             <h2>{t`API token`}</h2>
             <p>
-              Use this token to authenticate the <code>ansible-galaxy</code>{' '}
-              client.
+              <Trans>
+                Use this token to authenticate the <code>ansible-galaxy</code>{' '}
+                client.
+              </Trans>
             </p>
             <div className='pf-c-content'>
-              <b>{t`WARNING`}</b> loading a new token will delete your old
-              token.
+              <Trans>
+                <b>WARNING</b> loading a new token will delete your old token.
+              </Trans>
             </div>
             {token ? (
               <div>
                 <div className='pf-c-content'>
-                  <b>{t`WARNING`}</b> copy this token now. This is the only time
-                  you will ever see it.
+                  <Trans>
+                    <b>WARNING</b> copy this token now. This is the only time
+                    you will ever see it.
+                  </Trans>
                 </div>
                 <ClipboardCopy>{token}</ClipboardCopy>
               </div>

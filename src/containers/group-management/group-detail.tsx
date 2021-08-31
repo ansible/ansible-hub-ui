@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 
 import {
@@ -552,7 +552,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         deleteAction={() => this.deleteUser(user)}
         title={t`Remove user from group?`}
       >
-        <b>{user.username}</b> will be removed from <b>{group.name}</b>.
+        <Trans>
+          <b>{user.username}</b> will be removed from <b>{group.name}</b>.
+        </Trans>
       </DeleteModal>
     );
   }

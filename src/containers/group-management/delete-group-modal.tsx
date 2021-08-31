@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { List, ListItem, Spinner } from '@patternfly/react-core';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
@@ -22,15 +22,23 @@ export class DeleteGroupModal extends React.Component<IProps> {
         deleteAction={deleteAction}
         title={t`Delete group?`}
       >
-        <b>{name}</b> will be permanently deleted.
+        <Trans>
+          <b>{name}</b> will be permanently deleted.
+        </Trans>
         <p>&nbsp;</p>
         <div>
           {users && count > 10 && (
-            <p>Deleting this group will affect {count} users.</p>
+            <p>
+              <Trans>Deleting this group will affect {count} users.</Trans>
+            </p>
           )}
           {users && count > 0 && count <= 10 && (
             <>
-              <p>{t`These users will lose access to the group content:`}</p>
+              <p>
+                <Trans>
+                  These users will lose access to the group content:
+                </Trans>
+              </p>
               <List>
                 {users.map((u) => (
                   <ListItem key={u.username}>
@@ -43,7 +51,9 @@ export class DeleteGroupModal extends React.Component<IProps> {
           {users && !count && <p>{t`No users will be affected.`}</p>}
           {!users && (
             <p>
-              Checking for affected users... <Spinner size='sm' />
+              <Trans>
+                Checking for affected users... <Spinner size='sm' />
+              </Trans>
             </p>
           )}
         </div>
