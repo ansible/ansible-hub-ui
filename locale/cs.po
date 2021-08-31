@@ -990,7 +990,7 @@ msgstr ""
 #: src/loaders/standalone/standalone-loader.tsx:328
 #: src/paths.ts:65
 msgid "Namespaces"
-msgstr "Namespaces"
+msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx:213
 msgid "Namespaces will appear once created"
@@ -1124,7 +1124,7 @@ msgstr ""
 
 #: src/paths.ts:66
 msgid "Partners"
-msgstr "Partneři"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:303
 #: src/components/user-form/user-form.tsx:84
@@ -1901,7 +1901,7 @@ msgstr ""
 
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
-msgstr "{n, plural, one {# byt} few {# byty} other {# bytů}}\""
+msgstr "{n, plural, one {# byt} few {# byty} other {# bytů}}"
 
 #: src/containers/task-management/task-list-view.tsx:345
 msgid "{name} will be cancelled."
