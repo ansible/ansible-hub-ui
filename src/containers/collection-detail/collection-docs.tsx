@@ -262,9 +262,7 @@ class CollectionDocs extends React.Component<
     return (
       <EmptyStateCustom
         title={t`Not found`}
-        description={
-          t`The file is not available for this version of ` + collectionName
-        }
+        description={t`The file is not available for this version of ${collectionName}`}
         icon={ExclamationCircleIcon}
       />
     );

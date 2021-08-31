@@ -152,10 +152,10 @@ export class NamespaceForm extends React.Component<IProps, IState> {
   private getLinksErrorText(errorMessages): string {
     const msg: string[] = [];
     if ('links__name' in errorMessages) {
-      msg.push(t`Text: ` + errorMessages['links__name']);
+      msg.push(t`Text: ${errorMessages['links__name']}`);
     }
     if ('links__url' in errorMessages) {
-      msg.push(t`URL: ` + errorMessages['links__url']);
+      msg.push(t`URL: ${errorMessages['links__url']}`);
     }
 
     return msg.join(' ');

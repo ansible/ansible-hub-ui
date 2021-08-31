@@ -170,21 +170,21 @@ export class ImportConsole extends React.Component<IProps, {}> {
 
         <div className='title-bar'>
           <div>
-            <span className='data-title'>{t`Status: `}</span>
+            <span className='data-title'>{t`Status:`}</span>{' '}
             <StatusIndicator type='secondary' status={selectedImport.state} />
           </div>
           <div>
-            <span className='data-title'>{t`Approval status: `}</span>
+            <span className='data-title'>{t`Approval status:`}</span>{' '}
             {approvalStatus}
           </div>
           <div>
-            <span className='data-title'>{t`Version: `}</span>
+            <span className='data-title'>{t`Version:`}</span>{' '}
             {selectedImport.version}
           </div>
 
           {task && task.error ? (
             <div>
-              <span className='data-title'>{t`Error message: `}</span>
+              <span className='data-title'>{t`Error message:`}</span>{' '}
               {task.error.code}
               <pre>
                 <code>{task.error.description}</code>

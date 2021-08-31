@@ -56,7 +56,7 @@ export class ImportModal extends React.Component<IProps, IState> {
       <Modal
         variant='small'
         title={
-          collection ? t`New version of ` + collection.name : t`New collection`
+          collection ? t`New version of ${collection.name}` : t`New collection`
         }
         isOpen={isOpen}
         onClose={() => this.handleClose()}
@@ -218,12 +218,12 @@ export class ImportModal extends React.Component<IProps, IState> {
                 err.detail ||
                   err.title ||
                   err.code ||
-                  t`API error. Status code: ` + err.status,
+                  t`API error. Status code: ${err.status}`,
               );
             }
             errorMessage = messages.join(', ');
           } else {
-            errorMessage = t`API error. Status code: ` + errors.response.status;
+            errorMessage = t`API error. Status code: ${errors.response.status}`;
           }
         }
 
