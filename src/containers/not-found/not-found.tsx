@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './not-found.scss';
 // had to declare *.gif in src/index.d.ts

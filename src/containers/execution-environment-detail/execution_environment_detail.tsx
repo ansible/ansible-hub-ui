@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { EmptyStateNoData, MarkdownEditor } from '../../components';

@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import { Tooltip, Button } from '@patternfly/react-core';
 import { Paths } from 'src/paths';

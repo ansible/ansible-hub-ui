@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
