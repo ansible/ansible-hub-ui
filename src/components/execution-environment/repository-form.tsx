@@ -43,25 +43,25 @@ export class RepositoryForm extends React.Component<IProps, IState> {
         variant='large'
         onClose={onCancel}
         isOpen={true}
-        title={_`Edit repository`}
+        title={t`Edit repository`}
         actions={[
           <Button
             key='save'
             variant='primary'
             onClick={() => onSave(description, selectedGroups)}
           >
-            {_`Save`}
+            {t`Save`}
           </Button>,
           <Button key='cancel' variant='link' onClick={onCancel}>
-            {_`Cancel`}
+            {t`Cancel`}
           </Button>,
         ]}
       >
         <Form>
-          <FormGroup key='name' fieldId='name' label={_`Name`}>
+          <FormGroup key='name' fieldId='name' label={t`Name`}>
             <TextInput id='name' value={name} isDisabled={true} type='text' />
           </FormGroup>
-          <FormGroup key='name' fieldId='name' label={_`Container namespace`}>
+          <FormGroup key='name' fieldId='name' label={t`Container namespace`}>
             <TextInput
               id='name'
               value={namespace}
@@ -72,7 +72,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           <FormGroup
             key='description'
             fieldId='description'
-            label={_`Description`}
+            label={t`Description`}
           >
             <TextArea
               id='description'
@@ -91,7 +91,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           <FormGroup
             key='groups'
             fieldId='groups'
-            label={_`Groups with access`}
+            label={t`Groups with access`}
           >
             <div className='pf-c-form__helper-text'>
               Adding groups provides access to all repositories in the "

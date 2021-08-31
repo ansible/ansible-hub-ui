@@ -119,15 +119,15 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const tabs = [_`Collections`];
+    const tabs = [t`Collections`];
 
     if (this.state.showControls) {
-      tabs.push(_`CLI Configuration`);
+      tabs.push(t`CLI Configuration`);
     }
     const tab = params['tab'] || 'collections';
 
     if (namespace.resources) {
-      tabs.push(_`Resources`);
+      tabs.push(t`Resources`);
     }
 
     const repositoryUrl = getRepoUrl('inbound-' + namespace.name);
@@ -224,14 +224,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           {tab.toLowerCase() === 'collections' ? (
             noData ? (
               <EmptyStateNoData
-                title={_`No collections yet`}
-                description={_`Collections will appear once uploaded`}
+                title={t`No collections yet`}
+                description={t`Collections will appear once uploaded`}
                 button={
                   this.state.showControls && (
                     <Button
                       onClick={() => this.setState({ showImportModal: true })}
                     >
-                      {_`Upload collection`}
+                      {t`Upload collection`}
                     </Button>
                   )
                 }
@@ -299,7 +299,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           .then(() => this.loadCollections())
           .catch((error) => {
             this.setState({
-              warning: _`API Error: Failed to set deprecation.`,
+              warning: t`API Error: Failed to set deprecation.`,
             });
           });
         break;
@@ -370,7 +370,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         {' '}
         {collections.length !== 0 && (
           <Button onClick={() => this.setState({ showImportModal: true })}>
-            {_`Upload collection`}
+            {t`Upload collection`}
           </Button>
         )}
         <StatefulDropdown
@@ -383,7 +383,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     namespace: this.state.namespace.name,
                   })}
                 >
-                  {_`Edit namespace`}
+                  {t`Edit namespace`}
                 </Link>
               }
             />,
@@ -399,7 +399,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     },
                   )}
                 >
-                  {_`Imports`}
+                  {t`Imports`}
                 </Link>
               }
             />,

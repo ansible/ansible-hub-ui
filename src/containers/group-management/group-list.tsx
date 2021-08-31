@@ -126,15 +126,15 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         {createModalVisible ? this.renderCreateModal() : null}
         {deleteModalVisible ? this.renderDeleteModal() : null}
         {editModalVisible ? this.renderEditModal() : null}
-        <BaseHeader title={_`Groups`}></BaseHeader>
+        <BaseHeader title={t`Groups`}></BaseHeader>
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : loading ? (
           <LoadingPageSpinner />
         ) : noData ? (
           <EmptyStateNoData
-            title={_`No groups yet`}
-            description={_`Groups will appear once created`}
+            title={t`No groups yet`}
+            description={t`Groups will appear once created`}
             button={
               !!user &&
               user.model_permissions.add_group && (
@@ -142,7 +142,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                   variant='primary'
                   onClick={() => this.setState({ createModalVisible: true })}
                 >
-                  {_`Create`}
+                  {t`Create`}
                 </Button>
               )
             }
@@ -163,7 +163,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                           filterConfig={[
                             {
                               id: 'name',
-                              title: _`Group`,
+                              title: t`Group`,
                             },
                           ]}
                         />
@@ -177,7 +177,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                               this.setState({ createModalVisible: true })
                             }
                           >
-                            {_`Create`}
+                            {t`Create`}
                           </Button>
                         </ToolbarItem>
                       </ToolbarGroup>
@@ -321,7 +321,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: _`Error editing group.`,
+              title: t`Error editing group.`,
             },
           ],
         }),
@@ -337,7 +337,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     let sortTableOptions = {
       headers: [
         {
-          title: _`Group`,
+          title: t`Group`,
           type: 'alpha',
           id: 'name',
         },
@@ -350,7 +350,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     };
 
     return (
-      <table aria-label={_`Group list`} className='content-table pf-c-table'>
+      <table aria-label={t`Group list`} className='content-table pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -377,7 +377,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         <td>
           {!!user && user.model_permissions.delete_group && (
             <Button
-              aria-label={_`Delete`}
+              aria-label={t`Delete`}
               key='delete'
               variant='danger'
               onClick={() =>
@@ -387,7 +387,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                 })
               }
             >
-              {_`Delete`}
+              {t`Delete`}
             </Button>
           )}
         </td>
@@ -414,7 +414,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'success',
-              title: _`Successfully deleted group.`,
+              title: t`Successfully deleted group.`,
             },
           ],
         });
@@ -426,7 +426,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: _`Error deleting group.`,
+              title: t`Error deleting group.`,
             },
           ],
         }),

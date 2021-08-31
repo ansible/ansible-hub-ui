@@ -52,23 +52,23 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
     return (
       <React.Fragment>
-        <BaseHeader title={_`Connect to Hub`}></BaseHeader>
+        <BaseHeader title={t`Connect to Hub`}></BaseHeader>
         <Main>
           <section className='body pf-c-content'>
-            <h2>{_`Connect Private Automation Hub`}</h2>
+            <h2>{t`Connect Private Automation Hub`}</h2>
             <p>
               Use the{' '}
-              <Link to={Paths.repositories}>{_`Repository Management`}</Link>{' '}
+              <Link to={Paths.repositories}>{t`Repository Management`}</Link>{' '}
               page to sync collections curated by your organization to the Red
               Hat Certified repository in your private Automation Hub. Users
               with the correct permissions can use the sync toggles on the{' '}
-              <Link to={Paths.search}>{_`Collections`}</Link> page to control
+              <Link to={Paths.search}>{t`Collections`}</Link> page to control
               which collections are added to their organization's sync
               repository.
             </p>
           </section>
           <section className='body pf-c-content'>
-            <h2>{_`Connect the ansible-galaxy client`}</h2>
+            <h2>{t`Connect the ansible-galaxy client`}</h2>
             <p>
               Documentation on how to configure the <code>ansible-galaxy</code>{' '}
               client can be found{' '}
@@ -82,9 +82,9 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             </p>
           </section>
           <section className='body pf-c-content'>
-            <h2>{_`Offline token`}</h2>
+            <h2>{t`Offline token`}</h2>
             <p>
-              {_`Use this token to authenticate clients that need to download`}
+              {t`Use this token to authenticate clients that need to download`}
               content from Automation Hub. This is a secret token used to
               protect your content. Store your API token in a secure location.
             </p>
@@ -93,7 +93,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                 <ClipboardCopy>{tokenData.refresh_token}</ClipboardCopy>
               </div>
             ) : (
-              <Button onClick={() => this.loadToken()}>{_`Load token`}</Button>
+              <Button onClick={() => this.loadToken()}>{t`Load token`}</Button>
             )}
             <div
               className='pf-c-content'
@@ -111,7 +111,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                 {renewTokenCmd}
               </ClipboardCopy>
             </div>
-            <h2>{_`Manage tokens`}</h2>
+            <h2>{t`Manage tokens`}</h2>
             To revoke a token or see all of your tokens, visit the{' '}
             <a
               href='https://sso.redhat.com/auth/realms/redhat-external/account/applications'
@@ -122,22 +122,22 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             page.
           </section>
           <section className='body pf-c-content'>
-            <h2>{_`Server URL`}</h2>
+            <h2>{t`Server URL`}</h2>
             <p>
-              {_`Use this URL to configure the API endpoints that clients need to`}
+              {t`Use this URL to configure the API endpoints that clients need to`}
               download content from Automation Hub.
             </p>
             <ClipboardCopy isReadOnly>{getRepoUrl('')}</ClipboardCopy>
             <p>
-              {_`Note: this URL contains all collections in Hub. To connect to your`}
+              {t`Note: this URL contains all collections in Hub. To connect to your`}
               organization's sync repository use the URL found on{' '}
-              <Link to={Paths.repositories}>{_`Repository Management`}</Link>.
+              <Link to={Paths.repositories}>{t`Repository Management`}</Link>.
             </p>
           </section>
           <section className='body pf-c-content'>
-            <h2>{_`SSO URL`}</h2>
+            <h2>{t`SSO URL`}</h2>
             <p>
-              {_`Use this URL to configure the authentication URLs that clients`}
+              {t`Use this URL to configure the authentication URLs that clients`}
               need to download content from Automation Hub.
             </p>
             <ClipboardCopy isReadOnly>

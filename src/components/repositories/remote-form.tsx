@@ -89,7 +89,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
     return (
       <Modal
         isOpen={this.props.showModal}
-        title={_`Edit remote`}
+        title={t`Edit remote`}
         variant='small'
         onClose={() => this.props.closeModal()}
         actions={[
@@ -99,14 +99,14 @@ export class RemoteForm extends React.Component<IProps, IState> {
             variant='primary'
             onClick={() => this.props.saveRemote()}
           >
-            {_`Save`}
+            {t`Save`}
           </Button>,
           <Button
             key='cancel'
             variant='secondary'
             onClick={() => this.props.closeModal()}
           >
-            {_`Cancel`}
+            {t`Cancel`}
           </Button>,
         ]}
       >
@@ -121,7 +121,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
       <Form>
         <FormGroup
           fieldId={'name'}
-          label={_`Name`}
+          label={t`Name`}
           isRequired={requiredFields.includes('name')}
           validated={this.toError(!('name' in errorMessages))}
           helperTextInvalid={errorMessages['name']}
@@ -138,9 +138,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
         </FormGroup>
         <FormGroup
           fieldId={'url'}
-          label={_`URL`}
+          label={t`URL`}
           labelIcon={
-            <HelperText content={_`The URL of an external content source.`} />
+            <HelperText content={t`The URL of an external content source.`} />
           }
           isRequired={requiredFields.includes('url')}
           validated={this.toError(!('url' in errorMessages))}
@@ -159,10 +159,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
         {!disabledFields.includes('token') && (
           <FormGroup
             fieldId={'token'}
-            label={_`Token`}
+            label={t`Token`}
             labelIcon={
               <HelperText
-                content={_`Token for authenticating to the server URL.`}
+                content={t`Token for authenticating to the server URL.`}
               />
             }
             isRequired={requiredFields.includes('token')}
@@ -188,8 +188,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
         {!disabledFields.includes('auth_url') && (
           <FormGroup
             fieldId={'auth_url'}
-            label={_`SSO URL`}
-            labelIcon={<HelperText content={_`Single sign on URL.`} />}
+            label={t`SSO URL`}
+            labelIcon={<HelperText content={t`Single sign on URL.`} />}
             isRequired={requiredFields.includes('auth_url')}
             validated={this.toError(!('auth_url' in errorMessages))}
             helperTextInvalid={errorMessages['auth_url']}
@@ -208,7 +208,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
         {!disabledFields.includes('requirements_file') && (
           <FormGroup
             fieldId={'yaml'}
-            label={_`YAML requirements`}
+            label={t`YAML requirements`}
             labelIcon={
               <HelperText
                 content={
@@ -262,7 +262,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                     );
                   }}
                   variant='plain'
-                  aria-label={_`Download requirements file`}
+                  aria-label={t`Download requirements file`}
                 >
                   <DownloadIcon />
                 </Button>
@@ -271,16 +271,16 @@ export class RemoteForm extends React.Component<IProps, IState> {
           </FormGroup>
         )}
         <ExpandableSection
-          toggleTextExpanded={_`Hide advanced options`}
-          toggleTextCollapsed={_`Show advanced options`}
+          toggleTextExpanded={t`Hide advanced options`}
+          toggleTextCollapsed={t`Show advanced options`}
         >
           <div className='pf-c-form'>
             <FormGroup
               fieldId={'username'}
-              label={_`Username`}
+              label={t`Username`}
               labelIcon={
                 <HelperText
-                  content={_`The username to be used for authentication when syncing. This is not required when using a token.`}
+                  content={t`The username to be used for authentication when syncing. This is not required when using a token.`}
                 />
               }
               isRequired={requiredFields.includes('username')}
@@ -299,10 +299,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </FormGroup>
             <FormGroup
               fieldId={'password'}
-              label={_`Password`}
+              label={t`Password`}
               labelIcon={
                 <HelperText
-                  content={_`The password to be used for authentication when syncing. This is not required when using a token.`}
+                  content={t`The password to be used for authentication when syncing. This is not required when using a token.`}
                 />
               }
               isRequired={requiredFields.includes('password')}
@@ -326,7 +326,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </FormGroup>
             <FormGroup
               fieldId={'proxy_url'}
-              label={_`Proxy URL`}
+              label={t`Proxy URL`}
               isRequired={requiredFields.includes('proxy_url')}
               validated={this.toError(!('proxy_url' in errorMessages))}
               helperTextInvalid={errorMessages['proxy_url']}
@@ -344,7 +344,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
 
             <FormGroup
               fieldId={'proxy_username'}
-              label={_`Proxy username`}
+              label={t`Proxy username`}
               isRequired={requiredFields.includes('proxy_username')}
               validated={this.toError(!('proxy_username' in errorMessages))}
               helperTextInvalid={errorMessages['proxy_username']}
@@ -362,7 +362,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
 
             <FormGroup
               fieldId={'proxy_password'}
-              label={_`Proxy password`}
+              label={t`Proxy password`}
               isRequired={requiredFields.includes('proxy_password')}
               validated={this.toError(!('proxy_password' in errorMessages))}
               helperTextInvalid={errorMessages['proxy_password']}
@@ -390,10 +390,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
 
             <FormGroup
               fieldId={'tls_validation'}
-              label={_`TLS validation`}
+              label={t`TLS validation`}
               labelIcon={
                 <HelperText
-                  content={_`If selected, TLS peer validation must be performed.`}
+                  content={t`If selected, TLS peer validation must be performed.`}
                 />
               }
               isRequired={requiredFields.includes('tls_validation')}
@@ -408,10 +408,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </FormGroup>
             <FormGroup
               fieldId={'client_key'}
-              label={_`Client key`}
+              label={t`Client key`}
               labelIcon={
                 <HelperText
-                  content={_`A PEM encoded private key used for authentication.`}
+                  content={t`A PEM encoded private key used for authentication.`}
                 />
               }
               isRequired={requiredFields.includes('client_key')}
@@ -440,10 +440,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </FormGroup>
             <FormGroup
               fieldId={'client_cert'}
-              label={_`Client certificate`}
+              label={t`Client certificate`}
               labelIcon={
                 <HelperText
-                  content={_`A PEM encoded client certificate used for authentication.`}
+                  content={t`A PEM encoded client certificate used for authentication.`}
                 />
               }
               isRequired={requiredFields.includes('client_cert')}
@@ -480,7 +480,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                       );
                     }}
                     variant='plain'
-                    aria-label={_`Download client certification file`}
+                    aria-label={t`Download client certification file`}
                   >
                     <DownloadIcon />
                   </Button>
@@ -489,10 +489,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </FormGroup>
             <FormGroup
               fieldId={'ca_cert'}
-              label={_`CA certificate`}
+              label={t`CA certificate`}
               labelIcon={
                 <HelperText
-                  content={_`A PEM encoded client certificate used for authentication.`}
+                  content={t`A PEM encoded client certificate used for authentication.`}
                 />
               }
               isRequired={requiredFields.includes('ca_cert')}
@@ -528,7 +528,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                       );
                     }}
                     variant='plain'
-                    aria-label={_`Download CA certification file`}
+                    aria-label={t`Download CA certification file`}
                   >
                     <DownloadIcon />
                   </Button>
@@ -537,14 +537,14 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </FormGroup>
             <FormGroup
               fieldId={'download_concurrency'}
-              label={_`Download concurrency`}
+              label={t`Download concurrency`}
               labelIcon={
                 <HelperText
-                  content={_`Total number of simultaneous connections.`}
+                  content={t`Total number of simultaneous connections.`}
                 />
               }
               validated={remote.download_concurrency > 0 ? 'default' : 'error'}
-              helperTextInvalid={_`Number must be greater than 0`}
+              helperTextInvalid={t`Number must be greater than 0`}
             >
               <TextInput
                 id='download_concurrency'
@@ -560,10 +560,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </FormGroup>
             <FormGroup
               fieldId={'rate_limit'}
-              label={_`Rate Limit`}
+              label={t`Rate Limit`}
               labelIcon={
                 <HelperText
-                  content={_`Limits total download rate in requests per second.`}
+                  content={t`Limits total download rate in requests per second.`}
                 />
               }
               validated={
@@ -572,7 +572,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   ? 'default'
                   : 'error'
               }
-              helperTextInvalid={_`Must be an integer.`}
+              helperTextInvalid={t`Must be an integer.`}
             >
               <TextInput
                 id='rate_limit'

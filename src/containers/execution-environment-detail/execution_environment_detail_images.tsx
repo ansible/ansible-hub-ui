@@ -99,35 +99,35 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     ) {
       return (
         <EmptyStateNoData
-          title={_`No images yet`}
-          description={_`Images will appear once uploaded`}
+          title={t`No images yet`}
+          description={t`Images will appear once uploaded`}
         />
       );
     }
     const sortTableOptions = {
       headers: [
         {
-          title: _`Tag`,
+          title: t`Tag`,
           type: 'none',
           id: 'tag',
         },
         {
-          title: _`Published`,
+          title: t`Published`,
           type: 'none',
           id: 'published',
         },
         {
-          title: _`Layers`,
+          title: t`Layers`,
           type: 'none',
           id: 'layers',
         },
         {
-          title: _`Size`,
+          title: t`Size`,
           type: 'none',
           id: 'size',
         },
         {
-          title: _`Digest`,
+          title: t`Digest`,
           type: 'none',
           id: 'digest',
         },
@@ -186,11 +186,11 @@ class ExecutionEnvironmentDetailImages extends React.Component<
                     filterConfig={[
                       {
                         id: 'tag',
-                        title: _`Tag`,
+                        title: t`Tag`,
                       },
                       {
                         id: 'digest__icontains',
-                        title: _`Digest`,
+                        title: t`Digest`,
                       },
                     ]}
                   />
@@ -223,7 +223,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         {images.length === 0 && filterIsSet(params, ['tag']) ? (
           <EmptyStateFilter />
         ) : (
-          <table aria-label={_`Images`} className='content-table pf-c-table'>
+          <table aria-label={t`Images`} className='content-table pf-c-table'>
             <SortTable
               options={sortTableOptions}
               params={params}
@@ -285,7 +285,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           this.setState({ manageTagsManifestDigest: image.digest });
         }}
       >
-        {_`Edit tags`}
+        {t`Edit tags`}
       </DropdownItem>,
     ];
 

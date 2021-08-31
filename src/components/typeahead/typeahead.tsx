@@ -80,7 +80,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
       options.push(
         <SelectOption
           key={'not_found'}
-          value={_`Not found`}
+          value={t`Not found`}
           isDisabled={true}
         />,
       );

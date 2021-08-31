@@ -122,7 +122,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       extra.push(
         <ToolbarItem key='create-button'>
           <Button variant='primary' onClick={this.handleModalToggle}>
-            {_`Create`}
+            {t`Create`}
           </Button>
         </ToolbarItem>,
       );
@@ -130,8 +130,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     const title = namespaceBreadcrumb.name;
     const search = filterOwner
-      ? _`Search my namespaces`
-      : _`Search all ` + title.toLowerCase();
+      ? t`Search my namespaces`
+      : t`Search all ` + title.toLowerCase();
 
     return (
       <div className='namespace-page'>
@@ -152,12 +152,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
               <LinkTabs
                 tabs={[
                   {
-                    title: _`All`,
+                    title: t`All`,
                     link: Paths[NAMESPACE_TERM],
                     active: !filterOwner,
                   },
                   {
-                    title: _`My namespaces`,
+                    title: t`My namespaces`,
                     link: Paths.myNamespaces,
                     active: filterOwner,
                   },
@@ -169,7 +169,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             <div className='toolbar'>
               <Toolbar
                 params={params}
-                sortOptions={[{ title: _`Name`, id: 'name', type: 'alpha' }]}
+                sortOptions={[{ title: t`Name`, id: 'name', type: 'alpha' }]}
                 searchPlaceholder={search}
                 updateParams={(p) =>
                   this.updateParams(p, () => this.loadNamespaces())
@@ -212,14 +212,14 @@ export class NamespaceList extends React.Component<IProps, IState> {
     const { namespacePath, filterOwner } = this.props;
     const { user } = this.context;
 
-    const noDataTitle = _`No namespaces yet`;
+    const noDataTitle = t`No namespaces yet`;
     const noDataDescription = !filterOwner
-      ? _`Namespaces will appear once created`
-      : _`This account is not set up to manage any namespaces`;
+      ? t`Namespaces will appear once created`
+      : t`This account is not set up to manage any namespaces`;
 
     const noDataButton = user?.model_permissions?.add_namespace ? (
       <Button variant='primary' onClick={() => this.handleModalToggle()}>
-        {_`Create`}
+        {t`Create`}
       </Button>
     ) : null;
 

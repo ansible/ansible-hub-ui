@@ -11,13 +11,13 @@ export class EmptyStateFilter extends React.Component<IProps> {
   render() {
     return (
       <EmptyStateCustom
-        title={_`No results found`}
-        description={_`No results match the filter criteria. Try changing your filter settings.`}
+        title={t`No results found`}
+        description={t`No results match the filter criteria. Try changing your filter settings.`}
         icon={SearchIcon}
         button={
           this.props.clearAllFilters ? (
             <Button onClick={this.props.clearAllFilters} variant='link'>
-              {_`Clear all filters`}
+              {t`Clear all filters`}
             </Button>
           ) : null
         }

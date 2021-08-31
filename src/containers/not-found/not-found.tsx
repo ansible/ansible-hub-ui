@@ -17,8 +17,8 @@ class NotFound extends React.Component<RouteComponentProps, {}> {
           <section className='body'>
             <Bullseye className='bullseye'>
               <div className='bullseye-center'>
-                <img src={NotFoundImage} alt={_`Not found image`} />
-                <div>{_`We couldn't find the page you're looking for!`}</div>
+                <img src={NotFoundImage} alt={t`Not found image`} />
+                <div>{t`We couldn't find the page you're looking for!`}</div>
                 <div className='pf-c-content'>
                   <span className='four-oh-four'>404</span>
                 </div>

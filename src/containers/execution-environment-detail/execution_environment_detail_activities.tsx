@@ -49,8 +49,8 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
     if (activities.length === 0) {
       return (
         <EmptyStateNoData
-          title={_`No activities yet`}
-          description={_`Activities will appear once you push something`}
+          title={t`No activities yet`}
+          description={t`Activities will appear once you push something`}
         />
       );
     }
@@ -59,12 +59,12 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
         <Flex direction={{ default: 'column' }} flex={{ default: 'flex_1' }}>
           <FlexItem>
             <section className='body'>
-              <table aria-label={_`Activities`} className='pf-c-table'>
+              <table aria-label={t`Activities`} className='pf-c-table'>
                 <SortTable
                   options={{
                     headers: [
-                      { title: _`Change`, type: 'none', id: 'change' },
-                      { title: _`Date`, type: 'none', id: 'date' },
+                      { title: t`Change`, type: 'none', id: 'change' },
+                      { title: t`Date`, type: 'none', id: 'date' },
                     ],
                   }}
                   params={{}}

@@ -40,7 +40,7 @@ export class AppliedFilters extends React.Component<IProps, {}> {
             (key) => this.renderGroup(key),
           )}
           <Button onClick={this.clearAllFilters} variant='link'>
-            {_`Clear all filters`}
+            {t`Clear all filters`}
           </Button>
         </div>
       );

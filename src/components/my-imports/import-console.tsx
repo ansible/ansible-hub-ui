@@ -77,7 +77,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
           >
             <Tooltip
               position='left'
-              content={this.isLoading ? _`Follow logs` : _`Scroll to end`}
+              content={this.isLoading ? t`Follow logs` : t`Scroll to end`}
             >
               <span
                 onClick={() => this.handleScrollClick()}
@@ -92,21 +92,21 @@ export class ImportConsole extends React.Component<IProps, {}> {
 
           {task.messages.length === 0 ? (
             <div className='message'>
-              <span className='error'>{_`No task messages available`}</span>
+              <span className='error'>{t`No task messages available`}</span>
             </div>
           ) : null}
 
           {task.state === PulpStatus.completed && (
             <div className='message'>
               <br />
-              <span className='success'>{_`Done`}</span>
+              <span className='success'>{t`Done`}</span>
             </div>
           )}
 
           {task.state === PulpStatus.failed && (
             <div className='message'>
               <br />
-              <span className='failed'>{_`Failed`}</span>
+              <span className='failed'>{t`Failed`}</span>
             </div>
           )}
         </div>
@@ -169,21 +169,21 @@ export class ImportConsole extends React.Component<IProps, {}> {
 
         <div className='title-bar'>
           <div>
-            <span className='data-title'>{_`Status: `}</span>
+            <span className='data-title'>{t`Status: `}</span>
             <StatusIndicator type='secondary' status={selectedImport.state} />
           </div>
           <div>
-            <span className='data-title'>{_`Approval status: `}</span>
+            <span className='data-title'>{t`Approval status: `}</span>
             {approvalStatus}
           </div>
           <div>
-            <span className='data-title'>{_`Version: `}</span>
+            <span className='data-title'>{t`Version: `}</span>
             {selectedImport.version}
           </div>
 
           {task && task.error ? (
             <div>
-              <span className='data-title'>{_`Error message: `}</span>
+              <span className='data-title'>{t`Error message: `}</span>
               {task.error.code}
               <pre>
                 <code>{task.error.description}</code>

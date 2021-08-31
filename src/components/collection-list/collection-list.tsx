@@ -44,7 +44,7 @@ export class CollectionList extends React.Component<IProps> {
 
     return (
       <React.Fragment>
-        <DataList aria-label={_`List of Collections`}>
+        <DataList aria-label={t`List of Collections`}>
           {collections.length > 0 ? (
             collections.map((c) => (
               <CollectionListItem
@@ -90,7 +90,7 @@ export class CollectionList extends React.Component<IProps> {
           onClick={() => this.props.handleControlClick(collection.id, 'upload')}
           variant='secondary'
         >
-          {_`Upload new version`}
+          {t`Upload new version`}
         </Button>
         <StatefulDropdown
           items={[
@@ -100,7 +100,7 @@ export class CollectionList extends React.Component<IProps> {
               }
               key='1'
             >
-              {collection.deprecated ? _`Undeprecate` : _`Deprecate`}
+              {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
             </DropdownItem>,
           ]}
         />

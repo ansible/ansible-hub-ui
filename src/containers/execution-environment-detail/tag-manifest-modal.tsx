@@ -121,7 +121,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               isSaving || (tagsToAdd.length <= 0 && tagsToRemove.length <= 0)
             }
           >
-            {_`Save`}
+            {t`Save`}
             {isSaving && <Spinner size='sm'></Spinner>}
           </Button>,
           <Button
@@ -130,12 +130,12 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             onClick={() => closeModal()}
             variant='link'
           >
-            {_`Cancel`}
+            {t`Cancel`}
           </Button>,
         ]}
         isOpen={isOpen}
         onClose={() => closeModal()}
-        title={_`Manage tags`}
+        title={t`Manage tags`}
         variant='small'
       >
         {/*
@@ -147,7 +147,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             validated={!!tagInFormError ? 'error' : 'default'}
             helperTextInvalid={tagInFormError}
             fieldId='add-new-tag'
-            label={_`Add new tag`}
+            label={t`Add new tag`}
           >
             <InputGroup>
               <TextInput
@@ -178,7 +178,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             <Alert
               variant='warning'
               isInline
-              title={_`This tag already exists on another image. Do you want to move it to this image?`}
+              title={t`This tag already exists on another image. Do you want to move it to this image?`}
               actionLinks={
                 <>
                   <AlertActionLink
@@ -188,19 +188,19 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                       )
                     }
                   >
-                    {_`Yes`}
+                    {t`Yes`}
                   </AlertActionLink>
                   <AlertActionLink
                     onClick={() => this.setState({ tagToVerify: '' })}
                   >
-                    {_`No`}
+                    {t`No`}
                   </AlertActionLink>
                 </>
               }
             />
           )}
 
-          <FormGroup fieldId='remove-tag' label={_`Current tags`}>
+          <FormGroup fieldId='remove-tag' label={t`Current tags`}>
             <LabelGroup id='remove-tag' defaultIsOpen={true}>
               {this.getCurrentTags().map((tag) => (
                 <Label
@@ -220,7 +220,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               variant='info'
               title={<>Waiting for {pendingTasks} task(s) to finish.</>}
             >
-              {_`It's safe to close this window. These tasks will finish in the`}
+              {t`It's safe to close this window. These tasks will finish in the`}
               background.
             </Alert>
           )}
@@ -246,7 +246,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
 
     this.props.onAlert({
       variant: 'danger',
-      title: _`Failed to ${operation} tag "${tag}".`,
+      title: t`Failed to ${operation} tag "${tag}".`,
       description: msg,
     });
   };
@@ -335,8 +335,8 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               const tag = taskUrls.find((e) => e.task === r.data.pulp_id);
               this.props.onAlert({
                 variant: 'danger',
-                title: _`Task to change tag "${tag.tag}" could not be completed.`,
-                description: _`Reason: task ${r.data.state}`,
+                title: t`Task to change tag "${tag.tag}" could not be completed.`,
+                description: t`Reason: task ${r.data.state}`,
               });
             }
           }
@@ -369,14 +369,14 @@ export class TagManifestModal extends React.Component<IProps, IState> {
       this.setState({
         verifyingTag: false,
         tagInFormError:
-          _`A tag may contain lowercase and uppercase ASCII ` +
+          t`A tag may contain lowercase and uppercase ASCII ` +
           'alphabetic characters, digits, underscores, periods, and dashes. A tag must not ' +
           'start with a period, underscore, or a dash.',
       });
     } else if (this.getCurrentTags().includes(tag)) {
       this.setState({
         verifyingTag: false,
-        tagInFormError: _`This tag is already selected for this image. You cannot add it twice.`,
+        tagInFormError: t`This tag is already selected for this image. You cannot add it twice.`,
       });
     } else {
       this.setState({ tagInFormError: undefined }, () => {

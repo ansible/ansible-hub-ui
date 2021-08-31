@@ -30,7 +30,7 @@ export class WriteOnlyField extends React.Component<IProps> {
         />
         {isValueSet && (
           <Button onClick={() => onClear()} variant='control'>
-            {_`Clear`}
+            {t`Clear`}
           </Button>
         )}
       </InputGroup>

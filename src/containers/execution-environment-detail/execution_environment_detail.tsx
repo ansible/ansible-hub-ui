@@ -71,10 +71,10 @@ class ExecutionEnvironmentDetail extends React.Component<
           <section className='body card-area'>
             {' '}
             <Title headingLevel='h2' size='lg'>
-              {_`Instructions`}
+              {t`Instructions`}
             </Title>
             <Title headingLevel='h3' size='md'>
-              {_`Pull this image`}
+              {t`Pull this image`}
             </Title>
             <ClipboardCopy isReadOnly>{instructions}</ClipboardCopy>
           </section>
@@ -90,21 +90,21 @@ class ExecutionEnvironmentDetail extends React.Component<
                     this.setState({ markdownEditing: true });
                   }}
                 >
-                  {_`Edit`}
+                  {t`Edit`}
                 </Button>
               )}
             </Title>
             {!this.state.markdownEditing && !this.state.readme ? (
               <EmptyStateNoData
-                title={_`No README`}
-                description={_`Add a README with instructions for using this container.`}
+                title={t`No README`}
+                description={t`Add a README with instructions for using this container.`}
                 button={
                   canEdit ? (
                     <Button
                       variant='primary'
                       onClick={() => this.setState({ markdownEditing: true })}
                     >
-                      {_`Add`}
+                      {t`Add`}
                     </Button>
                   ) : null
                 }
@@ -134,7 +134,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                     )
                   }
                 >
-                  {_`Save`}
+                  {t`Save`}
                 </Button>
                 <Button
                   variant={'link'}
@@ -145,7 +145,7 @@ class ExecutionEnvironmentDetail extends React.Component<
                     this.queryReadme(this.props.containerRepository.name);
                   }}
                 >
-                  {_`Cancel`}
+                  {t`Cancel`}
                 </Button>
               </React.Fragment>
             )}

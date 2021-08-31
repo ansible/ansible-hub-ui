@@ -22,7 +22,7 @@ export class MarkdownEditor extends React.Component<IProps, {}> {
           {editing && (
             <div className='column editor'>
               <FormGroup fieldId='resources' helperText={helperText}>
-                <div id='markdown-title'>{_`Raw Markdown`}</div>
+                <div id='markdown-title'>{t`Raw Markdown`}</div>
                 <TextArea
                   aria-labelledby='markdown-title'
                   id='resources'
@@ -34,7 +34,7 @@ export class MarkdownEditor extends React.Component<IProps, {}> {
             </div>
           )}
           <div className='column preview-container'>
-            {editing && _`Preview`}
+            {editing && t`Preview`}
             <div className={editing ? 'pf-c-content preview' : 'pf-c-content'}>
               {text ? (
                 <ReactMarkdown children={text} />

@@ -40,7 +40,7 @@ export class StatusIndicator extends React.Component<IProps, {}> {
       case PulpStatus.waiting:
         labelProps = {
           color: 'blue',
-          text: _`Pending`,
+          text: t`Pending`,
           icon: <OutlinedClockIcon />,
         };
         break;
@@ -50,19 +50,19 @@ export class StatusIndicator extends React.Component<IProps, {}> {
       case PulpStatus.canceled:
         labelProps = {
           color: 'orange',
-          text: _`Canceled`,
+          text: t`Canceled`,
           icon: <ExclamationIcon />,
         };
         break;
 
       case PulpStatus.running:
-        labelProps = { color: 'blue', text: _`Running`, icon: <SyncAltIcon /> };
+        labelProps = { color: 'blue', text: t`Running`, icon: <SyncAltIcon /> };
         break;
 
       case PulpStatus.completed:
         labelProps = {
           color: 'green',
-          text: _`Completed`,
+          text: t`Completed`,
           icon: <CheckCircleIcon />,
         };
         break;
@@ -70,7 +70,7 @@ export class StatusIndicator extends React.Component<IProps, {}> {
       case PulpStatus.failed:
         labelProps = {
           color: 'red',
-          text: _`Failed`,
+          text: t`Failed`,
           icon: <ExclamationCircleIcon />,
         };
         break;

@@ -19,7 +19,7 @@ export class DeleteGroupModal extends React.Component<IProps> {
       <DeleteModal
         cancelAction={cancelAction}
         deleteAction={deleteAction}
-        title={_`Delete group?`}
+        title={t`Delete group?`}
       >
         <b>{name}</b> will be permanently deleted.
         <p>&nbsp;</p>
@@ -29,7 +29,7 @@ export class DeleteGroupModal extends React.Component<IProps> {
           )}
           {users && count > 0 && count <= 10 && (
             <>
-              <p>{_`These users will lose access to the group content:`}</p>
+              <p>{t`These users will lose access to the group content:`}</p>
               <List>
                 {users.map((u) => (
                   <ListItem key={u.username}>
@@ -39,7 +39,7 @@ export class DeleteGroupModal extends React.Component<IProps> {
               </List>
             </>
           )}
-          {users && !count && <p>{_`No users will be affected.`}</p>}
+          {users && !count && <p>{t`No users will be affected.`}</p>}
           {!users && (
             <p>
               Checking for affected users... <Spinner size='sm' />
