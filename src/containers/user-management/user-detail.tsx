@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link, Redirect } from 'react-router-dom';
 
 import { Button } from '@patternfly/react-core';
 
@@ -23,6 +23,7 @@ interface IState {
   errorMessages: object;
   showDeleteModal: boolean;
   alerts: AlertType[];
+  redirect?: string;
 }
 
 class UserDetail extends React.Component<RouteComponentProps, IState> {
@@ -45,6 +46,12 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
+	  
+	if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
+    
+    
     const { userDetail, errorMessages, alerts, showDeleteModal } = this.state;
     const { user } = this.context;
 
