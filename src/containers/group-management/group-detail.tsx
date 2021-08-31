@@ -546,6 +546,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const group = this.state.group;
     const user = this.state.showUserRemoveModal as UserType;
 
+    const username = { user };
+    const groupname = group.name;
+
     return (
       <DeleteModal
         cancelAction={() => this.setState({ showUserRemoveModal: null })}
@@ -553,7 +556,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         title={t`Remove user from group?`}
       >
         <Trans>
-          <b>{user.username}</b> will be removed from <b>{group.name}</b>.
+          <b>{username}</b> will be removed from <b>{groupname}</b>.
         </Trans>
       </DeleteModal>
     );
