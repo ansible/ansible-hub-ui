@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 
 import { Button } from '@patternfly/react-core';
 
@@ -20,6 +25,7 @@ interface IState {
   errorMessages: object;
   inEditMode: boolean;
   alerts: AlertType[];
+  redirect?: string;
 }
 
 class UserProfile extends React.Component<RouteComponentProps, IState> {
@@ -46,10 +52,14 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
         this.initialState = { ...result };
         this.setState({ user: result });
       })
-      .catch(() => this.props.history.push(Paths.notFound));
+      .catch(() => this.setState({ redirect: Paths.notFound }));
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
+
     const { user, errorMessages, inEditMode, alerts } = this.state;
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
@@ -114,7 +124,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
         );
         //redirect to login page when password is changed
         if (user.password) {
-          this.props.history.push(Paths.login);
+          this.setState({ redirect: Paths.login });
         }
       })
       .catch((err) => {
