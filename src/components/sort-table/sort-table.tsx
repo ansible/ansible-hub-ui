@@ -56,6 +56,7 @@ export class SortTable extends React.Component<IProps> {
 
     return (
       <Icon
+        data-cy={'sort_' + id}
         size='sm'
         onClick={() => this.sort(id, isMinus)}
         className={'clickable ' + (activeIcon ? 'active' : 'inactive')}
