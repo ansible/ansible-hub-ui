@@ -151,15 +151,15 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         <ImportModal
           isOpen={showImportModal}
           onUploadSuccess={(result) =>
-            this.props.history.push(
-              formatPath(
+            this.setState({
+              redirect: formatPath(
                 Paths.myImports,
                 {},
                 {
                   namespace: namespace.name,
                 },
               ),
-            )
+            })
           }
           // onCancel
           setOpen={(isOpen, warn) => this.toggleImportModal(isOpen, warn)}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './namespace-list.scss';
 
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { ParamHelper } from 'src/utilities/param-helper';
 import {
@@ -36,6 +36,7 @@ interface IState {
   hasPermission: boolean;
   isModalOpen: boolean;
   loading: boolean;
+  redirect: string;
 }
 
 interface IProps extends RouteComponentProps {
@@ -99,6 +100,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
+
     const { namespaces, params, itemCount } = this.state;
     const { filterOwner } = this.props;
     const { user } = this.context;
@@ -134,11 +139,11 @@ export class NamespaceList extends React.Component<IProps, IState> {
           isOpen={this.state.isModalOpen}
           toggleModal={this.handleModalToggle}
           onCreateSuccess={(result) =>
-            this.props.history.push(
-              formatPath(Paths.myCollections, {
+            this.setState({
+              redirect: formatPath(Paths.myCollections, {
                 namespace: result['name'],
               }),
-            )
+            })
           }
         ></NamespaceModal>
         <BaseHeader title={title}>
