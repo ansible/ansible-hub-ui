@@ -1,6 +1,11 @@
 import * as React from 'react';
 import './task.scss';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import {
+  Link,
+  withRouter,
+  Redirect,
+  RouteComponentProps,
+} from 'react-router-dom';
 import {
   AlertList,
   AlertType,
@@ -43,6 +48,7 @@ interface IState {
   cancelModalVisible: boolean;
   taskName: string;
   resources: { name: string; type: string }[];
+  redirect: string;
 }
 
 class TaskDetail extends React.Component<RouteComponentProps, IState> {
@@ -57,6 +63,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       cancelModalVisible: false,
       taskName: '',
       resources: [],
+      redirect: null,
     };
   }
 
@@ -80,6 +87,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       alerts,
       taskName,
       resources,
+      redirect,
     } = this.state;
     const breadcrumbs = [
       { url: Paths.taskList, name: _`Task management` },
@@ -88,6 +96,9 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
     let parentTaskId = null;
     if (!!parentTask) {
       parentTaskId = parsePulpIDFromURL(parentTask.pulp_href);
+    }
+    if (!!redirect) {
+      return <Redirect to={redirect}></Redirect>;
     }
 
     return loading ? (
@@ -434,7 +445,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
         });
       })
       .catch(() => {
-        this.props.history.push(Paths.notFound);
+        this.setState({ redirect: Paths.notFound });
       });
   }
 
