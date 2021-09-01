@@ -333,7 +333,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               className={group.name}
             >
               <FlexItem style={{ minWidth: '200px' }}>
-                {twoWayMapper(group.name, Constants.GROUP_HUMAN_PERMISSIONS)}
+                {twoWayMapper(
+                  group.name,
+                  Constants.HUMAN_GROUP_DETAIL_PERMISSIONS,
+                )}
               </FlexItem>
               <FlexItem grow={{ default: 'grow' }}>
                 <PermissionChipSelector

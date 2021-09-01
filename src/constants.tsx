@@ -146,6 +146,8 @@ export class Constants {
     push_containerdistribution: t`Push distribution`,
     pull_containerdistribution: t`Pull distribution`,
     view_containerdistribution: t`View distribution`,
+  };
+  static HUMAN_GROUP_DETAIL_PERMISSIONS = {
     namespaces: t`Namespaces`,
     collections: t`Collections`,
     users: t`Users`,
