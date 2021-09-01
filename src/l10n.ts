@@ -1,7 +1,7 @@
 import { i18n } from '@lingui/core';
 import * as plurals from 'make-plural/plurals';
 
-const availableLanguages = ['en', 'cs'];
+const availableLanguages = ['en', 'es', 'fr', 'nl', 'ja', 'zh'];
 
 // Accept-Language
 const userLanguage =

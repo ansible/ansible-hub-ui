@@ -5,7 +5,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
+"Language: fr\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -15,172 +15,172 @@ msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:110
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
-msgstr "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:262
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
-msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
+msgstr ""
 
 #: src/containers/token/token-standalone.tsx:46
 msgid "<0>WARNING</0> copy this token now. This is the only time you will ever see it."
-msgstr "<0>WARNING</0> copy this token now. This is the only time you will ever see it."
+msgstr ""
 
 #: src/containers/token/token-standalone.tsx:39
 msgid "<0>WARNING</0> loading a new token will delete your old token."
-msgstr "<0>WARNING</0> loading a new token will delete your old token."
+msgstr ""
 
 #: src/containers/user-management/delete-user-modal.tsx:56
 msgid "<0>{0}</0> will be permanently deleted."
-msgstr "<0>{0}</0> will be permanently deleted."
+msgstr ""
 
 #: src/containers/group-management/delete-group-modal.tsx:25
 msgid "<0>{name}</0> will be permanently deleted."
-msgstr "<0>{name}</0> will be permanently deleted."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:548
 msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
-msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:447
 #: src/components/repositories/remote-form.tsx:496
 msgid "A PEM encoded client certificate used for authentication."
-msgstr "A PEM encoded client certificate used for authentication."
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:415
 msgid "A PEM encoded private key used for authentication."
-msgstr "A PEM encoded private key used for authentication."
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:372
 msgid "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
-msgstr "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:518
 msgid "API Error: 500"
-msgstr "API Error: 500"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:305
 msgid "API Error: Failed to set deprecation."
-msgstr "API Error: Failed to set deprecation."
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:490
 #: src/containers/edit-namespace/edit-namespace.tsx:229
 msgid "API Error: {0}"
-msgstr "API Error: {0}"
+msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:334
 msgid "API Token"
-msgstr "API Token"
+msgstr ""
 
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:221
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:226
 msgid "API error. Status code: {0}"
-msgstr "API error. Status code: {0}"
+msgstr ""
 
 #: src/containers/token/token-standalone.tsx:31
 msgid "API token"
-msgstr "API token"
+msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:148
 msgid "About"
-msgstr "About"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:63
 msgid "Activities"
-msgstr "Activities"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:54
 msgid "Activities will appear once you push something"
-msgstr "Activities will appear once you push something"
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:18
 msgid "Activity"
-msgstr "Activity"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:108
 #: src/containers/group-management/group-detail.tsx:430
 #: src/containers/group-management/group-detail.tsx:621
 #: src/containers/group-management/group-detail.tsx:670
 msgid "Add"
-msgstr "Add"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:101
 msgid "Add a README with instructions for using this container."
-msgstr "Add a README with instructions for using this container."
+msgstr ""
 
 #: src/constants.tsx:111
 msgid "Add group"
-msgstr "Add group"
+msgstr ""
 
 #: src/constants.tsx:101
 msgid "Add namespace"
-msgstr "Add namespace"
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:151
 msgid "Add new tag"
-msgstr "Add new tag"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:416
 msgid "Add selected users to group"
-msgstr "Add selected users to group"
+msgstr ""
 
 #: src/constants.tsx:120
 msgid "Add synclist"
-msgstr "Add synclist"
+msgstr ""
 
 #: src/constants.tsx:107
 msgid "Add user"
-msgstr "Add user"
+msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx:151
 msgid "All"
-msgstr "All"
+msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:337
 msgid "Approval"
-msgstr "Approval"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:117
 msgid "Approval dashboard"
-msgstr "Approval dashboard"
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx:177
 msgid "Approval status:"
-msgstr "Approval status:"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:392
 #: src/containers/certification-dashboard/certification-dashboard.tsx:451
 msgid "Approve"
-msgstr "Approve"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:160
 #: src/containers/certification-dashboard/certification-dashboard.tsx:188
 #: src/containers/certification-dashboard/certification-dashboard.tsx:295
 msgid "Approved"
-msgstr "Approved"
+msgstr ""
 
 #: src/containers/about-modal/about-modal.tsx:95
 msgid "Browser OS"
-msgstr "Browser OS"
+msgstr ""
 
 #: src/containers/about-modal/about-modal.tsx:89
 msgid "Browser Version"
-msgstr "Browser Version"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:493
 msgid "CA certificate"
-msgstr "CA certificate"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:126
 msgid "CLI Configuration"
-msgstr "CLI Configuration"
+msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx:70
 msgid "CLI configuration"
-msgstr "CLI configuration"
+msgstr ""
 
 #: src/containers/repositories/repository-list.tsx:140
 msgid "Can't update remote without a distribution attached to it."
-msgstr "Can't update remote without a distribution attached to it."
+msgstr ""
 
 #: src/components/delete-modal/delete-modal.tsx:32
 #: src/components/execution-environment/repository-form.tsx:57
@@ -195,101 +195,101 @@ msgstr "Can't update remote without a distribution attached to it."
 #: src/containers/group-management/group-detail.tsx:433
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:77
 msgid "Cancel"
-msgstr "Cancel"
+msgstr ""
 
 #: src/components/status/status-indicator.tsx:54
 msgid "Canceled"
-msgstr "Canceled"
+msgstr ""
 
 #: src/components/cards/collection-card.tsx:92
 msgid "Certified"
-msgstr "Certified"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:67
 msgid "Change"
-msgstr "Change"
+msgstr ""
 
 #: src/constants.tsx:115
 msgid "Change Ansible distribution"
-msgstr "Change Ansible distribution"
+msgstr ""
 
 #: src/constants.tsx:113
 msgid "Change collection remote"
-msgstr "Change collection remote"
+msgstr ""
 
 #: src/constants.tsx:126
 #: src/constants.tsx:137
 msgid "Change container namespace permissions"
-msgstr "Change container namespace permissions"
+msgstr ""
 
 #: src/constants.tsx:123
 msgid "Change containers"
-msgstr "Change containers"
+msgstr ""
 
 #: src/constants.tsx:144
 msgid "Change distribution"
-msgstr "Change distribution"
+msgstr ""
 
 #: src/constants.tsx:112
 msgid "Change group"
-msgstr "Change group"
+msgstr ""
 
 #: src/constants.tsx:125
 #: src/constants.tsx:136
 msgid "Change image tags"
-msgstr "Change image tags"
+msgstr ""
 
 #: src/constants.tsx:102
 #: src/constants.tsx:130
 msgid "Change namespace"
-msgstr "Change namespace"
+msgstr ""
 
 #: src/constants.tsx:118
 msgid "Change synclist"
-msgstr "Change synclist"
+msgstr ""
 
 #: src/constants.tsx:108
 msgid "Change user"
-msgstr "Change user"
+msgstr ""
 
 #: src/containers/group-management/delete-group-modal.tsx:54
 msgid "Checking for affected users... <0/>"
-msgstr "Checking for affected users... <0/>"
+msgstr ""
 
 #: src/components/patternfly-wrappers/write-only-field.tsx:34
 msgid "Clear"
-msgstr "Clear"
+msgstr ""
 
 #: src/components/empty-state/empty-state-filter.tsx:21
 #: src/components/patternfly-wrappers/applied-filters.tsx:44
 msgid "Clear all filters"
-msgstr "Clear all filters"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:444
 msgid "Client certificate"
-msgstr "Client certificate"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:412
 msgid "Client key"
-msgstr "Client key"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:239
 msgid "Collection"
-msgstr "Collection"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:143
 msgid "Collection Name"
-msgstr "Collection Name"
+msgstr ""
 
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:243
 msgid "Collection upload canceled"
-msgstr "Collection upload canceled"
+msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx:90
 #: src/components/repositories/remote-repository-table.tsx:100
 #: src/containers/certification-dashboard/certification-dashboard.tsx:268
 msgid "Collection versions"
-msgstr "Collection versions"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:123
 #: src/containers/search/search.tsx:96
@@ -297,88 +297,88 @@ msgstr "Collection versions"
 #: src/loaders/standalone/standalone-loader.tsx:322
 #: src/loaders/standalone/standalone-loader.tsx:323
 msgid "Collections"
-msgstr "Collections"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:227
 #: src/containers/namespace-detail/namespace-detail.tsx:229
 #: src/containers/search/search.tsx:149
 msgid "Collections will appear once uploaded"
-msgstr "Collections will appear once uploaded"
+msgstr ""
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:178
 msgid "Command"
-msgstr "Command"
+msgstr ""
 
 #: src/components/repo-selector/repo-selector.tsx:80
 msgid "Community"
-msgstr "Community"
+msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:56
 msgid "Company name"
-msgstr "Company name"
+msgstr ""
 
 #: src/components/my-imports/import-list.tsx:83
 #: src/components/status/status-indicator.tsx:66
 #: src/containers/task-management/task-list-view.tsx:135
 msgid "Completed"
-msgstr "Completed"
+msgstr ""
 
 #: src/components/repositories/remote-repository-table.tsx:194
 msgid "Configure"
-msgstr "Configure"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:59
 msgid "Connect Private Automation Hub"
-msgstr "Connect Private Automation Hub"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:72
 msgid "Connect the ansible-galaxy client"
-msgstr "Connect the ansible-galaxy client"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:56
 msgid "Connect to Hub"
-msgstr "Connect to Hub"
+msgstr ""
 
 #: src/components/empty-state/empty-state-unauthorized.tsx:14
 msgid "Contact you organization administrator for more information."
-msgstr "Contact you organization administrator for more information."
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/containers/execution-environment-list/execution_environment_list.tsx:101
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:100
 #: src/loaders/standalone/standalone-loader.tsx:342
 msgid "Container Registry"
-msgstr "Container Registry"
+msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx:65
 msgid "Container namespace"
-msgstr "Container namespace"
+msgstr ""
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:130
 #: src/containers/execution-environment-list/execution_environment_list.tsx:185
 msgid "Container repository name"
-msgstr "Container repository name"
+msgstr ""
 
 #: src/containers/collection-detail/collection-content.tsx:61
 msgid "Content"
-msgstr "Content"
+msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx:55
 msgid "Content count"
-msgstr "Content count"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx:172
 msgid "Contents"
-msgstr "Contents"
+msgstr ""
 
 #: src/containers/collection-detail/collection-import-log.tsx:110
 msgid "Could not load import log"
-msgstr "Could not load import log"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:491
 #: src/containers/certification-dashboard/certification-dashboard.tsx:519
 msgid "Could not update the certification status for {0}.{1}.{2}."
-msgstr "Could not update the certification status for {0}.{1}.{2}."
+msgstr ""
 
 #: src/components/group-management/group-modal.tsx:56
 #: src/components/namespace-modal/namespace-modal.tsx:104
@@ -389,67 +389,67 @@ msgstr "Could not update the certification status for {0}.{1}.{2}."
 #: src/containers/user-management/user-list.tsx:178
 #: src/containers/user-management/user-list.tsx:242
 msgid "Create"
-msgstr "Create"
+msgstr ""
 
 #: src/components/group-management/group-modal.tsx:44
 msgid "Create a group"
-msgstr "Create a group"
+msgstr ""
 
 #: src/components/namespace-modal/namespace-modal.tsx:94
 msgid "Create a new namespace"
-msgstr "Create a new namespace"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:89
 msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+msgstr ""
 
 #: src/constants.tsx:121
 #: src/constants.tsx:132
 msgid "Create new containers"
-msgstr "Create new containers"
+msgstr ""
 
 #: src/containers/user-management/user-create.tsx:45
 #: src/containers/user-management/user-create.tsx:47
 msgid "Create new user"
-msgstr "Create new user"
+msgstr ""
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:195
 #: src/containers/group-management/group-detail.tsx:733
 #: src/containers/user-management/user-list.tsx:279
 msgid "Created"
-msgstr "Created"
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:210
 msgid "Created on"
-msgstr "Created on"
+msgstr ""
 
 #: src/constants.tsx:202
 msgid "Curate all synclist repository"
-msgstr "Curate all synclist repository"
+msgstr ""
 
 #: src/constants.tsx:199
 msgid "Curate synclist repository"
-msgstr "Curate synclist repository"
+msgstr ""
 
 #: src/constants.tsx:203
 msgid "Curate synclist repository batch"
-msgstr "Curate synclist repository batch"
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:204
 msgid "Current tags"
-msgstr "Current tags"
+msgstr ""
 
 #: src/components/tags/deprecated-tag.tsx:21
 msgid "DEPRECATED"
-msgstr "DEPRECATED"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:68
 msgid "Date"
-msgstr "Date"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:249
 msgid "Date created"
-msgstr "Date created"
+msgstr ""
 
 #: src/components/delete-modal/delete-modal.tsx:28
 #: src/containers/group-management/group-detail.tsx:228
@@ -460,114 +460,114 @@ msgstr "Date created"
 #: src/containers/user-management/user-detail.tsx:116
 #: src/containers/user-management/user-list.tsx:330
 msgid "Delete"
-msgstr "Delete"
+msgstr ""
 
 #: src/constants.tsx:141
 msgid "Delete container's distribution"
-msgstr "Delete container's distribution"
+msgstr ""
 
 #: src/constants.tsx:140
 msgid "Delete container's namespace"
-msgstr "Delete container's namespace"
+msgstr ""
 
 #: src/constants.tsx:145
 msgid "Delete distribution"
-msgstr "Delete distribution"
+msgstr ""
 
 #: src/constants.tsx:110
 msgid "Delete group"
-msgstr "Delete group"
+msgstr ""
 
 #: src/containers/group-management/delete-group-modal.tsx:23
 msgid "Delete group?"
-msgstr "Delete group?"
+msgstr ""
 
 #: src/constants.tsx:117
 msgid "Delete synclist"
-msgstr "Delete synclist"
+msgstr ""
 
 #: src/constants.tsx:106
 msgid "Delete user"
-msgstr "Delete user"
+msgstr ""
 
 #: src/containers/user-management/delete-user-modal.tsx:41
 msgid "Delete user?"
-msgstr "Delete user?"
+msgstr ""
 
 #: src/containers/user-management/delete-user-modal.tsx:50
 msgid "Deleting super users is not allowed."
-msgstr "Deleting super users is not allowed."
+msgstr ""
 
 #: src/containers/group-management/delete-group-modal.tsx:32
 msgid "Deleting this group will affect {count} users."
-msgstr "Deleting this group will affect {count} users."
+msgstr ""
 
 #: src/containers/user-management/delete-user-modal.tsx:52
 msgid "Deleting yourself is not allowed."
-msgstr "Deleting yourself is not allowed."
+msgstr ""
 
 #: src/components/collection-list/collection-list.tsx:104
 msgid "Deprecate"
-msgstr "Deprecate"
+msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:101
 #: src/components/execution-environment/repository-form.tsx:76
 #: src/components/namespace-form/namespace-form.tsx:115
 #: src/containers/execution-environment-list/execution_environment_list.tsx:190
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:18
 msgid "Detail"
-msgstr "Detail"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:131
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:194
 msgid "Digest"
-msgstr "Digest"
+msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx:45
 msgid "Distribution name"
-msgstr "Distribution name"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx:66
 msgid "Docs site"
-msgstr "Docs site"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx:167
 #: src/containers/collection-detail/collection-docs.tsx:117
 #: src/loaders/standalone/standalone-loader.tsx:349
 msgid "Documentation"
-msgstr "Documentation"
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx:103
 msgid "Done"
-msgstr "Done"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:532
 msgid "Download CA certification file"
-msgstr "Download CA certification file"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:484
 msgid "Download client certification file"
-msgstr "Download client certification file"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:541
 msgid "Download concurrency"
-msgstr "Download concurrency"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:266
 msgid "Download requirements file"
-msgstr "Download requirements file"
+msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:130
 msgid "Download tarball"
-msgstr "Download tarball"
+msgstr ""
 
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:78
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:89
 msgid "Dropdown"
-msgstr "Dropdown"
+msgstr ""
 
 #: src/components/repositories/remote-repository-table.tsx:155
 #: src/containers/edit-namespace/edit-namespace.tsx:109
@@ -579,39 +579,39 @@ msgstr "Dropdown"
 #: src/containers/user-management/user-edit.tsx:63
 #: src/containers/user-management/user-list.tsx:318
 msgid "Edit"
-msgstr "Edit"
+msgstr ""
 
 #: src/containers/edit-namespace/edit-namespace.tsx:111
 msgid "Edit details"
-msgstr "Edit details"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:180
 msgid "Edit group permissions"
-msgstr "Edit group permissions"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:389
 msgid "Edit namespace"
-msgstr "Edit namespace"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:93
 msgid "Edit remote"
-msgstr "Edit remote"
+msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx:47
 msgid "Edit repository"
-msgstr "Edit repository"
+msgstr ""
 
 #: src/containers/edit-namespace/edit-namespace.tsx:111
 msgid "Edit resources"
-msgstr "Edit resources"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:289
 msgid "Edit tags"
-msgstr "Edit tags"
+msgstr ""
 
 #: src/containers/user-management/user-edit.tsx:42
 msgid "Edit user"
-msgstr "Edit user"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:81
 #: src/containers/group-management/group-detail.tsx:656
@@ -619,101 +619,101 @@ msgstr "Edit user"
 #: src/containers/user-management/user-list.tsx:168
 #: src/containers/user-management/user-list.tsx:269
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:188
 msgid "Environment"
-msgstr "Environment"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:516
 #: src/containers/group-management/group-list.tsx:430
 msgid "Error deleting group."
-msgstr "Error deleting group."
+msgstr ""
 
 #: src/containers/user-management/delete-user-modal.tsx:72
 #: src/containers/user-management/delete-user-modal.tsx:96
 msgid "Error deleting user."
-msgstr "Error deleting user."
+msgstr ""
 
 #: src/containers/group-management/group-list.tsx:325
 msgid "Error editing group."
-msgstr "Error editing group."
+msgstr ""
 
 #: src/containers/my-imports/my-imports.tsx:304
 msgid "Error fetching import from API"
-msgstr "Error fetching import from API"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:115
 msgid "Error loading group."
-msgstr "Error loading group."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:129
 msgid "Error loading permissions."
-msgstr "Error loading permissions."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:459
 #: src/containers/group-management/group-detail.tsx:580
 #: src/containers/group-management/group-detail.tsx:810
 msgid "Error loading users."
-msgstr "Error loading users."
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx:187
 msgid "Error message:"
-msgstr "Error message:"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:829
 msgid "Error removing user from a group."
-msgstr "Error removing user from a group."
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:379
 msgid "Error stopping task."
-msgstr "Error stopping task."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:566
 msgid "Error updating users."
-msgstr "Error updating users."
+msgstr ""
 
 #: src/containers/execution-environment-detail/base.tsx:164
 msgid "Error: changes weren't saved"
-msgstr "Error: changes weren't saved"
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx:110
 #: src/components/my-imports/import-list.tsx:87
 #: src/components/status/status-indicator.tsx:74
 #: src/containers/task-management/task-list-view.tsx:139
 msgid "Failed"
-msgstr "Failed"
+msgstr ""
 
 #: src/containers/login/login.tsx:89
 msgid "Failed to retrieve user data."
-msgstr "Failed to retrieve user data."
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:250
 msgid "Failed to {operation} tag \"{tag}\"."
-msgstr "Failed to {operation} tag \"{tag}\"."
+msgstr ""
 
 #: src/components/repo-selector/repo-selector.tsx:51
 msgid "Filter by repository"
-msgstr "Filter by repository"
+msgstr ""
 
 #: src/components/patternfly-wrappers/compound-filter.tsx:115
 #: src/components/patternfly-wrappers/compound-filter.tsx:128
 #: src/components/patternfly-wrappers/compound-filter.tsx:164
 msgid "Filter by {0}"
-msgstr "Filter by {0}"
+msgstr ""
 
 #: src/components/permissions/obect-permission-field.tsx:46
 msgid "Find a group"
-msgstr "Find a group"
+msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:72
 #: src/components/collection-detail/table-of-contents.tsx:100
 msgid "Find content"
-msgstr "Find content"
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:220
 msgid "Finished at"
-msgstr "Finished at"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:79
 #: src/containers/group-management/group-detail.tsx:648
@@ -721,32 +721,32 @@ msgstr "Finished at"
 #: src/containers/user-management/user-list.tsx:160
 #: src/containers/user-management/user-list.tsx:257
 msgid "First name"
-msgstr "First name"
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx:81
 msgid "Follow logs"
-msgstr "Follow logs"
+msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:158
 msgid "Galaxy Logo"
-msgstr "Galaxy Logo"
+msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx:149
 msgid "Get token"
-msgstr "Get token"
+msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:171
 msgid "Go to documentation"
-msgstr "Go to documentation"
+msgstr ""
 
 #: src/containers/group-management/group-list.tsx:167
 #: src/containers/group-management/group-list.tsx:341
 msgid "Group"
-msgstr "Group"
+msgstr ""
 
 #: src/containers/group-management/group-list.tsx:354
 msgid "Group list"
-msgstr "Group list"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:127
 #: src/components/user-form/user-form.tsx:141
@@ -755,101 +755,101 @@ msgstr "Group list"
 #: src/containers/user-management/user-list.tsx:275
 #: src/loaders/standalone/standalone-loader.tsx:358
 msgid "Groups"
-msgstr "Groups"
+msgstr ""
 
 #: src/containers/group-management/group-list.tsx:138
 msgid "Groups will appear once created"
-msgstr "Groups will appear once created"
+msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx:95
 msgid "Groups with access"
-msgstr "Groups with access"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:275
 msgid "Hide advanced options"
-msgstr "Hide advanced options"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:397
 msgid "If selected, TLS peer validation must be performed."
-msgstr "If selected, TLS peer validation must be performed."
+msgstr ""
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:95
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:136
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:140
 msgid "Image layers"
-msgstr "Image layers"
+msgstr ""
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:18
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:227
 msgid "Images"
-msgstr "Images"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:104
 msgid "Images will appear once uploaded"
-msgstr "Images will appear once uploaded"
+msgstr ""
 
 #: src/constants.tsx:198
 #: src/constants.tsx:201
 msgid "Import and auto approve"
-msgstr "Import and auto approve"
+msgstr ""
 
 #: src/constants.tsx:200
 msgid "Import and move to staging"
-msgstr "Import and move to staging"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx:181
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
-msgstr "Import log"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:405
 msgid "Imports"
-msgstr "Imports"
+msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:61
 #: src/components/headers/collection-header.tsx:162
 msgid "Install"
-msgstr "Install"
+msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:78
 msgid "Install Version"
-msgstr "Install Version"
+msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:106
 msgid "Installation"
-msgstr "Installation"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:75
 msgid "Instructions"
-msgstr "Instructions"
+msgstr ""
 
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:152
 msgid "Invalid file format."
-msgstr "Invalid file format."
+msgstr ""
 
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:158
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
-msgstr "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
+msgstr ""
 
 #: src/containers/login/login.tsx:102
 msgid "Invalid login credentials."
-msgstr "Invalid login credentials."
+msgstr ""
 
 #: src/components/headers/collection-header.tsx:68
 msgid "Issue tracker"
-msgstr "Issue tracker"
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:224
 msgid "It's safe to close this window. These tasks will finish in the"
-msgstr "It's safe to close this window. These tasks will finish in the"
+msgstr ""
 
 #: src/components/collection-list/collection-filter.tsx:27
 msgid "Keywords"
-msgstr "Keywords"
+msgstr ""
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:200
 msgid "Last modified"
-msgstr "Last modified"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:80
 #: src/containers/group-management/group-detail.tsx:652
@@ -857,96 +857,96 @@ msgstr "Last modified"
 #: src/containers/user-management/user-list.tsx:164
 #: src/containers/user-management/user-list.tsx:263
 msgid "Last name"
-msgstr "Last name"
+msgstr ""
 
 #: src/components/repositories/remote-repository-table.tsx:81
 msgid "Last synced"
-msgstr "Last synced"
+msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx:60
 #: src/components/repositories/remote-repository-table.tsx:76
 msgid "Last updated"
-msgstr "Last updated"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:121
 msgid "Layers"
-msgstr "Layers"
+msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:72
 msgid "License"
-msgstr "License"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:567
 msgid "Limits total download rate in requests per second."
-msgstr "Limits total download rate in requests per second."
+msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:217
 msgid "Link URL"
-msgstr "Link URL"
+msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:208
 msgid "Link text"
-msgstr "Link text"
+msgstr ""
 
 #: src/components/collection-list/collection-list.tsx:48
 #: src/containers/search/search.tsx:266
 msgid "List of Collections"
-msgstr "List of Collections"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:97
 #: src/containers/token/token-standalone.tsx:57
 msgid "Load token"
-msgstr "Load token"
+msgstr ""
 
 #: src/containers/repositories/repository-list.tsx:105
 msgid "Local"
-msgstr "Local"
+msgstr ""
 
 #: src/containers/login/login.tsx:65
 msgid "Log in to your account"
-msgstr "Log in to your account"
+msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:188
 msgid "Login"
-msgstr "Login"
+msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:100
 msgid "Logo URL"
-msgstr "Logo URL"
+msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:123
 msgid "Logout"
-msgstr "Logout"
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:139
 msgid "Manage tags"
-msgstr "Manage tags"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:115
 msgid "Manage tokens"
-msgstr "Manage tokens"
+msgstr ""
 
 #: src/constants.tsx:104
 msgid "Modify Ansible repo content"
-msgstr "Modify Ansible repo content"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:576
 msgid "Must be an integer."
-msgstr "Must be an integer."
+msgstr ""
 
 #: src/containers/my-imports/my-imports.tsx:118
 msgid "My imports"
-msgstr "My imports"
+msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx:156
 msgid "My namespaces"
-msgstr "My namespaces"
+msgstr ""
 
 #: src/containers/settings/user-profile.tsx:73
 #: src/containers/settings/user-profile.tsx:74
 #: src/loaders/standalone/standalone-loader.tsx:112
 msgid "My profile"
-msgstr "My profile"
+msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:99
 #: src/components/execution-environment/repository-form.tsx:62
@@ -958,481 +958,481 @@ msgstr "My profile"
 #: src/components/repositories/remote-form.tsx:125
 #: src/containers/namespace-list/namespace-list.tsx:168
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 #: src/components/namespace-modal/namespace-modal.tsx:46
 msgid "Name can only contain [A-Za-z0-9_]"
-msgstr "Name can only contain [A-Za-z0-9_]"
+msgstr ""
 
 #: src/components/namespace-modal/namespace-modal.tsx:50
 msgid "Name cannot begin with '_'"
-msgstr "Name cannot begin with '_'"
+msgstr ""
 
 #: src/components/namespace-modal/namespace-modal.tsx:48
 msgid "Name must be longer than 2 characters"
-msgstr "Name must be longer than 2 characters"
+msgstr ""
 
 #: src/components/my-imports/import-list.tsx:214
 #: src/containers/certification-dashboard/certification-dashboard.tsx:139
 #: src/containers/certification-dashboard/certification-dashboard.tsx:234
 msgid "Namespace"
-msgstr "Namespace"
+msgstr ""
 
 #: src/components/namespace-modal/namespace-modal.tsx:121
 msgid "Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’."
-msgstr "Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’."
+msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:77
 #: src/components/namespace-modal/namespace-modal.tsx:142
 msgid "Namespace owners"
-msgstr "Namespace owners"
+msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:328
 #: src/paths.ts:65
 msgid "Namespaces"
-msgstr "Namespaces"
+msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx:213
 msgid "Namespaces will appear once created"
-msgstr "Namespaces will appear once created"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:156
 #: src/containers/certification-dashboard/certification-dashboard.tsx:189
 #: src/containers/certification-dashboard/certification-dashboard.tsx:315
 msgid "Needs Review"
-msgstr "Needs Review"
+msgstr ""
 
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:59
 msgid "New collection"
-msgstr "New collection"
+msgstr ""
 
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:59
 msgid "New version of {0}"
-msgstr "New version of {0}"
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:197
 msgid "No"
-msgstr "No"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:100
 msgid "No README"
-msgstr "No README"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:53
 msgid "No activities yet"
-msgstr "No activities yet"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:228
 #: src/containers/search/search.tsx:148
 msgid "No collections yet"
-msgstr "No collections yet"
+msgstr ""
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:104
 msgid "No container repositories yet"
-msgstr "No container repositories yet"
+msgstr ""
 
 #: src/containers/my-imports/my-imports.tsx:263
 msgid "No data"
-msgstr "No data"
+msgstr ""
 
 #: src/containers/group-management/group-list.tsx:137
 msgid "No groups yet"
-msgstr "No groups yet"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:103
 msgid "No images yet"
-msgstr "No images yet"
+msgstr ""
 
 #: src/components/my-imports/import-list.tsx:148
 msgid "No imports"
-msgstr "No imports"
+msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx:32
 msgid "No local repositories yet"
-msgstr "No local repositories yet"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:226
 msgid "No managed collections yet"
-msgstr "No managed collections yet"
+msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "No namespaces yet"
-msgstr "No namespaces yet"
+msgstr ""
 
 #: src/components/permissions/permission-chip-selector.tsx:80
 msgid "No permission"
-msgstr "No permission"
+msgstr ""
 
 #: src/containers/repositories/repository-list.tsx:200
 msgid "No remote repositories yet"
-msgstr "No remote repositories yet"
+msgstr ""
 
 #: src/components/empty-state/empty-state-filter.tsx:15
 msgid "No results found"
-msgstr "No results found"
+msgstr ""
 
 #: src/components/empty-state/empty-state-filter.tsx:16
 msgid "No results match the filter criteria. Try changing your filter settings."
-msgstr "No results match the filter criteria. Try changing your filter settings."
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx:96
 msgid "No task messages available"
-msgstr "No task messages available"
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:103
 msgid "No tasks yet"
-msgstr "No tasks yet"
+msgstr ""
 
 #: src/containers/group-management/delete-group-modal.tsx:51
 msgid "No users will be affected."
-msgstr "No users will be affected."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:611
 #: src/containers/user-management/user-list.tsx:238
 msgid "No users yet"
-msgstr "No users yet"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:176
 msgid "Not a super user"
-msgstr "Not a super user"
+msgstr ""
 
 #: src/components/permissions/permission-chip-selector.tsx:66
 #: src/components/typeahead/typeahead.tsx:84
 #: src/containers/collection-detail/collection-docs.tsx:264
 msgid "Not found"
-msgstr "Not found"
+msgstr ""
 
 #: src/containers/not-found/not-found.tsx:21
 msgid "Not found image"
-msgstr "Not found image"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:133
 msgid "Note: this URL contains all collections in Hub. To connect to your"
-msgstr "Note: this URL contains all collections in Hub. To connect to your"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:548
 msgid "Number must be greater than 0"
-msgstr "Number must be greater than 0"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:86
 msgid "Offline token"
-msgstr "Offline token"
+msgstr ""
 
 #: src/components/headers/base-header.tsx:47
 msgid "Page logo"
-msgstr "Page logo"
+msgstr ""
 
 #: src/paths.ts:66
 msgid "Partners"
-msgstr "Partners"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:303
 #: src/components/user-form/user-form.tsx:84
 #: src/containers/login/login.tsx:54
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:102
 msgid "Password confirmation"
-msgstr "Password confirmation"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:99
 msgid "Passwords do not match"
-msgstr "Passwords do not match"
+msgstr ""
 
 #: src/components/status/status-indicator.tsx:44
 msgid "Pending"
-msgstr "Pending"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:269
 msgid "Permission {0} was not removed."
-msgstr "Permission {0} was not removed."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:254
 msgid "Permission {permission} was not added."
-msgstr "Permission {permission} was not added."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:146
 msgid "Permissions"
-msgstr "Permissions"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:197
 msgid "Please finish editing permissions first."
-msgstr "Please finish editing permissions first."
+msgstr ""
 
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:148
 msgid "Please select no more than one file."
-msgstr "Please select no more than one file."
+msgstr ""
 
 #: src/components/namespace-modal/namespace-modal.tsx:44
 #: src/components/namespace-modal/namespace-modal.tsx:116
 msgid "Please, provide the namespace name"
-msgstr "Please, provide the namespace name"
+msgstr ""
 
 #: src/components/markdown-editor/markdown-editor.tsx:38
 msgid "Preview"
-msgstr "Preview"
+msgstr ""
 
 #: src/containers/settings/user-profile.tsx:111
 msgid "Profile saved."
-msgstr "Profile saved."
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:330
 msgid "Proxy URL"
-msgstr "Proxy URL"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:366
 msgid "Proxy password"
-msgstr "Proxy password"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:348
 msgid "Proxy username"
-msgstr "Proxy username"
+msgstr ""
 
 #: src/components/repo-selector/repo-selector.tsx:78
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:116
 msgid "Published"
-msgstr "Published"
+msgstr ""
 
 #: src/constants.tsx:147
 msgid "Pull distribution"
-msgstr "Pull distribution"
+msgstr ""
 
 #: src/constants.tsx:122
 #: src/constants.tsx:133
 msgid "Pull private containers"
-msgstr "Pull private containers"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:78
 msgid "Pull this image"
-msgstr "Pull this image"
+msgstr ""
 
 #: src/containers/about-modal/about-modal.tsx:71
 msgid "Pulp Ansible Version"
-msgstr "Pulp Ansible Version"
+msgstr ""
 
 #: src/constants.tsx:204
 msgid "Pulp Ansible: Collections sync"
-msgstr "Pulp Ansible: Collections sync"
+msgstr ""
 
 #: src/constants.tsx:207
 msgid "Pulp Ansible: Roles synchronize"
-msgstr "Pulp Ansible: Roles synchronize"
+msgstr ""
 
 #: src/constants.tsx:205
 msgid "Pulp ansible: Copy content"
-msgstr "Pulp ansible: Copy content"
+msgstr ""
 
 #: src/constants.tsx:209
 msgid "Pulp ansible: Import collection"
-msgstr "Pulp ansible: Import collection"
+msgstr ""
 
 #: src/constants.tsx:208
 msgid "Pulp ansible: Update collection remote"
-msgstr "Pulp ansible: Update collection remote"
+msgstr ""
 
 #: src/constants.tsx:206
 msgid "Pulp ansible: collection sync"
-msgstr "Pulp ansible: collection sync"
+msgstr ""
 
 #: src/constants.tsx:215
 msgid "Pulp container: Build image from containerfile"
-msgstr "Pulp container: Build image from containerfile"
+msgstr ""
 
 #: src/constants.tsx:216
 msgid "Pulp container: General multi delete"
-msgstr "Pulp container: General multi delete"
+msgstr ""
 
 #: src/constants.tsx:213
 msgid "Pulp container: Recursive add content"
-msgstr "Pulp container: Recursive add content"
+msgstr ""
 
 #: src/constants.tsx:214
 msgid "Pulp container: Recursive remove content"
-msgstr "Pulp container: Recursive remove content"
+msgstr ""
 
 #: src/constants.tsx:210
 msgid "Pulp container: Tag image"
-msgstr "Pulp container: Tag image"
+msgstr ""
 
 #: src/constants.tsx:212
 msgid "Pulp container: Tasks synchronize"
-msgstr "Pulp container: Tasks synchronize"
+msgstr ""
 
 #: src/constants.tsx:211
 msgid "Pulp container: Untage image"
-msgstr "Pulp container: Untage image"
+msgstr ""
 
 #: src/constants.tsx:228
 msgid "Pulpcore: Add and remove"
-msgstr "Pulpcore: Add and remove"
+msgstr ""
 
 #: src/constants.tsx:229
 msgid "Pulpcore: Add or remove"
-msgstr "Pulpcore: Add or remove"
+msgstr ""
 
 #: src/constants.tsx:225
 msgid "Pulpcore: Delete version"
-msgstr "Pulpcore: Delete version"
+msgstr ""
 
 #: src/constants.tsx:220
 msgid "Pulpcore: General create"
-msgstr "Pulpcore: General create"
+msgstr ""
 
 #: src/constants.tsx:222
 msgid "Pulpcore: General delete"
-msgstr "Pulpcore: General delete"
+msgstr ""
 
 #: src/constants.tsx:221
 msgid "Pulpcore: General update"
-msgstr "Pulpcore: General update"
+msgstr ""
 
 #: src/constants.tsx:217
 msgid "Pulpcore: Import repository version"
-msgstr "Pulpcore: Import repository version"
+msgstr ""
 
 #: src/constants.tsx:218
 msgid "Pulpcore: Orphan cleanup"
-msgstr "Pulpcore: Orphan cleanup"
+msgstr ""
 
 #: src/constants.tsx:223
 msgid "Pulpcore: Pulp export"
-msgstr "Pulpcore: Pulp export"
+msgstr ""
 
 #: src/constants.tsx:224
 msgid "Pulpcore: Pulp import"
-msgstr "Pulpcore: Pulp import"
+msgstr ""
 
 #: src/constants.tsx:219
 msgid "Pulpcore: Repair all artifacts"
-msgstr "Pulpcore: Repair all artifacts"
+msgstr ""
 
 #: src/constants.tsx:226
 msgid "Pulpcore: Repair version"
-msgstr "Pulpcore: Repair version"
+msgstr ""
 
 #: src/constants.tsx:227
 msgid "Pulpcore: Upload commit"
-msgstr "Pulpcore: Upload commit"
+msgstr ""
 
 #: src/constants.tsx:146
 msgid "Push distribution"
-msgstr "Push distribution"
+msgstr ""
 
 #: src/constants.tsx:138
 msgid "Push images to existing containers"
-msgstr "Push images to existing containers"
+msgstr ""
 
 #: src/constants.tsx:143
 msgid "Push new containers"
-msgstr "Push new containers"
+msgstr ""
 
 #: src/constants.tsx:127
 msgid "Push to existing containers"
-msgstr "Push to existing containers"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:564
 msgid "Rate Limit"
-msgstr "Rate Limit"
+msgstr ""
 
 #: src/components/markdown-editor/markdown-editor.tsx:26
 msgid "Raw Markdown"
-msgstr "Raw Markdown"
+msgstr ""
 
 #: src/components/collection-detail/table-of-contents.tsx:140
 msgid "Readme"
-msgstr "Readme"
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:340
 msgid "Reason: task {0}"
-msgstr "Reason: task {0}"
+msgstr ""
 
 #: src/components/repo-selector/repo-selector.tsx:79
 msgid "Red Hat Certified"
-msgstr "Red Hat Certified"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:409
 msgid "Reject"
-msgstr "Reject"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:152
 #: src/containers/certification-dashboard/certification-dashboard.tsx:190
 #: src/containers/certification-dashboard/certification-dashboard.tsx:305
 msgid "Rejected"
-msgstr "Rejected"
+msgstr ""
 
 #: src/containers/repositories/repository-list.tsx:105
 msgid "Remote"
-msgstr "Remote"
+msgstr ""
 
 #: src/components/repositories/remote-repository-table.tsx:66
 msgid "Remote name"
-msgstr "Remote name"
+msgstr ""
 
 #: src/containers/repositories/repository-list.tsx:201
 msgid "Remote repositories will appear once added"
-msgstr "Remote repositories will appear once added"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:788
 msgid "Remove"
-msgstr "Remove"
+msgstr ""
 
 #: src/constants.tsx:197
 msgid "Remove content from repository"
-msgstr "Remove content from repository"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:546
 msgid "Remove user from group?"
-msgstr "Remove user from group?"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx:69
 msgid "Repo"
-msgstr "Repo"
+msgstr ""
 
 #: src/containers/repositories/repository-list.tsx:152
 msgid "Repo Management"
-msgstr "Repo Management"
+msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx:65
 msgid "Repo URL"
-msgstr "Repo URL"
+msgstr ""
 
 #: src/components/repositories/remote-repository-table.tsx:71
 msgid "Repositories"
-msgstr "Repositories"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:62
 #: src/containers/token/token-insights.tsx:135
 #: src/loaders/standalone/standalone-loader.tsx:331
 msgid "Repository Management"
-msgstr "Repository Management"
+msgstr ""
 
 #: src/components/repositories/local-repository-table.tsx:50
 msgid "Repository name"
-msgstr "Repository name"
+msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:140
 msgid "Requires Ansible"
-msgstr "Requires Ansible"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:226
 msgid "Requires super user permissions to edit."
-msgstr "Requires super user permissions to edit."
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:131
 msgid "Resources"
-msgstr "Resources"
+msgstr ""
 
 #: src/components/my-imports/import-list.tsx:91
 #: src/components/status/status-indicator.tsx:60
 #: src/containers/task-management/task-list-view.tsx:143
 msgid "Running"
-msgstr "Running"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:192
 #: src/containers/token/token-insights.tsx:139
 msgid "SSO URL"
-msgstr "SSO URL"
+msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx:54
 #: src/components/group-management/group-modal.tsx:56
@@ -1443,89 +1443,89 @@ msgstr "SSO URL"
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:125
 #: src/containers/group-management/group-detail.tsx:383
 msgid "Save"
-msgstr "Save"
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx:81
 msgid "Scroll to end"
-msgstr "Scroll to end"
+msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx:130
 msgid "Search all {0}"
-msgstr "Search all {0}"
+msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx:129
 msgid "Search my namespaces"
-msgstr "Search my namespaces"
+msgstr ""
 
 #: src/components/collection-detail/collection-info.tsx:87
 #: src/components/headers/collection-header.tsx:96
 msgid "Select collection version"
-msgstr "Select collection version"
+msgstr ""
 
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:94
 msgid "Select file"
-msgstr "Select file"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:148
 msgid "Select groups"
-msgstr "Select groups"
+msgstr ""
 
 #: src/components/patternfly-wrappers/sort.tsx:145
 msgid "Select input"
-msgstr "Select input"
+msgstr ""
 
 #: src/components/my-imports/import-list.tsx:227
 msgid "Select namespace"
-msgstr "Select namespace"
+msgstr ""
 
 #: src/components/permissions/permission-chip-selector.tsx:50
 #: src/components/permissions/permission-chip-selector.tsx:78
 msgid "Select permissions"
-msgstr "Select permissions"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:487
 msgid "Select users"
-msgstr "Select users"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:126
 msgid "Server URL"
-msgstr "Server URL"
+msgstr ""
 
 #: src/containers/login/login.tsx:97
 msgid "Server error. Please come back later."
-msgstr "Server error. Please come back later."
+msgstr ""
 
 #: src/containers/about-modal/about-modal.tsx:65
 msgid "Server version"
-msgstr "Server version"
+msgstr ""
 
 #: src/containers/settings/user-profile.tsx:73
 msgid "Settings"
-msgstr "Settings"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:276
 msgid "Show advanced options"
-msgstr "Show advanced options"
+msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:77
 msgid "Showing:"
-msgstr "Showing:"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:193
 msgid "Single sign on URL."
-msgstr "Single sign on URL."
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:126
 msgid "Size"
-msgstr "Size"
+msgstr ""
 
 #: src/components/patternfly-wrappers/sort.tsx:150
 msgid "Sort results"
-msgstr "Sort results"
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:215
 msgid "Started at"
-msgstr "Started at"
+msgstr ""
 
 #: src/components/my-imports/import-list.tsx:78
 #: src/components/my-imports/import-list.tsx:111
@@ -1536,245 +1536,245 @@ msgstr "Started at"
 #: src/containers/task-management/task-list-view.tsx:175
 #: src/containers/task-management/task-list-view.tsx:225
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx:173
 msgid "Status:"
-msgstr "Status:"
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:283
 #: src/containers/task-management/task-list-view.tsx:299
 msgid "Stop task"
-msgstr "Stop task"
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:344
 msgid "Stop task?"
-msgstr "Stop task?"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:512
 #: src/containers/group-management/group-list.tsx:418
 msgid "Successfully deleted group."
-msgstr "Successfully deleted group."
+msgstr ""
 
 #: src/containers/user-management/delete-user-modal.tsx:93
 msgid "Successfully deleted user."
-msgstr "Successfully deleted user."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:824
 msgid "Successfully removed a user from a group."
-msgstr "Successfully removed a user from a group."
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:364
 msgid "Successfully stopped task."
-msgstr "Successfully stopped task."
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:175
 #: src/containers/user-management/user-list.tsx:348
 msgid "Super user"
-msgstr "Super user"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:229
 msgid "Super users can't disable themselves."
-msgstr "Super users can't disable themselves."
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:167
 #: src/containers/user-management/user-list.tsx:345
 msgid "Super users have all system permissions regardless of what groups they are in."
-msgstr "Super users have all system permissions regardless of what groups they are in."
+msgstr ""
 
 #: src/components/repositories/remote-repository-table.tsx:213
 #: src/containers/search/search.tsx:223
 msgid "Sync"
-msgstr "Sync"
+msgstr ""
 
 #: src/components/repositories/remote-repository-table.tsx:86
 msgid "Sync status"
-msgstr "Sync status"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:394
 msgid "TLS validation"
-msgstr "TLS validation"
+msgstr ""
 
 #: src/components/collection-list/collection-filter.tsx:31
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:111
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:190
 msgid "Tag"
-msgstr "Tag"
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:100
 #: src/loaders/standalone/standalone-loader.tsx:346
 msgid "Task Management"
-msgstr "Task Management"
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:233
 msgid "Task list"
-msgstr "Task list"
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:126
 #: src/containers/task-management/task-list-view.tsx:174
 #: src/containers/task-management/task-list-view.tsx:205
 msgid "Task name"
-msgstr "Task name"
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:339
 msgid "Task to change tag \"{0}\" could not be completed."
-msgstr "Task to change tag \"{0}\" could not be completed."
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:104
 msgid "Tasks will appear once created."
-msgstr "Tasks will appear once created."
+msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:155
 msgid "Text: {0}"
-msgstr "Text: {0}"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:144
 msgid "The URL of an external content source."
-msgstr "The URL of an external content source."
+msgstr ""
 
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:173
 msgid "The collection you have selected does not match this namespace."
-msgstr "The collection you have selected does not match this namespace."
+msgstr ""
 
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:167
 msgid "The collection you have selected doesn't appear to match {0}"
-msgstr "The collection you have selected doesn't appear to match {0}"
+msgstr ""
 
 #: src/containers/collection-detail/collection-docs.tsx:265
 msgid "The file is not available for this version of {collectionName}"
-msgstr "The file is not available for this version of {collectionName}"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:306
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
-msgstr "The password to be used for authentication when syncing. This is not required when using a token."
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:284
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
-msgstr "The username to be used for authentication when syncing. This is not required when using a token."
+msgstr ""
 
 #: src/components/repositories/remote-repository-table.tsx:137
 msgid "There are no repos associated with this remote."
-msgstr "There are no repos associated with this remote."
+msgstr ""
 
 #: src/components/my-imports/import-list.tsx:149
 msgid "There have not been any imports on this namespace."
-msgstr "There have not been any imports on this namespace."
+msgstr ""
 
 #: src/containers/group-management/delete-group-modal.tsx:38
 msgid "These users will lose access to the group content:"
-msgstr "These users will lose access to the group content:"
+msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx:214
 msgid "This account is not set up to manage any namespaces"
-msgstr "This account is not set up to manage any namespaces"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx:120
 msgid "This collection has been deprecated."
-msgstr "This collection has been deprecated."
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:182
 msgid "This tag already exists on another image. Do you want to move it to this image?"
-msgstr "This tag already exists on another image. Do you want to move it to this image?"
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:377
 msgid "This tag is already selected for this image. You cannot add it twice."
-msgstr "This tag is already selected for this image. You cannot add it twice."
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:163
 msgid "Token"
-msgstr "Token"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:166
 msgid "Token for authenticating to the server URL."
-msgstr "Token for authenticating to the server URL."
+msgstr ""
 
 #: src/containers/token/token-standalone.tsx:28
 msgid "Token management"
-msgstr "Token management"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:544
 msgid "Total number of simultaneous connections."
-msgstr "Total number of simultaneous connections."
+msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:100
 msgid "Type"
-msgstr "Type"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:142
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:158
 msgid "URL: {0}"
-msgstr "URL: {0}"
+msgstr ""
 
 #: src/components/collection-list/collection-list.tsx:104
 msgid "Undeprecate"
-msgstr "Undeprecate"
+msgstr ""
 
 #: src/constants.tsx:134
 msgid "Update container information"
-msgstr "Update container information"
+msgstr ""
 
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:70
 msgid "Upload"
-msgstr "Upload"
+msgstr ""
 
 #: src/containers/namespace-detail/namespace-detail.tsx:235
 #: src/containers/namespace-detail/namespace-detail.tsx:376
 msgid "Upload collection"
-msgstr "Upload collection"
+msgstr ""
 
 #: src/components/collection-list/collection-list.tsx:94
 msgid "Upload new version"
-msgstr "Upload new version"
+msgstr ""
 
 #: src/constants.tsx:103
 #: src/constants.tsx:131
 msgid "Upload to namespace"
-msgstr "Upload to namespace"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:128
 msgid "Use this URL to configure the API endpoints that clients need to"
-msgstr "Use this URL to configure the API endpoints that clients need to"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:141
 msgid "Use this URL to configure the authentication URLs that clients"
-msgstr "Use this URL to configure the authentication URLs that clients"
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:88
 msgid "Use this token to authenticate clients that need to download"
-msgstr "Use this token to authenticate clients that need to download"
+msgstr ""
 
 #: src/containers/token/token-standalone.tsx:33
 msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
-msgstr "Use this token to authenticate the <0>ansible-galaxy</0> client."
+msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:130
 msgid "Useful links"
-msgstr "Useful links"
+msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:353
 msgid "User Access"
-msgstr "User Access"
+msgstr ""
 
 #: src/containers/about-modal/about-modal.tsx:83
 msgid "User Groups"
-msgstr "User Groups"
+msgstr ""
 
 #: src/containers/user-management/user-detail.tsx:61
 msgid "User details"
-msgstr "User details"
+msgstr ""
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:208
 #: src/containers/group-management/group-detail.tsx:746
 #: src/containers/user-management/user-list.tsx:292
 msgid "User list"
-msgstr "User list"
+msgstr ""
 
 #: src/components/user-form/user-form.tsx:162
 msgid "User type"
-msgstr "User type"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:281
 #: src/components/user-form/user-form.tsx:78
@@ -1785,7 +1785,7 @@ msgstr "User type"
 #: src/containers/user-management/user-list.tsx:156
 #: src/containers/user-management/user-list.tsx:252
 msgid "Username"
-msgstr "Username"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:148
 #: src/containers/user-management/user-create.tsx:44
@@ -1794,115 +1794,115 @@ msgstr "Username"
 #: src/containers/user-management/user-list.tsx:137
 #: src/loaders/standalone/standalone-loader.tsx:354
 msgid "Users"
-msgstr "Users"
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:612
 msgid "Users will appear once added to this group"
-msgstr "Users will appear once added to this group"
+msgstr ""
 
 #: src/containers/user-management/user-list.tsx:239
 msgid "Users will appear once created"
-msgstr "Users will appear once created"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx:89
 #: src/containers/certification-dashboard/certification-dashboard.tsx:244
 msgid "Version"
-msgstr "Version"
+msgstr ""
 
 #: src/components/my-imports/import-console.tsx:181
 msgid "Version:"
-msgstr "Version:"
+msgstr ""
 
 #: src/constants.tsx:116
 msgid "View Ansible distribution"
-msgstr "View Ansible distribution"
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:378
 msgid "View Import Logs"
-msgstr "View Import Logs"
+msgstr ""
 
 #: src/constants.tsx:114
 msgid "View collection remote"
-msgstr "View collection remote"
+msgstr ""
 
 #: src/components/cards/namespace-card.tsx:52
 msgid "View collections"
-msgstr "View collections"
+msgstr ""
 
 #: src/constants.tsx:139
 msgid "View container's namespace"
-msgstr "View container's namespace"
+msgstr ""
 
 #: src/constants.tsx:142
 msgid "View container's repository"
-msgstr "View container's repository"
+msgstr ""
 
 #: src/constants.tsx:148
 msgid "View distribution"
-msgstr "View distribution"
+msgstr ""
 
 #: src/constants.tsx:109
 msgid "View group"
-msgstr "View group"
+msgstr ""
 
 #: src/constants.tsx:124
 #: src/constants.tsx:135
 msgid "View private containers"
-msgstr "View private containers"
+msgstr ""
 
 #: src/constants.tsx:119
 msgid "View synclist"
-msgstr "View synclist"
+msgstr ""
 
 #: src/constants.tsx:105
 msgid "View user"
-msgstr "View user"
+msgstr ""
 
 #: src/components/my-imports/import-list.tsx:95
 #: src/containers/task-management/task-list-view.tsx:147
 msgid "Waiting"
-msgstr "Waiting"
+msgstr ""
 
 #: src/containers/not-found/not-found.tsx:22
 msgid "We couldn't find the page you're looking for!"
-msgstr "We couldn't find the page you're looking for!"
+msgstr ""
 
 #: src/components/headers/collection-header.tsx:67
 msgid "Website"
-msgstr "Website"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:212
 msgid "YAML requirements"
-msgstr "YAML requirements"
+msgstr ""
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:192
 msgid "Yes"
-msgstr "Yes"
+msgstr ""
 
 #: src/components/namespace-form/resources-form.tsx:34
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
-msgstr "You can can customize the Resources tab on your profile by entering custom markdown here."
+msgstr ""
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:105
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
-msgstr "You currently have no container repositories. Add a container repository via the CLI to get started."
+msgstr ""
 
 #: src/components/empty-state/empty-state-unauthorized.tsx:13
 msgid "You do not have access to Automation Hub"
-msgstr "You do not have access to Automation Hub"
+msgstr ""
 
 #: src/containers/edit-namespace/edit-namespace.tsx:230
 msgid "You don't have permissions to update this namespace."
-msgstr "You don't have permissions to update this namespace."
+msgstr ""
 
 #: src/containers/edit-namespace/edit-namespace.tsx:164
 msgid "You have unsaved changes"
-msgstr "You have unsaved changes"
+msgstr ""
 
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
-msgstr "{n, plural, one {# byte} other {# bytes}}"
+msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:345
 msgid "{name} will be cancelled."
-msgstr "{name} will be cancelled."
+msgstr ""

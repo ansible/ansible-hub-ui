@@ -1,1 +1,0 @@
-/*eslint-disable*/module.exports={messages:{"Namespaces":"Namespaces","Partners":"Partneři","{n, plural, one {# byte} other {# bytes}}":[["n","plural",{one:["#"," byt"],few:["#"," byty"],other:["#"," bytů"]}],"\""]}};
