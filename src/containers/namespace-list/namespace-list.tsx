@@ -36,7 +36,7 @@ interface IState {
   hasPermission: boolean;
   isModalOpen: boolean;
   loading: boolean;
-  redirect: string;
+  redirect?: string;
 }
 
 interface IProps extends RouteComponentProps {
