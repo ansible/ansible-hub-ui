@@ -1,56 +1,28 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { resolve } = require('path');
 
+const isBuild = process.env.NODE_ENV === 'production';
+
 module.exports = {
   devtool: 'source-map',
   module: {
     rules: [
       {
-        test: /src\/.*\.js$/,
-        exclude: /(node_modules|bower_components)/i,
+        test: /src\/.*\.(js|jsx|ts|tsx)$/,
         use: [{ loader: 'source-map-loader' }, { loader: 'babel-loader' }],
       },
       {
-        test: /\.s?[ac]ss$/,
+        test: /\.(css|scss|sass)$/,
         use: [
-          process.env.NODE_ENV === 'production'
-            ? 'style-loader'
-            : MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'sass-loader',
-          },
+          isBuild ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'sass-loader',
         ],
       },
       {
         test: /\.(woff(2)?|ttf|jpg|png|eot|gif|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/',
-            },
-          },
-        ],
-      },
-
-      // TypeScript configs
-      // changed from { test: /\.jsx?$/, use: { loader: 'babel-loader' } },
-      {
-        test: /src\/.*\.(t|j)sx?$/,
-        use: [
-          { loader: 'awesome-typescript-loader' },
-          { loader: 'react-docgen-typescript-loader' },
-        ],
-      },
-      // addition - add source-map support
-      {
-        enforce: 'pre',
-        test: /src\/.*\.js$/,
-        loader: 'source-map-loader',
+        type: 'asset/resource',
+        generator: { filename: 'fonts/[name][ext][query]' },
       },
     ],
   },
@@ -61,5 +33,8 @@ module.exports = {
     alias: {
       src: resolve(__dirname, '../src'),
     },
+  },
+  watchOptions: {
+    ignored: ['**/.*.sw[po]'],
   },
 };

@@ -2,8 +2,8 @@
 const { resolve } = require('path');
 const config = require('@redhat-cloud-services/frontend-components-config');
 const TSOverrides = require('./webpack-ts-overrides');
-const commonWPconfig = require('./common.webpack.js');
 const webpack = require('webpack');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
 // should be imported, initialized with the following settings and exported like
@@ -72,26 +72,6 @@ module.exports = inputConfigs => {
     port: customConfigs.UI_PORT,
   });
 
-  webpackConfig.serve = {
-    content: commonWPconfig.paths.public,
-
-    // defines port for prod server
-    port: customConfigs.UI_PORT,
-
-    // https://github.com/webpack-contrib/webpack-serve/blob/master/docs/addons/history-fallback.config.js
-    add: app => app.use(convert(history({}))),
-  };
-
-  if (customConfigs.TARGET_ENVIRONMENT === 'prod') {
-    webpackConfig.serve.prod = {
-      publicPath: commonWPconfig.paths.publicPath,
-    };
-  } else {
-    webpackConfig.serve.dev = {
-      publicPath: commonWPconfig.paths.publicPath,
-    };
-  }
-
   // Override sections of the webpack config to work with TypeScript
   const newWebpackConfig = {
     ...webpackConfig,
@@ -111,12 +91,12 @@ module.exports = inputConfigs => {
     console.log('Overriding configs for standalone mode.');
 
     const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
-    const newPubPath = '/';
     console.log(`New entry.App: ${newEntry}`);
     newWebpackConfig.entry.App = newEntry;
   }
 
   plugins.push(new webpack.DefinePlugin(globals));
+  plugins.push(new ForkTsCheckerWebpackPlugin());
 
   return {
     ...newWebpackConfig,
