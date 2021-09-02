@@ -27,6 +27,7 @@ import {
   EmptyStateFilter,
   ShaLabel,
   TagLabel,
+  PublishToControllerModal,
   StatefulDropdown,
   AlertList,
   closeAlertMixin,
@@ -50,6 +51,7 @@ interface IState {
 
   // ID for manifest that is open in the manage tags modal.
   manageTagsManifestDigest: string;
+  publishToController: { digest?: string; image: string; tag?: string };
 }
 
 class ExecutionEnvironmentDetailImages extends React.Component<
@@ -80,6 +82,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       params: params,
       redirect: null,
       manageTagsManifestDigest: undefined,
+      publishToController: null,
       alerts: [],
     };
   }
@@ -93,7 +96,8 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   renderImages() {
-    const { params, images, manageTagsManifestDigest } = this.state;
+    const { params, images, manageTagsManifestDigest, publishToController } =
+      this.state;
     if (
       images.length === 0 &&
       !filterIsSet(params, ['tag', 'digest__icontains'])
@@ -170,6 +174,13 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             this.setState({ alerts: this.state.alerts.concat(alert) });
           }}
           containerRepository={this.props.containerRepository}
+        />
+        <PublishToControllerModal
+          digest={publishToController?.digest}
+          image={publishToController?.image}
+          isOpen={!!publishToController}
+          onClose={() => this.setState({ publishToController: null })}
+          tag={publishToController?.tag}
         />
 
         <div className='toolbar'>
@@ -279,16 +290,32 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       image.tags.length === 0
         ? image.digest
         : this.props.match.params['container'] + ':' + image.tags[0];
+
     const dropdownItems = [
+      canEditTags && (
+        <DropdownItem
+          key='edit-tags'
+          onClick={() => {
+            this.setState({ manageTagsManifestDigest: image.digest });
+          }}
+        >
+          {t`Edit tags`}
+        </DropdownItem>
+      ),
       <DropdownItem
-        key='edit-tags'
+        key='publish-to-controller'
         onClick={() => {
-          this.setState({ manageTagsManifestDigest: image.digest });
+          this.setState({
+            publishToController: {
+              digest: image.digest,
+              image: this.props.containerRepository.name,
+            },
+          });
         }}
       >
-        {t`Edit tags`}
+        {t`Use in Controller`}
       </DropdownItem>,
-    ];
+    ].filter((truthy) => truthy);
 
     return (
       <tr key={index}>
@@ -314,7 +341,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         </td>
 
         <td>
-          {canEditTags && (
+          {dropdownItems.length && (
             <StatefulDropdown items={dropdownItems}></StatefulDropdown>
           )}
         </td>
