@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import { Flex, FlexItem } from '@patternfly/react-core';
 
@@ -42,7 +43,7 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
           results={this.state.searchGroups}
           loadResults={this.loadGroups}
           onSelect={this.onSelect}
-          placeholderText={_`Find a group`}
+          placeholderText={t`Find a group`}
           menuAppendTo={this.props.menuAppendTo}
           isDisabled={!!this.props.isDisabled}
         />

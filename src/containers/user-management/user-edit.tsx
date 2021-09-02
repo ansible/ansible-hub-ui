@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
@@ -43,7 +44,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
     }
 
     const { user, errorMessages, unauthorized } = this.state;
-    const title = _`Edit user`;
+    const title = t`Edit user`;
 
     if (unauthorized) {
       return (
@@ -59,12 +60,12 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
     }
 
     const breadcrumbs = [
-      { url: Paths.userList, name: _`Users` },
+      { url: Paths.userList, name: t`Users` },
       {
         url: formatPath(Paths.userDetail, { userID: user.id }),
         name: user.username,
       },
-      { name: _`Edit` },
+      { name: t`Edit` },
     ];
 
     return (

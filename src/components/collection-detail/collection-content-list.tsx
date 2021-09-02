@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import cx from 'classnames';
 import './collection-content-list.scss';
@@ -68,12 +69,12 @@ export class CollectionContentList extends React.Component<IProps> {
                     updateParams(ParamHelper.setParam(params, 'keywords', ''))
                   }
                   aria-label='find-content'
-                  placeholder={_`Find content`}
+                  placeholder={t`Find content`}
                 />
               </ToolbarItem>
             </ToolbarGroup>
             <ToolbarGroup>
-              <ToolbarItem>{_`Showing:`}</ToolbarItem>
+              <ToolbarItem>{t`Showing:`}</ToolbarItem>
               {Object.keys(summary).map((key) => (
                 <ToolbarItem
                   key={key}
@@ -95,9 +96,9 @@ export class CollectionContentList extends React.Component<IProps> {
         <table className='content-table pf-c-table pf-m-compact'>
           <thead>
             <tr>
-              <th>{_`Name`}</th>
-              <th>{_`Type`}</th>
-              <th>{_`Description`}</th>
+              <th>{t`Name`}</th>
+              <th>{t`Type`}</th>
+              <th>{t`Description`}</th>
             </tr>
           </thead>
           <tbody>

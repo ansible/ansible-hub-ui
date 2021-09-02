@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import { capitalize } from 'lodash';
@@ -96,7 +97,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
                   updateParams(ParamHelper.setParam(params, 'keywords', ''))
                 }
                 aria-label='find-content'
-                placeholder={_`Find content`}
+                placeholder={t`Find content`}
               />
             </ToolbarItem>
           </ToolbarGroup>
@@ -136,7 +137,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
     };
 
     table.documentation.push({
-      display: _`Readme`,
+      display: t`Readme`,
       url: formatPath(Paths.collectionDocsIndexByRepo, baseUrlParams),
       type: 'docs',
       name: 'readme',

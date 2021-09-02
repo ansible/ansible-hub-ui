@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './collection-filter.scss';
 import {
@@ -23,11 +24,11 @@ export class CollectionFilter extends React.Component<IProps> {
     const filterConfig = [
       {
         id: 'keywords',
-        title: _`Keywords`,
+        title: t`Keywords`,
       },
       {
         id: 'tags',
-        title: _`Tag`,
+        title: t`Tag`,
         inputType: 'multiple' as 'multiple',
         options: Constants.COLLECTION_FILTER_TAGS.map((tag) => ({
           id: tag,

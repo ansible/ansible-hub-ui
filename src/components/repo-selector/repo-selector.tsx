@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import {
@@ -47,7 +48,7 @@ export class RepoSelector extends React.Component<IProps, IState> {
               variant='plain'
               className='input-group-text-no-wrap'
             >
-              {_`Filter by repository`}
+              {t`Filter by repository`}
             </InputGroupText>
             <Select
               className='nav-select'
@@ -74,9 +75,9 @@ export class RepoSelector extends React.Component<IProps, IState> {
               selections={this.getRepoName(this.props.selectedRepo)}
               variant='single'
             >
-              <SelectOption key={'published'} value={_`Published`} />
-              <SelectOption key={'rh-certified'} value={_`Red Hat Certified`} />
-              <SelectOption key={'community'} value={_`Community`} />
+              <SelectOption key={'published'} value={t`Published`} />
+              <SelectOption key={'rh-certified'} value={t`Red Hat Certified`} />
+              <SelectOption key={'community'} value={t`Community`} />
             </Select>
           </InputGroup>
         </FlexItem>

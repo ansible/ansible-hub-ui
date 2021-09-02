@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import { ParamHelper } from './utilities/param-helper';
 
 export function formatPath(path: Paths, data: any, params?: object) {
@@ -59,22 +60,10 @@ export enum Paths {
   taskList = '/tasks',
 }
 
-// FIXME: temporary global for l10n ; do localStorage.test_l10n = true in the console
-window._ = (strings, ...args) => {
-  strings = Array.from(strings);
-  const last = strings.pop();
-  const mark =
-    window.localStorage.test_l10n === 'true' ? (s) => '»' + s + '«' : (s) => s;
-
-  const parts = [...strings.map((s, i) => mark(s) + args[i]), mark(last)];
-
-  return parts.join('');
-};
-
 export const namespaceBreadcrumb = {
   name: {
-    namespaces: _`Namespaces`,
-    partners: _`Partners`,
+    namespaces: t`Namespaces`,
+    partners: t`Partners`,
   }[NAMESPACE_TERM],
   url: Paths[NAMESPACE_TERM],
 };

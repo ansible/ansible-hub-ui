@@ -1,0 +1,9 @@
+{
+  "catalogs": [{
+    "path": "<rootDir>/locale/{locale}",
+    "include": ["<rootDir>/src"]
+  }],
+  "format": "po",
+  "locales": ["en", "es", "fr", "nl", "ja", "zh"],
+  "sourceLocale": "en"
+}

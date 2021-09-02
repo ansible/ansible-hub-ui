@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './cards.scss';
 
@@ -48,7 +49,7 @@ export class NamespaceCard extends React.Component<IProps, {}> {
 
         {namespaceURL && (
           <CardFooter>
-            <Link to={namespaceURL}>{_`View collections`}</Link>
+            <Link to={namespaceURL}>{t`View collections`}</Link>
           </CardFooter>
         )}
       </Card>

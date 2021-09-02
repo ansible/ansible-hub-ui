@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 export class DeprecatedTag extends React.Component<{}, {}> {
@@ -17,7 +18,7 @@ export class DeprecatedTag extends React.Component<{}, {}> {
           borderRadius: '3px',
         }}
       >
-        {_`DEPRECATED`}
+        {t`DEPRECATED`}
       </div>
     );
   }

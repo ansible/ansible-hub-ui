@@ -1,0 +1,1908 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2021-09-01 22:22+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: zh\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/collection-detail/collection-info.tsx:110
+msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:262
+msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx:46
+msgid "<0>WARNING</0> copy this token now. This is the only time you will ever see it."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx:39
+msgid "<0>WARNING</0> loading a new token will delete your old token."
+msgstr ""
+
+#: src/containers/user-management/delete-user-modal.tsx:56
+msgid "<0>{0}</0> will be permanently deleted."
+msgstr ""
+
+#: src/containers/group-management/delete-group-modal.tsx:25
+msgid "<0>{name}</0> will be permanently deleted."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:548
+msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:447
+#: src/components/repositories/remote-form.tsx:496
+msgid "A PEM encoded client certificate used for authentication."
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:415
+msgid "A PEM encoded private key used for authentication."
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:372
+msgid "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:518
+msgid "API Error: 500"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:305
+msgid "API Error: Failed to set deprecation."
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:490
+#: src/containers/edit-namespace/edit-namespace.tsx:229
+msgid "API Error: {0}"
+msgstr ""
+
+#: src/loaders/standalone/standalone-loader.tsx:334
+msgid "API Token"
+msgstr ""
+
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:221
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:226
+msgid "API error. Status code: {0}"
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx:31
+msgid "API token"
+msgstr ""
+
+#: src/loaders/standalone/standalone-loader.tsx:148
+msgid "About"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:63
+msgid "Activities"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:54
+msgid "Activities will appear once you push something"
+msgstr ""
+
+#: src/components/execution-environment-header/execution-environment-header.tsx:18
+msgid "Activity"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:108
+#: src/containers/group-management/group-detail.tsx:430
+#: src/containers/group-management/group-detail.tsx:621
+#: src/containers/group-management/group-detail.tsx:670
+msgid "Add"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:101
+msgid "Add a README with instructions for using this container."
+msgstr ""
+
+#: src/constants.tsx:111
+msgid "Add group"
+msgstr ""
+
+#: src/constants.tsx:101
+msgid "Add namespace"
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:151
+msgid "Add new tag"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:416
+msgid "Add selected users to group"
+msgstr ""
+
+#: src/constants.tsx:120
+msgid "Add synclist"
+msgstr ""
+
+#: src/constants.tsx:107
+msgid "Add user"
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx:151
+msgid "All"
+msgstr ""
+
+#: src/loaders/standalone/standalone-loader.tsx:337
+msgid "Approval"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:117
+msgid "Approval dashboard"
+msgstr ""
+
+#: src/components/my-imports/import-console.tsx:177
+msgid "Approval status:"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:392
+#: src/containers/certification-dashboard/certification-dashboard.tsx:451
+msgid "Approve"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:160
+#: src/containers/certification-dashboard/certification-dashboard.tsx:188
+#: src/containers/certification-dashboard/certification-dashboard.tsx:295
+msgid "Approved"
+msgstr ""
+
+#: src/containers/about-modal/about-modal.tsx:95
+msgid "Browser OS"
+msgstr ""
+
+#: src/containers/about-modal/about-modal.tsx:89
+msgid "Browser Version"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:493
+msgid "CA certificate"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:126
+msgid "CLI Configuration"
+msgstr ""
+
+#: src/components/repositories/local-repository-table.tsx:70
+msgid "CLI configuration"
+msgstr ""
+
+#: src/containers/repositories/repository-list.tsx:140
+msgid "Can't update remote without a distribution attached to it."
+msgstr ""
+
+#: src/components/delete-modal/delete-modal.tsx:32
+#: src/components/execution-environment/repository-form.tsx:57
+#: src/components/group-management/group-modal.tsx:59
+#: src/components/namespace-modal/namespace-modal.tsx:107
+#: src/components/repositories/remote-form.tsx:110
+#: src/components/user-form/user-form.tsx:198
+#: src/containers/edit-namespace/edit-namespace.tsx:156
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:149
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:134
+#: src/containers/group-management/group-detail.tsx:390
+#: src/containers/group-management/group-detail.tsx:433
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:77
+msgid "Cancel"
+msgstr ""
+
+#: src/components/status/status-indicator.tsx:54
+msgid "Canceled"
+msgstr ""
+
+#: src/components/cards/collection-card.tsx:92
+msgid "Certified"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:67
+msgid "Change"
+msgstr ""
+
+#: src/constants.tsx:115
+msgid "Change Ansible distribution"
+msgstr ""
+
+#: src/constants.tsx:113
+msgid "Change collection remote"
+msgstr ""
+
+#: src/constants.tsx:126
+#: src/constants.tsx:137
+msgid "Change container namespace permissions"
+msgstr ""
+
+#: src/constants.tsx:123
+msgid "Change containers"
+msgstr ""
+
+#: src/constants.tsx:144
+msgid "Change distribution"
+msgstr ""
+
+#: src/constants.tsx:112
+msgid "Change group"
+msgstr ""
+
+#: src/constants.tsx:125
+#: src/constants.tsx:136
+msgid "Change image tags"
+msgstr ""
+
+#: src/constants.tsx:102
+#: src/constants.tsx:130
+msgid "Change namespace"
+msgstr ""
+
+#: src/constants.tsx:118
+msgid "Change synclist"
+msgstr ""
+
+#: src/constants.tsx:108
+msgid "Change user"
+msgstr ""
+
+#: src/containers/group-management/delete-group-modal.tsx:54
+msgid "Checking for affected users... <0/>"
+msgstr ""
+
+#: src/components/patternfly-wrappers/write-only-field.tsx:34
+msgid "Clear"
+msgstr ""
+
+#: src/components/empty-state/empty-state-filter.tsx:21
+#: src/components/patternfly-wrappers/applied-filters.tsx:44
+msgid "Clear all filters"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:444
+msgid "Client certificate"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:412
+msgid "Client key"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:239
+msgid "Collection"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:143
+msgid "Collection Name"
+msgstr ""
+
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:243
+msgid "Collection upload canceled"
+msgstr ""
+
+#: src/components/repositories/local-repository-table.tsx:90
+#: src/components/repositories/remote-repository-table.tsx:100
+#: src/containers/certification-dashboard/certification-dashboard.tsx:268
+msgid "Collection versions"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:123
+#: src/containers/search/search.tsx:96
+#: src/containers/token/token-insights.tsx:66
+#: src/loaders/standalone/standalone-loader.tsx:322
+#: src/loaders/standalone/standalone-loader.tsx:323
+msgid "Collections"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:227
+#: src/containers/namespace-detail/namespace-detail.tsx:229
+#: src/containers/search/search.tsx:149
+msgid "Collections will appear once uploaded"
+msgstr ""
+
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:178
+msgid "Command"
+msgstr ""
+
+#: src/components/repo-selector/repo-selector.tsx:80
+msgid "Community"
+msgstr ""
+
+#: src/components/namespace-form/namespace-form.tsx:56
+msgid "Company name"
+msgstr ""
+
+#: src/components/my-imports/import-list.tsx:83
+#: src/components/status/status-indicator.tsx:66
+#: src/containers/task-management/task-list-view.tsx:135
+msgid "Completed"
+msgstr ""
+
+#: src/components/repositories/remote-repository-table.tsx:194
+msgid "Configure"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:59
+msgid "Connect Private Automation Hub"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:72
+msgid "Connect the ansible-galaxy client"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:56
+msgid "Connect to Hub"
+msgstr ""
+
+#: src/components/empty-state/empty-state-unauthorized.tsx:14
+msgid "Contact you organization administrator for more information."
+msgstr ""
+
+#: src/components/execution-environment-header/execution-environment-header.tsx:27
+#: src/containers/execution-environment-list/execution_environment_list.tsx:101
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:100
+#: src/loaders/standalone/standalone-loader.tsx:342
+msgid "Container Registry"
+msgstr ""
+
+#: src/components/execution-environment/repository-form.tsx:65
+msgid "Container namespace"
+msgstr ""
+
+#: src/containers/execution-environment-list/execution_environment_list.tsx:130
+#: src/containers/execution-environment-list/execution_environment_list.tsx:185
+msgid "Container repository name"
+msgstr ""
+
+#: src/containers/collection-detail/collection-content.tsx:61
+msgid "Content"
+msgstr ""
+
+#: src/components/repositories/local-repository-table.tsx:55
+msgid "Content count"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:172
+msgid "Contents"
+msgstr ""
+
+#: src/containers/collection-detail/collection-import-log.tsx:110
+msgid "Could not load import log"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:491
+#: src/containers/certification-dashboard/certification-dashboard.tsx:519
+msgid "Could not update the certification status for {0}.{1}.{2}."
+msgstr ""
+
+#: src/components/group-management/group-modal.tsx:56
+#: src/components/namespace-modal/namespace-modal.tsx:104
+#: src/containers/group-management/group-list.tsx:146
+#: src/containers/group-management/group-list.tsx:181
+#: src/containers/namespace-list/namespace-list.tsx:121
+#: src/containers/namespace-list/namespace-list.tsx:218
+#: src/containers/user-management/user-list.tsx:178
+#: src/containers/user-management/user-list.tsx:242
+msgid "Create"
+msgstr ""
+
+#: src/components/group-management/group-modal.tsx:44
+msgid "Create a group"
+msgstr ""
+
+#: src/components/namespace-modal/namespace-modal.tsx:94
+msgid "Create a new namespace"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:89
+msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+msgstr ""
+
+#: src/constants.tsx:121
+#: src/constants.tsx:132
+msgid "Create new containers"
+msgstr ""
+
+#: src/containers/user-management/user-create.tsx:45
+#: src/containers/user-management/user-create.tsx:47
+msgid "Create new user"
+msgstr ""
+
+#: src/containers/execution-environment-list/execution_environment_list.tsx:195
+#: src/containers/group-management/group-detail.tsx:733
+#: src/containers/user-management/user-list.tsx:279
+msgid "Created"
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:210
+msgid "Created on"
+msgstr ""
+
+#: src/constants.tsx:202
+msgid "Curate all synclist repository"
+msgstr ""
+
+#: src/constants.tsx:199
+msgid "Curate synclist repository"
+msgstr ""
+
+#: src/constants.tsx:203
+msgid "Curate synclist repository batch"
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:204
+msgid "Current tags"
+msgstr ""
+
+#: src/components/tags/deprecated-tag.tsx:21
+msgid "DEPRECATED"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:68
+msgid "Date"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:249
+msgid "Date created"
+msgstr ""
+
+#: src/components/delete-modal/delete-modal.tsx:28
+#: src/containers/group-management/group-detail.tsx:228
+#: src/containers/group-management/group-list.tsx:381
+#: src/containers/group-management/group-list.tsx:391
+#: src/containers/task-management/task-list-view.tsx:274
+#: src/containers/task-management/task-list-view.tsx:290
+#: src/containers/user-management/user-detail.tsx:116
+#: src/containers/user-management/user-list.tsx:330
+msgid "Delete"
+msgstr ""
+
+#: src/constants.tsx:141
+msgid "Delete container's distribution"
+msgstr ""
+
+#: src/constants.tsx:140
+msgid "Delete container's namespace"
+msgstr ""
+
+#: src/constants.tsx:145
+msgid "Delete distribution"
+msgstr ""
+
+#: src/constants.tsx:110
+msgid "Delete group"
+msgstr ""
+
+#: src/containers/group-management/delete-group-modal.tsx:23
+msgid "Delete group?"
+msgstr ""
+
+#: src/constants.tsx:117
+msgid "Delete synclist"
+msgstr ""
+
+#: src/constants.tsx:106
+msgid "Delete user"
+msgstr ""
+
+#: src/containers/user-management/delete-user-modal.tsx:41
+msgid "Delete user?"
+msgstr ""
+
+#: src/containers/user-management/delete-user-modal.tsx:50
+msgid "Deleting super users is not allowed."
+msgstr ""
+
+#: src/containers/group-management/delete-group-modal.tsx:32
+msgid "Deleting this group will affect {count} users."
+msgstr ""
+
+#: src/containers/user-management/delete-user-modal.tsx:52
+msgid "Deleting yourself is not allowed."
+msgstr ""
+
+#: src/components/collection-list/collection-list.tsx:104
+msgid "Deprecate"
+msgstr ""
+
+#: src/components/collection-detail/collection-content-list.tsx:101
+#: src/components/execution-environment/repository-form.tsx:76
+#: src/components/namespace-form/namespace-form.tsx:115
+#: src/containers/execution-environment-list/execution_environment_list.tsx:190
+msgid "Description"
+msgstr ""
+
+#: src/components/execution-environment-header/execution-environment-header.tsx:18
+msgid "Detail"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:131
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:194
+msgid "Digest"
+msgstr ""
+
+#: src/components/repositories/local-repository-table.tsx:45
+msgid "Distribution name"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:66
+msgid "Docs site"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:167
+#: src/containers/collection-detail/collection-docs.tsx:117
+#: src/loaders/standalone/standalone-loader.tsx:349
+msgid "Documentation"
+msgstr ""
+
+#: src/components/my-imports/import-console.tsx:103
+msgid "Done"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:532
+msgid "Download CA certification file"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:484
+msgid "Download client certification file"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:541
+msgid "Download concurrency"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:266
+msgid "Download requirements file"
+msgstr ""
+
+#: src/components/collection-detail/collection-info.tsx:130
+msgid "Download tarball"
+msgstr ""
+
+#: src/components/patternfly-wrappers/stateful-dropdown.tsx:78
+#: src/components/patternfly-wrappers/stateful-dropdown.tsx:89
+msgid "Dropdown"
+msgstr ""
+
+#: src/components/repositories/remote-repository-table.tsx:155
+#: src/containers/edit-namespace/edit-namespace.tsx:109
+#: src/containers/execution-environment-detail/base.tsx:107
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:94
+#: src/containers/group-management/group-detail.tsx:313
+#: src/containers/settings/user-profile.tsx:92
+#: src/containers/user-management/user-detail.tsx:106
+#: src/containers/user-management/user-edit.tsx:63
+#: src/containers/user-management/user-list.tsx:318
+msgid "Edit"
+msgstr ""
+
+#: src/containers/edit-namespace/edit-namespace.tsx:111
+msgid "Edit details"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:180
+msgid "Edit group permissions"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:389
+msgid "Edit namespace"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:93
+msgid "Edit remote"
+msgstr ""
+
+#: src/components/execution-environment/repository-form.tsx:47
+msgid "Edit repository"
+msgstr ""
+
+#: src/containers/edit-namespace/edit-namespace.tsx:111
+msgid "Edit resources"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:289
+msgid "Edit tags"
+msgstr ""
+
+#: src/containers/user-management/user-edit.tsx:42
+msgid "Edit user"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:81
+#: src/containers/group-management/group-detail.tsx:656
+#: src/containers/group-management/group-detail.tsx:718
+#: src/containers/user-management/user-list.tsx:168
+#: src/containers/user-management/user-list.tsx:269
+msgid "Email"
+msgstr ""
+
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:188
+msgid "Environment"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:516
+#: src/containers/group-management/group-list.tsx:430
+msgid "Error deleting group."
+msgstr ""
+
+#: src/containers/user-management/delete-user-modal.tsx:72
+#: src/containers/user-management/delete-user-modal.tsx:96
+msgid "Error deleting user."
+msgstr ""
+
+#: src/containers/group-management/group-list.tsx:325
+msgid "Error editing group."
+msgstr ""
+
+#: src/containers/my-imports/my-imports.tsx:304
+msgid "Error fetching import from API"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:115
+msgid "Error loading group."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:129
+msgid "Error loading permissions."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:459
+#: src/containers/group-management/group-detail.tsx:580
+#: src/containers/group-management/group-detail.tsx:810
+msgid "Error loading users."
+msgstr ""
+
+#: src/components/my-imports/import-console.tsx:187
+msgid "Error message:"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:829
+msgid "Error removing user from a group."
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:379
+msgid "Error stopping task."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:566
+msgid "Error updating users."
+msgstr ""
+
+#: src/containers/execution-environment-detail/base.tsx:164
+msgid "Error: changes weren't saved"
+msgstr ""
+
+#: src/components/my-imports/import-console.tsx:110
+#: src/components/my-imports/import-list.tsx:87
+#: src/components/status/status-indicator.tsx:74
+#: src/containers/task-management/task-list-view.tsx:139
+msgid "Failed"
+msgstr ""
+
+#: src/containers/login/login.tsx:89
+msgid "Failed to retrieve user data."
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:250
+msgid "Failed to {operation} tag \"{tag}\"."
+msgstr ""
+
+#: src/components/repo-selector/repo-selector.tsx:51
+msgid "Filter by repository"
+msgstr ""
+
+#: src/components/patternfly-wrappers/compound-filter.tsx:115
+#: src/components/patternfly-wrappers/compound-filter.tsx:128
+#: src/components/patternfly-wrappers/compound-filter.tsx:164
+msgid "Filter by {0}"
+msgstr ""
+
+#: src/components/permissions/obect-permission-field.tsx:46
+msgid "Find a group"
+msgstr ""
+
+#: src/components/collection-detail/collection-content-list.tsx:72
+#: src/components/collection-detail/table-of-contents.tsx:100
+msgid "Find content"
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:220
+msgid "Finished at"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:79
+#: src/containers/group-management/group-detail.tsx:648
+#: src/containers/group-management/group-detail.tsx:728
+#: src/containers/user-management/user-list.tsx:160
+#: src/containers/user-management/user-list.tsx:257
+msgid "First name"
+msgstr ""
+
+#: src/components/my-imports/import-console.tsx:81
+msgid "Follow logs"
+msgstr ""
+
+#: src/loaders/standalone/standalone-loader.tsx:158
+msgid "Galaxy Logo"
+msgstr ""
+
+#: src/components/repositories/local-repository-table.tsx:149
+msgid "Get token"
+msgstr ""
+
+#: src/components/collection-detail/collection-info.tsx:171
+msgid "Go to documentation"
+msgstr ""
+
+#: src/containers/group-management/group-list.tsx:167
+#: src/containers/group-management/group-list.tsx:341
+msgid "Group"
+msgstr ""
+
+#: src/containers/group-management/group-list.tsx:354
+msgid "Group list"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:127
+#: src/components/user-form/user-form.tsx:141
+#: src/containers/group-management/group-detail.tsx:186
+#: src/containers/group-management/group-list.tsx:130
+#: src/containers/user-management/user-list.tsx:275
+#: src/loaders/standalone/standalone-loader.tsx:358
+msgid "Groups"
+msgstr ""
+
+#: src/containers/group-management/group-list.tsx:138
+msgid "Groups will appear once created"
+msgstr ""
+
+#: src/components/execution-environment/repository-form.tsx:95
+msgid "Groups with access"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:275
+msgid "Hide advanced options"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:397
+msgid "If selected, TLS peer validation must be performed."
+msgstr ""
+
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:95
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:136
+#: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:140
+msgid "Image layers"
+msgstr ""
+
+#: src/components/execution-environment-header/execution-environment-header.tsx:18
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:227
+msgid "Images"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:104
+msgid "Images will appear once uploaded"
+msgstr ""
+
+#: src/constants.tsx:198
+#: src/constants.tsx:201
+msgid "Import and auto approve"
+msgstr ""
+
+#: src/constants.tsx:200
+msgid "Import and move to staging"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:181
+#: src/containers/collection-detail/collection-import-log.tsx:77
+msgid "Import log"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:405
+msgid "Imports"
+msgstr ""
+
+#: src/components/collection-detail/collection-info.tsx:61
+#: src/components/headers/collection-header.tsx:162
+msgid "Install"
+msgstr ""
+
+#: src/components/collection-detail/collection-info.tsx:78
+msgid "Install Version"
+msgstr ""
+
+#: src/components/collection-detail/collection-info.tsx:106
+msgid "Installation"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:75
+msgid "Instructions"
+msgstr ""
+
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:152
+msgid "Invalid file format."
+msgstr ""
+
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:158
+msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
+msgstr ""
+
+#: src/containers/login/login.tsx:102
+msgid "Invalid login credentials."
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:68
+msgid "Issue tracker"
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:224
+msgid "It's safe to close this window. These tasks will finish in the"
+msgstr ""
+
+#: src/components/collection-list/collection-filter.tsx:27
+msgid "Keywords"
+msgstr ""
+
+#: src/containers/execution-environment-list/execution_environment_list.tsx:200
+msgid "Last modified"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:80
+#: src/containers/group-management/group-detail.tsx:652
+#: src/containers/group-management/group-detail.tsx:723
+#: src/containers/user-management/user-list.tsx:164
+#: src/containers/user-management/user-list.tsx:263
+msgid "Last name"
+msgstr ""
+
+#: src/components/repositories/remote-repository-table.tsx:81
+msgid "Last synced"
+msgstr ""
+
+#: src/components/repositories/local-repository-table.tsx:60
+#: src/components/repositories/remote-repository-table.tsx:76
+msgid "Last updated"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:121
+msgid "Layers"
+msgstr ""
+
+#: src/components/collection-detail/collection-info.tsx:72
+msgid "License"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:567
+msgid "Limits total download rate in requests per second."
+msgstr ""
+
+#: src/components/namespace-form/namespace-form.tsx:217
+msgid "Link URL"
+msgstr ""
+
+#: src/components/namespace-form/namespace-form.tsx:208
+msgid "Link text"
+msgstr ""
+
+#: src/components/collection-list/collection-list.tsx:48
+#: src/containers/search/search.tsx:266
+msgid "List of Collections"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:97
+#: src/containers/token/token-standalone.tsx:57
+msgid "Load token"
+msgstr ""
+
+#: src/containers/repositories/repository-list.tsx:105
+msgid "Local"
+msgstr ""
+
+#: src/containers/login/login.tsx:65
+msgid "Log in to your account"
+msgstr ""
+
+#: src/loaders/standalone/standalone-loader.tsx:188
+msgid "Login"
+msgstr ""
+
+#: src/components/namespace-form/namespace-form.tsx:100
+msgid "Logo URL"
+msgstr ""
+
+#: src/loaders/standalone/standalone-loader.tsx:123
+msgid "Logout"
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:139
+msgid "Manage tags"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:115
+msgid "Manage tokens"
+msgstr ""
+
+#: src/constants.tsx:104
+msgid "Modify Ansible repo content"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:576
+msgid "Must be an integer."
+msgstr ""
+
+#: src/containers/my-imports/my-imports.tsx:118
+msgid "My imports"
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx:156
+msgid "My namespaces"
+msgstr ""
+
+#: src/containers/settings/user-profile.tsx:73
+#: src/containers/settings/user-profile.tsx:74
+#: src/loaders/standalone/standalone-loader.tsx:112
+msgid "My profile"
+msgstr ""
+
+#: src/components/collection-detail/collection-content-list.tsx:99
+#: src/components/execution-environment/repository-form.tsx:62
+#: src/components/group-management/group-modal.tsx:73
+#: src/components/my-imports/import-list.tsx:74
+#: src/components/my-imports/import-list.tsx:110
+#: src/components/namespace-form/namespace-form.tsx:42
+#: src/components/namespace-modal/namespace-modal.tsx:113
+#: src/components/repositories/remote-form.tsx:125
+#: src/containers/namespace-list/namespace-list.tsx:168
+msgid "Name"
+msgstr ""
+
+#: src/components/namespace-modal/namespace-modal.tsx:46
+msgid "Name can only contain [A-Za-z0-9_]"
+msgstr ""
+
+#: src/components/namespace-modal/namespace-modal.tsx:50
+msgid "Name cannot begin with '_'"
+msgstr ""
+
+#: src/components/namespace-modal/namespace-modal.tsx:48
+msgid "Name must be longer than 2 characters"
+msgstr ""
+
+#: src/components/my-imports/import-list.tsx:214
+#: src/containers/certification-dashboard/certification-dashboard.tsx:139
+#: src/containers/certification-dashboard/certification-dashboard.tsx:234
+msgid "Namespace"
+msgstr ""
+
+#: src/components/namespace-modal/namespace-modal.tsx:121
+msgid "Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’."
+msgstr ""
+
+#: src/components/namespace-form/namespace-form.tsx:77
+#: src/components/namespace-modal/namespace-modal.tsx:142
+msgid "Namespace owners"
+msgstr ""
+
+#: src/loaders/standalone/standalone-loader.tsx:328
+#: src/paths.ts:65
+msgid "Namespaces"
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx:213
+msgid "Namespaces will appear once created"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:156
+#: src/containers/certification-dashboard/certification-dashboard.tsx:189
+#: src/containers/certification-dashboard/certification-dashboard.tsx:315
+msgid "Needs Review"
+msgstr ""
+
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:59
+msgid "New collection"
+msgstr ""
+
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:59
+msgid "New version of {0}"
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:197
+msgid "No"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:100
+msgid "No README"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:53
+msgid "No activities yet"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:228
+#: src/containers/search/search.tsx:148
+msgid "No collections yet"
+msgstr ""
+
+#: src/containers/execution-environment-list/execution_environment_list.tsx:104
+msgid "No container repositories yet"
+msgstr ""
+
+#: src/containers/my-imports/my-imports.tsx:263
+msgid "No data"
+msgstr ""
+
+#: src/containers/group-management/group-list.tsx:137
+msgid "No groups yet"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:103
+msgid "No images yet"
+msgstr ""
+
+#: src/components/my-imports/import-list.tsx:148
+msgid "No imports"
+msgstr ""
+
+#: src/components/repositories/local-repository-table.tsx:32
+msgid "No local repositories yet"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:226
+msgid "No managed collections yet"
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx:211
+msgid "No namespaces yet"
+msgstr ""
+
+#: src/components/permissions/permission-chip-selector.tsx:80
+msgid "No permission"
+msgstr ""
+
+#: src/containers/repositories/repository-list.tsx:200
+msgid "No remote repositories yet"
+msgstr ""
+
+#: src/components/empty-state/empty-state-filter.tsx:15
+msgid "No results found"
+msgstr ""
+
+#: src/components/empty-state/empty-state-filter.tsx:16
+msgid "No results match the filter criteria. Try changing your filter settings."
+msgstr ""
+
+#: src/components/my-imports/import-console.tsx:96
+msgid "No task messages available"
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:103
+msgid "No tasks yet"
+msgstr ""
+
+#: src/containers/group-management/delete-group-modal.tsx:51
+msgid "No users will be affected."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:611
+#: src/containers/user-management/user-list.tsx:238
+msgid "No users yet"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:176
+msgid "Not a super user"
+msgstr ""
+
+#: src/components/permissions/permission-chip-selector.tsx:66
+#: src/components/typeahead/typeahead.tsx:84
+#: src/containers/collection-detail/collection-docs.tsx:264
+msgid "Not found"
+msgstr ""
+
+#: src/containers/not-found/not-found.tsx:21
+msgid "Not found image"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:133
+msgid "Note: this URL contains all collections in Hub. To connect to your"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:548
+msgid "Number must be greater than 0"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:86
+msgid "Offline token"
+msgstr ""
+
+#: src/components/headers/base-header.tsx:47
+msgid "Page logo"
+msgstr ""
+
+#: src/paths.ts:66
+msgid "Partners"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:303
+#: src/components/user-form/user-form.tsx:84
+#: src/containers/login/login.tsx:54
+msgid "Password"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:102
+msgid "Password confirmation"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:99
+msgid "Passwords do not match"
+msgstr ""
+
+#: src/components/status/status-indicator.tsx:44
+msgid "Pending"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:269
+msgid "Permission {0} was not removed."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:254
+msgid "Permission {permission} was not added."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:146
+msgid "Permissions"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:197
+msgid "Please finish editing permissions first."
+msgstr ""
+
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:148
+msgid "Please select no more than one file."
+msgstr ""
+
+#: src/components/namespace-modal/namespace-modal.tsx:44
+#: src/components/namespace-modal/namespace-modal.tsx:116
+msgid "Please, provide the namespace name"
+msgstr ""
+
+#: src/components/markdown-editor/markdown-editor.tsx:38
+msgid "Preview"
+msgstr ""
+
+#: src/containers/settings/user-profile.tsx:111
+msgid "Profile saved."
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:330
+msgid "Proxy URL"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:366
+msgid "Proxy password"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:348
+msgid "Proxy username"
+msgstr ""
+
+#: src/components/repo-selector/repo-selector.tsx:78
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:116
+msgid "Published"
+msgstr ""
+
+#: src/constants.tsx:147
+msgid "Pull distribution"
+msgstr ""
+
+#: src/constants.tsx:122
+#: src/constants.tsx:133
+msgid "Pull private containers"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:78
+msgid "Pull this image"
+msgstr ""
+
+#: src/containers/about-modal/about-modal.tsx:71
+msgid "Pulp Ansible Version"
+msgstr ""
+
+#: src/constants.tsx:204
+msgid "Pulp Ansible: Collections sync"
+msgstr ""
+
+#: src/constants.tsx:207
+msgid "Pulp Ansible: Roles synchronize"
+msgstr ""
+
+#: src/constants.tsx:205
+msgid "Pulp ansible: Copy content"
+msgstr ""
+
+#: src/constants.tsx:209
+msgid "Pulp ansible: Import collection"
+msgstr ""
+
+#: src/constants.tsx:208
+msgid "Pulp ansible: Update collection remote"
+msgstr ""
+
+#: src/constants.tsx:206
+msgid "Pulp ansible: collection sync"
+msgstr ""
+
+#: src/constants.tsx:215
+msgid "Pulp container: Build image from containerfile"
+msgstr ""
+
+#: src/constants.tsx:216
+msgid "Pulp container: General multi delete"
+msgstr ""
+
+#: src/constants.tsx:213
+msgid "Pulp container: Recursive add content"
+msgstr ""
+
+#: src/constants.tsx:214
+msgid "Pulp container: Recursive remove content"
+msgstr ""
+
+#: src/constants.tsx:210
+msgid "Pulp container: Tag image"
+msgstr ""
+
+#: src/constants.tsx:212
+msgid "Pulp container: Tasks synchronize"
+msgstr ""
+
+#: src/constants.tsx:211
+msgid "Pulp container: Untage image"
+msgstr ""
+
+#: src/constants.tsx:228
+msgid "Pulpcore: Add and remove"
+msgstr ""
+
+#: src/constants.tsx:229
+msgid "Pulpcore: Add or remove"
+msgstr ""
+
+#: src/constants.tsx:225
+msgid "Pulpcore: Delete version"
+msgstr ""
+
+#: src/constants.tsx:220
+msgid "Pulpcore: General create"
+msgstr ""
+
+#: src/constants.tsx:222
+msgid "Pulpcore: General delete"
+msgstr ""
+
+#: src/constants.tsx:221
+msgid "Pulpcore: General update"
+msgstr ""
+
+#: src/constants.tsx:217
+msgid "Pulpcore: Import repository version"
+msgstr ""
+
+#: src/constants.tsx:218
+msgid "Pulpcore: Orphan cleanup"
+msgstr ""
+
+#: src/constants.tsx:223
+msgid "Pulpcore: Pulp export"
+msgstr ""
+
+#: src/constants.tsx:224
+msgid "Pulpcore: Pulp import"
+msgstr ""
+
+#: src/constants.tsx:219
+msgid "Pulpcore: Repair all artifacts"
+msgstr ""
+
+#: src/constants.tsx:226
+msgid "Pulpcore: Repair version"
+msgstr ""
+
+#: src/constants.tsx:227
+msgid "Pulpcore: Upload commit"
+msgstr ""
+
+#: src/constants.tsx:146
+msgid "Push distribution"
+msgstr ""
+
+#: src/constants.tsx:138
+msgid "Push images to existing containers"
+msgstr ""
+
+#: src/constants.tsx:143
+msgid "Push new containers"
+msgstr ""
+
+#: src/constants.tsx:127
+msgid "Push to existing containers"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:564
+msgid "Rate Limit"
+msgstr ""
+
+#: src/components/markdown-editor/markdown-editor.tsx:26
+msgid "Raw Markdown"
+msgstr ""
+
+#: src/components/collection-detail/table-of-contents.tsx:140
+msgid "Readme"
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:340
+msgid "Reason: task {0}"
+msgstr ""
+
+#: src/components/repo-selector/repo-selector.tsx:79
+msgid "Red Hat Certified"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:409
+msgid "Reject"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:152
+#: src/containers/certification-dashboard/certification-dashboard.tsx:190
+#: src/containers/certification-dashboard/certification-dashboard.tsx:305
+msgid "Rejected"
+msgstr ""
+
+#: src/containers/repositories/repository-list.tsx:105
+msgid "Remote"
+msgstr ""
+
+#: src/components/repositories/remote-repository-table.tsx:66
+msgid "Remote name"
+msgstr ""
+
+#: src/containers/repositories/repository-list.tsx:201
+msgid "Remote repositories will appear once added"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:788
+msgid "Remove"
+msgstr ""
+
+#: src/constants.tsx:197
+msgid "Remove content from repository"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:546
+msgid "Remove user from group?"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:69
+msgid "Repo"
+msgstr ""
+
+#: src/containers/repositories/repository-list.tsx:152
+msgid "Repo Management"
+msgstr ""
+
+#: src/components/repositories/local-repository-table.tsx:65
+msgid "Repo URL"
+msgstr ""
+
+#: src/components/repositories/remote-repository-table.tsx:71
+msgid "Repositories"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:62
+#: src/containers/token/token-insights.tsx:135
+#: src/loaders/standalone/standalone-loader.tsx:331
+msgid "Repository Management"
+msgstr ""
+
+#: src/components/repositories/local-repository-table.tsx:50
+msgid "Repository name"
+msgstr ""
+
+#: src/components/collection-detail/collection-info.tsx:140
+msgid "Requires Ansible"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:226
+msgid "Requires super user permissions to edit."
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:131
+msgid "Resources"
+msgstr ""
+
+#: src/components/my-imports/import-list.tsx:91
+#: src/components/status/status-indicator.tsx:60
+#: src/containers/task-management/task-list-view.tsx:143
+msgid "Running"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:192
+#: src/containers/token/token-insights.tsx:139
+msgid "SSO URL"
+msgstr ""
+
+#: src/components/execution-environment/repository-form.tsx:54
+#: src/components/group-management/group-modal.tsx:56
+#: src/components/repositories/remote-form.tsx:103
+#: src/components/user-form/user-form.tsx:195
+#: src/containers/edit-namespace/edit-namespace.tsx:153
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:138
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:125
+#: src/containers/group-management/group-detail.tsx:383
+msgid "Save"
+msgstr ""
+
+#: src/components/my-imports/import-console.tsx:81
+msgid "Scroll to end"
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx:130
+msgid "Search all {0}"
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx:129
+msgid "Search my namespaces"
+msgstr ""
+
+#: src/components/collection-detail/collection-info.tsx:87
+#: src/components/headers/collection-header.tsx:96
+msgid "Select collection version"
+msgstr ""
+
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:94
+msgid "Select file"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:148
+msgid "Select groups"
+msgstr ""
+
+#: src/components/patternfly-wrappers/sort.tsx:145
+msgid "Select input"
+msgstr ""
+
+#: src/components/my-imports/import-list.tsx:227
+msgid "Select namespace"
+msgstr ""
+
+#: src/components/permissions/permission-chip-selector.tsx:50
+#: src/components/permissions/permission-chip-selector.tsx:78
+msgid "Select permissions"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:487
+msgid "Select users"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:126
+msgid "Server URL"
+msgstr ""
+
+#: src/containers/login/login.tsx:97
+msgid "Server error. Please come back later."
+msgstr ""
+
+#: src/containers/about-modal/about-modal.tsx:65
+msgid "Server version"
+msgstr ""
+
+#: src/containers/settings/user-profile.tsx:73
+msgid "Settings"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:276
+msgid "Show advanced options"
+msgstr ""
+
+#: src/components/collection-detail/collection-content-list.tsx:77
+msgid "Showing:"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:193
+msgid "Single sign on URL."
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:126
+msgid "Size"
+msgstr ""
+
+#: src/components/patternfly-wrappers/sort.tsx:150
+msgid "Sort results"
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:215
+msgid "Started at"
+msgstr ""
+
+#: src/components/my-imports/import-list.tsx:78
+#: src/components/my-imports/import-list.tsx:111
+#: src/containers/certification-dashboard/certification-dashboard.tsx:147
+#: src/containers/certification-dashboard/certification-dashboard.tsx:194
+#: src/containers/certification-dashboard/certification-dashboard.tsx:254
+#: src/containers/task-management/task-list-view.tsx:130
+#: src/containers/task-management/task-list-view.tsx:175
+#: src/containers/task-management/task-list-view.tsx:225
+msgid "Status"
+msgstr ""
+
+#: src/components/my-imports/import-console.tsx:173
+msgid "Status:"
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:283
+#: src/containers/task-management/task-list-view.tsx:299
+msgid "Stop task"
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:344
+msgid "Stop task?"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:512
+#: src/containers/group-management/group-list.tsx:418
+msgid "Successfully deleted group."
+msgstr ""
+
+#: src/containers/user-management/delete-user-modal.tsx:93
+msgid "Successfully deleted user."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:824
+msgid "Successfully removed a user from a group."
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:364
+msgid "Successfully stopped task."
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:175
+#: src/containers/user-management/user-list.tsx:348
+msgid "Super user"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:229
+msgid "Super users can't disable themselves."
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:167
+#: src/containers/user-management/user-list.tsx:345
+msgid "Super users have all system permissions regardless of what groups they are in."
+msgstr ""
+
+#: src/components/repositories/remote-repository-table.tsx:213
+#: src/containers/search/search.tsx:223
+msgid "Sync"
+msgstr ""
+
+#: src/components/repositories/remote-repository-table.tsx:86
+msgid "Sync status"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:394
+msgid "TLS validation"
+msgstr ""
+
+#: src/components/collection-list/collection-filter.tsx:31
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:111
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:190
+msgid "Tag"
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:100
+#: src/loaders/standalone/standalone-loader.tsx:346
+msgid "Task Management"
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:233
+msgid "Task list"
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:126
+#: src/containers/task-management/task-list-view.tsx:174
+#: src/containers/task-management/task-list-view.tsx:205
+msgid "Task name"
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:339
+msgid "Task to change tag \"{0}\" could not be completed."
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:104
+msgid "Tasks will appear once created."
+msgstr ""
+
+#: src/components/namespace-form/namespace-form.tsx:155
+msgid "Text: {0}"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:144
+msgid "The URL of an external content source."
+msgstr ""
+
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:173
+msgid "The collection you have selected does not match this namespace."
+msgstr ""
+
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:167
+msgid "The collection you have selected doesn't appear to match {0}"
+msgstr ""
+
+#: src/containers/collection-detail/collection-docs.tsx:265
+msgid "The file is not available for this version of {collectionName}"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:306
+msgid "The password to be used for authentication when syncing. This is not required when using a token."
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:284
+msgid "The username to be used for authentication when syncing. This is not required when using a token."
+msgstr ""
+
+#: src/components/repositories/remote-repository-table.tsx:137
+msgid "There are no repos associated with this remote."
+msgstr ""
+
+#: src/components/my-imports/import-list.tsx:149
+msgid "There have not been any imports on this namespace."
+msgstr ""
+
+#: src/containers/group-management/delete-group-modal.tsx:38
+msgid "These users will lose access to the group content:"
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx:214
+msgid "This account is not set up to manage any namespaces"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:120
+msgid "This collection has been deprecated."
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:182
+msgid "This tag already exists on another image. Do you want to move it to this image?"
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:377
+msgid "This tag is already selected for this image. You cannot add it twice."
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:163
+msgid "Token"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:166
+msgid "Token for authenticating to the server URL."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx:28
+msgid "Token management"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:544
+msgid "Total number of simultaneous connections."
+msgstr ""
+
+#: src/components/collection-detail/collection-content-list.tsx:100
+msgid "Type"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:142
+msgid "URL"
+msgstr ""
+
+#: src/components/namespace-form/namespace-form.tsx:158
+msgid "URL: {0}"
+msgstr ""
+
+#: src/components/collection-list/collection-list.tsx:104
+msgid "Undeprecate"
+msgstr ""
+
+#: src/constants.tsx:134
+msgid "Update container information"
+msgstr ""
+
+#: src/containers/namespace-detail/import-modal/import-modal.tsx:70
+msgid "Upload"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:235
+#: src/containers/namespace-detail/namespace-detail.tsx:376
+msgid "Upload collection"
+msgstr ""
+
+#: src/components/collection-list/collection-list.tsx:94
+msgid "Upload new version"
+msgstr ""
+
+#: src/constants.tsx:103
+#: src/constants.tsx:131
+msgid "Upload to namespace"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:128
+msgid "Use this URL to configure the API endpoints that clients need to"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:141
+msgid "Use this URL to configure the authentication URLs that clients"
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:88
+msgid "Use this token to authenticate clients that need to download"
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx:33
+msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
+msgstr ""
+
+#: src/components/namespace-form/namespace-form.tsx:130
+msgid "Useful links"
+msgstr ""
+
+#: src/loaders/standalone/standalone-loader.tsx:353
+msgid "User Access"
+msgstr ""
+
+#: src/containers/about-modal/about-modal.tsx:83
+msgid "User Groups"
+msgstr ""
+
+#: src/containers/user-management/user-detail.tsx:61
+msgid "User details"
+msgstr ""
+
+#: src/containers/execution-environment-list/execution_environment_list.tsx:208
+#: src/containers/group-management/group-detail.tsx:746
+#: src/containers/user-management/user-list.tsx:292
+msgid "User list"
+msgstr ""
+
+#: src/components/user-form/user-form.tsx:162
+msgid "User type"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:281
+#: src/components/user-form/user-form.tsx:78
+#: src/containers/about-modal/about-modal.tsx:77
+#: src/containers/group-management/group-detail.tsx:644
+#: src/containers/group-management/group-detail.tsx:713
+#: src/containers/login/login.tsx:51
+#: src/containers/user-management/user-list.tsx:156
+#: src/containers/user-management/user-list.tsx:252
+msgid "Username"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:148
+#: src/containers/user-management/user-create.tsx:44
+#: src/containers/user-management/user-detail.tsx:58
+#: src/containers/user-management/user-edit.tsx:58
+#: src/containers/user-management/user-list.tsx:137
+#: src/loaders/standalone/standalone-loader.tsx:354
+msgid "Users"
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:612
+msgid "Users will appear once added to this group"
+msgstr ""
+
+#: src/containers/user-management/user-list.tsx:239
+msgid "Users will appear once created"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:89
+#: src/containers/certification-dashboard/certification-dashboard.tsx:244
+msgid "Version"
+msgstr ""
+
+#: src/components/my-imports/import-console.tsx:181
+msgid "Version:"
+msgstr ""
+
+#: src/constants.tsx:116
+msgid "View Ansible distribution"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:378
+msgid "View Import Logs"
+msgstr ""
+
+#: src/constants.tsx:114
+msgid "View collection remote"
+msgstr ""
+
+#: src/components/cards/namespace-card.tsx:52
+msgid "View collections"
+msgstr ""
+
+#: src/constants.tsx:139
+msgid "View container's namespace"
+msgstr ""
+
+#: src/constants.tsx:142
+msgid "View container's repository"
+msgstr ""
+
+#: src/constants.tsx:148
+msgid "View distribution"
+msgstr ""
+
+#: src/constants.tsx:109
+msgid "View group"
+msgstr ""
+
+#: src/constants.tsx:124
+#: src/constants.tsx:135
+msgid "View private containers"
+msgstr ""
+
+#: src/constants.tsx:119
+msgid "View synclist"
+msgstr ""
+
+#: src/constants.tsx:105
+msgid "View user"
+msgstr ""
+
+#: src/components/my-imports/import-list.tsx:95
+#: src/containers/task-management/task-list-view.tsx:147
+msgid "Waiting"
+msgstr ""
+
+#: src/containers/not-found/not-found.tsx:22
+msgid "We couldn't find the page you're looking for!"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:67
+msgid "Website"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:212
+msgid "YAML requirements"
+msgstr ""
+
+#: src/containers/execution-environment-detail/tag-manifest-modal.tsx:192
+msgid "Yes"
+msgstr ""
+
+#: src/components/namespace-form/resources-form.tsx:34
+msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
+msgstr ""
+
+#: src/containers/execution-environment-list/execution_environment_list.tsx:105
+msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
+msgstr ""
+
+#: src/components/empty-state/empty-state-unauthorized.tsx:13
+msgid "You do not have access to Automation Hub"
+msgstr ""
+
+#: src/containers/edit-namespace/edit-namespace.tsx:230
+msgid "You don't have permissions to update this namespace."
+msgstr ""
+
+#: src/containers/edit-namespace/edit-namespace.tsx:164
+msgid "You have unsaved changes"
+msgstr ""
+
+#: src/utilities/get_human_size.ts:14
+msgid "{n, plural, one {# byte} other {# bytes}}"
+msgstr ""
+
+#: src/containers/task-management/task-list-view.tsx:345
+msgid "{name} will be cancelled."
+msgstr ""

@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import { EmptyStateCustom } from './empty-state-custom';
 import { LockIcon } from '@patternfly/react-icons';
@@ -9,8 +10,8 @@ export class EmptyStateUnauthorized extends React.Component<IProps> {
     return (
       <EmptyStateCustom
         icon={LockIcon}
-        title={_`You do not have access to Automation Hub`}
-        description={_`Contact you organization administrator for more information.`}
+        title={t`You do not have access to Automation Hub`}
+        description={t`Contact you organization administrator for more information.`}
       />
     );
   }

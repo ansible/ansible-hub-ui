@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import { Button, InputGroup, TextInput } from '@patternfly/react-core';
 
@@ -30,7 +31,7 @@ export class WriteOnlyField extends React.Component<IProps> {
         />
         {isValueSet && (
           <Button onClick={() => onClear()} variant='control'>
-            {_`Clear`}
+            {t`Clear`}
           </Button>
         )}
       </InputGroup>

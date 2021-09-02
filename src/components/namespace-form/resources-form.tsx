@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './namespace-form.scss';
 import { NamespaceType } from 'src/api';
@@ -30,7 +31,7 @@ export class ResourcesForm extends React.Component<IProps, {}> {
       <MarkdownEditor
         text={namespace.resources}
         placeholder={placeholder}
-        helperText={_`You can can customize the Resources tab on your profile by entering custom markdown here.`}
+        helperText={t`You can can customize the Resources tab on your profile by entering custom markdown here.`}
         updateText={(value) => this.updateResources(value)}
         editing={true}
       />

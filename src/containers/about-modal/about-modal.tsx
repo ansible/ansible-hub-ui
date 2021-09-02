@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import {
   AboutModal,
@@ -61,37 +62,37 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
         <TextContent>
           <TextList component={TextListVariants.dl}>
             <TextListItem component={TextListItemVariants.dt}>
-              {_`Server version`}
+              {t`Server version`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {this.state.applicationInfo.server_version}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              {_`Pulp Ansible Version`}
+              {t`Pulp Ansible Version`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {this.state.applicationInfo.pulp_ansible_version}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              {_`Username`}
+              {t`Username`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {userName}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              {_`User Groups`}
+              {t`User Groups`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {user.groups.map((group) => group.name).join()}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              {_`Browser Version`}
+              {t`Browser Version`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {browser.name + ' ' + browser.version}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              {_`Browser OS`}
+              {t`Browser OS`}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               {browser.os}

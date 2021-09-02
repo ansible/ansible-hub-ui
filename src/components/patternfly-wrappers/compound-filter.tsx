@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import {
@@ -111,7 +112,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
 
         const toggle = [
           <SelectGroup
-            label={_`Filter by ` + selectedFilter.id}
+            label={t`Filter by ${selectedFilter.id}`}
             key={selectedFilter.id}
           >
             {options}
@@ -124,7 +125,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             onToggle={this.onToggle}
             onSelect={this.onSelectMultiple}
             isOpen={this.state.isOpen}
-            placeholderText={_`Filter by ` + selectedFilter.id.toLowerCase()}
+            placeholderText={t`Filter by ${selectedFilter.id.toLowerCase()}`}
             selections={this.props.params[this.state.selectedFilter.id]}
             isGrouped
           >
@@ -160,7 +161,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             aria-label={selectedFilter.id}
             placeholder={
               selectedFilter.placeholder ||
-              _`Filter by ${selectedFilter.title.toLowerCase()}`
+              t`Filter by ${selectedFilter.title.toLowerCase()}`
             }
             value={this.state.inputText}
             onChange={(k) => this.setState({ inputText: k })}

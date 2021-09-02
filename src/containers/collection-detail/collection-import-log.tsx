@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -73,7 +74,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
         }),
         name: collection.name,
       },
-      { name: _`Import log` },
+      { name: t`Import log` },
     ];
 
     return (
@@ -106,7 +107,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadData(forceReload = false) {
-    const failMsg = _`Could not load import log`;
+    const failMsg = t`Could not load import log`;
     this.setState({ loadingImports: true }, () => {
       this.loadCollection(this.context.selectedRepo, forceReload, () => {
         ImportAPI.list({

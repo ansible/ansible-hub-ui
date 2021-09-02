@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import { Chip, ChipGroup, Button } from '@patternfly/react-core';
@@ -40,7 +41,7 @@ export class AppliedFilters extends React.Component<IProps, {}> {
             (key) => this.renderGroup(key),
           )}
           <Button onClick={this.clearAllFilters} variant='link'>
-            {_`Clear all filters`}
+            {t`Clear all filters`}
           </Button>
         </div>
       );

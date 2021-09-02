@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './search.scss';
 
@@ -92,7 +93,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       <div className='search-page'>
         <BaseHeader
           className='header'
-          title={_`Collections`}
+          title={t`Collections`}
           contextSelector={
             <RepoSelector
               selectedRepo={this.context.selectedRepo}
@@ -144,8 +145,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
         </BaseHeader>
         {noData ? (
           <EmptyStateNoData
-            title={_`No collections yet`}
-            description={_`Collections will appear once uploaded`}
+            title={t`No collections yet`}
+            description={t`Collections will appear once uploaded`}
           />
         ) : (
           <React.Fragment>
@@ -219,7 +220,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       <Switch
         id={namespace + '.' + name}
         className='sync-toggle'
-        label={_`Sync`}
+        label={t`Sync`}
         isChecked={this.isCollectionSynced(name, namespace)}
         onChange={() => this.toggleCollectionSync(name, namespace)}
       />
@@ -262,7 +263,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     return (
       <div className='list-container'>
         <div className='list'>
-          <DataList className='data-list' aria-label={_`List of Collections`}>
+          <DataList className='data-list' aria-label={t`List of Collections`}>
             {collections.map((c) => (
               <CollectionListItem
                 showNamespace={true}

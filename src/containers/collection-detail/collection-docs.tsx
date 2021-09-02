@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './collection-detail.scss';
 
@@ -113,7 +114,7 @@ class CollectionDocs extends React.Component<
         }),
         name: collection.name,
       },
-      { name: _`Documentation` },
+      { name: t`Documentation` },
     ];
 
     // scroll to top of page
@@ -260,10 +261,8 @@ class CollectionDocs extends React.Component<
   private renderNotFound(collectionName) {
     return (
       <EmptyStateCustom
-        title={_`Not found`}
-        description={
-          _`The file is not available for this version of ` + collectionName
-        }
+        title={t`Not found`}
+        description={t`The file is not available for this version of ${collectionName}`}
         icon={ExclamationCircleIcon}
       />
     );

@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import {
   withRouter,
@@ -64,10 +65,10 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
 
     const notAuthorized = !!user && !user.model_permissions.view_user;
     const breadcrumbs = [
-      { url: Paths.userList, name: _`Users` },
+      { url: Paths.userList, name: t`Users` },
       { name: userDetail.username },
     ];
-    const title = _`User details`;
+    const title = t`User details`;
 
     return (
       <>
@@ -112,7 +113,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
                         userID: userDetail.id,
                       })}
                     >
-                      <Button>{_`Edit`}</Button>
+                      <Button>{t`Edit`}</Button>
                     </Link>
                   </div>
                 ) : null}
@@ -122,7 +123,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
                       variant='secondary'
                       onClick={() => this.setState({ showDeleteModal: true })}
                     >
-                      {_`Delete`}
+                      {t`Delete`}
                     </Button>
                   </div>
                 ) : null}

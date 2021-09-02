@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import {
   withRouter,
@@ -79,8 +80,8 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
         <UserFormPage
           isMe={true}
           user={user}
-          breadcrumbs={[{ name: _`Settings` }, { name: _`My profile` }]}
-          title={_`My profile`}
+          breadcrumbs={[{ name: t`Settings` }, { name: t`My profile` }]}
+          title={t`My profile`}
           errorMessages={errorMessages}
           updateUser={(user) => this.setState({ user: user })}
           saveUser={this.saveUser}
@@ -98,7 +99,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <div>
                   <Button onClick={() => this.setState({ inEditMode: true })}>
-                    {_`Edit`}
+                    {t`Edit`}
                   </Button>
                 </div>
               </div>
@@ -117,7 +118,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
           {
             inEditMode: false,
             alerts: this.state.alerts.concat([
-              { variant: 'success', title: _`Profile saved.` },
+              { variant: 'success', title: t`Profile saved.` },
             ]),
           },
           () => this.context.setUser(result.data),

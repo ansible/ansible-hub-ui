@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -57,7 +58,7 @@ class CollectionContent extends React.Component<
         }),
         name: collection.name,
       },
-      { name: _`Content` },
+      { name: t`Content` },
     ];
 
     return (

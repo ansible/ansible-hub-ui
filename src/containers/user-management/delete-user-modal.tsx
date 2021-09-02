@@ -1,3 +1,4 @@
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { UserType, UserAPI } from 'src/api';
 import { mapErrorMessages } from 'src/utilities';
@@ -37,7 +38,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
         deleteAction={() => this.deleteUser()}
         isDisabled={isWaitingForResponse || this.isUserSelfOrAdmin(user)}
         spinner={isWaitingForResponse}
-        title={_`Delete user?`}
+        title={t`Delete user?`}
       >
         {this.getActionDescription(user)}
       </DeleteModal>
@@ -46,15 +47,15 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
 
   private getActionDescription(user: UserType) {
     if (user.is_superuser) {
-      return _`Deleting super users is not allowed.`;
+      return t`Deleting super users is not allowed.`;
     } else if (user.id === this.context.user.id) {
-      return _`Deleting yourself is not allowed.`;
+      return t`Deleting yourself is not allowed.`;
     }
 
     return (
-      <>
+      <Trans>
         <b>{user.username}</b> will be permanently deleted.
-      </>
+      </Trans>
     );
   }
 
@@ -68,7 +69,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
         .then(() => this.waitForDeleteConfirm(this.props.user.id))
         .catch((err) => {
           this.props.addAlert(
-            _`Error deleting user.`,
+            t`Error deleting user.`,
             'danger',
             mapErrorMessages(err)['__nofield'],
           );
@@ -89,10 +90,10 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
       })
       .catch((err) => {
         if (err.response.status === 404) {
-          this.props.addAlert(_`Successfully deleted user.`, 'success');
+          this.props.addAlert(t`Successfully deleted user.`, 'success');
           this.props.closeModal(true);
         } else {
-          this.props.addAlert(_`Error deleting user.`, 'danger');
+          this.props.addAlert(t`Error deleting user.`, 'danger');
         }
 
         this.setState({ isWaitingForResponse: false });

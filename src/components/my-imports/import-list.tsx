@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import cx from 'classnames';
 import './my-imports.scss';
@@ -70,28 +71,28 @@ export class ImportList extends React.Component<IProps, IState> {
             filterConfig={[
               {
                 id: 'keywords',
-                title: _`Name`,
+                title: t`Name`,
               },
               {
                 id: 'state',
-                title: _`Status`,
+                title: t`Status`,
                 inputType: 'select',
                 options: [
                   {
                     id: 'completed',
-                    title: _`Completed`,
+                    title: t`Completed`,
                   },
                   {
                     id: 'failed',
-                    title: _`Failed`,
+                    title: t`Failed`,
                   },
                   {
                     id: 'running',
-                    title: _`Running`,
+                    title: t`Running`,
                   },
                   {
                     id: 'waiting',
-                    title: _`Waiting`,
+                    title: t`Waiting`,
                   },
                 ],
               },
@@ -106,8 +107,8 @@ export class ImportList extends React.Component<IProps, IState> {
           params={params}
           ignoredParams={['page_size', 'page', 'sort', 'ordering', 'namespace']}
           niceNames={{
-            keywords: _`Name`,
-            state: _`Status`,
+            keywords: t`Name`,
+            state: t`Status`,
           }}
         />
 
@@ -144,8 +145,8 @@ export class ImportList extends React.Component<IProps, IState> {
     ) {
       return (
         <EmptyStateNoData
-          title={_`No imports`}
-          description={_`There have not been any imports on this namespace.`}
+          title={t`No imports`}
+          description={t`There have not been any imports on this namespace.`}
         />
       );
     } else if (importList.length === 0) {
@@ -210,7 +211,7 @@ export class ImportList extends React.Component<IProps, IState> {
   private renderNamespacePicker(namespaces) {
     return (
       <div className='namespace-selector-wrapper'>
-        <div className='label'>{_`Namespace`}</div>
+        <div className='label'>{t`Namespace`}</div>
         <div className='selector'>
           <FormSelect
             onChange={(val) => {
@@ -223,7 +224,7 @@ export class ImportList extends React.Component<IProps, IState> {
               this.props.updateParams(params);
             }}
             value={this.props.params.namespace}
-            aria-label={_`Select namespace`}
+            aria-label={t`Select namespace`}
           >
             {namespaces.map((ns) => (
               <FormSelectOption key={ns.name} label={ns.name} value={ns.name} />

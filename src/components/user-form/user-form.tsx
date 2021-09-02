@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import {
@@ -74,18 +75,18 @@ export class UserForm extends React.Component<IProps, IState> {
     } = this.props;
     const { passwordConfirm } = this.state;
     const formFields = [
-      { id: 'username', title: _`Username` },
-      { id: 'first_name', title: _`First name` },
-      { id: 'last_name', title: _`Last name` },
-      { id: 'email', title: _`Email` },
+      { id: 'username', title: t`Username` },
+      { id: 'first_name', title: t`First name` },
+      { id: 'last_name', title: t`Last name` },
+      { id: 'email', title: t`Email` },
       !isReadonly && {
         id: 'password',
-        title: _`Password`,
+        title: t`Password`,
         type: 'password',
         placeholder: isNewUser ? '' : '••••••••••••••••••••••',
         formGroupLabelIcon: (
           <HelperText
-            content={_`Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions.`}
+            content={t`Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions.`}
           />
         ),
       },
@@ -95,10 +96,10 @@ export class UserForm extends React.Component<IProps, IState> {
     const passwordConfirmGroup = () => (
       <FormGroup
         fieldId='password-confirm'
-        helperTextInvalid={_`Passwords do not match`}
+        helperTextInvalid={t`Passwords do not match`}
         isRequired={isNewUser || !!user.password}
         key='confirm-group'
-        label={_`Password confirmation`}
+        label={t`Password confirmation`}
         validated={this.toError(
           this.isPassSame(user.password, passwordConfirm),
         )}
@@ -123,7 +124,7 @@ export class UserForm extends React.Component<IProps, IState> {
       <FormGroup
         fieldId='groups'
         key='readonlyGroups'
-        label={_`Groups`}
+        label={t`Groups`}
         aria-labelledby='readonly-groups'
       >
         {user.groups.map((group) => (
@@ -137,14 +138,14 @@ export class UserForm extends React.Component<IProps, IState> {
         fieldId='groups'
         helperTextInvalid={errorMessages['groups']}
         key='editGroups'
-        label={_`Groups`}
+        label={t`Groups`}
         validated={this.toError(!('groups' in errorMessages))}
       >
         <APISearchTypeAhead
           results={this.state.searchGroups}
           loadResults={this.loadGroups}
           onSelect={this.onSelectGroup}
-          placeholderText={_`Select groups`}
+          placeholderText={t`Select groups`}
           selections={user.groups}
           multiple={true}
           onClear={this.clearGroups}
@@ -158,12 +159,12 @@ export class UserForm extends React.Component<IProps, IState> {
         validated={this.toError(!('is_superuser' in errorMessages))}
         fieldId='is_superuser'
         key='superuserLabel'
-        label={_`User type`}
+        label={t`User type`}
         helperTextInvalid={errorMessages['is_superuser']}
         helperText={this.getSuperUserHelperText(user)}
       >
         <Tooltip
-          content={_`Super users have all system permissions regardless of what groups they are in.`}
+          content={t`Super users have all system permissions regardless of what groups they are in.`}
         >
           <Switch
             isDisabled={
@@ -171,8 +172,8 @@ export class UserForm extends React.Component<IProps, IState> {
               isReadonly ||
               this.context.user.id === user.id
             }
-            label={_`Super user`}
-            labelOff={_`Not a super user`}
+            label={t`Super user`}
+            labelOff={t`Not a super user`}
             isChecked={user.is_superuser}
             onChange={(e) =>
               this.updateUserFieldByName(!user.is_superuser, 'is_superuser')
@@ -191,10 +192,10 @@ export class UserForm extends React.Component<IProps, IState> {
             !this.requiredFilled(user)
           }
         >
-          {_`Save`}
+          {t`Save`}
         </Button>
         <Button key='cancel' onClick={() => onCancel()} variant='link'>
-          {_`Cancel`}
+          {t`Cancel`}
         </Button>
       </ActionGroup>
     );
@@ -222,10 +223,10 @@ export class UserForm extends React.Component<IProps, IState> {
 
   private getSuperUserHelperText(user) {
     if (!this.context.user.is_superuser) {
-      return _`Requires super user permissions to edit.`;
+      return t`Requires super user permissions to edit.`;
     }
     if (this.context.user.id === user.id) {
-      return _`Super users can't disable themselves.`;
+      return t`Super users can't disable themselves.`;
     }
 
     return null;

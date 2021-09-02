@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import {
@@ -74,7 +75,7 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
           <DropdownToggle onToggle={(e) => this.onToggle(e)}>
             {this.state.selected
               ? this.state.selected
-              : defaultText || _`Dropdown`}
+              : defaultText || t`Dropdown`}
           </DropdownToggle>
         );
       case 'icon':
@@ -85,7 +86,7 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
           >
             {this.state.selected
               ? this.state.selected
-              : defaultText || _`Dropdown`}
+              : defaultText || t`Dropdown`}
           </DropdownToggle>
         );
       case 'kebab':

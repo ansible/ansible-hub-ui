@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import { Link } from 'react-router-dom';
@@ -28,7 +29,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
     if (repositories.length === 0) {
       return (
         <EmptyStateNoData
-          title={_`No local repositories yet`}
+          title={t`No local repositories yet`}
           description={''}
         />
       );
@@ -41,32 +42,32 @@ export class LocalRepositoryTable extends React.Component<IProps> {
     let sortTableOptions = {
       headers: [
         {
-          title: _`Distribution name`,
+          title: t`Distribution name`,
           type: 'none',
           id: 'distribution',
         },
         {
-          title: _`Repository name`,
+          title: t`Repository name`,
           type: 'none',
           id: 'repository',
         },
         {
-          title: _`Content count`,
+          title: t`Content count`,
           type: 'none',
           id: 'content',
         },
         {
-          title: _`Last updated`,
+          title: t`Last updated`,
           type: 'none',
           id: 'updated_at',
         },
         {
-          title: _`Repo URL`,
+          title: t`Repo URL`,
           type: 'none',
           id: 'ansible_cli_url',
         },
         {
-          title: _`CLI configuration`,
+          title: t`CLI configuration`,
           type: 'none',
           id: 'cli_config',
         },
@@ -86,7 +87,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
 
     return (
       <table
-        aria-label={_`Collection versions`}
+        aria-label={t`Collection versions`}
         className='content-table pf-c-table'
       >
         <SortTable
@@ -145,7 +146,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
                   key='2'
                   component={
                     <Link to={formatPath(Paths.token, {})} target='_blank'>
-                      {_`Get token`}
+                      {t`Get token`}
                     </Link>
                   }
                 />,

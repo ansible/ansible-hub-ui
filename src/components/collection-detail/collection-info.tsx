@@ -1,3 +1,4 @@
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './collection-info.scss';
 
@@ -57,7 +58,7 @@ export class CollectionInfo extends React.Component<IProps> {
 
     return (
       <div className='pf-c-content info-panel'>
-        <h1>{_`Install`}</h1>
+        <h1>{t`Install`}</h1>
         <Grid hasGutter={true}>
           <GridItem>{latest_version.metadata.description}</GridItem>
           <GridItem>
@@ -68,13 +69,13 @@ export class CollectionInfo extends React.Component<IProps> {
 
           <GridItem>
             <Split hasGutter={true}>
-              <SplitItem className='install-title'>{_`License`}</SplitItem>
+              <SplitItem className='install-title'>{t`License`}</SplitItem>
               <SplitItem isFilled>{latest_version.metadata.license}</SplitItem>
             </Split>
           </GridItem>
           <GridItem>
             <Split hasGutter={true}>
-              <SplitItem className='install-tile'>{_`Install Version`}</SplitItem>
+              <SplitItem className='install-tile'>{t`Install Version`}</SplitItem>
               <SplitItem isFilled>
                 <FormSelect
                   onChange={(val) =>
@@ -83,7 +84,7 @@ export class CollectionInfo extends React.Component<IProps> {
                   value={
                     params.version ? params.version : latest_version.version
                   }
-                  aria-label={_`Select collection version`}
+                  aria-label={t`Select collection version`}
                 >
                   {all_versions.map((v) => (
                     <FormSelectOption
@@ -102,12 +103,14 @@ export class CollectionInfo extends React.Component<IProps> {
           </GridItem>
           <GridItem>
             <Split hasGutter={true}>
-              <SplitItem className='install-title'>{_`Installation`}</SplitItem>
+              <SplitItem className='install-title'>{t`Installation`}</SplitItem>
               <SplitItem isFilled>
                 <ClipboardCopy isReadOnly>{installCommand}</ClipboardCopy>
                 <div>
-                  <b>Note:</b> Installing collections with ansible-galaxy is
-                  only supported in ansible 2.9+
+                  <Trans>
+                    <b>Note:</b> Installing collections with ansible-galaxy is
+                    only supported in ansible 2.9+
+                  </Trans>
                 </div>
                 <div>
                   <a ref={this.downloadLinkRef} style={{ display: 'none' }}></a>
@@ -124,7 +127,7 @@ export class CollectionInfo extends React.Component<IProps> {
                       )
                     }
                   >
-                    {_`Download tarball`}
+                    {t`Download tarball`}
                   </Button>
                 </div>
               </SplitItem>
@@ -134,7 +137,7 @@ export class CollectionInfo extends React.Component<IProps> {
             <GridItem>
               <Split hasGutter={true}>
                 <SplitItem className='install-title'>
-                  {_`Requires Ansible`}
+                  {t`Requires Ansible`}
                 </SplitItem>
                 <SplitItem isFilled>
                   {latest_version.requires_ansible}
@@ -165,7 +168,7 @@ export class CollectionInfo extends React.Component<IProps> {
                   params,
                 )}
               >
-                {_`Go to documentation`}
+                {t`Go to documentation`}
               </Link>
             </GridItem>
           ) : null}

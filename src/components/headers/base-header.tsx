@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import cx from 'classnames';
 import './header.scss';
@@ -43,7 +44,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
             {imageURL ? (
               <Logo
                 className='image'
-                alt={_`Page logo`}
+                alt={t`Page logo`}
                 image={imageURL}
                 size='40px'
                 unlockWidth={true}

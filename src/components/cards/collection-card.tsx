@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import cx from 'classnames';
 import {
@@ -88,7 +89,7 @@ export class CollectionCard extends React.Component<IProps> {
     if (repo === Constants.CERTIFIED_REPO) {
       return (
         <Text component={TextVariants.small}>
-          <Badge isRead>{_`Certified`}</Badge>
+          <Badge isRead>{t`Certified`}</Badge>
         </Text>
       );
     }

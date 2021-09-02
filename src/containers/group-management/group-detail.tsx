@@ -1,3 +1,4 @@
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 
 import {
@@ -117,7 +118,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         this.setState({ group: result.data });
       })
       .catch((e) =>
-        this.addAlert(_`Error loading group.`, 'danger', e.message),
+        this.addAlert(t`Error loading group.`, 'danger', e.message),
       );
 
     GroupAPI.getPermissions(this.state.params.id)
@@ -131,7 +132,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         });
       })
       .catch((e) =>
-        this.addAlert(_`Error loading permissions.`, 'danger', e.message),
+        this.addAlert(t`Error loading permissions.`, 'danger', e.message),
       );
   }
 
@@ -152,9 +153,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     } = this.state;
     const { user } = this.context;
 
-    const tabs = [_`Permissions`];
+    const tabs = [t`Permissions`];
     if (!!user && user.model_permissions.view_user) {
-      tabs.push(_`Users`);
+      tabs.push(t`Users`);
     }
 
     if (!group && alerts && alerts.length) {
@@ -186,13 +187,13 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <BaseHeader
           title={
             editPermissions && params.tab == 'permissions'
-              ? _`Edit group permissions`
+              ? t`Edit group permissions`
               : group.name
           }
           breadcrumbs={
             <Breadcrumbs
               links={[
-                { url: Paths.groupList, name: _`Groups` },
+                { url: Paths.groupList, name: t`Groups` },
                 { name: group.name },
               ]}
             />
@@ -203,7 +204,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             <div className='tabs'>
               <Tabs
                 isDisabled={editPermissions}
-                disabledTitle={_`Please finish editing permissions first.`}
+                disabledTitle={t`Please finish editing permissions first.`}
                 tabs={tabs}
                 params={params}
                 updateParams={(p) => this.updateParams(p)}
@@ -234,7 +235,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           onClick={() => this.setState({ showDeleteModal: true })}
           variant='secondary'
         >
-          {_`Delete`}
+          {t`Delete`}
         </Button>
       </ToolbarItem>
     );
@@ -260,7 +261,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             permission: permission,
           }).catch((e) =>
             this.addAlert(
-              _`Permission ${permission} was not added.`,
+              t`Permission ${permission} was not added.`,
               'danger',
               e.message,
             ),
@@ -275,7 +276,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         promises.push(
           GroupAPI.removePermission(group.id, original.id).catch((e) =>
             this.addAlert(
-              _`Permission ${original.name} was not removed.`,
+              t`Permission ${original.name} was not removed.`,
               'danger',
               e.message,
             ),
@@ -319,7 +320,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           {!editPermissions && user.model_permissions.change_group && (
             <Button onClick={() => this.setState({ editPermissions: true })}>
-              {_`Edit`}
+              {t`Edit`}
             </Button>
           )}
         </div>
@@ -389,14 +390,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                 isDisabled={savingPermissions}
                 onClick={() => this.actionSavePermissions()}
               >
-                {_`Save`}
+                {t`Save`}
               </Button>
               <Button
                 variant='secondary'
                 isDisabled={savingPermissions}
                 onClick={() => this.actionCancelPermissions()}
               >
-                {_`Cancel`}
+                {t`Cancel`}
               </Button>
             </ActionGroup>
           </Form>
@@ -422,7 +423,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         title={''}
         header={
           <span className='pf-c-content'>
-            <h2>{_`Add selected users to group`}</h2>{' '}
+            <h2>{t`Add selected users to group`}</h2>{' '}
           </span>
         }
         actions={[
@@ -436,10 +437,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               )
             }
           >
-            {_`Add`}
+            {t`Add`}
           </Button>,
           <Button key='cancel' variant='link' onClick={close}>
-            {_`Cancel`}
+            {t`Cancel`}
           </Button>,
         ]}
       >
@@ -465,7 +466,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                 });
               })
               .catch((e) =>
-                this.addAlert(_`Error loading users.`, 'danger', e.message),
+                this.addAlert(t`Error loading users.`, 'danger', e.message),
               )
           }
           onSelect={(event, selection) => {
@@ -493,7 +494,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               });
             }
           }}
-          placeholderText={_`Select users`}
+          placeholderText={t`Select users`}
           selections={this.state.selected}
           menuAppendTo={'parent'}
           multiple={true}
@@ -518,11 +519,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           this.setState({
             showDeleteModal: false,
           });
-          this.addAlert(_`Successfully deleted group.`, 'success');
+          this.addAlert(t`Successfully deleted group.`, 'success');
           this.setState({ redirect: Paths.groupList });
         })
         .catch((e) =>
-          this.addAlert(_`Error deleting group.`, 'danger', e.message),
+          this.addAlert(t`Error deleting group.`, 'danger', e.message),
         );
     };
 
@@ -545,13 +546,18 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const group = this.state.group;
     const user = this.state.showUserRemoveModal as UserType;
 
+    const username = { user };
+    const groupname = group.name;
+
     return (
       <DeleteModal
         cancelAction={() => this.setState({ showUserRemoveModal: null })}
         deleteAction={() => this.deleteUser(user)}
-        title={_`Remove user from group?`}
+        title={t`Remove user from group?`}
       >
-        <b>{user.username}</b> will be removed from <b>{group.name}</b>.
+        <Trans>
+          <b>{username}</b> will be removed from <b>{groupname}</b>.
+        </Trans>
       </DeleteModal>
     );
   }
@@ -567,7 +573,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       }),
     )
       .catch((e) =>
-        this.addAlert(_`Error updating users.`, 'danger', e.message),
+        this.addAlert(t`Error updating users.`, 'danger', e.message),
       )
       .then(() => this.queryUsers());
   }
@@ -581,7 +587,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         this.setState({ options, allUsers: result.data.data });
       })
       .catch((e) =>
-        this.addAlert(_`Error loading users.`, 'danger', e.message),
+        this.addAlert(t`Error loading users.`, 'danger', e.message),
       );
   }
 
@@ -612,8 +618,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     if (noData) {
       return (
         <EmptyStateNoData
-          title={_`No users yet`}
-          description={_`Users will appear once added to this group`}
+          title={t`No users yet`}
+          description={t`Users will appear once added to this group`}
           button={
             !!user &&
             user.model_permissions.change_group &&
@@ -622,7 +628,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                 variant='primary'
                 onClick={() => this.setState({ addModalVisible: true })}
               >
-                {_`Add`}
+                {t`Add`}
               </Button>
             )
           }
@@ -645,19 +651,19 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                     filterConfig={[
                       {
                         id: 'username',
-                        title: _`Username`,
+                        title: t`Username`,
                       },
                       {
                         id: 'first_name',
-                        title: _`First name`,
+                        title: t`First name`,
                       },
                       {
                         id: 'last_name',
-                        title: _`Last name`,
+                        title: t`Last name`,
                       },
                       {
                         id: 'email',
-                        title: _`Email`,
+                        title: t`Email`,
                       },
                     ]}
                   />
@@ -671,7 +677,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                       <Button
                         onClick={() => this.setState({ addModalVisible: true })}
                       >
-                        {_`Add`}
+                        {t`Add`}
                       </Button>
                     </ToolbarItem>
                   </ToolbarGroup>
@@ -714,27 +720,27 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     let sortTableOptions = {
       headers: [
         {
-          title: _`Username`,
+          title: t`Username`,
           type: 'alpha',
           id: 'username',
         },
         {
-          title: _`Email`,
+          title: t`Email`,
           type: 'alpha',
           id: 'email',
         },
         {
-          title: _`Last name`,
+          title: t`Last name`,
           type: 'alpha',
           id: 'last_name',
         },
         {
-          title: _`First name`,
+          title: t`First name`,
           type: 'alpha',
           id: 'first_name',
         },
         {
-          title: _`Created`,
+          title: t`Created`,
           type: 'numeric',
           id: 'date_joined',
         },
@@ -747,7 +753,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     };
 
     return (
-      <table aria-label={_`User list`} className='content-table pf-c-table'>
+      <table aria-label={t`User list`} className='content-table pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -789,7 +795,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                     key='delete'
                     onClick={() => this.setState({ showUserRemoveModal: user })}
                   >
-                    {_`Remove`}
+                    {t`Remove`}
                   </DropdownItem>,
                 ]}
               ></StatefulDropdown>
@@ -811,7 +817,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         }),
       )
       .catch((e) =>
-        this.addAlert(_`Error loading users.`, 'danger', e.message),
+        this.addAlert(t`Error loading users.`, 'danger', e.message),
       );
   }
 
@@ -825,12 +831,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         this.setState({
           showUserRemoveModal: null,
         });
-        this.addAlert(_`Successfully removed a user from a group.`, 'success');
+        this.addAlert(t`Successfully removed a user from a group.`, 'success');
         this.queryUsers();
       })
       .catch((e) =>
         this.addAlert(
-          _`Error removing user from a group.`,
+          t`Error removing user from a group.`,
           'danger',
           e.message,
         ),

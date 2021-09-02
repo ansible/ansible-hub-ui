@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './certification-dashboard.scss';
 
@@ -113,7 +114,7 @@ class CertificationDashboard extends React.Component<
 
     return (
       <React.Fragment>
-        <BaseHeader title={_`Approval dashboard`}></BaseHeader>
+        <BaseHeader title={t`Approval dashboard`}></BaseHeader>
         <AlertList
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -135,28 +136,28 @@ class CertificationDashboard extends React.Component<
                         filterConfig={[
                           {
                             id: 'namespace',
-                            title: _`Namespace`,
+                            title: t`Namespace`,
                           },
                           {
                             id: 'name',
-                            title: _`Collection Name`,
+                            title: t`Collection Name`,
                           },
                           {
                             id: 'repository',
-                            title: _`Status`,
+                            title: t`Status`,
                             inputType: 'select',
                             options: [
                               {
                                 id: Constants.NOTCERTIFIED,
-                                title: _`Rejected`,
+                                title: t`Rejected`,
                               },
                               {
                                 id: Constants.NEEDSREVIEW,
-                                title: _`Needs Review`,
+                                title: t`Needs Review`,
                               },
                               {
                                 id: Constants.PUBLISHED,
-                                title: _`Approved`,
+                                title: t`Approved`,
                               },
                             ],
                           },
@@ -184,13 +185,13 @@ class CertificationDashboard extends React.Component<
                   ignoredParams={['page_size', 'page', 'sort']}
                   niceValues={{
                     repository: {
-                      [Constants.PUBLISHED]: _`Approved`,
-                      [Constants.NEEDSREVIEW]: _`Needs Review`,
-                      [Constants.NOTCERTIFIED]: _`Rejected`,
+                      [Constants.PUBLISHED]: t`Approved`,
+                      [Constants.NEEDSREVIEW]: t`Needs Review`,
+                      [Constants.NOTCERTIFIED]: t`Rejected`,
                     },
                   }}
                   niceNames={{
-                    repository: _`Status`,
+                    repository: t`Status`,
                   }}
                 />
               </div>
@@ -222,35 +223,35 @@ class CertificationDashboard extends React.Component<
         <EmptyStateFilter />
       ) : (
         <EmptyStateNoData
-          title={_`No managed collections yet`}
-          description={_`Collections will appear once uploaded`}
+          title={t`No managed collections yet`}
+          description={t`Collections will appear once uploaded`}
         />
       );
     }
     let sortTableOptions = {
       headers: [
         {
-          title: _`Namespace`,
+          title: t`Namespace`,
           type: 'alpha',
           id: 'namespace',
         },
         {
-          title: _`Collection`,
+          title: t`Collection`,
           type: 'alpha',
           id: 'collection',
         },
         {
-          title: _`Version`,
+          title: t`Version`,
           type: 'number',
           id: 'version',
         },
         {
-          title: _`Date created`,
+          title: t`Date created`,
           type: 'number',
           id: 'pulp_created',
         },
         {
-          title: _`Status`,
+          title: t`Status`,
           type: 'none',
           id: 'status',
         },
@@ -264,7 +265,7 @@ class CertificationDashboard extends React.Component<
 
     return (
       <table
-        aria-label={_`Collection versions`}
+        aria-label={t`Collection versions`}
         className='content-table pf-c-table'
       >
         <SortTable
@@ -291,7 +292,7 @@ class CertificationDashboard extends React.Component<
           <CheckCircleIcon
             style={{ color: 'var(--pf-global--success-color--100)' }}
           />{' '}
-          {_`Approved`}
+          {t`Approved`}
         </span>
       );
     }
@@ -301,7 +302,7 @@ class CertificationDashboard extends React.Component<
           <ExclamationCircleIcon
             style={{ color: 'var(--pf-global--danger-color--100)' }}
           />{' '}
-          {_`Rejected`}
+          {t`Rejected`}
         </span>
       );
     }
@@ -311,7 +312,7 @@ class CertificationDashboard extends React.Component<
           <InfoCircleIcon
             style={{ color: 'var(--pf-global--info-color--100)' }}
           />{' '}
-          {_`Needs Review`}
+          {t`Needs Review`}
         </span>
       );
     }
@@ -374,7 +375,7 @@ class CertificationDashboard extends React.Component<
               },
             )}
           >
-            {_`View Import Logs`}
+            {t`View Import Logs`}
           </Link>
         }
       />
@@ -388,7 +389,7 @@ class CertificationDashboard extends React.Component<
         isDisabled={isDisabled}
         key='certify'
       >
-        {_`Approve`}
+        {t`Approve`}
       </DropdownItem>
     );
 
@@ -405,7 +406,7 @@ class CertificationDashboard extends React.Component<
         className='rejected-icon'
         key='reject'
       >
-        {_`Reject`}
+        {t`Reject`}
       </DropdownItem>
     );
 
@@ -447,7 +448,7 @@ class CertificationDashboard extends React.Component<
               )
             }
           >
-            <span>{_`Approve`}</span>
+            <span>{t`Approve`}</span>
           </Button>
           <StatefulDropdown
             items={[rejectDropDown(false, Constants.NEEDSREVIEW), importsLink]}
@@ -486,8 +487,8 @@ class CertificationDashboard extends React.Component<
               updatingVersions: [],
               alerts: this.state.alerts.concat({
                 variant: 'danger',
-                title: _`API Error: ${error.response.status}`,
-                description: _`Could not update the certification status for ${version.namespace}.${version.name}.${version.version}.`,
+                title: t`API Error: ${error.response.status}`,
+                description: t`Could not update the certification status for ${version.namespace}.${version.name}.${version.version}.`,
               }),
             });
           }),
@@ -514,8 +515,8 @@ class CertificationDashboard extends React.Component<
           updatingVersions: [],
           alerts: this.state.alerts.concat({
             variant: 'danger',
-            title: _`API Error: 500`,
-            description: _`Could not update the certification status for ${version.namespace}.${version.name}.${version.version}.`,
+            title: t`API Error: 500`,
+            description: t`Could not update the certification status for ${version.namespace}.${version.name}.${version.version}.`,
           }),
         });
       }

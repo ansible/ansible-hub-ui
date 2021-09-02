@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 
@@ -80,7 +81,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
       options.push(
         <SelectOption
           key={'not_found'}
-          value={_`Not found`}
+          value={t`Not found`}
           isDisabled={true}
         />,
       );

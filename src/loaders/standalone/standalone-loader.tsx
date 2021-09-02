@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 // import PropTypes from 'prop-types';
 import * as React from 'react';
 import '../app.scss';
@@ -108,7 +109,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         <DropdownItem
           key='profile'
           component={
-            <Link to={Paths.userProfileSettings}>{_`My profile`}</Link>
+            <Link to={Paths.userProfileSettings}>{t`My profile`}</Link>
           }
         ></DropdownItem>,
 
@@ -119,7 +120,7 @@ class App extends React.Component<RouteComponentProps, IState> {
             ActiveUserAPI.logout().then(() => this.setState({ user: null }))
           }
         >
-          {_`Logout`}
+          {t`Logout`}
         </DropdownItem>,
       ];
 
@@ -144,7 +145,7 @@ class App extends React.Component<RouteComponentProps, IState> {
             this.setState({ aboutModalVisible: true, toggleOpen: false })
           }
         >
-          {_`About`}
+          {t`About`}
         </DropdownItem>,
       ];
 
@@ -154,7 +155,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           trademark=''
           brandImageSrc={Logo}
           onClose={() => this.setState({ aboutModalVisible: false })}
-          brandImageAlt={_`Galaxy Logo`}
+          brandImageAlt={t`Galaxy Logo`}
           productName={APPLICATION_NAME}
           user={user}
           userName={userName}
@@ -184,7 +185,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                   { next: this.props.location.pathname },
                 )}
               >
-                {_`Login`}
+                {t`Login`}
               </Link>
             ) : (
               <div>
@@ -318,43 +319,43 @@ class App extends React.Component<RouteComponentProps, IState> {
     });
 
     return [
-      menuSection(_`Collections`, {}, [
-        menuItem(_`Collections`, {
+      menuSection(t`Collections`, {}, [
+        menuItem(t`Collections`, {
           url: formatPath(Paths.searchByRepo, {
             repo: this.state.selectedRepo,
           }),
         }),
-        menuItem(_`Namespaces`, {
+        menuItem(t`Namespaces`, {
           url: Paths[NAMESPACE_TERM],
         }),
-        menuItem(_`Repository Management`, {
+        menuItem(t`Repository Management`, {
           url: Paths.repositories,
         }),
-        menuItem(_`API Token`, {
+        menuItem(t`API Token`, {
           url: Paths.token,
         }),
-        menuItem(_`Approval`, {
+        menuItem(t`Approval`, {
           condition: ({ user }) => user.model_permissions.move_collection,
           url: Paths.approvalDashboard,
         }),
       ]),
-      menuItem(_`Container Registry`, {
+      menuItem(t`Container Registry`, {
         condition: ({ featureFlags }) => featureFlags.execution_environments,
         url: Paths.executionEnvironments,
       }),
-      menuItem(_`Task Management`, {
+      menuItem(t`Task Management`, {
         url: Paths.taskList,
       }),
-      menuItem(_`Documentation`, {
+      menuItem(t`Documentation`, {
         url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
         external: true,
       }),
-      menuSection(_`User Access`, {}, [
-        menuItem(_`Users`, {
+      menuSection(t`User Access`, {}, [
+        menuItem(t`Users`, {
           condition: ({ user }) => user.model_permissions.view_user,
           url: Paths.userList,
         }),
-        menuItem(_`Groups`, {
+        menuItem(t`Groups`, {
           condition: ({ user }) => user.model_permissions.view_group,
           url: Paths.groupList,
         }),

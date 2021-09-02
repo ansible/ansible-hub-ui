@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './task.scss';
 import { Constants } from 'src/constants';
@@ -96,11 +97,11 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
         {cancelModalVisible ? this.renderCancelModal() : null}
-        <BaseHeader title={_`Task Management`} />
+        <BaseHeader title={t`Task Management`} />
         {noData && !loading ? (
           <EmptyStateNoData
-            title={_`No tasks yet`}
-            description={_`Tasks will appear once created.`}
+            title={t`No tasks yet`}
+            description={t`Tasks will appear once created.`}
           />
         ) : (
           <Main>
@@ -122,28 +123,28 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                             filterConfig={[
                               {
                                 id: 'name__contains',
-                                title: _`Task name`,
+                                title: t`Task name`,
                               },
                               {
                                 id: 'state',
-                                title: _`Status`,
+                                title: t`Status`,
                                 inputType: 'select',
                                 options: [
                                   {
                                     id: 'completed',
-                                    title: _`Completed`,
+                                    title: t`Completed`,
                                   },
                                   {
                                     id: 'failed',
-                                    title: _`Failed`,
+                                    title: t`Failed`,
                                   },
                                   {
                                     id: 'running',
-                                    title: _`Running`,
+                                    title: t`Running`,
                                   },
                                   {
                                     id: 'waiting',
-                                    title: _`Waiting`,
+                                    title: t`Waiting`,
                                   },
                                 ],
                               },
@@ -170,8 +171,8 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort', 'ordering']}
                     niceNames={{
-                      name__contains: _`Task name`,
-                      state: _`Status`,
+                      name__contains: t`Task name`,
+                      state: t`Status`,
                     }}
                   />
                 </div>
@@ -201,27 +202,27 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     let sortTableOptions = {
       headers: [
         {
-          title: _`Task name`,
+          title: t`Task name`,
           type: 'alpha',
           id: 'name',
         },
         {
-          title: _`Created on`,
+          title: t`Created on`,
           type: 'numeric',
           id: 'pulp_created',
         },
         {
-          title: _`Started at`,
+          title: t`Started at`,
           type: 'numeric',
           id: 'started_at',
         },
         {
-          title: _`Finished at`,
+          title: t`Finished at`,
           type: 'numeric',
           id: 'finished_at',
         },
         {
-          title: _`Status`,
+          title: t`Status`,
           type: 'alpha',
           id: 'state',
         },
@@ -229,7 +230,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     };
 
     return (
-      <table aria-label={_`Task list`} className='content-table pf-c-table'>
+      <table aria-label={t`Task list`} className='content-table pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -270,7 +271,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         return (
           <Button
             variant='secondary'
-            aria-label={_`Delete`}
+            aria-label={t`Delete`}
             key='delete'
             onClick={() =>
               this.setState({
@@ -279,14 +280,14 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
               })
             }
           >
-            {_`Stop task`}
+            {t`Stop task`}
           </Button>
         );
       case 'waiting':
         return (
           <Button
             variant='secondary'
-            aria-label={_`Delete`}
+            aria-label={t`Delete`}
             key='delete'
             onClick={() =>
               this.setState({
@@ -295,7 +296,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
               })
             }
           >
-            {_`Stop task`}
+            {t`Stop task`}
           </Button>
         );
     }
@@ -340,8 +341,8 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       <DeleteModal
         cancelAction={() => this.setState({ cancelModalVisible: false })}
         deleteAction={() => this.selectedTask(this.state.selectedTask, name)}
-        title={_`Stop task?`}
-        children={_`${name} will be cancelled.`}
+        title={t`Stop task?`}
+        children={t`${name} will be cancelled.`}
       />
     );
   }
@@ -360,7 +361,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
             {
               variant: 'success',
               title: name,
-              description: _`Successfully stopped task.`,
+              description: t`Successfully stopped task.`,
             },
           ],
         });
@@ -375,7 +376,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
             {
               variant: 'danger',
               title: name,
-              description: _`Error stopping task.`,
+              description: t`Error stopping task.`,
             },
           ],
         }),

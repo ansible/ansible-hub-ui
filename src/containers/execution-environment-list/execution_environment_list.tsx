@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment.scss';
 
@@ -97,11 +98,11 @@ class ExecutionEnvironmentList extends React.Component<
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
-        <BaseHeader title={_`Container Registry`}></BaseHeader>
+        <BaseHeader title={t`Container Registry`}></BaseHeader>
         {noData && !loading ? (
           <EmptyStateNoData
-            title={_`No container repositories yet`}
-            description={_`You currently have no container repositories. Add a container repository via the CLI to get started.`}
+            title={t`No container repositories yet`}
+            description={t`You currently have no container repositories. Add a container repository via the CLI to get started.`}
             button={pushImagesButton}
           />
         ) : (
@@ -126,7 +127,7 @@ class ExecutionEnvironmentList extends React.Component<
                             filterConfig={[
                               {
                                 id: 'name',
-                                title: _`Container repository name`,
+                                title: t`Container repository name`,
                               },
                             ]}
                           />
@@ -181,22 +182,22 @@ class ExecutionEnvironmentList extends React.Component<
     let sortTableOptions = {
       headers: [
         {
-          title: _`Container repository name`,
+          title: t`Container repository name`,
           type: 'alpha',
           id: 'name',
         },
         {
-          title: _`Description`,
+          title: t`Description`,
           type: 'alpha',
           id: 'description',
         },
         {
-          title: _`Created`,
+          title: t`Created`,
           type: 'numeric',
           id: 'created',
         },
         {
-          title: _`Last modified`,
+          title: t`Last modified`,
           type: 'alpha',
           id: 'updated',
         },
@@ -204,7 +205,7 @@ class ExecutionEnvironmentList extends React.Component<
     };
 
     return (
-      <table aria-label={_`User list`} className='content-table pf-c-table'>
+      <table aria-label={t`User list`} className='content-table pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
