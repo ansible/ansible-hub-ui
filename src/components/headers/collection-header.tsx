@@ -96,6 +96,13 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const latestVersion = collection.latest_version.created_at;
 
+    const isLatestVersion = (v) =>
+      `${moment(v.created).fromNow()} ${
+        v.version === all_versions[0].version ? t`(latest)` : ''
+      }`;
+
+    const { name: collectionName } = collection;
+
     return (
       <React.Fragment>
         <Modal
@@ -106,7 +113,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         >
           <List isPlain>
             <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
-              {collection.name}'s versions.
+              {t`${collectionName}'s versions.`}
             </Text>
             {all_versions.map((v) => (
               <ListItem key={v.version}>
@@ -126,8 +133,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 >
                   v{v.version}
                 </Button>{' '}
-                released {moment(v.created).fromNow()}{' '}
-                {v.version === all_versions[0].version ? '(latest)' : ''}
+                {t`released ${isLatestVersion(v)}`}
               </ListItem>
             ))}
           </List>
@@ -174,8 +180,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                         )
                       }
                     >
-                      {v.version} released {moment(v.created).fromNow()}{' '}
-                      {v.version === all_versions[0].version ? '(latest)' : ''}
+                      <Trans>
+                        {v.version} released {isLatestVersion(v)}
+                      </Trans>
                     </SelectOption>
                   ))}
                 </Select>
