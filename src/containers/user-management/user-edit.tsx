@@ -39,7 +39,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
+      return <Redirect push to={this.state.redirect} />;
     }
 
     const { user, errorMessages, unauthorized } = this.state;
