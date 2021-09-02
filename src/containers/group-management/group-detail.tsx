@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 
 import {
   AlertList,
@@ -65,6 +70,7 @@ interface IState {
   showUserRemoveModal: UserType | null;
   permissions: string[];
   originalPermissions: { id: number; name: string }[];
+  redirect?: string;
 }
 
 class GroupDetail extends React.Component<RouteComponentProps, IState> {
@@ -130,6 +136,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to={this.state.redirect} />;
+    }
+
     const {
       addModalVisible,
       alerts,
@@ -509,7 +519,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             showDeleteModal: false,
           });
           this.addAlert(_`Successfully deleted group.`, 'success');
-          this.props.history.push(Paths.groupList);
+          this.setState({ redirect: Paths.groupList });
         })
         .catch((e) =>
           this.addAlert(_`Error deleting group.`, 'danger', e.message),
