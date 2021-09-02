@@ -40,6 +40,7 @@ import {
 } from 'src/components';
 
 import { ImportModal } from './import-modal/import-modal';
+import { DeleteCollectionModal } from '../collection-detail/delete-collection-modal';
 
 import { ParamHelper, getRepoUrl, filterIsSet } from 'src/utilities';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
@@ -62,6 +63,7 @@ interface IState {
   warning: string;
   updateCollection: CollectionListType;
   showControls: boolean;
+  isOpenNamespaceModal: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -94,6 +96,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       warning: '',
       updateCollection: null,
       showControls: false, // becomes true when my-namespaces doesn't 404
+      isOpenNamespaceModal: false,
     };
   }
 
@@ -167,6 +170,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           setOpen={(isOpen, warn) => this.toggleImportModal(isOpen, warn)}
           collection={updateCollection}
           namespace={namespace.name}
+        />
+        <DeleteCollectionModal
+          isOpen={this.state.isOpenNamespaceModal}
+          closeModal={this.closeModal}
+          namespace={this.state.namespace}
         />
         {warning ? (
           <Alert
@@ -394,17 +402,19 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             <Tooltip
               key='2'
               content={
-                <>
+                <Trans>
                   Cannot delete namespace until <br />
                   collections' dependencies have <br />
                   been deleted
-                </>
+                </Trans>
               }
               position='left'
             >
               <DropdownItem
-                component={<Link to={'not-found'}>{t`Delete namespace`}</Link>}
-              />
+                onClick={() => this.setState({ isOpenNamespaceModal: true })}
+              >
+                {t`Delete namespace`}
+              </DropdownItem>
             </Tooltip>,
             <DropdownItem
               key='3'
@@ -440,6 +450,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     this.setState(newState);
   }
+
+  private closeModal = () => {
+    this.setState({ isOpenNamespaceModal: false });
+  };
 }
 
 NamespaceDetail.contextType = AppContext;
