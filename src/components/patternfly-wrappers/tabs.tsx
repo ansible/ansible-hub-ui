@@ -4,14 +4,14 @@ import { Tab, Tabs as PFTabs, TabTitleText } from '@patternfly/react-core';
 
 import { ParamHelper } from 'src/utilities/param-helper';
 
-export type TabsType = {
+export class TabsType {
   id: string;
   name: string;
-}[];
+}
 
 interface IProps {
   /** List of names for tabs */
-  tabs: TabsType;
+  tabs: TabsType[];
   /** Current page params */
   params: { tab?: string };
 

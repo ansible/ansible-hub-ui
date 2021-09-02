@@ -8,7 +8,7 @@ import { NamespaceType } from 'src/api';
 
 interface IProps {
   namespace: NamespaceType;
-  tabs: TabsType;
+  tabs: TabsType[];
   breadcrumbs: {
     url?: string;
     name: string;
