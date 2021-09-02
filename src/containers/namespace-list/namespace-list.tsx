@@ -101,7 +101,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
+      return <Redirect push to={this.state.redirect} />;
     }
 
     const { namespaces, params, itemCount } = this.state;
