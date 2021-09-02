@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { t } from '@lingui/macro';
+
 import { ClipboardCopy as PFClipboardCopy } from '@patternfly/react-core';
 
 interface IProps {
@@ -11,8 +13,8 @@ export class ClipboardCopy extends React.Component<IProps, {}> {
     const { children, ...props } = this.props;
     return (
       <PFClipboardCopy
-        hoverTip={_`Copy to clipboard`}
-        clickTip={_`Successfully copied to clipboard!`}
+        hoverTip={t`Copy to clipboard`}
+        clickTip={t`Successfully copied to clipboard!`}
         {...props}
       >
         {children}

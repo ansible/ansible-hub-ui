@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { t } from '@lingui/macro';
 
 import {
   Pagination as PaginationPF,
@@ -60,11 +61,11 @@ export class Pagination extends React.Component<IProps> {
           perPageOptions || Constants.DEFAULT_PAGINATION_OPTIONS,
         )}
         titles={{
-          ofWord: _`of`,
-          perPageSuffix: _`per page`,
+          ofWord: t`of`,
+          perPageSuffix: t`per page`,
           items: null,
         }}
-        toggleTemplate={(props) => <ToggleTemplate ofWord={_`of`} {...props} />}
+        toggleTemplate={(props) => <ToggleTemplate ofWord={t`of`} {...props} />}
       />
     );
   }
