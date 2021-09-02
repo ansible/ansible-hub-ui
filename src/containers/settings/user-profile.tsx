@@ -57,7 +57,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
+      return <Redirect push to={this.state.redirect} />;
     }
 
     const { user, errorMessages, inEditMode, alerts } = this.state;
