@@ -91,7 +91,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     }
 
     if (redirect) {
-      return <Redirect to={redirect} />;
+      return <Redirect push to={redirect} />;
     }
     return (
       <React.Fragment>

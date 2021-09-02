@@ -112,7 +112,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     } = this.state;
 
     if (redirect) {
-      return <Redirect to={redirect} />;
+      return <Redirect push to={redirect} />;
     }
 
     if (!namespace) {

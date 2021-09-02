@@ -33,7 +33,7 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to={this.state.redirect}></Redirect>;
+      return <Redirect push to={this.state.redirect}></Redirect>;
     }
 
     const helperText = (

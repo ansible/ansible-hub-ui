@@ -79,7 +79,7 @@ export function withContainerRepo(WrappedComponent) {
           />
         );
       } else if (this.state.redirect === 'notFound') {
-        return <Redirect to={Paths.notFound} />;
+        return <Redirect push to={Paths.notFound} />;
       }
 
       if (this.state.loading) {
