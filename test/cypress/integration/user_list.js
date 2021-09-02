@@ -76,15 +76,15 @@ describe('User list tests for sorting, paging and filtering', () => {
   });
 
   it('set page size is working', () => {
-    cy.get('.body:first')
+    cy.get('.body')
       .get('button[aria-label="Items per page"]:first')
       .click();
-    cy.get('.body:first').contains('20 per page').click();
+    cy.get('.body').contains('20 per page').click();
 
     range(20).forEach((i) => {
-      cy.get('.body:first').contains(items[i].name);
+      cy.get('.body').contains(items[i].name);
     });
 
-    cy.get('.body:first').contains(items[20].name).should('not.exist');
+    cy.get('.body').contains(items[20].name).should('not.exist');
   });
 });
