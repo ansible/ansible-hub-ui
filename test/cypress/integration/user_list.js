@@ -28,13 +28,6 @@ describe('User list tests for sorting, paging and filtering', () => {
   });
 
   it('table contains all columns', () => {
-    cy.contains('Username');
-    cy.contains('First name');
-    cy.contains('Last name');
-    cy.contains('Email');
-    cy.contains('Groups');
-    cy.contains('Created');
-
     [
       'Username',
       'First name',
