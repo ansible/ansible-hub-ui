@@ -403,7 +403,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               position='left'
             >
               <DropdownItem
-                component={<Link to={'not-found'}>{_`Delete namespace`}</Link>}
+                component={<Link to={'not-found'}>{t`Delete namespace`}</Link>}
               />
             </Tooltip>,
             <DropdownItem
