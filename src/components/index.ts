@@ -49,6 +49,7 @@ export { RemoteForm } from './repositories/remote-form';
 export { RemoteRepositoryTable } from './repositories/remote-repository-table';
 export { RepoSelector } from './repo-selector/repo-selector';
 export { RepositoryForm } from './execution-environment/repository-form';
+export { PublishToControllerModal } from './execution-environment/publish-to-controller-modal';
 export { ResourcesForm } from './namespace-form/resources-form';
 export { ShaLabel } from './sha-label/sha-label';
 export { SmallLogo } from './logo/small-logo';
