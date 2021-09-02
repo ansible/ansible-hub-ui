@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Button, Modal, Spinner } from '@patternfly/react-core';
+import { t } from '@lingui/macro';
 
 interface IProps {
   cancelAction: () => void;
@@ -32,11 +33,11 @@ export class ConfirmModal extends React.Component<IProps> {
             variant='primary'
             isDisabled={isDisabled}
           >
-            {confirmButtonTitle ? confirmButtonTitle : _`Yes`}
+            {confirmButtonTitle ? confirmButtonTitle : t`Yes`}
             {spinner && <Spinner size='sm'></Spinner>}
           </Button>,
           <Button key='cancel' onClick={cancelAction} variant='link'>
-            {_`Cancel`}
+            {t`Cancel`}
           </Button>,
         ]}
         isOpen={true}

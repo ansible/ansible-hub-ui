@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './task.scss';
+import { t } from '@lingui/macro';
 import {
   Link,
   withRouter,
@@ -90,7 +91,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       redirect,
     } = this.state;
     const breadcrumbs = [
-      { url: Paths.taskList, name: _`Task management` },
+      { url: Paths.taskList, name: t`Task management` },
       { name: !!task ? taskName : '' },
     ];
     let parentTaskId = null;
@@ -119,7 +120,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                 variant='secondary'
                 onClick={() => this.setState({ cancelModalVisible: true })}
               >
-                {_`Stop task`}
+                {t`Stop task`}
               </Button>
             )
           }
@@ -136,24 +137,24 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
               <FlexItem>
                 <section className='body card-area'>
                   <Title headingLevel='h2' size='lg'>
-                    {_`Task detail`}
+                    {t`Task detail`}
                   </Title>
                   <br />
                   <DescriptionList isHorizontal>
                     <DescriptionListGroup>
-                      <DescriptionListTerm>{_`Task name`}</DescriptionListTerm>
+                      <DescriptionListTerm>{t`Task name`}</DescriptionListTerm>
                       <DescriptionListDescription>
                         <Tooltip content={task.name}>{taskName}</Tooltip>
                       </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup>
-                      <DescriptionListTerm>{_`Finished at`}</DescriptionListTerm>
+                      <DescriptionListTerm>{t`Finished at`}</DescriptionListTerm>
                       <DescriptionListDescription>
                         <DateComponent date={task.finished_at} />
                       </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup>
-                      <DescriptionListTerm>{_`Created on`}</DescriptionListTerm>
+                      <DescriptionListTerm>{t`Created on`}</DescriptionListTerm>
                       <DescriptionListDescription>
                         <DateComponent date={task.pulp_created} />
                       </DescriptionListDescription>
@@ -164,18 +165,18 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
               <FlexItem>
                 <section className='body card-area'>
                   <Title headingLevel='h2' size='lg'>
-                    {_`Task groups`}
+                    {t`Task groups`}
                   </Title>
                   <br />
                   <DescriptionList isHorizontal>
                     <DescriptionListGroup>
-                      <DescriptionListTerm>{_`Task group`}</DescriptionListTerm>
+                      <DescriptionListTerm>{t`Task group`}</DescriptionListTerm>
                       <DescriptionListDescription>
-                        {!!task.task_group ? task.task_group : _`No task group`}
+                        {!!task.task_group ? task.task_group : t`No task group`}
                       </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup>
-                      <DescriptionListTerm>{_`Parent task`}</DescriptionListTerm>
+                      <DescriptionListTerm>{t`Parent task`}</DescriptionListTerm>
                       <DescriptionListDescription>
                         {!!parentTask ? (
                           <Link
@@ -187,12 +188,12 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                               parentTask.name}
                           </Link>
                         ) : (
-                          _`No parent task`
+                          t`No parent task`
                         )}
                       </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup>
-                      <DescriptionListTerm>{_`Child tasks`}</DescriptionListTerm>
+                      <DescriptionListTerm>{t`Child tasks`}</DescriptionListTerm>
                       <DescriptionListDescription>
                         {!!childTasks.length
                           ? childTasks.map((childTask) => {
@@ -214,7 +215,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                                 </React.Fragment>
                               );
                             })
-                          : _`No child task`}
+                          : t`No child task`}
                       </DescriptionListDescription>
                     </DescriptionListGroup>
                   </DescriptionList>
@@ -223,7 +224,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
               <FlexItem>
                 <section className='body card-area'>
                   <Title headingLevel='h2' size='lg'>
-                    {_`Reserve resources`}
+                    {t`Reserve resources`}
                   </Title>
                   <br />
                   {!!resources.length ? (
@@ -233,14 +234,14 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                           <React.Fragment key={resource.type + index}>
                             <hr />
                             <DescriptionListGroup>
-                              <DescriptionListTerm>{_`Type`}</DescriptionListTerm>
+                              <DescriptionListTerm>{t`Type`}</DescriptionListTerm>
                               <DescriptionListDescription>
                                 {resource.type}
                               </DescriptionListDescription>
                             </DescriptionListGroup>
                             {resource.name && (
                               <DescriptionListGroup>
-                                <DescriptionListTerm>{_`Name`}</DescriptionListTerm>
+                                <DescriptionListTerm>{t`Name`}</DescriptionListTerm>
                                 <DescriptionListDescription>
                                   {resource.name}
                                 </DescriptionListDescription>
@@ -251,7 +252,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                       })}
                     </DescriptionList>
                   ) : (
-                    _`There's no resource record`
+                    t`There's no resource record`
                   )}
                 </section>
               </FlexItem>
@@ -264,7 +265,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                 {!task.error && (
                   <section className='body card-area'>
                     <Title headingLevel='h2' size='lg'>
-                      {_`Progress messages`}
+                      {t`Progress messages`}
                     </Title>
                     <br />
                     {!!task.progress_reports.length ? (
@@ -296,8 +297,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                     ) : (
                       <EmptyStateCustom
                         icon={CubesIcon}
-                        title={_`There is no progress message.`}
-                        description={_`There is no progress message.`}
+                        title={t`There is no progress message.`}
+                        description={t`There is no progress message.`}
                       />
                     )}
                   </section>
@@ -305,13 +306,13 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                 {!!task.error && (
                   <section className='body card-area'>
                     <Title headingLevel='h2' size='lg'>
-                      {_`Error message`}
+                      {t`Error message`}
                     </Title>
                     <br />
                     <React.Fragment>
-                      <Title headingLevel='h3'>{_`Description`}</Title>
+                      <Title headingLevel='h3'>{t`Description`}</Title>
                       <CodeBlock>{task.error.description}</CodeBlock>
-                      <Title headingLevel='h3'>{_`Traceback`}</Title>
+                      <Title headingLevel='h3'>{t`Traceback`}</Title>
                       <CodeBlock className={'code-block'}>
                         {task.error.traceback}
                       </CodeBlock>
@@ -332,9 +333,9 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       <ConfirmModal
         cancelAction={() => this.setState({ cancelModalVisible: false })}
         confirmAction={() => this.cancelTask()}
-        title={_`Stop task`}
-        children={_`${name} will stop running.`}
-        confirmButtonTitle={_`Yes, stop`}
+        title={t`Stop task`}
+        children={t`${name} will stop running.`}
+        confirmButtonTitle={t`Yes, stop`}
       />
     );
   }
@@ -353,7 +354,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             {
               variant: 'success',
               title: taskName,
-              description: _`Successfully stopped task.`,
+              description: t`Successfully stopped task.`,
             },
           ],
         });
@@ -368,7 +369,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             {
               variant: 'danger',
               title: taskName,
-              description: _`Error stopping task.`,
+              description: t`Error stopping task.`,
             },
           ],
         });
