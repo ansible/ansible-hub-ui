@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import {
   BaseHeader,
@@ -15,6 +15,7 @@ import { AppContext } from 'src/loaders/app-context';
 interface IState {
   user: UserType;
   errorMessages: object;
+  redirect?: string;
 }
 
 class UserCreate extends React.Component<RouteComponentProps, IState> {
@@ -36,6 +37,10 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to={this.state.redirect} />;
+    }
+
     const { user, errorMessages } = this.state;
     const notAuthorised =
       !this.context.user || !this.context.user.model_permissions.add_user;
@@ -63,7 +68,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
           this.setState({ user: user, errorMessages: errorMessages })
         }
         saveUser={this.saveUser}
-        onCancel={() => this.props.history.push(Paths.userList)}
+        onCancel={() => this.setState({ redirect: Paths.userList })}
         isNewUser={true}
       ></UserFormPage>
     );
@@ -71,7 +76,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
   private saveUser = () => {
     const { user } = this.state;
     UserAPI.create(user)
-      .then((result) => this.props.history.push(Paths.userList))
+      .then((result) => this.setState({ redirect: Paths.userList }))
       .catch((err) => {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });

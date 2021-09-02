@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import {
   BaseHeader,
@@ -17,6 +17,7 @@ interface IState {
   user: UserType;
   errorMessages: object;
   unauthorized: boolean;
+  redirect?: string;
 }
 
 class UserEdit extends React.Component<RouteComponentProps, IState> {
@@ -37,6 +38,10 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to={this.state.redirect} />;
+    }
+
     const { user, errorMessages, unauthorized } = this.state;
     const title = _`Edit user`;
 
@@ -72,7 +77,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
           this.setState({ user: user, errorMessages: errorMessages })
         }
         saveUser={this.saveUser}
-        onCancel={() => this.props.history.push(Paths.userList)}
+        onCancel={() => this.setState({ redirect: Paths.userList })}
       />
     );
   }
@@ -82,9 +87,9 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
       .then(() => {
         //redirect to login page when password of logged user is changed
         if (this.context.user.id === user.id && user.password) {
-          this.props.history.push(Paths.login);
+          this.setState({ redirect: Paths.login });
         } else {
-          this.props.history.push(Paths.userList);
+          this.setState({ redirect: Paths.userList });
         }
       })
       .catch((err) => {
