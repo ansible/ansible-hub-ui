@@ -1,10 +1,20 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import cx from 'classnames';
 import './header.scss';
 
+import * as moment from 'moment';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import { FormSelect, FormSelectOption, Alert } from '@patternfly/react-core';
+import {
+  Select,
+  SelectOption,
+  SelectVariant,
+  List,
+  ListItem,
+  Modal,
+  Alert,
+  Text,
+  Button,
+} from '@patternfly/react-core';
 import { AppContext } from 'src/loaders/app-context';
 
 import {
@@ -13,6 +23,7 @@ import {
   LinkTabs,
   RepoSelector,
 } from 'src/components';
+
 import { CollectionDetailType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -34,9 +45,23 @@ interface IProps {
   repo?: string;
 }
 
-export class CollectionHeader extends React.Component<IProps> {
+interface IState {
+  isOpenSelect: boolean;
+  isOpenShowMoreModal: boolean;
+}
+
+export class CollectionHeader extends React.Component<IProps, IState> {
   ignoreParams = ['showing', 'keyords'];
   static contextType = AppContext;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOpenSelect: false,
+      isOpenShowMoreModal: false,
+    };
+  }
 
   render() {
     const {
@@ -72,78 +97,130 @@ export class CollectionHeader extends React.Component<IProps> {
     const latestVersion = collection.latest_version.created_at;
 
     return (
-      <BaseHeader
-        className={className}
-        title={collection.name}
-        imageURL={collection.namespace.avatar_url}
-        contextSelector={
-          <RepoSelector
-            selectedRepo={this.context.selectedRepo}
-            path={Paths.searchByRepo}
-            isDisabled
-          />
-        }
-        breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
-        versionControl={
-          <div className='install-version-column'>
-            <span>{t`Version`}</span>
-            <div className='install-version-dropdown'>
-              <FormSelect
-                onChange={(val) =>
-                  updateParams(ParamHelper.setParam(params, 'version', val))
+      <React.Fragment>
+        <Modal
+          isOpen={this.state.isOpenShowMoreModal}
+          title={t`Collection versions`}
+          variant='small'
+          onClose={() => this.setState({ isOpenShowMoreModal: false })}
+        >
+          <List isPlain>
+            <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+              {collection.name}'s versions.
+            </Text>
+            {all_versions.map((v) => (
+              <ListItem key={v.version}>
+                <Button
+                  variant='link'
+                  isInline
+                  onClick={() => {
+                    updateParams(
+                      ParamHelper.setParam(
+                        params,
+                        'version',
+                        v.version.toString(),
+                      ),
+                    );
+                    this.setState({ isOpenShowMoreModal: false });
+                  }}
+                >
+                  v{v.version}
+                </Button>{' '}
+                released {moment(v.created).fromNow()}{' '}
+                {v.version === all_versions[0].version ? '(latest)' : ''}
+              </ListItem>
+            ))}
+          </List>
+        </Modal>
+        <BaseHeader
+          className={className}
+          title={collection.name}
+          imageURL={collection.namespace.avatar_url}
+          contextSelector={
+            <RepoSelector
+              selectedRepo={this.context.selectedRepo}
+              path={Paths.searchByRepo}
+              isDisabled
+            />
+          }
+          breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
+          versionControl={
+            <div className='install-version-column'>
+              <span>{t`Version`}</span>
+              <div className='install-version-dropdown'>
+                <Select
+                  isOpen={this.state.isOpenSelect}
+                  onToggle={(isOpenSelect) => this.setState({ isOpenSelect })}
+                  variant={SelectVariant.single}
+                  onSelect={() => this.setState({ isOpenSelect: false })}
+                  selections={`v${collection.latest_version.version}`}
+                  aria-label={t`Select collection version`}
+                  loadingVariant={{
+                    text: t`Show more`,
+                    onClick: () => this.setState({ isOpenShowMoreModal: true }),
+                  }}
+                >
+                  {all_versions.map((v) => (
+                    <SelectOption
+                      key={v.version}
+                      value={`v${v.version}`}
+                      onClick={() =>
+                        updateParams(
+                          ParamHelper.setParam(
+                            params,
+                            'version',
+                            v.version.toString(),
+                          ),
+                        )
+                      }
+                    >
+                      {v.version} released {moment(v.created).fromNow()}{' '}
+                      {v.version === all_versions[0].version ? '(latest)' : ''}
+                    </SelectOption>
+                  ))}
+                </Select>
+              </div>
+              {latestVersion ? (
+                <span className='last-updated'>
+                  <Trans>
+                    Last updated <DateComponent date={latestVersion} />
+                  </Trans>
+                </span>
+              ) : null}
+            </div>
+          }
+        >
+          {collection.deprecated && (
+            <Alert
+              variant='danger'
+              isInline
+              title={t`This collection has been deprecated.`}
+            />
+          )}
+          <div className='tab-link-container'>
+            <div className='tabs'>{this.renderTabs(activeTab)}</div>
+            <div className='links'>
+              <div>
+                <ExternalLinkAltIcon />
+              </div>
+              {urlKeys.map((link) => {
+                const l = collection.latest_version.metadata[link.key];
+                if (!l) {
+                  return null;
                 }
-                value={collection.latest_version.version}
-                aria-label={t`Select collection version`}
-              >
-                {all_versions.map((v) => (
-                  <FormSelectOption
-                    key={v.version}
-                    value={v.version}
-                    label={'v' + v.version}
-                  />
-                ))}
-              </FormSelect>
-            </div>
-            {latestVersion ? (
-              <span className='last-updated'>
-                <Trans>
-                  Last updated <DateComponent date={latestVersion} />
-                </Trans>
-              </span>
-            ) : null}
-          </div>
-        }
-      >
-        {collection.deprecated && (
-          <Alert
-            variant='danger'
-            isInline
-            title={t`This collection has been deprecated.`}
-          />
-        )}
-        <div className='tab-link-container'>
-          <div className='tabs'>{this.renderTabs(activeTab)}</div>
-          <div className='links'>
-            <div>
-              <ExternalLinkAltIcon />
-            </div>
-            {urlKeys.map((link) => {
-              const l = collection.latest_version.metadata[link.key];
-              if (!l) {
-                return null;
-              }
 
-              return (
-                <div className='link' key={link.key}>
-                  <a href={l} target='_blank'>
-                    {link.name}
-                  </a>
-                </div>
-              );
-            })}
+                return (
+                  <div className='link' key={link.key}>
+                    <a href={l} target='_blank'>
+                      {link.name}
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </BaseHeader>
+        </BaseHeader>
+      </React.Fragment>
     );
   }
 

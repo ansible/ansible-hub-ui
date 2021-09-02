@@ -2,7 +2,6 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './collection-info.scss';
 
-import * as moment from 'moment';
 import { Link } from 'react-router-dom';
 
 import {
@@ -10,8 +9,6 @@ import {
   SplitItem,
   Grid,
   GridItem,
-  FormSelect,
-  FormSelectOption,
   Button,
 } from '@patternfly/react-core';
 
@@ -20,7 +17,6 @@ import { DownloadIcon } from '@patternfly/react-icons';
 import { CollectionDetailType, CollectionAPI } from 'src/api';
 import { Tag, ClipboardCopy } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import { ParamHelper } from 'src/utilities/param-helper';
 import { AppContext } from 'src/loaders/app-context';
 import { userLanguage } from 'src/l10n';
 
@@ -41,14 +37,7 @@ export class CollectionInfo extends React.Component<IProps> {
   }
 
   render() {
-    const {
-      name,
-      latest_version,
-      namespace,
-      all_versions,
-      params,
-      updateParams,
-    } = this.props;
+    const { name, latest_version, namespace, params } = this.props;
 
     let installCommand = `ansible-galaxy collection install ${namespace.name}.${name}`;
 
@@ -73,34 +62,6 @@ export class CollectionInfo extends React.Component<IProps> {
             <Split hasGutter={true}>
               <SplitItem className='install-title'>{t`License`}</SplitItem>
               <SplitItem isFilled>{latest_version.metadata.license}</SplitItem>
-            </Split>
-          </GridItem>
-          <GridItem>
-            <Split hasGutter={true}>
-              <SplitItem className='install-tile'>{t`Install Version`}</SplitItem>
-              <SplitItem isFilled>
-                <FormSelect
-                  onChange={(val) =>
-                    updateParams(ParamHelper.setParam(params, 'version', val))
-                  }
-                  value={
-                    params.version ? params.version : latest_version.version
-                  }
-                  aria-label={t`Select collection version`}
-                >
-                  {all_versions.map((v) => (
-                    <FormSelectOption
-                      key={v.version}
-                      value={v.version}
-                      label={`${v.version} released ${moment(
-                        v.created,
-                      ).fromNow()} ${
-                        v.version === latest_version.version ? '(latest)' : ''
-                      }`}
-                    />
-                  ))}
-                </FormSelect>
-              </SplitItem>
             </Split>
           </GridItem>
           <GridItem>
