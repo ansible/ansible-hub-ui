@@ -86,7 +86,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
     const { user } = this.state;
     UserAPI.update(user.id.toString(), user)
       .then(() => {
-        //redirect to login page when password of logged user is changed
+        //Redirect to login page when password of logged user is changed
         if (this.context.user.id === user.id && user.password) {
           this.setState({ redirect: Paths.login });
         } else {

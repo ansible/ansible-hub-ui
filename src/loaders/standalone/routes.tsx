@@ -128,7 +128,7 @@ class AuthHandler extends React.Component<
     // only enforce this if feature flags are set. Otherwise the container
     // registry will always return a 404 on the first load.
     if (this.props.isDisabled) {
-      return <Redirect to={Paths.notFound}></Redirect>;
+      return <Redirect push to={Paths.notFound}></Redirect>;
     }
 
     return <Component {...props}></Component>;

@@ -281,7 +281,7 @@ export const Routes = (props) => {
       <Route
         render={() =>
           some(Paths, (p) => p === path) ? null : (
-            <Redirect to={Paths.notFound} />
+            <Redirect push to={Paths.notFound} />
           )
         }
       />
