@@ -281,7 +281,12 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                                     !!report[key] && (
                                       <DescriptionListGroup key={key + index}>
                                         <DescriptionListTerm>
-                                          {capitalize(key)}
+                                          {{
+                                            message: t`Message`,
+                                            code: t`Code`,
+                                            state: t`State`,
+                                            done: t`Done`,
+                                          }[key] || capitalize(key)}
                                         </DescriptionListTerm>
                                         <DescriptionListDescription>
                                           {report[key]}
