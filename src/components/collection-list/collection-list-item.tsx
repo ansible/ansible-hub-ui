@@ -83,7 +83,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
           {showNamespace ? (
             <TextContent>
               <Text component={TextVariants.small}>
-                <Trans>Provided by ${company}</Trans>
+                <Trans>Provided by {company}</Trans>
               </Text>
             </TextContent>
           ) : null}
@@ -114,8 +114,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
       <DataListCell isFilled={false} alignRight key='stats'>
         {controls ? <div className='entry'>{controls}</div> : null}
         <div className='right-col entry'>
-          {t`Updated `}
-          <DateComponent date={latest_version.created_at} />
+          {t`Updated`} <DateComponent date={latest_version.created_at} />
         </div>
         <div className='entry'>v{latest_version.version}</div>
       </DataListCell>,

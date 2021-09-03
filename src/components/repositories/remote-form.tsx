@@ -221,7 +221,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               <HelperText
                 content={
                   <Trans>
-                    This uses the same ${docsAnsibleLink}
+                    This uses the same {docsAnsibleLink}
                     format as the ansible-galaxy CLI with the caveat that roles
                     aren't supported and the source parameter is not supported.
                   </Trans>

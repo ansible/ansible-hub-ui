@@ -103,7 +103,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
       userDropdownItems = [
         <DropdownItem isDisabled key='username'>
-          <Trans>Username: ${user.username}</Trans>
+          <Trans>Username: {user.username}</Trans>
         </DropdownItem>,
         <DropdownSeparator key='separator' />,
         <DropdownItem
