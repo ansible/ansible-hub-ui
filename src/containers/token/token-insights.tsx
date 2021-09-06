@@ -71,7 +71,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           </section>
           <section className='body pf-c-content'>
             <Trans>
-              <h2>{t`Connect the ansible-galaxy client`}</h2>
+              <h2>Connect the ansible-galaxy client</h2>
               <p>
                 Documentation on how to configure the{' '}
                 <code>ansible-galaxy</code> client can be found{' '}
