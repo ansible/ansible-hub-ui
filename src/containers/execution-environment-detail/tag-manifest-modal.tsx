@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 
 import { AlertType } from 'src/components';
@@ -219,10 +219,14 @@ export class TagManifestModal extends React.Component<IProps, IState> {
             <Alert
               isInline
               variant='info'
-              title={<>Waiting for {pendingTasks} task(s) to finish.</>}
+              title={
+                <Trans>Waiting for {pendingTasks} task(s) to finish.</Trans>
+              }
             >
-              {t`It's safe to close this window. These tasks will finish in the`}
-              background.
+              <Trans>
+                It's safe to close this window. These tasks will finish in the
+                background.
+              </Trans>
             </Alert>
           )}
         </Form>

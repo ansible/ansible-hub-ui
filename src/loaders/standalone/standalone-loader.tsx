@@ -130,16 +130,18 @@ class App extends React.Component<RouteComponentProps, IState> {
           href='https://access.redhat.com/support'
           target='_blank'
         >
-          {t`Customer Support `}
-          <ExternalLinkAltIcon />
+          <Trans>
+            Customer Support <ExternalLinkAltIcon />
+          </Trans>
         </DropdownItem>,
         <DropdownItem
           key='training'
           href='https://www.ansible.com/resources/webinars-training'
           target='_blank'
         >
-          {t`Training  `}
-          <ExternalLinkAltIcon />
+          <Trans>
+            Training <ExternalLinkAltIcon />
+          </Trans>
         </DropdownItem>,
         <DropdownItem
           key='about'
