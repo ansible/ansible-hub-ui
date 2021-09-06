@@ -4,11 +4,12 @@ import './execution-environment.scss';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
+  Button,
+  DropdownItem,
   Toolbar,
+  ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  ToolbarContent,
-  Button,
 } from '@patternfly/react-core';
 import { ExecutionEnvironmentAPI, ExecutionEnvironmentType } from 'src/api';
 import { filterIsSet, ParamHelper } from 'src/utilities';
@@ -24,7 +25,9 @@ import {
   LoadingPageSpinner,
   Main,
   Pagination,
+  PublishToControllerModal,
   SortTable,
+  StatefulDropdown,
   Tooltip,
   closeAlertMixin,
 } from 'src/components';
@@ -36,6 +39,7 @@ interface IState {
     page?: number;
     page_size?: number;
   };
+  publishToController: { digest?: string; image: string; tag?: string };
   loading: boolean;
   items: ExecutionEnvironmentType[];
   itemCount: number;
@@ -64,6 +68,7 @@ class ExecutionEnvironmentList extends React.Component<
 
     this.state = {
       params: params,
+      publishToController: null,
       items: [],
       loading: true,
       itemCount: 0,
@@ -76,7 +81,8 @@ class ExecutionEnvironmentList extends React.Component<
   }
 
   render() {
-    const { params, itemCount, loading, alerts, items } = this.state;
+    const { params, publishToController, itemCount, loading, alerts, items } =
+      this.state;
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
     const pushImagesButton = (
       <Button
@@ -98,6 +104,13 @@ class ExecutionEnvironmentList extends React.Component<
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
+        <PublishToControllerModal
+          digest={publishToController?.digest}
+          image={publishToController?.image}
+          isOpen={!!publishToController}
+          onClose={() => this.setState({ publishToController: null })}
+          tag={publishToController?.tag}
+        />
         <BaseHeader title={t`Container Registry`}></BaseHeader>
         {noData && !loading ? (
           <EmptyStateNoData
@@ -201,6 +214,11 @@ class ExecutionEnvironmentList extends React.Component<
           type: 'alpha',
           id: 'updated',
         },
+        {
+          title: '',
+          type: 'none',
+          id: 'controls',
+        },
       ],
     };
 
@@ -220,6 +238,21 @@ class ExecutionEnvironmentList extends React.Component<
 
   private renderTableRow(item: any, index: number) {
     const description = item.description;
+    const dropdownItems = [
+      <DropdownItem
+        key='publish-to-controller'
+        onClick={() => {
+          this.setState({
+            publishToController: {
+              image: item.name,
+            },
+          });
+        }}
+      >
+        {t`Use in Controller`}
+      </DropdownItem>,
+    ];
+
     return (
       <tr aria-labelledby={item.name} key={index}>
         <td>
@@ -243,6 +276,9 @@ class ExecutionEnvironmentList extends React.Component<
         </td>
         <td>
           <DateComponent date={item.updated} />
+        </td>
+        <td>
+          <StatefulDropdown items={dropdownItems}></StatefulDropdown>
         </td>
       </tr>
     );
