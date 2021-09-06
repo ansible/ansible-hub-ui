@@ -37,6 +37,9 @@ import {
   RepoSelector,
   StatefulDropdown,
   ClipboardCopy,
+  AlertType,
+  AlertList,
+  closeAlertMixin,
 } from 'src/components';
 
 import { ImportModal } from './import-modal/import-modal';
@@ -64,6 +67,7 @@ interface IState {
   updateCollection: CollectionListType;
   showControls: boolean;
   isOpenNamespaceModal: boolean;
+  alerts: AlertType[];
 }
 
 interface IProps extends RouteComponentProps {
@@ -97,6 +101,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       updateCollection: null,
       showControls: false, // becomes true when my-namespaces doesn't 404
       isOpenNamespaceModal: false,
+      alerts: [],
     };
   }
 
@@ -175,6 +180,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           isOpen={this.state.isOpenNamespaceModal}
           closeModal={this.closeModal}
           namespace={this.state.namespace}
+          addAlert={this.addAlert}
+        />
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={(i) => this.closeAlert(i)}
         />
         {warning ? (
           <Alert
@@ -399,23 +409,29 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 </Link>
               }
             />,
-            <Tooltip
-              key='2'
-              content={
-                <Trans>
-                  Cannot delete namespace until <br />
-                  collections' dependencies have <br />
-                  been deleted
-                </Trans>
-              }
-              position='left'
-            >
-              <DropdownItem
-                onClick={() => this.setState({ isOpenNamespaceModal: true })}
-              >
-                {t`Delete namespace`}
-              </DropdownItem>
-            </Tooltip>,
+            <React.Fragment key={'2'}>
+              {!collections.length ? (
+                <DropdownItem
+                  onClick={() => this.setState({ isOpenNamespaceModal: true })}
+                >
+                  {t`Delete namespace`}
+                </DropdownItem>
+              ) : (
+                <Tooltip
+                  isVisible={false}
+                  content={
+                    <Trans>
+                      Cannot delete namespace until <br />
+                      collections' dependencies have <br />
+                      been deleted
+                    </Trans>
+                  }
+                  position='left'
+                >
+                  <DropdownItem isDisabled>{t`Delete namespace`}</DropdownItem>
+                </Tooltip>
+              )}
+            </React.Fragment>,
             <DropdownItem
               key='3'
               component={
@@ -454,6 +470,24 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private closeModal = () => {
     this.setState({ isOpenNamespaceModal: false });
   };
+
+  private addAlert = (alert) => {
+    if (alert.variant === 'success') {
+      this.setState({ redirect: formatPath(Paths.namespaces, {}) });
+      this.context.setAlerts([...this.context.alerts, alert]);
+    }
+
+    if (alert.variant === 'danger') {
+      this.setState({
+        alerts: [...this.state.alerts, alert],
+        isOpenNamespaceModal: false,
+      });
+    }
+  };
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
 }
 
 NamespaceDetail.contextType = AppContext;

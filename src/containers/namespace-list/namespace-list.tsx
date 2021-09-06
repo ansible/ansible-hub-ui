@@ -16,6 +16,7 @@ import {
   NamespaceModal,
   Pagination,
   Toolbar,
+  AlertList,
 } from 'src/components';
 import { Button, ToolbarItem } from '@patternfly/react-core';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
@@ -100,6 +101,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
   }
 
+  componentWillUnmount() {
+    this.context.setAlerts([]);
+  }
+
   render() {
     if (this.state.redirect) {
       return <Redirect push to={this.state.redirect} />;
@@ -107,7 +112,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     const { namespaces, params, itemCount } = this.state;
     const { filterOwner } = this.props;
-    const { user } = this.context;
+    const { user, alerts } = this.context;
     const noData =
       !filterIsSet(this.state.params, ['keywords']) &&
       namespaces !== undefined &&
@@ -148,6 +153,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             })
           }
         ></NamespaceModal>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={title}>
           <div className='tab-link-container'>
             <div className='tabs'>
@@ -288,6 +294,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
   private get updateParams() {
     return ParamHelper.updateParamsMixin(this.nonURLParams);
+  }
+
+  private closeAlert(i) {
+    this.context.setAlerts([]);
   }
 }
 

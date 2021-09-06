@@ -32,7 +32,7 @@ import { reject, some } from 'lodash';
 import { Routes } from './routes';
 import { Paths, formatPath } from 'src/paths';
 import { ActiveUserAPI, UserType, FeatureFlagsType } from 'src/api';
-import { SmallLogo, StatefulDropdown } from 'src/components';
+import { AlertType, SmallLogo, StatefulDropdown } from 'src/components';
 import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
 import Logo from 'src/../static/images/logo_large.svg';
@@ -44,6 +44,7 @@ interface IState {
   toggleOpen: boolean;
   featureFlags: FeatureFlagsType;
   menuExpandedSections: string[];
+  alerts: AlertType[];
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -56,6 +57,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       toggleOpen: false,
       featureFlags: null,
       menuExpandedSections: [],
+      alerts: [],
     };
   }
 
@@ -413,6 +415,8 @@ class App extends React.Component<RouteComponentProps, IState> {
           selectedRepo: this.state.selectedRepo,
           setRepo: this.setRepo,
           featureFlags: this.state.featureFlags,
+          alerts: this.state.alerts,
+          setAlerts: this.setAlerts,
         }}
       >
         {component}
@@ -430,6 +434,10 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   private setRepo = (path: string) => {
     this.props.history.push(path);
+  };
+
+  private setAlerts = (alerts: AlertType[]) => {
+    this.setState({ alerts });
   };
 }
 

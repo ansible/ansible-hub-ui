@@ -4,7 +4,8 @@ import { t, Trans } from '@lingui/macro';
 import { DeleteModal } from '../../components/delete-modal/delete-modal';
 import { Checkbox, Text } from '@patternfly/react-core';
 
-import { CollectionDetailType, NamespaceType } from 'src/api';
+import { CollectionDetailType, NamespaceAPI, NamespaceType } from 'src/api';
+import { AlertType } from 'src/components';
 
 interface IProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface IProps {
   collection?: CollectionDetailType;
   collectionVersion?: string | null;
   namespace?: NamespaceType;
+  addAlert?: (props: AlertType) => void;
 }
 
 interface IState {
@@ -43,7 +45,9 @@ export class DeleteCollectionModal extends React.Component<IProps, IState> {
           closeModal();
         }}
         deleteAction={() =>
-          namespace ? this.deleteNamespace() : this.deleteCollection()
+          namespace
+            ? this.deleteNamespace(namespace)
+            : this.deleteCollection(collection)
         }
         title={
           namespace
@@ -97,11 +101,25 @@ export class DeleteCollectionModal extends React.Component<IProps, IState> {
     );
   }
 
-  private deleteCollection() {
+  private deleteCollection(collection) {
     console.log('on collection delete');
   }
 
-  private deleteNamespace() {
-    console.log('on namespace delete');
+  private deleteNamespace({ name }) {
+    NamespaceAPI.removeNamespace(name)
+      .then(() => {
+        this.props.addAlert({
+          variant: 'success',
+          title: t`Successfully deleted namespace.`,
+        });
+      })
+      .catch((e) => {
+        this.props.addAlert({
+          variant: 'danger',
+          title: t`Error deleting namespace.`,
+          description: e.message,
+        });
+        this.setState({ confirmDelete: false });
+      });
   }
 }
