@@ -11,19 +11,22 @@ import {
   TaskAPI,
 } from 'src/api';
 import { formatPath, Paths } from '../../paths';
-import { Button } from '@patternfly/react-core';
+import { Button, DropdownItem } from '@patternfly/react-core';
 import {
-  LoadingPageWithHeader,
-  ExecutionEnvironmentHeader,
-  Main,
-  RepositoryForm,
   AlertList,
-  closeAlertMixin,
   AlertType,
+  ExecutionEnvironmentHeader,
+  LoadingPageWithHeader,
+  Main,
+  PublishToControllerModal,
+  RepositoryForm,
+  StatefulDropdown,
+  closeAlertMixin,
 } from 'src/components';
 import { isEqual, isEmpty, xorWith, cloneDeep } from 'lodash';
 
 interface IState {
+  publishToController: { digest?: string; image: string; tag?: string };
   repo: ContainerRepositoryType;
   loading: boolean;
   redirect: string;
@@ -43,6 +46,7 @@ export function withContainerRepo(WrappedComponent) {
       super(props);
 
       this.state = {
+        publishToController: null,
         repo: undefined,
         loading: true,
         redirect: undefined,
@@ -90,11 +94,39 @@ export function withContainerRepo(WrappedComponent) {
         return <LoadingPageWithHeader />;
       }
       const permissions = this.state.repo.namespace.my_permissions;
+      const showEdit =
+        permissions.includes(
+          'container.namespace_change_containerdistribution',
+        ) || permissions.includes('container.change_containernamespace');
+      const dropdownItems = [
+        <DropdownItem
+          key='publish-to-controller'
+          onClick={() => {
+            this.setState({
+              publishToController: {
+                image: this.state.repo.name,
+              },
+            });
+          }}
+        >
+          {t`Use in Controller`}
+        </DropdownItem>,
+      ];
+
+      const { publishToController } = this.state;
+
       return (
         <React.Fragment>
           <AlertList
             alerts={this.state.alerts}
             closeAlert={(i) => this.closeAlert(i)}
+          />
+          <PublishToControllerModal
+            digest={publishToController?.digest}
+            image={publishToController?.image}
+            isOpen={!!publishToController}
+            onClose={() => this.setState({ publishToController: null })}
+            tag={publishToController?.tag}
           />
           <ExecutionEnvironmentHeader
             id={this.props.match.params['container']}
@@ -102,14 +134,14 @@ export function withContainerRepo(WrappedComponent) {
             tab={this.getTab()}
             container={this.state.repo}
             pageControls={
-              permissions.includes(
-                'container.namespace_change_containerdistribution',
-              ) ||
-              permissions.includes('container.change_containernamespace') ? (
-                <Button onClick={() => this.setState({ editing: true })}>
-                  {t`Edit`}
-                </Button>
-              ) : null
+              <>
+                {showEdit ? (
+                  <Button onClick={() => this.setState({ editing: true })}>
+                    {t`Edit`}
+                  </Button>
+                ) : null}
+                <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+              </>
             }
           />
           <Main>
