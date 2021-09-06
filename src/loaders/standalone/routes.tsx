@@ -120,6 +120,7 @@ class AuthHandler extends React.Component<
       }
       return (
         <Redirect
+          push
           to={formatPath(Paths.login, {}, { next: props.location.pathname })}
         ></Redirect>
       );
