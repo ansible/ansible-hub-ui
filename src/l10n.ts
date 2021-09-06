@@ -4,7 +4,7 @@ import * as plurals from 'make-plural/plurals';
 const availableLanguages = ['en', 'es', 'fr', 'nl', 'ja', 'zh'];
 
 // Accept-Language
-const userLanguage =
+export const userLanguage =
   navigator.languages
     .map((lang) => lang.replace(/[-_].*/, ''))
     .filter((lang) => availableLanguages.includes(lang))[0] || 'en';

@@ -22,6 +22,7 @@ import { Tag, ClipboardCopy } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { AppContext } from 'src/loaders/app-context';
+import { userLanguage } from 'src/l10n';
 
 interface IProps extends CollectionDetailType {
   params: {
@@ -51,7 +52,7 @@ export class CollectionInfo extends React.Component<IProps> {
 
     let installCommand = `ansible-galaxy collection install ${namespace.name}.${name}`;
 
-    moment.locale(navigator.language);
+    moment.locale(userLanguage);
 
     if (params.version) {
       installCommand += `:${params.version}`;
