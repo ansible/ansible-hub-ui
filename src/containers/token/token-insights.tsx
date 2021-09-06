@@ -58,36 +58,39 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           <section className='body pf-c-content'>
             <h2>{t`Connect Private Automation Hub`}</h2>
             <p>
-              Use the{' '}
-              <Link to={Paths.repositories}>{t`Repository Management`}</Link>{' '}
-              page to sync collections curated by your organization to the Red
-              Hat Certified repository in your private Automation Hub. Users
-              with the correct permissions can use the sync toggles on the{' '}
-              <Link to={Paths.search}>{t`Collections`}</Link> page to control
-              which collections are added to their organization's sync
-              repository.
+              <Trans>
+                Use the{' '}
+                <Link to={Paths.repositories}>Repository Management</Link> page
+                to sync collections curated by your organization to the Red Hat
+                Certified repository in your private Automation Hub. Users with
+                the correct permissions can use the sync toggles on the{' '}
+                <Link to={Paths.search}>Collections</Link> page to control which
+                collections are added to their organization's sync repository.
+              </Trans>
             </p>
           </section>
           <section className='body pf-c-content'>
-            <h2>{t`Connect the ansible-galaxy client`}</h2>
-            <p>
-              Documentation on how to configure the <code>ansible-galaxy</code>{' '}
-              client can be found{' '}
-              <a
-                href='https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/'
-                target='_blank'
-              >
-                here
-              </a>
-              . Use the following parameters to configure the client.
-            </p>
+            <Trans>
+              <h2>{t`Connect the ansible-galaxy client`}</h2>
+              <p>
+                Documentation on how to configure the{' '}
+                <code>ansible-galaxy</code> client can be found{' '}
+                <a
+                  href='https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/'
+                  target='_blank'
+                >
+                  here
+                </a>
+                . Use the following parameters to configure the client.
+              </p>
+            </Trans>
           </section>
           <section className='body pf-c-content'>
             <h2>{t`Offline token`}</h2>
             <p>
-              {t`Use this token to authenticate clients that need to download`}
+              {t`Use this token to authenticate clients that need to download
               content from Automation Hub. This is a secret token used to
-              protect your content. Store your API token in a secure location.
+              protect your content. Store your API token in a secure location.`}
             </p>
             {tokenData ? (
               <div>
@@ -101,8 +104,8 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               style={{ paddingTop: 'var(--pf-global--spacer--md)' }}
             >
               <span>
-                The token will expire after 30 days of inactivity. Run the
-                command below periodically to prevent your token from expiring.
+                {t`The token will expire after 30 days of inactivity. Run the
+                command below periodically to prevent your token from expiring.`}
               </span>
               <ClipboardCopy
                 isCode
@@ -113,33 +116,37 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               </ClipboardCopy>
             </div>
             <h2>{t`Manage tokens`}</h2>
-            To revoke a token or see all of your tokens, visit the{' '}
+            <Trans>
+              To revoke a token or see all of your tokens, visit the{' '}
+            </Trans>
             <a
               href='https://sso.redhat.com/auth/realms/redhat-external/account/applications'
               target='_blank'
             >
-              offline API token management
+              {t`offline API token management`}
             </a>{' '}
             page.
           </section>
           <section className='body pf-c-content'>
             <h2>{t`Server URL`}</h2>
             <p>
-              {t`Use this URL to configure the API endpoints that clients need to`}
-              download content from Automation Hub.
+              {t`Use this URL to configure the API endpoints that clients need to
+              download content from Automation Hub.`}
             </p>
             <ClipboardCopy isReadOnly>{getRepoUrl('')}</ClipboardCopy>
             <p>
-              {t`Note: this URL contains all collections in Hub. To connect to your`}
-              organization's sync repository use the URL found on{' '}
+              <Trans>
+                Note: this URL contains all collections in Hub. To connect to
+                your organization's sync repository use the URL found on{' '}
+              </Trans>
               <Link to={Paths.repositories}>{t`Repository Management`}</Link>.
             </p>
           </section>
           <section className='body pf-c-content'>
             <h2>{t`SSO URL`}</h2>
             <p>
-              {t`Use this URL to configure the authentication URLs that clients`}
-              need to download content from Automation Hub.
+              {t`Use this URL to configure the authentication URLs that clients
+              need to download content from Automation Hub.`}
             </p>
             <ClipboardCopy isReadOnly>
               https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
