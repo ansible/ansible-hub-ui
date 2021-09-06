@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import * as FileSaver from 'file-saver';
 
@@ -6,7 +6,6 @@ import {
   Form,
   FormGroup,
   TextInput,
-  FileUpload,
   Flex,
   FlexItem,
   Button,
@@ -15,7 +14,7 @@ import {
   ExpandableSection,
 } from '@patternfly/react-core';
 
-import { WriteOnlyField, HelperText } from 'src/components';
+import { WriteOnlyField, HelperText, FileUpload } from 'src/components';
 
 import { DownloadIcon } from '@patternfly/react-icons';
 
@@ -118,6 +117,14 @@ export class RemoteForm extends React.Component<IProps, IState> {
 
   private renderForm(requiredFields, disabledFields) {
     const { remote, errorMessages } = this.props;
+    const docsAnsibleLink = (
+      <a
+        target='_blank'
+        href='https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file'
+      >
+        requirements.yml
+      </a>
+    );
     return (
       <Form>
         <FormGroup
@@ -213,17 +220,11 @@ export class RemoteForm extends React.Component<IProps, IState> {
             labelIcon={
               <HelperText
                 content={
-                  <>
-                    This uses the same{' '}
-                    <a
-                      target='_blank'
-                      href='https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file'
-                    >
-                      requirements.yml
-                    </a>{' '}
-                    format as the ansible-galaxy CLI with the caveat that roles
-                    aren't supported and the source parameter is not supported.
-                  </>
+                  <Trans>
+                    This uses the same {docsAnsibleLink} format as the
+                    ansible-galaxy CLI with the caveat that roles aren't
+                    supported and the source parameter is not supported.
+                  </Trans>
                 }
               />
             }

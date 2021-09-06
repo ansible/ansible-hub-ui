@@ -14,7 +14,6 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  ClipboardCopy,
   DropdownItem,
   LabelGroup,
 } from '@patternfly/react-core';
@@ -33,6 +32,7 @@ import {
   closeAlertMixin,
   AlertType,
   DateComponent,
+  ClipboardCopy,
 } from '../../components';
 
 import { TagManifestModal } from './tag-manifest-modal';

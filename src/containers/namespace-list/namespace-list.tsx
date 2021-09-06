@@ -130,9 +130,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     const title = namespaceBreadcrumb.name;
+    const titleLowerCase = title.toLowerCase();
     const search = filterOwner
       ? t`Search my namespaces`
-      : t`Search all ${title.toLowerCase()}`;
+      : t`Search all ${titleLowerCase}`;
 
     return (
       <div className='namespace-page'>

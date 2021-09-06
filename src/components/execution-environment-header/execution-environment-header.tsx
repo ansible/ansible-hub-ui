@@ -15,7 +15,11 @@ interface IProps {
 
 export class ExecutionEnvironmentHeader extends React.Component<IProps> {
   render() {
-    const tabs = [t`Detail`, t`Activity`, t`Images`];
+    const tabs = [
+      { id: 'detail', name: t`Detail` },
+      { id: 'activity', name: t`Activity` },
+      { id: 'images', name: t`Images` },
+    ];
     return (
       <BaseHeader
         title={this.props.container.name}

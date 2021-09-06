@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { t, Trans } from '@lingui/macro';
 import './list-item.scss';
 
 import {
@@ -81,7 +82,9 @@ export class CollectionListItem extends React.Component<IProps, {}> {
           {deprecated && <DeprecatedTag />}
           {showNamespace ? (
             <TextContent>
-              <Text component={TextVariants.small}>Provided by {company}</Text>
+              <Text component={TextVariants.small}>
+                <Trans>Provided by {company}</Trans>
+              </Text>
             </TextContent>
           ) : null}
         </div>
@@ -111,7 +114,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
       <DataListCell isFilled={false} alignRight key='stats'>
         {controls ? <div className='entry'>{controls}</div> : null}
         <div className='right-col entry'>
-          Updated <DateComponent date={latest_version.created_at} />
+          {t`Updated`} <DateComponent date={latest_version.created_at} />
         </div>
         <div className='entry'>v{latest_version.version}</div>
       </DataListCell>,

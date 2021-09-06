@@ -11,7 +11,7 @@ import {
   ToolbarContent,
   Label,
 } from '@patternfly/react-core';
-import { ParamHelper, filterIsSet } from '../../utilities';
+import { ParamHelper, filterIsSet, twoWayMapper } from '../../utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 import {
   CheckCircleIcon,
@@ -307,25 +307,25 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       case 'completed':
         return (
           <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-            {state}
+            {twoWayMapper(state, Constants.HUMAN_STATUS)}
           </Label>
         );
       case 'failed':
         return (
           <Label variant='outline' color='red' icon={<ExclamationCircleIcon />}>
-            {state}
+            {twoWayMapper(state, Constants.HUMAN_STATUS)}
           </Label>
         );
       case 'running':
         return (
           <Label variant='outline' color='blue' icon={<SyncAltIcon />}>
-            {state}
+            {twoWayMapper(state, Constants.HUMAN_STATUS)}
           </Label>
         );
       case 'waiting':
         return (
           <Label variant='outline' color='grey' icon={<OutlinedClockIcon />}>
-            {state}
+            {twoWayMapper(state, Constants.HUMAN_STATUS)}
           </Label>
         );
       default:

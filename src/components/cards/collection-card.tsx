@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import cx from 'classnames';
 import {
@@ -64,7 +64,9 @@ export class CollectionCard extends React.Component<IProps> {
           </div>
           <div className='author'>
             <TextContent>
-              <Text component={TextVariants.small}>Provided by {company}</Text>
+              <Text component={TextVariants.small}>
+                <Trans>Provided by {company}</Trans>
+              </Text>
             </TextContent>
           </div>
         </CardHeader>

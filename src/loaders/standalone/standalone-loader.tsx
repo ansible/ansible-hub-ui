@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 // import PropTypes from 'prop-types';
 import * as React from 'react';
 import '../app.scss';
@@ -103,7 +103,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
       userDropdownItems = [
         <DropdownItem isDisabled key='username'>
-          Username: {user.username}
+          <Trans>Username: {user.username}</Trans>
         </DropdownItem>,
         <DropdownSeparator key='separator' />,
         <DropdownItem
@@ -130,14 +130,18 @@ class App extends React.Component<RouteComponentProps, IState> {
           href='https://access.redhat.com/support'
           target='_blank'
         >
-          Customer Support <ExternalLinkAltIcon />
+          <Trans>
+            Customer Support <ExternalLinkAltIcon />
+          </Trans>
         </DropdownItem>,
         <DropdownItem
           key='training'
           href='https://www.ansible.com/resources/webinars-training'
           target='_blank'
         >
-          Training <ExternalLinkAltIcon />
+          <Trans>
+            Training <ExternalLinkAltIcon />
+          </Trans>
         </DropdownItem>,
         <DropdownItem
           key='about'

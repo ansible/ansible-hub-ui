@@ -4,10 +4,14 @@ import { Tab, Tabs as PFTabs, TabTitleText } from '@patternfly/react-core';
 
 import { ParamHelper } from 'src/utilities/param-helper';
 
+export class TabsType {
+  id: string;
+  name: string;
+}
+
 interface IProps {
   /** List of names for tabs */
-  tabs: string[];
-
+  tabs: TabsType[];
   /** Current page params */
   params: { tab?: string };
 
@@ -30,7 +34,7 @@ export class Tabs extends React.Component<IProps> {
         onSelect={(_, key) =>
           !isDisabled &&
           updateParams(
-            ParamHelper.setParam(params, 'tab', tabs[key].toLowerCase()),
+            ParamHelper.setParam(params, 'tab', tabs[key].id.toLowerCase()),
           )
         }
       >
@@ -40,7 +44,7 @@ export class Tabs extends React.Component<IProps> {
             eventKey={i}
             title={
               <TabTitleText title={isDisabled ? disabledTitle : null}>
-                {tab}
+                {tab.name}
               </TabTitleText>
             }
             className={isDisabled ? 'disabled' : null}
@@ -54,7 +58,7 @@ export class Tabs extends React.Component<IProps> {
     const { params, tabs } = this.props;
     if (params.tab) {
       const i = tabs.findIndex(
-        (x) => x.toLowerCase() === params.tab.toLowerCase(),
+        (x) => x.id.toLowerCase() === params.tab.toLowerCase(),
       );
 
       // If tab is not found, default to the first tab.

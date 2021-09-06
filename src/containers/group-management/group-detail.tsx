@@ -153,9 +153,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     } = this.state;
     const { user } = this.context;
 
-    const tabs = [t`Permissions`];
+    const tabs = [{ id: 'permissions', name: t`Permissions` }];
     if (!!user && user.model_permissions.view_user) {
-      tabs.push(t`Users`);
+      tabs.push({ id: 'users', name: t`Users` });
     }
 
     if (!group && alerts && alerts.length) {
@@ -332,7 +332,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               key={group.name}
               className={group.name}
             >
-              <FlexItem style={{ minWidth: '200px' }}>{group.name}</FlexItem>
+              <FlexItem style={{ minWidth: '200px' }}>
+                {twoWayMapper(
+                  group.name,
+                  Constants.HUMAN_GROUP_DETAIL_PERMISSIONS,
+                )}
+              </FlexItem>
               <FlexItem grow={{ default: 'grow' }}>
                 <PermissionChipSelector
                   availablePermissions={group.object_permissions

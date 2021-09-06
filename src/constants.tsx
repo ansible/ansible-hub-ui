@@ -147,6 +147,14 @@ export class Constants {
     pull_containerdistribution: t`Pull distribution`,
     view_containerdistribution: t`View distribution`,
   };
+  static HUMAN_GROUP_DETAIL_PERMISSIONS = {
+    namespaces: t`Namespaces`,
+    collections: t`Collections`,
+    users: t`Users`,
+    groups: t`Groups`,
+    remotes: t`Remotes`,
+    containers: t`Containers`,
+  };
   static CONTAINER_NAMESPACE_PERMISSIONS = [
     'change_containernamespace',
     'namespace_push_containerdistribution',
@@ -171,10 +179,11 @@ export class Constants {
     'ci.console.redhat.com',
     'qa.console.redhat.com',
   ];
+
   static REPOSITORYNAMES = {
-    'Red Hat Certified': 'rh-certified',
-    Community: 'community',
-    Published: 'published',
+    published: t`Published`,
+    'rh-certified': t`Red Hat Certified`,
+    community: t`Community`,
   };
 
   static ALLOWEDREPOS = ['community', 'published', 'rh-certified'];
@@ -227,5 +236,12 @@ export class Constants {
     'pulpcore.app.tasks.upload.commit': t`Pulpcore: Upload commit`,
     'pulpcore.app.tasks.repository.add_and_remove': t`Pulpcore: Add and remove`,
     'pulpcore.plugin.tasking.add_and_remove': t`Pulpcore: Add or remove`,
+  };
+
+  static HUMAN_STATUS = {
+    completed: t`Completed`,
+    failed: t`Failed`,
+    running: t`Running`,
+    waiting: t`Waiting`,
   };
 }

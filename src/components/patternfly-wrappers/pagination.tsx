@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { t } from '@lingui/macro';
 
 import {
   Pagination as PaginationPF,
   PaginationVariant,
+  ToggleTemplate,
 } from '@patternfly/react-core';
 
 import { Constants } from 'src/constants';
@@ -58,6 +60,12 @@ export class Pagination extends React.Component<IProps> {
         perPageOptions={this.mapPerPageOptions(
           perPageOptions || Constants.DEFAULT_PAGINATION_OPTIONS,
         )}
+        titles={{
+          ofWord: t`of`,
+          perPageSuffix: t`per page`,
+          items: null,
+        }}
+        toggleTemplate={(props) => <ToggleTemplate ofWord={t`of`} {...props} />}
       />
     );
   }
