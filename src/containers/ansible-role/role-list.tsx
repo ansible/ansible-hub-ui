@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { DataList } from '@patternfly/react-core';
 import React from 'react';
-import { LegacyRoleAPI, LegacyRoleListType } from 'src/api';
+import { LegacyRoleAPI, LegacyRoleListType, TagAPI } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -80,6 +80,17 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
       );
   }
 
+  loadTags(inputText) {
+    return TagAPI.listRoles({ name__icontains: inputText, sort: '-count' })
+      .then(({ data: { data } }) =>
+        data.map(({ name, count }) => ({
+          id: name,
+          title: count === undefined ? name : t`${name} (${count})`,
+        })),
+      )
+      .catch(() => []);
+  }
+
   private get updateParams() {
     return ParamHelper.updateParamsMixin();
   }
@@ -95,6 +106,8 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
   }
 
   render() {
+    const { alerts, count, loading, params, roles } = this.state;
+
     const updateParams = (params) =>
       this.updateParams(params, () => this.query(params));
 
@@ -110,6 +123,8 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
       {
         id: 'tags',
         title: t`Tags`,
+        inputType: 'typeahead' as const,
+        // options handled by `typeaheads`
       },
     ];
 
@@ -126,8 +141,6 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
         type: 'numeric' as const,
       },
     ];
-
-    const { alerts, count, loading, params, roles } = this.state;
 
     const noData =
       count === 0 &&
@@ -155,6 +168,7 @@ class AnsibleRoleList extends React.Component<RouteProps, RolesState> {
               ignoredParams={['page', 'page_size', 'sort']}
               params={params}
               sortOptions={sortOptions}
+              typeaheads={{ tags: this.loadTags }}
               updateParams={updateParams}
             />
 

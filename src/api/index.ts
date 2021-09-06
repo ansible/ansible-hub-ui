@@ -85,6 +85,7 @@ export { SettingsAPI } from './settings';
 export { SignCollectionAPI } from './sign-collections';
 export { SignContainersAPI } from './sign-containers';
 export { SigningServiceAPI, SigningServiceType } from './signing-service';
+export { TagAPI } from './tag';
 export { TaskAPI } from './task';
 export { TaskManagementAPI } from './task-management';
 export { UserAPI } from './user';

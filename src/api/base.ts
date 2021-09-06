@@ -67,7 +67,7 @@ export class BaseAPI {
     return this.http.patch(this.getPath(apiPath) + id + '/', data);
   }
 
-  getPath(apiPath: string) {
+  getPath(apiPath?: string) {
     return apiPath || this.apiPath;
   }
 

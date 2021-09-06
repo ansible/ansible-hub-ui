@@ -32,22 +32,6 @@ export class Constants {
     'rejected',
   ];
 
-  // FIXME: replace with API call or free form input
-  static COLLECTION_FILTER_TAGS = [
-    'application',
-    'cloud',
-    'database',
-    'eda',
-    'infrastructure',
-    'linux',
-    'monitoring',
-    'networking',
-    'security',
-    'storage',
-    'tools',
-    'windows',
-  ];
-
   static TASK_NAMES = {
     'galaxy_ng.app.tasks.curate_all_synclist_repository': msg`Curate all synclist repository`,
     'galaxy_ng.app.tasks.curate_synclist_repository': msg`Curate synclist repository`,
