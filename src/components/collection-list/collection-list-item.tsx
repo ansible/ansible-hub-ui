@@ -114,7 +114,9 @@ export class CollectionListItem extends React.Component<IProps, {}> {
       <DataListCell isFilled={false} alignRight key='stats'>
         {controls ? <div className='entry'>{controls}</div> : null}
         <div className='right-col entry'>
-          {t`Updated`} <DateComponent date={latest_version.created_at} />
+          <Trans>
+            Updated <DateComponent date={latest_version.created_at} />
+          </Trans>
         </div>
         <div className='entry'>v{latest_version.version}</div>
       </DataListCell>,
