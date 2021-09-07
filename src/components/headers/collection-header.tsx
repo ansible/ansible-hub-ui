@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import cx from 'classnames';
 import './header.scss';
@@ -106,8 +106,9 @@ export class CollectionHeader extends React.Component<IProps> {
             </div>
             {latestVersion ? (
               <span className='last-updated'>
-                {t`Last updated`}{' '}
-                <DateComponent date={latestVersion}></DateComponent>
+                <Trans>
+                  Last updated <DateComponent date={latestVersion} />
+                </Trans>
               </span>
             ) : null}
           </div>
