@@ -61,6 +61,7 @@ interface IState {
   options: { id: number; name: string }[];
   selected: { id: number; name: string }[];
   editPermissions: boolean;
+  savingPermissions: boolean;
   showDeleteModal: boolean;
   showUserRemoveModal: UserType | null;
   permissions: string[];
@@ -97,6 +98,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       options: undefined,
       selected: [],
       editPermissions: false,
+      savingPermissions: false,
       showDeleteModal: false,
       showUserRemoveModal: null,
       permissions: [],
@@ -227,19 +229,30 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     );
   }
 
+  private actionCancelPermissions() {
+    const { originalPermissions } = this.state;
+    this.setState({
+      editPermissions: false,
+      permissions: originalPermissions.map(p => p.name),
+    });
+  }
+
   private actionSavePermissions() {
     const { group, originalPermissions, permissions } = this.state;
+    const promises = [];
 
     // Add permissions
     permissions.forEach(permission => {
       if (!originalPermissions.find(p => p.name === permission)) {
-        GroupAPI.addPermission(group.id, {
-          permission: permission,
-        }).catch(e =>
-          this.addAlert(
-            `Permission ${permission} was not added.`,
-            'danger',
-            e.message,
+        promises.push(
+          GroupAPI.addPermission(group.id, {
+            permission: permission,
+          }).catch(e =>
+            this.addAlert(
+              `Permission ${permission} was not added.`,
+              'danger',
+              e.message,
+            ),
           ),
         );
       }
@@ -248,22 +261,34 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     // Remove permissions
     originalPermissions.forEach(original => {
       if (!permissions.includes(original.name)) {
-        GroupAPI.removePermission(group.id, original.id).catch(e =>
-          this.addAlert(
-            `Permission ${original.name} was not removed.`,
-            'danger',
-            e.message,
+        promises.push(
+          GroupAPI.removePermission(group.id, original.id).catch(e =>
+            this.addAlert(
+              `Permission ${original.name} was not removed.`,
+              'danger',
+              e.message,
+            ),
           ),
         );
       }
     });
 
-    this.setState({ editPermissions: false });
+    this.setState({ savingPermissions: true }); // disable Save/Cancel while waiting
+    Promise.all(promises).then(() =>
+      this.setState({
+        editPermissions: false,
+        savingPermissions: false,
+      }),
+    );
   }
 
   private renderPermissions() {
     const groups = Constants.PERMISSIONS;
-    const { editPermissions, permissions: selectedPermissions } = this.state;
+    const {
+      editPermissions,
+      savingPermissions,
+      permissions: selectedPermissions,
+    } = this.state;
     const { user } = this.context;
 
     return (
@@ -342,13 +367,15 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             <ActionGroup>
               <Button
                 variant='primary'
+                isDisabled={savingPermissions}
                 onClick={() => this.actionSavePermissions()}
               >
                 Save
               </Button>
               <Button
                 variant='secondary'
-                onClick={() => this.setState({ editPermissions: false })}
+                isDisabled={savingPermissions}
+                onClick={() => this.actionCancelPermissions()}
               >
                 Cancel
               </Button>
