@@ -101,12 +101,10 @@ export class DeleteCollectionModal extends React.Component<IProps, IState> {
     );
   }
 
-  private deleteCollection(collection) {
-    console.log('on collection delete');
-  }
+  private deleteCollection(collection) {}
 
   private deleteNamespace({ name }) {
-    NamespaceAPI.removeNamespace(name)
+    NamespaceAPI.deleteNamespace(name)
       .then(() => {
         this.props.addAlert({
           variant: 'success',

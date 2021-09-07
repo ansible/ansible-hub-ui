@@ -7,7 +7,7 @@ class API extends HubAPI {
     super();
   }
 
-  removeNamespace(name) {
+  deleteNamespace(name) {
     return this.http.delete(this.apiPath + name);
   }
 }
