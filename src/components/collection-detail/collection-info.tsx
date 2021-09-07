@@ -76,24 +76,34 @@ export class CollectionInfo extends React.Component<IProps> {
                     only supported in ansible 2.9+
                   </Trans>
                 </div>
-                <div>
-                  <a ref={this.downloadLinkRef} style={{ display: 'none' }}></a>
-                  <Button
-                    className='download-button'
-                    variant='link'
-                    icon={<DownloadIcon />}
-                    onClick={() =>
-                      this.download(
-                        this.context.selectedRepo,
-                        namespace,
-                        name,
-                        latest_version,
-                      )
-                    }
-                  >
-                    {t`Download tarball`}
-                  </Button>
-                </div>
+                {this.context.user.is_guest ? (
+                  <div>
+                    {t`You have to be logged in to be able to download the tarball.`}{' '}
+                    <Link to={Paths.login}>{t`Login`}</Link>
+                  </div>
+                ) : (
+                  <div>
+                    <a
+                      ref={this.downloadLinkRef}
+                      style={{ display: 'none' }}
+                    ></a>
+                    <Button
+                      className='download-button'
+                      variant='link'
+                      icon={<DownloadIcon />}
+                      onClick={() =>
+                        this.download(
+                          this.context.selectedRepo,
+                          namespace,
+                          name,
+                          latest_version,
+                        )
+                      }
+                    >
+                      {t`Download tarball`}
+                    </Button>
+                  </div>
+                )}
               </SplitItem>
             </Split>
           </GridItem>
