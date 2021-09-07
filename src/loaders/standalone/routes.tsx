@@ -7,6 +7,7 @@ import {
   CollectionDetail,
   CollectionDocs,
   CollectionImportLog,
+  CollectionDependencies,
   EditNamespace,
   LoginPage,
   MyImports,
@@ -206,6 +207,10 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: CollectionDocs, path: Paths.collectionContentDocsByRepo },
       { comp: CollectionContent, path: Paths.collectionContentListByRepo },
       { comp: CollectionImportLog, path: Paths.collectionImportLogByRepo },
+      {
+        comp: CollectionDependencies,
+        path: Paths.collectionDependenciesByRepo,
+      },
       { comp: CollectionDetail, path: Paths.collectionByRepo },
       { comp: NamespaceDetail, path: Paths.namespaceByRepo },
       { comp: Search, path: Paths.searchByRepo },
