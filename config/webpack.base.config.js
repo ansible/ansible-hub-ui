@@ -109,7 +109,7 @@ module.exports = (inputConfigs) => {
         exposes: {
           './RootApp': resolve(
             __dirname,
-            isBuild ? '../src/AppEntry' : '../src/DevEntry',
+            isBuild ? '../src/app-entry.js' : '../src/dev-entry.js',
           ),
         },
       },
