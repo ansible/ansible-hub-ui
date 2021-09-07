@@ -125,7 +125,7 @@ export class UserForm extends React.Component<IProps, IState> {
         fieldId='groups'
         key='readonlyGroups'
         label={t`Groups`}
-        aria-labelledby='readonly-groups'
+        aria-labelledby={t`readonly-groups`}
       >
         {user.groups.map((group) => (
           <Label key={group.name}>{group.name}</Label>

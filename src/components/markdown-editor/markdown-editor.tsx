@@ -25,7 +25,7 @@ export class MarkdownEditor extends React.Component<IProps, {}> {
               <FormGroup fieldId='resources' helperText={helperText}>
                 <div id='markdown-title'>{t`Raw Markdown`}</div>
                 <TextArea
-                  aria-labelledby='markdown-title'
+                  aria-labelledby={t`markdown-title`}
                   id='resources'
                   value={text}
                   onChange={(value) => updateText(value)}

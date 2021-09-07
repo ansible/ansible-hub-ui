@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { t } from '@lingui/macro';
 
 import {
   LongArrowAltUpIcon,
@@ -75,7 +76,7 @@ export class SortTable extends React.Component<IProps> {
   render() {
     return (
       <thead>
-        <tr aria-labelledby='headers'>
+        <tr aria-labelledby={t`headers`}>
           {this.props.options['headers'].map((element) =>
             this.getHeaderItem(element),
           )}

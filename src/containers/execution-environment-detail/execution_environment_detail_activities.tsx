@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import {
@@ -128,23 +128,29 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   if (!!removed) {
                     activityDescription = (
                       <React.Fragment>
-                        <TagLink tag={action.tag_name} /> was moved to{' '}
-                        <ShaLink digest={action.manifest_digest} /> from
-                        <ShaLink digest={removed.manifest_digest} />
+                        <Trans>
+                          <TagLink tag={action.tag_name} /> was moved to{' '}
+                          <ShaLink digest={action.manifest_digest} /> from
+                          <ShaLink digest={removed.manifest_digest} />
+                        </Trans>
                       </React.Fragment>
                     );
                   } else {
                     activityDescription = (
                       <React.Fragment>
-                        <TagLink tag={action.tag_name} /> was added to{' '}
-                        <ShaLink digest={action.manifest_digest} />
+                        <Trans>
+                          <TagLink tag={action.tag_name} /> was added to{' '}
+                          <ShaLink digest={action.manifest_digest} />
+                        </Trans>
                       </React.Fragment>
                     );
                   }
                 } else {
                   activityDescription = (
                     <React.Fragment>
-                      <ShaLink digest={action.manifest_digest} /> was added
+                      <Trans>
+                        <ShaLink digest={action.manifest_digest} /> was added
+                      </Trans>
                     </React.Fragment>
                   );
                 }
@@ -163,8 +169,10 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   ) {
                     activityDescription = (
                       <React.Fragment>
-                        <TagLabel tag={action.tag_name} /> was removed from{' '}
-                        <ShaLink digest={action.manifest_digest} />
+                        <Trans>
+                          <TagLabel tag={action.tag_name} /> was removed from{' '}
+                          <ShaLink digest={action.manifest_digest} />
+                        </Trans>
                       </React.Fragment>
                     );
                   } else {
@@ -174,7 +182,9 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                 } else {
                   activityDescription = (
                     <React.Fragment>
-                      <ShaLabel digest={action.manifest_digest} /> was removed
+                      <Trans>
+                        <ShaLabel digest={action.manifest_digest} /> was removed
+                      </Trans>
                     </React.Fragment>
                   );
                 }

@@ -1,4 +1,5 @@
 import { WriteOnlyFieldType } from 'src/api';
+import { t } from '@lingui/macro';
 
 export function isFieldSet(
   name: string,
@@ -9,7 +10,7 @@ export function isFieldSet(
     console.log(field);
     return field.is_set;
   } else {
-    throw `Field ${name} is not in writeOnlyFields`;
+    throw t`Field ${name} is not in writeOnlyFields`;
   }
 }
 
