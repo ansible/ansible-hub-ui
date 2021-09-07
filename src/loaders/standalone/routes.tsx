@@ -98,7 +98,35 @@ class AuthHandler extends React.Component<
             );
           });
         })
-        .catch(() => this.setState({ isLoading: false }));
+        .catch(() => {
+          this.props.updateInitialData(
+            {
+              username: 'noone',
+              id: 0,
+              groups: [],
+              model_permissions: {
+                add_group: false,
+                add_namespace: false,
+                upload_to_namespace: false,
+                change_distribution: false,
+                change_namespace: false,
+                change_remote: false,
+                move_collection: false,
+                view_distribution: false,
+                view_group: false,
+                view_user: false,
+                delete_group: false,
+                delete_user: false,
+                change_group: false,
+                change_user: false,
+                add_user: false,
+              },
+              is_guest: true,
+            },
+            { execution_environments: false },
+            () => this.setState({ isLoading: false }),
+          );
+        });
     }
   }
 

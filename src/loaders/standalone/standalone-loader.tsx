@@ -183,7 +183,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         )}
         headerTools={
           <PageHeaderTools>
-            {!user ? (
+            {!user || user.is_guest ? (
               <Link
                 to={formatPath(
                   Paths.login,
@@ -333,12 +333,15 @@ class App extends React.Component<RouteComponentProps, IState> {
         }),
         menuItem(t`Namespaces`, {
           url: Paths[NAMESPACE_TERM],
+          condition: ({ user }) => !user.is_guest,
         }),
         menuItem(t`Repository Management`, {
+          condition: ({ user }) => !user.is_guest,
           url: Paths.repositories,
         }),
         menuItem(t`API Token`, {
           url: Paths.token,
+          condition: ({ user }) => !user.is_guest,
         }),
         menuItem(t`Approval`, {
           condition: ({ user }) => user.model_permissions.move_collection,
@@ -361,6 +364,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       ),
       menuItem(t`Task Management`, {
         url: Paths.taskList,
+        condition: ({ user }) => !user.is_guest,
       }),
       menuItem(t`Documentation`, {
         url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
