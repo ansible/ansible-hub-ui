@@ -12,6 +12,14 @@ updates:
 
   - package-ecosystem: 'npm'
     directory: '/'
+    target-branch: 'stable-4.4'
+    schedule:
+      interval: 'weekly'
+    commit-message:
+      prefix: '[stable-4.4] '
+
+  - package-ecosystem: 'npm'
+    directory: '/'
     target-branch: 'stable-4.3'
     schedule:
       interval: 'weekly'
