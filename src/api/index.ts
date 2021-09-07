@@ -45,6 +45,7 @@ export {
   ContainerManifestType,
   ContainerRepositoryType,
 } from './response-types/execution-environment';
+export { ExecutionEnvironmentRemoteAPI } from './execution-environment-remote';
 export { WriteOnlyFieldType } from './response-types/write-only-field';
 export { ActivitiesAPI } from './activities';
 export { ContainerTagAPI } from './container-tag';
