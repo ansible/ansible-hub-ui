@@ -18,7 +18,11 @@ import { ParamHelper } from 'src/utilities/param-helper';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 
-interface IState extends IBaseCollectionState {}
+import { CollectionAPI } from 'src/api/';
+
+interface IState extends IBaseCollectionState {
+  dependencies: any[];
+}
 
 class CollectionDependencies extends React.Component<
   RouteComponentProps,
@@ -32,11 +36,21 @@ class CollectionDependencies extends React.Component<
     this.state = {
       collection: undefined,
       params: params,
+      dependencies: [],
     };
   }
 
   componentDidMount() {
     this.loadData();
+
+    const namespace = 'jiricollectionsoxrttpna';
+    const collection = 'jiricollectionserregzmzdv';
+    CollectionAPI.getDependencies(namespace, collection).then(
+      (dependencies) => {
+        this.setState({ dependencies: dependencies.data.data });
+        console.log(dependencies.data.data);
+      },
+    );
   }
 
   render() {
@@ -88,26 +102,28 @@ class CollectionDependencies extends React.Component<
               <p>{t`This collection is being used by `}</p>
               <table className='content-table pf-c-table pf-m-compact'>
                 <tbody>
-                  <tr>
-                    <td>
-                      <Link
-                        to={formatPath(
-                          Paths.collectionContentDocsByRepo,
-                          {
-                            /*collection: collection,
-                                        namespace: namespace,
-                                        type: content.content_type,
-                                        name: content.name,
-                                        repo: this.context.selectedRepo,
-                                        */
-                          },
-                          //ParamHelper.getReduced(params, this.ignoredParams),
-                        )}
-                      >
-                        Depended
-                      </Link>
-                    </td>
-                  </tr>
+                  {this.state.dependencies.map((dependency) => (
+                    <tr key={dependency.name}>
+                      <td>
+                        <Link
+                          to={formatPath(
+                            Paths.collectionContentDocsByRepo,
+                            {
+                              /*collection: collection,
+                                          namespace: namespace,
+                                          type: content.content_type,
+                                          name: content.name,
+                                          repo: this.context.selectedRepo,
+                                          */
+                            },
+                            //ParamHelper.getReduced(params, this.ignoredParams),
+                          )}
+                        >
+                          {dependency.name}
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
