@@ -5,11 +5,18 @@ interface IProps {
   number: number | string;
   label?: string;
   hideNumber?: boolean;
+  pluralLabels?: {
+    [key: string]: {
+      '0': string;
+      '1': string;
+      other: string;
+    }[];
+  };
 }
 
 export class NumericLabel extends React.Component<IProps, {}> {
   render() {
-    const { className, number, label, hideNumber } = this.props;
+    const { className, number, label, hideNumber, pluralLabels } = this.props;
     let convertedNum: number;
 
     if (typeof number === 'string') {
@@ -25,7 +32,13 @@ export class NumericLabel extends React.Component<IProps, {}> {
         <span>
           {hideNumber ? null : NumericLabel.roundNumber(convertedNum)}{' '}
         </span>
-        <span className={className}>{label ? label + plural : null}</span>
+        <span className={className}>
+          {pluralLabels ? (
+            <>{this.setPluralLabel(pluralLabels, number)}</>
+          ) : (
+            <> {label ? label + plural : null} </>
+          )}
+        </span>
       </div>
     );
   }
@@ -51,5 +64,9 @@ export class NumericLabel extends React.Component<IProps, {}> {
 
     // If larger than a billion, don't even bother.
     return '1B+';
+  }
+
+  private setPluralLabel(plurals, number) {
+    return number === 0 || number === 1 ? plurals[number] : plurals['other'];
   }
 }

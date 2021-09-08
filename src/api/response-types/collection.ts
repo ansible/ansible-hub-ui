@@ -11,6 +11,7 @@ export class CollectionVersion {
     contents: ContentSummaryType[];
     description: string;
     tags: string[];
+    dependencies: any; //FIXME: any for testing
   };
   created_at: string;
   // contents: ContentSummaryType[]; // deprecated
@@ -35,6 +36,7 @@ export class CollectionVersionDetail extends CollectionVersion {
     documentation: string;
     issues: string;
     repository: string;
+    dependencies: any;
   };
   requires_ansible?: string;
   docs_blob: DocsBlobType;

@@ -63,9 +63,15 @@ export class CollectionListItem extends React.Component<IProps, {}> {
       );
     }
 
-    const contentSummary = convertContentSummaryCounts(
-      latest_version.metadata.contents,
-    );
+    let contentSummary = convertContentSummaryCounts(latest_version.metadata);
+
+    const plural = {
+      dependency: {
+        '0': 'dependencies',
+        '1': 'dependency',
+        other: 'dependencies',
+      },
+    };
 
     cells.push(
       <DataListCell key='content'>
@@ -96,6 +102,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                 className='numeric-label-capitalize-text'
                 label={k}
                 number={contentSummary.contents[k]}
+                pluralLabels={plural[k]}
               />
             </div>
           ))}
