@@ -82,7 +82,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { collections, params, numberOfResults } = this.state;
+    const { loading, collections, params, numberOfResults } = this.state;
     const noData =
       collections.length === 0 && !filterIsSet(params, ['keywords', 'tags']);
 
@@ -143,7 +143,9 @@ class Search extends React.Component<RouteComponentProps, IState> {
             </div>
           )}
         </BaseHeader>
-        {noData ? (
+        {loading ? (
+          <LoadingPageSpinner />
+        ) : noData ? (
           <EmptyStateNoData
             title={t`No collections yet`}
             description={t`Collections will appear once uploaded`}
@@ -170,9 +172,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderCollections(collections, params, updateParams) {
-    if (this.state.loading) {
-      return <LoadingPageSpinner></LoadingPageSpinner>;
-    }
     if (collections.length === 0) {
       return (
         <EmptyStateFilter
