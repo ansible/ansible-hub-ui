@@ -99,24 +99,24 @@ module.exports = (inputConfigs) => {
   plugins.push(new webpack.DefinePlugin(globals));
   plugins.push(new ForkTsCheckerWebpackPlugin());
 
-  /**
-   * Generates remote containers for chrome 2
-   */
-  plugins.push(
-    require('@redhat-cloud-services/frontend-components-config/federated-modules')(
-      {
-        root: resolve(__dirname, '../'),
-        exposes: {
-          './RootApp': resolve(
-            __dirname,
-            isBuild ? '../src/app-entry.js' : '../src/dev-entry.js',
-          ),
+  if (customConfigs.DEPLOYMENT_MODE === 'insights') {
+    /**
+     * Generates remote containers for chrome 2
+     */
+    plugins.push(
+      require('@redhat-cloud-services/frontend-components-config/federated-modules')(
+        {
+          root: resolve(__dirname, '../'),
+          exposes: {
+            './RootApp': resolve(
+              __dirname,
+              isBuild ? '../src/app-entry.js' : '../src/dev-entry.js',
+            ),
+          },
         },
-      },
-    ),
-  );
-
-  console.log({ rules: newWebpackConfig.module.rules });
+      ),
+    );
+  }
 
   return {
     ...newWebpackConfig,
