@@ -1,4 +1,5 @@
 import { t, Trans } from '@lingui/macro';
+import * as moment from 'moment';
 import * as React from 'react';
 import './collection-info.scss';
 
