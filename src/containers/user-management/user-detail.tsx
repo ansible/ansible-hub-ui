@@ -30,6 +30,7 @@ interface IState {
   showDeleteModal: boolean;
   alerts: AlertType[];
   redirect?: string;
+  unauthorised: boolean;
 }
 
 class UserDetail extends React.Component<RouteComponentProps, IState> {
@@ -41,14 +42,19 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
       errorMessages: {},
       alerts: [],
       showDeleteModal: false,
+      unauthorised: false,
     };
   }
 
   componentDidMount() {
     const id = this.props.match.params['userID'];
-    UserAPI.get(id)
-      .then((result) => this.setState({ userDetail: result.data }))
-      .catch(() => this.setState({ redirect: Paths.notFound }));
+    if (!this.context.user || this.context.user.is_guest) {
+      this.setState({ unauthorised: true });
+    } else {
+      UserAPI.get(id)
+        .then((result) => this.setState({ userDetail: result.data }))
+        .catch(() => this.setState({ redirect: Paths.notFound }));
+    }
   }
 
   render() {
@@ -56,9 +62,13 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
       return <Redirect push to={this.state.redirect} />;
     }
 
-    const { userDetail, errorMessages, alerts, showDeleteModal } = this.state;
+    const { userDetail, errorMessages, alerts, showDeleteModal, unauthorised } =
+      this.state;
     const { user } = this.context;
 
+    if (unauthorised) {
+      return <EmptyStateUnauthorized />;
+    }
     if (!userDetail) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }

@@ -2,7 +2,11 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
-import { LoginForm, LoginPage as PFLoginPage } from '@patternfly/react-core';
+import {
+  Button,
+  LoginForm,
+  LoginPage as PFLoginPage,
+} from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import Logo from 'src/../static/images/logo_large.svg';
@@ -67,6 +71,13 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
         brandImgSrc={Logo}
       >
         {loginForm}
+        <br />
+        <div className={'pf-c-form__actions'}>
+          <Button
+            className={'pf-m-block'}
+            onClick={() => this.setState({ redirect: Paths.search })}
+          >{t`View only mode`}</Button>
+        </div>
       </PFLoginPage>
     );
   }

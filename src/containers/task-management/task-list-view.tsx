@@ -23,6 +23,7 @@ import {
   DateComponent,
   EmptyStateFilter,
   EmptyStateNoData,
+  EmptyStateUnauthorized,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -33,6 +34,7 @@ import {
 import { TaskManagementAPI } from 'src/api';
 import { TaskType } from 'src/api/response-types/task';
 import { formatPath, Paths } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   params: {
@@ -45,6 +47,7 @@ interface IState {
   alerts: AlertType[];
   cancelModalVisible: boolean;
   selectedTask: TaskType;
+  unauthorised: boolean;
 }
 
 export class TaskListView extends React.Component<RouteComponentProps, IState> {
@@ -72,16 +75,28 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       alerts: [],
       cancelModalVisible: false,
       selectedTask: null,
+      unauthorised: false,
     };
   }
 
   componentDidMount() {
-    this.queryTasks();
+    if (!this.context.user || this.context.user.is_guest) {
+      this.setState({ loading: false, unauthorised: true });
+    } else {
+      this.queryTasks();
+    }
   }
 
   render() {
-    const { params, itemCount, loading, items, alerts, cancelModalVisible } =
-      this.state;
+    const {
+      params,
+      itemCount,
+      loading,
+      items,
+      alerts,
+      cancelModalVisible,
+      unauthorised,
+    } = this.state;
 
     const noData =
       items.length === 0 && !filterIsSet(params, ['name__contains', 'state']);
@@ -94,7 +109,9 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         ></AlertList>
         {cancelModalVisible ? this.renderCancelModal() : null}
         <BaseHeader title={t`Task Management`} />
-        {noData && !loading ? (
+        {unauthorised ? (
+          <EmptyStateUnauthorized />
+        ) : noData && !loading ? (
           <EmptyStateNoData
             title={t`No tasks yet`}
             description={t`Tasks will appear once created.`}
@@ -380,3 +397,5 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
 }
 
 export default withRouter(TaskListView);
+
+TaskListView.contextType = AppContext;

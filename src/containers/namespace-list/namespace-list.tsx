@@ -9,6 +9,7 @@ import {
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
+  EmptyStateUnauthorized,
   LinkTabs,
   LoadingPageSpinner,
   LoadingPageWithHeader,
@@ -22,8 +23,8 @@ import { Button, ToolbarItem } from '@patternfly/react-core';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { Constants } from 'src/constants';
-import { AppContext } from 'src/loaders/app-context';
 import { filterIsSet } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   namespaces: NamespaceListType[];
@@ -38,6 +39,7 @@ interface IState {
   hasPermission: boolean;
   isModalOpen: boolean;
   loading: boolean;
+  unauthorised: boolean;
   redirect?: string;
 }
 
@@ -72,6 +74,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       hasPermission: true,
       isModalOpen: false,
       loading: true,
+      unauthorised: false,
     };
   }
 
@@ -82,22 +85,28 @@ export class NamespaceList extends React.Component<IProps, IState> {
   };
 
   componentDidMount() {
-    if (this.props.filterOwner) {
-      // Make a query with no params and see if it returns results to tell
-      // if the user can edit namespaces
-      MyNamespaceAPI.list({}).then((results) => {
-        if (results.data.meta.count !== 0) {
-          this.loadNamespaces();
-        } else {
-          this.setState({
-            hasPermission: false,
-            namespaces: [],
-            loading: false,
-          });
-        }
-      });
+    if (!this.context.user || this.context.user.is_guest) {
+      console.log('IS GUEST');
+      this.setState({ loading: false, unauthorised: true });
     } else {
-      this.loadNamespaces();
+      if (this.props.filterOwner) {
+        // Make a query with no params and see if it returns results to tell
+        // if the user can edit namespaces
+        MyNamespaceAPI.list({}).then((results) => {
+          if (results.data.meta.count !== 0) {
+            this.loadNamespaces();
+          } else {
+            this.setState({
+              hasPermission: false,
+              namespaces: [],
+              loading: false,
+            });
+          }
+        });
+      } else {
+        console.log('LoadNamesoa');
+        this.loadNamespaces();
+      }
     }
   }
 
@@ -110,7 +119,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <Redirect push to={this.state.redirect} />;
     }
 
-    const { namespaces, params, itemCount } = this.state;
+    const { namespaces, params, itemCount, unauthorised, loading } = this.state;
     const { filterOwner } = this.props;
     const { user, alerts } = this.context;
     const noData =
@@ -118,7 +127,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       namespaces !== undefined &&
       namespaces.length === 0;
 
-    if (!namespaces) {
+    if (loading) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
@@ -173,7 +182,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
               />
             </div>
           </div>
-          {noData ? null : (
+          {noData || unauthorised ? null : (
             <div className='toolbar'>
               <Toolbar
                 params={params}
@@ -199,7 +208,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           )}
         </BaseHeader>
         <section className='card-area'>{this.renderBody()}</section>
-        {noData ? null : (
+        {noData || unauthorised || loading ? null : (
           <section className='footer'>
             <Pagination
               params={params}
@@ -216,7 +225,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   private renderBody() {
-    const { namespaces, loading } = this.state;
+    const { namespaces, loading, unauthorised } = this.state;
     const { namespacePath, filterOwner } = this.props;
     const { user } = this.context;
 
@@ -235,6 +244,13 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return (
         <section>
           <LoadingPageSpinner></LoadingPageSpinner>;
+        </section>
+      );
+    }
+    if (unauthorised) {
+      return (
+        <section>
+          <EmptyStateUnauthorized />
         </section>
       );
     }

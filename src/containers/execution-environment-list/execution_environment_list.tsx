@@ -30,6 +30,7 @@ import {
   StatefulDropdown,
   Tooltip,
   closeAlertMixin,
+  EmptyStateUnauthorized,
 } from 'src/components';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
@@ -44,6 +45,7 @@ interface IState {
   items: ExecutionEnvironmentType[];
   itemCount: number;
   alerts: AlertType[];
+  unauthorized: boolean;
 }
 
 class ExecutionEnvironmentList extends React.Component<
@@ -73,15 +75,20 @@ class ExecutionEnvironmentList extends React.Component<
       loading: true,
       itemCount: 0,
       alerts: [],
+      unauthorized: false,
     };
   }
 
   componentDidMount() {
-    this.queryEnvironments();
+    if (!this.context.user || this.context.user.is_guest) {
+      this.setState({ unauthorized: true, loading: false });
+    } else {
+      this.queryEnvironments();
+    }
   }
 
   render() {
-    const { params, publishToController, itemCount, loading, alerts, items } =
+    const { params, publishToController, itemCount, loading, alerts, items, unauthorized } =
       this.state;
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
     const pushImagesButton = (
@@ -118,6 +125,8 @@ class ExecutionEnvironmentList extends React.Component<
             description={t`You currently have no container repositories. Add a container repository via the CLI to get started.`}
             button={pushImagesButton}
           />
+        ) : unauthorized ? (
+          <EmptyStateUnauthorized />
         ) : (
           <Main>
             {loading ? (

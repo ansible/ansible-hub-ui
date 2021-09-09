@@ -20,6 +20,7 @@ import {
   DateComponent,
   EmptyStateFilter,
   EmptyStateNoData,
+  EmptyStateUnauthorized,
   LoadingPageWithHeader,
   Main,
   Pagination,
@@ -72,6 +73,7 @@ interface IState {
   permissions: string[];
   originalPermissions: { id: number; name: string }[];
   redirect?: string;
+  unauthorised: boolean;
 }
 
 class GroupDetail extends React.Component<RouteComponentProps, IState> {
@@ -109,31 +111,36 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       showUserRemoveModal: null,
       permissions: [],
       originalPermissions: [],
+      unauthorised: false,
     };
   }
 
   componentDidMount() {
-    GroupAPI.get(this.state.params.id)
-      .then((result) => {
-        this.setState({ group: result.data });
-      })
-      .catch((e) =>
-        this.addAlert(t`Error loading group.`, 'danger', e.message),
-      );
+    if (!this.context.user || this.context.user.is_guest) {
+      this.setState({ unauthorised: true });
+    } else {
+      GroupAPI.get(this.state.params.id)
+        .then((result) => {
+          this.setState({ group: result.data });
+        })
+        .catch((e) =>
+          this.addAlert(t`Error loading group.`, 'danger', e.message),
+        );
 
-    GroupAPI.getPermissions(this.state.params.id)
-      .then((result) => {
-        this.setState({
-          originalPermissions: result.data.data.map((p) => ({
-            id: p.id,
-            name: p.permission,
-          })),
-          permissions: result.data.data.map((x) => x.permission),
-        });
-      })
-      .catch((e) =>
-        this.addAlert(t`Error loading permissions.`, 'danger', e.message),
-      );
+      GroupAPI.getPermissions(this.state.params.id)
+        .then((result) => {
+          this.setState({
+            originalPermissions: result.data.data.map((p) => ({
+              id: p.id,
+              name: p.permission,
+            })),
+            permissions: result.data.data.map((x) => x.permission),
+          });
+        })
+        .catch((e) =>
+          this.addAlert(t`Error loading permissions.`, 'danger', e.message),
+        );
+    }
   }
 
   render() {
@@ -150,6 +157,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       showDeleteModal,
       showUserRemoveModal,
       users,
+      unauthorised,
     } = this.state;
     const { user } = this.context;
 
@@ -166,11 +174,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         ></AlertList>
       );
     }
+    if (unauthorised) {
+      return <EmptyStateUnauthorized />;
+    }
     if (!group) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    if (params.tab == 'users' && !users) {
+    if (params.tab == 'users' && !users && !unauthorised) {
       this.queryUsers();
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
