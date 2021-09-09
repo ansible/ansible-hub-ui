@@ -124,7 +124,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           isOpen={isOpenVersionsModal}
           title={t`Collection versions`}
           variant='small'
-          onClose={() => this.onClose('isOpenVersionsModal')}
+          onClose={() => this.setState({ isOpenVersionsModal: false })}
         >
           <List isPlain>
             <div className='versions-modal-header'>
@@ -152,7 +152,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                         v.version.toString(),
                       ),
                     );
-                    this.onClose('isOpenVersionsModal');
+                    this.setState({ isOpenVersionsModal: false });
                   }}
                 >
                   v{v.version}
@@ -192,7 +192,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                     this.setState({ isOpenVersionsSelect })
                   }
                   variant={SelectVariant.single}
-                  onSelect={() => this.onClose('isOpenVersionsSelect')}
+                  onSelect={() =>
+                    this.setState({ isOpenVersionsSelect: false })
+                  }
                   selections={`v${collection.latest_version.version}`}
                   aria-label={t`Select collection version`}
                   loadingVariant={
@@ -256,14 +258,14 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 <ExternalLinkAltIcon />
               </div>
               {urlKeys.map((link) => {
-                const l = collection.latest_version.metadata[link.key];
-                if (!l) {
+                const url = collection.latest_version.metadata[link.key];
+                if (!url) {
                   return null;
                 }
 
                 return (
                   <div className='link' key={link.key}>
-                    <a href={l} target='_blank'>
+                    <a href={url} target='_blank'>
                       {link.name}
                     </a>
                   </div>
@@ -329,19 +331,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   }
 
   private updatePaginationParams = ({ page, page_size }) => {
-    this.setState((prevState) => ({
-      ...prevState,
+    this.setState({
       modalPagination: {
         page: page,
         pageSize: page_size,
       },
-    }));
+    });
   };
-
-  private onClose(key: string) {
-    this.setState((prevState) => ({
-      ...prevState,
-      [key]: false,
-    }));
-  }
 }
