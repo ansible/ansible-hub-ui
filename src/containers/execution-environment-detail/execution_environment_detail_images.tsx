@@ -309,6 +309,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             publishToController: {
               digest: image.digest,
               image: this.props.containerRepository.name,
+              tag: image.tags[0],
             },
           });
         }}
