@@ -50,6 +50,13 @@
   padding-top: 10px;
 }
 
+.versions-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--pf-global--spacer--md);
+}
+
 .tab-link-container {
   display: flex;
   margin-top: 10px;

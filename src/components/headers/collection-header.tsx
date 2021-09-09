@@ -22,12 +22,14 @@ import {
   Breadcrumbs,
   LinkTabs,
   RepoSelector,
+  Pagination,
 } from 'src/components';
 
 import { CollectionDetailType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
+import { Constants } from 'src/constants';
 
 interface IProps {
   collection: CollectionDetailType;
@@ -46,20 +48,28 @@ interface IProps {
 }
 
 interface IState {
-  isOpenSelect: boolean;
-  isOpenShowMoreModal: boolean;
+  isOpenVersionsSelect: boolean;
+  isOpenVersionsModal: boolean;
+  modalPagination: {
+    page: number;
+    pageSize: number;
+  };
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
-  ignoreParams = ['showing', 'keyords'];
+  ignoreParams = ['showing', 'keywords'];
   static contextType = AppContext;
 
   constructor(props) {
     super(props);
 
     this.state = {
-      isOpenSelect: false,
-      isOpenShowMoreModal: false,
+      isOpenVersionsSelect: false,
+      isOpenVersionsModal: false,
+      modalPagination: {
+        page: 1,
+        pageSize: Constants.DEFAULT_PAGINATION_OPTIONS[1],
+      },
     };
   }
 
@@ -72,6 +82,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       activeTab,
       className,
     } = this.props;
+
+    const { modalPagination, isOpenVersionsModal, isOpenVersionsSelect } =
+      this.state;
+
+    const numOfshownVersions = 10;
 
     const all_versions = [...collection.all_versions];
 
@@ -106,17 +121,26 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     return (
       <React.Fragment>
         <Modal
-          isOpen={this.state.isOpenShowMoreModal}
+          isOpen={isOpenVersionsModal}
           title={t`Collection versions`}
           variant='small'
-          onClose={() => this.setState({ isOpenShowMoreModal: false })}
+          onClose={() => this.onClose('isOpenVersionsModal')}
         >
           <List isPlain>
-            <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
-              {t`${collectionName}'s versions.`}
-            </Text>
-            {all_versions.map((v) => (
-              <ListItem key={v.version}>
+            <div className='versions-modal-header'>
+              <Text>{t`${collectionName}'s versions.`}</Text>
+              <Pagination
+                isTop
+                params={{
+                  page: modalPagination.page,
+                  page_size: modalPagination.pageSize,
+                }}
+                updateParams={this.updatePaginationParams}
+                count={all_versions.length}
+              />
+            </div>
+            {this.paginateVersions(all_versions).map((v, i) => (
+              <ListItem key={i}>
                 <Button
                   variant='link'
                   isInline
@@ -128,7 +152,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                         v.version.toString(),
                       ),
                     );
-                    this.setState({ isOpenShowMoreModal: false });
+                    this.onClose('isOpenVersionsModal');
                   }}
                 >
                   v{v.version}
@@ -137,6 +161,14 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               </ListItem>
             ))}
           </List>
+          <Pagination
+            params={{
+              page: modalPagination.page,
+              page_size: modalPagination.pageSize,
+            }}
+            updateParams={this.updatePaginationParams}
+            count={all_versions.length}
+          />
         </Modal>
         <BaseHeader
           className={className}
@@ -155,18 +187,31 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               <span>{t`Version`}</span>
               <div className='install-version-dropdown'>
                 <Select
-                  isOpen={this.state.isOpenSelect}
-                  onToggle={(isOpenSelect) => this.setState({ isOpenSelect })}
+                  isOpen={isOpenVersionsSelect}
+                  onToggle={(isOpenVersionsSelect) =>
+                    this.setState({ isOpenVersionsSelect })
+                  }
                   variant={SelectVariant.single}
-                  onSelect={() => this.setState({ isOpenSelect: false })}
+                  onSelect={() => this.onClose('isOpenVersionsSelect')}
                   selections={`v${collection.latest_version.version}`}
                   aria-label={t`Select collection version`}
-                  loadingVariant={{
-                    text: t`Show more`,
-                    onClick: () => this.setState({ isOpenShowMoreModal: true }),
-                  }}
+                  loadingVariant={
+                    numOfshownVersions < all_versions.length
+                      ? {
+                          text: t`View more`,
+                          onClick: () =>
+                            this.setState({
+                              isOpenVersionsModal: true,
+                              isOpenVersionsSelect: false,
+                            }),
+                        }
+                      : null
+                  }
                 >
-                  {all_versions.map((v) => (
+                  {this.renderSelectVersions(
+                    all_versions,
+                    numOfshownVersions,
+                  ).map((v) => (
                     <SelectOption
                       key={v.version}
                       value={`v${v.version}`}
@@ -269,5 +314,34 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     ];
 
     return <LinkTabs tabs={tabs} />;
+  }
+
+  private renderSelectVersions(versions, count) {
+    return versions.slice(0, count);
+  }
+
+  private paginateVersions(versions) {
+    const { modalPagination } = this.state;
+    return versions.slice(
+      modalPagination.pageSize * (modalPagination.page - 1),
+      modalPagination.pageSize * modalPagination.page,
+    );
+  }
+
+  private updatePaginationParams = ({ page, page_size }) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      modalPagination: {
+        page: page,
+        pageSize: page_size,
+      },
+    }));
+  };
+
+  private onClose(key: string) {
+    this.setState((prevState) => ({
+      ...prevState,
+      [key]: false,
+    }));
   }
 }
