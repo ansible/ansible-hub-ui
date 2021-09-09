@@ -14,6 +14,7 @@ import {
   Button,
   DropdownItem,
   Tooltip,
+  Text,
 } from '@patternfly/react-core';
 
 import * as ReactMarkdown from 'react-markdown';
@@ -43,7 +44,7 @@ import {
 } from 'src/components';
 
 import { ImportModal } from './import-modal/import-modal';
-import { DeleteCollectionModal } from '../collection-detail/delete-collection-modal';
+import { DeleteModalWithConfirm } from 'src/components/delete-modal-with-confirm/delete-modal-with-confirm';
 
 import { ParamHelper, getRepoUrl, filterIsSet } from 'src/utilities';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
@@ -176,12 +177,18 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           collection={updateCollection}
           namespace={namespace.name}
         />
-        <DeleteCollectionModal
+        <DeleteModalWithConfirm
           isOpen={this.state.isOpenNamespaceModal}
-          closeModal={this.closeModal}
-          namespace={this.state.namespace}
-          addAlert={this.addAlert}
-        />
+          cancelAction={this.closeModal}
+          deleteAction={this.deleteNamespace}
+          title={t`Permanently delete namespace?`}
+        >
+          <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+            <Trans>
+              Deleting <b>{namespace.name}</b> and its data will be lost.
+            </Trans>
+          </Text>
+        </DeleteModalWithConfirm>
         <AlertList
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -467,22 +474,35 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     this.setState(newState);
   }
 
-  private closeModal = () => {
-    this.setState({ isOpenNamespaceModal: false });
+  private deleteNamespace = () => {
+    NamespaceAPI.deleteNamespace(this.state.namespace.name)
+      .then(() => {
+        this.setState({ redirect: formatPath(Paths.namespaces, {}) });
+        this.context.setAlerts([
+          ...this.context.alerts,
+          {
+            variant: 'success',
+            title: t`Successfully deleted namespace.`,
+          },
+        ]);
+      })
+      .catch((e) => {
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error deleting namespace.`,
+              description: 'e.message',
+            },
+          ],
+          isOpenNamespaceModal: false,
+        });
+      });
   };
 
-  private addAlert = (alert) => {
-    if (alert.variant === 'success') {
-      this.setState({ redirect: formatPath(Paths.namespaces, {}) });
-      this.context.setAlerts([...this.context.alerts, alert]);
-    }
-
-    if (alert.variant === 'danger') {
-      this.setState({
-        alerts: [...this.state.alerts, alert],
-        isOpenNamespaceModal: false,
-      });
-    }
+  private closeModal = () => {
+    this.setState({ isOpenNamespaceModal: false });
   };
 
   private get closeAlert() {
