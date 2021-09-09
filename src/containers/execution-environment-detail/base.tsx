@@ -58,6 +58,7 @@ export function withContainerRepo(WrappedComponent) {
       if (this.state.redirect === 'activity') {
         return (
           <Redirect
+            push
             to={formatPath(Paths.executionEnvironmentDetailActivities, {
               container: this.props.match.params['container'],
             })}
@@ -66,6 +67,7 @@ export function withContainerRepo(WrappedComponent) {
       } else if (this.state.redirect === 'detail') {
         return (
           <Redirect
+            push
             to={formatPath(Paths.executionEnvironmentDetail, {
               container: this.props.match.params['container'],
             })}
@@ -74,6 +76,7 @@ export function withContainerRepo(WrappedComponent) {
       } else if (this.state.redirect === 'images') {
         return (
           <Redirect
+            push
             to={formatPath(Paths.executionEnvironmentDetailImages, {
               container: this.props.match.params['container'],
             })}
