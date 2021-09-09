@@ -333,7 +333,6 @@ class App extends React.Component<RouteComponentProps, IState> {
         }),
         menuItem(t`Namespaces`, {
           url: Paths[NAMESPACE_TERM],
-          condition: ({ user }) => !user.is_guest,
         }),
         menuItem(t`Repository Management`, {
           condition: ({ user }) => !user.is_guest,

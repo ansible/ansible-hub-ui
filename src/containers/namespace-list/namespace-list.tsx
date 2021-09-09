@@ -39,7 +39,6 @@ interface IState {
   hasPermission: boolean;
   isModalOpen: boolean;
   loading: boolean;
-  unauthorised: boolean;
   redirect?: string;
 }
 
@@ -74,7 +73,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
       hasPermission: true,
       isModalOpen: false,
       loading: true,
-      unauthorised: false,
     };
   }
 
@@ -85,28 +83,22 @@ export class NamespaceList extends React.Component<IProps, IState> {
   };
 
   componentDidMount() {
-    if (!this.context.user || this.context.user.is_guest) {
-      console.log('IS GUEST');
-      this.setState({ loading: false, unauthorised: true });
+    if (this.props.filterOwner) {
+      // Make a query with no params and see if it returns results to tell
+      // if the user can edit namespaces
+      MyNamespaceAPI.list({}).then((results) => {
+        if (results.data.meta.count !== 0) {
+          this.loadNamespaces();
+        } else {
+          this.setState({
+            hasPermission: false,
+            namespaces: [],
+            loading: false,
+          });
+        }
+      });
     } else {
-      if (this.props.filterOwner) {
-        // Make a query with no params and see if it returns results to tell
-        // if the user can edit namespaces
-        MyNamespaceAPI.list({}).then((results) => {
-          if (results.data.meta.count !== 0) {
-            this.loadNamespaces();
-          } else {
-            this.setState({
-              hasPermission: false,
-              namespaces: [],
-              loading: false,
-            });
-          }
-        });
-      } else {
-        console.log('LoadNamesoa');
-        this.loadNamespaces();
-      }
+      this.loadNamespaces();
     }
   }
 
@@ -119,7 +111,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <Redirect push to={this.state.redirect} />;
     }
 
-    const { namespaces, params, itemCount, unauthorised, loading } = this.state;
+    const { namespaces, params, itemCount, loading } = this.state;
     const { filterOwner } = this.props;
     const { user, alerts } = this.context;
     const noData =
@@ -164,25 +156,27 @@ export class NamespaceList extends React.Component<IProps, IState> {
         ></NamespaceModal>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={title}>
-          <div className='tab-link-container'>
-            <div className='tabs'>
-              <LinkTabs
-                tabs={[
-                  {
-                    title: t`All`,
-                    link: Paths[NAMESPACE_TERM],
-                    active: !filterOwner,
-                  },
-                  {
-                    title: t`My namespaces`,
-                    link: Paths.myNamespaces,
-                    active: filterOwner,
-                  },
-                ]}
-              />
+          {!this.context.user.is_guest && (
+            <div className='tab-link-container'>
+              <div className='tabs'>
+                <LinkTabs
+                  tabs={[
+                    {
+                      title: t`All`,
+                      link: Paths[NAMESPACE_TERM],
+                      active: !filterOwner,
+                    },
+                    {
+                      title: t`My namespaces`,
+                      link: Paths.myNamespaces,
+                      active: filterOwner,
+                    },
+                  ]}
+                />
+              </div>
             </div>
-          </div>
-          {noData || unauthorised ? null : (
+          )}
+          {noData ? null : (
             <div className='toolbar'>
               <Toolbar
                 params={params}
@@ -208,7 +202,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           )}
         </BaseHeader>
         <section className='card-area'>{this.renderBody()}</section>
-        {noData || unauthorised || loading ? null : (
+        {noData || loading ? null : (
           <section className='footer'>
             <Pagination
               params={params}
@@ -225,7 +219,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   private renderBody() {
-    const { namespaces, loading, unauthorised } = this.state;
+    const { namespaces, loading } = this.state;
     const { namespacePath, filterOwner } = this.props;
     const { user } = this.context;
 
@@ -244,13 +238,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return (
         <section>
           <LoadingPageSpinner></LoadingPageSpinner>;
-        </section>
-      );
-    }
-    if (unauthorised) {
-      return (
-        <section>
-          <EmptyStateUnauthorized />
         </section>
       );
     }
