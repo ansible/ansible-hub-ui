@@ -299,7 +299,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             this.setState({ manageTagsManifestDigest: image.digest });
           }}
         >
-          {t`Edit tags`}
+          {t`Manage tags`}
         </DropdownItem>
       ),
       <DropdownItem
