@@ -71,13 +71,6 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
         brandImgSrc={Logo}
       >
         {loginForm}
-        <br />
-        <div className={'pf-c-form__actions'}>
-          <Button
-            className={'pf-m-block'}
-            onClick={() => this.setState({ redirect: Paths.search })}
-          >{t`View only mode`}</Button>
-        </div>
       </PFLoginPage>
     );
   }
