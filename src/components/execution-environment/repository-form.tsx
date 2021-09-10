@@ -95,8 +95,8 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             label={t`Groups with access`}
           >
             <div className='pf-c-form__helper-text'>
-              {t`Adding groups provides access to all repositories in the "
-                ${namespace}" container namespace.`}
+              {t`Adding groups provides access to all repositories in the
+                "${namespace}" container namespace.`}
             </div>
             <ObjectPermissionField
               groups={this.state.selectedGroups}
