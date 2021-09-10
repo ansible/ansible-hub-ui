@@ -5,7 +5,13 @@ describe('Task table contains correct headers and filter', () => {
   before(() => {
     cy.login(adminUsername, adminPassword);
     cy.visit('/ui/repositories?tab=remote');
+
+    cy.intercept(
+      'POST',
+      Cypress.env('prefix') + '/content/rh-certified/v3/sync/',
+    ).as('sync');
     cy.contains('button', 'Sync').click();
+    cy.wait('@sync');
   });
 
   it('table contains all columns and filter', () => {
