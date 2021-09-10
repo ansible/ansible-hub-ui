@@ -47,6 +47,7 @@ import { ImportModal } from './import-modal/import-modal';
 import { DeleteModalWithConfirm } from 'src/components/delete-modal-with-confirm/delete-modal-with-confirm';
 
 import { ParamHelper, getRepoUrl, filterIsSet } from 'src/utilities';
+import { Constants } from 'src/constants';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -69,6 +70,7 @@ interface IState {
   showControls: boolean;
   isOpenNamespaceModal: boolean;
   alerts: AlertType[];
+  isNamespaceEmpty: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -103,11 +105,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       showControls: false, // becomes true when my-namespaces doesn't 404
       isOpenNamespaceModal: false,
       alerts: [],
+      isNamespaceEmpty: false,
     };
   }
 
   componentDidMount() {
     this.loadAll();
+
+    this.loadAllRepos();
   }
 
   render() {
@@ -383,6 +388,35 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       .catch((response) => {
         this.setState({ redirect: Paths.notFound });
       });
+
+    const colletionsPromises = Object.keys(Constants.REPOSITORYNAMES).map(
+      (repo) =>
+        CollectionAPI.list(
+          { namespace: this.props.match.params['namespace'] },
+          repo,
+        ),
+    );
+
+    Promise.all(colletionsPromises).then((results) =>
+      this.setState({
+        isNamespaceEmpty: results.every((val) => val.data.meta.count === 0),
+      }),
+    );
+  }
+
+  private loadAllRepos() {
+    const repoPromises = Object.keys(Constants.REPOSITORYNAMES).map((repo) =>
+      CollectionAPI.list(
+        { namespace: this.props.match.params['namespace'] },
+        repo,
+      ),
+    );
+
+    Promise.all(repoPromises).then((results) =>
+      this.setState({
+        isNamespaceEmpty: results.every((val) => val.data.meta.count === 0),
+      }),
+    );
   }
 
   private get updateParams() {
@@ -417,7 +451,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               }
             />,
             <React.Fragment key={'2'}>
-              {!collections.length ? (
+              {this.state.isNamespaceEmpty ? (
                 <DropdownItem
                   onClick={() => this.setState({ isOpenNamespaceModal: true })}
                 >
@@ -493,7 +527,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             {
               variant: 'danger',
               title: t`Error deleting namespace.`,
-              description: 'e.message',
+              description: e.message,
             },
           ],
           isOpenNamespaceModal: false,
