@@ -111,8 +111,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   componentDidMount() {
     this.loadAll();
-
-    this.loadAllRepos();
   }
 
   render() {
@@ -384,24 +382,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           namespace: val[1].data,
           showControls: !!val[2],
         });
+
+        this.loadAllRepos();
       })
       .catch((response) => {
         this.setState({ redirect: Paths.notFound });
       });
-
-    const colletionsPromises = Object.keys(Constants.REPOSITORYNAMES).map(
-      (repo) =>
-        CollectionAPI.list(
-          { namespace: this.props.match.params['namespace'] },
-          repo,
-        ),
-    );
-
-    Promise.all(colletionsPromises).then((results) =>
-      this.setState({
-        isNamespaceEmpty: results.every((val) => val.data.meta.count === 0),
-      }),
-    );
   }
 
   private loadAllRepos() {
