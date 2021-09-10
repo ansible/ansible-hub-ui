@@ -11,6 +11,7 @@ import {
   Grid,
   GridItem,
   Button,
+  Alert,
 } from '@patternfly/react-core';
 
 import { DownloadIcon } from '@patternfly/react-icons';
@@ -76,11 +77,15 @@ export class CollectionInfo extends React.Component<IProps> {
                     only supported in ansible 2.9+
                   </Trans>
                 </div>
-                {this.context.user.is_guest ? (
-                  <div>
-                    {t`You have to be logged in to be able to download the tarball.`}{' '}
+                {this.context.user.is_anonymous ? (
+                  <React.Fragment>
+                    <Alert
+                      isInline
+                      variant='warning'
+                      title={t`You have to be logged in to be able to download the tarball.`}
+                    />{' '}
                     <Link to={Paths.login}>{t`Login`}</Link>
-                  </div>
+                  </React.Fragment>
                 ) : (
                   <div>
                     <a
