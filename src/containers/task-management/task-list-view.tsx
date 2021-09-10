@@ -2,29 +2,23 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './task.scss';
 import { Constants } from 'src/constants';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   Button,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
   ToolbarContent,
-  Label,
 } from '@patternfly/react-core';
-import { ParamHelper, filterIsSet, twoWayMapper } from '../../utilities';
+import { ParamHelper, filterIsSet } from '../../utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
-import {
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-  SyncAltIcon,
-  OutlinedClockIcon,
-} from '@patternfly/react-icons';
 import {
   AlertList,
   AlertType,
   AppliedFilters,
   BaseHeader,
   closeAlertMixin,
+  ConfirmModal,
   CompoundFilter,
   DateComponent,
   EmptyStateFilter,
@@ -33,10 +27,12 @@ import {
   Main,
   Pagination,
   SortTable,
+  Tooltip,
+  StatusIndicator,
 } from 'src/components';
 import { TaskManagementAPI } from 'src/api';
 import { TaskType } from 'src/api/response-types/task';
-import { DeleteModal } from 'src/components/delete-modal/delete-modal';
+import { formatPath, Paths } from 'src/paths';
 
 interface IState {
   params: {
@@ -244,12 +240,19 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderTableRow(item: TaskType, index: number) {
-    const { name, state, pulp_created, started_at, finished_at } = item;
-    const { user } = this.context;
+  private renderTableRow(item: any, index: number) {
+    const { name, state, pulp_created, started_at, finished_at, pulp_href } =
+      item;
+    let taskId = parsePulpIDFromURL(pulp_href);
     return (
       <tr aria-labelledby={name} key={index}>
-        <td>{Constants.TASK_NAMES[name] || name}</td>
+        <td>
+          <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
+            <Tooltip content={name}>
+              {Constants.TASK_NAMES[name] || name}
+            </Tooltip>
+          </Link>
+        </td>
         <td>
           <DateComponent date={pulp_created} />
         </td>
@@ -259,7 +262,9 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={finished_at} />
         </td>
-        <td>{this.statusLabel({ state })}</td>
+        <td>
+          <StatusIndicator status={state} />
+        </td>
         <td>{this.cancelButton(state, item)}</td>
       </tr>
     );
@@ -302,47 +307,17 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     }
   }
 
-  private statusLabel({ state }) {
-    switch (state) {
-      case 'completed':
-        return (
-          <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-            {twoWayMapper(state, Constants.HUMAN_STATUS)}
-          </Label>
-        );
-      case 'failed':
-        return (
-          <Label variant='outline' color='red' icon={<ExclamationCircleIcon />}>
-            {twoWayMapper(state, Constants.HUMAN_STATUS)}
-          </Label>
-        );
-      case 'running':
-        return (
-          <Label variant='outline' color='blue' icon={<SyncAltIcon />}>
-            {twoWayMapper(state, Constants.HUMAN_STATUS)}
-          </Label>
-        );
-      case 'waiting':
-        return (
-          <Label variant='outline' color='grey' icon={<OutlinedClockIcon />}>
-            {twoWayMapper(state, Constants.HUMAN_STATUS)}
-          </Label>
-        );
-      default:
-        return <Label variant='outline'>{state}</Label>;
-    }
-  }
-
   private renderCancelModal() {
     const name =
       Constants.TASK_NAMES[this.state.selectedTask.name] ||
       this.state.selectedTask.name;
     return (
-      <DeleteModal
+      <ConfirmModal
         cancelAction={() => this.setState({ cancelModalVisible: false })}
-        deleteAction={() => this.selectedTask(this.state.selectedTask, name)}
         title={t`Stop task?`}
         children={t`${name} will be cancelled.`}
+        confirmAction={() => this.selectedTask(this.state.selectedTask, name)}
+        confirmButtonTitle={t`Yes, stop`}
       />
     );
   }

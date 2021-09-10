@@ -23,6 +23,7 @@ export enum Paths {
   executionEnvironmentManifest = '/containers/:container+/_content/images/:digest',
   groupList = '/group-list',
   groupDetail = '/group/:group',
+  taskDetail = '/task/:task',
   myCollections = '/my-namespaces/:namespace',
   myNamespaces = '/my-namespaces',
   editNamespace = '/my-namespaces/edit/:namespace',
