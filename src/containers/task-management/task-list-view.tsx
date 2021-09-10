@@ -80,7 +80,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || this.context.user.is_guest) {
+    if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ loading: false, unauthorised: true });
     } else {
       this.queryTasks();

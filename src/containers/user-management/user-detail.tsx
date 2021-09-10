@@ -48,7 +48,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     const id = this.props.match.params['userID'];
-    if (!this.context.user || this.context.user.is_guest) {
+    if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorised: true });
     } else {
       UserAPI.get(id)

@@ -28,7 +28,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const { token } = this.state;
-    let unauthorised = !this.context.user || this.context.user.is_guest;
+    let unauthorised = !this.context.user || this.context.user.is_anonymous;
 
     return (
       <React.Fragment>

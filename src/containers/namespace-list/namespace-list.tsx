@@ -156,7 +156,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
         ></NamespaceModal>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={title}>
-          {!this.context.user.is_guest && (
+          {!this.context.user.is_anonymous && (
             <div className='tab-link-container'>
               <div className='tabs'>
                 <LinkTabs

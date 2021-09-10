@@ -116,7 +116,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || this.context.user.is_guest) {
+    if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorised: true });
     } else {
       GroupAPI.get(this.state.params.id)

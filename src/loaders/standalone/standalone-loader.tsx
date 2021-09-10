@@ -183,7 +183,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         )}
         headerTools={
           <PageHeaderTools>
-            {!user || user.is_guest ? (
+            {!user || user.is_anonymous ? (
               <Link
                 to={formatPath(
                   Paths.login,
@@ -335,12 +335,12 @@ class App extends React.Component<RouteComponentProps, IState> {
           url: Paths[NAMESPACE_TERM],
         }),
         menuItem(t`Repository Management`, {
-          condition: ({ user }) => !user.is_guest,
+          condition: ({ user }) => !user.is_anonymous,
           url: Paths.repositories,
         }),
         menuItem(t`API Token`, {
           url: Paths.token,
-          condition: ({ user }) => !user.is_guest,
+          condition: ({ user }) => !user.is_anonymous,
         }),
         menuItem(t`Approval`, {
           condition: ({ user }) => user.model_permissions.move_collection,
@@ -350,7 +350,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       menuSection(
         t`Execution Environments`,
         {
-          condition: ({ featureFlags }) => featureFlags.execution_environments,
+          condition: ({ featureFlags, user }) => featureFlags.execution_environmentv&& !user.is_anonymous,
         },
         [
           menuItem(t`Execution Environments`, {
@@ -363,7 +363,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       ),
       menuItem(t`Task Management`, {
         url: Paths.taskList,
-        condition: ({ user }) => !user.is_guest,
+        condition: ({ user }) => !user.is_anonymous,
       }),
       menuItem(t`Documentation`, {
         url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',

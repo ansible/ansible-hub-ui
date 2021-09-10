@@ -91,7 +91,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || this.context.user.is_guest) {
+    if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorised: true, loading: false });
     } else {
       this.loadContent();

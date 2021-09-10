@@ -8,7 +8,7 @@ import { EmptyStateUnauthorized } from 'src/components';
 
 class MyNamespaces extends React.Component<RouteComponentProps, {}> {
   render() {
-    if (!this.context.user || this.context.user.is_guest) {
+    if (!this.context.user || this.context.user.is_anonymous) {
       return <EmptyStateUnauthorized />;
     }
     return (

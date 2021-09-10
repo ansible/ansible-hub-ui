@@ -80,7 +80,7 @@ class ExecutionEnvironmentList extends React.Component<
   }
 
   componentDidMount() {
-    if (!this.context.user || this.context.user.is_guest) {
+    if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorized: true, loading: false });
     } else {
       this.queryEnvironments();
