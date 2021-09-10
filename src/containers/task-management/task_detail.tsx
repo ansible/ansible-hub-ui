@@ -420,9 +420,9 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
           result.data.reserved_resources_record.forEach((resource) => {
             let url = resource.replace('/pulp/api/v3/', '');
             let id = parsePulpIDFromURL(url);
-            let type = !!id
-              ? resource.split('/')[4]
-              : resource.split('/').at(-2);
+            let urlParts = resource.split('/');
+            console.log(urlParts);
+            let type = !!id ? urlParts[4] : urlParts[urlParts.length - 2];
             if (!!id) {
               allRelatedTasks.push(
                 GenericPulpAPI.get(url)
