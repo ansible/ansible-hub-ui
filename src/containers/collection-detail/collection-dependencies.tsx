@@ -10,6 +10,7 @@ import {
   Toolbar,
   ToolbarContent,
   ToolbarItem,
+  Text,
 } from '@patternfly/react-core';
 
 import {
@@ -52,6 +53,7 @@ class CollectionDependencies extends React.Component<
   RouteComponentProps,
   IState
 > {
+  private ignoredParams = ['page_size', 'page', 'sort', 'keywords'];
   constructor(props) {
     super(props);
 
@@ -174,13 +176,25 @@ class CollectionDependencies extends React.Component<
         <Main>
           <section className='body'>
             <div className='pf-c-content collection-dependencies'>
-              <h1>{t`Dependencies`}</h1>
+              <Text>{t`Dependencies`}</Text>
               <p>{t`This collection is dependent on the following collections`}</p>
               <List variant={ListVariant.inline}>
                 {Object.keys(dependencies).map((dependency) => (
                   <ListItem key={dependency}>
-                    <Link to={'/test'}>
-                      {this.separateCollectionByDependency(dependency)}
+                    <Link
+                      to={formatPath(
+                        Paths.collectionByRepo,
+                        {
+                          collection:
+                            this.separateCollectionByDependency(dependency)[1],
+                          namespace:
+                            this.separateCollectionByDependency(dependency)[0],
+                          repo: this.context.selectedRepo,
+                        },
+                        ParamHelper.getReduced(params, this.ignoredParams),
+                      )}
+                    >
+                      {this.separateCollectionByDependency(dependency)[1]}
                     </Link>
                   </ListItem>
                 ))}
@@ -234,21 +248,21 @@ class CollectionDependencies extends React.Component<
               <table className='content-table pf-c-table pf-m-compact'>
                 <tbody>
                   {this.filterUsedByDependencies(usedByDependencies).map(
-                    ({ name }) => (
+                    ({ name, namespace }) => (
                       <tr key={name}>
                         <td>
                           <Link
                             to={formatPath(
-                              Paths.collectionContentDocsByRepo,
+                              Paths.collectionByRepo,
                               {
-                                /*collection: collection,
-                                          namespace: namespace,
-                                          type: content.content_type,
-                                          name: content.name,
-                                          repo: this.context.selectedRepo,
-                                          */
+                                collection: name,
+                                namespace: namespace,
+                                repo: this.context.selectedRepo,
                               },
-                              //ParamHelper.getReduced(params, this.ignoredParams),
+                              ParamHelper.getReduced(
+                                params,
+                                this.ignoredParams,
+                              ),
                             )}
                           >
                             {name}
@@ -485,7 +499,7 @@ class CollectionDependencies extends React.Component<
   }
 
   private separateCollectionByDependency(dependency) {
-    return dependency.split('.')[1];
+    return dependency.split('.');
   }
 }
 
