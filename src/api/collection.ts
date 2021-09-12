@@ -166,9 +166,10 @@ export class API extends HubAPI {
     });
   }
 
-  getDependencies(namespace, collection) {
+  getUsedDependenciesByCollection(namespace, collection, params?) {
     return this.http.get(
       `/_ui/v1/collection-versions/?dependency=${namespace}.${collection}`,
+      { params },
     );
   }
 }
