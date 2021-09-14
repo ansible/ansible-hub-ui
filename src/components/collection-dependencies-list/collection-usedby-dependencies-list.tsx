@@ -27,10 +27,7 @@ interface IProps {
 }
 
 export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
-  private ignoredParams = ['page_size', 'page', 'sort', 'collection'];
-  constructor(props) {
-    super(props);
-  }
+  private ignoredParams = ['page_size', 'page', 'sort', 'name'];
 
   render() {
     const { params, usedByDependencies, itemCount, updateParams, repo } =
