@@ -40,6 +40,7 @@ import {
   FeatureFlagsType,
   SettingsAPI,
   UserType,
+  SettingsType,
 } from 'src/api';
 import { AppContext } from '../app-context';
 
@@ -49,7 +50,7 @@ interface IRoutesProps {
   updateInitialData: (
     user: UserType,
     flags: FeatureFlagsType,
-    settings: any,
+    settings: SettingsType,
     callback?: () => void,
   ) => void;
 }
@@ -60,7 +61,7 @@ interface IAuthHandlerProps extends RouteComponentProps {
   updateInitialData: (
     user: UserType,
     flags: FeatureFlagsType,
-    settings: any,
+    settings: SettingsType,
     callback?: () => void,
   ) => void;
   isDisabled: boolean;

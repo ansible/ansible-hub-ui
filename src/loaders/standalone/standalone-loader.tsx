@@ -31,7 +31,12 @@ import { reject, some } from 'lodash';
 
 import { Routes } from './routes';
 import { Paths, formatPath } from 'src/paths';
-import { ActiveUserAPI, UserType, FeatureFlagsType } from 'src/api';
+import {
+  ActiveUserAPI,
+  UserType,
+  FeatureFlagsType,
+  SettingsType,
+} from 'src/api';
 import { AlertType, SmallLogo, StatefulDropdown } from 'src/components';
 import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
@@ -45,7 +50,7 @@ interface IState {
   featureFlags: FeatureFlagsType;
   menuExpandedSections: string[];
   alerts: AlertType[];
-  settings: any;
+  settings: SettingsType;
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -398,7 +403,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   private updateInitialData = (
     user: UserType,
     flags: FeatureFlagsType,
-    settings: any,
+    settings: SettingsType,
     callback?: () => void,
   ) =>
     this.setState(

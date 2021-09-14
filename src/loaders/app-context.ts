@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { UserType, FeatureFlagsType } from 'src/api';
+import { UserType, FeatureFlagsType, SettingsType } from 'src/api';
 import { AlertType } from 'src/components';
 
 interface IAppContextType {
@@ -10,7 +10,7 @@ interface IAppContextType {
   featureFlags: FeatureFlagsType;
   alerts?: AlertType[];
   setAlerts?: (alerts: AlertType[]) => void;
-  settings: any;
+  settings: SettingsType;
 }
 
 export const AppContext = React.createContext<IAppContextType>(undefined);

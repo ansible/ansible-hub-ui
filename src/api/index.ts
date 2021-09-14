@@ -56,3 +56,4 @@ export { ControllerAPI } from './controller';
 export { TaskManagementAPI } from './task-management';
 export { GenericPulpAPI } from './generic-pulp';
 export { SettingsAPI } from './settings';
+export { SettingsType } from './response-types/settings';
