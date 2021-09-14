@@ -80,14 +80,16 @@ export class CollectionInfo extends React.Component<IProps> {
                 {!this.context.settings
                   .GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD &&
                 this.context.user.is_anonymous ? (
-                  <React.Fragment>
-                    <Alert
-                      isInline
-                      variant='warning'
-                      title={t`You have to be logged in to be able to download the tarball.`}
-                    />{' '}
-                    <Link to={Paths.login}>{t`Login`}</Link>
-                  </React.Fragment>
+                  <Alert
+                    isInline
+                    variant='warning'
+                    title={
+                      <React.Fragment>
+                        {t`You have to be logged in to be able to download the tarball.`}{' '}
+                        <Link to={Paths.login}>{t`Login`}</Link>
+                      </React.Fragment>
+                    }
+                  />
                 ) : (
                   <div>
                     <a
