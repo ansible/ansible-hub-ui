@@ -3,3 +3,10 @@
   justify-content: space-between;
   align-items: center;
 }
+
+// resets to default, possible bug pagination shows disc list-style-type with 'pf-c-content' className
+.pf-c-content ul {
+  padding-left: 0;
+  margin-left: 0;
+  list-style: none;
+}

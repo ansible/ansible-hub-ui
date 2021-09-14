@@ -119,3 +119,7 @@ export class CollectionDetailType {
     company: string;
   };
 }
+
+export class CollectionUsedByDependencies extends CollectionDetailType {
+  version: string;
+}
