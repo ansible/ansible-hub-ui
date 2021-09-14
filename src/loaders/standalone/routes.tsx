@@ -38,6 +38,7 @@ import {
   ActiveUserAPI,
   FeatureFlagsAPI,
   FeatureFlagsType,
+  SettingsAPI,
   UserType,
 } from 'src/api';
 import { AppContext } from '../app-context';
@@ -48,6 +49,7 @@ interface IRoutesProps {
   updateInitialData: (
     user: UserType,
     flags: FeatureFlagsType,
+    settings: any,
     callback?: () => void,
   ) => void;
 }
@@ -58,6 +60,7 @@ interface IAuthHandlerProps extends RouteComponentProps {
   updateInitialData: (
     user: UserType,
     flags: FeatureFlagsType,
+    settings: any,
     callback?: () => void,
   ) => void;
   isDisabled: boolean;
@@ -89,13 +92,21 @@ class AuthHandler extends React.Component<
     if (!user) {
       FeatureFlagsAPI.get()
         .then((featureFlagResponse) => {
-          this.props.updateInitialData(null, featureFlagResponse.data);
+          this.props.updateInitialData(null, featureFlagResponse.data, null);
           return ActiveUserAPI.getUser().then((userResponse) => {
             this.props.updateInitialData(
               userResponse,
               featureFlagResponse.data,
-              () => this.setState({ isLoading: false }),
+              null,
             );
+            return SettingsAPI.get().then((result) => {
+              this.props.updateInitialData(
+                userResponse,
+                featureFlagResponse.data,
+                result.data,
+                () => this.setState({ isLoading: false }),
+              );
+            });
           });
         })
         .catch(() => this.setState({ isLoading: false }));

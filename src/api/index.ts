@@ -55,3 +55,4 @@ export { ExecutionEnvironmentNamespaceAPI } from './execution-environment-namesp
 export { ControllerAPI } from './controller';
 export { TaskManagementAPI } from './task-management';
 export { GenericPulpAPI } from './generic-pulp';
+export { SettingsAPI } from './settings';

@@ -10,6 +10,7 @@ interface IAppContextType {
   featureFlags: FeatureFlagsType;
   alerts?: AlertType[];
   setAlerts?: (alerts: AlertType[]) => void;
+  settings: any;
 }
 
 export const AppContext = React.createContext<IAppContextType>(undefined);

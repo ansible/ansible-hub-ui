@@ -77,7 +77,9 @@ export class CollectionInfo extends React.Component<IProps> {
                     only supported in ansible 2.9+
                   </Trans>
                 </div>
-                {this.context.user.is_anonymous ? (
+                {!this.context.settings
+                  .GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD &&
+                this.context.user.is_anonymous ? (
                   <React.Fragment>
                     <Alert
                       isInline

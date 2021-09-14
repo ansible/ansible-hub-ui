@@ -45,6 +45,7 @@ interface IState {
   featureFlags: FeatureFlagsType;
   menuExpandedSections: string[];
   alerts: AlertType[];
+  settings: any;
 }
 
 class App extends React.Component<RouteComponentProps, IState> {
@@ -58,6 +59,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       featureFlags: null,
       menuExpandedSections: [],
       alerts: [],
+      settings: null,
     };
   }
 
@@ -396,13 +398,17 @@ class App extends React.Component<RouteComponentProps, IState> {
   private updateInitialData = (
     user: UserType,
     flags: FeatureFlagsType,
+    settings: any,
     callback?: () => void,
   ) =>
-    this.setState({ user: user, featureFlags: flags }, () => {
-      if (callback) {
-        callback();
-      }
-    });
+    this.setState(
+      { user: user, featureFlags: flags, settings: settings },
+      () => {
+        if (callback) {
+          callback();
+        }
+      },
+    );
 
   private setRepoToURL() {
     const match = this.isRepoURL(this.props.location.pathname);
@@ -430,6 +436,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           featureFlags: this.state.featureFlags,
           alerts: this.state.alerts,
           setAlerts: this.setAlerts,
+          settings: this.state.settings,
         }}
       >
         {component}
