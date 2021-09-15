@@ -391,12 +391,16 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private loadAllRepos() {
-    const repoPromises = Object.keys(Constants.REPOSITORYNAMES).map((repo) =>
-      CollectionAPI.list(
-        { namespace: this.props.match.params['namespace'] },
-        repo,
-      ),
-    );
+    // get collections in namespace from each repo
+    // except the one we already have 
+    const repoPromises = Object.keys(Constants.REPOSITORYNAMES)
+      .filter(repo => repo !== this.context.selectedRepo)
+      .map((repo) =>
+        CollectionAPI.list(
+          { namespace: this.props.match.params['namespace'] },
+          repo,
+        )
+      )
 
     Promise.all(repoPromises).then((results) =>
       this.setState({
@@ -495,7 +499,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private deleteNamespace = () => {
-    NamespaceAPI.deleteNamespace(this.state.namespace.name)
+    NamespaceAPI.delete(this.state.namespace.name)
       .then(() => {
         this.setState({ redirect: formatPath(Paths.namespaces, {}) });
         this.context.setAlerts([

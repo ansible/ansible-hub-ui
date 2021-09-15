@@ -6,10 +6,6 @@ class API extends HubAPI {
   constructor() {
     super();
   }
-
-  deleteNamespace(name) {
-    return this.http.delete(this.apiPath + name);
-  }
 }
 
 export const NamespaceAPI = new API();
