@@ -4,9 +4,14 @@ import { Link } from 'react-router-dom';
 
 import { CollectionUsedByDependencies } from 'src/api';
 
-import { Pagination, Toolbar } from 'src/components';
+import {
+  Pagination,
+  Toolbar,
+  EmptyStateNoData,
+  EmptyStateFilter,
+} from 'src/components';
 
-import { ParamHelper } from 'src/utilities/param-helper';
+import { ParamHelper, filterIsSet } from 'src/utilities';
 import { formatPath, Paths } from 'src/paths';
 
 import 'src/containers/collection-detail/collection-dependencies.scss';
@@ -35,6 +40,14 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
 
     const { name, ...rest } = params;
 
+    if (!itemCount && !filterIsSet(params, ['name']))
+      return (
+        <EmptyStateNoData
+          title={t`No collection is using this dependency`}
+          description={t`Collection is not being used by any collection.`}
+        />
+      );
+
     return (
       <>
         <div className='usedby-dependencies-header'>
@@ -59,34 +72,43 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
           />
         </div>
 
-        <table className='content-table pf-c-table pf-m-compact'>
-          <tbody>
-            {usedByDependencies.map(({ name, namespace, version }, i) => (
-              <tr key={i}>
-                <td>
-                  <Link
-                    to={formatPath(
-                      Paths.collectionByRepo,
-                      {
-                        collection: name,
-                        namespace: namespace,
-                        repo,
-                      },
-                      ParamHelper.getReduced({ version }, this.ignoredParams),
-                    )}
-                  >
-                    {name}
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Pagination
-          params={params}
-          updateParams={(params) => updateParams(params)}
-          count={itemCount}
-        />
+        {!itemCount ? (
+          <EmptyStateFilter />
+        ) : (
+          <>
+            <table className='content-table pf-c-table pf-m-compact'>
+              <tbody>
+                {usedByDependencies.map(({ name, namespace, version }, i) => (
+                  <tr key={i}>
+                    <td>
+                      <Link
+                        to={formatPath(
+                          Paths.collectionByRepo,
+                          {
+                            collection: name,
+                            namespace: namespace,
+                            repo,
+                          },
+                          ParamHelper.getReduced(
+                            { version },
+                            this.ignoredParams,
+                          ),
+                        )}
+                      >
+                        {name}
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <Pagination
+              params={params}
+              updateParams={(params) => updateParams(params)}
+              count={itemCount}
+            />
+          </>
+        )}
       </>
     );
   }

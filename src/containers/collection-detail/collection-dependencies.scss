@@ -5,8 +5,12 @@
 }
 
 // resets to default, possible bug pagination shows disc list-style-type with 'pf-c-content' className
-.pf-c-content ul {
-  padding-left: 0;
-  margin-left: 0;
-  list-style: none;
+.pf-c-options-menu__menu {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  list-style: none !important;
+}
+
+.dependencies-list li {
+  list-style: disc;
 }

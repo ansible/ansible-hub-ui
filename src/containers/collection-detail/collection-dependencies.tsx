@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import {
   CollectionAPI,
@@ -13,13 +13,15 @@ import {
   Main,
   CollectionDependenciesList,
   CollectionUsedbyDependenciesList,
+  EmptyStateNoData,
 } from 'src/components';
 
-import { ParamHelper } from 'src/utilities/param-helper';
+import { filterIsSet, ParamHelper } from 'src/utilities';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 
 import './collection-dependencies.scss';
+
 interface IState {
   collection: CollectionDetailType;
   params: {
@@ -90,6 +92,10 @@ class CollectionDependencies extends React.Component<
 
     const dependenciesParams = ParamHelper.getReduced(params, ['version']);
 
+    const noDependencies: boolean = !Object.keys(
+      collection.latest_version.metadata.dependencies,
+    ).length;
+
     return (
       <React.Fragment>
         <CollectionHeader
@@ -108,24 +114,42 @@ class CollectionDependencies extends React.Component<
           <section className='body'>
             <div className='pf-c-content collection-dependencies'>
               <h1>{t`Dependencies`}</h1>
-              <p>{t`This collection is dependent on the following collections`}</p>
-              <CollectionDependenciesList
-                collection={this.state.collection}
-                repo={this.context.selectedRepo}
-              />
-              <p>{t`This collection is being used by `}</p>
-              <CollectionUsedbyDependenciesList
-                repo={this.context.selectedRepo}
-                usedByDependencies={usedByDependencies}
-                itemCount={usedByDependenciesCount}
-                params={dependenciesParams}
-                updateParams={(p) =>
-                  this.updateParams(
-                    this.combineParams(this.state.params, p),
-                    () => this.loadUsedByDependencies(),
-                  )
-                }
-              />
+              {noDependencies &&
+              !usedByDependenciesCount &&
+              !filterIsSet(params, ['name']) ? (
+                <EmptyStateNoData
+                  title={t`No dependencies`}
+                  description={t`Collection does not have any dependencies`}
+                />
+              ) : (
+                <>
+                  <p>{t`This collection is dependent on the following collections`}</p>
+                  {noDependencies ? (
+                    <EmptyStateNoData
+                      title={t`No dependencies`}
+                      description={t`Collection has no dependencies.`}
+                    />
+                  ) : (
+                    <CollectionDependenciesList
+                      collection={this.state.collection}
+                      repo={this.context.selectedRepo}
+                    />
+                  )}
+                  <p>{t`This collection is being used by`}</p>
+                  <CollectionUsedbyDependenciesList
+                    repo={this.context.selectedRepo}
+                    usedByDependencies={usedByDependencies}
+                    itemCount={usedByDependenciesCount}
+                    params={dependenciesParams}
+                    updateParams={(p) =>
+                      this.updateParams(
+                        this.combineParams(this.state.params, p),
+                        () => this.loadUsedByDependencies(),
+                      )
+                    }
+                  />
+                </>
+              )}
             </div>
           </section>
         </Main>
