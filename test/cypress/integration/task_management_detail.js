@@ -11,9 +11,9 @@ describe('Task detail', () => {
       Cypress.env('prefix') + '/content/rh-certified/v3/sync/',
     ).as('sync');
 
-    let remotes = Cypress.env('prefix') + '_ui/v1/remotes/?*';
-
-    cy.intercept('GET', remotes).as('remotes');
+    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/remotes/?*').as(
+      'remotes',
+    );
 
     cy.contains('button', 'Sync').click();
     cy.wait('@sync');
