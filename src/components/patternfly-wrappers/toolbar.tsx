@@ -81,7 +81,7 @@ export class Toolbar extends React.Component<IProps, IState> {
                 />
                 <Button
                   variant={ButtonVariant.control}
-                  aria-label={`search button`}
+                  aria-label={t`search button`}
                   onClick={() => this.submitKeywords()}
                 >
                   <SearchIcon />
