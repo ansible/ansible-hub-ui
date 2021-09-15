@@ -115,7 +115,12 @@ export class CollectionCard extends React.Component<IProps> {
           <NumericLabel number={count} />
         </div>
         <div className='type-label'>
-          <NumericLabel number={count} hideNumber={true} label={type} />
+          <NumericLabel
+            number={count}
+            hideNumber={true}
+            label={type}
+            pluralLabels={Constants.COLLECTION_PLURAL_LABELS[type]}
+          />
         </div>
       </div>
     );
