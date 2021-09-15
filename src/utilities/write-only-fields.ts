@@ -1,5 +1,13 @@
 import { WriteOnlyFieldType } from 'src/api';
 
+export function isWriteOnly(
+  name: string,
+  writeOnlyFields: WriteOnlyFieldType[],
+) {
+  const field = writeOnlyFields.find((el) => el.name === name);
+  return !!field;
+}
+
 export function isFieldSet(
   name: string,
   writeOnlyFields: WriteOnlyFieldType[],

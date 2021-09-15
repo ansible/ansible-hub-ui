@@ -20,7 +20,7 @@ import { DownloadIcon } from '@patternfly/react-icons';
 
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { Constants } from 'src/constants';
-import { isFieldSet } from 'src/utilities';
+import { isFieldSet, isWriteOnly } from 'src/utilities';
 
 interface IProps {
   updateRemote: (remote) => void;
@@ -289,15 +289,23 @@ export class RemoteForm extends React.Component<IProps, IState> {
               validated={this.toError(!('username' in errorMessages))}
               helperTextInvalid={errorMessages['username']}
             >
-              <TextInput
-                validated={this.toError(!('username' in errorMessages))}
-                isRequired={requiredFields.includes('username')}
-                isDisabled={disabledFields.includes('username')}
-                id='username'
-                type='text'
-                value={remote.username || ''}
-                onChange={(value) => this.updateRemote(value, 'username')}
-              />
+              <WriteOnlyField
+                isValueSet={
+                  isWriteOnly('username', remote.write_only_fields) &&
+                  isFieldSet('username', remote.write_only_fields)
+                }
+                onClear={() => this.updateIsSet('username', false)}
+              >
+                <TextInput
+                  validated={this.toError(!('username' in errorMessages))}
+                  isRequired={requiredFields.includes('username')}
+                  isDisabled={disabledFields.includes('username')}
+                  id='username'
+                  type='text'
+                  value={remote.username || ''}
+                  onChange={(value) => this.updateRemote(value, 'username')}
+                />
+              </WriteOnlyField>
             </FormGroup>
             <FormGroup
               fieldId={'password'}
@@ -351,15 +359,25 @@ export class RemoteForm extends React.Component<IProps, IState> {
               validated={this.toError(!('proxy_username' in errorMessages))}
               helperTextInvalid={errorMessages['proxy_username']}
             >
-              <TextInput
-                validated={this.toError(!('proxy_username' in errorMessages))}
-                isRequired={requiredFields.includes('proxy_username')}
-                isDisabled={disabledFields.includes('proxy_username')}
-                id='proxy_username'
-                type='text'
-                value={remote.proxy_username || ''}
-                onChange={(value) => this.updateRemote(value, 'proxy_username')}
-              />
+              <WriteOnlyField
+                isValueSet={
+                  isWriteOnly('proxy_username', remote.write_only_fields) &&
+                  isFieldSet('proxy_username', remote.write_only_fields)
+                }
+                onClear={() => this.updateIsSet('proxy_username', false)}
+              >
+                <TextInput
+                  validated={this.toError(!('proxy_username' in errorMessages))}
+                  isRequired={requiredFields.includes('proxy_username')}
+                  isDisabled={disabledFields.includes('proxy_username')}
+                  id='proxy_username'
+                  type='text'
+                  value={remote.proxy_username || ''}
+                  onChange={(value) =>
+                    this.updateRemote(value, 'proxy_username')
+                  }
+                />
+              </WriteOnlyField>
             </FormGroup>
 
             <FormGroup

@@ -4,7 +4,11 @@ export { sanitizeDocsUrls } from './sanitize-docs-urls';
 export { mapErrorMessages } from './map-error-messages';
 export { getRepoUrl, getContainersURL } from './get-repo-url';
 export { twoWayMapper } from './two-way-mapper';
-export { isFieldSet, clearSetFieldsFromRequest } from './write-only-fields';
+export {
+  clearSetFieldsFromRequest,
+  isFieldSet,
+  isWriteOnly,
+} from './write-only-fields';
 export { filterIsSet } from './filter-is-set';
 export { truncateSha } from './truncate_sha';
 export { getHumanSize } from './get_human_size';
