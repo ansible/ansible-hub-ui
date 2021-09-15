@@ -10,8 +10,14 @@ describe('Task detail', () => {
       'POST',
       Cypress.env('prefix') + '/content/rh-certified/v3/sync/',
     ).as('sync');
+
+    let remotes = Cypress.env('prefix') + '_ui/v1/remotes/?*';
+
+    cy.intercept('GET', remotes).as('remotes');
+
     cy.contains('button', 'Sync').click();
     cy.wait('@sync');
+    cy.wait('@remotes');
   });
 
   it('contains correct headers and field names.', () => {
@@ -19,20 +25,24 @@ describe('Task detail', () => {
     cy.visit('/ui/tasks');
     cy.contains('Pulp Ansible: Collections sync').click();
 
-    cy.contains('Pulp Ansible: Collections sync');
-    cy.contains('Task detail');
-    cy.contains('Task name');
-    cy.contains('Created on');
-    cy.contains('Finished at');
-    cy.contains('Task groups');
-    cy.contains('Task group');
-    cy.contains('Parent task');
-    cy.contains('Child task');
-    cy.contains('Reserve resources');
-    cy.contains('Type');
-    cy.contains('Name');
-    cy.contains('remotes');
-    cy.contains('rh-certified');
-    cy.contains('repositories');
+    [
+      'Pulp Ansible: Collections sync',
+      'Task detail',
+      'Task name',
+      'Created on',
+      'Finished at',
+      'Task groups',
+      'Task group',
+      'Parent task',
+      'Child task',
+      'Reserve resources',
+      'Type',
+      'Name',
+      'remotes',
+      'rh-certified',
+      'repositories',
+    ].forEach((item) => {
+      cy.contains('.card-area', item);
+    });
   });
 });
