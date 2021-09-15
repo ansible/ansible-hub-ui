@@ -1,5 +1,4 @@
 import { WriteOnlyFieldType } from 'src/api';
-import { t } from '@lingui/macro';
 
 export function isFieldSet(
   name: string,

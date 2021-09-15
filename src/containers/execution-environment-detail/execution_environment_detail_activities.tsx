@@ -130,7 +130,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                       <React.Fragment>
                         <Trans>
                           <TagLink tag={action.tag_name} /> was moved to{' '}
-                          <ShaLink digest={action.manifest_digest} /> from
+                          <ShaLink digest={action.manifest_digest} /> from{' '}
                           <ShaLink digest={removed.manifest_digest} />
                         </Trans>
                       </React.Fragment>
