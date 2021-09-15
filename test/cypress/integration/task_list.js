@@ -10,8 +10,14 @@ describe('Task table contains correct headers and filter', () => {
       'POST',
       Cypress.env('prefix') + '/content/rh-certified/v3/sync/',
     ).as('sync');
+
+    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/remotes/?*').as(
+      'remotes',
+    );
+
     cy.contains('button', 'Sync').click();
     cy.wait('@sync');
+    cy.wait('@remotes');
   });
 
   it('table contains all columns and filter', () => {
