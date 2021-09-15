@@ -85,7 +85,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { featureFlags, menuExpandedSections, selectedRepo, user, settings } =
+    const { featureFlags, menuExpandedSections, selectedRepo, user } =
       this.state;
 
     // block the page from rendering if we're on a repo route and the repo in the
@@ -338,14 +338,12 @@ class App extends React.Component<RouteComponentProps, IState> {
             repo: this.state.selectedRepo,
           }),
           condition: ({ settings }) =>
-            !!settings &&
-            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
+            !settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
         }),
         menuItem(t`Namespaces`, {
           url: Paths[NAMESPACE_TERM],
           condition: ({ settings }) =>
-            !!settings &&
-            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
+            !settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
         }),
         menuItem(t`Repository Management`, {
           condition: ({ user }) => !user.is_anonymous,
@@ -382,8 +380,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
         external: true,
         condition: ({ settings }) =>
-          !!settings &&
-          settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
+          !settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
       }),
       menuSection(t`User Access`, {}, [
         menuItem(t`Users`, {
