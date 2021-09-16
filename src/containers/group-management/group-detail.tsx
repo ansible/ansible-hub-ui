@@ -424,7 +424,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         variant='large'
         onClose={close}
         isOpen={true}
-        aria-label='add-user-modal'
+        aria-label={t`add-user-modal`}
         title={''}
         header={
           <span className='pf-c-content'>

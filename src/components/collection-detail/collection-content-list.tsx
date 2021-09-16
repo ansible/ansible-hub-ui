@@ -68,7 +68,7 @@ export class CollectionContentList extends React.Component<IProps> {
                   onClear={() =>
                     updateParams(ParamHelper.setParam(params, 'keywords', ''))
                   }
-                  aria-label='find-content'
+                  aria-label={t`find-content`}
                   placeholder={t`Find content`}
                 />
               </ToolbarItem>

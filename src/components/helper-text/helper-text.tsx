@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { t } from '@lingui/macro';
 import { Popover, PopoverPosition, Button } from '@patternfly/react-core';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 import './helper-text.scss';
@@ -12,7 +13,7 @@ export class HelperText extends React.Component<IProps, {}> {
   render() {
     return (
       <Popover
-        aria-label='popover example'
+        aria-label={t`popover example`}
         position={PopoverPosition.top}
         bodyContent={this.props.content}
       >

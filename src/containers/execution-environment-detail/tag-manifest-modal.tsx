@@ -166,7 +166,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                 }}
               />
               <Button
-                aria-label='add new tag to image'
+                aria-label={t`Add new tag to image`}
                 variant='secondary'
                 onClick={this.verifyAndAddTag}
                 isDisabled={!!tagToVerify || verifyingTag || isSaving}
