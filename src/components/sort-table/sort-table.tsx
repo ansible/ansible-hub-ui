@@ -76,7 +76,7 @@ export class SortTable extends React.Component<IProps> {
   render() {
     return (
       <thead>
-        <tr aria-labelledby={t`headers`}>
+        <tr aria-labelledby='headers'>
           {this.props.options['headers'].map((element) =>
             this.getHeaderItem(element),
           )}
