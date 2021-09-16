@@ -119,7 +119,7 @@ class CollectionDependencies extends React.Component<
               !filterIsSet(params, ['name']) ? (
                 <EmptyStateNoData
                   title={t`No dependencies`}
-                  description={t`Collection does not have any dependencies`}
+                  description={t`Collection does not have any dependencies.`}
                 />
               ) : (
                 <>
@@ -127,7 +127,7 @@ class CollectionDependencies extends React.Component<
                   {noDependencies ? (
                     <EmptyStateNoData
                       title={t`No dependencies`}
-                      description={t`Collection has no dependencies.`}
+                      description={t`Collection does not have any dependencies.`}
                     />
                   ) : (
                     <CollectionDependenciesList
