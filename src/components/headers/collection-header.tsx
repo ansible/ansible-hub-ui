@@ -1,10 +1,20 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import cx from 'classnames';
 import './header.scss';
 
+import * as moment from 'moment';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import { FormSelect, FormSelectOption, Alert } from '@patternfly/react-core';
+import {
+  Select,
+  SelectOption,
+  SelectVariant,
+  List,
+  ListItem,
+  Modal,
+  Alert,
+  Text,
+  Button,
+} from '@patternfly/react-core';
 import { AppContext } from 'src/loaders/app-context';
 
 import {
@@ -12,11 +22,14 @@ import {
   Breadcrumbs,
   LinkTabs,
   RepoSelector,
+  Pagination,
 } from 'src/components';
+
 import { CollectionDetailType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
+import { Constants } from 'src/constants';
 
 interface IProps {
   collection: CollectionDetailType;
@@ -34,9 +47,31 @@ interface IProps {
   repo?: string;
 }
 
-export class CollectionHeader extends React.Component<IProps> {
-  ignoreParams = ['showing', 'keyords'];
+interface IState {
+  isOpenVersionsSelect: boolean;
+  isOpenVersionsModal: boolean;
+  modalPagination: {
+    page: number;
+    pageSize: number;
+  };
+}
+
+export class CollectionHeader extends React.Component<IProps, IState> {
+  ignoreParams = ['showing', 'keywords'];
   static contextType = AppContext;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOpenVersionsSelect: false,
+      isOpenVersionsModal: false,
+      modalPagination: {
+        page: 1,
+        pageSize: Constants.DEFAULT_PAGINATION_OPTIONS[1],
+      },
+    };
+  }
 
   render() {
     const {
@@ -47,6 +82,11 @@ export class CollectionHeader extends React.Component<IProps> {
       activeTab,
       className,
     } = this.props;
+
+    const { modalPagination, isOpenVersionsModal, isOpenVersionsSelect } =
+      this.state;
+
+    const numOfshownVersions = 10;
 
     const all_versions = [...collection.all_versions];
 
@@ -71,79 +111,170 @@ export class CollectionHeader extends React.Component<IProps> {
 
     const latestVersion = collection.latest_version.created_at;
 
-    return (
-      <BaseHeader
-        className={className}
-        title={collection.name}
-        imageURL={collection.namespace.avatar_url}
-        contextSelector={
-          <RepoSelector
-            selectedRepo={this.context.selectedRepo}
-            path={Paths.searchByRepo}
-            isDisabled
-          />
-        }
-        breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
-        versionControl={
-          <div className='install-version-column'>
-            <span>{t`Version`}</span>
-            <div className='install-version-dropdown'>
-              <FormSelect
-                onChange={(val) =>
-                  updateParams(ParamHelper.setParam(params, 'version', val))
-                }
-                value={collection.latest_version.version}
-                aria-label={t`Select collection version`}
-              >
-                {all_versions.map((v) => (
-                  <FormSelectOption
-                    key={v.version}
-                    value={v.version}
-                    label={'v' + v.version}
-                  />
-                ))}
-              </FormSelect>
-            </div>
-            {latestVersion ? (
-              <span className='last-updated'>
-                <Trans>
-                  Last updated <DateComponent date={latestVersion} />
-                </Trans>
-              </span>
-            ) : null}
-          </div>
-        }
-      >
-        {collection.deprecated && (
-          <Alert
-            variant='danger'
-            isInline
-            title={t`This collection has been deprecated.`}
-          />
-        )}
-        <div className='tab-link-container'>
-          <div className='tabs'>{this.renderTabs(activeTab)}</div>
-          <div className='links'>
-            <div>
-              <ExternalLinkAltIcon />
-            </div>
-            {urlKeys.map((link) => {
-              const l = collection.latest_version.metadata[link.key];
-              if (!l) {
-                return null;
-              }
+    const isLatestVersion = (v) =>
+      `${moment(v.created).fromNow()} ${
+        v.version === all_versions[0].version ? t`(latest)` : ''
+      }`;
 
-              return (
-                <div className='link' key={link.key}>
-                  <a href={l} target='_blank'>
-                    {link.name}
-                  </a>
-                </div>
-              );
-            })}
+    const { name: collectionName } = collection;
+
+    return (
+      <React.Fragment>
+        <Modal
+          isOpen={isOpenVersionsModal}
+          title={t`Collection versions`}
+          variant='small'
+          onClose={() => this.setState({ isOpenVersionsModal: false })}
+        >
+          <List isPlain>
+            <div className='versions-modal-header'>
+              <Text>{t`${collectionName}'s versions.`}</Text>
+              <Pagination
+                isTop
+                params={{
+                  page: modalPagination.page,
+                  page_size: modalPagination.pageSize,
+                }}
+                updateParams={this.updatePaginationParams}
+                count={all_versions.length}
+              />
+            </div>
+            {this.paginateVersions(all_versions).map((v, i) => (
+              <ListItem key={i}>
+                <Button
+                  variant='link'
+                  isInline
+                  onClick={() => {
+                    updateParams(
+                      ParamHelper.setParam(
+                        params,
+                        'version',
+                        v.version.toString(),
+                      ),
+                    );
+                    this.setState({ isOpenVersionsModal: false });
+                  }}
+                >
+                  v{v.version}
+                </Button>{' '}
+                {t`released ${isLatestVersion(v)}`}
+              </ListItem>
+            ))}
+          </List>
+          <Pagination
+            params={{
+              page: modalPagination.page,
+              page_size: modalPagination.pageSize,
+            }}
+            updateParams={this.updatePaginationParams}
+            count={all_versions.length}
+          />
+        </Modal>
+        <BaseHeader
+          className={className}
+          title={collection.name}
+          imageURL={collection.namespace.avatar_url}
+          contextSelector={
+            <RepoSelector
+              selectedRepo={this.context.selectedRepo}
+              path={Paths.searchByRepo}
+              isDisabled
+            />
+          }
+          breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
+          versionControl={
+            <div className='install-version-column'>
+              <span>{t`Version`}</span>
+              <div className='install-version-dropdown'>
+                <Select
+                  isOpen={isOpenVersionsSelect}
+                  onToggle={(isOpenVersionsSelect) =>
+                    this.setState({ isOpenVersionsSelect })
+                  }
+                  variant={SelectVariant.single}
+                  onSelect={() =>
+                    this.setState({ isOpenVersionsSelect: false })
+                  }
+                  selections={`v${collection.latest_version.version}`}
+                  aria-label={t`Select collection version`}
+                  loadingVariant={
+                    numOfshownVersions < all_versions.length
+                      ? {
+                          text: t`View more`,
+                          onClick: () =>
+                            this.setState({
+                              isOpenVersionsModal: true,
+                              isOpenVersionsSelect: false,
+                            }),
+                        }
+                      : null
+                  }
+                >
+                  {this.renderSelectVersions(
+                    all_versions,
+                    numOfshownVersions,
+                  ).map((v) => (
+                    <SelectOption
+                      key={v.version}
+                      value={`v${v.version}`}
+                      onClick={() =>
+                        updateParams(
+                          ParamHelper.setParam(
+                            params,
+                            'version',
+                            v.version.toString(),
+                          ),
+                        )
+                      }
+                    >
+                      <Trans>
+                        {v.version} released {isLatestVersion(v)}
+                      </Trans>
+                    </SelectOption>
+                  ))}
+                </Select>
+              </div>
+              {latestVersion ? (
+                <span className='last-updated'>
+                  <Trans>
+                    Last updated <DateComponent date={latestVersion} />
+                  </Trans>
+                </span>
+              ) : null}
+            </div>
+          }
+        >
+          {collection.deprecated && (
+            <Alert
+              variant='danger'
+              isInline
+              title={t`This collection has been deprecated.`}
+            />
+          )}
+          <div className='tab-link-container'>
+            <div className='tabs'>{this.renderTabs(activeTab)}</div>
+            <div className='links'>
+              <div>
+                <ExternalLinkAltIcon />
+              </div>
+              {urlKeys.map((link) => {
+                const url = collection.latest_version.metadata[link.key];
+                if (!url) {
+                  return null;
+                }
+
+                return (
+                  <div className='link' key={link.key}>
+                    <a href={url} target='_blank'>
+                      {link.name}
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </BaseHeader>
+        </BaseHeader>
+      </React.Fragment>
     );
   }
 
@@ -186,4 +317,25 @@ export class CollectionHeader extends React.Component<IProps> {
 
     return <LinkTabs tabs={tabs} />;
   }
+
+  private renderSelectVersions(versions, count) {
+    return versions.slice(0, count);
+  }
+
+  private paginateVersions(versions) {
+    const { modalPagination } = this.state;
+    return versions.slice(
+      modalPagination.pageSize * (modalPagination.page - 1),
+      modalPagination.pageSize * modalPagination.page,
+    );
+  }
+
+  private updatePaginationParams = ({ page, page_size }) => {
+    this.setState({
+      modalPagination: {
+        page: page,
+        pageSize: page_size,
+      },
+    });
+  };
 }
