@@ -36,11 +36,6 @@ describe('Task detail', () => {
       'Parent task',
       'Child task',
       'Reserve resources',
-      'Type',
-      'Name',
-      'remotes',
-      'rh-certified',
-      'repositories',
     ].forEach((item) => {
       cy.contains('.card-area', item);
     });
