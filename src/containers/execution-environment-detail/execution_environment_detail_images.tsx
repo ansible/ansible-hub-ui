@@ -3,7 +3,7 @@ import * as React from 'react';
 import './execution-environment-detail.scss';
 
 import { pickBy } from 'lodash';
-import { ImagesAPI, ContainerManifestType } from '../../api';
+import { ExecutionEnvironmentAPI, ContainerManifestType } from '../../api';
 import { formatPath, Paths } from '../../paths';
 import { filterIsSet, ParamHelper, getHumanSize } from '../../utilities';
 
@@ -352,7 +352,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
   queryImages(name) {
     this.setState({ loading: true }, () =>
-      ImagesAPI.list(
+      ExecutionEnvironmentAPI.images(
         name,
         ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
       )
