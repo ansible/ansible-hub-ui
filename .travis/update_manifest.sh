@@ -9,9 +9,7 @@ readonly TRAVIS_BRANCH="${TRAVIS_BRANCH:-}"
 
 readonly MANIFESTS_GIT_USER="${MANIFESTS_GIT_USER:-}"
 readonly MANIFESTS_GIT_EMAIL="${MANIFESTS_GIT_EMAIL:-}"
-readonly MANIFESTS_GIT_TOKEN="${RH_GALAXY_DROID_GITHUB_TOKEN:-}"
-
-readonly MANIFESTS_GIT_URL="https://${MANIFESTS_GIT_USER}:${MANIFESTS_GIT_TOKEN}@github.com/RedHatInsights/manifests.git"
+readonly MANIFESTS_GIT_URL="git@github.com:RedHatInsights/manifests.git"
 
 readonly GENERATE_MANIFEST=".travis/generate_manifest.js"
 readonly MANIFESTS_DIR='/tmp/manifests'
@@ -37,6 +35,15 @@ else
     log_message "Ignoring manifest update for branch '${TRAVIS_BRANCH}'."
     exit 0
 fi
+
+
+# decrypt deploy key and use
+gpg --quiet --batch --yes --decrypt --passphrase="$MANIFEST_PASSPHRASE" --output .travis/deploy_manifest .travis/deploy_manifest.gpg
+
+chmod 600 .travis/deploy_manifest
+eval `ssh-agent -s`
+ssh-add .travis/deploy_manifest
+
 
 git clone --depth=10 --branch="${manifests_branch}" \
     "${MANIFESTS_GIT_URL}" "${MANIFESTS_DIR}" &>/dev/null
