@@ -53,9 +53,11 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
         <div className='usedby-dependencies-header'>
           <Toolbar
             params={{ ...rest, keywords: name }}
-            sortOptions={[
-              { title: t`Collection`, id: 'collection', type: 'alpha' },
-            ]}
+            sortOptions={
+              !!itemCount && [
+                { title: t`Collection`, id: 'collection', type: 'alpha' },
+              ]
+            }
             searchPlaceholder={t`Filter collection name`}
             updateParams={(p) => {
               const { keywords, ...rest } = p;
@@ -64,12 +66,14 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
                 : updateParams(p);
             }}
           />
-          <Pagination
-            params={params}
-            updateParams={(p) => updateParams(p)}
-            count={itemCount}
-            isTop
-          />
+          {!!itemCount && (
+            <Pagination
+              params={params}
+              updateParams={(p) => updateParams(p)}
+              count={itemCount}
+              isTop
+            />
+          )}
         </div>
 
         {!itemCount ? (
