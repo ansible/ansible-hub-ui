@@ -15,6 +15,7 @@ import {
   DropdownItem,
   Tooltip,
   Text,
+  Checkbox,
 } from '@patternfly/react-core';
 
 import * as ReactMarkdown from 'react-markdown';
@@ -41,10 +42,10 @@ import {
   AlertType,
   AlertList,
   closeAlertMixin,
+  ConfirmModal,
 } from 'src/components';
 
 import { ImportModal } from './import-modal/import-modal';
-import { DeleteModalWithConfirm } from 'src/components/delete-modal-with-confirm/delete-modal-with-confirm';
 
 import { ParamHelper, getRepoUrl, filterIsSet } from 'src/utilities';
 import { Constants } from 'src/constants';
@@ -71,6 +72,7 @@ interface IState {
   isOpenNamespaceModal: boolean;
   alerts: AlertType[];
   isNamespaceEmpty: boolean;
+  confirmDelete: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -106,6 +108,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       isOpenNamespaceModal: false,
       alerts: [],
       isNamespaceEmpty: false,
+      confirmDelete: false,
     };
   }
 
@@ -123,6 +126,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       showImportModal,
       warning,
       updateCollection,
+      isOpenNamespaceModal,
+      confirmDelete,
     } = this.state;
 
     if (redirect) {
@@ -180,18 +185,29 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           collection={updateCollection}
           namespace={namespace.name}
         />
-        <DeleteModalWithConfirm
-          isOpen={this.state.isOpenNamespaceModal}
-          cancelAction={this.closeModal}
-          deleteAction={this.deleteNamespace}
-          title={t`Permanently delete namespace?`}
-        >
-          <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
-            <Trans>
-              Deleting <b>{namespace.name}</b> and its data will be lost.
-            </Trans>
-          </Text>
-        </DeleteModalWithConfirm>
+        {isOpenNamespaceModal && (
+          <ConfirmModal
+            cancelAction={this.closeModal}
+            confirmAction={this.deleteNamespace}
+            title={t`Permanently delete namespace?`}
+            confirmButtonTitle={t`Delete`}
+            isDisabled={!confirmDelete}
+          >
+            <>
+              <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+                <Trans>
+                  Deleting <b>{namespace.name}</b> and its data will be lost.
+                </Trans>
+              </Text>
+              <Checkbox
+                isChecked={confirmDelete}
+                onChange={(val) => this.setState({ confirmDelete: val })}
+                label={t`I understand that this action cannot be undone.`}
+                id='delete_confirm'
+              />
+            </>
+          </ConfirmModal>
+        )}
         <AlertList
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}
@@ -383,28 +399,30 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           showControls: !!val[2],
         });
 
-        this.loadAllRepos();
+        this.loadAllRepos(val[0].data.meta.count);
       })
       .catch((response) => {
         this.setState({ redirect: Paths.notFound });
       });
   }
 
-  private loadAllRepos() {
+  private loadAllRepos(currentRepoCount) {
     // get collections in namespace from each repo
-    // except the one we already have 
+    // except the one we already have
     const repoPromises = Object.keys(Constants.REPOSITORYNAMES)
-      .filter(repo => repo !== this.context.selectedRepo)
+      .filter((repo) => repo !== this.context.selectedRepo)
       .map((repo) =>
         CollectionAPI.list(
           { namespace: this.props.match.params['namespace'] },
           repo,
-        )
-      )
+        ),
+      );
 
     Promise.all(repoPromises).then((results) =>
       this.setState({
-        isNamespaceEmpty: results.every((val) => val.data.meta.count === 0),
+        isNamespaceEmpty:
+          results.every((val) => val.data.meta.count === 0) &&
+          currentRepoCount === 0,
       }),
     );
   }
@@ -501,7 +519,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private deleteNamespace = () => {
     NamespaceAPI.delete(this.state.namespace.name)
       .then(() => {
-        this.setState({ redirect: formatPath(Paths.namespaces, {}) });
+        this.setState({
+          redirect: formatPath(Paths.namespaces, {}),
+          confirmDelete: false,
+        });
         this.context.setAlerts([
           ...this.context.alerts,
           {
@@ -521,12 +542,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             },
           ],
           isOpenNamespaceModal: false,
+          confirmDelete: false,
         });
       });
   };
 
   private closeModal = () => {
-    this.setState({ isOpenNamespaceModal: false });
+    this.setState({ isOpenNamespaceModal: false, confirmDelete: false });
   };
 
   private get closeAlert() {
