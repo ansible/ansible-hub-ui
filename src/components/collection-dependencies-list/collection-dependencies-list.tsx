@@ -42,7 +42,7 @@ export class CollectionDependenciesList extends React.Component<IProps> {
                   namespace: this.splitDependencyName(dependency).namespace,
                   repo,
                 },
-                { version: this.separateVersion(dependencies[dependency]) },
+                this.separateVersion(dependencies[dependency]),
               )}
             >
               {this.splitDependencyName(dependency).collection}
@@ -59,6 +59,7 @@ export class CollectionDependenciesList extends React.Component<IProps> {
   }
 
   private separateVersion(version) {
-    return version.split(/(\d+.*)/)[1];
+    const v = version.match(/((\d+\.*)+)/);
+    return v ? { version: v[0] } : {};
   }
 }
