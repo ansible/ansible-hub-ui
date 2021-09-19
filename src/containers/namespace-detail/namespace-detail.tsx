@@ -418,13 +418,26 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         ),
       );
 
-    Promise.all(repoPromises).then((results) =>
-      this.setState({
-        isNamespaceEmpty:
-          results.every((val) => val.data.meta.count === 0) &&
-          currentRepoCount === 0,
-      }),
-    );
+    Promise.all(repoPromises)
+      .then((results) =>
+        this.setState({
+          isNamespaceEmpty:
+            results.every((val) => val.data.meta.count === 0) &&
+            currentRepoCount === 0,
+        }),
+      )
+      .catch((err) =>
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: 'Error loading collection repositories',
+              description: err?.message,
+            },
+          ],
+        }),
+      );
   }
 
   private get updateParams() {
