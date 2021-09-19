@@ -166,6 +166,18 @@ export class API extends HubAPI {
     });
   }
 
+  deleteCollectionVersion(collection) {
+    return this.http.delete(
+      `v3/collections/${collection.namespace.name}/${collection.name}/versions/${collection.latest_version.version}/`,
+    );
+  }
+
+  deleteCollection(collection) {
+    return this.http.delete(
+      `v3/collections/${collection.namespace.name}/${collection.name}/`,
+    );
+  }
+
   getUsedDependenciesByCollection(namespace, collection, params?) {
     return this.http.get(
       this.getUIPath(
