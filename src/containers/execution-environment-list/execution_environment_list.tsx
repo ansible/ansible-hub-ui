@@ -1,17 +1,22 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment.scss';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   Button,
+  Checkbox,
   DropdownItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { ExecutionEnvironmentAPI, ExecutionEnvironmentType } from 'src/api';
+import {
+  ExecutionEnvironmentAPI,
+  ExecutionEnvironmentType,
+  TaskAPI,
+} from 'src/api';
 import { filterIsSet, ParamHelper } from 'src/utilities';
 import {
   AlertList,
@@ -32,9 +37,10 @@ import {
   closeAlertMixin,
   EmptyStateUnauthorized,
 } from 'src/components';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from 'src/loaders/app-context';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 interface IState {
   params: {
@@ -47,6 +53,9 @@ interface IState {
   itemCount: number;
   alerts: AlertType[];
   unauthorized: boolean;
+  deleteModalVisible: boolean;
+  selectedItem: ExecutionEnvironmentType;
+  confirmDelete: boolean;
 }
 
 class ExecutionEnvironmentList extends React.Component<
@@ -77,6 +86,9 @@ class ExecutionEnvironmentList extends React.Component<
       itemCount: 0,
       alerts: [],
       unauthorized: false,
+      deleteModalVisible: false,
+      selectedItem: null,
+      confirmDelete: false,
     };
   }
 
@@ -97,6 +109,9 @@ class ExecutionEnvironmentList extends React.Component<
       alerts,
       items,
       unauthorized,
+      deleteModalVisible,
+      selectedItem,
+      confirmDelete,
     } = this.state;
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
     const pushImagesButton = (
@@ -127,6 +142,26 @@ class ExecutionEnvironmentList extends React.Component<
           tag={publishToController?.tag}
         />
         <BaseHeader title={t`Execution Environments`}></BaseHeader>
+        {deleteModalVisible && (
+    <DeleteModal
+        title={'Permanently delete container'}
+        cancelAction={() =>
+            this.setState({ deleteModalVisible: false, selectedItem: null })
+        }
+        deleteAction={() => this.deleteContainer()}
+        isDisabled={!confirmDelete}
+    >
+      <Trans>
+        Deleting <b>{selectedItem.name}</b> and its data will be lost.
+      </Trans>
+      <Checkbox
+          isChecked={confirmDelete}
+          onChange={(value) => this.setState({ confirmDelete: value })}
+          label={t`I understand that this action cannot be undone.`}
+          id='delete_confirm'
+      />
+    </DeleteModal>
+)}
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : noData && !loading ? (
@@ -268,6 +303,14 @@ class ExecutionEnvironmentList extends React.Component<
       >
         {t`Use in Controller`}
       </DropdownItem>,
+        <DropdownItem
+    key='delete'
+    onClick={() =>
+    this.setState({ selectedItem: item, deleteModalVisible: true })
+  }
+  >
+    {t`Delete`}
+    </DropdownItem>,
     ].filter((truthy) => truthy);
 
     return (
@@ -294,7 +337,7 @@ class ExecutionEnvironmentList extends React.Component<
         <td>
           <DateComponent date={item.updated} />
         </td>
-        <td>
+        <td style={{ paddingRight: '0px', textAlign: 'right' }} >
           {!!dropdownItems.length && <StatefulDropdown items={dropdownItems} />}
         </td>
       </tr>
@@ -311,6 +354,51 @@ class ExecutionEnvironmentList extends React.Component<
         }),
       ),
     );
+  }
+
+  private deleteContainer() {
+    const { selectedItem } = this.state;
+    ExecutionEnvironmentAPI.deleteExecutionEnvironment(selectedItem.name)
+      .then((result) => {
+        let taskId = result.data.task.split('tasks/')[1].replace('/', '');
+        this.setState({
+          loading: true,
+          deleteModalVisible: false,
+          selectedItem: null,
+          confirmDelete: false,
+        });
+        this.waitForTask(taskId).then(() => {
+          this.setState({
+            alerts: this.state.alerts.concat([
+              {
+                variant: 'success',
+                title: t`Success: ${selectedItem.name} was deleted`,
+              },
+            ]),
+          });
+          this.queryEnvironments();
+        });
+      })
+      .catch(() => {
+        this.setState({
+          deleteModalVisible: false,
+          selectedItem: null,
+          confirmDelete: false,
+          alerts: this.state.alerts.concat([
+            { variant: 'danger', title: t`Error: delete failed` },
+          ]),
+        });
+      });
+  }
+
+  private waitForTask(task) {
+    return TaskAPI.get(task).then((result) => {
+      if (result.data.state !== 'completed') {
+        return new Promise((r) => setTimeout(r, 500)).then(() =>
+          this.waitForTask(task),
+        );
+      }
+    });
   }
 
   private get updateParams() {
