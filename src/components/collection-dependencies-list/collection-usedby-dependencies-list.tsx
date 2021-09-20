@@ -5,10 +5,17 @@ import { Link } from 'react-router-dom';
 import { CollectionUsedByDependencies } from 'src/api';
 
 import {
-  Pagination,
   Toolbar,
+  ToolbarItem,
+  ToolbarGroup,
+  SearchInput,
+} from '@patternfly/react-core';
+
+import {
+  Pagination,
   EmptyStateNoData,
   EmptyStateFilter,
+  Sort,
 } from 'src/components';
 
 import { ParamHelper, filterIsSet } from 'src/utilities';
@@ -38,8 +45,6 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
     const { params, usedByDependencies, itemCount, updateParams, repo } =
       this.props;
 
-    const { name, ...rest } = params;
-
     if (!itemCount && !filterIsSet(params, ['name']))
       return (
         <EmptyStateNoData
@@ -51,21 +56,34 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
     return (
       <>
         <div className='usedby-dependencies-header'>
-          <Toolbar
-            params={{ ...rest, keywords: name }}
-            sortOptions={
-              !!itemCount && [
-                { title: t`Collection`, id: 'collection', type: 'alpha' },
-              ]
-            }
-            searchPlaceholder={t`Filter collection name`}
-            updateParams={(p) => {
-              const { keywords, ...rest } = p;
-              'keywords' in p
-                ? updateParams({ ...rest, name: keywords })
-                : updateParams(p);
-            }}
-          />
+          <Toolbar>
+            <ToolbarGroup>
+              <ToolbarItem>
+                <SearchInput
+                  value={params.name || ''}
+                  onChange={(val) =>
+                    updateParams(ParamHelper.setParam(params, 'name', val))
+                  }
+                  onClear={() =>
+                    updateParams(ParamHelper.setParam(params, 'name', ''))
+                  }
+                  aria-label='filter-collection-name'
+                  placeholder={t`Filter collection name`}
+                />
+              </ToolbarItem>
+              <ToolbarItem>
+                <Sort
+                  options={[
+                    { title: t`Collection`, id: 'collection', type: 'alpha' },
+                  ]}
+                  params={params}
+                  updateParams={({ sort }) =>
+                    updateParams(ParamHelper.setParam(params, 'sort', sort))
+                  }
+                />
+              </ToolbarItem>
+            </ToolbarGroup>
+          </Toolbar>
           {!!itemCount && (
             <Pagination
               params={params}

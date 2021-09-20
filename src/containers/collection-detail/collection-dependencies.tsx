@@ -48,6 +48,8 @@ class CollectionDependencies extends React.Component<
       'page_size',
     ]);
 
+    params['sort'] = !params['sort'] ? '-collection' : 'collection';
+
     this.state = {
       collection: undefined,
       params: params,
