@@ -85,7 +85,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { featureFlags, menuExpandedSections, selectedRepo, user } =
+    const { featureFlags, menuExpandedSections, selectedRepo, user, settings } =
       this.state;
 
     // block the page from rendering if we're on a repo route and the repo in the
@@ -231,8 +231,8 @@ class App extends React.Component<RouteComponentProps, IState> {
       ) : (
         <MenuItem item={item} />
       );
-    const MenuItem = ({ item }) =>
-      item.condition({ user, featureFlags }) ? (
+    const MenuItem = ({ item }) => {
+      return item.condition({ user, settings, featureFlags }) ? (
         <NavItem
           isActive={item.active}
           onClick={(e) => {
@@ -254,6 +254,8 @@ class App extends React.Component<RouteComponentProps, IState> {
           )}
         </NavItem>
       ) : null;
+    };
+
     const Menu = ({ items }) => (
       <>
         {items.map((item) => (
@@ -262,7 +264,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       </>
     );
     const MenuSection = ({ section }) =>
-      section.condition({ user, featureFlags }) ? (
+      section.condition({ user, featureFlags, settings }) ? (
         <NavExpandable
           title={section.name}
           groupId={section.name}
@@ -338,12 +340,12 @@ class App extends React.Component<RouteComponentProps, IState> {
             repo: this.state.selectedRepo,
           }),
           condition: ({ settings }) =>
-            !settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
+            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
         }),
         menuItem(t`Namespaces`, {
           url: Paths[NAMESPACE_TERM],
           condition: ({ settings }) =>
-            !settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
+            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
         }),
         menuItem(t`Repository Management`, {
           condition: ({ user }) => !user.is_anonymous,
@@ -380,7 +382,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
         external: true,
         condition: ({ settings }) =>
-          !settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
+          settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
       }),
       menuSection(t`User Access`, {}, [
         menuItem(t`Users`, {
