@@ -42,7 +42,7 @@ interface IState {
   itemCount: number;
   loading: boolean;
   showRemoteFormModal: boolean;
-  errorMessages: Object;
+  errorMessages: Object; // RemoteForm modal messages
 
   content: RemoteType[] | DistributionType[];
   remoteToEdit: RemoteType;

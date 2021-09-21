@@ -23,12 +23,15 @@ import { Constants } from 'src/constants';
 import { isFieldSet, isWriteOnly } from 'src/utilities';
 
 interface IProps {
-  updateRemote: (remote) => void;
-  remote: RemoteType;
-  saveRemote: () => void;
-  showModal: boolean;
+  allowEditName?: boolean;
   closeModal: () => void;
   errorMessages: object;
+  remote: RemoteType;
+  remoteType?: 'registry';
+  saveRemote: () => void;
+  showModal: boolean;
+  title?: string;
+  updateRemote: (remote) => void;
 }
 
 interface IState {
@@ -72,10 +75,11 @@ export class RemoteForm extends React.Component<IProps, IState> {
     if (!remote) {
       return null;
     }
-    const remoteType = this.getRemoteType(remote.url);
+
+    const remoteType = this.props.remoteType || this.getRemoteType(remote.url);
 
     let requiredFields = ['name', 'url'];
-    let disabledFields = ['name'];
+    let disabledFields = this.props.allowEditName ? [] : ['name'];
 
     if (remoteType === 'certified') {
       requiredFields = requiredFields.concat(['auth_url']);
@@ -86,10 +90,19 @@ export class RemoteForm extends React.Component<IProps, IState> {
       requiredFields = requiredFields.concat(['requirements_file']);
       disabledFields = disabledFields.concat(['auth_url', 'token']);
     }
+
+    if (remoteType === 'registry') {
+      disabledFields = disabledFields.concat([
+        'auth_url',
+        'token',
+        'requirements_file',
+      ]);
+    }
+
     return (
       <Modal
         isOpen={this.props.showModal}
-        title={t`Edit remote`}
+        title={this.props.title || t`Edit remote`}
         variant='small'
         onClose={() => this.props.closeModal()}
         actions={[
@@ -144,6 +157,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             onChange={(value) => this.updateRemote(value, 'name')}
           />
         </FormGroup>
+
         <FormGroup
           fieldId={'url'}
           label={t`URL`}
@@ -164,6 +178,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             onChange={(value) => this.updateRemote(value, 'url')}
           />
         </FormGroup>
+
         {!disabledFields.includes('token') && (
           <FormGroup
             fieldId={'token'}
@@ -272,6 +287,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </Flex>
           </FormGroup>
         )}
+
         <ExpandableSection
           toggleTextExpanded={t`Hide advanced options`}
           toggleTextCollapsed={t`Show advanced options`}
@@ -307,6 +323,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 />
               </WriteOnlyField>
             </FormGroup>
+
             <FormGroup
               fieldId={'password'}
               label={t`Password`}
@@ -334,6 +351,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 />
               </WriteOnlyField>
             </FormGroup>
+
             <FormGroup
               fieldId={'proxy_url'}
               label={t`Proxy URL`}
@@ -426,6 +444,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 isChecked={remote.tls_validation}
               />
             </FormGroup>
+
             <FormGroup
               fieldId={'client_key'}
               label={t`Client key`}
@@ -458,6 +477,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 />
               </WriteOnlyField>
             </FormGroup>
+
             <FormGroup
               fieldId={'client_cert'}
               label={t`Client certificate`}
@@ -507,6 +527,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 </FlexItem>
               </Flex>
             </FormGroup>
+
             <FormGroup
               fieldId={'ca_cert'}
               label={t`CA certificate`}
@@ -555,6 +576,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 </FlexItem>
               </Flex>
             </FormGroup>
+
             <FormGroup
               fieldId={'download_concurrency'}
               label={t`Download concurrency`}
@@ -563,7 +585,12 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   content={t`Total number of simultaneous connections.`}
                 />
               }
-              validated={remote.download_concurrency > 0 ? 'default' : 'error'}
+              validated={
+                !this.isNumericSet(remote.download_concurrency) ||
+                remote.download_concurrency > 0
+                  ? 'default'
+                  : 'error'
+              }
               helperTextInvalid={t`Number must be greater than 0`}
             >
               <TextInput
@@ -571,13 +598,17 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 type='number'
                 value={remote.download_concurrency}
                 validated={
-                  remote.download_concurrency > 0 ? 'default' : 'error'
+                  !this.isNumericSet(remote.download_concurrency) ||
+                  remote.download_concurrency > 0
+                    ? 'default'
+                    : 'error'
                 }
                 onChange={(value) =>
-                  this.updateRemote(parseInt(value), 'download_concurrency')
+                  this.updateRemote(value, 'download_concurrency')
                 }
               />
             </FormGroup>
+
             <FormGroup
               fieldId={'rate_limit'}
               label={t`Rate Limit`}
@@ -587,8 +618,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 />
               }
               validated={
-                Number.isInteger(remote.rate_limit) ||
-                remote.rate_limit === null
+                !this.isNumericSet(remote.rate_limit) ||
+                Number.isInteger(remote.rate_limit)
                   ? 'default'
                   : 'error'
               }
@@ -596,6 +627,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             >
               <TextInput
                 id='rate_limit'
+                type='number'
                 value={remote.rate_limit}
                 onChange={(value) => this.updateRemote(value, 'rate_limit')}
               />
@@ -665,6 +697,15 @@ export class RemoteForm extends React.Component<IProps, IState> {
   }
 
   private updateRemote(value, field) {
+    const numericFields = ['download_concurrency', 'rate_limit'];
+    if (numericFields.includes(field)) {
+      value = Number.isInteger(value)
+        ? value
+        : Number.isNaN(parseInt(value, 10))
+        ? null
+        : parseInt(value, 10);
+    }
+
     const update = { ...this.props.remote };
     update[field] = value;
     this.props.updateRemote(update);
@@ -676,5 +717,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
     } else {
       return 'error';
     }
+  }
+
+  private isNumericSet(value) {
+    return value != null && value !== '';
   }
 }
