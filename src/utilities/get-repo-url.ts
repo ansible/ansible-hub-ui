@@ -8,3 +8,8 @@ export function getRepoUrl(distributionPath: string) {
     ? `${host}${API_BASE_PATH}content/${distributionPath}/`
     : `${host}${API_BASE_PATH}`;
 }
+
+// returns the server name for (protocol-less) container urls
+export function getContainersURL() {
+  return window.location.href.split('://')[1].split('/ui')[0];
+}

@@ -3,9 +3,14 @@ import * as React from 'react';
 import './execution-environment-detail.scss';
 
 import { pickBy } from 'lodash';
-import { ExecutionEnvironmentAPI, ContainerManifestType } from '../../api';
-import { formatPath, Paths } from '../../paths';
-import { filterIsSet, ParamHelper, getHumanSize } from '../../utilities';
+import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
+import { formatPath, Paths } from 'src/paths';
+import {
+  ParamHelper,
+  filterIsSet,
+  getContainersURL,
+  getHumanSize,
+} from 'src/utilities';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -285,7 +290,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       </Link>
     );
 
-    const url = window.location.href.split('://')[1].split('/ui')[0];
+    const url = getContainersURL();
     let instruction =
       image.tags.length === 0
         ? image.digest
