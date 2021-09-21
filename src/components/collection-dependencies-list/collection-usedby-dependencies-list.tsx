@@ -16,6 +16,7 @@ import {
   EmptyStateNoData,
   EmptyStateFilter,
   Sort,
+  LoadingPageSpinner,
 } from 'src/components';
 
 import { ParamHelper, filterIsSet } from 'src/utilities';
@@ -25,6 +26,7 @@ import 'src/containers/collection-detail/collection-dependencies.scss';
 
 interface IProps {
   usedByDependencies: CollectionUsedByDependencies[];
+  usedByDependenciesLoading: boolean;
   repo: string;
   itemCount: number;
   params: {
@@ -42,8 +44,14 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
   private ignoredParams = ['page_size', 'page', 'sort', 'name'];
 
   render() {
-    const { params, usedByDependencies, itemCount, updateParams, repo } =
-      this.props;
+    const {
+      params,
+      usedByDependencies,
+      itemCount,
+      updateParams,
+      repo,
+      usedByDependenciesLoading,
+    } = this.props;
 
     if (!itemCount && !filterIsSet(params, ['name']))
       return (
@@ -68,7 +76,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
                     updateParams(ParamHelper.setParam(params, 'name', ''))
                   }
                   aria-label='filter-collection-name'
-                  placeholder={t`Filter collection name`}
+                  placeholder={t`Filter by name`}
                 />
               </ToolbarItem>
               <ToolbarItem>
@@ -94,41 +102,49 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
           )}
         </div>
 
-        {!itemCount ? (
-          <EmptyStateFilter />
+        {usedByDependenciesLoading ? (
+          <LoadingPageSpinner />
         ) : (
           <>
-            <table className='content-table pf-c-table pf-m-compact'>
-              <tbody>
-                {usedByDependencies.map(({ name, namespace, version }, i) => (
-                  <tr key={i}>
-                    <td>
-                      <Link
-                        to={formatPath(
-                          Paths.collectionByRepo,
-                          {
-                            collection: name,
-                            namespace: namespace,
-                            repo,
-                          },
-                          ParamHelper.getReduced(
-                            { version },
-                            this.ignoredParams,
-                          ),
-                        )}
-                      >
-                        {name}
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <Pagination
-              params={params}
-              updateParams={(params) => updateParams(params)}
-              count={itemCount}
-            />
+            {!itemCount ? (
+              <EmptyStateFilter />
+            ) : (
+              <>
+                <table className='content-table pf-c-table pf-m-compact'>
+                  <tbody>
+                    {usedByDependencies.map(
+                      ({ name, namespace, version }, i) => (
+                        <tr key={i}>
+                          <td>
+                            <Link
+                              to={formatPath(
+                                Paths.collectionByRepo,
+                                {
+                                  collection: name,
+                                  namespace: namespace,
+                                  repo,
+                                },
+                                ParamHelper.getReduced(
+                                  { version },
+                                  this.ignoredParams,
+                                ),
+                              )}
+                            >
+                              {name}
+                            </Link>
+                          </td>
+                        </tr>
+                      ),
+                    )}
+                  </tbody>
+                </table>
+                <Pagination
+                  params={params}
+                  updateParams={(params) => updateParams(params)}
+                  count={itemCount}
+                />
+              </>
+            )}
           </>
         )}
       </>

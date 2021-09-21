@@ -11,7 +11,7 @@ export class CollectionVersion {
     contents: ContentSummaryType[];
     description: string;
     tags: string[];
-    dependencies: any; //FIXME: any for testing
+    dependencies: DependencyType[];
   };
   created_at: string;
   // contents: ContentSummaryType[]; // deprecated
@@ -36,7 +36,7 @@ export class CollectionVersionDetail extends CollectionVersion {
     documentation: string;
     issues: string;
     repository: string;
-    dependencies: any;
+    dependencies: DependencyType[];
   };
   requires_ansible?: string;
   docs_blob: DocsBlobType;
@@ -122,4 +122,8 @@ export class CollectionDetailType {
 
 export class CollectionUsedByDependencies extends CollectionDetailType {
   version: string;
+}
+
+export class DependencyType {
+  [namespaceCollection: string]: string;
 }

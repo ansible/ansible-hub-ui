@@ -14,6 +14,9 @@ import {
   CollectionDependenciesList,
   CollectionUsedbyDependenciesList,
   EmptyStateNoData,
+  AlertType,
+  AlertList,
+  closeAlertMixin,
 } from 'src/components';
 
 import { filterIsSet, ParamHelper } from 'src/utilities';
@@ -33,6 +36,8 @@ interface IState {
   };
   usedByDependencies: CollectionUsedByDependencies[];
   usedByDependenciesCount: number;
+  usedByDependenciesLoading: boolean;
+  alerts: AlertType[];
 }
 
 class CollectionDependencies extends React.Component<
@@ -55,6 +60,8 @@ class CollectionDependencies extends React.Component<
       params: params,
       usedByDependencies: [],
       usedByDependenciesCount: 0,
+      usedByDependenciesLoading: false,
+      alerts: [],
     };
   }
 
@@ -63,8 +70,14 @@ class CollectionDependencies extends React.Component<
   }
 
   render() {
-    const { collection, params, usedByDependencies, usedByDependenciesCount } =
-      this.state;
+    const {
+      collection,
+      params,
+      usedByDependencies,
+      usedByDependenciesCount,
+      usedByDependenciesLoading,
+      alerts,
+    } = this.state;
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -100,6 +113,7 @@ class CollectionDependencies extends React.Component<
 
     return (
       <React.Fragment>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <CollectionHeader
           collection={collection}
           params={headerParams}
@@ -143,6 +157,7 @@ class CollectionDependencies extends React.Component<
                     usedByDependencies={usedByDependencies}
                     itemCount={usedByDependenciesCount}
                     params={dependenciesParams}
+                    usedByDependenciesLoading={usedByDependenciesLoading}
                     updateParams={(p) =>
                       this.updateParams(
                         this.combineParams(this.state.params, p),
@@ -164,15 +179,32 @@ class CollectionDependencies extends React.Component<
   }
 
   private loadUsedByDependencies() {
-    CollectionAPI.getUsedDependenciesByCollection(
-      this.state.collection.namespace.name,
-      this.state.collection.name,
-      ParamHelper.getReduced(this.state.params, ['version']),
-    ).then(({ data }) => {
-      this.setState({
-        usedByDependencies: data.data,
-        usedByDependenciesCount: data.meta.count,
-      });
+    this.setState({ usedByDependenciesLoading: true }, () => {
+      CollectionAPI.getUsedDependenciesByCollection(
+        this.state.collection.namespace.name,
+        this.state.collection.name,
+        ParamHelper.getReduced(this.state.params, ['version']),
+      )
+        .then(({ data }) => {
+          this.setState({
+            usedByDependencies: data.data,
+            usedByDependenciesCount: data.meta.count,
+            usedByDependenciesLoading: false,
+          });
+        })
+        .catch((err) =>
+          this.setState({
+            usedByDependenciesLoading: false,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: t`Error loading dependent collections.`,
+                description: err?.message,
+              },
+            ],
+          }),
+        );
     });
   }
 
@@ -184,9 +216,7 @@ class CollectionDependencies extends React.Component<
       this.state.params.version ? { version: this.state.params.version } : {},
       forceReload,
     )
-      .then((result) => {
-        this.setState({ collection: result }, callback);
-      })
+      .then((result) => this.setState({ collection: result }, callback))
       .catch(() => {
         this.props.history.push(Paths.notFound);
       });
@@ -198,6 +228,10 @@ class CollectionDependencies extends React.Component<
 
   private combineParams(...params) {
     return params.reduce((acc, cur) => ({ ...acc, ...cur }));
+  }
+
+  get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 }
 
