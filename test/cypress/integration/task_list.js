@@ -16,7 +16,7 @@ describe('Task table contains correct headers and filter', () => {
     cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/remotes/?*').as(
       'remotes',
     );
-    
+
     cy.wait('@sync');
     cy.wait('@remotes');
   });
