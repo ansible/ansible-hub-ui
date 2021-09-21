@@ -12,6 +12,7 @@ class LastSyncType {
 }
 
 export class RemoteType {
+  pk: string;
   name: string;
   url: string;
   auth_url: string;
