@@ -10,7 +10,7 @@ describe('Hub Menu Tests', () => {
     'Collections > Repository Management',
     'Collections > API Token',
     'Collections > Approval',
-    'Container Registry',
+    'Execution Environments > Execution Environments',
     'Task Management',
     'Documentation',
     'User Access > Users',
@@ -36,7 +36,7 @@ describe('Hub Menu Tests', () => {
       'Collections > Namespaces',
       'Collections > Repository Management',
       'Collections > API Token',
-      'Container Registry',
+      'Execution Environments > Execution Environments',
       'Task Management',
       'Documentation',
     ];

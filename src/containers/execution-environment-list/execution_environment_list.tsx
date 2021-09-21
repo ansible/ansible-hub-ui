@@ -111,7 +111,7 @@ class ExecutionEnvironmentList extends React.Component<
           onClose={() => this.setState({ publishToController: null })}
           tag={publishToController?.tag}
         />
-        <BaseHeader title={t`Container Registry`}></BaseHeader>
+        <BaseHeader title={t`Execution Environments`}></BaseHeader>
         {noData && !loading ? (
           <EmptyStateNoData
             title={t`No container repositories yet`}
