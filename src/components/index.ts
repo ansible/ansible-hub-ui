@@ -27,6 +27,7 @@ export { EmptyStateNoData } from './empty-state/empty-state-no-data';
 export { EmptyStateUnauthorized } from './empty-state/empty-state-unauthorized';
 export { ExecutionEnvironmentHeader } from './execution-environment-header/execution-environment-header';
 export { GroupModal } from './group-management/group-modal';
+export { DeleteModal } from './delete-modal/delete-modal';
 export { HelperText } from './helper-text/helper-text';
 export { ImportConsole } from './my-imports/import-console';
 export { ImportList } from './my-imports/import-list';
