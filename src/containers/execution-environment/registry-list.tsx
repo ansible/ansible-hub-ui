@@ -195,7 +195,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             }
             allowEditName={remoteFormNew}
             title={
-              remoteFormNew ? t`New remote registry` : t`Edit remote registry`
+              remoteFormNew ? t`Add remote registry` : t`Edit remote registry`
             }
           />
         )}
@@ -357,7 +357,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 
         <td>
           <Button variant='secondary' onClick={() => this.syncRegistry(item)}>
-            <Trans>Sync all remotes</Trans>
+            <Trans>Sync from registry</Trans>
           </Button>{' '}
           <StatefulDropdown
             items={[
