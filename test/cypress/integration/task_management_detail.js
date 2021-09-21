@@ -11,11 +11,12 @@ describe('Task detail', () => {
       Cypress.env('prefix') + '/content/rh-certified/v3/sync/',
     ).as('sync');
 
+    cy.contains('button', 'Sync').click();
+
     cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/remotes/?*').as(
       'remotes',
     );
 
-    cy.contains('button', 'Sync').click();
     cy.wait('@sync');
     cy.wait('@remotes');
   });
@@ -25,17 +26,19 @@ describe('Task detail', () => {
     cy.visit('/ui/tasks');
     cy.contains('Pulp Ansible: Collections sync').click();
 
+    cy.contains('h1', 'Pulp Ansible: Collections sync');
+    cy.contains('.card-area h2', 'Task detail');
+    cy.contains('.card-area h2', 'Task groups');
+    cy.contains('.card-area h2', 'Reserve resources');
+
+    // rest of the content in containers
     [
-      'Pulp Ansible: Collections sync',
-      'Task detail',
       'Task name',
       'Created on',
       'Finished at',
-      'Task groups',
       'Task group',
       'Parent task',
       'Child task',
-      'Reserve resources',
     ].forEach((item) => {
       cy.contains('.card-area', item);
     });
