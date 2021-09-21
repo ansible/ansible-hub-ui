@@ -362,34 +362,16 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                     </Tooltip>
                   )}
                 </React.Fragment>,
-                <React.Fragment key='2'>
-                  {noDependencies ? (
-                    <DropdownItem
-                      onClick={() =>
-                        this.openDeleteModalWithConfirm(
-                          collection.latest_version.version,
-                        )
-                      }
-                    >
-                      {t`Delete version ${collection.latest_version.version}`}
-                    </DropdownItem>
-                  ) : (
-                    <Tooltip
-                      position='left'
-                      content={
-                        <Trans>
-                          Cannot delete until collections <br />
-                          that depend on this collection <br />
-                          have been deleted.
-                        </Trans>
-                      }
-                    >
-                      <DropdownItem isDisabled>
-                        {t`Delete version ${collection.latest_version.version}`}
-                      </DropdownItem>
-                    </Tooltip>
-                  )}
-                </React.Fragment>,
+                <DropdownItem
+                  key='2'
+                  onClick={() =>
+                    this.openDeleteModalWithConfirm(
+                      collection.latest_version.version,
+                    )
+                  }
+                >
+                  {t`Delete version ${collection.latest_version.version}`}
+                </DropdownItem>,
               ]}
             />
           }
@@ -551,7 +533,18 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           }
         });
       })
-      .catch((err) =>
+      .catch((err) => {
+        const { detail, dependent_collection_versions } = err?.response?.data;
+        const dependencies = (
+          <>
+            <Trans>Dependent collections: </Trans>
+            <List>
+              {dependent_collection_versions.map((d) => (
+                <ListItem key={d}>{d}</ListItem>
+              ))}
+            </List>
+          </>
+        );
         this.setState({
           deleteCollection: null,
           collectionVersion: null,
@@ -559,12 +552,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error deleting collection version.`,
-              description: err?.message,
+              title: detail,
+              description: dependencies,
             },
           ],
-        }),
-      );
+        });
+      });
   };
 
   private deleteCollection = () => {
