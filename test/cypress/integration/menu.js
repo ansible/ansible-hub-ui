@@ -11,6 +11,7 @@ describe('Hub Menu Tests', () => {
     'Collections > API Token',
     'Collections > Approval',
     'Execution Environments > Execution Environments',
+    'Execution Environments > Remote Registries',
     'Task Management',
     'Documentation',
     'User Access > Users',
@@ -37,6 +38,7 @@ describe('Hub Menu Tests', () => {
       'Collections > Repository Management',
       'Collections > API Token',
       'Execution Environments > Execution Environments',
+      'Execution Environments > Remote Registries',
       'Task Management',
       'Documentation',
     ];

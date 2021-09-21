@@ -26,6 +26,7 @@ import {
   GroupDetail,
   RepositoryList,
   ExecutionEnvironmentList,
+  ExecutionEnvironmentRegistryList,
   ExecutionEnvironmentDetail,
   ExecutionEnvironmentDetailActivities,
   ExecutionEnvironmentDetailImages,
@@ -174,6 +175,11 @@ export class Routes extends React.Component<IRoutesProps> {
       {
         comp: ExecutionEnvironmentList,
         path: Paths.executionEnvironments,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        comp: ExecutionEnvironmentRegistryList,
+        path: Paths.executionEnvironmentsRegistries,
         isDisabled: isContainerDisabled,
       },
       {

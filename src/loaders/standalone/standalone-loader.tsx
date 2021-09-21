@@ -354,6 +354,9 @@ class App extends React.Component<RouteComponentProps, IState> {
           menuItem(t`Execution Environments`, {
             url: Paths.executionEnvironments,
           }),
+          menuItem(t`Remote Registries`, {
+            url: Paths.executionEnvironmentsRegistries,
+          }),
         ],
       ),
       menuItem(t`Task Management`, {
