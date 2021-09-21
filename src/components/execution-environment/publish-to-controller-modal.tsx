@@ -1,10 +1,29 @@
 import * as React from 'react';
 import { t, Trans } from '@lingui/macro';
-import { Button, Modal, Select, SelectOption } from '@patternfly/react-core';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import {
+  Button,
+  Flex,
+  FlexItem,
+  List,
+  ListItem,
+  Modal,
+} from '@patternfly/react-core';
+import { ExternalLinkAltIcon, TagIcon } from '@patternfly/react-icons';
 import { sortBy } from 'lodash';
-import { ControllerAPI, ImagesAPI } from 'src/api';
-import { ShaLabel } from 'src/components';
+import { ControllerAPI, ExecutionEnvironmentAPI } from 'src/api';
+import {
+  APISearchTypeAhead,
+  AlertList,
+  AlertType,
+  AppliedFilters,
+  CompoundFilter,
+  EmptyStateFilter,
+  EmptyStateNoData,
+  Pagination,
+  ShaLabel,
+  closeAlertMixin,
+} from 'src/components';
+import { filterIsSet, getContainersURL } from 'src/utilities';
 
 interface IProps {
   image: string;
@@ -15,32 +34,42 @@ interface IProps {
 }
 
 interface IState {
+  alerts: AlertType[];
   controllers: string[];
-  controllersError: any;
+  controllerCount: number;
+  controllerParams: {
+    page: number;
+    page_size: number;
+    host__icontains?: string;
+  };
   digest?: string;
   digestByTag: { [key: string]: string };
   loading: boolean;
   tag?: string;
-  tagSelectOpen: boolean;
+  tagResults: { name: string; id: string }[];
+  tagSelection: { name: string; id: string }[];
   tags: { tag: string; digest: string }[];
-  tagsError: any;
 }
+
+const initialState = {
+  alerts: [],
+  controllers: null,
+  controllerCount: 0,
+  controllerParams: { page: 1, page_size: 10 },
+  digest: null,
+  digestByTag: {},
+  loading: true,
+  tag: null,
+  tagResults: [],
+  tagSelection: [],
+  tags: [],
+};
 
 export class PublishToControllerModal extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
 
-    this.state = {
-      controllers: [],
-      controllersError: null,
-      digest: null,
-      digestByTag: {},
-      loading: true,
-      tag: null,
-      tagSelectOpen: false,
-      tags: [],
-      tagsError: null,
-    };
+    this.state = initialState;
   }
 
   componentDidUpdate(prevProps) {
@@ -52,103 +81,175 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
         this.fetchData(image);
       } else {
         // reset on close
-        this.setState({
-          // controllers don't change
-          digest: null,
-          digestByTag: {},
-          loading: true,
-          tag: null,
-          tagSelectOpen: false,
-          tags: [],
-          tagsError: null,
-        });
+        this.setState(initialState);
       }
     }
   }
 
-  fetchData(image) {
-    let controllers;
-
-    // only once
-    if (!this.state.controllers.length) {
-      controllers = ControllerAPI.list()
-        .then(({ data }) =>
-          this.setState({ controllers: data.data.map((c) => c.host) }),
-        )
-        .catch((e) => this.setState({ controllersError: e }));
-    }
-
-    const tags = ImagesAPI.list(image, { page_size: 1000 })
+  fetchControllers() {
+    const { controllerParams: params } = this.state;
+    return ControllerAPI.list(params)
       .then(({ data }) => {
-        // FIXME: no way to get a list of tags by updated? (this works, but the API should be doing the sorting)
-        let tags = data.data.flatMap(({ digest, pulp_created, tags }) =>
-          tags.map((tag) => ({ digest, pulp_created, tag })),
-        );
-        tags = sortBy(tags, 'pulp_created').reverse();
+        const controllers = data.data.map((c) => c.host);
+        const controllerCount = data.meta.count;
 
-        // filter tags by digest when provided from Images list
-        if (this.props.digest) {
-          tags = tags.filter(({ digest }) => digest === this.props.digest);
-        }
+        this.setState({ controllers, controllerCount });
+
+        return controllers;
+      })
+      .catch((e) =>
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error loading Controllers`,
+              description: e.message,
+            },
+          ],
+        }),
+      );
+  }
+
+  fetchTags(image, name?) {
+    // filter tags by digest when provided from Images list
+    const { digest } = this.props;
+
+    return ExecutionEnvironmentAPI.tags(image, {
+      sort: '-pulp_created',
+      ...(digest ? { tagged_manifest__digest: digest } : {}),
+      ...(name ? { name__icontains: name } : {}),
+    })
+      .then(({ data }) => {
+        const tags = data.data.map(
+          ({ name: tag, tagged_manifest: { digest } }) => ({ digest, tag }),
+        );
 
         const digestByTag = {};
         tags.forEach(({ digest, tag }) => (digestByTag[tag] = digest));
 
-        let { digest, tag } = this.props;
-        tag ||= tags[0]?.tag; // default to first tag unless in props (tags already filtered by digest if in props)
-        digest ||= digestByTag[tag]; // set digest by tag unless in props
+        const tagResults = tags.map(({ tag }) => ({ id: tag, name: tag }));
 
         this.setState({
-          digest,
           digestByTag,
-          tag,
+          tagResults,
           tags,
         });
+
+        return tags;
       })
-      .catch((e) => this.setState({ tagsError: e }));
+      .catch((e) =>
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error loading tags`,
+              description: e.message,
+            },
+          ],
+        }),
+      );
+  }
+
+  fetchData(image) {
+    const controllers = this.fetchControllers();
+    const tags = this.fetchTags(image).then(() => {
+      // preselect tag if present
+      let { digest, tag } = this.props;
+      tag ||= this.state.tags[0]?.tag; // default to first tag unless in props (tags already filtered by digest if in props)
+      digest ||= this.state.digestByTag[tag]; // set digest by tag unless in props
+
+      this.setState({
+        digest,
+        tag,
+        tagSelection: tag ? [{ id: tag, name: tag }] : [],
+      });
+    });
 
     Promise.all([controllers, tags]).then(() =>
       this.setState({ loading: false }),
     );
   }
 
-  render() {
-    const { image, isOpen, onClose } = this.props;
-    const {
-      controllers,
-      controllersError,
-      loading,
-      digest,
-      digestByTag,
-      tag,
-      tagSelectOpen,
-      tags,
-      tagsError,
-    } = this.state;
+  renderControllers() {
+    const { image, isOpen } = this.props;
+    const { controllers, controllerCount, digest, tag } = this.state;
+    const url = getContainersURL();
 
-    const url = window.location.href.split('://')[1].split('/ui')[0];
+    if (!isOpen || !controllers) {
+      return null;
+    }
 
-    const controllerButtons = digest && isOpen && (
-      <ul>
+    if (controllers.length === 0) {
+      // EmptyStateNoData already handled in render()
+      return <EmptyStateFilter />;
+    }
+
+    if (!digest && !tag) {
+      return t`No tag or digest selected.`;
+    }
+
+    return (
+      <List isPlain>
         {controllers.map((host) => {
-          const hostname = host.replace(/^https?:\/\//, '');
           const imageUrl = `${url}/${tag ? `${image}:${tag}` : digest}`;
           const href = `${host}/#/execution_environments/add?image=${encodeURIComponent(
             imageUrl,
           )}`;
 
           return (
-            <li>
+            <ListItem>
               <a href={href} target='_blank'>
-                <Trans>Publish to {hostname}</Trans>
-              </a>
-            </li>
+                {host}
+              </a>{' '}
+              <small>
+                <ExternalLinkAltIcon />
+              </small>
+            </ListItem>
           );
         })}
-      </ul>
+      </List>
     );
+  }
 
-    const docsLink = 'http://google.com'; // FIXME
+  render() {
+    const { image, isOpen, onClose } = this.props;
+    const {
+      alerts,
+      controllers,
+      controllerCount,
+      controllerParams,
+      loading,
+      digest,
+      digestByTag,
+      tagResults,
+      tagSelection,
+    } = this.state;
+
+    // FIXME: installer docs link
+    const docsLink = 'https://fixme.example.com';
+
+    const noData =
+      controllers?.length === 0 &&
+      !filterIsSet(controllerParams, ['host__icontains']);
+
+    const notListedMessage = (
+      <>
+        {' '}
+        <Trans>
+          If the Controller is not listed in the table, check settings.py.
+        </Trans>{' '}
+        {docsLink && (
+          <>
+            <a href={docsLink} target='_blank'>
+              <Trans>Learn more</Trans>
+            </a>{' '}
+            <ExternalLinkAltIcon />
+          </>
+        )}
+      </>
+    );
 
     return (
       <Modal
@@ -157,66 +258,122 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
         isOpen={isOpen}
         onClose={onClose}
         actions={[
-          <Button key='close' variant='secondary' onClick={onClose}>
+          <Button key='close' variant='primary' onClick={onClose}>
             {t`Close`}
           </Button>,
         ]}
       >
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        ></AlertList>
         {loading && t`Loading...`}
-        {controllersError && t`Error loading available Controllers`}
-        {isOpen && !loading && !controllersError && (
+        {noData && !loading ? (
+          <EmptyStateNoData
+            title={t`No Controllers available`}
+            description={notListedMessage}
+          />
+        ) : null}
+
+        {isOpen && !loading && !noData && controllers && (
           <>
-            <b>
-              <Trans>Execution Environment</Trans>
-            </b>{' '}
-            {image}
+            <Trans>
+              <b>Execution Environment</b> {image}
+            </Trans>
             <br />
-            {tagsError ? (
-              t`Error loading tags for ${image}`
-            ) : (
-              <>
+            <Flex>
+              <FlexItem>
                 <b>
                   <Trans>Tag</Trans>
                 </b>
-                <Select
-                  isOpen={tagSelectOpen}
+              </FlexItem>
+              <FlexItem grow={{ default: 'grow' }}>
+                <APISearchTypeAhead
+                  loadResults={(name) => this.fetchTags(image, name)}
+                  onClear={() => this.setState({ tag: null, tagSelection: [] })}
                   onSelect={(event, value) => {
                     const digest = digestByTag[value.toString()];
                     this.setState({
                       tag: digest && value.toString(),
+                      tagSelection: [{ id: value, name: value }],
                       digest,
-                      tagSelectOpen: false,
                     });
                   }}
-                  onToggle={(tagSelectOpen) => {
-                    this.setState({ tagSelectOpen });
-                  }}
-                  selections={tag}
-                  variant='single'
                   placeholderText={t`Select a tag`}
-                >
-                  {tags.map(({ tag }) => (
-                    <SelectOption key={tag} value={tag} />
-                  ))}
-                </Select>
-              </>
-            )}
-            {digest && <ShaLabel digest={digest} />}
-            {controllerButtons}
+                  results={tagResults}
+                  selections={tagSelection}
+                  toggleIcon={<TagIcon />}
+                />
+              </FlexItem>
+              <FlexItem>
+                {digest && <ShaLabel grey long digest={digest} />}
+              </FlexItem>
+            </Flex>
             <Trans>
-              If the controller is not listed in the table, check settings.py.
-            </Trans>{' '}
-            {docsLink && (
-              <>
-                <a href={docsLink} target='_blank'>
-                  <Trans>Learn more</Trans>
-                </a>{' '}
-                <ExternalLinkAltIcon />
-              </>
-            )}
+              Click on the Controller URL that you want to use the above
+              execution environment in, and it will launch that Controller's
+              console. Log in (if necessary) and follow the steps to complete
+              the configuration.
+            </Trans>
+
+            <CompoundFilter
+              updateParams={(controllerParams) => {
+                controllerParams.page = 1;
+                this.setState({ controllerParams }, () =>
+                  this.fetchControllers(),
+                );
+              }}
+              params={controllerParams}
+              filterConfig={[
+                {
+                  id: 'host__icontains',
+                  title: t`Controller name`,
+                },
+              ]}
+            />
+
+            <AppliedFilters
+              updateParams={(controllerParams) =>
+                this.setState({ controllerParams }, () =>
+                  this.fetchControllers(),
+                )
+              }
+              params={controllerParams}
+              ignoredParams={['page_size', 'page']}
+              niceNames={{
+                host__icontains: t`Controller name`,
+              }}
+            />
+
+            <Pagination
+              params={controllerParams}
+              updateParams={(controllerParams) => {
+                this.setState({ controllerParams }, () =>
+                  this.fetchControllers(),
+                );
+              }}
+              count={controllerCount}
+              isTop
+            />
+            {this.renderControllers()}
+            <Pagination
+              params={controllerParams}
+              updateParams={(controllerParams) => {
+                this.setState({ controllerParams }, () =>
+                  this.fetchControllers(),
+                );
+              }}
+              count={controllerCount}
+              isTop
+            />
+            <div>{notListedMessage}</div>
           </>
         )}
       </Modal>
     );
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 }
