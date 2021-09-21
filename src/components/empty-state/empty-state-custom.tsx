@@ -8,12 +8,12 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { ComponentClass } from 'react';
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 interface IProps {
   icon?: ComponentClass;
   title: string;
-  description: string;
+  description: ReactNode;
   button?: ReactElement;
 }
 
