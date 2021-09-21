@@ -20,6 +20,12 @@ class API extends HubAPI {
   image(name, digest) {
     return this.http.get(`${this.apiPath}${name}/_content/images/${digest}/`);
   }
+
+  tags(name, params) {
+    return this.http.get(this.apiPath + name + '/_content/tags/', {
+      params: this.mapPageToOffset(params),
+    });
+  }
 }
 
 export const ExecutionEnvironmentAPI = new API();
