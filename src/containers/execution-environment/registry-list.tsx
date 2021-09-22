@@ -107,7 +107,8 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       showDeleteModal,
       showRemoteFormModal,
     } = this.state;
-    const noData = items.length === 0 && !filterIsSet(params, ['name']);
+    const noData =
+      items.length === 0 && !filterIsSet(params, ['name__icontains']);
 
     const addButton = (
       <Button
@@ -237,7 +238,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                             params={params}
                             filterConfig={[
                               {
-                                id: 'name',
+                                id: 'name__icontains',
                                 title: t`Name`,
                               },
                             ]}
@@ -264,6 +265,9 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                     }
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort']}
+                    niceNames={{
+                      name__icontains: t`Name`,
+                    }}
                   />
                 </div>
                 {this.renderTable(params)}
