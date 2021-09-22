@@ -288,70 +288,70 @@ export class RemoteForm extends React.Component<IProps, IState> {
           </FormGroup>
         )}
 
+        <FormGroup
+          fieldId={'username'}
+          label={t`Username`}
+          labelIcon={
+            <HelperText
+              content={t`The username to be used for authentication when syncing. This is not required when using a token.`}
+            />
+          }
+          isRequired={requiredFields.includes('username')}
+          validated={this.toError(!('username' in errorMessages))}
+          helperTextInvalid={errorMessages['username']}
+        >
+          <WriteOnlyField
+            isValueSet={
+              isWriteOnly('username', remote.write_only_fields) &&
+              isFieldSet('username', remote.write_only_fields)
+            }
+            onClear={() => this.updateIsSet('username', false)}
+          >
+            <TextInput
+              validated={this.toError(!('username' in errorMessages))}
+              isRequired={requiredFields.includes('username')}
+              isDisabled={disabledFields.includes('username')}
+              id='username'
+              type='text'
+              value={remote.username || ''}
+              onChange={(value) => this.updateRemote(value, 'username')}
+            />
+          </WriteOnlyField>
+        </FormGroup>
+
+        <FormGroup
+          fieldId={'password'}
+          label={t`Password`}
+          labelIcon={
+            <HelperText
+              content={t`The password to be used for authentication when syncing. This is not required when using a token.`}
+            />
+          }
+          isRequired={requiredFields.includes('password')}
+          validated={this.toError(!('password' in errorMessages))}
+          helperTextInvalid={errorMessages['password']}
+        >
+          <WriteOnlyField
+            isValueSet={isFieldSet('password', remote.write_only_fields)}
+            onClear={() => this.updateIsSet('password', false)}
+          >
+            <TextInput
+              validated={this.toError(!('password' in errorMessages))}
+              isRequired={requiredFields.includes('password')}
+              isDisabled={disabledFields.includes('password')}
+              id='password'
+              type='password'
+              value={remote.password || ''}
+              onChange={(value) => this.updateRemote(value, 'password')}
+            />
+          </WriteOnlyField>
+        </FormGroup>
+
         <ExpandableSection
           toggleTextExpanded={t`Hide advanced options`}
           toggleTextCollapsed={t`Show advanced options`}
         >
           <div className='pf-c-form'>
-            <FormGroup
-              fieldId={'username'}
-              label={t`Username`}
-              labelIcon={
-                <HelperText
-                  content={t`The username to be used for authentication when syncing. This is not required when using a token.`}
-                />
-              }
-              isRequired={requiredFields.includes('username')}
-              validated={this.toError(!('username' in errorMessages))}
-              helperTextInvalid={errorMessages['username']}
-            >
-              <WriteOnlyField
-                isValueSet={
-                  isWriteOnly('username', remote.write_only_fields) &&
-                  isFieldSet('username', remote.write_only_fields)
-                }
-                onClear={() => this.updateIsSet('username', false)}
-              >
-                <TextInput
-                  validated={this.toError(!('username' in errorMessages))}
-                  isRequired={requiredFields.includes('username')}
-                  isDisabled={disabledFields.includes('username')}
-                  id='username'
-                  type='text'
-                  value={remote.username || ''}
-                  onChange={(value) => this.updateRemote(value, 'username')}
-                />
-              </WriteOnlyField>
-            </FormGroup>
-
-            <FormGroup
-              fieldId={'password'}
-              label={t`Password`}
-              labelIcon={
-                <HelperText
-                  content={t`The password to be used for authentication when syncing. This is not required when using a token.`}
-                />
-              }
-              isRequired={requiredFields.includes('password')}
-              validated={this.toError(!('password' in errorMessages))}
-              helperTextInvalid={errorMessages['password']}
-            >
-              <WriteOnlyField
-                isValueSet={isFieldSet('password', remote.write_only_fields)}
-                onClear={() => this.updateIsSet('password', false)}
-              >
-                <TextInput
-                  validated={this.toError(!('password' in errorMessages))}
-                  isRequired={requiredFields.includes('password')}
-                  isDisabled={disabledFields.includes('password')}
-                  id='password'
-                  type='password'
-                  value={remote.password || ''}
-                  onChange={(value) => this.updateRemote(value, 'password')}
-                />
-              </WriteOnlyField>
-            </FormGroup>
-
             <FormGroup
               fieldId={'proxy_url'}
               label={t`Proxy URL`}
