@@ -107,7 +107,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
         onClose={() => this.props.closeModal()}
         actions={[
           <Button
-            isDisabled={!this.isValid(requiredFields)}
+            isDisabled={!this.isValid(requiredFields, remoteType)}
             key='confirm'
             variant='primary'
             onClick={() => this.props.saveRemote()}
@@ -647,7 +647,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
     );
   }
 
-  private isValid(requiredFields) {
+  private isValid(requiredFields, remoteType) {
     const { remote } = this.props;
 
     for (const field of requiredFields) {
@@ -655,9 +655,14 @@ export class RemoteForm extends React.Component<IProps, IState> {
         return false;
       }
     }
-    if (remote.download_concurrency < 1) {
-      return false;
+
+    if (['community', 'certified', 'none'].includes(remoteType)) {
+      // only required in remotes, not registries
+      if (remote.download_concurrency < 1) {
+        return false;
+      }
     }
+
     return true;
   }
 
