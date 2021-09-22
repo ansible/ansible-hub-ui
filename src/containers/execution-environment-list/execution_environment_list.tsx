@@ -14,6 +14,7 @@ import {
 } from '@patternfly/react-core';
 import {
   ExecutionEnvironmentAPI,
+  ExecutionEnvironmentRemoteAPI,
   ExecutionEnvironmentType,
   TaskAPI,
 } from 'src/api';
@@ -292,6 +293,18 @@ class ExecutionEnvironmentList extends React.Component<
   private renderTableRow(item: any, index: number) {
     const description = item.description;
     const dropdownItems = [
+      item.pulp.repository.remote && (
+        <DropdownItem
+          key='sync'
+          onClick={() =>
+            ExecutionEnvironmentRemoteAPI.sync(
+              item.pulp.repository.remote.pulp_id,
+            )
+          }
+        >
+          {t`Sync from registry`}
+        </DropdownItem>
+      ),
       <DropdownItem
         key='publish-to-controller'
         onClick={() => {
