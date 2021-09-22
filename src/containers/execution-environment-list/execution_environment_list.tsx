@@ -7,6 +7,7 @@ import {
   Button,
   Checkbox,
   DropdownItem,
+  Label,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -44,15 +45,17 @@ import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 interface IState {
+  alerts: AlertType[];
+  itemCount: number;
+  itemToEdit?: ExecutionEnvironmentType;
+  items: ExecutionEnvironmentType[];
+  loading: boolean;
   params: {
     page?: number;
     page_size?: number;
   };
   publishToController: { digest?: string; image: string; tag?: string };
-  loading: boolean;
-  items: ExecutionEnvironmentType[];
-  itemCount: number;
-  alerts: AlertType[];
+  showRemoteModal: boolean;
   unauthorized: boolean;
   deleteModalVisible: boolean;
   selectedItem: ExecutionEnvironmentType;
@@ -80,12 +83,14 @@ class ExecutionEnvironmentList extends React.Component<
     }
 
     this.state = {
-      params: params,
-      publishToController: null,
+      alerts: [],
+      itemCount: 0,
+      itemToEdit: null,
       items: [],
       loading: true,
-      itemCount: 0,
-      alerts: [],
+      params,
+      publishToController: null,
+      showRemoteModal: false,
       unauthorized: false,
       deleteModalVisible: false,
       selectedItem: null,
@@ -103,17 +108,20 @@ class ExecutionEnvironmentList extends React.Component<
 
   render() {
     const {
+      alerts,
+      itemCount,
+      itemToEdit,
+      items,
+      loading,
       params,
       publishToController,
-      itemCount,
-      loading,
-      alerts,
-      items,
+      showRemoteModal,
       unauthorized,
       deleteModalVisible,
       selectedItem,
       confirmDelete,
     } = this.state;
+
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
     const pushImagesButton = (
       <Button
@@ -125,7 +133,7 @@ class ExecutionEnvironmentList extends React.Component<
           )
         }
       >
-        Push container images <ExternalLinkAltIcon />
+        <Trans>Push container images</Trans> <ExternalLinkAltIcon />
       </Button>
     );
     const name = !!selectedItem ? selectedItem.name : '';
@@ -143,6 +151,7 @@ class ExecutionEnvironmentList extends React.Component<
           onClose={() => this.setState({ publishToController: null })}
           tag={publishToController?.tag}
         />
+        {showRemoteModal && this.renderRemoteModal(itemToEdit)}
         <BaseHeader title={t`Execution Environments`}></BaseHeader>
         {deleteModalVisible && (
           <DeleteModal
@@ -198,6 +207,19 @@ class ExecutionEnvironmentList extends React.Component<
                               },
                             ]}
                           />
+                        </ToolbarItem>
+                        <ToolbarItem>
+                          <Button
+                            onClick={() =>
+                              this.setState({
+                                showRemoteModal: true,
+                                itemToEdit: null,
+                              })
+                            }
+                            variant='primary'
+                          >
+                            <Trans>Add execution environment</Trans>
+                          </Button>
                         </ToolbarItem>
                         <ToolbarItem>{pushImagesButton}</ToolbarItem>
                       </ToolbarGroup>
@@ -300,6 +322,19 @@ class ExecutionEnvironmentList extends React.Component<
     const dropdownItems = [
       item.pulp.repository.remote && (
         <DropdownItem
+          key='edit'
+          onClick={() =>
+            this.setState({
+              showRemoteModal: true,
+              itemToEdit: item,
+            })
+          }
+        >
+          {t`Edit`}
+        </DropdownItem>
+      ),
+      item.pulp.repository.remote && (
+        <DropdownItem
           key='sync'
           onClick={() =>
             ExecutionEnvironmentRemoteAPI.sync(
@@ -364,6 +399,10 @@ class ExecutionEnvironmentList extends React.Component<
         </td>
       </tr>
     );
+  }
+
+  private renderRemoteModal(itemToEdit) {
+    return <div>TODO</div>;
   }
 
   private queryEnvironments() {
