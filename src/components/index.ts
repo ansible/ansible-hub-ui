@@ -69,3 +69,4 @@ export { UserFormPage } from './user-form/user-form-page';
 export { WriteOnlyField } from './patternfly-wrappers/write-only-field';
 export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
 export { FileUpload } from './patternfly-wrappers/fileupload';
+export { DeleteModal } from './delete-modal/delete-modal';

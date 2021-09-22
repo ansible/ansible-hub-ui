@@ -26,6 +26,12 @@ class API extends HubAPI {
       params: this.mapPageToOffset(params),
     });
   }
+
+  deleteImage(name, manifest) {
+    return this.http.delete(
+      `${this.apiPath}${name}/_content/images/${manifest}/`,
+    );
+  }
 }
 
 export const ExecutionEnvironmentAPI = new API();

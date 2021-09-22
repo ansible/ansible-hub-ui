@@ -1,9 +1,9 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment-detail.scss';
 
 import { pickBy } from 'lodash';
-import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
+import { ExecutionEnvironmentAPI, ContainerManifestType, TaskAPI } from 'src/api';
 import { formatPath, Paths } from 'src/paths';
 import {
   ParamHelper,
@@ -21,6 +21,7 @@ import {
   ToolbarItem,
   DropdownItem,
   LabelGroup,
+  Checkbox,
 } from '@patternfly/react-core';
 
 import {
@@ -39,6 +40,9 @@ import {
   AlertType,
   DateComponent,
   ClipboardCopy,
+  DeleteModal,
+  LoadingPageWithHeader,
+  LoadingPageSpinner,
 } from '../../components';
 
 import { TagManifestModal } from './tag-manifest-modal';
@@ -57,6 +61,9 @@ interface IState {
   // ID for manifest that is open in the manage tags modal.
   manageTagsManifestDigest: string;
   publishToController: { digest?: string; image: string; tag?: string };
+  selectedImage: ContainerManifestType;
+  deleteModalVisible: boolean;
+  confirmDelete: boolean;
 }
 
 class ExecutionEnvironmentDetailImages extends React.Component<
@@ -88,7 +95,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       redirect: null,
       manageTagsManifestDigest: undefined,
       publishToController: null,
+      selectedImage: undefined,
+      deleteModalVisible: false,
       alerts: [],
+      confirmDelete: false,
     };
   }
 
@@ -101,8 +111,16 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   renderImages() {
-    const { params, images, manageTagsManifestDigest, publishToController } =
-      this.state;
+    const {
+      params,
+      images,
+      manageTagsManifestDigest,
+      publishToController,
+      selectedImage,
+      deleteModalVisible,
+      confirmDelete,
+      loading,
+    } = this.state;
     if (
       images.length === 0 &&
       !filterIsSet(params, ['tag', 'digest__icontains'])
@@ -113,6 +131,9 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           description={t`Images will appear once uploaded`}
         />
       );
+    }
+    if (loading) {
+      return <LoadingPageSpinner />;
     }
     const sortTableOptions = {
       headers: [
@@ -165,6 +186,30 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}
         />
+        {deleteModalVisible && (
+          <DeleteModal
+            title={'Permanently delete image'}
+            cancelAction={() =>
+              this.setState({
+                deleteModalVisible: false,
+                selectedImage: null,
+                confirmDelete: false,
+              })
+            }
+            deleteAction={() => this.deleteImage()}
+            isDisabled={!confirmDelete}
+          >
+            <Trans>
+              Deleting <b>{selectedImage.digest}</b> and its data will be lost.
+            </Trans>
+            <Checkbox
+              isChecked={confirmDelete}
+              onChange={(value) => this.setState({ confirmDelete: value })}
+              label={t`I understand that this action cannot be undone.`}
+              id='delete_confirm'
+            />
+          </DeleteModal>
+        )}
         <TagManifestModal
           isOpen={!!manageTagsManifestDigest}
           closeModal={() => this.setState({ manageTagsManifestDigest: null })}
@@ -321,6 +366,14 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       >
         {t`Use in Controller`}
       </DropdownItem>,
+        <DropdownItem
+            key='delete-image'
+            onClick={() => {
+                this.setState({ deleteModalVisible: true, selectedImage: image });
+            }}
+        >
+            {t`Delete`}
+        </DropdownItem>,
     ].filter((truthy) => truthy);
 
     return (
@@ -376,10 +429,59 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           this.setState({
             images: images,
             numberOfImages: result.data.meta.count,
+            loading: false,
           });
         })
         .catch((error) => this.setState({ redirect: 'notFound' })),
     );
+  }
+
+  private deleteImage() {
+    const { selectedImage } = this.state;
+    ExecutionEnvironmentAPI.deleteImage(
+      this.props.match.params['container'],
+      selectedImage.digest,
+    )
+      .then((result) => {
+        let taskId = result.data.task.split('tasks/')[1].replace('/', '');
+        this.setState({
+          loading: true,
+          deleteModalVisible: false,
+          selectedImage: null,
+          confirmDelete: false,
+        });
+        this.waitForTask(taskId).then(() => {
+          this.setState({
+            alerts: this.state.alerts.concat([
+              {
+                variant: 'success',
+                title: t`Success: ${selectedImage.digest} was deleted`,
+              },
+            ]),
+          });
+          this.queryImages(this.props.match.params['container']);
+        });
+      })
+      .catch(() => {
+        this.setState({
+          deleteModalVisible: false,
+          selectedImage: null,
+          confirmDelete: false,
+          alerts: this.state.alerts.concat([
+            { variant: 'danger', title: t`Error: delete failed` },
+          ]),
+        });
+      });
+  }
+
+  private waitForTask(task) {
+    return TaskAPI.get(task).then((result) => {
+      if (result.data.state !== 'completed') {
+        return new Promise((r) => setTimeout(r, 500)).then(() =>
+          this.waitForTask(task),
+        );
+      }
+    });
   }
 
   private get updateParams() {
