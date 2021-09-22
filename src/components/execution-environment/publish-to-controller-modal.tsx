@@ -251,6 +251,8 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
       </>
     );
 
+    const Spacer = () => <div style={{ paddingTop: '24px' }}></div>;
+
     return (
       <Modal
         variant='large'
@@ -280,7 +282,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
             <Trans>
               <b>Execution Environment</b> {image}
             </Trans>
-            <br />
+            <Spacer />
             <Flex>
               <FlexItem>
                 <b>
@@ -309,12 +311,14 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
                 {digest && <ShaLabel grey long digest={digest} />}
               </FlexItem>
             </Flex>
+            <Spacer />
             <Trans>
               Click on the Controller URL that you want to use the above
               execution environment in, and it will launch that Controller's
               console. Log in (if necessary) and follow the steps to complete
               the configuration.
             </Trans>
+            <Spacer />
 
             <CompoundFilter
               updateParams={(controllerParams) => {
@@ -366,6 +370,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
               count={controllerCount}
               isTop
             />
+            <Spacer />
             <div>{notListedMessage}</div>
           </>
         )}
