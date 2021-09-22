@@ -56,7 +56,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
     if (!itemCount && !filterIsSet(params, ['name']))
       return (
         <EmptyStateNoData
-          title={t`No collection is using this dependency`}
+          title={t`Not required for use by other collections`}
           description={t`Collection is not being used by any collection.`}
         />
       );

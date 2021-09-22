@@ -139,7 +139,7 @@ class CollectionDependencies extends React.Component<
                 />
               ) : (
                 <>
-                  <p>{t`This collection is dependent on the following collections`}</p>
+                  <p>{t`This collections requires the following collections for use`}</p>
                   {noDependencies ? (
                     <EmptyStateNoData
                       title={t`No dependencies`}
