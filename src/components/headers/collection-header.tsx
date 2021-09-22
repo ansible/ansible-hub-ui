@@ -584,7 +584,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
   private deleteCollection = () => {
     const { deleteCollection } = this.state;
-    CollectionAPI.deleteCollection(deleteCollection)
+    CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
 
