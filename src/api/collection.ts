@@ -166,15 +166,15 @@ export class API extends HubAPI {
     });
   }
 
-  deleteCollectionVersion(collection) {
+  deleteCollectionVersion(repo, collection) {
     return this.http.delete(
-      `v3/collections/${collection.namespace.name}/${collection.name}/versions/${collection.latest_version.version}/`,
+      `content/${repo}/v3/collections/${collection.namespace.name}/${collection.name}/versions/${collection.latest_version.version}/`,
     );
   }
 
-  deleteCollection(collection) {
+  deleteCollection(repo, collection) {
     return this.http.delete(
-      `v3/collections/${collection.namespace.name}/${collection.name}/`,
+      `content/${repo}/v3/collections/${collection.namespace.name}/${collection.name}/`,
     );
   }
 

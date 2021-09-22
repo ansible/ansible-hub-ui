@@ -487,7 +487,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   private deleteCollectionVersion = (collectionVersion) => {
     const { deleteCollection } = this.state;
 
-    CollectionAPI.deleteCollectionVersion(deleteCollection)
+    CollectionAPI.deleteCollectionVersion(
+      this.context.selectedRepo,
+      deleteCollection,
+    )
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
 
@@ -534,29 +537,48 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         });
       })
       .catch((err) => {
-        const { detail, dependent_collection_versions } = err?.response?.data;
-        const dependencies = (
-          <>
-            <Trans>Dependent collections: </Trans>
-            <List>
-              {dependent_collection_versions.map((d) => (
-                <ListItem key={d}>{d}</ListItem>
-              ))}
-            </List>
-          </>
-        );
-        this.setState({
-          deleteCollection: null,
-          collectionVersion: null,
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: detail,
-              description: dependencies,
-            },
-          ],
-        });
+        const {
+          data: { detail, dependent_collection_versions },
+          status,
+        } = err?.response;
+
+        if (status === 400) {
+          const dependencies = (
+            <>
+              <Trans>Dependent collections: </Trans>
+              <List>
+                {dependent_collection_versions.map((d) => (
+                  <ListItem key={d}>{d}</ListItem>
+                ))}
+              </List>
+            </>
+          );
+          this.setState({
+            deleteCollection: null,
+            collectionVersion: null,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: detail,
+                description: dependencies,
+              },
+            ],
+          });
+        } else {
+          this.setState({
+            deleteCollection: null,
+            collectionVersion: null,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: t`Error deleting collection version.`,
+                description: err?.message,
+              },
+            ],
+          });
+        }
       });
   };
 
