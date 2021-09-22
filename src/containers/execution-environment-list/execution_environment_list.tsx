@@ -269,6 +269,11 @@ class ExecutionEnvironmentList extends React.Component<
           id: 'updated',
         },
         {
+          title: t`Container registry type`,
+          type: 'none',
+          id: 'type',
+        },
+        {
           title: '',
           type: 'none',
           id: 'controls',
@@ -350,6 +355,9 @@ class ExecutionEnvironmentList extends React.Component<
         </td>
         <td>
           <DateComponent date={item.updated} />
+        </td>
+        <td>
+          <Label>{item.pulp.repository.remote ? t`Remote` : t`Local`}</Label>
         </td>
         <td style={{ paddingRight: '0px', textAlign: 'right' }}>
           {!!dropdownItems.length && <StatefulDropdown items={dropdownItems} />}
