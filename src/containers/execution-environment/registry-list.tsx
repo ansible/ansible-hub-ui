@@ -117,7 +117,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             remoteFormNew: true,
             remoteToEdit: {
               name: '',
-              // API defaults to true when not sending anything, make the UI fits
+              // API defaults to true when not sending anything, make the UI fit
               tls_validation: true,
               write_only_fields: [
                 { name: 'username', is_set: false },
@@ -126,7 +126,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                 { name: 'proxy_password', is_set: false },
                 { name: 'client_key', is_set: false },
               ],
-            } as any,
+            } as RemoteType,
             remoteUnmodified: null,
             showRemoteFormModal: true,
           })
@@ -405,18 +405,39 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     );
   }
 
-  private deleteRegistry(item) {
-    ExecutionEnvironmentRegistryAPI.delete(item.name)
-      .then((r) => console.log('TODO delete success/error'))
+  private deleteRegistry({ name }) {
+    ExecutionEnvironmentRegistryAPI.delete(name)
+      .then(() =>
+        this.addAlert(
+          t`Successfully deleted remote registry ${name}`,
+          'success',
+        ),
+      )
+      .catch(() =>
+        this.addAlert(t`Failed to delete remote registry ${name}`, 'danger'),
+      )
       .then(() =>
         this.setState({ showDeleteModal: false, remoteToEdit: null }),
       );
   }
 
-  private syncRegistry(item) {
-    ExecutionEnvironmentRegistryAPI.sync(item.name).then((r) =>
-      console.log('TODO sync success/error'),
-    );
+  private syncRegistry({ name }) {
+    ExecutionEnvironmentRegistryAPI.sync(name)
+      .then(() => this.addAlert(t`Sync initiated for ${name}`, 'success'))
+      .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
+  }
+
+  private addAlert(title, variant, description?) {
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          description,
+          title,
+          variant,
+        },
+      ],
+    });
   }
 
   private get updateParams() {
