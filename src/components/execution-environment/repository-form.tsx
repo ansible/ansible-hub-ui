@@ -44,7 +44,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
         variant='large'
         onClose={onCancel}
         isOpen={true}
-        title={t`Edit repository`}
+        title={t`Edit execution environment`}
         actions={[
           <Button
             key='save'
