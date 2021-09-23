@@ -251,7 +251,7 @@ class ExecutionEnvironmentList extends React.Component<
       >
         {t`Use in Controller`}
       </DropdownItem>,
-    ];
+    ].filter((truthy) => truthy);
 
     return (
       <tr aria-labelledby={item.name} key={index}>
@@ -278,7 +278,7 @@ class ExecutionEnvironmentList extends React.Component<
           <DateComponent date={item.updated} />
         </td>
         <td>
-          <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+          {!!dropdownItems.length && <StatefulDropdown items={dropdownItems} />}
         </td>
       </tr>
     );
