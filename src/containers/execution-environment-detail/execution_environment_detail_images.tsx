@@ -3,9 +3,14 @@ import * as React from 'react';
 import './execution-environment-detail.scss';
 
 import { pickBy } from 'lodash';
-import { ImagesAPI, ContainerManifestType } from '../../api';
-import { formatPath, Paths } from '../../paths';
-import { filterIsSet, ParamHelper, getHumanSize } from '../../utilities';
+import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
+import { formatPath, Paths } from 'src/paths';
+import {
+  ParamHelper,
+  filterIsSet,
+  getContainersURL,
+  getHumanSize,
+} from 'src/utilities';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -27,6 +32,7 @@ import {
   EmptyStateFilter,
   ShaLabel,
   TagLabel,
+  PublishToControllerModal,
   StatefulDropdown,
   AlertList,
   closeAlertMixin,
@@ -50,6 +56,7 @@ interface IState {
 
   // ID for manifest that is open in the manage tags modal.
   manageTagsManifestDigest: string;
+  publishToController: { digest?: string; image: string; tag?: string };
 }
 
 class ExecutionEnvironmentDetailImages extends React.Component<
@@ -80,6 +87,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       params: params,
       redirect: null,
       manageTagsManifestDigest: undefined,
+      publishToController: null,
       alerts: [],
     };
   }
@@ -93,7 +101,8 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   renderImages() {
-    const { params, images, manageTagsManifestDigest } = this.state;
+    const { params, images, manageTagsManifestDigest, publishToController } =
+      this.state;
     if (
       images.length === 0 &&
       !filterIsSet(params, ['tag', 'digest__icontains'])
@@ -170,6 +179,13 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             this.setState({ alerts: this.state.alerts.concat(alert) });
           }}
           containerRepository={this.props.containerRepository}
+        />
+        <PublishToControllerModal
+          digest={publishToController?.digest}
+          image={publishToController?.image}
+          isOpen={!!publishToController}
+          onClose={() => this.setState({ publishToController: null })}
+          tag={publishToController?.tag}
         />
 
         <div className='toolbar'>
@@ -274,21 +290,38 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       </Link>
     );
 
-    const url = window.location.href.split('://')[1].split('/ui')[0];
+    const url = getContainersURL();
     let instruction =
       image.tags.length === 0
         ? image.digest
         : this.props.match.params['container'] + ':' + image.tags[0];
+
     const dropdownItems = [
+      canEditTags && (
+        <DropdownItem
+          key='edit-tags'
+          onClick={() => {
+            this.setState({ manageTagsManifestDigest: image.digest });
+          }}
+        >
+          {t`Manage tags`}
+        </DropdownItem>
+      ),
       <DropdownItem
-        key='edit-tags'
+        key='publish-to-controller'
         onClick={() => {
-          this.setState({ manageTagsManifestDigest: image.digest });
+          this.setState({
+            publishToController: {
+              digest: image.digest,
+              image: this.props.containerRepository.name,
+              tag: image.tags[0],
+            },
+          });
         }}
       >
-        {t`Edit tags`}
+        {t`Use in Controller`}
       </DropdownItem>,
-    ];
+    ].filter((truthy) => truthy);
 
     return (
       <tr key={index}>
@@ -314,7 +347,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         </td>
 
         <td>
-          {canEditTags && (
+          {dropdownItems.length && (
             <StatefulDropdown items={dropdownItems}></StatefulDropdown>
           )}
         </td>
@@ -324,7 +357,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
   queryImages(name) {
     this.setState({ loading: true }, () =>
-      ImagesAPI.list(
+      ExecutionEnvironmentAPI.images(
         name,
         ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
       )

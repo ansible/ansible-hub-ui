@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { PlusCircleIcon, CubesIcon } from '@patternfly/react-icons';
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { EmptyStateCustom } from './empty-state-custom';
 
 interface IProps {
   button?: ReactElement;
   title: string;
-  description: string;
+  description: ReactNode;
 }
 
 export class EmptyStateNoData extends React.Component<IProps> {
