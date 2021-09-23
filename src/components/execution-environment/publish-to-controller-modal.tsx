@@ -192,7 +192,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
     }
 
     return (
-      <List isPlain>
+      <List isPlain isBordered>
         {controllers.map((host) => {
           const imageUrl = `${url}/${tag ? `${image}:${tag}` : digest}`;
           const href = `${host}/#/execution_environments/add?image=${encodeURIComponent(
@@ -200,7 +200,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
           )}`;
 
           return (
-            <ListItem>
+            <ListItem style={{ paddingTop: '8px' }}>
               <a href={href} target='_blank'>
                 {host}
               </a>{' '}
@@ -282,14 +282,15 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
         {isOpen && !loading && !noData && controllers && (
           <>
             <Trans>
-              <b>Execution Environment</b> {image}
+              <b>Execution Environment</b>{' '}
+              <span style={{ paddingLeft: '16px' }}>{image}</span>
             </Trans>
             <Spacer />
             <Flex>
               <FlexItem>
                 <b>{t`Tag`}</b>
               </FlexItem>
-              <FlexItem grow={{ default: 'grow' }}>
+              <FlexItem>
                 <APISearchTypeAhead
                   loadResults={(name) => this.fetchTags(image, name)}
                   onClear={() => this.setState({ tag: null, tagSelection: [] })}
@@ -307,10 +308,21 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
                   toggleIcon={<TagIcon />}
                 />
               </FlexItem>
-              <FlexItem>
-                {digest && <ShaLabel grey long digest={digest} />}
-              </FlexItem>
+              <FlexItem grow={{ default: 'grow' }}></FlexItem>
             </Flex>
+            {digest && (
+              <>
+                <Spacer />
+                <Flex>
+                  <FlexItem>
+                    <b>{t`Digest`}</b>
+                  </FlexItem>
+                  <FlexItem>
+                    <ShaLabel grey long digest={digest} />
+                  </FlexItem>
+                </Flex>
+              </>
+            )}
             <Spacer />
             <Trans>
               Click on the Controller URL that you want to use the above
@@ -320,21 +332,38 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
             </Trans>
             <Spacer />
 
-            <CompoundFilter
-              updateParams={(controllerParams) => {
-                controllerParams.page = 1;
-                this.setState({ controllerParams }, () =>
-                  this.fetchControllers(),
-                );
-              }}
-              params={controllerParams}
-              filterConfig={[
-                {
-                  id: 'host__icontains',
-                  title: t`Controller name`,
-                },
-              ]}
-            />
+            <Flex>
+              <FlexItem>
+                <CompoundFilter
+                  updateParams={(controllerParams) => {
+                    controllerParams.page = 1;
+                    this.setState({ controllerParams }, () =>
+                      this.fetchControllers(),
+                    );
+                  }}
+                  params={controllerParams}
+                  filterConfig={[
+                    {
+                      id: 'host__icontains',
+                      title: t`Controller name`,
+                    },
+                  ]}
+                />
+              </FlexItem>
+              <FlexItem grow={{ default: 'grow' }}></FlexItem>
+              <FlexItem>
+                <Pagination
+                  params={controllerParams}
+                  updateParams={(controllerParams) => {
+                    this.setState({ controllerParams }, () =>
+                      this.fetchControllers(),
+                    );
+                  }}
+                  count={controllerCount}
+                  isTop
+                />
+              </FlexItem>
+            </Flex>
 
             <AppliedFilters
               updateParams={(controllerParams) =>
@@ -349,17 +378,10 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
               }}
             />
 
-            <Pagination
-              params={controllerParams}
-              updateParams={(controllerParams) => {
-                this.setState({ controllerParams }, () =>
-                  this.fetchControllers(),
-                );
-              }}
-              count={controllerCount}
-              isTop
-            />
+            <Spacer />
             {this.renderControllers()}
+            <Spacer />
+
             <Pagination
               params={controllerParams}
               updateParams={(controllerParams) => {
