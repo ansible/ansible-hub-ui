@@ -111,7 +111,7 @@ class ExecutionEnvironmentList extends React.Component<
           onClose={() => this.setState({ publishToController: null })}
           tag={publishToController?.tag}
         />
-        <BaseHeader title={t`Container Registry`}></BaseHeader>
+        <BaseHeader title={t`Execution Environments`}></BaseHeader>
         {noData && !loading ? (
           <EmptyStateNoData
             title={t`No container repositories yet`}
@@ -251,7 +251,7 @@ class ExecutionEnvironmentList extends React.Component<
       >
         {t`Use in Controller`}
       </DropdownItem>,
-    ];
+    ].filter((truthy) => truthy);
 
     return (
       <tr aria-labelledby={item.name} key={index}>
@@ -278,7 +278,7 @@ class ExecutionEnvironmentList extends React.Component<
           <DateComponent date={item.updated} />
         </td>
         <td>
-          <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+          {!!dropdownItems.length && <StatefulDropdown items={dropdownItems} />}
         </td>
       </tr>
     );

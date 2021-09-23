@@ -345,10 +345,20 @@ class App extends React.Component<RouteComponentProps, IState> {
           url: Paths.approvalDashboard,
         }),
       ]),
-      menuItem(t`Container Registry`, {
-        condition: ({ featureFlags }) => featureFlags.execution_environments,
-        url: Paths.executionEnvironments,
-      }),
+      menuSection(
+        t`Execution Environments`,
+        {
+          condition: ({ featureFlags }) => featureFlags.execution_environments,
+        },
+        [
+          menuItem(t`Execution Environments`, {
+            url: Paths.executionEnvironments,
+          }),
+          menuItem(t`Remote Registries`, {
+            url: Paths.executionEnvironmentsRegistries,
+          }),
+        ],
+      ),
       menuItem(t`Task Management`, {
         url: Paths.taskList,
       }),

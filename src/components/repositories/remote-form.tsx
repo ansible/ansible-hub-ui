@@ -20,15 +20,18 @@ import { DownloadIcon } from '@patternfly/react-icons';
 
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { Constants } from 'src/constants';
-import { isFieldSet } from 'src/utilities';
+import { isFieldSet, isWriteOnly } from 'src/utilities';
 
 interface IProps {
-  updateRemote: (remote) => void;
-  remote: RemoteType;
-  saveRemote: () => void;
-  showModal: boolean;
+  allowEditName?: boolean;
   closeModal: () => void;
   errorMessages: object;
+  remote: RemoteType;
+  remoteType?: 'registry';
+  saveRemote: () => void;
+  showModal: boolean;
+  title?: string;
+  updateRemote: (remote) => void;
 }
 
 interface IState {
@@ -72,10 +75,11 @@ export class RemoteForm extends React.Component<IProps, IState> {
     if (!remote) {
       return null;
     }
-    const remoteType = this.getRemoteType(remote.url);
+
+    const remoteType = this.props.remoteType || this.getRemoteType(remote.url);
 
     let requiredFields = ['name', 'url'];
-    let disabledFields = ['name'];
+    let disabledFields = this.props.allowEditName ? [] : ['name'];
 
     if (remoteType === 'certified') {
       requiredFields = requiredFields.concat(['auth_url']);
@@ -86,15 +90,24 @@ export class RemoteForm extends React.Component<IProps, IState> {
       requiredFields = requiredFields.concat(['requirements_file']);
       disabledFields = disabledFields.concat(['auth_url', 'token']);
     }
+
+    if (remoteType === 'registry') {
+      disabledFields = disabledFields.concat([
+        'auth_url',
+        'token',
+        'requirements_file',
+      ]);
+    }
+
     return (
       <Modal
         isOpen={this.props.showModal}
-        title={t`Edit remote`}
+        title={this.props.title || t`Edit remote`}
         variant='small'
         onClose={() => this.props.closeModal()}
         actions={[
           <Button
-            isDisabled={!this.isValid(requiredFields)}
+            isDisabled={!this.isValid(requiredFields, remoteType)}
             key='confirm'
             variant='primary'
             onClick={() => this.props.saveRemote()}
@@ -144,6 +157,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             onChange={(value) => this.updateRemote(value, 'name')}
           />
         </FormGroup>
+
         <FormGroup
           fieldId={'url'}
           label={t`URL`}
@@ -164,6 +178,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             onChange={(value) => this.updateRemote(value, 'url')}
           />
         </FormGroup>
+
         {!disabledFields.includes('token') && (
           <FormGroup
             fieldId={'token'}
@@ -272,60 +287,71 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </Flex>
           </FormGroup>
         )}
+
+        <FormGroup
+          fieldId={'username'}
+          label={t`Username`}
+          labelIcon={
+            <HelperText
+              content={t`The username to be used for authentication when syncing. This is not required when using a token.`}
+            />
+          }
+          isRequired={requiredFields.includes('username')}
+          validated={this.toError(!('username' in errorMessages))}
+          helperTextInvalid={errorMessages['username']}
+        >
+          <WriteOnlyField
+            isValueSet={
+              isWriteOnly('username', remote.write_only_fields) &&
+              isFieldSet('username', remote.write_only_fields)
+            }
+            onClear={() => this.updateIsSet('username', false)}
+          >
+            <TextInput
+              validated={this.toError(!('username' in errorMessages))}
+              isRequired={requiredFields.includes('username')}
+              isDisabled={disabledFields.includes('username')}
+              id='username'
+              type='text'
+              value={remote.username || ''}
+              onChange={(value) => this.updateRemote(value, 'username')}
+            />
+          </WriteOnlyField>
+        </FormGroup>
+
+        <FormGroup
+          fieldId={'password'}
+          label={t`Password`}
+          labelIcon={
+            <HelperText
+              content={t`The password to be used for authentication when syncing. This is not required when using a token.`}
+            />
+          }
+          isRequired={requiredFields.includes('password')}
+          validated={this.toError(!('password' in errorMessages))}
+          helperTextInvalid={errorMessages['password']}
+        >
+          <WriteOnlyField
+            isValueSet={isFieldSet('password', remote.write_only_fields)}
+            onClear={() => this.updateIsSet('password', false)}
+          >
+            <TextInput
+              validated={this.toError(!('password' in errorMessages))}
+              isRequired={requiredFields.includes('password')}
+              isDisabled={disabledFields.includes('password')}
+              id='password'
+              type='password'
+              value={remote.password || ''}
+              onChange={(value) => this.updateRemote(value, 'password')}
+            />
+          </WriteOnlyField>
+        </FormGroup>
+
         <ExpandableSection
           toggleTextExpanded={t`Hide advanced options`}
           toggleTextCollapsed={t`Show advanced options`}
         >
           <div className='pf-c-form'>
-            <FormGroup
-              fieldId={'username'}
-              label={t`Username`}
-              labelIcon={
-                <HelperText
-                  content={t`The username to be used for authentication when syncing. This is not required when using a token.`}
-                />
-              }
-              isRequired={requiredFields.includes('username')}
-              validated={this.toError(!('username' in errorMessages))}
-              helperTextInvalid={errorMessages['username']}
-            >
-              <TextInput
-                validated={this.toError(!('username' in errorMessages))}
-                isRequired={requiredFields.includes('username')}
-                isDisabled={disabledFields.includes('username')}
-                id='username'
-                type='text'
-                value={remote.username || ''}
-                onChange={(value) => this.updateRemote(value, 'username')}
-              />
-            </FormGroup>
-            <FormGroup
-              fieldId={'password'}
-              label={t`Password`}
-              labelIcon={
-                <HelperText
-                  content={t`The password to be used for authentication when syncing. This is not required when using a token.`}
-                />
-              }
-              isRequired={requiredFields.includes('password')}
-              validated={this.toError(!('password' in errorMessages))}
-              helperTextInvalid={errorMessages['password']}
-            >
-              <WriteOnlyField
-                isValueSet={isFieldSet('password', remote.write_only_fields)}
-                onClear={() => this.updateIsSet('password', false)}
-              >
-                <TextInput
-                  validated={this.toError(!('password' in errorMessages))}
-                  isRequired={requiredFields.includes('password')}
-                  isDisabled={disabledFields.includes('password')}
-                  id='password'
-                  type='password'
-                  value={remote.password || ''}
-                  onChange={(value) => this.updateRemote(value, 'password')}
-                />
-              </WriteOnlyField>
-            </FormGroup>
             <FormGroup
               fieldId={'proxy_url'}
               label={t`Proxy URL`}
@@ -351,15 +377,25 @@ export class RemoteForm extends React.Component<IProps, IState> {
               validated={this.toError(!('proxy_username' in errorMessages))}
               helperTextInvalid={errorMessages['proxy_username']}
             >
-              <TextInput
-                validated={this.toError(!('proxy_username' in errorMessages))}
-                isRequired={requiredFields.includes('proxy_username')}
-                isDisabled={disabledFields.includes('proxy_username')}
-                id='proxy_username'
-                type='text'
-                value={remote.proxy_username || ''}
-                onChange={(value) => this.updateRemote(value, 'proxy_username')}
-              />
+              <WriteOnlyField
+                isValueSet={
+                  isWriteOnly('proxy_username', remote.write_only_fields) &&
+                  isFieldSet('proxy_username', remote.write_only_fields)
+                }
+                onClear={() => this.updateIsSet('proxy_username', false)}
+              >
+                <TextInput
+                  validated={this.toError(!('proxy_username' in errorMessages))}
+                  isRequired={requiredFields.includes('proxy_username')}
+                  isDisabled={disabledFields.includes('proxy_username')}
+                  id='proxy_username'
+                  type='text'
+                  value={remote.proxy_username || ''}
+                  onChange={(value) =>
+                    this.updateRemote(value, 'proxy_username')
+                  }
+                />
+              </WriteOnlyField>
             </FormGroup>
 
             <FormGroup
@@ -408,6 +444,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 isChecked={remote.tls_validation}
               />
             </FormGroup>
+
             <FormGroup
               fieldId={'client_key'}
               label={t`Client key`}
@@ -440,6 +477,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 />
               </WriteOnlyField>
             </FormGroup>
+
             <FormGroup
               fieldId={'client_cert'}
               label={t`Client certificate`}
@@ -489,6 +527,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 </FlexItem>
               </Flex>
             </FormGroup>
+
             <FormGroup
               fieldId={'ca_cert'}
               label={t`CA certificate`}
@@ -537,6 +576,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 </FlexItem>
               </Flex>
             </FormGroup>
+
             <FormGroup
               fieldId={'download_concurrency'}
               label={t`Download concurrency`}
@@ -545,7 +585,12 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   content={t`Total number of simultaneous connections.`}
                 />
               }
-              validated={remote.download_concurrency > 0 ? 'default' : 'error'}
+              validated={
+                !this.isNumericSet(remote.download_concurrency) ||
+                remote.download_concurrency > 0
+                  ? 'default'
+                  : 'error'
+              }
               helperTextInvalid={t`Number must be greater than 0`}
             >
               <TextInput
@@ -553,13 +598,17 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 type='number'
                 value={remote.download_concurrency}
                 validated={
-                  remote.download_concurrency > 0 ? 'default' : 'error'
+                  !this.isNumericSet(remote.download_concurrency) ||
+                  remote.download_concurrency > 0
+                    ? 'default'
+                    : 'error'
                 }
                 onChange={(value) =>
-                  this.updateRemote(parseInt(value), 'download_concurrency')
+                  this.updateRemote(value, 'download_concurrency')
                 }
               />
             </FormGroup>
+
             <FormGroup
               fieldId={'rate_limit'}
               label={t`Rate Limit`}
@@ -569,8 +618,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 />
               }
               validated={
-                Number.isInteger(remote.rate_limit) ||
-                remote.rate_limit === null
+                !this.isNumericSet(remote.rate_limit) ||
+                Number.isInteger(remote.rate_limit)
                   ? 'default'
                   : 'error'
               }
@@ -578,6 +627,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             >
               <TextInput
                 id='rate_limit'
+                type='number'
                 value={remote.rate_limit}
                 onChange={(value) => this.updateRemote(value, 'rate_limit')}
               />
@@ -597,7 +647,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
     );
   }
 
-  private isValid(requiredFields) {
+  private isValid(requiredFields, remoteType) {
     const { remote } = this.props;
 
     for (const field of requiredFields) {
@@ -605,9 +655,14 @@ export class RemoteForm extends React.Component<IProps, IState> {
         return false;
       }
     }
-    if (remote.download_concurrency < 1) {
-      return false;
+
+    if (['community', 'certified', 'none'].includes(remoteType)) {
+      // only required in remotes, not registries
+      if (remote.download_concurrency < 1) {
+        return false;
+      }
     }
+
     return true;
   }
 
@@ -647,6 +702,15 @@ export class RemoteForm extends React.Component<IProps, IState> {
   }
 
   private updateRemote(value, field) {
+    const numericFields = ['download_concurrency', 'rate_limit'];
+    if (numericFields.includes(field)) {
+      value = Number.isInteger(value)
+        ? value
+        : Number.isNaN(parseInt(value, 10))
+        ? null
+        : parseInt(value, 10);
+    }
+
     const update = { ...this.props.remote };
     update[field] = value;
     this.props.updateRemote(update);
@@ -658,5 +722,9 @@ export class RemoteForm extends React.Component<IProps, IState> {
     } else {
       return 'error';
     }
+  }
+
+  private isNumericSet(value) {
+    return value != null && value !== '';
   }
 }

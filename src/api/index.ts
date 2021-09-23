@@ -39,6 +39,7 @@ export { DistributionAPI } from './distribution';
 export { MyDistributionAPI } from './my-distribution';
 export { DistributionType } from './response-types/distribution';
 export { ExecutionEnvironmentAPI } from './execution-environment';
+export { ExecutionEnvironmentRegistryAPI } from './execution-environment-registry';
 export {
   ExecutionEnvironmentType,
   ContainerManifestType,
