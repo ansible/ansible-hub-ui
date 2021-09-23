@@ -165,6 +165,15 @@ export class API extends HubAPI {
         .catch((err) => reject(err));
     });
   }
+
+  getUsedDependenciesByCollection(namespace, collection, params?) {
+    return this.http.get(
+      this.getUIPath(
+        `collection-versions/?dependency=${namespace}.${collection}`,
+      ),
+      { params: this.mapPageToOffset(params) },
+    );
+  }
 }
 
 export const CollectionAPI = new API();

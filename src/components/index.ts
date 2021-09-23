@@ -16,6 +16,8 @@ export { CollectionFilter } from './collection-list/collection-filter';
 export { CollectionList } from './collection-list/collection-list';
 export { CollectionListItem } from './collection-list/collection-list-item';
 export { ConfirmModal } from './confirm-modal/confirm-modal';
+export { CollectionDependenciesList } from './collection-dependencies-list/collection-dependencies-list';
+export { CollectionUsedbyDependenciesList } from './collection-dependencies-list/collection-usedby-dependencies-list';
 export { CompoundFilter } from './patternfly-wrappers/compound-filter';
 export { DateComponent } from './date-component/date-component';
 export { DeprecatedTag } from './tags/deprecated-tag';

@@ -202,6 +202,14 @@ export class Constants {
     'windows',
   ];
 
+  static COLLECTION_PLURAL_LABELS = {
+    dependency: {
+      '0': 'dependencies',
+      '1': 'dependency',
+      other: 'dependencies',
+    },
+  };
+
   static TASK_NAMES = {
     'galaxy_ng.app.tasks.promotion._remove_content_from_repository': t`Remove content from repository`,
     'galaxy_ng.app.tasks.publishing.import_and_auto_approve': t`Import and auto approve`,

@@ -312,6 +312,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         title: t`Import log`,
         link: formatPath(Paths.collectionImportLogByRepo, pathParams, reduced),
       },
+      {
+        active: active === 'dependencies',
+        title: t`Dependencies`,
+        link: formatPath(
+          Paths.collectionDependenciesByRepo,
+          pathParams,
+          reduced,
+        ),
+      },
     ];
 
     return <LinkTabs tabs={tabs} />;
