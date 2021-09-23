@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PlusCircleIcon, SearchIcon } from '@patternfly/react-icons';
+import { PlusCircleIcon, CubesIcon } from '@patternfly/react-icons';
 import { ReactElement } from 'react';
 import { EmptyStateCustom } from './empty-state-custom';
 
@@ -13,7 +13,7 @@ export class EmptyStateNoData extends React.Component<IProps> {
   render() {
     return (
       <EmptyStateCustom
-        icon={this.props.button ? PlusCircleIcon : SearchIcon}
+        icon={this.props.button ? PlusCircleIcon : CubesIcon}
         title={this.props.title}
         description={this.props.description}
         button={this.props.button}
