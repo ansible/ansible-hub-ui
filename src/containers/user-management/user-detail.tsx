@@ -48,7 +48,11 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     const id = this.props.match.params['userID'];
-    if (!this.context.user || this.context.user.is_anonymous) {
+    if (
+      !this.context.user ||
+      this.context.user.is_anonymous ||
+      !this.context.user.model_permissions.view_user
+    ) {
       this.setState({ unauthorised: true });
     } else {
       UserAPI.get(id)
@@ -73,7 +77,6 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const notAuthorized = !!user && !user.model_permissions.view_user;
     const breadcrumbs = [
       { url: Paths.userList, name: t`Users` },
       { name: userDetail.username },
@@ -98,49 +101,39 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
             })
           }
         ></DeleteUserModal>
-        {notAuthorized ? (
-          <React.Fragment>
-            <BaseHeader
-              breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
-              title={title}
-            ></BaseHeader>
-            <EmptyStateUnauthorized />{' '}
-          </React.Fragment>
-        ) : (
-          <UserFormPage
-            user={userDetail}
-            breadcrumbs={breadcrumbs}
-            title={title}
-            errorMessages={errorMessages}
-            updateUser={(user) => this.setState({ userDetail: user })}
-            isReadonly
-            extraControls={
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                {!!user && user.model_permissions.change_user ? (
-                  <div>
-                    <Link
-                      to={formatPath(Paths.editUser, {
-                        userID: userDetail.id,
-                      })}
-                    >
-                      <Button>{t`Edit`}</Button>
-                    </Link>
-                  </div>
-                ) : null}
-                {!!user && user.model_permissions.delete_user ? (
-                  <div style={{ marginLeft: '8px' }}>
-                    <Button
-                      variant='secondary'
-                      onClick={() => this.setState({ showDeleteModal: true })}
-                    >
-                      {t`Delete`}
-                    </Button>
-                  </div>
-                ) : null}
-              </div>
-            }
-          ></UserFormPage>
-        )}
+        <UserFormPage
+          user={userDetail}
+          breadcrumbs={breadcrumbs}
+          title={title}
+          errorMessages={errorMessages}
+          updateUser={(user) => this.setState({ userDetail: user })}
+          isReadonly
+          extraControls={
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              {!!user && user.model_permissions.change_user ? (
+                <div>
+                  <Link
+                    to={formatPath(Paths.editUser, {
+                      userID: userDetail.id,
+                    })}
+                  >
+                    <Button>{t`Edit`}</Button>
+                  </Link>
+                </div>
+              ) : null}
+              {!!user && user.model_permissions.delete_user ? (
+                <div style={{ marginLeft: '8px' }}>
+                  <Button
+                    variant='secondary'
+                    onClick={() => this.setState({ showDeleteModal: true })}
+                  >
+                    {t`Delete`}
+                  </Button>
+                </div>
+              ) : null}
+            </div>
+          }
+        ></UserFormPage>
       </>
     );
   }
