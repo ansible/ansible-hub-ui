@@ -24,7 +24,6 @@ import {
   RepoSelector,
   Pagination,
 } from 'src/components';
-
 import { CollectionDetailType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';

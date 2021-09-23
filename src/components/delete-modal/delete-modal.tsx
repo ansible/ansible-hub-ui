@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import { Button, Modal, Spinner } from '@patternfly/react-core';
 
-interface IProps {
+export interface IProps {
   cancelAction: () => void;
   children?: any;
   deleteAction: () => void;
