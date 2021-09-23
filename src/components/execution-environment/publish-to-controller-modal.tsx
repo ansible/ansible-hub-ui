@@ -19,6 +19,7 @@ import {
   CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
+  LoadingPageSpinner,
   Pagination,
   ShaLabel,
   closeAlertMixin,
@@ -236,14 +237,11 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
 
     const notListedMessage = (
       <>
-        {' '}
-        <Trans>
-          If the Controller is not listed in the table, check settings.py.
-        </Trans>{' '}
+        {t`If the Controller is not listed in the table, check settings.py.`}{' '}
         {docsLink && (
           <>
             <a href={docsLink} target='_blank'>
-              <Trans>Learn more</Trans>
+              {t`Learn more`}
             </a>{' '}
             <ExternalLinkAltIcon />
           </>
@@ -269,7 +267,11 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
-        {loading && t`Loading...`}
+        {loading && (
+          <div style={{ padding: '16px' }}>
+            <LoadingPageSpinner />
+          </div>
+        )}
         {noData && !loading ? (
           <EmptyStateNoData
             title={t`No Controllers available`}
@@ -285,9 +287,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
             <Spacer />
             <Flex>
               <FlexItem>
-                <b>
-                  <Trans>Tag</Trans>
-                </b>
+                <b>{t`Tag`}</b>
               </FlexItem>
               <FlexItem grow={{ default: 'grow' }}>
                 <APISearchTypeAhead
