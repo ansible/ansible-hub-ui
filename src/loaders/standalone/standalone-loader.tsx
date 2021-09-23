@@ -339,13 +339,13 @@ class App extends React.Component<RouteComponentProps, IState> {
           url: formatPath(Paths.searchByRepo, {
             repo: this.state.selectedRepo,
           }),
-          condition: ({ user, settings }) =>
-            !!user || settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
+          condition: ({ settings }) =>
+            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
         }),
         menuItem(t`Namespaces`, {
           url: Paths[NAMESPACE_TERM],
-          condition: ({ user, settings }) =>
-            !!user || settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
+          condition: ({ settings }) =>
+            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
         }),
         menuItem(t`Repository Management`, {
           condition: ({ user }) => !user.is_anonymous,
@@ -381,8 +381,8 @@ class App extends React.Component<RouteComponentProps, IState> {
       menuItem(t`Documentation`, {
         url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
         external: true,
-        condition: ({ user, settings }) =>
-          !!user || settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
+        condition: ({ settings }) =>
+          settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS,
       }),
       menuSection(t`User Access`, {}, [
         menuItem(t`Users`, {
