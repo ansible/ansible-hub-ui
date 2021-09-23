@@ -81,6 +81,7 @@ export class CollectionInfo extends React.Component<IProps> {
                   .GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD &&
                 this.context.user.is_anonymous ? (
                   <Alert
+                    className={'collection-download-alert'}
                     isInline
                     variant='warning'
                     title={
