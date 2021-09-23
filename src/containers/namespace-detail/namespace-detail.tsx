@@ -395,6 +395,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         // TODO this needs fixing on backend to return nothing in these cases with 200 status
         // if view only mode is enabled disregard errors and hope
         if (
+          this.context.user.is_anonymous &&
           this.context.settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS
         ) {
           return null;
