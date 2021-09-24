@@ -5,7 +5,6 @@ import { RouteComponentProps, Redirect } from 'react-router-dom';
 import {
   ExecutionEnvironmentAPI,
   ContainerRepositoryType,
-  ContainerDistributionAPI,
   ExecutionEnvironmentNamespaceAPI,
   GroupObjectPermissionType,
   TaskAPI,
@@ -23,7 +22,6 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
-import { isEqual, isEmpty, xorWith, cloneDeep } from 'lodash';
 
 interface IState {
   publishToController: { digest?: string; image: string; tag?: string };
@@ -149,35 +147,11 @@ export function withContainerRepo(WrappedComponent) {
               <RepositoryForm
                 name={this.state.repo.name}
                 namespace={this.state.repo.namespace.name}
-                selectedGroups={cloneDeep(this.state.selectedGroups)}
+                selectedGroups={this.state.selectedGroups}
                 description={this.state.repo.description}
                 permissions={permissions}
-                onSave={({ description, selectedGroups }) => {
-                  let promises = [];
-                  if (description !== this.state.repo.description) {
-                    promises.push(
-                      ContainerDistributionAPI.patch(
-                        this.state.repo.pulp.distribution.pulp_id,
-                        {
-                          description: description,
-                        },
-                      ),
-                    );
-                  }
-                  if (
-                    !this.compareGroupsAndPerms(
-                      selectedGroups.sort(),
-                      this.state.selectedGroups.sort(),
-                    )
-                  ) {
-                    promises.push(
-                      ExecutionEnvironmentNamespaceAPI.update(
-                        this.state.repo.namespace.name,
-                        { groups: selectedGroups },
-                      ),
-                    );
-                  }
-                  Promise.all(promises)
+                onSave={(promise) => {
+                  promise
                     .then((results) => {
                       let task = results.find((x) => x.data && x.data.task);
                       this.setState({ editing: false, loading: true });
@@ -202,6 +176,7 @@ export function withContainerRepo(WrappedComponent) {
                     );
                 }}
                 onCancel={() => this.setState({ editing: false })}
+                distributionPulpId={this.state.repo.pulp.distribution.pulp_id}
               />
             )}
             <WrappedComponent
@@ -212,27 +187,6 @@ export function withContainerRepo(WrappedComponent) {
           </Main>
         </React.Fragment>
       );
-    }
-
-    //Compare groups and compare their permissions
-    private compareGroupsAndPerms(original, newOne) {
-      let same = true;
-      if (original.length === newOne.length) {
-        original.forEach((x, index) => {
-          if (
-            !isEmpty(
-              xorWith(
-                x.object_permissions.sort(),
-                newOne[index].object_permissions.sort(),
-                isEqual,
-              ),
-            )
-          ) {
-            same = false;
-          }
-        });
-      }
-      return isEmpty(xorWith(original, newOne, isEqual)) && same;
     }
 
     private loadRepo() {

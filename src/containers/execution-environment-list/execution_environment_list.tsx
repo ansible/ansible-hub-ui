@@ -404,6 +404,7 @@ class ExecutionEnvironmentList extends React.Component<
       pulp?.repository?.remote || {};
     const remote = pulp?.repository ? !!pulp?.repository?.remote : true; // add only supports remote
     const isNew = !pulp?.repository; // only exists in real data
+    const distributionPulpId = pulp?.distribution?.pulp_id;
 
     return (
       <RepositoryForm
@@ -422,56 +423,27 @@ class ExecutionEnvironmentList extends React.Component<
             /*TODO*/
           ]
         }
-        onSave={(item) => {
-          if (isNew) {
-            const {
-              name,
-              upstreamName: upstream_name,
-              registry,
-              includeTags: include_tags,
-              excludeTags: exclude_tags,
-            } = item;
-            ExecutionEnvironmentRemoteAPI.create({
-              name,
-              upstream_name,
-              registry,
-              include_tags,
-              exclude_tags,
-            }).then(() =>
+        remotePulpId={pulp_id}
+        distributionPulpId={distributionPulpId}
+        onSave={(promise) => {
+          promise
+            .then(() => {
               this.setState(
                 {
                   showRemoteModal: false,
                   itemToEdit: null,
                 },
                 () => this.queryEnvironments(),
-              ),
-            );
-          } else {
-            const {
-              upstreamName: upstream_name,
-              registry,
-              includeTags: include_tags,
-              excludeTags: exclude_tags,
-              description,
-              selectedGroups,
-            } = item;
-            ExecutionEnvironmentRemoteAPI.update(pulp_id, {
-              name,
-              upstream_name,
-              registry,
-              include_tags,
-              exclude_tags,
-            }).then(() =>
-              //TODO description, selectedGroups
-              this.setState(
-                {
-                  showRemoteModal: false,
-                  itemToEdit: null,
-                },
-                () => this.queryEnvironments(),
-              ),
-            );
-          }
+              );
+            })
+            .catch(() => {
+              this.setState({
+                alerts: this.state.alerts.concat({
+                  variant: 'danger',
+                  title: t`Error: changes weren't saved`,
+                }),
+              });
+            });
         }}
         onCancel={() =>
           this.setState({

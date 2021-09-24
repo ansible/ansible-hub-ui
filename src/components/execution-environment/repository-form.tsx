@@ -14,10 +14,14 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { TagIcon } from '@patternfly/react-icons';
+import { isEqual, isEmpty, xorWith, cloneDeep } from 'lodash';
 import { APISearchTypeAhead, ObjectPermissionField } from 'src/components';
 import {
+  ContainerDistributionAPI,
   GroupObjectPermissionType,
+  ExecutionEnvironmentNamespaceAPI,
   ExecutionEnvironmentRegistryAPI,
+  ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
 import { Constants } from 'src/constants';
 
@@ -26,9 +30,10 @@ interface IProps {
   namespace: string;
   description: string;
   selectedGroups: GroupObjectPermissionType[];
-  onSave: (object) => void;
+  onSave: (Promise) => void;
   onCancel: () => void;
   permissions: string[];
+  distributionPulpId: string;
 
   // remote only
   isNew?: boolean;
@@ -37,6 +42,7 @@ interface IProps {
   includeTags?: string[];
   registry?: string; // pk
   upstreamName?: string;
+  remotePulpId?: string;
 }
 
 interface IState {
@@ -59,7 +65,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     this.state = {
       name: this.props.name,
       description: this.props.description,
-      selectedGroups: this.props.selectedGroups,
+      selectedGroups: cloneDeep(this.props.selectedGroups),
 
       addTagsInclude: '',
       addTagsExclude: '',
@@ -113,21 +119,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           <Button
             key='save'
             variant='primary'
-            onClick={() =>
-              onSave(
-                isRemote
-                  ? {
-                      name,
-                      description,
-                      selectedGroups,
-                      upstreamName,
-                      registry: registrySelection[0]?.id,
-                      includeTags,
-                      excludeTags,
-                    }
-                  : { description, selectedGroups },
-              )
-            }
+            onClick={() => onSave(this.onSave())}
           >
             {t`Save`}
           </Button>,
@@ -373,5 +365,82 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     this.setState({
       [key]: Array.from(current.values()),
     } as any);
+  }
+
+  private onSave() {
+    const {
+      description: originalDescription,
+      distributionPulpId,
+      isNew,
+      isRemote,
+      name: originalName,
+      namespace,
+      remotePulpId,
+      selectedGroups: originalSelectedGroups,
+    } = this.props;
+    const {
+      description,
+      excludeTags: exclude_tags,
+      includeTags: include_tags,
+      name,
+      registrySelection: [{ id: registry } = { id: null }],
+      selectedGroups,
+      upstreamName: upstream_name,
+    } = this.state;
+
+    if (isRemote && isNew) {
+      return ExecutionEnvironmentRemoteAPI.create({
+        name,
+        upstream_name,
+        registry,
+        include_tags,
+        exclude_tags,
+      });
+    }
+
+    return Promise.all([
+      // remote edit - upstream, tags, registry
+      isRemote &&
+        !isNew &&
+        ExecutionEnvironmentRemoteAPI.update(remotePulpId, {
+          name: originalName, // readonly but required
+          upstream_name,
+          registry,
+          include_tags,
+          exclude_tags,
+        }),
+      // remote edit or local edit - description, if changed
+      description !== originalDescription &&
+        ContainerDistributionAPI.patch(distributionPulpId, { description }),
+      // remote edit or local edit - groups, if changed
+      !this.compareGroupsAndPerms(
+        selectedGroups.sort(),
+        originalSelectedGroups.sort(),
+      ) &&
+        ExecutionEnvironmentNamespaceAPI.update(namespace, {
+          groups: selectedGroups,
+        }),
+    ]);
+  }
+
+  //Compare groups and compare their permissions
+  private compareGroupsAndPerms(original, newOne) {
+    let same = true;
+    if (original.length === newOne.length) {
+      original.forEach((x, index) => {
+        if (
+          !isEmpty(
+            xorWith(
+              x.object_permissions.sort(),
+              newOne[index].object_permissions.sort(),
+              isEqual,
+            ),
+          )
+        ) {
+          same = false;
+        }
+      });
+    }
+    return isEmpty(xorWith(original, newOne, isEqual)) && same;
   }
 }
