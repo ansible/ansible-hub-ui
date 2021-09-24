@@ -364,7 +364,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         t`Execution Environments`,
         {
           condition: ({ featureFlags, user }) =>
-            featureFlags.execution_environmentv && !user.is_anonymous,
+            featureFlags.execution_environments && !user.is_anonymous,
         },
         [
           menuItem(t`Execution Environments`, {
