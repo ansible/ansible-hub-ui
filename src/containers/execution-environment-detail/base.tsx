@@ -177,6 +177,19 @@ export function withContainerRepo(WrappedComponent) {
                 }}
                 onCancel={() => this.setState({ editing: false })}
                 distributionPulpId={this.state.repo.pulp.distribution.pulp_id}
+                isRemote={!!this.state.repo.pulp.repository.remote}
+                isNew={false}
+                upstreamName={
+                  this.state.repo.pulp.repository.remote?.upstream_name
+                }
+                registry={this.state.repo.pulp.repository.remote?.registry}
+                excludeTags={
+                  this.state.repo.pulp.repository.remote?.exclude_tags
+                }
+                includeTags={
+                  this.state.repo.pulp.repository.remote?.include_tags
+                }
+                remotePulpId={this.state.repo.pulp.repository.remote?.pulp_id}
               />
             )}
             <WrappedComponent

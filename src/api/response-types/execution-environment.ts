@@ -33,6 +33,13 @@ export class ContainerRepositoryType {
       pulp_created: string;
       last_sync_task: string;
       pulp_labels: object;
+      remote?: {
+        pulp_id: string;
+        registry: string;
+        upstream_name: string;
+        include_tags: string[];
+        exclude_tags: string[];
+      };
     };
     distribution: {
       pulp_id: string;
