@@ -29,7 +29,6 @@ interface IProps {
   name: string;
   namespace: string;
   description: string;
-  selectedGroups: GroupObjectPermissionType[];
   onSave: (Promise) => void;
   onCancel: () => void;
   permissions: string[];
@@ -49,6 +48,7 @@ interface IState {
   name: string;
   description: string;
   selectedGroups: GroupObjectPermissionType[];
+  originalSelectedGroups: GroupObjectPermissionType[];
 
   addTagsInclude: string;
   addTagsExclude: string;
@@ -65,7 +65,8 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     this.state = {
       name: this.props.name,
       description: this.props.description,
-      selectedGroups: cloneDeep(this.props.selectedGroups),
+      selectedGroups: [],
+      originalSelectedGroups: [],
 
       addTagsInclude: '',
       addTagsExclude: '',
@@ -90,6 +91,8 @@ export class RepositoryForm extends React.Component<IProps, IState> {
         }
       });
     }
+
+    this.loadSelectedGroups();
   }
 
   render() {
@@ -348,6 +351,16 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     });
   }
 
+  private loadSelectedGroups() {
+    const { namespace } = this.props;
+    return ExecutionEnvironmentNamespaceAPI.get(namespace).then((result) =>
+      this.setState({
+        selectedGroups: cloneDeep(result.data.groups),
+        originalSelectedGroups: result.data.groups,
+      }),
+    );
+  }
+
   private addTags(tags, key: 'includeTags' | 'excludeTags') {
     const current = new Set(this.state[key]);
     tags.split(/\s+|\s*,\s*/).forEach((tag) => current.add(tag));
@@ -376,7 +389,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       name: originalName,
       namespace,
       remotePulpId,
-      selectedGroups: originalSelectedGroups,
     } = this.props;
     const {
       description,
@@ -385,6 +397,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       name,
       registrySelection: [{ id: registry } = { id: null }],
       selectedGroups,
+      originalSelectedGroups,
       upstreamName: upstream_name,
     } = this.state;
 

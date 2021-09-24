@@ -5,7 +5,6 @@ import { RouteComponentProps, Redirect } from 'react-router-dom';
 import {
   ExecutionEnvironmentAPI,
   ContainerRepositoryType,
-  ExecutionEnvironmentNamespaceAPI,
   GroupObjectPermissionType,
   TaskAPI,
 } from 'src/api';
@@ -29,7 +28,6 @@ interface IState {
   loading: boolean;
   redirect: string;
   editing: boolean;
-  selectedGroups: GroupObjectPermissionType[];
   alerts: AlertType[];
 }
 
@@ -49,7 +47,6 @@ export function withContainerRepo(WrappedComponent) {
         loading: true,
         redirect: undefined,
         editing: false,
-        selectedGroups: [],
         alerts: [],
       };
     }
@@ -147,7 +144,6 @@ export function withContainerRepo(WrappedComponent) {
               <RepositoryForm
                 name={this.state.repo.name}
                 namespace={this.state.repo.namespace.name}
-                selectedGroups={this.state.selectedGroups}
                 description={this.state.repo.description}
                 permissions={permissions}
                 onSave={(promise) => {
@@ -205,16 +201,10 @@ export function withContainerRepo(WrappedComponent) {
     private loadRepo() {
       ExecutionEnvironmentAPI.get(this.props.match.params['container'])
         .then((result) => {
-          const repo = result;
-          return ExecutionEnvironmentNamespaceAPI.get(
-            result.data.namespace.name,
-          ).then((result) =>
-            this.setState({
-              loading: false,
-              repo: repo.data,
-              selectedGroups: result.data.groups,
-            }),
-          );
+          this.setState({
+            loading: false,
+            repo: result.data,
+          });
         })
         .catch((e) => this.setState({ redirect: 'notFound' }));
     }

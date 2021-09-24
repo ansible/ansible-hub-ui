@@ -418,11 +418,6 @@ class ExecutionEnvironmentList extends React.Component<
         excludeTags={exclude_tags || []}
         includeTags={include_tags || []}
         permissions={namespace?.my_permissions || []}
-        selectedGroups={
-          [
-            /*TODO*/
-          ]
-        }
         remotePulpId={pulp_id}
         distributionPulpId={distributionPulpId}
         onSave={(promise) => {
