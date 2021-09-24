@@ -180,7 +180,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       this.props.containerRepository.namespace.my_permissions.includes(
         'container.namespace_modify_content_containerpushrepository',
       );
-    const { digest } = selectedImage;
+    const { digest } = selectedImage || {};
 
     return (
       <section className='body'>
