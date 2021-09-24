@@ -183,6 +183,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       this.props.containerRepository.namespace.my_permissions.includes(
         'container.namespace_modify_content_containerpushrepository',
       );
+    const { digest } = selectedImage;
 
     return (
       <section className='body'>
@@ -192,7 +193,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         />
         {deleteModalVisible && (
           <DeleteModal
-            title={'Permanently delete image'}
+            title={t`Permanently delete image`}
             cancelAction={() =>
               this.setState({
                 deleteModalVisible: false,
@@ -204,7 +205,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             isDisabled={!confirmDelete}
           >
             <Trans>
-              Deleting <b>{selectedImage.digest}</b> and its data will be lost.
+              Deleting <b>{digest}</b> and its data will be lost.
             </Trans>
             <Checkbox
               isChecked={confirmDelete}
@@ -442,6 +443,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
   private deleteImage() {
     const { selectedImage } = this.state;
+    const { digest } = selectedImage;
     ExecutionEnvironmentAPI.deleteImage(
       this.props.match.params['container'],
       selectedImage.digest,
@@ -459,7 +461,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             alerts: this.state.alerts.concat([
               {
                 variant: 'success',
-                title: t`Success: ${selectedImage.digest} was deleted`,
+                title: t`Success: ${digest} was deleted`,
               },
             ]),
           });
