@@ -29,7 +29,7 @@ class API extends HubAPI {
 
   deleteImage(name, manifest) {
     return this.http.delete(
-        `${this.apiPath}${name}/_content/images/${manifest}/`,
+      `${this.apiPath}${name}/_content/images/${manifest}/`,
     );
   }
 

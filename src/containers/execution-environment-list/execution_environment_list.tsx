@@ -127,6 +127,7 @@ class ExecutionEnvironmentList extends React.Component<
         Push container images <ExternalLinkAltIcon />
       </Button>
     );
+    const { name } = selectedItem;
 
     return (
       <React.Fragment>
