@@ -2,8 +2,6 @@ import * as React from 'react';
 import { UserType, FeatureFlagsType } from 'src/api';
 import { AlertType } from 'src/components';
 
-import { AlertType } from 'src/components';
-
 interface IAppContextType {
   user: UserType;
   setUser: (user: UserType) => void;

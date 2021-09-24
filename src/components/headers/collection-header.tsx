@@ -2,7 +2,7 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './header.scss';
 
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import * as moment from 'moment';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
@@ -545,11 +545,30 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         if (status === 400) {
           const dependencies = (
             <>
-              <Trans>Dependent collections: </Trans>
+              <Trans>Dependent collections</Trans>
               <List>
-                {dependent_collection_versions.map((d) => (
-                  <ListItem key={d}>{d}</ListItem>
-                ))}
+                {dependent_collection_versions.map((d) => {
+                  const { namespace, version, collection } =
+                    this.separateStringDependencies(d);
+                  return (
+                    <ListItem key={d}>
+                      <Link
+                        to={formatPath(
+                          Paths.collectionByRepo,
+                          {
+                            repo: this.context.selectedRepo,
+                            namespace,
+                            collection,
+                          },
+                          { version: version },
+                        )}
+                        onClick={() => this.setState({ alerts: [] })}
+                      >
+                        {d}
+                      </Link>
+                    </ListItem>
+                  );
+                })}
               </List>
             </>
           );
@@ -669,5 +688,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
   get closeAlert() {
     return closeAlertMixin('alerts');
+  }
+
+  private separateStringDependencies(dependency) {
+    const [nsCollection, version] = dependency.split(' ');
+    const [namespace, collection] = nsCollection.split('.');
+
+    return { namespace, collection, version };
   }
 }
