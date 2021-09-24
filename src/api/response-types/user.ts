@@ -46,6 +46,7 @@ export class UserType {
   password?: string;
   model_permissions?: Permissions;
   is_superuser?: boolean;
+  is_anonymous?: boolean;
 }
 
 export class MeType {

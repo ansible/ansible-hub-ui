@@ -2,13 +2,18 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
-import { LoginForm, LoginPage as PFLoginPage } from '@patternfly/react-core';
+import {
+  Button,
+  LoginForm,
+  LoginPage as PFLoginPage,
+} from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import Logo from 'src/../static/images/logo_large.svg';
 import { ParamHelper } from 'src/utilities/';
 import { Paths } from 'src/paths';
 import { ActiveUserAPI } from 'src/api';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   usernameValue: string;
@@ -80,9 +85,12 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
 
   private onLoginButtonClick = (event) => {
     ActiveUserAPI.login(this.state.usernameValue, this.state.passwordValue)
-      .then((result) => {
+      .then(() => {
         ActiveUserAPI.getUser()
-          .then(() => this.setState({ redirect: this.redirectPage }))
+          .then((result) => {
+            this.context.setUser(result);
+            this.setState({ redirect: this.redirectPage });
+          })
           .catch(() =>
             this.setState({
               passwordValue: '',
@@ -109,3 +117,5 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
 }
 
 export default withRouter(LoginPage);
+
+LoginPage.contextType = AppContext;

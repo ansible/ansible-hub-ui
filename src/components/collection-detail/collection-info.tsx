@@ -11,6 +11,7 @@ import {
   Grid,
   GridItem,
   Button,
+  Alert,
 } from '@patternfly/react-core';
 
 import { DownloadIcon } from '@patternfly/react-icons';
@@ -76,24 +77,43 @@ export class CollectionInfo extends React.Component<IProps> {
                     only supported in ansible 2.9+
                   </Trans>
                 </div>
-                <div>
-                  <a ref={this.downloadLinkRef} style={{ display: 'none' }}></a>
-                  <Button
-                    className='download-button'
-                    variant='link'
-                    icon={<DownloadIcon />}
-                    onClick={() =>
-                      this.download(
-                        this.context.selectedRepo,
-                        namespace,
-                        name,
-                        latest_version,
-                      )
+                {!this.context.settings
+                  .GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD &&
+                this.context.user.is_anonymous ? (
+                  <Alert
+                    className={'collection-download-alert'}
+                    isInline
+                    variant='warning'
+                    title={
+                      <React.Fragment>
+                        {t`You have to be logged in to be able to download the tarball.`}{' '}
+                        <Link to={Paths.login}>{t`Login`}</Link>
+                      </React.Fragment>
                     }
-                  >
-                    {t`Download tarball`}
-                  </Button>
-                </div>
+                  />
+                ) : (
+                  <div>
+                    <a
+                      ref={this.downloadLinkRef}
+                      style={{ display: 'none' }}
+                    ></a>
+                    <Button
+                      className='download-button'
+                      variant='link'
+                      icon={<DownloadIcon />}
+                      onClick={() =>
+                        this.download(
+                          this.context.selectedRepo,
+                          namespace,
+                          name,
+                          latest_version,
+                        )
+                      }
+                    >
+                      {t`Download tarball`}
+                    </Button>
+                  </div>
+                )}
               </SplitItem>
             </Split>
           </GridItem>

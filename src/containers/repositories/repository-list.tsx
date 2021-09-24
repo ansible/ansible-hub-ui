@@ -12,6 +12,7 @@ import {
   LocalRepositoryTable,
   RemoteForm,
   EmptyStateNoData,
+  EmptyStateUnauthorized,
 } from 'src/components';
 import { ParamHelper, mapErrorMessages } from 'src/utilities';
 import { Constants } from 'src/constants';
@@ -43,7 +44,7 @@ interface IState {
   loading: boolean;
   showRemoteFormModal: boolean;
   errorMessages: Object; // RemoteForm modal messages
-
+  unauthorised: boolean;
   content: RemoteType[] | DistributionType[];
   remoteToEdit: RemoteType;
 }
@@ -85,11 +86,16 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       content: [],
       remoteToEdit: undefined,
       errorMessages: {},
+      unauthorised: false,
     };
   }
 
   componentDidMount() {
-    this.loadContent();
+    if (!this.context.user || this.context.user.is_anonymous) {
+      this.setState({ unauthorised: true, loading: false });
+    } else {
+      this.loadContent();
+    }
   }
 
   render() {
@@ -100,6 +106,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       remoteToEdit,
       showRemoteFormModal,
       errorMessages,
+      unauthorised,
     } = this.state;
 
     const tabs = [
@@ -154,7 +161,8 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
         )}
         <BaseHeader title={t`Repo Management`}>
           {DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
-          !loading ? (
+          !loading &&
+          !unauthorised ? (
             <div className='header-bottom'>
               <div className='tab-link-container'>
                 <div className='tabs'>
@@ -174,7 +182,13 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
             </div>
           ) : null}
         </BaseHeader>
-        {loading ? <LoadingPageSpinner /> : this.renderContent(params, content)}
+        {loading ? (
+          <LoadingPageSpinner />
+        ) : unauthorised ? (
+          <EmptyStateUnauthorized />
+        ) : (
+          this.renderContent(params, content)
+        )}
       </React.Fragment>
     );
   }

@@ -35,7 +35,9 @@ import {
   SortTable,
   StatefulDropdown,
   closeAlertMixin,
+  EmptyStateUnauthorized,
 } from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   alerts: AlertType[];
@@ -136,6 +138,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         <Trans>Add remote registry</Trans>
       </Button>
     );
+
+    if (this.context.user.is_anonymous) {
+      return <EmptyStateUnauthorized />;
+    }
 
     return (
       <React.Fragment>
@@ -454,3 +460,4 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 }
 
 export default withRouter(ExecutionEnvironmentRegistryList);
+ExecutionEnvironmentRegistryList.contextType = AppContext;

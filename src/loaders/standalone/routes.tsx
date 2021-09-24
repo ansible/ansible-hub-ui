@@ -38,7 +38,9 @@ import {
   ActiveUserAPI,
   FeatureFlagsAPI,
   FeatureFlagsType,
+  SettingsAPI,
   UserType,
+  SettingsType,
 } from 'src/api';
 import { AppContext } from '../app-context';
 
@@ -48,6 +50,7 @@ interface IRoutesProps {
   updateInitialData: (
     user: UserType,
     flags: FeatureFlagsType,
+    settings: SettingsType,
     callback?: () => void,
   ) => void;
 }
@@ -58,6 +61,7 @@ interface IAuthHandlerProps extends RouteComponentProps {
   updateInitialData: (
     user: UserType,
     flags: FeatureFlagsType,
+    settings: SettingsType,
     callback?: () => void,
   ) => void;
   isDisabled: boolean;
@@ -85,18 +89,20 @@ class AuthHandler extends React.Component<
   componentDidMount() {
     // This component is mounted on every route change, so it's a good place
     // to check for an active user.
-    const { user } = this.context;
-    if (!user) {
-      FeatureFlagsAPI.get()
-        .then((featureFlagResponse) => {
-          this.props.updateInitialData(null, featureFlagResponse.data);
-          return ActiveUserAPI.getUser().then((userResponse) => {
-            this.props.updateInitialData(
-              userResponse,
-              featureFlagResponse.data,
-              () => this.setState({ isLoading: false }),
-            );
-          });
+    const { user, settings } = this.context;
+    if (!user || !settings) {
+      let promises = [];
+      promises.push(FeatureFlagsAPI.get());
+      promises.push(ActiveUserAPI.getUser());
+      promises.push(SettingsAPI.get());
+      Promise.all(promises)
+        .then((results) => {
+          this.props.updateInitialData(
+            results[1],
+            results[0].data,
+            results[2].data,
+            () => this.setState({ isLoading: false }),
+          );
         })
         .catch(() => this.setState({ isLoading: false }));
     }
