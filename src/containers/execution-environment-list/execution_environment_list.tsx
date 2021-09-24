@@ -336,11 +336,7 @@ class ExecutionEnvironmentList extends React.Component<
       item.pulp.repository.remote && (
         <DropdownItem
           key='sync'
-          onClick={() =>
-            ExecutionEnvironmentRemoteAPI.sync(
-              item.pulp.repository.remote.pulp_id,
-            )
-          }
+          onClick={() => ExecutionEnvironmentRemoteAPI.sync(item.name)}
         >
           {t`Sync from registry`}
         </DropdownItem>
