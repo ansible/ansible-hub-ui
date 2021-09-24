@@ -321,19 +321,17 @@ class ExecutionEnvironmentList extends React.Component<
   private renderTableRow(item: any, index: number) {
     const description = item.description;
     const dropdownItems = [
-      item.pulp.repository.remote && (
-        <DropdownItem
-          key='edit'
-          onClick={() =>
-            this.setState({
-              showRemoteModal: true,
-              itemToEdit: { ...item },
-            })
-          }
-        >
-          {t`Edit`}
-        </DropdownItem>
-      ),
+      <DropdownItem
+        key='edit'
+        onClick={() =>
+          this.setState({
+            showRemoteModal: true,
+            itemToEdit: { ...item },
+          })
+        }
+      >
+        {t`Edit`}
+      </DropdownItem>,
       item.pulp.repository.remote && (
         <DropdownItem
           key='sync'
