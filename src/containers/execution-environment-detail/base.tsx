@@ -3,8 +3,9 @@ import * as React from 'react';
 
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 import {
-  ExecutionEnvironmentAPI,
   ContainerRepositoryType,
+  ExecutionEnvironmentAPI,
+  ExecutionEnvironmentRemoteAPI,
   GroupObjectPermissionType,
   TaskAPI,
 } from 'src/api';
@@ -50,9 +51,11 @@ export function withContainerRepo(WrappedComponent) {
         alerts: [],
       };
     }
+
     componentDidMount() {
       this.loadRepo();
     }
+
     render() {
       if (this.state.redirect === 'activity') {
         return (
@@ -94,6 +97,16 @@ export function withContainerRepo(WrappedComponent) {
           'container.namespace_change_containerdistribution',
         ) || permissions.includes('container.change_containernamespace');
       const dropdownItems = [
+        this.state.repo.pulp.repository.remote && (
+          <DropdownItem
+            key='sync'
+            onClick={() =>
+              ExecutionEnvironmentRemoteAPI.sync(this.state.repo.name)
+            }
+          >
+            {t`Sync from registry`}
+          </DropdownItem>
+        ),
         <DropdownItem
           key='publish-to-controller'
           onClick={() => {
@@ -106,7 +119,7 @@ export function withContainerRepo(WrappedComponent) {
         >
           {t`Use in Controller`}
         </DropdownItem>,
-      ];
+      ].filter((truthy) => truthy);
 
       const { publishToController } = this.state;
 
