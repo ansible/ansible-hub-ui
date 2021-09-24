@@ -88,8 +88,15 @@ class ExecutionEnvironmentList extends React.Component<
   }
 
   render() {
-    const { params, publishToController, itemCount, loading, alerts, items, unauthorized } =
-      this.state;
+    const {
+      params,
+      publishToController,
+      itemCount,
+      loading,
+      alerts,
+      items,
+      unauthorized,
+    } = this.state;
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
     const pushImagesButton = (
       <Button
