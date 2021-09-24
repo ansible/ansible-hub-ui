@@ -7,6 +7,7 @@ import {
   Button,
   Checkbox,
   DropdownItem,
+  Label,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -14,10 +15,10 @@ import {
 } from '@patternfly/react-core';
 import {
   ExecutionEnvironmentAPI,
+  ExecutionEnvironmentRemoteAPI,
   ExecutionEnvironmentType,
-  TaskAPI,
 } from 'src/api';
-import { filterIsSet, ParamHelper } from 'src/utilities';
+import { filterIsSet, waitForTask, ParamHelper } from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -31,6 +32,7 @@ import {
   Main,
   Pagination,
   PublishToControllerModal,
+  RepositoryForm,
   SortTable,
   StatefulDropdown,
   Tooltip,
@@ -43,15 +45,17 @@ import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 interface IState {
+  alerts: AlertType[];
+  itemCount: number;
+  itemToEdit?: ExecutionEnvironmentType;
+  items: ExecutionEnvironmentType[];
+  loading: boolean;
   params: {
     page?: number;
     page_size?: number;
   };
   publishToController: { digest?: string; image: string; tag?: string };
-  loading: boolean;
-  items: ExecutionEnvironmentType[];
-  itemCount: number;
-  alerts: AlertType[];
+  showRemoteModal: boolean;
   unauthorized: boolean;
   deleteModalVisible: boolean;
   selectedItem: ExecutionEnvironmentType;
@@ -79,12 +83,14 @@ class ExecutionEnvironmentList extends React.Component<
     }
 
     this.state = {
-      params: params,
-      publishToController: null,
+      alerts: [],
+      itemCount: 0,
+      itemToEdit: null,
       items: [],
       loading: true,
-      itemCount: 0,
-      alerts: [],
+      params,
+      publishToController: null,
+      showRemoteModal: false,
       unauthorized: false,
       deleteModalVisible: false,
       selectedItem: null,
@@ -102,17 +108,20 @@ class ExecutionEnvironmentList extends React.Component<
 
   render() {
     const {
+      alerts,
+      itemCount,
+      itemToEdit,
+      items,
+      loading,
       params,
       publishToController,
-      itemCount,
-      loading,
-      alerts,
-      items,
+      showRemoteModal,
       unauthorized,
       deleteModalVisible,
       selectedItem,
       confirmDelete,
     } = this.state;
+
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
     const pushImagesButton = (
       <Button
@@ -124,9 +133,23 @@ class ExecutionEnvironmentList extends React.Component<
           )
         }
       >
-        Push container images <ExternalLinkAltIcon />
+        <Trans>Push container images</Trans> <ExternalLinkAltIcon />
       </Button>
     );
+    const addRemoteButton = (
+      <Button
+        onClick={() =>
+          this.setState({
+            showRemoteModal: true,
+            itemToEdit: {} as ExecutionEnvironmentType,
+          })
+        }
+        variant='primary'
+      >
+        <Trans>Add execution environment</Trans>
+      </Button>
+    );
+
     const name = !!selectedItem ? selectedItem.name : '';
 
     return (
@@ -142,6 +165,7 @@ class ExecutionEnvironmentList extends React.Component<
           onClose={() => this.setState({ publishToController: null })}
           tag={publishToController?.tag}
         />
+        {showRemoteModal && this.renderRemoteModal(itemToEdit)}
         <BaseHeader title={t`Execution Environments`}></BaseHeader>
         {deleteModalVisible && (
           <DeleteModal
@@ -169,7 +193,12 @@ class ExecutionEnvironmentList extends React.Component<
           <EmptyStateNoData
             title={t`No container repositories yet`}
             description={t`You currently have no container repositories. Add a container repository via the CLI to get started.`}
-            button={pushImagesButton}
+            button={
+              <>
+                {addRemoteButton}
+                {pushImagesButton}
+              </>
+            }
           />
         ) : (
           <Main>
@@ -198,6 +227,7 @@ class ExecutionEnvironmentList extends React.Component<
                             ]}
                           />
                         </ToolbarItem>
+                        <ToolbarItem>{addRemoteButton}</ToolbarItem>
                         <ToolbarItem>{pushImagesButton}</ToolbarItem>
                       </ToolbarGroup>
                     </ToolbarContent>
@@ -268,6 +298,11 @@ class ExecutionEnvironmentList extends React.Component<
           id: 'updated',
         },
         {
+          title: t`Container registry type`,
+          type: 'none',
+          id: 'type',
+        },
+        {
           title: '',
           type: 'none',
           id: 'controls',
@@ -292,6 +327,25 @@ class ExecutionEnvironmentList extends React.Component<
   private renderTableRow(item: any, index: number) {
     const description = item.description;
     const dropdownItems = [
+      <DropdownItem
+        key='edit'
+        onClick={() =>
+          this.setState({
+            showRemoteModal: true,
+            itemToEdit: { ...item },
+          })
+        }
+      >
+        {t`Edit`}
+      </DropdownItem>,
+      item.pulp.repository.remote && (
+        <DropdownItem
+          key='sync'
+          onClick={() => ExecutionEnvironmentRemoteAPI.sync(item.name)}
+        >
+          {t`Sync from registry`}
+        </DropdownItem>
+      ),
       <DropdownItem
         key='publish-to-controller'
         onClick={() => {
@@ -338,10 +392,65 @@ class ExecutionEnvironmentList extends React.Component<
         <td>
           <DateComponent date={item.updated} />
         </td>
+        <td>
+          <Label>{item.pulp.repository.remote ? t`Remote` : t`Local`}</Label>
+        </td>
         <td style={{ paddingRight: '0px', textAlign: 'right' }}>
           {!!dropdownItems.length && <StatefulDropdown items={dropdownItems} />}
         </td>
       </tr>
+    );
+  }
+
+  private renderRemoteModal(itemToEdit) {
+    const { name, namespace, description, pulp } = itemToEdit;
+    const { pulp_id, registry, upstream_name, include_tags, exclude_tags } =
+      pulp?.repository?.remote || {};
+    const remote = pulp?.repository ? !!pulp?.repository?.remote : true; // add only supports remote
+    const isNew = !pulp?.repository; // only exists in real data
+    const distributionPulpId = pulp?.distribution?.pulp_id;
+
+    return (
+      <RepositoryForm
+        isRemote={!!remote}
+        isNew={isNew}
+        name={name}
+        namespace={namespace?.name}
+        description={description}
+        upstreamName={upstream_name}
+        registry={registry}
+        excludeTags={exclude_tags || []}
+        includeTags={include_tags || []}
+        permissions={namespace?.my_permissions || []}
+        remotePulpId={pulp_id}
+        distributionPulpId={distributionPulpId}
+        onSave={(promise) => {
+          promise
+            .then(() => {
+              this.setState(
+                {
+                  showRemoteModal: false,
+                  itemToEdit: null,
+                },
+                () => this.queryEnvironments(),
+              );
+            })
+            .catch(() => {
+              this.setState({
+                alerts: this.state.alerts.concat({
+                  variant: 'danger',
+                  title: t`Error: changes weren't saved`,
+                }),
+              });
+            });
+        }}
+        onCancel={() =>
+          this.setState({
+            showRemoteModal: false,
+            itemToEdit: null,
+          })
+        }
+      />
     );
   }
 
@@ -369,7 +478,7 @@ class ExecutionEnvironmentList extends React.Component<
           selectedItem: null,
           confirmDelete: false,
         });
-        this.waitForTask(taskId).then(() => {
+        waitForTask(taskId).then(() => {
           this.setState({
             alerts: this.state.alerts.concat([
               {
@@ -391,16 +500,6 @@ class ExecutionEnvironmentList extends React.Component<
           ]),
         });
       });
-  }
-
-  private waitForTask(task) {
-    return TaskAPI.get(task).then((result) => {
-      if (result.data.state !== 'completed') {
-        return new Promise((r) => setTimeout(r, 500)).then(() =>
-          this.waitForTask(task),
-        );
-      }
-    });
   }
 
   private get updateParams() {

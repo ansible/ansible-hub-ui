@@ -3,17 +3,14 @@ import * as React from 'react';
 import './execution-environment-detail.scss';
 
 import { pickBy } from 'lodash';
-import {
-  ExecutionEnvironmentAPI,
-  ContainerManifestType,
-  TaskAPI,
-} from 'src/api';
+import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
 import { formatPath, Paths } from 'src/paths';
 import {
   ParamHelper,
   filterIsSet,
   getContainersURL,
   getHumanSize,
+  waitForTask,
 } from 'src/utilities';
 
 import { Link, withRouter } from 'react-router-dom';
@@ -183,7 +180,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       this.props.containerRepository.namespace.my_permissions.includes(
         'container.namespace_modify_content_containerpushrepository',
       );
-    const { digest } = selectedImage;
+    const { digest } = selectedImage || {};
 
     return (
       <section className='body'>
@@ -346,8 +343,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         ? image.digest
         : this.props.match.params['container'] + ':' + image.tags[0];
 
+    const isRemote = !!this.props.containerRepository.pulp.repository.remote;
+
     const dropdownItems = [
-      canEditTags && (
+      canEditTags && !isRemote && (
         <DropdownItem
           key='edit-tags'
           onClick={() => {
@@ -456,7 +455,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           selectedImage: null,
           confirmDelete: false,
         });
-        this.waitForTask(taskId).then(() => {
+        waitForTask(taskId).then(() => {
           this.setState({
             alerts: this.state.alerts.concat([
               {
@@ -478,16 +477,6 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           ]),
         });
       });
-  }
-
-  private waitForTask(task) {
-    return TaskAPI.get(task).then((result) => {
-      if (result.data.state !== 'completed') {
-        return new Promise((r) => setTimeout(r, 500)).then(() =>
-          this.waitForTask(task),
-        );
-      }
-    });
   }
 
   private get updateParams() {

@@ -171,7 +171,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
                 onClick={this.verifyAndAddTag}
                 isDisabled={!!tagToVerify || verifyingTag || isSaving}
               >
-                Add {verifyingTag && <Spinner size='sm'></Spinner>}
+                {t`Add`} {verifyingTag && <Spinner size='sm'></Spinner>}
               </Button>
             </InputGroup>
           </FormGroup>
@@ -312,6 +312,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
     });
   }
 
+  // FIXME merge with waitForTask from utilities
   private waitForTasks(taskUrls: ITaskUrls[]) {
     const pending = new Set(taskUrls.map((i) => i.task));
 

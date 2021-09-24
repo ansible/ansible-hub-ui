@@ -1,7 +1,7 @@
 import { PulpStatus } from './pulp';
 import { WriteOnlyFieldType } from './write-only-field';
 
-class LastSyncType {
+export class LastSyncType {
   state: PulpStatus;
   started_at: string;
   finished_at: string;

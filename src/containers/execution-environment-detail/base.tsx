@@ -3,12 +3,10 @@ import * as React from 'react';
 
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 import {
-  ExecutionEnvironmentAPI,
   ContainerRepositoryType,
-  ContainerDistributionAPI,
-  ExecutionEnvironmentNamespaceAPI,
+  ExecutionEnvironmentAPI,
+  ExecutionEnvironmentRemoteAPI,
   GroupObjectPermissionType,
-  TaskAPI,
 } from 'src/api';
 import { formatPath, Paths } from '../../paths';
 import { Button, DropdownItem } from '@patternfly/react-core';
@@ -23,7 +21,7 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
-import { isEqual, isEmpty, xorWith, cloneDeep } from 'lodash';
+import { waitForTask } from 'src/utilities';
 
 interface IState {
   publishToController: { digest?: string; image: string; tag?: string };
@@ -31,7 +29,6 @@ interface IState {
   loading: boolean;
   redirect: string;
   editing: boolean;
-  selectedGroups: GroupObjectPermissionType[];
   alerts: AlertType[];
 }
 
@@ -51,13 +48,14 @@ export function withContainerRepo(WrappedComponent) {
         loading: true,
         redirect: undefined,
         editing: false,
-        selectedGroups: [],
         alerts: [],
       };
     }
+
     componentDidMount() {
       this.loadRepo();
     }
+
     render() {
       if (this.state.redirect === 'activity') {
         return (
@@ -99,6 +97,16 @@ export function withContainerRepo(WrappedComponent) {
           'container.namespace_change_containerdistribution',
         ) || permissions.includes('container.change_containernamespace');
       const dropdownItems = [
+        this.state.repo.pulp.repository.remote && (
+          <DropdownItem
+            key='sync'
+            onClick={() =>
+              ExecutionEnvironmentRemoteAPI.sync(this.state.repo.name)
+            }
+          >
+            {t`Sync from registry`}
+          </DropdownItem>
+        ),
         <DropdownItem
           key='publish-to-controller'
           onClick={() => {
@@ -111,7 +119,7 @@ export function withContainerRepo(WrappedComponent) {
         >
           {t`Use in Controller`}
         </DropdownItem>,
-      ];
+      ].filter((truthy) => truthy);
 
       const { publishToController } = this.state;
 
@@ -149,40 +157,15 @@ export function withContainerRepo(WrappedComponent) {
               <RepositoryForm
                 name={this.state.repo.name}
                 namespace={this.state.repo.namespace.name}
-                selectedGroups={cloneDeep(this.state.selectedGroups)}
                 description={this.state.repo.description}
                 permissions={permissions}
-                onSave={(description, selectedGroups) => {
-                  let promises = [];
-                  if (description !== this.state.repo.description) {
-                    promises.push(
-                      ContainerDistributionAPI.patch(
-                        this.state.repo.pulp.distribution.pulp_id,
-                        {
-                          description: description,
-                        },
-                      ),
-                    );
-                  }
-                  if (
-                    !this.compareGroupsAndPerms(
-                      selectedGroups.sort(),
-                      this.state.selectedGroups.sort(),
-                    )
-                  ) {
-                    promises.push(
-                      ExecutionEnvironmentNamespaceAPI.update(
-                        this.state.repo.namespace.name,
-                        { groups: selectedGroups },
-                      ),
-                    );
-                  }
-                  Promise.all(promises)
+                onSave={(promise) => {
+                  promise
                     .then((results) => {
                       let task = results.find((x) => x.data && x.data.task);
                       this.setState({ editing: false, loading: true });
                       if (!!task) {
-                        this.waitForTask(
+                        waitForTask(
                           task.data.task.split('tasks/')[1].replace('/', ''),
                         ).then(() => {
                           this.loadRepo();
@@ -202,6 +185,20 @@ export function withContainerRepo(WrappedComponent) {
                     );
                 }}
                 onCancel={() => this.setState({ editing: false })}
+                distributionPulpId={this.state.repo.pulp.distribution.pulp_id}
+                isRemote={!!this.state.repo.pulp.repository.remote}
+                isNew={false}
+                upstreamName={
+                  this.state.repo.pulp.repository.remote?.upstream_name
+                }
+                registry={this.state.repo.pulp.repository.remote?.registry}
+                excludeTags={
+                  this.state.repo.pulp.repository.remote?.exclude_tags
+                }
+                includeTags={
+                  this.state.repo.pulp.repository.remote?.include_tags
+                }
+                remotePulpId={this.state.repo.pulp.repository.remote?.pulp_id}
               />
             )}
             <WrappedComponent
@@ -214,40 +211,13 @@ export function withContainerRepo(WrappedComponent) {
       );
     }
 
-    //Compare groups and compare their permissions
-    private compareGroupsAndPerms(original, newOne) {
-      let same = true;
-      if (original.length === newOne.length) {
-        original.forEach((x, index) => {
-          if (
-            !isEmpty(
-              xorWith(
-                x.object_permissions.sort(),
-                newOne[index].object_permissions.sort(),
-                isEqual,
-              ),
-            )
-          ) {
-            same = false;
-          }
-        });
-      }
-      return isEmpty(xorWith(original, newOne, isEqual)) && same;
-    }
-
     private loadRepo() {
       ExecutionEnvironmentAPI.get(this.props.match.params['container'])
         .then((result) => {
-          const repo = result;
-          return ExecutionEnvironmentNamespaceAPI.get(
-            result.data.namespace.name,
-          ).then((result) =>
-            this.setState({
-              loading: false,
-              repo: repo.data,
-              selectedGroups: result.data.groups,
-            }),
-          );
+          this.setState({
+            loading: false,
+            repo: result.data,
+          });
         })
         .catch((e) => this.setState({ redirect: 'notFound' }));
     }
@@ -265,15 +235,6 @@ export function withContainerRepo(WrappedComponent) {
       return 'detail';
     }
 
-    private waitForTask(task) {
-      return TaskAPI.get(task).then((result) => {
-        if (result.data.state !== 'completed') {
-          return new Promise((r) => setTimeout(r, 500)).then(() =>
-            this.waitForTask(task),
-          );
-        }
-      });
-    }
     private get closeAlert() {
       return closeAlertMixin('alerts');
     }

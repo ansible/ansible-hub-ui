@@ -35,8 +35,9 @@ import {
   StatefulDropdown,
 } from 'src/components';
 
-import { CollectionAPI, CollectionDetailType, TaskAPI } from 'src/api';
+import { CollectionAPI, CollectionDetailType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
+import { waitForTask } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
 import { Constants } from 'src/constants';
@@ -494,7 +495,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
 
-        this.waitForTaskFinish(taskId).then(() => {
+        waitForTask(taskId).then(() => {
           if (deleteCollection.all_versions.length > 1) {
             const topVersion = deleteCollection.all_versions.filter(
               ({ version }) => version !== collectionVersion,
@@ -607,7 +608,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
 
-        this.waitForTaskFinish(taskId).then(() => {
+        waitForTask(taskId).then(() => {
           this.context.setAlerts([
             ...this.context.alerts,
             {
@@ -667,16 +668,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           ],
         }),
       );
-  }
-
-  private waitForTaskFinish(task) {
-    return TaskAPI.get(task).then((result) => {
-      if (result.data.state !== 'completed') {
-        return new Promise((r) => setTimeout(r, 500)).then(() =>
-          this.waitForTaskFinish(task),
-        );
-      }
-    });
   }
 
   private getIdFromTask(task) {
