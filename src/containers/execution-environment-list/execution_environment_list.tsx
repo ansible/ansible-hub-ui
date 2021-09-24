@@ -127,7 +127,7 @@ class ExecutionEnvironmentList extends React.Component<
         Push container images <ExternalLinkAltIcon />
       </Button>
     );
-    const { name } = selectedItem;
+    const name = !!selectedItem ? selectedItem.name : '';
 
     return (
       <React.Fragment>
@@ -153,7 +153,7 @@ class ExecutionEnvironmentList extends React.Component<
             isDisabled={!confirmDelete}
           >
             <Trans>
-              Deleting <b>{selectedItem.name}</b> and its data will be lost.
+              Deleting <b>{name}</b> and its data will be lost.
             </Trans>
             <Checkbox
               isChecked={confirmDelete}
@@ -359,6 +359,7 @@ class ExecutionEnvironmentList extends React.Component<
 
   private deleteContainer() {
     const { selectedItem } = this.state;
+    const { name } = selectedItem;
     ExecutionEnvironmentAPI.deleteExecutionEnvironment(selectedItem.name)
       .then((result) => {
         let taskId = result.data.task.split('tasks/')[1].replace('/', '');
@@ -373,7 +374,7 @@ class ExecutionEnvironmentList extends React.Component<
             alerts: this.state.alerts.concat([
               {
                 variant: 'success',
-                title: t`Success: ${selectedItem.name} was deleted`,
+                title: t`Success: ${name} was deleted`,
               },
             ]),
           });
