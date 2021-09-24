@@ -32,6 +32,10 @@ class API extends HubAPI {
       `${this.apiPath}${name}/_content/images/${manifest}/`,
     );
   }
+
+  deleteExecutionEnvironment(name) {
+    return this.http.delete(`${this.apiPath}${name}/`);
+  }
 }
 
 export const ExecutionEnvironmentAPI = new API();
