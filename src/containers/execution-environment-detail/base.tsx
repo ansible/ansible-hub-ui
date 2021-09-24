@@ -7,7 +7,6 @@ import {
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
   GroupObjectPermissionType,
-  TaskAPI,
 } from 'src/api';
 import { formatPath, Paths } from '../../paths';
 import { Button, DropdownItem } from '@patternfly/react-core';
@@ -22,6 +21,7 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
+import { waitForTask } from 'src/utilities';
 
 interface IState {
   publishToController: { digest?: string; image: string; tag?: string };
@@ -165,7 +165,7 @@ export function withContainerRepo(WrappedComponent) {
                       let task = results.find((x) => x.data && x.data.task);
                       this.setState({ editing: false, loading: true });
                       if (!!task) {
-                        this.waitForTask(
+                        waitForTask(
                           task.data.task.split('tasks/')[1].replace('/', ''),
                         ).then(() => {
                           this.loadRepo();
@@ -235,15 +235,6 @@ export function withContainerRepo(WrappedComponent) {
       return 'detail';
     }
 
-    private waitForTask(task) {
-      return TaskAPI.get(task).then((result) => {
-        if (result.data.state !== 'completed') {
-          return new Promise((r) => setTimeout(r, 500)).then(() =>
-            this.waitForTask(task),
-          );
-        }
-      });
-    }
     private get closeAlert() {
       return closeAlertMixin('alerts');
     }

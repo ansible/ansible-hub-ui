@@ -17,9 +17,8 @@ import {
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
   ExecutionEnvironmentType,
-  TaskAPI,
 } from 'src/api';
-import { filterIsSet, ParamHelper } from 'src/utilities';
+import { filterIsSet, waitForTask, ParamHelper } from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -479,7 +478,7 @@ class ExecutionEnvironmentList extends React.Component<
           selectedItem: null,
           confirmDelete: false,
         });
-        this.waitForTask(taskId).then(() => {
+        waitForTask(taskId).then(() => {
           this.setState({
             alerts: this.state.alerts.concat([
               {
@@ -501,16 +500,6 @@ class ExecutionEnvironmentList extends React.Component<
           ]),
         });
       });
-  }
-
-  private waitForTask(task) {
-    return TaskAPI.get(task).then((result) => {
-      if (result.data.state !== 'completed') {
-        return new Promise((r) => setTimeout(r, 500)).then(() =>
-          this.waitForTask(task),
-        );
-      }
-    });
   }
 
   private get updateParams() {

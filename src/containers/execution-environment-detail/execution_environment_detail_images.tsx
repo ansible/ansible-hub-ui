@@ -3,17 +3,14 @@ import * as React from 'react';
 import './execution-environment-detail.scss';
 
 import { pickBy } from 'lodash';
-import {
-  ExecutionEnvironmentAPI,
-  ContainerManifestType,
-  TaskAPI,
-} from 'src/api';
+import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
 import { formatPath, Paths } from 'src/paths';
 import {
   ParamHelper,
   filterIsSet,
   getContainersURL,
   getHumanSize,
+  waitForTask,
 } from 'src/utilities';
 
 import { Link, withRouter } from 'react-router-dom';
@@ -458,7 +455,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           selectedImage: null,
           confirmDelete: false,
         });
-        this.waitForTask(taskId).then(() => {
+        waitForTask(taskId).then(() => {
           this.setState({
             alerts: this.state.alerts.concat([
               {
@@ -480,16 +477,6 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           ]),
         });
       });
-  }
-
-  private waitForTask(task) {
-    return TaskAPI.get(task).then((result) => {
-      if (result.data.state !== 'completed') {
-        return new Promise((r) => setTimeout(r, 500)).then(() =>
-          this.waitForTask(task),
-        );
-      }
-    });
   }
 
   private get updateParams() {

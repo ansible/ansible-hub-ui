@@ -312,6 +312,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
     });
   }
 
+  // FIXME merge with waitForTask from utilities
   private waitForTasks(taskUrls: ITaskUrls[]) {
     const pending = new Set(taskUrls.map((i) => i.task));
 
