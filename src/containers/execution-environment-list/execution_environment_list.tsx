@@ -34,6 +34,7 @@ import {
 } from 'src/components';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   params: {
@@ -126,14 +127,14 @@ class ExecutionEnvironmentList extends React.Component<
           tag={publishToController?.tag}
         />
         <BaseHeader title={t`Execution Environments`}></BaseHeader>
-        {noData && !loading ? (
+        {unauthorized ? (
+          <EmptyStateUnauthorized />
+        ) : noData && !loading ? (
           <EmptyStateNoData
             title={t`No container repositories yet`}
             description={t`You currently have no container repositories. Add a container repository via the CLI to get started.`}
             button={pushImagesButton}
           />
-        ) : unauthorized ? (
-          <EmptyStateUnauthorized />
         ) : (
           <Main>
             {loading ? (
@@ -322,3 +323,4 @@ class ExecutionEnvironmentList extends React.Component<
 }
 
 export default withRouter(ExecutionEnvironmentList);
+ExecutionEnvironmentList.contextType = AppContext;
