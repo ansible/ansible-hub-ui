@@ -10,7 +10,7 @@ class API extends HubAPI {
 
   sync(name) {
     const apiPath = this.getUIPath('execution-environments/repositories/');
-    return this.http.post(apiPath + name + '/sync/', {});
+    return this.http.post(apiPath + name + '/_content/sync/', {});
   }
 }
 
