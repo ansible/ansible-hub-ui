@@ -1,15 +1,24 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import {
+  Alert,
   Button,
   Form,
   FormGroup,
+  InputGroup,
+  Label,
+  LabelGroup,
   Modal,
-  TextInput,
+  Spinner,
   TextArea,
+  TextInput,
 } from '@patternfly/react-core';
-import { ObjectPermissionField } from 'src/components';
-import { GroupObjectPermissionType } from 'src/api';
+import { TagIcon } from '@patternfly/react-icons';
+import { APISearchTypeAhead, ObjectPermissionField } from 'src/components';
+import {
+  GroupObjectPermissionType,
+  ExecutionEnvironmentRegistryAPI,
+} from 'src/api';
 import { Constants } from 'src/constants';
 
 interface IProps {
@@ -17,39 +26,108 @@ interface IProps {
   namespace: string;
   description: string;
   selectedGroups: GroupObjectPermissionType[];
-  onSave: (string, []) => void;
+  onSave: (object) => void;
   onCancel: () => void;
   permissions: string[];
+
+  // remote only
+  isNew?: boolean;
+  isRemote?: boolean;
+  excludeTags?: string[];
+  includeTags?: string[];
+  registry?: string; // pk
+  upstreamName?: string;
 }
 
 interface IState {
+  name: string;
   description: string;
   selectedGroups: GroupObjectPermissionType[];
+
+  addTagsInclude: string;
+  addTagsExclude: string;
+  excludeTags?: string[];
+  includeTags?: string[];
+  registries?: { id: string; name: string }[];
+  registrySelection?: { id: string; name: string }[];
+  upstreamName: string;
 }
 
 export class RepositoryForm extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
+      name: this.props.name,
       description: this.props.description,
       selectedGroups: this.props.selectedGroups,
+
+      addTagsInclude: '',
+      addTagsExclude: '',
+      excludeTags: this.props.excludeTags,
+      includeTags: this.props.includeTags,
+      registries: null,
+      registrySelection: [],
+      upstreamName: this.props.upstreamName,
     };
   }
 
+  componentDidMount() {
+    if (this.props.isRemote) {
+      this.loadRegistries().then(() => {
+        // prefill registry if passed from props
+        if (this.props.registry) {
+          this.setState({
+            registrySelection: this.state.registries.filter(
+              ({ id }) => id === this.props.registry,
+            ),
+          });
+        }
+      });
+    }
+  }
+
   render() {
-    const { name, onSave, onCancel, namespace } = this.props;
-    const { description, selectedGroups } = this.state;
+    const { onSave, onCancel, namespace, isNew, isRemote } = this.props;
+    const {
+      name,
+      description,
+      selectedGroups,
+      upstreamName,
+      excludeTags,
+      includeTags,
+      registrySelection,
+      registries,
+      addTagsInclude,
+      addTagsExclude,
+    } = this.state;
+
     return (
       <Modal
         variant='large'
         onClose={onCancel}
         isOpen={true}
-        title={t`Edit execution environment`}
+        title={
+          isNew ? t`Add execution environment` : t`Edit execution environment`
+        }
         actions={[
           <Button
             key='save'
             variant='primary'
-            onClick={() => onSave(description, selectedGroups)}
+            onClick={() =>
+              onSave(
+                isRemote
+                  ? {
+                      name,
+                      description,
+                      selectedGroups,
+                      upstreamName,
+                      registry: registrySelection[0]?.id,
+                      includeTags,
+                      excludeTags,
+                    }
+                  : { description, selectedGroups },
+              )
+            }
           >
             {t`Save`}
           </Button>,
@@ -59,17 +137,170 @@ export class RepositoryForm extends React.Component<IProps, IState> {
         ]}
       >
         <Form>
-          <FormGroup key='name' fieldId='name' label={t`Name`}>
-            <TextInput id='name' value={name} isDisabled={true} type='text' />
-          </FormGroup>
-          <FormGroup key='name' fieldId='name' label={t`Container namespace`}>
-            <TextInput
-              id='name'
-              value={namespace}
-              isDisabled={true}
-              type='text'
-            />
-          </FormGroup>
+          {!isRemote ? (
+            <>
+              <FormGroup key='name' fieldId='name' label={t`Name`}>
+                <TextInput
+                  id='name'
+                  value={name}
+                  isDisabled={true}
+                  type='text'
+                />
+              </FormGroup>
+
+              <FormGroup
+                key='namespace'
+                fieldId='namespace'
+                label={t`Container namespace`}
+              >
+                <TextInput
+                  id='namespace'
+                  value={namespace}
+                  isDisabled={true}
+                  type='text'
+                />
+              </FormGroup>
+            </>
+          ) : (
+            <>
+              <FormGroup key='name' fieldId='name' label={t`Name`}>
+                <TextInput
+                  id='name'
+                  value={name}
+                  isDisabled={!isNew}
+                  onChange={(value) => this.setState({ name: value })}
+                />
+              </FormGroup>
+
+              <FormGroup
+                key='upstreamName'
+                fieldId='upstreamName'
+                label={t`Upstream name`}
+              >
+                <TextInput
+                  id='upstreamName'
+                  value={upstreamName}
+                  onChange={(value) => this.setState({ upstreamName: value })}
+                />
+              </FormGroup>
+
+              <FormGroup key='registry' fieldId='registry' label={t`Registry`}>
+                {registries ? (
+                  <APISearchTypeAhead
+                    loadResults={(name) => this.loadRegistries(name)}
+                    onClear={() => this.setState({ registrySelection: [] })}
+                    onSelect={(event, value) =>
+                      this.setState({
+                        registrySelection: registries.filter(
+                          ({ name }) => name === value,
+                        ),
+                      })
+                    }
+                    placeholderText={t`Select a registry`}
+                    results={registries}
+                    selections={registrySelection}
+                  />
+                ) : (
+                  <Spinner />
+                )}
+              </FormGroup>
+
+              <FormGroup
+                fieldId='addTagsInclude'
+                label={t`Add tag(s) to include`}
+              >
+                <InputGroup>
+                  <TextInput
+                    type='text'
+                    id='addTagsInclude'
+                    value={addTagsInclude}
+                    onChange={(val) => this.setState({ addTagsInclude: val })}
+                    onKeyUp={(e) => {
+                      // l10n: don't translate
+                      if (e.key === 'Enter') {
+                        this.addTags(addTagsInclude, 'includeTags');
+                      }
+                    }}
+                  />
+                  <Button
+                    variant='secondary'
+                    onClick={() => this.addTags(addTagsInclude, 'includeTags')}
+                  >
+                    {t`Add`}
+                  </Button>
+                </InputGroup>
+              </FormGroup>
+
+              <FormGroup
+                fieldId='currentTag'
+                label={t`Currently included tags`}
+              >
+                <LabelGroup id='remove-tag' defaultIsOpen={true}>
+                  {includeTags.map((tag) => (
+                    <Label
+                      icon={<TagIcon />}
+                      onClose={() => this.removeTag(tag, 'includeTags')}
+                      key={tag}
+                    >
+                      {tag}
+                    </Label>
+                  ))}
+                </LabelGroup>
+              </FormGroup>
+
+              <FormGroup
+                fieldId='addTagsExclude'
+                label={t`Add tag(s) to exclude`}
+              >
+                <InputGroup>
+                  <TextInput
+                    type='text'
+                    id='addTagsExclude'
+                    value={addTagsExclude}
+                    onChange={(val) => this.setState({ addTagsExclude: val })}
+                    onKeyUp={(e) => {
+                      // l10n: don't translate
+                      if (e.key === 'Enter') {
+                        this.addTags(addTagsExclude, 'excludeTags');
+                      }
+                    }}
+                  />
+                  <Button
+                    variant='secondary'
+                    onClick={() => this.addTags(addTagsExclude, 'excludeTags')}
+                  >
+                    {t`Add`}
+                  </Button>
+                </InputGroup>
+              </FormGroup>
+
+              <FormGroup
+                fieldId='currentTag'
+                label={t`Currently excluded tags`}
+              >
+                <LabelGroup id='remove-tag' defaultIsOpen={true}>
+                  {excludeTags.map((tag) => (
+                    <Label
+                      icon={<TagIcon />}
+                      onClose={() => this.removeTag(tag, 'excludeTags')}
+                      key={tag}
+                    >
+                      {tag}
+                    </Label>
+                  ))}
+                </LabelGroup>
+              </FormGroup>
+
+              {includeTags.length && excludeTags.length ? (
+                <Alert
+                  variant='warning'
+                  isInline
+                  title={t`It does not make sense to include and exclude tags at the same time.`}
+                />
+              ) : null}
+            </>
+          )}
+
           <FormGroup
             key='description'
             fieldId='description'
@@ -113,5 +344,34 @@ export class RepositoryForm extends React.Component<IProps, IState> {
         </Form>
       </Modal>
     );
+  }
+
+  private loadRegistries(name?) {
+    return ExecutionEnvironmentRegistryAPI.list({
+      ...(name ? { name__icontains: name } : {}),
+    }).then(({ data }) => {
+      const registries = data.data.map(({ pk, name }) => ({ id: pk, name }));
+      this.setState({ registries });
+      return registries;
+    });
+  }
+
+  private addTags(tags, key: 'includeTags' | 'excludeTags') {
+    const current = new Set(this.state[key]);
+    tags.split(/\s+|\s*,\s*/).forEach((tag) => current.add(tag));
+
+    this.setState({
+      [key]: Array.from(current.values()),
+      [key === 'includeTags' ? 'addTagsInclude' : 'addTagsExclude']: '',
+    } as any);
+  }
+
+  private removeTag(tag, key: 'includeTags' | 'excludeTags') {
+    const current = new Set(this.state[key]);
+    current.delete(tag);
+
+    this.setState({
+      [key]: Array.from(current.values()),
+    } as any);
   }
 }

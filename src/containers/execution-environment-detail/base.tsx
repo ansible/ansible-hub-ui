@@ -152,7 +152,7 @@ export function withContainerRepo(WrappedComponent) {
                 selectedGroups={cloneDeep(this.state.selectedGroups)}
                 description={this.state.repo.description}
                 permissions={permissions}
-                onSave={(description, selectedGroups) => {
+                onSave={({ description, selectedGroups }) => {
                   let promises = [];
                   if (description !== this.state.repo.description) {
                     promises.push(
