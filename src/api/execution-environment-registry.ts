@@ -19,8 +19,12 @@ class API extends HubAPI {
     throw 'use smartUpdate()';
   }
 
-  sync(name) {
-    return this.http.post(this.apiPath + name + '/sync/', {});
+  index(id) {
+    return this.http.post(this.apiPath + id + '/index/', {});
+  }
+
+  sync(id) {
+    return this.http.post(this.apiPath + id + '/sync/', {});
   }
 }
 

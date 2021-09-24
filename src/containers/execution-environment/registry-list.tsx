@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { t, Trans } from '@lingui/macro';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   Button,
   DropdownItem,
@@ -9,6 +9,7 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
+  Tooltip,
 } from '@patternfly/react-core';
 import { ExecutionEnvironmentRegistryAPI, RemoteType } from 'src/api';
 import {
@@ -17,6 +18,7 @@ import {
   lastSyncStatus,
   lastSynced,
   mapErrorMessages,
+  parsePulpIDFromURL,
 } from 'src/utilities';
 import {
   AlertList,
@@ -36,6 +38,8 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
+
+import { Paths, formatPath } from 'src/paths';
 
 interface IState {
   alerts: AlertType[];
@@ -390,6 +394,21 @@ class ExecutionEnvironmentRegistryList extends React.Component<
               >
                 <Trans>Delete</Trans>
               </DropdownItem>,
+              <Tooltip
+                content={
+                  item.is_indexable
+                    ? t`Find execution environments in this registry`
+                    : t`Indexing execution environments is only supported on registry.redhat.io`
+                }
+              >
+                <DropdownItem
+                  key='index'
+                  onClick={() => this.indexRegistry(item)}
+                  isDisabled={!item.is_indexable}
+                >
+                  <Trans>Index execution environments</Trans>
+                </DropdownItem>
+              </Tooltip>,
             ]}
           />
         </td>
@@ -409,13 +428,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     );
   }
 
-  private deleteRegistry({ name }) {
-    ExecutionEnvironmentRegistryAPI.delete(name)
+  private deleteRegistry({ pk, name }) {
+    ExecutionEnvironmentRegistryAPI.delete(pk)
       .then(() =>
-        this.addAlert(
-          t`Successfully deleted remote registry ${name}`,
-          'success',
-        ),
+        this.addAlert(t`Successfully deleted remote registry ${pk}`, 'success'),
       )
       .catch(() =>
         this.addAlert(t`Failed to delete remote registry ${name}`, 'danger'),
@@ -425,10 +441,46 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       );
   }
 
-  private syncRegistry({ name }) {
-    ExecutionEnvironmentRegistryAPI.sync(name)
-      .then(() => this.addAlert(t`Sync initiated for ${name}`, 'success'))
+  private syncRegistry({ pk, name }) {
+    ExecutionEnvironmentRegistryAPI.sync(pk)
+      .then((result) => {
+        const task_id = parsePulpIDFromURL(result.data.task);
+        this.addAlert(
+          t`Sync initiated for ${name}`,
+          'success',
+          <span>
+            <Trans>
+              View the task{' '}
+              <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
+                here
+              </Link>
+              .
+            </Trans>
+          </span>,
+        );
+      })
       .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
+  }
+
+  private indexRegistry({ pk, name }) {
+    ExecutionEnvironmentRegistryAPI.index(pk)
+      .then((result) => {
+        const task_id = parsePulpIDFromURL(result.data.task);
+        this.addAlert(
+          t`Indexing execution environments in ${name}`,
+          'success',
+          <span>
+            <Trans>
+              View the task{' '}
+              <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
+                here
+              </Link>
+              .
+            </Trans>
+          </span>,
+        );
+      })
+      .catch(() => this.addAlert(t`Indexing failed for ${name}`, 'danger'));
   }
 
   private addAlert(title, variant, description?) {
