@@ -346,8 +346,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         ? image.digest
         : this.props.match.params['container'] + ':' + image.tags[0];
 
+    const isRemote = !!this.props.containerRepository.pulp.repository.remote;
+
     const dropdownItems = [
-      canEditTags && (
+      canEditTags && !isRemote && (
         <DropdownItem
           key='edit-tags'
           onClick={() => {
