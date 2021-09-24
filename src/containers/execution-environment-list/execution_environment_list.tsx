@@ -33,6 +33,7 @@ import {
   Main,
   Pagination,
   PublishToControllerModal,
+  RepositoryForm,
   SortTable,
   StatefulDropdown,
   Tooltip,
@@ -213,7 +214,7 @@ class ExecutionEnvironmentList extends React.Component<
                             onClick={() =>
                               this.setState({
                                 showRemoteModal: true,
-                                itemToEdit: null,
+                                itemToEdit: {} as ExecutionEnvironmentType,
                               })
                             }
                             variant='primary'
@@ -326,7 +327,7 @@ class ExecutionEnvironmentList extends React.Component<
           onClick={() =>
             this.setState({
               showRemoteModal: true,
-              itemToEdit: item,
+              itemToEdit: { ...item },
             })
           }
         >
@@ -398,7 +399,88 @@ class ExecutionEnvironmentList extends React.Component<
   }
 
   private renderRemoteModal(itemToEdit) {
-    return <div>TODO</div>;
+    const { name, namespace, description, pulp } = itemToEdit;
+    const { pulp_id, registry, upstream_name, include_tags, exclude_tags } =
+      pulp?.repository?.remote || {};
+    const remote = pulp?.repository ? !!pulp?.repository?.remote : true; // add only supports remote
+    const isNew = !pulp?.repository; // only exists in real data
+
+    return (
+      <RepositoryForm
+        isRemote={!!remote}
+        isNew={isNew}
+        name={name}
+        namespace={namespace?.name}
+        description={description}
+        upstreamName={upstream_name}
+        registry={registry}
+        excludeTags={exclude_tags || []}
+        includeTags={include_tags || []}
+        permissions={namespace?.my_permissions || []}
+        selectedGroups={
+          [
+            /*TODO*/
+          ]
+        }
+        onSave={(item) => {
+          if (isNew) {
+            const {
+              name,
+              upstreamName: upstream_name,
+              registry,
+              includeTags: include_tags,
+              excludeTags: exclude_tags,
+            } = item;
+            ExecutionEnvironmentRemoteAPI.create({
+              name,
+              upstream_name,
+              registry,
+              include_tags,
+              exclude_tags,
+            }).then(() =>
+              this.setState(
+                {
+                  showRemoteModal: false,
+                  itemToEdit: null,
+                },
+                () => this.queryEnvironments(),
+              ),
+            );
+          } else {
+            const {
+              upstreamName: upstream_name,
+              registry,
+              includeTags: include_tags,
+              excludeTags: exclude_tags,
+              description,
+              selectedGroups,
+            } = item;
+            ExecutionEnvironmentRemoteAPI.update(pulp_id, {
+              name,
+              upstream_name,
+              registry,
+              include_tags,
+              exclude_tags,
+            }).then(() =>
+              //TODO description, selectedGroups
+              this.setState(
+                {
+                  showRemoteModal: false,
+                  itemToEdit: null,
+                },
+                () => this.queryEnvironments(),
+              ),
+            );
+          }
+        }}
+        onCancel={() =>
+          this.setState({
+            showRemoteModal: false,
+            itemToEdit: null,
+          })
+        }
+      />
+    );
   }
 
   private queryEnvironments() {
