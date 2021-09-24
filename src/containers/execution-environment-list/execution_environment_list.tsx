@@ -144,25 +144,25 @@ class ExecutionEnvironmentList extends React.Component<
         />
         <BaseHeader title={t`Execution Environments`}></BaseHeader>
         {deleteModalVisible && (
-    <DeleteModal
-        title={'Permanently delete container'}
-        cancelAction={() =>
-            this.setState({ deleteModalVisible: false, selectedItem: null })
-        }
-        deleteAction={() => this.deleteContainer()}
-        isDisabled={!confirmDelete}
-    >
-      <Trans>
-        Deleting <b>{selectedItem.name}</b> and its data will be lost.
-      </Trans>
-      <Checkbox
-          isChecked={confirmDelete}
-          onChange={(value) => this.setState({ confirmDelete: value })}
-          label={t`I understand that this action cannot be undone.`}
-          id='delete_confirm'
-      />
-    </DeleteModal>
-)}
+          <DeleteModal
+            title={'Permanently delete container'}
+            cancelAction={() =>
+              this.setState({ deleteModalVisible: false, selectedItem: null })
+            }
+            deleteAction={() => this.deleteContainer()}
+            isDisabled={!confirmDelete}
+          >
+            <Trans>
+              Deleting <b>{selectedItem.name}</b> and its data will be lost.
+            </Trans>
+            <Checkbox
+              isChecked={confirmDelete}
+              onChange={(value) => this.setState({ confirmDelete: value })}
+              label={t`I understand that this action cannot be undone.`}
+              id='delete_confirm'
+            />
+          </DeleteModal>
+        )}
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : noData && !loading ? (
