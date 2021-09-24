@@ -3,7 +3,11 @@ import * as React from 'react';
 import './execution-environment-detail.scss';
 
 import { pickBy } from 'lodash';
-import { ExecutionEnvironmentAPI, ContainerManifestType, TaskAPI } from 'src/api';
+import {
+  ExecutionEnvironmentAPI,
+  ContainerManifestType,
+  TaskAPI,
+} from 'src/api';
 import { formatPath, Paths } from 'src/paths';
 import {
   ParamHelper,
@@ -366,14 +370,14 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       >
         {t`Use in Controller`}
       </DropdownItem>,
-        <DropdownItem
-            key='delete-image'
-            onClick={() => {
-                this.setState({ deleteModalVisible: true, selectedImage: image });
-            }}
-        >
-            {t`Delete`}
-        </DropdownItem>,
+      <DropdownItem
+        key='delete-image'
+        onClick={() => {
+          this.setState({ deleteModalVisible: true, selectedImage: image });
+        }}
+      >
+        {t`Delete`}
+      </DropdownItem>,
     ].filter((truthy) => truthy);
 
     return (
