@@ -2,6 +2,8 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './header.scss';
 
+import { Redirect, Link } from 'react-router-dom';
+
 import * as moment from 'moment';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import {
@@ -14,6 +16,9 @@ import {
   Alert,
   Text,
   Button,
+  DropdownItem,
+  Tooltip,
+  Checkbox,
 } from '@patternfly/react-core';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -23,8 +28,14 @@ import {
   LinkTabs,
   RepoSelector,
   Pagination,
+  AlertList,
+  AlertType,
+  closeAlertMixin,
+  ConfirmModal,
+  StatefulDropdown,
 } from 'src/components';
-import { CollectionDetailType } from 'src/api';
+
+import { CollectionAPI, CollectionDetailType, TaskAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
@@ -53,6 +64,12 @@ interface IState {
     page: number;
     pageSize: number;
   };
+  deleteCollection: CollectionDetailType;
+  collectionVersion: string | null;
+  confirmDelete: boolean;
+  alerts: AlertType[];
+  redirect: string;
+  noDependencies: boolean;
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
@@ -69,7 +86,17 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         page: 1,
         pageSize: Constants.DEFAULT_PAGINATION_OPTIONS[1],
       },
+      deleteCollection: null,
+      collectionVersion: null,
+      confirmDelete: false,
+      alerts: [],
+      redirect: null,
+      noDependencies: false,
     };
+  }
+
+  componentDidMount() {
+    this.getUsedbyDependencies();
   }
 
   render() {
@@ -82,8 +109,16 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       className,
     } = this.props;
 
-    const { modalPagination, isOpenVersionsModal, isOpenVersionsSelect } =
-      this.state;
+    const {
+      modalPagination,
+      isOpenVersionsModal,
+      isOpenVersionsSelect,
+      redirect,
+      noDependencies,
+      collectionVersion,
+      deleteCollection,
+      confirmDelete,
+    } = this.state;
 
     const numOfshownVersions = 10;
 
@@ -116,6 +151,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       }`;
 
     const { name: collectionName } = collection;
+
+    if (redirect) return <Redirect push to={redirect} />;
 
     return (
       <React.Fragment>
@@ -169,6 +206,61 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             count={all_versions.length}
           />
         </Modal>
+        {deleteCollection && (
+          <ConfirmModal
+            cancelAction={this.closeModal}
+            confirmAction={() =>
+              !!collectionVersion
+                ? this.deleteCollectionVersion(collectionVersion)
+                : this.deleteCollection()
+            }
+            isDisabled={!confirmDelete}
+            title={
+              collectionVersion
+                ? t`Permanently delete collection version`
+                : t`Permanently delete collection`
+            }
+            confirmButtonTitle={t`Delete`}
+          >
+            <>
+              <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+                {collectionVersion ? (
+                  <>
+                    {deleteCollection.all_versions.length === 1 ? (
+                      <Trans>
+                        Deleting{' '}
+                        <b>
+                          {deleteCollection.name} v{collectionVersion}
+                        </b>{' '}
+                        and its data will be lost and this will cause the entire
+                        collection to be deleted.
+                      </Trans>
+                    ) : (
+                      <Trans>
+                        Deleting{' '}
+                        <b>
+                          {deleteCollection.name} v{collectionVersion}
+                        </b>{' '}
+                        and its data will be lost.
+                      </Trans>
+                    )}
+                  </>
+                ) : (
+                  <Trans>
+                    Deleting <b>{deleteCollection.name}</b> and its data will be
+                    lost.
+                  </Trans>
+                )}
+              </Text>
+              <Checkbox
+                isChecked={confirmDelete}
+                onChange={(val) => this.setState({ confirmDelete: val })}
+                label={t`I understand that this action cannot be undone.`}
+                id='delete_confirm'
+              />
+            </>
+          </ConfirmModal>
+        )}
         <BaseHeader
           className={className}
           title={collection.name}
@@ -242,6 +334,47 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               ) : null}
             </div>
           }
+          pageControls={
+            <StatefulDropdown
+              items={[
+                <React.Fragment key='1'>
+                  {noDependencies ? (
+                    <DropdownItem
+                      key={1}
+                      onClick={() => this.openDeleteModalWithConfirm()}
+                    >
+                      {t`Delete entire collection`}
+                    </DropdownItem>
+                  ) : (
+                    <Tooltip
+                      position='left'
+                      content={
+                        <Trans>
+                          Cannot delete until collections <br />
+                          that depend on this collection <br />
+                          have been deleted.
+                        </Trans>
+                      }
+                    >
+                      <DropdownItem isDisabled>
+                        {t`Delete entire collection`}
+                      </DropdownItem>
+                    </Tooltip>
+                  )}
+                </React.Fragment>,
+                <DropdownItem
+                  key='2'
+                  onClick={() =>
+                    this.openDeleteModalWithConfirm(
+                      collection.latest_version.version,
+                    )
+                  }
+                >
+                  {t`Delete version ${collection.latest_version.version}`}
+                </DropdownItem>,
+              ]}
+            />
+          }
         >
           {collection.deprecated && (
             <Alert
@@ -250,6 +383,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               title={t`This collection has been deprecated.`}
             />
           )}
+          <AlertList
+            alerts={this.state.alerts}
+            closeAlert={(i) => this.closeAlert(i)}
+          />
           <div className='tab-link-container'>
             <div className='tabs'>{this.renderTabs(activeTab)}</div>
             <div className='links'>
@@ -346,4 +483,217 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       },
     });
   };
+
+  private deleteCollectionVersion = (collectionVersion) => {
+    const { deleteCollection } = this.state;
+
+    CollectionAPI.deleteCollectionVersion(
+      this.context.selectedRepo,
+      deleteCollection,
+    )
+      .then((res) => {
+        const taskId = this.getIdFromTask(res.data.task);
+
+        this.waitForTaskFinish(taskId).then(() => {
+          if (deleteCollection.all_versions.length > 1) {
+            const topVersion = deleteCollection.all_versions.filter(
+              ({ version }) => version !== collectionVersion,
+            );
+            this.props.updateParams(
+              ParamHelper.setParam(
+                this.props.params,
+                'version',
+                topVersion[0].version,
+              ),
+            );
+
+            this.setState({
+              deleteCollection: null,
+              collectionVersion: null,
+              alerts: [
+                ...this.state.alerts,
+                {
+                  variant: 'success',
+                  title: t`Successfully deleted collection version.`,
+                },
+              ],
+            });
+          } else {
+            // last version in collection => collection will be deleted => redirect
+            this.context.setAlerts([
+              ...this.context.alerts,
+              {
+                variant: 'success',
+                title: t`Successfully deleted collection.`,
+              },
+            ]);
+            this.setState({
+              redirect: formatPath(Paths.namespaceByRepo, {
+                repo: this.context.selectedRepo,
+                namespace: deleteCollection.namespace.name,
+              }),
+            });
+          }
+        });
+      })
+      .catch((err) => {
+        const {
+          data: { detail, dependent_collection_versions },
+          status,
+        } = err?.response;
+
+        if (status === 400) {
+          const dependencies = (
+            <>
+              <Trans>Dependent collections</Trans>
+              <List>
+                {dependent_collection_versions.map((d) => {
+                  const { namespace, version, collection } =
+                    this.separateStringDependencies(d);
+                  return (
+                    <ListItem key={d}>
+                      <Link
+                        to={formatPath(
+                          Paths.collectionByRepo,
+                          {
+                            repo: this.context.selectedRepo,
+                            namespace,
+                            collection,
+                          },
+                          { version: version },
+                        )}
+                        onClick={() => this.setState({ alerts: [] })}
+                      >
+                        {d}
+                      </Link>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </>
+          );
+          this.setState({
+            deleteCollection: null,
+            collectionVersion: null,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: detail,
+                description: dependencies,
+              },
+            ],
+          });
+        } else {
+          this.setState({
+            deleteCollection: null,
+            collectionVersion: null,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: t`Error deleting collection version.`,
+                description: err?.message,
+              },
+            ],
+          });
+        }
+      });
+  };
+
+  private deleteCollection = () => {
+    const { deleteCollection } = this.state;
+    CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
+      .then((res) => {
+        const taskId = this.getIdFromTask(res.data.task);
+
+        this.waitForTaskFinish(taskId).then(() => {
+          this.context.setAlerts([
+            ...this.context.alerts,
+            {
+              variant: 'success',
+              title: t`Successfully deleted collection.`,
+            },
+          ]);
+          this.setState({
+            collectionVersion: null,
+            deleteCollection: null,
+            redirect: formatPath(Paths.namespaceByRepo, {
+              repo: this.context.selectedRepo,
+              namespace: deleteCollection.namespace.name,
+            }),
+          });
+        });
+      })
+      .catch((err) =>
+        this.setState({
+          collectionVersion: null,
+          deleteCollection: null,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error deleting collection.`,
+              description: err?.message,
+            },
+          ],
+        }),
+      );
+  };
+
+  private openDeleteModalWithConfirm(version = null) {
+    this.setState({
+      deleteCollection: this.props.collection,
+      collectionVersion: version,
+      confirmDelete: false,
+    });
+  }
+
+  private getUsedbyDependencies() {
+    const { name, namespace } = this.props.collection;
+    CollectionAPI.getUsedDependenciesByCollection(namespace.name, name)
+      .then(({ data }) => {
+        this.setState({ noDependencies: !data.data.length });
+      })
+      .catch((err) =>
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error getting collection's dependencies.`,
+              description: err?.message,
+            },
+          ],
+        }),
+      );
+  }
+
+  private waitForTaskFinish(task) {
+    return TaskAPI.get(task).then((result) => {
+      if (result.data.state !== 'completed') {
+        return new Promise((r) => setTimeout(r, 500)).then(() =>
+          this.waitForTaskFinish(task),
+        );
+      }
+    });
+  }
+
+  private getIdFromTask(task) {
+    return task.match(/tasks\/([a-zA-Z0-9-]+)/i)[1];
+  }
+  private closeModal = () => {
+    this.setState({ deleteCollection: null });
+  };
+
+  get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
+
+  private separateStringDependencies(dependency) {
+    const [nsCollection, version] = dependency.split(' ');
+    const [namespace, collection] = nsCollection.split('.');
+
+    return { namespace, collection, version };
+  }
 }
