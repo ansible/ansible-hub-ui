@@ -303,14 +303,14 @@ class ExecutionEnvironmentList extends React.Component<
       >
         {t`Use in Controller`}
       </DropdownItem>,
-        <DropdownItem
-    key='delete'
-    onClick={() =>
-    this.setState({ selectedItem: item, deleteModalVisible: true })
-  }
-  >
-    {t`Delete`}
-    </DropdownItem>,
+      <DropdownItem
+        key='delete'
+        onClick={() =>
+          this.setState({ selectedItem: item, deleteModalVisible: true })
+        }
+      >
+        {t`Delete`}
+      </DropdownItem>,
     ].filter((truthy) => truthy);
 
     return (
@@ -337,7 +337,7 @@ class ExecutionEnvironmentList extends React.Component<
         <td>
           <DateComponent date={item.updated} />
         </td>
-        <td style={{ paddingRight: '0px', textAlign: 'right' }} >
+        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
           {!!dropdownItems.length && <StatefulDropdown items={dropdownItems} />}
         </td>
       </tr>
