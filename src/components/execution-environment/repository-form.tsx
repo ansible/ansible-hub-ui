@@ -92,7 +92,9 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       });
     }
 
-    this.loadSelectedGroups();
+    if (!this.props.isNew) {
+      this.loadSelectedGroups();
+    }
   }
 
   render() {

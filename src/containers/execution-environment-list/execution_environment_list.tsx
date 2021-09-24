@@ -137,6 +137,20 @@ class ExecutionEnvironmentList extends React.Component<
         <Trans>Push container images</Trans> <ExternalLinkAltIcon />
       </Button>
     );
+    const addRemoteButton = (
+      <Button
+        onClick={() =>
+          this.setState({
+            showRemoteModal: true,
+            itemToEdit: {} as ExecutionEnvironmentType,
+          })
+        }
+        variant='primary'
+      >
+        <Trans>Add execution environment</Trans>
+      </Button>
+    );
+
     const name = !!selectedItem ? selectedItem.name : '';
 
     return (
@@ -180,7 +194,12 @@ class ExecutionEnvironmentList extends React.Component<
           <EmptyStateNoData
             title={t`No container repositories yet`}
             description={t`You currently have no container repositories. Add a container repository via the CLI to get started.`}
-            button={pushImagesButton}
+            button={
+              <>
+                {addRemoteButton}
+                {pushImagesButton}
+              </>
+            }
           />
         ) : (
           <Main>
@@ -209,19 +228,7 @@ class ExecutionEnvironmentList extends React.Component<
                             ]}
                           />
                         </ToolbarItem>
-                        <ToolbarItem>
-                          <Button
-                            onClick={() =>
-                              this.setState({
-                                showRemoteModal: true,
-                                itemToEdit: {} as ExecutionEnvironmentType,
-                              })
-                            }
-                            variant='primary'
-                          >
-                            <Trans>Add execution environment</Trans>
-                          </Button>
-                        </ToolbarItem>
+                        <ToolbarItem>{addRemoteButton}</ToolbarItem>
                         <ToolbarItem>{pushImagesButton}</ToolbarItem>
                       </ToolbarGroup>
                     </ToolbarContent>
