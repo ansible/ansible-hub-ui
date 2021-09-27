@@ -3,3 +3,19 @@
     padding-left: 0px;
   }
 }
+
+.delete-namespace-modal-message {
+  padding-bottom: var(--pf-global--spacer--md);
+}
+
+.namespace-page-controls {
+  display: flex;
+  align-items: center;
+}
+
+.namespace-warning-alert {
+  position: fixed;
+  right: 5px;
+  top: 80px;
+  z-index: 300;
+}
