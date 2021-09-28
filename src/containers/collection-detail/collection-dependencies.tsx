@@ -44,7 +44,7 @@ class CollectionDependencies extends React.Component<
   RouteComponentProps,
   IState
 > {
-  private ignoredParams = ['page_size', 'page', 'sort', 'name'];
+  private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
   constructor(props) {
     super(props);
 
@@ -60,7 +60,7 @@ class CollectionDependencies extends React.Component<
       params: params,
       usedByDependencies: [],
       usedByDependenciesCount: 0,
-      usedByDependenciesLoading: false,
+      usedByDependenciesLoading: true,
       alerts: [],
     };
   }
@@ -132,7 +132,7 @@ class CollectionDependencies extends React.Component<
               <h1>{t`Dependencies`}</h1>
               {noDependencies &&
               !usedByDependenciesCount &&
-              !filterIsSet(params, ['name']) ? (
+              !filterIsSet(params, ['name__icontains']) ? (
                 <EmptyStateNoData
                   title={t`No dependencies`}
                   description={t`Collection does not have any dependencies.`}
