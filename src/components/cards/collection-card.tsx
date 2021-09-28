@@ -35,9 +35,7 @@ export class CollectionCard extends React.Component<IProps> {
       this.props;
 
     const company = namespace.company || namespace.name;
-    const contentSummary = convertContentSummaryCounts(
-      latest_version.metadata.contents,
-    );
+    const contentSummary = convertContentSummaryCounts(latest_version.metadata);
 
     return (
       <Card className={cx('collection-card-container', className)}>
@@ -117,7 +115,12 @@ export class CollectionCard extends React.Component<IProps> {
           <NumericLabel number={count} />
         </div>
         <div className='type-label'>
-          <NumericLabel number={count} hideNumber={true} label={type} />
+          <NumericLabel
+            number={count}
+            hideNumber={true}
+            label={type}
+            pluralLabels={Constants.COLLECTION_PLURAL_LABELS[type]}
+          />
         </div>
       </div>
     );

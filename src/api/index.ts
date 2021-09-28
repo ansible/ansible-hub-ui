@@ -8,6 +8,7 @@ export {
 export {
   CollectionListType,
   CollectionDetailType,
+  CollectionUsedByDependencies,
   DocsBlobType,
   PluginContentType,
   CollectionUploadType,
@@ -38,17 +39,22 @@ export { DistributionAPI } from './distribution';
 export { MyDistributionAPI } from './my-distribution';
 export { DistributionType } from './response-types/distribution';
 export { ExecutionEnvironmentAPI } from './execution-environment';
+export { ExecutionEnvironmentRegistryAPI } from './execution-environment-registry';
 export {
   ExecutionEnvironmentType,
   ContainerManifestType,
   ContainerRepositoryType,
 } from './response-types/execution-environment';
+export { ExecutionEnvironmentRemoteAPI } from './execution-environment-remote';
 export { WriteOnlyFieldType } from './response-types/write-only-field';
-export { ImagesAPI } from './images';
 export { ActivitiesAPI } from './activities';
 export { ContainerTagAPI } from './container-tag';
 export { FeatureFlagsType } from './response-types/feature-flags';
 export { FeatureFlagsAPI } from './feature-flags';
 export { ContainerDistributionAPI } from './container-distribution';
 export { ExecutionEnvironmentNamespaceAPI } from './execution-environment-namespace';
+export { ControllerAPI } from './controller';
 export { TaskManagementAPI } from './task-management';
+export { GenericPulpAPI } from './generic-pulp';
+export { SettingsAPI } from './settings';
+export { SettingsType } from './response-types/settings';

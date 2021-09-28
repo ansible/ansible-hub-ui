@@ -1,0 +1,16 @@
+.usedby-dependencies-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// resets to default, possible bug pagination shows disc list-style-type with 'pf-c-content' className
+.pf-c-options-menu__menu {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  list-style: none !important;
+}
+
+.dependencies-list li {
+  list-style: disc;
+}

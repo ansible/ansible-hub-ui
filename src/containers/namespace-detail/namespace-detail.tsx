@@ -13,6 +13,9 @@ import {
   AlertActionCloseButton,
   Button,
   DropdownItem,
+  Tooltip,
+  Text,
+  Checkbox,
 } from '@patternfly/react-core';
 
 import * as ReactMarkdown from 'react-markdown';
@@ -36,11 +39,16 @@ import {
   RepoSelector,
   StatefulDropdown,
   ClipboardCopy,
+  AlertType,
+  AlertList,
+  closeAlertMixin,
+  ConfirmModal,
 } from 'src/components';
 
 import { ImportModal } from './import-modal/import-modal';
 
 import { ParamHelper, getRepoUrl, filterIsSet } from 'src/utilities';
+import { Constants } from 'src/constants';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -61,6 +69,10 @@ interface IState {
   warning: string;
   updateCollection: CollectionListType;
   showControls: boolean;
+  isOpenNamespaceModal: boolean;
+  alerts: AlertType[];
+  isNamespaceEmpty: boolean;
+  confirmDelete: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -93,11 +105,21 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       warning: '',
       updateCollection: null,
       showControls: false, // becomes true when my-namespaces doesn't 404
+      isOpenNamespaceModal: false,
+      alerts: [],
+      isNamespaceEmpty: false,
+      confirmDelete: false,
     };
   }
 
   componentDidMount() {
     this.loadAll();
+
+    if (this.context.alerts) this.setState({ alerts: this.context.alerts });
+  }
+
+  componentWillUnmount() {
+    this.context.setAlerts([]);
   }
 
   render() {
@@ -110,6 +132,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       showImportModal,
       warning,
       updateCollection,
+      isOpenNamespaceModal,
+      confirmDelete,
     } = this.state;
 
     if (redirect) {
@@ -166,6 +190,33 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           setOpen={(isOpen, warn) => this.toggleImportModal(isOpen, warn)}
           collection={updateCollection}
           namespace={namespace.name}
+        />
+        {isOpenNamespaceModal && (
+          <ConfirmModal
+            cancelAction={this.closeModal}
+            confirmAction={this.deleteNamespace}
+            title={t`Permanently delete namespace?`}
+            confirmButtonTitle={t`Delete`}
+            isDisabled={!confirmDelete}
+          >
+            <>
+              <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+                <Trans>
+                  Deleting <b>{namespace.name}</b> and its data will be lost.
+                </Trans>
+              </Text>
+              <Checkbox
+                isChecked={confirmDelete}
+                onChange={(val) => this.setState({ confirmDelete: val })}
+                label={t`I understand that this action cannot be undone.`}
+                id='delete_confirm'
+              />
+            </>
+          </ConfirmModal>
+        )}
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={(i) => this.closeAlert(i)}
         />
         {warning ? (
           <Alert
@@ -340,11 +391,20 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         this.context.selectedRepo,
       ),
       NamespaceAPI.get(this.props.match.params['namespace']),
-      MyNamespaceAPI.get(this.props.match.params['namespace']).catch(
+      MyNamespaceAPI.get(this.props.match.params['namespace']).catch((e) => {
+        // TODO this needs fixing on backend to return nothing in these cases with 200 status
+        // if view only mode is enabled disregard errors and hope
+        if (
+          this.context.user.is_anonymous &&
+          this.context.settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS
+        ) {
+          return null;
+        }
         // expecting 404 - it just means we can not edit the namespace (unless both NamespaceAPI and MyNamespaceAPI fail)
-        (e) =>
-          e.response && e.response.status === 404 ? null : Promise.reject(e),
-      ),
+        return e.response && e.response.status === 404
+          ? null
+          : Promise.reject(e);
+      }),
     ])
       .then((val) => {
         this.setState({
@@ -353,10 +413,46 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           namespace: val[1].data,
           showControls: !!val[2],
         });
+
+        this.loadAllRepos(val[0].data.meta.count);
       })
       .catch((response) => {
         this.setState({ redirect: Paths.notFound });
       });
+  }
+
+  private loadAllRepos(currentRepoCount) {
+    // get collections in namespace from each repo
+    // except the one we already have
+    const repoPromises = Object.keys(Constants.REPOSITORYNAMES)
+      .filter((repo) => repo !== this.context.selectedRepo)
+      .map((repo) =>
+        CollectionAPI.list(
+          { namespace: this.props.match.params['namespace'] },
+          repo,
+        ),
+      );
+
+    Promise.all(repoPromises)
+      .then((results) =>
+        this.setState({
+          isNamespaceEmpty:
+            results.every((val) => val.data.meta.count === 0) &&
+            currentRepoCount === 0,
+        }),
+      )
+      .catch((err) =>
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: 'Error loading collection repositories',
+              description: err?.message,
+            },
+          ],
+        }),
+      );
   }
 
   private get updateParams() {
@@ -390,8 +486,31 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 </Link>
               }
             />,
+            <React.Fragment key={'2'}>
+              {this.state.isNamespaceEmpty ? (
+                <DropdownItem
+                  onClick={() => this.setState({ isOpenNamespaceModal: true })}
+                >
+                  {t`Delete namespace`}
+                </DropdownItem>
+              ) : (
+                <Tooltip
+                  isVisible={false}
+                  content={
+                    <Trans>
+                      Cannot delete namespace until <br />
+                      collections' dependencies have <br />
+                      been deleted
+                    </Trans>
+                  }
+                  position='left'
+                >
+                  <DropdownItem isDisabled>{t`Delete namespace`}</DropdownItem>
+                </Tooltip>
+              )}
+            </React.Fragment>,
             <DropdownItem
-              key='2'
+              key='3'
               component={
                 <Link
                   to={formatPath(
@@ -423,6 +542,45 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     }
 
     this.setState(newState);
+  }
+
+  private deleteNamespace = () => {
+    NamespaceAPI.delete(this.state.namespace.name)
+      .then(() => {
+        this.setState({
+          redirect: formatPath(Paths.namespaces, {}),
+          confirmDelete: false,
+        });
+        this.context.setAlerts([
+          ...this.context.alerts,
+          {
+            variant: 'success',
+            title: t`Successfully deleted namespace.`,
+          },
+        ]);
+      })
+      .catch((e) => {
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error deleting namespace.`,
+              description: e.message,
+            },
+          ],
+          isOpenNamespaceModal: false,
+          confirmDelete: false,
+        });
+      });
+  };
+
+  private closeModal = () => {
+    this.setState({ isOpenNamespaceModal: false, confirmDelete: false });
+  };
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 }
 

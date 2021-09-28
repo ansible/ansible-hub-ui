@@ -16,7 +16,7 @@ interface IProps {
 export class AlertType {
   variant: AlertProps['variant'];
   title: string;
-  description?: string;
+  description?: string | JSX.Element;
 }
 
 export class AlertList extends React.Component<IProps, {}> {

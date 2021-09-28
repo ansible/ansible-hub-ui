@@ -165,6 +165,27 @@ export class API extends HubAPI {
         .catch((err) => reject(err));
     });
   }
+
+  deleteCollectionVersion(repo, collection) {
+    return this.http.delete(
+      `content/${repo}/v3/collections/${collection.namespace.name}/${collection.name}/versions/${collection.latest_version.version}/`,
+    );
+  }
+
+  deleteCollection(repo, collection) {
+    return this.http.delete(
+      `content/${repo}/v3/collections/${collection.namespace.name}/${collection.name}/`,
+    );
+  }
+
+  getUsedDependenciesByCollection(namespace, collection, params?) {
+    return this.http.get(
+      this.getUIPath(
+        `collection-versions/?dependency=${namespace}.${collection}`,
+      ),
+      { params: this.mapPageToOffset(params) },
+    );
+  }
 }
 
 export const CollectionAPI = new API();

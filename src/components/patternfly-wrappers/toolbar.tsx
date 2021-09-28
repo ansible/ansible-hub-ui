@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { t } from '@lingui/macro';
 
 import {
   Toolbar as ToolbarPF,
@@ -75,12 +76,12 @@ export class Toolbar extends React.Component<IProps, IState> {
                   onChange={(k) => this.setState({ kwField: k })}
                   onKeyPress={(e) => this.handleEnter(e)}
                   type='search'
-                  aria-label='search text input'
+                  aria-label={t`search text input`}
                   placeholder={searchPlaceholder}
                 />
                 <Button
                   variant={ButtonVariant.control}
-                  aria-label='search button'
+                  aria-label={t`search button`}
                   onClick={() => this.submitKeywords()}
                 >
                   <SearchIcon />

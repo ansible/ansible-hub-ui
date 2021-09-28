@@ -1,11 +1,17 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment-detail.scss';
 
 import { pickBy } from 'lodash';
-import { ImagesAPI, ContainerManifestType } from '../../api';
-import { formatPath, Paths } from '../../paths';
-import { filterIsSet, ParamHelper, getHumanSize } from '../../utilities';
+import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
+import { formatPath, Paths } from 'src/paths';
+import {
+  ParamHelper,
+  filterIsSet,
+  getContainersURL,
+  getHumanSize,
+  waitForTask,
+} from 'src/utilities';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -16,6 +22,7 @@ import {
   ToolbarItem,
   DropdownItem,
   LabelGroup,
+  Checkbox,
 } from '@patternfly/react-core';
 
 import {
@@ -27,12 +34,16 @@ import {
   EmptyStateFilter,
   ShaLabel,
   TagLabel,
+  PublishToControllerModal,
   StatefulDropdown,
   AlertList,
   closeAlertMixin,
   AlertType,
   DateComponent,
   ClipboardCopy,
+  DeleteModal,
+  LoadingPageWithHeader,
+  LoadingPageSpinner,
 } from '../../components';
 
 import { TagManifestModal } from './tag-manifest-modal';
@@ -50,6 +61,10 @@ interface IState {
 
   // ID for manifest that is open in the manage tags modal.
   manageTagsManifestDigest: string;
+  publishToController: { digest?: string; image: string; tag?: string };
+  selectedImage: ContainerManifestType;
+  deleteModalVisible: boolean;
+  confirmDelete: boolean;
 }
 
 class ExecutionEnvironmentDetailImages extends React.Component<
@@ -80,7 +95,11 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       params: params,
       redirect: null,
       manageTagsManifestDigest: undefined,
+      publishToController: null,
+      selectedImage: undefined,
+      deleteModalVisible: false,
       alerts: [],
+      confirmDelete: false,
     };
   }
 
@@ -93,7 +112,16 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 
   renderImages() {
-    const { params, images, manageTagsManifestDigest } = this.state;
+    const {
+      params,
+      images,
+      manageTagsManifestDigest,
+      publishToController,
+      selectedImage,
+      deleteModalVisible,
+      confirmDelete,
+      loading,
+    } = this.state;
     if (
       images.length === 0 &&
       !filterIsSet(params, ['tag', 'digest__icontains'])
@@ -104,6 +132,9 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           description={t`Images will appear once uploaded`}
         />
       );
+    }
+    if (loading) {
+      return <LoadingPageSpinner />;
     }
     const sortTableOptions = {
       headers: [
@@ -149,6 +180,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       this.props.containerRepository.namespace.my_permissions.includes(
         'container.namespace_modify_content_containerpushrepository',
       );
+    const { digest } = selectedImage || {};
 
     return (
       <section className='body'>
@@ -156,6 +188,30 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}
         />
+        {deleteModalVisible && (
+          <DeleteModal
+            title={t`Permanently delete image`}
+            cancelAction={() =>
+              this.setState({
+                deleteModalVisible: false,
+                selectedImage: null,
+                confirmDelete: false,
+              })
+            }
+            deleteAction={() => this.deleteImage()}
+            isDisabled={!confirmDelete}
+          >
+            <Trans>
+              Deleting <b>{digest}</b> and its data will be lost.
+            </Trans>
+            <Checkbox
+              isChecked={confirmDelete}
+              onChange={(value) => this.setState({ confirmDelete: value })}
+              label={t`I understand that this action cannot be undone.`}
+              id='delete_confirm'
+            />
+          </DeleteModal>
+        )}
         <TagManifestModal
           isOpen={!!manageTagsManifestDigest}
           closeModal={() => this.setState({ manageTagsManifestDigest: null })}
@@ -170,6 +226,13 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             this.setState({ alerts: this.state.alerts.concat(alert) });
           }}
           containerRepository={this.props.containerRepository}
+        />
+        <PublishToControllerModal
+          digest={publishToController?.digest}
+          image={publishToController?.image}
+          isOpen={!!publishToController}
+          onClose={() => this.setState({ publishToController: null })}
+          tag={publishToController?.tag}
         />
 
         <div className='toolbar'>
@@ -274,21 +337,48 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       </Link>
     );
 
-    const url = window.location.href.split('://')[1].split('/ui')[0];
+    const url = getContainersURL();
     let instruction =
       image.tags.length === 0
         ? image.digest
         : this.props.match.params['container'] + ':' + image.tags[0];
+
+    const isRemote = !!this.props.containerRepository.pulp.repository.remote;
+
     const dropdownItems = [
+      canEditTags && !isRemote && (
+        <DropdownItem
+          key='edit-tags'
+          onClick={() => {
+            this.setState({ manageTagsManifestDigest: image.digest });
+          }}
+        >
+          {t`Manage tags`}
+        </DropdownItem>
+      ),
       <DropdownItem
-        key='edit-tags'
+        key='publish-to-controller'
         onClick={() => {
-          this.setState({ manageTagsManifestDigest: image.digest });
+          this.setState({
+            publishToController: {
+              digest: image.digest,
+              image: this.props.containerRepository.name,
+              tag: image.tags[0],
+            },
+          });
         }}
       >
-        {t`Edit tags`}
+        {t`Use in Controller`}
       </DropdownItem>,
-    ];
+      <DropdownItem
+        key='delete-image'
+        onClick={() => {
+          this.setState({ deleteModalVisible: true, selectedImage: image });
+        }}
+      >
+        {t`Delete`}
+      </DropdownItem>,
+    ].filter((truthy) => truthy);
 
     return (
       <tr key={index}>
@@ -314,7 +404,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         </td>
 
         <td>
-          {canEditTags && (
+          {dropdownItems.length && (
             <StatefulDropdown items={dropdownItems}></StatefulDropdown>
           )}
         </td>
@@ -324,7 +414,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
   queryImages(name) {
     this.setState({ loading: true }, () =>
-      ImagesAPI.list(
+      ExecutionEnvironmentAPI.images(
         name,
         ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
       )
@@ -343,10 +433,50 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           this.setState({
             images: images,
             numberOfImages: result.data.meta.count,
+            loading: false,
           });
         })
         .catch((error) => this.setState({ redirect: 'notFound' })),
     );
+  }
+
+  private deleteImage() {
+    const { selectedImage } = this.state;
+    const { digest } = selectedImage;
+    ExecutionEnvironmentAPI.deleteImage(
+      this.props.match.params['container'],
+      selectedImage.digest,
+    )
+      .then((result) => {
+        let taskId = result.data.task.split('tasks/')[1].replace('/', '');
+        this.setState({
+          loading: true,
+          deleteModalVisible: false,
+          selectedImage: null,
+          confirmDelete: false,
+        });
+        waitForTask(taskId).then(() => {
+          this.setState({
+            alerts: this.state.alerts.concat([
+              {
+                variant: 'success',
+                title: t`Success: ${digest} was deleted`,
+              },
+            ]),
+          });
+          this.queryImages(this.props.match.params['container']);
+        });
+      })
+      .catch(() => {
+        this.setState({
+          deleteModalVisible: false,
+          selectedImage: null,
+          confirmDelete: false,
+          alerts: this.state.alerts.concat([
+            { variant: 'danger', title: t`Error: delete failed` },
+          ]),
+        });
+      });
   }
 
   private get updateParams() {

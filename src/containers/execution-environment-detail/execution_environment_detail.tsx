@@ -5,11 +5,11 @@ import {
   EmptyStateNoData,
   MarkdownEditor,
   ClipboardCopy,
-} from '../../components';
+} from 'src/components';
 import { FlexItem, Flex, Title, Button } from '@patternfly/react-core';
-import './execution-environment-detail.scss';
 import { withContainerRepo, IDetailSharedProps } from './base';
-import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from '../../api';
+import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
+import { getContainersURL } from 'src/utilities';
 import './execution-environment-detail.scss';
 
 interface IState {
@@ -51,7 +51,7 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   renderDetail() {
-    const url = window.location.href.split('://')[1].split('/ui')[0];
+    const url = getContainersURL();
     const instructions =
       'podman pull ' +
       url +

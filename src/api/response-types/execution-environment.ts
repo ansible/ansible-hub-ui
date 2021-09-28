@@ -1,3 +1,5 @@
+import { LastSyncType } from './remote';
+
 export class ExecutionEnvironmentType {
   created: string;
   name: string;
@@ -33,6 +35,14 @@ export class ContainerRepositoryType {
       pulp_created: string;
       last_sync_task: string;
       pulp_labels: object;
+      remote?: {
+        pulp_id: string;
+        registry: string;
+        upstream_name: string;
+        include_tags: string[];
+        exclude_tags: string[];
+        last_sync_task: LastSyncType;
+      };
     };
     distribution: {
       pulp_id: string;

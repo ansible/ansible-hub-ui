@@ -7,6 +7,7 @@ import {
   CollectionDetail,
   CollectionDocs,
   CollectionImportLog,
+  CollectionDependencies,
   EditNamespace,
   LoginPage,
   MyImports,
@@ -25,17 +26,21 @@ import {
   GroupDetail,
   RepositoryList,
   ExecutionEnvironmentList,
+  ExecutionEnvironmentRegistryList,
   ExecutionEnvironmentDetail,
   ExecutionEnvironmentDetailActivities,
   ExecutionEnvironmentDetailImages,
   ExecutionEnvironmentManifest,
   TaskListView,
+  TaskDetail,
 } from 'src/containers';
 import {
   ActiveUserAPI,
   FeatureFlagsAPI,
   FeatureFlagsType,
+  SettingsAPI,
   UserType,
+  SettingsType,
 } from 'src/api';
 import { AppContext } from '../app-context';
 
@@ -45,6 +50,7 @@ interface IRoutesProps {
   updateInitialData: (
     user: UserType,
     flags: FeatureFlagsType,
+    settings: SettingsType,
     callback?: () => void,
   ) => void;
 }
@@ -55,6 +61,7 @@ interface IAuthHandlerProps extends RouteComponentProps {
   updateInitialData: (
     user: UserType,
     flags: FeatureFlagsType,
+    settings: SettingsType,
     callback?: () => void,
   ) => void;
   isDisabled: boolean;
@@ -82,18 +89,20 @@ class AuthHandler extends React.Component<
   componentDidMount() {
     // This component is mounted on every route change, so it's a good place
     // to check for an active user.
-    const { user } = this.context;
-    if (!user) {
-      FeatureFlagsAPI.get()
-        .then((featureFlagResponse) => {
-          this.props.updateInitialData(null, featureFlagResponse.data);
-          return ActiveUserAPI.getUser().then((userResponse) => {
-            this.props.updateInitialData(
-              userResponse,
-              featureFlagResponse.data,
-              () => this.setState({ isLoading: false }),
-            );
-          });
+    const { user, settings } = this.context;
+    if (!user || !settings) {
+      let promises = [];
+      promises.push(FeatureFlagsAPI.get());
+      promises.push(ActiveUserAPI.getUser());
+      promises.push(SettingsAPI.get());
+      Promise.all(promises)
+        .then((results) => {
+          this.props.updateInitialData(
+            results[1],
+            results[0].data,
+            results[2].data,
+            () => this.setState({ isLoading: false }),
+          );
         })
         .catch(() => this.setState({ isLoading: false }));
     }
@@ -120,6 +129,7 @@ class AuthHandler extends React.Component<
       }
       return (
         <Redirect
+          push
           to={formatPath(Paths.login, {}, { next: props.location.pathname })}
         ></Redirect>
       );
@@ -174,11 +184,17 @@ export class Routes extends React.Component<IRoutesProps> {
         isDisabled: isContainerDisabled,
       },
       {
+        comp: ExecutionEnvironmentRegistryList,
+        path: Paths.executionEnvironmentsRegistries,
+        isDisabled: isContainerDisabled,
+      },
+      {
         comp: TaskListView,
         path: Paths.taskList,
       },
       { comp: GroupList, path: Paths.groupList },
       { comp: GroupDetail, path: Paths.groupDetail },
+      { comp: TaskDetail, path: Paths.taskDetail },
       { comp: RepositoryList, path: Paths.repositories },
       { comp: UserProfile, path: Paths.userProfileSettings },
       {
@@ -203,6 +219,10 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: CollectionDocs, path: Paths.collectionContentDocsByRepo },
       { comp: CollectionContent, path: Paths.collectionContentListByRepo },
       { comp: CollectionImportLog, path: Paths.collectionImportLogByRepo },
+      {
+        comp: CollectionDependencies,
+        path: Paths.collectionDependenciesByRepo,
+      },
       { comp: CollectionDetail, path: Paths.collectionByRepo },
       { comp: NamespaceDetail, path: Paths.namespaceByRepo },
       { comp: Search, path: Paths.searchByRepo },

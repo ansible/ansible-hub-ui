@@ -54,6 +54,13 @@ const CollectionImportLog = asyncComponent(() =>
   ),
 );
 
+const CollectionDependencies = asyncComponent(() =>
+  import(
+    /* webpackChunkName: "collection_detail" */
+    '../../containers/collection-detail/collection-dependencies'
+  ),
+);
+
 const NotFound = asyncComponent(() =>
   import(
     /* webpackChunkName: "not_found" */
@@ -219,6 +226,11 @@ export const Routes = (props) => {
       <InsightsRoute
         path={Paths.collectionImportLogByRepo}
         component={CollectionImportLog}
+        rootClass='root'
+      />
+      <InsightsRoute
+        path={Paths.collectionDependenciesByRepo}
+        component={CollectionDependencies}
         rootClass='root'
       />
       <InsightsRoute

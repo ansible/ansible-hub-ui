@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
+import { isEqual } from 'lodash';
+
 import {
   CollectionHeader,
   CollectionInfo,
@@ -31,6 +33,11 @@ class CollectionDetail extends React.Component<
 
   componentDidMount() {
     this.loadCollection(this.context.selectedRepo);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!isEqual(prevProps.location, this.props.location))
+      this.loadCollection(this.context.selectedRepo);
   }
 
   render() {

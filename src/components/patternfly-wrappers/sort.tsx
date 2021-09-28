@@ -147,7 +147,7 @@ export class Sort extends React.Component<IProps, IState> {
             onSelect={(_, name) => this.onSelect(name)}
             selections={selectedOption.title}
             isOpen={isExpanded}
-            aria-labelledby={t`Sort results`}
+            aria-labelledby='Sort results'
           >
             {options.map((option) => (
               <SelectOption key={option.id} value={option.title} />

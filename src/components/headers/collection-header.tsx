@@ -1,10 +1,25 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import cx from 'classnames';
 import './header.scss';
 
+import { Redirect, Link } from 'react-router-dom';
+
+import * as moment from 'moment';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import { FormSelect, FormSelectOption, Alert } from '@patternfly/react-core';
+import {
+  Select,
+  SelectOption,
+  SelectVariant,
+  List,
+  ListItem,
+  Modal,
+  Alert,
+  Text,
+  Button,
+  DropdownItem,
+  Tooltip,
+  Checkbox,
+} from '@patternfly/react-core';
 import { AppContext } from 'src/loaders/app-context';
 
 import {
@@ -12,11 +27,20 @@ import {
   Breadcrumbs,
   LinkTabs,
   RepoSelector,
+  Pagination,
+  AlertList,
+  AlertType,
+  closeAlertMixin,
+  ConfirmModal,
+  StatefulDropdown,
 } from 'src/components';
-import { CollectionDetailType } from 'src/api';
+
+import { CollectionAPI, CollectionDetailType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
+import { waitForTask } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
+import { Constants } from 'src/constants';
 
 interface IProps {
   collection: CollectionDetailType;
@@ -34,9 +58,47 @@ interface IProps {
   repo?: string;
 }
 
-export class CollectionHeader extends React.Component<IProps> {
-  ignoreParams = ['showing', 'keyords'];
+interface IState {
+  isOpenVersionsSelect: boolean;
+  isOpenVersionsModal: boolean;
+  modalPagination: {
+    page: number;
+    pageSize: number;
+  };
+  deleteCollection: CollectionDetailType;
+  collectionVersion: string | null;
+  confirmDelete: boolean;
+  alerts: AlertType[];
+  redirect: string;
+  noDependencies: boolean;
+}
+
+export class CollectionHeader extends React.Component<IProps, IState> {
+  ignoreParams = ['showing', 'keywords'];
   static contextType = AppContext;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOpenVersionsSelect: false,
+      isOpenVersionsModal: false,
+      modalPagination: {
+        page: 1,
+        pageSize: Constants.DEFAULT_PAGINATION_OPTIONS[1],
+      },
+      deleteCollection: null,
+      collectionVersion: null,
+      confirmDelete: false,
+      alerts: [],
+      redirect: null,
+      noDependencies: false,
+    };
+  }
+
+  componentDidMount() {
+    this.getUsedbyDependencies();
+  }
 
   render() {
     const {
@@ -47,6 +109,19 @@ export class CollectionHeader extends React.Component<IProps> {
       activeTab,
       className,
     } = this.props;
+
+    const {
+      modalPagination,
+      isOpenVersionsModal,
+      isOpenVersionsSelect,
+      redirect,
+      noDependencies,
+      collectionVersion,
+      deleteCollection,
+      confirmDelete,
+    } = this.state;
+
+    const numOfshownVersions = 10;
 
     const all_versions = [...collection.all_versions];
 
@@ -71,79 +146,272 @@ export class CollectionHeader extends React.Component<IProps> {
 
     const latestVersion = collection.latest_version.created_at;
 
-    return (
-      <BaseHeader
-        className={className}
-        title={collection.name}
-        imageURL={collection.namespace.avatar_url}
-        contextSelector={
-          <RepoSelector
-            selectedRepo={this.context.selectedRepo}
-            path={Paths.searchByRepo}
-            isDisabled
-          />
-        }
-        breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
-        versionControl={
-          <div className='install-version-column'>
-            <span>{t`Version`}</span>
-            <div className='install-version-dropdown'>
-              <FormSelect
-                onChange={(val) =>
-                  updateParams(ParamHelper.setParam(params, 'version', val))
-                }
-                value={collection.latest_version.version}
-                aria-label={t`Select collection version`}
-              >
-                {all_versions.map((v) => (
-                  <FormSelectOption
-                    key={v.version}
-                    value={v.version}
-                    label={'v' + v.version}
-                  />
-                ))}
-              </FormSelect>
-            </div>
-            {latestVersion ? (
-              <span className='last-updated'>
-                <Trans>
-                  Last updated <DateComponent date={latestVersion} />
-                </Trans>
-              </span>
-            ) : null}
-          </div>
-        }
-      >
-        {collection.deprecated && (
-          <Alert
-            variant='danger'
-            isInline
-            title={t`This collection has been deprecated.`}
-          />
-        )}
-        <div className='tab-link-container'>
-          <div className='tabs'>{this.renderTabs(activeTab)}</div>
-          <div className='links'>
-            <div>
-              <ExternalLinkAltIcon />
-            </div>
-            {urlKeys.map((link) => {
-              const l = collection.latest_version.metadata[link.key];
-              if (!l) {
-                return null;
-              }
+    const isLatestVersion = (v) =>
+      `${moment(v.created).fromNow()} ${
+        v.version === all_versions[0].version ? t`(latest)` : ''
+      }`;
 
-              return (
-                <div className='link' key={link.key}>
-                  <a href={l} target='_blank'>
-                    {link.name}
-                  </a>
-                </div>
-              );
-            })}
+    const { name: collectionName } = collection;
+
+    if (redirect) return <Redirect push to={redirect} />;
+
+    return (
+      <React.Fragment>
+        <Modal
+          isOpen={isOpenVersionsModal}
+          title={t`Collection versions`}
+          variant='small'
+          onClose={() => this.setState({ isOpenVersionsModal: false })}
+        >
+          <List isPlain>
+            <div className='versions-modal-header'>
+              <Text>{t`${collectionName}'s versions.`}</Text>
+              <Pagination
+                isTop
+                params={{
+                  page: modalPagination.page,
+                  page_size: modalPagination.pageSize,
+                }}
+                updateParams={this.updatePaginationParams}
+                count={all_versions.length}
+              />
+            </div>
+            {this.paginateVersions(all_versions).map((v, i) => (
+              <ListItem key={i}>
+                <Button
+                  variant='link'
+                  isInline
+                  onClick={() => {
+                    updateParams(
+                      ParamHelper.setParam(
+                        params,
+                        'version',
+                        v.version.toString(),
+                      ),
+                    );
+                    this.setState({ isOpenVersionsModal: false });
+                  }}
+                >
+                  v{v.version}
+                </Button>{' '}
+                {t`released ${isLatestVersion(v)}`}
+              </ListItem>
+            ))}
+          </List>
+          <Pagination
+            params={{
+              page: modalPagination.page,
+              page_size: modalPagination.pageSize,
+            }}
+            updateParams={this.updatePaginationParams}
+            count={all_versions.length}
+          />
+        </Modal>
+        {deleteCollection && (
+          <ConfirmModal
+            cancelAction={this.closeModal}
+            confirmAction={() =>
+              !!collectionVersion
+                ? this.deleteCollectionVersion(collectionVersion)
+                : this.deleteCollection()
+            }
+            isDisabled={!confirmDelete}
+            title={
+              collectionVersion
+                ? t`Permanently delete collection version`
+                : t`Permanently delete collection`
+            }
+            confirmButtonTitle={t`Delete`}
+          >
+            <>
+              <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+                {collectionVersion ? (
+                  <>
+                    {deleteCollection.all_versions.length === 1 ? (
+                      <Trans>
+                        Deleting{' '}
+                        <b>
+                          {deleteCollection.name} v{collectionVersion}
+                        </b>{' '}
+                        and its data will be lost and this will cause the entire
+                        collection to be deleted.
+                      </Trans>
+                    ) : (
+                      <Trans>
+                        Deleting{' '}
+                        <b>
+                          {deleteCollection.name} v{collectionVersion}
+                        </b>{' '}
+                        and its data will be lost.
+                      </Trans>
+                    )}
+                  </>
+                ) : (
+                  <Trans>
+                    Deleting <b>{deleteCollection.name}</b> and its data will be
+                    lost.
+                  </Trans>
+                )}
+              </Text>
+              <Checkbox
+                isChecked={confirmDelete}
+                onChange={(val) => this.setState({ confirmDelete: val })}
+                label={t`I understand that this action cannot be undone.`}
+                id='delete_confirm'
+              />
+            </>
+          </ConfirmModal>
+        )}
+        <BaseHeader
+          className={className}
+          title={collection.name}
+          imageURL={collection.namespace.avatar_url}
+          contextSelector={
+            <RepoSelector
+              selectedRepo={this.context.selectedRepo}
+              path={Paths.searchByRepo}
+              isDisabled
+            />
+          }
+          breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
+          versionControl={
+            <div className='install-version-column'>
+              <span>{t`Version`}</span>
+              <div className='install-version-dropdown'>
+                <Select
+                  isOpen={isOpenVersionsSelect}
+                  onToggle={(isOpenVersionsSelect) =>
+                    this.setState({ isOpenVersionsSelect })
+                  }
+                  variant={SelectVariant.single}
+                  onSelect={() =>
+                    this.setState({ isOpenVersionsSelect: false })
+                  }
+                  selections={`v${collection.latest_version.version}`}
+                  aria-label={t`Select collection version`}
+                  loadingVariant={
+                    numOfshownVersions < all_versions.length
+                      ? {
+                          text: t`View more`,
+                          onClick: () =>
+                            this.setState({
+                              isOpenVersionsModal: true,
+                              isOpenVersionsSelect: false,
+                            }),
+                        }
+                      : null
+                  }
+                >
+                  {this.renderSelectVersions(
+                    all_versions,
+                    numOfshownVersions,
+                  ).map((v) => (
+                    <SelectOption
+                      key={v.version}
+                      value={`v${v.version}`}
+                      onClick={() =>
+                        updateParams(
+                          ParamHelper.setParam(
+                            params,
+                            'version',
+                            v.version.toString(),
+                          ),
+                        )
+                      }
+                    >
+                      <Trans>
+                        {v.version} released {isLatestVersion(v)}
+                      </Trans>
+                    </SelectOption>
+                  ))}
+                </Select>
+              </div>
+              {latestVersion ? (
+                <span className='last-updated'>
+                  <Trans>
+                    Last updated <DateComponent date={latestVersion} />
+                  </Trans>
+                </span>
+              ) : null}
+            </div>
+          }
+          pageControls={
+            <StatefulDropdown
+              items={[
+                <React.Fragment key='1'>
+                  {noDependencies ? (
+                    <DropdownItem
+                      key={1}
+                      onClick={() => this.openDeleteModalWithConfirm()}
+                    >
+                      {t`Delete entire collection`}
+                    </DropdownItem>
+                  ) : (
+                    <Tooltip
+                      position='left'
+                      content={
+                        <Trans>
+                          Cannot delete until collections <br />
+                          that depend on this collection <br />
+                          have been deleted.
+                        </Trans>
+                      }
+                    >
+                      <DropdownItem isDisabled>
+                        {t`Delete entire collection`}
+                      </DropdownItem>
+                    </Tooltip>
+                  )}
+                </React.Fragment>,
+                <DropdownItem
+                  key='2'
+                  onClick={() =>
+                    this.openDeleteModalWithConfirm(
+                      collection.latest_version.version,
+                    )
+                  }
+                >
+                  {t`Delete version ${collection.latest_version.version}`}
+                </DropdownItem>,
+              ]}
+            />
+          }
+        >
+          {collection.deprecated && (
+            <Alert
+              variant='danger'
+              isInline
+              title={t`This collection has been deprecated.`}
+            />
+          )}
+          <AlertList
+            alerts={this.state.alerts}
+            closeAlert={(i) => this.closeAlert(i)}
+          />
+          <div className='tab-link-container'>
+            <div className='tabs'>{this.renderTabs(activeTab)}</div>
+            <div className='links'>
+              <div>
+                <ExternalLinkAltIcon />
+              </div>
+              {urlKeys.map((link) => {
+                const url = collection.latest_version.metadata[link.key];
+                if (!url) {
+                  return null;
+                }
+
+                return (
+                  <div className='link' key={link.key}>
+                    <a href={url} target='_blank'>
+                      {link.name}
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </BaseHeader>
+        </BaseHeader>
+      </React.Fragment>
     );
   }
 
@@ -182,8 +450,241 @@ export class CollectionHeader extends React.Component<IProps> {
         title: t`Import log`,
         link: formatPath(Paths.collectionImportLogByRepo, pathParams, reduced),
       },
+      {
+        active: active === 'dependencies',
+        title: t`Dependencies`,
+        link: formatPath(
+          Paths.collectionDependenciesByRepo,
+          pathParams,
+          reduced,
+        ),
+      },
     ];
 
     return <LinkTabs tabs={tabs} />;
+  }
+
+  private renderSelectVersions(versions, count) {
+    return versions.slice(0, count);
+  }
+
+  private paginateVersions(versions) {
+    const { modalPagination } = this.state;
+    return versions.slice(
+      modalPagination.pageSize * (modalPagination.page - 1),
+      modalPagination.pageSize * modalPagination.page,
+    );
+  }
+
+  private updatePaginationParams = ({ page, page_size }) => {
+    this.setState({
+      modalPagination: {
+        page: page,
+        pageSize: page_size,
+      },
+    });
+  };
+
+  private deleteCollectionVersion = (collectionVersion) => {
+    const { deleteCollection } = this.state;
+
+    CollectionAPI.deleteCollectionVersion(
+      this.context.selectedRepo,
+      deleteCollection,
+    )
+      .then((res) => {
+        const taskId = this.getIdFromTask(res.data.task);
+
+        waitForTask(taskId).then(() => {
+          if (deleteCollection.all_versions.length > 1) {
+            const topVersion = deleteCollection.all_versions.filter(
+              ({ version }) => version !== collectionVersion,
+            );
+            this.props.updateParams(
+              ParamHelper.setParam(
+                this.props.params,
+                'version',
+                topVersion[0].version,
+              ),
+            );
+
+            this.setState({
+              deleteCollection: null,
+              collectionVersion: null,
+              alerts: [
+                ...this.state.alerts,
+                {
+                  variant: 'success',
+                  title: t`Successfully deleted collection version.`,
+                },
+              ],
+            });
+          } else {
+            // last version in collection => collection will be deleted => redirect
+            this.context.setAlerts([
+              ...this.context.alerts,
+              {
+                variant: 'success',
+                title: t`Successfully deleted collection.`,
+              },
+            ]);
+            this.setState({
+              redirect: formatPath(Paths.namespaceByRepo, {
+                repo: this.context.selectedRepo,
+                namespace: deleteCollection.namespace.name,
+              }),
+            });
+          }
+        });
+      })
+      .catch((err) => {
+        const {
+          data: { detail, dependent_collection_versions },
+          status,
+        } = err?.response;
+
+        if (status === 400) {
+          const dependencies = (
+            <>
+              <Trans>Dependent collections</Trans>
+              <List>
+                {dependent_collection_versions.map((d) => {
+                  const { namespace, version, collection } =
+                    this.separateStringDependencies(d);
+                  return (
+                    <ListItem key={d}>
+                      <Link
+                        to={formatPath(
+                          Paths.collectionByRepo,
+                          {
+                            repo: this.context.selectedRepo,
+                            namespace,
+                            collection,
+                          },
+                          { version: version },
+                        )}
+                        onClick={() => this.setState({ alerts: [] })}
+                      >
+                        {d}
+                      </Link>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </>
+          );
+          this.setState({
+            deleteCollection: null,
+            collectionVersion: null,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: detail,
+                description: dependencies,
+              },
+            ],
+          });
+        } else {
+          this.setState({
+            deleteCollection: null,
+            collectionVersion: null,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: t`Error deleting collection version.`,
+                description: err?.message,
+              },
+            ],
+          });
+        }
+      });
+  };
+
+  private deleteCollection = () => {
+    const { deleteCollection } = this.state;
+    CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
+      .then((res) => {
+        const taskId = this.getIdFromTask(res.data.task);
+
+        waitForTask(taskId).then(() => {
+          this.context.setAlerts([
+            ...this.context.alerts,
+            {
+              variant: 'success',
+              title: t`Successfully deleted collection.`,
+            },
+          ]);
+          this.setState({
+            collectionVersion: null,
+            deleteCollection: null,
+            redirect: formatPath(Paths.namespaceByRepo, {
+              repo: this.context.selectedRepo,
+              namespace: deleteCollection.namespace.name,
+            }),
+          });
+        });
+      })
+      .catch((err) =>
+        this.setState({
+          collectionVersion: null,
+          deleteCollection: null,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error deleting collection.`,
+              description: err?.message,
+            },
+          ],
+        }),
+      );
+  };
+
+  private openDeleteModalWithConfirm(version = null) {
+    this.setState({
+      deleteCollection: this.props.collection,
+      collectionVersion: version,
+      confirmDelete: false,
+    });
+  }
+
+  private getUsedbyDependencies() {
+    const { name, namespace } = this.props.collection;
+    CollectionAPI.getUsedDependenciesByCollection(namespace.name, name)
+      .then(({ data }) => {
+        this.setState({ noDependencies: !data.data.length });
+      })
+      .catch((err) =>
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error getting collection's dependencies.`,
+              description: err?.message,
+            },
+          ],
+        }),
+      );
+  }
+
+  private getIdFromTask(task) {
+    return task.match(/tasks\/([a-zA-Z0-9-]+)/i)[1];
+  }
+  private closeModal = () => {
+    this.setState({ deleteCollection: null });
+  };
+
+  get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
+
+  private separateStringDependencies(dependency) {
+    const [nsCollection, version] = dependency.split(' ');
+    const [namespace, collection] = nsCollection.split('.');
+
+    return { namespace, collection, version };
   }
 }

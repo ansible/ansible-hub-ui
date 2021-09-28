@@ -13,7 +13,6 @@ jobs:
     env:
       BRANCH: 'master' # for webpack
       NODE_OPTIONS: "--max-old-space-size=4096 --max_old_space_size=4096"
-      RH_GALAXY_DROID_GITHUB_TOKEN: ${{ secrets.RH_GALAXY_DROID_GITHUB_TOKEN }}
 
     steps:
 
@@ -27,10 +26,10 @@ jobs:
 
     - name: "Update the dev tag"
       run: |
-        git config --local user.name "rh-galaxy-droid"
+        git config --local user.name "Dev release workflow"
         git config --local user.email "ansible-hub-ui+dev@example.com"
         git tag -f dev
-        git push -fq https://rh-galaxy-droid:$RH_GALAXY_DROID_GITHUB_TOKEN@github.com/ansible/ansible-hub-ui --tags
+        git push -f --tags
 
     - name: "Cache ~/.npm"
       uses: actions/cache@v2

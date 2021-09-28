@@ -4,13 +4,19 @@ import { truncateSha } from 'src/utilities';
 
 interface IProps {
   digest: string;
+  grey?: boolean;
+  long?: boolean;
 }
 
 export class ShaLabel extends React.Component<IProps> {
   render() {
+    const { digest, grey, long } = this.props;
+
     return (
-      <Tooltip content={this.props.digest}>
-        <Label color='blue'>{truncateSha(this.props.digest)}</Label>
+      <Tooltip content={digest}>
+        <Label color={grey ? 'grey' : 'blue'}>
+          {long ? digest : truncateSha(digest)}
+        </Label>
       </Tooltip>
     );
   }

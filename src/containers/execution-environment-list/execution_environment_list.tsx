@@ -1,17 +1,24 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment.scss';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
+  Button,
+  Checkbox,
+  DropdownItem,
+  Label,
   Toolbar,
+  ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  ToolbarContent,
-  Button,
 } from '@patternfly/react-core';
-import { ExecutionEnvironmentAPI, ExecutionEnvironmentType } from 'src/api';
-import { filterIsSet, ParamHelper } from 'src/utilities';
+import {
+  ExecutionEnvironmentAPI,
+  ExecutionEnvironmentRemoteAPI,
+  ExecutionEnvironmentType,
+} from 'src/api';
+import { filterIsSet, waitForTask, ParamHelper } from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -24,22 +31,35 @@ import {
   LoadingPageSpinner,
   Main,
   Pagination,
+  PublishToControllerModal,
+  RepositoryForm,
   SortTable,
+  StatefulDropdown,
   Tooltip,
   closeAlertMixin,
+  EmptyStateUnauthorized,
 } from 'src/components';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { formatPath, Paths } from '../../paths';
+import { AppContext } from 'src/loaders/app-context';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 interface IState {
+  alerts: AlertType[];
+  itemCount: number;
+  itemToEdit?: ExecutionEnvironmentType;
+  items: ExecutionEnvironmentType[];
+  loading: boolean;
   params: {
     page?: number;
     page_size?: number;
   };
-  loading: boolean;
-  items: ExecutionEnvironmentType[];
-  itemCount: number;
-  alerts: AlertType[];
+  publishToController: { digest?: string; image: string; tag?: string };
+  showRemoteModal: boolean;
+  unauthorized: boolean;
+  deleteModalVisible: boolean;
+  selectedItem: ExecutionEnvironmentType;
+  confirmDelete: boolean;
 }
 
 class ExecutionEnvironmentList extends React.Component<
@@ -63,20 +83,45 @@ class ExecutionEnvironmentList extends React.Component<
     }
 
     this.state = {
-      params: params,
+      alerts: [],
+      itemCount: 0,
+      itemToEdit: null,
       items: [],
       loading: true,
-      itemCount: 0,
-      alerts: [],
+      params,
+      publishToController: null,
+      showRemoteModal: false,
+      unauthorized: false,
+      deleteModalVisible: false,
+      selectedItem: null,
+      confirmDelete: false,
     };
   }
 
   componentDidMount() {
-    this.queryEnvironments();
+    if (!this.context.user || this.context.user.is_anonymous) {
+      this.setState({ unauthorized: true, loading: false });
+    } else {
+      this.queryEnvironments();
+    }
   }
 
   render() {
-    const { params, itemCount, loading, alerts, items } = this.state;
+    const {
+      alerts,
+      itemCount,
+      itemToEdit,
+      items,
+      loading,
+      params,
+      publishToController,
+      showRemoteModal,
+      unauthorized,
+      deleteModalVisible,
+      selectedItem,
+      confirmDelete,
+    } = this.state;
+
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
     const pushImagesButton = (
       <Button
@@ -88,9 +133,24 @@ class ExecutionEnvironmentList extends React.Component<
           )
         }
       >
-        Push container images <ExternalLinkAltIcon />
+        <Trans>Push container images</Trans> <ExternalLinkAltIcon />
       </Button>
     );
+    const addRemoteButton = (
+      <Button
+        onClick={() =>
+          this.setState({
+            showRemoteModal: true,
+            itemToEdit: {} as ExecutionEnvironmentType,
+          })
+        }
+        variant='primary'
+      >
+        <Trans>Add execution environment</Trans>
+      </Button>
+    );
+
+    const name = !!selectedItem ? selectedItem.name : '';
 
     return (
       <React.Fragment>
@@ -98,12 +158,47 @@ class ExecutionEnvironmentList extends React.Component<
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
-        <BaseHeader title={t`Container Registry`}></BaseHeader>
-        {noData && !loading ? (
+        <PublishToControllerModal
+          digest={publishToController?.digest}
+          image={publishToController?.image}
+          isOpen={!!publishToController}
+          onClose={() => this.setState({ publishToController: null })}
+          tag={publishToController?.tag}
+        />
+        {showRemoteModal && this.renderRemoteModal(itemToEdit)}
+        <BaseHeader title={t`Execution Environments`}></BaseHeader>
+        {deleteModalVisible && (
+          <DeleteModal
+            title={'Permanently delete container'}
+            cancelAction={() =>
+              this.setState({ deleteModalVisible: false, selectedItem: null })
+            }
+            deleteAction={() => this.deleteContainer()}
+            isDisabled={!confirmDelete}
+          >
+            <Trans>
+              Deleting <b>{name}</b> and its data will be lost.
+            </Trans>
+            <Checkbox
+              isChecked={confirmDelete}
+              onChange={(value) => this.setState({ confirmDelete: value })}
+              label={t`I understand that this action cannot be undone.`}
+              id='delete_confirm'
+            />
+          </DeleteModal>
+        )}
+        {unauthorized ? (
+          <EmptyStateUnauthorized />
+        ) : noData && !loading ? (
           <EmptyStateNoData
             title={t`No container repositories yet`}
             description={t`You currently have no container repositories. Add a container repository via the CLI to get started.`}
-            button={pushImagesButton}
+            button={
+              <>
+                {addRemoteButton}
+                {pushImagesButton}
+              </>
+            }
           />
         ) : (
           <Main>
@@ -132,6 +227,7 @@ class ExecutionEnvironmentList extends React.Component<
                             ]}
                           />
                         </ToolbarItem>
+                        <ToolbarItem>{addRemoteButton}</ToolbarItem>
                         <ToolbarItem>{pushImagesButton}</ToolbarItem>
                       </ToolbarGroup>
                     </ToolbarContent>
@@ -201,6 +297,16 @@ class ExecutionEnvironmentList extends React.Component<
           type: 'alpha',
           id: 'updated',
         },
+        {
+          title: t`Container registry type`,
+          type: 'none',
+          id: 'type',
+        },
+        {
+          title: '',
+          type: 'none',
+          id: 'controls',
+        },
       ],
     };
 
@@ -220,6 +326,48 @@ class ExecutionEnvironmentList extends React.Component<
 
   private renderTableRow(item: any, index: number) {
     const description = item.description;
+    const dropdownItems = [
+      <DropdownItem
+        key='edit'
+        onClick={() =>
+          this.setState({
+            showRemoteModal: true,
+            itemToEdit: { ...item },
+          })
+        }
+      >
+        {t`Edit`}
+      </DropdownItem>,
+      item.pulp.repository.remote && (
+        <DropdownItem
+          key='sync'
+          onClick={() => ExecutionEnvironmentRemoteAPI.sync(item.name)}
+        >
+          {t`Sync from registry`}
+        </DropdownItem>
+      ),
+      <DropdownItem
+        key='publish-to-controller'
+        onClick={() => {
+          this.setState({
+            publishToController: {
+              image: item.name,
+            },
+          });
+        }}
+      >
+        {t`Use in Controller`}
+      </DropdownItem>,
+      <DropdownItem
+        key='delete'
+        onClick={() =>
+          this.setState({ selectedItem: item, deleteModalVisible: true })
+        }
+      >
+        {t`Delete`}
+      </DropdownItem>,
+    ].filter((truthy) => truthy);
+
     return (
       <tr aria-labelledby={item.name} key={index}>
         <td>
@@ -244,7 +392,65 @@ class ExecutionEnvironmentList extends React.Component<
         <td>
           <DateComponent date={item.updated} />
         </td>
+        <td>
+          <Label>{item.pulp.repository.remote ? t`Remote` : t`Local`}</Label>
+        </td>
+        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
+          {!!dropdownItems.length && <StatefulDropdown items={dropdownItems} />}
+        </td>
       </tr>
+    );
+  }
+
+  private renderRemoteModal(itemToEdit) {
+    const { name, namespace, description, pulp } = itemToEdit;
+    const { pulp_id, registry, upstream_name, include_tags, exclude_tags } =
+      pulp?.repository?.remote || {};
+    const remote = pulp?.repository ? !!pulp?.repository?.remote : true; // add only supports remote
+    const isNew = !pulp?.repository; // only exists in real data
+    const distributionPulpId = pulp?.distribution?.pulp_id;
+
+    return (
+      <RepositoryForm
+        isRemote={!!remote}
+        isNew={isNew}
+        name={name}
+        namespace={namespace?.name}
+        description={description}
+        upstreamName={upstream_name}
+        registry={registry}
+        excludeTags={exclude_tags || []}
+        includeTags={include_tags || []}
+        permissions={namespace?.my_permissions || []}
+        remotePulpId={pulp_id}
+        distributionPulpId={distributionPulpId}
+        onSave={(promise) => {
+          promise
+            .then(() => {
+              this.setState(
+                {
+                  showRemoteModal: false,
+                  itemToEdit: null,
+                },
+                () => this.queryEnvironments(),
+              );
+            })
+            .catch(() => {
+              this.setState({
+                alerts: this.state.alerts.concat({
+                  variant: 'danger',
+                  title: t`Error: changes weren't saved`,
+                }),
+              });
+            });
+        }}
+        onCancel={() =>
+          this.setState({
+            showRemoteModal: false,
+            itemToEdit: null,
+          })
+        }
+      />
     );
   }
 
@@ -260,6 +466,42 @@ class ExecutionEnvironmentList extends React.Component<
     );
   }
 
+  private deleteContainer() {
+    const { selectedItem } = this.state;
+    const { name } = selectedItem;
+    ExecutionEnvironmentAPI.deleteExecutionEnvironment(selectedItem.name)
+      .then((result) => {
+        let taskId = result.data.task.split('tasks/')[1].replace('/', '');
+        this.setState({
+          loading: true,
+          deleteModalVisible: false,
+          selectedItem: null,
+          confirmDelete: false,
+        });
+        waitForTask(taskId).then(() => {
+          this.setState({
+            alerts: this.state.alerts.concat([
+              {
+                variant: 'success',
+                title: t`Success: ${name} was deleted`,
+              },
+            ]),
+          });
+          this.queryEnvironments();
+        });
+      })
+      .catch(() => {
+        this.setState({
+          deleteModalVisible: false,
+          selectedItem: null,
+          confirmDelete: false,
+          alerts: this.state.alerts.concat([
+            { variant: 'danger', title: t`Error: delete failed` },
+          ]),
+        });
+      });
+  }
+
   private get updateParams() {
     return ParamHelper.updateParamsMixin();
   }
@@ -270,3 +512,4 @@ class ExecutionEnvironmentList extends React.Component<
 }
 
 export default withRouter(ExecutionEnvironmentList);
+ExecutionEnvironmentList.contextType = AppContext;

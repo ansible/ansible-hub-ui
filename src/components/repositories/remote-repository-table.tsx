@@ -5,10 +5,9 @@ import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import { RemoteType, UserType, PulpStatus } from 'src/api';
-import { DateComponent, HelperText, SortTable, StatefulDropdown } from '..';
-import { StatusIndicator } from 'src/components';
-
+import { DateComponent, SortTable, StatefulDropdown } from 'src/components';
 import { Constants } from 'src/constants';
+import { lastSynced, lastSyncStatus } from 'src/utilities';
 
 interface IProps {
   remotes: RemoteType[];
@@ -123,14 +122,8 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         ) : (
           <td>{'---'}</td>
         )}
-        {!!remote.last_sync_task && !!remote.last_sync_task.finished_at ? (
-          <td>
-            <DateComponent date={remote.last_sync_task.finished_at} />
-          </td>
-        ) : (
-          <td>{'---'}</td>
-        )}
-        <td>{this.renderStatus(remote)}</td>
+        <td>{lastSynced(remote) || '---'}</td>
+        <td>{lastSyncStatus(remote) || '---'}</td>
         <td>
           {remote.repositories.length === 0 ? (
             <Tooltip
@@ -162,25 +155,6 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
           )}
         </td>
       </tr>
-    );
-  }
-
-  private renderStatus(remote) {
-    if (!remote.last_sync_task) {
-      return '---';
-    }
-
-    let errorMessage = null;
-    if (remote['last_sync_task']['error']) {
-      errorMessage = (
-        <HelperText content={remote.last_sync_task.error['description']} />
-      );
-    }
-
-    return (
-      <>
-        <StatusIndicator status={remote.last_sync_task.state} /> {errorMessage}
-      </>
     );
   }
 

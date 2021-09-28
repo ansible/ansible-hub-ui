@@ -9,6 +9,7 @@ import {
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
+  EmptyStateUnauthorized,
   LinkTabs,
   LoadingPageSpinner,
   LoadingPageWithHeader,
@@ -16,13 +17,14 @@ import {
   NamespaceModal,
   Pagination,
   Toolbar,
+  AlertList,
 } from 'src/components';
 import { Button, ToolbarItem } from '@patternfly/react-core';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { Constants } from 'src/constants';
-import { AppContext } from 'src/loaders/app-context';
 import { filterIsSet } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   namespaces: NamespaceListType[];
@@ -100,20 +102,24 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
   }
 
+  componentWillUnmount() {
+    this.context.setAlerts([]);
+  }
+
   render() {
     if (this.state.redirect) {
       return <Redirect push to={this.state.redirect} />;
     }
 
-    const { namespaces, params, itemCount } = this.state;
+    const { namespaces, params, itemCount, loading } = this.state;
     const { filterOwner } = this.props;
-    const { user } = this.context;
+    const { user, alerts } = this.context;
     const noData =
       !filterIsSet(this.state.params, ['keywords']) &&
       namespaces !== undefined &&
       namespaces.length === 0;
 
-    if (!namespaces) {
+    if (loading) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
@@ -148,25 +154,28 @@ export class NamespaceList extends React.Component<IProps, IState> {
             })
           }
         ></NamespaceModal>
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={title}>
-          <div className='tab-link-container'>
-            <div className='tabs'>
-              <LinkTabs
-                tabs={[
-                  {
-                    title: t`All`,
-                    link: Paths[NAMESPACE_TERM],
-                    active: !filterOwner,
-                  },
-                  {
-                    title: t`My namespaces`,
-                    link: Paths.myNamespaces,
-                    active: filterOwner,
-                  },
-                ]}
-              />
+          {!this.context.user.is_anonymous && (
+            <div className='tab-link-container'>
+              <div className='tabs'>
+                <LinkTabs
+                  tabs={[
+                    {
+                      title: t`All`,
+                      link: Paths[NAMESPACE_TERM],
+                      active: !filterOwner,
+                    },
+                    {
+                      title: t`My namespaces`,
+                      link: Paths.myNamespaces,
+                      active: filterOwner,
+                    },
+                  ]}
+                />
+              </div>
             </div>
-          </div>
+          )}
           {noData ? null : (
             <div className='toolbar'>
               <Toolbar
@@ -193,7 +202,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           )}
         </BaseHeader>
         <section className='card-area'>{this.renderBody()}</section>
-        {noData ? null : (
+        {noData || loading ? null : (
           <section className='footer'>
             <Pagination
               params={params}
@@ -288,6 +297,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
   private get updateParams() {
     return ParamHelper.updateParamsMixin(this.nonURLParams);
+  }
+
+  private closeAlert(i) {
+    this.context.setAlerts([]);
   }
 }
 

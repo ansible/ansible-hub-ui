@@ -24,7 +24,7 @@ export class WriteOnlyField extends React.Component<IProps> {
     return (
       <InputGroup>
         <TextInput
-          aria-label='hidden value'
+          aria-label={t`hidden value`}
           placeholder='••••••••••••••••••••••'
           type='password'
           isDisabled={isValueSet}

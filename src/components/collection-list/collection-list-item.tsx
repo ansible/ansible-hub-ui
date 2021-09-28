@@ -25,6 +25,7 @@ import {
 } from 'src/components';
 import { CollectionListType } from 'src/api';
 import { convertContentSummaryCounts } from 'src/utilities';
+import { Constants } from 'src/constants';
 
 interface IProps extends CollectionListType {
   showNamespace?: boolean;
@@ -63,9 +64,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
       );
     }
 
-    const contentSummary = convertContentSummaryCounts(
-      latest_version.metadata.contents,
-    );
+    let contentSummary = convertContentSummaryCounts(latest_version.metadata);
 
     cells.push(
       <DataListCell key='content'>
@@ -96,6 +95,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
                 className='numeric-label-capitalize-text'
                 label={k}
                 number={contentSummary.contents[k]}
+                pluralLabels={Constants.COLLECTION_PLURAL_LABELS[k]}
               />
             </div>
           ))}
