@@ -45,6 +45,7 @@ class CollectionDependencies extends React.Component<
   IState
 > {
   private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
+  private cancelToken = undefined;
   constructor(props) {
     super(props);
 
@@ -180,10 +181,15 @@ class CollectionDependencies extends React.Component<
 
   private loadUsedByDependencies() {
     this.setState({ usedByDependenciesLoading: true }, () => {
+      if (this.cancelToken) this.cancelToken.cancel('request-canceled');
+
+      this.cancelToken = CollectionAPI.getCancelToken();
+
       CollectionAPI.getUsedDependenciesByCollection(
         this.state.collection.namespace.name,
         this.state.collection.name,
         ParamHelper.getReduced(this.state.params, ['version']),
+        this.cancelToken,
       )
         .then(({ data }) => {
           this.setState({
@@ -192,19 +198,24 @@ class CollectionDependencies extends React.Component<
             usedByDependenciesLoading: false,
           });
         })
-        .catch((err) =>
-          this.setState({
-            usedByDependenciesLoading: false,
-            alerts: [
-              ...this.state.alerts,
-              {
-                variant: 'danger',
-                title: t`Error loading dependent collections.`,
-                description: err?.message,
-              },
-            ],
-          }),
-        );
+        .catch((err) => {
+          if (err?.message !== 'request-canceled') {
+            this.setState({
+              usedByDependenciesLoading: false,
+              alerts: [
+                ...this.state.alerts,
+                {
+                  variant: 'danger',
+                  title: t`Error loading dependent collections.`,
+                  description: err?.message,
+                },
+              ],
+            });
+          }
+        })
+        .finally(() => {
+          this.cancelToken = undefined;
+        });
     });
   }
 
