@@ -421,7 +421,6 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             let url = resource.replace('/pulp/api/v3/', '');
             let id = parsePulpIDFromURL(url);
             let urlParts = resource.split('/');
-            console.log(urlParts);
             let type = !!id ? urlParts[4] : urlParts[urlParts.length - 2];
             if (!!id) {
               allRelatedTasks.push(
