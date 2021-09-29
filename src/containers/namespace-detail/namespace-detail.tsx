@@ -486,29 +486,35 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 </Link>
               }
             />,
-            <React.Fragment key={'2'}>
-              {this.state.isNamespaceEmpty ? (
-                <DropdownItem
-                  onClick={() => this.setState({ isOpenNamespaceModal: true })}
-                >
-                  {t`Delete namespace`}
-                </DropdownItem>
-              ) : (
-                <Tooltip
-                  isVisible={false}
-                  content={
-                    <Trans>
-                      Cannot delete namespace until <br />
-                      collections' dependencies have <br />
-                      been deleted
-                    </Trans>
-                  }
-                  position='left'
-                >
-                  <DropdownItem isDisabled>{t`Delete namespace`}</DropdownItem>
-                </Tooltip>
-              )}
-            </React.Fragment>,
+            this.context.user.model_permissions.delete_namespace && (
+              <React.Fragment key={'2'}>
+                {this.state.isNamespaceEmpty ? (
+                  <DropdownItem
+                    onClick={() =>
+                      this.setState({ isOpenNamespaceModal: true })
+                    }
+                  >
+                    {t`Delete namespace`}
+                  </DropdownItem>
+                ) : (
+                  <Tooltip
+                    isVisible={false}
+                    content={
+                      <Trans>
+                        Cannot delete namespace until <br />
+                        collections' dependencies have <br />
+                        been deleted
+                      </Trans>
+                    }
+                    position='left'
+                  >
+                    <DropdownItem
+                      isDisabled
+                    >{t`Delete namespace`}</DropdownItem>
+                  </Tooltip>
+                )}
+              </React.Fragment>
+            ),
             <DropdownItem
               key='3'
               component={
@@ -525,7 +531,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 </Link>
               }
             />,
-          ]}
+          ].filter(Boolean)}
         />
       </div>
     );
