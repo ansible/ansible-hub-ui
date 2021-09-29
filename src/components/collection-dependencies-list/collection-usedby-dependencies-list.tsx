@@ -134,7 +134,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
                                 ),
                               )}
                             >
-                              {name}
+                              {name} v{version}
                             </Link>
                           </td>
                         </tr>
