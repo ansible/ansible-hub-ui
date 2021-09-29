@@ -116,7 +116,11 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     const noData =
       items.length === 0 && !filterIsSet(params, ['name__icontains']);
 
-    const addButton = (
+    if (this.context.user.is_anonymous) {
+      return <EmptyStateUnauthorized />;
+    }
+
+    const addButton = this.context.user.model_permissions.add_remote ? (
       <Button
         onClick={() =>
           this.setState({
@@ -141,11 +145,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       >
         <Trans>Add remote registry</Trans>
       </Button>
-    );
-
-    if (this.context.user.is_anonymous) {
-      return <EmptyStateUnauthorized />;
-    }
+    ) : null;
 
     return (
       <React.Fragment>
@@ -375,31 +375,35 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           </Button>{' '}
           <StatefulDropdown
             items={[
-              <DropdownItem
-                key='edit'
-                onClick={() =>
-                  this.setState({
-                    remoteFormErrors: {},
-                    remoteFormNew: false,
-                    remoteToEdit: { ...item },
-                    remoteUnmodified: { ...item },
-                    showRemoteFormModal: true,
-                  })
-                }
-              >
-                <Trans>Edit</Trans>
-              </DropdownItem>,
-              <DropdownItem
-                key='delete'
-                onClick={() =>
-                  this.setState({
-                    showDeleteModal: true,
-                    remoteToEdit: item,
-                  })
-                }
-              >
-                <Trans>Delete</Trans>
-              </DropdownItem>,
+              this.context.user.model_permissions.change_remote && (
+                <DropdownItem
+                  key='edit'
+                  onClick={() =>
+                    this.setState({
+                      remoteFormErrors: {},
+                      remoteFormNew: false,
+                      remoteToEdit: { ...item },
+                      remoteUnmodified: { ...item },
+                      showRemoteFormModal: true,
+                    })
+                  }
+                >
+                  <Trans>Edit</Trans>
+                </DropdownItem>
+              ),
+              this.context.user.model_permissions.delete_remote && (
+                <DropdownItem
+                  key='delete'
+                  onClick={() =>
+                    this.setState({
+                      showDeleteModal: true,
+                      remoteToEdit: item,
+                    })
+                  }
+                >
+                  <Trans>Delete</Trans>
+                </DropdownItem>
+              ),
               <Tooltip
                 content={
                   item.is_indexable
@@ -415,7 +419,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                   <Trans>Index execution environments</Trans>
                 </DropdownItem>
               </Tooltip>,
-            ]}
+            ].filter(Boolean)}
           />
         </td>
       </tr>
