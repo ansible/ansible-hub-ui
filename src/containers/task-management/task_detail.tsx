@@ -70,7 +70,16 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     this.loadContent();
+    const refresh = setInterval(() => this.loadContent(), 10000);
+    if (
+      ['cancelled', 'completed', 'failed', 'canceled'].includes(
+        this.state.task?.state,
+      )
+    ) {
+      clearInterval(refresh);
+    }
   }
+
   componentDidUpdate(prevProps) {
     if (prevProps.match.params['task'] !== this.props.match.params['task']) {
       this.setState({ loading: true });
