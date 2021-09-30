@@ -50,6 +50,7 @@ interface IState {
   taskName: string;
   resources: { name: string; type: string }[];
   redirect: string;
+  refresh: any;
 }
 
 class TaskDetail extends React.Component<RouteComponentProps, IState> {
@@ -65,18 +66,17 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       taskName: '',
       resources: [],
       redirect: null,
+      refresh: null,
     };
   }
 
   componentDidMount() {
     this.loadContent();
-    const refresh = setInterval(() => this.loadContent(), 10000);
-    if (
-      ['cancelled', 'completed', 'failed', 'canceled'].includes(
-        this.state.task?.state,
-      )
-    ) {
-      clearInterval(refresh);
+  }
+
+  componentWillUnmount() {
+    if (this.state.refresh) {
+      clearInterval(this.state.refresh);
     }
   }
 
@@ -393,12 +393,23 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
 
   private loadContent() {
     let taskId = this.props.match.params['task'];
+    if (!this.state.refresh && !this.state.task) {
+      this.setState({ refresh: setInterval(() => this.loadContent(), 10000) });
+    }
     return TaskManagementAPI.get(taskId)
       .then((result) => {
         let allRelatedTasks = [];
         let parentTask = null;
         let childTasks = [];
         let resources = [];
+        if (
+          ['cancelled', 'completed', 'failed', 'canceled'].includes(
+            result.data.state,
+          )
+        ) {
+          clearInterval(this.state.refresh);
+          this.setState({ refresh: null });
+        }
         if (!!result.data.parent_task) {
           let parentTaskId = parsePulpIDFromURL(result.data.parent_task);
           allRelatedTasks.push(
