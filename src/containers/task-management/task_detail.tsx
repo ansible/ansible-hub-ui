@@ -402,11 +402,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
         let parentTask = null;
         let childTasks = [];
         let resources = [];
-        if (
-          ['cancelled', 'completed', 'failed', 'canceled'].includes(
-            result.data.state,
-          )
-        ) {
+        if (['canceled', 'completed', 'failed'].includes(result.data.state)) {
           clearInterval(this.state.refresh);
           this.setState({ refresh: null });
         }
