@@ -2,7 +2,7 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment-detail.scss';
 
-import { pickBy } from 'lodash';
+import { sum } from 'lodash';
 import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
 import { formatPath, Paths } from 'src/paths';
 import {
@@ -419,19 +419,24 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
       )
         .then((result) => {
-          let images = [];
-          result.data.data.forEach((object) => {
-            let image = pickBy(object, function (value, key) {
-              return ['digest', 'tags', 'pulp_created'].includes(key);
-            });
-            image['layers'] = object.layers.length;
-            let size = 0;
-            object.layers.forEach((layer) => (size += layer.size));
-            image['size'] = size;
-            images.push(image);
-          });
+          const images = result.data.data.map(
+            ({ digest, image_manifests, layers, pulp_created, tags }) => ({
+              digest,
+              image_manifests,
+              layers: layers.length,
+              pulp_created,
+              size: sum(layers.map((l) => l.size || 0)),
+              tags,
+            }),
+          );
+
+          // if there's a manifest list, skip all the manifests inside
+          const skipImages = images
+            .flatMap((i) => i.image_manifests)
+            .map((m) => m.digest);
+
           this.setState({
-            images: images,
+            images: images.filter((i) => !skipImages.includes(i.digest)),
             numberOfImages: result.data.meta.count,
             loading: false,
           });
