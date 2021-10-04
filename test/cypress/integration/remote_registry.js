@@ -85,6 +85,29 @@ describe('Remote Registry Tests', () => {
     cy.contains('table tr', 'some url2');
   });
 
+  it('admin can edit new remote registry', () => {
+    cy.menuGo('Execution Enviroments > Remote Registries');
+
+    cy.get(
+      'tr[aria-labelledby="New remote registry1"] button[aria-label="Actions"]',
+    ).click();
+    cy.contains('a', 'Edit').click();
+
+    cy.get('input[id = "url"]').clear();
+    cy.get('input[id = "url"]').type('some new url2');
+
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
+    ).as('registriesGet');
+
+    cy.contains('button', 'Save').click();
+    cy.wait('@registriesGet');
+
+    cy.visit('/ui/registries');
+    cy.contains('table tr', 'some new url2');
+  });
+
   it('admin can delete data', () => {
     deleteData();
   });
