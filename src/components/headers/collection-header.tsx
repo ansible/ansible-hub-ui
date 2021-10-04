@@ -547,7 +547,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           const dependencies = (
             <>
               <Trans>Dependent collections</Trans>
-              <List>
+              <List className='dependent-collections-alert-list'>
                 {dependent_collection_versions.map((d) => {
                   const { namespace, version, collection } =
                     this.separateStringDependencies(d);

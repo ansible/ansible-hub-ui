@@ -178,12 +178,17 @@ export class API extends HubAPI {
     );
   }
 
-  getUsedDependenciesByCollection(namespace, collection, params?) {
+  getUsedDependenciesByCollection(
+    namespace,
+    collection,
+    params = {},
+    cancelToken = undefined,
+  ) {
     return this.http.get(
       this.getUIPath(
         `collection-versions/?dependency=${namespace}.${collection}`,
       ),
-      { params: this.mapPageToOffset(params) },
+      { params: this.mapPageToOffset(params), cancelToken: cancelToken?.token },
     );
   }
 }

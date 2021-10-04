@@ -200,7 +200,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             isDisabled={!confirmDelete}
           >
             <>
-              <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+              <Text className='delete-namespace-modal-message'>
                 <Trans>
                   Deleting <b>{namespace.name}</b> and its data will be lost.
                 </Trans>
@@ -220,12 +220,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         />
         {warning ? (
           <Alert
-            style={{
-              position: 'fixed',
-              right: '5px',
-              top: '80px',
-              zIndex: 300,
-            }}
+            className='namespace-warning-alert'
             variant='warning'
             title={warning}
             actionClose={
@@ -462,10 +457,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private renderPageControls() {
     const { collections } = this.state;
     if (!this.state.showControls) {
-      return <div style={{ display: 'flex', alignItems: 'center' }}></div>;
+      return <div className='namespace-page-controls'></div>;
     }
     return (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div className='namespace-page-controls'>
         {' '}
         {collections.length !== 0 && (
           <Button onClick={() => this.setState({ showImportModal: true })}>
