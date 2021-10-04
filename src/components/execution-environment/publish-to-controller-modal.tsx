@@ -2,6 +2,10 @@ import * as React from 'react';
 import { t, Trans } from '@lingui/macro';
 import {
   Button,
+  DescriptionList,
+  DescriptionListDescription,
+  DescriptionListGroup,
+  DescriptionListTerm,
   Flex,
   FlexItem,
   List,
@@ -281,48 +285,52 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
 
         {isOpen && !loading && !noData && controllers && (
           <>
-            <Trans>
-              <b>Execution Environment</b>{' '}
-              <span style={{ paddingLeft: '16px' }}>{image}</span>
-            </Trans>
-            <Spacer />
-            <Flex>
-              <FlexItem>
-                <b>{t`Tag`}</b>
-              </FlexItem>
-              <FlexItem>
-                <APISearchTypeAhead
-                  loadResults={(name) => this.fetchTags(image, name)}
-                  onClear={() => this.setState({ tag: null, tagSelection: [] })}
-                  onSelect={(event, value) => {
-                    const digest = digestByTag[value.toString()];
-                    this.setState({
-                      tag: digest && value.toString(),
-                      tagSelection: [{ id: value, name: value }],
-                      digest,
-                    });
-                  }}
-                  placeholderText={t`Select a tag`}
-                  results={tagResults}
-                  selections={tagSelection}
-                  toggleIcon={<TagIcon />}
-                />
-              </FlexItem>
-              <FlexItem grow={{ default: 'grow' }}></FlexItem>
-            </Flex>
-            {digest && (
-              <>
-                <Spacer />
-                <Flex>
-                  <FlexItem>
-                    <b>{t`Digest`}</b>
-                  </FlexItem>
-                  <FlexItem>
-                    <ShaLabel grey long digest={digest} />
-                  </FlexItem>
-                </Flex>
-              </>
-            )}
+            <DescriptionList isHorizontal>
+              <DescriptionListGroup>
+                <DescriptionListTerm>
+                  {t`Execution Environment`}
+                </DescriptionListTerm>
+                <DescriptionListDescription>{image}</DescriptionListDescription>
+              </DescriptionListGroup>
+              <DescriptionListGroup>
+                <DescriptionListTerm>{t`Tag`}</DescriptionListTerm>
+                <DescriptionListDescription>
+                  <Flex>
+                    <FlexItem>
+                      <APISearchTypeAhead
+                        loadResults={(name) => this.fetchTags(image, name)}
+                        onClear={() =>
+                          this.setState({ tag: null, tagSelection: [] })
+                        }
+                        onSelect={(event, value) => {
+                          const digest = digestByTag[value.toString()];
+                          this.setState({
+                            tag: digest && value.toString(),
+                            tagSelection: [{ id: value, name: value }],
+                            digest,
+                          });
+                        }}
+                        placeholderText={t`Select a tag`}
+                        results={tagResults}
+                        selections={tagSelection}
+                        toggleIcon={<TagIcon />}
+                      />
+                    </FlexItem>
+                    <FlexItem></FlexItem>
+                  </Flex>
+                </DescriptionListDescription>
+              </DescriptionListGroup>
+              {digest && (
+                <>
+                  <DescriptionListGroup>
+                    <DescriptionListTerm>{t`Digest`}</DescriptionListTerm>
+                    <DescriptionListDescription>
+                      <ShaLabel grey long digest={digest} />
+                    </DescriptionListDescription>
+                  </DescriptionListGroup>
+                </>
+              )}
+            </DescriptionList>
             <Spacer />
             <Trans>
               Click on the Controller URL that you want to use the above
