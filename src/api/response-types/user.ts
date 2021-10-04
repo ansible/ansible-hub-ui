@@ -33,6 +33,9 @@ export class Permissions {
   change_group: boolean;
   change_user: boolean;
   add_user: boolean;
+  delete_namespace: boolean;
+  add_remote: boolean;
+  delete_remote: boolean;
 }
 
 export class UserType {
