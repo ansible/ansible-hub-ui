@@ -35,13 +35,13 @@ interface IProps {
     collection?: string;
     sort?: string;
     version?: string;
-    name?: string;
+    name__icontains?: string;
   };
   updateParams: (params) => void;
 }
 
 export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
-  private ignoredParams = ['page_size', 'page', 'sort', 'name'];
+  private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
 
   render() {
     const {
@@ -53,7 +53,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
       usedByDependenciesLoading,
     } = this.props;
 
-    if (!itemCount && !filterIsSet(params, ['name']))
+    if (!itemCount && !filterIsSet(params, ['name__icontains']))
       return (
         <EmptyStateNoData
           title={t`Not required for use by other collections`}
@@ -68,12 +68,16 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
             <ToolbarGroup>
               <ToolbarItem>
                 <SearchInput
-                  value={params.name || ''}
+                  value={params.name__icontains || ''}
                   onChange={(val) =>
-                    updateParams(ParamHelper.setParam(params, 'name', val))
+                    updateParams(
+                      ParamHelper.setParam(params, 'name__icontains', val),
+                    )
                   }
                   onClear={() =>
-                    updateParams(ParamHelper.setParam(params, 'name', ''))
+                    updateParams(
+                      ParamHelper.setParam(params, 'name__icontains', ''),
+                    )
                   }
                   aria-label='filter-collection-name'
                   placeholder={t`Filter by name`}
@@ -121,7 +125,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
                                 Paths.collectionByRepo,
                                 {
                                   collection: name,
-                                  namespace: namespace,
+                                  namespace,
                                   repo,
                                 },
                                 ParamHelper.getReduced(
@@ -130,7 +134,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
                                 ),
                               )}
                             >
-                              {name}
+                              {name} v{version}
                             </Link>
                           </td>
                         </tr>
