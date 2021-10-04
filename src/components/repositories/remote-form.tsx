@@ -74,9 +74,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
      * https://issues.redhat.com/browse/AAH-959
      ***************************************************************/
     if (this.props.remote.download_concurrency === null) {
-        this.props.remote.download_concurrency = 10;
+      this.props.remote.download_concurrency = 10;
     }
-
   }
 
   render() {
