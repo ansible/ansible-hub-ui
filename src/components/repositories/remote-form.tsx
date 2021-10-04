@@ -293,7 +293,11 @@ export class RemoteForm extends React.Component<IProps, IState> {
           label={t`Username`}
           labelIcon={
             <HelperText
-              content={t`The username to be used for authentication when syncing. This is not required when using a token.`}
+              content={
+                disabledFields.includes('token')
+                  ? t`The username to be used for authentication when syncing.`
+                  : t`The username to be used for authentication when syncing. This is not required when using a token.`
+              }
             />
           }
           isRequired={requiredFields.includes('username')}
@@ -324,7 +328,11 @@ export class RemoteForm extends React.Component<IProps, IState> {
           label={t`Password`}
           labelIcon={
             <HelperText
-              content={t`The password to be used for authentication when syncing. This is not required when using a token.`}
+              content={
+                disabledFields.includes('token')
+                  ? t`The password to be used for authentication when syncing.`
+                  : t`The password to be used for authentication when syncing. This is not required when using a token.`
+              }
             />
           }
           isRequired={requiredFields.includes('password')}
