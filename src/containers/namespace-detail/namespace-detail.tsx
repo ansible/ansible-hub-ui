@@ -461,6 +461,61 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   private renderPageControls() {
     const { collections } = this.state;
+    const dropdownItems = [
+      <DropdownItem
+        key='1'
+        component={
+          <Link
+            to={formatPath(Paths.editNamespace, {
+              namespace: this.state.namespace.name,
+            })}
+          >
+            {t`Edit namespace`}
+          </Link>
+        }
+      />,
+      this.context.user.model_permissions.delete_namespace && (
+        <React.Fragment key={'2'}>
+          {this.state.isNamespaceEmpty ? (
+            <DropdownItem
+              onClick={() => this.setState({ isOpenNamespaceModal: true })}
+            >
+              {t`Delete namespace`}
+            </DropdownItem>
+          ) : (
+            <Tooltip
+              isVisible={false}
+              content={
+                <Trans>
+                  Cannot delete namespace until <br />
+                  collections' dependencies have <br />
+                  been deleted
+                </Trans>
+              }
+              position='left'
+            >
+              <DropdownItem isDisabled>{t`Delete namespace`}</DropdownItem>
+            </Tooltip>
+          )}
+        </React.Fragment>
+      ),
+      <DropdownItem
+        key='3'
+        component={
+          <Link
+            to={formatPath(
+              Paths.myImports,
+              {},
+              {
+                namespace: this.state.namespace.name,
+              },
+            )}
+          >
+            {t`Imports`}
+          </Link>
+        }
+      />,
+    ].filter(Boolean);
     if (!this.state.showControls) {
       return <div style={{ display: 'flex', alignItems: 'center' }}></div>;
     }
@@ -472,67 +527,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             {t`Upload collection`}
           </Button>
         )}
-        <StatefulDropdown
-          items={[
-            <DropdownItem
-              key='1'
-              component={
-                <Link
-                  to={formatPath(Paths.editNamespace, {
-                    namespace: this.state.namespace.name,
-                  })}
-                >
-                  {t`Edit namespace`}
-                </Link>
-              }
-            />,
-            this.context.user.model_permissions.delete_namespace && (
-              <React.Fragment key={'2'}>
-                {this.state.isNamespaceEmpty ? (
-                  <DropdownItem
-                    onClick={() =>
-                      this.setState({ isOpenNamespaceModal: true })
-                    }
-                  >
-                    {t`Delete namespace`}
-                  </DropdownItem>
-                ) : (
-                  <Tooltip
-                    isVisible={false}
-                    content={
-                      <Trans>
-                        Cannot delete namespace until <br />
-                        collections' dependencies have <br />
-                        been deleted
-                      </Trans>
-                    }
-                    position='left'
-                  >
-                    <DropdownItem
-                      isDisabled
-                    >{t`Delete namespace`}</DropdownItem>
-                  </Tooltip>
-                )}
-              </React.Fragment>
-            ),
-            <DropdownItem
-              key='3'
-              component={
-                <Link
-                  to={formatPath(
-                    Paths.myImports,
-                    {},
-                    {
-                      namespace: this.state.namespace.name,
-                    },
-                  )}
-                >
-                  {t`Imports`}
-                </Link>
-              }
-            />,
-          ].filter(Boolean)}
-        />
+        {dropdownItems.length < 0 && <StatefulDropdown items={dropdownItems} />}
       </div>
     );
   }

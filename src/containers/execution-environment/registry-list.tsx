@@ -354,6 +354,52 @@ class ExecutionEnvironmentRegistryList extends React.Component<
   }
 
   private renderTableRow(item: any, index: number) {
+    const dropdownItems = [
+      this.context.user.model_permissions.change_remote && (
+        <DropdownItem
+          key='edit'
+          onClick={() =>
+            this.setState({
+              remoteFormErrors: {},
+              remoteFormNew: false,
+              remoteToEdit: { ...item },
+              remoteUnmodified: { ...item },
+              showRemoteFormModal: true,
+            })
+          }
+        >
+          <Trans>Edit</Trans>
+        </DropdownItem>
+      ),
+      this.context.user.model_permissions.delete_remote && (
+        <DropdownItem
+          key='delete'
+          onClick={() =>
+            this.setState({
+              showDeleteModal: true,
+              remoteToEdit: item,
+            })
+          }
+        >
+          <Trans>Delete</Trans>
+        </DropdownItem>
+      ),
+      <Tooltip
+        content={
+          item.is_indexable
+            ? t`Find execution environments in this registry`
+            : t`Indexing execution environments is only supported on registry.redhat.io`
+        }
+      >
+        <DropdownItem
+          key='index'
+          onClick={() => this.indexRegistry(item)}
+          isDisabled={!item.is_indexable}
+        >
+          <Trans>Index execution environments</Trans>
+        </DropdownItem>
+      </Tooltip>,
+    ].filter(Boolean);
     return (
       <tr aria-labelledby={item.name} key={index}>
         <td>{item.name}</td>
@@ -373,54 +419,9 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           <Button variant='secondary' onClick={() => this.syncRegistry(item)}>
             <Trans>Sync from registry</Trans>
           </Button>{' '}
-          <StatefulDropdown
-            items={[
-              this.context.user.model_permissions.change_remote && (
-                <DropdownItem
-                  key='edit'
-                  onClick={() =>
-                    this.setState({
-                      remoteFormErrors: {},
-                      remoteFormNew: false,
-                      remoteToEdit: { ...item },
-                      remoteUnmodified: { ...item },
-                      showRemoteFormModal: true,
-                    })
-                  }
-                >
-                  <Trans>Edit</Trans>
-                </DropdownItem>
-              ),
-              this.context.user.model_permissions.delete_remote && (
-                <DropdownItem
-                  key='delete'
-                  onClick={() =>
-                    this.setState({
-                      showDeleteModal: true,
-                      remoteToEdit: item,
-                    })
-                  }
-                >
-                  <Trans>Delete</Trans>
-                </DropdownItem>
-              ),
-              <Tooltip
-                content={
-                  item.is_indexable
-                    ? t`Find execution environments in this registry`
-                    : t`Indexing execution environments is only supported on registry.redhat.io`
-                }
-              >
-                <DropdownItem
-                  key='index'
-                  onClick={() => this.indexRegistry(item)}
-                  isDisabled={!item.is_indexable}
-                >
-                  <Trans>Index execution environments</Trans>
-                </DropdownItem>
-              </Tooltip>,
-            ].filter(Boolean)}
-          />
+          {dropdownItems.length > 0 && (
+            <StatefulDropdown items={dropdownItems} />
+          )}
         </td>
       </tr>
     );
