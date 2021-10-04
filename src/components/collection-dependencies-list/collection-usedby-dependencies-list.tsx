@@ -49,7 +49,6 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
       usedByDependencies,
       itemCount,
       updateParams,
-      repo,
       usedByDependenciesLoading,
     } = this.props;
 
@@ -117,7 +116,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
                 <table className='content-table pf-c-table pf-m-compact'>
                   <tbody>
                     {usedByDependencies.map(
-                      ({ name, namespace, version }, i) => (
+                      ({ name, namespace, version, repository_list }, i) => (
                         <tr key={i}>
                           <td>
                             <Link
@@ -126,7 +125,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
                                 {
                                   collection: name,
                                   namespace,
-                                  repo,
+                                  repo: repository_list[0],
                                 },
                                 ParamHelper.getReduced(
                                   { version },
