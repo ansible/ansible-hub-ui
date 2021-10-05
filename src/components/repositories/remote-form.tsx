@@ -77,7 +77,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
       this.props.remoteType !== 'registry' &&
       this.props.remote.download_concurrency === null
     ) {
-      this.props.remote.download_concurrency = 10;
+      this.updateRemote(10, 'download_concurrency');
     }
   }
 
