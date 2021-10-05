@@ -319,7 +319,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     );
   }
 
-  private renderTableRow(image: any, index: number, canEditTags: boolean) {
+  private renderTableRow(image, index: number, canEditTags: boolean) {
     const manifestLink = (digestOrTag) =>
       formatPath(Paths.executionEnvironmentManifest, {
         container: this.props.match.params['container'],
@@ -344,6 +344,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         : this.props.match.params['container'] + ':' + image.tags[0];
 
     const isRemote = !!this.props.containerRepository.pulp.repository.remote;
+    const { isManifestList } = image;
 
     const dropdownItems = [
       canEditTags && !isRemote && (
@@ -384,18 +385,28 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       <tr key={index}>
         <td>
           <LabelGroup className={'tags-column'}>
-            {image.tags.sort().map((tag) => (
-              <TagLink key={tag} tag={tag} />
-            ))}
+            {image.tags
+              .sort()
+              .map((tag) =>
+                isManifestList ? (
+                  <TagLabel key={tag} tag={tag} />
+                ) : (
+                  <TagLink key={tag} tag={tag} />
+                ),
+              )}
           </LabelGroup>
         </td>
         <td>
           <DateComponent date={image.pulp_created} />
         </td>
-        <td>{image.layers}</td>
-        <td>{getHumanSize(image.size)}</td>
+        <td>{isManifestList ? '---' : image.layers}</td>
+        <td>{isManifestList ? '---' : getHumanSize(image.size)}</td>
         <td>
-          <ShaLink digest={image.digest} />
+          {isManifestList ? (
+            <ShaLabel digest={image.digest} />
+          ) : (
+            <ShaLink digest={image.digest} />
+          )}
         </td>
         <td>
           <ClipboardCopy isReadOnly>
@@ -420,9 +431,17 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       )
         .then((result) => {
           const images = result.data.data.map(
-            ({ digest, image_manifests, layers, pulp_created, tags }) => ({
+            ({
               digest,
               image_manifests,
+              layers,
+              media_type,
+              pulp_created,
+              tags,
+            }) => ({
+              digest,
+              image_manifests,
+              isManifestList: !!media_type.match('manifest.list'),
               layers: layers.length,
               pulp_created,
               size: sum(layers.map((l) => l.size || 0)),
