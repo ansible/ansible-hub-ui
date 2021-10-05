@@ -36,6 +36,7 @@ export class Permissions {
   delete_namespace: boolean;
   add_remote: boolean;
   delete_remote: boolean;
+  delete_collection: boolean;
 }
 
 export class UserType {
