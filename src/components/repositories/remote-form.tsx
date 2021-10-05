@@ -73,7 +73,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
      * Shim in a default concurrency value to pass form validation
      * https://issues.redhat.com/browse/AAH-959
      ***************************************************************/
-    if (this.props.remoteType !== 'registry' && this.props.remote.download_concurrency === null) {
+    if (
+      this.props.remoteType !== 'registry' &&
+      this.props.remote.download_concurrency === null
+    ) {
       this.props.remote.download_concurrency = 10;
     }
   }
