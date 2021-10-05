@@ -1,6 +1,6 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, Link, RouteComponentProps } from 'react-router-dom';
 import {
   BaseHeader,
   Breadcrumbs,
@@ -30,6 +30,7 @@ interface IState {
   container: { name: string };
   digest: string;
   environment: string[];
+  error: boolean;
   labels: string[];
   layers: { text: string; size: string }[];
   loading: boolean;
@@ -48,6 +49,7 @@ class ExecutionEnvironmentManifest extends React.Component<
       container: { name: this.props.match.params['container'] },
       digest: this.props.match.params['digest'], // digest or tag until loading done
       environment: [],
+      error: false,
       labels: [],
       layers: [],
       loading: true,
@@ -76,6 +78,7 @@ class ExecutionEnvironmentManifest extends React.Component<
       container,
       digest,
       environment,
+      error,
       labels,
       layers,
       loading,
@@ -129,83 +132,100 @@ class ExecutionEnvironmentManifest extends React.Component<
         </BaseHeader>
 
         <Main>
-          <Flex>
-            <FlexItem className='layers-max-width'>
-              <section className='body'>
-                <Title headingLevel='h2' size='lg'>
-                  {t`Image layers`}
-                </Title>
-
-                <DataList
-                  aria-label={t`Image layers`}
-                  onSelectDataListItem={(id) =>
-                    this.setState({ selectedLayer: id })
-                  }
-                  selectedDataListItemId={selectedLayer}
+          {error ? (
+            <section className='body'>
+              <Trans>
+                Manifest lists are not currently supported on this screen,
+                please use the{' '}
+                <Link
+                  to={formatPath(Paths.executionEnvironmentDetailImages, {
+                    container: container.name,
+                  })}
                 >
-                  {layers.map(({ text, size }, index) => (
-                    <DataListItem key={index} id={`layer-${index}`}>
-                      <DataListItemRow>
-                        <DataListItemCells
-                          dataListCells={[
-                            <DataListCell
-                              key='primary content'
-                              className='single-line-ellipsis'
-                            >
-                              <code>{text}</code>
-                            </DataListCell>,
-                            size && (
-                              <DataListCell key='secondary content'>
-                                {size}
-                              </DataListCell>
-                            ),
-                          ]}
-                        />
-                      </DataListItemRow>
-                    </DataListItem>
-                  ))}
-                </DataList>
-              </section>
-            </FlexItem>
-
-            <Flex
-              direction={{ default: 'column' }}
-              className='layers-max-width'
-            >
-              <FlexItem>
+                  Images
+                </Link>{' '}
+                tab to see manifest list details.
+              </Trans>
+            </section>
+          ) : (
+            <Flex>
+              <FlexItem className='layers-max-width'>
                 <section className='body'>
                   <Title headingLevel='h2' size='lg'>
-                    {t`Command`}
+                    {t`Image layers`}
                   </Title>
 
-                  <code>{command}</code>
+                  <DataList
+                    aria-label={t`Image layers`}
+                    onSelectDataListItem={(id) =>
+                      this.setState({ selectedLayer: id })
+                    }
+                    selectedDataListItemId={selectedLayer}
+                  >
+                    {layers.map(({ text, size }, index) => (
+                      <DataListItem key={index} id={`layer-${index}`}>
+                        <DataListItemRow>
+                          <DataListItemCells
+                            dataListCells={[
+                              <DataListCell
+                                key='primary content'
+                                className='single-line-ellipsis'
+                              >
+                                <code>{text}</code>
+                              </DataListCell>,
+                              size && (
+                                <DataListCell key='secondary content'>
+                                  {size}
+                                </DataListCell>
+                              ),
+                            ]}
+                          />
+                        </DataListItemRow>
+                      </DataListItem>
+                    ))}
+                  </DataList>
                 </section>
               </FlexItem>
 
-              <FlexItem>
-                <section className='body'>
-                  <Title headingLevel='h2' size='lg'>
-                    {t`Environment`}
-                  </Title>
+              <Flex
+                direction={{ default: 'column' }}
+                className='layers-max-width'
+              >
+                <FlexItem>
+                  <section className='body'>
+                    <Title headingLevel='h2' size='lg'>
+                      {t`Command`}
+                    </Title>
 
-                  {environment.map((line, index) => (
-                    <React.Fragment key={index}>
-                      <code>{line}</code>
-                      <br />
-                    </React.Fragment>
-                  ))}
-                </section>
-              </FlexItem>
+                    <code>{command}</code>
+                  </section>
+                </FlexItem>
+
+                <FlexItem>
+                  <section className='body'>
+                    <Title headingLevel='h2' size='lg'>
+                      {t`Environment`}
+                    </Title>
+
+                    {environment.map((line, index) => (
+                      <React.Fragment key={index}>
+                        <code>{line}</code>
+                        <br />
+                      </React.Fragment>
+                    ))}
+                  </section>
+                </FlexItem>
+              </Flex>
             </Flex>
-          </Flex>
+          )}
         </Main>
       </>
     );
   }
 
   query({ container, digest: digestOrTag }) {
-    return ExecutionEnvironmentAPI.image(container.name, digestOrTag).then(
-      ({ data: { config_blob, digest, layers, tags } }) => {
+    return ExecutionEnvironmentAPI.image(container.name, digestOrTag)
+      .then(({ data: { config_blob, digest, layers, tags } }) => {
         const sizes = layers.map((l) => l.size);
         const size = getHumanSize(sum(sizes));
 
@@ -225,8 +245,13 @@ class ExecutionEnvironmentManifest extends React.Component<
           layers: history,
           size,
         };
-      },
-    );
+      })
+      .catch((err) => {
+        // FIXME: support manifest lists, and have API support it
+        return {
+          error: true,
+        };
+      });
   }
 }
 
