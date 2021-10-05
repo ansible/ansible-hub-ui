@@ -1,7 +1,7 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 
-import { RouteComponentProps, Redirect } from 'react-router-dom';
+import { Link, RouteComponentProps, Redirect } from 'react-router-dom';
 import {
   ContainerRepositoryType,
   ExecutionEnvironmentAPI,
@@ -21,7 +21,7 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
-import { waitForTask } from 'src/utilities';
+import { parsePulpIDFromURL, waitForTask } from 'src/utilities';
 
 interface IState {
   publishToController: { digest?: string; image: string; tag?: string };
@@ -100,9 +100,7 @@ export function withContainerRepo(WrappedComponent) {
         this.state.repo.pulp.repository.remote && (
           <DropdownItem
             key='sync'
-            onClick={() =>
-              ExecutionEnvironmentRemoteAPI.sync(this.state.repo.name)
-            }
+            onClick={() => this.sync(this.state.repo.name)}
           >
             {t`Sync from registry`}
           </DropdownItem>
@@ -237,6 +235,40 @@ export function withContainerRepo(WrappedComponent) {
 
     private get closeAlert() {
       return closeAlertMixin('alerts');
+    }
+
+    private addAlert(title, variant, description?) {
+      this.setState({
+        alerts: [
+          ...this.state.alerts,
+          {
+            description,
+            title,
+            variant,
+          },
+        ],
+      });
+    }
+
+    private sync(name) {
+      ExecutionEnvironmentRemoteAPI.sync(name)
+        .then((result) => {
+          const task_id = parsePulpIDFromURL(result.data.task);
+          this.addAlert(
+            t`Sync initiated for ${name}`,
+            'success',
+            <span>
+              <Trans>
+                View the task{' '}
+                <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
+                  here
+                </Link>
+                .
+              </Trans>
+            </span>,
+          );
+        })
+        .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
     }
   };
 }

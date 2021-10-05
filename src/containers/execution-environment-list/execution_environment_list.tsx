@@ -18,7 +18,12 @@ import {
   ExecutionEnvironmentRemoteAPI,
   ExecutionEnvironmentType,
 } from 'src/api';
-import { filterIsSet, waitForTask, ParamHelper } from 'src/utilities';
+import {
+  filterIsSet,
+  parsePulpIDFromURL,
+  waitForTask,
+  ParamHelper,
+} from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -339,10 +344,7 @@ class ExecutionEnvironmentList extends React.Component<
         {t`Edit`}
       </DropdownItem>,
       item.pulp.repository.remote && (
-        <DropdownItem
-          key='sync'
-          onClick={() => ExecutionEnvironmentRemoteAPI.sync(item.name)}
-        >
+        <DropdownItem key='sync' onClick={() => this.sync(item.name)}>
           {t`Sync from registry`}
         </DropdownItem>
       ),
@@ -508,6 +510,40 @@ class ExecutionEnvironmentList extends React.Component<
 
   private get closeAlert() {
     return closeAlertMixin('alerts');
+  }
+
+  private addAlert(title, variant, description?) {
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          description,
+          title,
+          variant,
+        },
+      ],
+    });
+  }
+
+  private sync(name) {
+    ExecutionEnvironmentRemoteAPI.sync(name)
+      .then((result) => {
+        const task_id = parsePulpIDFromURL(result.data.task);
+        this.addAlert(
+          t`Sync initiated for ${name}`,
+          'success',
+          <span>
+            <Trans>
+              View the task{' '}
+              <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
+                here
+              </Link>
+              .
+            </Trans>
+          </span>,
+        );
+      })
+      .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
   }
 }
 
