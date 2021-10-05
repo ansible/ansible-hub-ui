@@ -37,6 +37,7 @@ export class Permissions {
   add_remote: boolean;
   delete_remote: boolean;
   delete_collection: boolean;
+  delete_containerrepository: boolean;
 }
 
 export class UserType {
