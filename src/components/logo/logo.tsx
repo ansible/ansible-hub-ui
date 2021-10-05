@@ -11,11 +11,30 @@ interface IProps {
   alt: string;
   className?: string;
   unlockWidth?: boolean;
+  fallbackToDefault?: boolean;
 }
 
-export class Logo extends React.Component<IProps> {
+interface IState {
+  failed: boolean;
+}
+
+export class Logo extends React.Component<IProps, IState> {
+  constructor(props) {
+    super(props);
+    this.state = { failed: false };
+  }
+
   render() {
-    const { size, image, alt, className, unlockWidth, width } = this.props;
+    const {
+      alt,
+      className,
+      fallbackToDefault,
+      image,
+      size,
+      unlockWidth,
+      width,
+    } = this.props;
+    const { failed } = this.state;
 
     const style = {
       height: size,
@@ -36,8 +55,13 @@ export class Logo extends React.Component<IProps> {
       <div className={className} style={style}>
         <img
           style={{ objectFit: 'contain', maxHeight: size }}
-          src={image || DefaultLogo}
+          src={failed ? DefaultLogo : image || DefaultLogo}
           alt={alt}
+          onError={
+            fallbackToDefault
+              ? (e) => this.setState({ failed: true })
+              : () => null
+          }
         />
       </div>
     );
