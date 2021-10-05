@@ -68,6 +68,17 @@ export class RemoteForm extends React.Component<IProps, IState> {
       uploadedClientCertFilename: clientCertFilename,
       uploadedCaCertFilename: caCertFilename,
     };
+
+    /***************************************************************
+     * Shim in a default concurrency value to pass form validation
+     * https://issues.redhat.com/browse/AAH-959
+     ***************************************************************/
+    if (
+      this.props.remoteType !== 'registry' &&
+      this.props.remote.download_concurrency === null
+    ) {
+      this.updateRemote(10, 'download_concurrency');
+    }
   }
 
   render() {
