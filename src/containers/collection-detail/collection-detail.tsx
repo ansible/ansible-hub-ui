@@ -32,7 +32,7 @@ class CollectionDetail extends React.Component<
   }
 
   componentDidMount() {
-    this.loadCollection(this.context.selectedRepo);
+    this.loadCollection(this.context.selectedRepo, true);
   }
 
   componentDidUpdate(prevProps) {
