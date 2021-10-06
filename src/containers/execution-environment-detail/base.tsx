@@ -100,6 +100,9 @@ export function withContainerRepo(WrappedComponent) {
           <DropdownItem
             key='sync'
             onClick={() => this.sync(this.state.repo.name)}
+            isDisabled={['running', 'waiting'].includes(
+              this.state.repo.pulp.repository.remote?.last_sync_task?.state,
+            )}
           >
             {t`Sync from registry`}
           </DropdownItem>
@@ -215,6 +218,16 @@ export function withContainerRepo(WrappedComponent) {
             loading: false,
             repo: result.data,
           });
+
+          const last_sync_task =
+            result.data.pulp.repository.remote?.last_sync_task || {};
+          if (
+            last_sync_task.state &&
+            ['running', 'waiting'].includes(last_sync_task.state)
+          ) {
+            // keep refreshing while a remove repo is being synced
+            setTimeout(() => this.loadRepo(), 10000);
+          }
         })
         .catch((e) => this.setState({ redirect: 'notFound' }));
     }
@@ -266,6 +279,7 @@ export function withContainerRepo(WrappedComponent) {
               </Trans>
             </span>,
           );
+          this.loadRepo();
         })
         .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
     }
