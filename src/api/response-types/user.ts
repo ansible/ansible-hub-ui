@@ -42,6 +42,7 @@ export class UserType {
   last_name?: string;
   email?: string;
   groups: { id: number; name: string }[];
+  auth_provider?: [];
   date_joined?: string;
   password?: string;
   model_permissions?: Permissions;

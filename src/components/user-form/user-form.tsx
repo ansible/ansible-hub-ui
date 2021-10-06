@@ -120,6 +120,19 @@ export class UserForm extends React.Component<IProps, IState> {
       </FormGroup>
     );
 
+    const readonlyAuth = () => (
+      <FormGroup
+        fieldId='auth_provider'
+        key='readonlyAuth'
+        label={t`Authentication provider`}
+        aria-labelledby='readonly-auth'
+      >
+        {user.auth_provider.map((provider) => (
+          <Label key={provider}>{provider}</Label>
+        ))}
+      </FormGroup>
+    );
+
     const readonlyGroups = () => (
       <FormGroup
         fieldId='groups'
@@ -203,6 +216,7 @@ export class UserForm extends React.Component<IProps, IState> {
     const formSuffix = [
       !isReadonly && passwordConfirmGroup(),
       isMe || isReadonly ? readonlyGroups() : editGroups(),
+      isMe && isReadonly && readonlyAuth(),
       superuserLabel,
       !isReadonly && formButtons(),
     ];
