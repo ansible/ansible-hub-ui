@@ -482,7 +482,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
                 id: 'digest',
               },
               {
-                title: t`OS/Arch`,
+                title: t`OS / Arch`,
                 type: 'none',
                 id: 'os_arch',
               },
