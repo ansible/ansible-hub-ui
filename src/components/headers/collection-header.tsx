@@ -548,28 +548,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             <>
               <Trans>Dependent collections</Trans>
               <List className='dependent-collections-alert-list'>
-                {dependent_collection_versions.map((d) => {
-                  const { namespace, version, collection } =
-                    this.separateStringDependencies(d);
-                  return (
-                    <ListItem key={d}>
-                      <Link
-                        to={formatPath(
-                          Paths.collectionByRepo,
-                          {
-                            repo: this.context.selectedRepo,
-                            namespace,
-                            collection,
-                          },
-                          { version: version },
-                        )}
-                        onClick={() => this.setState({ alerts: [] })}
-                      >
-                        {d}
-                      </Link>
-                    </ListItem>
-                  );
-                })}
+                {dependent_collection_versions.map((d) => (
+                  <ListItem key={d}>{d}</ListItem>
+                ))}
               </List>
             </>
           );
@@ -679,12 +660,5 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
   get closeAlert() {
     return closeAlertMixin('alerts');
-  }
-
-  private separateStringDependencies(dependency) {
-    const [nsCollection, version] = dependency.split(' ');
-    const [namespace, collection] = nsCollection.split('.');
-
-    return { namespace, collection, version };
   }
 }

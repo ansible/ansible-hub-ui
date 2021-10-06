@@ -122,6 +122,7 @@ export class CollectionDetailType {
 
 export class CollectionUsedByDependencies extends CollectionDetailType {
   version: string;
+  repository_list: string[];
 }
 
 export class DependencyType {
