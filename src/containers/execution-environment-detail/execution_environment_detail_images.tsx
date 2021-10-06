@@ -16,14 +16,16 @@ import {
 import { Link, withRouter } from 'react-router-dom';
 
 import {
+  Button,
+  Checkbox,
+  DropdownItem,
+  LabelGroup,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  DropdownItem,
-  LabelGroup,
-  Checkbox,
 } from '@patternfly/react-core';
+import { AngleDownIcon, AngleRightIcon } from '@patternfly/react-icons';
 
 import {
   AppliedFilters,
@@ -65,6 +67,7 @@ interface IState {
   selectedImage: ContainerManifestType;
   deleteModalVisible: boolean;
   confirmDelete: boolean;
+  expandedImage?: ContainerManifestType;
 }
 
 class ExecutionEnvironmentDetailImages extends React.Component<
@@ -100,6 +103,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       deleteModalVisible: false,
       alerts: [],
       confirmDelete: false,
+      expandedImage: null,
     };
   }
 
@@ -138,6 +142,12 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     }
     const sortTableOptions = {
       headers: [
+        {
+          title: '',
+          type: 'none',
+          id: 'expand',
+          className: 'pf-c-table__toggle',
+        },
         {
           title: t`Tag`,
           type: 'none',
@@ -345,6 +355,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
     const isRemote = !!this.props.containerRepository.pulp.repository.remote;
     const { isManifestList } = image;
+    const { expandedImage } = this.state;
 
     const dropdownItems = [
       canEditTags && !isRemote && (
@@ -382,44 +393,70 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     ].filter((truthy) => truthy);
 
     return (
-      <tr key={index}>
-        <td>
-          <LabelGroup className={'tags-column'}>
-            {image.tags
-              .sort()
-              .map((tag) =>
-                isManifestList ? (
-                  <TagLabel key={tag} tag={tag} />
+      <>
+        <tr key={index}>
+          <td className='pf-c-table__toggle'>
+            {isManifestList ? (
+              <Button
+                variant='plain'
+                onClick={() =>
+                  this.setState({
+                    expandedImage: expandedImage === image ? null : image,
+                  })
+                }
+              >
+                {expandedImage === image ? (
+                  <AngleDownIcon />
                 ) : (
-                  <TagLink key={tag} tag={tag} />
-                ),
-              )}
-          </LabelGroup>
-        </td>
-        <td>
-          <DateComponent date={image.pulp_created} />
-        </td>
-        <td>{isManifestList ? '---' : image.layers}</td>
-        <td>{isManifestList ? '---' : getHumanSize(image.size)}</td>
-        <td>
-          {isManifestList ? (
-            <ShaLabel digest={image.digest} />
-          ) : (
-            <ShaLink digest={image.digest} />
-          )}
-        </td>
-        <td>
-          <ClipboardCopy isReadOnly>
-            {'podman pull ' + url + '/' + instruction}
-          </ClipboardCopy>
-        </td>
+                  <AngleRightIcon />
+                )}
+              </Button>
+            ) : null}
+          </td>
+          <td>
+            <LabelGroup className={'tags-column'}>
+              {image.tags
+                .sort()
+                .map((tag) =>
+                  isManifestList ? (
+                    <TagLabel key={tag} tag={tag} />
+                  ) : (
+                    <TagLink key={tag} tag={tag} />
+                  ),
+                )}
+            </LabelGroup>
+          </td>
+          <td>
+            <DateComponent date={image.pulp_created} />
+          </td>
+          <td>{isManifestList ? '---' : image.layers}</td>
+          <td>{isManifestList ? '---' : getHumanSize(image.size)}</td>
+          <td>
+            {isManifestList ? (
+              <ShaLabel digest={image.digest} />
+            ) : (
+              <ShaLink digest={image.digest} />
+            )}
+          </td>
+          <td>
+            <ClipboardCopy isReadOnly>
+              {'podman pull ' + url + '/' + instruction}
+            </ClipboardCopy>
+          </td>
 
-        <td>
-          {dropdownItems.length && (
-            <StatefulDropdown items={dropdownItems}></StatefulDropdown>
-          )}
-        </td>
-      </tr>
+          <td>
+            {dropdownItems.length && (
+              <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+            )}
+          </td>
+        </tr>
+
+        {expandedImage === image && (
+          <tr>
+            <td colSpan={7}>TODO</td>
+          </tr>
+        )}
+      </>
     );
   }
 
