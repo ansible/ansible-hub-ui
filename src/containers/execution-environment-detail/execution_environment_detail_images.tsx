@@ -529,12 +529,12 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
   queryImages(name) {
     this.setState({ loading: true }, () =>
-      ExecutionEnvironmentAPI.images(
-        name,
-        ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
-      )
-        .then((result) => {
-          const images = result.data.data.map(
+      ExecutionEnvironmentAPI.images(name, {
+        ...ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
+        exclude_child_manifests: true,
+      })
+        .then(({ data: { data, meta } }) => {
+          const images = data.map(
             ({
               digest,
               image_manifests,
@@ -553,14 +553,9 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             }),
           );
 
-          // if there's a manifest list, skip all the manifests inside
-          const skipImages = images
-            .flatMap((i) => i.image_manifests)
-            .map((m) => m.digest);
-
           this.setState({
-            images: images.filter((i) => !skipImages.includes(i.digest)),
-            numberOfImages: result.data.meta.count,
+            images,
+            numberOfImages: meta.count,
             loading: false,
           });
         })
