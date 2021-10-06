@@ -309,7 +309,12 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             />
             <tbody>
               {images.map((image, i) =>
-                this.renderTableRow(image, i, canEditTags),
+                this.renderTableRow(
+                  image,
+                  i,
+                  canEditTags,
+                  sortTableOptions.headers.length,
+                ),
               )}
             </tbody>
           </table>
@@ -329,7 +334,12 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     );
   }
 
-  private renderTableRow(image, index: number, canEditTags: boolean) {
+  private renderTableRow(
+    image,
+    index: number,
+    canEditTags: boolean,
+    cols: number,
+  ) {
     const manifestLink = (digestOrTag) =>
       formatPath(Paths.executionEnvironmentManifest, {
         container: this.props.match.params['container'],
@@ -453,10 +463,67 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
         {expandedImage === image && (
           <tr>
-            <td colSpan={7}>TODO</td>
+            <td colSpan={cols}>{this.renderManifestList(image, ShaLink)}</td>
           </tr>
         )}
       </>
+    );
+  }
+
+  renderManifestList({ image_manifests }, ShaLink) {
+    return (
+      <table className='content-table pf-c-table'>
+        <SortTable
+          options={{
+            headers: [
+              {
+                title: t`Digest`,
+                type: 'none',
+                id: 'digest',
+              },
+              {
+                title: t`OS/Arch`,
+                type: 'none',
+                id: 'os_arch',
+              },
+            ],
+          }}
+          params={{}}
+          updateParams={(p) => null}
+        />
+        <tbody>
+          {image_manifests.map(
+            ({
+              digest,
+              os,
+              os_version,
+              os_features,
+              architecture,
+              variant,
+              features,
+            }) => (
+              <tr>
+                <td>
+                  <ShaLink digest={digest} />
+                </td>
+                <td>
+                  {[
+                    os,
+                    os_version,
+                    os_features,
+                    '/',
+                    architecture,
+                    variant,
+                    features,
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                </td>
+              </tr>
+            ),
+          )}
+        </tbody>
+      </table>
     );
   }
 
