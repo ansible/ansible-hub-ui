@@ -413,19 +413,18 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private updateInitialData = (
-    user: UserType,
-    flags: FeatureFlagsType,
-    settings: SettingsType,
+    data: {
+      user?: UserType;
+      featureFlags?: FeatureFlagsType;
+      settings?: SettingsType;
+    },
     callback?: () => void,
   ) =>
-    this.setState(
-      { user: user, featureFlags: flags, settings: settings },
-      () => {
-        if (callback) {
-          callback();
-        }
-      },
-    );
+    this.setState(data as any, () => {
+      if (callback) {
+        callback();
+      }
+    });
 
   private setRepoToURL() {
     const match = this.isRepoURL(this.props.location.pathname);

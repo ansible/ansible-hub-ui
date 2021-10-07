@@ -48,9 +48,11 @@ import { Paths, formatPath } from 'src/paths';
 
 interface IRoutesProps {
   updateInitialData: (
-    user: UserType,
-    flags: FeatureFlagsType,
-    settings: SettingsType,
+    data: {
+      user?: UserType;
+      featureFlags?: FeatureFlagsType;
+      settings?: SettingsType;
+    },
     callback?: () => void,
   ) => void;
 }
@@ -59,9 +61,11 @@ interface IAuthHandlerProps extends RouteComponentProps {
   Component: any;
   noAuth: boolean;
   updateInitialData: (
-    user: UserType,
-    flags: FeatureFlagsType,
-    settings: SettingsType,
+    data: {
+      user?: UserType;
+      featureFlags?: FeatureFlagsType;
+      settings?: SettingsType;
+    },
     callback?: () => void,
   ) => void;
   isDisabled: boolean;
@@ -86,21 +90,28 @@ class AuthHandler extends React.Component<
     super(props);
     this.state = { isLoading: !context.user };
   }
+
   componentDidMount() {
     // This component is mounted on every route change, so it's a good place
     // to check for an active user.
     const { user, settings } = this.context;
     if (!user || !settings) {
       let promises = [];
-      promises.push(FeatureFlagsAPI.get());
+      promises.push(
+        FeatureFlagsAPI.get().then(({ data }) => {
+          // we need this even if ActiveUserAPI fails, otherwise isExternalAuth will always be false, breaking keycloak redirect
+          this.props.updateInitialData({ featureFlags: data });
+        }),
+      );
       promises.push(ActiveUserAPI.getUser());
       promises.push(SettingsAPI.get());
       Promise.all(promises)
         .then((results) => {
           this.props.updateInitialData(
-            results[1],
-            results[0].data,
-            results[2].data,
+            {
+              user: results[1],
+              settings: results[2].data,
+            },
             () => this.setState({ isLoading: false }),
           );
         })
