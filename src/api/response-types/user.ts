@@ -34,8 +34,9 @@ export class Permissions {
   change_user: boolean;
   add_user: boolean;
   delete_namespace: boolean;
-  add_remote: boolean;
-  delete_remote: boolean;
+  add_containerregistry: boolean;
+  change_containerregistry: boolean;
+  delete_containerregistry: boolean;
   delete_collection: boolean;
   delete_containerrepository: boolean;
 }

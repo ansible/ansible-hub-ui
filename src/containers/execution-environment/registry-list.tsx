@@ -120,7 +120,8 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       return <EmptyStateUnauthorized />;
     }
 
-    const addButton = this.context.user.model_permissions.add_remote ? (
+    const addButton = this.context.user.model_permissions
+      .add_containerregistry ? (
       <Button
         onClick={() =>
           this.setState({
@@ -355,7 +356,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 
   private renderTableRow(item: any, index: number) {
     const dropdownItems = [
-      this.context.user.model_permissions.change_remote && (
+      this.context.user.model_permissions.change_containerregistry && (
         <DropdownItem
           key='edit'
           onClick={() =>
@@ -371,7 +372,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           <Trans>Edit</Trans>
         </DropdownItem>
       ),
-      this.context.user.model_permissions.delete_remote && (
+      this.context.user.model_permissions.delete_containerregistry && (
         <DropdownItem
           key='delete'
           onClick={() =>
