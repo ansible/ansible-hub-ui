@@ -33,7 +33,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
             links={[
               {
                 url: Paths.executionEnvironments,
-                name: t`Container Registry`,
+                name: t`Execution Environments`,
               },
               { name: this.props.container.name },
             ]}
