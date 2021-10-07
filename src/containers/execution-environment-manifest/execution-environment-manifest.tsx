@@ -100,7 +100,7 @@ class ExecutionEnvironmentManifest extends React.Component<
             <Breadcrumbs
               links={[
                 {
-                  name: t`Container Registry`,
+                  name: t`Execution Environments`,
                   url: Paths.executionEnvironments,
                 },
                 {
