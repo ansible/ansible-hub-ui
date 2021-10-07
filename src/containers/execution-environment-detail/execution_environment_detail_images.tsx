@@ -2,7 +2,7 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment-detail.scss';
 
-import { pickBy } from 'lodash';
+import { sum } from 'lodash';
 import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
 import { formatPath, Paths } from 'src/paths';
 import {
@@ -16,14 +16,16 @@ import {
 import { Link, withRouter } from 'react-router-dom';
 
 import {
+  Button,
+  Checkbox,
+  DropdownItem,
+  LabelGroup,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  DropdownItem,
-  LabelGroup,
-  Checkbox,
 } from '@patternfly/react-core';
+import { AngleDownIcon, AngleRightIcon } from '@patternfly/react-icons';
 
 import {
   AppliedFilters,
@@ -65,6 +67,7 @@ interface IState {
   selectedImage: ContainerManifestType;
   deleteModalVisible: boolean;
   confirmDelete: boolean;
+  expandedImage?: ContainerManifestType;
 }
 
 class ExecutionEnvironmentDetailImages extends React.Component<
@@ -100,6 +103,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       deleteModalVisible: false,
       alerts: [],
       confirmDelete: false,
+      expandedImage: null,
     };
   }
 
@@ -138,6 +142,12 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     }
     const sortTableOptions = {
       headers: [
+        {
+          title: '',
+          type: 'none',
+          id: 'expand',
+          className: 'pf-c-table__toggle',
+        },
         {
           title: t`Tag`,
           type: 'none',
@@ -299,7 +309,12 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             />
             <tbody>
               {images.map((image, i) =>
-                this.renderTableRow(image, i, canEditTags),
+                this.renderTableRow(
+                  image,
+                  i,
+                  canEditTags,
+                  sortTableOptions.headers.length,
+                ),
               )}
             </tbody>
           </table>
@@ -319,7 +334,12 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     );
   }
 
-  private renderTableRow(image: any, index: number, canEditTags: boolean) {
+  private renderTableRow(
+    image,
+    index: number,
+    canEditTags: boolean,
+    cols: number,
+  ) {
     const manifestLink = (digestOrTag) =>
       formatPath(Paths.executionEnvironmentManifest, {
         container: this.props.match.params['container'],
@@ -344,6 +364,8 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         : this.props.match.params['container'] + ':' + image.tags[0];
 
     const isRemote = !!this.props.containerRepository.pulp.repository.remote;
+    const { isManifestList } = image;
+    const { expandedImage } = this.state;
 
     const dropdownItems = [
       canEditTags && !isRemote && (
@@ -381,58 +403,159 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     ].filter((truthy) => truthy);
 
     return (
-      <tr key={index}>
-        <td>
-          <LabelGroup className={'tags-column'}>
-            {image.tags.sort().map((tag) => (
-              <TagLink key={tag} tag={tag} />
-            ))}
-          </LabelGroup>
-        </td>
-        <td>
-          <DateComponent date={image.pulp_created} />
-        </td>
-        <td>{image.layers}</td>
-        <td>{getHumanSize(image.size)}</td>
-        <td>
-          <ShaLink digest={image.digest} />
-        </td>
-        <td>
-          <ClipboardCopy isReadOnly>
-            {'podman pull ' + url + '/' + instruction}
-          </ClipboardCopy>
-        </td>
+      <>
+        <tr key={index}>
+          <td className='pf-c-table__toggle'>
+            {isManifestList ? (
+              <Button
+                variant='plain'
+                onClick={() =>
+                  this.setState({
+                    expandedImage: expandedImage === image ? null : image,
+                  })
+                }
+              >
+                {expandedImage === image ? (
+                  <AngleDownIcon />
+                ) : (
+                  <AngleRightIcon />
+                )}
+              </Button>
+            ) : null}
+          </td>
+          <td>
+            <LabelGroup className={'tags-column'}>
+              {image.tags
+                .sort()
+                .map((tag) =>
+                  isManifestList ? (
+                    <TagLabel key={tag} tag={tag} />
+                  ) : (
+                    <TagLink key={tag} tag={tag} />
+                  ),
+                )}
+            </LabelGroup>
+          </td>
+          <td>
+            <DateComponent date={image.pulp_created} />
+          </td>
+          <td>{isManifestList ? '---' : image.layers}</td>
+          <td>{isManifestList ? '---' : getHumanSize(image.size)}</td>
+          <td>
+            {isManifestList ? (
+              <ShaLabel digest={image.digest} />
+            ) : (
+              <ShaLink digest={image.digest} />
+            )}
+          </td>
+          <td>
+            <ClipboardCopy isReadOnly>
+              {'podman pull ' + url + '/' + instruction}
+            </ClipboardCopy>
+          </td>
 
-        <td>
-          {dropdownItems.length && (
-            <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+          <td>
+            {dropdownItems.length && (
+              <StatefulDropdown items={dropdownItems}></StatefulDropdown>
+            )}
+          </td>
+        </tr>
+
+        {expandedImage === image && (
+          <tr>
+            <td colSpan={cols}>{this.renderManifestList(image, ShaLink)}</td>
+          </tr>
+        )}
+      </>
+    );
+  }
+
+  renderManifestList({ image_manifests }, ShaLink) {
+    return (
+      <table className='content-table pf-c-table'>
+        <SortTable
+          options={{
+            headers: [
+              {
+                title: t`Digest`,
+                type: 'none',
+                id: 'digest',
+              },
+              {
+                title: t`OS / Arch`,
+                type: 'none',
+                id: 'os_arch',
+              },
+            ],
+          }}
+          params={{}}
+          updateParams={(p) => null}
+        />
+        <tbody>
+          {image_manifests.map(
+            ({
+              digest,
+              os,
+              os_version,
+              os_features,
+              architecture,
+              variant,
+              features,
+            }) => (
+              <tr>
+                <td>
+                  <ShaLink digest={digest} />
+                </td>
+                <td>
+                  {[
+                    os,
+                    os_version,
+                    os_features,
+                    '/',
+                    architecture,
+                    variant,
+                    features,
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                </td>
+              </tr>
+            ),
           )}
-        </td>
-      </tr>
+        </tbody>
+      </table>
     );
   }
 
   queryImages(name) {
     this.setState({ loading: true }, () =>
-      ExecutionEnvironmentAPI.images(
-        name,
-        ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
-      )
-        .then((result) => {
-          let images = [];
-          result.data.data.forEach((object) => {
-            let image = pickBy(object, function (value, key) {
-              return ['digest', 'tags', 'pulp_created'].includes(key);
-            });
-            image['layers'] = object.layers.length;
-            let size = 0;
-            object.layers.forEach((layer) => (size += layer.size));
-            image['size'] = size;
-            images.push(image);
-          });
+      ExecutionEnvironmentAPI.images(name, {
+        ...ParamHelper.getReduced(this.state.params, this.nonQueryStringParams),
+        exclude_child_manifests: true,
+      })
+        .then(({ data: { data, meta } }) => {
+          const images = data.map(
+            ({
+              digest,
+              image_manifests,
+              layers,
+              media_type,
+              pulp_created,
+              tags,
+            }) => ({
+              digest,
+              image_manifests,
+              isManifestList: !!media_type.match('manifest.list'),
+              layers: layers.length,
+              pulp_created,
+              size: sum(layers.map((l) => l.size || 0)),
+              tags,
+            }),
+          );
+
           this.setState({
-            images: images,
-            numberOfImages: result.data.meta.count,
+            images,
+            numberOfImages: meta.count,
             loading: false,
           });
         })
