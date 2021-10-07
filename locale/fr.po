@@ -34,7 +34,7 @@ msgstr "<0>{nom} sera définitivement supprimé."
 
 #: src/containers/group-management/group-detail.tsx:548
 msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
-msgstr "<0>{nom d'utilisateur} sera retiré de {nom du groupe}."
+msgstr "<0>{username} sera retiré de {groupname}."
 
 #: src/components/repositories/remote-form.tsx:447
 #: src/components/repositories/remote-form.tsx:496
@@ -1637,7 +1637,7 @@ msgstr "La collection que vous avez sélectionnée ne semble pas correspondre à
 
 #: src/containers/collection-detail/collection-docs.tsx:265
 msgid "The file is not available for this version of {collectionName}"
-msgstr "Le fichier n'est pas disponible pour cette version de {nom de la collection}"
+msgstr "Le fichier n'est pas disponible pour cette version de {collectionName}"
 
 #: src/components/repositories/remote-form.tsx:306
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
@@ -1896,8 +1896,8 @@ msgstr "Vous avez des changements qui n’ont pas été sauvegardés"
 
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
-msgstr "{n, pluriel, un {# octet} autre {# octet}}"
+msgstr "{n, plural, one {# octet} other {# octet}}"
 
 #: src/containers/task-management/task-list-view.tsx:345
 msgid "{name} will be cancelled."
-msgstr "{nom} sera annulé."
+msgstr "{name} sera annulé."
