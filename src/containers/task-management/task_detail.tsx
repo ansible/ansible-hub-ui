@@ -153,9 +153,17 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                     <DescriptionListGroup>
                       <DescriptionListTerm>{t`Task name`}</DescriptionListTerm>
                       <DescriptionListDescription>
-                        <Tooltip content={task.name}>{taskName}</Tooltip>
+                        {task.name}
                       </DescriptionListDescription>
                     </DescriptionListGroup>
+                    {task.name !== taskName && (
+                      <DescriptionListGroup>
+                        <DescriptionListTerm>{t`Descriptive name`}</DescriptionListTerm>
+                        <DescriptionListDescription>
+                          {taskName}
+                        </DescriptionListDescription>
+                      </DescriptionListGroup>
+                    )}
                     <DescriptionListGroup>
                       <DescriptionListTerm>{t`Finished at`}</DescriptionListTerm>
                       <DescriptionListDescription>
