@@ -35,6 +35,7 @@ export { LinkTabs } from './patternfly-wrappers/link-tabs';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';
 export { LoadingPageWithHeader } from './loading/loading-with-header';
 export { LocalRepositoryTable } from './repositories/local-repository-table';
+export { LoginLink } from './shared/login-link';
 export { Logo } from './logo/logo';
 export { Main } from './patternfly-wrappers/main';
 export { MarkdownEditor } from './markdown-editor/markdown-editor';

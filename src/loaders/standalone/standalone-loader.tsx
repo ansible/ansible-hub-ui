@@ -37,7 +37,12 @@ import {
   FeatureFlagsType,
   SettingsType,
 } from 'src/api';
-import { AlertType, SmallLogo, StatefulDropdown } from 'src/components';
+import {
+  AlertType,
+  LoginLink,
+  SmallLogo,
+  StatefulDropdown,
+} from 'src/components';
 import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
 import Logo from 'src/../static/images/logo_large.svg';
@@ -191,15 +196,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         headerTools={
           <PageHeaderTools>
             {!user || user.is_anonymous ? (
-              <Link
-                to={formatPath(
-                  Paths.login,
-                  {},
-                  { next: this.props.location.pathname },
-                )}
-              >
-                {t`Login`}
-              </Link>
+              <LoginLink next={this.props.location.pathname} />
             ) : (
               <div>
                 <StatefulDropdown
