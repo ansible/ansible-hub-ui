@@ -24,7 +24,7 @@ describe('Task detail', () => {
   it('contains correct headers and field names.', () => {
     cy.login(adminUsername, adminPassword);
     cy.visit('/ui/tasks');
-    cy.contains('Pulp Ansible: Collections sync').click();
+    cy.contains('pulp_ansible.app.tasks.collections.sync').click();
 
     cy.contains('h1', 'Pulp Ansible: Collections sync');
     cy.contains('.card-area h2', 'Task detail');
