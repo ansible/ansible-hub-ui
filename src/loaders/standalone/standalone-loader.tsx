@@ -219,7 +219,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       />
     );
 
-    const menu = this.menu();
+    const menu = user && settings ? this.menu() : []; // no longer all set at the same time
     this.activateMenu(menu);
 
     const ItemOrSection = ({ item }) =>
