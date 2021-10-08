@@ -33,6 +33,12 @@ export class Permissions {
   change_group: boolean;
   change_user: boolean;
   add_user: boolean;
+  delete_namespace: boolean;
+  add_containerregistry: boolean;
+  change_containerregistry: boolean;
+  delete_containerregistry: boolean;
+  delete_collection: boolean;
+  delete_containerrepository: boolean;
 }
 
 export class UserType {
