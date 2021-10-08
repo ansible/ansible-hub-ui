@@ -265,8 +265,8 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       <tr aria-labelledby={name} key={index}>
         <td>
           <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
-            <Tooltip content={name}>
-              {Constants.TASK_NAMES[name] || name}
+            <Tooltip content={Constants.TASK_NAMES[name] || name}>
+              {name}
             </Tooltip>
           </Link>
         </td>
