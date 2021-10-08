@@ -155,6 +155,44 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     if (redirect) return <Redirect push to={redirect} />;
 
+    const dropdownItems = [
+      noDependencies
+        ? this.context.user.model_permissions.delete_collection && (
+            <DropdownItem
+              key={1}
+              onClick={() => this.openDeleteModalWithConfirm()}
+            >
+              {t`Delete entire collection`}
+            </DropdownItem>
+          )
+        : this.context.user.model_permissions.delete_collection && (
+            <Tooltip
+              position='left'
+              content={
+                <Trans>
+                  Cannot delete until collections <br />
+                  that depend on this collection <br />
+                  have been deleted.
+                </Trans>
+              }
+            >
+              <DropdownItem isDisabled>
+                {t`Delete entire collection`}
+              </DropdownItem>
+            </Tooltip>
+          ),
+      this.context.user.model_permissions.delete_collection && (
+        <DropdownItem
+          key='2'
+          onClick={() =>
+            this.openDeleteModalWithConfirm(collection.latest_version.version)
+          }
+        >
+          {t`Delete version ${collection.latest_version.version}`}
+        </DropdownItem>
+      ),
+    ].filter(Boolean);
+
     return (
       <React.Fragment>
         <Modal
@@ -336,45 +374,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             </div>
           }
           pageControls={
-            <StatefulDropdown
-              items={[
-                <React.Fragment key='1'>
-                  {noDependencies ? (
-                    <DropdownItem
-                      key={1}
-                      onClick={() => this.openDeleteModalWithConfirm()}
-                    >
-                      {t`Delete entire collection`}
-                    </DropdownItem>
-                  ) : (
-                    <Tooltip
-                      position='left'
-                      content={
-                        <Trans>
-                          Cannot delete until collections <br />
-                          that depend on this collection <br />
-                          have been deleted.
-                        </Trans>
-                      }
-                    >
-                      <DropdownItem isDisabled>
-                        {t`Delete entire collection`}
-                      </DropdownItem>
-                    </Tooltip>
-                  )}
-                </React.Fragment>,
-                <DropdownItem
-                  key='2'
-                  onClick={() =>
-                    this.openDeleteModalWithConfirm(
-                      collection.latest_version.version,
-                    )
-                  }
-                >
-                  {t`Delete version ${collection.latest_version.version}`}
-                </DropdownItem>,
-              ]}
-            />
+            dropdownItems.length > 0 ? (
+              <StatefulDropdown items={dropdownItems} />
+            ) : null
           }
         >
           {collection.deprecated && (
