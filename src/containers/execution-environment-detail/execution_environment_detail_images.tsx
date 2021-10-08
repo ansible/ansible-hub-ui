@@ -68,6 +68,7 @@ interface IState {
   deleteModalVisible: boolean;
   confirmDelete: boolean;
   expandedImage?: ContainerManifestType;
+  isDeletionPending: boolean;
 }
 
 class ExecutionEnvironmentDetailImages extends React.Component<
@@ -104,6 +105,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       alerts: [],
       confirmDelete: false,
       expandedImage: null,
+      isDeletionPending: false,
     };
   }
 
@@ -125,6 +127,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       deleteModalVisible,
       confirmDelete,
       loading,
+      isDeletionPending,
     } = this.state;
     if (
       images.length === 0 &&
@@ -200,6 +203,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         />
         {deleteModalVisible && (
           <DeleteModal
+            spinner={isDeletionPending}
             title={t`Permanently delete image`}
             cancelAction={() =>
               this.setState({
@@ -209,7 +213,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               })
             }
             deleteAction={() => this.deleteImage()}
-            isDisabled={!confirmDelete}
+            isDisabled={!confirmDelete || isDeletionPending}
           >
             <Trans>
               Deleting <b>{digest}</b> and its data will be lost.
@@ -566,40 +570,43 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   private deleteImage() {
     const { selectedImage } = this.state;
     const { digest } = selectedImage;
-    ExecutionEnvironmentAPI.deleteImage(
-      this.props.match.params['container'],
-      selectedImage.digest,
-    )
-      .then((result) => {
-        let taskId = result.data.task.split('tasks/')[1].replace('/', '');
-        this.setState({
-          loading: true,
-          deleteModalVisible: false,
-          selectedImage: null,
-          confirmDelete: false,
-        });
-        waitForTask(taskId).then(() => {
+    this.setState({ isDeletionPending: true }, () =>
+      ExecutionEnvironmentAPI.deleteImage(
+        this.props.match.params['container'],
+        selectedImage.digest,
+      )
+        .then((result) => {
+          let taskId = result.data.task.split('tasks/')[1].replace('/', '');
           this.setState({
+            selectedImage: null,
+          });
+          waitForTask(taskId).then(() => {
+            this.setState({
+              isDeletionPending: false,
+              confirmDelete: false,
+              deleteModalVisible: false,
+              alerts: this.state.alerts.concat([
+                {
+                  variant: 'success',
+                  title: t`Success: ${digest} was deleted`,
+                },
+              ]),
+            });
+            this.queryImages(this.props.match.params['container']);
+          });
+        })
+        .catch(() => {
+          this.setState({
+            deleteModalVisible: false,
+            selectedImage: null,
+            confirmDelete: false,
+            isDeletionPending: false,
             alerts: this.state.alerts.concat([
-              {
-                variant: 'success',
-                title: t`Success: ${digest} was deleted`,
-              },
+              { variant: 'danger', title: t`Error: delete failed` },
             ]),
           });
-          this.queryImages(this.props.match.params['container']);
-        });
-      })
-      .catch(() => {
-        this.setState({
-          deleteModalVisible: false,
-          selectedImage: null,
-          confirmDelete: false,
-          alerts: this.state.alerts.concat([
-            { variant: 'danger', title: t`Error: delete failed` },
-          ]),
-        });
-      });
+        }),
+    );
   }
 
   private get updateParams() {
