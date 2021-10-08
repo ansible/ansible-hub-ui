@@ -123,7 +123,8 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
           },
           () => this.context.setUser(result.data),
         );
-        //Redirect to login page when password is changed
+        // Redirect to login page when password is changed
+        // SSO not relevant, user edit disabled
         if (user.password) {
           this.setState({ redirect: Paths.login });
         }

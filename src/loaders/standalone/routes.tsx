@@ -134,6 +134,7 @@ class AuthHandler extends React.Component<
     }
 
     if (!user && !noAuth) {
+      // NOTE: also update LoginLink when changing this
       if (isExternalAuth && UI_EXTERNAL_LOGIN_URI) {
         window.location.replace(UI_EXTERNAL_LOGIN_URI);
         return <div></div>;
