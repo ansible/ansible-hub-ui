@@ -412,8 +412,8 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     ].filter((truthy) => truthy);
 
     return (
-      <>
-        <tr key={index}>
+      <React.Fragment key={index}>
+        <tr>
           <td className='pf-c-table__toggle'>
             {isManifestList ? (
               <Button
@@ -475,7 +475,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             <td colSpan={cols}>{this.renderManifestList(image, ShaLink)}</td>
           </tr>
         )}
-      </>
+      </React.Fragment>
     );
   }
 
