@@ -26,8 +26,13 @@ export class CollectionFilter extends React.Component<IProps, IState> {
     super(props);
 
     this.state = {
-      inputText: '',
+      inputText: props.params.keywords || '',
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.params.keywords !== this.props.params['keywords'])
+      this.setState({ inputText: this.props.params['keywords'] || '' });
   }
 
   render() {
