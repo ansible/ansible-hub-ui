@@ -37,7 +37,12 @@ import {
   FeatureFlagsType,
   SettingsType,
 } from 'src/api';
-import { AlertType, SmallLogo, StatefulDropdown } from 'src/components';
+import {
+  AlertType,
+  LoginLink,
+  SmallLogo,
+  StatefulDropdown,
+} from 'src/components';
 import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
 import Logo from 'src/../static/images/logo_large.svg';
@@ -191,15 +196,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         headerTools={
           <PageHeaderTools>
             {!user || user.is_anonymous ? (
-              <Link
-                to={formatPath(
-                  Paths.login,
-                  {},
-                  { next: this.props.location.pathname },
-                )}
-              >
-                {t`Login`}
-              </Link>
+              <LoginLink next={this.props.location.pathname} />
             ) : (
               <div>
                 <StatefulDropdown
@@ -222,7 +219,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       />
     );
 
-    const menu = this.menu();
+    const menu = user && settings ? this.menu() : []; // no longer all set at the same time
     this.activateMenu(menu);
 
     const ItemOrSection = ({ item }) =>
@@ -413,19 +410,18 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private updateInitialData = (
-    user: UserType,
-    flags: FeatureFlagsType,
-    settings: SettingsType,
+    data: {
+      user?: UserType;
+      featureFlags?: FeatureFlagsType;
+      settings?: SettingsType;
+    },
     callback?: () => void,
   ) =>
-    this.setState(
-      { user: user, featureFlags: flags, settings: settings },
-      () => {
-        if (callback) {
-          callback();
-        }
-      },
-    );
+    this.setState(data as any, () => {
+      if (callback) {
+        callback();
+      }
+    });
 
   private setRepoToURL() {
     const match = this.isRepoURL(this.props.location.pathname);
