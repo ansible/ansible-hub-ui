@@ -12,7 +12,6 @@ jobs:
       MANIFESTS_GIT_EMAIL: ansible-hub-ui+manifests@example.com
       MANIFESTS_GIT_USER: rh-galaxy-droid
       NODE_OPTIONS: "--max-old-space-size=4096 --max_old_space_size=4096"
-      RH_GALAXY_DROID_GITHUB_TOKEN: ${{ secrets.RH_GALAXY_DROID_GITHUB_TOKEN }}
       TRAVIS_PULL_REQUEST: "false"
 
     steps:
@@ -32,3 +31,5 @@ jobs:
 
     - name: "Run update_manifest.sh"
       run: .travis/update_manifest.sh
+      env:
+        MANIFEST_PASSPHRASE: ${{ secrets.MANIFEST_PASSPHRASE }}
