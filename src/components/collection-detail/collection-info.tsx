@@ -17,7 +17,7 @@ import {
 import { DownloadIcon } from '@patternfly/react-icons';
 
 import { CollectionDetailType, CollectionAPI } from 'src/api';
-import { Tag, ClipboardCopy } from 'src/components';
+import { Tag, ClipboardCopy, LoginLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 import { userLanguage } from 'src/l10n';
@@ -87,7 +87,7 @@ export class CollectionInfo extends React.Component<IProps> {
                     title={
                       <React.Fragment>
                         {t`You have to be logged in to be able to download the tarball.`}{' '}
-                        <Link to={Paths.login}>{t`Login`}</Link>
+                        <LoginLink />
                       </React.Fragment>
                     }
                   />
