@@ -73,6 +73,7 @@ interface IState {
   alerts: AlertType[];
   isNamespaceEmpty: boolean;
   confirmDelete: boolean;
+  isNamespacePending: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -109,6 +110,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       alerts: [],
       isNamespaceEmpty: false,
       confirmDelete: false,
+      isNamespacePending: false,
     };
   }
 
@@ -134,6 +136,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       updateCollection,
       isOpenNamespaceModal,
       confirmDelete,
+      isNamespacePending,
     } = this.state;
 
     if (redirect) {
@@ -193,11 +196,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         />
         {isOpenNamespaceModal && (
           <ConfirmModal
+            spinner={isNamespacePending}
             cancelAction={this.closeModal}
             confirmAction={this.deleteNamespace}
             title={t`Permanently delete namespace?`}
             confirmButtonTitle={t`Delete`}
-            isDisabled={!confirmDelete}
+            isDisabled={!confirmDelete || isNamespacePending}
           >
             <>
               <Text className='delete-namespace-modal-message'>
@@ -541,34 +545,38 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private deleteNamespace = () => {
-    NamespaceAPI.delete(this.state.namespace.name)
-      .then(() => {
-        this.setState({
-          redirect: formatPath(Paths.namespaces, {}),
-          confirmDelete: false,
-        });
-        this.context.setAlerts([
-          ...this.context.alerts,
-          {
-            variant: 'success',
-            title: t`Successfully deleted namespace.`,
-          },
-        ]);
-      })
-      .catch((e) => {
-        this.setState({
-          alerts: [
-            ...this.state.alerts,
+    this.setState({ isNamespacePending: true }, () =>
+      NamespaceAPI.delete(this.state.namespace.name)
+        .then(() => {
+          this.setState({
+            redirect: formatPath(Paths.namespaces, {}),
+            confirmDelete: false,
+            isNamespacePending: false,
+          });
+          this.context.setAlerts([
+            ...this.context.alerts,
             {
-              variant: 'danger',
-              title: t`Error deleting namespace.`,
-              description: e.message,
+              variant: 'success',
+              title: t`Successfully deleted namespace.`,
             },
-          ],
-          isOpenNamespaceModal: false,
-          confirmDelete: false,
-        });
-      });
+          ]);
+        })
+        .catch((e) => {
+          this.setState({
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: t`Error deleting namespace.`,
+                description: e.message,
+              },
+            ],
+            isOpenNamespaceModal: false,
+            confirmDelete: false,
+            isNamespacePending: false,
+          });
+        }),
+    );
   };
 
   private closeModal = () => {

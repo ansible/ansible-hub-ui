@@ -65,6 +65,7 @@ interface IState {
   deleteModalVisible: boolean;
   selectedItem: ExecutionEnvironmentType;
   confirmDelete: boolean;
+  isDeletionPending: boolean;
 }
 
 class ExecutionEnvironmentList extends React.Component<
@@ -100,6 +101,7 @@ class ExecutionEnvironmentList extends React.Component<
       deleteModalVisible: false,
       selectedItem: null,
       confirmDelete: false,
+      isDeletionPending: false,
     };
   }
 
@@ -125,6 +127,7 @@ class ExecutionEnvironmentList extends React.Component<
       deleteModalVisible,
       selectedItem,
       confirmDelete,
+      isDeletionPending,
     } = this.state;
 
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
@@ -174,12 +177,13 @@ class ExecutionEnvironmentList extends React.Component<
         <BaseHeader title={t`Execution Environments`}></BaseHeader>
         {deleteModalVisible && (
           <DeleteModal
+            spinner={isDeletionPending}
             title={'Permanently delete container'}
             cancelAction={() =>
               this.setState({ deleteModalVisible: false, selectedItem: null })
             }
             deleteAction={() => this.deleteContainer()}
-            isDisabled={!confirmDelete}
+            isDisabled={!confirmDelete || isDeletionPending}
           >
             <Trans>
               Deleting <b>{name}</b> and its data will be lost.
@@ -473,37 +477,40 @@ class ExecutionEnvironmentList extends React.Component<
   private deleteContainer() {
     const { selectedItem } = this.state;
     const { name } = selectedItem;
-    ExecutionEnvironmentAPI.deleteExecutionEnvironment(selectedItem.name)
-      .then((result) => {
-        let taskId = result.data.task.split('tasks/')[1].replace('/', '');
-        this.setState({
-          loading: true,
-          deleteModalVisible: false,
-          selectedItem: null,
-          confirmDelete: false,
-        });
-        waitForTask(taskId).then(() => {
+    this.setState({ isDeletionPending: true }, () =>
+      ExecutionEnvironmentAPI.deleteExecutionEnvironment(selectedItem.name)
+        .then((result) => {
+          let taskId = result.data.task.split('tasks/')[1].replace('/', '');
           this.setState({
+            selectedItem: null,
+          });
+          waitForTask(taskId).then(() => {
+            this.setState({
+              isDeletionPending: false,
+              confirmDelete: false,
+              deleteModalVisible: false,
+              alerts: this.state.alerts.concat([
+                {
+                  variant: 'success',
+                  title: t`Success: ${name} was deleted`,
+                },
+              ]),
+            });
+            this.queryEnvironments();
+          });
+        })
+        .catch(() => {
+          this.setState({
+            deleteModalVisible: false,
+            selectedItem: null,
+            confirmDelete: false,
+            isDeletionPending: false,
             alerts: this.state.alerts.concat([
-              {
-                variant: 'success',
-                title: t`Success: ${name} was deleted`,
-              },
+              { variant: 'danger', title: t`Error: delete failed` },
             ]),
           });
-          this.queryEnvironments();
-        });
-      })
-      .catch(() => {
-        this.setState({
-          deleteModalVisible: false,
-          selectedItem: null,
-          confirmDelete: false,
-          alerts: this.state.alerts.concat([
-            { variant: 'danger', title: t`Error: delete failed` },
-          ]),
-        });
-      });
+        }),
+    );
   }
 
   private get updateParams() {
