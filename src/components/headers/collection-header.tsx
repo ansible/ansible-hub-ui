@@ -71,6 +71,7 @@ interface IState {
   alerts: AlertType[];
   redirect: string;
   noDependencies: boolean;
+  isDeletionPending: boolean;
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
@@ -93,6 +94,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       alerts: [],
       redirect: null,
       noDependencies: false,
+      isDeletionPending: false,
     };
   }
 
@@ -119,6 +121,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       collectionVersion,
       deleteCollection,
       confirmDelete,
+      isDeletionPending,
     } = this.state;
 
     const numOfshownVersions = 10;
@@ -247,13 +250,16 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         </Modal>
         {deleteCollection && (
           <ConfirmModal
+            spinner={isDeletionPending}
             cancelAction={this.closeModal}
             confirmAction={() =>
-              !!collectionVersion
-                ? this.deleteCollectionVersion(collectionVersion)
-                : this.deleteCollection()
+              this.setState({ isDeletionPending: true }, () => {
+                !!collectionVersion
+                  ? this.deleteCollectionVersion(collectionVersion)
+                  : this.deleteCollection();
+              })
             }
-            isDisabled={!confirmDelete}
+            isDisabled={!confirmDelete || isDeletionPending}
             title={
               collectionVersion
                 ? t`Permanently delete collection version`
@@ -513,6 +519,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             this.setState({
               deleteCollection: null,
               collectionVersion: null,
+              isDeletionPending: false,
               alerts: [
                 ...this.state.alerts,
                 {
@@ -559,6 +566,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           this.setState({
             deleteCollection: null,
             collectionVersion: null,
+            isDeletionPending: false,
             alerts: [
               ...this.state.alerts,
               {
@@ -572,6 +580,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           this.setState({
             deleteCollection: null,
             collectionVersion: null,
+            isDeletionPending: false,
             alerts: [
               ...this.state.alerts,
               {
@@ -602,6 +611,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           this.setState({
             collectionVersion: null,
             deleteCollection: null,
+            isDeletionPending: false,
             redirect: formatPath(Paths.namespaceByRepo, {
               repo: this.context.selectedRepo,
               namespace: deleteCollection.namespace.name,
@@ -613,6 +623,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         this.setState({
           collectionVersion: null,
           deleteCollection: null,
+          isDeletionPending: false,
           alerts: [
             ...this.state.alerts,
             {
