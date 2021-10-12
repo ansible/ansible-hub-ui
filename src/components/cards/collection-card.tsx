@@ -41,10 +41,11 @@ export class CollectionCard extends React.Component<IProps> {
       <Card className={cx('collection-card-container', className)}>
         <CardHeader className='logo-row'>
           <Logo
+            alt={t`${company} logo`}
+            fallbackToDefault
             image={namespace.avatar_url}
-            alt={company + ' logo'}
             size='40px'
-            unlockWidth={true}
+            unlockWidth
           />
           <TextContent>{this.getCertification(repo)}</TextContent>
         </CardHeader>
