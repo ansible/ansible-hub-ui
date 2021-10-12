@@ -54,10 +54,11 @@ export class CollectionListItem extends React.Component<IProps, {}> {
       cells.push(
         <DataListCell isFilled={false} alignRight={false} key='ns'>
           <Logo
-            alt={company + ' logo'}
+            alt={t`${company} logo`}
+            fallbackToDefault
             image={namespace.avatar_url}
             size='40px'
-            unlockWidth={true}
+            unlockWidth
             width='97px'
           />
         </DataListCell>,
