@@ -1,9 +1,10 @@
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './header.scss';
 
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 
-import { BaseHeader, Tabs, TabsType, Breadcrumbs } from 'src/components';
+import { BaseHeader, Logo, Tabs, TabsType, Breadcrumbs } from 'src/components';
 import { NamespaceType } from 'src/api';
 
 interface IProps {
@@ -33,10 +34,23 @@ export class PartnerHeader extends React.Component<IProps, {}> {
       tabs,
       updateParams,
     } = this.props;
+
+    const company = namespace.company || namespace.name;
+
     return (
       <BaseHeader
-        title={namespace.company || namespace.name}
-        imageURL={namespace.avatar_url}
+        title={company}
+        logo={
+          namespace.avatar_url && (
+            <Logo
+              alt={t`${company} logo`}
+              className='image'
+              image={namespace.avatar_url}
+              size='40px'
+              unlockWidth
+            />
+          )
+        }
         breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
         pageControls={pageControls}
         contextSelector={contextSelector}
