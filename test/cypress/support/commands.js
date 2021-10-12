@@ -439,10 +439,19 @@ Cypress.Commands.add('settings', {}, (newSettings) => {
     })
     .then(() => cy.exec(restart))
     .then(({ code, stderr, stdout }) => {
-      console.log(`RUN ${restart} ${stdout} ${stderr}`);
+      console.log(`RUN ${restart} ${code} ${stdout} ${stderr}`);
 
-      if (stderr) {
-        return Promise.reject(new Error(`Restart failed: ${stderr}`));
+      if (code) {
+        return Promise.reject(new Error(`Restart failed (${code}): ${stderr}`));
       }
+    })
+    .then(() => {
+      // wait for server to respond with a good status (502 means server didn't restart yet)
+      cy.request({
+        url: Cypress.env('prefix') + '_ui/v1/feature-flags/',
+        retryOnStatusCodeFailure: true,
+      })
+        .its('status')
+        .should('eq', 200);
     });
 });
