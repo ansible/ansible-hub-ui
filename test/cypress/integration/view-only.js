@@ -1,4 +1,8 @@
 describe('view-only mode', () => {
+  before(() => {
+    cy.galaxykit('collection upload');
+  });
+
   describe('with download', () => {
     before(() => {
       cy.settings({
