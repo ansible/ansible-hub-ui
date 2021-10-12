@@ -445,8 +445,10 @@ Cypress.Commands.add('settings', {}, (newSettings) => {
         return Promise.reject(new Error(`Restart failed (${code}): ${stderr}`));
       }
     })
+    .then(() => cy.wait(2000))
     .then(() => {
       // wait for server to respond with a good status (502 means server didn't restart yet)
+      // ..after waiting to make sure we're not faster than the restart
       cy.request({
         url: Cypress.env('prefix') + '_ui/v1/feature-flags/',
         retryOnStatusCodeFailure: true,
