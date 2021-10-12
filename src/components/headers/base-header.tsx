@@ -4,11 +4,10 @@ import cx from 'classnames';
 import './header.scss';
 
 import { Title } from '@patternfly/react-core';
-import { Logo } from 'src/components';
 
 interface IProps {
   title: string;
-  imageURL?: string;
+  logo?: React.ReactNode;
   breadcrumbs?: React.ReactNode;
   pageControls?: React.ReactNode;
   children?: React.ReactNode;
@@ -22,7 +21,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
   render() {
     const {
       title,
-      imageURL,
+      logo,
       pageControls,
       children,
       breadcrumbs,
@@ -43,15 +42,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
 
         <div className='column-section'>
           <div className='title-box'>
-            {imageURL ? (
-              <Logo
-                className='image'
-                alt={t`Page logo`}
-                image={imageURL}
-                size='40px'
-                unlockWidth={true}
-              />
-            ) : null}
+            {logo}
             <div>
               <Title headingLevel='h1' size='2xl'>
                 {title}

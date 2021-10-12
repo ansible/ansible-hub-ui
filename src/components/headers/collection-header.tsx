@@ -26,6 +26,7 @@ import {
   BaseHeader,
   Breadcrumbs,
   LinkTabs,
+  Logo,
   RepoSelector,
   Pagination,
   AlertList,
@@ -155,6 +156,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       }`;
 
     const { name: collectionName } = collection;
+    const company = collection.namespace.company || collection.namespace.name;
 
     if (redirect) return <Redirect push to={redirect} />;
 
@@ -309,7 +311,18 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         <BaseHeader
           className={className}
           title={collection.name}
-          imageURL={collection.namespace.avatar_url}
+          logo={
+            collection.namespace.avatar_url && (
+              <Logo
+                alt={t`${company} logo`}
+                className='image'
+                fallbackToDefault
+                image={collection.namespace.avatar_url}
+                size='40px'
+                unlockWidth
+              />
+            )
+          }
           contextSelector={
             <RepoSelector
               selectedRepo={this.context.selectedRepo}
