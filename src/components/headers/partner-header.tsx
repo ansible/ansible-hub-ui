@@ -45,6 +45,7 @@ export class PartnerHeader extends React.Component<IProps, {}> {
             <Logo
               alt={t`${company} logo`}
               className='image'
+              fallbackToDefault
               image={namespace.avatar_url}
               size='40px'
               unlockWidth

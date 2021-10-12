@@ -316,6 +316,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               <Logo
                 alt={t`${company} logo`}
                 className='image'
+                fallbackToDefault
                 image={collection.namespace.avatar_url}
                 size='40px'
                 unlockWidth

@@ -33,11 +33,11 @@ export class NamespaceCard extends React.Component<IProps, {}> {
         <CardHeader>
           <CardHeaderMain>
             <Logo
-              unlockWidth
-              image={avatar_url}
               alt={t`${company} logo`}
-              size='40px'
               fallbackToDefault
+              image={avatar_url}
+              size='40px'
+              unlockWidth
             />
           </CardHeaderMain>
         </CardHeader>
