@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import shell from 'shell-escape-tag';
-var urljoin = require('url-join');
+const urljoin = require('url-join');
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
@@ -406,4 +406,43 @@ Cypress.Commands.add('deleteTestGroups', {}, () => {
   cy.galaxykit('group list').then((lines) => {
     lines.map(col1).forEach((group) => cy.galaxykit('-i group delete', group));
   });
+});
+
+/// settings.py manipulation
+Cypress.Commands.add('settings', {}, (newSettings) => {
+  const settings = Cypress.env('settings'); // location for the settings.py file
+  const restart = Cypress.env('restart'); // command to apply the settings
+
+  const pythonifyValue = (v) =>
+    v === true
+      ? 'True'
+      : v === false
+      ? 'False'
+      : v == null
+      ? 'None'
+      : JSON.stringify(v);
+  const pythonify = (obj) =>
+    obj
+      ? Object.keys(obj).map((k) => `${k} = ${pythonifyValue(obj[k])} #CYPRESS`)
+      : [];
+
+  const newLines = pythonify(newSettings);
+  console.log(`SETTINGS ${settings} ${newLines.join('\n')}`);
+
+  return cy
+    .readFile(settings)
+    .then((data) => {
+      const currentLines = data
+        .split('\n')
+        .filter((line) => !line.match('#CYPRESS'));
+      return cy.writeFile(settings, [...currentLines, ...newLines].join('\n'));
+    })
+    .then(() => cy.exec(restart))
+    .then(({ code, stderr, stdout }) => {
+      console.log(`RUN ${restart} ${stdout} ${stderr}`);
+
+      if (stderr) {
+        return Promise.reject(new Error(`Restart failed: ${stderr}`));
+      }
+    });
 });
