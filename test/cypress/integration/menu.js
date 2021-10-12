@@ -32,6 +32,7 @@ describe('Hub Menu Tests', () => {
   });
 
   describe('user without permissions', () => {
+    // one more similar test in view-only
     let visibleMenuItems = [
       'Collections > Collections',
       'Collections > Namespaces',
