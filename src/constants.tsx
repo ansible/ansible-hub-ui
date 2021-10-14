@@ -19,9 +19,11 @@ export class Constants {
 
   static NOTCERTIFIED = 'rejected';
   static NEEDSREVIEW = 'staging';
+
   static PERMISSIONS = [
     {
       name: 'namespaces',
+      label: t`Namespaces`,
       object_permissions: [
         'galaxy.add_namespace',
         'galaxy.change_namespace',
@@ -30,10 +32,14 @@ export class Constants {
     },
     {
       name: 'collections',
-      object_permissions: ['ansible.modify_ansible_repo_content'],
+      label: t`Collections`,
+      object_permissions: [
+        'ansible.modify_ansible_repo_content',
+      ],
     },
     {
       name: 'users',
+      label: t`Users`,
       object_permissions: [
         'galaxy.view_user',
         'galaxy.delete_user',
@@ -43,6 +49,7 @@ export class Constants {
     },
     {
       name: 'groups',
+      label: t`Groups`,
       object_permissions: [
         'galaxy.view_group',
         'galaxy.delete_group',
@@ -52,6 +59,7 @@ export class Constants {
     },
     {
       name: 'remotes',
+      label: t`Remotes`,
       object_permissions: [
         'ansible.change_collectionremote',
         'ansible.view_collectionremote',
@@ -59,6 +67,7 @@ export class Constants {
     },
     {
       name: 'containers',
+      label: t`Containers`,
       object_permissions: [
         // Turning off private container permissions since they aren't supported yet
         // 'container.namespace_pull_containerdistribution',
@@ -147,14 +156,7 @@ export class Constants {
     pull_containerdistribution: t`Pull distribution`,
     view_containerdistribution: t`View distribution`,
   };
-  static HUMAN_GROUP_DETAIL_PERMISSIONS = {
-    namespaces: t`Namespaces`,
-    collections: t`Collections`,
-    users: t`Users`,
-    groups: t`Groups`,
-    remotes: t`Remotes`,
-    containers: t`Containers`,
-  };
+
   static CONTAINER_NAMESPACE_PERMISSIONS = [
     'change_containernamespace',
     'namespace_push_containerdistribution',
