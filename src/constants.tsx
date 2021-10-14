@@ -25,7 +25,7 @@ export class Constants {
       name: 'namespaces',
       label: t`Namespaces`,
       object_permissions: [
-        'galaxy.add_namespace',
+        'galaxy.add_namespace', // model_permissions.add_namespace
         'galaxy.change_namespace',
         'galaxy.delete_namespace', // model_permissions.delete_namespace
         'galaxy.upload_to_namespace',
@@ -35,7 +35,7 @@ export class Constants {
       name: 'collections',
       label: t`Collections`,
       object_permissions: [
-        'ansible.modify_ansible_repo_content',
+        'ansible.modify_ansible_repo_content', // model_permissions.move_collection
         'ansible.delete_collection', // model_permissions.delete_collection
       ],
     },
@@ -43,27 +43,27 @@ export class Constants {
       name: 'users',
       label: t`Users`,
       object_permissions: [
-        'galaxy.view_user',
-        'galaxy.delete_user',
-        'galaxy.add_user',
-        'galaxy.change_user',
+        'galaxy.view_user', // model_permissions.view_user
+        'galaxy.delete_user', // model_permissions.delete_user
+        'galaxy.add_user', // model_permissions.add_user
+        'galaxy.change_user', // model_permissions.change_user
       ],
     },
     {
       name: 'groups',
       label: t`Groups`,
       object_permissions: [
-        'galaxy.view_group',
-        'galaxy.delete_group',
-        'galaxy.add_group',
-        'galaxy.change_group',
+        'galaxy.view_group', // model_permissions.view_group
+        'galaxy.delete_group', // model_permissions.delete_group
+        'galaxy.add_group', // model_permissions.add_group
+        'galaxy.change_group', // model_permissions.change_group
       ],
     },
     {
       name: 'remotes',
       label: t`Remotes`,
       object_permissions: [
-        'ansible.change_collectionremote',
+        'ansible.change_collectionremote', // model_permissions.change_remote
         'ansible.view_collectionremote',
       ],
     },
