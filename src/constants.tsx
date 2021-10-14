@@ -27,6 +27,7 @@ export class Constants {
       object_permissions: [
         'galaxy.add_namespace',
         'galaxy.change_namespace',
+        'galaxy.delete_namespace', // model_permissions.delete_namespace
         'galaxy.upload_to_namespace',
       ],
     },
@@ -35,6 +36,7 @@ export class Constants {
       label: t`Collections`,
       object_permissions: [
         'ansible.modify_ansible_repo_content',
+        'ansible.delete_collection', // model_permissions.delete_collection
       ],
     },
     {
@@ -73,11 +75,21 @@ export class Constants {
         // 'container.namespace_pull_containerdistribution',
         // 'container.namespace_view_containerdistribution',
 
+        'container.delete_containerrepository', // model_permissions.delete_containerrepository
         'container.namespace_change_containerdistribution',
         'container.namespace_modify_content_containerpushrepository',
         'container.change_containernamespace',
         'container.namespace_push_containerdistribution',
         'container.add_containernamespace',
+      ],
+    },
+    {
+      name: 'registries',
+      label: t`Remote Registries`,
+      object_permissions: [
+        'galaxy.add_containerregistryremote', // model_permissions.add_containerregistry
+        'galaxy.change_containerregistryremote', // model_permissions.change_containerregistry
+        'galaxy.delete_containerregistryremote', // model_permissions.delete_containerregistry
       ],
     },
 
