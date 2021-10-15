@@ -26,9 +26,9 @@ export class Constants {
       label: t`Namespaces`,
       object_permissions: [
         'galaxy.add_namespace', // model_permissions.add_namespace
-        'galaxy.change_namespace',
+        'galaxy.change_namespace', // (model_permissions.change_namespace)
         'galaxy.delete_namespace', // model_permissions.delete_namespace
-        'galaxy.upload_to_namespace',
+        'galaxy.upload_to_namespace', // (model_permissions.upload_to_namespace)
       ],
     },
     {
@@ -65,6 +65,8 @@ export class Constants {
       object_permissions: [
         'ansible.change_collectionremote', // model_permissions.change_remote
         'ansible.view_collectionremote',
+        // 'ansible.add_collectionremote', // (model_permissions.add_remote)
+        // 'ansible.delete_collectionremote', // (model_permissions.delete_remote)
       ],
     },
     {
@@ -75,12 +77,17 @@ export class Constants {
         // 'container.namespace_pull_containerdistribution',
         // 'container.namespace_view_containerdistribution',
 
+        // 'container.add_containerrepository', // (model_permissions.add_containerrepository)
+        // 'container.change_containerrepository', // (model_permissions.change_containerrepository)
         'container.delete_containerrepository', // model_permissions.delete_containerrepository
+
         'container.namespace_change_containerdistribution',
         'container.namespace_modify_content_containerpushrepository',
-        'container.change_containernamespace',
         'container.namespace_push_containerdistribution',
-        'container.add_containernamespace',
+
+        'container.add_containernamespace', // (model_permissions.add_containernamespace)
+        'container.change_containernamespace', // (model_permissions.change_containernamespace)
+        // 'container.delete_containernamespace', // (model_permissions.delete_containernamespace)
       ],
     },
     {
@@ -96,18 +103,31 @@ export class Constants {
     // These aren't currently used. Removing them to reduce confusion in the UI
     // {
     //   name: 'distribution',
+    //   label: '...',
     //   object_permissions: [
-    //     'ansible.change_ansibledistribution',
-    //     'ansible.view_ansibledistribution',
+    //     'ansible.view_ansibledistribution', // (model_permissions.view_distribution)
+    //     'ansible.add_ansibledistribution', // (model_permissions.add_distribution)
+    //     'ansible.change_ansibledistribution', // (model_permissions.change_distribution)
+    //     'ansible.delete_ansibledistribution', // (model_permissions.delete_distribution)
     //   ],
     // },
     // {
     //   name: 'synclists',
+    //   label: '...',
     //   object_permissions: [
     //     'galaxy.delete_synclist',
     //     'galaxy.change_synclist',
     //     'galaxy.view_synclist',
     //     'galaxy.add_synclist',
+    //   ],
+    // },
+    // {
+    //   name: 'container_distribution',
+    //   label: '...',
+    //   object_permissions: [
+    //     'container.add_containerdistribution', // (model_permissions.add_containerdistribution)
+    //     'container.change_containerdistribution', // (model_permissions.change_containerdistribution)
+    //     'container.delete_containerdistribution', // (model_permissions.delete_containerdistribution)
     //   ],
     // },
   ];
