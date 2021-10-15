@@ -131,6 +131,7 @@ export class Constants {
     //   ],
     // },
   ];
+
   static USER_GROUP_MGMT_PERMISSIONS = [
     'galaxy.delete_user',
     'galaxy.add_user',
@@ -138,28 +139,45 @@ export class Constants {
     'galaxy.delete_group',
     'galaxy.add_group',
   ];
+
   static HUMAN_PERMISSIONS = {
+    'ansible.add_ansibledistribution': t`Add Ansible distribution`,
+    'ansible.add_collectionremote': t`Add collection remote`,
     'ansible.change_ansibledistribution': t`Change Ansible distribution`,
     'ansible.change_collectionremote': t`Change collection remote`,
+    'ansible.delete_ansibledistribution': t`Delete Ansible distribution`,
+    'ansible.delete_collection': t`Delete collection`,
+    'ansible.delete_collectionremote': t`Delete collection remote`,
     'ansible.modify_ansible_repo_content': t`Modify Ansible repo content`,
     'ansible.view_ansibledistribution': t`View Ansible distribution`,
     'ansible.view_collectionremote': t`View collection remote`,
+    'container.add_containerdistribution': t`Add container distribution`,
     'container.add_containernamespace': t`Create new containers`,
+    'container.add_containerrepository': t`Add container repository`,
+    'container.change_containerdistribution': t`Change container distribution`,
     'container.change_containernamespace': t`Change container namespace permissions`,
+    'container.change_containerrepository': t`Change container repository`,
+    'container.delete_containerdistribution': t`Delete container distribution`,
+    'container.delete_containernamespace': t`Delete container namespace`,
+    'container.delete_containerrepository': t`Delete container repository`,
     'container.namespace_change_containerdistribution': t`Change containers`,
     'container.namespace_modify_content_containerpushrepository': t`Change image tags`,
     'container.namespace_pull_containerdistribution': t`Pull private containers`,
     'container.namespace_push_containerdistribution': t`Push to existing containers`,
     'container.namespace_view_containerdistribution': t`View private containers`,
+    'galaxy.add_containerregistryremote': t`Add remote registry`,
     'galaxy.add_group': t`Add group`,
     'galaxy.add_namespace': t`Add namespace`,
     'galaxy.add_synclist': t`Add synclist`,
     'galaxy.add_user': t`Add user`,
+    'galaxy.change_containerregistryremote': t`Change remote registry`,
     'galaxy.change_group': t`Change group`,
     'galaxy.change_namespace': t`Change namespace`,
     'galaxy.change_synclist': t`Change synclist`,
     'galaxy.change_user': t`Change user`,
+    'galaxy.delete_containerregistryremote': t`Delete remote registry`,
     'galaxy.delete_group': t`Delete group`,
+    'galaxy.delete_namespace': t`Delete namespace`,
     'galaxy.delete_synclist': t`Delete synclist`,
     'galaxy.delete_user': t`Delete user`,
     'galaxy.upload_to_namespace': t`Upload to namespace`,
@@ -167,6 +185,7 @@ export class Constants {
     'galaxy.view_synclist': t`View synclist`,
     'galaxy.view_user': t`View user`,
   };
+
   static GROUP_HUMAN_PERMISSIONS = {
     change_namespace: t`Change namespace`,
     upload_to_namespace: t`Upload to namespace`,
