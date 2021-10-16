@@ -42,6 +42,8 @@ interface IProps {
   registry?: string; // pk
   upstreamName?: string;
   remotePulpId?: string;
+
+  addAlert?: (variant, title, description?) => void;
 }
 
 interface IState {
@@ -80,16 +82,25 @@ export class RepositoryForm extends React.Component<IProps, IState> {
 
   componentDidMount() {
     if (this.props.isRemote) {
-      this.loadRegistries().then(() => {
-        // prefill registry if passed from props
-        if (this.props.registry) {
-          this.setState({
-            registrySelection: this.state.registries.filter(
-              ({ id }) => id === this.props.registry,
-            ),
-          });
-        }
-      });
+      this.loadRegistries()
+        .then(() => {
+          // prefill registry if passed from props
+          if (this.props.registry) {
+            this.setState({
+              registrySelection: this.state.registries.filter(
+                ({ id }) => id === this.props.registry,
+              ),
+            });
+          }
+        })
+        .catch((e) => {
+          this.props.addAlert(
+            'danger',
+            t`Error loading registries.`,
+            e?.message,
+          );
+          this.props.onCancel();
+        });
     }
 
     if (!this.props.isNew) {
@@ -372,12 +383,17 @@ export class RepositoryForm extends React.Component<IProps, IState> {
 
   private loadSelectedGroups() {
     const { namespace } = this.props;
-    return ExecutionEnvironmentNamespaceAPI.get(namespace).then((result) =>
-      this.setState({
-        selectedGroups: cloneDeep(result.data.groups),
-        originalSelectedGroups: result.data.groups,
-      }),
-    );
+    return ExecutionEnvironmentNamespaceAPI.get(namespace)
+      .then((result) =>
+        this.setState({
+          selectedGroups: cloneDeep(result.data.groups),
+          originalSelectedGroups: result.data.groups,
+        }),
+      )
+      .catch((e) => {
+        this.props.addAlert('danger', t`Error loading groups.`, e?.message);
+        this.props.onCancel();
+      });
   }
 
   private addTags(tags, key: 'includeTags' | 'excludeTags') {
