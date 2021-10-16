@@ -83,7 +83,7 @@ class ExecutionEnvironmentDetail extends React.Component<
             <Title headingLevel='h2' size='lg'>
               {!this.state.markdownEditing && this.state.readme && canEdit && (
                 <Button
-                  className={'edit-button'}
+                  className={'hub-c-button-edit'}
                   variant={'primary'}
                   onClick={() => {
                     this.setState({ markdownEditing: true });

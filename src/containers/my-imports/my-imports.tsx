@@ -118,7 +118,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
         <BaseHeader title={t`My imports`} />
         <Main>
           <section className='body'>
-            <div className='page-container'>
+            <div className='hub-page-container'>
               <div className='import-list'>
                 <ImportList
                   importList={importList}
@@ -142,7 +142,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                 />
               </div>
 
-              <div className='import-console'>
+              <div className='hub-import-console'>
                 <ImportConsole
                   loading={loadingImportDetails}
                   task={selectedImportDetails}

@@ -110,7 +110,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
                   updateParams={updateParams}
                 />
 
-                <div className='pagination-container'>
+                <div className='hub-pagination-container'>
                   <div className='card-list-switcher'>
                     <CardListSwitcher
                       size='sm'

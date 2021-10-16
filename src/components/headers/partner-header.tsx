@@ -59,7 +59,7 @@ export class PartnerHeader extends React.Component<IProps, {}> {
       >
         {namespace.description ? <div>{namespace.description}</div> : null}
 
-        <div className='tab-link-container'>
+        <div className='hub-tab-link-container'>
           <div className='tabs'>
             <Tabs
               tabs={tabs}

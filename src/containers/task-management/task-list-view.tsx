@@ -122,7 +122,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
               <LoadingPageSpinner />
             ) : (
               <section className='body'>
-                <div className='task-list'>
+                <div className='hub-task-list'>
                   <Toolbar>
                     <ToolbarContent>
                       <ToolbarGroup>
@@ -243,7 +243,10 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     };
 
     return (
-      <table aria-label={t`Task list`} className='content-table pf-c-table'>
+      <table
+        aria-label={t`Task list`}
+        className='hub-c-table-content pf-c-table'
+      >
         <SortTable
           options={sortTableOptions}
           params={params}

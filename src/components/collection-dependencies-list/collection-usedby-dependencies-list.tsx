@@ -62,7 +62,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
 
     return (
       <>
-        <div className='usedby-dependencies-header'>
+        <div className='ans-usedby-dependencies-header'>
           <Toolbar>
             <ToolbarGroup>
               <ToolbarItem>
@@ -113,7 +113,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
               <EmptyStateFilter />
             ) : (
               <>
-                <table className='content-table pf-c-table pf-m-compact'>
+                <table className='hub-c-table-content pf-c-table pf-m-compact'>
                   <tbody>
                     {usedByDependencies.map(
                       ({ name, namespace, version, repository_list }, i) => (

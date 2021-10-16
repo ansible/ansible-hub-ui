@@ -29,7 +29,7 @@ export class NamespaceCard extends React.Component<IProps, {}> {
   render() {
     const { avatar_url, name, company, namespaceURL } = this.props;
     return (
-      <Card className='ns-card-container'>
+      <Card className='hub-c-card-ns-container'>
         <CardHeader>
           <CardHeaderMain>
             <Logo

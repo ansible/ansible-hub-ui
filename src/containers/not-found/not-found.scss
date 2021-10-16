@@ -1,13 +1,11 @@
-.bullseye-center {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.bullseye {
+.hub-c-bullseye {
   min-height: calc(100vh - 230px);
-}
-
-.four-oh-four {
-  font-size: 30pt;
+  &__center {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  &__404 {
+    font-size: 30pt;
+  }
 }
