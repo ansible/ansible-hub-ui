@@ -18,6 +18,7 @@ import {
   Pagination,
   Toolbar,
   AlertList,
+  AlertType,
 } from 'src/components';
 import { Button, ToolbarItem } from '@patternfly/react-core';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
@@ -40,6 +41,7 @@ interface IState {
   isModalOpen: boolean;
   loading: boolean;
   redirect?: string;
+  alerts?: AlertType[];
 }
 
 interface IProps extends RouteComponentProps {
@@ -73,6 +75,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       hasPermission: true,
       isModalOpen: false,
       loading: true,
+      alerts: [],
     };
   }
 
@@ -86,17 +89,36 @@ export class NamespaceList extends React.Component<IProps, IState> {
     if (this.props.filterOwner) {
       // Make a query with no params and see if it returns results to tell
       // if the user can edit namespaces
-      MyNamespaceAPI.list({}).then((results) => {
-        if (results.data.meta.count !== 0) {
-          this.loadNamespaces();
-        } else {
-          this.setState({
-            hasPermission: false,
-            namespaces: [],
-            loading: false,
-          });
-        }
-      });
+      MyNamespaceAPI.list({})
+        .then((results) => {
+          if (results.data.meta.count !== 0) {
+            this.loadNamespaces();
+          } else {
+            this.setState({
+              hasPermission: false,
+              namespaces: [],
+              loading: false,
+            });
+          }
+        })
+        .catch((e) =>
+          this.setState(
+            {
+              namespaces: [],
+              itemCount: 0,
+              loading: false,
+            },
+            () =>
+              this.context.setAlerts([
+                ...this.context.alerts,
+                {
+                  variant: 'danger',
+                  title: t`Error loading my namespaces.`,
+                  description: e?.message,
+                },
+              ]),
+          ),
+        );
     } else {
       this.loadNamespaces();
     }
@@ -285,13 +307,32 @@ export class NamespaceList extends React.Component<IProps, IState> {
       apiFunc = (p) => NamespaceAPI.list(p);
     }
     this.setState({ loading: true }, () => {
-      apiFunc(this.state.params).then((results) => {
-        this.setState({
-          namespaces: results.data.data,
-          itemCount: results.data.meta.count,
-          loading: false,
-        });
-      });
+      apiFunc(this.state.params)
+        .then((results) => {
+          this.setState({
+            namespaces: results.data.data,
+            itemCount: results.data.meta.count,
+            loading: false,
+          });
+        })
+        .catch((e) =>
+          this.setState(
+            {
+              namespaces: [],
+              itemCount: 0,
+              loading: false,
+            },
+            () =>
+              this.context.setAlerts([
+                ...this.context.alerts,
+                {
+                  variant: 'danger',
+                  title: t`Error loading namespaces.`,
+                  description: e?.message,
+                },
+              ]),
+          ),
+        );
     });
   }
 
