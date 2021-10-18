@@ -24,6 +24,51 @@ describe('Remote Registry Tests', () => {
     });
   }
 
+  function addData(
+    name,
+    url,
+    username,
+    password,
+    proxy_url,
+    proxy_username,
+    proxy_password,
+    download_concurrency,
+    rate_limit,
+  ) {
+    cy.contains('button', 'Add remote registry').click();
+
+    // add registry
+    cy.get('input[id = "name"]').type(name);
+    cy.get('input[id = "url"]').type(url);
+    cy.get('input[id = "username"]').type(username);
+    cy.get('input[id = "password"]').type(password);
+    //advanced options
+    cy.get('.pf-c-expandable-section__toggle-text').click();
+    cy.get('input[id = "proxy_url"]').type(proxy_url);
+    cy.get('input[id = "proxy_username"]').type(proxy_username);
+    cy.get('input[id = "proxy_password"]').type(proxy_password);
+    cy.get('[data-cy=client_key]');
+    cy.get('button[data-cy=client_cert]');
+    cy.get('button[data-cy=ca_cert]');
+    cy.get('input[id = "download_concurrency"]').type(download_concurrency);
+    cy.get('input[id = "rate_limit"]').type(rate_limit);
+
+    cy.intercept(
+      'POST',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/',
+    ).as('registries');
+
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
+    ).as('registriesGet');
+
+    cy.contains('button', 'Save').click();
+
+    cy.wait('@registries');
+    cy.wait('@registriesGet');
+  }
+
   before(() => {
     cy.visit('/');
     cy.login(adminUsername, adminPassword);
@@ -51,6 +96,28 @@ describe('Remote Registry Tests', () => {
     cy.menuGo('Execution Enviroments > Remote Registries');
     cy.addRemoteRegistry('New remote registry1', 'some url1');
     cy.addRemoteRegistry('New remote registry2', 'some url2');
+    addData(
+      'New remote registry1',
+      'some url1',
+      'some username1',
+      'some password1',
+      'some proxy_url1',
+      'some proxy_username1',
+      'some proxy_password1',
+      5,
+      5,
+    );
+    addData(
+      'New remote registry2',
+      'some url2',
+      'some username2',
+      'some password2',
+      'some proxy_url2',
+      'some proxy_username2',
+      'some proxy_password2',
+      5,
+      5,
+    );
   });
 
   it('admin can view data', () => {
