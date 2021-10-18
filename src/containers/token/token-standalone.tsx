@@ -28,6 +28,10 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
     };
   }
 
+  componentWillUnmount() {
+    this.context.setAlerts([]);
+  }
+
   render() {
     const { token } = this.state;
     let unauthorised = !this.context.user || this.context.user.is_anonymous;
@@ -99,9 +103,18 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadToken() {
-    ActiveUserAPI.getToken().then((result) =>
-      this.setState({ token: result.data.token }),
-    );
+    ActiveUserAPI.getToken()
+      .then((result) => this.setState({ token: result.data.token }))
+      .catch((e) =>
+        this.context.setAlerts([
+          ...this.context.alerts,
+          {
+            variant: 'danger',
+            title: t`Error loading token.`,
+            description: e?.message,
+          },
+        ]),
+      );
   }
 }
 
