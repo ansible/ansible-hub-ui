@@ -190,6 +190,12 @@ class App extends React.Component<RouteComponentProps, IState> {
           productName={APPLICATION_NAME}
           user={user}
           userName={userName}
+          addAlert={(variant, title, description) =>
+            this.setAlerts([
+              ...this.state.alerts,
+              { variant, title, description },
+            ])
+          }
         ></AboutModalWindow>
       );
     }

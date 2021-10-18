@@ -63,6 +63,10 @@ export class UserForm extends React.Component<IProps, IState> {
     this.loadGroups('');
   }
 
+  componentWillUnmount() {
+    this.context.setAlerts([]);
+  }
+
   render() {
     const {
       user,
@@ -271,9 +275,17 @@ export class UserForm extends React.Component<IProps, IState> {
   };
 
   private loadGroups = (name) => {
-    GroupAPI.list({ name__contains: name, page_size: 5 }).then((result) =>
-      this.setState({ searchGroups: result.data.data }),
-    );
+    GroupAPI.list({ name__contains: name, page_size: 5 })
+      .then((result) => this.setState({ searchGroups: result.data.data }))
+      .catch((e) =>
+        this.context.setAlerts([
+          {
+            variant: 'danger',
+            title: t`Error loading groups.`,
+            description: e?.message,
+          },
+        ]),
+      );
   };
 
   private toError(validated: boolean) {

@@ -21,6 +21,7 @@ interface IProps {
   productName: string;
   user: UserType;
   userName: string;
+  addAlert?: (variant, title, description?) => void;
 }
 
 interface IState {
@@ -36,14 +37,23 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    ApplicationInfoAPI.get('').then((result) => {
-      this.setState({
-        applicationInfo: {
-          server_version: result.data.server_version,
-          pulp_ansible_version: result.data.pulp_ansible_version,
-        },
+    ApplicationInfoAPI.get('')
+      .then((result) => {
+        this.setState({
+          applicationInfo: {
+            server_version: result.data.server_version,
+            pulp_ansible_version: result.data.pulp_ansible_version,
+          },
+        });
+      })
+      .catch((e) => {
+        this.props.onClose();
+        this.props.addAlert(
+          'danger',
+          t`Error loading galaxy_ng information.`,
+          e?.message,
+        );
       });
-    });
   }
 
   render() {
