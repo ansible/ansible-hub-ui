@@ -7,14 +7,14 @@ describe('Collection Upload Tests', () => {
   });
 
   it('collection is uploaded', () => {
-    const filepath = 'collections/arista-cvp-3.1.0.tar.gz';
-    cy.galaxykit('-i namespace create', 'arista');
+    const filepath = 'collections/ansible-network-1.2.0.tar.gz';
+    cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
-    cy.intercept('GET', Cypress.env('prefix') + 'v1/namespaces/arista').as(
+    cy.intercept('GET', Cypress.env('prefix') + 'v1/namespaces/ansible').as(
       'namespaces',
     );
 
-    cy.get('a[href="/ui/repo/published/arista"]').click();
+    cy.get('a[href="/ui/repo/published/ansible"]').click();
     cy.wait(500);
     cy.contains('Upload collection').click();
     cy.get('input[type="file"]').attachFile(filepath);
