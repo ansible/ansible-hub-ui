@@ -5,7 +5,13 @@ import { Flex, FlexItem } from '@patternfly/react-core';
 import { TrashIcon } from '@patternfly/react-icons';
 
 import { GroupObjectPermissionType, GroupAPI } from 'src/api';
-import { APISearchTypeAhead, PermissionChipSelector } from 'src/components';
+import {
+  AlertList,
+  AlertType,
+  APISearchTypeAhead,
+  PermissionChipSelector,
+  closeAlertMixin,
+} from 'src/components';
 import { twoWayMapper } from 'src/utilities';
 import { Constants } from 'src/constants';
 
@@ -19,6 +25,7 @@ interface IProps {
 
 interface IState {
   searchGroups: { name: string; id: number | string }[];
+  alerts?: AlertType[];
 }
 
 export class ObjectPermissionField extends React.Component<IProps, IState> {
@@ -27,6 +34,7 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
 
     this.state = {
       searchGroups: [],
+      alerts: [],
     };
   }
 
@@ -39,6 +47,10 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
 
     return (
       <div>
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        />
         <APISearchTypeAhead
           results={this.state.searchGroups}
           loadResults={this.loadGroups}
@@ -106,13 +118,25 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
   }
 
   private loadGroups = (name) => {
-    GroupAPI.list({ name__contains: name }).then((result) => {
-      const added = this.props.groups.map((group) => group.name);
-      const groups = result.data.data.filter(
-        (group) => !added.includes(group.name),
+    GroupAPI.list({ name__contains: name })
+      .then((result) => {
+        const added = this.props.groups.map((group) => group.name);
+        const groups = result.data.data.filter(
+          (group) => !added.includes(group.name),
+        );
+        this.setState({ searchGroups: groups });
+      })
+      .catch((e) =>
+        this.setState({
+          alerts: [
+            {
+              variant: 'danger',
+              title: t`Error loading groups.`,
+              description: e?.message,
+            },
+          ],
+        }),
       );
-      this.setState({ searchGroups: groups });
-    });
   };
 
   private onSelect = (event, selection, isPlaceholder) => {
@@ -130,4 +154,8 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
 
     this.props.setGroups(newGroups);
   };
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
 }
