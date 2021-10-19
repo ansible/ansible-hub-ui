@@ -523,3 +523,25 @@ Cypress.Commands.add(
   },
 );
 
+Cypress.Commands.add(
+  'addLocalContainer',
+  {},
+  (localName, remoteName, registry = 'docker.io/') => {
+    return cy
+      .exec(
+        shell`
+    podman pull ${registry + remoteName} ;
+    podman image tag ${remoteName} localhost:5001/${localName}:latest ;
+    podman push localhost:5001/${localName}:latest --tls-verify=false
+  `,
+      )
+      .then(({ code, stderr, stdout }) => {
+        console.log(`c${code} ERR=${stderr} OUT=${stdout}`);
+        if (code) {
+          return Promise.reject(
+            new Error(`podman pull/push failed (code ${code}): ${stderr}`),
+          );
+        }
+      });
+  },
+);
