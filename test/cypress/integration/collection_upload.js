@@ -25,6 +25,7 @@ describe('Collection Upload Tests', () => {
     cy.get('[data-cy="confirm-upload"]').click();
     cy.wait('@upload');
     cy.contains('My imports');
+    cy.wait(1000);
     cy.get('.pf-c-label__content').contains('Completed');
   });
 });
