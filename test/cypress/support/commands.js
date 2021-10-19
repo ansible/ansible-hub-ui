@@ -481,3 +481,45 @@ Cypress.Commands.add('addRemoteRegistry', {}, (name, url) => {
   cy.wait('@registries');
   cy.wait('@registriesGet');
 });
+
+Cypress.Commands.add(
+  'addRemoteContainer',
+  {},
+  ({ name, upstream_name, registry, include_tags }) => {
+    cy.menuGo('Execution Environments > Execution Environments');
+    cy.contains('button', 'Add execution environment').click();
+
+    // add registry
+    cy.get('input[id="name"]').type(name);
+    cy.get('input[id="upstreamName"]').type(upstream_name);
+
+    cy.get(
+      '.hub-formgroup-registry .pf-c-form-control.pf-c-select__toggle-typeahead',
+    )
+      .click()
+      .type(registry);
+    cy.contains('button', registry).click();
+
+    cy.get('input[id="addTagsInclude"]')
+      .type(include_tags)
+      .parent()
+      .find('button', 'Add')
+      .click();
+
+    cy.intercept(
+      'POST',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/remotes/',
+    ).as('saved');
+
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
+    ).as('listLoad');
+
+    cy.contains('button', 'Save').click();
+
+    cy.wait('@saved');
+    cy.wait('@listLoad');
+  },
+);
+
