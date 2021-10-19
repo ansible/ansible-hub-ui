@@ -277,9 +277,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                 </div>
                 <div>
                   <AppliedFilters
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryRegistries())
-                    }
+                    updateParams={(p) => {
+                      this.updateParams(p, () => this.queryRegistries());
+                      this.setState({ inputText: '' });
+                    }}
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort']}
                     niceNames={{
