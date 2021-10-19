@@ -457,3 +457,27 @@ Cypress.Commands.add('settings', {}, (newSettings) => {
         .should('eq', 200);
     });
 });
+
+Cypress.Commands.add('addRemoteRegistry', {}, (name, url) => {
+  cy.menuGo('Execution Enviroments > Remote Registries');
+  cy.contains('button', 'Add remote registry').click();
+
+  // add registry
+  cy.get('input[id = "name"]').type(name);
+  cy.get('input[id = "url"]').type(url);
+
+  cy.intercept(
+    'POST',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/registries/',
+  ).as('registries');
+
+  cy.intercept(
+    'GET',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
+  ).as('registriesGet');
+
+  cy.contains('button', 'Save').click();
+
+  cy.wait('@registries');
+  cy.wait('@registriesGet');
+});
