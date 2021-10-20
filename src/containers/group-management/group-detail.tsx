@@ -74,6 +74,7 @@ interface IState {
   originalPermissions: { id: number; name: string }[];
   redirect?: string;
   unauthorised: boolean;
+  inputText: string;
 }
 
 class GroupDetail extends React.Component<RouteComponentProps, IState> {
@@ -112,6 +113,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       permissions: [],
       originalPermissions: [],
       unauthorised: false,
+      inputText: '',
     };
   }
 
@@ -660,6 +662,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               <ToolbarGroup>
                 <ToolbarItem>
                   <CompoundFilter
+                    inputText={this.state.inputText}
+                    onChange={(text) => this.setState({ inputText: text })}
                     updateParams={(p) =>
                       this.updateParams(p, () => this.queryUsers())
                     }
@@ -710,7 +714,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         </div>
         <div>
           <AppliedFilters
-            updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
+            updateParams={(p) => {
+              this.updateParams(p, () => this.queryUsers());
+              this.setState({ inputText: '' });
+            }}
             params={params}
             ignoredParams={['page_size', 'page', 'sort', 'id', 'tab']}
           />

@@ -54,6 +54,7 @@ interface IState {
   tagResults: { name: string; id: string }[];
   tagSelection: { name: string; id: string }[];
   tags: { tag: string; digest: string }[];
+  inputText: string;
 }
 
 const initialState = {
@@ -68,6 +69,7 @@ const initialState = {
   tagResults: [],
   tagSelection: [],
   tags: [],
+  inputText: '',
 };
 
 export class PublishToControllerModal extends React.Component<IProps, IState> {
@@ -343,6 +345,8 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
             <Flex>
               <FlexItem>
                 <CompoundFilter
+                  inputText={this.state.inputText}
+                  onChange={(text) => this.setState({ inputText: text })}
                   updateParams={(controllerParams) => {
                     controllerParams.page = 1;
                     this.setState({ controllerParams }, () =>

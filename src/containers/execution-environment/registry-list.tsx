@@ -58,6 +58,7 @@ interface IState {
   remoteUnmodified?: RemoteType;
   showDeleteModal: boolean;
   showRemoteFormModal: boolean;
+  inputText: string;
 }
 
 class ExecutionEnvironmentRegistryList extends React.Component<
@@ -92,6 +93,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       remoteUnmodified: null,
       showDeleteModal: false,
       showRemoteFormModal: false,
+      inputText: '',
     };
   }
 
@@ -240,6 +242,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                       <ToolbarGroup>
                         <ToolbarItem>
                           <CompoundFilter
+                            inputText={this.state.inputText}
+                            onChange={(text) =>
+                              this.setState({ inputText: text })
+                            }
                             updateParams={(p) => {
                               p['page'] = 1;
                               this.updateParams(p, () =>
@@ -271,9 +277,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                 </div>
                 <div>
                   <AppliedFilters
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryRegistries())
-                    }
+                    updateParams={(p) => {
+                      this.updateParams(p, () => this.queryRegistries());
+                      this.setState({ inputText: '' });
+                    }}
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort']}
                     niceNames={{

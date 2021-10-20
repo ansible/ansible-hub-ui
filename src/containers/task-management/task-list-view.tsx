@@ -48,6 +48,7 @@ interface IState {
   cancelModalVisible: boolean;
   selectedTask: TaskType;
   unauthorised: boolean;
+  inputText: string;
 }
 
 export class TaskListView extends React.Component<RouteComponentProps, IState> {
@@ -76,6 +77,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       cancelModalVisible: false,
       selectedTask: null,
       unauthorised: false,
+      inputText: '',
     };
   }
 
@@ -128,6 +130,10 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                       <ToolbarGroup>
                         <ToolbarItem>
                           <CompoundFilter
+                            inputText={this.state.inputText}
+                            onChange={(text) =>
+                              this.setState({ inputText: text })
+                            }
                             updateParams={(p) => {
                               p['page'] = 1;
                               this.updateParams(p, () => this.queryTasks());
@@ -178,9 +184,10 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                 </div>
                 <div>
                   <AppliedFilters
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryTasks())
-                    }
+                    updateParams={(p) => {
+                      this.updateParams(p, () => this.queryTasks());
+                      this.setState({ inputText: '' });
+                    }}
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort', 'ordering']}
                     niceNames={{
@@ -189,7 +196,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                     }}
                   />
                 </div>
-                {this.renderTable(params)}
+                {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
                 <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
                   <Pagination
                     params={params}
