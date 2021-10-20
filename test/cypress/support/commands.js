@@ -545,3 +545,15 @@ Cypress.Commands.add(
       });
   },
 );
+
+Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
+  cy.menuGo('Execution Environments > Execution Environments');
+  cy.contains('tr', name)
+    .find('button[aria-label="Actions"]')
+    .click()
+    .parents('tr')
+    .contains('.pf-c-dropdown__menu-item', 'Sync from registry')
+    .click();
+
+  cy.contains('.pf-c-alert__title', `Sync initiated for ${name}`);
+});
