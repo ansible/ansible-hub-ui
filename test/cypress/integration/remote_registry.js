@@ -58,6 +58,18 @@ describe('Remote Registry Tests', () => {
     cy.login(adminUsername, adminPassword);
   });
 
+  it('checks for empty state', () => {
+    cy.menuGo('Execution Enviroments > Remote Registries');
+    cy.get('.pf-c-empty-state__content > .pf-c-title').should(
+      'have.text',
+      'No remote registries yet',
+    );
+    cy.get('.pf-c-empty-state__content > .pf-c-empty-state__body').should(
+      'have.text',
+      'You currently have no remote registries.',
+    );
+  });
+
   it('admin can add new remote registry', () => {
     cy.menuGo('Execution Enviroments > Remote Registries');
     addData('New remote registry1', 'some url1');

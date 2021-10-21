@@ -35,6 +35,7 @@ interface IProps {
 
 interface IState {
   kwField: string;
+  inputText: string;
 }
 
 export class ImportList extends React.Component<IProps, IState> {
@@ -43,6 +44,7 @@ export class ImportList extends React.Component<IProps, IState> {
 
     this.state = {
       kwField: '',
+      inputText: '',
     };
   }
 
@@ -63,6 +65,8 @@ export class ImportList extends React.Component<IProps, IState> {
         {this.renderNamespacePicker(namespaces)}
         <Toolbar>
           <CompoundFilter
+            inputText={this.state.inputText}
+            onChange={(text) => this.setState({ inputText: text })}
             updateParams={(p) => {
               p['page'] = 1;
               this.props.updateParams(p);
@@ -103,6 +107,7 @@ export class ImportList extends React.Component<IProps, IState> {
           updateParams={(p) => {
             p['page'] = 1;
             this.props.updateParams(p);
+            this.setState({ inputText: '' });
           }}
           params={params}
           ignoredParams={['page_size', 'page', 'sort', 'ordering', 'namespace']}

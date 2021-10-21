@@ -57,6 +57,7 @@ interface IState {
   loading: boolean;
   updatingVersions: CollectionVersion[];
   unauthorized: boolean;
+  inputText: string;
 }
 
 class CertificationDashboard extends React.Component<
@@ -91,6 +92,7 @@ class CertificationDashboard extends React.Component<
       updatingVersions: [],
       alerts: [],
       unauthorized: false,
+      inputText: '',
     };
   }
 
@@ -130,6 +132,10 @@ class CertificationDashboard extends React.Component<
                   <ToolbarGroup>
                     <ToolbarItem>
                       <CompoundFilter
+                        inputText={this.state.inputText}
+                        onChange={(text) => {
+                          this.setState({ inputText: text });
+                        }}
                         updateParams={(p) =>
                           this.updateParams(p, () => this.queryCollections())
                         }
@@ -179,9 +185,10 @@ class CertificationDashboard extends React.Component<
               </div>
               <div>
                 <AppliedFilters
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.queryCollections())
-                  }
+                  updateParams={(p) => {
+                    this.updateParams(p, () => this.queryCollections());
+                    this.setState({ inputText: '' });
+                  }}
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
                   niceValues={{

@@ -55,6 +55,7 @@ interface IState {
   selectedGroup: any;
   groupError: any;
   unauthorized: boolean;
+  inputText: string;
 }
 
 class GroupList extends React.Component<RouteComponentProps, IState> {
@@ -86,6 +87,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       selectedGroup: null,
       groupError: null,
       unauthorized: false,
+      inputText: '',
     };
   }
 
@@ -157,6 +159,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                     <ToolbarGroup>
                       <ToolbarItem>
                         <CompoundFilter
+                          inputText={this.state.inputText}
+                          onChange={(val) => this.setState({ inputText: val })}
                           updateParams={(p) =>
                             this.updateParams(p, () => this.queryGroups())
                           }
@@ -197,9 +201,10 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
               </div>
               <div>
                 <AppliedFilters
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.queryGroups())
-                  }
+                  updateParams={(p) => {
+                    this.updateParams(p, () => this.queryGroups());
+                    this.setState({ inputText: '' });
+                  }}
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
                 />
