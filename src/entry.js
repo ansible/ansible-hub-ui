@@ -9,7 +9,7 @@ import App from './loaders/insights/insights-loader';
 import getBaseName from './utilities/getBaseName';
 import 'src/l10n';
 
-// Entrypoint for compiling the app to run in insights production mode.
+// hub-entrypoint for compiling the app to run in insights production mode.
 
 const basename = getBaseName(window.location.pathname);
 

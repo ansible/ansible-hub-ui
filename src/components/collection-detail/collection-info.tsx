@@ -132,14 +132,14 @@ export class CollectionInfo extends React.Component<IProps> {
 
           {latest_version.docs_blob.collection_readme ? (
             <GridItem>
-              <div className='readme-container'>
+              <div className='hub-readme-container'>
                 <div
                   className='pf-c-content'
                   dangerouslySetInnerHTML={{
                     __html: latest_version.docs_blob.collection_readme.html,
                   }}
                 />
-                <div className='fade-out'></div>
+                <div className='hub-fade-out'></div>
               </div>
               <Link
                 to={formatPath(

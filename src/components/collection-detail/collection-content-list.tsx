@@ -80,7 +80,7 @@ export class CollectionContentList extends React.Component<IProps> {
                   key={key}
                   className={cx({
                     clickable: true,
-                    'selected-item': key === showing,
+                    'hub-c-toolbar__item-selected-item': key === showing,
                     'hub-c-toolbar__item-type-selector': true,
                   })}
                   onClick={() =>

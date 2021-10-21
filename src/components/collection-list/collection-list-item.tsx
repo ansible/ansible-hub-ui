@@ -88,8 +88,8 @@ export class CollectionListItem extends React.Component<IProps, {}> {
             </TextContent>
           ) : null}
         </div>
-        <div className='entry'>{latest_version.metadata.description}</div>
-        <div className='entry pf-l-flex pf-m-wrap content'>
+        <div className='hub-entry'>{latest_version.metadata.description}</div>
+        <div className='hub-entry pf-l-flex pf-m-wrap content'>
           {Object.keys(contentSummary.contents).map((k) => (
             <div key={k}>
               <NumericLabel
@@ -101,7 +101,7 @@ export class CollectionListItem extends React.Component<IProps, {}> {
             </div>
           ))}
         </div>
-        <div className='entry pf-l-flex pf-m-wrap'>
+        <div className='hub-entry pf-l-flex pf-m-wrap'>
           <LabelGroup>
             {latest_version.metadata.tags.map((tag, index) => (
               <Tag key={index}>{tag}</Tag>
@@ -113,13 +113,13 @@ export class CollectionListItem extends React.Component<IProps, {}> {
 
     cells.push(
       <DataListCell isFilled={false} alignRight key='stats'>
-        {controls ? <div className='entry'>{controls}</div> : null}
-        <div className='right-col entry'>
+        {controls ? <div className='hub-entry'>{controls}</div> : null}
+        <div className='hub-right-col hub-entry'>
           <Trans>
             Updated <DateComponent date={latest_version.created_at} />
           </Trans>
         </div>
-        <div className='entry'>v{latest_version.version}</div>
+        <div className='hub-entry'>v{latest_version.version}</div>
       </DataListCell>,
     );
 

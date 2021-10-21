@@ -250,7 +250,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           }
           filters={
             tab.toLowerCase() === 'collections' ? (
-              <div className='toolbar-wrapper namespace-detail'>
+              <div className='hub-toolbar-wrapper namespace-detail'>
                 <div className='toolbar'>
                   <CollectionFilter
                     ignoredParams={ignoredParams}

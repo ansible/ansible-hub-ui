@@ -102,7 +102,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
           }
         >
           {!noData && (
-            <div className='toolbar-wrapper'>
+            <div className='hub-toolbar-wrapper'>
               <div className='toolbar'>
                 <CollectionFilter
                   ignoredParams={['page', 'page_size', 'sort', 'view_type']}
