@@ -3,7 +3,7 @@ import { t, Trans } from '@lingui/macro';
 import {
   Alert,
   Button,
-  ClipboardCopy,
+  ClipboardCopyButton,
   DescriptionList,
   DescriptionListDescription,
   DescriptionListGroup,
@@ -208,14 +208,19 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
 
           return (
             <ListItem style={{ paddingTop: '8px' }}>
-              <ClipboardCopy variant='inline-compact'>
-                <a href={href} target='_blank'>
-                  {host}
-                </a>{' '}
-                <small>
-                  <ExternalLinkAltIcon />
-                </small>
-              </ClipboardCopy>
+              <a href={href} target='_blank'>
+                {host}
+              </a>{' '}
+              <small>
+                <ExternalLinkAltIcon />
+              </small>
+              <ClipboardCopyButton
+                variant={'plain'}
+                children={href}
+                id={href}
+                textId={href}
+                onClick={() => navigator.clipboard.writeText(href)}
+              />
             </ListItem>
           );
         })}
