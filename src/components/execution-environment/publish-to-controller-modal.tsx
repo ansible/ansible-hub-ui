@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { t, Trans } from '@lingui/macro';
 import {
+  Alert,
   Button,
+  ClipboardCopy,
   DescriptionList,
   DescriptionListDescription,
   DescriptionListGroup,
@@ -13,7 +15,6 @@ import {
   Modal,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon, TagIcon } from '@patternfly/react-icons';
-import { sortBy } from 'lodash';
 import { ControllerAPI, ExecutionEnvironmentAPI } from 'src/api';
 import {
   APISearchTypeAhead,
@@ -207,15 +208,24 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
 
           return (
             <ListItem style={{ paddingTop: '8px' }}>
-              <a href={href} target='_blank'>
-                {host}
-              </a>{' '}
-              <small>
-                <ExternalLinkAltIcon />
-              </small>
+              <ClipboardCopy variant='inline-compact'>
+                <a href={href} target='_blank'>
+                  {host}
+                </a>{' '}
+                <small>
+                  <ExternalLinkAltIcon />
+                </small>
+              </ClipboardCopy>
             </ListItem>
           );
         })}
+        {Object.keys(window).includes('chrome') && (
+          <Alert
+            isInline
+            variant='warning'
+            title={t`Unsafe link may be blocked by the browser. Please copy the link manually, please.`}
+          />
+        )}
       </List>
     );
   }
