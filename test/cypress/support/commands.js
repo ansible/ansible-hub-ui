@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import shell from 'shell-escape-tag';
-var urljoin = require('url-join');
+const urljoin = require('url-join');
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
@@ -406,4 +406,154 @@ Cypress.Commands.add('deleteTestGroups', {}, () => {
   cy.galaxykit('group list').then((lines) => {
     lines.map(col1).forEach((group) => cy.galaxykit('-i group delete', group));
   });
+});
+
+/// settings.py manipulation
+Cypress.Commands.add('settings', {}, (newSettings) => {
+  const settings = Cypress.env('settings'); // location for the settings.py file
+  const restart = Cypress.env('restart'); // command to apply the settings
+
+  const pythonifyValue = (v) =>
+    v === true
+      ? 'True'
+      : v === false
+      ? 'False'
+      : v == null
+      ? 'None'
+      : JSON.stringify(v);
+  const pythonify = (obj) =>
+    obj
+      ? Object.keys(obj).map((k) => `${k} = ${pythonifyValue(obj[k])} #CYPRESS`)
+      : [];
+
+  const newLines = pythonify(newSettings);
+  console.log(`SETTINGS ${settings} ${newLines.join('\n')}`);
+
+  return cy
+    .readFile(settings)
+    .then((data) => {
+      const currentLines = data
+        .split('\n')
+        .filter((line) => !line.match('#CYPRESS'));
+      return cy.writeFile(settings, [...currentLines, ...newLines].join('\n'));
+    })
+    .then(() => cy.exec(restart))
+    .then(({ code, stderr, stdout }) => {
+      console.log(`RUN ${restart} ${code} ${stdout} ${stderr}`);
+
+      if (code) {
+        return Promise.reject(new Error(`Restart failed (${code}): ${stderr}`));
+      }
+    })
+    .then(() => cy.wait(2000))
+    .then(() => {
+      // wait for server to respond with a good status (502 means server didn't restart yet)
+      // ..after waiting to make sure we're not faster than the restart
+      cy.request({
+        url: Cypress.env('prefix') + '_ui/v1/feature-flags/',
+        retryOnStatusCodeFailure: true,
+      })
+        .its('status')
+        .should('eq', 200);
+    });
+});
+
+Cypress.Commands.add('addRemoteRegistry', {}, (name, url) => {
+  cy.menuGo('Execution Enviroments > Remote Registries');
+  cy.contains('button', 'Add remote registry').click();
+
+  // add registry
+  cy.get('input[id = "name"]').type(name);
+  cy.get('input[id = "url"]').type(url);
+
+  cy.intercept(
+    'POST',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/registries/',
+  ).as('registries');
+
+  cy.intercept(
+    'GET',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
+  ).as('registriesGet');
+
+  cy.contains('button', 'Save').click();
+
+  cy.wait('@registries');
+  cy.wait('@registriesGet');
+});
+
+Cypress.Commands.add(
+  'addRemoteContainer',
+  {},
+  ({ name, upstream_name, registry, include_tags }) => {
+    cy.menuGo('Execution Environments > Execution Environments');
+    cy.contains('button', 'Add execution environment').click();
+
+    // add registry
+    cy.get('input[id="name"]').type(name);
+    cy.get('input[id="upstreamName"]').type(upstream_name);
+
+    cy.get(
+      '.hub-formgroup-registry .pf-c-form-control.pf-c-select__toggle-typeahead',
+    )
+      .click()
+      .type(registry);
+    cy.contains('button', registry).click();
+
+    cy.get('input[id="addTagsInclude"]')
+      .type(include_tags)
+      .parent()
+      .find('button', 'Add')
+      .click();
+
+    cy.intercept(
+      'POST',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/remotes/',
+    ).as('saved');
+
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
+    ).as('listLoad');
+
+    cy.contains('button', 'Save').click();
+
+    cy.wait('@saved');
+    cy.wait('@listLoad');
+  },
+);
+
+Cypress.Commands.add(
+  'addLocalContainer',
+  {},
+  (localName, remoteName, registry = 'docker.io/') => {
+    return cy
+      .exec(
+        shell`
+    podman pull ${registry + remoteName} ;
+    podman image tag ${remoteName} localhost:5001/${localName}:latest ;
+    podman push localhost:5001/${localName}:latest --tls-verify=false
+  `,
+      )
+      .then(({ code, stderr, stdout }) => {
+        console.log(`c${code} ERR=${stderr} OUT=${stdout}`);
+        if (code) {
+          return Promise.reject(
+            new Error(`podman pull/push failed (code ${code}): ${stderr}`),
+          );
+        }
+      });
+  },
+);
+
+Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
+  cy.menuGo('Execution Environments > Execution Environments');
+  cy.contains('tr', name)
+    .find('button[aria-label="Actions"]')
+    .click()
+    .parents('tr')
+    .contains('.pf-c-dropdown__menu-item', 'Sync from registry')
+    .click();
+
+  cy.contains('.pf-c-alert__title', `Sync initiated for ${name}`);
 });
