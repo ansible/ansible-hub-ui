@@ -99,12 +99,14 @@ class ExecutionEnvironmentDetail extends React.Component<
                 description={t`Add a README with instructions for using this container.`}
                 button={
                   canEdit ? (
-                    <Button
-                      variant='primary'
-                      onClick={() => this.setState({ markdownEditing: true })}
-                    >
-                      {t`Add`}
-                    </Button>
+                    <div data-cy='add-readme'>
+                      <Button
+                        variant='primary'
+                        onClick={() => this.setState({ markdownEditing: true })}
+                      >
+                        {t`Add`}
+                      </Button>
+                    </div>
                   ) : null
                 }
               />
@@ -124,17 +126,19 @@ class ExecutionEnvironmentDetail extends React.Component<
 
             {this.state.markdownEditing && (
               <React.Fragment>
-                <Button
-                  variant={'primary'}
-                  onClick={() =>
-                    this.saveReadme(
-                      this.props.containerRepository.name,
-                      this.state.readme,
-                    )
-                  }
-                >
-                  {t`Save`}
-                </Button>
+                <div data-cy='save-readme'>
+                  <Button
+                    variant={'primary'}
+                    onClick={() =>
+                      this.saveReadme(
+                        this.props.containerRepository.name,
+                        this.state.readme,
+                      )
+                    }
+                  >
+                    {t`Save`}
+                  </Button>
+                </div>
                 <Button
                   variant={'link'}
                   onClick={() => {
