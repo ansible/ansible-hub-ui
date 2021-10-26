@@ -42,7 +42,9 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
         pageControls={this.props.pageControls}
       >
         <Tooltip content={this.props.container.description}>
-          <p className={'truncated'}>{this.props.container.description}</p>
+          <p data-cy='description' className={'truncated'}>
+            {this.props.container.description}
+          </p>
         </Tooltip>
         {last_sync_task && (
           <p className='truncated'>
