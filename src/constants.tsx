@@ -19,69 +19,101 @@ export class Constants {
 
   static NOTCERTIFIED = 'rejected';
   static NEEDSREVIEW = 'staging';
+
   static PERMISSIONS = [
     {
       name: 'namespaces',
+      label: t`Collection Namespaces`,
       object_permissions: [
-        'galaxy.add_namespace',
-        'galaxy.change_namespace',
-        'galaxy.upload_to_namespace',
+        'galaxy.add_namespace', // model_permissions.add_namespace
+        'galaxy.change_namespace', // (model_permissions.change_namespace)
+        'galaxy.delete_namespace', // model_permissions.delete_namespace
+        'galaxy.upload_to_namespace', // (model_permissions.upload_to_namespace)
       ],
     },
     {
       name: 'collections',
-      object_permissions: ['ansible.modify_ansible_repo_content'],
+      label: t`Collections`,
+      object_permissions: [
+        'ansible.modify_ansible_repo_content', // model_permissions.move_collection
+        'ansible.delete_collection', // model_permissions.delete_collection
+      ],
     },
     {
       name: 'users',
+      label: t`Users`,
       object_permissions: [
-        'galaxy.view_user',
-        'galaxy.delete_user',
-        'galaxy.add_user',
-        'galaxy.change_user',
+        'galaxy.view_user', // model_permissions.view_user
+        'galaxy.delete_user', // model_permissions.delete_user
+        'galaxy.add_user', // model_permissions.add_user
+        'galaxy.change_user', // model_permissions.change_user
       ],
     },
     {
       name: 'groups',
+      label: t`Groups`,
       object_permissions: [
-        'galaxy.view_group',
-        'galaxy.delete_group',
-        'galaxy.add_group',
-        'galaxy.change_group',
+        'galaxy.view_group', // model_permissions.view_group
+        'galaxy.delete_group', // model_permissions.delete_group
+        'galaxy.add_group', // model_permissions.add_group
+        'galaxy.change_group', // model_permissions.change_group
       ],
     },
     {
       name: 'remotes',
+      label: t`Collection Remotes`,
       object_permissions: [
-        'ansible.change_collectionremote',
+        'ansible.change_collectionremote', // model_permissions.change_remote
         'ansible.view_collectionremote',
+        // 'ansible.add_collectionremote', // (model_permissions.add_remote)
+        // 'ansible.delete_collectionremote', // (model_permissions.delete_remote)
       ],
     },
     {
       name: 'containers',
+      label: t`Containers`,
       object_permissions: [
         // Turning off private container permissions since they aren't supported yet
         // 'container.namespace_pull_containerdistribution',
         // 'container.namespace_view_containerdistribution',
 
+        // 'container.add_containerrepository', // (model_permissions.add_containerrepository)
+        // 'container.change_containerrepository', // (model_permissions.change_containerrepository)
+        'container.delete_containerrepository', // model_permissions.delete_containerrepository
+
         'container.namespace_change_containerdistribution',
         'container.namespace_modify_content_containerpushrepository',
-        'container.change_containernamespace',
         'container.namespace_push_containerdistribution',
-        'container.add_containernamespace',
+
+        'container.add_containernamespace', // (model_permissions.add_containernamespace)
+        'container.change_containernamespace', // (model_permissions.change_containernamespace)
+        // 'container.delete_containernamespace', // (model_permissions.delete_containernamespace)
+      ],
+    },
+    {
+      name: 'registries',
+      label: t`Remote Registries`,
+      object_permissions: [
+        'galaxy.add_containerregistryremote', // model_permissions.add_containerregistry
+        'galaxy.change_containerregistryremote', // model_permissions.change_containerregistry
+        'galaxy.delete_containerregistryremote', // model_permissions.delete_containerregistry
       ],
     },
 
     // These aren't currently used. Removing them to reduce confusion in the UI
     // {
     //   name: 'distribution',
+    //   label: '...',
     //   object_permissions: [
-    //     'ansible.change_ansibledistribution',
-    //     'ansible.view_ansibledistribution',
+    //     'ansible.view_ansibledistribution', // (model_permissions.view_distribution)
+    //     'ansible.add_ansibledistribution', // (model_permissions.add_distribution)
+    //     'ansible.change_ansibledistribution', // (model_permissions.change_distribution)
+    //     'ansible.delete_ansibledistribution', // (model_permissions.delete_distribution)
     //   ],
     // },
     // {
     //   name: 'synclists',
+    //   label: '...',
     //   object_permissions: [
     //     'galaxy.delete_synclist',
     //     'galaxy.change_synclist',
@@ -89,7 +121,17 @@ export class Constants {
     //     'galaxy.add_synclist',
     //   ],
     // },
+    // {
+    //   name: 'container_distribution',
+    //   label: '...',
+    //   object_permissions: [
+    //     'container.add_containerdistribution', // (model_permissions.add_containerdistribution)
+    //     'container.change_containerdistribution', // (model_permissions.change_containerdistribution)
+    //     'container.delete_containerdistribution', // (model_permissions.delete_containerdistribution)
+    //   ],
+    // },
   ];
+
   static USER_GROUP_MGMT_PERMISSIONS = [
     'galaxy.delete_user',
     'galaxy.add_user',
@@ -97,35 +139,53 @@ export class Constants {
     'galaxy.delete_group',
     'galaxy.add_group',
   ];
+
   static HUMAN_PERMISSIONS = {
-    'galaxy.add_namespace': t`Add namespace`,
-    'galaxy.change_namespace': t`Change namespace`,
-    'galaxy.upload_to_namespace': t`Upload to namespace`,
-    'ansible.modify_ansible_repo_content': t`Modify Ansible repo content`,
-    'galaxy.view_user': t`View user`,
-    'galaxy.delete_user': t`Delete user`,
-    'galaxy.add_user': t`Add user`,
-    'galaxy.change_user': t`Change user`,
-    'galaxy.view_group': t`View group`,
-    'galaxy.delete_group': t`Delete group`,
-    'galaxy.add_group': t`Add group`,
-    'galaxy.change_group': t`Change group`,
-    'ansible.change_collectionremote': t`Change collection remote`,
-    'ansible.view_collectionremote': t`View collection remote`,
+    'ansible.add_ansibledistribution': t`Add Ansible distribution`,
+    'ansible.add_collectionremote': t`Add collection remote`,
     'ansible.change_ansibledistribution': t`Change Ansible distribution`,
+    'ansible.change_collectionremote': t`Change collection remote`,
+    'ansible.delete_ansibledistribution': t`Delete Ansible distribution`,
+    'ansible.delete_collection': t`Delete collection`,
+    'ansible.delete_collectionremote': t`Delete collection remote`,
+    'ansible.modify_ansible_repo_content': t`Modify Ansible repo content`,
     'ansible.view_ansibledistribution': t`View Ansible distribution`,
-    'galaxy.delete_synclist': t`Delete synclist`,
-    'galaxy.change_synclist': t`Change synclist`,
-    'galaxy.view_synclist': t`View synclist`,
-    'galaxy.add_synclist': t`Add synclist`,
+    'ansible.view_collectionremote': t`View collection remote`,
+    'container.add_containerdistribution': t`Add container distribution`,
     'container.add_containernamespace': t`Create new containers`,
-    'container.namespace_pull_containerdistribution': t`Pull private containers`,
-    'container.namespace_change_containerdistribution': t`Change containers`,
-    'container.namespace_view_containerdistribution': t`View private containers`,
-    'container.namespace_modify_content_containerpushrepository': t`Change image tags`,
+    'container.add_containerrepository': t`Add container repository`,
+    'container.change_containerdistribution': t`Change container distribution`,
     'container.change_containernamespace': t`Change container namespace permissions`,
+    'container.change_containerrepository': t`Change container repository`,
+    'container.delete_containerdistribution': t`Delete container distribution`,
+    'container.delete_containernamespace': t`Delete container namespace`,
+    'container.delete_containerrepository': t`Delete container repository`,
+    'container.namespace_change_containerdistribution': t`Change containers`,
+    'container.namespace_modify_content_containerpushrepository': t`Change image tags`,
+    'container.namespace_pull_containerdistribution': t`Pull private containers`,
     'container.namespace_push_containerdistribution': t`Push to existing containers`,
+    'container.namespace_view_containerdistribution': t`View private containers`,
+    'galaxy.add_containerregistryremote': t`Add remote registry`,
+    'galaxy.add_group': t`Add group`,
+    'galaxy.add_namespace': t`Add namespace`,
+    'galaxy.add_synclist': t`Add synclist`,
+    'galaxy.add_user': t`Add user`,
+    'galaxy.change_containerregistryremote': t`Change remote registry`,
+    'galaxy.change_group': t`Change group`,
+    'galaxy.change_namespace': t`Change namespace`,
+    'galaxy.change_synclist': t`Change synclist`,
+    'galaxy.change_user': t`Change user`,
+    'galaxy.delete_containerregistryremote': t`Delete remote registry`,
+    'galaxy.delete_group': t`Delete group`,
+    'galaxy.delete_namespace': t`Delete namespace`,
+    'galaxy.delete_synclist': t`Delete synclist`,
+    'galaxy.delete_user': t`Delete user`,
+    'galaxy.upload_to_namespace': t`Upload to namespace`,
+    'galaxy.view_group': t`View group`,
+    'galaxy.view_synclist': t`View synclist`,
+    'galaxy.view_user': t`View user`,
   };
+
   static GROUP_HUMAN_PERMISSIONS = {
     change_namespace: t`Change namespace`,
     upload_to_namespace: t`Upload to namespace`,
@@ -147,14 +207,7 @@ export class Constants {
     pull_containerdistribution: t`Pull distribution`,
     view_containerdistribution: t`View distribution`,
   };
-  static HUMAN_GROUP_DETAIL_PERMISSIONS = {
-    namespaces: t`Namespaces`,
-    collections: t`Collections`,
-    users: t`Users`,
-    groups: t`Groups`,
-    remotes: t`Remotes`,
-    containers: t`Containers`,
-  };
+
   static CONTAINER_NAMESPACE_PERMISSIONS = [
     'change_containernamespace',
     'namespace_push_containerdistribution',
