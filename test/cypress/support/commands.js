@@ -198,7 +198,7 @@ Cypress.Commands.add('createGroup', {}, (name) => {
 /*
  * groupName: name of the group you want to add permissions to
  * permissions: array of {group, permissions}
- *   group: permission group, one of names from PERMISSIONS; namespaces | collections | users | groups | remotes | containers
+ *   group: permission group, one of names from PERMISSIONS; namespaces | collections | users | groups | remotes | containers | registries
  *   permissions: array of HUMAN_PERMISSIONS values (of the right group) - eg. "View user"
  */
 Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
@@ -261,11 +261,16 @@ Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
 const allPerms = [
   {
     group: 'namespaces',
-    permissions: ['Add namespace', 'Change namespace', 'Upload to namespace'],
+    permissions: [
+      'Add namespace',
+      'Change namespace',
+      'Delete namespace',
+      'Upload to namespace',
+    ],
   },
   {
     group: 'collections',
-    permissions: ['Modify Ansible repo content'],
+    permissions: ['Modify Ansible repo content', 'Delete collection'],
   },
   {
     group: 'users',
@@ -282,15 +287,20 @@ const allPerms = [
   {
     group: 'containers',
     permissions: [
-      // Turning off private container permissions since they aren't supported yet
-      // 'Pull private containers', // container.namespace_pull_containerdistribution
-      // 'View private containers', // container.namespace_view_containerdistribution
-
+      'Delete container repository',
       'Change container namespace permissions',
       'Change containers',
       'Change image tags',
       'Create new containers',
       'Push to existing containers',
+    ],
+  },
+  {
+    group: 'registries',
+    permissions: [
+      'Add remote registry',
+      'Change remote registry',
+      'Delete remote registry',
     ],
   },
 ];
