@@ -23,7 +23,7 @@ export class Constants {
   static PERMISSIONS = [
     {
       name: 'namespaces',
-      label: t`Namespaces`,
+      label: t`Collection Namespaces`,
       object_permissions: [
         'galaxy.add_namespace', // model_permissions.add_namespace
         'galaxy.change_namespace', // (model_permissions.change_namespace)
@@ -61,7 +61,7 @@ export class Constants {
     },
     {
       name: 'remotes',
-      label: t`Remotes`,
+      label: t`Collection Remotes`,
       object_permissions: [
         'ansible.change_collectionremote', // model_permissions.change_remote
         'ansible.view_collectionremote',
