@@ -2,6 +2,7 @@ import * as React from 'react';
 import { t, Trans } from '@lingui/macro';
 import {
   Button,
+  ClipboardCopyButton,
   DescriptionList,
   DescriptionListDescription,
   DescriptionListGroup,
@@ -13,7 +14,6 @@ import {
   Modal,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon, TagIcon } from '@patternfly/react-icons';
-import { sortBy } from 'lodash';
 import { ControllerAPI, ExecutionEnvironmentAPI } from 'src/api';
 import {
   APISearchTypeAhead,
@@ -181,6 +181,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
     const { image, isOpen } = this.props;
     const { controllers, controllerCount, digest, tag } = this.state;
     const url = getContainersURL();
+    const unsafeLinksSupported = !Object.keys(window).includes('chrome');
 
     if (!isOpen || !controllers) {
       return null;
@@ -208,9 +209,20 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
               <a href={href} target='_blank'>
                 {host}
               </a>{' '}
-              <small>
-                <ExternalLinkAltIcon />
-              </small>
+              {unsafeLinksSupported && (
+                <small>
+                  <ExternalLinkAltIcon />
+                </small>
+              )}
+              {!unsafeLinksSupported && (
+                <ClipboardCopyButton
+                  variant={'plain'}
+                  children={t`Copy to clipboard`}
+                  id={href}
+                  textId={t`Copy to clipboard`}
+                  onClick={() => navigator.clipboard.writeText(href)}
+                />
+              )}
             </ListItem>
           );
         })}
@@ -254,6 +266,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
     );
 
     const Spacer = () => <div style={{ paddingTop: '24px' }}></div>;
+    const unsafeLinksSupported = !Object.keys(window).includes('chrome');
 
     return (
       <Modal
@@ -338,6 +351,13 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
               console. Log in (if necessary) and follow the steps to complete
               the configuration.
             </Trans>
+            <br />
+            {!unsafeLinksSupported && (
+              <Trans>
+                <b>Note:</b> The following links may be blocked by your browser.
+                Copy and paste the link manually.
+              </Trans>
+            )}
             <Spacer />
 
             <Flex>
