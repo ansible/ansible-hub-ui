@@ -18,10 +18,6 @@ jobs:
         node-version: '14'
         cache: 'npm'
 
-    - name: "Install lint:po dependencies"
-      run: |
-        sudo apt install -y libstring-escape-perl libarray-utils-perl perl
-
     - name: "Checks"
       run: |
         # fail if npm install had to change package-lock.json
