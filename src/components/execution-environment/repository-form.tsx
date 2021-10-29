@@ -181,7 +181,12 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 />
               </FormGroup>
 
-              <FormGroup key='registry' fieldId='registry' label={t`Registry`}>
+              <FormGroup
+                key='registry'
+                fieldId='registry'
+                label={t`Registry`}
+                className='hub-formgroup-registry'
+              >
                 {registries ? (
                   <APISearchTypeAhead
                     loadResults={(name) => this.loadRegistries(name)}
@@ -321,6 +326,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             key='groups'
             fieldId='groups'
             label={t`Groups with access`}
+            className='hub-formgroup-groups'
           >
             <div className='pf-c-form__helper-text'>
               {t`Adding groups provides access to all repositories in the

@@ -24,29 +24,6 @@ describe('Remote Registry Tests', () => {
     });
   }
 
-  function addData(name, url) {
-    cy.contains('button', 'Add remote registry').click();
-
-    // add registry
-    cy.get('input[id = "name"]').type(name);
-    cy.get('input[id = "url"]').type(url);
-
-    cy.intercept(
-      'POST',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/',
-    ).as('registries');
-
-    cy.intercept(
-      'GET',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
-    ).as('registriesGet');
-
-    cy.contains('button', 'Save').click();
-
-    cy.wait('@registries');
-    cy.wait('@registriesGet');
-  }
-
   before(() => {
     cy.visit('/');
     cy.login(adminUsername, adminPassword);
@@ -60,8 +37,8 @@ describe('Remote Registry Tests', () => {
 
   it('admin can add new remote registry', () => {
     cy.menuGo('Execution Enviroments > Remote Registries');
-    addData('New remote registry1', 'some url1');
-    addData('New remote registry2', 'some url2');
+    cy.addRemoteRegistry('New remote registry1', 'some url1');
+    cy.addRemoteRegistry('New remote registry2', 'some url2');
   });
 
   it('admin can view data', () => {

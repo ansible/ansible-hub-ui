@@ -144,7 +144,13 @@ jobs:
         podman exec pulp pulpcore-manager reset-admin-password --password admin
 
         npm install
-        echo -e '{\n  "prefix": "/api/galaxy/",\n  "username": "admin",\n  "password": "admin"\n}' > cypress.env.json
+        echo -e '{
+          "prefix": "/api/galaxy/",
+          "username": "admin",
+          "password": "admin",
+          "settings": "../../pulp_galaxy_ng/settings/settings.py",
+          "restart": "podman exec pulp bash -c \"s6-svc -r /var/run/s6/services/pulpcore-api\"; sleep 10"
+        }' > cypress.env.json
 
         # ensure index.html uses the new js
         curl http://localhost:8002/static/galaxy_ng/index.html | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
