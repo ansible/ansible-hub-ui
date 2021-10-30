@@ -149,7 +149,8 @@ jobs:
           "username": "admin",
           "password": "admin",
           "settings": "../../pulp_galaxy_ng/settings/settings.py",
-          "restart": "podman exec pulp bash -c \"s6-svc -r /var/run/s6/services/pulpcore-api\"; sleep 10"
+          "restart": "podman exec pulp bash -c \"s6-svc -r /var/run/s6/services/pulpcore-api\"; sleep 10",
+          "containers": "localhost:8002"
         }' > cypress.env.json
 
         # ensure index.html uses the new js

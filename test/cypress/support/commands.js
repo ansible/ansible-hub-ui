@@ -543,26 +543,27 @@ Cypress.Commands.add(
       console.log(arr);
       return Promise.reject(...arr);
     };
+    const server = Cypress.env('containers');
 
     return cy
       .exec(shell`podman pull ${registry + remoteName}`)
       .then(log, logFail)
       .then(() =>
         cy.exec(
-          shell`podman image tag ${remoteName} localhost:8002/${localName}:latest`,
+          shell`podman image tag ${remoteName} ${server}/${localName}:latest`,
         ),
       )
       .then(log, logFail)
       .then(() =>
         cy.exec(
-          shell`podman login localhost:8002 --tls-verify=false --username=admin --password=admin`,
+          shell`podman login ${server} --tls-verify=false --username=admin --password=admin`,
           { failOnNonZeroExit: false },
         ),
       )
       .then(log, logFail)
       .then(() =>
         cy.exec(
-          shell`podman push localhost:8002/${localName}:latest --tls-verify=false`,
+          shell`podman push ${server}/${localName}:latest --tls-verify=false`,
           { failOnNonZeroExit: false },
         ),
       )
