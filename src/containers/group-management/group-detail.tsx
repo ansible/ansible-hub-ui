@@ -557,7 +557,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const group = this.state.group;
     const user = this.state.showUserRemoveModal as UserType;
 
-    const username = { user };
+    const { username } = user;
     const groupname = group.name;
 
     return (
