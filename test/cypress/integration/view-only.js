@@ -53,7 +53,8 @@ describe('view-only mode', () => {
       cy.contains('.pf-c-tabs__item a', 'My namespaces').should('not.exist');
 
       // go to a (namespace) detail screen
-      cy.contains('a', 'View collections');
+      cy.contains('a', 'View collections').click();
+      cy.contains('.pf-c-title', 'admin');
 
       cy.contains('button', 'Upload collection').should('not.exist');
       cy.contains('button', 'Upload new version').should('not.exist');
