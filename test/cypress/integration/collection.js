@@ -20,7 +20,7 @@ describe('collection tests', () => {
 
   it('deletes an entire collection', () => {
     cy.galaxykit('-i collection upload test_namespace test_collection');
-    cy.visit('ui/repo/published/test_namespace/test_collection');
+    cy.visit('/ui/repo/published/test_namespace/test_collection');
 
     cy.get('[data-cy=kebab-toggle]').click();
     cy.get('[data-cy=delete-collection-dropdown]').click();
