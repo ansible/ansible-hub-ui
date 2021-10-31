@@ -86,6 +86,7 @@ jobs:
           RH_ENTITLEMENT_REQUIRED='insights'
           TOKEN_AUTH_DISABLED=True
           X_PULP_CONTENT_HOST='localhost'
+          GALAXY_REQUIRE_CONTENT_APPROVAL=False
         " | sed 's/^\s\+//' | tee settings/settings.py
 
         podman run \
