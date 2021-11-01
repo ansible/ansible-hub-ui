@@ -34,16 +34,23 @@ These are separate from the project's own dependencies. Run the following from t
 
 ### Prepare your `cypress.env.json`
 
-The tests need to know details about the instance of Automation Hub that it's running against. Create a file named `cypress.env.json` in the test/ directory, and use the below example as a template.
+The tests need to know details about the instance of Automation Hub that it's running against. Create a file named `cypress.env.json` in the test/ directory, and use the below example as a template or start by copying `cypress.env.json.template`.
 
     {
-        "baseUrl":"http://localhost:8002/",
-        "prefix":"<api root>",
+        "baseUrl": "http://localhost:8002/",
+        "prefix": "<api root>",
         "username": "<your username here>",
-        "password": "<your password here>"
+        "password": "<your password here>",
+        "settings": "../../galaxy_ng/galaxy_ng/app/settings.py",
+        "restart": "true",
+        "containers": "localhost:5001"
     }
 
-*note*: the api root for the docker development environment of ansible/galaxy_ng is `api/automation-hub/`.
+*note*: the api root for the docker development environment of ansible/galaxy\_ng is `/api/automation-hub/`, while pulp-oci-images uses `/api/galaxy/`.
+
+*note*: `settings` should point to galaxy\_ng `settings.py` relative to the `test/` folder, `restart` is a command to restart the server, true works in development because the server is watching for changes.
+
+*note*: `containers` is what you would use with `docker push`/`podman push` to add a local container
 
 ## Run the Tests Directly
 
@@ -128,3 +135,5 @@ You may use these commands:
 * cy.galaxykit("namespace create", name, [initial group])
 * cy.galaxykit("namespace addgroup", namespace, group)
 * cy.galaxykit("namespace removegroup", namespace, group)
+
+see [command.py](https://github.com/ansible/galaxykit/blob/main/galaxykit/command.py) for more.
