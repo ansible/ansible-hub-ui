@@ -480,15 +480,13 @@ class ExecutionEnvironmentList extends React.Component<
     this.setState({ isDeletionPending: true }, () =>
       ExecutionEnvironmentAPI.deleteExecutionEnvironment(selectedItem.name)
         .then((result) => {
-          let taskId = result.data.task.split('tasks/')[1].replace('/', '');
-          this.setState({
-            selectedItem: null,
-          });
+          const taskId = result.data.task.split('tasks/')[1].replace('/', '');
           waitForTask(taskId).then(() => {
             this.setState({
-              isDeletionPending: false,
               confirmDelete: false,
               deleteModalVisible: false,
+              isDeletionPending: false,
+              selectedItem: null,
               alerts: this.state.alerts.concat([
                 {
                   variant: 'success',
