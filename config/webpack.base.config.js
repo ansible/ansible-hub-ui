@@ -71,6 +71,9 @@ module.exports = (inputConfigs) => {
 
     // defines port for dev server
     port: customConfigs.UI_PORT,
+
+    // frontend-components-config 4.5.0+: don't remove patternfly from non-insights builds
+    bundlePfModules: customConfigs.DEPLOYMENT_MODE !== 'insights',
   });
 
   // Override sections of the webpack config to work with TypeScript
