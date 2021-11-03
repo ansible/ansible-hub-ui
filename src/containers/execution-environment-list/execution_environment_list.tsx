@@ -404,7 +404,11 @@ class ExecutionEnvironmentList extends React.Component<
           <Label>{item.pulp.repository.remote ? t`Remote` : t`Local`}</Label>
         </td>
         <td style={{ paddingRight: '0px', textAlign: 'right' }}>
-          {!!dropdownItems.length && <StatefulDropdown items={dropdownItems} />}
+          {!!dropdownItems.length && (
+            <div data-cy='kebab-toggle'>
+              <StatefulDropdown items={dropdownItems} />
+            </div>
+          )}
         </td>
       </tr>
     );
