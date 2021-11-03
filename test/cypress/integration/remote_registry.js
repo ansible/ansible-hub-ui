@@ -2,32 +2,10 @@ describe('Remote Registry Tests', () => {
   const adminUsername = Cypress.env('username');
   const adminPassword = Cypress.env('password');
 
-  function deleteData() {
-    cy.intercept(
-      'GET',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
-    ).as('registries');
-
-    cy.visit('/ui/registries');
-
-    cy.wait('@registries').then((result) => {
-      var data = result.response.body.data;
-      data.forEach((element) => {
-        cy.get(
-          'tr[aria-labelledby="' +
-            element.name +
-            '"] button[aria-label="Actions"]',
-        ).click();
-        cy.contains('a', 'Delete').click();
-        cy.contains('button', 'Delete').click();
-      });
-    });
-  }
-
   before(() => {
     cy.visit('/');
     cy.login(adminUsername, adminPassword);
-    deleteData();
+    cy.deleteRegistries();
   });
 
   beforeEach(() => {
@@ -98,6 +76,6 @@ describe('Remote Registry Tests', () => {
   });
 
   it('admin can delete data', () => {
-    deleteData();
+    cy.deleteRegistries();
   });
 });
