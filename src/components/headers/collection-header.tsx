@@ -166,6 +166,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             <DropdownItem
               key={1}
               onClick={() => this.openDeleteModalWithConfirm()}
+              data-cy='delete-collection-dropdown'
             >
               {t`Delete entire collection`}
             </DropdownItem>
@@ -394,7 +395,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           }
           pageControls={
             dropdownItems.length > 0 ? (
-              <StatefulDropdown items={dropdownItems} />
+              <div data-cy='kebab-toggle'>
+                <StatefulDropdown items={dropdownItems} />
+              </div>
             ) : null
           }
         >
