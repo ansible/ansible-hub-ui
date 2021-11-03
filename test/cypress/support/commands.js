@@ -537,22 +537,37 @@ Cypress.Commands.add(
   'addLocalContainer',
   {},
   (localName, remoteName, registry = 'docker.io/') => {
+    const log = ({ code, stderr, stdout }) =>
+      console.log(`CODE=${code} ERR=${stderr} OUT=${stdout}`);
+    const logFail = (...arr) => {
+      console.log(arr);
+      return Promise.reject(...arr);
+    };
+    const server = Cypress.env('containers');
+
     return cy
-      .exec(
-        shell`
-    podman pull ${registry + remoteName} ;
-    podman image tag ${remoteName} localhost:5001/${localName}:latest ;
-    podman push localhost:5001/${localName}:latest --tls-verify=false
-  `,
+      .exec(shell`podman pull ${registry + remoteName}`)
+      .then(log, logFail)
+      .then(() =>
+        cy.exec(
+          shell`podman image tag ${remoteName} ${server}/${localName}:latest`,
+        ),
       )
-      .then(({ code, stderr, stdout }) => {
-        console.log(`c${code} ERR=${stderr} OUT=${stdout}`);
-        if (code) {
-          return Promise.reject(
-            new Error(`podman pull/push failed (code ${code}): ${stderr}`),
-          );
-        }
-      });
+      .then(log, logFail)
+      .then(() =>
+        cy.exec(
+          shell`podman login ${server} --tls-verify=false --username=admin --password=admin`,
+          { failOnNonZeroExit: false },
+        ),
+      )
+      .then(log, logFail)
+      .then(() =>
+        cy.exec(
+          shell`podman push ${server}/${localName}:latest --tls-verify=false`,
+          { failOnNonZeroExit: false },
+        ),
+      )
+      .then(log, logFail);
   },
 );
 
