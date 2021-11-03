@@ -42,8 +42,6 @@ import {
   LoginLink,
   SmallLogo,
   StatefulDropdown,
-  AlertList,
-  closeAlertMixin,
 } from 'src/components';
 import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
@@ -133,18 +131,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           key='logout'
           aria-label={'logout'}
           onClick={() =>
-            ActiveUserAPI.logout()
-              .then(() => this.setState({ user: null }))
-              .catch((e) => {
-                this.setAlerts([
-                  ...this.state.alerts,
-                  {
-                    variant: 'danger',
-                    title: t`API Error: unable to logout.`,
-                    description: e?.message,
-                  },
-                ]);
-              })
+            ActiveUserAPI.logout().then(() => this.setState({ user: null }))
           }
         >
           {t`Logout`}
@@ -190,12 +177,6 @@ class App extends React.Component<RouteComponentProps, IState> {
           productName={APPLICATION_NAME}
           user={user}
           userName={userName}
-          addAlert={(variant, title, description) =>
-            this.setAlerts([
-              ...this.state.alerts,
-              { variant, title, description },
-            ])
-          }
         ></AboutModalWindow>
       );
     }
@@ -327,10 +308,6 @@ class App extends React.Component<RouteComponentProps, IState> {
 
     return this.ctx(
       <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
         {this.state.aboutModalVisible && aboutModal}
         <Routes updateInitialData={this.updateInitialData} />
       </Page>,
@@ -495,10 +472,6 @@ class App extends React.Component<RouteComponentProps, IState> {
   private setAlerts = (alerts: AlertType[]) => {
     this.setState({ alerts });
   };
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
 }
 
 export default withRouter(App);
