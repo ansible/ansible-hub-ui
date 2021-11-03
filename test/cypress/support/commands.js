@@ -468,13 +468,38 @@ Cypress.Commands.add('settings', {}, (newSettings) => {
     });
 });
 
-Cypress.Commands.add('addRemoteRegistry', {}, (name, url) => {
+Cypress.Commands.add('addRemoteRegistry', {}, (name, url, extra = null) => {
   cy.menuGo('Execution Enviroments > Remote Registries');
   cy.contains('button', 'Add remote registry').click();
 
   // add registry
   cy.get('input[id = "name"]').type(name);
   cy.get('input[id = "url"]').type(url);
+
+  if (extra) {
+    const {
+      username,
+      password,
+      proxy_url,
+      proxy_username,
+      proxy_password,
+      download_concurrency,
+      rate_limit,
+    } = extra;
+
+    cy.get('input[id = "username"]').type(username);
+    cy.get('input[id = "password"]').type(password);
+    //advanced options
+    cy.get('.pf-c-expandable-section__toggle-text').click();
+    cy.get('input[id = "proxy_url"]').type(proxy_url);
+    cy.get('input[id = "proxy_username"]').type(proxy_username);
+    cy.get('input[id = "proxy_password"]').type(proxy_password);
+    cy.get('[data-cy=client_key]');
+    cy.get('button[data-cy=client_cert]');
+    cy.get('button[data-cy=ca_cert]');
+    cy.get('input[id = "download_concurrency"]').type(download_concurrency);
+    cy.get('input[id = "rate_limit"]').type(rate_limit);
+  }
 
   cy.intercept(
     'POST',
