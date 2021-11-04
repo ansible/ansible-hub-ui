@@ -481,6 +481,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 onClear={() => this.updateIsSet('client_key', false)}
               >
                 <FileUpload
+                  data-cy='client_key'
                   validated={this.toError(!('client_key' in errorMessages))}
                   isRequired={requiredFields.includes('client_key')}
                   id='yaml'
@@ -529,6 +530,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 </FlexItem>
                 <FlexItem>
                   <Button
+                    data-cy='client_cert'
                     isDisabled={!this.props.remote.client_cert}
                     onClick={() => {
                       FileSaver.saveAs(
@@ -578,6 +580,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 </FlexItem>
                 <FlexItem>
                   <Button
+                    data-cy='ca_cert'
                     isDisabled={!this.props.remote.ca_cert}
                     onClick={() => {
                       FileSaver.saveAs(
