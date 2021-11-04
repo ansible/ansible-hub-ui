@@ -92,14 +92,14 @@ describe('Execution Environments - Use in Controller', () => {
             /^https:\/\/www\.example\.com\/#\/execution_environments\/add\?image=.*latest$/,
           );
         cy.contains('a', 'https://another.example.com');
-        cy.get('button[aria-label="Copyable input"]').should('have.length', 2);
+        cy.get('ul.pf-c-list > li > a').should('have.length', 2);
 
         // filter controllers
         cy.get('input[placeholder="Filter by controller name"]')
           .click()
           .type('another{enter}');
         cy.contains('a', 'https://another.example.com');
-        cy.get('button[aria-label="Copyable input"]').should('have.length', 1);
+        cy.get('ul.pf-c-list > li > a').should('have.length', 1);
         cy.contains('a', 'https://www.example.com').should('not.exist');
 
         // unset tag, see digest
@@ -123,7 +123,7 @@ describe('Execution Environments - Use in Controller', () => {
 
         // unfilter controllers
         cy.contains('Clear all filters').click();
-        cy.get('button[aria-label="Copyable input"]').should('have.length', 2);
+        cy.get('ul.pf-c-list > li > a').should('have.length', 2);
 
         // leave
         cy.get('button[aria-label="Close"]').click();
