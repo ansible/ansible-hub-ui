@@ -78,8 +78,6 @@ export class CompoundFilter extends React.Component<IProps, IState> {
       </DropdownItem>
     ));
 
-   
-
     return (
       <InputGroup>
         <StatefulDropdown
@@ -106,7 +104,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
       </InputGroup>
     );
   }
-  
+
   private renderInput(selectedFilter: FilterOption) {
     switch (selectedFilter.inputType) {
       case 'multiple':
