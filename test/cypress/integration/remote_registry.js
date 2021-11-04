@@ -50,7 +50,15 @@ describe('Remote Registry Tests', () => {
   it('admin can add new remote registry', () => {
     cy.menuGo('Execution Enviroments > Remote Registries');
     cy.addRemoteRegistry('New remote registry1', 'some url1');
-    cy.addRemoteRegistry('New remote registry2', 'some url2');
+    cy.addRemoteRegistry('New remote registry2', 'some url2', {
+      username: 'some username2',
+      password: 'some password2',
+      proxy_url: 'some proxy_url2',
+      proxy_username: 'some proxy_username2',
+      proxy_password: 'some proxy_password2',
+      download_concurrency: 5,
+      rate_limit: 5,
+    });
   });
 
   it('admin can view data', () => {
