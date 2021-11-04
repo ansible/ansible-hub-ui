@@ -78,6 +78,8 @@ export class CompoundFilter extends React.Component<IProps, IState> {
       </DropdownItem>
     ));
 
+   
+
     return (
       <InputGroup>
         <StatefulDropdown
@@ -97,14 +99,14 @@ export class CompoundFilter extends React.Component<IProps, IState> {
         <Button
           onClick={() => this.submitFilter()}
           variant={ButtonVariant.control}
-          isDisabled={!this.props.inputText}
+          isDisabled={!this.props.inputText.trim().length}
         >
           <SearchIcon></SearchIcon>
         </Button>
       </InputGroup>
     );
   }
-
+  
   private renderInput(selectedFilter: FilterOption) {
     switch (selectedFilter.inputType) {
       case 'multiple':
