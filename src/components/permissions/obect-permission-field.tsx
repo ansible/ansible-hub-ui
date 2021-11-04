@@ -6,11 +6,9 @@ import { TrashIcon } from '@patternfly/react-icons';
 
 import { GroupObjectPermissionType, GroupAPI } from 'src/api';
 import {
-  AlertList,
   AlertType,
   APISearchTypeAhead,
   PermissionChipSelector,
-  closeAlertMixin,
 } from 'src/components';
 import { twoWayMapper } from 'src/utilities';
 import { Constants } from 'src/constants';
@@ -21,11 +19,12 @@ interface IProps {
   setGroups: (groups: GroupObjectPermissionType[]) => void;
   isDisabled?: boolean;
   menuAppendTo?: 'parent' | 'inline';
+  errorOccured?: (error: string) => void;
 }
 
 interface IState {
   searchGroups: { name: string; id: number | string }[];
-  alerts?: AlertType[];
+  formAlerts?: AlertType;
 }
 
 export class ObjectPermissionField extends React.Component<IProps, IState> {
@@ -34,7 +33,6 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
 
     this.state = {
       searchGroups: [],
-      alerts: [],
     };
   }
 
@@ -47,10 +45,6 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
 
     return (
       <div>
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
         <APISearchTypeAhead
           results={this.state.searchGroups}
           loadResults={this.loadGroups}
@@ -126,17 +120,7 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
         );
         this.setState({ searchGroups: groups });
       })
-      .catch((e) =>
-        this.setState({
-          alerts: [
-            {
-              variant: 'danger',
-              title: t`Error loading groups.`,
-              description: e?.message,
-            },
-          ],
-        }),
-      );
+      .catch((e) => this.props.errorOccured(e?.message));
   };
 
   private onSelect = (event, selection, isPlaceholder) => {
@@ -154,8 +138,4 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
 
     this.props.setGroups(newGroups);
   };
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
 }

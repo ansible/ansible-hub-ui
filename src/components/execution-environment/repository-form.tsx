@@ -15,7 +15,11 @@ import {
 } from '@patternfly/react-core';
 import { TagIcon } from '@patternfly/react-icons';
 import { isEqual, isEmpty, xorWith, cloneDeep } from 'lodash';
-import { APISearchTypeAhead, ObjectPermissionField } from 'src/components';
+import {
+  AlertType,
+  APISearchTypeAhead,
+  ObjectPermissionField,
+} from 'src/components';
 import {
   ContainerDistributionAPI,
   GroupObjectPermissionType,
@@ -59,6 +63,10 @@ interface IState {
   registries?: { id: string; name: string }[];
   registrySelection?: { id: string; name: string }[];
   upstreamName: string;
+  formErrors?: {
+    registries?: AlertType;
+    groups?: AlertType;
+  };
 }
 
 export class RepositoryForm extends React.Component<IProps, IState> {
@@ -77,6 +85,10 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       registries: null,
       registrySelection: [],
       upstreamName: this.props.upstreamName || '',
+      formErrors: {
+        registries: null,
+        groups: null,
+      },
     };
   }
 
@@ -94,12 +106,16 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           }
         })
         .catch((e) => {
-          this.props.addAlert(
-            'danger',
-            t`Error loading registries.`,
-            e?.message,
-          );
-          this.props.onCancel();
+          this.setState({
+            formErrors: {
+              ...this.state.formErrors,
+              registries: {
+                title: 'Error loading registries.',
+                description: e?.message,
+                variant: 'danger',
+              },
+            },
+          });
         });
     }
 
@@ -120,7 +136,9 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       registries,
       addTagsInclude,
       addTagsExclude,
+      formErrors,
     } = this.state;
+
     return (
       <Modal
         variant='large'
@@ -209,23 +227,36 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 className='hub-formgroup-registry'
                 isRequired={true}
               >
-                {registries ? (
-                  <APISearchTypeAhead
-                    loadResults={(name) => this.loadRegistries(name)}
-                    onClear={() => this.setState({ registrySelection: [] })}
-                    onSelect={(event, value) =>
-                      this.setState({
-                        registrySelection: registries.filter(
-                          ({ name }) => name === value,
-                        ),
-                      })
-                    }
-                    placeholderText={t`Select a registry`}
-                    results={registries}
-                    selections={registrySelection}
-                  />
+                {!!formErrors?.registries ? (
+                  <Alert
+                    title={formErrors.registries.title}
+                    variant='danger'
+                    isInline
+                  >
+                    {formErrors.registries.description}
+                  </Alert>
                 ) : (
-                  <Spinner />
+                  <>
+                    {registries ? (
+                      <APISearchTypeAhead
+                        loadResults={(name) => this.loadRegistries(name)}
+                        onClear={() => this.setState({ registrySelection: [] })}
+                        onSelect={(event, value) =>
+                          this.setState({
+                            registrySelection: registries.filter(
+                              ({ name }) => name === value,
+                            ),
+                          })
+                        }
+                        placeholderText={t`Select a registry`}
+                        results={registries}
+                        selections={registrySelection}
+                        isDisabled={true}
+                      />
+                    ) : (
+                      <Spinner />
+                    )}
+                  </>
                 )}
               </FormGroup>
 
@@ -350,21 +381,43 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             label={t`Groups with access`}
             className='hub-formgroup-groups'
           >
-            <div className='pf-c-form__helper-text'>
-              {t`Adding groups provides access to all repositories in the
-                "${namespace}" container namespace.`}
-            </div>
-            <ObjectPermissionField
-              groups={this.state.selectedGroups}
-              availablePermissions={Constants.CONTAINER_NAMESPACE_PERMISSIONS}
-              setGroups={(g) => this.setState({ selectedGroups: g })}
-              menuAppendTo='parent'
-              isDisabled={
-                !this.props.permissions.includes(
-                  'container.change_containernamespace',
-                )
-              }
-            ></ObjectPermissionField>
+            {!!formErrors?.groups ? (
+              <Alert title={formErrors.groups.title} variant='danger' isInline>
+                {formErrors.groups.description}
+              </Alert>
+            ) : (
+              <>
+                <div className='pf-c-form__helper-text'>
+                  {t`Adding groups provides access to all repositories in the
+                    "${namespace}" container namespace.`}
+                </div>
+                <ObjectPermissionField
+                  groups={this.state.selectedGroups}
+                  availablePermissions={
+                    Constants.CONTAINER_NAMESPACE_PERMISSIONS
+                  }
+                  setGroups={(g) => this.setState({ selectedGroups: g })}
+                  menuAppendTo='parent'
+                  isDisabled={
+                    !this.props.permissions.includes(
+                      'container.change_containernamespace',
+                    )
+                  }
+                  errorOccured={(err) => {
+                    this.setState({
+                      formErrors: {
+                        ...this.state.formErrors,
+                        groups: {
+                          title: 'Error loading groups.',
+                          description: err,
+                          variant: 'danger',
+                        },
+                      },
+                    });
+                  }}
+                ></ObjectPermissionField>
+              </>
+            )}
           </FormGroup>
         </Form>
       </Modal>
@@ -391,8 +444,16 @@ export class RepositoryForm extends React.Component<IProps, IState> {
         }),
       )
       .catch((e) => {
-        this.props.addAlert('danger', t`Error loading groups.`, e?.message);
-        this.props.onCancel();
+        this.setState({
+          formErrors: {
+            ...this.state.formErrors,
+            groups: {
+              title: 'Error loading groups.',
+              description: e?.message,
+              variant: 'danger',
+            },
+          },
+        });
       });
   }
 
