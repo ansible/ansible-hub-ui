@@ -403,7 +403,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                       'container.change_containernamespace',
                     )
                   }
-                  errorOccured={(err) => {
+                  onError={(err) =>
                     this.setState({
                       formErrors: {
                         ...this.state.formErrors,
@@ -413,8 +413,8 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                           variant: 'danger',
                         },
                       },
-                    });
-                  }}
+                    })
+                  }
                 ></ObjectPermissionField>
               </>
             )}
