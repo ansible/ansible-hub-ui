@@ -605,5 +605,53 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
     .contains('.pf-c-dropdown__menu-item', 'Sync from registry')
     .click();
 
-  cy.contains('.pf-c-alert__title', `Sync initiated for ${name}`);
+  // FIXME: `Sync initiated for ${name}` after AAH-972 is fixed (shows `Sync initiated for {name}` on GH)
+  cy.contains('.pf-c-alert__title', `Sync initiated for`);
+});
+
+Cypress.Commands.add('deleteRegistries', {}, () => {
+  cy.intercept(
+    'GET',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
+  ).as('registries');
+
+  cy.visit('/ui/registries');
+
+  cy.wait('@registries').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.get(
+        'tr[aria-labelledby="' +
+          element.name +
+          '"] button[aria-label="Actions"]',
+      ).click();
+      cy.contains('a', 'Delete').click();
+      cy.contains('button', 'Delete').click();
+    });
+  });
+});
+
+Cypress.Commands.add('deleteContainers', {}, () => {
+  cy.intercept(
+    'GET',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
+  ).as('listLoad');
+
+  cy.visit('/ui/containers');
+
+  cy.wait('@listLoad').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.get(
+        'tr[aria-labelledby="' +
+          element.name +
+          '"] button[aria-label="Actions"]',
+      ).click();
+      cy.contains('a', 'Delete').click();
+      cy.get('input[id=delete_confirm]').click();
+      cy.contains('button', 'Delete').click();
+      cy.wait('@listLoad', { timeout: 50000 });
+      cy.get('.pf-c-alert__action').click();
+    });
+  });
 });
