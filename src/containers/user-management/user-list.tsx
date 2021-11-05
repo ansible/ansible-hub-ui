@@ -215,14 +215,15 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                 />
               </div>
               {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
-
-              <Pagination
-                params={params}
-                updateParams={(p) =>
-                  this.updateParams(p, () => this.queryUsers())
-                }
-                count={itemCount}
-              />
+              <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
+                <Pagination
+                  params={params}
+                  updateParams={(p) =>
+                    this.updateParams(p, () => this.queryUsers())
+                  }
+                  count={itemCount}
+                />
+              </div>
             </section>
           </Main>
         )}
