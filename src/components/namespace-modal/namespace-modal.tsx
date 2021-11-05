@@ -2,11 +2,10 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import { Modal } from '@patternfly/react-core';
 import { Form, FormGroup } from '@patternfly/react-core';
-import { Button, InputGroup, TextInput } from '@patternfly/react-core';
-import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
+import { Button, InputGroup, TextInput, Alert } from '@patternfly/react-core';
 import { NamespaceAPI, GroupObjectPermissionType } from 'src/api';
 
-import { HelperText, ObjectPermissionField } from 'src/components';
+import { AlertType, HelperText, ObjectPermissionField } from 'src/components';
 
 interface IProps {
   isOpen: boolean;
@@ -19,6 +18,9 @@ interface IState {
   newNamespaceNameValid: boolean;
   newGroups: GroupObjectPermissionType[];
   errorMessages: any;
+  formErrors: {
+    groups: AlertType;
+  };
 }
 
 export class NamespaceModal extends React.Component<IProps, IState> {
@@ -33,6 +35,9 @@ export class NamespaceModal extends React.Component<IProps, IState> {
       newNamespaceNameValid: true,
       newGroups: [],
       errorMessages: {},
+      formErrors: {
+        groups: null,
+      },
     };
   }
 
@@ -87,7 +92,13 @@ export class NamespaceModal extends React.Component<IProps, IState> {
   };
 
   render() {
-    const { newNamespaceName, newGroups, newNamespaceNameValid } = this.state;
+    const { newNamespaceName, newGroups, newNamespaceNameValid, formErrors } =
+      this.state;
+
+    const isSaveDisabled = Object.values(formErrors).some(
+      (err) => err !== null,
+    );
+
     return (
       <Modal
         variant='medium'
@@ -99,7 +110,9 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             key='confirm'
             variant='primary'
             onClick={this.handleSubmit}
-            isDisabled={!newNamespaceName || !newNamespaceNameValid}
+            isDisabled={
+              !newNamespaceName || !newNamespaceNameValid || isSaveDisabled
+            }
           >
             {t`Create`}
           </Button>,
@@ -143,12 +156,33 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             fieldId='groups'
             helperTextInvalid={this.state.errorMessages['groups']}
           >
-            <ObjectPermissionField
-              availablePermissions={['change_namespace', 'upload_to_namespace']}
-              groups={newGroups}
-              setGroups={(g) => this.setState({ newGroups: g })}
-              menuAppendTo='parent'
-            />
+            {!!formErrors?.groups ? (
+              <Alert title={formErrors.groups.title} variant='danger' isInline>
+                {formErrors.groups.description}
+              </Alert>
+            ) : (
+              <ObjectPermissionField
+                availablePermissions={[
+                  'change_namespace',
+                  'upload_to_namespace',
+                ]}
+                groups={newGroups}
+                setGroups={(g) => this.setState({ newGroups: g })}
+                menuAppendTo='parent'
+                onError={(err) =>
+                  this.setState({
+                    formErrors: {
+                      ...this.state.formErrors,
+                      groups: {
+                        title: 'Error loading groups.',
+                        description: err,
+                        variant: 'danger',
+                      },
+                    },
+                  })
+                }
+              />
+            )}
           </FormGroup>
         </Form>
       </Modal>
