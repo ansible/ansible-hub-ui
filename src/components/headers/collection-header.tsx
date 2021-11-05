@@ -188,14 +188,16 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             </Tooltip>
           ),
       this.context.user.model_permissions.delete_collection && (
-        <DropdownItem
-          key='2'
-          onClick={() =>
-            this.openDeleteModalWithConfirm(collection.latest_version.version)
-          }
-        >
-          {t`Delete version ${collection.latest_version.version}`}
-        </DropdownItem>
+        <div data-cy='delete-version-dropdown'>
+          <DropdownItem
+            key='2'
+            onClick={() =>
+              this.openDeleteModalWithConfirm(collection.latest_version.version)
+            }
+          >
+            {t`Delete version ${collection.latest_version.version}`}
+          </DropdownItem>
+        </div>
       ),
     ].filter(Boolean);
 
