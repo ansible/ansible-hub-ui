@@ -13,7 +13,7 @@ describe('collection tests', () => {
   const adminUsername = Cypress.env('username');
   const adminPassword = Cypress.env('password');
 
-  before(() => {
+  beforeEach(() => {
     cy.login(adminUsername, adminPassword);
   });
 
