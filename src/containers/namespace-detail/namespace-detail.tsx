@@ -41,6 +41,9 @@ import {
   StatefulDropdown,
   ClipboardCopy,
   ConfirmModal,
+  AlertList,
+  closeAlertMixin,
+  AlertType,
 } from 'src/components';
 
 import { ImportModal } from './import-modal/import-modal';
@@ -71,6 +74,7 @@ interface IState {
   isNamespaceEmpty: boolean;
   confirmDelete: boolean;
   isNamespacePending: boolean;
+  alerts: AlertType[];
 }
 
 interface IProps extends RouteComponentProps {
@@ -107,11 +111,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       isNamespaceEmpty: false,
       confirmDelete: false,
       isNamespacePending: false,
+      alerts: [],
     };
   }
 
   componentDidMount() {
     this.loadAll();
+
+    this.setState({ alerts: this.context.alerts || [] });
   }
 
   componentWillUnmount() {
@@ -170,6 +177,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     return (
       <React.Fragment>
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        />
         <ImportModal
           isOpen={showImportModal}
           onUploadSuccess={(result) =>
@@ -432,14 +443,16 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         }),
       )
       .catch((err) =>
-        this.context.setAlerts([
-          ...this.context.alerts,
-          {
-            variant: 'danger',
-            title: t`Error loading collection repositories.`,
-            description: err?.message,
-          },
-        ]),
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error loading collection repositories.`,
+              description: err?.message,
+            },
+          ],
+        }),
       );
   }
 
@@ -558,14 +571,16 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               isNamespacePending: false,
             },
             () =>
-              this.context.setAlerts([
-                ...this.context.alerts,
-                {
-                  variant: 'danger',
-                  title: t`Error deleting namespace.`,
-                  description: e?.message,
-                },
-              ]),
+              this.setState({
+                alerts: [
+                  ...this.state.alerts,
+                  {
+                    variant: 'danger',
+                    title: t`Error deleting namespace.`,
+                    description: e?.message,
+                  },
+                ],
+              }),
           );
         }),
     );
@@ -574,6 +589,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private closeModal = () => {
     this.setState({ isOpenNamespaceModal: false, confirmDelete: false });
   };
+
+  get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
 }
 
 NamespaceDetail.contextType = AppContext;
