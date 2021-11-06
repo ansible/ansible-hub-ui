@@ -9,6 +9,8 @@ import {
   CollectionInfo,
   LoadingPageWithHeader,
   Main,
+  AlertList,
+  closeAlertMixin,
 } from 'src/components';
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -28,6 +30,7 @@ class CollectionDetail extends React.Component<
     this.state = {
       collection: undefined,
       params: params,
+      alerts: [],
     };
   }
 
@@ -41,7 +44,7 @@ class CollectionDetail extends React.Component<
   }
 
   render() {
-    const { collection, params } = this.state;
+    const { collection, params, alerts } = this.state;
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -63,6 +66,10 @@ class CollectionDetail extends React.Component<
 
     return (
       <React.Fragment>
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        ></AlertList>
         <CollectionHeader
           collection={collection}
           params={params}
@@ -81,6 +88,18 @@ class CollectionDetail extends React.Component<
               {...collection}
               updateParams={(p) => this.updateParams(p)}
               params={this.state.params}
+              addAlert={(variant, title, description) =>
+                this.setState({
+                  alerts: [
+                    ...this.state.alerts,
+                    {
+                      variant,
+                      title,
+                      description,
+                    },
+                  ],
+                })
+              }
             />
           </section>
         </Main>
@@ -94,6 +113,10 @@ class CollectionDetail extends React.Component<
 
   get updateParams() {
     return ParamHelper.updateParamsMixin();
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 }
 
