@@ -95,10 +95,6 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     const { newNamespaceName, newGroups, newNamespaceNameValid, formErrors } =
       this.state;
 
-    const isSaveDisabled = Object.values(formErrors).some(
-      (err) => err !== null,
-    );
-
     return (
       <Modal
         variant='medium'
@@ -110,9 +106,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             key='confirm'
             variant='primary'
             onClick={this.handleSubmit}
-            isDisabled={
-              !newNamespaceName || !newNamespaceNameValid || isSaveDisabled
-            }
+            isDisabled={!newNamespaceName || !newNamespaceNameValid}
           >
             {t`Create`}
           </Button>,
