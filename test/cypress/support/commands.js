@@ -604,9 +604,7 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
     .parents('tr')
     .contains('.pf-c-dropdown__menu-item', 'Sync from registry')
     .click();
-
-  // FIXME: `Sync initiated for ${name}` after AAH-972 is fixed (shows `Sync initiated for {name}` on GH)
-  cy.contains('.pf-c-alert__title', `Sync initiated for`);
+  cy.contains('.pf-c-alert__title', `Sync initiated for ${name}`);
 });
 
 Cypress.Commands.add('deleteRegistries', {}, () => {
