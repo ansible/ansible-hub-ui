@@ -31,10 +31,8 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
   }
 
   render() {
-    let selectPermissionCaption = this.props.selectPermissionCaption;
-    if (!this.props.selectPermissionCaption) {
-      selectPermissionCaption = t`Select permissions`;
-    }
+    let selectPermissionCaption =
+      this.props.selectPermissionCaption || t`Select permissions`;
 
     if (this.props.isViewOnly) {
       const items = this.props.selectedPermissions.length
