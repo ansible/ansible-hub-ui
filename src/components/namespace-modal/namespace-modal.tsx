@@ -43,7 +43,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     if (name == '') {
       error['name'] = t`Please, provide the namespace name`;
     } else if (!/^[a-zA-Z0-9_]+$/.test(name)) {
-      error['name'] = t`Name can only contain [A-Za-z0-9_]`;
+      error['name'] = t`Name can only contain letters and numbers`;
     } else if (name.length <= 2) {
       error['name'] = t`Name must be longer than 2 characters`;
     } else if (name.startsWith('_')) {
@@ -90,7 +90,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     const { newNamespaceName, newGroups, newNamespaceNameValid } = this.state;
     return (
       <Modal
-        variant='large'
+        variant='small'
         title={t`Create a new namespace`}
         isOpen={this.props.isOpen}
         onClose={this.toggleModal}
@@ -113,7 +113,6 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             label={t`Name`}
             isRequired
             fieldId='name'
-            helperText={t`Please, provide the namespace name`}
             helperTextInvalid={this.state.errorMessages['name']}
             validated={this.toError(this.state.newNamespaceNameValid)}
             labelIcon={
