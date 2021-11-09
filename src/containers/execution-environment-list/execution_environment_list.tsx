@@ -60,6 +60,7 @@ interface IState {
   showDeleteModal: boolean;
   selectedItem: ExecutionEnvironmentType;
   inputText: string;
+  formError: { title: string; detail: string }[];
 }
 
 class ExecutionEnvironmentList extends React.Component<
@@ -95,6 +96,7 @@ class ExecutionEnvironmentList extends React.Component<
       showDeleteModal: false,
       selectedItem: null,
       inputText: '',
+      formError: [],
     };
   }
 
@@ -429,6 +431,7 @@ class ExecutionEnvironmentList extends React.Component<
         permissions={namespace?.my_permissions || []}
         remotePulpId={pulp_id}
         distributionPulpId={distributionPulpId}
+        formError={this.state.formError}
         onSave={(promise) => {
           promise
             .then(() => {
@@ -436,15 +439,23 @@ class ExecutionEnvironmentList extends React.Component<
                 {
                   showRemoteModal: false,
                   itemToEdit: null,
+                  alerts: this.state.alerts.concat({
+                    variant: 'success',
+                    title: isNew
+                      ? t`Execution environment added.`
+                      : t`Execution environment saved.`,
+                  }),
                 },
                 () => this.queryEnvironments(),
               );
             })
-            .catch(() => {
+            .catch((err) => {
               this.setState({
-                alerts: this.state.alerts.concat({
-                  variant: 'danger',
-                  title: t`Error: changes weren't saved`,
+                formError: err.response.data.errors.map((error) => {
+                  return {
+                    title: error.title,
+                    detail: error.source.parameter + ': ' + error.detail,
+                  };
                 }),
               });
             });
