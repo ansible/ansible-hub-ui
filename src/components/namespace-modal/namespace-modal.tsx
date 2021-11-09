@@ -147,6 +147,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
               groups={newGroups}
               setGroups={(g) => this.setState({ newGroups: g })}
               menuAppendTo='parent'
+              selectPermissionCaption={t`Select namespace owner permissions`}
             />
           </FormGroup>
         </Form>

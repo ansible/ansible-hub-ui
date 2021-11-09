@@ -17,6 +17,7 @@ interface IProps {
   onSelect?: (event, selection) => void;
   onClear?: () => void;
   menuAppendTo?: 'parent' | 'inline';
+  selectPermissionCaption?: string;
 }
 
 interface IState {
@@ -30,10 +31,15 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
   }
 
   render() {
+    let selectPermissionCaption = this.props.selectPermissionCaption;
+    if (!this.props.selectPermissionCaption) {
+      selectPermissionCaption = t`Select permissions`;
+    }
+
     if (this.props.isViewOnly) {
       const items = this.props.selectedPermissions.length
         ? this.props.selectedPermissions
-        : [this.placeholderText()];
+        : [this.placeholderText(selectPermissionCaption)];
       return (
         <LabelGroup>
           {items.map((text) => (
@@ -47,7 +53,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
       <Select
         menuAppendTo={this.props.menuAppendTo}
         variant={SelectVariant.typeaheadMulti}
-        typeAheadAriaLabel={t`Select permissions`}
+        typeAheadAriaLabel={selectPermissionCaption}
         onToggle={this.onToggle}
         onSelect={!!this.props.onSelect ? this.props.onSelect : this.onSelect}
         onClear={
@@ -55,7 +61,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         }
         selections={this.props.selectedPermissions}
         isOpen={this.state.isOpen}
-        placeholderText={this.placeholderText()}
+        placeholderText={this.placeholderText(selectPermissionCaption)}
         isDisabled={!!this.props.isDisabled}
       >
         {this.props.availablePermissions.length === 0
@@ -73,9 +79,9 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
     );
   }
 
-  private placeholderText() {
+  private placeholderText(selectPermissionCaption) {
     if (!this.props.isDisabled && !this.props.isViewOnly) {
-      return t`Select permissions`;
+      return selectPermissionCaption;
     }
     return this.props.selectedPermissions.length === 0 ? t`No permission` : '';
   }
