@@ -10,7 +10,7 @@ import logger from 'redux-logger';
 import getBaseName from './utilities/getBaseName';
 import 'src/l10n';
 
-// hub-entrypoint for compiling the app to run in insights dev mode.
+// Entrypoint for compiling the app to run in insights dev mode.
 
 const basename = getBaseName(window.location.pathname);
 

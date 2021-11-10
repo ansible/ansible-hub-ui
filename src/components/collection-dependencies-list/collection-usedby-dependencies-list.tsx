@@ -62,7 +62,7 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
 
     return (
       <>
-        <div className='ans-usedby-dependencies-header'>
+        <div className='hub-usedby-dependencies-header'>
           <Toolbar>
             <ToolbarGroup>
               <ToolbarItem>

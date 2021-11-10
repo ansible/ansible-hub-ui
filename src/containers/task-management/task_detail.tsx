@@ -338,7 +338,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                       <Title headingLevel='h3'>{t`Description`}</Title>
                       <CodeBlock>{task.error.description}</CodeBlock>
                       <Title headingLevel='h3'>{t`Traceback`}</Title>
-                      <CodeBlock className={'hub-hub-code-block'}>
+                      <CodeBlock className={'hub-code-block'}>
                         {task.error.traceback}
                       </CodeBlock>
                     </React.Fragment>
