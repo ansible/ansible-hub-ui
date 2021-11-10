@@ -96,7 +96,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                 <ClipboardCopy>{tokenData.refresh_token}</ClipboardCopy>
               </div>
             ) : (
-              <div className='load-token'>
+              <div>
                 <Button
                   onClick={() => this.loadToken()}
                 >{t`Load token`}</Button>
