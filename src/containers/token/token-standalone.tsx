@@ -1,5 +1,6 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
+import './token.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Button } from '@patternfly/react-core';
@@ -75,7 +76,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                   <ClipboardCopy>{token}</ClipboardCopy>
                 </div>
               ) : (
-                <div>
+                <div className='load-token'>
                   <Button
                     onClick={() => this.loadToken()}
                   >{t`Load token`}</Button>

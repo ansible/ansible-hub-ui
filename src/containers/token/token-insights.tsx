@@ -1,5 +1,6 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
+import './token.scss';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { ClipboardCopyVariant, Button } from '@patternfly/react-core';
@@ -95,7 +96,11 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                 <ClipboardCopy>{tokenData.refresh_token}</ClipboardCopy>
               </div>
             ) : (
-              <Button onClick={() => this.loadToken()}>{t`Load token`}</Button>
+              <div className='load-token'>
+                <Button
+                  onClick={() => this.loadToken()}
+                >{t`Load token`}</Button>
+              </div>
             )}
             <div
               className='pf-c-content'
