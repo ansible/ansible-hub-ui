@@ -38,14 +38,20 @@ describe('A namespace form', () => {
 
   it('should give message if input is empty', () => {
     getInputBox().type(' ');
-    getMessage().should('have.text', 'Name can only contain letters and numbers');
+    getMessage().should(
+      'have.text',
+      'Name can only contain letters and numbers',
+    );
     getCreateButton().should('be.disabled');
     clearInput();
   });
 
   it('should give message if input has incorrect characters', () => {
     getInputBox().type('!/^[a-zA-Z0-9_]+$/.');
-    getMessage().should('have.text', 'Name can only contain letters and numbers');
+    getMessage().should(
+      'have.text',
+      'Name can only contain letters and numbers',
+    );
     getCreateButton().should('be.disabled');
     clearInput();
   });
