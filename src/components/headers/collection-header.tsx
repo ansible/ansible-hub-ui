@@ -166,6 +166,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             <DropdownItem
               key={1}
               onClick={() => this.openDeleteModalWithConfirm()}
+              data-cy='delete-collection-dropdown'
             >
               {t`Delete entire collection`}
             </DropdownItem>
@@ -187,14 +188,16 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             </Tooltip>
           ),
       this.context.user.model_permissions.delete_collection && (
-        <DropdownItem
-          key='2'
-          onClick={() =>
-            this.openDeleteModalWithConfirm(collection.latest_version.version)
-          }
-        >
-          {t`Delete version ${collection.latest_version.version}`}
-        </DropdownItem>
+        <div data-cy='delete-version-dropdown'>
+          <DropdownItem
+            key='2'
+            onClick={() =>
+              this.openDeleteModalWithConfirm(collection.latest_version.version)
+            }
+          >
+            {t`Delete version ${collection.latest_version.version}`}
+          </DropdownItem>
+        </div>
       ),
     ].filter(Boolean);
 
@@ -394,7 +397,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           }
           pageControls={
             dropdownItems.length > 0 ? (
-              <StatefulDropdown items={dropdownItems} />
+              <div data-cy='kebab-toggle'>
+                <StatefulDropdown items={dropdownItems} />
+              </div>
             ) : null
           }
         >

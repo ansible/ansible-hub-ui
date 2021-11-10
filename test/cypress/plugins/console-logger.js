@@ -98,9 +98,10 @@ function logConsole(params) {
   const prefixSpacer = ' '.repeat(prefix.length);
 
   if (args) {
-    let formattedMessage = String.prototype.toString(args[0]).trimRight();
-    log(color(`${prefix}${args[0].value}`));
-    recordLogMessage(`${prefix}${args[0].value}`);
+    args.forEach((arg) => {
+      log(color(`${prefix}${arg.value}`));
+      recordLogMessage(`${prefix}${arg.value}`);
+    });
   }
 }
 

@@ -9,3 +9,5 @@ Dockerfile
 *.png
 *.mp4
 *.po
+test/cypress.env.json.template
+test/cypress/fixtures/

@@ -59,6 +59,7 @@ interface IState {
   showDeleteModal: boolean;
   alerts: AlertType[];
   unauthorized: boolean;
+  inputText: string;
 }
 
 class UserList extends React.Component<RouteComponentProps, IState> {
@@ -87,6 +88,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       itemCount: 0,
       alerts: [],
       unauthorized: false,
+      inputText: '',
     };
   }
 
@@ -146,6 +148,10 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                     <ToolbarGroup>
                       <ToolbarItem>
                         <CompoundFilter
+                          inputText={this.state.inputText}
+                          onChange={(input) =>
+                            this.setState({ inputText: input })
+                          }
                           updateParams={(p) =>
                             this.updateParams(p, () => this.queryUsers())
                           }
@@ -194,9 +200,10 @@ class UserList extends React.Component<RouteComponentProps, IState> {
               </div>
               <div>
                 <AppliedFilters
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.queryUsers())
-                  }
+                  updateParams={(p) => {
+                    this.updateParams(p, () => this.queryUsers());
+                    this.setState({ inputText: '' });
+                  }}
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
                   niceNames={{

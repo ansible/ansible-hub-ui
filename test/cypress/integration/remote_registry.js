@@ -2,55 +2,10 @@ describe('Remote Registry Tests', () => {
   const adminUsername = Cypress.env('username');
   const adminPassword = Cypress.env('password');
 
-  function deleteData() {
-    cy.intercept(
-      'GET',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
-    ).as('registries');
-
-    cy.visit('/ui/registries');
-
-    cy.wait('@registries').then((result) => {
-      var data = result.response.body.data;
-      data.forEach((element) => {
-        cy.get(
-          'tr[aria-labelledby="' +
-            element.name +
-            '"] button[aria-label="Actions"]',
-        ).click();
-        cy.contains('a', 'Delete').click();
-        cy.contains('button', 'Delete').click();
-      });
-    });
-  }
-
-  function addData(name, url) {
-    cy.contains('button', 'Add remote registry').click();
-
-    // add registry
-    cy.get('input[id = "name"]').type(name);
-    cy.get('input[id = "url"]').type(url);
-
-    cy.intercept(
-      'POST',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/',
-    ).as('registries');
-
-    cy.intercept(
-      'GET',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
-    ).as('registriesGet');
-
-    cy.contains('button', 'Save').click();
-
-    cy.wait('@registries');
-    cy.wait('@registriesGet');
-  }
-
   before(() => {
     cy.visit('/');
     cy.login(adminUsername, adminPassword);
-    deleteData();
+    cy.deleteRegistries();
   });
 
   beforeEach(() => {
@@ -58,10 +13,30 @@ describe('Remote Registry Tests', () => {
     cy.login(adminUsername, adminPassword);
   });
 
+  it('checks for empty state', () => {
+    cy.menuGo('Execution Enviroments > Remote Registries');
+    cy.get('.pf-c-empty-state__content > .pf-c-title').should(
+      'have.text',
+      'No remote registries yet',
+    );
+    cy.get('.pf-c-empty-state__content > .pf-c-empty-state__body').should(
+      'have.text',
+      'You currently have no remote registries.',
+    );
+  });
+
   it('admin can add new remote registry', () => {
     cy.menuGo('Execution Enviroments > Remote Registries');
-    addData('New remote registry1', 'some url1');
-    addData('New remote registry2', 'some url2');
+    cy.addRemoteRegistry('New remote registry1', 'some url1');
+    cy.addRemoteRegistry('New remote registry2', 'some url2', {
+      username: 'some username2',
+      password: 'some password2',
+      proxy_url: 'some proxy_url2',
+      proxy_username: 'some proxy_username2',
+      proxy_password: 'some proxy_password2',
+      download_concurrency: 5,
+      rate_limit: 5,
+    });
   });
 
   it('admin can view data', () => {
@@ -109,6 +84,6 @@ describe('Remote Registry Tests', () => {
   });
 
   it('admin can delete data', () => {
-    deleteData();
+    cy.deleteRegistries();
   });
 });

@@ -66,6 +66,7 @@ export class ImportModal extends React.Component<IProps, IState> {
             variant='primary'
             onClick={() => this.saveFile()}
             isDisabled={!this.canUpload()}
+            data-cy={'confirm-upload'}
           >
             {t`Upload`}
           </Button>,

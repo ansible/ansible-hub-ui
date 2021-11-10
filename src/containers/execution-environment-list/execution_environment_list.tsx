@@ -66,6 +66,7 @@ interface IState {
   selectedItem: ExecutionEnvironmentType;
   confirmDelete: boolean;
   isDeletionPending: boolean;
+  inputText: string;
 }
 
 class ExecutionEnvironmentList extends React.Component<
@@ -102,6 +103,7 @@ class ExecutionEnvironmentList extends React.Component<
       selectedItem: null,
       confirmDelete: false,
       isDeletionPending: false,
+      inputText: '',
     };
   }
 
@@ -221,6 +223,10 @@ class ExecutionEnvironmentList extends React.Component<
                       <ToolbarGroup>
                         <ToolbarItem>
                           <CompoundFilter
+                            inputText={this.state.inputText}
+                            onChange={(text) =>
+                              this.setState({ inputText: text })
+                            }
                             updateParams={(p) => {
                               p['page'] = 1;
                               this.updateParams(p, () =>
@@ -253,9 +259,10 @@ class ExecutionEnvironmentList extends React.Component<
                 </div>
                 <div>
                   <AppliedFilters
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryEnvironments())
-                    }
+                    updateParams={(p) => {
+                      this.updateParams(p, () => this.queryEnvironments());
+                      this.setState({ inputText: '' });
+                    }}
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort']}
                   />
@@ -407,7 +414,11 @@ class ExecutionEnvironmentList extends React.Component<
           <Label>{item.pulp.repository.remote ? t`Remote` : t`Local`}</Label>
         </td>
         <td style={{ paddingRight: '0px', textAlign: 'right' }}>
-          {!!dropdownItems.length && <StatefulDropdown items={dropdownItems} />}
+          {!!dropdownItems.length && (
+            <div data-cy='kebab-toggle'>
+              <StatefulDropdown items={dropdownItems} />
+            </div>
+          )}
         </td>
       </tr>
     );
@@ -483,15 +494,13 @@ class ExecutionEnvironmentList extends React.Component<
     this.setState({ isDeletionPending: true }, () =>
       ExecutionEnvironmentAPI.deleteExecutionEnvironment(selectedItem.name)
         .then((result) => {
-          let taskId = result.data.task.split('tasks/')[1].replace('/', '');
-          this.setState({
-            selectedItem: null,
-          });
+          const taskId = result.data.task.split('tasks/')[1].replace('/', '');
           waitForTask(taskId).then(() => {
             this.setState({
-              isDeletionPending: false,
               confirmDelete: false,
               deleteModalVisible: false,
+              isDeletionPending: false,
+              selectedItem: null,
               alerts: this.state.alerts.concat([
                 {
                   variant: 'success',

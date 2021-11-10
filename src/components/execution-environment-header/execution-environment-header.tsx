@@ -42,7 +42,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
         pageControls={this.props.pageControls}
       >
         <Tooltip content={this.props.container.description}>
-          <p className={'hub-m-truncated'}>
+          <p data-cy='description' className={'hub-m-truncated'}>
             {this.props.container.description}
           </p>
         </Tooltip>

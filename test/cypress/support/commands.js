@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import shell from 'shell-escape-tag';
-var urljoin = require('url-join');
+const urljoin = require('url-join');
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
@@ -198,7 +198,7 @@ Cypress.Commands.add('createGroup', {}, (name) => {
 /*
  * groupName: name of the group you want to add permissions to
  * permissions: array of {group, permissions}
- *   group: permission group, one of names from PERMISSIONS; namespaces | collections | users | groups | remotes | containers
+ *   group: permission group, one of names from PERMISSIONS; namespaces | collections | users | groups | remotes | containers | registries
  *   permissions: array of HUMAN_PERMISSIONS values (of the right group) - eg. "View user"
  */
 Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
@@ -261,11 +261,16 @@ Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
 const allPerms = [
   {
     group: 'namespaces',
-    permissions: ['Add namespace', 'Change namespace', 'Upload to namespace'],
+    permissions: [
+      'Add namespace',
+      'Change namespace',
+      'Delete namespace',
+      'Upload to namespace',
+    ],
   },
   {
     group: 'collections',
-    permissions: ['Modify Ansible repo content'],
+    permissions: ['Modify Ansible repo content', 'Delete collection'],
   },
   {
     group: 'users',
@@ -282,15 +287,20 @@ const allPerms = [
   {
     group: 'containers',
     permissions: [
-      // Turning off private container permissions since they aren't supported yet
-      // 'Pull private containers', // container.namespace_pull_containerdistribution
-      // 'View private containers', // container.namespace_view_containerdistribution
-
+      'Delete container repository',
       'Change container namespace permissions',
       'Change containers',
       'Change image tags',
       'Create new containers',
       'Push to existing containers',
+    ],
+  },
+  {
+    group: 'registries',
+    permissions: [
+      'Add remote registry',
+      'Change remote registry',
+      'Delete remote registry',
     ],
   },
 ];
@@ -405,5 +415,241 @@ Cypress.Commands.add('deleteTestUsers', {}, () => {
 Cypress.Commands.add('deleteTestGroups', {}, () => {
   cy.galaxykit('group list').then((lines) => {
     lines.map(col1).forEach((group) => cy.galaxykit('-i group delete', group));
+  });
+});
+
+/// settings.py manipulation
+Cypress.Commands.add('settings', {}, (newSettings) => {
+  const settings = Cypress.env('settings'); // location for the settings.py file
+  const restart = Cypress.env('restart'); // command to apply the settings
+
+  const pythonifyValue = (v) =>
+    v === true
+      ? 'True'
+      : v === false
+      ? 'False'
+      : v == null
+      ? 'None'
+      : JSON.stringify(v);
+  const pythonify = (obj) =>
+    obj
+      ? Object.keys(obj).map((k) => `${k} = ${pythonifyValue(obj[k])} #CYPRESS`)
+      : [];
+
+  const newLines = pythonify(newSettings);
+  console.log(`SETTINGS ${settings} ${newLines.join('\n')}`);
+
+  return cy
+    .readFile(settings)
+    .then((data) => {
+      const currentLines = data
+        .split('\n')
+        .filter((line) => !line.match('#CYPRESS'));
+      return cy.writeFile(settings, [...currentLines, ...newLines].join('\n'));
+    })
+    .then(() => cy.exec(restart))
+    .then(({ code, stderr, stdout }) => {
+      console.log(`RUN ${restart} ${code} ${stdout} ${stderr}`);
+
+      if (code) {
+        return Promise.reject(new Error(`Restart failed (${code}): ${stderr}`));
+      }
+    })
+    .then(() => cy.wait(2000))
+    .then(() => {
+      // wait for server to respond with a good status (502 means server didn't restart yet)
+      // ..after waiting to make sure we're not faster than the restart
+      cy.request({
+        url: Cypress.env('prefix') + '_ui/v1/feature-flags/',
+        retryOnStatusCodeFailure: true,
+      })
+        .its('status')
+        .should('eq', 200);
+    });
+});
+
+Cypress.Commands.add('addRemoteRegistry', {}, (name, url, extra = null) => {
+  cy.menuGo('Execution Enviroments > Remote Registries');
+  cy.contains('button', 'Add remote registry').click();
+
+  // add registry
+  cy.get('input[id="name"]').type(name);
+  cy.get('input[id="url"]').type(url);
+
+  if (extra) {
+    const {
+      username,
+      password,
+      proxy_url,
+      proxy_username,
+      proxy_password,
+      download_concurrency,
+      rate_limit,
+    } = extra;
+
+    cy.get('input[id="username"]').type(username);
+    cy.get('input[id="password"]').type(password);
+    //advanced options
+    cy.get('.pf-c-expandable-section__toggle-text').click();
+    cy.get('input[id="proxy_url"]').type(proxy_url);
+    cy.get('input[id="proxy_username"]').type(proxy_username);
+    cy.get('input[id="proxy_password"]').type(proxy_password);
+    cy.get('[data-cy=client_key]');
+    cy.get('button[data-cy=client_cert]');
+    cy.get('button[data-cy=ca_cert]');
+    cy.get('input[id="download_concurrency"]').type(download_concurrency);
+    cy.get('input[id="rate_limit"]').type(rate_limit);
+  }
+
+  cy.intercept(
+    'POST',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/registries/',
+  ).as('registries');
+
+  cy.intercept(
+    'GET',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
+  ).as('registriesGet');
+
+  cy.contains('button', 'Save').click();
+
+  cy.wait('@registries');
+  cy.wait('@registriesGet');
+});
+
+Cypress.Commands.add(
+  'addRemoteContainer',
+  {},
+  ({ name, upstream_name, registry, include_tags }) => {
+    cy.menuGo('Execution Environments > Execution Environments');
+    cy.contains('button', 'Add execution environment').click();
+
+    // add registry
+    cy.get('input[id="name"]').type(name);
+    cy.get('input[id="upstreamName"]').type(upstream_name);
+
+    cy.get(
+      '.hub-formgroup-registry .pf-c-form-control.pf-c-select__toggle-typeahead',
+    )
+      .click()
+      .type(registry);
+    cy.contains('button', registry).click();
+
+    cy.get('input[id="addTagsInclude"]')
+      .type(include_tags)
+      .parent()
+      .find('button', 'Add')
+      .click();
+
+    cy.intercept(
+      'POST',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/remotes/',
+    ).as('saved');
+
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
+    ).as('listLoad');
+
+    cy.contains('button', 'Save').click();
+
+    cy.wait('@saved');
+    cy.wait('@listLoad');
+  },
+);
+
+Cypress.Commands.add(
+  'addLocalContainer',
+  {},
+  (localName, remoteName, registry = 'docker.io/') => {
+    const log = ({ code, stderr, stdout }) =>
+      console.log(`CODE=${code} ERR=${stderr} OUT=${stdout}`);
+    const logFail = (...arr) => {
+      console.log(arr);
+      return Promise.reject(...arr);
+    };
+    const server = Cypress.env('containers');
+
+    return cy
+      .exec(shell`podman pull ${registry + remoteName}`)
+      .then(log, logFail)
+      .then(() =>
+        cy.exec(
+          shell`podman image tag ${remoteName} ${server}/${localName}:latest`,
+        ),
+      )
+      .then(log, logFail)
+      .then(() =>
+        cy.exec(
+          shell`podman login ${server} --tls-verify=false --username=admin --password=admin`,
+          { failOnNonZeroExit: false },
+        ),
+      )
+      .then(log, logFail)
+      .then(() =>
+        cy.exec(
+          shell`podman push ${server}/${localName}:latest --tls-verify=false`,
+          { failOnNonZeroExit: false },
+        ),
+      )
+      .then(log, logFail);
+  },
+);
+
+Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
+  cy.menuGo('Execution Environments > Execution Environments');
+  cy.contains('tr', name)
+    .find('button[aria-label="Actions"]')
+    .click()
+    .parents('tr')
+    .contains('.pf-c-dropdown__menu-item', 'Sync from registry')
+    .click();
+  cy.contains('.pf-c-alert__title', `Sync initiated for ${name}`);
+});
+
+Cypress.Commands.add('deleteRegistries', {}, () => {
+  cy.intercept(
+    'GET',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
+  ).as('registries');
+
+  cy.visit('/ui/registries');
+
+  cy.wait('@registries').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.get(
+        'tr[aria-labelledby="' +
+          element.name +
+          '"] button[aria-label="Actions"]',
+      ).click();
+      cy.contains('a', 'Delete').click();
+      cy.contains('button', 'Delete').click();
+    });
+  });
+});
+
+Cypress.Commands.add('deleteContainers', {}, () => {
+  cy.intercept(
+    'GET',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
+  ).as('listLoad');
+
+  cy.visit('/ui/containers');
+
+  cy.wait('@listLoad').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.get(
+        'tr[aria-labelledby="' +
+          element.name +
+          '"] button[aria-label="Actions"]',
+      ).click();
+      cy.contains('a', 'Delete').click();
+      cy.get('input[id=delete_confirm]').click();
+      cy.contains('button', 'Delete').click();
+      cy.wait('@listLoad', { timeout: 50000 });
+      cy.get('.pf-c-alert__action').click();
+    });
   });
 });
