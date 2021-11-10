@@ -31,11 +31,6 @@ describe('A namespace form', () => {
     getCreateNamespace().click();
   });
 
-  it('should give message before typing', () => {
-    getMessage().should('have.text', 'Please, provide the namespace name');
-    getCreateButton().should('be.disabled');
-  });
-
   it('should give message if input is empty', () => {
     getInputBox().type(' ');
     getMessage().should(

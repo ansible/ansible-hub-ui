@@ -39,10 +39,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
   private newNamespaceNameIsValid() {
     const error: any = this.state.errorMessages;
     const name: string = this.state.newNamespaceName;
-
-    if (name == '') {
-      error['name'] = t`Please, provide the namespace name`;
-    } else if (!/^[a-zA-Z0-9_]+$/.test(name)) {
+    if (!/^[a-zA-Z0-9_]+$/.test(name)) {
       error['name'] = t`Name can only contain letters and numbers`;
     } else if (name.length <= 2) {
       error['name'] = t`Name must be longer than 2 characters`;
