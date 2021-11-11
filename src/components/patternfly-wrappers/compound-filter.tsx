@@ -79,24 +79,26 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     ));
 
     let select;
-    if (filterConfig.length != 1)
-    {
-      select = <StatefulDropdown
-      toggleType='dropdown'
-      defaultText={
-        <span>
-          <FilterIcon />
-          {'   '}
-          {selectedFilter.title}
-        </span>
-      }
-      position='left'
-      isPlain={false}
-      items={filterOptions}
-      />; 
-    }else
-    {
-      select = <div style={{verticalAlign : 'center'}}>{filterConfig[0].title}</div>;
+    if (filterConfig.length != 1) {
+      select = (
+        <StatefulDropdown
+          toggleType='dropdown'
+          defaultText={
+            <span>
+              <FilterIcon />
+              {'   '}
+              {selectedFilter.title}
+            </span>
+          }
+          position='left'
+          isPlain={false}
+          items={filterOptions}
+        />
+      );
+    } else {
+      select = (
+        <div style={{ verticalAlign: 'center' }}>{filterConfig[0].title}</div>
+      );
     }
 
     return (
