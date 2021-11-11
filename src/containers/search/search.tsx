@@ -40,6 +40,7 @@ interface IState {
   };
   loading: boolean;
   synclist: SyncListType;
+  title: string;
 }
 
 class Search extends React.Component<RouteComponentProps, IState> {
@@ -65,12 +66,25 @@ class Search extends React.Component<RouteComponentProps, IState> {
       );
     }
 
+    const queryString = window.location.search;
+    console.log('queryString', queryString);
+    const urlParams = new URLSearchParams(queryString);
+    console.log('urlParams', urlParams);
+    console.log('urlParams,is_role', urlParams.get('is_role'));
+
+    let searchTitle = 'Collections';
+    if (urlParams.get('is_role') === 'True' || urlParams.get('is_role') === 'true') {
+        searchTitle = 'Roles';
+    }
+
+    console.log('Search params', params);
     this.state = {
       collections: [],
       params: params,
       numberOfResults: 0,
       loading: true,
       synclist: undefined,
+      title: searchTitle
     };
   }
 
@@ -93,7 +107,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       <div className='search-page'>
         <BaseHeader
           className='header'
-          title={t`Collections`}
+          title={this.state.title}
           contextSelector={
             <RepoSelector
               selectedRepo={this.context.selectedRepo}

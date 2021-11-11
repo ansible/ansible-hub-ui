@@ -330,11 +330,21 @@ class App extends React.Component<RouteComponentProps, IState> {
       items,
     });
 
+    console.log(this.state);
+
     return [
       menuSection(t`Collections`, {}, [
         menuItem(t`Collections`, {
           url: formatPath(Paths.searchByRepo, {
-            repo: this.state.selectedRepo,
+            repo: this.state.selectedRepo + '?is_role=False',
+          }),
+          condition: ({ settings, user }) =>
+            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
+            !user.is_anonymous,
+        }),
+        menuItem(t`Roles`, {
+          url: formatPath(Paths.searchByRepoRoles, {
+            repo: this.state.selectedRepo + '?is_role=True',
           }),
           condition: ({ settings, user }) =>
             settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||

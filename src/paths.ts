@@ -33,6 +33,7 @@ export enum Paths {
   logout = '/logout',
   search = '/',
   searchByRepo = '/repo/:repo',
+  searchByRepoRoles = '/repo/:repo',
   myCollectionsByRepo = '/repo/:repo/my-namespaces/:namespace',
   collectionByRepo = '/repo/:repo/:namespace/:collection',
   collectionDocsPage = '/:namespace/:collection/docs/:page',
