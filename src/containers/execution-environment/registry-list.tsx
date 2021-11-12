@@ -179,10 +179,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
               let promise = remoteFormNew
                 ? ExecutionEnvironmentRegistryAPI.create(newRemote)
                 : ExecutionEnvironmentRegistryAPI.smartUpdate(
-                    remoteToEdit.pk,
-                    remoteToEdit,
-                    remoteUnmodified,
-                  );
+                  remoteToEdit.pk,
+                  remoteToEdit,
+                  remoteUnmodified,
+                );
 
               promise
                 .then(() => {
@@ -225,7 +225,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
               <span>
                 <b>
                   {remoteToEdit.name}
-                  {}
+                  {' '}
                 </b>
                 will be deleted.
               </span>
