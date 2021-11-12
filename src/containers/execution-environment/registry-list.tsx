@@ -221,7 +221,15 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             }
             deleteAction={() => this.deleteRegistry(remoteToEdit)}
             title={t`Delete remote registry?`}
-            children={t`${remoteToEdit.name} will be deleted.`}
+            children={
+              <span>
+                <b>
+                  {remoteToEdit.name}
+                  {}
+                </b>
+                will be deleted.
+              </span>
+            }
           />
         )}
         <BaseHeader title={t`Remote Registries`}></BaseHeader>
