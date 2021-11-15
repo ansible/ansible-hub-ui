@@ -3,7 +3,7 @@ import * as React from 'react';
 import './markdown-editor.scss';
 
 import { Form, FormGroup, TextArea } from '@patternfly/react-core';
-import * as ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 
 interface IProps {
   text: string;
@@ -37,11 +37,7 @@ export class MarkdownEditor extends React.Component<IProps, {}> {
           <div className='column preview-container'>
             {editing && t`Preview`}
             <div className={editing ? 'pf-c-content preview' : 'pf-c-content'}>
-              {text ? (
-                <ReactMarkdown children={text} />
-              ) : (
-                <ReactMarkdown children={placeholder} />
-              )}
+              <ReactMarkdown>{text || placeholder}</ReactMarkdown>
             </div>
           </div>
         </div>
