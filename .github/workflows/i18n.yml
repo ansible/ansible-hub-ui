@@ -1,0 +1,35 @@
+name: i18n
+
+on:
+  # allow running manually
+  workflow_dispatch:
+  # run weekly
+  push:
+    branches: [ 'master', 'stable-4.4' ]
+  schedule:
+    - cron:  '30 5 * * 0'
+
+jobs:
+  i18n:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+    - name: "extract strings"
+      run: |
+        npm install
+        npm run gettext:extract
+
+    - name: "compile strings"
+      run: npm run gettext:compile
+
+    - name: "commit"
+      run: |
+        git config --global user.name 'GH Actions'
+        git config --global user.email 'gh_actions@users.noreply.github.com'
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ansible/ansible-hub-ui.git
+        git add locale/
+        git commit -m "Automated updated of i18n strings on $(date +'%Y-%m-%d')"
+        git push --set-upstream origin
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
