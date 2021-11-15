@@ -204,7 +204,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             spinner={isNamespacePending}
             cancelAction={this.closeModal}
             confirmAction={this.deleteNamespace}
-            title={t`Delete namespace`}
+            title={t`Delete namespace?`}
             confirmButtonTitle={t`Delete`}
             isDisabled={!confirmDelete || isNamespacePending}
           >

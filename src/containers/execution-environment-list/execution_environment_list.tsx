@@ -8,6 +8,7 @@ import {
   Checkbox,
   DropdownItem,
   Label,
+  Text,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -187,9 +188,11 @@ class ExecutionEnvironmentList extends React.Component<
             deleteAction={() => this.deleteContainer()}
             isDisabled={!confirmDelete || isDeletionPending}
           >
-            <Trans>
-              Deleting <b>{name}</b> and its data will be lost.
-            </Trans>
+            <Text className='delete-container-modal-message'>
+              <Trans>
+                Deleting <b>{name}</b> and its data will be lost.
+              </Trans>
+            </Text>
             <Checkbox
               isChecked={confirmDelete}
               onChange={(value) => this.setState({ confirmDelete: value })}
