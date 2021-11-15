@@ -268,15 +268,14 @@ class ExecutionEnvironmentList extends React.Component<
                   />
                 </div>
                 {this.renderTable(params)}
-                <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                  <Pagination
-                    params={params}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryEnvironments())
-                    }
-                    count={itemCount}
-                  />
-                </div>
+
+                <Pagination
+                  params={params}
+                  updateParams={(p) =>
+                    this.updateParams(p, () => this.queryEnvironments())
+                  }
+                  count={itemCount}
+                />
               </section>
             )}
           </Main>
