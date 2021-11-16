@@ -623,6 +623,7 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
   cy.wait('@registries').then((result) => {
     var data = result.response.body.data;
     data.forEach((element) => {
+      cy.wait(10000);
       cy.get(
         'tr[aria-labelledby="' +
           element.name +

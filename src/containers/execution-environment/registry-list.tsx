@@ -469,10 +469,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       .catch(() =>
         this.addAlert(t`Failed to delete remote registry ${name}`, 'danger'),
       )
-      .then(
-        () => this.queryRegistries(),
-        this.setState({ showDeleteModal: false, remoteToEdit: null }),
-      );
+      .then(() => {
+        this.queryRegistries();
+        this.setState({ showDeleteModal: false, remoteToEdit: null });
+      });
   }
 
   private syncRegistry({ pk, name }) {
