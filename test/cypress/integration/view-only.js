@@ -22,7 +22,7 @@ describe('view-only mode', () => {
 
       [
         'Collections > Repository Management',
-        'Collections > API Token',
+        'Collections > API token management',
         'Collections > Approval',
         'Execution Environments > Execution Environments',
         'Execution Environments > Remote Registries',

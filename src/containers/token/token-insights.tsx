@@ -95,7 +95,11 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                 <ClipboardCopy>{tokenData.refresh_token}</ClipboardCopy>
               </div>
             ) : (
-              <Button onClick={() => this.loadToken()}>{t`Load token`}</Button>
+              <div>
+                <Button
+                  onClick={() => this.loadToken()}
+                >{t`Load token`}</Button>
+              </div>
             )}
             <div
               className='pf-c-content'

@@ -350,7 +350,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           condition: ({ user }) => !user.is_anonymous,
           url: Paths.repositories,
         }),
-        menuItem(t`API Token`, {
+        menuItem(t`API token management`, {
           url: Paths.token,
           condition: ({ user }) => !user.is_anonymous,
         }),

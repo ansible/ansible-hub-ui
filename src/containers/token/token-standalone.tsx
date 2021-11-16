@@ -1,8 +1,9 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
+import './token.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Button } from '@patternfly/react-core';
+import { Button, Card, CardTitle, CardBody } from '@patternfly/react-core';
 
 import {
   BaseHeader,
@@ -35,53 +36,62 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
     return (
       <React.Fragment>
-        <BaseHeader title={t`Token management`}></BaseHeader>
+        <BaseHeader title={t`API token management`}></BaseHeader>
         <Main>
           {unauthorised ? (
             <EmptyStateUnauthorized />
           ) : (
-            <section className='body pf-c-content'>
-              <h2>{t`API token`}</h2>
-              <p>
-                <Trans>
-                  Use this token to authenticate the <code>ansible-galaxy</code>{' '}
-                  client.
-                </Trans>
-              </p>
-              {!this.context.user.auth_provider.includes('django') && (
-                <div>
-                  <h2>{t`Expiration`}</h2>
+            <Card>
+              <section className='body pf-c-content'>
+                <CardTitle>
+                  <h2>{t`API token`}</h2>
+                </CardTitle>
+                <CardBody>
                   <p>
                     <Trans>
-                      You are an SSO user. Your token will expire{' '}
-                      <DateComponent date={expirationDate.toISOString()} />.
+                      Use this token to authenticate the{' '}
+                      <code>ansible-galaxy</code> client.
                     </Trans>
                   </p>
-                </div>
-              )}
-              <div className='pf-c-content'>
-                <Trans>
-                  <b>WARNING</b> loading a new token will delete your old token.
-                </Trans>
-              </div>
-              {token ? (
-                <div>
+                  {!this.context.user.auth_provider.includes('django') && (
+                    <div>
+                      <h2>{t`Expiration`}</h2>
+                      <p>
+                        <Trans>
+                          You are an SSO user. Your token will expire{' '}
+                          <DateComponent date={expirationDate.toISOString()} />.
+                        </Trans>
+                      </p>
+                    </div>
+                  )}
                   <div className='pf-c-content'>
                     <Trans>
-                      <b>WARNING</b> copy this token now. This is the only time
-                      you will ever see it.
+                      <b>WARNING</b> loading a new token will delete your old
+                      token.
                     </Trans>
                   </div>
-                  <ClipboardCopy>{token}</ClipboardCopy>
-                </div>
-              ) : (
-                <div>
-                  <Button
-                    onClick={() => this.loadToken()}
-                  >{t`Load token`}</Button>
-                </div>
-              )}
-            </section>
+                  {token ? (
+                    <div>
+                      <CardBody>
+                        <div className='pf-c-content'>
+                          <Trans>
+                            <b>WARNING</b> copy this token now. This is the only
+                            time you will ever see it.
+                          </Trans>
+                        </div>
+                      </CardBody>
+                      <ClipboardCopy>{token}</ClipboardCopy>
+                    </div>
+                  ) : (
+                    <div className='load-token'>
+                      <Button
+                        onClick={() => this.loadToken()}
+                      >{t`Load token`}</Button>
+                    </div>
+                  )}
+                </CardBody>
+              </section>
+            </Card>
           )}
         </Main>
       </React.Fragment>
