@@ -1,6 +1,5 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import './token.scss';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { ClipboardCopyVariant, Button } from '@patternfly/react-core';
