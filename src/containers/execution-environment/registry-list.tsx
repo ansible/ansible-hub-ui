@@ -179,10 +179,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
               let promise = remoteFormNew
                 ? ExecutionEnvironmentRegistryAPI.create(newRemote)
                 : ExecutionEnvironmentRegistryAPI.smartUpdate(
-                  remoteToEdit.pk,
-                  remoteToEdit,
-                  remoteUnmodified,
-                );
+                    remoteToEdit.pk,
+                    remoteToEdit,
+                    remoteUnmodified,
+                  );
 
               promise
                 .then(() => {
@@ -222,13 +222,9 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             deleteAction={() => this.deleteRegistry(remoteToEdit)}
             title={t`Delete remote registry?`}
             children={
-              <span>
-                <b>
-                  {remoteToEdit.name}
-                  {' '}
-                </b>
-                will be deleted.
-              </span>
+              <Trans>
+                <b>{remoteToEdit.name}</b> will be deleted.
+              </Trans>
             }
           />
         )}
@@ -473,7 +469,8 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       .catch(() =>
         this.addAlert(t`Failed to delete remote registry ${name}`, 'danger'),
       )
-      .then(() =>
+      .then(
+        () => this.queryRegistries(),
         this.setState({ showDeleteModal: false, remoteToEdit: null }),
       );
   }
