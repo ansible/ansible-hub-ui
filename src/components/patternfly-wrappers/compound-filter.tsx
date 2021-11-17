@@ -96,7 +96,9 @@ export class CompoundFilter extends React.Component<IProps, IState> {
         />
       );
     } else {
-      select = <div style={{ margin: '10px' }}>{filterConfig[0].title}</div>;
+      select = (
+        <div style={{ margin: '8px 4px 0 0' }}>{filterConfig[0].title}</div>
+      );
     }
 
     return (
