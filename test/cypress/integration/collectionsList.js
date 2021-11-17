@@ -12,7 +12,7 @@ describe('Collections list Tests', () => {
     range(21).forEach((i) => {
       let item = { name: 'my_collection' + i };
       items.push(item);
-      //cy.galaxykit('-i collection upload my_namespace my_collection'+i);
+      cy.galaxykit('-i collection upload my_namespace my_collection' + i);
     });
 
     // load items. Because galaxykit does not support delete collection yet,
