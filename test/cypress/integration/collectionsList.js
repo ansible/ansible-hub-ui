@@ -15,8 +15,9 @@ describe('Collections list Tests', () => {
       //cy.galaxykit('-i collection upload my_namespace my_collection'+i);
     });
 
-    // load items, some data may be present from previous test, so we must load them, we can not expect
-    // that only our test data are in database
+    // load items. Because galaxykit does not support delete collection yet,
+    // some data may be present from previous test, so we must load them, we can not expect
+    // that only our test data are in database.
     cy.intercept(
       'GET',
       Cypress.env('prefix') +
@@ -27,20 +28,16 @@ describe('Collections list Tests', () => {
     let data = [];
     cy.wait('@data').then((res) => {
       items = res.response.body.data;
-
-      items.forEach((item) => {
-        cy.log(item.name);
-      });
     });
   });
 
   beforeEach(() => {
     cy.login(adminUsername, adminPassword);
+    cy.visit('/ui/repo/published');
   });
 
   it('paging is working', () => {
     // this page cant sort items, so we can only count them, there should be at least 21 items that we inserted
-    cy.visit('/ui/repo/published');
     cy.get('.collection-container').get('article').should('have.length', 10);
 
     cy.get('.cards').get('[aria-label="Go to next page"]:first').click();
@@ -68,5 +65,11 @@ describe('Collections list Tests', () => {
     cy.get('.cards').get('[data-action="per-page-20"]').click();
 
     cy.get('.collection-container').get('article').should('have.length', 20);
+  });
+
+  it('Cards/List switch is working', () => {
+    cy.get('[data-cy="view_type_list"] svg').click();
+
+    cy.get('li[aria-labelledby="simple-item1"').should('have.length', 10);
   });
 });
