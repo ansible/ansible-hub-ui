@@ -447,6 +447,22 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     );
   }
 
+  private updateRegistries() {
+    ExecutionEnvironmentRegistryAPI.list(this.state.params).then((result) => {
+      const isAllCompleted = result.data.data.every(
+        (task) => task.last_sync_task.state === 'completed',
+      );
+
+      if (!isAllCompleted) setTimeout(() => this.updateRegistries(), 500);
+
+      this.setState({
+        items: result.data.data,
+        itemCount: result.data.meta.count,
+        loading: false,
+      });
+    });
+  }
+
   private deleteRegistry({ pk, name }) {
     ExecutionEnvironmentRegistryAPI.delete(pk)
       .then(() =>
@@ -480,6 +496,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             </Trans>
           </span>,
         );
+        this.updateRegistries();
       })
       .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
   }
