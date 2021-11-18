@@ -41,7 +41,6 @@ interface IState {
   isModalOpen: boolean;
   loading: boolean;
   redirect?: string;
-  alerts?: AlertType[];
 }
 
 interface IProps extends RouteComponentProps {
@@ -75,7 +74,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
       hasPermission: true,
       isModalOpen: false,
       loading: true,
-      alerts: [],
     };
   }
 
@@ -176,7 +174,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             })
           }
         ></NamespaceModal>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList alerts={alerts} closeAlert={() => this.closeAlert()} />
         <BaseHeader title={title}>
           {!this.context.user.is_anonymous && (
             <div className='tab-link-container'>
@@ -340,7 +338,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     return ParamHelper.updateParamsMixin(this.nonURLParams);
   }
 
-  private closeAlert(i) {
+  private closeAlert() {
     this.context.setAlerts([]);
   }
 }
