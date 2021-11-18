@@ -90,6 +90,9 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
     }
 
     this.props.setGroups(newGroups);
+
+    const newSearchGroups = [...this.state.searchGroups, group];
+    this.setState({ searchGroups: newSearchGroups });
   }
 
   private setPermissions(perms, group) {
