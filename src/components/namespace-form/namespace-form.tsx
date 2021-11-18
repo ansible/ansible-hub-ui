@@ -119,7 +119,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                   formErrors: {
                     ...this.state.formErrors,
                     groups: {
-                      title: 'Error loading groups.',
+                      title: t`Error loading groups.`,
                       description: err,
                       variant: 'danger',
                     },

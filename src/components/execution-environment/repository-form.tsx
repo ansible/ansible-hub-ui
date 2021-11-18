@@ -110,7 +110,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             formErrors: {
               ...this.state.formErrors,
               registries: {
-                title: 'Error loading registries.',
+                title: t`Error loading registries.`,
                 description: e?.message,
                 variant: 'danger',
               },
@@ -408,7 +408,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                       formErrors: {
                         ...this.state.formErrors,
                         groups: {
-                          title: 'Error loading groups.',
+                          title: t`Error loading groups.`,
                           description: err,
                           variant: 'danger',
                         },
@@ -448,7 +448,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           formErrors: {
             ...this.state.formErrors,
             groups: {
-              title: 'Error loading groups.',
+              title: t`Error loading groups.`,
               description: e?.message,
               variant: 'danger',
             },

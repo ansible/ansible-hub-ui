@@ -94,7 +94,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                 ...this.context.alerts,
                 {
                   variant: 'danger',
-                  title: `Error loading active user.`,
+                  title: t`Error loading active user.`,
                   description: e?.message,
                 },
               ]);
