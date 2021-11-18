@@ -139,7 +139,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
             </ClipboardCopy>
           </td>
         )}
-        <td>
+        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
           <span>
             <StatefulDropdown
               items={[
