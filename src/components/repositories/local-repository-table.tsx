@@ -72,11 +72,6 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           type: 'none',
           id: 'cli_config',
         },
-        {
-          title: '',
-          type: 'none',
-          id: 'kebab',
-        },
       ],
     };
 
@@ -139,22 +134,6 @@ export class LocalRepositoryTable extends React.Component<IProps> {
             </ClipboardCopy>
           </td>
         )}
-        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
-          <span>
-            <StatefulDropdown
-              items={[
-                <DropdownItem
-                  key='2'
-                  component={
-                    <Link to={formatPath(Paths.token, {})} target='_blank'>
-                      {t`Get token`}
-                    </Link>
-                  }
-                />,
-              ]}
-            />
-          </span>
-        </td>
       </tr>
     );
   }
