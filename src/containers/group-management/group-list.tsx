@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './group-management.scss';
 
@@ -36,9 +36,11 @@ import {
   Main,
   Pagination,
   SortTable,
+  StatefulDropdown,
 } from 'src/components';
 import {
   Button,
+  DropdownItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -396,6 +398,37 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
   private renderTableRow(group, index: number) {
     const { user } = this.context;
+    const dropdownItems = [
+      <React.Fragment>
+        <DropdownItem
+          key='edit'
+          onClick={() => {
+            this.setState({
+              selectedGroup: { ...group },
+              redirect: formatPath(Paths.groupDetail, {
+                group: group.id,
+              }),
+            });
+          }}
+        >
+          <Trans>Edit group</Trans>
+        </DropdownItem>
+
+        {!!user && user.model_permissions.delete_group && (
+          <DropdownItem
+            key='delete'
+            onClick={() => {
+              this.setState({
+                selectedGroup: group,
+                deleteModalVisible: true,
+              });
+            }}
+          >
+            <Trans>Delete</Trans>
+          </DropdownItem>
+        )}
+      </React.Fragment>,
+    ];
     return (
       <tr aria-labelledby={group.name} key={index}>
         <td>
@@ -408,20 +441,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           </Link>
         </td>
         <td>
-          {!!user && user.model_permissions.delete_group && (
-            <Button
-              aria-label={t`Delete`}
-              key='delete'
-              variant='danger'
-              onClick={() =>
-                this.setState({
-                  selectedGroup: group,
-                  deleteModalVisible: true,
-                })
-              }
-            >
-              {t`Delete`}
-            </Button>
+          {dropdownItems.length > 0 && (
+            <StatefulDropdown items={dropdownItems} />
           )}
         </td>
       </tr>
