@@ -78,32 +78,23 @@ export class CompoundFilter extends React.Component<IProps, IState> {
       </DropdownItem>
     ));
 
-    let select;
-    if (filterConfig.length != 1) {
-      select = (
-        <StatefulDropdown
-          toggleType='dropdown'
-          defaultText={
-            <span>
-              <FilterIcon />
-              {'   '}
-              {selectedFilter.title}
-            </span>
-          }
-          position='left'
-          isPlain={false}
-          items={filterOptions}
-        />
-      );
-    } else {
-      select = (
-        <div style={{ margin: '8px 4px 0 0' }}>{filterConfig[0].title}</div>
-      );
-    }
-
     return (
       <InputGroup>
-        {select}
+        {filterConfig.length != 1 && (
+          <StatefulDropdown
+            toggleType='dropdown'
+            defaultText={
+              <span>
+                <FilterIcon />
+                {'   '}
+                {selectedFilter.title}
+              </span>
+            }
+            position='left'
+            isPlain={false}
+            items={filterOptions}
+          />
+        )}
         {this.renderInput(selectedFilter)}
         <Button
           onClick={() => this.submitFilter()}
