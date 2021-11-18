@@ -197,15 +197,14 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                   />
                 </div>
                 {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
-                <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                  <Pagination
-                    params={params}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryTasks())
-                    }
-                    count={itemCount}
-                  />
-                </div>
+
+                <Pagination
+                  params={params}
+                  updateParams={(p) =>
+                    this.updateParams(p, () => this.queryTasks())
+                  }
+                  count={itemCount}
+                />
               </section>
             )}
           </Main>
