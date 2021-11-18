@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { t, Trans } from '@lingui/macro';
+import './registry-list.scss';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
@@ -289,15 +290,13 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                   />
                 </div>
                 {this.renderTable(params)}
-                <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                  <Pagination
-                    params={params}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryRegistries())
-                    }
-                    count={itemCount}
-                  />
-                </div>
+                <Pagination
+                  params={params}
+                  updateParams={(p) =>
+                    this.updateParams(p, () => this.queryRegistries())
+                  }
+                  count={itemCount}
+                />
               </section>
             )}
           </Main>
