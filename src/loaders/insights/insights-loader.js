@@ -18,6 +18,7 @@ class App extends Component {
       user: null,
       activeUser: null,
       selectedRepo: DEFAULT_REPO,
+      alerts: [],
     };
   }
 
@@ -117,6 +118,8 @@ class App extends Component {
             user: this.state.activeUser,
             setUser: this.setActiveUser,
             selectedRepo: this.state.selectedRepo,
+            alerts: this.state.alerts,
+            setAlerts: this.setAlerts,
           }}
         >
           <Routes childProps={this.props} />
@@ -126,6 +129,10 @@ class App extends Component {
   }
   setActiveUser = (user) => {
     this.setState({ activeUser: user });
+  };
+
+  setAlerts = (alerts) => {
+    this.setState({ alerts });
   };
 
   isRepoURL = (location) => {
