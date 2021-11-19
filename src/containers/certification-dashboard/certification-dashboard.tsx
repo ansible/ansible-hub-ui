@@ -355,10 +355,8 @@ class CertificationDashboard extends React.Component<
           <DateComponent date={version.created_at} />
         </td>
         <td>{this.renderStatus(version)}</td>
-        <td>
-          <div className='control-column'>
-            <div>{this.renderButtons(version)}</div>
-          </div>
+        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
+          {this.renderButtons(version)}
         </td>
       </tr>
     );
