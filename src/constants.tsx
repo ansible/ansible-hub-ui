@@ -99,6 +99,15 @@ export class Constants {
         'galaxy.delete_containerregistryremote', // model_permissions.delete_containerregistry
       ],
     },
+    {
+      name: 'task_management',
+      label: t`Task Management`,
+      object_permissions: [
+        'core.change_task',
+        'core.delete_task',
+        'core.view_task',
+      ],
+    },
 
     // These aren't currently used. Removing them to reduce confusion in the UI
     // {
@@ -165,6 +174,9 @@ export class Constants {
     'container.namespace_pull_containerdistribution': t`Pull private containers`,
     'container.namespace_push_containerdistribution': t`Push to existing containers`,
     'container.namespace_view_containerdistribution': t`View private containers`,
+    'core.change_task': t`Change task`,
+    'core.delete_task': t`Delete task`,
+    'core.view_task': t`View all tasks`,
     'galaxy.add_containerregistryremote': t`Add remote registry`,
     'galaxy.add_group': t`Add group`,
     'galaxy.add_namespace': t`Add namespace`,
