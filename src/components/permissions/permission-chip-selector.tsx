@@ -17,7 +17,6 @@ interface IProps {
   onSelect?: (event, selection) => void;
   onClear?: () => void;
   menuAppendTo?: 'parent' | 'inline';
-  selectPermissionCaption?: string;
 }
 
 interface IState {
@@ -31,13 +30,10 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
   }
 
   render() {
-    let selectPermissionCaption =
-      this.props.selectPermissionCaption || t`Select permissions`;
-
     if (this.props.isViewOnly) {
       const items = this.props.selectedPermissions.length
         ? this.props.selectedPermissions
-        : [this.placeholderText(selectPermissionCaption)];
+        : [this.placeholderText()];
       return (
         <LabelGroup>
           {items.map((text) => (
@@ -51,7 +47,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
       <Select
         menuAppendTo={this.props.menuAppendTo}
         variant={SelectVariant.typeaheadMulti}
-        typeAheadAriaLabel={selectPermissionCaption}
+        typeAheadAriaLabel={t`Select permissions`}
         onToggle={this.onToggle}
         onSelect={!!this.props.onSelect ? this.props.onSelect : this.onSelect}
         onClear={
@@ -59,7 +55,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         }
         selections={this.props.selectedPermissions}
         isOpen={this.state.isOpen}
-        placeholderText={this.placeholderText(selectPermissionCaption)}
+        placeholderText={this.placeholderText()}
         isDisabled={!!this.props.isDisabled}
       >
         {this.props.availablePermissions.length === 0
@@ -77,9 +73,9 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
     );
   }
 
-  private placeholderText(selectPermissionCaption) {
+  private placeholderText() {
     if (!this.props.isDisabled && !this.props.isViewOnly) {
-      return selectPermissionCaption;
+      return t`Select permissions`;
     }
     return this.props.selectedPermissions.length === 0 ? t`No permission` : '';
   }

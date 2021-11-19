@@ -15,7 +15,6 @@ interface IProps {
   setGroups: (groups: GroupObjectPermissionType[]) => void;
   isDisabled?: boolean;
   menuAppendTo?: 'parent' | 'inline';
-  selectPermissionCaption?: string;
 }
 
 interface IState {
@@ -67,7 +66,6 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
                   )}
                   setSelected={(perms) => this.setPermissions(perms, group)}
                   menuAppendTo={this.props.menuAppendTo}
-                  selectPermissionCaption={this.props.selectPermissionCaption}
                 />
               </FlexItem>
               <FlexItem>

@@ -39,7 +39,10 @@ export class NamespaceModal extends React.Component<IProps, IState> {
   private newNamespaceNameIsValid() {
     const error: any = this.state.errorMessages;
     const name: string = this.state.newNamespaceName;
-    if (!/^[a-zA-Z0-9_]+$/.test(name)) {
+
+    if (name == '') {
+      error['name'] = t`Please, provide the namespace name`;
+    } else if (!/^[a-zA-Z0-9_]+$/.test(name)) {
       error['name'] = t`Name can only contain letters and numbers`;
     } else if (name.length <= 2) {
       error['name'] = t`Name must be longer than 2 characters`;
@@ -87,7 +90,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     const { newNamespaceName, newGroups, newNamespaceNameValid } = this.state;
     return (
       <Modal
-        variant='small'
+        variant='medium'
         title={t`Create a new namespace`}
         isOpen={this.props.isOpen}
         onClose={this.toggleModal}
@@ -139,12 +142,12 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             fieldId='groups'
             helperTextInvalid={this.state.errorMessages['groups']}
           >
+            {t`Select namespace owner permissions`}
             <ObjectPermissionField
               availablePermissions={['change_namespace', 'upload_to_namespace']}
               groups={newGroups}
               setGroups={(g) => this.setState({ newGroups: g })}
               menuAppendTo='parent'
-              selectPermissionCaption={t`Select namespace owner permissions`}
             />
           </FormGroup>
         </Form>

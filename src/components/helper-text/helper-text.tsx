@@ -11,11 +11,13 @@ interface IProps {
 
 export class HelperText extends React.Component<IProps, {}> {
   render() {
+    let div = <div style={{ height: '10px' }}></div>;
     return (
       <Popover
         aria-label={t`popover example`}
         position={PopoverPosition.top}
         bodyContent={this.props.content}
+        headerContent={div}
       >
         <Button iconPosition={'left'} variant={'plain'} className={'helper'}>
           <OutlinedQuestionCircleIcon />
