@@ -32,6 +32,8 @@ describe('A namespace form', () => {
   });
 
   it('should give message before typing', () => {
+    // error is shown only when start typing and then left empty
+    getInputBox().type('A{backspace}');
     getMessage().should('have.text', 'Please, provide the namespace name');
     getCreateButton().should('be.disabled');
   });
