@@ -8,6 +8,7 @@ import {
   Main,
   TagLabel,
   ClipboardCopy,
+  ShaLabel,
 } from '../../components';
 import {
   DataList,
@@ -116,7 +117,8 @@ class ExecutionEnvironmentManifest extends React.Component<
             />
           }
         >
-          <div>
+          <div className='copy-sha'>
+            <ShaLabel digest={digest} />
             <ClipboardCopy className='eco-clipboard-copy' isReadOnly>
               {digest}
             </ClipboardCopy>
