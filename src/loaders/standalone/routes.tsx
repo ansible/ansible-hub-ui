@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom';
+import { Routes, Route, Redirect, RouteComponentProps } from 'react-router-dom';
 
 import {
   CertificationDashboard,
@@ -262,7 +262,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
 
   render() {
     return (
-      <Switch>
+      <Routes>
         {this.getRoutes().map((route, index) => (
           <Route
             key={index}
@@ -278,7 +278,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
             path={route.path}
           ></Route>
         ))}
-      </Switch>
+      </Routes>
     );
   }
 }

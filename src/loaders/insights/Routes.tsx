@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Routes, Redirect } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { Paths } from 'src/paths';
@@ -157,7 +157,7 @@ const SignatureKeysList = lazy(
 );
 
 /**
- * the Switch component changes routes depending on the path.
+ * the Routes component changes routes depending on the path.
  *
  * Route properties:
  *      exact - path must match exactly,
@@ -167,7 +167,7 @@ const SignatureKeysList = lazy(
 export const InsightsRoutes = () => {
   return (
     <Suspense fallback={<LoadingPageWithHeader />}>
-      <Switch>
+      <Routes>
         <Route path={Paths.repositories} component={Repository} />
         <Route
           path={Paths.approvalDashboard}
@@ -228,7 +228,7 @@ export const InsightsRoutes = () => {
         <Route>
           <Redirect push to={Paths.notFound} />
         </Route>
-      </Switch>
+      </Routes>
     </Suspense>
   );
 };
