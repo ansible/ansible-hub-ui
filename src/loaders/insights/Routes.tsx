@@ -164,7 +164,7 @@ const SignatureKeysList = lazy(
  *      path - https://prod.foo.redhat.com:1337/insights/advisor/rules
  *      component - component to be rendered when a route has been chosen.
  */
-export const Routes = () => {
+export const InsightsRoutes = () => {
   return (
     <Suspense fallback={<LoadingPageWithHeader />}>
       <Switch>
@@ -233,7 +233,7 @@ export const Routes = () => {
   );
 };
 
-Routes.propTypes = {
+InsightsRoutes.propTypes = {
   childProps: PropTypes.shape({
     location: PropTypes.shape({
       pathname: PropTypes.string,

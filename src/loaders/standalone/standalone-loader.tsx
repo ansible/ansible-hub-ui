@@ -28,7 +28,7 @@ import {
 } from '@patternfly/react-icons';
 import { reject, some } from 'lodash';
 
-import { Routes } from './routes';
+import { StandaloneRoutes } from './routes';
 import { Paths, formatPath } from 'src/paths';
 import {
   ActiveUserAPI,
@@ -310,13 +310,15 @@ class App extends React.Component<RouteComponentProps, IState> {
       this.props.location.pathname === formatPath(Paths.login, {}) ||
       this.props.location.pathname === UI_EXTERNAL_LOGIN_URI
     ) {
-      return this.ctx(<Routes updateInitialData={this.updateInitialData} />);
+      return this.ctx(
+        <StandaloneRoutes updateInitialData={this.updateInitialData} />,
+      );
     }
 
     return this.ctx(
       <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
         {this.state.aboutModalVisible && aboutModal}
-        <Routes updateInitialData={this.updateInitialData} />
+        <StandaloneRoutes updateInitialData={this.updateInitialData} />
       </Page>,
     );
   }

@@ -147,7 +147,7 @@ class AuthHandler extends React.Component<
   }
 }
 
-export class Routes extends React.Component<IRoutesProps> {
+export class StandaloneRoutes extends React.Component<IRoutesProps> {
   static contextType = AppContext;
 
   // Note: must be ordered from most specific to least specific

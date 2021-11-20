@@ -4,7 +4,7 @@ import { RouteComponentProps, withRouter, matchPath } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
-import { Routes } from './Routes';
+import { InsightsRoutes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
 import { loadContext } from '../load-context';
@@ -133,7 +133,7 @@ const App = (props: IProps) => {
         variant='info'
         title={t`The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections.`}
       />
-      <Routes childProps={props} />
+      <InsightsRoutes childProps={props} />
       <UIVersion />
     </AppContext.Provider>
   );
