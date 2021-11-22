@@ -63,7 +63,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.name,
+      name: this.props.name || '',
       description: this.props.description,
       selectedGroups: [],
       originalSelectedGroups: [],
@@ -74,7 +74,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       includeTags: this.props.includeTags,
       registries: null,
       registrySelection: [],
-      upstreamName: this.props.upstreamName,
+      upstreamName: this.props.upstreamName || '',
     };
   }
 
@@ -111,7 +111,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       addTagsInclude,
       addTagsExclude,
     } = this.state;
-
     return (
       <Modal
         variant='large'
@@ -125,6 +124,11 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             key='save'
             variant='primary'
             onClick={() => onSave(this.onSave())}
+            isDisabled={
+              this.state.name.length === 0 ||
+              this.state.upstreamName.length === 0 ||
+              this.state.registrySelection.length === 0
+            }
           >
             {t`Save`}
           </Button>,
@@ -160,7 +164,12 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             </>
           ) : (
             <>
-              <FormGroup key='name' fieldId='name' label={t`Name`}>
+              <FormGroup
+                isRequired={true}
+                key='name'
+                fieldId='name'
+                label={t`Name`}
+              >
                 <TextInput
                   id='name'
                   value={name}
@@ -173,6 +182,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 key='upstreamName'
                 fieldId='upstreamName'
                 label={t`Upstream name`}
+                isRequired={true}
               >
                 <TextInput
                   id='upstreamName'
@@ -186,6 +196,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 fieldId='registry'
                 label={t`Registry`}
                 className='hub-formgroup-registry'
+                isRequired={true}
               >
                 {registries ? (
                   <APISearchTypeAhead
