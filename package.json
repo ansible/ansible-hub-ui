@@ -7,7 +7,7 @@
     "dependencies": {
         "@ansible/galaxy-doc-builder": "1.0.0-alpha4",
         "@babel/runtime": "^7.16.3",
-        "@patternfly/patternfly": "^4.151.4",
+        "@patternfly/patternfly": "^4.159.1",
         "@patternfly/react-core": "^4.168.8",
         "@patternfly/react-table": "^4.37.8",
         "@redhat-cloud-services/frontend-components": "^3.5.0",
