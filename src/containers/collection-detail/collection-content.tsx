@@ -68,8 +68,8 @@ class CollectionContent extends React.Component<
         <CollectionHeader
           collection={collection}
           params={params}
-          updateParams={params =>
-            this.updateParams(params, () =>
+          setVersion={version =>
+            this.updateParams({ ...params, version }, () =>
               this.loadCollection(this.context.selectedRepo, true),
             )
           }
