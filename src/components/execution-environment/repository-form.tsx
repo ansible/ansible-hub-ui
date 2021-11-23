@@ -102,7 +102,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     const {
       name,
       description,
-      selectedGroups,
       upstreamName,
       excludeTags,
       includeTags,
@@ -125,9 +124,10 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             variant='primary'
             onClick={() => onSave(this.onSave())}
             isDisabled={
-              this.state.name.length === 0 ||
-              this.state.upstreamName.length === 0 ||
-              this.state.registrySelection.length === 0
+              (this.state.name.length === 0 ||
+                this.state.upstreamName.length === 0 ||
+                this.state.registrySelection.length === 0) &&
+              isRemote
             }
           >
             {t`Save`}
