@@ -82,8 +82,8 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
         <CollectionHeader
           collection={collection}
           params={params}
-          updateParams={params =>
-            this.updateParams(params, () => this.loadData(true))
+          setVersion={version =>
+            this.updateParams({ ...params, version }, () => this.loadData(true))
           }
           breadcrumbs={breadcrumbs}
           activeTab='import-log'
