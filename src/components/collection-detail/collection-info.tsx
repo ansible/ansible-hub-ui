@@ -27,7 +27,7 @@ interface IProps extends CollectionDetailType {
   params: {
     version?: string;
   };
-  updateParams: (params) => void;
+  setVersion: (version: string) => void;
 }
 
 export class CollectionInfo extends React.Component<IProps> {
@@ -46,7 +46,7 @@ export class CollectionInfo extends React.Component<IProps> {
       namespace,
       all_versions,
       params,
-      updateParams,
+      setVersion,
     } = this.props;
 
     let installCommand = `ansible-galaxy collection install ${namespace.name}.${name}`;
@@ -92,7 +92,7 @@ export class CollectionInfo extends React.Component<IProps> {
                         this.context.selectedRepo,
                         namespace,
                         name,
-                        latest_version,
+                        params.version || latest_version.version,
                       )
                     }
                   >
@@ -107,12 +107,8 @@ export class CollectionInfo extends React.Component<IProps> {
               <SplitItem className='install-tile'>Install Version</SplitItem>
               <SplitItem isFilled>
                 <FormSelect
-                  onChange={val =>
-                    updateParams(ParamHelper.setParam(params, 'version', val))
-                  }
-                  value={
-                    params.version ? params.version : latest_version.version
-                  }
+                  onChange={val => setVersion(val)}
+                  value={params.version || latest_version.version}
                   aria-label='Select collection version'
                 >
                   {all_versions.map(v => (
@@ -162,20 +158,17 @@ export class CollectionInfo extends React.Component<IProps> {
     );
   }
 
-  private download(reponame, namespace, name, latest_version) {
-    CollectionAPI.getDownloadURL(
-      reponame,
-      namespace.name,
-      name,
-      latest_version.version,
-    ).then((downloadURL: string) => {
-      // By getting a reference to a hidden <a> tag, setting the href and
-      // programmatically clicking it, we can hold off on making the api
-      // calls to get the download URL until it's actually needed. Clicking
-      // the <a> tag also gets around all the problems using a popup with
-      // window.open() causes.
-      this.downloadLinkRef.current.href = downloadURL;
-      this.downloadLinkRef.current.click();
-    });
+  private download(reponame, namespace, name, version) {
+    CollectionAPI.getDownloadURL(reponame, namespace.name, name, version).then(
+      (downloadURL: string) => {
+        // By getting a reference to a hidden <a> tag, setting the href and
+        // programmatically clicking it, we can hold off on making the api
+        // calls to get the download URL until it's actually needed. Clicking
+        // the <a> tag also gets around all the problems using a popup with
+        // window.open() causes.
+        this.downloadLinkRef.current.href = downloadURL;
+        this.downloadLinkRef.current.click();
+      },
+    );
   }
 }

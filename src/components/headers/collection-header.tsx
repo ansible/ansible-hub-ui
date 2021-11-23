@@ -16,7 +16,6 @@ interface IProps {
   params: {
     version?: string;
   };
-  updateParams: (params) => void;
   breadcrumbs: {
     url?: string;
     name: string;
@@ -24,6 +23,7 @@ interface IProps {
   activeTab: string;
   className?: string;
   repo?: string;
+  setVersion: (version: string) => void;
 }
 
 export class CollectionHeader extends React.Component<IProps> {
@@ -33,10 +33,10 @@ export class CollectionHeader extends React.Component<IProps> {
     const {
       collection,
       params,
-      updateParams,
       breadcrumbs,
       activeTab,
       className,
+      setVersion,
     } = this.props;
 
     const all_versions = [...collection.all_versions];
@@ -70,9 +70,7 @@ export class CollectionHeader extends React.Component<IProps> {
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <APIButton style={{ marginRight: '8px' }} />
             <FormSelect
-              onChange={val =>
-                updateParams(ParamHelper.setParam(params, 'version', val))
-              }
+              onChange={val => setVersion(val)}
               value={collection.latest_version.version}
               aria-label='Select collection version'
             >

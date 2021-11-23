@@ -133,8 +133,8 @@ class CollectionDocs extends React.Component<
         <CollectionHeader
           collection={collection}
           params={params}
-          updateParams={p =>
-            this.updateParams(p, () =>
+          setVersion={version =>
+            this.updateParams({ ...params, version }, () =>
               this.loadCollection(this.context.selectedRepo, true),
             )
           }
