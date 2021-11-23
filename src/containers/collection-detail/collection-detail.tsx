@@ -55,26 +55,27 @@ class CollectionDetail extends React.Component<
       },
     ];
 
+    const setVersion = version =>
+      this.updateParams({ ...params, version }, () =>
+        this.loadCollection(this.context.selectedRepo, true),
+      );
+
     return (
       <React.Fragment>
         <CollectionHeader
           collection={collection}
           params={params}
-          updateParams={p =>
-            this.updateParams(p, () =>
-              this.loadCollection(this.context.selectedRepo, true),
-            )
-          }
           breadcrumbs={breadcrumbs}
           activeTab='details'
           repo={this.context.selectedRepo}
+          setVersion={setVersion}
         />
         <Main>
           <Section className='body'>
             <CollectionInfo
               {...collection}
-              updateParams={p => this.updateParams(p)}
-              params={this.state.params}
+              params={params}
+              setVersion={setVersion}
             />
           </Section>
         </Main>
