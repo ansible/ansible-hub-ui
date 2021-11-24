@@ -25,7 +25,6 @@ describe('Collections list Tests', () => {
     ).as('data');
     cy.visit('/ui/repo/published?page_size=100&view_type=null&page=1');
 
-    let data = [];
     cy.wait('@data').then((res) => {
       items = res.response.body.data;
     });
