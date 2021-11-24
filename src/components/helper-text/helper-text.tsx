@@ -7,17 +7,17 @@ import './helper-text.scss';
 interface IProps {
   /** Value to display in the tag */
   content: React.ReactNode;
+  header?: React.ReactNode;
 }
 
 export class HelperText extends React.Component<IProps, {}> {
   render() {
-    let div = <div style={{ height: '10px' }}></div>;
     return (
       <Popover
         aria-label={t`popover example`}
         position={PopoverPosition.top}
         bodyContent={this.props.content}
-        headerContent={div}
+        headerContent={this.props.header}
       >
         <Button iconPosition={'left'} variant={'plain'} className={'helper'}>
           <OutlinedQuestionCircleIcon />

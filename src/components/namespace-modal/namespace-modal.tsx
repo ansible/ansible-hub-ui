@@ -118,6 +118,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             labelIcon={
               <HelperText
                 content={t`Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’.`}
+                header={t`Namespace name`}
               />
             }
           >
