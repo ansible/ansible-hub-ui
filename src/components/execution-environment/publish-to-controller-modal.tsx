@@ -357,7 +357,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
             {!unsafeLinksSupported && (
               <Trans>
                 <b>Note:</b> The following links may be blocked by your browser.
-                Copy and paste the link manually.
+                Copy and paste the external link manually.
               </Trans>
             )}
             <Spacer />
