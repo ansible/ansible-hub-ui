@@ -12,6 +12,8 @@ import {
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { getValueFromFunction } from 'src/utilities';
+
 import './repo-selector.scss';
 
 interface IProps {
@@ -60,14 +62,14 @@ export class RepoSelector extends React.Component<IProps, IState> {
               isPlain={false}
               onSelect={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const originalRepo = this.props.selectedRepo;
-                const newRepo = this.getRepoBasePath(event.target.name);
+                const newRepo = this.getRepoName(event.target.name);
 
                 this.setState({ selectExpanded: false });
 
                 if (newRepo !== originalRepo) {
                   const path = formatPath(this.props.path, {
                     ...this.props.pathParams,
-                    repo: newRepo,
+                    repo: event.target.name,
                   });
                   this.context.setRepo(path);
                 }
@@ -82,7 +84,7 @@ export class RepoSelector extends React.Component<IProps, IState> {
                 <SelectOption
                   name={option}
                   key={option}
-                  value={repoNames[option]}
+                  value={getValueFromFunction(repoNames[option])}
                 />
               ))}
             </Select>
@@ -92,24 +94,8 @@ export class RepoSelector extends React.Component<IProps, IState> {
     );
   }
 
-  private getRepoBasePath(basePath) {
-    const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
-      (key) => Constants.REPOSITORYNAMES[key] === basePath,
-    );
-
-    // allowing the repo to go through even if isn't one that we support so
-    // that 404s bubble up naturally from the child components.
-    if (!newRepoName) {
-      return basePath;
-    }
-    return newRepoName;
-  }
-
   private getRepoName(repoName) {
-    if (Constants.REPOSITORYNAMES[repoName]) {
-      return Constants.REPOSITORYNAMES[repoName];
-    }
-
-    return repoName;
+    const repo = Constants.REPOSITORYNAMES[repoName];
+    return repo ? getValueFromFunction(repo) : repoName;
   }
 }

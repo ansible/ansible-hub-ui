@@ -246,9 +246,9 @@ export class Constants {
   ];
 
   static REPOSITORYNAMES = {
-    published: t`Published`,
-    'rh-certified': t`Red Hat Certified`,
-    community: t`Community`,
+    published: () => t`Published`,
+    'rh-certified': () => t`Red Hat Certified`,
+    community: () => t`Community`,
   };
 
   static ALLOWEDREPOS = ['community', 'published', 'rh-certified'];
