@@ -9,7 +9,7 @@ describe('Collections list Tests', () => {
     cy.login(adminUsername, adminPassword);
 
     // insert test data
-    range(21).forEach((i) => {
+    range(41).forEach((i) => {
       let item = { name: 'my_collection' + i };
       items.push(item);
       cy.galaxykit('-i collection upload my_namespace my_collection' + i);
@@ -45,8 +45,7 @@ describe('Collections list Tests', () => {
 
     cy.get('.cards').get('[aria-label="Go to next page"]:first').click();
     // some remaining data can be there from previous tests
-    var remaining = items.length - 20;
-    if (remaining > 10) remaining = 10;
+    const remaining = items.length > 30 ? 10 : items.length - 20;
     cy.get('.collection-container')
       .get('article')
       .should('have.length', remaining);
