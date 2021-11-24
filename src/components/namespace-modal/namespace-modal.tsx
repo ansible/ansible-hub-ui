@@ -143,7 +143,6 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             fieldId='groups'
             helperTextInvalid={this.state.errorMessages['groups']}
           >
-            {t`Select namespace owner permissions`}
             <ObjectPermissionField
               availablePermissions={['change_namespace', 'upload_to_namespace']}
               groups={newGroups}
