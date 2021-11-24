@@ -17,6 +17,7 @@ import {
   Text,
   Checkbox,
 } from '@patternfly/react-core';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 
 import * as ReactMarkdown from 'react-markdown';
 
@@ -150,7 +151,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     const tabs = [{ id: 'collections', name: t`Collections` }];
 
     if (this.state.showControls) {
-      tabs.push({ id: 'cli-configuration', name: t`CLI Configuration` });
+      tabs.push({ id: 'cli-configuration', name: t`CLI configuration` });
     }
     const tab = params['tab'] || 'collections';
 
@@ -307,7 +308,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           {tab.toLowerCase() === 'cli-configuration' ? (
             <section className='body'>
               <div>
-                <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
                 <div>
                   <Trans>
                     <b>Note:</b> Use this URL to configure ansible-galaxy to
@@ -319,9 +319,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     >
                       here
                     </a>
-                    .
+                    <span>&nbsp;</span>
+                    <ExternalLinkAltIcon />.
                   </Trans>
                 </div>
+                <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
               </div>
             </section>
           ) : null}
