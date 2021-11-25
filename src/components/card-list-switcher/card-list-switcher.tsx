@@ -32,20 +32,24 @@ export class CardListSwitcher extends React.Component<IProps> {
 
     return (
       <div className={className}>
-        <ThLargeIcon
-          size={size}
-          className={cx(iconClasses, { selected: disp === 'card' })}
-          onClick={() =>
-            updateParams(ParamHelper.setParam(params, 'view_type', 'card'))
-          }
-        />
-        <ListIcon
-          size={size}
-          className={cx(iconClasses, { selected: disp === 'list' })}
-          onClick={() =>
-            updateParams(ParamHelper.setParam(params, 'view_type', 'list'))
-          }
-        />
+        <span data-cy='view_type_card'>
+          <ThLargeIcon
+            size={size}
+            className={cx(iconClasses, { selected: disp === 'card' })}
+            onClick={() =>
+              updateParams(ParamHelper.setParam(params, 'view_type', 'card'))
+            }
+          />
+        </span>
+        <span data-cy='view_type_list'>
+          <ListIcon
+            size={size}
+            className={cx(iconClasses, { selected: disp === 'list' })}
+            onClick={() =>
+              updateParams(ParamHelper.setParam(params, 'view_type', 'list'))
+            }
+          />
+        </span>
       </div>
     );
   }
