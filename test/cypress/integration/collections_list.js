@@ -9,7 +9,7 @@ describe('Collections list Tests', () => {
     cy.login(adminUsername, adminPassword);
 
     // insert test data
-    range(41).forEach((i) => {
+    range(21).forEach((i) => {
       let item = { name: 'my_collection' + i };
       items.push(item);
       cy.galaxykit('-i collection upload my_namespace my_collection' + i);
