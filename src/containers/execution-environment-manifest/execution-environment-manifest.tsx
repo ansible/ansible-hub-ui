@@ -21,6 +21,9 @@ import {
   LabelGroup,
   Title,
   ClipboardCopyButton,
+  Card,
+  CardBody,
+  CardTitle,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
 import { Paths, formatPath } from '../../paths';
@@ -158,41 +161,46 @@ class ExecutionEnvironmentManifest extends React.Component<
           ) : (
             <Flex>
               <FlexItem className='layers-max-width'>
-                <section className='body'>
-                  <Title headingLevel='h2' size='lg'>
-                    {t`Image layers`}
-                  </Title>
-
-                  <DataList
-                    aria-label={t`Image layers`}
-                    onSelectDataListItem={(id) =>
-                      this.setState({ selectedLayer: id })
-                    }
-                    selectedDataListItemId={selectedLayer}
-                  >
-                    {layers.map(({ text, size }, index) => (
-                      <DataListItem key={index} id={`layer-${index}`}>
-                        <DataListItemRow>
-                          <DataListItemCells
-                            dataListCells={[
-                              <DataListCell
-                                key='primary content'
-                                className='single-line-ellipsis'
-                              >
-                                <code>{text}</code>
-                              </DataListCell>,
-                              size && (
-                                <DataListCell key='secondary content'>
-                                  {size}
-                                </DataListCell>
-                              ),
-                            ]}
-                          />
-                        </DataListItemRow>
-                      </DataListItem>
-                    ))}
-                  </DataList>
-                </section>
+                <Card>
+                  <section className='body'>
+                    <CardTitle>
+                      <Title headingLevel='h2' size='lg'>
+                        {t`Image layers`}
+                      </Title>
+                    </CardTitle>
+                    <CardBody>
+                      <DataList
+                        aria-label={t`Image layers`}
+                        onSelectDataListItem={(id) =>
+                          this.setState({ selectedLayer: id })
+                        }
+                        selectedDataListItemId={selectedLayer}
+                      >
+                        {layers.map(({ text, size }, index) => (
+                          <DataListItem key={index} id={`layer-${index}`}>
+                            <DataListItemRow>
+                              <DataListItemCells
+                                dataListCells={[
+                                  <DataListCell
+                                    key='primary content'
+                                    className='single-line-ellipsis'
+                                  >
+                                    <code>{text}</code>
+                                  </DataListCell>,
+                                  size && (
+                                    <DataListCell key='secondary content'>
+                                      {size}
+                                    </DataListCell>
+                                  ),
+                                ]}
+                              />
+                            </DataListItemRow>
+                          </DataListItem>
+                        ))}
+                      </DataList>
+                    </CardBody>
+                  </section>
+                </Card>
               </FlexItem>
 
               <Flex
@@ -200,28 +208,37 @@ class ExecutionEnvironmentManifest extends React.Component<
                 className='layers-max-width'
               >
                 <FlexItem>
-                  <section className='body'>
-                    <Title headingLevel='h2' size='lg'>
-                      {t`Command`}
-                    </Title>
-
-                    <code>{command}</code>
-                  </section>
+                  <Card>
+                    <section className='body'>
+                      <CardTitle>
+                        <Title headingLevel='h2' size='lg'>
+                          {t`Command`}
+                        </Title>
+                      </CardTitle>
+                      <CardBody>
+                        <code>{command}</code>
+                      </CardBody>
+                    </section>
+                  </Card>
                 </FlexItem>
-
                 <FlexItem>
-                  <section className='body'>
-                    <Title headingLevel='h2' size='lg'>
-                      {t`Environment`}
-                    </Title>
-
-                    {environment.map((line, index) => (
-                      <React.Fragment key={index}>
-                        <code>{line}</code>
-                        <br />
-                      </React.Fragment>
-                    ))}
-                  </section>
+                  <Card>
+                    <section className='body'>
+                      <CardTitle>
+                        <Title headingLevel='h2' size='lg'>
+                          {t`Environment`}
+                        </Title>
+                      </CardTitle>
+                      <CardBody>
+                        {environment.map((line, index) => (
+                          <React.Fragment key={index}>
+                            <code>{line}</code>
+                            <br />
+                          </React.Fragment>
+                        ))}
+                      </CardBody>
+                    </section>
+                  </Card>
                 </FlexItem>
               </Flex>
             </Flex>
