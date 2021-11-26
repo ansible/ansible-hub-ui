@@ -422,7 +422,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           {lastSynced(item)}
         </td>
 
-        <td>
+        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
           <Button variant='secondary' onClick={() => this.syncRegistry(item)}>
             <Trans>Sync from registry</Trans>
           </Button>{' '}
