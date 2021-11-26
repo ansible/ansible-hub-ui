@@ -124,7 +124,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         )}
         <td>{lastSynced(remote) || '---'}</td>
         <td>{lastSyncStatus(remote) || '---'}</td>
-        <td>
+        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
           {remote.repositories.length === 0 ? (
             <Tooltip
               content={t`There are no repos associated with this remote.`}
