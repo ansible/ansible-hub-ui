@@ -4,8 +4,6 @@ on:
   # allow running manually
   workflow_dispatch:
   # run weekly
-  push:
-    branches: [ 'master', 'stable-4.4' ]
   schedule:
     - cron:  '30 5 * * 0'
 
