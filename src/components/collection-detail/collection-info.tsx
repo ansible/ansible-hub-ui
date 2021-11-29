@@ -17,14 +17,7 @@ import {
 import { DownloadIcon } from '@patternfly/react-icons';
 
 import { CollectionDetailType, CollectionAPI } from 'src/api';
-import {
-  Tag,
-  ClipboardCopy,
-  LoginLink,
-  AlertType,
-  closeAlertMixin,
-  AlertList,
-} from 'src/components';
+import { Tag, ClipboardCopy, LoginLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 import { userLanguage } from 'src/l10n';
@@ -37,21 +30,13 @@ interface IProps extends CollectionDetailType {
   addAlert?: (variant, title, description?) => void;
 }
 
-interface IState {
-  alerts: AlertType[];
-}
-
-export class CollectionInfo extends React.Component<IProps, IState> {
+export class CollectionInfo extends React.Component<IProps> {
   downloadLinkRef: any;
   static contextType = AppContext;
 
   constructor(props) {
     super(props);
     this.downloadLinkRef = React.createRef();
-
-    this.state = {
-      alerts: [],
-    };
   }
 
   render() {
