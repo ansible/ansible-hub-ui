@@ -207,6 +207,7 @@ class ExecutionEnvironmentList extends React.Component<
             button={
               <>
                 {addRemoteButton}
+                <div>&nbsp;</div>
                 {pushImagesButton}
               </>
             }
