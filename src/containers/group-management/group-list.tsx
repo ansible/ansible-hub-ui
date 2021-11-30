@@ -416,6 +416,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
         {!!user && user.model_permissions.delete_group && (
           <DropdownItem
+            aria-label='Delete'
             key='delete'
             onClick={() => {
               this.setState({
