@@ -20,6 +20,7 @@ import {
   Checkbox,
   DropdownItem,
   LabelGroup,
+  Text,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -216,9 +217,13 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             deleteAction={() => this.deleteImage()}
             isDisabled={!confirmDelete || isDeletionPending}
           >
-            <Trans>
-              Deleting <b>{digest}</b> and its data will be lost.
-            </Trans>
+            <>
+              <Text className='delete-image-modal-message'>
+                <Trans>
+                  Deleting <b>{digest}</b> and its data will be lost.
+                </Trans>
+              </Text>
+            </>
             <Checkbox
               isChecked={confirmDelete}
               onChange={(value) => this.setState({ confirmDelete: value })}
