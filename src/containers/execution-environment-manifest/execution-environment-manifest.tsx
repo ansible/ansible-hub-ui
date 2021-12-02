@@ -20,6 +20,7 @@ import {
   FlexItem,
   LabelGroup,
   Title,
+  ClipboardCopyButton,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
 import { Paths, formatPath } from '../../paths';
@@ -118,10 +119,15 @@ class ExecutionEnvironmentManifest extends React.Component<
           }
         >
           <div className='copy-sha'>
-            <ShaLabel digest={digest} />
-            <ClipboardCopy className='eco-clipboard-copy' isReadOnly>
-              {digest}
-            </ClipboardCopy>
+            <ShaLabel digest={digest} long={true} />
+            <ClipboardCopyButton
+              className='eco-clipboard-copy'
+              variant={'plain'}
+              onClick={() => navigator.clipboard.writeText(digest)}
+              children={digest}
+              id={digest}
+              textId={t`Copy to clipboard`}
+            />
           </div>
 
           <LabelGroup numLabels={6}>
