@@ -328,17 +328,16 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             </tbody>
           </table>
         )}
-        <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-          <Pagination
-            params={params}
-            updateParams={(p) =>
-              this.updateParams(p, () =>
-                this.queryImages(this.props.match.params['container']),
-              )
-            }
-            count={this.state.numberOfImages}
-          />
-        </div>
+
+        <Pagination
+          params={params}
+          updateParams={(p) =>
+            this.updateParams(p, () =>
+              this.queryImages(this.props.match.params['container']),
+            )
+          }
+          count={this.state.numberOfImages}
+        />
       </section>
     );
   }
