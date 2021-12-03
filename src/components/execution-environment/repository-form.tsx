@@ -251,7 +251,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                         placeholderText={t`Select a registry`}
                         results={registries}
                         selections={registrySelection}
-                        isDisabled={true}
                       />
                     ) : (
                       <Spinner />
