@@ -75,6 +75,8 @@
         "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
         "build:prod": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
         "deploy": "npm-run-all build:prod test-prettier lint:ts",
+        "eslint": "eslint --ext .js,.jsx,.ts,.tsx src/ config/ test/",
+        "eslint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix src/ config/ test/",
         "gettext:compile": "lingui compile",
         "gettext:extract": "lingui extract",
         "lint": "npm-run-all lint:*",
