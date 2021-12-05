@@ -43,7 +43,6 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
       if (refresh) {
         this.props.refreshRemotes();
-      } else {
       }
     }, 5000);
   }

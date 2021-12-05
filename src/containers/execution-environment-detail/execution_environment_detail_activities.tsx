@@ -69,7 +69,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                     ],
                   }}
                   params={{}}
-                  updateParams={() => {}}
+                  updateParams={() => null}
                 />
                 <tbody>
                   {activities.map((action, i) => {
