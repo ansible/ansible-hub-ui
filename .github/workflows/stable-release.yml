@@ -8,6 +8,10 @@ on:
     - '!dev'
     - '!**cloud**'
 
+concurrency:
+  group: stable-release-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   stable:
     runs-on: ubuntu-latest

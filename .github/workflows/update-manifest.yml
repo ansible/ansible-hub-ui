@@ -5,6 +5,10 @@ on:
   push:
     branches: [ 'master', 'stable-prod' ]
 
+concurrency:
+  group: update-manifest-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   manifest:
     runs-on: ubuntu-latest
