@@ -8,6 +8,7 @@ import {
   Main,
   TagLabel,
   ClipboardCopy,
+  ShaLabel,
 } from '../../components';
 import {
   DataList,
@@ -19,6 +20,7 @@ import {
   FlexItem,
   LabelGroup,
   Title,
+  ClipboardCopyButton,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
 import { Paths, formatPath } from '../../paths';
@@ -116,10 +118,16 @@ class ExecutionEnvironmentManifest extends React.Component<
             />
           }
         >
-          <div>
-            <ClipboardCopy className='eco-clipboard-copy' isReadOnly>
-              {digest}
-            </ClipboardCopy>
+          <div className='copy-sha'>
+            <ShaLabel digest={digest} long={true} />
+            <ClipboardCopyButton
+              className='eco-clipboard-copy'
+              variant={'plain'}
+              onClick={() => navigator.clipboard.writeText(digest)}
+              children={digest}
+              id={digest}
+              textId={t`Copy to clipboard`}
+            />
           </div>
 
           <LabelGroup numLabels={6}>
