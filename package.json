@@ -44,7 +44,7 @@
         "@lingui/cli": "^3.12.1",
         "@lingui/macro": "^3.13.0",
         "@ls-lint/ls-lint": "^1.10.0",
-        "@redhat-cloud-services/frontend-components-config": "^4.3.9",
+        "@redhat-cloud-services/frontend-components-config": "^4.5.6",
         "babel-core": "^7.0.0-bridge.0",
         "babel-plugin-lodash": "^3.3.4",
         "babel-plugin-macros": "^3.1.0",
