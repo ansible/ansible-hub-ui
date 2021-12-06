@@ -11,6 +11,10 @@ on:
   schedule:
     - cron:  '30 5 * * *'
 
+concurrency:
+  group: cypress-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   cypress:
     runs-on: ubuntu-latest
