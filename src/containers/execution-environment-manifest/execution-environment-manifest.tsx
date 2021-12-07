@@ -144,62 +144,58 @@ class ExecutionEnvironmentManifest extends React.Component<
 
         <Main>
           {error ? (
-            <section className='body'>
-              <Trans>
-                Manifest lists are not currently supported on this screen,
-                please use the{' '}
-                <Link
-                  to={formatPath(Paths.executionEnvironmentDetailImages, {
-                    container: container.name,
-                  })}
-                >
-                  Images
-                </Link>{' '}
-                tab to see manifest list details.
-              </Trans>
-            </section>
+            <Trans>
+              Manifest lists are not currently supported on this screen, please
+              use the{' '}
+              <Link
+                to={formatPath(Paths.executionEnvironmentDetailImages, {
+                  container: container.name,
+                })}
+              >
+                Images
+              </Link>{' '}
+              tab to see manifest list details.
+            </Trans>
           ) : (
             <Flex>
               <FlexItem className='layers-max-width'>
                 <Card>
-                  <section className='body'>
-                    <CardTitle>
-                      <Title headingLevel='h2' size='lg'>
-                        {t`Image layers`}
-                      </Title>
-                    </CardTitle>
-                    <CardBody>
-                      <DataList
-                        aria-label={t`Image layers`}
-                        onSelectDataListItem={(id) =>
-                          this.setState({ selectedLayer: id })
-                        }
-                        selectedDataListItemId={selectedLayer}
-                      >
-                        {layers.map(({ text, size }, index) => (
-                          <DataListItem key={index} id={`layer-${index}`}>
-                            <DataListItemRow>
-                              <DataListItemCells
-                                dataListCells={[
-                                  <DataListCell
-                                    key='primary content'
-                                    className='single-line-ellipsis'
-                                  >
-                                    <code>{text}</code>
-                                  </DataListCell>,
-                                  size && (
-                                    <DataListCell key='secondary content'>
-                                      {size}
-                                    </DataListCell>
-                                  ),
-                                ]}
-                              />
-                            </DataListItemRow>
-                          </DataListItem>
-                        ))}
-                      </DataList>
-                    </CardBody>
-                  </section>
+                  <CardTitle>
+                    <Title headingLevel='h2' size='lg'>
+                      {t`Image layers`}
+                    </Title>
+                  </CardTitle>
+                  <CardBody>
+                    <DataList
+                      aria-label={t`Image layers`}
+                      onSelectDataListItem={(id) =>
+                        this.setState({ selectedLayer: id })
+                      }
+                      selectedDataListItemId={selectedLayer}
+                    >
+                      {layers.map(({ text, size }, index) => (
+                        <DataListItem key={index} id={`layer-${index}`}>
+                          <DataListItemRow>
+                            <DataListItemCells
+                              dataListCells={[
+                                <DataListCell
+                                  key='primary content'
+                                  className='single-line-ellipsis'
+                                >
+                                  <code>{text}</code>
+                                </DataListCell>,
+                                size && (
+                                  <DataListCell key='secondary content'>
+                                    {size}
+                                  </DataListCell>
+                                ),
+                              ]}
+                            />
+                          </DataListItemRow>
+                        </DataListItem>
+                      ))}
+                    </DataList>
+                  </CardBody>
                 </Card>
               </FlexItem>
 
@@ -209,35 +205,31 @@ class ExecutionEnvironmentManifest extends React.Component<
               >
                 <FlexItem>
                   <Card>
-                    <section className='body'>
-                      <CardTitle>
-                        <Title headingLevel='h2' size='lg'>
-                          {t`Command`}
-                        </Title>
-                      </CardTitle>
-                      <CardBody>
-                        <code>{command}</code>
-                      </CardBody>
-                    </section>
+                    <CardTitle>
+                      <Title headingLevel='h2' size='lg'>
+                        {t`Command`}
+                      </Title>
+                    </CardTitle>
+                    <CardBody>
+                      <code>{command}</code>
+                    </CardBody>
                   </Card>
                 </FlexItem>
                 <FlexItem>
                   <Card>
-                    <section className='body'>
-                      <CardTitle>
-                        <Title headingLevel='h2' size='lg'>
-                          {t`Environment`}
-                        </Title>
-                      </CardTitle>
-                      <CardBody>
-                        {environment.map((line, index) => (
-                          <React.Fragment key={index}>
-                            <code>{line}</code>
-                            <br />
-                          </React.Fragment>
-                        ))}
-                      </CardBody>
-                    </section>
+                    <CardTitle>
+                      <Title headingLevel='h2' size='lg'>
+                        {t`Environment`}
+                      </Title>
+                    </CardTitle>
+                    <CardBody>
+                      {environment.map((line, index) => (
+                        <React.Fragment key={index}>
+                          <code>{line}</code>
+                          <br />
+                        </React.Fragment>
+                      ))}
+                    </CardBody>
                   </Card>
                 </FlexItem>
               </Flex>
