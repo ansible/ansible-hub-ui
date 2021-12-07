@@ -267,8 +267,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             isDisabled={!confirmDelete || isDeletionPending}
             title={
               collectionVersion
-                ? t`Permanently delete collection version`
-                : t`Permanently delete collection`
+                ? t`Permanently delete collection version?`
+                : t`Permanently delete collection?`
             }
             confirmButtonTitle={t`Delete`}
           >
