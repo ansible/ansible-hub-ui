@@ -9,10 +9,9 @@ describe('Imports filter test', () => {
 
     // insert test data
 
-    /*cy.galaxykit('-i collection upload filter_test_namespace my_collection1');
+    cy.galaxykit('-i collection upload filter_test_namespace my_collection1');
     cy.galaxykit('-i collection upload filter_test_namespace my_collection2');
     cy.galaxykit('-i collection upload filter_test_namespace different_name');
-    cy.galaxykit('-i collection upload filter_test_namespace different_name');*/
   });
 
   beforeEach(() => {
