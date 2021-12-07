@@ -1,3 +1,4 @@
+/* global insights */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withRouter, matchPath } from 'react-router-dom';

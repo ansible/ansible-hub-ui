@@ -4,9 +4,7 @@ import { EmptyStateCustom } from './empty-state-custom';
 import { LockIcon } from '@patternfly/react-icons';
 import { LoginLink } from 'src/components';
 
-interface IProps {}
-
-export class EmptyStateUnauthorized extends React.Component<IProps> {
+export class EmptyStateUnauthorized extends React.Component {
   render() {
     return (
       <EmptyStateCustom

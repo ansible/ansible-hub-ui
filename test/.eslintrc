@@ -1,0 +1,12 @@
+{
+  "globals": {
+    "Cypress": "readonly",
+    "after": "readonly",
+    "before": "readonly",
+    "beforeEach": "readonly",
+    "cy": "readonly",
+    "describe": "readonly",
+    "expect": "readonly",
+    "it": "readonly"
+  }
+}
