@@ -9,10 +9,10 @@ describe('Imports filter test', () => {
 
     // insert test data
 
-    cy.galaxykit('-i collection upload filter_test_namespace my_collection1');
+    /*cy.galaxykit('-i collection upload filter_test_namespace my_collection1');
     cy.galaxykit('-i collection upload filter_test_namespace my_collection2');
     cy.galaxykit('-i collection upload filter_test_namespace different_name');
-    cy.galaxykit('-i collection upload filter_test_namespace different_name');
+    cy.galaxykit('-i collection upload filter_test_namespace different_name');*/
   });
 
   beforeEach(() => {
@@ -38,7 +38,20 @@ describe('Imports filter test', () => {
     cy.get('.import-list button:first').click();
     cy.contains('a', 'Status').click();
 
-    cy.get('.import-list button').click();
+    cy.get('.import-list button').eq(1).click();
     cy.contains('a', 'Completed').click();
+
+    cy.get('.import-list-data').contains('my_collection1');
+    cy.get('.import-list-data').contains('my_collection2');
+    cy.get('.import-list-data').contains('different_name');
+  });
+
+  it('Exact search for waiting is working.', () => {
+    cy.get('.import-list button:first').click();
+    cy.contains('a', 'Status').click();
+
+    cy.get('.import-list button').eq(1).click();
+    cy.contains('a', 'Waiting').click();
+    cy.contains('No results found');
   });
 });
