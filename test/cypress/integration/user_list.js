@@ -2,8 +2,6 @@ import { range, sortBy } from 'lodash';
 
 describe('User list tests for sorting, paging and filtering', () => {
   let items = [];
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
 
   before(() => {
     cy.deleteTestUsers();
@@ -23,7 +21,7 @@ describe('User list tests for sorting, paging and filtering', () => {
   });
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.visit('/ui/users');
   });
 

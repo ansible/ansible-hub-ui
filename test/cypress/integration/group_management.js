@@ -1,7 +1,4 @@
 describe('Hub Group Management Tests', () => {
-  var adminUsername = Cypress.env('username');
-  var adminPassword = Cypress.env('password');
-
   before(() => {
     cy.deleteTestGroups();
     cy.deleteTestGroups();
@@ -14,7 +11,7 @@ describe('Hub Group Management Tests', () => {
   });
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
   });
 
   it('admin user can create/delete a group', () => {

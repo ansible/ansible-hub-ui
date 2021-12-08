@@ -134,6 +134,12 @@ Cypress.Commands.add('logout', {}, () => {
 });
 
 Cypress.Commands.add('login', {}, (username, password) => {
+  if (!username && !password) {
+    // defult to admin
+    username = Cypress.env('username');
+    password = Cypress.env('password');
+  }
+
   cy.apiLogin(username, password);
 });
 

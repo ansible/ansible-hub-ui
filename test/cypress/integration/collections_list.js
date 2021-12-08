@@ -1,12 +1,10 @@
 import { range, sortBy } from 'lodash';
 
 describe('Collections list Tests', () => {
-  var adminUsername = Cypress.env('username');
-  var adminPassword = Cypress.env('password');
   let items = [];
 
   before(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
 
     // insert test data
     range(21).forEach((i) => {
@@ -31,7 +29,7 @@ describe('Collections list Tests', () => {
   });
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.visit('/ui/repo/published');
   });
 

@@ -10,11 +10,8 @@ const waitForTaskToFinish = (task, maxRequests, level = 0) => {
 };
 
 describe('collection tests', () => {
-  const adminUsername = Cypress.env('username');
-  const adminPassword = Cypress.env('password');
-
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
   });
 
   it('deletes an entire collection', () => {
