@@ -32,8 +32,8 @@ import {
   AlertList,
   AlertType,
   closeAlertMixin,
-  ConfirmModal,
   StatefulDropdown,
+  DeleteModal,
 } from 'src/components';
 
 import { CollectionAPI, CollectionDetailType } from 'src/api';
@@ -254,10 +254,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           />
         </Modal>
         {deleteCollection && (
-          <ConfirmModal
+          <DeleteModal
             spinner={isDeletionPending}
             cancelAction={this.closeModal}
-            confirmAction={() =>
+            deleteAction={() =>
               this.setState({ isDeletionPending: true }, () => {
                 !!collectionVersion
                   ? this.deleteCollectionVersion(collectionVersion)
@@ -270,7 +270,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 ? t`Delete collection version`
                 : t`Delete collection`
             }
-            confirmButtonTitle={t`Delete`}
           >
             <>
               <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
@@ -309,7 +308,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 id='delete_confirm'
               />
             </>
-          </ConfirmModal>
+          </DeleteModal>
         )}
         <BaseHeader
           className={className}

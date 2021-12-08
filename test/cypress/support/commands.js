@@ -623,7 +623,6 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
   cy.wait('@registries').then((result) => {
     var data = result.response.body.data;
     data.forEach((element) => {
-      cy.wait(10000);
       cy.get(
         'tr[aria-labelledby="' +
           element.name +
@@ -631,6 +630,7 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
       ).click();
       cy.contains('a', 'Delete').click();
       cy.contains('button', 'Delete').click();
+      cy.wait('@registries');
     });
   });
 });

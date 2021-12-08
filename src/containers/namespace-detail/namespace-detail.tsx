@@ -43,6 +43,7 @@ import {
   ConfirmModal,
   AlertList,
   closeAlertMixin,
+  DeleteModal,
   AlertType,
 } from 'src/components';
 
@@ -200,12 +201,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           namespace={namespace.name}
         />
         {isOpenNamespaceModal && (
-          <ConfirmModal
+          <DeleteModal
             spinner={isNamespacePending}
             cancelAction={this.closeModal}
-            confirmAction={this.deleteNamespace}
+            deleteAction={this.deleteNamespace}
             title={t`Delete namespace?`}
-            confirmButtonTitle={t`Delete`}
             isDisabled={!confirmDelete || isNamespacePending}
           >
             <>
@@ -221,7 +221,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 id='delete_confirm'
               />
             </>
-          </ConfirmModal>
+          </DeleteModal>
         )}
         {warning ? (
           <Alert
