@@ -1,10 +1,10 @@
-.certification-dasboard {
-  .toolbar {
-    padding-bottom: 16px;
-    display: flex;
-    justify-content: space-between;
-  }
+.certification-dashboard-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.certification-dasboard {
   .footer {
     padding-top: 16px;
   }
