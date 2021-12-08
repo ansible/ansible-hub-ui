@@ -85,7 +85,7 @@ describe('Group Permissions Tests', () => {
     );
     cy.contains('tr', 'DeleteGroup').find('[aria-label=Delete]').click();
     cy.contains('[role=dialog] button', 'Delete').click();
-    cy.wait('@deleteGroup').then(({ request, response }) => {
+    cy.wait('@deleteGroup').then(({ response }) => {
       expect(response.statusCode).to.eq(204);
     });
   });

@@ -19,7 +19,6 @@ import {
   LoadingPageSpinner,
   Main,
   StatusIndicator,
-  Tooltip,
 } from 'src/components';
 import {
   Button,

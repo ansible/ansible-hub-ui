@@ -2,7 +2,7 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './header.scss';
 
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import * as moment from 'moment';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';

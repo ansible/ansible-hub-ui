@@ -132,7 +132,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
                   remoteToEdit,
                   this.unModifiedRemote,
                 )
-                  .then((r) => {
+                  .then(() => {
                     this.setState(
                       {
                         errorMessages: {},
@@ -231,7 +231,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
                 this.selectRemoteToEdit(remote)
               }
               syncRemote={(distro) =>
-                RemoteAPI.sync(distro).then((result) => this.loadContent())
+                RemoteAPI.sync(distro).then(() => this.loadContent())
               }
               user={user}
               refreshRemotes={this.refreshContent}

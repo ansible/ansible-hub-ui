@@ -181,7 +181,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
 
   renderControllers() {
     const { image, isOpen } = this.props;
-    const { controllers, controllerCount, digest, tag } = this.state;
+    const { controllers, digest, tag } = this.state;
     const url = getContainersURL();
     const unsafeLinksSupported = !Object.keys(window).includes('chrome');
 

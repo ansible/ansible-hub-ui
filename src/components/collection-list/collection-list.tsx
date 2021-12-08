@@ -90,7 +90,7 @@ export class CollectionList extends React.Component<IProps> {
         <StatefulDropdown
           items={[
             <DropdownItem
-              onClick={(e) =>
+              onClick={() =>
                 this.props.handleControlClick(collection.id, 'deprecate')
               }
               key='1'

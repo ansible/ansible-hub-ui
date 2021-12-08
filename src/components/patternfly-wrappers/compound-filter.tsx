@@ -150,7 +150,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             }
             isPlain={false}
             position='left'
-            items={selectedFilter.options.map((v, i) => (
+            items={selectedFilter.options.map((v) => (
               <DropdownItem
                 onClick={() => {
                   this.props.onChange(v.id);

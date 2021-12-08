@@ -4,7 +4,6 @@ import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import {
   BaseHeader,
-  Breadcrumbs,
   EmptyStateUnauthorized,
   LoadingPageWithHeader,
   UserFormPage,

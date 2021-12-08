@@ -16,8 +16,6 @@ import {
   closeAlertMixin,
   UserFormPage,
   EmptyStateUnauthorized,
-  BaseHeader,
-  Breadcrumbs,
 } from 'src/components';
 import { UserType, UserAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';

@@ -180,7 +180,7 @@ class ExecutionEnvironmentDetail extends React.Component<
             loading: false,
           });
         })
-        .catch((error) => this.setState({ redirect: 'notFound' })),
+        .catch(() => this.setState({ redirect: 'notFound' })),
     );
   }
 

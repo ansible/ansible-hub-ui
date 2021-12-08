@@ -201,7 +201,7 @@ export class UserForm extends React.Component<IProps, IState> {
             label={t`Super user`}
             labelOff={t`Not a super user`}
             isChecked={user.is_superuser}
-            onChange={(e) =>
+            onChange={() =>
               this.updateUserFieldByName(!user.is_superuser, 'is_superuser')
             }
           ></Switch>
@@ -265,7 +265,7 @@ export class UserForm extends React.Component<IProps, IState> {
     this.props.updateUser(newUser, this.props.errorMessages);
   };
 
-  private onSelectGroup = (event, selection, isPlaceholder) => {
+  private onSelectGroup = (event, selection) => {
     const { user } = this.props;
 
     const newUser = { ...user };

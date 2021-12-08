@@ -55,7 +55,7 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
         />
         <br />
         <div>
-          {groups.map((group, i) => (
+          {groups.map((group) => (
             <Flex
               style={{ marginTop: '16px' }}
               alignItems={{ default: 'alignItemsCenter' }}
@@ -123,7 +123,7 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
       .catch((e) => this.props.onError(e?.message));
   };
 
-  private onSelect = (event, selection, isPlaceholder) => {
+  private onSelect = (event, selection) => {
     const newGroups = [...this.props.groups];
 
     const addedGroup = this.state.searchGroups.find(

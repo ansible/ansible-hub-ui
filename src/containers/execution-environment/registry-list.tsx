@@ -185,7 +185,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                   );
 
               promise
-                .then((r) => {
+                .then(() => {
                   this.setState(
                     {
                       remoteToEdit: null,

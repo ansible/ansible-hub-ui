@@ -223,7 +223,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         response.data.links.push(emptyLink);
         this.setState({ loading: false, namespace: response.data });
       })
-      .catch((response) => {
+      .catch(() => {
         this.setState({ unauthorized: true, loading: false });
       });
   }

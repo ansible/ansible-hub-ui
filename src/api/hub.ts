@@ -1,4 +1,3 @@
-import { Constants } from 'src/constants';
 import { BaseAPI } from './base';
 
 export class HubAPI extends BaseAPI {

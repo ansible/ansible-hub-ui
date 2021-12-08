@@ -77,7 +77,7 @@ class App extends Component {
     this.appNav();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     // This is sort of a dirty hack to make it so that collection details can
     // view repositories other than "published", but all other views are locked
     // to "published"

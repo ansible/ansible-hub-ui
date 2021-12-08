@@ -127,14 +127,14 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
                   selectedImportDetail: importDetailResult.data,
                 });
               })
-              .catch((err) => {
+              .catch(() => {
                 this.setState({
                   apiError: failMsg,
                   loadingImports: false,
                 });
               });
           })
-          .catch((err) => {
+          .catch(() => {
             this.setState({
               apiError: failMsg,
               loadingImports: false,

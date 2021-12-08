@@ -73,7 +73,7 @@ class App extends React.Component<RouteComponentProps, IState> {
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     this.setRepoToURL();
   }
 

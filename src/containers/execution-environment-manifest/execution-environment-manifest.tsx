@@ -7,7 +7,6 @@ import {
   LoadingPageWithHeader,
   Main,
   TagLabel,
-  ClipboardCopy,
   ShaLabel,
 } from '../../components';
 import {
@@ -254,7 +253,7 @@ class ExecutionEnvironmentManifest extends React.Component<
           size,
         };
       })
-      .catch((err) => {
+      .catch(() => {
         // FIXME: support manifest lists, and have API support it
         return {
           error: true,

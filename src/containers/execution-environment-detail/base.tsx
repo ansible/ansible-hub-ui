@@ -232,7 +232,7 @@ export function withContainerRepo(WrappedComponent) {
             setTimeout(() => this.loadRepo(), 10000);
           }
         })
-        .catch((e) => this.setState({ redirect: 'notFound' }));
+        .catch(() => this.setState({ redirect: 'notFound' }));
     }
 
     private getTab() {

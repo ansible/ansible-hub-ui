@@ -183,7 +183,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         />
         <ImportModal
           isOpen={showImportModal}
-          onUploadSuccess={(result) =>
+          onUploadSuccess={() =>
             this.setState({
               redirect: formatPath(
                 Paths.myImports,
@@ -352,7 +352,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           this.context.selectedRepo,
         )
           .then(() => this.loadCollections())
-          .catch((error) => {
+          .catch(() => {
             this.setState({
               warning: t`API Error: Failed to set deprecation.`,
             });
@@ -417,7 +417,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
         this.loadAllRepos(val[0].data.meta.count);
       })
-      .catch((response) => {
+      .catch(() => {
         this.setState({ redirect: Paths.notFound });
       });
   }

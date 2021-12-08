@@ -9,7 +9,6 @@ import {
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
-  EmptyStateUnauthorized,
   LinkTabs,
   LoadingPageSpinner,
   LoadingPageWithHeader,
@@ -18,7 +17,6 @@ import {
   Pagination,
   Toolbar,
   AlertList,
-  AlertType,
 } from 'src/components';
 import { Button, ToolbarItem } from '@patternfly/react-core';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
