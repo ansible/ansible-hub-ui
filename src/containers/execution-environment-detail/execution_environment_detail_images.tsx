@@ -204,7 +204,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         {deleteModalVisible && (
           <DeleteModal
             spinner={isDeletionPending}
-            title={t`Permanently delete image`}
+            title={t`Permanently delete image?`}
             cancelAction={() =>
               this.setState({
                 deleteModalVisible: false,
