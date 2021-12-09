@@ -428,15 +428,23 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     );
   }
 
-  private queryRegistries() {
-    this.setState({ loading: true }, () =>
-      ExecutionEnvironmentRegistryAPI.list(this.state.params).then((result) =>
+  private queryRegistries(noLoading = false) {
+    this.setState(noLoading ? null : { loading: true }, () =>
+      ExecutionEnvironmentRegistryAPI.list(this.state.params).then((result) => {
+        const isAnyRunning = result.data.data.some((task) =>
+          ['running', 'waiting'].includes(task.last_sync_task.state),
+        );
+
+        if (isAnyRunning) {
+          setTimeout(() => this.queryRegistries(true), 5000);
+        }
+
         this.setState({
           items: result.data.data,
           itemCount: result.data.meta.count,
           loading: false,
-        }),
-      ),
+        });
+      }),
     );
   }
 
@@ -473,6 +481,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             </Trans>
           </span>,
         );
+        this.queryRegistries(true);
       })
       .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
   }
