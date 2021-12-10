@@ -1,4 +1,6 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
+import { i18n } from '@lingui/core';
+
 import * as React from 'react';
 import './task.scss';
 import { Constants } from 'src/constants';
@@ -274,7 +276,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       <tr aria-labelledby={name} key={index}>
         <td>
           <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
-            <Tooltip content={Constants.TASK_NAMES[name] || name}>
+            <Tooltip content={i18n._(Constants.TASK_NAMES[name] || name)}>
               {name}
             </Tooltip>
           </Link>
