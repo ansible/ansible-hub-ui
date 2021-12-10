@@ -1,4 +1,6 @@
 import { t } from '@lingui/macro';
+import { i18n } from '@lingui/core';
+
 import * as React from 'react';
 
 import {
@@ -12,7 +14,6 @@ import {
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
-import { getValueFromFunction } from 'src/utilities';
 
 import './repo-selector.scss';
 
@@ -84,7 +85,7 @@ export class RepoSelector extends React.Component<IProps, IState> {
                 <SelectOption
                   name={option}
                   key={option}
-                  value={getValueFromFunction(repoNames[option])}
+                  value={i18n._(repoNames[option])}
                 />
               ))}
             </Select>
@@ -96,6 +97,6 @@ export class RepoSelector extends React.Component<IProps, IState> {
 
   private getRepoName(repoName) {
     const repo = Constants.REPOSITORYNAMES[repoName];
-    return repo ? getValueFromFunction(repo) : repoName;
+    return i18n._(repo);
   }
 }

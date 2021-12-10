@@ -1,4 +1,5 @@
-import { t } from '@lingui/macro';
+import { t, defineMessage } from '@lingui/macro';
+
 export class Constants {
   static readonly SEARCH_VIEW_TYPE_LOCAL_KEY = 'search_view_type';
   static readonly DEFAULT_PAGE_SIZE = 10;
@@ -246,9 +247,9 @@ export class Constants {
   ];
 
   static REPOSITORYNAMES = {
-    published: () => t`Published`,
-    'rh-certified': () => t`Red Hat Certified`,
-    community: () => t`Community`,
+    published: t({ message: `Published` }),
+    'rh-certified': defineMessage({ message: `Red Hat Certified` }),
+    community: defineMessage({ message: `Community` }),
   };
 
   static ALLOWEDREPOS = ['community', 'published', 'rh-certified'];
