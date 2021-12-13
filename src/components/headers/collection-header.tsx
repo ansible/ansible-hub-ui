@@ -568,7 +568,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         const {
           data: { detail, dependent_collection_versions },
           status,
-        } = err?.response;
+        } = err.response;
 
         if (status === 400) {
           const dependencies = (
