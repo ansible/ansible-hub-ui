@@ -50,6 +50,8 @@ import { AppContext } from 'src/loaders/app-context';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
+import { DeleteExecutionEnviromentModal } from 'src/containers/execution-environment-detail/delete-execution-enviroment-modal';
+
 interface IState {
   alerts: AlertType[];
   itemCount: number;
@@ -64,6 +66,7 @@ interface IState {
   showRemoteModal: boolean;
   unauthorized: boolean;
   deleteModalVisible: boolean;
+  showDeleteModal: boolean;
   selectedItem: ExecutionEnvironmentType;
   confirmDelete: boolean;
   isDeletionPending: boolean;
@@ -101,6 +104,7 @@ class ExecutionEnvironmentList extends React.Component<
       showRemoteModal: false,
       unauthorized: false,
       deleteModalVisible: false,
+      showDeleteModal: false,
       selectedItem: null,
       confirmDelete: false,
       isDeletionPending: false,
@@ -128,6 +132,7 @@ class ExecutionEnvironmentList extends React.Component<
       showRemoteModal,
       unauthorized,
       deleteModalVisible,
+      showDeleteModal,
       selectedItem,
       confirmDelete,
       isDeletionPending,
@@ -178,6 +183,24 @@ class ExecutionEnvironmentList extends React.Component<
         />
         {showRemoteModal && this.renderRemoteModal(itemToEdit)}
         <BaseHeader title={t`Execution Environments`}></BaseHeader>
+
+        {showDeleteModal && (
+          <DeleteExecutionEnviromentModal
+            selectedItem={selectedItem}
+            cancelAction={() =>
+              this.setState({ showDeleteModal: false, selectedItem: null })
+            }
+            queryEnvironments={() => this.queryEnvironments()}
+            addAlert={(text, variant, description = undefined) =>
+              this.setState({
+                alerts: alerts.concat([
+                  { title: text, variant: variant, description: description },
+                ]),
+              })
+            }
+          ></DeleteExecutionEnviromentModal>
+        )}
+
         {deleteModalVisible && (
           <DeleteModal
             spinner={isDeletionPending}
@@ -379,6 +402,16 @@ class ExecutionEnvironmentList extends React.Component<
           key='delete'
           onClick={() =>
             this.setState({ selectedItem: item, deleteModalVisible: true })
+          }
+        >
+          {t`Delete`}
+        </DropdownItem>
+      ),
+      this.context.user.model_permissions.delete_containerrepository && (
+        <DropdownItem
+          key='delete2'
+          onClick={() =>
+            this.setState({ selectedItem: item, showDeleteModal: true })
           }
         >
           {t`Delete`}
