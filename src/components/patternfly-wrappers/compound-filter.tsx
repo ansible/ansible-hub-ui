@@ -232,7 +232,9 @@ export class CompoundFilter extends React.Component<IProps, IState> {
   };
 
   private selectTitleById(inputText: string, selectedFilter: FilterOption) {
-    if (!inputText || !selectedFilter?.options) return inputText;
+    if (!inputText || !selectedFilter?.options) {
+      return inputText;
+    }
 
     return selectedFilter.options.find((opt) => opt.id === inputText).title;
   }

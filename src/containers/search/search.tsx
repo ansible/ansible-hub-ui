@@ -77,8 +77,9 @@ class Search extends React.Component<RouteComponentProps, IState> {
   componentDidMount() {
     this.queryCollections();
 
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE)
+    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       this.getSynclist();
+    }
   }
 
   render() {

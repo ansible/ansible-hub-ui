@@ -22,13 +22,14 @@ export class CollectionDependenciesList extends React.Component<IProps> {
 
     const { dependencies } = collection.latest_version.metadata;
 
-    if (!Object.keys(dependencies).length)
+    if (!Object.keys(dependencies).length) {
       return (
         <EmptyStateNoData
           title={t`No dependencies`}
           description={t`Collection does not have dependencies.`}
         />
       );
+    }
 
     return (
       <List variant={ListVariant.inline} className='dependencies-list'>
