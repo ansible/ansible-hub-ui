@@ -401,16 +401,6 @@ class ExecutionEnvironmentList extends React.Component<
         <DropdownItem
           key='delete'
           onClick={() =>
-            this.setState({ selectedItem: item, deleteModalVisible: true })
-          }
-        >
-          {t`Delete`}
-        </DropdownItem>
-      ),
-      this.context.user.model_permissions.delete_containerrepository && (
-        <DropdownItem
-          key='delete2'
-          onClick={() =>
             this.setState({ selectedItem: item, showDeleteModal: true })
           }
         >
