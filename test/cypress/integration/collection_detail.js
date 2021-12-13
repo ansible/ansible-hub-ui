@@ -1,7 +1,4 @@
 describe('Collection detail', () => {
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
-
   function tabClick(name) {
     cy.contains('li a span', name).click();
     // repo link must be in all tabs
@@ -15,7 +12,7 @@ describe('Collection detail', () => {
   });
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.visit(
       '/ui/repo/published/collection_detail_test_namespace/collection_detail_test_collection',
     );

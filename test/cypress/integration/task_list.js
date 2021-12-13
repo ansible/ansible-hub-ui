@@ -1,9 +1,6 @@
 describe('Task table contains correct headers and filter', () => {
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
-
   before(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.visit('/ui/repositories?tab=remote');
 
     cy.intercept(
@@ -22,7 +19,7 @@ describe('Task table contains correct headers and filter', () => {
   });
 
   it('table contains all columns and filter', () => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.visit('/ui/tasks');
     cy.contains('Task Management');
     cy.get('[aria-label="name__contains"]');

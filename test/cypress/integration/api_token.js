@@ -1,9 +1,6 @@
 describe('API Token Tests', () => {
-  var adminUsername = Cypress.env('username');
-  var adminPassword = Cypress.env('password');
-
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
   });
 
   it('token is generated', () => {

@@ -1,7 +1,4 @@
 describe('Edit a namespace', () => {
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
-
   let kebabToggle = () => {
     return cy.get('button[id^=pf-dropdown-toggle-id-] > svg').parent().click();
   };
@@ -44,7 +41,7 @@ describe('Edit a namespace', () => {
   });
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.galaxykit('-i namespace create', 'testns1');
     cy.menuGo('Collections > Namespaces');
     cy.get('a[href*="ui/repo/published/testns1"]').click();

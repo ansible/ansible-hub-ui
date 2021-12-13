@@ -1,10 +1,8 @@
 describe('execution environments', () => {
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
   let num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
 
     cy.deleteRegistries();
     cy.deleteContainers();
@@ -20,7 +18,7 @@ describe('execution environments', () => {
   });
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.menuGo('Execution Environments > Execution Environments');
   });
 

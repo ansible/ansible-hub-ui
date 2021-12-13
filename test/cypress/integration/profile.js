@@ -1,7 +1,4 @@
 describe('My Profile Tests', () => {
-  const adminUsername = Cypress.env('username');
-  const adminPassword = Cypress.env('password');
-
   const username = 'nopermission';
   const password = 'n0permissi0n';
 
@@ -11,7 +8,7 @@ describe('My Profile Tests', () => {
   });
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     // open the dropdown labeled with the username and then...
     cy.get('[aria-label="user-dropdown"] button').click();
     // a little hacky, but basically

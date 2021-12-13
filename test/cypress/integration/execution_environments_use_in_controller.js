@@ -1,6 +1,4 @@
 describe('Execution Environments - Use in Controller', () => {
-  const adminUsername = Cypress.env('username');
-  const adminPassword = Cypress.env('password');
   let num = (~~(Math.random() * 1000000)).toString(); // FIXME: maybe drop everywhere once AAH-1095 is fixed
 
   before(() => {
@@ -11,7 +9,7 @@ describe('Execution Environments - Use in Controller', () => {
       ],
     });
 
-    cy.login(adminUsername, adminPassword);
+    cy.login();
 
     cy.deleteRegistries();
     cy.deleteContainers();
@@ -31,7 +29,7 @@ describe('Execution Environments - Use in Controller', () => {
   });
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.menuGo('Execution Environments > Execution Environments');
   });
 

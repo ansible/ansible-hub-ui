@@ -1,7 +1,4 @@
 describe('A namespace form', () => {
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
-
   let getCreateNamespace = () => {
     return cy.get('.pf-c-button.pf-m-primary');
   };
@@ -25,7 +22,7 @@ describe('A namespace form', () => {
   };
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     createNamespace();
     cy.menuGo('Collections > Namespaces');
     getCreateNamespace().click();
