@@ -27,7 +27,7 @@ class MaintenancePage extends React.Component {
             Maintenance in progress
           </Title>
           <EmptyStateBody>
-            We are currently undergoing scheduled maintenance from 07:00 - 13:00
+            We are currently undergoing scheduled maintenance from 13:00 - 15:00
             UTC.
           </EmptyStateBody>
           <EmptyStateBody>
