@@ -19,12 +19,7 @@ import {
   ExecutionEnvironmentRemoteAPI,
   ExecutionEnvironmentType,
 } from 'src/api';
-import {
-  filterIsSet,
-  parsePulpIDFromURL,
-  waitForTask,
-  ParamHelper,
-} from 'src/utilities';
+import { filterIsSet, parsePulpIDFromURL, ParamHelper } from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -48,7 +43,6 @@ import {
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from 'src/loaders/app-context';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 import { DeleteExecutionEnviromentModal } from 'src/containers/execution-environment-detail/delete-execution-enviroment-modal';
 
@@ -65,7 +59,6 @@ interface IState {
   publishToController: { digest?: string; image: string; tag?: string };
   showRemoteModal: boolean;
   unauthorized: boolean;
-  deleteModalVisible: boolean;
   showDeleteModal: boolean;
   selectedItem: ExecutionEnvironmentType;
   confirmDelete: boolean;
@@ -103,7 +96,6 @@ class ExecutionEnvironmentList extends React.Component<
       publishToController: null,
       showRemoteModal: false,
       unauthorized: false,
-      deleteModalVisible: false,
       showDeleteModal: false,
       selectedItem: null,
       confirmDelete: false,
@@ -131,11 +123,8 @@ class ExecutionEnvironmentList extends React.Component<
       publishToController,
       showRemoteModal,
       unauthorized,
-      deleteModalVisible,
       showDeleteModal,
       selectedItem,
-      confirmDelete,
-      isDeletionPending,
     } = this.state;
 
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
@@ -166,8 +155,6 @@ class ExecutionEnvironmentList extends React.Component<
       </Button>
     );
 
-    const name = !!selectedItem ? selectedItem.name : '';
-
     return (
       <React.Fragment>
         <AlertList
@@ -190,7 +177,7 @@ class ExecutionEnvironmentList extends React.Component<
             cancelAction={() =>
               this.setState({ showDeleteModal: false, selectedItem: null })
             }
-            queryEnvironments={() => this.queryEnvironments()}
+            afterDelete={() => this.queryEnvironments()}
             addAlert={(text, variant, description = undefined) =>
               this.setState({
                 alerts: alerts.concat([
@@ -199,30 +186,6 @@ class ExecutionEnvironmentList extends React.Component<
               })
             }
           ></DeleteExecutionEnviromentModal>
-        )}
-
-        {deleteModalVisible && (
-          <DeleteModal
-            spinner={isDeletionPending}
-            title={'Delete container?'}
-            cancelAction={() =>
-              this.setState({ deleteModalVisible: false, selectedItem: null })
-            }
-            deleteAction={() => this.deleteContainer()}
-            isDisabled={!confirmDelete || isDeletionPending}
-          >
-            <Text className='delete-container-modal-message'>
-              <Trans>
-                Deleting <b>{name}</b> and its data will be lost.
-              </Trans>
-            </Text>
-            <Checkbox
-              isChecked={confirmDelete}
-              onChange={(value) => this.setState({ confirmDelete: value })}
-              label={t`I understand that this action cannot be undone.`}
-              id='delete_confirm'
-            />
-          </DeleteModal>
         )}
         {unauthorized ? (
           <EmptyStateUnauthorized />
@@ -515,43 +478,6 @@ class ExecutionEnvironmentList extends React.Component<
         .catch((e) =>
           this.addAlert(t`Error loading environments.`, 'danger', e?.message),
         ),
-    );
-  }
-
-  private deleteContainer() {
-    const { selectedItem } = this.state;
-    const { name } = selectedItem;
-    this.setState({ isDeletionPending: true }, () =>
-      ExecutionEnvironmentAPI.deleteExecutionEnvironment(selectedItem.name)
-        .then((result) => {
-          const taskId = result.data.task.split('tasks/')[1].replace('/', '');
-          waitForTask(taskId).then(() => {
-            this.setState({
-              confirmDelete: false,
-              deleteModalVisible: false,
-              isDeletionPending: false,
-              selectedItem: null,
-              alerts: this.state.alerts.concat([
-                {
-                  variant: 'success',
-                  title: t`Success: ${name} was deleted`,
-                },
-              ]),
-            });
-            this.queryEnvironments();
-          });
-        })
-        .catch(() => {
-          this.setState({
-            deleteModalVisible: false,
-            selectedItem: null,
-            confirmDelete: false,
-            isDeletionPending: false,
-            alerts: this.state.alerts.concat([
-              { variant: 'danger', title: t`Error: delete failed` },
-            ]),
-          });
-        }),
     );
   }
 

@@ -17,7 +17,7 @@ interface IProps {
   cancelAction: Function;
   selectedItem: ExecutionEnvironmentType;
   addAlert: (message, variant, description?) => void;
-  queryEnvironments: Function;
+  afterDelete: Function;
 }
 
 export class DeleteExecutionEnviromentModal extends React.Component<
@@ -41,7 +41,7 @@ export class DeleteExecutionEnviromentModal extends React.Component<
     return (
       <DeleteModal
         spinner={isDeletionPending}
-        title={'Permanently delete container'}
+        title={'Permanently delete container?'}
         cancelAction={() => cancelAction()}
         deleteAction={() => this.deleteContainer(selectedItem)}
         isDisabled={!confirmDelete || isDeletionPending}
@@ -65,7 +65,7 @@ export class DeleteExecutionEnviromentModal extends React.Component<
   }
 
   deleteContainer(selectedItem: ExecutionEnvironmentType) {
-    const { addAlert, cancelAction, queryEnvironments } = this.props;
+    const { addAlert, cancelAction, afterDelete } = this.props;
     this.setState({ isDeletionPending: true }, () =>
       ExecutionEnvironmentAPI.deleteExecutionEnvironment(selectedItem.name)
         .then((result) => {
@@ -81,7 +81,7 @@ export class DeleteExecutionEnviromentModal extends React.Component<
               'success',
               null,
             );
-            queryEnvironments();
+            afterDelete();
           });
         })
         .catch(() => {
