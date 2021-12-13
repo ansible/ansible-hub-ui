@@ -30,6 +30,9 @@ jobs:
         git diff --exit-code package-lock.json
         popd
 
+        # dependencies
+        pip install lint-po
+
         # run linters
         npm run lint
 
