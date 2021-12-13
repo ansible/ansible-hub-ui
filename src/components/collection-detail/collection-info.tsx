@@ -27,6 +27,7 @@ interface IProps extends CollectionDetailType {
     version?: string;
   };
   updateParams: (params) => void;
+  addAlert?: (variant, title, description?) => void;
 }
 
 export class CollectionInfo extends React.Component<IProps> {
@@ -167,14 +168,22 @@ export class CollectionInfo extends React.Component<IProps> {
       namespace.name,
       name,
       latest_version.version,
-    ).then((downloadURL: string) => {
-      // By getting a reference to a hidden <a> tag, setting the href and
-      // programmatically clicking it, we can hold off on making the api
-      // calls to get the download URL until it's actually needed. Clicking
-      // the <a> tag also gets around all the problems using a popup with
-      // window.open() causes.
-      this.downloadLinkRef.current.href = downloadURL;
-      this.downloadLinkRef.current.click();
-    });
+    )
+      .then((downloadURL: string) => {
+        // By getting a reference to a hidden <a> tag, setting the href and
+        // programmatically clicking it, we can hold off on making the api
+        // calls to get the download URL until it's actually needed. Clicking
+        // the <a> tag also gets around all the problems using a popup with
+        // window.open() causes.
+        this.downloadLinkRef.current.href = downloadURL;
+        this.downloadLinkRef.current.click();
+      })
+      .catch((e) =>
+        this.props.addAlert(
+          'danger',
+          t`Error downloading collection.`,
+          e?.message,
+        ),
+      );
   }
 }

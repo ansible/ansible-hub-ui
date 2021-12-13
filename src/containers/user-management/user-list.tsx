@@ -399,13 +399,29 @@ class UserList extends React.Component<RouteComponentProps, IState> {
 
   private queryUsers() {
     this.setState({ loading: true }, () =>
-      UserAPI.list(this.state.params).then((result) =>
-        this.setState({
-          users: result.data.data,
-          itemCount: result.data.meta.count,
-          loading: false,
-        }),
-      ),
+      UserAPI.list(this.state.params)
+        .then((result) =>
+          this.setState({
+            users: result.data.data,
+            itemCount: result.data.meta.count,
+            loading: false,
+          }),
+        )
+        .catch((e) =>
+          this.setState({
+            users: [],
+            itemCount: 0,
+            loading: false,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: t`Error loading users.`,
+                description: e?.message,
+              },
+            ],
+          }),
+        ),
     );
   }
 

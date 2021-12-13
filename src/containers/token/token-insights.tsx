@@ -5,7 +5,14 @@ import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { ClipboardCopyVariant, Button } from '@patternfly/react-core';
 
 import { Paths } from 'src/paths';
-import { BaseHeader, Main, ClipboardCopy } from 'src/components';
+import {
+  BaseHeader,
+  Main,
+  ClipboardCopy,
+  AlertList,
+  AlertType,
+  closeAlertMixin,
+} from 'src/components';
 import { getRepoUrl } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -20,6 +27,7 @@ interface IState {
     session_state: string;
     token_type: string;
   };
+  alerts: AlertType[];
 }
 
 class TokenPage extends React.Component<RouteComponentProps, IState> {
@@ -28,19 +36,35 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
     this.state = {
       tokenData: undefined,
+      alerts: [],
     };
   }
 
   componentDidMount() {
     // this function will fail if chrome.auth.doOffline() hasn't been called
-    (window as any).insights.chrome.auth.getOfflineToken().then((result) => {
-      this.setState({ tokenData: result.data });
-    });
+    (window as any).insights.chrome.auth
+      .getOfflineToken()
+      .then((result) => {
+        this.setState({ tokenData: result.data });
+      })
+      .catch((e) =>
+        this.setState({
+          tokenData: undefined,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error loading token.`,
+              description: e?.message,
+            },
+          ],
+        }),
+      );
   }
 
   render() {
     const { user } = this.context;
-    const { tokenData } = this.state;
+    const { tokenData, alerts } = this.state;
     const renewTokenCmd = `curl https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token -d grant_type=refresh_token -d client_id="${
       user.username
     }" -d refresh_token=\"${
@@ -49,6 +73,10 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
     return (
       <React.Fragment>
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        ></AlertList>
         <BaseHeader title={t`Connect to Hub`}></BaseHeader>
         <Main>
           <section className='body pf-c-content'>
@@ -172,6 +200,10 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
       // available to getOfflineToken() when the component mounts after
       // the reload
       .doOffline();
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 }
 

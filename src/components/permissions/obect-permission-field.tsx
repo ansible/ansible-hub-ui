@@ -5,7 +5,11 @@ import { Flex, FlexItem } from '@patternfly/react-core';
 import { TrashIcon } from '@patternfly/react-icons';
 
 import { GroupObjectPermissionType, GroupAPI } from 'src/api';
-import { APISearchTypeAhead, PermissionChipSelector } from 'src/components';
+import {
+  AlertType,
+  APISearchTypeAhead,
+  PermissionChipSelector,
+} from 'src/components';
 import { twoWayMapper } from 'src/utilities';
 import { Constants } from 'src/constants';
 
@@ -15,10 +19,12 @@ interface IProps {
   setGroups: (groups: GroupObjectPermissionType[]) => void;
   isDisabled?: boolean;
   menuAppendTo?: 'parent' | 'inline';
+  onError?: (error: string) => void;
 }
 
 interface IState {
   searchGroups: { name: string; id: number | string }[];
+  formAlerts?: AlertType;
 }
 
 export class ObjectPermissionField extends React.Component<IProps, IState> {
@@ -106,13 +112,15 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
   }
 
   private loadGroups = (name) => {
-    GroupAPI.list({ name__contains: name }).then((result) => {
-      const added = this.props.groups.map((group) => group.name);
-      const groups = result.data.data.filter(
-        (group) => !added.includes(group.name),
-      );
-      this.setState({ searchGroups: groups });
-    });
+    GroupAPI.list({ name__contains: name })
+      .then((result) => {
+        const added = this.props.groups.map((group) => group.name);
+        const groups = result.data.data.filter(
+          (group) => !added.includes(group.name),
+        );
+        this.setState({ searchGroups: groups });
+      })
+      .catch((e) => this.props.onError(e?.message));
   };
 
   private onSelect = (event, selection, isPlaceholder) => {
