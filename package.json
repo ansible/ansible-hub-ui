@@ -85,6 +85,7 @@
         "lint:ls": "ls-lint",
         "lint:sass": "stylelint 'src/**/*.scss' --config .stylelintrc.json",
         "lint:ts": "tsc",
+        "lint:po": "lint-po locale/*.po",
         "prettier": "prettier --write 'src/**' 'config/**' 'test/**'",
         "prettier:check": "prettier -l 'src/**' 'config/**' 'test/**'",
         "prod": "NODE_ENV=production webpack serve --config custom.dev.config",
