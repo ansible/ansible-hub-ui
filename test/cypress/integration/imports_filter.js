@@ -1,5 +1,3 @@
-import { range, sortBy } from 'lodash';
-
 describe('Imports filter test', () => {
   var adminUsername = Cypress.env('username');
   var adminPassword = Cypress.env('password');
