@@ -42,10 +42,8 @@ export interface IDetailSharedProps extends RouteComponentProps {
 
 // A higher order component to wrap individual detail pages
 export function withContainerRepo(WrappedComponent) {
-  let wrapper_class = class extends React.Component<
-    RouteComponentProps,
-    IState
-  > {
+  return class extends React.Component<RouteComponentProps, IState> {
+    static contextType = AppContext;
     constructor(props) {
       super(props);
 
@@ -326,7 +324,4 @@ export function withContainerRepo(WrappedComponent) {
         .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
     }
   };
-
-  wrapper_class.contextType = AppContext;
-  return wrapper_class;
 }
