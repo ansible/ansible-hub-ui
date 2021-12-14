@@ -44,7 +44,6 @@ import {
   DateComponent,
   ClipboardCopy,
   DeleteModal,
-  LoadingPageWithHeader,
   LoadingPageSpinner,
 } from '../../components';
 
@@ -497,7 +496,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             ],
           }}
           params={{}}
-          updateParams={(p) => null}
+          updateParams={() => null}
         />
         <tbody>
           {image_manifests.map(
@@ -567,7 +566,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             loading: false,
           });
         })
-        .catch((error) => this.setState({ redirect: 'notFound' })),
+        .catch(() => this.setState({ redirect: 'notFound' })),
     );
   }
 

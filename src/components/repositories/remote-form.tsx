@@ -82,7 +82,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { remote, errorMessages } = this.props;
+    const { remote } = this.props;
     if (!remote) {
       return null;
     }

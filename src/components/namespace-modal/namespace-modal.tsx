@@ -63,13 +63,13 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     });
   }
 
-  private handleSubmit = (event) => {
+  private handleSubmit = () => {
     const data: any = {
       name: this.state.newNamespaceName,
       groups: this.state.newGroups,
     };
     NamespaceAPI.create(data)
-      .then((results) => {
+      .then(() => {
         this.toggleModal();
         this.setState({
           newNamespaceName: '',

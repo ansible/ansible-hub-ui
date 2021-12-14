@@ -101,7 +101,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={(p) => null}
+          updateParams={() => null}
         />
         <tbody>{remotes.map((remote, i) => this.renderRow(remote, i))}</tbody>
       </table>

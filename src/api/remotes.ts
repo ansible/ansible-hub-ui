@@ -44,7 +44,7 @@ class API extends HubAPI {
     );
   }
 
-  update(id, obj) {
+  update(_id, _obj) {
     throw 'use smartUpdate()';
   }
 

@@ -27,7 +27,7 @@ export function loadCollection(
     .then((result) => {
       this.setState({ collection: result }, callback);
     })
-    .catch((result) => {
+    .catch(() => {
       this.props.history.push(Paths.notFound);
     });
 }

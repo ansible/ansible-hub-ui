@@ -34,7 +34,7 @@ describe('collection tests', () => {
     cy.wait('@deleteCollection').its('response.statusCode').should('eq', 202);
 
     waitForTaskToFinish('@taskStatus', 10);
-    cy.get('@taskStatus.last').then((res) => {
+    cy.get('@taskStatus.last').then(() => {
       cy.get('.pf-c-alert').contains('Successfully deleted collection.');
     });
   });

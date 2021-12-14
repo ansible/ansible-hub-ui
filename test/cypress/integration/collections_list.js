@@ -1,4 +1,4 @@
-import { range, sortBy } from 'lodash';
+import { range } from 'lodash';
 
 describe('Collections list Tests', () => {
   let items = [];

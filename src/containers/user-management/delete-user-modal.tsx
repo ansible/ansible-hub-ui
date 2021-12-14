@@ -83,7 +83,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
   // modal
   private waitForDeleteConfirm(user) {
     UserAPI.get(user)
-      .then(async (result) => {
+      .then(async () => {
         // wait half a second
         await new Promise((r) => setTimeout(r, 500));
         this.waitForDeleteConfirm(user);

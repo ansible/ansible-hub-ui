@@ -51,11 +51,6 @@ interface IProps {
   containerRepository: ContainerRepositoryType;
 }
 
-interface ITagPromises {
-  tag: string;
-  promise: Promise<any>;
-}
-
 interface ITaskUrls {
   tag: string;
   task: string;
@@ -96,7 +91,7 @@ export class TagManifestModal extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { children, closeModal, isOpen, containerManifest } = this.props;
+    const { closeModal, isOpen, containerManifest } = this.props;
 
     const {
       tagInForm,
@@ -384,10 +379,10 @@ export class TagManifestModal extends React.Component<IProps, IState> {
     } else {
       this.setState({ tagInFormError: undefined }, () => {
         ExecutionEnvironmentAPI.image(this.props.repositoryName, tag)
-          .then((result) => {
+          .then(() => {
             this.setState({ tagToVerify: tag, verifyingTag: false });
           })
-          .catch((err) => {
+          .catch(() => {
             this.setState({ tagInForm: '', verifyingTag: false }, () =>
               this.addTag(tag),
             );

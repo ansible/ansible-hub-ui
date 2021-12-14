@@ -298,7 +298,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
             },
           );
         })
-        .catch((result) => {
+        .catch(() => {
           this.setState({
             selectedImportDetails: undefined,
             importDetailError: t`Error fetching import from API`,

@@ -29,7 +29,7 @@ describe('My Profile Tests', () => {
     cy.get('.body').within(() => {
       // restricted to text input types because there's a checkbox now for the
       // 'super user' option, but it's disabled.
-      cy.get('input[type="text"]').each(($el, index, $list) => {
+      cy.get('input[type="text"]').each(($el) => {
         expect(inputs).to.include($el.attr('id'));
       });
     });

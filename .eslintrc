@@ -31,7 +31,7 @@
 
     // "curly": ["error", "all"],
     "eol-last": ["error", "always"],
-    // "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
 
 
     /// Rules to add from previous config (see #860)
@@ -44,7 +44,6 @@
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-inferrable-types": "off",
-    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-var-requires": "off",
     "no-case-declarations": "off",
     "no-extra-boolean-cast": "off",

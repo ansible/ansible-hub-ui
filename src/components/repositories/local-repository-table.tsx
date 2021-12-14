@@ -1,19 +1,9 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 
-import { Link } from 'react-router-dom';
-
-import { DropdownItem } from '@patternfly/react-core';
-import {
-  DateComponent,
-  EmptyStateNoData,
-  SortTable,
-  StatefulDropdown,
-  ClipboardCopy,
-} from '..';
+import { DateComponent, EmptyStateNoData, SortTable, ClipboardCopy } from '..';
 import { Constants } from 'src/constants';
 import { getRepoUrl } from 'src/utilities';
-import { Paths, formatPath } from 'src/paths';
 
 interface IProps {
   repositories: {}[];

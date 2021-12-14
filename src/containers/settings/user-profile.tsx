@@ -1,11 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Button } from '@patternfly/react-core';
 
@@ -44,7 +39,6 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    const id = this.props.match.params['userID'];
     ActiveUserAPI.getUser()
       .then((result) => {
         // The api doesn't return a value for the password, so set a blank one here

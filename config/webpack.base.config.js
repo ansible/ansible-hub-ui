@@ -37,7 +37,7 @@ module.exports = (inputConfigs) => {
   const customConfigs = {};
   const globals = {};
 
-  defaultConfigs.forEach((item, i) => {
+  defaultConfigs.forEach((item) => {
     // == will match null and undefined, but not false
     if (inputConfigs[item.name] == null) {
       customConfigs[item.name] = item.default;
