@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 
 import {
   BaseHeader,
@@ -24,6 +23,8 @@ import {
   DistributionType,
 } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
+import { Button, ToolbarItem } from '@patternfly/react-core';
+import { Paths } from 'src/paths';
 
 export class Repository {
   name: string;
@@ -159,7 +160,10 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
             }
           />
         )}
-        <BaseHeader title={t`Repo Management`}>
+        <BaseHeader
+          title={t`Repo Management`}
+          pageControls={this.renderControls()}
+        >
           {DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
           !loading &&
           !unauthorised ? (
@@ -284,6 +288,18 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       }
     });
   };
+
+  private renderControls() {
+    if (this.state.params.tab == 'local') {
+      return (
+        <ToolbarItem>
+          <Link to={Paths.token}>
+            <Button>{t`Get token`}</Button>
+          </Link>
+        </ToolbarItem>
+      );
+    }
+  }
 
   private get updateParams() {
     return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
