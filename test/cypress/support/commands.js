@@ -630,6 +630,7 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
       ).click();
       cy.contains('a', 'Delete').click();
       cy.contains('button', 'Delete').click();
+      cy.wait('@registries');
     });
   });
 });

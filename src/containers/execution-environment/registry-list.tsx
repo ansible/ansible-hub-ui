@@ -221,7 +221,11 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             }
             deleteAction={() => this.deleteRegistry(remoteToEdit)}
             title={t`Delete remote registry?`}
-            children={t`${remoteToEdit.name} will be deleted.`}
+            children={
+              <Trans>
+                <b>{remoteToEdit.name}</b> will be deleted.
+              </Trans>
+            }
           />
         )}
         <BaseHeader title={t`Remote Registries`}></BaseHeader>
@@ -465,9 +469,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       .catch(() =>
         this.addAlert(t`Failed to delete remote registry ${name}`, 'danger'),
       )
-      .then(() =>
-        this.setState({ showDeleteModal: false, remoteToEdit: null }),
-      );
+      .then(() => {
+        this.queryRegistries();
+        this.setState({ showDeleteModal: false, remoteToEdit: null });
+      });
   }
 
   private syncRegistry({ pk, name }) {

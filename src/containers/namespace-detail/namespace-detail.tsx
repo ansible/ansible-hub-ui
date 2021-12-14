@@ -40,9 +40,9 @@ import {
   RepoSelector,
   StatefulDropdown,
   ClipboardCopy,
-  ConfirmModal,
   AlertList,
   closeAlertMixin,
+  DeleteModal,
   AlertType,
 } from 'src/components';
 
@@ -200,12 +200,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           namespace={namespace.name}
         />
         {isOpenNamespaceModal && (
-          <ConfirmModal
+          <DeleteModal
             spinner={isNamespacePending}
             cancelAction={this.closeModal}
-            confirmAction={this.deleteNamespace}
-            title={t`Permanently delete namespace?`}
-            confirmButtonTitle={t`Delete`}
+            deleteAction={this.deleteNamespace}
+            title={t`Delete namespace?`}
             isDisabled={!confirmDelete || isNamespacePending}
           >
             <>
@@ -221,7 +220,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                 id='delete_confirm'
               />
             </>
-          </ConfirmModal>
+          </DeleteModal>
         )}
         {warning ? (
           <Alert
