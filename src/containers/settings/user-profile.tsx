@@ -13,12 +13,12 @@ import {
 } from 'src/components';
 import { UserType, ActiveUserAPI } from 'src/api';
 import { Paths } from 'src/paths';
-import { mapErrorMessages } from 'src/utilities';
+import { mapErrorMessages, ErrorMessagesType } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   user: UserType;
-  errorMessages: object;
+  errorMessages: ErrorMessagesType;
   inEditMode: boolean;
   alerts: AlertType[];
   redirect?: string;

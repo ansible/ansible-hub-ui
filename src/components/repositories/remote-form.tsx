@@ -20,12 +20,12 @@ import { DownloadIcon } from '@patternfly/react-icons';
 
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { Constants } from 'src/constants';
-import { isFieldSet, isWriteOnly } from 'src/utilities';
+import { isFieldSet, isWriteOnly, ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   allowEditName?: boolean;
   closeModal: () => void;
-  errorMessages: object;
+  errorMessages: ErrorMessagesType;
   remote: RemoteType;
   remoteType?: 'registry';
   saveRemote: () => void;

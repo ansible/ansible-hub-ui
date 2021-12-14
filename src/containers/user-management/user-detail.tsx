@@ -21,10 +21,11 @@ import { UserType, UserAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { DeleteUserModal } from './delete-user-modal';
 import { AppContext } from 'src/loaders/app-context';
+import { ErrorMessagesType } from 'src/utilities';
 
 interface IState {
   userDetail: UserType;
-  errorMessages: object;
+  errorMessages: ErrorMessagesType;
   showDeleteModal: boolean;
   alerts: AlertType[];
   redirect?: string;

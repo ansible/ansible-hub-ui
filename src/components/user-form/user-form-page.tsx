@@ -2,15 +2,16 @@ import * as React from 'react';
 
 import { BaseHeader, Main, Breadcrumbs, UserForm } from 'src/components';
 import { UserType } from 'src/api';
+import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   title: string;
   user: UserType;
   breadcrumbs: any[];
-  errorMessages: object;
+  errorMessages: ErrorMessagesType;
   isReadonly?: boolean;
 
-  updateUser: (user: UserType, errorMessages: object) => void;
+  updateUser: (user: UserType, errorMessages: ErrorMessagesType) => void;
   saveUser?: () => void;
   extraControls?: React.ReactNode;
   onCancel?: () => void;

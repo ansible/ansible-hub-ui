@@ -8,14 +8,14 @@ import {
   LoadingPageWithHeader,
   UserFormPage,
 } from 'src/components';
-import { mapErrorMessages } from 'src/utilities';
+import { mapErrorMessages, ErrorMessagesType } from 'src/utilities';
 import { UserType, UserAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   user: UserType;
-  errorMessages: object;
+  errorMessages: ErrorMessagesType;
   unauthorized: boolean;
   redirect?: string;
 }
