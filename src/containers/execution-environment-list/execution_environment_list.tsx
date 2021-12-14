@@ -5,7 +5,6 @@ import './execution-environment.scss';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   Button,
-  Checkbox,
   DropdownItem,
   Label,
   Text,
