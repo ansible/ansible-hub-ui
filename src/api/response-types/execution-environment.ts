@@ -12,7 +12,7 @@ export class ContainerManifestType {
   pulp_id: string;
   pulp_created: string;
   digest: string;
-  schema_version: Number;
+  schema_version: number;
   config_blob: {
     digest: string;
     media_type: string;

@@ -37,7 +37,7 @@ interface IState {
   tagInForm: string;
   verifyingTag: boolean;
   tagToVerify: string;
-  pendingTasks: Number;
+  pendingTasks: number;
   tagInFormError: string;
 }
 
