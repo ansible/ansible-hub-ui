@@ -40,7 +40,6 @@ import {
   RepoSelector,
   StatefulDropdown,
   ClipboardCopy,
-  ConfirmModal,
   AlertList,
   closeAlertMixin,
   DeleteModal,

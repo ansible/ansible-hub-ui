@@ -181,7 +181,7 @@ class ExecutionEnvironmentList extends React.Component<
         {deleteModalVisible && (
           <DeleteModal
             spinner={isDeletionPending}
-            title={'Delete container'}
+            title={'Delete container?'}
             cancelAction={() =>
               this.setState({ deleteModalVisible: false, selectedItem: null })
             }
