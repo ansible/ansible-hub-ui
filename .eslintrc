@@ -1,0 +1,60 @@
+{
+  env: {
+    "browser": true,
+    "node": true,
+    "es2021": true,
+  },
+  parser: "@typescript-eslint/parser",
+  settings: {
+    "react": {
+      "version": "detect",
+    },
+  },
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+  ],
+  parserOptions: {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+    },
+  },
+  globals: {
+    // overridden in test/.eslintrc
+    NAMESPACE_TERM: "readonly",
+  },
+  rules: {
+    /// Rules we actually want - some are disabled until a separate PR because they cause many errors
+
+    // "curly": ["error", "all"],
+    "eol-last": ["error", "always"],
+    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+
+
+    /// Rules to add from previous config (see #860)
+
+    // array-bracket-spacing camelcase comma-dangle comma-spacing comma-style curly dot-notation eol-last eqeqeq func-names indent key-spacing keyword-spacing linebreak-style max-len new-cap no-bitwise no-caller no-mixed-spaces-and-tabs no-multiple-empty-lines no-trailing-spaces no-undef no-unused-vars no-use-before-define no-var no-with object-curly-spacing object-shorthand one-var padding-line-between-statements quote-props quotes react/jsx-curly-spacing semi space-before-blocks space-in-parens space-infix-ops space-unary-ops vars-on-top wrap-iife yoda
+
+
+    /// Rules we're disabling until they can be fixed, or disabled permanently
+
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "no-case-declarations": "off",
+    "no-extra-boolean-cast": "off",
+    "no-prototype-builtins": "off",
+    "no-useless-escape": "off",
+    "prefer-const": "off",
+    "react/display-name": "off",
+    "react/jsx-key": "off",
+    "react/jsx-no-target-blank": "off",
+    "react/no-children-prop": "off",
+    "react/no-unescaped-entities": "off",
+    "react/prop-types": "off",
+  },
+}

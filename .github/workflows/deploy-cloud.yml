@@ -5,6 +5,10 @@ on:
   push:
     branches: [ "master", "master-stable", "prod-beta", "prod-stable" ]
 
+concurrency:
+  group: deploy-cloud-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   cloud:
     runs-on: ubuntu-latest

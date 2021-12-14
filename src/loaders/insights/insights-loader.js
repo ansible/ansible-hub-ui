@@ -1,3 +1,4 @@
+/* global insights */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withRouter, matchPath } from 'react-router-dom';
@@ -5,7 +6,7 @@ import { connect } from 'react-redux';
 import { Routes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
-import { ActiveUserAPI } from 'src/api';
+import { ActiveUserAPI, SettingsAPI } from 'src/api';
 import { Paths } from 'src/paths';
 
 const DEFAULT_REPO = 'published';
@@ -18,6 +19,8 @@ class App extends Component {
       user: null,
       activeUser: null,
       selectedRepo: DEFAULT_REPO,
+      alerts: [],
+      settings: {},
     };
   }
 
@@ -59,16 +62,22 @@ class App extends Component {
     insights.chrome.auth
       .getUser()
       .then((user) => this.setState({ user: user }));
-    ActiveUserAPI.getActiveUser().then((result) =>
-      this.setState({ activeUser: result.data }),
-    );
+    let promises = [];
+    promises.push(ActiveUserAPI.getActiveUser());
+    promises.push(SettingsAPI.get());
+    Promise.all(promises).then((results) => {
+      this.setState({
+        activeUser: results[0].data,
+        settings: results[1].data,
+      });
+    });
   }
 
   componentWillUnmount() {
     this.appNav();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     // This is sort of a dirty hack to make it so that collection details can
     // view repositories other than "published", but all other views are locked
     // to "published"
@@ -117,6 +126,9 @@ class App extends Component {
             user: this.state.activeUser,
             setUser: this.setActiveUser,
             selectedRepo: this.state.selectedRepo,
+            alerts: this.state.alerts,
+            setAlerts: this.setAlerts,
+            settings: this.state.settings,
           }}
         >
           <Routes childProps={this.props} />
@@ -126,6 +138,10 @@ class App extends Component {
   }
   setActiveUser = (user) => {
     this.setState({ activeUser: user });
+  };
+
+  setAlerts = (alerts) => {
+    this.setState({ alerts });
   };
 
   isRepoURL = (location) => {

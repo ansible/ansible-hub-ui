@@ -1,11 +1,9 @@
 describe('Repo Management tests', () => {
   let remoteRepoUrl = '/ui/repositories?tab=remote';
   let localRepoUrl = '/ui/repositories';
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
   });
 
   it('admin user sees download_concurrency in remote config', () => {
@@ -44,7 +42,7 @@ describe('Repo Management tests', () => {
    * when you want to save the remote proxy config.
    */
   it.skip('remote proxy config can be saved and deleted.', () => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.visit(remoteRepoUrl);
     cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
     cy.contains('Edit').click();

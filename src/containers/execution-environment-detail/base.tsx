@@ -144,7 +144,10 @@ export function withContainerRepo(WrappedComponent) {
             pageControls={
               <>
                 {showEdit ? (
-                  <Button onClick={() => this.setState({ editing: true })}>
+                  <Button
+                    onClick={() => this.setState({ editing: true })}
+                    variant={'secondary'}
+                  >
                     {t`Edit`}
                   </Button>
                 ) : null}
@@ -229,7 +232,7 @@ export function withContainerRepo(WrappedComponent) {
             setTimeout(() => this.loadRepo(), 10000);
           }
         })
-        .catch((e) => this.setState({ redirect: 'notFound' }));
+        .catch(() => this.setState({ redirect: 'notFound' }));
     }
 
     private getTab() {

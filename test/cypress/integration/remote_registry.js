@@ -1,16 +1,13 @@
 describe('Remote Registry Tests', () => {
-  const adminUsername = Cypress.env('username');
-  const adminPassword = Cypress.env('password');
-
   before(() => {
     cy.visit('/');
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.deleteRegistries();
   });
 
   beforeEach(() => {
     cy.visit('/');
-    cy.login(adminUsername, adminPassword);
+    cy.login();
   });
 
   it('checks for empty state', () => {

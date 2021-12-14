@@ -9,7 +9,6 @@ import {
   BaseHeader,
   EmptyStateFilter,
   EmptyStateNoData,
-  EmptyStateUnauthorized,
   LinkTabs,
   LoadingPageSpinner,
   LoadingPageWithHeader,
@@ -86,17 +85,36 @@ export class NamespaceList extends React.Component<IProps, IState> {
     if (this.props.filterOwner) {
       // Make a query with no params and see if it returns results to tell
       // if the user can edit namespaces
-      MyNamespaceAPI.list({}).then((results) => {
-        if (results.data.meta.count !== 0) {
-          this.loadNamespaces();
-        } else {
-          this.setState({
-            hasPermission: false,
-            namespaces: [],
-            loading: false,
-          });
-        }
-      });
+      MyNamespaceAPI.list({})
+        .then((results) => {
+          if (results.data.meta.count !== 0) {
+            this.loadNamespaces();
+          } else {
+            this.setState({
+              hasPermission: false,
+              namespaces: [],
+              loading: false,
+            });
+          }
+        })
+        .catch((e) =>
+          this.setState(
+            {
+              namespaces: [],
+              itemCount: 0,
+              loading: false,
+            },
+            () =>
+              this.context.setAlerts([
+                ...this.context.alerts,
+                {
+                  variant: 'danger',
+                  title: t`Error loading my namespaces.`,
+                  description: e?.message,
+                },
+              ]),
+          ),
+        );
     } else {
       this.loadNamespaces();
     }
@@ -154,7 +172,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             })
           }
         ></NamespaceModal>
-        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
+        <AlertList alerts={alerts} closeAlert={() => this.closeAlert()} />
         <BaseHeader title={title}>
           {!this.context.user.is_anonymous && (
             <div className='hub-tab-link-container'>
@@ -285,13 +303,32 @@ export class NamespaceList extends React.Component<IProps, IState> {
       apiFunc = (p) => NamespaceAPI.list(p);
     }
     this.setState({ loading: true }, () => {
-      apiFunc(this.state.params).then((results) => {
-        this.setState({
-          namespaces: results.data.data,
-          itemCount: results.data.meta.count,
-          loading: false,
-        });
-      });
+      apiFunc(this.state.params)
+        .then((results) => {
+          this.setState({
+            namespaces: results.data.data,
+            itemCount: results.data.meta.count,
+            loading: false,
+          });
+        })
+        .catch((e) =>
+          this.setState(
+            {
+              namespaces: [],
+              itemCount: 0,
+              loading: false,
+            },
+            () =>
+              this.context.setAlerts([
+                ...this.context.alerts,
+                {
+                  variant: 'danger',
+                  title: t`Error loading namespaces.`,
+                  description: e?.message,
+                },
+              ]),
+          ),
+        );
     });
   }
 
@@ -299,7 +336,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     return ParamHelper.updateParamsMixin(this.nonURLParams);
   }
 
-  private closeAlert(i) {
+  private closeAlert() {
     this.context.setAlerts([]);
   }
 }

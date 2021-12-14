@@ -6,7 +6,14 @@ import {
   MarkdownEditor,
   ClipboardCopy,
 } from 'src/components';
-import { FlexItem, Flex, Title, Button } from '@patternfly/react-core';
+import {
+  FlexItem,
+  Flex,
+  Title,
+  Button,
+  Card,
+  CardBody,
+} from '@patternfly/react-core';
 import { withContainerRepo, IDetailSharedProps } from './base';
 import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
 import { getContainersURL } from 'src/utilities';
@@ -80,78 +87,84 @@ class ExecutionEnvironmentDetail extends React.Component<
         </FlexItem>
         <FlexItem>
           <section className='body pf-c-content'>
-            <Title headingLevel='h2' size='lg'>
-              {!this.state.markdownEditing && this.state.readme && canEdit && (
-                <Button
-                  className={'hub-c-button-edit'}
-                  variant={'primary'}
-                  onClick={() => {
-                    this.setState({ markdownEditing: true });
-                  }}
-                >
-                  {t`Edit`}
-                </Button>
-              )}
-            </Title>
-            {!this.state.markdownEditing && !this.state.readme ? (
-              <EmptyStateNoData
-                title={t`No README`}
-                description={t`Add a README with instructions for using this container.`}
-                button={
-                  canEdit ? (
-                    <div data-cy='add-readme'>
+            <Card>
+              <CardBody>
+                <Title headingLevel='h2' size='lg'>
+                  {!this.state.markdownEditing && this.state.readme && canEdit && (
+                    <Button
+                      className={'hub-c-button-edit'}
+                      variant={'primary'}
+                      onClick={() => {
+                        this.setState({ markdownEditing: true });
+                      }}
+                    >
+                      {t`Edit`}
+                    </Button>
+                  )}
+                </Title>
+                {!this.state.markdownEditing && !this.state.readme ? (
+                  <EmptyStateNoData
+                    title={t`No README`}
+                    description={t`Add a README with instructions for using this container.`}
+                    button={
+                      canEdit ? (
+                        <div data-cy='add-readme'>
+                          <Button
+                            variant='primary'
+                            onClick={() =>
+                              this.setState({ markdownEditing: true })
+                            }
+                          >
+                            {t`Add`}
+                          </Button>
+                        </div>
+                      ) : null
+                    }
+                  />
+                ) : (
+                  <MarkdownEditor
+                    text={this.state.readme}
+                    placeholder={''}
+                    helperText={''}
+                    updateText={(value) =>
+                      this.setState({
+                        readme: value,
+                      })
+                    }
+                    editing={this.state.markdownEditing}
+                  />
+                )}
+
+                {this.state.markdownEditing && (
+                  <React.Fragment>
+                    <div data-cy='save-readme'>
                       <Button
-                        variant='primary'
-                        onClick={() => this.setState({ markdownEditing: true })}
+                        variant={'primary'}
+                        onClick={() =>
+                          this.saveReadme(
+                            this.props.containerRepository.name,
+                            this.state.readme,
+                          )
+                        }
                       >
-                        {t`Add`}
+                        {t`Save`}
                       </Button>
                     </div>
-                  ) : null
-                }
-              />
-            ) : (
-              <MarkdownEditor
-                text={this.state.readme}
-                placeholder={''}
-                helperText={''}
-                updateText={(value) =>
-                  this.setState({
-                    readme: value,
-                  })
-                }
-                editing={this.state.markdownEditing}
-              />
-            )}
-
-            {this.state.markdownEditing && (
-              <React.Fragment>
-                <div data-cy='save-readme'>
-                  <Button
-                    variant={'primary'}
-                    onClick={() =>
-                      this.saveReadme(
-                        this.props.containerRepository.name,
-                        this.state.readme,
-                      )
-                    }
-                  >
-                    {t`Save`}
-                  </Button>
-                </div>
-                <Button
-                  variant={'link'}
-                  onClick={() => {
-                    this.setState({
-                      markdownEditing: false,
-                    });
-                    this.queryReadme(this.props.containerRepository.name);
-                  }}
-                >
-                  {t`Cancel`}
-                </Button>
-              </React.Fragment>
-            )}
+                    <Button
+                      variant={'link'}
+                      onClick={() => {
+                        this.setState({
+                          markdownEditing: false,
+                        });
+                        this.queryReadme(this.props.containerRepository.name);
+                      }}
+                    >
+                      {t`Cancel`}
+                    </Button>
+                  </React.Fragment>
+                )}
+              </CardBody>
+            </Card>
           </section>
         </FlexItem>
       </Flex>
@@ -167,7 +180,7 @@ class ExecutionEnvironmentDetail extends React.Component<
             loading: false,
           });
         })
-        .catch((error) => this.setState({ redirect: 'notFound' })),
+        .catch(() => this.setState({ redirect: 'notFound' })),
     );
   }
 

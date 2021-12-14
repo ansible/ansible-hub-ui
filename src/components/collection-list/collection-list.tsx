@@ -69,17 +69,11 @@ export class CollectionList extends React.Component<IProps> {
             />
           )}
         </DataList>
-
-        <div className='controls bottom'>
-          <div></div>
-          <div>
-            <Pagination
-              params={params}
-              updateParams={(p) => updateParams(p)}
-              count={itemCount}
-            />
-          </div>
-        </div>
+        <Pagination
+          params={params}
+          updateParams={(p) => updateParams(p)}
+          count={itemCount}
+        />
       </React.Fragment>
     );
   }
@@ -96,7 +90,7 @@ export class CollectionList extends React.Component<IProps> {
         <StatefulDropdown
           items={[
             <DropdownItem
-              onClick={(e) =>
+              onClick={() =>
                 this.props.handleControlClick(collection.id, 'deprecate')
               }
               key='1'

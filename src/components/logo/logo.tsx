@@ -1,4 +1,3 @@
-import { cellWidth } from '@patternfly/react-table';
 import * as React from 'react';
 // had to declare *.svg in src/index.d.ts
 import DefaultLogo from 'src/../static/images/default-logo.svg';
@@ -59,7 +58,7 @@ export class Logo extends React.Component<IProps, IState> {
           alt={alt}
           onError={
             fallbackToDefault
-              ? (e) => this.setState({ failed: true })
+              ? () => this.setState({ failed: true })
               : () => null
           }
         />

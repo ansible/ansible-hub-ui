@@ -2,11 +2,7 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
-import {
-  Button,
-  LoginForm,
-  LoginPage as PFLoginPage,
-} from '@patternfly/react-core';
+import { LoginForm, LoginPage as PFLoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import Logo from 'src/../static/images/logo_large.svg';

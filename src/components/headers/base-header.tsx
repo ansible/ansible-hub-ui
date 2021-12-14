@@ -1,4 +1,3 @@
-import { t } from '@lingui/macro';
 import * as React from 'react';
 import cx from 'classnames';
 import './header.scss';

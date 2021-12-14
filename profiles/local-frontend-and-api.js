@@ -14,7 +14,7 @@ routes[`/${SECTION}/${APP_ID}`]      = { host: `https://${localhost}:${FRONTEND_
 routes[`/beta/apps/${APP_ID}`]       = { host: `https://${localhost}:${FRONTEND_PORT}` };
 routes[`/apps/${APP_ID}`]            = { host: `https://${localhost}:${FRONTEND_PORT}` };
 
-routes[`/api/automation-hub/`]       = { host: `http://${localhost}:${API_PORT}` };
-routes[`/static/`]       = { host: `http://${localhost}:${API_PORT}` };
+// routes[`/api/automation-hub/`]       = { host: `http://${localhost}:${API_PORT}` };
+// routes[`/static/`]       = { host: `http://${localhost}:${API_PORT}` };
 
 module.exports = { routes };

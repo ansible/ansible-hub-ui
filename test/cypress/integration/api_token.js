@@ -1,13 +1,10 @@
 describe('API Token Tests', () => {
-  var adminUsername = Cypress.env('username');
-  var adminPassword = Cypress.env('password');
-
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
   });
 
   it('token is generated', () => {
-    cy.menuGo('Collections > API Token');
+    cy.menuGo('Collections > API token management');
     cy.contains('Load token').click();
 
     cy.get('[aria-label="Copyable input"]')

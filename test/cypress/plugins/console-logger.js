@@ -36,51 +36,6 @@ function log(msg) {
   console.log(msg);
 }
 
-function logEntry(params) {
-  if (eventFilter && !eventFilter('browser', params.entry)) {
-    return;
-  }
-
-  const { level, source, text, timestamp, url, lineNumber, stackTrace, args } =
-    params.entry;
-  const color = severityColors[level];
-  const icon = severityIcons[level];
-
-  const prefix = `[${new Date(timestamp).toISOString()}] ${icon} `;
-  const prefixSpacer = ' '.repeat(prefix.length);
-
-  let logMessage = `${prefix}${chalk.bold(level)} (${source}): ${text}`;
-  log(color(logMessage));
-  recordLogMessage(logMessage);
-
-  const logAdditional = (msg) => {
-    let additionalLogMessage = `${prefixSpacer}${msg}`;
-    log(color(additionalLogMessage));
-    recordLogMessage(additionalLogMessage);
-  };
-
-  if (url) {
-    logAdditional(`${chalk.bold('URL')}: ${url}`);
-  }
-
-  if (stackTrace && lineNumber) {
-    logAdditional(`Stack trace line number: ${lineNumber}`);
-    logAdditional(`Stack trace description: ${stackTrace.description}`);
-    logAdditional(`Stack call frames: ${stackTrace.callFrames.join(', ')}`);
-  }
-
-  if (args) {
-    logAdditional(`Arguments:`);
-    logAdditional(
-      '  ' +
-        JSON.stringify(args, null, 2)
-          .split('\n')
-          .join(`\n${prefixSpacer}  `)
-          .trimRight(),
-    );
-  }
-}
-
 function logConsole(params) {
   if (eventFilter && !eventFilter('console', params)) {
     return;
@@ -95,7 +50,6 @@ function logConsole(params) {
   const icon = severityIcons[level];
 
   const prefix = `[${new Date(timestamp).toISOString()}] ${icon} `;
-  const prefixSpacer = ' '.repeat(prefix.length);
 
   if (args) {
     args.forEach((arg) => {
@@ -168,10 +122,6 @@ function browserLaunchHandler(browser = {}, launchOptions) {
     })
       .then((cdp) => {
         debugLog('Connected to Chrome Debugging Protocol');
-
-        /** captures logs from the browser */
-        //   cdp.Log.enable()
-        //   cdp.Log.entryAdded(logEntry)
 
         /** captures logs from console.X calls */
         cdp.Runtime.enable();

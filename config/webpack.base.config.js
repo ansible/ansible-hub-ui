@@ -1,9 +1,9 @@
-/* global require, module, __dirname */
 const { resolve } = require('path');
 const config = require('@redhat-cloud-services/frontend-components-config');
 const TSOverrides = require('./webpack-ts-overrides');
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const isBuild = process.env.NODE_ENV === 'production';
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
 // should be imported, initialized with the following settings and exported like
@@ -37,7 +37,7 @@ module.exports = (inputConfigs) => {
   const customConfigs = {};
   const globals = {};
 
-  defaultConfigs.forEach((item, i) => {
+  defaultConfigs.forEach((item) => {
     // == will match null and undefined, but not false
     if (inputConfigs[item.name] == null) {
       customConfigs[item.name] = item.default;
@@ -68,7 +68,6 @@ module.exports = (inputConfigs) => {
     htmlPlugin: htmlPluginConfig,
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
-
     // defines port for dev server
     port: customConfigs.UI_PORT,
   });
@@ -98,6 +97,25 @@ module.exports = (inputConfigs) => {
 
   plugins.push(new webpack.DefinePlugin(globals));
   plugins.push(new ForkTsCheckerWebpackPlugin());
+
+  if (customConfigs.DEPLOYMENT_MODE === 'insights') {
+    /**
+     * Generates remote containers for chrome 2
+     */
+    plugins.push(
+      require('@redhat-cloud-services/frontend-components-config/federated-modules')(
+        {
+          root: resolve(__dirname, '../'),
+          exposes: {
+            './RootApp': resolve(
+              __dirname,
+              isBuild ? '../src/app-entry.js' : '../src/dev-entry.js',
+            ),
+          },
+        },
+      ),
+    );
+  }
 
   return {
     ...newWebpackConfig,

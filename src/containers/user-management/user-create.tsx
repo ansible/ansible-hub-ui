@@ -77,7 +77,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
   private saveUser = () => {
     const { user } = this.state;
     UserAPI.create(user)
-      .then((result) => this.setState({ redirect: Paths.userList }))
+      .then(() => this.setState({ redirect: Paths.userList }))
       .catch((err) => {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });

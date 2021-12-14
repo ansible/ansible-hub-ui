@@ -1,6 +1,6 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { Tooltip, Button } from '@patternfly/react-core';
+import { Tooltip } from '@patternfly/react-core';
 import { Paths } from 'src/paths';
 import { BaseHeader, Breadcrumbs, Tabs } from 'src/components';
 import { ContainerRepositoryType } from 'src/api';
@@ -41,11 +41,6 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
         }
         pageControls={this.props.pageControls}
       >
-        <Tooltip content={this.props.container.description}>
-          <p data-cy='description' className={'hub-m-truncated'}>
-            {this.props.container.description}
-          </p>
-        </Tooltip>
         {last_sync_task && (
           <p className='hub-m-truncated'>
             <Trans>
@@ -54,6 +49,13 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
             {lastSyncStatus({ last_sync_task })}
           </p>
         )}
+        <div style={{ height: '10px' }}>&nbsp;</div>
+        <Tooltip content={this.props.container.description}>
+          <p data-cy='description' className={'truncated'}>
+            {this.props.container.description}
+          </p>
+        </Tooltip>
+
         <span />
         <div className='hub-tab-link-container'>
           <div className='tabs'>

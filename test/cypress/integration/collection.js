@@ -10,11 +10,8 @@ const waitForTaskToFinish = (task, maxRequests, level = 0) => {
 };
 
 describe('collection tests', () => {
-  const adminUsername = Cypress.env('username');
-  const adminPassword = Cypress.env('password');
-
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
   });
 
   it('deletes an entire collection', () => {
@@ -37,7 +34,7 @@ describe('collection tests', () => {
     cy.wait('@deleteCollection').its('response.statusCode').should('eq', 202);
 
     waitForTaskToFinish('@taskStatus', 10);
-    cy.get('@taskStatus.last').then((res) => {
+    cy.get('@taskStatus.last').then(() => {
       cy.get('.pf-c-alert').contains('Successfully deleted collection.');
     });
   });

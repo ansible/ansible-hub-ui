@@ -69,7 +69,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                     ],
                   }}
                   params={{}}
-                  updateParams={() => {}}
+                  updateParams={() => null}
                 />
                 <tbody>
                   {activities.map((action, i) => {
@@ -228,7 +228,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
             loading: false,
           });
         })
-        .catch((error) => this.setState({ redirect: 'notFound' }));
+        .catch(() => this.setState({ redirect: 'notFound' }));
     });
   }
 }

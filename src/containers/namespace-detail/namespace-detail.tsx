@@ -17,8 +17,9 @@ import {
   Text,
   Checkbox,
 } from '@patternfly/react-core';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 
-import * as ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 
 import {
   CollectionListType,
@@ -39,10 +40,10 @@ import {
   RepoSelector,
   StatefulDropdown,
   ClipboardCopy,
-  AlertType,
+  ConfirmModal,
   AlertList,
   closeAlertMixin,
-  ConfirmModal,
+  AlertType,
 } from 'src/components';
 
 import { ImportModal } from './import-modal/import-modal';
@@ -70,10 +71,10 @@ interface IState {
   updateCollection: CollectionListType;
   showControls: boolean;
   isOpenNamespaceModal: boolean;
-  alerts: AlertType[];
   isNamespaceEmpty: boolean;
   confirmDelete: boolean;
   isNamespacePending: boolean;
+  alerts: AlertType[];
 }
 
 interface IProps extends RouteComponentProps {
@@ -107,17 +108,17 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       updateCollection: null,
       showControls: false, // becomes true when my-namespaces doesn't 404
       isOpenNamespaceModal: false,
-      alerts: [],
       isNamespaceEmpty: false,
       confirmDelete: false,
       isNamespacePending: false,
+      alerts: [],
     };
   }
 
   componentDidMount() {
     this.loadAll();
 
-    if (this.context.alerts) this.setState({ alerts: this.context.alerts });
+    this.setState({ alerts: this.context.alerts || [] });
   }
 
   componentWillUnmount() {
@@ -150,7 +151,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     const tabs = [{ id: 'collections', name: t`Collections` }];
 
     if (this.state.showControls) {
-      tabs.push({ id: 'cli-configuration', name: t`CLI Configuration` });
+      tabs.push({ id: 'cli-configuration', name: t`CLI configuration` });
     }
     const tab = params['tab'] || 'collections';
 
@@ -176,9 +177,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     return (
       <React.Fragment>
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        />
         <ImportModal
           isOpen={showImportModal}
-          onUploadSuccess={(result) =>
+          onUploadSuccess={() =>
             this.setState({
               redirect: formatPath(
                 Paths.myImports,
@@ -218,10 +223,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             </>
           </ConfirmModal>
         )}
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
         {warning ? (
           <Alert
             className='hub-c-alert-namespace'
@@ -307,7 +308,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           {tab.toLowerCase() === 'cli-configuration' ? (
             <section className='body'>
               <div>
-                <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
                 <div>
                   <Trans>
                     <b>Note:</b> Use this URL to configure ansible-galaxy to
@@ -319,9 +319,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     >
                       here
                     </a>
-                    .
+                    <span>&nbsp;</span>
+                    <ExternalLinkAltIcon />.
                   </Trans>
                 </div>
+                <ClipboardCopy isReadOnly>{repositoryUrl}</ClipboardCopy>
               </div>
             </section>
           ) : null}
@@ -350,7 +352,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           this.context.selectedRepo,
         )
           .then(() => this.loadCollections())
-          .catch((error) => {
+          .catch(() => {
             this.setState({
               warning: t`API Error: Failed to set deprecation.`,
             });
@@ -362,7 +364,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private renderResources(namespace: NamespaceType) {
     return (
       <div className='pf-c-content preview'>
-        <ReactMarkdown source={namespace.resources} />
+        <ReactMarkdown>{namespace.resources}</ReactMarkdown>
       </div>
     );
   }
@@ -415,7 +417,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
         this.loadAllRepos(val[0].data.meta.count);
       })
-      .catch((response) => {
+      .catch(() => {
         this.setState({ redirect: Paths.notFound });
       });
   }
@@ -446,7 +448,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: 'Error loading collection repositories',
+              title: t`Error loading collection repositories.`,
               description: err?.message,
             },
           ],
@@ -562,19 +564,24 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           ]);
         })
         .catch((e) => {
-          this.setState({
-            alerts: [
-              ...this.state.alerts,
-              {
-                variant: 'danger',
-                title: t`Error deleting namespace.`,
-                description: e.message,
-              },
-            ],
-            isOpenNamespaceModal: false,
-            confirmDelete: false,
-            isNamespacePending: false,
-          });
+          this.setState(
+            {
+              isOpenNamespaceModal: false,
+              confirmDelete: false,
+              isNamespacePending: false,
+            },
+            () =>
+              this.setState({
+                alerts: [
+                  ...this.state.alerts,
+                  {
+                    variant: 'danger',
+                    title: t`Error deleting namespace.`,
+                    description: e?.message,
+                  },
+                ],
+              }),
+          );
         }),
     );
   };
@@ -583,7 +590,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     this.setState({ isOpenNamespaceModal: false, confirmDelete: false });
   };
 
-  private get closeAlert() {
+  get closeAlert() {
     return closeAlertMixin('alerts');
   }
 }

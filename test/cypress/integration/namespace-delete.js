@@ -1,9 +1,6 @@
 describe('Delete a namespace', () => {
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
-
   before(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
   });
 
   it('deletes a namespace', () => {

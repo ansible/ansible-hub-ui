@@ -80,19 +80,21 @@ export class CompoundFilter extends React.Component<IProps, IState> {
 
     return (
       <InputGroup>
-        <StatefulDropdown
-          toggleType='dropdown'
-          defaultText={
-            <span>
-              <FilterIcon />
-              {'   '}
-              {selectedFilter.title}
-            </span>
-          }
-          position='left'
-          isPlain={false}
-          items={filterOptions}
-        />
+        {filterConfig.length != 1 && (
+          <StatefulDropdown
+            toggleType='dropdown'
+            defaultText={
+              <span>
+                <FilterIcon />
+                {'   '}
+                {selectedFilter.title}
+              </span>
+            }
+            position='left'
+            isPlain={false}
+            items={filterOptions}
+          />
+        )}
         {this.renderInput(selectedFilter)}
         <Button
           onClick={() => this.submitFilter()}
@@ -148,7 +150,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             }
             isPlain={false}
             position='left'
-            items={selectedFilter.options.map((v, i) => (
+            items={selectedFilter.options.map((v) => (
               <DropdownItem
                 onClick={() => {
                   this.props.onChange(v.id);

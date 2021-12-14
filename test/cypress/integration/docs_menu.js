@@ -1,10 +1,7 @@
 describe('Token Management Tests', () => {
-  const adminUsername = Cypress.env('username');
-  const adminPassword = Cypress.env('password');
-
   beforeEach(() => {
     cy.visit('/');
-    cy.login(adminUsername, adminPassword);
+    cy.login();
   });
 
   it('user can open docs dropdown menu', () => {

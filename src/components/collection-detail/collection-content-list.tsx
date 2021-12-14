@@ -6,7 +6,6 @@ import './collection-content-list.scss';
 import { Link } from 'react-router-dom';
 import {
   SearchInput,
-  TextInput,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,

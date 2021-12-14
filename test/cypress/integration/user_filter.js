@@ -1,15 +1,12 @@
 // This tests the filter on user page. Should apply partial matchMedia.
 
 describe('Search for users', () => {
-  let adminUsername = Cypress.env('username');
-  let adminPassword = Cypress.env('password');
-
   before(() => {
     cy.deleteTestUsers();
   });
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.menuGo('User Access > Users');
   });
 

@@ -9,9 +9,10 @@ import {
   Label,
   Tooltip,
   Switch,
+  Alert,
 } from '@patternfly/react-core';
 
-import { APISearchTypeAhead, HelperText } from 'src/components';
+import { AlertType, APISearchTypeAhead, HelperText } from 'src/components';
 import { DataForm } from 'src/components/shared/data-form';
 
 import { UserType, GroupAPI } from 'src/api';
@@ -42,6 +43,9 @@ interface IProps {
 interface IState {
   passwordConfirm: string;
   searchGroups: any[];
+  formErrors: {
+    groups: AlertType;
+  };
 }
 
 export class UserForm extends React.Component<IProps, IState> {
@@ -56,6 +60,9 @@ export class UserForm extends React.Component<IProps, IState> {
     this.state = {
       passwordConfirm: '',
       searchGroups: [],
+      formErrors: {
+        groups: null,
+      },
     };
   }
 
@@ -73,7 +80,7 @@ export class UserForm extends React.Component<IProps, IState> {
       isNewUser,
       isMe,
     } = this.props;
-    const { passwordConfirm } = this.state;
+    const { passwordConfirm, formErrors } = this.state;
     const formFields = [
       { id: 'username', title: t`Username` },
       { id: 'first_name', title: t`First name` },
@@ -154,16 +161,22 @@ export class UserForm extends React.Component<IProps, IState> {
         label={t`Groups`}
         validated={this.toError(!('groups' in errorMessages))}
       >
-        <APISearchTypeAhead
-          results={this.state.searchGroups}
-          loadResults={this.loadGroups}
-          onSelect={this.onSelectGroup}
-          placeholderText={t`Select groups`}
-          selections={user.groups}
-          multiple={true}
-          onClear={this.clearGroups}
-          isDisabled={isReadonly}
-        />
+        {!!formErrors.groups ? (
+          <Alert title={formErrors.groups.title} variant='danger' isInline>
+            {formErrors.groups.description}
+          </Alert>
+        ) : (
+          <APISearchTypeAhead
+            results={this.state.searchGroups}
+            loadResults={this.loadGroups}
+            onSelect={this.onSelectGroup}
+            placeholderText={t`Select groups`}
+            selections={user.groups}
+            multiple={true}
+            onClear={this.clearGroups}
+            isDisabled={isReadonly}
+          />
+        )}
       </FormGroup>
     );
 
@@ -188,7 +201,7 @@ export class UserForm extends React.Component<IProps, IState> {
             label={t`Super user`}
             labelOff={t`Not a super user`}
             isChecked={user.is_superuser}
-            onChange={(e) =>
+            onChange={() =>
               this.updateUserFieldByName(!user.is_superuser, 'is_superuser')
             }
           ></Switch>
@@ -252,7 +265,7 @@ export class UserForm extends React.Component<IProps, IState> {
     this.props.updateUser(newUser, this.props.errorMessages);
   };
 
-  private onSelectGroup = (event, selection, isPlaceholder) => {
+  private onSelectGroup = (event, selection) => {
     const { user } = this.props;
 
     const newUser = { ...user };
@@ -271,9 +284,20 @@ export class UserForm extends React.Component<IProps, IState> {
   };
 
   private loadGroups = (name) => {
-    GroupAPI.list({ name__contains: name, page_size: 5 }).then((result) =>
-      this.setState({ searchGroups: result.data.data }),
-    );
+    GroupAPI.list({ name__contains: name, page_size: 5 })
+      .then((result) => this.setState({ searchGroups: result.data.data }))
+      .catch((e) => {
+        this.setState({
+          formErrors: {
+            ...this.state.formErrors,
+            groups: {
+              variant: 'danger',
+              title: t`Error loading groups.`,
+              description: e?.message,
+            },
+          },
+        });
+      });
   };
 
   private toError(validated: boolean) {

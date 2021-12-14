@@ -25,7 +25,6 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import shell from 'shell-escape-tag';
-const urljoin = require('url-join');
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
@@ -57,7 +56,7 @@ Cypress.Commands.add('menuGo', {}, (name) => {
 
 Cypress.Commands.add('apiLogin', {}, (username, password) => {
   let loginUrl = Cypress.env('prefix') + '_ui/v1/auth/login/';
-  cy.request('GET', loginUrl).then((response) => {
+  cy.request('GET', loginUrl).then(() => {
     cy.getCookie('csrftoken').then((csrftoken) => {
       cy.request({
         method: 'POST',
@@ -134,6 +133,12 @@ Cypress.Commands.add('logout', {}, () => {
 });
 
 Cypress.Commands.add('login', {}, (username, password) => {
+  if (!username && !password) {
+    // defult to admin
+    username = Cypress.env('username');
+    password = Cypress.env('password');
+  }
+
   cy.apiLogin(username, password);
 });
 
@@ -351,7 +356,7 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/users/?*').as('userList');
 
   cy.contains('[role=dialog] button', 'Delete').click();
-  cy.wait('@deleteUser').then(({ request, response }) => {
+  cy.wait('@deleteUser').then(({ response }) => {
     expect(response.statusCode).to.eq(204);
   });
 
@@ -370,7 +375,7 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
   );
   cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click();
   cy.contains('[role=dialog] button', 'Delete').click();
-  cy.wait('@deleteGroup').then(({ request, response }) => {
+  cy.wait('@deleteGroup').then(({ response }) => {
     expect(response.statusCode).to.eq(204);
   });
 

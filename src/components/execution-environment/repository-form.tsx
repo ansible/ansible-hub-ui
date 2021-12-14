@@ -1,4 +1,4 @@
-import { t, Trans } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import {
   Alert,
@@ -15,7 +15,11 @@ import {
 } from '@patternfly/react-core';
 import { TagIcon } from '@patternfly/react-icons';
 import { isEqual, isEmpty, xorWith, cloneDeep } from 'lodash';
-import { APISearchTypeAhead, ObjectPermissionField } from 'src/components';
+import {
+  AlertType,
+  APISearchTypeAhead,
+  ObjectPermissionField,
+} from 'src/components';
 import {
   ContainerDistributionAPI,
   GroupObjectPermissionType,
@@ -42,6 +46,8 @@ interface IProps {
   registry?: string; // pk
   upstreamName?: string;
   remotePulpId?: string;
+
+  addAlert?: (variant, title, description?) => void;
 }
 
 interface IState {
@@ -57,13 +63,17 @@ interface IState {
   registries?: { id: string; name: string }[];
   registrySelection?: { id: string; name: string }[];
   upstreamName: string;
+  formErrors?: {
+    registries?: AlertType;
+    groups?: AlertType;
+  };
 }
 
 export class RepositoryForm extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.name,
+      name: this.props.name || '',
       description: this.props.description,
       selectedGroups: [],
       originalSelectedGroups: [],
@@ -74,22 +84,39 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       includeTags: this.props.includeTags,
       registries: null,
       registrySelection: [],
-      upstreamName: this.props.upstreamName,
+      upstreamName: this.props.upstreamName || '',
+      formErrors: {
+        registries: null,
+        groups: null,
+      },
     };
   }
 
   componentDidMount() {
     if (this.props.isRemote) {
-      this.loadRegistries().then(() => {
-        // prefill registry if passed from props
-        if (this.props.registry) {
+      this.loadRegistries()
+        .then(() => {
+          // prefill registry if passed from props
+          if (this.props.registry) {
+            this.setState({
+              registrySelection: this.state.registries.filter(
+                ({ id }) => id === this.props.registry,
+              ),
+            });
+          }
+        })
+        .catch((e) => {
           this.setState({
-            registrySelection: this.state.registries.filter(
-              ({ id }) => id === this.props.registry,
-            ),
+            formErrors: {
+              ...this.state.formErrors,
+              registries: {
+                title: t`Error loading registries.`,
+                description: e?.message,
+                variant: 'danger',
+              },
+            },
           });
-        }
-      });
+        });
     }
 
     if (!this.props.isNew) {
@@ -102,7 +129,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     const {
       name,
       description,
-      selectedGroups,
       upstreamName,
       excludeTags,
       includeTags,
@@ -110,6 +136,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       registries,
       addTagsInclude,
       addTagsExclude,
+      formErrors,
     } = this.state;
 
     return (
@@ -125,6 +152,12 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             key='save'
             variant='primary'
             onClick={() => onSave(this.onSave())}
+            isDisabled={
+              (this.state.name.length === 0 ||
+                this.state.upstreamName.length === 0 ||
+                this.state.registrySelection.length === 0) &&
+              isRemote
+            }
           >
             {t`Save`}
           </Button>,
@@ -160,7 +193,12 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             </>
           ) : (
             <>
-              <FormGroup key='name' fieldId='name' label={t`Name`}>
+              <FormGroup
+                isRequired={true}
+                key='name'
+                fieldId='name'
+                label={t`Name`}
+              >
                 <TextInput
                   id='name'
                   value={name}
@@ -173,6 +211,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 key='upstreamName'
                 fieldId='upstreamName'
                 label={t`Upstream name`}
+                isRequired={true}
               >
                 <TextInput
                   id='upstreamName'
@@ -186,24 +225,37 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 fieldId='registry'
                 label={t`Registry`}
                 className='hub-formgroup-registry'
+                isRequired={true}
               >
-                {registries ? (
-                  <APISearchTypeAhead
-                    loadResults={(name) => this.loadRegistries(name)}
-                    onClear={() => this.setState({ registrySelection: [] })}
-                    onSelect={(event, value) =>
-                      this.setState({
-                        registrySelection: registries.filter(
-                          ({ name }) => name === value,
-                        ),
-                      })
-                    }
-                    placeholderText={t`Select a registry`}
-                    results={registries}
-                    selections={registrySelection}
-                  />
+                {!!formErrors?.registries ? (
+                  <Alert
+                    title={formErrors.registries.title}
+                    variant='danger'
+                    isInline
+                  >
+                    {formErrors.registries.description}
+                  </Alert>
                 ) : (
-                  <Spinner />
+                  <>
+                    {registries ? (
+                      <APISearchTypeAhead
+                        loadResults={(name) => this.loadRegistries(name)}
+                        onClear={() => this.setState({ registrySelection: [] })}
+                        onSelect={(event, value) =>
+                          this.setState({
+                            registrySelection: registries.filter(
+                              ({ name }) => name === value,
+                            ),
+                          })
+                        }
+                        placeholderText={t`Select a registry`}
+                        results={registries}
+                        selections={registrySelection}
+                      />
+                    ) : (
+                      <Spinner />
+                    )}
+                  </>
                 )}
               </FormGroup>
 
@@ -328,21 +380,43 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             label={t`Groups with access`}
             className='hub-formgroup-groups'
           >
-            <div className='pf-c-form__helper-text'>
-              {t`Adding groups provides access to all repositories in the
-                "${namespace}" container namespace.`}
-            </div>
-            <ObjectPermissionField
-              groups={this.state.selectedGroups}
-              availablePermissions={Constants.CONTAINER_NAMESPACE_PERMISSIONS}
-              setGroups={(g) => this.setState({ selectedGroups: g })}
-              menuAppendTo='parent'
-              isDisabled={
-                !this.props.permissions.includes(
-                  'container.change_containernamespace',
-                )
-              }
-            ></ObjectPermissionField>
+            {!!formErrors?.groups ? (
+              <Alert title={formErrors.groups.title} variant='danger' isInline>
+                {formErrors.groups.description}
+              </Alert>
+            ) : (
+              <>
+                <div className='pf-c-form__helper-text'>
+                  {t`Adding groups provides access to all repositories in the
+                    "${namespace}" container namespace.`}
+                </div>
+                <ObjectPermissionField
+                  groups={this.state.selectedGroups}
+                  availablePermissions={
+                    Constants.CONTAINER_NAMESPACE_PERMISSIONS
+                  }
+                  setGroups={(g) => this.setState({ selectedGroups: g })}
+                  menuAppendTo='parent'
+                  isDisabled={
+                    !this.props.permissions.includes(
+                      'container.change_containernamespace',
+                    )
+                  }
+                  onError={(err) =>
+                    this.setState({
+                      formErrors: {
+                        ...this.state.formErrors,
+                        groups: {
+                          title: t`Error loading groups.`,
+                          description: err,
+                          variant: 'danger',
+                        },
+                      },
+                    })
+                  }
+                ></ObjectPermissionField>
+              </>
+            )}
           </FormGroup>
         </Form>
       </Modal>
@@ -361,12 +435,25 @@ export class RepositoryForm extends React.Component<IProps, IState> {
 
   private loadSelectedGroups() {
     const { namespace } = this.props;
-    return ExecutionEnvironmentNamespaceAPI.get(namespace).then((result) =>
-      this.setState({
-        selectedGroups: cloneDeep(result.data.groups),
-        originalSelectedGroups: result.data.groups,
-      }),
-    );
+    return ExecutionEnvironmentNamespaceAPI.get(namespace)
+      .then((result) =>
+        this.setState({
+          selectedGroups: cloneDeep(result.data.groups),
+          originalSelectedGroups: result.data.groups,
+        }),
+      )
+      .catch((e) => {
+        this.setState({
+          formErrors: {
+            ...this.state.formErrors,
+            groups: {
+              title: t`Error loading groups.`,
+              description: e?.message,
+              variant: 'danger',
+            },
+          },
+        });
+      });
   }
 
   private addTags(tags, key: 'includeTags' | 'excludeTags') {

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { t, Trans } from '@lingui/macro';
+import './registry-list.scss';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
@@ -184,7 +185,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                   );
 
               promise
-                .then((r) => {
+                .then(() => {
                   this.setState(
                     {
                       remoteToEdit: null,
@@ -289,15 +290,13 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                   />
                 </div>
                 {this.renderTable(params)}
-                <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                  <Pagination
-                    params={params}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryRegistries())
-                    }
-                    count={itemCount}
-                  />
-                </div>
+                <Pagination
+                  params={params}
+                  updateParams={(p) =>
+                    this.updateParams(p, () => this.queryRegistries())
+                  }
+                  count={itemCount}
+                />
               </section>
             )}
           </Main>
@@ -423,7 +422,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           {lastSynced(item)}
         </td>
 
-        <td>
+        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
           <Button variant='secondary' onClick={() => this.syncRegistry(item)}>
             <Trans>Sync from registry</Trans>
           </Button>{' '}
@@ -435,15 +434,23 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     );
   }
 
-  private queryRegistries() {
-    this.setState({ loading: true }, () =>
-      ExecutionEnvironmentRegistryAPI.list(this.state.params).then((result) =>
+  private queryRegistries(noLoading = false) {
+    this.setState(noLoading ? null : { loading: true }, () =>
+      ExecutionEnvironmentRegistryAPI.list(this.state.params).then((result) => {
+        const isAnyRunning = result.data.data.some((task) =>
+          ['running', 'waiting'].includes(task.last_sync_task.state),
+        );
+
+        if (isAnyRunning) {
+          setTimeout(() => this.queryRegistries(true), 5000);
+        }
+
         this.setState({
           items: result.data.data,
           itemCount: result.data.meta.count,
           loading: false,
-        }),
-      ),
+        });
+      }),
     );
   }
 
@@ -480,6 +487,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             </Trans>
           </span>,
         );
+        this.queryRegistries(true);
       })
       .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
   }

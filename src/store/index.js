@@ -4,18 +4,10 @@ import promise from 'redux-promise-middleware';
 let registry;
 
 export function init(...middleware) {
-  if (registry) {
-    throw new Error('store already initialized');
+  if (!registry) {
+    registry = new ReducerRegistry({}, [promise, ...middleware]);
   }
 
-  registry = new ReducerRegistry({}, [promise, ...middleware]);
-
-  //If you want to register all of your reducers, this is good place.
-  /*
-   *  registry.register({
-   *    someName: (state, action) => ({...state})
-   *  });
-   */
   return registry;
 }
 

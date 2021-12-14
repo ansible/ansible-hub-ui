@@ -7,7 +7,7 @@ import {
   LoadingPageWithHeader,
   Main,
   TagLabel,
-  ClipboardCopy,
+  ShaLabel,
 } from '../../components';
 import {
   DataList,
@@ -19,6 +19,10 @@ import {
   FlexItem,
   LabelGroup,
   Title,
+  ClipboardCopyButton,
+  Card,
+  CardBody,
+  CardTitle,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
 import { Paths, formatPath } from '../../paths';
@@ -116,10 +120,16 @@ class ExecutionEnvironmentManifest extends React.Component<
             />
           }
         >
-          <div>
-            <ClipboardCopy className='eco-clipboard-copy' isReadOnly>
-              {digest}
-            </ClipboardCopy>
+          <div className='copy-sha'>
+            <ShaLabel digest={digest} long={true} />
+            <ClipboardCopyButton
+              className='eco-clipboard-copy'
+              variant={'plain'}
+              onClick={() => navigator.clipboard.writeText(digest)}
+              children={digest}
+              id={digest}
+              textId={t`Copy to clipboard`}
+            />
           </div>
 
           <LabelGroup numLabels={6}>
@@ -133,58 +143,59 @@ class ExecutionEnvironmentManifest extends React.Component<
 
         <Main>
           {error ? (
-            <section className='body'>
-              <Trans>
-                Manifest lists are not currently supported on this screen,
-                please use the{' '}
-                <Link
-                  to={formatPath(Paths.executionEnvironmentDetailImages, {
-                    container: container.name,
-                  })}
-                >
-                  Images
-                </Link>{' '}
-                tab to see manifest list details.
-              </Trans>
-            </section>
+            <Trans>
+              Manifest lists are not currently supported on this screen, please
+              use the{' '}
+              <Link
+                to={formatPath(Paths.executionEnvironmentDetailImages, {
+                  container: container.name,
+                })}
+              >
+                Images
+              </Link>{' '}
+              tab to see manifest list details.
+            </Trans>
           ) : (
             <Flex>
               <FlexItem className='layers-max-width'>
-                <section className='body'>
-                  <Title headingLevel='h2' size='lg'>
-                    {t`Image layers`}
-                  </Title>
-
-                  <DataList
-                    aria-label={t`Image layers`}
-                    onSelectDataListItem={(id) =>
-                      this.setState({ selectedLayer: id })
-                    }
-                    selectedDataListItemId={selectedLayer}
-                  >
-                    {layers.map(({ text, size }, index) => (
-                      <DataListItem key={index} id={`layer-${index}`}>
-                        <DataListItemRow>
-                          <DataListItemCells
-                            dataListCells={[
-                              <DataListCell
-                                key='primary content'
-                                className='single-line-ellipsis'
-                              >
-                                <code>{text}</code>
-                              </DataListCell>,
-                              size && (
-                                <DataListCell key='secondary content'>
-                                  {size}
-                                </DataListCell>
-                              ),
-                            ]}
-                          />
-                        </DataListItemRow>
-                      </DataListItem>
-                    ))}
-                  </DataList>
-                </section>
+                <Card>
+                  <CardTitle>
+                    <Title headingLevel='h2' size='lg'>
+                      {t`Image layers`}
+                    </Title>
+                  </CardTitle>
+                  <CardBody>
+                    <DataList
+                      aria-label={t`Image layers`}
+                      onSelectDataListItem={(id) =>
+                        this.setState({ selectedLayer: id })
+                      }
+                      selectedDataListItemId={selectedLayer}
+                    >
+                      {layers.map(({ text, size }, index) => (
+                        <DataListItem key={index} id={`layer-${index}`}>
+                          <DataListItemRow>
+                            <DataListItemCells
+                              dataListCells={[
+                                <DataListCell
+                                  key='primary content'
+                                  className='single-line-ellipsis'
+                                >
+                                  <code>{text}</code>
+                                </DataListCell>,
+                                size && (
+                                  <DataListCell key='secondary content'>
+                                    {size}
+                                  </DataListCell>
+                                ),
+                              ]}
+                            />
+                          </DataListItemRow>
+                        </DataListItem>
+                      ))}
+                    </DataList>
+                  </CardBody>
+                </Card>
               </FlexItem>
 
               <Flex
@@ -192,28 +203,33 @@ class ExecutionEnvironmentManifest extends React.Component<
                 className='layers-max-width'
               >
                 <FlexItem>
-                  <section className='body'>
-                    <Title headingLevel='h2' size='lg'>
-                      {t`Command`}
-                    </Title>
-
-                    <code>{command}</code>
-                  </section>
+                  <Card>
+                    <CardTitle>
+                      <Title headingLevel='h2' size='lg'>
+                        {t`Command`}
+                      </Title>
+                    </CardTitle>
+                    <CardBody>
+                      <code>{command}</code>
+                    </CardBody>
+                  </Card>
                 </FlexItem>
-
                 <FlexItem>
-                  <section className='body'>
-                    <Title headingLevel='h2' size='lg'>
-                      {t`Environment`}
-                    </Title>
-
-                    {environment.map((line, index) => (
-                      <React.Fragment key={index}>
-                        <code>{line}</code>
-                        <br />
-                      </React.Fragment>
-                    ))}
-                  </section>
+                  <Card>
+                    <CardTitle>
+                      <Title headingLevel='h2' size='lg'>
+                        {t`Environment`}
+                      </Title>
+                    </CardTitle>
+                    <CardBody>
+                      {environment.map((line, index) => (
+                        <React.Fragment key={index}>
+                          <code>{line}</code>
+                          <br />
+                        </React.Fragment>
+                      ))}
+                    </CardBody>
+                  </Card>
                 </FlexItem>
               </Flex>
             </Flex>
@@ -246,7 +262,7 @@ class ExecutionEnvironmentManifest extends React.Component<
           size,
         };
       })
-      .catch((err) => {
+      .catch(() => {
         // FIXME: support manifest lists, and have API support it
         return {
           error: true,

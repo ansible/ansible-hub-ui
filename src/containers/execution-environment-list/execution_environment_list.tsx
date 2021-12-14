@@ -180,7 +180,7 @@ class ExecutionEnvironmentList extends React.Component<
         {deleteModalVisible && (
           <DeleteModal
             spinner={isDeletionPending}
-            title={'Permanently delete container'}
+            title={'Permanently delete container?'}
             cancelAction={() =>
               this.setState({ deleteModalVisible: false, selectedItem: null })
             }
@@ -207,6 +207,7 @@ class ExecutionEnvironmentList extends React.Component<
             button={
               <>
                 {addRemoteButton}
+                <div>&nbsp;</div>
                 {pushImagesButton}
               </>
             }
@@ -268,15 +269,14 @@ class ExecutionEnvironmentList extends React.Component<
                   />
                 </div>
                 {this.renderTable(params)}
-                <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-                  <Pagination
-                    params={params}
-                    updateParams={(p) =>
-                      this.updateParams(p, () => this.queryEnvironments())
-                    }
-                    count={itemCount}
-                  />
-                </div>
+
+                <Pagination
+                  params={params}
+                  updateParams={(p) =>
+                    this.updateParams(p, () => this.queryEnvironments())
+                  }
+                  count={itemCount}
+                />
               </section>
             )}
           </Main>
@@ -472,19 +472,26 @@ class ExecutionEnvironmentList extends React.Component<
             itemToEdit: null,
           })
         }
+        addAlert={(variant, title, description) =>
+          this.addAlert(title, variant, description)
+        }
       />
     );
   }
 
   private queryEnvironments() {
     this.setState({ loading: true }, () =>
-      ExecutionEnvironmentAPI.list(this.state.params).then((result) =>
-        this.setState({
-          items: result.data.data,
-          itemCount: result.data.meta.count,
-          loading: false,
-        }),
-      ),
+      ExecutionEnvironmentAPI.list(this.state.params)
+        .then((result) =>
+          this.setState({
+            items: result.data.data,
+            itemCount: result.data.meta.count,
+            loading: false,
+          }),
+        )
+        .catch((e) =>
+          this.addAlert(t`Error loading environments.`, 'danger', e?.message),
+        ),
     );
   }
 

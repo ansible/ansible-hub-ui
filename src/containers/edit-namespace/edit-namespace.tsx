@@ -12,6 +12,7 @@ import {
   AlertType,
   Main,
   EmptyStateUnauthorized,
+  LoadingPageSpinner,
 } from 'src/components';
 import {
   MyNamespaceAPI,
@@ -24,6 +25,7 @@ import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
 
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { ParamHelper, mapErrorMessages } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   namespace: NamespaceType;
@@ -31,6 +33,7 @@ interface IState {
   newLinkURL: string;
   errorMessages: any;
   saving: boolean;
+  loading: boolean;
   redirect: string;
   unsavedData: boolean;
   alerts: AlertType[];
@@ -54,6 +57,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     }
 
     this.state = {
+      loading: false,
       alerts: [],
       namespace: null,
       userId: '',
@@ -69,10 +73,34 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    ActiveUserAPI.getUser().then((result) => {
-      this.setState({ userId: result.account_number }, () =>
-        this.loadNamespace(),
-      );
+    this.setState({ loading: true }, () => {
+      ActiveUserAPI.getUser()
+        .then((result) => {
+          this.setState({ userId: result.account_number }, () =>
+            this.loadNamespace(),
+          );
+        })
+        .catch((e) =>
+          this.setState(
+            {
+              loading: false,
+              redirect: formatPath(Paths.namespaceByRepo, {
+                namespace: this.props.match.params['namespace'],
+                repo: this.context.selectedRepo,
+              }),
+            },
+            () => {
+              this.context.setAlerts([
+                ...this.context.alerts,
+                {
+                  variant: 'danger',
+                  title: t`Error loading active user.`,
+                  description: e?.message,
+                },
+              ]);
+            },
+          ),
+        );
     });
   }
 
@@ -85,6 +113,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       params,
       userId,
       unauthorized,
+      loading,
     } = this.state;
 
     const tabs = [
@@ -92,13 +121,18 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       { id: 'edit-resources', name: t`Edit resources` },
     ];
 
+    if (redirect) {
+      return <Redirect push to={redirect} />;
+    }
+
+    if (loading) {
+      return <LoadingPageSpinner />;
+    }
+
     if (!namespace) {
       return null;
     }
 
-    if (redirect) {
-      return <Redirect push to={redirect} />;
-    }
     return (
       <React.Fragment>
         <PartnerHeader
@@ -187,10 +221,10 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         // on the link edit form for adding new links
         const emptyLink: NamespaceLinkType = { name: '', url: '' };
         response.data.links.push(emptyLink);
-        this.setState({ namespace: response.data });
+        this.setState({ loading: false, namespace: response.data });
       })
-      .catch((response) => {
-        this.setState({ unauthorized: true });
+      .catch(() => {
+        this.setState({ unauthorized: true, loading: false });
       });
   }
 
@@ -210,15 +244,25 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
 
       MyNamespaceAPI.update(this.state.namespace.name, namespace)
         .then((result) => {
-          this.setState({
-            namespace: result.data,
-            errorMessages: {},
-            saving: false,
-            unsavedData: false,
-            redirect: formatPath(Paths.myCollections, {
-              namespace: this.state.namespace.name,
-            }),
-          });
+          this.setState(
+            {
+              namespace: result.data,
+              errorMessages: {},
+              saving: false,
+              unsavedData: false,
+              redirect: formatPath(Paths.myCollections, {
+                namespace: this.state.namespace.name,
+              }),
+            },
+            () =>
+              this.context.setAlerts([
+                ...this.context.alerts,
+                {
+                  variant: 'success',
+                  title: t`Namespace successfully edited.`,
+                },
+              ]),
+          );
         })
         .catch((error) => {
           const result = error.response;
@@ -252,5 +296,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     });
   }
 }
+
+EditNamespace.contextType = AppContext;
 
 export default withRouter(EditNamespace);

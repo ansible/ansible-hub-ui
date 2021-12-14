@@ -8,6 +8,7 @@ declare module '*.gif';
 declare module '*.svg';
 
 // Declare configuration globals here so that TypeScript compiles
+/* eslint-disable no-var */
 declare var API_HOST;
 declare var API_BASE_PATH;
 declare var UI_BASE_PATH;

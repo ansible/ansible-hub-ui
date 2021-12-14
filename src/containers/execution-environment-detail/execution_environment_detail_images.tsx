@@ -44,7 +44,6 @@ import {
   DateComponent,
   ClipboardCopy,
   DeleteModal,
-  LoadingPageWithHeader,
   LoadingPageSpinner,
 } from '../../components';
 
@@ -206,7 +205,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         {deleteModalVisible && (
           <DeleteModal
             spinner={isDeletionPending}
-            title={t`Permanently delete image`}
+            title={t`Permanently delete image?`}
             cancelAction={() =>
               this.setState({
                 deleteModalVisible: false,
@@ -251,7 +250,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           tag={publishToController?.tag}
         />
 
-        <div className='toolbar'>
+        <div className='detail-images-toolbar toolbar'>
           <Toolbar>
             <ToolbarContent>
               <ToolbarGroup>
@@ -331,17 +330,16 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             </tbody>
           </table>
         )}
-        <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
-          <Pagination
-            params={params}
-            updateParams={(p) =>
-              this.updateParams(p, () =>
-                this.queryImages(this.props.match.params['container']),
-              )
-            }
-            count={this.state.numberOfImages}
-          />
-        </div>
+
+        <Pagination
+          params={params}
+          updateParams={(p) =>
+            this.updateParams(p, () =>
+              this.queryImages(this.props.match.params['container']),
+            )
+          }
+          count={this.state.numberOfImages}
+        />
       </section>
     );
   }
@@ -466,7 +464,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             </ClipboardCopy>
           </td>
 
-          <td>
+          <td style={{ paddingRight: '0px', textAlign: 'right' }}>
             {dropdownItems.length && (
               <StatefulDropdown items={dropdownItems}></StatefulDropdown>
             )}
@@ -501,7 +499,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             ],
           }}
           params={{}}
-          updateParams={(p) => null}
+          updateParams={() => null}
         />
         <tbody>
           {image_manifests.map(
@@ -571,7 +569,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             loading: false,
           });
         })
-        .catch((error) => this.setState({ redirect: 'notFound' })),
+        .catch(() => this.setState({ redirect: 'notFound' })),
     );
   }
 

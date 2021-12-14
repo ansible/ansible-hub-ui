@@ -5,7 +5,7 @@ import './collection-detail.scss';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
-import { Alert, TextInputBase } from '@patternfly/react-core';
+import { Alert } from '@patternfly/react-core';
 
 import {
   CollectionHeader,

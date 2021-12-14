@@ -5,7 +5,11 @@ import { Flex, FlexItem } from '@patternfly/react-core';
 import { TrashIcon } from '@patternfly/react-icons';
 
 import { GroupObjectPermissionType, GroupAPI } from 'src/api';
-import { APISearchTypeAhead, PermissionChipSelector } from 'src/components';
+import {
+  AlertType,
+  APISearchTypeAhead,
+  PermissionChipSelector,
+} from 'src/components';
 import { twoWayMapper } from 'src/utilities';
 import { Constants } from 'src/constants';
 
@@ -15,10 +19,12 @@ interface IProps {
   setGroups: (groups: GroupObjectPermissionType[]) => void;
   isDisabled?: boolean;
   menuAppendTo?: 'parent' | 'inline';
+  onError?: (error: string) => void;
 }
 
 interface IState {
   searchGroups: { name: string; id: number | string }[];
+  formAlerts?: AlertType;
 }
 
 export class ObjectPermissionField extends React.Component<IProps, IState> {
@@ -43,13 +49,13 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
           results={this.state.searchGroups}
           loadResults={this.loadGroups}
           onSelect={this.onSelect}
-          placeholderText={t`Find a group`}
+          placeholderText={t`Select a group`}
           menuAppendTo={this.props.menuAppendTo}
           isDisabled={!!this.props.isDisabled}
         />
         <br />
         <div>
-          {groups.map((group, i) => (
+          {groups.map((group) => (
             <Flex
               style={{ marginTop: '16px' }}
               alignItems={{ default: 'alignItemsCenter' }}
@@ -90,6 +96,9 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
     }
 
     this.props.setGroups(newGroups);
+
+    const newSearchGroups = [...this.state.searchGroups, group];
+    this.setState({ searchGroups: newSearchGroups });
   }
 
   private setPermissions(perms, group) {
@@ -103,16 +112,18 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
   }
 
   private loadGroups = (name) => {
-    GroupAPI.list({ name__contains: name }).then((result) => {
-      const added = this.props.groups.map((group) => group.name);
-      const groups = result.data.data.filter(
-        (group) => !added.includes(group.name),
-      );
-      this.setState({ searchGroups: groups });
-    });
+    GroupAPI.list({ name__contains: name })
+      .then((result) => {
+        const added = this.props.groups.map((group) => group.name);
+        const groups = result.data.data.filter(
+          (group) => !added.includes(group.name),
+        );
+        this.setState({ searchGroups: groups });
+      })
+      .catch((e) => this.props.onError(e?.message));
   };
 
-  private onSelect = (event, selection, isPlaceholder) => {
+  private onSelect = (event, selection) => {
     const newGroups = [...this.props.groups];
 
     const addedGroup = this.state.searchGroups.find(

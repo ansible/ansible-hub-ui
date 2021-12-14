@@ -1,19 +1,9 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 
-import { Link } from 'react-router-dom';
-
-import { DropdownItem } from '@patternfly/react-core';
-import {
-  DateComponent,
-  EmptyStateNoData,
-  SortTable,
-  StatefulDropdown,
-  ClipboardCopy,
-} from '..';
+import { DateComponent, EmptyStateNoData, SortTable, ClipboardCopy } from '..';
 import { Constants } from 'src/constants';
 import { getRepoUrl } from 'src/utilities';
-import { Paths, formatPath } from 'src/paths';
 
 interface IProps {
   repositories: {}[];
@@ -71,11 +61,6 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           title: t`CLI configuration`,
           type: 'none',
           id: 'cli_config',
-        },
-        {
-          title: '',
-          type: 'none',
-          id: 'kebab',
         },
       ],
     };
@@ -139,22 +124,6 @@ export class LocalRepositoryTable extends React.Component<IProps> {
             </ClipboardCopy>
           </td>
         )}
-        <td>
-          <span>
-            <StatefulDropdown
-              items={[
-                <DropdownItem
-                  key='2'
-                  component={
-                    <Link to={formatPath(Paths.token, {})} target='_blank'>
-                      {t`Get token`}
-                    </Link>
-                  }
-                />,
-              ]}
-            />
-          </span>
-        </td>
       </tr>
     );
   }

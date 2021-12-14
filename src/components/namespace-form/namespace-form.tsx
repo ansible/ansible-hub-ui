@@ -2,10 +2,20 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './namespace-form.scss';
 
-import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
+import {
+  Form,
+  FormGroup,
+  TextInput,
+  TextArea,
+  Alert,
+} from '@patternfly/react-core';
 import { PlusCircleIcon, TrashIcon } from '@patternfly/react-icons';
 
-import { NamespaceCard, ObjectPermissionField } from 'src/components';
+import {
+  NamespaceCard,
+  ObjectPermissionField,
+  AlertType,
+} from 'src/components';
 import { NamespaceType } from 'src/api';
 
 interface IProps {
@@ -18,6 +28,9 @@ interface IProps {
 
 interface IState {
   newNamespaceGroup: string;
+  formErrors?: {
+    groups?: AlertType;
+  };
 }
 
 export class NamespaceForm extends React.Component<IProps, IState> {
@@ -26,11 +39,16 @@ export class NamespaceForm extends React.Component<IProps, IState> {
 
     this.state = {
       newNamespaceGroup: '',
+      formErrors: {
+        groups: null,
+      },
     };
   }
 
   render() {
-    const { namespace, errorMessages, userId } = this.props;
+    const { namespace, errorMessages } = this.props;
+
+    const { formErrors } = this.state;
 
     if (!namespace) {
       return null;
@@ -83,16 +101,33 @@ export class NamespaceForm extends React.Component<IProps, IState> {
           )}
         >
           <br />
-
-          <ObjectPermissionField
-            groups={namespace.groups}
-            availablePermissions={['change_namespace', 'upload_to_namespace']}
-            setGroups={(g) => {
-              const newNS = { ...namespace };
-              newNS.groups = g;
-              this.props.updateNamespace(newNS);
-            }}
-          ></ObjectPermissionField>
+          {!!formErrors?.groups ? (
+            <Alert title={formErrors.groups.title} variant='danger' isInline>
+              {formErrors.groups.description}
+            </Alert>
+          ) : (
+            <ObjectPermissionField
+              groups={namespace.groups}
+              availablePermissions={['change_namespace', 'upload_to_namespace']}
+              setGroups={(g) => {
+                const newNS = { ...namespace };
+                newNS.groups = g;
+                this.props.updateNamespace(newNS);
+              }}
+              onError={(err) =>
+                this.setState({
+                  formErrors: {
+                    ...this.state.formErrors,
+                    groups: {
+                      title: t`Error loading groups.`,
+                      description: err,
+                      variant: 'danger',
+                    },
+                  },
+                })
+              }
+            ></ObjectPermissionField>
+          )}
         </FormGroup>
 
         <FormGroup
