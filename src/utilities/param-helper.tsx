@@ -31,7 +31,7 @@ export class ParamHelper {
 
   // Replaces specified parameter with speficied value
   static setParam(
-    p: Object,
+    p: object,
     key: string,
     value: number | string | string[] | number[],
   ) {
@@ -42,7 +42,7 @@ export class ParamHelper {
   }
 
   // Appends parameter to existing value
-  static appendParam(p: Object, key: string, value: number | string) {
+  static appendParam(p: object, key: string, value: number | string) {
     const params = cloneDeep(p);
     if (params[key]) {
       if (Array.isArray(params[key])) {
@@ -59,7 +59,7 @@ export class ParamHelper {
 
   // Returns a reduced set of parameters. Useful when not all params should
   // be passed to the API
-  static getReduced(p: Object, keys: string[]) {
+  static getReduced(p: object, keys: string[]) {
     const params = cloneDeep(p);
     for (let k of keys) {
       delete params[k];
@@ -84,7 +84,7 @@ export class ParamHelper {
   }
 
   // Checks to see if a specific key value pair exists
-  static paramExists(params: Object, key: string, value: string | number) {
+  static paramExists(params: object, key: string, value: string | number) {
     const param = params[key];
 
     if (param) {
@@ -99,7 +99,7 @@ export class ParamHelper {
   }
 
   // Returns the query string for the set of parameters
-  static getQueryString(params: Object, ignoreParams?: string[]) {
+  static getQueryString(params: object, ignoreParams?: string[]) {
     let paramString = [];
     for (const key of Object.keys(params)) {
       // skip the param if its in the list of ignored params

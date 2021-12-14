@@ -16,7 +16,7 @@ export class ContainerManifestType {
   config_blob: {
     digest: string;
     media_type: string;
-    data?: Object;
+    data?: unknown;
   };
   tags: string[];
   layers: { digest: string; size: number }[];
