@@ -6,7 +6,6 @@ import {
   ContainerRepositoryType,
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
-  ExecutionEnvironmentType,
 } from 'src/api';
 import { formatPath, Paths } from '../../paths';
 import { Button, DropdownItem } from '@patternfly/react-core';
@@ -22,6 +21,8 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { parsePulpIDFromURL, waitForTask } from 'src/utilities';
+
+import { AppContext } from 'src/loaders/app-context';
 
 import { DeleteExecutionEnviromentModal } from 'src/containers/execution-environment-detail/delete-execution-enviroment-modal';
 
@@ -41,7 +42,10 @@ export interface IDetailSharedProps extends RouteComponentProps {
 
 // A higher order component to wrap individual detail pages
 export function withContainerRepo(WrappedComponent) {
-  return class extends React.Component<RouteComponentProps, IState> {
+  let wrapper_class = class extends React.Component<
+    RouteComponentProps,
+    IState
+  > {
     constructor(props) {
       super(props);
 
@@ -129,19 +133,20 @@ export function withContainerRepo(WrappedComponent) {
         >
           {t`Use in Controller`}
         </DropdownItem>,
-        <DropdownItem
-          key='delete'
-          onClick={() => {
-            this.setState({ showDeleteModal: true });
-          }}
-        >
-          {t`Delete`}
-        </DropdownItem>,
+        this.context.user.model_permissions.delete_containerrepository && (
+          <DropdownItem
+            key='delete'
+            onClick={() => {
+              this.setState({ showDeleteModal: true });
+            }}
+          >
+            {t`Delete`}
+          </DropdownItem>
+        ),
       ].filter((truthy) => truthy);
 
       const { alerts, repo, publishToController, showDeleteModal } = this.state;
-      let selectedItem = new ExecutionEnvironmentType();
-      selectedItem.name = repo.name;
+      let selectedItem = repo.name;
 
       return (
         <React.Fragment>
@@ -159,7 +164,7 @@ export function withContainerRepo(WrappedComponent) {
           {showDeleteModal && (
             <DeleteExecutionEnviromentModal
               selectedItem={selectedItem}
-              cancelAction={() => this.setState({ showDeleteModal: false })}
+              closeAction={() => this.setState({ showDeleteModal: false })}
               afterDelete={() => this.setState({ redirect: 'list' })}
               addAlert={(text, variant, description = undefined) =>
                 this.setState({
@@ -170,7 +175,6 @@ export function withContainerRepo(WrappedComponent) {
               }
             ></DeleteExecutionEnviromentModal>
           )}
-
           <ExecutionEnvironmentHeader
             id={this.props.match.params['container']}
             updateState={(change) => this.setState(change)}
@@ -322,4 +326,7 @@ export function withContainerRepo(WrappedComponent) {
         .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
     }
   };
+
+  wrapper_class.contextType = AppContext;
+  return wrapper_class;
 }

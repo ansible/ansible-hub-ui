@@ -1,21 +1,19 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { ExecutionEnvironmentType, ExecutionEnvironmentAPI } from 'src/api';
+import { ExecutionEnvironmentAPI } from 'src/api';
 import { waitForTask } from 'src/utilities';
-import { AppContext } from 'src/loaders/app-context';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 import { Checkbox } from '@patternfly/react-core';
 
 interface IState {
-  isWaitingForResponse: boolean;
   confirmDelete: boolean;
   isDeletionPending: boolean;
 }
 
 interface IProps {
-  cancelAction: Function;
-  selectedItem: ExecutionEnvironmentType;
+  closeAction: Function;
+  selectedItem: string;
   addAlert: (message, variant, description?) => void;
   afterDelete: Function;
 }
@@ -28,27 +26,25 @@ export class DeleteExecutionEnviromentModal extends React.Component<
     super(props);
 
     this.state = {
-      isWaitingForResponse: false,
       confirmDelete: false,
       isDeletionPending: false,
     };
   }
 
   render() {
-    const { selectedItem, cancelAction } = this.props;
+    const { selectedItem, closeAction } = this.props;
     const { isDeletionPending, confirmDelete } = this.state;
 
     return (
       <DeleteModal
         spinner={isDeletionPending}
         title={'Permanently delete container?'}
-        cancelAction={() => cancelAction()}
+        cancelAction={() => closeAction()}
         deleteAction={() => this.deleteContainer(selectedItem)}
         isDisabled={!confirmDelete || isDeletionPending}
       >
         <Trans>
-          Deleting <b>{this.getName(selectedItem)}</b> and its data will be
-          lost.
+          Deleting <b>{selectedItem}</b> and its data will be lost.
         </Trans>
         <Checkbox
           isChecked={confirmDelete}
@@ -60,14 +56,10 @@ export class DeleteExecutionEnviromentModal extends React.Component<
     );
   }
 
-  getName(selectedItem: ExecutionEnvironmentType) {
-    return !!selectedItem ? selectedItem.name : '';
-  }
-
-  deleteContainer(selectedItem: ExecutionEnvironmentType) {
-    const { addAlert, cancelAction, afterDelete } = this.props;
+  deleteContainer(selectedItem: string) {
+    const { addAlert, closeAction, afterDelete } = this.props;
     this.setState({ isDeletionPending: true }, () =>
-      ExecutionEnvironmentAPI.deleteExecutionEnvironment(selectedItem.name)
+      ExecutionEnvironmentAPI.deleteExecutionEnvironment(selectedItem)
         .then((result) => {
           const taskId = result.data.task.split('tasks/')[1].replace('/', '');
           waitForTask(taskId).then(() => {
@@ -75,12 +67,8 @@ export class DeleteExecutionEnviromentModal extends React.Component<
               confirmDelete: false,
               isDeletionPending: false,
             });
-            cancelAction();
-            addAlert(
-              t`Success: ${this.getName(selectedItem)} was deleted`,
-              'success',
-              null,
-            );
+            closeAction();
+            addAlert(t`Success: ${selectedItem} was deleted`, 'success', null);
             afterDelete();
           });
         })
@@ -90,7 +78,7 @@ export class DeleteExecutionEnviromentModal extends React.Component<
             isDeletionPending: false,
           });
           addAlert(t`Error: delete failed`, 'danger', null);
-          cancelAction();
+          closeAction();
         }),
     );
   }
