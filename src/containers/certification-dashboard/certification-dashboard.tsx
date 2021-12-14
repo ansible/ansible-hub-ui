@@ -127,7 +127,7 @@ class CertificationDashboard extends React.Component<
         ) : (
           <Main className='hub-certification-dashboard'>
             <section className='body'>
-              <div className='toolbar certification-dashboard-toolbar'>
+              <div className='toolbar hub-certification-dashboard-toolbar'>
                 <Toolbar>
                   <ToolbarGroup>
                     <ToolbarItem>
