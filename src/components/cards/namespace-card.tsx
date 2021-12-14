@@ -24,7 +24,7 @@ interface IProps {
   namespaceURL?: string;
 }
 
-export class NamespaceCard extends React.Component<IProps, {}> {
+export class NamespaceCard extends React.Component<IProps> {
   MAX_DESCRIPTION_LENGTH = 26;
   render() {
     const { avatar_url, name, company, namespaceURL } = this.props;

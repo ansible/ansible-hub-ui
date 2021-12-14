@@ -22,7 +22,7 @@ interface IProps {
   filters?: React.ReactNode;
 }
 
-export class PartnerHeader extends React.Component<IProps, {}> {
+export class PartnerHeader extends React.Component<IProps> {
   render() {
     const {
       breadcrumbs,

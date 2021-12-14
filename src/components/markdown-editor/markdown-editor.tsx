@@ -13,7 +13,7 @@ interface IProps {
   editing: boolean;
 }
 
-export class MarkdownEditor extends React.Component<IProps, {}> {
+export class MarkdownEditor extends React.Component<IProps> {
   render() {
     const { text, placeholder, updateText, helperText, editing } = this.props;
 

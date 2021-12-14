@@ -24,7 +24,7 @@ interface LabelPropType {
   text: string;
 }
 
-export class StatusIndicator extends React.Component<IProps, {}> {
+export class StatusIndicator extends React.Component<IProps> {
   static defaultProps = {
     type: 'primary',
   };

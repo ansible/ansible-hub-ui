@@ -19,7 +19,7 @@ export class AlertType {
   description?: string | JSX.Element;
 }
 
-export class AlertList extends React.Component<IProps, {}> {
+export class AlertList extends React.Component<IProps> {
   render() {
     const { alerts, closeAlert } = this.props;
     return (

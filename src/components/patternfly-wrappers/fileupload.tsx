@@ -6,7 +6,7 @@ import {
   FileUploadProps,
 } from '@patternfly/react-core';
 
-export class FileUpload extends React.Component<FileUploadProps, {}> {
+export class FileUpload extends React.Component<FileUploadProps> {
   render() {
     return (
       <PFFileUpload

@@ -14,7 +14,7 @@ interface IProps {
   };
 }
 
-export class NumericLabel extends React.Component<IProps, {}> {
+export class NumericLabel extends React.Component<IProps> {
   render() {
     const { className, number, label, hideNumber, pluralLabels } = this.props;
     let convertedNum: number;

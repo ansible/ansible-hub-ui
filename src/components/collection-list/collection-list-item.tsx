@@ -33,7 +33,7 @@ interface IProps extends CollectionListType {
   repo?: string;
 }
 
-export class CollectionListItem extends React.Component<IProps, {}> {
+export class CollectionListItem extends React.Component<IProps> {
   render() {
     const {
       name,
