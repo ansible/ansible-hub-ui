@@ -458,7 +458,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             </ClipboardCopy>
           </td>
 
-          <td>
+          <td style={{ paddingRight: '0px', textAlign: 'right' }}>
             {dropdownItems.length && (
               <StatefulDropdown items={dropdownItems}></StatefulDropdown>
             )}
