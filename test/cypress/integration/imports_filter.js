@@ -42,7 +42,9 @@ describe('Imports filter test', () => {
     cy.get('.import-list-data').contains('my_collection2');
     cy.get('.import-list-data').contains('different_name');
 
-    cy.wait(6000);
+    // waiting to another query, otherwise sporadic failuers
+    // text completed must be visible in the right container
+    cy.get('.import-console').contains('Completed');
   });
 
   it('Exact search for waiting is working.', () => {
