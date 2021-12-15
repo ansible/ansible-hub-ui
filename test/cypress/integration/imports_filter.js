@@ -29,8 +29,6 @@ describe('Imports filter test', () => {
     cy.get('.import-list-data').contains('my_collection1');
     cy.get('.import-list-data').contains('my_collection2').should('not.exist');
     cy.get('.import-list-data').contains('different_name').should('not.exist');
-
-    cy.wait(6000);
   });
 
   it('Exact search for completed is working.', () => {
@@ -43,6 +41,8 @@ describe('Imports filter test', () => {
     cy.get('.import-list-data').contains('my_collection1');
     cy.get('.import-list-data').contains('my_collection2');
     cy.get('.import-list-data').contains('different_name');
+
+    cy.wait(6000);
   });
 
   it('Exact search for waiting is working.', () => {
