@@ -133,7 +133,7 @@ jobs:
         npm run build-standalone
 
         # save the App.*.js hash for later verification
-        BUILD_HASH=`ls dist/js/App*js | cut -d. -f2`
+        BUILD_HASH=`ls dist/js/App*js | cut -d. -f2,3`
         echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
 
         rm -rf ../pulp_galaxy_ng/static/galaxy_ng/ || true
