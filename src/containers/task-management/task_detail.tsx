@@ -355,9 +355,10 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
         cancelAction={() => this.setState({ cancelModalVisible: false })}
         confirmAction={() => this.cancelTask()}
         title={t`Stop task`}
-        children={t`${name} will stop running.`}
         confirmButtonTitle={t`Yes, stop`}
-      />
+      >
+        {t`${name} will stop running.`}
+      </ConfirmModal>
     );
   }
 

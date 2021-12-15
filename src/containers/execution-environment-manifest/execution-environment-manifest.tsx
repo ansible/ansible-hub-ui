@@ -126,10 +126,11 @@ class ExecutionEnvironmentManifest extends React.Component<
               className='eco-clipboard-copy'
               variant={'plain'}
               onClick={() => navigator.clipboard.writeText(digest)}
-              children={digest}
               id={digest}
               textId={t`Copy to clipboard`}
-            />
+            >
+              {digest}
+            </ClipboardCopyButton>
           </div>
 
           <LabelGroup numLabels={6}>

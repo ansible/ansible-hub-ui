@@ -219,11 +219,12 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
               {!unsafeLinksSupported && (
                 <ClipboardCopyButton
                   variant={'plain'}
-                  children={t`Copy to clipboard`}
                   id={href}
                   textId={t`Copy to clipboard`}
                   onClick={() => navigator.clipboard.writeText(href)}
-                />
+                >
+                  {t`Copy to clipboard`}
+                </ClipboardCopyButton>
               )}
             </ListItem>
           );
