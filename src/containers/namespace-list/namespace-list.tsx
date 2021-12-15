@@ -141,7 +141,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    let extra = [];
+    const extra = [];
 
     if (user?.model_permissions?.add_namespace) {
       extra.push(

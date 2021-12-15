@@ -253,7 +253,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       );
     }
 
-    let sortTableOptions = {
+    const sortTableOptions = {
       headers: [
         {
           title: t`Username`,

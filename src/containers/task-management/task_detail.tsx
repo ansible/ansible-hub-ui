@@ -216,7 +216,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                       <DescriptionListDescription>
                         {childTasks.length
                           ? childTasks.map((childTask) => {
-                              let childTaskId = parsePulpIDFromURL(
+                              const childTaskId = parsePulpIDFromURL(
                                 childTask.pulp_href,
                               );
                               return (
@@ -403,22 +403,22 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadContent() {
-    let taskId = this.props.match.params['task'];
+    const taskId = this.props.match.params['task'];
     if (!this.state.refresh && !this.state.task) {
       this.setState({ refresh: setInterval(() => this.loadContent(), 10000) });
     }
     return TaskManagementAPI.get(taskId)
       .then((result) => {
-        let allRelatedTasks = [];
+        const allRelatedTasks = [];
         let parentTask = null;
-        let childTasks = [];
-        let resources = [];
+        const childTasks = [];
+        const resources = [];
         if (['canceled', 'completed', 'failed'].includes(result.data.state)) {
           clearInterval(this.state.refresh);
           this.setState({ refresh: null });
         }
         if (result.data.parent_task) {
-          let parentTaskId = parsePulpIDFromURL(result.data.parent_task);
+          const parentTaskId = parsePulpIDFromURL(result.data.parent_task);
           allRelatedTasks.push(
             TaskManagementAPI.get(parentTaskId)
               .then((result) => {
@@ -431,7 +431,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
         }
         if (result.data.child_tasks.length) {
           result.data.child_tasks.forEach((child) => {
-            let childTaskId = parsePulpIDFromURL(child);
+            const childTaskId = parsePulpIDFromURL(child);
             allRelatedTasks.push(
               TaskManagementAPI.get(childTaskId)
                 .then((result) => {
@@ -445,10 +445,10 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
         }
         if (result.data.reserved_resources_record.length) {
           result.data.reserved_resources_record.forEach((resource) => {
-            let url = resource.replace('/pulp/api/v3/', '');
-            let id = parsePulpIDFromURL(url);
-            let urlParts = resource.split('/');
-            let type = id ? urlParts[4] : urlParts[urlParts.length - 2];
+            const url = resource.replace('/pulp/api/v3/', '');
+            const id = parsePulpIDFromURL(url);
+            const urlParts = resource.split('/');
+            const type = id ? urlParts[4] : urlParts[urlParts.length - 2];
             if (id) {
               allRelatedTasks.push(
                 GenericPulpAPI.get(url)

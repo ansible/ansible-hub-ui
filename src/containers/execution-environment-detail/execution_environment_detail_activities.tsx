@@ -116,13 +116,13 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
     this.setState({ loading: true }, () => {
       ActivitiesAPI.list(name, this.state.page)
         .then((result) => {
-          let activities = [];
+          const activities = [];
           result.data.data.forEach((activity) => {
             {
               activity.added.forEach((action) => {
                 let activityDescription;
                 if (action.pulp_type === 'container.tag') {
-                  let removed = activity.removed.find((item) => {
+                  const removed = activity.removed.find((item) => {
                     return item.tag_name === action.tag_name;
                   });
                   if (removed) {
@@ -210,7 +210,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
               ),
             });
           } else {
-            let lastActivity = activities[activities.length - 1];
+            const lastActivity = activities[activities.length - 1];
             if (lastActivity) {
               activities.push({
                 created: lastActivity.created,

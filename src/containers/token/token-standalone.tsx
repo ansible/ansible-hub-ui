@@ -34,7 +34,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
   }
   render() {
     const { token, alerts } = this.state;
-    let unauthorised = !this.context.user || this.context.user.is_anonymous;
+    const unauthorised = !this.context.user || this.context.user.is_anonymous;
     const expiration = this.context.settings.GALAXY_TOKEN_EXPIRATION;
     const expirationDate = new Date(Date.now() + 1000 * 60 * expiration);
 

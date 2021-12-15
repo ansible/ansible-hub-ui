@@ -4,7 +4,7 @@ export class API extends PulpAPI {
   apiPath = 'tasks/';
 
   list(params) {
-    let changedParams = { ...params };
+    const changedParams = { ...params };
     if (changedParams['sort']) {
       changedParams['ordering'] = changedParams['sort'];
       delete changedParams['sort'];

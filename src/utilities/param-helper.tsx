@@ -61,7 +61,7 @@ export class ParamHelper {
   // be passed to the API
   static getReduced(p: object, keys: string[]) {
     const params = cloneDeep(p);
-    for (let k of keys) {
+    for (const k of keys) {
       delete params[k];
     }
 
@@ -100,7 +100,8 @@ export class ParamHelper {
 
   // Returns the query string for the set of parameters
   static getQueryString(params: object, ignoreParams?: string[]) {
-    let paramString = [];
+    const paramString = [];
+
     for (const key of Object.keys(params)) {
       // skip the param if its in the list of ignored params
       if (ignoreParams && ignoreParams.includes(key)) {

@@ -202,7 +202,7 @@ export function withContainerRepo(WrappedComponent) {
                 onSave={(promise) => {
                   promise
                     .then((results) => {
-                      let task = results.find((x) => x.data && x.data.task);
+                      const task = results.find((x) => x.data && x.data.task);
                       this.setState({ editing: false, loading: true });
                       if (task) {
                         waitForTask(

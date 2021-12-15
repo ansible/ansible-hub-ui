@@ -38,7 +38,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
 
   private renderTable(repositories) {
     const params = { sort: 'repository' };
-    let sortTableOptions = {
+    const sortTableOptions = {
       headers: [
         {
           title: t`Distribution name`,

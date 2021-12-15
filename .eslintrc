@@ -43,7 +43,6 @@
 
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
-    "prefer-const": "off",
     "react/display-name": "off",
     "react/jsx-key": "off",
     "react/no-unescaped-entities": "off",

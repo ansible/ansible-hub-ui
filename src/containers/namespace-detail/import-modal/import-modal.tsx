@@ -214,7 +214,7 @@ export class ImportModal extends React.Component<IProps, IState> {
           // Upload fails
           if (errors.response.data.errors) {
             const messages = [];
-            for (let err of errors.response.data.errors) {
+            for (const err of errors.response.data.errors) {
               messages.push(
                 err.detail ||
                   err.title ||

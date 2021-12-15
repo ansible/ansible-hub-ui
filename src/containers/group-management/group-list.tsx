@@ -359,7 +359,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       return <EmptyStateFilter />;
     }
 
-    let sortTableOptions = {
+    const sortTableOptions = {
       headers: [
         {
           title: t`Group`,

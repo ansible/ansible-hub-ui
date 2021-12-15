@@ -25,7 +25,7 @@ export function convertContentSummaryCounts(
     },
   };
 
-  for (let c of content) {
+  for (const c of content) {
     if (c.content_type === 'role') {
       summary.contents.role++;
     } else if (c.content_type === 'module') {

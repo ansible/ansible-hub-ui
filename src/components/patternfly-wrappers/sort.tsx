@@ -80,7 +80,7 @@ export class Sort extends React.Component<IProps, IState> {
   }
 
   private setDescending() {
-    let field = this.getSelected(this.props.params);
+    const field = this.getSelected(this.props.params);
     const descending = !this.getIsDescending(this.props.params);
 
     this.props.updateParams(

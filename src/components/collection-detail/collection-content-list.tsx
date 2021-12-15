@@ -35,12 +35,12 @@ export class CollectionContentList extends React.Component<IProps> {
     const { contents, collection, namespace, params, updateParams } =
       this.props;
 
-    let toShow: ContentSummaryType[] = [];
+    const toShow: ContentSummaryType[] = [];
     const summary = { all: 0 };
     const showing = params.showing || 'all';
     const keywords = params.keywords || '';
 
-    for (let c of contents) {
+    for (const c of contents) {
       const typeMatch = showing === 'all' ? true : c.content_type === showing;
       if (!summary[c.content_type]) {
         summary[c.content_type] = 0;

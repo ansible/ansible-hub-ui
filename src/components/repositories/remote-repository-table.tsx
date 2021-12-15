@@ -58,7 +58,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
   private renderTable(remotes) {
     const params = { sort: 'repository' };
-    let sortTableOptions = {
+    const sortTableOptions = {
       headers: [
         {
           title: t`Remote name`,

@@ -274,7 +274,7 @@ class ExecutionEnvironmentList extends React.Component<
       return <EmptyStateFilter />;
     }
 
-    let sortTableOptions = {
+    const sortTableOptions = {
       headers: [
         {
           title: t`Container repository name`,
