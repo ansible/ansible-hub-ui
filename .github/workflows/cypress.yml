@@ -138,13 +138,19 @@ jobs:
         # apply changes, runs collectstatic and serves static assets
         podman exec pulp bash -c "s6-svc -r /var/run/s6/services/pulpcore-api"
 
-    - name: "Finish up and run cypress"
-      working-directory: 'ansible-hub-ui/test'
+    - name: "Reset admin password"
       run: |
         # podman exec pulp pip install django_extensions
         podman exec pulp pulpcore-manager reset-admin-password --password admin
 
+    - name: "Install Cypress & test dependencies"
+      working-directory: 'ansible-hub-ui/test'
+      run: |
         npm install
+
+    - name: "Configure Cypress"
+      working-directory: 'ansible-hub-ui/test'
+      run: |
         echo -e '{
           "prefix": "/api/galaxy/",
           "username": "admin",
@@ -154,9 +160,14 @@ jobs:
           "containers": "localhost:8002"
         }' > cypress.env.json
 
-        # ensure index.html uses the new js
-        curl http://localhost:8002/static/galaxy_ng/index.html | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
+    - name: "Ensure index.html uses the new js"
+      run: |
+        echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
+        curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
 
+    - name: "Run cypress"
+      working-directory: 'ansible-hub-ui/test'
+      run: |
         npm run cypress:chrome
 
     - uses: actions/upload-artifact@v2
