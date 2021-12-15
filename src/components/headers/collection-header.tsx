@@ -158,7 +158,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const { name: collectionName } = collection;
     const company = collection.namespace.company || collection.namespace.name;
 
-    if (redirect) return <Redirect push to={redirect} />;
+    if (redirect) {
+      return <Redirect push to={redirect} />;
+    }
 
     const dropdownItems = [
       noDependencies

@@ -1,5 +1,7 @@
 const waitForTaskToFinish = (task, maxRequests, level = 0) => {
-  if (level === maxRequests) throw `Maximum requests exceeded.`;
+  if (level === maxRequests) {
+    throw `Maximum requests exceeded.`;
+  }
 
   cy.wait(task).then(({ response }) => {
     if (response.body.state !== 'completed') {

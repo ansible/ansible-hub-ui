@@ -39,8 +39,9 @@ class CollectionDetail extends React.Component<
   }
 
   componentDidUpdate(prevProps) {
-    if (!isEqual(prevProps.location, this.props.location))
+    if (!isEqual(prevProps.location, this.props.location)) {
       this.loadCollection(this.context.selectedRepo);
+    }
   }
 
   render() {

@@ -52,13 +52,14 @@ export class CollectionUsedbyDependenciesList extends React.Component<IProps> {
       usedByDependenciesLoading,
     } = this.props;
 
-    if (!itemCount && !filterIsSet(params, ['name__icontains']))
+    if (!itemCount && !filterIsSet(params, ['name__icontains'])) {
       return (
         <EmptyStateNoData
           title={t`Not required for use by other collections`}
           description={t`Collection is not being used by any collection.`}
         />
       );
+    }
 
     return (
       <>

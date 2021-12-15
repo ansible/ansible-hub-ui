@@ -181,7 +181,9 @@ class CollectionDependencies extends React.Component<
 
   private loadUsedByDependencies() {
     this.setState({ usedByDependenciesLoading: true }, () => {
-      if (this.cancelToken) this.cancelToken.cancel('request-canceled');
+      if (this.cancelToken) {
+        this.cancelToken.cancel('request-canceled');
+      }
 
       this.cancelToken = CollectionAPI.getCancelToken();
 
