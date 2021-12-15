@@ -247,7 +247,7 @@ export class Constants {
   ];
 
   static REPOSITORYNAMES = {
-    published: t({ message: `Published` }),
+    published: defineMessage({ message: `Published` }),
     'rh-certified': defineMessage({ message: `Red Hat Certified` }),
     community: defineMessage({ message: `Community` }),
   };
