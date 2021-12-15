@@ -322,7 +322,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     }
     if (isUserMgmtDisabled) {
       Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-        if (filteredPermissions.hasOwnProperty(perm)) {
+        if (perm in filteredPermissions) {
           delete filteredPermissions[perm];
         }
       });

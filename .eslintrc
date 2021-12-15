@@ -43,7 +43,6 @@
 
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
-    "no-prototype-builtins": "off",
     "no-useless-escape": "off",
     "prefer-const": "off",
     "react/display-name": "off",
