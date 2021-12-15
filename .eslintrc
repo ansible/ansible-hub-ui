@@ -42,7 +42,6 @@
     /// Rules we're disabling until they can be fixed, or disabled permanently
 
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/no-var-requires": "off",
     "no-case-declarations": "off",
     "no-extra-boolean-cast": "off",
