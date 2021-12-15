@@ -1,8 +1,9 @@
 const { resolve } = require('path');
 const config = require('@redhat-cloud-services/frontend-components-config');
-const TSOverrides = require('./webpack-ts-overrides');
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const isBuild = process.env.NODE_ENV === 'production';
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
@@ -51,9 +52,16 @@ module.exports = (inputConfigs) => {
     }
   });
 
+  const isStandalone = customConfigs.DEPLOYMENT_MODE !== 'insights';
+
+  // config for HtmlWebpackPlugin
   const htmlPluginConfig = {
-    targetEnv: customConfigs.DEPLOYMENT_MODE,
+    // used by src/index.html
     applicationName: customConfigs.APPLICATION_NAME,
+    targetEnv: customConfigs.DEPLOYMENT_MODE,
+
+    // standalone needs injecting js and css into dist/index.html
+    inject: isStandalone,
   };
 
   // being able to turn off the favicon is useful for deploying to insights mode
@@ -70,12 +78,61 @@ module.exports = (inputConfigs) => {
     https: customConfigs.UI_USE_HTTPS,
     // defines port for dev server
     port: customConfigs.UI_PORT,
+
+    // frontend-components-config 4.5.0+: don't remove patternfly from non-insights builds
+    bundlePfModules: isStandalone,
   });
 
   // Override sections of the webpack config to work with TypeScript
   const newWebpackConfig = {
     ...webpackConfig,
-    ...TSOverrides,
+
+    // override from empty
+    devtool: 'source-map',
+
+    module: {
+      ...webpackConfig.module,
+
+      // override to drop ts-loader
+      rules: [
+        {
+          test: /src\/.*\.(js|jsx|ts|tsx)$/,
+          use: [{ loader: 'source-map-loader' }, { loader: 'babel-loader' }],
+        },
+        {
+          test: /\.(css|scss|sass)$/,
+          use: [
+            isBuild ? MiniCssExtractPlugin.loader : 'style-loader',
+            'css-loader',
+            'sass-loader',
+          ],
+        },
+        {
+          test: /\.(woff(2)?|ttf|jpg|png|eot|gif|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          type: 'asset/resource',
+          generator: { filename: 'fonts/[name][ext][query]' },
+        },
+      ],
+    },
+
+    resolve: {
+      ...webpackConfig.resolve,
+
+      // override to support jsx, drop scss
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+
+      alias: {
+        ...webpackConfig.resolve.alias,
+
+        // imports relative to repo root
+        src: resolve(__dirname, '../src'),
+      },
+    },
+
+    // ignore editor files when watching
+    watchOptions: {
+      ignored: ['**/.*.sw[po]'],
+    },
   };
 
   if (customConfigs.WEBPACK_PROXY) {
