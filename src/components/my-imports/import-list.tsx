@@ -118,7 +118,7 @@ export class ImportList extends React.Component<IProps, IState> {
           }}
         />
 
-        <div className='import-list-data'>
+        <div data-cy='import-list-data'>
           {this.renderList(selectImport, importList, selectedImport, loading)}
         </div>
         <Pagination

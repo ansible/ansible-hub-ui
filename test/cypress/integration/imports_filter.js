@@ -19,16 +19,22 @@ describe('Imports filter test', () => {
 
   it('partial filter for name is working.', () => {
     cy.get('input[aria-label="keywords"').type('my_collection{enter}');
-    cy.get('.import-list-data').contains('my_collection1');
-    cy.get('.import-list-data').contains('my_collection2');
-    cy.get('.import-list-data').contains('different_name').should('not.exist');
+    cy.get('[data-cy="import-list-data"]').contains('my_collection1');
+    cy.get('[data-cy="import-list-data"]').contains('my_collection2');
+    cy.get('[data-cy="import-list-data"]')
+      .contains('different_name')
+      .should('not.exist');
   });
 
   it('exact filter for name is working.', () => {
     cy.get('input[aria-label="keywords"').type('my_collection1{enter}');
-    cy.get('.import-list-data').contains('my_collection1');
-    cy.get('.import-list-data').contains('my_collection2').should('not.exist');
-    cy.get('.import-list-data').contains('different_name').should('not.exist');
+    cy.get('[data-cy="import-list-data"]').contains('my_collection1');
+    cy.get('[data-cy="import-list-data"]')
+      .contains('my_collection2')
+      .should('not.exist');
+    cy.get('[data-cy="import-list-data"]')
+      .contains('different_name')
+      .should('not.exist');
   });
 
   it('Exact search for completed is working.', () => {
@@ -36,15 +42,19 @@ describe('Imports filter test', () => {
     cy.contains('a', 'Status').click();
 
     cy.get('.import-list button').eq(1).click();
-    cy.contains('a', 'Completed').click();
-
-    cy.get('.import-list-data').contains('my_collection1');
-    cy.get('.import-list-data').contains('my_collection2');
-    cy.get('.import-list-data').contains('different_name');
 
     // waiting to another query, otherwise sporadic failuers
-    // text completed must be visible in the right container
-    cy.get('.import-console').contains('Completed');
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+    ).as('wait');
+    cy.contains('a', 'Completed').click();
+
+    cy.get('[data-cy="import-list-data"]').contains('my_collection1');
+    cy.get('[data-cy="import-list-data"]').contains('my_collection2');
+    cy.get('[data-cy="import-list-data"]').contains('different_name');
+
+    cy.wait('@wait');
   });
 
   it('Exact search for waiting is working.', () => {
