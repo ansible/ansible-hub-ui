@@ -49,10 +49,8 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         variant={SelectVariant.typeaheadMulti}
         typeAheadAriaLabel={t`Select permissions`}
         onToggle={this.onToggle}
-        onSelect={!!this.props.onSelect ? this.props.onSelect : this.onSelect}
-        onClear={
-          !!this.props.onClear ? this.props.onClear : this.clearSelection
-        }
+        onSelect={this.props.onSelect ? this.props.onSelect : this.onSelect}
+        onClear={this.props.onClear ? this.props.onClear : this.clearSelection}
         selections={this.props.selectedPermissions}
         isOpen={this.state.isOpen}
         placeholderText={this.placeholderText()}

@@ -167,7 +167,7 @@ class ExecutionEnvironmentList extends React.Component<
 
         {showDeleteModal && (
           <DeleteExecutionEnviromentModal
-            selectedItem={!!selectedItem ? selectedItem.name : ''}
+            selectedItem={selectedItem ? selectedItem.name : ''}
             closeAction={() =>
               this.setState({ showDeleteModal: false, selectedItem: null })
             }

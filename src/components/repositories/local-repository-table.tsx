@@ -112,7 +112,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
         <td>{distribution.repository.name}</td>
         <td>{distribution.repository.content_count}</td>
         {DEPLOYMENT_MODE ===
-        Constants.INSIGHTS_DEPLOYMENT_MODE ? null : !!distribution.repository
+        Constants.INSIGHTS_DEPLOYMENT_MODE ? null : distribution.repository
             .pulp_last_updated ? (
           <td>
             <DateComponent date={distribution.repository.pulp_last_updated} />

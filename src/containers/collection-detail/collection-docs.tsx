@@ -205,7 +205,7 @@ class CollectionDocs extends React.Component<
           {name}
         </a>
       );
-    } else if (!!href) {
+    } else if (href) {
       // TODO: right now this will break if people put
       // ../ at the front of their urls. Need to find a
       // way to document this

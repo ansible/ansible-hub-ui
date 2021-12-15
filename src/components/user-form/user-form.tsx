@@ -161,7 +161,7 @@ export class UserForm extends React.Component<IProps, IState> {
         label={t`Groups`}
         validated={this.toError(!('groups' in errorMessages))}
       >
-        {!!formErrors.groups ? (
+        {formErrors.groups ? (
           <Alert title={formErrors.groups.title} variant='danger' isInline>
             {formErrors.groups.description}
           </Alert>

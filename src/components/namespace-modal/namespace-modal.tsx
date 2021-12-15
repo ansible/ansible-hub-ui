@@ -157,7 +157,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
             fieldId='groups'
             helperTextInvalid={this.state.errorMessages['groups']}
           >
-            {!!formErrors?.groups ? (
+            {formErrors?.groups ? (
               <Alert title={formErrors.groups.title} variant='danger' isInline>
                 {formErrors.groups.description}
               </Alert>

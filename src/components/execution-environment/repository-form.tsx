@@ -227,7 +227,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 className='hub-formgroup-registry'
                 isRequired={true}
               >
-                {!!formErrors?.registries ? (
+                {formErrors?.registries ? (
                   <Alert
                     title={formErrors.registries.title}
                     variant='danger'
@@ -380,7 +380,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             label={t`Groups with access`}
             className='hub-formgroup-groups'
           >
-            {!!formErrors?.groups ? (
+            {formErrors?.groups ? (
               <Alert title={formErrors.groups.title} variant='danger' isInline>
                 {formErrors.groups.description}
               </Alert>

@@ -261,7 +261,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             cancelAction={this.closeModal}
             deleteAction={() =>
               this.setState({ isDeletionPending: true }, () => {
-                !!collectionVersion
+                collectionVersion
                   ? this.deleteCollectionVersion(collectionVersion)
                   : this.deleteCollection();
               })

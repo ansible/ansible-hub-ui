@@ -204,7 +204,7 @@ export function withContainerRepo(WrappedComponent) {
                     .then((results) => {
                       let task = results.find((x) => x.data && x.data.task);
                       this.setState({ editing: false, loading: true });
-                      if (!!task) {
+                      if (task) {
                         waitForTask(
                           task.data.task.split('tasks/')[1].replace('/', ''),
                         ).then(() => {
