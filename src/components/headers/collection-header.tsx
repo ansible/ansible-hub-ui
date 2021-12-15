@@ -427,7 +427,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
                 return (
                   <div className='link' key={link.key}>
-                    <a href={url} target='_blank'>
+                    <a href={url} target='_blank' rel='noreferrer'>
                       {link.name}
                     </a>
                   </div>

@@ -208,7 +208,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
 
           return (
             <ListItem style={{ paddingTop: '8px' }}>
-              <a href={href} target='_blank'>
+              <a href={href} target='_blank' rel='noreferrer'>
                 {host}
               </a>{' '}
               {unsafeLinksSupported && (
@@ -258,7 +258,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
         {t`If the Controller is not listed in the table, check settings.py.`}{' '}
         {docsLink && (
           <>
-            <a href={docsLink} target='_blank'>
+            <a href={docsLink} target='_blank' rel='noreferrer'>
               {t`Learn more`}
             </a>{' '}
             <ExternalLinkAltIcon />

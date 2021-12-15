@@ -102,6 +102,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                 <a
                   href='https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/'
                   target='_blank'
+                  rel='noreferrer'
                 >
                   here
                 </a>
@@ -154,6 +155,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               <a
                 href='https://sso.redhat.com/auth/realms/redhat-external/account/applications'
                 target='_blank'
+                rel='noreferrer'
               >
                 offline API token management
               </a>{' '}

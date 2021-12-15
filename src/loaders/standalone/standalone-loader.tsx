@@ -238,7 +238,12 @@ class App extends React.Component<RouteComponentProps, IState> {
           }}
         >
           {item.url && item.external ? (
-            <a href={item.url} data-cy={item['data-cy']} target='_blank'>
+            <a
+              href={item.url}
+              data-cy={item['data-cy']}
+              target='_blank'
+              rel='noreferrer'
+            >
               {item.name}
               <ExternalLinkAltIcon
                 style={{ position: 'absolute', right: '32px' }}

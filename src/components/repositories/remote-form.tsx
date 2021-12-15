@@ -145,6 +145,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
       <a
         target='_blank'
         href='https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file'
+        rel='noreferrer'
       >
         requirements.yml
       </a>
