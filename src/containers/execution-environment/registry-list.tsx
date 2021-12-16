@@ -234,7 +234,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
               <LoadingPageSpinner />
             ) : (
               <section className='body'>
-                <div className='container-list-toolbar'>
+                <div className='hub-container-list-toolbar'>
                   <Toolbar>
                     <ToolbarContent>
                       <ToolbarGroup>
@@ -341,7 +341,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     };
 
     return (
-      <table className='content-table pf-c-table'>
+      <table className='hub-c-table-content pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}

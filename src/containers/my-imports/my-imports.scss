@@ -1,12 +1,12 @@
 @import '../../global-variables.scss';
 
-.page-container {
+.hub-page-container {
   display: flex;
   .import-list {
     width: 400px;
   }
 
-  .import-console {
+  .hub-import-console {
     flex-grow: 1;
     margin-left: 10px;
   }

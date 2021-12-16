@@ -31,7 +31,7 @@ export class CollectionDependenciesList extends React.Component<IProps> {
       );
 
     return (
-      <List variant={ListVariant.inline} className='dependencies-list'>
+      <List variant={ListVariant.inline} className='hub-c-list-dependencies'>
         {Object.keys(dependencies).map((dependency, i) => (
           <ListItem key={i} style={{ marginRight: '70px' }}>
             <Link

@@ -1,10 +1,10 @@
 @import '../../global-variables.scss';
 
-.truncated {
+.hub-m-truncated {
   max-height: 3rem;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.edit-button {
+.hub-c-button-edit {
   float: right;
 }

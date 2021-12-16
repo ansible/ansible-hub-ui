@@ -80,8 +80,8 @@ export class CollectionContentList extends React.Component<IProps> {
                   key={key}
                   className={cx({
                     clickable: true,
-                    'selected-item': key === showing,
-                    'type-selector': true,
+                    'hub-c-toolbar__item-selected-item': key === showing,
+                    'hub-c-toolbar__item-type-selector': true,
                   })}
                   onClick={() =>
                     updateParams(ParamHelper.setParam(params, 'showing', key))
@@ -93,7 +93,7 @@ export class CollectionContentList extends React.Component<IProps> {
             </ToolbarGroup>
           </Toolbar>
         </div>
-        <table className='content-table pf-c-table pf-m-compact'>
+        <table className='hub-c-table-content pf-c-table pf-m-compact'>
           <thead>
             <tr>
               <th>{t`Name`}</th>

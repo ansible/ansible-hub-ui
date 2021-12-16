@@ -1,4 +1,7 @@
-.group-list-toolbar {
+.hub-group-list-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   .pf-c-toolbar__content {
     padding-left: 0px;
   }

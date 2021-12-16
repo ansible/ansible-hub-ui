@@ -151,7 +151,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         ) : (
           <Main>
             <section className='body'>
-              <div className='group-list-toolbar'>
+              <div className='hub-group-list-toolbar'>
                 <Toolbar>
                   <ToolbarContent>
                     <ToolbarGroup>
@@ -351,7 +351,10 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     };
 
     return (
-      <table aria-label={t`Group list`} className='content-table pf-c-table'>
+      <table
+        aria-label={t`Group list`}
+        className='hub-c-table-content pf-c-table'
+      >
         <SortTable
           options={sortTableOptions}
           params={params}

@@ -16,12 +16,12 @@ class NotFound extends React.Component<RouteComponentProps, {}> {
         <BaseHeader title='404 - Page not found'></BaseHeader>
         <Main>
           <section className='body'>
-            <Bullseye className='bullseye'>
-              <div className='bullseye-center'>
+            <Bullseye className='hub-c-bullseye'>
+              <div className='hub-c-bullseye__center'>
                 <img src={NotFoundImage} alt={t`Not found image`} />
                 <div>{t`We couldn't find the page you're looking for!`}</div>
                 <div className='pf-c-content'>
-                  <span className='four-oh-four'>404</span>
+                  <span className='hub-c-bullseye__404'>404</span>
                 </div>
               </div>
             </Bullseye>
