@@ -7,7 +7,6 @@ import {
   Button,
   DropdownItem,
   Label,
-  Text,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,

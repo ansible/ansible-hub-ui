@@ -4,7 +4,7 @@ import { ExecutionEnvironmentAPI } from 'src/api';
 import { waitForTask } from 'src/utilities';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
-import { Checkbox } from '@patternfly/react-core';
+import { Checkbox, Text } from '@patternfly/react-core';
 
 interface IState {
   confirmDelete: boolean;
@@ -38,14 +38,16 @@ export class DeleteExecutionEnviromentModal extends React.Component<
     return (
       <DeleteModal
         spinner={isDeletionPending}
-        title={'Permanently delete container?'}
+        title={'Delete container?'}
         cancelAction={() => closeAction()}
         deleteAction={() => this.deleteContainer(selectedItem)}
         isDisabled={!confirmDelete || isDeletionPending}
       >
-        <Trans>
-          Deleting <b>{selectedItem}</b> and its data will be lost.
-        </Trans>
+        <Text className='delete-container-modal-message'>
+          <Trans>
+            Deleting <b>{selectedItem}</b> and its data will be lost.
+          </Trans>
+        </Text>
         <Checkbox
           isChecked={confirmDelete}
           onChange={(value) => this.setState({ confirmDelete: value })}
