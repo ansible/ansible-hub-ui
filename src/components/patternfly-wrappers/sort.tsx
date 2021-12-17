@@ -138,7 +138,7 @@ export class Sort extends React.Component<IProps, IState> {
     }
 
     return (
-      <div className='sort-wrapper'>
+      <div className='hub-sort-wrapper'>
         {options.length > 1 ? (
           <Select
             variant={SelectVariant.single}

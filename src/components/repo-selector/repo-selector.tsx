@@ -48,7 +48,7 @@ export class RepoSelector extends React.Component<IProps, IState> {
           <InputGroup>
             <InputGroupText
               variant='plain'
-              className='input-group-text-no-wrap'
+              className='hub-input-group-text-no-wrap'
             >
               {t`Filter by repository`}
             </InputGroupText>

@@ -38,7 +38,7 @@ export class CollectionCard extends React.Component<IProps> {
     const contentSummary = convertContentSummaryCounts(latest_version.metadata);
 
     return (
-      <Card className={cx('collection-card-container', className)}>
+      <Card className={cx('hub-c-card-collection-container ', className)}>
         <CardHeader className='logo-row'>
           <Logo
             alt={t`${company} logo`}

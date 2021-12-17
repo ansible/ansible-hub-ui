@@ -55,7 +55,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
     }
     return (
       <Form>
-        <div className='card-row'>
+        <div className='hub-card-row'>
           <div className='fields'>
             <FormGroup fieldId='name' label={t`Name`} isRequired>
               <TextInput

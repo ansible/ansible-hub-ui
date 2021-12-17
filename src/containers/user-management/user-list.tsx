@@ -142,7 +142,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         ) : (
           <Main>
             <section className='body'>
-              <div className='user-list-toolbar'>
+              <div className='hub-user-list-toolbar'>
                 <Toolbar>
                   <ToolbarContent>
                     <ToolbarGroup>
@@ -296,7 +296,10 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     };
 
     return (
-      <table aria-label={t`User list`} className='content-table pf-c-table'>
+      <table
+        aria-label={t`User list`}
+        className='hub-c-table-content pf-c-table'
+      >
         <SortTable
           options={sortTableOptions}
           params={params}

@@ -168,7 +168,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
           !loading &&
           !unauthorised ? (
             <div className='header-bottom'>
-              <div className='tab-link-container'>
+              <div className='hub-tab-link-container'>
                 <div className='tabs'>
                   <Tabs
                     tabs={tabs}

@@ -133,7 +133,10 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             )
           }
           status={
-            <StatusIndicator className={'task-status'} status={task.state} />
+            <StatusIndicator
+              className={'hub-c-task-status'}
+              status={task.state}
+            />
           }
         />
         <Main>
@@ -334,7 +337,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                       <Title headingLevel='h3'>{t`Description`}</Title>
                       <CodeBlock>{task.error.description}</CodeBlock>
                       <Title headingLevel='h3'>{t`Traceback`}</Title>
-                      <CodeBlock className={'code-block'}>
+                      <CodeBlock className={'hub-code-block'}>
                         {task.error.traceback}
                       </CodeBlock>
                     </React.Fragment>

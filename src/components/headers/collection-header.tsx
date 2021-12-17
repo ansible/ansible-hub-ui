@@ -415,7 +415,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             alerts={this.state.alerts}
             closeAlert={(i) => this.closeAlert(i)}
           />
-          <div className='tab-link-container'>
+          <div className='hub-tab-link-container'>
             <div className='tabs'>{this.renderTabs(activeTab)}</div>
             <div className='links'>
               <div>
