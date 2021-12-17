@@ -139,7 +139,10 @@ export const Routes = () => {
         <Route path={Paths.myCollections} component={ManageNamespace} />
         <Route path={Paths.myCollectionsByRepo} component={ManageNamespace} />
         <Route path={Paths.myNamespaces} component={MyNamespaces} />
-        <Route path={Paths.collectionDocsPageByRepo} component={CollectionDocs} />
+        <Route
+          path={Paths.collectionDocsPageByRepo}
+          component={CollectionDocs}
+        />
         <Route
           path={Paths.collectionDocsIndexByRepo}
           component={CollectionDocs}
@@ -166,8 +169,14 @@ export const Routes = () => {
         <Route path={Paths.collectionDocsPage} component={CollectionDocs} />
         <Route path={Paths.collectionDocsIndex} component={CollectionDocs} />
         <Route path={Paths.collectionContentDocs} component={CollectionDocs} />
-        <Route path={Paths.collectionContentList} component={CollectionContent} />
-        <Route path={Paths.collectionImportLog} component={CollectionImportLog} />
+        <Route
+          path={Paths.collectionContentList}
+          component={CollectionContent}
+        />
+        <Route
+          path={Paths.collectionImportLog}
+          component={CollectionImportLog}
+        />
         <Route path={Paths.myImports} component={MyImports} />
         <Route path={Paths.collection} component={CollectionDetail} />
         <Route path={Paths.namespace} component={PartnerDetail} />
