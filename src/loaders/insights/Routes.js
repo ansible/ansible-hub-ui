@@ -1,6 +1,7 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import { Paths } from 'src/paths';
+import { LoadingPageWithHeader } from 'src/components';
 
 const EditNamespace = lazy(() =>
   import(
@@ -124,10 +125,7 @@ const Repository = lazy(() =>
  */
 export const Routes = () => {
   return (
-    /**
-     * TODO: Add global loader component to the fallback
-     */
-    <Suspense fallback={null}>
+    <Suspense fallback={LoadingPageWithHeader}>
       <Switch>
         <Route path={Paths.repositories} component={Repository} />
         <Route
