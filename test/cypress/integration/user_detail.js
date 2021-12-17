@@ -82,11 +82,15 @@ describe('user detail tests all fields, editing, and deleting', () => {
     // cy.get('.pf-c-alert__title').should('have.text', 'Successfully deleted testUser')
   });
 
-  it('checks a user without edit permissions', () => {
+  it.only('checks a user without edit permissions', () => {
+    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('wait');
     cy.logout();
     cy.login('testUser', 'testUserpassword');
-    cy.visit('/ui/users');
-    cy.contains('testUser').click();
+    cy.visit('/ui/users/?username=testUser');
+    cy.get('a[href*="/ui/users/"]').click();
+
+    cy.wait('@wait');
+
     cy.contains('Edit').should('not.exist');
     cy.contains('Delete').should('not.exist');
   });
