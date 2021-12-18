@@ -24,6 +24,25 @@ jobs:
       run: |
         curl https://raw.githubusercontent.com/ansible/galaxy_ng/master/.ci/scripts/validate_commit_message_custom.py | python
 
+    - name: "parse issue number"
+      if: ${{ failure() }}
+      run: |
+        ISSUE=`gh pr view ${{github.event.number}} | grep AAH- | sed 's/^.*\<AAH-\([0-9]\+\).*$/\1/'`
+        echo "ISSUE=${ISSUE}" >> $GITHUB_ENV
+
+    - name: "commit No-Issue | Fixes + CHANGES"
+      if: ${{ failure() }}
+      run: |
+        if [ -n "$ISSUE" ]; then
+          mkdir -p CHANGES
+          gh pr view ${{github.event.number}} --json title --jq .title > CHANGES/"$ISSUE".misc
+          git add CHANGES
+          git commit -m "Fixes: AAH-$ISSUE"
+        else
+          git commit --allow-empty -m "No-Issue"
+        fi
+        git push
+
   pr-checks:
     runs-on: ubuntu-latest
     steps:
