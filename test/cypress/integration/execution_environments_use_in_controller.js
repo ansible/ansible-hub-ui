@@ -46,13 +46,13 @@ describe('Execution Environments - Use in Controller', () => {
     );
 
     // one row of each type available
-    cy.contains('.content-table .pf-c-label', 'Remote');
-    cy.contains('.content-table .pf-c-label', 'Local');
+    cy.contains('.hub-c-table-content .pf-c-label', 'Remote');
+    cy.contains('.hub-c-table-content .pf-c-label', 'Local');
   });
 
   const list = (type) =>
     cy
-      .contains('.content-table .pf-c-label', type)
+      .contains('.hub-c-table-content .pf-c-label', type)
       .parents('tr')
       .find('button[aria-label="Actions"]')
       .click()
@@ -61,7 +61,7 @@ describe('Execution Environments - Use in Controller', () => {
       .click();
 
   const detail = (type) => {
-    cy.contains('.content-table .pf-c-label', type)
+    cy.contains('.hub-c-table-content .pf-c-label', type)
       .parents('tr')
       .find('td a')
       .click();

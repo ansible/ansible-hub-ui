@@ -125,9 +125,9 @@ class CertificationDashboard extends React.Component<
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : (
-          <Main className='certification-dashboard'>
+          <Main className='hub-certification-dashboard'>
             <section className='body'>
-              <div className='toolbar certification-dashboard-toolbar'>
+              <div className='toolbar hub-certification-dashboard-toolbar'>
                 <Toolbar>
                   <ToolbarGroup>
                     <ToolbarItem>
@@ -274,7 +274,7 @@ class CertificationDashboard extends React.Component<
     return (
       <table
         aria-label={t`Collection versions`}
-        className='content-table pf-c-table'
+        className='hub-c-table-content pf-c-table'
       >
         <SortTable
           options={sortTableOptions}

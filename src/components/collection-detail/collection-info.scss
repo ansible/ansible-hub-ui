@@ -4,14 +4,14 @@
   display: table-cell;
 }
 
-.readme-container {
+.hub-readme-container {
   position: relative;
   max-height: 300px;
   min-height: 50px;
   overflow: hidden;
 }
 
-.fade-out {
+.hub-fade-out {
   position: absolute;
   z-index: 1;
   bottom: 0;
@@ -33,6 +33,6 @@
 .info-panel {
   padding: 8px;
 }
-.collection-download-alert > h4 {
+.hub-collection-download-alert > h4 {
   margin-top: 0px;
 }

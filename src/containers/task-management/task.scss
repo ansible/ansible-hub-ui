@@ -1,4 +1,4 @@
-.task-list {
+.hub-task-list {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,9 +6,9 @@
     padding-left: 0px;
   }
 }
-.task-status {
+.hub-c-task-status {
   margin-left: 10px;
 }
-.code-block {
+.hub-code-block {
   white-space: pre-wrap;
 }

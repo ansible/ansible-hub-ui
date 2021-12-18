@@ -42,7 +42,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
         pageControls={this.props.pageControls}
       >
         {last_sync_task && (
-          <p className='truncated'>
+          <p className='hub-m-truncated'>
             <Trans>
               Last updated from registry {lastSynced({ last_sync_task })}
             </Trans>{' '}
@@ -51,13 +51,13 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
         )}
         <div style={{ height: '10px' }}>&nbsp;</div>
         <Tooltip content={this.props.container.description}>
-          <p data-cy='description' className={'truncated'}>
+          <p data-cy='description' className={'hub-m-truncated'}>
             {this.props.container.description}
           </p>
         </Tooltip>
 
         <span />
-        <div className='tab-link-container'>
+        <div className='hub-tab-link-container'>
           <div className='tabs'>
             <Tabs
               tabs={tabs}

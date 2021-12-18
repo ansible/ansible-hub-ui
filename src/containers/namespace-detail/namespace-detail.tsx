@@ -224,7 +224,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         )}
         {warning ? (
           <Alert
-            className='namespace-warning-alert'
+            className='hub-c-alert-namespace'
             variant='warning'
             title={warning}
             actionClose={
@@ -250,7 +250,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           }
           filters={
             tab.toLowerCase() === 'collections' ? (
-              <div className='toolbar-wrapper namespace-detail'>
+              <div className='hub-toolbar-wrapper namespace-detail'>
                 <div className='toolbar'>
                   <CollectionFilter
                     ignoredParams={ignoredParams}
@@ -258,7 +258,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     updateParams={updateParams}
                   />
 
-                  <div className='pagination-container'>
+                  <div className='hub-pagination-container'>
                     <Pagination
                       params={params}
                       updateParams={updateParams}
@@ -517,10 +517,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       />,
     ].filter(Boolean);
     if (!this.state.showControls) {
-      return <div className='namespace-page-controls'></div>;
+      return <div className='hub-namespace-page-controls'></div>;
     }
     return (
-      <div className='namespace-page-controls' data-cy='kebab-toggle'>
+      <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
         {' '}
         {collections.length !== 0 && (
           <Button onClick={() => this.setState({ showImportModal: true })}>

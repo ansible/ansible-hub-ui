@@ -168,7 +168,7 @@ export class ImportList extends React.Component<IProps, IState> {
               className={cx({
                 clickable: true,
                 'list-container': true,
-                'selected-item':
+                'hub-c-toolbar__item-selected-item':
                   item.type === selectedImport.type &&
                   item.id === selectedImport.id,
               })}

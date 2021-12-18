@@ -310,7 +310,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         {images.length === 0 && filterIsSet(params, ['tag']) ? (
           <EmptyStateFilter />
         ) : (
-          <table aria-label={t`Images`} className='content-table pf-c-table'>
+          <table
+            aria-label={t`Images`}
+            className='hub-c-table-content pf-c-table'
+          >
             <SortTable
               options={sortTableOptions}
               params={params}
@@ -436,7 +439,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             ) : null}
           </td>
           <td>
-            <LabelGroup className={'tags-column'}>
+            <LabelGroup className={'hub-c-label-group-tags-column'}>
               {image.tags
                 .sort()
                 .map((tag) =>
@@ -484,7 +487,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
   renderManifestList({ image_manifests }, ShaLink) {
     return (
-      <table className='content-table pf-c-table'>
+      <table className='hub-c-table-content pf-c-table'>
         <SortTable
           options={{
             headers: [

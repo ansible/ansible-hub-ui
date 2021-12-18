@@ -160,7 +160,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       : t`Search all ${titleLowerCase}`;
 
     return (
-      <div className='namespace-page'>
+      <div className='hub-namespace-page'>
         <NamespaceModal
           isOpen={this.state.isModalOpen}
           toggleModal={this.handleModalToggle}
@@ -175,7 +175,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
         <AlertList alerts={alerts} closeAlert={() => this.closeAlert()} />
         <BaseHeader title={title}>
           {!this.context.user.is_anonymous && (
-            <div className='tab-link-container'>
+            <div className='hub-tab-link-container'>
               <div className='tabs'>
                 <LinkTabs
                   tabs={[

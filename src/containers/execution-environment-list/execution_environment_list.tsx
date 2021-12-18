@@ -221,7 +221,7 @@ class ExecutionEnvironmentList extends React.Component<
               <LoadingPageSpinner />
             ) : (
               <section className='body'>
-                <div className='container-list-toolbar'>
+                <div className='hub-container-list-toolbar'>
                   <Toolbar>
                     <ToolbarContent>
                       <ToolbarGroup>
@@ -330,7 +330,10 @@ class ExecutionEnvironmentList extends React.Component<
     };
 
     return (
-      <table aria-label={t`User list`} className='content-table pf-c-table'>
+      <table
+        aria-label={t`User list`}
+        className='hub-c-table-content pf-c-table'
+      >
         <SortTable
           options={sortTableOptions}
           params={params}

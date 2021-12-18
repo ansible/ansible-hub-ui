@@ -53,7 +53,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
 
     if (loading || apiError) {
       return (
-        <div className='import-console'>
+        <div className='hub-import-console'>
           {selectedImport ? this.renderTitle(selectedImport) : null}
           <div className='loading message-list'>
             {apiError ? <div className='message'>{apiError}</div> : <Spinner />}
@@ -67,7 +67,7 @@ export class ImportConsole extends React.Component<IProps, {}> {
       selectedImport.state === PulpStatus.waiting;
 
     return (
-      <div className='import-console pf-c-content'>
+      <div className='hub-import-console pf-c-content'>
         {this.renderTitle(selectedImport)}
         <div className='message-list'>
           <div
