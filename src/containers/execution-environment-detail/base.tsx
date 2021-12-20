@@ -22,6 +22,10 @@ import {
 } from 'src/components';
 import { parsePulpIDFromURL, waitForTask } from 'src/utilities';
 
+import { AppContext } from 'src/loaders/app-context';
+
+import { DeleteExecutionEnviromentModal } from 'src/containers/execution-environment-detail/delete-execution-enviroment-modal';
+
 interface IState {
   publishToController: { digest?: string; image: string; tag?: string };
   repo: ContainerRepositoryType;
@@ -29,6 +33,7 @@ interface IState {
   redirect: string;
   editing: boolean;
   alerts: AlertType[];
+  showDeleteModal: boolean;
 }
 
 export interface IDetailSharedProps extends RouteComponentProps {
@@ -38,6 +43,7 @@ export interface IDetailSharedProps extends RouteComponentProps {
 // A higher order component to wrap individual detail pages
 export function withContainerRepo(WrappedComponent) {
   return class extends React.Component<RouteComponentProps, IState> {
+    static contextType = AppContext;
     constructor(props) {
       super(props);
 
@@ -48,6 +54,7 @@ export function withContainerRepo(WrappedComponent) {
         redirect: undefined,
         editing: false,
         alerts: [],
+        showDeleteModal: false,
       };
     }
 
@@ -56,6 +63,11 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     render() {
+      if (this.state.redirect === 'list') {
+        return (
+          <Redirect push to={formatPath(Paths.executionEnvironments, {})} />
+        );
+      }
       if (this.state.redirect === 'activity') {
         return (
           <Redirect
@@ -119,9 +131,20 @@ export function withContainerRepo(WrappedComponent) {
         >
           {t`Use in Controller`}
         </DropdownItem>,
+        this.context.user.model_permissions.delete_containerrepository && (
+          <DropdownItem
+            key='delete'
+            onClick={() => {
+              this.setState({ showDeleteModal: true });
+            }}
+          >
+            {t`Delete`}
+          </DropdownItem>
+        ),
       ].filter((truthy) => truthy);
 
-      const { publishToController } = this.state;
+      const { alerts, repo, publishToController, showDeleteModal } = this.state;
+      let selectedItem = repo.name;
 
       return (
         <React.Fragment>
@@ -136,6 +159,20 @@ export function withContainerRepo(WrappedComponent) {
             onClose={() => this.setState({ publishToController: null })}
             tag={publishToController?.tag}
           />
+          {showDeleteModal && (
+            <DeleteExecutionEnviromentModal
+              selectedItem={selectedItem}
+              closeAction={() => this.setState({ showDeleteModal: false })}
+              afterDelete={() => this.setState({ redirect: 'list' })}
+              addAlert={(text, variant, description = undefined) =>
+                this.setState({
+                  alerts: alerts.concat([
+                    { title: text, variant: variant, description: description },
+                  ]),
+                })
+              }
+            ></DeleteExecutionEnviromentModal>
+          )}
           <ExecutionEnvironmentHeader
             id={this.props.match.params['container']}
             updateState={(change) => this.setState(change)}
