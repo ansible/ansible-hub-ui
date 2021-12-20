@@ -18,14 +18,6 @@ jobs:
 
       - name: Run script to validate commits for both pull request and a push
         env:
-          PY_COLORS: '1' 
-          ANSIBLE_FORCE_COLOR: '1' 
-          GITHUB_PULL_REQUEST: ${{ github.event.number }}
-          GITHUB_PULL_REQUEST_BODY: ${{ github.event.pull_request.body }}
-          GITHUB_BRANCH: ${{ github.head_ref }}
-          GITHUB_REPO_SLUG: ${{ github.repository }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_CONTEXT: ${{ github.event.pull_request.commits_url }}
           GITHUB_PR_COMMITS_URL: ${{ github.event.pull_request.commits_url }}
           START_COMMIT: ${{ github.event.before }}
           END_COMMIT: ${{ github.event.after }}
