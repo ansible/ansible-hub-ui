@@ -83,14 +83,11 @@ describe('user detail tests all fields, editing, and deleting', () => {
   });
 
   it.only('checks a user without edit permissions', () => {
-    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('wait');
     cy.logout();
     cy.login('testUser', 'testUserpassword');
     cy.visit('/ui/users/?username=testUser');
     cy.get('a[href*="/ui/users/"]').click();
-
-    cy.wait('@wait');
-
+    cy.contains('User detail');
     cy.contains('Edit').should('not.exist');
     cy.contains('Delete').should('not.exist');
   });
