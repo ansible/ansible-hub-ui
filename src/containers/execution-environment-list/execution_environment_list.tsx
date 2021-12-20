@@ -59,8 +59,6 @@ interface IState {
   unauthorized: boolean;
   showDeleteModal: boolean;
   selectedItem: ExecutionEnvironmentType;
-  confirmDelete: boolean;
-  isDeletionPending: boolean;
   inputText: string;
 }
 
@@ -96,8 +94,6 @@ class ExecutionEnvironmentList extends React.Component<
       unauthorized: false,
       showDeleteModal: false,
       selectedItem: null,
-      confirmDelete: false,
-      isDeletionPending: false,
       inputText: '',
     };
   }
