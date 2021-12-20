@@ -189,7 +189,7 @@ export class ImportList extends React.Component<IProps, IState> {
     return (
       <div>
         <div>
-          <span className='item-name'> {item.name} </span>{' '}
+          <span data-cy='item-name'> {item.name} </span>{' '}
           {item.version ? 'v' + item.version : ''}
         </div>
         <div className='sub-text'>
