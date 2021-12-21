@@ -13,7 +13,9 @@ export class ParamHelper {
 
     paramObj.forEach((val, key) => {
       // do not append empty values at all (this will disable searching by empty strings)
-      if (val.trim().length == 0) return;
+      if (val.trim().length == 0) {
+        return;
+      }
 
       // Parse value as number if it's included in the list of numeric
       // types.
