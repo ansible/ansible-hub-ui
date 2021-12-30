@@ -12,10 +12,10 @@ interface IState {
 }
 
 interface IProps {
-  closeAction: Function;
+  closeAction: () => void;
   selectedItem: string;
   addAlert: (message, variant, description?) => void;
-  afterDelete: Function;
+  afterDelete: () => void;
 }
 
 export class DeleteExecutionEnviromentModal extends React.Component<
