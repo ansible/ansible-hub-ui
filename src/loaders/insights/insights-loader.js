@@ -154,6 +154,9 @@ class App extends Component {
 App.propTypes = {
   history: PropTypes.object,
   basename: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
 };
 
 /**

@@ -201,7 +201,7 @@ class CollectionDocs extends React.Component<
   private renderDocLink(name, href, collection, params) {
     if (!!href && href.startsWith('http')) {
       return (
-        <a href={href} target='_blank'>
+        <a href={href} target='_blank' rel='noreferrer'>
           {name}
         </a>
       );

@@ -315,6 +315,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     <a
                       href='https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#configuring-the-ansible-galaxy-client'
                       target='_blank'
+                      rel='noreferrer'
                     >
                       here
                     </a>

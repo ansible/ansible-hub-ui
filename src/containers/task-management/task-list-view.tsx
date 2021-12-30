@@ -341,10 +341,9 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       <ConfirmModal
         cancelAction={() => this.setState({ cancelModalVisible: false })}
         title={t`Stop task?`}
-        children={t`${name} will be cancelled.`}
         confirmAction={() => this.selectedTask(this.state.selectedTask, name)}
         confirmButtonTitle={t`Yes, stop`}
-      />
+      >{t`${name} will be cancelled.`}</ConfirmModal>
     );
   }
 

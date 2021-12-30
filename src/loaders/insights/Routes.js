@@ -300,3 +300,11 @@ export const Routes = (props) => {
     </Switch>
   );
 };
+
+Routes.propTypes = {
+  childProps: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+  }),
+};
