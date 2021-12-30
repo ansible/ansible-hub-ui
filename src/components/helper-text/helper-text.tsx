@@ -10,7 +10,7 @@ interface IProps {
   header?: React.ReactNode;
 }
 
-export class HelperText extends React.Component<IProps, {}> {
+export class HelperText extends React.Component<IProps> {
   render() {
     return (
       <Popover

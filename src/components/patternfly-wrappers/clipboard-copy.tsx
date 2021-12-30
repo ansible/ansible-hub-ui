@@ -8,7 +8,7 @@ interface IProps {
   [key: string]: any;
 }
 
-export class ClipboardCopy extends React.Component<IProps, {}> {
+export class ClipboardCopy extends React.Component<IProps> {
   render() {
     const { children, ...props } = this.props;
     return (

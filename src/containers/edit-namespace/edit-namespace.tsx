@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
 
 import {
   PartnerHeader,
@@ -21,17 +21,19 @@ import {
   NamespaceLinkType,
 } from 'src/api';
 
-import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
-
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
-import { ParamHelper, mapErrorMessages } from 'src/utilities';
+import {
+  ErrorMessagesType,
+  ParamHelper,
+  mapErrorMessages,
+} from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   namespace: NamespaceType;
   newLinkName: string;
   newLinkURL: string;
-  errorMessages: any;
+  errorMessages: ErrorMessagesType;
   saving: boolean;
   loading: boolean;
   redirect: string;

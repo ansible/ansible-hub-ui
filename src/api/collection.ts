@@ -85,7 +85,7 @@ export class API extends HubAPI {
   }
 
   upload(
-    repositoryPath: String,
+    repositoryPath: string,
     data: CollectionUploadType,
     progressCallback: (e) => void,
     cancelToken?: any,

@@ -13,7 +13,13 @@ import { Constants } from 'src/constants';
 
 interface IProps {
   ignoredParams: string[];
-  params: {};
+  params: {
+    keywords?: string;
+    page?: number;
+    page_size?: number;
+    tags?: string[];
+    view_type?: string;
+  };
   updateParams: (p) => void;
 }
 

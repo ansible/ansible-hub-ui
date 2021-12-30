@@ -9,7 +9,7 @@ import { Bullseye } from '@patternfly/react-core';
 
 import { BaseHeader, Main } from 'src/components';
 
-class NotFound extends React.Component<RouteComponentProps, {}> {
+class NotFound extends React.Component<RouteComponentProps> {
   render() {
     return (
       <React.Fragment>

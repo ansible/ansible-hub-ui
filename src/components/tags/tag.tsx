@@ -8,7 +8,7 @@ interface IProps {
   children: string;
 }
 
-export class Tag extends React.Component<IProps, {}> {
+export class Tag extends React.Component<IProps> {
   render() {
     return (
       <Label className='hub-c-label-tag' readOnly>

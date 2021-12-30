@@ -20,6 +20,7 @@ import {
   lastSynced,
   mapErrorMessages,
   parsePulpIDFromURL,
+  ErrorMessagesType,
 } from 'src/utilities';
 import {
   AlertList,
@@ -53,7 +54,7 @@ interface IState {
     page?: number;
     page_size?: number;
   };
-  remoteFormErrors: Object;
+  remoteFormErrors: ErrorMessagesType;
   remoteFormNew: boolean;
   remoteToEdit?: RemoteType;
   remoteUnmodified?: RemoteType;

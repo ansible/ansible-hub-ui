@@ -1,11 +1,18 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { Modal } from '@patternfly/react-core';
-import { Form, FormGroup } from '@patternfly/react-core';
-import { Button, InputGroup, TextInput, Alert } from '@patternfly/react-core';
-import { NamespaceAPI, GroupObjectPermissionType } from 'src/api';
+import {
+  Alert,
+  Button,
+  Form,
+  FormGroup,
+  InputGroup,
+  Modal,
+  TextInput,
+} from '@patternfly/react-core';
 
+import { NamespaceAPI, GroupObjectPermissionType } from 'src/api';
 import { AlertType, HelperText, ObjectPermissionField } from 'src/components';
+import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   isOpen: boolean;
@@ -17,7 +24,7 @@ interface IState {
   newNamespaceName: string;
   newNamespaceNameValid: boolean;
   newGroups: GroupObjectPermissionType[];
-  errorMessages: any;
+  errorMessages: ErrorMessagesType;
   formErrors: {
     groups: AlertType;
   };

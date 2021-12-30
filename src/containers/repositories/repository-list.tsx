@@ -13,7 +13,11 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
 } from 'src/components';
-import { ParamHelper, mapErrorMessages } from 'src/utilities';
+import {
+  ParamHelper,
+  ErrorMessagesType,
+  mapErrorMessages,
+} from 'src/utilities';
 import { Constants } from 'src/constants';
 import {
   RemoteAPI,
@@ -44,7 +48,7 @@ interface IState {
   itemCount: number;
   loading: boolean;
   showRemoteFormModal: boolean;
-  errorMessages: Object; // RemoteForm modal messages
+  errorMessages: ErrorMessagesType; // RemoteForm modal messages
   unauthorised: boolean;
   content: RemoteType[] | DistributionType[];
   remoteToEdit: RemoteType;

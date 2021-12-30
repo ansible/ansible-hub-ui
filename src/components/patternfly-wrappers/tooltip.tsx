@@ -5,7 +5,7 @@ interface IProps {
   content: string;
 }
 
-export class Tooltip extends React.Component<IProps, {}> {
+export class Tooltip extends React.Component<IProps> {
   render() {
     const { content, children } = this.props;
     return (

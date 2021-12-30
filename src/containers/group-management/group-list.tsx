@@ -10,7 +10,12 @@ import {
 } from 'react-router-dom';
 import { GroupAPI, UserAPI, UserType } from 'src/api';
 import { DeleteGroupModal } from './delete-group-modal';
-import { filterIsSet, mapErrorMessages, ParamHelper } from 'src/utilities';
+import {
+  filterIsSet,
+  mapErrorMessages,
+  ParamHelper,
+  ErrorMessagesType,
+} from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -53,7 +58,7 @@ interface IState {
   deleteModalVisible: boolean;
   editModalVisible: boolean;
   selectedGroup: any;
-  groupError: any;
+  groupError: ErrorMessagesType;
   unauthorized: boolean;
   inputText: string;
 }

@@ -1,7 +1,11 @@
 // Transforms the error message format from the API into an object such that
 // {<backendFieldID>: <errorMessage>}
 
-export function mapErrorMessages(err) {
+export class ErrorMessagesType {
+  [key: string]: string;
+}
+
+export function mapErrorMessages(err): ErrorMessagesType {
   const messages: any = {};
 
   // 500 errors only have err.response.data string

@@ -23,7 +23,7 @@ interface IProps {
   updateNamespace: (data) => void;
 }
 
-export class ResourcesForm extends React.Component<IProps, {}> {
+export class ResourcesForm extends React.Component<IProps> {
   render() {
     const { namespace } = this.props;
 

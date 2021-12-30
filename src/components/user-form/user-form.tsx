@@ -14,9 +14,9 @@ import {
 
 import { AlertType, APISearchTypeAhead, HelperText } from 'src/components';
 import { DataForm } from 'src/components/shared/data-form';
-
 import { UserType, GroupAPI } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
+import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   /** User to edit */
@@ -26,7 +26,7 @@ interface IProps {
   updateUser: (user: UserType, errorMesssages: object) => void;
 
   /** List of errors from the API */
-  errorMessages: object;
+  errorMessages: ErrorMessagesType;
 
   /** Disables the form */
   isReadonly?: boolean;

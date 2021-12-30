@@ -6,7 +6,15 @@ import { Constants } from 'src/constants';
 import { getRepoUrl } from 'src/utilities';
 
 interface IProps {
-  repositories: {}[];
+  repositories: {
+    base_path: string;
+    name: string;
+    repository: {
+      content_count: number;
+      name: string;
+      pulp_last_updated: string;
+    };
+  }[];
   updateParams: (p) => void;
 }
 

@@ -30,7 +30,7 @@ interface IProps {
   collectionVersion?: CollectionVersion;
 }
 
-export class ImportConsole extends React.Component<IProps, {}> {
+export class ImportConsole extends React.Component<IProps> {
   lastImport: any;
   isLoading = false;
 

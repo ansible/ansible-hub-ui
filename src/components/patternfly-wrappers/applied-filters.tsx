@@ -25,7 +25,7 @@ interface IProps {
   className?: string;
 }
 
-export class AppliedFilters extends React.Component<IProps, {}> {
+export class AppliedFilters extends React.Component<IProps> {
   static defaultProps = {
     ignoredParams: [],
     niceNames: {},

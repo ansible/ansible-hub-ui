@@ -16,7 +16,7 @@ interface IProps {
   status?: React.ReactNode;
 }
 
-export class BaseHeader extends React.Component<IProps, {}> {
+export class BaseHeader extends React.Component<IProps> {
   render() {
     const {
       title,

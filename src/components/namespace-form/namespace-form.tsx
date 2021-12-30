@@ -17,10 +17,11 @@ import {
   AlertType,
 } from 'src/components';
 import { NamespaceType } from 'src/api';
+import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   namespace: NamespaceType;
-  errorMessages: any;
+  errorMessages: ErrorMessagesType;
   userId: string;
 
   updateNamespace: (namespace) => void;

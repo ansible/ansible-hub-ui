@@ -1,9 +1,10 @@
 import * as React from 'react';
-
 import { Form, FormGroup, TextInput } from '@patternfly/react-core';
 
+import { ErrorMessagesType } from 'src/utilities';
+
 interface IProps {
-  errorMessages: any; // FIXME: { [key: string]: string }, but all callers use {}, object or any
+  errorMessages: ErrorMessagesType;
   formFields: {
     formGroupLabelIcon?: React.ReactNode;
     id: string;
