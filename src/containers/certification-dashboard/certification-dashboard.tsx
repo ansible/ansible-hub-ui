@@ -236,7 +236,7 @@ class CertificationDashboard extends React.Component<
         />
       );
     }
-    let sortTableOptions = {
+    const sortTableOptions = {
       headers: [
         {
           title: t`Namespace`,

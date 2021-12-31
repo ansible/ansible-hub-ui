@@ -167,7 +167,7 @@ class ExecutionEnvironmentList extends React.Component<
 
         {showDeleteModal && (
           <DeleteExecutionEnviromentModal
-            selectedItem={!!selectedItem ? selectedItem.name : ''}
+            selectedItem={selectedItem ? selectedItem.name : ''}
             closeAction={() =>
               this.setState({ showDeleteModal: false, selectedItem: null })
             }
@@ -274,7 +274,7 @@ class ExecutionEnvironmentList extends React.Component<
       return <EmptyStateFilter />;
     }
 
-    let sortTableOptions = {
+    const sortTableOptions = {
       headers: [
         {
           title: t`Container repository name`,

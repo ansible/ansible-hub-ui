@@ -140,14 +140,14 @@ export class TagManifestModal extends React.Component<IProps, IState> {
         */}
         <Form onSubmit={(e) => e.preventDefault()}>
           <FormGroup
-            validated={!!tagInFormError ? 'error' : 'default'}
+            validated={tagInFormError ? 'error' : 'default'}
             helperTextInvalid={tagInFormError}
             fieldId='add-new-tag'
             label={t`Add new tag`}
           >
             <InputGroup>
               <TextInput
-                validated={!!tagInFormError ? 'error' : 'default'}
+                validated={tagInFormError ? 'error' : 'default'}
                 type='text'
                 id='add-new-tag'
                 value={tagInForm}

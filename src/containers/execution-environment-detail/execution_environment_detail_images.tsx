@@ -373,7 +373,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     );
 
     const url = getContainersURL();
-    let instruction =
+    const instruction =
       image.tags.length === 0
         ? image.digest
         : this.props.match.params['container'] + ':' + image.tags[0];
@@ -587,7 +587,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
         selectedImage.digest,
       )
         .then((result) => {
-          let taskId = result.data.task.split('tasks/')[1].replace('/', '');
+          const taskId = result.data.task.split('tasks/')[1].replace('/', '');
           this.setState({
             selectedImage: null,
           });

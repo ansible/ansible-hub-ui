@@ -96,7 +96,7 @@ class AuthHandler extends React.Component<
     // to check for an active user.
     const { user, settings } = this.context;
     if (!user || !settings) {
-      let promises = [];
+      const promises = [];
       promises.push(
         FeatureFlagsAPI.get().then(({ data }) => {
           // we need this even if ActiveUserAPI fails, otherwise isExternalAuth will always be false, breaking keycloak redirect

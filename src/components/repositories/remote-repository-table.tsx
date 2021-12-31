@@ -58,7 +58,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
   private renderTable(remotes) {
     const params = { sort: 'repository' };
-    let sortTableOptions = {
+    const sortTableOptions = {
       headers: [
         {
           title: t`Remote name`,
@@ -114,7 +114,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
       <tr key={i}>
         <td>{remote.name}</td>
         <td>{remote.repositories.map((r) => r.name).join(', ')}</td>
-        {!!remote.updated_at ? (
+        {remote.updated_at ? (
           <td>
             <DateComponent date={remote.updated_at} />
           </td>

@@ -76,7 +76,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                     return (
                       <tr key={i}>
                         <td>{action.action}</td>
-                        {!!action.created ? (
+                        {action.created ? (
                           <td>
                             <DateComponent date={action.created} />
                           </td>
@@ -116,16 +116,16 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
     this.setState({ loading: true }, () => {
       ActivitiesAPI.list(name, this.state.page)
         .then((result) => {
-          let activities = [];
+          const activities = [];
           result.data.data.forEach((activity) => {
             {
               activity.added.forEach((action) => {
                 let activityDescription;
                 if (action.pulp_type === 'container.tag') {
-                  let removed = activity.removed.find((item) => {
+                  const removed = activity.removed.find((item) => {
                     return item.tag_name === action.tag_name;
                   });
-                  if (!!removed) {
+                  if (removed) {
                     activityDescription = (
                       <React.Fragment>
                         <Trans>
@@ -195,7 +195,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
               });
             }
           });
-          if (!!result.data.links.next) {
+          if (result.data.links.next) {
             this.setState({ page: this.state.page + 1 });
             activities.push({
               created: '',
@@ -210,8 +210,8 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
               ),
             });
           } else {
-            let lastActivity = activities[activities.length - 1];
-            if (!!lastActivity) {
+            const lastActivity = activities[activities.length - 1];
+            if (lastActivity) {
               activities.push({
                 created: lastActivity.created,
                 action: (

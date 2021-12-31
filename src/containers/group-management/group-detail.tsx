@@ -316,13 +316,13 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     } = this.state;
     const { user, featureFlags } = this.context;
     let isUserMgmtDisabled = false;
-    let filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
+    const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
     if (featureFlags) {
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
     if (isUserMgmtDisabled) {
       Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-        if (filteredPermissions.hasOwnProperty(perm)) {
+        if (perm in filteredPermissions) {
           delete filteredPermissions[perm];
         }
       });
@@ -735,7 +735,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       return <EmptyStateFilter />;
     }
 
-    let sortTableOptions = {
+    const sortTableOptions = {
       headers: [
         {
           title: t`Username`,

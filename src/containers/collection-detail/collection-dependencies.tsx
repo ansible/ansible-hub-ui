@@ -108,7 +108,7 @@ class CollectionDependencies extends React.Component<
 
     const dependenciesParams = ParamHelper.getReduced(params, ['version']);
 
-    const noDependencies: boolean = !Object.keys(
+    const noDependencies = !Object.keys(
       collection.latest_version.metadata.dependencies,
     ).length;
 

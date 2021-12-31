@@ -144,7 +144,6 @@ export function withContainerRepo(WrappedComponent) {
       ].filter((truthy) => truthy);
 
       const { alerts, repo, publishToController, showDeleteModal } = this.state;
-      let selectedItem = repo.name;
 
       return (
         <React.Fragment>
@@ -161,7 +160,7 @@ export function withContainerRepo(WrappedComponent) {
           />
           {showDeleteModal && (
             <DeleteExecutionEnviromentModal
-              selectedItem={selectedItem}
+              selectedItem={repo.name}
               closeAction={() => this.setState({ showDeleteModal: false })}
               afterDelete={() => this.setState({ redirect: 'list' })}
               addAlert={(text, variant, description = undefined) =>
@@ -202,9 +201,9 @@ export function withContainerRepo(WrappedComponent) {
                 onSave={(promise) => {
                   promise
                     .then((results) => {
-                      let task = results.find((x) => x.data && x.data.task);
+                      const task = results.find((x) => x.data && x.data.task);
                       this.setState({ editing: false, loading: true });
-                      if (!!task) {
+                      if (task) {
                         waitForTask(
                           task.data.task.split('tasks/')[1].replace('/', ''),
                         ).then(() => {

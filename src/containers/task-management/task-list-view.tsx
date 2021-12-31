@@ -218,7 +218,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     if (items.length === 0) {
       return <EmptyStateFilter />;
     }
-    let sortTableOptions = {
+    const sortTableOptions = {
       headers: [
         {
           title: t`Task name`,
@@ -269,7 +269,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(item: any, index: number) {
     const { name, state, pulp_created, started_at, finished_at, pulp_href } =
       item;
-    let taskId = parsePulpIDFromURL(pulp_href);
+    const taskId = parsePulpIDFromURL(pulp_href);
     return (
       <tr aria-labelledby={name} key={index}>
         <td>

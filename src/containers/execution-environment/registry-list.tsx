@@ -165,7 +165,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             updateRemote={(r: RemoteType) => this.setState({ remoteToEdit: r })}
             saveRemote={() => {
               const { remoteFormNew, remoteToEdit } = this.state;
-              let newRemote = { ...remoteToEdit };
+              const newRemote = { ...remoteToEdit };
 
               if (remoteFormNew) {
                 // prevent "This field may not be blank." when writing in and then deleting username/password/etc
@@ -177,7 +177,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                 });
               }
 
-              let promise = remoteFormNew
+              const promise = remoteFormNew
                 ? ExecutionEnvironmentRegistryAPI.create(newRemote)
                 : ExecutionEnvironmentRegistryAPI.smartUpdate(
                     remoteToEdit.pk,
@@ -315,7 +315,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       return <EmptyStateFilter />;
     }
 
-    let sortTableOptions = {
+    const sortTableOptions = {
       headers: [
         {
           title: t`Name`,

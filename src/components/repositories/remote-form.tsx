@@ -51,7 +51,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
       caCertFilename,
     ] = Array(4).fill('');
 
-    if (!!props.remote) {
+    if (props.remote) {
       requirementsFilename = this.props.remote.requirements_file
         ? 'requirements.yml'
         : '';

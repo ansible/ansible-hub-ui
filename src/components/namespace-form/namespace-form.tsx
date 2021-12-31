@@ -102,7 +102,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
           )}
         >
           <br />
-          {!!formErrors?.groups ? (
+          {formErrors?.groups ? (
             <Alert title={formErrors.groups.title} variant='danger' isInline>
               {formErrors.groups.description}
             </Alert>

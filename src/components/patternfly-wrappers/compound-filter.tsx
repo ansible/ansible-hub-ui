@@ -110,22 +110,6 @@ export class CompoundFilter extends React.Component<IProps, IState> {
   private renderInput(selectedFilter: FilterOption) {
     switch (selectedFilter.inputType) {
       case 'multiple':
-        const options = selectedFilter.options.map((option) => (
-          // patternfly does not allow for us to set a display name aside from the ID
-          // which unfortunately means that multiple select will ignore the human readable
-          // option.title
-          <SelectOption key={option.id} value={option.id} />
-        ));
-
-        const toggle = [
-          <SelectGroup
-            label={t`Filter by ${selectedFilter.id}`}
-            key={selectedFilter.id}
-          >
-            {options}
-          </SelectGroup>,
-        ];
-
         return (
           <Select
             variant={SelectVariant.checkbox}
@@ -136,7 +120,19 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             selections={this.props.params[this.state.selectedFilter.id]}
             isGrouped
           >
-            {toggle}
+            {[
+              <SelectGroup
+                label={t`Filter by ${selectedFilter.id}`}
+                key={selectedFilter.id}
+              >
+                {selectedFilter.options.map((option) => (
+                  // patternfly does not allow for us to set a display name aside from the ID
+                  // which unfortunately means that multiple select will ignore the human readable
+                  // option.title
+                  <SelectOption key={option.id} value={option.id} />
+                ))}
+              </SelectGroup>,
+            ]}
           </Select>
         );
       case 'select':
