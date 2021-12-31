@@ -6,7 +6,7 @@
     "private": true,
     "dependencies": {
         "@ansible/galaxy-doc-builder": "1.0.0-alpha4",
-        "@babel/runtime": "^7.16.3",
+        "@babel/runtime": "^7.16.5",
         "@patternfly/patternfly": "^4.144.5",
         "@patternfly/react-core": "^4.181.1",
         "@patternfly/react-table": "^4.37.8",
