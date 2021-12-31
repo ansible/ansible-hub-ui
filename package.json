@@ -6,8 +6,8 @@
     "private": true,
     "dependencies": {
         "@ansible/galaxy-doc-builder": "1.0.0-alpha4",
-        "@babel/runtime": "^7.16.3",
-        "@patternfly/patternfly": "^4.159.1",
+        "@babel/runtime": "^7.16.5",
+        "@patternfly/patternfly": "^4.164.2",
         "@patternfly/react-core": "^4.175.4",
         "@patternfly/react-table": "^4.44.4",
         "@redhat-cloud-services/frontend-components": "^3.5.1",
@@ -35,8 +35,8 @@
     },
     "devDependencies": {
         "@babel/core": "^7.16.0",
-        "@babel/plugin-proposal-class-properties": "^7.16.0",
-        "@babel/plugin-proposal-object-rest-spread": "^7.16.0",
+        "@babel/plugin-proposal-class-properties": "^7.16.5",
+        "@babel/plugin-proposal-object-rest-spread": "^7.16.5",
         "@babel/plugin-syntax-dynamic-import": "^7.8.3",
         "@babel/plugin-transform-runtime": "^7.16.4",
         "@babel/preset-env": "^7.16.4",
