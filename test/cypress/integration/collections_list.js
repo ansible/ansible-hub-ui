@@ -3,9 +3,17 @@ import { range } from 'lodash';
 describe('Collections list Tests', () => {
   let items = [];
 
+  function deleteData()
+  {
+    cy.deleteCollections('my_namespace');
+    cy.galaxykit('namespace delete my_namespace');
+  }
+
   before(() => {
     cy.login();
+    deleteData();
 
+    cy.galaxykit('namespace create my_namespace');
     // insert test data
     range(21).forEach((i) => {
       let item = { name: 'my_collection' + i };
@@ -13,8 +21,8 @@ describe('Collections list Tests', () => {
       cy.galaxykit('-i collection upload my_namespace my_collection' + i);
     });
 
-    // load items. Because galaxykit does not support delete collection yet,
-    // some data may be present from previous test, so we must load them, we can not expect
+    // load items. Because not all test support cleaning yet,
+    // some other collections may be present from previous test, so we must load them, we can not expect
     // that only our test data are in database.
     cy.intercept(
       'GET',
@@ -26,6 +34,10 @@ describe('Collections list Tests', () => {
     cy.wait('@data').then((res) => {
       items = res.response.body.data;
     });
+  });
+
+  after(() => {
+    deleteData();
   });
 
   beforeEach(() => {
