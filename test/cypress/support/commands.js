@@ -664,7 +664,7 @@ Cypress.Commands.add('deleteContainers', {}, () => {
 Cypress.Commands.add('deleteCollections', {}, (namespace) => {
   range(5).forEach((i) => {
     cy.galaxykit('namespace list-collections ' + namespace).then((json) => {
-      JSON.parse(json).data.forEach( (collection) => {
+      JSON.parse(json).data.forEach((collection) => {
         cy.galaxykit('collection delete', namespace, collection.name);
       });
     });

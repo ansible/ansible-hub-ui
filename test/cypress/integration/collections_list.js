@@ -3,8 +3,7 @@ import { range } from 'lodash';
 describe('Collections list Tests', () => {
   let items = [];
 
-  function deleteData()
-  {
+  function deleteData() {
     cy.deleteCollections('my_namespace');
     cy.galaxykit('namespace delete my_namespace');
   }
