@@ -29,4 +29,4 @@ jobs:
         git add locale/
         if git commit -m "Automated updated of i18n strings on $(date +'%Y-%m-%d')"; then
           git push --set-upstream origin
-        if
+        fi
