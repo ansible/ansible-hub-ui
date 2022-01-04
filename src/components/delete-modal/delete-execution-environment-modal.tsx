@@ -18,7 +18,7 @@ interface IProps {
   afterDelete: () => void;
 }
 
-export class DeleteExecutionEnviromentModal extends React.Component<
+export class DeleteExecutionEnvironmentModal extends React.Component<
   IProps,
   IState
 > {
