@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { ParamHelper } from './utilities/param-helper';
 
-export function formatPath(path: Paths, data: any, params?: object) {
+export function formatPath(path: Paths, data, params?: object) {
   let url = path as string;
 
   for (const k of Object.keys(data)) {

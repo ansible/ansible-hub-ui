@@ -10,7 +10,7 @@ interface IProps {
   onClear: () => void;
 
   /** Component to display when the user is allowed to update this field. */
-  children: any;
+  children: React.ReactNode;
 }
 
 export class WriteOnlyField extends React.Component<IProps> {

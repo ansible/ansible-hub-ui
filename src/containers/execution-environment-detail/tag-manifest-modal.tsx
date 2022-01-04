@@ -254,16 +254,11 @@ export class TagManifestModal extends React.Component<IProps, IState> {
   private saveTags() {
     const { containerManifest } = this.props;
 
-    interface ITagPromises {
-      tag: string;
-      promise: Promise<any>;
-    }
-
-    const promises: ITagPromises[] = [];
-
     this.setState({ isSaving: true }, () => {
       const repository: ContainerRepositoryType =
         this.props.containerRepository;
+
+      const promises = [];
 
       for (const tag of this.state.tagsToRemove) {
         promises.push({

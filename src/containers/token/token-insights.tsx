@@ -42,7 +42,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     // this function will fail if chrome.auth.doOffline() hasn't been called
-    (window as any).insights.chrome.auth
+    window.insights.chrome.auth
       .getOfflineToken()
       .then((result) => {
         this.setState({ tokenData: result.data });
@@ -198,11 +198,10 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadToken() {
-    (window as any).insights.chrome.auth
-      // doOffline causes the page to refresh and will make the data
-      // available to getOfflineToken() when the component mounts after
-      // the reload
-      .doOffline();
+    // doOffline causes the page to refresh and will make the data
+    // available to getOfflineToken() when the component mounts after
+    // the reload
+    window.insights.chrome.auth.doOffline();
   }
 
   private get closeAlert() {

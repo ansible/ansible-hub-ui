@@ -3,9 +3,6 @@ import { BaseAPI } from './base';
 export class HubAPI extends BaseAPI {
   UI_API_VERSION = 'v1';
 
-  apiPath: string;
-  http: any;
-
   constructor() {
     super(API_HOST + API_BASE_PATH);
   }

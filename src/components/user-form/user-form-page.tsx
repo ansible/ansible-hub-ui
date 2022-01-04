@@ -7,7 +7,7 @@ import { ErrorMessagesType } from 'src/utilities';
 interface IProps {
   title: string;
   user: UserType;
-  breadcrumbs: any[];
+  breadcrumbs: { name: string; url?: string }[];
   errorMessages: ErrorMessagesType;
   isReadonly?: boolean;
 

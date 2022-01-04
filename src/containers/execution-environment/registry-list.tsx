@@ -364,7 +364,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     );
   }
 
-  private renderTableRow(item: any, index: number) {
+  private renderTableRow(item, index: number) {
     const dropdownItems = [
       this.context.user.model_permissions.change_containerregistry && (
         <DropdownItem

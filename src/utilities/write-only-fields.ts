@@ -23,7 +23,7 @@ export function isFieldSet(
 // Deletes any write only fields from the object so that they don't
 // get sent to the API
 export function clearSetFieldsFromRequest(
-  data: any,
+  data,
   writeOnlyFields: WriteOnlyFieldType[],
 ): object {
   const newObj = { ...data };

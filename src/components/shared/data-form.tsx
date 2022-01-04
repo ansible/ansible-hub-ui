@@ -15,7 +15,7 @@ interface IProps {
   formPrefix?: React.ReactNode;
   formSuffix?: React.ReactNode;
   isReadonly: boolean;
-  model: any;
+  model: { [key: string]: any };
   requiredFields: string[];
   updateField: (value, event) => void;
   onSave: () => void;

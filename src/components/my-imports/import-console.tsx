@@ -31,7 +31,7 @@ interface IProps {
 }
 
 export class ImportConsole extends React.Component<IProps> {
-  lastImport: any;
+  lastImport: React.RefObject<HTMLDivElement>;
   isLoading = false;
 
   constructor(props) {
@@ -127,7 +127,11 @@ export class ImportConsole extends React.Component<IProps> {
   private renderTitle(selectedImport) {
     const { task, hideCollectionName, collectionVersion } = this.props;
 
-    let collectionHead: any = `${selectedImport.namespace}.${selectedImport.name}`;
+    let collectionHead = (
+      <>
+        {selectedImport.namespace}.{selectedImport.name}
+      </>
+    );
     let approvalStatus = t`waiting for import to finish`;
 
     if (collectionVersion) {

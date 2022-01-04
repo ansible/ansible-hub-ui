@@ -29,8 +29,9 @@ class CollectionDocs extends React.Component<
   RouteComponentProps,
   IBaseCollectionState
 > {
-  docsRef: any;
+  docsRef: React.RefObject<HTMLDivElement>;
   searchBarRef: React.RefObject<HTMLInputElement>;
+
   constructor(props) {
     super(props);
     const params = ParamHelper.parseParamString(props.location.search);

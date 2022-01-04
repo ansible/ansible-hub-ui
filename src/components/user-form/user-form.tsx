@@ -42,7 +42,7 @@ interface IProps {
 
 interface IState {
   passwordConfirm: string;
-  searchGroups: any[];
+  searchGroups: { name: string; id: number }[];
   formErrors: {
     groups: AlertType;
   };

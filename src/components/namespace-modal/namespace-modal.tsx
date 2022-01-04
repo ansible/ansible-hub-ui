@@ -49,7 +49,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
   }
 
   private newNamespaceNameIsValid() {
-    const error: any = this.state.errorMessages;
+    const error = this.state.errorMessages;
     const name: string = this.state.newNamespaceName;
 
     if (name == '') {
@@ -71,7 +71,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
   }
 
   private handleSubmit = () => {
-    const data: any = {
+    const data = {
       name: this.state.newNamespaceName,
       groups: this.state.newGroups,
     };
@@ -87,7 +87,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
       })
       .catch((error) => {
         const result = error.response;
-        const messages: any = this.state.errorMessages;
+        const messages = this.state.errorMessages;
         for (const e of result.data.errors) {
           messages[e.source.parameter] = e.detail;
         }

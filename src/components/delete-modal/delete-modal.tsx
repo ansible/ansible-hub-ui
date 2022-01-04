@@ -4,7 +4,7 @@ import { Button, Modal, Spinner } from '@patternfly/react-core';
 
 export interface IProps {
   cancelAction: () => void;
-  children?: any;
+  children?: React.ReactNode;
   deleteAction: () => void;
   isDisabled?: boolean;
   title: string;

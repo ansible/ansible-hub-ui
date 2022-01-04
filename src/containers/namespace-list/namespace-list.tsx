@@ -295,15 +295,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   private loadNamespaces() {
-    let apiFunc: any;
+    const { filterOwner } = this.props;
+    const api = filterOwner ? MyNamespaceAPI : NamespaceAPI;
 
-    if (this.props.filterOwner) {
-      apiFunc = (p) => MyNamespaceAPI.list(p);
-    } else {
-      apiFunc = (p) => NamespaceAPI.list(p);
-    }
     this.setState({ loading: true }, () => {
-      apiFunc(this.state.params)
+      api
+        .list(this.state.params)
         .then((results) => {
           this.setState({
             namespaces: results.data.data,

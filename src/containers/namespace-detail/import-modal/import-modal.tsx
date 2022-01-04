@@ -35,7 +35,7 @@ interface IState {
 
 export class ImportModal extends React.Component<IProps, IState> {
   acceptedFileTypes = ['application/x-gzip', 'application/gzip'];
-  cancelToken: any;
+  cancelToken: ReturnType<typeof CollectionAPI.getCancelToken>;
   COLLECTION_NAME_REGEX = /[0-9a-z_]+-[0-9a-z_]+-[0-9A-Za-z.+-]+/;
 
   constructor(props) {

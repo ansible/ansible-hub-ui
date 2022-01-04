@@ -326,7 +326,7 @@ class ExecutionEnvironmentList extends React.Component<
     );
   }
 
-  private renderTableRow(item: any, index: number) {
+  private renderTableRow(item, index: number) {
     const description = item.description;
     const dropdownItems = [
       <DropdownItem

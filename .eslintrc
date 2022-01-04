@@ -41,7 +41,6 @@
 
     /// Rules we're disabling until they can be fixed, or disabled permanently
 
-    "@typescript-eslint/no-explicit-any": "off",
     "react/jsx-key": "off",
   },
 }

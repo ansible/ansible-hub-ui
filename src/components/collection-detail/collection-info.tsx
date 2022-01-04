@@ -31,7 +31,7 @@ interface IProps extends CollectionDetailType {
 }
 
 export class CollectionInfo extends React.Component<IProps> {
-  downloadLinkRef: any;
+  downloadLinkRef: React.RefObject<HTMLAnchorElement>;
   static contextType = AppContext;
 
   constructor(props) {

@@ -27,7 +27,6 @@ interface IState {
   distribution_id: string;
   groups: GroupObjectPermissionType[];
   description: string;
-  namespace: any;
 }
 
 class ExecutionEnvironmentDetail extends React.Component<
@@ -45,7 +44,6 @@ class ExecutionEnvironmentDetail extends React.Component<
       distribution_id: '',
       groups: [],
       description: '',
-      namespace: {},
     };
   }
 

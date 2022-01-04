@@ -63,7 +63,7 @@ export class AppliedFilters extends React.Component<IProps> {
 
     return (
       <div style={{ display: 'inline', marginRight: '8px' }} key={key}>
-        <ChipGroup categoryName={(niceNames[key] || key) as any}>
+        <ChipGroup categoryName={niceNames[key] || key}>
           {chips.map((v, i) => (
             <Chip
               key={i}
