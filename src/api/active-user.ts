@@ -11,7 +11,7 @@ class API extends HubAPI {
   getUser(): Promise<any> {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       return new Promise((resolve, reject) => {
-        (window as any).insights.chrome.auth
+        window.insights.chrome.auth
           .getUser()
           // we don't care about entitlements stuff in the UI, so just
           // return the user's identity
@@ -45,10 +45,11 @@ class API extends HubAPI {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       return new Promise((resolve, reject) => {
         reject(
-          'Use window.chrome.insights.auth to get tokens for insights deployments',
+          'Use window.insights.chrome.auth to get tokens for insights deployments',
         );
       });
     }
+
     return this.http.post('v3/auth/token/', {});
   }
 

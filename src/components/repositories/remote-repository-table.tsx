@@ -19,7 +19,7 @@ interface IProps {
 }
 
 export class RemoteRepositoryTable extends React.Component<IProps> {
-  polling: any;
+  polling: ReturnType<typeof setInterval>;
   refreshOnStatuses = [PulpStatus.waiting, PulpStatus.running];
 
   constructor(props) {

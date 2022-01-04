@@ -4,7 +4,7 @@ import { t } from '@lingui/macro';
 
 interface IProps {
   cancelAction: () => void;
-  children?: any;
+  children?: React.ReactNode;
   confirmAction?: () => void;
   isDisabled?: boolean;
   title: string;

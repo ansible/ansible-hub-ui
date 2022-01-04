@@ -266,7 +266,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderTableRow(item: any, index: number) {
+  private renderTableRow(item, index: number) {
     const { name, state, pulp_created, started_at, finished_at, pulp_href } =
       item;
     const taskId = parsePulpIDFromURL(pulp_href);

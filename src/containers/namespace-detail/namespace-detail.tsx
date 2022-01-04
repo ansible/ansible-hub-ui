@@ -244,7 +244,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           contextSelector={
             <RepoSelector
               selectedRepo={this.context.selectedRepo}
-              path={this.props.match.path as any} // Paths.namespaceByRepo or Paths.myCollectionsByRepo
+              path={this.props.match.path as Paths} // Paths.namespaceByRepo or Paths.myCollectionsByRepo
               pathParams={{ namespace: namespace.name }}
             />
           }
@@ -489,7 +489,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               content={
                 <Trans>
                   Cannot delete namespace until <br />
-                  collections' dependencies have <br />
+                  collections&apos; dependencies have <br />
                   been deleted
                 </Trans>
               }

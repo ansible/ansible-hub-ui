@@ -56,7 +56,7 @@ export class API extends HubAPI {
     super();
   }
 
-  list(params?: any, repo?: string) {
+  list(params?, repo?: string) {
     const path = this.apiPath + repo + '/';
     return super.list(params, path).then((response) => ({
       ...response,
@@ -88,7 +88,7 @@ export class API extends HubAPI {
     repositoryPath: string,
     data: CollectionUploadType,
     progressCallback: (e) => void,
-    cancelToken?: any,
+    cancelToken?,
   ) {
     const formData = new FormData();
     formData.append('file', data.file);
@@ -112,10 +112,7 @@ export class API extends HubAPI {
   }
 
   getCancelToken() {
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
-
-    return source;
+    return axios.CancelToken.source();
   }
 
   // Caches the last collection returned from the server. If the requested

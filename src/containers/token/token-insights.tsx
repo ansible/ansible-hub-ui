@@ -42,7 +42,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     // this function will fail if chrome.auth.doOffline() hasn't been called
-    (window as any).insights.chrome.auth
+    window.insights.chrome.auth
       .getOfflineToken()
       .then((result) => {
         this.setState({ tokenData: result.data });
@@ -89,7 +89,8 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                 Certified repository in your private Automation Hub. Users with
                 the correct permissions can use the sync toggles on the{' '}
                 <Link to={Paths.search}>Collections</Link> page to control which
-                collections are added to their organization's sync repository.
+                collections are added to their organization&apos;s sync
+                repository.
               </Trans>
             </p>
           </section>
@@ -174,7 +175,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             <p>
               <Trans>
                 Note: this URL contains all collections in Hub. To connect to
-                your organization's sync repository use the URL found on{' '}
+                your organization&apos;s sync repository use the URL found on{' '}
                 <Link to={Paths.repositories}>Repository Management</Link>.
               </Trans>
             </p>
@@ -197,11 +198,10 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadToken() {
-    (window as any).insights.chrome.auth
-      // doOffline causes the page to refresh and will make the data
-      // available to getOfflineToken() when the component mounts after
-      // the reload
-      .doOffline();
+    // doOffline causes the page to refresh and will make the data
+    // available to getOfflineToken() when the component mounts after
+    // the reload
+    window.insights.chrome.auth.doOffline();
   }
 
   private get closeAlert() {

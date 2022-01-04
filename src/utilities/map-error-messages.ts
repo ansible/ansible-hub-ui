@@ -6,7 +6,7 @@ export class ErrorMessagesType {
 }
 
 export function mapErrorMessages(err): ErrorMessagesType {
-  const messages: any = {};
+  const messages = {};
 
   // 500 errors only have err.response.data string
   if (typeof err.response.data === 'string') {

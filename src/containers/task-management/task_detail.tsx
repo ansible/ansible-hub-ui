@@ -49,7 +49,7 @@ interface IState {
   taskName: string;
   resources: { name: string; type: string }[];
   redirect: string;
-  refresh: any;
+  polling: ReturnType<typeof setInterval>;
 }
 
 class TaskDetail extends React.Component<RouteComponentProps, IState> {
@@ -65,7 +65,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       taskName: '',
       resources: [],
       redirect: null,
-      refresh: null,
+      polling: null,
     };
   }
 
@@ -74,8 +74,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentWillUnmount() {
-    if (this.state.refresh) {
-      clearInterval(this.state.refresh);
+    if (this.state.polling) {
+      clearInterval(this.state.polling);
     }
   }
 
@@ -220,9 +220,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                                 childTask.pulp_href,
                               );
                               return (
-                                <React.Fragment>
+                                <React.Fragment key={childTaskId}>
                                   <Link
-                                    key={childTaskId}
                                     to={formatPath(Paths.taskDetail, {
                                       task: childTaskId,
                                     })}
@@ -403,10 +402,11 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadContent() {
-    const taskId = this.props.match.params['task'];
-    if (!this.state.refresh && !this.state.task) {
-      this.setState({ refresh: setInterval(() => this.loadContent(), 10000) });
+    if (!this.state.polling && !this.state.task) {
+      this.setState({ polling: setInterval(() => this.loadContent(), 10000) });
     }
+
+    const taskId = this.props.match.params['task'];
     return TaskManagementAPI.get(taskId)
       .then((result) => {
         const allRelatedTasks = [];
@@ -414,8 +414,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
         const childTasks = [];
         const resources = [];
         if (['canceled', 'completed', 'failed'].includes(result.data.state)) {
-          clearInterval(this.state.refresh);
-          this.setState({ refresh: null });
+          clearInterval(this.state.polling);
+          this.setState({ polling: null });
         }
         if (result.data.parent_task) {
           const parentTaskId = parsePulpIDFromURL(result.data.parent_task);

@@ -29,7 +29,12 @@ import {
   StatefulDropdown,
   Tabs,
 } from 'src/components';
-import { GroupAPI, UserAPI, UserType } from 'src/api';
+import {
+  GroupAPI,
+  UserAPI,
+  UserType,
+  GroupObjectPermissionType,
+} from 'src/api';
 import { filterIsSet, ParamHelper, twoWayMapper } from 'src/utilities';
 import { formatPath, Paths } from 'src/paths';
 import {
@@ -51,7 +56,7 @@ import { DeleteGroupModal } from './delete-group-modal';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 interface IState {
-  group: any;
+  group: GroupObjectPermissionType;
   params: {
     id: string;
     page?: number;

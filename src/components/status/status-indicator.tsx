@@ -20,7 +20,7 @@ interface IProps {
 
 interface LabelPropType {
   color: string;
-  icon: any;
+  icon: React.ReactElement;
   text: string;
 }
 

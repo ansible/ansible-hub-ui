@@ -1,7 +1,7 @@
 import * as React from 'react';
 import cx from 'classnames';
 
-export class Main extends React.Component<any> {
+export class Main extends React.Component<React.HTMLProps<HTMLElement>> {
   render() {
     const { children, className, ...extra } = this.props;
     return (

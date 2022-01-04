@@ -74,7 +74,7 @@ export class ParamHelper {
   }
 
   // Removes a parameter, or a specific key value pair from a parameter object
-  static deleteParam(p: any, key: string, value?: string | number) {
+  static deleteParam(p, key: string, value?: string | number) {
     const params = cloneDeep(p);
     if (value && Array.isArray(params[key]) && params[key].length > 1) {
       const i = params[key].indexOf(value);

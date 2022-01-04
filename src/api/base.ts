@@ -48,11 +48,11 @@ export class BaseAPI {
     return this.http.get(this.getPath(apiPath) + id + '/');
   }
 
-  update(id: string | number, data: any, apiPath?: string) {
+  update(id: string | number, data, apiPath?: string) {
     return this.http.put(this.getPath(apiPath) + id + '/', data);
   }
 
-  create(data: any, apiPath?: string) {
+  create(data, apiPath?: string) {
     return this.http.post(this.getPath(apiPath), data);
   }
 
@@ -60,7 +60,7 @@ export class BaseAPI {
     return this.http.delete(this.getPath(apiPath) + id + '/');
   }
 
-  patch(id: string | number, data: any, apiPath?: string) {
+  patch(id: string | number, data, apiPath?: string) {
     return this.http.patch(this.getPath(apiPath) + id + '/', data);
   }
 
@@ -73,7 +73,7 @@ export class BaseAPI {
     // authenticated before the request is executed. On most calls it appears
     // to only add ~10ms of latency.
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      await (window as any).insights.chrome.auth.getUser();
+      await window.insights.chrome.auth.getUser();
     }
     if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
       request.headers['X-CSRFToken'] = Cookies.get('csrftoken');

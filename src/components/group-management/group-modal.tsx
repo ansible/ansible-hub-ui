@@ -7,13 +7,14 @@ import {
   Modal,
   TextInput,
 } from '@patternfly/react-core';
+import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   onCancel?: () => void;
   onSave?: (string) => void;
   clearErrors?: () => void;
-  group?: any;
-  errorMessage?: any;
+  group?: { name: string };
+  errorMessage?: ErrorMessagesType;
 }
 
 interface IState {

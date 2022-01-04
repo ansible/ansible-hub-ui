@@ -45,7 +45,8 @@ class CollectionDependencies extends React.Component<
   IState
 > {
   private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
-  private cancelToken = undefined;
+  private cancelToken: ReturnType<typeof CollectionAPI.getCancelToken>;
+
   constructor(props) {
     super(props);
 

@@ -319,14 +319,16 @@ class App extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private menu(): any[] {
+  private menu() {
     const menuItem = (name, options = {}) => ({
+      active: false,
       condition: () => true,
       ...options,
       type: 'item',
       name,
     });
     const menuSection = (name, options = {}, items = []) => ({
+      active: false,
       condition: (...params) =>
         some(items, (item) => item.condition(...params)), // any visible items inside
       ...options,

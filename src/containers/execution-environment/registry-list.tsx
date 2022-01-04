@@ -364,7 +364,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     );
   }
 
-  private renderTableRow(item: any, index: number) {
+  private renderTableRow(item, index: number) {
     const dropdownItems = [
       this.context.user.model_permissions.change_containerregistry && (
         <DropdownItem
@@ -396,6 +396,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         </DropdownItem>
       ),
       <Tooltip
+        key='index'
         content={
           item.is_indexable
             ? t`Find execution environments in this registry`
@@ -403,7 +404,6 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         }
       >
         <DropdownItem
-          key='index'
           onClick={() => this.indexRegistry(item)}
           isDisabled={!item.is_indexable}
         >

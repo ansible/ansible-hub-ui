@@ -44,6 +44,8 @@ export interface IDetailSharedProps extends RouteComponentProps {
 export function withContainerRepo(WrappedComponent) {
   return class extends React.Component<RouteComponentProps, IState> {
     static contextType = AppContext;
+    static displayName = `withContainerRepo(${WrappedComponent.displayName})`;
+
     constructor(props) {
       super(props);
 

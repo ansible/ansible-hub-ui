@@ -40,8 +40,8 @@ interface IState {
 }
 
 class MyImports extends React.Component<RouteComponentProps, IState> {
-  polling: any;
-  topOfPage: any;
+  polling: ReturnType<typeof setInterval>;
+  topOfPage: React.RefObject<HTMLDivElement>;
 
   constructor(props) {
     super(props);

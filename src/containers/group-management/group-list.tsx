@@ -8,7 +8,12 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom';
-import { GroupAPI, UserAPI, UserType } from 'src/api';
+import {
+  GroupAPI,
+  UserAPI,
+  UserType,
+  GroupObjectPermissionType,
+} from 'src/api';
 import { DeleteGroupModal } from './delete-group-modal';
 import {
   filterIsSet,
@@ -51,13 +56,13 @@ interface IState {
   loading: boolean;
   itemCount: number;
   alerts: AlertType[];
-  groups: any[];
+  groups: GroupObjectPermissionType[];
   createModalVisible: boolean;
   deleteModalCount?: number;
   deleteModalUsers?: UserType[];
   deleteModalVisible: boolean;
   editModalVisible: boolean;
-  selectedGroup: any;
+  selectedGroup: GroupObjectPermissionType;
   groupError: ErrorMessagesType;
   unauthorized: boolean;
   inputText: string;
@@ -389,7 +394,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderTableRow(group: any, index: number) {
+  private renderTableRow(group, index: number) {
     const { user } = this.context;
     return (
       <tr aria-labelledby={group.name} key={index}>
