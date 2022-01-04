@@ -1,7 +1,4 @@
 describe('Imports filter test', () => {
-  var adminUsername = Cypress.env('username');
-  var adminPassword = Cypress.env('password');
-
   function deleteTestData() {
     cy.galaxykit('namespace delete filter_test_namespace');
     cy.galaxykit('-i collection delete filter_test_namespace my_collection1');
@@ -10,7 +7,7 @@ describe('Imports filter test', () => {
   }
 
   before(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
 
     deleteTestData();
     // insert test data
@@ -21,7 +18,7 @@ describe('Imports filter test', () => {
   });
 
   beforeEach(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
     cy.visit('/ui/my-imports?namespace=filter_test_namespace');
   });
 
