@@ -219,8 +219,8 @@ export class TagManifestModal extends React.Component<IProps, IState> {
               }
             >
               <Trans>
-                It's safe to close this window. These tasks will finish in the
-                background.
+                It&apos;s safe to close this window. These tasks will finish in
+                the background.
               </Trans>
             </Alert>
           )}

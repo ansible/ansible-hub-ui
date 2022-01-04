@@ -350,9 +350,9 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
             <Spacer />
             <Trans>
               Click on the Controller URL that you want to use the above
-              execution environment in, and it will launch that Controller's
-              console. Log in (if necessary) and follow the steps to complete
-              the configuration.
+              execution environment in, and it will launch that
+              Controller&apos;s console. Log in (if necessary) and follow the
+              steps to complete the configuration.
             </Trans>
             <br />
             {!unsafeLinksSupported && (

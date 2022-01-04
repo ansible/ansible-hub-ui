@@ -489,7 +489,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               content={
                 <Trans>
                   Cannot delete namespace until <br />
-                  collections' dependencies have <br />
+                  collections&apos; dependencies have <br />
                   been deleted
                 </Trans>
               }

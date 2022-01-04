@@ -27,7 +27,7 @@
     NAMESPACE_TERM: "readonly",
   },
   rules: {
-    /// Rules we actually want - some are disabled until a separate PR because they cause many errors
+    /// Rules we actually want
 
     "curly": ["error", "all"],
     "eol-last": ["error", "always"],
@@ -45,6 +45,5 @@
     "@typescript-eslint/no-var-requires": "off",
     "react/display-name": "off",
     "react/jsx-key": "off",
-    "react/no-unescaped-entities": "off",
   },
 }
