@@ -5,25 +5,24 @@ on:
     branches: [ 'master', 'stable-*' ]
 
 jobs:
-
   check_commit:
-
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.after }}  # for PR avoids checking out merge commit
-          fetch-depth: 0  # include all history
 
-      - name: Run script to validate commits for both pull request and a push
-        env:
-          GITHUB_PR_COMMITS_URL: ${{ github.event.pull_request.commits_url }}
-          GITHUB_USER: ${{ github.event.pull_request.user.login }}
-          START_COMMIT: ${{ github.event.before }}
-          END_COMMIT: ${{ github.event.after }}
-        run: |
-          curl https://raw.githubusercontent.com/ansible/galaxy_ng/master/.ci/scripts/validate_commit_message_custom.py | python
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.after }}  # for PR avoids checking out merge commit
+        fetch-depth: 0  # include all history
+
+    - name: Run script to validate commits for both pull request and a push
+      env:
+        GITHUB_PR_COMMITS_URL: ${{ github.event.pull_request.commits_url }}
+        GITHUB_USER: ${{ github.event.pull_request.user.login }}
+        START_COMMIT: ${{ github.event.before }}
+        END_COMMIT: ${{ github.event.after }}
+      run: |
+        curl https://raw.githubusercontent.com/ansible/galaxy_ng/master/.ci/scripts/validate_commit_message_custom.py | python
 
   pr-checks:
     runs-on: ubuntu-latest
