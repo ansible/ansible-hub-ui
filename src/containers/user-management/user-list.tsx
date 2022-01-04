@@ -25,23 +25,23 @@ import { UserPlusIcon } from '@patternfly/react-icons';
 import { UserAPI, UserType } from 'src/api';
 import { ParamHelper, filterIsSet } from 'src/utilities';
 import {
-  StatefulDropdown,
-  CompoundFilter,
-  LoadingPageSpinner,
-  AppliedFilters,
-  Pagination,
-  SortTable,
   AlertList,
-  closeAlertMixin,
   AlertType,
+  AppliedFilters,
   BaseHeader,
-  Main,
+  CompoundFilter,
+  DateComponent,
+  DeleteUserModal,
+  EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
-  EmptyStateFilter,
-  DateComponent,
+  LoadingPageSpinner,
+  Main,
+  Pagination,
+  SortTable,
+  StatefulDropdown,
+  closeAlertMixin,
 } from 'src/components';
-import { DeleteUserModal } from './delete-user-modal';
 
 import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';

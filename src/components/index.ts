@@ -24,6 +24,7 @@ export { DateComponent } from './date-component/date-component';
 export { DeleteExecutionEnvironmentModal } from './delete-modal/delete-execution-environment-modal';
 export { DeleteGroupModal } from './group-management/delete-group-modal';
 export { DeleteModal } from './delete-modal/delete-modal';
+export { DeleteUserModal } from './delete-modal/delete-user-modal';
 export { DeprecatedTag } from './tags/deprecated-tag';
 export { EmptyStateCustom } from './empty-state/empty-state-custom';
 export { EmptyStateFilter } from './empty-state/empty-state-filter';
