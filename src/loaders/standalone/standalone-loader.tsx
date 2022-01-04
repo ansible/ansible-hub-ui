@@ -38,12 +38,12 @@ import {
   SettingsType,
 } from 'src/api';
 import {
+  AboutModalWindow,
   AlertType,
   LoginLink,
   SmallLogo,
   StatefulDropdown,
 } from 'src/components';
-import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
 import Logo from 'src/../static/images/logo_large.svg';
 
