@@ -207,7 +207,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
           )}`;
 
           return (
-            <ListItem style={{ paddingTop: '8px' }}>
+            <ListItem style={{ paddingTop: '8px' }} key={host}>
               <a href={href} target='_blank' rel='noreferrer'>
                 {host}
               </a>{' '}

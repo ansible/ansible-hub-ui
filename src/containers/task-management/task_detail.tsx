@@ -220,9 +220,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                                 childTask.pulp_href,
                               );
                               return (
-                                <React.Fragment>
+                                <React.Fragment key={childTaskId}>
                                   <Link
-                                    key={childTaskId}
                                     to={formatPath(Paths.taskDetail, {
                                       task: childTaskId,
                                     })}

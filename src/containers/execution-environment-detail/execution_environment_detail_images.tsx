@@ -517,7 +517,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               variant,
               features,
             }) => (
-              <tr>
+              <tr key={digest}>
                 <td>
                   <ShaLink digest={digest} />
                 </td>

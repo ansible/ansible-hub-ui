@@ -396,6 +396,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         </DropdownItem>
       ),
       <Tooltip
+        key='index'
         content={
           item.is_indexable
             ? t`Find execution environments in this registry`
@@ -403,7 +404,6 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         }
       >
         <DropdownItem
-          key='index'
           onClick={() => this.indexRegistry(item)}
           isDisabled={!item.is_indexable}
         >
