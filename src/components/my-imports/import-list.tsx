@@ -103,6 +103,7 @@ export class ImportList extends React.Component<IProps, IState> {
             ]}
           />
         </Toolbar>
+
         <AppliedFilters
           updateParams={(p) => {
             p['page'] = 1;
@@ -117,7 +118,7 @@ export class ImportList extends React.Component<IProps, IState> {
           }}
         />
 
-        <div>
+        <div data-cy='import-list-data'>
           {this.renderList(selectImport, importList, selectedImport, loading)}
         </div>
         <Pagination
@@ -188,7 +189,8 @@ export class ImportList extends React.Component<IProps, IState> {
     return (
       <div>
         <div>
-          {item.name} {item.version ? 'v' + item.version : ''}
+          <span data-cy='item-name'>{item.name}</span>{' '}
+          {item.version ? 'v' + item.version : ''}
         </div>
         <div className='sub-text'>
           Status: {item.state}{' '}
