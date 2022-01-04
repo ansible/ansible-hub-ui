@@ -25,6 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import shell from 'shell-escape-tag';
+import { range } from 'lodash';
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
@@ -656,6 +657,16 @@ Cypress.Commands.add('deleteContainers', {}, () => {
       cy.contains('button', 'Delete').click();
       cy.wait('@listLoad', { timeout: 50000 });
       cy.get('.pf-c-alert__action').click();
+    });
+  });
+});
+
+Cypress.Commands.add('deleteCollections', {}, (namespace) => {
+  range(5).forEach(() => {
+    cy.galaxykit('namespace list-collections ' + namespace).then((json) => {
+      JSON.parse(json).data.forEach((collection) => {
+        cy.galaxykit('collection delete', namespace, collection.name);
+      });
     });
   });
 });
