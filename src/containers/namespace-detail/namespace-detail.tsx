@@ -30,8 +30,9 @@ import {
 } from 'src/api';
 
 import {
-  CollectionList,
   CollectionFilter,
+  CollectionList,
+  ImportModal,
   LoadingPageWithHeader,
   Main,
   Pagination,
@@ -45,8 +46,6 @@ import {
   DeleteModal,
   AlertType,
 } from 'src/components';
-
-import { ImportModal } from './import-modal/import-modal';
 
 import { ParamHelper, getRepoUrl, filterIsSet } from 'src/utilities';
 import { Constants } from 'src/constants';
