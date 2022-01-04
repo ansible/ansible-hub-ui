@@ -33,6 +33,9 @@ jobs:
     - name: "commit No-Issue | Fixes + CHANGES"
       if: ${{ failure() }}
       run: |
+        git config --global user.name 'GitHub Actions: PR checks workflow'
+        git config --global user.email 'ansible-hub-ui+pr-checks@example.com'
+
         if [ -n "$ISSUE" ]; then
           mkdir -p CHANGES
           gh pr view ${{github.event.number}} --json title --jq .title > CHANGES/"$ISSUE".misc

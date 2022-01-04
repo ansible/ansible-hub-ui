@@ -30,8 +30,9 @@ jobs:
 
     - name: "Update the dev tag"
       run: |
-        git config --local user.name "Dev release workflow"
-        git config --local user.email "ansible-hub-ui+dev@example.com"
+        git config --local user.name "GitHub Actions: Dev release workflow"
+        git config --local user.email "ansible-hub-ui+dev-release@example.com"
+
         git tag -f dev
         git push -f --tags
 

@@ -33,8 +33,9 @@ jobs:
 
     - name: "commit"
       run: |
-        git config --global user.name 'GH Actions'
-        git config --global user.email 'gh_actions@users.noreply.github.com'
+        git config --global user.name 'GitHub Actions: i18n workflow'
+        git config --global user.email 'ansible-hub-ui+i18n@example.com'
+
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ansible/ansible-hub-ui.git
         git add locale/
         if git commit -m "Automated updated of i18n strings on $(date +'%Y-%m-%d')"; then
