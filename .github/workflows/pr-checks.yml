@@ -24,15 +24,15 @@ jobs:
       run: |
         curl https://raw.githubusercontent.com/ansible/galaxy_ng/master/.ci/scripts/validate_commit_message_custom.py | python
 
-    - name: "parse issue number"
+    - name: "parse issue number, switch branch, commit, push"
       if: ${{ failure() }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        ISSUE=`gh pr view ${{github.event.number}} | grep AAH- | sed 's/^.*\<AAH-\([0-9]\+\).*$/\1/'`
-        echo "ISSUE=${ISSUE}" >> $GITHUB_ENV
+        ISSUE=`( gh pr view ${{github.event.number}} ; gh pr view ${{github.event.number}} -c ) | grep AAH- | sed 's/^.*\<AAH-\([0-9]\+\).*$/\1/'`
 
-    - name: "commit No-Issue | Fixes + CHANGES"
-      if: ${{ failure() }}
-      run: |
+        gh pr checkout ${{github.event.number}}
+
         git config --global user.name 'GitHub Actions: PR checks workflow'
         git config --global user.email 'ansible-hub-ui+pr-checks@example.com'
 
@@ -44,6 +44,8 @@ jobs:
         else
           git commit --allow-empty -m "No-Issue"
         fi
+        git log -1 -p
+
         git push
 
   pr-checks:
