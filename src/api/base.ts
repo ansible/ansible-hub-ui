@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 
 export class BaseAPI {
   apiPath: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   http: any;
 
   constructor(apiBaseUrl) {

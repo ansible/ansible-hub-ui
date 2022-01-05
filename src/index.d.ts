@@ -20,6 +20,7 @@ interface Window {
     chrome: {
       auth: {
         doOffline: () => void;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         getOfflineToken: () => Promise<{ data: any }>;
         getUser: () => Promise<{ identity: object }>;
       };

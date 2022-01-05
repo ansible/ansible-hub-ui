@@ -37,6 +37,7 @@ interface IState {
 }
 
 export class Sort extends React.Component<IProps, IState> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   options: any;
   static defaultProps = {
     sortParamName: 'sort',

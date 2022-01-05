@@ -31,6 +31,7 @@ interface IProps {
   filterConfig: FilterOption[];
 
   /** Current page params */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: any;
 
   /** Sets the current page params to p */
