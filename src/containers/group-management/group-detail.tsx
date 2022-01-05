@@ -125,7 +125,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    // console.log('Hellloooo', this.state.params.isEditing);
+    console.log('Hellloooo', this.state.params.isEditing);
     if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorised: true });
     } else {
@@ -270,9 +270,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     });
   }
 
+
   private actionSavePermissions() {
     const { group, originalPermissions, permissions } = this.state;
     const promises = [];
+
 
     // Add permissions
     permissions.forEach((permission) => {
@@ -307,10 +309,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     });
 
     this.setState({ savingPermissions: true }); // disable Save/Cancel while waiting
+    const {isEditing} = this.state.params
     Promise.all(promises).then(() =>
       this.setState({
         editPermissions: false,
         savingPermissions: false,
+        // isEditing: false,
       }),
     );
   }
@@ -322,6 +326,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       savingPermissions,
       permissions: selectedPermissions,
     } = this.state;
+
+    const {isEditing} = this.state.params
     const { user, featureFlags } = this.context;
     let isUserMgmtDisabled = false;
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
@@ -374,7 +380,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                     .map((value) => twoWayMapper(value, filteredPermissions))}
                   setSelected={(perms) => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
-                  isViewOnly={!editPermissions}
+                  isViewOnly={!editPermissions && !isEditing}
                   onClear={() => {
                     const clearedPerms = group.object_permissions;
                     this.setState({
