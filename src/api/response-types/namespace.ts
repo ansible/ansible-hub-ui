@@ -18,6 +18,7 @@ export class NamespaceListType {
 export class NamespaceType extends NamespaceListType {
   groups: GroupObjectPermissionType[];
   resources: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   owners: any[];
   links: NamespaceLinkType[];
 }

@@ -15,6 +15,7 @@ interface IProps {
   formPrefix?: React.ReactNode;
   formSuffix?: React.ReactNode;
   isReadonly: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   model: { [key: string]: any };
   requiredFields: string[];
   updateField: (value, event) => void;
@@ -48,6 +49,7 @@ export class DataForm extends React.Component<IProps> {
           isRequired={!isReadonly && requiredFields.includes(field.id)}
           key={field.id}
           label={field.title}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           labelIcon={!isReadonly && (field.formGroupLabelIcon as any)}
           validated={isReadonly ? 'default' : validated}
           aria-labelledby={field.id}
@@ -59,6 +61,7 @@ export class DataForm extends React.Component<IProps> {
               id={field.id}
               onChange={updateField}
               placeholder={field.placeholder}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               type={(field.type as any) || 'text'}
               validated={validated}
               value={model[field.id]}

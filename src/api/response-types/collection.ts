@@ -65,8 +65,11 @@ export class PluginContentType {
   readme_filename: string;
   readme_html: string;
   doc_strings: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     doc: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     metadata: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return: any;
     examples: string;
   };

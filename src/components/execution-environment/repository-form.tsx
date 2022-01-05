@@ -463,6 +463,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     this.setState({
       [key]: Array.from(current.values()),
       [key === 'includeTags' ? 'addTagsInclude' : 'addTagsExclude']: '',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any);
   }
 
@@ -472,6 +473,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
 
     this.setState({
       [key]: Array.from(current.values()),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any);
   }
 
