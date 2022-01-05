@@ -106,14 +106,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         page_size: params['page_size'] || 10,
         sort: params['sort'] || 'username',
         tab: params['tab'] || 'permissions',
-        isEditing: true,
+        isEditing: false,
       },
       itemCount: 0,
       alerts: [],
       addModalVisible: false,
       options: undefined,
       selected: [],
-      editPermissions: true,
+      editPermissions: false,
       savingPermissions: false,
       showDeleteModal: false,
       showUserRemoveModal: null,
@@ -125,6 +125,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
+    // console.log('Hellloooo', this.state.params.isEditing);
     if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorised: true });
     } else {
