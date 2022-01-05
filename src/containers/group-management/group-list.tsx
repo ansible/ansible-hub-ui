@@ -407,11 +407,12 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
               selectedGroup: { ...group },
               redirect: formatPath(Paths.groupDetail, {
                 group: group.id,
+                editPermissions: group.isEditing,
               }),
             });
           }}
         >
-          <Trans>Edit group</Trans>
+          <Trans>Edit</Trans>
         </DropdownItem>
 
         {!!user && user.model_permissions.delete_group && (
@@ -436,6 +437,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           <Link
             to={formatPath(Paths.groupDetail, {
               group: group.id,
+
             })}
           >
             {group.name}

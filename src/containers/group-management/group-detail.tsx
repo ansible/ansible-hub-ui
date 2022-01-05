@@ -63,6 +63,7 @@ interface IState {
     page_size?: number;
     sort?: string;
     tab: string;
+    isEditing: boolean
   };
   users: UserType[];
   allUsers: UserType[];
@@ -105,13 +106,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         page_size: params['page_size'] || 10,
         sort: params['sort'] || 'username',
         tab: params['tab'] || 'permissions',
+        isEditing: true,
       },
       itemCount: 0,
       alerts: [],
       addModalVisible: false,
       options: undefined,
       selected: [],
-      editPermissions: false,
+      editPermissions: true,
       savingPermissions: false,
       showDeleteModal: false,
       showUserRemoveModal: null,
@@ -121,6 +123,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       inputText: '',
     };
   }
+    
 
   componentDidMount() {
     if (!this.context.user || this.context.user.is_anonymous) {
