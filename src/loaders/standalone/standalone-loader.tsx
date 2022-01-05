@@ -423,6 +423,7 @@ class App extends React.Component<RouteComponentProps, IState> {
     },
     callback?: () => void,
   ) =>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.setState(data as any, () => {
       if (callback) {
         callback();

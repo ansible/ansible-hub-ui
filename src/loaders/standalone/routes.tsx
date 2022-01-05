@@ -58,6 +58,7 @@ interface IRoutesProps {
 }
 
 interface IAuthHandlerProps extends RouteComponentProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Component: any;
   noAuth: boolean;
   updateInitialData: (
@@ -75,6 +76,7 @@ interface IAuthHandlerState {
 }
 
 interface IRouteConfig {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   comp: any;
   path: string;
   noAuth?: boolean;

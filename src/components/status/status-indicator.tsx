@@ -82,7 +82,9 @@ export class StatusIndicator extends React.Component<IProps> {
 
     return (
       <Label
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         variant={this.typeToVariantMap[type] as any}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         color={labelProps.color as any}
         icon={labelProps.icon}
         className={this.props.className}

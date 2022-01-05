@@ -8,6 +8,7 @@ class API extends HubAPI {
     super();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getUser(): Promise<any> {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       return new Promise((resolve, reject) => {
@@ -41,6 +42,7 @@ class API extends HubAPI {
   // insights has some asinine way of loading tokens that involves forcing the
   // page to refresh before loading the token that can't be done witha single
   // API request.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getToken(): Promise<any> {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       return new Promise((resolve, reject) => {
