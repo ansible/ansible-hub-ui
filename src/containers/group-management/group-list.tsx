@@ -437,7 +437,6 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           <Link
             to={formatPath(Paths.groupDetail, {
               group: group.id,
-
             })}
           >
             {group.name}
