@@ -29,18 +29,21 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        ISSUE=`( gh pr view ${{github.event.number}} ; gh pr view ${{github.event.number}} -c ) | grep AAH- | sed 's/^.*\<AAH-\([0-9]\+\).*$/\1/'`
+        ISSUES=`( gh pr view "${{github.event.number}}" ; gh pr view "${{github.event.number}}" -c ; echo "$GITHUB_HEAD_REF" ) | perl -nE 'say($1) while /\bAAH-?(\d+)\b/gi'`
 
-        gh pr checkout ${{github.event.number}}
+        gh pr checkout "${{github.event.number}}"
 
         git config --global user.name 'GitHub Actions: PR checks workflow'
         git config --global user.email 'ansible-hub-ui+pr-checks@example.com'
 
-        if [ -n "$ISSUE" ]; then
+        if [ -n "$ISSUES" ]; then
+          TITLE=`gh pr view "${{github.event.number}}" --json title --jq .title`
           mkdir -p CHANGES
-          gh pr view ${{github.event.number}} --json title --jq .title > CHANGES/"$ISSUE".misc
-          git add CHANGES
-          git commit -m "Fixes: AAH-$ISSUE"
+          for ISSUE in $ISSUES; do
+            [ -e CHANGES/"$ISSUE".misc ] || echo "$TITLE" > CHANGES/"$ISSUE".misc
+            git add CHANGES
+            git commit --allow-empty -m "Issue: AAH-$ISSUE"
+          done
         else
           git commit --allow-empty -m "No-Issue"
         fi
