@@ -270,11 +270,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     });
   }
 
-
   private actionSavePermissions() {
     const { group, originalPermissions, permissions } = this.state;
     const promises = [];
-
 
     // Add permissions
     permissions.forEach((permission) => {
@@ -309,7 +307,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     });
 
     this.setState({ savingPermissions: true }); // disable Save/Cancel while waiting
-    const {isEditing} = this.state.params
+    const { isEditing } = this.state.params;
     Promise.all(promises).then(() =>
       this.setState({
         editPermissions: false,
@@ -327,7 +325,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       permissions: selectedPermissions,
     } = this.state;
 
-    const {isEditing} = this.state.params
+    const { isEditing } = this.state.params;
     const { user, featureFlags } = this.context;
     let isUserMgmtDisabled = false;
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
