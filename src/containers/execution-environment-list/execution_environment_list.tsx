@@ -526,11 +526,11 @@ class ExecutionEnvironmentList extends React.Component<
           'success',
           <span>
             <Trans>
-              View the task{' '}
+              See the task management{' '}
               <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
-                here
+                detail page{' '}
               </Link>
-              .
+              for the status of this task.
             </Trans>
           </span>,
         );

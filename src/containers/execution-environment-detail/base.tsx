@@ -319,7 +319,7 @@ export function withContainerRepo(WrappedComponent) {
               <Trans>
                 See the task management{' '}
                 <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
-                  detail page
+                  detail page{' '}
                 </Link>
                 for the status of this task.
               </Trans>
