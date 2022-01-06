@@ -1,149 +1,119 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import React from 'react';
-import asyncComponent from 'src/utilities/asyncComponent';
-import some from 'lodash/some';
+import React, { lazy, Suspense } from 'react';
 import { Paths } from 'src/paths';
+import { LoadingPageWithHeader } from 'src/components';
 
-/**
- * Aysnc imports of components
- *
- * https://webpack.js.org/guides/code-splitting/
- * https://reactjs.org/docs/code-splitting.html
- *
- * pros:
- *      1) code splitting
- *      2) can be used in server-side rendering
- * cons:
- *      1) nameing chunk names adds unnecessary docs to code,
- *         see the difference with DashboardMap and InventoryDeployments.
- *
- */
-const EditNamespace = asyncComponent(() =>
+const EditNamespace = lazy(() =>
   import(
     /* webpackChunkName: "namespace_detail" */
     '../../containers/edit-namespace/edit-namespace'
   ),
 );
 
-const CollectionDetail = asyncComponent(() =>
+const CollectionDetail = lazy(() =>
   import(
     /* webpackChunkName: "collection_detail" */
     '../../containers/collection-detail/collection-detail'
   ),
 );
 
-const CollectionContent = asyncComponent(() =>
+const CollectionContent = lazy(() =>
   import(
     /* webpackChunkName: "collection_detail" */
     '../../containers/collection-detail/collection-content'
   ),
 );
 
-const CollectionDocs = asyncComponent(() =>
+const CollectionDocs = lazy(() =>
   import(
     /* webpackChunkName: "collection_detail" */
     '../../containers/collection-detail/collection-docs'
   ),
 );
 
-const CollectionImportLog = asyncComponent(() =>
+const CollectionImportLog = lazy(() =>
   import(
     /* webpackChunkName: "collection_detail" */
     '../../containers/collection-detail/collection-import-log'
   ),
 );
 
-const CollectionDependencies = asyncComponent(() =>
+const CollectionDependencies = lazy(() =>
   import(
     /* webpackChunkName: "collection_detail" */
     '../../containers/collection-detail/collection-dependencies'
   ),
 );
 
-const NotFound = asyncComponent(() =>
+const NotFound = lazy(() =>
   import(
     /* webpackChunkName: "not_found" */
     '../../containers/not-found/not-found'
   ),
 );
 
-const MyNamespaces = asyncComponent(() =>
+const MyNamespaces = lazy(() =>
   import(
     /* webpackChunkName: "namespace_list" */
     '../../containers/namespace-list/my-namespaces'
   ),
 );
 
-const ManageNamespace = asyncComponent(() =>
+const ManageNamespace = lazy(() =>
   import(
     /* webpackChunkName: "namespace_detail" */
     '../../containers/namespace-detail/namespace-detail'
   ),
 );
 
-const PartnerDetail = asyncComponent(() =>
+const PartnerDetail = lazy(() =>
   import(
     /* webpackChunkName: "namespace_detail" */
     '../../containers/namespace-detail/namespace-detail'
   ),
 );
 
-const Partners = asyncComponent(() =>
+const Partners = lazy(() =>
   import(
     /* webpackChunkName: "namespace_list" */
     '../../containers/namespace-list/' + NAMESPACE_TERM
   ),
 );
 
-const MyImports = asyncComponent(() =>
+const MyImports = lazy(() =>
   import(
     /* webpackChunkName: "my_imports" */
     '../../containers/my-imports/my-imports'
   ),
 );
 
-const Search = asyncComponent(() =>
+const Search = lazy(() =>
   import(
     /* webpackChunkName: "search" */
     '../../containers/search/search'
   ),
 );
 
-const TokenPage = asyncComponent(() =>
+const TokenPage = lazy(() =>
   import(
     /* webpackChunkName: "settings" */
     '../../containers/token/token-insights'
   ),
 );
 
-const CertificationDashboard = asyncComponent(() =>
+const CertificationDashboard = lazy(() =>
   import(
     /* webpackChunkName: "settings" */
     '../../containers/certification-dashboard/certification-dashboard'
   ),
 );
 
-const Repository = asyncComponent(() =>
+const Repository = lazy(() =>
   import(
     /* webpackChunkName: "repository-list" */
     '../../containers/repositories/repository-list'
   ),
 );
-
-const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
-  const root = document.getElementById('root');
-  root.removeAttribute('class');
-  root.classList.add(`page__${rootClass}`, 'pf-c-page__main');
-  root.setAttribute('role', 'main');
-
-  return <Route {...rest} component={Component} />;
-};
-
-InsightsRoute.propTypes = {
-  component: PropTypes.func,
-  rootClass: PropTypes.string,
-};
 
 /**
  * the Switch component changes routes depending on the path.
@@ -153,151 +123,69 @@ InsightsRoute.propTypes = {
  *      path - https://prod.foo.redhat.com:1337/insights/advisor/rules
  *      component - component to be rendered when a route has been chosen.
  */
-export const Routes = (props) => {
-  const path = props.childProps.location.pathname;
-
+export const Routes = () => {
   return (
-    <Switch>
-      <InsightsRoute
-        path={Paths.repositories}
-        component={Repository}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.approvalDashboard}
-        component={CertificationDashboard}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.notFound}
-        component={NotFound}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.token}
-        component={TokenPage}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths[NAMESPACE_TERM]}
-        component={Partners}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.editNamespace}
-        component={EditNamespace}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.myCollections}
-        component={ManageNamespace}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.myCollectionsByRepo}
-        component={ManageNamespace}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.myNamespaces}
-        component={MyNamespaces}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionDocsPageByRepo}
-        component={CollectionDocs}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionDocsIndexByRepo}
-        component={CollectionDocs}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionContentDocsByRepo}
-        component={CollectionDocs}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionContentListByRepo}
-        component={CollectionContent}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionImportLogByRepo}
-        component={CollectionImportLog}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionDependenciesByRepo}
-        component={CollectionDependencies}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionByRepo}
-        component={CollectionDetail}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.namespaceByRepo}
-        component={PartnerDetail}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.searchByRepo}
-        component={Search}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionDocsPage}
-        component={CollectionDocs}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionDocsIndex}
-        component={CollectionDocs}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionContentDocs}
-        component={CollectionDocs}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionContentList}
-        component={CollectionContent}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collectionImportLog}
-        component={CollectionImportLog}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.myImports}
-        component={MyImports}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.collection}
-        component={CollectionDetail}
-        rootClass='root'
-      />
-      <InsightsRoute
-        path={Paths.namespace}
-        component={PartnerDetail}
-        rootClass='root'
-      />
-      <InsightsRoute path={Paths.search} component={Search} rootClass='root' />
-      {/* Finally, catch all unmatched routes */}
-      <Route
-        render={() =>
-          some(Paths, (p) => p === path) ? null : (
-            <Redirect push to={Paths.notFound} />
-          )
-        }
-      />
-    </Switch>
+    <Suspense fallback={LoadingPageWithHeader}>
+      <Switch>
+        <Route path={Paths.repositories} component={Repository} />
+        <Route
+          path={Paths.approvalDashboard}
+          component={CertificationDashboard}
+        />
+        <Route path={Paths.notFound} component={NotFound} />
+        <Route path={Paths.token} component={TokenPage} />
+        <Route path={Paths[NAMESPACE_TERM]} component={Partners} />
+        <Route path={Paths.editNamespace} component={EditNamespace} />
+        <Route path={Paths.myCollections} component={ManageNamespace} />
+        <Route path={Paths.myCollectionsByRepo} component={ManageNamespace} />
+        <Route path={Paths.myNamespaces} component={MyNamespaces} />
+        <Route
+          path={Paths.collectionDocsPageByRepo}
+          component={CollectionDocs}
+        />
+        <Route
+          path={Paths.collectionDocsIndexByRepo}
+          component={CollectionDocs}
+        />
+        <Route
+          path={Paths.collectionContentDocsByRepo}
+          component={CollectionDocs}
+        />
+        <Route
+          path={Paths.collectionContentListByRepo}
+          component={CollectionContent}
+        />
+        <Route
+          path={Paths.collectionImportLogByRepo}
+          component={CollectionImportLog}
+        />
+        <Route
+          path={Paths.collectionDependenciesByRepo}
+          component={CollectionDependencies}
+        />
+        <Route path={Paths.collectionByRepo} component={CollectionDetail} />
+        <Route path={Paths.namespaceByRepo} component={PartnerDetail} />
+        <Route path={Paths.searchByRepo} component={Search} />
+        <Route path={Paths.collectionDocsPage} component={CollectionDocs} />
+        <Route path={Paths.collectionDocsIndex} component={CollectionDocs} />
+        <Route path={Paths.collectionContentDocs} component={CollectionDocs} />
+        <Route
+          path={Paths.collectionContentList}
+          component={CollectionContent}
+        />
+        <Route
+          path={Paths.collectionImportLog}
+          component={CollectionImportLog}
+        />
+        <Route path={Paths.myImports} component={MyImports} />
+        <Route path={Paths.collection} component={CollectionDetail} />
+        <Route path={Paths.namespace} component={PartnerDetail} />
+        <Route path={Paths.search} component={Search} />
+        <Route>
+          <Redirect push to={Paths.notFound} />
+        </Route>
+      </Switch>
+    </Suspense>
   );
 };
 
