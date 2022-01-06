@@ -12,6 +12,11 @@ export class ParamHelper {
     let v;
 
     paramObj.forEach((val, key) => {
+      // do not append empty values at all (this will disable searching by empty strings)
+      if (val.trim().length == 0) {
+        return;
+      }
+
       // Parse value as number if it's included in the list of numeric
       // types.
       // It seems like there should be a better way to do this based off
