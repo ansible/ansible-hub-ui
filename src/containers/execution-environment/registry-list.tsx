@@ -502,15 +502,15 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       .then((result) => {
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(
-          t`Indexing execution environments in ${name}`,
+          t`Indexing started for ${name}`,
           'success',
           <span>
             <Trans>
-              View the task{' '}
+              See the task management{' '}
               <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
-                here
+                detail page
               </Link>
-              .
+              for the status of this task.
             </Trans>
           </span>,
         );
