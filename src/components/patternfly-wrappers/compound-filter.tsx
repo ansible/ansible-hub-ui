@@ -35,11 +35,14 @@ interface IProps {
 
   /** Sets the current page params to p */
   updateParams: (params) => void;
+
+  inputText: string;
+
+  onChange: (inputText: string) => void;
 }
 
 interface IState {
   selectedFilter: FilterOption;
-  inputText: string;
   isExpanded: boolean;
   isCreatable: boolean;
   isOpen: boolean;
@@ -52,7 +55,6 @@ export class CompoundFilter extends React.Component<IProps, IState> {
 
     this.state = {
       selectedFilter: props.filterConfig[0],
-      inputText: '',
       isExpanded: false,
       isCreatable: false,
       isOpen: false,
@@ -66,7 +68,10 @@ export class CompoundFilter extends React.Component<IProps, IState> {
 
     const filterOptions = filterConfig.map((v) => (
       <DropdownItem
-        onClick={() => this.setState({ selectedFilter: v, inputText: '' })}
+        onClick={() => {
+          this.props.onChange('');
+          this.setState({ selectedFilter: v });
+        }}
         key={v.id}
       >
         {v.title}
@@ -92,7 +97,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
         <Button
           onClick={() => this.submitFilter()}
           variant={ButtonVariant.control}
-          isDisabled={!this.state.inputText}
+          isDisabled={!this.props.inputText}
         >
           <SearchIcon></SearchIcon>
         </Button>
@@ -137,7 +142,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
           <StatefulDropdown
             toggleType='dropdown'
             defaultText={
-              this.selectTitleById(this.state.inputText, selectedFilter) ||
+              this.selectTitleById(this.props.inputText, selectedFilter) ||
               selectedFilter.placeholder ||
               selectedFilter.title
             }
@@ -145,9 +150,10 @@ export class CompoundFilter extends React.Component<IProps, IState> {
             position='left'
             items={selectedFilter.options.map((v, i) => (
               <DropdownItem
-                onClick={() =>
-                  this.setState({ inputText: v.id }, () => this.submitFilter())
-                }
+                onClick={() => {
+                  this.props.onChange(v.id);
+                  this.submitFilter(v.id);
+                }}
                 key={v.id}
               >
                 {v.title}
@@ -163,8 +169,8 @@ export class CompoundFilter extends React.Component<IProps, IState> {
               selectedFilter.placeholder ||
               t`Filter by ${selectedFilter.title.toLowerCase()}`
             }
-            value={this.state.inputText}
-            onChange={(k) => this.setState({ inputText: k })}
+            value={this.props.inputText}
+            onChange={(k) => this.props.onChange(k)}
             onKeyPress={(e) => this.handleEnter(e)}
           />
         );
@@ -173,7 +179,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
 
   private handleEnter(e) {
     // l10n: don't translate
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && this.props.inputText.length > 0) {
       this.submitFilter();
     }
   }
@@ -188,12 +194,12 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     );
   }
 
-  private submitFilter() {
+  private submitFilter(id = undefined) {
     this.props.updateParams(
       ParamHelper.setParam(
         this.props.params,
         this.state.selectedFilter.id,
-        this.state.inputText,
+        id ? id : this.props.inputText,
       ),
     );
   }
