@@ -598,7 +598,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               alerts: this.state.alerts.concat([
                 {
                   variant: 'success',
-                  title: t`Success: ${digest} was deleted`,
+                  title: t`${digest} has been successfully deleted.`,
                 },
               ]),
             });
