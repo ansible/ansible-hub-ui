@@ -70,7 +70,11 @@ export class DeleteExecutionEnvironmentModal extends React.Component<
               isDeletionPending: false,
             });
             closeAction();
-            addAlert(t`Success: ${selectedItem} was deleted`, 'success', null);
+            addAlert(
+              t`${selectedItem} has been successfully deleted.`,
+              'success',
+              null,
+            );
             afterDelete();
           });
         })
