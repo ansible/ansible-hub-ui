@@ -464,10 +464,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
   private deleteRegistry({ pk, name }) {
     ExecutionEnvironmentRegistryAPI.delete(pk)
       .then(() =>
-        this.addAlert(
-          t`Successfully deleted remote registry ${name}`,
-          'success',
-        ),
+        this.addAlert(t`${name} has been successfully deleted.`, 'success'),
       )
       .catch(() =>
         this.addAlert(t`Failed to delete remote registry ${name}`, 'danger'),
