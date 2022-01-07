@@ -106,7 +106,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         page_size: params['page_size'] || 10,
         sort: params['sort'] || 'username',
         tab: params['tab'] || 'permissions',
-        isEditing: false,
+        isEditing: params['isEditing'] === 'true',
       },
       itemCount: 0,
       alerts: [],
@@ -125,7 +125,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    console.log('Hellloooo', this.state.params.isEditing);
+    this.setState({editPermissions: this.state.params.isEditing});
     if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorised: true });
     } else {
@@ -307,12 +307,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     });
 
     this.setState({ savingPermissions: true }); // disable Save/Cancel while waiting
-    const { isEditing } = this.state.params;
     Promise.all(promises).then(() =>
       this.setState({
         editPermissions: false,
         savingPermissions: false,
-        // isEditing: false,
       }),
     );
   }
@@ -325,7 +323,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       permissions: selectedPermissions,
     } = this.state;
 
-    const { isEditing } = this.state.params;
     const { user, featureFlags } = this.context;
     let isUserMgmtDisabled = false;
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
@@ -378,7 +375,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                     .map((value) => twoWayMapper(value, filteredPermissions))}
                   setSelected={(perms) => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
-                  isViewOnly={!editPermissions && !isEditing}
+                  isViewOnly={!editPermissions}
                   onClear={() => {
                     const clearedPerms = group.object_permissions;
                     this.setState({

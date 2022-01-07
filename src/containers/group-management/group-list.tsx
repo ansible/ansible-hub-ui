@@ -407,7 +407,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
               selectedGroup: { ...group },
               redirect: formatPath(Paths.groupDetail, {
                 group: group.id,
-              }),
+              }, {isEditing: true}),
             });
           }}
         >
