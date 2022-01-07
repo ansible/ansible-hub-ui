@@ -125,7 +125,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    this.setState({editPermissions: this.state.params.isEditing});
+    this.setState({ editPermissions: this.state.params.isEditing });
     if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorised: true });
     } else {
