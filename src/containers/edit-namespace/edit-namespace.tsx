@@ -261,7 +261,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                 ...this.context.alerts,
                 {
                   variant: 'success',
-                  title: t`Namespace successfully edited.`,
+                  title: t`${this.state.namespace.name} has been successfully edited.`,
                 },
               ]),
           );
