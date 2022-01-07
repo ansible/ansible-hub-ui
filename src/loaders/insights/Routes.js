@@ -2,6 +2,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import { Paths } from 'src/paths';
 import { LoadingPageWithHeader } from 'src/components';
+import { PropTypes } from 'prop-types';
 
 const EditNamespace = lazy(() =>
   import(
