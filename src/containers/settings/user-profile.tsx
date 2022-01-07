@@ -112,7 +112,10 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
           {
             inEditMode: false,
             alerts: this.state.alerts.concat([
-              { variant: 'success', title: t`Profile saved.` },
+              {
+                variant: 'success',
+                title: t`Saved changes to ${user.username}.`,
+              },
             ]),
           },
           () => this.context.setUser(result.data),
