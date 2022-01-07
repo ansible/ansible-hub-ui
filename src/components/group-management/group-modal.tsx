@@ -5,6 +5,7 @@ import {
   Form,
   FormGroup,
   Modal,
+  ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
 import { ErrorMessagesType } from 'src/utilities';
@@ -36,13 +37,12 @@ export class GroupModal extends React.Component<IProps, IState> {
     const { onCancel, onSave, clearErrors } = this.props;
     return (
       <Modal
-        variant='small'
+        variant={ModalVariant.medium}
         onClose={() => {
           onCancel();
         }}
         isOpen={true}
-        title={''}
-        header={<h2>{t`Create a group`}</h2>}
+        title='Create a group'
         actions={[
           <Button
             isDisabled={
