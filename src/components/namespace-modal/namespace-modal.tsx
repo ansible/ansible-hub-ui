@@ -7,6 +7,7 @@ import {
   FormGroup,
   InputGroup,
   Modal,
+  ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
 
@@ -104,7 +105,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
 
     return (
       <Modal
-        variant='medium'
+        variant={ModalVariant.medium}
         title={t`Create a new namespace`}
         isOpen={this.props.isOpen}
         onClose={this.toggleModal}
