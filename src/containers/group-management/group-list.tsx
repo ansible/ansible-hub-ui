@@ -399,7 +399,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(group, index: number) {
     const { user } = this.context;
     const dropdownItems = [
-      <React.Fragment>
+      <React.Fragment key='dropdown'>
         <DropdownItem
           key='edit'
           onClick={() => {
