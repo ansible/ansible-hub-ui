@@ -372,6 +372,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
 
   private cancelTask() {
     const { task, taskName } = this.state;
+    console.log('hello', taskName);
     TaskManagementAPI.patch(parsePulpIDFromURL(task.pulp_href), {
       state: 'canceled',
     })
@@ -384,7 +385,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             {
               variant: 'success',
               title: taskName,
-              description: t`Successfully stopped task.`,
+              description: t`${taskName} stopped successfully.`,
             },
           ],
         });

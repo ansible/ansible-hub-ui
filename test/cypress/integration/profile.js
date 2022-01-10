@@ -107,11 +107,11 @@ describe('My Profile Tests', () => {
     cy.intercept('PUT', Cypress.env('prefix') + '_ui/v1/me/').as('saveForm');
 
     cy.contains('Save').click();
-    cy.get('[aria-label="Success Alert"]').contains('Profile saved');
+    cy.get('[aria-label="Success Alert"]').contains('Saved changes to {0}.');
 
     cy.wait('@saveForm').its('response.statusCode').should('eq', 200);
 
-    cy.get('[aria-label="Success Alert"]').contains('Profile saved.');
+    cy.get('[aria-label="Success Alert"]').contains('Saved changes to {0}.');
   });
 
   it('user can cancel form', () => {
