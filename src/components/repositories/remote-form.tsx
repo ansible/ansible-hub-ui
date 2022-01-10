@@ -35,44 +35,33 @@ interface IProps {
 }
 
 interface IState {
-  uploadedRequirementFilename: string;
-  uploadedClientKeyFilename: string;
-  uploadedClientCertFilename: string;
-  uploadedCaCertFilename: string;
+  filenames: { [key: string]: string };
+  original: { [key: string]: boolean };
 }
 
 export class RemoteForm extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
-    let [
-      requirementsFilename,
-      clientCertFilename,
-      clientKeyFilename,
-      caCertFilename,
-    ] = Array(4).fill('');
 
-    if (props.remote) {
-      requirementsFilename = this.props.remote.requirements_file
-        ? 'requirements.yml'
-        : '';
-      clientKeyFilename = this.props.remote.client_key ? 'client_key.yml' : '';
-      clientCertFilename = this.props.remote.client_cert
-        ? 'client_cert.yml'
-        : '';
-      caCertFilename = this.props.remote.ca_cert ? 'ca_cert.yml' : '';
-    }
+    const { requirements_file, client_key, client_cert, ca_cert } =
+      props.remote || {};
 
     this.state = {
-      uploadedRequirementFilename: requirementsFilename,
-      uploadedClientKeyFilename: clientKeyFilename,
-      uploadedClientCertFilename: clientCertFilename,
-      uploadedCaCertFilename: caCertFilename,
+      filenames: {
+        requirements_file: requirements_file ? 'requirements.yml' : '',
+        client_key: client_key ? 'client_key' : '',
+        client_cert: client_cert ? 'client_cert' : '',
+        ca_cert: ca_cert ? 'ca_cert' : '',
+      },
+      original: {
+        requirements_file: !!requirements_file,
+        client_key: !!client_key,
+        client_cert: !!client_cert,
+        ca_cert: !!ca_cert,
+      },
     };
 
-    /***************************************************************
-     * Shim in a default concurrency value to pass form validation
-     * https://issues.redhat.com/browse/AAH-959
-     ***************************************************************/
+    // Shim in a default concurrency value to pass form validation (AAH-959)
     if (
       this.props.remoteType !== 'registry' &&
       this.props.remote.download_concurrency === null
@@ -141,6 +130,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
 
   private renderForm(requiredFields, disabledFields) {
     const { remote, errorMessages } = this.props;
+    const { original, filenames } = this.state;
+
     const docsAnsibleLink = (
       <a
         target='_blank'
@@ -150,6 +141,25 @@ export class RemoteForm extends React.Component<IProps, IState> {
         requirements.yml
       </a>
     );
+
+    const filename = (field) =>
+      original[field] ? t`(uploaded)` : filenames[field];
+    const fileOnChange = (field) => (value, name) => {
+      this.setState(
+        {
+          filenames: {
+            ...filenames,
+            [field]: name,
+          },
+          original: {
+            ...original,
+            [field]: false,
+          },
+        },
+        () => this.updateRemote(value, field),
+      );
+    };
+
     return (
       <Form>
         <FormGroup
@@ -268,15 +278,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   isRequired={requiredFields.includes('requirements_file')}
                   id='yaml'
                   type='text'
-                  filename={this.state.uploadedRequirementFilename}
+                  filename={filename('requirements_file')}
                   value={this.props.remote.requirements_file || ''}
                   hideDefaultPreview
-                  onChange={(value, filename) => {
-                    this.setState(
-                      { uploadedRequirementFilename: filename },
-                      () => this.updateRemote(value, 'requirements_file'),
-                    );
-                  }}
+                  onChange={fileOnChange('requirements_file')}
                 />
               </FlexItem>
               <FlexItem>
@@ -287,7 +292,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                       new Blob([this.props.remote.requirements_file], {
                         type: 'text/plain;charset=utf-8',
                       }),
-                      this.state.uploadedRequirementFilename,
+                      filenames.requirements_file,
                     );
                   }}
                   variant='plain'
@@ -487,14 +492,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   isRequired={requiredFields.includes('client_key')}
                   id='yaml'
                   type='text'
-                  filename={this.state.uploadedClientKeyFilename}
+                  filename={filename('client_key')}
                   value={this.props.remote.client_key || ''}
                   hideDefaultPreview
-                  onChange={(value, filename) => {
-                    this.setState({ uploadedClientKeyFilename: filename }, () =>
-                      this.updateRemote(value, 'client_key'),
-                    );
-                  }}
+                  onChange={fileOnChange('client_key')}
                 />
               </WriteOnlyField>
             </FormGroup>
@@ -518,15 +519,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
                     isRequired={requiredFields.includes('client_cert')}
                     id='yaml'
                     type='text'
-                    filename={this.state.uploadedClientCertFilename}
+                    filename={filename('client_cert')}
                     value={this.props.remote.client_cert || ''}
                     hideDefaultPreview
-                    onChange={(value, filename) => {
-                      this.setState(
-                        { uploadedClientCertFilename: filename },
-                        () => this.updateRemote(value, 'client_cert'),
-                      );
-                    }}
+                    onChange={fileOnChange('client_cert')}
                   />
                 </FlexItem>
                 <FlexItem>
@@ -538,7 +534,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                         new Blob([this.props.remote.client_cert], {
                           type: 'text/plain;charset=utf-8',
                         }),
-                        this.state.uploadedClientCertFilename,
+                        filenames.client_cert,
                       );
                     }}
                     variant='plain'
@@ -569,14 +565,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
                     isRequired={requiredFields.includes('ca_cert')}
                     id='yaml'
                     type='text'
-                    filename={this.state.uploadedCaCertFilename}
+                    filename={filename('ca_cert')}
                     value={this.props.remote.ca_cert || ''}
                     hideDefaultPreview
-                    onChange={(value, filename) => {
-                      this.setState({ uploadedCaCertFilename: filename }, () =>
-                        this.updateRemote(value, 'ca_cert'),
-                      );
-                    }}
+                    onChange={fileOnChange('ca_cert')}
                   />
                 </FlexItem>
                 <FlexItem>
@@ -588,7 +580,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                         new Blob([this.props.remote.ca_cert], {
                           type: 'text/plain;charset=utf-8',
                         }),
-                        this.state.uploadedCaCertFilename,
+                        filenames.ca_cert,
                       );
                     }}
                     variant='plain'
