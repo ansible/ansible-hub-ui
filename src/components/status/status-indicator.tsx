@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 
-import { Label } from '@patternfly/react-core';
+import { Label, LabelProps } from '@patternfly/react-core';
 import {
   OutlinedClockIcon,
   ExclamationIcon,
@@ -19,7 +19,7 @@ interface IProps {
 }
 
 interface LabelPropType {
-  color: string;
+  color: LabelProps['color'];
   icon: React.ReactElement;
   text: string;
 }
@@ -29,7 +29,7 @@ export class StatusIndicator extends React.Component<IProps> {
     type: 'primary',
   };
 
-  typeToVariantMap = {
+  typeToVariantMap: Record<string, LabelProps['variant']> = {
     primary: 'outline',
     secondary: 'filled',
   };
@@ -82,10 +82,8 @@ export class StatusIndicator extends React.Component<IProps> {
 
     return (
       <Label
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        variant={this.typeToVariantMap[type] as any}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        color={labelProps.color as any}
+        variant={this.typeToVariantMap[type]}
+        color={labelProps.color}
         icon={labelProps.icon}
         className={this.props.className}
       >

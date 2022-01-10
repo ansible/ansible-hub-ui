@@ -43,9 +43,9 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
       .then((result) => {
         // The api doesn't return a value for the password, so set a blank one here
         // to keep react from getting confused
-        result.password = '';
-        this.initialState = { ...result };
-        this.setState({ user: result });
+        const extendedResult = { ...result, password: '' };
+        this.initialState = { ...extendedResult };
+        this.setState({ user: extendedResult });
       })
       .catch(() => this.setState({ redirect: Paths.notFound }));
   }

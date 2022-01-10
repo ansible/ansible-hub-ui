@@ -10,6 +10,7 @@ import {
   Tooltip,
   Switch,
   Alert,
+  TextInputTypes,
 } from '@patternfly/react-core';
 
 import { AlertType, APISearchTypeAhead, HelperText } from 'src/components';
@@ -89,7 +90,7 @@ export class UserForm extends React.Component<IProps, IState> {
       !isReadonly && {
         id: 'password',
         title: t`Password`,
-        type: 'password',
+        type: TextInputTypes.password,
         placeholder: isNewUser ? '' : '••••••••••••••••••••••',
         formGroupLabelIcon: (
           <HelperText

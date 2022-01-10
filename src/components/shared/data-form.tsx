@@ -1,16 +1,21 @@
 import * as React from 'react';
-import { Form, FormGroup, TextInput } from '@patternfly/react-core';
+import {
+  Form,
+  FormGroup,
+  TextInput,
+  TextInputTypes,
+} from '@patternfly/react-core';
 
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   errorMessages: ErrorMessagesType;
   formFields: {
-    formGroupLabelIcon?: React.ReactNode;
+    formGroupLabelIcon?: React.ReactElement;
     id: string;
     placeholder?: string;
     title: string;
-    type?: string;
+    type?: TextInputTypes;
   }[];
   formPrefix?: React.ReactNode;
   formSuffix?: React.ReactNode;
@@ -49,8 +54,7 @@ export class DataForm extends React.Component<IProps> {
           isRequired={!isReadonly && requiredFields.includes(field.id)}
           key={field.id}
           label={field.title}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          labelIcon={!isReadonly && (field.formGroupLabelIcon as any)}
+          labelIcon={!isReadonly && field.formGroupLabelIcon}
           validated={isReadonly ? 'default' : validated}
           aria-labelledby={field.id}
         >
@@ -61,8 +65,7 @@ export class DataForm extends React.Component<IProps> {
               id={field.id}
               onChange={updateField}
               placeholder={field.placeholder}
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              type={(field.type as any) || 'text'}
+              type={field.type || 'text'}
               validated={validated}
               value={model[field.id]}
             />

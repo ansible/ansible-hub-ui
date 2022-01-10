@@ -15,7 +15,7 @@ class API extends HubAPI {
     return super.update(pk, reducedData);
   }
 
-  update(_id, _obj) {
+  update(_id, _obj): Promise<never> {
     throw 'use smartUpdate()';
   }
 

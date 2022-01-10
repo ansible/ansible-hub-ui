@@ -31,6 +31,7 @@ interface IProps {
   filterConfig: FilterOption[];
 
   /** Current page params */
+  // Type help: this shoud be something like: Record<string, strgin | SelectOptionObject | (string | SelectOptionObject)[]>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: any;
 
