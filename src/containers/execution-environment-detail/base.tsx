@@ -207,7 +207,14 @@ export function withContainerRepo(WrappedComponent) {
                   promise
                     .then((results) => {
                       const task = results.find((x) => x.data && x.data.task);
-                      this.setState({ editing: false, loading: true });
+                      this.setState({
+                        editing: false,
+                        loading: true,
+                        alerts: this.state.alerts.concat({
+                          variant: 'success',
+                          title: t`Saved changes to ${this.state.repo.name}`,
+                        }),
+                      });
                       if (task) {
                         waitForTask(
                           task.data.task.split('tasks/')[1].replace('/', ''),
