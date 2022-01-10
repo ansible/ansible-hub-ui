@@ -63,6 +63,7 @@ interface IState {
     page_size?: number;
     sort?: string;
     tab: string;
+    isEditing: boolean;
   };
   users: UserType[];
   allUsers: UserType[];
@@ -105,6 +106,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         page_size: params['page_size'] || 10,
         sort: params['sort'] || 'username',
         tab: params['tab'] || 'permissions',
+        isEditing: params['isEditing'] === 'true',
       },
       itemCount: 0,
       alerts: [],
@@ -123,6 +125,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
+    this.setState({ editPermissions: this.state.params.isEditing });
     if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorised: true });
     } else {
@@ -319,6 +322,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       savingPermissions,
       permissions: selectedPermissions,
     } = this.state;
+
     const { user, featureFlags } = this.context;
     let isUserMgmtDisabled = false;
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };

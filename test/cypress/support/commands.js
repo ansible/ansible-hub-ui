@@ -374,7 +374,8 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
     'listGroups',
   );
-  cy.get(`[aria-labelledby=${name}] [aria-label=Delete]`).click();
+  cy.get(`[aria-labelledby=${name}] [aria-label=Actions]`).click();
+  cy.get('[aria-label=Delete]').click();
   cy.contains('[role=dialog] button', 'Delete').click();
   cy.wait('@deleteGroup').then(({ response }) => {
     expect(response.statusCode).to.eq(204);
