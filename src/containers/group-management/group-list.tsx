@@ -14,7 +14,6 @@ import {
   UserType,
   GroupObjectPermissionType,
 } from 'src/api';
-import { DeleteGroupModal } from './delete-group-modal';
 import {
   filterIsSet,
   mapErrorMessages,
@@ -28,6 +27,7 @@ import {
   BaseHeader,
   closeAlertMixin,
   CompoundFilter,
+  DeleteGroupModal,
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,

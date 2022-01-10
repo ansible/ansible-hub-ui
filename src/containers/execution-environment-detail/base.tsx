@@ -12,6 +12,7 @@ import { Button, DropdownItem } from '@patternfly/react-core';
 import {
   AlertList,
   AlertType,
+  DeleteExecutionEnvironmentModal,
   ExecutionEnvironmentHeader,
   LoadingPageWithHeader,
   Main,
@@ -23,8 +24,6 @@ import {
 import { parsePulpIDFromURL, waitForTask } from 'src/utilities';
 
 import { AppContext } from 'src/loaders/app-context';
-
-import { DeleteExecutionEnviromentModal } from 'src/containers/execution-environment-detail/delete-execution-enviroment-modal';
 
 interface IState {
   publishToController: { digest?: string; image: string; tag?: string };
@@ -161,7 +160,7 @@ export function withContainerRepo(WrappedComponent) {
             tag={publishToController?.tag}
           />
           {showDeleteModal && (
-            <DeleteExecutionEnviromentModal
+            <DeleteExecutionEnvironmentModal
               selectedItem={repo.name}
               closeAction={() => this.setState({ showDeleteModal: false })}
               afterDelete={() => this.setState({ redirect: 'list' })}
@@ -172,7 +171,7 @@ export function withContainerRepo(WrappedComponent) {
                   ]),
                 })
               }
-            ></DeleteExecutionEnviromentModal>
+            ></DeleteExecutionEnvironmentModal>
           )}
           <ExecutionEnvironmentHeader
             id={this.props.match.params['container']}

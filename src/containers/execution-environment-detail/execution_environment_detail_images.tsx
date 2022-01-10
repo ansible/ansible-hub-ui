@@ -37,6 +37,7 @@ import {
   EmptyStateFilter,
   ShaLabel,
   TagLabel,
+  TagManifestModal,
   PublishToControllerModal,
   StatefulDropdown,
   AlertList,
@@ -47,8 +48,6 @@ import {
   DeleteModal,
   LoadingPageSpinner,
 } from '../../components';
-
-import { TagManifestModal } from './tag-manifest-modal';
 
 import { withContainerRepo, IDetailSharedProps } from './base';
 import './execution-environment-detail_images.scss';

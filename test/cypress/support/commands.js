@@ -475,7 +475,7 @@ Cypress.Commands.add('settings', {}, (newSettings) => {
 });
 
 Cypress.Commands.add('addRemoteRegistry', {}, (name, url, extra = null) => {
-  cy.menuGo('Execution Enviroments > Remote Registries');
+  cy.menuGo('Execution Environments > Remote Registries');
   cy.contains('button', 'Add remote registry').click();
 
   // add registry

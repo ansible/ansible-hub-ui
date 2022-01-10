@@ -25,6 +25,7 @@ import {
   BaseHeader,
   CompoundFilter,
   DateComponent,
+  DeleteExecutionEnvironmentModal,
   EmptyStateFilter,
   EmptyStateNoData,
   LoadingPageSpinner,
@@ -41,8 +42,6 @@ import {
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from 'src/loaders/app-context';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-
-import { DeleteExecutionEnviromentModal } from 'src/containers/execution-environment-detail/delete-execution-enviroment-modal';
 
 interface IState {
   alerts: AlertType[];
@@ -166,7 +165,7 @@ class ExecutionEnvironmentList extends React.Component<
         <BaseHeader title={t`Execution Environments`}></BaseHeader>
 
         {showDeleteModal && (
-          <DeleteExecutionEnviromentModal
+          <DeleteExecutionEnvironmentModal
             selectedItem={selectedItem ? selectedItem.name : ''}
             closeAction={() =>
               this.setState({ showDeleteModal: false, selectedItem: null })
@@ -179,7 +178,7 @@ class ExecutionEnvironmentList extends React.Component<
                 ]),
               })
             }
-          ></DeleteExecutionEnviromentModal>
+          ></DeleteExecutionEnvironmentModal>
         )}
         {unauthorized ? (
           <EmptyStateUnauthorized />

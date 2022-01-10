@@ -10,16 +10,16 @@ import {
 import { Button } from '@patternfly/react-core';
 
 import {
-  LoadingPageWithHeader,
-  AlertType,
   AlertList,
-  closeAlertMixin,
-  UserFormPage,
+  AlertType,
+  DeleteUserModal,
   EmptyStateUnauthorized,
+  LoadingPageWithHeader,
+  UserFormPage,
+  closeAlertMixin,
 } from 'src/components';
 import { UserType, UserAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
-import { DeleteUserModal } from './delete-user-modal';
 import { AppContext } from 'src/loaders/app-context';
 import { ErrorMessagesType } from 'src/utilities';
 

@@ -18,6 +18,8 @@ import {
   closeAlertMixin,
   CompoundFilter,
   DateComponent,
+  DeleteGroupModal,
+  DeleteModal,
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
@@ -52,8 +54,6 @@ import {
 } from '@patternfly/react-core';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
-import { DeleteGroupModal } from './delete-group-modal';
-import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 
 interface IState {
   group: GroupObjectPermissionType;
