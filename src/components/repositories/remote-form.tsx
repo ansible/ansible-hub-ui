@@ -177,8 +177,15 @@ export class RemoteForm extends React.Component<IProps, IState> {
             <HelperText content={t`The URL of an external content source.`} />
           }
           isRequired={requiredFields.includes('url')}
-          validated={this.toError(!('url' in errorMessages))}
-          helperTextInvalid={errorMessages['url']}
+          validated={
+            'url' in errorMessages ||
+            (remote.url && remote.url.slice(0, 8) !== 'https://')
+              ? 'error'
+              : 'default'
+          }
+          helperTextInvalid={
+            errorMessages['url'] || t`The URL needs to be secure (https://).`
+          }
         >
           <TextInput
             validated={this.toError(!('url' in errorMessages))}
@@ -186,7 +193,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             isDisabled={disabledFields.includes('url')}
             id='url'
             type='text'
-            value={remote.url || ''}
+            value={remote.url || 'https://'}
             onChange={(value) => this.updateRemote(value, 'url')}
           />
         </FormGroup>
