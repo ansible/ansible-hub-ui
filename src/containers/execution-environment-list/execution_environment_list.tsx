@@ -455,6 +455,13 @@ class ExecutionEnvironmentList extends React.Component<
                 },
                 () => this.queryEnvironments(),
               );
+              this.context.setAlerts([
+                ...this.context.alerts,
+                {
+                  variant: 'success',
+                  title: t`${registry} has been successfully deleted.`,
+                },
+              ]);
             })
             .catch((err) => {
               this.setState({
