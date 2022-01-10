@@ -60,7 +60,7 @@ describe('collection tests', () => {
     cy.wait('@reload', { timeout: 50000 });
     cy.get('h4[class=pf-c-alert__title]').should(
       'have.text',
-      'Success alert:Successfully deleted collection.',
+      'Success alert:{0} v{collectionVersion} has been successfully deleted.',
     );
   });
 });
