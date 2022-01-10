@@ -20,9 +20,25 @@ interface Window {
     chrome: {
       auth: {
         doOffline: () => void;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        getOfflineToken: () => Promise<{ data: any }>;
-        getUser: () => Promise<{ identity: object }>;
+        getOfflineToken: () => Promise<{
+          data: {
+            access_token: string;
+            expires_in: number;
+            id_token: string;
+            refresh_expires_in: number;
+            refresh_token: string;
+            scope: string;
+            session_state: string;
+            token_type: string;
+          };
+        }>;
+        getUser: () => Promise<{
+          identity: {
+            account_number: string;
+            username: string;
+            groups: { id: number; name: string }[];
+          };
+        }>;
       };
       identifyApp: (s: string) => void;
       init: () => void;

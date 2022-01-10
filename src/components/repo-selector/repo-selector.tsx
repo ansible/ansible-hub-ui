@@ -19,8 +19,7 @@ interface IProps {
   // Path of the component that's using the component. This is required so that
   // the url for the repo can be updated correctly.
   path: Paths;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  pathParams?: any;
+  pathParams?: Record<string, string>;
   isDisabled?: boolean;
 }
 

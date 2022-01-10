@@ -1,6 +1,10 @@
 import { Constants } from 'src/constants';
 import { HubAPI } from './hub';
 
+type GetUserReturn = Awaited<
+  Promise<ReturnType<typeof window.insights.chrome.auth.getUser>>
+>;
+
 class API extends HubAPI {
   apiPath = this.getUIPath('me/');
 
@@ -8,8 +12,7 @@ class API extends HubAPI {
     super();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getUser(): Promise<any> {
+  getUser(): Promise<GetUserReturn['identity']> {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       return new Promise((resolve, reject) => {
         window.insights.chrome.auth
