@@ -1,5 +1,4 @@
 import { t, Trans } from '@lingui/macro';
-// import PropTypes from 'prop-types';
 import * as React from 'react';
 import '../app.scss';
 import {
