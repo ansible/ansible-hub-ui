@@ -100,7 +100,7 @@ export class CollectionList extends React.Component<IProps> {
               }
               description={
                 DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-                  ? t`Temporarily disabled due to sync issues. (AAH-1245)`
+                  ? t`Temporarily disabled due to sync issues. (AAH-1237)`
                   : null
               }
             >
