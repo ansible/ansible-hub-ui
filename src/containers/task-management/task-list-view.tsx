@@ -369,7 +369,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
             {
               variant: 'success',
               title: name,
-              description: t`Successfully stopped task.`,
+              description: t`${name} stopped successfully.`,
             },
           ],
         });
