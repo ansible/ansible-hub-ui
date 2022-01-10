@@ -396,6 +396,7 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
     args.length >= 1 && typeof args[args.length - 1] == 'object'
       ? args.splice(args.length - 1, 1)[0]
       : [];
+  cy.log('galaxykit ' + operation + ' ' + args);
   const cmd = shell`galaxykit -s ${server} -u ${adminUsername} -p ${adminPassword} ${shell.preserve(
     operation,
   )} ${args}`;
