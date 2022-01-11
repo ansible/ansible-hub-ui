@@ -63,10 +63,13 @@ export enum Paths {
   taskList = '/tasks',
 }
 
-export const namespaceBreadcrumb = {
-  name: {
-    namespaces: t`Namespaces`,
-    partners: t`Partners`,
-  }[NAMESPACE_TERM],
-  url: Paths[NAMESPACE_TERM],
-};
+export const namespaceBreadcrumb = () =>
+  NAMESPACE_TERM === 'namespaces'
+    ? {
+        name: t`Namespaces`,
+        url: Paths.namespaces,
+      }
+    : {
+        name: t`Partners`,
+        url: Paths.partners,
+      };

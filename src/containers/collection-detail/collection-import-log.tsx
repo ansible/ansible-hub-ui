@@ -58,7 +58,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
     }
 
     const breadcrumbs = [
-      namespaceBreadcrumb,
+      namespaceBreadcrumb(),
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,

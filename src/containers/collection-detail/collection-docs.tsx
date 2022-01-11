@@ -99,7 +99,7 @@ class CollectionDocs extends React.Component<
     }
 
     const breadcrumbs = [
-      namespaceBreadcrumb,
+      namespaceBreadcrumb(),
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,

@@ -235,7 +235,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         ) : null}
         <PartnerHeader
           namespace={namespace}
-          breadcrumbs={[namespaceBreadcrumb, { name: namespace.name }]}
+          breadcrumbs={[namespaceBreadcrumb(), { name: namespace.name }]}
           tabs={tabs}
           params={params}
           updateParams={(p) => this.updateParams(p)}

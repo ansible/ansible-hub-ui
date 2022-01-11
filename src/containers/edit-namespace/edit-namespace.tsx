@@ -140,7 +140,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         <PartnerHeader
           namespace={namespace}
           breadcrumbs={[
-            namespaceBreadcrumb,
+            namespaceBreadcrumb(),
             {
               name: namespace.name,
               url: formatPath(Paths.myCollections, {
