@@ -33,6 +33,7 @@ interface IState {
   editing: boolean;
   alerts: AlertType[];
   showDeleteModal: boolean;
+  formError: { title: string; detail: string }[];
 }
 
 export interface IDetailSharedProps extends RouteComponentProps {
@@ -56,6 +57,7 @@ export function withContainerRepo(WrappedComponent) {
         editing: false,
         alerts: [],
         showDeleteModal: false,
+        formError: [],
       };
     }
 
@@ -199,6 +201,7 @@ export function withContainerRepo(WrappedComponent) {
                 namespace={this.state.repo.namespace.name}
                 description={this.state.repo.description}
                 permissions={permissions}
+                formError={this.state.formError}
                 onSave={(promise) => {
                   promise
                     .then((results) => {
@@ -214,12 +217,14 @@ export function withContainerRepo(WrappedComponent) {
                         this.loadRepo();
                       }
                     })
-                    .catch(() =>
+                    .catch((err) =>
                       this.setState({
-                        editing: false,
-                        alerts: this.state.alerts.concat({
-                          variant: 'danger',
-                          title: t`Error: changes weren't saved`,
+                        formError: err.response.data.errors.map((error) => {
+                          return {
+                            title: error.title,
+                            detail:
+                              error.source.parameter + ': ' + error.detail,
+                          };
                         }),
                       }),
                     );
