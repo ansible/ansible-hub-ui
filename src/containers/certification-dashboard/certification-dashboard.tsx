@@ -479,24 +479,19 @@ class CertificationDashboard extends React.Component<
           originalRepo,
           destinationRepo,
         )
-          .then(
-            (result) =>
-              // Since pulp doesn't reply with the new object, perform a
-              // second query to get the updated data
-              {
-                this.setState({
-                  updatingVersions: [version],
-                });
-                this.waitForUpdate(result.data.remove_task_id, version);
-              },
-            () =>
-              this.context.setAlerts([
-                ...this.context.alerts,
-                {
+          .then((result) =>
+            // Since pulp doesn't reply with the new object, perform a
+            // second query to get the updated data
+            {
+              this.setState({
+                updatingVersions: [version],
+                alerts: this.state.alerts.concat({
                   variant: 'success',
                   title: t`Certification status for ${version.namespace}.${version.name}.${version.version} has been successfully updated.`,
-                },
-              ]),
+                }),
+              });
+              this.waitForUpdate(result.data.remove_task_id, version);
+            },
           )
           .catch((error) => {
             this.setState({
