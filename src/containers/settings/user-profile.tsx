@@ -105,13 +105,13 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
   }
 
   private saveUser = () => {
-    const { user } = this.state;
+    const { user, alerts } = this.state;
     ActiveUserAPI.saveUser(user)
       .then((result) => {
         this.setState(
           {
             inEditMode: false,
-            alerts: this.state.alerts.concat([
+            alerts: alerts.concat([
               {
                 variant: 'success',
                 title: t`Saved changes to ${user.username}.`,
