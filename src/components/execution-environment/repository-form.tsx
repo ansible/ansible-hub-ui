@@ -46,8 +46,8 @@ interface IProps {
   registry?: string; // pk
   upstreamName?: string;
   remotePulpId?: string;
-
   addAlert?: (variant, title, description?) => void;
+  formError: { title: string; detail: string }[];
 }
 
 interface IState {
@@ -125,7 +125,8 @@ export class RepositoryForm extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { onSave, onCancel, namespace, isNew, isRemote } = this.props;
+    const { onSave, onCancel, namespace, isNew, isRemote, formError } =
+      this.props;
     const {
       name,
       description,
@@ -151,13 +152,8 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           <Button
             key='save'
             variant='primary'
+            isDisabled={!this.formIsValid()}
             onClick={() => onSave(this.onSave())}
-            isDisabled={
-              (this.state.name.length === 0 ||
-                this.state.upstreamName.length === 0 ||
-                this.state.registrySelection.length === 0) &&
-              isRemote
-            }
           >
             {t`Save`}
           </Button>,
@@ -198,12 +194,15 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 key='name'
                 fieldId='name'
                 label={t`Name`}
+                helperTextInvalid={t`Container names can only contain alphanumeric characters, ".", "_", "-" and a up to one "/".`}
+                validated={this.validateName(name)}
               >
                 <TextInput
                   id='name'
                   value={name}
                   isDisabled={!isNew}
                   onChange={(value) => this.setState({ name: value })}
+                  validated={this.validateName(name)}
                 />
               </FormGroup>
 
@@ -374,53 +373,80 @@ export class RepositoryForm extends React.Component<IProps, IState> {
               autoResize={true}
             />
           </FormGroup>
-          <FormGroup
-            key='groups'
-            fieldId='groups'
-            label={t`Groups with access`}
-            className='hub-formgroup-groups'
-          >
-            {!!formErrors?.groups ? (
-              <Alert title={formErrors.groups.title} variant='danger' isInline>
-                {formErrors.groups.description}
-              </Alert>
-            ) : (
-              <>
-                <div className='pf-c-form__helper-text'>
-                  {t`Adding groups provides access to all repositories in the
+          {formErrors?.groups ? (
+            <Alert title={formErrors.groups.title} variant='danger' isInline>
+              {formErrors.groups.description}
+            </Alert>
+          ) : (
+            <FormGroup
+              key='groups'
+              fieldId='groups'
+              label={t`Groups with access`}
+              className='hub-formgroup-groups'
+            >
+              <div className='pf-c-form__helper-text'>
+                {t`Adding groups provides access to all repositories in the
                     "${namespace}" container namespace.`}
-                </div>
-                <ObjectPermissionField
-                  groups={this.state.selectedGroups}
-                  availablePermissions={
-                    Constants.CONTAINER_NAMESPACE_PERMISSIONS
-                  }
-                  setGroups={(g) => this.setState({ selectedGroups: g })}
-                  menuAppendTo='parent'
-                  isDisabled={
-                    !this.props.permissions.includes(
-                      'container.change_containernamespace',
-                    )
-                  }
-                  onError={(err) =>
-                    this.setState({
-                      formErrors: {
-                        ...this.state.formErrors,
-                        groups: {
-                          title: t`Error loading groups.`,
-                          description: err,
-                          variant: 'danger',
-                        },
+              </div>
+              <ObjectPermissionField
+                groups={this.state.selectedGroups}
+                availablePermissions={Constants.CONTAINER_NAMESPACE_PERMISSIONS}
+                setGroups={(g) => this.setState({ selectedGroups: g })}
+                menuAppendTo='parent'
+                isDisabled={
+                  !this.props.permissions.includes(
+                    'container.change_containernamespace',
+                  )
+                }
+                onError={(err) =>
+                  this.setState({
+                    formErrors: {
+                      ...this.state.formErrors,
+                      groups: {
+                        title: t`Error loading groups.`,
+                        description: err,
+                        variant: 'danger',
                       },
-                    })
-                  }
-                ></ObjectPermissionField>
-              </>
-            )}
-          </FormGroup>
+                    },
+                  })
+                }
+              ></ObjectPermissionField>
+              {!!formError &&
+                formError.length > 0 &&
+                formError.map((error) => (
+                  <Alert
+                    title={error.title}
+                    variant='danger'
+                    isInline
+                    key={error.title}
+                  >
+                    {error.detail}
+                  </Alert>
+                ))}
+            </FormGroup>
+          )}
         </Form>
       </Modal>
     );
+  }
+
+  private validateName(name) {
+    const regex = /^([0-9A-Za-z._-]+\/)?[0-9A-Za-z._-]+$/;
+    if (name === '' || regex.test(name)) {
+      return 'default';
+    } else {
+      return 'error';
+    }
+  }
+
+  private formIsValid() {
+    const { name, upstreamName, registrySelection } = this.state;
+    if (!this.props.isRemote) {
+      // no validation for local
+      return true;
+    }
+    const nameValid = name && this.validateName(name) === 'default';
+    return nameValid && upstreamName && registrySelection.length;
   }
 
   private loadRegistries(name?) {
