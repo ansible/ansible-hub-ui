@@ -466,6 +466,7 @@ class CertificationDashboard extends React.Component<
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {
+    const { alerts } = this.state;
     // Set the selected version to loading
     this.setState(
       {
@@ -485,7 +486,7 @@ class CertificationDashboard extends React.Component<
             {
               this.setState({
                 updatingVersions: [version],
-                alerts: this.state.alerts.concat({
+                alerts: alerts.concat({
                   variant: 'success',
                   title: t`Certification status for ${version.namespace}.${version.name}.${version.version} has been successfully updated.`,
                 }),
@@ -496,7 +497,7 @@ class CertificationDashboard extends React.Component<
           .catch((error) => {
             this.setState({
               updatingVersions: [],
-              alerts: this.state.alerts.concat({
+              alerts: alerts.concat({
                 variant: 'danger',
                 title: t`API Error: ${error.response.status}`,
                 description: t`Could not update the certification status for ${version.namespace}.${version.name}.${version.version}.`,

@@ -210,7 +210,7 @@ export function withContainerRepo(WrappedComponent) {
                       this.setState({
                         editing: false,
                         loading: true,
-                        alerts: this.state.alerts.concat({
+                        alerts: alerts.concat({
                           variant: 'success',
                           title: t`Saved changes to ${this.state.repo.name}`,
                         }),

@@ -423,7 +423,7 @@ class ExecutionEnvironmentList extends React.Component<
     const remote = pulp?.repository ? !!pulp?.repository?.remote : true; // add only supports remote
     const isNew = !pulp?.repository; // only exists in real data
     const distributionPulpId = pulp?.distribution?.pulp_id;
-
+    const { alerts } = this.state;
     return (
       <RepositoryForm
         isRemote={!!remote}
@@ -446,7 +446,7 @@ class ExecutionEnvironmentList extends React.Component<
                 {
                   showRemoteModal: false,
                   itemToEdit: null,
-                  alerts: this.state.alerts.concat({
+                  alerts: alerts.concat({
                     variant: 'success',
                     title: isNew
                       ? t`Execution environment added.`
