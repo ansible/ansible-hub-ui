@@ -10,9 +10,19 @@ on:
 jobs:
   i18n:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        branch:
+          - 'master'
+          - 'stable-4.4'
+
     steps:
 
     - uses: actions/checkout@v2
+      with:
+        ref: ${{ matrix.branch }}
+
     - name: "extract strings"
       run: |
         npm install
