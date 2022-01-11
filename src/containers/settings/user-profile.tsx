@@ -105,7 +105,11 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
   }
 
   private saveUser = () => {
-    const { user, alerts } = this.state;
+    const {
+      user,
+      user: { username },
+      alerts,
+    } = this.state;
     ActiveUserAPI.saveUser(user)
       .then((result) => {
         this.setState(
@@ -114,7 +118,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
             alerts: alerts.concat([
               {
                 variant: 'success',
-                title: t`Saved changes to ${user.username}.`,
+                title: t`Saved changes to ${username}.`,
               },
             ]),
           },

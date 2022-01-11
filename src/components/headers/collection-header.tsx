@@ -521,6 +521,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     )
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
+        const name = deleteCollection.name;
         waitForTask(taskId).then(() => {
           if (deleteCollection.all_versions.length > 1) {
             const topVersion = deleteCollection.all_versions.filter(
@@ -533,7 +534,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 topVersion[0].version,
               ),
             );
-
             this.setState({
               deleteCollection: null,
               collectionVersion: null,
@@ -542,7 +542,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 ...this.state.alerts,
                 {
                   variant: 'success',
-                  title: t`${deleteCollection.name} v${collectionVersion} has been successfully deleted.`,
+                  title: (
+                    <Trans>
+                      Collection{' '}
+                      <b>
+                        {name} v{collectionVersion}
+                      </b>{' '}
+                      has been successfully deleted.
+                    </Trans>
+                  ),
                 },
               ],
             });
@@ -552,7 +560,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               ...this.context.alerts,
               {
                 variant: 'success',
-                title: t`${deleteCollection.name} v${collectionVersion} has been successfully deleted.`,
+                title: (
+                  <Trans>
+                    Collection{' '}
+                    <b>
+                      {name} v{collectionVersion}
+                    </b>{' '}
+                    has been successfully deleted.
+                  </Trans>
+                ),
               },
             ]);
             this.setState({
