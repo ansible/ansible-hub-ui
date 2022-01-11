@@ -285,12 +285,27 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       groups__name: this.state.selectedGroup.name,
       page: 0,
       page_size: 10,
-    }).then((result) =>
-      this.setState({
-        deleteModalUsers: result.data.data,
-        deleteModalCount: result.data.meta.count,
-      }),
-    );
+    })
+      .then((result) =>
+        this.setState({
+          deleteModalUsers: result.data.data,
+          deleteModalCount: result.data.meta.count,
+        }),
+      )
+      .catch((e) =>
+        this.setState({
+          deleteModalVisible: false,
+          selectedGroup: null,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error loading users.`,
+              description: e?.message,
+            },
+          ],
+        }),
+      );
   }
 
   private saveGroup(value) {
@@ -441,13 +456,29 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
   private queryGroups() {
     this.setState({ loading: true }, () =>
-      GroupAPI.list(this.state.params).then((result) =>
-        this.setState({
-          groups: result.data.data,
-          itemCount: result.data.meta.count,
-          loading: false,
-        }),
-      ),
+      GroupAPI.list(this.state.params)
+        .then((result) =>
+          this.setState({
+            groups: result.data.data,
+            itemCount: result.data.meta.count,
+            loading: false,
+          }),
+        )
+        .catch((e) =>
+          this.setState({
+            groups: [],
+            itemCount: 0,
+            loading: false,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: t`Error loading groups.`,
+                description: e?.message,
+              },
+            ],
+          }),
+        ),
     );
   }
 }

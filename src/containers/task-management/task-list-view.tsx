@@ -388,13 +388,29 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
 
   private queryTasks() {
     this.setState({ loading: true }, () => {
-      TaskManagementAPI.list(this.state.params).then((result) => {
-        this.setState({
-          items: result.data.results,
-          itemCount: result.data.count,
-          loading: false,
-        });
-      });
+      TaskManagementAPI.list(this.state.params)
+        .then((result) => {
+          this.setState({
+            items: result.data.results,
+            itemCount: result.data.count,
+            loading: false,
+          });
+        })
+        .catch((e) =>
+          this.setState({
+            loading: false,
+            items: [],
+            itemCount: 0,
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: t`Error loading tasks.`,
+                description: e?.message,
+              },
+            ],
+          }),
+        );
     });
   }
 

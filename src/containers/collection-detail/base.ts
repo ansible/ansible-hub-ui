@@ -1,4 +1,5 @@
 import { CollectionDetailType, CollectionAPI } from 'src/api';
+import { AlertType } from 'src/components';
 import { Paths } from 'src/paths';
 
 export interface IBaseCollectionState {
@@ -8,6 +9,7 @@ export interface IBaseCollectionState {
     keywords?: string;
   };
   collection: CollectionDetailType;
+  alerts?: AlertType[];
 }
 
 export function loadCollection(

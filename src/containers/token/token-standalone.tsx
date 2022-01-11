@@ -10,12 +10,16 @@ import {
   ClipboardCopy,
   EmptyStateUnauthorized,
   DateComponent,
+  AlertList,
+  AlertType,
+  closeAlertMixin,
 } from 'src/components';
 import { ActiveUserAPI } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   token: string;
+  alerts: AlertType[];
 }
 
 class TokenPage extends React.Component<RouteComponentProps, IState> {
@@ -24,17 +28,21 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
     this.state = {
       token: undefined,
+      alerts: [],
     };
   }
-
   render() {
-    const { token } = this.state;
+    const { token, alerts } = this.state;
     let unauthorised = !this.context.user || this.context.user.is_anonymous;
     const expiration = this.context.settings.GALAXY_TOKEN_EXPIRATION;
     const expirationDate = new Date(Date.now() + 1000 * 60 * expiration);
 
     return (
       <React.Fragment>
+        <AlertList
+          alerts={alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        ></AlertList>
         <BaseHeader title={t`Token management`}></BaseHeader>
         <Main>
           {unauthorised ? (
@@ -89,9 +97,24 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadToken() {
-    ActiveUserAPI.getToken().then((result) =>
-      this.setState({ token: result.data.token }),
-    );
+    ActiveUserAPI.getToken()
+      .then((result) => this.setState({ token: result.data.token }))
+      .catch((e) =>
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error loading token.`,
+              description: e?.message,
+            },
+          ],
+        }),
+      );
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 }
 
