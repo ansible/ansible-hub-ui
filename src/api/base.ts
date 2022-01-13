@@ -1,11 +1,12 @@
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 import { Constants } from 'src/constants';
 import { ParamHelper } from 'src/utilities';
 import Cookies from 'js-cookie';
 
 export class BaseAPI {
   apiPath: string;
-  http: AxiosInstance;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  http: any;
 
   constructor(apiBaseUrl) {
     this.http = axios.create({
