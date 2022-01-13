@@ -723,7 +723,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               this.setState({ inputText: '' });
             }}
             params={params}
-            ignoredParams={['page_size', 'page', 'sort', 'id', 'tab']}
+            ignoredParams={[
+              'id',
+              'isEditing',
+              'page',
+              'page_size',
+              'sort',
+              'tab',
+            ]}
           />
         </div>
         {this.renderUsersTable(users)}
