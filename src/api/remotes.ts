@@ -44,7 +44,7 @@ class API extends HubAPI {
     );
   }
 
-  update(_id, _obj): Promise<never> {
+  update(_id, _obj) {
     throw 'use smartUpdate()';
   }
 
