@@ -34,9 +34,18 @@ interface IProps {
   updateRemote: (remote) => void;
 }
 
+type FormFilename = {
+  name: string;
+  original: boolean;
+};
+
 interface IState {
-  filenames: { [key: string]: string };
-  original: { [key: string]: boolean };
+  filenames: {
+    requirements_file: FormFilename;
+    client_key: FormFilename;
+    client_cert: FormFilename;
+    ca_cert: FormFilename;
+  };
 }
 
 export class RemoteForm extends React.Component<IProps, IState> {
@@ -48,16 +57,22 @@ export class RemoteForm extends React.Component<IProps, IState> {
 
     this.state = {
       filenames: {
-        requirements_file: requirements_file ? 'requirements.yml' : '',
-        client_key: client_key ? 'client_key' : '',
-        client_cert: client_cert ? 'client_cert' : '',
-        ca_cert: ca_cert ? 'ca_cert' : '',
-      },
-      original: {
-        requirements_file: !!requirements_file,
-        client_key: !!client_key,
-        client_cert: !!client_cert,
-        ca_cert: !!ca_cert,
+        requirements_file: {
+          name: requirements_file ? 'requirements.yml' : '',
+          original: !!requirements_file,
+        },
+        client_key: {
+          name: client_key ? 'client_key' : '',
+          original: !!client_key,
+        },
+        client_cert: {
+          name: client_cert ? 'client_cert' : '',
+          original: !!client_cert,
+        },
+        ca_cert: {
+          name: ca_cert ? 'ca_cert' : '',
+          original: !!ca_cert,
+        },
       },
     };
 
@@ -130,7 +145,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
 
   private renderForm(requiredFields, disabledFields) {
     const { remote, errorMessages } = this.props;
-    const { original, filenames } = this.state;
+    const { filenames } = this.state;
 
     const docsAnsibleLink = (
       <a
@@ -143,17 +158,16 @@ export class RemoteForm extends React.Component<IProps, IState> {
     );
 
     const filename = (field) =>
-      original[field] ? t`(uploaded)` : filenames[field];
+      filenames[field].original ? t`(uploaded)` : filenames[field].name;
     const fileOnChange = (field) => (value, name) => {
       this.setState(
         {
           filenames: {
             ...filenames,
-            [field]: name,
-          },
-          original: {
-            ...original,
-            [field]: false,
+            [field]: {
+              name,
+              original: false,
+            },
           },
         },
         () => this.updateRemote(value, field),
@@ -292,7 +306,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                       new Blob([this.props.remote.requirements_file], {
                         type: 'text/plain;charset=utf-8',
                       }),
-                      filenames.requirements_file,
+                      filenames.requirements_file.name,
                     );
                   }}
                   variant='plain'
@@ -534,7 +548,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                         new Blob([this.props.remote.client_cert], {
                           type: 'text/plain;charset=utf-8',
                         }),
-                        filenames.client_cert,
+                        filenames.client_cert.name,
                       );
                     }}
                     variant='plain'
@@ -580,7 +594,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                         new Blob([this.props.remote.ca_cert], {
                           type: 'text/plain;charset=utf-8',
                         }),
-                        filenames.ca_cert,
+                        filenames.ca_cert.name,
                       );
                     }}
                     variant='plain'
