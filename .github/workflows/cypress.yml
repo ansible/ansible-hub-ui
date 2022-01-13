@@ -126,6 +126,11 @@ jobs:
       working-directory: 'ansible-hub-ui'
       run: |
         npm install
+
+        # production displays unknown translations literally, make sure it's up to date
+        npm run gettext:extract
+        npm run gettext:compile
+
         npm run build-standalone
 
         # save the App.*.js hash for later verification
