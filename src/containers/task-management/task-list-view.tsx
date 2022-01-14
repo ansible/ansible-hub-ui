@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 
 import * as React from 'react';
@@ -369,7 +369,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
             {
               variant: 'success',
               title: name,
-              description: t`${name} stopped successfully.`,
+              description: <Trans>Task <b>{name}</b> stopped successfully.</Trans>,
             },
           ],
         });

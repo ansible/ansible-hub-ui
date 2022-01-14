@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
@@ -118,7 +118,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
             alerts: alerts.concat([
               {
                 variant: 'success',
-                title: t`Saved changes to ${username}.`,
+                title: <Trans>Saved changes to user <b>{username}</b>.</Trans>,
               },
             ]),
           },

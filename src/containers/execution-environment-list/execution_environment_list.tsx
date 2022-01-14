@@ -522,7 +522,7 @@ class ExecutionEnvironmentList extends React.Component<
       .then((result) => {
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(
-          t`Sync initiated for ${name}`,
+          <Trans>Sync started for execution environment <b>{name}</b>.</Trans>,
           'success',
           <span>
             <Trans>

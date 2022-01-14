@@ -473,7 +473,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'success',
-              title: t`${group.name} has been successfully deleted.`,
+              title: <Trans>Group <b>{group.name}</b> has been successfully deleted.</Trans>,
             },
           ],
         });

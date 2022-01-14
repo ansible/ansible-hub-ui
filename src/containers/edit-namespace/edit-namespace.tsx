@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
@@ -261,7 +261,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                 ...this.context.alerts,
                 {
                   variant: 'success',
-                  title: t`Saved changes to ${this.state.namespace.name}.`,
+                  title: <Trans>Saved changes to namespace <b>{this.state.namespace.name}</b>.</Trans>,
                 },
               ]),
           );

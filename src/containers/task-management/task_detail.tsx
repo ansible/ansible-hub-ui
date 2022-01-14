@@ -1,8 +1,7 @@
 import * as React from 'react';
 import './task.scss';
-import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-
+import { t, Trans } from '@lingui/macro';
 import {
   Link,
   withRouter,
@@ -384,7 +383,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             {
               variant: 'success',
               title: taskName,
-              description: t`${taskName} stopped successfully.`,
+              description: <Trans>Task <b>{taskName}</b> stopped successfully.</Trans>,
             },
           ],
         });

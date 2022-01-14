@@ -464,7 +464,14 @@ class ExecutionEnvironmentRegistryList extends React.Component<
   private deleteRegistry({ pk, name }) {
     ExecutionEnvironmentRegistryAPI.delete(pk)
       .then(() =>
+<<<<<<< HEAD
         this.addAlert(t`${name} has been successfully deleted.`, 'success'),
+=======
+        this.addAlert(
+          <Trans>Remote registry <b>{name}</b> has been successfully deleted.</Trans>,
+          'success',
+        ),
+>>>>>>> 4554e8f (--amend)
       )
       .catch(() =>
         this.addAlert(t`Failed to delete remote registry ${name}`, 'danger'),
@@ -480,7 +487,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       .then((result) => {
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(
-          t`Syncing started for ${name}`,
+          <Trans>Sync started for remote registry <b>{name}</b>.</Trans>,
           'success',
           <span>
             <Trans>
@@ -519,6 +526,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
   }
 
   private addAlert(title, variant, description?) {
+    // if (! description) {
+    //   description = title;
+    //   title = null;
+    // }
     this.setState({
       alerts: [
         ...this.state.alerts,

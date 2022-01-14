@@ -320,7 +320,7 @@ export function withContainerRepo(WrappedComponent) {
         .then((result) => {
           const task_id = parsePulpIDFromURL(result.data.task);
           this.addAlert(
-            t`Syncing started for ${name}`,
+            <Trans>Sync started for remote registry <b>{name}</b>.</Trans>,
             'success',
             <span>
               <Trans>
