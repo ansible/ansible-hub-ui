@@ -41,7 +41,6 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       data.forEach((record) => {
         items.push({ name: record.name });
       });
-
       items = sortBy(items, 'name');
     });
   }
@@ -59,7 +58,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.contains('button', 'Clear all filters').click();
   });
 
-  it('table contains all columns', () => {
+  it('should contains all columns.', () => {
     ['Namespace', 'Collection', 'Version', 'Date created', 'Status'].forEach(
       (item) => {
         cy.get('[data-cy="table_header"]').contains(item);
@@ -67,7 +66,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     );
   });
 
-  it('items are sorted alphabetically and paging is working', () => {
+  it('should sort alphabetically and paging is working.', () => {
     cy.get('[data-cy="sort_collection"]').click();
     cy.get('[data-cy="sort_collection"]').click();
 
@@ -84,7 +83,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy="body"]').contains(items[20].name);
   });
 
-  it('sorting is working for collection', () => {
+  it('should sort collection.', () => {
     cy.get('[data-cy="sort_collection"]').click();
     cy.get('[data-cy="body"]').contains('approval');
 
@@ -99,11 +98,11 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     );
   });
 
-  it('table contains some time informations', () => {
+  it('should see time informations.', () => {
     cy.contains('[data-cy="body"]', 'a few seconds ago');
   });
 
-  it('collection filter is working', () => {
+  it('should filter collection.', () => {
     cy.get('[data-cy="body"] [data-cy="compound_filter"] button:first').click();
     cy.contains(
       '[data-cy="body"] [data-cy="compound_filter"] a',
@@ -121,7 +120,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       .should('not.exist');
   });
 
-  it('collection filter and namespace filter is working', () => {
+  it('should filter collection and namespace together.', () => {
     cy.get('[data-cy="body"] [data-cy="compound_filter"] button:first').click();
     cy.contains(
       '[data-cy="body"] [data-cy="compound_filter"] a',
@@ -152,7 +151,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       .should('not.exist');
   });
 
-  it('filter non existing namespace is working and not showing any data', () => {
+  it('should filter non existing namespace and not show any data', () => {
     cy.get('[data-cy="body"] [data-cy="compound_filter"] button:first').click();
     cy.contains(
       '[data-cy="body"] [data-cy="compound_filter"] a',
@@ -165,7 +164,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy="body"]').contains('No results found');
   });
 
-  it('set page size is working', () => {
+  it('should set page size', () => {
     cy.get('[data-cy="body"]')
       .get('button[aria-label="Items per page"]:first')
       .click();
