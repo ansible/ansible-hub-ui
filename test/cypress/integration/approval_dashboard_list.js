@@ -4,7 +4,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   let items = [];
 
   function deleteData() {
-    var intercept_url =
+    /*var intercept_url =
       Cypress.env('prefix') +
       '_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=100';
 
@@ -19,7 +19,8 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
           'collection delete ' + record.namespace + ' ' + record.name,
         );
       });
-    });
+    });*/
+    cy.deleteNamespacesAndCollections();
   }
 
   function createData() {

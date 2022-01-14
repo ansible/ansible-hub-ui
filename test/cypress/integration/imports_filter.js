@@ -1,15 +1,8 @@
 describe('Imports filter test', () => {
-  function deleteTestData() {
-    cy.galaxykit('namespace delete filter_test_namespace');
-    cy.galaxykit('-i collection delete filter_test_namespace my_collection1');
-    cy.galaxykit('-i collection delete filter_test_namespace my_collection2');
-    cy.galaxykit('-i collection delete filter_test_namespace different_name');
-  }
-
   before(() => {
     cy.login();
+    cy.deleteNamespacesAndCollections();
 
-    deleteTestData();
     // insert test data
     cy.galaxykit('namespace create filter_test_namespace');
     cy.galaxykit('-i collection upload filter_test_namespace my_collection1');
@@ -20,10 +13,6 @@ describe('Imports filter test', () => {
   beforeEach(() => {
     cy.login();
     cy.visit('/ui/my-imports?namespace=filter_test_namespace');
-  });
-
-  after(() => {
-    deleteTestData();
   });
 
   it('partial filter for name is working.', () => {

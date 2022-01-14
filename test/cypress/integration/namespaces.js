@@ -2,7 +2,7 @@ describe('Namespaces Page Tests', () => {
   before(() => {
     cy.deleteTestUsers();
     cy.deleteTestGroups();
-    // TODO: cy.deleteTestNamespaces();
+    cy.deleteNamespacesAndCollections();
 
     cy.galaxykit('-i group create', 'testGroup1');
     cy.galaxykit('-i group create', 'testGroup2');
