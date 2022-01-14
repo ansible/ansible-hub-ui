@@ -12,6 +12,10 @@ const waitForTaskToFinish = (task, maxRequests, level = 0) => {
 };
 
 describe('collection tests', () => {
+  before(() => {
+    cy.deleteNamespacesAndCollections();
+  });
+
   beforeEach(() => {
     cy.login();
   });

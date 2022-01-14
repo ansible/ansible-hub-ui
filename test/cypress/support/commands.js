@@ -672,3 +672,12 @@ Cypress.Commands.add('deleteCollections', {}, (namespace) => {
     });
   });
 });
+
+Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
+  cy.galaxykit('namespace list').then((json) => {
+    JSON.parse(json).data.forEach((namespace) => {
+      cy.deleteCollections(namespace.name);
+      cy.galaxykit('namespace delete', namespace.name);
+    });
+  });
+});
