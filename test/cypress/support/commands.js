@@ -363,7 +363,10 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
 
   // Wait for navigation
   cy.wait('@userList');
-  cy.contains(username).should('not.exist');
+  cy.get('h4[class=pf-c-alert__title]').should(
+    'have.text',
+    'Success alert:User testUser has been successfully deleted.',
+  );
 });
 
 Cypress.Commands.add('deleteGroup', {}, (name) => {
@@ -383,7 +386,7 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
 
   // Wait for list reload
   cy.wait('@listGroups');
-  cy.contains(name).should('not.exist');
+  cy.contains('No groups yet').should('exist');
 });
 
 // GalaxyKit Integration
@@ -612,7 +615,10 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
     .parents('tr')
     .contains('.pf-c-dropdown__menu-item', 'Sync from registry')
     .click();
-  cy.contains('.pf-c-alert__title', `Sync initiated for ${name}`);
+  cy.contains(
+    '.pf-c-alert__title',
+    `Sync started for execution environment ${name}.`,
+  );
 });
 
 Cypress.Commands.add('deleteRegistries', {}, () => {

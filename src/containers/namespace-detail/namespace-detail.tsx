@@ -558,7 +558,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             ...this.context.alerts,
             {
               variant: 'success',
-              title: <Trans>Namespace <b>{this.state.namespace.name}</b> has been successfully deleted.</Trans>,
+              title: (
+                <Trans>
+                  Namespace <b>{this.state.namespace.name}</b> has been
+                  successfully deleted.
+                </Trans>
+              ),
             },
           ]);
         })

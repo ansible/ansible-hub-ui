@@ -118,7 +118,11 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
             alerts: alerts.concat([
               {
                 variant: 'success',
-                title: <Trans>Saved changes to user <b>{username}</b>.</Trans>,
+                title: (
+                  <Trans>
+                    Saved changes to user <b>{username}</b>.
+                  </Trans>
+                ),
               },
             ]),
           },

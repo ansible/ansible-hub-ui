@@ -468,7 +468,9 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         this.addAlert(t`${name} has been successfully deleted.`, 'success'),
 =======
         this.addAlert(
-          <Trans>Remote registry <b>{name}</b> has been successfully deleted.</Trans>,
+          <Trans>
+            Remote registry <b>{name}</b> has been successfully deleted.
+          </Trans>,
           'success',
         ),
 >>>>>>> 4554e8f (--amend)
@@ -487,7 +489,9 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       .then((result) => {
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(
-          <Trans>Sync started for remote registry <b>{name}</b>.</Trans>,
+          <Trans>
+            Sync started for remote registry <b>{name}</b>.
+          </Trans>,
           'success',
           <span>
             <Trans>
