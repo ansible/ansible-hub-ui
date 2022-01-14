@@ -68,7 +68,7 @@ export class Toolbar extends React.Component<IProps, IState> {
     return (
       <ToolbarPF>
         <ToolbarContent>
-          <ToolbarGroup>
+          <ToolbarGroup style={{ marginLeft: 0 }}>
             <ToolbarItem>
               <InputGroup>
                 <TextInput

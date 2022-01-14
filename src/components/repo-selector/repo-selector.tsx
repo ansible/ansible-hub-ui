@@ -47,6 +47,7 @@ export class RepoSelector extends React.Component<IProps, IState> {
         <FlexItem>
           <InputGroup>
             <InputGroupText
+              style={{ paddingLeft: 0 }}
               variant='plain'
               className='hub-input-group-text-no-wrap'
             >
