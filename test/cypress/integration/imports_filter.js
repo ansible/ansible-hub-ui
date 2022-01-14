@@ -105,9 +105,6 @@ describe('Imports filter test', () => {
     ).as('wait');
     cy.contains('a', 'Completed').click();
 
-    cy.get('[data-cy="import-list-data"]')
-      .contains('my_collection1')
-      .should('not.exist');
     cy.get('[data-cy="import-list-data"]').contains('my_collection2');
     cy.get('[data-cy="import-list-data"]')
       .contains('different_name')
