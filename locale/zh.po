@@ -37,7 +37,7 @@ msgstr "<0/> 被删除"
 msgid "<0/> was removed from <1/>"
 msgstr "<0/> 已从 <1/> 中删除"
 
-#: src/components/collection-detail/collection-info.tsx:75
+#: src/components/collection-detail/collection-info.tsx:76
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>注：</0>只有 ansible 2.9+ 支持使用 ansible-galaxy 安装集合。"
 
@@ -49,11 +49,11 @@ msgstr ""
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 msgstr "<0>注：</0>使用这个 URL 将 ansible-galaxy 配置为上传集合到这个命名空间。有关 ansible-galaxy 配置的更多信息，请参阅<1>这里</1>。"
 
-#: src/containers/token/token-standalone.tsx:70
+#: src/containers/token/token-standalone.tsx:78
 msgid "<0>WARNING</0> copy this token now. This is the only time you will ever see it."
 msgstr "<0>警告</0> 复制此令牌。此时是您可能看到它的唯一时间。"
 
-#: src/containers/token/token-standalone.tsx:63
+#: src/containers/token/token-standalone.tsx:71
 msgid "<0>WARNING</0> loading a new token will delete your old token."
 msgstr "<0>警告</0> 加载新令牌将删除您的旧令牌。"
 
@@ -82,7 +82,7 @@ msgstr "用于验证的 PEM 编码私钥。"
 msgid "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
 msgstr "标签可以包含小写和大写 ASCII 字母字符、数字、下划线、句点和短划线。标签不得以句点、下划线或短划线开头。"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:526
+#: src/containers/certification-dashboard/certification-dashboard.tsx:524
 msgid "API Error: 500"
 msgstr "API 错误：500"
 
@@ -90,8 +90,8 @@ msgstr "API 错误：500"
 msgid "API Error: Failed to set deprecation."
 msgstr "API 错误：无法设置弃用。"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:498
-#: src/containers/edit-namespace/edit-namespace.tsx:234
+#: src/containers/certification-dashboard/certification-dashboard.tsx:496
+#: src/containers/edit-namespace/edit-namespace.tsx:278
 msgid "API Error: {0}"
 msgstr "API 错误：{0}"
 
@@ -104,7 +104,7 @@ msgstr "API 令牌"
 msgid "API error. Status code: {0}"
 msgstr "API 错误。状态代码：{0}"
 
-#: src/containers/token/token-standalone.tsx:44
+#: src/containers/token/token-standalone.tsx:52
 msgid "API token"
 msgstr "API 令牌"
 
@@ -124,8 +124,8 @@ msgstr "推送内容后，将显示活动"
 msgid "Activity"
 msgstr "活动"
 
-#: src/components/execution-environment/repository-form.tsx:231
-#: src/components/execution-environment/repository-form.tsx:274
+#: src/components/execution-environment/repository-form.tsx:282
+#: src/components/execution-environment/repository-form.tsx:325
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:107
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:174
 #: src/containers/group-management/group-detail.tsx:453
@@ -134,7 +134,7 @@ msgstr "活动"
 msgid "Add"
 msgstr "添加"
 
-#: src/constants.tsx:144
+#: src/constants.tsx:153
 msgid "Add Ansible distribution"
 msgstr ""
 
@@ -142,28 +142,28 @@ msgstr ""
 msgid "Add a README with instructions for using this container."
 msgstr "添加一个包括使用这个容器信息的 README。"
 
-#: src/constants.tsx:145
+#: src/constants.tsx:154
 msgid "Add collection remote"
 msgstr ""
 
-#: src/constants.tsx:154
+#: src/constants.tsx:163
 msgid "Add container distribution"
 msgstr ""
 
-#: src/constants.tsx:156
+#: src/constants.tsx:165
 msgid "Add container repository"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:121
-#: src/containers/execution-environment-list/execution_environment_list.tsx:159
+#: src/components/execution-environment/repository-form.tsx:149
+#: src/containers/execution-environment-list/execution_environment_list.tsx:161
 msgid "Add execution environment"
 msgstr "添加执行环境"
 
-#: src/constants.tsx:169
+#: src/constants.tsx:181
 msgid "Add group"
 msgstr "添加组"
 
-#: src/constants.tsx:170
+#: src/constants.tsx:182
 msgid "Add namespace"
 msgstr "添加命名空间"
 
@@ -175,7 +175,7 @@ msgstr "添加新标签"
 msgid "Add new tag to image"
 msgstr "向镜像添加新标签"
 
-#: src/constants.tsx:168
+#: src/constants.tsx:180
 #: src/containers/execution-environment/registry-list.tsx:149
 #: src/containers/execution-environment/registry-list.tsx:212
 msgid "Add remote registry"
@@ -185,29 +185,29 @@ msgstr "添加远程 registry"
 msgid "Add selected users to group"
 msgstr "将所选用户添加到组"
 
-#: src/constants.tsx:171
+#: src/constants.tsx:183
 msgid "Add synclist"
 msgstr "添加同步列表"
 
-#: src/components/execution-environment/repository-form.tsx:255
+#: src/components/execution-environment/repository-form.tsx:306
 msgid "Add tag(s) to exclude"
 msgstr "添加要排除的标签"
 
-#: src/components/execution-environment/repository-form.tsx:212
+#: src/components/execution-environment/repository-form.tsx:263
 msgid "Add tag(s) to include"
 msgstr "添加要包含的标签"
 
-#: src/constants.tsx:172
+#: src/constants.tsx:184
 msgid "Add user"
 msgstr "添加用户"
 
-#: src/components/execution-environment/repository-form.tsx:332
+#: src/components/execution-environment/repository-form.tsx:388
 msgid ""
 "Adding groups provides access to all repositories in the\n"
 "\"{namespace}\" container namespace."
 msgstr "通过添加组，可以访问 \"{namespace}\" 容器命名空间中的所有存储库。"
 
-#: src/containers/namespace-list/namespace-list.tsx:165
+#: src/containers/namespace-list/namespace-list.tsx:185
 msgid "All"
 msgstr "所有"
 
@@ -223,8 +223,8 @@ msgstr "批准仪表板"
 msgid "Approval status:"
 msgstr "批准状态："
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:400
-#: src/containers/certification-dashboard/certification-dashboard.tsx:459
+#: src/containers/certification-dashboard/certification-dashboard.tsx:398
+#: src/containers/certification-dashboard/certification-dashboard.tsx:457
 msgid "Approve"
 msgstr "批准"
 
@@ -234,7 +234,7 @@ msgstr "批准"
 msgid "Approved"
 msgstr "已批准"
 
-#: src/components/user-form/user-form.tsx:127
+#: src/components/user-form/user-form.tsx:134
 msgid "Authentication provider"
 msgstr "身份验证供应商"
 
@@ -262,18 +262,18 @@ msgstr "CLI 配置"
 msgid "CLI configuration"
 msgstr "CLI 配置"
 
-#: src/containers/repositories/repository-list.tsx:150
+#: src/containers/repositories/repository-list.tsx:151
 msgid "Can't update remote without a distribution attached to it."
 msgstr "在未将一个发布附加到它时，无法远程更新。"
 
 #: src/components/confirm-modal/confirm-modal.tsx:40
 #: src/components/delete-modal/delete-modal.tsx:32
-#: src/components/execution-environment/repository-form.tsx:132
+#: src/components/execution-environment/repository-form.tsx:161
 #: src/components/group-management/group-modal.tsx:58
-#: src/components/namespace-modal/namespace-modal.tsx:107
+#: src/components/namespace-modal/namespace-modal.tsx:114
 #: src/components/repositories/remote-form.tsx:133
-#: src/components/user-form/user-form.tsx:211
-#: src/containers/edit-namespace/edit-namespace.tsx:161
+#: src/components/user-form/user-form.tsx:224
+#: src/containers/edit-namespace/edit-namespace.tsx:195
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:151
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:134
 #: src/containers/group-management/group-detail.tsx:413
@@ -302,58 +302,62 @@ msgstr "已认证"
 msgid "Change"
 msgstr "更改"
 
-#: src/constants.tsx:146
+#: src/constants.tsx:155
 msgid "Change Ansible distribution"
 msgstr "更改 Ansible 发布"
 
-#: src/constants.tsx:147
+#: src/constants.tsx:156
 msgid "Change collection remote"
 msgstr "更改集合远程"
 
-#: src/constants.tsx:157
+#: src/constants.tsx:166
 msgid "Change container distribution"
 msgstr ""
 
-#: src/constants.tsx:158
-#: src/constants.tsx:197
+#: src/constants.tsx:167
+#: src/constants.tsx:209
 msgid "Change container namespace permissions"
 msgstr "更改容器命名空间权限"
 
-#: src/constants.tsx:159
+#: src/constants.tsx:168
 msgid "Change container repository"
 msgstr ""
 
-#: src/constants.tsx:163
+#: src/constants.tsx:172
 msgid "Change containers"
 msgstr "更改容器"
 
-#: src/constants.tsx:204
+#: src/constants.tsx:216
 msgid "Change distribution"
 msgstr "更改分发"
 
-#: src/constants.tsx:174
+#: src/constants.tsx:186
 msgid "Change group"
 msgstr "更改组"
 
-#: src/constants.tsx:164
-#: src/constants.tsx:196
+#: src/constants.tsx:173
+#: src/constants.tsx:208
 msgid "Change image tags"
 msgstr "更改镜像标签"
 
-#: src/constants.tsx:175
-#: src/constants.tsx:190
+#: src/constants.tsx:187
+#: src/constants.tsx:202
 msgid "Change namespace"
 msgstr "更改命名空间"
 
-#: src/constants.tsx:173
+#: src/constants.tsx:185
 msgid "Change remote registry"
 msgstr ""
 
-#: src/constants.tsx:176
+#: src/constants.tsx:188
 msgid "Change synclist"
 msgstr "更改同步列表"
 
 #: src/constants.tsx:177
+msgid "Change task"
+msgstr ""
+
+#: src/constants.tsx:189
 msgid "Change user"
 msgstr "更改用户"
 
@@ -430,7 +434,7 @@ msgid "Collection upload canceled"
 msgstr "集合上传已取消"
 
 #: src/components/headers/collection-header.tsx:208
-#: src/components/repositories/local-repository-table.tsx:91
+#: src/components/repositories/local-repository-table.tsx:86
 #: src/components/repositories/remote-repository-table.tsx:99
 #: src/containers/certification-dashboard/certification-dashboard.tsx:276
 msgid "Collection versions"
@@ -454,17 +458,17 @@ msgstr "上传后会出现集合"
 msgid "Command"
 msgstr "命令"
 
-#: src/constants.tsx:239
+#: src/constants.tsx:251
 msgid "Community"
 msgstr "社区"
 
-#: src/components/namespace-form/namespace-form.tsx:56
+#: src/components/namespace-form/namespace-form.tsx:74
 msgid "Company name"
 msgstr "公司名称"
 
 #: src/components/my-imports/import-list.tsx:87
 #: src/components/status/status-indicator.tsx:67
-#: src/constants.tsx:303
+#: src/constants.tsx:315
 #: src/containers/task-management/task-list-view.tsx:154
 msgid "Completed"
 msgstr "完成"
@@ -473,15 +477,15 @@ msgstr "完成"
 msgid "Configure"
 msgstr "配置"
 
-#: src/containers/token/token-insights.tsx:55
+#: src/containers/token/token-insights.tsx:83
 msgid "Connect Private Automation Hub"
 msgstr "连接私有 Automation Hub"
 
-#: src/containers/token/token-insights.tsx:69
+#: src/containers/token/token-insights.tsx:97
 msgid "Connect the ansible-galaxy client"
 msgstr "连接 ansible-galaxy 客户端"
 
-#: src/containers/token/token-insights.tsx:52
+#: src/containers/token/token-insights.tsx:80
 msgid "Connect to Hub"
 msgstr "连接到 Hub"
 
@@ -500,16 +504,20 @@ msgstr "如需更多信息，请联系您的机构管理员。"
 #~ msgid "Container Registry"
 #~ msgstr "容器 Registry"
 
-#: src/components/execution-environment/repository-form.tsx:151
+#: src/components/execution-environment/repository-form.tsx:197
+msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
+msgstr ""
+
+#: src/components/execution-environment/repository-form.tsx:180
 msgid "Container namespace"
 msgstr "容器命名空间"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:317
+#: src/containers/execution-environment-list/execution_environment_list.tsx:319
 msgid "Container registry type"
 msgstr "容器 Registry 类型"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:240
-#: src/containers/execution-environment-list/execution_environment_list.tsx:297
+#: src/containers/execution-environment-list/execution_environment_list.tsx:242
+#: src/containers/execution-environment-list/execution_environment_list.tsx:299
 msgid "Container repository name"
 msgstr "容器仓库名称"
 
@@ -544,17 +552,17 @@ msgstr "复制到剪贴板。"
 msgid "Could not load import log"
 msgstr "无法加载导入日志"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:499
-#: src/containers/certification-dashboard/certification-dashboard.tsx:527
+#: src/containers/certification-dashboard/certification-dashboard.tsx:497
+#: src/containers/certification-dashboard/certification-dashboard.tsx:525
 msgid "Could not update the certification status for {0}.{1}.{2}."
 msgstr "无法为 {0}.{1}.{2} 更新证书的状态。"
 
 #: src/components/group-management/group-modal.tsx:55
-#: src/components/namespace-modal/namespace-modal.tsx:104
+#: src/components/namespace-modal/namespace-modal.tsx:111
 #: src/containers/group-management/group-list.tsx:148
 #: src/containers/group-management/group-list.tsx:185
-#: src/containers/namespace-list/namespace-list.tsx:132
-#: src/containers/namespace-list/namespace-list.tsx:233
+#: src/containers/namespace-list/namespace-list.tsx:152
+#: src/containers/namespace-list/namespace-list.tsx:253
 #: src/containers/user-management/user-list.tsx:184
 #: src/containers/user-management/user-list.tsx:249
 msgid "Create"
@@ -564,16 +572,16 @@ msgstr "创建"
 msgid "Create a group"
 msgstr "创建用户"
 
-#: src/components/namespace-modal/namespace-modal.tsx:94
+#: src/components/namespace-modal/namespace-modal.tsx:101
 msgid "Create a new namespace"
 msgstr "创建新的命名空间,"
 
-#: src/components/user-form/user-form.tsx:89
+#: src/components/user-form/user-form.tsx:96
 msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 msgstr "使用至少 9 个字符创建密码，包括特殊字符，例如 <!@$%>。避免使用通用名称或表达式。"
 
-#: src/constants.tsx:155
-#: src/constants.tsx:192
+#: src/constants.tsx:164
+#: src/constants.tsx:204
 msgid "Create new containers"
 msgstr "创建新容器"
 
@@ -583,7 +591,7 @@ msgid "Create new user"
 msgstr "创建新用户"
 
 #: src/containers/execution-environment/registry-list.tsx:323
-#: src/containers/execution-environment-list/execution_environment_list.tsx:307
+#: src/containers/execution-environment-list/execution_environment_list.tsx:309
 #: src/containers/group-management/group-detail.tsx:761
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
@@ -594,15 +602,15 @@ msgstr "已创建"
 msgid "Created on"
 msgstr "创建于"
 
-#: src/constants.tsx:272
+#: src/constants.tsx:284
 msgid "Curate all synclist repository"
 msgstr "策展所有同步列表仓库"
 
-#: src/constants.tsx:269
+#: src/constants.tsx:281
 msgid "Curate synclist repository"
 msgstr "策展同步列表仓库"
 
-#: src/constants.tsx:273
+#: src/constants.tsx:285
 msgid "Curate synclist repository batch"
 msgstr "策展同步列表仓库批量"
 
@@ -610,11 +618,11 @@ msgstr "策展同步列表仓库批量"
 msgid "Current tags"
 msgstr "当前标签"
 
-#: src/components/execution-environment/repository-form.tsx:281
+#: src/components/execution-environment/repository-form.tsx:332
 msgid "Currently excluded tags"
 msgstr "当前排除的标签"
 
-#: src/components/execution-environment/repository-form.tsx:238
+#: src/components/execution-environment/repository-form.tsx:289
 msgid "Currently included tags"
 msgstr "当前包括的标签"
 
@@ -638,11 +646,11 @@ msgstr "创建日期"
 #: src/components/headers/collection-header.tsx:273
 #: src/containers/execution-environment/registry-list.tsx:392
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:410
-#: src/containers/execution-environment-list/execution_environment_list.tsx:381
+#: src/containers/execution-environment-list/execution_environment_list.tsx:383
 #: src/containers/group-management/group-detail.tsx:251
-#: src/containers/group-management/group-list.tsx:386
-#: src/containers/group-management/group-list.tsx:396
-#: src/containers/namespace-detail/namespace-detail.tsx:203
+#: src/containers/group-management/group-list.tsx:401
+#: src/containers/group-management/group-list.tsx:411
+#: src/containers/namespace-detail/namespace-detail.tsx:207
 #: src/containers/task-management/task-list-view.tsx:303
 #: src/containers/task-management/task-list-view.tsx:319
 #: src/containers/user-management/user-detail.tsx:130
@@ -650,39 +658,39 @@ msgstr "创建日期"
 msgid "Delete"
 msgstr "删除"
 
-#: src/constants.tsx:148
+#: src/constants.tsx:157
 msgid "Delete Ansible distribution"
 msgstr ""
 
-#: src/constants.tsx:149
+#: src/constants.tsx:158
 msgid "Delete collection"
 msgstr ""
 
-#: src/constants.tsx:150
+#: src/constants.tsx:159
 msgid "Delete collection remote"
 msgstr ""
 
-#: src/constants.tsx:160
+#: src/constants.tsx:169
 msgid "Delete container distribution"
 msgstr ""
 
-#: src/constants.tsx:161
+#: src/constants.tsx:170
 msgid "Delete container namespace"
 msgstr ""
 
-#: src/constants.tsx:162
+#: src/constants.tsx:171
 msgid "Delete container repository"
 msgstr ""
 
-#: src/constants.tsx:201
+#: src/constants.tsx:213
 msgid "Delete container's distribution"
 msgstr "删除容器的发布"
 
-#: src/constants.tsx:200
+#: src/constants.tsx:212
 msgid "Delete container's namespace"
 msgstr "删除容器的命名空间"
 
-#: src/constants.tsx:205
+#: src/constants.tsx:217
 msgid "Delete distribution"
 msgstr "作业发布"
 
@@ -691,7 +699,7 @@ msgstr "作业发布"
 msgid "Delete entire collection"
 msgstr "删除整个集合"
 
-#: src/constants.tsx:179
+#: src/constants.tsx:191
 msgid "Delete group"
 msgstr "删除组"
 
@@ -699,13 +707,13 @@ msgstr "删除组"
 msgid "Delete group?"
 msgstr "删除组？"
 
-#: src/constants.tsx:180
+#: src/constants.tsx:192
 #: src/containers/namespace-detail/namespace-detail.tsx:482
 #: src/containers/namespace-detail/namespace-detail.tsx:496
 msgid "Delete namespace"
 msgstr "删除命名空间"
 
-#: src/constants.tsx:178
+#: src/constants.tsx:190
 msgid "Delete remote registry"
 msgstr ""
 
@@ -713,11 +721,15 @@ msgstr ""
 msgid "Delete remote registry?"
 msgstr "删除远程 registry？"
 
-#: src/constants.tsx:181
+#: src/constants.tsx:193
 msgid "Delete synclist"
 msgstr "删除同步列表"
 
-#: src/constants.tsx:182
+#: src/constants.tsx:178
+msgid "Delete task"
+msgstr ""
+
+#: src/constants.tsx:194
 msgid "Delete user"
 msgstr "删除用户"
 
@@ -738,7 +750,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "删除 <0>{0} v{collectionVersion}</0> 其数据将会丢失。"
 
 #: src/components/headers/collection-header.tsx:299
-#: src/containers/namespace-detail/namespace-detail.tsx:208
+#: src/containers/namespace-detail/namespace-detail.tsx:212
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "删除 <0>{0}</0> 其数据将会丢失。"
 
@@ -746,7 +758,7 @@ msgstr "删除 <0>{0}</0> 其数据将会丢失。"
 msgid "Deleting <0>{digest}</0> and its data will be lost."
 msgstr "删除 <0>{digest}</0> 其数据将会丢失。"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:190
+#: src/containers/execution-environment-list/execution_environment_list.tsx:192
 msgid "Deleting <0>{name}</0> and its data will be lost."
 msgstr "删除 <0>{name}</0> 其数据将会丢失。"
 
@@ -777,9 +789,9 @@ msgid "Deprecate"
 msgstr "弃用"
 
 #: src/components/collection-detail/collection-content-list.tsx:101
-#: src/components/execution-environment/repository-form.tsx:309
-#: src/components/namespace-form/namespace-form.tsx:115
-#: src/containers/execution-environment-list/execution_environment_list.tsx:302
+#: src/components/execution-environment/repository-form.tsx:360
+#: src/components/namespace-form/namespace-form.tsx:150
+#: src/containers/execution-environment-list/execution_environment_list.tsx:304
 #: src/containers/task-management/task_detail.tsx:335
 msgid "Description"
 msgstr "描述"
@@ -813,7 +825,7 @@ msgstr "文档站点"
 msgid "Documentation"
 msgstr "文档"
 
-#: src/containers/token/token-insights.tsx:71
+#: src/containers/token/token-insights.tsx:99
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "有关如何配置 <0>ansible-galaxy</0> 客户端的文档位于<1>这里</1>。使用下列参数来配置客户端："
 
@@ -838,7 +850,7 @@ msgstr "下载并发"
 msgid "Download requirements file"
 msgstr "下载要求文件"
 
-#: src/components/collection-detail/collection-info.tsx:113
+#: src/components/collection-detail/collection-info.tsx:114
 msgid "Download tarball"
 msgstr "下载 tarball"
 
@@ -852,11 +864,11 @@ msgid "Dropdown"
 msgstr "下拉菜单"
 
 #: src/components/repositories/remote-repository-table.tsx:148
-#: src/containers/edit-namespace/edit-namespace.tsx:114
+#: src/containers/edit-namespace/edit-namespace.tsx:148
 #: src/containers/execution-environment/registry-list.tsx:379
-#: src/containers/execution-environment-detail/base.tsx:148
+#: src/containers/execution-environment-detail/base.tsx:150
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:92
-#: src/containers/execution-environment-list/execution_environment_list.tsx:355
+#: src/containers/execution-environment-list/execution_environment_list.tsx:357
 #: src/containers/group-management/group-detail.tsx:336
 #: src/containers/settings/user-profile.tsx:102
 #: src/containers/user-management/user-detail.tsx:120
@@ -865,11 +877,11 @@ msgstr "下拉菜单"
 msgid "Edit"
 msgstr "编辑"
 
-#: src/containers/edit-namespace/edit-namespace.tsx:91
+#: src/containers/edit-namespace/edit-namespace.tsx:120
 msgid "Edit details"
 msgstr "编辑详情"
 
-#: src/components/execution-environment/repository-form.tsx:121
+#: src/components/execution-environment/repository-form.tsx:149
 msgid "Edit execution environment"
 msgstr "编辑执行环境"
 
@@ -893,7 +905,7 @@ msgstr "编辑远程 registry"
 #~ msgid "Edit repository"
 #~ msgstr "编辑仓库"
 
-#: src/containers/edit-namespace/edit-namespace.tsx:92
+#: src/containers/edit-namespace/edit-namespace.tsx:121
 msgid "Edit resources"
 msgstr "编辑资源"
 
@@ -905,7 +917,7 @@ msgstr "编辑资源"
 msgid "Edit user"
 msgstr "编辑用户"
 
-#: src/components/user-form/user-form.tsx:81
+#: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:681
 #: src/containers/group-management/group-detail.tsx:746
 #: src/containers/user-management/user-list.tsx:174
@@ -926,11 +938,11 @@ msgid "Error deleting collection."
 msgstr "删除集合出错。"
 
 #: src/containers/group-management/group-detail.tsx:539
-#: src/containers/group-management/group-list.tsx:435
+#: src/containers/group-management/group-list.tsx:450
 msgid "Error deleting group."
 msgstr "删除组错误。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:570
+#: src/containers/namespace-detail/namespace-detail.tsx:577
 msgid "Error deleting namespace."
 msgstr "删除命名空间错误。"
 
@@ -939,7 +951,11 @@ msgstr "删除命名空间错误。"
 msgid "Error deleting user."
 msgstr "删除用户错误。"
 
-#: src/containers/group-management/group-list.tsx:330
+#: src/components/collection-detail/collection-info.tsx:184
+msgid "Error downloading collection."
+msgstr ""
+
+#: src/containers/group-management/group-list.tsx:345
 msgid "Error editing group."
 msgstr "编辑组错误。"
 
@@ -955,25 +971,69 @@ msgstr "获取集合依赖关系时出错。"
 msgid "Error loading Controllers"
 msgstr "加载控制器时出错"
 
+#: src/containers/edit-namespace/edit-namespace.tsx:97
+msgid "Error loading active user."
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:449
+msgid "Error loading collection repositories."
+msgstr ""
+
 #: src/containers/collection-detail/collection-dependencies.tsx:209
 msgid "Error loading dependent collections."
 msgstr "加载依赖集合时出错。"
+
+#: src/containers/execution-environment-list/execution_environment_list.tsx:501
+msgid "Error loading environments."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:129
 msgid "Error loading group."
 msgstr "加载组错误。"
 
+#: src/components/execution-environment/repository-form.tsx:406
+#: src/components/execution-environment/repository-form.tsx:476
+#: src/components/namespace-form/namespace-form.tsx:122
+#: src/components/namespace-modal/namespace-modal.tsx:171
+#: src/components/user-form/user-form.tsx:295
+#: src/containers/group-management/group-list.tsx:476
+msgid "Error loading groups."
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx:114
+msgid "Error loading my namespaces."
+msgstr ""
+
+#: src/containers/namespace-list/namespace-list.tsx:328
+msgid "Error loading namespaces."
+msgstr ""
+
 #: src/containers/group-management/group-detail.tsx:143
 msgid "Error loading permissions."
 msgstr "加载权限时出错。"
+
+#: src/components/execution-environment/repository-form.tsx:113
+msgid "Error loading registries."
+msgstr ""
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:154
 msgid "Error loading tags"
 msgstr "加载标签时出错。"
 
+#: src/containers/task-management/task-list-view.tsx:408
+msgid "Error loading tasks."
+msgstr ""
+
+#: src/containers/token/token-insights.tsx:57
+#: src/containers/token/token-standalone.tsx:108
+msgid "Error loading token."
+msgstr ""
+
 #: src/containers/group-management/group-detail.tsx:482
 #: src/containers/group-management/group-detail.tsx:603
 #: src/containers/group-management/group-detail.tsx:838
+#: src/containers/group-management/group-list.tsx:303
+#: src/containers/user-management/user-list.tsx:419
 msgid "Error loading users."
 msgstr "加载用户时出错。"
 
@@ -1000,11 +1060,11 @@ msgstr "更新用户时出错。"
 
 #: src/containers/execution-environment-detail/base.tsx:182
 #: src/containers/execution-environment-list/execution_environment_list.tsx:461
-msgid "Error: changes weren't saved"
-msgstr "错误：更改没有被保存"
+#~ msgid "Error: changes weren't saved"
+#~ msgstr "错误：更改没有被保存"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:610
-#: src/containers/execution-environment-list/execution_environment_list.tsx:518
+#: src/containers/execution-environment-list/execution_environment_list.tsx:536
 msgid "Error: delete failed"
 msgstr "错误：删除失败"
 
@@ -1013,26 +1073,34 @@ msgid "Execution Environment"
 msgstr "执行环境"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:36
-#: src/containers/execution-environment-list/execution_environment_list.tsx:179
+#: src/containers/execution-environment-list/execution_environment_list.tsx:181
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:103
 #: src/loaders/standalone/standalone-loader.tsx:363
 #: src/loaders/standalone/standalone-loader.tsx:369
 msgid "Execution Environments"
 msgstr "执行环境"
 
-#: src/containers/token/token-standalone.tsx:53
+#: src/containers/execution-environment-list/execution_environment_list.tsx:459
+msgid "Execution environment added."
+msgstr ""
+
+#: src/containers/execution-environment-list/execution_environment_list.tsx:460
+msgid "Execution environment saved."
+msgstr ""
+
+#: src/containers/token/token-standalone.tsx:61
 msgid "Expiration"
 msgstr "过期"
 
 #: src/components/my-imports/import-console.tsx:110
 #: src/components/my-imports/import-list.tsx:91
 #: src/components/status/status-indicator.tsx:75
-#: src/constants.tsx:304
+#: src/constants.tsx:316
 #: src/containers/task-management/task-list-view.tsx:158
 msgid "Failed"
 msgstr "失败"
 
-#: src/containers/execution-environment/registry-list.tsx:459
+#: src/containers/execution-environment/registry-list.tsx:467
 msgid "Failed to delete remote registry {name}"
 msgstr "删除远程 registry {name} 失败"
 
@@ -1058,7 +1126,7 @@ msgstr "按仓库过滤"
 msgid "Filter by {0}"
 msgstr "按 {0} 过滤。"
 
-#: src/components/permissions/obect-permission-field.tsx:46
+#: src/components/permissions/obect-permission-field.tsx:52
 msgid "Find a group"
 msgstr "查找组"
 
@@ -1076,7 +1144,7 @@ msgstr "在此 registry 中查找执行环境"
 msgid "Finished at"
 msgstr "完成于"
 
-#: src/components/user-form/user-form.tsx:79
+#: src/components/user-form/user-form.tsx:86
 #: src/containers/group-management/group-detail.tsx:673
 #: src/containers/group-management/group-detail.tsx:756
 #: src/containers/user-management/user-list.tsx:166
@@ -1092,7 +1160,7 @@ msgstr "跟踪日志"
 msgid "Galaxy Logo"
 msgstr "Galaxy 徽标"
 
-#: src/components/repositories/local-repository-table.tsx:150
+#: src/containers/repositories/repository-list.tsx:297
 msgid "Get token"
 msgstr "获得令牌"
 
@@ -1100,21 +1168,21 @@ msgstr "获得令牌"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "10 次尝试后放弃等待任务."
 
-#: src/components/collection-detail/collection-info.tsx:155
+#: src/components/collection-detail/collection-info.tsx:156
 msgid "Go to documentation"
 msgstr "访问文档"
 
 #: src/containers/group-management/group-list.tsx:171
-#: src/containers/group-management/group-list.tsx:346
+#: src/containers/group-management/group-list.tsx:361
 msgid "Group"
 msgstr "组"
 
-#: src/containers/group-management/group-list.tsx:359
+#: src/containers/group-management/group-list.tsx:374
 msgid "Group list"
 msgstr "组列表"
 
-#: src/components/user-form/user-form.tsx:140
-#: src/components/user-form/user-form.tsx:154
+#: src/components/user-form/user-form.tsx:147
+#: src/components/user-form/user-form.tsx:161
 #: src/constants.tsx:54
 #: src/containers/group-management/group-detail.tsx:209
 #: src/containers/group-management/group-list.tsx:132
@@ -1127,7 +1195,7 @@ msgstr "组"
 msgid "Groups will appear once created"
 msgstr "组在创建后会出现"
 
-#: src/components/execution-environment/repository-form.tsx:328
+#: src/components/execution-environment/repository-form.tsx:384
 msgid "Groups with access"
 msgstr "带有访问权限的组"
 
@@ -1137,8 +1205,8 @@ msgstr "隐藏高级选项"
 
 #: src/components/headers/collection-header.tsx:308
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:226
-#: src/containers/execution-environment-list/execution_environment_list.tsx:196
-#: src/containers/namespace-detail/namespace-detail.tsx:215
+#: src/containers/execution-environment-list/execution_environment_list.tsx:198
+#: src/containers/namespace-detail/namespace-detail.tsx:219
 msgid "I understand that this action cannot be undone."
 msgstr "我理解这个行动是无法撤销的。"
 
@@ -1165,12 +1233,12 @@ msgstr "镜像"
 msgid "Images will appear once uploaded"
 msgstr "上传后将显示镜像"
 
-#: src/constants.tsx:268
-#: src/constants.tsx:271
+#: src/constants.tsx:280
+#: src/constants.tsx:283
 msgid "Import and auto approve"
 msgstr "导入和自动批准"
 
-#: src/constants.tsx:270
+#: src/constants.tsx:282
 msgid "Import and move to staging"
 msgstr "导入并移至 staging"
 
@@ -1187,7 +1255,7 @@ msgstr "导入"
 msgid "Index execution environments"
 msgstr "索引执行环境"
 
-#: src/containers/execution-environment/registry-list.tsx:492
+#: src/containers/execution-environment/registry-list.tsx:501
 msgid "Indexing execution environments in {name}"
 msgstr "在 {name} 中索引执行环境."
 
@@ -1195,11 +1263,11 @@ msgstr "在 {name} 中索引执行环境."
 msgid "Indexing execution environments is only supported on registry.redhat.io"
 msgstr "只有在 registry.redhat.io 上才支持索引执行环境"
 
-#: src/containers/execution-environment/registry-list.tsx:505
+#: src/containers/execution-environment/registry-list.tsx:514
 msgid "Indexing failed for {name}"
 msgstr "对 {name} 进行索引失败"
 
-#: src/components/collection-detail/collection-info.tsx:54
+#: src/components/collection-detail/collection-info.tsx:55
 #: src/components/headers/collection-header.tsx:457
 msgid "Install"
 msgstr "安装"
@@ -1208,7 +1276,7 @@ msgstr "安装"
 #~ msgid "Install Version"
 #~ msgstr "安装版本"
 
-#: src/components/collection-detail/collection-info.tsx:71
+#: src/components/collection-detail/collection-info.tsx:72
 msgid "Installation"
 msgstr "安装"
 
@@ -1232,7 +1300,7 @@ msgstr "登录凭据无效。"
 msgid "Issue tracker"
 msgstr "问题跟踪器"
 
-#: src/components/execution-environment/repository-form.tsx:300
+#: src/components/execution-environment/repository-form.tsx:351
 msgid "It does not make sense to include and exclude tags at the same time."
 msgstr "同时包含和排除标签没有意义。"
 
@@ -1248,11 +1316,11 @@ msgstr "关闭这个窗口是安全的。这些任务将在后台结束。"
 msgid "Keywords"
 msgstr "关键字"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:312
+#: src/containers/execution-environment-list/execution_environment_list.tsx:314
 msgid "Last modified"
 msgstr "最后修改"
 
-#: src/components/user-form/user-form.tsx:80
+#: src/components/user-form/user-form.tsx:87
 #: src/containers/group-management/group-detail.tsx:677
 #: src/containers/group-management/group-detail.tsx:751
 #: src/containers/user-management/user-list.tsx:170
@@ -1286,7 +1354,7 @@ msgstr "层"
 msgid "Learn more"
 msgstr "了解更多"
 
-#: src/components/collection-detail/collection-info.tsx:65
+#: src/components/collection-detail/collection-info.tsx:66
 msgid "License"
 msgstr "许可证"
 
@@ -1294,11 +1362,11 @@ msgstr "许可证"
 msgid "Limits total download rate in requests per second."
 msgstr "限制请求的每秒总下载率。"
 
-#: src/components/namespace-form/namespace-form.tsx:217
+#: src/components/namespace-form/namespace-form.tsx:252
 msgid "Link URL"
 msgstr "链接 URL"
 
-#: src/components/namespace-form/namespace-form.tsx:208
+#: src/components/namespace-form/namespace-form.tsx:243
 msgid "Link text"
 msgstr "链接文本"
 
@@ -1307,13 +1375,13 @@ msgstr "链接文本"
 msgid "List of Collections"
 msgstr "集合列表"
 
-#: src/containers/token/token-insights.tsx:98
-#: src/containers/token/token-standalone.tsx:81
+#: src/containers/token/token-insights.tsx:126
+#: src/containers/token/token-standalone.tsx:89
 msgid "Load token"
 msgstr "加载令牌"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:411
-#: src/containers/repositories/repository-list.tsx:113
+#: src/containers/execution-environment-list/execution_environment_list.tsx:413
+#: src/containers/repositories/repository-list.tsx:114
 msgid "Local"
 msgstr "本地"
 
@@ -1326,7 +1394,7 @@ msgstr "登录到您的帐户"
 msgid "Login"
 msgstr "登录"
 
-#: src/components/namespace-form/namespace-form.tsx:100
+#: src/components/namespace-form/namespace-form.tsx:135
 msgid "Logo URL"
 msgstr "徽标 URL"
 
@@ -1339,7 +1407,7 @@ msgstr "退出"
 msgid "Manage tags"
 msgstr "管理标签"
 
-#: src/containers/token/token-insights.tsx:119
+#: src/containers/token/token-insights.tsx:147
 msgid "Manage tokens"
 msgstr "管理令牌"
 
@@ -1351,7 +1419,7 @@ msgstr "此屏幕目前不支持清单列表，请使用 <0>Images</0> 标签页
 msgid "Message"
 msgstr "信息"
 
-#: src/constants.tsx:151
+#: src/constants.tsx:160
 msgid "Modify Ansible repo content"
 msgstr "修改 Ansible repo 内容"
 
@@ -1363,7 +1431,7 @@ msgstr "必须是整数。"
 msgid "My imports"
 msgstr "我的导入"
 
-#: src/containers/namespace-list/namespace-list.tsx:170
+#: src/containers/namespace-list/namespace-list.tsx:190
 msgid "My namespaces"
 msgstr "我的命名空间"
 
@@ -1374,31 +1442,31 @@ msgid "My profile"
 msgstr "我的配置集"
 
 #: src/components/collection-detail/collection-content-list.tsx:99
-#: src/components/execution-environment/repository-form.tsx:139
-#: src/components/execution-environment/repository-form.tsx:163
+#: src/components/execution-environment/repository-form.tsx:168
+#: src/components/execution-environment/repository-form.tsx:196
 #: src/components/group-management/group-modal.tsx:72
 #: src/components/my-imports/import-list.tsx:78
 #: src/components/my-imports/import-list.tsx:115
-#: src/components/namespace-form/namespace-form.tsx:42
-#: src/components/namespace-modal/namespace-modal.tsx:113
+#: src/components/namespace-form/namespace-form.tsx:60
+#: src/components/namespace-modal/namespace-modal.tsx:120
 #: src/components/repositories/remote-form.tsx:156
 #: src/containers/execution-environment/registry-list.tsx:259
 #: src/containers/execution-environment/registry-list.tsx:287
 #: src/containers/execution-environment/registry-list.tsx:318
-#: src/containers/namespace-list/namespace-list.tsx:183
+#: src/containers/namespace-list/namespace-list.tsx:203
 #: src/containers/task-management/task_detail.tsx:261
 msgid "Name"
 msgstr "名称"
 
-#: src/components/namespace-modal/namespace-modal.tsx:46
+#: src/components/namespace-modal/namespace-modal.tsx:51
 msgid "Name can only contain [A-Za-z0-9_]"
 msgstr "名称只能包含 [A-Za-z0-9_]"
 
-#: src/components/namespace-modal/namespace-modal.tsx:50
+#: src/components/namespace-modal/namespace-modal.tsx:55
 msgid "Name cannot begin with '_'"
 msgstr "名称不能以 '_' 开头."
 
-#: src/components/namespace-modal/namespace-modal.tsx:48
+#: src/components/namespace-modal/namespace-modal.tsx:53
 msgid "Name must be longer than 2 characters"
 msgstr "名称必须大于 2 个字符"
 
@@ -1408,21 +1476,25 @@ msgstr "名称必须大于 2 个字符"
 msgid "Namespace"
 msgstr "命名空间"
 
-#: src/components/namespace-modal/namespace-modal.tsx:121
+#: src/components/namespace-modal/namespace-modal.tsx:128
 msgid "Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’."
 msgstr "命名空间名称限制为字母数字字符和下划线，长度最少为 2 个字符，且不能以 '_' 开头。"
 
-#: src/components/namespace-form/namespace-form.tsx:77
-#: src/components/namespace-modal/namespace-modal.tsx:142
+#: src/components/namespace-form/namespace-form.tsx:95
+#: src/components/namespace-modal/namespace-modal.tsx:149
 msgid "Namespace owners"
 msgstr "命名空间所有者"
+
+#: src/containers/edit-namespace/edit-namespace.tsx:262
+msgid "Namespace successfully edited."
+msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:343
 #: src/paths.ts:68
 msgid "Namespaces"
 msgstr "命名空间"
 
-#: src/containers/namespace-list/namespace-list.tsx:228
+#: src/containers/namespace-list/namespace-list.tsx:248
 msgid "Namespaces will appear once created"
 msgstr "命名空间在创建后会出现"
 
@@ -1465,7 +1537,7 @@ msgstr "没有子任务"
 msgid "No collections yet"
 msgstr "还没有集合"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:205
+#: src/containers/execution-environment-list/execution_environment_list.tsx:207
 msgid "No container repositories yet"
 msgstr "还没有容器仓库"
 
@@ -1499,7 +1571,7 @@ msgstr "还没有本地仓库"
 msgid "No managed collections yet"
 msgstr "还没有受管集合"
 
-#: src/containers/namespace-list/namespace-list.tsx:226
+#: src/containers/namespace-list/namespace-list.tsx:246
 msgid "No namespaces yet"
 msgstr "还没有命名空间"
 
@@ -1515,7 +1587,7 @@ msgstr "没有权限"
 msgid "No remote registries yet"
 msgstr "没有远程 registry"
 
-#: src/containers/repositories/repository-list.tsx:217
+#: src/containers/repositories/repository-list.tsx:221
 msgid "No remote repositories yet"
 msgstr "还没有远程软件仓库"
 
@@ -1552,7 +1624,7 @@ msgstr "任何用户都不会受到影响。"
 msgid "No users yet"
 msgstr "还没有用户"
 
-#: src/components/user-form/user-form.tsx:189
+#: src/components/user-form/user-form.tsx:202
 msgid "Not a super user"
 msgstr "不是一个超级用户"
 
@@ -1574,7 +1646,7 @@ msgstr "其他集合不需要使用"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your"
 #~ msgstr "注：这个 URL 包含 Hub 中的所有集合。要连接到您的"
 
-#: src/containers/token/token-insights.tsx:141
+#: src/containers/token/token-insights.tsx:169
 msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 msgstr "注意：此 URL 包含 Hub 中的所有集合。要连接到组织的同步存储库，请使用<0>存储库管理</0>中的 URL。"
 
@@ -1586,7 +1658,7 @@ msgstr "此字段必须大于 0"
 msgid "OS / Arch"
 msgstr "OS/ Arch"
 
-#: src/containers/token/token-insights.tsx:85
+#: src/containers/token/token-insights.tsx:113
 msgid "Offline token"
 msgstr "离线令牌"
 
@@ -1603,16 +1675,16 @@ msgid "Partners"
 msgstr "合作伙伴"
 
 #: src/components/repositories/remote-form.tsx:339
-#: src/components/user-form/user-form.tsx:84
+#: src/components/user-form/user-form.tsx:91
 #: src/containers/login/login.tsx:59
 msgid "Password"
 msgstr "密码"
 
-#: src/components/user-form/user-form.tsx:102
+#: src/components/user-form/user-form.tsx:109
 msgid "Password confirmation"
 msgstr "确认密码"
 
-#: src/components/user-form/user-form.tsx:99
+#: src/components/user-form/user-form.tsx:106
 msgid "Passwords do not match"
 msgstr "密码不匹配"
 
@@ -1621,18 +1693,30 @@ msgid "Pending"
 msgstr "待处理"
 
 #: src/components/headers/collection-header.tsx:271
-msgid "Permanently delete collection"
-msgstr "永久删除集合"
+#~ msgid "Permanently delete collection"
+#~ msgstr "永久删除集合"
 
 #: src/components/headers/collection-header.tsx:270
-msgid "Permanently delete collection version"
-msgstr "永久删除集合版本"
+#~ msgid "Permanently delete collection version"
+#~ msgstr "永久删除集合版本"
+
+#: src/components/headers/collection-header.tsx:270
+msgid "Permanently delete collection version?"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:271
+msgid "Permanently delete collection?"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:209
-msgid "Permanently delete image"
-msgstr "永久删除镜像"
+#~ msgid "Permanently delete image"
+#~ msgstr "永久删除镜像"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:202
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:209
+msgid "Permanently delete image?"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:206
 msgid "Permanently delete namespace?"
 msgstr "永久删除命名空间？"
 
@@ -1656,8 +1740,8 @@ msgstr "请首先完成编辑权限。"
 msgid "Please select no more than one file."
 msgstr "请只选择一个文件。"
 
-#: src/components/namespace-modal/namespace-modal.tsx:44
-#: src/components/namespace-modal/namespace-modal.tsx:116
+#: src/components/namespace-modal/namespace-modal.tsx:49
+#: src/components/namespace-modal/namespace-modal.tsx:123
 msgid "Please, provide the namespace name"
 msgstr "请提供命名空间名称"
 
@@ -1690,17 +1774,17 @@ msgstr "代理密码"
 msgid "Proxy username"
 msgstr "代理用户名"
 
-#: src/constants.tsx:237
+#: src/constants.tsx:249
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:162
 msgid "Published"
 msgstr "已发布"
 
-#: src/constants.tsx:207
+#: src/constants.tsx:219
 msgid "Pull distribution"
 msgstr "拉却u分发"
 
-#: src/constants.tsx:165
-#: src/constants.tsx:193
+#: src/constants.tsx:174
+#: src/constants.tsx:205
 msgid "Pull private containers"
 msgstr "拉取私有容器"
 
@@ -1712,127 +1796,127 @@ msgstr "拉取此镜像"
 msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible 版本"
 
-#: src/constants.tsx:274
+#: src/constants.tsx:286
 msgid "Pulp Ansible: Collections sync"
 msgstr "Pulp Ansible：集合同步"
 
-#: src/constants.tsx:277
+#: src/constants.tsx:289
 msgid "Pulp Ansible: Roles synchronize"
 msgstr "Pulp Ansible: 角色同步"
 
-#: src/constants.tsx:275
+#: src/constants.tsx:287
 msgid "Pulp ansible: Copy content"
 msgstr "Pulp ansible：复制内容"
 
-#: src/constants.tsx:279
+#: src/constants.tsx:291
 msgid "Pulp ansible: Import collection"
 msgstr "Pulp ansible：导入集合"
 
-#: src/constants.tsx:278
+#: src/constants.tsx:290
 msgid "Pulp ansible: Update collection remote"
 msgstr "Pulp ansible：更新集合远程"
 
-#: src/constants.tsx:276
+#: src/constants.tsx:288
 msgid "Pulp ansible: collection sync"
 msgstr "Pulp ansible：集合同步"
 
-#: src/constants.tsx:285
+#: src/constants.tsx:297
 msgid "Pulp container: Build image from containerfile"
 msgstr "Pulp 容器：从 containerfile 构建镜像"
 
-#: src/constants.tsx:286
+#: src/constants.tsx:298
 msgid "Pulp container: General multi delete"
 msgstr "Pulp 容器：常规多删除"
 
-#: src/constants.tsx:283
+#: src/constants.tsx:295
 msgid "Pulp container: Recursive add content"
 msgstr "Pulp 容器：递归添加内容"
 
-#: src/constants.tsx:284
+#: src/constants.tsx:296
 msgid "Pulp container: Recursive remove content"
 msgstr "Pulp 容器：递归删除内容"
 
-#: src/constants.tsx:280
+#: src/constants.tsx:292
 msgid "Pulp container: Tag image"
 msgstr "Pulp 容器：标签镜像"
 
-#: src/constants.tsx:282
+#: src/constants.tsx:294
 msgid "Pulp container: Tasks synchronize"
 msgstr "Pulp 容器：任务同步"
 
-#: src/constants.tsx:281
+#: src/constants.tsx:293
 msgid "Pulp container: Untage image"
 msgstr "Pulp 容器：为标签的镜像"
 
-#: src/constants.tsx:298
+#: src/constants.tsx:310
 msgid "Pulpcore: Add and remove"
 msgstr "Pulpcore：添加和删除"
 
-#: src/constants.tsx:299
+#: src/constants.tsx:311
 msgid "Pulpcore: Add or remove"
 msgstr "Pulpcore：添加或删除"
 
-#: src/constants.tsx:295
+#: src/constants.tsx:307
 msgid "Pulpcore: Delete version"
 msgstr "Pulpcore：删除版本"
 
-#: src/constants.tsx:290
+#: src/constants.tsx:302
 msgid "Pulpcore: General create"
 msgstr "Pulpcore：常规创建"
 
-#: src/constants.tsx:292
+#: src/constants.tsx:304
 msgid "Pulpcore: General delete"
 msgstr "Pulpcore：常规删除"
 
-#: src/constants.tsx:291
+#: src/constants.tsx:303
 msgid "Pulpcore: General update"
 msgstr "Pulpcore：常规更新"
 
-#: src/constants.tsx:287
+#: src/constants.tsx:299
 msgid "Pulpcore: Import repository version"
 msgstr "Pulpcore：导入仓库版本"
 
-#: src/constants.tsx:288
+#: src/constants.tsx:300
 msgid "Pulpcore: Orphan cleanup"
 msgstr "Pulpcore：Orphan 清理"
 
-#: src/constants.tsx:293
+#: src/constants.tsx:305
 msgid "Pulpcore: Pulp export"
 msgstr "Pulpcore： Pulp 导出"
 
-#: src/constants.tsx:294
+#: src/constants.tsx:306
 msgid "Pulpcore: Pulp import"
 msgstr "Pulpcore： Pulp 导入"
 
-#: src/constants.tsx:289
+#: src/constants.tsx:301
 msgid "Pulpcore: Repair all artifacts"
 msgstr "Pulpcore：修复所有工件"
 
-#: src/constants.tsx:296
+#: src/constants.tsx:308
 msgid "Pulpcore: Repair version"
 msgstr "Pulpcore：修复版本"
 
-#: src/constants.tsx:297
+#: src/constants.tsx:309
 msgid "Pulpcore: Upload commit"
 msgstr "Pulpcore：上传提交"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:146
+#: src/containers/execution-environment-list/execution_environment_list.tsx:148
 msgid "Push container images"
 msgstr "推容器镜像"
 
-#: src/constants.tsx:206
+#: src/constants.tsx:218
 msgid "Push distribution"
 msgstr "推送分发"
 
-#: src/constants.tsx:198
+#: src/constants.tsx:210
 msgid "Push images to existing containers"
 msgstr "将镜像推送到现有容器"
 
-#: src/constants.tsx:203
+#: src/constants.tsx:215
 msgid "Push new containers"
 msgstr "推送新容器"
 
-#: src/constants.tsx:166
+#: src/constants.tsx:175
 msgid "Push to existing containers"
 msgstr "推送到现有容器"
 
@@ -1852,11 +1936,11 @@ msgstr "Readme"
 msgid "Reason: task {0}"
 msgstr "原因：任务 {0}"
 
-#: src/constants.tsx:238
+#: src/constants.tsx:250
 msgid "Red Hat Certified"
 msgstr "红帽认证"
 
-#: src/components/execution-environment/repository-form.tsx:187
+#: src/components/execution-environment/repository-form.tsx:225
 msgid "Registry"
 msgstr "Registry"
 
@@ -1868,7 +1952,7 @@ msgstr "Registry URL"
 msgid "Registry sync status"
 msgstr "Registry 同步状态"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:417
+#: src/containers/certification-dashboard/certification-dashboard.tsx:415
 msgid "Reject"
 msgstr "拒绝"
 
@@ -1878,8 +1962,8 @@ msgstr "拒绝"
 msgid "Rejected"
 msgstr "拒绝"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:411
-#: src/containers/repositories/repository-list.tsx:114
+#: src/containers/execution-environment-list/execution_environment_list.tsx:413
+#: src/containers/repositories/repository-list.tsx:115
 msgid "Remote"
 msgstr "远程"
 
@@ -1893,7 +1977,7 @@ msgstr "远程 Registry"
 msgid "Remote name"
 msgstr "远程名称"
 
-#: src/containers/repositories/repository-list.tsx:218
+#: src/containers/repositories/repository-list.tsx:222
 msgid "Remote repositories will appear once added"
 msgstr "添加后会出现远程仓库"
 
@@ -1905,7 +1989,7 @@ msgstr "添加后会出现远程仓库"
 msgid "Remove"
 msgstr "删除"
 
-#: src/constants.tsx:267
+#: src/constants.tsx:279
 msgid "Remove content from repository"
 msgstr "从仓库中删除内容"
 
@@ -1917,7 +2001,7 @@ msgstr "从组中删除用户？"
 msgid "Repo"
 msgstr "仓库"
 
-#: src/containers/repositories/repository-list.tsx:162
+#: src/containers/repositories/repository-list.tsx:164
 msgid "Repo Management"
 msgstr "仓库管理"
 
@@ -1937,11 +2021,11 @@ msgstr "仓库管理"
 msgid "Repository name"
 msgstr "仓库名称"
 
-#: src/components/collection-detail/collection-info.tsx:124
+#: src/components/collection-detail/collection-info.tsx:125
 msgid "Requires Ansible"
 msgstr "需要 Ansible"
 
-#: src/components/user-form/user-form.tsx:240
+#: src/components/user-form/user-form.tsx:253
 msgid "Requires super user permissions to edit."
 msgstr "需要超级用户权限进行编辑。"
 
@@ -1955,21 +2039,21 @@ msgstr "资源"
 
 #: src/components/my-imports/import-list.tsx:95
 #: src/components/status/status-indicator.tsx:61
-#: src/constants.tsx:305
+#: src/constants.tsx:317
 #: src/containers/task-management/task-list-view.tsx:162
 msgid "Running"
 msgstr "运行中"
 
 #: src/components/repositories/remote-form.tsx:225
-#: src/containers/token/token-insights.tsx:149
+#: src/containers/token/token-insights.tsx:177
 msgid "SSO URL"
 msgstr "SSO URL"
 
-#: src/components/execution-environment/repository-form.tsx:129
+#: src/components/execution-environment/repository-form.tsx:158
 #: src/components/group-management/group-modal.tsx:55
 #: src/components/repositories/remote-form.tsx:126
-#: src/components/user-form/user-form.tsx:208
-#: src/containers/edit-namespace/edit-namespace.tsx:158
+#: src/components/user-form/user-form.tsx:221
+#: src/containers/edit-namespace/edit-namespace.tsx:192
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:139
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:125
 #: src/containers/group-management/group-detail.tsx:406
@@ -1984,15 +2068,15 @@ msgstr "滚动至末尾"
 #~ msgid "Search all {0}"
 #~ msgstr "搜索所有 {0}"
 
-#: src/containers/namespace-list/namespace-list.tsx:142
+#: src/containers/namespace-list/namespace-list.tsx:162
 msgid "Search all {titleLowerCase}"
 msgstr "搜索所有 {titleLowerCase}"
 
-#: src/containers/namespace-list/namespace-list.tsx:141
+#: src/containers/namespace-list/namespace-list.tsx:161
 msgid "Search my namespaces"
 msgstr "搜索我的命名空间"
 
-#: src/components/execution-environment/repository-form.tsx:201
+#: src/components/execution-environment/repository-form.tsx:250
 msgid "Select a registry"
 msgstr "选择 registry"
 
@@ -2008,7 +2092,7 @@ msgstr "选择集合版本"
 msgid "Select file"
 msgstr "选择文件"
 
-#: src/components/user-form/user-form.tsx:161
+#: src/components/user-form/user-form.tsx:173
 msgid "Select groups"
 msgstr "选择组"
 
@@ -2029,7 +2113,7 @@ msgstr "选择权限"
 msgid "Select users"
 msgstr "选择用户"
 
-#: src/containers/token/token-insights.tsx:132
+#: src/containers/token/token-insights.tsx:160
 msgid "Server URL"
 msgstr "服务器 URL"
 
@@ -2103,7 +2187,7 @@ msgstr "停止任务？"
 msgid "Success: {digest} was deleted"
 msgstr "成功：{digest} 已删除"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:504
+#: src/containers/execution-environment-list/execution_environment_list.tsx:522
 msgid "Success: {name} was deleted"
 msgstr "成功：{name} 已删除"
 
@@ -2121,7 +2205,7 @@ msgid "Successfully deleted collection."
 msgstr "成功删除集合。"
 
 #: src/containers/group-management/group-detail.tsx:535
-#: src/containers/group-management/group-list.tsx:423
+#: src/containers/group-management/group-list.tsx:438
 msgid "Successfully deleted group."
 msgstr "成功删除组。"
 
@@ -2129,7 +2213,7 @@ msgstr "成功删除组。"
 msgid "Successfully deleted namespace."
 msgstr "成功删除命名空间。"
 
-#: src/containers/execution-environment/registry-list.tsx:454
+#: src/containers/execution-environment/registry-list.tsx:462
 msgid "Successfully deleted remote registry {name}"
 msgstr "成功删除远程 registry {name}"
 
@@ -2146,16 +2230,16 @@ msgstr "成功从组中删除用户。"
 msgid "Successfully stopped task."
 msgstr "成功停止任务。"
 
-#: src/components/user-form/user-form.tsx:188
+#: src/components/user-form/user-form.tsx:201
 #: src/containers/user-management/user-list.tsx:355
 msgid "Super user"
 msgstr "超级用户"
 
-#: src/components/user-form/user-form.tsx:243
+#: src/components/user-form/user-form.tsx:256
 msgid "Super users can't disable themselves."
 msgstr "超级用户无法禁用自身。"
 
-#: src/components/user-form/user-form.tsx:180
+#: src/components/user-form/user-form.tsx:193
 #: src/containers/user-management/user-list.tsx:352
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "超级用户具有所有系统权限，无论他们所在的组是什么。"
@@ -2165,21 +2249,21 @@ msgstr "超级用户具有所有系统权限，无论他们所在的组是什么
 msgid "Sync"
 msgstr "同步"
 
-#: src/containers/execution-environment/registry-list.tsx:484
-#: src/containers/execution-environment-detail/base.tsx:284
-#: src/containers/execution-environment-list/execution_environment_list.tsx:564
+#: src/containers/execution-environment/registry-list.tsx:493
+#: src/containers/execution-environment-detail/base.tsx:289
+#: src/containers/execution-environment-list/execution_environment_list.tsx:582
 msgid "Sync failed for {name}"
 msgstr "对 {name} 同步失败"
 
 #: src/containers/execution-environment/registry-list.tsx:428
-#: src/containers/execution-environment-detail/base.tsx:107
-#: src/containers/execution-environment-list/execution_environment_list.tsx:359
+#: src/containers/execution-environment-detail/base.tsx:109
+#: src/containers/execution-environment-list/execution_environment_list.tsx:361
 msgid "Sync from registry"
 msgstr "从 registry 进行同步"
 
-#: src/containers/execution-environment/registry-list.tsx:471
-#: src/containers/execution-environment-detail/base.tsx:270
-#: src/containers/execution-environment-list/execution_environment_list.tsx:551
+#: src/containers/execution-environment/registry-list.tsx:479
+#: src/containers/execution-environment-detail/base.tsx:275
+#: src/containers/execution-environment-list/execution_environment_list.tsx:569
 msgid "Sync initiated for {name}"
 msgstr "为 {name} 发起同步"
 
@@ -2198,6 +2282,7 @@ msgstr "TLS 验证"
 msgid "Tag"
 msgstr "标签"
 
+#: src/constants.tsx:104
 #: src/containers/task-management/task-list-view.tsx:113
 #: src/loaders/standalone/standalone-loader.tsx:377
 msgid "Task Management"
@@ -2238,7 +2323,7 @@ msgstr "更改标签 \"{0}\" 的任务无法完成。"
 msgid "Tasks will appear once created."
 msgstr "任务在创建后将显示。"
 
-#: src/components/namespace-form/namespace-form.tsx:155
+#: src/components/namespace-form/namespace-form.tsx:190
 msgid "Text: {0}"
 msgstr "文本：{0}"
 
@@ -2266,7 +2351,7 @@ msgstr "同步时用于身份验证的密码。"
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同步时要用于身份验证的密码。在使用令牌时不需要此密码。"
 
-#: src/containers/token/token-insights.tsx:105
+#: src/containers/token/token-insights.tsx:133
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "令牌将在 30 天没有活动时过期。定期运行以下命令以防止您的令牌过期。"
 
@@ -2299,7 +2384,7 @@ msgstr "没有资源记录"
 msgid "These users will lose access to the group content:"
 msgstr "这些用户将丢失对组群内容的访问权限："
 
-#: src/containers/namespace-list/namespace-list.tsx:229
+#: src/containers/namespace-list/namespace-list.tsx:249
 msgid "This account is not set up to manage any namespaces"
 msgstr "此帐户没有设置为管理任何命名空间"
 
@@ -2327,7 +2412,7 @@ msgstr "已为此镜像选择此标签。您不能添加两次。"
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "这使用与 ansible-galaxy CLI 相同的 {docsAnsibleLink} 格式，但不支持角色，并且不支持 source 参数。"
 
-#: src/containers/token/token-insights.tsx:120
+#: src/containers/token/token-insights.tsx:148
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr "若要撤销令牌或查看所有令牌，请访问<0>离线 API 令牌管理</0>页面。"
 
@@ -2339,7 +2424,7 @@ msgstr "令牌"
 msgid "Token for authenticating to the server URL."
 msgstr "用于向服务器 URL 进行身份验证的令牌。"
 
-#: src/containers/token/token-standalone.tsx:38
+#: src/containers/token/token-standalone.tsx:46
 msgid "Token management"
 msgstr "仓库管理"
 
@@ -2364,7 +2449,7 @@ msgstr "类型"
 msgid "URL"
 msgstr "URL"
 
-#: src/components/namespace-form/namespace-form.tsx:158
+#: src/components/namespace-form/namespace-form.tsx:193
 msgid "URL: {0}"
 msgstr "URL：{0}"
 
@@ -2372,7 +2457,7 @@ msgstr "URL：{0}"
 msgid "Undeprecate"
 msgstr "取消弃用"
 
-#: src/constants.tsx:194
+#: src/constants.tsx:206
 msgid "Update container information"
 msgstr "更新容器信息"
 
@@ -2393,23 +2478,23 @@ msgstr "上传集合"
 msgid "Upload new version"
 msgstr "上传新版本"
 
-#: src/constants.tsx:183
-#: src/constants.tsx:191
+#: src/constants.tsx:195
+#: src/constants.tsx:203
 msgid "Upload to namespace"
 msgstr "上传到命名空间"
 
-#: src/components/execution-environment/repository-form.tsx:175
+#: src/components/execution-environment/repository-form.tsx:212
 msgid "Upstream name"
 msgstr "上游名称"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:276
-#: src/containers/execution-environment-detail/base.tsx:120
+#: src/containers/execution-environment-detail/base.tsx:122
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:402
-#: src/containers/execution-environment-list/execution_environment_list.tsx:372
+#: src/containers/execution-environment-list/execution_environment_list.tsx:374
 msgid "Use in Controller"
 msgstr "在控制器中使用"
 
-#: src/containers/token/token-insights.tsx:57
+#: src/containers/token/token-insights.tsx:85
 msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 msgstr "使用 <0>Repository Management</0> 页面将您的机构策展的集合同步到您的私有 Automation Hub 中的红帽认证存储库。拥有正确权限的用户可以使用 <1>Collections</1> 页面上的同步切换来控制哪些集合被添加到机构的同步存储库中。"
 
@@ -2417,7 +2502,7 @@ msgstr "使用 <0>Repository Management</0> 页面将您的机构策展的集合
 #~ msgid "Use this URL to configure the API endpoints that clients need to"
 #~ msgstr "使用此 URL 配置客户端所需的 API 端点"
 
-#: src/containers/token/token-insights.tsx:134
+#: src/containers/token/token-insights.tsx:162
 msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
 msgstr "使用此 URL 配置客户端需要从 Automation Hub 下载内容的 API 端点。"
 
@@ -2425,7 +2510,7 @@ msgstr "使用此 URL 配置客户端需要从 Automation Hub 下载内容的 AP
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr "使用此 URL 配置客户端的身份验证 URL"
 
-#: src/containers/token/token-insights.tsx:151
+#: src/containers/token/token-insights.tsx:179
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 msgstr "使用此 URL 配置客户端需要从 Automation Hub 下载内容的验证 URL。"
 
@@ -2433,15 +2518,15 @@ msgstr "使用此 URL 配置客户端需要从 Automation Hub 下载内容的验
 #~ msgid "Use this token to authenticate clients that need to download"
 #~ msgstr "使用此令牌验证需要下载的客户端"
 
-#: src/containers/token/token-insights.tsx:87
+#: src/containers/token/token-insights.tsx:115
 msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
 msgstr "使用此令牌来验证需要从 Automation Hub 下载内容的客户端。这是用于保护您的内容的机密令牌。请将您的 API 令牌存储在安全的位置。"
 
-#: src/containers/token/token-standalone.tsx:46
+#: src/containers/token/token-standalone.tsx:54
 msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
 msgstr "使用此令牌来验证 <0>ansible-galaxy</0> 客户端。"
 
-#: src/components/namespace-form/namespace-form.tsx:130
+#: src/components/namespace-form/namespace-form.tsx:165
 msgid "Useful links"
 msgstr "有用的链接"
 
@@ -2457,18 +2542,18 @@ msgstr "用户组"
 msgid "User details"
 msgstr "用户详情"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:330
+#: src/containers/execution-environment-list/execution_environment_list.tsx:332
 #: src/containers/group-management/group-detail.tsx:774
 #: src/containers/user-management/user-list.tsx:299
 msgid "User list"
 msgstr "用户列表"
 
-#: src/components/user-form/user-form.tsx:175
+#: src/components/user-form/user-form.tsx:188
 msgid "User type"
 msgstr "用户类型"
 
 #: src/components/repositories/remote-form.tsx:304
-#: src/components/user-form/user-form.tsx:78
+#: src/components/user-form/user-form.tsx:85
 #: src/containers/about-modal/about-modal.tsx:77
 #: src/containers/group-management/group-detail.tsx:669
 #: src/containers/group-management/group-detail.tsx:741
@@ -2509,15 +2594,19 @@ msgstr "版本"
 msgid "Version:"
 msgstr "版本："
 
-#: src/constants.tsx:152
+#: src/constants.tsx:161
 msgid "View Ansible distribution"
 msgstr "查看 Ansible 发布"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:386
+#: src/containers/certification-dashboard/certification-dashboard.tsx:384
 msgid "View Import Logs"
 msgstr "查看导入日志"
 
-#: src/constants.tsx:153
+#: src/constants.tsx:179
+msgid "View all tasks"
+msgstr ""
+
+#: src/constants.tsx:162
 msgid "View collection remote"
 msgstr "查看集合远程"
 
@@ -2525,19 +2614,19 @@ msgstr "查看集合远程"
 msgid "View collections"
 msgstr "查看集合"
 
-#: src/constants.tsx:199
+#: src/constants.tsx:211
 msgid "View container's namespace"
 msgstr "查看容器的命名空间"
 
-#: src/constants.tsx:202
+#: src/constants.tsx:214
 msgid "View container's repository"
 msgstr "查看容器的软件仓库"
 
-#: src/constants.tsx:208
+#: src/constants.tsx:220
 msgid "View distribution"
 msgstr "查看分发"
 
-#: src/constants.tsx:184
+#: src/constants.tsx:196
 msgid "View group"
 msgstr "查看组"
 
@@ -2545,28 +2634,28 @@ msgstr "查看组"
 msgid "View more"
 msgstr "查看更多"
 
-#: src/constants.tsx:167
-#: src/constants.tsx:195
+#: src/constants.tsx:176
+#: src/constants.tsx:207
 msgid "View private containers"
 msgstr "查看私有容器"
 
-#: src/constants.tsx:185
+#: src/constants.tsx:197
 msgid "View synclist"
 msgstr "查看同步列表"
 
-#: src/containers/execution-environment/registry-list.tsx:474
-#: src/containers/execution-environment/registry-list.tsx:495
-#: src/containers/execution-environment-detail/base.tsx:273
-#: src/containers/execution-environment-list/execution_environment_list.tsx:554
+#: src/containers/execution-environment/registry-list.tsx:482
+#: src/containers/execution-environment/registry-list.tsx:504
+#: src/containers/execution-environment-detail/base.tsx:278
+#: src/containers/execution-environment-list/execution_environment_list.tsx:572
 msgid "View the task <0>here</0>."
 msgstr "查看任务<0>这里</0>。"
 
-#: src/constants.tsx:186
+#: src/constants.tsx:198
 msgid "View user"
 msgstr "查看用户"
 
 #: src/components/my-imports/import-list.tsx:99
-#: src/constants.tsx:306
+#: src/constants.tsx:318
 #: src/containers/task-management/task-list-view.tsx:166
 msgid "Waiting"
 msgstr "等待"
@@ -2597,7 +2686,7 @@ msgstr "是"
 msgid "Yes, stop"
 msgstr "是，停止"
 
-#: src/containers/token/token-standalone.tsx:55
+#: src/containers/token/token-standalone.tsx:63
 msgid "You are an SSO user. Your token will expire <0/>."
 msgstr "您是一个 SSO 用户。您的令牌将过期 <0/>。"
 
@@ -2605,7 +2694,7 @@ msgstr "您是一个 SSO 用户。您的令牌将过期 <0/>。"
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
 msgstr "您可以通过在此处输入自定义标记来自定义配置集上的 Resources 选项卡。"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:206
+#: src/containers/execution-environment-list/execution_environment_list.tsx:208
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "您当前没有容器仓库。通过 CLI 添加容器仓库以开始。"
 
@@ -2617,15 +2706,15 @@ msgstr "您目前没有远程 registry。"
 msgid "You do not have access to Automation Hub"
 msgstr "您无法访问 Automation Hub"
 
-#: src/containers/edit-namespace/edit-namespace.tsx:235
+#: src/containers/edit-namespace/edit-namespace.tsx:279
 msgid "You don't have permissions to update this namespace."
 msgstr "您没有更新这个命名空间的权限。"
 
-#: src/components/collection-detail/collection-info.tsx:89
+#: src/components/collection-detail/collection-info.tsx:90
 msgid "You have to be logged in to be able to download the tarball."
 msgstr "您必须登录才能下载 tarball。"
 
-#: src/containers/edit-namespace/edit-namespace.tsx:169
+#: src/containers/edit-namespace/edit-namespace.tsx:203
 msgid "You have unsaved changes"
 msgstr "您有未保存的更改"
 
