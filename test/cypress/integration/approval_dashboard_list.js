@@ -28,7 +28,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   function loadData() {
     // we cant delete all data using galaxykit right now, because when collection is rejected
     // it cant be deleted. So we must load the data, that are right now in the table
-    var intercept_url =
+    let intercept_url =
       Cypress.env('prefix') +
       '_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=100';
 
@@ -37,7 +37,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.contains('button', 'Clear all filters').click();
 
     cy.wait('@data').then((res) => {
-      var data = res.response.body.data;
+      let data = res.response.body.data;
       data.forEach((record) => {
         items.push({ name: record.name });
       });
