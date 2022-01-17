@@ -396,6 +396,7 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
     args.length >= 1 && typeof args[args.length - 1] == 'object'
       ? args.splice(args.length - 1, 1)[0]
       : [];
+  cy.log('galaxykit ' + operation + ' ' + args);
   const cmd = shell`galaxykit -s ${server} -u ${adminUsername} -p ${adminPassword} ${shell.preserve(
     operation,
   )} ${args}`;
@@ -668,6 +669,15 @@ Cypress.Commands.add('deleteCollections', {}, (namespace) => {
       JSON.parse(json).data.forEach((collection) => {
         cy.galaxykit('collection delete', namespace, collection.name);
       });
+    });
+  });
+});
+
+Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
+  cy.galaxykit('namespace list').then((json) => {
+    JSON.parse(json).data.forEach((namespace) => {
+      cy.deleteCollections(namespace.name);
+      cy.galaxykit('namespace delete', namespace.name);
     });
   });
 });

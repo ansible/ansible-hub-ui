@@ -126,7 +126,7 @@ class CertificationDashboard extends React.Component<
           <EmptyStateUnauthorized />
         ) : (
           <Main className='hub-certification-dashboard'>
-            <section className='body'>
+            <section className='body' data-cy='body'>
               <div className='toolbar hub-certification-dashboard-toolbar'>
                 <Toolbar>
                   <ToolbarGroup>
@@ -331,6 +331,7 @@ class CertificationDashboard extends React.Component<
       <tr
         aria-labelledby={`${version.namespace}.${version.name} v${version.version}`}
         key={index}
+        data-cy='table_row'
       >
         <td>{version.namespace}</td>
         <td>{version.name}</td>

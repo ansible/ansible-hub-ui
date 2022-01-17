@@ -3,14 +3,9 @@ import { range } from 'lodash';
 describe('Collections list Tests', () => {
   let items = [];
 
-  function deleteData() {
-    cy.deleteCollections('my_namespace');
-    cy.galaxykit('namespace delete my_namespace');
-  }
-
   before(() => {
     cy.login();
-    deleteData();
+    cy.deleteNamespacesAndCollections();
 
     cy.galaxykit('namespace create my_namespace');
     // insert test data
@@ -33,10 +28,6 @@ describe('Collections list Tests', () => {
     cy.wait('@data').then((res) => {
       items = res.response.body.data;
     });
-  });
-
-  after(() => {
-    deleteData();
   });
 
   beforeEach(() => {

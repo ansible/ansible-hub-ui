@@ -81,7 +81,7 @@ export class CompoundFilter extends React.Component<IProps, IState> {
     ));
 
     return (
-      <InputGroup>
+      <InputGroup data-cy='compound_filter'>
         {filterConfig.length != 1 && (
           <StatefulDropdown
             toggleType='dropdown'
