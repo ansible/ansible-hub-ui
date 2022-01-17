@@ -96,6 +96,7 @@ Please start by reading [Cypress best practices](https://docs.cypress.io/guides/
 `it` + UI helpers:
   * always make sure to wait for the last thing that happens automatically when initiating a user action
   * for example, when adding a user, waiting for the API response is not enough, since the UI then redirects to the user list screen => wait for the Users list screen to finish loading
+  * (NOTE: negative tests (`.should('not.exist')`) do NOT wait.)
 
 `after` / `afterEach`:
   * don't use; won't run after failures anyway
