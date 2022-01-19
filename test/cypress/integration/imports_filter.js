@@ -10,6 +10,10 @@ describe('Imports filter test', () => {
     cy.galaxykit('-i collection upload filter_test_namespace different_name');
   });
 
+  after(() => {
+    deleteNamespacesAndCollections();
+  });
+
   beforeEach(() => {
     cy.login();
     cy.visit('/ui/my-imports?namespace=filter_test_namespace');
