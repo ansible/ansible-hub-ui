@@ -52,6 +52,10 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     loadData();
   });
 
+  after(() => {
+    cy.deleteNamespacesAndCollections();
+  });
+
   beforeEach(() => {
     cy.login();
     cy.visit('/ui/approval-dashboard');
@@ -176,5 +180,25 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     range(20).forEach((i) => {
       cy.get('[data-cy="body"]').contains(items[i].name);
     });
+  });
+
+  it('should approve or reject', () => {
+    cy.get('[data-cy="sort_collection"]').click();
+    cy.get('[data-cy="sort_collection"]').click();
+
+    cy.get('[data-cy="table_row"]:first button').click();
+    cy.contains('Reject').click();
+    cy.contains('[data-cy="table_row"]', items[0].name).contains('Rejected');
+
+    cy.get('[data-cy="table_row"]:first button').click();
+    cy.contains('Approve').click();
+    cy.contains('[data-cy="table_row"]', items[0].name).contains('Approved');
+  });
+
+  it('should redirect to import logs.', () => {
+    cy.get('[data-cy="table_row"]:first button').click();
+    cy.contains('View Import Logs').click();
+    cy.contains('My imports');
+    cy.get('.import-list');
   });
 });
