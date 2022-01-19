@@ -11,7 +11,7 @@ describe('Imports filter test', () => {
   });
 
   after(() => {
-    deleteNamespacesAndCollections();
+    cy.deleteNamespacesAndCollections();
   });
 
   beforeEach(() => {
