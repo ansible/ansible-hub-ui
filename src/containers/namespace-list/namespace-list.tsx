@@ -26,6 +26,7 @@ import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { Constants } from 'src/constants';
 import { filterIsSet } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
+import { i18n } from '@lingui/core';
 
 interface IState {
   namespaces: NamespaceListType[];
@@ -155,7 +156,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       );
     }
 
-    const title = namespaceBreadcrumb.name;
+    const title = i18n._(namespaceBreadcrumb.name);
     const titleLowerCase = title.toLowerCase();
     const search = filterOwner
       ? t`Search my namespaces`
