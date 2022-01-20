@@ -64,7 +64,7 @@ export class CollectionFilter extends React.Component<IProps, IState> {
     return (
       <Toolbar>
         <ToolbarContent>
-          <ToolbarGroup>
+          <ToolbarGroup style={{ marginLeft: 0 }}>
             <ToolbarItem>
               <CompoundFilter
                 inputText={this.state.inputText}
