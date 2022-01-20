@@ -132,6 +132,7 @@ class ExecutionEnvironmentList extends React.Component<
             '_blank',
           )
         }
+        data-cy='push-images-button'
       >
         <Trans>Push container images</Trans> <ExternalLinkAltIcon />
       </Button>
