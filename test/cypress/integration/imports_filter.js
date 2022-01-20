@@ -52,11 +52,11 @@ describe('Imports filter test', () => {
     ).as('wait');
     cy.contains('a', 'Completed').click();
 
+    cy.wait('@wait');
+
     cy.get('[data-cy="import-list-data"]').contains('my_collection1');
     cy.get('[data-cy="import-list-data"]').contains('my_collection2');
     cy.get('[data-cy="import-list-data"]').contains('different_name');
-
-    cy.wait('@wait');
   });
 
   it('Exact search for waiting is working.', () => {
