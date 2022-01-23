@@ -207,7 +207,7 @@ msgid ""
 "\"{namespace}\" container namespace."
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:185
+#: src/containers/namespace-list/namespace-list.tsx:186
 msgid "All"
 msgstr ""
 
@@ -561,8 +561,8 @@ msgstr ""
 #: src/components/namespace-modal/namespace-modal.tsx:111
 #: src/containers/group-management/group-list.tsx:148
 #: src/containers/group-management/group-list.tsx:185
-#: src/containers/namespace-list/namespace-list.tsx:152
-#: src/containers/namespace-list/namespace-list.tsx:253
+#: src/containers/namespace-list/namespace-list.tsx:153
+#: src/containers/namespace-list/namespace-list.tsx:254
 #: src/containers/user-management/user-list.tsx:184
 #: src/containers/user-management/user-list.tsx:249
 msgid "Create"
@@ -1000,11 +1000,11 @@ msgstr ""
 msgid "Error loading groups."
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:114
+#: src/containers/namespace-list/namespace-list.tsx:115
 msgid "Error loading my namespaces."
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:328
+#: src/containers/namespace-list/namespace-list.tsx:329
 msgid "Error loading namespaces."
 msgstr ""
 
@@ -1431,7 +1431,7 @@ msgstr ""
 msgid "My imports"
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:190
+#: src/containers/namespace-list/namespace-list.tsx:191
 msgid "My namespaces"
 msgstr ""
 
@@ -1453,7 +1453,7 @@ msgstr ""
 #: src/containers/execution-environment/registry-list.tsx:259
 #: src/containers/execution-environment/registry-list.tsx:287
 #: src/containers/execution-environment/registry-list.tsx:318
-#: src/containers/namespace-list/namespace-list.tsx:203
+#: src/containers/namespace-list/namespace-list.tsx:204
 #: src/containers/task-management/task_detail.tsx:261
 msgid "Name"
 msgstr ""
@@ -1494,7 +1494,7 @@ msgstr ""
 msgid "Namespaces"
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:248
+#: src/containers/namespace-list/namespace-list.tsx:249
 msgid "Namespaces will appear once created"
 msgstr ""
 
@@ -1571,7 +1571,7 @@ msgstr ""
 msgid "No managed collections yet"
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:246
+#: src/containers/namespace-list/namespace-list.tsx:247
 msgid "No namespaces yet"
 msgstr ""
 
@@ -2064,11 +2064,11 @@ msgstr ""
 #~ msgid "Search all {0}"
 #~ msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:162
+#: src/containers/namespace-list/namespace-list.tsx:163
 msgid "Search all {titleLowerCase}"
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:161
+#: src/containers/namespace-list/namespace-list.tsx:162
 msgid "Search my namespaces"
 msgstr ""
 
@@ -2380,7 +2380,7 @@ msgstr ""
 msgid "These users will lose access to the group content:"
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:249
+#: src/containers/namespace-list/namespace-list.tsx:250
 msgid "This account is not set up to manage any namespaces"
 msgstr ""
 

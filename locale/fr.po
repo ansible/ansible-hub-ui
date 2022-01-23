@@ -207,7 +207,7 @@ msgid ""
 "\"{namespace}\" container namespace."
 msgstr "L'ajout de groupes permet d'accéder à tous les référentiels de l'espace de nom du conteneur \"{namespace}\"."
 
-#: src/containers/namespace-list/namespace-list.tsx:185
+#: src/containers/namespace-list/namespace-list.tsx:186
 msgid "All"
 msgstr "Tous"
 
@@ -561,8 +561,8 @@ msgstr "Impossible de mettre à jour le statut de certification de {0}.{1}.{2}."
 #: src/components/namespace-modal/namespace-modal.tsx:111
 #: src/containers/group-management/group-list.tsx:148
 #: src/containers/group-management/group-list.tsx:185
-#: src/containers/namespace-list/namespace-list.tsx:152
-#: src/containers/namespace-list/namespace-list.tsx:253
+#: src/containers/namespace-list/namespace-list.tsx:153
+#: src/containers/namespace-list/namespace-list.tsx:254
 #: src/containers/user-management/user-list.tsx:184
 #: src/containers/user-management/user-list.tsx:249
 msgid "Create"
@@ -1000,11 +1000,11 @@ msgstr "Erreur de chargement du groupe."
 msgid "Error loading groups."
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:114
+#: src/containers/namespace-list/namespace-list.tsx:115
 msgid "Error loading my namespaces."
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:328
+#: src/containers/namespace-list/namespace-list.tsx:329
 msgid "Error loading namespaces."
 msgstr ""
 
@@ -1431,7 +1431,7 @@ msgstr "Doit être un nombre entier."
 msgid "My imports"
 msgstr "Mes importations"
 
-#: src/containers/namespace-list/namespace-list.tsx:190
+#: src/containers/namespace-list/namespace-list.tsx:191
 msgid "My namespaces"
 msgstr "Mes espaces de noms"
 
@@ -1453,7 +1453,7 @@ msgstr "Mon profil"
 #: src/containers/execution-environment/registry-list.tsx:259
 #: src/containers/execution-environment/registry-list.tsx:287
 #: src/containers/execution-environment/registry-list.tsx:318
-#: src/containers/namespace-list/namespace-list.tsx:203
+#: src/containers/namespace-list/namespace-list.tsx:204
 #: src/containers/task-management/task_detail.tsx:261
 msgid "Name"
 msgstr "Nom"
@@ -1494,7 +1494,7 @@ msgstr ""
 msgid "Namespaces"
 msgstr "Espaces de noms"
 
-#: src/containers/namespace-list/namespace-list.tsx:248
+#: src/containers/namespace-list/namespace-list.tsx:249
 msgid "Namespaces will appear once created"
 msgstr "Les espaces de noms apparaîtront une fois créés"
 
@@ -1571,7 +1571,7 @@ msgstr "Pas encore de référentiel local"
 msgid "No managed collections yet"
 msgstr "Pas encore de collections gérées"
 
-#: src/containers/namespace-list/namespace-list.tsx:246
+#: src/containers/namespace-list/namespace-list.tsx:247
 msgid "No namespaces yet"
 msgstr "Pas encore d'espace de noms"
 
@@ -2068,11 +2068,11 @@ msgstr "Faites défiler jusqu'à la fin"
 #~ msgid "Search all {0}"
 #~ msgstr "Rechercher tous les {0}"
 
-#: src/containers/namespace-list/namespace-list.tsx:162
+#: src/containers/namespace-list/namespace-list.tsx:163
 msgid "Search all {titleLowerCase}"
 msgstr "Rechercher tous les {titleLowerCase}"
 
-#: src/containers/namespace-list/namespace-list.tsx:161
+#: src/containers/namespace-list/namespace-list.tsx:162
 msgid "Search my namespaces"
 msgstr "Rechercher dans mes espaces de noms"
 
@@ -2384,7 +2384,7 @@ msgstr "Il n'y a pas d'enregistrement de ressources"
 msgid "These users will lose access to the group content:"
 msgstr "Ces utilisateurs perdront l'accès au contenu du groupe :"
 
-#: src/containers/namespace-list/namespace-list.tsx:249
+#: src/containers/namespace-list/namespace-list.tsx:250
 msgid "This account is not set up to manage any namespaces"
 msgstr "Ce compte n'est pas configuré pour gérer des espaces de noms"
 

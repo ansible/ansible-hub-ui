@@ -209,7 +209,7 @@ msgstr ""
 "Adding groups provides access to all repositories in the\n"
 "\"{namespace}\" container namespace."
 
-#: src/containers/namespace-list/namespace-list.tsx:185
+#: src/containers/namespace-list/namespace-list.tsx:186
 msgid "All"
 msgstr "All"
 
@@ -563,8 +563,8 @@ msgstr "Could not update the certification status for {0}.{1}.{2}."
 #: src/components/namespace-modal/namespace-modal.tsx:111
 #: src/containers/group-management/group-list.tsx:148
 #: src/containers/group-management/group-list.tsx:185
-#: src/containers/namespace-list/namespace-list.tsx:152
-#: src/containers/namespace-list/namespace-list.tsx:253
+#: src/containers/namespace-list/namespace-list.tsx:153
+#: src/containers/namespace-list/namespace-list.tsx:254
 #: src/containers/user-management/user-list.tsx:184
 #: src/containers/user-management/user-list.tsx:249
 msgid "Create"
@@ -1002,11 +1002,11 @@ msgstr "Error loading group."
 msgid "Error loading groups."
 msgstr "Error loading groups."
 
-#: src/containers/namespace-list/namespace-list.tsx:114
+#: src/containers/namespace-list/namespace-list.tsx:115
 msgid "Error loading my namespaces."
 msgstr "Error loading my namespaces."
 
-#: src/containers/namespace-list/namespace-list.tsx:328
+#: src/containers/namespace-list/namespace-list.tsx:329
 msgid "Error loading namespaces."
 msgstr "Error loading namespaces."
 
@@ -1433,7 +1433,7 @@ msgstr "Must be an integer."
 msgid "My imports"
 msgstr "My imports"
 
-#: src/containers/namespace-list/namespace-list.tsx:190
+#: src/containers/namespace-list/namespace-list.tsx:191
 msgid "My namespaces"
 msgstr "My namespaces"
 
@@ -1455,7 +1455,7 @@ msgstr "My profile"
 #: src/containers/execution-environment/registry-list.tsx:259
 #: src/containers/execution-environment/registry-list.tsx:287
 #: src/containers/execution-environment/registry-list.tsx:318
-#: src/containers/namespace-list/namespace-list.tsx:203
+#: src/containers/namespace-list/namespace-list.tsx:204
 #: src/containers/task-management/task_detail.tsx:261
 msgid "Name"
 msgstr "Name"
@@ -1496,7 +1496,7 @@ msgstr "Namespace successfully edited."
 msgid "Namespaces"
 msgstr "Namespaces"
 
-#: src/containers/namespace-list/namespace-list.tsx:248
+#: src/containers/namespace-list/namespace-list.tsx:249
 msgid "Namespaces will appear once created"
 msgstr "Namespaces will appear once created"
 
@@ -1573,7 +1573,7 @@ msgstr "No local repositories yet"
 msgid "No managed collections yet"
 msgstr "No managed collections yet"
 
-#: src/containers/namespace-list/namespace-list.tsx:246
+#: src/containers/namespace-list/namespace-list.tsx:247
 msgid "No namespaces yet"
 msgstr "No namespaces yet"
 
@@ -2066,11 +2066,11 @@ msgstr "Scroll to end"
 #~ msgid "Search all {0}"
 #~ msgstr "Search all {0}"
 
-#: src/containers/namespace-list/namespace-list.tsx:162
+#: src/containers/namespace-list/namespace-list.tsx:163
 msgid "Search all {titleLowerCase}"
 msgstr "Search all {titleLowerCase}"
 
-#: src/containers/namespace-list/namespace-list.tsx:161
+#: src/containers/namespace-list/namespace-list.tsx:162
 msgid "Search my namespaces"
 msgstr "Search my namespaces"
 
@@ -2382,7 +2382,7 @@ msgstr "There's no resource record"
 msgid "These users will lose access to the group content:"
 msgstr "These users will lose access to the group content:"
 
-#: src/containers/namespace-list/namespace-list.tsx:249
+#: src/containers/namespace-list/namespace-list.tsx:250
 msgid "This account is not set up to manage any namespaces"
 msgstr "This account is not set up to manage any namespaces"
 
