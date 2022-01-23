@@ -17,6 +17,10 @@ msgstr ""
 msgid "(latest)"
 msgstr "（最新）"
 
+#: src/components/repositories/remote-form.tsx:161
+msgid "(uploaded)"
+msgstr ""
+
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:151
 msgid "<0/> was added"
 msgstr "<0/> 被添加"
@@ -81,12 +85,12 @@ msgstr "<0>{name}</0> 将被永久删除。"
 msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 msgstr "<0>{username}</0> 将从 <1>{groupname}</1> 中删除。"
 
-#: src/components/repositories/remote-form.tsx:507
-#: src/components/repositories/remote-form.tsx:558
+#: src/components/repositories/remote-form.tsx:522
+#: src/components/repositories/remote-form.tsx:568
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "用于身份验证的 PEM 编码客户端证书。"
 
-#: src/components/repositories/remote-form.tsx:473
+#: src/components/repositories/remote-form.tsx:492
 msgid "A PEM encoded private key used for authentication."
 msgstr "用于验证的 PEM 编码私钥。"
 
@@ -94,7 +98,7 @@ msgstr "用于验证的 PEM 编码私钥。"
 msgid "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
 msgstr "标签可以包含小写和大写 ASCII 字母字符、数字、下划线、句点和短划线。标签不得以句点、下划线或短划线开头。"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:524
+#: src/containers/certification-dashboard/certification-dashboard.tsx:525
 msgid "API Error: 500"
 msgstr "API 错误：500"
 
@@ -102,7 +106,7 @@ msgstr "API 错误：500"
 msgid "API Error: Failed to set deprecation."
 msgstr "API 错误：无法设置弃用。"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:496
+#: src/containers/certification-dashboard/certification-dashboard.tsx:497
 #: src/containers/edit-namespace/edit-namespace.tsx:280
 msgid "API Error: {0}"
 msgstr "API 错误：{0}"
@@ -172,7 +176,7 @@ msgid "Add container repository"
 msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx:149
-#: src/containers/execution-environment-list/execution_environment_list.tsx:149
+#: src/containers/execution-environment-list/execution_environment_list.tsx:150
 msgid "Add execution environment"
 msgstr "添加执行环境"
 
@@ -224,7 +228,7 @@ msgid ""
 "\"{namespace}\" container namespace."
 msgstr "通过添加组，可以访问 \"{namespace}\" 容器命名空间中的所有存储库。"
 
-#: src/containers/namespace-list/namespace-list.tsx:183
+#: src/containers/namespace-list/namespace-list.tsx:184
 msgid "All"
 msgstr "所有"
 
@@ -240,8 +244,8 @@ msgstr "批准仪表板"
 msgid "Approval status:"
 msgstr "批准状态："
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:398
-#: src/containers/certification-dashboard/certification-dashboard.tsx:457
+#: src/containers/certification-dashboard/certification-dashboard.tsx:399
+#: src/containers/certification-dashboard/certification-dashboard.tsx:458
 msgid "Approve"
 msgstr "批准"
 
@@ -267,7 +271,7 @@ msgstr "浏览器 OS"
 msgid "Browser Version"
 msgstr "浏览器版本"
 
-#: src/components/repositories/remote-form.tsx:555
+#: src/components/repositories/remote-form.tsx:565
 msgid "CA certificate"
 msgstr "CA 证书"
 
@@ -291,7 +295,7 @@ msgstr "在未将一个发布附加到它时，无法远程更新。"
 #: src/components/group-management/group-modal.tsx:59
 #: src/components/import-modal/import-modal.tsx:78
 #: src/components/namespace-modal/namespace-modal.tsx:122
-#: src/components/repositories/remote-form.tsx:133
+#: src/components/repositories/remote-form.tsx:137
 #: src/components/user-form/user-form.tsx:225
 #: src/containers/edit-namespace/edit-namespace.tsx:197
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
@@ -401,11 +405,11 @@ msgstr "清除所有过滤器"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "点击您要在其中使用上述执行环境的 Controller URL，它将启动该控制器的控制台。登录（如果需要）并按照步骤完成配置。"
 
-#: src/components/repositories/remote-form.tsx:504
+#: src/components/repositories/remote-form.tsx:519
 msgid "Client certificate"
 msgstr "客户端证书"
 
-#: src/components/repositories/remote-form.tsx:470
+#: src/components/repositories/remote-form.tsx:489
 msgid "Client key"
 msgstr "客户端密钥"
 
@@ -530,12 +534,12 @@ msgstr ""
 msgid "Container namespace"
 msgstr "容器命名空间"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:301
+#: src/containers/execution-environment-list/execution_environment_list.tsx:302
 msgid "Container registry type"
 msgstr "容器 Registry 类型"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:225
-#: src/containers/execution-environment-list/execution_environment_list.tsx:281
+#: src/containers/execution-environment-list/execution_environment_list.tsx:226
+#: src/containers/execution-environment-list/execution_environment_list.tsx:282
 msgid "Container repository name"
 msgstr "容器仓库名称"
 
@@ -571,8 +575,8 @@ msgstr "复制到剪贴板。"
 msgid "Could not load import log"
 msgstr "无法加载导入日志"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:497
-#: src/containers/certification-dashboard/certification-dashboard.tsx:525
+#: src/containers/certification-dashboard/certification-dashboard.tsx:498
+#: src/containers/certification-dashboard/certification-dashboard.tsx:526
 msgid "Could not update the certification status for {0}.{1}.{2}."
 msgstr "无法为 {0}.{1}.{2} 更新证书的状态。"
 
@@ -580,8 +584,8 @@ msgstr "无法为 {0}.{1}.{2} 更新证书的状态。"
 #: src/components/namespace-modal/namespace-modal.tsx:119
 #: src/containers/group-management/group-list.tsx:160
 #: src/containers/group-management/group-list.tsx:197
-#: src/containers/namespace-list/namespace-list.tsx:150
-#: src/containers/namespace-list/namespace-list.tsx:251
+#: src/containers/namespace-list/namespace-list.tsx:151
+#: src/containers/namespace-list/namespace-list.tsx:252
 #: src/containers/user-management/user-list.tsx:184
 #: src/containers/user-management/user-list.tsx:249
 msgid "Create"
@@ -610,7 +614,7 @@ msgid "Create new user"
 msgstr "创建新用户"
 
 #: src/containers/execution-environment/registry-list.tsx:326
-#: src/containers/execution-environment-list/execution_environment_list.tsx:291
+#: src/containers/execution-environment-list/execution_environment_list.tsx:292
 #: src/containers/group-management/group-detail.tsx:777
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
@@ -665,7 +669,7 @@ msgstr "创建日期"
 #: src/containers/execution-environment/registry-list.tsx:395
 #: src/containers/execution-environment-detail/base.tsx:144
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:415
-#: src/containers/execution-environment-list/execution_environment_list.tsx:368
+#: src/containers/execution-environment-list/execution_environment_list.tsx:369
 #: src/containers/group-management/group-detail.tsx:259
 #: src/containers/group-management/group-list.tsx:432
 #: src/containers/task-management/task-list-view.tsx:305
@@ -828,7 +832,7 @@ msgstr "弃用"
 #: src/components/collection-detail/collection-content-list.tsx:100
 #: src/components/execution-environment/repository-form.tsx:360
 #: src/components/namespace-form/namespace-form.tsx:151
-#: src/containers/execution-environment-list/execution_environment_list.tsx:286
+#: src/containers/execution-environment-list/execution_environment_list.tsx:287
 #: src/containers/task-management/task_detail.tsx:336
 msgid "Description"
 msgstr "描述"
@@ -871,19 +875,19 @@ msgstr "有关如何配置 <0>ansible-galaxy</0> 客户端的文档位于<1>这�
 msgid "Done"
 msgstr "完成"
 
-#: src/components/repositories/remote-form.tsx:595
+#: src/components/repositories/remote-form.tsx:601
 msgid "Download CA certification file"
 msgstr "下载 CA 认证文件"
 
-#: src/components/repositories/remote-form.tsx:545
+#: src/components/repositories/remote-form.tsx:555
 msgid "Download client certification file"
 msgstr "下载客户端认证文件"
 
-#: src/components/repositories/remote-form.tsx:605
+#: src/components/repositories/remote-form.tsx:611
 msgid "Download concurrency"
 msgstr "下载并发"
 
-#: src/components/repositories/remote-form.tsx:294
+#: src/components/repositories/remote-form.tsx:313
 msgid "Download requirements file"
 msgstr "下载要求文件"
 
@@ -905,7 +909,7 @@ msgstr "下拉菜单"
 #: src/containers/execution-environment/registry-list.tsx:382
 #: src/containers/execution-environment-detail/base.tsx:190
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
-#: src/containers/execution-environment-list/execution_environment_list.tsx:342
+#: src/containers/execution-environment-list/execution_environment_list.tsx:343
 #: src/containers/group-management/group-detail.tsx:345
 #: src/containers/group-management/group-list.tsx:418
 #: src/containers/settings/user-profile.tsx:96
@@ -931,7 +935,7 @@ msgstr "编辑组权限"
 msgid "Edit namespace"
 msgstr "编辑命名空间"
 
-#: src/components/repositories/remote-form.tsx:116
+#: src/components/repositories/remote-form.tsx:120
 msgid "Edit remote"
 msgstr "编辑远程"
 
@@ -1021,7 +1025,7 @@ msgstr ""
 msgid "Error loading dependent collections."
 msgstr "加载依赖集合时出错。"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:486
+#: src/containers/execution-environment-list/execution_environment_list.tsx:487
 msgid "Error loading environments."
 msgstr ""
 
@@ -1038,11 +1042,11 @@ msgstr "加载组错误。"
 msgid "Error loading groups."
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:112
+#: src/containers/namespace-list/namespace-list.tsx:113
 msgid "Error loading my namespaces."
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:323
+#: src/containers/namespace-list/namespace-list.tsx:324
 msgid "Error loading namespaces."
 msgstr ""
 
@@ -1111,18 +1115,18 @@ msgid "Execution Environment"
 msgstr "执行环境"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:36
-#: src/containers/execution-environment-list/execution_environment_list.tsx:167
+#: src/containers/execution-environment-list/execution_environment_list.tsx:168
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:107
 #: src/loaders/standalone/standalone-loader.tsx:369
 #: src/loaders/standalone/standalone-loader.tsx:375
 msgid "Execution Environments"
 msgstr "执行环境"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:444
+#: src/containers/execution-environment-list/execution_environment_list.tsx:445
 msgid "Execution environment added."
 msgstr ""
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:445
+#: src/containers/execution-environment-list/execution_environment_list.tsx:446
 msgid "Execution environment saved."
 msgstr ""
 
@@ -1154,7 +1158,7 @@ msgstr "{operation} 标签 \"{tag}\" 失败。"
 msgid "Filter by name"
 msgstr "按名称过滤"
 
-#: src/components/repo-selector/repo-selector.tsx:53
+#: src/components/repo-selector/repo-selector.tsx:54
 msgid "Filter by repository"
 msgstr "按仓库过滤"
 
@@ -1237,7 +1241,7 @@ msgstr "组在创建后会出现"
 msgid "Groups with access"
 msgstr "带有访问权限的组"
 
-#: src/components/repositories/remote-form.tsx:371
+#: src/components/repositories/remote-form.tsx:390
 msgid "Hide advanced options"
 msgstr "隐藏高级选项"
 
@@ -1248,7 +1252,7 @@ msgstr "隐藏高级选项"
 msgid "I understand that this action cannot be undone."
 msgstr "我理解这个行动是无法撤销的。"
 
-#: src/components/repositories/remote-form.tsx:454
+#: src/components/repositories/remote-form.tsx:473
 msgid "If selected, TLS peer validation must be performed."
 msgstr "如果选中，则必须执行 TLS 对等验证。"
 
@@ -1354,7 +1358,7 @@ msgstr "关闭这个窗口是安全的。这些任务将在后台结束。"
 msgid "Keywords"
 msgstr "关键字"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:296
+#: src/containers/execution-environment-list/execution_environment_list.tsx:297
 msgid "Last modified"
 msgstr "最后修改"
 
@@ -1396,7 +1400,7 @@ msgstr "了解更多"
 msgid "License"
 msgstr "许可证"
 
-#: src/components/repositories/remote-form.tsx:640
+#: src/components/repositories/remote-form.tsx:646
 msgid "Limits total download rate in requests per second."
 msgstr "限制请求的每秒总下载率。"
 
@@ -1418,7 +1422,7 @@ msgstr "集合列表"
 msgid "Load token"
 msgstr "加载令牌"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:398
+#: src/containers/execution-environment-list/execution_environment_list.tsx:399
 #: src/containers/repositories/repository-list.tsx:118
 msgid "Local"
 msgstr "本地"
@@ -1461,7 +1465,7 @@ msgstr "信息"
 msgid "Modify Ansible repo content"
 msgstr "修改 Ansible repo 内容"
 
-#: src/components/repositories/remote-form.tsx:649
+#: src/components/repositories/remote-form.tsx:655
 msgid "Must be an integer."
 msgstr "必须是整数。"
 
@@ -1469,7 +1473,7 @@ msgstr "必须是整数。"
 msgid "My imports"
 msgstr "我的导入"
 
-#: src/containers/namespace-list/namespace-list.tsx:188
+#: src/containers/namespace-list/namespace-list.tsx:189
 msgid "My namespaces"
 msgstr "我的命名空间"
 
@@ -1487,11 +1491,11 @@ msgstr "我的配置集"
 #: src/components/my-imports/import-list.tsx:116
 #: src/components/namespace-form/namespace-form.tsx:61
 #: src/components/namespace-modal/namespace-modal.tsx:128
-#: src/components/repositories/remote-form.tsx:157
+#: src/components/repositories/remote-form.tsx:181
 #: src/containers/execution-environment/registry-list.tsx:264
 #: src/containers/execution-environment/registry-list.tsx:292
 #: src/containers/execution-environment/registry-list.tsx:321
-#: src/containers/namespace-list/namespace-list.tsx:201
+#: src/containers/namespace-list/namespace-list.tsx:202
 #: src/containers/task-management/task_detail.tsx:262
 msgid "Name"
 msgstr "名称"
@@ -1540,7 +1544,7 @@ msgstr ""
 msgid "Namespaces"
 msgstr "命名空间"
 
-#: src/containers/namespace-list/namespace-list.tsx:246
+#: src/containers/namespace-list/namespace-list.tsx:247
 msgid "Namespaces will appear once created"
 msgstr "命名空间在创建后会出现"
 
@@ -1583,7 +1587,7 @@ msgstr "没有子任务"
 msgid "No collections yet"
 msgstr "还没有集合"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:189
+#: src/containers/execution-environment-list/execution_environment_list.tsx:190
 msgid "No container repositories yet"
 msgstr "还没有容器仓库"
 
@@ -1617,7 +1621,7 @@ msgstr "还没有本地仓库"
 msgid "No managed collections yet"
 msgstr "还没有受管集合"
 
-#: src/containers/namespace-list/namespace-list.tsx:244
+#: src/containers/namespace-list/namespace-list.tsx:245
 msgid "No namespaces yet"
 msgstr "还没有命名空间"
 
@@ -1696,7 +1700,7 @@ msgstr "其他集合不需要使用"
 msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 msgstr "注意：此 URL 包含 Hub 中的所有集合。要连接到组织的同步存储库，请使用<0>存储库管理</0>中的 URL。"
 
-#: src/components/repositories/remote-form.tsx:617
+#: src/components/repositories/remote-form.tsx:623
 msgid "Number must be greater than 0"
 msgstr "此字段必须大于 0"
 
@@ -1720,7 +1724,7 @@ msgstr "父任务"
 msgid "Partners"
 msgstr "合作伙伴"
 
-#: src/components/repositories/remote-form.tsx:340
+#: src/components/repositories/remote-form.tsx:359
 #: src/components/user-form/user-form.tsx:92
 #: src/containers/login/login.tsx:55
 msgid "Password"
@@ -1807,15 +1811,15 @@ msgstr "进度消息"
 msgid "Provided by {company}"
 msgstr "由 {company} 提供"
 
-#: src/components/repositories/remote-form.tsx:377
+#: src/components/repositories/remote-form.tsx:396
 msgid "Proxy URL"
 msgstr "代理 URL"
 
-#: src/components/repositories/remote-form.tsx:423
+#: src/components/repositories/remote-form.tsx:442
 msgid "Proxy password"
 msgstr "代理密码"
 
-#: src/components/repositories/remote-form.tsx:395
+#: src/components/repositories/remote-form.tsx:414
 msgid "Proxy username"
 msgstr "代理用户名"
 
@@ -1945,7 +1949,7 @@ msgstr "Pulpcore：修复版本"
 msgid "Pulpcore: Upload commit"
 msgstr "Pulpcore：上传提交"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:136
+#: src/containers/execution-environment-list/execution_environment_list.tsx:137
 msgid "Push container images"
 msgstr "推容器镜像"
 
@@ -1965,7 +1969,7 @@ msgstr "推送新容器"
 msgid "Push to existing containers"
 msgstr "推送到现有容器"
 
-#: src/components/repositories/remote-form.tsx:637
+#: src/components/repositories/remote-form.tsx:643
 msgid "Rate Limit"
 msgstr "速率限制"
 
@@ -1997,7 +2001,7 @@ msgstr "Registry URL"
 msgid "Registry sync status"
 msgstr "Registry 同步状态"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:415
+#: src/containers/certification-dashboard/certification-dashboard.tsx:416
 msgid "Reject"
 msgstr "拒绝"
 
@@ -2007,7 +2011,7 @@ msgstr "拒绝"
 msgid "Rejected"
 msgstr "拒绝"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:398
+#: src/containers/execution-environment-list/execution_environment_list.tsx:399
 #: src/containers/repositories/repository-list.tsx:119
 msgid "Remote"
 msgstr "远程"
@@ -2089,7 +2093,7 @@ msgstr "资源"
 msgid "Running"
 msgstr "运行中"
 
-#: src/components/repositories/remote-form.tsx:226
+#: src/components/repositories/remote-form.tsx:250
 #: src/containers/token/token-insights.tsx:184
 msgid "SSO URL"
 msgstr "SSO URL"
@@ -2097,7 +2101,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/repository-form.tsx:158
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
-#: src/components/repositories/remote-form.tsx:126
+#: src/components/repositories/remote-form.tsx:130
 #: src/components/user-form/user-form.tsx:222
 #: src/containers/edit-namespace/edit-namespace.tsx:194
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
@@ -2113,11 +2117,11 @@ msgstr "滚动至末尾"
 #~ msgid "Search all {0}"
 #~ msgstr "搜索所有 {0}"
 
-#: src/containers/namespace-list/namespace-list.tsx:160
+#: src/containers/namespace-list/namespace-list.tsx:161
 msgid "Search all {titleLowerCase}"
 msgstr "搜索所有 {titleLowerCase}"
 
-#: src/containers/namespace-list/namespace-list.tsx:159
+#: src/containers/namespace-list/namespace-list.tsx:160
 msgid "Search my namespaces"
 msgstr "搜索我的命名空间"
 
@@ -2178,7 +2182,7 @@ msgstr "服务器版本"
 msgid "Settings"
 msgstr "设置"
 
-#: src/components/repositories/remote-form.tsx:372
+#: src/components/repositories/remote-form.tsx:391
 msgid "Show advanced options"
 msgstr "显示高级选项"
 
@@ -2186,7 +2190,7 @@ msgstr "显示高级选项"
 msgid "Showing:"
 msgstr "显示："
 
-#: src/components/repositories/remote-form.tsx:227
+#: src/components/repositories/remote-form.tsx:251
 msgid "Single sign on URL."
 msgstr "单点登录。"
 
@@ -2304,19 +2308,19 @@ msgstr "同步"
 
 #: src/containers/execution-environment/registry-list.tsx:497
 #: src/containers/execution-environment-detail/base.tsx:329
-#: src/containers/execution-environment-list/execution_environment_list.tsx:530
+#: src/containers/execution-environment-list/execution_environment_list.tsx:531
 msgid "Sync failed for {name}"
 msgstr "对 {name} 同步失败"
 
 #: src/containers/execution-environment/registry-list.tsx:431
 #: src/containers/execution-environment-detail/base.tsx:122
-#: src/containers/execution-environment-list/execution_environment_list.tsx:346
+#: src/containers/execution-environment-list/execution_environment_list.tsx:347
 msgid "Sync from registry"
 msgstr "从 registry 进行同步"
 
 #: src/containers/execution-environment/registry-list.tsx:483
 #: src/containers/execution-environment-detail/base.tsx:315
-#: src/containers/execution-environment-list/execution_environment_list.tsx:517
+#: src/containers/execution-environment-list/execution_environment_list.tsx:518
 msgid "Sync initiated for {name}"
 msgstr "为 {name} 发起同步"
 
@@ -2324,7 +2328,7 @@ msgstr "为 {name} 发起同步"
 msgid "Sync status"
 msgstr "同步状态"
 
-#: src/components/repositories/remote-form.tsx:451
+#: src/components/repositories/remote-form.tsx:470
 msgid "TLS validation"
 msgstr "TLS 验证"
 
@@ -2384,7 +2388,7 @@ msgstr ""
 msgid "Text: {0}"
 msgstr "文本：{0}"
 
-#: src/components/repositories/remote-form.tsx:177
+#: src/components/repositories/remote-form.tsx:201
 msgid "The URL of an external content source."
 msgstr "外部内容源的 URL。"
 
@@ -2400,11 +2404,11 @@ msgstr "您选择的集合没有显示与 {0} 匹配。"
 msgid "The file is not available for this version of {collectionName}"
 msgstr "文件不适用于这个版本的 {collectionName}"
 
-#: src/components/repositories/remote-form.tsx:345
+#: src/components/repositories/remote-form.tsx:364
 msgid "The password to be used for authentication when syncing."
 msgstr "同步时用于身份验证的密码。"
 
-#: src/components/repositories/remote-form.tsx:346
+#: src/components/repositories/remote-form.tsx:365
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同步时要用于身份验证的密码。在使用令牌时不需要此密码。"
 
@@ -2412,11 +2416,11 @@ msgstr "同步时要用于身份验证的密码。在使用令牌时不需要此
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "令牌将在 30 天没有活动时过期。定期运行以下命令以防止您的令牌过期。"
 
-#: src/components/repositories/remote-form.tsx:310
+#: src/components/repositories/remote-form.tsx:329
 msgid "The username to be used for authentication when syncing."
 msgstr "同步时用于身份验证的用户名。"
 
-#: src/components/repositories/remote-form.tsx:311
+#: src/components/repositories/remote-form.tsx:330
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "同步时要用于身份验证的用户名。在使用令牌时不需要此用户名。"
 
@@ -2441,7 +2445,7 @@ msgstr "没有资源记录"
 msgid "These users will lose access to the group content:"
 msgstr "这些用户将丢失对组群内容的访问权限："
 
-#: src/containers/namespace-list/namespace-list.tsx:247
+#: src/containers/namespace-list/namespace-list.tsx:248
 msgid "This account is not set up to manage any namespaces"
 msgstr "此帐户没有设置为管理任何命名空间"
 
@@ -2465,7 +2469,7 @@ msgstr "该标签已存在于其他镜像上。您要将其移至此镜像吗？
 msgid "This tag is already selected for this image. You cannot add it twice."
 msgstr "已为此镜像选择此标签。您不能添加两次。"
 
-#: src/components/repositories/remote-form.tsx:250
+#: src/components/repositories/remote-form.tsx:274
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "这使用与 ansible-galaxy CLI 相同的 {docsAnsibleLink} 格式，但不支持角色，并且不支持 source 参数。"
 
@@ -2473,11 +2477,11 @@ msgstr "这使用与 ansible-galaxy CLI 相同的 {docsAnsibleLink} 格式，但
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr "若要撤销令牌或查看所有令牌，请访问<0>离线 API 令牌管理</0>页面。"
 
-#: src/components/repositories/remote-form.tsx:197
+#: src/components/repositories/remote-form.tsx:221
 msgid "Token"
 msgstr "令牌"
 
-#: src/components/repositories/remote-form.tsx:200
+#: src/components/repositories/remote-form.tsx:224
 msgid "Token for authenticating to the server URL."
 msgstr "用于向服务器 URL 进行身份验证的令牌。"
 
@@ -2485,7 +2489,7 @@ msgstr "用于向服务器 URL 进行身份验证的令牌。"
 #~ msgid "Token management"
 #~ msgstr "仓库管理"
 
-#: src/components/repositories/remote-form.tsx:608
+#: src/components/repositories/remote-form.tsx:614
 msgid "Total number of simultaneous connections."
 msgstr "同时连接总数。"
 
@@ -2502,7 +2506,7 @@ msgstr "培训 <0/>"
 msgid "Type"
 msgstr "类型"
 
-#: src/components/repositories/remote-form.tsx:175
+#: src/components/repositories/remote-form.tsx:199
 msgid "URL"
 msgstr "URL"
 
@@ -2547,7 +2551,7 @@ msgstr "上游名称"
 #: src/components/execution-environment/publish-to-controller-modal.tsx:277
 #: src/containers/execution-environment-detail/base.tsx:135
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:407
-#: src/containers/execution-environment-list/execution_environment_list.tsx:359
+#: src/containers/execution-environment-list/execution_environment_list.tsx:360
 msgid "Use in Controller"
 msgstr "在控制器中使用"
 
@@ -2599,7 +2603,7 @@ msgstr "用户组"
 msgid "User details"
 msgstr "用户详情"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:315
+#: src/containers/execution-environment-list/execution_environment_list.tsx:316
 #: src/containers/group-management/group-detail.tsx:791
 #: src/containers/user-management/user-list.tsx:300
 msgid "User list"
@@ -2610,7 +2614,7 @@ msgid "User type"
 msgstr "用户类型"
 
 #: src/components/about-modal/about-modal.tsx:77
-#: src/components/repositories/remote-form.tsx:305
+#: src/components/repositories/remote-form.tsx:324
 #: src/components/user-form/user-form.tsx:86
 #: src/containers/group-management/group-detail.tsx:678
 #: src/containers/group-management/group-detail.tsx:757
@@ -2655,7 +2659,7 @@ msgstr "版本："
 msgid "View Ansible distribution"
 msgstr "查看 Ansible 发布"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:384
+#: src/containers/certification-dashboard/certification-dashboard.tsx:385
 msgid "View Import Logs"
 msgstr "查看导入日志"
 
@@ -2703,7 +2707,7 @@ msgstr "查看同步列表"
 #: src/containers/execution-environment/registry-list.tsx:486
 #: src/containers/execution-environment/registry-list.tsx:508
 #: src/containers/execution-environment-detail/base.tsx:318
-#: src/containers/execution-environment-list/execution_environment_list.tsx:520
+#: src/containers/execution-environment-list/execution_environment_list.tsx:521
 msgid "View the task <0>here</0>."
 msgstr "查看任务<0>这里</0>。"
 
@@ -2729,7 +2733,7 @@ msgstr "我们无法找到您要查找的页面！"
 msgid "Website"
 msgstr "网站"
 
-#: src/components/repositories/remote-form.tsx:246
+#: src/components/repositories/remote-form.tsx:270
 msgid "YAML requirements"
 msgstr "YAML 要求"
 
@@ -2751,7 +2755,7 @@ msgstr "您是一个 SSO 用户。您的令牌将过期 <0/>。"
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
 msgstr "您可以通过在此处输入自定义标记来自定义配置集上的 Resources 选项卡。"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:190
+#: src/containers/execution-environment-list/execution_environment_list.tsx:191
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "您当前没有容器仓库。通过 CLI 添加容器仓库以开始。"
 
