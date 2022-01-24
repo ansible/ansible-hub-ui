@@ -55,7 +55,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
 
   after(() => {
     //cy.deleteNamespacesAndCollections();
-    cy.settings({ GALAXY_REQUIRE_CONTENT_APPROVAL: false });
+    cy.settings();
   });
 
   beforeEach(() => {
