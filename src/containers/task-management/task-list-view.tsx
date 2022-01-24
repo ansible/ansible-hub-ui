@@ -1,4 +1,4 @@
-import { t, Trans } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 
 import * as React from 'react';
@@ -276,7 +276,13 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       <tr aria-labelledby={name} key={index}>
         <td>
           <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
-            <Tooltip content={i18n._(Constants.TASK_NAMES[name]) || name}>
+            <Tooltip
+              content={
+                (Constants.TASK_NAMES[name] &&
+                  i18n._(Constants.TASK_NAMES[name])) ||
+                name
+              }
+            >
               {name}
             </Tooltip>
           </Link>

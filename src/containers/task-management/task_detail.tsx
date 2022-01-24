@@ -205,7 +205,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                               task: parentTaskId,
                             })}
                           >
-                            {i18n._(Constants.TASK_NAMES[parentTask.name]) ||
+                            {(Constants.TASK_NAMES[parentTask.name] &&
+                              i18n._(Constants.TASK_NAMES[parentTask.name])) ||
                               parentTask.name}
                           </Link>
                         ) : (
@@ -228,9 +229,11 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                                       task: childTaskId,
                                     })}
                                   >
-                                    {i18n._(
-                                      Constants.TASK_NAMES[childTask.name],
-                                    ) || childTask.name}
+                                    {(Constants.TASK_NAMES[childTask.name] &&
+                                      i18n._(
+                                        Constants.TASK_NAMES[childTask.name],
+                                      )) ||
+                                      childTask.name}
                                   </Link>
                                   <br />
                                 </React.Fragment>
@@ -474,7 +477,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             parentTask,
             loading: false,
             taskName:
-              i18n._(Constants.TASK_NAMES[result.data.name]) ||
+              (Constants.TASK_NAMES[result.data.name] &&
+                i18n._(Constants.TASK_NAMES[result.data.name])) ||
               result.data.name,
             resources,
           });
