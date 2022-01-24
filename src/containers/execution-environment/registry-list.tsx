@@ -431,7 +431,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             <Trans>Sync from registry</Trans>
           </Button>{' '}
           {dropdownItems.length > 0 && (
-            <StatefulDropdown items={dropdownItems} />
+            <StatefulDropdown
+              items={dropdownItems}
+              ariaLabel='registry-list-kebab'
+            />
           )}
         </td>
       </tr>

@@ -330,18 +330,25 @@ class ExecutionEnvironmentList extends React.Component<
 
   private renderTableRow(item, index: number) {
     const description = item.description;
+
+    const canEdit = item.namespace.my_permissions.includes(
+      'container.change_containernamespace',
+    );
+
     const dropdownItems = [
-      <DropdownItem
-        key='edit'
-        onClick={() =>
-          this.setState({
-            showRemoteModal: true,
-            itemToEdit: { ...item },
-          })
-        }
-      >
-        {t`Edit`}
-      </DropdownItem>,
+      canEdit && (
+        <DropdownItem
+          key='edit'
+          onClick={() =>
+            this.setState({
+              showRemoteModal: true,
+              itemToEdit: { ...item },
+            })
+          }
+        >
+          {t`Edit`}
+        </DropdownItem>
+      ),
       item.pulp.repository.remote && (
         <DropdownItem key='sync' onClick={() => this.sync(item.name)}>
           {t`Sync from registry`}
