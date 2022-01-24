@@ -21,22 +21,22 @@ describe('Imports filter test', () => {
 
   it('partial filter for name is working.', () => {
     cy.get('input[aria-label="keywords"').type('my_collection{enter}');
-    cy.get('[data-cy="import-list-data"]').contains('my_collection1');
-    cy.get('[data-cy="import-list-data"]').contains('my_collection2');
     cy.get('[data-cy="import-list-data"]')
       .contains('different_name')
       .should('not.exist');
+    cy.get('[data-cy="import-list-data"]').contains('my_collection1');
+    cy.get('[data-cy="import-list-data"]').contains('my_collection2');
   });
 
   it('exact filter for name is working.', () => {
     cy.get('input[aria-label="keywords"').type('my_collection1{enter}');
-    cy.get('[data-cy="import-list-data"]').contains('my_collection1');
     cy.get('[data-cy="import-list-data"]')
       .contains('my_collection2')
       .should('not.exist');
     cy.get('[data-cy="import-list-data"]')
       .contains('different_name')
       .should('not.exist');
+    cy.get('[data-cy="import-list-data"]').contains('my_collection1');
   });
 
   it('Exact search for completed is working.', () => {
@@ -82,12 +82,12 @@ describe('Imports filter test', () => {
     ).as('wait');
     cy.contains('a', 'Completed').click();
 
-    cy.get('[data-cy="import-list-data"]').contains('my_collection1');
+    cy.wait('@wait');
+
     cy.get('[data-cy="import-list-data"]')
       .contains('different_name')
       .should('not.exist');
-
-    cy.wait('@wait');
+    cy.get('[data-cy="import-list-data"]').contains('my_collection1');
   });
 
   it('Partial search for name and completed is working.', () => {
@@ -103,12 +103,11 @@ describe('Imports filter test', () => {
       Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
     ).as('wait');
     cy.contains('a', 'Completed').click();
+    cy.wait('@wait');
 
     cy.get('[data-cy="import-list-data"]').contains('my_collection2');
     cy.get('[data-cy="import-list-data"]')
       .contains('different_name')
       .should('not.exist');
-
-    cy.wait('@wait');
   });
 });
