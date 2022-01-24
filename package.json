@@ -34,7 +34,7 @@
         "redux-promise-middleware": "^6.1.2"
     },
     "devDependencies": {
-        "@babel/core": "^7.16.7",
+        "@babel/core": "^7.16.12",
         "@babel/plugin-proposal-class-properties": "^7.16.7",
         "@babel/plugin-proposal-object-rest-spread": "^7.16.7",
         "@babel/plugin-syntax-dynamic-import": "^7.8.3",
