@@ -34,6 +34,8 @@ import {
   closeAlertMixin,
   StatefulDropdown,
   DeleteModal,
+  SignSingleCertificateModal,
+  SignAllCertificatesModal,
 } from 'src/components';
 
 import { CollectionAPI, CollectionDetailType } from 'src/api';
@@ -62,6 +64,8 @@ interface IProps {
 interface IState {
   isOpenVersionsSelect: boolean;
   isOpenVersionsModal: boolean;
+  isOpenSignModal: boolean;
+  isOpenSignAllModal: boolean;
   modalPagination: {
     page: number;
     pageSize: number;
@@ -85,6 +89,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     this.state = {
       isOpenVersionsSelect: false,
       isOpenVersionsModal: false,
+      isOpenSignModal: false,
+      isOpenSignAllModal: false,
       modalPagination: {
         page: 1,
         pageSize: Constants.DEFAULT_PAGINATION_OPTIONS[1],
@@ -201,10 +207,44 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Delete version ${collection.latest_version.version}`}
         </DropdownItem>
       ),
+      <DropdownItem
+        key='sign-all'
+        onClick={() => this.setState({ isOpenSignAllModal: true })}
+      >
+        {`Sign entire collection`}
+      </DropdownItem>,
+      <DropdownItem
+        key='sign-version'
+        onClick={() => this.setState({ isOpenSignModal: true })}
+      >
+        {`Sign version ${collection.latest_version.version}`}
+      </DropdownItem>,
     ];
 
     return (
       <React.Fragment>
+        <SignAllCertificatesModal
+          name={collectionName}
+          numberOfAffected={collection.all_versions.length}
+          isOpen={this.state.isOpenSignAllModal}
+          onSubmit={() => {
+            // TODO
+            this.setState({ isOpenSignAllModal: false });
+          }}
+          onCancel={() => {
+            this.setState({ isOpenSignAllModal: false });
+          }}
+        />
+        <SignSingleCertificateModal
+          name={collectionName}
+          version={collection.latest_version.version}
+          isOpen={this.state.isOpenSignModal}
+          onSubmit={() => {
+            // TODO
+            this.setState({ isOpenSignModal: false });
+          }}
+          onCancel={() => this.setState({ isOpenSignModal: false })}
+        />
         <Modal
           isOpen={isOpenVersionsModal}
           title={t`Collection versions`}

@@ -45,6 +45,7 @@ import {
   closeAlertMixin,
   DeleteModal,
   AlertType,
+  SignAllCertificatesModal,
 } from 'src/components';
 
 import { ParamHelper, getRepoUrl, filterIsSet } from 'src/utilities';
@@ -70,6 +71,7 @@ interface IState {
   updateCollection: CollectionListType;
   showControls: boolean;
   isOpenNamespaceModal: boolean;
+  isOpenSignModal: boolean;
   isNamespaceEmpty: boolean;
   confirmDelete: boolean;
   isNamespacePending: boolean;
@@ -107,6 +109,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       updateCollection: null,
       showControls: false, // becomes true when my-namespaces doesn't 404
       isOpenNamespaceModal: false,
+      isOpenSignModal: false,
       isNamespaceEmpty: false,
       confirmDelete: false,
       isNamespacePending: false,
@@ -330,6 +333,18 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             ? this.renderResources(namespace)
             : null}
         </Main>
+        <SignAllCertificatesModal
+          name={this.state.namespace.name}
+          numberOfAffected={this.state.itemCount}
+          isOpen={this.state.isOpenSignModal}
+          onSubmit={() => {
+            // TODO
+            this.setState({ isOpenSignModal: false });
+          }}
+          onCancel={() => {
+            this.setState({ isOpenSignModal: false });
+          }}
+        />
       </React.Fragment>
     );
   }
@@ -515,7 +530,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </Link>
         }
       />,
-    ].filter(Boolean);
+      <DropdownItem
+        key='sign-collections'
+        onClick={() => this.setState({ isOpenSignModal: true })}
+      >
+        {t`Sign all collections`}
+      </DropdownItem>,
+    ];
     if (!this.state.showControls) {
       return <div className='hub-namespace-page-controls'></div>;
     }

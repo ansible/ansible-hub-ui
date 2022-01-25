@@ -62,6 +62,8 @@ export { TagManifestModal } from './execution-environment/tag-manifest-modal';
 export { ShaLabel } from './sha-label/sha-label';
 export { SmallLogo } from './logo/small-logo';
 export { Sort, SortFieldType } from './patternfly-wrappers/sort';
+export { default as SignSingleCertificateModal } from './sign-single-certificate-modal';
+export { default as SignAllCertificatesModal } from './sign-all-certificates-modal';
 export { SortTable } from './sort-table/sort-table';
 export { StatefulDropdown } from './patternfly-wrappers/stateful-dropdown';
 export { StatusIndicator } from './status/status-indicator';
