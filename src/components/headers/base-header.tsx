@@ -44,8 +44,7 @@ export class BaseHeader extends React.Component<IProps> {
             {logo}
             <div>
               <Title headingLevel='h1' size='2xl'>
-                {title}
-                {status}
+                {title} {status}
               </Title>
             </div>
           </div>

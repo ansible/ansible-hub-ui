@@ -44,6 +44,7 @@ import { waitForTask } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
 import { Constants } from 'src/constants';
+import { SignatureBadge } from '../signing';
 
 interface IProps {
   collection: CollectionDetailType;
@@ -434,6 +435,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   </Trans>
                 </span>
               ) : null}
+              <SignatureBadge isSigned isCompact />
             </div>
           }
           pageControls={

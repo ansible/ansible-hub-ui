@@ -14,15 +14,6 @@
 }
 
 .hub-c-card-collection-container {
-  width: 280px;
-  // height: 340px;
-
-  // For some reason the PF Card components overrides all the defaults for
-  // divs
-  div {
-    display: block;
-  }
-
   .name {
     font-weight: bold;
     text-overflow: ellipsis;
@@ -35,21 +26,6 @@
     font-size: var(--pf-global--FontSize--xs);
     color: var(--pf-global--color--200);
     text-transform: capitalize;
-  }
-
-  .type-container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .logo-row {
-    display: flex;
-    justify-content: space-between;
-
-    .icon {
-      color: var(--pf-global--info-color--100);
-      margin-right: 3px;
-    }
   }
 
   .description {
