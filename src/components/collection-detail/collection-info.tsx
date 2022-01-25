@@ -12,6 +12,7 @@ import {
   GridItem,
   Button,
   Alert,
+  ButtonVariant,
 } from '@patternfly/react-core';
 
 import { DownloadIcon } from '@patternfly/react-icons';
@@ -115,6 +116,23 @@ export class CollectionInfo extends React.Component<IProps> {
                     </Button>
                   </div>
                 )}
+              </SplitItem>
+            </Split>
+          </GridItem>
+          <GridItem>
+            <Split hasGutter>
+              <SplitItem className='install-title'>{t`Signature`}</SplitItem>
+              <SplitItem>
+                <Button
+                  style={{ padding: 0 }}
+                  variant={ButtonVariant.link}
+                  icon={<DownloadIcon />}
+                  onClick={() => {
+                    // TODO
+                  }}
+                >
+                  {t`Download the signature file`}
+                </Button>
               </SplitItem>
             </Split>
           </GridItem>
