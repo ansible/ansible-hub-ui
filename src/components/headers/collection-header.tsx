@@ -166,7 +166,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       noDependencies
         ? this.context.user.model_permissions.delete_collection && (
             <DropdownItem
-              key={1}
+              key='1-enabled'
               onClick={() => this.openDeleteModalWithConfirm()}
               data-cy='delete-collection-dropdown'
             >
@@ -175,6 +175,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           )
         : this.context.user.model_permissions.delete_collection && (
             <Tooltip
+              key='1-disabled'
               position='left'
               content={
                 <Trans>
@@ -190,18 +191,17 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             </Tooltip>
           ),
       this.context.user.model_permissions.delete_collection && (
-        <div data-cy='delete-version-dropdown'>
-          <DropdownItem
-            key='2'
-            onClick={() =>
-              this.openDeleteModalWithConfirm(collection.latest_version.version)
-            }
-          >
-            {t`Delete version ${collection.latest_version.version}`}
-          </DropdownItem>
-        </div>
+        <DropdownItem
+          data-cy='delete-version-dropdown'
+          key='2'
+          onClick={() =>
+            this.openDeleteModalWithConfirm(collection.latest_version.version)
+          }
+        >
+          {t`Delete version ${collection.latest_version.version}`}
+        </DropdownItem>
       ),
-    ].filter(Boolean);
+    ];
 
     return (
       <React.Fragment>
