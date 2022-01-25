@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import shell from 'shell-escape-tag';
-import { range } from 'lodash';
+import { range, sortBy } from 'lodash';
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
@@ -698,7 +698,7 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
   cy.wait('@data').then((res) => {
     let data = res.response.body.data;
     data.forEach((record) => {
-      cy.galaxykit('collection delete', record.namespace, record.name);
+      cy.galaxykit('collection delete-in-repository', record.namespace, record.name, 'staging');
     });
   });
 
@@ -709,3 +709,66 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
     });
   });
 });
+
+Cypress.Commands.add('createApprovalData', {}, (count, items, db_insert) => {
+    
+   // db insert allows to not insert data again when testing localy
+    if (db_insert) cy.galaxykit('-i namespace create approval_dashboard_namespace_test');
+    range(count).forEach((i) => {
+      items.push({'name' : 'approval_dashboard_collection_test' + i }); 
+      if (db_insert) cy.galaxykit(
+        '-i collection upload',
+        'approval_dashboard_namespace_test',
+        'approval_dashboard_collection_test' + i,
+      );
+    });
+
+    if (db_insert) cy.galaxykit(
+      '-i collection upload',
+      'approval_dashboard_namespace_test_additional_data',
+      'approval_dashboard_collection_test_additional1',
+    );
+    items.push({'name' : 'approval_dashboard_collection_test_additional1'});
+     
+    if (db_insert) cy.galaxykit(
+      '-i collection upload',
+      'approval_dashboard_namespace_test_additional_data',
+      'approval_dashboard_collection_test_additional2',
+    );
+    items.push({'name' : 'approval_dashboard_collection_test_additional2'});
+    let items2 = sortBy(items, 'name');
+    items.length = 0;
+    items2.forEach((item) =>
+    {
+      items.push(item);    
+    });
+
+    cy.log('items = ' + items.length);
+});
+
+Cypress.Commands.add('loadApprovalData', {}, (items) => {
+  let intercept_url =
+    Cypress.env('prefix') +
+    '_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=100';
+
+  cy.visit('/ui/approval-dashboard?page_size=100');
+  cy.intercept('GET', intercept_url).as('data');
+  cy.contains('button', 'Clear all filters').click();
+
+  cy.wait('@data').then((res) => {
+    let data = res.response.body.data;
+    data.forEach((record) => {
+      items.push({ name: record.name });
+    });
+    let items2 = sortBy(items, 'name');
+    items.length = 0;
+    items2.forEach((item) =>
+    {
+      items.push(item);    
+    });
+    debugger;
+  });
+});
+
+
+
