@@ -20,7 +20,14 @@ describe('Imports filter test', () => {
   });
 
   it('partial filter for name is working.', () => {
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+    ).as('wait');
+
     cy.get('input[aria-label="keywords"').type('my_collection{enter}');
+    cy.wait('@wait');
+
     cy.get('[data-cy="import-list-data"]')
       .contains('different_name')
       .should('not.exist');
@@ -29,7 +36,14 @@ describe('Imports filter test', () => {
   });
 
   it('exact filter for name is working.', () => {
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+    ).as('wait');
+
     cy.get('input[aria-label="keywords"').type('my_collection1{enter}');
+    cy.wait('@wait');
+
     cy.get('[data-cy="import-list-data"]')
       .contains('my_collection2')
       .should('not.exist');
