@@ -209,17 +209,15 @@ export class NamespaceList extends React.Component<IProps, IState> {
                         params={params}
                         filterConfig={[{ id: 'keywords', title: t`keywords` }]}
                       />
-                      <ToolbarItem>
-                        <AppliedFilters
-                          style={{ marginTop: '16px' }}
-                          updateParams={updateParams}
-                          params={params}
-                          ignoredParams={['page_size', 'page', 'sort']}
-                        />
-                      </ToolbarItem>
+                      <AppliedFilters
+                        style={{ marginTop: '16px' }}
+                        updateParams={updateParams}
+                        params={params}
+                        ignoredParams={['page_size', 'page', 'sort']}
+                      />
                     </ToolbarItem>
                   </ToolbarGroup>
-                  <ToolbarGroup>
+                  <ToolbarGroup style={{ alignSelf: 'start' }}>
                     <ToolbarItem>
                       <Sort
                         options={[
@@ -229,9 +227,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                         updateParams={updateParams}
                       />
                     </ToolbarItem>
-                  </ToolbarGroup>
-                  {user?.model_permissions?.add_namespace && (
-                    <ToolbarGroup>
+                    {user?.model_permissions?.add_namespace && (
                       <ToolbarItem key='create-button'>
                         <Button
                           variant='primary'
@@ -240,8 +236,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
                           {t`Create`}
                         </Button>
                       </ToolbarItem>
-                    </ToolbarGroup>
-                  )}
+                    )}
+                  </ToolbarGroup>
                 </ToolbarContent>
               </Toolbar>
               <div>
