@@ -48,23 +48,57 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   before(() => {
     cy.settings({ GALAXY_REQUIRE_CONTENT_APPROVAL: true });
     cy.login();
-    cy.deleteNamespacesAndCollections();
-    createData();
+    //cy.deleteNamespacesAndCollections();
+    //createData();
     loadData();
+    cy.viewport(2550, 750);
   });
 
   after(() => {
     //cy.deleteNamespacesAndCollections();
-    cy.settings();
+    //cy.settings();
   });
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/ui/approval-dashboard');
-    cy.contains('button', 'Clear all filters').click();
+  });
+
+  it.skip('should not see items in collections.', () => {
+    cy.visit('/ui/repo/published');
+    cy.visit('No collections yet');
+  });
+
+  it('should approve items.', () => {
+    /*cy.intercept(
+        'GET',
+        Cypress.env('prefix') +
+      '_ui/v1/collection-versions/*',
+      ).as('wait');*/
+
+    cy.visit('/ui/approval-dashboard?page_size=100');
+    cy.contains('Approval dashboard');
+    cy.get('[data-cy="sort_collection"]').click();
+
+    //cy.visit('@wait');
+
+    /*cy.contains('.button', 'Approve').each((el) => {
+      debugger;
+      cy.log(el);
+      //el.click();
+    });*/
+  });
+
+  /*
+  it('should see items in collections.', () => {
+    cy.visit('/ui/repo/published?page_size=100');
+    cy.contains(items[0]);
+    cy.contains(items[1]);
+    cy.contains(items[2]);
   });
 
   it('should contains all columns.', () => {
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
     ['Namespace', 'Collection', 'Version', 'Date created', 'Status'].forEach(
       (item) => {
         cy.get('[data-cy="SortTable-headers"]').contains(item);
@@ -73,6 +107,9 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   });
 
   it('should sort alphabetically and paging is working.', () => {
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
+
     cy.get('[data-cy="sort_collection"]').click();
     cy.get('[data-cy="sort_collection"]').click();
 
@@ -90,6 +127,9 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   });
 
   it('should sort collection.', () => {
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
+    
     cy.get('[data-cy="sort_collection"]').click();
     cy.get('[data-cy="body"]').contains('approval');
 
@@ -105,10 +145,16 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   });
 
   it('should see time informations.', () => {
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
+    
     cy.contains('[data-cy="body"]', 'a few seconds ago');
   });
 
   it('should filter collection.', () => {
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
+    
     cy.get('[data-cy="body"] [data-cy="compound_filter"] button:first').click();
     cy.contains(
       '[data-cy="body"] [data-cy="compound_filter"] a',
@@ -127,6 +173,9 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   });
 
   it('should filter collection and namespace together.', () => {
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
+    
     cy.get('[data-cy="body"] [data-cy="compound_filter"] button:first').click();
     cy.contains(
       '[data-cy="body"] [data-cy="compound_filter"] a',
@@ -158,6 +207,9 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   });
 
   it('should filter non existing namespace and not show any data', () => {
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
+    
     cy.get('[data-cy="body"] [data-cy="compound_filter"] button:first').click();
     cy.contains(
       '[data-cy="body"] [data-cy="compound_filter"] a',
@@ -171,6 +223,9 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   });
 
   it('should set page size', () => {
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
+    
     cy.get('[data-cy="body"]')
       .get('button[aria-label="Items per page"]:first')
       .click();
@@ -185,6 +240,9 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   });
 
   it('should approve or reject', () => {
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
+    
     cy.get('[data-cy="sort_collection"]').click();
     cy.get('[data-cy="sort_collection"]').click();
 
@@ -198,9 +256,13 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   });
 
   it('should redirect to import logs.', () => {
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
+    
     cy.get('[data-cy="table_row"]:first button').click();
     cy.contains('View Import Logs').click();
     cy.contains('My imports');
     cy.get('.import-list');
   });
+  */
 });

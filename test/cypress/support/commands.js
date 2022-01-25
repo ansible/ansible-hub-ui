@@ -685,6 +685,23 @@ Cypress.Commands.add('deleteCollections', {}, (namespace) => {
 });
 
 Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
+  // delete data in approval dashboard
+  cy.login();
+  let intercept_url =
+    Cypress.env('prefix') +
+    '_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=100';
+
+  cy.visit('/ui/approval-dashboard?page_size=100');
+  cy.intercept('GET', intercept_url).as('data');
+  cy.contains('button', 'Clear all filters').click();
+
+  cy.wait('@data').then((res) => {
+    let data = res.response.body.data;
+    data.forEach((record) => {
+      cy.galaxykit('collection delete', record.namespace, record.name);
+    });
+  });
+
   cy.galaxykit('namespace list').then((json) => {
     JSON.parse(json).data.forEach((namespace) => {
       cy.deleteCollections(namespace.name);
