@@ -1,22 +1,20 @@
 import * as React from 'react';
 import {
   Button,
-  ButtonVariant,
-  InputGroup,
-  TextInput,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
-import { SearchIcon } from '@patternfly/react-icons';
 import { t } from '@lingui/macro';
 
 import { ParamHelper } from 'src/utilities/param-helper';
 import {
   AlertList,
+  AppliedFilters,
   BaseHeader,
+  CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
   LinkTabs,
@@ -26,7 +24,6 @@ import {
   NamespaceModal,
   Pagination,
   Sort,
-  SortFieldType,
 } from 'src/components';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
@@ -46,11 +43,13 @@ interface IState {
     page?: number;
     page_size?: number;
     tenant?: string;
+    keywords?: string;
   };
   hasPermission: boolean;
   isModalOpen: boolean;
   loading: boolean;
   redirect?: string;
+  inputText: string;
 }
 
 interface IProps extends RouteComponentProps {
@@ -84,6 +83,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       hasPermission: true,
       isModalOpen: false,
       loading: true,
+      inputText: params['keywords'] || '',
     };
   }
 
@@ -141,7 +141,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <Redirect push to={this.state.redirect} />;
     }
 
-    const { namespaces, params, itemCount, loading } = this.state;
+    const { namespaces, params, itemCount, loading, inputText } = this.state;
     const { filterOwner } = this.props;
     const { user, alerts } = this.context;
     const noData =
@@ -153,23 +153,13 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const extra = [];
-
-    if (user?.model_permissions?.add_namespace) {
-      extra.push(
-        <ToolbarItem key='create-button'>
-          <Button variant='primary' onClick={this.handleModalToggle}>
-            {t`Create`}
-          </Button>
-        </ToolbarItem>,
-      );
-    }
-
+    // Namespaces or Partners
     const title = i18n._(namespaceBreadcrumb.name);
-    const titleLowerCase = title.toLowerCase();
-    const search = filterOwner
-      ? t`Search my namespaces`
-      : t`Search all ${titleLowerCase}`;
+
+    const updateParams = (p) => {
+      p['page'] = 1;
+      this.updateParams(p, () => this.loadNamespaces());
+    };
 
     return (
       <div className='hub-namespace-page'>
@@ -208,15 +198,52 @@ export class NamespaceList extends React.Component<IProps, IState> {
           )}
           {noData ? null : (
             <div className='toolbar'>
-              <NamespaceListToolbar
-                params={params}
-                sortOptions={[{ title: t`Name`, id: 'name', type: 'alpha' }]}
-                searchPlaceholder={search}
-                updateParams={(p) =>
-                  this.updateParams(p, () => this.loadNamespaces())
-                }
-                extraInputs={extra}
-              />
+              <Toolbar>
+                <ToolbarContent>
+                  <ToolbarGroup style={{ marginLeft: 0 }}>
+                    <ToolbarItem>
+                      <CompoundFilter
+                        inputText={inputText}
+                        onChange={(text) => this.setState({ inputText: text })}
+                        updateParams={updateParams}
+                        params={params}
+                        filterConfig={[{ id: 'keywords', title: t`keywords` }]}
+                      />
+                      <ToolbarItem>
+                        <AppliedFilters
+                          style={{ marginTop: '16px' }}
+                          updateParams={updateParams}
+                          params={params}
+                          ignoredParams={['page_size', 'page', 'sort']}
+                        />
+                      </ToolbarItem>
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <Sort
+                        options={[
+                          { title: t`Name`, id: 'name', type: 'alpha' },
+                        ]}
+                        params={params}
+                        updateParams={updateParams}
+                      />
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                  {user?.model_permissions?.add_namespace && (
+                    <ToolbarGroup>
+                      <ToolbarItem key='create-button'>
+                        <Button
+                          variant='primary'
+                          onClick={this.handleModalToggle}
+                        >
+                          {t`Create`}
+                        </Button>
+                      </ToolbarItem>
+                    </ToolbarGroup>
+                  )}
+                </ToolbarContent>
+              </Toolbar>
               <div>
                 <Pagination
                   params={params}
@@ -351,108 +378,3 @@ export class NamespaceList extends React.Component<IProps, IState> {
 }
 
 NamespaceList.contextType = AppContext;
-
-interface IxProps {
-  /** Current page params */
-  params: {
-    sort?: string;
-    keywords?: string;
-  };
-
-  /** List of sort options that the user can pick from */
-  sortOptions?: SortFieldType[];
-
-  /** Sets the current page params to p */
-  updateParams: (params) => void;
-
-  /** Search bar placeholder text*/
-  searchPlaceholder: string;
-
-  /** Extra set of customizeable inputs that appear to right of sort*/
-  extraInputs?: React.ReactNode[];
-}
-
-interface IxState {
-  kwField: string;
-}
-
-export class NamespaceListToolbar extends React.Component<IxProps, IxState> {
-  static defaultProps = {
-    extraInputs: [],
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      kwField: props.params.keywords || '',
-    };
-  }
-
-  render() {
-    const {
-      params,
-      sortOptions,
-      updateParams,
-      searchPlaceholder,
-      extraInputs,
-    } = this.props;
-    const { kwField } = this.state;
-    return (
-      <Toolbar>
-        <ToolbarContent>
-          <ToolbarGroup style={{ marginLeft: 0 }}>
-            <ToolbarItem>
-              <InputGroup>
-                <TextInput
-                  value={kwField}
-                  onChange={(k) => this.setState({ kwField: k })}
-                  onKeyPress={(e) => this.handleEnter(e)}
-                  type='search'
-                  aria-label={t`search text input`}
-                  placeholder={searchPlaceholder}
-                />
-                <Button
-                  variant={ButtonVariant.control}
-                  aria-label={t`search button`}
-                  onClick={() => this.submitKeywords()}
-                >
-                  <SearchIcon />
-                </Button>
-              </InputGroup>
-            </ToolbarItem>
-          </ToolbarGroup>
-          {sortOptions && (
-            <ToolbarGroup>
-              <ToolbarItem>
-                <Sort
-                  options={sortOptions}
-                  params={params}
-                  updateParams={updateParams}
-                />
-              </ToolbarItem>
-            </ToolbarGroup>
-          )}
-          {extraInputs}
-        </ToolbarContent>
-      </Toolbar>
-    );
-  }
-
-  private handleEnter(e) {
-    // l10n: don't translate
-    if (e.key === 'Enter') {
-      this.submitKeywords();
-    }
-  }
-
-  private submitKeywords() {
-    this.props.updateParams({
-      ...ParamHelper.setParam(
-        this.props.params,
-        'keywords',
-        this.state.kwField,
-      ),
-      page: 1, // always reset the page when searching
-    });
-  }
-}
