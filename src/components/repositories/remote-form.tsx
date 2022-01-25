@@ -50,7 +50,9 @@ const validateURLHelper = (
     if (protocol === 'https:') {
       return { validated: 'default' };
     }
-  } catch (_) {}
+  } catch (_) {
+    // fallthrough
+  }
 
   return {
     validated: 'error',
