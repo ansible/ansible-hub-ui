@@ -59,4 +59,3 @@ jobs:
         npm cache verify
         npm ci || npm install
         npm run deploy && curl -sSL https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh | bash -s
-
