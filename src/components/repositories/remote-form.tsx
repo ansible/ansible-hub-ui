@@ -16,11 +16,49 @@ import {
 
 import { WriteOnlyField, HelperText, FileUpload } from 'src/components';
 
-import { DownloadIcon } from '@patternfly/react-icons';
+import {
+  DownloadIcon,
+  ExclamationTriangleIcon,
+  ExclamationCircleIcon,
+} from '@patternfly/react-icons';
 
 import { RemoteType, WriteOnlyFieldType } from 'src/api';
 import { Constants } from 'src/constants';
 import { isFieldSet, isWriteOnly, ErrorMessagesType } from 'src/utilities';
+
+const validateURLHelper = (
+  outsideError: string | undefined,
+  url: string,
+): {
+  validated: 'default' | 'warning' | 'error';
+  helperTextInvalid?: string;
+  helperText?: string;
+} => {
+  if (outsideError) {
+    return { validated: 'error', helperTextInvalid: outsideError };
+  }
+
+  try {
+    const { protocol } = new URL(url);
+    if (protocol === 'http:') {
+      return {
+        validated: 'warning',
+        helperText: t`Consider using a secure URL (https://).`,
+      };
+    }
+
+    if (protocol === 'https:') {
+      return { validated: 'default' };
+    }
+  } catch (_) {
+    // fallthrough
+  }
+
+  return {
+    validated: 'error',
+    helperTextInvalid: t`The URL needs to be in 'http(s)://' format.`,
+  };
+};
 
 interface IProps {
   allowEditName?: boolean;
@@ -201,11 +239,14 @@ export class RemoteForm extends React.Component<IProps, IState> {
             <HelperText content={t`The URL of an external content source.`} />
           }
           isRequired={requiredFields.includes('url')}
-          validated={this.toError(!('url' in errorMessages))}
-          helperTextInvalid={errorMessages['url']}
+          {...validateURLHelper(errorMessages['url'], remote.url)}
+          helperTextIcon={<ExclamationTriangleIcon />}
+          helperTextInvalidIcon={<ExclamationCircleIcon />}
         >
           <TextInput
-            validated={this.toError(!('url' in errorMessages))}
+            validated={
+              validateURLHelper(errorMessages['url'], remote.url).validated
+            }
             isRequired={requiredFields.includes('url')}
             isDisabled={disabledFields.includes('url')}
             id='url'
