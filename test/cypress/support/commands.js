@@ -698,7 +698,12 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
   cy.wait('@data').then((res) => {
     let data = res.response.body.data;
     data.forEach((record) => {
-      cy.galaxykit('collection delete-in-repository', record.namespace, record.name, 'staging');
+      cy.galaxykit(
+        'collection delete-in-repository',
+        record.namespace,
+        record.name,
+        'staging',
+      );
     });
   });
 
@@ -711,39 +716,41 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
 });
 
 Cypress.Commands.add('createApprovalData', {}, (count, items, db_insert) => {
-    
-   // db insert allows to not insert data again when testing localy
-    if (db_insert) cy.galaxykit('-i namespace create approval_dashboard_namespace_test');
-    range(count).forEach((i) => {
-      items.push({'name' : 'approval_dashboard_collection_test' + i }); 
-      if (db_insert) cy.galaxykit(
+  // db insert allows to not insert data again when testing localy
+  if (db_insert)
+    cy.galaxykit('-i namespace create approval_dashboard_namespace_test');
+  range(count).forEach((i) => {
+    items.push({ name: 'approval_dashboard_collection_test' + i });
+    if (db_insert)
+      cy.galaxykit(
         '-i collection upload',
         'approval_dashboard_namespace_test',
         'approval_dashboard_collection_test' + i,
       );
-    });
+  });
 
-    if (db_insert) cy.galaxykit(
+  if (db_insert)
+    cy.galaxykit(
       '-i collection upload',
       'approval_dashboard_namespace_test_additional_data',
       'approval_dashboard_collection_test_additional1',
     );
-    items.push({'name' : 'approval_dashboard_collection_test_additional1'});
-     
-    if (db_insert) cy.galaxykit(
+  items.push({ name: 'approval_dashboard_collection_test_additional1' });
+
+  if (db_insert)
+    cy.galaxykit(
       '-i collection upload',
       'approval_dashboard_namespace_test_additional_data',
       'approval_dashboard_collection_test_additional2',
     );
-    items.push({'name' : 'approval_dashboard_collection_test_additional2'});
-    let items2 = sortBy(items, 'name');
-    items.length = 0;
-    items2.forEach((item) =>
-    {
-      items.push(item);    
-    });
+  items.push({ name: 'approval_dashboard_collection_test_additional2' });
+  let items2 = sortBy(items, 'name');
+  items.length = 0;
+  items2.forEach((item) => {
+    items.push(item);
+  });
 
-    cy.log('items = ' + items.length);
+  cy.log('items = ' + items.length);
 });
 
 Cypress.Commands.add('loadApprovalData', {}, (items) => {
@@ -762,13 +769,9 @@ Cypress.Commands.add('loadApprovalData', {}, (items) => {
     });
     let items2 = sortBy(items, 'name');
     items.length = 0;
-    items2.forEach((item) =>
-    {
-      items.push(item);    
+    items2.forEach((item) => {
+      items.push(item);
     });
     debugger;
   });
 });
-
-
-
