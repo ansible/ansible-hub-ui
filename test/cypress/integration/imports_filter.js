@@ -54,6 +54,7 @@ describe('Imports filter test', () => {
   });
 
   it('Exact search for completed is working.', () => {
+    cy.wait(10);
     cy.get('.import-list button:first').click();
     cy.contains('a', 'Status').click();
 
