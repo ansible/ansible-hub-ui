@@ -7,6 +7,7 @@ import '../app.scss';
 import { AppContext } from '../app-context';
 import { ActiveUserAPI, SettingsAPI } from 'src/api';
 import { Paths } from 'src/paths';
+import { UIVersion } from 'src/components';
 
 const DEFAULT_REPO = 'published';
 
@@ -120,10 +121,6 @@ class App extends Component {
       return null;
     }
 
-    const HTMLComment = ({ text }) => (
-      <div dangerouslySetInnerHTML={{ __html: `<!-- ${text} -->` }} />
-    );
-
     return (
       <AppContext.Provider
         value={{
@@ -136,7 +133,7 @@ class App extends Component {
         }}
       >
         <Routes childProps={this.props} />
-        <HTMLComment text={`ansible-hub-ui ${UI_COMMIT_HASH}`} />
+        <UIVersion />
       </AppContext.Provider>
     );
   }
