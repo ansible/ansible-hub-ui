@@ -1,8 +1,9 @@
-const { resolve } = require('path');
+const { resolve } = require('path'); // node:path
 const config = require('@redhat-cloud-services/frontend-components-config');
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { execSync } = require('child_process'); // node:child_process
 
 const isBuild = process.env.NODE_ENV === 'production';
 
@@ -10,6 +11,8 @@ const isBuild = process.env.NODE_ENV === 'production';
 // should be imported, initialized with the following settings and exported like
 // a normal webpack config. See config/insights.prod.webpack.config.js for an
 // example
+
+const gitCommit = execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim();
 
 // Default user defined settings
 const defaultConfigs = [
@@ -22,6 +25,7 @@ const defaultConfigs = [
   { name: 'NAMESPACE_TERM', default: 'namespaces', scope: 'global' },
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
   { name: 'UI_EXTERNAL_LOGIN_URI', default: '/login', scope: 'global' },
+  { name: 'UI_COMMIT_HASH', default: gitCommit, scope: 'global' },
 
   // Webpack scope means the variable will only be available to webpack at
   // build time
