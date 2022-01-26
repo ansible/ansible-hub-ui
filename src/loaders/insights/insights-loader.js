@@ -118,22 +118,27 @@ class App extends Component {
     // before the app can authenticate
     if (!this.state.user || !this.state.activeUser) {
       return null;
-    } else {
-      return (
-        <AppContext.Provider
-          value={{
-            user: this.state.activeUser,
-            setUser: this.setActiveUser,
-            selectedRepo: this.state.selectedRepo,
-            alerts: this.state.alerts,
-            setAlerts: this.setAlerts,
-            settings: this.state.settings,
-          }}
-        >
-          <Routes childProps={this.props} />
-        </AppContext.Provider>
-      );
     }
+
+    const HTMLComment = ({ text }) => (
+      <div dangerouslySetInnerHTML={{ __html: `<!-- ${text} -->` }} />
+    );
+
+    return (
+      <AppContext.Provider
+        value={{
+          user: this.state.activeUser,
+          setUser: this.setActiveUser,
+          selectedRepo: this.state.selectedRepo,
+          alerts: this.state.alerts,
+          setAlerts: this.setAlerts,
+          settings: this.state.settings,
+        }}
+      >
+        <Routes childProps={this.props} />
+        <HTMLComment text={`ansible-hub-ui ${UI_COMMIT_HASH}`} />
+      </AppContext.Provider>
+    );
   }
   setActiveUser = (user) => {
     this.setState({ activeUser: user });
