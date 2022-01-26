@@ -50,6 +50,18 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
     const { isOpen, onClose, brandImageAlt, productName, user, userName } =
       this.props;
     const browser = detect();
+
+    const Label = ({ children }) => (
+      <TextListItem component={TextListItemVariants.dt}>
+        {children}
+      </TextListItem>
+    );
+    const Value = ({ children }) => (
+      <TextListItem component={TextListItemVariants.dd}>
+        {children}
+      </TextListItem>
+    );
+
     return (
       <AboutModal
         isOpen={isOpen}
@@ -61,42 +73,23 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
       >
         <TextContent>
           <TextList component={TextListVariants.dl}>
-            <TextListItem component={TextListItemVariants.dt}>
-              {t`Server version`}
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dd}>
-              {this.state.applicationInfo.server_version}
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dt}>
-              {t`Pulp Ansible Version`}
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dd}>
-              {this.state.applicationInfo.pulp_ansible_version}
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dt}>
-              {t`Username`}
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dd}>
-              {userName}
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dt}>
-              {t`User Groups`}
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dd}>
-              {user.groups.map((group) => group.name).join()}
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dt}>
-              {t`Browser Version`}
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dd}>
-              {browser.name + ' ' + browser.version}
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dt}>
-              {t`Browser OS`}
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dd}>
-              {browser.os}
-            </TextListItem>
+            <Label>{t`Server version`}</Label>
+            <Value>{this.state.applicationInfo.server_version}</Value>
+
+            <Label>{t`Pulp Ansible Version`}</Label>
+            <Value>{this.state.applicationInfo.pulp_ansible_version}</Value>
+
+            <Label>{t`Username`}</Label>
+            <Value>{userName}</Value>
+
+            <Label>{t`User Groups`}</Label>
+            <Value>{user.groups.map((group) => group.name).join()}</Value>
+
+            <Label>{t`Browser Version`}</Label>
+            <Value>{browser.name + ' ' + browser.version}</Value>
+
+            <Label>{t`Browser OS`}</Label>
+            <Value>{browser.os}</Value>
           </TextList>
         </TextContent>
       </AboutModal>
