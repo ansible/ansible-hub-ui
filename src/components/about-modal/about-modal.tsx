@@ -79,6 +79,9 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
             <Label>{t`Pulp Ansible Version`}</Label>
             <Value>{this.state.applicationInfo.pulp_ansible_version}</Value>
 
+            <Label>{t`UI Version`}</Label>
+            <Value>{UI_COMMIT_HASH}</Value>
+
             <Label>{t`Username`}</Label>
             <Value>{userName}</Value>
 
