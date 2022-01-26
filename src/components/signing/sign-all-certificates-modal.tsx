@@ -45,7 +45,7 @@ const SignAllCertificatesModal: React.FC<Props> = ({
     <br />
     <p>
       <Trans>
-        This action will affect <strong>{numberOfAffected}</strong> versions.
+        This action will affect <strong>{numberOfAffected}</strong> version(s).
       </Trans>
     </p>
   </Modal>
