@@ -149,6 +149,7 @@ export function withContainerRepo(WrappedComponent) {
                   <Button
                     onClick={() => this.setState({ editing: true })}
                     variant={'secondary'}
+                    data-cy='edit-container'
                   >
                     {t`Edit`}
                   </Button>
