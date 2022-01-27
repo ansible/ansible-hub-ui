@@ -97,6 +97,9 @@ jobs:
       with:
         node-version: '14'
         cache: 'npm'
+        cache-dependency-path: |
+          base/package-lock.json
+          pr/package-lock.json
 
     - name: "Diff configs"
       run: |
