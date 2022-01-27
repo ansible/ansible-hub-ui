@@ -156,6 +156,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     ];
 
     const latestVersion = collection.latest_version.created_at;
+    const isSigned = collection.latest_version.metadata.signatures.length > 0;
 
     const isLatestVersion = (v) =>
       `${moment(v.created).fromNow()} ${
@@ -435,7 +436,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   </Trans>
                 </span>
               ) : null}
-              <SignatureBadge isSigned isCompact />
+              <SignatureBadge isCompact isSigned={isSigned} />
             </div>
           }
           pageControls={

@@ -37,6 +37,12 @@ export class CollectionVersionDetail extends CollectionVersion {
     issues: string;
     repository: string;
     dependencies: DependencyType[];
+    signatures: {
+      signature: string;
+      pubkey_fingerprint: string;
+      signing_service: string;
+      pulp_created: string;
+    }[];
   };
   requires_ansible?: string;
   docs_blob: DocsBlobType;
@@ -49,6 +55,7 @@ export class CollectionListType {
   // download_count: number;
   deprecated: boolean;
   latest_version: CollectionVersion;
+  sign_state: 'unsigned' | 'signed';
 
   namespace: {
     id: number;

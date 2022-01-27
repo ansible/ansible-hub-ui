@@ -35,8 +35,15 @@ export class CollectionCard extends React.Component<IProps> {
   MAX_DESCRIPTION_LENGTH = 60;
 
   render() {
-    const { name, latest_version, namespace, className, footer, repo } =
-      this.props;
+    const {
+      name,
+      latest_version,
+      namespace,
+      className,
+      footer,
+      sign_state,
+      repo,
+    } = this.props;
 
     const company = namespace.company || namespace.name;
     const contentSummary = convertContentSummaryCounts(latest_version.metadata);
@@ -61,7 +68,10 @@ export class CollectionCard extends React.Component<IProps> {
                   <TextContent>
                     {this.getCertification(repo) ?? ' '}
                   </TextContent>
-                  <SignatureBadge isCompact />
+                  <SignatureBadge
+                    isCompact
+                    isSigned={sign_state === 'signed'}
+                  />
                 </SplitItem>
               </Split>
             </GridItem>
