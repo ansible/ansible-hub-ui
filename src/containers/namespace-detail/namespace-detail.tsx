@@ -543,14 +543,15 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </Link>
         }
       />,
-      <DropdownItem
-        isDisabled={!hasNotSignedCollection(collections)}
-        key='sign-collections'
-        onClick={() => this.setState({ isOpenSignModal: true })}
-      >
-        {t`Sign all collections`}
-      </DropdownItem>,
-    ];
+      hasNotSignedCollection(collections) && (
+        <DropdownItem
+          key='sign-collections'
+          onClick={() => this.setState({ isOpenSignModal: true })}
+        >
+          {t`Sign all collections`}
+        </DropdownItem>
+      ),
+    ].filter(Boolean);
     if (!this.state.showControls) {
       return <div className='hub-namespace-page-controls'></div>;
     }

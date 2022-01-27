@@ -214,22 +214,20 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         </DropdownItem>
       ),
       <DropdownItem
-        isDisabled={false}
         key='sign-all'
         onClick={() => this.setState({ isOpenSignAllModal: true })}
       >
         {`Sign entire collection`}
       </DropdownItem>,
-      <DropdownItem
-        isDisabled={isSigned}
-        key='sign-version'
-        onClick={() => this.setState({ isOpenSignModal: true })}
-      >
-        {isSigned
-          ? t`Version ${collection.latest_version.version} is signed`
-          : t`Sign version ${collection.latest_version.version}`}
-      </DropdownItem>,
-    ];
+      !isSigned && (
+        <DropdownItem
+          key='sign-version'
+          onClick={() => this.setState({ isOpenSignModal: true })}
+        >
+          {t`Sign version ${collection.latest_version.version}`}
+        </DropdownItem>
+      ),
+    ].filter(Boolean);
 
     return (
       <React.Fragment>
@@ -238,8 +236,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           numberOfAffected={collection.all_versions.length}
           isOpen={this.state.isOpenSignAllModal}
           onSubmit={() => {
-            // TODO
-            this.setState({ isOpenSignAllModal: false });
+            SignCollectionAPI.sign({
+              signing_service: 'ansible-default',
+              repository: this.context.selectedRepo,
+              namespace: collection.latest_version.namespace,
+              collection: collection.name,
+              version: collection.latest_version.version,
+            }).then(() => {
+              this.setState({ isOpenSignModal: false });
+            });
           }}
           onCancel={() => {
             this.setState({ isOpenSignAllModal: false });
@@ -256,13 +261,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               namespace: collection.latest_version.namespace,
               collection: collection.name,
               version: collection.latest_version.version,
-            })
-              .then(() => {
-                this.setState({ isOpenSignModal: false });
-              })
-              .catch((e) => {
-                console.log('Signing failed', e);
-              });
+            }).then(() => {
+              this.setState({ isOpenSignModal: false });
+            });
           }}
           onCancel={() => this.setState({ isOpenSignModal: false })}
         />
