@@ -108,7 +108,7 @@ jobs:
           npm install
 
           for file in *.js; do
-            node -e 'console.log(JSON.stringify(require("./'"$file"'"), null, 2))' > ~/webpack-config/$version/$file.json
+            node -e 'console.log(JSON.stringify(require("./'"$file"'"), null, 2)?.replace(/\/home\/.*\/(base|pr|ansible-hub-ui)\//g, "/DIR/"))' > ~/webpack-config/$version/$file.json
           done
 
           popd
