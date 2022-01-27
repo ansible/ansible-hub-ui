@@ -27,6 +27,7 @@ import {
   NamespaceAPI,
   MyNamespaceAPI,
   NamespaceType,
+  SignCollectionAPI,
 } from 'src/api';
 
 import {
@@ -81,6 +82,9 @@ interface IState {
 interface IProps extends RouteComponentProps {
   selectedRepo: string;
 }
+
+const hasNotSignedCollection = (collections: CollectionListType[]): boolean =>
+  collections.some((el) => el.sign_state === 'unsigned');
 
 export class NamespaceDetail extends React.Component<IProps, IState> {
   nonAPIParams = ['tab'];
@@ -338,8 +342,17 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           numberOfAffected={this.state.itemCount}
           isOpen={this.state.isOpenSignModal}
           onSubmit={() => {
-            // TODO
-            this.setState({ isOpenSignModal: false });
+            SignCollectionAPI.sign({
+              signing_service: 'ansible-default',
+              repository: this.context.selectedRepo,
+              namespace: namespace.name,
+            })
+              .then(() => {
+                this.setState({ isOpenSignModal: false });
+              })
+              .catch((e) => {
+                console.log('Signing failed', e);
+              });
           }}
           onCancel={() => {
             this.setState({ isOpenSignModal: false });
@@ -531,6 +544,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         }
       />,
       <DropdownItem
+        isDisabled={!hasNotSignedCollection(collections)}
         key='sign-collections'
         onClick={() => this.setState({ isOpenSignModal: true })}
       >

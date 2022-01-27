@@ -38,7 +38,11 @@ import {
   SignAllCertificatesModal,
 } from 'src/components';
 
-import { CollectionAPI, CollectionDetailType } from 'src/api';
+import {
+  CollectionAPI,
+  CollectionDetailType,
+  SignCollectionAPI,
+} from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { waitForTask } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -210,16 +214,20 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         </DropdownItem>
       ),
       <DropdownItem
+        isDisabled={false}
         key='sign-all'
         onClick={() => this.setState({ isOpenSignAllModal: true })}
       >
         {`Sign entire collection`}
       </DropdownItem>,
       <DropdownItem
+        isDisabled={isSigned}
         key='sign-version'
         onClick={() => this.setState({ isOpenSignModal: true })}
       >
-        {`Sign version ${collection.latest_version.version}`}
+        {isSigned
+          ? t`Version ${collection.latest_version.version} is signed`
+          : t`Sign version ${collection.latest_version.version}`}
       </DropdownItem>,
     ];
 
@@ -242,8 +250,19 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           version={collection.latest_version.version}
           isOpen={this.state.isOpenSignModal}
           onSubmit={() => {
-            // TODO
-            this.setState({ isOpenSignModal: false });
+            SignCollectionAPI.sign({
+              signing_service: 'ansible-default',
+              repository: this.context.selectedRepo,
+              namespace: collection.latest_version.namespace,
+              collection: collection.name,
+              version: collection.latest_version.version,
+            })
+              .then(() => {
+                this.setState({ isOpenSignModal: false });
+              })
+              .catch((e) => {
+                console.log('Signing failed', e);
+              });
           }}
           onCancel={() => this.setState({ isOpenSignModal: false })}
         />
