@@ -111,7 +111,7 @@ jobs:
           npm install
 
           for file in *.js; do
-            node -e 'console.log(JSON.stringify(require("./'"$file"'"), null, 2))' | sed -e 's/\/home\/.*\/\(base\|pr\|ansible-hub-ui\)\//\/DIR\//g' -e 's/\(\[name\]\)\.[0-9]\+\.\(\[fullhash\]\)/\1.TIMESTAMP.\2/g' | grep -v '^Current branch:' > ~/webpack-config/$version/$file.json
+            node -e 'console.log(JSON.stringify(require("./'"$file"'"), null, 2))' | sed -e 's/\/home\/.*\/\(base\|pr\)\//\/DIR\//g' -e 's/\(\[name\]\|automationHub\)\.[0-9]\+\.\(\[fullhash\]\)/\1.TIMESTAMP.\2/g' | grep -v '^Current branch:' > ~/webpack-config/$version/$file.json
           done
 
           popd
