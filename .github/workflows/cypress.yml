@@ -51,7 +51,7 @@ jobs:
       run: |
         echo '# Containerfile'
         echo '\
-          FROM docker.io/pulp/pulp-ci-centos:latest
+          FROM ghcr.io/pulp/pulp-ci-centos:latest
 
           RUN pip3 install --upgrade \
             requests \
