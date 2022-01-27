@@ -364,6 +364,9 @@ class CertificationDashboard extends React.Component<
   }
 
   private renderButtons(version: CollectionVersion) {
+    // TODO
+    const canSign = true;
+
     if (this.state.updatingVersions.includes(version)) {
       return;
     }
@@ -396,7 +399,7 @@ class CertificationDashboard extends React.Component<
         isDisabled={isDisabled}
         key='certify'
       >
-        {t`Approve`}
+        {canSign ? t`Sign and approve` : t`Approve`}
       </DropdownItem>
     );
 
@@ -455,7 +458,7 @@ class CertificationDashboard extends React.Component<
               )
             }
           >
-            <span>{t`Approve`}</span>
+            <span>{canSign ? t`Sign and approve` : t`Approve`}</span>
           </Button>
           <StatefulDropdown
             items={[rejectDropDown(false, Constants.NEEDSREVIEW), importsLink]}
