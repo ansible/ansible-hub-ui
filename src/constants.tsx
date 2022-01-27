@@ -1,4 +1,5 @@
-import { t } from '@lingui/macro';
+import { t, defineMessage } from '@lingui/macro';
+
 export class Constants {
   static readonly SEARCH_VIEW_TYPE_LOCAL_KEY = 'search_view_type';
   static readonly DEFAULT_PAGE_SIZE = 10;
@@ -246,9 +247,9 @@ export class Constants {
   ];
 
   static REPOSITORYNAMES = {
-    published: t`Published`,
-    'rh-certified': t`Red Hat Certified`,
-    community: t`Community`,
+    published: defineMessage({ message: `Published` }),
+    'rh-certified': defineMessage({ message: `Red Hat Certified` }),
+    community: defineMessage({ message: `Community` }),
   };
 
   static ALLOWEDREPOS = ['community', 'published', 'rh-certified'];
@@ -276,39 +277,102 @@ export class Constants {
   };
 
   static TASK_NAMES = {
-    'galaxy_ng.app.tasks.promotion._remove_content_from_repository': t`Remove content from repository`,
-    'galaxy_ng.app.tasks.publishing.import_and_auto_approve': t`Import and auto approve`,
-    'galaxy_ng.app.tasks.curate_synclist_repository': t`Curate synclist repository`,
-    'galaxy_ng.app.tasks.import_and_move_to_staging': t`Import and move to staging`,
-    'galaxy_ng.app.tasks.import_and_auto_approve': t`Import and auto approve`,
-    'galaxy_ng.app.tasks.curate_all_synclist_repository': t`Curate all synclist repository`,
-    'galaxy_ng.app.tasks.synclist.curate_synclist_repository_batch': t`Curate synclist repository batch`,
-    'pulp_ansible.app.tasks.collections.sync': t`Pulp Ansible: Collections sync`,
-    'pulp_ansible.app.tasks.copy.copy_content': t`Pulp ansible: Copy content`,
-    'pulp_ansible.app.tasks.collections.collection_sync': t`Pulp ansible: collection sync`,
-    'pulp_ansible.app.tasks.roles.synchronize': t`Pulp Ansible: Roles synchronize`,
-    'pulp_ansible.app.tasks.collections.update_collection_remote': t`Pulp ansible: Update collection remote`,
-    'pulp_ansible.app.tasks.collections.import_collection': t`Pulp ansible: Import collection`,
-    'pulp_container.app.tasks.tag_image': t`Pulp container: Tag image`,
-    'pulp_container.app.tasks.untag_image': t`Pulp container: Untage image`,
-    'pulp_container.app.tasks.synchronize': t`Pulp container: Tasks synchronize`,
-    'pulp_container.app.tasks.recursive_add_content': t`Pulp container: Recursive add content`,
-    'pulp_container.app.tasks.recursive_remove_content': t`Pulp container: Recursive remove content`,
-    'pulp_container.app.tasks.build_image_from_containerfile': t`Pulp container: Build image from containerfile`,
-    'pulp_container.app.tasks.general_multi_delete': t`Pulp container: General multi delete`,
-    'pulpcore.tasking.tasks.import_repository_version': t`Pulpcore: Import repository version`,
-    'pulpcore.tasking.tasks.orphan_cleanup': t`Pulpcore: Orphan cleanup`,
-    'pulpcore.tasking.tasks.repair_all_artifacts': t`Pulpcore: Repair all artifacts`,
-    'pulpcore.tasking.tasks.base.general_create': t`Pulpcore: General create`,
-    'pulpcore.tasking.tasks.base.general_update': t`Pulpcore: General update`,
-    'pulpcore.tasking.tasks.base.general_delete': t`Pulpcore: General delete`,
-    'pulpcore.app.tasks.export.pulp_export': t`Pulpcore: Pulp export`,
-    'pulpcore.app.tasks.pulp_import': t`Pulpcore: Pulp import`,
-    'pulpcore.app.tasks.repository.delete_version': t`Pulpcore: Delete version`,
-    'pulpcore.app.tasks.repository.repair_version': t`Pulpcore: Repair version`,
-    'pulpcore.app.tasks.upload.commit': t`Pulpcore: Upload commit`,
-    'pulpcore.app.tasks.repository.add_and_remove': t`Pulpcore: Add and remove`,
-    'pulpcore.plugin.tasking.add_and_remove': t`Pulpcore: Add or remove`,
+    'galaxy_ng.app.tasks.promotion._remove_content_from_repository':
+      defineMessage({ message: `Remove content from repository` }),
+    'galaxy_ng.app.tasks.publishing.import_and_auto_approve': defineMessage({
+      message: `Import and auto approve`,
+    }),
+    'galaxy_ng.app.tasks.curate_synclist_repository': defineMessage({
+      message: `Curate synclist repository`,
+    }),
+    'galaxy_ng.app.tasks.import_and_move_to_staging': defineMessage({
+      message: `Import and move to staging`,
+    }),
+    'galaxy_ng.app.tasks.import_and_auto_approve': defineMessage({
+      message: `Import and auto approve`,
+    }),
+    'galaxy_ng.app.tasks.curate_all_synclist_repository': defineMessage({
+      message: `Curate all synclist repository`,
+    }),
+    'galaxy_ng.app.tasks.synclist.curate_synclist_repository_batch':
+      defineMessage({ message: `Curate synclist repository batch` }),
+    'pulp_ansible.app.tasks.collections.sync': defineMessage({
+      message: `Pulp Ansible: Collections sync`,
+    }),
+    'pulp_ansible.app.tasks.copy.copy_content': defineMessage({
+      message: `Pulp ansible: Copy content`,
+    }),
+    'pulp_ansible.app.tasks.collections.collection_sync': defineMessage({
+      message: `Pulp ansible: collection sync`,
+    }),
+    'pulp_ansible.app.tasks.roles.synchronize': defineMessage({
+      message: `Pulp Ansible: Roles synchronize`,
+    }),
+    'pulp_ansible.app.tasks.collections.update_collection_remote':
+      defineMessage({ message: `Pulp ansible: Update collection remote` }),
+    'pulp_ansible.app.tasks.collections.import_collection': defineMessage({
+      message: `Pulp ansible: Import collection`,
+    }),
+    'pulp_container.app.tasks.tag_image': defineMessage({
+      message: `Pulp container: Tag image`,
+    }),
+    'pulp_container.app.tasks.untag_image': defineMessage({
+      message: `Pulp container: Untage image`,
+    }),
+    'pulp_container.app.tasks.synchronize': defineMessage({
+      message: `Pulp container: Tasks synchronize`,
+    }),
+    'pulp_container.app.tasks.recursive_add_content': defineMessage({
+      message: `Pulp container: Recursive add content`,
+    }),
+    'pulp_container.app.tasks.recursive_remove_content': defineMessage({
+      message: `Pulp container: Recursive remove content`,
+    }),
+    'pulp_container.app.tasks.build_image_from_containerfile': defineMessage({
+      message: `Pulp container: Build image from containerfile`,
+    }),
+    'pulp_container.app.tasks.general_multi_delete': defineMessage({
+      message: `Pulp container: General multi delete`,
+    }),
+    'pulpcore.tasking.tasks.import_repository_version': defineMessage({
+      message: `Pulpcore: Import repository version`,
+    }),
+    'pulpcore.tasking.tasks.orphan_cleanup': defineMessage({
+      message: `Pulpcore: Orphan cleanup`,
+    }),
+    'pulpcore.tasking.tasks.repair_all_artifacts': defineMessage({
+      message: `Pulpcore: Repair all artifacts`,
+    }),
+    'pulpcore.tasking.tasks.base.general_create': defineMessage({
+      message: `Pulpcore: General create`,
+    }),
+    'pulpcore.tasking.tasks.base.general_update': defineMessage({
+      message: `Pulpcore: General update`,
+    }),
+    'pulpcore.tasking.tasks.base.general_delete': defineMessage({
+      message: `Pulpcore: General delete`,
+    }),
+    'pulpcore.app.tasks.export.pulp_export': defineMessage({
+      message: `Pulpcore: Pulp export`,
+    }),
+    'pulpcore.app.tasks.pulp_import': defineMessage({
+      message: `Pulpcore: Pulp import`,
+    }),
+    'pulpcore.app.tasks.repository.delete_version': defineMessage({
+      message: `Pulpcore: Delete version`,
+    }),
+    'pulpcore.app.tasks.repository.repair_version': defineMessage({
+      message: `Pulpcore: Repair version`,
+    }),
+    'pulpcore.app.tasks.upload.commit': defineMessage({
+      message: `Pulpcore: Upload commit`,
+    }),
+    'pulpcore.app.tasks.repository.add_and_remove': defineMessage({
+      message: `Pulpcore: Add and remove`,
+    }),
+    'pulpcore.plugin.tasking.add_and_remove': defineMessage({
+      message: `Pulpcore: Add or remove`,
+    }),
   };
 
   static HUMAN_STATUS = {
