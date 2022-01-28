@@ -1,5 +1,3 @@
-import { afterMain } from '@patternfly/react-core/dist/esm/helpers/Popper/thirdparty/popper-core';
-
 describe('Imports filter test', () => {
   before(() => {
     cy.login();
