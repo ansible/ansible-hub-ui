@@ -6,9 +6,14 @@ describe('Collection detail', () => {
   }
 
   before(() => {
+    cy.clearDatabase();
     cy.galaxykit(
       '-i collection upload collection_detail_test_namespace collection_detail_test_collection',
     );
+  });
+
+  after(() => {
+    cy.clearDatabase();
   });
 
   beforeEach(() => {

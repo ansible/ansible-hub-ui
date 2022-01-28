@@ -6,6 +6,7 @@ describe('Collections list Tests', () => {
   before(() => {
     cy.login();
     cy.deleteNamespacesAndCollections();
+    cy.clearDatabase();
 
     cy.galaxykit('namespace create my_namespace');
     // insert test data
@@ -28,6 +29,10 @@ describe('Collections list Tests', () => {
     cy.wait('@data').then((res) => {
       items = res.response.body.data;
     });
+  });
+
+  after(() => {
+    cy.clearDatabase();
   });
 
   beforeEach(() => {
