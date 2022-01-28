@@ -28,3 +28,4 @@ test/cypress/videos/*
 test/cypress.env.json
 test/results
 test/cypress/fixtures/example.json
+test/pg_dump.dump

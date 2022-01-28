@@ -681,3 +681,22 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
     });
   });
 });
+
+let database_saved = false;
+
+Cypress.Commands.add('clearDatabase', {}, () => {
+  if (database_saved) {
+    // read snapshot
+    cy.log('Restoring database from pg_dump.dump');
+    const restore = Cypress.env('restore');
+    cy.log(restore);
+    cy.exec(restore);
+  } else {
+    // write snapshot
+    database_saved = true;
+    cy.log('Dumping database to pg_dump.dump');
+    const dump = Cypress.env('dump');
+    cy.log(dump);
+    cy.exec(dump);
+  }
+});

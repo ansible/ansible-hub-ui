@@ -1,4 +1,12 @@
 describe('API Token Tests', () => {
+  before(() => {
+    cy.clearDatabase();
+  });
+
+  after(() => {
+    cy.clearDatabase();
+  });
+
   beforeEach(() => {
     cy.login();
   });

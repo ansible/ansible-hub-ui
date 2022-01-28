@@ -1,7 +1,10 @@
+import { afterMain } from '@patternfly/react-core/dist/esm/helpers/Popper/thirdparty/popper-core';
+
 describe('Imports filter test', () => {
   before(() => {
     cy.login();
     cy.deleteNamespacesAndCollections();
+    cy.clearDatabase();
 
     // insert test data
     cy.galaxykit('namespace create filter_test_namespace');
@@ -13,6 +16,10 @@ describe('Imports filter test', () => {
   beforeEach(() => {
     cy.login();
     cy.visit('/ui/my-imports?namespace=filter_test_namespace');
+  });
+
+  after(() => {
+    cy.clearDatabase();
   });
 
   it('partial filter for name is working.', () => {

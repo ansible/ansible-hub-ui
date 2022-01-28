@@ -11,3 +11,4 @@ Dockerfile
 *.po
 test/cypress.env.json.template
 test/cypress/fixtures/
+test/pg_dump.dump
