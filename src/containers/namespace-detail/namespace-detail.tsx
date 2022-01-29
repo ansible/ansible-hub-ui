@@ -84,7 +84,7 @@ interface IProps extends RouteComponentProps {
 }
 
 const hasNotSignedCollection = (collections: CollectionListType[]): boolean =>
-  collections.some((el) => el.sign_state === 'unsigned');
+  collections.some((el) => el.sign_state !== 'signed');
 
 export class NamespaceDetail extends React.Component<IProps, IState> {
   nonAPIParams = ['tab'];
