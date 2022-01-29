@@ -55,7 +55,7 @@ export class CollectionListType {
   // download_count: number;
   deprecated: boolean;
   latest_version: CollectionVersion;
-  sign_state: 'unsigned' | 'signed';
+  sign_state: 'unsigned' | 'signed' | 'partial';
 
   namespace: {
     id: number;
@@ -116,6 +116,7 @@ export class CollectionDetailType {
   id: string;
   name: string;
   description: string;
+  sign_state: 'unsigned' | 'signed' | 'partial';
   // download_count: number;
 
   namespace: {
