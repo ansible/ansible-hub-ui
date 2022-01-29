@@ -12,10 +12,10 @@ import {
   GridItem,
   Button,
   Alert,
-  ButtonVariant,
 } from '@patternfly/react-core';
 
 import { DownloadIcon } from '@patternfly/react-icons';
+import DownloadSignatureGridItem from './download-signature-grid-item';
 
 import { CollectionDetailType, CollectionAPI } from 'src/api';
 import { Tag, ClipboardCopy, LoginLink } from 'src/components';
@@ -119,23 +119,7 @@ export class CollectionInfo extends React.Component<IProps> {
               </SplitItem>
             </Split>
           </GridItem>
-          <GridItem>
-            <Split hasGutter>
-              <SplitItem className='install-title'>{t`Signature`}</SplitItem>
-              <SplitItem>
-                <Button
-                  style={{ padding: 0 }}
-                  variant={ButtonVariant.link}
-                  icon={<DownloadIcon />}
-                  onClick={() => {
-                    // TODO
-                  }}
-                >
-                  {t`Download the signature file`}
-                </Button>
-              </SplitItem>
-            </Split>
-          </GridItem>
+          <DownloadSignatureGridItem version={latest_version} />
           {latest_version.requires_ansible && (
             <GridItem>
               <Split hasGutter={true}>
