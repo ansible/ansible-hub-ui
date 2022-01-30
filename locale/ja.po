@@ -69,12 +69,12 @@ msgstr "<0>{name}</0> は完全に削除されます。"
 msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 msgstr "<0>{username}</0> は <1>{groupname}</1> から削除されます。"
 
-#: src/components/repositories/remote-form.tsx:506
-#: src/components/repositories/remote-form.tsx:557
+#: src/components/repositories/remote-form.tsx:547
+#: src/components/repositories/remote-form.tsx:598
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "認証に使用する PEM でエンコードされたクライアント証明書。"
 
-#: src/components/repositories/remote-form.tsx:472
+#: src/components/repositories/remote-form.tsx:513
 msgid "A PEM encoded private key used for authentication."
 msgstr "認証に使用する PEM でエンコードされた秘密鍵。"
 
@@ -250,7 +250,7 @@ msgstr "ブラウザー OS"
 msgid "Browser Version"
 msgstr "ブラウザーのバージョン"
 
-#: src/components/repositories/remote-form.tsx:554
+#: src/components/repositories/remote-form.tsx:595
 msgid "CA certificate"
 msgstr "CA 証明書"
 
@@ -271,7 +271,7 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 #: src/components/execution-environment/repository-form.tsx:161
 #: src/components/group-management/group-modal.tsx:58
 #: src/components/namespace-modal/namespace-modal.tsx:114
-#: src/components/repositories/remote-form.tsx:133
+#: src/components/repositories/remote-form.tsx:171
 #: src/components/user-form/user-form.tsx:224
 #: src/containers/edit-namespace/edit-namespace.tsx:195
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:151
@@ -383,11 +383,11 @@ msgstr "すべてのフィルターの解除"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "上記の実行環境を使用するコントローラー URL をクリックすると、そのコントローラーのコンソールを起動します。ログイン (必要な場合) して、手順に従い、設定を完了します。"
 
-#: src/components/repositories/remote-form.tsx:503
+#: src/components/repositories/remote-form.tsx:544
 msgid "Client certificate"
 msgstr "クライアント証明書"
 
-#: src/components/repositories/remote-form.tsx:469
+#: src/components/repositories/remote-form.tsx:510
 msgid "Client key"
 msgstr "クライアントキー"
 
@@ -488,6 +488,10 @@ msgstr "ansible-galaxy クライアントの接続"
 #: src/containers/token/token-insights.tsx:80
 msgid "Connect to Hub"
 msgstr "Hub への接続"
+
+#: src/components/repositories/remote-form.tsx:46
+msgid "Consider using a secure URL (https://)."
+msgstr ""
 
 #: src/components/empty-state/empty-state-unauthorized.tsx:14
 #~ msgid "Contact you organization administrator for more information."
@@ -834,19 +838,19 @@ msgstr "<0>ansible-galaxy</0> クライアントの設定方法に関するド�
 msgid "Done"
 msgstr "完了"
 
-#: src/components/repositories/remote-form.tsx:594
+#: src/components/repositories/remote-form.tsx:635
 msgid "Download CA certification file"
 msgstr "CA 証明書ファイルのダウンロード"
 
-#: src/components/repositories/remote-form.tsx:544
+#: src/components/repositories/remote-form.tsx:585
 msgid "Download client certification file"
 msgstr "クライアント認定ファイルのダウンロード"
 
-#: src/components/repositories/remote-form.tsx:604
+#: src/components/repositories/remote-form.tsx:645
 msgid "Download concurrency"
 msgstr "同時実行のダウンロード"
 
-#: src/components/repositories/remote-form.tsx:293
+#: src/components/repositories/remote-form.tsx:334
 msgid "Download requirements file"
 msgstr "要件ファイルのダウンロード"
 
@@ -893,7 +897,7 @@ msgstr "グループ権限の編集"
 msgid "Edit namespace"
 msgstr "名前空間の編集"
 
-#: src/components/repositories/remote-form.tsx:116
+#: src/components/repositories/remote-form.tsx:154
 msgid "Edit remote"
 msgstr "リモートの編集"
 
@@ -1199,7 +1203,7 @@ msgstr "グループは、作成時に表示されます"
 msgid "Groups with access"
 msgstr "アクセス権のあるグループ"
 
-#: src/components/repositories/remote-form.tsx:370
+#: src/components/repositories/remote-form.tsx:411
 msgid "Hide advanced options"
 msgstr "詳細オプションの非表示"
 
@@ -1210,7 +1214,7 @@ msgstr "詳細オプションの非表示"
 msgid "I understand that this action cannot be undone."
 msgstr "このアクションは元に戻せないことを理解しています。"
 
-#: src/components/repositories/remote-form.tsx:453
+#: src/components/repositories/remote-form.tsx:494
 msgid "If selected, TLS peer validation must be performed."
 msgstr "選択されている場合は、TLS ピア検証を行う必要があります。"
 
@@ -1358,7 +1362,7 @@ msgstr "詳細情報"
 msgid "License"
 msgstr "ライセンス"
 
-#: src/components/repositories/remote-form.tsx:639
+#: src/components/repositories/remote-form.tsx:680
 msgid "Limits total download rate in requests per second."
 msgstr "1 秒あたりの要求の合計ダウンロード速度を制限します。"
 
@@ -1423,7 +1427,7 @@ msgstr "メッセージ"
 msgid "Modify Ansible repo content"
 msgstr "Ansible リポジトリーコンテンツの変更"
 
-#: src/components/repositories/remote-form.tsx:648
+#: src/components/repositories/remote-form.tsx:689
 msgid "Must be an integer."
 msgstr "整数でなければなりません。"
 
@@ -1449,7 +1453,7 @@ msgstr "自分のプロファイル"
 #: src/components/my-imports/import-list.tsx:115
 #: src/components/namespace-form/namespace-form.tsx:60
 #: src/components/namespace-modal/namespace-modal.tsx:120
-#: src/components/repositories/remote-form.tsx:156
+#: src/components/repositories/remote-form.tsx:194
 #: src/containers/execution-environment/registry-list.tsx:259
 #: src/containers/execution-environment/registry-list.tsx:287
 #: src/containers/execution-environment/registry-list.tsx:318
@@ -1650,7 +1654,7 @@ msgstr "他のコレクションでの使用には必要ありません。"
 msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 msgstr "注記: この URL には、ハブ内のすべてのコレクションが含まれます。組織の同期リポジトリーに接続するには <0>リポジトリー管理</0> にある URL をしようします。"
 
-#: src/components/repositories/remote-form.tsx:616
+#: src/components/repositories/remote-form.tsx:657
 msgid "Number must be greater than 0"
 msgstr "数字は 0 より大きくなければなりません"
 
@@ -1674,7 +1678,7 @@ msgstr "親タスク"
 msgid "Partners"
 msgstr "パートナー"
 
-#: src/components/repositories/remote-form.tsx:339
+#: src/components/repositories/remote-form.tsx:380
 #: src/components/user-form/user-form.tsx:91
 #: src/containers/login/login.tsx:59
 msgid "Password"
@@ -1762,15 +1766,15 @@ msgstr "進捗メッセージ"
 msgid "Provided by {company}"
 msgstr "{company} 提供"
 
-#: src/components/repositories/remote-form.tsx:376
+#: src/components/repositories/remote-form.tsx:417
 msgid "Proxy URL"
 msgstr "プロキシー URL"
 
-#: src/components/repositories/remote-form.tsx:422
+#: src/components/repositories/remote-form.tsx:463
 msgid "Proxy password"
 msgstr "プロキシーパスワード"
 
-#: src/components/repositories/remote-form.tsx:394
+#: src/components/repositories/remote-form.tsx:435
 msgid "Proxy username"
 msgstr "プロキシーユーザー名"
 
@@ -1920,7 +1924,7 @@ msgstr "新規コンテナーのプッシュ"
 msgid "Push to existing containers"
 msgstr "既存コンテナーへのプッシュ"
 
-#: src/components/repositories/remote-form.tsx:636
+#: src/components/repositories/remote-form.tsx:677
 msgid "Rate Limit"
 msgstr "速度制限"
 
@@ -2044,14 +2048,14 @@ msgstr "リソース"
 msgid "Running"
 msgstr "実行中"
 
-#: src/components/repositories/remote-form.tsx:225
+#: src/components/repositories/remote-form.tsx:266
 #: src/containers/token/token-insights.tsx:177
 msgid "SSO URL"
 msgstr "SSO URL"
 
 #: src/components/execution-environment/repository-form.tsx:158
 #: src/components/group-management/group-modal.tsx:55
-#: src/components/repositories/remote-form.tsx:126
+#: src/components/repositories/remote-form.tsx:164
 #: src/components/user-form/user-form.tsx:221
 #: src/containers/edit-namespace/edit-namespace.tsx:192
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:139
@@ -2129,7 +2133,7 @@ msgstr "バージョンの選択t"
 msgid "Settings"
 msgstr "設定"
 
-#: src/components/repositories/remote-form.tsx:371
+#: src/components/repositories/remote-form.tsx:412
 msgid "Show advanced options"
 msgstr "詳細オプションの表示"
 
@@ -2137,7 +2141,7 @@ msgstr "詳細オプションの表示"
 msgid "Showing:"
 msgstr "表示:"
 
-#: src/components/repositories/remote-form.tsx:226
+#: src/components/repositories/remote-form.tsx:267
 msgid "Single sign on URL."
 msgstr "シングルサインオン URL"
 
@@ -2271,7 +2275,7 @@ msgstr "{name}の同期開始"
 msgid "Sync status"
 msgstr "同期の状態"
 
-#: src/components/repositories/remote-form.tsx:450
+#: src/components/repositories/remote-form.tsx:491
 msgid "TLS validation"
 msgstr "TLS 検証"
 
@@ -2327,7 +2331,11 @@ msgstr "タスクは、作成後に表示されます。"
 msgid "Text: {0}"
 msgstr "テキスト: {0}"
 
-#: src/components/repositories/remote-form.tsx:176
+#: src/components/repositories/remote-form.tsx:59
+msgid "The URL needs to be in 'http(s)://' format."
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:214
 msgid "The URL of an external content source."
 msgstr "外部コンテンツソースの URL。"
 
@@ -2343,11 +2351,11 @@ msgstr "選択したコレクションは、{0} と一致しないようです�
 msgid "The file is not available for this version of {collectionName}"
 msgstr "このファイルは、このバージョンの {collectionName} では使用できません。"
 
-#: src/components/repositories/remote-form.tsx:344
+#: src/components/repositories/remote-form.tsx:385
 msgid "The password to be used for authentication when syncing."
 msgstr "同期時に認証に使用されるパスワード。"
 
-#: src/components/repositories/remote-form.tsx:345
+#: src/components/repositories/remote-form.tsx:386
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するパスワード。トークンを使用する場合は不要です。"
 
@@ -2355,11 +2363,11 @@ msgstr "同期時に認証に使用するパスワード。トークンを使用
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "トークンは、30 日のアクティブではない状態が続くと期限切れになります。トークンの有効期限が切れないように、定期的に以下のコマンドを実行します。"
 
-#: src/components/repositories/remote-form.tsx:309
+#: src/components/repositories/remote-form.tsx:350
 msgid "The username to be used for authentication when syncing."
 msgstr "同期時に認証に使用されるユーザー名。"
 
-#: src/components/repositories/remote-form.tsx:310
+#: src/components/repositories/remote-form.tsx:351
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するユーザー名。トークンを使用する場合は不要です。"
 
@@ -2408,7 +2416,7 @@ msgstr "このタグは別のイメージにすでに存在します。このイ
 msgid "This tag is already selected for this image. You cannot add it twice."
 msgstr "このタグはすでにこのイメージに対して選択されています。タグは 2 回追加できません。"
 
-#: src/components/repositories/remote-form.tsx:249
+#: src/components/repositories/remote-form.tsx:290
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "これは、ansible-galaxy CLI と同じ {docsAnsibleLink} 形式を使用します。ただし、ロールも、ソースパラメーターもサポート対象外である点に注意が必要です。"
 
@@ -2416,11 +2424,11 @@ msgstr "これは、ansible-galaxy CLI と同じ {docsAnsibleLink} 形式を使�
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr "トークンを取り消すか、すべてのトークンを表示するには、<0>オフライン API トークン管理</0> ページに移動します。"
 
-#: src/components/repositories/remote-form.tsx:196
+#: src/components/repositories/remote-form.tsx:237
 msgid "Token"
 msgstr "トークン"
 
-#: src/components/repositories/remote-form.tsx:199
+#: src/components/repositories/remote-form.tsx:240
 msgid "Token for authenticating to the server URL."
 msgstr "サーバー URL に対する認証に使用するトークンです。"
 
@@ -2428,7 +2436,7 @@ msgstr "サーバー URL に対する認証に使用するトークンです。"
 msgid "Token management"
 msgstr "タスク管理"
 
-#: src/components/repositories/remote-form.tsx:607
+#: src/components/repositories/remote-form.tsx:648
 msgid "Total number of simultaneous connections."
 msgstr "同時接続の合計数。"
 
@@ -2445,7 +2453,7 @@ msgstr "トレーニング <0/>"
 msgid "Type"
 msgstr "タイプ"
 
-#: src/components/repositories/remote-form.tsx:174
+#: src/components/repositories/remote-form.tsx:212
 msgid "URL"
 msgstr "URL"
 
@@ -2552,7 +2560,7 @@ msgstr "ユーザーリスト"
 msgid "User type"
 msgstr "ユーザータイプ"
 
-#: src/components/repositories/remote-form.tsx:304
+#: src/components/repositories/remote-form.tsx:345
 #: src/components/user-form/user-form.tsx:85
 #: src/containers/about-modal/about-modal.tsx:77
 #: src/containers/group-management/group-detail.tsx:669
@@ -2672,7 +2680,7 @@ msgstr "お探しのページは見つかりませんでした!"
 msgid "Website"
 msgstr "Web サイト"
 
-#: src/components/repositories/remote-form.tsx:245
+#: src/components/repositories/remote-form.tsx:286
 msgid "YAML requirements"
 msgstr "YAML 要件"
 
