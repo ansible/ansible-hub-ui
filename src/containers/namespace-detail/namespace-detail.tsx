@@ -181,6 +181,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       'view_type',
     ];
 
+    const canSign =
+      this.context.featureFlags.collection_signing === true &&
+      this.context.user.sign_collections_on_namespace;
+
     return (
       <React.Fragment>
         <AlertList
@@ -337,27 +341,29 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             ? this.renderResources(namespace)
             : null}
         </Main>
-        <SignAllCertificatesModal
-          name={this.state.namespace.name}
-          numberOfAffected={this.state.itemCount}
-          isOpen={this.state.isOpenSignModal}
-          onSubmit={() => {
-            SignCollectionAPI.sign({
-              signing_service: 'ansible-default',
-              repository: this.context.selectedRepo,
-              namespace: namespace.name,
-            })
-              .then(() => {
-                this.setState({ isOpenSignModal: false });
+        {canSign && (
+          <SignAllCertificatesModal
+            name={this.state.namespace.name}
+            numberOfAffected={this.state.itemCount}
+            isOpen={this.state.isOpenSignModal}
+            onSubmit={() => {
+              SignCollectionAPI.sign({
+                signing_service: 'ansible-default',
+                repository: this.context.selectedRepo,
+                namespace: namespace.name,
               })
-              .catch((e) => {
-                console.log('Signing failed', e);
-              });
-          }}
-          onCancel={() => {
-            this.setState({ isOpenSignModal: false });
-          }}
-        />
+                .then(() => {
+                  this.setState({ isOpenSignModal: false });
+                })
+                .catch((e) => {
+                  console.log('Signing failed', e);
+                });
+            }}
+            onCancel={() => {
+              this.setState({ isOpenSignModal: false });
+            }}
+          />
+        )}
       </React.Fragment>
     );
   }
@@ -488,6 +494,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private renderPageControls() {
+    const canSign =
+      this.context.featureFlags.collection_signing === true &&
+      this.context.user.sign_collections_on_namespace;
+
     const { collections } = this.state;
     const dropdownItems = [
       <DropdownItem
@@ -543,7 +553,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </Link>
         }
       />,
-      hasNotSignedCollection(collections) && (
+      canSign && hasNotSignedCollection(collections) && (
         <DropdownItem
           key='sign-collections'
           onClick={() => this.setState({ isOpenSignModal: true })}

@@ -159,6 +159,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       { key: 'repository', name: t`Repo` },
     ];
 
+    const canSign =
+      this.context.featureFlags.collection_signing === true &&
+      this.context.user.sign_collections_on_namespace;
     const latestVersion = collection.latest_version.created_at;
     const isVersionSigned =
       collection.latest_version.metadata.signatures.length > 0;
@@ -215,7 +218,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Delete version ${collection.latest_version.version}`}
         </DropdownItem>
       ),
-      !isCollectionSigned && (
+      canSign && !isCollectionSigned && (
         <DropdownItem
           key='sign-all'
           onClick={() => this.setState({ isOpenSignAllModal: true })}
@@ -223,7 +226,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {`Sign entire collection`}
         </DropdownItem>
       ),
-      !isVersionSigned && (
+      canSign && !isVersionSigned && (
         <DropdownItem
           key='sign-version'
           onClick={() => this.setState({ isOpenSignModal: true })}
@@ -235,42 +238,46 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     return (
       <React.Fragment>
-        <SignAllCertificatesModal
-          name={collectionName}
-          numberOfAffected={collection.all_versions.length}
-          isOpen={this.state.isOpenSignAllModal}
-          onSubmit={() => {
-            SignCollectionAPI.sign({
-              signing_service: 'ansible-default',
-              repository: this.context.selectedRepo,
-              namespace: collection.latest_version.namespace,
-              collection: collection.name,
-              version: collection.latest_version.version,
-            }).then(() => {
-              this.setState({ isOpenSignModal: false });
-            });
-          }}
-          onCancel={() => {
-            this.setState({ isOpenSignAllModal: false });
-          }}
-        />
-        <SignSingleCertificateModal
-          name={collectionName}
-          version={collection.latest_version.version}
-          isOpen={this.state.isOpenSignModal}
-          onSubmit={() => {
-            SignCollectionAPI.sign({
-              signing_service: 'ansible-default',
-              repository: this.context.selectedRepo,
-              namespace: collection.latest_version.namespace,
-              collection: collection.name,
-              version: collection.latest_version.version,
-            }).then(() => {
-              this.setState({ isOpenSignModal: false });
-            });
-          }}
-          onCancel={() => this.setState({ isOpenSignModal: false })}
-        />
+        {canSign && (
+          <>
+            <SignAllCertificatesModal
+              name={collectionName}
+              numberOfAffected={collection.all_versions.length}
+              isOpen={this.state.isOpenSignAllModal}
+              onSubmit={() => {
+                SignCollectionAPI.sign({
+                  signing_service: 'ansible-default',
+                  repository: this.context.selectedRepo,
+                  namespace: collection.latest_version.namespace,
+                  collection: collection.name,
+                  version: collection.latest_version.version,
+                }).then(() => {
+                  this.setState({ isOpenSignModal: false });
+                });
+              }}
+              onCancel={() => {
+                this.setState({ isOpenSignAllModal: false });
+              }}
+            />
+            <SignSingleCertificateModal
+              name={collectionName}
+              version={collection.latest_version.version}
+              isOpen={this.state.isOpenSignModal}
+              onSubmit={() => {
+                SignCollectionAPI.sign({
+                  signing_service: 'ansible-default',
+                  repository: this.context.selectedRepo,
+                  namespace: collection.latest_version.namespace,
+                  collection: collection.name,
+                  version: collection.latest_version.version,
+                }).then(() => {
+                  this.setState({ isOpenSignModal: false });
+                });
+              }}
+              onCancel={() => this.setState({ isOpenSignModal: false })}
+            />
+          </>
+        )}
         <Modal
           isOpen={isOpenVersionsModal}
           title={t`Collection versions`}
