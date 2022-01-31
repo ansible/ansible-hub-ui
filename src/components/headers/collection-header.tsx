@@ -180,7 +180,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       noDependencies
         ? this.context.user.model_permissions.delete_collection && (
             <DropdownItem
-              key='1-enabled'
+              key='delete-collection-enabled'
               onClick={() => this.openDeleteModalWithConfirm()}
               data-cy='delete-collection-dropdown'
             >
@@ -189,7 +189,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           )
         : this.context.user.model_permissions.delete_collection && (
             <Tooltip
-              key='1-disabled'
+              key='delete-collection-disabled'
               position='left'
               content={
                 <Trans>
@@ -207,7 +207,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       this.context.user.model_permissions.delete_collection && (
         <DropdownItem
           data-cy='delete-version-dropdown'
-          key='2'
+          key='delete-collection-version'
           onClick={() =>
             this.openDeleteModalWithConfirm(collection.latest_version.version)
           }
