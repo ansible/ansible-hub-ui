@@ -49,7 +49,13 @@ import {
   SignAllCertificatesModal,
 } from 'src/components';
 
-import { ParamHelper, getRepoUrl, filterIsSet } from 'src/utilities';
+import {
+  ParamHelper,
+  getRepoUrl,
+  filterIsSet,
+  waitForTask,
+  canSign,
+} from 'src/utilities';
 import { Constants } from 'src/constants';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
@@ -180,10 +186,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       'tab',
       'view_type',
     ];
-
-    const canSign =
-      this.context.featureFlags.collection_signing === true &&
-      this.context.user.sign_collections_on_namespace;
 
     return (
       <React.Fragment>
@@ -341,23 +343,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             ? this.renderResources(namespace)
             : null}
         </Main>
-        {canSign && (
+        {canSign(this.context) && (
           <SignAllCertificatesModal
             name={this.state.namespace.name}
             numberOfAffected={this.state.itemCount}
             isOpen={this.state.isOpenSignModal}
             onSubmit={() => {
-              SignCollectionAPI.sign({
-                signing_service: 'ansible-default',
-                repository: this.context.selectedRepo,
-                namespace: namespace.name,
-              })
-                .then(() => {
-                  this.setState({ isOpenSignModal: false });
-                })
-                .catch((e) => {
-                  console.log('Signing failed', e);
-                });
+              this.signAllCertificates(namespace);
             }}
             onCancel={() => {
               this.setState({ isOpenSignModal: false });
@@ -400,6 +392,38 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         <ReactMarkdown>{namespace.resources}</ReactMarkdown>
       </div>
     );
+  }
+
+  private signAllCertificates(namespace: NamespaceType) {
+    const errorAlert = (status: string | number = 500): AlertType => ({
+      variant: 'danger',
+      title: t`API Error: ${status}`,
+      description: t`Failed to sign all certificates.`,
+    });
+
+    SignCollectionAPI.sign({
+      signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
+      repository: this.context.selectedRepo,
+      namespace: namespace.name,
+    })
+      .then((result) => {
+        waitForTask(result.data.task_id)
+          .then(() => {
+            this.setState({ isOpenSignModal: false });
+            this.loadAll();
+          })
+          .catch((error) => {
+            this.setState({
+              alerts: [...this.state.alerts, errorAlert(error)],
+            });
+          });
+      })
+      .catch((error) => {
+        // The request failed in the first place
+        this.setState({
+          alerts: [...this.state.alerts, errorAlert(error.response.status)],
+        });
+      });
   }
 
   private loadCollections() {
@@ -494,10 +518,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private renderPageControls() {
-    const canSign =
-      this.context.featureFlags.collection_signing === true &&
-      this.context.user.sign_collections_on_namespace;
-
     const { collections } = this.state;
     const dropdownItems = [
       <DropdownItem
@@ -553,7 +573,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </Link>
         }
       />,
-      canSign && hasNotSignedCollection(collections) && (
+      canSign(this.context) && hasNotSignedCollection(collections) && (
         <DropdownItem
           key='sign-collections'
           onClick={() => this.setState({ isOpenSignModal: true })}

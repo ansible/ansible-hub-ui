@@ -44,7 +44,7 @@ import {
   SignCollectionAPI,
 } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
-import { waitForTask } from 'src/utilities';
+import { waitForTask, canSign } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
 import { Constants } from 'src/constants';
@@ -159,9 +159,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       { key: 'repository', name: t`Repo` },
     ];
 
-    const canSign =
-      this.context.featureFlags.collection_signing === true &&
-      this.context.user.sign_collections_on_namespace;
     const latestVersion = collection.latest_version.created_at;
     const isVersionSigned =
       collection.latest_version.metadata.signatures.length > 0;
@@ -218,7 +215,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Delete version ${collection.latest_version.version}`}
         </DropdownItem>
       ),
-      canSign && !isCollectionSigned && (
+      canSign(this.context) && !isCollectionSigned && (
         <DropdownItem
           key='sign-all'
           onClick={() => this.setState({ isOpenSignAllModal: true })}
@@ -226,7 +223,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {`Sign entire collection`}
         </DropdownItem>
       ),
-      canSign && !isVersionSigned && (
+      canSign(this.context) && !isVersionSigned && (
         <DropdownItem
           key='sign-version'
           onClick={() => this.setState({ isOpenSignModal: true })}
@@ -238,23 +235,13 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     return (
       <React.Fragment>
-        {canSign && (
+        {canSign(this.context) && (
           <>
             <SignAllCertificatesModal
               name={collectionName}
               numberOfAffected={collection.all_versions.length}
               isOpen={this.state.isOpenSignAllModal}
-              onSubmit={() => {
-                SignCollectionAPI.sign({
-                  signing_service: 'ansible-default',
-                  repository: this.context.selectedRepo,
-                  namespace: collection.latest_version.namespace,
-                  collection: collection.name,
-                  version: collection.latest_version.version,
-                }).then(() => {
-                  this.setState({ isOpenSignModal: false });
-                });
-              }}
+              onSubmit={this.signCollection}
               onCancel={() => {
                 this.setState({ isOpenSignAllModal: false });
               }}
@@ -263,17 +250,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               name={collectionName}
               version={collection.latest_version.version}
               isOpen={this.state.isOpenSignModal}
-              onSubmit={() => {
-                SignCollectionAPI.sign({
-                  signing_service: 'ansible-default',
-                  repository: this.context.selectedRepo,
-                  namespace: collection.latest_version.namespace,
-                  collection: collection.name,
-                  version: collection.latest_version.version,
-                }).then(() => {
-                  this.setState({ isOpenSignModal: false });
-                });
-              }}
+              onSubmit={this.signVersion}
               onCancel={() => this.setState({ isOpenSignModal: false })}
             />
           </>
@@ -584,6 +561,73 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         pageSize: page_size,
       },
     });
+  };
+
+  private signCollection = () => {
+    const errorAlert = (status: string | number = 500): AlertType => ({
+      variant: 'danger',
+      title: t`API Error: ${status}`,
+      description: t`Failed to sign all versions in the collection.`,
+    });
+
+    SignCollectionAPI.sign({
+      signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
+      repository: this.context.selectedRepo,
+      namespace: this.props.collection.namespace.name,
+      collection: this.props.collection.name,
+    })
+      .then((result) => {
+        waitForTask(result.data.task_id)
+          .then(() => {
+            window.location.reload();
+            this.setState({ isOpenSignAllModal: false });
+          })
+          .catch((error) => {
+            this.setState({
+              alerts: [...this.state.alerts, errorAlert(error)],
+            });
+          });
+      })
+      .catch((error) => {
+        // The request failed in the first place
+        this.setState({
+          alerts: [...this.state.alerts, errorAlert(error.response.status)],
+        });
+      });
+  };
+
+  private signVersion = () => {
+    const errorAlert = (status: string | number = 500): AlertType => ({
+      variant: 'danger',
+      title: t`API Error: ${status}`,
+      description: t`Failed to sign the version.`,
+    });
+
+    SignCollectionAPI.sign({
+      signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
+      repository: this.context.selectedRepo,
+      namespace: this.props.collection.namespace.name,
+      collection: this.props.collection.name,
+      version: this.props.collection.latest_version.version,
+    })
+      .then((result) => {
+        waitForTask(result.data.task_id)
+          .then(() => {
+            window.location.reload();
+            this.setState({ isOpenSignModal: false });
+          })
+          .catch((error) => {
+            this.setState({
+              alerts: [...this.state.alerts, errorAlert(error)],
+            });
+          });
+      })
+      .catch((error) => {
+        // The request failed in the first place
+        this.setState({
+          alerts: [...this.state.alerts, errorAlert(error.response.status)],
+        });
+      });
   };
 
   private deleteCollectionVersion = (collectionVersion) => {
