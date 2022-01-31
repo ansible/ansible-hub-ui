@@ -6,6 +6,7 @@ describe('execution environments', () => {
 
     cy.deleteRegistries();
     cy.deleteContainers();
+    cy.clearDatabase();
 
     cy.addRemoteRegistry(`docker${num}`, 'https://registry.hub.docker.com/');
     cy.addRemoteContainer({
@@ -15,6 +16,10 @@ describe('execution environments', () => {
       include_tags: 'latest',
     });
     cy.addLocalContainer(`localpine${num}`, 'alpine');
+  });
+
+  after(() => {
+    cy.clearDatabase();
   });
 
   beforeEach(() => {

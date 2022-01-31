@@ -688,14 +688,18 @@ Cypress.Commands.add('clearDatabase', {}, () => {
   if (database_saved) {
     // read snapshot
     cy.log('Restoring database from pg_dump.dump');
-    const restore = Cypress.env('restore');
+    let restore = Cypress.env('restore');
+    restore =
+      'docker exec galaxy_ng_postgres_1 pg_restore -U galaxy_ng -d galaxy_ng -c pg_dump.dump';
     cy.log(restore);
     cy.exec(restore);
   } else {
     // write snapshot
     database_saved = true;
     cy.log('Dumping database to pg_dump.dump');
-    const dump = Cypress.env('dump');
+    let dump = Cypress.env('dump');
+    dump =
+      'docker exec galaxy_ng_postgres_1 pg_dump -U galaxy_ng -d galaxy_ng -Fc > pg_dump.dump;docker cp pg_dump.dump galaxy_ng_postgres_1:pg_dump.dump';
     cy.log(dump);
     cy.exec(dump);
   }

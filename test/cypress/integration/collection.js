@@ -1,12 +1,4 @@
 const waitForTaskToFinish = (task, maxRequests, level = 0) => {
-  before(() => {
-    cy.clearDatabase();
-  });
-
-  after(() => {
-    cy.clearDatabase();
-  });
-
   if (level === maxRequests) {
     throw `Maximum requests exceeded.`;
   }
@@ -22,6 +14,11 @@ const waitForTaskToFinish = (task, maxRequests, level = 0) => {
 describe('collection tests', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
+    cy.clearDatabase();
+  });
+
+  after(() => {
+    cy.clearDatabase();
   });
 
   beforeEach(() => {
