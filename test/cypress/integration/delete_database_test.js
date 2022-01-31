@@ -1,5 +1,3 @@
-import { range, sortBy } from 'lodash';
-
 describe('Clearing of database test.', () => {
   before(() => {
     cy.clearDatabase();
