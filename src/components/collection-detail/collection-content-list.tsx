@@ -11,6 +11,10 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 
+import { ExclamationTriangleIcon } from '@patternfly/react-icons';
+
+import { EmptyStateCustom } from 'src/components';
+
 import { ContentSummaryType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -92,41 +96,56 @@ export class CollectionContentList extends React.Component<IProps> {
             </ToolbarGroup>
           </Toolbar>
         </div>
-        <table className='hub-c-table-content pf-c-table pf-m-compact'>
-          <thead>
-            <tr>
-              <th>{t`Name`}</th>
-              <th>{t`Type`}</th>
-              <th>{t`Description`}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {toShow.map((content, i) => (
-              <tr key={i}>
-                <td>
-                  <Link
-                    to={formatPath(
-                      Paths.collectionContentDocsByRepo,
-                      {
-                        collection: collection,
-                        namespace: namespace,
-                        type: content.content_type,
-                        name: content.name,
-                        repo: this.context.selectedRepo,
-                      },
-                      ParamHelper.getReduced(params, this.ignoredParams),
-                    )}
-                  >
-                    {content.name}
-                  </Link>
-                </td>
-                <td>{content.content_type}</td>
-                <td>{content.description}</td>
+        {toShow.length > 0 ? (
+          <table className='hub-c-table-content pf-c-table pf-m-compact'>
+            <thead>
+              <tr>
+                <th>{t`Name`}</th>
+                <th>{t`Type`}</th>
+                <th>{t`Description`}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {toShow.map((content, i) => (
+                <tr key={i}>
+                  <td>
+                    <Link
+                      to={formatPath(
+                        Paths.collectionContentDocsByRepo,
+                        {
+                          collection: collection,
+                          namespace: namespace,
+                          type: content.content_type,
+                          name: content.name,
+                          repo: this.context.selectedRepo,
+                        },
+                        ParamHelper.getReduced(params, this.ignoredParams),
+                      )}
+                    >
+                      {content.name}
+                    </Link>
+                  </td>
+                  <td>{content.content_type}</td>
+                  <td>{content.description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          this.context.selectedRepo === 'community' &&
+          this.renderCommunityWarningMessage()
+        )}
       </div>
+    );
+  }
+
+  private renderCommunityWarningMessage() {
+    return (
+      <EmptyStateCustom
+        title={t`Warning`}
+        description={t`Community collections do not have docs nor content counts, but all content gets synchronized`}
+        icon={ExclamationTriangleIcon}
+      />
     );
   }
 }
