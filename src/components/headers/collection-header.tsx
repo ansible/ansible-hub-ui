@@ -544,11 +544,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   variant: 'success',
                   title: (
                     <Trans>
-                      Collection{' '}
-                      <b>
-                        {name} v{collectionVersion}
-                      </b>{' '}
-                      has been successfully deleted.
+                      Collection &quot;{name} v{collectionVersion}&quot; has
+                      been successfully deleted.
                     </Trans>
                   ),
                 },
@@ -562,11 +559,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 variant: 'success',
                 title: (
                   <Trans>
-                    Collection{' '}
-                    <b>
-                      {name} v{collectionVersion}
-                    </b>{' '}
-                    has been successfully deleted.
+                    Collection &quot;{name} v{collectionVersion}&quot; has been
+                    successfully deleted.
                   </Trans>
                 ),
               },
@@ -629,7 +623,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   };
 
   private deleteCollection = () => {
-    const { deleteCollection } = this.state;
+    const { deleteCollection, collectionVersion } = this.state;
     CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
@@ -639,7 +633,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             ...this.context.alerts,
             {
               variant: 'success',
-              title: t`Successfully deleted collection.`,
+              title: (
+                <Trans>
+                  Collection &quot;{deleteCollection.name} v{collectionVersion}
+                  &quot; has been successfully deleted.
+                </Trans>
+              ),
             },
           ]);
           this.setState({

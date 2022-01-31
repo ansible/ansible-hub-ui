@@ -108,13 +108,13 @@ describe('My Profile Tests', () => {
 
     cy.contains('Save').click();
     cy.get('[aria-label="Success Alert"]').contains(
-      'Saved changes to user admin.',
+      'Saved changes to user "admin".',
     );
 
     cy.wait('@saveForm').its('response.statusCode').should('eq', 200);
 
     cy.get('[aria-label="Success Alert"]').contains(
-      'Saved changes to user admin.',
+      'Saved changes to user "admin".',
     );
   });
 

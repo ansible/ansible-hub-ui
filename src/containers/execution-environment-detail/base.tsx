@@ -212,7 +212,12 @@ export function withContainerRepo(WrappedComponent) {
                         loading: true,
                         alerts: alerts.concat({
                           variant: 'success',
-                          title: t`Saved changes to ${this.state.repo.name}`,
+                          title: (
+                            <Trans>
+                              Saved changes to execution environment &quot;
+                              {this.state.repo.name}&quot;.
+                            </Trans>
+                          ),
                         }),
                       });
                       if (task) {
@@ -320,9 +325,7 @@ export function withContainerRepo(WrappedComponent) {
         .then((result) => {
           const task_id = parsePulpIDFromURL(result.data.task);
           this.addAlert(
-            <Trans>
-              Sync started for remote registry <b>{name}</b>.
-            </Trans>,
+            <Trans>Sync started for remote registry &quot;{name}&quot;.</Trans>,
             'success',
             <span>
               <Trans>

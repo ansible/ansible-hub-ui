@@ -92,7 +92,8 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
         if (err.response.status === 404) {
           this.props.addAlert(
             <Trans>
-              User <b>{this.props.user.username}</b> has been successfully deleted.
+              User &quot;{this.props.user.username}&quot; has been successfully
+              deleted.
             </Trans>,
             'success',
           );

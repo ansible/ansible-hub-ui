@@ -18,7 +18,7 @@ describe('Delete a namespace', () => {
     cy.wait('@reload');
     cy.get('h4[class=pf-c-alert__title]').should(
       'have.text',
-      'Success alert:Namespace testns1 has been successfully deleted.',
+      'Success alert:Namespace "testns1" has been successfully deleted.',
     );
   });
 });

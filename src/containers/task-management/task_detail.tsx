@@ -384,9 +384,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
               variant: 'success',
               title: taskName,
               description: (
-                <Trans>
-                  Task <b>{taskName}</b> stopped successfully.
-                </Trans>
+                <Trans>Task &quot;{taskName}&quot; stopped successfully.</Trans>
               ),
             },
           ],

@@ -560,7 +560,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               variant: 'success',
               title: (
                 <Trans>
-                  Namespace <b>{this.state.namespace.name}</b> has been
+                  Namespace &quot;{this.state.namespace.name}&quot; has been
                   successfully deleted.
                 </Trans>
               ),

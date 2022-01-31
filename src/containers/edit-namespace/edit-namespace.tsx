@@ -263,8 +263,8 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                   variant: 'success',
                   title: (
                     <Trans>
-                      Saved changes to namespace{' '}
-                      <b>{this.state.namespace.name}</b>.
+                      Saved changes to namespace &quot;
+                      {this.state.namespace.name}&quot;.
                     </Trans>
                   ),
                 },

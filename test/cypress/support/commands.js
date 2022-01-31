@@ -365,7 +365,7 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
   cy.wait('@userList');
   cy.get('h4[class=pf-c-alert__title]').should(
     'have.text',
-    'Success alert:User testUser has been successfully deleted.',
+    'Success alert:User "testUser" has been successfully deleted.',
   );
 });
 
@@ -617,7 +617,7 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
     .click();
   cy.contains(
     '.pf-c-alert__title',
-    `Sync started for execution environment ${name}.`,
+    `Sync started for execution environment "${name}".`,
   );
 });
 

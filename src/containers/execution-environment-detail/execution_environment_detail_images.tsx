@@ -600,7 +600,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
                   variant: 'success',
                   title: (
                     <Trans>
-                      Image <b>{digest}</b> has been successfully deleted.
+                      Image &quot;{digest}&quot; has been successfully deleted.
                     </Trans>
                   ),
                 },

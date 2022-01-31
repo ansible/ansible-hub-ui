@@ -448,9 +448,17 @@ class ExecutionEnvironmentList extends React.Component<
                   itemToEdit: null,
                   alerts: alerts.concat({
                     variant: 'success',
-                    title: isNew
-                      ? t`Execution environment added.`
-                      : t`Execution environment saved.`,
+                    title: isNew ? (
+                      <Trans>
+                        Execution environment &quot;{name}&quot; has been added
+                        successfully.
+                      </Trans>
+                    ) : (
+                      <Trans>
+                        Saved changes to execution environment &quot;{name}
+                        &quot;.
+                      </Trans>
+                    ),
                   }),
                 },
                 () => this.queryEnvironments(),
@@ -523,7 +531,7 @@ class ExecutionEnvironmentList extends React.Component<
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(
           <Trans>
-            Sync started for execution environment <b>{name}</b>.
+            Sync started for execution environment &quot;{name}&quot;.
           </Trans>,
           'success',
           <span>

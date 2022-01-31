@@ -492,11 +492,8 @@ class CertificationDashboard extends React.Component<
               },
             this.addAlert(
               <Trans>
-                Certification status for collection{' '}
-                <b>
-                  {version.name} v{version.version}
-                </b>{' '}
-                has been successfully updated.
+                Certification status for collection &quot;{version.name} v
+                {version.version}&quot; has been successfully updated.
               </Trans>,
               'success',
             ),

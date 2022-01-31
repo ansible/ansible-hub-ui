@@ -119,9 +119,7 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
               {
                 variant: 'success',
                 title: (
-                  <Trans>
-                    Saved changes to user <b>{username}</b>.
-                  </Trans>
+                  <Trans>Saved changes to user &quot;{username}&quot;.</Trans>
                 ),
               },
             ]),
