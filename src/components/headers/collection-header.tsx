@@ -570,6 +570,18 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       description: t`Failed to sign all versions in the collection.`,
     });
 
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          id: 'loading-signing',
+          variant: 'info',
+          title: t`Signing all version in the collection...`,
+        },
+      ],
+      isOpenSignAllModal: false,
+    });
+
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
       repository: this.context.selectedRepo,
@@ -579,12 +591,20 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       .then((result) => {
         waitForTask(result.data.task_id)
           .then(() => {
+            // Cannot requery the api as it comes as prop
+            // We should get the collection into state from api probably
             window.location.reload();
-            this.setState({ isOpenSignAllModal: false });
           })
           .catch((error) => {
             this.setState({
               alerts: [...this.state.alerts, errorAlert(error)],
+            });
+          })
+          .finally(() => {
+            this.setState({
+              alerts: this.state.alerts.filter(
+                (x) => x?.id !== 'loading-signing',
+              ),
             });
           });
       })
@@ -603,6 +623,18 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       description: t`Failed to sign the version.`,
     });
 
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          id: 'loading-signing',
+          variant: 'info',
+          title: t`Signing the version...`,
+        },
+      ],
+      isOpenSignModal: false,
+    });
+
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
       repository: this.context.selectedRepo,
@@ -614,11 +646,17 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         waitForTask(result.data.task_id)
           .then(() => {
             window.location.reload();
-            this.setState({ isOpenSignModal: false });
           })
           .catch((error) => {
             this.setState({
               alerts: [...this.state.alerts, errorAlert(error)],
+            });
+          })
+          .finally(() => {
+            this.setState({
+              alerts: this.state.alerts.filter(
+                (x) => x?.id !== 'loading-signing',
+              ),
             });
           });
       })

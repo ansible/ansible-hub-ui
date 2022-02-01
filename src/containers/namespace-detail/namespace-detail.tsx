@@ -398,7 +398,19 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     const errorAlert = (status: string | number = 500): AlertType => ({
       variant: 'danger',
       title: t`API Error: ${status}`,
-      description: t`Failed to sign all certificates.`,
+      description: t`Failed to sign all collections.`,
+    });
+
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          id: 'loading-signing',
+          variant: 'info',
+          title: t`Signing all collections...`,
+        },
+      ],
+      isOpenSignModal: false,
     });
 
     SignCollectionAPI.sign({
@@ -409,12 +421,18 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       .then((result) => {
         waitForTask(result.data.task_id)
           .then(() => {
-            this.setState({ isOpenSignModal: false });
             this.loadAll();
           })
           .catch((error) => {
             this.setState({
               alerts: [...this.state.alerts, errorAlert(error)],
+            });
+          })
+          .finally(() => {
+            this.setState({
+              alerts: this.state.alerts.filter(
+                (x) => x?.id !== 'loading-signing',
+              ),
             });
           });
       })
