@@ -18,7 +18,6 @@ describe('Hub User Management Tests', () => {
       { group: 'users', permissions: ['View user', 'Delete user'] },
     ]);
     cy.galaxykit('user group add', username, 'delete-user');
-
   });
 
   describe('basic check of user page', () => {
