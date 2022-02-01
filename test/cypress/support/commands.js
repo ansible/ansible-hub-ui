@@ -699,8 +699,12 @@ Cypress.Commands.add('clearDatabase', {}, () => {
     cy.log('Dumping database to pg_dump.dump');
     let dump = Cypress.env('dump');
     dump =
-      'docker exec postgres pg_dump -U galaxy_ng -d galaxy_ng -Fc > pg_dump.dump;docker cp pg_dump.dump galaxy_ng_postgres_1:pg_dump.dump';
+      'docker exec postgres pg_dump -U galaxy_ng -d galaxy_ng -Fc > pg_dump.dump';
     cy.log(dump);
     cy.exec(dump);
+
+    let copy = 'docker cp pg_dump.dump postgres:pg_dump.dump;';
+    cy.log(copy);
+    cy.exec(copy);
   }
 });
