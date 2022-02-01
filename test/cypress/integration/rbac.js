@@ -93,7 +93,7 @@ describe('RBAC test for user with all permissions', () => {
     cy.galaxykit('group create', groupName);
 
     cy.addAllPermissions(groupName);
-    cy.addUserToGroup(groupName, userName);
+    cy.galaxykit('user group add', userName, groupName);
   });
 
   beforeEach(() => {
