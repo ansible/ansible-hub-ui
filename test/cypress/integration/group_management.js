@@ -28,8 +28,7 @@ describe('Hub Group Management Tests', () => {
     let groupName = 'testGroup';
     let userName = 'testUser';
 
-    cy.createGroup(groupName);
-    //cy.createUser(userName);
+    cy.galaxykit('group create', groupName);
     cy.galaxykit('user create', userName, userName + 'Password');
     cy.addUserToGroup(groupName, userName);
 
@@ -48,7 +47,7 @@ describe('Hub Group Management Tests', () => {
       'remotes',
     ];
 
-    cy.createGroup(name);
+    cy.galaxykit('group create', name);
 
     cy.addAllPermissions(name);
     permissionTypes.forEach((permGroup) => {

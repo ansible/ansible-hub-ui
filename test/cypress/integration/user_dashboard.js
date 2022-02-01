@@ -12,7 +12,6 @@ describe('Hub User Management Tests', () => {
     cy.cookieLogin(adminUsername, adminPassword);
 
     cy.createUser(username, password, 'Test F', 'Test L', 'test@example.com');
-    //cy.galaxykit('user create', userName, userPassword);
     cy.contains('[data-cy="UserList-row-test"]', 'Test F');
     cy.createGroup('delete-user');
     cy.addPermissions('delete-user', [

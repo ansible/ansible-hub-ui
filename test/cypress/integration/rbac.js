@@ -23,7 +23,6 @@ describe('RBAC test for user without permissions', () => {
       include_tags: 'latest',
     });
 
-    //cy.createUser(userName, userPassword);
     cy.galaxykit('user create', userName, userPassword);
   });
 
@@ -90,9 +89,9 @@ describe('RBAC test for user with all permissions', () => {
       include_tags: 'latest',
     });
 
-    //cy.createUser(userName, userPassword);
     cy.galaxykit('user create', userName, userPassword);
-    cy.createGroup(groupName);
+    cy.galaxykit('group create', groupName);
+
     cy.addAllPermissions(groupName);
     cy.addUserToGroup(groupName, userName);
   });
