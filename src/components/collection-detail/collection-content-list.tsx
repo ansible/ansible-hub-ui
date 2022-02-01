@@ -96,45 +96,43 @@ export class CollectionContentList extends React.Component<IProps> {
             </ToolbarGroup>
           </Toolbar>
         </div>
-        {toShow.length > 0 ? (
-          <table className='hub-c-table-content pf-c-table pf-m-compact'>
-            <thead>
-              <tr>
-                <th>{t`Name`}</th>
-                <th>{t`Type`}</th>
-                <th>{t`Description`}</th>
+        <table className='hub-c-table-content pf-c-table pf-m-compact'>
+          <thead>
+            <tr>
+              <th>{t`Name`}</th>
+              <th>{t`Type`}</th>
+              <th>{t`Description`}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {toShow.map((content, i) => (
+              <tr key={i}>
+                <td>
+                  <Link
+                    to={formatPath(
+                      Paths.collectionContentDocsByRepo,
+                      {
+                        collection: collection,
+                        namespace: namespace,
+                        type: content.content_type,
+                        name: content.name,
+                        repo: this.context.selectedRepo,
+                      },
+                      ParamHelper.getReduced(params, this.ignoredParams),
+                    )}
+                  >
+                    {content.name}
+                  </Link>
+                </td>
+                <td>{content.content_type}</td>
+                <td>{content.description}</td>
               </tr>
-            </thead>
-            <tbody>
-              {toShow.map((content, i) => (
-                <tr key={i}>
-                  <td>
-                    <Link
-                      to={formatPath(
-                        Paths.collectionContentDocsByRepo,
-                        {
-                          collection: collection,
-                          namespace: namespace,
-                          type: content.content_type,
-                          name: content.name,
-                          repo: this.context.selectedRepo,
-                        },
-                        ParamHelper.getReduced(params, this.ignoredParams),
-                      )}
-                    >
-                      {content.name}
-                    </Link>
-                  </td>
-                  <td>{content.content_type}</td>
-                  <td>{content.description}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
+            ))}
+          </tbody>
+        </table>
+        {toShow.length <= 0 &&
           this.context.selectedRepo === 'community' &&
-          this.renderCommunityWarningMessage()
-        )}
+          this.renderCommunityWarningMessage()}
       </div>
     );
   }
