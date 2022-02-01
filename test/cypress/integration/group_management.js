@@ -30,7 +30,7 @@ describe('Hub Group Management Tests', () => {
 
     cy.galaxykit('group create', groupName);
     cy.galaxykit('user create', userName, userName + 'Password');
-    cy.addUserToGroup(groupName, userName);
+    cy.galaxykit('user group add', userName, groupName);
 
     cy.removeUserFromGroup(groupName, userName);
     cy.deleteGroup(groupName);
