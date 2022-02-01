@@ -29,7 +29,8 @@ describe('Hub Group Management Tests', () => {
     let userName = 'testUser';
 
     cy.createGroup(groupName);
-    cy.createUser(userName);
+    //cy.createUser(userName);
+    cy.galaxykit('user create', userName, userName + 'Password');
     cy.addUserToGroup(groupName, userName);
 
     cy.removeUserFromGroup(groupName, userName);
