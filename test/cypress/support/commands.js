@@ -690,7 +690,7 @@ Cypress.Commands.add('clearDatabase', {}, () => {
     cy.log('Restoring database from pg_dump.dump');
     let restore = Cypress.env('restore');
     restore =
-      'podman exec pulp pg_restore -U galaxy_ng -d galaxy_ng -c pg_dump.dump;';
+      'podman exec pulp pg_restore -U postgres -d galaxy_ng -c pg_dump.dump;';
     cy.log(restore);
     cy.exec(restore);
   } else {
@@ -699,7 +699,7 @@ Cypress.Commands.add('clearDatabase', {}, () => {
     cy.log('Dumping database to pg_dump.dump');
     let dump = Cypress.env('dump');
     dump =
-      'podman exec pulp pg_dump -U galaxy_ng -d galaxy_ng -Fc > pg_dump.dump;';
+      'podman exec pulp pg_dump -U postgres -d galaxy_ng -Fc > pg_dump.dump;';
     cy.log(dump);
     cy.exec(dump);
 
