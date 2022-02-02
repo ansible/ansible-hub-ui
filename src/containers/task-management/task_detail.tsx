@@ -1,6 +1,8 @@
 import * as React from 'react';
 import './task.scss';
 import { t } from '@lingui/macro';
+import { i18n } from '@lingui/core';
+
 import {
   Link,
   withRouter,
@@ -201,7 +203,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                               task: parentTaskId,
                             })}
                           >
-                            {Constants.TASK_NAMES[parentTask.name] ||
+                            {(Constants.TASK_NAMES[parentTask.name] &&
+                              i18n._(Constants.TASK_NAMES[parentTask.name])) ||
                               parentTask.name}
                           </Link>
                         ) : (
@@ -225,7 +228,10 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                                       task: childTaskId,
                                     })}
                                   >
-                                    {Constants.TASK_NAMES[childTask.name] ||
+                                    {(Constants.TASK_NAMES[childTask.name] &&
+                                      i18n._(
+                                        Constants.TASK_NAMES[childTask.name],
+                                      )) ||
                                       childTask.name}
                                   </Link>
                                   <br />
@@ -468,7 +474,9 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             parentTask,
             loading: false,
             taskName:
-              Constants.TASK_NAMES[result.data.name] || result.data.name,
+              (Constants.TASK_NAMES[result.data.name] &&
+                i18n._(Constants.TASK_NAMES[result.data.name])) ||
+              result.data.name,
             resources,
           });
         });
