@@ -699,7 +699,7 @@ Cypress.Commands.add('clearDatabase', {}, () => {
 
     // logging the databases
     cy.log('logging the database');
-    cy.exec("podman exec pulp psql -U postgres -c '\du'");
+    cy.exec("podman exec pulp psql -U postgres -c 'du'");
 
     cy.log('Dumping database to pg_dump.dump');
     let dump = Cypress.env('dump');
