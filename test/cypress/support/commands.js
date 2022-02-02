@@ -696,6 +696,11 @@ Cypress.Commands.add('clearDatabase', {}, () => {
   } else {
     // write snapshot
     database_saved = true;
+
+    // logging the databases
+    cy.log('logging the database');
+    cy.exec("podman exec pulp psql -U postgres -c 'du'");
+
     cy.log('Dumping database to pg_dump.dump');
     let dump = Cypress.env('dump');
     dump =
