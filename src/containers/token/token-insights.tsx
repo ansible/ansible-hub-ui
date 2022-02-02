@@ -15,6 +15,7 @@ import {
 } from 'src/components';
 import { getRepoUrl } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
+import { MyDistributionAPI } from 'src/api';
 
 interface IState {
   tokenData: {
@@ -28,6 +29,7 @@ interface IState {
     token_type: string;
   };
   alerts: AlertType[];
+  repoUrl: string;
 }
 
 class TokenPage extends React.Component<RouteComponentProps, IState> {
@@ -37,7 +39,33 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
     this.state = {
       tokenData: undefined,
       alerts: [],
+      repoUrl: '',
     };
+  }
+
+  private getMyDistributionPath() {
+    MyDistributionAPI.list()
+      .then(({ data }) => {
+        const syncDistro =
+          data.data.find(({ base_path }) => base_path.includes('synclist'))
+            ?.base_path || '';
+        this.setState({
+          repoUrl: syncDistro,
+        });
+      })
+      .catch((e) =>
+        this.setState({
+          repoUrl: '',
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Error loading Server URL.`,
+              description: e?.message,
+            },
+          ],
+        }),
+      );
   }
 
   componentDidMount() {
@@ -60,6 +88,8 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           ],
         }),
       );
+
+    this.getMyDistributionPath();
   }
 
   render() {
@@ -171,14 +201,9 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                 download content from Automation Hub.
               </Trans>
             </p>
-            <ClipboardCopy isReadOnly>{getRepoUrl('')}</ClipboardCopy>
-            <p>
-              <Trans>
-                Note: this URL contains all collections in Hub. To connect to
-                your organization&apos;s sync repository use the URL found on{' '}
-                <Link to={Paths.repositories}>Repository Management</Link>.
-              </Trans>
-            </p>
+            <ClipboardCopy isReadOnly>
+              {getRepoUrl(this.state.repoUrl)}
+            </ClipboardCopy>
           </section>
           <section className='body pf-c-content'>
             <h2>{t`SSO URL`}</h2>
