@@ -699,7 +699,7 @@ Cypress.Commands.add('clearDatabase', {}, () => {
 
     // logging the databases
     cy.log('logging the database');
-    cy.exec("podman exec pulp psql -U postgres -c '\\du'").then((result) => {
+    cy.exec("podman exec pulp psql -U postgres -c '\\l'").then((result) => {
       cy.log('result: ' + result.stdout);
       cy.log('error: ' + result.stderr);
 
