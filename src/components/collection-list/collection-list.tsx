@@ -107,6 +107,7 @@ export class CollectionList extends React.Component<IProps> {
               {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
             </DropdownItem>,
           ]}
+          ariaLabel='collection-kebab'
         />
       </div>
     );
