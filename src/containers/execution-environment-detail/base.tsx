@@ -146,7 +146,10 @@ export function withContainerRepo(WrappedComponent) {
             pageControls={
               <>
                 {showEdit ? (
-                  <Button onClick={() => this.setState({ editing: true })}>
+                  <Button
+                    onClick={() => this.setState({ editing: true })}
+                    variant={'secondary'}
+                  >
                     {t`Edit`}
                   </Button>
                 ) : null}
