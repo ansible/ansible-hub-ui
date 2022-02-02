@@ -96,12 +96,72 @@ Please start by reading [Cypress best practices](https://docs.cypress.io/guides/
 `it` + UI helpers:
   * always make sure to wait for the last thing that happens automatically when initiating a user action
   * for example, when adding a user, waiting for the API response is not enough, since the UI then redirects to the user list screen => wait for the Users list screen to finish loading
+  * (NOTE: negative tests (`.should('not.exist')`) do NOT wait.)
 
 `after` / `afterEach`:
   * don't use; won't run after failures anyway
   * consider doing galaxykit based cleanup from `after` as well as in `before`
     * only a convenience to declutter
     * can't rely on it
+
+
+## Checklists
+
+### List screen
+
+name like `$collection-list.js` (using camel\_case for collection name, singular)
+
+* before: delete all data of that collection, prepare only dependencies (`galaxykit`)
+* test empty state (no data)
+  * mock API responses if it's not possible to remove all items
+* check error screens when a request fails with 400, 401/3, 404, 500
+  * mock API responses
+* check loading state
+  * mock API response to wait for a promise before returning a response
+* nested describe with a `before` to set up real data (`galaxykit`)
+* check title, columns, sanity check data
+* check filter, empty state filter
+* check perpage and paging (can set to 2)
+* check sort, do it from page 2, should reset page to 1
+* check screen actions, list item actions
+  * skip create/edit, those should live in a form screen test
+  * prefer to test nontrivial extra actions (including delete) in a separate per-feature test .. which can test both list/detail screen for that button
+  * test the rest
+* [NOT YET] switch to a user with only the relevant permissions per test, not admin (needs permission-aware helpers first) .. only need the Foo button in foo action test, can test not in list screen
+
+### Detail screen
+
+name like `$collection-detail.js`
+
+* before: delete all data of that collection, set up an entity per each tested type (local/remote, etc.) (`galaxykit`)
+* test error state (404, 401/3, 400, 500)
+* test loading state
+* if there are tabs, make sure to test every available tab
+* test any actions not tested in a shared action test
+* make sure some relevant details appear
+* if there are multiple types of an entity, test the differences by having a test for each type
+* [NOT YET] switch to a user with only the relevant permissions per test, not admin
+
+### Form screen
+
+name like `$collection-form.js`
+
+* before: set up any dependencies (if the form has any selects that need populating) (`galaxykit`)
+* treat new and edit as separate tests (possibly with shared parts), test both
+* test saveability vs required fields
+* have one test submit the form with minimal valid data
+* have one test submit the form filling out all possible fields
+* test a submit with an error response, test that an alert appears
+  * may need to mock the API response if there's no server-side validation
+* test load failures (edit failing to load the entity, or either mode failing to load some other data it depends on)
+
+### Actions
+
+name like `$collection-$action.js` (using camel\_case for both collection name and action name)
+
+* test the action on each available screen
+  * prefer to loop the same test over an array of "get me there" functions (see [`execution_environments_use_in_controller.js`](https://github.com/ansible/ansible-hub-ui/blob/master/test/cypress/integration/execution_environments_use_in_controller.js#L53-L83) for an example)
+* make sure to wait until every request associated with submitting that action ends, including tasks, and subsequent list screen reloads
 
 ## GalaxyKit Integration
 
@@ -115,11 +175,11 @@ At this time, galaxykit is exposed in three commands: galaxykit, deleteTestUsers
 
 ### cy.deleteTestUsers()
 
-This command will delete any users in the system with the word "test" in their name.
+This command will delete any users in the system.
 
 ### cy.deleteTestGroups()
 
-This command will delete any groups in the system with the word "test" in the name.
+This command will delete any groups in the system.
 
 ### cy.galaxykit(command, ...args)
 
