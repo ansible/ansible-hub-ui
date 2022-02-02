@@ -690,7 +690,7 @@ Cypress.Commands.add('clearDatabase', {}, () => {
     cy.log('Restoring database from pg_dump.dump');
     let restore = Cypress.env('restore');
     restore =
-      'podman exec pulp pg_restore -U postgres -d galaxy_ng -c pg_dump.dump;';
+      'podman exec pulp pg_restore -U postgres -d postgres -c pg_dump.dump;';
     cy.log(restore);
     cy.exec(restore);
   } else {
