@@ -41,16 +41,21 @@ export class CollectionContentList extends React.Component<IProps> {
     const showing = params.showing || 'all';
     const keywords = params.keywords || '';
 
-    for (let c of contents) {
-      const typeMatch = showing === 'all' ? true : c.content_type === showing;
-      if (!summary[c.content_type]) {
-        summary[c.content_type] = 0;
-      }
+    for (const c of contents) {
+      summary[c.content_type] ||= 0;
 
-      if (typeMatch && c.name.match(keywords)) {
-        toShow.push(c);
+      const keywordMatch = c.name.match(keywords);
+      const typeMatch = showing === 'all' ? true : c.content_type === showing;
+
+      // count only items matching keyword
+      if (keywordMatch) {
         summary[c.content_type]++;
         summary['all']++;
+      }
+
+      // show only items matching keyword + type
+      if (keywordMatch && typeMatch) {
+        toShow.push(c);
       }
     }
 
