@@ -1,12 +1,20 @@
-import { t } from '@lingui/macro';
 import * as React from 'react';
-import './namespace-list.scss';
-
+import {
+  Button,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
+} from '@patternfly/react-core';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
+import { t } from '@lingui/macro';
 
 import { ParamHelper } from 'src/utilities/param-helper';
 import {
+  AlertList,
+  AppliedFilters,
   BaseHeader,
+  CompoundFilter,
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
@@ -16,17 +24,16 @@ import {
   NamespaceCard,
   NamespaceModal,
   Pagination,
-  Toolbar,
-  AlertList,
-  AlertType,
+  Sort,
 } from 'src/components';
-import { Button, ToolbarItem } from '@patternfly/react-core';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { Constants } from 'src/constants';
 import { filterIsSet } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 import { i18n } from '@lingui/core';
+
+import './namespace-list.scss';
 
 interface IState {
   namespaces: NamespaceListType[];
@@ -37,11 +44,13 @@ interface IState {
     page?: number;
     page_size?: number;
     tenant?: string;
+    keywords?: string;
   };
   hasPermission: boolean;
   isModalOpen: boolean;
   loading: boolean;
   redirect?: string;
+  inputText: string;
 }
 
 interface IProps extends RouteComponentProps {
@@ -75,6 +84,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       hasPermission: true,
       isModalOpen: false,
       loading: true,
+      inputText: params['keywords'] || '',
     };
   }
 
@@ -132,7 +142,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <Redirect push to={this.state.redirect} />;
     }
 
-    const { namespaces, params, itemCount, loading } = this.state;
+    const { namespaces, params, itemCount, loading, inputText } = this.state;
     const { filterOwner } = this.props;
     const { user, alerts } = this.context;
     const noData =
@@ -144,23 +154,13 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    let extra = [];
-
-    if (user?.model_permissions?.add_namespace) {
-      extra.push(
-        <ToolbarItem key='create-button'>
-          <Button variant='primary' onClick={this.handleModalToggle}>
-            {t`Create`}
-          </Button>
-        </ToolbarItem>,
-      );
-    }
-
+    // Namespaces or Partners
     const title = i18n._(namespaceBreadcrumb.name);
-    const titleLowerCase = title.toLowerCase();
-    const search = filterOwner
-      ? t`Search my namespaces`
-      : t`Search all ${titleLowerCase}`;
+
+    const updateParams = (p) => {
+      p['page'] = 1;
+      this.updateParams(p, () => this.loadNamespaces());
+    };
 
     return (
       <div className='namespace-page'>
@@ -199,15 +199,48 @@ export class NamespaceList extends React.Component<IProps, IState> {
           )}
           {noData ? null : (
             <div className='toolbar'>
-              <Toolbar
-                params={params}
-                sortOptions={[{ title: t`Name`, id: 'name', type: 'alpha' }]}
-                searchPlaceholder={search}
-                updateParams={(p) =>
-                  this.updateParams(p, () => this.loadNamespaces())
-                }
-                extraInputs={extra}
-              />
+              <Toolbar>
+                <ToolbarContent>
+                  <ToolbarGroup style={{ marginLeft: 0 }}>
+                    <ToolbarItem>
+                      <CompoundFilter
+                        inputText={inputText}
+                        onChange={(text) => this.setState({ inputText: text })}
+                        updateParams={updateParams}
+                        params={params}
+                        filterConfig={[{ id: 'keywords', title: t`keywords` }]}
+                      />
+                      <AppliedFilters
+                        style={{ marginTop: '16px' }}
+                        updateParams={updateParams}
+                        params={params}
+                        ignoredParams={['page_size', 'page', 'sort']}
+                      />
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                  <ToolbarGroup style={{ alignSelf: 'start' }}>
+                    <ToolbarItem>
+                      <Sort
+                        options={[
+                          { title: t`Name`, id: 'name', type: 'alpha' },
+                        ]}
+                        params={params}
+                        updateParams={updateParams}
+                      />
+                    </ToolbarItem>
+                    {user?.model_permissions?.add_namespace && (
+                      <ToolbarItem key='create-button'>
+                        <Button
+                          variant='primary'
+                          onClick={this.handleModalToggle}
+                        >
+                          {t`Create`}
+                        </Button>
+                      </ToolbarItem>
+                    )}
+                  </ToolbarGroup>
+                </ToolbarContent>
+              </Toolbar>
               <div>
                 <Pagination
                   params={params}

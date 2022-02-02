@@ -63,7 +63,6 @@ export { TableOfContents } from './collection-detail/table-of-contents';
 export { Tabs, TabsType } from './patternfly-wrappers/tabs';
 export { Tag } from './tags/tag';
 export { TagLabel } from './tag-label/tag-label';
-export { Toolbar } from './patternfly-wrappers/toolbar';
 export { Tooltip } from './patternfly-wrappers/tooltip';
 export { UserForm } from './user-form/user-form';
 export { UserFormPage } from './user-form/user-form-page';
