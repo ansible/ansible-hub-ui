@@ -682,44 +682,29 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
   });
 });
 
-let database_saved = false;
-
 Cypress.Commands.add('clearDatabase', {}, () => {
-  if (database_saved) {
-    // read snapshot
-    cy.log('Restoring database from pg_dump.dump');
-    let restore = Cypress.env('restore');
-    restore =
-      'podman exec pulp pg_restore -U postgres -d postgres -c pg_dump.dump;';
-    cy.log(restore);
-    cy.exec(restore);
-  } else {
-    // write snapshot
-    database_saved = true;
+  // read snapshot
+  cy.log('Restoring database from pg_dump.dump');
+  let restore = Cypress.env('restore');
 
-    // logging the databases
-    cy.log('logging the database');
-    cy.exec("podman exec pulp psql -U postgres -c '\\l'").then((result) => {
-      cy.log('result: ' + result.stdout);
-      cy.log('error: ' + result.stderr);
-
-      // yields the 'result' object
-      // {
-      //   code: 0,
-      //   stdout: "Files successfully built",
-      //   stderr: ""
-      // }
-    });
-
-    cy.log('Dumping database to pg_dump.dump');
-    let dump = Cypress.env('dump');
-    dump =
-      'podman exec pulp pg_dump -U postgres -d postgres -Fc > pg_dump.dump;';
-    cy.log(dump);
-    cy.exec(dump);
-
-    let copy = 'podman cp pg_dump.dump pulp:pg_dump.dump;';
-    cy.log(copy);
-    cy.exec(copy);
+  if (!restore) {
+    restore = 'podman exec pulp pg_restore -U pulp -d pulp -c pg_dump.dump;';
   }
+  cy.log(restore);
+  cy.exec(restore);
+});
+
+Cypress.Commands.add('dumpDatabase', {}, () => {
+  // write snapshot
+  cy.log('Dumping database to pg_dump.dump');
+  let dump = Cypress.env('dump');
+
+  if (!dump) {
+    dump = 'podman exec pulp pg_dump -U pulp -d pulp -Fc > pg_dump.dump;';
+  }
+  cy.log(dump);
+  cy.exec(dump);
+  /*let copy = 'podman cp pg_dump.dump pulp:pg_dump.dump;';
+  cy.log(copy);
+  cy.exec(copy);*/
 });
