@@ -700,7 +700,8 @@ Cypress.Commands.add('dumpDatabase', {}, () => {
   let dump = Cypress.env('dump');
 
   if (!dump) {
-    dump = 'podman exec pulp pg_dump -U pulp -d pulp -Fc > pg_dump.dump;';
+    dump =
+      'podman exec pulp pg_dump -U pulp -d pulp -Fc > pg_dump.dump;podman cp pg_dump.dump pulp:pg_dump.dump;';
   }
   cy.log(dump);
   cy.exec(dump);

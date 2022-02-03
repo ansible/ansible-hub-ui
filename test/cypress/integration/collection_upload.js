@@ -1,4 +1,3 @@
-
 describe('Collection Upload Tests', () => {
   const userName = 'testUser';
   const userPassword = 'I am a complicated passw0rd';
