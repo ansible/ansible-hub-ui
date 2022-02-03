@@ -41,7 +41,10 @@ describe('collection tests', () => {
 
     waitForTaskToFinish('@taskStatus', 10);
     cy.get('@taskStatus.last').then(() => {
-      cy.get('.pf-c-alert').contains('Successfully deleted collection.');
+      cy.get('h4[class=pf-c-alert__title]').should(
+        'have.text',
+        'Success alert:Collection "test_collection v" has been successfully deleted.',
+      );
     });
   });
 
@@ -60,7 +63,7 @@ describe('collection tests', () => {
     cy.wait('@reload', { timeout: 50000 });
     cy.get('h4[class=pf-c-alert__title]').should(
       'have.text',
-      'Success alert:Successfully deleted collection.',
+      'Success alert:Collection "my_collection v1.0.0" has been successfully deleted.',
     );
   });
 });

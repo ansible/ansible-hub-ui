@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './certification-dashboard.scss';
 
@@ -466,6 +466,7 @@ class CertificationDashboard extends React.Component<
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {
+    const { alerts } = this.state;
     // Set the selected version to loading
     this.setState(
       {
@@ -479,20 +480,28 @@ class CertificationDashboard extends React.Component<
           originalRepo,
           destinationRepo,
         )
-          .then((result) =>
-            // Since pulp doesn't reply with the new object, perform a
-            // second query to get the updated data
-            {
-              this.setState({
-                updatingVersions: [version],
-              });
-              this.waitForUpdate(result.data.remove_task_id, version);
-            },
+          .then(
+            (result) =>
+              // Since pulp doesn't reply with the new object, perform a
+              // second query to get the updated data
+              {
+                this.setState({
+                  updatingVersions: [version],
+                });
+                this.waitForUpdate(result.data.remove_task_id, version);
+              },
+            this.addAlert(
+              <Trans>
+                Certification status for collection &quot;{version.name} v
+                {version.version}&quot; has been successfully updated.
+              </Trans>,
+              'success',
+            ),
           )
           .catch((error) => {
             this.setState({
               updatingVersions: [],
-              alerts: this.state.alerts.concat({
+              alerts: alerts.concat({
                 variant: 'danger',
                 title: t`API Error: ${error.response.status}`,
                 description: t`Could not update the certification status for ${version.namespace}.${version.name}.${version.version}.`,
@@ -549,6 +558,19 @@ class CertificationDashboard extends React.Component<
 
   private get closeAlert() {
     return closeAlertMixin('alerts');
+  }
+
+  private addAlert(title, variant, description?) {
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          description,
+          title,
+          variant,
+        },
+      ],
+    });
   }
 }
 

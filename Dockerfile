@@ -15,7 +15,6 @@ RUN chmod +x /hub/entrypoint.sh && \
 
 # make webpack-dev-sever and other node packages executable
 ENV PATH /hub/node_modules/.bin:$PATH
-ENV NODE_OPTIONS=--max_old_space_size=4096
 
 WORKDIR /hub/app
 EXPOSE 8002

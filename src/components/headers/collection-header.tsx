@@ -521,7 +521,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     )
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
-
+        const name = deleteCollection.name;
         waitForTask(taskId).then(() => {
           if (deleteCollection.all_versions.length > 1) {
             const topVersion = deleteCollection.all_versions.filter(
@@ -534,7 +534,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 topVersion[0].version,
               ),
             );
-
             this.setState({
               deleteCollection: null,
               collectionVersion: null,
@@ -543,7 +542,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 ...this.state.alerts,
                 {
                   variant: 'success',
-                  title: t`Successfully deleted collection version.`,
+                  title: (
+                    <Trans>
+                      Collection &quot;{name} v{collectionVersion}&quot; has
+                      been successfully deleted.
+                    </Trans>
+                  ),
                 },
               ],
             });
@@ -553,7 +557,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               ...this.context.alerts,
               {
                 variant: 'success',
-                title: t`Successfully deleted collection.`,
+                title: (
+                  <Trans>
+                    Collection &quot;{name} v{collectionVersion}&quot; has been
+                    successfully deleted.
+                  </Trans>
+                ),
               },
             ]);
             this.setState({
@@ -614,7 +623,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   };
 
   private deleteCollection = () => {
-    const { deleteCollection } = this.state;
+    const { deleteCollection, collectionVersion } = this.state;
     CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
@@ -624,7 +633,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             ...this.context.alerts,
             {
               variant: 'success',
-              title: t`Successfully deleted collection.`,
+              title: (
+                <Trans>
+                  Collection &quot;{deleteCollection.name} v{collectionVersion}
+                  &quot; has been successfully deleted.
+                </Trans>
+              ),
             },
           ]);
           this.setState({

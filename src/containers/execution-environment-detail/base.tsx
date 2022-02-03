@@ -207,7 +207,19 @@ export function withContainerRepo(WrappedComponent) {
                   promise
                     .then((results) => {
                       const task = results.find((x) => x.data && x.data.task);
-                      this.setState({ editing: false, loading: true });
+                      this.setState({
+                        editing: false,
+                        loading: true,
+                        alerts: alerts.concat({
+                          variant: 'success',
+                          title: (
+                            <Trans>
+                              Saved changes to execution environment &quot;
+                              {this.state.repo.name}&quot;.
+                            </Trans>
+                          ),
+                        }),
+                      });
                       if (task) {
                         waitForTask(
                           task.data.task.split('tasks/')[1].replace('/', ''),
@@ -313,15 +325,15 @@ export function withContainerRepo(WrappedComponent) {
         .then((result) => {
           const task_id = parsePulpIDFromURL(result.data.task);
           this.addAlert(
-            t`Sync initiated for ${name}`,
+            <Trans>Sync started for remote registry &quot;{name}&quot;.</Trans>,
             'success',
             <span>
               <Trans>
-                View the task{' '}
+                See the task management{' '}
                 <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
-                  here
+                  detail page{' '}
                 </Link>
-                .
+                for the status of this task.
               </Trans>
             </span>,
           );

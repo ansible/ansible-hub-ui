@@ -465,7 +465,9 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     ExecutionEnvironmentRegistryAPI.delete(pk)
       .then(() =>
         this.addAlert(
-          t`Successfully deleted remote registry ${name}`,
+          <Trans>
+            Remote registry &quot;{name}&quot; has been successfully deleted.
+          </Trans>,
           'success',
         ),
       )
@@ -483,15 +485,15 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       .then((result) => {
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(
-          t`Sync initiated for ${name}`,
+          <Trans>Sync started for remote registry &quot;{name}&quot;.</Trans>,
           'success',
           <span>
             <Trans>
-              View the task{' '}
+              See the task management{' '}
               <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
-                here
+                detail page{' '}
               </Link>
-              .
+              for the status of this task.
             </Trans>
           </span>,
         );
@@ -505,15 +507,15 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       .then((result) => {
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(
-          t`Indexing execution environments in ${name}`,
+          t`Indexing started for execution environment "${name}".`,
           'success',
           <span>
             <Trans>
-              View the task{' '}
+              See the task management{' '}
               <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
-                here
+                detail page
               </Link>
-              .
+              for the status of this task.
             </Trans>
           </span>,
         );

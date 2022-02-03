@@ -423,7 +423,7 @@ class ExecutionEnvironmentList extends React.Component<
     const remote = pulp?.repository ? !!pulp?.repository?.remote : true; // add only supports remote
     const isNew = !pulp?.repository; // only exists in real data
     const distributionPulpId = pulp?.distribution?.pulp_id;
-
+    const { alerts } = this.state;
     return (
       <RepositoryForm
         isRemote={!!remote}
@@ -446,11 +446,19 @@ class ExecutionEnvironmentList extends React.Component<
                 {
                   showRemoteModal: false,
                   itemToEdit: null,
-                  alerts: this.state.alerts.concat({
+                  alerts: alerts.concat({
                     variant: 'success',
-                    title: isNew
-                      ? t`Execution environment added.`
-                      : t`Execution environment saved.`,
+                    title: isNew ? (
+                      <Trans>
+                        Execution environment &quot;{name}&quot; has been added
+                        successfully.
+                      </Trans>
+                    ) : (
+                      <Trans>
+                        Saved changes to execution environment &quot;{name}
+                        &quot;.
+                      </Trans>
+                    ),
                   }),
                 },
                 () => this.queryEnvironments(),
@@ -522,15 +530,17 @@ class ExecutionEnvironmentList extends React.Component<
       .then((result) => {
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(
-          t`Sync initiated for ${name}`,
+          <Trans>
+            Sync started for execution environment &quot;{name}&quot;.
+          </Trans>,
           'success',
           <span>
             <Trans>
-              View the task{' '}
+              See the task management{' '}
               <Link to={formatPath(Paths.taskDetail, { task: task_id })}>
-                here
+                detail page{' '}
               </Link>
-              .
+              for the status of this task.
             </Trans>
           </span>,
         );

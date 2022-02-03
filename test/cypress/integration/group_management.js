@@ -21,7 +21,7 @@ describe('Hub Group Management Tests', () => {
     cy.contains(name).should('exist');
 
     cy.deleteGroup(name);
-    cy.contains(name).should('not.exist');
+    cy.contains('No groups yet').should('exist');
   });
 
   it('admin user can add/remove a user to/from a group', () => {

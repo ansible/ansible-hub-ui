@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
@@ -105,14 +105,23 @@ class UserProfile extends React.Component<RouteComponentProps, IState> {
   }
 
   private saveUser = () => {
-    const { user } = this.state;
+    const {
+      user,
+      user: { username },
+      alerts,
+    } = this.state;
     ActiveUserAPI.saveUser(user)
       .then((result) => {
         this.setState(
           {
             inEditMode: false,
-            alerts: this.state.alerts.concat([
-              { variant: 'success', title: t`Profile saved.` },
+            alerts: alerts.concat([
+              {
+                variant: 'success',
+                title: (
+                  <Trans>Saved changes to user &quot;{username}&quot;.</Trans>
+                ),
+              },
             ]),
           },
           () => this.context.setUser(result.data),
