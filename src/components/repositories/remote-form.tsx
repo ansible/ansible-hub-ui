@@ -12,6 +12,7 @@ import {
   Modal,
   Checkbox,
   ExpandableSection,
+  Switch,
 } from '@patternfly/react-core';
 
 import { WriteOnlyField, HelperText, FileUpload } from 'src/components';
@@ -169,7 +170,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           </Button>,
           <Button
             key='cancel'
-            variant='secondary'
+            variant='link'
             onClick={() => this.props.closeModal()}
           >
             {t`Cancel`}
@@ -253,6 +254,18 @@ export class RemoteForm extends React.Component<IProps, IState> {
             type='text'
             value={remote.url || ''}
             onChange={(value) => this.updateRemote(value, 'url')}
+          />
+        </FormGroup>
+
+        <FormGroup
+          fieldId={'signed_only'}
+          name={t`Signed only`}
+          label={t`Only download signed collections`}
+        >
+          <Switch
+            id='signed_only'
+            isChecked={remote.signed_only}
+            onChange={(value) => this.updateRemote(value, 'signed_only')}
           />
         </FormGroup>
 
