@@ -130,7 +130,7 @@ export class CollectionContentList extends React.Component<IProps> {
             ))}
           </tbody>
         </table>
-        {toShow.length <= 0 &&
+        {summary.all <= 0 &&
           this.context.selectedRepo === 'community' &&
           this.renderCommunityWarningMessage()}
       </div>
