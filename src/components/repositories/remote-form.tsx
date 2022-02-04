@@ -497,7 +497,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   isRequired={requiredFields.includes('proxy_password')}
                   isDisabled={disabledFields.includes('proxy_password')}
                   id='proxy_password'
-                  type='text'
+                  type='password'
                   value={remote.proxy_password || ''}
                   onChange={(value) =>
                     this.updateRemote(value, 'proxy_password')
