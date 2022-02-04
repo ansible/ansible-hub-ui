@@ -41,7 +41,7 @@ describe('Clearing of database test.', () => {
       cy.get('table[aria-label="User list"]').contains('admin');
     }
 
-    range(3).forEach((i) => {
+    range(3).forEach(() => {
       cy.clearDatabase();
       cy.galaxykit('user create', 'DeleteTestUser', '123abcdpassword');
 
