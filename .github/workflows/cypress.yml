@@ -9,7 +9,7 @@ on:
     branches: [ 'master', 'stable-*' ]
   # daily on master
   schedule:
-    - cron:  '30 5 * * *'
+  - cron: '30 5 * * *'
 
 concurrency:
   group: cypress-${{ github.ref }}

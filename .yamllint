@@ -1,0 +1,18 @@
+ignore: |
+  /node_modules/
+  /test/node_modules/
+
+extends: default
+
+rules:
+  line-length:
+    max: 240
+  indentation:
+    indent-sequences: consistent
+  brackets:
+    max-spaces-inside: 1
+  document-start: disable
+  truthy:
+    check-keys: false
+  comments:
+    min-spaces-from-content: 1
