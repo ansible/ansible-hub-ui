@@ -11,6 +11,10 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 
+import { ExclamationTriangleIcon } from '@patternfly/react-icons';
+
+import { EmptyStateCustom } from 'src/components';
+
 import { ContentSummaryType } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -131,7 +135,20 @@ export class CollectionContentList extends React.Component<IProps> {
             ))}
           </tbody>
         </table>
+        {summary.all <= 0 &&
+          this.context.selectedRepo === 'community' &&
+          this.renderCommunityWarningMessage()}
       </div>
+    );
+  }
+
+  private renderCommunityWarningMessage() {
+    return (
+      <EmptyStateCustom
+        title={t`Warning`}
+        description={t`Community collections do not have docs nor content counts, but all content gets synchronized`}
+        icon={ExclamationTriangleIcon}
+      />
     );
   }
 }

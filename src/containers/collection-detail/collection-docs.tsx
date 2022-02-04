@@ -22,7 +22,10 @@ import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 
-import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import {
+  ExclamationTriangleIcon,
+  ExclamationCircleIcon,
+} from '@patternfly/react-icons';
 
 // renders markdown files in collection docs/ directory
 class CollectionDocs extends React.Component<
@@ -189,6 +192,9 @@ class CollectionDocs extends React.Component<
                     )}
                   />
                 )
+              ) : this.context.selectedRepo === 'community' &&
+                !collection.latest_version.docs_blob.contents ? (
+                this.renderCommunityWarningMessage()
               ) : (
                 this.renderNotFound(collection.name)
               )}
@@ -265,6 +271,16 @@ class CollectionDocs extends React.Component<
         title={t`Not found`}
         description={t`The file is not available for this version of ${collectionName}`}
         icon={ExclamationCircleIcon}
+      />
+    );
+  }
+
+  private renderCommunityWarningMessage() {
+    return (
+      <EmptyStateCustom
+        title={t`Warning`}
+        description={t`Community collections do not have docs nor content counts, but all content gets synchronized`}
+        icon={ExclamationTriangleIcon}
       />
     );
   }
