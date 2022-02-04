@@ -42,7 +42,7 @@ interface Window {
       };
       identifyApp: (s: string) => void;
       init: () => void;
-      on: (s: string, f: function) => void;
+      on: (s: string, f: () => void) => void;
     };
   };
 }
