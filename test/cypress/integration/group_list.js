@@ -9,13 +9,13 @@ describe('Group list tests for sorting, paging and filtering', () => {
     cy.deleteTestGroups();
     cy.deleteTestGroups();
 
-    range(20).forEach((i) => {
+    range(21).forEach((i) => {
       let item = { name: 'group_test' + i };
       items.push(item);
       cy.galaxykit('-i group create', item.name);
     });
 
-    items.push({ name: 'system:partner-engineers' });
+    //items.push({ name: 'system:partner-engineers' });
 
     items = sortBy(items, 'name');
   });
