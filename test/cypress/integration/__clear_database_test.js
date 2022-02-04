@@ -6,8 +6,6 @@ describe('Clearing of database test.', () => {
     cy.galaxykit('user create', 'DeleteTestUser', '123abcdpassword');
   });
 
-  after(() => {});
-
   beforeEach(() => {
     cy.login();
     cy.visit('/ui/users');

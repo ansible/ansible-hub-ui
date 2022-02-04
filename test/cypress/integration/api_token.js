@@ -1,8 +1,4 @@
 describe('API Token Tests', () => {
-  before(() => {});
-
-  after(() => {});
-
   beforeEach(() => {
     cy.login();
   });
