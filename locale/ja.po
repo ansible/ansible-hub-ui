@@ -134,7 +134,7 @@ msgstr "アクティビティー"
 msgid "Add"
 msgstr "追加"
 
-#: src/constants.tsx:153
+#: src/constants.tsx:154
 msgid "Add Ansible distribution"
 msgstr ""
 
@@ -142,15 +142,15 @@ msgstr ""
 msgid "Add a README with instructions for using this container."
 msgstr "このコンテナーの使用手順を記載した README を追加します。"
 
-#: src/constants.tsx:154
+#: src/constants.tsx:155
 msgid "Add collection remote"
 msgstr ""
 
-#: src/constants.tsx:163
+#: src/constants.tsx:164
 msgid "Add container distribution"
 msgstr ""
 
-#: src/constants.tsx:165
+#: src/constants.tsx:166
 msgid "Add container repository"
 msgstr ""
 
@@ -159,11 +159,11 @@ msgstr ""
 msgid "Add execution environment"
 msgstr "実行環境の追加"
 
-#: src/constants.tsx:181
+#: src/constants.tsx:182
 msgid "Add group"
 msgstr "グループの追加"
 
-#: src/constants.tsx:182
+#: src/constants.tsx:183
 msgid "Add namespace"
 msgstr "名前空間の追加"
 
@@ -175,7 +175,7 @@ msgstr "新規タグの追加"
 msgid "Add new tag to image"
 msgstr "新規タグのイメージへの追加"
 
-#: src/constants.tsx:180
+#: src/constants.tsx:181
 #: src/containers/execution-environment/registry-list.tsx:149
 #: src/containers/execution-environment/registry-list.tsx:212
 msgid "Add remote registry"
@@ -185,7 +185,7 @@ msgstr "リモートレジストリーの追加"
 msgid "Add selected users to group"
 msgstr "選択したユーザーのグループへの追加"
 
-#: src/constants.tsx:183
+#: src/constants.tsx:184
 msgid "Add synclist"
 msgstr "同期リストの追加"
 
@@ -197,7 +197,7 @@ msgstr "除外するタグの追加"
 msgid "Add tag(s) to include"
 msgstr "含めるタグの追加"
 
-#: src/constants.tsx:184
+#: src/constants.tsx:185
 msgid "Add user"
 msgstr "ユーザーの追加"
 
@@ -302,62 +302,62 @@ msgstr "認定済み"
 msgid "Change"
 msgstr "変更"
 
-#: src/constants.tsx:155
+#: src/constants.tsx:156
 msgid "Change Ansible distribution"
 msgstr "Ansible ディストリビューションの変更"
 
-#: src/constants.tsx:156
+#: src/constants.tsx:157
 msgid "Change collection remote"
 msgstr "コレクションリモートの変更"
 
-#: src/constants.tsx:166
+#: src/constants.tsx:167
 msgid "Change container distribution"
 msgstr ""
 
-#: src/constants.tsx:167
-#: src/constants.tsx:209
+#: src/constants.tsx:168
+#: src/constants.tsx:210
 msgid "Change container namespace permissions"
 msgstr "コンテナーの名前空間パーミッションの変更"
 
-#: src/constants.tsx:168
+#: src/constants.tsx:169
 msgid "Change container repository"
 msgstr ""
 
-#: src/constants.tsx:172
+#: src/constants.tsx:173
 msgid "Change containers"
 msgstr "コンテナーの変更"
 
-#: src/constants.tsx:216
+#: src/constants.tsx:217
 msgid "Change distribution"
 msgstr "ディストリビューションの変更"
 
-#: src/constants.tsx:186
+#: src/constants.tsx:187
 msgid "Change group"
 msgstr "グループの変更"
 
-#: src/constants.tsx:173
-#: src/constants.tsx:208
+#: src/constants.tsx:174
+#: src/constants.tsx:209
 msgid "Change image tags"
 msgstr "イメージタグの変更"
 
-#: src/constants.tsx:187
-#: src/constants.tsx:202
+#: src/constants.tsx:188
+#: src/constants.tsx:203
 msgid "Change namespace"
 msgstr "名前空間の変更"
 
-#: src/constants.tsx:185
+#: src/constants.tsx:186
 msgid "Change remote registry"
 msgstr ""
 
-#: src/constants.tsx:188
+#: src/constants.tsx:189
 msgid "Change synclist"
 msgstr "同期リストの変更"
 
-#: src/constants.tsx:177
+#: src/constants.tsx:178
 msgid "Change task"
 msgstr ""
 
-#: src/constants.tsx:189
+#: src/constants.tsx:190
 msgid "Change user"
 msgstr "ユーザーの変更"
 
@@ -365,7 +365,7 @@ msgstr "ユーザーの変更"
 msgid "Checking for affected users... <0/>"
 msgstr "影響を受けるユーザーを確認中... <0/>"
 
-#: src/containers/task-management/task_detail.tsx:213
+#: src/containers/task-management/task_detail.tsx:216
 msgid "Child tasks"
 msgstr "子タスク"
 
@@ -395,7 +395,7 @@ msgstr "クライアントキー"
 msgid "Close"
 msgstr "閉じる"
 
-#: src/containers/task-management/task_detail.tsx:303
+#: src/containers/task-management/task_detail.tsx:309
 msgid "Code"
 msgstr "コード"
 
@@ -408,11 +408,11 @@ msgstr "コレクション"
 msgid "Collection Name"
 msgstr "コレクション名"
 
-#: src/constants.tsx:26
+#: src/constants.tsx:27
 msgid "Collection Namespaces"
 msgstr ""
 
-#: src/constants.tsx:64
+#: src/constants.tsx:65
 msgid "Collection Remotes"
 msgstr ""
 
@@ -440,7 +440,7 @@ msgstr "コレクションのアップロードが取り消されました"
 msgid "Collection versions"
 msgstr "コレクションのバージョン"
 
-#: src/constants.tsx:36
+#: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:150
 #: src/containers/search/search.tsx:96
 #: src/loaders/standalone/standalone-loader.tsx:334
@@ -458,9 +458,14 @@ msgstr "コレクションはアップロードされると表示されます"
 msgid "Command"
 msgstr "コマンド"
 
-#: src/constants.tsx:251
+#: src/constants.tsx:252
 msgid "Community"
 msgstr "コミュニティー"
+
+#: src/components/collection-detail/collection-content-list.tsx:150
+#: src/containers/collection-detail/collection-docs.tsx:281
+msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
+msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:74
 msgid "Company name"
@@ -468,8 +473,8 @@ msgstr "会社名"
 
 #: src/components/my-imports/import-list.tsx:87
 #: src/components/status/status-indicator.tsx:67
-#: src/constants.tsx:315
-#: src/containers/task-management/task-list-view.tsx:154
+#: src/constants.tsx:379
+#: src/containers/task-management/task-list-view.tsx:156
 msgid "Completed"
 msgstr "完了済み"
 
@@ -525,7 +530,7 @@ msgstr "コンテナーレジストリータイプ"
 msgid "Container repository name"
 msgstr "コンテナーリポジトリー名"
 
-#: src/constants.tsx:74
+#: src/constants.tsx:75
 msgid "Containers"
 msgstr "コンテナー"
 
@@ -565,8 +570,8 @@ msgstr "{0} の証明書ステータスを更新できませんでした。{1}.{
 #: src/components/namespace-modal/namespace-modal.tsx:111
 #: src/containers/group-management/group-list.tsx:148
 #: src/containers/group-management/group-list.tsx:185
-#: src/containers/namespace-list/namespace-list.tsx:153
-#: src/containers/namespace-list/namespace-list.tsx:254
+#: src/containers/namespace-list/namespace-list.tsx:237
+#: src/containers/namespace-list/namespace-list.tsx:287
 #: src/containers/user-management/user-list.tsx:184
 #: src/containers/user-management/user-list.tsx:249
 msgid "Create"
@@ -584,8 +589,8 @@ msgstr "新規名前空間の作成"
 msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 msgstr "特殊文字 (例: <!@$%>) を含めた 9 文字以上のパスワードを作成します。一般的な名前または式は使用しないでください。"
 
-#: src/constants.tsx:164
-#: src/constants.tsx:204
+#: src/constants.tsx:165
+#: src/constants.tsx:205
 msgid "Create new containers"
 msgstr "新規コンテナーの作成"
 
@@ -601,20 +606,20 @@ msgstr "新規ユーザーの作成"
 msgid "Created"
 msgstr "作成済み"
 
-#: src/containers/task-management/task-list-view.tsx:230
-#: src/containers/task-management/task_detail.tsx:174
+#: src/containers/task-management/task-list-view.tsx:232
+#: src/containers/task-management/task_detail.tsx:176
 msgid "Created on"
 msgstr "作成日時"
 
-#: src/constants.tsx:284
+#: src/constants.tsx:294
 msgid "Curate all synclist repository"
 msgstr "全同期リストリポジトリーのキュレート"
 
-#: src/constants.tsx:281
+#: src/constants.tsx:285
 msgid "Curate synclist repository"
 msgstr "同期リポジトリーのキュレート"
 
-#: src/constants.tsx:285
+#: src/constants.tsx:298
 msgid "Curate synclist repository batch"
 msgstr "同期リストのバッチのキュレート"
 
@@ -650,51 +655,51 @@ msgstr "作成日"
 #: src/components/headers/collection-header.tsx:273
 #: src/containers/execution-environment/registry-list.tsx:392
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:410
-#: src/containers/execution-environment-list/execution_environment_list.tsx:383
+#: src/containers/execution-environment-list/execution_environment_list.tsx:390
 #: src/containers/group-management/group-detail.tsx:251
 #: src/containers/group-management/group-list.tsx:401
 #: src/containers/group-management/group-list.tsx:411
 #: src/containers/namespace-detail/namespace-detail.tsx:207
-#: src/containers/task-management/task-list-view.tsx:303
-#: src/containers/task-management/task-list-view.tsx:319
+#: src/containers/task-management/task-list-view.tsx:311
+#: src/containers/task-management/task-list-view.tsx:327
 #: src/containers/user-management/user-detail.tsx:130
 #: src/containers/user-management/user-list.tsx:337
 msgid "Delete"
 msgstr "削除"
 
-#: src/constants.tsx:157
+#: src/constants.tsx:158
 msgid "Delete Ansible distribution"
 msgstr ""
 
-#: src/constants.tsx:158
+#: src/constants.tsx:159
 msgid "Delete collection"
 msgstr ""
 
-#: src/constants.tsx:159
+#: src/constants.tsx:160
 msgid "Delete collection remote"
 msgstr ""
 
-#: src/constants.tsx:169
+#: src/constants.tsx:170
 msgid "Delete container distribution"
 msgstr ""
 
-#: src/constants.tsx:170
+#: src/constants.tsx:171
 msgid "Delete container namespace"
 msgstr ""
 
-#: src/constants.tsx:171
+#: src/constants.tsx:172
 msgid "Delete container repository"
 msgstr ""
 
-#: src/constants.tsx:213
+#: src/constants.tsx:214
 msgid "Delete container's distribution"
 msgstr "コンテナーのディストリビューションの削除"
 
-#: src/constants.tsx:212
+#: src/constants.tsx:213
 msgid "Delete container's namespace"
 msgstr "コンテナーの名前空間の削除"
 
-#: src/constants.tsx:217
+#: src/constants.tsx:218
 msgid "Delete distribution"
 msgstr "ディストリビューションの削除"
 
@@ -703,7 +708,7 @@ msgstr "ディストリビューションの削除"
 msgid "Delete entire collection"
 msgstr "コレクション全体の削除"
 
-#: src/constants.tsx:191
+#: src/constants.tsx:192
 msgid "Delete group"
 msgstr "グループの削除"
 
@@ -711,13 +716,13 @@ msgstr "グループの削除"
 msgid "Delete group?"
 msgstr "グループを削除しますか?"
 
-#: src/constants.tsx:192
+#: src/constants.tsx:193
 #: src/containers/namespace-detail/namespace-detail.tsx:482
 #: src/containers/namespace-detail/namespace-detail.tsx:496
 msgid "Delete namespace"
 msgstr "名前空間の削除"
 
-#: src/constants.tsx:190
+#: src/constants.tsx:191
 msgid "Delete remote registry"
 msgstr ""
 
@@ -725,15 +730,15 @@ msgstr ""
 msgid "Delete remote registry?"
 msgstr "リモートレジストリーを削除しますか?"
 
-#: src/constants.tsx:193
+#: src/constants.tsx:194
 msgid "Delete synclist"
 msgstr "同期リストの削除"
 
-#: src/constants.tsx:178
+#: src/constants.tsx:179
 msgid "Delete task"
 msgstr ""
 
-#: src/constants.tsx:194
+#: src/constants.tsx:195
 msgid "Delete user"
 msgstr "ユーザーの削除"
 
@@ -792,15 +797,15 @@ msgstr "依存するコレクション"
 msgid "Deprecate"
 msgstr "非推奨"
 
-#: src/components/collection-detail/collection-content-list.tsx:101
+#: src/components/collection-detail/collection-content-list.tsx:110
 #: src/components/execution-environment/repository-form.tsx:360
 #: src/components/namespace-form/namespace-form.tsx:150
 #: src/containers/execution-environment-list/execution_environment_list.tsx:304
-#: src/containers/task-management/task_detail.tsx:335
+#: src/containers/task-management/task_detail.tsx:341
 msgid "Description"
 msgstr "説明"
 
-#: src/containers/task-management/task_detail.tsx:161
+#: src/containers/task-management/task_detail.tsx:163
 msgid "Descriptive name"
 msgstr "分かりやすい名前"
 
@@ -824,7 +829,7 @@ msgid "Docs site"
 msgstr "ドキュメントのサイト"
 
 #: src/components/headers/collection-header.tsx:462
-#: src/containers/collection-detail/collection-docs.tsx:117
+#: src/containers/collection-detail/collection-docs.tsx:120
 #: src/loaders/standalone/standalone-loader.tsx:381
 msgid "Documentation"
 msgstr "ドキュメント"
@@ -834,7 +839,7 @@ msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be
 msgstr "<0>ansible-galaxy</0> クライアントの設定方法に関するドキュメントは、「<1>こちら</1>」を参照してください。以下のパラメーターを使用してクライアントを設定します。"
 
 #: src/components/my-imports/import-console.tsx:103
-#: src/containers/task-management/task_detail.tsx:305
+#: src/containers/task-management/task_detail.tsx:311
 msgid "Done"
 msgstr "完了"
 
@@ -870,9 +875,9 @@ msgstr "ドロップダウン"
 #: src/components/repositories/remote-repository-table.tsx:148
 #: src/containers/edit-namespace/edit-namespace.tsx:148
 #: src/containers/execution-environment/registry-list.tsx:379
-#: src/containers/execution-environment-detail/base.tsx:150
+#: src/containers/execution-environment-detail/base.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:92
-#: src/containers/execution-environment-list/execution_environment_list.tsx:357
+#: src/containers/execution-environment-list/execution_environment_list.tsx:363
 #: src/containers/group-management/group-detail.tsx:336
 #: src/containers/settings/user-profile.tsx:102
 #: src/containers/user-management/user-detail.tsx:120
@@ -987,7 +992,7 @@ msgstr ""
 msgid "Error loading dependent collections."
 msgstr "依存するコレクションのロード中にエラーが発生しました。"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:501
+#: src/containers/execution-environment-list/execution_environment_list.tsx:508
 msgid "Error loading environments."
 msgstr ""
 
@@ -1004,11 +1009,11 @@ msgstr "グループの読み込みエラー。"
 msgid "Error loading groups."
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:115
+#: src/containers/namespace-list/namespace-list.tsx:125
 msgid "Error loading my namespaces."
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:329
+#: src/containers/namespace-list/namespace-list.tsx:362
 msgid "Error loading namespaces."
 msgstr ""
 
@@ -1024,7 +1029,7 @@ msgstr ""
 msgid "Error loading tags"
 msgstr "タグの読み込みエラー。"
 
-#: src/containers/task-management/task-list-view.tsx:408
+#: src/containers/task-management/task-list-view.tsx:416
 msgid "Error loading tasks."
 msgstr ""
 
@@ -1041,7 +1046,7 @@ msgstr ""
 msgid "Error loading users."
 msgstr "ユーザーの読み込みエラー。"
 
-#: src/containers/task-management/task_detail.tsx:331
+#: src/containers/task-management/task_detail.tsx:337
 msgid "Error message"
 msgstr "エラーメッセージ"
 
@@ -1053,8 +1058,8 @@ msgstr "エラーメッセージ:"
 msgid "Error removing user from a group."
 msgstr "グループからユーザーの削除中のエラー。"
 
-#: src/containers/task-management/task-list-view.tsx:378
-#: src/containers/task-management/task_detail.tsx:394
+#: src/containers/task-management/task-list-view.tsx:386
+#: src/containers/task-management/task_detail.tsx:400
 msgid "Error stopping task."
 msgstr "タスクの停止エラー。"
 
@@ -1068,7 +1073,7 @@ msgstr "ユーザーの更新中のエラー。"
 #~ msgstr "エラー: 変更が保存されませんでした"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:610
-#: src/containers/execution-environment-list/execution_environment_list.tsx:536
+#: src/containers/execution-environment-list/execution_environment_list.tsx:543
 msgid "Error: delete failed"
 msgstr "エラー: 削除に失敗しました"
 
@@ -1084,11 +1089,11 @@ msgstr "実行環境"
 msgid "Execution Environments"
 msgstr "実行環境"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:459
+#: src/containers/execution-environment-list/execution_environment_list.tsx:466
 msgid "Execution environment added."
 msgstr ""
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:460
+#: src/containers/execution-environment-list/execution_environment_list.tsx:467
 msgid "Execution environment saved."
 msgstr ""
 
@@ -1099,12 +1104,12 @@ msgstr "有効期限"
 #: src/components/my-imports/import-console.tsx:110
 #: src/components/my-imports/import-list.tsx:91
 #: src/components/status/status-indicator.tsx:75
-#: src/constants.tsx:316
-#: src/containers/task-management/task-list-view.tsx:158
+#: src/constants.tsx:380
+#: src/containers/task-management/task-list-view.tsx:160
 msgid "Failed"
 msgstr "失敗"
 
-#: src/containers/execution-environment/registry-list.tsx:467
+#: src/containers/execution-environment/registry-list.tsx:470
 msgid "Failed to delete remote registry {name}"
 msgstr "リモートレジストリー {name} を削除できませんでした。"
 
@@ -1120,7 +1125,7 @@ msgstr "\"{tag}\" の {operation} に失敗しました"
 msgid "Filter by name"
 msgstr "名前別にフィルター"
 
-#: src/components/repo-selector/repo-selector.tsx:53
+#: src/components/repo-selector/repo-selector.tsx:56
 msgid "Filter by repository"
 msgstr "リポジトリー別にフィルター"
 
@@ -1134,7 +1139,7 @@ msgstr "{0} 別にフィルター"
 msgid "Find a group"
 msgstr "グループの検索"
 
-#: src/components/collection-detail/collection-content-list.tsx:72
+#: src/components/collection-detail/collection-content-list.tsx:81
 #: src/components/collection-detail/table-of-contents.tsx:100
 msgid "Find content"
 msgstr "コンテンツの検索"
@@ -1143,8 +1148,8 @@ msgstr "コンテンツの検索"
 msgid "Find execution environments in this registry"
 msgstr "このレジストリーでの実行環境の検索"
 
-#: src/containers/task-management/task-list-view.tsx:240
-#: src/containers/task-management/task_detail.tsx:168
+#: src/containers/task-management/task-list-view.tsx:242
+#: src/containers/task-management/task_detail.tsx:170
 msgid "Finished at"
 msgstr "終了日時"
 
@@ -1187,7 +1192,7 @@ msgstr "グループリスト"
 
 #: src/components/user-form/user-form.tsx:147
 #: src/components/user-form/user-form.tsx:161
-#: src/constants.tsx:54
+#: src/constants.tsx:55
 #: src/containers/group-management/group-detail.tsx:209
 #: src/containers/group-management/group-list.tsx:132
 #: src/containers/user-management/user-list.tsx:282
@@ -1237,12 +1242,12 @@ msgstr "イメージ"
 msgid "Images will appear once uploaded"
 msgstr "アップロード後にイメージが表示されます"
 
-#: src/constants.tsx:280
-#: src/constants.tsx:283
+#: src/constants.tsx:282
+#: src/constants.tsx:291
 msgid "Import and auto approve"
 msgstr "インポートと自動承認"
 
-#: src/constants.tsx:282
+#: src/constants.tsx:288
 msgid "Import and move to staging"
 msgstr "インポートしてステージングに移動"
 
@@ -1259,7 +1264,7 @@ msgstr "インポート"
 msgid "Index execution environments"
 msgstr "実行環境のインデックス作成"
 
-#: src/containers/execution-environment/registry-list.tsx:501
+#: src/containers/execution-environment/registry-list.tsx:504
 msgid "Indexing execution environments in {name}"
 msgstr "{name} で実行環境のインデックスを作成する"
 
@@ -1267,7 +1272,7 @@ msgstr "{name} で実行環境のインデックスを作成する"
 msgid "Indexing execution environments is only supported on registry.redhat.io"
 msgstr "実行環境は registry.redhat.io でのみサポートされます。"
 
-#: src/containers/execution-environment/registry-list.tsx:514
+#: src/containers/execution-environment/registry-list.tsx:517
 msgid "Indexing failed for {name}"
 msgstr "{name} のインデックス作成に失敗しました"
 
@@ -1384,7 +1389,7 @@ msgstr "コレクションの一覧"
 msgid "Load token"
 msgstr "トークンの読み込み"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:413
+#: src/containers/execution-environment-list/execution_environment_list.tsx:420
 #: src/containers/repositories/repository-list.tsx:114
 msgid "Local"
 msgstr "ローカル"
@@ -1419,11 +1424,11 @@ msgstr "トークンの管理"
 msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 msgstr "マニフェストリストはこの画面ではサポートされていません。<0>Images</0> タブを使用してマニフェスト一覧の詳細を確認してください。"
 
-#: src/containers/task-management/task_detail.tsx:302
+#: src/containers/task-management/task_detail.tsx:308
 msgid "Message"
 msgstr "メッセージ"
 
-#: src/constants.tsx:160
+#: src/constants.tsx:161
 msgid "Modify Ansible repo content"
 msgstr "Ansible リポジトリーコンテンツの変更"
 
@@ -1445,7 +1450,7 @@ msgstr "自分の名前空間"
 msgid "My profile"
 msgstr "自分のプロファイル"
 
-#: src/components/collection-detail/collection-content-list.tsx:99
+#: src/components/collection-detail/collection-content-list.tsx:108
 #: src/components/execution-environment/repository-form.tsx:168
 #: src/components/execution-environment/repository-form.tsx:196
 #: src/components/group-management/group-modal.tsx:72
@@ -1457,8 +1462,8 @@ msgstr "自分のプロファイル"
 #: src/containers/execution-environment/registry-list.tsx:259
 #: src/containers/execution-environment/registry-list.tsx:287
 #: src/containers/execution-environment/registry-list.tsx:318
-#: src/containers/namespace-list/namespace-list.tsx:204
-#: src/containers/task-management/task_detail.tsx:261
+#: src/containers/namespace-list/namespace-list.tsx:225
+#: src/containers/task-management/task_detail.tsx:267
 msgid "Name"
 msgstr "名前"
 
@@ -1498,7 +1503,7 @@ msgstr ""
 msgid "Namespaces"
 msgstr "名前空間"
 
-#: src/containers/namespace-list/namespace-list.tsx:249
+#: src/containers/namespace-list/namespace-list.tsx:282
 msgid "Namespaces will appear once created"
 msgstr "名前空間は作成後に表示されます"
 
@@ -1532,7 +1537,7 @@ msgstr "README なし"
 msgid "No activities yet"
 msgstr "まだアクティビティーはありません"
 
-#: src/containers/task-management/task_detail.tsx:235
+#: src/containers/task-management/task_detail.tsx:241
 msgid "No child task"
 msgstr "子タスクなし"
 
@@ -1575,11 +1580,11 @@ msgstr "まだローカルリポジトリーはありません"
 msgid "No managed collections yet"
 msgstr "まだ管理コレクションはありません"
 
-#: src/containers/namespace-list/namespace-list.tsx:247
+#: src/containers/namespace-list/namespace-list.tsx:280
 msgid "No namespaces yet"
 msgstr "まだ名前空間はまだありません"
 
-#: src/containers/task-management/task_detail.tsx:208
+#: src/containers/task-management/task_detail.tsx:211
 msgid "No parent task"
 msgstr "親タスクなし"
 
@@ -1607,7 +1612,7 @@ msgstr "絞り込みの基準と一致する結果がありません。フィル
 msgid "No tag or digest selected."
 msgstr "タグまたはダイジェストが選択されていません。"
 
-#: src/containers/task-management/task_detail.tsx:192
+#: src/containers/task-management/task_detail.tsx:194
 msgid "No task group"
 msgstr "タスクグループなし"
 
@@ -1615,7 +1620,7 @@ msgstr "タスクグループなし"
 msgid "No task messages available"
 msgstr "利用可能なタスクメッセージはありません"
 
-#: src/containers/task-management/task-list-view.tsx:118
+#: src/containers/task-management/task-list-view.tsx:120
 msgid "No tasks yet"
 msgstr "まだタスクはありません"
 
@@ -1634,7 +1639,7 @@ msgstr "スーパーユーザーではありません"
 
 #: src/components/permissions/permission-chip-selector.tsx:66
 #: src/components/typeahead/typeahead.tsx:86
-#: src/containers/collection-detail/collection-docs.tsx:264
+#: src/containers/collection-detail/collection-docs.tsx:270
 msgid "Not found"
 msgstr "見つかりません"
 
@@ -1670,7 +1675,7 @@ msgstr "オフライントークン"
 #~ msgid "Page logo"
 #~ msgstr "ページロゴ"
 
-#: src/containers/task-management/task_detail.tsx:196
+#: src/containers/task-management/task_detail.tsx:198
 msgid "Parent task"
 msgstr "親タスク"
 
@@ -1757,7 +1762,7 @@ msgstr "プレビュー"
 msgid "Profile saved."
 msgstr "プロファイルが保存されました。"
 
-#: src/containers/task-management/task_detail.tsx:285
+#: src/containers/task-management/task_detail.tsx:291
 msgid "Progress messages"
 msgstr "進捗メッセージ"
 
@@ -1778,17 +1783,17 @@ msgstr "プロキシーパスワード"
 msgid "Proxy username"
 msgstr "プロキシーユーザー名"
 
-#: src/constants.tsx:249
+#: src/constants.tsx:250
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:162
 msgid "Published"
 msgstr "公開"
 
-#: src/constants.tsx:219
+#: src/constants.tsx:220
 msgid "Pull distribution"
 msgstr "ディストリビューションのプル"
 
-#: src/constants.tsx:174
-#: src/constants.tsx:205
+#: src/constants.tsx:175
+#: src/constants.tsx:206
 msgid "Pull private containers"
 msgstr "プライベートコンテナーのプル"
 
@@ -1800,107 +1805,107 @@ msgstr "このイメージのプル"
 msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible バージョン"
 
-#: src/constants.tsx:286
+#: src/constants.tsx:299
 msgid "Pulp Ansible: Collections sync"
 msgstr "Pulp Ansible: コレクションの同期"
 
-#: src/constants.tsx:289
+#: src/constants.tsx:308
 msgid "Pulp Ansible: Roles synchronize"
 msgstr "Pulp Ansible: ロールの同期"
 
-#: src/constants.tsx:287
+#: src/constants.tsx:302
 msgid "Pulp ansible: Copy content"
 msgstr "Pulp ansible: コンテンツのコピー"
 
-#: src/constants.tsx:291
+#: src/constants.tsx:313
 msgid "Pulp ansible: Import collection"
 msgstr "Pulp ansible: コレクションのインポート"
 
-#: src/constants.tsx:290
+#: src/constants.tsx:312
 msgid "Pulp ansible: Update collection remote"
 msgstr "Pulp ansible: コレクションリモートの更新"
 
-#: src/constants.tsx:288
+#: src/constants.tsx:305
 msgid "Pulp ansible: collection sync"
 msgstr "Pulp ansible: コレクションの同期"
 
-#: src/constants.tsx:297
+#: src/constants.tsx:331
 msgid "Pulp container: Build image from containerfile"
 msgstr "Pulp コンテナー: コンテナーファイルからのイメージの構築"
 
-#: src/constants.tsx:298
+#: src/constants.tsx:334
 msgid "Pulp container: General multi delete"
 msgstr "Pulp コンテナー: 複数削除 (一般)"
 
-#: src/constants.tsx:295
+#: src/constants.tsx:325
 msgid "Pulp container: Recursive add content"
 msgstr "Pulp コンテナー: コンテンツの再追加"
 
-#: src/constants.tsx:296
+#: src/constants.tsx:328
 msgid "Pulp container: Recursive remove content"
 msgstr "Pulp コンテナー: コンテンツの再帰削除"
 
-#: src/constants.tsx:292
+#: src/constants.tsx:316
 msgid "Pulp container: Tag image"
 msgstr "Pulp コンテナー: イメージのタグ付け"
 
-#: src/constants.tsx:294
+#: src/constants.tsx:322
 msgid "Pulp container: Tasks synchronize"
 msgstr "Pulp コンテナー: タスクの同期"
 
-#: src/constants.tsx:293
+#: src/constants.tsx:319
 msgid "Pulp container: Untage image"
 msgstr "Pulp コンテナー: イメージのタグ付け解除"
 
-#: src/constants.tsx:310
+#: src/constants.tsx:370
 msgid "Pulpcore: Add and remove"
 msgstr "Pulpcore: 追加および削除"
 
-#: src/constants.tsx:311
+#: src/constants.tsx:373
 msgid "Pulpcore: Add or remove"
 msgstr "Pulpcore: 追加または削除"
 
-#: src/constants.tsx:307
+#: src/constants.tsx:361
 msgid "Pulpcore: Delete version"
 msgstr "Pulpcore: バージョンの削除"
 
-#: src/constants.tsx:302
+#: src/constants.tsx:346
 msgid "Pulpcore: General create"
 msgstr "Pulpcore: 作成 (一般)"
 
-#: src/constants.tsx:304
+#: src/constants.tsx:352
 msgid "Pulpcore: General delete"
 msgstr "Pulpcore: 削除 (一般)"
 
-#: src/constants.tsx:303
+#: src/constants.tsx:349
 msgid "Pulpcore: General update"
 msgstr "Pulpcore: 更新 (一般)"
 
-#: src/constants.tsx:299
+#: src/constants.tsx:337
 msgid "Pulpcore: Import repository version"
 msgstr "Pulpcore: リポジトリーバージョンのインポート"
 
-#: src/constants.tsx:300
+#: src/constants.tsx:340
 msgid "Pulpcore: Orphan cleanup"
 msgstr "Pulpcore: 孤立している項目の消去"
 
-#: src/constants.tsx:305
+#: src/constants.tsx:355
 msgid "Pulpcore: Pulp export"
 msgstr "Pulpcore: Pulp エクスポート"
 
-#: src/constants.tsx:306
+#: src/constants.tsx:358
 msgid "Pulpcore: Pulp import"
 msgstr "Pulpcore: Pulp インポート"
 
-#: src/constants.tsx:301
+#: src/constants.tsx:343
 msgid "Pulpcore: Repair all artifacts"
 msgstr "Pulpcore: すべてのアーティファクトの修正"
 
-#: src/constants.tsx:308
+#: src/constants.tsx:364
 msgid "Pulpcore: Repair version"
 msgstr "Pulpcore: バージョンの修復"
 
-#: src/constants.tsx:309
+#: src/constants.tsx:367
 msgid "Pulpcore: Upload commit"
 msgstr "Pulpcore: コミットのアップロード"
 
@@ -1908,19 +1913,19 @@ msgstr "Pulpcore: コミットのアップロード"
 msgid "Push container images"
 msgstr "コンテナーイメージのプッシュ"
 
-#: src/constants.tsx:218
+#: src/constants.tsx:219
 msgid "Push distribution"
 msgstr "ディストリビューションのプッシュ"
 
-#: src/constants.tsx:210
+#: src/constants.tsx:211
 msgid "Push images to existing containers"
 msgstr "既存コンテナーへのイメージのプッシュ"
 
-#: src/constants.tsx:215
+#: src/constants.tsx:216
 msgid "Push new containers"
 msgstr "新規コンテナーのプッシュ"
 
-#: src/constants.tsx:175
+#: src/constants.tsx:176
 msgid "Push to existing containers"
 msgstr "既存コンテナーへのプッシュ"
 
@@ -1940,7 +1945,7 @@ msgstr "Readme"
 msgid "Reason: task {0}"
 msgstr "理由: タスク {0}"
 
-#: src/constants.tsx:250
+#: src/constants.tsx:251
 msgid "Red Hat Certified"
 msgstr "Red Hat 認定"
 
@@ -1966,12 +1971,12 @@ msgstr "拒否"
 msgid "Rejected"
 msgstr "拒否"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:413
+#: src/containers/execution-environment-list/execution_environment_list.tsx:420
 #: src/containers/repositories/repository-list.tsx:115
 msgid "Remote"
 msgstr "リモート"
 
-#: src/constants.tsx:95
+#: src/constants.tsx:96
 #: src/containers/execution-environment/registry-list.tsx:226
 #: src/loaders/standalone/standalone-loader.tsx:372
 msgid "Remote Registries"
@@ -1993,7 +1998,7 @@ msgstr "リモートリポジトリーは追加されると表示されます"
 msgid "Remove"
 msgstr "削除"
 
-#: src/constants.tsx:279
+#: src/constants.tsx:281
 msgid "Remove content from repository"
 msgstr "リポジトリーからのコンテンツ削除"
 
@@ -2033,7 +2038,7 @@ msgstr "Ansible が必要です"
 msgid "Requires super user permissions to edit."
 msgstr "編集にはスーパーユーザー権限が必要です。"
 
-#: src/containers/task-management/task_detail.tsx:244
+#: src/containers/task-management/task_detail.tsx:250
 msgid "Reserve resources"
 msgstr "リソースの予約"
 
@@ -2043,8 +2048,8 @@ msgstr "リソース"
 
 #: src/components/my-imports/import-list.tsx:95
 #: src/components/status/status-indicator.tsx:61
-#: src/constants.tsx:317
-#: src/containers/task-management/task-list-view.tsx:162
+#: src/constants.tsx:381
+#: src/containers/task-management/task-list-view.tsx:164
 msgid "Running"
 msgstr "実行中"
 
@@ -2073,12 +2078,12 @@ msgstr "最後までスクロール"
 #~ msgstr "すべての {0} の検索"
 
 #: src/containers/namespace-list/namespace-list.tsx:163
-msgid "Search all {titleLowerCase}"
-msgstr "すべての {titleLowerCase} の検索"
+#~ msgid "Search all {titleLowerCase}"
+#~ msgstr "すべての {titleLowerCase} の検索"
 
 #: src/containers/namespace-list/namespace-list.tsx:162
-msgid "Search my namespaces"
-msgstr "名前空間の検索"
+#~ msgid "Search my namespaces"
+#~ msgstr "名前空間の検索"
 
 #: src/components/execution-environment/repository-form.tsx:250
 msgid "Select a registry"
@@ -2137,7 +2142,7 @@ msgstr "設定"
 msgid "Show advanced options"
 msgstr "詳細オプションの表示"
 
-#: src/components/collection-detail/collection-content-list.tsx:77
+#: src/components/collection-detail/collection-content-list.tsx:86
 msgid "Showing:"
 msgstr "表示:"
 
@@ -2153,11 +2158,11 @@ msgstr "サイズ"
 #~ msgid "Sort results"
 #~ msgstr "結果のソート"
 
-#: src/containers/task-management/task-list-view.tsx:235
+#: src/containers/task-management/task-list-view.tsx:237
 msgid "Started at"
 msgstr "開始日時"
 
-#: src/containers/task-management/task_detail.tsx:304
+#: src/containers/task-management/task_detail.tsx:310
 msgid "State"
 msgstr "状態"
 
@@ -2166,9 +2171,9 @@ msgstr "状態"
 #: src/containers/certification-dashboard/certification-dashboard.tsx:154
 #: src/containers/certification-dashboard/certification-dashboard.tsx:202
 #: src/containers/certification-dashboard/certification-dashboard.tsx:262
-#: src/containers/task-management/task-list-view.tsx:149
-#: src/containers/task-management/task-list-view.tsx:195
-#: src/containers/task-management/task-list-view.tsx:245
+#: src/containers/task-management/task-list-view.tsx:151
+#: src/containers/task-management/task-list-view.tsx:197
+#: src/containers/task-management/task-list-view.tsx:247
 msgid "Status"
 msgstr "ステータス"
 
@@ -2176,14 +2181,14 @@ msgstr "ステータス"
 msgid "Status:"
 msgstr "ステータス:"
 
-#: src/containers/task-management/task-list-view.tsx:312
-#: src/containers/task-management/task-list-view.tsx:328
-#: src/containers/task-management/task_detail.tsx:132
-#: src/containers/task-management/task_detail.tsx:358
+#: src/containers/task-management/task-list-view.tsx:320
+#: src/containers/task-management/task-list-view.tsx:336
+#: src/containers/task-management/task_detail.tsx:134
+#: src/containers/task-management/task_detail.tsx:364
 msgid "Stop task"
 msgstr "タスクの停止"
 
-#: src/containers/task-management/task-list-view.tsx:341
+#: src/containers/task-management/task-list-view.tsx:349
 msgid "Stop task?"
 msgstr "タスクを停止しますか？"
 
@@ -2191,7 +2196,7 @@ msgstr "タスクを停止しますか？"
 msgid "Success: {digest} was deleted"
 msgstr "成功: {digest} が削除されました"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:522
+#: src/containers/execution-environment-list/execution_environment_list.tsx:529
 msgid "Success: {name} was deleted"
 msgstr "成功: {name} が削除されました"
 
@@ -2217,7 +2222,7 @@ msgstr "グループが正常に削除されました。"
 msgid "Successfully deleted namespace."
 msgstr "名前空間が正常に削除されました。"
 
-#: src/containers/execution-environment/registry-list.tsx:462
+#: src/containers/execution-environment/registry-list.tsx:465
 msgid "Successfully deleted remote registry {name}"
 msgstr "リモートレジストリー {name} が正常に削除されました"
 
@@ -2229,8 +2234,8 @@ msgstr "ユーザーが正常に削除されました。"
 msgid "Successfully removed a user from a group."
 msgstr "グループからユーザーを正常に削除しました。"
 
-#: src/containers/task-management/task-list-view.tsx:363
-#: src/containers/task-management/task_detail.tsx:379
+#: src/containers/task-management/task-list-view.tsx:371
+#: src/containers/task-management/task_detail.tsx:385
 msgid "Successfully stopped task."
 msgstr "タスクを正常に停止しました。"
 
@@ -2253,21 +2258,21 @@ msgstr "スーパーユーザーには、所属するグループに関係なく
 msgid "Sync"
 msgstr "同期"
 
-#: src/containers/execution-environment/registry-list.tsx:493
-#: src/containers/execution-environment-detail/base.tsx:289
-#: src/containers/execution-environment-list/execution_environment_list.tsx:582
+#: src/containers/execution-environment/registry-list.tsx:496
+#: src/containers/execution-environment-detail/base.tsx:293
+#: src/containers/execution-environment-list/execution_environment_list.tsx:589
 msgid "Sync failed for {name}"
 msgstr "{name} の同期に失敗しました"
 
 #: src/containers/execution-environment/registry-list.tsx:428
 #: src/containers/execution-environment-detail/base.tsx:109
-#: src/containers/execution-environment-list/execution_environment_list.tsx:361
+#: src/containers/execution-environment-list/execution_environment_list.tsx:368
 msgid "Sync from registry"
 msgstr "レジストリーからの同期"
 
-#: src/containers/execution-environment/registry-list.tsx:479
-#: src/containers/execution-environment-detail/base.tsx:275
-#: src/containers/execution-environment-list/execution_environment_list.tsx:569
+#: src/containers/execution-environment/registry-list.tsx:482
+#: src/containers/execution-environment-detail/base.tsx:279
+#: src/containers/execution-environment-list/execution_environment_list.tsx:576
 msgid "Sync initiated for {name}"
 msgstr "{name}の同期開始"
 
@@ -2286,36 +2291,36 @@ msgstr "TLS 検証"
 msgid "Tag"
 msgstr "タグ"
 
-#: src/constants.tsx:104
-#: src/containers/task-management/task-list-view.tsx:113
+#: src/constants.tsx:105
+#: src/containers/task-management/task-list-view.tsx:115
 #: src/loaders/standalone/standalone-loader.tsx:377
 msgid "Task Management"
 msgstr "タスク管理"
 
-#: src/containers/task-management/task_detail.tsx:149
+#: src/containers/task-management/task_detail.tsx:151
 msgid "Task detail"
 msgstr "タスクの詳細"
 
-#: src/containers/task-management/task_detail.tsx:190
+#: src/containers/task-management/task_detail.tsx:192
 msgid "Task group"
 msgstr "タスクグループ"
 
-#: src/containers/task-management/task_detail.tsx:185
+#: src/containers/task-management/task_detail.tsx:187
 msgid "Task groups"
 msgstr "タスクグループ"
 
-#: src/containers/task-management/task-list-view.tsx:253
+#: src/containers/task-management/task-list-view.tsx:255
 msgid "Task list"
 msgstr "タスク一覧"
 
-#: src/containers/task-management/task_detail.tsx:103
+#: src/containers/task-management/task_detail.tsx:105
 msgid "Task management"
 msgstr "タスク管理"
 
-#: src/containers/task-management/task-list-view.tsx:145
-#: src/containers/task-management/task-list-view.tsx:194
-#: src/containers/task-management/task-list-view.tsx:225
-#: src/containers/task-management/task_detail.tsx:154
+#: src/containers/task-management/task-list-view.tsx:147
+#: src/containers/task-management/task-list-view.tsx:196
+#: src/containers/task-management/task-list-view.tsx:227
+#: src/containers/task-management/task_detail.tsx:156
 msgid "Task name"
 msgstr "タスク名"
 
@@ -2323,7 +2328,7 @@ msgstr "タスク名"
 msgid "Task to change tag \"{0}\" could not be completed."
 msgstr "タグ \"{0}\" の変更タスクを完了できませんでした。"
 
-#: src/containers/task-management/task-list-view.tsx:119
+#: src/containers/task-management/task-list-view.tsx:121
 msgid "Tasks will appear once created."
 msgstr "タスクは、作成後に表示されます。"
 
@@ -2347,7 +2352,7 @@ msgstr "選択したコレクションは、この名前空間と一致しませ
 msgid "The collection you have selected doesn't appear to match {0}"
 msgstr "選択したコレクションは、{0} と一致しないようです。"
 
-#: src/containers/collection-detail/collection-docs.tsx:265
+#: src/containers/collection-detail/collection-docs.tsx:271
 msgid "The file is not available for this version of {collectionName}"
 msgstr "このファイルは、このバージョンの {collectionName} では使用できません。"
 
@@ -2379,12 +2384,12 @@ msgstr "このリモートに関連付けられているリポジトリーはあ
 msgid "There have not been any imports on this namespace."
 msgstr "この名前空間へのインポートはありません。"
 
-#: src/containers/task-management/task_detail.tsx:322
-#: src/containers/task-management/task_detail.tsx:323
+#: src/containers/task-management/task_detail.tsx:328
+#: src/containers/task-management/task_detail.tsx:329
 msgid "There is no progress message."
 msgstr "進捗メッセージはありません。"
 
-#: src/containers/task-management/task_detail.tsx:272
+#: src/containers/task-management/task_detail.tsx:278
 msgid "There's no resource record"
 msgstr "リソースレコードがありません"
 
@@ -2392,7 +2397,7 @@ msgstr "リソースレコードがありません"
 msgid "These users will lose access to the group content:"
 msgstr "以下のユーザーは、グループコンテンツにアクセスできなくなります:"
 
-#: src/containers/namespace-list/namespace-list.tsx:250
+#: src/containers/namespace-list/namespace-list.tsx:283
 msgid "This account is not set up to manage any namespaces"
 msgstr "このアカウントは、名前空間の管理設定がされていません"
 
@@ -2440,7 +2445,7 @@ msgstr "タスク管理"
 msgid "Total number of simultaneous connections."
 msgstr "同時接続の合計数。"
 
-#: src/containers/task-management/task_detail.tsx:337
+#: src/containers/task-management/task_detail.tsx:343
 msgid "Traceback"
 msgstr "トレースバック"
 
@@ -2448,8 +2453,8 @@ msgstr "トレースバック"
 msgid "Training <0/>"
 msgstr "トレーニング <0/>"
 
-#: src/components/collection-detail/collection-content-list.tsx:100
-#: src/containers/task-management/task_detail.tsx:254
+#: src/components/collection-detail/collection-content-list.tsx:109
+#: src/containers/task-management/task_detail.tsx:260
 msgid "Type"
 msgstr "タイプ"
 
@@ -2465,7 +2470,7 @@ msgstr "URL: {0}"
 msgid "Undeprecate"
 msgstr "Undeprecate"
 
-#: src/constants.tsx:206
+#: src/constants.tsx:207
 msgid "Update container information"
 msgstr "コンテナー情報の更新"
 
@@ -2486,8 +2491,8 @@ msgstr "コレクションのアップロード"
 msgid "Upload new version"
 msgstr "新規バージョンのアップロード"
 
-#: src/constants.tsx:195
-#: src/constants.tsx:203
+#: src/constants.tsx:196
+#: src/constants.tsx:204
 msgid "Upload to namespace"
 msgstr "名前空間へのアップロード"
 
@@ -2498,7 +2503,7 @@ msgstr "アップストリーム名"
 #: src/components/execution-environment/publish-to-controller-modal.tsx:276
 #: src/containers/execution-environment-detail/base.tsx:122
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:402
-#: src/containers/execution-environment-list/execution_environment_list.tsx:374
+#: src/containers/execution-environment-list/execution_environment_list.tsx:381
 msgid "Use in Controller"
 msgstr "コントローラーでの使用"
 
@@ -2575,7 +2580,7 @@ msgstr "ユーザー名"
 msgid "Username: {0}"
 msgstr "ユーザー名: {0}"
 
-#: src/constants.tsx:44
+#: src/constants.tsx:45
 #: src/containers/group-management/group-detail.tsx:168
 #: src/containers/user-management/user-create.tsx:49
 #: src/containers/user-management/user-detail.tsx:81
@@ -2602,7 +2607,7 @@ msgstr "バージョン"
 msgid "Version:"
 msgstr "バージョン:"
 
-#: src/constants.tsx:161
+#: src/constants.tsx:162
 msgid "View Ansible distribution"
 msgstr "Ansible ディストリビューションの表示"
 
@@ -2610,11 +2615,11 @@ msgstr "Ansible ディストリビューションの表示"
 msgid "View Import Logs"
 msgstr "インポートログの表示"
 
-#: src/constants.tsx:179
+#: src/constants.tsx:180
 msgid "View all tasks"
 msgstr ""
 
-#: src/constants.tsx:162
+#: src/constants.tsx:163
 msgid "View collection remote"
 msgstr "コレクションリモートの表示"
 
@@ -2622,19 +2627,19 @@ msgstr "コレクションリモートの表示"
 msgid "View collections"
 msgstr "コレクションの表示"
 
-#: src/constants.tsx:211
+#: src/constants.tsx:212
 msgid "View container's namespace"
 msgstr "コンテナーの名前空間の表示"
 
-#: src/constants.tsx:214
+#: src/constants.tsx:215
 msgid "View container's repository"
 msgstr "コンテナーのリポジトリーの表示"
 
-#: src/constants.tsx:220
+#: src/constants.tsx:221
 msgid "View distribution"
 msgstr "ディストリビューションの表示"
 
-#: src/constants.tsx:196
+#: src/constants.tsx:197
 msgid "View group"
 msgstr "グループの表示"
 
@@ -2642,35 +2647,40 @@ msgstr "グループの表示"
 msgid "View more"
 msgstr "詳細表示"
 
-#: src/constants.tsx:176
-#: src/constants.tsx:207
+#: src/constants.tsx:177
+#: src/constants.tsx:208
 msgid "View private containers"
 msgstr "プライベートコンテナーの表示"
 
-#: src/constants.tsx:197
+#: src/constants.tsx:198
 msgid "View synclist"
 msgstr "同期リストの表示"
 
-#: src/containers/execution-environment/registry-list.tsx:482
-#: src/containers/execution-environment/registry-list.tsx:504
-#: src/containers/execution-environment-detail/base.tsx:278
-#: src/containers/execution-environment-list/execution_environment_list.tsx:572
+#: src/containers/execution-environment/registry-list.tsx:485
+#: src/containers/execution-environment/registry-list.tsx:507
+#: src/containers/execution-environment-detail/base.tsx:282
+#: src/containers/execution-environment-list/execution_environment_list.tsx:579
 msgid "View the task <0>here</0>."
 msgstr "タスクを <0>こちら</0> に表示します。"
 
-#: src/constants.tsx:198
+#: src/constants.tsx:199
 msgid "View user"
 msgstr "ユーザーの表示"
 
 #: src/components/my-imports/import-list.tsx:99
-#: src/constants.tsx:318
-#: src/containers/task-management/task-list-view.tsx:166
+#: src/constants.tsx:382
+#: src/containers/task-management/task-list-view.tsx:168
 msgid "Waiting"
 msgstr "待機中"
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:223
 msgid "Waiting for {pendingTasks} task(s) to finish."
 msgstr "{pendingTasks} タスクが完了するまで待機します。"
+
+#: src/components/collection-detail/collection-content-list.tsx:149
+#: src/containers/collection-detail/collection-docs.tsx:280
+msgid "Warning"
+msgstr ""
 
 #: src/containers/not-found/not-found.tsx:22
 msgid "We couldn't find the page you're looking for!"
@@ -2689,8 +2699,8 @@ msgstr "YAML 要件"
 msgid "Yes"
 msgstr "はい"
 
-#: src/containers/task-management/task-list-view.tsx:344
-#: src/containers/task-management/task_detail.tsx:360
+#: src/containers/task-management/task-list-view.tsx:352
+#: src/containers/task-management/task_detail.tsx:366
 msgid "Yes, stop"
 msgstr "はい、停止する"
 
@@ -2738,7 +2748,7 @@ msgstr "承認"
 msgid "could not be determined yet"
 msgstr "まだ判断できません。"
 
-#: src/components/collection-detail/collection-content-list.tsx:71
+#: src/components/collection-detail/collection-content-list.tsx:80
 #: src/components/collection-detail/table-of-contents.tsx:99
 msgid "find-content"
 msgstr "コンテンツの検索"
@@ -2746,6 +2756,10 @@ msgstr "コンテンツの検索"
 #: src/components/patternfly-wrappers/write-only-field.tsx:27
 msgid "hidden value"
 msgstr "非表示の値"
+
+#: src/containers/namespace-list/namespace-list.tsx:211
+msgid "keywords"
+msgstr ""
 
 #: src/components/patternfly-wrappers/pagination.tsx:64
 #: src/components/patternfly-wrappers/pagination.tsx:68
@@ -2769,12 +2783,12 @@ msgid "released {0}"
 msgstr "{0} のリリース"
 
 #: src/components/patternfly-wrappers/toolbar.tsx:84
-msgid "search button"
-msgstr "検索ボタン"
+#~ msgid "search button"
+#~ msgstr "検索ボタン"
 
 #: src/components/patternfly-wrappers/toolbar.tsx:79
-msgid "search text input"
-msgstr "テキスト入力の検索"
+#~ msgid "search text input"
+#~ msgstr "テキスト入力の検索"
 
 #: src/components/my-imports/import-console.tsx:138
 msgid "waiting for approval"
@@ -2808,10 +2822,10 @@ msgstr "{company} ロゴ"
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# バイト} other {# バイト}}"
 
-#: src/containers/task-management/task-list-view.tsx:342
+#: src/containers/task-management/task-list-view.tsx:350
 msgid "{name} will be cancelled."
 msgstr "{name} はキャンセルされます。"
 
-#: src/containers/task-management/task_detail.tsx:359
+#: src/containers/task-management/task_detail.tsx:365
 msgid "{name} will stop running."
 msgstr "{name} は実行を停止します。"
