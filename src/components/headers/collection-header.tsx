@@ -576,7 +576,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         {
           id: 'loading-signing',
           variant: 'info',
-          title: t`Signing started for all versions in collection "${this.props.collection.name}&"`,
+          title: t`Signing started for all versions in collection "${this.props.collection.name}"`,
         },
       ],
       isOpenSignAllModal: false,
@@ -591,9 +591,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       .then((result) => {
         waitForTask(result.data.task_id)
           .then(() => {
-            // Cannot requery the api as it comes as prop
-            // We should get the collection into state from api probably
-            window.location.reload();
+            this.props.updateParams({});
           })
           .catch((error) => {
             this.setState({
