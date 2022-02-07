@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import {
   Alert,
@@ -19,6 +19,7 @@ import {
   AlertType,
   APISearchTypeAhead,
   ObjectPermissionField,
+  HelperText,
 } from 'src/components';
 import {
   ContainerDistributionAPI,
@@ -211,6 +212,16 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 fieldId='upstreamName'
                 label={t`Upstream name`}
                 isRequired={true}
+                labelIcon={
+                  <HelperText
+                    content={
+                      <Trans>
+                        Use the namespace/name format for namespaced containers,{' '}
+                        <b>library/</b>name otherwise.
+                      </Trans>
+                    }
+                  />
+                }
               >
                 <TextInput
                   id='upstreamName'
