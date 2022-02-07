@@ -407,7 +407,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         {
           id: 'loading-signing',
           variant: 'info',
-          title: t`Signing all collections...`,
+          title: t`Signing started for all collections in namespace "${namespace.name}".`,
         },
       ],
       isOpenSignModal: false,

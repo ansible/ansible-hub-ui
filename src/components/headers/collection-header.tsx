@@ -576,7 +576,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         {
           id: 'loading-signing',
           variant: 'info',
-          title: t`Signing all version in the collection...`,
+          title: t`Signing started for all versions in collection "${this.props.collection.name}&"`,
         },
       ],
       isOpenSignAllModal: false,
@@ -629,7 +629,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         {
           id: 'loading-signing',
           variant: 'info',
-          title: t`Signing the version...`,
+          title: t`Signing started for collection "${this.props.collection.name} v${this.props.collection.latest_version.version}".`,
         },
       ],
       isOpenSignModal: false,
