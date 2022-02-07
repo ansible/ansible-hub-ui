@@ -2,6 +2,7 @@
   "extends": "stylelint-config-standard-scss",
   "rules": {
     "declaration-colon-newline-after": null,
-    "scss/at-import-partial-extension": null
+    "scss/at-import-partial-extension": null,
+    "selector-class-pattern": null
   }
 }
