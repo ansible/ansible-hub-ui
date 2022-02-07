@@ -64,6 +64,7 @@
 .hub-tab-link-container {
   display: flex;
   margin-top: 10px;
+
   @media (max-width: $breakpoint-md) {
     flex-direction: column-reverse;
   }
@@ -81,6 +82,7 @@
     @media (min-width: $breakpoint-md) {
       justify-content: flex-end;
     }
+
     @media (max-width: $breakpoint-md) {
       margin-bottom: 10px;
     }

@@ -16,6 +16,7 @@
 .docs-container {
   padding-top: 24px;
   background-color: white;
+
   @media (min-width: $breakpoint-md) {
     display: flex;
   }
