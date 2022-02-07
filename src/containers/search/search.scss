@@ -20,6 +20,7 @@
   .collection-container {
     padding-top: 24px;
     flex-grow: 1;
+
     .cards {
       display: flex;
       flex-wrap: wrap;
@@ -44,6 +45,7 @@
 
       // Hack to hide the annoying line at the top of the data list.
       overflow: hidden;
+
       .data-list {
         margin-top: -17px;
         margin-bottom: -17px;

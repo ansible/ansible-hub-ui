@@ -1,10 +1,12 @@
 .hub-c-bullseye {
   min-height: calc(100vh - 230px);
+
   &__center {
     display: flex;
     align-items: center;
     flex-direction: column;
   }
+
   &__404 {
     font-size: 30pt;
   }
