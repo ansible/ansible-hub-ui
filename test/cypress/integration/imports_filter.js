@@ -51,10 +51,10 @@ describe('Imports filter test', () => {
       .contains('different_name')
       .should('not.exist');
     cy.get('[data-cy="import-list-data"]').contains('my_collection1');
+    cy.wait(10000);
   });
 
   it('Exact search for completed is working.', () => {
-    cy.wait(10000);
     cy.get('.import-list button:first').click();
     cy.contains('a', 'Status').click();
 
