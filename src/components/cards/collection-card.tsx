@@ -53,7 +53,7 @@ export class CollectionCard extends React.Component<IProps> {
         <CardHeader>
           <Grid hasGutter style={{ width: '100%' }}>
             <GridItem sm={12}>
-              <Split>
+              <Split hasGutter>
                 <SplitItem>
                   <Logo
                     alt={t`${company} logo`}
