@@ -575,7 +575,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         ...this.state.alerts,
         {
           id: 'loading-signing',
-          variant: 'info',
+          variant: 'success',
           title: t`Signing started for all versions in collection "${this.props.collection.name}"`,
         },
       ],
@@ -626,7 +626,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         ...this.state.alerts,
         {
           id: 'loading-signing',
-          variant: 'info',
+          variant: 'success',
           title: t`Signing started for collection "${this.props.collection.name} v${this.props.collection.latest_version.version}".`,
         },
       ],
