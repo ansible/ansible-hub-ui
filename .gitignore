@@ -28,3 +28,6 @@ test/cypress/videos/*
 test/cypress.env.json
 test/results
 test/cypress/fixtures/example.json
+
+# pycache files
+*pyc

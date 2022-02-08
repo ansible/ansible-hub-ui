@@ -1,0 +1,7 @@
+[tool.towncrier]
+package = "ansible-hub-ui"
+filename = "CHANGES.rst"
+directory = "CHANGES/"
+title_format = "{version} ({project_date})"
+template = "CHANGES/.TEMPLATE.rst"
+issue_format = "`AAH-{issue} <https://issues.redhat.com/browse/AAH-{issue}>`_"
