@@ -21,7 +21,7 @@ const DownloadSignatureGridItem: FC<Props> = ({ version }) => {
   const [show, setShow] = useState(false);
 
   // No signature object or the signatures is empty
-  if (!signingEnabled || version.metadata.signatures.length < 1) {
+  if (!signingEnabled || version.metadata.signatures?.length < 1) {
     return null;
   }
 

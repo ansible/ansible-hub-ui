@@ -161,7 +161,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const latestVersion = collection.latest_version.created_at;
     const isVersionSigned =
-      collection.latest_version.metadata.signatures.length > 0;
+      collection.latest_version.metadata.signatures?.length > 0;
     const isCollectionSigned = collection.sign_state === 'signed';
 
     const isLatestVersion = (v) =>
