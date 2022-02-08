@@ -85,7 +85,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
   render() {
     const { loading, collections, params, numberOfResults } = this.state;
     const noData =
-      collections.length === 0 && !filterIsSet(params, ['keywords', 'tags']);
+      collections.length === 0 &&
+      !filterIsSet(params, ['keywords', 'tags', 'sign_state']);
 
     const updateParams = (p) =>
       this.updateParams(p, () => this.queryCollections());
