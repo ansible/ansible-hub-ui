@@ -89,9 +89,6 @@ interface IProps extends RouteComponentProps {
   selectedRepo: string;
 }
 
-const hasNotSignedCollection = (collections: CollectionListType[]): boolean =>
-  collections.some((el) => el.sign_state !== 'signed');
-
 export class NamespaceDetail extends React.Component<IProps, IState> {
   nonAPIParams = ['tab'];
 
@@ -591,7 +588,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </Link>
         }
       />,
-      canSign(this.context) && hasNotSignedCollection(collections) && (
+      canSign(this.context) && (
         <DropdownItem
           key='sign-collections'
           onClick={() => this.setState({ isOpenSignModal: true })}

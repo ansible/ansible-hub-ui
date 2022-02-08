@@ -162,7 +162,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const latestVersion = collection.latest_version.created_at;
     const isVersionSigned =
       collection.latest_version.metadata.signatures?.length > 0;
-    const isCollectionSigned = collection.sign_state === 'signed';
 
     const isLatestVersion = (v) =>
       `${moment(v.created).fromNow()} ${
@@ -215,7 +214,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Delete version ${collection.latest_version.version}`}
         </DropdownItem>
       ),
-      canSign(this.context) && !isCollectionSigned && (
+      canSign(this.context) && (
         <DropdownItem
           key='sign-all'
           onClick={() => this.setState({ isOpenSignAllModal: true })}
@@ -223,7 +222,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {`Sign entire collection`}
         </DropdownItem>
       ),
-      canSign(this.context) && !isVersionSigned && (
+      canSign(this.context) && (
         <DropdownItem
           key='sign-version'
           onClick={() => this.setState({ isOpenSignModal: true })}
