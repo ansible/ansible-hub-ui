@@ -27,18 +27,19 @@
   margin-bottom: 10px;
 
   .link-name {
-    flex-grow: 1;
+    flex: 1;
   }
 
   .link-url {
-    flex-grow: 2;
+    flex: 2;
     margin-left: 20px;
   }
 
   .link-button {
     display: flex;
-    align-items: center;
+    align-items: top;
     margin-left: 10px;
+    margin-top: 8px;
 
     .link-container {
       width: 20px;

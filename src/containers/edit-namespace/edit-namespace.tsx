@@ -190,6 +190,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
               <Form>
                 <ActionGroup>
                   <Button
+                    isDisabled={this.isSaveDisabled()}
                     variant='primary'
                     onClick={() => this.saveNamespace()}
                   >
@@ -211,6 +212,15 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
           </Main>
         )}
       </React.Fragment>
+    );
+  }
+
+  private isSaveDisabled() {
+    const namespace = this.state.namespace;
+    return namespace.links.some(
+      (link) =>
+        NamespaceForm.validateName(link).validated == 'error' ||
+        NamespaceForm.validateUrl(link).validated == 'error',
     );
   }
 

@@ -9,7 +9,7 @@ describe('Edit a namespace', () => {
 
   let getLinkTextField = () => {
     return cy
-      .get('div.useful-links > div.link-name > input')
+      .get('div.useful-links > div.link-name input')
       .invoke('attr', 'placeholder', 'Link text')
       .click();
   };
@@ -117,34 +117,36 @@ describe('Edit a namespace', () => {
   });
 
   it('tests the Links field', () => {
-    getLinkTextField().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
-    getUrlField().type('example.com');
+    getLinkTextField().first().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
+    getUrlField().first().type('https://example.com');
     saveButton().click();
     linksHelper().should(
       'contain',
       'Text: Ensure this field has no more than 32 characters.',
     );
-    getLinkTextField().clear();
+    getLinkTextField().first().clear();
+    cy.contains('.useful-links', 'Name must not be empty.');
+
+    getLinkTextField().first().type('Link to example website');
+    getUrlField().first().clear();
+    cy.contains('.useful-links', 'URL must not be empty.');
+
+    getUrlField().first().type('example.com');
+    cy.contains('.useful-links', 'The URL needs to be in');
+
+    getUrlField().first().clear().type('https://example.com/');
     saveButton().click();
-    linksHelper().should('contain', 'Text: This field may not be blank.');
-    getLinkTextField().type('Link to example website');
-    getUrlField().clear();
-    saveButton().click();
-    linksHelper().should('contain', 'URL: This field may not be blank.');
-    getUrlField().type('example.com');
-    saveButton().click();
-    linksHelper().should('contain', "URL: 'example.com' is not a valid url.");
-    getUrlField().clear().type('https://example.com/');
-    saveButton().click();
-    cy.get('div.link > a')
+    cy.get('div.link a')
       .should('contain', 'Link to example website')
       .and('have.attr', 'href', 'https://example.com/');
   });
 
   it('removes a link', () => {
     cy.get(
-      'div.useful-links:first-child > div.link-button > div.link-container > svg',
-    ).click();
+      'div.useful-links:first-child > div.link-button > div.link-container svg',
+    )
+      .first()
+      .click();
     saveButton().click();
   });
 
