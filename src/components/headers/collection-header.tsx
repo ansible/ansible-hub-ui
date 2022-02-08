@@ -623,7 +623,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   };
 
   private deleteCollection = () => {
-    const { deleteCollection, collectionVersion } = this.state;
+    const { deleteCollection, deleteCollection : { name }, collectionVersion } = this.state;
     CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
@@ -635,7 +635,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               variant: 'success',
               title: (
                 <Trans>
-                  Collection &quot;{deleteCollection.name} v{collectionVersion}
+                  Collection &quot;{name} v{collectionVersion}
                   &quot; has been successfully deleted.
                 </Trans>
               ),
@@ -661,8 +661,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error deleting collection.`,
-              description: err?.message,
+              title: t`Collection "${name}" could not be deleted.`,
+              description: t`Error ${err?.message} - ${err?.message}`,
             },
           ],
         }),
