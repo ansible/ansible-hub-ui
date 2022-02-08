@@ -68,10 +68,7 @@ export class CollectionCard extends React.Component<IProps> {
                   <TextContent>
                     {this.getCertification(repo) ?? ' '}
                   </TextContent>
-                  <SignatureBadge
-                    isCompact
-                    isSigned={sign_state === 'signed'}
-                  />
+                  <SignatureBadge isCompact signState={sign_state} />
                 </SplitItem>
               </Split>
             </GridItem>

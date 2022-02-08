@@ -122,10 +122,7 @@ export class CollectionListItem extends React.Component<IProps> {
           </Trans>
         </div>
         <div className='hub-entry'>v{latest_version.version}</div>
-        <SignatureBadge
-          className='hub-entry'
-          isSigned={sign_state === 'signed'}
-        />
+        <SignatureBadge className='hub-entry' signState={sign_state} />
       </DataListCell>,
     );
 

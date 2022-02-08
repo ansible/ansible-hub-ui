@@ -44,6 +44,7 @@ export class CollectionVersionDetail extends CollectionVersion {
       pulp_created: string;
     }[];
   };
+  sign_state: 'signed' | 'unsigned' | 'partial';
   requires_ansible?: string;
   docs_blob: DocsBlobType;
 }

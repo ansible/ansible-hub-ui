@@ -8,11 +8,11 @@ import {
 import { useContext } from 'src/loaders/app-context';
 
 interface Props extends LabelProps {
-  isSigned?: boolean;
+  signState: 'signed' | 'unsigned' | 'partial';
 }
 
 const SignatureBadge: FC<Props> = ({
-  isSigned = false,
+  signState = 'unsigned',
   isCompact = false,
   ...props
 }) => {
@@ -23,15 +23,32 @@ const SignatureBadge: FC<Props> = ({
     return null;
   }
 
+  const text = () => {
+    switch (signState) {
+      case 'signed':
+        return t`Signed`;
+      case 'unsigned':
+        return t`Unsigned`;
+      case 'partial':
+        return t`Partially signed`;
+    }
+  };
+
   return (
     <Label
       variant='outline'
-      color={isSigned ? 'green' : 'orange'}
-      icon={isSigned ? <CheckCircleIcon /> : <ExclamationTriangleIcon />}
+      color={signState === 'signed' ? 'green' : 'orange'}
+      icon={
+        signState === 'signed' ? (
+          <CheckCircleIcon />
+        ) : (
+          <ExclamationTriangleIcon />
+        )
+      }
       isCompact={isCompact}
       {...props}
     >
-      {isSigned ? t`Signed` : t`Unsigned`}
+      {text()}
     </Label>
   );
 };
