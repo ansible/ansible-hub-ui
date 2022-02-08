@@ -59,6 +59,16 @@ export class CollectionFilter extends React.Component<IProps, IState> {
           title: tag,
         })),
       },
+      {
+        id: 'sign_state',
+        title: 'Sign state',
+        inputType: 'select' as const,
+        options: [
+          { id: 'signed', title: 'Signed' },
+          { id: 'unsigned', title: 'Unsigned' },
+          { id: 'partial', title: 'Partial' },
+        ],
+      },
     ];
 
     return (
@@ -75,6 +85,11 @@ export class CollectionFilter extends React.Component<IProps, IState> {
               />
               <ToolbarItem>
                 <AppliedFilters
+                  niceNames={{
+                    sign_state: 'sign state',
+                    tags: 'tags',
+                    keywords: 'keywords',
+                  }}
                   style={{ marginTop: '16px' }}
                   updateParams={updateParams}
                   params={params}
