@@ -15,6 +15,7 @@ export class RemoteType {
   pk: string;
   name: string;
   url: string;
+  signed_only: boolean;
   auth_url: string;
   rate_limit: number;
   token?: string;
