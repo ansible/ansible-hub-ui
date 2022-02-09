@@ -14,6 +14,7 @@ interface IProps {
 }
 
 export class AlertType {
+  id?: string;
   variant: AlertProps['variant'];
   title: string | JSX.Element;
   description?: string | JSX.Element;
