@@ -3,7 +3,7 @@ import * as React from 'react';
 import './search.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { DataList, Switch } from '@patternfly/react-core';
+import { DataList, Gallery, GalleryItem, Switch } from '@patternfly/react-core';
 import {
   BaseHeader,
   CardListSwitcher,
@@ -195,19 +195,30 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
   private renderCards(collections) {
     return (
-      <div className='cards'>
+      <Gallery
+        className='cards'
+        data-testid='all_reports'
+        hasGutter
+        minWidths={{
+          sm: '280px',
+          md: '280px',
+          lg: '280px',
+          xl: '280px',
+          '2xl': '280px',
+        }}
+      >
         {collections.map((c) => {
           return (
-            <CollectionCard
-              className='card'
-              key={c.id}
-              {...c}
-              footer={this.renderSyncToggle(c.name, c.namespace.name)}
-              repo={this.context.selectedRepo}
-            />
+            <GalleryItem key={c.id}>
+              <CollectionCard
+                {...c}
+                footer={this.renderSyncToggle(c.name, c.namespace.name)}
+                repo={this.context.selectedRepo}
+              />
+            </GalleryItem>
           );
         })}
-      </div>
+      </Gallery>
     );
   }
 

@@ -40,7 +40,7 @@ describe('view-only mode', () => {
       cy.contains('.pf-c-title', 'Collections');
 
       // go to a detail screen
-      cy.get('.pf-c-card__header .name a').first().click();
+      cy.get('[data-cy=collection-card-link]').first().click();
 
       cy.contains('.pf-c-button', 'Download tarball');
     });
@@ -80,7 +80,7 @@ describe('view-only mode', () => {
       cy.contains('.pf-c-title', 'Collections');
 
       // go to a detail screen
-      cy.get('.pf-c-card__header .name a').first().click();
+      cy.get('[data-cy=collection-card-link]').first().click();
 
       cy.contains(
         '.pf-c-alert.pf-m-warning',
