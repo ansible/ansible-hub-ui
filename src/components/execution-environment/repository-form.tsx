@@ -214,12 +214,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 isRequired={true}
                 labelIcon={
                   <HelperText
-                    content={
-                      <Trans>
-                        Use the namespace/name format for namespaced containers,{' '}
-                        <b>library/</b>name otherwise.
-                      </Trans>
-                    }
+                    content={t`Use the namespace/name format for namespaced containers. Otherwise, use the library/name format.`}
                   />
                 }
               >
