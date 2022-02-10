@@ -471,13 +471,35 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           'success',
         ),
       )
-      .catch(() =>
-        this.addAlert(t`Failed to delete remote registry ${name}`, 'danger'),
-      )
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        this.addAlert(
+          t`Remote registry "${name}" could not be deleted.`,
+          'danger',
+          this.errorMessage(status, statusText),
+        );
+      })
       .then(() => {
         this.queryRegistries();
         this.setState({ showDeleteModal: false, remoteToEdit: null });
       });
+  }
+
+  private errorMessage(statusCode, statusText) {
+    switch (statusCode.toString()) {
+      case '500':
+        return t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`;
+      case '401':
+        return t`Error ${statusCode} - ${statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
+      case '403':
+        return t`Error ${statusCode} - ${statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
+      case '404':
+        return t`Error ${statusCode} - ${statusText}: The server could not find the requested URL.`;
+      case '400':
+        return t`Error ${statusCode} - ${statusText}: The server was unable to complete your request.`;
+      default:
+        return t`Error ${statusCode} - ${statusText}`;
+    }
   }
 
   private syncRegistry({ pk, name }) {
@@ -499,7 +521,14 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         );
         this.queryRegistries(true);
       })
-      .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        this.addAlert(
+          t`Remote registry "${name}" could not be synced.`,
+          'danger',
+          this.errorMessage(status, statusText),
+        );
+      });
   }
 
   private indexRegistry({ pk, name }) {
@@ -520,7 +549,14 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           </span>,
         );
       })
-      .catch(() => this.addAlert(t`Indexing failed for ${name}`, 'danger'));
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        this.addAlert(
+          t`Execution environment "${name}" could not be indexed.`,
+          'danger',
+          this.errorMessage(status, statusText),
+        );
+      });
   }
 
   private addAlert(title, variant, description?) {

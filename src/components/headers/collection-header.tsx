@@ -513,15 +513,17 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   };
 
   private deleteCollectionVersion = (collectionVersion) => {
-    const { deleteCollection } = this.state;
-
+    const {
+      deleteCollection,
+      deleteCollection: { name },
+    } = this.state;
     CollectionAPI.deleteCollectionVersion(
       this.context.selectedRepo,
       deleteCollection,
     )
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
-        const name = deleteCollection.name;
+        // const name = deleteCollection.name;
         waitForTask(taskId).then(() => {
           if (deleteCollection.all_versions.length > 1) {
             const topVersion = deleteCollection.all_versions.filter(
@@ -578,6 +580,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         const {
           data: { detail, dependent_collection_versions },
           status,
+          statusText,
         } = err.response;
 
         if (status === 400) {
@@ -613,8 +616,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               ...this.state.alerts,
               {
                 variant: 'danger',
-                title: t`Error deleting collection version.`,
-                description: err?.message,
+                title: t`Collection "${name} v${collectionVersion}" could not be deleted.`,
+                description: this.errorMessage(status, statusText),
               },
             ],
           });
@@ -623,7 +626,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   };
 
   private deleteCollection = () => {
-    const { deleteCollection, deleteCollection : { name }, collectionVersion } = this.state;
+    const {
+      deleteCollection,
+      deleteCollection: { name },
+      collectionVersion,
+    } = this.state;
     CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
@@ -652,7 +659,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           });
         });
       })
-      .catch((err) =>
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        console.log(this.errorMessage(status, statusText));
         this.setState({
           collectionVersion: null,
           deleteCollection: null,
@@ -662,12 +671,29 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             {
               variant: 'danger',
               title: t`Collection "${name}" could not be deleted.`,
-              description: t`Error ${err?.message} - ${err?.message}`,
+              description: this.errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   };
+
+  private errorMessage(statusCode, statusText) {
+    switch (statusCode.toString()) {
+      case '500':
+        return t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`;
+      case '401':
+        return t`Error ${statusCode} - ${statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
+      case '403':
+        return t`Error ${statusCode} - ${statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
+      case '404':
+        return t`Error ${statusCode} - ${statusText}: The server could not find the requested URL.`;
+      case '400':
+        return t`Error ${statusCode} - ${statusText}: The server was unable to complete your request.`;
+      default:
+        return t`Error ${statusCode} - ${statusText}`;
+    }
+  }
 
   private openDeleteModalWithConfirm(version = null) {
     this.setState({
@@ -683,18 +709,19 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       .then(({ data }) => {
         this.setState({ noDependencies: !data.data.length });
       })
-      .catch((err) =>
+      .catch((err) => {
+        const { status, statusText } = err.response;
         this.setState({
           alerts: [
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error getting collection's dependencies.`,
-              description: err?.message,
+              title: t`Dependencies for collection "${name}" could not be displayed.`,
+              description: this.errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   }
 
   private getIdFromTask(task) {

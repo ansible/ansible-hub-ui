@@ -609,18 +609,40 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             this.queryImages(this.props.match.params['container']);
           });
         })
-        .catch(() => {
+        .catch((err) => {
+          const { status, statusText } = err.response;
           this.setState({
             deleteModalVisible: false,
             selectedImage: null,
             confirmDelete: false,
             isDeletionPending: false,
             alerts: this.state.alerts.concat([
-              { variant: 'danger', title: t`Error: delete failed` },
+              {
+                variant: 'danger',
+                title: t`Image "${digest}" could not be deleted.`,
+                description: this.errorMessage(status, statusText),
+              },
             ]),
           });
         }),
     );
+  }
+
+  private errorMessage(statusCode, statusText) {
+    switch (statusCode.toString()) {
+      case '500':
+        return t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`;
+      case '401':
+        return t`Error ${statusCode} - ${statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
+      case '403':
+        return t`Error ${statusCode} - ${statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
+      case '404':
+        return t`Error ${statusCode} - ${statusText}: The server could not find the requested URL.`;
+      case '400':
+        return t`Error ${statusCode} - ${statusText}: The server was unable to complete your request.`;
+      default:
+        return t`Error ${statusCode} - ${statusText}`;
+    }
   }
 
   private get updateParams() {

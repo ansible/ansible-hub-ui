@@ -133,9 +133,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         .then((result) => {
           this.setState({ group: result.data });
         })
-        .catch((e) =>
-          this.addAlert(t`Error loading group.`, 'danger', e.message),
-        );
+        .catch((e) => {
+          const { status, statusText } = e.response;
+          this.addAlert(
+            t`Group "${this.state.group.name}" could not be displayed.`,
+            'danger',
+            this.errorMessage(status, statusText),
+          );
+        });
 
       GroupAPI.getPermissions(this.state.params.id)
         .then((result) => {
@@ -147,9 +152,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             permissions: result.data.data.map((x) => x.permission),
           });
         })
-        .catch((e) =>
-          this.addAlert(t`Error loading permissions.`, 'danger', e.message),
-        );
+        .catch((e) => {
+          const { status, statusText } = e.response;
+          this.addAlert(
+            t`Permissions for group "${this.state.group.name}" could not be displayed.`,
+            'danger',
+            this.errorMessage(status, statusText),
+          );
+        });
     }
   }
 
@@ -280,13 +290,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         promises.push(
           GroupAPI.addPermission(group.id, {
             permission: permission,
-          }).catch((e) =>
+          }).catch((e) => {
+            const { status, statusText } = e.response;
             this.addAlert(
-              t`Permission ${permission} was not added.`,
+              t`Permission "${permission}" could not be not added.`,
               'danger',
-              e.message,
-            ),
-          ),
+              this.errorMessage(status, statusText),
+            );
+          }),
         );
       }
     });
@@ -295,13 +306,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     originalPermissions.forEach((original) => {
       if (!permissions.includes(original.name)) {
         promises.push(
-          GroupAPI.removePermission(group.id, original.id).catch((e) =>
+          GroupAPI.removePermission(group.id, original.id).catch((e) => {
+            const { status, statusText } = e.response;
             this.addAlert(
-              t`Permission ${original.name} was not removed.`,
+              t`Permission "${original.name}" could not be not removed.`,
               'danger',
-              e.message,
-            ),
-          ),
+              this.errorMessage(status, statusText),
+            );
+          }),
         );
       }
     });
@@ -487,9 +499,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                   options: filteredUsers,
                 });
               })
-              .catch((e) =>
-                this.addAlert(t`Error loading users.`, 'danger', e.message),
-              )
+              .catch((e) => {
+                const { status, statusText } = e.response;
+                this.addAlert(
+                  t`Users list could not be displayed.`,
+                  'danger',
+                  this.errorMessage(status, statusText),
+                );
+              })
           }
           onSelect={(event, selection) => {
             const selectedUser = this.state.options.find(
@@ -541,12 +558,20 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           this.setState({
             showDeleteModal: false,
           });
-          this.addAlert(t`Successfully deleted group.`, 'success');
+          this.addAlert(
+            t`Group "${group}" has been successfully deleted.`,
+            'success',
+          );
           this.setState({ redirect: Paths.groupList });
         })
-        .catch((e) =>
-          this.addAlert(t`Error deleting group.`, 'danger', e.message),
-        );
+        .catch((e) => {
+          const { status, statusText } = e.response;
+          this.addAlert(
+            t`Group "${group}" could not be deleted.`,
+            'danger',
+            this.errorMessage(status, statusText),
+          );
+        });
     };
 
     if (!users) {
@@ -594,9 +619,20 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         });
       }),
     )
-      .catch((e) =>
-        this.addAlert(t`Error updating users.`, 'danger', e.message),
-      )
+      .then(() => {
+        this.addAlert(
+          t`User "${selectedUsers[0].name}" has been successfully added to group "${this.state.group.name}".`,
+          'success',
+        );
+      })
+      .catch((e) => {
+        const { status, statusText } = e.response;
+        this.addAlert(
+          t`User "${selectedUsers[0].name}" could not be added to group "${this.state.group.name}".`,
+          'danger',
+          this.errorMessage(status, statusText),
+        );
+      })
       .then(() => this.queryUsers());
   }
 
@@ -608,9 +644,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           .map((option) => ({ id: option.id, name: option.username }));
         this.setState({ options, allUsers: result.data.data });
       })
-      .catch((e) =>
-        this.addAlert(t`Error loading users.`, 'danger', e.message),
-      );
+      .catch((e) => {
+        const { status, statusText } = e.response;
+        this.addAlert(
+          t`Users list could not be displayed.`,
+          'danger',
+          this.errorMessage(status, statusText),
+        );
+      });
   }
 
   private addAlert(title, variant, description?) {
@@ -853,31 +894,57 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           itemCount: result.data.meta.count,
         }),
       )
-      .catch((e) =>
-        this.addAlert(t`Error loading users.`, 'danger', e.message),
-      );
+      .catch((e) => {
+        const { status, statusText } = e.response;
+        this.addAlert(
+          t`Users list could not be displayed.`,
+          'danger',
+          this.errorMessage(status, statusText),
+        );
+      });
   }
 
   private deleteUser(user) {
     user.groups = user.groups.filter((group) => {
       return group.id != this.state.params.id;
     });
-
+    const { name } = this.state.group;
     UserAPI.update(user.id, user)
       .then(() => {
         this.setState({
           showUserRemoveModal: null,
         });
-        this.addAlert(t`Successfully removed a user from a group.`, 'success');
+        this.addAlert(
+          t`User "${user.username}" has been successfully removed group "${name}".`,
+          'success',
+        );
         this.queryUsers();
       })
-      .catch((e) =>
+      .catch((e) => {
+        const { status, statusText } = e.response;
         this.addAlert(
-          t`Error removing user from a group.`,
+          t`User "${user.username}" could not be removed from group "${name}".`,
           'danger',
-          e.message,
-        ),
-      );
+          this.errorMessage(status, statusText),
+        );
+      });
+  }
+
+  private errorMessage(statusCode: number, statusText: string) {
+    switch (statusCode.toString()) {
+      case '500':
+        return t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`;
+      case '401':
+        return t`Error ${statusCode} - ${statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
+      case '403':
+        return t`Error ${statusCode} - ${statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
+      case '404':
+        return t`Error ${statusCode} - ${statusText}: The server could not find the requested URL.`;
+      case '400':
+        return t`Error ${statusCode} - ${statusText}: The server was unable to complete your request.`;
+      default:
+        return t`Error ${statusCode} - ${statusText}`;
+    }
   }
 
   private get updateParams() {
