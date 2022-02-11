@@ -293,7 +293,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           }).catch((e) => {
             const { status, statusText } = e.response;
             this.addAlert(
-              t`Permission "${permission}" could not be not added.`,
+              t`Permission "${permission}" could not be not added to group "${this.state.group}".`,
               'danger',
               this.errorMessage(status, statusText),
             );
@@ -309,7 +309,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           GroupAPI.removePermission(group.id, original.id).catch((e) => {
             const { status, statusText } = e.response;
             this.addAlert(
-              t`Permission "${original.name}" could not be not removed.`,
+              t`Permission "${original.name}" could not be not removed from group "${this.state.group}".`,
               'danger',
               this.errorMessage(status, statusText),
             );

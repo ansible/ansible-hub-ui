@@ -303,7 +303,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           deleteModalCount: result.data.meta.count,
         }),
       )
-      .catch((e) =>
+      .catch((e) => {
+        const { status, statusText } = e.response;
         this.setState({
           deleteModalVisible: false,
           selectedGroup: null,
@@ -311,12 +312,12 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error loading users.`,
-              description: e?.message,
+              title: t`Users list could not be displayed.`,
+              description: this.errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   }
 
   private saveGroup(value) {
@@ -353,7 +354,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error editing group.`,
+              title: t`Changes to group "${this.state.selectedGroup}" could not be saved.`,
             },
           ],
         }),
@@ -506,7 +507,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             loading: false,
           }),
         )
-        .catch((e) =>
+        .catch((e) => {
+          const { status, statusText } = e.response;
           this.setState({
             groups: [],
             itemCount: 0,
@@ -515,13 +517,29 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
               ...this.state.alerts,
               {
                 variant: 'danger',
-                title: t`Error loading groups.`,
-                description: e?.message,
+                title: t`Groups list could not be displayed.`,
+                description: this.errorMessage(status, statusText),
               },
             ],
-          }),
-        ),
+          });
+        }),
     );
+  }
+  private errorMessage(statusCode, statusText) {
+    switch (statusCode.toString()) {
+      case '500':
+        return t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`;
+      case '401':
+        return t`Error ${statusCode} - ${statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
+      case '403':
+        return t`Error ${statusCode} - ${statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
+      case '404':
+        return t`Error ${statusCode} - ${statusText}: The server could not find the requested URL.`;
+      case '400':
+        return t`Error ${statusCode} - ${statusText}: The server was unable to complete your request.`;
+      default:
+        return t`Error ${statusCode} - ${statusText}`;
+    }
   }
 }
 
