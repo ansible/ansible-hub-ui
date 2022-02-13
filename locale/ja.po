@@ -312,7 +312,7 @@ msgstr "取り消し済み"
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "コレクションの依存関係が <0/>削除されるまで <1/> 名前空間は削除できません"
 
-#: src/components/headers/collection-header.tsx:180
+#: src/components/headers/collection-header.tsx:181
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "このコレクションに依存するコレクションが<0/>削除されるまで <1/>削除できません。"
 
@@ -517,15 +517,15 @@ msgstr "完了済み"
 msgid "Configure"
 msgstr "設定"
 
-#: src/containers/token/token-insights.tsx:83
+#: src/containers/token/token-insights.tsx:113
 msgid "Connect Private Automation Hub"
 msgstr "Private Automation Hub の接続"
 
-#: src/containers/token/token-insights.tsx:98
+#: src/containers/token/token-insights.tsx:128
 msgid "Connect the ansible-galaxy client"
 msgstr "ansible-galaxy クライアントの接続"
 
-#: src/containers/token/token-insights.tsx:80
+#: src/containers/token/token-insights.tsx:110
 msgid "Connect to Hub"
 msgstr "Hub への接続"
 
@@ -746,7 +746,7 @@ msgid "Delete distribution"
 msgstr "ディストリビューションの削除"
 
 #: src/components/headers/collection-header.tsx:173
-#: src/components/headers/collection-header.tsx:188
+#: src/components/headers/collection-header.tsx:189
 msgid "Delete entire collection"
 msgstr "コレクション全体の削除"
 
@@ -796,7 +796,7 @@ msgstr "ユーザーの削除"
 msgid "Delete user?"
 msgstr "ユーザーを削除しますか?"
 
-#: src/components/headers/collection-header.tsx:200
+#: src/components/headers/collection-header.tsx:201
 msgid "Delete version {0}"
 msgstr "バージョン{0} の削除"
 
@@ -888,7 +888,7 @@ msgstr "ドキュメントのサイト"
 msgid "Documentation"
 msgstr "ドキュメント"
 
-#: src/containers/token/token-insights.tsx:100
+#: src/containers/token/token-insights.tsx:130
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "<0>ansible-galaxy</0> クライアントの設定方法に関するドキュメントは、「<1>こちら</1>」を参照してください。以下のパラメーターを使用してクライアントを設定します。"
 
@@ -1035,6 +1035,10 @@ msgstr "コレクションの依存関係の取得中にエラーが発生しま
 msgid "Error loading Controllers"
 msgstr "コントローラーの読み込みエラー"
 
+#: src/containers/token/token-insights.tsx:63
+msgid "Error loading Server URL."
+msgstr ""
+
 #: src/containers/edit-namespace/edit-namespace.tsx:99
 msgid "Error loading active user."
 msgstr ""
@@ -1088,7 +1092,7 @@ msgstr "タグの読み込みエラー。"
 msgid "Error loading tasks."
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:57
+#: src/containers/token/token-insights.tsx:85
 #: src/containers/token/token-standalone.tsx:118
 msgid "Error loading token."
 msgstr ""
@@ -1459,7 +1463,7 @@ msgstr "リンクテキスト"
 msgid "List of Collections"
 msgstr "コレクションの一覧"
 
-#: src/containers/token/token-insights.tsx:131
+#: src/containers/token/token-insights.tsx:161
 #: src/containers/token/token-standalone.tsx:97
 msgid "Load token"
 msgstr "トークンの読み込み"
@@ -1491,7 +1495,7 @@ msgstr "ログアウト"
 msgid "Manage tags"
 msgstr "タグの管理"
 
-#: src/containers/token/token-insights.tsx:153
+#: src/containers/token/token-insights.tsx:183
 msgid "Manage tokens"
 msgstr "トークンの管理"
 
@@ -1743,8 +1747,8 @@ msgstr "他のコレクションでの使用には必要ありません。"
 #~ msgstr "注記: この URL には、ハブ内のすべてのコレクションが含まれます。接続方法:"
 
 #: src/containers/token/token-insights.tsx:176
-msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
-msgstr "注記: この URL には、ハブ内のすべてのコレクションが含まれます。組織の同期リポジトリーに接続するには <0>リポジトリー管理</0> にある URL をしようします。"
+#~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
+#~ msgstr "注記: この URL には、ハブ内のすべてのコレクションが含まれます。組織の同期リポジトリーに接続するには <0>リポジトリー管理</0> にある URL をしようします。"
 
 #: src/components/repositories/remote-form.tsx:664
 msgid "Number must be greater than 0"
@@ -1754,7 +1758,7 @@ msgstr "数字は 0 より大きくなければなりません"
 msgid "OS / Arch"
 msgstr "OS / アーキテクチャー"
 
-#: src/containers/token/token-insights.tsx:115
+#: src/containers/token/token-insights.tsx:145
 msgid "Offline token"
 msgstr "オフライントークン"
 
@@ -2144,7 +2148,7 @@ msgid "Running"
 msgstr "実行中"
 
 #: src/components/repositories/remote-form.tsx:291
-#: src/containers/token/token-insights.tsx:184
+#: src/containers/token/token-insights.tsx:209
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -2242,7 +2246,7 @@ msgstr "パーミッションの選択"
 msgid "Select users"
 msgstr "ユーザーの選択"
 
-#: src/containers/token/token-insights.tsx:167
+#: src/containers/token/token-insights.tsx:197
 msgid "Server URL"
 msgstr "サーバー URL"
 
@@ -2508,7 +2512,7 @@ msgstr "同期時に認証に使用されるパスワード。"
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するパスワード。トークンを使用する場合は不要です。"
 
-#: src/containers/token/token-insights.tsx:139
+#: src/containers/token/token-insights.tsx:169
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "トークンは、30 日のアクティブではない状態が続くと期限切れになります。トークンの有効期限が切れないように、定期的に以下のコマンドを実行します。"
 
@@ -2569,7 +2573,7 @@ msgstr "このタグはすでにこのイメージに対して選択されてい
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "これは、ansible-galaxy CLI と同じ {docsAnsibleLink} 形式を使用します。ただし、ロールも、ソースパラメーターもサポート対象外である点に注意が必要です。"
 
-#: src/containers/token/token-insights.tsx:154
+#: src/containers/token/token-insights.tsx:184
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr "トークンを取り消すか、すべてのトークンを表示するには、<0>オフライン API トークン管理</0> ページに移動します。"
 
@@ -2651,7 +2655,7 @@ msgstr "アップストリーム名"
 msgid "Use in Controller"
 msgstr "コントローラーでの使用"
 
-#: src/containers/token/token-insights.tsx:85
+#: src/containers/token/token-insights.tsx:115
 msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 msgstr "<0>リポジトリー管理</0> ページを使用して、組織がキュレートされたコレクションを Private Automation Hub の Red Hat 認定リポジトリーと同期します。適切なパーミッションが割り当てられたユーザーは、<1>コレクション</1> ページの同期トグルを使用して、組織の同期リポジトリーに追加されるコレクションを制御できます。"
 
@@ -2659,7 +2663,7 @@ msgstr "<0>リポジトリー管理</0> ページを使用して、組織がキ�
 #~ msgid "Use this URL to configure the API endpoints that clients need to"
 #~ msgstr "この URL を使用してクライアントが必要とする API エンドポイントを設定する"
 
-#: src/containers/token/token-insights.tsx:169
+#: src/containers/token/token-insights.tsx:199
 msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
 msgstr "この URL を使用してクライアントが必要とする API エンドポイントが Automation Hub からコンテンツをダウンロードするように設定します。"
 
@@ -2667,7 +2671,7 @@ msgstr "この URL を使用してクライアントが必要とする API エ�
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr "この URL を使用してクライアントの認証 URL を設定する"
 
-#: src/containers/token/token-insights.tsx:186
+#: src/containers/token/token-insights.tsx:211
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 msgstr "この URL を使用して、クライアントが Automation Hub からコンテンツをダウンロードする必要のある認証 URL を設定します。"
 
@@ -2675,7 +2679,7 @@ msgstr "この URL を使用して、クライアントが Automation Hub から
 #~ msgid "Use this token to authenticate clients that need to download"
 #~ msgstr "このトークンを使用してダウンロードの必要があるクライアントを認証する"
 
-#: src/containers/token/token-insights.tsx:117
+#: src/containers/token/token-insights.tsx:147
 msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
 msgstr "このトークンを使用して、Automation Hub からコンテンツをダウンロードする必要があるクライアントを認証します。これは、コンテンツの保護に使用されるシークレットトークンです。API トークンは、安全な場所に保存します。"
 

@@ -312,7 +312,7 @@ msgstr "Annulé"
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "Impossible de supprimer un espace de nom <0/>tant que les dépendances des collections n'ont pas été supprimées<1/>"
 
-#: src/components/headers/collection-header.tsx:180
+#: src/components/headers/collection-header.tsx:181
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "Impossible à supprimer tant que les collections <0/>qui dépendent de cette collection n'ont pas été supprimées<1/>."
 
@@ -517,15 +517,15 @@ msgstr "Complété"
 msgid "Configure"
 msgstr "Configurer Tower"
 
-#: src/containers/token/token-insights.tsx:83
+#: src/containers/token/token-insights.tsx:113
 msgid "Connect Private Automation Hub"
 msgstr "Connect Private Automation Hub"
 
-#: src/containers/token/token-insights.tsx:98
+#: src/containers/token/token-insights.tsx:128
 msgid "Connect the ansible-galaxy client"
 msgstr "Connecter le client ansible-galaxy"
 
-#: src/containers/token/token-insights.tsx:80
+#: src/containers/token/token-insights.tsx:110
 msgid "Connect to Hub"
 msgstr "Connecter au Hub"
 
@@ -746,7 +746,7 @@ msgid "Delete distribution"
 msgstr "Supprimer la distribution"
 
 #: src/components/headers/collection-header.tsx:173
-#: src/components/headers/collection-header.tsx:188
+#: src/components/headers/collection-header.tsx:189
 msgid "Delete entire collection"
 msgstr "Supprimer toute la collection"
 
@@ -796,7 +796,7 @@ msgstr "Supprimer l’utilisateur"
 msgid "Delete user?"
 msgstr "Supprimer l’utilisateur ?"
 
-#: src/components/headers/collection-header.tsx:200
+#: src/components/headers/collection-header.tsx:201
 msgid "Delete version {0}"
 msgstr "Supprimer la version {0}"
 
@@ -888,7 +888,7 @@ msgstr "Site des docs"
 msgid "Documentation"
 msgstr "Documentation"
 
-#: src/containers/token/token-insights.tsx:100
+#: src/containers/token/token-insights.tsx:130
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "La documentation sur la façon de configurer le client <0>ansible-galaxy</0> se trouve <1>ici</1>. Utilisez les paramètres suivants pour configurer le client."
 
@@ -1035,6 +1035,10 @@ msgstr "Erreur dans la récupération des dépendances de la collection."
 msgid "Error loading Controllers"
 msgstr "Erreur de chargement des contrôleurs"
 
+#: src/containers/token/token-insights.tsx:63
+msgid "Error loading Server URL."
+msgstr ""
+
 #: src/containers/edit-namespace/edit-namespace.tsx:99
 msgid "Error loading active user."
 msgstr ""
@@ -1088,7 +1092,7 @@ msgstr "Erreur de chargement des tags"
 msgid "Error loading tasks."
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:57
+#: src/containers/token/token-insights.tsx:85
 #: src/containers/token/token-standalone.tsx:118
 msgid "Error loading token."
 msgstr ""
@@ -1459,7 +1463,7 @@ msgstr "Texte du lien"
 msgid "List of Collections"
 msgstr "Liste des collections"
 
-#: src/containers/token/token-insights.tsx:131
+#: src/containers/token/token-insights.tsx:161
 #: src/containers/token/token-standalone.tsx:97
 msgid "Load token"
 msgstr "Jeton de charge"
@@ -1491,7 +1495,7 @@ msgstr "Déconnexion"
 msgid "Manage tags"
 msgstr "Gérer les tags"
 
-#: src/containers/token/token-insights.tsx:153
+#: src/containers/token/token-insights.tsx:183
 msgid "Manage tokens"
 msgstr "Gérer les jetons"
 
@@ -1743,8 +1747,8 @@ msgstr "Non requis pour l'utilisation par d'autres collections"
 #~ msgstr "Remarque : cette URL contient toutes les collections du Hub. Pour vous connecter à votre"
 
 #: src/containers/token/token-insights.tsx:176
-msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
-msgstr "Remarque : cette URL contient toutes les collections du Hub. Pour vous connecter au référentiel de synchronisation de votre organisation, utilisez l'URL qui se trouve dans <0>Gestion de référentiel</0>."
+#~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
+#~ msgstr "Remarque : cette URL contient toutes les collections du Hub. Pour vous connecter au référentiel de synchronisation de votre organisation, utilisez l'URL qui se trouve dans <0>Gestion de référentiel</0>."
 
 #: src/components/repositories/remote-form.tsx:664
 msgid "Number must be greater than 0"
@@ -1754,7 +1758,7 @@ msgstr "Ce champ doit être supérieur à 0"
 msgid "OS / Arch"
 msgstr "OS / Arch"
 
-#: src/containers/token/token-insights.tsx:115
+#: src/containers/token/token-insights.tsx:145
 msgid "Offline token"
 msgstr "Jeton hors ligne"
 
@@ -2144,7 +2148,7 @@ msgid "Running"
 msgstr "En cours d'exécution"
 
 #: src/components/repositories/remote-form.tsx:291
-#: src/containers/token/token-insights.tsx:184
+#: src/containers/token/token-insights.tsx:209
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -2242,7 +2246,7 @@ msgstr "Ajouter les permissions"
 msgid "Select users"
 msgstr "Sélectionner les utilisateurs"
 
-#: src/containers/token/token-insights.tsx:167
+#: src/containers/token/token-insights.tsx:197
 msgid "Server URL"
 msgstr "URL du serveur"
 
@@ -2508,7 +2512,7 @@ msgstr "Le mot de passe à utiliser pour l'authentification lors de la synchroni
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "Le mot de passe à utiliser pour l'authentification lors de la synchronisation. Ce n'est pas nécessaire si vous utilisez un jeton."
 
-#: src/containers/token/token-insights.tsx:139
+#: src/containers/token/token-insights.tsx:169
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "Le jeton expirera après 30 jours d'inactivité. Exécutez périodiquement la commande ci-dessous pour empêcher votre jeton d'expirer."
 
@@ -2569,7 +2573,7 @@ msgstr "Ce tag est déjà sélectionnée pour cette image. Vous ne pouvez pas l'
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "Il utilise le même format {docsAnsibleLink} que le CLI ansible-galaxy avec la réserve que les rôles ne sont pas supportés et que le paramètre source n'est pas supporté."
 
-#: src/containers/token/token-insights.tsx:154
+#: src/containers/token/token-insights.tsx:184
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr "Pour révoquer un jeton ou voir tous vos jetons, visitez la page<0>offline API token management</0> (gestion des jetons API hors ligne)"
 
@@ -2651,7 +2655,7 @@ msgstr "Nom en amont"
 msgid "Use in Controller"
 msgstr "Utilisation dans le contrôleur"
 
-#: src/containers/token/token-insights.tsx:85
+#: src/containers/token/token-insights.tsx:115
 msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 msgstr "Utilisez la page <0>Gestion de référentiel</0> pour synchroniser les collections créées par votre organisation avec le référentiel Red Hat Certified dans votre Automation Hub privé. Les utilisateurs disposant des autorisations appropriées peuvent utiliser les boutons de synchronisation de la page <1>Collections</1> pour contrôler les collections qui sont ajoutées au référentiel de synchronisation de leur organisation."
 
@@ -2659,7 +2663,7 @@ msgstr "Utilisez la page <0>Gestion de référentiel</0> pour synchroniser les c
 #~ msgid "Use this URL to configure the API endpoints that clients need to"
 #~ msgstr "Utilisez cette URL pour configurer les points de terminaison de l'API que les clients doivent utiliser"
 
-#: src/containers/token/token-insights.tsx:169
+#: src/containers/token/token-insights.tsx:199
 msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
 msgstr "Utilisez cette URL pour configurer les points de terminaison de l'API que les clients on besoin pour télécharger du contenu depuis Automation Hub."
 
@@ -2667,7 +2671,7 @@ msgstr "Utilisez cette URL pour configurer les points de terminaison de l'API qu
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr "Utilisez cette URL pour configurer les URL d'authentification que les clients doivent utiliser"
 
-#: src/containers/token/token-insights.tsx:186
+#: src/containers/token/token-insights.tsx:211
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 msgstr "Utilisez cette URL pour configurer les URL d'authentification dont les clients ont besoin pour télécharger du contenu depuis Automation Hub."
 
@@ -2675,7 +2679,7 @@ msgstr "Utilisez cette URL pour configurer les URL d'authentification dont les c
 #~ msgid "Use this token to authenticate clients that need to download"
 #~ msgstr "Utilisez ce jeton pour authentifier les clients qui doivent télécharger"
 
-#: src/containers/token/token-insights.tsx:117
+#: src/containers/token/token-insights.tsx:147
 msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
 msgstr "Utilisez ce jeton pour authentifier les clients qui doivent télécharger du contenu depuis Automation Hub. Il s'agit d'un jeton secret utilisé pour protéger votre contenu. Stockez votre jeton API dans un endroit sécurisé."
 

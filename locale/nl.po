@@ -312,7 +312,7 @@ msgstr ""
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:180
+#: src/components/headers/collection-header.tsx:181
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr ""
 
@@ -517,15 +517,15 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:83
+#: src/containers/token/token-insights.tsx:113
 msgid "Connect Private Automation Hub"
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:98
+#: src/containers/token/token-insights.tsx:128
 msgid "Connect the ansible-galaxy client"
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:80
+#: src/containers/token/token-insights.tsx:110
 msgid "Connect to Hub"
 msgstr ""
 
@@ -746,7 +746,7 @@ msgid "Delete distribution"
 msgstr ""
 
 #: src/components/headers/collection-header.tsx:173
-#: src/components/headers/collection-header.tsx:188
+#: src/components/headers/collection-header.tsx:189
 msgid "Delete entire collection"
 msgstr ""
 
@@ -796,7 +796,7 @@ msgstr ""
 msgid "Delete user?"
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:200
+#: src/components/headers/collection-header.tsx:201
 msgid "Delete version {0}"
 msgstr ""
 
@@ -888,7 +888,7 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:100
+#: src/containers/token/token-insights.tsx:130
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr ""
 
@@ -1035,6 +1035,10 @@ msgstr ""
 msgid "Error loading Controllers"
 msgstr ""
 
+#: src/containers/token/token-insights.tsx:63
+msgid "Error loading Server URL."
+msgstr ""
+
 #: src/containers/edit-namespace/edit-namespace.tsx:99
 msgid "Error loading active user."
 msgstr ""
@@ -1088,7 +1092,7 @@ msgstr ""
 msgid "Error loading tasks."
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:57
+#: src/containers/token/token-insights.tsx:85
 #: src/containers/token/token-standalone.tsx:118
 msgid "Error loading token."
 msgstr ""
@@ -1459,7 +1463,7 @@ msgstr ""
 msgid "List of Collections"
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:131
+#: src/containers/token/token-insights.tsx:161
 #: src/containers/token/token-standalone.tsx:97
 msgid "Load token"
 msgstr ""
@@ -1491,7 +1495,7 @@ msgstr ""
 msgid "Manage tags"
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:153
+#: src/containers/token/token-insights.tsx:183
 msgid "Manage tokens"
 msgstr ""
 
@@ -1743,8 +1747,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/containers/token/token-insights.tsx:176
-msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
-msgstr ""
+#~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
+#~ msgstr ""
 
 #: src/components/repositories/remote-form.tsx:664
 msgid "Number must be greater than 0"
@@ -1754,7 +1758,7 @@ msgstr ""
 msgid "OS / Arch"
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:115
+#: src/containers/token/token-insights.tsx:145
 msgid "Offline token"
 msgstr ""
 
@@ -2140,7 +2144,7 @@ msgid "Running"
 msgstr ""
 
 #: src/components/repositories/remote-form.tsx:291
-#: src/containers/token/token-insights.tsx:184
+#: src/containers/token/token-insights.tsx:209
 msgid "SSO URL"
 msgstr ""
 
@@ -2238,7 +2242,7 @@ msgstr ""
 msgid "Select users"
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:167
+#: src/containers/token/token-insights.tsx:197
 msgid "Server URL"
 msgstr ""
 
@@ -2504,7 +2508,7 @@ msgstr ""
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:139
+#: src/containers/token/token-insights.tsx:169
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr ""
 
@@ -2565,7 +2569,7 @@ msgstr ""
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:154
+#: src/containers/token/token-insights.tsx:184
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr ""
 
@@ -2647,7 +2651,7 @@ msgstr ""
 msgid "Use in Controller"
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:85
+#: src/containers/token/token-insights.tsx:115
 msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 msgstr ""
 
@@ -2655,7 +2659,7 @@ msgstr ""
 #~ msgid "Use this URL to configure the API endpoints that clients need to"
 #~ msgstr ""
 
-#: src/containers/token/token-insights.tsx:169
+#: src/containers/token/token-insights.tsx:199
 msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
 msgstr ""
 
@@ -2663,7 +2667,7 @@ msgstr ""
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr ""
 
-#: src/containers/token/token-insights.tsx:186
+#: src/containers/token/token-insights.tsx:211
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 msgstr ""
 
@@ -2671,7 +2675,7 @@ msgstr ""
 #~ msgid "Use this token to authenticate clients that need to download"
 #~ msgstr ""
 
-#: src/containers/token/token-insights.tsx:117
+#: src/containers/token/token-insights.tsx:147
 msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
 msgstr ""
 

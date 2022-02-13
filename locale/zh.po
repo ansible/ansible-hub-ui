@@ -312,7 +312,7 @@ msgstr "已取消"
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "无法删除命名空间，直到 <0/> 集合的依赖项已 <1/> 被删除"
 
-#: src/components/headers/collection-header.tsx:180
+#: src/components/headers/collection-header.tsx:181
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "无法删除集合，直到集合 <0/>依赖于此集合 <1/> 已被删除。"
 
@@ -517,15 +517,15 @@ msgstr "完成"
 msgid "Configure"
 msgstr "配置"
 
-#: src/containers/token/token-insights.tsx:83
+#: src/containers/token/token-insights.tsx:113
 msgid "Connect Private Automation Hub"
 msgstr "连接私有 Automation Hub"
 
-#: src/containers/token/token-insights.tsx:98
+#: src/containers/token/token-insights.tsx:128
 msgid "Connect the ansible-galaxy client"
 msgstr "连接 ansible-galaxy 客户端"
 
-#: src/containers/token/token-insights.tsx:80
+#: src/containers/token/token-insights.tsx:110
 msgid "Connect to Hub"
 msgstr "连接到 Hub"
 
@@ -746,7 +746,7 @@ msgid "Delete distribution"
 msgstr "作业发布"
 
 #: src/components/headers/collection-header.tsx:173
-#: src/components/headers/collection-header.tsx:188
+#: src/components/headers/collection-header.tsx:189
 msgid "Delete entire collection"
 msgstr "删除整个集合"
 
@@ -796,7 +796,7 @@ msgstr "删除用户"
 msgid "Delete user?"
 msgstr "删除用户？"
 
-#: src/components/headers/collection-header.tsx:200
+#: src/components/headers/collection-header.tsx:201
 msgid "Delete version {0}"
 msgstr "删除版本 {0}"
 
@@ -888,7 +888,7 @@ msgstr "文档站点"
 msgid "Documentation"
 msgstr "文档"
 
-#: src/containers/token/token-insights.tsx:100
+#: src/containers/token/token-insights.tsx:130
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "有关如何配置 <0>ansible-galaxy</0> 客户端的文档位于<1>这里</1>。使用下列参数来配置客户端："
 
@@ -1035,6 +1035,10 @@ msgstr "获取集合依赖关系时出错。"
 msgid "Error loading Controllers"
 msgstr "加载控制器时出错"
 
+#: src/containers/token/token-insights.tsx:63
+msgid "Error loading Server URL."
+msgstr ""
+
 #: src/containers/edit-namespace/edit-namespace.tsx:99
 msgid "Error loading active user."
 msgstr ""
@@ -1088,7 +1092,7 @@ msgstr "加载标签时出错。"
 msgid "Error loading tasks."
 msgstr ""
 
-#: src/containers/token/token-insights.tsx:57
+#: src/containers/token/token-insights.tsx:85
 #: src/containers/token/token-standalone.tsx:118
 msgid "Error loading token."
 msgstr ""
@@ -1459,7 +1463,7 @@ msgstr "链接文本"
 msgid "List of Collections"
 msgstr "集合列表"
 
-#: src/containers/token/token-insights.tsx:131
+#: src/containers/token/token-insights.tsx:161
 #: src/containers/token/token-standalone.tsx:97
 msgid "Load token"
 msgstr "加载令牌"
@@ -1491,7 +1495,7 @@ msgstr "退出"
 msgid "Manage tags"
 msgstr "管理标签"
 
-#: src/containers/token/token-insights.tsx:153
+#: src/containers/token/token-insights.tsx:183
 msgid "Manage tokens"
 msgstr "管理令牌"
 
@@ -1743,8 +1747,8 @@ msgstr "其他集合不需要使用"
 #~ msgstr "注：这个 URL 包含 Hub 中的所有集合。要连接到您的"
 
 #: src/containers/token/token-insights.tsx:176
-msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
-msgstr "注意：此 URL 包含 Hub 中的所有集合。要连接到组织的同步存储库，请使用<0>存储库管理</0>中的 URL。"
+#~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
+#~ msgstr "注意：此 URL 包含 Hub 中的所有集合。要连接到组织的同步存储库，请使用<0>存储库管理</0>中的 URL。"
 
 #: src/components/repositories/remote-form.tsx:664
 msgid "Number must be greater than 0"
@@ -1754,7 +1758,7 @@ msgstr "此字段必须大于 0"
 msgid "OS / Arch"
 msgstr "OS/ Arch"
 
-#: src/containers/token/token-insights.tsx:115
+#: src/containers/token/token-insights.tsx:145
 msgid "Offline token"
 msgstr "离线令牌"
 
@@ -2144,7 +2148,7 @@ msgid "Running"
 msgstr "运行中"
 
 #: src/components/repositories/remote-form.tsx:291
-#: src/containers/token/token-insights.tsx:184
+#: src/containers/token/token-insights.tsx:209
 msgid "SSO URL"
 msgstr "SSO URL"
 
@@ -2242,7 +2246,7 @@ msgstr "选择权限"
 msgid "Select users"
 msgstr "选择用户"
 
-#: src/containers/token/token-insights.tsx:167
+#: src/containers/token/token-insights.tsx:197
 msgid "Server URL"
 msgstr "服务器 URL"
 
@@ -2508,7 +2512,7 @@ msgstr "同步时用于身份验证的密码。"
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同步时要用于身份验证的密码。在使用令牌时不需要此密码。"
 
-#: src/containers/token/token-insights.tsx:139
+#: src/containers/token/token-insights.tsx:169
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "令牌将在 30 天没有活动时过期。定期运行以下命令以防止您的令牌过期。"
 
@@ -2569,7 +2573,7 @@ msgstr "已为此镜像选择此标签。您不能添加两次。"
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "这使用与 ansible-galaxy CLI 相同的 {docsAnsibleLink} 格式，但不支持角色，并且不支持 source 参数。"
 
-#: src/containers/token/token-insights.tsx:154
+#: src/containers/token/token-insights.tsx:184
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr "若要撤销令牌或查看所有令牌，请访问<0>离线 API 令牌管理</0>页面。"
 
@@ -2651,7 +2655,7 @@ msgstr "上游名称"
 msgid "Use in Controller"
 msgstr "在控制器中使用"
 
-#: src/containers/token/token-insights.tsx:85
+#: src/containers/token/token-insights.tsx:115
 msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 msgstr "使用 <0>Repository Management</0> 页面将您的机构策展的集合同步到您的私有 Automation Hub 中的红帽认证存储库。拥有正确权限的用户可以使用 <1>Collections</1> 页面上的同步切换来控制哪些集合被添加到机构的同步存储库中。"
 
@@ -2659,7 +2663,7 @@ msgstr "使用 <0>Repository Management</0> 页面将您的机构策展的集合
 #~ msgid "Use this URL to configure the API endpoints that clients need to"
 #~ msgstr "使用此 URL 配置客户端所需的 API 端点"
 
-#: src/containers/token/token-insights.tsx:169
+#: src/containers/token/token-insights.tsx:199
 msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
 msgstr "使用此 URL 配置客户端需要从 Automation Hub 下载内容的 API 端点。"
 
@@ -2667,7 +2671,7 @@ msgstr "使用此 URL 配置客户端需要从 Automation Hub 下载内容的 AP
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr "使用此 URL 配置客户端的身份验证 URL"
 
-#: src/containers/token/token-insights.tsx:186
+#: src/containers/token/token-insights.tsx:211
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 msgstr "使用此 URL 配置客户端需要从 Automation Hub 下载内容的验证 URL。"
 
@@ -2675,7 +2679,7 @@ msgstr "使用此 URL 配置客户端需要从 Automation Hub 下载内容的验
 #~ msgid "Use this token to authenticate clients that need to download"
 #~ msgstr "使用此令牌验证需要下载的客户端"
 
-#: src/containers/token/token-insights.tsx:117
+#: src/containers/token/token-insights.tsx:147
 msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
 msgstr "使用此令牌来验证需要从 Automation Hub 下载内容的客户端。这是用于保护您的内容的机密令牌。请将您的 API 令牌存储在安全的位置。"
 
