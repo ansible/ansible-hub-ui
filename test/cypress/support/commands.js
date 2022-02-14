@@ -394,13 +394,17 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
 Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   const adminUsername = Cypress.env('username');
   const adminPassword = Cypress.env('password');
+  const galaxykitCommand = Cypress.env('galaxykit') || 'galaxykit';
   const server = Cypress.config().baseUrl + Cypress.env('prefix');
   const options =
     args.length >= 1 && typeof args[args.length - 1] == 'object'
       ? args.splice(args.length - 1, 1)[0]
       : [];
-  cy.log('galaxykit ' + operation + ' ' + args);
-  const cmd = shell`galaxykit -s ${server} -u ${adminUsername} -p ${adminPassword} ${shell.preserve(
+
+  cy.log(`${galaxykitCommand} ${operation} ${args}`);
+  const cmd = shell`${shell.preserve(
+    galaxykitCommand,
+  )} -s ${server} -u ${adminUsername} -p ${adminPassword} ${shell.preserve(
     operation,
   )} ${args}`;
 
