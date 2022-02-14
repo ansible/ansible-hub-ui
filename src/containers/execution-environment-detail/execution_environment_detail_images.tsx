@@ -628,7 +628,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     );
   }
 
-  private errorMessage(statusCode, statusText) {
+  private errorMessage(statusCode: number, statusText: string) {
     switch (statusCode.toString()) {
       case '500':
         return t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`;

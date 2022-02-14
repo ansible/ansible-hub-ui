@@ -661,7 +661,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       })
       .catch((err) => {
         const { status, statusText } = err.response;
-        console.log(this.errorMessage(status, statusText));
         this.setState({
           collectionVersion: null,
           deleteCollection: null,
@@ -678,7 +677,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       });
   };
 
-  private errorMessage(statusCode, statusText) {
+  private errorMessage(statusCode: number, statusText: string) {
     switch (statusCode.toString()) {
       case '500':
         return t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`;
