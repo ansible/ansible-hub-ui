@@ -1,6 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment-detail.scss';
+import { errorMessage } from 'src/utilities';
 
 import { sum } from 'lodash';
 import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
@@ -620,29 +621,12 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               {
                 variant: 'danger',
                 title: t`Image "${digest}" could not be deleted.`,
-                description: this.errorMessage(status, statusText),
+                description: errorMessage(status, statusText),
               },
             ]),
           });
         }),
     );
-  }
-
-  private errorMessage(statusCode: number, statusText: string) {
-    switch (statusCode.toString()) {
-      case '500':
-        return t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`;
-      case '401':
-        return t`Error ${statusCode} - ${statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
-      case '403':
-        return t`Error ${statusCode} - ${statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
-      case '404':
-        return t`Error ${statusCode} - ${statusText}: The server could not find the requested URL.`;
-      case '400':
-        return t`Error ${statusCode} - ${statusText}: The server was unable to complete your request.`;
-      default:
-        return t`Error ${statusCode} - ${statusText}`;
-    }
   }
 
   private get updateParams() {

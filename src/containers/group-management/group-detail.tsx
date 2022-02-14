@@ -1,5 +1,6 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
+import { errorMessage } from 'src/utilities';
 
 import {
   withRouter,
@@ -138,7 +139,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           this.addAlert(
             t`Group "${this.state.group.name}" could not be displayed.`,
             'danger',
-            this.errorMessage(status, statusText),
+            errorMessage(status, statusText),
           );
         });
 
@@ -157,7 +158,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           this.addAlert(
             t`Permissions for group "${this.state.group.name}" could not be displayed.`,
             'danger',
-            this.errorMessage(status, statusText),
+            errorMessage(status, statusText),
           );
         });
     }
@@ -295,7 +296,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             this.addAlert(
               t`Permission "${permission}" could not be not added to group "${this.state.group}".`,
               'danger',
-              this.errorMessage(status, statusText),
+              errorMessage(status, statusText),
             );
           }),
         );
@@ -311,7 +312,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             this.addAlert(
               t`Permission "${original.name}" could not be not removed from group "${this.state.group}".`,
               'danger',
-              this.errorMessage(status, statusText),
+              errorMessage(status, statusText),
             );
           }),
         );
@@ -504,7 +505,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                 this.addAlert(
                   t`Users list could not be displayed.`,
                   'danger',
-                  this.errorMessage(status, statusText),
+                  errorMessage(status, statusText),
                 );
               })
           }
@@ -569,7 +570,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           this.addAlert(
             t`Group "${group}" could not be deleted.`,
             'danger',
-            this.errorMessage(status, statusText),
+            errorMessage(status, statusText),
           );
         });
     };
@@ -630,7 +631,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         this.addAlert(
           t`User "${selectedUsers[0].name}" could not be added to group "${this.state.group.name}".`,
           'danger',
-          this.errorMessage(status, statusText),
+          errorMessage(status, statusText),
         );
       })
       .then(() => this.queryUsers());
@@ -649,7 +650,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         this.addAlert(
           t`Users list could not be displayed.`,
           'danger',
-          this.errorMessage(status, statusText),
+          errorMessage(status, statusText),
         );
       });
   }
@@ -899,7 +900,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         this.addAlert(
           t`Users list could not be displayed.`,
           'danger',
-          this.errorMessage(status, statusText),
+          errorMessage(status, statusText),
         );
       });
   }
@@ -925,26 +926,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         this.addAlert(
           t`User "${user.username}" could not be removed from group "${name}".`,
           'danger',
-          this.errorMessage(status, statusText),
+          errorMessage(status, statusText),
         );
       });
-  }
-
-  private errorMessage(statusCode: number, statusText: string) {
-    switch (statusCode.toString()) {
-      case '500':
-        return t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`;
-      case '401':
-        return t`Error ${statusCode} - ${statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
-      case '403':
-        return t`Error ${statusCode} - ${statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
-      case '404':
-        return t`Error ${statusCode} - ${statusText}: The server could not find the requested URL.`;
-      case '400':
-        return t`Error ${statusCode} - ${statusText}: The server was unable to complete your request.`;
-      default:
-        return t`Error ${statusCode} - ${statusText}`;
-    }
   }
 
   private get updateParams() {

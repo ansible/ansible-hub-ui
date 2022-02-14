@@ -1,5 +1,6 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
+import { errorMessage } from 'src/utilities';
 import './header.scss';
 
 import { Redirect } from 'react-router-dom';
@@ -617,7 +618,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               {
                 variant: 'danger',
                 title: t`Collection "${name} v${collectionVersion}" could not be deleted.`,
-                description: this.errorMessage(status, statusText),
+                description: errorMessage(status, statusText),
               },
             ],
           });
@@ -670,29 +671,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             {
               variant: 'danger',
               title: t`Collection "${name}" could not be deleted.`,
-              description: this.errorMessage(status, statusText),
+              description: errorMessage(status, statusText),
             },
           ],
         });
       });
   };
-
-  private errorMessage(statusCode: number, statusText: string) {
-    switch (statusCode.toString()) {
-      case '500':
-        return t`Error ${statusCode} - ${statusText}: The server encountered an error and was unable to complete your request.`;
-      case '401':
-        return t`Error ${statusCode} - ${statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
-      case '403':
-        return t`Error ${statusCode} - ${statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions.`;
-      case '404':
-        return t`Error ${statusCode} - ${statusText}: The server could not find the requested URL.`;
-      case '400':
-        return t`Error ${statusCode} - ${statusText}: The server was unable to complete your request.`;
-      default:
-        return t`Error ${statusCode} - ${statusText}`;
-    }
-  }
 
   private openDeleteModalWithConfirm(version = null) {
     this.setState({
@@ -716,7 +700,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             {
               variant: 'danger',
               title: t`Dependencies for collection "${name}" could not be displayed.`,
-              description: this.errorMessage(status, statusText),
+              description: errorMessage(status, statusText),
             },
           ],
         });
