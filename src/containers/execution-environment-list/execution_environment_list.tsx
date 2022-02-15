@@ -533,7 +533,7 @@ class ExecutionEnvironmentList extends React.Component<
           <Trans>
             Sync started for execution environment &quot;{name}&quot;.
           </Trans>,
-          'success',
+          'info',
           <span>
             <Trans>
               See the task management{' '}

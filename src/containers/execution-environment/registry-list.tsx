@@ -492,7 +492,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(
           <Trans>Sync started for remote registry &quot;{name}&quot;.</Trans>,
-          'success',
+          'info',
           <span>
             <Trans>
               See the task management{' '}
