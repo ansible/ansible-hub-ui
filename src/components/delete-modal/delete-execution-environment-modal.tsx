@@ -38,7 +38,7 @@ export class DeleteExecutionEnvironmentModal extends React.Component<
     return (
       <DeleteModal
         spinner={isDeletionPending}
-        title={'Delete container?'}
+        title={t`Delete container?`}
         cancelAction={() => closeAction()}
         deleteAction={() => this.deleteContainer(selectedItem)}
         isDisabled={!confirmDelete || isDeletionPending}

@@ -207,10 +207,10 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
                   niceNames={{
-                    username__contains: 'Username',
-                    first_name__contains: 'First name',
-                    last_name__contains: 'Last name',
-                    email__contains: 'Email',
+                    username__contains: t`Username`,
+                    first_name__contains: t`First name`,
+                    last_name__contains: t`Last name`,
+                    email__contains: t`Email`,
                   }}
                 />
               </div>

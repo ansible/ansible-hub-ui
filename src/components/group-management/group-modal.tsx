@@ -42,7 +42,7 @@ export class GroupModal extends React.Component<IProps, IState> {
           onCancel();
         }}
         isOpen={true}
-        title='Create a group'
+        title={t`Create a group`}
         actions={[
           <Button
             isDisabled={
