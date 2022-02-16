@@ -38,6 +38,7 @@ import {
 } from 'src/api';
 import {
   AboutModalWindow,
+  UIVersion,
   AlertType,
   LoginLink,
   SmallLogo,
@@ -460,6 +461,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         }}
       >
         {component}
+        <UIVersion />
       </AppContext.Provider>
     );
   }

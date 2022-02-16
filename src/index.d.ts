@@ -13,6 +13,7 @@ declare var DEPLOYMENT_MODE;
 declare var NAMESPACE_TERM;
 declare var APPLICATION_NAME;
 declare var UI_EXTERNAL_LOGIN_URI;
+declare var UI_COMMIT_HASH;
 
 // when DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE only
 interface Window {

@@ -70,6 +70,7 @@ export { Tabs, TabsType } from './patternfly-wrappers/tabs';
 export { Tag } from './tags/tag';
 export { TagLabel } from './tag-label/tag-label';
 export { Tooltip } from './patternfly-wrappers/tooltip';
+export { UIVersion } from './shared/ui-version';
 export { UserForm } from './user-form/user-form';
 export { UserFormPage } from './user-form/user-form-page';
 export { WriteOnlyField } from './patternfly-wrappers/write-only-field';

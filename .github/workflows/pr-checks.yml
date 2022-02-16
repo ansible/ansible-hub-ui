@@ -113,7 +113,8 @@ jobs:
           for file in *.js; do
             node -e 'console.log(JSON.stringify(require("./'"$file"'"), null, 2))' |
               sed -e 's/\/home\/.*\/\(base\|pr\)\//\/DIR\//g' \
-                -e 's/\(\[name\]\|automationHub\)\.[0-9]\+\.\(\[fullhash\]\)/\1.TIMESTAMP.\2/g' |
+                -e 's/\(\[name\]\|automationHub\)\.[0-9]\+\.\(\[fullhash\]\)/\1.TIMESTAMP.\2/g' \
+                -e 's/"UI_COMMIT_HASH": ".*"/"UI_COMMIT_HASH": "HASH"/' |
               grep -v '^Current branch:' |
               grep -v '^Root folder:' > ~/webpack-config/"$version"/"$file".json
           done

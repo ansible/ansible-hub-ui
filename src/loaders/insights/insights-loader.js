@@ -7,6 +7,7 @@ import '../app.scss';
 import { AppContext } from '../app-context';
 import { ActiveUserAPI, SettingsAPI } from 'src/api';
 import { Paths } from 'src/paths';
+import { UIVersion } from 'src/components';
 
 const DEFAULT_REPO = 'published';
 
@@ -118,22 +119,23 @@ class App extends Component {
     // before the app can authenticate
     if (!this.state.user || !this.state.activeUser) {
       return null;
-    } else {
-      return (
-        <AppContext.Provider
-          value={{
-            user: this.state.activeUser,
-            setUser: this.setActiveUser,
-            selectedRepo: this.state.selectedRepo,
-            alerts: this.state.alerts,
-            setAlerts: this.setAlerts,
-            settings: this.state.settings,
-          }}
-        >
-          <Routes childProps={this.props} />
-        </AppContext.Provider>
-      );
     }
+
+    return (
+      <AppContext.Provider
+        value={{
+          user: this.state.activeUser,
+          setUser: this.setActiveUser,
+          selectedRepo: this.state.selectedRepo,
+          alerts: this.state.alerts,
+          setAlerts: this.setAlerts,
+          settings: this.state.settings,
+        }}
+      >
+        <Routes childProps={this.props} />
+        <UIVersion />
+      </AppContext.Provider>
+    );
   }
   setActiveUser = (user) => {
     this.setState({ activeUser: user });
