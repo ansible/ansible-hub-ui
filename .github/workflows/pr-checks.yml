@@ -76,3 +76,49 @@ jobs:
         # we can just look for any merge commits since 2020
         count=`git log --min-parents=2 --since 2020-01-01 | tee /dev/stderr | wc -l`
         [ "$count" = 0 ]
+
+  webpack-config:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: "Checkout ansible-hub-ui (${{ github.base_ref }})"
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.base_ref }}
+        path: 'base'
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v2
+      with:
+        path: 'pr'
+
+    - name: "Install node 14"
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+        cache: 'npm'
+        cache-dependency-path: |
+          base/package-lock.json
+          pr/package-lock.json
+
+    - name: "Diff configs"
+      run: |
+        mkdir ~/webpack-config/
+
+        for version in base pr; do
+          mkdir ~/webpack-config/$version/
+          pushd $version/config/
+          npm install
+
+          for file in *.js; do
+            node -e 'console.log(JSON.stringify(require("./'"$file"'"), null, 2))' |
+              sed -e 's/\/home\/.*\/\(base\|pr\)\//\/DIR\//g' \
+                -e 's/\(\[name\]\|automationHub\)\.[0-9]\+\.\(\[fullhash\]\)/\1.TIMESTAMP.\2/g' |
+              grep -v '^Current branch:' |
+              grep -v '^Root folder:' > ~/webpack-config/"$version"/"$file".json
+          done
+
+          popd
+        done
+
+        diff -Naur ~/webpack-config/{base,pr}
