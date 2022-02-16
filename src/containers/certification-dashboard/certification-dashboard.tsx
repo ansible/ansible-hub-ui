@@ -42,7 +42,6 @@ import {
 import { Paths, formatPath } from 'src/paths';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
-import { versions } from 'process';
 
 interface IState {
   params: {
