@@ -23,7 +23,7 @@ import {
 import { UserPlusIcon } from '@patternfly/react-icons';
 
 import { UserAPI, UserType } from 'src/api';
-import { ParamHelper, filterIsSet } from 'src/utilities';
+import { ParamHelper, filterIsSet, errorMessage } from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -410,7 +410,8 @@ class UserList extends React.Component<RouteComponentProps, IState> {
             loading: false,
           }),
         )
-        .catch((e) =>
+        .catch((e) => {
+          const { status, statusText } = e.response;
           this.setState({
             users: [],
             itemCount: 0,
@@ -419,12 +420,12 @@ class UserList extends React.Component<RouteComponentProps, IState> {
               ...this.state.alerts,
               {
                 variant: 'danger',
-                title: t`Error loading users.`,
-                description: e?.message,
+                title: t`Users list could not be displayed.`,
+                description: errorMessage(status, statusText),
               },
             ],
-          }),
-        ),
+          });
+        }),
     );
   }
 

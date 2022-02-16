@@ -4,7 +4,7 @@ import { UserType, UserAPI } from 'src/api';
 import { mapErrorMessages } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
-
+import { errorMessage } from 'src/utilities';
 interface IState {
   isWaitingForResponse: boolean;
 }
@@ -69,7 +69,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
         .then(() => this.waitForDeleteConfirm(this.props.user.id))
         .catch((err) => {
           this.props.addAlert(
-            t`Error deleting user.`,
+            t`User "${this.props.user.username}" could not be deleted.`,
             'danger',
             mapErrorMessages(err)['__nofield'],
           );
@@ -89,6 +89,7 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
         this.waitForDeleteConfirm(user);
       })
       .catch((err) => {
+        const { status, statusText } = err.response;
         if (err.response.status === 404) {
           this.props.addAlert(
             <Trans>
@@ -99,7 +100,11 @@ export class DeleteUserModal extends React.Component<IProps, IState> {
           );
           this.props.closeModal(true);
         } else {
-          this.props.addAlert(t`Error deleting user.`, 'danger');
+          this.props.addAlert(
+            t`User "${this.props.user.username}" could not be deleted.`,
+            'danger',
+            errorMessage(status, statusText),
+          );
         }
 
         this.setState({ isWaitingForResponse: false });

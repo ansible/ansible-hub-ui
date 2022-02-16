@@ -3,6 +3,7 @@ import * as React from 'react';
 import { ExecutionEnvironmentAPI } from 'src/api';
 import { waitForTask } from 'src/utilities';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
+import { errorMessage } from 'src/utilities';
 
 import { Checkbox, Text } from '@patternfly/react-core';
 
@@ -80,12 +81,17 @@ export class DeleteExecutionEnvironmentModal extends React.Component<
             afterDelete();
           });
         })
-        .catch(() => {
+        .catch((e) => {
+          const { status, statusText } = e.response;
           this.setState({
             confirmDelete: false,
             isDeletionPending: false,
           });
-          addAlert(t`Error: delete failed`, 'danger', null);
+          addAlert(
+            t`Execution environment "${selectedItem}" could not be deleted.`,
+            'danger',
+            errorMessage(status, statusText),
+          );
           closeAction();
         }),
     );

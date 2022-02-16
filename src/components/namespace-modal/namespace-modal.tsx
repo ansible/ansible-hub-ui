@@ -176,7 +176,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                     formErrors: {
                       ...this.state.formErrors,
                       groups: {
-                        title: t`Error loading groups.`,
+                        title: t`Groups list could not be displayed.`,
                         description: err,
                         variant: 'danger',
                       },

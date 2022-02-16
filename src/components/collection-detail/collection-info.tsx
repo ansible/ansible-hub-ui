@@ -2,6 +2,7 @@ import { t, Trans } from '@lingui/macro';
 import * as moment from 'moment';
 import * as React from 'react';
 import './collection-info.scss';
+import { errorMessage } from 'src/utilities';
 
 import { Link } from 'react-router-dom';
 
@@ -178,12 +179,13 @@ export class CollectionInfo extends React.Component<IProps> {
         this.downloadLinkRef.current.href = downloadURL;
         this.downloadLinkRef.current.click();
       })
-      .catch((e) =>
+      .catch((e) => {
+        const { status, statusText } = e.response;
         this.props.addAlert(
           'danger',
-          t`Error downloading collection.`,
-          e?.message,
-        ),
-      );
+          t`Collection "${name}" could not be downloaded.`,
+          errorMessage(status, statusText),
+        );
+      });
   }
 }

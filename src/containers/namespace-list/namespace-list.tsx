@@ -28,7 +28,7 @@ import {
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { Constants } from 'src/constants';
-import { filterIsSet } from 'src/utilities';
+import { errorMessage, filterIsSet } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 import { i18n } from '@lingui/core';
 
@@ -109,7 +109,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
             });
           }
         })
-        .catch((e) =>
+        .catch((e) => {
+          const { status, statusText } = e.response;
           this.setState(
             {
               namespaces: [],
@@ -121,12 +122,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
                 ...this.context.alerts,
                 {
                   variant: 'danger',
-                  title: t`Error loading my namespaces.`,
-                  description: e?.message,
+                  title: t`Namespaces list could not be displayed.`,
+                  description: errorMessage(status, statusText),
                 },
               ]),
-          ),
-        );
+          );
+        });
     } else {
       this.loadNamespaces();
     }
@@ -343,7 +344,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
             loading: false,
           });
         })
-        .catch((e) =>
+        .catch((e) => {
+          const { status, statusText } = e.response;
           this.setState(
             {
               namespaces: [],
@@ -355,12 +357,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
                 ...this.context.alerts,
                 {
                   variant: 'danger',
-                  title: t`Error loading namespaces.`,
-                  description: e?.message,
+                  title: t`Namespaces list could not be displayed.`,
+                  description: errorMessage(status, statusText),
                 },
               ]),
-          ),
-        );
+          );
+        });
     });
   }
 

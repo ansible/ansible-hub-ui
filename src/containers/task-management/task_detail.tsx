@@ -39,6 +39,7 @@ import { Paths, formatPath } from 'src/paths';
 import { Constants } from 'src/constants';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 import { capitalize } from 'lodash';
+import { errorMessage } from 'src/utilities';
 
 interface IState {
   loading: boolean;
@@ -391,7 +392,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
         });
         this.loadContent();
       })
-      .catch(() => {
+      .catch((e) => {
+        const { status, statusText } = e.response;
         this.setState({
           loading: true,
           cancelModalVisible: false,
@@ -399,8 +401,8 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: taskName,
-              description: t`Error stopping task.`,
+              title: t`Task "${taskName}" could not be stopped.`,
+              description: errorMessage(status, statusText),
             },
           ],
         });

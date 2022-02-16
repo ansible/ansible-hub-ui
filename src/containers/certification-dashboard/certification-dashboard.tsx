@@ -26,7 +26,7 @@ import {
 } from '@patternfly/react-icons';
 
 import { CollectionVersionAPI, CollectionVersion, TaskAPI } from 'src/api';
-import { filterIsSet, ParamHelper } from 'src/utilities';
+import { errorMessage, filterIsSet, ParamHelper } from 'src/utilities';
 import {
   LoadingPageWithHeader,
   StatefulDropdown,
@@ -42,6 +42,7 @@ import {
 import { Paths, formatPath } from 'src/paths';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
+import { versions } from 'process';
 
 interface IState {
   params: {
@@ -488,19 +489,21 @@ class CertificationDashboard extends React.Component<
               },
             this.addAlert(
               <Trans>
-                Certification status for collection &quot;{version.name} v
-                {version.version}&quot; has been successfully updated.
+                Certification status for collection &quot;{version.namespace}{' '}
+                {version.name} v{version.version}&quot; has been successfully
+                updated.
               </Trans>,
               'success',
             ),
           )
           .catch((error) => {
+            const { status, statusText } = error.response;
             this.setState({
               updatingVersions: [],
               alerts: alerts.concat({
                 variant: 'danger',
-                title: t`API Error: ${error.response.status}`,
-                description: t`Could not update the certification status for ${version.namespace}.${version.name}.${version.version}.`,
+                title: t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+                description: errorMessage(status, statusText),
               }),
             });
           }),
@@ -527,8 +530,8 @@ class CertificationDashboard extends React.Component<
           updatingVersions: [],
           alerts: this.state.alerts.concat({
             variant: 'danger',
-            title: t`API Error: 500`,
-            description: t`Could not update the certification status for ${version.namespace}.${version.name}.${version.version}.`,
+            title: t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+            description: t`Error 500 - Internal Server Error: The server encountered an error and was unable to complete your request.`,
           }),
         });
       }

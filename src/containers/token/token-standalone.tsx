@@ -17,6 +17,7 @@ import {
 } from 'src/components';
 import { ActiveUserAPI } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
+import { errorMessage } from 'src/utilities';
 
 interface IState {
   token: string;
@@ -109,18 +110,19 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
   private loadToken() {
     ActiveUserAPI.getToken()
       .then((result) => this.setState({ token: result.data.token }))
-      .catch((e) =>
+      .catch((e) => {
+        const { status, statusText } = e.response;
         this.setState({
           alerts: [
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error loading token.`,
-              description: e?.message,
+              title: t`Token could not be displayed.`,
+              description: errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   }
 
   private get closeAlert() {

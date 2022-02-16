@@ -26,6 +26,7 @@ import {
   ErrorMessagesType,
   ParamHelper,
   mapErrorMessages,
+  errorMessage,
 } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -43,6 +44,7 @@ interface IState {
     tab?: string;
   };
   userId: string;
+  userName: string;
   unauthorized: boolean;
 }
 
@@ -63,6 +65,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       alerts: [],
       namespace: null,
       userId: '',
+      userName: '',
       newLinkURL: '',
       newLinkName: '',
       errorMessages: {},
@@ -78,11 +81,13 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     this.setState({ loading: true }, () => {
       ActiveUserAPI.getUser()
         .then((result) => {
-          this.setState({ userId: result.account_number }, () =>
-            this.loadNamespace(),
+          this.setState(
+            { userId: result.account_number, userName: result.username },
+            () => this.loadNamespace(),
           );
         })
-        .catch((e) =>
+        .catch((e) => {
+          const { status, statusText } = e.response;
           this.setState(
             {
               loading: false,
@@ -96,13 +101,13 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                 ...this.context.alerts,
                 {
                   variant: 'danger',
-                  title: t`Error loading active user.`,
-                  description: e?.message,
+                  title: t`Active user profile "${this.state.userName}" could not be displayed.`,
+                  description: errorMessage(status, statusText),
                 },
               ]);
             },
-          ),
-        );
+          );
+        });
     });
   }
 
@@ -272,7 +277,10 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
           );
         })
         .catch((error) => {
-          const result = error.response;
+          const {
+            result,
+            result: { status, statusText },
+          } = error.response;
           if (result.status === 400) {
             this.setState({
               errorMessages: mapErrorMessages(error),
@@ -282,8 +290,8 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
             this.setState({
               alerts: this.state.alerts.concat({
                 variant: 'danger',
-                title: t`API Error: ${error.response.status}`,
-                description: t`You don't have permissions to update this namespace.`,
+                title: t`Changes to namespace "${this.state.namespace.name}" could not be saved.`,
+                description: errorMessage(status, statusText),
               }),
               saving: false,
             });
