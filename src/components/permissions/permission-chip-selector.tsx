@@ -1,4 +1,6 @@
 import { t } from '@lingui/macro';
+import { i18n } from '@lingui/core';
+
 import * as React from 'react';
 import {
   Label,
@@ -17,6 +19,7 @@ interface IProps {
   onSelect?: (event, selection) => void;
   onClear?: () => void;
   menuAppendTo?: 'parent' | 'inline';
+  multilingual?: boolean;
 }
 
 interface IState {
@@ -37,10 +40,28 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
       return (
         <LabelGroup>
           {items.map((text) => (
-            <Label key={text}>{text}</Label>
+            <Label key={text}>
+              {this.props.multilingual ? i18n._(text) : text}
+            </Label>
           ))}
         </LabelGroup>
       );
+    }
+
+    let selections = [];
+    if (this.props.multilingual) {
+      this.props.selectedPermissions.forEach((item) => {
+        let item2 = {};
+        // orginal english value
+        item2['value'] = item;
+        item2.toString = function (): string {
+          // translated value
+          return i18n._(item);
+        };
+        selections.push(item2);
+      });
+    } else {
+      selections = this.props.selectedPermissions;
     }
 
     return (
@@ -51,7 +72,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         onToggle={this.onToggle}
         onSelect={this.props.onSelect ? this.props.onSelect : this.onSelect}
         onClear={this.props.onClear ? this.props.onClear : this.clearSelection}
-        selections={this.props.selectedPermissions}
+        selections={selections}
         isOpen={this.state.isOpen}
         placeholderText={this.placeholderText()}
         isDisabled={!!this.props.isDisabled}
@@ -65,7 +86,9 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
               />,
             ]
           : this.props.availablePermissions.map((option, index) => (
-              <SelectOption key={index} value={option} />
+              <SelectOption key={index} value={option}>
+                {this.props.multilingual ? i18n._(option) : option}
+              </SelectOption>
             ))}
       </Select>
     );
