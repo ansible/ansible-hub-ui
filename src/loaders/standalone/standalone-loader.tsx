@@ -403,7 +403,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         }),
         menuItem(t`Roles`, {
           condition: ({ user }) => user.model_permissions.view_user,
-          url: Paths.groupList,
+          url: Paths.roleList,
         }),
       ]),
     ];

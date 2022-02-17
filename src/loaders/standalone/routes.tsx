@@ -45,6 +45,8 @@ import {
 import { AppContext } from '../app-context';
 
 import { Paths, formatPath } from 'src/paths';
+import { RoleList } from 'src/containers/role-management/role-list';
+import { RoleDetail } from 'src/containers/role-management/role-detail';
 
 interface IRoutesProps {
   updateInitialData: (
@@ -206,6 +208,8 @@ export class Routes extends React.Component<IRoutesProps> {
       },
       { comp: GroupList, path: Paths.groupList },
       { comp: GroupDetail, path: Paths.groupDetail },
+      { comp: RoleDetail, path: Paths.roleDetail },
+      { comp: RoleList, path: Paths.roleList },
       { comp: TaskDetail, path: Paths.taskDetail },
       { comp: RepositoryList, path: Paths.repositories },
       { comp: UserProfile, path: Paths.userProfileSettings },
