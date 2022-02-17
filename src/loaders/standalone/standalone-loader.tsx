@@ -401,6 +401,10 @@ class App extends React.Component<RouteComponentProps, IState> {
           condition: ({ user }) => user.model_permissions.view_group,
           url: Paths.groupList,
         }),
+        menuItem(t`Roles`, {
+          condition: ({ user }) => user.model_permissions.view_user,
+          url: Paths.groupList,
+        }),
       ]),
     ];
   }
