@@ -125,11 +125,11 @@ msgid "API token"
 msgstr "API 令牌"
 
 #: src/containers/token/token-standalone.tsx:47
-#: src/loaders/standalone/standalone-loader.tsx:359
+#: src/loaders/standalone/standalone-loader.tsx:360
 msgid "API token management"
 msgstr ""
 
-#: src/loaders/standalone/standalone-loader.tsx:165
+#: src/loaders/standalone/standalone-loader.tsx:166
 msgid "About"
 msgstr "关于"
 
@@ -232,7 +232,7 @@ msgstr "通过添加组，可以访问 \"{namespace}\" 容器命名空间中的�
 msgid "All"
 msgstr "所有"
 
-#: src/loaders/standalone/standalone-loader.tsx:363
+#: src/loaders/standalone/standalone-loader.tsx:364
 msgid "Approval"
 msgstr "批准"
 
@@ -263,11 +263,11 @@ msgstr "身份验证供应商"
 msgid "Browse..."
 msgstr "浏览......"
 
-#: src/components/about-modal/about-modal.tsx:95
+#: src/components/about-modal/about-modal.tsx:94
 msgid "Browser OS"
 msgstr "浏览器 OS"
 
-#: src/components/about-modal/about-modal.tsx:89
+#: src/components/about-modal/about-modal.tsx:91
 msgid "Browser Version"
 msgstr "浏览器版本"
 
@@ -478,8 +478,8 @@ msgstr "集合版本"
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:150
 #: src/containers/search/search.tsx:97
-#: src/loaders/standalone/standalone-loader.tsx:340
 #: src/loaders/standalone/standalone-loader.tsx:341
+#: src/loaders/standalone/standalone-loader.tsx:342
 msgid "Collections"
 msgstr "集合"
 
@@ -614,8 +614,8 @@ msgid "Create"
 msgstr "创建"
 
 #: src/components/group-management/group-modal.tsx:45
-#~ msgid "Create a group"
-#~ msgstr "创建用户"
+msgid "Create a group"
+msgstr "创建用户"
 
 #: src/components/namespace-modal/namespace-modal.tsx:109
 msgid "Create a new namespace"
@@ -671,7 +671,7 @@ msgstr "当前排除的标签"
 msgid "Currently included tags"
 msgstr "当前包括的标签"
 
-#: src/loaders/standalone/standalone-loader.tsx:146
+#: src/loaders/standalone/standalone-loader.tsx:147
 msgid "Customer Support <0/>"
 msgstr "客户支持 <0/>"
 
@@ -740,6 +740,10 @@ msgstr "删除容器的发布"
 #: src/constants.tsx:213
 msgid "Delete container's namespace"
 msgstr "删除容器的命名空间"
+
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:41
+msgid "Delete container?"
+msgstr ""
 
 #: src/constants.tsx:218
 msgid "Delete distribution"
@@ -884,7 +888,7 @@ msgstr "文档站点"
 
 #: src/components/headers/collection-header.tsx:463
 #: src/containers/collection-detail/collection-docs.tsx:121
-#: src/loaders/standalone/standalone-loader.tsx:387
+#: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
 msgstr "文档"
 
@@ -985,6 +989,7 @@ msgstr "编辑用户"
 #: src/containers/group-management/group-detail.tsx:690
 #: src/containers/group-management/group-detail.tsx:762
 #: src/containers/user-management/user-list.tsx:174
+#: src/containers/user-management/user-list.tsx:213
 #: src/containers/user-management/user-list.tsx:276
 msgid "Email"
 msgstr "电子邮件"
@@ -1143,8 +1148,8 @@ msgstr "执行环境"
 #: src/components/execution-environment-header/execution-environment-header.tsx:36
 #: src/containers/execution-environment-list/execution_environment_list.tsx:168
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:107
-#: src/loaders/standalone/standalone-loader.tsx:369
-#: src/loaders/standalone/standalone-loader.tsx:375
+#: src/loaders/standalone/standalone-loader.tsx:370
+#: src/loaders/standalone/standalone-loader.tsx:376
 msgid "Execution Environments"
 msgstr "执行环境"
 
@@ -1224,6 +1229,7 @@ msgstr "完成于"
 #: src/containers/group-management/group-detail.tsx:682
 #: src/containers/group-management/group-detail.tsx:772
 #: src/containers/user-management/user-list.tsx:166
+#: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:264
 msgid "First name"
 msgstr "名"
@@ -1232,7 +1238,7 @@ msgstr "名"
 msgid "Follow logs"
 msgstr "跟踪日志"
 
-#: src/loaders/standalone/standalone-loader.tsx:175
+#: src/loaders/standalone/standalone-loader.tsx:176
 msgid "Galaxy Logo"
 msgstr "Galaxy 徽标"
 
@@ -1267,7 +1273,7 @@ msgstr "组列表"
 #: src/containers/group-management/group-detail.tsx:217
 #: src/containers/group-management/group-list.tsx:144
 #: src/containers/user-management/user-list.tsx:282
-#: src/loaders/standalone/standalone-loader.tsx:399
+#: src/loaders/standalone/standalone-loader.tsx:400
 msgid "Groups"
 msgstr "组"
 
@@ -1412,6 +1418,7 @@ msgstr "最后修改"
 #: src/containers/group-management/group-detail.tsx:686
 #: src/containers/group-management/group-detail.tsx:767
 #: src/containers/user-management/user-list.tsx:170
+#: src/containers/user-management/user-list.tsx:212
 #: src/containers/user-management/user-list.tsx:270
 msgid "Last name"
 msgstr "姓"
@@ -1486,7 +1493,7 @@ msgstr "登录"
 msgid "Logo URL"
 msgstr "徽标 URL"
 
-#: src/loaders/standalone/standalone-loader.tsx:136
+#: src/loaders/standalone/standalone-loader.tsx:137
 msgid "Logout"
 msgstr "退出"
 
@@ -1525,7 +1532,7 @@ msgstr "我的命名空间"
 
 #: src/containers/settings/user-profile.tsx:77
 #: src/containers/settings/user-profile.tsx:78
-#: src/loaders/standalone/standalone-loader.tsx:125
+#: src/loaders/standalone/standalone-loader.tsx:126
 msgid "My profile"
 msgstr "我的配置集"
 
@@ -1589,7 +1596,7 @@ msgstr "命名空间所有者"
 #~ msgid "Namespace successfully edited."
 #~ msgstr ""
 
-#: src/loaders/standalone/standalone-loader.tsx:349
+#: src/loaders/standalone/standalone-loader.tsx:350
 #: src/paths.ts:72
 msgid "Namespaces"
 msgstr "命名空间"
@@ -1891,7 +1898,7 @@ msgstr "拉取私有容器"
 msgid "Pull this image"
 msgstr "拉取此镜像"
 
-#: src/components/about-modal/about-modal.tsx:71
+#: src/components/about-modal/about-modal.tsx:79
 msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible 版本"
 
@@ -2068,7 +2075,7 @@ msgstr "远程"
 
 #: src/constants.tsx:96
 #: src/containers/execution-environment/registry-list.tsx:231
-#: src/loaders/standalone/standalone-loader.tsx:378
+#: src/loaders/standalone/standalone-loader.tsx:379
 msgid "Remote Registries"
 msgstr "远程 Registry"
 
@@ -2116,7 +2123,7 @@ msgstr "仓库 URL"
 msgid "Repositories"
 msgstr "软件仓库"
 
-#: src/loaders/standalone/standalone-loader.tsx:355
+#: src/loaders/standalone/standalone-loader.tsx:356
 msgid "Repository Management"
 msgstr "仓库管理"
 
@@ -2254,7 +2261,7 @@ msgstr "服务器 URL"
 msgid "Server error. Please come back later."
 msgstr "服务器错误。请稍后返回。"
 
-#: src/components/about-modal/about-modal.tsx:65
+#: src/components/about-modal/about-modal.tsx:76
 msgid "Server version"
 msgstr "服务器版本"
 
@@ -2437,7 +2444,7 @@ msgstr ""
 
 #: src/constants.tsx:105
 #: src/containers/task-management/task-list-view.tsx:115
-#: src/loaders/standalone/standalone-loader.tsx:383
+#: src/loaders/standalone/standalone-loader.tsx:384
 msgid "Task Management"
 msgstr "任务管理"
 
@@ -2597,7 +2604,7 @@ msgstr "同时连接总数。"
 msgid "Traceback"
 msgstr "追溯"
 
-#: src/loaders/standalone/standalone-loader.tsx:155
+#: src/loaders/standalone/standalone-loader.tsx:156
 msgid "Training <0/>"
 msgstr "培训 <0/>"
 
@@ -2605,6 +2612,10 @@ msgstr "培训 <0/>"
 #: src/containers/task-management/task_detail.tsx:260
 msgid "Type"
 msgstr "类型"
+
+#: src/components/about-modal/about-modal.tsx:82
+msgid "UI Version"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:237
 msgid "URL"
@@ -2695,11 +2706,11 @@ msgstr "有用的链接"
 msgid "User \"{0}\" has been successfully deleted."
 msgstr ""
 
-#: src/loaders/standalone/standalone-loader.tsx:394
+#: src/loaders/standalone/standalone-loader.tsx:395
 msgid "User Access"
 msgstr "用户访问"
 
-#: src/components/about-modal/about-modal.tsx:83
+#: src/components/about-modal/about-modal.tsx:88
 msgid "User Groups"
 msgstr "用户组"
 
@@ -2717,18 +2728,19 @@ msgstr "用户列表"
 msgid "User type"
 msgstr "用户类型"
 
-#: src/components/about-modal/about-modal.tsx:77
+#: src/components/about-modal/about-modal.tsx:85
 #: src/components/repositories/remote-form.tsx:365
 #: src/components/user-form/user-form.tsx:86
 #: src/containers/group-management/group-detail.tsx:678
 #: src/containers/group-management/group-detail.tsx:757
 #: src/containers/login/login.tsx:52
 #: src/containers/user-management/user-list.tsx:162
+#: src/containers/user-management/user-list.tsx:210
 #: src/containers/user-management/user-list.tsx:259
 msgid "Username"
 msgstr "用户名"
 
-#: src/loaders/standalone/standalone-loader.tsx:119
+#: src/loaders/standalone/standalone-loader.tsx:120
 msgid "Username: {0}"
 msgstr "用户名：{0}"
 
@@ -2738,7 +2750,7 @@ msgstr "用户名：{0}"
 #: src/containers/user-management/user-detail.tsx:80
 #: src/containers/user-management/user-edit.tsx:62
 #: src/containers/user-management/user-list.tsx:139
-#: src/loaders/standalone/standalone-loader.tsx:395
+#: src/loaders/standalone/standalone-loader.tsx:396
 msgid "Users"
 msgstr "用户"
 

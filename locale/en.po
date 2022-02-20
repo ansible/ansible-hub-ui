@@ -125,11 +125,11 @@ msgid "API token"
 msgstr "API token"
 
 #: src/containers/token/token-standalone.tsx:47
-#: src/loaders/standalone/standalone-loader.tsx:359
+#: src/loaders/standalone/standalone-loader.tsx:360
 msgid "API token management"
 msgstr "API token management"
 
-#: src/loaders/standalone/standalone-loader.tsx:165
+#: src/loaders/standalone/standalone-loader.tsx:166
 msgid "About"
 msgstr "About"
 
@@ -234,7 +234,7 @@ msgstr ""
 msgid "All"
 msgstr "All"
 
-#: src/loaders/standalone/standalone-loader.tsx:363
+#: src/loaders/standalone/standalone-loader.tsx:364
 msgid "Approval"
 msgstr "Approval"
 
@@ -265,11 +265,11 @@ msgstr "Authentication provider"
 msgid "Browse..."
 msgstr "Browse..."
 
-#: src/components/about-modal/about-modal.tsx:95
+#: src/components/about-modal/about-modal.tsx:94
 msgid "Browser OS"
 msgstr "Browser OS"
 
-#: src/components/about-modal/about-modal.tsx:89
+#: src/components/about-modal/about-modal.tsx:91
 msgid "Browser Version"
 msgstr "Browser Version"
 
@@ -480,8 +480,8 @@ msgstr "Collection versions"
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:150
 #: src/containers/search/search.tsx:97
-#: src/loaders/standalone/standalone-loader.tsx:340
 #: src/loaders/standalone/standalone-loader.tsx:341
+#: src/loaders/standalone/standalone-loader.tsx:342
 msgid "Collections"
 msgstr "Collections"
 
@@ -616,8 +616,8 @@ msgid "Create"
 msgstr "Create"
 
 #: src/components/group-management/group-modal.tsx:45
-#~ msgid "Create a group"
-#~ msgstr "Create a group"
+msgid "Create a group"
+msgstr "Create a group"
 
 #: src/components/namespace-modal/namespace-modal.tsx:109
 msgid "Create a new namespace"
@@ -673,7 +673,7 @@ msgstr "Currently excluded tags"
 msgid "Currently included tags"
 msgstr "Currently included tags"
 
-#: src/loaders/standalone/standalone-loader.tsx:146
+#: src/loaders/standalone/standalone-loader.tsx:147
 msgid "Customer Support <0/>"
 msgstr "Customer Support <0/>"
 
@@ -742,6 +742,10 @@ msgstr "Delete container's distribution"
 #: src/constants.tsx:213
 msgid "Delete container's namespace"
 msgstr "Delete container's namespace"
+
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:41
+msgid "Delete container?"
+msgstr "Delete container?"
 
 #: src/constants.tsx:218
 msgid "Delete distribution"
@@ -886,7 +890,7 @@ msgstr "Docs site"
 
 #: src/components/headers/collection-header.tsx:463
 #: src/containers/collection-detail/collection-docs.tsx:121
-#: src/loaders/standalone/standalone-loader.tsx:387
+#: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
 msgstr "Documentation"
 
@@ -987,6 +991,7 @@ msgstr "Edit user"
 #: src/containers/group-management/group-detail.tsx:690
 #: src/containers/group-management/group-detail.tsx:762
 #: src/containers/user-management/user-list.tsx:174
+#: src/containers/user-management/user-list.tsx:213
 #: src/containers/user-management/user-list.tsx:276
 msgid "Email"
 msgstr "Email"
@@ -1145,8 +1150,8 @@ msgstr "Execution Environment"
 #: src/components/execution-environment-header/execution-environment-header.tsx:36
 #: src/containers/execution-environment-list/execution_environment_list.tsx:168
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:107
-#: src/loaders/standalone/standalone-loader.tsx:369
-#: src/loaders/standalone/standalone-loader.tsx:375
+#: src/loaders/standalone/standalone-loader.tsx:370
+#: src/loaders/standalone/standalone-loader.tsx:376
 msgid "Execution Environments"
 msgstr "Execution Environments"
 
@@ -1226,6 +1231,7 @@ msgstr "Finished at"
 #: src/containers/group-management/group-detail.tsx:682
 #: src/containers/group-management/group-detail.tsx:772
 #: src/containers/user-management/user-list.tsx:166
+#: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:264
 msgid "First name"
 msgstr "First name"
@@ -1234,7 +1240,7 @@ msgstr "First name"
 msgid "Follow logs"
 msgstr "Follow logs"
 
-#: src/loaders/standalone/standalone-loader.tsx:175
+#: src/loaders/standalone/standalone-loader.tsx:176
 msgid "Galaxy Logo"
 msgstr "Galaxy Logo"
 
@@ -1269,7 +1275,7 @@ msgstr "Group list"
 #: src/containers/group-management/group-detail.tsx:217
 #: src/containers/group-management/group-list.tsx:144
 #: src/containers/user-management/user-list.tsx:282
-#: src/loaders/standalone/standalone-loader.tsx:399
+#: src/loaders/standalone/standalone-loader.tsx:400
 msgid "Groups"
 msgstr "Groups"
 
@@ -1414,6 +1420,7 @@ msgstr "Last modified"
 #: src/containers/group-management/group-detail.tsx:686
 #: src/containers/group-management/group-detail.tsx:767
 #: src/containers/user-management/user-list.tsx:170
+#: src/containers/user-management/user-list.tsx:212
 #: src/containers/user-management/user-list.tsx:270
 msgid "Last name"
 msgstr "Last name"
@@ -1488,7 +1495,7 @@ msgstr "Login"
 msgid "Logo URL"
 msgstr "Logo URL"
 
-#: src/loaders/standalone/standalone-loader.tsx:136
+#: src/loaders/standalone/standalone-loader.tsx:137
 msgid "Logout"
 msgstr "Logout"
 
@@ -1527,7 +1534,7 @@ msgstr "My namespaces"
 
 #: src/containers/settings/user-profile.tsx:77
 #: src/containers/settings/user-profile.tsx:78
-#: src/loaders/standalone/standalone-loader.tsx:125
+#: src/loaders/standalone/standalone-loader.tsx:126
 msgid "My profile"
 msgstr "My profile"
 
@@ -1591,7 +1598,7 @@ msgstr "Namespace owners"
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
-#: src/loaders/standalone/standalone-loader.tsx:349
+#: src/loaders/standalone/standalone-loader.tsx:350
 #: src/paths.ts:72
 msgid "Namespaces"
 msgstr "Namespaces"
@@ -1893,7 +1900,7 @@ msgstr "Pull private containers"
 msgid "Pull this image"
 msgstr "Pull this image"
 
-#: src/components/about-modal/about-modal.tsx:71
+#: src/components/about-modal/about-modal.tsx:79
 msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible Version"
 
@@ -2070,7 +2077,7 @@ msgstr "Remote"
 
 #: src/constants.tsx:96
 #: src/containers/execution-environment/registry-list.tsx:231
-#: src/loaders/standalone/standalone-loader.tsx:378
+#: src/loaders/standalone/standalone-loader.tsx:379
 msgid "Remote Registries"
 msgstr "Remote Registries"
 
@@ -2114,7 +2121,7 @@ msgstr "Repo URL"
 msgid "Repositories"
 msgstr "Repositories"
 
-#: src/loaders/standalone/standalone-loader.tsx:355
+#: src/loaders/standalone/standalone-loader.tsx:356
 msgid "Repository Management"
 msgstr "Repository Management"
 
@@ -2252,7 +2259,7 @@ msgstr "Server URL"
 msgid "Server error. Please come back later."
 msgstr "Server error. Please come back later."
 
-#: src/components/about-modal/about-modal.tsx:65
+#: src/components/about-modal/about-modal.tsx:76
 msgid "Server version"
 msgstr "Server version"
 
@@ -2435,7 +2442,7 @@ msgstr "Task \"{taskName}\" stopped successfully."
 
 #: src/constants.tsx:105
 #: src/containers/task-management/task-list-view.tsx:115
-#: src/loaders/standalone/standalone-loader.tsx:383
+#: src/loaders/standalone/standalone-loader.tsx:384
 msgid "Task Management"
 msgstr "Task Management"
 
@@ -2595,7 +2602,7 @@ msgstr "Total number of simultaneous connections."
 msgid "Traceback"
 msgstr "Traceback"
 
-#: src/loaders/standalone/standalone-loader.tsx:155
+#: src/loaders/standalone/standalone-loader.tsx:156
 msgid "Training <0/>"
 msgstr "Training <0/>"
 
@@ -2603,6 +2610,10 @@ msgstr "Training <0/>"
 #: src/containers/task-management/task_detail.tsx:260
 msgid "Type"
 msgstr "Type"
+
+#: src/components/about-modal/about-modal.tsx:82
+msgid "UI Version"
+msgstr "UI Version"
 
 #: src/components/repositories/remote-form.tsx:237
 msgid "URL"
@@ -2693,11 +2704,11 @@ msgstr "Useful links"
 msgid "User \"{0}\" has been successfully deleted."
 msgstr "User \"{0}\" has been successfully deleted."
 
-#: src/loaders/standalone/standalone-loader.tsx:394
+#: src/loaders/standalone/standalone-loader.tsx:395
 msgid "User Access"
 msgstr "User Access"
 
-#: src/components/about-modal/about-modal.tsx:83
+#: src/components/about-modal/about-modal.tsx:88
 msgid "User Groups"
 msgstr "User Groups"
 
@@ -2715,18 +2726,19 @@ msgstr "User list"
 msgid "User type"
 msgstr "User type"
 
-#: src/components/about-modal/about-modal.tsx:77
+#: src/components/about-modal/about-modal.tsx:85
 #: src/components/repositories/remote-form.tsx:365
 #: src/components/user-form/user-form.tsx:86
 #: src/containers/group-management/group-detail.tsx:678
 #: src/containers/group-management/group-detail.tsx:757
 #: src/containers/login/login.tsx:52
 #: src/containers/user-management/user-list.tsx:162
+#: src/containers/user-management/user-list.tsx:210
 #: src/containers/user-management/user-list.tsx:259
 msgid "Username"
 msgstr "Username"
 
-#: src/loaders/standalone/standalone-loader.tsx:119
+#: src/loaders/standalone/standalone-loader.tsx:120
 msgid "Username: {0}"
 msgstr "Username: {0}"
 
@@ -2736,7 +2748,7 @@ msgstr "Username: {0}"
 #: src/containers/user-management/user-detail.tsx:80
 #: src/containers/user-management/user-edit.tsx:62
 #: src/containers/user-management/user-list.tsx:139
-#: src/loaders/standalone/standalone-loader.tsx:395
+#: src/loaders/standalone/standalone-loader.tsx:396
 msgid "Users"
 msgstr "Users"
 

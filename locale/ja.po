@@ -125,11 +125,11 @@ msgid "API token"
 msgstr "API トークン"
 
 #: src/containers/token/token-standalone.tsx:47
-#: src/loaders/standalone/standalone-loader.tsx:359
+#: src/loaders/standalone/standalone-loader.tsx:360
 msgid "API token management"
 msgstr ""
 
-#: src/loaders/standalone/standalone-loader.tsx:165
+#: src/loaders/standalone/standalone-loader.tsx:166
 msgid "About"
 msgstr "情報"
 
@@ -232,7 +232,7 @@ msgstr "グループを追加すると、\"{namespace}\" コンテナー名前�
 msgid "All"
 msgstr "すべて"
 
-#: src/loaders/standalone/standalone-loader.tsx:363
+#: src/loaders/standalone/standalone-loader.tsx:364
 msgid "Approval"
 msgstr "承認"
 
@@ -263,11 +263,11 @@ msgstr "認証プロバイダー"
 msgid "Browse..."
 msgstr "参照..."
 
-#: src/components/about-modal/about-modal.tsx:95
+#: src/components/about-modal/about-modal.tsx:94
 msgid "Browser OS"
 msgstr "ブラウザー OS"
 
-#: src/components/about-modal/about-modal.tsx:89
+#: src/components/about-modal/about-modal.tsx:91
 msgid "Browser Version"
 msgstr "ブラウザーのバージョン"
 
@@ -478,8 +478,8 @@ msgstr "コレクションのバージョン"
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:150
 #: src/containers/search/search.tsx:97
-#: src/loaders/standalone/standalone-loader.tsx:340
 #: src/loaders/standalone/standalone-loader.tsx:341
+#: src/loaders/standalone/standalone-loader.tsx:342
 msgid "Collections"
 msgstr "コレクション"
 
@@ -614,8 +614,8 @@ msgid "Create"
 msgstr "作成"
 
 #: src/components/group-management/group-modal.tsx:45
-#~ msgid "Create a group"
-#~ msgstr "グループの作成"
+msgid "Create a group"
+msgstr "グループの作成"
 
 #: src/components/namespace-modal/namespace-modal.tsx:109
 msgid "Create a new namespace"
@@ -671,7 +671,7 @@ msgstr "現在除外されているタグ"
 msgid "Currently included tags"
 msgstr "現在含まれているタグ"
 
-#: src/loaders/standalone/standalone-loader.tsx:146
+#: src/loaders/standalone/standalone-loader.tsx:147
 msgid "Customer Support <0/>"
 msgstr "カスタマーサポート <0/>"
 
@@ -740,6 +740,10 @@ msgstr "コンテナーのディストリビューションの削除"
 #: src/constants.tsx:213
 msgid "Delete container's namespace"
 msgstr "コンテナーの名前空間の削除"
+
+#: src/components/delete-modal/delete-execution-environment-modal.tsx:41
+msgid "Delete container?"
+msgstr ""
 
 #: src/constants.tsx:218
 msgid "Delete distribution"
@@ -884,7 +888,7 @@ msgstr "ドキュメントのサイト"
 
 #: src/components/headers/collection-header.tsx:463
 #: src/containers/collection-detail/collection-docs.tsx:121
-#: src/loaders/standalone/standalone-loader.tsx:387
+#: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
 msgstr "ドキュメント"
 
@@ -985,6 +989,7 @@ msgstr "ユーザーの編集"
 #: src/containers/group-management/group-detail.tsx:690
 #: src/containers/group-management/group-detail.tsx:762
 #: src/containers/user-management/user-list.tsx:174
+#: src/containers/user-management/user-list.tsx:213
 #: src/containers/user-management/user-list.tsx:276
 msgid "Email"
 msgstr "メール"
@@ -1143,8 +1148,8 @@ msgstr "実行環境"
 #: src/components/execution-environment-header/execution-environment-header.tsx:36
 #: src/containers/execution-environment-list/execution_environment_list.tsx:168
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:107
-#: src/loaders/standalone/standalone-loader.tsx:369
-#: src/loaders/standalone/standalone-loader.tsx:375
+#: src/loaders/standalone/standalone-loader.tsx:370
+#: src/loaders/standalone/standalone-loader.tsx:376
 msgid "Execution Environments"
 msgstr "実行環境"
 
@@ -1224,6 +1229,7 @@ msgstr "終了日時"
 #: src/containers/group-management/group-detail.tsx:682
 #: src/containers/group-management/group-detail.tsx:772
 #: src/containers/user-management/user-list.tsx:166
+#: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:264
 msgid "First name"
 msgstr "名"
@@ -1232,7 +1238,7 @@ msgstr "名"
 msgid "Follow logs"
 msgstr "ログのフォロー"
 
-#: src/loaders/standalone/standalone-loader.tsx:175
+#: src/loaders/standalone/standalone-loader.tsx:176
 msgid "Galaxy Logo"
 msgstr "Galaxy ロゴ"
 
@@ -1267,7 +1273,7 @@ msgstr "グループリスト"
 #: src/containers/group-management/group-detail.tsx:217
 #: src/containers/group-management/group-list.tsx:144
 #: src/containers/user-management/user-list.tsx:282
-#: src/loaders/standalone/standalone-loader.tsx:399
+#: src/loaders/standalone/standalone-loader.tsx:400
 msgid "Groups"
 msgstr "グループ"
 
@@ -1412,6 +1418,7 @@ msgstr "最終更新日"
 #: src/containers/group-management/group-detail.tsx:686
 #: src/containers/group-management/group-detail.tsx:767
 #: src/containers/user-management/user-list.tsx:170
+#: src/containers/user-management/user-list.tsx:212
 #: src/containers/user-management/user-list.tsx:270
 msgid "Last name"
 msgstr "姓"
@@ -1486,7 +1493,7 @@ msgstr "ログイン"
 msgid "Logo URL"
 msgstr "ロゴ URL"
 
-#: src/loaders/standalone/standalone-loader.tsx:136
+#: src/loaders/standalone/standalone-loader.tsx:137
 msgid "Logout"
 msgstr "ログアウト"
 
@@ -1525,7 +1532,7 @@ msgstr "自分の名前空間"
 
 #: src/containers/settings/user-profile.tsx:77
 #: src/containers/settings/user-profile.tsx:78
-#: src/loaders/standalone/standalone-loader.tsx:125
+#: src/loaders/standalone/standalone-loader.tsx:126
 msgid "My profile"
 msgstr "自分のプロファイル"
 
@@ -1589,7 +1596,7 @@ msgstr "名前空間の所有者"
 #~ msgid "Namespace successfully edited."
 #~ msgstr ""
 
-#: src/loaders/standalone/standalone-loader.tsx:349
+#: src/loaders/standalone/standalone-loader.tsx:350
 #: src/paths.ts:72
 msgid "Namespaces"
 msgstr "名前空間"
@@ -1891,7 +1898,7 @@ msgstr "プライベートコンテナーのプル"
 msgid "Pull this image"
 msgstr "このイメージのプル"
 
-#: src/components/about-modal/about-modal.tsx:71
+#: src/components/about-modal/about-modal.tsx:79
 msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible バージョン"
 
@@ -2068,7 +2075,7 @@ msgstr "リモート"
 
 #: src/constants.tsx:96
 #: src/containers/execution-environment/registry-list.tsx:231
-#: src/loaders/standalone/standalone-loader.tsx:378
+#: src/loaders/standalone/standalone-loader.tsx:379
 msgid "Remote Registries"
 msgstr "リモートレジストリー"
 
@@ -2116,7 +2123,7 @@ msgstr "リポジトリー URL"
 msgid "Repositories"
 msgstr "リポジトリー"
 
-#: src/loaders/standalone/standalone-loader.tsx:355
+#: src/loaders/standalone/standalone-loader.tsx:356
 msgid "Repository Management"
 msgstr "リポジトリー管理"
 
@@ -2254,7 +2261,7 @@ msgstr "サーバー URL"
 msgid "Server error. Please come back later."
 msgstr "サーバーエラー。後でもう一度お試しください。"
 
-#: src/components/about-modal/about-modal.tsx:65
+#: src/components/about-modal/about-modal.tsx:76
 msgid "Server version"
 msgstr "バージョンの選択t"
 
@@ -2437,7 +2444,7 @@ msgstr ""
 
 #: src/constants.tsx:105
 #: src/containers/task-management/task-list-view.tsx:115
-#: src/loaders/standalone/standalone-loader.tsx:383
+#: src/loaders/standalone/standalone-loader.tsx:384
 msgid "Task Management"
 msgstr "タスク管理"
 
@@ -2597,7 +2604,7 @@ msgstr "同時接続の合計数。"
 msgid "Traceback"
 msgstr "トレースバック"
 
-#: src/loaders/standalone/standalone-loader.tsx:155
+#: src/loaders/standalone/standalone-loader.tsx:156
 msgid "Training <0/>"
 msgstr "トレーニング <0/>"
 
@@ -2605,6 +2612,10 @@ msgstr "トレーニング <0/>"
 #: src/containers/task-management/task_detail.tsx:260
 msgid "Type"
 msgstr "タイプ"
+
+#: src/components/about-modal/about-modal.tsx:82
+msgid "UI Version"
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:237
 msgid "URL"
@@ -2695,11 +2706,11 @@ msgstr "便利なリンク"
 msgid "User \"{0}\" has been successfully deleted."
 msgstr ""
 
-#: src/loaders/standalone/standalone-loader.tsx:394
+#: src/loaders/standalone/standalone-loader.tsx:395
 msgid "User Access"
 msgstr "ユーザーアクセス"
 
-#: src/components/about-modal/about-modal.tsx:83
+#: src/components/about-modal/about-modal.tsx:88
 msgid "User Groups"
 msgstr "ユーザーグループ"
 
@@ -2717,18 +2728,19 @@ msgstr "ユーザーリスト"
 msgid "User type"
 msgstr "ユーザータイプ"
 
-#: src/components/about-modal/about-modal.tsx:77
+#: src/components/about-modal/about-modal.tsx:85
 #: src/components/repositories/remote-form.tsx:365
 #: src/components/user-form/user-form.tsx:86
 #: src/containers/group-management/group-detail.tsx:678
 #: src/containers/group-management/group-detail.tsx:757
 #: src/containers/login/login.tsx:52
 #: src/containers/user-management/user-list.tsx:162
+#: src/containers/user-management/user-list.tsx:210
 #: src/containers/user-management/user-list.tsx:259
 msgid "Username"
 msgstr "ユーザー名"
 
-#: src/loaders/standalone/standalone-loader.tsx:119
+#: src/loaders/standalone/standalone-loader.tsx:120
 msgid "Username: {0}"
 msgstr "ユーザー名: {0}"
 
@@ -2738,7 +2750,7 @@ msgstr "ユーザー名: {0}"
 #: src/containers/user-management/user-detail.tsx:80
 #: src/containers/user-management/user-edit.tsx:62
 #: src/containers/user-management/user-list.tsx:139
-#: src/loaders/standalone/standalone-loader.tsx:395
+#: src/loaders/standalone/standalone-loader.tsx:396
 msgid "Users"
 msgstr "ユーザー"
 
