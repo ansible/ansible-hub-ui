@@ -1,0 +1,12 @@
+ignore:
+  - '.git/'
+  - 'node_modules/'
+  - 'dist/'
+  - 'test/results/'
+  - 'locale/*.js'
+  - '*.svg'
+rules:
+  end-of-file:
+    enable: true
+    disable-autofix: false
+    single-new-line: true
