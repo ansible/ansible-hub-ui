@@ -1,3 +1,4 @@
+// FIXME dead or missed in hub-namespace-page-controls rename?
 .controls {
   display: flex;
   justify-content: space-between;
@@ -5,11 +6,13 @@
   padding-right: 24px;
 }
 
+// FIXME global
 .top {
   padding-top: 0;
   padding-bottom: 16px;
 }
 
+// FIXME global
 .bottom {
   padding-top: 16px;
   padding-bottom: 0;

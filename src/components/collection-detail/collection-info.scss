@@ -1,3 +1,4 @@
+// FIXME global
 .install-title {
   min-width: 100px;
   vertical-align: middle;
@@ -11,6 +12,7 @@
   overflow: hidden;
 }
 
+// FIXME global-ish (and maybe readme-container is c-collection-info__readme-container ?
 .hub-fade-out {
   position: absolute;
   z-index: 1;
@@ -26,10 +28,12 @@
   height: 50px;
 }
 
+// FIXME global
 .download-button {
   padding-left: 0;
 }
 
+// FIXME global
 .info-panel {
   padding: 8px;
 }

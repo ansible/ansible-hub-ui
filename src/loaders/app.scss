@@ -1,6 +1,14 @@
 // Importing Global Variables
 @import '~@redhat-cloud-services/frontend-components-utilities/styles/all';
 
+// FIXME some or all of these should not apply to insights mode:
+// body - bad global, probably already set
+// clickable - should still be hub-m-clickable probably
+// page-sidebar - standalone menu, unless insights also uses it, would be bad anyway
+// nav-title - only set in standalone-loader, unless insights sets it somewhere
+// pre,code - pre > code unlikely, put under hub-root or something
+// body,#root - also handled by insights likely?
+
 .body {
   background-color: white;
   padding: 16px;

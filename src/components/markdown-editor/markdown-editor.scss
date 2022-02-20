@@ -1,5 +1,6 @@
 @import '../../global-variables.scss';
 
+// FIXME good, just add prefix to top
 .markdown-editor {
   display: flex;
 
@@ -28,6 +29,7 @@
   }
 }
 
+// FIXME id?
 #resources {
   height: 500px;
   resize: none;
