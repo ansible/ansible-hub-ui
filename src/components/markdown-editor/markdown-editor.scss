@@ -1,4 +1,5 @@
 @import '../../global-variables.scss';
+
 .markdown-editor {
   display: flex;
 
@@ -26,6 +27,7 @@
     max-width: 500px;
   }
 }
+
 #resources {
   height: 500px;
   resize: none;

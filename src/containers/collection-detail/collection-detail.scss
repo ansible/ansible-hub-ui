@@ -1,8 +1,8 @@
 @import '../../global-variables.scss';
 
 .main {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 
 .header {
@@ -16,6 +16,7 @@
 .docs-container {
   padding-top: 24px;
   background-color: white;
+
   @media (min-width: $breakpoint-md) {
     display: flex;
   }
@@ -25,14 +26,14 @@
     min-width: 294px;
     max-width: 294px;
     border-right: 1px solid #d8d8d8;
-    padding: 0px;
-    padding-top: 0px;
+    padding: 0;
+    padding-top: 0;
   }
 
   .docs {
     flex-grow: 1;
     padding: 24px;
-    padding-top: 0px;
+    padding-top: 0;
     overflow-x: auto;
 
     // make the height close to the height ofthe page so short docs don't
@@ -43,6 +44,7 @@
       tr:nth-child(2n) {
         background-color: #f2f2f2;
       }
+
       td,
       th {
         border: 1px solid #ccc;
@@ -51,6 +53,7 @@
     }
   }
 }
+
 .docs-container pre {
   white-space: pre-wrap;
 }

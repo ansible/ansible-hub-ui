@@ -34,7 +34,7 @@
 
 .background {
   background-color: white;
-  padding: 0px 24px 0px 24px;
+  padding: 0 24px;
 }
 
 .placeholder {
@@ -64,6 +64,7 @@
 .hub-tab-link-container {
   display: flex;
   margin-top: 10px;
+
   @media (max-width: $breakpoint-md) {
     flex-direction: column-reverse;
   }
@@ -81,12 +82,12 @@
     @media (min-width: $breakpoint-md) {
       justify-content: flex-end;
     }
+
     @media (max-width: $breakpoint-md) {
       margin-bottom: 10px;
     }
 
     flex-grow: 1;
-
     display: flex;
     align-items: center;
     flex-wrap: wrap;
