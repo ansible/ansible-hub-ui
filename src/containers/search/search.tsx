@@ -112,25 +112,23 @@ class Search extends React.Component<RouteComponentProps, IState> {
                 />
 
                 <div className='hub-pagination-container'>
-                  <div className='card-list-switcher'>
-                    <CardListSwitcher
-                      size='sm'
-                      params={params}
-                      updateParams={(p) =>
-                        this.updateParams(p, () =>
-                          // Note, we have to use this.state.params instead
-                          // of params in the callback because the callback
-                          // executes before the page can re-run render
-                          // which means params doesn't contain the most
-                          // up to date state
-                          localStorage.setItem(
-                            Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
-                            this.state.params.view_type,
-                          ),
-                        )
-                      }
-                    />
-                  </div>
+                  <CardListSwitcher
+                    size='sm'
+                    params={params}
+                    updateParams={(p) =>
+                      this.updateParams(p, () =>
+                        // Note, we have to use this.state.params instead
+                        // of params in the callback because the callback
+                        // executes before the page can re-run render
+                        // which means params doesn't contain the most
+                        // up to date state
+                        localStorage.setItem(
+                          Constants.SEARCH_VIEW_TYPE_LOCAL_KEY,
+                          this.state.params.view_type,
+                        ),
+                      )
+                    }
+                  />
 
                   <Pagination
                     params={params}

@@ -6,7 +6,8 @@
   display: flex;
   flex-direction: column;
 
-  .hub-toolbar-wrapper .toolbar .hub-pagination-container .card-list-switcher {
+  // FIXME: ok but decreased specificity, check still applies
+  .hub-c-card-list-switcher {
     margin-right: 24px;
   }
 

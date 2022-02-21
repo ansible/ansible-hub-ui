@@ -1,14 +1,14 @@
-// FIXME: global
-.icon {
-  margin-left: 8px;
-  color: var(--pf-global--icon--Color--light);
+.hub-c-card-list-switcher {
+  .hub-icon {
+    margin-left: 8px;
+    color: var(--pf-global--icon--Color--light);
 
-  &:hover {
+    &:hover {
+      color: var(--pf-global--link--Color--dark);
+    }
+  }
+
+  .hub-selected {
     color: var(--pf-global--link--Color--dark);
   }
-}
-
-// FIXME: global
-.selected {
-  color: var(--pf-global--link--Color--dark);
 }

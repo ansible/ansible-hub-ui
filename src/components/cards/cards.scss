@@ -45,6 +45,7 @@
     display: flex;
     justify-content: space-between;
 
+    // FIXME do i need stuff from hub-c-card-list-switcher hub-icon ?... margin left 8px, hover color dark .. if so, maybe -m-icon ;; and does Color--light and info-color--100 match?
     .icon {
       color: var(--pf-global--info-color--100);
       margin-right: 3px;
