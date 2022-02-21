@@ -19,6 +19,7 @@ import {
   AlertType,
   APISearchTypeAhead,
   ObjectPermissionField,
+  HelperText,
 } from 'src/components';
 import {
   ContainerDistributionAPI,
@@ -211,6 +212,11 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 fieldId='upstreamName'
                 label={t`Upstream name`}
                 isRequired={true}
+                labelIcon={
+                  <HelperText
+                    content={t`Use the namespace/name format for namespaced containers. Otherwise, use the library/name format.`}
+                  />
+                }
               >
                 <TextInput
                   id='upstreamName'
