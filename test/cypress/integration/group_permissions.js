@@ -72,7 +72,7 @@ describe('Group Permissions Tests', () => {
 
   it('can add group', () => {
     cy.login('user4', 'user4Password');
-    cy.galaxykit('group create', NewGroup);
+    cy.galaxykit('group create', 'NewGroup');
   });
 
   it('can delete group', () => {
