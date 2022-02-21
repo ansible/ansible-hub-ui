@@ -27,8 +27,6 @@
     border: none;
     background: transparent !important;
     text-overflow: ellipsis;
-    padding: var(--custom-override);
-    margin: var(--custom-override);
   }
 
   button {
@@ -39,7 +37,5 @@
 
   .pf-c-button::after {
     border: none !important;
-    padding: var(--custom-override);
-    margin: var(--custom-override);
   }
 }
