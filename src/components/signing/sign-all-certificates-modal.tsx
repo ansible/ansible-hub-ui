@@ -15,7 +15,7 @@ interface Props {
   onCancel: () => void;
 }
 
-const SignAllCertificatesModal: React.FC<Props> = ({
+export const SignAllCertificatesModal: React.FC<Props> = ({
   name,
   numberOfAffected,
   isOpen,
@@ -50,5 +50,3 @@ const SignAllCertificatesModal: React.FC<Props> = ({
     </p>
   </Modal>
 );
-
-export default SignAllCertificatesModal;

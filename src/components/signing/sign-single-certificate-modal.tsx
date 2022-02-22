@@ -15,7 +15,7 @@ interface Props {
   onCancel: () => void;
 }
 
-const SignSingleCertificateModal: React.FC<Props> = ({
+export const SignSingleCertificateModal: React.FC<Props> = ({
   name,
   version,
   isOpen,
@@ -44,5 +44,3 @@ const SignSingleCertificateModal: React.FC<Props> = ({
     </p>
   </Modal>
 );
-
-export default SignSingleCertificateModal;

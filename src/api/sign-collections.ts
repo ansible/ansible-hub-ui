@@ -1,4 +1,4 @@
-import { BaseAPI } from './base';
+import { HubAPI } from './hub';
 
 interface SignNamespace {
   signing_service?: string;
@@ -16,12 +16,8 @@ interface SignVersion extends SignCollection {
 
 type SignProps = SignNamespace | SignCollection | SignVersion;
 
-class API extends BaseAPI {
+class API extends HubAPI {
   apiPath = 'v3/sign/collections/';
-
-  constructor() {
-    super(API_HOST + API_BASE_PATH);
-  }
 
   sign(data: SignProps) {
     return this.http.post(this.apiPath, data);

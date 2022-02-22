@@ -11,7 +11,7 @@ interface Props extends LabelProps {
   signState: 'signed' | 'unsigned' | 'partial';
 }
 
-const SignatureBadge: FC<Props> = ({
+export const SignatureBadge: FC<Props> = ({
   signState = 'unsigned',
   isCompact = false,
   ...props
@@ -52,5 +52,3 @@ const SignatureBadge: FC<Props> = ({
     </Label>
   );
 };
-
-export default SignatureBadge;
