@@ -733,10 +733,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
       }
     }
 
-    if (
-      validateURLHelper(this.props.errorMessages['url'], remote.url)
-        .validated == 'error'
-    ) {
+    if (validateURLHelper(null, remote.url).validated == 'error') {
       return false;
     }
 
