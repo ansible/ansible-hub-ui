@@ -16,9 +16,10 @@ class API extends HubAPI {
   addPermission(id, data) {
     return this.http.post(this.apiPath + id + '/model-permissions/', data);
   }
+
   removePermission(id, permissionId) {
     return this.http.delete(
-      this.apiPath + id + '/model-permissions/' + permissionId,
+      this.apiPath + id + '/model-permissions/' + permissionId + '/',
     );
   }
 }
