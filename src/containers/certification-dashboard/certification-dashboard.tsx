@@ -530,7 +530,7 @@ class CertificationDashboard extends React.Component<
           alerts: this.state.alerts.concat({
             variant: 'danger',
             title: t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-            description: t`Error 500 - Internal Server Error: The server encountered an error and was unable to complete your request.`,
+            description: errorMessage(500, t`Internal Server Error`),
           }),
         });
       }

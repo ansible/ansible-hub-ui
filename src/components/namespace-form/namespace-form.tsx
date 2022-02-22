@@ -17,7 +17,7 @@ import {
   AlertType,
 } from 'src/components';
 import { NamespaceType } from 'src/api';
-import { ErrorMessagesType } from 'src/utilities';
+import { errorMessage, ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   namespace: NamespaceType;
@@ -115,18 +115,19 @@ export class NamespaceForm extends React.Component<IProps, IState> {
                 newNS.groups = g;
                 this.props.updateNamespace(newNS);
               }}
-              onError={(err) =>
+              onError={(err) => {
+                const { status, statusText } = err.response;
                 this.setState({
                   formErrors: {
                     ...this.state.formErrors,
                     groups: {
                       title: t`Groups list could not be displayed.`,
-                      description: err,
+                      description: errorMessage(status, statusText),
                       variant: 'danger',
                     },
                   },
-                })
-              }
+                });
+              }}
             ></ObjectPermissionField>
           )}
         </FormGroup>
@@ -277,4 +278,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
       </div>
     );
   }
+}
+function statusText(status: string, statusText: any): string | JSX.Element {
+  throw new Error('Function not implemented.');
 }
