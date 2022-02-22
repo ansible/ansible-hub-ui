@@ -64,6 +64,7 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
               <FlexItem style={{ minWidth: '200px' }}>{group.name}</FlexItem>
               <FlexItem grow={{ default: 'grow' }} style={{ width: '90%' }}>
                 <PermissionChipSelector
+                  multilingual={true}
                   availablePermissions={availablePermissions.map((perm) =>
                     twoWayMapper(perm, Constants.GROUP_HUMAN_PERMISSIONS),
                   )}

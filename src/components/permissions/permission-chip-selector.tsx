@@ -66,7 +66,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         variant={SelectVariant.typeaheadMulti}
         typeAheadAriaLabel={t`Select permissions`}
         onToggle={this.onToggle}
-        onSelect={this.props.onSelect ? this.props.onSelect : this.onSelect}
+        onSelect={this.onSelect}
         onClear={this.props.onClear ? this.props.onClear : this.clearSelection}
         selections={selections}
         isOpen={this.state.isOpen}
@@ -108,13 +108,22 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
   };
 
   private onSelect = (event, selection) => {
-    const newPerms = new Set(this.props.selectedPermissions);
-    if (newPerms.has(selection)) {
-      newPerms.delete(selection);
-    } else {
-      newPerms.add(selection);
+    // value contains orginal key in english
+    if (this.props.multilingual && selection.value) {
+      selection = selection.value;
     }
 
-    this.props.setSelected(Array.from(newPerms));
+    if (this.props.onSelect) {
+      this.props.onSelect(event, selection);
+    } else {
+      const newPerms = new Set(this.props.selectedPermissions);
+      if (newPerms.has(selection)) {
+        newPerms.delete(selection);
+      } else {
+        newPerms.add(selection);
+      }
+
+      this.props.setSelected(Array.from(newPerms));
+    }
   };
 }

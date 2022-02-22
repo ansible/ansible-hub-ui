@@ -390,11 +390,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                     });
                   }}
                   onSelect={(event, selection) => {
-                    // value contains orginal key in english
-                    if (selection.value) {
-                      selection = selection.value;
-                    }
-
                     const newPerms = new Set(this.state.permissions);
                     if (
                       newPerms.has(twoWayMapper(selection, filteredPermissions))
