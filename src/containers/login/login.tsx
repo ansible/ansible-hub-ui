@@ -56,6 +56,7 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
         passwordValue={this.state.passwordValue}
         onChangePassword={this.handlePasswordChange}
         onLoginButtonClick={this.onLoginButtonClick}
+        loginButtonLabel={t`Log In`}
       />
     );
     return (
