@@ -44,7 +44,6 @@ interface IState {
     tab?: string;
   };
   userId: string;
-  userName: string;
   unauthorized: boolean;
 }
 
@@ -65,7 +64,6 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       alerts: [],
       namespace: null,
       userId: '',
-      userName: '',
       newLinkURL: '',
       newLinkName: '',
       errorMessages: {},
@@ -81,9 +79,8 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     this.setState({ loading: true }, () => {
       ActiveUserAPI.getUser()
         .then((result) => {
-          this.setState(
-            { userId: result.account_number, userName: result.username },
-            () => this.loadNamespace(),
+          this.setState({ userId: result.account_number }, () =>
+            this.loadNamespace(),
           );
         })
         .catch((e) => {
@@ -101,7 +98,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                 ...this.context.alerts,
                 {
                   variant: 'danger',
-                  title: t`Active user profile "${this.state.userName}" could not be displayed.`,
+                  title: t`Active user profile "${this.context.user?.username}" could not be displayed.`,
                   description: errorMessage(status, statusText),
                 },
               ]);
