@@ -50,16 +50,12 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
 
     let selections = [];
     if (this.props.multilingual) {
-      this.props.selectedPermissions.forEach((item) => {
-        const item2 = {};
+      selections = this.props.selectedPermissions.map((value) => ({
         // orginal english value
-        item2['value'] = item;
-        item2.toString = function (): string {
-          // translated value
-          return i18n._(item);
-        };
-        selections.push(item2);
-      });
+        value,
+        // translated
+        toString: () => i18n._(value),
+      }));
     } else {
       selections = this.props.selectedPermissions;
     }
