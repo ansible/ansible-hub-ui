@@ -63,6 +63,6 @@ describe('Hub Group Management Tests', () => {
         .should('exist');
     });
 
-    cy.galaxykit('group delete', groupName);
+    cy.galaxykit('group delete', name);
   });
 });

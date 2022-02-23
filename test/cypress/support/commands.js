@@ -631,7 +631,7 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
   cy.contains('.title-box h1', 'Completed', { timeout: 20000 });
 });
 
-Cypress.Commands.add('deleteRegistries', {}, () => {
+Cypress.Commands.add('deleteRegistriesManual', {}, () => {
   cy.intercept(
     'GET',
     Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
@@ -652,7 +652,39 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
   });
 });
 
+Cypress.Commands.add('deleteRegistries', {}, () => {
+  cy.intercept(
+    'GET',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
+  ).as('registries');
+
+  cy.visit('/ui/registries');
+
+  cy.wait('@registries').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.galaxykit('registry delete', element.name);
+    });
+  });
+});
+
 Cypress.Commands.add('deleteContainers', {}, () => {
+  cy.intercept(
+    'GET',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
+  ).as('listLoad');
+
+  cy.visit('/ui/containers');
+
+  cy.wait('@listLoad').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.galaxykit('container delete', element.name);
+    });
+  });
+});
+
+Cypress.Commands.add('deleteContainersManual', {}, () => {
   cy.intercept(
     'GET',
     Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
