@@ -33,7 +33,7 @@ describe('Hub Group Management Tests', () => {
     cy.galaxykit('user group add', userName, groupName);
 
     cy.removeUserFromGroup(groupName, userName);
-    cy.deleteGroup(groupName);
+    cy.galaxykit('group delete', groupName);
     cy.deleteUser(userName);
   });
 
@@ -63,6 +63,6 @@ describe('Hub Group Management Tests', () => {
         .should('exist');
     });
 
-    cy.deleteGroup(name);
+    cy.galaxykit('group delete', groupName);
   });
 });
