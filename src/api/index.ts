@@ -57,5 +57,5 @@ export { ControllerAPI } from './controller';
 export { TaskManagementAPI } from './task-management';
 export { GenericPulpAPI } from './generic-pulp';
 export { SettingsAPI } from './settings';
-export { RoleManagementAPI } from './role-management';
+export { RoleAPI } from './role';
 export { SettingsType } from './response-types/settings';

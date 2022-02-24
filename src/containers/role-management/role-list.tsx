@@ -1,5 +1,6 @@
 import React from 'react';
-import { t } from '@lingui/macro';
+import { useState, useCallback } from 'react';
+import { t, Trans } from '@lingui/macro';
 import { AppContext } from 'src/loaders/app-context';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import {
@@ -16,21 +17,23 @@ import {
   EmptyStateUnauthorized,
   EmptyStateNoData,
   AppliedFilters,
+  Tag,
 } from 'src/components';
 import {
+  Button,
+  Label,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
   Tooltip,
 } from '@patternfly/react-core';
-import axios from 'axios';
 import './role.scss';
 import { RoleType } from 'src/api/response-types/role';
-import { RoleAPI } from 'src/api/role';
 import { filterIsSet, ParamHelper, parsePulpIDFromURL } from 'src/utilities';
-import { RoleManagementAPI } from 'src/api/role-management';
+import { RoleAPI } from 'src/api/role';
 import { formatPath, Paths } from 'src/paths';
+import { Tbody, Td, Tr, ExpandableRowContent } from '@patternfly/react-table';
 import { Constants } from 'src/constants';
 
 interface IState {
@@ -45,6 +48,8 @@ interface IState {
   };
   unauthorized: boolean;
   selectedRole: RoleType[];
+  expanded: boolean;
+  expandedRepoNames: string[];
 }
 export class RoleList extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
@@ -60,7 +65,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     }
 
     if (!params['sort']) {
-      params['sort'] = '-name_contains';
+      params['sort'] = '-pulp_created';
     }
 
     this.state = {
@@ -72,6 +77,8 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       roleCount: 0,
       unauthorized: false,
       selectedRole: null,
+      expanded: false,
+      expandedRepoNames: [],
     };
   }
 
@@ -84,8 +91,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { params, roles, loading, roleCount, alerts, unauthorized } =
-      this.state;
+    const { params, loading, roleCount, alerts, unauthorized } = this.state;
 
     const noData = roleCount === 0 && !filterIsSet(params, ['name__icontains']);
     return (
@@ -94,13 +100,18 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
-        <BaseHeader title={t`Role Management`}></BaseHeader>
+        <BaseHeader title={t`Roles`}></BaseHeader>
         {unauthorized ? (
           <EmptyStateUnauthorized />
         ) : noData && !loading ? (
           <EmptyStateNoData
-            title={t`No roles yet`}
-            description={t`Roles will appear once created.`}
+            title={t`There are currently no roles`}
+            description={t`Please add a role by using the button below.`}
+            button={
+              <Button>
+                <Trans>Add roles</Trans>
+              </Button>
+            }
           />
         ) : (
           <Main>
@@ -125,7 +136,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                             params={params}
                             filterConfig={[
                               {
-                                id: 'name',
+                                id: 'name__icontains',
                                 title: t`Role name`,
                               },
                               {
@@ -134,6 +145,11 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                               },
                             ]}
                           />
+                        </ToolbarItem>
+                        <ToolbarItem>
+                          <Button>
+                            <Trans>Add roles</Trans>
+                          </Button>
                         </ToolbarItem>
                       </ToolbarGroup>
                     </ToolbarContent>
@@ -156,8 +172,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort', 'ordering']}
                     niceNames={{
-                      name__contains: t`Role`,
-                      description: t`Description`,
+                      name__icontains: t`Role name`,
                     }}
                   />
                 </div>
@@ -183,12 +198,16 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
 
   private renderTable(params) {
     const { roles } = this.state;
-    console.log('ROLECOUNT: ', roles.length);
     if (roles.length === 0) {
       return <EmptyStateFilter />;
     }
     const sortTableOptions = {
       headers: [
+        // {
+        //   title: null,
+        //   type: null,
+        //   id: null,
+        // },
         {
           title: t`Role`,
           type: 'alpha',
@@ -215,44 +234,67 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
             this.updateParams(p, () => this.queryRoles());
           }}
         />
-        <tbody>{roles.map((role, i) => this.renderTableRow(role, i))}</tbody>
+        <Tbody>{roles.map((role, i) => this.renderTableRow(role, i))}</Tbody>
       </table>
     );
   }
 
   private renderTableRow(role, index: number) {
-    const { name, description, pulp_href } = role;
+    const { name, description, pulp_href, permissions } = role;
     const roleID = parsePulpIDFromURL(pulp_href);
+
     return (
-      <tr aria-labelledby={name} key={index}>
-        <td>
-          <Link to={formatPath(Paths.roleDetail, { role: roleID })}>
+      <>
+        <Tr aria-labelledby={name} key={index}>
+          {/* <Td
+          expand={{
+            rowIndex: index,
+            isExpanded: isRoleExpanded(role),
+            onToggle: () => setRoleExpanded(role, !isRoleExpanded(role)),
+          }} /> */}
+          <Td>
+            {/* <Link to={formatPath(Paths.roleDetail, { role: roleID })}> */}
             {/* <Tooltip
-              content={
-                (Constants.TASK_NAMES[name] &&
-                  i18n._(Constants.TASK_NAMES[name])) ||
-                name
-              }
-            >
-              {name}
-            </Tooltip> */}
+      content={
+        (Constants.TASK_NAMES[name] &&
+          i18n._(Constants.TASK_NAMES[name])) ||
+        name
+      }
+    >
+      {name}
+    </Tooltip> */}
             {name}
-          </Link>
-        </td>
-        <td>{description}</td>
-      </tr>
+            {/* </Link> */}
+          </Td>
+          <Td>{description}</Td>
+        </Tr>
+        <Tr isExpanded={this.state.expanded}>
+          <Td>
+            <ExpandableRowContent>
+              {permissions.map((p) => {
+                return <Tag>{p}</Tag>;
+              })}
+            </ExpandableRowContent>
+          </Td>
+        </Tr>
+      </>
     );
   }
 
   private queryRoles = () => {
     const { params } = this.state;
+    const initialExpandedRepoNames = this.state.roles
+      .filter((role) => !!role.permissions)
+      .map((role) => role.name); // Default to all expanded
+
     this.setState({ loading: true }, () => {
-      RoleManagementAPI.list(params)
+      RoleAPI.list(params)
         .then((result) => {
           this.setState({
             roles: result.data.results,
             roleCount: result.data.count,
             loading: false,
+            expandedRepoNames: initialExpandedRepoNames,
           });
         })
         .catch((err) => {
@@ -263,6 +305,10 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
           this.addAlert(t`Roles list could not be displayed.`, 'danger');
         });
     });
+  };
+
+  private handleExpansion = () => {
+    return this.setState({ expanded: !this.state.expanded });
   };
 
   private get updateParams() {

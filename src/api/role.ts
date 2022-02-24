@@ -1,27 +1,16 @@
-import { PulpAPI } from "./pulp";
-import { RoleType } from "./response-types/role";
-
+import { PulpAPI } from './pulp';
 
 export class API extends PulpAPI {
-    apiPath = 'v3/roles/'
+  apiPath = 'roles/';
 
-    constructor() {
-        super();
+  list(params) {
+    const changedParams = { ...params };
+    if (changedParams['sort']) {
+      changedParams['ordering'] = changedParams['sort'];
+      delete changedParams['sort'];
     }
-
-    list(params?, role?: string) {
-        const path = this.apiPath + role + '/';
-        return super.list(params, path).then((response) => ({
-          ...response,
-          data: {
-            ...response.data,
-            // remove module_utils, doc_fragments from each item
-            // data: response.data.data.map(filterListItem),
-          },
-        }));
-      }
-
-
+    return super.list(changedParams);
+  }
 }
 
-export const RoleAPI = API
+export const RoleAPI = new API();
