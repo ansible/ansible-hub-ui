@@ -15,10 +15,8 @@ async function activate(locale: string) {
   if (window.localStorage.test_l10n === 'true') {
     Object.keys(messages).forEach((key) => {
       if (Array.isArray(messages[key])) {
-        // t`Foo ${param}` -> ["Foo ", ['param']] => [">>Foo <<", ['param']]
-        messages[key] = messages[key].map((item) =>
-          Array.isArray(item) ? item : '»' + item + '«',
-        );
+        // t`Foo ${param}` -> ["Foo ", ['param']] => [">>", "Foo ", ['param'], "<<"]
+        messages[key] = ['»', ...messages[key], '«'];
       } else {
         // simple string
         messages[key] = '»' + messages[key] + '«';
