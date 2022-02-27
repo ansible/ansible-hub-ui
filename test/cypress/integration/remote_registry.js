@@ -24,11 +24,11 @@ describe('Remote Registry Tests', () => {
 
   it('admin can add new remote registry', () => {
     cy.menuGo('Execution Environments > Remote Registries');
-    cy.addRemoteRegistry('New remote registry1', 'some url1');
-    cy.addRemoteRegistry('New remote registry2', 'some url2', {
+    cy.addRemoteRegistry('New remote registry1', 'https://some url1');
+    cy.addRemoteRegistry('New remote registry2', 'https://some url2', {
       username: 'some username2',
       password: 'some password2',
-      proxy_url: 'some proxy_url2',
+      proxy_url: 'https://some proxy_url2',
       proxy_username: 'some proxy_username2',
       proxy_password: 'some proxy_password2',
       download_concurrency: 5,
@@ -53,8 +53,8 @@ describe('Remote Registry Tests', () => {
 
     cy.contains('table tr', 'New remote registry1');
     cy.contains('table tr', 'New remote registry2');
-    cy.contains('table tr', 'some url1');
-    cy.contains('table tr', 'some url2');
+    cy.contains('table tr', 'https://some url1');
+    cy.contains('table tr', 'https://some url2');
   });
 
   it('admin can edit new remote registry', () => {
@@ -66,7 +66,7 @@ describe('Remote Registry Tests', () => {
     cy.contains('a', 'Edit').click();
 
     cy.get('input[id = "url"]').clear();
-    cy.get('input[id = "url"]').type('some new url2');
+    cy.get('input[id = "url"]').type('https://some new url2');
 
     cy.intercept(
       'GET',
@@ -77,7 +77,7 @@ describe('Remote Registry Tests', () => {
     cy.wait('@registriesGet');
 
     cy.visit('/ui/registries');
-    cy.contains('table tr', 'some new url2');
+    cy.contains('table tr', 'https://some new url2');
   });
 
   it('admin can delete data', () => {
