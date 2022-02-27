@@ -145,8 +145,8 @@ msgstr ""
 msgid "Activity"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:282
-#: src/components/execution-environment/repository-form.tsx:325
+#: src/components/execution-environment/repository-form.tsx:288
+#: src/components/execution-environment/repository-form.tsx:331
 #: src/components/execution-environment/tag-manifest-modal.tsx:169
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
 #: src/containers/group-management/group-detail.tsx:462
@@ -175,7 +175,7 @@ msgstr ""
 msgid "Add container repository"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:149
+#: src/components/execution-environment/repository-form.tsx:150
 #: src/containers/execution-environment-list/execution_environment_list.tsx:150
 msgid "Add execution environment"
 msgstr ""
@@ -210,11 +210,11 @@ msgstr ""
 msgid "Add synclist"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:306
+#: src/components/execution-environment/repository-form.tsx:312
 msgid "Add tag(s) to exclude"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:263
+#: src/components/execution-environment/repository-form.tsx:269
 msgid "Add tag(s) to include"
 msgstr ""
 
@@ -222,7 +222,7 @@ msgstr ""
 msgid "Add user"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:388
+#: src/components/execution-environment/repository-form.tsx:394
 msgid ""
 "Adding groups provides access to all repositories in the\n"
 "\"{namespace}\" container namespace."
@@ -290,7 +290,7 @@ msgstr ""
 
 #: src/components/confirm-modal/confirm-modal.tsx:40
 #: src/components/delete-modal/delete-modal.tsx:32
-#: src/components/execution-environment/repository-form.tsx:161
+#: src/components/execution-environment/repository-form.tsx:162
 #: src/components/execution-environment/tag-manifest-modal.tsx:129
 #: src/components/group-management/group-modal.tsx:59
 #: src/components/import-modal/import-modal.tsx:78
@@ -548,11 +548,11 @@ msgstr ""
 #~ msgid "Container Registry"
 #~ msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:197
+#: src/components/execution-environment/repository-form.tsx:198
 msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:180
+#: src/components/execution-environment/repository-form.tsx:181
 msgid "Container namespace"
 msgstr ""
 
@@ -663,11 +663,11 @@ msgstr ""
 msgid "Current tags"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:332
+#: src/components/execution-environment/repository-form.tsx:338
 msgid "Currently excluded tags"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:289
+#: src/components/execution-environment/repository-form.tsx:295
 msgid "Currently included tags"
 msgstr ""
 
@@ -856,7 +856,7 @@ msgid "Deprecate"
 msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:109
-#: src/components/execution-environment/repository-form.tsx:360
+#: src/components/execution-environment/repository-form.tsx:366
 #: src/components/namespace-form/namespace-form.tsx:151
 #: src/containers/execution-environment-list/execution_environment_list.tsx:287
 #: src/containers/task-management/task_detail.tsx:341
@@ -949,7 +949,7 @@ msgstr ""
 msgid "Edit details"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:149
+#: src/components/execution-environment/repository-form.tsx:150
 msgid "Edit execution environment"
 msgstr ""
 
@@ -1064,8 +1064,8 @@ msgstr ""
 msgid "Error loading group."
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:406
-#: src/components/execution-environment/repository-form.tsx:476
+#: src/components/execution-environment/repository-form.tsx:412
+#: src/components/execution-environment/repository-form.tsx:482
 #: src/components/namespace-form/namespace-form.tsx:123
 #: src/components/namespace-modal/namespace-modal.tsx:179
 #: src/components/user-form/user-form.tsx:296
@@ -1085,7 +1085,7 @@ msgstr ""
 msgid "Error loading permissions."
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:113
+#: src/components/execution-environment/repository-form.tsx:114
 msgid "Error loading registries."
 msgstr ""
 
@@ -1185,7 +1185,7 @@ msgstr ""
 msgid "Failed to delete remote registry {name}"
 msgstr ""
 
-#: src/containers/login/login.tsx:93
+#: src/containers/login/login.tsx:94
 msgid "Failed to retrieve user data."
 msgstr ""
 
@@ -1281,7 +1281,7 @@ msgstr ""
 msgid "Groups will appear once created"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:384
+#: src/components/execution-environment/repository-form.tsx:390
 msgid "Groups with access"
 msgstr ""
 
@@ -1386,7 +1386,7 @@ msgstr ""
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 msgstr ""
 
-#: src/containers/login/login.tsx:106
+#: src/containers/login/login.tsx:107
 msgid "Invalid login credentials."
 msgstr ""
 
@@ -1394,7 +1394,7 @@ msgstr ""
 msgid "Issue tracker"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:351
+#: src/components/execution-environment/repository-form.tsx:357
 msgid "It does not make sense to include and exclude tags at the same time."
 msgstr ""
 
@@ -1480,7 +1480,11 @@ msgstr ""
 msgid "Local"
 msgstr ""
 
-#: src/containers/login/login.tsx:66
+#: src/containers/login/login.tsx:59
+msgid "Log In"
+msgstr ""
+
+#: src/containers/login/login.tsx:67
 msgid "Log in to your account"
 msgstr ""
 
@@ -1537,8 +1541,8 @@ msgid "My profile"
 msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:107
-#: src/components/execution-environment/repository-form.tsx:168
-#: src/components/execution-environment/repository-form.tsx:196
+#: src/components/execution-environment/repository-form.tsx:169
+#: src/components/execution-environment/repository-form.tsx:197
 #: src/components/group-management/group-modal.tsx:73
 #: src/components/my-imports/import-list.tsx:78
 #: src/components/my-imports/import-list.tsx:116
@@ -2046,7 +2050,7 @@ msgstr ""
 msgid "Red Hat Certified"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:225
+#: src/components/execution-environment/repository-form.tsx:231
 msgid "Registry"
 msgstr ""
 
@@ -2155,7 +2159,7 @@ msgstr ""
 msgid "SSO URL"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:158
+#: src/components/execution-environment/repository-form.tsx:159
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
 #: src/components/repositories/remote-form.tsx:168
@@ -2212,7 +2216,7 @@ msgstr ""
 msgid "Select a group"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:250
+#: src/components/execution-environment/repository-form.tsx:256
 msgid "Select a registry"
 msgstr ""
 
@@ -2253,7 +2257,7 @@ msgstr ""
 msgid "Server URL"
 msgstr ""
 
-#: src/containers/login/login.tsx:101
+#: src/containers/login/login.tsx:102
 msgid "Server error. Please come back later."
 msgstr ""
 
@@ -2651,7 +2655,7 @@ msgstr ""
 msgid "Upload to namespace"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:212
+#: src/components/execution-environment/repository-form.tsx:213
 msgid "Upstream name"
 msgstr ""
 
@@ -2664,6 +2668,10 @@ msgstr ""
 
 #: src/containers/token/token-insights.tsx:115
 msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
+msgstr ""
+
+#: src/components/execution-environment/repository-form.tsx:217
+msgid "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
 msgstr ""
 
 #: src/containers/token/token-insights.tsx:128
@@ -2960,6 +2968,10 @@ msgstr ""
 
 #: src/components/headers/collection-header.tsx:383
 msgid "{0} released {1}"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
+msgid "{0} was added"
 msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx:224

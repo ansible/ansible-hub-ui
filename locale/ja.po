@@ -145,8 +145,8 @@ msgstr "項目をプッシュするとアクティビティーが表示されま
 msgid "Activity"
 msgstr "アクティビティー"
 
-#: src/components/execution-environment/repository-form.tsx:282
-#: src/components/execution-environment/repository-form.tsx:325
+#: src/components/execution-environment/repository-form.tsx:288
+#: src/components/execution-environment/repository-form.tsx:331
 #: src/components/execution-environment/tag-manifest-modal.tsx:169
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
 #: src/containers/group-management/group-detail.tsx:462
@@ -175,7 +175,7 @@ msgstr ""
 msgid "Add container repository"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:149
+#: src/components/execution-environment/repository-form.tsx:150
 #: src/containers/execution-environment-list/execution_environment_list.tsx:150
 msgid "Add execution environment"
 msgstr "実行環境の追加"
@@ -210,11 +210,11 @@ msgstr "選択したユーザーのグループへの追加"
 msgid "Add synclist"
 msgstr "同期リストの追加"
 
-#: src/components/execution-environment/repository-form.tsx:306
+#: src/components/execution-environment/repository-form.tsx:312
 msgid "Add tag(s) to exclude"
 msgstr "除外するタグの追加"
 
-#: src/components/execution-environment/repository-form.tsx:263
+#: src/components/execution-environment/repository-form.tsx:269
 msgid "Add tag(s) to include"
 msgstr "含めるタグの追加"
 
@@ -222,7 +222,7 @@ msgstr "含めるタグの追加"
 msgid "Add user"
 msgstr "ユーザーの追加"
 
-#: src/components/execution-environment/repository-form.tsx:388
+#: src/components/execution-environment/repository-form.tsx:394
 msgid ""
 "Adding groups provides access to all repositories in the\n"
 "\"{namespace}\" container namespace."
@@ -290,7 +290,7 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 
 #: src/components/confirm-modal/confirm-modal.tsx:40
 #: src/components/delete-modal/delete-modal.tsx:32
-#: src/components/execution-environment/repository-form.tsx:161
+#: src/components/execution-environment/repository-form.tsx:162
 #: src/components/execution-environment/tag-manifest-modal.tsx:129
 #: src/components/group-management/group-modal.tsx:59
 #: src/components/import-modal/import-modal.tsx:78
@@ -548,11 +548,11 @@ msgstr "詳細は、組織の管理者にお問い合わせください。"
 #~ msgid "Container Registry"
 #~ msgstr "コンテナーレジストリー"
 
-#: src/components/execution-environment/repository-form.tsx:197
+#: src/components/execution-environment/repository-form.tsx:198
 msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:180
+#: src/components/execution-environment/repository-form.tsx:181
 msgid "Container namespace"
 msgstr "コンテナーの名前空間"
 
@@ -663,11 +663,11 @@ msgstr "同期リストのバッチのキュレート"
 msgid "Current tags"
 msgstr "現在のタグ"
 
-#: src/components/execution-environment/repository-form.tsx:332
+#: src/components/execution-environment/repository-form.tsx:338
 msgid "Currently excluded tags"
 msgstr "現在除外されているタグ"
 
-#: src/components/execution-environment/repository-form.tsx:289
+#: src/components/execution-environment/repository-form.tsx:295
 msgid "Currently included tags"
 msgstr "現在含まれているタグ"
 
@@ -856,7 +856,7 @@ msgid "Deprecate"
 msgstr "非推奨"
 
 #: src/components/collection-detail/collection-content-list.tsx:109
-#: src/components/execution-environment/repository-form.tsx:360
+#: src/components/execution-environment/repository-form.tsx:366
 #: src/components/namespace-form/namespace-form.tsx:151
 #: src/containers/execution-environment-list/execution_environment_list.tsx:287
 #: src/containers/task-management/task_detail.tsx:341
@@ -949,7 +949,7 @@ msgstr "編集"
 msgid "Edit details"
 msgstr "詳細の編集"
 
-#: src/components/execution-environment/repository-form.tsx:149
+#: src/components/execution-environment/repository-form.tsx:150
 msgid "Edit execution environment"
 msgstr "実行環境の編集"
 
@@ -1064,8 +1064,8 @@ msgstr ""
 msgid "Error loading group."
 msgstr "グループの読み込みエラー。"
 
-#: src/components/execution-environment/repository-form.tsx:406
-#: src/components/execution-environment/repository-form.tsx:476
+#: src/components/execution-environment/repository-form.tsx:412
+#: src/components/execution-environment/repository-form.tsx:482
 #: src/components/namespace-form/namespace-form.tsx:123
 #: src/components/namespace-modal/namespace-modal.tsx:179
 #: src/components/user-form/user-form.tsx:296
@@ -1085,7 +1085,7 @@ msgstr ""
 msgid "Error loading permissions."
 msgstr "パーミッションの読み込みエラー。"
 
-#: src/components/execution-environment/repository-form.tsx:113
+#: src/components/execution-environment/repository-form.tsx:114
 msgid "Error loading registries."
 msgstr ""
 
@@ -1185,7 +1185,7 @@ msgstr "失敗"
 msgid "Failed to delete remote registry {name}"
 msgstr "リモートレジストリー {name} を削除できませんでした。"
 
-#: src/containers/login/login.tsx:93
+#: src/containers/login/login.tsx:94
 msgid "Failed to retrieve user data."
 msgstr "ユーザーを取得できませんでした。"
 
@@ -1281,7 +1281,7 @@ msgstr "グループ"
 msgid "Groups will appear once created"
 msgstr "グループは、作成時に表示されます"
 
-#: src/components/execution-environment/repository-form.tsx:384
+#: src/components/execution-environment/repository-form.tsx:390
 msgid "Groups with access"
 msgstr "アクセス権のあるグループ"
 
@@ -1386,7 +1386,7 @@ msgstr "ファイル形式が無効です。"
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 msgstr "ファイル名が無効です。コレクションの形式は 'namespace-collection_name-1.0.0' のようにする必要があります。"
 
-#: src/containers/login/login.tsx:106
+#: src/containers/login/login.tsx:107
 msgid "Invalid login credentials."
 msgstr "ログイン認証情報が無効です。"
 
@@ -1394,7 +1394,7 @@ msgstr "ログイン認証情報が無効です。"
 msgid "Issue tracker"
 msgstr "問題トラッカー"
 
-#: src/components/execution-environment/repository-form.tsx:351
+#: src/components/execution-environment/repository-form.tsx:357
 msgid "It does not make sense to include and exclude tags at the same time."
 msgstr "タグを同時に含めたり、除外したりしても意味がありません。"
 
@@ -1480,7 +1480,11 @@ msgstr "トークンの読み込み"
 msgid "Local"
 msgstr "ローカル"
 
-#: src/containers/login/login.tsx:66
+#: src/containers/login/login.tsx:59
+msgid "Log In"
+msgstr ""
+
+#: src/containers/login/login.tsx:67
 msgid "Log in to your account"
 msgstr "アカウントにログイン"
 
@@ -1537,8 +1541,8 @@ msgid "My profile"
 msgstr "自分のプロファイル"
 
 #: src/components/collection-detail/collection-content-list.tsx:107
-#: src/components/execution-environment/repository-form.tsx:168
-#: src/components/execution-environment/repository-form.tsx:196
+#: src/components/execution-environment/repository-form.tsx:169
+#: src/components/execution-environment/repository-form.tsx:197
 #: src/components/group-management/group-modal.tsx:73
 #: src/components/my-imports/import-list.tsx:78
 #: src/components/my-imports/import-list.tsx:116
@@ -2046,7 +2050,7 @@ msgstr "理由: タスク {0}"
 msgid "Red Hat Certified"
 msgstr "Red Hat 認定"
 
-#: src/components/execution-environment/repository-form.tsx:225
+#: src/components/execution-environment/repository-form.tsx:231
 msgid "Registry"
 msgstr "レジストリー"
 
@@ -2159,7 +2163,7 @@ msgstr "実行中"
 msgid "SSO URL"
 msgstr "SSO URL"
 
-#: src/components/execution-environment/repository-form.tsx:158
+#: src/components/execution-environment/repository-form.tsx:159
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
 #: src/components/repositories/remote-form.tsx:168
@@ -2216,7 +2220,7 @@ msgstr ""
 msgid "Select a group"
 msgstr ""
 
-#: src/components/execution-environment/repository-form.tsx:250
+#: src/components/execution-environment/repository-form.tsx:256
 msgid "Select a registry"
 msgstr "レジストリーの選択"
 
@@ -2257,7 +2261,7 @@ msgstr "ユーザーの選択"
 msgid "Server URL"
 msgstr "サーバー URL"
 
-#: src/containers/login/login.tsx:101
+#: src/containers/login/login.tsx:102
 msgid "Server error. Please come back later."
 msgstr "サーバーエラー。後でもう一度お試しください。"
 
@@ -2655,7 +2659,7 @@ msgstr "新規バージョンのアップロード"
 msgid "Upload to namespace"
 msgstr "名前空間へのアップロード"
 
-#: src/components/execution-environment/repository-form.tsx:212
+#: src/components/execution-environment/repository-form.tsx:213
 msgid "Upstream name"
 msgstr "アップストリーム名"
 
@@ -2669,6 +2673,10 @@ msgstr "コントローラーでの使用"
 #: src/containers/token/token-insights.tsx:115
 msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 msgstr "<0>リポジトリー管理</0> ページを使用して、組織がキュレートされたコレクションを Private Automation Hub の Red Hat 認定リポジトリーと同期します。適切なパーミッションが割り当てられたユーザーは、<1>コレクション</1> ページの同期トグルを使用して、組織の同期リポジトリーに追加されるコレクションを制御できます。"
+
+#: src/components/execution-environment/repository-form.tsx:217
+msgid "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
+msgstr ""
 
 #: src/containers/token/token-insights.tsx:128
 #~ msgid "Use this URL to configure the API endpoints that clients need to"
@@ -2965,6 +2973,10 @@ msgstr "インポートの完了を待機中"
 #: src/components/headers/collection-header.tsx:383
 msgid "{0} released {1}"
 msgstr "{0} が {1} をリリース"
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
+msgid "{0} was added"
+msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx:224
 #~ msgid "{0} will be deleted."
