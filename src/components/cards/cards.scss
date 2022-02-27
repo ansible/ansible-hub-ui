@@ -30,6 +30,11 @@
     width: 100%;
   }
 
+  .author .pf-c-content small {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
   .type-label {
     font-size: var(--pf-global--FontSize--xs);
     color: var(--pf-global--color--200);
