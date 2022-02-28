@@ -61,7 +61,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   it('should contains all columns.', () => {
     ['Namespace', 'Collection', 'Version', 'Date created', 'Status'].forEach(
       (item) => {
-        cy.get('[data-cy="table_header"]').contains(item);
+        cy.get('[data-cy="SortTable-headers"]').contains(item);
       },
     );
   });

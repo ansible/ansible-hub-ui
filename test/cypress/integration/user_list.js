@@ -34,7 +34,7 @@ describe('User list tests for sorting, paging and filtering', () => {
       'Groups',
       'Created',
     ].forEach((item) => {
-      cy.get('tr[aria-labelledby="headers"] th').contains(item);
+      cy.get('tr[data-cy="SortTable-headers"] th').contains(item);
     });
   });
 

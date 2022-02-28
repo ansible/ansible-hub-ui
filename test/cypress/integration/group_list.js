@@ -24,7 +24,7 @@ describe('Group list tests for sorting, paging and filtering', () => {
   });
 
   it('table contains all columns', () => {
-    cy.get('tr[aria-labelledby="headers"] th').contains('Group');
+    cy.get('tr[data-cy="SortTable-headers"] th').contains('Group');
   });
 
   it('items are sorted alphabetically and paging is working', () => {

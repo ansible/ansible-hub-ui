@@ -48,7 +48,7 @@ describe('Remote Registry Tests', () => {
       'Registry URL',
       'Registry sync status',
     ].forEach((element) => {
-      cy.contains('tr[aria-labelledby="headers"]', element);
+      cy.contains('tr[data-cy="SortTable-headers"]', element);
     });
 
     cy.contains('table tr', 'New remote registry1');

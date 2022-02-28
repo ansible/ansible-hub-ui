@@ -16,23 +16,23 @@ describe('Repo Management tests', () => {
 
   it('can see table in repo tabs and it shows data correctly', () => {
     cy.visit(localRepoUrl);
-    cy.get('[aria-labelledby="headers"]').contains('Distribution name');
-    cy.get('[aria-labelledby="headers"]').contains('Repository name');
-    cy.get('[aria-labelledby="headers"]').contains('Content count');
-    cy.get('[aria-labelledby="headers"]').contains('Last updated');
-    cy.get('[aria-labelledby="headers"]').contains('Repo URL');
-    cy.get('[aria-labelledby="headers"]').contains('CLI configuration');
+    cy.get('[data-cy="SortTable-headers"]').contains('Distribution name');
+    cy.get('[data-cy="SortTable-headers"]').contains('Repository name');
+    cy.get('[data-cy="SortTable-headers"]').contains('Content count');
+    cy.get('[data-cy="SortTable-headers"]').contains('Last updated');
+    cy.get('[data-cy="SortTable-headers"]').contains('Repo URL');
+    cy.get('[data-cy="SortTable-headers"]').contains('CLI configuration');
     cy.contains('community');
     cy.contains('published');
     cy.contains('rejected');
     cy.contains('rh-certified');
     cy.contains('staging');
     cy.get('button').contains('Remote').parent().click();
-    cy.get('[aria-labelledby="headers"]').contains('Remote name');
-    cy.get('[aria-labelledby="headers"]').contains('Repositories');
-    cy.get('[aria-labelledby="headers"]').contains('Last updated');
-    cy.get('[aria-labelledby="headers"]').contains('Last sync');
-    cy.get('[aria-labelledby="headers"]').contains('Sync status');
+    cy.get('[data-cy="SortTable-headers"]').contains('Remote name');
+    cy.get('[data-cy="SortTable-headers"]').contains('Repositories');
+    cy.get('[data-cy="SortTable-headers"]').contains('Last updated');
+    cy.get('[data-cy="SortTable-headers"]').contains('Last sync');
+    cy.get('[data-cy="SortTable-headers"]').contains('Sync status');
 
     cy.contains('Configure');
     cy.contains('Sync');
