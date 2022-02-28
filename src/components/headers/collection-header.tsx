@@ -1,5 +1,6 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
+import { errorMessage } from 'src/utilities';
 import './header.scss';
 
 import { Redirect } from 'react-router-dom';
@@ -513,8 +514,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   };
 
   private deleteCollectionVersion = (collectionVersion) => {
-    const { deleteCollection } = this.state;
-
+    const {
+      deleteCollection,
+      deleteCollection: { name },
+    } = this.state;
     CollectionAPI.deleteCollectionVersion(
       this.context.selectedRepo,
       deleteCollection,
@@ -578,6 +581,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         const {
           data: { detail, dependent_collection_versions },
           status,
+          statusText,
         } = err.response;
 
         if (status === 400) {
@@ -613,8 +617,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               ...this.state.alerts,
               {
                 variant: 'danger',
-                title: t`Error deleting collection version.`,
-                description: err?.message,
+                title: t`Collection "${name} v${collectionVersion}" could not be deleted.`,
+                description: errorMessage(status, statusText),
               },
             ],
           });
@@ -623,7 +627,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   };
 
   private deleteCollection = () => {
-    const { deleteCollection, collectionVersion } = this.state;
+    const {
+      deleteCollection,
+      deleteCollection: { name },
+      collectionVersion,
+    } = this.state;
     CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
@@ -635,7 +643,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               variant: 'success',
               title: (
                 <Trans>
-                  Collection &quot;{deleteCollection.name} v{collectionVersion}
+                  Collection &quot;{name} v{collectionVersion}
                   &quot; has been successfully deleted.
                 </Trans>
               ),
@@ -652,7 +660,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           });
         });
       })
-      .catch((err) =>
+      .catch((err) => {
+        const { status, statusText } = err.response;
         this.setState({
           collectionVersion: null,
           deleteCollection: null,
@@ -661,12 +670,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error deleting collection.`,
-              description: err?.message,
+              title: t`Collection "${name}" could not be deleted.`,
+              description: errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   };
 
   private openDeleteModalWithConfirm(version = null) {
@@ -683,18 +692,19 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       .then(({ data }) => {
         this.setState({ noDependencies: !data.data.length });
       })
-      .catch((err) =>
+      .catch((err) => {
+        const { status, statusText } = err.response;
         this.setState({
           alerts: [
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error getting collection's dependencies.`,
-              description: err?.message,
+              title: t`Dependencies for collection "${name}" could not be displayed.`,
+              description: errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   }
 
   private getIdFromTask(task) {

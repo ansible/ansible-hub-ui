@@ -1,6 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment-detail.scss';
+import { errorMessage } from 'src/utilities';
 
 import { sum } from 'lodash';
 import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
@@ -609,14 +610,19 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             this.queryImages(this.props.match.params['container']);
           });
         })
-        .catch(() => {
+        .catch((err) => {
+          const { status, statusText } = err.response;
           this.setState({
             deleteModalVisible: false,
             selectedImage: null,
             confirmDelete: false,
             isDeletionPending: false,
             alerts: this.state.alerts.concat([
-              { variant: 'danger', title: t`Error: delete failed` },
+              {
+                variant: 'danger',
+                title: t`Image "${digest}" could not be deleted.`,
+                description: errorMessage(status, statusText),
+              },
             ]),
           });
         }),

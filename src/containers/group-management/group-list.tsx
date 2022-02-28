@@ -1,6 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './group-management.scss';
+import { errorMessage } from 'src/utilities';
 
 import {
   withRouter,
@@ -303,7 +304,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           deleteModalCount: result.data.meta.count,
         }),
       )
-      .catch((e) =>
+      .catch((e) => {
+        const { status, statusText } = e.response;
         this.setState({
           deleteModalVisible: false,
           selectedGroup: null,
@@ -311,12 +313,12 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error loading users.`,
-              description: e?.message,
+              title: t`Users list could not be displayed.`,
+              description: errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   }
 
   private saveGroup(value) {
@@ -353,7 +355,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error editing group.`,
+              title: t`Changes to group "${this.state.selectedGroup}" could not be saved.`,
             },
           ],
         }),
@@ -506,7 +508,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             loading: false,
           }),
         )
-        .catch((e) =>
+        .catch((e) => {
+          const { status, statusText } = e.response;
           this.setState({
             groups: [],
             itemCount: 0,
@@ -515,12 +518,12 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
               ...this.state.alerts,
               {
                 variant: 'danger',
-                title: t`Error loading groups.`,
-                description: e?.message,
+                title: t`Groups list could not be displayed.`,
+                description: errorMessage(status, statusText),
               },
             ],
-          }),
-        ),
+          });
+        }),
     );
   }
 }

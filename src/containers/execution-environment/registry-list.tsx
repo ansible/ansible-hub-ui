@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { t, Trans } from '@lingui/macro';
+import { errorMessage } from 'src/utilities';
 import './registry-list.scss';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
@@ -471,9 +472,14 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           'success',
         ),
       )
-      .catch(() =>
-        this.addAlert(t`Failed to delete remote registry ${name}`, 'danger'),
-      )
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        this.addAlert(
+          t`Remote registry "${name}" could not be deleted.`,
+          'danger',
+          errorMessage(status, statusText),
+        );
+      })
       .then(() => {
         this.queryRegistries();
         this.setState({ showDeleteModal: false, remoteToEdit: null });
@@ -486,7 +492,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(
           <Trans>Sync started for remote registry &quot;{name}&quot;.</Trans>,
-          'success',
+          'info',
           <span>
             <Trans>
               See the task management{' '}
@@ -499,7 +505,14 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         );
         this.queryRegistries(true);
       })
-      .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        this.addAlert(
+          t`Remote registry "${name}" could not be synced.`,
+          'danger',
+          errorMessage(status, statusText),
+        );
+      });
   }
 
   private indexRegistry({ pk, name }) {
@@ -520,7 +533,14 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           </span>,
         );
       })
-      .catch(() => this.addAlert(t`Indexing failed for ${name}`, 'danger'));
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        this.addAlert(
+          t`Execution environment "${name}" could not be indexed.`,
+          'danger',
+          errorMessage(status, statusText),
+        );
+      });
   }
 
   private addAlert(title, variant, description?) {
