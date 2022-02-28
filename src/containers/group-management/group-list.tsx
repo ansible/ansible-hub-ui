@@ -435,7 +435,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       </React.Fragment>,
     ];
     return (
-      <tr aria-labelledby={group.name} key={index}>
+      <tr data-cy={`GroupList-row-${group.name}`} key={index}>
         <td>
           <Link
             to={formatPath(Paths.groupDetail, {

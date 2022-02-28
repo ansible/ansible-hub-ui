@@ -213,7 +213,7 @@ Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
     Cypress.env('prefix') + '_ui/v1/groups/*/model-permissions/*',
   ).as('groups');
   cy.menuGo('User Access > Groups');
-  cy.get(`[aria-labelledby=${groupName}] a`).click();
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.wait('@groups');
   cy.contains('button', 'Edit').click();
   permissions.forEach((permissionElement) => {
@@ -235,7 +235,7 @@ Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
 
 Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
   cy.menuGo('User Access > Groups');
-  cy.get(`[aria-labelledby=${groupName}] a`).click();
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.contains('button', 'Edit').click();
   permissions.forEach((permissionElement) => {
     if (permissionElement.permissions.length > 3) {
@@ -321,7 +321,7 @@ Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
 
 Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.menuGo('User Access > Groups');
-  cy.get(`[aria-labelledby=${groupName}] a`).click();
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.contains('button', 'Users').click();
   cy.contains('button', 'Add').click();
   cy.get('input.pf-c-select__toggle-typeahead').type(userName);
@@ -332,7 +332,7 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
 
 Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
   cy.menuGo('User Access > Groups');
-  cy.get(`[aria-labelledby=${groupName}] a`).click();
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.contains('button', 'Users').click();
   cy.get(`[aria-labelledby=${userName}] [aria-label=Actions]`).click();
   cy.containsnear(
@@ -377,7 +377,7 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
     'listGroups',
   );
-  cy.get(`[aria-labelledby=${name}] [aria-label=Actions]`).click();
+  cy.get(`[data-cy="GroupList-row-${name}"] [aria-label="Actions"]`).click();
   cy.get('[aria-label=Delete]').click();
   cy.contains('[role=dialog] button', 'Delete').click();
   cy.wait('@deleteGroup').then(({ response }) => {

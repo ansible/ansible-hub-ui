@@ -83,7 +83,9 @@ describe('Group Permissions Tests', () => {
     cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/**').as(
       'deleteGroup',
     );
-    cy.get(`[aria-labelledby=DeleteGroup] [aria-label=Actions]`).click();
+    cy.get(
+      `[data-cy="GroupList-row-DeleteGroup"] [aria-label="Actions"]`,
+    ).click();
     cy.get('[aria-label=Delete]').click();
     cy.contains('[role=dialog] button', 'Delete').click();
     cy.wait('@deleteGroup').then(({ response }) => {
