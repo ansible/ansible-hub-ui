@@ -412,7 +412,10 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       </Tooltip>,
     ].filter(Boolean);
     return (
-      <tr aria-labelledby={item.name} key={index}>
+      <tr
+        data-cy={`ExecutionEnvironmentRegistryList-row-${item.name}`}
+        key={index}
+      >
         <td>{item.name}</td>
         <td>
           <DateComponent date={item.created_at} />

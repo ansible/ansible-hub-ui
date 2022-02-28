@@ -633,9 +633,7 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
     var data = result.response.body.data;
     data.forEach((element) => {
       cy.get(
-        'tr[aria-labelledby="' +
-          element.name +
-          '"] button[aria-label="Actions"]',
+        `tr[data-cy="ExecutionEnvironmentRegistryList-row-${element.name}"] button[aria-label="Actions"]`,
       ).click();
       cy.contains('a', 'Delete').click();
       cy.contains('button', 'Delete').click();
