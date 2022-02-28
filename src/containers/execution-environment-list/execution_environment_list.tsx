@@ -312,10 +312,7 @@ class ExecutionEnvironmentList extends React.Component<
     };
 
     return (
-      <table
-        aria-label={t`User list`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <table className='hub-c-table-content pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
