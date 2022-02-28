@@ -98,7 +98,7 @@ describe('My Profile Tests', () => {
   });
 
   it('groups input is readonly', () => {
-    cy.get('[aria-labelledby=readonly-groups]')
+    cy.get('[data-cy="UserForm-readonly-groups"]')
       .find('input')
       .should('not.exist');
   });

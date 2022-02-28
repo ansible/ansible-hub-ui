@@ -133,7 +133,6 @@ export class UserForm extends React.Component<IProps, IState> {
         fieldId='auth_provider'
         key='readonlyAuth'
         label={t`Authentication provider`}
-        aria-labelledby='readonly-auth'
       >
         {user.auth_provider.map((provider) => (
           <Label key={provider}>{provider}</Label>
@@ -146,7 +145,7 @@ export class UserForm extends React.Component<IProps, IState> {
         fieldId='groups'
         key='readonlyGroups'
         label={t`Groups`}
-        aria-labelledby='readonly-groups'
+        data-cy='UserForm-readonly-groups'
       >
         {user.groups.map((group) => (
           <Label key={group.name}>{group.name}</Label>
