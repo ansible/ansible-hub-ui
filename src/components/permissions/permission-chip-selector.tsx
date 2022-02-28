@@ -1,4 +1,6 @@
 import { t } from '@lingui/macro';
+import { i18n } from '@lingui/core';
+
 import * as React from 'react';
 import {
   Label,
@@ -17,6 +19,7 @@ interface IProps {
   onSelect?: (event, selection) => void;
   onClear?: () => void;
   menuAppendTo?: 'parent' | 'inline';
+  multilingual?: boolean;
 }
 
 interface IState {
@@ -37,10 +40,24 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
       return (
         <LabelGroup>
           {items.map((text) => (
-            <Label key={text}>{text}</Label>
+            <Label key={text}>
+              {this.props.multilingual ? i18n._(text) : text}
+            </Label>
           ))}
         </LabelGroup>
       );
+    }
+
+    let selections = [];
+    if (this.props.multilingual) {
+      selections = this.props.selectedPermissions.map((value) => ({
+        // orginal english value
+        value,
+        // translated
+        toString: () => i18n._(value),
+      }));
+    } else {
+      selections = this.props.selectedPermissions;
     }
 
     return (
@@ -49,9 +66,9 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
         variant={SelectVariant.typeaheadMulti}
         typeAheadAriaLabel={t`Select permissions`}
         onToggle={this.onToggle}
-        onSelect={this.props.onSelect ? this.props.onSelect : this.onSelect}
+        onSelect={this.onSelect}
         onClear={this.props.onClear ? this.props.onClear : this.clearSelection}
-        selections={this.props.selectedPermissions}
+        selections={selections}
         isOpen={this.state.isOpen}
         placeholderText={this.placeholderText()}
         isDisabled={!!this.props.isDisabled}
@@ -65,7 +82,9 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
               />,
             ]
           : this.props.availablePermissions.map((option, index) => (
-              <SelectOption key={index} value={option} />
+              <SelectOption key={index} value={option}>
+                {this.props.multilingual ? i18n._(option) : option}
+              </SelectOption>
             ))}
       </Select>
     );
@@ -89,13 +108,22 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
   };
 
   private onSelect = (event, selection) => {
-    const newPerms = new Set(this.props.selectedPermissions);
-    if (newPerms.has(selection)) {
-      newPerms.delete(selection);
-    } else {
-      newPerms.add(selection);
+    // value contains orginal key in english
+    if (this.props.multilingual && selection.value) {
+      selection = selection.value;
     }
 
-    this.props.setSelected(Array.from(newPerms));
+    if (this.props.onSelect) {
+      this.props.onSelect(event, selection);
+    } else {
+      const newPerms = new Set(this.props.selectedPermissions);
+      if (newPerms.has(selection)) {
+        newPerms.delete(selection);
+      } else {
+        newPerms.add(selection);
+      }
+
+      this.props.setSelected(Array.from(newPerms));
+    }
   };
 }
