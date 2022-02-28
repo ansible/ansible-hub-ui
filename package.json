@@ -43,7 +43,7 @@
         "@babel/preset-typescript": "^7.16.7",
         "@lingui/cli": "^3.13.2",
         "@lingui/macro": "^3.13.2",
-        "@ls-lint/ls-lint": "^1.10.0",
+        "@ls-lint/ls-lint": "^1.11.0",
         "@redhat-cloud-services/frontend-components-config": "^4.6.1",
         "@typescript-eslint/eslint-plugin": "^5.9.0",
         "@typescript-eslint/parser": "^5.12.0",
