@@ -809,7 +809,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
     return (
-      <tr aria-labelledby={user.username} key={index}>
+      <tr data-cy={`GroupDetail-users-${user.username}`} key={index}>
         <td>
           <Link to={formatPath(Paths.userDetail, { userID: user.id })}>
             {user.username}

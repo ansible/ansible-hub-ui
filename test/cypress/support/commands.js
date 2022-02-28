@@ -327,16 +327,18 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.get('input.pf-c-select__toggle-typeahead').type(userName);
   cy.contains('button', userName).click();
   cy.contains('footer > button', 'Add').click();
-  cy.get(`[aria-labelledby=${userName}]`).should('exist');
+  cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
 });
 
 Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
   cy.menuGo('User Access > Groups');
   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.contains('button', 'Users').click();
-  cy.get(`[aria-labelledby=${userName}] [aria-label=Actions]`).click();
+  cy.get(
+    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
+  ).click();
   cy.containsnear(
-    `[aria-labelledby=${userName}] [aria-label=Actions]`,
+    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
     'Remove',
   ).click();
   cy.contains('button.pf-m-danger', 'Delete').click();
