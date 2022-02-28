@@ -273,7 +273,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
       item;
     const taskId = parsePulpIDFromURL(pulp_href);
     return (
-      <tr aria-labelledby={name} key={index}>
+      <tr key={index}>
         <td>
           <Link to={formatPath(Paths.taskDetail, { task: taskId })}>
             <Tooltip
