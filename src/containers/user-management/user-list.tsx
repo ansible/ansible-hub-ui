@@ -342,7 +342,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       );
     }
     return (
-      <tr aria-labelledby={user.username} key={index}>
+      <tr data-cy={`UserList-row-${user.username}`} key={index}>
         <td>
           <Link to={formatPath(Paths.userDetail, { userID: user.id })}>
             {user.username}

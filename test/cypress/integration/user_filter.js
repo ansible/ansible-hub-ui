@@ -28,7 +28,7 @@ describe('Search for users', () => {
 
   let checkUserEntry = () => {
     return cy
-      .get('tbody > tr[aria-labelledby="new_user"] > td > a')
+      .get('tbody > tr[data-cy="UserList-row-new_user"] > td > a')
       .contains('new_user')
       .should('be.visible');
   };

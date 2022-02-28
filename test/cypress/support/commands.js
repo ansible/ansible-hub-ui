@@ -348,9 +348,9 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
   cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/users/*').as(
     'deleteUser',
   );
-  cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click();
+  cy.get(`[data-cy="UserList-row-${username}"] [aria-label="Actions"]`).click();
   cy.containsnear(
-    `[aria-labelledby=${username}] [aria-label=Actions]`,
+    `[data-cy="UserList-row-${username}"] [aria-label="Actions"]`,
     'Delete',
   ).click();
 
