@@ -379,7 +379,7 @@ class ExecutionEnvironmentList extends React.Component<
     ].filter((truthy) => truthy);
 
     return (
-      <tr aria-labelledby={item.name} key={index}>
+      <tr data-cy={`ExecutionEnvironmentList-row-${item.name}`} key={index}>
         <td>
           <Link
             to={formatPath(Paths.executionEnvironmentDetail, {

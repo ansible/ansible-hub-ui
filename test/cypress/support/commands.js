@@ -656,9 +656,7 @@ Cypress.Commands.add('deleteContainers', {}, () => {
     var data = result.response.body.data;
     data.forEach((element) => {
       cy.get(
-        'tr[aria-labelledby="' +
-          element.name +
-          '"] button[aria-label="Actions"]',
+        `tr[data-cy="ExecutionEnvironmentList-row-${element.name}"] button[aria-label="Actions"]`,
       ).click();
       cy.contains('a', 'Delete').click();
       cy.get('input[id=delete_confirm]').click();
