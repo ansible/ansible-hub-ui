@@ -1,4 +1,6 @@
 import { t, Trans } from '@lingui/macro';
+import { i18n } from '@lingui/core';
+
 import * as React from 'react';
 
 import {
@@ -345,7 +347,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               key={group.name}
               className={group.name}
             >
-              <FlexItem style={{ minWidth: '200px' }}>{group.label}</FlexItem>
+              <FlexItem style={{ minWidth: '200px' }}>
+                {i18n._(group.label)}
+              </FlexItem>
               <FlexItem grow={{ default: 'grow' }}>
                 <PermissionChipSelector
                   availablePermissions={group.object_permissions
@@ -366,6 +370,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                     .map((value) => twoWayMapper(value, filteredPermissions))}
                   setSelected={(perms) => this.setState({ permissions: perms })}
                   menuAppendTo='inline'
+                  multilingual={true}
                   isViewOnly={!editPermissions}
                   onClear={() => {
                     const clearedPerms = group.object_permissions;
