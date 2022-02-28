@@ -407,12 +407,13 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                   )
                 }
                 onError={(err) => {
+                  const { status, statusText } = err.response;
                   this.setState({
                     formErrors: {
                       ...this.state.formErrors,
                       groups: {
                         title: t`Groups list could not be displayed.`,
-                        description: err,
+                        description: errorMessage(status, statusText),
                         variant: 'danger',
                       },
                     },

@@ -279,6 +279,3 @@ export class NamespaceForm extends React.Component<IProps, IState> {
     );
   }
 }
-function statusText(status: string, statusText: any): string | JSX.Element {
-  throw new Error('Function not implemented.');
-}

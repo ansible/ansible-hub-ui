@@ -274,10 +274,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
           );
         })
         .catch((error) => {
-          const {
-            result,
-            result: { status, statusText },
-          } = error.response;
+          const result = error.response;
           if (result.status === 400) {
             this.setState({
               errorMessages: mapErrorMessages(error),
@@ -288,7 +285,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
               alerts: this.state.alerts.concat({
                 variant: 'danger',
                 title: t`Changes to namespace "${this.state.namespace.name}" could not be saved.`,
-                description: errorMessage(status, statusText),
+                description: errorMessage(result.status, result.statusText),
               }),
               saving: false,
             });
