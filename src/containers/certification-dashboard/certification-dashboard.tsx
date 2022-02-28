@@ -328,11 +328,7 @@ class CertificationDashboard extends React.Component<
 
   private renderRow(version: CollectionVersion, index) {
     return (
-      <tr
-        aria-labelledby={`${version.namespace}.${version.name} v${version.version}`}
-        key={index}
-        data-cy='table_row'
-      >
+      <tr key={index} data-cy='CertificationDashboard-row'>
         <td>{version.namespace}</td>
         <td>{version.name}</td>
         <td>
