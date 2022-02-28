@@ -68,6 +68,6 @@ describe('Collections list Tests', () => {
   it('Cards/List switch is working', () => {
     cy.get('[data-cy="view_type_list"] svg').click();
 
-    cy.get('li[aria-labelledby="simple-item1"').should('have.length', 10);
+    cy.get('[data-cy="CollectionListItem"]').should('have.length', 10);
   });
 });

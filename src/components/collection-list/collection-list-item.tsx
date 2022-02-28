@@ -124,7 +124,7 @@ export class CollectionListItem extends React.Component<IProps> {
     );
 
     return (
-      <DataListItem aria-labelledby='simple-item1'>
+      <DataListItem data-cy='CollectionListItem'>
         <DataListItemRow>
           <DataListItemCells dataListCells={cells} />
         </DataListItemRow>
