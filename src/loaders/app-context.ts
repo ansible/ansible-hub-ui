@@ -2,7 +2,7 @@ import * as React from 'react';
 import { UserType, FeatureFlagsType, SettingsType } from 'src/api';
 import { AlertType } from 'src/components';
 
-interface IAppContextType {
+export interface IAppContextType {
   user: UserType;
   setUser: (user: UserType) => void;
   selectedRepo?: string;
@@ -14,3 +14,4 @@ interface IAppContextType {
 }
 
 export const AppContext = React.createContext<IAppContextType>(undefined);
+export const useContext = () => React.useContext(AppContext);

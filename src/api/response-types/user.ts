@@ -25,6 +25,8 @@ export class Permissions {
   change_namespace: boolean;
   change_remote: boolean;
   move_collection: boolean;
+  sign_collections_on_namespace: boolean;
+  sign_collections_on_repository: boolean;
   view_distribution: boolean;
   view_group: boolean;
   view_user: boolean;
