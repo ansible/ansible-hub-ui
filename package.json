@@ -9,7 +9,7 @@
         "@babel/runtime": "^7.17.2",
         "@patternfly/patternfly": "^4.179.1",
         "@patternfly/react-core": "^4.192.15",
-        "@patternfly/react-table": "^4.61.15",
+        "@patternfly/react-table": "^4.67.5",
         "@redhat-cloud-services/frontend-components": "^3.7.3",
         "@redhat-cloud-services/frontend-components-utilities": "^3.2.8",
         "@types/node": "^12.20.16",
