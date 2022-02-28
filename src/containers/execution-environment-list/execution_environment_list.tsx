@@ -312,10 +312,7 @@ class ExecutionEnvironmentList extends React.Component<
     };
 
     return (
-      <table
-        aria-label={t`User list`}
-        className='hub-c-table-content pf-c-table'
-      >
+      <table className='hub-c-table-content pf-c-table'>
         <SortTable
           options={sortTableOptions}
           params={params}
@@ -379,7 +376,7 @@ class ExecutionEnvironmentList extends React.Component<
     ].filter((truthy) => truthy);
 
     return (
-      <tr aria-labelledby={item.name} key={index}>
+      <tr data-cy={`ExecutionEnvironmentList-row-${item.name}`} key={index}>
         <td>
           <Link
             to={formatPath(Paths.executionEnvironmentDetail, {

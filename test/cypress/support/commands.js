@@ -213,7 +213,7 @@ Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
     Cypress.env('prefix') + '_ui/v1/groups/*/model-permissions/*',
   ).as('groups');
   cy.menuGo('User Access > Groups');
-  cy.get(`[aria-labelledby=${groupName}] a`).click();
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.wait('@groups');
   cy.contains('button', 'Edit').click();
   permissions.forEach((permissionElement) => {
@@ -235,7 +235,7 @@ Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
 
 Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
   cy.menuGo('User Access > Groups');
-  cy.get(`[aria-labelledby=${groupName}] a`).click();
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.contains('button', 'Edit').click();
   permissions.forEach((permissionElement) => {
     if (permissionElement.permissions.length > 3) {
@@ -321,22 +321,24 @@ Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
 
 Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.menuGo('User Access > Groups');
-  cy.get(`[aria-labelledby=${groupName}] a`).click();
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.contains('button', 'Users').click();
   cy.contains('button', 'Add').click();
   cy.get('input.pf-c-select__toggle-typeahead').type(userName);
   cy.contains('button', userName).click();
   cy.contains('footer > button', 'Add').click();
-  cy.get(`[aria-labelledby=${userName}]`).should('exist');
+  cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
 });
 
 Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
   cy.menuGo('User Access > Groups');
-  cy.get(`[aria-labelledby=${groupName}] a`).click();
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.contains('button', 'Users').click();
-  cy.get(`[aria-labelledby=${userName}] [aria-label=Actions]`).click();
+  cy.get(
+    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
+  ).click();
   cy.containsnear(
-    `[aria-labelledby=${userName}] [aria-label=Actions]`,
+    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
     'Remove',
   ).click();
   cy.contains('button.pf-m-danger', 'Delete').click();
@@ -348,9 +350,9 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
   cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/users/*').as(
     'deleteUser',
   );
-  cy.get(`[aria-labelledby=${username}] [aria-label=Actions]`).click();
+  cy.get(`[data-cy="UserList-row-${username}"] [aria-label="Actions"]`).click();
   cy.containsnear(
-    `[aria-labelledby=${username}] [aria-label=Actions]`,
+    `[data-cy="UserList-row-${username}"] [aria-label="Actions"]`,
     'Delete',
   ).click();
 
@@ -377,7 +379,7 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
     'listGroups',
   );
-  cy.get(`[aria-labelledby=${name}] [aria-label=Actions]`).click();
+  cy.get(`[data-cy="GroupList-row-${name}"] [aria-label="Actions"]`).click();
   cy.get('[aria-label=Delete]').click();
   cy.contains('[role=dialog] button', 'Delete').click();
   cy.wait('@deleteGroup').then(({ response }) => {
@@ -637,9 +639,7 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
     var data = result.response.body.data;
     data.forEach((element) => {
       cy.get(
-        'tr[aria-labelledby="' +
-          element.name +
-          '"] button[aria-label="Actions"]',
+        `tr[data-cy="ExecutionEnvironmentRegistryList-row-${element.name}"] button[aria-label="Actions"]`,
       ).click();
       cy.contains('a', 'Delete').click();
       cy.contains('button', 'Delete').click();
@@ -660,9 +660,7 @@ Cypress.Commands.add('deleteContainers', {}, () => {
     var data = result.response.body.data;
     data.forEach((element) => {
       cy.get(
-        'tr[aria-labelledby="' +
-          element.name +
-          '"] button[aria-label="Actions"]',
+        `tr[data-cy="ExecutionEnvironmentList-row-${element.name}"] button[aria-label="Actions"]`,
       ).click();
       cy.contains('a', 'Delete').click();
       cy.get('input[id=delete_confirm]').click();

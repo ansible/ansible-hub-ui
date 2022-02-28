@@ -42,7 +42,7 @@ describe('Execution Environments - Use in Controller', () => {
       'Last modified',
       'Container registry type',
     ].forEach((header) =>
-      cy.get('tr[aria-labelledby="headers"] th').contains(header),
+      cy.get('tr[data-cy="SortTable-headers"] th').contains(header),
     );
 
     // one row of each type available

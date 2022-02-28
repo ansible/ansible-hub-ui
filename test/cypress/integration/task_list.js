@@ -25,7 +25,7 @@ describe('Task table contains correct headers and filter', () => {
     cy.get('[aria-label="name__contains"]');
     ['Task name', 'Created on', 'Started at', 'Finished at', 'Status'].forEach(
       (item) => {
-        cy.get('tr[aria-labelledby="headers"] th').contains(item);
+        cy.get('tr[data-cy="SortTable-headers"] th').contains(item);
       },
     );
   });

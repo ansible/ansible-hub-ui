@@ -98,7 +98,7 @@ describe('My Profile Tests', () => {
   });
 
   it('groups input is readonly', () => {
-    cy.get('[aria-labelledby=readonly-groups]')
+    cy.get('[data-cy="UserForm-readonly-groups"]')
       .find('input')
       .should('not.exist');
   });
@@ -126,10 +126,19 @@ describe('My Profile Tests', () => {
 
     cy.get('.pf-c-button').contains('Cancel').click();
 
-    cy.get('[aria-labelledby=username]').should('not.contain', 'administrator');
-    cy.get('[aria-labelledby=first_name]').should('not.contain', 'First Name');
-    cy.get('[aria-labelledby=last_name]').should('not.contain', 'Last Name');
-    cy.get('[aria-labelledby=email]').should(
+    cy.get('[data-cy="DataForm-field-username"]').should(
+      'not.contain',
+      'administrator',
+    );
+    cy.get('[data-cy="DataForm-field-first_name"]').should(
+      'not.contain',
+      'First Name',
+    );
+    cy.get('[data-cy="DataForm-field-last_name"]').should(
+      'not.contain',
+      'Last Name',
+    );
+    cy.get('[data-cy="DataForm-field-email"]').should(
       'not.contain',
       'administrator@example.com',
     );

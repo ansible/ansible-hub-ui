@@ -56,7 +56,7 @@ export class DataForm extends React.Component<IProps> {
           label={field.title}
           labelIcon={!isReadonly && field.formGroupLabelIcon}
           validated={isReadonly ? 'default' : validated}
-          aria-labelledby={field.id}
+          data-cy={`DataForm-field-${field.id}`}
         >
           {isReadonly ? (
             model[field.id]

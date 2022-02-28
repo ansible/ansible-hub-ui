@@ -48,7 +48,7 @@ describe('Remote Registry Tests', () => {
       'Registry URL',
       'Registry sync status',
     ].forEach((element) => {
-      cy.contains('tr[aria-labelledby="headers"]', element);
+      cy.contains('tr[data-cy="SortTable-headers"]', element);
     });
 
     cy.contains('table tr', 'New remote registry1');
@@ -61,7 +61,7 @@ describe('Remote Registry Tests', () => {
     cy.menuGo('Execution Environments > Remote Registries');
 
     cy.get(
-      'tr[aria-labelledby="New remote registry1"] button[aria-label="Actions"]',
+      'tr[data-cy="ExecutionEnvironmentRegistryList-row-New remote registry1"] button[aria-label="Actions"]',
     ).click();
     cy.contains('a', 'Edit').click();
 

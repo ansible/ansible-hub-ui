@@ -12,7 +12,7 @@ describe('Hub User Management Tests', () => {
     cy.cookieLogin(adminUsername, adminPassword);
 
     cy.createUser(username, password, 'Test F', 'Test L', 'test@example.com');
-    cy.contains('[aria-labelledby=test]', 'Test F');
+    cy.contains('[data-cy="UserList-row-test"]', 'Test F');
 
     cy.createGroup('delete-user');
     cy.addPermissions('delete-user', [
@@ -28,7 +28,7 @@ describe('Hub User Management Tests', () => {
     });
 
     it('User table lists users', () => {
-      cy.contains('[aria-label="User list"] [aria-labelledby=admin]', 'admin');
+      cy.contains('[data-cy="UserList-row-admin"]', 'admin');
     });
   });
 
@@ -39,9 +39,9 @@ describe('Hub User Management Tests', () => {
     });
 
     it('Can create new users', () => {
-      cy.contains('[aria-labelledby=test]', 'Test F');
-      cy.contains('[aria-labelledby=test]', 'Test L');
-      cy.contains('[aria-labelledby=test]', 'test@example.com');
+      cy.contains('[data-cy="UserList-row-test"]', 'Test F');
+      cy.contains('[data-cy="UserList-row-test"]', 'Test L');
+      cy.contains('[data-cy="UserList-row-test"]', 'test@example.com');
 
       cy.contains('.body', 'Test F').not();
     });
@@ -49,12 +49,10 @@ describe('Hub User Management Tests', () => {
 
   describe('prevents super-user and self deletion', () => {
     function attemptToDelete(toDelete) {
+      const actionsSelector = `[data-cy="UserList-row-${toDelete}"] [aria-label="Actions"]`;
       cy.menuGo('User Access > Users');
-      cy.get(`[aria-labelledby=${toDelete}] [aria-label=Actions]`).click();
-      cy.containsnear(
-        `[aria-labelledby=${toDelete}] [aria-label=Actions]`,
-        'Delete',
-      ).click();
+      cy.get(actionsSelector).click();
+      cy.containsnear(actionsSelector, 'Delete').click();
       cy.get('footer > button:contains("Delete")').should('be.disabled');
       cy.get('footer > button:contains("Cancel")').click();
     }
