@@ -47,7 +47,12 @@ import {
   AlertType,
 } from 'src/components';
 
-import { ParamHelper, getRepoUrl, filterIsSet } from 'src/utilities';
+import {
+  ParamHelper,
+  getRepoUrl,
+  filterIsSet,
+  errorMessage,
+} from 'src/utilities';
 import { Constants } from 'src/constants';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
@@ -441,18 +446,19 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             currentRepoCount === 0,
         }),
       )
-      .catch((err) =>
+      .catch((err) => {
+        const { status, statusText } = err.response;
         this.setState({
           alerts: [
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error loading collection repositories.`,
-              description: err?.message,
+              title: t`Collection repositories could not be displayed.`,
+              description: errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   }
 
   private get updateParams() {
@@ -546,8 +552,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private deleteNamespace = () => {
+    const {
+      namespace: { name },
+    } = this.state;
     this.setState({ isNamespacePending: true }, () =>
-      NamespaceAPI.delete(this.state.namespace.name)
+      NamespaceAPI.delete(name)
         .then(() => {
           this.setState({
             redirect: formatPath(Paths.namespaces, {}),
@@ -560,31 +569,32 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               variant: 'success',
               title: (
                 <Trans>
-                  Namespace &quot;{this.state.namespace.name}&quot; has been
-                  successfully deleted.
+                  Namespace &quot;{name}&quot; has been successfully deleted.
                 </Trans>
               ),
             },
           ]);
         })
         .catch((e) => {
+          const { status, statusText } = e.response;
           this.setState(
             {
               isOpenNamespaceModal: false,
               confirmDelete: false,
               isNamespacePending: false,
             },
-            () =>
+            () => {
               this.setState({
                 alerts: [
                   ...this.state.alerts,
                   {
                     variant: 'danger',
-                    title: t`Error deleting namespace.`,
-                    description: e?.message,
+                    title: t`Namespace "${name}" could not be deleted.`,
+                    description: errorMessage(status, statusText),
                   },
                 ],
-              }),
+              });
+            },
           );
         }),
     );

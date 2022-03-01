@@ -13,7 +13,7 @@ import {
   AlertType,
   closeAlertMixin,
 } from 'src/components';
-import { getRepoUrl } from 'src/utilities';
+import { errorMessage, getRepoUrl } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 import { MyDistributionAPI } from 'src/api';
 
@@ -53,19 +53,20 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
           repoUrl: syncDistro,
         });
       })
-      .catch((e) =>
+      .catch((e) => {
+        const { status, statusText } = e.response;
         this.setState({
           repoUrl: '',
           alerts: [
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error loading Server URL.`,
-              description: e?.message,
+              title: t`Server URL could not be displayed.`,
+              description: errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   }
 
   componentDidMount() {
@@ -75,19 +76,20 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
       .then((result) => {
         this.setState({ tokenData: result.data });
       })
-      .catch((e) =>
+      .catch((e) => {
+        const { status, statusText } = e.response;
         this.setState({
           tokenData: undefined,
           alerts: [
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error loading token.`,
-              description: e?.message,
+              title: t`Token could not be displayed.`,
+              description: errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
 
     this.getMyDistributionPath();
   }

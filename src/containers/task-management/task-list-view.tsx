@@ -12,7 +12,7 @@ import {
   ToolbarItem,
   ToolbarContent,
 } from '@patternfly/react-core';
-import { ParamHelper, filterIsSet } from '../../utilities';
+import { ParamHelper, filterIsSet, errorMessage } from '../../utilities';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 import {
   AlertList,
@@ -377,7 +377,8 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         });
         this.queryTasks();
       })
-      .catch(() =>
+      .catch((e) => {
+        const { status, statusText } = e.response;
         this.setState({
           loading: true,
           cancelModalVisible: false,
@@ -385,12 +386,12 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: name,
-              description: t`Error stopping task.`,
+              title: t`Task "${name}" could not be stopped.`,
+              description: errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   }
 
   private get closeAlert() {
@@ -407,7 +408,8 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
             loading: false,
           });
         })
-        .catch((e) =>
+        .catch((e) => {
+          const { status, statusText } = e.response;
           this.setState({
             loading: false,
             items: [],
@@ -416,12 +418,12 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
               ...this.state.alerts,
               {
                 variant: 'danger',
-                title: t`Error loading tasks.`,
-                description: e?.message,
+                title: t`Tasks list could not be displayed.`,
+                description: errorMessage(status, statusText),
               },
             ],
-          }),
-        );
+          });
+        });
     });
   }
 

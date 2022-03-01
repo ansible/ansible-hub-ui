@@ -19,7 +19,7 @@ interface IProps {
   setGroups: (groups: GroupObjectPermissionType[]) => void;
   isDisabled?: boolean;
   menuAppendTo?: 'parent' | 'inline';
-  onError?: (error: string) => void;
+  onError?: (error: any) => void;
 }
 
 interface IState {
@@ -121,7 +121,7 @@ export class ObjectPermissionField extends React.Component<IProps, IState> {
         );
         this.setState({ searchGroups: groups });
       })
-      .catch((e) => this.props.onError(e?.message));
+      .catch((e) => this.props.onError(e.response));
   };
 
   private onSelect = (event, selection) => {

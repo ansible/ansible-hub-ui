@@ -29,6 +29,7 @@ import {
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
 import { Constants } from 'src/constants';
+import { errorMessage } from 'src/utilities';
 
 interface IProps {
   name: string;
@@ -107,12 +108,13 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           }
         })
         .catch((e) => {
+          const { status, statusText } = e.response;
           this.setState({
             formErrors: {
               ...this.state.formErrors,
               registries: {
-                title: t`Error loading registries.`,
-                description: e?.message,
+                title: t`Registries list could not be displayed.`,
+                description: errorMessage(status, statusText),
                 variant: 'danger',
               },
             },
@@ -404,18 +406,19 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                     'container.change_containernamespace',
                   )
                 }
-                onError={(err) =>
+                onError={(err) => {
+                  const { status, statusText } = err.response;
                   this.setState({
                     formErrors: {
                       ...this.state.formErrors,
                       groups: {
-                        title: t`Error loading groups.`,
-                        description: err,
+                        title: t`Groups list could not be displayed.`,
+                        description: errorMessage(status, statusText),
                         variant: 'danger',
                       },
                     },
-                  })
-                }
+                  });
+                }}
               ></ObjectPermissionField>
               {!!formError &&
                 formError.length > 0 &&
@@ -475,12 +478,13 @@ export class RepositoryForm extends React.Component<IProps, IState> {
         }),
       )
       .catch((e) => {
+        const { status, statusText } = e.response;
         this.setState({
           formErrors: {
             ...this.state.formErrors,
             groups: {
-              title: t`Error loading groups.`,
-              description: e?.message,
+              title: t`Groups list could not be displayed.`,
+              description: errorMessage(status, statusText),
               variant: 'danger',
             },
           },

@@ -26,6 +26,7 @@ import {
   ErrorMessagesType,
   ParamHelper,
   mapErrorMessages,
+  errorMessage,
 } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -82,7 +83,8 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
             this.loadNamespace(),
           );
         })
-        .catch((e) =>
+        .catch((e) => {
+          const { status, statusText } = e.response;
           this.setState(
             {
               loading: false,
@@ -96,13 +98,13 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                 ...this.context.alerts,
                 {
                   variant: 'danger',
-                  title: t`Error loading active user.`,
-                  description: e?.message,
+                  title: t`Active user profile "${this.context.user?.username}" could not be displayed.`,
+                  description: errorMessage(status, statusText),
                 },
               ]);
             },
-          ),
-        );
+          );
+        });
     });
   }
 
@@ -282,8 +284,8 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
             this.setState({
               alerts: this.state.alerts.concat({
                 variant: 'danger',
-                title: t`API Error: ${error.response.status}`,
-                description: t`You don't have permissions to update this namespace.`,
+                title: t`Changes to namespace "${this.state.namespace.name}" could not be saved.`,
+                description: errorMessage(result.status, result.statusText),
               }),
               saving: false,
             });

@@ -17,7 +17,7 @@ import { AlertType, APISearchTypeAhead, HelperText } from 'src/components';
 import { DataForm } from 'src/components/shared/data-form';
 import { UserType, GroupAPI } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
-import { ErrorMessagesType } from 'src/utilities';
+import { errorMessage, ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   /** User to edit */
@@ -287,13 +287,14 @@ export class UserForm extends React.Component<IProps, IState> {
     GroupAPI.list({ name__contains: name, page_size: 5 })
       .then((result) => this.setState({ searchGroups: result.data.data }))
       .catch((e) => {
+        const { status, statusText } = e.response;
         this.setState({
           formErrors: {
             ...this.state.formErrors,
             groups: {
               variant: 'danger',
-              title: t`Error loading groups.`,
-              description: e?.message,
+              title: t`Groups list could not be displayed.`,
+              description: errorMessage(status, statusText),
             },
           },
         });

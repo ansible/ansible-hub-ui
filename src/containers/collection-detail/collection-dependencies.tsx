@@ -19,7 +19,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 
-import { filterIsSet, ParamHelper } from 'src/utilities';
+import { errorMessage, filterIsSet, ParamHelper } from 'src/utilities';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -202,6 +202,7 @@ class CollectionDependencies extends React.Component<
           });
         })
         .catch((err) => {
+          const { status, statusText } = err.response;
           if (err?.message !== 'request-canceled') {
             this.setState({
               usedByDependenciesLoading: false,
@@ -209,8 +210,8 @@ class CollectionDependencies extends React.Component<
                 ...this.state.alerts,
                 {
                   variant: 'danger',
-                  title: t`Error loading dependent collections.`,
-                  description: err?.message,
+                  title: t`Dependent collections could not be displayed.`,
+                  description: errorMessage(status, statusText),
                 },
               ],
             });

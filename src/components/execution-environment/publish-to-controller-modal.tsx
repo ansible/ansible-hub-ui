@@ -28,7 +28,7 @@ import {
   ShaLabel,
   closeAlertMixin,
 } from 'src/components';
-import { filterIsSet, getContainersURL } from 'src/utilities';
+import { errorMessage, filterIsSet, getContainersURL } from 'src/utilities';
 
 interface IProps {
   image: string;
@@ -104,18 +104,19 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
 
         return controllers;
       })
-      .catch((e) =>
+      .catch((e) => {
+        const { status, statusText } = e.response;
         this.setState({
           alerts: [
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error loading Controllers`,
-              description: e.message,
+              title: t`Controllers list could not be displayed.`,
+              description: errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   }
 
   fetchTags(image, name?) {
@@ -145,18 +146,19 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
 
         return tags;
       })
-      .catch((e) =>
+      .catch((e) => {
+        const { status, statusText } = e.response;
         this.setState({
           alerts: [
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Error loading tags`,
-              description: e.message,
+              title: t`Tags could not be displayed.`,
+              description: errorMessage(status, statusText),
             },
           ],
-        }),
-      );
+        });
+      });
   }
 
   fetchData(image) {

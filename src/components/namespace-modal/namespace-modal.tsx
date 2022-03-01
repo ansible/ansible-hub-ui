@@ -13,7 +13,7 @@ import {
 
 import { NamespaceAPI, GroupObjectPermissionType } from 'src/api';
 import { AlertType, HelperText, ObjectPermissionField } from 'src/components';
-import { ErrorMessagesType } from 'src/utilities';
+import { errorMessage, ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   isOpen: boolean;
@@ -171,18 +171,19 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                 groups={newGroups}
                 setGroups={(g) => this.setState({ newGroups: g })}
                 menuAppendTo='parent'
-                onError={(err) =>
+                onError={(err) => {
+                  const { status, statusText } = err.response;
                   this.setState({
                     formErrors: {
                       ...this.state.formErrors,
                       groups: {
-                        title: t`Error loading groups.`,
-                        description: err,
+                        title: t`Groups list could not be displayed.`,
+                        description: errorMessage(status, statusText),
                         variant: 'danger',
                       },
                     },
-                  })
-                }
+                  });
+                }}
               />
             )}
           </FormGroup>
