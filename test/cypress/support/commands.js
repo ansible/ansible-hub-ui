@@ -625,6 +625,9 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
     '.pf-c-alert__title',
     `Sync started for execution environment "${name}".`,
   );
+  // wait for finish
+  cy.contains('a', 'detail page').click();
+  cy.contains('.title-box h1', 'Completed', { timeout: 20000 });
 });
 
 Cypress.Commands.add('deleteRegistries', {}, () => {
