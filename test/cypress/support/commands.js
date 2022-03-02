@@ -342,7 +342,7 @@ Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
     'Remove',
   ).click();
   cy.contains('button.pf-m-danger', 'Delete').click();
-  cy.contains(userName).should('not.exist');
+  cy.contains('[data-cy=main-tabs]', userName).should('not.exist');
 });
 
 Cypress.Commands.add('deleteUser', {}, (username) => {
