@@ -155,6 +155,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                   selectedImport={selectedImport}
                   apiError={importDetailError}
                   collectionVersion={selectedCollectionVersion}
+                  data-cy={'MyImports'}
                 />
               </div>
             </div>

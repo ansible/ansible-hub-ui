@@ -28,6 +28,7 @@ interface IProps {
   setFollowMessages: (follow: boolean) => void;
   hideCollectionName?: boolean;
   collectionVersion?: CollectionVersion;
+  'data-cy'?: string;
 }
 
 export class ImportConsole extends React.Component<IProps> {
@@ -67,7 +68,10 @@ export class ImportConsole extends React.Component<IProps> {
       selectedImport.state === PulpStatus.waiting;
 
     return (
-      <div className='hub-import-console pf-c-content'>
+      <div
+        className='hub-import-console pf-c-content'
+        data-cy={`ImportConsole-${this.props['data-cy']}`}
+      >
         {this.renderTitle(selectedImport)}
         <div className='message-list'>
           <div

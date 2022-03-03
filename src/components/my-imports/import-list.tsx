@@ -28,6 +28,7 @@ interface IProps {
     keyword?: string;
     namespace?: string;
   };
+  'data-cy'?: string;
 
   selectImport: (x) => void;
   updateParams: (filters) => void;
@@ -173,6 +174,7 @@ export class ImportList extends React.Component<IProps, IState> {
                   item.type === selectedImport.type &&
                   item.id === selectedImport.id,
               })}
+              data-cy={`ImportList-row-${item.name}`}
             >
               <div className='left'>
                 <i className={this.getStatusClass(item.state)} />
