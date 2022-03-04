@@ -447,7 +447,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             {group.name}
           </Link>
         </td>
-        <td>
+        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
           {dropdownItems.length > 0 && (
             <StatefulDropdown items={dropdownItems} />
           )}
