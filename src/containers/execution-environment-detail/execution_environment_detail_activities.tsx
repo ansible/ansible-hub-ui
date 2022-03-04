@@ -216,7 +216,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                 created: lastActivity.created,
                 action: (
                   <React.Fragment>
-                    {this.props.containerRepository.name} was added
+                    {t`${this.props.containerRepository.name} was added`}
                   </React.Fragment>
                 ),
               });
