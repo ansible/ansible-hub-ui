@@ -1113,7 +1113,7 @@ msgstr ""
 msgid "Failed to delete remote registry {name}"
 msgstr ""
 
-#: src/containers/login/login.tsx:97
+#: src/containers/login/login.tsx:98
 msgid "Failed to retrieve user data."
 msgstr ""
 
@@ -1301,7 +1301,7 @@ msgstr ""
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 msgstr ""
 
-#: src/containers/login/login.tsx:110
+#: src/containers/login/login.tsx:111
 msgid "Invalid login credentials."
 msgstr ""
 
@@ -1394,7 +1394,11 @@ msgstr ""
 msgid "Local"
 msgstr ""
 
-#: src/containers/login/login.tsx:70
+#: src/containers/login/login.tsx:63
+msgid "Log In"
+msgstr ""
+
+#: src/containers/login/login.tsx:71
 msgid "Log in to your account"
 msgstr ""
 
@@ -2122,7 +2126,7 @@ msgstr ""
 msgid "Server URL"
 msgstr ""
 
-#: src/containers/login/login.tsx:105
+#: src/containers/login/login.tsx:106
 msgid "Server error. Please come back later."
 msgstr ""
 
@@ -2796,6 +2800,10 @@ msgstr ""
 
 #: src/components/headers/collection-header.tsx:382
 msgid "{0} released {1}"
+msgstr ""
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
+msgid "{0} was added"
 msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx:223

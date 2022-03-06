@@ -1113,7 +1113,7 @@ msgstr "失敗"
 msgid "Failed to delete remote registry {name}"
 msgstr "リモートレジストリー {name} を削除できませんでした。"
 
-#: src/containers/login/login.tsx:97
+#: src/containers/login/login.tsx:98
 msgid "Failed to retrieve user data."
 msgstr "ユーザーを取得できませんでした。"
 
@@ -1301,7 +1301,7 @@ msgstr "ファイル形式が無効です。"
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 msgstr "ファイル名が無効です。コレクションの形式は 'namespace-collection_name-1.0.0' のようにする必要があります。"
 
-#: src/containers/login/login.tsx:110
+#: src/containers/login/login.tsx:111
 msgid "Invalid login credentials."
 msgstr "ログイン認証情報が無効です。"
 
@@ -1394,7 +1394,11 @@ msgstr "トークンの読み込み"
 msgid "Local"
 msgstr "ローカル"
 
-#: src/containers/login/login.tsx:70
+#: src/containers/login/login.tsx:63
+msgid "Log In"
+msgstr ""
+
+#: src/containers/login/login.tsx:71
 msgid "Log in to your account"
 msgstr "アカウントにログイン"
 
@@ -2126,7 +2130,7 @@ msgstr "ユーザーの選択"
 msgid "Server URL"
 msgstr "サーバー URL"
 
-#: src/containers/login/login.tsx:105
+#: src/containers/login/login.tsx:106
 msgid "Server error. Please come back later."
 msgstr "サーバーエラー。後でもう一度お試しください。"
 
@@ -2801,6 +2805,10 @@ msgstr "インポートの完了を待機中"
 #: src/components/headers/collection-header.tsx:382
 msgid "{0} released {1}"
 msgstr "{0} が {1} をリリース"
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
+msgid "{0} was added"
+msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx:223
 msgid "{0} will be deleted."

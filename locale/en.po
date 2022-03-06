@@ -1115,7 +1115,7 @@ msgstr "Failed"
 msgid "Failed to delete remote registry {name}"
 msgstr "Failed to delete remote registry {name}"
 
-#: src/containers/login/login.tsx:97
+#: src/containers/login/login.tsx:98
 msgid "Failed to retrieve user data."
 msgstr "Failed to retrieve user data."
 
@@ -1303,7 +1303,7 @@ msgstr "Invalid file format."
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 msgstr "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 
-#: src/containers/login/login.tsx:110
+#: src/containers/login/login.tsx:111
 msgid "Invalid login credentials."
 msgstr "Invalid login credentials."
 
@@ -1396,7 +1396,11 @@ msgstr "Load token"
 msgid "Local"
 msgstr "Local"
 
-#: src/containers/login/login.tsx:70
+#: src/containers/login/login.tsx:63
+msgid "Log In"
+msgstr "Log In"
+
+#: src/containers/login/login.tsx:71
 msgid "Log in to your account"
 msgstr "Log in to your account"
 
@@ -2124,7 +2128,7 @@ msgstr "Select users"
 msgid "Server URL"
 msgstr "Server URL"
 
-#: src/containers/login/login.tsx:105
+#: src/containers/login/login.tsx:106
 msgid "Server error. Please come back later."
 msgstr "Server error. Please come back later."
 
@@ -2799,6 +2803,10 @@ msgstr "waiting for import to finish"
 #: src/components/headers/collection-header.tsx:382
 msgid "{0} released {1}"
 msgstr "{0} released {1}"
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
+msgid "{0} was added"
+msgstr "{0} was added"
 
 #: src/containers/execution-environment/registry-list.tsx:223
 msgid "{0} will be deleted."

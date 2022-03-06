@@ -1113,7 +1113,7 @@ msgstr "Échec"
 msgid "Failed to delete remote registry {name}"
 msgstr "Échec de la suppression du registre distant {name}"
 
-#: src/containers/login/login.tsx:97
+#: src/containers/login/login.tsx:98
 msgid "Failed to retrieve user data."
 msgstr "Échec de la récupération des données utilisateur."
 
@@ -1301,7 +1301,7 @@ msgstr "Format de fichier non valide."
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 msgstr "Nom de fichier non valide. Les collections doivent être formatées ainsi 'namespace-collection_name-1.0.0'"
 
-#: src/containers/login/login.tsx:110
+#: src/containers/login/login.tsx:111
 msgid "Invalid login credentials."
 msgstr "Identifiants de connexion non valides."
 
@@ -1394,7 +1394,11 @@ msgstr "Jeton de charge"
 msgid "Local"
 msgstr "Local"
 
-#: src/containers/login/login.tsx:70
+#: src/containers/login/login.tsx:63
+msgid "Log In"
+msgstr ""
+
+#: src/containers/login/login.tsx:71
 msgid "Log in to your account"
 msgstr "Connectez-vous à votre compte"
 
@@ -2126,7 +2130,7 @@ msgstr "Sélectionner les utilisateurs"
 msgid "Server URL"
 msgstr "URL du serveur"
 
-#: src/containers/login/login.tsx:105
+#: src/containers/login/login.tsx:106
 msgid "Server error. Please come back later."
 msgstr "Erreur de serveur. Veuillez essayer plus tard."
 
@@ -2801,6 +2805,10 @@ msgstr "patientez jusqu’à ce que l’importation se termine"
 #: src/components/headers/collection-header.tsx:382
 msgid "{0} released {1}"
 msgstr "{0} released {1}"
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
+msgid "{0} was added"
+msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx:223
 msgid "{0} will be deleted."
