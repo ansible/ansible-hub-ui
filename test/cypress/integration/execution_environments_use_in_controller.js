@@ -82,6 +82,7 @@ describe('Execution Environments - Use in Controller', () => {
       it(`Use in Controller - ${type} ${opener.name}`, () => {
         opener(type);
 
+        // sporadic failure
         // shows links
         cy.contains('a', 'https://www.example.com')
           .should('have.attr', 'href')

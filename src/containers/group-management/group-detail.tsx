@@ -246,7 +246,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             </div>
           </div>
         </BaseHeader>
-        <Main>
+        <Main data-cy='main-tabs'>
           {params.tab == 'permissions' ? this.renderPermissions() : null}
           {params.tab == 'users' ? this.renderUsers(users) : null}
         </Main>
