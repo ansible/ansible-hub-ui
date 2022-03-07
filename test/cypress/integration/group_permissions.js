@@ -37,11 +37,8 @@ describe('Group Permissions Tests', () => {
       'Add group',
       'Change group',
     ]);
-    cy.addPermissions('group4', [
-      { group: 'users', permissions: ['View user'] },
-    ]);
+    cy.galaxykit('group perm add', 'group4', 'galaxy.view_user');
     addTestGroup('DeleteGroup');
-
     addTestUser('user1');
     addTestUser('user2', 'group2');
     addTestUser('user3', 'group3');
