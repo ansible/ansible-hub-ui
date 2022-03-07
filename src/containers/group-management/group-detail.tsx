@@ -609,7 +609,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         title={t`Remove user from group?`}
       >
         <Trans>
-          <b>{username}</b> will be removed from <b>{groupname}</b>.
+          User <b>{username}</b> will be removed from group<b>{groupname}</b>.
         </Trans>
       </DeleteModal>
     );
@@ -868,7 +868,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={user.date_joined} />
         </td>
-        <td>
+        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
           {' '}
           {!!currentUser &&
             currentUser.model_permissions.change_group &&
