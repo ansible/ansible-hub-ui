@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Tooltip as PFTooltip } from '@patternfly/react-core';
 
 interface IProps {
+  children: React.ReactNode;
   content: string;
 }
 
