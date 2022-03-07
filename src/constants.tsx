@@ -24,7 +24,7 @@ export class Constants {
   static PERMISSIONS = [
     {
       name: 'namespaces',
-      label: t`Collection Namespaces`,
+      label: defineMessage({ message: `Collection Namespaces` }),
       object_permissions: [
         'galaxy.add_namespace', // model_permissions.add_namespace
         'galaxy.change_namespace', // (model_permissions.change_namespace)
@@ -34,7 +34,7 @@ export class Constants {
     },
     {
       name: 'collections',
-      label: t`Collections`,
+      label: defineMessage({ message: `Collections` }),
       object_permissions: [
         'ansible.modify_ansible_repo_content', // model_permissions.move_collection
         'ansible.delete_collection', // model_permissions.delete_collection
@@ -42,7 +42,7 @@ export class Constants {
     },
     {
       name: 'users',
-      label: t`Users`,
+      label: defineMessage({ message: `Users` }),
       object_permissions: [
         'galaxy.view_user', // model_permissions.view_user
         'galaxy.delete_user', // model_permissions.delete_user
@@ -52,7 +52,7 @@ export class Constants {
     },
     {
       name: 'groups',
-      label: t`Groups`,
+      label: defineMessage({ message: `Groups` }),
       object_permissions: [
         'galaxy.view_group', // model_permissions.view_group
         'galaxy.delete_group', // model_permissions.delete_group
@@ -62,7 +62,7 @@ export class Constants {
     },
     {
       name: 'remotes',
-      label: t`Collection Remotes`,
+      label: defineMessage({ message: `Collection Remotes` }),
       object_permissions: [
         'ansible.change_collectionremote', // model_permissions.change_remote
         'ansible.view_collectionremote',
@@ -72,7 +72,7 @@ export class Constants {
     },
     {
       name: 'containers',
-      label: t`Containers`,
+      label: defineMessage({ message: `Containers` }),
       object_permissions: [
         // Turning off private container permissions since they aren't supported yet
         // 'container.namespace_pull_containerdistribution',
@@ -93,7 +93,7 @@ export class Constants {
     },
     {
       name: 'registries',
-      label: t`Remote Registries`,
+      label: defineMessage({ message: `Remote Registries` }),
       object_permissions: [
         'galaxy.add_containerregistryremote', // model_permissions.add_containerregistry
         'galaxy.change_containerregistryremote', // model_permissions.change_containerregistry
@@ -102,7 +102,7 @@ export class Constants {
     },
     {
       name: 'task_management',
-      label: t`Task Management`,
+      label: defineMessage({ message: `Task Management` }),
       object_permissions: [
         'core.change_task',
         'core.delete_task',
