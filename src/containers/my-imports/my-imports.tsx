@@ -118,7 +118,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
         <BaseHeader title={t`My imports`} />
         <Main>
           <section className='body'>
-            <div className='hub-page-container'>
+            <div className='hub-page-container' data-cy='MyImports'>
               <div className='import-list'>
                 <ImportList
                   importList={importList}
@@ -155,7 +155,6 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                   selectedImport={selectedImport}
                   apiError={importDetailError}
                   collectionVersion={selectedCollectionVersion}
-                  data-cy={'MyImports'}
                 />
               </div>
             </div>

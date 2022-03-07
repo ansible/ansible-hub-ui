@@ -30,48 +30,76 @@ describe('Imports filter test', () => {
 
     cy.visit('/ui/my-imports?namespace=test_namespace');
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).click();
-    cy.get('[data-cy="ImportConsole-MyImports"]').contains(
+    cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
       `test_namespace.${testCollection}`,
     );
-    cy.get('[data-cy="ImportConsole-MyImports"] .title-bar').contains(
-      'Completed',
-      { timeout: 10000 },
-    );
-    cy.get('[data-cy="ImportConsole-MyImports"] .message-list').contains(
-      'Done',
-    );
+    cy.get(
+      '[data-cy="MyImports"] [data-cy="ImportConsole"] .title-bar',
+    ).contains('Completed', { timeout: 10000 });
+    cy.get(
+      '[data-cy="MyImports"] [data-cy="ImportConsole"] .message-list',
+    ).contains('Done');
   });
 
   it('should fail on importing existing collection', () => {
     cy.galaxykit(`-i collection upload test_namespace ${testCollection}`);
+
     cy.visit('/ui/my-imports?namespace=test_namespace');
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
-    cy.get('[data-cy="ImportConsole-MyImports"]').contains(
+    cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
       `test_namespace.${testCollection}`,
     );
-    cy.get('[data-cy="ImportConsole-MyImports"] .title-bar').contains(
-      'Failed',
-      { timeout: 10000 },
+    cy.get(
+      '[data-cy="MyImports"] [data-cy="ImportConsole"] .title-bar',
+    ).contains('Failed', { timeout: 10000 });
+    cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
+      'Error message',
     );
-    cy.get('[data-cy="ImportConsole-MyImports"]').contains('Error message');
-    cy.get('[data-cy="ImportConsole-MyImports"] .message-list').contains(
-      'Failed',
-    );
+    cy.get(
+      '[data-cy="MyImports"] [data-cy="ImportConsole"] .message-list',
+    ).contains('Failed');
   });
 
   it('should redirect to new uploaded collection', () => {
     cy.visit('/ui/my-imports?namespace=test_namespace');
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
-    cy.get('[data-cy="ImportConsole-MyImports"]')
+    cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]')
       .contains(`test_namespace.${testCollection}`)
       .click();
     cy.contains(testCollection);
   });
 
   it('should be able to switch between namespaces', () => {
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+    ).as('collectionVersions');
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/imports/collections/*',
+    ).as('importsCollections');
+
     cy.get('[aria-label="Select namespace"]').select('test_namespace');
+
+    cy.wait('@collectionVersions');
+    cy.wait('@importsCollections');
+
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).should('be.visible');
+
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+    ).as('collectionVersions');
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/imports/collections/*',
+    ).as('importsCollections');
+
     cy.get('[aria-label="Select namespace"]').select('filter_test_namespace');
+
+    cy.wait('@collectionVersions');
+    cy.wait('@importsCollections');
+
     cy.get('[data-cy="ImportList-row-my_collection1"]').should('be.visible');
   });
 
