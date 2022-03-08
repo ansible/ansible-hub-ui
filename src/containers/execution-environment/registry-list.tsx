@@ -38,9 +38,9 @@ import {
   Pagination,
   RemoteForm,
   SortTable,
-  StatefulDropdown,
   closeAlertMixin,
   EmptyStateUnauthorized,
+  ListItemActions,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -366,6 +366,16 @@ class ExecutionEnvironmentRegistryList extends React.Component<
   }
 
   private renderTableRow(item, index: number) {
+    const buttons = [
+      <Button
+        key='sync'
+        variant='secondary'
+        onClick={() => this.syncRegistry(item)}
+      >
+        <Trans>Sync from registry</Trans>
+      </Button>,
+    ];
+
     const dropdownItems = [
       this.context.user.model_permissions.change_containerregistry && (
         <DropdownItem
@@ -429,18 +439,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           {lastSyncStatus(item) || '---'}
           {lastSynced(item)}
         </td>
-
-        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
-          <Button variant='secondary' onClick={() => this.syncRegistry(item)}>
-            <Trans>Sync from registry</Trans>
-          </Button>{' '}
-          {dropdownItems.length > 0 && (
-            <StatefulDropdown
-              items={dropdownItems}
-              ariaLabel='registry-list-kebab'
-            />
-          )}
-        </td>
+        <ListItemActions kebabItems={dropdownItems} buttons={buttons} />
       </tr>
     );
   }

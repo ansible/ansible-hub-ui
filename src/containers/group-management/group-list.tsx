@@ -38,7 +38,6 @@ import {
   Main,
   Pagination,
   SortTable,
-  StatefulDropdown,
 } from 'src/components';
 import {
   Button,
@@ -448,7 +447,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             {group.name}
           </Link>
         </td>
-        <ListItemActions items={dropdownItems} isKebab={true} />
+        <ListItemActions kebabItems={dropdownItems} />
       </tr>
     );
   }

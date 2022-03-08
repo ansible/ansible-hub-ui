@@ -34,10 +34,10 @@ import {
   PublishToControllerModal,
   RepositoryForm,
   SortTable,
-  StatefulDropdown,
   Tooltip,
   closeAlertMixin,
   EmptyStateUnauthorized,
+  ListItemActions,
 } from 'src/components';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from 'src/loaders/app-context';
@@ -402,13 +402,7 @@ class ExecutionEnvironmentList extends React.Component<
         <td>
           <Label>{item.pulp.repository.remote ? t`Remote` : t`Local`}</Label>
         </td>
-        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
-          {!!dropdownItems.length && (
-            <div data-cy='kebab-toggle'>
-              <StatefulDropdown items={dropdownItems} />
-            </div>
-          )}
-        </td>
+        <ListItemActions kebabItems={dropdownItems} />
       </tr>
     );
   }

@@ -39,7 +39,6 @@ import {
   Main,
   Pagination,
   SortTable,
-  StatefulDropdown,
   closeAlertMixin,
   ListItemActions,
 } from 'src/components';
@@ -375,7 +374,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={user.date_joined} />
         </td>
-        <ListItemActions items={dropdownItems} isKebab={true} />
+        <ListItemActions kebabItems={dropdownItems} />
       </tr>
     );
   }
