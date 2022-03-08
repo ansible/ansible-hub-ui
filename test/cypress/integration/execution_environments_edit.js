@@ -7,7 +7,11 @@ describe('execution environments', () => {
     cy.deleteRegistriesManual();
     cy.deleteContainersManual();
 
-    cy.addRemoteRegistry(`docker${num}`, 'https://registry.hub.docker.com/');
+    cy.galaxykit(
+      'registry create',
+      `docker${num}`,
+      'https://registry.hub.docker.com/',
+    );
     cy.addRemoteContainer({
       name: `remotepine${num}`,
       upstream_name: 'library/alpine',

@@ -15,7 +15,11 @@ describe('RBAC test for user without permissions', () => {
     cy.deleteRegistries();
     cy.deleteContainers();
 
-    cy.addRemoteRegistry(`docker`, 'https://registry.hub.docker.com/');
+    cy.galaxykit(
+      'registry create',
+      'docker',
+      'https://registry.hub.docker.com/',
+    );
     cy.addRemoteContainer({
       name: `testcontainer`,
       upstream_name: 'library/alpine',
@@ -81,7 +85,11 @@ describe('RBAC test for user with all permissions', () => {
     cy.deleteRegistries();
     cy.deleteContainers();
 
-    cy.addRemoteRegistry(`docker`, 'https://registry.hub.docker.com/');
+    cy.galaxykit(
+      'registry create',
+      'docker',
+      'https://registry.hub.docker.com/',
+    );
     cy.addRemoteContainer({
       name: `testcontainer`,
       upstream_name: 'library/alpine',

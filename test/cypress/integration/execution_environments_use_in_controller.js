@@ -13,10 +13,11 @@ describe('Execution Environments - Use in Controller', () => {
 
     cy.deleteRegistries();
     cy.deleteContainers();
-
-    // FIXME: add galaxykit support for remote registries
-    cy.addRemoteRegistry(`docker${num}`, 'https://registry.hub.docker.com/');
-
+    cy.galaxykit(
+      'registry create',
+      `docker${num}`,
+      'https://registry.hub.docker.com/',
+    );
     cy.addRemoteContainer({
       name: `remotepine${num}`,
       upstream_name: 'library/alpine',
