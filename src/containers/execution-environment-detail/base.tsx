@@ -251,10 +251,10 @@ export function withContainerRepo(WrappedComponent) {
                 }
                 registry={this.state.repo.pulp.repository.remote?.registry}
                 excludeTags={
-                  this.state.repo.pulp.repository.remote?.exclude_tags
+                  this.state.repo.pulp.repository.remote?.exclude_tags || []
                 }
                 includeTags={
-                  this.state.repo.pulp.repository.remote?.include_tags
+                  this.state.repo.pulp.repository.remote?.include_tags || []
                 }
                 remotePulpId={this.state.repo.pulp.repository.remote?.pulp_id}
               />
