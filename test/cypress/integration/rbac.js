@@ -20,13 +20,12 @@ describe('RBAC test for user without permissions', () => {
       'docker',
       'https://registry.hub.docker.com/',
     );
-    cy.addRemoteContainer({
-      name: `testcontainer`,
-      upstream_name: 'library/alpine',
-      registry: `docker`,
-      include_tags: 'latest',
-    });
-
+    cy.galaxykit(
+      'container create',
+      `testcontainer`,
+      'library/alpine',
+      `docker`,
+    );
     cy.galaxykit('user create', userName, userPassword);
   });
 

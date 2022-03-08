@@ -18,12 +18,12 @@ describe('Execution Environments - Use in Controller', () => {
       `docker${num}`,
       'https://registry.hub.docker.com/',
     );
-    cy.addRemoteContainer({
-      name: `remotepine${num}`,
-      upstream_name: 'library/alpine',
-      registry: `docker${num}`,
-      include_tags: 'latest',
-    });
+    cy.galaxykit(
+      'container create',
+      `remotepine${num}`,
+      'library/alpine',
+      `docker${num}`,
+    );
     cy.syncRemoteContainer(`remotepine${num}`);
 
     cy.addLocalContainer(`localpine${num}`, 'alpine');
