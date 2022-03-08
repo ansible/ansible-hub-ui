@@ -72,33 +72,47 @@ describe('Imports filter test', () => {
   it('should be able to switch between namespaces', () => {
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
-    ).as('collectionVersions');
+      Cypress.env('prefix') +
+        '_ui/v1/imports/collections/?namespace=test_namespace&*',
+    ).as('collectionsInNamespace');
     cy.intercept(
       'GET',
       Cypress.env('prefix') + '_ui/v1/imports/collections/*',
-    ).as('importsCollections');
+    ).as('collectionDetail');
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') +
+        '_ui/v1/collection-versions/?namespace=test_namespace&name=*',
+    ).as('collectionVersions');
 
     cy.get('[aria-label="Select namespace"]').select('test_namespace');
 
+    cy.wait('@collectionsInNamespace');
+    cy.wait('@collectionDetail');
     cy.wait('@collectionVersions');
-    cy.wait('@importsCollections');
 
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).should('be.visible');
 
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
-    ).as('collectionVersions');
+      Cypress.env('prefix') +
+        '_ui/v1/imports/collections/?namespace=filter_test_namespace&*',
+    ).as('collectionsInNamespace');
     cy.intercept(
       'GET',
       Cypress.env('prefix') + '_ui/v1/imports/collections/*',
-    ).as('importsCollections');
+    ).as('collectionDetail');
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') +
+        '_ui/v1/collection-versions/?namespace=filter_test_namespace&name=*',
+    ).as('collectionVersions');
 
     cy.get('[aria-label="Select namespace"]').select('filter_test_namespace');
 
+    cy.wait('@collectionsInNamespace');
+    cy.wait('@collectionDetail');
     cy.wait('@collectionVersions');
-    cy.wait('@importsCollections');
 
     cy.get('[data-cy="ImportList-row-my_collection1"]').should('be.visible');
   });
