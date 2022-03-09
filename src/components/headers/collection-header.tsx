@@ -68,12 +68,14 @@ interface IState {
     pageSize: number;
   };
   deleteCollection: CollectionDetailType;
-  collectionVersion: string | null;
   confirmDelete: boolean;
   alerts: AlertType[];
   redirect: string;
   noDependencies: boolean;
   isDeletionPending: boolean;
+
+  // entire collection or collection version is deleted
+  deletedCollectionType: 'version' | 'entire' | null;
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
@@ -91,7 +93,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         pageSize: Constants.DEFAULT_PAGINATION_OPTIONS[1],
       },
       deleteCollection: null,
-      collectionVersion: null,
+      deletedCollectionType: null,
       confirmDelete: false,
       alerts: [],
       redirect: null,
@@ -120,10 +122,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       isOpenVersionsSelect,
       redirect,
       noDependencies,
-      collectionVersion,
       deleteCollection,
       confirmDelete,
       isDeletionPending,
+      deletedCollectionType,
     } = this.state;
 
     const numOfshownVersions = 10;
@@ -262,27 +264,28 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             cancelAction={this.closeModal}
             deleteAction={() =>
               this.setState({ isDeletionPending: true }, () => {
-                collectionVersion
-                  ? this.deleteCollectionVersion(collectionVersion)
+                deletedCollectionType === 'version'
+                  ? this.deleteCollectionVersion()
                   : this.deleteCollection();
               })
             }
             isDisabled={!confirmDelete || isDeletionPending}
             title={
-              collectionVersion
+              deletedCollectionType === 'version'
                 ? t`Delete collection version?`
                 : t`Delete collection?`
             }
           >
             <>
               <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
-                {collectionVersion ? (
+                {deletedCollectionType === 'version' ? (
                   <>
                     {deleteCollection.all_versions.length === 1 ? (
                       <Trans>
                         Deleting{' '}
                         <b>
-                          {deleteCollection.name} v{collectionVersion}
+                          {deleteCollection.name} v
+                          {deleteCollection.latest_version.version}
                         </b>{' '}
                         and its data will be lost and this will cause the entire
                         collection to be deleted.
@@ -291,7 +294,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                       <Trans>
                         Deleting{' '}
                         <b>
-                          {deleteCollection.name} v{collectionVersion}
+                          {deleteCollection.name} v
+                          {deleteCollection.latest_version.version}
                         </b>{' '}
                         and its data will be lost.
                       </Trans>
@@ -513,10 +517,13 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     });
   };
 
-  private deleteCollectionVersion = (collectionVersion) => {
+  private deleteCollectionVersion = () => {
     const {
       deleteCollection,
-      deleteCollection: { name },
+      deleteCollection: {
+        name,
+        latest_version: { version: deletedVersion },
+      },
     } = this.state;
     CollectionAPI.deleteCollectionVersion(
       this.context.selectedRepo,
@@ -524,11 +531,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     )
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
-        const name = deleteCollection.name;
+
         waitForTask(taskId).then(() => {
           if (deleteCollection.all_versions.length > 1) {
             const topVersion = deleteCollection.all_versions.filter(
-              ({ version }) => version !== collectionVersion,
+              ({ version }) => version !== deletedVersion,
             );
             this.props.updateParams(
               ParamHelper.setParam(
@@ -539,7 +546,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             );
             this.setState({
               deleteCollection: null,
-              collectionVersion: null,
+              deletedCollectionType: null,
               isDeletionPending: false,
               alerts: [
                 ...this.state.alerts,
@@ -547,8 +554,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   variant: 'success',
                   title: (
                     <Trans>
-                      Collection &quot;{name} v{collectionVersion}&quot; has
-                      been successfully deleted.
+                      Collection &quot;{name} v{deletedVersion}&quot; has been
+                      successfully deleted.
                     </Trans>
                   ),
                 },
@@ -562,7 +569,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 variant: 'success',
                 title: (
                   <Trans>
-                    Collection &quot;{name} v{collectionVersion}&quot; has been
+                    Collection &quot;{name} v{deletedVersion}&quot; has been
                     successfully deleted.
                   </Trans>
                 ),
@@ -597,7 +604,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           );
           this.setState({
             deleteCollection: null,
-            collectionVersion: null,
+            deletedCollectionType: null,
             isDeletionPending: false,
             alerts: [
               ...this.state.alerts,
@@ -611,13 +618,13 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         } else {
           this.setState({
             deleteCollection: null,
-            collectionVersion: null,
+            deletedCollectionType: null,
             isDeletionPending: false,
             alerts: [
               ...this.state.alerts,
               {
                 variant: 'danger',
-                title: t`Collection "${name} v${collectionVersion}" could not be deleted.`,
+                title: t`Collection "${name} v${deletedVersion}" could not be deleted.`,
                 description: errorMessage(status, statusText),
               },
             ],
@@ -629,8 +636,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   private deleteCollection = () => {
     const {
       deleteCollection,
-      deleteCollection: { name },
-      collectionVersion,
+      deleteCollection: {
+        name,
+        latest_version: { version },
+      },
     } = this.state;
     CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
       .then((res) => {
@@ -643,14 +652,14 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               variant: 'success',
               title: (
                 <Trans>
-                  Collection &quot;{name} v{collectionVersion}
+                  Collection &quot;{name} v{version}
                   &quot; has been successfully deleted.
                 </Trans>
               ),
             },
           ]);
           this.setState({
-            collectionVersion: null,
+            deletedCollectionType: null,
             deleteCollection: null,
             isDeletionPending: false,
             redirect: formatPath(Paths.namespaceByRepo, {
@@ -663,7 +672,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       .catch((err) => {
         const { status, statusText } = err.response;
         this.setState({
-          collectionVersion: null,
+          deletedCollectionType: null,
           deleteCollection: null,
           isDeletionPending: false,
           alerts: [
@@ -681,7 +690,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   private openDeleteModalWithConfirm(version = null) {
     this.setState({
       deleteCollection: this.props.collection,
-      collectionVersion: version,
+      deletedCollectionType: version ? 'version' : 'entire',
       confirmDelete: false,
     });
   }
@@ -711,7 +720,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     return task.match(/tasks\/([a-zA-Z0-9-]+)/i)[1];
   }
   private closeModal = () => {
-    this.setState({ deleteCollection: null });
+    this.setState({ deleteCollection: null, deletedCollectionType: null });
   };
 
   get closeAlert() {
