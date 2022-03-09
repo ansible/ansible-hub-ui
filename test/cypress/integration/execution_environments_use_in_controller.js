@@ -24,6 +24,18 @@ describe('Execution Environments - Use in Controller', () => {
       'library/alpine',
       `docker${num}`,
     );
+
+    /*cy.addRemoteRegistry(`docker${num}`, 'https://registry.hub.docker.com/');
+
+    cy.addRemoteContainer({
+      name: `remotepine${num}`,
+      upstream_name: 'library/alpine',
+      registry: `docker${num}`,
+      include_tags: 'latest',
+    });*/
+
+    cy.visit('/ui/containers/');
+    cy.contains('.body', `remotepine${num}`, { timeout: 10000 });
     cy.syncRemoteContainer(`remotepine${num}`);
 
     cy.addLocalContainer(`localpine${num}`, 'alpine');

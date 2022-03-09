@@ -628,7 +628,8 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
   );
   // wait for finish
   cy.contains('a', 'detail page').click();
-  cy.contains('.title-box h1', 'Completed', { timeout: 20000 });
+  cy.contains('.title-box h1', 'Completed', { timeout: 60000 });
+  //cy.contains('Too Many Requests');
 });
 
 Cypress.Commands.add('deleteRegistriesManual', {}, () => {
