@@ -1,9 +1,10 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import './search.scss';
+import { errorMessage } from 'src/utilities';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { DataList, Switch } from '@patternfly/react-core';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { DataList, Switch, DropdownItem, Button } from '@patternfly/react-core';
 import {
   BaseHeader,
   CardListSwitcher,
@@ -15,18 +16,24 @@ import {
   LoadingPageSpinner,
   Pagination,
   RepoSelector,
+  StatefulDropdown,
+  AlertList,
+  AlertType,
+  closeAlertMixin,
+  ImportModal,
 } from 'src/components';
 import {
   CollectionAPI,
   CollectionListType,
   SyncListType,
   MySyncListAPI,
+  MyNamespaceAPI,
 } from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
-import { filterIsSet } from 'src/utilities';
-import { Paths } from 'src/paths';
+import { filterIsSet, waitForTask, getIdFromTask } from 'src/utilities';
+import { Paths, formatPath } from 'src/paths';
 
 interface IState {
   collections: CollectionListType[];
@@ -40,6 +47,10 @@ interface IState {
   };
   loading: boolean;
   synclist: SyncListType;
+  alerts: AlertType[];
+  updateCollection: CollectionListType;
+  showImportModal: boolean;
+  redirect: string;
 }
 
 class Search extends React.Component<RouteComponentProps, IState> {
@@ -71,10 +82,18 @@ class Search extends React.Component<RouteComponentProps, IState> {
       numberOfResults: 0,
       loading: true,
       synclist: undefined,
+      alerts: [],
+      updateCollection: null,
+      showImportModal: false,
+      redirect: null,
     };
   }
 
   componentDidMount() {
+    this.load();
+  }
+
+  private load() {
     this.queryCollections();
 
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
@@ -82,8 +101,23 @@ class Search extends React.Component<RouteComponentProps, IState> {
     }
   }
 
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
+
   render() {
-    const { loading, collections, params, numberOfResults } = this.state;
+    if (this.state.redirect) {
+      return <Redirect push to={this.state.redirect} />;
+    }
+
+    const {
+      loading,
+      collections,
+      params,
+      numberOfResults,
+      showImportModal,
+      updateCollection,
+    } = this.state;
     const noData =
       collections.length === 0 &&
       !filterIsSet(params, ['keywords', 'tags', 'sign_state']);
@@ -93,6 +127,30 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
     return (
       <div className='search-page'>
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        />
+        {showImportModal && (
+          <ImportModal
+            isOpen={showImportModal}
+            onUploadSuccess={() =>
+              this.setState({
+                redirect: formatPath(
+                  Paths.myImports,
+                  {},
+                  {
+                    namespace: updateCollection.namespace.name,
+                  },
+                ),
+              })
+            }
+            // onCancel
+            setOpen={(isOpen, warn) => this.toggleImportModal(isOpen, warn)}
+            collection={updateCollection}
+            namespace={updateCollection.namespace.name}
+          />
+        )}
         <BaseHeader
           className='header'
           title={t`Collections`}
@@ -173,6 +231,18 @@ class Search extends React.Component<RouteComponentProps, IState> {
     );
   }
 
+  private toggleImportModal(isOpen: boolean, warning?: string) {
+    const newAlerts = this.state.alerts;
+    if (warning) {
+      const newAlert = new AlertType();
+      newAlert.title = warning;
+      newAlert.variant = 'warning';
+      newAlerts.push();
+      this.setState({ alerts: newAlerts });
+    }
+    this.setState({ showImportModal: isOpen });
+  }
+
   private renderCollections(collections, params, updateParams) {
     if (collections.length === 0) {
       return (
@@ -203,7 +273,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
               className='card'
               key={c.id}
               {...c}
-              footer={this.renderSyncToggle(c.name, c.namespace.name)}
+              footer={this.renderSyncToggle(c.name, c.namespace.name, false, c)}
               repo={this.context.selectedRepo}
             />
           );
@@ -212,11 +282,79 @@ class Search extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderSyncToggle(name: string, namespace: string): React.ReactNode {
+  private handleControlClick(collection) {
+    const operation = !collection.deprecated;
+    const operation_text = operation ? 'deprecated' : 'undeprecated';
+    CollectionAPI.setDeprecation(
+      collection,
+      operation,
+      this.context.selectedRepo,
+    )
+      .then((res) => {
+        const taskId = getIdFromTask(res.data.task);
+        waitForTask(taskId).then(() => {
+          this.load();
+        });
+      })
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Collection "${collection.name}" could not be "${operation_text}".`,
+              description: errorMessage(status, statusText),
+            },
+          ],
+        });
+      });
+  }
+
+  private renderSyncToggle(
+    name: string,
+    namespace: string,
+    list: boolean,
+    collection,
+  ): React.ReactNode {
     const { synclist } = this.state;
-    if (!synclist) {
-      return null;
+
+    let menu = null;
+    if (list) {
+      menu = (
+        <React.Fragment>
+          <Button
+            onClick={() => this.checkUploadPrivilleges(collection)}
+            variant='secondary'
+          >
+            {t`Upload new version`}
+          </Button>
+          <StatefulDropdown
+            items={[
+              <DropdownItem
+                onClick={() => this.handleControlClick(collection)}
+                key='deprecate'
+                isDisabled={
+                  DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+                }
+                description={
+                  DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+                    ? t`Temporarily disabled due to sync issues. (AAH-1237)`
+                    : null
+                }
+              >
+                {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
+              </DropdownItem>,
+            ]}
+            ariaLabel='collection-kebab'
+          />
+        </React.Fragment>
+      );
     }
+    if (!synclist) {
+      return menu;
+    }
+
     return (
       <Switch
         id={namespace + '.' + name}
@@ -226,6 +364,39 @@ class Search extends React.Component<RouteComponentProps, IState> {
         onChange={() => this.toggleCollectionSync(name, namespace)}
       />
     );
+  }
+
+  private checkUploadPrivilleges(collection) {
+    const addAlert = () => {
+      const alert = new AlertType();
+      alert.title = t`You dont have rights to do this operation.`;
+      this.state.alerts.push(alert);
+
+      this.setState({
+        alerts: this.state.alerts,
+      });
+    };
+
+    MyNamespaceAPI.get(collection.namespace.name, {
+      include_related: 'my_permissions',
+    })
+      .then((value) => {
+        if (
+          value.data.related_fields.my_permissions.includes(
+            'galaxy.upload_to_namespace',
+          )
+        ) {
+          this.setState({
+            updateCollection: collection,
+            showImportModal: true,
+          });
+        } else {
+          addAlert();
+        }
+      })
+      .catch(() => {
+        addAlert();
+      });
   }
 
   private toggleCollectionSync(name: string, namespace: string) {
@@ -270,7 +441,12 @@ class Search extends React.Component<RouteComponentProps, IState> {
                 showNamespace={true}
                 key={c.id}
                 {...c}
-                controls={this.renderSyncToggle(c.name, c.namespace.name)}
+                controls={this.renderSyncToggle(
+                  c.name,
+                  c.namespace.name,
+                  true,
+                  c,
+                )}
                 repo={this.context.selectedRepo}
               />
             ))}

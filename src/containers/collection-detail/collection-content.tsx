@@ -31,7 +31,11 @@ class CollectionContent extends React.Component<
   }
 
   componentDidMount() {
-    this.loadCollection(this.context.selectedRepo);
+    this.load(false);
+  }
+
+  load(forceReload) {
+    this.loadCollection(this.context.selectedRepo, forceReload);
   }
 
   render() {
@@ -64,6 +68,7 @@ class CollectionContent extends React.Component<
     return (
       <React.Fragment>
         <CollectionHeader
+          reload={() => this.load(true)}
           collection={collection}
           params={params}
           updateParams={(params) =>
