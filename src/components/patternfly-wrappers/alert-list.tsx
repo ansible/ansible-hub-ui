@@ -11,6 +11,8 @@ interface IProps {
 
   /** Callback to close the alert at the given index */
   closeAlert: (alertIndex) => void;
+
+  'data-cy'?: string;
 }
 
 export class AlertType {
@@ -32,6 +34,7 @@ export class AlertList extends React.Component<IProps> {
           display: 'flex',
           flexDirection: 'column',
         }}
+        data-cy={`AlertList-${this.props['data-cy']}`}
       >
         {alerts.map((alert, i) => (
           <Alert
