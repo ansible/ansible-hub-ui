@@ -71,25 +71,10 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     // this function will fail if chrome.auth.doOffline() hasn't been called
-    window.insights.chrome.auth
-      .getOfflineToken()
-      .then((result) => {
-        this.setState({ tokenData: result.data });
-      })
-      .catch((e) => {
-        const { status, statusText } = e.response;
-        this.setState({
-          tokenData: undefined,
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: t`Token could not be displayed.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
-        });
-      });
+    // so it never works the first time .. loadToken() causes a reload and then it works => no error handling
+    window.insights.chrome.auth.getOfflineToken().then((result) => {
+      this.setState({ tokenData: result.data });
+    });
 
     this.getMyDistributionPath();
   }
