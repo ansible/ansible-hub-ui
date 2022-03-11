@@ -35,7 +35,11 @@ class CollectionDetail extends React.Component<
   }
 
   componentDidMount() {
-    this.loadCollection(this.context.selectedRepo, true);
+    this.load(true);
+  }
+
+  load(forceReload) {
+    this.loadCollection(this.context.selectedRepo, forceReload);
   }
 
   componentDidUpdate(prevProps) {
@@ -72,6 +76,7 @@ class CollectionDetail extends React.Component<
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
         <CollectionHeader
+          reload={() => this.load(true)}
           collection={collection}
           params={params}
           updateParams={(p) =>

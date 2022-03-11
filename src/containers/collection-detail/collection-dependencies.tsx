@@ -68,7 +68,7 @@ class CollectionDependencies extends React.Component<
   }
 
   componentDidMount() {
-    this.loadData();
+    this.loadData(false);
   }
 
   render() {
@@ -117,6 +117,7 @@ class CollectionDependencies extends React.Component<
       <React.Fragment>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <CollectionHeader
+          reload={() => this.loadData(true)}
           collection={collection}
           params={headerParams}
           updateParams={(p) => {
@@ -231,7 +232,9 @@ class CollectionDependencies extends React.Component<
       this.state.params.version ? { version: this.state.params.version } : {},
       forceReload,
     )
-      .then((result) => this.setState({ collection: result }, callback))
+      .then((result) => {
+        this.setState({ collection: result }, callback);
+      })
       .catch(() => {
         this.props.history.push(Paths.notFound);
       });

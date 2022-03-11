@@ -37,15 +37,22 @@ import {
   DeleteModal,
   SignSingleCertificateModal,
   SignAllCertificatesModal,
+  ImportModal,
 } from 'src/components';
 
 import {
   CollectionAPI,
   CollectionDetailType,
   SignCollectionAPI,
+  CollectionListType,
+  MyNamespaceAPI,
 } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
-import { waitForTask, canSign as canSignNS } from 'src/utilities';
+import {
+  waitForTask,
+  canSign as canSignNS,
+  getIdFromTask,
+} from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
 import { Constants } from 'src/constants';
@@ -65,6 +72,7 @@ interface IProps {
   activeTab: string;
   className?: string;
   repo?: string;
+  reload: () => void;
 }
 
 interface IState {
@@ -83,6 +91,8 @@ interface IState {
   redirect: string;
   noDependencies: boolean;
   isDeletionPending: boolean;
+  updateCollection: CollectionListType;
+  showImportModal: boolean;
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
@@ -108,6 +118,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       redirect: null,
       noDependencies: false,
       isDeletionPending: false,
+      updateCollection: null,
+      showImportModal: false,
     };
   }
 
@@ -135,6 +147,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       deleteCollection,
       confirmDelete,
       isDeletionPending,
+      showImportModal,
+      updateCollection,
     } = this.state;
 
     const numOfshownVersions = 10;
@@ -239,10 +253,49 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Sign version ${collection.latest_version.version}`}
         </DropdownItem>
       ),
+      <DropdownItem
+        onClick={() => this.deprecate(collection)}
+        key='deprecate'
+        isDisabled={DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE}
+        description={
+          DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+            ? t`Temporarily disabled due to sync issues. (AAH-1237)`
+            : null
+        }
+      >
+        {collection['deprecated'] ? t`Undeprecate` : t`Deprecate`}
+      </DropdownItem>,
+      <DropdownItem
+        key='upload-collection-version'
+        onClick={() => this.checkUploadPrivilleges(collection)}
+        data-cy='upload-collection-version-dropdown'
+      >
+        {t`Upload new version`}
+      </DropdownItem>,
     ].filter(Boolean);
 
     return (
       <React.Fragment>
+        {showImportModal && (
+          <ImportModal
+            isOpen={showImportModal}
+            onUploadSuccess={() =>
+              this.setState({
+                redirect: formatPath(
+                  Paths.myImports,
+                  {},
+                  {
+                    namespace: updateCollection.namespace.name,
+                  },
+                ),
+              })
+            }
+            // onCancel
+            setOpen={(isOpen, warn) => this.toggleImportModal(isOpen, warn)}
+            collection={updateCollection}
+            namespace={updateCollection.namespace.name}
+          />
+        )}
         {canSign && (
           <>
             <SignAllCertificatesModal
@@ -467,7 +520,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             ) : null
           }
         >
-          {collection.deprecated && (
+          {collection['deprecated'] && (
             <Alert
               variant='danger'
               isInline
@@ -503,6 +556,39 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         </BaseHeader>
       </React.Fragment>
     );
+  }
+
+  private checkUploadPrivilleges(collection) {
+    const addAlert = () => {
+      const alert = new AlertType();
+      alert.title = t`You dont have rights to do this operation.`;
+      this.state.alerts.push(alert);
+
+      this.setState({
+        alerts: this.state.alerts,
+      });
+    };
+
+    MyNamespaceAPI.get(collection.namespace.name, {
+      include_related: 'my_permissions',
+    })
+      .then((value) => {
+        if (
+          value.data.related_fields.my_permissions.includes(
+            'galaxy.upload_to_namespace',
+          )
+        ) {
+          this.setState({
+            updateCollection: collection,
+            showImportModal: true,
+          });
+        } else {
+          addAlert();
+        }
+      })
+      .catch(() => {
+        addAlert();
+      });
   }
 
   private renderTabs(active) {
@@ -678,6 +764,39 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       });
   };
 
+  private deprecate(collection) {
+    const operation = !collection.deprecated;
+    const operation_text = operation ? 'deprecated' : 'undeprecated';
+
+    CollectionAPI.setDeprecation(
+      collection,
+      operation,
+      this.context.selectedRepo,
+    )
+      .then((res) => {
+        const taskId = getIdFromTask(res.data.task);
+        waitForTask(taskId).then(() => {
+          if (this.props.reload) {
+            this.props.reload();
+          }
+        });
+      })
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        this.setState({
+          collectionVersion: null,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Collection "${collection.name}" could not be "${operation_text}".`,
+              description: errorMessage(status, statusText),
+            },
+          ],
+        });
+      });
+  }
+
   private deleteCollectionVersion = (collectionVersion) => {
     const {
       deleteCollection,
@@ -688,7 +807,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       deleteCollection,
     )
       .then((res) => {
-        const taskId = this.getIdFromTask(res.data.task);
+        const taskId = getIdFromTask(res.data.task);
         const name = deleteCollection.name;
 
         waitForTask(taskId).then(() => {
@@ -793,6 +912,18 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       });
   };
 
+  private toggleImportModal(isOpen: boolean, warning?: string) {
+    const newAlerts = this.state.alerts;
+    if (warning) {
+      const newAlert = new AlertType();
+      newAlert.title = warning;
+      newAlert.variant = 'warning';
+      newAlerts.push();
+      this.setState({ alerts: newAlerts });
+    }
+    this.setState({ showImportModal: isOpen });
+  }
+
   private deleteCollection = () => {
     const {
       deleteCollection,
@@ -800,7 +931,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     } = this.state;
     CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
       .then((res) => {
-        const taskId = this.getIdFromTask(res.data.task);
+        const taskId = getIdFromTask(res.data.task);
 
         waitForTask(taskId).then(() => {
           this.context.setAlerts([
@@ -868,9 +999,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       });
   }
 
-  private getIdFromTask(task) {
-    return task.match(/tasks\/([a-zA-Z0-9-]+)/i)[1];
-  }
   private closeModal = () => {
     this.setState({ deleteCollection: null });
   };
