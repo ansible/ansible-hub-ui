@@ -1,7 +1,7 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './search.scss';
-import { errorMessage } from 'src/utilities';
+import { errorMessage, deleteCollectionUtils } from 'src/utilities';
 
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { DataList, Switch, DropdownItem, Button } from '@patternfly/react-core';
@@ -51,6 +51,11 @@ interface IState {
   updateCollection: CollectionListType;
   showImportModal: boolean;
   redirect: string;
+  noDependencies: boolean;
+  deleteCollection: CollectionListType;
+  confirmDelete: boolean;
+  isDeletionPending: boolean;
+  collectionVersion: string | null;
 }
 
 class Search extends React.Component<RouteComponentProps, IState> {
@@ -86,6 +91,11 @@ class Search extends React.Component<RouteComponentProps, IState> {
       updateCollection: null,
       showImportModal: false,
       redirect: null,
+      noDependencies: false,
+      deleteCollection: null,
+      confirmDelete: false,
+      isDeletionPending: false,
+      collectionVersion: null,
     };
   }
 
@@ -117,6 +127,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
       numberOfResults,
       showImportModal,
       updateCollection,
+      deleteCollection,
+      confirmDelete,
+      isDeletionPending,
+      collectionVersion,
     } = this.state;
     const noData =
       collections.length === 0 &&
@@ -131,6 +145,19 @@ class Search extends React.Component<RouteComponentProps, IState> {
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}
         />
+        {deleteCollectionUtils.deleteModal(
+          deleteCollection,
+          isDeletionPending,
+          confirmDelete,
+          collectionVersion,
+          () => this.setState({ deleteCollection: null }),
+          () => {
+            this.setState({ isDeletionPending: true }, () => {
+              this.deleteCollection();
+            });
+          },
+          (val) => this.setState({ confirmDelete: val }),
+        )}
         {showImportModal && (
           <ImportModal
             isOpen={showImportModal}
@@ -331,6 +358,13 @@ class Search extends React.Component<RouteComponentProps, IState> {
           </Button>
           <StatefulDropdown
             items={[
+              <React.Fragment key='fragment'>
+                {deleteCollectionUtils.deleteMenuOption(
+                  true,
+                  this.context,
+                  () => this.tryOpenDeleteModalWithConfirm(collection),
+                )}
+              </React.Fragment>,
               <DropdownItem
                 onClick={() => this.handleControlClick(collection)}
                 key='deprecate'
@@ -397,6 +431,37 @@ class Search extends React.Component<RouteComponentProps, IState> {
       .catch(() => {
         addAlert();
       });
+  }
+
+  private tryOpenDeleteModalWithConfirm(collection) {
+    deleteCollectionUtils.getUsedbyDependencies(
+      collection,
+      (noDependencies) =>
+        this.openDeleteModalWithConfirm(noDependencies, collection),
+      (alerts) => this.setState({ alerts: [...this.state.alerts, alerts] }),
+    );
+  }
+
+  private openDeleteModalWithConfirm(noDependencies, collection) {
+    if (noDependencies) {
+      this.setState({
+        deleteCollection: collection,
+        confirmDelete: false,
+      });
+    } else {
+      const newAlerts = this.state.alerts;
+      const newAlert = new AlertType();
+      newAlert.title = (
+        <Trans>
+          Cannot delete until collections <br />
+          that depend on this collection <br />
+          have been deleted.
+        </Trans>
+      );
+      newAlert.variant = 'warning';
+      newAlerts.push(newAlert);
+      this.setState({ alerts: newAlerts });
+    }
   }
 
   private toggleCollectionSync(name: string, namespace: string) {
@@ -491,6 +556,55 @@ class Search extends React.Component<RouteComponentProps, IState> {
   private get updateParams() {
     return ParamHelper.updateParamsMixin();
   }
+
+  private deleteCollection = () => {
+    const {
+      deleteCollection,
+      deleteCollection: { name },
+      collectionVersion,
+    } = this.state;
+    CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
+      .then((res) => {
+        const taskId = getIdFromTask(res.data.task);
+
+        waitForTask(taskId).then(() => {
+          this.context.setAlerts([
+            ...this.context.alerts,
+            {
+              variant: 'success',
+              title: (
+                <Trans>
+                  Collection &quot;{name} v{collectionVersion}
+                  &quot; has been successfully deleted.
+                </Trans>
+              ),
+            },
+          ]);
+          this.setState({
+            collectionVersion: null,
+            deleteCollection: null,
+            isDeletionPending: false,
+          });
+          this.load();
+        });
+      })
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        this.setState({
+          collectionVersion: null,
+          deleteCollection: null,
+          isDeletionPending: false,
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'danger',
+              title: t`Collection "${name}" could not be deleted.`,
+              description: errorMessage(status, statusText),
+            },
+          ],
+        });
+      });
+  };
 }
 
 export default withRouter(Search);

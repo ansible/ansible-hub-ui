@@ -151,6 +151,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       isOpenNamespaceModal,
       confirmDelete,
       isNamespacePending,
+      alerts,
     } = this.state;
 
     if (redirect) {
@@ -313,6 +314,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     this.handleCollectionAction(id, action)
                   }
                   repo={this.context.selectedRepo}
+                  alerts={alerts}
+                  setAlerts={(alerts) => this.setState(alerts)}
+                  reload={() => this.loadAll()}
+                  context={this.context}
                 />
               </section>
             )

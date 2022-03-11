@@ -19,3 +19,4 @@ export { errorMessage } from './fail-alerts';
 export { validateURLHelper } from './validateURLHelper';
 export { canSign } from './can-sign';
 export { getIdFromTask } from './getIdFromTask';
+export { deleteCollectionUtils } from './delete-collection';
