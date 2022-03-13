@@ -65,7 +65,7 @@ msgstr "<0>{0}</0> は完全に削除されます。"
 msgid "<0>{name}</0> will be permanently deleted."
 msgstr "<0>{name}</0> は完全に削除されます。"
 
-#: src/containers/group-management/group-detail.tsx:571
+#: src/containers/group-management/group-detail.tsx:576
 msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 msgstr "<0>{username}</0> は <1>{groupname}</1> から削除されます。"
 
@@ -128,9 +128,9 @@ msgstr "アクティビティー"
 #: src/components/execution-environment/repository-form.tsx:325
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:107
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:174
-#: src/containers/group-management/group-detail.tsx:453
-#: src/containers/group-management/group-detail.tsx:644
-#: src/containers/group-management/group-detail.tsx:695
+#: src/containers/group-management/group-detail.tsx:458
+#: src/containers/group-management/group-detail.tsx:649
+#: src/containers/group-management/group-detail.tsx:700
 msgid "Add"
 msgstr "追加"
 
@@ -181,7 +181,7 @@ msgstr "新規タグのイメージへの追加"
 msgid "Add remote registry"
 msgstr "リモートレジストリーの追加"
 
-#: src/containers/group-management/group-detail.tsx:439
+#: src/containers/group-management/group-detail.tsx:444
 msgid "Add selected users to group"
 msgstr "選択したユーザーのグループへの追加"
 
@@ -276,8 +276,8 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 #: src/containers/edit-namespace/edit-namespace.tsx:195
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:151
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:134
-#: src/containers/group-management/group-detail.tsx:413
-#: src/containers/group-management/group-detail.tsx:456
+#: src/containers/group-management/group-detail.tsx:418
+#: src/containers/group-management/group-detail.tsx:461
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:77
 msgid "Cancel"
 msgstr "取り消し"
@@ -601,7 +601,7 @@ msgstr "新規ユーザーの作成"
 
 #: src/containers/execution-environment/registry-list.tsx:323
 #: src/containers/execution-environment-list/execution_environment_list.tsx:309
-#: src/containers/group-management/group-detail.tsx:761
+#: src/containers/group-management/group-detail.tsx:766
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
 msgstr "作成済み"
@@ -656,7 +656,7 @@ msgstr "作成日"
 #: src/containers/execution-environment/registry-list.tsx:392
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:410
 #: src/containers/execution-environment-list/execution_environment_list.tsx:390
-#: src/containers/group-management/group-detail.tsx:251
+#: src/containers/group-management/group-detail.tsx:253
 #: src/containers/group-management/group-list.tsx:401
 #: src/containers/group-management/group-list.tsx:411
 #: src/containers/namespace-detail/namespace-detail.tsx:207
@@ -878,7 +878,7 @@ msgstr "ドロップダウン"
 #: src/containers/execution-environment-detail/base.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:92
 #: src/containers/execution-environment-list/execution_environment_list.tsx:363
-#: src/containers/group-management/group-detail.tsx:336
+#: src/containers/group-management/group-detail.tsx:338
 #: src/containers/settings/user-profile.tsx:102
 #: src/containers/user-management/user-detail.tsx:120
 #: src/containers/user-management/user-edit.tsx:68
@@ -894,7 +894,7 @@ msgstr "詳細の編集"
 msgid "Edit execution environment"
 msgstr "実行環境の編集"
 
-#: src/containers/group-management/group-detail.tsx:203
+#: src/containers/group-management/group-detail.tsx:205
 msgid "Edit group permissions"
 msgstr "グループ権限の編集"
 
@@ -927,9 +927,10 @@ msgid "Edit user"
 msgstr "ユーザーの編集"
 
 #: src/components/user-form/user-form.tsx:88
-#: src/containers/group-management/group-detail.tsx:681
-#: src/containers/group-management/group-detail.tsx:746
+#: src/containers/group-management/group-detail.tsx:686
+#: src/containers/group-management/group-detail.tsx:751
 #: src/containers/user-management/user-list.tsx:174
+#: src/containers/user-management/user-list.tsx:213
 #: src/containers/user-management/user-list.tsx:276
 msgid "Email"
 msgstr "メール"
@@ -946,7 +947,7 @@ msgstr "コレクションバージョンの削除エラー。"
 msgid "Error deleting collection."
 msgstr "コレクションの削除エラー。"
 
-#: src/containers/group-management/group-detail.tsx:539
+#: src/containers/group-management/group-detail.tsx:544
 #: src/containers/group-management/group-list.tsx:450
 msgid "Error deleting group."
 msgstr "グループの削除エラー。"
@@ -996,7 +997,7 @@ msgstr "依存するコレクションのロード中にエラーが発生しま
 msgid "Error loading environments."
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:129
+#: src/containers/group-management/group-detail.tsx:131
 msgid "Error loading group."
 msgstr "グループの読み込みエラー。"
 
@@ -1017,7 +1018,7 @@ msgstr ""
 msgid "Error loading namespaces."
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:143
+#: src/containers/group-management/group-detail.tsx:145
 msgid "Error loading permissions."
 msgstr "パーミッションの読み込みエラー。"
 
@@ -1038,9 +1039,9 @@ msgstr ""
 msgid "Error loading token."
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:482
-#: src/containers/group-management/group-detail.tsx:603
-#: src/containers/group-management/group-detail.tsx:838
+#: src/containers/group-management/group-detail.tsx:487
+#: src/containers/group-management/group-detail.tsx:608
+#: src/containers/group-management/group-detail.tsx:843
 #: src/containers/group-management/group-list.tsx:303
 #: src/containers/user-management/user-list.tsx:419
 msgid "Error loading users."
@@ -1054,7 +1055,7 @@ msgstr "エラーメッセージ"
 msgid "Error message:"
 msgstr "エラーメッセージ:"
 
-#: src/containers/group-management/group-detail.tsx:857
+#: src/containers/group-management/group-detail.tsx:862
 msgid "Error removing user from a group."
 msgstr "グループからユーザーの削除中のエラー。"
 
@@ -1063,7 +1064,7 @@ msgstr "グループからユーザーの削除中のエラー。"
 msgid "Error stopping task."
 msgstr "タスクの停止エラー。"
 
-#: src/containers/group-management/group-detail.tsx:589
+#: src/containers/group-management/group-detail.tsx:594
 msgid "Error updating users."
 msgstr "ユーザーの更新中のエラー。"
 
@@ -1154,9 +1155,10 @@ msgid "Finished at"
 msgstr "終了日時"
 
 #: src/components/user-form/user-form.tsx:86
-#: src/containers/group-management/group-detail.tsx:673
-#: src/containers/group-management/group-detail.tsx:756
+#: src/containers/group-management/group-detail.tsx:678
+#: src/containers/group-management/group-detail.tsx:761
 #: src/containers/user-management/user-list.tsx:166
+#: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:264
 msgid "First name"
 msgstr "名"
@@ -1193,7 +1195,7 @@ msgstr "グループリスト"
 #: src/components/user-form/user-form.tsx:147
 #: src/components/user-form/user-form.tsx:161
 #: src/constants.tsx:55
-#: src/containers/group-management/group-detail.tsx:209
+#: src/containers/group-management/group-detail.tsx:211
 #: src/containers/group-management/group-list.tsx:132
 #: src/containers/user-management/user-list.tsx:282
 #: src/loaders/standalone/standalone-loader.tsx:393
@@ -1330,9 +1332,10 @@ msgid "Last modified"
 msgstr "最終更新日"
 
 #: src/components/user-form/user-form.tsx:87
-#: src/containers/group-management/group-detail.tsx:677
-#: src/containers/group-management/group-detail.tsx:751
+#: src/containers/group-management/group-detail.tsx:682
+#: src/containers/group-management/group-detail.tsx:756
 #: src/containers/user-management/user-list.tsx:170
+#: src/containers/user-management/user-list.tsx:212
 #: src/containers/user-management/user-list.tsx:270
 msgid "Last name"
 msgstr "姓"
@@ -1592,7 +1595,7 @@ msgstr "まだ名前空間はまだありません"
 msgid "No parent task"
 msgstr "親タスクなし"
 
-#: src/components/permissions/permission-chip-selector.tsx:80
+#: src/components/permissions/permission-chip-selector.tsx:99
 msgid "No permission"
 msgstr "パーミッションなし"
 
@@ -1632,7 +1635,7 @@ msgstr "まだタスクはありません"
 msgid "No users will be affected."
 msgstr "影響を受けるユーザーはありません。"
 
-#: src/containers/group-management/group-detail.tsx:634
+#: src/containers/group-management/group-detail.tsx:639
 #: src/containers/user-management/user-list.tsx:245
 msgid "No users yet"
 msgstr "まだユーザーはありません"
@@ -1641,7 +1644,7 @@ msgstr "まだユーザーはありません"
 msgid "Not a super user"
 msgstr "スーパーユーザーではありません"
 
-#: src/components/permissions/permission-chip-selector.tsx:66
+#: src/components/permissions/permission-chip-selector.tsx:83
 #: src/components/typeahead/typeahead.tsx:86
 #: src/containers/collection-detail/collection-docs.tsx:270
 msgid "Not found"
@@ -1721,6 +1724,10 @@ msgstr ""
 msgid "Permanently delete collection?"
 msgstr ""
 
+#: src/containers/execution-environment-list/execution_environment_list.tsx:185
+msgid "Permanently delete container?"
+msgstr ""
+
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:209
 #~ msgid "Permanently delete image"
 #~ msgstr "イメージは完全に削除されます。"
@@ -1733,19 +1740,19 @@ msgstr ""
 msgid "Permanently delete namespace?"
 msgstr "名前空間を完全に削除しますか？"
 
-#: src/containers/group-management/group-detail.tsx:292
+#: src/containers/group-management/group-detail.tsx:294
 msgid "Permission {0} was not removed."
 msgstr "パーミッション {0} は削除されませんでした。"
 
-#: src/containers/group-management/group-detail.tsx:277
+#: src/containers/group-management/group-detail.tsx:279
 msgid "Permission {permission} was not added."
 msgstr "パーミッション {permission} は追加されませんでした。"
 
-#: src/containers/group-management/group-detail.tsx:166
+#: src/containers/group-management/group-detail.tsx:168
 msgid "Permissions"
 msgstr "パーミッション"
 
-#: src/containers/group-management/group-detail.tsx:220
+#: src/containers/group-management/group-detail.tsx:222
 msgid "Please finish editing permissions first."
 msgstr "アクセス権を最初に編集してください。"
 
@@ -1998,7 +2005,7 @@ msgstr "リモートリポジトリーは追加されると表示されます"
 #~ msgid "Remotes"
 #~ msgstr "リモート"
 
-#: src/containers/group-management/group-detail.tsx:816
+#: src/containers/group-management/group-detail.tsx:821
 msgid "Remove"
 msgstr "削除"
 
@@ -2006,7 +2013,7 @@ msgstr "削除"
 msgid "Remove content from repository"
 msgstr "リポジトリーからのコンテンツ削除"
 
-#: src/containers/group-management/group-detail.tsx:569
+#: src/containers/group-management/group-detail.tsx:574
 msgid "Remove user from group?"
 msgstr "グループからユーザーを削除しますか?"
 
@@ -2069,7 +2076,7 @@ msgstr "SSO URL"
 #: src/containers/edit-namespace/edit-namespace.tsx:192
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:139
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:125
-#: src/containers/group-management/group-detail.tsx:406
+#: src/containers/group-management/group-detail.tsx:411
 msgid "Save"
 msgstr "保存"
 
@@ -2117,12 +2124,12 @@ msgstr "入力の選択"
 msgid "Select namespace"
 msgstr "名前空間の選択"
 
-#: src/components/permissions/permission-chip-selector.tsx:50
-#: src/components/permissions/permission-chip-selector.tsx:78
+#: src/components/permissions/permission-chip-selector.tsx:67
+#: src/components/permissions/permission-chip-selector.tsx:97
 msgid "Select permissions"
 msgstr "パーミッションの選択"
 
-#: src/containers/group-management/group-detail.tsx:510
+#: src/containers/group-management/group-detail.tsx:515
 msgid "Select users"
 msgstr "ユーザーの選択"
 
@@ -2217,7 +2224,7 @@ msgstr "コレクションバージョンが正常に削除されました。"
 msgid "Successfully deleted collection."
 msgstr "コレクションが正常に削除されました。"
 
-#: src/containers/group-management/group-detail.tsx:535
+#: src/containers/group-management/group-detail.tsx:540
 #: src/containers/group-management/group-list.tsx:438
 msgid "Successfully deleted group."
 msgstr "グループが正常に削除されました。"
@@ -2234,7 +2241,7 @@ msgstr "リモートレジストリー {name} が正常に削除されました"
 msgid "Successfully deleted user."
 msgstr "ユーザーが正常に削除されました。"
 
-#: src/containers/group-management/group-detail.tsx:852
+#: src/containers/group-management/group-detail.tsx:857
 msgid "Successfully removed a user from a group."
 msgstr "グループからユーザーを正常に削除しました。"
 
@@ -2560,7 +2567,7 @@ msgid "User details"
 msgstr "エラーの詳細"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:332
-#: src/containers/group-management/group-detail.tsx:774
+#: src/containers/group-management/group-detail.tsx:779
 #: src/containers/user-management/user-list.tsx:299
 msgid "User list"
 msgstr "ユーザーリスト"
@@ -2572,10 +2579,11 @@ msgstr "ユーザータイプ"
 #: src/components/repositories/remote-form.tsx:345
 #: src/components/user-form/user-form.tsx:85
 #: src/containers/about-modal/about-modal.tsx:77
-#: src/containers/group-management/group-detail.tsx:669
-#: src/containers/group-management/group-detail.tsx:741
+#: src/containers/group-management/group-detail.tsx:674
+#: src/containers/group-management/group-detail.tsx:746
 #: src/containers/login/login.tsx:56
 #: src/containers/user-management/user-list.tsx:162
+#: src/containers/user-management/user-list.tsx:210
 #: src/containers/user-management/user-list.tsx:259
 msgid "Username"
 msgstr "ユーザー名"
@@ -2585,7 +2593,7 @@ msgid "Username: {0}"
 msgstr "ユーザー名: {0}"
 
 #: src/constants.tsx:45
-#: src/containers/group-management/group-detail.tsx:168
+#: src/containers/group-management/group-detail.tsx:170
 #: src/containers/user-management/user-create.tsx:49
 #: src/containers/user-management/user-detail.tsx:81
 #: src/containers/user-management/user-edit.tsx:63
@@ -2594,7 +2602,7 @@ msgstr "ユーザー名: {0}"
 msgid "Users"
 msgstr "ユーザー"
 
-#: src/containers/group-management/group-detail.tsx:635
+#: src/containers/group-management/group-detail.tsx:640
 msgid "Users will appear once added to this group"
 msgstr "ユーザーはこのグループへの追加後に表示されます"
 
@@ -2740,7 +2748,7 @@ msgstr "tarball をダウンロードするには、ログインしておく必�
 msgid "You have unsaved changes"
 msgstr "変更が保存されていません"
 
-#: src/containers/group-management/group-detail.tsx:435
+#: src/containers/group-management/group-detail.tsx:440
 msgid "add-user-modal"
 msgstr "add-user-modal"
 

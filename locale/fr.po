@@ -65,7 +65,7 @@ msgstr "<0>{0}</0> sera définitivement supprimé."
 msgid "<0>{name}</0> will be permanently deleted."
 msgstr "<0>{name}</0> sera définitivement supprimé."
 
-#: src/containers/group-management/group-detail.tsx:571
+#: src/containers/group-management/group-detail.tsx:576
 msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 msgstr "<0>{username}</0> sera retiré de <1>{groupname}</1>."
 
@@ -128,9 +128,9 @@ msgstr "Activité"
 #: src/components/execution-environment/repository-form.tsx:325
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:107
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:174
-#: src/containers/group-management/group-detail.tsx:453
-#: src/containers/group-management/group-detail.tsx:644
-#: src/containers/group-management/group-detail.tsx:695
+#: src/containers/group-management/group-detail.tsx:458
+#: src/containers/group-management/group-detail.tsx:649
+#: src/containers/group-management/group-detail.tsx:700
 msgid "Add"
 msgstr "Ajouter"
 
@@ -181,7 +181,7 @@ msgstr "Ajouter un nouveau tag à l'image"
 msgid "Add remote registry"
 msgstr "Ajouter un registre à distance"
 
-#: src/containers/group-management/group-detail.tsx:439
+#: src/containers/group-management/group-detail.tsx:444
 msgid "Add selected users to group"
 msgstr "Ajouter les utilisateurs sélectionnés au groupe"
 
@@ -276,8 +276,8 @@ msgstr "Impossible de mettre à jour l’utilisateur distant sans qu'une distrib
 #: src/containers/edit-namespace/edit-namespace.tsx:195
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:151
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:134
-#: src/containers/group-management/group-detail.tsx:413
-#: src/containers/group-management/group-detail.tsx:456
+#: src/containers/group-management/group-detail.tsx:418
+#: src/containers/group-management/group-detail.tsx:461
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:77
 msgid "Cancel"
 msgstr "Annuler"
@@ -601,7 +601,7 @@ msgstr "Créer un nouvel utilisateur"
 
 #: src/containers/execution-environment/registry-list.tsx:323
 #: src/containers/execution-environment-list/execution_environment_list.tsx:309
-#: src/containers/group-management/group-detail.tsx:761
+#: src/containers/group-management/group-detail.tsx:766
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
 msgstr "Créé"
@@ -656,7 +656,7 @@ msgstr "Date de création"
 #: src/containers/execution-environment/registry-list.tsx:392
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:410
 #: src/containers/execution-environment-list/execution_environment_list.tsx:390
-#: src/containers/group-management/group-detail.tsx:251
+#: src/containers/group-management/group-detail.tsx:253
 #: src/containers/group-management/group-list.tsx:401
 #: src/containers/group-management/group-list.tsx:411
 #: src/containers/namespace-detail/namespace-detail.tsx:207
@@ -878,7 +878,7 @@ msgstr "Dropdown"
 #: src/containers/execution-environment-detail/base.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:92
 #: src/containers/execution-environment-list/execution_environment_list.tsx:363
-#: src/containers/group-management/group-detail.tsx:336
+#: src/containers/group-management/group-detail.tsx:338
 #: src/containers/settings/user-profile.tsx:102
 #: src/containers/user-management/user-detail.tsx:120
 #: src/containers/user-management/user-edit.tsx:68
@@ -894,7 +894,7 @@ msgstr "Modifier les détails"
 msgid "Edit execution environment"
 msgstr "Modifier l'environnement d'exécution"
 
-#: src/containers/group-management/group-detail.tsx:203
+#: src/containers/group-management/group-detail.tsx:205
 msgid "Edit group permissions"
 msgstr "Modifier les autorisations de groupe"
 
@@ -927,9 +927,10 @@ msgid "Edit user"
 msgstr "Modifier l’utilisateur"
 
 #: src/components/user-form/user-form.tsx:88
-#: src/containers/group-management/group-detail.tsx:681
-#: src/containers/group-management/group-detail.tsx:746
+#: src/containers/group-management/group-detail.tsx:686
+#: src/containers/group-management/group-detail.tsx:751
 #: src/containers/user-management/user-list.tsx:174
+#: src/containers/user-management/user-list.tsx:213
 #: src/containers/user-management/user-list.tsx:276
 msgid "Email"
 msgstr "Email"
@@ -946,7 +947,7 @@ msgstr "Erreur de suppression de la version de collection."
 msgid "Error deleting collection."
 msgstr "Erreur de suppression de la collection."
 
-#: src/containers/group-management/group-detail.tsx:539
+#: src/containers/group-management/group-detail.tsx:544
 #: src/containers/group-management/group-list.tsx:450
 msgid "Error deleting group."
 msgstr "Suppression du groupe"
@@ -996,7 +997,7 @@ msgstr "Erreur de chargement des collections dépendantes."
 msgid "Error loading environments."
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:129
+#: src/containers/group-management/group-detail.tsx:131
 msgid "Error loading group."
 msgstr "Erreur de chargement du groupe."
 
@@ -1017,7 +1018,7 @@ msgstr ""
 msgid "Error loading namespaces."
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:143
+#: src/containers/group-management/group-detail.tsx:145
 msgid "Error loading permissions."
 msgstr "Erreur de chargement des permissions."
 
@@ -1038,9 +1039,9 @@ msgstr ""
 msgid "Error loading token."
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:482
-#: src/containers/group-management/group-detail.tsx:603
-#: src/containers/group-management/group-detail.tsx:838
+#: src/containers/group-management/group-detail.tsx:487
+#: src/containers/group-management/group-detail.tsx:608
+#: src/containers/group-management/group-detail.tsx:843
 #: src/containers/group-management/group-list.tsx:303
 #: src/containers/user-management/user-list.tsx:419
 msgid "Error loading users."
@@ -1054,7 +1055,7 @@ msgstr "Message d'erreur"
 msgid "Error message:"
 msgstr "Message d'erreur"
 
-#: src/containers/group-management/group-detail.tsx:857
+#: src/containers/group-management/group-detail.tsx:862
 msgid "Error removing user from a group."
 msgstr "Erreur lors de la suppression d'un utilisateur d'un groupe."
 
@@ -1063,7 +1064,7 @@ msgstr "Erreur lors de la suppression d'un utilisateur d'un groupe."
 msgid "Error stopping task."
 msgstr "Erreur d'arrêt de la tâche."
 
-#: src/containers/group-management/group-detail.tsx:589
+#: src/containers/group-management/group-detail.tsx:594
 msgid "Error updating users."
 msgstr "Erreur de mise à jour des utilisateurs."
 
@@ -1154,9 +1155,10 @@ msgid "Finished at"
 msgstr "Terminé"
 
 #: src/components/user-form/user-form.tsx:86
-#: src/containers/group-management/group-detail.tsx:673
-#: src/containers/group-management/group-detail.tsx:756
+#: src/containers/group-management/group-detail.tsx:678
+#: src/containers/group-management/group-detail.tsx:761
 #: src/containers/user-management/user-list.tsx:166
+#: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:264
 msgid "First name"
 msgstr "Prénom"
@@ -1193,7 +1195,7 @@ msgstr "Liste des groupes"
 #: src/components/user-form/user-form.tsx:147
 #: src/components/user-form/user-form.tsx:161
 #: src/constants.tsx:55
-#: src/containers/group-management/group-detail.tsx:209
+#: src/containers/group-management/group-detail.tsx:211
 #: src/containers/group-management/group-list.tsx:132
 #: src/containers/user-management/user-list.tsx:282
 #: src/loaders/standalone/standalone-loader.tsx:393
@@ -1330,9 +1332,10 @@ msgid "Last modified"
 msgstr "Dernière modification"
 
 #: src/components/user-form/user-form.tsx:87
-#: src/containers/group-management/group-detail.tsx:677
-#: src/containers/group-management/group-detail.tsx:751
+#: src/containers/group-management/group-detail.tsx:682
+#: src/containers/group-management/group-detail.tsx:756
 #: src/containers/user-management/user-list.tsx:170
+#: src/containers/user-management/user-list.tsx:212
 #: src/containers/user-management/user-list.tsx:270
 msgid "Last name"
 msgstr "Nom"
@@ -1592,7 +1595,7 @@ msgstr "Pas encore d'espace de noms"
 msgid "No parent task"
 msgstr "Aucune tâche parentale"
 
-#: src/components/permissions/permission-chip-selector.tsx:80
+#: src/components/permissions/permission-chip-selector.tsx:99
 msgid "No permission"
 msgstr "Aucune permission"
 
@@ -1632,7 +1635,7 @@ msgstr "Aucune tâche pour le moment"
 msgid "No users will be affected."
 msgstr "Aucun utilisateur ne sera affecté."
 
-#: src/containers/group-management/group-detail.tsx:634
+#: src/containers/group-management/group-detail.tsx:639
 #: src/containers/user-management/user-list.tsx:245
 msgid "No users yet"
 msgstr "Aucun utilisateur existant"
@@ -1641,7 +1644,7 @@ msgstr "Aucun utilisateur existant"
 msgid "Not a super user"
 msgstr "Ne correspond pas à un super utilisateur"
 
-#: src/components/permissions/permission-chip-selector.tsx:66
+#: src/components/permissions/permission-chip-selector.tsx:83
 #: src/components/typeahead/typeahead.tsx:86
 #: src/containers/collection-detail/collection-docs.tsx:270
 msgid "Not found"
@@ -1721,6 +1724,10 @@ msgstr ""
 msgid "Permanently delete collection?"
 msgstr ""
 
+#: src/containers/execution-environment-list/execution_environment_list.tsx:185
+msgid "Permanently delete container?"
+msgstr ""
+
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:209
 #~ msgid "Permanently delete image"
 #~ msgstr "Effacer définitivement l'image"
@@ -1733,19 +1740,19 @@ msgstr ""
 msgid "Permanently delete namespace?"
 msgstr "Souhaitez-vous supprimer définitivement cet espace-nom ?"
 
-#: src/containers/group-management/group-detail.tsx:292
+#: src/containers/group-management/group-detail.tsx:294
 msgid "Permission {0} was not removed."
 msgstr "La permission {0} n'a pas été supprimée."
 
-#: src/containers/group-management/group-detail.tsx:277
+#: src/containers/group-management/group-detail.tsx:279
 msgid "Permission {permission} was not added."
 msgstr "La permission {permission} n'a pas été ajoutée."
 
-#: src/containers/group-management/group-detail.tsx:166
+#: src/containers/group-management/group-detail.tsx:168
 msgid "Permissions"
 msgstr "Permissions"
 
-#: src/containers/group-management/group-detail.tsx:220
+#: src/containers/group-management/group-detail.tsx:222
 msgid "Please finish editing permissions first."
 msgstr "Veuillez d'abord finir d'éditer les permissions."
 
@@ -1998,7 +2005,7 @@ msgstr "Les dépôts distants apparaîtront une fois ajoutés"
 #~ msgid "Remotes"
 #~ msgstr "Télécommandes"
 
-#: src/containers/group-management/group-detail.tsx:816
+#: src/containers/group-management/group-detail.tsx:821
 msgid "Remove"
 msgstr "Supprimer"
 
@@ -2006,7 +2013,7 @@ msgstr "Supprimer"
 msgid "Remove content from repository"
 msgstr "Supprimer le contenu du référentiel"
 
-#: src/containers/group-management/group-detail.tsx:569
+#: src/containers/group-management/group-detail.tsx:574
 msgid "Remove user from group?"
 msgstr "Supprimer un utilisateur d'un groupe ?"
 
@@ -2069,7 +2076,7 @@ msgstr "SSO URL"
 #: src/containers/edit-namespace/edit-namespace.tsx:192
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:139
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:125
-#: src/containers/group-management/group-detail.tsx:406
+#: src/containers/group-management/group-detail.tsx:411
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -2117,12 +2124,12 @@ msgstr "Sélectionnez une entrée"
 msgid "Select namespace"
 msgstr "Sélectionnez l'espace de noms"
 
-#: src/components/permissions/permission-chip-selector.tsx:50
-#: src/components/permissions/permission-chip-selector.tsx:78
+#: src/components/permissions/permission-chip-selector.tsx:67
+#: src/components/permissions/permission-chip-selector.tsx:97
 msgid "Select permissions"
 msgstr "Ajouter les permissions"
 
-#: src/containers/group-management/group-detail.tsx:510
+#: src/containers/group-management/group-detail.tsx:515
 msgid "Select users"
 msgstr "Sélectionner les utilisateurs"
 
@@ -2217,7 +2224,7 @@ msgstr "La version de la collection a été supprimée."
 msgid "Successfully deleted collection."
 msgstr "L’utilisateur a pu être supprimé."
 
-#: src/containers/group-management/group-detail.tsx:535
+#: src/containers/group-management/group-detail.tsx:540
 #: src/containers/group-management/group-list.tsx:438
 msgid "Successfully deleted group."
 msgstr "Le groupe a été supprimé."
@@ -2234,7 +2241,7 @@ msgstr "Suppression réussie du registre distant {name}"
 msgid "Successfully deleted user."
 msgstr "A réussi à supprimer l'utilisateur."
 
-#: src/containers/group-management/group-detail.tsx:852
+#: src/containers/group-management/group-detail.tsx:857
 msgid "Successfully removed a user from a group."
 msgstr "On a réussi à supprimer un utilisateur d'un groupe."
 
@@ -2560,7 +2567,7 @@ msgid "User details"
 msgstr "Informations sur l'utilisateur"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:332
-#: src/containers/group-management/group-detail.tsx:774
+#: src/containers/group-management/group-detail.tsx:779
 #: src/containers/user-management/user-list.tsx:299
 msgid "User list"
 msgstr "Liste des utilisateurs"
@@ -2572,10 +2579,11 @@ msgstr "Type d’utilisateur"
 #: src/components/repositories/remote-form.tsx:345
 #: src/components/user-form/user-form.tsx:85
 #: src/containers/about-modal/about-modal.tsx:77
-#: src/containers/group-management/group-detail.tsx:669
-#: src/containers/group-management/group-detail.tsx:741
+#: src/containers/group-management/group-detail.tsx:674
+#: src/containers/group-management/group-detail.tsx:746
 #: src/containers/login/login.tsx:56
 #: src/containers/user-management/user-list.tsx:162
+#: src/containers/user-management/user-list.tsx:210
 #: src/containers/user-management/user-list.tsx:259
 msgid "Username"
 msgstr "Nom d'utilisateur"
@@ -2585,7 +2593,7 @@ msgid "Username: {0}"
 msgstr "Nom d'utilisateur : {0}"
 
 #: src/constants.tsx:45
-#: src/containers/group-management/group-detail.tsx:168
+#: src/containers/group-management/group-detail.tsx:170
 #: src/containers/user-management/user-create.tsx:49
 #: src/containers/user-management/user-detail.tsx:81
 #: src/containers/user-management/user-edit.tsx:63
@@ -2594,7 +2602,7 @@ msgstr "Nom d'utilisateur : {0}"
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: src/containers/group-management/group-detail.tsx:635
+#: src/containers/group-management/group-detail.tsx:640
 msgid "Users will appear once added to this group"
 msgstr "Les utilisateurs apparaîtront une fois ajoutés à ce groupe"
 
@@ -2740,7 +2748,7 @@ msgstr "Vous devez être connecté pour pouvoir télécharger l'archive tarball.
 msgid "You have unsaved changes"
 msgstr "Vous avez des changements qui n’ont pas été sauvegardés"
 
-#: src/containers/group-management/group-detail.tsx:435
+#: src/containers/group-management/group-detail.tsx:440
 msgid "add-user-modal"
 msgstr "add-user-modal"
 
