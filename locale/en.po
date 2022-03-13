@@ -82,8 +82,8 @@ msgid "<0>{name}</0> will be permanently deleted."
 msgstr "<0>{name}</0> will be permanently deleted."
 
 #: src/containers/group-management/group-detail.tsx:611
-msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
-msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
+#~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
+#~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
 #: src/components/repositories/remote-form.tsx:563
 #: src/components/repositories/remote-form.tsx:609
@@ -2367,7 +2367,7 @@ msgstr "See the task management <0>detail page </0>for the status of this task."
 msgid "See the task management <0>detail page</0>for the status of this task."
 msgstr "See the task management <0>detail page</0>for the status of this task."
 
-#: src/components/permissions/obect-permission-field.tsx:52
+#: src/components/permissions/obect-permission-field.tsx:57
 msgid "Select a group"
 msgstr "Select a group"
 
@@ -2937,6 +2937,10 @@ msgstr "User \"{0}\" has been successfully deleted."
 #: src/containers/group-management/group-detail.tsx:924
 msgid "User \"{0}\" has been successfully removed group \"{name}\"."
 msgstr "User \"{0}\" has been successfully removed group \"{name}\"."
+
+#: src/containers/group-management/group-detail.tsx:611
+msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
+msgstr "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
 
 #: src/loaders/standalone/standalone-loader.tsx:395
 msgid "User Access"

@@ -82,8 +82,8 @@ msgid "<0>{name}</0> will be permanently deleted."
 msgstr "<0>{name}</0> 将被永久删除。"
 
 #: src/containers/group-management/group-detail.tsx:611
-msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
-msgstr "<0>{username}</0> 将从 <1>{groupname}</1> 中删除。"
+#~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
+#~ msgstr "<0>{username}</0> 将从 <1>{groupname}</1> 中删除。"
 
 #: src/components/repositories/remote-form.tsx:563
 #: src/components/repositories/remote-form.tsx:609
@@ -2369,7 +2369,7 @@ msgstr ""
 msgid "See the task management <0>detail page</0>for the status of this task."
 msgstr ""
 
-#: src/components/permissions/obect-permission-field.tsx:52
+#: src/components/permissions/obect-permission-field.tsx:57
 msgid "Select a group"
 msgstr ""
 
@@ -2938,6 +2938,10 @@ msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:924
 msgid "User \"{0}\" has been successfully removed group \"{name}\"."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:611
+msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
 msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:395
