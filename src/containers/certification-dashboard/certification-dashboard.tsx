@@ -350,7 +350,7 @@ class CertificationDashboard extends React.Component<
           <DateComponent date={version.created_at} />
         </td>
         <td>{this.renderStatus(version)}</td>
-        <td>{this.renderButtons(version)}</td>
+        {this.renderButtons(version)}
       </tr>
     );
   }
@@ -362,7 +362,7 @@ class CertificationDashboard extends React.Component<
       this.context?.user?.model_permissions?.sign_collections_on_namespace;
 
     if (this.state.updatingVersions.includes(version)) {
-      return;
+      return <ListItemActions />; // empty td;
     }
 
     const approveButton = [
@@ -431,41 +431,35 @@ class CertificationDashboard extends React.Component<
 
     if (version.repository_list.includes(Constants.PUBLISHED)) {
       return (
-        <span>
-          <ListItemActions
-            kebabItems={[
-              certifyDropDown(true, Constants.PUBLISHED),
-              rejectDropDown(false, Constants.PUBLISHED),
-              importsLink,
-            ]}
-          />
-        </span>
+        <ListItemActions
+          kebabItems={[
+            certifyDropDown(true, Constants.PUBLISHED),
+            rejectDropDown(false, Constants.PUBLISHED),
+            importsLink,
+          ]}
+        />
       );
     }
     if (version.repository_list.includes(Constants.NOTCERTIFIED)) {
       return (
-        <span>
-          <ListItemActions
-            kebabItems={[
-              certifyDropDown(false, Constants.NOTCERTIFIED),
-              rejectDropDown(true, Constants.NOTCERTIFIED),
-              importsLink,
-            ]}
-          />
-        </span>
+        <ListItemActions
+          kebabItems={[
+            certifyDropDown(false, Constants.NOTCERTIFIED),
+            rejectDropDown(true, Constants.NOTCERTIFIED),
+            importsLink,
+          ]}
+        />
       );
     }
     if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
       return (
-        <span>
-          <ListItemActions
-            kebabItems={[
-              rejectDropDown(false, Constants.NEEDSREVIEW),
-              importsLink,
-            ]}
-            buttons={approveButton}
-          />
-        </span>
+        <ListItemActions
+          kebabItems={[
+            rejectDropDown(false, Constants.NEEDSREVIEW),
+            importsLink,
+          ]}
+          buttons={approveButton}
+        />
       );
     }
   }
