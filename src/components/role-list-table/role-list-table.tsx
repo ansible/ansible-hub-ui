@@ -30,6 +30,7 @@ interface Props {
   isUserManagementDisabled?: boolean;
   params: object;
   updateParams?: (params) => void;
+  isCompact?: boolean;
 }
 
 export const RoleListTable = ({
@@ -38,6 +39,7 @@ export const RoleListTable = ({
   dropdownActions,
   params,
   updateParams,
+  isCompact,
 }: Props) => {
   const [expandedRoles, setExpandedRoles] = useState<string[]>([]);
 
@@ -88,7 +90,11 @@ export const RoleListTable = ({
   };
 
   return (
-    <TableComposable aria-label='role-list-table' data-cy='RoleListTable'>
+    <TableComposable
+      aria-label='role-list-table'
+      data-cy='RoleListTable'
+      variant={isCompact ? 'compact' : undefined}
+    >
       <SortTable
         options={sortTableOptions}
         params={params}
