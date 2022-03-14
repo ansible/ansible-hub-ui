@@ -110,10 +110,24 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
   private renderRow(remote, i) {
     const { user } = this.props;
+    const buttons = remote.repositories.length
+      ? this.getConfigureOrSyncButton(remote)
+      : [
+          <Tooltip
+            content={t`There are no repos associated with this remote.`}
+            key='empty'
+          >
+            <Button variant='plain'>
+              <ExclamationCircleIcon />
+            </Button>
+          </Tooltip>,
+        ];
     const dropdownItems = [
-      <DropdownItem key='edit' onClick={() => this.props.editRemote(remote)}>
-        {t`Edit`}
-      </DropdownItem>,
+      remote.repositories.length && user?.model_permissions?.change_remote && (
+        <DropdownItem key='edit' onClick={() => this.props.editRemote(remote)}>
+          {t`Edit`}
+        </DropdownItem>
+      ),
     ];
     return (
       <tr key={i}>
@@ -128,32 +142,14 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         )}
         <td>{lastSynced(remote) || '---'}</td>
         <td>{lastSyncStatus(remote) || '---'}</td>
-        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
-          {remote.repositories.length === 0 ? (
-            <Tooltip
-              content={t`There are no repos associated with this remote.`}
-            >
-              <Button variant='plain'>
-                <ExclamationCircleIcon />
-              </Button>
-            </Tooltip>
-          ) : (
-            !!user &&
-            user.model_permissions.change_remote && (
-              <ListItemActions
-                kebabItems={dropdownItems}
-                buttons={this.getConfigureOrSyncButton(remote)}
-              />
-            )
-          )}
-        </td>
+        <ListItemActions kebabItems={dropdownItems} buttons={buttons} />
       </tr>
     );
   }
 
   private getConfigureOrSyncButton(remote: RemoteType) {
     const { user } = this.props;
-    if (!!user && !user.model_permissions.change_remote) {
+    if (!user?.model_permissions?.change_remote) {
       return null;
     }
     const configButton = [
