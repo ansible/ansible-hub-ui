@@ -3,8 +3,8 @@ import React from 'react';
 import { StatefulDropdown } from '../patternfly-wrappers/stateful-dropdown';
 
 interface IProps {
-  kebabItems?: any[];
-  buttons?: any[];
+  kebabItems?: React.ReactNode[];
+  buttons?: React.ReactNode[];
 }
 export class ListItemActions extends React.Component<IProps> {
   render() {
@@ -17,8 +17,8 @@ export class ListItemActions extends React.Component<IProps> {
           justifyContent: 'flex-end',
         }}
       >
-        {this.props.buttons && <List>{this.props.buttons} </List>}
-        {this.props.kebabItems && (
+        {this.props.buttons?.length && <List>{this.props.buttons} </List>}
+        {this.props.kebabItems?.length && (
           <div data-cy='kebab-toggle'>
             <StatefulDropdown items={this.props.kebabItems.filter(Boolean)} />{' '}
           </div>

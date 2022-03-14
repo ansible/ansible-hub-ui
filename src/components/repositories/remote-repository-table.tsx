@@ -5,7 +5,7 @@ import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import { RemoteType, UserType, PulpStatus } from 'src/api';
-import { DateComponent, SortTable, StatefulDropdown } from 'src/components';
+import { DateComponent, SortTable, ListItemActions } from 'src/components';
 import { Constants } from 'src/constants';
 import { lastSynced, lastSyncStatus } from 'src/utilities';
 
@@ -110,6 +110,11 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
   private renderRow(remote, i) {
     const { user } = this.props;
+    const dropdownItems = [
+      <DropdownItem key='edit' onClick={() => this.props.editRemote(remote)}>
+        {t`Edit`}
+      </DropdownItem>,
+    ];
     return (
       <tr key={i}>
         <td>{remote.name}</td>
@@ -135,21 +140,10 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
           ) : (
             !!user &&
             user.model_permissions.change_remote && (
-              <>
-                {this.getConfigureOrSyncButton(remote)}
-                <span>
-                  <StatefulDropdown
-                    items={[
-                      <DropdownItem
-                        key='edit'
-                        onClick={() => this.props.editRemote(remote)}
-                      >
-                        {t`Edit`}
-                      </DropdownItem>,
-                    ]}
-                  />
-                </span>
-              </>
+              <ListItemActions
+                kebabItems={dropdownItems}
+                buttons={this.getConfigureOrSyncButton(remote)}
+              />
             )
           )}
         </td>
@@ -162,31 +156,34 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
     if (!!user && !user.model_permissions.change_remote) {
       return null;
     }
-    const configButton = (
-      <Button onClick={() => this.props.editRemote(remote)} variant='secondary'>
+    const configButton = [
+      <Button
+        key='config'
+        onClick={() => this.props.editRemote(remote)}
+        variant='secondary'
+      >
         {t`Configure`}
-      </Button>
-    );
+      </Button>,
+    ];
 
-    const syncButton = (
-      <>
-        <Button
-          isDisabled={
-            remote.repositories.length === 0 ||
-            (remote.last_sync_task &&
-              ['running', 'waiting'].includes(remote.last_sync_task.state))
-          }
-          onClick={() =>
-            this.props.syncRemote(
-              remote.repositories[0].distributions[0].base_path,
-            )
-          }
-          variant='secondary'
-        >
-          {t`Sync`}
-        </Button>
-      </>
-    );
+    const syncButton = [
+      <Button
+        key='sync'
+        isDisabled={
+          remote.repositories.length === 0 ||
+          (remote.last_sync_task &&
+            ['running', 'waiting'].includes(remote.last_sync_task.state))
+        }
+        onClick={() =>
+          this.props.syncRemote(
+            remote.repositories[0].distributions[0].base_path,
+          )
+        }
+        variant='secondary'
+      >
+        {t`Sync`}
+      </Button>,
+    ];
 
     let remoteType = 'none';
 

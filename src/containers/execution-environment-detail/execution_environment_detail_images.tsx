@@ -468,9 +468,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               {'podman pull ' + url + '/' + instruction}
             </ClipboardCopy>
           </td>
-          {!!dropdownItems.length && (
-            <ListItemActions kebabItems={dropdownItems} />
-          )}
+          <ListItemActions kebabItems={dropdownItems} />
         </tr>
 
         {expandedImage === image && (

@@ -852,13 +852,18 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const currentUser = this.context.user;
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
+
     const dropdownItems = [
-      <DropdownItem
-        key='delete'
-        onClick={() => this.setState({ showUserRemoveModal: user })}
-      >
-        {t`Remove`}
-      </DropdownItem>,
+      !!currentUser &&
+        currentUser.model_permissions.change_group &&
+        !isUserMgmtDisabled && (
+          <DropdownItem
+            key='delete'
+            onClick={() => this.setState({ showUserRemoveModal: user })}
+          >
+            {t`Remove`}
+          </DropdownItem>
+        ),
     ];
     if (featureFlags) {
       isUserMgmtDisabled = featureFlags.external_authentication;
@@ -876,9 +881,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={user.date_joined} />
         </td>
-        {!!currentUser &&
-          currentUser.model_permissions.change_group &&
-          !isUserMgmtDisabled && <ListItemActions kebabItems={dropdownItems} />}
+        <ListItemActions kebabItems={dropdownItems} />
       </tr>
     );
   }
