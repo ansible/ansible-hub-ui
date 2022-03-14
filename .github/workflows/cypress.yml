@@ -177,6 +177,7 @@ jobs:
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
+        galaxykit -s 'http://localhost:8002/api/galaxy/' -u admin -p admin user list ; echo $?
         npm run cypress:chrome
 
     - uses: actions/upload-artifact@v2
