@@ -27,11 +27,13 @@
   margin-bottom: 10px;
 
   .link-name {
-    flex: 1;
+    flex-grow: 1;
+    flex-basis: 0;
   }
 
   .link-url {
-    flex: 2;
+    flex-grow: 2;
+    flex-basis: 0;
     margin-left: 20px;
   }
 
