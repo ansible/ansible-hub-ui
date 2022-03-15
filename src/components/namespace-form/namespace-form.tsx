@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import './namespace-form.scss';
+import { validateURLHelper } from 'src/utilities';
 
 import {
   Form,
@@ -78,7 +79,6 @@ export class NamespaceForm extends React.Component<IProps, IState> {
             >
               <TextInput
                 validated={this.toError(!('company' in errorMessages))}
-                isRequired
                 id='company'
                 type='text'
                 value={namespace.company}
@@ -234,27 +234,68 @@ export class NamespaceForm extends React.Component<IProps, IState> {
     this.props.updateNamespace(update);
   }
 
+  public static validateName(link): {
+    validated: 'default' | 'error';
+    helperTextInvalid?: string;
+  } {
+    if (link.url) {
+      if (link.name) {
+        return { validated: 'default' };
+      } else {
+        return {
+          validated: 'error',
+          helperTextInvalid: t`Name must not be empty.`,
+        };
+      }
+    }
+
+    // if link url is empty, there is no need to insert name because the link data will be discarded
+    return { validated: 'default' };
+  }
+
+  public static validateUrl(link): ReturnType<typeof validateURLHelper> {
+    if (link.url) {
+      // only validate url if input is not blank, blank inputs are thrown away
+      return validateURLHelper(undefined, link.url);
+    }
+
+    if (link.name) {
+      return {
+        validated: 'error',
+        helperTextInvalid: t`URL must not be empty.`,
+      };
+    }
+
+    return { validated: 'default' };
+  }
+
   private renderLinkGroup(link, index) {
     const last = index === this.props.namespace.links.length - 1;
     return (
       <div className='useful-links' key={index}>
         <div className='link-name'>
-          <TextInput
-            id='name'
-            type='text'
-            placeholder={t`Link text`}
-            value={link.name}
-            onChange={(value, event) => this.updateLink(index, value, event)}
-          />
+          <FormGroup fieldId={'name'} {...NamespaceForm.validateName(link)}>
+            <TextInput
+              id='name'
+              type='text'
+              placeholder={t`Link text`}
+              value={link.name}
+              onChange={(value, event) => this.updateLink(index, value, event)}
+              validated={NamespaceForm.validateName(link).validated}
+            />
+          </FormGroup>
         </div>
         <div className='link-url'>
-          <TextInput
-            id='url'
-            type='text'
-            placeholder={t`Link URL`}
-            value={link.url}
-            onChange={(value, event) => this.updateLink(index, value, event)}
-          />
+          <FormGroup fieldId={'link'} {...NamespaceForm.validateUrl(link)}>
+            <TextInput
+              id='url'
+              type='text'
+              placeholder={t`Link URL`}
+              value={link.url}
+              onChange={(value, event) => this.updateLink(index, value, event)}
+              validated={NamespaceForm.validateUrl(link.url).validated}
+            />
+          </FormGroup>
         </div>
         <div className='link-button'>
           <div className='link-container'>

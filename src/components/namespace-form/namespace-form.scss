@@ -28,17 +28,20 @@
 
   .link-name {
     flex-grow: 1;
+    flex-basis: 0;
   }
 
   .link-url {
     flex-grow: 2;
+    flex-basis: 0;
     margin-left: 20px;
   }
 
   .link-button {
     display: flex;
-    align-items: center;
+    align-items: top;
     margin-left: 10px;
+    margin-top: 8px;
 
     .link-container {
       width: 20px;

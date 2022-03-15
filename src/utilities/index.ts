@@ -16,3 +16,4 @@ export { parsePulpIDFromURL } from './parse-pulp-id';
 export { lastSynced, lastSyncStatus } from './last-sync-task';
 export { waitForTask } from './wait-for-task';
 export { errorMessage } from './fail-alerts';
+export { validateURLHelper } from './validateURLHelper';
