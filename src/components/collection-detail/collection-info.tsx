@@ -102,6 +102,7 @@ export class CollectionInfo extends React.Component<IProps> {
                     <Button
                       className='download-button'
                       variant='link'
+                      data-cy='download-collection-tarball-button'
                       icon={<DownloadIcon />}
                       onClick={() =>
                         this.download(
@@ -125,7 +126,7 @@ export class CollectionInfo extends React.Component<IProps> {
                 <SplitItem className='install-title'>
                   {t`Requires Ansible`}
                 </SplitItem>
-                <SplitItem isFilled>
+                <SplitItem isFilled data-cy='ansible-requirement'>
                   {latest_version.requires_ansible}
                 </SplitItem>
               </Split>
