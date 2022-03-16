@@ -158,7 +158,6 @@ class ExecutionEnvironmentRegistryList extends React.Component<
         <AlertList
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
-          data-cy='ExecutionEnvironmentRegistryList'
         ></AlertList>
         {showRemoteFormModal && (
           <RemoteForm

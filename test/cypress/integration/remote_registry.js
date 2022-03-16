@@ -73,7 +73,7 @@ describe('Remote Registry Tests', () => {
 
     cy.wait('@sync');
 
-    cy.get('[data-cy="AlertList-ExecutionEnvironmentRegistryList"]').contains(
+    cy.get('[data-cy="AlertList"]').contains(
       'Sync started for remote registry "New remote registry1".',
     );
 
