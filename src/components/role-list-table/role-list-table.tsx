@@ -28,9 +28,19 @@ interface Props {
   roles: RoleType[];
   dropdownActions?: JSX.Element[];
   isUserManagementDisabled?: boolean;
-  params: object;
+  params?: object;
   updateParams?: (params) => void;
   isCompact?: boolean;
+  variant?: 'expandable' | 'checkbox' | 'radio';
+  tableHeader?: {
+    headers: {
+      title: string;
+      type: string;
+      id: string;
+    }[];
+  };
+  selected?: RoleType[] | RoleType;
+  onSelect?: (selectedRole: RoleType, selectedRoles?: RoleType[]) => void;
 }
 
 export const RoleListTable = ({
@@ -40,10 +50,32 @@ export const RoleListTable = ({
   params,
   updateParams,
   isCompact,
+  variant = 'expandable',
+  tableHeader,
+  selected,
+  onSelect,
 }: Props) => {
+  if (variant === 'checkbox' && !Array.isArray(selected)) {
+    throw new Error(
+      'Invalid type passed into `selected`. Variant `checkbox` expected type Array.',
+    );
+  }
+
+  if (variant === 'radio' && Array.isArray(selected)) {
+    throw new Error(
+      'Invalid type passed into `selected`. Variant `radio` expected type Object.',
+    );
+  }
+
   const [expandedRoles, setExpandedRoles] = useState<string[]>([]);
 
   const isRoleExpanded = (role) => expandedRoles.includes(role);
+
+  const isRoleSelected = (role: RoleType) => {
+    return (selected as RoleType[])
+      .map((role) => role.name)
+      .includes(role.name);
+  };
 
   const handleToggleRole = (role) => {
     setExpandedRoles((prevState) =>
@@ -51,6 +83,20 @@ export const RoleListTable = ({
         ? prevState.filter((r) => r !== role)
         : [...prevState, role],
     );
+  };
+
+  const onSelectRole = (role) => {
+    if (variant === 'checkbox') {
+      const selectedRoles = selected as RoleType[];
+      const updatedRoles = isRoleSelected(role)
+        ? selectedRoles.filter((r) => r.name !== role.name)
+        : [...selectedRoles, role];
+      onSelect(role, updatedRoles);
+    }
+
+    if (variant === 'radio') {
+      onSelect(role as RoleType);
+    }
   };
 
   const allPermissions = [...Constants.PERMISSIONS];
@@ -64,7 +110,7 @@ export const RoleListTable = ({
     });
   }
 
-  const sortTableOptions = {
+  const defaultTableHeader = {
     headers: [
       {
         title: '',
@@ -96,22 +142,46 @@ export const RoleListTable = ({
       variant={isCompact ? 'compact' : undefined}
     >
       <SortTable
-        options={sortTableOptions}
+        options={tableHeader ?? defaultTableHeader}
         params={params}
         updateParams={updateParams}
       />
-      {roles.map(({ name, description, permissions }, i) => (
-        <Tbody key={i} isExpanded={isRoleExpanded(name)}>
+      {roles.map((role, rowIndex) => (
+        <Tbody key={rowIndex} isExpanded={isRoleExpanded(role.name)}>
           <Tr>
-            <Td
-              expand={{
-                isExpanded: isRoleExpanded(name),
-                onToggle: () => handleToggleRole(name),
-                rowIndex: i,
-              }}
-            />
-            <Td>{name}</Td>
-            <Td>{description}</Td>
+            {variant === 'expandable' && (
+              <Td
+                expand={{
+                  isExpanded: isRoleExpanded(role.name),
+                  onToggle: () => handleToggleRole(role.name),
+                  rowIndex,
+                }}
+              />
+            )}
+
+            {variant === 'checkbox' && (
+              <Td
+                select={{
+                  rowIndex,
+                  onSelect: () => onSelectRole(role),
+                  isSelected: isRoleSelected(role),
+                  variant: 'checkbox',
+                }}
+              />
+            )}
+
+            {variant === 'radio' && (
+              <Td
+                select={{
+                  rowIndex,
+                  onSelect: () => onSelectRole(role),
+                  isSelected: (selected as RoleType)?.name === role.name,
+                  variant: 'radio',
+                }}
+              />
+            )}
+            <Td>{role.name}</Td>
+            <Td>{role.description}</Td>
             {dropdownActions && (
               <Td style={{ paddingRight: '0px', textAlign: 'right' }}>
                 <div data-cy='kebab-toggle'>
@@ -128,9 +198,11 @@ export const RoleListTable = ({
                         props: updatedProps,
                       };
 
-                      const role = { name, description, permissions };
                       return (
-                        <div key={i} onClick={() => item.props.onClick(role)}>
+                        <div
+                          key={i}
+                          onClick={() => item.props.onClick(role.name)}
+                        >
                           {updatedItem}
                         </div>
                       );
@@ -140,48 +212,49 @@ export const RoleListTable = ({
               </Td>
             )}
           </Tr>
-          <Tr isExpanded={isRoleExpanded(name)}>
+          <Tr isExpanded={isRoleExpanded(role.name)}>
             <Td colSpan={4}>
               <ExpandableRowContent>
-                {allPermissions.map((group) => (
-                  <Flex
-                    style={{ marginTop: '16px' }}
-                    alignItems={{ default: 'alignItemsCenter' }}
-                    key={group.name}
-                    className={group.name}
-                  >
-                    <FlexItem style={{ minWidth: '200px' }}>
-                      {i18n._(group.label)}
-                    </FlexItem>
-                    <FlexItem grow={{ default: 'grow' }}>
-                      <PermissionChipSelector
-                        availablePermissions={group.object_permissions
-                          .filter(
-                            (perm) =>
-                              !permissions.find(
-                                (selected) => selected === perm,
+                {Object.keys(role?.permissions).length > 0 &&
+                  allPermissions.map((group) => (
+                    <Flex
+                      style={{ marginTop: '16px' }}
+                      alignItems={{ default: 'alignItemsCenter' }}
+                      key={group.name}
+                      className={group.name}
+                    >
+                      <FlexItem style={{ minWidth: '200px' }}>
+                        {i18n._(group.label)}
+                      </FlexItem>
+                      <FlexItem grow={{ default: 'grow' }}>
+                        <PermissionChipSelector
+                          availablePermissions={group.object_permissions
+                            .filter(
+                              (perm) =>
+                                !role.permissions.find(
+                                  (selected) => selected === perm,
+                                ),
+                            )
+                            .map((value) =>
+                              twoWayMapper(value, filteredPermissions),
+                            )
+                            .sort()}
+                          selectedPermissions={role.permissions
+                            .filter((selected) =>
+                              group.object_permissions.find(
+                                (perm) => selected === perm,
                               ),
-                          )
-                          .map((value) =>
-                            twoWayMapper(value, filteredPermissions),
-                          )
-                          .sort()}
-                        selectedPermissions={permissions
-                          .filter((selected) =>
-                            group.object_permissions.find(
-                              (perm) => selected === perm,
-                            ),
-                          )
-                          .map((value) =>
-                            twoWayMapper(value, filteredPermissions),
-                          )}
-                        menuAppendTo='inline'
-                        multilingual={true}
-                        isViewOnly={true}
-                      />
-                    </FlexItem>
-                  </Flex>
-                ))}
+                            )
+                            .map((value) =>
+                              twoWayMapper(value, filteredPermissions),
+                            )}
+                          menuAppendTo='inline'
+                          multilingual={true}
+                          isViewOnly={true}
+                        />
+                      </FlexItem>
+                    </Flex>
+                  ))}
               </ExpandableRowContent>
             </Td>
           </Tr>

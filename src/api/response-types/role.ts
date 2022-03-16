@@ -3,6 +3,6 @@ export class RoleType {
   pulp_created: string;
   name: string;
   description: string;
-  permissions: string[];
+  permissions?: string[];
   locked: boolean;
 }
