@@ -634,7 +634,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               <TextInput
                 id='download_concurrency'
                 type='number'
-                value={remote.download_concurrency}
+                value={remote.download_concurrency || ''}
                 validated={
                   !this.isNumericSet(remote.download_concurrency) ||
                   remote.download_concurrency > 0
@@ -666,7 +666,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               <TextInput
                 id='rate_limit'
                 type='number'
-                value={remote.rate_limit}
+                value={remote.rate_limit || ''}
                 onChange={(value) => this.updateRemote(value, 'rate_limit')}
               />
             </FormGroup>
