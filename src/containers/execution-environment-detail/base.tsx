@@ -63,6 +63,11 @@ export function withContainerRepo(WrappedComponent) {
 
     componentDidMount() {
       this.loadRepo();
+      this.setState({ alerts: this.context.alerts || [] });
+    }
+
+    componentWillUnmount() {
+      this.context.setAlerts([]);
     }
 
     render() {
@@ -166,13 +171,16 @@ export function withContainerRepo(WrappedComponent) {
               selectedItem={repo.name}
               closeAction={() => this.setState({ showDeleteModal: false })}
               afterDelete={() => this.setState({ redirect: 'list' })}
-              addAlert={(text, variant, description = undefined) =>
-                this.setState({
-                  alerts: alerts.concat([
-                    { title: text, variant: variant, description: description },
-                  ]),
-                })
-              }
+              addAlert={(text, variant) => {
+                this.context.setAlerts([
+                  ...this.context.alerts,
+                  {
+                    variant: variant,
+                    title: text,
+                  },
+                ]);
+                this.setState({ alerts: this.context.alerts || [] });
+              }}
             ></DeleteExecutionEnvironmentModal>
           )}
           <ExecutionEnvironmentHeader
