@@ -1,3 +1,13 @@
+4.4.3 (2022-03-16)
+Misc
+----
+
+- `AAH-1198 <https://issues.redhat.com/browse/AAH-1198>`_, `AAH-1199 <https://issues.redhat.com/browse/AAH-1199>`_, `AAH-1204 <https://issues.redhat.com/browse/AAH-1204>`_, `AAH-1205 <https://issues.redhat.com/browse/AAH-1205>`_
+
+
+----
+
+
 4.4.2 (2022-03-01)
 Misc
 ----
