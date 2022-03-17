@@ -16,6 +16,12 @@ describe('Namespaces Page Tests', () => {
     cy.galaxykit('namespace addgroup', 'testns2', 'testGroup2');
   });
 
+  after(() => {
+    cy.deleteTestUsers();
+    cy.deleteTestGroups();
+    cy.deleteNamespacesAndCollections();
+  });
+
   it('can navigate to pubic namespace list', () => {
     cy.login('testUser2', 'p@ssword1');
     cy.menuGo('Collections > Namespaces');
