@@ -1,33 +1,18 @@
 import { range } from 'lodash';
 
 describe('Collections list Tests', () => {
-  let items = [];
-
   before(() => {
-    cy.login();
     cy.deleteNamespacesAndCollections();
 
     cy.galaxykit('namespace create my_namespace');
     // insert test data
     range(21).forEach((i) => {
-      let item = { name: 'my_collection' + i };
-      items.push(item);
       cy.galaxykit('-i collection upload my_namespace my_collection' + i);
     });
+  });
 
-    // load items. Because not all test support cleaning yet,
-    // some other collections may be present from previous test, so we must load them, we can not expect
-    // that only our test data are in database.
-    cy.intercept(
-      'GET',
-      Cypress.env('prefix') +
-        '_ui/v1/repo/published/?deprecated=false&offset=0&limit=100',
-    ).as('data');
-    cy.visit('/ui/repo/published?page_size=100&view_type=null&page=1');
-
-    cy.wait('@data').then((res) => {
-      items = res.response.body.data;
-    });
+  after(() => {
+    cy.deleteNamespacesAndCollections();
   });
 
   beforeEach(() => {
@@ -43,11 +28,7 @@ describe('Collections list Tests', () => {
     cy.get('.collection-container').get('article').should('have.length', 10);
 
     cy.get('.cards').get('[aria-label="Go to next page"]:first').click();
-    // some remaining data can be there from previous tests
-    const remaining = items.length > 30 ? 10 : items.length - 20;
-    cy.get('.collection-container')
-      .get('article')
-      .should('have.length', remaining);
+    cy.get('.collection-container').get('article').should('have.length', 1);
   });
 
   it('filter is working', () => {
@@ -69,5 +50,20 @@ describe('Collections list Tests', () => {
     cy.get('[data-cy="view_type_list"] svg').click();
 
     cy.get('[data-cy="CollectionListItem"]').should('have.length', 10);
+  });
+
+  it('should switch repos when clicking on the dropdown', () => {
+    cy.get('button[aria-label="Options menu"]:first').click();
+    cy.get('button[name="rh-certified"]:first').click();
+    cy.get('.cards .card').should('have.length', 0);
+
+    // Switch back (to have data again)
+    cy.get('button[aria-label="Options menu"]:first').click();
+    cy.get('button[name="published"]:first').click();
+    cy.get('.cards .card').should('have.length', 10);
+
+    cy.get('button[aria-label="Options menu"]:first').click();
+    cy.get('button[name="community"]:first').click();
+    cy.get('.cards .card').should('have.length', 0);
   });
 });
