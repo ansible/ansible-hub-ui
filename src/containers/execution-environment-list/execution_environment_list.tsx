@@ -20,7 +20,6 @@ import {
 import { filterIsSet, parsePulpIDFromURL, ParamHelper } from 'src/utilities';
 import {
   AlertList,
-  AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -36,7 +35,6 @@ import {
   SortTable,
   StatefulDropdown,
   Tooltip,
-  closeAlertMixin,
   EmptyStateUnauthorized,
 } from 'src/components';
 import { formatPath, Paths } from '../../paths';
@@ -44,7 +42,6 @@ import { AppContext } from 'src/loaders/app-context';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 
 interface IState {
-  alerts: AlertType[];
   itemCount: number;
   itemToEdit?: ExecutionEnvironmentType;
   items: ExecutionEnvironmentType[];
@@ -83,7 +80,6 @@ class ExecutionEnvironmentList extends React.Component<
     }
 
     this.state = {
-      alerts: [],
       itemCount: 0,
       itemToEdit: null,
       items: [],
@@ -109,7 +105,6 @@ class ExecutionEnvironmentList extends React.Component<
 
   render() {
     const {
-      alerts,
       itemCount,
       itemToEdit,
       items,
@@ -121,6 +116,8 @@ class ExecutionEnvironmentList extends React.Component<
       showDeleteModal,
       selectedItem,
     } = this.state;
+
+    const alerts = this.context.alerts;
 
     const noData = items.length === 0 && !filterIsSet(params, ['name']);
     const pushImagesButton = (
@@ -153,10 +150,7 @@ class ExecutionEnvironmentList extends React.Component<
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        ></AlertList>
+        <AlertList alerts={alerts}></AlertList>
         <PublishToControllerModal
           digest={publishToController?.digest}
           image={publishToController?.image}
@@ -174,12 +168,15 @@ class ExecutionEnvironmentList extends React.Component<
               this.setState({ showDeleteModal: false, selectedItem: null })
             }
             afterDelete={() => this.queryEnvironments()}
-            addAlert={(text, variant, description = undefined) =>
-              this.setState({
-                alerts: alerts.concat([
-                  { title: text, variant: variant, description: description },
-                ]),
-              })
+            addAlert={(title, variant, description = undefined) =>
+              this.context.setAlerts([
+                ...alerts,
+                {
+                  variant,
+                  title,
+                  description,
+                },
+              ])
             }
           ></DeleteExecutionEnvironmentModal>
         )}
@@ -420,7 +417,7 @@ class ExecutionEnvironmentList extends React.Component<
     const remote = pulp?.repository ? !!pulp?.repository?.remote : true; // add only supports remote
     const isNew = !pulp?.repository; // only exists in real data
     const distributionPulpId = pulp?.distribution?.pulp_id;
-    const { alerts } = this.state;
+
     return (
       <RepositoryForm
         isRemote={!!remote}
@@ -443,23 +440,26 @@ class ExecutionEnvironmentList extends React.Component<
                 {
                   showRemoteModal: false,
                   itemToEdit: null,
-                  alerts: alerts.concat({
-                    variant: 'success',
-                    title: isNew ? (
-                      <Trans>
-                        Execution environment &quot;{name}&quot; has been added
-                        successfully.
-                      </Trans>
-                    ) : (
-                      <Trans>
-                        Saved changes to execution environment &quot;{name}
-                        &quot;.
-                      </Trans>
-                    ),
-                  }),
                 },
                 () => this.queryEnvironments(),
               );
+              this.context.setAlerts([
+                ...this.context.alerts,
+                {
+                  variant: 'success',
+                  title: isNew ? (
+                    <Trans>
+                      Execution environment &quot;{name}&quot; has been added
+                      successfully.
+                    </Trans>
+                  ) : (
+                    <Trans>
+                      Saved changes to execution environment &quot;{name}
+                      &quot;.
+                    </Trans>
+                  ),
+                },
+              ]);
             })
             .catch((err) => {
               this.setState({
@@ -505,21 +505,15 @@ class ExecutionEnvironmentList extends React.Component<
     return ParamHelper.updateParamsMixin();
   }
 
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
-  }
-
   private addAlert(title, variant, description?) {
-    this.setState({
-      alerts: [
-        ...this.state.alerts,
-        {
-          description,
-          title,
-          variant,
-        },
-      ],
-    });
+    this.context.setAlerts([
+      ...this.context.alerts,
+      {
+        description,
+        title,
+        variant,
+      },
+    ]);
   }
 
   private sync(name) {
