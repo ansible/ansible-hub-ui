@@ -31,7 +31,6 @@ interface IState {
   loading: boolean;
   redirect: string;
   editing: boolean;
-  alerts: AlertType[];
   showDeleteModal: boolean;
   formError: { title: string; detail: string }[];
 }
@@ -55,7 +54,6 @@ export function withContainerRepo(WrappedComponent) {
         loading: true,
         redirect: undefined,
         editing: false,
-        alerts: [],
         showDeleteModal: false,
         formError: [],
       };
@@ -63,7 +61,6 @@ export function withContainerRepo(WrappedComponent) {
 
     componentDidMount() {
       this.loadRepo();
-      this.setState({ alerts: this.context.alerts || [] });
     }
 
     componentWillUnmount() {
@@ -151,14 +148,12 @@ export function withContainerRepo(WrappedComponent) {
         ),
       ].filter((truthy) => truthy);
 
-      const { alerts, repo, publishToController, showDeleteModal } = this.state;
+      const { repo, publishToController, showDeleteModal } = this.state;
+      const alerts: AlertType[] = this.context.alerts || [];
 
       return (
         <React.Fragment>
-          <AlertList
-            alerts={this.state.alerts}
-            closeAlert={(i) => this.closeAlert(i)}
-          />
+          <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
           <PublishToControllerModal
             digest={publishToController?.digest}
             image={publishToController?.image}
@@ -173,13 +168,12 @@ export function withContainerRepo(WrappedComponent) {
               afterDelete={() => this.setState({ redirect: 'list' })}
               addAlert={(text, variant) => {
                 this.context.setAlerts([
-                  ...this.context.alerts,
+                  ...alerts,
                   {
                     variant: variant,
                     title: text,
                   },
                 ]);
-                this.setState({ alerts: this.context.alerts || [] });
               }}
             ></DeleteExecutionEnvironmentModal>
           )}
@@ -218,7 +212,10 @@ export function withContainerRepo(WrappedComponent) {
                       this.setState({
                         editing: false,
                         loading: true,
-                        alerts: alerts.concat({
+                      });
+                      this.context.setAlerts([
+                        ...alerts,
+                        {
                           variant: 'success',
                           title: (
                             <Trans>
@@ -226,8 +223,8 @@ export function withContainerRepo(WrappedComponent) {
                               {this.state.repo.name}&quot;.
                             </Trans>
                           ),
-                        }),
-                      });
+                        },
+                      ]);
                       if (task) {
                         waitForTask(
                           task.data.task.split('tasks/')[1].replace('/', ''),
@@ -316,16 +313,14 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private addAlert(title, variant, description?) {
-      this.setState({
-        alerts: [
-          ...this.state.alerts,
-          {
-            description,
-            title,
-            variant,
-          },
-        ],
-      });
+      this.context.setAlerts([
+        ...(this.context.alerts ?? []),
+        {
+          description,
+          title,
+          variant,
+        },
+      ]);
     }
 
     private sync(name) {
