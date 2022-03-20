@@ -1,4 +1,3 @@
-
 msgid ""
 msgstr ""
 "POT-Creation-Date: 2021-09-01 22:22+0000\n"
@@ -11,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/components/headers/collection-header.tsx:155
 msgid "(latest)"
@@ -64,7 +64,7 @@ msgstr "<0>{0}</0> zal permanent worden verwijderd."
 msgid "<0>{name}</0> will be permanently deleted."
 msgstr "<0>{name}</0> zal permanent worden verwijderd."
 
-#: src/containers/group-management/group-detail.tsx:571
+#: src/containers/group-management/group-detail.tsx:576
 msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 msgstr "<0>{username}</0> zal worden verwijderd uit <1>{groupname}</1>."
 
@@ -127,9 +127,9 @@ msgstr "Activiteit"
 #: src/components/execution-environment/repository-form.tsx:325
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:107
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:174
-#: src/containers/group-management/group-detail.tsx:453
-#: src/containers/group-management/group-detail.tsx:644
-#: src/containers/group-management/group-detail.tsx:695
+#: src/containers/group-management/group-detail.tsx:458
+#: src/containers/group-management/group-detail.tsx:649
+#: src/containers/group-management/group-detail.tsx:700
 msgid "Add"
 msgstr "Toevoegen"
 
@@ -180,7 +180,7 @@ msgstr "Nieuwe tag aan afbeelding toevoegen"
 msgid "Add remote registry"
 msgstr "Extern register toevoegen"
 
-#: src/containers/group-management/group-detail.tsx:439
+#: src/containers/group-management/group-detail.tsx:444
 msgid "Add selected users to group"
 msgstr "Geselecteerde gebruikers aan groep toevoegen"
 
@@ -204,7 +204,8 @@ msgstr "Gebruiker toevoegen"
 msgid ""
 "Adding groups provides access to all repositories in the\n"
 "\"{namespace}\" container namespace."
-msgstr "Het toevoegen van groepen geeft toegang tot alle repository's in de\n"
+msgstr ""
+"Het toevoegen van groepen geeft toegang tot alle repository's in de\n"
 "\"{namespace}\" container-namespace."
 
 #: src/containers/namespace-list/namespace-list.tsx:186
@@ -276,8 +277,8 @@ msgstr "Ik kan niet op afstand updaten zonder dat er een distributie aan vastzit
 #: src/containers/edit-namespace/edit-namespace.tsx:195
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:151
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:134
-#: src/containers/group-management/group-detail.tsx:413
-#: src/containers/group-management/group-detail.tsx:456
+#: src/containers/group-management/group-detail.tsx:418
+#: src/containers/group-management/group-detail.tsx:461
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:77
 msgid "Cancel"
 msgstr "Annuleren"
@@ -601,7 +602,7 @@ msgstr "Nieuwe gebruiker maken"
 
 #: src/containers/execution-environment/registry-list.tsx:323
 #: src/containers/execution-environment-list/execution_environment_list.tsx:309
-#: src/containers/group-management/group-detail.tsx:761
+#: src/containers/group-management/group-detail.tsx:766
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
 msgstr "Gemaakt"
@@ -656,7 +657,7 @@ msgstr "Datum aangemaakt"
 #: src/containers/execution-environment/registry-list.tsx:392
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:410
 #: src/containers/execution-environment-list/execution_environment_list.tsx:390
-#: src/containers/group-management/group-detail.tsx:251
+#: src/containers/group-management/group-detail.tsx:253
 #: src/containers/group-management/group-list.tsx:401
 #: src/containers/group-management/group-list.tsx:411
 #: src/containers/namespace-detail/namespace-detail.tsx:207
@@ -878,7 +879,7 @@ msgstr "Dropdown"
 #: src/containers/execution-environment-detail/base.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:92
 #: src/containers/execution-environment-list/execution_environment_list.tsx:363
-#: src/containers/group-management/group-detail.tsx:336
+#: src/containers/group-management/group-detail.tsx:338
 #: src/containers/settings/user-profile.tsx:102
 #: src/containers/user-management/user-detail.tsx:120
 #: src/containers/user-management/user-edit.tsx:68
@@ -894,7 +895,7 @@ msgstr "Details bewerken"
 msgid "Edit execution environment"
 msgstr "Uitvoeringsomgeving bewerken"
 
-#: src/containers/group-management/group-detail.tsx:203
+#: src/containers/group-management/group-detail.tsx:205
 msgid "Edit group permissions"
 msgstr "Groepspermissies bewerken"
 
@@ -927,9 +928,10 @@ msgid "Edit user"
 msgstr "Gebruiker wijzigen"
 
 #: src/components/user-form/user-form.tsx:88
-#: src/containers/group-management/group-detail.tsx:681
-#: src/containers/group-management/group-detail.tsx:746
+#: src/containers/group-management/group-detail.tsx:686
+#: src/containers/group-management/group-detail.tsx:751
 #: src/containers/user-management/user-list.tsx:174
+#: src/containers/user-management/user-list.tsx:213
 #: src/containers/user-management/user-list.tsx:276
 msgid "Email"
 msgstr "E-mail"
@@ -946,7 +948,7 @@ msgstr "Fout bij verwijderen collectieversie."
 msgid "Error deleting collection."
 msgstr "Fout bij verwijderen collectie."
 
-#: src/containers/group-management/group-detail.tsx:539
+#: src/containers/group-management/group-detail.tsx:544
 #: src/containers/group-management/group-list.tsx:450
 msgid "Error deleting group."
 msgstr "Fout bij verwijderen groep."
@@ -996,7 +998,7 @@ msgstr "Fout bij het laden van afhankelijke collecties."
 msgid "Error loading environments."
 msgstr "Fout bij het laden van omgevingen."
 
-#: src/containers/group-management/group-detail.tsx:129
+#: src/containers/group-management/group-detail.tsx:131
 msgid "Error loading group."
 msgstr "Fout bij het laden van groep."
 
@@ -1017,7 +1019,7 @@ msgstr "Fout bij het laden van mijn namespaces."
 msgid "Error loading namespaces."
 msgstr "Fout bij het laden van namespaces."
 
-#: src/containers/group-management/group-detail.tsx:143
+#: src/containers/group-management/group-detail.tsx:145
 msgid "Error loading permissions."
 msgstr "Fout bij het laden van machtigingen."
 
@@ -1038,9 +1040,9 @@ msgstr "Fout bij het laden van taken."
 msgid "Error loading token."
 msgstr "Fout bij het laden van token."
 
-#: src/containers/group-management/group-detail.tsx:482
-#: src/containers/group-management/group-detail.tsx:603
-#: src/containers/group-management/group-detail.tsx:838
+#: src/containers/group-management/group-detail.tsx:487
+#: src/containers/group-management/group-detail.tsx:608
+#: src/containers/group-management/group-detail.tsx:843
 #: src/containers/group-management/group-list.tsx:303
 #: src/containers/user-management/user-list.tsx:419
 msgid "Error loading users."
@@ -1054,7 +1056,7 @@ msgstr "Foutbericht"
 msgid "Error message:"
 msgstr "Foutbericht:"
 
-#: src/containers/group-management/group-detail.tsx:857
+#: src/containers/group-management/group-detail.tsx:862
 msgid "Error removing user from a group."
 msgstr "Fout bij het verwijderen van een gebruiker uit een groep."
 
@@ -1063,7 +1065,7 @@ msgstr "Fout bij het verwijderen van een gebruiker uit een groep."
 msgid "Error stopping task."
 msgstr "Fout bij het stoppen van de taak."
 
-#: src/containers/group-management/group-detail.tsx:589
+#: src/containers/group-management/group-detail.tsx:594
 msgid "Error updating users."
 msgstr "Fout bij het bijwerken van gebruikers."
 
@@ -1113,7 +1115,7 @@ msgstr "Mislukt"
 msgid "Failed to delete remote registry {name}"
 msgstr "Het is niet gelukt om extern register {name} te verwijderen"
 
-#: src/containers/login/login.tsx:97
+#: src/containers/login/login.tsx:98
 msgid "Failed to retrieve user data."
 msgstr "Ophalen gebruikersgegevens mislukt."
 
@@ -1154,9 +1156,10 @@ msgid "Finished at"
 msgstr "Voltooid op"
 
 #: src/components/user-form/user-form.tsx:86
-#: src/containers/group-management/group-detail.tsx:673
-#: src/containers/group-management/group-detail.tsx:756
+#: src/containers/group-management/group-detail.tsx:678
+#: src/containers/group-management/group-detail.tsx:761
 #: src/containers/user-management/user-list.tsx:166
+#: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:264
 msgid "First name"
 msgstr "Voornaam"
@@ -1193,7 +1196,7 @@ msgstr "Groepslijst"
 #: src/components/user-form/user-form.tsx:147
 #: src/components/user-form/user-form.tsx:161
 #: src/constants.tsx:55
-#: src/containers/group-management/group-detail.tsx:209
+#: src/containers/group-management/group-detail.tsx:211
 #: src/containers/group-management/group-list.tsx:132
 #: src/containers/user-management/user-list.tsx:282
 #: src/loaders/standalone/standalone-loader.tsx:393
@@ -1301,7 +1304,7 @@ msgstr "Ongeldig bestandsformaat."
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
 msgstr "Ongeldige bestandsnaam. Collecties moeten worden geformatteerd als 'namespace-collection_name-1.0.0'"
 
-#: src/containers/login/login.tsx:110
+#: src/containers/login/login.tsx:111
 msgid "Invalid login credentials."
 msgstr "Ongeldige inloggegevens."
 
@@ -1330,9 +1333,10 @@ msgid "Last modified"
 msgstr "Laatste wijziging"
 
 #: src/components/user-form/user-form.tsx:87
-#: src/containers/group-management/group-detail.tsx:677
-#: src/containers/group-management/group-detail.tsx:751
+#: src/containers/group-management/group-detail.tsx:682
+#: src/containers/group-management/group-detail.tsx:756
 #: src/containers/user-management/user-list.tsx:170
+#: src/containers/user-management/user-list.tsx:212
 #: src/containers/user-management/user-list.tsx:270
 msgid "Last name"
 msgstr "Achternaam"
@@ -1394,7 +1398,11 @@ msgstr "Laadtoken"
 msgid "Local"
 msgstr "Lokaal"
 
-#: src/containers/login/login.tsx:70
+#: src/containers/login/login.tsx:63
+msgid "Log In"
+msgstr ""
+
+#: src/containers/login/login.tsx:71
 msgid "Log in to your account"
 msgstr "Log in op uw account"
 
@@ -1588,7 +1596,7 @@ msgstr "Nog geen namespaces"
 msgid "No parent task"
 msgstr "Geen oudertaak"
 
-#: src/components/permissions/permission-chip-selector.tsx:80
+#: src/components/permissions/permission-chip-selector.tsx:99
 msgid "No permission"
 msgstr "Geen machtiging"
 
@@ -1628,7 +1636,7 @@ msgstr "Nog geen taken"
 msgid "No users will be affected."
 msgstr "Geen enkele gebruiker zal hierdoor worden getroffen."
 
-#: src/containers/group-management/group-detail.tsx:634
+#: src/containers/group-management/group-detail.tsx:639
 #: src/containers/user-management/user-list.tsx:245
 msgid "No users yet"
 msgstr "Nog geen gebruikers"
@@ -1637,7 +1645,7 @@ msgstr "Nog geen gebruikers"
 msgid "Not a super user"
 msgstr "Geen supergebruiker"
 
-#: src/components/permissions/permission-chip-selector.tsx:66
+#: src/components/permissions/permission-chip-selector.tsx:83
 #: src/components/typeahead/typeahead.tsx:86
 #: src/containers/collection-detail/collection-docs.tsx:270
 msgid "Not found"
@@ -1717,6 +1725,10 @@ msgstr "Collectieversie permanent verwijderen?"
 msgid "Permanently delete collection?"
 msgstr "Collectie permanent verwijderen?"
 
+#: src/containers/execution-environment-list/execution_environment_list.tsx:185
+msgid "Permanently delete container?"
+msgstr ""
+
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:209
 #~ msgid "Permanently delete image"
 #~ msgstr "Permanently delete image"
@@ -1729,19 +1741,19 @@ msgstr "Afbeelding permanent verwijderen?"
 msgid "Permanently delete namespace?"
 msgstr "Namespace permanent verwijderen?"
 
-#: src/containers/group-management/group-detail.tsx:292
+#: src/containers/group-management/group-detail.tsx:294
 msgid "Permission {0} was not removed."
 msgstr "Machtiging {0} werd niet verwijderd."
 
-#: src/containers/group-management/group-detail.tsx:277
+#: src/containers/group-management/group-detail.tsx:279
 msgid "Permission {permission} was not added."
 msgstr "Machtiging {permission} werd niet toegevoegd."
 
-#: src/containers/group-management/group-detail.tsx:166
+#: src/containers/group-management/group-detail.tsx:168
 msgid "Permissions"
 msgstr "Machtigingen"
 
-#: src/containers/group-management/group-detail.tsx:220
+#: src/containers/group-management/group-detail.tsx:222
 msgid "Please finish editing permissions first."
 msgstr "Maak eerst het bewerken van de machtigingen af."
 
@@ -1990,7 +2002,7 @@ msgstr "Externe naam"
 msgid "Remote repositories will appear once added"
 msgstr "Externe repository's zullen verschijnen zodra ze zijn toegevoegd"
 
-#: src/containers/group-management/group-detail.tsx:816
+#: src/containers/group-management/group-detail.tsx:821
 msgid "Remove"
 msgstr "Verwijderen"
 
@@ -1998,7 +2010,7 @@ msgstr "Verwijderen"
 msgid "Remove content from repository"
 msgstr "Inhoud verwijderen uit repository"
 
-#: src/containers/group-management/group-detail.tsx:569
+#: src/containers/group-management/group-detail.tsx:574
 msgid "Remove user from group?"
 msgstr "Gebruiker uit groep verwijderen?"
 
@@ -2061,7 +2073,7 @@ msgstr "SSO URL"
 #: src/containers/edit-namespace/edit-namespace.tsx:192
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:139
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:125
-#: src/containers/group-management/group-detail.tsx:406
+#: src/containers/group-management/group-detail.tsx:411
 msgid "Save"
 msgstr "Opslaan"
 
@@ -2109,12 +2121,12 @@ msgstr "Input selecteren"
 msgid "Select namespace"
 msgstr "Namespace selecteren"
 
-#: src/components/permissions/permission-chip-selector.tsx:50
-#: src/components/permissions/permission-chip-selector.tsx:78
+#: src/components/permissions/permission-chip-selector.tsx:67
+#: src/components/permissions/permission-chip-selector.tsx:97
 msgid "Select permissions"
 msgstr "Machtigingen selecteren"
 
-#: src/containers/group-management/group-detail.tsx:510
+#: src/containers/group-management/group-detail.tsx:515
 msgid "Select users"
 msgstr "Gebruikers selecteren"
 
@@ -2122,7 +2134,7 @@ msgstr "Gebruikers selecteren"
 msgid "Server URL"
 msgstr "Server-URL"
 
-#: src/containers/login/login.tsx:105
+#: src/containers/login/login.tsx:106
 msgid "Server error. Please come back later."
 msgstr "Fout bij de server. Kom a.u.b. later terug."
 
@@ -2209,7 +2221,7 @@ msgstr "Collectieversie succesvol verwijderd."
 msgid "Successfully deleted collection."
 msgstr "Collectie succesvol verwijderd."
 
-#: src/containers/group-management/group-detail.tsx:535
+#: src/containers/group-management/group-detail.tsx:540
 #: src/containers/group-management/group-list.tsx:438
 msgid "Successfully deleted group."
 msgstr "Groep succesvol verwijderd."
@@ -2226,7 +2238,7 @@ msgstr "Extern register {name} succesvol verwijderd"
 msgid "Successfully deleted user."
 msgstr "Gebruiker succesvol verwijderd."
 
-#: src/containers/group-management/group-detail.tsx:852
+#: src/containers/group-management/group-detail.tsx:857
 msgid "Successfully removed a user from a group."
 msgstr "Een gebruiker succesvol verwijderd uit een groep."
 
@@ -2552,7 +2564,7 @@ msgid "User details"
 msgstr "Gebruikersdetails"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:332
-#: src/containers/group-management/group-detail.tsx:774
+#: src/containers/group-management/group-detail.tsx:779
 #: src/containers/user-management/user-list.tsx:299
 msgid "User list"
 msgstr "Gebruikerslijst"
@@ -2564,10 +2576,11 @@ msgstr "Type gebruiker"
 #: src/components/repositories/remote-form.tsx:345
 #: src/components/user-form/user-form.tsx:85
 #: src/containers/about-modal/about-modal.tsx:77
-#: src/containers/group-management/group-detail.tsx:669
-#: src/containers/group-management/group-detail.tsx:741
+#: src/containers/group-management/group-detail.tsx:674
+#: src/containers/group-management/group-detail.tsx:746
 #: src/containers/login/login.tsx:56
 #: src/containers/user-management/user-list.tsx:162
+#: src/containers/user-management/user-list.tsx:210
 #: src/containers/user-management/user-list.tsx:259
 msgid "Username"
 msgstr "Gebruikersnaam"
@@ -2577,7 +2590,7 @@ msgid "Username: {0}"
 msgstr "Gebruikersnaam: {0}"
 
 #: src/constants.tsx:45
-#: src/containers/group-management/group-detail.tsx:168
+#: src/containers/group-management/group-detail.tsx:170
 #: src/containers/user-management/user-create.tsx:49
 #: src/containers/user-management/user-detail.tsx:81
 #: src/containers/user-management/user-edit.tsx:63
@@ -2586,7 +2599,7 @@ msgstr "Gebruikersnaam: {0}"
 msgid "Users"
 msgstr "Gebruikers"
 
-#: src/containers/group-management/group-detail.tsx:635
+#: src/containers/group-management/group-detail.tsx:640
 msgid "Users will appear once added to this group"
 msgstr "Gebruikers verschijnen nadat ze zijn toegevoegd aan deze groep"
 
@@ -2732,7 +2745,7 @@ msgstr "U moet ingelogd zijn om de tarball te kunnen downloaden."
 msgid "You have unsaved changes"
 msgstr "Er zijn niet-opgeslagen wijzigingen"
 
-#: src/containers/group-management/group-detail.tsx:435
+#: src/containers/group-management/group-detail.tsx:440
 msgid "add-user-modal"
 msgstr "add-user-modal"
 
@@ -2797,6 +2810,10 @@ msgstr "wacht tot importeren is voltooid"
 #: src/components/headers/collection-header.tsx:382
 msgid "{0} released {1}"
 msgstr "{0} heeft {1} vrijgegeven"
+
+#: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
+msgid "{0} was added"
+msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx:223
 msgid "{0} will be deleted."
