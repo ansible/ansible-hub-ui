@@ -39,6 +39,10 @@ jobs:
         node-version: '16'
         cache: 'npm'
 
+    - uses: actions/setup-go@v2
+      with:
+        go-version: '1.17'
+
     - name: "Checks"
       run: |
         # fail if npm install had to change package-lock.json
