@@ -41,6 +41,7 @@ interface Props {
   };
   selected?: RoleType[] | RoleType;
   onSelect?: (selectedRole: RoleType, selectedRoles?: RoleType[]) => void;
+  isStickyHeader?: boolean;
 }
 
 export const RoleListTable = ({
@@ -54,6 +55,7 @@ export const RoleListTable = ({
   tableHeader,
   selected,
   onSelect,
+  isStickyHeader = false,
 }: Props) => {
   if (variant === 'checkbox' && !Array.isArray(selected)) {
     throw new Error(
@@ -140,6 +142,7 @@ export const RoleListTable = ({
       aria-label='role-list-table'
       data-cy='RoleListTable'
       variant={isCompact ? 'compact' : undefined}
+      isStickyHeader={isStickyHeader}
     >
       <SortTable
         options={tableHeader ?? defaultTableHeader}
@@ -201,7 +204,10 @@ export const RoleListTable = ({
                       return (
                         <div
                           key={i}
-                          onClick={() => item.props.onClick(role.name)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            item.props.onClick(role);
+                          }}
                         >
                           {updatedItem}
                         </div>
