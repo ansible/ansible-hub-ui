@@ -1,0 +1,13 @@
+{
+  "Exclude": [
+    "\\.svg$",
+    "^.git\\/",
+    "^LICENSE$",
+    "^\\.travis\\/deploy_key\\.enc$",
+    "^\\.travis\\/deploy_manifest\\.gpg$",
+    "^dist\\/",
+    "^locale\\/.*\\.js$",
+    "^node_modules\\/",
+    "^test\\/results\\/"
+  ]
+}

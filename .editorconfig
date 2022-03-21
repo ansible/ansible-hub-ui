@@ -1,0 +1,19 @@
+# don't look up
+root = true
+
+# unix newlines, final newline, UTF-8, and 2 spaces for indent
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+
+# markdown must allow trailing spaces
+[*.md]
+trim_trailing_whitespace = false
+
+# Makefiles can't use spaces
+[Makefile]
+indent_style = tab
