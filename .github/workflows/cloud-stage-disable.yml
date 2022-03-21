@@ -18,8 +18,7 @@ jobs:
         git config --global user.name 'GH Actions'
         git config --global user.email 'gh_actions@users.noreply.github.com'
 
-        rm .cloud-stage-cron.enabled
-        git add .cloud-stage-cron.enabled
+        git rm -f .cloud-stage-cron.enabled
 
         git commit -m 'Disable cloud stage cron deploy '`date --iso=d`
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ansible/ansible-hub-ui.git
