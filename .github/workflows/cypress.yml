@@ -111,16 +111,16 @@ jobs:
         " | sed 's/^\s\+//' | tee settings/settings.py
 
         podman run \
-             --detach \
-             --publish 8002:80 \
-             --name pulp \
-             --volume "$(pwd)/settings":/etc/pulp \
-             --volume "$(pwd)/static":/galaxy_ng_static \
-             --tmpfs /var/lib/pulp \
-             --tmpfs /var/lib/pgsql \
-             --tmpfs /var/lib/containers \
-             --device /dev/fuse \
-             localhost/pulp/pulp-galaxy-ng:latest
+          --detach \
+          --publish 8002:80 \
+          --name pulp \
+          --volume "$(pwd)/settings":/etc/pulp \
+          --volume "$(pwd)/static":/galaxy_ng_static \
+          --tmpfs /var/lib/pulp \
+          --tmpfs /var/lib/pgsql \
+          --tmpfs /var/lib/containers \
+          --device /dev/fuse \
+          localhost/pulp/pulp-galaxy-ng:latest
 
     - name: "Install node 16"
       uses: actions/setup-node@v2
