@@ -1,0 +1,25 @@
+name: "Push master to master-stable"
+
+on:
+  workflow_dispatch: # allow running manually
+  schedule:
+  - cron: '0 13 * * 2,4' # Tuesdays and Thursdays, 13:00 UTC
+
+jobs:
+  cloud:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: "Checkout ansible-hub-ui master"
+      uses: actions/checkout@v2
+      with:
+        ref: 'master'
+
+    - name: "Fail if paused"
+      run: |
+        [ -f .cloud-stage-cron.enabled ] || exit 1
+
+    - name: "Push to master-stable"
+      run: |
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ansible/ansible-hub-ui.git
+        git push origin master:master-stable
