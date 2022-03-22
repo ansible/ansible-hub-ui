@@ -18,6 +18,7 @@ export class CollectionVersion {
   namespace: string;
   name: string;
   repository_list: string[];
+  sign_state: 'signed' | 'unsigned' | 'partial';
 }
 
 class RenderedFile {

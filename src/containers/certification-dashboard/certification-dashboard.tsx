@@ -17,10 +17,11 @@ import {
   ToolbarItem,
   Button,
   DropdownItem,
+  Label,
 } from '@patternfly/react-core';
 
 import {
-  InfoCircleIcon,
+  ExclamationTriangleIcon,
   ExclamationCircleIcon,
   CheckCircleIcon,
 } from '@patternfly/react-icons';
@@ -296,32 +297,29 @@ class CertificationDashboard extends React.Component<
     }
     if (version.repository_list.includes(Constants.PUBLISHED)) {
       return (
-        <span>
-          <CheckCircleIcon
-            style={{ color: 'var(--pf-global--success-color--100)' }}
-          />{' '}
-          {t`Approved`}
-        </span>
+        <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
+          {version.sign_state === 'signed'
+            ? t`Signed and approved`
+            : t`Approved`}
+        </Label>
       );
     }
     if (version.repository_list.includes(Constants.NOTCERTIFIED)) {
       return (
-        <span>
-          <ExclamationCircleIcon
-            style={{ color: 'var(--pf-global--danger-color--100)' }}
-          />{' '}
+        <Label variant='outline' color='red' icon={<ExclamationCircleIcon />}>
           {t`Rejected`}
-        </span>
+        </Label>
       );
     }
     if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
       return (
-        <span>
-          <InfoCircleIcon
-            style={{ color: 'var(--pf-global--info-color--100)' }}
-          />{' '}
+        <Label
+          variant='outline'
+          color='orange'
+          icon={<ExclamationTriangleIcon />}
+        >
           {t`Needs Review`}
-        </span>
+        </Label>
       );
     }
   }
@@ -360,6 +358,11 @@ class CertificationDashboard extends React.Component<
   }
 
   private renderButtons(version: CollectionVersion) {
+    const canSign =
+      this.context?.featureFlags?.collection_signing === true &&
+      this.context?.featureFlags?.collection_auto_sign === true &&
+      this.context?.user?.model_permissions?.sign_collections_on_namespace;
+
     if (this.state.updatingVersions.includes(version)) {
       return;
     }
@@ -392,7 +395,7 @@ class CertificationDashboard extends React.Component<
         isDisabled={isDisabled}
         key='certify'
       >
-        {t`Approve`}
+        {canSign ? t`Sign and approve` : t`Approve`}
       </DropdownItem>
     );
 
@@ -451,7 +454,7 @@ class CertificationDashboard extends React.Component<
               )
             }
           >
-            <span>{t`Approve`}</span>
+            <span>{canSign ? t`Sign and approve` : t`Approve`}</span>
           </Button>
           <StatefulDropdown
             items={[rejectDropDown(false, Constants.NEEDSREVIEW), importsLink]}
