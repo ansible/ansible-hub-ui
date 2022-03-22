@@ -17,10 +17,14 @@ interface SignVersion extends SignCollection {
 type SignProps = SignNamespace | SignCollection | SignVersion;
 
 class API extends HubAPI {
-  apiPath = 'v3/sign/collections/';
+  apiPath = '_ui/v1/collection_signing/';
 
   sign(data: SignProps) {
-    return this.http.post(this.apiPath, data);
+    const { repository: distro_base_path, ...rest } = data;
+    return this.http.post(this.apiPath, {
+      ...rest,
+      distro_base_path,
+    });
   }
 }
 
