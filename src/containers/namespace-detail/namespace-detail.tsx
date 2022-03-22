@@ -413,7 +413,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
-      repository: this.context.selectedRepo,
+      distro_base_path: this.context.selectedRepo,
       namespace: namespace.name,
     })
       .then((result) => {

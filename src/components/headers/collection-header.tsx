@@ -592,7 +592,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
-      repository: this.context.selectedRepo,
+      distro_base_path: this.context.selectedRepo,
       namespace: this.props.collection.namespace.name,
       collection: this.props.collection.name,
     })
@@ -643,7 +643,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
-      repository: this.context.selectedRepo,
+      distro_base_path: this.context.selectedRepo,
       namespace: this.props.collection.namespace.name,
       collection: this.props.collection.name,
       version: this.props.collection.latest_version.version,
