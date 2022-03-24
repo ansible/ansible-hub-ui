@@ -9,6 +9,7 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  ListItemActions,
   Main,
 } from 'src/components';
 import {
@@ -30,7 +31,6 @@ import { CollectionVersionAPI, CollectionVersion, TaskAPI } from 'src/api';
 import { errorMessage, filterIsSet, ParamHelper } from 'src/utilities';
 import {
   LoadingPageWithHeader,
-  StatefulDropdown,
   CompoundFilter,
   LoadingPageSpinner,
   AppliedFilters,
@@ -350,9 +350,7 @@ class CertificationDashboard extends React.Component<
           <DateComponent date={version.created_at} />
         </td>
         <td>{this.renderStatus(version)}</td>
-        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
-          {this.renderButtons(version)}
-        </td>
+        {this.renderButtons(version)}
       </tr>
     );
   }
@@ -364,8 +362,23 @@ class CertificationDashboard extends React.Component<
       this.context?.user?.model_permissions?.sign_collections_on_namespace;
 
     if (this.state.updatingVersions.includes(version)) {
-      return;
+      return <ListItemActions />; // empty td;
     }
+
+    const approveButton = [
+      <Button
+        key='approve'
+        onClick={() =>
+          this.updateCertification(
+            version,
+            Constants.NEEDSREVIEW,
+            Constants.PUBLISHED,
+          )
+        }
+      >
+        <span>{canSign ? t`Sign and approve` : t`Approve`}</span>
+      </Button>,
+    ];
     const importsLink = (
       <DropdownItem
         key='imports'
@@ -418,48 +431,35 @@ class CertificationDashboard extends React.Component<
 
     if (version.repository_list.includes(Constants.PUBLISHED)) {
       return (
-        <span>
-          <StatefulDropdown
-            items={[
-              certifyDropDown(true, Constants.PUBLISHED),
-              rejectDropDown(false, Constants.PUBLISHED),
-              importsLink,
-            ]}
-          />
-        </span>
+        <ListItemActions
+          kebabItems={[
+            certifyDropDown(true, Constants.PUBLISHED),
+            rejectDropDown(false, Constants.PUBLISHED),
+            importsLink,
+          ]}
+        />
       );
     }
     if (version.repository_list.includes(Constants.NOTCERTIFIED)) {
       return (
-        <span>
-          <StatefulDropdown
-            items={[
-              certifyDropDown(false, Constants.NOTCERTIFIED),
-              rejectDropDown(true, Constants.NOTCERTIFIED),
-              importsLink,
-            ]}
-          />
-        </span>
+        <ListItemActions
+          kebabItems={[
+            certifyDropDown(false, Constants.NOTCERTIFIED),
+            rejectDropDown(true, Constants.NOTCERTIFIED),
+            importsLink,
+          ]}
+        />
       );
     }
     if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
       return (
-        <span>
-          <Button
-            onClick={() =>
-              this.updateCertification(
-                version,
-                Constants.NEEDSREVIEW,
-                Constants.PUBLISHED,
-              )
-            }
-          >
-            <span>{canSign ? t`Sign and approve` : t`Approve`}</span>
-          </Button>
-          <StatefulDropdown
-            items={[rejectDropDown(false, Constants.NEEDSREVIEW), importsLink]}
-          />
-        </span>
+        <ListItemActions
+          kebabItems={[
+            rejectDropDown(false, Constants.NEEDSREVIEW),
+            importsLink,
+          ]}
+          buttons={approveButton}
+        />
       );
     }
   }

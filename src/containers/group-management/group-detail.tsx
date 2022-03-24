@@ -26,12 +26,12 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  ListItemActions,
   LoadingPageWithHeader,
   Main,
   Pagination,
   PermissionChipSelector,
   SortTable,
-  StatefulDropdown,
   Tabs,
 } from 'src/components';
 import {
@@ -852,6 +852,19 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const currentUser = this.context.user;
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
+
+    const dropdownItems = [
+      !!currentUser &&
+        currentUser.model_permissions.change_group &&
+        !isUserMgmtDisabled && (
+          <DropdownItem
+            key='delete'
+            onClick={() => this.setState({ showUserRemoveModal: user })}
+          >
+            {t`Remove`}
+          </DropdownItem>
+        ),
+    ];
     if (featureFlags) {
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
@@ -868,23 +881,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <td>
           <DateComponent date={user.date_joined} />
         </td>
-        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
-          {' '}
-          {!!currentUser &&
-            currentUser.model_permissions.change_group &&
-            !isUserMgmtDisabled && (
-              <StatefulDropdown
-                items={[
-                  <DropdownItem
-                    key='delete'
-                    onClick={() => this.setState({ showUserRemoveModal: user })}
-                  >
-                    {t`Remove`}
-                  </DropdownItem>,
-                ]}
-              ></StatefulDropdown>
-            )}
-        </td>
+        <ListItemActions kebabItems={dropdownItems} />
       </tr>
     );
   }

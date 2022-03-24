@@ -5,7 +5,7 @@ import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import { RemoteType, UserType, PulpStatus } from 'src/api';
-import { DateComponent, SortTable, StatefulDropdown } from 'src/components';
+import { DateComponent, SortTable, ListItemActions } from 'src/components';
 import { Constants } from 'src/constants';
 import { lastSynced, lastSyncStatus } from 'src/utilities';
 
@@ -110,6 +110,25 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
   private renderRow(remote, i) {
     const { user } = this.props;
+    const buttons = remote.repositories.length
+      ? this.getConfigureOrSyncButton(remote)
+      : [
+          <Tooltip
+            content={t`There are no repos associated with this remote.`}
+            key='empty'
+          >
+            <Button variant='plain'>
+              <ExclamationCircleIcon />
+            </Button>
+          </Tooltip>,
+        ];
+    const dropdownItems = [
+      remote.repositories.length && user?.model_permissions?.change_remote && (
+        <DropdownItem key='edit' onClick={() => this.props.editRemote(remote)}>
+          {t`Edit`}
+        </DropdownItem>
+      ),
+    ];
     return (
       <tr key={i}>
         <td>{remote.name}</td>
@@ -123,70 +142,44 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
         )}
         <td>{lastSynced(remote) || '---'}</td>
         <td>{lastSyncStatus(remote) || '---'}</td>
-        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
-          {remote.repositories.length === 0 ? (
-            <Tooltip
-              content={t`There are no repos associated with this remote.`}
-            >
-              <Button variant='plain'>
-                <ExclamationCircleIcon />
-              </Button>
-            </Tooltip>
-          ) : (
-            !!user &&
-            user.model_permissions.change_remote && (
-              <>
-                {this.getConfigureOrSyncButton(remote)}
-                <span>
-                  <StatefulDropdown
-                    items={[
-                      <DropdownItem
-                        key='edit'
-                        onClick={() => this.props.editRemote(remote)}
-                      >
-                        {t`Edit`}
-                      </DropdownItem>,
-                    ]}
-                  />
-                </span>
-              </>
-            )
-          )}
-        </td>
+        <ListItemActions kebabItems={dropdownItems} buttons={buttons} />
       </tr>
     );
   }
 
   private getConfigureOrSyncButton(remote: RemoteType) {
     const { user } = this.props;
-    if (!!user && !user.model_permissions.change_remote) {
+    if (!user?.model_permissions?.change_remote) {
       return null;
     }
-    const configButton = (
-      <Button onClick={() => this.props.editRemote(remote)} variant='secondary'>
+    const configButton = [
+      <Button
+        key='config'
+        onClick={() => this.props.editRemote(remote)}
+        variant='secondary'
+      >
         {t`Configure`}
-      </Button>
-    );
+      </Button>,
+    ];
 
-    const syncButton = (
-      <>
-        <Button
-          isDisabled={
-            remote.repositories.length === 0 ||
-            (remote.last_sync_task &&
-              ['running', 'waiting'].includes(remote.last_sync_task.state))
-          }
-          onClick={() =>
-            this.props.syncRemote(
-              remote.repositories[0].distributions[0].base_path,
-            )
-          }
-          variant='secondary'
-        >
-          {t`Sync`}
-        </Button>
-      </>
-    );
+    const syncButton = [
+      <Button
+        key='sync'
+        isDisabled={
+          remote.repositories.length === 0 ||
+          (remote.last_sync_task &&
+            ['running', 'waiting'].includes(remote.last_sync_task.state))
+        }
+        onClick={() =>
+          this.props.syncRemote(
+            remote.repositories[0].distributions[0].base_path,
+          )
+        }
+        variant='secondary'
+      >
+        {t`Sync`}
+      </Button>,
+    ];
 
     let remoteType = 'none';
 

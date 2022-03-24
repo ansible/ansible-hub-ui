@@ -66,7 +66,7 @@ describe('RBAC test for user without permissions', () => {
   it('should not be able to create remote registries, edit or delete when user does not have permissions', () => {
     cy.visit('/ui/registries');
     cy.contains('Add remote registry').should('not.exist');
-    cy.get('[aria-label=registry-list-kebab]').click();
+    cy.get('[data-cy=kebab-toggle]').click();
     cy.contains('Edit').should('not.exist');
     cy.contains('Delete').should('not.exist');
   });
@@ -138,7 +138,7 @@ describe('RBAC test for user with all permissions', () => {
   it('should display create, edit and delete buttons when user has permissions', () => {
     cy.visit('/ui/registries');
     cy.contains('Add remote registry').should('exist');
-    cy.get('[aria-label=registry-list-kebab]').click();
+    cy.get('[data-cy=kebab-toggle]').click();
     cy.contains('Edit').should('exist');
     cy.contains('Delete').should('exist');
   });

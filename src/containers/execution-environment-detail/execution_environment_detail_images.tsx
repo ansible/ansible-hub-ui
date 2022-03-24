@@ -40,7 +40,6 @@ import {
   TagLabel,
   TagManifestModal,
   PublishToControllerModal,
-  StatefulDropdown,
   AlertList,
   closeAlertMixin,
   AlertType,
@@ -48,6 +47,7 @@ import {
   ClipboardCopy,
   DeleteModal,
   LoadingPageSpinner,
+  ListItemActions,
 } from '../../components';
 
 import { withContainerRepo, IDetailSharedProps } from './base';
@@ -468,12 +468,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               {'podman pull ' + url + '/' + instruction}
             </ClipboardCopy>
           </td>
-
-          <td style={{ paddingRight: '0px', textAlign: 'right' }}>
-            {dropdownItems.length && (
-              <StatefulDropdown items={dropdownItems}></StatefulDropdown>
-            )}
-          </td>
+          <ListItemActions kebabItems={dropdownItems} />
         </tr>
 
         {expandedImage === image && (

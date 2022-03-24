@@ -33,11 +33,11 @@ import {
   EmptyStateNoData,
   EmptyStateUnauthorized,
   GroupModal,
+  ListItemActions,
   LoadingPageSpinner,
   Main,
   Pagination,
   SortTable,
-  StatefulDropdown,
 } from 'src/components';
 import {
   Button,
@@ -447,11 +447,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             {group.name}
           </Link>
         </td>
-        <td style={{ paddingRight: '0px', textAlign: 'right' }}>
-          {dropdownItems.length > 0 && (
-            <StatefulDropdown items={dropdownItems} />
-          )}
-        </td>
+        <ListItemActions kebabItems={dropdownItems} />
       </tr>
     );
   }
