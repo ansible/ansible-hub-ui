@@ -1,4 +1,4 @@
-describe('Remote Registry Tests', () => {
+describe(['standalone'], 'Remote Registry Tests', () => {
   before(() => {
     cy.visit('/');
     cy.login();

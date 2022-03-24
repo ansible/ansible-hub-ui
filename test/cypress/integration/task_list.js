@@ -1,4 +1,4 @@
-describe('Task table contains correct headers and filter', () => {
+describe(['standalone'], 'Task table contains correct headers and filter', () => {
   before(() => {
     cy.login();
     cy.visit('/ui/repositories?tab=remote');

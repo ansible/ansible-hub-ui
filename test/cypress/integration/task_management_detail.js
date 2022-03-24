@@ -1,4 +1,4 @@
-describe('Task detail', () => {
+describe(['standalone'], 'Task detail', () => {
   before(() => {
     cy.login();
     cy.visit('/ui/repositories?tab=remote');
@@ -14,8 +14,8 @@ describe('Task detail', () => {
       'remotes',
     );
 
-    cy.wait('@sync');
-    cy.wait('@remotes');
+    cy.wait('@sync', {timeout: 15000});
+    cy.wait('@remotes', {timeout: 15000});
   });
 
   it('contains correct headers and field names.', () => {

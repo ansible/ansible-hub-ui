@@ -1,6 +1,5 @@
 // This tests the filter on user page. Should apply partial matchMedia.
-
-describe('Search for users', () => {
+describe(['standalone'], 'Search for users', () => {
   before(() => {
     cy.deleteTestUsers();
   });

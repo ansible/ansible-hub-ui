@@ -1,4 +1,4 @@
-describe('Group Permissions Tests', () => {
+describe(['standalone'], 'Group Permissions Tests', () => {
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
 

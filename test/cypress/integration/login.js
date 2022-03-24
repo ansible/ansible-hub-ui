@@ -1,4 +1,4 @@
-describe('Login helpers', () => {
+describe(['standalone'], 'Login helpers', () => {
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
   let username = 'nopermission';

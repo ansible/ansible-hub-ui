@@ -1,4 +1,4 @@
-describe('Namespaces Page Tests', () => {
+describe(['standalone'], 'Namespaces Page Tests', () => {
   before(() => {
     cy.deleteTestUsers();
     cy.deleteTestGroups();

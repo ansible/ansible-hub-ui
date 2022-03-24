@@ -1,4 +1,4 @@
-describe('API Token Tests', () => {
+describe(['standalone'], 'API Token Tests', () => {
   beforeEach(() => {
     cy.login();
   });

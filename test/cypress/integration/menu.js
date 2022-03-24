@@ -1,4 +1,4 @@
-describe('Hub Menu Tests', () => {
+describe(['standalone'], 'Hub Menu Tests', () => {
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
   let username = 'nopermission';

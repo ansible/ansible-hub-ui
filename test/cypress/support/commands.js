@@ -84,6 +84,18 @@ Cypress.Commands.add('manualLogin', {}, (username, password) => {
   cy.wait('@feature-flags');
 });
 
+Cypress.Commands.add('manualCloudLogin', {}, (username, password) => {
+  cy.visit('/');
+  // type in the username
+  cy.get('#username-verification').type(username);
+  // click next
+  cy.get('#login-show-step2').click()
+  cy.get('#password').type(`${password}{enter}`);
+  //cy.wait('@login');
+  cy.get('#UserMenu');
+  //cy.wait('@feature-flags');
+});
+
 Cypress.Commands.add('cookieLogout', {}, () => {
   cy.clearCookie('sessionid');
   cy.clearCookie('csrftoken');

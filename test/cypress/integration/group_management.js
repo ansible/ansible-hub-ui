@@ -1,4 +1,4 @@
-describe('Hub Group Management Tests', () => {
+describe(['standalone'], 'Hub Group Management Tests', () => {
   before(() => {
     cy.deleteTestGroups();
     cy.deleteTestGroups();

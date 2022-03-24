@@ -6,7 +6,7 @@ const userPassword = 'I am a complicated passw0rd';
 
 const groupName = 'testgroup';
 
-describe('RBAC test for user without permissions', () => {
+describe(['standalone'], 'RBAC test for user without permissions', () => {
   before(() => {
     cy.login(adminUsername, adminPassword);
 
@@ -72,7 +72,7 @@ describe('RBAC test for user without permissions', () => {
   });
 });
 
-describe('RBAC test for user with all permissions', () => {
+describe(['standalone'], 'RBAC test for user with all permissions', () => {
   before(() => {
     cy.login(adminUsername, adminPassword);
 

@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:chrome": "cypress run --browser chrome --headless",
+    "cypress:chrome:one": "cypress run --browser chrome --headless",
     "cypress:chromium": "cypress run --browser chromium-browser --headless",
     "cypress:firefox": "cypress run --browser firefox --headless",
     "cypress": "cypress open"
@@ -13,13 +14,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^9.5.1",
+    "cypress": "^9.5.2",
     "cypress-log-to-output": "^1.1.2",
     "cypress-multi-reporters": "^1.5.0"
   },
   "dependencies": {
     "cypress-file-upload": "^5.0.8",
+    "cypress-tags": "^0.3.0",
     "shell-escape-tag": "^2.0.2",
+    "typescript": "^4.6.2",
     "url-join": "^4.0.1"
   }
 }

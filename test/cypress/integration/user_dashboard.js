@@ -1,4 +1,4 @@
-describe('Hub User Management Tests', () => {
+describe(['standalone'], 'Hub User Management Tests', () => {
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
   let username = 'test';

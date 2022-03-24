@@ -1,4 +1,4 @@
-describe('Token Management Tests', () => {
+describe(['standalone'], 'Token Management Tests', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.login();
