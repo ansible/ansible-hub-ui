@@ -1,0 +1,1 @@
+When configuring remotes user is able to set `signed_only` to True. When that field is set to True, only signed collections are synced.

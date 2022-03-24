@@ -12,9 +12,12 @@ import {
   Modal,
   Checkbox,
   ExpandableSection,
+  Switch,
 } from '@patternfly/react-core';
 
 import { WriteOnlyField, HelperText, FileUpload } from 'src/components';
+
+import { AppContext } from 'src/loaders/app-context';
 
 import {
   DownloadIcon,
@@ -55,6 +58,8 @@ interface IState {
 }
 
 export class RemoteForm extends React.Component<IProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -137,7 +142,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           </Button>,
           <Button
             key='cancel'
-            variant='secondary'
+            variant='link'
             onClick={() => this.props.closeModal()}
           >
             {t`Cancel`}
@@ -223,6 +228,20 @@ export class RemoteForm extends React.Component<IProps, IState> {
             onChange={(value) => this.updateRemote(value, 'url')}
           />
         </FormGroup>
+
+        {this.context?.featureFlags?.collection_signing === true && (
+          <FormGroup
+            fieldId={'signed_only'}
+            name={t`Signed only`}
+            label={t`Download only signed collections`}
+          >
+            <Switch
+              id='signed_only'
+              isChecked={remote.signed_only}
+              onChange={(value) => this.updateRemote(value, 'signed_only')}
+            />
+          </FormGroup>
+        )}
 
         {!disabledFields.includes('token') && (
           <FormGroup
