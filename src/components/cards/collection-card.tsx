@@ -15,7 +15,7 @@ import {
 
 import { Link } from 'react-router-dom';
 
-import { NumericLabel, Logo } from 'src/components';
+import { NumericLabel, Logo, SignatureBadge } from 'src/components';
 import { CollectionListType } from 'src/api';
 import { formatPath, Paths } from 'src/paths';
 import { convertContentSummaryCounts } from 'src/utilities';
@@ -31,8 +31,15 @@ export class CollectionCard extends React.Component<IProps> {
   MAX_DESCRIPTION_LENGTH = 60;
 
   render() {
-    const { name, latest_version, namespace, className, footer, repo } =
-      this.props;
+    const {
+      name,
+      latest_version,
+      namespace,
+      className,
+      footer,
+      repo,
+      sign_state,
+    } = this.props;
 
     const company = namespace.company || namespace.name;
     const contentSummary = convertContentSummaryCounts(latest_version.metadata);
@@ -48,6 +55,7 @@ export class CollectionCard extends React.Component<IProps> {
             unlockWidth
           />
           <TextContent>{this.getCertification(repo)}</TextContent>
+          <SignatureBadge isCompact signState={sign_state} />
         </CardHeader>
         <CardHeader>
           <div className='name'>
