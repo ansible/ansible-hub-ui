@@ -95,11 +95,8 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const { user } = this.context;
     const { tokenData, alerts } = this.state;
-    const renewTokenCmd = `curl https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token -d grant_type=refresh_token -d client_id="${
-      user.username
-    }" -d refresh_token="${
+    const renewTokenCmd = `curl https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token -d grant_type=refresh_token -d client_id="cloud-services" -d refresh_token="${
       tokenData?.refresh_token ?? '{{ user_token }}'
     }" --fail --silent --show-error --output /dev/null`;
 
