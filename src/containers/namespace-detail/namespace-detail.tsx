@@ -559,7 +559,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       NamespaceAPI.delete(name)
         .then(() => {
           this.setState({
-            redirect: formatPath(Paths.namespaces, {}),
+            redirect: formatPath(namespaceBreadcrumb.url, {}),
             confirmDelete: false,
             isNamespacePending: false,
           });
