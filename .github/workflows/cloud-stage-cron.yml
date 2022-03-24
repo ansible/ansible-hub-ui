@@ -23,4 +23,7 @@ jobs:
       run: |
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ansible/ansible-hub-ui.git
         git fetch --all
+        git log -1 origin/master
+        git log -1 origin/master-stable
+        git log -1 HEAD
         git push origin master:master-stable
