@@ -1,12 +1,25 @@
 import { t } from '@lingui/macro';
+import { Constants } from './constants';
 import { ParamHelper } from './utilities/param-helper';
 
-export function formatPath(
+const replaceNamespaceWithPartners = (path: Paths): string => {
+  if (DEPLOYMENT_MODE !== Constants.INSIGHTS_DEPLOYMENT_MODE) {
+    return path;
+  }
+
+  if (path === Paths.namespaces) {
+    return Paths.partners;
+  } else {
+    return path;
+  }
+};
+
+export const formatPath = (
   path: Paths,
   data,
   params?: Record<string, string | boolean>,
-) {
-  let url = path as string;
+) => {
+  let url = replaceNamespaceWithPartners(path);
 
   for (const k of Object.keys(data)) {
     url = url.replace(':' + k + '+', data[k]).replace(':' + k, data[k]);
@@ -17,7 +30,7 @@ export function formatPath(
   } else {
     return url;
   }
-}
+};
 
 export enum Paths {
   executionEnvironmentDetailActivities = '/containers/:container+/_content/activity',
