@@ -24,6 +24,7 @@
   },
   globals: {
     // overridden in test/.eslintrc
+    APPLICATION_NAME: "readonly",
     NAMESPACE_TERM: "readonly",
   },
   rules: {

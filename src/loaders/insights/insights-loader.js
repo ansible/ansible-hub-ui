@@ -27,6 +27,7 @@ class App extends Component {
   componentDidMount() {
     window.insights.chrome.init();
     window.insights.chrome.identifyApp('automation-hub');
+    document.title = APPLICATION_NAME; // change window title from automationHub
 
     // This listens for insights navigation events, so this will fire
     // when items in the nav are clicked or the app is loaded for the first
