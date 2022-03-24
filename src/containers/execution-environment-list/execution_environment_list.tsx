@@ -104,7 +104,12 @@ class ExecutionEnvironmentList extends React.Component<
       this.setState({ unauthorized: true, loading: false });
     } else {
       this.queryEnvironments();
+      this.setState({ alerts: this.context.alerts });
     }
+  }
+
+  componentWillUnmount() {
+    this.context.setAlerts([]);
   }
 
   render() {
