@@ -17,7 +17,7 @@ msgstr ""
 msgid "(latest)"
 msgstr "(dernier)"
 
-#: src/components/repositories/remote-form.tsx:167
+#: src/components/repositories/remote-form.tsx:172
 msgid "(uploaded)"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr "<0/> a été supprimé"
 msgid "<0/> was removed from <1/>"
 msgstr "<0/> a été retiré de <1/>"
 
-#: src/components/collection-detail/collection-info.tsx:77
+#: src/components/collection-detail/collection-info.tsx:78
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>Remarque:</0> L'installation de collections avec ansible-galaxy n'est prise en charge que dans ansible 2.9+"
 
@@ -85,12 +85,12 @@ msgstr "<0>{name}</0> sera définitivement supprimé."
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> sera retiré de <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:531
-#: src/components/repositories/remote-form.tsx:577
+#: src/components/repositories/remote-form.tsx:550
+#: src/components/repositories/remote-form.tsx:596
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "Un certificat client codé PEM utilisé pour l'authentification."
 
-#: src/components/repositories/remote-form.tsx:501
+#: src/components/repositories/remote-form.tsx:520
 msgid "A PEM encoded private key used for authentication."
 msgstr "Une clé privée codée PEM utilisée pour l'authentification."
 
@@ -240,7 +240,7 @@ msgstr "Tous"
 msgid "Approval"
 msgstr "Approbation"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:120
+#: src/containers/certification-dashboard/certification-dashboard.tsx:121
 msgid "Approval dashboard"
 msgstr "Tableau de bord des approbations"
 
@@ -248,13 +248,13 @@ msgstr "Tableau de bord des approbations"
 msgid "Approval status:"
 msgstr "Statut d'approbation :"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:395
-#: src/containers/certification-dashboard/certification-dashboard.tsx:454
+#: src/containers/certification-dashboard/certification-dashboard.tsx:379
+#: src/containers/certification-dashboard/certification-dashboard.tsx:411
 msgid "Approve"
 msgstr "Approuver"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:167
-#: src/containers/certification-dashboard/certification-dashboard.tsx:196
+#: src/containers/certification-dashboard/certification-dashboard.tsx:168
+#: src/containers/certification-dashboard/certification-dashboard.tsx:197
 #: src/containers/certification-dashboard/certification-dashboard.tsx:303
 msgid "Approved"
 msgstr "Approuvé"
@@ -275,7 +275,7 @@ msgstr "Navigateur SE"
 msgid "Browser Version"
 msgstr "Version du navigateur"
 
-#: src/components/repositories/remote-form.tsx:574
+#: src/components/repositories/remote-form.tsx:593
 msgid "CA certificate"
 msgstr "Certificat CA"
 
@@ -299,7 +299,7 @@ msgstr "Impossible de mettre à jour l’utilisateur distant sans qu'une distrib
 #: src/components/group-management/group-modal.tsx:59
 #: src/components/import-modal/import-modal.tsx:78
 #: src/components/namespace-modal/namespace-modal.tsx:122
-#: src/components/repositories/remote-form.tsx:143
+#: src/components/repositories/remote-form.tsx:148
 #: src/components/signing/sign-all-certificates-modal.tsx:35
 #: src/components/signing/sign-single-certificate-modal.tsx:35
 #: src/components/user-form/user-form.tsx:224
@@ -326,11 +326,11 @@ msgstr "Impossible à supprimer tant que les collections <0/>qui dépendent de c
 #~ msgid "Certification status for collection \"{0} v{1}\" has been successfully updated."
 #~ msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:490
+#: src/containers/certification-dashboard/certification-dashboard.tsx:493
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr ""
 
-#: src/components/cards/collection-card.tsx:93
+#: src/components/cards/collection-card.tsx:101
 msgid "Certified"
 msgstr "Certifié"
 
@@ -397,8 +397,8 @@ msgstr ""
 msgid "Change user"
 msgstr "Changer d'utilisateur"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:504
-#: src/containers/certification-dashboard/certification-dashboard.tsx:532
+#: src/containers/certification-dashboard/certification-dashboard.tsx:507
+#: src/containers/certification-dashboard/certification-dashboard.tsx:535
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr ""
 
@@ -432,11 +432,11 @@ msgstr "Effacer tous les filtres"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "Cliquez sur l'URL du contrôleur dans lequel vous voulez utiliser l'environnement d'exécution ci-dessus, ce qui lancera la console de ce contrôleur. Connectez-vous (si nécessaire) et suivez les étapes pour terminer la configuration."
 
-#: src/components/repositories/remote-form.tsx:528
+#: src/components/repositories/remote-form.tsx:547
 msgid "Client certificate"
 msgstr "Certificat client"
 
-#: src/components/repositories/remote-form.tsx:498
+#: src/components/repositories/remote-form.tsx:517
 msgid "Client key"
 msgstr "Clé du client"
 
@@ -449,7 +449,7 @@ msgid "Code"
 msgstr "Code"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:89
-#: src/containers/certification-dashboard/certification-dashboard.tsx:247
+#: src/containers/certification-dashboard/certification-dashboard.tsx:248
 msgid "Collection"
 msgstr "Collection"
 
@@ -471,11 +471,11 @@ msgstr ""
 msgid "Collection \"{name}\" could not be deleted."
 msgstr ""
 
-#: src/components/collection-detail/collection-info.tsx:186
+#: src/components/collection-detail/collection-info.tsx:188
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:150
+#: src/containers/certification-dashboard/certification-dashboard.tsx:151
 msgid "Collection Name"
 msgstr "Nom de la collection"
 
@@ -511,21 +511,21 @@ msgstr "Le téléchargement de la collection a été annulé"
 #: src/components/headers/collection-header.tsx:211
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
-#: src/containers/certification-dashboard/certification-dashboard.tsx:276
+#: src/containers/certification-dashboard/certification-dashboard.tsx:277
 msgid "Collection versions"
 msgstr "Versions de la collection"
 
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:155
-#: src/containers/search/search.tsx:97
+#: src/containers/search/search.tsx:98
 #: src/loaders/standalone/standalone-loader.tsx:341
 #: src/loaders/standalone/standalone-loader.tsx:342
 msgid "Collections"
 msgstr "Collections"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:235
+#: src/containers/certification-dashboard/certification-dashboard.tsx:236
 #: src/containers/namespace-detail/namespace-detail.tsx:283
-#: src/containers/search/search.tsx:152
+#: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
 msgstr "Les collections apparaîtront une fois téléchargées"
 
@@ -553,19 +553,19 @@ msgstr "Nom de l’entreprise"
 msgid "Completed"
 msgstr "Complété"
 
-#: src/components/repositories/remote-repository-table.tsx:167
+#: src/components/repositories/remote-repository-table.tsx:161
 msgid "Configure"
 msgstr "Configurer Tower"
 
-#: src/containers/token/token-insights.tsx:115
+#: src/containers/token/token-insights.tsx:97
 msgid "Connect Private Automation Hub"
 msgstr "Connect Private Automation Hub"
 
-#: src/containers/token/token-insights.tsx:130
+#: src/containers/token/token-insights.tsx:112
 msgid "Connect the ansible-galaxy client"
 msgstr "Connecter le client ansible-galaxy"
 
-#: src/containers/token/token-insights.tsx:112
+#: src/containers/token/token-insights.tsx:94
 msgid "Connect to Hub"
 msgstr "Connecter au Hub"
 
@@ -727,12 +727,12 @@ msgstr "OBSOLÈTE"
 msgid "Date"
 msgstr "Date"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:257
+#: src/containers/certification-dashboard/certification-dashboard.tsx:258
 msgid "Date created"
 msgstr "Date de création"
 
 #: src/components/delete-modal/delete-modal.tsx:28
-#: src/containers/execution-environment/registry-list.tsx:396
+#: src/containers/execution-environment/registry-list.tsx:406
 #: src/containers/execution-environment-detail/base.tsx:144
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:416
 #: src/containers/execution-environment-list/execution_environment_list.tsx:373
@@ -926,7 +926,7 @@ msgstr "Détail"
 #: src/components/execution-environment/publish-to-controller-modal.tsx:344
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:177
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:279
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:495
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:490
 msgid "Digest"
 msgstr "Digest"
 
@@ -944,7 +944,7 @@ msgstr "Site des docs"
 msgid "Documentation"
 msgstr "Documentation"
 
-#: src/containers/token/token-insights.tsx:132
+#: src/containers/token/token-insights.tsx:114
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "La documentation sur la façon de configurer le client <0>ansible-galaxy</0> se trouve <1>ici</1>. Utilisez les paramètres suivants pour configurer le client."
 
@@ -953,23 +953,27 @@ msgstr "La documentation sur la façon de configurer le client <0>ansible-galaxy
 msgid "Done"
 msgstr "Terminé"
 
-#: src/components/repositories/remote-form.tsx:610
+#: src/components/repositories/remote-form.tsx:629
 msgid "Download CA certification file"
 msgstr "Télécharger le fichier de certification CA"
 
-#: src/components/repositories/remote-form.tsx:564
+#: src/components/repositories/remote-form.tsx:583
 msgid "Download client certification file"
 msgstr "Télécharger le fichier de certification du client"
 
-#: src/components/repositories/remote-form.tsx:620
+#: src/components/repositories/remote-form.tsx:639
 msgid "Download concurrency"
 msgstr "Télécharger la concurrence"
 
-#: src/components/repositories/remote-form.tsx:322
+#: src/components/repositories/remote-form.tsx:236
+msgid "Download only signed collections"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:341
 msgid "Download requirements file"
 msgstr "Télécharger le fichier des exigences"
 
-#: src/components/collection-detail/collection-info.tsx:115
+#: src/components/collection-detail/collection-info.tsx:116
 msgid "Download tarball"
 msgstr "Télécharger l'archive"
 
@@ -982,9 +986,9 @@ msgstr "Faites glisser un fichier ici ou naviguez pour le télécharger"
 msgid "Dropdown"
 msgstr "Dropdown"
 
-#: src/components/repositories/remote-repository-table.tsx:147
+#: src/components/repositories/remote-repository-table.tsx:128
 #: src/containers/edit-namespace/edit-namespace.tsx:152
-#: src/containers/execution-environment/registry-list.tsx:383
+#: src/containers/execution-environment/registry-list.tsx:393
 #: src/containers/execution-environment-detail/base.tsx:191
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
 #: src/containers/execution-environment-list/execution_environment_list.tsx:346
@@ -1013,7 +1017,7 @@ msgstr "Modifier les autorisations de groupe"
 msgid "Edit namespace"
 msgstr "Modifier l'espace de nom"
 
-#: src/components/repositories/remote-form.tsx:126
+#: src/components/repositories/remote-form.tsx:131
 msgid "Edit remote"
 msgstr "Modifier l’utilisateur à distance"
 
@@ -1058,7 +1062,7 @@ msgstr "Environnement"
 #~ msgid "Error deleting collection."
 #~ msgstr "Erreur de suppression de la collection."
 
-#: src/containers/group-management/group-list.tsx:494
+#: src/containers/group-management/group-list.tsx:490
 msgid "Error deleting group."
 msgstr "Suppression du groupe"
 
@@ -1107,7 +1111,7 @@ msgstr "Erreur lors de la récupération de l'importation à partir de l'API"
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Erreur de chargement des collections dépendantes."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:499
+#: src/containers/execution-environment-list/execution_environment_list.tsx:493
 msgid "Error loading environments."
 msgstr ""
 
@@ -1228,11 +1232,11 @@ msgstr "Environnement d'exécution"
 msgid "Execution Environments"
 msgstr "Environnements d'exécution"
 
-#: src/containers/execution-environment/registry-list.tsx:542
+#: src/containers/execution-environment/registry-list.tsx:541
 msgid "Execution environment \"{name}\" could not be indexed."
 msgstr ""
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:449
+#: src/containers/execution-environment-list/execution_environment_list.tsx:443
 msgid "Execution environment \"{name}\" has been added successfully."
 msgstr ""
 
@@ -1299,7 +1303,7 @@ msgstr "Filtrer par {0}"
 msgid "Find content"
 msgstr "informations principales"
 
-#: src/containers/execution-environment/registry-list.tsx:403
+#: src/containers/execution-environment/registry-list.tsx:413
 msgid "Find execution environments in this registry"
 msgstr "Trouver les environnements d'exécution dans ce registre"
 
@@ -1333,7 +1337,7 @@ msgstr "Token API"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "Abandon de l'attente de la tâche après 10 tentatives."
 
-#: src/components/collection-detail/collection-info.tsx:157
+#: src/components/collection-detail/collection-info.tsx:159
 msgid "Go to documentation"
 msgstr "Afficher la documentation"
 
@@ -1346,7 +1350,7 @@ msgstr "Groupe"
 msgid "Group \"{0}\" could not be displayed."
 msgstr ""
 
-#: src/containers/group-management/group-list.tsx:479
+#: src/containers/group-management/group-list.tsx:475
 msgid "Group \"{0}\" has been successfully deleted."
 msgstr ""
 
@@ -1377,7 +1381,7 @@ msgstr "Groupes"
 #: src/components/namespace-form/namespace-form.tsx:124
 #: src/components/namespace-modal/namespace-modal.tsx:180
 #: src/components/user-form/user-form.tsx:296
-#: src/containers/group-management/group-list.tsx:521
+#: src/containers/group-management/group-list.tsx:517
 msgid "Groups list could not be displayed."
 msgstr ""
 
@@ -1389,9 +1393,13 @@ msgstr "Les groupes apparaîtront une fois créés"
 msgid "Groups with access"
 msgstr "Groupes avec accès"
 
-#: src/components/repositories/remote-form.tsx:399
+#: src/components/repositories/remote-form.tsx:418
 msgid "Hide advanced options"
 msgstr "Masquer les options avancées"
+
+#: src/components/collection-detail/download-signature-grid-item.tsx:44
+msgid "Hide the signature"
+msgstr ""
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
 #: src/components/headers/collection-header.tsx:310
@@ -1400,7 +1408,7 @@ msgstr "Masquer les options avancées"
 msgid "I understand that this action cannot be undone."
 msgstr "Je comprends que cette action ne peut être annulée."
 
-#: src/components/repositories/remote-form.tsx:482
+#: src/components/repositories/remote-form.tsx:501
 msgid "If selected, TLS peer validation must be performed."
 msgstr "Si cette option est sélectionnée, la validation par les pairs TLS doit être effectuée."
 
@@ -1408,11 +1416,11 @@ msgstr "Si cette option est sélectionnée, la validation par les pairs TLS doit
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "Si le contrôleur ne figure pas dans le tableau, vérifiez settings.py."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:623
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:618
 msgid "Image \"{digest}\" could not be deleted."
 msgstr ""
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:603
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:598
 msgid "Image \"{digest}\" has been successfully deleted."
 msgstr ""
 
@@ -1449,7 +1457,7 @@ msgstr "Journal des importations"
 msgid "Imports"
 msgstr "Importations"
 
-#: src/containers/execution-environment/registry-list.tsx:411
+#: src/containers/execution-environment/registry-list.tsx:421
 msgid "Index execution environments"
 msgstr "Indexation des environnements d'exécution"
 
@@ -1457,7 +1465,7 @@ msgstr "Indexation des environnements d'exécution"
 #~ msgid "Indexing execution environments in {name}"
 #~ msgstr "Indexation des environnements d'exécution dans {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:404
+#: src/containers/execution-environment/registry-list.tsx:414
 msgid "Indexing execution environments is only supported on registry.redhat.io"
 msgstr "L'indexation des environnements d'exécution n'est prise en charge que sur registry.redhat.io"
 
@@ -1465,11 +1473,11 @@ msgstr "L'indexation des environnements d'exécution n'est prise en charge que s
 #~ msgid "Indexing failed for {name}"
 #~ msgstr "L'indexation a échoué pour {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:526
+#: src/containers/execution-environment/registry-list.tsx:525
 msgid "Indexing started for execution environment \"{name}\"."
 msgstr ""
 
-#: src/components/collection-detail/collection-info.tsx:56
+#: src/components/collection-detail/collection-info.tsx:57
 #: src/components/headers/collection-header.tsx:459
 msgid "Install"
 msgstr "Install"
@@ -1478,7 +1486,7 @@ msgstr "Install"
 #~ msgid "Install Version"
 #~ msgstr "Version d'installation"
 
-#: src/components/collection-detail/collection-info.tsx:73
+#: src/components/collection-detail/collection-info.tsx:74
 msgid "Installation"
 msgstr "Installation"
 
@@ -1486,7 +1494,7 @@ msgstr "Installation"
 msgid "Instructions"
 msgstr "Instructions"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:533
+#: src/containers/certification-dashboard/certification-dashboard.tsx:536
 msgid "Internal Server Error"
 msgstr ""
 
@@ -1561,11 +1569,11 @@ msgstr "Couches"
 msgid "Learn more"
 msgstr "En savoir plus"
 
-#: src/components/collection-detail/collection-info.tsx:67
+#: src/components/collection-detail/collection-info.tsx:68
 msgid "License"
 msgstr "Licence"
 
-#: src/components/repositories/remote-form.tsx:655
+#: src/components/repositories/remote-form.tsx:674
 msgid "Limits total download rate in requests per second."
 msgstr "Limite le débit total de téléchargement en demandes par seconde."
 
@@ -1578,11 +1586,11 @@ msgid "Link text"
 msgstr "Texte du lien"
 
 #: src/components/collection-list/collection-list.tsx:49
-#: src/containers/search/search.tsx:266
+#: src/containers/search/search.tsx:267
 msgid "List of Collections"
 msgstr "Liste des collections"
 
-#: src/containers/token/token-insights.tsx:163
+#: src/containers/token/token-insights.tsx:145
 #: src/containers/token/token-standalone.tsx:98
 msgid "Load token"
 msgstr "Jeton de charge"
@@ -1618,7 +1626,7 @@ msgstr "Déconnexion"
 msgid "Manage tags"
 msgstr "Gérer les tags"
 
-#: src/containers/token/token-insights.tsx:185
+#: src/containers/token/token-insights.tsx:167
 msgid "Manage tokens"
 msgstr "Gérer les jetons"
 
@@ -1634,7 +1642,7 @@ msgstr "Message"
 msgid "Modify Ansible repo content"
 msgstr "Modifier le contenu du référentiel Ansible"
 
-#: src/components/repositories/remote-form.tsx:664
+#: src/components/repositories/remote-form.tsx:683
 msgid "Must be an integer."
 msgstr "Doit être un nombre entier."
 
@@ -1660,7 +1668,7 @@ msgstr "Mon profil"
 #: src/components/my-imports/import-list.tsx:116
 #: src/components/namespace-form/namespace-form.tsx:62
 #: src/components/namespace-modal/namespace-modal.tsx:128
-#: src/components/repositories/remote-form.tsx:187
+#: src/components/repositories/remote-form.tsx:192
 #: src/containers/execution-environment/registry-list.tsx:265
 #: src/containers/execution-environment/registry-list.tsx:293
 #: src/containers/execution-environment/registry-list.tsx:322
@@ -1690,8 +1698,8 @@ msgid "Name must not be empty."
 msgstr ""
 
 #: src/components/my-imports/import-list.tsx:221
-#: src/containers/certification-dashboard/certification-dashboard.tsx:146
-#: src/containers/certification-dashboard/certification-dashboard.tsx:242
+#: src/containers/certification-dashboard/certification-dashboard.tsx:147
+#: src/containers/certification-dashboard/certification-dashboard.tsx:243
 msgid "Namespace"
 msgstr "Espace de nommage"
 
@@ -1738,9 +1746,9 @@ msgstr ""
 msgid "Namespaces will appear once created"
 msgstr "Les espaces de noms apparaîtront une fois créés"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:163
-#: src/containers/certification-dashboard/certification-dashboard.tsx:197
-#: src/containers/certification-dashboard/certification-dashboard.tsx:323
+#: src/containers/certification-dashboard/certification-dashboard.tsx:164
+#: src/containers/certification-dashboard/certification-dashboard.tsx:198
+#: src/containers/certification-dashboard/certification-dashboard.tsx:321
 msgid "Needs Review"
 msgstr "Examen des besoins"
 
@@ -1773,7 +1781,7 @@ msgid "No child task"
 msgstr "Aucune tâche dépendante"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:282
-#: src/containers/search/search.tsx:151
+#: src/containers/search/search.tsx:152
 msgid "No collections yet"
 msgstr "Pas encore de collections"
 
@@ -1807,7 +1815,7 @@ msgstr "Pas d'importations"
 msgid "No local repositories yet"
 msgstr "Pas encore de référentiel local"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:234
+#: src/containers/certification-dashboard/certification-dashboard.tsx:235
 msgid "No managed collections yet"
 msgstr "Pas encore de collections gérées"
 
@@ -1890,15 +1898,15 @@ msgstr "Non requis pour l'utilisation par d'autres collections"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Remarque : cette URL contient toutes les collections du Hub. Pour vous connecter au référentiel de synchronisation de votre organisation, utilisez l'URL qui se trouve dans <0>Gestion de référentiel</0>."
 
-#: src/components/repositories/remote-form.tsx:632
+#: src/components/repositories/remote-form.tsx:651
 msgid "Number must be greater than 0"
 msgstr "Ce champ doit être supérieur à 0"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:500
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:495
 msgid "OS / Arch"
 msgstr "OS / Arch"
 
-#: src/containers/token/token-insights.tsx:147
+#: src/containers/token/token-insights.tsx:129
 msgid "Offline token"
 msgstr "Jeton hors ligne"
 
@@ -1910,6 +1918,10 @@ msgstr "Jeton hors ligne"
 msgid "Parent task"
 msgstr "Tâche parentale"
 
+#: src/components/collection-list/collection-filter.tsx:69
+msgid "Partial"
+msgstr ""
+
 #: src/components/signing/signature-badge.tsx:33
 msgid "Partially signed"
 msgstr ""
@@ -1918,7 +1930,7 @@ msgstr ""
 msgid "Partners"
 msgstr "Partenaires"
 
-#: src/components/repositories/remote-form.tsx:368
+#: src/components/repositories/remote-form.tsx:387
 #: src/components/user-form/user-form.tsx:92
 #: src/containers/login/login.tsx:55
 msgid "Password"
@@ -2012,20 +2024,20 @@ msgstr "Prévisualisation"
 msgid "Progress messages"
 msgstr "Messages de progression"
 
-#: src/components/cards/collection-card.tsx:67
+#: src/components/cards/collection-card.tsx:75
 #: src/components/collection-list/collection-list-item.tsx:86
 msgid "Provided by {company}"
 msgstr "Fourni par {company}"
 
-#: src/components/repositories/remote-form.tsx:405
+#: src/components/repositories/remote-form.tsx:424
 msgid "Proxy URL"
 msgstr "URL du proxy"
 
-#: src/components/repositories/remote-form.tsx:451
+#: src/components/repositories/remote-form.tsx:470
 msgid "Proxy password"
 msgstr "Mot de passe du proxy"
 
-#: src/components/repositories/remote-form.tsx:423
+#: src/components/repositories/remote-form.tsx:442
 msgid "Proxy username"
 msgstr "Nom d'utilisateur du proxy"
 
@@ -2175,7 +2187,7 @@ msgstr "Pousser de nouveaux conteneurs"
 msgid "Push to existing containers"
 msgstr "Pousser vers les conteneurs existants"
 
-#: src/components/repositories/remote-form.tsx:652
+#: src/components/repositories/remote-form.tsx:671
 msgid "Rate Limit"
 msgstr "Limite de taux"
 
@@ -2211,13 +2223,13 @@ msgstr "URL du registre"
 msgid "Registry sync status"
 msgstr "Statut sync registre"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:412
+#: src/containers/certification-dashboard/certification-dashboard.tsx:428
 msgid "Reject"
 msgstr "Rejeter"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:159
-#: src/containers/certification-dashboard/certification-dashboard.tsx:198
-#: src/containers/certification-dashboard/certification-dashboard.tsx:313
+#: src/containers/certification-dashboard/certification-dashboard.tsx:160
+#: src/containers/certification-dashboard/certification-dashboard.tsx:199
+#: src/containers/certification-dashboard/certification-dashboard.tsx:310
 msgid "Rejected"
 msgstr "Rejeté"
 
@@ -2236,15 +2248,15 @@ msgstr "Registres distants"
 msgid "Remote name"
 msgstr "Nom de l’utilisateur à distance"
 
-#: src/containers/execution-environment/registry-list.tsx:481
+#: src/containers/execution-environment/registry-list.tsx:480
 msgid "Remote registry \"{name}\" could not be deleted."
 msgstr ""
 
-#: src/containers/execution-environment/registry-list.tsx:514
+#: src/containers/execution-environment/registry-list.tsx:513
 msgid "Remote registry \"{name}\" could not be synced."
 msgstr ""
 
-#: src/containers/execution-environment/registry-list.tsx:472
+#: src/containers/execution-environment/registry-list.tsx:471
 msgid "Remote registry \"{name}\" has been successfully deleted."
 msgstr ""
 
@@ -2256,7 +2268,7 @@ msgstr "Les dépôts distants apparaîtront une fois ajoutés"
 #~ msgid "Remotes"
 #~ msgstr "Télécommandes"
 
-#: src/containers/group-management/group-detail.tsx:882
+#: src/containers/group-management/group-detail.tsx:864
 msgid "Remove"
 msgstr "Supprimer"
 
@@ -2292,7 +2304,7 @@ msgstr "Gestion du référentiel"
 msgid "Repository name"
 msgstr "Nom du référentiel"
 
-#: src/components/collection-detail/collection-info.tsx:126
+#: src/components/collection-detail/collection-info.tsx:128
 msgid "Requires Ansible"
 msgstr "Nécessite Ansible"
 
@@ -2315,15 +2327,15 @@ msgstr "Ressources"
 msgid "Running"
 msgstr "En cours d'exécution"
 
-#: src/components/repositories/remote-form.tsx:259
-#: src/containers/token/token-insights.tsx:211
+#: src/components/repositories/remote-form.tsx:278
+#: src/containers/token/token-insights.tsx:193
 msgid "SSO URL"
 msgstr "SSO URL"
 
 #: src/components/execution-environment/repository-form.tsx:161
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
-#: src/components/repositories/remote-form.tsx:136
+#: src/components/repositories/remote-form.tsx:141
 #: src/components/user-form/user-form.tsx:221
 #: src/containers/edit-namespace/edit-namespace.tsx:197
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
@@ -2335,7 +2347,7 @@ msgstr "Enregistrer"
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr ""
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:454
+#: src/containers/execution-environment-list/execution_environment_list.tsx:448
 msgid "Saved changes to execution environment \"{name}\"."
 msgstr ""
 
@@ -2363,13 +2375,13 @@ msgstr "Faites défiler jusqu'à la fin"
 #~ msgid "Search my namespaces"
 #~ msgstr "Rechercher dans mes espaces de noms"
 
-#: src/containers/execution-environment/registry-list.tsx:500
+#: src/containers/execution-environment/registry-list.tsx:499
 #: src/containers/execution-environment-detail/base.tsx:331
-#: src/containers/execution-environment-list/execution_environment_list.tsx:535
+#: src/containers/execution-environment-list/execution_environment_list.tsx:529
 msgid "See the task management <0>detail page </0>for the status of this task."
 msgstr ""
 
-#: src/containers/execution-environment/registry-list.tsx:529
+#: src/containers/execution-environment/registry-list.tsx:528
 msgid "See the task management <0>detail page</0>for the status of this task."
 msgstr ""
 
@@ -2414,7 +2426,7 @@ msgstr "Ajouter les permissions"
 msgid "Select users"
 msgstr "Sélectionner les utilisateurs"
 
-#: src/containers/token/token-insights.tsx:199
+#: src/containers/token/token-insights.tsx:181
 msgid "Server URL"
 msgstr "URL du serveur"
 
@@ -2434,9 +2446,13 @@ msgstr "Version du serveur"
 msgid "Settings"
 msgstr "Paramètres"
 
-#: src/components/repositories/remote-form.tsx:400
+#: src/components/repositories/remote-form.tsx:419
 msgid "Show advanced options"
 msgstr "Afficher les options avancées"
+
+#: src/components/collection-detail/download-signature-grid-item.tsx:44
+msgid "Show the signature"
+msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:85
 msgid "Showing:"
@@ -2454,15 +2470,37 @@ msgstr ""
 msgid "Sign all collections"
 msgstr ""
 
+#: src/containers/certification-dashboard/certification-dashboard.tsx:379
+#: src/containers/certification-dashboard/certification-dashboard.tsx:411
+msgid "Sign and approve"
+msgstr ""
+
+#: src/components/collection-list/collection-filter.tsx:64
+msgid "Sign state"
+msgstr ""
+
 #: src/components/signing/sign-single-certificate-modal.tsx:27
 msgid "Sign version {version}"
 msgstr ""
 
+#: src/components/collection-detail/download-signature-grid-item.tsx:34
+msgid "Signature"
+msgstr ""
+
+#: src/components/collection-list/collection-filter.tsx:67
 #: src/components/signing/signature-badge.tsx:29
 msgid "Signed"
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:260
+#: src/containers/certification-dashboard/certification-dashboard.tsx:302
+msgid "Signed and approved"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:235
+msgid "Signed only"
+msgstr ""
+
+#: src/components/repositories/remote-form.tsx:279
 msgid "Single sign on URL."
 msgstr "Single Sign-On sur URL"
 
@@ -2484,9 +2522,9 @@ msgstr "État"
 
 #: src/components/my-imports/import-list.tsx:82
 #: src/components/my-imports/import-list.tsx:117
-#: src/containers/certification-dashboard/certification-dashboard.tsx:154
-#: src/containers/certification-dashboard/certification-dashboard.tsx:202
-#: src/containers/certification-dashboard/certification-dashboard.tsx:262
+#: src/containers/certification-dashboard/certification-dashboard.tsx:155
+#: src/containers/certification-dashboard/certification-dashboard.tsx:203
+#: src/containers/certification-dashboard/certification-dashboard.tsx:263
 #: src/containers/task-management/task-list-view.tsx:151
 #: src/containers/task-management/task-list-view.tsx:197
 #: src/containers/task-management/task-list-view.tsx:246
@@ -2572,17 +2610,17 @@ msgstr "Les super utilisateurs ne peuvent pas se désactiver eux-mêmes."
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "Les super utilisateurs disposent de toutes les autorisations du système, quels que soient les groupes auxquels ils appartiennent."
 
-#: src/components/repositories/remote-repository-table.tsx:186
-#: src/containers/search/search.tsx:223
+#: src/components/repositories/remote-repository-table.tsx:180
+#: src/containers/search/search.tsx:224
 msgid "Sync"
 msgstr "Sync"
 
 #: src/containers/execution-environment-detail/base.tsx:342
-#: src/containers/execution-environment-list/execution_environment_list.tsx:545
+#: src/containers/execution-environment-list/execution_environment_list.tsx:539
 msgid "Sync failed for {name}"
 msgstr "Sync a échoué pour {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:435
+#: src/containers/execution-environment/registry-list.tsx:375
 #: src/containers/execution-environment-detail/base.tsx:122
 #: src/containers/execution-environment-list/execution_environment_list.tsx:351
 msgid "Sync from registry"
@@ -2594,11 +2632,11 @@ msgstr "Sync à partir du registre"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiée pour {name}"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:530
+#: src/containers/execution-environment-list/execution_environment_list.tsx:524
 msgid "Sync started for execution environment \"{name}\"."
 msgstr ""
 
-#: src/containers/execution-environment/registry-list.tsx:497
+#: src/containers/execution-environment/registry-list.tsx:496
 #: src/containers/execution-environment-detail/base.tsx:328
 msgid "Sync started for remote registry \"{name}\"."
 msgstr ""
@@ -2607,7 +2645,7 @@ msgstr ""
 msgid "Sync status"
 msgstr "Statut Sync"
 
-#: src/components/repositories/remote-form.tsx:479
+#: src/components/repositories/remote-form.tsx:498
 msgid "TLS validation"
 msgstr "Validation TLS"
 
@@ -2695,7 +2733,7 @@ msgstr "Texte : {0}"
 msgid "The URL needs to be in 'http(s)://' format."
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:207
+#: src/components/repositories/remote-form.tsx:212
 msgid "The URL of an external content source."
 msgstr "L'URL d'une source de contenu externe."
 
@@ -2711,27 +2749,27 @@ msgstr "La collection que vous avez sélectionnée ne semble pas correspondre à
 msgid "The file is not available for this version of {collectionName}"
 msgstr "Le fichier n'est pas disponible pour cette version de {collectionName}"
 
-#: src/components/repositories/remote-form.tsx:373
+#: src/components/repositories/remote-form.tsx:392
 msgid "The password to be used for authentication when syncing."
 msgstr "Le mot de passe à utiliser pour l'authentification lors de la synchronisation."
 
-#: src/components/repositories/remote-form.tsx:374
+#: src/components/repositories/remote-form.tsx:393
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "Le mot de passe à utiliser pour l'authentification lors de la synchronisation. Ce n'est pas nécessaire si vous utilisez un jeton."
 
-#: src/containers/token/token-insights.tsx:171
+#: src/containers/token/token-insights.tsx:153
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "Le jeton expirera après 30 jours d'inactivité. Exécutez périodiquement la commande ci-dessous pour empêcher votre jeton d'expirer."
 
-#: src/components/repositories/remote-form.tsx:338
+#: src/components/repositories/remote-form.tsx:357
 msgid "The username to be used for authentication when syncing."
 msgstr "Le nom d'utilisateur à utiliser pour l'authentification lors de la synchronisation."
 
-#: src/components/repositories/remote-form.tsx:339
+#: src/components/repositories/remote-form.tsx:358
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "Le nom d'utilisateur à utiliser pour l'authentification lors de la synchronisation. Ce n'est pas nécessaire si vous utilisez un jeton."
 
-#: src/components/repositories/remote-repository-table.tsx:129
+#: src/components/repositories/remote-repository-table.tsx:117
 msgid "There are no repos associated with this remote."
 msgstr "Il n'y a pas de référentiel associé à cet utilisateur à distance"
 
@@ -2780,24 +2818,23 @@ msgstr "Ce tag existe déjà sur une autre image. Voulez-vous le déplacer sur c
 msgid "This tag is already selected for this image. You cannot add it twice."
 msgstr "Ce tag est déjà sélectionnée pour cette image. Vous ne pouvez pas l'ajouter deux fois."
 
-#: src/components/repositories/remote-form.tsx:283
+#: src/components/repositories/remote-form.tsx:302
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "Il utilise le même format {docsAnsibleLink} que le CLI ansible-galaxy avec la réserve que les rôles ne sont pas supportés et que le paramètre source n'est pas supporté."
 
-#: src/containers/token/token-insights.tsx:186
+#: src/containers/token/token-insights.tsx:168
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr "Pour révoquer un jeton ou voir tous vos jetons, visitez la page<0>offline API token management</0> (gestion des jetons API hors ligne)"
 
-#: src/components/repositories/remote-form.tsx:230
+#: src/components/repositories/remote-form.tsx:249
 msgid "Token"
 msgstr "Jeton"
 
-#: src/containers/token/token-insights.tsx:87
 #: src/containers/token/token-standalone.tsx:120
 msgid "Token could not be displayed."
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:233
+#: src/components/repositories/remote-form.tsx:252
 msgid "Token for authenticating to the server URL."
 msgstr "Token pour l'authentification à l'URL du serveur."
 
@@ -2805,7 +2842,7 @@ msgstr "Token pour l'authentification à l'URL du serveur."
 #~ msgid "Token management"
 #~ msgstr "Gestion des jetons"
 
-#: src/components/repositories/remote-form.tsx:623
+#: src/components/repositories/remote-form.tsx:642
 msgid "Total number of simultaneous connections."
 msgstr "Nombre total de connexions simultanées."
 
@@ -2826,7 +2863,7 @@ msgstr "Type"
 msgid "UI Version"
 msgstr ""
 
-#: src/components/repositories/remote-form.tsx:205
+#: src/components/repositories/remote-form.tsx:210
 msgid "URL"
 msgstr "URL"
 
@@ -2842,6 +2879,7 @@ msgstr "URL : {0}"
 msgid "Undeprecate"
 msgstr "Dépréciation de"
 
+#: src/components/collection-list/collection-filter.tsx:68
 #: src/components/signing/signature-badge.tsx:31
 msgid "Unsigned"
 msgstr ""
@@ -2883,7 +2921,7 @@ msgstr "Nom en amont"
 msgid "Use in Controller"
 msgstr "Utilisation dans le contrôleur"
 
-#: src/containers/token/token-insights.tsx:117
+#: src/containers/token/token-insights.tsx:99
 msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
 msgstr "Utilisez la page <0>Gestion de référentiel</0> pour synchroniser les collections créées par votre organisation avec le référentiel Red Hat Certified dans votre Automation Hub privé. Les utilisateurs disposant des autorisations appropriées peuvent utiliser les boutons de synchronisation de la page <1>Collections</1> pour contrôler les collections qui sont ajoutées au référentiel de synchronisation de leur organisation."
 
@@ -2895,7 +2933,7 @@ msgstr ""
 #~ msgid "Use this URL to configure the API endpoints that clients need to"
 #~ msgstr "Utilisez cette URL pour configurer les points de terminaison de l'API que les clients doivent utiliser"
 
-#: src/containers/token/token-insights.tsx:201
+#: src/containers/token/token-insights.tsx:183
 msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
 msgstr "Utilisez cette URL pour configurer les points de terminaison de l'API que les clients on besoin pour télécharger du contenu depuis Automation Hub."
 
@@ -2903,7 +2941,7 @@ msgstr "Utilisez cette URL pour configurer les points de terminaison de l'API qu
 #~ msgid "Use this URL to configure the authentication URLs that clients"
 #~ msgstr "Utilisez cette URL pour configurer les URL d'authentification que les clients doivent utiliser"
 
-#: src/containers/token/token-insights.tsx:213
+#: src/containers/token/token-insights.tsx:195
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
 msgstr "Utilisez cette URL pour configurer les URL d'authentification dont les clients ont besoin pour télécharger du contenu depuis Automation Hub."
 
@@ -2911,7 +2949,7 @@ msgstr "Utilisez cette URL pour configurer les URL d'authentification dont les c
 #~ msgid "Use this token to authenticate clients that need to download"
 #~ msgstr "Utilisez ce jeton pour authentifier les clients qui doivent télécharger"
 
-#: src/containers/token/token-insights.tsx:149
+#: src/containers/token/token-insights.tsx:131
 msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
 msgstr "Utilisez ce jeton pour authentifier les clients qui doivent télécharger du contenu depuis Automation Hub. Il s'agit d'un jeton secret utilisé pour protéger votre contenu. Stockez votre jeton API dans un endroit sécurisé."
 
@@ -2932,7 +2970,7 @@ msgstr ""
 msgid "User \"{0}\" could not be deleted."
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:932
+#: src/containers/group-management/group-detail.tsx:929
 msgid "User \"{0}\" could not be removed from group \"{name}\"."
 msgstr ""
 
@@ -2944,7 +2982,7 @@ msgstr ""
 msgid "User \"{0}\" has been successfully deleted."
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:924
+#: src/containers/group-management/group-detail.tsx:921
 msgid "User \"{0}\" has been successfully removed group \"{name}\"."
 msgstr ""
 
@@ -2974,7 +3012,7 @@ msgid "User type"
 msgstr "Type d’utilisateur"
 
 #: src/components/about-modal/about-modal.tsx:85
-#: src/components/repositories/remote-form.tsx:333
+#: src/components/repositories/remote-form.tsx:352
 #: src/components/user-form/user-form.tsx:86
 #: src/containers/group-management/group-detail.tsx:725
 #: src/containers/group-management/group-detail.tsx:804
@@ -3001,9 +3039,9 @@ msgstr "Utilisateurs"
 
 #: src/containers/group-management/group-detail.tsx:511
 #: src/containers/group-management/group-detail.tsx:656
-#: src/containers/group-management/group-detail.tsx:906
+#: src/containers/group-management/group-detail.tsx:903
 #: src/containers/group-management/group-list.tsx:316
-#: src/containers/user-management/user-list.tsx:423
+#: src/containers/user-management/user-list.tsx:419
 msgid "Users list could not be displayed."
 msgstr ""
 
@@ -3016,7 +3054,7 @@ msgid "Users will appear once created"
 msgstr "Les utilisateurs apparaîtront une fois créés"
 
 #: src/components/headers/collection-header.tsx:341
-#: src/containers/certification-dashboard/certification-dashboard.tsx:252
+#: src/containers/certification-dashboard/certification-dashboard.tsx:253
 msgid "Version"
 msgstr "Version"
 
@@ -3028,7 +3066,7 @@ msgstr "Version:"
 msgid "View Ansible distribution"
 msgstr "Voir la distribution Ansible"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:381
+#: src/containers/certification-dashboard/certification-dashboard.tsx:397
 msgid "View Import Logs"
 msgstr "Afficher les journaux d'importation"
 
@@ -3107,7 +3145,7 @@ msgstr "Nous n'avons pas trouvé la page que vous recherchez !"
 msgid "Website"
 msgstr "Site web"
 
-#: src/components/repositories/remote-form.tsx:279
+#: src/components/repositories/remote-form.tsx:298
 msgid "YAML requirements"
 msgstr "Exigences YAML"
 
@@ -3153,7 +3191,7 @@ msgstr "Vous n'avez pas accès à Automation Hub"
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "Vous n'avez pas le droit de mettre à jour cet espace de nom."
 
-#: src/components/collection-detail/collection-info.tsx:91
+#: src/components/collection-detail/collection-info.tsx:92
 msgid "You have to be logged in to be able to download the tarball."
 msgstr "Vous devez être connecté pour pouvoir télécharger l'archive tarball."
 
@@ -3182,6 +3220,7 @@ msgstr "find-content"
 msgid "hidden value"
 msgstr "valeur cachée"
 
+#: src/components/collection-list/collection-filter.tsx:91
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
 msgstr ""
@@ -3215,6 +3254,14 @@ msgstr "libéré {0}"
 #~ msgid "search text input"
 #~ msgstr "saisie de texte de recherche"
 
+#: src/components/collection-list/collection-filter.tsx:89
+msgid "sign state"
+msgstr ""
+
+#: src/components/collection-list/collection-filter.tsx:90
+msgid "tags"
+msgstr ""
+
 #: src/components/my-imports/import-console.tsx:142
 msgid "waiting for approval"
 msgstr "attendre l'approbation"
@@ -3239,7 +3286,7 @@ msgstr ""
 msgid "{collectionName}'s versions."
 msgstr "versions de {collectionName}."
 
-#: src/components/cards/collection-card.tsx:44
+#: src/components/cards/collection-card.tsx:51
 #: src/components/cards/namespace-card.tsx:36
 #: src/components/collection-list/collection-list-item.tsx:57
 #: src/components/headers/collection-header.tsx:322
