@@ -1,7 +1,6 @@
 msgid ""
 msgstr ""
 "POT-Creation-Date: 2021-09-01 22:22+0000\n"
-"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
@@ -15,7 +14,7 @@ msgstr ""
 
 #: src/components/headers/collection-header.tsx:175
 msgid "(latest)"
-msgstr ""
+msgstr "(laatst)"
 
 #: src/components/headers/collection-header.tsx:167
 msgid "(signed)"
@@ -31,27 +30,27 @@ msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:151
 msgid "<0/> was added"
-msgstr ""
+msgstr "<0/> werd toegevoegd"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:141
 msgid "<0/> was added to <1/>"
-msgstr ""
+msgstr "<0/> werd toegevoegd aan <1/>"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:131
 msgid "<0/> was moved to <1/> from <2/>"
-msgstr ""
+msgstr "<0/> werd verplaatst naar <1/> vanuit <2/>"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:185
 msgid "<0/> was removed"
-msgstr ""
+msgstr "<0/> werd verwijderd"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:172
 msgid "<0/> was removed from <1/>"
-msgstr ""
+msgstr "<0/> werd verwijderd uit <1/>"
 
 #: src/components/collection-detail/collection-info.tsx:78
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
-msgstr ""
+msgstr "<0>Opmerking:</0> Het installeren van collecties met ansible-galaxy wordt alleen ondersteund in ansible 2.9+"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:361
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
@@ -59,11 +58,11 @@ msgstr ""
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:358
 #~ msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the link manually."
-#~ msgstr ""
+#~ msgstr "<0>Opmerking:</0> De volgende links kunnen door je browser worden geblokkeerd. Kopieer en plak de link handmatig."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:312
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
-#~ msgstr ""
+#~ msgstr "<0>Opmerking:</0> Gebruik deze URL om ansible-galaxy te configureren om collecties naar deze namespace te uploaden. Meer informatie over configuraties van ansible-galaxy vindt u <1>hier</1>."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:321
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
@@ -71,11 +70,11 @@ msgstr ""
 
 #: src/containers/token/token-standalone.tsx:86
 msgid "<0>WARNING</0> copy this token now. This is the only time you will ever see it."
-msgstr ""
+msgstr "<0>WAARSCHUWING</0> kopieer dit token nu. Dit is de enige keer dat u het ooit zult zien."
 
 #: src/containers/token/token-standalone.tsx:77
 msgid "<0>WARNING</0> loading a new token will delete your old token."
-msgstr ""
+msgstr "<0>WAARSCHUWING</0> het laden van een nieuw token zal uw oude token verwijderen."
 
 #: src/containers/execution-environment/registry-list.tsx:227
 msgid "<0>{0}</0> will be deleted."
@@ -83,41 +82,41 @@ msgstr ""
 
 #: src/components/delete-modal/delete-user-modal.tsx:56
 msgid "<0>{0}</0> will be permanently deleted."
-msgstr ""
+msgstr "<0>{0}</0> zal permanent worden verwijderd."
 
 #: src/components/group-management/delete-group-modal.tsx:25
 msgid "<0>{name}</0> will be permanently deleted."
-msgstr ""
+msgstr "<0>{name}</0> zal permanent worden verwijderd."
 
-#: src/containers/group-management/group-detail.tsx:611
+#: src/containers/group-management/group-detail.tsx:576
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
-#~ msgstr ""
+#~ msgstr "<0>{username}</0> zal worden verwijderd uit <1>{groupname}</1>."
 
 #: src/components/repositories/remote-form.tsx:550
 #: src/components/repositories/remote-form.tsx:596
 msgid "A PEM encoded client certificate used for authentication."
-msgstr ""
+msgstr "Een PEM-gecodeerd cliëntcertificaat dat wordt gebruikt voor authenticatie."
 
 #: src/components/repositories/remote-form.tsx:520
 msgid "A PEM encoded private key used for authentication."
-msgstr ""
+msgstr "Een PEM-gecodeerde privésleutel die wordt gebruikt voor authentificatie."
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:367
 msgid "A tag may contain lowercase and uppercase ASCII alphabetic characters, digits, underscores, periods, and dashes. A tag must not start with a period, underscore, or a dash."
-msgstr ""
+msgstr "Een tag mag kleine letters en hoofdletters bevatten, ASCII alfabetische tekens, cijfers, underscores, punten, en streepjes. Een tag mag niet beginnen met een punt, underscore, of een streepje."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:534
+#: src/containers/certification-dashboard/certification-dashboard.tsx:524
 #~ msgid "API Error: 500"
-#~ msgstr ""
+#~ msgstr "API-fout: 500"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:380
 msgid "API Error: Failed to set deprecation."
-msgstr ""
+msgstr "API-fout: Mislukt om deprecatie in te stellen."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:506
-#: src/containers/edit-namespace/edit-namespace.tsx:285
+#: src/containers/certification-dashboard/certification-dashboard.tsx:496
+#: src/containers/edit-namespace/edit-namespace.tsx:278
 #~ msgid "API Error: {0}"
-#~ msgstr ""
+#~ msgstr "API-fout: {0}"
 
 #: src/components/headers/collection-header.tsx:577
 #: src/components/headers/collection-header.tsx:628
@@ -127,16 +126,16 @@ msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:353
 #~ msgid "API Token"
-#~ msgstr ""
+#~ msgstr "API-token"
 
 #: src/components/import-modal/import-modal.tsx:222
 #: src/components/import-modal/import-modal.tsx:227
 msgid "API error. Status code: {0}"
-msgstr ""
+msgstr "API-fout. Status code: {0}"
 
 #: src/containers/token/token-standalone.tsx:56
 msgid "API token"
-msgstr ""
+msgstr "API-token"
 
 #: src/containers/token/token-standalone.tsx:48
 #: src/loaders/standalone/standalone-loader.tsx:360
@@ -145,7 +144,7 @@ msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:166
 msgid "About"
-msgstr ""
+msgstr "Over"
 
 #: src/containers/edit-namespace/edit-namespace.tsx:101
 msgid "Active user profile \"{0}\" could not be displayed."
@@ -153,15 +152,15 @@ msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:63
 msgid "Activities"
-msgstr ""
+msgstr "Activiteiten"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:54
 msgid "Activities will appear once you push something"
-msgstr ""
+msgstr "Activiteiten zullen verschijnen zodra u op iets drukt"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:21
 msgid "Activity"
-msgstr ""
+msgstr "Activiteit"
 
 #: src/components/execution-environment/repository-form.tsx:290
 #: src/components/execution-environment/repository-form.tsx:333
@@ -171,140 +170,142 @@ msgstr ""
 #: src/containers/group-management/group-detail.tsx:700
 #: src/containers/group-management/group-detail.tsx:751
 msgid "Add"
-msgstr ""
+msgstr "Toevoegen"
 
 #: src/constants.tsx:154
 msgid "Add Ansible distribution"
-msgstr ""
+msgstr "Ansible-distributie toevoegen"
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:106
 msgid "Add a README with instructions for using this container."
-msgstr ""
+msgstr "Voeg een README toe met instructies voor het gebruik van deze container."
 
 #: src/constants.tsx:155
 msgid "Add collection remote"
-msgstr ""
+msgstr "Collectie op afstand toevoegen"
 
 #: src/constants.tsx:164
 msgid "Add container distribution"
-msgstr ""
+msgstr "Container-distributie toevoegen"
 
 #: src/constants.tsx:166
 msgid "Add container repository"
-msgstr ""
+msgstr "Container-repository toevoegen"
 
 #: src/components/execution-environment/repository-form.tsx:152
 #: src/containers/execution-environment-list/execution_environment_list.tsx:155
 msgid "Add execution environment"
-msgstr ""
+msgstr "Uitvoeringsomgeving toevoegen"
 
 #: src/constants.tsx:182
 msgid "Add group"
-msgstr ""
+msgstr "Groep toevoegen"
 
 #: src/constants.tsx:183
 msgid "Add namespace"
-msgstr ""
+msgstr "Naamruimte toevoegen"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:146
 msgid "Add new tag"
-msgstr ""
+msgstr "Nieuwe tag toevoegen"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:164
 msgid "Add new tag to image"
-msgstr ""
+msgstr "Nieuwe tag aan afbeelding toevoegen"
 
 #: src/constants.tsx:181
 #: src/containers/execution-environment/registry-list.tsx:152
 #: src/containers/execution-environment/registry-list.tsx:215
 msgid "Add remote registry"
-msgstr ""
+msgstr "Extern register toevoegen"
 
 #: src/containers/group-management/group-detail.tsx:466
 msgid "Add selected users to group"
-msgstr ""
+msgstr "Geselecteerde gebruikers aan groep toevoegen"
 
 #: src/constants.tsx:184
 msgid "Add synclist"
-msgstr ""
+msgstr "Synclist toevoegen"
 
 #: src/components/execution-environment/repository-form.tsx:314
 msgid "Add tag(s) to exclude"
-msgstr ""
+msgstr "Tag(s) toevoegen om uit te sluiten"
 
 #: src/components/execution-environment/repository-form.tsx:271
 msgid "Add tag(s) to include"
-msgstr ""
+msgstr "Tag(s) toevoegen om op te nemen"
 
 #: src/constants.tsx:185
 msgid "Add user"
-msgstr ""
+msgstr "Gebruiker toevoegen"
 
 #: src/components/execution-environment/repository-form.tsx:396
 msgid ""
 "Adding groups provides access to all repositories in the\n"
 "\"{namespace}\" container namespace."
 msgstr ""
+"Het toevoegen van groepen geeft toegang tot alle repository's in de\n"
+"\"{namespace}\" container-namespace."
 
 #: src/containers/namespace-list/namespace-list.tsx:186
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: src/loaders/standalone/standalone-loader.tsx:364
 msgid "Approval"
-msgstr ""
+msgstr "Goedkeuring"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:121
 msgid "Approval dashboard"
-msgstr ""
+msgstr "Goedkeuring dashboard"
 
 #: src/components/my-imports/import-console.tsx:181
 msgid "Approval status:"
-msgstr ""
+msgstr "Goedkeuringsstatus:"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:379
 #: src/containers/certification-dashboard/certification-dashboard.tsx:411
 msgid "Approve"
-msgstr ""
+msgstr "Goedkeuring"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:168
 #: src/containers/certification-dashboard/certification-dashboard.tsx:197
 #: src/containers/certification-dashboard/certification-dashboard.tsx:303
 msgid "Approved"
-msgstr ""
+msgstr "Goedgekeurd"
 
 #: src/components/user-form/user-form.tsx:135
 msgid "Authentication provider"
-msgstr ""
+msgstr "Verificatieprovider"
 
 #: src/components/patternfly-wrappers/fileupload.tsx:13
 msgid "Browse..."
-msgstr ""
+msgstr "Bladeren..."
 
 #: src/components/about-modal/about-modal.tsx:94
 msgid "Browser OS"
-msgstr ""
+msgstr "Browser OS"
 
 #: src/components/about-modal/about-modal.tsx:91
 msgid "Browser Version"
-msgstr ""
+msgstr "Browserversie"
 
 #: src/components/repositories/remote-form.tsx:593
 msgid "CA certificate"
-msgstr ""
+msgstr "CA-certificaat"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:153
 #~ msgid "CLI Configuration"
-#~ msgstr ""
+#~ msgstr "CLI-configuratie"
 
 #: src/components/repositories/local-repository-table.tsx:69
 #: src/containers/namespace-detail/namespace-detail.tsx:164
 msgid "CLI configuration"
-msgstr ""
+msgstr "CLI-configuratie"
 
 #: src/containers/repositories/repository-list.tsx:155
 msgid "Can't update remote without a distribution attached to it."
-msgstr ""
+msgstr "Ik kan niet op afstand updaten zonder dat er een distributie aan vastzit."
 
 #: src/components/confirm-modal/confirm-modal.tsx:40
 #: src/components/delete-modal/delete-modal.tsx:32
@@ -322,23 +323,19 @@ msgstr ""
 #: src/containers/group-management/group-detail.tsx:440
 #: src/containers/group-management/group-detail.tsx:483
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: src/components/status/status-indicator.tsx:55
 msgid "Canceled"
-msgstr ""
+msgstr "Geannuleerd"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:564
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
-msgstr ""
+msgstr "Kan geen namespace verwijderen totdat <0/>de afhankelijkheden van collecties <1/>zijn verwijderd."
 
 #: src/components/headers/collection-header.tsx:200
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
-msgstr ""
-
-#: src/containers/certification-dashboard/certification-dashboard.tsx:494
-#~ msgid "Certification status for collection \"{0} v{1}\" has been successfully updated."
-#~ msgstr ""
+msgstr "Kan niet verwijderen totdat collecties <0/>die van deze collectie afhankelijk zijn, <1/>zijn verwijderd."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:493
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
@@ -346,70 +343,70 @@ msgstr ""
 
 #: src/components/cards/collection-card.tsx:101
 msgid "Certified"
-msgstr ""
+msgstr "Gecertificeerd"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:67
 msgid "Change"
-msgstr ""
+msgstr "Wijzigen"
 
 #: src/constants.tsx:156
 msgid "Change Ansible distribution"
-msgstr ""
+msgstr "Ansible-distributie wijzigen"
 
 #: src/constants.tsx:157
 msgid "Change collection remote"
-msgstr ""
+msgstr "Collectie op afstand wijzigen"
 
 #: src/constants.tsx:167
 msgid "Change container distribution"
-msgstr ""
+msgstr "Container-distributie wijzigen"
 
 #: src/constants.tsx:168
 #: src/constants.tsx:210
 msgid "Change container namespace permissions"
-msgstr ""
+msgstr "Machtigingen container-namespace wijzigen"
 
 #: src/constants.tsx:169
 msgid "Change container repository"
-msgstr ""
+msgstr "Container-repository wijzigen"
 
 #: src/constants.tsx:173
 msgid "Change containers"
-msgstr ""
+msgstr "Containers wijzigen"
 
 #: src/constants.tsx:217
 msgid "Change distribution"
-msgstr ""
+msgstr "Verdeling wijzigen"
 
 #: src/constants.tsx:187
 msgid "Change group"
-msgstr ""
+msgstr "Groep wijzigen"
 
 #: src/constants.tsx:174
 #: src/constants.tsx:209
 msgid "Change image tags"
-msgstr ""
+msgstr "Afbeeldingstags wijzigen"
 
 #: src/constants.tsx:188
 #: src/constants.tsx:203
 msgid "Change namespace"
-msgstr ""
+msgstr "Namespace wijzigen"
 
 #: src/constants.tsx:186
 msgid "Change remote registry"
-msgstr ""
+msgstr "Extern register wijzigen"
 
 #: src/constants.tsx:189
 msgid "Change synclist"
-msgstr ""
+msgstr "Synclist wijzigen"
 
 #: src/constants.tsx:178
 msgid "Change task"
-msgstr ""
+msgstr "Taak wijzigen"
 
 #: src/constants.tsx:190
 msgid "Change user"
-msgstr ""
+msgstr "Gebruiker wijzigen"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:507
 #: src/containers/certification-dashboard/certification-dashboard.tsx:535
@@ -426,50 +423,46 @@ msgstr ""
 
 #: src/components/group-management/delete-group-modal.tsx:54
 msgid "Checking for affected users... <0/>"
-msgstr ""
+msgstr "Controleren op getroffen gebruikers... <0/>"
 
 #: src/containers/task-management/task_detail.tsx:218
 msgid "Child tasks"
-msgstr ""
+msgstr "Kindertaken"
 
 #: src/components/patternfly-wrappers/fileupload.tsx:14
 #: src/components/patternfly-wrappers/write-only-field.tsx:34
 msgid "Clear"
-msgstr ""
+msgstr "Wissen"
 
 #: src/components/empty-state/empty-state-filter.tsx:21
 #: src/components/patternfly-wrappers/applied-filters.tsx:44
 msgid "Clear all filters"
-msgstr ""
+msgstr "Alle filters wissen"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:353
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
-msgstr ""
+msgstr "Klik op de controller-URL waarin u de bovenstaande uitvoeringsomgeving wilt gebruiken, en het zal de console van die controller starten. Log in (indien nodig) en volg de stappen om de configuratie te voltooien."
 
 #: src/components/repositories/remote-form.tsx:547
 msgid "Client certificate"
-msgstr ""
+msgstr "Klantcertificaat"
 
 #: src/components/repositories/remote-form.tsx:517
 msgid "Client key"
-msgstr ""
+msgstr "Klantsleutel"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:284
 msgid "Close"
-msgstr ""
+msgstr "Sluiten"
 
 #: src/containers/task-management/task_detail.tsx:310
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:89
 #: src/containers/certification-dashboard/certification-dashboard.tsx:248
 msgid "Collection"
-msgstr ""
-
-#: src/components/headers/collection-header.tsx:637
-#~ msgid "Collection \"{0} v{collectionVersion}\" has been successfully deleted."
-#~ msgstr ""
+msgstr "Collectie"
 
 #: src/components/headers/collection-header.tsx:783
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
@@ -491,28 +484,28 @@ msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:151
 msgid "Collection Name"
-msgstr ""
+msgstr "Naam collectie"
 
 #: src/constants.tsx:27
 msgid "Collection Namespaces"
-msgstr ""
+msgstr "Namespaces collectie"
 
 #: src/constants.tsx:65
 msgid "Collection Remotes"
-msgstr ""
+msgstr "Externe items collectie"
 
 #: src/containers/collection-detail/collection-dependencies.tsx:140
 #: src/containers/collection-detail/collection-dependencies.tsx:148
 msgid "Collection does not have any dependencies."
-msgstr ""
+msgstr "Collectie heeft geen afhankelijkheden."
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:29
 msgid "Collection does not have dependencies."
-msgstr ""
+msgstr "Collectie heeft geen afhankelijkheden."
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:59
 msgid "Collection is not being used by any collection."
-msgstr ""
+msgstr "Collectie wordt niet gebruikt door een collectie."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:525
 msgid "Collection repositories could not be displayed."
@@ -520,14 +513,14 @@ msgstr ""
 
 #: src/components/import-modal/import-modal.tsx:244
 msgid "Collection upload canceled"
-msgstr ""
+msgstr "Upload collectie geannuleerd"
 
 #: src/components/headers/collection-header.tsx:265
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:277
 msgid "Collection versions"
-msgstr ""
+msgstr "Collectie-versies"
 
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:161
@@ -535,110 +528,110 @@ msgstr ""
 #: src/loaders/standalone/standalone-loader.tsx:341
 #: src/loaders/standalone/standalone-loader.tsx:342
 msgid "Collections"
-msgstr ""
+msgstr "Collecties"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:236
 #: src/containers/namespace-detail/namespace-detail.tsx:289
 #: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
-msgstr ""
+msgstr "Collecties zullen verschijnen zodra geüpload"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:210
 msgid "Command"
-msgstr ""
+msgstr "Opdracht"
 
 #: src/constants.tsx:252
 msgid "Community"
-msgstr ""
+msgstr "Gemeenschap"
 
 #: src/components/collection-detail/collection-content-list.tsx:149
 #: src/containers/collection-detail/collection-docs.tsx:282
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
-msgstr ""
+msgstr "Gemeenschapscollecties hebben geen documenten of tellingen van de inhoud, maar alle inhoud wordt gesynchroniseerd."
 
 #: src/components/namespace-form/namespace-form.tsx:76
 msgid "Company name"
-msgstr ""
+msgstr "Bedrijfsnaam"
 
 #: src/components/my-imports/import-list.tsx:87
 #: src/components/status/status-indicator.tsx:67
 #: src/constants.tsx:379
 #: src/containers/task-management/task-list-view.tsx:156
 msgid "Completed"
-msgstr ""
+msgstr "Voltooid"
 
 #: src/components/repositories/remote-repository-table.tsx:161
 msgid "Configure"
-msgstr ""
+msgstr "Configureren"
 
 #: src/containers/token/token-insights.tsx:97
 msgid "Connect Private Automation Hub"
-msgstr ""
+msgstr "Privé-automatiseringshub verbinden"
 
 #: src/containers/token/token-insights.tsx:112
 msgid "Connect the ansible-galaxy client"
-msgstr ""
+msgstr "De ansible-galaxy-client verbinden"
 
 #: src/containers/token/token-insights.tsx:94
 msgid "Connect to Hub"
-msgstr ""
+msgstr "Aansluiten op hub"
 
 #: src/utilities/validateURLHelper.ts:20
 msgid "Consider using a secure URL (https://)."
-msgstr ""
+msgstr "Overweeg een beveiligde URL te gebruiken (https://)."
 
 #: src/components/empty-state/empty-state-unauthorized.tsx:14
 #~ msgid "Contact you organization administrator for more information."
-#~ msgstr ""
+#~ msgstr "Contact you organization administrator for more information."
 
 #: src/components/empty-state/empty-state-unauthorized.tsx:15
 msgid "Contact your organization administrator for more information."
-msgstr ""
+msgstr "Neem contact op met de beheerder van uw organisatie voor meer informatie."
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:27
 #: src/containers/execution-environment-list/execution_environment_list.tsx:101
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:100
 #: src/loaders/standalone/standalone-loader.tsx:342
 #~ msgid "Container Registry"
-#~ msgstr ""
+#~ msgstr "Container Registry"
 
 #: src/components/execution-environment/repository-form.tsx:200
 msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
-msgstr ""
+msgstr "Containernamen kunnen alleen alfanumerieke tekens, \".\", \"_\", \"-\" en maximaal één \"/\" bevatten."
 
 #: src/components/execution-environment/repository-form.tsx:183
 msgid "Container namespace"
-msgstr ""
+msgstr "Container-namespace"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:307
 msgid "Container registry type"
-msgstr ""
+msgstr "Type containerregister"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:231
 #: src/containers/execution-environment-list/execution_environment_list.tsx:287
 msgid "Container repository name"
-msgstr ""
+msgstr "Naam container-repository"
 
 #: src/constants.tsx:75
 msgid "Containers"
-msgstr ""
+msgstr "Containers"
 
 #: src/containers/collection-detail/collection-content.tsx:61
 msgid "Content"
-msgstr ""
+msgstr "inhoud"
 
 #: src/components/repositories/local-repository-table.tsx:54
 msgid "Content count"
-msgstr ""
+msgstr "Telling inhoud"
 
 #: src/components/headers/collection-header.tsx:527
 msgid "Contents"
-msgstr ""
+msgstr "Inhoud"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:383
 #: src/components/execution-environment/publish-to-controller-modal.tsx:412
 msgid "Controller name"
-msgstr ""
+msgstr "Naam controller"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:114
 msgid "Controllers list could not be displayed."
@@ -649,16 +642,16 @@ msgstr ""
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:16
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:130
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Gekopieerd naar klembord"
 
 #: src/containers/collection-detail/collection-import-log.tsx:110
 msgid "Could not load import log"
-msgstr ""
+msgstr "Kon import-log niet laden"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:507
-#: src/containers/certification-dashboard/certification-dashboard.tsx:535
+#: src/containers/certification-dashboard/certification-dashboard.tsx:497
+#: src/containers/certification-dashboard/certification-dashboard.tsx:525
 #~ msgid "Could not update the certification status for {0}.{1}.{2}."
-#~ msgstr ""
+#~ msgstr "Kon de certificatiestatus voor {0}.{1}.{2} niet bijwerken."
 
 #: src/components/group-management/group-modal.tsx:56
 #: src/components/namespace-modal/namespace-modal.tsx:119
@@ -669,81 +662,81 @@ msgstr ""
 #: src/containers/user-management/user-list.tsx:184
 #: src/containers/user-management/user-list.tsx:249
 msgid "Create"
-msgstr ""
+msgstr "Maken"
 
 #: src/components/group-management/group-modal.tsx:45
 msgid "Create a group"
-msgstr ""
+msgstr "Een groep maken"
 
 #: src/components/namespace-modal/namespace-modal.tsx:109
 msgid "Create a new namespace"
-msgstr ""
+msgstr "Een nieuwe namespace maken"
 
 #: src/components/user-form/user-form.tsx:97
 msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr ""
+msgstr "Maak een wachtwoord van ten minste 9 tekens, inclusief speciale tekens , bijvoorbeeld <!@$%>. Vermijd het gebruik van veelvoorkomende namen of uitdrukkingen."
 
 #: src/constants.tsx:165
 #: src/constants.tsx:205
 msgid "Create new containers"
-msgstr ""
+msgstr "Nieuwe containers maken"
 
 #: src/containers/user-management/user-create.tsx:50
 #: src/containers/user-management/user-create.tsx:52
 msgid "Create new user"
-msgstr ""
+msgstr "Nieuwe gebruiker maken"
 
 #: src/containers/execution-environment/registry-list.tsx:327
 #: src/containers/execution-environment-list/execution_environment_list.tsx:297
 #: src/containers/group-management/group-detail.tsx:824
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
-msgstr ""
+msgstr "Gemaakt"
 
 #: src/containers/task-management/task-list-view.tsx:231
 #: src/containers/task-management/task_detail.tsx:178
 msgid "Created on"
-msgstr ""
+msgstr "Gemaakt op"
 
 #: src/constants.tsx:294
 msgid "Curate all synclist repository"
-msgstr ""
+msgstr "Alle repository's synclist cureren"
 
 #: src/constants.tsx:285
 msgid "Curate synclist repository"
-msgstr ""
+msgstr "Repository-synclist cureren"
 
 #: src/constants.tsx:298
 msgid "Curate synclist repository batch"
-msgstr ""
+msgstr "Batch repository-synclist cureren"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:199
 msgid "Current tags"
-msgstr ""
+msgstr "Huidige tags"
 
 #: src/components/execution-environment/repository-form.tsx:340
 msgid "Currently excluded tags"
-msgstr ""
+msgstr "Momenteel uitgesloten tags"
 
 #: src/components/execution-environment/repository-form.tsx:297
 msgid "Currently included tags"
-msgstr ""
+msgstr "Momenteel inbegrepen tags"
 
 #: src/loaders/standalone/standalone-loader.tsx:147
 msgid "Customer Support <0/>"
-msgstr ""
+msgstr "Klantenondersteuning <0/>"
 
 #: src/components/tags/deprecated-tag.tsx:21
 msgid "DEPRECATED"
-msgstr ""
+msgstr "AFGESCHAFT"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:68
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:258
 msgid "Date created"
-msgstr ""
+msgstr "Datum aangemaakt"
 
 #: src/components/delete-modal/delete-modal.tsx:28
 #: src/containers/execution-environment/registry-list.tsx:406
@@ -757,19 +750,19 @@ msgstr ""
 #: src/containers/user-management/user-detail.tsx:129
 #: src/containers/user-management/user-list.tsx:340
 msgid "Delete"
-msgstr ""
+msgstr "Verwijderen"
 
 #: src/constants.tsx:158
 msgid "Delete Ansible distribution"
-msgstr ""
+msgstr "Ansible-distributie verwijderen"
 
 #: src/constants.tsx:159
 msgid "Delete collection"
-msgstr ""
+msgstr "Collectie verwijderen"
 
 #: src/constants.tsx:160
 msgid "Delete collection remote"
-msgstr ""
+msgstr "Collectie op afstand verwijderen"
 
 #: src/components/headers/collection-header.tsx:327
 msgid "Delete collection version?"
@@ -781,23 +774,23 @@ msgstr ""
 
 #: src/constants.tsx:170
 msgid "Delete container distribution"
-msgstr ""
+msgstr "Container-distributie verwijderen"
 
 #: src/constants.tsx:171
 msgid "Delete container namespace"
-msgstr ""
+msgstr "Namespace van de container verwijderen"
 
 #: src/constants.tsx:172
 msgid "Delete container repository"
-msgstr ""
+msgstr "Container-repository verwijderen"
 
 #: src/constants.tsx:214
 msgid "Delete container's distribution"
-msgstr ""
+msgstr "De distributie van de container verwijderen"
 
 #: src/constants.tsx:213
 msgid "Delete container's namespace"
-msgstr ""
+msgstr "Namespace van de container verwijderen"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:42
 msgid "Delete container?"
@@ -805,20 +798,20 @@ msgstr ""
 
 #: src/constants.tsx:218
 msgid "Delete distribution"
-msgstr ""
+msgstr "Distributie verwijderen"
 
 #: src/components/headers/collection-header.tsx:192
 #: src/components/headers/collection-header.tsx:208
 msgid "Delete entire collection"
-msgstr ""
+msgstr "Volledige collectie verwijderen"
 
 #: src/constants.tsx:192
 msgid "Delete group"
-msgstr ""
+msgstr "Groep verwijderen"
 
 #: src/components/group-management/delete-group-modal.tsx:23
 msgid "Delete group?"
-msgstr ""
+msgstr "Groep verwijderen?"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:209
 msgid "Delete image?"
@@ -828,7 +821,7 @@ msgstr ""
 #: src/containers/namespace-detail/namespace-detail.tsx:558
 #: src/containers/namespace-detail/namespace-detail.tsx:572
 msgid "Delete namespace"
-msgstr ""
+msgstr "Namespace verwijderen"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:217
 msgid "Delete namespace?"
@@ -836,52 +829,52 @@ msgstr ""
 
 #: src/constants.tsx:191
 msgid "Delete remote registry"
-msgstr ""
+msgstr "Extern register verwijderen"
 
 #: src/containers/execution-environment/registry-list.tsx:225
 msgid "Delete remote registry?"
-msgstr ""
+msgstr "Extern register verwijderen?"
 
 #: src/constants.tsx:194
 msgid "Delete synclist"
-msgstr ""
+msgstr "Synclist verwijderen"
 
 #: src/constants.tsx:179
 msgid "Delete task"
-msgstr ""
+msgstr "Taak verwijderen"
 
 #: src/constants.tsx:195
 msgid "Delete user"
-msgstr ""
+msgstr "Gebruiker verwijderen"
 
 #: src/components/delete-modal/delete-user-modal.tsx:41
 msgid "Delete user?"
-msgstr ""
+msgstr "Gebruiker verwijderen?"
 
 #: src/components/headers/collection-header.tsx:220
 msgid "Delete version {0}"
-msgstr ""
+msgstr "Versie {0} verwijderen"
 
 #: src/components/headers/collection-header.tsx:336
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
-msgstr ""
+msgstr "<0>{0} v{collectionVersion}</0> en zijn gegevens zullen verloren gaan en dit zal tot gevolg hebben dat de gehele collectie wordt verwijderd."
 
 #: src/components/headers/collection-header.tsx:345
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
-msgstr ""
+msgstr "<0>{0} v{collectionVersion}</0> en zijn gegevens zullen verloren gaan."
 
 #: src/components/headers/collection-header.tsx:355
 #: src/containers/namespace-detail/namespace-detail.tsx:222
 msgid "Deleting <0>{0}</0> and its data will be lost."
-msgstr ""
+msgstr "<0>{0}</0> en zijn gegevens zullen verloren gaan."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:222
 msgid "Deleting <0>{digest}</0> and its data will be lost."
-msgstr ""
+msgstr "<0>{digest}</0> en zijn gegevens zullen verloren gaan."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:190
+#: src/containers/execution-environment-list/execution_environment_list.tsx:192
 #~ msgid "Deleting <0>{name}</0> and its data will be lost."
-#~ msgstr ""
+#~ msgstr "<0>{name}</0> en zijn gegevens zullen verloren gaan."
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:48
 msgid "Deleting <0>{selectedItem}</0> and its data will be lost."
@@ -889,21 +882,21 @@ msgstr ""
 
 #: src/components/delete-modal/delete-user-modal.tsx:50
 msgid "Deleting super users is not allowed."
-msgstr ""
+msgstr "Het verwijderen van supergebruikers is niet toegestaan."
 
 #: src/components/group-management/delete-group-modal.tsx:32
 msgid "Deleting this group will affect {count} users."
-msgstr ""
+msgstr "Het verwijderen van deze groep zal invloed hebben op {count} gebruikers."
 
 #: src/components/delete-modal/delete-user-modal.tsx:52
 msgid "Deleting yourself is not allowed."
-msgstr ""
+msgstr "Jezelf verwijderen is niet toegestaan."
 
 #: src/components/headers/collection-header.tsx:541
 #: src/containers/collection-detail/collection-dependencies.tsx:105
 #: src/containers/collection-detail/collection-dependencies.tsx:134
 msgid "Dependencies"
-msgstr ""
+msgstr "Afhankelijkheden"
 
 #: src/components/headers/collection-header.tsx:865
 msgid "Dependencies for collection \"{name}\" could not be displayed."
@@ -911,7 +904,7 @@ msgstr ""
 
 #: src/components/headers/collection-header.tsx:753
 msgid "Dependent collections"
-msgstr ""
+msgstr "Afhankelijke collecties"
 
 #: src/containers/collection-detail/collection-dependencies.tsx:213
 msgid "Dependent collections could not be displayed."
@@ -919,7 +912,7 @@ msgstr ""
 
 #: src/components/collection-list/collection-list.tsx:107
 msgid "Deprecate"
-msgstr ""
+msgstr "Afschrijven"
 
 #: src/components/collection-detail/collection-content-list.tsx:109
 #: src/components/execution-environment/repository-form.tsx:368
@@ -928,57 +921,57 @@ msgstr ""
 #: src/containers/execution-environment-list/execution_environment_list.tsx:292
 #: src/containers/task-management/task_detail.tsx:342
 msgid "Description"
-msgstr ""
+msgstr "Omschrijving"
 
 #: src/containers/task-management/task_detail.tsx:165
 msgid "Descriptive name"
-msgstr ""
+msgstr "Beschrijvende naam"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:20
 msgid "Detail"
-msgstr ""
+msgstr "Detail"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:344
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:177
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:279
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:490
 msgid "Digest"
-msgstr ""
+msgstr "Digest"
 
 #: src/components/repositories/local-repository-table.tsx:44
 msgid "Distribution name"
-msgstr ""
+msgstr "Naam distributie"
 
 #: src/components/headers/collection-header.tsx:157
 msgid "Docs site"
-msgstr ""
+msgstr "Locatie documenten"
 
 #: src/components/headers/collection-header.tsx:522
 #: src/containers/collection-detail/collection-docs.tsx:121
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
-msgstr ""
+msgstr "Documentatie"
 
 #: src/containers/token/token-insights.tsx:114
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
-msgstr ""
+msgstr "Documentatie over het configureren van de <0>ansible-galaxy</0>-client kan <1>hier</1> worden gevonden. Gebruik de volgende parameters om de client te configureren."
 
 #: src/components/my-imports/import-console.tsx:103
 #: src/containers/task-management/task_detail.tsx:312
 msgid "Done"
-msgstr ""
+msgstr "Gereed"
 
 #: src/components/repositories/remote-form.tsx:629
 msgid "Download CA certification file"
-msgstr ""
+msgstr "Certificeringsbestand CA downloaden"
 
 #: src/components/repositories/remote-form.tsx:583
 msgid "Download client certification file"
-msgstr ""
+msgstr "Certificeringsbestand client downloaden"
 
 #: src/components/repositories/remote-form.tsx:639
 msgid "Download concurrency"
-msgstr ""
+msgstr "Gelijktijdigheid downloaden"
 
 #: src/components/repositories/remote-form.tsx:236
 msgid "Download only signed collections"
@@ -986,20 +979,20 @@ msgstr ""
 
 #: src/components/repositories/remote-form.tsx:341
 msgid "Download requirements file"
-msgstr ""
+msgstr "Bestand met vereisten downloaden"
 
 #: src/components/collection-detail/collection-info.tsx:116
 msgid "Download tarball"
-msgstr ""
+msgstr "Tarball downloaden"
 
 #: src/components/patternfly-wrappers/fileupload.tsx:15
 msgid "Drag a file here or browse to upload"
-msgstr ""
+msgstr "Sleep een bestand hierheen of blader om te uploaden"
 
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:78
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:89
 msgid "Dropdown"
-msgstr ""
+msgstr "Dropdown"
 
 #: src/components/repositories/remote-repository-table.tsx:128
 #: src/containers/edit-namespace/edit-namespace.tsx:152
@@ -1014,47 +1007,47 @@ msgstr ""
 #: src/containers/user-management/user-edit.tsx:67
 #: src/containers/user-management/user-list.tsx:328
 msgid "Edit"
-msgstr ""
+msgstr "Bewerken"
 
 #: src/containers/edit-namespace/edit-namespace.tsx:124
 msgid "Edit details"
-msgstr ""
+msgstr "Details bewerken"
 
 #: src/components/execution-environment/repository-form.tsx:152
 msgid "Edit execution environment"
-msgstr ""
+msgstr "Uitvoeringsomgeving bewerken"
 
 #: src/containers/group-management/group-detail.tsx:224
 msgid "Edit group permissions"
-msgstr ""
+msgstr "Groepspermissies bewerken"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:548
 msgid "Edit namespace"
-msgstr ""
+msgstr "Namespace wijzigen"
 
 #: src/components/repositories/remote-form.tsx:131
 msgid "Edit remote"
-msgstr ""
+msgstr "Op afstand bewerken"
 
 #: src/containers/execution-environment/registry-list.tsx:215
 msgid "Edit remote registry"
-msgstr ""
+msgstr "Extern register bewerken"
 
 #: src/components/execution-environment/repository-form.tsx:47
 #~ msgid "Edit repository"
-#~ msgstr ""
+#~ msgstr "Edit repository"
 
 #: src/containers/edit-namespace/edit-namespace.tsx:125
 msgid "Edit resources"
-msgstr ""
+msgstr "Hulpbronnen bewerken"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:289
 #~ msgid "Edit tags"
-#~ msgstr ""
+#~ msgstr "Edit tags"
 
 #: src/containers/user-management/user-edit.tsx:46
 msgid "Edit user"
-msgstr ""
+msgstr "Gebruiker wijzigen"
 
 #: src/components/user-form/user-form.tsx:89
 #: src/containers/group-management/group-detail.tsx:737
@@ -1063,143 +1056,139 @@ msgstr ""
 #: src/containers/user-management/user-list.tsx:213
 #: src/containers/user-management/user-list.tsx:276
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:222
 msgid "Environment"
-msgstr ""
+msgstr "Omgeving"
 
-#: src/components/headers/collection-header.tsx:616
+#: src/components/headers/collection-header.tsx:606
 #~ msgid "Error deleting collection version."
-#~ msgstr ""
+#~ msgstr "Fout bij verwijderen collectieversie."
 
-#: src/components/headers/collection-header.tsx:664
+#: src/components/headers/collection-header.tsx:649
 #~ msgid "Error deleting collection."
-#~ msgstr ""
+#~ msgstr "Fout bij verwijderen collectie."
 
 #: src/containers/group-management/group-list.tsx:490
 msgid "Error deleting group."
-msgstr ""
+msgstr "Fout bij verwijderen groep."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:583
+#: src/containers/namespace-detail/namespace-detail.tsx:577
 #~ msgid "Error deleting namespace."
-#~ msgstr ""
+#~ msgstr "Fout bij verwijderen namespace."
 
-#: src/components/delete-modal/delete-user-modal.tsx:72
-#: src/components/delete-modal/delete-user-modal.tsx:102
+#: src/containers/user-management/delete-user-modal.tsx:72
+#: src/containers/user-management/delete-user-modal.tsx:96
 #~ msgid "Error deleting user."
-#~ msgstr ""
+#~ msgstr "Fout bij verwijderen gebruiker."
 
 #: src/components/collection-detail/collection-info.tsx:184
 #~ msgid "Error downloading collection."
-#~ msgstr ""
+#~ msgstr "Fout bij downloaden collectie."
 
-#: src/containers/group-management/group-list.tsx:356
+#: src/containers/group-management/group-list.tsx:345
 #~ msgid "Error editing group."
-#~ msgstr ""
+#~ msgstr "Fout bij bewerken groep."
 
 #: src/containers/my-imports/my-imports.tsx:304
 msgid "Error fetching import from API"
-msgstr ""
+msgstr "Fout bij ophalen import uit API"
 
-#: src/components/headers/collection-header.tsx:692
+#: src/components/headers/collection-header.tsx:677
 #~ msgid "Error getting collection's dependencies."
-#~ msgstr ""
+#~ msgstr "Fout bij het ophalen van de afhankelijkheden van de collectie."
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:113
 #~ msgid "Error loading Controllers"
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van controllers"
 
-#: src/containers/token/token-insights.tsx:63
-#~ msgid "Error loading Server URL."
-#~ msgstr ""
-
-#: src/containers/edit-namespace/edit-namespace.tsx:99
+#: src/containers/edit-namespace/edit-namespace.tsx:97
 #~ msgid "Error loading active user."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van actieve gebruiker."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:450
+#: src/containers/namespace-detail/namespace-detail.tsx:449
 #~ msgid "Error loading collection repositories."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van de repository's van de collectie."
 
-#: src/containers/collection-detail/collection-dependencies.tsx:212
+#: src/containers/collection-detail/collection-dependencies.tsx:209
 #~ msgid "Error loading dependent collections."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van afhankelijke collecties."
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:498
 msgid "Error loading environments."
-msgstr ""
+msgstr "Fout bij het laden van omgevingen."
 
-#: src/containers/group-management/group-detail.tsx:137
+#: src/containers/group-management/group-detail.tsx:131
 #~ msgid "Error loading group."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van groep."
 
-#: src/components/execution-environment/repository-form.tsx:412
-#: src/components/execution-environment/repository-form.tsx:482
-#: src/components/namespace-form/namespace-form.tsx:123
-#: src/components/namespace-modal/namespace-modal.tsx:179
-#: src/components/user-form/user-form.tsx:296
-#: src/containers/group-management/group-list.tsx:518
+#: src/components/execution-environment/repository-form.tsx:406
+#: src/components/execution-environment/repository-form.tsx:476
+#: src/components/namespace-form/namespace-form.tsx:122
+#: src/components/namespace-modal/namespace-modal.tsx:171
+#: src/components/user-form/user-form.tsx:295
+#: src/containers/group-management/group-list.tsx:476
 #~ msgid "Error loading groups."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van groepen."
 
-#: src/containers/namespace-list/namespace-list.tsx:124
+#: src/containers/namespace-list/namespace-list.tsx:125
 #~ msgid "Error loading my namespaces."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van mijn namespaces."
 
-#: src/containers/namespace-list/namespace-list.tsx:358
+#: src/containers/namespace-list/namespace-list.tsx:362
 #~ msgid "Error loading namespaces."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van namespaces."
 
-#: src/containers/group-management/group-detail.tsx:151
+#: src/containers/group-management/group-detail.tsx:145
 #~ msgid "Error loading permissions."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van machtigingen."
 
-#: src/components/execution-environment/repository-form.tsx:114
+#: src/components/execution-environment/repository-form.tsx:113
 #~ msgid "Error loading registries."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van registers."
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:154
 #~ msgid "Error loading tags"
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van tags"
 
-#: src/containers/task-management/task-list-view.tsx:419
+#: src/containers/task-management/task-list-view.tsx:416
 #~ msgid "Error loading tasks."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van taken."
 
-#: src/containers/token/token-insights.tsx:85
-#: src/containers/token/token-standalone.tsx:118
+#: src/containers/token/token-insights.tsx:57
+#: src/containers/token/token-standalone.tsx:108
 #~ msgid "Error loading token."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van token."
 
-#: src/containers/group-management/group-detail.tsx:491
-#: src/containers/group-management/group-detail.tsx:612
-#: src/containers/group-management/group-detail.tsx:857
-#: src/containers/group-management/group-list.tsx:314
-#: src/containers/user-management/user-list.tsx:422
+#: src/containers/group-management/group-detail.tsx:487
+#: src/containers/group-management/group-detail.tsx:608
+#: src/containers/group-management/group-detail.tsx:843
+#: src/containers/group-management/group-list.tsx:303
+#: src/containers/user-management/user-list.tsx:419
 #~ msgid "Error loading users."
-#~ msgstr ""
+#~ msgstr "Fout bij het laden van gebruikers."
 
 #: src/containers/task-management/task_detail.tsx:338
 msgid "Error message"
-msgstr ""
+msgstr "Foutbericht"
 
 #: src/components/my-imports/import-console.tsx:191
 msgid "Error message:"
-msgstr ""
+msgstr "Foutbericht:"
 
-#: src/containers/group-management/group-detail.tsx:876
+#: src/containers/group-management/group-detail.tsx:862
 #~ msgid "Error removing user from a group."
-#~ msgstr ""
+#~ msgstr "Fout bij het verwijderen van een gebruiker uit een groep."
 
-#: src/containers/task-management/task-list-view.tsx:389
-#: src/containers/task-management/task_detail.tsx:403
+#: src/containers/task-management/task-list-view.tsx:386
+#: src/containers/task-management/task_detail.tsx:400
 #~ msgid "Error stopping task."
-#~ msgstr ""
+#~ msgstr "Fout bij het stoppen van de taak."
 
-#: src/containers/group-management/group-detail.tsx:598
+#: src/containers/group-management/group-detail.tsx:594
 #~ msgid "Error updating users."
-#~ msgstr ""
+#~ msgstr "Fout bij het bijwerken van gebruikers."
 
 #: src/utilities/fail-alerts.ts:9
 msgid "Error {statusCode} - {statusText}"
@@ -1225,19 +1214,19 @@ msgstr ""
 msgid "Error {statusCode} - {statusText}: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
 msgstr ""
 
-#: src/containers/execution-environment-detail/base.tsx:223
-#: src/containers/execution-environment-list/execution_environment_list.tsx:447
+#: src/containers/execution-environment-detail/base.tsx:182
+#: src/containers/execution-environment-list/execution_environment_list.tsx:461
 #~ msgid "Error: changes weren't saved"
-#~ msgstr ""
+#~ msgstr "Error: changes weren't saved"
 
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:88
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:619
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:610
+#: src/containers/execution-environment-list/execution_environment_list.tsx:543
 #~ msgid "Error: delete failed"
-#~ msgstr ""
+#~ msgstr "Fout: verwijderen mislukt"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:309
 msgid "Execution Environment"
-msgstr ""
+msgstr "Uitvoeringsomgeving"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:36
 #: src/containers/execution-environment-list/execution_environment_list.tsx:173
@@ -1245,7 +1234,7 @@ msgstr ""
 #: src/loaders/standalone/standalone-loader.tsx:370
 #: src/loaders/standalone/standalone-loader.tsx:376
 msgid "Execution Environments"
-msgstr ""
+msgstr "Uitvoeringsomgevingen"
 
 #: src/containers/execution-environment/registry-list.tsx:541
 msgid "Execution environment \"{name}\" could not be indexed."
@@ -1263,17 +1252,17 @@ msgstr ""
 msgid "Execution environment \"{selectedItem}\" has been successfully deleted."
 msgstr ""
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:452
+#: src/containers/execution-environment-list/execution_environment_list.tsx:466
 #~ msgid "Execution environment added."
-#~ msgstr ""
+#~ msgstr "Uitvoeringsomgeving toegevoegd."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:453
+#: src/containers/execution-environment-list/execution_environment_list.tsx:467
 #~ msgid "Execution environment saved."
-#~ msgstr ""
+#~ msgstr "Uitvoeringsomgeving opgeslagen."
 
 #: src/containers/token/token-standalone.tsx:67
 msgid "Expiration"
-msgstr ""
+msgstr "Vervaldatum"
 
 #: src/components/my-imports/import-console.tsx:110
 #: src/components/my-imports/import-list.tsx:91
@@ -1281,15 +1270,15 @@ msgstr ""
 #: src/constants.tsx:380
 #: src/containers/task-management/task-list-view.tsx:160
 msgid "Failed"
-msgstr ""
+msgstr "Mislukt"
 
-#: src/containers/execution-environment/registry-list.tsx:475
+#: src/containers/execution-environment/registry-list.tsx:470
 #~ msgid "Failed to delete remote registry {name}"
-#~ msgstr ""
+#~ msgstr "Het is niet gelukt om extern register {name} te verwijderen"
 
 #: src/containers/login/login.tsx:94
 msgid "Failed to retrieve user data."
-msgstr ""
+msgstr "Ophalen gebruikersgegevens mislukt."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:399
 msgid "Failed to sign all collections."
@@ -1305,39 +1294,39 @@ msgstr ""
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:249
 msgid "Failed to {operation} tag \"{tag}\"."
-msgstr ""
+msgstr "Kan tag \"{tag}\" niet {operation}."
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:83
 msgid "Filter by name"
-msgstr ""
+msgstr "Op naam filteren"
 
 #: src/components/repo-selector/repo-selector.tsx:57
 msgid "Filter by repository"
-msgstr ""
+msgstr "Filteren op repository"
 
 #: src/components/patternfly-wrappers/compound-filter.tsx:121
 #: src/components/patternfly-wrappers/compound-filter.tsx:127
 #: src/components/patternfly-wrappers/compound-filter.tsx:170
 msgid "Filter by {0}"
-msgstr ""
+msgstr "Filteren op {0}"
 
-#: src/components/permissions/obect-permission-field.tsx:46
+#: src/components/permissions/obect-permission-field.tsx:52
 #~ msgid "Find a group"
-#~ msgstr ""
+#~ msgstr "Een groep zoeken"
 
 #: src/components/collection-detail/collection-content-list.tsx:80
 #: src/components/collection-detail/table-of-contents.tsx:100
 msgid "Find content"
-msgstr ""
+msgstr "Inhoud zoeken"
 
 #: src/containers/execution-environment/registry-list.tsx:413
 msgid "Find execution environments in this registry"
-msgstr ""
+msgstr "Uitvoeringsomgevingen in dit register zoeken"
 
 #: src/containers/task-management/task-list-view.tsx:241
 #: src/containers/task-management/task_detail.tsx:172
 msgid "Finished at"
-msgstr ""
+msgstr "Voltooid op"
 
 #: src/components/user-form/user-form.tsx:87
 #: src/containers/group-management/group-detail.tsx:729
@@ -1346,32 +1335,32 @@ msgstr ""
 #: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:264
 msgid "First name"
-msgstr ""
+msgstr "Voornaam"
 
 #: src/components/my-imports/import-console.tsx:81
 msgid "Follow logs"
-msgstr ""
+msgstr "Logs volgen"
 
 #: src/loaders/standalone/standalone-loader.tsx:176
 msgid "Galaxy Logo"
-msgstr ""
+msgstr "Galaxy-logo"
 
 #: src/containers/repositories/repository-list.tsx:301
 msgid "Get token"
-msgstr ""
+msgstr "Token ophalen"
 
 #: src/utilities/wait-for-task.ts:9
 msgid "Giving up waiting for task after 10 attempts."
-msgstr ""
+msgstr "Wachten op een taak wordt na 10 pogingen opgegeven."
 
 #: src/components/collection-detail/collection-info.tsx:159
 msgid "Go to documentation"
-msgstr ""
+msgstr "Naar documentatie gaan"
 
 #: src/containers/group-management/group-list.tsx:184
 #: src/containers/group-management/group-list.tsx:374
 msgid "Group"
-msgstr ""
+msgstr "Groep"
 
 #: src/containers/group-management/group-detail.tsx:142
 msgid "Group \"{0}\" could not be displayed."
@@ -1391,7 +1380,7 @@ msgstr ""
 
 #: src/containers/group-management/group-list.tsx:388
 msgid "Group list"
-msgstr ""
+msgstr "Groepslijst"
 
 #: src/components/user-form/user-form.tsx:147
 #: src/components/user-form/user-form.tsx:161
@@ -1401,7 +1390,7 @@ msgstr ""
 #: src/containers/user-management/user-list.tsx:282
 #: src/loaders/standalone/standalone-loader.tsx:400
 msgid "Groups"
-msgstr ""
+msgstr "Groepen"
 
 #: src/components/execution-environment/repository-form.tsx:415
 #: src/components/execution-environment/repository-form.tsx:486
@@ -1414,15 +1403,15 @@ msgstr ""
 
 #: src/containers/group-management/group-list.tsx:153
 msgid "Groups will appear once created"
-msgstr ""
+msgstr "Groepen zullen verschijnen zodra ze zijn aangemaakt"
 
 #: src/components/execution-environment/repository-form.tsx:392
 msgid "Groups with access"
-msgstr ""
+msgstr "Groepen met toegang"
 
 #: src/components/repositories/remote-form.tsx:418
 msgid "Hide advanced options"
-msgstr ""
+msgstr "Geavanceerde opties verbergen"
 
 #: src/components/collection-detail/download-signature-grid-item.tsx:44
 msgid "Hide the signature"
@@ -1433,15 +1422,15 @@ msgstr ""
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
 #: src/containers/namespace-detail/namespace-detail.tsx:229
 msgid "I understand that this action cannot be undone."
-msgstr ""
+msgstr "Ik begrijp dat deze actie niet ongedaan kan worden gemaakt."
 
 #: src/components/repositories/remote-form.tsx:501
 msgid "If selected, TLS peer validation must be performed."
-msgstr ""
+msgstr "Indien geselecteerd, moet TLS-peervalidatie worden uitgevoerd."
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:261
 msgid "If the Controller is not listed in the table, check settings.py."
-msgstr ""
+msgstr "Als de controller niet in de tabel voorkomt, controleer dan settings.py."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:618
 msgid "Image \"{digest}\" could not be deleted."
@@ -1455,50 +1444,50 @@ msgstr ""
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:165
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:170
 msgid "Image layers"
-msgstr ""
+msgstr "Afbeeldingslagen"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:22
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:314
 msgid "Images"
-msgstr ""
+msgstr "Afbeeldingen"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:141
 msgid "Images will appear once uploaded"
-msgstr ""
+msgstr "Afbeeldingen zullen verschijnen zodra geüpload"
 
 #: src/constants.tsx:282
 #: src/constants.tsx:291
 msgid "Import and auto approve"
-msgstr ""
+msgstr "Importeren en automatisch goedkeuren"
 
 #: src/constants.tsx:288
 msgid "Import and move to staging"
-msgstr ""
+msgstr "Importeren en verplaatsen naar staging"
 
 #: src/components/headers/collection-header.tsx:536
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
-msgstr ""
+msgstr "Logboek importeren"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:589
 msgid "Imports"
-msgstr ""
+msgstr "Invoer"
 
 #: src/containers/execution-environment/registry-list.tsx:421
 msgid "Index execution environments"
-msgstr ""
+msgstr "Index uitvoeringsomgevingen"
 
-#: src/containers/execution-environment/registry-list.tsx:508
+#: src/containers/execution-environment/registry-list.tsx:504
 #~ msgid "Indexing execution environments in {name}"
-#~ msgstr ""
+#~ msgstr "Indexeren van uitvoeringsomgevingen in {name}"
 
 #: src/containers/execution-environment/registry-list.tsx:414
 msgid "Indexing execution environments is only supported on registry.redhat.io"
-msgstr ""
+msgstr "Het indexeren van uitvoeringsomgevingen wordt alleen ondersteund op registry.redhat.io"
 
-#: src/containers/execution-environment/registry-list.tsx:523
+#: src/containers/execution-environment/registry-list.tsx:517
 #~ msgid "Indexing failed for {name}"
-#~ msgstr ""
+#~ msgstr "Indexeren mislukt voor {name}"
 
 #: src/containers/execution-environment/registry-list.tsx:525
 msgid "Indexing started for execution environment \"{name}\"."
@@ -1507,19 +1496,19 @@ msgstr ""
 #: src/components/collection-detail/collection-info.tsx:57
 #: src/components/headers/collection-header.tsx:517
 msgid "Install"
-msgstr ""
+msgstr "Installeren"
 
 #: src/components/collection-detail/collection-info.tsx:78
 #~ msgid "Install Version"
-#~ msgstr ""
+#~ msgstr "Install Version"
 
 #: src/components/collection-detail/collection-info.tsx:74
 msgid "Installation"
-msgstr ""
+msgstr "Installatie"
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:78
 msgid "Instructions"
-msgstr ""
+msgstr "Instructies"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:536
 msgid "Internal Server Error"
@@ -1527,39 +1516,39 @@ msgstr ""
 
 #: src/components/import-modal/import-modal.tsx:153
 msgid "Invalid file format."
-msgstr ""
+msgstr "Ongeldig bestandsformaat."
 
 #: src/components/import-modal/import-modal.tsx:159
 msgid "Invalid file name. Collections must be formatted as 'namespace-collection_name-1.0.0'"
-msgstr ""
+msgstr "Ongeldige bestandsnaam. Collecties moeten worden geformatteerd als 'namespace-collection_name-1.0.0'"
 
 #: src/containers/login/login.tsx:107
 msgid "Invalid login credentials."
-msgstr ""
+msgstr "Ongeldige inloggegevens."
 
 #: src/components/headers/collection-header.tsx:159
 msgid "Issue tracker"
-msgstr ""
+msgstr "Probleem tracker"
 
 #: src/components/execution-environment/repository-form.tsx:359
 msgid "It does not make sense to include and exclude tags at the same time."
-msgstr ""
+msgstr "Het heeft geen zin om tags tegelijkertijd op te nemen en uit te sluiten."
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:224
 #~ msgid "It's safe to close this window. These tasks will finish in the"
-#~ msgstr ""
+#~ msgstr "It's safe to close this window. These tasks will finish in the"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:221
 msgid "It's safe to close this window. These tasks will finish in the background."
-msgstr ""
+msgstr "Het is veilig om dit venster te sluiten. Deze taken zullen op de achtergrond eindigen."
 
 #: src/components/collection-list/collection-filter.tsx:51
 msgid "Keywords"
-msgstr ""
+msgstr "Trefwoorden"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:302
 msgid "Last modified"
-msgstr ""
+msgstr "Laatste wijziging"
 
 #: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:733
@@ -1568,64 +1557,64 @@ msgstr ""
 #: src/containers/user-management/user-list.tsx:212
 #: src/containers/user-management/user-list.tsx:270
 msgid "Last name"
-msgstr ""
+msgstr "Achternaam"
 
 #: src/components/repositories/remote-repository-table.tsx:79
 msgid "Last synced"
-msgstr ""
+msgstr "Laatste synchronisatie"
 
 #: src/components/repositories/local-repository-table.tsx:59
 #: src/components/repositories/remote-repository-table.tsx:74
 #: src/containers/execution-environment/registry-list.tsx:332
 msgid "Last updated"
-msgstr ""
+msgstr "Laatst geüpdatet"
 
 #: src/components/headers/collection-header.tsx:447
 msgid "Last updated <0/>"
-msgstr ""
+msgstr "Laatst geüpdatet <0/>"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:46
 msgid "Last updated from registry {0}"
-msgstr ""
+msgstr "Laatst bijgewerkt vanuit register {0}"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:167
 msgid "Layers"
-msgstr ""
+msgstr "Lagen"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:265
 msgid "Learn more"
-msgstr ""
+msgstr "Meer lezen"
 
 #: src/components/collection-detail/collection-info.tsx:68
 msgid "License"
-msgstr ""
+msgstr "Licentie"
 
 #: src/components/repositories/remote-form.tsx:674
 msgid "Limits total download rate in requests per second."
-msgstr ""
+msgstr "Beperkt de totale downloadsnelheid in verzoeken per seconde."
 
 #: src/components/namespace-form/namespace-form.tsx:293
 msgid "Link URL"
-msgstr ""
+msgstr "Link URL"
 
 #: src/components/namespace-form/namespace-form.tsx:281
 msgid "Link text"
-msgstr ""
+msgstr "Link tekst"
 
 #: src/components/collection-list/collection-list.tsx:49
 #: src/containers/search/search.tsx:267
 msgid "List of Collections"
-msgstr ""
+msgstr "Lijst van collecties"
 
 #: src/containers/token/token-insights.tsx:145
 #: src/containers/token/token-standalone.tsx:98
 msgid "Load token"
-msgstr ""
+msgstr "Laadtoken"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:408
 #: src/containers/repositories/repository-list.tsx:118
 msgid "Local"
-msgstr ""
+msgstr "Lokaal"
 
 #: src/containers/login/login.tsx:59
 msgid "Log In"
@@ -1633,59 +1622,59 @@ msgstr ""
 
 #: src/containers/login/login.tsx:67
 msgid "Log in to your account"
-msgstr ""
+msgstr "Log in op uw account"
 
 #: src/components/shared/login-link.tsx:23
 #: src/components/shared/login-link.tsx:30
 msgid "Login"
-msgstr ""
+msgstr "Inloggen"
 
 #: src/components/namespace-form/namespace-form.tsx:137
 msgid "Logo URL"
-msgstr ""
+msgstr "Logo URL"
 
 #: src/loaders/standalone/standalone-loader.tsx:137
 msgid "Logout"
-msgstr ""
+msgstr "Afmelden"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:134
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:393
 msgid "Manage tags"
-msgstr ""
+msgstr "Tags beheren"
 
 #: src/containers/token/token-insights.tsx:167
 msgid "Manage tokens"
-msgstr ""
+msgstr "Tokens beheren"
 
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:147
 msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
-msgstr ""
+msgstr "Manifestlijsten worden momenteel niet ondersteund in dit scherm, gebruik het tabblad <0>Afbeeldingen</0> om details van manifestlijsten te zien."
 
 #: src/containers/task-management/task_detail.tsx:309
 msgid "Message"
-msgstr ""
+msgstr "Bericht"
 
 #: src/constants.tsx:161
 msgid "Modify Ansible repo content"
-msgstr ""
+msgstr "Ansible repo-inhoud aanpassen"
 
 #: src/components/repositories/remote-form.tsx:683
 msgid "Must be an integer."
-msgstr ""
+msgstr "Moet een geheel getal zijn."
 
 #: src/containers/my-imports/my-imports.tsx:118
 msgid "My imports"
-msgstr ""
+msgstr "Mijn import"
 
 #: src/containers/namespace-list/namespace-list.tsx:191
 msgid "My namespaces"
-msgstr ""
+msgstr "Mijn namespaces"
 
 #: src/containers/settings/user-profile.tsx:77
 #: src/containers/settings/user-profile.tsx:78
 #: src/loaders/standalone/standalone-loader.tsx:126
 msgid "My profile"
-msgstr ""
+msgstr "Mijn profiel"
 
 #: src/components/collection-detail/collection-content-list.tsx:107
 #: src/components/execution-environment/repository-form.tsx:171
@@ -1702,11 +1691,11 @@ msgstr ""
 #: src/containers/namespace-list/namespace-list.tsx:225
 #: src/containers/task-management/task_detail.tsx:268
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
-#: src/components/namespace-modal/namespace-modal.tsx:46
+#: src/components/namespace-modal/namespace-modal.tsx:51
 #~ msgid "Name can only contain [A-Za-z0-9_]"
-#~ msgstr ""
+#~ msgstr "Naam kan alleen [A-Za-z0-9_] bevatten"
 
 #: src/components/namespace-modal/namespace-modal.tsx:59
 msgid "Name can only contain letters and numbers"
@@ -1714,11 +1703,11 @@ msgstr ""
 
 #: src/components/namespace-modal/namespace-modal.tsx:63
 msgid "Name cannot begin with '_'"
-msgstr ""
+msgstr "Naam kan niet met '_' beginnen"
 
 #: src/components/namespace-modal/namespace-modal.tsx:61
 msgid "Name must be longer than 2 characters"
-msgstr ""
+msgstr "Naam moet langer zijn dan 2 tekens"
 
 #: src/components/namespace-form/namespace-form.tsx:247
 msgid "Name must not be empty."
@@ -1728,11 +1717,7 @@ msgstr ""
 #: src/containers/certification-dashboard/certification-dashboard.tsx:147
 #: src/containers/certification-dashboard/certification-dashboard.tsx:243
 msgid "Namespace"
-msgstr ""
-
-#: src/containers/namespace-detail/namespace-detail.tsx:562
-#~ msgid "Namespace \"{0}\" has been successfully deleted."
-#~ msgstr ""
+msgstr "Namespace"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:669
 msgid "Namespace \"{name}\" could not be deleted."
@@ -1748,21 +1733,21 @@ msgstr ""
 
 #: src/components/namespace-modal/namespace-modal.tsx:135
 msgid "Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’."
-msgstr ""
+msgstr "Namespace-namen zijn beperkt tot alfanumerieke tekens en underscores, moeten minimaal 2 tekens lang zijn en mogen niet beginnen met een '_'."
 
 #: src/components/namespace-form/namespace-form.tsx:96
 #: src/components/namespace-modal/namespace-modal.tsx:157
 msgid "Namespace owners"
-msgstr ""
+msgstr "Eigenaars van de namespace"
 
-#: src/containers/edit-namespace/edit-namespace.tsx:264
+#: src/containers/edit-namespace/edit-namespace.tsx:262
 #~ msgid "Namespace successfully edited."
-#~ msgstr ""
+#~ msgstr "Namespace succesvol gewijzigd."
 
 #: src/loaders/standalone/standalone-loader.tsx:350
 #: src/paths.ts:72
 msgid "Namespaces"
-msgstr ""
+msgstr "Namespaces"
 
 #: src/containers/namespace-list/namespace-list.tsx:125
 #: src/containers/namespace-list/namespace-list.tsx:360
@@ -1771,179 +1756,179 @@ msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx:282
 msgid "Namespaces will appear once created"
-msgstr ""
+msgstr "Namespaces zullen verschijnen zodra ze zijn aangemaakt"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:164
 #: src/containers/certification-dashboard/certification-dashboard.tsx:198
 #: src/containers/certification-dashboard/certification-dashboard.tsx:321
 msgid "Needs Review"
-msgstr ""
+msgstr "Vereist herziening"
 
 #: src/components/import-modal/import-modal.tsx:59
 msgid "New collection"
-msgstr ""
+msgstr "Nieuwe collectie"
 
 #: src/components/import-modal/import-modal.tsx:59
 msgid "New version of {0}"
-msgstr ""
+msgstr "Nieuwe versie van {0}"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:192
 msgid "No"
-msgstr ""
+msgstr "Geen"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:299
 msgid "No Controllers available"
-msgstr ""
+msgstr "Geen controllers beschikbaar"
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:105
 msgid "No README"
-msgstr ""
+msgstr "Geen README"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:53
 msgid "No activities yet"
-msgstr ""
+msgstr "Nog geen activiteiten"
 
 #: src/containers/task-management/task_detail.tsx:242
 msgid "No child task"
-msgstr ""
+msgstr "Geen kindertaak"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:288
 #: src/containers/search/search.tsx:152
 msgid "No collections yet"
-msgstr ""
+msgstr "Nog geen collecties"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:195
 msgid "No container repositories yet"
-msgstr ""
+msgstr "Nog geen containerrepository's"
 
 #: src/containers/my-imports/my-imports.tsx:263
 msgid "No data"
-msgstr ""
+msgstr "Geen gegevens"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:28
 #: src/containers/collection-detail/collection-dependencies.tsx:139
 #: src/containers/collection-detail/collection-dependencies.tsx:147
 msgid "No dependencies"
-msgstr ""
+msgstr "Geen afhankelijkheden"
 
 #: src/containers/group-management/group-list.tsx:152
 msgid "No groups yet"
-msgstr ""
+msgstr "Nog geen groepen"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:140
 msgid "No images yet"
-msgstr ""
+msgstr "Nog geen beelden"
 
 #: src/components/my-imports/import-list.tsx:154
 msgid "No imports"
-msgstr ""
+msgstr "Geen invoer"
 
 #: src/components/repositories/local-repository-table.tsx:31
 msgid "No local repositories yet"
-msgstr ""
+msgstr "Nog geen lokale repository's"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:235
 msgid "No managed collections yet"
-msgstr ""
+msgstr "Nog geen beheerde collecties"
 
 #: src/containers/namespace-list/namespace-list.tsx:280
 msgid "No namespaces yet"
-msgstr ""
+msgstr "Nog geen namespaces"
 
 #: src/containers/task-management/task_detail.tsx:213
 msgid "No parent task"
-msgstr ""
+msgstr "Geen oudertaak"
 
 #: src/components/permissions/permission-chip-selector.tsx:97
 msgid "No permission"
-msgstr ""
+msgstr "Geen machtiging"
 
 #: src/containers/execution-environment/registry-list.tsx:235
 msgid "No remote registries yet"
-msgstr ""
+msgstr "Nog geen registers op afstand"
 
 #: src/containers/repositories/repository-list.tsx:225
 msgid "No remote repositories yet"
-msgstr ""
+msgstr "Nog geen externe repository's"
 
 #: src/components/empty-state/empty-state-filter.tsx:15
 msgid "No results found"
-msgstr ""
+msgstr "Geen resultaten gevonden"
 
 #: src/components/empty-state/empty-state-filter.tsx:16
 msgid "No results match the filter criteria. Try changing your filter settings."
-msgstr ""
+msgstr "Geen resultaten voldoen aan de filtercriteria. Probeer uw filterinstellingen te wijzigen."
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:200
 msgid "No tag or digest selected."
-msgstr ""
+msgstr "Geen tag of digest geselecteerd."
 
 #: src/containers/task-management/task_detail.tsx:196
 msgid "No task group"
-msgstr ""
+msgstr "Geen taakgroep"
 
 #: src/components/my-imports/import-console.tsx:96
 msgid "No task messages available"
-msgstr ""
+msgstr "Geen taakberichten beschikbaar"
 
 #: src/containers/task-management/task-list-view.tsx:120
 msgid "No tasks yet"
-msgstr ""
+msgstr "Nog geen taken"
 
 #: src/components/group-management/delete-group-modal.tsx:51
 msgid "No users will be affected."
-msgstr ""
+msgstr "Geen enkele gebruiker zal hierdoor worden getroffen."
 
 #: src/containers/group-management/group-detail.tsx:690
 #: src/containers/user-management/user-list.tsx:245
 msgid "No users yet"
-msgstr ""
+msgstr "Nog geen gebruikers"
 
 #: src/components/user-form/user-form.tsx:202
 msgid "Not a super user"
-msgstr ""
+msgstr "Geen supergebruiker"
 
 #: src/components/permissions/permission-chip-selector.tsx:81
 #: src/components/typeahead/typeahead.tsx:86
 #: src/containers/collection-detail/collection-docs.tsx:271
 msgid "Not found"
-msgstr ""
+msgstr "Niet gevonden"
 
 #: src/containers/not-found/not-found.tsx:21
 msgid "Not found image"
-msgstr ""
+msgstr "Afbeelding niet gevonden"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:58
 msgid "Not required for use by other collections"
-msgstr ""
+msgstr "Niet vereist voor gebruik door andere collecties"
 
 #: src/containers/token/token-insights.tsx:133
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your"
-#~ msgstr ""
+#~ msgstr "Note: this URL contains all collections in Hub. To connect to your"
 
-#: src/containers/token/token-insights.tsx:176
+#: src/containers/token/token-insights.tsx:169
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
-#~ msgstr ""
+#~ msgstr "Opmerking: deze URL bevat alle collecties in Hub. Om verbinding te maken met de sync-repository van uw organisatie gebruikt u de URL die u kunt vinden op <0>Repository Management</0>."
 
 #: src/components/repositories/remote-form.tsx:651
 msgid "Number must be greater than 0"
-msgstr ""
+msgstr "Getal moet groter zijn dan 0"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:495
 msgid "OS / Arch"
-msgstr ""
+msgstr "OS / Arch"
 
 #: src/containers/token/token-insights.tsx:129
 msgid "Offline token"
-msgstr ""
+msgstr "Offline token"
 
 #: src/components/headers/base-header.tsx:47
 #~ msgid "Page logo"
-#~ msgstr ""
+#~ msgstr "Page logo"
 
 #: src/containers/task-management/task_detail.tsx:200
 msgid "Parent task"
-msgstr ""
+msgstr "Oudertaak"
 
 #: src/components/collection-list/collection-filter.tsx:69
 msgid "Partial"
@@ -1955,53 +1940,57 @@ msgstr ""
 
 #: src/paths.ts:73
 msgid "Partners"
-msgstr ""
+msgstr "Partners"
 
 #: src/components/repositories/remote-form.tsx:387
 #: src/components/user-form/user-form.tsx:92
 #: src/containers/login/login.tsx:55
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #: src/components/user-form/user-form.tsx:110
 msgid "Password confirmation"
-msgstr ""
+msgstr "Bevestiging wachtwoord"
 
 #: src/components/user-form/user-form.tsx:107
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Wachtwoorden komen niet overeen"
 
 #: src/components/status/status-indicator.tsx:45
 msgid "Pending"
-msgstr ""
+msgstr "In afwachting"
 
 #: src/components/headers/collection-header.tsx:271
 #~ msgid "Permanently delete collection"
-#~ msgstr ""
+#~ msgstr "Permanently delete collection"
 
 #: src/components/headers/collection-header.tsx:270
 #~ msgid "Permanently delete collection version"
-#~ msgstr ""
+#~ msgstr "Permanently delete collection version"
 
 #: src/components/headers/collection-header.tsx:270
 #~ msgid "Permanently delete collection version?"
-#~ msgstr ""
+#~ msgstr "Collectieversie permanent verwijderen?"
 
 #: src/components/headers/collection-header.tsx:271
 #~ msgid "Permanently delete collection?"
+#~ msgstr "Collectie permanent verwijderen?"
+
+#: src/containers/execution-environment-list/execution_environment_list.tsx:185
+#~ msgid "Permanently delete container?"
 #~ msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:209
 #~ msgid "Permanently delete image"
-#~ msgstr ""
+#~ msgstr "Permanently delete image"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:209
 #~ msgid "Permanently delete image?"
-#~ msgstr ""
+#~ msgstr "Afbeelding permanent verwijderen?"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:207
+#: src/containers/namespace-detail/namespace-detail.tsx:206
 #~ msgid "Permanently delete namespace?"
-#~ msgstr ""
+#~ msgstr "Namespace permanent verwijderen?"
 
 #: src/containers/group-management/group-detail.tsx:315
 msgid "Permission \"{0}\" could not be not removed from group \"{1}\"."
@@ -2011,17 +2000,17 @@ msgstr ""
 msgid "Permission \"{permission}\" could not be not added to group \"{0}\"."
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:300
+#: src/containers/group-management/group-detail.tsx:294
 #~ msgid "Permission {0} was not removed."
-#~ msgstr ""
+#~ msgstr "Machtiging {0} werd niet verwijderd."
 
-#: src/containers/group-management/group-detail.tsx:285
+#: src/containers/group-management/group-detail.tsx:279
 #~ msgid "Permission {permission} was not added."
-#~ msgstr ""
+#~ msgstr "Machtiging {permission} werd niet toegevoegd."
 
 #: src/containers/group-management/group-detail.tsx:187
 msgid "Permissions"
-msgstr ""
+msgstr "Machtigingen"
 
 #: src/containers/group-management/group-detail.tsx:161
 msgid "Permissions for group \"{0}\" could not be displayed."
@@ -2029,210 +2018,210 @@ msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:241
 msgid "Please finish editing permissions first."
-msgstr ""
+msgstr "Maak eerst het bewerken van de machtigingen af."
 
 #: src/components/import-modal/import-modal.tsx:149
 msgid "Please select no more than one file."
-msgstr ""
+msgstr "Selecteer niet meer dan één bestand."
 
 #: src/components/namespace-modal/namespace-modal.tsx:57
 msgid "Please, provide the namespace name"
-msgstr ""
+msgstr "Geef de naam van de namespace op"
 
 #: src/components/markdown-editor/markdown-editor.tsx:38
 msgid "Preview"
-msgstr ""
+msgstr "Voorvertoning"
 
-#: src/containers/settings/user-profile.tsx:115
+#: src/containers/settings/user-profile.tsx:121
 #~ msgid "Profile saved."
-#~ msgstr ""
+#~ msgstr "Profiel opgeslagen."
 
 #: src/containers/task-management/task_detail.tsx:292
 msgid "Progress messages"
-msgstr ""
+msgstr "Voortgangsberichten"
 
 #: src/components/cards/collection-card.tsx:75
 #: src/components/collection-list/collection-list-item.tsx:88
 msgid "Provided by {company}"
-msgstr ""
+msgstr "Geleverd door {company}"
 
 #: src/components/repositories/remote-form.tsx:424
 msgid "Proxy URL"
-msgstr ""
+msgstr "Proxy-URL"
 
 #: src/components/repositories/remote-form.tsx:470
 msgid "Proxy password"
-msgstr ""
+msgstr "Proxy-wachtwoord"
 
 #: src/components/repositories/remote-form.tsx:442
 msgid "Proxy username"
-msgstr ""
+msgstr "Proxy-gebruikersnaam"
 
 #: src/constants.tsx:250
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:162
 msgid "Published"
-msgstr ""
+msgstr "Gepubliceerd"
 
 #: src/constants.tsx:220
 msgid "Pull distribution"
-msgstr ""
+msgstr "Trekverdeling"
 
 #: src/constants.tsx:175
 #: src/constants.tsx:206
 msgid "Pull private containers"
-msgstr ""
+msgstr "Privé-containers trekken"
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:81
 msgid "Pull this image"
-msgstr ""
+msgstr "Deze afbeelding trekken"
 
 #: src/components/about-modal/about-modal.tsx:79
 msgid "Pulp Ansible Version"
-msgstr ""
+msgstr "Pulp Ansible-versie"
 
 #: src/constants.tsx:299
 msgid "Pulp Ansible: Collections sync"
-msgstr ""
+msgstr "Pulp Ansible: collecties sync"
 
 #: src/constants.tsx:308
 msgid "Pulp Ansible: Roles synchronize"
-msgstr ""
+msgstr "Pulp Ansible: rollen synchroniseren"
 
 #: src/constants.tsx:302
 msgid "Pulp ansible: Copy content"
-msgstr ""
+msgstr "Pulp ansible: inhoud kopiëren"
 
 #: src/constants.tsx:313
 msgid "Pulp ansible: Import collection"
-msgstr ""
+msgstr "Pulp ansible: collectie importeren"
 
 #: src/constants.tsx:312
 msgid "Pulp ansible: Update collection remote"
-msgstr ""
+msgstr "Pulp ansible: collectie op afstand bijwerken"
 
 #: src/constants.tsx:305
 msgid "Pulp ansible: collection sync"
-msgstr ""
+msgstr "Pulp ansible: collectie sync"
 
 #: src/constants.tsx:331
 msgid "Pulp container: Build image from containerfile"
-msgstr ""
+msgstr "Pulp container: afbeelding samenstellen uit containerbestand"
 
 #: src/constants.tsx:334
 msgid "Pulp container: General multi delete"
-msgstr ""
+msgstr "Pulp container: algemeen meervoudig verwijderen"
 
 #: src/constants.tsx:325
 msgid "Pulp container: Recursive add content"
-msgstr ""
+msgstr "Pulp container: inhoud recursief toevoegen"
 
 #: src/constants.tsx:328
 msgid "Pulp container: Recursive remove content"
-msgstr ""
+msgstr "Pulp container: inhoud recursief verwijderen"
 
 #: src/constants.tsx:316
 msgid "Pulp container: Tag image"
-msgstr ""
+msgstr "Pulp container: tag afbeelding"
 
 #: src/constants.tsx:322
 msgid "Pulp container: Tasks synchronize"
-msgstr ""
+msgstr "Pulp container: taken synchroniseren"
 
 #: src/constants.tsx:319
 msgid "Pulp container: Untage image"
-msgstr ""
+msgstr "Pulp container: tag afbeelding verwijderen"
 
 #: src/constants.tsx:370
 msgid "Pulpcore: Add and remove"
-msgstr ""
+msgstr "Pulpkern: toevoegen en verwijderen"
 
 #: src/constants.tsx:373
 msgid "Pulpcore: Add or remove"
-msgstr ""
+msgstr "Pulpkern: toevoegen of verwijderen"
 
 #: src/constants.tsx:361
 msgid "Pulpcore: Delete version"
-msgstr ""
+msgstr "Pulpcore: versie verwijderen"
 
 #: src/constants.tsx:346
 msgid "Pulpcore: General create"
-msgstr ""
+msgstr "Pulpcore: algemeen maken"
 
 #: src/constants.tsx:352
 msgid "Pulpcore: General delete"
-msgstr ""
+msgstr "Pulpcore: algemeen verwijderen"
 
 #: src/constants.tsx:349
 msgid "Pulpcore: General update"
-msgstr ""
+msgstr "Pulpcore: algemeen bijwerken"
 
 #: src/constants.tsx:337
 msgid "Pulpcore: Import repository version"
-msgstr ""
+msgstr "Pulpcore: versie repository importeren"
 
 #: src/constants.tsx:340
 msgid "Pulpcore: Orphan cleanup"
-msgstr ""
+msgstr "Pulpcore: Orphan opschonen"
 
 #: src/constants.tsx:355
 msgid "Pulpcore: Pulp export"
-msgstr ""
+msgstr "Pulpcore: Pulp exporteren"
 
 #: src/constants.tsx:358
 msgid "Pulpcore: Pulp import"
-msgstr ""
+msgstr "Pulpcore: Pulp importeren"
 
 #: src/constants.tsx:343
 msgid "Pulpcore: Repair all artifacts"
-msgstr ""
+msgstr "Pulpcore: alle artefacten repareren"
 
 #: src/constants.tsx:364
 msgid "Pulpcore: Repair version"
-msgstr ""
+msgstr "Pulpcore: reparatieversie"
 
 #: src/constants.tsx:367
 msgid "Pulpcore: Upload commit"
-msgstr ""
+msgstr "Pulpcore: commit uploaden"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:142
 msgid "Push container images"
-msgstr ""
+msgstr "Push containerafbeeldingen"
 
 #: src/constants.tsx:219
 msgid "Push distribution"
-msgstr ""
+msgstr "Push distributie"
 
 #: src/constants.tsx:211
 msgid "Push images to existing containers"
-msgstr ""
+msgstr "Push afbeeldingen naar bestaande containers"
 
 #: src/constants.tsx:216
 msgid "Push new containers"
-msgstr ""
+msgstr "Push nieuwe containers"
 
 #: src/constants.tsx:176
 msgid "Push to existing containers"
-msgstr ""
+msgstr "Push naar bestaande containers"
 
 #: src/components/repositories/remote-form.tsx:671
 msgid "Rate Limit"
-msgstr ""
+msgstr "Tarieflimiet"
 
 #: src/components/markdown-editor/markdown-editor.tsx:26
 msgid "Raw Markdown"
-msgstr ""
+msgstr "Ruwe markdown"
 
 #: src/components/collection-detail/table-of-contents.tsx:140
 msgid "Readme"
-msgstr ""
+msgstr "Readme"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:335
 msgid "Reason: task {0}"
-msgstr ""
+msgstr "Reden: taak {0}"
 
 #: src/constants.tsx:251
 msgid "Red Hat Certified"
-msgstr ""
+msgstr "Red Hat gecertificeerd"
 
 #: src/components/execution-environment/repository-form.tsx:116
 msgid "Registries list could not be displayed."
@@ -2240,40 +2229,40 @@ msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx:233
 msgid "Registry"
-msgstr ""
+msgstr "Register"
 
 #: src/containers/execution-environment/registry-list.tsx:337
 msgid "Registry URL"
-msgstr ""
+msgstr "URL register"
 
 #: src/containers/execution-environment/registry-list.tsx:342
 msgid "Registry sync status"
-msgstr ""
+msgstr "Status registersynchronisatie"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:428
 msgid "Reject"
-msgstr ""
+msgstr "Weigeren"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:160
 #: src/containers/certification-dashboard/certification-dashboard.tsx:199
 #: src/containers/certification-dashboard/certification-dashboard.tsx:310
 msgid "Rejected"
-msgstr ""
+msgstr "Geweigerd"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:408
 #: src/containers/repositories/repository-list.tsx:119
 msgid "Remote"
-msgstr ""
+msgstr "Afstand"
 
 #: src/constants.tsx:96
 #: src/containers/execution-environment/registry-list.tsx:232
 #: src/loaders/standalone/standalone-loader.tsx:379
 msgid "Remote Registries"
-msgstr ""
+msgstr "Externe registers"
 
 #: src/components/repositories/remote-repository-table.tsx:64
 msgid "Remote name"
-msgstr ""
+msgstr "Externe naam"
 
 #: src/containers/execution-environment/registry-list.tsx:480
 msgid "Remote registry \"{name}\" could not be deleted."
@@ -2289,59 +2278,59 @@ msgstr ""
 
 #: src/containers/repositories/repository-list.tsx:226
 msgid "Remote repositories will appear once added"
-msgstr ""
+msgstr "Externe repository's zullen verschijnen zodra ze zijn toegevoegd"
 
 #: src/containers/group-management/group-detail.tsx:864
 msgid "Remove"
-msgstr ""
+msgstr "Verwijderen"
 
 #: src/constants.tsx:281
 msgid "Remove content from repository"
-msgstr ""
+msgstr "Inhoud verwijderen uit repository"
 
 #: src/containers/group-management/group-detail.tsx:609
 msgid "Remove user from group?"
-msgstr ""
+msgstr "Gebruiker uit groep verwijderen?"
 
 #: src/components/headers/collection-header.tsx:160
 msgid "Repo"
-msgstr ""
+msgstr "Repo"
 
 #: src/containers/repositories/repository-list.tsx:168
 msgid "Repo Management"
-msgstr ""
+msgstr "Repo-beheer"
 
 #: src/components/repositories/local-repository-table.tsx:64
 msgid "Repo URL"
-msgstr ""
+msgstr "URL repo"
 
 #: src/components/repositories/remote-repository-table.tsx:69
 msgid "Repositories"
-msgstr ""
+msgstr "Repository's"
 
 #: src/loaders/standalone/standalone-loader.tsx:356
 msgid "Repository Management"
-msgstr ""
+msgstr "Repositorybeheer"
 
 #: src/components/repositories/local-repository-table.tsx:49
 msgid "Repository name"
-msgstr ""
+msgstr "Naam repository"
 
 #: src/components/collection-detail/collection-info.tsx:128
 msgid "Requires Ansible"
-msgstr ""
+msgstr "Vereist Ansible"
 
 #: src/components/user-form/user-form.tsx:253
 msgid "Requires super user permissions to edit."
-msgstr ""
+msgstr "Vereist machtigingen supergebruiker om te bewerken."
 
 #: src/containers/task-management/task_detail.tsx:251
 msgid "Reserve resources"
-msgstr ""
+msgstr "Reservehulpbronnen"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:169
 msgid "Resources"
-msgstr ""
+msgstr "Hulpbronnen"
 
 #: src/components/role-list-table/role-list-table.tsx:44
 msgid "Role"
@@ -2352,12 +2341,12 @@ msgstr ""
 #: src/constants.tsx:381
 #: src/containers/task-management/task-list-view.tsx:164
 msgid "Running"
-msgstr ""
+msgstr "In uitvoering"
 
 #: src/components/repositories/remote-form.tsx:278
 #: src/containers/token/token-insights.tsx:193
 msgid "SSO URL"
-msgstr ""
+msgstr "SSO URL"
 
 #: src/components/execution-environment/repository-form.tsx:161
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
@@ -2368,7 +2357,7 @@ msgstr ""
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 #: src/containers/group-management/group-detail.tsx:433
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 #: src/containers/execution-environment-detail/base.tsx:219
 msgid "Saved changes to execution environment \"{0}\"."
@@ -2388,19 +2377,19 @@ msgstr ""
 
 #: src/components/my-imports/import-console.tsx:81
 msgid "Scroll to end"
-msgstr ""
+msgstr "Bladeren naar het einde"
 
 #: src/containers/namespace-list/namespace-list.tsx:130
 #~ msgid "Search all {0}"
-#~ msgstr ""
+#~ msgstr "Search all {0}"
 
-#: src/containers/namespace-list/namespace-list.tsx:161
+#: src/containers/namespace-list/namespace-list.tsx:163
 #~ msgid "Search all {titleLowerCase}"
-#~ msgstr ""
+#~ msgstr "Search all {titleLowerCase}"
 
-#: src/containers/namespace-list/namespace-list.tsx:160
+#: src/containers/namespace-list/namespace-list.tsx:162
 #~ msgid "Search my namespaces"
-#~ msgstr ""
+#~ msgstr "Search my namespaces"
 
 #: src/containers/execution-environment/registry-list.tsx:499
 #: src/containers/execution-environment-detail/base.tsx:334
@@ -2418,44 +2407,44 @@ msgstr ""
 
 #: src/components/execution-environment/repository-form.tsx:258
 msgid "Select a registry"
-msgstr ""
+msgstr "Een register selecteren"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:331
 msgid "Select a tag"
-msgstr ""
+msgstr "Een tag selecteren"
 
 #: src/components/headers/collection-header.tsx:407
 msgid "Select collection version"
-msgstr ""
+msgstr "Collectieversie selecteren"
 
 #: src/components/import-modal/import-modal.tsx:95
 msgid "Select file"
-msgstr ""
+msgstr "Selecteer bestand"
 
 #: src/components/user-form/user-form.tsx:173
 msgid "Select groups"
-msgstr ""
+msgstr "Groepen selecteren"
 
 #: src/components/patternfly-wrappers/sort.tsx:145
 #~ msgid "Select input"
-#~ msgstr ""
+#~ msgstr "Input selecteren"
 
 #: src/components/my-imports/import-list.tsx:234
 msgid "Select namespace"
-msgstr ""
+msgstr "Namespace selecteren"
 
 #: src/components/permissions/permission-chip-selector.tsx:67
 #: src/components/permissions/permission-chip-selector.tsx:95
 msgid "Select permissions"
-msgstr ""
+msgstr "Machtigingen selecteren"
 
 #: src/containers/group-management/group-detail.tsx:542
 msgid "Select users"
-msgstr ""
+msgstr "Gebruikers selecteren"
 
 #: src/containers/token/token-insights.tsx:181
 msgid "Server URL"
-msgstr ""
+msgstr "Server-URL"
 
 #: src/containers/token/token-insights.tsx:64
 msgid "Server URL could not be displayed."
@@ -2463,19 +2452,19 @@ msgstr ""
 
 #: src/containers/login/login.tsx:102
 msgid "Server error. Please come back later."
-msgstr ""
+msgstr "Fout bij de server. Kom a.u.b. later terug."
 
 #: src/components/about-modal/about-modal.tsx:76
 msgid "Server version"
-msgstr ""
+msgstr "Server-versie"
 
 #: src/containers/settings/user-profile.tsx:77
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: src/components/repositories/remote-form.tsx:419
 msgid "Show advanced options"
-msgstr ""
+msgstr "Geavanceerde opties tonen"
 
 #: src/components/collection-detail/download-signature-grid-item.tsx:44
 msgid "Show the signature"
@@ -2483,7 +2472,7 @@ msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:85
 msgid "Showing:"
-msgstr ""
+msgstr "Tonen:"
 
 #: src/components/signing/sign-single-certificate-modal.tsx:32
 msgid "Sign"
@@ -2550,23 +2539,23 @@ msgstr ""
 
 #: src/components/repositories/remote-form.tsx:279
 msgid "Single sign on URL."
-msgstr ""
+msgstr "Enkele URL voor aanmelden."
 
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:172
 msgid "Size"
-msgstr ""
+msgstr "Maat"
 
 #: src/components/patternfly-wrappers/sort.tsx:145
 msgid "Sort results"
-msgstr ""
+msgstr "Sort results"
 
 #: src/containers/task-management/task-list-view.tsx:236
 msgid "Started at"
-msgstr ""
+msgstr "Gestart op"
 
 #: src/containers/task-management/task_detail.tsx:311
 msgid "State"
-msgstr ""
+msgstr "Staat"
 
 #: src/components/my-imports/import-list.tsx:82
 #: src/components/my-imports/import-list.tsx:117
@@ -2577,108 +2566,105 @@ msgstr ""
 #: src/containers/task-management/task-list-view.tsx:197
 #: src/containers/task-management/task-list-view.tsx:246
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: src/components/my-imports/import-console.tsx:177
 msgid "Status:"
-msgstr ""
+msgstr "Status:"
 
 #: src/containers/task-management/task-list-view.tsx:322
 #: src/containers/task-management/task-list-view.tsx:338
 #: src/containers/task-management/task_detail.tsx:133
 #: src/containers/task-management/task_detail.tsx:365
 msgid "Stop task"
-msgstr ""
+msgstr "Taak stoppen"
 
 #: src/containers/task-management/task-list-view.tsx:351
 msgid "Stop task?"
-msgstr ""
+msgstr "Taak stoppen?"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:601
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:596
 #~ msgid "Success: {digest} was deleted"
-#~ msgstr ""
+#~ msgstr "Succes: {digest} werd verwijderd"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:511
+#: src/containers/execution-environment-list/execution_environment_list.tsx:529
 #~ msgid "Success: {name} was deleted"
-#~ msgstr ""
-
-#: src/components/delete-modal/delete-execution-environment-modal.tsx:73
-#~ msgid "Success: {selectedItem} was deleted"
-#~ msgstr ""
+#~ msgstr "Succes: {name} werd verwijderd"
 
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:17
 msgid "Successfully copied to clipboard!"
-msgstr ""
+msgstr "Succesvol gekopieerd naar klembord!"
 
-#: src/components/headers/collection-header.tsx:546
+#: src/components/headers/collection-header.tsx:545
 #~ msgid "Successfully deleted collection version."
-#~ msgstr ""
+#~ msgstr "Collectieversie succesvol verwijderd."
 
-#: src/components/headers/collection-header.tsx:556
-#: src/components/headers/collection-header.tsx:627
+#: src/components/headers/collection-header.tsx:555
+#: src/components/headers/collection-header.tsx:626
 #~ msgid "Successfully deleted collection."
-#~ msgstr ""
+#~ msgstr "Collectie succesvol verwijderd."
 
-#: src/containers/group-management/group-detail.tsx:544
+#: src/containers/group-management/group-detail.tsx:540
+#: src/containers/group-management/group-list.tsx:438
 #~ msgid "Successfully deleted group."
-#~ msgstr ""
+#~ msgstr "Groep succesvol verwijderd."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:561
+#: src/containers/namespace-detail/namespace-detail.tsx:560
 #~ msgid "Successfully deleted namespace."
-#~ msgstr ""
+#~ msgstr "Namespace succesvol verwijderd."
 
-#: src/containers/execution-environment/registry-list.tsx:468
+#: src/containers/execution-environment/registry-list.tsx:465
 #~ msgid "Successfully deleted remote registry {name}"
-#~ msgstr ""
+#~ msgstr "Extern register {name} succesvol verwijderd"
 
-#: src/components/delete-modal/delete-user-modal.tsx:93
+#: src/containers/user-management/delete-user-modal.tsx:93
 #~ msgid "Successfully deleted user."
-#~ msgstr ""
+#~ msgstr "Gebruiker succesvol verwijderd."
 
-#: src/containers/group-management/group-detail.tsx:871
+#: src/containers/group-management/group-detail.tsx:857
 #~ msgid "Successfully removed a user from a group."
-#~ msgstr ""
+#~ msgstr "Een gebruiker succesvol verwijderd uit een groep."
 
-#: src/containers/task-management/task-list-view.tsx:372
-#: src/containers/task-management/task_detail.tsx:387
+#: src/containers/task-management/task-list-view.tsx:371
+#: src/containers/task-management/task_detail.tsx:385
 #~ msgid "Successfully stopped task."
-#~ msgstr ""
+#~ msgstr "Taak succesvol gestopt."
 
 #: src/components/user-form/user-form.tsx:201
 #: src/containers/user-management/user-list.tsx:358
 msgid "Super user"
-msgstr ""
+msgstr "Supergebruiker"
 
 #: src/components/user-form/user-form.tsx:256
 msgid "Super users can't disable themselves."
-msgstr ""
+msgstr "Supergebruikers kunnen zichzelf niet uitschakelen."
 
 #: src/components/user-form/user-form.tsx:193
 #: src/containers/user-management/user-list.tsx:355
 msgid "Super users have all system permissions regardless of what groups they are in."
-msgstr ""
+msgstr "Supergebruikers hebben alle systeemmachtigingen, ongeacht de groepen waarin ze zitten."
 
 #: src/components/repositories/remote-repository-table.tsx:180
 #: src/containers/search/search.tsx:224
 msgid "Sync"
-msgstr ""
+msgstr "Synchroniseren"
 
 #: src/containers/execution-environment-detail/base.tsx:345
 #: src/containers/execution-environment-list/execution_environment_list.tsx:544
 msgid "Sync failed for {name}"
-msgstr ""
+msgstr "Sync mislukt voor {name}"
 
 #: src/containers/execution-environment/registry-list.tsx:375
 #: src/containers/execution-environment-detail/base.tsx:122
 #: src/containers/execution-environment-list/execution_environment_list.tsx:356
 msgid "Sync from registry"
-msgstr ""
+msgstr "Synchroniseren vanuit register"
 
-#: src/containers/execution-environment/registry-list.tsx:486
-#: src/containers/execution-environment-detail/base.tsx:316
-#: src/containers/execution-environment-list/execution_environment_list.tsx:525
+#: src/containers/execution-environment/registry-list.tsx:482
+#: src/containers/execution-environment-detail/base.tsx:279
+#: src/containers/execution-environment-list/execution_environment_list.tsx:576
 #~ msgid "Sync initiated for {name}"
-#~ msgstr ""
+#~ msgstr "Sync gestart voor {name}"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:529
 msgid "Sync started for execution environment \"{name}\"."
@@ -2691,18 +2677,18 @@ msgstr ""
 
 #: src/components/repositories/remote-repository-table.tsx:84
 msgid "Sync status"
-msgstr ""
+msgstr "Synchronisatiestatus"
 
 #: src/components/repositories/remote-form.tsx:498
 msgid "TLS validation"
-msgstr ""
+msgstr "TLS-validatie"
 
 #: src/components/collection-list/collection-filter.tsx:55
 #: src/components/execution-environment/publish-to-controller-modal.tsx:314
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:275
 msgid "Tag"
-msgstr ""
+msgstr "Tag"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:156
 msgid "Tags could not be displayed."
@@ -2728,38 +2714,38 @@ msgstr ""
 #: src/containers/task-management/task-list-view.tsx:115
 #: src/loaders/standalone/standalone-loader.tsx:384
 msgid "Task Management"
-msgstr ""
+msgstr "Taakbeheer"
 
 #: src/containers/task-management/task_detail.tsx:153
 msgid "Task detail"
-msgstr ""
+msgstr "Taakdetail"
 
 #: src/containers/task-management/task_detail.tsx:194
 msgid "Task group"
-msgstr ""
+msgstr "Taakgroep"
 
 #: src/containers/task-management/task_detail.tsx:189
 msgid "Task groups"
-msgstr ""
+msgstr "Taakgroepen"
 
 #: src/containers/task-management/task-list-view.tsx:255
 msgid "Task list"
-msgstr ""
+msgstr "Takenlijst"
 
 #: src/containers/task-management/task_detail.tsx:104
 msgid "Task management"
-msgstr ""
+msgstr "Taakbeheer"
 
 #: src/containers/task-management/task-list-view.tsx:147
 #: src/containers/task-management/task-list-view.tsx:196
 #: src/containers/task-management/task-list-view.tsx:226
 #: src/containers/task-management/task_detail.tsx:158
 msgid "Task name"
-msgstr ""
+msgstr "Naam taak"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:334
 msgid "Task to change tag \"{0}\" could not be completed."
-msgstr ""
+msgstr "Taak om tag \"{0}\" te wijzigen kon niet worden voltooid."
 
 #: src/containers/task-management/task-list-view.tsx:421
 msgid "Tasks list could not be displayed."
@@ -2767,7 +2753,7 @@ msgstr ""
 
 #: src/containers/task-management/task-list-view.tsx:121
 msgid "Tasks will appear once created."
-msgstr ""
+msgstr "Taken verschijnen zodra ze zijn aangemaakt."
 
 #: src/components/collection-list/collection-list.tsx:103
 msgid "Temporarily disabled due to sync issues. (AAH-1237)"
@@ -2775,72 +2761,72 @@ msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:192
 msgid "Text: {0}"
-msgstr ""
+msgstr "Tekst: {0}"
 
 #: src/utilities/validateURLHelper.ts:33
 msgid "The URL needs to be in 'http(s)://' format."
-msgstr ""
+msgstr "De URL-indeling moet \"http(s)://\" zijn."
 
 #: src/components/repositories/remote-form.tsx:212
 msgid "The URL of an external content source."
-msgstr ""
+msgstr "De URL van een externe inhoudsbron."
 
 #: src/components/import-modal/import-modal.tsx:174
 msgid "The collection you have selected does not match this namespace."
-msgstr ""
+msgstr "De collectie die u hebt geselecteerd komt niet overeen met deze namespace."
 
 #: src/components/import-modal/import-modal.tsx:168
 msgid "The collection you have selected doesn't appear to match {0}"
-msgstr ""
+msgstr "De collectie die u hebt geselecteerd lijkt niet overeen te komen met {0}"
 
 #: src/containers/collection-detail/collection-docs.tsx:272
 msgid "The file is not available for this version of {collectionName}"
-msgstr ""
+msgstr "Het bestand is niet beschikbaar voor deze versie van {collectionName}"
 
 #: src/components/repositories/remote-form.tsx:392
 msgid "The password to be used for authentication when syncing."
-msgstr ""
+msgstr "Het wachtwoord dat moet worden gebruikt voor authenticatie bij het synchroniseren."
 
 #: src/components/repositories/remote-form.tsx:393
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
-msgstr ""
+msgstr "Het wachtwoord dat moet worden gebruikt voor authenticatie bij het synchroniseren. Dit is niet nodig bij gebruik van een token."
 
 #: src/containers/token/token-insights.tsx:153
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
-msgstr ""
+msgstr "Het token zal verlopen na 30 dagen van inactiviteit. Voer het onderstaande opdracht regelmatig uit om te voorkomen dat uw token verloopt."
 
 #: src/components/repositories/remote-form.tsx:357
 msgid "The username to be used for authentication when syncing."
-msgstr ""
+msgstr "De gebruikersnaam die moet worden gebruikt voor authenticatie bij het synchroniseren."
 
 #: src/components/repositories/remote-form.tsx:358
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
-msgstr ""
+msgstr "De gebruikersnaam die moet worden gebruikt voor authenticatie bij het synchroniseren. Dit is niet nodig bij gebruik van een token."
 
 #: src/components/repositories/remote-repository-table.tsx:117
 msgid "There are no repos associated with this remote."
-msgstr ""
+msgstr "Er zijn geen repo's verbonden met dit externe item."
 
 #: src/components/my-imports/import-list.tsx:155
 msgid "There have not been any imports on this namespace."
-msgstr ""
+msgstr "Er zijn geen importen geweest op deze namespace."
 
 #: src/containers/task-management/task_detail.tsx:329
 #: src/containers/task-management/task_detail.tsx:330
 msgid "There is no progress message."
-msgstr ""
+msgstr "Er is geen voortgangsbericht."
 
 #: src/containers/task-management/task_detail.tsx:279
 msgid "There's no resource record"
-msgstr ""
+msgstr "Er is geen bronvermelding"
 
 #: src/components/group-management/delete-group-modal.tsx:38
 msgid "These users will lose access to the group content:"
-msgstr ""
+msgstr "Deze gebruikers zullen de toegang tot de inhoud van de groep verliezen:"
 
 #: src/containers/namespace-list/namespace-list.tsx:283
 msgid "This account is not set up to manage any namespaces"
-msgstr ""
+msgstr "Deze account is niet ingesteld om namespaces te beheren"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
@@ -2848,35 +2834,35 @@ msgstr ""
 
 #: src/components/headers/collection-header.tsx:470
 msgid "This collection has been deprecated."
-msgstr ""
+msgstr "Deze collectie is afgeschreven."
 
 #: src/containers/collection-detail/collection-dependencies.tsx:156
 msgid "This collection is being used by"
-msgstr ""
+msgstr "Deze collectie wordt gebruikt door"
 
 #: src/containers/collection-detail/collection-dependencies.tsx:144
 msgid "This collections requires the following collections for use"
-msgstr ""
+msgstr "Deze collectie vereist de volgende collecties voor gebruik"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:177
 msgid "This tag already exists on another image. Do you want to move it to this image?"
-msgstr ""
+msgstr "Deze tag bestaat al op een andere afbeelding. Wilt u hem verplaatsen naar deze afbeelding?"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:372
 msgid "This tag is already selected for this image. You cannot add it twice."
-msgstr ""
+msgstr "Deze tag is al geselecteerd voor deze afbeelding. U kunt deze niet tweemaal toevoegen."
 
 #: src/components/repositories/remote-form.tsx:302
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
-msgstr ""
+msgstr "Dit gebruikt dezelfde {docsAnsibleLink}-indeling als de ansible-galaxy CLI met het voorbehoud dat rollen niet worden ondersteund en dat de bronparameter niet wordt ondersteund."
 
 #: src/containers/token/token-insights.tsx:168
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
-msgstr ""
+msgstr "Om een token in te trekken of al uw tokens te zien, bezoekt u de pagina <0>beheer offline API-tokens</0>."
 
 #: src/components/repositories/remote-form.tsx:249
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: src/containers/token/token-standalone.tsx:120
 msgid "Token could not be displayed."
@@ -2884,28 +2870,28 @@ msgstr ""
 
 #: src/components/repositories/remote-form.tsx:252
 msgid "Token for authenticating to the server URL."
-msgstr ""
+msgstr "Token voor verificatie naar de server-URL."
 
-#: src/containers/token/token-standalone.tsx:38
+#: src/containers/token/token-standalone.tsx:46
 #~ msgid "Token management"
-#~ msgstr ""
+#~ msgstr "Beheer van tokens"
 
 #: src/components/repositories/remote-form.tsx:642
 msgid "Total number of simultaneous connections."
-msgstr ""
+msgstr "Totaal aantal gelijktijdige verbindingen."
 
 #: src/containers/task-management/task_detail.tsx:344
 msgid "Traceback"
-msgstr ""
+msgstr "Traceback"
 
 #: src/loaders/standalone/standalone-loader.tsx:156
 msgid "Training <0/>"
-msgstr ""
+msgstr "Opleiding <0/>"
 
 #: src/components/collection-detail/collection-content-list.tsx:108
 #: src/containers/task-management/task_detail.tsx:261
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: src/components/about-modal/about-modal.tsx:82
 msgid "UI Version"
@@ -2913,7 +2899,7 @@ msgstr ""
 
 #: src/components/repositories/remote-form.tsx:210
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: src/components/namespace-form/namespace-form.tsx:265
 msgid "URL must not be empty."
@@ -2921,11 +2907,11 @@ msgstr ""
 
 #: src/components/namespace-form/namespace-form.tsx:195
 msgid "URL: {0}"
-msgstr ""
+msgstr "URL: {0}"
 
 #: src/components/collection-list/collection-list.tsx:107
 msgid "Undeprecate"
-msgstr ""
+msgstr "Afschrijving ongedaan maken"
 
 #: src/components/collection-list/collection-filter.tsx:68
 #: src/components/signing/signature-badge.tsx:31
@@ -2934,44 +2920,44 @@ msgstr ""
 
 #: src/constants.tsx:207
 msgid "Update container information"
-msgstr ""
+msgstr "Containerinformatie bijwerken"
 
 #: src/components/collection-list/collection-list-item.tsx:120
 msgid "Updated <0/>"
-msgstr ""
+msgstr "Bijgewerkt <0/>"
 
 #: src/components/import-modal/import-modal.tsx:71
 msgid "Upload"
-msgstr ""
+msgstr "Uploaden"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:295
 #: src/containers/namespace-detail/namespace-detail.tsx:610
 msgid "Upload collection"
-msgstr ""
+msgstr "Collectie uploaden"
 
 #: src/components/collection-list/collection-list.tsx:89
 msgid "Upload new version"
-msgstr ""
+msgstr "Nieuwe versie uploaden"
 
 #: src/constants.tsx:196
 #: src/constants.tsx:204
 msgid "Upload to namespace"
-msgstr ""
+msgstr "Uploaden naar namespace"
 
 #: src/components/execution-environment/repository-form.tsx:215
 msgid "Upstream name"
-msgstr ""
+msgstr "Naam stroomopwaarts"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:279
 #: src/containers/execution-environment-detail/base.tsx:135
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:408
 #: src/containers/execution-environment-list/execution_environment_list.tsx:369
 msgid "Use in Controller"
-msgstr ""
+msgstr "Gebruiken in controller"
 
 #: src/containers/token/token-insights.tsx:99
 msgid "Use the <0>Repository Management</0> page to sync collections curated by your organization to the Red Hat Certified repository in your private Automation Hub. Users with the correct permissions can use the sync toggles on the <1>Collections</1> page to control which collections are added to their organization's sync repository."
-msgstr ""
+msgstr "Gebruik de pagina <0>Repository Management</0> om collecties te synchroniseren die door uw organisatie zijn samengesteld naar de Red Hat Certified repository in uw privé Automation Hub. Gebruikers met de juiste machtigingen kunnen de synchronisatie knoppen op de pagina <1>Collecties</1> gebruiken om te bepalen welke collecties worden toegevoegd aan de synchronisatierepository van hun organisatie."
 
 #: src/components/execution-environment/repository-form.tsx:219
 msgid "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
@@ -2979,35 +2965,35 @@ msgstr ""
 
 #: src/containers/token/token-insights.tsx:128
 #~ msgid "Use this URL to configure the API endpoints that clients need to"
-#~ msgstr ""
+#~ msgstr "Use this URL to configure the API endpoints that clients need to"
 
 #: src/containers/token/token-insights.tsx:183
 msgid "Use this URL to configure the API endpoints that clients need to download content from Automation Hub."
-msgstr ""
+msgstr "Gebruik deze URL om de API-eindpunten te configureren die clients nodig hebben om inhoud van Automation Hub te downloaden."
 
 #: src/containers/token/token-insights.tsx:141
 #~ msgid "Use this URL to configure the authentication URLs that clients"
-#~ msgstr ""
+#~ msgstr "Use this URL to configure the authentication URLs that clients"
 
 #: src/containers/token/token-insights.tsx:195
 msgid "Use this URL to configure the authentication URLs that clients need to download content from Automation Hub."
-msgstr ""
+msgstr "Gebruik deze URL om de authenticatie-URL's te configureren die clients nodig hebben om inhoud van Automation Hub te downloaden."
 
 #: src/containers/token/token-insights.tsx:88
 #~ msgid "Use this token to authenticate clients that need to download"
-#~ msgstr ""
+#~ msgstr "Use this token to authenticate clients that need to download"
 
 #: src/containers/token/token-insights.tsx:131
 msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
-msgstr ""
+msgstr "Gebruik dit token voor de authenticatie van klanten die content van Automation Hub moeten downloaden. Dit is een geheim token dat wordt gebruikt om uw inhoud te beschermen. Bewaar uw API-token op een veilige plaats."
 
 #: src/containers/token/token-standalone.tsx:60
 msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
-msgstr ""
+msgstr "Gebruik dit token voor authenticatie van de <0>ansible-galaxy</0>-client."
 
 #: src/components/namespace-form/namespace-form.tsx:167
 msgid "Useful links"
-msgstr ""
+msgstr "Nuttige links"
 
 #: src/containers/group-management/group-detail.tsx:637
 msgid "User \"{0}\" could not be added to group \"{1}\"."
@@ -3040,24 +3026,24 @@ msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:395
 msgid "User Access"
-msgstr ""
+msgstr "Toegang gebruiker"
 
 #: src/components/about-modal/about-modal.tsx:88
 msgid "User Groups"
-msgstr ""
+msgstr "Gebruikersgroepen"
 
 #: src/containers/user-management/user-detail.tsx:83
 msgid "User details"
-msgstr ""
+msgstr "Gebruikersdetails"
 
 #: src/containers/group-management/group-detail.tsx:838
 #: src/containers/user-management/user-list.tsx:300
 msgid "User list"
-msgstr ""
+msgstr "Gebruikerslijst"
 
 #: src/components/user-form/user-form.tsx:188
 msgid "User type"
-msgstr ""
+msgstr "Type gebruiker"
 
 #: src/components/about-modal/about-modal.tsx:85
 #: src/components/repositories/remote-form.tsx:352
@@ -3069,11 +3055,11 @@ msgstr ""
 #: src/containers/user-management/user-list.tsx:210
 #: src/containers/user-management/user-list.tsx:259
 msgid "Username"
-msgstr ""
+msgstr "Gebruikersnaam"
 
 #: src/loaders/standalone/standalone-loader.tsx:120
 msgid "Username: {0}"
-msgstr ""
+msgstr "Gebruikersnaam: {0}"
 
 #: src/constants.tsx:45
 #: src/containers/group-management/group-detail.tsx:189
@@ -3083,7 +3069,7 @@ msgstr ""
 #: src/containers/user-management/user-list.tsx:139
 #: src/loaders/standalone/standalone-loader.tsx:396
 msgid "Users"
-msgstr ""
+msgstr "Gebruikers"
 
 #: src/containers/group-management/group-detail.tsx:511
 #: src/containers/group-management/group-detail.tsx:656
@@ -3095,117 +3081,117 @@ msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:691
 msgid "Users will appear once added to this group"
-msgstr ""
+msgstr "Gebruikers verschijnen nadat ze zijn toegevoegd aan deze groep"
 
 #: src/containers/user-management/user-list.tsx:246
 msgid "Users will appear once created"
-msgstr ""
+msgstr "Gebruikers verschijnen zodra ze zijn aangemaakt"
 
 #: src/components/headers/collection-header.tsx:395
 #: src/containers/certification-dashboard/certification-dashboard.tsx:253
 msgid "Version"
-msgstr ""
+msgstr "Versie"
 
 #: src/components/my-imports/import-console.tsx:185
 msgid "Version:"
-msgstr ""
+msgstr "Versie:"
 
 #: src/constants.tsx:162
 msgid "View Ansible distribution"
-msgstr ""
+msgstr "Ansible-distributie weergeven"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:397
 msgid "View Import Logs"
-msgstr ""
+msgstr "Importlogs weergeven"
 
 #: src/constants.tsx:180
 msgid "View all tasks"
-msgstr ""
+msgstr "Geef alle taken weer."
 
 #: src/constants.tsx:163
 msgid "View collection remote"
-msgstr ""
+msgstr "Collectie op afstand weergeven"
 
 #: src/components/cards/namespace-card.tsx:53
 msgid "View collections"
-msgstr ""
+msgstr "Collecties weergeven"
 
 #: src/constants.tsx:212
 msgid "View container's namespace"
-msgstr ""
+msgstr "De namespace van de container weergeven"
 
 #: src/constants.tsx:215
 msgid "View container's repository"
-msgstr ""
+msgstr "Repository van de container weergeven"
 
 #: src/constants.tsx:221
 msgid "View distribution"
-msgstr ""
+msgstr "Verdeling weergeven"
 
 #: src/constants.tsx:197
 msgid "View group"
-msgstr ""
+msgstr "Groep weergeven"
 
 #: src/components/headers/collection-header.tsx:411
 msgid "View more"
-msgstr ""
+msgstr "Meer weergeven"
 
 #: src/constants.tsx:177
 #: src/constants.tsx:208
 msgid "View private containers"
-msgstr ""
+msgstr "Privé-containers weergeven"
 
 #: src/constants.tsx:198
 msgid "View synclist"
-msgstr ""
+msgstr "Synclist weergeven"
 
-#: src/containers/execution-environment/registry-list.tsx:489
-#: src/containers/execution-environment/registry-list.tsx:511
-#: src/containers/execution-environment-detail/base.tsx:319
-#: src/containers/execution-environment-list/execution_environment_list.tsx:528
+#: src/containers/execution-environment/registry-list.tsx:485
+#: src/containers/execution-environment/registry-list.tsx:507
+#: src/containers/execution-environment-detail/base.tsx:282
+#: src/containers/execution-environment-list/execution_environment_list.tsx:579
 #~ msgid "View the task <0>here</0>."
-#~ msgstr ""
+#~ msgstr "Bekijk de taak <0>hier</0>."
 
 #: src/constants.tsx:199
 msgid "View user"
-msgstr ""
+msgstr "Gebruiker weergeven"
 
 #: src/components/my-imports/import-list.tsx:99
 #: src/constants.tsx:382
 #: src/containers/task-management/task-list-view.tsx:168
 msgid "Waiting"
-msgstr ""
+msgstr "Wachten"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:218
 msgid "Waiting for {pendingTasks} task(s) to finish."
-msgstr ""
+msgstr "Wachten tot {pendingTasks} taak/taken is/zijn voltooid."
 
 #: src/components/collection-detail/collection-content-list.tsx:148
 #: src/containers/collection-detail/collection-docs.tsx:281
 msgid "Warning"
-msgstr ""
+msgstr "Waarschuwing"
 
 #: src/containers/not-found/not-found.tsx:22
 msgid "We couldn't find the page you're looking for!"
-msgstr ""
+msgstr "We konden de pagina die u zoekt niet vinden!"
 
 #: src/components/headers/collection-header.tsx:158
 msgid "Website"
-msgstr ""
+msgstr "Website"
 
 #: src/components/repositories/remote-form.tsx:298
 msgid "YAML requirements"
-msgstr ""
+msgstr "YAML-eisen"
 
 #: src/components/confirm-modal/confirm-modal.tsx:36
 #: src/components/execution-environment/tag-manifest-modal.tsx:187
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: src/containers/task-management/task-list-view.tsx:353
 #: src/containers/task-management/task_detail.tsx:366
 msgid "Yes, stop"
-msgstr ""
+msgstr "Ja, stoppen"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:40
 msgid "You are about to sign <0>all</0> versions under <1>{name}</1>."
@@ -3217,90 +3203,90 @@ msgstr ""
 
 #: src/containers/token/token-standalone.tsx:69
 msgid "You are an SSO user. Your token will expire <0/>."
-msgstr ""
+msgstr "U bent een SSO-gebruiker. Uw token zal verlopen <0/>."
 
 #: src/components/namespace-form/resources-form.tsx:34
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
-msgstr ""
+msgstr "U kunt het tabblad Hulpbronnen op uw profiel aanpassen door hier aangepaste markdown in te voeren."
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:196
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
-msgstr ""
+msgstr "U hebt momenteel geen containerrepository's. Voeg een containerrepository toe via de CLI om te beginnen."
 
 #: src/containers/execution-environment/registry-list.tsx:236
 msgid "You currently have no remote registries."
-msgstr ""
+msgstr "U hebt momenteel geen externe registers."
 
 #: src/components/empty-state/empty-state-unauthorized.tsx:12
 msgid "You do not have access to Automation Hub"
-msgstr ""
+msgstr "U heeft geen toegang tot Automation Hub"
 
-#: src/containers/edit-namespace/edit-namespace.tsx:286
+#: src/containers/edit-namespace/edit-namespace.tsx:279
 #~ msgid "You don't have permissions to update this namespace."
-#~ msgstr ""
+#~ msgstr "U hebt geen machtigingen om deze namespace bij te werken."
 
 #: src/components/collection-detail/collection-info.tsx:92
 msgid "You have to be logged in to be able to download the tarball."
-msgstr ""
+msgstr "U moet ingelogd zijn om de tarball te kunnen downloaden."
 
 #: src/containers/edit-namespace/edit-namespace.tsx:208
 msgid "You have unsaved changes"
-msgstr ""
+msgstr "Er zijn niet-opgeslagen wijzigingen"
 
 #: src/containers/group-management/group-detail.tsx:462
 msgid "add-user-modal"
-msgstr ""
+msgstr "add-user-modal"
 
 #: src/components/my-imports/import-console.tsx:144
 msgid "approved"
-msgstr ""
+msgstr "goedgekeurd"
 
 #: src/components/my-imports/import-console.tsx:146
 msgid "could not be determined yet"
-msgstr ""
+msgstr "kon nog niet worden vastgesteld"
 
 #: src/components/collection-detail/collection-content-list.tsx:79
 #: src/components/collection-detail/table-of-contents.tsx:99
 msgid "find-content"
-msgstr ""
+msgstr "find-content"
 
 #: src/components/patternfly-wrappers/write-only-field.tsx:27
 msgid "hidden value"
-msgstr ""
+msgstr "verborgen waarde"
 
 #: src/components/collection-list/collection-filter.tsx:91
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
-msgstr ""
+msgstr "trefwoorden"
 
 #: src/components/patternfly-wrappers/pagination.tsx:64
 #: src/components/patternfly-wrappers/pagination.tsx:68
 msgid "of"
-msgstr ""
+msgstr "van"
 
 #: src/components/patternfly-wrappers/pagination.tsx:65
 msgid "per page"
-msgstr ""
+msgstr "per pagina"
 
 #: src/components/helper-text/helper-text.tsx:17
 msgid "popover example"
-msgstr ""
+msgstr "popover-voorbeeld"
 
 #: src/components/my-imports/import-console.tsx:140
 msgid "rejected"
-msgstr ""
+msgstr "afgewezen"
 
 #: src/components/headers/collection-header.tsx:300
 msgid "released {0}"
-msgstr ""
+msgstr "{0} vrijgegeven"
 
 #: src/components/patternfly-wrappers/toolbar.tsx:84
 #~ msgid "search button"
-#~ msgstr ""
+#~ msgstr "search button"
 
 #: src/components/patternfly-wrappers/toolbar.tsx:79
 #~ msgid "search text input"
-#~ msgstr ""
+#~ msgstr "search text input"
 
 #: src/components/collection-list/collection-filter.tsx:89
 msgid "sign state"
@@ -3312,27 +3298,27 @@ msgstr ""
 
 #: src/components/my-imports/import-console.tsx:142
 msgid "waiting for approval"
-msgstr ""
+msgstr "wacht op goedkeuring"
 
 #: src/components/my-imports/import-console.tsx:135
 msgid "waiting for import to finish"
-msgstr ""
+msgstr "wacht tot importeren is voltooid"
 
 #: src/components/headers/collection-header.tsx:438
 msgid "{0} released {1}"
-msgstr ""
+msgstr "{0} heeft {1} vrijgegeven"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
 msgid "{0} was added"
 msgstr ""
 
-#: src/containers/execution-environment/registry-list.tsx:224
+#: src/containers/execution-environment/registry-list.tsx:223
 #~ msgid "{0} will be deleted."
-#~ msgstr ""
+#~ msgstr "{0} zal worden gewist."
 
 #: src/components/headers/collection-header.tsx:271
 msgid "{collectionName}'s versions."
-msgstr ""
+msgstr "versies van {collectionName}."
 
 #: src/components/cards/collection-card.tsx:51
 #: src/components/cards/namespace-card.tsx:36
@@ -3340,16 +3326,16 @@ msgstr ""
 #: src/components/headers/collection-header.tsx:376
 #: src/components/headers/partner-header.tsx:46
 msgid "{company} logo"
-msgstr ""
+msgstr "{company} logo"
 
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
-msgstr ""
+msgstr "{n, plural, one {# byte} other {# bytes}}"
 
 #: src/containers/task-management/task-list-view.tsx:354
 msgid "{name} will be cancelled."
-msgstr ""
+msgstr "{name} zal worden geannuleerd."
 
 #: src/containers/task-management/task_detail.tsx:368
 msgid "{name} will stop running."
-msgstr ""
+msgstr "{name} zal stoppen met draaien."
