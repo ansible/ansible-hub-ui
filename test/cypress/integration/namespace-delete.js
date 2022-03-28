@@ -1,4 +1,4 @@
-describe('Delete a namespace', () => {
+describe(['standalone'], 'Delete a namespace', () => {
   before(() => {
     cy.login();
   });

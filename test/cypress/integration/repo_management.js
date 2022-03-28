@@ -1,4 +1,4 @@
-describe('Repo Management tests', () => {
+describe(['standalone'], 'Repo Management tests', () => {
   let remoteRepoUrl = '/ui/repositories?tab=remote';
   let localRepoUrl = '/ui/repositories';
 

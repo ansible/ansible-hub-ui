@@ -1,4 +1,4 @@
-describe('Task detail', () => {
+describe(['standalone'], 'Task detail', () => {
   before(() => {
     cy.login();
     cy.visit('/ui/repositories?tab=remote');

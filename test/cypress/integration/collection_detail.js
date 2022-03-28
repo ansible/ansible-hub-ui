@@ -1,4 +1,4 @@
-describe('Collection detail', () => {
+describe(['standalone'], 'Collection detail', () => {
   function tabClick(name) {
     cy.contains('li a span', name).click();
     // repo link must be in all tabs

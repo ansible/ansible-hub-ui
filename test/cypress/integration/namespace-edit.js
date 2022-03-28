@@ -1,4 +1,4 @@
-describe('Edit a namespace', () => {
+describe(['standalone'], 'Edit a namespace', () => {
   let kebabToggle = () => {
     return cy.get('button[id^=pf-dropdown-toggle-id-] > svg').parent().click();
   };

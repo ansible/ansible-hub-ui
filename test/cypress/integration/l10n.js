@@ -13,7 +13,7 @@ const languageCheckHelper = (url, selector) => (language, message) => {
   cy.get(selector).should('contain.text', message);
 };
 
-describe('Localization tests with the t`String` format', () => {
+describe(['standalone'], 'Localization tests with the t`String` format', () => {
   const helper = languageCheckHelper('/ui/repositories', 'h1');
 
   beforeEach(() => {
@@ -34,7 +34,7 @@ describe('Localization tests with the t`String` format', () => {
   });
 });
 
-describe('Localization tests with the <Trans> format', () => {
+describe(['standalone'], 'Localization tests with the <Trans> format', () => {
   const helper = languageCheckHelper(
     '/ui/containers',
     '[data-cy="push-images-button"]',

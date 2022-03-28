@@ -1,4 +1,4 @@
-describe('execution environments', () => {
+describe(['standalone'], 'execution environments', () => {
   let num = (~~(Math.random() * 1000000)).toString();
 
   before(() => {

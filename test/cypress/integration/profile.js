@@ -1,4 +1,4 @@
-describe('My Profile Tests', () => {
+describe(['standalone'], 'My Profile Tests', () => {
   const username = 'nopermission';
   const password = 'n0permissi0n';
 

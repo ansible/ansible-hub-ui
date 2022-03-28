@@ -19,3 +19,14 @@ import 'cypress-file-upload';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// ************************************************************
+// The chrome ui in cloud is unstable and causes random
+// exceptions, so we need to ignore those wherever possible
+// *************************************************************/
+// https://github.com/quasarframework/quasar/issues/2233#issuecomment-414070235
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  return false
+})

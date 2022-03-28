@@ -1,6 +1,6 @@
 import { range } from 'lodash';
 
-describe('Collections list Tests', () => {
+describe(['standalone'], 'Collections list Tests', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
 

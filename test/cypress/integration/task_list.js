@@ -1,4 +1,4 @@
-describe('Task table contains correct headers and filter', () => {
+describe(['standalone'], 'Task table contains correct headers and filter', () => {
   before(() => {
     cy.login();
     cy.visit('/ui/repositories?tab=remote');
@@ -14,8 +14,8 @@ describe('Task table contains correct headers and filter', () => {
       'remotes',
     );
 
-    cy.wait('@sync');
-    cy.wait('@remotes');
+    cy.wait('@sync', { timeout: 10000 });
+    cy.wait('@remotes', { timeout: 10000 });
   });
 
   it('table contains all columns and filter', () => {

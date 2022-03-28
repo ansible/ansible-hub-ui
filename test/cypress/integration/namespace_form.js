@@ -1,4 +1,4 @@
-describe('A namespace form', () => {
+describe(['standalone'], 'A namespace form', () => {
   let getCreateNamespace = () => {
     return cy.get('.pf-c-button.pf-m-primary');
   };

@@ -1,4 +1,4 @@
-describe('Imports filter test', () => {
+describe(['standalone'], 'Imports filter test', () => {
   before(() => {
     cy.login();
     cy.deleteNamespacesAndCollections();

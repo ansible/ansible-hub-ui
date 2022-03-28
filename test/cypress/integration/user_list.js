@@ -1,6 +1,6 @@
 import { range, sortBy } from 'lodash';
 
-describe('User list tests for sorting, paging and filtering', () => {
+describe(['standalone'], 'User list tests for sorting, paging and filtering', () => {
   let items = [];
 
   before(() => {

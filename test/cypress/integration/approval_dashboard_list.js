@@ -1,6 +1,6 @@
 import { range, sortBy } from 'lodash';
 
-describe('Approval Dashboard list tests for sorting, paging and filtering', () => {
+describe(['standalone'], 'Approval Dashboard list tests for sorting, paging and filtering', () => {
   let items = [];
 
   function createData() {

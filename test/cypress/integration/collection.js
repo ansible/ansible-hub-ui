@@ -11,7 +11,7 @@ const waitForTaskToFinish = (task, maxRequests, level = 0) => {
   });
 };
 
-describe('collection tests', () => {
+describe(['standalone'], 'collection tests', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
   });
