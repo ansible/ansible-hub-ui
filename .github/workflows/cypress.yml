@@ -179,6 +179,8 @@ jobs:
       working-directory: 'ansible-hub-ui/test'
       run: |
         npm run cypress:chrome
+      env:
+        CYPRESS_INCLUDE_TAGS: standalone
 
     - uses: actions/upload-artifact@v2
       if: failure()
