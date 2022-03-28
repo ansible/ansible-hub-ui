@@ -111,10 +111,10 @@ jobs:
       with:
         path: 'ansible-hub-ui'
 
-    - name: "Install node 14"
+    - name: "Install node 16"
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '16'
 
     - name: "Cache ~/.npm & ~/.cache/Cypress"
       uses: actions/cache@v2
