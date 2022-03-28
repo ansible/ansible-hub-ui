@@ -67,6 +67,7 @@ jobs:
         ' | tee Containerfile
 
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
+        rm -f image # ensure older version is gone, podman save errors otherwise
         podman save localhost/pulp/pulp-galaxy-ng:latest -o image
 
     - name: "Load pulp-galaxy-ng from cache"
