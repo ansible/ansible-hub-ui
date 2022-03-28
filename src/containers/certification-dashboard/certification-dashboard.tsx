@@ -359,7 +359,8 @@ class CertificationDashboard extends React.Component<
     const canSign =
       this.context?.featureFlags?.collection_signing === true &&
       this.context?.featureFlags?.collection_auto_sign === true &&
-      this.context?.user?.model_permissions?.sign_collections_on_namespace;
+      true;
+    // this.context?.user?.model_permissions?.sign_collections_on_namespace;
 
     if (this.state.updatingVersions.includes(version)) {
       return <ListItemActions />; // empty td;
