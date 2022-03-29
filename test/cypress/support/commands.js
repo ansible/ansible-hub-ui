@@ -89,7 +89,7 @@ Cypress.Commands.add('manualCloudLogin', {}, (username, password) => {
   // type in the username
   cy.get('#username-verification').type(username);
   // click next
-  cy.get('#login-show-step2').click()
+  cy.get('#login-show-step2').click();
   cy.get('#password').type(`${password}{enter}`);
   //cy.wait('@login');
   cy.get('#UserMenu');

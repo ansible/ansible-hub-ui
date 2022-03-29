@@ -37,4 +37,4 @@ const tagify = require('cypress-tags');
  */
 module.exports = (on, config) => {
   on('file:preprocessor', tagify(config));
-}; 
+};
