@@ -2,9 +2,7 @@ import { t } from '@lingui/macro';
 
 import React, { useState } from 'react';
 
-import {
-  SortTable,
-} from 'src/components';
+import { SortTable } from 'src/components';
 
 import {
   TableComposable,
