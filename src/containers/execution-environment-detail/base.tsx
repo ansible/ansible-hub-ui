@@ -165,7 +165,10 @@ export function withContainerRepo(WrappedComponent) {
             <DeleteExecutionEnvironmentModal
               selectedItem={repo.name}
               closeAction={() => this.setState({ showDeleteModal: false })}
-              afterDelete={() => this.setState({ redirect: 'list' })}
+              afterDelete={() => {
+                this.context.setAlerts(this.state.alerts);
+                this.setState({ redirect: 'list' });
+              }}
               addAlert={(text, variant, description = undefined) =>
                 this.setState({
                   alerts: alerts.concat([
