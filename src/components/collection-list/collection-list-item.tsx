@@ -26,6 +26,7 @@ import {
 import { CollectionListType } from 'src/api';
 import { convertContentSummaryCounts } from 'src/utilities';
 import { Constants } from 'src/constants';
+import { SignatureBadge } from '../signing';
 
 interface IProps extends CollectionListType {
   showNamespace?: boolean;
@@ -44,6 +45,7 @@ export class CollectionListItem extends React.Component<IProps> {
       controls,
       deprecated,
       repo,
+      sign_state,
     } = this.props;
 
     const cells = [];
@@ -120,6 +122,7 @@ export class CollectionListItem extends React.Component<IProps> {
           </Trans>
         </div>
         <div className='hub-entry'>v{latest_version.version}</div>
+        <SignatureBadge className='hub-entry' signState={sign_state} />
       </DataListCell>,
     );
 

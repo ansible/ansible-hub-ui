@@ -35,14 +35,21 @@ import {
   closeAlertMixin,
   StatefulDropdown,
   DeleteModal,
+  SignSingleCertificateModal,
+  SignAllCertificatesModal,
 } from 'src/components';
 
-import { CollectionAPI, CollectionDetailType } from 'src/api';
+import {
+  CollectionAPI,
+  CollectionDetailType,
+  SignCollectionAPI,
+} from 'src/api';
 import { Paths, formatPath } from 'src/paths';
-import { waitForTask } from 'src/utilities';
+import { waitForTask, canSign } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
 import { Constants } from 'src/constants';
+import { SignatureBadge } from '../signing';
 
 interface IProps {
   collection: CollectionDetailType;
@@ -63,6 +70,8 @@ interface IProps {
 interface IState {
   isOpenVersionsSelect: boolean;
   isOpenVersionsModal: boolean;
+  isOpenSignModal: boolean;
+  isOpenSignAllModal: boolean;
   modalPagination: {
     page: number;
     pageSize: number;
@@ -86,6 +95,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     this.state = {
       isOpenVersionsSelect: false,
       isOpenVersionsModal: false,
+      isOpenSignModal: false,
+      isOpenSignAllModal: false,
       modalPagination: {
         page: 1,
         pageSize: Constants.DEFAULT_PAGINATION_OPTIONS[1],
@@ -151,10 +162,17 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const latestVersion = collection.latest_version.created_at;
 
+    const signedString = (v) => {
+      if ('sign_state' in v) {
+        return v.sign_state === 'signed' ? t`(signed)` : t`(unsigned)`;
+      } else {
+        return '';
+      }
+    };
+
     const isLatestVersion = (v) =>
-      `${moment(v.created).fromNow()} ${
-        v.version === all_versions[0].version ? t`(latest)` : ''
-      }`;
+      `${moment(v.created).fromNow()} ${signedString(v)}
+      ${v.version === all_versions[0].version ? t`(latest)` : ''}`;
 
     const { name: collectionName } = collection;
     const company = collection.namespace.company || collection.namespace.name;
@@ -202,10 +220,46 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Delete version ${collection.latest_version.version}`}
         </DropdownItem>
       ),
+      canSign(this.context) && (
+        <DropdownItem
+          key='sign-all'
+          onClick={() => this.setState({ isOpenSignAllModal: true })}
+        >
+          {t`Sign entire collection`}
+        </DropdownItem>
+      ),
+      canSign(this.context) && (
+        <DropdownItem
+          key='sign-version'
+          onClick={() => this.setState({ isOpenSignModal: true })}
+        >
+          {t`Sign version ${collection.latest_version.version}`}
+        </DropdownItem>
+      ),
     ].filter(Boolean);
 
     return (
       <React.Fragment>
+        {canSign(this.context) && (
+          <>
+            <SignAllCertificatesModal
+              name={collectionName}
+              numberOfAffected={collection.all_versions.length}
+              isOpen={this.state.isOpenSignAllModal}
+              onSubmit={this.signCollection}
+              onCancel={() => {
+                this.setState({ isOpenSignAllModal: false });
+              }}
+            />
+            <SignSingleCertificateModal
+              name={collectionName}
+              version={collection.latest_version.version}
+              isOpen={this.state.isOpenSignModal}
+              onSubmit={this.signVersion}
+              onCancel={() => this.setState({ isOpenSignModal: false })}
+            />
+          </>
+        )}
         <Modal
           isOpen={isOpenVersionsModal}
           title={t`Collection versions`}
@@ -395,6 +449,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   </Trans>
                 </span>
               ) : null}
+              <SignatureBadge
+                isCompact
+                signState={collection.latest_version.sign_state}
+              />
             </div>
           }
           pageControls={
@@ -513,6 +571,109 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     });
   };
 
+  private signCollection = () => {
+    const errorAlert = (status: string | number = 500): AlertType => ({
+      variant: 'danger',
+      title: t`API Error: ${status}`,
+      description: t`Failed to sign all versions in the collection.`,
+    });
+
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          id: 'loading-signing',
+          variant: 'success',
+          title: t`Signing started for all versions in collection "${this.props.collection.name}"`,
+        },
+      ],
+      isOpenSignAllModal: false,
+    });
+
+    SignCollectionAPI.sign({
+      signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
+      repository: this.context.selectedRepo,
+      namespace: this.props.collection.namespace.name,
+      collection: this.props.collection.name,
+    })
+      .then((result) => {
+        waitForTask(result.data.task_id)
+          .then(() => {
+            this.props.updateParams({});
+          })
+          .catch((error) => {
+            this.setState({
+              alerts: [...this.state.alerts, errorAlert(error)],
+            });
+          })
+          .finally(() => {
+            this.setState({
+              alerts: this.state.alerts.filter(
+                (x) => x?.id !== 'loading-signing',
+              ),
+            });
+          });
+      })
+      .catch((error) => {
+        // The request failed in the first place
+        this.setState({
+          alerts: [...this.state.alerts, errorAlert(error.response.status)],
+        });
+      });
+  };
+
+  private signVersion = () => {
+    const errorAlert = (status: string | number = 500): AlertType => ({
+      variant: 'danger',
+      title: t`API Error: ${status}`,
+      description: t`Failed to sign the version.`,
+    });
+
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          id: 'loading-signing',
+          variant: 'success',
+          title: t`Signing started for collection "${this.props.collection.name} v${this.props.collection.latest_version.version}".`,
+        },
+      ],
+      isOpenSignModal: false,
+    });
+
+    SignCollectionAPI.sign({
+      signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
+      repository: this.context.selectedRepo,
+      namespace: this.props.collection.namespace.name,
+      collection: this.props.collection.name,
+      version: this.props.collection.latest_version.version,
+    })
+      .then((result) => {
+        waitForTask(result.data.task_id)
+          .then(() => {
+            this.props.updateParams({});
+          })
+          .catch((error) => {
+            this.setState({
+              alerts: [...this.state.alerts, errorAlert(error)],
+            });
+          })
+          .finally(() => {
+            this.setState({
+              alerts: this.state.alerts.filter(
+                (x) => x?.id !== 'loading-signing',
+              ),
+            });
+          });
+      })
+      .catch((error) => {
+        // The request failed in the first place
+        this.setState({
+          alerts: [...this.state.alerts, errorAlert(error.response.status)],
+        });
+      });
+  };
+
   private deleteCollectionVersion = (collectionVersion) => {
     const {
       deleteCollection,
@@ -525,6 +686,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       .then((res) => {
         const taskId = this.getIdFromTask(res.data.task);
         const name = deleteCollection.name;
+
         waitForTask(taskId).then(() => {
           if (deleteCollection.all_versions.length > 1) {
             const topVersion = deleteCollection.all_versions.filter(
@@ -537,6 +699,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 topVersion[0].version,
               ),
             );
+
             this.setState({
               deleteCollection: null,
               collectionVersion: null,

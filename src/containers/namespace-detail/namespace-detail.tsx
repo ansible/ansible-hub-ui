@@ -27,6 +27,7 @@ import {
   NamespaceAPI,
   MyNamespaceAPI,
   NamespaceType,
+  SignCollectionAPI,
 } from 'src/api';
 
 import {
@@ -45,6 +46,7 @@ import {
   closeAlertMixin,
   DeleteModal,
   AlertType,
+  SignAllCertificatesModal,
 } from 'src/components';
 
 import {
@@ -52,6 +54,8 @@ import {
   getRepoUrl,
   filterIsSet,
   errorMessage,
+  waitForTask,
+  canSign,
 } from 'src/utilities';
 import { Constants } from 'src/constants';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
@@ -75,6 +79,7 @@ interface IState {
   updateCollection: CollectionListType;
   showControls: boolean;
   isOpenNamespaceModal: boolean;
+  isOpenSignModal: boolean;
   isNamespaceEmpty: boolean;
   confirmDelete: boolean;
   isNamespacePending: boolean;
@@ -112,6 +117,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       updateCollection: null,
       showControls: false, // becomes true when my-namespaces doesn't 404
       isOpenNamespaceModal: false,
+      isOpenSignModal: false,
       isNamespaceEmpty: false,
       confirmDelete: false,
       isNamespacePending: false,
@@ -335,6 +341,19 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             ? this.renderResources(namespace)
             : null}
         </Main>
+        {canSign(this.context) && (
+          <SignAllCertificatesModal
+            name={this.state.namespace.name}
+            numberOfAffected={this.state.itemCount}
+            isOpen={this.state.isOpenSignModal}
+            onSubmit={() => {
+              this.signAllCertificates(namespace);
+            }}
+            onCancel={() => {
+              this.setState({ isOpenSignModal: false });
+            }}
+          />
+        )}
       </React.Fragment>
     );
   }
@@ -371,6 +390,56 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         <ReactMarkdown>{namespace.resources}</ReactMarkdown>
       </div>
     );
+  }
+
+  private signAllCertificates(namespace: NamespaceType) {
+    const errorAlert = (status: string | number = 500): AlertType => ({
+      variant: 'danger',
+      title: t`API Error: ${status}`,
+      description: t`Failed to sign all collections.`,
+    });
+
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          id: 'loading-signing',
+          variant: 'success',
+          title: t`Signing started for all collections in namespace "${namespace.name}".`,
+        },
+      ],
+      isOpenSignModal: false,
+    });
+
+    SignCollectionAPI.sign({
+      signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
+      repository: this.context.selectedRepo,
+      namespace: namespace.name,
+    })
+      .then((result) => {
+        waitForTask(result.data.task_id)
+          .then(() => {
+            this.loadAll();
+          })
+          .catch((error) => {
+            this.setState({
+              alerts: [...this.state.alerts, errorAlert(error)],
+            });
+          })
+          .finally(() => {
+            this.setState({
+              alerts: this.state.alerts.filter(
+                (x) => x?.id !== 'loading-signing',
+              ),
+            });
+          });
+      })
+      .catch((error) => {
+        // The request failed in the first place
+        this.setState({
+          alerts: [...this.state.alerts, errorAlert(error.response.status)],
+        });
+      });
   }
 
   private loadCollections() {
@@ -521,6 +590,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </Link>
         }
       />,
+      canSign(this.context) && (
+        <DropdownItem
+          key='sign-collections'
+          onClick={() => this.setState({ isOpenSignModal: true })}
+        >
+          {t`Sign all collections`}
+        </DropdownItem>
+      ),
     ].filter(Boolean);
     if (!this.state.showControls) {
       return <div className='hub-namespace-page-controls'></div>;
