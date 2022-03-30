@@ -38,6 +38,80 @@ describe('Repo Management tests', () => {
     cy.contains('Sync');
   });
 
+  it('retrieves and copies token from local repo list', () => {
+    cy.visit(localRepoUrl);
+    cy.get('[data-cy="get-token"]').contains('Get token').click();
+    cy.get('button').contains('Load token').click();
+    cy.get('[aria-label="Copyable input"]')
+      .invoke('val')
+      .then((token) => {
+        cy.get('[aria-label="Copy to clipboard"]').realClick();
+        cy.window().then((win) => {
+          win.navigator.clipboard.readText().then((copiedToken) => {
+            assert.equal(copiedToken, token);
+          });
+        });
+      });
+  });
+
+  it('expands and copies CLI config from local repo list', () => {
+    cy.visit(localRepoUrl);
+    cy.get(
+      'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__group > button[aria-label="Show content"]',
+    ).click();
+    cy.get(
+      'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre',
+    ).contains('http://localhost:8002/api/automation-hub/content/community/');
+    cy.get(
+      'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre',
+    )
+      .invoke('text')
+      .then((CLI) => {
+        cy.get(
+          'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__group > button[aria-label="Copy to clipboard"]',
+        ).realClick();
+        cy.window().then((win) => {
+          win.navigator.clipboard.readText().then((copiedCLI) => {
+            assert.equal(copiedCLI, CLI);
+          });
+        });
+      });
+  });
+
+  it('edits remote repo', () => {
+    cy.visit(remoteRepoUrl);
+
+    //select config button for 'community' repo
+    cy.get('td')
+      .contains('community')
+      .parent()
+      .children('td:nth-child(6)')
+      .contains('Configure')
+      .click();
+  });
+
+  it('starts remote repo sync', () => {
+    cy.visit(remoteRepoUrl);
+
+    //checks sync status === 'Running' after sync post request
+    cy.intercept(
+      'POST',
+      'http://localhost:8002/api/automation-hub/content/rh-certified/v3/sync/',
+    ).as('startSync');
+    cy.get('td')
+      .contains('rh-certified')
+      .parent()
+      .children('td:nth-child(6)')
+      .contains('Sync')
+      .click();
+    cy.wait('@startSync');
+    cy.get('td')
+      .contains('rh-certified')
+      .parent()
+      .children('td:nth-child(5)')
+      .should('have.text', 'Running ');
+  });
+
   /* FIXME: Needs more work to handle uploading a requirements.yml
    * when you want to save the remote proxy config.
    */
