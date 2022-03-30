@@ -12,7 +12,6 @@ import {
   ExpandableRowContent,
 } from '@patternfly/react-table';
 interface Props {
-  children;
   params?: object;
   updateParams?: (params) => void;
   isCompact?: boolean;
@@ -33,7 +32,7 @@ export const RoleListTable: React.FC<Props> = ({
   isCompact,
   tableHeader,
   isStickyHeader = false,
-}: Props) => {
+}) => {
   const defaultTableHeader = {
     headers: [
       {
