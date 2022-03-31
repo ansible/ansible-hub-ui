@@ -327,7 +327,7 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.get('input.pf-c-select__toggle-typeahead').type(userName);
   cy.contains('button', userName).click();
   cy.get('.pf-c-content h2').click(); // click modal header to close dropdown
-  cy.contains('footer > button', 'Add').click({force: true});
+  cy.contains('footer > button', 'Add').click({ force: true });
   cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
 });
 
@@ -628,8 +628,7 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
   );
   // wait for finish
   cy.contains('a', 'detail page').click();
-  cy.contains('.title-box h1', 'Completed', { timeout: 60000 });
-  //cy.contains('Too Many Requests');
+  cy.contains('.title-box h1', 'Completed', { timeout: 30000 });
 });
 
 Cypress.Commands.add('deleteRegistriesManual', {}, () => {
