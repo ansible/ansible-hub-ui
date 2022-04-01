@@ -55,6 +55,7 @@ export { ContainerDistributionAPI } from './container-distribution';
 export { ExecutionEnvironmentNamespaceAPI } from './execution-environment-namespace';
 export { ControllerAPI } from './controller';
 export { TaskManagementAPI } from './task-management';
+export { RoleAPI } from './role';
 export { GenericPulpAPI } from './generic-pulp';
 export { SettingsAPI } from './settings';
 export { SettingsType } from './response-types/settings';
