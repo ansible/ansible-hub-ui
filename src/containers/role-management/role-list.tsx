@@ -171,6 +171,55 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
             ) : (
               <section className='body'>
                 <div className='role-list'>
+                  <Toolbar>
+                    <ToolbarContent>
+                      <ToolbarGroup>
+                        <ToolbarItem>
+                          <CompoundFilter
+                            inputText={this.state.inputText}
+                            onChange={(text) =>
+                              this.setState({ inputText: text })
+                            }
+                            updateParams={(p) => {
+                              p['page'] = 1;
+                              this.updateParams(p, () => this.queryRoles());
+                            }}
+                            params={params}
+                            filterConfig={[
+                              {
+                                id: 'name__icontains',
+                                title: t`Role name`,
+                              },
+                              {
+                                id: 'description__icontains',
+                                title: t`Description`,
+                              },
+                              {
+                                id: 'locked',
+                                title: t`Status`,
+                                inputType: 'select',
+                                options: [
+                                  {
+                                    id: 'true',
+                                    title: t`Locked`,
+                                  },
+                                  {
+                                    id: 'false',
+                                    title: t`Unlocked`,
+                                  },
+                                ],
+                              },
+                            ]}
+                          />
+                        </ToolbarItem>
+                        <ToolbarItem>
+                          <Button>
+                            <Trans>Add roles</Trans>
+                          </Button>
+                        </ToolbarItem>
+                      </ToolbarGroup>
+                    </ToolbarContent>
+                  </Toolbar>
                   <Pagination
                     params={params}
                     updateParams={(p) =>
@@ -193,7 +242,11 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                     }}
                   />
                 </div>
-
+                {loading ? (
+                  <LoadingPageSpinner />
+                ) : (
+                  this.renderTable(this.state.params)
+                )}
                 <Pagination
                   params={params}
                   updateParams={(p) =>
