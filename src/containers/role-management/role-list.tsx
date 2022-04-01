@@ -171,7 +171,6 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
             ) : (
               <section className='body'>
                 <div className='role-list'>
-
                   <Pagination
                     params={params}
                     updateParams={(p) =>
@@ -262,9 +261,6 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       </TableComposable>
     );
   }
-
-
-
 
   private deleteRole({ pulp_href, name }) {
     const roleID = parsePulpIDFromURL(pulp_href);
