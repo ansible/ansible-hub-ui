@@ -36,7 +36,7 @@ import {
   ToolbarItem,
   Tooltip,
 } from '@patternfly/react-core';
-import './role.scss';
+// import './role.scss';
 import { RoleType } from 'src/api/response-types/role';
 import {
   errorMessage,
@@ -44,7 +44,7 @@ import {
   ParamHelper,
   parsePulpIDFromURL,
 } from 'src/utilities';
-import { RoleAPI } from '.response-types/role';
+import { RoleAPI } from 'src/api/role';
 import { formatPath, Paths } from 'src/paths';
 import {
   Tbody,
@@ -193,11 +193,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                     }}
                   />
                 </div>
-                {loading ? (
-                  <LoadingPageSpinner />
-                ) : (
-                  this.renderTable(this.state.params)
-                )}
+
                 <Pagination
                   params={params}
                   updateParams={(p) =>
@@ -210,55 +206,6 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
           </Main>
         )}
       </React.Fragment>
-    );
-  }
-
-  private renderTable(params) {
-    const { roles } = this.state;
-    if (roles.length === 0) {
-      return <EmptyStateFilter />;
-    }
-    const sortTableOptions = {
-      headers: [
-        {
-          title: t``,
-          type: 'none',
-          id: 'expand',
-        },
-        {
-          title: t`Role`,
-          type: 'alpha',
-          id: 'name',
-        },
-        {
-          title: t`Description`,
-          type: 'alpha',
-          id: 'description',
-        },
-        {
-          title: t`Status`,
-          type: 'alpha',
-          id: 'locked',
-        },
-      ],
-    };
-
-    return (
-      <TableComposable
-        variant='compact'
-        aria-label={t`Role list`}
-        className='hub-c-table-content pf-c-table'
-      >
-        <SortTable
-          options={sortTableOptions}
-          params={params}
-          updateParams={(p) => {
-            p['page'] = 1;
-            this.updateParams(p, () => this.queryRoles());
-          }}
-        />
-        {roles.map((role, i) => this.renderTableRow(role, i))}
-      </TableComposable>
     );
   }
 
