@@ -25,6 +25,7 @@ import {
   Tag,
   StatefulDropdown,
   DeleteModal,
+  RoleListTable,
 } from 'src/components';
 import {
   Button,
@@ -245,7 +246,41 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                 {loading ? (
                   <LoadingPageSpinner />
                 ) : (
-                  this.renderTable(this.state.params)
+                  <RoleListTable
+                    roles={this.state.roles}
+                    dropdownActions={[
+                      <DropdownItem
+                        key='edit-role'
+                        onClick={(role) => {
+                          // edit role action
+                        }}
+                      >
+                        {t`Edit Role`}
+                      </DropdownItem>,
+                      <DropdownItem
+                        key='duplicate-role'
+                        onClick={(role) => {
+                          // duplicate role action
+                        }}
+                      >
+                        {t`Duplicate role`}
+                      </DropdownItem>,
+                      <DropdownItem
+                        key='delete-role'
+                        onClick={(role) => {
+                          // delete role action
+                        }}
+                      >
+                        {t`Delete role`}
+                      </DropdownItem>,
+                    ]}
+                    params={params}
+                    updateParams={(p) => {
+                      this.updateParams(p, () => this.queryRoles());
+                    }}
+                    // isUserManagementDisabled={true}
+                  />
+                  // this.renderTable(this.state.params)
                 )}
                 <Pagination
                   params={params}
