@@ -78,6 +78,12 @@ export { Tooltip } from './patternfly-wrappers/tooltip';
 export { UIVersion } from './shared/ui-version';
 export { UserForm } from './user-form/user-form';
 export { UserFormPage } from './user-form/user-form-page';
+export {
+  RoleListTable,
+  ExpandableRow,
+  CheckboxRow,
+  RadioRow,
+} from './role-list-table/role-list-table';
 export { WriteOnlyField } from './patternfly-wrappers/write-only-field';
 export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
 export { FileUpload } from './patternfly-wrappers/fileupload';
