@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useCallback } from 'react';
 import { t, Trans } from '@lingui/macro';
+import { i18n } from '@lingui/core';
 import { AppContext } from 'src/loaders/app-context';
 import {
   Link,
@@ -26,6 +27,9 @@ import {
   StatefulDropdown,
   DeleteModal,
   RoleListTable,
+  ExpandableRow,
+  ListItemActions,
+  PermissionChipSelector,
 } from 'src/components';
 import {
   Button,
@@ -36,6 +40,8 @@ import {
   ToolbarGroup,
   ToolbarItem,
   Tooltip,
+  Flex,
+  FlexItem,
 } from '@patternfly/react-core';
 // import './role.scss';
 import { RoleType } from 'src/api/response-types/role';
@@ -44,7 +50,9 @@ import {
   filterIsSet,
   ParamHelper,
   parsePulpIDFromURL,
+  twoWayMapper,
 } from 'src/utilities';
+
 import { RoleAPI } from 'src/api/role';
 import { formatPath, Paths } from 'src/paths';
 import {
@@ -84,7 +92,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     ]);
 
     if (!params['page_size']) {
-      params['page_size'] = 10;
+      params['page_size'] = 15;
     }
 
     if (!params['sort']) {
@@ -123,10 +131,27 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       unauthorized,
       showDeleteModal,
       roleToEdit,
+      roles,
     } = this.state;
 
     const noData =
       roleCount === 0 && !filterIsSet(params, ['name__icontains', 'locked']);
+
+    const groups = Constants.PERMISSIONS;
+
+    const { user, featureFlags } = this.context;
+    let isUserMgmtDisabled = false;
+    const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
+    if (featureFlags) {
+      isUserMgmtDisabled = featureFlags.external_authentication;
+    }
+    if (isUserMgmtDisabled) {
+      Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
+        if (perm in filteredPermissions) {
+          delete filteredPermissions[perm];
+        }
+      });
+    }
     return (
       <React.Fragment>
         <AlertList
@@ -247,48 +272,81 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                   <LoadingPageSpinner />
                 ) : (
                   <RoleListTable
-                    roles={this.state.roles}
-                    dropdownActions={[
-                      <DropdownItem
-                        key='edit-role'
-                        onClick={(role) => {
-                          // edit role action
-                        }}
+                    isStickyHeader={true}
+                    params={this.state.params}
+                    updateParams={this.updateParams}
+                    isCompact={true}
+                  >
+                    {roles.map((role) => (
+                      <ExpandableRow
+                        key={role.name}
+                        expandableRowContent={
+                          <>
+                            {groups.map((group) => (
+                              <Flex
+                                style={{ marginTop: '16px' }}
+                                alignItems={{ default: 'alignItemsCenter' }}
+                                key={group.name}
+                                className={group.name}
+                              >
+                                <FlexItem style={{ minWidth: '200px' }}>
+                                  {i18n._(group.label)}
+                                </FlexItem>
+                                <FlexItem grow={{ default: 'grow' }}>
+                                  <PermissionChipSelector
+                                    availablePermissions={group.object_permissions
+                                      .filter(
+                                        (perm) =>
+                                          !role.permissions.find(
+                                            (selected) => selected === perm,
+                                          ),
+                                      )
+                                      .map((value) =>
+                                        twoWayMapper(
+                                          value,
+                                          filteredPermissions,
+                                        ),
+                                      )
+                                      .sort()}
+                                    selectedPermissions={role.permissions
+                                      .filter((selected) =>
+                                        group.object_permissions.find(
+                                          (perm) => selected === perm,
+                                        ),
+                                      )
+                                      .map((value) =>
+                                        twoWayMapper(
+                                          value,
+                                          filteredPermissions,
+                                        ),
+                                      )}
+                                    menuAppendTo='inline'
+                                    multilingual={true}
+                                    isViewOnly={true}
+                                  />
+                                </FlexItem>
+                              </Flex>
+                            ))}
+                          </>
+                        }
                       >
-                        {t`Edit Role`}
-                      </DropdownItem>,
-                      <DropdownItem
-                        key='duplicate-role'
-                        onClick={(role) => {
-                          // duplicate role action
-                        }}
-                      >
-                        {t`Duplicate role`}
-                      </DropdownItem>,
-                      <DropdownItem
-                        key='delete-role'
-                        onClick={(role) => {
-                          // delete role action
-                        }}
-                      >
-                        {t`Delete role`}
-                      </DropdownItem>,
-                    ]}
-                    params={params}
-                    updateParams={(p) => {
-                      this.updateParams(p, () => this.queryRoles());
-                    }}
-                    // isUserManagementDisabled={true}
-                  />
-                  // this.renderTable(this.state.params)
+                        <td>{role.name}</td>
+                        <td>{role.description}</td>
+                        <ListItemActions
+                          kebabItems={this.renderDropdownItems()}
+                        />
+                      </ExpandableRow>
+                    ))}
+                  </RoleListTable>
+
+                  // <Pagination
+                  //   params={params}
+                  //   updateParams={(p) =>
+                  //     this.updateParams(p, () => this.queryRoles())
+                  //   }
+                  //   count={roleCount}
+                  // />
                 )}
-                <Pagination
-                  params={params}
-                  updateParams={(p) =>
-                    this.updateParams(p, () => this.queryRoles())
-                  }
-                  count={roleCount}
-                />
               </section>
             )}
           </Main>
@@ -321,6 +379,22 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
         this.setState({ showDeleteModal: false, roleToEdit: null });
       });
   }
+
+  private renderDropdownItems = () => {
+    const dropdownItems = [
+      // this.context.user.model_permissions.change_containerregistry && (
+      <DropdownItem key='edit' onClick={() => console.log('Editing!! ')}>
+        <Trans>Edit</Trans>
+      </DropdownItem>,
+      // ),
+      // this.context.user.model_permissions.delete_containerregistry && (
+      <DropdownItem key='delete' onClick={() => console.log('DELETE! ')}>
+        <Trans>Delete</Trans>
+      </DropdownItem>,
+      // ),
+    ];
+    return dropdownItems;
+  };
 
   private queryRoles = () => {
     const { params } = this.state;
