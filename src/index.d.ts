@@ -8,6 +8,7 @@ declare module '*.svg';
 /* eslint-disable no-var */
 declare var API_HOST;
 declare var API_BASE_PATH;
+declare var PULP_API_BASE_PATH;
 declare var UI_BASE_PATH;
 declare var DEPLOYMENT_MODE;
 declare var NAMESPACE_TERM;

@@ -6,6 +6,7 @@ module.exports = webpackBase({
 
   // Path to the API on the API host. EX: /api/automation-hub
   API_BASE_PATH: '/api/automation-hub/',
+  PULP_API_BASE_PATH: '/api/automation-hub/pulp/api/v3/',
 
   // Path on the host where the UI is found. EX: /apps/automation-hub
   UI_BASE_PATH: '',
