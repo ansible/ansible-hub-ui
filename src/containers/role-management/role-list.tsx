@@ -263,7 +263,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                     ignoredParams={['page_size', 'page', 'sort', 'ordering']}
                     niceNames={{
                       name__icontains: t`Role name`,
-                      locked: t`Status`,
+                      locked: t`Locked?`,
                     }}
                   />
                 </div>
@@ -367,7 +367,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                             <td>{role.description}</td>
                             <td>{role.locked ? 'Locked' : 'Unlocked'}</td>
                             <ListItemActions
-                              kebabItems={this.renderDropdownItems()}
+                              kebabItems={this.renderDropdownItems(role)}
                             />
                           </ExpandableRow>
                         ))}
@@ -417,7 +417,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       });
   }
 
-  private renderDropdownItems = () => {
+  private renderDropdownItems = (role) => {
     const dropdownItems = [
       // this.context.user.model_permissions.change_containerregistry && (
       <DropdownItem key='edit' onClick={() => console.log('Editing!! ')}>
