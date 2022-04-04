@@ -212,7 +212,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
                       />
                       <AppliedFilters
                         style={{ marginTop: '16px' }}
-                        updateParams={updateParams}
+                        updateParams={(p) => {
+                          updateParams(p);
+                          this.setState({ inputText: '' });
+                        }}
                         params={params}
                         ignoredParams={['page_size', 'page', 'sort']}
                       />
