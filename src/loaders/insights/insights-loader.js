@@ -29,12 +29,6 @@ class App extends Component {
     window.insights.chrome.identifyApp('automation-hub');
     document.title = APPLICATION_NAME; // change window title from automationHub
 
-    // hide global filter - enabled for the whole ansible org but irrelevant outside AAP
-    const globalFilter = document.getElementById('global-filter');
-    if (el) {
-      el.style.display = 'none';
-    }
-
     // This listens for insights navigation events, so this will fire
     // when items in the nav are clicked or the app is loaded for the first
     // time

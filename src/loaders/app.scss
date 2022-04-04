@@ -19,6 +19,11 @@
     var(--pf-global--palette--black-800);
 }
 
+// hide crc global filter - enabled for the whole ansible org but irrelevant outside AAP
+#global-filter {
+  display: none;
+}
+
 section.pf-c-nav__section.nav-title > h2 {
   height: 50px;
   font-size: var(--pf-c-nav__link--FontSize);
