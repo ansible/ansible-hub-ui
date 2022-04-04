@@ -1,0 +1,57 @@
+.empty-state-box {
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-wizard-layout {
+  // height: 590px;
+  padding: 1rem 1.5rem 0 1.5rem;
+
+  // .select-roles-content {
+  //   min-height: 570px;
+  // }
+
+  .permission {
+    margin: 3px;
+  }
+
+  .preview-roles {
+    margin-top: 20px;
+
+    .permissions {
+      margin: 10px 0 10px;
+    }
+  }
+
+  .filter {
+    width: 250px;
+  }
+
+  .selected-roles-list {
+    height: 340px;
+    overflow-x: auto;
+  }
+
+  .no-filter-data {
+    display: flex;
+    justify-content: center;
+    height: 400px;
+  }
+}
+
+.loading-wizard {
+  display: flex;
+  align-items: center;
+}
+
+.no-data {
+  display: flex;
+  justify-content: center;
+}
+
+.select-roles-content {
+  height: 530px;
+  overflow: hidden;
+}

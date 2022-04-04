@@ -1,5 +1,4 @@
 import { t, Trans } from '@lingui/macro';
-import { i18n } from '@lingui/core';
 
 import * as React from 'react';
 import { errorMessage } from 'src/utilities';
@@ -30,7 +29,6 @@ import {
   LoadingPageWithHeader,
   Main,
   Pagination,
-  PermissionChipSelector,
   SortTable,
   Tabs,
 } from 'src/components';
@@ -40,23 +38,23 @@ import {
   UserType,
   GroupObjectPermissionType,
 } from 'src/api';
-import { filterIsSet, ParamHelper, twoWayMapper } from 'src/utilities';
+import { filterIsSet, ParamHelper } from 'src/utilities';
 import { formatPath, Paths } from 'src/paths';
 import {
-  ActionGroup,
   Button,
   DropdownItem,
-  Flex,
-  FlexItem,
-  Form,
   Modal,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { Constants } from 'src/constants';
+
 import { AppContext } from 'src/loaders/app-context';
+
+import './group-management.scss';
+
+import GroupDetailRoleManagement from './group-detail-role-management/group-detail-role-management';
 
 interface IState {
   group: GroupObjectPermissionType;
@@ -66,7 +64,7 @@ interface IState {
     page_size?: number;
     sort?: string;
     tab: string;
-    isEditing: boolean;
+    [key: string]: string | number;
   };
   users: UserType[];
   allUsers: UserType[];
@@ -107,9 +105,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         id: id,
         page: 0,
         page_size: params['page_size'] || 10,
-        sort: params['sort'] || 'username',
-        tab: params['tab'] || 'permissions',
-        isEditing: params['isEditing'] === 'true',
+        sort:
+          params['sort'] || (params['tab'] === 'access' ? 'role' : 'username'),
+        tab: params['tab'] || 'access',
+        role__icontains: params['role__icontains'] || '',
       },
       itemCount: 0,
       alerts: [],
@@ -128,41 +127,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    this.setState({ editPermissions: this.state.params.isEditing });
     if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorised: true });
     } else {
-      GroupAPI.get(this.state.params.id)
-        .then((result) => {
-          this.setState({ group: result.data });
-        })
-        .catch((e) => {
-          const { status, statusText } = e.response;
-          this.addAlert(
-            t`Group "${this.state.group.name}" could not be displayed.`,
-            'danger',
-            errorMessage(status, statusText),
-          );
-        });
-
-      GroupAPI.getPermissions(this.state.params.id)
-        .then((result) => {
-          this.setState({
-            originalPermissions: result.data.data.map((p) => ({
-              id: p.id,
-              name: p.permission,
-            })),
-            permissions: result.data.data.map((x) => x.permission),
-          });
-        })
-        .catch((e) => {
-          const { status, statusText } = e.response;
-          this.addAlert(
-            t`Permissions for group "${this.state.group.name}" could not be displayed.`,
-            'danger',
-            errorMessage(status, statusText),
-          );
-        });
+      this.queryGroup();
     }
   }
 
@@ -184,7 +152,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     } = this.state;
     const { user } = this.context;
 
-    const tabs = [{ id: 'permissions', name: t`Permissions` }];
+    const tabs = [{ id: 'access', name: t`Access` }];
     if (!!user && user.model_permissions.view_user) {
       tabs.push({ id: 'users', name: t`Users` });
     }
@@ -237,8 +205,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           <div className='hub-tab-link-container'>
             <div className='tabs'>
               <Tabs
-                isDisabled={editPermissions}
-                disabledTitle={t`Please finish editing permissions first.`}
                 tabs={tabs}
                 params={params}
                 updateParams={(p) => this.updateParams(p)}
@@ -247,7 +213,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           </div>
         </BaseHeader>
         <Main data-cy='main-tabs'>
-          {params.tab == 'permissions' ? this.renderPermissions() : null}
+          {params.tab == 'access' ? this.renderGroupDetail() : null}
           {params.tab == 'users' ? this.renderUsers(users) : null}
         </Main>
       </React.Fragment>
@@ -256,7 +222,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   private renderControls() {
     const { user } = this.context;
-    const { editPermissions } = this.state;
 
     if (!user || !user.model_permissions.delete_group) {
       return null;
@@ -265,7 +230,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     return (
       <ToolbarItem>
         <Button
-          isDisabled={editPermissions}
           onClick={() => this.setState({ showDeleteModal: true })}
           variant='secondary'
         >
@@ -275,174 +239,78 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private actionCancelPermissions() {
-    const { originalPermissions } = this.state;
-    this.setState({
-      editPermissions: false,
-      permissions: originalPermissions.map((p) => p.name),
-    });
-  }
+  // private actionCancelPermissions() {
+  //   const { originalPermissions } = this.state;
+  //   this.setState({
+  //     editPermissions: false,
+  //     permissions: originalPermissions.map((p) => p.name),
+  //   });
+  // }
 
-  private actionSavePermissions() {
-    const { group, originalPermissions, permissions } = this.state;
-    const promises = [];
+  // private actionSavePermissions() {
+  // const { group, originalPermissions, permissions } = this.state;
+  // const promises = [];
+  // Add permissions
+  // permissions.forEach((permission) => {
+  //   if (!originalPermissions.find((p) => p.name === permission)) {
+  //     promises.push(
+  //       GroupAPI.addPermission(group.id, {
+  //         permission: permission,
+  //       }).catch((e) => {
+  //         const { status, statusText } = e.response;
+  //         this.addAlert(
+  //           t`Permission "${permission}" could not be not added to group "${this.state.group}".`,
+  //           'danger',
+  //           errorMessage(status, statusText),
+  //         );
+  //       }),
+  //     );
+  //   }
+  // });
+  // Remove permissions
+  // originalPermissions.forEach((original) => {
+  //   if (!permissions.includes(original.name)) {
+  //     promises.push(
+  //       GroupAPI.removePermission(group.id, original.id).catch((e) => {
+  //         const { status, statusText } = e.response;
+  //         this.addAlert(
+  //           t`Permission "${original.name}" could not be not removed from group "${this.state.group}".`,
+  //           'danger',
+  //           errorMessage(status, statusText),
+  //         );
+  //       }),
+  //     );
+  //   }
+  // });
+  // this.setState({ savingPermissions: true }); // disable Save/Cancel while waiting
+  // Promise.all(promises).then(() =>
+  //   this.setState({
+  //     editPermissions: false,
+  //     savingPermissions: false,
+  //   }),
+  // );
+  // }
 
-    // Add permissions
-    permissions.forEach((permission) => {
-      if (!originalPermissions.find((p) => p.name === permission)) {
-        promises.push(
-          GroupAPI.addPermission(group.id, {
-            permission: permission,
-          }).catch((e) => {
-            const { status, statusText } = e.response;
-            this.addAlert(
-              t`Permission "${permission}" could not be not added to group "${this.state.group}".`,
-              'danger',
-              errorMessage(status, statusText),
-            );
-          }),
-        );
-      }
-    });
+  private renderGroupDetail() {
+    const { params, group } = this.state;
 
-    // Remove permissions
-    originalPermissions.forEach((original) => {
-      if (!permissions.includes(original.name)) {
-        promises.push(
-          GroupAPI.removePermission(group.id, original.id).catch((e) => {
-            const { status, statusText } = e.response;
-            this.addAlert(
-              t`Permission "${original.name}" could not be not removed from group "${this.state.group}".`,
-              'danger',
-              errorMessage(status, statusText),
-            );
-          }),
-        );
-      }
-    });
+    const ignoredParams = ['username', 'first_name', 'last_name', 'email'];
 
-    this.setState({ savingPermissions: true }); // disable Save/Cancel while waiting
-    Promise.all(promises).then(() =>
-      this.setState({
-        editPermissions: false,
-        savingPermissions: false,
-      }),
-    );
-  }
-
-  private renderPermissions() {
-    const groups = Constants.PERMISSIONS;
-    const {
-      editPermissions,
-      savingPermissions,
-      permissions: selectedPermissions,
-    } = this.state;
-
-    const { user, featureFlags } = this.context;
-    let isUserMgmtDisabled = false;
-    const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
-    if (featureFlags) {
-      isUserMgmtDisabled = featureFlags.external_authentication;
-    }
-    if (isUserMgmtDisabled) {
-      Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-        if (perm in filteredPermissions) {
-          delete filteredPermissions[perm];
-        }
-      });
-    }
+    const roleParams = ParamHelper.getReduced(params, [
+      params['role__icontains'] === '' && 'role__icontains',
+      ...ignoredParams,
+    ]);
 
     return (
-      <section className='body'>
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          {!editPermissions && user.model_permissions.change_group && (
-            <Button onClick={() => this.setState({ editPermissions: true })}>
-              {t`Edit`}
-            </Button>
-          )}
-        </div>
-        <div>
-          {groups.map((group) => (
-            <Flex
-              style={{ marginTop: '16px' }}
-              alignItems={{ default: 'alignItemsCenter' }}
-              key={group.name}
-              className={group.name}
-            >
-              <FlexItem style={{ minWidth: '200px' }}>
-                {i18n._(group.label)}
-              </FlexItem>
-              <FlexItem grow={{ default: 'grow' }}>
-                <PermissionChipSelector
-                  availablePermissions={group.object_permissions
-                    .filter(
-                      (perm) =>
-                        !selectedPermissions.find(
-                          (selected) => selected === perm,
-                        ),
-                    )
-                    .map((value) => twoWayMapper(value, filteredPermissions))
-                    .sort()}
-                  selectedPermissions={selectedPermissions
-                    .filter((selected) =>
-                      group.object_permissions.find(
-                        (perm) => selected === perm,
-                      ),
-                    )
-                    .map((value) => twoWayMapper(value, filteredPermissions))}
-                  setSelected={(perms) => this.setState({ permissions: perms })}
-                  menuAppendTo='inline'
-                  multilingual={true}
-                  isViewOnly={!editPermissions}
-                  onClear={() => {
-                    const clearedPerms = group.object_permissions;
-                    this.setState({
-                      permissions: this.state.permissions.filter(
-                        (x) => !clearedPerms.includes(x),
-                      ),
-                    });
-                  }}
-                  onSelect={(event, selection) => {
-                    const newPerms = new Set(this.state.permissions);
-                    if (
-                      newPerms.has(twoWayMapper(selection, filteredPermissions))
-                    ) {
-                      newPerms.delete(
-                        twoWayMapper(selection, filteredPermissions),
-                      );
-                    } else {
-                      newPerms.add(
-                        twoWayMapper(selection, filteredPermissions),
-                      );
-                    }
-                    this.setState({ permissions: Array.from(newPerms) });
-                  }}
-                />
-              </FlexItem>
-            </Flex>
-          ))}
-        </div>
-        {editPermissions && (
-          <Form>
-            <ActionGroup>
-              <Button
-                variant='primary'
-                isDisabled={savingPermissions}
-                onClick={() => this.actionSavePermissions()}
-              >
-                {t`Save`}
-              </Button>
-              <Button
-                variant='secondary'
-                isDisabled={savingPermissions}
-                onClick={() => this.actionCancelPermissions()}
-              >
-                {t`Cancel`}
-              </Button>
-            </ActionGroup>
-          </Form>
-        )}
-      </section>
+      <GroupDetailRoleManagement
+        params={roleParams}
+        updateParams={(p) => this.updateParams(p)}
+        context={this.context}
+        group={group}
+        addAlert={(title, variant, description) =>
+          this.addAlert(title, variant, description)
+        }
+      />
     );
   }
 
@@ -674,15 +542,26 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderUsers(users) {
-    const { params, itemCount } = this.state;
+    const { itemCount } = this.state;
     const { user, featureFlags } = this.context;
     const noData =
       itemCount === 0 &&
-      !filterIsSet(params, ['username', 'first_name', 'last_name', 'email']);
+      !filterIsSet(this.state.params, [
+        'username',
+        'first_name',
+        'last_name',
+        'email',
+      ]);
     let isUserMgmtDisabled = false;
     if (featureFlags) {
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
+
+    // const params = {
+    //   ...ParamHelper.deleteParam(this.state.params, 'role__icontains'),
+    // };
+
+    const params = this.state.params;
 
     if (noData) {
       return (
@@ -777,6 +656,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               'page_size',
               'sort',
               'tab',
+              'role__icontains',
             ]}
           />
         </div>
@@ -887,8 +767,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private queryUsers() {
+    let params = ParamHelper.getReduced(this.state.params, ['role__icontains']);
+    params = ParamHelper.setParam(params, 'sort', 'username');
+
     UserAPI.list({
-      ...this.state.params,
+      ...params,
       ...{ groups__name: this.state.group.name },
     })
       .then((result) =>
@@ -905,6 +788,25 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           errorMessage(status, statusText),
         );
       });
+  }
+
+  private queryGroup() {
+    GroupAPI.get(this.state.params.id)
+      .then((result) => {
+        this.setState({ group: result.data });
+      })
+      .catch((e) => {
+        const { status, statusText } = e.response;
+        this.addAlert(
+          t`Group "${this.state.group.name}" could not be displayed.`,
+          'danger',
+          errorMessage(status, statusText),
+        );
+      });
+
+    this.setState({
+      users: null,
+    });
   }
 
   private deleteUser(user) {

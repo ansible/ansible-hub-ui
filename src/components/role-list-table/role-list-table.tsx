@@ -43,7 +43,7 @@ export const RoleListTable: React.FC<Props> = ({
       {
         title: t`Role`,
         type: 'alpha',
-        id: 'name',
+        id: 'role',
       },
       {
         title: t`Description`,
