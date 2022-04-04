@@ -12,20 +12,8 @@ export class API extends PulpAPI {
     return super.list(changedParams);
   }
 
-  getPermissions(id) {
-    return this.http.get(
-      this.apiPath + id + '/model-permissions/?limit=100000&offset=0',
-    );
-  }
-
-  addPermission(id, data) {
-    return this.http.post(this.apiPath + id + '/model-permissions/', data);
-  }
-
-  removePermission(id, permissionId) {
-    return this.http.delete(
-      this.apiPath + id + '/model-permissions/' + permissionId + '/',
-    );
+  updatePermissions(id, data: any[]) {
+    return this.http.patch(this.apiPath + id, { name, Permissions });
   }
 }
 
