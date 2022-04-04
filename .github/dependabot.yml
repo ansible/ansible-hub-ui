@@ -22,7 +22,7 @@ updates:
     directory: '/'
     target-branch: 'stable-4.3'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
     commit-message:
       prefix: '[stable-4.3] '
 
@@ -30,6 +30,6 @@ updates:
     directory: '/'
     target-branch: 'stable-4.2'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
     commit-message:
       prefix: '[stable-4.2] '
