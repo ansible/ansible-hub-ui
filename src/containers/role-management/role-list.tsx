@@ -425,7 +425,15 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       </DropdownItem>,
       // ),
       // this.context.user.model_permissions.delete_containerregistry && (
-      <DropdownItem key='delete' onClick={() => console.log('DELETE! ')}>
+      <DropdownItem
+        key='delete'
+        onClick={() =>
+          this.setState({
+            showDeleteModal: true,
+            roleToEdit: role,
+          })
+        }
+      >
         <Trans>Delete</Trans>
       </DropdownItem>,
       // ),
