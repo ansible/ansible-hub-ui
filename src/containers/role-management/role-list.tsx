@@ -152,6 +152,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
         }
       });
     }
+
     return (
       <React.Fragment>
         <AlertList
@@ -270,106 +271,110 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                   <LoadingPageSpinner />
                 ) : (
                   <>
-                    <RoleListTable
-                      isStickyHeader={false}
-                      params={this.state.params}
-                      updateParams={(p) => {
-                        this.updateParams(p, () => this.queryRoles());
-                      }}
-                      isCompact={true}
-                      tableHeader={{
-                        headers: [
-                          {
-                            title: '',
-                            type: 'none',
-                            id: 'expander',
-                          },
-                          {
-                            title: t`Role name`,
-                            type: 'alpha',
-                            id: 'name',
-                          },
-                          {
-                            title: t`Description`,
-                            type: 'none',
-                            id: 'description',
-                          },
-                          {
-                            title: t`Locked`,
-                            type: 'none',
-                            id: 'locked',
-                          },
-                          {
-                            title: '',
-                            type: 'none',
-                            id: 'kebab',
-                          },
-                        ],
-                      }}
-                    >
-                      {roles.map((role) => (
-                        <ExpandableRow
-                          key={role.name}
-                          expandableRowContent={
-                            <>
-                              {groups.map((group) => (
-                                <Flex
-                                  style={{ marginTop: '16px' }}
-                                  alignItems={{ default: 'alignItemsCenter' }}
-                                  key={group.name}
-                                  className={group.name}
-                                >
-                                  <FlexItem style={{ minWidth: '200px' }}>
-                                    {i18n._(group.label)}
-                                  </FlexItem>
-                                  <FlexItem grow={{ default: 'grow' }}>
-                                    <PermissionChipSelector
-                                      availablePermissions={group.object_permissions
-                                        .filter(
-                                          (perm) =>
-                                            !role.permissions.find(
-                                              (selected) => selected === perm,
+                    {' '}
+                    {roleCount ? (
+                      <RoleListTable
+                        isStickyHeader={false}
+                        params={this.state.params}
+                        updateParams={(p) => {
+                          this.updateParams(p, () => this.queryRoles());
+                        }}
+                        isCompact={true}
+                        tableHeader={{
+                          headers: [
+                            {
+                              title: '',
+                              type: 'none',
+                              id: 'expander',
+                            },
+                            {
+                              title: t`Role name`,
+                              type: 'alpha',
+                              id: 'name',
+                            },
+                            {
+                              title: t`Description`,
+                              type: 'none',
+                              id: 'description',
+                            },
+                            {
+                              title: t`Locked`,
+                              type: 'none',
+                              id: 'locked',
+                            },
+                            {
+                              title: '',
+                              type: 'none',
+                              id: 'kebab',
+                            },
+                          ],
+                        }}
+                      >
+                        {roles.map((role) => (
+                          <ExpandableRow
+                            key={role.name}
+                            expandableRowContent={
+                              <>
+                                {groups.map((group) => (
+                                  <Flex
+                                    style={{ marginTop: '16px' }}
+                                    alignItems={{ default: 'alignItemsCenter' }}
+                                    key={group.name}
+                                    className={group.name}
+                                  >
+                                    <FlexItem style={{ minWidth: '200px' }}>
+                                      {i18n._(group.label)}
+                                    </FlexItem>
+                                    <FlexItem grow={{ default: 'grow' }}>
+                                      <PermissionChipSelector
+                                        availablePermissions={group.object_permissions
+                                          .filter(
+                                            (perm) =>
+                                              !role.permissions.find(
+                                                (selected) => selected === perm,
+                                              ),
+                                          )
+                                          .map((value) =>
+                                            twoWayMapper(
+                                              value,
+                                              filteredPermissions,
                                             ),
-                                        )
-                                        .map((value) =>
-                                          twoWayMapper(
-                                            value,
-                                            filteredPermissions,
-                                          ),
-                                        )
-                                        .sort()}
-                                      selectedPermissions={role.permissions
-                                        .filter((selected) =>
-                                          group.object_permissions.find(
-                                            (perm) => selected === perm,
-                                          ),
-                                        )
-                                        .map((value) =>
-                                          twoWayMapper(
-                                            value,
-                                            filteredPermissions,
-                                          ),
-                                        )}
-                                      menuAppendTo='inline'
-                                      multilingual={true}
-                                      isViewOnly={true}
-                                    />
-                                  </FlexItem>
-                                </Flex>
-                              ))}
-                            </>
-                          }
-                        >
-                          <td>{role.name}</td>
-                          <td>{role.description}</td>
-                          <td>{role.locked ? 'Locked' : 'Unlocked'}</td>
-                          <ListItemActions
-                            kebabItems={this.renderDropdownItems()}
-                          />
-                        </ExpandableRow>
-                      ))}
-                    </RoleListTable>
-
+                                          )
+                                          .sort()}
+                                        selectedPermissions={role.permissions
+                                          .filter((selected) =>
+                                            group.object_permissions.find(
+                                              (perm) => selected === perm,
+                                            ),
+                                          )
+                                          .map((value) =>
+                                            twoWayMapper(
+                                              value,
+                                              filteredPermissions,
+                                            ),
+                                          )}
+                                        menuAppendTo='inline'
+                                        multilingual={true}
+                                        isViewOnly={true}
+                                      />
+                                    </FlexItem>
+                                  </Flex>
+                                ))}
+                              </>
+                            }
+                          >
+                            <td>{role.name}</td>
+                            <td>{role.description}</td>
+                            <td>{role.locked ? 'Locked' : 'Unlocked'}</td>
+                            <ListItemActions
+                              kebabItems={this.renderDropdownItems()}
+                            />
+                          </ExpandableRow>
+                        ))}
+                      </RoleListTable>
+                    ) : (
+                      <EmptyStateFilter />
+                    )}
                     <Pagination
                       params={params}
                       updateParams={(p) =>
