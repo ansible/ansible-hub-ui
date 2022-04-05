@@ -186,9 +186,9 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
             title={t`There are currently no roles`}
             description={t`Please add a role by using the button below.`}
             button={
-              <Button>
-                <Trans>Add roles</Trans>
-              </Button>
+              <Link to={Paths.createRole}>
+                <Button variant={'primary'}>{t`Add roles`}</Button>
+              </Link>
             }
           />
         ) : (
@@ -237,9 +237,9 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                           />
                         </ToolbarItem>
                         <ToolbarItem>
-                          <Button>
-                            <Trans>Add roles</Trans>
-                          </Button>
+                          <Link to={Paths.createRole}>
+                            <Button variant={'primary'}>{t`Add roles`}</Button>
+                          </Link>
                         </ToolbarItem>
                       </ToolbarGroup>
                     </ToolbarContent>

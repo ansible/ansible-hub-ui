@@ -27,6 +27,7 @@ export enum Paths {
   executionEnvironmentManifest = '/containers/:container+/_content/images/:digest',
   executionEnvironmentsRegistries = '/registries',
   roleList = '/roles',
+  createRole = '/roles/create',
   groupList = '/group-list',
   groupDetail = '/group/:group',
   taskDetail = '/task/:task',

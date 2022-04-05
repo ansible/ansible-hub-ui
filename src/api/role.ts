@@ -15,7 +15,7 @@ export class API extends PulpAPI {
   updatePermissions(id, data: Object) {
     return this.http.patch(this.apiPath + id, { name, Permissions });
   }
-  createRole( data: Object) {
+  createRole(data: Object) {
     return this.http.post(this.apiPath, { name, Permissions });
   }
 }

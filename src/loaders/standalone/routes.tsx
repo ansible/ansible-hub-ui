@@ -35,6 +35,7 @@ import {
   TaskDetail,
 } from 'src/containers';
 import { RoleList } from 'src/containers/role-management/role-list';
+import RoleCreate from 'src/containers/role-management/role-create';
 import {
   ActiveUserAPI,
   FeatureFlagsAPI,
@@ -209,6 +210,7 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: GroupDetail, path: Paths.groupDetail },
       { comp: TaskDetail, path: Paths.taskDetail },
       { comp: RoleList, path: Paths.roleList },
+      { comp: RoleCreate, path: Paths.createRole },
       { comp: RepositoryList, path: Paths.repositories },
       { comp: UserProfile, path: Paths.userProfileSettings },
       {
