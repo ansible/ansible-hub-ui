@@ -82,6 +82,7 @@ interface IState {
   roleToEdit: RoleType;
   showDeleteModal: boolean;
 }
+
 export class RoleList extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
@@ -453,11 +454,16 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
           });
         })
         .catch((err) => {
+          const { status, statusText } = err.response;
           this.setState({
             roleCount: 0,
             loading: false,
           });
-          this.addAlert(t`Roles list could not be displayed.`, 'danger');
+          this.addAlert(
+            t`Roles list could not be displayed.`,
+            'danger',
+            errorMessage(status, statusText),
+          );
         });
     });
   };

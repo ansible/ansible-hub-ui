@@ -209,8 +209,8 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: GroupList, path: Paths.groupList },
       { comp: GroupDetail, path: Paths.groupDetail },
       { comp: TaskDetail, path: Paths.taskDetail },
-      { comp: RoleList, path: Paths.roleList },
       { comp: RoleCreate, path: Paths.createRole },
+      { comp: RoleList, path: Paths.roleList },
       { comp: RepositoryList, path: Paths.repositories },
       { comp: UserProfile, path: Paths.userProfileSettings },
       {

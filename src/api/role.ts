@@ -13,10 +13,11 @@ export class API extends PulpAPI {
   }
 
   updatePermissions(id, data: Object) {
-    return this.http.patch(this.apiPath + id, { name, Permissions });
+    return this.http.patch(this.apiPath + id, data);
   }
+
   createRole(data: Object) {
-    return this.http.post(this.apiPath, { name, Permissions });
+    return this.http.post(this.apiPath, data);
   }
 }
 
