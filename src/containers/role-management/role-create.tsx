@@ -120,6 +120,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                   }}
                   type='text'
                   validated={this.toError(!this.state.roleError)}
+                  placeholder='Role name'
                 />
               </FormGroup>
 

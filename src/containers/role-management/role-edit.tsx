@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 
 import * as React from 'react';
@@ -132,7 +132,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     } else {
       RoleAPI.get(this.state.params.id)
         .then((result) => {
-          this.setState({ role: result.data });
+          this.setState({ role: result.data, description: result.data.description });
         })
         .catch((e) => {
           const { status, statusText } = e.response;
@@ -234,8 +234,8 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
               ]}
             />
           }
-          pageControls={this.renderControls()}
-        ></BaseHeader>
+
+        ><div style={{paddingBottom:'10px'}}><Trans >{role.description}</Trans></div></BaseHeader>
         <Main>
           <section className='body'>
             <div>
