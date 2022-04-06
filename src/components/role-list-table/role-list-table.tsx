@@ -84,12 +84,13 @@ export const ExpandableRow: React.FC<{
   rowIndex?: number;
   expandableRowContent?: React.ReactNode;
   colSpan?: number;
-}> = ({ rowIndex, children, expandableRowContent, colSpan }) => {
+  'data-cy'?: string;
+}> = ({ rowIndex, children, expandableRowContent, colSpan, ...props }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <Tbody isExpanded={isExpanded}>
-      <Tr>
+      <Tr data-cy={props['data-cy']}>
         <Td
           expand={{
             onToggle: () => setIsExpanded(!isExpanded),
@@ -115,9 +116,10 @@ export const CheckboxRow: React.FC<{
   isSelected: boolean;
   onSelect: (value) => void;
   isDisabled?: boolean;
-}> = ({ rowIndex, children, isSelected, onSelect, isDisabled }) => (
+  'data-cy'?: string;
+}> = ({ rowIndex, children, isSelected, onSelect, isDisabled, ...props }) => (
   <Tbody>
-    <Tr>
+    <Tr data-cy={props['data-cy']}>
       <Td
         select={{
           disable: isDisabled,
@@ -136,9 +138,10 @@ export const RadioRow: React.FC<{
   rowIndex?: number;
   isSelected: boolean;
   onSelect: (value) => void;
-}> = ({ rowIndex, children, isSelected, onSelect }) => (
+  'data-cy'?: string;
+}> = ({ rowIndex, children, isSelected, onSelect, ...props }) => (
   <Tbody>
-    <Tr>
+    <Tr data-cy={props['data-cy']}>
       <Td
         select={{
           variant: 'radio',

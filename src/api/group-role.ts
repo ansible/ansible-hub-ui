@@ -46,7 +46,7 @@ class API extends PulpAPI {
   }
 
   removeRole(id, pulpId) {
-    return this.http.delete(this.apiPath + `${id}/roles/${pulpId}`);
+    return this.http.delete(this.apiPath + `${id}/roles/${pulpId}/`);
   }
 
   addRoleToGroup(id, role, content_object = null) {

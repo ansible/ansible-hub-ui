@@ -101,7 +101,11 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
   };
 
   const addRoles = (
-    <Button onClick={() => setShowAddRolesModal(true)} variant='primary'>
+    <Button
+      onClick={() => setShowAddRolesModal(true)}
+      variant='primary'
+      data-cy='add-roles'
+    >
       <Trans>Add roles</Trans>
     </Button>
   );
@@ -224,32 +228,40 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
             setSelectedRoles([]);
           }}
           onSave={() => {
-            selectedRoles.forEach((role) => {
-              GroupRoleAPI.addRoleToGroup(group.id, role)
-                .then(() => {
-                  addAlert(
-                    t`Role ${role.name} has been successfully added to ${group.name}.`,
-                    'success',
-                  );
-                  queryRolesWithPermissions();
-                })
-                .catch((e) => {
-                  const { status, statusText, data } = e.response;
+            new Promise((resolve) => {
+              selectedRoles.forEach((role, i) => {
+                GroupRoleAPI.addRoleToGroup(group.id, role)
+                  .then(() => {
+                    addAlert(
+                      t`Role ${role.name} has been successfully added to ${group.name}.`,
+                      'success',
+                    );
+                  })
+                  .catch((e) => {
+                    const { status, statusText, data } = e.response;
 
-                  const errMessage =
-                    data?.non_field_errors?.length > 0
-                      ? data.non_field_errors[0]
-                      : errorMessage(status, statusText);
+                    const errMessage =
+                      data?.non_field_errors?.length > 0
+                        ? data.non_field_errors[0]
+                        : errorMessage(status, statusText);
 
-                  addAlert(
-                    t`Role ${role.name} could not be assigned to group ${group.name}.`,
-                    'danger',
-                    errMessage,
-                  );
-                });
+                    addAlert(
+                      t`Role ${role.name} could not be assigned to group ${group.name}.`,
+                      'danger',
+                      errMessage,
+                    );
+                  })
+                  .finally(() => {
+                    if (i === selectedRoles.length - 1) {
+                      resolve(i);
+                    }
+                  });
+              });
+            }).then(() => {
+              queryRolesWithPermissions();
+              setShowAddRolesModal(false);
+              setSelectedRoles([]);
             });
-            setShowAddRolesModal(false);
-            setSelectedRoles([]);
           }}
         />
       )}
