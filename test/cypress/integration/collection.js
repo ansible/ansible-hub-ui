@@ -43,7 +43,7 @@ describe('collection tests', () => {
     cy.get('@taskStatus.last').then(() => {
       cy.get('h4[class=pf-c-alert__title]').should(
         'have.text',
-        'Success alert:Collection "test_collection v" has been successfully deleted.',
+        'Success alert:Collection "test_collection" has been successfully deleted.',
       );
     });
   });
