@@ -114,11 +114,13 @@ export const CheckboxRow: React.FC<{
   rowIndex?: number;
   isSelected: boolean;
   onSelect: (value) => void;
-}> = ({ rowIndex, children, isSelected, onSelect }) => (
+  isDisabled?: boolean;
+}> = ({ rowIndex, children, isSelected, onSelect, isDisabled }) => (
   <Tbody>
     <Tr>
       <Td
         select={{
+          disable: isDisabled,
           variant: 'checkbox',
           rowIndex,
           onSelect,

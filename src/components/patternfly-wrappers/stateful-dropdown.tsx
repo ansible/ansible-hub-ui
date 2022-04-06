@@ -101,7 +101,6 @@ export class StatefulDropdown extends React.Component<IProps, IState> {
   }
 
   private onSelect(event) {
-    event.persist();
     this.setState(
       {
         isOpen: !this.state.isOpen,

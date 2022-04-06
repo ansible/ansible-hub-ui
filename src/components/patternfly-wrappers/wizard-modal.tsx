@@ -3,10 +3,11 @@ import {
   Modal,
   ModalVariant,
   Wizard as PFWizard,
+  WizardStep,
 } from '@patternfly/react-core';
 
 interface Props {
-  steps: any;
+  steps: WizardStep[];
   title: string;
   variant?: ModalVariant;
   onClose: () => void;

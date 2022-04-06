@@ -54,6 +54,7 @@ interface Props {
   context: IAppContextType;
   group: GroupObjectPermissionType;
   addAlert: (title, variant, description?) => void;
+  nonQueryParams?: string[];
 }
 
 const GroupDetailRoleManagement: React.FC<Props> = ({
@@ -62,6 +63,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
   context,
   group,
   addAlert,
+  nonQueryParams,
 }) => {
   const [showAddRolesModal, setShowAddRolesModal] = useState<boolean>(false);
   const [selectedDeleteRole, setSelectedDeleteRole] = useState<RoleType>(null);
@@ -79,10 +81,10 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
 
   const queryRolesWithPermissions = () => {
     setLoading(true);
-    GroupRoleAPI.getRolesWithPermissions(
-      group.id,
-      ParamHelper.getReduced(params, ['id', 'tab']),
-    )
+    GroupRoleAPI.getRolesWithPermissions(group.id, {
+      ...ParamHelper.getReduced(params, ['id', 'tab', ...nonQueryParams]),
+      sort: ParamHelper.validSortParams(params['sort'], ['role'], 'role'),
+    })
       .then(({ data, count }) => {
         setRoles(data);
         setRolesItemCount(count);
@@ -128,6 +130,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
       .finally(() => {
         setIsRoleDeleting(false);
         setSelectedDeleteRole(null);
+        queryRolesWithPermissions();
       });
   };
 
@@ -228,6 +231,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     t`Role ${role.name} has been successfully added to ${group.name}.`,
                     'success',
                   );
+                  queryRolesWithPermissions();
                 })
                 .catch((e) => {
                   const { status, statusText, data } = e.response;
@@ -296,19 +300,15 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
 
           <AppliedFilters
             style={{ marginTop: '16px' }}
-            updateParams={updateParams}
+            updateParams={(p) => updateParams(p)}
             params={params}
             ignoredParams={[
               'id',
-              'isEditing',
               'page',
               'page_size',
               'sort',
               'tab',
-              'username',
-              'first_name',
-              'last_name',
-              'email',
+              ...nonQueryParams,
             ]}
             niceNames={{
               role__icontains: t`Name`,

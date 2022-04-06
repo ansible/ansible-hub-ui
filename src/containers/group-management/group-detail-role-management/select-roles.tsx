@@ -1,6 +1,5 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
-import { differenceBy } from 'lodash';
 
 import { RoleType, RoleAPI } from 'src/api';
 
@@ -39,7 +38,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [localParams, setLocalParams] = useState({
     page: 1,
-    page_size: 1000,
+    page_size: 10,
   });
 
   useEffect(() => {
@@ -49,9 +48,8 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
   const queryRoles = () => {
     setLoading(true);
     RoleAPI.list(localParams).then(({ data }) => {
-      const unassignedRoles = differenceBy(data.results, assignedRoles, 'name');
-      setRoles(unassignedRoles);
-      setRolesItemCount(unassignedRoles.length);
+      setRoles(data.results);
+      setRolesItemCount(data.count);
       setLoading(false);
     });
   };
@@ -80,6 +78,8 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
       </div>
     );
   }
+
+  const isAssigned = (name) => assignedRoles.some((role) => role.name === name);
 
   const tabHeader = {
     headers: [
@@ -119,7 +119,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
                 : 'justifyContentSpaceBetween',
             }}
             direction={{ default: 'column' }}
-            className=''
+            className='inner-roles-content'
           >
             {Object.keys(selectedRoles).length !== 0 && (
               <FlexItem>
@@ -179,7 +179,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
               />
             </FlexItem>
 
-            <FlexItem>
+            <FlexItem style={{ flexGrow: 1 }}>
               {noData && filterIsSet(localParams, ['name__icontains']) ? (
                 <div className='no-filter-data'>
                   <EmptyStateFilter />
@@ -198,7 +198,9 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
                       <CheckboxRow
                         rowIndex={i}
                         key={role.name}
-                        isSelected={isRoleSelected(role.name)}
+                        isSelected={
+                          isRoleSelected(role.name) || isAssigned(role.name)
+                        }
                         onSelect={() =>
                           onRolesUpdate(
                             isRoleSelected(role.name)
@@ -208,6 +210,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
                               : [...selectedRoles, role],
                           )
                         }
+                        isDisabled={isAssigned(role.name)}
                       >
                         <td>{role.name}</td>
                         <td>{role.description}</td>

@@ -73,8 +73,6 @@ interface IState {
   addModalVisible: boolean;
   options: { id: number; name: string }[];
   selected: { id: number; name: string }[];
-  editPermissions: boolean;
-  savingPermissions: boolean;
   showDeleteModal: boolean;
   showUserRemoveModal: UserType | null;
   permissions: string[];
@@ -86,6 +84,10 @@ interface IState {
 
 class GroupDetail extends React.Component<RouteComponentProps, IState> {
   nonQueryStringParams = ['group'];
+
+  userQueryStringParams = ['username', 'first_name', 'last_name', 'email'];
+
+  roleQueryStringParams = ['role__icontains'];
 
   constructor(props) {
     super(props);
@@ -108,15 +110,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         sort:
           params['sort'] || (params['tab'] === 'access' ? 'role' : 'username'),
         tab: params['tab'] || 'access',
-        role__icontains: params['role__icontains'] || '',
       },
       itemCount: 0,
       alerts: [],
       addModalVisible: false,
       options: undefined,
       selected: [],
-      editPermissions: false,
-      savingPermissions: false,
       showDeleteModal: false,
       showUserRemoveModal: null,
       permissions: [],
@@ -142,7 +141,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const {
       addModalVisible,
       alerts,
-      editPermissions,
       group,
       params,
       showDeleteModal,
@@ -187,11 +185,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         {showDeleteModal ? this.renderGroupDeleteModal() : null}
         {showUserRemoveModal ? this.renderUserRemoveModal() : null}
         <BaseHeader
-          title={
-            editPermissions && params.tab == 'permissions'
-              ? t`Edit group permissions`
-              : group.name
-          }
+          title={group.name}
           breadcrumbs={
             <Breadcrumbs
               links={[
@@ -239,77 +233,18 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  // private actionCancelPermissions() {
-  //   const { originalPermissions } = this.state;
-  //   this.setState({
-  //     editPermissions: false,
-  //     permissions: originalPermissions.map((p) => p.name),
-  //   });
-  // }
-
-  // private actionSavePermissions() {
-  // const { group, originalPermissions, permissions } = this.state;
-  // const promises = [];
-  // Add permissions
-  // permissions.forEach((permission) => {
-  //   if (!originalPermissions.find((p) => p.name === permission)) {
-  //     promises.push(
-  //       GroupAPI.addPermission(group.id, {
-  //         permission: permission,
-  //       }).catch((e) => {
-  //         const { status, statusText } = e.response;
-  //         this.addAlert(
-  //           t`Permission "${permission}" could not be not added to group "${this.state.group}".`,
-  //           'danger',
-  //           errorMessage(status, statusText),
-  //         );
-  //       }),
-  //     );
-  //   }
-  // });
-  // Remove permissions
-  // originalPermissions.forEach((original) => {
-  //   if (!permissions.includes(original.name)) {
-  //     promises.push(
-  //       GroupAPI.removePermission(group.id, original.id).catch((e) => {
-  //         const { status, statusText } = e.response;
-  //         this.addAlert(
-  //           t`Permission "${original.name}" could not be not removed from group "${this.state.group}".`,
-  //           'danger',
-  //           errorMessage(status, statusText),
-  //         );
-  //       }),
-  //     );
-  //   }
-  // });
-  // this.setState({ savingPermissions: true }); // disable Save/Cancel while waiting
-  // Promise.all(promises).then(() =>
-  //   this.setState({
-  //     editPermissions: false,
-  //     savingPermissions: false,
-  //   }),
-  // );
-  // }
-
   private renderGroupDetail() {
     const { params, group } = this.state;
-
-    const ignoredParams = ['username', 'first_name', 'last_name', 'email'];
-
-    const roleParams = ParamHelper.getReduced(params, [
-      params['role__icontains'] === '' && 'role__icontains',
-      ...ignoredParams,
-    ]);
-
     return (
       <GroupDetailRoleManagement
-        params={roleParams}
+        params={params}
         updateParams={(p) => this.updateParams(p)}
         context={this.context}
         group={group}
         addAlert={(title, variant, description) =>
           this.addAlert(title, variant, description)
         }
+        nonQueryParams={this.userQueryStringParams}
       />
     );
   }
@@ -542,7 +477,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderUsers(users) {
-    const { itemCount } = this.state;
+    const { itemCount, params } = this.state;
     const { user, featureFlags } = this.context;
     const noData =
       itemCount === 0 &&
@@ -551,17 +486,12 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         'first_name',
         'last_name',
         'email',
+        'role__icontains',
       ]);
     let isUserMgmtDisabled = false;
     if (featureFlags) {
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
-
-    // const params = {
-    //   ...ParamHelper.deleteParam(this.state.params, 'role__icontains'),
-    // };
-
-    const params = this.state.params;
 
     if (noData) {
       return (
@@ -651,7 +581,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             params={params}
             ignoredParams={[
               'id',
-              'isEditing',
               'page',
               'page_size',
               'sort',
@@ -767,12 +696,20 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private queryUsers() {
-    let params = ParamHelper.getReduced(this.state.params, ['role__icontains']);
-    params = ParamHelper.setParam(params, 'sort', 'username');
+    const params = {
+      ...ParamHelper.getReduced(this.state.params, [
+        ...this.roleQueryStringParams,
+      ]),
+      sort: ParamHelper.validSortParams(
+        this.state.params['sort'],
+        this.userQueryStringParams,
+        'username',
+      ),
+      groups__name: this.state.group.name,
+    };
 
     UserAPI.list({
       ...params,
-      ...{ groups__name: this.state.group.name },
     })
       .then((result) =>
         this.setState({
