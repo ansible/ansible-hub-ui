@@ -2,12 +2,7 @@ import React from 'react';
 import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 import { AppContext } from 'src/loaders/app-context';
-import {
-  Link,
-  RouteComponentProps,
-  withRouter,
-
-} from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import {
   AlertType,
   Pagination,

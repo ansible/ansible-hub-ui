@@ -1,11 +1,7 @@
 import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 import * as React from 'react';
-import {
-  withRouter,
-  RouteComponentProps,
-  Redirect,
-} from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import {
   BaseHeader,
@@ -63,10 +59,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     }
 
     const groups = Constants.PERMISSIONS;
-    const {
-      permissions: selectedPermissions,
-      name,
-    } = this.state;
+    const { permissions: selectedPermissions, name } = this.state;
 
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
@@ -151,7 +144,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                   validated={this.toError(!this.state.roleError)}
                 />
               </FormGroup> */}
-              </div>
+            </div>
             <div>
               <div style={{ paddingBottom: '8px', paddingTop: '16px' }}>
                 <Title headingLevel='h2'>Permissions</Title>
@@ -257,7 +250,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     RoleAPI.create({ name, permissions })
       .then(() => this.setState({ redirect: Paths.roleList }))
       .catch((err) => {
-        this.setState({ roleError: mapErrorMessages(err)  });
+        this.setState({ roleError: mapErrorMessages(err) });
         console.log('roleError: ', this.state.roleError);
       });
   };
