@@ -123,8 +123,6 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                 />
               </FormGroup>
 
-              {/*
-              //// are we using description in this release?
               <FormGroup
                 isRequired={false}
                 key='description'
@@ -142,8 +140,9 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                   }}
                   type='text'
                   validated={this.toError(!this.state.roleError)}
+                  placeholder='Add a role description here'
                 />
-              </FormGroup> */}
+              </FormGroup>
             </div>
             <div>
               <div style={{ paddingBottom: '8px', paddingTop: '16px' }}>
@@ -246,8 +245,8 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     );
   }
   private saveRole = () => {
-    const { name, permissions } = this.state;
-    RoleAPI.create({ name, permissions })
+    const { name, permissions, description } = this.state;
+    RoleAPI.create({ name, description, permissions })
       .then(() => this.setState({ redirect: Paths.roleList }))
       .catch((err) => {
         this.setState({ roleError: mapErrorMessages(err) });

@@ -405,10 +405,8 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     const dropdownItems = [
       // this.context.user.model_permissions.change_containerregistry && (
 
-      <DropdownItem
-        key='edit'
-      >
-        <Link to={formatPath(Paths.roleEdit, {role: roleID})}>
+      <DropdownItem key='edit'>
+        <Link to={formatPath(Paths.roleEdit, { role: roleID })}>
           <Trans>Edit</Trans>
         </Link>
       </DropdownItem>,

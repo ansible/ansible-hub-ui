@@ -1,16 +1,11 @@
-import { t, } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 
 import * as React from 'react';
-import { errorMessage,   parsePulpIDFromURL, } from 'src/utilities';
+import { errorMessage, parsePulpIDFromURL } from 'src/utilities';
 import { RoleAPI } from 'src/api/role';
 
-import {
-  withRouter,
-  RouteComponentProps,
-
-  Redirect,
-} from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import {
   AlertList,
@@ -20,10 +15,7 @@ import {
   BaseHeader,
   Breadcrumbs,
   closeAlertMixin,
-
   DateComponent,
-
-
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
@@ -32,14 +24,8 @@ import {
   Main,
   Pagination,
   PermissionChipSelector,
-
-
 } from 'src/components';
-import {
-  GroupAPI,
-
-
-} from 'src/api';
+import { GroupAPI } from 'src/api';
 import {
   filterIsSet,
   ParamHelper,
@@ -241,7 +227,12 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
         <BaseHeader
           title={editPermissions ? t`Edit role permissions` : role.name}
           breadcrumbs={
-            <Breadcrumbs links={[{ url: Paths.roleList, name: t`Roles`}, { name: role.name }]} />
+            <Breadcrumbs
+              links={[
+                { url: Paths.roleList, name: t`Roles` },
+                { name: role.name },
+              ]}
+            />
           }
           pageControls={this.renderControls()}
         ></BaseHeader>
