@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState, useCallback } from 'react';
 import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 import { AppContext } from 'src/loaders/app-context';
@@ -7,7 +6,7 @@ import {
   Link,
   RouteComponentProps,
   withRouter,
-  Redirect,
+
 } from 'react-router-dom';
 import {
   AlertType,
@@ -18,13 +17,10 @@ import {
   EmptyStateFilter,
   LoadingPageSpinner,
   Main,
-  SortTable,
   AlertList,
   EmptyStateUnauthorized,
   EmptyStateNoData,
   AppliedFilters,
-  Tag,
-  StatefulDropdown,
   DeleteModal,
   RoleListTable,
   ExpandableRow,
@@ -34,16 +30,13 @@ import {
 import {
   Button,
   DropdownItem,
-  Label,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  Tooltip,
   Flex,
   FlexItem,
 } from '@patternfly/react-core';
-// import './role.scss';
 import { RoleType } from 'src/api/response-types/role';
 import {
   errorMessage,
@@ -54,15 +47,7 @@ import {
 } from 'src/utilities';
 
 import { RoleAPI } from 'src/api/role';
-import { formatPath, Paths } from 'src/paths';
-import {
-  Tbody,
-  Td,
-  Tr,
-  ExpandableRowContent,
-  TableComposable,
-  Th,
-} from '@patternfly/react-table';
+import { Paths } from 'src/paths';
 import { Constants } from 'src/constants';
 
 interface IState {
@@ -140,7 +125,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
 
     const groups = Constants.PERMISSIONS;
 
-    const { user, featureFlags } = this.context;
+    const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
     if (featureFlags) {

@@ -1,31 +1,22 @@
-import { t, Trans } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 import * as React from 'react';
 import {
   withRouter,
   RouteComponentProps,
   Redirect,
-  Link,
 } from 'react-router-dom';
 
 import {
   BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
-  UserFormPage,
   PermissionChipSelector,
   Main,
 } from 'src/components';
 import {
   ActionGroup,
   Button,
-  DropdownItem,
-  Label,
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-  Tooltip,
   Flex,
   FlexItem,
   Form,
@@ -35,15 +26,10 @@ import {
 } from '@patternfly/react-core';
 
 import {
-  errorMessage,
-  filterIsSet,
-  ParamHelper,
-  parsePulpIDFromURL,
   twoWayMapper,
   mapErrorMessages,
   ErrorMessagesType,
 } from 'src/utilities';
-import { UserType, UserAPI } from 'src/api';
 import { Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 import { Constants } from 'src/constants';
@@ -55,8 +41,7 @@ interface IState {
   permissions: string[];
   name: string;
   description: string;
-  roleError: any;
-  // ErrorMessagesType;
+  roleError: ErrorMessagesType;
 }
 
 class RoleCreate extends React.Component<RouteComponentProps, IState> {
@@ -79,12 +64,11 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
 
     const groups = Constants.PERMISSIONS;
     const {
-      errorMessages,
       permissions: selectedPermissions,
       name,
     } = this.state;
 
-    const { user, featureFlags } = this.context;
+    const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
     if (featureFlags) {
@@ -145,7 +129,29 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                   validated={this.toError(!this.state.roleError)}
                 />
               </FormGroup>
-            </div>
+
+              {/*
+              //// are we using description in this release?
+              <FormGroup
+                isRequired={false}
+                key='description'
+                fieldId='description'
+                label={t`Description`}
+                helperTextInvalid={
+                  !this.state.roleError ? null : this.state.roleError.name
+                }
+              >
+                <TextInput
+                  id='role_description'
+                  value={this.state.description}
+                  onChange={(value) => {
+                    this.setState({ description: value });
+                  }}
+                  type='text'
+                  validated={this.toError(!this.state.roleError)}
+                />
+              </FormGroup> */}
+              </div>
             <div>
               <div style={{ paddingBottom: '8px', paddingTop: '16px' }}>
                 <Title headingLevel='h2'>Permissions</Title>
@@ -251,7 +257,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     RoleAPI.create({ name, permissions })
       .then(() => this.setState({ redirect: Paths.roleList }))
       .catch((err) => {
-        this.setState({ roleError: t`A role named ${name} already exists.` });
+        this.setState({ roleError: mapErrorMessages(err)  });
         console.log('roleError: ', this.state.roleError);
       });
   };
