@@ -375,6 +375,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                           ))}
                         </>
                       }
+                      data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
                     >
                       <td>{role.name}</td>
                       <td>{role.description}</td>

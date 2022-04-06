@@ -211,7 +211,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
                           )
                         }
                         isDisabled={isAssigned(role.name)}
-                        data-cy={`RoleListTable-row-${role.name}`}
+                        data-cy={`RoleListTable-CheckboxRow-row-${role.name}`}
                       >
                         <td>{role.name}</td>
                         <td>{role.description}</td>
