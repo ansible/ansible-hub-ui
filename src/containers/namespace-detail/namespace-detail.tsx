@@ -55,13 +55,13 @@ import {
   filterIsSet,
   errorMessage,
   waitForTask,
-  canSign,
 } from 'src/utilities';
 import { Constants } from 'src/constants';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
+  canSign: boolean;
   collections: CollectionListType[];
   namespace: NamespaceType;
   params: {
@@ -107,6 +107,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     params['namespace'] = props.match.params['namespace'];
 
     this.state = {
+      canSign: false,
       collections: [],
       namespace: null,
       params: params,
@@ -137,6 +138,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   render() {
     const {
+      canSign,
       collections,
       namespace,
       params,
@@ -341,7 +343,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             ? this.renderResources(namespace)
             : null}
         </Main>
-        {canSign(this.context) && (
+        {canSign && (
           <SignAllCertificatesModal
             name={this.state.namespace.name}
             numberOfAffected={this.state.itemCount}
@@ -465,7 +467,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         this.context.selectedRepo,
       ),
       NamespaceAPI.get(this.props.match.params['namespace']),
-      MyNamespaceAPI.get(this.props.match.params['namespace']).catch((e) => {
+      MyNamespaceAPI.get(this.props.match.params['namespace'], {
+        include_related: 'my_permissions',
+      }).catch((e) => {
         // TODO this needs fixing on backend to return nothing in these cases with 200 status
         // if view only mode is enabled disregard errors and hope
         if (
@@ -486,6 +490,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           itemCount: val[0].data.meta.count,
           namespace: val[1].data,
           showControls: !!val[2],
+          canSign:
+            this.context.featureFlags?.collection_signing &&
+            val[2]?.data?.related_fields?.my_permissions?.includes(
+              'galaxy.change_namespace',
+            ),
         });
 
         this.loadAllRepos(val[0].data.meta.count);
@@ -535,7 +544,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private renderPageControls() {
-    const { collections } = this.state;
+    const { canSign, collections } = this.state;
+
     const dropdownItems = [
       <DropdownItem
         key='1'
@@ -590,7 +600,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </Link>
         }
       />,
-      canSign(this.context) && (
+      canSign && (
         <DropdownItem
           key='sign-collections'
           onClick={() => this.setState({ isOpenSignModal: true })}

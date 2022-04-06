@@ -20,4 +20,5 @@ export class NamespaceType extends NamespaceListType {
   resources: string;
   owners: string[];
   links: NamespaceLinkType[];
+  related_fields: { my_permissions?: string[] };
 }
