@@ -127,6 +127,7 @@ export class CollectionDetailType {
     name: string;
     avatar_url: string;
     company: string;
+    related_fields: { my_permissions?: string[] };
   };
 }
 

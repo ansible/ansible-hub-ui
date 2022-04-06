@@ -45,7 +45,7 @@ import {
   SignCollectionAPI,
 } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
-import { waitForTask, canSign } from 'src/utilities';
+import { waitForTask } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
 import { Constants } from 'src/constants';
@@ -174,12 +174,18 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       `${moment(v.created).fromNow()} ${signedString(v)}
       ${v.version === all_versions[0].version ? t`(latest)` : ''}`;
 
-    const { name: collectionName } = collection;
-    const company = collection.namespace.company || collection.namespace.name;
+    const { name: collectionName, namespace } = collection;
+    const company = namespace.company || namespace.name;
 
     if (redirect) {
       return <Redirect push to={redirect} />;
     }
+
+    const canSign =
+      this.context.featureFlags?.collection_signing &&
+      namespace?.related_fields?.my_permissions?.includes(
+        'galaxy.change_namespace',
+      );
 
     const dropdownItems = [
       noDependencies
@@ -220,7 +226,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Delete version ${collection.latest_version.version}`}
         </DropdownItem>
       ),
-      canSign(this.context) && (
+      canSign && (
         <DropdownItem
           key='sign-all'
           onClick={() => this.setState({ isOpenSignAllModal: true })}
@@ -228,7 +234,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Sign entire collection`}
         </DropdownItem>
       ),
-      canSign(this.context) && (
+      canSign && (
         <DropdownItem
           key='sign-version'
           onClick={() => this.setState({ isOpenSignModal: true })}
@@ -240,7 +246,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     return (
       <React.Fragment>
-        {canSign(this.context) && (
+        {canSign && (
           <>
             <SignAllCertificatesModal
               name={collectionName}

@@ -21,7 +21,7 @@ export function loadCollection(
     this.props.match.params['namespace'],
     this.props.match.params['collection'],
     repo,
-    this.state.params,
+    { ...this.state.params, include_related: 'my_permissions' },
     forceReload,
   )
     .then((result) => {
