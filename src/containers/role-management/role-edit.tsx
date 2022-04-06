@@ -132,7 +132,11 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     } else {
       RoleAPI.get(this.state.params.id)
         .then((result) => {
-          this.setState({ role: result.data, description: result.data.description });
+          this.setState({
+            role: result.data,
+            description: result.data.description,
+            name: result.data.name,
+          });
         })
         .catch((e) => {
           const { status, statusText } = e.response;
@@ -234,8 +238,11 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
               ]}
             />
           }
-
-        ><div style={{paddingBottom:'10px'}}><Trans >{role.description}</Trans></div></BaseHeader>
+        >
+          <div style={{ paddingBottom: '10px' }}>
+            <Trans>{role.description}</Trans>
+          </div>
+        </BaseHeader>
         <Main>
           <section className='body'>
             <div>
