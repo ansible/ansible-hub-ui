@@ -42,7 +42,7 @@ import {
 } from 'src/utilities';
 
 import { RoleAPI } from 'src/api/role';
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { Constants } from 'src/constants';
 
 interface IState {
@@ -399,10 +399,18 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderDropdownItems = (role) => {
+    const { pulp_href } = role;
+    const roleID = parsePulpIDFromURL(pulp_href);
+
     const dropdownItems = [
       // this.context.user.model_permissions.change_containerregistry && (
-      <DropdownItem key='edit' onClick={() => console.log('Editing!! ')}>
-        <Trans>Edit</Trans>
+
+      <DropdownItem
+        key='edit'
+      >
+        <Link to={formatPath(Paths.roleEdit, {role: roleID})}>
+          <Trans>Edit</Trans>
+        </Link>
       </DropdownItem>,
       // ),
       // this.context.user.model_permissions.delete_containerregistry && (
