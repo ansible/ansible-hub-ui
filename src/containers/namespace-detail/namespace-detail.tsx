@@ -55,6 +55,7 @@ import {
   filterIsSet,
   errorMessage,
   waitForTask,
+  canSign as canSignNS,
 } from 'src/utilities';
 import { Constants } from 'src/constants';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
@@ -490,11 +491,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           itemCount: val[0].data.meta.count,
           namespace: val[1].data,
           showControls: !!val[2],
-          canSign:
-            this.context.featureFlags?.collection_signing &&
-            val[2]?.data?.related_fields?.my_permissions?.includes(
-              'galaxy.change_namespace',
-            ),
+          canSign: canSignNS(this.context, val[2]?.data),
         });
 
         this.loadAllRepos(val[0].data.meta.count);

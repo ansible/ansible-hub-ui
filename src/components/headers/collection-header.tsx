@@ -45,7 +45,7 @@ import {
   SignCollectionAPI,
 } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
-import { waitForTask } from 'src/utilities';
+import { waitForTask, canSign as canSignNS } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
 import { Constants } from 'src/constants';
@@ -181,11 +181,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       return <Redirect push to={redirect} />;
     }
 
-    const canSign =
-      this.context.featureFlags?.collection_signing &&
-      namespace?.related_fields?.my_permissions?.includes(
-        'galaxy.change_namespace',
-      );
+    const canSign = canSignNS(this.context, namespace);
 
     const dropdownItems = [
       noDependencies
