@@ -1,15 +1,12 @@
 import { Trans } from '@lingui/macro';
 import React from 'react';
 import { Flex, FlexItem, Label, Divider } from '@patternfly/react-core';
-
-import { RoleType, GroupObjectPermissionType } from 'src/api';
-
+import { RoleType, GroupType } from 'src/api';
 import { Tooltip } from 'src/components';
-
 import { Constants } from 'src/constants';
 
 interface Props {
-  group: GroupObjectPermissionType;
+  group: GroupType;
   selectedRoles: RoleType[];
 }
 

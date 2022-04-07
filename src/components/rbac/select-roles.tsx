@@ -1,9 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
-
-import { RoleType, RoleAPI, GroupRoleType } from 'src/api';
-
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
+import { RoleType, RoleAPI } from 'src/api';
 import {
   CompoundFilter,
   RoleListTable,
@@ -14,19 +12,20 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
 } from 'src/components';
-
 import { filterIsSet } from 'src/utilities';
 
 interface SelectRolesProps {
-  assignedRoles: GroupRoleType[];
+  assignedRoles: { role: string }[];
   selectedRoles: RoleType[];
   onRolesUpdate?: (roles) => void;
+  message?: string;
 }
 
 export const SelectRoles: React.FC<SelectRolesProps> = ({
   assignedRoles,
   selectedRoles,
   onRolesUpdate,
+  message,
 }) => {
   const [inputText, setInputText] = useState<string>('');
   const [roles, setRoles] = useState<RoleType[]>([]);
@@ -118,12 +117,20 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
             }}
             direction={{ default: 'column' }}
           >
+            {message && (
+              <FlexItem>
+                <Flex>
+                  <FlexItem>{message}</FlexItem>
+                </Flex>
+              </FlexItem>
+            )}
+
             {Object.keys(selectedRoles).length !== 0 && (
               <FlexItem>
                 <Flex>
                   <FlexItem>
                     <strong>
-                      <Trans>Selected Roles</Trans>
+                      <Trans>Selected roles</Trans>
                     </strong>
                   </FlexItem>
 

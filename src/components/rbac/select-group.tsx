@@ -20,7 +20,6 @@ interface IProps {
   updateGroup?: (group) => void;
 }
 
-// TODO group, not roles ;; use bits from 68d99325747faba0e24f45223278662613227536 maybe
 export const SelectGroup: React.FC<IProps> = ({
   assignedGroups,
   selectedGroup,

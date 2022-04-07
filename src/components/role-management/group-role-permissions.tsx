@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import { RolePermissions, LoadingPageSpinner } from 'src/components';
-
 import { RoleAPI } from 'src/api';
+import { Constants } from 'src/constants';
+import { RolePermissions, LoadingPageSpinner } from 'src/components';
 
 interface IProps {
   name: string;
-  filteredPermissions: {
+  filteredPermissions?: {
     [key: string]: string;
   };
 }
@@ -23,6 +23,10 @@ export const GroupRolePermissions = ({ name, filteredPermissions }: IProps) => {
 
   if (!role) {
     return <LoadingPageSpinner />;
+  }
+
+  if (!filteredPermissions) {
+    filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
   }
 
   return (

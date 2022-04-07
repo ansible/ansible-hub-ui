@@ -52,6 +52,7 @@ export {
   NumericLabel,
   CollectionNumericLabel,
 } from './numeric-label/numeric-label';
+export { OwnersTab } from './rbac/owners-tab';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { PartnerHeader } from './headers/partner-header';
 export { PermissionChipSelector } from './permissions/permission-chip-selector';

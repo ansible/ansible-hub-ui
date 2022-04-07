@@ -277,7 +277,6 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                       updateParams={(p) => {
                         this.updateParams(p, () => this.queryRoles());
                       }}
-                      isCompact={true}
                       tableHeader={{
                         headers: [
                           {

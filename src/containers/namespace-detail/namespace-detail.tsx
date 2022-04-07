@@ -38,6 +38,7 @@ import {
   ImportModal,
   LoadingPageWithHeader,
   Main,
+  OwnersTab,
   Pagination,
   PartnerHeader,
   EmptyStateNoData,
@@ -74,6 +75,7 @@ interface IState {
     tab?: string;
     keywords?: string;
     namespace?: string;
+    group?: number;
   };
   redirect: string;
   itemCount: number;
@@ -94,7 +96,7 @@ interface IProps extends RouteComponentProps {
 }
 
 export class NamespaceDetail extends React.Component<IProps, IState> {
-  nonAPIParams = ['tab'];
+  nonAPIParams = ['tab', 'group'];
 
   // namespace is a positional url argument, so don't include it in the
   // query params
@@ -139,6 +141,18 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     this.context.setAlerts([]);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.search !== this.props.location.search) {
+      const params = ParamHelper.parseParamString(this.props.location.search, [
+        'page',
+        'page_size',
+      ]);
+
+      params['namespace'] = this.props.match.params['namespace'];
+      this.setState({ params });
+    }
+  }
+
   render() {
     const {
       canSign,
@@ -168,9 +182,36 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       { id: 'collections', name: t`Collections` },
       showControls && { id: 'cli-configuration', name: t`CLI configuration` },
       namespace.resources && { id: 'resources', name: t`Resources` },
+      { id: 'owners', name: t`Namespace owners` },
     ].filter(Boolean);
 
     const tab = params['tab'] || 'collections';
+
+    const breadcrumbs = [
+      namespaceBreadcrumb,
+      {
+        name: namespace.name,
+        url:
+          tab === 'owners'
+            ? formatPath(Paths.myCollections, { namespace: namespace.name })
+            : null,
+      },
+      tab === 'owners'
+        ? {
+            name: t`Namespace owners`,
+            url: params.group
+              ? formatPath(
+                  Paths.myCollections,
+                  { namespace: namespace.name },
+                  { tab: 'owners' },
+                )
+              : null,
+          }
+        : null,
+      tab === 'owners' && params.group
+        ? { name: t`Group ${params.group}` }
+        : null,
+    ].filter(Boolean);
 
     const repositoryUrl = getRepoUrl('inbound-' + namespace.name);
 
@@ -185,6 +226,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       'page_size',
       'sort',
       'tab',
+      'group',
       'view_type',
     ];
 
@@ -259,7 +301,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         ) : null}
         <PartnerHeader
           namespace={namespace}
-          breadcrumbs={[namespaceBreadcrumb, { name: namespace.name }]}
+          breadcrumbs={breadcrumbs}
           tabs={tabs}
           params={params}
           updateParams={(p) => this.updateParams(p)}
@@ -351,6 +393,29 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             </section>
           ) : null}
           {tab === 'resources' ? this.renderResources(namespace) : null}
+          {tab === 'owners' ? (
+            <OwnersTab
+              addAlert={(alert: AlertType) =>
+                this.setState({
+                  alerts: [...this.state.alerts, alert],
+                })
+              }
+              groupId={params.group}
+              groups={namespace.groups}
+              name={namespace.name}
+              reload={() => this.loadAll()}
+              selectRolesMessage={t`The selected roles will be added to this specific namespace.`}
+              updateGroups={(groups) =>
+                MyNamespaceAPI.update(namespace.name, {
+                  ...namespace,
+                  groups,
+                })
+              }
+              urlPrefix={formatPath(Paths.myCollections, {
+                namespace: namespace.name,
+              })}
+            />
+          ) : null}
         </Main>
         {canSign && (
           <SignAllCertificatesModal

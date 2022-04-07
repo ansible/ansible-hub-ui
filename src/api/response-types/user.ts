@@ -44,6 +44,7 @@ export class Permissions {
 export class GroupType {
   id: number;
   name: string;
+  object_roles?: string[];
 }
 
 export class UserType {

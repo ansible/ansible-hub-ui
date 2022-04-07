@@ -21,7 +21,7 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
-import { parsePulpIDFromURL, waitForTask } from 'src/utilities';
+import { ParamHelper, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 
 import { AppContext } from 'src/loaders/app-context';
 
@@ -79,6 +79,9 @@ export function withContainerRepo(WrappedComponent) {
         images: formatPath(Paths.executionEnvironmentDetailImages, {
           container,
         }),
+        owners: formatPath(Paths.executionEnvironmentDetailOwners, {
+          container,
+        }),
         notFound: Paths.notFound,
       }[this.state.redirect];
 
@@ -132,6 +135,11 @@ export function withContainerRepo(WrappedComponent) {
 
       const { alerts, repo, publishToController, showDeleteModal } = this.state;
 
+      // move to Owner tab when it can have its own breadcrumbs
+      const { group: groupId } = ParamHelper.parseParamString(
+        this.props.location.search,
+      ) as { group?: number };
+
       return (
         <React.Fragment>
           <AlertList
@@ -162,6 +170,7 @@ export function withContainerRepo(WrappedComponent) {
             id={this.props.match.params['container']}
             updateState={(change) => this.setState(change)}
             tab={this.getTab()}
+            groupId={groupId}
             container={this.state.repo}
             pageControls={
               <>
@@ -277,7 +286,7 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private getTab() {
-      const tabs = ['detail', 'images', 'activity'];
+      const tabs = ['detail', 'images', 'activity', 'owners'];
       const location = this.props.location.pathname.split('/').pop();
 
       for (const tab of tabs) {

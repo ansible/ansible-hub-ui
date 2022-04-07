@@ -22,6 +22,7 @@ export function formatPath(
 export enum Paths {
   executionEnvironmentDetailActivities = '/containers/:container+/_content/activity',
   executionEnvironmentDetailImages = '/containers/:container+/_content/images',
+  executionEnvironmentDetailOwners = '/containers/:container+/_content/owners',
   executionEnvironmentDetail = '/containers/:container+',
   executionEnvironments = '/containers',
   executionEnvironmentManifest = '/containers/:container+/_content/images/:digest',

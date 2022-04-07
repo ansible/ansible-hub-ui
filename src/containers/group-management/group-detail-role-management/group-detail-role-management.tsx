@@ -11,7 +11,6 @@ import {
   LoadingPageWithHeader,
   Pagination,
   RoleListTable,
-  RolePermissions,
   SelectRoles,
   PreviewRoles,
   ExpandableRow,
