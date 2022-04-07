@@ -1,6 +1,7 @@
 import React from 'react';
 import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
+import './role.scss'
 import { AppContext } from 'src/loaders/app-context';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import {
@@ -96,7 +97,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || !this.context.user.model_permissions.view_group) {
+    if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ loading: false, unauthorized: true });
     } else {
       this.queryRoles();
@@ -398,18 +399,18 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       });
   }
 
+
   private renderDropdownItems = (role) => {
     const { pulp_href } = role;
     const roleID = parsePulpIDFromURL(pulp_href);
 
     const dropdownItems = [
       // this.context.user.model_permissions.change_containerregistry && (
-
-      <DropdownItem key='edit'>
-        <Link to={formatPath(Paths.roleEdit, { role: roleID })}>
-          <Trans>Edit</Trans>
-        </Link>
-      </DropdownItem>,
+      <Link key='edit' to={formatPath(Paths.roleEdit, { role: roleID })}>
+        <DropdownItem key='edit'>
+         <Trans>Edit</Trans>
+        </DropdownItem>
+      </Link>,
       // ),
       // this.context.user.model_permissions.delete_containerregistry && (
       <DropdownItem

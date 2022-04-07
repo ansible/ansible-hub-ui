@@ -38,6 +38,7 @@ interface IState {
   name: string;
   description: string;
   roleError: ErrorMessagesType;
+  nameError: boolean;
 }
 
 class RoleCreate extends React.Component<RouteComponentProps, IState> {
@@ -45,6 +46,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     super(props);
 
     this.state = {
+      nameError: false,
       errorMessages: {},
       permissions: [],
       name: '',
@@ -75,173 +77,170 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
       });
     }
 
-    const notAuthorised =
-      !this.context.user || !this.context.user.model_permissions.add_user;
+    const notAuthorised = !this.context.user || this.context.user.is_anonymous;
     const breadcrumbs = [
       { url: Paths.roleList, name: t`Roles` },
       { name: t`Create new role` },
     ];
     const title = t`Create new role`;
 
-    return notAuthorised ? (
+    return (
       <React.Fragment>
         <BaseHeader
           breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
           title={title}
         ></BaseHeader>
-        <EmptyStateUnauthorized />
-      </React.Fragment>
-    ) : (
-      <React.Fragment>
-        <BaseHeader
-          breadcrumbs={<Breadcrumbs links={breadcrumbs}></Breadcrumbs>}
-          title={title}
-        ></BaseHeader>
-        <Main>
-          <section className='body'>
-            <div>
-              <div style={{ paddingBottom: '8px', paddingTop: '16px' }}>
-                <Title headingLevel='h2'>Details</Title>
-              </div>
-              <FormGroup
-                isRequired={true}
-                key='name'
-                fieldId='name'
-                label={t`Name`}
-                helperTextInvalid={
-                  !this.state.roleError ? null : this.state.roleError.name
-                }
-              >
-                <TextInput
-                  id='role_name'
-                  value={this.state.name}
-                  onChange={(value) => {
-                    this.setState({ name: value });
-                  }}
-                  type='text'
-                  validated={this.toError(!this.state.roleError)}
-                  placeholder='Role name'
-                />
-              </FormGroup>
-
-              <FormGroup
-                isRequired={false}
-                key='description'
-                fieldId='description'
-                label={t`Description`}
-                helperTextInvalid={
-                  !this.state.roleError ? null : this.state.roleError.name
-                }
-              >
-                <TextInput
-                  id='role_description'
-                  value={this.state.description}
-                  onChange={(value) => {
-                    this.setState({ description: value });
-                  }}
-                  type='text'
-                  validated={this.toError(!this.state.roleError)}
-                  placeholder='Add a role description here'
-                />
-              </FormGroup>
-            </div>
-            <div>
-              <div style={{ paddingBottom: '8px', paddingTop: '16px' }}>
-                <Title headingLevel='h2'>Permissions</Title>
-              </div>
-              {groups.map((group) => (
-                <Flex
-                  style={{ marginTop: '16px' }}
-                  alignItems={{ default: 'alignItemsCenter' }}
-                  key={group.name}
-                  className={group.name}
+        {notAuthorised ? (
+          <EmptyStateUnauthorized />
+        ) : (
+          <Main>
+            <section className='body'>
+              <div>
+                <div style={{ paddingBottom: '8px', paddingTop: '16px' }}>
+                  <Title headingLevel='h2'>Details</Title>
+                </div>
+                <FormGroup
+                  isRequired={true}
+                  key='name'
+                  fieldId='name'
+                  label={t`Name`}
+                  helperTextInvalid={
+                    // !this.state.roleError ? null : this.state.roleError
+                    t`Role name must be unique.`
+                  }
+                  validated={this.state.nameError ? 'error' : null}
                 >
-                  <FlexItem style={{ minWidth: '200px' }}>
-                    {i18n._(group.label)}
-                  </FlexItem>
-                  <FlexItem grow={{ default: 'grow' }}>
-                    <PermissionChipSelector
-                      availablePermissions={group.object_permissions
-                        .filter(
-                          (perm) =>
-                            !selectedPermissions.find(
-                              (selected) => selected === perm,
-                            ),
-                        )
-                        .map((value) =>
-                          twoWayMapper(value, filteredPermissions),
-                        )
-                        .sort()}
-                      selectedPermissions={selectedPermissions
-                        .filter((selected) =>
-                          group.object_permissions.find(
-                            (perm) => selected === perm,
-                          ),
-                        )
-                        .map((value) =>
-                          twoWayMapper(value, filteredPermissions),
-                        )}
-                      setSelected={(perms) =>
-                        this.setState({ permissions: perms })
-                      }
-                      menuAppendTo='inline'
-                      multilingual={true}
-                      isViewOnly={false}
-                      onClear={() => {
-                        const clearedPerms = group.object_permissions;
-                        this.setState({
-                          permissions: this.state.permissions.filter(
-                            (x) => !clearedPerms.includes(x),
-                          ),
-                        });
-                      }}
-                      onSelect={(event, selection) => {
-                        const newPerms = new Set(this.state.permissions);
-                        if (
-                          newPerms.has(
-                            twoWayMapper(selection, filteredPermissions),
+                  <TextInput
+                    id='role_name'
+                    value={this.state.name}
+                    onChange={(value) => {
+                      this.setState({ name: value, nameError: false });
+                    }}
+                    type='text'
+                    validated={this.state.nameError ? 'error' : null}
+                    placeholder='Role name'
+                  />
+                </FormGroup>
+
+                <FormGroup
+                  isRequired={true}
+                  key='description'
+                  fieldId='description'
+                  label={t`Description`}
+                  helperTextInvalid={
+                    !this.state.roleError ? null : this.state.roleError.name
+                  }
+                >
+                  <TextInput
+                    id='role_description'
+                    value={this.state.description}
+                    onChange={(value) => {
+                      this.setState({ description: value });
+                    }}
+                    type='text'
+                    validated={this.toError(!this.state.roleError)}
+                    placeholder='Add a role description here'
+                  />
+                </FormGroup>
+              </div>
+              <div>
+                <div style={{ paddingBottom: '8px', paddingTop: '16px' }}>
+                  <Title headingLevel='h2'>Permissions</Title>
+                </div>
+                {groups.map((group) => (
+                  <Flex
+                    style={{ marginTop: '16px' }}
+                    alignItems={{ default: 'alignItemsCenter' }}
+                    key={group.name}
+                    className={group.name}
+                  >
+                    <FlexItem style={{ minWidth: '200px' }}>
+                      {i18n._(group.label)}
+                    </FlexItem>
+                    <FlexItem grow={{ default: 'grow' }}>
+                      <PermissionChipSelector
+                        availablePermissions={group.object_permissions
+                          .filter(
+                            (perm) =>
+                              !selectedPermissions.find(
+                                (selected) => selected === perm,
+                              ),
                           )
-                        ) {
-                          newPerms.delete(
-                            twoWayMapper(selection, filteredPermissions),
-                          );
-                        } else {
-                          newPerms.add(
-                            twoWayMapper(selection, filteredPermissions),
-                          );
+                          .map((value) =>
+                            twoWayMapper(value, filteredPermissions),
+                          )
+                          .sort()}
+                        selectedPermissions={selectedPermissions
+                          .filter((selected) =>
+                            group.object_permissions.find(
+                              (perm) => selected === perm,
+                            ),
+                          )
+                          .map((value) =>
+                            twoWayMapper(value, filteredPermissions),
+                          )}
+                        setSelected={(perms) =>
+                          this.setState({ permissions: perms })
                         }
-                        this.setState({ permissions: Array.from(newPerms) });
-                      }}
-                    />
-                  </FlexItem>
-                </Flex>
-              ))}
-            </div>
-            <Form>
-              <ActionGroup>
-                <Button
-                  variant='primary'
-                  isDisabled={!name}
-                  onClick={() => {
-                    this.saveRole();
-                  }}
-                >
-                  {t`Save`}
-                </Button>
+                        menuAppendTo='inline'
+                        multilingual={true}
+                        isViewOnly={false}
+                        onClear={() => {
+                          const clearedPerms = group.object_permissions;
+                          this.setState({
+                            permissions: this.state.permissions.filter(
+                              (x) => !clearedPerms.includes(x),
+                            ),
+                          });
+                        }}
+                        onSelect={(event, selection) => {
+                          const newPerms = new Set(this.state.permissions);
+                          if (
+                            newPerms.has(
+                              twoWayMapper(selection, filteredPermissions),
+                            )
+                          ) {
+                            newPerms.delete(
+                              twoWayMapper(selection, filteredPermissions),
+                            );
+                          } else {
+                            newPerms.add(
+                              twoWayMapper(selection, filteredPermissions),
+                            );
+                          }
+                          this.setState({ permissions: Array.from(newPerms) });
+                        }}
+                      />
+                    </FlexItem>
+                  </Flex>
+                ))}
+              </div>
+              <Form>
+                <ActionGroup>
+                  <Button
+                    variant='primary'
+                    isDisabled={!name}
+                    onClick={() => {
+                      this.saveRole();
+                    }}
+                  >
+                    {t`Save`}
+                  </Button>
 
-                <Button
-                  variant='secondary'
-                  onClick={() => {
-                    this.setState({
-                      roleError: null,
-                      redirect: Paths.roleList,
-                    });
-                  }}
-                >{t`Cancel`}</Button>
-              </ActionGroup>
-            </Form>
-          </section>
-        </Main>
+                  <Button
+                    variant='secondary'
+                    onClick={() => {
+                      this.setState({
+                        roleError: null,
+                        redirect: Paths.roleList,
+                      });
+                    }}
+                  >{t`Cancel`}</Button>
+                </ActionGroup>
+              </Form>
+            </section>
+          </Main>
+        )}
       </React.Fragment>
     );
   }
@@ -250,8 +249,10 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     RoleAPI.create({ name, description, permissions })
       .then(() => this.setState({ redirect: Paths.roleList }))
       .catch((err) => {
-        this.setState({ roleError: mapErrorMessages(err) });
-        console.log('roleError: ', this.state.roleError);
+        console.log('errors: ', err.response.status);
+        err.response.status === 400
+          ? this.setState({ nameError: true })
+          : this.setState({ roleError: mapErrorMessages(err) });
       });
   };
 

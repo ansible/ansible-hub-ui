@@ -14,15 +14,18 @@ export function mapErrorMessages(err): ErrorMessagesType {
     return messages;
   }
 
-  for (const e of err.response.data.errors) {
-    if (e.source) {
-      messages[e.source.parameter] = e.detail;
-    } else {
-      // some error responses are too cool to have a
-      // parameter set on them >:(
-      messages['__nofield'] = e.detail || e.title;
+  if (err.response.data.errors) {
+    for (const e of err.response.data.errors) {
+      if (e.source) {
+        messages[e.source.parameter] = e.detail;
+      } else {
+        // some error responses are too cool to have a
+        // parameter set on them >:(
+        messages['__nofield'] = e.detail || e.title;
+      }
     }
+  } else {
+    messages['__nofield'] = 'details';
   }
-
   return messages;
 }
