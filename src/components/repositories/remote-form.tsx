@@ -122,6 +122,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
         'auth_url',
         'token',
         'requirements_file',
+        'signed_only',
       ]);
     }
 
@@ -229,7 +230,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
           />
         </FormGroup>
 
-        {this.context?.featureFlags?.collection_signing === true && (
+        {!disabledFields.includes('signed_only') &&
+        this.context.featureFlags?.collection_signing ? (
           <FormGroup
             fieldId={'signed_only'}
             name={t`Signed only`}
@@ -241,7 +243,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               onChange={(value) => this.updateRemote(value, 'signed_only')}
             />
           </FormGroup>
-        )}
+        ) : null}
 
         {!disabledFields.includes('token') && (
           <FormGroup
