@@ -81,6 +81,7 @@ interface IState {
   description: string;
   roleError: ErrorMessagesType;
   nameError: boolean;
+  descriptionError: boolean;
 }
 
 class EditRole extends React.Component<RouteComponentProps, IState> {
@@ -112,6 +113,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
       inputText: '',
       name: null,
       description: null,
+      descriptionError: false,
     };
   }
 
@@ -171,7 +173,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-
     if (this.state.redirect) {
       return <Redirect push to={this.state.redirect} />;
     }
@@ -187,7 +188,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
       params,
       unauthorised,
     } = this.state;
-
 
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
@@ -254,13 +254,15 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
                 <Title headingLevel='h2'>Details</Title>
               </div>
               <FormGroup
-                isRequired={false}
+                isRequired={true}
                 key='description'
                 fieldId='description'
                 label={t`Role description`}
                 helperTextInvalid={
-                  !this.state.roleError ? null : this.state.roleError.name
+                  // !this.state.descriptionError ? null : this.state.roleError
+                  t`This field may not be blank.`
                 }
+                validated={this.state.descriptionError ? 'error' : null}
               >
                 <TextInput
                   id='role_name'
@@ -269,7 +271,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
                     this.setState({ description: value });
                   }}
                   type='text'
-                  validated={this.toError(!this.state.roleError)}
+                  validated={this.state.descriptionError ? 'error' : null}
                   placeholder='Add a role description here'
                 />
               </FormGroup>
@@ -397,8 +399,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-
-
   private actionSavePermissions() {
     const { role, originalPermissions, permissions } = this.state;
     const { pulp_href } = role;
@@ -432,7 +432,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-
   private addAlert(title, variant, description?) {
     this.setState({
       alerts: [
@@ -453,10 +452,9 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     RoleAPI.updatePermissions(roleID, { name, description, permissions })
       .then(() => this.setState({ redirect: Paths.roleList }))
       .catch((err) => {
-        console.log('errors: ', err.response.status);
         err.response.status === 400
-          ? this.setState({ nameError: true })
-          : this.setState({ roleError: mapErrorMessages(err) });
+          ? this.setState({ descriptionError: true })
+          : mapErrorMessages(err);
       });
   };
 

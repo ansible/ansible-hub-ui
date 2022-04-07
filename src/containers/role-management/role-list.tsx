@@ -1,7 +1,7 @@
 import React from 'react';
 import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-import './role.scss'
+import './role.scss';
 import { AppContext } from 'src/loaders/app-context';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import {
@@ -399,7 +399,6 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       });
   }
 
-
   private renderDropdownItems = (role) => {
     const { pulp_href } = role;
     const roleID = parsePulpIDFromURL(pulp_href);
@@ -408,7 +407,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       // this.context.user.model_permissions.change_containerregistry && (
       <Link key='edit' to={formatPath(Paths.roleEdit, { role: roleID })}>
         <DropdownItem key='edit'>
-         <Trans>Edit</Trans>
+          <Trans>Edit</Trans>
         </DropdownItem>
       </Link>,
       // ),
