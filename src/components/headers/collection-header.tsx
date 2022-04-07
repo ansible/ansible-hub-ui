@@ -793,7 +793,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const {
       deleteCollection,
       deleteCollection: { name },
-      collectionVersion,
     } = this.state;
     CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
       .then((res) => {
@@ -804,12 +803,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             ...this.context.alerts,
             {
               variant: 'success',
-              title: (
-                <Trans>
-                  Collection &quot;{name} v{collectionVersion}
-                  &quot; has been successfully deleted.
-                </Trans>
-              ),
+              title: t`Collection "${name}" has been successfully deleted.`,
             },
           ]);
           this.setState({
