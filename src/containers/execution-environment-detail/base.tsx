@@ -66,40 +66,23 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     render() {
-      if (this.state.redirect === 'list') {
-        return (
-          <Redirect push to={formatPath(Paths.executionEnvironments, {})} />
-        );
-      }
-      if (this.state.redirect === 'activity') {
-        return (
-          <Redirect
-            push
-            to={formatPath(Paths.executionEnvironmentDetailActivities, {
-              container: this.props.match.params['container'],
-            })}
-          />
-        );
-      } else if (this.state.redirect === 'detail') {
-        return (
-          <Redirect
-            push
-            to={formatPath(Paths.executionEnvironmentDetail, {
-              container: this.props.match.params['container'],
-            })}
-          />
-        );
-      } else if (this.state.redirect === 'images') {
-        return (
-          <Redirect
-            push
-            to={formatPath(Paths.executionEnvironmentDetailImages, {
-              container: this.props.match.params['container'],
-            })}
-          />
-        );
-      } else if (this.state.redirect === 'notFound') {
-        return <Redirect push to={Paths.notFound} />;
+      const container = this.props.match.params['container'];
+      const redirect = {
+        list: formatPath(Paths.executionEnvironments, {}),
+        activity: formatPath(Paths.executionEnvironmentDetailActivities, {
+          container,
+        }),
+        detail: formatPath(Paths.executionEnvironmentDetail, {
+          container,
+        }),
+        images: formatPath(Paths.executionEnvironmentDetailImages, {
+          container,
+        }),
+        notFound: Paths.notFound,
+      }[this.state.redirect];
+
+      if (redirect) {
+        return <Redirect push to={redirect} />;
       }
 
       if (this.state.loading) {
