@@ -147,6 +147,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       params,
       redirect,
       itemCount,
+      showControls,
       showImportModal,
       warning,
       updateCollection,
@@ -163,16 +164,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    const tabs = [{ id: 'collections', name: t`Collections` }];
+    const tabs = [
+      { id: 'collections', name: t`Collections` },
+      showControls && { id: 'cli-configuration', name: t`CLI configuration` },
+      namespace.resources && { id: 'resources', name: t`Resources` },
+    ].filter(Boolean);
 
-    if (this.state.showControls) {
-      tabs.push({ id: 'cli-configuration', name: t`CLI configuration` });
-    }
     const tab = params['tab'] || 'collections';
-
-    if (namespace.resources) {
-      tabs.push({ id: 'resources', name: t`Resources` });
-    }
 
     const repositoryUrl = getRepoUrl('inbound-' + namespace.name);
 
@@ -274,7 +272,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             />
           }
           filters={
-            tab.toLowerCase() === 'collections' ? (
+            tab === 'collections' ? (
               <div className='hub-toolbar-wrapper namespace-detail'>
                 <div className='toolbar'>
                   <CollectionFilter
@@ -297,7 +295,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           }
         ></PartnerHeader>
         <Main>
-          {tab.toLowerCase() === 'collections' ? (
+          {tab === 'collections' ? (
             noData ? (
               <EmptyStateNoData
                 title={t`No collections yet`}
@@ -329,7 +327,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               </section>
             )
           ) : null}
-          {tab.toLowerCase() === 'cli-configuration' ? (
+          {tab === 'cli-configuration' ? (
             <section className='body'>
               <div>
                 <div>
@@ -352,9 +350,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               </div>
             </section>
           ) : null}
-          {tab.toLowerCase() === 'resources'
-            ? this.renderResources(namespace)
-            : null}
+          {tab === 'resources' ? this.renderResources(namespace) : null}
         </Main>
         {canSign && (
           <SignAllCertificatesModal
