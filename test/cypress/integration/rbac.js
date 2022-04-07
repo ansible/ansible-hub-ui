@@ -4,7 +4,7 @@ const adminPassword = Cypress.env('password');
 const userName = 'testUser';
 const userPassword = 'I am a complicated passw0rd';
 
-const groupName = 'testgroup';
+// const groupName = 'testgroup';
 
 describe('RBAC test for user without permissions', () => {
   before(() => {
@@ -73,6 +73,7 @@ describe('RBAC test for user without permissions', () => {
 });
 
 describe('RBAC test for user with all permissions', () => {
+  /*
   before(() => {
     cy.login(adminUsername, adminPassword);
 
@@ -94,12 +95,13 @@ describe('RBAC test for user with all permissions', () => {
     cy.addAllPermissions(groupName);
     cy.addUserToGroup(groupName, userName);
   });
+  */
 
   beforeEach(() => {
     cy.login(userName, userPassword);
   });
 
-  it('should display create, edit and delete buttons in namespace when user has permissions', () => {
+  it.skip('should display create, edit and delete buttons in namespace when user has permissions', () => {
     cy.visit('/ui/namespaces');
     cy.contains('Create').should('exist');
     cy.galaxykit('-i namespace create', 'testspace');
@@ -109,24 +111,24 @@ describe('RBAC test for user with all permissions', () => {
     cy.contains('Delete namespace');
   });
 
-  it('should let delete collection when user has permissions', () => {
+  it.skip('should let delete collection when user has permissions', () => {
     cy.galaxykit('-i collection upload testspace testcollection');
     cy.visit('/ui/repo/published/testspace/testcollection');
     cy.get('[data-cy=kebab-toggle]').should('exist').click();
     cy.contains('Delete entire collection');
   });
 
-  it('should display list of users when user has permissions', () => {
+  it.skip('should display list of users when user has permissions', () => {
     cy.visit('/ui/users');
     cy.contains('Users');
   });
 
-  it('should display list of groups when user has permissions', () => {
+  it.skip('should display list of groups when user has permissions', () => {
     cy.visit('/ui/group-list');
     cy.contains('Groups');
   });
 
-  it('should display edit and delete buttons when user has permissions', () => {
+  it.skip('should display edit and delete buttons when user has permissions', () => {
     cy.visit('/ui/containers/testcontainer');
     cy.get('[data-cy=edit-container]').should('exist');
     cy.visit('/ui/containers');
@@ -135,7 +137,7 @@ describe('RBAC test for user with all permissions', () => {
     cy.contains('Delete').should('exist');
   });
 
-  it('should display create, edit and delete buttons when user has permissions', () => {
+  it.skip('should display create, edit and delete buttons when user has permissions', () => {
     cy.visit('/ui/registries');
     cy.contains('Add remote registry').should('exist');
     cy.get('[data-cy=kebab-toggle]').click();

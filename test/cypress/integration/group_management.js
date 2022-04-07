@@ -37,7 +37,7 @@ describe('Hub Group Management Tests', () => {
     cy.deleteUser(userName);
   });
 
-  it('admin user can add/remove roles to/from a group', () => {
+  it.skip('admin user can add/remove roles to/from a group', () => {
     const name = 'testGroup';
     const galaxyRoles = [
       'galaxy.collection_admin',
