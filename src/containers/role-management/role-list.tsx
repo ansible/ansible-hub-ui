@@ -32,6 +32,7 @@ import {
   ToolbarItem,
   Flex,
   FlexItem,
+  Tooltip,
 } from '@patternfly/react-core';
 import { RoleType } from 'src/api/response-types/role';
 import {
@@ -78,7 +79,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     }
 
     if (!params['sort']) {
-      params['sort'] = '-pulp_created';
+      params['sort'] = '-name';
     }
 
     this.state = {
@@ -379,9 +380,9 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     RoleAPI.delete(roleID)
       .then(() =>
         this.addAlert(
-          <Trans>
-            Remote registry &quot;{name}&quot; has been successfully deleted.
-          </Trans>,
+          t`
+            Role "${name}" has been successfully deleted.
+          `,
           'success',
         ),
       )
@@ -400,29 +401,31 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderDropdownItems = (role) => {
-    const { pulp_href } = role;
+    const { pulp_href, locked } = role;
     const roleID = parsePulpIDFromURL(pulp_href);
 
     const dropdownItems = [
       // this.context.user.model_permissions.change_containerregistry && (
       <Link key='edit' to={formatPath(Paths.roleEdit, { role: roleID })}>
-        <DropdownItem key='edit'>
-          <Trans>Edit</Trans>
-        </DropdownItem>
+        <DropdownItem key='edit'>{t`Edit`}</DropdownItem>
       </Link>,
       // ),
       // this.context.user.model_permissions.delete_containerregistry && (
-      <DropdownItem
-        key='delete'
-        onClick={() =>
-          this.setState({
-            showDeleteModal: true,
-            roleToEdit: role,
-          })
-        }
-      >
-        <Trans>Delete</Trans>
-      </DropdownItem>,
+
+      <Tooltip key='delete' content={t`Locked roles cannot be deleted.`}>
+        <DropdownItem
+          key='delete'
+          isDisabled={locked}
+          onClick={() =>
+            this.setState({
+              showDeleteModal: true,
+              roleToEdit: role,
+            })
+          }
+        >
+          {t`Delete`}
+        </DropdownItem>
+      </Tooltip>,
       // ),
     ];
     return dropdownItems;

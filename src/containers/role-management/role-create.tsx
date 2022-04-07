@@ -249,7 +249,6 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     RoleAPI.create({ name, description, permissions })
       .then(() => this.setState({ redirect: Paths.roleList }))
       .catch((err) => {
-        console.log('errors: ', err.response.status);
         err.response.status === 400
           ? this.setState({ nameError: true })
           : this.setState({ roleError: mapErrorMessages(err) });
