@@ -22,6 +22,7 @@ import {
   ExpandableRow,
   ListItemActions,
   PermissionChipSelector,
+  DateComponent,
 } from 'src/components';
 import {
   Button,
@@ -79,7 +80,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     }
 
     if (!params['sort']) {
-      params['sort'] = '-name';
+      params['sort'] = '-pulp_created';
     }
 
     this.state = {
@@ -281,6 +282,11 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                               id: 'description',
                             },
                             {
+                              title: t`Created`,
+                              type: 'none',
+                              id: 'pulp_created',
+                            },
+                            {
                               title: t`Locked`,
                               type: 'none',
                               id: 'locked',
@@ -348,6 +354,10 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                           >
                             <td>{role.name}</td>
                             <td>{role.description}</td>
+                            <td>
+                              <DateComponent date={role.pulp_created} />
+                            </td>
+
                             <td>{role.locked ? 'Locked' : 'Unlocked'}</td>
                             <ListItemActions
                               kebabItems={this.renderDropdownItems(role)}

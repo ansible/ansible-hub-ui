@@ -12,11 +12,11 @@ export class API extends PulpAPI {
     return super.list(changedParams);
   }
 
-  updatePermissions(id, data: Object) {
+  updatePermissions(id, data: unknown) {
     return this.http.patch(this.apiPath + id, data);
   }
 
-  createRole(data: Object) {
+  createRole(data: unknown) {
     return this.http.post(this.apiPath, data);
   }
 }
