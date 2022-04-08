@@ -117,6 +117,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
         })
         .catch((e) => {
           const { status, statusText } = e.response;
+          this.setState({ redirect: Paths.notFound });
           this.addAlert(
             t`Role "${this.state.role.name}" could not be displayed.`,
             'danger',
@@ -146,12 +147,11 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     const groups = Constants.PERMISSIONS;
     const {
       permissions: selectedPermissions,
-      name,
       description,
+      descriptionError,
       alerts,
       editPermissions,
       role,
-
       unauthorised,
     } = this.state;
 
@@ -328,7 +328,10 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
                 <ActionGroup>
                   <Button
                     variant='primary'
-                    isDisabled={!name}
+                    isDisabled={
+                      descriptionError ||
+                      this.checkLength(this.state.description)
+                    }
                     onClick={() => {
                       this.saveRole();
                     }}
@@ -341,7 +344,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
                     onClick={() => {
                       this.setState({
                         roleError: null,
-
+                        descriptionError: null,
                         redirect: Paths.roleList,
                       });
                     }}
@@ -354,6 +357,14 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
       </React.Fragment>
     );
   }
+
+  private checkLength = (input) => {
+    if (input.toString().length > 128) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   private helperText = (input) => {
     let text = null;
