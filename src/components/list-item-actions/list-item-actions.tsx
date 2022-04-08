@@ -10,6 +10,7 @@ export class ListItemActions extends React.Component<IProps> {
   render() {
     const buttons = this.props.buttons?.filter(Boolean);
     const kebabItems = this.props.kebabItems?.filter(Boolean);
+
     return (
       <td
         style={{
@@ -19,12 +20,16 @@ export class ListItemActions extends React.Component<IProps> {
           justifyContent: 'flex-end',
         }}
       >
-        {buttons?.length && <List>{buttons} </List>}
-        {kebabItems?.length && (
+        {buttons?.length ? (
+          <>
+            <List>{buttons}</List>{' '}
+          </>
+        ) : null}
+        {kebabItems?.length ? (
           <div data-cy='kebab-toggle'>
             <StatefulDropdown items={kebabItems} />{' '}
           </div>
-        )}
+        ) : null}
       </td>
     );
   }
