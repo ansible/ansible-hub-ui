@@ -918,7 +918,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           showUserRemoveModal: null,
         });
         this.addAlert(
-          t`User "${user.username}" has been successfully removed group "${name}".`,
+          t`User "${user.username}" has been successfully removed from group "${name}".`,
           'success',
         );
         this.queryUsers();
