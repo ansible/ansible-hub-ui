@@ -147,12 +147,13 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
       isDisabled={isRoleDeleting}
     >
       <Trans>
-        You are about to remove <strong>{selectedDeleteRole?.name}</strong>{' '}
-        under <strong>{group?.name}</strong>.
+        You are about to remove <strong>{selectedDeleteRole?.name}</strong> from{' '}
+        <strong>{group?.name}</strong>.
       </Trans>
       <br />
       <Trans>
-        This will also remove all associated permissions under this role.
+        This will revoke all permissions associated with this role from the
+        group.
       </Trans>
     </DeleteModal>
   );
@@ -265,7 +266,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
         />
       )}
       {noData ? (
-        <section className='body empty-state-box'>
+        <section className='body hub-empty-state-box'>
           <EmptyStateCustom
             title={t`There are currently no roles assigned to this group.`}
             description={t`Please add a role by using the button below.`}

@@ -1,51 +1,51 @@
-.empty-state-box {
+.hub-empty-state-box {
   min-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.custom-wizard-layout {
+.hub-custom-wizard-layout {
   padding: 1rem 1.5rem 0;
 
-  .select-roles-content {
+  .hub-select-roles-content {
     height: 530px;
     overflow: auto;
   }
 
-  .permission {
+  .hub-permission {
     margin: 3px;
   }
 
-  .preview-roles {
+  .hub-preview-roles {
     margin-top: 20px;
-
-    .permissions {
-      margin: 10px 0;
-    }
   }
 
-  .filter {
+  .hub-permissions {
+    margin: 10px 0;
+  }
+
+  .hub-filter {
     width: 250px;
   }
 
-  .selected-roles-list {
+  .hub-selected-roles-list {
     overflow-x: auto;
   }
 
-  .no-filter-data {
+  .hub-no-filter-data {
     display: flex;
     justify-content: center;
     height: 400px;
   }
 }
 
-.loading-wizard {
+.hub-loading-wizard {
   display: flex;
   align-items: center;
 }
 
-.no-data {
+.hub-no-data {
   display: flex;
   justify-content: center;
   min-height: 590px;

@@ -28,20 +28,20 @@ const PreviewRoles = ({ group, selectedRoles }: Props) =>
   Object.keys(selectedRoles).length <= 0 ? (
     <div>No roles selected</div>
   ) : (
-    <div className='custom-wizard-layout'>
+    <div className='hub-custom-wizard-layout'>
       <p>
         The following roles will be applied to group:{' '}
         <strong>{group.name}</strong>
       </p>
-      <Flex direction={{ default: 'column' }} className='preview-roles'>
+      <Flex direction={{ default: 'column' }} className='hub-preview-roles'>
         {selectedRoles.map((role) => (
           <React.Fragment key={role.name}>
             <FlexItem>
               <strong>{role.name}</strong>{' '}
               {role?.description && `- ${role?.description}`}
-              <Flex className='permissions'>
+              <Flex className='hub-permissions'>
                 {role.permissions.map((permission) => (
-                  <FlexItem key={permission} className='permission'>
+                  <FlexItem key={permission} className='hub-permission'>
                     <Tooltip
                       content={
                         Constants.HUMAN_PERMISSIONS[permission] || permission

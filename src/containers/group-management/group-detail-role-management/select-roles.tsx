@@ -56,7 +56,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
 
   if (loading) {
     return (
-      <div className='custom-wizard-layout loading-wizard'>
+      <div className='hub-custom-wizard-layout hub-loading-wizard'>
         <LoadingPageSpinner />
       </div>
     );
@@ -69,7 +69,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
 
   if (noData && !filterIsSet(localParams, ['name__icontains'])) {
     return (
-      <div className='custom-wizard-layout no-data'>
+      <div className='hub-custom-wizard-layout hub-no-data'>
         <EmptyStateCustom
           title={t`No assignable roles.`}
           description={t`There are currently no roles that can be assigned to this group.`}
@@ -102,7 +102,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
   };
 
   return (
-    <div className='custom-wizard-layout'>
+    <div className='hub-custom-wizard-layout'>
       <Flex
         justifyContent={{
           default: noData
@@ -111,7 +111,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
         }}
         direction={{ default: 'column' }}
       >
-        <FlexItem className='select-roles-content'>
+        <FlexItem className='hub-select-roles-content'>
           <Flex
             justifyContent={{
               default: noData
@@ -119,7 +119,6 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
                 : 'justifyContentSpaceBetween',
             }}
             direction={{ default: 'column' }}
-            className='inner-roles-content'
           >
             {Object.keys(selectedRoles).length !== 0 && (
               <FlexItem>
@@ -131,7 +130,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
                   <FlexItem flex={{ default: 'flex_1' }}>
                     <Flex>
                       {selectedRoles.map((role) => (
-                        <FlexItem key={role.name} className='permission'>
+                        <FlexItem key={role.name} className='hub-permission'>
                           <Label
                             onClose={() =>
                               onRolesUpdate(
@@ -152,7 +151,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
             )}
 
             <FlexItem>
-              <div className='filter'>
+              <div className='hub-filter'>
                 <CompoundFilter
                   inputText={inputText}
                   onChange={(inputText) => setInputText(inputText)}
@@ -181,11 +180,11 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
 
             <FlexItem style={{ flexGrow: 1 }}>
               {noData && filterIsSet(localParams, ['name__icontains']) ? (
-                <div className='no-filter-data'>
+                <div className='hub-no-filter-data'>
                   <EmptyStateFilter />
                 </div>
               ) : (
-                <div className='selected-roles-list'>
+                <div className='hub-selected-roles-list'>
                   <RoleListTable
                     isStickyHeader
                     params={localParams}

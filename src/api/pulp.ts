@@ -1,8 +1,12 @@
 import { BaseAPI } from './base';
 
 export class PulpAPI extends BaseAPI {
-  constructor() {
-    super(API_HOST + PULP_API_BASE_PATH);
+  constructor(extendPath?: string) {
+    if (extendPath) {
+      super(API_HOST + PULP_API_BASE_PATH + extendPath);
+    } else {
+      super(API_HOST + PULP_API_BASE_PATH);
+    }
   }
 
   list(params?, apiPath?) {
