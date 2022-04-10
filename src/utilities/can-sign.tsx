@@ -1,5 +1,8 @@
-import { IAppContextType } from '../loaders/app-context';
-
-export const canSign = (context: IAppContextType) =>
-  context.featureFlags.collection_signing &&
-  context.user.model_permissions.sign_collections_on_namespace;
+export const canSign = ({ featureFlags }, namespace) => {
+  const permissions = namespace?.related_fields?.my_permissions || [];
+  return (
+    featureFlags?.collection_signing &&
+    permissions.includes('galaxy.change_namespace') &&
+    permissions.includes('galaxy.upload_to_namespace')
+  );
+};

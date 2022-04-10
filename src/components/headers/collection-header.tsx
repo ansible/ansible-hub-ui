@@ -45,7 +45,7 @@ import {
   SignCollectionAPI,
 } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
-import { waitForTask, canSign } from 'src/utilities';
+import { waitForTask, canSign as canSignNS } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
 import { Constants } from 'src/constants';
@@ -174,12 +174,14 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       `${moment(v.created).fromNow()} ${signedString(v)}
       ${v.version === all_versions[0].version ? t`(latest)` : ''}`;
 
-    const { name: collectionName } = collection;
-    const company = collection.namespace.company || collection.namespace.name;
+    const { name: collectionName, namespace } = collection;
+    const company = namespace.company || namespace.name;
 
     if (redirect) {
       return <Redirect push to={redirect} />;
     }
+
+    const canSign = canSignNS(this.context, namespace);
 
     const dropdownItems = [
       noDependencies
@@ -220,7 +222,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Delete version ${collection.latest_version.version}`}
         </DropdownItem>
       ),
-      canSign(this.context) && (
+      canSign && (
         <DropdownItem
           key='sign-all'
           onClick={() => this.setState({ isOpenSignAllModal: true })}
@@ -228,7 +230,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Sign entire collection`}
         </DropdownItem>
       ),
-      canSign(this.context) && (
+      canSign && (
         <DropdownItem
           key='sign-version'
           onClick={() => this.setState({ isOpenSignModal: true })}
@@ -240,7 +242,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     return (
       <React.Fragment>
-        {canSign(this.context) && (
+        {canSign && (
           <>
             <SignAllCertificatesModal
               name={collectionName}
@@ -592,7 +594,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
-      repository: this.context.selectedRepo,
+      distro_base_path: this.context.selectedRepo,
       namespace: this.props.collection.namespace.name,
       collection: this.props.collection.name,
     })
@@ -643,7 +645,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     SignCollectionAPI.sign({
       signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
-      repository: this.context.selectedRepo,
+      distro_base_path: this.context.selectedRepo,
       namespace: this.props.collection.namespace.name,
       collection: this.props.collection.name,
       version: this.props.collection.latest_version.version,

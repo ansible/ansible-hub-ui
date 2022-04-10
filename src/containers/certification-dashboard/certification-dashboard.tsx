@@ -356,10 +356,10 @@ class CertificationDashboard extends React.Component<
   }
 
   private renderButtons(version: CollectionVersion) {
+    const { featureFlags } = this.context;
+    // not checking namespace permissions here, auto_sign happens API side, so is the permission check
     const canSign =
-      this.context?.featureFlags?.collection_signing === true &&
-      this.context?.featureFlags?.collection_auto_sign === true &&
-      this.context?.user?.model_permissions?.sign_collections_on_namespace;
+      featureFlags?.collection_signing && featureFlags?.collection_auto_sign;
 
     if (this.state.updatingVersions.includes(version)) {
       return <ListItemActions />; // empty td;
