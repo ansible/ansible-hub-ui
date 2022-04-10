@@ -25,7 +25,7 @@ msgstr "(signed)"
 msgid "(unsigned)"
 msgstr "(unsigned)"
 
-#: src/components/repositories/remote-form.tsx:172
+#: src/components/repositories/remote-form.tsx:173
 msgid "(uploaded)"
 msgstr "(uploaded)"
 
@@ -93,12 +93,12 @@ msgstr "<0>{name}</0> will be permanently deleted."
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:550
-#: src/components/repositories/remote-form.tsx:596
+#: src/components/repositories/remote-form.tsx:552
+#: src/components/repositories/remote-form.tsx:598
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "A PEM encoded client certificate used for authentication."
 
-#: src/components/repositories/remote-form.tsx:520
+#: src/components/repositories/remote-form.tsx:522
 msgid "A PEM encoded private key used for authentication."
 msgstr "A PEM encoded private key used for authentication."
 
@@ -291,7 +291,7 @@ msgstr "Browser OS"
 msgid "Browser Version"
 msgstr "Browser Version"
 
-#: src/components/repositories/remote-form.tsx:593
+#: src/components/repositories/remote-form.tsx:595
 msgid "CA certificate"
 msgstr "CA certificate"
 
@@ -315,7 +315,7 @@ msgstr "Can't update remote without a distribution attached to it."
 #: src/components/group-management/group-modal.tsx:59
 #: src/components/import-modal/import-modal.tsx:78
 #: src/components/namespace-modal/namespace-modal.tsx:122
-#: src/components/repositories/remote-form.tsx:148
+#: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:35
 #: src/components/signing/sign-single-certificate-modal.tsx:35
 #: src/components/user-form/user-form.tsx:224
@@ -444,11 +444,11 @@ msgstr "Clear all filters"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 
-#: src/components/repositories/remote-form.tsx:547
+#: src/components/repositories/remote-form.tsx:549
 msgid "Client certificate"
 msgstr "Client certificate"
 
-#: src/components/repositories/remote-form.tsx:517
+#: src/components/repositories/remote-form.tsx:519
 msgid "Client key"
 msgstr "Client key"
 
@@ -471,17 +471,20 @@ msgstr "Collection \"{name} v{collectionVersion}\" could not be deleted."
 
 #: src/components/headers/collection-header.tsx:712
 #: src/components/headers/collection-header.tsx:727
-#: src/components/headers/collection-header.tsx:808
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 
-#: src/components/headers/collection-header.tsx:836
+#: src/components/headers/collection-header.tsx:830
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "Collection \"{name}\" could not be deleted."
 
 #: src/components/collection-detail/collection-info.tsx:188
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "Collection \"{name}\" could not be downloaded."
+
+#: src/components/headers/collection-header.tsx:806
+msgid "Collection \"{name}\" has been successfully deleted."
+msgstr "Collection \"{name}\" has been successfully deleted."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:151
 msgid "Collection Name"
@@ -658,8 +661,8 @@ msgstr "Could not load import log"
 #: src/components/namespace-modal/namespace-modal.tsx:119
 #: src/containers/group-management/group-list.tsx:161
 #: src/containers/group-management/group-list.tsx:198
-#: src/containers/namespace-list/namespace-list.tsx:237
-#: src/containers/namespace-list/namespace-list.tsx:287
+#: src/containers/namespace-list/namespace-list.tsx:240
+#: src/containers/namespace-list/namespace-list.tsx:290
 #: src/containers/user-management/user-list.tsx:184
 #: src/containers/user-management/user-list.tsx:249
 msgid "Create"
@@ -899,7 +902,7 @@ msgstr "Deleting yourself is not allowed."
 msgid "Dependencies"
 msgstr "Dependencies"
 
-#: src/components/headers/collection-header.tsx:865
+#: src/components/headers/collection-header.tsx:859
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "Dependencies for collection \"{name}\" could not be displayed."
 
@@ -962,23 +965,23 @@ msgstr "Documentation on how to configure the <0>ansible-galaxy</0> client can b
 msgid "Done"
 msgstr "Done"
 
-#: src/components/repositories/remote-form.tsx:629
+#: src/components/repositories/remote-form.tsx:631
 msgid "Download CA certification file"
 msgstr "Download CA certification file"
 
-#: src/components/repositories/remote-form.tsx:583
+#: src/components/repositories/remote-form.tsx:585
 msgid "Download client certification file"
 msgstr "Download client certification file"
 
-#: src/components/repositories/remote-form.tsx:639
+#: src/components/repositories/remote-form.tsx:641
 msgid "Download concurrency"
 msgstr "Download concurrency"
 
-#: src/components/repositories/remote-form.tsx:236
+#: src/components/repositories/remote-form.tsx:238
 msgid "Download only signed collections"
 msgstr "Download only signed collections"
 
-#: src/components/repositories/remote-form.tsx:341
+#: src/components/repositories/remote-form.tsx:343
 msgid "Download requirements file"
 msgstr "Download requirements file"
 
@@ -1026,7 +1029,7 @@ msgstr "Edit group permissions"
 msgid "Edit namespace"
 msgstr "Edit namespace"
 
-#: src/components/repositories/remote-form.tsx:131
+#: src/components/repositories/remote-form.tsx:132
 msgid "Edit remote"
 msgstr "Edit remote"
 
@@ -1410,7 +1413,7 @@ msgstr "Groups will appear once created"
 msgid "Groups with access"
 msgstr "Groups with access"
 
-#: src/components/repositories/remote-form.tsx:418
+#: src/components/repositories/remote-form.tsx:420
 msgid "Hide advanced options"
 msgstr "Hide advanced options"
 
@@ -1425,7 +1428,7 @@ msgstr "Hide the signature"
 msgid "I understand that this action cannot be undone."
 msgstr "I understand that this action cannot be undone."
 
-#: src/components/repositories/remote-form.tsx:501
+#: src/components/repositories/remote-form.tsx:503
 msgid "If selected, TLS peer validation must be performed."
 msgstr "If selected, TLS peer validation must be performed."
 
@@ -1590,7 +1593,7 @@ msgstr "Learn more"
 msgid "License"
 msgstr "License"
 
-#: src/components/repositories/remote-form.tsx:674
+#: src/components/repositories/remote-form.tsx:676
 msgid "Limits total download rate in requests per second."
 msgstr "Limits total download rate in requests per second."
 
@@ -1659,7 +1662,7 @@ msgstr "Message"
 msgid "Modify Ansible repo content"
 msgstr "Modify Ansible repo content"
 
-#: src/components/repositories/remote-form.tsx:683
+#: src/components/repositories/remote-form.tsx:685
 msgid "Must be an integer."
 msgstr "Must be an integer."
 
@@ -1685,11 +1688,11 @@ msgstr "My profile"
 #: src/components/my-imports/import-list.tsx:116
 #: src/components/namespace-form/namespace-form.tsx:62
 #: src/components/namespace-modal/namespace-modal.tsx:128
-#: src/components/repositories/remote-form.tsx:192
+#: src/components/repositories/remote-form.tsx:193
 #: src/containers/execution-environment/registry-list.tsx:265
 #: src/containers/execution-environment/registry-list.tsx:293
 #: src/containers/execution-environment/registry-list.tsx:322
-#: src/containers/namespace-list/namespace-list.tsx:225
+#: src/containers/namespace-list/namespace-list.tsx:228
 #: src/containers/task-management/task_detail.tsx:268
 msgid "Name"
 msgstr "Name"
@@ -1751,11 +1754,11 @@ msgid "Namespaces"
 msgstr "Namespaces"
 
 #: src/containers/namespace-list/namespace-list.tsx:125
-#: src/containers/namespace-list/namespace-list.tsx:360
+#: src/containers/namespace-list/namespace-list.tsx:363
 msgid "Namespaces list could not be displayed."
 msgstr "Namespaces list could not be displayed."
 
-#: src/containers/namespace-list/namespace-list.tsx:282
+#: src/containers/namespace-list/namespace-list.tsx:285
 msgid "Namespaces will appear once created"
 msgstr "Namespaces will appear once created"
 
@@ -1832,7 +1835,7 @@ msgstr "No local repositories yet"
 msgid "No managed collections yet"
 msgstr "No managed collections yet"
 
-#: src/containers/namespace-list/namespace-list.tsx:280
+#: src/containers/namespace-list/namespace-list.tsx:283
 msgid "No namespaces yet"
 msgstr "No namespaces yet"
 
@@ -1911,7 +1914,7 @@ msgstr "Not required for use by other collections"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:651
+#: src/components/repositories/remote-form.tsx:653
 msgid "Number must be greater than 0"
 msgstr "Number must be greater than 0"
 
@@ -1943,7 +1946,7 @@ msgstr "Partially signed"
 msgid "Partners"
 msgstr "Partners"
 
-#: src/components/repositories/remote-form.tsx:387
+#: src/components/repositories/remote-form.tsx:389
 #: src/components/user-form/user-form.tsx:92
 #: src/containers/login/login.tsx:55
 msgid "Password"
@@ -2046,15 +2049,15 @@ msgstr "Progress messages"
 msgid "Provided by {company}"
 msgstr "Provided by {company}"
 
-#: src/components/repositories/remote-form.tsx:424
+#: src/components/repositories/remote-form.tsx:426
 msgid "Proxy URL"
 msgstr "Proxy URL"
 
-#: src/components/repositories/remote-form.tsx:470
+#: src/components/repositories/remote-form.tsx:472
 msgid "Proxy password"
 msgstr "Proxy password"
 
-#: src/components/repositories/remote-form.tsx:442
+#: src/components/repositories/remote-form.tsx:444
 msgid "Proxy username"
 msgstr "Proxy username"
 
@@ -2204,7 +2207,7 @@ msgstr "Push new containers"
 msgid "Push to existing containers"
 msgstr "Push to existing containers"
 
-#: src/components/repositories/remote-form.tsx:671
+#: src/components/repositories/remote-form.tsx:673
 msgid "Rate Limit"
 msgstr "Rate Limit"
 
@@ -2344,7 +2347,7 @@ msgstr "Role"
 msgid "Running"
 msgstr "Running"
 
-#: src/components/repositories/remote-form.tsx:278
+#: src/components/repositories/remote-form.tsx:280
 #: src/containers/token/token-insights.tsx:193
 msgid "SSO URL"
 msgstr "SSO URL"
@@ -2352,7 +2355,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/repository-form.tsx:161
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
-#: src/components/repositories/remote-form.tsx:141
+#: src/components/repositories/remote-form.tsx:142
 #: src/components/user-form/user-form.tsx:221
 #: src/containers/edit-namespace/edit-namespace.tsx:197
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
@@ -2463,7 +2466,7 @@ msgstr "Server version"
 msgid "Settings"
 msgstr "Settings"
 
-#: src/components/repositories/remote-form.tsx:419
+#: src/components/repositories/remote-form.tsx:421
 msgid "Show advanced options"
 msgstr "Show advanced options"
 
@@ -2522,7 +2525,7 @@ msgstr "Signed"
 msgid "Signed and approved"
 msgstr "Signed and approved"
 
-#: src/components/repositories/remote-form.tsx:235
+#: src/components/repositories/remote-form.tsx:237
 msgid "Signed only"
 msgstr "Signed only"
 
@@ -2538,7 +2541,7 @@ msgstr "Signing started for all versions in collection \"{0}\""
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "Signing started for collection \"{0} v{1}\"."
 
-#: src/components/repositories/remote-form.tsx:279
+#: src/components/repositories/remote-form.tsx:281
 msgid "Single sign on URL."
 msgstr "Single sign on URL."
 
@@ -2680,7 +2683,7 @@ msgstr "Sync started for remote registry \"{name}\"."
 msgid "Sync status"
 msgstr "Sync status"
 
-#: src/components/repositories/remote-form.tsx:498
+#: src/components/repositories/remote-form.tsx:500
 msgid "TLS validation"
 msgstr "TLS validation"
 
@@ -2768,7 +2771,7 @@ msgstr "Text: {0}"
 msgid "The URL needs to be in 'http(s)://' format."
 msgstr "The URL needs to be in 'http(s)://' format."
 
-#: src/components/repositories/remote-form.tsx:212
+#: src/components/repositories/remote-form.tsx:213
 msgid "The URL of an external content source."
 msgstr "The URL of an external content source."
 
@@ -2784,11 +2787,11 @@ msgstr "The collection you have selected doesn't appear to match {0}"
 msgid "The file is not available for this version of {collectionName}"
 msgstr "The file is not available for this version of {collectionName}"
 
-#: src/components/repositories/remote-form.tsx:392
+#: src/components/repositories/remote-form.tsx:394
 msgid "The password to be used for authentication when syncing."
 msgstr "The password to be used for authentication when syncing."
 
-#: src/components/repositories/remote-form.tsx:393
+#: src/components/repositories/remote-form.tsx:395
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "The password to be used for authentication when syncing. This is not required when using a token."
 
@@ -2796,11 +2799,11 @@ msgstr "The password to be used for authentication when syncing. This is not req
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 
-#: src/components/repositories/remote-form.tsx:357
+#: src/components/repositories/remote-form.tsx:359
 msgid "The username to be used for authentication when syncing."
 msgstr "The username to be used for authentication when syncing."
 
-#: src/components/repositories/remote-form.tsx:358
+#: src/components/repositories/remote-form.tsx:360
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "The username to be used for authentication when syncing. This is not required when using a token."
 
@@ -2825,7 +2828,7 @@ msgstr "There's no resource record"
 msgid "These users will lose access to the group content:"
 msgstr "These users will lose access to the group content:"
 
-#: src/containers/namespace-list/namespace-list.tsx:283
+#: src/containers/namespace-list/namespace-list.tsx:286
 msgid "This account is not set up to manage any namespaces"
 msgstr "This account is not set up to manage any namespaces"
 
@@ -2853,7 +2856,7 @@ msgstr "This tag already exists on another image. Do you want to move it to this
 msgid "This tag is already selected for this image. You cannot add it twice."
 msgstr "This tag is already selected for this image. You cannot add it twice."
 
-#: src/components/repositories/remote-form.tsx:302
+#: src/components/repositories/remote-form.tsx:304
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 
@@ -2861,7 +2864,7 @@ msgstr "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI wi
 msgid "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 msgstr "To revoke a token or see all of your tokens, visit the <0>offline API token management</0> page."
 
-#: src/components/repositories/remote-form.tsx:249
+#: src/components/repositories/remote-form.tsx:251
 msgid "Token"
 msgstr "Token"
 
@@ -2869,7 +2872,7 @@ msgstr "Token"
 msgid "Token could not be displayed."
 msgstr "Token could not be displayed."
 
-#: src/components/repositories/remote-form.tsx:252
+#: src/components/repositories/remote-form.tsx:254
 msgid "Token for authenticating to the server URL."
 msgstr "Token for authenticating to the server URL."
 
@@ -2877,7 +2880,7 @@ msgstr "Token for authenticating to the server URL."
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:642
+#: src/components/repositories/remote-form.tsx:644
 msgid "Total number of simultaneous connections."
 msgstr "Total number of simultaneous connections."
 
@@ -2898,7 +2901,7 @@ msgstr "Type"
 msgid "UI Version"
 msgstr "UI Version"
 
-#: src/components/repositories/remote-form.tsx:210
+#: src/components/repositories/remote-form.tsx:211
 msgid "URL"
 msgstr "URL"
 
@@ -3047,7 +3050,7 @@ msgid "User type"
 msgstr "User type"
 
 #: src/components/about-modal/about-modal.tsx:85
-#: src/components/repositories/remote-form.tsx:352
+#: src/components/repositories/remote-form.tsx:354
 #: src/components/user-form/user-form.tsx:86
 #: src/containers/group-management/group-detail.tsx:725
 #: src/containers/group-management/group-detail.tsx:804
@@ -3180,7 +3183,7 @@ msgstr "We couldn't find the page you're looking for!"
 msgid "Website"
 msgstr "Website"
 
-#: src/components/repositories/remote-form.tsx:298
+#: src/components/repositories/remote-form.tsx:300
 msgid "YAML requirements"
 msgstr "YAML requirements"
 
