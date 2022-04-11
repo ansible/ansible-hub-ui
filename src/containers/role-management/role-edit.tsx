@@ -34,6 +34,7 @@ import {
   Title,
   FormGroup,
   TextInput,
+  Divider,
 } from '@patternfly/react-core';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
@@ -169,13 +170,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
       });
     }
 
-    const { user } = this.context;
-
-    const tabs = [{ id: 'permissions', name: t`Permissions` }];
-    if (!!user && user.model_permissions.view_user) {
-      tabs.push({ id: 'users', name: t`Users` });
-    }
-
     if (!role && alerts && alerts.length) {
       return (
         <AlertList
@@ -219,43 +213,66 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
           <Main>
             <section className='body'>
               <div>
-                <div style={{ paddingBottom: '8px', paddingTop: '16px' }}>
+                <div style={{ paddingBottom: '8px' }}>
                   <Title headingLevel='h2'>{t`Details`}</Title>
                 </div>
-                <FormGroup
-                  isRequired={true}
-                  key='description'
-                  fieldId='description'
-                  label={t`Role description`}
-                  helperTextInvalid={this.helperText(description)}
-                  validated={
-                    this.state.descriptionError ||
-                    this.state.description.length > 150
-                      ? 'error'
-                      : null
-                  }
-                >
-                  <TextInput
-                    id='role_name'
-                    value={this.state.description}
-                    onChange={(value) => {
-                      this.setState({ description: value });
-                    }}
-                    type='text'
-                    validated={
-                      this.state.descriptionError ||
-                      this.state.description.length > 150
-                        ? 'error'
-                        : null
-                    }
-                    placeholder={t`Add a role description here`}
-                  />
-                </FormGroup>
+
+                <Form>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <FormGroup
+                      fieldId='name'
+                      label={t`Role name`}
+                      isRequired
+                      style={{ width: '50%', float: 'left' }}
+                    >
+                      <TextInput
+                        isRequired
+                        isDisabled
+                        id='name'
+                        type='text'
+                        value={this.state.name}
+                      />
+                    </FormGroup>
+                    <FormGroup
+                      style={{ width: '50%' }}
+                      isRequired={true}
+                      key='description'
+                      fieldId='description'
+                      label={t`Role description`}
+                      helperTextInvalid={this.helperText(description)}
+                      validated={
+                        this.state.descriptionError ||
+                        this.state.description.length > 150
+                          ? 'error'
+                          : null
+                      }
+                    >
+                      <TextInput
+                        id='role_name'
+                        value={this.state.description}
+                        onChange={(value) => {
+                          this.setState({ description: value });
+                        }}
+                        type='text'
+                        validated={
+                          this.state.descriptionError ||
+                          this.state.description.length > 150
+                            ? 'error'
+                            : null
+                        }
+                        placeholder={t`Add a role description here`}
+                      />
+                    </FormGroup>
+                  </div>
+                </Form>
               </div>
               <div>
-                <div style={{ paddingBottom: '8px', paddingTop: '16px' }}>
-                  <Title headingLevel='h2'>Permissions</Title>
-                </div>
+                <br />
+                <Divider />
+                <br />
+
+                <Title headingLevel='h2'>Permissions</Title>
+
                 {groups.map((group) => (
                   <Flex
                     style={{ marginTop: '16px' }}
