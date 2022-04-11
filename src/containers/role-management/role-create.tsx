@@ -126,8 +126,8 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                   key='description'
                   fieldId='description'
                   label={t`Description`}
-                  helperTextInvalid={
-                    () => this.helperText(this.state.description)
+                  helperTextInvalid={() =>
+                    this.helperText(this.state.description)
                   }
                   validated={this.state.descriptionError ? 'error' : null}
                 >
