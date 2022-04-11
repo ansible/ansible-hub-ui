@@ -33,6 +33,7 @@ export class AlertList extends React.Component<IProps> {
           display: 'flex',
           flexDirection: 'column',
         }}
+        data-cy='AlertList'
       >
         {alerts.map((alert, i) => (
           <Alert

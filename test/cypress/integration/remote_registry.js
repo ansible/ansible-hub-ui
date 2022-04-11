@@ -57,6 +57,31 @@ describe('Remote Registry Tests', () => {
     cy.contains('table tr', 'https://some url2');
   });
 
+  it('user can sync succesfully remote registry', () => {
+    cy.visit('/ui/registries');
+
+    cy.intercept(
+      'POST',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/*/sync',
+    ).as('sync');
+
+    cy.get(
+      '[data-cy="ExecutionEnvironmentRegistryList-row-New remote registry1"]',
+    )
+      .contains('Sync from registry')
+      .click();
+
+    cy.wait('@sync');
+
+    cy.get('[data-cy="AlertList"]').contains(
+      'Sync started for remote registry "New remote registry1".',
+    );
+
+    cy.get(
+      '[data-cy="ExecutionEnvironmentRegistryList-row-New remote registry1"]',
+    ).contains('Completed', { timeout: 10000 });
+  });
+
   it('admin can edit new remote registry', () => {
     cy.menuGo('Execution Environments > Remote Registries');
 
