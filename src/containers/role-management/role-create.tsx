@@ -262,7 +262,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
   };
 
   private checkLength = (input) => {
-    if (input.toString().length > 128) {
+    if (input.toString().length === 0 || input.toString().length > 128) {
       return true;
     } else {
       return false;
@@ -273,7 +273,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     let text = null;
     if (input === '') {
       text = t`This field may not be blank.`;
-    } else if (input.toString().length > 150) {
+    } else if (input.toString().length > 128) {
       text = t`Ensure this field has no more than 150 characters.`;
     } else {
       text = null;
