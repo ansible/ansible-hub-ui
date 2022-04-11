@@ -28,7 +28,6 @@ interface IProps {
     keyword?: string;
     namespace?: string;
   };
-  'data-cy'?: string;
 
   selectImport: (x) => void;
   updateParams: (filters) => void;
