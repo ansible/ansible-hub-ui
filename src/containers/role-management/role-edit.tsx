@@ -3,9 +3,10 @@ import { i18n } from '@lingui/core';
 
 import * as React from 'react';
 import {
-  errorMessage,
   parsePulpIDFromURL,
-  mapErrorMessages,
+  errorMessage,
+  ErrorMessagesType,
+  twoWayMapper,
 } from 'src/utilities';
 import { RoleAPI } from 'src/api/role';
 
@@ -23,7 +24,6 @@ import {
   PermissionChipSelector,
 } from 'src/components';
 
-import { twoWayMapper, ErrorMessagesType } from 'src/utilities';
 import { Paths } from 'src/paths';
 import {
   ActionGroup,
@@ -120,13 +120,13 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
           });
         })
         .catch((e) => {
-          // const { status, statusText } = e.response;
+          const { status, statusText } = e.response;
           this.setState({ redirect: Paths.notFound });
-          // this.addAlert(
-          //   t`Role "${this.state.role.name}" could not be displayed.`,
-          //   'danger',
-          //   errorMessage(status, statusText),
-          // );
+          this.addAlert(
+            t`Role "${this.state.role.name}" could not be displayed.`,
+            'danger',
+            errorMessage(status, statusText),
+          );
           console.log('Error: ', e.response);
         });
     }
@@ -341,10 +341,11 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
                 <ActionGroup>
                   <Button
                     variant='primary'
-                    isDisabled={
-                      descriptionError ||
-                      this.checkLength(this.state.description)
-                    }
+                    // isDisabled={
+                    //   descriptionError
+                    //   ||
+                    //   this.checkLength(this.state.description)
+                    // }
                     onClick={() => {
                       this.saveRole();
                     }}
@@ -383,8 +384,8 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     let text = null;
     if (input === '') {
       text = t`This field may not be blank.`;
-    } else if (input.toString().length > 150) {
-      text = t`Ensure this field has no more than 150 characters.`;
+    } else if (input.toString().length > 128) {
+      text = t`Ensure this field has no more than 128 characters.`;
     } else {
       text = null;
     }
@@ -412,9 +413,8 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     RoleAPI.updatePermissions(roleID, { name, description, permissions })
       .then(() => this.setState({ redirect: Paths.roleList }))
       .catch((err) => {
-        err.response.status === 400
-          ? this.setState({ descriptionError: true })
-          : mapErrorMessages(err);
+        err.response.status === 400;
+        this.setState({ descriptionError: true });
       });
   };
 

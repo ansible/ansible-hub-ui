@@ -9,6 +9,7 @@ import {
   EmptyStateUnauthorized,
   PermissionChipSelector,
   Main,
+  AlertType,
 } from 'src/components';
 import {
   ActionGroup,
@@ -20,12 +21,14 @@ import {
   FormGroup,
   Title,
   Divider,
+  Spinner,
 } from '@patternfly/react-core';
 
 import {
   twoWayMapper,
   mapErrorMessages,
   ErrorMessagesType,
+  errorMessage,
 } from 'src/utilities';
 import { Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
@@ -33,6 +36,7 @@ import { Constants } from 'src/constants';
 import { RoleAPI } from 'src/api/role';
 
 interface IState {
+  saving: boolean;
   errorMessages: ErrorMessagesType;
   redirect?: string;
   permissions: string[];
@@ -41,6 +45,7 @@ interface IState {
   roleError: ErrorMessagesType;
   nameError: boolean;
   descriptionError: boolean;
+  alerts: AlertType[];
 }
 
 class RoleCreate extends React.Component<RouteComponentProps, IState> {
@@ -48,6 +53,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     super(props);
 
     this.state = {
+      saving: false,
       nameError: false,
       errorMessages: {},
       permissions: [],
@@ -55,6 +61,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
       description: '',
       roleError: null,
       descriptionError: false,
+      alerts: [],
     };
   }
 
@@ -64,7 +71,12 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     }
     const { nameError, descriptionError } = this.state;
     const groups = Constants.PERMISSIONS;
-    const { permissions: selectedPermissions, name } = this.state;
+    const {
+      permissions: selectedPermissions,
+      name,
+      errorMessages,
+      saving,
+    } = this.state;
 
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
@@ -131,10 +143,8 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                       key='description'
                       fieldId='description'
                       label={t`Description`}
-                      helperTextInvalid={() =>
-                        this.helperText(this.state.description)
-                      }
-                      validated={this.state.descriptionError ? 'error' : null}
+                      helperTextInvalid={errorMessages['description']}
+                      validated={this.toError(!('company' in errorMessages))}
                     >
                       <TextInput
                         id='role_description'
@@ -143,7 +153,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                           this.setState({ description: value });
                         }}
                         type='text'
-                        validated={this.state.descriptionError ? 'error' : null}
+                        validated={this.toError(!('company' in errorMessages))}
                         placeholder='Add a role description here'
                       />
                     </FormGroup>
@@ -253,6 +263,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                       });
                     }}
                   >{t`Cancel`}</Button>
+                  {saving ? <Spinner></Spinner> : null}
                 </ActionGroup>
               </Form>
             </section>
@@ -262,14 +273,31 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     );
   }
   private saveRole = () => {
-    const { name, permissions, description } = this.state;
-    RoleAPI.create({ name, description, permissions })
-      .then(() => this.setState({ redirect: Paths.roleList }))
-      .catch((err) => {
-        err.response.status === 400
-          ? this.setState({ nameError: true })
-          : this.setState({ roleError: mapErrorMessages(err) });
-      });
+    this.setState({ saving: true }, () => {
+      const { name, permissions, description } = this.state;
+      RoleAPI.create({ name, description, permissions })
+        .then(() =>
+          this.setState({ redirect: Paths.roleList, errorMessages: {} }),
+        )
+        .catch((err) => {
+          const { status, statusText } = err.response;
+          if (status === 400) {
+            this.setState({
+              errorMessages: mapErrorMessages(err),
+              saving: false,
+            });
+          } else if (status === 404) {
+            this.setState({
+              alerts: this.state.alerts.concat({
+                variant: 'danger',
+                title: t`Changes to role "${this.state.name}" could not be saved.`,
+                description: errorMessage(status, statusText),
+              }),
+              saving: false,
+            });
+          }
+        });
+    });
   };
 
   private checkLength = (input) => {
