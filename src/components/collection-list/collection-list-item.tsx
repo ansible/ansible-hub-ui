@@ -78,6 +78,7 @@ export class CollectionListItem extends React.Component<IProps> {
               namespace: namespace.name,
               repo: repo,
             })}
+            data-cy='CollectionList-name'
           >
             {name}
           </Link>

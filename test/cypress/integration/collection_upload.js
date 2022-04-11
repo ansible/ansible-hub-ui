@@ -69,6 +69,7 @@ describe('Collection Upload Tests', () => {
 
   it('should not upload new collection version when user does not have permissions', () => {
     cy.visit('/ui/repo/published/testspace');
+    cy.get('[data-cy="CollectionList-name"]').contains('testcollection');
     cy.contains('Upload new version').should('not.exist');
   });
 
