@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import React from 'react';
 import { Flex, FlexItem, Label, Divider } from '@patternfly/react-core';
 
@@ -24,41 +25,40 @@ const splitByDot = (perm: string) => {
   );
 };
 
-const PreviewRoles = ({ group, selectedRoles }: Props) =>
-  Object.keys(selectedRoles).length <= 0 ? (
-    <div>No roles selected</div>
-  ) : (
-    <div className='hub-custom-wizard-layout'>
-      <p>
+const PreviewRoles = ({ group, selectedRoles }: Props) => (
+  <div className='hub-custom-wizard-layout'>
+    <p>
+      <Trans>
         The following roles will be applied to group:{' '}
         <strong>{group.name}</strong>
-      </p>
-      <Flex direction={{ default: 'column' }} className='hub-preview-roles'>
-        {selectedRoles.map((role) => (
-          <React.Fragment key={role.name}>
-            <FlexItem>
-              <strong>{role.name}</strong>{' '}
-              {role?.description && `- ${role?.description}`}
-              <Flex className='hub-permissions'>
-                {role.permissions.map((permission) => (
-                  <FlexItem key={permission} className='hub-permission'>
-                    <Tooltip
-                      content={
-                        Constants.HUMAN_PERMISSIONS[permission] || permission
-                      }
-                    >
-                      <Label>{splitByDot(permission)}</Label>
-                    </Tooltip>
-                  </FlexItem>
-                ))}
-              </Flex>
-            </FlexItem>
-            <FlexItem>
-              <Divider />
-            </FlexItem>
-          </React.Fragment>
-        ))}
-      </Flex>
-    </div>
-  );
+      </Trans>
+    </p>
+    <Flex direction={{ default: 'column' }} className='hub-preview-roles'>
+      {selectedRoles.map((role) => (
+        <React.Fragment key={role.name}>
+          <FlexItem>
+            <strong>{role.name}</strong>{' '}
+            {role?.description && `- ${role?.description}`}
+            <Flex className='hub-permissions'>
+              {role.permissions.map((permission) => (
+                <FlexItem key={permission} className='hub-permission'>
+                  <Tooltip
+                    content={
+                      Constants.HUMAN_PERMISSIONS[permission] || permission
+                    }
+                  >
+                    <Label>{splitByDot(permission)}</Label>
+                  </Tooltip>
+                </FlexItem>
+              ))}
+            </Flex>
+          </FlexItem>
+          <FlexItem>
+            <Divider />
+          </FlexItem>
+        </React.Fragment>
+      ))}
+    </Flex>
+  </div>
+);
 export default PreviewRoles;
