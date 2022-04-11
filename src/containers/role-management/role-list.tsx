@@ -88,6 +88,10 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       params['sort'] = '-pulp_created';
     }
 
+    if (!params['name__startswith']) {
+      params['name__startswith'] = 'galaxy.';
+    }
+
     this.state = {
       redirect: null,
       roles: [],
@@ -255,7 +259,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                       this.setState({ inputText: '' });
                     }}
                     params={params}
-                    ignoredParams={['page_size', 'page', 'sort', 'ordering']}
+                    ignoredParams={['page_size', 'page', 'sort', 'ordering', 'name__startswith']}
                     niceNames={{
                       name__icontains: t`Role name`,
                       locked: t`Locked?`,
