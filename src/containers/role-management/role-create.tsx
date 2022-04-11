@@ -19,6 +19,7 @@ import {
   TextInput,
   FormGroup,
   Title,
+  Divider,
 } from '@patternfly/react-core';
 
 import {
@@ -98,55 +99,63 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
           <Main>
             <section className='body'>
               <div>
-                <div style={{ paddingBottom: '8px', paddingTop: '16px' }}>
-                  <Title headingLevel='h2'>Details</Title>
+                <div style={{ paddingBottom: '8px' }}>
+                  <Title headingLevel='h2'>{t`Details`}</Title>
                 </div>
-                <FormGroup
-                  isRequired={true}
-                  key='name'
-                  fieldId='name'
-                  label={t`Name`}
-                  helperTextInvalid={() => this.helperText(this.state.name)}
-                  validated={this.state.nameError ? 'error' : null}
-                >
-                  <TextInput
-                    id='role_name'
-                    value={this.state.name}
-                    onChange={(value) => {
-                      this.setState({ name: value, nameError: false });
-                    }}
-                    type='text'
-                    validated={this.state.nameError ? 'error' : null}
-                    placeholder='Role name'
-                  />
-                </FormGroup>
+                <Form>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <FormGroup
+                      isRequired={true}
+                      key='name'
+                      fieldId='name'
+                      label={t`Name`}
+                      style={{ width: '50%', float: 'left' }}
+                      helperTextInvalid={() => this.helperText(this.state.name)}
+                      validated={this.state.nameError ? 'error' : null}
+                    >
+                      <TextInput
+                        id='role_name'
+                        value={this.state.name}
+                        onChange={(value) => {
+                          this.setState({ name: value, nameError: false });
+                        }}
+                        type='text'
+                        validated={this.state.nameError ? 'error' : null}
+                        placeholder='Role name'
+                      />
+                    </FormGroup>
 
-                <FormGroup
-                  isRequired={true}
-                  key='description'
-                  fieldId='description'
-                  label={t`Description`}
-                  helperTextInvalid={() =>
-                    this.helperText(this.state.description)
-                  }
-                  validated={this.state.descriptionError ? 'error' : null}
-                >
-                  <TextInput
-                    id='role_description'
-                    value={this.state.description}
-                    onChange={(value) => {
-                      this.setState({ description: value });
-                    }}
-                    type='text'
-                    validated={this.state.descriptionError ? 'error' : null}
-                    placeholder='Add a role description here'
-                  />
-                </FormGroup>
+                    <FormGroup
+                      isRequired={true}
+                      style={{ width: '50%' }}
+                      key='description'
+                      fieldId='description'
+                      label={t`Description`}
+                      helperTextInvalid={() =>
+                        this.helperText(this.state.description)
+                      }
+                      validated={this.state.descriptionError ? 'error' : null}
+                    >
+                      <TextInput
+                        id='role_description'
+                        value={this.state.description}
+                        onChange={(value) => {
+                          this.setState({ description: value });
+                        }}
+                        type='text'
+                        validated={this.state.descriptionError ? 'error' : null}
+                        placeholder='Add a role description here'
+                      />
+                    </FormGroup>
+                  </div>
+                </Form>
               </div>
               <div>
-                <div style={{ paddingBottom: '8px', paddingTop: '16px' }}>
-                  <Title headingLevel='h2'>Permissions</Title>
-                </div>
+                <br />
+                <Divider />
+                <br />
+                <Title headingLevel='h2'>Permissions</Title>
+
                 {groups.map((group) => (
                   <Flex
                     style={{ marginTop: '16px' }}
