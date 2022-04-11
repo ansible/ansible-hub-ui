@@ -3,7 +3,12 @@ import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 import './role.scss';
 import { AppContext } from 'src/loaders/app-context';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import {
+  Link,
+  RouteComponentProps,
+  withRouter,
+  Redirect,
+} from 'react-router-dom';
 import {
   AlertType,
   Pagination,
@@ -84,6 +89,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     }
 
     this.state = {
+      redirect: null,
       roles: [],
       alerts: [],
       loading: true,
@@ -108,6 +114,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
 
   render() {
     const {
+      redirect,
       params,
       loading,
       roleCount,
@@ -126,6 +133,10 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
+
+    if (redirect) {
+      return <Redirect push to={redirect} />;
+    }
     if (featureFlags) {
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
@@ -371,7 +382,9 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                               kebabItems={this.renderDropdownItems(role)}
                             />
                           ) : (
-                            <td />
+                            <ListItemActions
+                              kebabItems={this.renderDropdownItems(role)}
+                            />
                           )}
                         </ExpandableRow>
                       ))}
@@ -426,9 +439,21 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
 
     const dropdownItems = [
       // this.context.user.model_permissions.change_containerregistry && (
-      <Link key='edit' to={formatPath(Paths.roleEdit, { role: roleID })}>
-        <DropdownItem key='edit'>{t`Edit`}</DropdownItem>
-      </Link>,
+
+      <Tooltip key='edit' content={t`Locked roles cannot be edited.`}>
+        <DropdownItem
+          key='edit'
+          isDisabled={locked}
+          onClick={() =>
+            this.setState({
+              redirect: formatPath(Paths.roleEdit, { role: roleID }),
+            })
+          }
+        >
+          {t`Edit`}
+        </DropdownItem>
+      </Tooltip>,
+
       // ),
       // this.context.user.model_permissions.delete_containerregistry && (
 

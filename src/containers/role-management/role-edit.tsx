@@ -42,6 +42,7 @@ import { RoleType } from 'src/api/response-types/role';
 
 interface IState {
   role: RoleType;
+
   params: {
     id: string;
   };
@@ -69,6 +70,7 @@ interface IState {
 }
 
 class EditRole extends React.Component<RouteComponentProps, IState> {
+  _isMounted = false;
   nonQueryStringParams = ['role'];
 
   constructor(props) {
@@ -103,6 +105,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     this.setState({ editPermissions: true });
     if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorised: true });
@@ -117,27 +120,20 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
           });
         })
         .catch((e) => {
-          const { status, statusText } = e.response;
+          // const { status, statusText } = e.response;
           this.setState({ redirect: Paths.notFound });
-          this.addAlert(
-            t`Role "${this.state.role.name}" could not be displayed.`,
-            'danger',
-            errorMessage(status, statusText),
-          );
+          // this.addAlert(
+          //   t`Role "${this.state.role.name}" could not be displayed.`,
+          //   'danger',
+          //   errorMessage(status, statusText),
+          // );
+          console.log('Error: ', e.response);
         });
-
-      this.setState({
-        permissions: [
-          'galaxy.add_namespace',
-          'galaxy.change_namespace',
-          'galaxy.delete_namespace',
-        ],
-        originalPermissions: [
-          'galaxy.add_namespace',
-          'galaxy.change_namespace',
-        ],
-      });
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
