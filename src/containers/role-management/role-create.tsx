@@ -106,7 +106,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                   key='name'
                   fieldId='name'
                   label={t`Name`}
-                  helperTextInvalid={t`Role name must be unique.`}
+                  helperTextInvalid={() => this.helperText(this.state.name)}
                   validated={this.state.nameError ? 'error' : null}
                 >
                   <TextInput
@@ -127,7 +127,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                   fieldId='description'
                   label={t`Description`}
                   helperTextInvalid={
-                    !this.state.roleError ? null : this.state.roleError.name
+                    () => this.helperText(this.state.description)
                   }
                   validated={this.state.descriptionError ? 'error' : null}
                 >
@@ -238,6 +238,8 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                     onClick={() => {
                       this.setState({
                         roleError: null,
+                        nameError: null,
+                        descriptionError: null,
                         redirect: Paths.roleList,
                       });
                     }}
