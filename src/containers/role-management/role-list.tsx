@@ -355,7 +355,17 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                             <DateComponent date={role.pulp_created} />
                           </td>
 
-                          <td>{role.locked ? 'Locked' : 'Unlocked'}</td>
+                          {role.locked ? (
+                            <Tooltip
+                              content={t`Locked roles cannot be edited or deleted.`}
+                            >
+                              <td>
+                                <Trans>Locked</Trans>
+                              </td>
+                            </Tooltip>
+                          ) : (
+                            <td>{t`Unlocked`}</td>
+                          )}
                           {!role.locked ? (
                             <ListItemActions
                               kebabItems={this.renderDropdownItems(role)}
