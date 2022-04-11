@@ -280,7 +280,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                           },
                           {
                             title: t`Created`,
-                            type: 'none',
+                            type: 'number',
                             id: 'pulp_created',
                           },
                           {
