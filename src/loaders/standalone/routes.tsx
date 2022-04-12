@@ -171,6 +171,7 @@ export class Routes extends React.Component<IRoutesProps> {
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
     return [
+      { comp: LegacyRoles, path: Paths.legacyRoles },
       {
         comp: ExecutionEnvironmentDetailActivities,
         path: Paths.executionEnvironmentDetailActivities,
@@ -248,7 +249,6 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: CollectionDetail, path: Paths.collection },
       { comp: NamespaceDetail, path: Paths.namespace },
       { comp: Search, path: Paths.search },
-      { comp: LegacyRoles, path: Paths.legacyRoles },
     ];
   }
 
