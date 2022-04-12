@@ -127,7 +127,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
             'danger',
             errorMessage(status, statusText),
           );
-          console.log('Error: ', e.response);
+        
         });
     }
   }
@@ -145,7 +145,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     const {
       permissions: selectedPermissions,
       description,
-      descriptionError,
       alerts,
       editPermissions,
       role,
@@ -238,13 +237,13 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
                       helperTextInvalid={this.helperText(description)}
                       validated={
                         this.state.descriptionError ||
-                        this.state.description.length > 150
+                        this.checkLength(this.state.description)
                           ? 'error'
                           : null
                       }
                     >
                       <TextInput
-                        id='role_name'
+                        id='role_description'
                         value={this.state.description}
                         onChange={(value) => {
                           this.setState({ description: value });
@@ -252,7 +251,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
                         type='text'
                         validated={
                           this.state.descriptionError ||
-                          this.state.description.length > 150
+                          this.checkLength(this.state.description)
                             ? 'error'
                             : null
                         }
@@ -341,11 +340,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
                 <ActionGroup>
                   <Button
                     variant='primary'
-                    // isDisabled={
-                    //   descriptionError
-                    //   ||
-                    //   this.checkLength(this.state.description)
-                    // }
+                    isDisabled={this.checkLength(this.state.description)}
                     onClick={() => {
                       this.saveRole();
                     }}
@@ -373,7 +368,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
   }
 
   private checkLength = (input) => {
-    if (input.toString().length > 128) {
+    if (input.toString().length > 128 || input.toString().length === 0) {
       return true;
     } else {
       return false;
@@ -413,8 +408,9 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     RoleAPI.updatePermissions(roleID, { name, description, permissions })
       .then(() => this.setState({ redirect: Paths.roleList }))
       .catch((err) => {
-        err.response.status === 400;
-        this.setState({ descriptionError: true });
+        if (err.response.status === 400) {
+          this.setState({ descriptionError: true });
+        }
       });
   };
 

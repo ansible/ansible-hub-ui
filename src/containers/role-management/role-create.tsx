@@ -37,7 +37,7 @@ import { RoleAPI } from 'src/api/role';
 
 interface IState {
   saving: boolean;
-  errorMessages: ErrorMessagesType;
+  errorMessages: any;
   redirect?: string;
   permissions: string[];
   name: string;
@@ -49,6 +49,7 @@ interface IState {
 }
 
 class RoleCreate extends React.Component<RouteComponentProps, IState> {
+  _isMounted = false;
   constructor(props) {
     super(props);
 
@@ -65,18 +66,29 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     };
   }
 
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   render() {
     if (this.state.redirect) {
       return <Redirect push to={this.state.redirect} />;
     }
-    const { nameError, descriptionError } = this.state;
-    const groups = Constants.PERMISSIONS;
     const {
+      nameError,
+      descriptionError,
+      errorMessages,
+      description,
       permissions: selectedPermissions,
       name,
-      errorMessages,
+
       saving,
     } = this.state;
+    const groups = Constants.PERMISSIONS;
 
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
@@ -122,17 +134,30 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                       fieldId='name'
                       label={t`Name`}
                       style={{ width: '50%', float: 'left' }}
-                      helperTextInvalid={() => this.helperText(this.state.name)}
-                      validated={this.state.nameError ? 'error' : null}
+                      helperTextInvalid={
+                        errorMessages['name'] || this.helperText(name)
+                      }
+                      validated={
+                        this.toError(!('name' in errorMessages)) ||
+                        this.checkLength(this.state.name)
+                          ? 'error'
+                          : null
+                      }
                     >
                       <TextInput
                         id='role_name'
                         value={this.state.name}
                         onChange={(value) => {
-                          this.setState({ name: value, nameError: false });
+                          this.setState({ name: value, errorMessages: {} });
+
                         }}
                         type='text'
-                        validated={this.state.nameError ? 'error' : null}
+                        validated={
+                          this.toError(!('name' in errorMessages)) ||
+                          this.checkLength(this.state.name)
+                            ? 'error'
+                            : null
+                        }
                         placeholder='Role name'
                       />
                     </FormGroup>
@@ -143,17 +168,33 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                       key='description'
                       fieldId='description'
                       label={t`Description`}
-                      helperTextInvalid={errorMessages['description']}
-                      validated={this.toError(!('company' in errorMessages))}
+                      helperTextInvalid={
+                        this.helperText(description) ||
+                        errorMessages['description']
+                      }
+                      validated={
+                        this.toError(!('description' in errorMessages)) &&
+                        this.checkLength(this.state.description)
+                          ? 'error'
+                          : null
+                      }
                     >
                       <TextInput
                         id='role_description'
                         value={this.state.description}
                         onChange={(value) => {
-                          this.setState({ description: value });
+                          this.setState({
+                            description: value,
+                            errorMessages: {},
+                          });
                         }}
                         type='text'
-                        validated={this.toError(!('company' in errorMessages))}
+                        validated={
+                          this.toError(!('description' in errorMessages)) &&
+                          this.checkLength(this.state.description)
+                            ? 'error'
+                            : null
+                        }
                         placeholder='Add a role description here'
                       />
                     </FormGroup>
@@ -247,6 +288,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                     }
                     onClick={() => {
                       this.saveRole();
+
                     }}
                   >
                     {t`Save`}
@@ -272,20 +314,27 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
       </React.Fragment>
     );
   }
+
   private saveRole = () => {
     this.setState({ saving: true }, () => {
-      const { name, permissions, description } = this.state;
+      const { name, permissions, description, errorMessages } = this.state;
       RoleAPI.create({ name, description, permissions })
         .then(() =>
-          this.setState({ redirect: Paths.roleList, errorMessages: {} }),
+          this.setState({ redirect: Paths.roleList, errorMessages: null }),
         )
         .catch((err) => {
           const { status, statusText } = err.response;
+
           if (status === 400) {
-            this.setState({
-              errorMessages: mapErrorMessages(err),
-              saving: false,
-            });
+            const messages = this.mapErrors(err);
+
+            this.setState(
+              {
+                errorMessages: messages,
+                saving: false,
+              },
+              () => console.log('errorMEssages: ', this.state.errorMessages),
+            );
           } else if (status === 404) {
             this.setState({
               alerts: this.state.alerts.concat({
@@ -300,6 +349,19 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     });
   };
 
+  private mapErrors = (err) => {
+    const messages = {};
+    if (err.response.data.name) {
+      messages['name'] = err.response.data.name[0];
+    } else if (err.response.data.description !== undefined) {
+      messages['description'] = err.response.data.description[0];
+    }
+    console.log('messages: ', messages);
+    return messages;
+  };
+
+
+
   private checkLength = (input) => {
     if (input.toString().length === 0 || input.toString().length > 128) {
       return true;
@@ -313,7 +375,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     if (input === '') {
       text = t`This field may not be blank.`;
     } else if (input.toString().length > 128) {
-      text = t`Ensure this field has no more than 150 characters.`;
+      text = t`Ensure this field has no more than 128 characters.`;
     } else {
       text = null;
     }
