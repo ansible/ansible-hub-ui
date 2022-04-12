@@ -46,8 +46,7 @@ export class LegacyRoleList extends React.Component<IProps> {
 
     return (
       <React.Fragment>
-        <DataList aria-label={t`List of Roles`}>
-        </DataList>
+        <DataList aria-label={t`List of Roles`}></DataList>
         <Pagination
           params={params}
           updateParams={(p) => updateParams(p)}

@@ -22,7 +22,6 @@ import { AppContext } from 'src/loaders/app-context';
 //import { filterIsSet } from 'src/utilities';
 //import { Paths } from 'src/paths';
 
-
 interface IState {
   //Roles: LegacyRoleListType[];
   numberOfResults: number;
@@ -36,23 +35,21 @@ interface IState {
   loading: boolean;
 }
 
-
 //class LegacyRoles extends React.Component<RouteComponentProps, IState> {
 class LegacyRoles extends React.Component {
-
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     return (
-        <div><h1>ROLES</h1></div>
+      <div>
+        <h1>ROLES</h1>
+      </div>
     );
   }
-
 }
 
 export default withRouter(LegacyRoles);

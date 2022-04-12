@@ -452,7 +452,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       path: Paths.searchByRepo,
     });
     console.log('isRepoUrl', location, matched);
-    return matched
+    return matched;
   }
 
   private ctx(component) {
