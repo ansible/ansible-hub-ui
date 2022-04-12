@@ -9,6 +9,7 @@ import {
   CollectionImportLog,
   CollectionDependencies,
   EditNamespace,
+  LegacyRoles,
   LoginPage,
   MyImports,
   NamespaceDetail,
@@ -247,6 +248,7 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: CollectionDetail, path: Paths.collection },
       { comp: NamespaceDetail, path: Paths.namespace },
       { comp: Search, path: Paths.search },
+      { comp: LegacyRoles, path: Paths.legacyRoles },
     ];
   }
 

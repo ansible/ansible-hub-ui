@@ -59,3 +59,4 @@ export { GenericPulpAPI } from './generic-pulp';
 export { SettingsAPI } from './settings';
 export { SettingsType } from './response-types/settings';
 export { SignCollectionAPI } from './sign-collections';
+export { LegacyRoleListType } from './response-types/legacy-role';

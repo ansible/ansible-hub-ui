@@ -38,6 +38,7 @@ export enum Paths {
   search = '/',
   searchByRepo = '/repo/:repo',
   myCollectionsByRepo = '/repo/:repo/my-namespaces/:namespace',
+  legacyRoles = '/legacyroles',
   collectionByRepo = '/repo/:repo/:namespace/:collection',
   collectionDocsPage = '/:namespace/:collection/docs/:page',
   collectionDocsIndex = '/:namespace/:collection/docs',

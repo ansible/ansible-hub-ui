@@ -366,6 +366,12 @@ class App extends React.Component<RouteComponentProps, IState> {
           url: Paths.approvalDashboard,
         }),
       ]),
+      menuSection(t`Legacy Roles`, {}, [
+        menuItem(t`Roles`, {
+          url: Paths.legacyRoles,
+          condition: ({ user }) => !user.is_anonymous,
+        }),
+      ]),
       menuSection(
         t`Execution Environments`,
         {
@@ -433,6 +439,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   private setRepoToURL() {
     const match = this.isRepoURL(this.props.location.pathname);
+    console.log('setRepoToUrl', this.props.location.pathname, match);
     if (match) {
       if (match.params['repo'] !== this.state.selectedRepo) {
         this.setState({ selectedRepo: match.params['repo'] });
@@ -441,12 +448,23 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private isRepoURL(location) {
-    return matchPath(location, {
+    const matched = matchPath(location, {
       path: Paths.searchByRepo,
     });
+    console.log('isRepoUrl', location, matched);
+    return matched
   }
 
   private ctx(component) {
+    console.log('ctx', 'component', component);
+    //console.log('ctx', 'this.state.user', this.state.user);
+    //console.log('ctx', 'this.setUser', this.setUser);
+    console.log('ctx', 'this.setRepo', this.setRepo);
+    console.log('ctx', 'this.state.selectedRepo', this.state.selectedRepo);
+    console.log('ctx', 'this.state.featureFlags', this.state.featureFlags);
+    console.log('ctx', 'this.state.alerts', this.state.alerts);
+    //console.log('ctx', 'this.state.settings', this.state.settings);
+
     return (
       <AppContext.Provider
         value={{
