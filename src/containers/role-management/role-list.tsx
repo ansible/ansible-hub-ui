@@ -266,9 +266,12 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                       'ordering',
                       'name__startswith',
                     ]}
+                    niceValues={{
+                      locked: { true: t`Locked`, false: t`Unlocked` },
+                    }}
                     niceNames={{
                       name__icontains: t`Role name`,
-                      locked: t`Locked?`,
+                      locked: t`Status`,
                     }}
                   />
                 </div>

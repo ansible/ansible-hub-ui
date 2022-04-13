@@ -25,64 +25,46 @@ import {
   Spinner,
 } from '@patternfly/react-core';
 
-import {
-  twoWayMapper,
-
-  ErrorMessagesType,
-  errorMessage,
-} from 'src/utilities';
+import { twoWayMapper, errorMessage } from 'src/utilities';
 import { Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 import { Constants } from 'src/constants';
 import { RoleAPI } from 'src/api/role';
 
 interface IState {
-  isNameValid: boolean;
-  isDescriptionValid: boolean;
   saving: boolean;
-  errorMessages: any;
+  errorMessages: { string?: string };
   redirect?: string;
   permissions: string[];
   name: string;
   description: string;
-  roleError: ErrorMessagesType;
-  nameError: boolean;
-  descriptionError: boolean;
+
   alerts: AlertType[];
 }
 
 class RoleCreate extends React.Component<RouteComponentProps, IState> {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      isNameValid: true,
-      isDescriptionValid: true,
       saving: false,
-      nameError: false,
+
       errorMessages: {},
       permissions: [],
       name: '',
       description: '',
-      roleError: null,
-      descriptionError: false,
+
       alerts: [],
     };
   }
-
-
-
 
   render() {
     if (this.state.redirect) {
       return <Redirect push to={this.state.redirect} />;
     }
     const {
-      nameError,
-      descriptionError,
       errorMessages,
-      description,
+
       permissions: selectedPermissions,
       name,
 
@@ -275,9 +257,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                     variant='secondary'
                     onClick={() => {
                       this.setState({
-                        roleError: null,
-                        nameError: null,
-                        descriptionError: null,
+                        errorMessages: {},
                         redirect: Paths.roleList,
                       });
                     }}
@@ -294,7 +274,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
 
   private saveRole = () => {
     this.setState({ saving: true }, () => {
-      const { name, permissions, description, errorMessages } = this.state;
+      const { name, permissions, description } = this.state;
       RoleAPI.create({ name, description, permissions })
         .then(() =>
           this.setState({ redirect: Paths.roleList, errorMessages: null }),
@@ -350,11 +330,11 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
       error[field] = t`This field may not be blank.`;
     } else if (input.toString().length > 128) {
       error[field] = t`Ensure this field has no more than 128 characters.`;
-    } else if ((field === 'name') && (!/^[ a-zA-Z0-9_.]+$/.test(input))) {
+    } else if (field === 'name' && !/^[ a-zA-Z0-9_.]+$/.test(input)) {
       error[field] = t`This field can only contain letters and numbers`;
     } else if (input.length <= 2) {
       error[field] = t`This field must be longer than 2 characters`;
-    } else if ((field === 'name') && (!input.startsWith('galaxy.'))) {
+    } else if (field === 'name' && !input.startsWith('galaxy.')) {
       error[field] = t`This field must start with 'galaxy.'.`;
     } else {
       delete error[field];
