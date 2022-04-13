@@ -127,7 +127,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
             'danger',
             errorMessage(status, statusText),
           );
-        
         });
     }
   }

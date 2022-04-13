@@ -18,6 +18,7 @@ import {
   FlexItem,
   Form,
   TextInput,
+  InputGroup,
   FormGroup,
   Title,
   Divider,
@@ -26,7 +27,7 @@ import {
 
 import {
   twoWayMapper,
-  mapErrorMessages,
+
   ErrorMessagesType,
   errorMessage,
 } from 'src/utilities';
@@ -36,6 +37,8 @@ import { Constants } from 'src/constants';
 import { RoleAPI } from 'src/api/role';
 
 interface IState {
+  isNameValid: boolean;
+  isDescriptionValid: boolean;
   saving: boolean;
   errorMessages: any;
   redirect?: string;
@@ -49,11 +52,13 @@ interface IState {
 }
 
 class RoleCreate extends React.Component<RouteComponentProps, IState> {
-  _isMounted = false;
+
   constructor(props) {
     super(props);
 
     this.state = {
+      isNameValid: true,
+      isDescriptionValid: true,
       saving: false,
       nameError: false,
       errorMessages: {},
@@ -66,13 +71,8 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     };
   }
 
-  componentDidMount() {
-    this._isMounted = true;
-  }
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+
 
   render() {
     if (this.state.redirect) {
@@ -134,32 +134,24 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                       fieldId='name'
                       label={t`Name`}
                       style={{ width: '50%', float: 'left' }}
-                      helperTextInvalid={
-                        errorMessages['name'] || this.helperText(name)
-                      }
-                      validated={
-                        this.toError(!('name' in errorMessages)) ||
-                        this.checkLength(this.state.name)
-                          ? 'error'
-                          : null
-                      }
+                      helperTextInvalid={this.state.errorMessages['name']}
+                      validated={errorMessages['name'] ? 'error' : null}
                     >
-                      <TextInput
-                        id='role_name'
-                        value={this.state.name}
-                        onChange={(value) => {
-                          this.setState({ name: value, errorMessages: {} });
-
-                        }}
-                        type='text'
-                        validated={
-                          this.toError(!('name' in errorMessages)) ||
-                          this.checkLength(this.state.name)
-                            ? 'error'
-                            : null
-                        }
-                        placeholder='Role name'
-                      />
+                      <InputGroup>
+                        <TextInput
+                          id='role_name'
+                          value={name}
+                          onChange={(value) => {
+                            this.setState({ name: value }, () => {
+                              this.validateInput(value, 'name');
+                              console.log('errorsobject: ', errorMessages);
+                            });
+                          }}
+                          type='text'
+                          validated={errorMessages['name'] ? 'error' : null}
+                          placeholder='Role name'
+                        />
+                      </InputGroup>
                     </FormGroup>
 
                     <FormGroup
@@ -169,31 +161,21 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                       fieldId='description'
                       label={t`Description`}
                       helperTextInvalid={
-                        this.helperText(description) ||
-                        errorMessages['description']
+                        this.state.errorMessages['description']
                       }
-                      validated={
-                        this.toError(!('description' in errorMessages)) &&
-                        this.checkLength(this.state.description)
-                          ? 'error'
-                          : null
-                      }
+                      validated={errorMessages['description'] ? 'error' : null}
                     >
                       <TextInput
                         id='role_description'
                         value={this.state.description}
                         onChange={(value) => {
-                          this.setState({
-                            description: value,
-                            errorMessages: {},
+                          this.setState({ description: value }, () => {
+                            this.validateInput(value, 'description');
                           });
                         }}
                         type='text'
                         validated={
-                          this.toError(!('description' in errorMessages)) &&
-                          this.checkLength(this.state.description)
-                            ? 'error'
-                            : null
+                          errorMessages['description'] ? 'error' : null
                         }
                         placeholder='Add a role description here'
                       />
@@ -280,15 +262,10 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                   <Button
                     variant='primary'
                     isDisabled={
-                      !name ||
-                      descriptionError ||
-                      nameError ||
-                      this.checkLength(this.state.description) ||
-                      this.checkLength(this.state.name)
+                      'description' in errorMessages || 'name' in errorMessages
                     }
                     onClick={() => {
                       this.saveRole();
-
                     }}
                   >
                     {t`Save`}
@@ -326,17 +303,14 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
           const { status, statusText } = err.response;
 
           if (status === 400) {
-            const messages = this.mapErrors(err);
+            this.mapErrors(err);
 
-            this.setState(
-              {
-                errorMessages: messages,
-                saving: false,
-              },
-              () => console.log('errorMEssages: ', this.state.errorMessages),
-            );
+            this.setState({
+              saving: false,
+            });
           } else if (status === 404) {
             this.setState({
+              errorMessages: {},
               alerts: this.state.alerts.concat({
                 variant: 'danger',
                 title: t`Changes to role "${this.state.name}" could not be saved.`,
@@ -350,17 +324,17 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
   };
 
   private mapErrors = (err) => {
-    const messages = {};
+    const errors = this.state.errorMessages;
+
     if (err.response.data.name) {
-      messages['name'] = err.response.data.name[0];
+      errors['name'] = err.response.data.name[0];
     } else if (err.response.data.description !== undefined) {
-      messages['description'] = err.response.data.description[0];
+      errors['description'] = err.response.data.description[0];
+    } else {
+      delete errors['name'];
+      delete errors['description'];
     }
-    console.log('messages: ', messages);
-    return messages;
   };
-
-
 
   private checkLength = (input) => {
     if (input.toString().length === 0 || input.toString().length > 128) {
@@ -370,16 +344,31 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
     }
   };
 
-  private helperText = (input) => {
-    let text = null;
+  private validateInput = (input, field) => {
+    const error = this.state.errorMessages;
     if (input === '') {
-      text = t`This field may not be blank.`;
+      error[field] = t`This field may not be blank.`;
     } else if (input.toString().length > 128) {
-      text = t`Ensure this field has no more than 128 characters.`;
+      error[field] = t`Ensure this field has no more than 128 characters.`;
+    } else if ((field === 'name') && (!/^[ a-zA-Z0-9_.]+$/.test(input))) {
+      error[field] = t`This field can only contain letters and numbers`;
+    } else if (input.length <= 2) {
+      error[field] = t`This field must be longer than 2 characters`;
+    } else if ((field === 'name') && (!input.startsWith('galaxy.'))) {
+      error[field] = t`This field must start with 'galaxy.'.`;
     } else {
-      text = null;
+      delete error[field];
     }
-    return text;
+    // if (field === 'name') {
+    //   this.setState({
+    //     isNameValid: !('name' in error),
+    //     errorMessages: error,
+    //   });
+    // } else if (field === 'description') {
+    //   this.setState({
+    //     isDescriptionValid: !('description' in error),
+    //   });
+    // }
   };
 
   private toError(validated: boolean) {
