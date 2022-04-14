@@ -27,7 +27,13 @@ import {
   CheckCircleIcon,
 } from '@patternfly/react-icons';
 
-import { CollectionVersionAPI, CollectionVersion, TaskAPI } from 'src/api';
+import {
+  CollectionVersionAPI,
+  CollectionVersion,
+  TaskAPI,
+  CertificateUploadAPI,
+  Repositories,
+} from 'src/api';
 import { errorMessage, filterIsSet, ParamHelper } from 'src/utilities';
 import {
   LoadingPageWithHeader,
@@ -39,6 +45,7 @@ import {
   closeAlertMixin,
   AlertType,
   SortTable,
+  UploadSingCertificateModal,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { Constants } from 'src/constants';
@@ -59,6 +66,8 @@ interface IState {
   updatingVersions: CollectionVersion[];
   unauthorized: boolean;
   inputText: string;
+  uploadCertificateModalOpen: boolean;
+  versionToUploadCertificate: CollectionVersion;
 }
 
 class CertificationDashboard extends React.Component<
@@ -94,6 +103,8 @@ class CertificationDashboard extends React.Component<
       alerts: [],
       unauthorized: false,
       inputText: '',
+      uploadCertificateModalOpen: false,
+      versionToUploadCertificate: undefined,
     };
   }
 
@@ -220,6 +231,11 @@ class CertificationDashboard extends React.Component<
                 />
               </div>
             </section>
+            <UploadSingCertificateModal
+              isOpen={this.state.uploadCertificateModalOpen}
+              onCancel={this.closeUploadCertificateModal}
+              onSubmit={(d) => this.submitCertificate(d, this)}
+            />
           </Main>
         )}
       </React.Fragment>
@@ -319,7 +335,7 @@ class CertificationDashboard extends React.Component<
           icon={<ExclamationTriangleIcon />}
         >
           {version.sign_state === 'unsigned' &&
-          (this.context.settings.GALAXY_REQUIRE_SIGNATURE_FOR_APPROVAL ?? true)
+          this.context.settings.GALAXY_REQUIRE_SIGNATURE_FOR_APPROVAL
             ? t`Needs signature and review`
             : t`Needs review`}
         </Label>
@@ -368,9 +384,20 @@ class CertificationDashboard extends React.Component<
       return <ListItemActions />; // empty td;
     }
 
+    const needUploadSignature =
+      (this.context.settings.GALAXY_REQUIRE_SIGNATURE_FOR_APPROVAL ?? true) &&
+      version.sign_state === 'unsigned';
     const approveButton = [
+      needUploadSignature && (
+        <React.Fragment key='upload'>
+          <Button onClick={() => this.openUploadCertificateModal(version)}>
+            {t`Upload signature`}
+          </Button>{' '}
+        </React.Fragment>
+      ),
       <Button
         key='approve'
+        isDisabled={needUploadSignature}
         onClick={() =>
           this.updateCertification(
             version,
@@ -379,9 +406,10 @@ class CertificationDashboard extends React.Component<
           )
         }
       >
-        <span>{canSign ? t`Sign and approve` : t`Approve`}</span>
+        {canSign ? t`Sign and approve` : t`Approve`}
       </Button>,
-    ];
+    ].filter(Boolean);
+
     const importsLink = (
       <DropdownItem
         key='imports'
@@ -465,6 +493,59 @@ class CertificationDashboard extends React.Component<
         />
       );
     }
+  }
+
+  private openUploadCertificateModal(version: CollectionVersion) {
+    this.setState({
+      uploadCertificateModalOpen: true,
+      versionToUploadCertificate: version,
+    });
+  }
+
+  private async submitCertificate(file: string, that) {
+    const version = that.state.versionToUploadCertificate;
+    const repository = await Repositories.getRepository({
+      name: that.context.selectedRepo,
+    }).pulp_href;
+    const signed_collection = `/pulp/api/v3/content/ansible/collection_versions/${version.id}`;
+
+    CertificateUploadAPI.upload({
+      file: {
+        name: file,
+        type: 'text/plain',
+      },
+      repository,
+      signed_collection,
+    })
+      .then(() =>
+        that.addAlert(
+          <Trans>
+            Certificate for collection &quot;{version.namespace} {version.name}{' '}
+            v{version.version}&quot; has been successfully uploaded.
+          </Trans>,
+          'success',
+        ),
+      )
+      .catch((error) => {
+        const { status, statusText } = error.response;
+        that.setState({
+          alerts: that.state.alerts.concat({
+            variant: 'danger',
+            title: t`The certificate for "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+            description: errorMessage(status, statusText),
+          }),
+        });
+      })
+      .finally(() => {
+        that.closeUploadCertificateModal();
+      });
+  }
+
+  private closeUploadCertificateModal() {
+    this.setState({
+      uploadCertificateModalOpen: false,
+      versionToUploadCertificate: undefined,
+    });
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {

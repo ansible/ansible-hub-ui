@@ -66,6 +66,7 @@ export {
   SignSingleCertificateModal,
   SignAllCertificatesModal,
   SignatureBadge,
+  UploadSingCertificateModal,
 } from './signing';
 export { SortTable } from './sort-table/sort-table';
 export { StatefulDropdown } from './patternfly-wrappers/stateful-dropdown';
