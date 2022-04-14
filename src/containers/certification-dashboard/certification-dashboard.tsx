@@ -318,7 +318,10 @@ class CertificationDashboard extends React.Component<
           color='orange'
           icon={<ExclamationTriangleIcon />}
         >
-          {t`Needs Review`}
+          {version.sign_state === 'unsigned' &&
+          (this.context.settings.GALAXY_REQUIRE_SIGNATURE_FOR_APPROVAL ?? true)
+            ? t`Needs signature and review`
+            : t`Needs review`}
         </Label>
       );
     }
