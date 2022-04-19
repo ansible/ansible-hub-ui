@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 
 interface Props {
   isOpen: boolean;
-  onSubmit: (path: string) => void;
+  onSubmit: (file: File) => void;
   onCancel: () => void;
 }
 
@@ -20,11 +20,11 @@ export const UploadSingCertificateModal: React.FC<Props> = ({
   onCancel,
 }) => {
   const [filename, setFilename] = useState('');
-  const [path, setPath] = useState('');
+  const [path, setPath] = useState<File | null>(null);
 
-  const handleFileInputChange = (_e, file) => {
+  const handleFileInputChange = (e, file) => {
     setFilename(file.name);
-    setPath(file.path);
+    setPath(file);
   };
 
   return (
@@ -40,7 +40,7 @@ export const UploadSingCertificateModal: React.FC<Props> = ({
           onClick={() => {
             onSubmit(path);
             setFilename('');
-            setPath('');
+            setPath(null);
           }}
         >
           {t`Upload`}

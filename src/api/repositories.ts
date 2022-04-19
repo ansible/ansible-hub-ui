@@ -5,10 +5,19 @@ interface GetRepository {
   name: string;
 }
 
+interface ReturnRepository {
+  data: {
+    count: number;
+    next: string;
+    previous: string;
+    results: Repository[];
+  };
+}
+
 class API extends PulpAPI {
   apiPath = '/repositories/ansible/ansible/';
 
-  getRepository(data: GetRepository): Repository {
+  getRepository(data: GetRepository): Promise<ReturnRepository> {
     return this.http.get(`${this.apiPath}?name=${data.name}`);
   }
 }

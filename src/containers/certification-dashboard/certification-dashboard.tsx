@@ -233,8 +233,8 @@ class CertificationDashboard extends React.Component<
             </section>
             <UploadSingCertificateModal
               isOpen={this.state.uploadCertificateModalOpen}
-              onCancel={this.closeUploadCertificateModal}
-              onSubmit={(d) => this.submitCertificate(d, this)}
+              onCancel={() => this.closeUploadCertificateModal()}
+              onSubmit={(d) => this.submitCertificate(d)}
             />
           </Main>
         )}
@@ -502,34 +502,37 @@ class CertificationDashboard extends React.Component<
     });
   }
 
-  private async submitCertificate(file: string, that) {
-    const version = that.state.versionToUploadCertificate;
-    const repository = await Repositories.getRepository({
-      name: that.context.selectedRepo,
-    }).pulp_href;
-    const signed_collection = `/pulp/api/v3/content/ansible/collection_versions/${version.id}`;
+  private async submitCertificate(file: File) {
+    const version = this.state.versionToUploadCertificate;
+    const response = await Repositories.getRepository({
+      name: 'staging',
+    });
+    const signed_collection = `${PULP_API_BASE_PATH}content/ansible/collection_versions/${version.id}/`;
 
     CertificateUploadAPI.upload({
-      file: {
-        name: file,
-        type: 'text/plain',
-      },
-      repository,
+      file,
+      repository: response.data.results[0].pulp_href,
       signed_collection,
     })
-      .then(() =>
-        that.addAlert(
+      .then((result) => {
+        // This is a hack because it task return the full task api path:
+        // eg.: /api/automation-hub/pulp/api/v3/tasks/0be64cb4-3b7e-4a6b-b35d-c3b589923a90/
+        this.waitForUpdate(
+          result.data.task.slice(0, -1).split('/').pop(),
+          version,
+        );
+        this.addAlert(
           <Trans>
             Certificate for collection &quot;{version.namespace} {version.name}{' '}
             v{version.version}&quot; has been successfully uploaded.
           </Trans>,
           'success',
-        ),
-      )
+        );
+      })
       .catch((error) => {
         const { status, statusText } = error.response;
-        that.setState({
-          alerts: that.state.alerts.concat({
+        this.setState({
+          alerts: this.state.alerts.concat({
             variant: 'danger',
             title: t`The certificate for "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
             description: errorMessage(status, statusText),
@@ -537,7 +540,7 @@ class CertificationDashboard extends React.Component<
         });
       })
       .finally(() => {
-        that.closeUploadCertificateModal();
+        this.closeUploadCertificateModal();
       });
   }
 
