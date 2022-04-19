@@ -11,7 +11,7 @@ interface IProps {
 export class Tag extends React.Component<IProps> {
   render() {
     return (
-      <Label className='hub-c-label-tag' readOnly>
+      <Label className='hub-c-label-tag' readOnly data-cy='tag'>
         {this.props.children}
       </Label>
     );
