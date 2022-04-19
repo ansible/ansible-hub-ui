@@ -2,7 +2,6 @@
 // This will tell typescript that anything from this module is of type any.
 
 declare module '@redhat-cloud-services/frontend-components';
-declare module 'axios-mock-adapter';
 declare module 'react-markdown';
 declare module 'react-router-hash-link';
 declare module 'file-saver';
