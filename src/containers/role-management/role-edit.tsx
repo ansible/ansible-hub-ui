@@ -1,13 +1,13 @@
-import { t, Trans } from '@lingui/macro';
-import { i18n } from '@lingui/core';
+import { t } from '@lingui/macro';
+// import { i18n } from '@lingui/core';
 
 import * as React from 'react';
 import {
   parsePulpIDFromURL,
   errorMessage,
   ErrorMessagesType,
-  twoWayMapper,
 } from 'src/utilities';
+
 import { RoleAPI } from 'src/api/role';
 
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
@@ -15,47 +15,33 @@ import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import {
   AlertList,
   AlertType,
-  BaseHeader,
-  Breadcrumbs,
   closeAlertMixin,
   EmptyStateUnauthorized,
   LoadingPageWithHeader,
   Main,
-  PermissionChipSelector,
+  RoleForm,
+  RoleHeader,
 } from 'src/components';
 
 import { Paths } from 'src/paths';
-import {
-  ActionGroup,
-  Button,
-  Flex,
-  FlexItem,
-  Form,
-  Title,
-  FormGroup,
-  TextInput,
-  Divider,
-} from '@patternfly/react-core';
+
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { RoleType } from 'src/api/response-types/role';
 
 interface IState {
   role: RoleType;
-
   params: {
     id: string;
   };
-
   itemCount: number;
   alerts: AlertType[];
-
   options: { id: number; name: string }[];
   selected: { id: number; name: string }[];
   editPermissions: boolean;
-  savingPermissions: boolean;
-  showDeleteModal: boolean;
 
+  showDeleteModal: boolean;
+  saving: boolean;
   permissions: string[];
   originalPermissions: string[];
   redirect?: string;
@@ -65,12 +51,10 @@ interface IState {
   description: string;
   roleError: ErrorMessagesType;
   nameError: boolean;
-  descriptionError: boolean;
-  descriptionMessage: string;
+  errorMessages: { [key: string]: string };
 }
 
 class EditRole extends React.Component<RouteComponentProps, IState> {
-  _isMounted = false;
   nonQueryStringParams = ['role'];
 
   constructor(props) {
@@ -90,7 +74,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
       options: undefined,
       selected: [],
       editPermissions: false,
-      savingPermissions: false,
       showDeleteModal: false,
       nameError: false,
       permissions: [],
@@ -99,13 +82,12 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
       inputText: '',
       name: null,
       description: null,
-      descriptionError: false,
-      descriptionMessage: null,
+      errorMessages: {},
+      saving: false,
     };
   }
 
   componentDidMount() {
-    this._isMounted = true;
     this.setState({ editPermissions: true });
     if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorised: true });
@@ -116,7 +98,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
             role: result.data,
             description: result.data.description,
             name: result.data.name,
-            permissions: result.data.permissions,
+            originalPermissions: result.data.permissions,
           });
         })
         .catch((e) => {
@@ -131,23 +113,21 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     }
   }
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
   render() {
     if (this.state.redirect) {
       return <Redirect push to={this.state.redirect} />;
     }
 
-    const groups = Constants.PERMISSIONS;
     const {
-      permissions: selectedPermissions,
+      name,
+
       description,
       alerts,
       editPermissions,
       role,
+      errorMessages,
       unauthorised,
+      saving,
     } = this.state;
 
     const { featureFlags } = this.context;
@@ -172,12 +152,15 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
         ></AlertList>
       );
     }
-    if (unauthorised) {
-      return <EmptyStateUnauthorized />;
-    }
+
     if (!role) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
+
+    const breadcrumbs = [
+      { url: Paths.roleList, name: t`Roles` },
+      { name: role.name },
+    ];
 
     return (
       <React.Fragment>
@@ -185,180 +168,38 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
           alerts={alerts}
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
-
-        <BaseHeader
+        <RoleHeader
           title={editPermissions ? t`Edit role permissions` : role.name}
-          breadcrumbs={
-            <Breadcrumbs
-              links={[
-                { url: Paths.roleList, name: t`Roles` },
-                { name: role.name },
-              ]}
-            />
-          }
-        >
-          <div style={{ paddingBottom: '10px' }}>
-            <Trans>{role.description}</Trans>
-          </div>
-        </BaseHeader>
+          subTitle={role.description}
+          breadcrumbs={breadcrumbs}
+        />
         {unauthorised ? (
           <EmptyStateUnauthorized />
         ) : (
           <Main>
             <section className='body'>
-              <div>
-                <div style={{ paddingBottom: '8px' }}>
-                  <Title headingLevel='h2'>{t`Details`}</Title>
-                </div>
-
-                <Form>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <FormGroup
-                      fieldId='name'
-                      label={t`Role name`}
-                      isRequired
-                      style={{ width: '50%', float: 'left' }}
-                    >
-                      <TextInput
-                        isRequired
-                        isDisabled
-                        id='name'
-                        type='text'
-                        value={this.state.name}
-                      />
-                    </FormGroup>
-                    <FormGroup
-                      style={{ width: '50%' }}
-                      isRequired={true}
-                      key='description'
-                      fieldId='description'
-                      label={t`Role description`}
-                      helperTextInvalid={this.helperText(description)}
-                      validated={
-                        this.state.descriptionError ||
-                        this.checkLength(this.state.description)
-                          ? 'error'
-                          : null
-                      }
-                    >
-                      <TextInput
-                        id='role_description'
-                        value={this.state.description}
-                        onChange={(value) => {
-                          this.setState({ description: value });
-                        }}
-                        type='text'
-                        validated={
-                          this.state.descriptionError ||
-                          this.checkLength(this.state.description)
-                            ? 'error'
-                            : null
-                        }
-                        placeholder={t`Add a role description here`}
-                      />
-                    </FormGroup>
-                  </div>
-                </Form>
-              </div>
-              <div>
-                <br />
-                <Divider />
-                <br />
-
-                <Title headingLevel='h2'>Permissions</Title>
-
-                {groups.map((group) => (
-                  <Flex
-                    style={{ marginTop: '16px' }}
-                    alignItems={{ default: 'alignItemsCenter' }}
-                    key={group.name}
-                    className={group.name}
-                  >
-                    <FlexItem style={{ minWidth: '200px' }}>
-                      {i18n._(group.label)}
-                    </FlexItem>
-                    <FlexItem grow={{ default: 'grow' }}>
-                      <PermissionChipSelector
-                        availablePermissions={group.object_permissions
-                          .filter(
-                            (perm) =>
-                              !selectedPermissions.find(
-                                (selected) => selected === perm,
-                              ),
-                          )
-                          .map((value) =>
-                            twoWayMapper(value, filteredPermissions),
-                          )
-                          .sort()}
-                        selectedPermissions={selectedPermissions
-                          .filter((selected) =>
-                            group.object_permissions.find(
-                              (perm) => selected === perm,
-                            ),
-                          )
-                          .map((value) =>
-                            twoWayMapper(value, filteredPermissions),
-                          )}
-                        setSelected={(perms) =>
-                          this.setState({ permissions: perms })
-                        }
-                        menuAppendTo='inline'
-                        multilingual={true}
-                        isViewOnly={false}
-                        onClear={() => {
-                          const clearedPerms = group.object_permissions;
-                          this.setState({
-                            permissions: this.state.permissions.filter(
-                              (x) => !clearedPerms.includes(x),
-                            ),
-                          });
-                        }}
-                        onSelect={(event, selection) => {
-                          const newPerms = new Set(this.state.permissions);
-                          if (
-                            newPerms.has(
-                              twoWayMapper(selection, filteredPermissions),
-                            )
-                          ) {
-                            newPerms.delete(
-                              twoWayMapper(selection, filteredPermissions),
-                            );
-                          } else {
-                            newPerms.add(
-                              twoWayMapper(selection, filteredPermissions),
-                            );
-                          }
-                          this.setState({ permissions: Array.from(newPerms) });
-                        }}
-                      />
-                    </FlexItem>
-                  </Flex>
-                ))}
-              </div>
-              <Form>
-                <ActionGroup>
-                  <Button
-                    variant='primary'
-                    isDisabled={this.checkLength(this.state.description)}
-                    onClick={() => {
-                      this.saveRole();
-                    }}
-                  >
-                    {t`Save`}
-                  </Button>
-
-                  <Button
-                    variant='secondary'
-                    onClick={() => {
-                      this.setState({
-                        roleError: null,
-                        descriptionError: null,
-                        redirect: Paths.roleList,
-                      });
-                    }}
-                  >{t`Cancel`}</Button>
-                </ActionGroup>
-              </Form>
+              <RoleForm
+                {...this.state}
+                name={name}
+                nameDisabled={true}
+                description={description}
+                descriptionHelperText={errorMessages['description']}
+                descriptionValidated={
+                  errorMessages['description'] ? 'error' : null
+                }
+                onDescriptionChange={(value) => {
+                  this.setState({ description: value }, () => {
+                    this.validateInput(value, 'description');
+                  });
+                }}
+                // originalPermissions={originalPermissions}
+                saving={saving}
+                saveRole={this.editRole}
+                isSavingDisabled={
+                  'description' in errorMessages || 'name' in errorMessages
+                }
+                cancelRole={this.cancelRole}
+              />
             </section>
           </Main>
         )}
@@ -386,6 +227,49 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     return text;
   };
 
+  private validateInput = (input, field) => {
+    const error = { ...this.state.errorMessages };
+    if (input === '') {
+      error[field] = t`This field may not be blank.`;
+    } else if (input.toString().length > 128) {
+      error[field] = t`Ensure this field has no more than 128 characters.`;
+    } else if (field === 'name' && !/^[ a-zA-Z0-9_.]+$/.test(input)) {
+      error[field] = t`This field can only contain letters and numbers`;
+    } else if (input.length <= 2) {
+      error[field] = t`This field must be longer than 2 characters`;
+    } else if (field === 'name' && !input.startsWith('galaxy.')) {
+      error[field] = t`This field must start with 'galaxy.'.`;
+    } else {
+      delete error[field];
+    }
+
+    this.setState({
+      errorMessages: error,
+    });
+  };
+
+  private cancelRole = () => {
+    this.setState({
+      errorMessages: {},
+      redirect: Paths.roleList,
+    });
+  };
+
+  private mapErrors = (err) => {
+    const errors = { ...this.state.errorMessages };
+
+    if (err.response.data.name) {
+      errors['name'] = err.response.data.name.toString();
+    } else if (err.response.data.description) {
+      errors['description'] = err.response.data.description.toString();
+    } else {
+      delete errors['name'];
+      delete errors['description'];
+    }
+
+    this.setState({ errorMessages: errors });
+  };
+
   private addAlert(title, variant, description?) {
     this.setState({
       alerts: [
@@ -399,18 +283,32 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     });
   }
 
-  private saveRole = () => {
-    const { pulp_href } = this.state.role;
-    const roleID = parsePulpIDFromURL(pulp_href) + '/';
-    const { name, permissions, description } = this.state;
+  private editRole = (permissions) => {
+    this.setState({ saving: true }, () => {
+      const { pulp_href } = this.state.role;
+      const roleID = parsePulpIDFromURL(pulp_href) + '/';
+      const { name, description } = this.state;
 
-    RoleAPI.updatePermissions(roleID, { name, description, permissions })
-      .then(() => this.setState({ redirect: Paths.roleList }))
-      .catch((err) => {
-        if (err.response.status === 400) {
-          this.setState({ descriptionError: true });
-        }
-      });
+      RoleAPI.updatePermissions(roleID, { name, description, permissions })
+        .then(() => this.setState({ redirect: Paths.roleList }))
+        .catch((err) => {
+          const { status, statusText } = err.response;
+          if (err.response.status === 400) {
+            this.mapErrors(err);
+            this.setState({ saving: false });
+          } else if (status === 404) {
+            this.setState({
+              errorMessages: {},
+              alerts: this.state.alerts.concat({
+                variant: 'danger',
+                title: t`Changes to role "${name}" could not be saved.`,
+                description: errorMessage(status, statusText),
+              }),
+              saving: false,
+            });
+          }
+        });
+    });
   };
 
   private toError(validated: boolean) {

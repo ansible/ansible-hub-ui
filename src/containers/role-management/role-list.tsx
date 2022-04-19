@@ -1,7 +1,6 @@
 import React from 'react';
 import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-import './role.scss';
 import { AppContext } from 'src/loaders/app-context';
 import {
   Link,
@@ -320,7 +319,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                         ],
                       }}
                     >
-                      {roles.map((role) => (
+                      {roles.map((role, i) => (
                         <ExpandableRow
                           key={role.name}
                           expandableRowContent={
@@ -372,6 +371,8 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                               ))}
                             </>
                           }
+                          colSpan={6}
+                          rowIndex={i}
                         >
                           <td>{role.name}</td>
                           <td>{role.description}</td>

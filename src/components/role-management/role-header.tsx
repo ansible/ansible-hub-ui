@@ -1,13 +1,6 @@
 import * as React from 'react';
-import { t, Trans } from '@lingui/macro';
-import {
-  BaseHeader,
-  Breadcrumbs,
-  EmptyStateUnauthorized,
-  PermissionChipSelector,
-  Main,
-  AlertType,
-} from 'src/components';
+import { Trans } from '@lingui/macro';
+import { BaseHeader, Breadcrumbs } from 'src/components';
 interface IProps {
   title: string;
   subTitle?: string;

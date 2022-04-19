@@ -1,8 +1,8 @@
 import { t } from '@lingui/macro';
-// import { i18n } from '@lingui/core';
 import { errorMessage } from 'src/utilities';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import './role.scss';
 
 import {
   RoleForm,
@@ -11,7 +11,6 @@ import {
   EmptyStateUnauthorized,
   Main,
 } from 'src/components';
-import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
 
 import { Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
@@ -51,13 +50,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
       return <Redirect push to={this.state.redirect} />;
     }
 
-    const {
-      errorMessages,
-      description,
-      permissions: selectedPermissions,
-      name,
-      saving,
-    } = this.state;
+    const { errorMessages, description, name, saving } = this.state;
 
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
@@ -142,7 +135,6 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
   };
 
   private cancelRole = () => {
-    console.log('CANCELLING!!!');
     this.setState({
       errorMessages: {},
       redirect: Paths.roleList,
@@ -150,7 +142,6 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
   };
 
   private createRole = (permissions) => {
-    console.log('SAVING!!!!');
     this.setState({ saving: true }, () => {
       const { name, description } = this.state;
 
@@ -172,7 +163,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
               errorMessages: {},
               alerts: this.state.alerts.concat({
                 variant: 'danger',
-                title: t`Changes to role "${this.state.name}" could not be saved.`,
+                title: t`Role "${this.state.name}" could not be created.`,
                 description: errorMessage(status, statusText),
               }),
               saving: false,
@@ -183,16 +174,18 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
   };
 
   private mapErrors = (err) => {
-    const errors = this.state.errorMessages;
+    const errors = { ...this.state.errorMessages };
 
     if (err.response.data.name) {
-      errors['name'] = err.response.data.name[0];
-    } else if (err.response.data.description !== undefined) {
-      errors['description'] = err.response.data.description[0];
+      errors['name'] = err.response.data.name.toString();
+    } else if (err.response.data.description) {
+      errors['description'] = err.response.data.description.toString();
     } else {
       delete errors['name'];
       delete errors['description'];
     }
+
+    this.setState({ errorMessages: errors });
   };
 }
 

@@ -1,4 +1,4 @@
-import { t, Trans } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import { i18n } from '@lingui/core';
 import { PermissionChipSelector } from 'src/components';
@@ -20,7 +20,6 @@ import { twoWayMapper } from 'src/utilities';
 
 import { Constants } from 'src/constants';
 interface IState {
-  formErrors: { [key: string]: string };
   permissions: string[];
 }
 interface IProps {
@@ -37,15 +36,21 @@ interface IProps {
   cancelRole: () => void;
   isSavingDisabled: boolean;
   saving: boolean;
+  originalPermissions?: string[];
 }
 
 export class RoleForm extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      formErrors: {},
       permissions: [],
     };
+  }
+
+  componentDidMount() {
+    if (this.props.originalPermissions) {
+      this.setState({ permissions: this.props.originalPermissions });
+    }
   }
 
   render() {
@@ -61,6 +66,7 @@ export class RoleForm extends React.Component<IProps, IState> {
       onDescriptionChange,
       saveRole,
       cancelRole,
+      nameDisabled,
       isSavingDisabled,
       saving,
     } = this.props;
@@ -99,6 +105,7 @@ export class RoleForm extends React.Component<IProps, IState> {
                 <InputGroup>
                   <TextInput
                     id='role_name'
+                    isDisabled={nameDisabled}
                     value={name}
                     onChange={onNameChange}
                     type='text'
