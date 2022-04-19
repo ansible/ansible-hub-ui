@@ -107,13 +107,14 @@ List of all workflows:
 
 List by branches:
 
-- `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `pr-checks`, `stable-release`, `update-manifest`
+- `master`: `backported-labels`, `cloud-stage-cron`, `cypress`, `deploy-cloud`, `dev-release`, `i18n`, `pr-checks`, `stable-release`, `update-manifest`
 - `master-stable`: `deploy-cloud`
 - `prod-beta`: `deploy-cloud`
 - `prod-stable`: `deploy-cloud`
 - `stable-4.2`: `backported-labels`, `pr-checks`, `stable-release`
 - `stable-4.3`: `backported-labels`, `cypress`, `pr-checks`, `stable-release`
-- `stable-4.4`: `backported-labels`, `cypress`, `pr-checks`, `stable-release`
+- `stable-4.4`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
+- `stable-4.5`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
 
 ## Patternfly
 
