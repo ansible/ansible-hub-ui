@@ -250,10 +250,13 @@ class ExecutionEnvironmentManifest extends React.Component<
         // but keep anything without #(nop) unchanged
         const parseNop = (str) => str.replace(/^.*#\(nop\)\s+(.*)/, '$1');
 
-        const history = config_blob.data.history.map(({ created_by }) => ({
-          text: parseNop(created_by),
-          // FIXME: size, but no correspondence between the order of history (which have the commands) and layers (which have sizes)
-        }));
+        // Filter out layers that don't have a "created_by" field.
+        const history = config_blob.data.history
+          .filter((item) => 'created_by' in item)
+          .map(({ created_by }) => ({
+            text: parseNop(created_by),
+            // FIXME: size, but no correspondence between the order of history (which have the commands) and layers (which have sizes)
+          }));
 
         return {
           digest,
