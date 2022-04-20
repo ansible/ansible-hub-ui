@@ -174,17 +174,10 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
   };
 
   private mapErrors = (err) => {
-    const errors = { ...this.state.errorMessages };
-
-    if (err.response.data.name) {
-      errors['name'] = err.response.data.name.toString();
-    } else if (err.response.data.description) {
-      errors['description'] = err.response.data.description.toString();
-    } else {
-      delete errors['name'];
-      delete errors['description'];
+    const errors = { ...err.response.data };
+    for (const field in errors) {
+      errors[field] = errors[field].toString().split(',').join(' ');
     }
-
     this.setState({ errorMessages: errors });
   };
 }
