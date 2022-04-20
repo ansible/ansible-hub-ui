@@ -4,25 +4,17 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   let items = [];
 
   function createData() {
-    cy.galaxykit('-i namespace create approval_dashboard_namespace_test');
+    cy.galaxykit('-i namespace create appd_namespace_test');
     range(21).forEach((i) => {
       cy.galaxykit(
         '-i collection upload',
-        'approval_dashboard_namespace_test',
-        'approval_dashboard_collection_test' + i,
+        'appd_namespace_test',
+        'appd_c_test' + i,
       );
     });
 
-    cy.galaxykit(
-      '-i collection upload',
-      'approval_dashboard_namespace_test_additional_data',
-      'approval_dashboard_collection_test_additional1',
-    );
-    cy.galaxykit(
-      '-i collection upload',
-      'approval_dashboard_namespace_test_additional_data',
-      'approval_dashboard_collection_test_additional2',
-    );
+    cy.galaxykit('-i collection upload', 'appd_nadd1', 'appd_c_test_add1');
+    cy.galaxykit('-i collection upload', 'appd_nadd1', 'appd_c_test_add2');
   }
 
   function loadData() {
@@ -44,6 +36,19 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       items = sortBy(items, 'name');
     });
   }
+
+  /*
+  function filterByCollectionName(collection_name) {
+    cy.get('[data-cy="body"] [data-cy="compound_filter"] button:first').click();
+    cy.contains(
+      '[data-cy="body"] [data-cy="compound_filter"] a',
+      'Collection Name',
+    ).click();
+
+    cy.get('[data-cy="body"] [data-cy="compound_filter"] input').type(
+      collection_name + '{enter}',
+    );
+  }*/
 
   before(() => {
     cy.login();
@@ -85,7 +90,6 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
 
   it('should sort collection.', () => {
     cy.get('[data-cy="sort_collection"]').click();
-    cy.get('[data-cy="body"]').contains('approval');
 
     cy.get('[data-cy="CertificationDashboard-row"]:first').contains(
       items[items.length - 1].name,
@@ -112,12 +116,10 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy="sort_collection"]').click();
 
     cy.get('[data-cy="body"] [data-cy="compound_filter"] input').type(
-      'approval_dashboard_collection_test0{enter}',
+      'appd_c_test0{enter}',
     );
-    cy.get('[data-cy="body"]').contains('approval_dashboard_collection_test0');
-    cy.get('[data-cy="body"]')
-      .contains('approval_dashboard_collection_test1')
-      .should('not.exist');
+    cy.get('[data-cy="body"]').contains('appd_c_test0');
+    cy.get('[data-cy="body"]').contains('appd_c_test1').should('not.exist');
   });
 
   it('should filter collection and namespace together.', () => {
@@ -126,9 +128,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       '[data-cy="body"] [data-cy="compound_filter"] a',
       'Collection Name',
     ).click();
-    cy.get('[data-cy="body"] .toolbar input').type(
-      'approval_dashboard_collection_test0{enter}',
-    );
+    cy.get('[data-cy="body"] .toolbar input').type('appd_c_test0{enter}');
 
     cy.get('[data-cy="body"] .toolbar button:first').click();
     cy.contains(
@@ -136,19 +136,15 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       'Namespace',
     ).click();
     cy.get('[data-cy="body"] [data-cy="compound_filter"] input').type(
-      'approval_dashboard_namespace_test{enter}',
+      'appd_namespace_test{enter}',
     );
 
     cy.get('[data-cy="sort_collection"]').click();
     cy.get('[data-cy="sort_collection"]').click();
 
-    cy.get('[data-cy="body"]').contains('approval_dashboard_collection_test0');
-    cy.get('[data-cy="body"]')
-      .contains('approval_dashboard_collection_test1')
-      .should('not.exist');
-    cy.get('[data-cy="body"]')
-      .contains('approval_dashboard_namespace_test_additional_data')
-      .should('not.exist');
+    cy.get('[data-cy="body"]').contains('appd_c_test0');
+    cy.get('[data-cy="body"]').contains('appd_c_test1').should('not.exist');
+    cy.get('[data-cy="body"]').contains('appd_nadd1').should('not.exist');
   });
 
   it('should filter non existing namespace and not show any data', () => {
@@ -176,5 +172,40 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     range(20).forEach((i) => {
       cy.get('[data-cy="body"]').contains(items[i].name);
     });
+  });
+
+  /*it('should reject', () => {
+    filterByCollectionName('appd_c_test_add2');
+
+    cy.get('[data-cy="kebab-toggle"]:first button[aria-label="Actions"]').click(
+      { force: true },
+    );
+    cy.contains('Reject').click({ force: true });
+    cy.contains(
+      '[data-cy="CertificationDashboard-row"]',
+      'appd_c_test_add2',
+    ).contains('Rejected');
+  });
+
+  it('should approve', () => {
+    filterByCollectionName('appd_c_test_add2');
+
+    cy.get('[data-cy="kebab-toggle"]:first button[aria-label="Actions"]').click(
+      { force: true },
+    );
+    cy.contains('Approve').click({ force: true });
+    cy.contains(
+      '[data-cy="CertificationDashboard-row"]',
+      'appd_c_test_add2',
+    ).contains('Approved');
+  });*/
+
+  it('should redirect to import logs.', () => {
+    cy.get(
+      '[data-cy="kebab-toggle"]:first button[aria-label="Actions"]',
+    ).click();
+    cy.contains('View Import Logs').click();
+    cy.contains('My imports');
+    cy.get('.import-list');
   });
 });
