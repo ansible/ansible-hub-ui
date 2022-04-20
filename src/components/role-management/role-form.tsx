@@ -27,9 +27,9 @@ interface IProps {
   name: string;
   description: string;
   onNameChange?: (value: string) => void;
-  nameValidated?: any;
+  nameValidated?: 'default' | 'warning' | 'success' | 'error';
   nameHelperText?: string;
-  descriptionValidated: any;
+  descriptionValidated: 'default' | 'warning' | 'success' | 'error';
   descriptionHelperText: string;
   onDescriptionChange: (value: string) => void;
   saveRole: (permissions: string[]) => void;
