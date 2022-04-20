@@ -11,7 +11,6 @@ const cKwargs = { timeout: 10000 };
 
 describe(['cloud'], 'cloud smoketest', () => {
   before(() => {
-
     // TODO create a single collection ...
     const suffix = Math.floor(Math.random() * 10000);
     const collectionNamespace = `namespace_${suffix}`;
@@ -49,7 +48,6 @@ describe(['cloud'], 'cloud smoketest', () => {
 
   describe('with download', () => {
     it('can load a Collection', () => {
-
       // TODO create a single collection ...
       //cy.galaxykit('namespace create my_namespace');
       //cy.galaxykit('-i collection upload my_namespace my_collection');
@@ -59,15 +57,11 @@ describe(['cloud'], 'cloud smoketest', () => {
 
       // wait for collections to load
       //cy.get('.hub-c-card-collection-container .name a', cKwargs).should(
-      cy.get('.collection-card-container .name a', cKwargs).should(
-        'exist',
-      );
+      cy.get('.collection-card-container .name a', cKwargs).should('exist');
 
       // click on the first available collection
       //cy.get('.hub-c-card-collection-container .name a', cKwargs)
-      cy.get('.collection-card-container .name a', cKwargs)
-        .first()
-        .click();
+      cy.get('.collection-card-container .name a', cKwargs).first().click();
 
       // wait for collection detail to load
       cy.get('.info-panel', cKwargs);
@@ -77,7 +71,6 @@ describe(['cloud'], 'cloud smoketest', () => {
     });
 
     it('can load a Partners list of collections', () => {
-
       // TODO create a single collection ...
       //cy.galaxykit('namespace create my_namespace');
       //cy.galaxykit('-i collection upload my_namespace my_collection');
@@ -97,7 +90,9 @@ describe(['cloud'], 'cloud smoketest', () => {
 
       // wait for the summary|list to load
       //cy.get('.namespace-detail', cKwargs).should('be.visible');
-      cy.get('[aria-label="List of Collections"]', cKwargs).should('be.visible');
+      cy.get('[aria-label="List of Collections"]', cKwargs).should(
+        'be.visible',
+      );
 
       // ensure the upload collection button appears
       cy.contains('button', 'Upload collection').should('exist');

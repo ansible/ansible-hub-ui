@@ -85,7 +85,6 @@ Cypress.Commands.add('manualLogin', {}, (username, password) => {
 });
 
 Cypress.Commands.add('manualCloudLogin', {}, (username, password) => {
-
   /**********************************
    * This works for staging ...
    *********************************/
@@ -102,7 +101,7 @@ Cypress.Commands.add('manualCloudLogin', {}, (username, password) => {
   /**********************************
    * This works for ephemeral ...
    *********************************/
-  cy.visit('/');  
+  cy.visit('/');
   // type in the username
   cy.get('input[id^="username"]').type(username);
   // type in the password and press enter to trigger login
@@ -110,7 +109,6 @@ Cypress.Commands.add('manualCloudLogin', {}, (username, password) => {
 
   // Wait for the user menu?
   cy.get('#UserMenu');
-
 });
 
 Cypress.Commands.add('cookieLogout', {}, () => {
@@ -428,7 +426,16 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   const adminPassword = Cypress.env('password');
   const adminToken = Cypress.env('token');
   const galaxykitCommand = Cypress.env('galaxykit') || 'galaxykit';
-  const server = Cypress.config().baseUrl + Cypress.env('prefix');
+  let server = Cypress.env('prefix');
+  if (
+    Cypress.env('baseUrl') !== undefined &&
+    Cypress.env('baseUrl') !== null &&
+    Cypress.env('baseUrl') !== ''
+  ) {
+    server = Cypress.env('baseUrl') + server;
+  } else {
+    server = Cypress.config().baseUrl + server;
+  }
   const options =
     args.length >= 1 && typeof args[args.length - 1] == 'object'
       ? args.splice(args.length - 1, 1)[0]
@@ -437,13 +444,17 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   cy.log(`${galaxykitCommand} ${operation} ${args}`);
   let cmd = `${galaxykitCommand}`;
   cmd = cmd + ` -c -s ${server} -u ${adminUsername}`;
-  if (authUrl !== undefined && authUrl !== null && authUrl !== "") {
+  if (authUrl !== undefined && authUrl !== null && authUrl !== '') {
     cmd = cmd + ` -a ${authUrl}`;
   }
-  if (adminPassword !== undefined && adminPassword !== null && adminPassword !== "") {
+  if (
+    adminPassword !== undefined &&
+    adminPassword !== null &&
+    adminPassword !== ''
+  ) {
     cmd = cmd + ` -p ${adminPassword}`;
-  } 
-  if (adminToken !== undefined && adminToken !== null && adminToken !== "") {
+  }
+  if (adminToken !== undefined && adminToken !== null && adminToken !== '') {
     cmd = cmd + ` -t ${adminToken}`;
     //cmd = cmd + ` -t $CYPRESS_token`;
   }
