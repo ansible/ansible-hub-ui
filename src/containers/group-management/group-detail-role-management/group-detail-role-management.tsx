@@ -229,35 +229,32 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
             setSelectedRoles([]);
           }}
           onSave={() => {
-            const selectedRolesPromises = selectedRoles.map(
-              (role) =>
-                new Promise((resolve) => {
-                  GroupRoleAPI.addRoleToGroup(group.id, role)
-                    .then(() => {
-                      addAlert(
-                        t`Role ${role.name} has been successfully added to ${group.name}.`,
-                        'success',
-                      );
-                    })
-                    .catch((e) => {
-                      const { status, statusText, data } = e.response;
+            const selectedRolesPromises = selectedRoles.map((role) =>
+              GroupRoleAPI.addRoleToGroup(group.id, role)
+                .then(() => {
+                  addAlert(
+                    t`Role ${role.name} has been successfully added to ${group.name}.`,
+                    'success',
+                  );
+                })
+                .catch((e) => {
+                  const { status, statusText, data } = e.response;
 
-                      const errMessage =
-                        data?.non_field_errors?.length > 0
-                          ? data.non_field_errors[0]
-                          : errorMessage(status, statusText);
+                  const errMessage =
+                    data?.non_field_errors?.length > 0
+                      ? data.non_field_errors[0]
+                      : errorMessage(status, statusText);
 
-                      addAlert(
-                        t`Role ${role.name} could not be assigned to group ${group.name}.`,
-                        'danger',
-                        errMessage,
-                      );
-                    })
-                    .finally(() => resolve(role));
-                }),
+                  addAlert(
+                    t`Role ${role.name} could not be assigned to group ${group.name}.`,
+                    'danger',
+                    errMessage,
+                  );
+                })
+                .finally(() => role),
             );
 
-            Promise.allSettled(selectedRolesPromises).then(() => {
+            Promise.all(selectedRolesPromises).then(() => {
               queryRolesWithPermissions();
               setShowAddRolesModal(false);
               setSelectedRoles([]);
@@ -289,7 +286,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                       filterConfig={[
                         {
                           id: 'role__icontains',
-                          title: t`name`,
+                          title: t`Name`,
                         },
                       ]}
                     />
@@ -330,67 +327,67 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
             <>
               <RoleListTable params={params} updateParams={updateParams}>
                 {roles.map((role, i) => (
-                  <React.Fragment key={i}>
-                    <ExpandableRow
-                      expandableRowContent={
-                        <>
-                          {groups.map((group) => (
-                            <Flex
-                              style={{ marginTop: '16px' }}
-                              alignItems={{ default: 'alignItemsCenter' }}
-                              key={group.name}
-                              className={group.name}
-                            >
-                              <FlexItem style={{ minWidth: '200px' }}>
-                                {i18n._(group.label)}
-                              </FlexItem>
-                              <FlexItem grow={{ default: 'grow' }}>
-                                <PermissionChipSelector
-                                  availablePermissions={group.object_permissions
-                                    .filter(
-                                      (perm) =>
-                                        !role.permissions.find(
-                                          (selected) => selected === perm,
-                                        ),
-                                    )
-                                    .map((value) =>
-                                      twoWayMapper(value, filteredPermissions),
-                                    )
-                                    .sort()}
-                                  selectedPermissions={role.permissions
-                                    .filter((selected) =>
-                                      group.object_permissions.find(
-                                        (perm) => selected === perm,
-                                      ),
-                                    )
-                                    .map((value) =>
-                                      twoWayMapper(value, filteredPermissions),
-                                    )}
-                                  menuAppendTo='inline'
-                                  multilingual={true}
-                                  isViewOnly={true}
-                                />
-                              </FlexItem>
-                            </Flex>
-                          ))}
-                        </>
-                      }
-                      data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
-                    >
-                      <td>{role.name}</td>
-                      <td>{role.description}</td>
-                      <ListItemActions
-                        kebabItems={[
-                          <DropdownItem
-                            key='remove-role'
-                            onClick={() => setSelectedDeleteRole(role)}
+                  <ExpandableRow
+                    key={i}
+                    rowIndex={i}
+                    expandableRowContent={
+                      <>
+                        {groups.map((group) => (
+                          <Flex
+                            style={{ marginTop: '16px' }}
+                            alignItems={{ default: 'alignItemsCenter' }}
+                            key={group.name}
+                            className={group.name}
                           >
-                            {t`Remove Role`}
-                          </DropdownItem>,
-                        ]}
-                      />
-                    </ExpandableRow>
-                  </React.Fragment>
+                            <FlexItem style={{ minWidth: '200px' }}>
+                              {i18n._(group.label)}
+                            </FlexItem>
+                            <FlexItem grow={{ default: 'grow' }}>
+                              <PermissionChipSelector
+                                availablePermissions={group.object_permissions
+                                  .filter(
+                                    (perm) =>
+                                      !role.permissions.find(
+                                        (selected) => selected === perm,
+                                      ),
+                                  )
+                                  .map((value) =>
+                                    twoWayMapper(value, filteredPermissions),
+                                  )
+                                  .sort()}
+                                selectedPermissions={role.permissions
+                                  .filter((selected) =>
+                                    group.object_permissions.find(
+                                      (perm) => selected === perm,
+                                    ),
+                                  )
+                                  .map((value) =>
+                                    twoWayMapper(value, filteredPermissions),
+                                  )}
+                                menuAppendTo='inline'
+                                multilingual={true}
+                                isViewOnly={true}
+                              />
+                            </FlexItem>
+                          </Flex>
+                        ))}
+                      </>
+                    }
+                    data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
+                  >
+                    <td>{role.name}</td>
+                    <td>{role.description}</td>
+                    <ListItemActions
+                      kebabItems={[
+                        <DropdownItem
+                          key='remove-role'
+                          onClick={() => setSelectedDeleteRole(role)}
+                        >
+                          {t`Remove Role`}
+                        </DropdownItem>,
+                      ]}
+                    />
+                  </ExpandableRow>
                 ))}
               </RoleListTable>
 

@@ -16,7 +16,7 @@ interface Props {
 }
 
 const splitByDot = (perm: string) => {
-  const [category, permission] = perm.split('.');
+  const [category, permission] = perm.split('.', 2);
   const catTitle = category.charAt(0).toUpperCase() + category.slice(1);
   return (
     <>

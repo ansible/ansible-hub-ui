@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
 
 import { RoleType, RoleAPI } from 'src/api';
@@ -124,7 +124,9 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
               <FlexItem>
                 <Flex>
                   <FlexItem>
-                    <strong>Selected Roles</strong>
+                    <strong>
+                      <Trans>Selected Roles</Trans>
+                    </strong>
                   </FlexItem>
 
                   <FlexItem flex={{ default: 'flex_1' }}>

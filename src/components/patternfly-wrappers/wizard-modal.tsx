@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import React from 'react';
 import {
   Modal,
@@ -30,10 +31,10 @@ export const WizardModal = ({
   >
     <PFWizard
       hasNoBodyPadding
-      navAriaLabel={`${title} steps`}
-      mainAriaLabel={`${title} content`}
-      titleId='wiz-modal-demo-title'
-      descriptionId='wiz-modal-demo-description'
+      navAriaLabel={t`${title} steps`}
+      mainAriaLabel={t`${title} content`}
+      titleId='wizard-modal-title'
+      descriptionId='wizard-modal-description'
       title={title}
       steps={steps}
       onClose={onClose}
