@@ -475,7 +475,7 @@ msgstr ""
 msgid "Collection \"{name}\" could not be deleted."
 msgstr ""
 
-#: src/components/collection-detail/collection-info.tsx:188
+#: src/components/collection-detail/collection-info.tsx:189
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr ""
 
@@ -982,7 +982,7 @@ msgstr ""
 msgid "Download requirements file"
 msgstr "要件ファイルのダウンロード"
 
-#: src/components/collection-detail/collection-info.tsx:116
+#: src/components/collection-detail/collection-info.tsx:117
 msgid "Download tarball"
 msgstr "tarball のダウンロード"
 
@@ -1354,7 +1354,7 @@ msgstr "トークンの取得"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "10 回試行した後に、タスクの待機を中止します。"
 
-#: src/components/collection-detail/collection-info.tsx:159
+#: src/components/collection-detail/collection-info.tsx:160
 msgid "Go to documentation"
 msgstr "ドキュメントに移動"
 
@@ -2317,7 +2317,7 @@ msgstr "リポジトリー管理"
 msgid "Repository name"
 msgstr "リポジトリー名"
 
-#: src/components/collection-detail/collection-info.tsx:128
+#: src/components/collection-detail/collection-info.tsx:129
 msgid "Requires Ansible"
 msgstr "Ansible が必要です"
 

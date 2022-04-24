@@ -477,7 +477,7 @@ msgstr ""
 msgid "Collection \"{name}\" could not be deleted."
 msgstr ""
 
-#: src/components/collection-detail/collection-info.tsx:188
+#: src/components/collection-detail/collection-info.tsx:189
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr ""
 
@@ -984,7 +984,7 @@ msgstr ""
 msgid "Download requirements file"
 msgstr "Bestand met vereisten downloaden"
 
-#: src/components/collection-detail/collection-info.tsx:116
+#: src/components/collection-detail/collection-info.tsx:117
 msgid "Download tarball"
 msgstr "Tarball downloaden"
 
@@ -1356,7 +1356,7 @@ msgstr "Token ophalen"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "Wachten op een taak wordt na 10 pogingen opgegeven."
 
-#: src/components/collection-detail/collection-info.tsx:159
+#: src/components/collection-detail/collection-info.tsx:160
 msgid "Go to documentation"
 msgstr "Naar documentatie gaan"
 
@@ -2319,7 +2319,7 @@ msgstr "Repositorybeheer"
 msgid "Repository name"
 msgstr "Naam repository"
 
-#: src/components/collection-detail/collection-info.tsx:128
+#: src/components/collection-detail/collection-info.tsx:129
 msgid "Requires Ansible"
 msgstr "Vereist Ansible"
 

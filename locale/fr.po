@@ -475,7 +475,7 @@ msgstr ""
 msgid "Collection \"{name}\" could not be deleted."
 msgstr ""
 
-#: src/components/collection-detail/collection-info.tsx:188
+#: src/components/collection-detail/collection-info.tsx:189
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr ""
 
@@ -982,7 +982,7 @@ msgstr ""
 msgid "Download requirements file"
 msgstr "Télécharger le fichier des exigences"
 
-#: src/components/collection-detail/collection-info.tsx:116
+#: src/components/collection-detail/collection-info.tsx:117
 msgid "Download tarball"
 msgstr "Télécharger l'archive"
 
@@ -1354,7 +1354,7 @@ msgstr "Token API"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "Abandon de l'attente de la tâche après 10 tentatives."
 
-#: src/components/collection-detail/collection-info.tsx:159
+#: src/components/collection-detail/collection-info.tsx:160
 msgid "Go to documentation"
 msgstr "Afficher la documentation"
 
@@ -2317,7 +2317,7 @@ msgstr "Gestion du référentiel"
 msgid "Repository name"
 msgstr "Nom du référentiel"
 
-#: src/components/collection-detail/collection-info.tsx:128
+#: src/components/collection-detail/collection-info.tsx:129
 msgid "Requires Ansible"
 msgstr "Nécessite Ansible"
 
