@@ -98,22 +98,27 @@ The Github Action invokes the [RedHatInsights/insights-frontend-builder-common//
 List of all workflows:
 
 - `backported-labels`: Add a backported-* label when a PR is backported to stable-*; on patchback merges
+- `cloud-stage-cron`: Deploy master to master-stable when enabled, trigger `deploy-cloud`; cron
+- `cloud-stage-disable`: Disable cron deploy from master; manual
+- `cloud-stage-enable`: Enable cron deploy from master; manual
 - `cypress`: Run Cypress integration tests; on PRs, pushes and cron
 - `deploy-cloud`: Deploy to c.r.c; when the relevant branch is updated
 - `dev-release`: Build and upload to github releases, update `dev` tag; when master is updated
+- `i18n`: Extract and merge l10n strings for 4.4+; cron
 - `pr-checks`: Check for linter errors, obsolete package-lock.json and merge commits; on PRs only
 - `stable-release`: Build and upload to github releases; when a stable release is created
 - `update-manifest`: Update https://github.com/RedHatInsights/manifests ; when master is updated
 
 List by branches:
 
-- `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `pr-checks`, `stable-release`, `update-manifest`
+- `master`: `backported-labels`, `cloud-stage-cron`, `cypress`, `deploy-cloud`, `dev-release`, `i18n`, `pr-checks`, `stable-release`, `update-manifest`
 - `master-stable`: `deploy-cloud`
 - `prod-beta`: `deploy-cloud`
 - `prod-stable`: `deploy-cloud`
 - `stable-4.2`: `backported-labels`, `pr-checks`, `stable-release`
 - `stable-4.3`: `backported-labels`, `cypress`, `pr-checks`, `stable-release`
-- `stable-4.4`: `backported-labels`, `cypress`, `pr-checks`, `stable-release`
+- `stable-4.4`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
+- `stable-4.5`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
 
 ## Patternfly
 
