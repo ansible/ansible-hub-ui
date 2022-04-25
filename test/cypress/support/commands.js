@@ -423,46 +423,51 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
 /// cy.galaxykit(operation, ...args, options = {}) .. only args get escaped; yields an array of nonempty lines on success
 Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   const authUrl = Cypress.env('authUrl');
+  const baseUrl_env = Cypress.env('baseUrl');
+  const baseUrl_cfg = Cypress.config().baseUrl;
+  const prefix = Cypress.env('prefix');
   const adminUsername = Cypress.env('username');
   const adminPassword = Cypress.env('password');
   const adminToken = Cypress.env('token');
   const galaxykitCommand = Cypress.env('galaxykit') || 'galaxykit';
 
-  let server = Cypress.env('prefix');
-  if (
-    Cypress.env('baseUrl') !== undefined &&
-    Cypress.env('baseUrl') !== null &&
-    Cypress.env('baseUrl') !== ''
-  ) {
-    server = Cypress.env('baseUrl') + server;
-  } else {
-    server = Cypress.config().baseUrl + server;
-  }
+  // what are these?
   const options =
     args.length >= 1 && typeof args[args.length - 1] == 'object'
       ? args.splice(args.length - 1, 1)[0]
       : [];
 
-  cy.log(`${galaxykitCommand} ${operation} ${args}`);
+  // assemble the server url from env OR from config
+  let server = null;
+  if ( baseUrl_env ) {
+    server = baseUrl_env + prefix;
+  } else {
+    server = baseUrl_cfg + prefix;
+  }
+
+  // assemble the command with all the args and kwargs
   let cmd = `${galaxykitCommand}`;
-  cmd = cmd + ` -c -s ${server} -u ${adminUsername}`;
-  if (authUrl !== undefined && authUrl !== null && authUrl !== '') {
+  cmd = cmd + ` -c -s ${server}`;
+  // authurl is required for sso/ephemeral
+  if ( authUrl ) {
     cmd = cmd + ` -a ${authUrl}`;
   }
-  if (
-    adminPassword !== undefined &&
-    adminPassword !== null &&
-    adminPassword !== ''
-  ) {
+  // username is always required
+  cmd = cmd + ` -u ${adminUsername}`;
+  // password required for standalone and ephemeral
+  if ( adminPassword) {
     cmd = cmd + ` -p ${adminPassword}`;
   }
-  if (adminToken !== undefined && adminToken !== null && adminToken !== '') {
+  // no token required for ephemeral
+  if ( adminToken ) {
     cmd = cmd + ` -t ${adminToken}`;
   }
-  cmd = cmd + ' ' + `${operation} ${args}`;
-  cmd = shell`${shell.preserve(cmd)}`;
+
+  // join the args at the end of the command via shell.preserve
+  cmd = cmd + ` ${operation} ${shell.preserve(args)}`;
   cy.log(cmd);
 
+  // execute the command
   return cy.exec(cmd, options).then(({ code, stderr, stdout }) => {
     console.log(`RUN ${cmd}`, options, { code, stderr, stdout });
 
