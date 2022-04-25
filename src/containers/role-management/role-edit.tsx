@@ -6,7 +6,7 @@ import {
   errorMessage,
   ErrorMessagesType,
 } from 'src/utilities';
-import { mapNetworkErrors } from 'src/utilities/map-role-errors';
+import { mapNetworkErrors, validateInput } from 'src/utilities/map-role-errors';
 
 import { RoleAPI } from 'src/api/role';
 
@@ -24,8 +24,6 @@ import {
 } from 'src/components';
 
 import { Paths } from 'src/paths';
-
-import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 import { RoleType } from 'src/api/response-types/role';
 
@@ -130,20 +128,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
       saving,
     } = this.state;
 
-    const { featureFlags } = this.context;
-    let isUserMgmtDisabled = false;
-    const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
-    if (featureFlags) {
-      isUserMgmtDisabled = featureFlags.external_authentication;
-    }
-    if (isUserMgmtDisabled) {
-      Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-        if (perm in filteredPermissions) {
-          delete filteredPermissions[perm];
-        }
-      });
-    }
-
     if (!role && alerts && alerts.length) {
       return (
         <AlertList
@@ -189,10 +173,14 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
                 }
                 onDescriptionChange={(value) => {
                   this.setState({ description: value }, () => {
-                    this.validateInput(value, 'description');
+                    const errors = validateInput(
+                      value,
+                      'description',
+                      this.state.errorMessages,
+                    );
+                    this.setState({ errorMessages: errors });
                   });
                 }}
-                // originalPermissions={originalPermissions}
                 saving={saving}
                 saveRole={this.editRole}
                 isSavingDisabled={
@@ -206,25 +194,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
       </React.Fragment>
     );
   }
-
-  private validateInput = (input, field) => {
-    const error = { ...this.state.errorMessages };
-    if (input === '') {
-      error[field] = t`This field may not be blank.`;
-    } else if (field === 'name' && !/^[ a-zA-Z0-9_.]+$/.test(input)) {
-      error[field] = t`This field can only contain letters and numbers`;
-    } else if (input.length <= 2) {
-      error[field] = t`This field must be longer than 2 characters`;
-    } else if (field === 'name' && !input.startsWith('galaxy.')) {
-      error[field] = t`This field must start with 'galaxy.'.`;
-    } else {
-      delete error[field];
-    }
-
-    this.setState({
-      errorMessages: error,
-    });
-  };
 
   private cancelRole = () => {
     this.setState({

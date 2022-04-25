@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import { errorMessage } from 'src/utilities';
-import { mapNetworkErrors } from 'src/utilities/map-role-errors';
+import { mapNetworkErrors, validateInput } from 'src/utilities/map-role-errors';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import './role.scss';
@@ -15,12 +15,11 @@ import {
 
 import { Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
-import { Constants } from 'src/constants';
 import { RoleAPI } from 'src/api/role';
 
 interface IState {
   saving: boolean;
-  errorMessages: { [key: string]: string } | (() => void);
+  errorMessages: { [key: string]: string };
   redirect?: string;
   permissions: string[];
   name: string;
@@ -53,20 +52,6 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
 
     const { errorMessages, description, name, saving } = this.state;
 
-    const { featureFlags } = this.context;
-    let isUserMgmtDisabled = false;
-    const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
-    if (featureFlags) {
-      isUserMgmtDisabled = featureFlags.external_authentication;
-    }
-    if (isUserMgmtDisabled) {
-      Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-        if (perm in filteredPermissions) {
-          delete filteredPermissions[perm];
-        }
-      });
-    }
-
     const notAuthorised = !this.context.user || this.context.user.is_anonymous;
     const breadcrumbs = [
       { url: Paths.roleList, name: t`Roles` },
@@ -87,7 +72,12 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                 name={name}
                 onNameChange={(value) => {
                   this.setState({ name: value }, () => {
-                    this.validateInput(value, 'name');
+                    const errors = validateInput(
+                      value,
+                      'name',
+                      this.state.errorMessages,
+                    );
+                    this.setState({ errorMessages: errors });
                   });
                 }}
                 description={description}
@@ -97,7 +87,12 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
                 descriptionHelperText={errorMessages['description']}
                 onDescriptionChange={(value) => {
                   this.setState({ description: value }, () => {
-                    this.validateInput(value, 'description');
+                    const errors = validateInput(
+                      value,
+                      'description',
+                      this.state.errorMessages,
+                    );
+                    this.setState({ errorMessages: errors });
                   });
                 }}
                 saveRole={this.createRole}
@@ -113,27 +108,6 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
       </React.Fragment>
     );
   }
-
-  private validateInput = (input, field) => {
-    const error = { ...this.state.errorMessages };
-    if (input === '') {
-      error[field] = t`This field may not be blank.`;
-    } else if (input.toString().length > 128) {
-      error[field] = t`Ensure this field has no more than 128 characters.`;
-    } else if (field === 'name' && !/^[ a-zA-Z0-9_.]+$/.test(input)) {
-      error[field] = t`This field can only contain letters and numbers`;
-    } else if (input.length <= 2) {
-      error[field] = t`This field must be longer than 2 characters`;
-    } else if (field === 'name' && !input.startsWith('galaxy.')) {
-      error[field] = t`This field must start with 'galaxy.'.`;
-    } else {
-      delete error[field];
-    }
-
-    this.setState({
-      errorMessages: error,
-    });
-  };
 
   private cancelRole = () => {
     this.setState({
