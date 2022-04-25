@@ -1,6 +1,10 @@
 import { t } from '@lingui/macro';
 import { errorMessage } from 'src/utilities';
-import { mapNetworkErrors, validateInput } from 'src/utilities/map-role-errors';
+
+import {
+  mapNetworkErrors,
+  validateInput,
+} from 'src/containers/role-management/map-role-errors';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import './role.scss';

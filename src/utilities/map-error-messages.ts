@@ -23,5 +23,6 @@ export function mapErrorMessages(err): ErrorMessagesType {
       messages['__nofield'] = e.detail || e.title;
     }
   }
+
   return messages;
 }

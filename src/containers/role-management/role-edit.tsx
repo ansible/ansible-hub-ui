@@ -6,7 +6,10 @@ import {
   errorMessage,
   ErrorMessagesType,
 } from 'src/utilities';
-import { mapNetworkErrors, validateInput } from 'src/utilities/map-role-errors';
+import {
+  mapNetworkErrors,
+  validateInput,
+} from 'src/containers/role-management/map-role-errors';
 
 import { RoleAPI } from 'src/api/role';
 
