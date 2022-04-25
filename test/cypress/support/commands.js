@@ -439,7 +439,7 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
 
   // assemble the server url from env OR from config
   let server = null;
-  if ( baseUrl_env ) {
+  if (baseUrl_env) {
     server = baseUrl_env + prefix;
   } else {
     server = baseUrl_cfg + prefix;
@@ -449,17 +449,17 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   let cmd = `${galaxykitCommand}`;
   cmd = cmd + ` -c -s ${server}`;
   // authurl is required for sso/ephemeral
-  if ( authUrl ) {
+  if (authUrl) {
     cmd = cmd + ` -a ${authUrl}`;
   }
   // username is always required
   cmd = cmd + ` -u ${adminUsername}`;
   // password required for standalone and ephemeral
-  if ( adminPassword) {
+  if (adminPassword) {
     cmd = cmd + ` -p ${adminPassword}`;
   }
   // no token required for ephemeral
-  if ( adminToken ) {
+  if (adminToken) {
     cmd = cmd + ` -t ${adminToken}`;
   }
 
