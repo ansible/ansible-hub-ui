@@ -8,10 +8,6 @@ type GetUserReturn = Awaited<
 class API extends HubAPI {
   apiPath = this.getUIPath('me/');
 
-  constructor() {
-    super();
-  }
-
   getUser(): Promise<GetUserReturn['identity']> {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       return new Promise((resolve, reject) => {

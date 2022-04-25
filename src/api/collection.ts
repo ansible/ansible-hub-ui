@@ -52,10 +52,6 @@ export class API extends HubAPI {
   apiPath = this.getUIPath('repo/');
   cachedCollection: CollectionDetailType;
 
-  constructor() {
-    super();
-  }
-
   list(params?, repo?: string) {
     const path = this.apiPath + repo + '/';
     return super.list(params, path).then((response) => ({

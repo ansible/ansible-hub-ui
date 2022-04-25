@@ -3,10 +3,6 @@ import { HubAPI } from './hub';
 export class API extends HubAPI {
   apiPath = this.getUIPath('collection-versions/');
 
-  constructor() {
-    super();
-  }
-
   setRepository(
     namespace: string,
     name: string,
