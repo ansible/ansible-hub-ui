@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-// import { i18n } from '@lingui/core';
 
 import * as React from 'react';
 import {
@@ -231,8 +230,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     const error = { ...this.state.errorMessages };
     if (input === '') {
       error[field] = t`This field may not be blank.`;
-    } else if (input.toString().length > 128) {
-      error[field] = t`Ensure this field has no more than 128 characters.`;
     } else if (field === 'name' && !/^[ a-zA-Z0-9_.]+$/.test(input)) {
       error[field] = t`This field can only contain letters and numbers`;
     } else if (input.length <= 2) {

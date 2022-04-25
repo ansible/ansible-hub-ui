@@ -258,13 +258,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                       this.setState({ inputText: '' });
                     }}
                     params={params}
-                    ignoredParams={[
-                      'page_size',
-                      'page',
-                      'sort',
-                      'ordering',
-                      'name__startswith',
-                    ]}
+                    ignoredParams={['page_size', 'page', 'sort', 'ordering']}
                     niceValues={{
                       locked: { true: t`Locked`, false: t`Unlocked` },
                     }}
