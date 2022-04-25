@@ -15,7 +15,8 @@
   "devDependencies": {
     "cypress": "^9.5.4",
     "cypress-log-to-output": "^1.1.2",
-    "cypress-multi-reporters": "^1.6.0"
+    "cypress-multi-reporters": "^1.6.0",
+    "cypress-tags": "^0.3.0"
   },
   "dependencies": {
     "cypress-file-upload": "^5.0.8",
