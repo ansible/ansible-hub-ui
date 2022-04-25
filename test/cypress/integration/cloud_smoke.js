@@ -11,36 +11,47 @@ const cKwargs = { timeout: 10000 };
 
 describe(['cloud'], 'cloud smoketest', () => {
   before(() => {
-
-
     // ************************************************************
     // The chrome ui in cloud is unstable and causes random
     // exceptions, so we need to ignore those wherever possible
     // *************************************************************/
-    // https://github.com/quasarframework/quasar/issues/2233#issuecomment-414070235    
+    // https://github.com/quasarframework/quasar/issues/2233#issuecomment-414070235
     Cypress.on('uncaught:exception', (err, runnable) => {
+      //console.log('uncaught error', err);
+      //console.log('uncaught runnable', runnable);
 
-        //console.log('uncaught error', err);
-        //console.log('uncaught runnable', runnable);
+      // This is unavoidable on cloud
+      //const resizeObserverLoopErrRe = /^ResizeObserver loop limit exceeded/;
+      //if (resizeObserverLoopErrRe.test(err.message)) {
+      if (err.message.includes('ResizeObserver loop limit exceeded')) {
+        return false;
+      }
 
-        // This is unavoidable on cloud
-        const resizeObserverLoopErrRe = /^ResizeObserver loop limit exceeded/
-        if (resizeObserverLoopErrRe.test(err.message)) {
-            return false;
-        }
+      // random cloud issues?
+      if (err.message.includes('Failed to load resource')) {
+        return false;
+      }
 
-        //  random cloud issues?
-        if (err.message.includes('Failed to load resource')) {
-            return false;
-        }
+      // more random cloud issues?
+      if (err.message.includes('undefined') || err.message === undefined) {
+        return false;
+      }
 
-        // non-orgadmins can't query my-synclists ...
-        if (err.message.includes('Request failed with status code 403') {
-            return false;
-        }
+      // non-orgadmins can't query my-synclists ...
+      if (err.message.includes('Request failed with status code 403')) {
+        return false;
+      }
 
-        return true;
-    }
+      // token page?
+      if (err.message.includes('not available')) {
+        return false;
+      }
+
+      console.log('uncaught error', err);
+      console.log('uncaught runnable', runnable);
+
+      return true;
+    });
 
     // create a single collection ...
     const suffix = Math.floor(Math.random() * 10000);
@@ -144,9 +155,6 @@ describe(['cloud'], 'cloud smoketest', () => {
 
       // wait for the the repository list to appear
       cy.get('.repository-list', cKwargs).should('be.visible');
-
-      // ensure the get token button appears ... NOT IN EPHEMERAL?
-      //cy.contains('button', 'Get token').should('exist');
     });
 
     it('can load the Connect to hub page', () => {
@@ -154,6 +162,7 @@ describe(['cloud'], 'cloud smoketest', () => {
       cy.get('[data-ouia-component-id="Connect to Hub"]', cKwargs).click();
 
       // ensure the load token button appears
+      cy.get('button.pf-c-button', cKwargs);
       cy.contains('button', 'Load token').should('exist');
     });
   });
