@@ -36,7 +36,7 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    ApplicationInfoAPI.get('').then((result) => {
+    ApplicationInfoAPI.get().then((result) => {
       this.setState({
         applicationInfo: {
           server_version: result.data.server_version,
