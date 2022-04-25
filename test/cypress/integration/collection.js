@@ -31,7 +31,7 @@ describe('collection tests', () => {
     cy.intercept(
       'DELETE',
       Cypress.env('prefix') +
-        '/content/published/v3/collections/test_namespace/test_collection',
+        'v3/plugin/ansible/content/published/collections/index/test_namespace/test_collection',
     ).as('deleteCollection');
     cy.intercept('GET', Cypress.env('prefix') + '/v3/tasks/*').as('taskStatus');
 
