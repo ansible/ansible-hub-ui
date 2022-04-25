@@ -47,6 +47,11 @@ describe(['cloud'], 'cloud smoketest', () => {
         return false;
       }
 
+      // token page?
+      if (err.message.includes('unhandled promise rejection')) {
+        return false;
+      }
+
       console.log('uncaught error', err);
       console.log('uncaught runnable', runnable);
 
