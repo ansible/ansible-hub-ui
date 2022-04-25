@@ -6,6 +6,7 @@ import {
   errorMessage,
   ErrorMessagesType,
 } from 'src/utilities';
+import { mapNetworkErrors } from 'src/utilities/map-role-errors';
 
 import { RoleAPI } from 'src/api/role';
 
@@ -206,26 +207,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private checkLength = (input) => {
-    if (input.toString().length > 128 || input.toString().length === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  private helperText = (input) => {
-    let text = null;
-    if (input === '') {
-      text = t`This field may not be blank.`;
-    } else if (input.toString().length > 128) {
-      text = t`Ensure this field has no more than 128 characters.`;
-    } else {
-      text = null;
-    }
-    return text;
-  };
-
   private validateInput = (input, field) => {
     const error = { ...this.state.errorMessages };
     if (input === '') {
@@ -252,14 +233,6 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     });
   };
 
-  private mapErrors = (err) => {
-    const errors = { ...err.response.data };
-    for (const field in errors) {
-      errors[field] = errors[field].toString().split(',').join(' ');
-    }
-    this.setState({ errorMessages: errors });
-  };
-
   private addAlert(title, variant, description?) {
     this.setState({
       alerts: [
@@ -284,8 +257,9 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
         .catch((err) => {
           const { status, statusText } = err.response;
           if (err.response.status === 400) {
-            this.mapErrors(err);
-            this.setState({ saving: false });
+            const errors = mapNetworkErrors(err);
+
+            this.setState({ saving: false, errorMessages: errors });
           } else if (status === 404) {
             this.setState({
               errorMessages: {},

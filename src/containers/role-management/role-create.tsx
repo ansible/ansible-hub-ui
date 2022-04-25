@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro';
 import { errorMessage } from 'src/utilities';
+import { mapNetworkErrors } from 'src/utilities/map-role-errors';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import './role.scss';
@@ -19,7 +20,7 @@ import { RoleAPI } from 'src/api/role';
 
 interface IState {
   saving: boolean;
-  errorMessages: { [key: string]: string };
+  errorMessages: { [key: string]: string } | (() => void);
   redirect?: string;
   permissions: string[];
   name: string;
@@ -153,10 +154,11 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
           const { status, statusText } = err.response;
 
           if (status === 400) {
-            this.mapErrors(err);
+            const errors = mapNetworkErrors(err);
 
             this.setState({
               saving: false,
+              errorMessages: errors,
             });
           } else if (status === 404) {
             this.setState({
@@ -171,14 +173,6 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
           }
         });
     });
-  };
-
-  private mapErrors = (err) => {
-    const errors = { ...err.response.data };
-    for (const field in errors) {
-      errors[field] = errors[field].toString().split(',').join(' ');
-    }
-    this.setState({ errorMessages: errors });
   };
 }
 
