@@ -71,27 +71,17 @@ export class RoleForm extends React.Component<IProps, IState> {
       saving,
     } = this.props;
     const groups = Constants.PERMISSIONS;
-    const { featureFlags } = this.context;
-    let isUserMgmtDisabled = false;
+
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
-    if (featureFlags) {
-      isUserMgmtDisabled = featureFlags.external_authentication;
-    }
-    if (isUserMgmtDisabled) {
-      Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-        if (perm in filteredPermissions) {
-          delete filteredPermissions[perm];
-        }
-      });
-    }
 
     return (
       <React.Fragment>
-        <div>
-          <div style={{ paddingBottom: '8px' }}>
-            <Title headingLevel='h2'>{t`Details`}</Title>
-          </div>
-          <Form>
+        <Form>
+          <div>
+            <div style={{ paddingBottom: '8px' }}>
+              <Title headingLevel='h2'>{t`Details`}</Title>
+            </div>
+
             <div style={{ display: 'flex', gap: '10px' }}>
               <FormGroup
                 isRequired={true}
@@ -134,77 +124,80 @@ export class RoleForm extends React.Component<IProps, IState> {
                 />
               </FormGroup>
             </div>
-          </Form>
-        </div>
-        <div>
-          <br />
-          <Divider />
-          <br />
-          <Title headingLevel='h2'>Permissions</Title>
+          </div>
+          <div>
+            <br />
+            <Divider />
+            <br />
+            <Title headingLevel='h2'>Permissions</Title>
 
-          {groups.map((group) => (
-            <Flex
-              style={{ marginTop: '16px' }}
-              alignItems={{ default: 'alignItemsCenter' }}
-              key={group.name}
-              className={group.name}
-            >
-              <FlexItem style={{ minWidth: '200px' }}>
-                {i18n._(group.label)}
-              </FlexItem>
-              <FlexItem grow={{ default: 'grow' }}>
-                <PermissionChipSelector
-                  availablePermissions={group.object_permissions
-                    .filter(
-                      (perm) =>
-                        !selectedPermissions.find(
-                          (selected) => selected === perm,
+            {groups.map((group) => (
+              <Flex
+                style={{ marginTop: '16px' }}
+                alignItems={{ default: 'alignItemsCenter' }}
+                key={group.name}
+                className={group.name}
+              >
+                <FlexItem style={{ minWidth: '200px' }}>
+                  {i18n._(group.label)}
+                </FlexItem>
+                <FlexItem grow={{ default: 'grow' }}>
+                  <PermissionChipSelector
+                    availablePermissions={group.object_permissions
+                      .filter(
+                        (perm) =>
+                          !selectedPermissions.find(
+                            (selected) => selected === perm,
+                          ),
+                      )
+                      .map((value) => twoWayMapper(value, filteredPermissions))
+                      .sort()}
+                    selectedPermissions={selectedPermissions
+                      .filter((selected) =>
+                        group.object_permissions.find(
+                          (perm) => selected === perm,
                         ),
-                    )
-                    .map((value) => twoWayMapper(value, filteredPermissions))
-                    .sort()}
-                  selectedPermissions={selectedPermissions
-                    .filter((selected) =>
-                      group.object_permissions.find(
-                        (perm) => selected === perm,
-                      ),
-                    )
-                    .map((value) => twoWayMapper(value, filteredPermissions))}
-                  setSelected={(perms) => this.setState({ permissions: perms })}
-                  menuAppendTo='inline'
-                  multilingual={true}
-                  isViewOnly={false}
-                  onClear={() => {
-                    const clearedPerms = group.object_permissions;
-                    this.setState({
-                      permissions: this.state.permissions.filter(
-                        (x) => !clearedPerms.includes(x),
-                      ),
-                    });
-                  }}
-                  onSelect={(event, selection) => {
-                    const newPerms = new Set(this.state.permissions);
-                    if (
-                      newPerms.has(twoWayMapper(selection, filteredPermissions))
-                    ) {
-                      newPerms.delete(
-                        twoWayMapper(selection, filteredPermissions),
-                      );
-                    } else {
-                      newPerms.add(
-                        twoWayMapper(selection, filteredPermissions),
-                      );
+                      )
+                      .map((value) => twoWayMapper(value, filteredPermissions))}
+                    setSelected={(perms) =>
+                      this.setState({ permissions: perms })
                     }
-                    this.setState({
-                      permissions: Array.from(newPerms),
-                    });
-                  }}
-                />
-              </FlexItem>
-            </Flex>
-          ))}
-        </div>
-        <Form>
+                    menuAppendTo='inline'
+                    multilingual={true}
+                    isViewOnly={false}
+                    onClear={() => {
+                      const clearedPerms = group.object_permissions;
+                      this.setState({
+                        permissions: this.state.permissions.filter(
+                          (x) => !clearedPerms.includes(x),
+                        ),
+                      });
+                    }}
+                    onSelect={(event, selection) => {
+                      const newPerms = new Set(this.state.permissions);
+                      if (
+                        newPerms.has(
+                          twoWayMapper(selection, filteredPermissions),
+                        )
+                      ) {
+                        newPerms.delete(
+                          twoWayMapper(selection, filteredPermissions),
+                        );
+                      } else {
+                        newPerms.add(
+                          twoWayMapper(selection, filteredPermissions),
+                        );
+                      }
+                      this.setState({
+                        permissions: Array.from(newPerms),
+                      });
+                    }}
+                  />
+                </FlexItem>
+              </Flex>
+            ))}
+          </div>
+
           <ActionGroup>
             <Button
               variant='primary'
