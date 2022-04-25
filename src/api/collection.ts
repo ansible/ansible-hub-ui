@@ -73,7 +73,7 @@ export class API extends HubAPI {
     isDeprecated: boolean,
     repo: string,
   ) {
-    const path = `content/${repo}/v3/collections/`;
+    const path = `v3/plugin/ansible/content/${repo}/collections/index/`;
 
     return this.patch(
       `${collection.namespace.name}/${collection.name}`,
@@ -154,7 +154,7 @@ export class API extends HubAPI {
     return new Promise((resolve, reject) => {
       this.http
         .get(
-          `content/${distro_base_path}/v3/collections/${namespace}/${name}/versions/${version}/`,
+          `v3/plugin/ansible/content/${distro_base_path}/collections/index/${namespace}/${name}/versions/${version}/`,
         )
         .then((result) => {
           resolve(result.data['download_url']);
@@ -165,13 +165,13 @@ export class API extends HubAPI {
 
   deleteCollectionVersion(repo, collection) {
     return this.http.delete(
-      `content/${repo}/v3/collections/${collection.namespace.name}/${collection.name}/versions/${collection.latest_version.version}/`,
+      `v3/plugin/ansible/content/${repo}/collections/index/${collection.namespace.name}/${collection.name}/versions/${collection.latest_version.version}/`,
     );
   }
 
   deleteCollection(repo, collection) {
     return this.http.delete(
-      `content/${repo}/v3/collections/${collection.namespace.name}/${collection.name}/`,
+      `v3/plugin/ansible/content/${repo}/collections/index/${collection.namespace.name}/${collection.name}/`,
     );
   }
 
