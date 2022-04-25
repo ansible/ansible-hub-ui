@@ -84,6 +84,33 @@ Cypress.Commands.add('manualLogin', {}, (username, password) => {
   cy.wait('@feature-flags');
 });
 
+Cypress.Commands.add('manualCloudLogin', {}, (username, password) => {
+  /**********************************
+   * This works for staging ...
+   *********************************/
+  /*
+  cy.visit('/');
+  // type in the username
+  cy.get('#username-verification').type(username);
+  // click next
+  cy.get('#login-show-step2').click();
+  cy.get('#password').type(`${password}{enter}`);
+  cy.get('#UserMenu');
+  */
+
+  /**********************************
+   * This works for ephemeral ...
+   *********************************/
+  cy.visit('/');
+  // type in the username
+  cy.get('input[id^="username"]').type(username);
+  // type in the password and press enter to trigger login
+  cy.get('input[id^="password"').type(`${password}{enter}`);
+
+  // Wait for the user menu?
+  cy.get('#UserMenu');
+});
+
 Cypress.Commands.add('cookieLogout', {}, () => {
   cy.clearCookie('sessionid');
   cy.clearCookie('csrftoken');
@@ -395,21 +422,46 @@ Cypress.Commands.add('deleteGroup', {}, (name) => {
 // GalaxyKit Integration
 /// cy.galaxykit(operation, ...args, options = {}) .. only args get escaped; yields an array of nonempty lines on success
 Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
+  const authUrl = Cypress.env('authUrl');
   const adminUsername = Cypress.env('username');
   const adminPassword = Cypress.env('password');
+  const adminToken = Cypress.env('token');
   const galaxykitCommand = Cypress.env('galaxykit') || 'galaxykit';
-  const server = Cypress.config().baseUrl + Cypress.env('prefix');
+
+  let server = Cypress.env('prefix');
+  if (
+    Cypress.env('baseUrl') !== undefined &&
+    Cypress.env('baseUrl') !== null &&
+    Cypress.env('baseUrl') !== ''
+  ) {
+    server = Cypress.env('baseUrl') + server;
+  } else {
+    server = Cypress.config().baseUrl + server;
+  }
   const options =
     args.length >= 1 && typeof args[args.length - 1] == 'object'
       ? args.splice(args.length - 1, 1)[0]
       : [];
 
   cy.log(`${galaxykitCommand} ${operation} ${args}`);
-  const cmd = shell`${shell.preserve(
-    galaxykitCommand,
-  )} -s ${server} -u ${adminUsername} -p ${adminPassword} ${shell.preserve(
-    operation,
-  )} ${args}`;
+  let cmd = `${galaxykitCommand}`;
+  cmd = cmd + ` -c -s ${server} -u ${adminUsername}`;
+  if (authUrl !== undefined && authUrl !== null && authUrl !== '') {
+    cmd = cmd + ` -a ${authUrl}`;
+  }
+  if (
+    adminPassword !== undefined &&
+    adminPassword !== null &&
+    adminPassword !== ''
+  ) {
+    cmd = cmd + ` -p ${adminPassword}`;
+  }
+  if (adminToken !== undefined && adminToken !== null && adminToken !== '') {
+    cmd = cmd + ` -t ${adminToken}`;
+  }
+  cmd = cmd + ' ' + `${operation} ${args}`;
+  cmd = shell`${shell.preserve(cmd)}`;
+  cy.log(cmd);
 
   return cy.exec(cmd, options).then(({ code, stderr, stdout }) => {
     console.log(`RUN ${cmd}`, options, { code, stderr, stdout });
