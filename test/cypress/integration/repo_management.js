@@ -1,5 +1,3 @@
-import assert from 'assert';
-
 describe('Repo Management tests', () => {
   let remoteRepoUrl = '/ui/repositories?tab=remote';
   let localRepoUrl = '/ui/repositories';
@@ -44,13 +42,14 @@ describe('Repo Management tests', () => {
     cy.visit(localRepoUrl);
     cy.get('[data-cy="get-token"]').contains('Get token').click();
     cy.get('button').contains('Load token').click();
-    cy.get('[aria-label="Copyable input"]')
+    return cy
+      .get('[aria-label="Copyable input"]')
       .invoke('val')
       .then((token) => {
         cy.get('[aria-label="Copy to clipboard"]').realClick();
-        cy.window().then((win) => {
-          win.navigator.clipboard.readText().then((copiedToken) => {
-            assert.equal(copiedToken, token);
+        return cy.window().then((win) => {
+          return win.navigator.clipboard.readText().then((copiedToken) => {
+            expect(copiedToken).to.equal(token);
           });
         });
       });
@@ -64,17 +63,18 @@ describe('Repo Management tests', () => {
     cy.get(
       'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre',
     ).contains('http://localhost:8002/api/automation-hub/content/community/');
-    cy.get(
-      'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre',
-    )
+    return cy
+      .get(
+        'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre',
+      )
       .invoke('text')
       .then((CLI) => {
         cy.get(
           'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__group > button[aria-label="Copy to clipboard"]',
         ).realClick();
-        cy.window().then((win) => {
-          win.navigator.clipboard.readText().then((copiedCLI) => {
-            assert.equal(copiedCLI, CLI);
+        return cy.window().then((win) => {
+          return win.navigator.clipboard.readText().then((copiedCLI) => {
+            expect(copiedCLI).to.equal(CLI);
           });
         });
       });
@@ -82,14 +82,18 @@ describe('Repo Management tests', () => {
 
   it('edits remote repo', () => {
     cy.visit(remoteRepoUrl);
+    cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
+    cy.contains('Edit').click();
+    cy.contains('Show advanced options').click();
+    cy.get('input[id="username"]').type('test');
+    cy.get('input[id="password"]').type('test');
+    cy.get('input[id="proxy_url"]').type('https://example.org');
+    cy.get('input[id="proxy_username"]').type('test');
+    cy.get('input[id="proxy_password"]').type('test');
+    cy.contains('Save').click();
 
-    //select config button for 'community' repo
-    cy.get('td')
-      .contains('community')
-      .parent()
-      .children('td:nth-child(6)')
-      .contains('Configure')
-      .click();
+    cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'rh-certified' repo
+    cy.contains('Edit').click();
   });
 
   it('starts remote repo sync', () => {
@@ -98,7 +102,7 @@ describe('Repo Management tests', () => {
     //checks sync status === 'Running' after sync post request
     cy.intercept(
       'POST',
-      'http://localhost:8002/api/automation-hub/content/rh-certified/v3/sync/',
+      Cypress.env('prefix') + 'content/rh-certified/v3/sync/',
     ).as('startSync');
     cy.get('td')
       .contains('rh-certified')
