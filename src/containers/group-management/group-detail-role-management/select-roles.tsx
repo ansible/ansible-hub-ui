@@ -231,7 +231,6 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
               params={localParams}
               updateParams={(p) => setLocalParams(p)}
               count={rolesItemCount}
-              style={{ padding: '0px' }}
             />
           </FlexItem>
         )}

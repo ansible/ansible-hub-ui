@@ -31,21 +31,12 @@ interface IProps {
 
   /** Options for the number of items that can be displayed per page */
   perPageOptions?: number[];
-
-  style?: object;
 }
 
 export class Pagination extends React.Component<IProps> {
   render() {
-    const {
-      count,
-      params,
-      updateParams,
-      isTop,
-      perPageOptions,
-      isCompact,
-      style,
-    } = this.props;
+    const { count, params, updateParams, isTop, perPageOptions, isCompact } =
+      this.props;
 
     const extraProps = {};
     if (!isTop) {
@@ -75,7 +66,6 @@ export class Pagination extends React.Component<IProps> {
           items: null,
         }}
         toggleTemplate={(props) => <ToggleTemplate ofWord={t`of`} {...props} />}
-        style={style}
       />
     );
   }

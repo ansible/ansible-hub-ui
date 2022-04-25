@@ -9,8 +9,11 @@
   padding: 1rem 1.5rem 0;
 
   .hub-select-roles-content {
-    height: 530px;
     overflow: auto;
+  }
+
+  .pf-c-pagination.pf-m-bottom {
+    padding-top: 0;
   }
 
   .hub-permission {
