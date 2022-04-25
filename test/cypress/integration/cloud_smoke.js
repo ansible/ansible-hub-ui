@@ -11,6 +11,37 @@ const cKwargs = { timeout: 10000 };
 
 describe(['cloud'], 'cloud smoketest', () => {
   before(() => {
+
+
+    // ************************************************************
+    // The chrome ui in cloud is unstable and causes random
+    // exceptions, so we need to ignore those wherever possible
+    // *************************************************************/
+    // https://github.com/quasarframework/quasar/issues/2233#issuecomment-414070235    
+    Cypress.on('uncaught:exception', (err, runnable) => {
+
+        //console.log('uncaught error', err);
+        //console.log('uncaught runnable', runnable);
+
+        // This is unavoidable on cloud
+        const resizeObserverLoopErrRe = /^ResizeObserver loop limit exceeded/
+        if (resizeObserverLoopErrRe.test(err.message)) {
+            return false;
+        }
+
+        //  random cloud issues?
+        if (err.message.includes('Failed to load resource')) {
+            return false;
+        }
+
+        // non-orgadmins can't query my-synclists ...
+        if (err.message.includes('Request failed with status code 403') {
+            return false;
+        }
+
+        return true;
+    }
+
     // create a single collection ...
     const suffix = Math.floor(Math.random() * 10000);
     const collectionNamespace = `namespace_${suffix}`;
@@ -50,12 +81,15 @@ describe(['cloud'], 'cloud smoketest', () => {
     // wait for the collections button to appear and then click on it
     cy.get('[data-ouia-component-id="Collections"]', cKwargs).click();
     // wait for the the collections list to appear
+    cy.get('.collection-container', cKwargs);
     cy.get('.collection-container', cKwargs).should('be.visible');
   });
 
   describe('with download', () => {
     it('can load a Collection', () => {
       // wait for collections to appear
+      //cy.get('.collection-container', cKwargs).should('be.visible');
+      cy.get('.collection-container', cKwargs);
       cy.get('.collection-container', cKwargs).should('be.visible');
 
       // wait for collections to load
