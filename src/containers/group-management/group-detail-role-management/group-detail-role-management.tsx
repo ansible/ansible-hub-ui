@@ -217,6 +217,14 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
 
   const groups = Constants.PERMISSIONS;
 
+  const getSelectedRoles = (role, group) => {
+    return role.permissions
+      .filter((selected) =>
+        group.object_permissions.find((perm) => selected === perm),
+      )
+      .map((value) => twoWayMapper(value, filteredPermissions));
+  };
+
   return (
     <>
       {selectedDeleteRole && deleteModal}
@@ -330,49 +338,51 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                   <ExpandableRow
                     key={i}
                     rowIndex={i}
-                    expandableRowContent={
-                      <>
-                        {groups.map((group) => (
+                    expandableRowContent={groups.map((group, i) => (
+                      <React.Fragment key={i}>
+                        {getSelectedRoles(role, group).length !== 0 && (
                           <Flex
                             style={{ marginTop: '16px' }}
                             alignItems={{ default: 'alignItemsCenter' }}
                             key={group.name}
                             className={group.name}
                           >
-                            <FlexItem style={{ minWidth: '200px' }}>
-                              {i18n._(group.label)}
-                            </FlexItem>
-                            <FlexItem grow={{ default: 'grow' }}>
-                              <PermissionChipSelector
-                                availablePermissions={group.object_permissions
-                                  .filter(
-                                    (perm) =>
-                                      !role.permissions.find(
-                                        (selected) => selected === perm,
-                                      ),
-                                  )
-                                  .map((value) =>
-                                    twoWayMapper(value, filteredPermissions),
-                                  )
-                                  .sort()}
-                                selectedPermissions={role.permissions
-                                  .filter((selected) =>
-                                    group.object_permissions.find(
-                                      (perm) => selected === perm,
-                                    ),
-                                  )
-                                  .map((value) =>
-                                    twoWayMapper(value, filteredPermissions),
-                                  )}
-                                menuAppendTo='inline'
-                                multilingual={true}
-                                isViewOnly={true}
-                              />
-                            </FlexItem>
+                            {role.permissions.length !== 0 && (
+                              <>
+                                <FlexItem style={{ minWidth: '200px' }}>
+                                  {i18n._(group.label)}
+                                </FlexItem>
+                                <FlexItem grow={{ default: 'grow' }}>
+                                  <PermissionChipSelector
+                                    availablePermissions={group.object_permissions
+                                      .filter(
+                                        (perm) =>
+                                          !role.permissions.find(
+                                            (selected) => selected === perm,
+                                          ),
+                                      )
+                                      .map((value) =>
+                                        twoWayMapper(
+                                          value,
+                                          filteredPermissions,
+                                        ),
+                                      )
+                                      .sort()}
+                                    selectedPermissions={getSelectedRoles(
+                                      role,
+                                      group,
+                                    )}
+                                    menuAppendTo='inline'
+                                    multilingual={true}
+                                    isViewOnly={true}
+                                  />
+                                </FlexItem>
+                              </>
+                            )}
                           </Flex>
-                        ))}
-                      </>
-                    }
+                        )}
+                      </React.Fragment>
+                    ))}
                     data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
                   >
                     <td>{role.name}</td>
