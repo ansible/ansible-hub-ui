@@ -326,6 +326,7 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.contains('button', 'Add').click();
   cy.get('input.pf-c-select__toggle-typeahead').type(userName);
   cy.contains('button', userName).click();
+  cy.get('.pf-c-content h2').click(); // click modal header to close dropdown
   cy.contains('footer > button', 'Add').click();
   cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
 });
