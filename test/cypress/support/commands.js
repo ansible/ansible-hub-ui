@@ -471,7 +471,7 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   return cy.exec(cmd, options).then(({ code, stderr, stdout }) => {
     console.log(`RUN ${cmd}`, options, { code, stderr, stdout });
 
-    if (stderr) {
+    if (code !== 0) {
       return Promise.reject(new Error(`Galaxykit failed: ${stderr}`));
     }
 
