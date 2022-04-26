@@ -18,6 +18,13 @@ export { default as UserList } from './user-management/user-list';
 export { default as EditUser } from './user-management/user-edit';
 export { default as UserDetail } from './user-management/user-detail';
 export { default as UserCreate } from './user-management/user-create';
+export { default as RoleCreate } from './role-management/role-create';
+export {
+  mapNetworkErrors,
+  validateInput,
+} from './role-management/map-role-errors';
+
+export { default as EditRole } from './role-management/role-edit';
 export { default as UserProfile } from './settings/user-profile';
 export { default as GroupList } from './group-management/group-list';
 export { default as GroupDetail } from './group-management/group-detail';
