@@ -201,6 +201,76 @@ Cypress.Commands.add('createGroup', {}, (name) => {
   cy.contains(name).should('exist');
 });
 
+Cypress.Commands.add('addRolesToGroup', {}, (groupName, roles) => {
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('groups');
+  cy.menuGo('User Access > Groups');
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+  cy.wait('@groups');
+  cy.get('[data-cy=add-roles]').click();
+  roles.forEach((role) => {
+    cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${role}"]`)
+      .find('input')
+      .click();
+  });
+
+  cy.get('.pf-c-wizard__footer > button').contains('Next').click();
+
+  roles.forEach((role) => {
+    cy.contains(role);
+  });
+
+  cy.intercept('POST', Cypress.env('pulpPrefix') + 'groups/*/roles/').as(
+    'postGroupRoles',
+  );
+
+  cy.intercept('GET', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
+    'getGroupRoles',
+  );
+
+  cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('roles');
+
+  cy.get('.pf-c-wizard__footer > button').contains('Add').click();
+
+  roles.forEach(() => {
+    cy.wait('@postGroupRoles');
+  });
+  cy.wait('@getGroupRoles');
+  cy.wait('@roles');
+});
+
+Cypress.Commands.add('removeRoleFromGroup', {}, (groupName, role) => {
+  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('groups');
+  cy.menuGo('User Access > Groups');
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+  cy.wait('@groups');
+
+  cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`)
+    .find('[data-cy="kebab-toggle"]')
+    .click()
+    .contains('Remove Role')
+    .click();
+
+  cy.intercept('DELETE', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
+    'deleteRole',
+  );
+
+  cy.intercept('GET', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
+    'getGroupRoles',
+  );
+
+  cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('roles');
+
+  cy.get('.pf-c-modal-box__footer').contains('Delete').click();
+
+  cy.wait('@deleteRole');
+  cy.wait('@getGroupRoles');
+  cy.wait('@roles');
+});
+
+Cypress.Commands.add('removeRolesFromGroup', {}, (groupName, roles) => {
+  roles.forEach((role) => cy.removeRoleFromGroup(groupName, role));
+});
+
 /*
  * groupName: name of the group you want to add permissions to
  * permissions: array of {group, permissions}
