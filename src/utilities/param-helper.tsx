@@ -153,4 +153,17 @@ export class ParamHelper {
 
     updateParams(params);
   }
+
+  // check if params are valid for sorting
+  static validSortParams = (sort, sortParams, defaultSort) => {
+    const isDesc = sort.includes('-');
+
+    const ascSort = isDesc ? sort.replace('-', '') : sort;
+
+    if (sortParams.includes(ascSort)) {
+      return isDesc ? sort : ascSort;
+    }
+
+    return defaultSort;
+  };
 }
