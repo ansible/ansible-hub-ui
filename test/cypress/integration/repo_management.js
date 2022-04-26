@@ -1,4 +1,5 @@
 describe('Repo Management tests', () => {
+  let num = (~~(Math.random() * 1000000)).toString();
   let remoteRepoUrl = '/ui/repositories?tab=remote';
   let localRepoUrl = '/ui/repositories';
 
@@ -80,8 +81,40 @@ describe('Repo Management tests', () => {
       });
   });
 
-  it('edits remote repo', () => {
+  it('edits remote registry', () => {
+    cy.menuGo('Execution Environments > Remote Registries');
+    cy.deleteRegistries();
+    cy.addRemoteRegistry(`docker${num}`, 'https://registry.hub.docker.com/');
+    cy.get('[aria-label="Actions"]').click();
+    cy.contains('Edit').click();
+    cy.contains('Show advanced options').click();
+    cy.get('input[id="username"]').type('test');
+    cy.get('input[id="password"]').type('test');
+    cy.get('input[id="proxy_url"]').type('https://example.org');
+    cy.get('input[id="proxy_username"]').type('test');
+    cy.get('input[id="proxy_password"]').type('test');
+    cy.intercept(
+      'PUT',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/**/',
+    ).as('editRegistry');
+    cy.contains('Save').click();
+    cy.wait('@editRegistry');
+
+    // verify values have been saved properly.
+    cy.get('[aria-label="Actions"]').click();
+    cy.contains('Edit').click();
+    cy.contains('Show advanced options').click();
+    cy.get('input[id="username"]').should('have.value', 'test');
+    cy.get('input[id="proxy_url"]').should('have.value', 'https://example.org');
+    cy.get('input[id="proxy_username"]').should('have.value', 'test');
+    cy.contains('Save').click();
+  });
+
+  it(`edits remote repo 'community'`, () => {
     cy.visit(remoteRepoUrl);
+
+    // edit 'community repo
+
     cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
@@ -92,8 +125,43 @@ describe('Repo Management tests', () => {
     cy.get('input[id="proxy_password"]').type('test');
     cy.contains('Save').click();
 
-    cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'rh-certified' repo
+    // verify values have been saved properly.
+    cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
     cy.contains('Edit').click();
+    cy.contains('Show advanced options').click();
+    cy.get('input[id="username"]').should('have.value', 'test');
+    cy.get('input[id="proxy_url"]').should('have.value', 'https://example.org');
+    cy.get('input[id="proxy_username"]').should('have.value', 'test');
+    cy.contains('Save').click();
+  });
+
+  it.only(`edits remote repo 'rh-certified'`, () => {
+    // edit 'rh-certified' repo
+    cy.visit(remoteRepoUrl);
+    cy.get('[aria-label="Actions"]').eq(1).click(); // click the kebab menu on the 'rh-certified' repo
+    cy.contains('Edit').click();
+    cy.contains('Show advanced options').click();
+    cy.get('input[id="username"]').type('test');
+
+    cy.get('input[id="password"]').type('test');
+    cy.get('input[id="proxy_url"]').type('https://example.org');
+    cy.get('input[id="proxy_username"]').type('test');
+    cy.get('input[id="proxy_password"]').type('test');
+    cy.intercept(
+      'PUT',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/**/',
+    ).as('editRegistry');
+    cy.contains('Save').click();
+    cy.wait('@editRegistry');
+
+    // // verify values have been saved properly.
+    cy.get('[aria-label="Actions"]').eq(1).click(); // click the kebab menu on the 'community' repo
+    cy.contains('Edit').click();
+    cy.contains('Show advanced options').click();
+    cy.get('input[id="username"]').should('have.value', 'test');
+    cy.get('input[id="proxy_url"]').should('have.value', 'https://example.org');
+    cy.get('input[id="proxy_username"]').should('have.value', 'test');
+    cy.contains('Save').click();
   });
 
   it('starts remote repo sync', () => {
@@ -134,6 +202,7 @@ describe('Repo Management tests', () => {
     cy.get('input[id="proxy_url"]').type('https://example.org');
     cy.get('input[id="proxy_username"]').type('test');
     cy.get('input[id="proxy_password"]').type('test');
+    cy.contains('Save').click();
     cy.intercept(
       'PUT',
       Cypress.env('prefix') + 'content/community/v3/sync/config/',
