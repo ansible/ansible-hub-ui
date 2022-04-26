@@ -36,31 +36,28 @@ describe('Hub Group Management Tests', () => {
     cy.deleteUser(userName);
   });
 
-  it('admin user can add/remove permissions to/from a group', () => {
-    let name = 'testGroup';
-    let permissionTypes = [
-      'namespaces',
-      'collections',
-      'users',
-      'groups',
-      'remotes',
+  it.skip('admin user can add/remove roles to/from a group', () => {
+    const name = 'testGroup';
+    const galaxyRoles = [
+      'galaxy.collection_admin',
+      'galaxy.execution_environment_admin',
+      'galaxy.namespace_owner',
+      'galaxy.publisher',
+      'galaxy.synclist_owner',
     ];
 
     cy.galaxykit('group create', name);
 
-    cy.addAllPermissions(name);
-    permissionTypes.forEach((permGroup) => {
-      cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}`)
-        .contains('span', 'No permission')
-        .should('not.exist');
+    cy.addRolesToGroup(name, galaxyRoles);
+
+    galaxyRoles.forEach((role) => {
+      cy.contains(`Role ${role} has been successfully added to ${name}.`);
+
+      cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`);
     });
 
-    cy.removeAllPermissions(name);
-    permissionTypes.forEach((permGroup) => {
-      cy.get(`.pf-l-flex.pf-m-align-items-center.${permGroup}`)
-        .contains('span', 'No permission')
-        .should('exist');
-    });
+    cy.removeRolesFromGroup(name, galaxyRoles);
+    cy.contains('There are currently no roles assigned to this group.');
 
     cy.galaxykit('group delete', name);
   });

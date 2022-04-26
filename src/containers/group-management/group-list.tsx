@@ -407,13 +407,9 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
           onClick={() => {
             this.setState({
               selectedGroup: { ...group },
-              redirect: formatPath(
-                Paths.groupDetail,
-                {
-                  group: group.id,
-                },
-                { isEditing: true },
-              ),
+              redirect: formatPath(Paths.groupDetail, {
+                group: group.id,
+              }),
             });
           }}
         >

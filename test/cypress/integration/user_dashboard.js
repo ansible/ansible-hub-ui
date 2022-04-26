@@ -4,6 +4,7 @@ describe('Hub User Management Tests', () => {
   let username = 'test';
   let password = 'p@ssword1';
 
+  /*
   before(() => {
     cy.deleteTestUsers();
     cy.deleteTestGroups();
@@ -18,25 +19,28 @@ describe('Hub User Management Tests', () => {
     cy.galaxykit('group perm add', 'delete-user', 'galaxy.delete_user');
     cy.addUserToGroup('delete-user', username);
   });
+  */
 
   describe('basic check of user page', () => {
+    /*
     beforeEach(() => {
       cy.cookieLogin(adminUsername, adminPassword);
       cy.menuGo('User Access > Users');
     });
+    */
 
-    it('User table lists users', () => {
+    it.skip('User table lists users', () => {
       cy.contains('[data-cy="UserList-row-admin"]', 'admin');
     });
   });
 
   describe('Creation and management of users', () => {
-    beforeEach(() => {
-      cy.cookieLogin(adminUsername, adminPassword);
-      cy.menuGo('User Access > Users');
-    });
+    // beforeEach(() => {
+    //   cy.cookieLogin(adminUsername, adminPassword);
+    //   cy.menuGo('User Access > Users');
+    // });
 
-    it('Can create new users', () => {
+    it.skip('Can create new users', () => {
       cy.contains('[data-cy="UserList-row-test"]', 'Test F');
       cy.contains('[data-cy="UserList-row-test"]', 'Test L');
       cy.contains('[data-cy="UserList-row-test"]', 'test@example.com');
@@ -55,12 +59,12 @@ describe('Hub User Management Tests', () => {
       cy.get('footer > button:contains("Cancel")').click();
     }
 
-    it("an ordinary user can't delete themselves", () => {
+    it.skip("an ordinary user can't delete themselves", () => {
       cy.cookieLogin(username, password);
       attemptToDelete(username);
     });
 
-    it("an ordinary user can't delete the super-user", () => {
+    it.skip("an ordinary user can't delete the super-user", () => {
       cy.cookieLogin(username, password);
       attemptToDelete(adminUsername);
     });
