@@ -78,6 +78,9 @@ export function withContainerRepo(WrappedComponent) {
         images: formatPath(Paths.executionEnvironmentDetailImages, {
           container,
         }),
+        owners: formatPath(Paths.executionEnvironmentDetailOwners, {
+          container,
+        }),
         notFound: Paths.notFound,
       }[this.state.redirect];
 
@@ -277,7 +280,7 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private getTab() {
-      const tabs = ['detail', 'images', 'activity'];
+      const tabs = ['detail', 'images', 'activity', 'owners'];
       const location = this.props.location.pathname.split('/').pop();
 
       for (const tab of tabs) {
