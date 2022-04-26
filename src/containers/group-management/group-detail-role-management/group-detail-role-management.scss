@@ -1,0 +1,55 @@
+.hub-empty-state-box {
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hub-custom-wizard-layout {
+  padding: 1rem 1.5rem 0;
+
+  .hub-select-roles-content {
+    overflow: auto;
+  }
+
+  .pf-c-pagination.pf-m-bottom {
+    padding-top: 0;
+  }
+
+  .hub-permission {
+    margin: 3px;
+  }
+
+  .hub-preview-roles {
+    margin-top: 20px;
+  }
+
+  .hub-permissions {
+    margin: 10px 0;
+  }
+
+  .hub-filter {
+    width: 250px;
+  }
+
+  .hub-selected-roles-list {
+    overflow-x: auto;
+  }
+
+  .hub-no-filter-data {
+    display: flex;
+    justify-content: center;
+    height: 400px;
+  }
+}
+
+.hub-loading-wizard {
+  display: flex;
+  align-items: center;
+}
+
+.hub-no-data {
+  display: flex;
+  justify-content: center;
+  min-height: 590px;
+}
