@@ -13,6 +13,7 @@ import {
 interface IProps {
   availablePermissions: string[];
   selectedPermissions: string[];
+  customPermissions?: string[];
   setSelected?: (selected: string[]) => void;
   isDisabled?: boolean;
   isViewOnly?: boolean;
