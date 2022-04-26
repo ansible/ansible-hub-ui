@@ -26,6 +26,7 @@ import { AppContext } from 'src/loaders/app-context';
 import {
   BaseHeader,
   Breadcrumbs,
+  BreadcrumbType,
   LinkTabs,
   Logo,
   RepoSelector,
@@ -58,10 +59,7 @@ interface IProps {
     latestVersion?: string;
   };
   updateParams: (params) => void;
-  breadcrumbs: {
-    url?: string;
-    name: string;
-  }[];
+  breadcrumbs: BreadcrumbType[];
   activeTab: string;
   className?: string;
   repo?: string;
