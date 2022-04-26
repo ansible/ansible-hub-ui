@@ -76,7 +76,7 @@ export const RoleListTable: React.FC<Props> = ({
 };
 
 export const ExpandableRow: React.FC<{
-  rowIndex?: number;
+  rowIndex: number;
   expandableRowContent?: React.ReactNode;
   colSpan?: number;
 }> = ({ rowIndex, children, expandableRowContent, colSpan }) => {
