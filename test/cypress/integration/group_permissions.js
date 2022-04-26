@@ -1,4 +1,5 @@
 describe('Group Permissions Tests', () => {
+  /*
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
 
@@ -15,6 +16,7 @@ describe('Group Permissions Tests', () => {
       cy.addPermissions(group, [{ group: 'groups', permissions }]);
     }
   }
+  */
 
   function groupsNotVisible() {
     cy.contains('group2').should('not.exist');
@@ -23,6 +25,7 @@ describe('Group Permissions Tests', () => {
   }
 
   before(() => {
+    /*
     cy.deleteTestUsers();
     cy.deleteTestGroups();
     cy.cookieReset();
@@ -43,9 +46,10 @@ describe('Group Permissions Tests', () => {
     addTestUser('user2', 'group2');
     addTestUser('user3', 'group3');
     addTestUser('user4', 'group4');
+    */
   });
 
-  it("it can't view groups", () => {
+  it.skip("it can't view groups", () => {
     // test user without any group at all
     cy.login('user1', 'user1Password');
     cy.visit('/ui/groups');
@@ -57,7 +61,7 @@ describe('Group Permissions Tests', () => {
     groupsNotVisible();
   });
 
-  it('can view groups, can not change groups, can not add groups, can not delete groups', () => {
+  it.skip('can view groups, can not change groups, can not add groups, can not delete groups', () => {
     cy.login('user3', 'user3Password');
     cy.menuGo('User Access > Groups');
 
@@ -67,12 +71,12 @@ describe('Group Permissions Tests', () => {
     cy.contains('button', 'Delete').should('not.exist');
   });
 
-  it('can add group', () => {
+  it.skip('can add group', () => {
     cy.login('user4', 'user4Password');
     cy.galaxykit('group create', 'NewGroup');
   });
 
-  it('can delete group', () => {
+  it.skip('can delete group', () => {
     cy.login('user4', 'user4Password');
     cy.menuGo('User Access > Groups');
 
@@ -89,7 +93,7 @@ describe('Group Permissions Tests', () => {
     });
   });
 
-  it('can change group', () => {
+  it.skip('can change group', () => {
     cy.login('user4', 'user4Password');
 
     cy.removePermissions('group4', [
