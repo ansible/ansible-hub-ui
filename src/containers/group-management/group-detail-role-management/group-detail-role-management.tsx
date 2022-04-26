@@ -88,7 +88,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
     setLoading(true);
 
     Promise.all([
-      RoleAPI.list(),
+      RoleAPI.list({ name__startswith: 'galaxy.' }),
       GroupRoleAPI.listRoles(group.id, {
         ...ParamHelper.getReduced(params, ['id', 'tab', ...nonQueryParams]),
         sort: ParamHelper.validSortParams(params['sort'], ['role'], 'role'),
