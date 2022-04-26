@@ -36,6 +36,7 @@ import {
   ImportModal,
   LoadingPageWithHeader,
   Main,
+  NamespaceOwnersForm,
   Pagination,
   PartnerHeader,
   EmptyStateNoData,
@@ -166,6 +167,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       { id: 'collections', name: t`Collections` },
       showControls && { id: 'cli-configuration', name: t`CLI configuration` },
       namespace.resources && { id: 'resources', name: t`Resources` },
+      { id: 'owners', name: t`Namespace owners` },
     ].filter(Boolean);
 
     const tab = params['tab'] || 'collections';
@@ -339,6 +341,23 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             </section>
           ) : null}
           {tab === 'resources' ? this.renderResources(namespace) : null}
+          {tab === 'owners' ? (
+            <NamespaceOwnersForm
+              namespace={namespace}
+              updateNamespace={(_p) =>
+                updateParams({
+                  /* TODO */
+                })
+              }
+              addAlert={(alert: AlertType) =>
+                this.setState({
+                  alerts: [...this.state.alerts, alert],
+                })
+              }
+              location={this.props.location}
+              history={this.props.history}
+            />
+          ) : null}
         </Main>
         {canSign && (
           <SignAllCertificatesModal
