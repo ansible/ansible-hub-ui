@@ -9,5 +9,6 @@
         "@babel/plugin-transform-runtime",
         "babel-plugin-lodash",
         "babel-plugin-macros",
+        "babel-plugin-istanbul",
     ]
 }

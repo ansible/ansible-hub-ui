@@ -29,6 +29,8 @@ test/cypress/downloads/*
 test/cypress.env.json
 test/results
 test/cypress/fixtures/example.json
+test/coverage
+test/.nyc_output
 
 # pycache files
 *pyc
