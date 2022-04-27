@@ -2,12 +2,13 @@ name: "PR checks"
 
 on:
   pull_request:
-    branches: [ 'master', 'stable-*' ]
+    branches: [ 'master', 'stable-*', 'feature/*' ]
 
 jobs:
 
   check_commit:
     runs-on: ubuntu-latest
+    if: ${{ github.base_ref == 'master' }}
     steps:
 
     - name: Checkout code
