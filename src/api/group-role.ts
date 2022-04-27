@@ -4,9 +4,7 @@ class API extends PulpAPI {
   apiPath = 'groups/';
 
   listRoles(groupId, params?) {
-    return this.http.get(`${this.apiPath}${groupId}/roles/`, {
-      params: this.mapPageToOffset(params),
-    });
+    return super.list(params, `${this.apiPath}${groupId}/roles/`);
   }
 
   removeRole(groupId, roleId) {
