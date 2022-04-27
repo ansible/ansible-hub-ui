@@ -8,7 +8,8 @@
     "cypress:chrome": "cypress run --e2e --browser chrome --headless",
     "cypress:chromium": "cypress run --e2e --browser chromium-browser --headless",
     "cypress:firefox": "cypress run --e2e --browser firefox --headless",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "mock:registry": "node remote-registry.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "cypress": "^10.6.0",
     "cypress-file-upload": "^5.0.8",
     "cypress-log-to-output": "^1.1.2",
+    "express": "^4.18.1",
     "shell-escape-tag": "^2.0.2",
     "url-join": "^5.0.0"
   }
