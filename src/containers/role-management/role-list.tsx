@@ -84,7 +84,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     }
 
     if (!params['sort']) {
-      params['sort'] = '-pulp_created';
+      params['sort'] = 'role';
     }
 
     if (!params['name__startswith']) {
@@ -261,10 +261,12 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                     ignoredParams={['page_size', 'page', 'sort', 'ordering']}
                     niceValues={{
                       locked: { true: t`Locked`, false: t`Unlocked` },
+                      name__startswith: { 'galaxy.': t`true` },
                     }}
                     niceNames={{
-                      name__icontains: t`Role name`,
                       locked: t`Status`,
+                      name__icontains: t`Role name`,
+                      name__startswith: t`Galaxy only`,
                     }}
                   />
                 </div>
@@ -277,7 +279,6 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                       updateParams={(p) => {
                         this.updateParams(p, () => this.queryRoles());
                       }}
-                      isCompact={true}
                       tableHeader={{
                         headers: [
                           {
