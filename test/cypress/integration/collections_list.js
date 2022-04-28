@@ -125,7 +125,7 @@ describe('Collections list Tests', () => {
     cy.get('.toolbar')
       .get('[aria-label="keywords"]:first')
       .type('my_collection0{enter}');
-    cy.get('.body').contains('my_collection2').should('not.exist');
+    cy.get('.list').contains('my_collection2').should('not.exist');
     cy.get('.list').contains('my_collection0');
 
     cy.get('[aria-label=Actions]').click();
