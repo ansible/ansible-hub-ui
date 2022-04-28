@@ -1,6 +1,45 @@
 import { range } from 'lodash';
 
 describe('Collections list Tests', () => {
+
+  function deprecate() {
+    cy.get('.toolbar')
+      .get('[aria-label="keywords"]:first')
+      .type('my_collection0{enter}');
+    cy.get('.list').contains('my_collection2').should('not.exist');
+    cy.get('.list').contains('my_collection0');
+
+    cy.get('[aria-label=Actions]').click();
+    cy.contains('Deprecate').click();
+    cy.contains('No results found', { timeout: 10000 });
+  }
+
+  function undeprecate() {
+    cy.visit('/ui/repo/published/my_namespace/my_collection0');
+    cy.contains('This collection has been deprecated.');
+    cy.get('[aria-label=Actions]').click();
+    cy.contains('Undeprecate').click();
+    cy.contains('This collection has been deprecated.', {
+      timeout: 10000,
+    }).should('not.exist');
+  }
+
+  function undeprecateIfDeprecated() {
+    // undeprecate collection if deprecated from previous repeated run (otherwise, tests fails)
+    // that is because when you deprecate, delete collection and upload it again, the collection
+    // stays deprecated
+    let request_url =
+      Cypress.env('prefix') +
+      '_ui/v1/repo/published/?limit=1&name=my_collection0&offset=0"';
+
+    cy.request(request_url).then((data) => {
+      const deprecated = data.body.data[0].deprecated;
+      if (deprecated) {
+        undeprecate();
+      }
+    });
+  }
+
   before(() => {
     cy.deleteNamespacesAndCollections();
 
