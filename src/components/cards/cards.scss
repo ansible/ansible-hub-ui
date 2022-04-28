@@ -49,10 +49,16 @@
   .logo-row {
     display: flex;
     justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 5px;
 
     .icon {
       color: var(--pf-global--info-color--100);
       margin-right: 3px;
+    }
+
+    .left-container {
+      display: flex;
     }
 
     .hub-signature-badge {

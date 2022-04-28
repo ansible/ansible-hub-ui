@@ -1,11 +1,14 @@
 import { range } from 'lodash';
 
 describe('Collections list Tests', () => {
-  function deprecate() {
+  function deprecate(list) {
+    const container = list ? '.list' : '.card';
+
     cy.get('.toolbar')
       .get('[aria-label="keywords"]:first')
       .type('my_collection0{enter}');
-    cy.get('.list').contains('my_collection0');
+    cy.get(container).contains('my_collection2').should('not.exist');
+    cy.get(container).contains('my_collection0');
 
     cy.get('[aria-label=Actions]').click();
     cy.contains('Deprecate').click();
@@ -64,12 +67,22 @@ describe('Collections list Tests', () => {
 
   it('can deprecate', () => {
     cy.get('[data-cy="view_type_list"] svg').click();
-    deprecate();
+    deprecate(true);
   });
 
   it('can undeprecate', () => {
     cy.get('[data-cy="view_type_list"] svg').click();
     undeprecate();
+  });
+
+  it('can deprecate in Cards', () => {
+    cy.get('[data-cy="view_type_card"] svg').click();
+    deprecate(false);
+  });
+
+  it('can undeprecate in Cards', () => {
+    cy.get('[data-cy="view_type_card"] svg').click();
+    undeprecate(false);
   });
 
   it('paging is working', () => {

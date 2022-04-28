@@ -560,12 +560,14 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
   private checkUploadPrivilleges(collection) {
     const addAlert = () => {
-      const alert = new AlertType();
-      alert.title = t`You dont have rights to do this operation.`;
-      this.state.alerts.push(alert);
-
       this.setState({
-        alerts: this.state.alerts,
+        alerts: [
+          ...this.state.alerts,
+          {
+            title: t`You don't have rights to do this operation.`,
+            variant: 'warning',
+          },
+        ],
       });
     };
 
@@ -765,12 +767,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   };
 
   private deprecate(collection) {
-    const operation = !collection.deprecated;
-    const operation_text = operation ? 'deprecated' : 'undeprecated';
-
     CollectionAPI.setDeprecation(
       collection,
-      operation,
+      !collection.deprecated,
       this.context.selectedRepo,
     )
       .then((res) => {
@@ -789,7 +788,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Collection "${collection.name}" could not be "${operation_text}".`,
+              title: !collection.deprecated
+                ? t`Collection "${collection.name}" could not be deprecated.`
+                : t`Collection "${collection.name}" could not be undeprecated.`,
               description: errorMessage(status, statusText),
             },
           ],
@@ -913,13 +914,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   };
 
   private toggleImportModal(isOpen: boolean, warning?: string) {
-    const newAlerts = this.state.alerts;
     if (warning) {
-      const newAlert = new AlertType();
-      newAlert.title = warning;
-      newAlert.variant = 'warning';
-      newAlerts.push();
-      this.setState({ alerts: newAlerts });
+      this.setState({
+        alerts: [...this.state.alerts, { title: warning, variant: 'warning' }],
+      });
     }
     this.setState({ showImportModal: isOpen });
   }

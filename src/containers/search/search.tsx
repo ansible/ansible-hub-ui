@@ -99,6 +99,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       this.getSynclist();
     }
+
+    //this.setState({ synclist: { collections: [] } as any }); // DEBUG
   }
 
   private get closeAlert() {
@@ -232,13 +234,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
   }
 
   private toggleImportModal(isOpen: boolean, warning?: string) {
-    const newAlerts = this.state.alerts;
     if (warning) {
-      const newAlert = new AlertType();
-      newAlert.title = warning;
-      newAlert.variant = 'warning';
-      newAlerts.push();
-      this.setState({ alerts: newAlerts });
+      this.setState({
+        alerts: [...this.state.alerts, { title: warning, variant: 'warning' }],
+      });
     }
     this.setState({ showImportModal: isOpen });
   }
@@ -275,6 +274,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
               {...c}
               footer={this.renderSyncToggle(c.name, c.namespace.name, false, c)}
               repo={this.context.selectedRepo}
+              menu={this.renderMenu(false, c)}
             />
           );
         })}
@@ -283,11 +283,9 @@ class Search extends React.Component<RouteComponentProps, IState> {
   }
 
   private handleControlClick(collection) {
-    const operation = !collection.deprecated;
-    const operation_text = operation ? 'deprecated' : 'undeprecated';
     CollectionAPI.setDeprecation(
       collection,
-      operation,
+      !collection.deprecated,
       this.context.selectedRepo,
     )
       .then((res) => {
@@ -303,12 +301,57 @@ class Search extends React.Component<RouteComponentProps, IState> {
             ...this.state.alerts,
             {
               variant: 'danger',
-              title: t`Collection "${collection.name}" could not be "${operation_text}".`,
+              title: !collection.deprecated
+                ? t`Collection "${collection.name}" could not be deprecated.`
+                : t`Collection "${collection.name}" could not be undeprecated.`,
               description: errorMessage(status, statusText),
             },
           ],
         });
       });
+  }
+
+  private renderMenu(list, collection): any {
+    const menuItems = [];
+    menuItems.push(
+      <DropdownItem
+        onClick={() => this.handleControlClick(collection)}
+        key='deprecate'
+        isDisabled={DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE}
+        description={
+          DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+            ? t`Temporarily disabled due to sync issues. (AAH-1237)`
+            : null
+        }
+      >
+        {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
+      </DropdownItem>,
+    );
+
+    if (!list) {
+      menuItems.push(
+        <DropdownItem
+          onClick={() => this.checkUploadPrivilleges(collection)}
+          key='upload new version'
+        >
+          {t`Upload new version`}
+        </DropdownItem>,
+      );
+    }
+
+    return (
+      <React.Fragment>
+        {list && (
+          <Button
+            onClick={() => this.checkUploadPrivilleges(collection)}
+            variant='secondary'
+          >
+            {t`Upload new version`}
+          </Button>
+        )}
+        <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
+      </React.Fragment>
+    );
   }
 
   private renderSyncToggle(
@@ -319,61 +362,34 @@ class Search extends React.Component<RouteComponentProps, IState> {
   ): React.ReactNode {
     const { synclist } = this.state;
 
-    let menu = null;
-    if (list) {
-      menu = (
-        <React.Fragment>
-          <Button
-            onClick={() => this.checkUploadPrivilleges(collection)}
-            variant='secondary'
-          >
-            {t`Upload new version`}
-          </Button>
-          <StatefulDropdown
-            items={[
-              <DropdownItem
-                onClick={() => this.handleControlClick(collection)}
-                key='deprecate'
-                isDisabled={
-                  DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-                }
-                description={
-                  DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-                    ? t`Temporarily disabled due to sync issues. (AAH-1237)`
-                    : null
-                }
-              >
-                {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
-              </DropdownItem>,
-            ]}
-            ariaLabel='collection-kebab'
-          />
-        </React.Fragment>
-      );
-    }
     if (!synclist) {
-      return menu;
+      return list ? this.renderMenu(list, collection) : null;
     }
 
     return (
-      <Switch
-        id={namespace + '.' + name}
-        className='sync-toggle'
-        label={t`Sync`}
-        isChecked={this.isCollectionSynced(name, namespace)}
-        onChange={() => this.toggleCollectionSync(name, namespace)}
-      />
+      <>
+        <Switch
+          id={namespace + '.' + name}
+          className='sync-toggle'
+          label={t`Sync`}
+          isChecked={this.isCollectionSynced(name, namespace)}
+          onChange={() => this.toggleCollectionSync(name, namespace)}
+        />
+        {list && this.renderMenu(list, collection)}
+      </>
     );
   }
 
   private checkUploadPrivilleges(collection) {
     const addAlert = () => {
-      const alert = new AlertType();
-      alert.title = t`You dont have rights to do this operation.`;
-      this.state.alerts.push(alert);
-
       this.setState({
-        alerts: this.state.alerts,
+        alerts: [
+          ...this.state.alerts,
+          {
+            title: t`You don't have rights to do this operation.`,
+            variant: 'warning',
+          },
+        ],
       });
     };
 

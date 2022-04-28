@@ -17,12 +17,21 @@ describe('Collection Upload Tests', () => {
 
   it('should not upload new collection version in collection list when user does not have permissions', () => {
     cy.login(userName, userPassword);
+
     cy.visit(
       '/ui/repo/published?page_size=10&view_type=list&keywords=testcollection',
     );
     cy.contains('testcollection');
     cy.contains('Upload new version').click();
-    cy.contains('You dont have rights to do this operation.');
+    cy.contains("You don't have rights to do this operation.");
+
+    cy.visit(
+      '/ui/repo/published?page_size=10&view_type=card&keywords=testcollection',
+    );
+    cy.contains('testcollection');
+    cy.get('[aria-label=Actions]').click();
+    cy.contains('Upload new version').click();
+    cy.contains("You don't have rights to do this operation.");
   });
 
   it('should not upload new collection version in collection detail when user does not have permissions', () => {
@@ -31,15 +40,24 @@ describe('Collection Upload Tests', () => {
     cy.contains('testcollection');
     cy.get('button[aria-label=Actions]').click();
     cy.contains('Upload new version').click();
-    cy.contains('You dont have rights to do this operation.');
+    cy.contains("You don't have rights to do this operation.");
   });
 
   it('should see upload new collection version in collection list when user does have permissions', () => {
     cy.login();
+
     cy.visit(
       '/ui/repo/published?page_size=10&view_type=list&keywords=testcollection',
     );
     cy.contains('testcollection');
+    cy.contains('Upload new version').click();
+    cy.contains('New version of testcollection');
+
+    cy.visit(
+      '/ui/repo/published?page_size=10&view_type=card&keywords=testcollection',
+    );
+    cy.contains('testcollection');
+    cy.get('button[aria-label=Actions]').click();
     cy.contains('Upload new version').click();
     cy.contains('New version of testcollection');
   });
