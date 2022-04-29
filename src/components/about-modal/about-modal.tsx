@@ -24,14 +24,22 @@ interface IProps {
 }
 
 interface IState {
-  applicationInfo: { server_version: string; pulp_ansible_version: string };
+  applicationInfo: {
+    galaxy_ng_commit: string;
+    pulp_ansible_version: string;
+    server_version: string;
+  };
 }
 
 export class AboutModalWindow extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      applicationInfo: { server_version: '', pulp_ansible_version: '' },
+      applicationInfo: {
+        galaxy_ng_commit: '',
+        pulp_ansible_version: '',
+        server_version: '',
+      },
     };
   }
 
@@ -39,8 +47,9 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
     ApplicationInfoAPI.get().then((result) => {
       this.setState({
         applicationInfo: {
-          server_version: result.data.server_version,
+          galaxy_ng_commit: result.data.galaxy_ng_commit,
           pulp_ansible_version: result.data.pulp_ansible_version,
+          server_version: result.data.server_version,
         },
       });
     });
@@ -74,7 +83,11 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
         <TextContent>
           <TextList component={TextListVariants.dl}>
             <Label>{t`Server version`}</Label>
-            <Value>{this.state.applicationInfo.server_version}</Value>
+            <Value>
+              {this.state.applicationInfo.server_version}
+              <br />
+              {this.state.applicationInfo.galaxy_ng_commit}
+            </Value>
 
             <Label>{t`Pulp Ansible Version`}</Label>
             <Value>{this.state.applicationInfo.pulp_ansible_version}</Value>
