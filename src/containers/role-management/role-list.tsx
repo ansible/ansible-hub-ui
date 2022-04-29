@@ -368,7 +368,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                           colSpan={6}
                           rowIndex={i}
                         >
-                          <td>{role.name}</td>
+                          <td data-cy='name-field'>{role.name}</td>
                           <td>{role.description}</td>
                           <td>
                             <DateComponent date={role.pulp_created} />
