@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Trans } from '@lingui/macro';
-import { BaseHeader, Breadcrumbs } from 'src/components';
+import { BaseHeader, Breadcrumbs, BreadcrumbType } from 'src/components';
+
 interface IProps {
   title: string;
   subTitle?: string;
-  breadcrumbs: any[];
+  breadcrumbs: BreadcrumbType[];
 }
 
 export class RoleHeader extends React.Component<IProps> {

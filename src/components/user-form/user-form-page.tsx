@@ -1,13 +1,19 @@
 import * as React from 'react';
 
-import { BaseHeader, Main, Breadcrumbs, UserForm } from 'src/components';
+import {
+  BaseHeader,
+  Main,
+  Breadcrumbs,
+  BreadcrumbType,
+  UserForm,
+} from 'src/components';
 import { UserType } from 'src/api';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   title: string;
   user: UserType;
-  breadcrumbs: { name: string; url?: string }[];
+  breadcrumbs: BreadcrumbType[];
   errorMessages: ErrorMessagesType;
   isReadonly?: boolean;
 

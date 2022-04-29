@@ -2,12 +2,14 @@ import * as React from 'react';
 import { Breadcrumb, BreadcrumbItem } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 
+export class BreadcrumbType {
+  name: string;
+  url?: string;
+}
+
 interface IProps {
   /** List of links to display in the breadcrumb */
-  links: {
-    name: string;
-    url?: string;
-  }[];
+  links: BreadcrumbType[];
 }
 
 export class Breadcrumbs extends React.Component<IProps> {
