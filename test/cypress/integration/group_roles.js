@@ -32,12 +32,11 @@ describe('add roles to a group', () => {
     );
     cy.intercept(
       'GET',
-      Cypress.env('pulpPrefix') +
-        'groups/*/roles/?ordering=role&offset=0&limit=10',
+      'http://localhost:8002/pulp/api/v3/roles/?name__startswith=galaxy.&offset=0&limit=10',
     ).as('loadGroup');
     cy.get('[data-cy="create-group-button"]').contains('Create').click();
     cy.wait('@createGroup');
-    cy.wait(10000);
+    cy.wait('@loadGroup');
 
     // add roles
 
