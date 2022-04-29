@@ -112,6 +112,16 @@ jobs:
           npm install
 
           for file in *.js; do
+            # FIXME: that's what TARGET_ENVIRONMENT is for
+            NODE_ENV=
+            if grep -q prod <<< "$file"; then
+              NODE_ENV=production
+            fi
+            export NODE_ENV
+
+            # eliminate differences caused by branch name based logic in f-c-config
+            export BRANCH="${{ github.base_ref }}"
+
             node -e 'console.log(JSON.stringify(require("./'"$file"'"), null, 2))' |
               sed -e 's/\/home\/.*\/\(base\|pr\)\//\/DIR\//g' \
                 -e 's/\(\[name\]\|automationHub\)\.[0-9]\+\.\(\[fullhash\]\)/\1.TIMESTAMP.\2/g' \
