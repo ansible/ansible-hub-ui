@@ -8,8 +8,6 @@ import { Tooltip } from 'src/components';
 
 import { Constants } from 'src/constants';
 
-import './group-detail-role-management.scss';
-
 interface Props {
   group: GroupObjectPermissionType;
   selectedRoles: RoleType[];
@@ -25,7 +23,7 @@ const splitByDot = (perm: string) => {
   );
 };
 
-const PreviewRoles = ({ group, selectedRoles }: Props) => (
+export const PreviewRoles = ({ group, selectedRoles }: Props) => (
   <div className='hub-custom-wizard-layout'>
     <p>
       <Trans>
@@ -61,4 +59,3 @@ const PreviewRoles = ({ group, selectedRoles }: Props) => (
     </Flex>
   </div>
 );
-export default PreviewRoles;

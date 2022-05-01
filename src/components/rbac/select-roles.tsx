@@ -12,13 +12,10 @@ import {
   LoadingPageSpinner,
   CheckboxRow,
   EmptyStateFilter,
-  EmptyStateCustom,
+  EmptyStateNoData,
 } from 'src/components';
 
-import './group-detail-role-management.scss';
 import { filterIsSet } from 'src/utilities';
-
-import { CubesIcon } from '@patternfly/react-icons';
 
 interface SelectRolesProps {
   assignedRoles: GroupRoleType[];
@@ -26,7 +23,7 @@ interface SelectRolesProps {
   onRolesUpdate?: (roles) => void;
 }
 
-const SelectRoles: React.FC<SelectRolesProps> = ({
+export const SelectRoles: React.FC<SelectRolesProps> = ({
   assignedRoles,
   selectedRoles,
   onRolesUpdate,
@@ -72,10 +69,9 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
   if (noData && !filterIsSet(localParams, ['name__icontains'])) {
     return (
       <div className='hub-custom-wizard-layout hub-no-data'>
-        <EmptyStateCustom
+        <EmptyStateNoData
           title={t`No assignable roles.`}
           description={t`There are currently no roles that can be assigned to this group.`}
-          icon={CubesIcon}
         />
       </div>
     );
@@ -240,4 +236,3 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
     </div>
   );
 };
-export default SelectRoles;

@@ -7,9 +7,13 @@ import {
   CompoundFilter,
   DeleteModal,
   EmptyStateNoData,
+  GroupRolePermissions,
   LoadingPageWithHeader,
   Pagination,
   RoleListTable,
+  RolePermissions,
+  SelectRoles,
+  PreviewRoles,
   ExpandableRow,
   WizardModal,
   EmptyStateFilter,
@@ -40,10 +44,6 @@ import {
 import { IAppContextType } from 'src/loaders/app-context';
 
 import { Constants } from 'src/constants';
-
-import PreviewRoles from './preview-roles';
-import SelectRoles from './select-roles';
-import GroupRolePermissions from './group-role-permissions';
 
 import './group-detail-role-management.scss';
 

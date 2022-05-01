@@ -11,7 +11,7 @@ interface IProps {
   };
 }
 
-const GroupRolePermissions = ({ name, filteredPermissions }: IProps) => {
+export const GroupRolePermissions = ({ name, filteredPermissions }: IProps) => {
   const [role, setRole] = useState(null);
 
   useEffect(() => {
@@ -37,5 +37,3 @@ const GroupRolePermissions = ({ name, filteredPermissions }: IProps) => {
     </>
   );
 };
-
-export default GroupRolePermissions;
