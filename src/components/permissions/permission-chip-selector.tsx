@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro';
-import { i18n } from '@lingui/core';
-
 import * as React from 'react';
+import { i18n } from '@lingui/core';
 import {
   Label,
   LabelGroup,
@@ -11,7 +10,7 @@ import {
 } from '@patternfly/react-core';
 
 interface IProps {
-  availablePermissions: string[];
+  availablePermissions?: string[];
   selectedPermissions: string[];
   customPermissions?: string[];
   setSelected?: (selected: string[]) => void;

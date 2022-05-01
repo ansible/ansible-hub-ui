@@ -4,93 +4,113 @@ import * as React from 'react';
 import { Flex, FlexItem } from '@patternfly/react-core';
 import { Constants } from 'src/constants';
 import { PermissionChipSelector } from 'src/components';
-import { RoleType } from 'src/api';
 import { twoWayMapper } from 'src/utilities';
 
 interface IProps {
   filteredPermissions: { [key: string]: string };
-  role: RoleType;
+  selectedPermissions: string[];
+  setPermissions?: (permissions) => void;
+  showEmpty: boolean;
+  showCustom: boolean;
 }
 
 export const RolePermissions: React.FC<IProps> = ({
   filteredPermissions,
-  role,
+  selectedPermissions,
+  setPermissions,
+  showCustom,
+  showEmpty,
 }) => {
-  const groups = Constants.PERMISSIONS;
-
-  const getSelectedRoles = (role, group) =>
-    role.permissions
+  const permFilter = (availablePermissions) =>
+    selectedPermissions
       .filter((selected) =>
-        group.object_permissions.find((perm) => selected === perm),
+        availablePermissions.find((perm) => selected === perm),
       )
       .map((value) => twoWayMapper(value, filteredPermissions));
 
-  const getCustomPermissions = (role) =>
-    role.permissions.filter(
-      (perm) => !Object.keys(filteredPermissions).includes(perm),
-    );
+  const getSelected = (group) => permFilter(group.object_permissions);
+
+  const customPermissions = selectedPermissions.filter(
+    (perm) => !Object.keys(filteredPermissions).includes(perm),
+  );
+
+  const origGroups = Constants.PERMISSIONS.map((group) => ({
+    ...group,
+    label: i18n._(group.label),
+  }));
+  const allGroups = showCustom
+    ? [
+        ...origGroups,
+        {
+          name: 'custom',
+          label: t`Custom permissions`,
+          object_permissions: customPermissions,
+        },
+      ]
+    : origGroups;
+  const groups = showEmpty
+    ? allGroups
+    : allGroups.filter((group) => getSelected(group).length);
 
   return (
     <>
-      {groups.map((group, i) => (
-        <React.Fragment key={i}>
-          {getSelectedRoles(role, group).length !== 0 && (
-            <Flex
-              style={{ marginTop: '16px' }}
-              alignItems={{ default: 'alignItemsCenter' }}
-              key={group.name}
-              className={group.name}
-            >
-              {role.permissions.length !== 0 && (
-                <>
-                  <FlexItem style={{ minWidth: '200px' }}>
-                    {i18n._(group.label)}
-                  </FlexItem>
-                  <FlexItem grow={{ default: 'grow' }}>
-                    <PermissionChipSelector
-                      availablePermissions={group.object_permissions
-                        .filter(
-                          (perm) =>
-                            !role.permissions.find(
-                              (selected) => selected === perm,
-                            ),
-                        )
-                        .map((value) =>
-                          twoWayMapper(value, filteredPermissions),
-                        )
-                        .sort()}
-                      selectedPermissions={getSelectedRoles(role, group)}
-                      menuAppendTo='inline'
-                      multilingual={true}
-                      isViewOnly={true}
-                    />
-                  </FlexItem>
-                </>
-              )}
-            </Flex>
-          )}
-        </React.Fragment>
-      ))}
-
-      {getCustomPermissions(role).length !== 0 && (
+      {groups.map((group) => (
         <Flex
           style={{ marginTop: '16px' }}
           alignItems={{ default: 'alignItemsCenter' }}
+          key={group.name}
+          className={group.name}
         >
-          <FlexItem style={{ minWidth: '200px' }}>
-            {t`Custom permissions`}
-          </FlexItem>
+          <FlexItem style={{ minWidth: '200px' }}>{group.label}</FlexItem>
           <FlexItem grow={{ default: 'grow' }}>
             <PermissionChipSelector
-              availablePermissions={[]}
-              selectedPermissions={getCustomPermissions(role)}
+              isViewOnly={!setPermissions}
               menuAppendTo='inline'
               multilingual={true}
-              isViewOnly={true}
+              selectedPermissions={getSelected(group)}
+              {...(setPermissions
+                ? {
+                    availablePermissions: group.object_permissions
+                      .filter(
+                        (perm) =>
+                          !selectedPermissions.find(
+                            (selected) => selected === perm,
+                          ),
+                      )
+                      .map((value) => twoWayMapper(value, filteredPermissions))
+                      .sort(),
+                    setSelected: setPermissions,
+                    onClear: () => {
+                      const clearedPermissions = group.object_permissions;
+                      setPermissions(
+                        selectedPermissions.filter(
+                          (x) => !clearedPermissions.includes(x),
+                        ),
+                      );
+                    },
+                    onSelect: (event, selection) => {
+                      const newPermissions = new Set(selectedPermissions);
+                      if (
+                        newPermissions.has(
+                          twoWayMapper(selection, filteredPermissions),
+                        )
+                      ) {
+                        newPermissions.delete(
+                          twoWayMapper(selection, filteredPermissions),
+                        );
+                      } else {
+                        newPermissions.add(
+                          twoWayMapper(selection, filteredPermissions),
+                        );
+                      }
+                      setPermissions(Array.from(newPermissions));
+                    },
+                  }
+                : {})}
             />
           </FlexItem>
         </Flex>
-      )}
+      ))}
     </>
   );
 };

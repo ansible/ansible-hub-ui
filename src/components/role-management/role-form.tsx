@@ -1,27 +1,23 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { i18n } from '@lingui/core';
-import { PermissionChipSelector } from 'src/components';
 import {
   ActionGroup,
   Button,
-  Flex,
-  FlexItem,
-  Form,
-  TextInput,
-  InputGroup,
-  FormGroup,
-  Title,
   Divider,
+  Form,
+  FormGroup,
+  InputGroup,
   Spinner,
+  TextInput,
+  Title,
 } from '@patternfly/react-core';
-
-import { twoWayMapper } from 'src/utilities';
-
 import { Constants } from 'src/constants';
+import { RolePermissions } from 'src/components';
+
 interface IState {
   permissions: string[];
 }
+
 interface IProps {
   nameDisabled?: boolean;
   name: string;
@@ -70,7 +66,6 @@ export class RoleForm extends React.Component<IProps, IState> {
       isSavingDisabled,
       saving,
     } = this.props;
-    const groups = Constants.PERMISSIONS;
 
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
 
@@ -100,7 +95,7 @@ export class RoleForm extends React.Component<IProps, IState> {
                     onChange={onNameChange}
                     type='text'
                     validated={nameValidated}
-                    placeholder='Role name'
+                    placeholder={t`Role name`}
                   />
                 </InputGroup>
               </FormGroup>
@@ -120,7 +115,7 @@ export class RoleForm extends React.Component<IProps, IState> {
                   onChange={onDescriptionChange}
                   type='text'
                   validated={descriptionValidated}
-                  placeholder='Add a role description here'
+                  placeholder={t`Add a role description here`}
                 />
               </FormGroup>
             </div>
@@ -131,71 +126,13 @@ export class RoleForm extends React.Component<IProps, IState> {
             <br />
             <Title headingLevel='h2'>Permissions</Title>
 
-            {groups.map((group) => (
-              <Flex
-                style={{ marginTop: '16px' }}
-                alignItems={{ default: 'alignItemsCenter' }}
-                key={group.name}
-                className={group.name}
-              >
-                <FlexItem style={{ minWidth: '200px' }}>
-                  {i18n._(group.label)}
-                </FlexItem>
-                <FlexItem grow={{ default: 'grow' }}>
-                  <PermissionChipSelector
-                    availablePermissions={group.object_permissions
-                      .filter(
-                        (perm) =>
-                          !selectedPermissions.find(
-                            (selected) => selected === perm,
-                          ),
-                      )
-                      .map((value) => twoWayMapper(value, filteredPermissions))
-                      .sort()}
-                    selectedPermissions={selectedPermissions
-                      .filter((selected) =>
-                        group.object_permissions.find(
-                          (perm) => selected === perm,
-                        ),
-                      )
-                      .map((value) => twoWayMapper(value, filteredPermissions))}
-                    setSelected={(perms) =>
-                      this.setState({ permissions: perms })
-                    }
-                    menuAppendTo='inline'
-                    multilingual={true}
-                    isViewOnly={false}
-                    onClear={() => {
-                      const clearedPerms = group.object_permissions;
-                      this.setState({
-                        permissions: this.state.permissions.filter(
-                          (x) => !clearedPerms.includes(x),
-                        ),
-                      });
-                    }}
-                    onSelect={(event, selection) => {
-                      const newPerms = new Set(this.state.permissions);
-                      if (
-                        newPerms.has(
-                          twoWayMapper(selection, filteredPermissions),
-                        )
-                      ) {
-                        newPerms.delete(
-                          twoWayMapper(selection, filteredPermissions),
-                        );
-                      } else {
-                        newPerms.add(
-                          twoWayMapper(selection, filteredPermissions),
-                        );
-                      }
-                      this.setState({
-                        permissions: Array.from(newPerms),
-                      });
-                    }}
-                  />
-                </FlexItem>
-              </Flex>
-            ))}
+            <RolePermissions
+              filteredPermissions={filteredPermissions}
+              selectedPermissions={selectedPermissions}
+              setPermissions={(permissions) => this.setState({ permissions })}
+              showCustom={false}
+              showEmpty={true}
+            />
           </div>
 
           <ActionGroup>

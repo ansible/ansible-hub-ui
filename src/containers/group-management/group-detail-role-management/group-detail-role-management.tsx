@@ -350,7 +350,9 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     expandableRowContent={
                       <RolePermissions
                         filteredPermissions={filteredPermissions}
-                        role={role}
+                        selectedPermissions={role.permissions}
+                        showCustom={true}
+                        showEmpty={false}
                       />
                     }
                     data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
