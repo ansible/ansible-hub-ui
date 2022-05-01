@@ -114,3 +114,73 @@ export const RolePermissions: React.FC<IProps> = ({
     </>
   );
 };
+
+
+/* TODO update from .. changed during rbac .. probably start from scratch
+            {groups.map((group) => (
+              <Flex
+                style={{ marginTop: '16px' }}
+                alignItems={{ default: 'alignItemsCenter' }}
+                key={group.name}
+                className={group.name}
+                data-cy={`RoleForm-Permissions-row-${group.name}`}
+              >
+                <FlexItem style={{ minWidth: '200px' }}>
+                  {i18n._(group.label)}
+                </FlexItem>
+                <FlexItem grow={{ default: 'grow' }}>
+                  <PermissionChipSelector
+                    availablePermissions={group.object_permissions
+                      .filter(
+                        (perm) =>
+                          !selectedPermissions.find(
+                            (selected) => selected === perm,
+                          ),
+                      )
+                      .map((value) => twoWayMapper(value, filteredPermissions))
+                      .sort()}
+                    selectedPermissions={selectedPermissions
+                      .filter((selected) =>
+                        group.object_permissions.find(
+                          (perm) => selected === perm,
+                        ),
+                      )
+                      .map((value) => twoWayMapper(value, filteredPermissions))}
+                    setSelected={(perms) =>
+                      this.setState({ permissions: perms })
+                    }
+                    menuAppendTo='inline'
+                    multilingual={true}
+                    isViewOnly={false}
+                    onClear={() => {
+                      const clearedPerms = group.object_permissions;
+                      this.setState({
+                        permissions: this.state.permissions.filter(
+                          (x) => !clearedPerms.includes(x),
+                        ),
+                      });
+                    }}
+                    onSelect={(event, selection) => {
+                      const newPerms = new Set(this.state.permissions);
+                      if (
+                        newPerms.has(
+                          twoWayMapper(selection, filteredPermissions),
+                        )
+                      ) {
+                        newPerms.delete(
+                          twoWayMapper(selection, filteredPermissions),
+                        );
+                      } else {
+                        newPerms.add(
+                          twoWayMapper(selection, filteredPermissions),
+                        );
+                      }
+                      this.setState({
+                        permissions: Array.from(newPerms),
+                      });
+                    }}
+                  />
+                </FlexItem>
+              </Flex>
+            ))}
+=======*/
