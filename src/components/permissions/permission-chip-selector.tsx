@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro';
-import { i18n } from '@lingui/core';
-
 import * as React from 'react';
+import { i18n } from '@lingui/core';
 import {
   Label,
   LabelGroup,

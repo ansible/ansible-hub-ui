@@ -1,6 +1,5 @@
 import React from 'react';
 import { t, Trans } from '@lingui/macro';
-import { i18n } from '@lingui/core';
 import { AppContext } from 'src/loaders/app-context';
 import {
   Link,
@@ -23,9 +22,9 @@ import {
   AppliedFilters,
   DeleteModal,
   RoleListTable,
+  RolePermissions,
   ExpandableRow,
   ListItemActions,
-  PermissionChipSelector,
   DateComponent,
 } from 'src/components';
 import {
@@ -35,8 +34,6 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  Flex,
-  FlexItem,
   Tooltip,
 } from '@patternfly/react-core';
 import { RoleType } from 'src/api/response-types/role';
@@ -45,7 +42,6 @@ import {
   filterIsSet,
   ParamHelper,
   parsePulpIDFromURL,
-  twoWayMapper,
 } from 'src/utilities';
 
 import { RoleAPI } from 'src/api/role';
@@ -130,8 +126,6 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
 
     const noData =
       roleCount === 0 && !filterIsSet(params, ['name__icontains', 'locked']);
-
-    const groups = Constants.PERMISSIONS;
 
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
@@ -316,53 +310,12 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                         <ExpandableRow
                           key={role.name}
                           expandableRowContent={
-                            <>
-                              {groups.map((group) => (
-                                <Flex
-                                  style={{ marginTop: '16px' }}
-                                  alignItems={{ default: 'alignItemsCenter' }}
-                                  key={group.name}
-                                  className={group.name}
-                                >
-                                  <FlexItem style={{ minWidth: '200px' }}>
-                                    {i18n._(group.label)}
-                                  </FlexItem>
-                                  <FlexItem grow={{ default: 'grow' }}>
-                                    <PermissionChipSelector
-                                      availablePermissions={group.object_permissions
-                                        .filter(
-                                          (perm) =>
-                                            !role.permissions.find(
-                                              (selected) => selected === perm,
-                                            ),
-                                        )
-                                        .map((value) =>
-                                          twoWayMapper(
-                                            value,
-                                            filteredPermissions,
-                                          ),
-                                        )
-                                        .sort()}
-                                      selectedPermissions={role.permissions
-                                        .filter((selected) =>
-                                          group.object_permissions.find(
-                                            (perm) => selected === perm,
-                                          ),
-                                        )
-                                        .map((value) =>
-                                          twoWayMapper(
-                                            value,
-                                            filteredPermissions,
-                                          ),
-                                        )}
-                                      menuAppendTo='inline'
-                                      multilingual={true}
-                                      isViewOnly={true}
-                                    />
-                                  </FlexItem>
-                                </Flex>
-                              ))}
-                            </>
+                            <RolePermissions
+                              filteredPermissions={filteredPermissions}
+                              selectedPermissions={role.permissions}
+                              showCustom={true}
+                              showEmpty={false}
+                            />
                           }
                           colSpan={6}
                           rowIndex={i}
