@@ -3020,8 +3020,12 @@ msgid "User \"{0}\" has been successfully deleted."
 msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:921
-msgid "User \"{0}\" has been successfully removed group \"{name}\"."
+msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
 msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:921
+#~ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
+#~ msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:611
 msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
