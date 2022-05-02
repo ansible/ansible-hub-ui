@@ -13,9 +13,9 @@ import {
   Pagination,
   RepoSelector,
 } from 'src/components';
-//import {
-//  LegacyRoleListType,
-//} from 'src/api';
+import {
+  LegacyRoleListType,
+} from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
@@ -23,7 +23,7 @@ import { AppContext } from 'src/loaders/app-context';
 //import { Paths } from 'src/paths';
 
 interface IState {
-  //Roles: LegacyRoleListType[];
+  legacyroles: LegacyRoleListType[];
   numberOfResults: number;
   params: {
     page?: number;
@@ -36,17 +36,26 @@ interface IState {
 }
 
 //class LegacyRoles extends React.Component<RouteComponentProps, IState> {
-class LegacyRoles extends React.Component {
+//class LegacyRoles extends React.Component {
+class LegacyRoles extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log('LegacyRoles mounted');
+    console.log('LegacyRoles state', this.state);
+    console.log('LegacyRoles props', this.props);
+  } 
 
   render() {
+    const legacyroles = ['foo.bar', 'foo.baz', 'jim.bob'];
     return (
       <div>
         <h1>ROLES</h1>
+        {legacyroles.map((r) => (
+            <div id={r} key={r}>ROLE: {r}</div>
+        ))}
       </div>
     );
   }

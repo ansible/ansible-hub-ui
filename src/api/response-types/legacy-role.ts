@@ -15,3 +15,26 @@ export class LegacyRoleListType {
     company: string;
   };
 }
+
+export class LegacyRoleDetailType {
+  deprecated: boolean;
+  all_versions: {
+    id: string;
+    version: string;
+    created: string;
+  }[];
+  latest_version: string;
+
+  id: string;
+  name: string;
+  description: string;
+
+  namespace: {
+    id: number;
+    description: string;
+    name: string;
+    avatar_url: string;
+    company: string;
+  };
+}
+

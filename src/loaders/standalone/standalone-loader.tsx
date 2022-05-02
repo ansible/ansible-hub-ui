@@ -456,13 +456,13 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private ctx(component) {
-    console.log('ctx', 'component', component);
+    //console.log('ctx', 'component', component);
     //console.log('ctx', 'this.state.user', this.state.user);
     //console.log('ctx', 'this.setUser', this.setUser);
-    console.log('ctx', 'this.setRepo', this.setRepo);
-    console.log('ctx', 'this.state.selectedRepo', this.state.selectedRepo);
-    console.log('ctx', 'this.state.featureFlags', this.state.featureFlags);
-    console.log('ctx', 'this.state.alerts', this.state.alerts);
+    //console.log('ctx', 'this.setRepo', this.setRepo);
+    //console.log('ctx', 'this.state.selectedRepo', this.state.selectedRepo);
+    //console.log('ctx', 'this.state.featureFlags', this.state.featureFlags);
+    //console.log('ctx', 'this.state.alerts', this.state.alerts);
     //console.log('ctx', 'this.state.settings', this.state.settings);
 
     return (

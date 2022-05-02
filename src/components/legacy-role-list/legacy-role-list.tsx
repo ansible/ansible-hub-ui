@@ -35,18 +35,32 @@ interface IProps {
 export class LegacyRoleList extends React.Component<IProps> {
   render() {
     const {
+      //context,
+      //setState,
+      //forceUpdate,
+      //render,
       legacyroles,
       params,
       updateParams,
       ignoredParams,
       itemCount,
       showControls,
-      repo,
+      //repo,
     } = this.props;
+
+    console.log('legacyrolelist props', this.props);
 
     return (
       <React.Fragment>
-        <DataList aria-label={t`List of Roles`}></DataList>
+        <DataList aria-label={t`List of Roles`}>
+            {legacyroles.length > 0 ? (
+                legacyroles.map((r) => (
+                        <h2>ROLE</h2>
+                ))    
+            ) : (
+                <EmptyStateFilter />
+            )}
+        </DataList>
         <Pagination
           params={params}
           updateParams={(p) => updateParams(p)}
@@ -56,10 +70,10 @@ export class LegacyRoleList extends React.Component<IProps> {
     );
   }
 
-  private renderCollectionControls(legacyrole: LegacyRoleListType) {
+  private renderLegacyRoleControls(legacyrole: LegacyRoleListType) {
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <h1>ROLE</h1>
+        <h2>ROLE CONTROL</h2>
       </div>
     );
   }
