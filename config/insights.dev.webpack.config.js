@@ -1,5 +1,8 @@
 const webpackBase = require('./webpack.base.config');
 
+const proxyHost = process.env.API_PROXY_HOST || 'localhost';
+const proxyPort = process.env.API_PROXY_PORT || '5001';
+
 module.exports = webpackBase({
   // The host where the API lives. EX: https://localhost:5001
   API_HOST: '',
@@ -7,6 +10,9 @@ module.exports = webpackBase({
   // Path to the API on the API host. EX: /api/automation-hub
   API_BASE_PATH: '/api/automation-hub/',
   PULP_API_BASE_PATH: '/api/automation-hub/pulp/api/v3/',
+
+  // Value for standalone.api.target
+  API_PROXY_TARGET: `http://${proxyHost}:${proxyPort}`,
 
   // Path on the host where the UI is found. EX: /apps/automation-hub
   UI_BASE_PATH: '',
@@ -29,7 +35,7 @@ module.exports = webpackBase({
   USE_FAVICON: false,
 
   // Serve the UI over http or https. Options: true, false
-  UI_USE_HTTPS: true,
+  UI_USE_HTTPS: false,
 
   // Enables webpack debug mode. Options: true, false
   UI_DEBUG: true,

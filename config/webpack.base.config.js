@@ -1,5 +1,9 @@
 const { resolve } = require('path'); // node:path
 const config = require('@redhat-cloud-services/frontend-components-config');
+const {
+  rbac,
+  defaultServices,
+} = require('@redhat-cloud-services/frontend-components-config-utilities/standalone');
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -37,6 +41,7 @@ const defaultConfigs = [
   { name: 'WEBPACK_PROXY', default: undefined, scope: 'webpack' },
   { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
   { name: 'USE_FAVICON', default: true, scope: 'webpack' },
+  { name: 'API_PROXY_TARGET', default: undefined, scope: 'webpack' },
 ];
 
 module.exports = (inputConfigs) => {
@@ -86,6 +91,21 @@ module.exports = (inputConfigs) => {
 
     // frontend-components-config 4.5.0+: don't remove patternfly from non-insights builds
     bundlePfModules: isStandalone,
+
+    // insights dev
+    ...(!isStandalone &&
+      !isBuild && {
+        appUrl: '/beta/ansible/automation-hub/',
+        deployment: 'beta/apps',
+        standalone: {
+          api: {
+            context: [customConfigs.API_BASE_PATH],
+            target: customConfigs.API_PROXY_TARGET,
+          },
+          rbac,
+          ...defaultServices,
+        },
+      }),
   });
 
   // Override sections of the webpack config to work with TypeScript
@@ -174,6 +194,10 @@ module.exports = (inputConfigs) => {
               isBuild ? '../src/app-entry.js' : '../src/dev-entry.js',
             ),
           },
+          ...(!isBuild && {
+            // fixes "Shared module is not available for eager consumption"
+            exclude: ['@patternfly/react-core'],
+          }),
         },
       ),
     );
