@@ -15,8 +15,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strictNullChecks": false,
-    "target": "es5",
-    "types": ["cypress-real-events"]
+    "target": "es5"
   },
   "include": ["./src/"],
   "exclude": ["node_modules"]
