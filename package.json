@@ -90,8 +90,6 @@
         "lint:yaml": "yamllint .",
         "prettier": "prettier --write 'src/**' 'config/**' 'test/**'",
         "prettier:check": "prettier -l 'src/**' 'config/**' 'test/**'",
-        "prod": "NODE_ENV=production webpack serve --config custom.dev.config",
-        "server:ctr": "node src/server/generateServerKey.js",
         "start": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/insights.dev.webpack.config.js",
         "start-pulp": "NODE_ENV=development API_PROXY_PORT=8080 API_BASE_PATH='/api/galaxy/' webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
         "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
