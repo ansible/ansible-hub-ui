@@ -31,9 +31,8 @@ describe('Hub Group Management Tests', () => {
     cy.createGroup(groupName);
     cy.createUser(userName);
     cy.addUserToGroup(groupName, userName);
-
     cy.removeUserFromGroup(groupName, userName);
-    cy.deleteGroup(groupName);
+    cy.galaxykit('group delete', groupName);
     cy.deleteUser(userName);
   });
 
@@ -47,7 +46,7 @@ describe('Hub Group Management Tests', () => {
       'remotes',
     ];
 
-    cy.createGroup(name);
+    cy.galaxykit('group create', name);
 
     cy.addAllPermissions(name);
     permissionTypes.forEach((permGroup) => {
@@ -63,6 +62,6 @@ describe('Hub Group Management Tests', () => {
         .should('exist');
     });
 
-    cy.deleteGroup(name);
+    cy.galaxykit('group delete', name);
   });
 });

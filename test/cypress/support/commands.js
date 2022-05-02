@@ -327,7 +327,7 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.get('input.pf-c-select__toggle-typeahead').type(userName);
   cy.contains('button', userName).click();
   cy.get('.pf-c-content h2').click(); // click modal header to close dropdown
-  cy.contains('footer > button', 'Add').click();
+  cy.contains('footer > button', 'Add').click({ force: true });
   cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
 });
 
@@ -628,10 +628,10 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
   );
   // wait for finish
   cy.contains('a', 'detail page').click();
-  cy.contains('.title-box h1', 'Completed', { timeout: 20000 });
+  cy.contains('.title-box h1', 'Completed', { timeout: 30000 });
 });
 
-Cypress.Commands.add('deleteRegistries', {}, () => {
+Cypress.Commands.add('deleteRegistriesManual', {}, () => {
   cy.intercept(
     'GET',
     Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
@@ -652,7 +652,39 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
   });
 });
 
+Cypress.Commands.add('deleteRegistries', {}, () => {
+  cy.intercept(
+    'GET',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
+  ).as('registries');
+
+  cy.visit('/ui/registries');
+
+  cy.wait('@registries').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.galaxykit('registry delete', element.name);
+    });
+  });
+});
+
 Cypress.Commands.add('deleteContainers', {}, () => {
+  cy.intercept(
+    'GET',
+    Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
+  ).as('listLoad');
+
+  cy.visit('/ui/containers');
+
+  cy.wait('@listLoad').then((result) => {
+    var data = result.response.body.data;
+    data.forEach((element) => {
+      cy.galaxykit('container delete', element.name);
+    });
+  });
+});
+
+Cypress.Commands.add('deleteContainersManual', {}, () => {
   cy.intercept(
     'GET',
     Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',

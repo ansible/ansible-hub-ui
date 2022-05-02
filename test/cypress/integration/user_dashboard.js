@@ -13,11 +13,9 @@ describe('Hub User Management Tests', () => {
 
     cy.createUser(username, password, 'Test F', 'Test L', 'test@example.com');
     cy.contains('[data-cy="UserList-row-test"]', 'Test F');
-
-    cy.createGroup('delete-user');
-    cy.addPermissions('delete-user', [
-      { group: 'users', permissions: ['View user', 'Delete user'] },
-    ]);
+    cy.galaxykit('group create', 'delete-user');
+    cy.galaxykit('group perm add', 'delete-user', 'galaxy.view_user');
+    cy.galaxykit('group perm add', 'delete-user', 'galaxy.delete_user');
     cy.addUserToGroup('delete-user', username);
   });
 

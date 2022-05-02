@@ -10,11 +10,8 @@ describe('Execution Environments - Use in Controller', () => {
     });
 
     cy.login();
-
     cy.deleteRegistries();
     cy.deleteContainers();
-
-    // FIXME: add galaxykit support for remote registries
     cy.addRemoteRegistry(`docker${num}`, 'https://registry.hub.docker.com/');
 
     cy.addRemoteContainer({
@@ -23,8 +20,11 @@ describe('Execution Environments - Use in Controller', () => {
       registry: `docker${num}`,
       include_tags: 'latest',
     });
-    cy.syncRemoteContainer(`remotepine${num}`);
 
+    cy.visit('/ui/containers/');
+    cy.contains('.body', `remotepine${num}`, { timeout: 10000 });
+
+    cy.syncRemoteContainer(`remotepine${num}`);
     cy.addLocalContainer(`localpine${num}`, 'alpine');
   });
 

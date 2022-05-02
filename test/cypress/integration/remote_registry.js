@@ -24,6 +24,7 @@ describe('Remote Registry Tests', () => {
 
   it('admin can add new remote registry', () => {
     cy.menuGo('Execution Environments > Remote Registries');
+
     cy.addRemoteRegistry('New remote registry1', 'https://some url1');
     cy.addRemoteRegistry('New remote registry2', 'https://some url2', {
       username: 'some username2',

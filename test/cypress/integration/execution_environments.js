@@ -7,13 +7,17 @@ describe('execution environments', () => {
     cy.deleteRegistries();
     cy.deleteContainers();
 
-    cy.addRemoteRegistry(`docker${num}`, 'https://registry.hub.docker.com/');
-    cy.addRemoteContainer({
-      name: `remotepine${num}`,
-      upstream_name: 'library/alpine',
-      registry: `docker${num}`,
-      include_tags: 'latest',
-    });
+    cy.galaxykit(
+      'registry create',
+      `docker${num}`,
+      'https://registry.hub.docker.com/',
+    );
+    cy.galaxykit(
+      'container create',
+      `remotepine${num}`,
+      'library/alpine',
+      `docker${num}`,
+    );
   });
 
   beforeEach(() => {

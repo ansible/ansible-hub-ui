@@ -15,15 +15,18 @@ describe('RBAC test for user without permissions', () => {
     cy.deleteRegistries();
     cy.deleteContainers();
 
-    cy.addRemoteRegistry(`docker`, 'https://registry.hub.docker.com/');
-    cy.addRemoteContainer({
-      name: `testcontainer`,
-      upstream_name: 'library/alpine',
-      registry: `docker`,
-      include_tags: 'latest',
-    });
-
-    cy.createUser(userName, userPassword);
+    cy.galaxykit(
+      'registry create',
+      'docker',
+      'https://registry.hub.docker.com/',
+    );
+    cy.galaxykit(
+      'container create',
+      `testcontainer`,
+      'library/alpine',
+      `docker`,
+    );
+    cy.galaxykit('user create', userName, userPassword);
   });
 
   beforeEach(() => {
@@ -81,7 +84,11 @@ describe('RBAC test for user with all permissions', () => {
     cy.deleteRegistries();
     cy.deleteContainers();
 
-    cy.addRemoteRegistry(`docker`, 'https://registry.hub.docker.com/');
+    cy.galaxykit(
+      'registry create',
+      'docker',
+      'https://registry.hub.docker.com/',
+    );
     cy.addRemoteContainer({
       name: `testcontainer`,
       upstream_name: 'library/alpine',
@@ -89,10 +96,11 @@ describe('RBAC test for user with all permissions', () => {
       include_tags: 'latest',
     });
 
-    cy.createUser(userName, userPassword);
-    cy.createGroup(groupName);
+    cy.galaxykit('user create', userName, userPassword);
+    cy.galaxykit('group create', groupName);
+
     cy.addAllPermissions(groupName);
-    cy.addUserToGroup(groupName, userName);
+    cy.galaxykit('user group add', userName, groupName);
   });
 
   beforeEach(() => {
