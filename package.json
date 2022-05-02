@@ -18,7 +18,12 @@
         "@types/react-router-dom": "^5.3.3",
         "axios": "~0.26.1",
         "classnames": "^2.3.1",
+<<<<<<< HEAD
         "csstype": "^3.1.0",
+=======
+        "csstype": "^3.0.11",
+        "cypress-real-events": "^1.7.0",
+>>>>>>> 21b1d3fb (add cypress-real-events)
         "detect-browser": "^5.3.0",
         "file-saver": "^2.0.5",
         "js-cookie": "^3.0.1",

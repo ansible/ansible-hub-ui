@@ -34,14 +34,18 @@ describe('Repo Management tests', () => {
     cy.get('[data-cy="SortTable-headers"]').contains('Last updated');
     cy.get('[data-cy="SortTable-headers"]').contains('Last sync');
     cy.get('[data-cy="SortTable-headers"]').contains('Sync status');
-
-    cy.contains('Configure');
     cy.contains('Sync');
   });
 
   it('retrieves and copies token from local repo list', () => {
     cy.visit(localRepoUrl);
-    cy.get('[data-cy="get-token"]').contains('Get token').click();
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/distributions/?offset=0&limit=10',
+    ).as('loadRepos');
+    cy.wait('@loadRepos');
+    cy.get('button').contains('Get token').click();
+
     cy.get('button').contains('Load token').click();
     return cy
       .get('[aria-label="Copyable input"]')
@@ -72,7 +76,7 @@ describe('Repo Management tests', () => {
       .then((CLI) => {
         cy.get(
           'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__group > button[aria-label="Copy to clipboard"]',
-        ).realClick();
+        ).click();
         return cy.window().then((win) => {
           return win.navigator.clipboard.readText().then((copiedCLI) => {
             expect(copiedCLI).to.equal(CLI);
