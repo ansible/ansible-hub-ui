@@ -1,0 +1,1 @@
+Fix an error where images created by ansible builder couldn't be inspected in the UI.
