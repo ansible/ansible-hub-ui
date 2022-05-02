@@ -1,6 +1,6 @@
 describe('add roles to a group', () => {
   let num = (~~(Math.random() * 1000000)).toString();
-  before(() => {
+  beforeEach(() => {
     cy.login();
   });
 
