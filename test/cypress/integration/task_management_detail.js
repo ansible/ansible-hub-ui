@@ -8,11 +8,11 @@ describe('Task detail', () => {
       Cypress.env('prefix') + '/content/rh-certified/v3/sync/',
     ).as('sync');
 
-    cy.contains('button', 'Sync').click();
-
     cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/remotes/?*').as(
       'remotes',
     );
+
+    cy.contains('button', 'Sync').click();
 
     cy.wait('@sync');
     cy.wait('@remotes');
