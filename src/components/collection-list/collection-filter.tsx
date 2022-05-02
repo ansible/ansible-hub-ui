@@ -10,6 +10,7 @@ import {
 
 import { AppliedFilters, CompoundFilter } from 'src/components';
 import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IProps {
   ignoredParams: string[];
@@ -28,6 +29,8 @@ interface IState {
 }
 
 export class CollectionFilter extends React.Component<IProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -44,7 +47,6 @@ export class CollectionFilter extends React.Component<IProps, IState> {
 
   render() {
     const { ignoredParams, params, updateParams } = this.props;
-
     const filterConfig = [
       {
         id: 'keywords',
