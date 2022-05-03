@@ -67,7 +67,7 @@ describe('Repo Management tests', () => {
     ).click();
     cy.get(
       'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre',
-    ).contains('http://localhost:8002/api/automation-hub/content/community/');
+    ).contains(Cypress.env('prefix') + 'content/community/');
     return cy
       .get(
         'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre',
@@ -118,7 +118,6 @@ describe('Repo Management tests', () => {
 
   it(`edits remote repo 'community'`, () => {
     cy.visit(remoteRepoUrl);
-
     cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
@@ -176,7 +175,6 @@ describe('Repo Management tests', () => {
       .click({ multiple: true });
     cy.get('input[id="proxy_url"]').clear();
     cy.get('input[id="proxy_username"]').clear();
-
     cy.contains('Save').click();
   });
 
