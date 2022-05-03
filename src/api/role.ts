@@ -7,10 +7,7 @@ export class API extends PulpAPI {
     return this.http.patch(this.apiPath + id, data);
   }
 
-  list(params?, apiPath?) {
-    const changedParams = { ...params, name__startswith: 'galaxy.' };
-    return super.list(changedParams, apiPath);
-  }
+  // list(params?)
 
   getPermissions(id) {
     return this.http.get(

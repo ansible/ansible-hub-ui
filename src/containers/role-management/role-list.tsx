@@ -486,6 +486,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
 
   private queryRoles = () => {
     const { params } = this.state;
+
     this.setState({ loading: true }, () => {
       RoleAPI.list(params)
         .then((result) => {
