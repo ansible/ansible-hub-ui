@@ -52,7 +52,6 @@ export {
   NumericLabel,
   CollectionNumericLabel,
 } from './numeric-label/numeric-label';
-export { ObjectPermissionField } from './permissions/obect-permission-field';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { PartnerHeader } from './headers/partner-header';
 export { PermissionChipSelector } from './permissions/permission-chip-selector';

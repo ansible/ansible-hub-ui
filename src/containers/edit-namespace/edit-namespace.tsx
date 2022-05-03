@@ -3,6 +3,7 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
 
+import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
 import {
   PartnerHeader,
   NamespaceForm,
@@ -14,8 +15,7 @@ import {
   EmptyStateUnauthorized,
   LoadingPageSpinner,
 } from 'src/components';
-import { MyNamespaceAPI, NamespaceType, NamespaceLinkType } from 'src/api';
-
+import { AppContext } from 'src/loaders/app-context';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import {
   ErrorMessagesType,
@@ -23,7 +23,6 @@ import {
   mapErrorMessages,
   errorMessage,
 } from 'src/utilities';
-import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   namespace: NamespaceType;
@@ -265,6 +264,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         });
     });
   }
+
   private get closeAlert() {
     return closeAlertMixin('alerts');
   }
