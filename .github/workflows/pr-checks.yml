@@ -126,6 +126,7 @@ jobs:
               sed -e 's/\/home\/.*\/\(base\|pr\)\//\/DIR\//g' \
                 -e 's/\(\[name\]\|automationHub\)\.[0-9]\+\.\(\[fullhash\]\)/\1.TIMESTAMP.\2/g' \
                 -e 's/"UI_COMMIT_HASH": ".*"/"UI_COMMIT_HASH": "HASH"/' |
+              perl -ne 'print unless /^[0-9a-f]{64,64}$/d' |
               grep -v '^Current branch:' |
               grep -v '^Root folder:' > ~/webpack-config/"$version"/"$file".json
           done
