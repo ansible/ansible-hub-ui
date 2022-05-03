@@ -74,24 +74,6 @@ describe('Edit a namespace', () => {
     cy.get('.pf-c-title').should('contain', 'Company name');
   });
 
-  it('tests the namespace owners field', () => {
-    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
-      'autocomplete',
-    );
-
-    cy.get('.pf-c-form-control.pf-c-select__toggle-typeahead')
-      .click()
-      .type('abcde');
-    cy.wait('@autocomplete');
-    cy.get('.pf-c-select__menu-wrapper').should('contain', 'Not found');
-    cy.get('.pf-c-button.pf-m-plain.pf-c-select__toggle-clear').click();
-
-    cy.wait('@autocomplete');
-    cy.contains('namespace-owner-autocomplete').click();
-
-    saveButton().click();
-  });
-
   it('tests the Logo URL field', () => {
     const url = 'https://example.com/';
     cy.get('#avatar_url').clear().type('abcde');
