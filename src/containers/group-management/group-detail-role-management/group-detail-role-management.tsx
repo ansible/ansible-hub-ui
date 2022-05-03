@@ -17,7 +17,12 @@ import {
   EmptyStateFilter,
   ListItemActions,
 } from 'src/components';
-import { GroupRoleAPI, GroupObjectPermissionType, RoleType } from 'src/api';
+import {
+  GroupRoleAPI,
+  GroupObjectPermissionType,
+  RoleAPI,
+  RoleType,
+} from 'src/api';
 
 import {
   errorMessage,
@@ -81,13 +86,35 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
 
   const queryRolesWithPermissions = () => {
     setLoading(true);
-    GroupRoleAPI.getRolesWithPermissions(group.id, {
-      ...ParamHelper.getReduced(params, ['id', 'tab', ...nonQueryParams]),
-      sort: ParamHelper.validSortParams(params['sort'], ['role'], 'role'),
-    })
-      .then(({ data, count }) => {
+
+    Promise.all([
+      RoleAPI.list({ name__startswith: 'galaxy.' }),
+      GroupRoleAPI.listRoles(group.id, {
+        ...ParamHelper.getReduced(params, ['id', 'tab', ...nonQueryParams]),
+        sort: ParamHelper.validSortParams(params['sort'], ['role'], 'role'),
+      }),
+    ])
+      .then(([allRoles, assignedRoles]) => {
+        // match roles with assigned roles
+        return assignedRoles.data.results
+          .map(({ role, pulp_href }) => {
+            const data = allRoles.data.results.find(
+              ({ name }) => name === role,
+            );
+            if (data) {
+              return {
+                ...data,
+                // swap pulp_href role with assigned pulp_href role
+                // to delete the assigned role
+                pulp_href,
+              };
+            }
+          })
+          .filter(Boolean);
+      })
+      .then((data) => {
         setRoles(data);
-        setRolesItemCount(count);
+        setRolesItemCount(data.length);
         setLoading(false);
       })
       .catch((e) => {
