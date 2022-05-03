@@ -14,21 +14,12 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 import { TagIcon } from '@patternfly/react-icons';
-import { isEqual, isEmpty, xorWith, cloneDeep } from 'lodash';
-import {
-  AlertType,
-  APISearchTypeAhead,
-  ObjectPermissionField,
-  HelperText,
-} from 'src/components';
+import { AlertType, APISearchTypeAhead, HelperText } from 'src/components';
 import {
   ContainerDistributionAPI,
-  GroupObjectPermissionType,
-  ExecutionEnvironmentNamespaceAPI,
   ExecutionEnvironmentRegistryAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
-import { Constants } from 'src/constants';
 import { errorMessage } from 'src/utilities';
 
 interface IProps {
@@ -55,8 +46,6 @@ interface IProps {
 interface IState {
   name: string;
   description: string;
-  selectedGroups: GroupObjectPermissionType[];
-  originalSelectedGroups: GroupObjectPermissionType[];
 
   addTagsInclude: string;
   addTagsExclude: string;
@@ -67,7 +56,6 @@ interface IState {
   upstreamName: string;
   formErrors?: {
     registries?: AlertType;
-    groups?: AlertType;
   };
 }
 
@@ -77,8 +65,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     this.state = {
       name: this.props.name || '',
       description: this.props.description,
-      selectedGroups: [],
-      originalSelectedGroups: [],
 
       addTagsInclude: '',
       addTagsExclude: '',
@@ -89,7 +75,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       upstreamName: this.props.upstreamName || '',
       formErrors: {
         registries: null,
-        groups: null,
       },
     };
   }
@@ -121,15 +106,10 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           });
         });
     }
-
-    if (!this.props.isNew) {
-      this.loadSelectedGroups();
-    }
   }
 
   render() {
-    const { onSave, onCancel, namespace, isNew, isRemote, formError } =
-      this.props;
+    const { onSave, onCancel, namespace, isNew, isRemote } = this.props;
     const {
       name,
       description,
@@ -373,59 +353,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
               autoResize={true}
             />
           </FormGroup>
-          {formErrors?.groups ? (
-            <Alert title={formErrors.groups.title} variant='danger' isInline>
-              {formErrors.groups.description}
-            </Alert>
-          ) : (
-            <FormGroup
-              key='groups'
-              fieldId='groups'
-              label={t`Groups with access`}
-              className='hub-formgroup-groups'
-            >
-              <div className='pf-c-form__helper-text'>
-                {t`Adding groups provides access to all repositories in the
-                    "${namespace}" container namespace.`}
-              </div>
-              <ObjectPermissionField
-                groups={this.state.selectedGroups}
-                availablePermissions={Constants.CONTAINER_NAMESPACE_PERMISSIONS}
-                setGroups={(g) => this.setState({ selectedGroups: g })}
-                menuAppendTo='parent'
-                isDisabled={
-                  !this.props.permissions.includes(
-                    'container.change_containernamespace',
-                  )
-                }
-                onError={(err) => {
-                  const { status, statusText } = err.response;
-                  this.setState({
-                    formErrors: {
-                      ...this.state.formErrors,
-                      groups: {
-                        title: t`Groups list could not be displayed.`,
-                        description: errorMessage(status, statusText),
-                        variant: 'danger',
-                      },
-                    },
-                  });
-                }}
-              ></ObjectPermissionField>
-              {!!formError &&
-                formError.length > 0 &&
-                formError.map((error) => (
-                  <Alert
-                    title={error.title}
-                    variant='danger'
-                    isInline
-                    key={error.title}
-                  >
-                    {error.detail}
-                  </Alert>
-                ))}
-            </FormGroup>
-          )}
         </Form>
       </Modal>
     );
@@ -460,30 +387,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     });
   }
 
-  private loadSelectedGroups() {
-    const { namespace } = this.props;
-    return ExecutionEnvironmentNamespaceAPI.get(namespace)
-      .then((result) =>
-        this.setState({
-          selectedGroups: cloneDeep(result.data.groups),
-          originalSelectedGroups: result.data.groups,
-        }),
-      )
-      .catch((e) => {
-        const { status, statusText } = e.response;
-        this.setState({
-          formErrors: {
-            ...this.state.formErrors,
-            groups: {
-              title: t`Groups list could not be displayed.`,
-              description: errorMessage(status, statusText),
-              variant: 'danger',
-            },
-          },
-        });
-      });
-  }
-
   private addTags(tags, key: 'includeTags' | 'excludeTags') {
     const current = new Set(this.state[key]);
     tags.split(/\s+|\s*,\s*/).forEach((tag) => current.add(tag));
@@ -512,7 +415,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       isNew,
       isRemote,
       name: originalName,
-      namespace,
       remotePulpId,
     } = this.props;
     const {
@@ -521,8 +423,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       includeTags: include_tags,
       name,
       registrySelection: [{ id: registry } = { id: null }],
-      selectedGroups,
-      originalSelectedGroups,
       upstreamName: upstream_name,
     } = this.state;
 
@@ -550,35 +450,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       // remote edit or local edit - description, if changed
       description !== originalDescription &&
         ContainerDistributionAPI.patch(distributionPulpId, { description }),
-      // remote edit or local edit - groups, if changed
-      !this.compareGroupsAndPerms(
-        selectedGroups.sort(),
-        originalSelectedGroups.sort(),
-      ) &&
-        ExecutionEnvironmentNamespaceAPI.update(namespace, {
-          groups: selectedGroups,
-        }),
     ]);
-  }
-
-  //Compare groups and compare their permissions
-  private compareGroupsAndPerms(original, newOne) {
-    let same = true;
-    if (original.length === newOne.length) {
-      original.forEach((x, index) => {
-        if (
-          !isEmpty(
-            xorWith(
-              x.object_permissions.sort(),
-              newOne[index].object_permissions.sort(),
-              isEqual,
-            ),
-          )
-        ) {
-          same = false;
-        }
-      });
-    }
-    return isEmpty(xorWith(original, newOne, isEqual)) && same;
   }
 }
