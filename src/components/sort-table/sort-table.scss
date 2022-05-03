@@ -1,9 +1,11 @@
 @import '../../global-variables.scss';
 
-.active {
-  color: $blue;
-}
+.hub-SortTable-headers {
+  .active {
+    color: $blue;
+  }
 
-.inactive {
-  color: $grey;
+  .inactive {
+    color: $grey;
+  }
 }
