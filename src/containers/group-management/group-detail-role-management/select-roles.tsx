@@ -47,11 +47,13 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
 
   const queryRoles = () => {
     setLoading(true);
-    RoleAPI.list(localParams).then(({ data }) => {
-      setRoles(data.results);
-      setRolesItemCount(data.count);
-      setLoading(false);
-    });
+    RoleAPI.list({ name__startswith: 'galaxy.', ...localParams }).then(
+      ({ data }) => {
+        setRoles(data.results);
+        setRolesItemCount(data.count);
+        setLoading(false);
+      },
+    );
   };
 
   if (loading) {
