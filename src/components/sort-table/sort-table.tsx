@@ -75,7 +75,7 @@ export class SortTable extends React.Component<IProps> {
   render() {
     return (
       <thead>
-        <tr data-cy='SortTable-headers'>
+        <tr className='hub-SortTable-headers' data-cy='SortTable-headers'>
           {this.props.options['headers'].map((element) =>
             this.getHeaderItem(element),
           )}
