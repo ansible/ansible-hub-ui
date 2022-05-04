@@ -86,7 +86,6 @@ export class API extends LegacyAPI {
     //const path = `${this.apiPath}${repo}/${namespace}/${name}/`;
     const path = `${this.apiPath}/${github_user}/${name}/`;
     console.log('PATH', path);
-
   }
 }
 

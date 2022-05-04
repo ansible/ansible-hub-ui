@@ -67,10 +67,7 @@ class LegacyUsers extends React.Component<RouteComponentProps, IProps> {
           <DataList aria-label={t`List of Legacy Users`}>
             {this.state.legacyusers &&
               this.state.legacyusers.map((luser) => (
-                <LegacyUserListItem
-                  key={luser.id}
-                  user={luser}
-                />
+                <LegacyUserListItem key={luser.id} user={luser} />
               ))}
           </DataList>
         </React.Fragment>

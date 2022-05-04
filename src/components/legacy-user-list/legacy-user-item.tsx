@@ -56,9 +56,7 @@ export class LegacyUserListItem extends React.Component<LegacyUserProps> {
     cells.push(
       <DataListCell key='content'>
         <div>
-          <Link to={user_url}>
-            {user.username}
-          </Link>
+          <Link to={user_url}>{user.username}</Link>
         </div>
       </DataListCell>,
     );
