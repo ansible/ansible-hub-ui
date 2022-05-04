@@ -4,7 +4,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
+"Language: nl\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -65,7 +65,7 @@ msgstr "<0>Opmerking:</0> De volgende links kunnen door je browser worden geblok
 
 #: src/containers/namespace-detail/namespace-detail.tsx:324
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
-msgstr "<0>Opmerking:</0> Gebruik deze URL om ansible-galaxy te configureren om collecties naar deze namespace te uploaden. Meer informatie over configuraties van ansible-galaxy vindt u <1>hier</1>."
+msgstr "<0>Opmerking:</0> Gebruik deze URL om ansible-galaxy te configureren om collecties naar deze namespace te uploaden. Meer informatie over configuraties van ansible-galaxy vindt u <1>hier</1><2> </2><3/>."
 
 #: src/containers/token/token-standalone.tsx:86
 msgid "<0>WARNING</0> copy this token now. This is the only time you will ever see it."
@@ -77,7 +77,7 @@ msgstr "<0>WAARSCHUWING</0> het laden van een nieuw token zal uw oude token verw
 
 #: src/containers/execution-environment/registry-list.tsx:227
 msgid "<0>{0}</0> will be deleted."
-msgstr "<0> zal worden gewist."
+msgstr "<0>{0}</0> zal worden gewist."
 
 #: src/components/delete-modal/delete-user-modal.tsx:56
 msgid "<0>{0}</0> will be permanently deleted."
@@ -469,7 +469,7 @@ msgstr "Collection \"{name} v{collectionVersion}\" could not be deleted."
 #: src/components/headers/collection-header.tsx:714
 #: src/components/headers/collection-header.tsx:729
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
-msgstr "Collectieversie succesvol verwijderd."
+msgstr "Collectieversie \"{name} v{collectionVersion}\" succesvol verwijderd."
 
 #: src/components/headers/collection-header.tsx:832
 msgid "Collection \"{name}\" could not be deleted."
@@ -481,7 +481,7 @@ msgstr "Collection \"{name}\" could not be downloaded."
 
 #: src/components/headers/collection-header.tsx:808
 msgid "Collection \"{name}\" has been successfully deleted."
-msgstr "Collectieversie succesvol verwijderd."
+msgstr "Collectieversie \"{name}\" succesvol verwijderd."
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:151
 msgid "Collection Name"
@@ -1193,7 +1193,7 @@ msgstr "Foutbericht:"
 
 #: src/utilities/fail-alerts.ts:9
 msgid "Error {statusCode} - {statusText}"
-msgstr "Fout"
+msgstr "Fout {statusCode} - {statusText}"
 
 #: src/utilities/fail-alerts.ts:6
 msgid "Error {statusCode} - {statusText}: Forbidden: You do not have the required permissions to proceed with this request. Please contact the server administrator for elevated permissions."
@@ -1726,7 +1726,7 @@ msgstr "Namespace \"{name}\" could not be deleted."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:655
 msgid "Namespace \"{name}\" has been successfully deleted."
-msgstr "Namespace succesvol verwijderd."
+msgstr "Namespace \"{name}\" succesvol verwijderd."
 
 #: src/components/namespace-modal/namespace-modal.tsx:136
 msgid "Namespace name"
@@ -2362,11 +2362,11 @@ msgstr "Opslaan"
 
 #: src/containers/execution-environment-detail/base.tsx:219
 msgid "Saved changes to execution environment \"{0}\"."
-msgstr "Terug naar uitvoeringsomgevingen"
+msgstr "Terug naar uitvoeringsomgevingen \"{0}\""
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:453
 msgid "Saved changes to execution environment \"{name}\"."
-msgstr "Terug naar uitvoeringsomgevingen"
+msgstr "Terug naar uitvoeringsomgevingen \"{name}\""
 
 #: src/containers/edit-namespace/edit-namespace.tsx:277
 msgid "Saved changes to namespace \"{0}\"."
@@ -2374,7 +2374,7 @@ msgstr "Saved changes to namespace \"{0}\"."
 
 #: src/containers/settings/user-profile.tsx:122
 msgid "Saved changes to user \"{username}\"."
-msgstr "Modus Niet-opgeslagen wijzigingen"
+msgstr "Modus Niet-opgeslagen wijzigingen \"{username}\""
 
 #: src/components/my-imports/import-console.tsx:81
 msgid "Scroll to end"
@@ -2503,11 +2503,11 @@ msgstr "Sign state"
 
 #: src/components/headers/collection-header.tsx:238
 msgid "Sign version {0}"
-msgstr "API-versie"
+msgstr "API-versie {0}"
 
 #: src/components/signing/sign-single-certificate-modal.tsx:27
 msgid "Sign version {version}"
-msgstr "API-versie"
+msgstr "API-versie {version}"
 
 #: src/components/collection-detail/download-signature-grid-item.tsx:34
 msgid "Signature"
@@ -2701,7 +2701,7 @@ msgstr "Task \"{name}\" could not be stopped."
 
 #: src/containers/task-management/task-list-view.tsx:373
 msgid "Task \"{name}\" stopped successfully."
-msgstr "Taak succesvol gestopt."
+msgstr "Taak \"{name}\" succesvol gestopt."
 
 #: src/containers/task-management/task_detail.tsx:404
 msgid "Task \"{taskName}\" could not be stopped."
@@ -2709,7 +2709,7 @@ msgstr "Task \"{taskName}\" could not be stopped."
 
 #: src/containers/task-management/task_detail.tsx:388
 msgid "Task \"{taskName}\" stopped successfully."
-msgstr "Taak succesvol gestopt."
+msgstr "Taak \"{taskName}\" succesvol gestopt."
 
 #: src/constants.tsx:105
 #: src/containers/task-management/task-list-view.tsx:115
@@ -3027,7 +3027,7 @@ msgstr "User \"{0}\" has been successfully removed group \"{name}\"."
 
 #: src/containers/group-management/group-detail.tsx:611
 msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
-msgstr "<0>{gebruikersnaam}{username} zal worden verwijderd uit </0>{groepsnaam}<1>."
+msgstr "Gebruikersnaam <0>{username}</0> zal worden verwijderd uit </1>{groupname}<1>."
 
 #: src/loaders/standalone/standalone-loader.tsx:395
 msgid "User Access"
@@ -3335,7 +3335,7 @@ msgstr "{company} logo"
 
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
-msgstr "{n, plural, one {# byte} andere {# bytes}}"
+msgstr "{n, plural, one {# byte} other {# bytes}}"
 
 #: src/containers/task-management/task-list-view.tsx:354
 msgid "{name} will be cancelled."
