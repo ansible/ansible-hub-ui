@@ -44,17 +44,19 @@ export class GroupModal extends React.Component<IProps, IState> {
         isOpen={true}
         title={t`Create a group`}
         actions={[
-          <Button
-            isDisabled={
-              this.state.name.length === 0 ||
-              (this.props.group && this.state.name === this.props.group.name)
-            }
-            key='create'
-            variant='primary'
-            onClick={() => onSave(this.state.name)}
-          >
-            {!this.props.group ? t`Create` : t`Save`}
-          </Button>,
+          <div key='create' data-cy='create-group-button'>
+            <Button
+              isDisabled={
+                this.state.name.length === 0 ||
+                (this.props.group && this.state.name === this.props.group.name)
+              }
+              key='create'
+              variant='primary'
+              onClick={() => onSave(this.state.name)}
+            >
+              {!this.props.group ? t`Create` : t`Save`}
+            </Button>
+          </div>,
           <Button key='cancel' variant='link' onClick={() => onCancel()}>
             {t`Cancel`}
           </Button>,
