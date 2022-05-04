@@ -1,1 +1,0 @@
-Create separate component for toggle dropdown on list views

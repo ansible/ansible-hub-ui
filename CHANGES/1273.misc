@@ -1,1 +1,0 @@
-Cypress: allow changing galaxykit command in cypress.env.json, can be used to pass --ignore-certs
