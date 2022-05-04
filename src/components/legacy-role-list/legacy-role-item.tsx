@@ -29,64 +29,60 @@ import { SignatureBadge } from '../signing';
 
 import { LegacyRoleDetailType } from 'src/api/response-types/legacy-role';
 
-
 interface LegacyRoleProps {
   role: LegacyRoleDetailType;
 }
 
-
 export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
   render() {
-    const {
-      role
-    } = this.props;
+    const { role } = this.props;
 
     const cells = [];
 
     cells.push(
-        <DataListCell isFilled={false} alignRight={false} key='ns'>
-            <Logo
-                alt={t`role.github_user logo`}
-                fallbackToDefault
-                image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-                size='40px'
-                unlockWidth
-                width='97px'
-            >
-            </Logo>
-        </DataListCell>
+      <DataListCell isFilled={false} alignRight={false} key='ns'>
+        <Logo
+          alt={t`role.github_user logo`}
+          fallbackToDefault
+          image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+          size='40px'
+          unlockWidth
+          width='97px'
+        ></Logo>
+      </DataListCell>,
     );
 
-	cells.push(
-        <DataListCell key='content'>
-            <div>
-                <Link
-                    to="/ui/legacy/roles/{role.namespace.name}/{role.name}"
-                >
-                {role.name}
-                </Link>
-                <TextContent>
-                    <Text component={TextVariants.small}>
-                        <Trans>Provided by {role.github_user}</Trans>
-                    </Text>
-                </TextContent>
-            </div>
-            <div className='hub-entry'>{role.description}</div>
-            <div className='hub-entry'>
-                <LabelGroup>
-                {role.summary_fields.tags.map((tag, index) => (
-                  <Tag key={index}>{tag}</Tag>
-                ))}
-                </LabelGroup>
-            </div>
-        </DataListCell>
+    cells.push(
+      <DataListCell key='content'>
+        <div>
+          <Link to='/ui/legacy/roles/{role.namespace.name}/{role.name}'>
+            {role.name}
+          </Link>
+          <TextContent>
+            <Text component={TextVariants.small}>
+              <Trans>Provided by {role.github_user}</Trans>
+            </Text>
+          </TextContent>
+        </div>
+        <div className='hub-entry'>{role.description}</div>
+        <div className='hub-entry'>
+          <LabelGroup>
+            {role.summary_fields.tags.map((tag, index) => (
+              <Tag key={index}>{tag}</Tag>
+            ))}
+          </LabelGroup>
+        </div>
+      </DataListCell>,
     );
 
     cells.push(
       <DataListCell isFilled={false} alignRight key='stats'>
         <div className='hub-right-col hub-entry'>
           <Trans>
-            Updated <DateComponent date={role.summary_fields.versions[0].release_date} />
+            Updated{' '}
+            <DateComponent
+              date={role.summary_fields.versions[0].release_date}
+            />
           </Trans>
         </div>
         <div className='hub-entry'>v{role.summary_fields.versions[0].name}</div>

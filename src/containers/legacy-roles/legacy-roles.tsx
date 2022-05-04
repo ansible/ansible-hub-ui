@@ -41,21 +41,20 @@ interface IProps {
 }
 
 interface LegacyRole {
-    user: string;
-    name: string;
-    latest_version: string;
+  user: string;
+  name: string;
+  latest_version: string;
 }
 
 //class LegacyRoles extends React.Component<RouteComponentProps, IState> {
 //class LegacyRoles extends React.Component {
 class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
-
   constructor(props) {
     super(props);
     this.state = {
-        ...props,
-        legacyroles: [],
-    }
+      ...props,
+      legacyroles: [],
+    };
   }
 
   componentDidMount() {
@@ -65,36 +64,33 @@ class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
     console.log('LegacyAPI', LegacyAPI);
     console.log('LegacyRoleAPI', LegacyRoleAPI);
 
-    LegacyRoleAPI.get('roles')
-        .then(response => { 
-            console.log(response.data);
-            //this.setState({legacyroles: response.data});
-			this.setState((state, props) => ({
-				legacyroles: response.data.results
-			}));
-        })
+    LegacyRoleAPI.get('roles').then((response) => {
+      console.log(response.data);
+      //this.setState({legacyroles: response.data});
+      this.setState((state, props) => ({
+        legacyroles: response.data.results,
+      }));
+    });
   }
 
   render() {
     return (
-     <div>
-         <BaseHeader
-           title={t`Legacy Roles`}
-         >
-         </BaseHeader>
-         <React.Fragment>
-            <DataList aria-label={t`List of Legacy Roles`}>
-                { this.state.legacyroles && 
-                    this.state.legacyroles.map((lrole) => (
-                        <LegacyRoleListItem key={lrole.github_user + lrole.name + lrole.id} role={lrole} />
-                    ))
-                }
-            </DataList>
+      <div>
+        <BaseHeader title={t`Legacy Roles`}></BaseHeader>
+        <React.Fragment>
+          <DataList aria-label={t`List of Legacy Roles`}>
+            {this.state.legacyroles &&
+              this.state.legacyroles.map((lrole) => (
+                <LegacyRoleListItem
+                  key={lrole.github_user + lrole.name + lrole.id}
+                  role={lrole}
+                />
+              ))}
+          </DataList>
         </React.Fragment>
-    </div>
+      </div>
     );
   }
-
 }
 
 export default withRouter(LegacyRoles);

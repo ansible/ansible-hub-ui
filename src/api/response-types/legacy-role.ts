@@ -47,24 +47,23 @@ export class LegacyRoleListType {
   summary_fields: {
     dependencies: string[];
     namespace: {
-        id: number,
-        name: string,
-    },
+      id: number;
+      name: string;
+    };
     provider_namespace: {
-        id: number,
-        name: string,
-    },
+      id: number;
+      name: string;
+    };
     repository: {
-        name: string;
-        original_name: string;
-    },
-    tags: string[],
+      name: string;
+      original_name: string;
+    };
+    tags: string[];
     versions: {
       name: string;
       release_date: string;
-    }[]
+    }[];
   };
-
 }
 
 export class LegacyRoleDetailType {
@@ -80,21 +79,21 @@ export class LegacyRoleDetailType {
   summary_fields: {
     dependencies: string[];
     namespace: {
-        id: number,
-        name: string,
-    },
+      id: number;
+      name: string;
+    };
     provider_namespace: {
-        id: number,
-        name: string,
-    },
+      id: number;
+      name: string;
+    };
     repository: {
-        name: string;
-        original_name: string;
-    },
-    tags: string[],
+      name: string;
+      original_name: string;
+    };
+    tags: string[];
     versions: {
       name: string;
       release_date: string;
-    }[]
+    }[];
   };
 }
