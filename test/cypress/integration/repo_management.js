@@ -47,42 +47,27 @@ describe('Repo Management tests', () => {
     cy.get('button').contains('Get token').click();
 
     cy.get('button').contains('Load token').click();
-    return cy
-      .get('[aria-label="Copyable input"]')
+    cy.get('[aria-label="Copyable input"]')
       .invoke('val')
-      .then((token) => {
-        cy.get('[aria-label="Copy to clipboard"]').realClick();
-        return cy.window().then((win) => {
-          return win.navigator.clipboard.readText().then((copiedToken) => {
-            expect(copiedToken).to.equal(token);
-          });
-        });
-      });
+      .should('have.length', 40);
+    cy.get('button[aria-label="Copy to clipboard"]').should('be.enabled');
   });
 
   it('expands and copies CLI config from local repo list', () => {
     cy.visit(localRepoUrl);
     cy.get(
       'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__group > button[aria-label="Show content"]',
-    ).click();
+    ).click(); //show expandable content
+    cy.get(
+      'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre',
+    ).contains(Cypress.env('prefix') + 'content/community/'); // check content of input
     cy.get(
       'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre',
     ).contains(Cypress.env('prefix') + 'content/community/');
-    return cy
-      .get(
-        'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre',
-      )
-      .invoke('text')
-      .then((CLI) => {
-        cy.get(
-          'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__group > button[aria-label="Copy to clipboard"]',
-        ).click();
-        return cy.window().then((win) => {
-          return win.navigator.clipboard.readText().then((copiedCLI) => {
-            expect(copiedCLI).to.equal(CLI);
-          });
-        });
-      });
+
+    cy.get(
+      'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__group > button[aria-label="Copy to clipboard"]',
+    ).should('be.enabled');
   });
 
   it('edits remote registry', () => {
