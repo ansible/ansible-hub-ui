@@ -478,7 +478,7 @@ msgstr "Collection \"{name} v{collectionVersion}\" has been successfully deleted
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "Collection \"{name}\" could not be deleted."
 
-#: src/components/collection-detail/collection-info.tsx:188
+#: src/components/collection-detail/collection-info.tsx:189
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "Collection \"{name}\" could not be downloaded."
 
@@ -985,7 +985,7 @@ msgstr "Download only signed collections"
 msgid "Download requirements file"
 msgstr "Download requirements file"
 
-#: src/components/collection-detail/collection-info.tsx:116
+#: src/components/collection-detail/collection-info.tsx:117
 msgid "Download tarball"
 msgstr "Download tarball"
 
@@ -1357,7 +1357,7 @@ msgstr "Get token"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "Giving up waiting for task after 10 attempts."
 
-#: src/components/collection-detail/collection-info.tsx:159
+#: src/components/collection-detail/collection-info.tsx:160
 msgid "Go to documentation"
 msgstr "Go to documentation"
 
@@ -2320,7 +2320,7 @@ msgstr "Repository Management"
 msgid "Repository name"
 msgstr "Repository name"
 
-#: src/components/collection-detail/collection-info.tsx:128
+#: src/components/collection-detail/collection-info.tsx:129
 msgid "Requires Ansible"
 msgstr "Requires Ansible"
 
@@ -3021,8 +3021,12 @@ msgid "User \"{0}\" has been successfully deleted."
 msgstr "User \"{0}\" has been successfully deleted."
 
 #: src/containers/group-management/group-detail.tsx:921
-msgid "User \"{0}\" has been successfully removed group \"{name}\"."
-msgstr "User \"{0}\" has been successfully removed group \"{name}\"."
+msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
+msgstr "User \"{0}\" has been successfully removed from group \"{name}\"."
+
+#: src/containers/group-management/group-detail.tsx:921
+#~ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
+#~ msgstr "User \"{0}\" has been successfully removed group \"{name}\"."
 
 #: src/containers/group-management/group-detail.tsx:611
 msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
