@@ -3,7 +3,7 @@ import {
   CollectionDetailType,
   CollectionListType,
   CollectionUploadType,
-  LegacyRoleDetailType
+  LegacyRoleDetailType,
 } from 'src/api';
 import axios from 'axios';
 
@@ -34,31 +34,22 @@ function filterListItem(item: CollectionListType) {
 function filterDetailItem(item: CollectionDetailType) {
   return {
     ...item,
-    latest_version: {
-      ...item.latest_version,
-      contents: null, // deprecated
-      docs_blob: {
-        ...item.latest_version.docs_blob,
-        contents: filterContents(item.latest_version.docs_blob.contents),
-      },
-      metadata: {
-        ...item.latest_version.metadata,
-        contents: filterContents(item.latest_version.metadata.contents),
-      },
-    },
+    latest_version: '',
   };
 }
 
 export class API extends LegacyAPI {
-  apiPath = this.getApiPath('roles/');
-  cachedCollection: CollectionDetailType;
+  apiPath = this.getApiPath('');
+  cachedLegacyRole: LegacyRoleDetailType;
 
   constructor() {
     super();
   }
 
   list(params?) {
-    const path = this.apiPath + '/';
+    //const path = this.apiPath + '/';
+    const path = this.apiPath;
+    console.log('API this.apiPath', path);
     return super.list(params, path).then((response) => ({
       ...response,
       data: {
@@ -79,7 +70,7 @@ export class API extends LegacyAPI {
   // This allows the collection page to be broken into separate components
   // and routed separately without fetching redundant data from the API
   getCached(
-    namespace,
+    github_user,
     name,
     params?,
     forceReload?: boolean,
@@ -88,13 +79,16 @@ export class API extends LegacyAPI {
       !forceReload &&
       this.cachedLegacyRole &&
       this.cachedLegacyRole.name === name &&
-      this.cachedLegacyRole.namespace.name === namespace
+      this.cachedLegacyRole.github_user === github_user
     ) {
       return Promise.resolve(this.cachedLegacyRole);
     }
 
     //const path = `${this.apiPath}${repo}/${namespace}/${name}/`;
-    const path = `${this.apiPath}/${namespace}/${name}/`;
+    const path = `${this.apiPath}/${github_user}/${name}/`;
+    console.log('PATH', path);
+
+    /*
     return this.http
       .get(path, {
         params: params,
@@ -102,11 +96,12 @@ export class API extends LegacyAPI {
       .then((result) => {
         // remove module_utils, doc_fragments from item
         const item = filterDetailItem(result.data);
-        this.cachedCollection = item;
+        this.cachedLegacyRole = item;
         return item;
       });
+    */
+    //return ("foobar");
   }
-
 }
 
 export const LegacyRoleAPI = new API();

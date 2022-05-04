@@ -51,22 +51,23 @@ export class LegacyRoleList extends React.Component<IProps> {
     console.log('legacyrolelist props', this.props);
 
     return (
-      <React.Fragment>
-        <DataList aria-label={t`List of Roles`}>
-            {legacyroles.length > 0 ? (
-                legacyroles.map((r) => (
-                        <h2>ROLE</h2>
-                ))    
-            ) : (
+      <div>
+          <h1>LegacyRoleList Component</h1>
+          <React.Fragment>
+            <DataList aria-label={t`List of Roles`}>
+              {legacyroles.length > 0 ? (
+                legacyroles.map((r) => <h2>ROLE</h2>)
+              ) : (
                 <EmptyStateFilter />
-            )}
-        </DataList>
-        <Pagination
-          params={params}
-          updateParams={(p) => updateParams(p)}
-          count={itemCount}
-        />
-      </React.Fragment>
+              )}
+            </DataList>
+            <Pagination
+              params={params}
+              updateParams={(p) => updateParams(p)}
+              count={itemCount}
+            />
+          </React.Fragment>
+      </div>
     );
   }
 

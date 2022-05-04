@@ -13,18 +13,20 @@ import {
   Pagination,
   RepoSelector,
 } from 'src/components';
-import {
-  LegacyRoleListType,
-} from 'src/api';
+import { LegacyAPI } from 'src/api/legacy';
+import { LegacyRoleAPI } from 'src/api/legacyrole';
+import { LegacyRoleListType } from 'src/api';
+import { LegacyRoleListItem } from 'src/components/legacy-role-list/legacy-role-item';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 //import { filterIsSet } from 'src/utilities';
 //import { Paths } from 'src/paths';
 
-interface IState {
+interface IProps {
   legacyroles: LegacyRoleListType[];
-  numberOfResults: number;
+  //numberOfResults: number;
+  itemCount: number;
   params: {
     page?: number;
     page_size?: number;
@@ -32,33 +34,67 @@ interface IState {
     tags?: string[];
     view_type?: string;
   };
-  loading: boolean;
+  updateParams: (params) => void;
+  ignoredParams: string[];
+  //showControls?: boolean;
+  //loading: boolean;
+}
+
+interface LegacyRole {
+    user: string;
+    name: string;
+    latest_version: string;
 }
 
 //class LegacyRoles extends React.Component<RouteComponentProps, IState> {
 //class LegacyRoles extends React.Component {
-class LegacyRoles extends React.Component<RouteComponentProps, IState> {
+class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
+
   constructor(props) {
     super(props);
+    this.state = {
+        ...props,
+        legacyroles: [],
+    }
   }
 
   componentDidMount() {
     console.log('LegacyRoles mounted');
     console.log('LegacyRoles state', this.state);
     console.log('LegacyRoles props', this.props);
-  } 
+    console.log('LegacyAPI', LegacyAPI);
+    console.log('LegacyRoleAPI', LegacyRoleAPI);
+
+    LegacyRoleAPI.get('roles')
+        .then(response => { 
+            console.log(response.data);
+            //this.setState({legacyroles: response.data});
+			this.setState((state, props) => ({
+				legacyroles: response.data.results
+			}));
+        })
+  }
 
   render() {
-    const legacyroles = ['foo.bar', 'foo.baz', 'jim.bob'];
     return (
-      <div>
-        <h1>ROLES</h1>
-        {legacyroles.map((r) => (
-            <div id={r} key={r}>ROLE: {r}</div>
-        ))}
-      </div>
+     <div>
+         <BaseHeader
+           title={t`Legacy Roles`}
+         >
+         </BaseHeader>
+         <React.Fragment>
+            <DataList aria-label={t`List of Legacy Roles`}>
+                { this.state.legacyroles && 
+                    this.state.legacyroles.map((lrole) => (
+                        <LegacyRoleListItem key={lrole.github_user + lrole.name + lrole.id} role={lrole} />
+                    ))
+                }
+            </DataList>
+        </React.Fragment>
+    </div>
     );
   }
+
 }
 
 export default withRouter(LegacyRoles);

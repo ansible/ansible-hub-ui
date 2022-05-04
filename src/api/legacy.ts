@@ -1,5 +1,5 @@
 import { BaseAPI } from './base';
-import { LegacyRoleDetailType} from 'src/api';
+import { LegacyRoleDetailType } from 'src/api';
 
 export class LegacyAPI extends BaseAPI {
   API_VERSION = 'v1';

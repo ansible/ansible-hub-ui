@@ -369,7 +369,6 @@ class App extends React.Component<RouteComponentProps, IState> {
       menuSection(t`Legacy Roles`, {}, [
         menuItem(t`Roles`, {
           url: Paths.legacyRoles,
-          condition: ({ user }) => !user.is_anonymous,
         }),
       ]),
       menuSection(
