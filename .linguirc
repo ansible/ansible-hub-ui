@@ -4,6 +4,6 @@
     "include": ["<rootDir>/src"]
   }],
   "format": "po",
-  "locales": ["en", "es", "fr", "nl", "ja", "zh"],
+  "locales": ["en", "es", "fr", "ko", "nl", "ja", "zh"],
   "sourceLocale": "en"
 }
