@@ -1,6 +1,7 @@
 import { i18n } from '@lingui/core';
 import * as plurals from 'make-plural/plurals';
 
+// remember to update .linguirc as well
 const availableLanguages = ['en', 'es', 'fr', 'ko', 'nl', 'ja', 'zh'];
 
 // Accept-Language
