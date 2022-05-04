@@ -351,14 +351,6 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                   ))}
                 </LabelGroup>
               </FormGroup>
-
-              {includeTags.length && excludeTags.length ? (
-                <Alert
-                  variant='warning'
-                  isInline
-                  title={t`It does not make sense to include and exclude tags at the same time.`}
-                />
-              ) : null}
             </>
           )}
 
