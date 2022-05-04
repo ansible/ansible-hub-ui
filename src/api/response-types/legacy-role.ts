@@ -49,6 +49,7 @@ export class LegacyRoleListType {
     namespace: {
       id: number;
       name: string;
+      avatar_url: string;
     };
     provider_namespace: {
       id: number;
@@ -81,6 +82,7 @@ export class LegacyRoleDetailType {
     namespace: {
       id: number;
       name: string;
+      avatar_url: string;
     };
     provider_namespace: {
       id: number;

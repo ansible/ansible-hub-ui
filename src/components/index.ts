@@ -84,3 +84,5 @@ export { FileUpload } from './patternfly-wrappers/fileupload';
 export { ListItemActions } from './list-item-actions/list-item-actions';
 export { LegacyRoleList } from './legacy-role-list/legacy-role-list';
 export { LegacyRoleListItem } from './legacy-role-list/legacy-role-item';
+export { LegacyUserList } from './legacy-user-list/legacy-user-list';
+export { LegacyUserListItem } from './legacy-user-list/legacy-user-item';

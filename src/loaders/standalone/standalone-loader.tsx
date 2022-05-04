@@ -367,6 +367,9 @@ class App extends React.Component<RouteComponentProps, IState> {
         }),
       ]),
       menuSection(t`Legacy Roles`, {}, [
+        menuItem(t`Community`, {
+          url: Paths.legacyUsers,
+        }),
         menuItem(t`Roles`, {
           url: Paths.legacyRoles,
         }),

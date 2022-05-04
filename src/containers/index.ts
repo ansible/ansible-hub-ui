@@ -31,3 +31,4 @@ export { default as ExecutionEnvironmentManifest } from './execution-environment
 export { default as TaskDetail } from './task-management/task_detail';
 export { default as TaskListView } from './task-management/task-list-view';
 export { default as LegacyRoles } from './legacy-roles/legacy-roles';
+export { default as LegacyUsers } from './legacy-users/legacy-users';

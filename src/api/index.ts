@@ -61,3 +61,5 @@ export { SettingsType } from './response-types/settings';
 export { SignCollectionAPI } from './sign-collections';
 export { LegacyRoleListType } from './response-types/legacy-role';
 export { LegacyRoleDetailType } from './response-types/legacy-role';
+export { LegacyUserListType } from './response-types/legacy-user';
+export { LegacyUserDetailType } from './response-types/legacy-user';
