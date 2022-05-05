@@ -107,14 +107,6 @@ describe('Repo Management tests', () => {
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
 
-    // clear all values
-    cy.get('input[id="username"]').clear();
-    cy.get('input[type="password"]')
-      .siblings('button')
-      .click({ multiple: true });
-    cy.get('input[id="proxy_url"]').clear();
-    cy.get('input[id="proxy_username"]').clear();
-
     // enter new values
     cy.get('input[id="username"]').type('test');
     cy.get('input[id="password"]').type('test');
