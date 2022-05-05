@@ -1,6 +1,7 @@
 describe('user detail tests all fields, editing, and deleting', () => {
   let adminUsername = Cypress.env('username');
   let adminPassword = Cypress.env('password');
+  let num = (~~(Math.random() * 1000000)).toString();
 
   let selectInput = (id) => {
     return cy.get(`input[id=${id}]`).click();
@@ -10,8 +11,15 @@ describe('user detail tests all fields, editing, and deleting', () => {
     return cy.get(`[aria-labelledby=${label}] > .pf-c-form__group-control`);
   };
 
+  let deleteTestGroup = () => {
+    cy.visit('/ui/groups');
+    cy.contains(`testGroup${num}`).click();
+    cy.contains('Delete').click();
+    cy.get('button').contains('Delete').click();
+  };
+
   let buildUserProfile = () => {
-    cy.createGroup('testGroup');
+    cy.createGroup(`testGroup${num}`);
     cy.galaxykit('user create', 'testUser', 'testUserpassword');
     cy.addPermissions('testGroup', [
       { group: 'users', permissions: ['View user'] },
@@ -36,7 +44,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
 
   beforeEach(() => {
     cy.login(adminUsername, adminPassword);
-    cy.deleteTestGroups();
+    deleteTestGroup();
     buildUserProfile();
   });
 
@@ -76,13 +84,14 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.visit('/ui/users');
     cy.contains('testUser').click();
     cy.contains('Delete').click();
-    cy.get('footer > button.pf-c-button.pf-m-danger').click();
-    // looks like we need a success alert deleting user from user_detail?
+    cy.get('button').contains('Delete').click();
 
+    cy.contains('testUser').should('not.exist');
+    // looks like we need a success alert deleting user from user_detail?
     // cy.get('.pf-c-alert__title').should('have.text', 'Successfully deleted testUser')
   });
 
-  it.only('checks a user without edit permissions', () => {
+  it('checks a user without edit permissions', () => {
     cy.logout();
     cy.login('testUser', 'testUserpassword');
     cy.visit('/ui/users/?username=testUser');
