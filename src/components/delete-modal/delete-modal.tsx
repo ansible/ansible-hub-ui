@@ -19,16 +19,17 @@ export class DeleteModal extends React.Component<IProps> {
     return (
       <Modal
         actions={[
-          <Button
-            key='delete'
-            onClick={deleteAction}
-            variant='danger'
-            isDisabled={isDisabled}
-            data-cy='delete_button'
-          >
-            {t`Delete`}
-            {spinner && <Spinner size='sm'></Spinner>}
-          </Button>,
+          <div data-cy='delete-button' key='delete'>
+            <Button
+              key='delete'
+              onClick={deleteAction}
+              variant='danger'
+              isDisabled={isDisabled}
+            >
+              {t`Delete`}
+              {spinner && <Spinner size='sm'></Spinner>}
+            </Button>
+          </div>,
           <Button key='cancel' onClick={cancelAction} variant='link'>
             {t`Cancel`}
           </Button>,
