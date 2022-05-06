@@ -160,15 +160,6 @@ describe('Repo Management tests', () => {
     cy.get('[aria-label="Actions"]').eq(1).click(); // click the kebab menu on the 'rh-certified' repo
     cy.contains('Edit').click();
 
-    // clear all values
-    cy.contains('Show advanced options').click();
-    cy.get('input[id="username"]').clear();
-    cy.get('input[type="password"]')
-      .siblings('button')
-      .click({ multiple: true });
-    cy.get('input[id="proxy_url"]').clear();
-    cy.get('input[id="proxy_username"]').clear();
-
     // enter new values
     cy.get('input[id="username"]').type('test');
     cy.get('input[id="password"]').type('test');
