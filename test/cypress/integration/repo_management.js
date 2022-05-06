@@ -163,7 +163,8 @@ describe('Repo Management tests', () => {
     // enter new values
     cy.get('input[id="username"]').type('test');
     cy.get('input[id="password"]').type('test');
-    cy.get('input[id="proxy_url"]').type('https://example.org');
+
+    cy.get('input[id="proxy_url"]').clear().type('https://example.org');
     cy.get('input[id="proxy_username"]').type('test');
     cy.get('input[id="proxy_password"]').type('test');
     cy.intercept(
