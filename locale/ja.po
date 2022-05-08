@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/components/headers/collection-header.tsx:175
 msgid "(latest)"
@@ -252,7 +253,7 @@ msgstr "すべて"
 msgid "Approval"
 msgstr "承認"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:121
+#: src/containers/certification-dashboard/certification-dashboard.tsx:132
 msgid "Approval dashboard"
 msgstr "承認ダッシュボード"
 
@@ -260,14 +261,14 @@ msgstr "承認ダッシュボード"
 msgid "Approval status:"
 msgstr "承認状態:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:379
-#: src/containers/certification-dashboard/certification-dashboard.tsx:411
+#: src/containers/certification-dashboard/certification-dashboard.tsx:409
+#: src/containers/certification-dashboard/certification-dashboard.tsx:442
 msgid "Approve"
 msgstr "承認"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:168
-#: src/containers/certification-dashboard/certification-dashboard.tsx:197
-#: src/containers/certification-dashboard/certification-dashboard.tsx:303
+#: src/containers/certification-dashboard/certification-dashboard.tsx:179
+#: src/containers/certification-dashboard/certification-dashboard.tsx:208
+#: src/containers/certification-dashboard/certification-dashboard.tsx:319
 msgid "Approved"
 msgstr "承認済"
 
@@ -314,6 +315,7 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 #: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:35
 #: src/components/signing/sign-single-certificate-modal.tsx:35
+#: src/components/signing/upload-sign-certificate-modal.tsx:49
 #: src/components/user-form/user-form.tsx:224
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
@@ -334,7 +336,11 @@ msgstr "コレクションの依存関係が<0/>削除されるまで<1/>名前�
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "このコレクションに依存する<0/>コレクションが削除されるまで<1/>削除できません。"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:493
+#: src/containers/certification-dashboard/certification-dashboard.tsx:525
+msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:580
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "コレクション \"{0} {1} v{2}\" の認定ステータスが正常に更新されました。"
 
@@ -405,8 +411,8 @@ msgstr "タスクの変更"
 msgid "Change user"
 msgstr "ユーザーの変更"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:507
-#: src/containers/certification-dashboard/certification-dashboard.tsx:535
+#: src/containers/certification-dashboard/certification-dashboard.tsx:594
+#: src/containers/certification-dashboard/certification-dashboard.tsx:622
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "コレクション \"{0} {1} v{2}\" の認定ステータスへの変更を保存できませんでした。"
 
@@ -457,7 +463,7 @@ msgid "Code"
 msgstr "コード"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:89
-#: src/containers/certification-dashboard/certification-dashboard.tsx:248
+#: src/containers/certification-dashboard/certification-dashboard.tsx:264
 msgid "Collection"
 msgstr "コレクション"
 
@@ -482,7 +488,7 @@ msgstr "コレクション \"{name}\" をダウンロードできませんでし
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "コレクション \"{name}\" が正常に削除されました。"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:151
+#: src/containers/certification-dashboard/certification-dashboard.tsx:162
 msgid "Collection Name"
 msgstr "コレクション名"
 
@@ -518,7 +524,7 @@ msgstr "コレクションのアップロードが取り消されました"
 #: src/components/headers/collection-header.tsx:267
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
-#: src/containers/certification-dashboard/certification-dashboard.tsx:277
+#: src/containers/certification-dashboard/certification-dashboard.tsx:293
 msgid "Collection versions"
 msgstr "コレクションのバージョン"
 
@@ -530,7 +536,7 @@ msgstr "コレクションのバージョン"
 msgid "Collections"
 msgstr "コレクション"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:236
+#: src/containers/certification-dashboard/certification-dashboard.tsx:252
 #: src/containers/namespace-detail/namespace-detail.tsx:292
 #: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
@@ -734,7 +740,7 @@ msgstr "非推奨"
 msgid "Date"
 msgstr "日付"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:258
+#: src/containers/certification-dashboard/certification-dashboard.tsx:274
 msgid "Date created"
 msgstr "作成日"
 
@@ -988,6 +994,10 @@ msgstr "tarball のダウンロード"
 #: src/components/patternfly-wrappers/fileupload.tsx:15
 msgid "Drag a file here or browse to upload"
 msgstr "ここにファイルをドラッグするか、参照してアップロード"
+
+#: src/components/signing/upload-sign-certificate-modal.tsx:57
+msgid "Drag and drop a file or upload one'"
+msgstr ""
 
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:78
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:89
@@ -1510,7 +1520,7 @@ msgstr "インストール"
 msgid "Instructions"
 msgstr "手順"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:536
+#: src/containers/certification-dashboard/certification-dashboard.tsx:623
 msgid "Internal Server Error"
 msgstr "内部サーバーエラー"
 
@@ -1542,7 +1552,7 @@ msgstr "タグを同時に含めたり、除外したりしても意味があり
 msgid "It's safe to close this window. These tasks will finish in the background."
 msgstr "このウィンドウを安全に閉じることができます。このタスクはバックグラウンドで完了されます。"
 
-#: src/components/collection-list/collection-filter.tsx:51
+#: src/components/collection-list/collection-filter.tsx:53
 msgid "Keywords"
 msgstr "キーワード"
 
@@ -1714,8 +1724,8 @@ msgid "Name must not be empty."
 msgstr "名前を空白にすることはできません。"
 
 #: src/components/my-imports/import-list.tsx:221
-#: src/containers/certification-dashboard/certification-dashboard.tsx:147
-#: src/containers/certification-dashboard/certification-dashboard.tsx:243
+#: src/containers/certification-dashboard/certification-dashboard.tsx:158
+#: src/containers/certification-dashboard/certification-dashboard.tsx:259
 msgid "Namespace"
 msgstr "名前空間"
 
@@ -1758,11 +1768,18 @@ msgstr "名前空間リストを表示できませんでした。"
 msgid "Namespaces will appear once created"
 msgstr "名前空間は作成後に表示されます"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:164
-#: src/containers/certification-dashboard/certification-dashboard.tsx:198
-#: src/containers/certification-dashboard/certification-dashboard.tsx:321
+#: src/containers/certification-dashboard/certification-dashboard.tsx:175
+#: src/containers/certification-dashboard/certification-dashboard.tsx:209
 msgid "Needs Review"
 msgstr "レビューが必要"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:340
+msgid "Needs review"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:339
+msgid "Needs signature and review"
+msgstr ""
 
 #: src/components/import-modal/import-modal.tsx:59
 msgid "New collection"
@@ -1827,7 +1844,7 @@ msgstr "インポートなし"
 msgid "No local repositories yet"
 msgstr "まだローカルリポジトリーはありません"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:235
+#: src/containers/certification-dashboard/certification-dashboard.tsx:251
 msgid "No managed collections yet"
 msgstr "まだ管理コレクションはありません"
 
@@ -1930,7 +1947,7 @@ msgstr "オフライントークン"
 msgid "Parent task"
 msgstr "親タスク"
 
-#: src/components/collection-list/collection-filter.tsx:69
+#: src/components/collection-list/collection-filter.tsx:71
 msgid "Partial"
 msgstr "部分的"
 
@@ -2019,6 +2036,10 @@ msgstr "グループ \"{0}\" のパーミッションを表示できませんで
 #: src/containers/group-management/group-detail.tsx:241
 msgid "Please finish editing permissions first."
 msgstr "アクセス権を最初に編集してください。"
+
+#: src/components/signing/upload-sign-certificate-modal.tsx:53
+msgid "Please select a signature file to upload."
+msgstr ""
 
 #: src/components/import-modal/import-modal.tsx:149
 msgid "Please select no more than one file."
@@ -2239,13 +2260,13 @@ msgstr "レジストリー URL"
 msgid "Registry sync status"
 msgstr "レジストリーの同期ステータス"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:428
+#: src/containers/certification-dashboard/certification-dashboard.tsx:459
 msgid "Reject"
 msgstr "拒否"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:160
-#: src/containers/certification-dashboard/certification-dashboard.tsx:199
-#: src/containers/certification-dashboard/certification-dashboard.tsx:310
+#: src/containers/certification-dashboard/certification-dashboard.tsx:171
+#: src/containers/certification-dashboard/certification-dashboard.tsx:210
+#: src/containers/certification-dashboard/certification-dashboard.tsx:326
 msgid "Rejected"
 msgstr "拒否"
 
@@ -2418,6 +2439,7 @@ msgid "Select collection version"
 msgstr "コレクションバージョンの選択"
 
 #: src/components/import-modal/import-modal.tsx:95
+#: src/components/signing/upload-sign-certificate-modal.tsx:58
 msgid "Select file"
 msgstr "ファイルの選択"
 
@@ -2487,8 +2509,8 @@ msgstr "すべて署名する"
 msgid "Sign all collections"
 msgstr "すべてのコレクションに署名する"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:379
-#: src/containers/certification-dashboard/certification-dashboard.tsx:411
+#: src/containers/certification-dashboard/certification-dashboard.tsx:409
+#: src/containers/certification-dashboard/certification-dashboard.tsx:442
 msgid "Sign and approve"
 msgstr "署名および承認"
 
@@ -2496,7 +2518,7 @@ msgstr "署名および承認"
 msgid "Sign entire collection"
 msgstr "コレクション全体の署名"
 
-#: src/components/collection-list/collection-filter.tsx:64
+#: src/components/collection-list/collection-filter.tsx:66
 msgid "Sign state"
 msgstr "署名状態"
 
@@ -2512,12 +2534,12 @@ msgstr "バージョン {version} に署名する"
 msgid "Signature"
 msgstr "署名"
 
-#: src/components/collection-list/collection-filter.tsx:67
+#: src/components/collection-list/collection-filter.tsx:69
 #: src/components/signing/signature-badge.tsx:29
 msgid "Signed"
 msgstr "署名済み"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:302
+#: src/containers/certification-dashboard/certification-dashboard.tsx:318
 msgid "Signed and approved"
 msgstr "署名済みおよび承認済み"
 
@@ -2559,9 +2581,9 @@ msgstr "状態"
 
 #: src/components/my-imports/import-list.tsx:82
 #: src/components/my-imports/import-list.tsx:117
-#: src/containers/certification-dashboard/certification-dashboard.tsx:155
-#: src/containers/certification-dashboard/certification-dashboard.tsx:203
-#: src/containers/certification-dashboard/certification-dashboard.tsx:263
+#: src/containers/certification-dashboard/certification-dashboard.tsx:166
+#: src/containers/certification-dashboard/certification-dashboard.tsx:214
+#: src/containers/certification-dashboard/certification-dashboard.tsx:279
 #: src/containers/task-management/task-list-view.tsx:151
 #: src/containers/task-management/task-list-view.tsx:197
 #: src/containers/task-management/task-list-view.tsx:246
@@ -2683,7 +2705,7 @@ msgstr "同期のステータス"
 msgid "TLS validation"
 msgstr "TLS 検証"
 
-#: src/components/collection-list/collection-filter.tsx:55
+#: src/components/collection-list/collection-filter.tsx:57
 #: src/components/execution-environment/publish-to-controller-modal.tsx:314
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:275
@@ -2770,6 +2792,10 @@ msgstr "URL の形式は 'http(s)://' でなければなりません。"
 #: src/components/repositories/remote-form.tsx:213
 msgid "The URL of an external content source."
 msgstr "外部コンテンツソースの URL。"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:537
+msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
+msgstr ""
 
 #: src/components/import-modal/import-modal.tsx:174
 msgid "The collection you have selected does not match this namespace."
@@ -2913,7 +2939,7 @@ msgstr "URL: {0}"
 msgid "Undeprecate"
 msgstr "非推奨解除"
 
-#: src/components/collection-list/collection-filter.tsx:68
+#: src/components/collection-list/collection-filter.tsx:70
 #: src/components/signing/signature-badge.tsx:31
 msgid "Unsigned"
 msgstr "未署名"
@@ -2927,6 +2953,7 @@ msgid "Updated <0/>"
 msgstr "<0/> を更新"
 
 #: src/components/import-modal/import-modal.tsx:71
+#: src/components/signing/upload-sign-certificate-modal.tsx:46
 msgid "Upload"
 msgstr "アップロード"
 
@@ -2938,6 +2965,11 @@ msgstr "コレクションのアップロード"
 #: src/components/collection-list/collection-list.tsx:89
 msgid "Upload new version"
 msgstr "新規バージョンのアップロード"
+
+#: src/components/signing/upload-sign-certificate-modal.tsx:33
+#: src/containers/certification-dashboard/certification-dashboard.tsx:394
+msgid "Upload signature"
+msgstr ""
 
 #: src/constants.tsx:196
 #: src/constants.tsx:204
@@ -3017,8 +3049,8 @@ msgid "User \"{0}\" has been successfully deleted."
 msgstr "ユーザー \"{0}\" が正常に削除されました。"
 
 #: src/containers/group-management/group-detail.tsx:921
-msgid "User \"{0}\" has been successfully removed group \"{name}\"."
-msgstr "ユーザー \"{0}\" がグループ \"{name}\" から正常に削除されました。"
+msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:921
 #~ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
@@ -3092,7 +3124,7 @@ msgid "Users will appear once created"
 msgstr "ユーザーは作成後に表示されます"
 
 #: src/components/headers/collection-header.tsx:397
-#: src/containers/certification-dashboard/certification-dashboard.tsx:253
+#: src/containers/certification-dashboard/certification-dashboard.tsx:269
 msgid "Version"
 msgstr "バージョン"
 
@@ -3104,7 +3136,7 @@ msgstr "バージョン:"
 msgid "View Ansible distribution"
 msgstr "Ansible ディストリビューションの表示"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:397
+#: src/containers/certification-dashboard/certification-dashboard.tsx:428
 msgid "View Import Logs"
 msgstr "インポートログの表示"
 
@@ -3258,7 +3290,7 @@ msgstr "find-content"
 msgid "hidden value"
 msgstr "非表示の値"
 
-#: src/components/collection-list/collection-filter.tsx:91
+#: src/components/collection-list/collection-filter.tsx:93
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
 msgstr "キーワード"
@@ -3292,11 +3324,11 @@ msgstr "{0} のリリース"
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:89
+#: src/components/collection-list/collection-filter.tsx:91
 msgid "sign state"
 msgstr "署名状態"
 
-#: src/components/collection-list/collection-filter.tsx:90
+#: src/components/collection-list/collection-filter.tsx:92
 msgid "tags"
 msgstr "タグ"
 

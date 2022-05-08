@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/components/headers/collection-header.tsx:175
 msgid "(latest)"
@@ -252,7 +253,7 @@ msgstr "Tous"
 msgid "Approval"
 msgstr "Approbation"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:121
+#: src/containers/certification-dashboard/certification-dashboard.tsx:132
 msgid "Approval dashboard"
 msgstr "Tableau de bord des approbations"
 
@@ -260,14 +261,14 @@ msgstr "Tableau de bord des approbations"
 msgid "Approval status:"
 msgstr "Statut d'approbation :"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:379
-#: src/containers/certification-dashboard/certification-dashboard.tsx:411
+#: src/containers/certification-dashboard/certification-dashboard.tsx:409
+#: src/containers/certification-dashboard/certification-dashboard.tsx:442
 msgid "Approve"
 msgstr "Approuver"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:168
-#: src/containers/certification-dashboard/certification-dashboard.tsx:197
-#: src/containers/certification-dashboard/certification-dashboard.tsx:303
+#: src/containers/certification-dashboard/certification-dashboard.tsx:179
+#: src/containers/certification-dashboard/certification-dashboard.tsx:208
+#: src/containers/certification-dashboard/certification-dashboard.tsx:319
 msgid "Approved"
 msgstr "Approuvé"
 
@@ -314,6 +315,7 @@ msgstr "Impossible de mettre à jour l’utilisateur distant sans qu'une distrib
 #: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:35
 #: src/components/signing/sign-single-certificate-modal.tsx:35
+#: src/components/signing/upload-sign-certificate-modal.tsx:49
 #: src/components/user-form/user-form.tsx:224
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
@@ -334,7 +336,11 @@ msgstr "Impossible de supprimer un espace de nom <0/> tant que les dépendances 
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "Impossible à supprimer tant que les collections <0/> qui dépendent de cette collection <1/> n'ont pas été supprimées<1/>."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:493
+#: src/containers/certification-dashboard/certification-dashboard.tsx:525
+msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:580
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "Le statut de certification de la collection \"{0} {1} v{2}\" a été mis à jour."
 
@@ -405,8 +411,8 @@ msgstr "Modifier la tâche"
 msgid "Change user"
 msgstr "Changer d'utilisateur"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:507
-#: src/containers/certification-dashboard/certification-dashboard.tsx:535
+#: src/containers/certification-dashboard/certification-dashboard.tsx:594
+#: src/containers/certification-dashboard/certification-dashboard.tsx:622
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "Les changements de statut de certification pour la collection \"{0} {1} v{2}\" n’ont pas pu être sauvegardés."
 
@@ -457,7 +463,7 @@ msgid "Code"
 msgstr "Code"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:89
-#: src/containers/certification-dashboard/certification-dashboard.tsx:248
+#: src/containers/certification-dashboard/certification-dashboard.tsx:264
 msgid "Collection"
 msgstr "Collection"
 
@@ -482,7 +488,7 @@ msgstr "La collection \"{name}\" n’a pas pu être téléchargée."
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "La collection  \"{name}\"  a été supprimée."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:151
+#: src/containers/certification-dashboard/certification-dashboard.tsx:162
 msgid "Collection Name"
 msgstr "Nom de la collection"
 
@@ -518,7 +524,7 @@ msgstr "Le téléchargement de la collection a été annulé"
 #: src/components/headers/collection-header.tsx:267
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
-#: src/containers/certification-dashboard/certification-dashboard.tsx:277
+#: src/containers/certification-dashboard/certification-dashboard.tsx:293
 msgid "Collection versions"
 msgstr "Versions de la collection"
 
@@ -530,7 +536,7 @@ msgstr "Versions de la collection"
 msgid "Collections"
 msgstr "Collections"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:236
+#: src/containers/certification-dashboard/certification-dashboard.tsx:252
 #: src/containers/namespace-detail/namespace-detail.tsx:292
 #: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
@@ -734,7 +740,7 @@ msgstr "OBSOLÈTE"
 msgid "Date"
 msgstr "Date"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:258
+#: src/containers/certification-dashboard/certification-dashboard.tsx:274
 msgid "Date created"
 msgstr "Date de création"
 
@@ -988,6 +994,10 @@ msgstr "Télécharger l'archive"
 #: src/components/patternfly-wrappers/fileupload.tsx:15
 msgid "Drag a file here or browse to upload"
 msgstr "Faites glisser un fichier ici ou naviguez pour le télécharger"
+
+#: src/components/signing/upload-sign-certificate-modal.tsx:57
+msgid "Drag and drop a file or upload one'"
+msgstr ""
 
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:78
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:89
@@ -1510,7 +1520,7 @@ msgstr "Installation"
 msgid "Instructions"
 msgstr "Instructions"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:536
+#: src/containers/certification-dashboard/certification-dashboard.tsx:623
 msgid "Internal Server Error"
 msgstr "Erreur de serveur interne"
 
@@ -1542,7 +1552,7 @@ msgstr "Il ne semble pas très logique d'inclure et d'exclure des tags en même 
 msgid "It's safe to close this window. These tasks will finish in the background."
 msgstr "Vous pouvez fermer cette fenêtre en toute sécurité. Ces tâches se termineront en arrière-plan."
 
-#: src/components/collection-list/collection-filter.tsx:51
+#: src/components/collection-list/collection-filter.tsx:53
 msgid "Keywords"
 msgstr "Mots clés"
 
@@ -1714,8 +1724,8 @@ msgid "Name must not be empty."
 msgstr "Le nom ne peut pas rester vide."
 
 #: src/components/my-imports/import-list.tsx:221
-#: src/containers/certification-dashboard/certification-dashboard.tsx:147
-#: src/containers/certification-dashboard/certification-dashboard.tsx:243
+#: src/containers/certification-dashboard/certification-dashboard.tsx:158
+#: src/containers/certification-dashboard/certification-dashboard.tsx:259
 msgid "Namespace"
 msgstr "Espace de nommage"
 
@@ -1758,11 +1768,18 @@ msgstr "La liste d’espace-noms n’a pas pu être affichée"
 msgid "Namespaces will appear once created"
 msgstr "Les espaces de noms apparaîtront une fois créés"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:164
-#: src/containers/certification-dashboard/certification-dashboard.tsx:198
-#: src/containers/certification-dashboard/certification-dashboard.tsx:321
+#: src/containers/certification-dashboard/certification-dashboard.tsx:175
+#: src/containers/certification-dashboard/certification-dashboard.tsx:209
 msgid "Needs Review"
 msgstr "Examen des besoins"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:340
+msgid "Needs review"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:339
+msgid "Needs signature and review"
+msgstr ""
 
 #: src/components/import-modal/import-modal.tsx:59
 msgid "New collection"
@@ -1827,7 +1844,7 @@ msgstr "Pas d'importations"
 msgid "No local repositories yet"
 msgstr "Pas encore de référentiel local"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:235
+#: src/containers/certification-dashboard/certification-dashboard.tsx:251
 msgid "No managed collections yet"
 msgstr "Pas encore de collections gérées"
 
@@ -1930,7 +1947,7 @@ msgstr "Jeton hors ligne"
 msgid "Parent task"
 msgstr "Tâche parentale"
 
-#: src/components/collection-list/collection-filter.tsx:69
+#: src/components/collection-list/collection-filter.tsx:71
 msgid "Partial"
 msgstr "Partiel"
 
@@ -2019,6 +2036,10 @@ msgstr "Les permissions du groupe \"{0}\" n’ont pas pu être affichées."
 #: src/containers/group-management/group-detail.tsx:241
 msgid "Please finish editing permissions first."
 msgstr "Veuillez d'abord finir d'éditer les permissions."
+
+#: src/components/signing/upload-sign-certificate-modal.tsx:53
+msgid "Please select a signature file to upload."
+msgstr ""
 
 #: src/components/import-modal/import-modal.tsx:149
 msgid "Please select no more than one file."
@@ -2239,13 +2260,13 @@ msgstr "URL du registre"
 msgid "Registry sync status"
 msgstr "Statut sync registre"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:428
+#: src/containers/certification-dashboard/certification-dashboard.tsx:459
 msgid "Reject"
 msgstr "Rejeter"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:160
-#: src/containers/certification-dashboard/certification-dashboard.tsx:199
-#: src/containers/certification-dashboard/certification-dashboard.tsx:310
+#: src/containers/certification-dashboard/certification-dashboard.tsx:171
+#: src/containers/certification-dashboard/certification-dashboard.tsx:210
+#: src/containers/certification-dashboard/certification-dashboard.tsx:326
 msgid "Rejected"
 msgstr "Rejeté"
 
@@ -2418,6 +2439,7 @@ msgid "Select collection version"
 msgstr "Sélectionnez la version de la collection"
 
 #: src/components/import-modal/import-modal.tsx:95
+#: src/components/signing/upload-sign-certificate-modal.tsx:58
 msgid "Select file"
 msgstr "Sélectionner un fichier"
 
@@ -2487,8 +2509,8 @@ msgstr "Tout signer"
 msgid "Sign all collections"
 msgstr "Signer toutes les collections"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:379
-#: src/containers/certification-dashboard/certification-dashboard.tsx:411
+#: src/containers/certification-dashboard/certification-dashboard.tsx:409
+#: src/containers/certification-dashboard/certification-dashboard.tsx:442
 msgid "Sign and approve"
 msgstr "Signer et approuver"
 
@@ -2496,7 +2518,7 @@ msgstr "Signer et approuver"
 msgid "Sign entire collection"
 msgstr "Signer toute la collection"
 
-#: src/components/collection-list/collection-filter.tsx:64
+#: src/components/collection-list/collection-filter.tsx:66
 msgid "Sign state"
 msgstr "Signer l’état"
 
@@ -2512,12 +2534,12 @@ msgstr "Signer la version {version}"
 msgid "Signature"
 msgstr "Signature"
 
-#: src/components/collection-list/collection-filter.tsx:67
+#: src/components/collection-list/collection-filter.tsx:69
 #: src/components/signing/signature-badge.tsx:29
 msgid "Signed"
 msgstr "Signé"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:302
+#: src/containers/certification-dashboard/certification-dashboard.tsx:318
 msgid "Signed and approved"
 msgstr "Signé et approuvé"
 
@@ -2559,9 +2581,9 @@ msgstr "État"
 
 #: src/components/my-imports/import-list.tsx:82
 #: src/components/my-imports/import-list.tsx:117
-#: src/containers/certification-dashboard/certification-dashboard.tsx:155
-#: src/containers/certification-dashboard/certification-dashboard.tsx:203
-#: src/containers/certification-dashboard/certification-dashboard.tsx:263
+#: src/containers/certification-dashboard/certification-dashboard.tsx:166
+#: src/containers/certification-dashboard/certification-dashboard.tsx:214
+#: src/containers/certification-dashboard/certification-dashboard.tsx:279
 #: src/containers/task-management/task-list-view.tsx:151
 #: src/containers/task-management/task-list-view.tsx:197
 #: src/containers/task-management/task-list-view.tsx:246
@@ -2683,7 +2705,7 @@ msgstr "Statut Sync"
 msgid "TLS validation"
 msgstr "Validation TLS"
 
-#: src/components/collection-list/collection-filter.tsx:55
+#: src/components/collection-list/collection-filter.tsx:57
 #: src/components/execution-environment/publish-to-controller-modal.tsx:314
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:275
@@ -2770,6 +2792,10 @@ msgstr "L’URL doit être au format 'http(s)://'."
 #: src/components/repositories/remote-form.tsx:213
 msgid "The URL of an external content source."
 msgstr "L'URL d'une source de contenu externe."
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:537
+msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
+msgstr ""
 
 #: src/components/import-modal/import-modal.tsx:174
 msgid "The collection you have selected does not match this namespace."
@@ -2913,7 +2939,7 @@ msgstr "URL: {0}"
 msgid "Undeprecate"
 msgstr "Réversion de dépréciation"
 
-#: src/components/collection-list/collection-filter.tsx:68
+#: src/components/collection-list/collection-filter.tsx:70
 #: src/components/signing/signature-badge.tsx:31
 msgid "Unsigned"
 msgstr "Réversion de signature"
@@ -2927,6 +2953,7 @@ msgid "Updated <0/>"
 msgstr "Mise à jour de <0/>"
 
 #: src/components/import-modal/import-modal.tsx:71
+#: src/components/signing/upload-sign-certificate-modal.tsx:46
 msgid "Upload"
 msgstr "Télécharger"
 
@@ -2938,6 +2965,11 @@ msgstr "Télécharger la collection"
 #: src/components/collection-list/collection-list.tsx:89
 msgid "Upload new version"
 msgstr "Télécharger la nouvelle version"
+
+#: src/components/signing/upload-sign-certificate-modal.tsx:33
+#: src/containers/certification-dashboard/certification-dashboard.tsx:394
+msgid "Upload signature"
+msgstr ""
 
 #: src/constants.tsx:196
 #: src/constants.tsx:204
@@ -3017,8 +3049,8 @@ msgid "User \"{0}\" has been successfully deleted."
 msgstr "L’utilsateur \"{0}\" a été supprimé."
 
 #: src/containers/group-management/group-detail.tsx:921
-msgid "User \"{0}\" has been successfully removed group \"{name}\"."
-msgstr "L’utilsateur \"{0}\" a été supprimé du groupe \"{name}\"."
+msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:921
 #~ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
@@ -3092,7 +3124,7 @@ msgid "Users will appear once created"
 msgstr "Les utilisateurs apparaîtront une fois créés"
 
 #: src/components/headers/collection-header.tsx:397
-#: src/containers/certification-dashboard/certification-dashboard.tsx:253
+#: src/containers/certification-dashboard/certification-dashboard.tsx:269
 msgid "Version"
 msgstr "Version"
 
@@ -3104,7 +3136,7 @@ msgstr "Version:"
 msgid "View Ansible distribution"
 msgstr "Voir la distribution Ansible"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:397
+#: src/containers/certification-dashboard/certification-dashboard.tsx:428
 msgid "View Import Logs"
 msgstr "Afficher les journaux d'importation"
 
@@ -3258,7 +3290,7 @@ msgstr "find-content"
 msgid "hidden value"
 msgstr "valeur cachée"
 
-#: src/components/collection-list/collection-filter.tsx:91
+#: src/components/collection-list/collection-filter.tsx:93
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
 msgstr "mots clés"
@@ -3292,11 +3324,11 @@ msgstr "libéré {0}"
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:89
+#: src/components/collection-list/collection-filter.tsx:91
 msgid "sign state"
 msgstr "état sign"
 
-#: src/components/collection-list/collection-filter.tsx:90
+#: src/components/collection-list/collection-filter.tsx:92
 msgid "tags"
 msgstr "libellés"
 
