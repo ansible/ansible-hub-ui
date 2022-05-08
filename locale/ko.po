@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/components/headers/collection-header.tsx:175
 msgid "(latest)"
@@ -1542,7 +1543,7 @@ msgstr "동시에 태그를 포함 및 제외하는 것은 바람직하지 않�
 msgid "It's safe to close this window. These tasks will finish in the background."
 msgstr "이 창을 닫는 것이 안전합니다. 이러한 작업은 백그라운드에서 완료됩니다."
 
-#: src/components/collection-list/collection-filter.tsx:51
+#: src/components/collection-list/collection-filter.tsx:53
 msgid "Keywords"
 msgstr "키워드"
 
@@ -1930,7 +1931,7 @@ msgstr "오프라인 토큰"
 msgid "Parent task"
 msgstr "상위 작업"
 
-#: src/components/collection-list/collection-filter.tsx:69
+#: src/components/collection-list/collection-filter.tsx:71
 msgid "Partial"
 msgstr "부분적"
 
@@ -2496,7 +2497,7 @@ msgstr "서명 및 승인"
 msgid "Sign entire collection"
 msgstr "전체 컬렉션에 서명"
 
-#: src/components/collection-list/collection-filter.tsx:64
+#: src/components/collection-list/collection-filter.tsx:66
 msgid "Sign state"
 msgstr "서명 상태"
 
@@ -2512,7 +2513,7 @@ msgstr "서명 버전 {version}"
 msgid "Signature"
 msgstr "서명"
 
-#: src/components/collection-list/collection-filter.tsx:67
+#: src/components/collection-list/collection-filter.tsx:69
 #: src/components/signing/signature-badge.tsx:29
 msgid "Signed"
 msgstr "서명됨"
@@ -2683,7 +2684,7 @@ msgstr "동기화 상태"
 msgid "TLS validation"
 msgstr "TLS 인증"
 
-#: src/components/collection-list/collection-filter.tsx:55
+#: src/components/collection-list/collection-filter.tsx:57
 #: src/components/execution-environment/publish-to-controller-modal.tsx:314
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:275
@@ -2913,7 +2914,7 @@ msgstr "URL: {0}"
 msgid "Undeprecate"
 msgstr "사용되지 않음"
 
-#: src/components/collection-list/collection-filter.tsx:68
+#: src/components/collection-list/collection-filter.tsx:70
 #: src/components/signing/signature-badge.tsx:31
 msgid "Unsigned"
 msgstr "서명되지 않음"
@@ -3254,7 +3255,7 @@ msgstr "콘텐츠 찾기"
 msgid "hidden value"
 msgstr "숨겨진 값"
 
-#: src/components/collection-list/collection-filter.tsx:91
+#: src/components/collection-list/collection-filter.tsx:93
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
 msgstr "키워드"
@@ -3288,11 +3289,11 @@ msgstr "게시됨 {0}"
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:89
+#: src/components/collection-list/collection-filter.tsx:91
 msgid "sign state"
 msgstr "서명 상태"
 
-#: src/components/collection-list/collection-filter.tsx:90
+#: src/components/collection-list/collection-filter.tsx:92
 msgid "tags"
 msgstr "태그"
 

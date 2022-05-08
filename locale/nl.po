@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/components/headers/collection-header.tsx:175
 msgid "(latest)"
@@ -242,7 +243,8 @@ msgstr "Gebruiker toevoegen"
 msgid ""
 "Adding groups provides access to all repositories in the\n"
 "\"{namespace}\" container namespace."
-msgstr "Het toevoegen van groepen geeft toegang tot alle repository's in de\n"
+msgstr ""
+"Het toevoegen van groepen geeft toegang tot alle repository's in de\n"
 "\"{namespace}\" container-namespace."
 
 #: src/containers/namespace-list/namespace-list.tsx:186
@@ -475,7 +477,7 @@ msgstr "Collectieversie \"{name} v{collectionVersion}\" succesvol verwijderd."
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "Collection \"{name}\" could not be deleted."
 
-#: src/components/collection-detail/collection-info.tsx:189
+#: src/components/collection-detail/collection-info.tsx:188
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "Collection \"{name}\" could not be downloaded."
 
@@ -982,7 +984,7 @@ msgstr "Download only signed collections"
 msgid "Download requirements file"
 msgstr "Bestand met vereisten downloaden"
 
-#: src/components/collection-detail/collection-info.tsx:117
+#: src/components/collection-detail/collection-info.tsx:116
 msgid "Download tarball"
 msgstr "Tarball downloaden"
 
@@ -1354,7 +1356,7 @@ msgstr "Token ophalen"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "Wachten op een taak wordt na 10 pogingen opgegeven."
 
-#: src/components/collection-detail/collection-info.tsx:160
+#: src/components/collection-detail/collection-info.tsx:159
 msgid "Go to documentation"
 msgstr "Naar documentatie gaan"
 
@@ -1543,7 +1545,7 @@ msgstr "Het heeft geen zin om tags tegelijkertijd op te nemen en uit te sluiten.
 msgid "It's safe to close this window. These tasks will finish in the background."
 msgstr "Het is veilig om dit venster te sluiten. Deze taken zullen op de achtergrond eindigen."
 
-#: src/components/collection-list/collection-filter.tsx:51
+#: src/components/collection-list/collection-filter.tsx:53
 msgid "Keywords"
 msgstr "Trefwoorden"
 
@@ -1931,7 +1933,7 @@ msgstr "Offline token"
 msgid "Parent task"
 msgstr "Oudertaak"
 
-#: src/components/collection-list/collection-filter.tsx:69
+#: src/components/collection-list/collection-filter.tsx:71
 msgid "Partial"
 msgstr "Partial"
 
@@ -2317,7 +2319,7 @@ msgstr "Repositorybeheer"
 msgid "Repository name"
 msgstr "Naam repository"
 
-#: src/components/collection-detail/collection-info.tsx:129
+#: src/components/collection-detail/collection-info.tsx:128
 msgid "Requires Ansible"
 msgstr "Vereist Ansible"
 
@@ -2497,7 +2499,7 @@ msgstr "Sign and approve"
 msgid "Sign entire collection"
 msgstr "Volledige collectie verwijderen"
 
-#: src/components/collection-list/collection-filter.tsx:64
+#: src/components/collection-list/collection-filter.tsx:66
 msgid "Sign state"
 msgstr "Sign state"
 
@@ -2513,7 +2515,7 @@ msgstr "API-versie {version}"
 msgid "Signature"
 msgstr "Signature"
 
-#: src/components/collection-list/collection-filter.tsx:67
+#: src/components/collection-list/collection-filter.tsx:69
 #: src/components/signing/signature-badge.tsx:29
 msgid "Signed"
 msgstr "Signed"
@@ -2684,7 +2686,7 @@ msgstr "Synchronisatiestatus"
 msgid "TLS validation"
 msgstr "TLS-validatie"
 
-#: src/components/collection-list/collection-filter.tsx:55
+#: src/components/collection-list/collection-filter.tsx:57
 #: src/components/execution-environment/publish-to-controller-modal.tsx:314
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:275
@@ -2914,7 +2916,7 @@ msgstr "URL: {0}"
 msgid "Undeprecate"
 msgstr "Afschrijving ongedaan maken"
 
-#: src/components/collection-list/collection-filter.tsx:68
+#: src/components/collection-list/collection-filter.tsx:70
 #: src/components/signing/signature-badge.tsx:31
 msgid "Unsigned"
 msgstr "Unsigned"
@@ -3019,11 +3021,7 @@ msgstr "User \"{0}\" has been successfully deleted."
 
 #: src/containers/group-management/group-detail.tsx:921
 msgid "User \"{0}\" has been successfully removed group \"{name}\"."
-msgstr "User \"{0}\" has been successfully removed group \"{name}\"."
-
-#: src/containers/group-management/group-detail.tsx:921
-#~ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
-#~ msgstr ""
+msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:611
 msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
@@ -3259,7 +3257,7 @@ msgstr "find-content"
 msgid "hidden value"
 msgstr "verborgen waarde"
 
-#: src/components/collection-list/collection-filter.tsx:91
+#: src/components/collection-list/collection-filter.tsx:93
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
 msgstr "trefwoorden"
@@ -3293,11 +3291,11 @@ msgstr "{0} vrijgegeven"
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:89
+#: src/components/collection-list/collection-filter.tsx:91
 msgid "sign state"
 msgstr "sign state"
 
-#: src/components/collection-list/collection-filter.tsx:90
+#: src/components/collection-list/collection-filter.tsx:92
 msgid "tags"
 msgstr "Tags"
 

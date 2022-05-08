@@ -478,7 +478,7 @@ msgstr "Collection \"{name} v{collectionVersion}\" has been successfully deleted
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "Collection \"{name}\" could not be deleted."
 
-#: src/components/collection-detail/collection-info.tsx:189
+#: src/components/collection-detail/collection-info.tsx:188
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "Collection \"{name}\" could not be downloaded."
 
@@ -985,7 +985,7 @@ msgstr "Download only signed collections"
 msgid "Download requirements file"
 msgstr "Download requirements file"
 
-#: src/components/collection-detail/collection-info.tsx:117
+#: src/components/collection-detail/collection-info.tsx:116
 msgid "Download tarball"
 msgstr "Download tarball"
 
@@ -1357,7 +1357,7 @@ msgstr "Get token"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "Giving up waiting for task after 10 attempts."
 
-#: src/components/collection-detail/collection-info.tsx:160
+#: src/components/collection-detail/collection-info.tsx:159
 msgid "Go to documentation"
 msgstr "Go to documentation"
 
@@ -1546,7 +1546,7 @@ msgstr "It does not make sense to include and exclude tags at the same time."
 msgid "It's safe to close this window. These tasks will finish in the background."
 msgstr "It's safe to close this window. These tasks will finish in the background."
 
-#: src/components/collection-list/collection-filter.tsx:51
+#: src/components/collection-list/collection-filter.tsx:53
 msgid "Keywords"
 msgstr "Keywords"
 
@@ -1934,7 +1934,7 @@ msgstr "Offline token"
 msgid "Parent task"
 msgstr "Parent task"
 
-#: src/components/collection-list/collection-filter.tsx:69
+#: src/components/collection-list/collection-filter.tsx:71
 msgid "Partial"
 msgstr "Partial"
 
@@ -2320,7 +2320,7 @@ msgstr "Repository Management"
 msgid "Repository name"
 msgstr "Repository name"
 
-#: src/components/collection-detail/collection-info.tsx:129
+#: src/components/collection-detail/collection-info.tsx:128
 msgid "Requires Ansible"
 msgstr "Requires Ansible"
 
@@ -2500,7 +2500,7 @@ msgstr "Sign and approve"
 msgid "Sign entire collection"
 msgstr "Sign entire collection"
 
-#: src/components/collection-list/collection-filter.tsx:64
+#: src/components/collection-list/collection-filter.tsx:66
 msgid "Sign state"
 msgstr "Sign state"
 
@@ -2516,7 +2516,7 @@ msgstr "Sign version {version}"
 msgid "Signature"
 msgstr "Signature"
 
-#: src/components/collection-list/collection-filter.tsx:67
+#: src/components/collection-list/collection-filter.tsx:69
 #: src/components/signing/signature-badge.tsx:29
 msgid "Signed"
 msgstr "Signed"
@@ -2687,7 +2687,7 @@ msgstr "Sync status"
 msgid "TLS validation"
 msgstr "TLS validation"
 
-#: src/components/collection-list/collection-filter.tsx:55
+#: src/components/collection-list/collection-filter.tsx:57
 #: src/components/execution-environment/publish-to-controller-modal.tsx:314
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:275
@@ -2917,7 +2917,7 @@ msgstr "URL: {0}"
 msgid "Undeprecate"
 msgstr "Undeprecate"
 
-#: src/components/collection-list/collection-filter.tsx:68
+#: src/components/collection-list/collection-filter.tsx:70
 #: src/components/signing/signature-badge.tsx:31
 msgid "Unsigned"
 msgstr "Unsigned"
@@ -3021,12 +3021,12 @@ msgid "User \"{0}\" has been successfully deleted."
 msgstr "User \"{0}\" has been successfully deleted."
 
 #: src/containers/group-management/group-detail.tsx:921
-msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
-msgstr "User \"{0}\" has been successfully removed from group \"{name}\"."
+#~ msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
+#~ msgstr "User \"{0}\" has been successfully removed from group \"{name}\"."
 
 #: src/containers/group-management/group-detail.tsx:921
-#~ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
-#~ msgstr "User \"{0}\" has been successfully removed group \"{name}\"."
+msgid "User \"{0}\" has been successfully removed group \"{name}\"."
+msgstr "User \"{0}\" has been successfully removed group \"{name}\"."
 
 #: src/containers/group-management/group-detail.tsx:611
 msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
@@ -3262,7 +3262,7 @@ msgstr "find-content"
 msgid "hidden value"
 msgstr "hidden value"
 
-#: src/components/collection-list/collection-filter.tsx:91
+#: src/components/collection-list/collection-filter.tsx:93
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
 msgstr "keywords"
@@ -3296,11 +3296,11 @@ msgstr "released {0}"
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:89
+#: src/components/collection-list/collection-filter.tsx:91
 msgid "sign state"
 msgstr "sign state"
 
-#: src/components/collection-list/collection-filter.tsx:90
+#: src/components/collection-list/collection-filter.tsx:92
 msgid "tags"
 msgstr "tags"
 
