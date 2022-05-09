@@ -42,7 +42,7 @@ describe('Namespace detail screen', () => {
   });
 
   it('should show an error when tring to upload a new collecting wiht invalid name', () => {
-    cy.get('[data-cy="kebab-toggle"] > .pf-c-button').click();
+    cy.get('[data-cy="ns-kebab-toggle"]').siblings('button').click();
     cy.fixture('collections/invalid-collection-name-1.0.0-bad.tar.gz', 'binary')
       .then(Cypress.Blob.binaryStringToBlob)
       .then((fileContent) => {
