@@ -4,7 +4,6 @@ describe('Task detail', () => {
     cy.visit('/ui/repositories?tab=remote');
 
     cy.contains('Repo Management');
-    cy.contains('Configure');
     cy.contains('Sync');
 
     cy.intercept(

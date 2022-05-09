@@ -159,12 +159,12 @@ describe('Repo Management tests', () => {
     cy.visit(remoteRepoUrl);
     cy.get('[aria-label="Actions"]').eq(1).click(); // click the kebab menu on the 'rh-certified' repo
     cy.contains('Edit').click();
-
+    cy.contains('Show advanced options').click();
     // enter new values
     cy.get('input[id="username"]').type('test');
     cy.get('input[id="password"]').type('test');
 
-    cy.get('input[id="proxy_url"]').clear().type('https://example.org');
+    cy.get('input[id="proxy_url"]').type('https://example.org');
     cy.get('input[id="proxy_username"]').type('test');
     cy.get('input[id="proxy_password"]').type('test');
     cy.intercept(
