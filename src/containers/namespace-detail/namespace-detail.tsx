@@ -649,14 +649,18 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       return <div className='hub-namespace-page-controls'></div>;
     }
     return (
-      <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
+      <div className='hub-namespace-page-controls'>
         {' '}
         {collections.length !== 0 && (
           <Button onClick={() => this.setState({ showImportModal: true })}>
             {t`Upload collection`}
           </Button>
         )}
-        {dropdownItems.length > 0 && <StatefulDropdown items={dropdownItems} />}
+        {dropdownItems.length > 0 && (
+          <div data-cy='ns-kebab-toggle'>
+            <StatefulDropdown items={dropdownItems} />
+          </div>
+        )}
       </div>
     );
   }
