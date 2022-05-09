@@ -173,6 +173,7 @@ export class ImportList extends React.Component<IProps, IState> {
                   item.type === selectedImport.type &&
                   item.id === selectedImport.id,
               })}
+              data-cy={`ImportList-row-${item.name}`}
             >
               <div className='left'>
                 <i className={this.getStatusClass(item.state)} />
