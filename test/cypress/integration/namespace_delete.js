@@ -1,6 +1,7 @@
 describe('Delete a namespace', () => {
-  before(() => {
+  beforeEach(() => {
     cy.login();
+    cy.deleteNamespacesAndCollections();
   });
 
   it('deletes a namespace', () => {
@@ -29,7 +30,6 @@ describe('Delete a namespace', () => {
       Cypress.env('prefix') + '_ui/v1/namespaces/?sort=name*',
     ).as('reload');
     cy.galaxykit('-i namespace create', 'ansible');
-
     cy.menuGo('Collections > Namespaces');
     cy.wait('@reload');
     cy.get('a[href*="ui/repo/published/ansible"]').click();
