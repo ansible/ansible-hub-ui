@@ -59,8 +59,6 @@ describe('Delete a namespace', () => {
     cy.get('a[href*="ui/repo/published/ansible"]').click();
     cy.get('[data-cy=ns-kebab-toggle]').click();
     cy.contains('Delete namespace').click({ force: true });
-    cy.get('.pf-c-tooltip').contains(
-      `Cannot delete namespace until collections' dependencies have been deleted`,
-    );
+    cy.contains('Delete namespace?').should('not.exist');
   });
 });
