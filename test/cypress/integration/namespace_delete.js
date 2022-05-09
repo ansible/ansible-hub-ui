@@ -22,7 +22,7 @@ describe('Delete a namespace', () => {
     );
   });
 
-  it.only('cannot delete a non-empty namespace', () => {
+  it('cannot delete a non-empty namespace', () => {
     //create namespace
     cy.intercept(
       'GET',
@@ -58,9 +58,9 @@ describe('Delete a namespace', () => {
     cy.menuGo('Collections > Namespaces');
     cy.get('a[href*="ui/repo/published/ansible"]').click();
     cy.get('[data-cy=ns-kebab-toggle]').click();
-    cy.contains('Delete namespace').should('not.be.clickable');
-    cy.contains(
-      'Cannot delete namespace until collections dependencies have been deleted',
+    cy.contains('Delete namespace').click({ force: true });
+    cy.get('.pf-c-tooltip').contains(
+      `Cannot delete namespace until collections' dependencies have been deleted`,
     );
   });
 });
