@@ -36,6 +36,9 @@ interface LegacyRoleProps {
 export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
   render() {
     const { role } = this.props;
+    //const role_url = 'legacy/roles/' + role.github_user + '/' + role.name;
+    //const role_url = '/' + role.github_user + '/' + role.name;
+    const role_url = role.github_user + '/' + role.name;
 
     const cells = [];
 
@@ -55,7 +58,7 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
     cells.push(
       <DataListCell key='content'>
         <div>
-          <Link to='/ui/legacy/roles/{role.namespace.name}/{role.name}'>
+          <Link to={role_url}>
             {role.name}
           </Link>
           <TextContent>

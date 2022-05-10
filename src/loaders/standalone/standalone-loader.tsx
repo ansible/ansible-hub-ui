@@ -366,7 +366,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           url: Paths.approvalDashboard,
         }),
       ]),
-      menuSection(t`Legacy Roles`, {}, [
+      menuSection(t`Legacy`, {}, [
         menuItem(t`Community`, {
           url: Paths.legacyUsers,
         }),
