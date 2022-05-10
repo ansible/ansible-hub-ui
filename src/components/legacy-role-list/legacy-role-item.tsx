@@ -58,9 +58,7 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
     cells.push(
       <DataListCell key='content'>
         <div>
-          <Link to={role_url}>
-            {role.name}
-          </Link>
+          <Link to={role_url}>{role.name}</Link>
           <TextContent>
             <Text component={TextVariants.small}>
               <Trans>Provided by {role.github_user}</Trans>

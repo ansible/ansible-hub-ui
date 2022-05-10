@@ -69,31 +69,30 @@ interface RoleMeta {
 }
 
 class LegacyRoleInstall extends React.Component<RoleMeta, RoleMeta> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...props,
+    };
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          ...props,
-        };
-    }
-
-    render() {
-        const installCMD = `ansible-galaxy role install ${this.state.github_user}.${this.state.name}`;
-        return (<h1>Installation: {installCMD}</h1>);
-    }
+  render() {
+    const installCMD = `ansible-galaxy role install ${this.state.github_user}.${this.state.name}`;
+    return <h1>Installation: {installCMD}</h1>;
+  }
 }
 
 class LegacyRoleDocs extends React.Component<{}, RoleMeta> {
-    constructor(props) {
-        super(props);
-        this.state = {
-          ...props,
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...props,
+    };
+  }
 
-    render() {
-        return (<h1>DOCUMENTATION</h1>);
-    }
+  render() {
+    return <h1>DOCUMENTATION</h1>;
+  }
 }
 
 class DocsEntry {
@@ -124,12 +123,11 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
       activeItem: 'install',
     };
 
-    this.onSelect = result => {
+    this.onSelect = (result) => {
       this.setState({
-          activeItem: result.itemId    
+        activeItem: result.itemId,
       });
     };
-
   }
 
   componentDidMount() {
@@ -139,7 +137,11 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
     console.log('LegacyAPI', LegacyAPI);
     console.log('LegacyRoleAPI', LegacyRoleAPI);
 
-    const url = 'roles/?github_user=' + this.state.github_user + '&name=' + this.state.name;
+    const url =
+      'roles/?github_user=' +
+      this.state.github_user +
+      '&name=' +
+      this.state.name;
     console.log(url);
 
     LegacyRoleAPI.get_raw(url).then((response) => {
@@ -151,10 +153,9 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
         role: response.data.results[0],
         github_user: github_user,
         name: name,
-        activeItem: activeItem
+        activeItem: activeItem,
       }));
     });
-
   }
 
   onSelect(e) {
@@ -165,12 +166,11 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
     //const name = this.state.name;
     //const role = this.state.role;
     this.setState((state, props) => ({
-        //role: role,
-        //github_user: github_user,
-        //name: name,
-        activeItem: e.itemId    
+      //role: role,
+      //github_user: github_user,
+      //name: name,
+      activeItem: e.itemId,
     }));
-
   }
 
   render() {
@@ -184,130 +184,117 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
 
     const header_cells = [];
     if (this.state.role !== undefined && this.state.role !== null) {
-        header_cells.push(
-          <DataListCell isFilled={false} alignRight={false} key='ns'>
-            <Logo
-              alt={t`role.github_user logo`}
-              fallbackToDefault
-              image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-              size='40px'
-              unlockWidth
-              width='97px'
-            ></Logo>
-            <Link to=''>
-                {this.state.role.github_user}
-            </Link>
-          </DataListCell>,
-        );
+      header_cells.push(
+        <DataListCell isFilled={false} alignRight={false} key='ns'>
+          <Logo
+            alt={t`role.github_user logo`}
+            fallbackToDefault
+            image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+            size='40px'
+            unlockWidth
+            width='97px'
+          ></Logo>
+          <Link to=''>{this.state.role.github_user}</Link>
+        </DataListCell>,
+      );
 
-        header_cells.push(
-          <DataListCell key='content'>
-            <div>
-              <TextContent>
-                <Text component={TextVariants.h1}>
-                  {this.state.role.name}
-                </Text>
-              </TextContent>
-            </div>
-            <div className='hub-entry'>{this.state.role.description}</div>
-            <div className='hub-entry'>
-              <LabelGroup>
-                {this.state.role.summary_fields.tags.map((tag, index) => (
-                  <Tag key={index}>{tag}</Tag>
-                ))}
-              </LabelGroup>
-            </div>
-          </DataListCell>,
-        );
+      header_cells.push(
+        <DataListCell key='content'>
+          <div>
+            <TextContent>
+              <Text component={TextVariants.h1}>{this.state.role.name}</Text>
+            </TextContent>
+          </div>
+          <div className='hub-entry'>{this.state.role.description}</div>
+          <div className='hub-entry'>
+            <LabelGroup>
+              {this.state.role.summary_fields.tags.map((tag, index) => (
+                <Tag key={index}>{tag}</Tag>
+              ))}
+            </LabelGroup>
+          </div>
+        </DataListCell>,
+      );
 
-        header_cells.push(
-          <DataListCell isFilled={false} alignRight key='stats'>
-            <div className='hub-right-col hub-entry'>
-              <Trans>
-                Updated{' '}
-                <DateComponent
-                  date={this.state.role.summary_fields.versions[0].release_date}
-                />
-              </Trans>
-            </div>
-            <div className='hub-entry'>v{this.state.role.summary_fields.versions[0].name}</div>
-          </DataListCell>,
-        );
+      header_cells.push(
+        <DataListCell isFilled={false} alignRight key='stats'>
+          <div className='hub-right-col hub-entry'>
+            <Trans>
+              Updated{' '}
+              <DateComponent
+                date={this.state.role.summary_fields.versions[0].release_date}
+              />
+            </Trans>
+          </div>
+          <div className='hub-entry'>
+            v{this.state.role.summary_fields.versions[0].name}
+          </div>
+        </DataListCell>,
+      );
     }
 
     const table = {
-      install: {title: 'Install'},
-      documentation: {title: 'Documentation'},
+      install: { title: 'Install' },
+      documentation: { title: 'Documentation' },
     };
 
     const renderContent = () => {
-        if (this.state.activeItem == 'install') {
-            return (
-                <LegacyRoleInstall 
-                    role={this.state.role}
-                    github_user={this.state.github_user}
-                    name={this.state.name}
-                    id={this.state.role.id}
-                >
-                </LegacyRoleInstall>
-            )
-        } else if (this.state.activeItem === 'documentation') {
-            return (
-                <LegacyRoleDocs
-                >
-                </LegacyRoleDocs>
-            )
-        } else {
-            return <div></div>
-        }
-
-    }
+      if (this.state.activeItem == 'install') {
+        return (
+          <LegacyRoleInstall
+            role={this.state.role}
+            github_user={this.state.github_user}
+            name={this.state.name}
+            id={this.state.role.id}
+          ></LegacyRoleInstall>
+        );
+      } else if (this.state.activeItem === 'documentation') {
+        return <LegacyRoleDocs></LegacyRoleDocs>;
+      } else {
+        return <div></div>;
+      }
+    };
 
     return (
       <React.Fragment>
-
         {/* TODO: turn the header into breadcrumbs */}
-        <BaseHeader title={t`Legacy Roles > ${this.state.github_user} > ${this.state.name}`}></BaseHeader>
+        <BaseHeader
+          title={t`Legacy Roles > ${this.state.github_user} > ${this.state.name}`}
+        ></BaseHeader>
 
         <DataList aria-label={t`Role Header`}>
-            <DataListItem data-cy='LegacyRoleListItem'>
-              <DataListItemRow>
-                <DataListItemCells dataListCells={header_cells} />
-              </DataListItemRow>
-            </DataListItem>
+          <DataListItem data-cy='LegacyRoleListItem'>
+            <DataListItemRow>
+              <DataListItemCells dataListCells={header_cells} />
+            </DataListItemRow>
+          </DataListItem>
         </DataList>
 
         <Panel>
-            <Nav theme='light' variant='tertiary' onSelect={this.onSelect}>
-              <NavList>
-                {Object.keys(table).map((key) => {
-                    return (
-                        <NavItem
-                            isActive={this.state.activeItem === key}
-                            title={table[key].title}
-                            key={key}
-                            itemId={key}
-                        >
-                        {table[key].title}
-                        </NavItem>
-                    )
-                })}
-              </NavList>
-            </Nav>
+          <Nav theme='light' variant='tertiary' onSelect={this.onSelect}>
+            <NavList>
+              {Object.keys(table).map((key) => {
+                return (
+                  <NavItem
+                    isActive={this.state.activeItem === key}
+                    title={table[key].title}
+                    key={key}
+                    itemId={key}
+                  >
+                    {table[key].title}
+                  </NavItem>
+                );
+              })}
+            </NavList>
+          </Nav>
 
-            <PanelMain>
-                <PanelMainBody>
-                    {renderContent()}
-                </PanelMainBody>
-            </PanelMain>
-
+          <PanelMain>
+            <PanelMainBody>{renderContent()}</PanelMainBody>
+          </PanelMain>
         </Panel>
-
       </React.Fragment>
     );
-
   }
-
 }
 
 export default withRouter(LegacyRole);
