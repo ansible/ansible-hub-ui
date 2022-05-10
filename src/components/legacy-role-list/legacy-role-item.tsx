@@ -46,9 +46,9 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
       <DataListCell isFilled={false} alignRight={false} key='ns'>
         <Logo
           alt={t`role.github_user logo`}
-          fallbackToDefault
-          image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-          size='40px'
+          //fallbackToDefault
+          image={role.summary_fields.namespace.avatar_url}
+          size='70px'
           unlockWidth
           width='97px'
         ></Logo>

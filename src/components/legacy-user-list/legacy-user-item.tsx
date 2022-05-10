@@ -45,7 +45,7 @@ export class LegacyUserListItem extends React.Component<LegacyUserProps> {
         <Logo
           alt={t`role.github_user logo`}
           fallbackToDefault
-          image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+          image={user.avatar_url}
           size='40px'
           unlockWidth
           width='97px'

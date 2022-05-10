@@ -162,12 +162,13 @@ class LegacyUser extends React.Component<RouteComponentProps, IProps> {
         </DataListCell>,
       );
 
+      //image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
       infocells.push(
         <DataListCell isFilled={false} alignRight={false} key='ns'>
           <Logo
             alt={t`role.github_user logo`}
             fallbackToDefault
-            image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+            image={this.state.user.avatar_url}
             size='90px'
             unlockWidth
             width='90px'
