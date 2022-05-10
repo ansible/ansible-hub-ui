@@ -49,7 +49,7 @@ interface LURProps {
 
 interface LURState {
   user: LegacyUserListType;
-  roles: LegacyRoleListType[]
+  roles: LegacyRoleListType[];
 }
 
 // class App extends React.Component<{}, { value: string }> {
@@ -67,43 +67,40 @@ class LegacyUserRoles extends React.Component<LURProps, LURState> {
   }
 
   componentDidMount() {
-      const user = this.state.user;
-      const url = 'roles/?namespace=' + user.id;    
-      console.log('fetching url', url);
-      LegacyRoleAPI.get_raw(url).then((response) => {
-        console.log(response.data);
-        this.setState((state, props) => {
-            return {
-                user: user,
-                roles: response.data.results,
-            }
-        });
+    const user = this.state.user;
+    const url = 'roles/?namespace=' + user.id;
+    console.log('fetching url', url);
+    LegacyRoleAPI.get_raw(url).then((response) => {
+      console.log(response.data);
+      this.setState((state, props) => {
+        return {
+          user: user,
+          roles: response.data.results,
+        };
       });
-  };
+    });
+  }
 
   render() {
     console.log(this.state);
 
     const infocells = [];
     if (this.state.roles !== undefined && this.state.roles !== null) {
-        for (var i = 0; i < this.state.roles.length; i++) {
-            const thisRole = this.state.roles[i];
-            console.log('ROLE', thisRole);
+      for (var i = 0; i < this.state.roles.length; i++) {
+        const thisRole = this.state.roles[i];
+        console.log('ROLE', thisRole);
 
-            infocells.push(
-              <DataListCell isFilled={false} alignRight={false} key='ns'>
-                <BaseHeader title={thisRole.name}></BaseHeader>
-              </DataListCell>,
-            );
-
-        };
+        infocells.push(
+          <DataListCell isFilled={false} alignRight={false} key='ns'>
+            <BaseHeader title={thisRole.name}></BaseHeader>
+          </DataListCell>,
+        );
+      }
     }
 
-    return(<DataListItemCells dataListCells={infocells} />);
+    return <DataListItemCells dataListCells={infocells} />;
   }
-
 }
-
 
 interface IProps {
   userid: number;
@@ -128,7 +125,7 @@ class LegacyUser extends React.Component<RouteComponentProps, IProps> {
   constructor(props) {
     super(props);
     console.log('user props', props);
-    const userid = props.match.params.userid
+    const userid = props.match.params.userid;
     this.state = {
       ...props,
       userid: userid,
@@ -140,7 +137,6 @@ class LegacyUser extends React.Component<RouteComponentProps, IProps> {
 
   componentDidMount() {
     LegacyUserAPI.get('users/' + this.state.userid).then((response) => {
-
       // set the user
       console.log(response.data);
       const user = response.data;
@@ -148,49 +144,47 @@ class LegacyUser extends React.Component<RouteComponentProps, IProps> {
       this.setState((state, props) => ({
         user: response.data,
       }));
-
     });
   }
 
   render() {
-
     if (this.state.user === null) {
-        return (<div>loading</div>);
+      return <div>loading</div>;
     }
 
     const infocells = [];
     //const rolecells = [];
 
     if (this.state.user !== undefined) {
-        infocells.push(
-          <DataListCell isFilled={false} alignRight={false} key='ns'>
-            <BaseHeader title={this.state.user.username}></BaseHeader>
-          </DataListCell>,
-        );
+      infocells.push(
+        <DataListCell isFilled={false} alignRight={false} key='ns'>
+          <BaseHeader title={this.state.user.username}></BaseHeader>
+        </DataListCell>,
+      );
 
-        infocells.push(
-          <DataListCell isFilled={false} alignRight={false} key='ns'>
-            <Logo
-              alt={t`role.github_user logo`}
-              fallbackToDefault
-              image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-              size='90px'
-              unlockWidth
-              width='90px'
-            ></Logo>
-          </DataListCell>,
-        );
+      infocells.push(
+        <DataListCell isFilled={false} alignRight={false} key='ns'>
+          <Logo
+            alt={t`role.github_user logo`}
+            fallbackToDefault
+            image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+            size='90px'
+            unlockWidth
+            width='90px'
+          ></Logo>
+        </DataListCell>,
+      );
 
-        infocells.push(
-          <DataListCell isFilled={false} alignRight={false} key='ns'>
-            <TextContent>
-              <Text component={TextVariants.small}>
-                <h2>{this.state.user.username}</h2>
-              </Text>
-            </TextContent>
-          </DataListCell>,
-        );
-    };
+      infocells.push(
+        <DataListCell isFilled={false} alignRight={false} key='ns'>
+          <TextContent>
+            <Text component={TextVariants.small}>
+              <h2>{this.state.user.username}</h2>
+            </Text>
+          </TextContent>
+        </DataListCell>,
+      );
+    }
 
     return (
       <DataListItem data-cy='LegacyUser'>
@@ -198,13 +192,11 @@ class LegacyUser extends React.Component<RouteComponentProps, IProps> {
           <DataListItemCells dataListCells={infocells} />
         </DataListItemRow>
         <DataListItemRow>
-            <LegacyUserRoles user={this.state.user} />
+          <LegacyUserRoles user={this.state.user} />
         </DataListItemRow>
-     </DataListItem>
+      </DataListItem>
     );
-
   }
-
 }
 
 export default withRouter(LegacyUser);
