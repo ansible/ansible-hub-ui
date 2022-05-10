@@ -38,7 +38,7 @@ export class LegacyUserListItem extends React.Component<LegacyUserProps> {
     const { user } = this.props;
 
     const cells = [];
-    const user_url = '/legacy/users/' + user.username;
+    const user_url = '/legacy/users/' + user.id;
 
     cells.push(
       <DataListCell isFilled={false} alignRight={false} key='ns'>

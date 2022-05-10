@@ -49,7 +49,7 @@ export class API extends LegacyAPI {
   list(params?) {
     //const path = this.apiPath + '/';
     const path = this.apiPath;
-    console.log('API this.apiPath', path);
+    console.log('Legacy Role API this.apiPath', path);
     return super.list(params, path).then((response) => ({
       ...response,
       data: {

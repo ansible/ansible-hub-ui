@@ -49,6 +49,10 @@ export class BaseAPI {
     return this.http.get(this.getPath(apiPath) + id + '/');
   }
 
+  get_raw(id: string, apiPath?: string) {
+    return this.http.get(this.getPath(apiPath) + id);
+  }
+
   update(id: string | number, data, apiPath?: string) {
     return this.http.put(this.getPath(apiPath) + id + '/', data);
   }

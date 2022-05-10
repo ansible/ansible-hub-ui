@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import './legacy-users.scss';
+import './legacy-roles.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { DataList, Switch } from '@patternfly/react-core';
@@ -14,9 +14,9 @@ import {
   RepoSelector,
 } from 'src/components';
 import { LegacyAPI } from 'src/api/legacy';
-import { LegacyUserAPI } from 'src/api/legacyuser';
-import { LegacyUserListType } from 'src/api';
-import { LegacyUserListItem } from 'src/components/legacy-user-list/legacy-user-item';
+import { LegacyRoleAPI } from 'src/api/legacyrole';
+import { LegacyRoleListType } from 'src/api';
+import { LegacyRoleListItem } from 'src/components/legacy-role-list/legacy-role-item';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
@@ -24,7 +24,7 @@ import { AppContext } from 'src/loaders/app-context';
 //import { Paths } from 'src/paths';
 
 interface IProps {
-  legacyusers: LegacyUserListType[];
+  legacyroles: LegacyRoleListType[];
   //numberOfResults: number;
   itemCount: number;
   params: {
@@ -40,21 +40,35 @@ interface IProps {
   //loading: boolean;
 }
 
-class LegacyUsers extends React.Component<RouteComponentProps, IProps> {
+interface LegacyRole {
+  user: string;
+  name: string;
+  latest_version: string;
+}
+
+//class LegacyRoles extends React.Component<RouteComponentProps, IState> {
+//class LegacyRoles extends React.Component {
+class LegacyRole extends React.Component<RouteComponentProps, IProps> {
   constructor(props) {
     super(props);
     this.state = {
       ...props,
-      legacyusers: [],
+      legacyroles: [],
     };
   }
 
   componentDidMount() {
-    LegacyUserAPI.get('users').then((response) => {
+    console.log('LegacyRoles mounted');
+    console.log('LegacyRoles state', this.state);
+    console.log('LegacyRoles props', this.props);
+    console.log('LegacyAPI', LegacyAPI);
+    console.log('LegacyRoleAPI', LegacyRoleAPI);
+
+    LegacyRoleAPI.get('roles').then((response) => {
       console.log(response.data);
       //this.setState({legacyroles: response.data});
       this.setState((state, props) => ({
-        legacyusers: response.data.results,
+        legacyroles: response.data.results,
       }));
     });
   }
@@ -62,12 +76,15 @@ class LegacyUsers extends React.Component<RouteComponentProps, IProps> {
   render() {
     return (
       <div>
-        <BaseHeader title={t`Legacy Authors`}></BaseHeader>
+        <BaseHeader title={t`Legacy Roles`}></BaseHeader>
         <React.Fragment>
-          <DataList aria-label={t`List of Legacy Authors`}>
-            {this.state.legacyusers &&
-              this.state.legacyusers.map((luser) => (
-                <LegacyUserListItem key={luser.id} user={luser} />
+          <DataList aria-label={t`List of Legacy Roles`}>
+            {this.state.legacyroles &&
+              this.state.legacyroles.map((lrole) => (
+                <LegacyRoleListItem
+                  key={lrole.github_user + lrole.name + lrole.id}
+                  role={lrole}
+                />
               ))}
           </DataList>
         </React.Fragment>
@@ -76,6 +93,6 @@ class LegacyUsers extends React.Component<RouteComponentProps, IProps> {
   }
 }
 
-export default withRouter(LegacyUsers);
+export default withRouter(LegacyRole);
 
-LegacyUsers.contextType = AppContext;
+LegacyRole.contextType = AppContext;

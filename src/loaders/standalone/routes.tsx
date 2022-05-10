@@ -10,7 +10,9 @@ import {
   CollectionDependencies,
   EditNamespace,
   LegacyUsers,
+  LegacyUser,
   LegacyRoles,
+  LegacyRole,
   LoginPage,
   MyImports,
   NamespaceDetail,
@@ -173,7 +175,9 @@ export class Routes extends React.Component<IRoutesProps> {
     }
     return [
       { comp: LegacyUsers, path: Paths.legacyUsers },
+      { comp: LegacyUser, path: Paths.legacyUser },
       { comp: LegacyRoles, path: Paths.legacyRoles },
+      { comp: LegacyRole, path: Paths.legacyRole },
       {
         comp: ExecutionEnvironmentDetailActivities,
         path: Paths.executionEnvironmentDetailActivities,
