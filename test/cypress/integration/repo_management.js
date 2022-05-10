@@ -157,7 +157,7 @@ describe('Repo Management tests', () => {
 
   it(`edits remote repo 'rh-certified'`, () => {
     cy.visit(remoteRepoUrl);
-    cy.get('[aria-label="Actions"]').eq(1).click(); // click the kebab menu on the 'rh-certified' repo
+    cy.get('[data-cy="kebab-toggle"]').eq(1).click(); // click the kebab menu on the 'rh-certified' repo
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
     // enter new values
