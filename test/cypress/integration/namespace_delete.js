@@ -33,11 +33,38 @@ describe('Delete a namespace', () => {
     cy.menuGo('Collections > Namespaces');
     cy.wait('@reload');
 
-    // attempt deletion
-
     cy.get('a[href*="ui/repo/published/ansible"]').click();
+
+    //upload a collection
+
+    cy.contains('Upload collection').click();
+    cy.fixture('collections/ansible-network-1.2.0.tar.gz', 'binary')
+      .then(Cypress.Blob.binaryStringToBlob)
+      .then((fileContent) => {
+        cy.get('input[type="file"]').attachFile({
+          fileContent,
+          fileName: 'ansible-network-1.2.0.tar.gz',
+          mimeType: 'application/gzip',
+        });
+      });
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+    ).as('upload');
+    cy.get('[data-cy="confirm-upload"]').click();
+    cy.wait('@upload');
+
+    // attempt deletion
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/namespaces/?sort=name&offset=0&limit=20',
+    ).as('namespaces');
+    cy.menuGo('Collections > Namespaces');
+    cy.wait('@namespaces');
+    cy.contains('ansible').parent().contains('View collections').click();
     cy.get('[data-cy=ns-kebab-toggle]').click();
-    cy.contains('Delete namespace').click({ force: true });
-    cy.contains('Delete namespace?').should('not.exist');
+    cy.contains('Delete namespace')
+      .invoke('attr', 'aria-disabled')
+      .should('eq', 'true');
   });
 });
