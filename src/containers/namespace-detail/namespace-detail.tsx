@@ -379,7 +379,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         )
           .then((result) => {
             const taskId = result.data.task.split('tasks/')[1].replace('/', '');
-            console.log('result id', result.data);
             waitForTask(taskId).then(() => {
               this.loadCollections();
             });
