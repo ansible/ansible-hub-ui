@@ -26,6 +26,24 @@
       flex-wrap: wrap;
       align-content: flex-start;
 
+      div[aria-label='collection-kebab'] {
+        button[aria-label='Actions'] {
+          transform: scaleY(0.7);
+          position: relative;
+          top: -10px;
+          padding-left: 8px;
+        }
+
+        ul {
+          position: absolute;
+          top: 20px;
+        }
+      }
+
+      .hub-signature-badge {
+        height: 16px;
+      }
+
       .card {
         margin-left: 24px;
         margin-bottom: 24px;
@@ -62,7 +80,7 @@
     flex-shrink: 0;
   }
 
-  .sync-toggle {
+  .list .sync-toggle {
     margin-right: 10px;
   }
 }
