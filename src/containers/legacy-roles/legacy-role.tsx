@@ -76,7 +76,6 @@ interface RoleMetaReadme {
   readme_html: string;
 }
 
-
 class LegacyRoleInstall extends React.Component<RoleMeta, RoleMeta> {
   constructor(props) {
     super(props);
@@ -100,8 +99,7 @@ class LegacyRoleDocs extends React.Component<RoleMeta, RoleMetaReadme> {
   }
 
   componentDidMount() {
-
-    const url = 'roles/' + this.state.role.id + '/content'
+    const url = 'roles/' + this.state.role.id + '/content';
     console.log(url);
 
     LegacyRoleAPI.get_raw(url).then((response) => {
@@ -114,7 +112,7 @@ class LegacyRoleDocs extends React.Component<RoleMeta, RoleMetaReadme> {
 
   render() {
     //return <>{this.state.readme_html}</>;
-    return (<div dangerouslySetInnerHTML={{ __html: this.state.readme_html }} />)
+    return <div dangerouslySetInnerHTML={{ __html: this.state.readme_html }} />;
   }
 }
 
@@ -272,14 +270,14 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
           ></LegacyRoleInstall>
         );
       } else if (this.state.activeItem === 'documentation') {
-         return (
-              <LegacyRoleDocs
-                role={this.state.role}
-                github_user={this.state.github_user}
-                name={this.state.name}
-                id={this.state.role.id}
-              ></LegacyRoleDocs>
-         );
+        return (
+          <LegacyRoleDocs
+            role={this.state.role}
+            github_user={this.state.github_user}
+            name={this.state.name}
+            id={this.state.role.id}
+          ></LegacyRoleDocs>
+        );
       } else {
         return <div></div>;
       }
