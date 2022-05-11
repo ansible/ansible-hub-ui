@@ -377,7 +377,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           !collection.deprecated,
           this.context.selectedRepo,
         )
-          .then(() => this.loadCollections())
+          .then((result) => {
+            const taskId = result.data.task.split('tasks/')[1].replace('/', '');
+            console.log('result id', result.data);
+            waitForTask(taskId).then(() => {
+              this.loadCollections();
+            });
+          })
           .catch(() => {
             this.setState({
               warning: t`API Error: Failed to set deprecation.`,
