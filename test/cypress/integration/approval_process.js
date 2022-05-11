@@ -2,6 +2,8 @@ describe('Approval Dashboard process', () => {
   before(() => {
     cy.settings({ GALAXY_REQUIRE_CONTENT_APPROVAL: true });
     cy.settings({ GALAXY_REQUIRE_SIGNATURE_FOR_APPROVAL: false });
+    cy.settings({ GALAXY_AUTO_SIGN_COLLECTIONS: true });
+
     cy.login();
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i collection upload', 'appp_n_test', 'appp_c_test1');

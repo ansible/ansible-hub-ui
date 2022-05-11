@@ -721,29 +721,12 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
   });
 });
 
-Cypress.Commands.add('deleteAllCollections', {}, () => {
-  let url =
-    Cypress.env('prefix') +
-    '_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=100';
-  cy.request(url).then((res) => {
-    let data = res.body.data;
-    data.forEach((record) => {
-      cy.galaxykit(
-        'collection delete',
-        record.namespace,
-        record.name,
-        'None',
-        record.repository_list[0],
-      );
-    });
-  });
-});
-
 Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
   cy.deleteAllCollections();
   cy.wait(5000);
   cy.galaxykit('namespace list').then((json) => {
     JSON.parse(json).data.forEach((namespace) => {
+      cy.deleteCollections(namespace.name);
       cy.galaxykit('namespace delete', namespace.name);
     });
   });
