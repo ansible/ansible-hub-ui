@@ -189,8 +189,8 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
           <Logo
             alt={t`role.github_user logo`}
             fallbackToDefault
-            image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-            size='40px'
+            image={role.summary_fields.namespace.avatar_url}
+            size='70px'
             unlockWidth
             width='97px'
           ></Logo>
