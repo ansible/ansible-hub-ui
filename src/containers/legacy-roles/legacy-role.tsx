@@ -140,10 +140,10 @@ class LegacyRoleDocs extends React.Component<RoleMeta, RoleMetaReadme> {
   render() {
     //return <>{this.state.readme_html}</>;
     return (
-	  <div className='hub-readme-container'>
+      <div className='hub-readme-container'>
         <div
-		  className='pf-c-content'
-          dangerouslySetInnerHTML={{ __html: this.state.readme_html }} 
+          className='pf-c-content'
+          dangerouslySetInnerHTML={{ __html: this.state.readme_html }}
         />
       </div>
     );
