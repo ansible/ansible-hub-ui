@@ -339,13 +339,11 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
             <section className='body'>{renderContent()}</section>
           </Main>
           */}
-
         </Panel>
 
-          <Main>
-            <section className='body'>{renderContent()}</section>
-          </Main>
-
+        <Main>
+          <section className='body'>{renderContent()}</section>
+        </Main>
       </React.Fragment>
     );
   }

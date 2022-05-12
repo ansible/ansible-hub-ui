@@ -158,7 +158,6 @@ class LegacyUser extends React.Component<RouteComponentProps, IProps> {
     //const rolecells = [];
 
     if (this.state.user !== undefined) {
-
       /*
       infocells.push(
         <DataListCell isFilled={false} alignRight={false} key='ns'>
@@ -199,28 +198,25 @@ class LegacyUser extends React.Component<RouteComponentProps, IProps> {
         </DataListCell>,
       );
       */
-
     }
 
     return (
       <React.Fragment>
-     
-          <DataList aria-label={t`User Header`}> 
-              <DataListItem data-cy='LegacyUser'>
-                <DataListItemRow>
-                  <DataListItemCells dataListCells={infocells} />
-                </DataListItemRow>
-              </DataListItem>
-          </DataList> 
+        <DataList aria-label={t`User Header`}>
+          <DataListItem data-cy='LegacyUser'>
+            <DataListItemRow>
+              <DataListItemCells dataListCells={infocells} />
+            </DataListItemRow>
+          </DataListItem>
+        </DataList>
 
-          <DataList aria-label={t`Role List`}> 
-              <DataListItem data-cy='LegacyUser'>
-                <DataListItemRow>
-                  <LegacyUserRoles user={this.state.user} />
-                </DataListItemRow>
-              </DataListItem>
-          </DataList> 
-
+        <DataList aria-label={t`Role List`}>
+          <DataListItem data-cy='LegacyUser'>
+            <DataListItemRow>
+              <LegacyUserRoles user={this.state.user} />
+            </DataListItemRow>
+          </DataListItem>
+        </DataList>
       </React.Fragment>
     );
   }
