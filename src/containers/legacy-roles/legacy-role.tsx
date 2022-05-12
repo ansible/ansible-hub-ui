@@ -110,33 +110,6 @@ class LegacyRoleDocs extends React.Component<RoleMeta, RoleMetaReadme> {
     });
   }
 
-  /*
-	<GridItem>
-	  <div className='hub-readme-container'>
-		<div
-		  className='pf-c-content'
-		  dangerouslySetInnerHTML={{
-			__html: latest_version.docs_blob.collection_readme.html,
-		  }}
-		/>
-		<div className='hub-fade-out'></div>
-	  </div>
-	  <Link
-		to={formatPath(
-		  Paths.collectionDocsIndexByRepo,
-		  {
-			collection: name,
-			namespace: namespace.name,
-			repo: this.context.selectedRepo,
-		  },
-		  params,
-		)}
-	  >
-		{t`Go to documentation`}
-	  </Link>
-	</GridItem>
-  */
-
   render() {
     //return <>{this.state.readme_html}</>;
     return (
@@ -317,6 +290,11 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
       }
     };
 
+    /*
+        <Main>
+          <section className='body'>
+    */
+
     return (
       <React.Fragment>
         {/* TODO: turn the header into breadcrumbs */}
@@ -332,7 +310,7 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
           </DataListItem>
         </DataList>
 
-        <Panel>
+        <Panel isScrollable>
           <Nav theme='light' variant='tertiary' onSelect={this.onSelect}>
             <NavList>
               {Object.keys(table).map((key) => {
@@ -350,10 +328,24 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
             </NavList>
           </Nav>
 
+          {/*
           <PanelMain>
             <PanelMainBody>{renderContent()}</PanelMainBody>
           </PanelMain>
+          */}
+
+          {/*
+          <Main>
+            <section className='body'>{renderContent()}</section>
+          </Main>
+          */}
+
         </Panel>
+
+          <Main>
+            <section className='body'>{renderContent()}</section>
+          </Main>
+
       </React.Fragment>
     );
   }

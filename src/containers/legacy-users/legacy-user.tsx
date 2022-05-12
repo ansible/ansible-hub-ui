@@ -2,6 +2,8 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './legacy-users.scss';
 
+import { Link } from 'react-router-dom';
+
 import {
   DataListItem,
   DataListItemRow,
@@ -156,26 +158,37 @@ class LegacyUser extends React.Component<RouteComponentProps, IProps> {
     //const rolecells = [];
 
     if (this.state.user !== undefined) {
+
+      /*
       infocells.push(
         <DataListCell isFilled={false} alignRight={false} key='ns'>
           <BaseHeader title={this.state.user.username}></BaseHeader>
         </DataListCell>,
       );
+      */
 
       //image='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
       infocells.push(
         <DataListCell isFilled={false} alignRight={false} key='ns'>
           <Logo
-            alt={t`role.github_user logo`}
+            alt='avatar url'
             fallbackToDefault
             image={this.state.user.avatar_url}
             size='90px'
             unlockWidth
             width='90px'
           ></Logo>
+          <Link to=''>{this.state.user.username}</Link>
         </DataListCell>,
       );
 
+      infocells.push(
+        <DataListCell isFilled={false} alignRight={false} key='ns'>
+          <BaseHeader title={this.state.user.username}></BaseHeader>
+        </DataListCell>,
+      );
+
+      /*
       infocells.push(
         <DataListCell isFilled={false} alignRight={false} key='ns'>
           <TextContent>
@@ -185,17 +198,30 @@ class LegacyUser extends React.Component<RouteComponentProps, IProps> {
           </TextContent>
         </DataListCell>,
       );
+      */
+
     }
 
     return (
-      <DataListItem data-cy='LegacyUser'>
-        <DataListItemRow>
-          <DataListItemCells dataListCells={infocells} />
-        </DataListItemRow>
-        <DataListItemRow>
-          <LegacyUserRoles user={this.state.user} />
-        </DataListItemRow>
-      </DataListItem>
+      <React.Fragment>
+     
+          <DataList aria-label={t`User Header`}> 
+              <DataListItem data-cy='LegacyUser'>
+                <DataListItemRow>
+                  <DataListItemCells dataListCells={infocells} />
+                </DataListItemRow>
+              </DataListItem>
+          </DataList> 
+
+          <DataList aria-label={t`Role List`}> 
+              <DataListItem data-cy='LegacyUser'>
+                <DataListItemRow>
+                  <LegacyUserRoles user={this.state.user} />
+                </DataListItemRow>
+              </DataListItem>
+          </DataList> 
+
+      </React.Fragment>
     );
   }
 }
