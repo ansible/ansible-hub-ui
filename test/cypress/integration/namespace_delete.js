@@ -56,7 +56,13 @@ describe('Delete a namespace', () => {
 
     // sign collection
 
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') +
+        '_ui/v1/repo/published/?deprecated=false&offset=0&limit=10',
+    ).as('collections');
     cy.menuGo('Collections > Collections');
+    cy.wait('@collections');
     cy.contains('network').click();
     cy.get('[data-cy="kebab-toggle"]').click();
     cy.contains('Sign entire collection').click();
