@@ -2,6 +2,8 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './namespace-detail.scss';
 
+import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+
 import {
   withRouter,
   RouteComponentProps,
@@ -378,9 +380,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           this.context.selectedRepo,
         )
           .then((result) => {
-            const taskId = result.data.task.split('tasks/')[1].replace('/', '');
-            waitForTask(taskId).then(() => {
-              this.loadCollections();
+            const taskId = parsePulpIDFromURL(result.data.task);
+            return waitForTask(taskId).then(() => {
+              return this.loadCollections();
             });
           })
           .catch(() => {
