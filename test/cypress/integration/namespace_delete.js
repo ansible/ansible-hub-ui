@@ -54,6 +54,19 @@ describe('Delete a namespace', () => {
     cy.get('[data-cy="confirm-upload"]').click();
     cy.wait('@upload');
 
+    // sign collection
+
+    cy.menuGo('Collections > Collections');
+    cy.contains('network').click();
+    cy.get('[data-cy="kebab-toggle"]').click();
+    cy.contains('Sign entire collection').click();
+    cy.intercept(
+      'POST',
+      Cypress.env('prefix') + '_ui/v1/collection_signing/',
+    ).as('signed');
+    cy.get('button').contains('Sign all').click();
+    cy.wait('@signed');
+
     // attempt deletion
     cy.intercept(
       'GET',
