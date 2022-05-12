@@ -56,34 +56,34 @@ describe('Delete a namespace', () => {
 
     // sign collection
 
-    cy.intercept(
-      'GET',
-      Cypress.env('prefix') +
-        '_ui/v1/repo/published/?deprecated=false&offset=0&limit=10',
-    ).as('collections');
-    cy.menuGo('Collections > Collections');
-    cy.wait('@collections');
-    cy.contains('network').click();
-    cy.get('[data-cy="kebab-toggle"]').click();
-    cy.contains('Sign entire collection').click();
-    cy.intercept(
-      'POST',
-      Cypress.env('prefix') + '_ui/v1/collection_signing/',
-    ).as('signed');
-    cy.get('button').contains('Sign all').click();
-    cy.wait('@signed');
+    // cy.intercept(
+    //   'GET',
+    //   Cypress.env('prefix') +
+    //     '_ui/v1/repo/published/?deprecated=false&offset=0&limit=10',
+    // ).as('collections');
+    // cy.menuGo('Collections > Collections');
+    // cy.wait('@collections');
+    // cy.contains('network').click();
+    // cy.get('[data-cy="kebab-toggle"]').click();
+    // cy.contains('Sign entire collection').click();
+    // cy.intercept(
+    //   'POST',
+    //   Cypress.env('prefix') + '_ui/v1/collection_signing/',
+    // ).as('signed');
+    // cy.get('button').contains('Sign all').click();
+    // cy.wait('@signed');
 
     // approval dashboard, sign and approve
 
-    // cy.menuGo('Collections > Approval');
-    // cy.get('button[aria-label="Actions"]:first').click();
-    // cy.intercept(
-    //   'POST',
-    //   Cypress.env('prefix') +
-    //     'v3/collections/namespace_detail_test/collection1/versions/1.0.0/move/rejected/published/',
-    // ).as('signAndApprove');
-    // cy.contains('Sign and approve').click();
-    // cy.wait('@signAndApprove');
+    cy.menuGo('Collections > Approval');
+    cy.get('button[aria-label="Actions"]:first').click();
+    cy.intercept(
+      'POST',
+      Cypress.env('prefix') +
+        'v3/collections/namespace_detail_test/collection1/versions/1.0.0/move/rejected/published/',
+    ).as('signAndApprove');
+    cy.contains('Sign and approve').click();
+    cy.wait('@signAndApprove');
 
     // attempt deletion
     cy.intercept(
