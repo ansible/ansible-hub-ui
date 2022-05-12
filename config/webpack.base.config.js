@@ -57,6 +57,7 @@ module.exports = (inputConfigs) => {
   });
 
   const isStandalone = customConfigs.DEPLOYMENT_MODE !== 'insights';
+  const isCommunity = customConfigs.DEPLOYMENT_MODE === 'community';
 
   // config for HtmlWebpackPlugin
   const htmlPluginConfig = {
@@ -152,6 +153,12 @@ module.exports = (inputConfigs) => {
     console.log('Overriding configs for standalone mode.');
 
     const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
+    console.log(`New entry.App: ${newEntry}`);
+    newWebpackConfig.entry.App = newEntry;
+  } else if (customConfigs.DEPLOYMENT_MODE === 'community') {
+    console.log('Overriding configs for community mode.');
+
+    const newEntry = resolve(__dirname, '../src/entry-community.tsx');
     console.log(`New entry.App: ${newEntry}`);
     newWebpackConfig.entry.App = newEntry;
   }
