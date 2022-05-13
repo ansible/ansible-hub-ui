@@ -1,0 +1,1 @@
+Wait for setDeprecation task before running loadCollections and success handler.
