@@ -435,7 +435,7 @@ class ExecutionEnvironmentList extends React.Component<
         remotePulpId={pulp_id}
         distributionPulpId={distributionPulpId}
         formError={this.state.formError}
-        onSave={(promise) => {
+        onSave={(promise, form) => {
           promise
             .then(() => {
               this.setState(
@@ -446,12 +446,12 @@ class ExecutionEnvironmentList extends React.Component<
                     variant: 'success',
                     title: isNew ? (
                       <Trans>
-                        Execution environment &quot;{name}&quot; has been added
-                        successfully.
+                        Execution environment &quot;{form.name}&quot; has been
+                        added successfully.
                       </Trans>
                     ) : (
                       <Trans>
-                        Saved changes to execution environment &quot;{name}
+                        Saved changes to execution environment &quot;{form.name}
                         &quot;.
                       </Trans>
                     ),
