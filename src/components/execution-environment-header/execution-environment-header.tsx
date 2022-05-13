@@ -20,6 +20,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
       { id: 'detail', name: t`Detail` },
       { id: 'activity', name: t`Activity` },
       { id: 'images', name: t`Images` },
+      { id: 'owners', name: t`Owners` },
     ];
 
     const last_sync_task =

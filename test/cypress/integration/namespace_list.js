@@ -12,16 +12,9 @@ describe('Namespaces Page Tests', () => {
 
     cy.galaxykit('-i namespace create', 'testns1');
     cy.galaxykit('-i namespace create', 'testns2');
-
     //FIXME roles
     //cy.galaxykit('namespace addgroup', 'testns1', 'testGroup1');
     //cy.galaxykit('namespace addgroup', 'testns2', 'testGroup2');
-  });
-
-  after(() => {
-    cy.deleteTestUsers();
-    cy.deleteTestGroups();
-    cy.deleteNamespacesAndCollections();
   });
 
   it('can navigate to public namespace list', () => {
