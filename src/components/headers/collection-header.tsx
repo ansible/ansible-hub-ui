@@ -774,7 +774,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     )
       .then((res) => {
         const taskId = parsePulpIDFromURL(res.data.task);
-        waitForTask(taskId).then(() => {
+        return waitForTask(taskId).then(() => {
           if (this.props.reload) {
             this.props.reload();
           }

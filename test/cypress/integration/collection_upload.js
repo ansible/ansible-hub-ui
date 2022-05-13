@@ -16,8 +16,6 @@ describe('Collection Upload Tests', () => {
   });
 
   it('should not upload new collection version in collection list when user does not have permissions', () => {
-    cy.login(userName, userPassword);
-
     cy.visit(
       '/ui/repo/published?page_size=10&view_type=list&keywords=testcollection',
     );
@@ -35,7 +33,6 @@ describe('Collection Upload Tests', () => {
   });
 
   it('should not upload new collection version in collection detail when user does not have permissions', () => {
-    cy.login(userName, userPassword);
     cy.visit('/ui/repo/published/testspace/testcollection');
     cy.contains('testcollection');
     cy.get('button[aria-label=Actions]').click();

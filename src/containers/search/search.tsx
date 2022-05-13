@@ -100,7 +100,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       this.getSynclist();
     }
 
-    //this.setState({ synclist: { collections: [] } as any }); // DEBUG
+    this.setState({ synclist: { collections: [] } as any }); // DEBUG
   }
 
   private get closeAlert() {
@@ -265,14 +265,19 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
   private renderCards(collections) {
     return (
-      <div className='cards'>
+      <div className='hub-cards'>
         {collections.map((c) => {
           return (
             <CollectionCard
               className='card'
               key={c.id}
               {...c}
-              footer={this.renderSyncToggle(c.name, c.namespace.name, false, c)}
+              footer={this.renderCollectionControls(
+                c.name,
+                c.namespace.name,
+                false,
+                c,
+              )}
               repo={this.context.selectedRepo}
               menu={this.renderMenu(false, c)}
             />
@@ -290,7 +295,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     )
       .then((res) => {
         const taskId = parsePulpIDFromURL(res.data.task);
-        waitForTask(taskId).then(() => {
+        return waitForTask(taskId).then(() => {
           this.load();
         });
       })
@@ -354,7 +359,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderSyncToggle(
+  private renderCollectionControls(
     name: string,
     namespace: string,
     list: boolean,
@@ -450,14 +455,14 @@ class Search extends React.Component<RouteComponentProps, IState> {
   private renderList(collections) {
     return (
       <div className='list-container'>
-        <div className='list'>
+        <div className='hub-list'>
           <DataList className='data-list' aria-label={t`List of Collections`}>
             {collections.map((c) => (
               <CollectionListItem
                 showNamespace={true}
                 key={c.id}
                 {...c}
-                controls={this.renderSyncToggle(
+                controls={this.renderCollectionControls(
                   c.name,
                   c.namespace.name,
                   true,

@@ -55,13 +55,11 @@ export class CollectionCard extends React.Component<IProps> {
             image={namespace.avatar_url}
             size='40px'
             unlockWidth
+            flexGrow
           />
-
-          <div className='left-container'>
-            <TextContent>{this.getCertification(repo)}</TextContent>
-            <SignatureBadge isCompact signState={sign_state} />
-            {menu}
-          </div>
+          <TextContent>{this.getCertification(repo)}</TextContent>
+          <SignatureBadge isCompact signState={sign_state} />
+          {menu}
         </CardHeader>
         <CardHeader>
           <div className='name'>

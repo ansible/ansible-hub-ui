@@ -25,7 +25,7 @@ export function loadCollection(
     forceReload,
   )
     .then((result) => {
-      CollectionAPI.list(
+      return CollectionAPI.list(
         {
           name: this.props.match.params['collection'],
         },
