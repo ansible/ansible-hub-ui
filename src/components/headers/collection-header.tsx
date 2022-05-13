@@ -51,7 +51,7 @@ import { Paths, formatPath } from 'src/paths';
 import {
   waitForTask,
   canSign as canSignNS,
-  getIdFromTask,
+  parsePulpIDFromURL,
 } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { DateComponent } from '../date-component/date-component';
@@ -773,7 +773,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       this.context.selectedRepo,
     )
       .then((res) => {
-        const taskId = getIdFromTask(res.data.task);
+        const taskId = parsePulpIDFromURL(res.data.task);
         waitForTask(taskId).then(() => {
           if (this.props.reload) {
             this.props.reload();
@@ -808,7 +808,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       deleteCollection,
     )
       .then((res) => {
-        const taskId = getIdFromTask(res.data.task);
+        const taskId = parsePulpIDFromURL(res.data.task);
         const name = deleteCollection.name;
 
         waitForTask(taskId).then(() => {
@@ -929,7 +929,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     } = this.state;
     CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
       .then((res) => {
-        const taskId = getIdFromTask(res.data.task);
+        const taskId = parsePulpIDFromURL(res.data.task);
 
         waitForTask(taskId).then(() => {
           this.context.setAlerts([

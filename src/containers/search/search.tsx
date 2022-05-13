@@ -32,7 +32,7 @@ import {
 import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
-import { filterIsSet, waitForTask, getIdFromTask } from 'src/utilities';
+import { filterIsSet, waitForTask, parsePulpIDFromURL } from 'src/utilities';
 import { Paths, formatPath } from 'src/paths';
 
 interface IState {
@@ -289,7 +289,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       this.context.selectedRepo,
     )
       .then((res) => {
-        const taskId = getIdFromTask(res.data.task);
+        const taskId = parsePulpIDFromURL(res.data.task);
         waitForTask(taskId).then(() => {
           this.load();
         });
