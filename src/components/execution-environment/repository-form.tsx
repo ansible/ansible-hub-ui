@@ -35,7 +35,7 @@ interface IProps {
   name: string;
   namespace: string;
   description: string;
-  onSave: (Promise) => void;
+  onSave: (Promise, state?: IState) => void;
   onCancel: () => void;
   permissions: string[];
   distributionPulpId: string;
@@ -156,7 +156,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             key='save'
             variant='primary'
             isDisabled={!this.formIsValid()}
-            onClick={() => onSave(this.onSave())}
+            onClick={() => onSave(this.onSave(), this.state)}
           >
             {t`Save`}
           </Button>,
@@ -369,7 +369,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           >
             <TextArea
               id='description'
-              value={description}
+              value={description || ''}
               isDisabled={
                 !this.props.permissions.includes(
                   'container.namespace_change_containerdistribution',
