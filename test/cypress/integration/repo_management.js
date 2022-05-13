@@ -53,18 +53,16 @@ describe('Repo Management tests', () => {
     cy.get('button[aria-label="Copy to clipboard"]').should('be.enabled');
   });
 
-  it('expands and copies CLI config from local repo list', () => {
+  it.only('expands and copies CLI config from local repo list', () => {
     cy.visit(localRepoUrl);
     cy.get(
-      'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__group > button[aria-label="Show content"]',
+      '.pf-c-clipboard-copy button[aria-label="Show content"]:first',
     ).click(); //show expandable content
     cy.get(
-      'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre',
+      '.pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre:first',
     ).contains(Cypress.env('prefix') + 'content/community/'); // check content of input
 
-    cy.get(
-      'table > tbody > tr:first-child > td:nth-child(6) > .pf-c-clipboard-copy > .pf-c-clipboard-copy__group > button[aria-label="Copy to clipboard"]',
-    ).should('be.enabled');
+    cy.get('button[aria-label="Copy to clipboard"]').eq(1).should('be.enabled');
   });
 
   it('edits remote registry', () => {
