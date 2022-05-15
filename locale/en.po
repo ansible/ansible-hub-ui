@@ -65,7 +65,7 @@ msgstr "<0>Note:</0> The following links may be blocked by your browser. Copy an
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:324
+#: src/containers/namespace-detail/namespace-detail.tsx:326
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 
@@ -110,7 +110,7 @@ msgstr "A tag may contain lowercase and uppercase ASCII alphabetic characters, d
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:383
+#: src/containers/namespace-detail/namespace-detail.tsx:390
 msgid "API Error: Failed to set deprecation."
 msgstr "API Error: Failed to set deprecation."
 
@@ -121,7 +121,7 @@ msgstr "API Error: Failed to set deprecation."
 
 #: src/components/headers/collection-header.tsx:579
 #: src/components/headers/collection-header.tsx:630
-#: src/containers/namespace-detail/namespace-detail.tsx:401
+#: src/containers/namespace-detail/namespace-detail.tsx:408
 msgid "API Error: {status}"
 msgstr "API Error: {status}"
 
@@ -260,7 +260,7 @@ msgstr "Approval"
 msgid "Approval dashboard"
 msgstr "Approval dashboard"
 
-#: src/components/my-imports/import-console.tsx:181
+#: src/components/my-imports/import-console.tsx:184
 msgid "Approval status:"
 msgstr "Approval status:"
 
@@ -300,7 +300,7 @@ msgstr "CA certificate"
 #~ msgstr "CLI Configuration"
 
 #: src/components/repositories/local-repository-table.tsx:69
-#: src/containers/namespace-detail/namespace-detail.tsx:167
+#: src/containers/namespace-detail/namespace-detail.tsx:169
 msgid "CLI configuration"
 msgstr "CLI configuration"
 
@@ -331,7 +331,7 @@ msgstr "Cancel"
 msgid "Canceled"
 msgstr "Canceled"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:571
+#: src/containers/namespace-detail/namespace-detail.tsx:578
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 
@@ -516,7 +516,7 @@ msgstr "Collection does not have dependencies."
 msgid "Collection is not being used by any collection."
 msgstr "Collection is not being used by any collection."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:531
+#: src/containers/namespace-detail/namespace-detail.tsx:538
 msgid "Collection repositories could not be displayed."
 msgstr "Collection repositories could not be displayed."
 
@@ -532,7 +532,7 @@ msgid "Collection versions"
 msgstr "Collection versions"
 
 #: src/constants.tsx:37
-#: src/containers/namespace-detail/namespace-detail.tsx:164
+#: src/containers/namespace-detail/namespace-detail.tsx:166
 #: src/containers/search/search.tsx:98
 #: src/loaders/standalone/standalone-loader.tsx:341
 #: src/loaders/standalone/standalone-loader.tsx:342
@@ -540,7 +540,7 @@ msgid "Collections"
 msgstr "Collections"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:252
-#: src/containers/namespace-detail/namespace-detail.tsx:292
+#: src/containers/namespace-detail/namespace-detail.tsx:294
 #: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
 msgstr "Collections will appear once uploaded"
@@ -827,12 +827,12 @@ msgid "Delete image?"
 msgstr "Delete image?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:565
-#: src/containers/namespace-detail/namespace-detail.tsx:579
+#: src/containers/namespace-detail/namespace-detail.tsx:572
+#: src/containers/namespace-detail/namespace-detail.tsx:586
 msgid "Delete namespace"
 msgstr "Delete namespace"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:220
+#: src/containers/namespace-detail/namespace-detail.tsx:222
 msgid "Delete namespace?"
 msgstr "Delete namespace?"
 
@@ -873,7 +873,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 
 #: src/components/headers/collection-header.tsx:357
-#: src/containers/namespace-detail/namespace-detail.tsx:225
+#: src/containers/namespace-detail/namespace-detail.tsx:227
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "Deleting <0>{0}</0> and its data will be lost."
 
@@ -965,7 +965,7 @@ msgstr "Documentation"
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 
-#: src/components/my-imports/import-console.tsx:103
+#: src/components/my-imports/import-console.tsx:106
 #: src/containers/task-management/task_detail.tsx:312
 msgid "Done"
 msgstr "Done"
@@ -1034,7 +1034,7 @@ msgstr "Edit execution environment"
 msgid "Edit group permissions"
 msgstr "Edit group permissions"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:555
+#: src/containers/namespace-detail/namespace-detail.tsx:562
 msgid "Edit namespace"
 msgstr "Edit namespace"
 
@@ -1186,7 +1186,7 @@ msgstr "Error loading environments."
 msgid "Error message"
 msgstr "Error message"
 
-#: src/components/my-imports/import-console.tsx:191
+#: src/components/my-imports/import-console.tsx:194
 msgid "Error message:"
 msgstr "Error message:"
 
@@ -1277,7 +1277,7 @@ msgstr "Execution environment \"{selectedItem}\" has been successfully deleted."
 msgid "Expiration"
 msgstr "Expiration"
 
-#: src/components/my-imports/import-console.tsx:110
+#: src/components/my-imports/import-console.tsx:113
 #: src/components/my-imports/import-list.tsx:91
 #: src/components/status/status-indicator.tsx:75
 #: src/constants.tsx:380
@@ -1293,7 +1293,7 @@ msgstr "Failed"
 msgid "Failed to retrieve user data."
 msgstr "Failed to retrieve user data."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:402
+#: src/containers/namespace-detail/namespace-detail.tsx:409
 msgid "Failed to sign all collections."
 msgstr "Failed to sign all collections."
 
@@ -1350,7 +1350,7 @@ msgstr "Finished at"
 msgid "First name"
 msgstr "First name"
 
-#: src/components/my-imports/import-console.tsx:81
+#: src/components/my-imports/import-console.tsx:84
 msgid "Follow logs"
 msgstr "Follow logs"
 
@@ -1433,7 +1433,7 @@ msgstr "Hide the signature"
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
 #: src/components/headers/collection-header.tsx:366
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
-#: src/containers/namespace-detail/namespace-detail.tsx:232
+#: src/containers/namespace-detail/namespace-detail.tsx:234
 msgid "I understand that this action cannot be undone."
 msgstr "I understand that this action cannot be undone."
 
@@ -1482,7 +1482,7 @@ msgstr "Import and move to staging"
 msgid "Import log"
 msgstr "Import log"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:596
+#: src/containers/namespace-detail/namespace-detail.tsx:603
 msgid "Imports"
 msgstr "Imports"
 
@@ -1726,17 +1726,17 @@ msgstr "Name must be longer than 2 characters"
 msgid "Name must not be empty."
 msgstr "Name must not be empty."
 
-#: src/components/my-imports/import-list.tsx:221
+#: src/components/my-imports/import-list.tsx:222
 #: src/containers/certification-dashboard/certification-dashboard.tsx:158
 #: src/containers/certification-dashboard/certification-dashboard.tsx:259
 msgid "Namespace"
 msgstr "Namespace"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:676
+#: src/containers/namespace-detail/namespace-detail.tsx:683
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "Namespace \"{name}\" could not be deleted."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:655
+#: src/containers/namespace-detail/namespace-detail.tsx:662
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "Namespace \"{name}\" has been successfully deleted."
 
@@ -1812,7 +1812,7 @@ msgstr "No activities yet"
 msgid "No child task"
 msgstr "No child task"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:291
+#: src/containers/namespace-detail/namespace-detail.tsx:293
 #: src/containers/search/search.tsx:152
 msgid "No collections yet"
 msgstr "No collections yet"
@@ -1887,7 +1887,7 @@ msgstr "No tag or digest selected."
 msgid "No task group"
 msgstr "No task group"
 
-#: src/components/my-imports/import-console.tsx:96
+#: src/components/my-imports/import-console.tsx:99
 msgid "No task messages available"
 msgstr "No task messages available"
 
@@ -2352,7 +2352,7 @@ msgstr "Requires super user permissions to edit."
 msgid "Reserve resources"
 msgstr "Reserve resources"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:172
+#: src/containers/namespace-detail/namespace-detail.tsx:174
 msgid "Resources"
 msgstr "Resources"
 
@@ -2399,7 +2399,7 @@ msgstr "Saved changes to namespace \"{0}\"."
 msgid "Saved changes to user \"{username}\"."
 msgstr "Saved changes to user \"{username}\"."
 
-#: src/components/my-imports/import-console.tsx:81
+#: src/components/my-imports/import-console.tsx:84
 msgid "Scroll to end"
 msgstr "Scroll to end"
 
@@ -2454,7 +2454,7 @@ msgstr "Select groups"
 #~ msgid "Select input"
 #~ msgstr "Select input"
 
-#: src/components/my-imports/import-list.tsx:234
+#: src/components/my-imports/import-list.tsx:235
 msgid "Select namespace"
 msgstr "Select namespace"
 
@@ -2508,7 +2508,7 @@ msgid "Sign all"
 msgstr "Sign all"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:27
-#: src/containers/namespace-detail/namespace-detail.tsx:605
+#: src/containers/namespace-detail/namespace-detail.tsx:612
 msgid "Sign all collections"
 msgstr "Sign all collections"
 
@@ -2550,7 +2550,7 @@ msgstr "Signed and approved"
 msgid "Signed only"
 msgstr "Signed only"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:411
+#: src/containers/namespace-detail/namespace-detail.tsx:418
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Signing started for all collections in namespace \"{0}\"."
 
@@ -2593,7 +2593,7 @@ msgstr "State"
 msgid "Status"
 msgstr "Status"
 
-#: src/components/my-imports/import-console.tsx:177
+#: src/components/my-imports/import-console.tsx:180
 msgid "Status:"
 msgstr "Status:"
 
@@ -2960,8 +2960,8 @@ msgstr "Updated <0/>"
 msgid "Upload"
 msgstr "Upload"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:298
-#: src/containers/namespace-detail/namespace-detail.tsx:617
+#: src/containers/namespace-detail/namespace-detail.tsx:300
+#: src/containers/namespace-detail/namespace-detail.tsx:624
 msgid "Upload collection"
 msgstr "Upload collection"
 
@@ -3131,7 +3131,7 @@ msgstr "Users will appear once created"
 msgid "Version"
 msgstr "Version"
 
-#: src/components/my-imports/import-console.tsx:185
+#: src/components/my-imports/import-console.tsx:188
 msgid "Version:"
 msgstr "Version:"
 
@@ -3276,11 +3276,11 @@ msgstr "You have unsaved changes"
 msgid "add-user-modal"
 msgstr "add-user-modal"
 
-#: src/components/my-imports/import-console.tsx:144
+#: src/components/my-imports/import-console.tsx:147
 msgid "approved"
 msgstr "approved"
 
-#: src/components/my-imports/import-console.tsx:146
+#: src/components/my-imports/import-console.tsx:149
 msgid "could not be determined yet"
 msgstr "could not be determined yet"
 
@@ -3311,7 +3311,7 @@ msgstr "per page"
 msgid "popover example"
 msgstr "popover example"
 
-#: src/components/my-imports/import-console.tsx:140
+#: src/components/my-imports/import-console.tsx:143
 msgid "rejected"
 msgstr "rejected"
 
@@ -3335,11 +3335,11 @@ msgstr "sign state"
 msgid "tags"
 msgstr "tags"
 
-#: src/components/my-imports/import-console.tsx:142
+#: src/components/my-imports/import-console.tsx:145
 msgid "waiting for approval"
 msgstr "waiting for approval"
 
-#: src/components/my-imports/import-console.tsx:135
+#: src/components/my-imports/import-console.tsx:138
 msgid "waiting for import to finish"
 msgstr "waiting for import to finish"
 

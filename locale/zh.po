@@ -64,7 +64,7 @@ msgstr "<0>注：</0> 您的浏览器可能会阻止以下链接。手动复制�
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:324
+#: src/containers/namespace-detail/namespace-detail.tsx:326
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>注：</0>使用这个 URL 将 ansible-galaxy 配置为上传集合到这个命名空间。有关 ansible-galaxy 配置的更多信息，请参阅<1>这里</1><2></2><3/>。"
 
@@ -109,7 +109,7 @@ msgstr "标签可以包含小写和大写 ASCII 字母字符、数字、下划�
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:383
+#: src/containers/namespace-detail/namespace-detail.tsx:390
 msgid "API Error: Failed to set deprecation."
 msgstr "API 错误：无法设置弃用。"
 
@@ -120,7 +120,7 @@ msgstr "API 错误：无法设置弃用。"
 
 #: src/components/headers/collection-header.tsx:579
 #: src/components/headers/collection-header.tsx:630
-#: src/containers/namespace-detail/namespace-detail.tsx:401
+#: src/containers/namespace-detail/namespace-detail.tsx:408
 msgid "API Error: {status}"
 msgstr "API 错误：{status}"
 
@@ -257,7 +257,7 @@ msgstr "批准"
 msgid "Approval dashboard"
 msgstr "批准仪表板"
 
-#: src/components/my-imports/import-console.tsx:181
+#: src/components/my-imports/import-console.tsx:184
 msgid "Approval status:"
 msgstr "批准状态："
 
@@ -297,7 +297,7 @@ msgstr "CA 证书"
 #~ msgstr "CLI Configuration"
 
 #: src/components/repositories/local-repository-table.tsx:69
-#: src/containers/namespace-detail/namespace-detail.tsx:167
+#: src/containers/namespace-detail/namespace-detail.tsx:169
 msgid "CLI configuration"
 msgstr "CLI 配置"
 
@@ -328,7 +328,7 @@ msgstr "取消"
 msgid "Canceled"
 msgstr "已取消"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:571
+#: src/containers/namespace-detail/namespace-detail.tsx:578
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "无法删除命名空间，直到 <0/> 集合的依赖项已 <1/> 被删除"
 
@@ -513,7 +513,7 @@ msgstr "集合没有依赖项。"
 msgid "Collection is not being used by any collection."
 msgstr "集合没有被任何集合使用。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:531
+#: src/containers/namespace-detail/namespace-detail.tsx:538
 msgid "Collection repositories could not be displayed."
 msgstr "无法显示集合仓库。"
 
@@ -529,7 +529,7 @@ msgid "Collection versions"
 msgstr "集合版本"
 
 #: src/constants.tsx:37
-#: src/containers/namespace-detail/namespace-detail.tsx:164
+#: src/containers/namespace-detail/namespace-detail.tsx:166
 #: src/containers/search/search.tsx:98
 #: src/loaders/standalone/standalone-loader.tsx:341
 #: src/loaders/standalone/standalone-loader.tsx:342
@@ -537,7 +537,7 @@ msgid "Collections"
 msgstr "集合"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:252
-#: src/containers/namespace-detail/namespace-detail.tsx:292
+#: src/containers/namespace-detail/namespace-detail.tsx:294
 #: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
 msgstr "上传后会出现集合"
@@ -824,12 +824,12 @@ msgid "Delete image?"
 msgstr "删除镜像？"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:565
-#: src/containers/namespace-detail/namespace-detail.tsx:579
+#: src/containers/namespace-detail/namespace-detail.tsx:572
+#: src/containers/namespace-detail/namespace-detail.tsx:586
 msgid "Delete namespace"
 msgstr "删除命名空间"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:220
+#: src/containers/namespace-detail/namespace-detail.tsx:222
 msgid "Delete namespace?"
 msgstr "删除命名空间？"
 
@@ -870,7 +870,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "删除 <0>{0} v{collectionVersion}</0> 其数据将会丢失。"
 
 #: src/components/headers/collection-header.tsx:357
-#: src/containers/namespace-detail/namespace-detail.tsx:225
+#: src/containers/namespace-detail/namespace-detail.tsx:227
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "删除 <0>{0}</0> 其数据将会丢失。"
 
@@ -962,7 +962,7 @@ msgstr "文档"
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "有关如何配置 <0>ansible-galaxy</0> 客户端的文档位于<1>这里</1>。使用下列参数来配置客户端："
 
-#: src/components/my-imports/import-console.tsx:103
+#: src/components/my-imports/import-console.tsx:106
 #: src/containers/task-management/task_detail.tsx:312
 msgid "Done"
 msgstr "完成"
@@ -1031,7 +1031,7 @@ msgstr "编辑执行环境"
 msgid "Edit group permissions"
 msgstr "编辑组权限"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:555
+#: src/containers/namespace-detail/namespace-detail.tsx:562
 msgid "Edit namespace"
 msgstr "编辑命名空间"
 
@@ -1183,7 +1183,7 @@ msgstr "加载环境时出错。"
 msgid "Error message"
 msgstr "错误消息"
 
-#: src/components/my-imports/import-console.tsx:191
+#: src/components/my-imports/import-console.tsx:194
 msgid "Error message:"
 msgstr "错误消息："
 
@@ -1274,7 +1274,7 @@ msgstr "执行环境 \"{selectedItem}\" 已成功删除。"
 msgid "Expiration"
 msgstr "过期"
 
-#: src/components/my-imports/import-console.tsx:110
+#: src/components/my-imports/import-console.tsx:113
 #: src/components/my-imports/import-list.tsx:91
 #: src/components/status/status-indicator.tsx:75
 #: src/constants.tsx:380
@@ -1290,7 +1290,7 @@ msgstr "失败"
 msgid "Failed to retrieve user data."
 msgstr "获取用户数据失败。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:402
+#: src/containers/namespace-detail/namespace-detail.tsx:409
 msgid "Failed to sign all collections."
 msgstr "签发所有集合失败。"
 
@@ -1347,7 +1347,7 @@ msgstr "完成于"
 msgid "First name"
 msgstr "名"
 
-#: src/components/my-imports/import-console.tsx:81
+#: src/components/my-imports/import-console.tsx:84
 msgid "Follow logs"
 msgstr "跟踪日志"
 
@@ -1430,7 +1430,7 @@ msgstr "隐藏签名"
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
 #: src/components/headers/collection-header.tsx:366
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
-#: src/containers/namespace-detail/namespace-detail.tsx:232
+#: src/containers/namespace-detail/namespace-detail.tsx:234
 msgid "I understand that this action cannot be undone."
 msgstr "我理解这个行动是无法撤销的。"
 
@@ -1479,7 +1479,7 @@ msgstr "导入并移至 staging"
 msgid "Import log"
 msgstr "导入日志"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:596
+#: src/containers/namespace-detail/namespace-detail.tsx:603
 msgid "Imports"
 msgstr "导入"
 
@@ -1723,17 +1723,17 @@ msgstr "名称必须大于 2 个字符"
 msgid "Name must not be empty."
 msgstr "名称不能为空。"
 
-#: src/components/my-imports/import-list.tsx:221
+#: src/components/my-imports/import-list.tsx:222
 #: src/containers/certification-dashboard/certification-dashboard.tsx:158
 #: src/containers/certification-dashboard/certification-dashboard.tsx:259
 msgid "Namespace"
 msgstr "命名空间"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:676
+#: src/containers/namespace-detail/namespace-detail.tsx:683
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "命名空间 \"{name}\" 无法被删除。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:655
+#: src/containers/namespace-detail/namespace-detail.tsx:662
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "命名空间 \"{name}\" 已被成功删除。"
 
@@ -1809,7 +1809,7 @@ msgstr "还没有活动"
 msgid "No child task"
 msgstr "没有子任务"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:291
+#: src/containers/namespace-detail/namespace-detail.tsx:293
 #: src/containers/search/search.tsx:152
 msgid "No collections yet"
 msgstr "还没有集合"
@@ -1884,7 +1884,7 @@ msgstr "没有选择标签或摘要。"
 msgid "No task group"
 msgstr "没有任务组"
 
-#: src/components/my-imports/import-console.tsx:96
+#: src/components/my-imports/import-console.tsx:99
 msgid "No task messages available"
 msgstr "没有可用的任务消息"
 
@@ -2349,7 +2349,7 @@ msgstr "需要超级用户权限进行编辑。"
 msgid "Reserve resources"
 msgstr "保留资源"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:172
+#: src/containers/namespace-detail/namespace-detail.tsx:174
 msgid "Resources"
 msgstr "资源"
 
@@ -2396,7 +2396,7 @@ msgstr "保存对命名空间 \"{0}\" 的更改。"
 msgid "Saved changes to user \"{username}\"."
 msgstr "保存对用户 \"{username}\" 的更改。"
 
-#: src/components/my-imports/import-console.tsx:81
+#: src/components/my-imports/import-console.tsx:84
 msgid "Scroll to end"
 msgstr "滚动至末尾"
 
@@ -2451,7 +2451,7 @@ msgstr "选择组"
 #~ msgid "Select input"
 #~ msgstr "Select input"
 
-#: src/components/my-imports/import-list.tsx:234
+#: src/components/my-imports/import-list.tsx:235
 msgid "Select namespace"
 msgstr "选择命名空间"
 
@@ -2505,7 +2505,7 @@ msgid "Sign all"
 msgstr "签发所有"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:27
-#: src/containers/namespace-detail/namespace-detail.tsx:605
+#: src/containers/namespace-detail/namespace-detail.tsx:612
 msgid "Sign all collections"
 msgstr "签发所有集合"
 
@@ -2547,7 +2547,7 @@ msgstr "已签名并批准"
 msgid "Signed only"
 msgstr "仅包括签发的"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:411
+#: src/containers/namespace-detail/namespace-detail.tsx:418
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "开始签发命名空间 \"{0}\" 中的所有集合。"
 
@@ -2590,7 +2590,7 @@ msgstr "状态"
 msgid "Status"
 msgstr "状态"
 
-#: src/components/my-imports/import-console.tsx:177
+#: src/components/my-imports/import-console.tsx:180
 msgid "Status:"
 msgstr "状态："
 
@@ -2957,8 +2957,8 @@ msgstr "更新的 <0/>"
 msgid "Upload"
 msgstr "上传"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:298
-#: src/containers/namespace-detail/namespace-detail.tsx:617
+#: src/containers/namespace-detail/namespace-detail.tsx:300
+#: src/containers/namespace-detail/namespace-detail.tsx:624
 msgid "Upload collection"
 msgstr "上传集合"
 
@@ -3128,7 +3128,7 @@ msgstr "用户创建后将会出现"
 msgid "Version"
 msgstr "版本"
 
-#: src/components/my-imports/import-console.tsx:185
+#: src/components/my-imports/import-console.tsx:188
 msgid "Version:"
 msgstr "版本："
 
@@ -3273,11 +3273,11 @@ msgstr "您有未保存的更改"
 msgid "add-user-modal"
 msgstr "add-user-modal"
 
-#: src/components/my-imports/import-console.tsx:144
+#: src/components/my-imports/import-console.tsx:147
 msgid "approved"
 msgstr "已批准"
 
-#: src/components/my-imports/import-console.tsx:146
+#: src/components/my-imports/import-console.tsx:149
 msgid "could not be determined yet"
 msgstr "还无法决定"
 
@@ -3308,7 +3308,7 @@ msgstr "按页面"
 msgid "popover example"
 msgstr "弹出示例"
 
-#: src/components/my-imports/import-console.tsx:140
+#: src/components/my-imports/import-console.tsx:143
 msgid "rejected"
 msgstr "拒绝"
 
@@ -3332,11 +3332,11 @@ msgstr "签发状态"
 msgid "tags"
 msgstr "标签"
 
-#: src/components/my-imports/import-console.tsx:142
+#: src/components/my-imports/import-console.tsx:145
 msgid "waiting for approval"
 msgstr "等待批准"
 
-#: src/components/my-imports/import-console.tsx:135
+#: src/components/my-imports/import-console.tsx:138
 msgid "waiting for import to finish"
 msgstr "等待导入结束"
 
