@@ -42,6 +42,7 @@ export const SignAllCertificatesModal: React.FC<Props> = ({
       actions={[
         <Button
           key='sign-all'
+          data-cy='modal-sign-button'
           variant={ButtonVariant.primary}
           onClick={onSubmit}
         >
@@ -67,14 +68,18 @@ export const SignAllCertificatesModal: React.FC<Props> = ({
               <Trans>Signed version(s)</Trans>
             </SplitItem>
             <SplitItem>
-              <Badge isRead>{numberOfAffected - affectedUnsigned}</Badge>
+              <Badge isRead data-cy='signed-number-badge'>
+                {numberOfAffected - affectedUnsigned}
+              </Badge>
             </SplitItem>
             <SplitItem></SplitItem>
             <SplitItem>
               <Trans>Unsigned version(s)</Trans>
             </SplitItem>
             <SplitItem>
-              <Badge isRead>{affectedUnsigned}</Badge>
+              <Badge isRead data-cy='unsigned-number-badge'>
+                {affectedUnsigned}
+              </Badge>
             </SplitItem>
           </Split>
         </GridItem>
