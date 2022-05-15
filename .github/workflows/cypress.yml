@@ -53,6 +53,26 @@ jobs:
         echo '\
           FROM ghcr.io/pulp/pulp-ci-centos:latest
 
+          # Add the folders permissions copy files etc.
+          # RUN set -ex; \
+          #   mkdir -p /entrypoints.d \
+          #           /etc/ansible \
+          #   && mkdir --mode=2775 -p /var/lib/pulp \
+          #   && chown ${USER_NAME}:${USER_GROUP} /var/lib/pulp \
+          #   && mkdir --mode=2775 -p \
+          #           /var/lib/pulp/artifact \
+          #           /var/lib/pulp/tmp \
+          #           /var/lib/pulp/scripts \
+          #           /etc/pulp/certs \
+          #           /tmp/ansible \
+          #   && chown ${USER_NAME}:${USER_GROUP} /var/lib/pulp/artifact \
+          #   && chown ${USER_NAME}:${USER_GROUP} /var/lib/pulp/tmp \
+          #   && chown ${USER_NAME}:${USER_GROUP} /var/lib/pulp/scripts \
+          #   && chown ${USER_NAME}:${USER_GROUP} /etc/pulp/certs \
+          #   && chown ${USER_NAME}:${USER_GROUP} \
+          #       /tmp/ansible \
+          #       /etc/ansible \
+
           RUN pip3 install --upgrade \
             requests \
             git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
@@ -105,6 +125,10 @@ jobs:
              --tmpfs /var/lib/containers \
              --device /dev/fuse \
              localhost/pulp/pulp-galaxy-ng:latest
+
+    - name: "Add signing service"
+      run: | # Run the signing-setup script
+
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v2
