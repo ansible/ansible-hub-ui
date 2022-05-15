@@ -150,6 +150,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         id: collection.latest_version.id,
         version: collection.latest_version.version,
         created: collection.latest_version.created_at,
+        sign_state: collection.latest_version.sign_state,
       });
     }
 
@@ -246,7 +247,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           <>
             <SignAllCertificatesModal
               name={collectionName}
-              numberOfAffected={collection.all_versions.length}
+              numberOfAffected={collection.total_versions}
+              affectedUnsigned={collection.unsigned_versions}
               isOpen={this.state.isOpenSignAllModal}
               onSubmit={this.signCollection}
               onCancel={() => {
