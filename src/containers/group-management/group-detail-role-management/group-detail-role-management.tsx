@@ -88,7 +88,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
     setLoading(true);
 
     Promise.all([
-      RoleAPI.list({ name__startswith: 'galaxy.' }),
+      RoleAPI.list({ name__startswith: 'galaxy.', page_size: 100000 }),
       GroupRoleAPI.listRoles(group.id, {
         ...ParamHelper.getReduced(params, ['id', 'tab', ...nonQueryParams]),
         sort: ParamHelper.validSortParams(params['sort'], ['role'], 'role'),
@@ -244,6 +244,31 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
 
   const groups = Constants.PERMISSIONS;
 
+  const tableHeader = {
+    headers: [
+      {
+        title: '',
+        type: 'none',
+        id: 'expander',
+      },
+      {
+        title: t`Role`,
+        type: 'alpha',
+        id: 'role',
+      },
+      {
+        title: t`Description`,
+        type: 'none',
+        id: 'description',
+      },
+      {
+        title: '',
+        type: 'none',
+        id: 'kebab',
+      },
+    ],
+  };
+
   const getSelectedRoles = (role, group) =>
     role.permissions
       .filter((selected) =>
@@ -364,7 +389,11 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
           />
           {!noFilteredData ? (
             <>
-              <RoleListTable params={params} updateParams={updateParams}>
+              <RoleListTable
+                params={params}
+                updateParams={updateParams}
+                tableHeader={tableHeader}
+              >
                 {roles.map((role, i) => (
                   <ExpandableRow
                     key={i}
