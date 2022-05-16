@@ -1,10 +1,18 @@
 describe('tests the approval list screen ', () => {
+  before(() => {
+    cy.settings({
+      GALAXY_AUTO_SIGN_COLLECTIONS: true,
+    });
+  });
   beforeEach(() => {
     cy.login();
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'ansible');
     cy.galaxykit('-i collection upload ansible network');
     cy.menuGo('Collections > Approval');
+  });
+  after(() => {
+    cy.settings();
   });
 
   it('has a default Needs Review filter', () => {
