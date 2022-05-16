@@ -24,6 +24,7 @@ interface IState {
   token: string;
   alerts: AlertType[];
   loading: boolean;
+  loadingToken: boolean;
 }
 
 class TokenPage extends React.Component<RouteComponentProps, IState> {
@@ -34,6 +35,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
       token: undefined,
       alerts: [],
       loading: true,
+      loadingToken: true,
     };
   }
 
@@ -121,7 +123,9 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
 
   private loadToken() {
     ActiveUserAPI.getToken()
-      .then((result) => this.setState({ token: result.data.token }))
+      .then((result) =>
+        this.setState({ token: result.data.token, loadingToken: false }),
+      )
       .catch((e) => {
         const { status, statusText } = e.response;
         this.setState({
@@ -133,6 +137,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               description: errorMessage(status, statusText),
             },
           ],
+          loadingToken: false,
         });
       });
   }
