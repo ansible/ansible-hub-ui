@@ -71,6 +71,7 @@ describe('edit a remote repository', () => {
 
   it(`edits remote repo 'rh-certified'`, () => {
     cy.visit(remoteRepoUrl);
+    cy.get('[data-cy="kebab-toggle"]').should('be.visible');
     cy.get('[data-cy="kebab-toggle"]').eq(1).click(); // click the kebab menu on the 'rh-certified' repo
     cy.contains('Edit').click();
     cy.get('input[id="name"]').should('be.disabled'); //has a readonly name field
@@ -99,6 +100,7 @@ describe('edit a remote repository', () => {
     cy.wait('@editRemote');
 
     // verify values have been saved properly.
+    cy.get('[aria-label="Actions"]').should('be.visible');
     cy.get('[aria-label="Actions"]').eq(1).click(); // click the kebab menu on the 'rh-certified' repo
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
@@ -113,6 +115,7 @@ describe('edit a remote repository', () => {
     cy.wait('@editRemote');
 
     // clear all values
+    cy.get('[aria-label="Actions"]').should('be.visible');
     cy.get('[aria-label="Actions"]').eq(1).click(); // click the kebab menu on the 'rh-certified' repo
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
