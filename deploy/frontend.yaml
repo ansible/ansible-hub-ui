@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: automation-hub-frontend
+objects:
+  - apiVersion: cloud.redhat.com/v1alpha1
+    kind: Frontend
+    metadata:
+      name: automation-hub
+    spec:
+      envName: ${ENV_NAME}
+      title: automation-hub
+      deploymentRepo: https://github.com/ansible/ansible-hub-ui
+      API:
+        versions:
+          - v1
+      frontend:
+        paths:
+          - /apps/automation-hub
+      image: ${IMAGE}:${IMAGE_TAG}
+      navItems:
+        - appId: "automationHub"
+          title: "Automation Hub"
+          href: "/ansible/automation-hub"
+          product: "Red Hat Insights"
+      module:
+        manifestLocation: "/apps/automation-hub/fed-mods.json"
+        modules:
+          - id: "ansible-automation-hub"
+            module: "./RootApp"
+            routes:
+              - pathname: /ansible/automation-hub
+
+parameters:
+  - name: ENV_NAME
+    required: true
+  - name: IMAGE_TAG
+    required: true
+  - name: IMAGE
+    value: quay.io/cloudservices/ansible-hub-ui
