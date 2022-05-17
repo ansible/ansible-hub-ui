@@ -1,7 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
 
-import { RoleType, RoleAPI } from 'src/api';
+import { RoleType, RoleAPI, GroupRoleType } from 'src/api';
 
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
 import {
@@ -21,7 +21,7 @@ import { filterIsSet } from 'src/utilities';
 import { CubesIcon } from '@patternfly/react-icons';
 
 interface SelectRolesProps {
-  assignedRoles: RoleType[];
+  assignedRoles: GroupRoleType[];
   selectedRoles: RoleType[];
   onRolesUpdate?: (roles) => void;
 }
@@ -81,7 +81,7 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
     );
   }
 
-  const isAssigned = (name) => assignedRoles.some((role) => role.name === name);
+  const isAssigned = (name) => assignedRoles.some((role) => role.role === name);
 
   const tabHeader = {
     headers: [
