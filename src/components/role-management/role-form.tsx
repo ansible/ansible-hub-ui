@@ -137,6 +137,7 @@ export class RoleForm extends React.Component<IProps, IState> {
                 alignItems={{ default: 'alignItemsCenter' }}
                 key={group.name}
                 className={group.name}
+                data-cy={`RoleForm-Permissions-row-${group.name}`}
               >
                 <FlexItem style={{ minWidth: '200px' }}>
                   {i18n._(group.label)}

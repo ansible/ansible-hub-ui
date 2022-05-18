@@ -821,3 +821,33 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
     });
   });
 });
+
+Cypress.Commands.add('createRole', {}, (name, description, permissions) => {
+  cy.visit('ui/roles/create');
+
+  cy.get('input[id="role_name"]').type(name);
+  cy.get('input[id="role_description"]').type(description);
+
+  permissions.forEach((permissionElement) => {
+    cy.get(
+      `[data-cy=RoleForm-Permissions-row-${permissionElement.group}] .pf-c-select`,
+    ).click();
+    permissionElement.permissions.forEach((permission) => {
+      cy.contains('button', permission).click();
+    });
+
+    // untoggle permission options
+    cy.contains('Permissions').click();
+  });
+
+  cy.intercept('POST', Cypress.env('pulpPrefix') + 'roles/').as('saveRole');
+  cy.intercept(
+    'GET',
+    Cypress.env('pulpPrefix') + 'roles/?name__startswith=galaxy.*',
+  ).as('galaxyRoles');
+
+  cy.contains('Save').click();
+
+  cy.wait('@saveRole');
+  cy.wait('@galaxyRoles');
+});
