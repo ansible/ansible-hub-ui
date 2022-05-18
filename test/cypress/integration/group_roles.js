@@ -27,20 +27,18 @@ describe('add roles to a group', () => {
     cy.wait('@loadGroups');
     cy.get('button').contains('Create').click();
     cy.get('input[id="group_name"]').type(`test group${num}`);
+
     cy.intercept('POST', Cypress.env('prefix') + '_ui/v1/groups/').as(
       'createGroup',
     );
-    cy.intercept(
-      'GET',
-      'http://localhost:8002/pulp/api/v3/roles/?name__startswith=galaxy.&offset=0&limit=10',
-    ).as('loadGroup');
+
     cy.get('[data-cy="create-group-button"]').contains('Create').click();
+
     cy.wait('@createGroup');
-    cy.wait('@loadGroup');
 
     // add roles
 
-    cy.get('button').contains('Add roles').click();
+    cy.contains('Add roles').click();
     cy.get('td')
       .contains(`galaxy.alpha${num}`)
       .siblings('.pf-c-table__check')
