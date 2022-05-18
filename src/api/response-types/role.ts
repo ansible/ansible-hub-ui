@@ -6,3 +6,10 @@ export class RoleType {
   permissions?: string[];
   locked: boolean;
 }
+
+export class GroupRoleType {
+  pulp_href: string;
+  pulp_created: string;
+  role: string;
+  content_object: string;
+}
