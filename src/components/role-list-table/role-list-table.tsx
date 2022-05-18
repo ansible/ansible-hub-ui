@@ -103,7 +103,11 @@ export const ExpandableRow: React.FC<{
       {expandableRowContent && (
         <Tr isExpanded={isExpanded}>
           <Td colSpan={colSpan ?? 4}>
-            <ExpandableRowContent>{expandableRowContent}</ExpandableRowContent>
+            {isExpanded && (
+              <ExpandableRowContent>
+                {expandableRowContent}
+              </ExpandableRowContent>
+            )}
           </Td>
         </Tr>
       )}
