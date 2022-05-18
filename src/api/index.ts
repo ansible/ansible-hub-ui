@@ -62,6 +62,6 @@ export { GenericPulpAPI } from './generic-pulp';
 export { SettingsAPI } from './settings';
 export { SettingsType } from './response-types/settings';
 export { SignCollectionAPI } from './sign-collections';
-export { RoleType } from './response-types/role';
+export { RoleType, GroupRoleType } from './response-types/role';
 export { CertificateUploadAPI } from './certificate-upload';
 export { Repositories } from './repositories';
