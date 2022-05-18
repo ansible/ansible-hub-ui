@@ -58,7 +58,7 @@ export { RepoSelector } from './repo-selector/repo-selector';
 export { RepositoryForm } from './execution-environment/repository-form';
 export { RoleForm } from './role-management/role-form';
 export { RoleHeader } from './role-management/role-header';
-
+export { RolePermissions } from './role-management/role-permissions';
 export { ResourcesForm } from './namespace-form/resources-form';
 export { TagManifestModal } from './execution-environment/tag-manifest-modal';
 export { ShaLabel } from './sha-label/sha-label';
