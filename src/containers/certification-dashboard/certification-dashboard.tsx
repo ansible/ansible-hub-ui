@@ -19,12 +19,14 @@ import {
   Button,
   DropdownItem,
   Label,
+  ButtonVariant,
 } from '@patternfly/react-core';
 
 import {
   ExclamationTriangleIcon,
   ExclamationCircleIcon,
   CheckCircleIcon,
+  DownloadIcon,
 } from '@patternfly/react-icons';
 
 import {
@@ -33,6 +35,7 @@ import {
   TaskAPI,
   CertificateUploadAPI,
   Repositories,
+  CollectionAPI,
 } from 'src/api';
 import { errorMessage, filterIsSet, ParamHelper } from 'src/utilities';
 import {
@@ -349,21 +352,14 @@ class CertificationDashboard extends React.Component<
         <td>{version.namespace}</td>
         <td>{version.name}</td>
         <td>
-          <Link
-            to={formatPath(
-              Paths.collectionByRepo,
-              {
-                namespace: version.namespace,
-                collection: version.name,
-                repo: version.repository_list[0],
-              },
-              {
-                version: version.version,
-              },
-            )}
+          <Button
+            variant={ButtonVariant.link}
+            onClick={() => {
+              this.download(version.namespace, version.name, version.version);
+            }}
           >
-            {version.version}
-          </Link>
+            {version.version} <DownloadIcon />
+          </Button>
         </td>
         <td>
           <DateComponent date={version.created_at} />
@@ -385,7 +381,7 @@ class CertificationDashboard extends React.Component<
     }
 
     const needUploadSignature =
-      (this.context.settings.GALAXY_REQUIRE_SIGNATURE_FOR_APPROVAL ?? true) &&
+      this.context.settings.GALAXY_SIGNATURE_UPLOAD_ENABLED &&
       version.sign_state === 'unsigned';
     const approveButton = [
       needUploadSignature && (
@@ -659,6 +655,14 @@ class CertificationDashboard extends React.Component<
         },
       ],
     });
+  }
+
+  private download(namespace: string, name: string, version: string) {
+    CollectionAPI.getDownloadURL('staging', namespace, name, version).then(
+      (downloadURL: string) => {
+        window.location.assign(downloadURL);
+      },
+    );
   }
 }
 
