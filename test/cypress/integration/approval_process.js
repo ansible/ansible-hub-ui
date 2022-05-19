@@ -23,11 +23,17 @@ describe('Approval Dashboard process', () => {
   it('should approve', () => {
     cy.visit('/ui/approval-dashboard');
     cy.contains('[data-cy="CertificationDashboard-row"]', 'Needs review');
-    cy.contains('[data-cy="CertificationDashboard-row"] button', 'Sign and approve').click();
-    cy.contains('.body', 'No results found', { timeout: 8000});
+    cy.contains(
+      '[data-cy="CertificationDashboard-row"] button',
+      'Sign and approve',
+    ).click();
+    cy.contains('.body', 'No results found', { timeout: 8000 });
     cy.visit('/ui/approval-dashboard');
     cy.contains('button', 'Clear all filters').click();
-    cy.contains('[data-cy="CertificationDashboard-row"]', 'Signed and approved');
+    cy.contains(
+      '[data-cy="CertificationDashboard-row"]',
+      'Signed and approved',
+    );
   });
 
   it('should see item in collections.', () => {
