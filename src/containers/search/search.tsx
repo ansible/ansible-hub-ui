@@ -296,6 +296,18 @@ class Search extends React.Component<RouteComponentProps, IState> {
       .then((res) => {
         const taskId = parsePulpIDFromURL(res.data.task);
         return waitForTask(taskId).then(() => {
+          const title = !collection.deprecated
+            ? t`The collection "${collection.name}" has been successfully deprecated.`
+            : t`The collection "${collection.name}" has been successfully undeprecated.`;
+          this.setState({
+            alerts: [
+              ...this.state.alerts,
+              {
+                title: title,
+                variant: 'success',
+              },
+            ],
+          });
           this.load();
         });
       })
