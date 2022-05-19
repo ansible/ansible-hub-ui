@@ -190,6 +190,16 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       'view_type',
     ];
 
+    const total_versions = collections.reduce(
+      (acc, c) => acc + c.total_versions,
+      0,
+    );
+
+    const unsigned_versions = collections.reduce(
+      (acc, c) => acc + c.unsigned_versions,
+      0,
+    );
+
     return (
       <React.Fragment>
         <AlertList
@@ -349,7 +359,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         {canSign && (
           <SignAllCertificatesModal
             name={this.state.namespace.name}
-            numberOfAffected={this.state.itemCount}
+            numberOfAffected={total_versions}
+            affectedUnsigned={unsigned_versions}
             isOpen={this.state.isOpenSignModal}
             onSubmit={() => {
               this.signAllCertificates(namespace);

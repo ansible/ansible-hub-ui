@@ -1,15 +1,25 @@
 import { t, Trans } from '@lingui/macro';
 import {
+  Badge,
   Button,
   ButtonVariant,
+  Form,
+  FormGroup,
+  FormSelect,
+  FormSelectOption,
+  Grid,
+  GridItem,
   Modal,
   ModalVariant,
+  Split,
+  SplitItem,
 } from '@patternfly/react-core';
 import React from 'react';
 
 interface Props {
   name: string;
   numberOfAffected: number;
+  affectedUnsigned: number;
   isOpen: boolean;
   onSubmit: () => void;
   onCancel: () => void;
@@ -18,35 +28,72 @@ interface Props {
 export const SignAllCertificatesModal: React.FC<Props> = ({
   name,
   numberOfAffected,
+  affectedUnsigned,
   isOpen,
   onSubmit,
   onCancel,
-}) => (
-  <Modal
-    variant={ModalVariant.medium}
-    title={t`Sign all collections`}
-    isOpen={isOpen}
-    onClose={onCancel}
-    actions={[
-      <Button key='sign-all' variant={ButtonVariant.primary} onClick={onSubmit}>
-        {t`Sign all`}
-      </Button>,
-      <Button key='cancel' variant={ButtonVariant.link} onClick={onCancel}>
-        {t`Cancel`}
-      </Button>,
-    ]}
-  >
-    <p>
-      <Trans>
-        You are about to sign <strong>all</strong> versions under{' '}
-        <strong>{name}</strong>.
-      </Trans>
-    </p>
-    <br />
-    <p>
-      <Trans>
-        This action will affect <strong>{numberOfAffected}</strong> version(s).
-      </Trans>
-    </p>
-  </Modal>
-);
+}) => {
+  return (
+    <Modal
+      variant={ModalVariant.medium}
+      title={t`Sign all collections`}
+      isOpen={isOpen}
+      onClose={onCancel}
+      actions={[
+        <Button
+          key='sign-all'
+          variant={ButtonVariant.primary}
+          onClick={onSubmit}
+        >
+          {t`Sign all`}
+        </Button>,
+        <Button key='cancel' variant={ButtonVariant.link} onClick={onCancel}>
+          {t`Cancel`}
+        </Button>,
+      ]}
+    >
+      <Grid hasGutter>
+        <GridItem span={12}>
+          <p>
+            <Trans>
+              You are about to sign <strong>{numberOfAffected}</strong>{' '}
+              version(s) under <strong>{name}</strong>.
+            </Trans>
+          </p>
+        </GridItem>
+        <GridItem span={12}>
+          <Split hasGutter>
+            <SplitItem>
+              <Trans>Signed version(s)</Trans>
+            </SplitItem>
+            <SplitItem>
+              <Badge isRead>{numberOfAffected - affectedUnsigned}</Badge>
+            </SplitItem>
+            <SplitItem></SplitItem>
+            <SplitItem>
+              <Trans>Unsigned version(s)</Trans>
+            </SplitItem>
+            <SplitItem>
+              <Badge isRead>{affectedUnsigned}</Badge>
+            </SplitItem>
+          </Split>
+        </GridItem>
+        <GridItem span={12}>
+          <Form>
+            <FormGroup
+              fieldId='service-selector'
+              label={t`Signing service selector:`}
+            >
+              <FormSelect value='ansible-default' id='service-selector'>
+                <FormSelectOption
+                  value='ansible-default'
+                  label='ansible-default'
+                />
+              </FormSelect>
+            </FormGroup>
+          </Form>
+        </GridItem>
+      </Grid>
+    </Modal>
+  );
+};
