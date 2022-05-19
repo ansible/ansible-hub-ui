@@ -1,5 +1,8 @@
 describe('add roles to a group', () => {
-  let num = (~~(Math.random() * 1000000)).toString();
+  const num = (~~(Math.random() * 1000000)).toString();
+  const groupName = 'test_group_627477'; // `test_group_${num}`;
+  const roleName = 'galaxy.test_role_627477'; // `galaxy.test_role_${num}`
+
   beforeEach(() => {
     cy.login();
   });
@@ -64,4 +67,58 @@ describe('add roles to a group', () => {
     cy.get('.pf-c-dropdown__menu-item').contains('Delete').click();
     cy.get(`[data-cy=delete-button]`).click();
   });
+
+  after(() => {
+    // cy.galaxykit("group delete", groupName);
+    // cy.deleteRole(roleName);
+  });
+
+  // it('should add a new role to group', () => {
+  //   const permissions = [
+  //     {
+  //       group: 'groups',
+  //       permissions: [
+  //         'Add group',
+  //         'Change group',
+  //         'Delete group',
+  //         'View group',
+  //       ],
+  //     },
+  //     {
+  //       group: 'namespaces',
+  //       permissions: ['Add namespace', 'Delete namespace']
+  //     },
+  //   ]
+  //   // cy.createRole(roleName, 'test role for test group', permissions);
+  //   // cy.createGroup(groupName);
+  //   // cy.addRolesToGroup(groupName, [roleName]);
+
+  //   cy.visit('/ui/group/59');
+  //   cy.get('[data-cy="RoleListTable"]').contains(roleName);
+  //   cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${roleName}"] .pf-c-table__toggle`).click();
+
+  //   cy.contains('1 more').click();
+  //   permissions.forEach(({ permissions }) => {
+  //     permissions.forEach(perm => {
+  //       cy.contains(perm)
+  //     })
+  //   })
+  // });
+
+  it('test Add roles modal', () => {
+    cy.visit('/ui/group/59');
+    cy.get('[data-cy=add-roles]').click();
+  });
+
+  // TODO
+  //it('test filtering in group roles')
+
+  // it('test for already added role')
+
+  // it('should be able to remove role from group', () => {
+  //   cy.visit('/ui/group/59');
+  //   cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${roleName}"] [data-cy="kebab-toggle"]`).click();
+  //   cy.contains('Remove Role').click();
+  //   cy.get('[data-cy="DeleteModal"]').parent().click();
+  // });
 });

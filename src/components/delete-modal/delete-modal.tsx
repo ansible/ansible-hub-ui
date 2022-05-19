@@ -9,12 +9,20 @@ export interface IProps {
   isDisabled?: boolean;
   title: string;
   spinner?: boolean;
+  'data-cy'?: string;
 }
 
 export class DeleteModal extends React.Component<IProps> {
   render() {
-    const { cancelAction, children, deleteAction, isDisabled, title, spinner } =
-      this.props;
+    const {
+      cancelAction,
+      children,
+      deleteAction,
+      isDisabled,
+      title,
+      spinner,
+      ...props
+    } = this.props;
 
     return (
       <Modal
