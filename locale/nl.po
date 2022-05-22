@@ -12,15 +12,15 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/headers/collection-header.tsx:175
+#: src/components/headers/collection-header.tsx:176
 msgid "(latest)"
 msgstr "(laatst)"
 
-#: src/components/headers/collection-header.tsx:167
+#: src/components/headers/collection-header.tsx:168
 msgid "(signed)"
 msgstr "(signed)"
 
-#: src/components/headers/collection-header.tsx:167
+#: src/components/headers/collection-header.tsx:168
 msgid "(unsigned)"
 msgstr "(unsigned)"
 
@@ -64,7 +64,7 @@ msgstr "<0>Opmerking:</0> De volgende links kunnen door je browser worden geblok
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:326
+#: src/containers/namespace-detail/namespace-detail.tsx:336
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Opmerking:</0> Gebruik deze URL om ansible-galaxy te configureren om collecties naar deze namespace te uploaden. Meer informatie over configuraties van ansible-galaxy vindt u <1>hier</1><2> </2><3/>."
 
@@ -109,7 +109,7 @@ msgstr "Een tag mag kleine letters en hoofdletters bevatten, ASCII alfabetische 
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:390
+#: src/containers/namespace-detail/namespace-detail.tsx:401
 msgid "API Error: Failed to set deprecation."
 msgstr "API-fout: Mislukt om deprecatie in te stellen."
 
@@ -118,9 +118,9 @@ msgstr "API-fout: Mislukt om deprecatie in te stellen."
 #~ msgid "API Error: {0}"
 #~ msgstr "API Error: {0}"
 
-#: src/components/headers/collection-header.tsx:579
-#: src/components/headers/collection-header.tsx:630
-#: src/containers/namespace-detail/namespace-detail.tsx:408
+#: src/components/headers/collection-header.tsx:581
+#: src/components/headers/collection-header.tsx:632
+#: src/containers/namespace-detail/namespace-detail.tsx:419
 msgid "API Error: {status}"
 msgstr "API-fout: {status}"
 
@@ -315,7 +315,7 @@ msgstr "Ik kan niet op afstand updaten zonder dat er een distributie aan vastzit
 #: src/components/import-modal/import-modal.tsx:78
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/repositories/remote-form.tsx:149
-#: src/components/signing/sign-all-certificates-modal.tsx:35
+#: src/components/signing/sign-all-certificates-modal.tsx:51
 #: src/components/signing/sign-single-certificate-modal.tsx:35
 #: src/components/signing/upload-sign-certificate-modal.tsx:49
 #: src/components/user-form/user-form.tsx:224
@@ -330,11 +330,11 @@ msgstr "Annuleren"
 msgid "Canceled"
 msgstr "Geannuleerd"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:578
+#: src/containers/namespace-detail/namespace-detail.tsx:589
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "Kan geen namespace verwijderen totdat <0/>de afhankelijkheden van collecties <1/>zijn verwijderd."
 
-#: src/components/headers/collection-header.tsx:202
+#: src/components/headers/collection-header.tsx:203
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "Kan niet verwijderen totdat collecties <0/>die van deze collectie afhankelijk zijn, <1/>zijn verwijderd."
 
@@ -469,16 +469,16 @@ msgstr "Code"
 msgid "Collection"
 msgstr "Collectie"
 
-#: src/components/headers/collection-header.tsx:785
+#: src/components/headers/collection-header.tsx:787
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "Collection \"{name} v{collectionVersion}\" could not be deleted."
 
-#: src/components/headers/collection-header.tsx:714
-#: src/components/headers/collection-header.tsx:729
+#: src/components/headers/collection-header.tsx:716
+#: src/components/headers/collection-header.tsx:731
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "Collectieversie \"{name} v{collectionVersion}\" succesvol verwijderd."
 
-#: src/components/headers/collection-header.tsx:832
+#: src/components/headers/collection-header.tsx:834
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "Collection \"{name}\" could not be deleted."
 
@@ -486,7 +486,7 @@ msgstr "Collection \"{name}\" could not be deleted."
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "Collection \"{name}\" could not be downloaded."
 
-#: src/components/headers/collection-header.tsx:808
+#: src/components/headers/collection-header.tsx:810
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "Collectieversie \"{name}\" succesvol verwijderd."
 
@@ -515,7 +515,7 @@ msgstr "Collectie heeft geen afhankelijkheden."
 msgid "Collection is not being used by any collection."
 msgstr "Collectie wordt niet gebruikt door een collectie."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:538
+#: src/containers/namespace-detail/namespace-detail.tsx:549
 msgid "Collection repositories could not be displayed."
 msgstr "Collection repositories could not be displayed."
 
@@ -523,7 +523,7 @@ msgstr "Collection repositories could not be displayed."
 msgid "Collection upload canceled"
 msgstr "Upload collectie geannuleerd"
 
-#: src/components/headers/collection-header.tsx:267
+#: src/components/headers/collection-header.tsx:269
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:293
@@ -539,7 +539,7 @@ msgid "Collections"
 msgstr "Collecties"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:252
-#: src/containers/namespace-detail/namespace-detail.tsx:294
+#: src/containers/namespace-detail/namespace-detail.tsx:304
 #: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
 msgstr "Collecties zullen verschijnen zodra geüpload"
@@ -632,7 +632,7 @@ msgstr "inhoud"
 msgid "Content count"
 msgstr "Telling inhoud"
 
-#: src/components/headers/collection-header.tsx:529
+#: src/components/headers/collection-header.tsx:531
 msgid "Contents"
 msgstr "Inhoud"
 
@@ -772,11 +772,11 @@ msgstr "Collectie verwijderen"
 msgid "Delete collection remote"
 msgstr "Collectie op afstand verwijderen"
 
-#: src/components/headers/collection-header.tsx:329
+#: src/components/headers/collection-header.tsx:331
 msgid "Delete collection version?"
 msgstr "Collectieversie selecteren"
 
-#: src/components/headers/collection-header.tsx:330
+#: src/components/headers/collection-header.tsx:332
 msgid "Delete collection?"
 msgstr "Collectie verwijderen"
 
@@ -808,8 +808,8 @@ msgstr "Namespace van de container verwijderen"
 msgid "Delete distribution"
 msgstr "Distributie verwijderen"
 
-#: src/components/headers/collection-header.tsx:194
-#: src/components/headers/collection-header.tsx:210
+#: src/components/headers/collection-header.tsx:195
+#: src/components/headers/collection-header.tsx:211
 msgid "Delete entire collection"
 msgstr "Volledige collectie verwijderen"
 
@@ -826,12 +826,12 @@ msgid "Delete image?"
 msgstr "Delete image?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:572
-#: src/containers/namespace-detail/namespace-detail.tsx:586
+#: src/containers/namespace-detail/namespace-detail.tsx:583
+#: src/containers/namespace-detail/namespace-detail.tsx:597
 msgid "Delete namespace"
 msgstr "Namespace verwijderen"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:222
+#: src/containers/namespace-detail/namespace-detail.tsx:232
 msgid "Delete namespace?"
 msgstr "Namespace verwijderen"
 
@@ -859,20 +859,20 @@ msgstr "Gebruiker verwijderen"
 msgid "Delete user?"
 msgstr "Gebruiker verwijderen?"
 
-#: src/components/headers/collection-header.tsx:222
+#: src/components/headers/collection-header.tsx:223
 msgid "Delete version {0}"
 msgstr "Versie {0} verwijderen"
 
-#: src/components/headers/collection-header.tsx:338
+#: src/components/headers/collection-header.tsx:340
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 msgstr "<0>{0} v{collectionVersion}</0> en zijn gegevens zullen verloren gaan en dit zal tot gevolg hebben dat de gehele collectie wordt verwijderd."
 
-#: src/components/headers/collection-header.tsx:347
+#: src/components/headers/collection-header.tsx:349
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "<0>{0} v{collectionVersion}</0> en zijn gegevens zullen verloren gaan."
 
-#: src/components/headers/collection-header.tsx:357
-#: src/containers/namespace-detail/namespace-detail.tsx:227
+#: src/components/headers/collection-header.tsx:359
+#: src/containers/namespace-detail/namespace-detail.tsx:237
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "<0>{0}</0> en zijn gegevens zullen verloren gaan."
 
@@ -900,17 +900,17 @@ msgstr "Het verwijderen van deze groep zal invloed hebben op {count} gebruikers.
 msgid "Deleting yourself is not allowed."
 msgstr "Jezelf verwijderen is niet toegestaan."
 
-#: src/components/headers/collection-header.tsx:543
+#: src/components/headers/collection-header.tsx:545
 #: src/containers/collection-detail/collection-dependencies.tsx:105
 #: src/containers/collection-detail/collection-dependencies.tsx:134
 msgid "Dependencies"
 msgstr "Afhankelijkheden"
 
-#: src/components/headers/collection-header.tsx:861
+#: src/components/headers/collection-header.tsx:863
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "Dependencies for collection \"{name}\" could not be displayed."
 
-#: src/components/headers/collection-header.tsx:755
+#: src/components/headers/collection-header.tsx:757
 msgid "Dependent collections"
 msgstr "Afhankelijke collecties"
 
@@ -950,11 +950,11 @@ msgstr "Digest"
 msgid "Distribution name"
 msgstr "Naam distributie"
 
-#: src/components/headers/collection-header.tsx:157
+#: src/components/headers/collection-header.tsx:158
 msgid "Docs site"
 msgstr "Locatie documenten"
 
-#: src/components/headers/collection-header.tsx:524
+#: src/components/headers/collection-header.tsx:526
 #: src/containers/collection-detail/collection-docs.tsx:121
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
@@ -1033,7 +1033,7 @@ msgstr "Uitvoeringsomgeving bewerken"
 msgid "Edit group permissions"
 msgstr "Groepspermissies bewerken"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:562
+#: src/containers/namespace-detail/namespace-detail.tsx:573
 msgid "Edit namespace"
 msgstr "Namespace wijzigen"
 
@@ -1292,15 +1292,15 @@ msgstr "Mislukt"
 msgid "Failed to retrieve user data."
 msgstr "Ophalen gebruikersgegevens mislukt."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:409
+#: src/containers/namespace-detail/namespace-detail.tsx:420
 msgid "Failed to sign all collections."
 msgstr "Failed to sign all collections."
 
-#: src/components/headers/collection-header.tsx:580
+#: src/components/headers/collection-header.tsx:582
 msgid "Failed to sign all versions in the collection."
 msgstr "Failed to sign all versions in the collection."
 
-#: src/components/headers/collection-header.tsx:631
+#: src/components/headers/collection-header.tsx:633
 msgid "Failed to sign the version."
 msgstr "Failed to sign the version."
 
@@ -1430,9 +1430,9 @@ msgid "Hide the signature"
 msgstr "Hide the signature"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
-#: src/components/headers/collection-header.tsx:366
+#: src/components/headers/collection-header.tsx:368
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
-#: src/containers/namespace-detail/namespace-detail.tsx:234
+#: src/containers/namespace-detail/namespace-detail.tsx:244
 msgid "I understand that this action cannot be undone."
 msgstr "Ik begrijp dat deze actie niet ongedaan kan worden gemaakt."
 
@@ -1476,12 +1476,12 @@ msgstr "Importeren en automatisch goedkeuren"
 msgid "Import and move to staging"
 msgstr "Importeren en verplaatsen naar staging"
 
-#: src/components/headers/collection-header.tsx:538
+#: src/components/headers/collection-header.tsx:540
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "Logboek importeren"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:603
+#: src/containers/namespace-detail/namespace-detail.tsx:614
 msgid "Imports"
 msgstr "Invoer"
 
@@ -1506,7 +1506,7 @@ msgid "Indexing started for execution environment \"{name}\"."
 msgstr "Indexing started for execution environment \"{name}\"."
 
 #: src/components/collection-detail/collection-info.tsx:57
-#: src/components/headers/collection-header.tsx:519
+#: src/components/headers/collection-header.tsx:521
 msgid "Install"
 msgstr "Installeren"
 
@@ -1538,7 +1538,7 @@ msgstr "Ongeldige bestandsnaam. Collecties moeten worden geformatteerd als 'name
 msgid "Invalid login credentials."
 msgstr "Ongeldige inloggegevens."
 
-#: src/components/headers/collection-header.tsx:159
+#: src/components/headers/collection-header.tsx:160
 msgid "Issue tracker"
 msgstr "Probleem tracker"
 
@@ -1581,7 +1581,7 @@ msgstr "Laatste synchronisatie"
 msgid "Last updated"
 msgstr "Laatst geüpdatet"
 
-#: src/components/headers/collection-header.tsx:449
+#: src/components/headers/collection-header.tsx:451
 msgid "Last updated <0/>"
 msgstr "Laatst geüpdatet <0/>"
 
@@ -1731,11 +1731,11 @@ msgstr "Name must not be empty."
 msgid "Namespace"
 msgstr "Namespace"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:683
+#: src/containers/namespace-detail/namespace-detail.tsx:694
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "Namespace \"{name}\" could not be deleted."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:662
+#: src/containers/namespace-detail/namespace-detail.tsx:673
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "Namespace \"{name}\" succesvol verwijderd."
 
@@ -1811,7 +1811,7 @@ msgstr "Nog geen activiteiten"
 msgid "No child task"
 msgstr "Geen kindertaak"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:293
+#: src/containers/namespace-detail/namespace-detail.tsx:303
 #: src/containers/search/search.tsx:152
 msgid "No collections yet"
 msgstr "Nog geen collecties"
@@ -2315,7 +2315,7 @@ msgstr "Inhoud verwijderen uit repository"
 msgid "Remove user from group?"
 msgstr "Gebruiker uit groep verwijderen?"
 
-#: src/components/headers/collection-header.tsx:160
+#: src/components/headers/collection-header.tsx:161
 msgid "Repo"
 msgstr "Repo"
 
@@ -2436,7 +2436,7 @@ msgstr "Een register selecteren"
 msgid "Select a tag"
 msgstr "Een tag selecteren"
 
-#: src/components/headers/collection-header.tsx:409
+#: src/components/headers/collection-header.tsx:411
 msgid "Select collection version"
 msgstr "Collectieversie selecteren"
 
@@ -2502,12 +2502,12 @@ msgstr "Tonen:"
 msgid "Sign"
 msgstr "Sign"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:32
+#: src/components/signing/sign-all-certificates-modal.tsx:48
 msgid "Sign all"
 msgstr "Sign all"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:27
-#: src/containers/namespace-detail/namespace-detail.tsx:612
+#: src/components/signing/sign-all-certificates-modal.tsx:39
+#: src/containers/namespace-detail/namespace-detail.tsx:623
 msgid "Sign all collections"
 msgstr "Sign all collections"
 
@@ -2516,7 +2516,7 @@ msgstr "Sign all collections"
 msgid "Sign and approve"
 msgstr "Sign and approve"
 
-#: src/components/headers/collection-header.tsx:230
+#: src/components/headers/collection-header.tsx:231
 msgid "Sign entire collection"
 msgstr "Volledige collectie verwijderen"
 
@@ -2524,7 +2524,7 @@ msgstr "Volledige collectie verwijderen"
 msgid "Sign state"
 msgstr "Sign state"
 
-#: src/components/headers/collection-header.tsx:238
+#: src/components/headers/collection-header.tsx:239
 msgid "Sign version {0}"
 msgstr "API-versie {0}"
 
@@ -2549,15 +2549,23 @@ msgstr "Signed and approved"
 msgid "Signed only"
 msgstr "Signed only"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:418
+#: src/components/signing/sign-all-certificates-modal.tsx:67
+msgid "Signed version(s)"
+msgstr ""
+
+#: src/components/signing/sign-all-certificates-modal.tsx:85
+msgid "Signing service selector:"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:429
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Signing started for all collections in namespace \"{0}\"."
 
-#: src/components/headers/collection-header.tsx:589
+#: src/components/headers/collection-header.tsx:591
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "Signing started for all versions in collection \"{0}\""
 
-#: src/components/headers/collection-header.tsx:640
+#: src/components/headers/collection-header.tsx:642
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "Signing started for collection \"{0} v{1}\"."
 
@@ -2857,10 +2865,10 @@ msgid "This account is not set up to manage any namespaces"
 msgstr "Deze account is niet ingesteld om namespaces te beheren"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:47
-msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
-msgstr "This action will affect <0>{numberOfAffected}</0> version(s)."
+#~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
+#~ msgstr "This action will affect <0>{numberOfAffected}</0> version(s)."
 
-#: src/components/headers/collection-header.tsx:472
+#: src/components/headers/collection-header.tsx:474
 msgid "This collection has been deprecated."
 msgstr "Deze collectie is afgeschreven."
 
@@ -2946,6 +2954,10 @@ msgstr "Afschrijving ongedaan maken"
 msgid "Unsigned"
 msgstr "Unsigned"
 
+#: src/components/signing/sign-all-certificates-modal.tsx:74
+msgid "Unsigned version(s)"
+msgstr ""
+
 #: src/constants.tsx:207
 msgid "Update container information"
 msgstr "Containerinformatie bijwerken"
@@ -2959,8 +2971,8 @@ msgstr "Bijgewerkt <0/>"
 msgid "Upload"
 msgstr "Uploaden"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:300
-#: src/containers/namespace-detail/namespace-detail.tsx:624
+#: src/containers/namespace-detail/namespace-detail.tsx:310
+#: src/containers/namespace-detail/namespace-detail.tsx:635
 msgid "Upload collection"
 msgstr "Collectie uploaden"
 
@@ -3125,7 +3137,7 @@ msgstr "Gebruikers verschijnen nadat ze zijn toegevoegd aan deze groep"
 msgid "Users will appear once created"
 msgstr "Gebruikers verschijnen zodra ze zijn aangemaakt"
 
-#: src/components/headers/collection-header.tsx:397
+#: src/components/headers/collection-header.tsx:399
 #: src/containers/certification-dashboard/certification-dashboard.tsx:269
 msgid "Version"
 msgstr "Versie"
@@ -3170,7 +3182,7 @@ msgstr "Verdeling weergeven"
 msgid "View group"
 msgstr "Groep weergeven"
 
-#: src/components/headers/collection-header.tsx:413
+#: src/components/headers/collection-header.tsx:415
 msgid "View more"
 msgstr "Meer weergeven"
 
@@ -3213,7 +3225,7 @@ msgstr "Waarschuwing"
 msgid "We couldn't find the page you're looking for!"
 msgstr "We konden de pagina die u zoekt niet vinden!"
 
-#: src/components/headers/collection-header.tsx:158
+#: src/components/headers/collection-header.tsx:159
 msgid "Website"
 msgstr "Website"
 
@@ -3232,12 +3244,16 @@ msgid "Yes, stop"
 msgstr "Ja, stoppen"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:40
-msgid "You are about to sign <0>all</0> versions under <1>{name}</1>."
-msgstr "You are about to sign <0>all</0> versions under <1>{name}</1>."
+#~ msgid "You are about to sign <0>all</0> versions under <1>{name}</1>."
+#~ msgstr "You are about to sign <0>all</0> versions under <1>{name}</1>."
 
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
 msgstr "You are about to sign <0>version {version}</0> under <1>{name}</1>."
+
+#: src/components/signing/sign-all-certificates-modal.tsx:58
+msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
+msgstr ""
 
 #: src/containers/token/token-standalone.tsx:69
 msgid "You are an SSO user. Your token will expire <0/>."
@@ -3314,7 +3330,7 @@ msgstr "popover-voorbeeld"
 msgid "rejected"
 msgstr "afgewezen"
 
-#: src/components/headers/collection-header.tsx:302
+#: src/components/headers/collection-header.tsx:304
 msgid "released {0}"
 msgstr "{0} vrijgegeven"
 
@@ -3342,7 +3358,7 @@ msgstr "wacht op goedkeuring"
 msgid "waiting for import to finish"
 msgstr "wacht tot importeren is voltooid"
 
-#: src/components/headers/collection-header.tsx:440
+#: src/components/headers/collection-header.tsx:442
 msgid "{0} released {1}"
 msgstr "{0} heeft {1} vrijgegeven"
 
@@ -3354,14 +3370,14 @@ msgstr "{0} werd toegevoegd"
 #~ msgid "{0} will be deleted."
 #~ msgstr "{0} will be deleted."
 
-#: src/components/headers/collection-header.tsx:273
+#: src/components/headers/collection-header.tsx:275
 msgid "{collectionName}'s versions."
 msgstr "versies van {collectionName}."
 
 #: src/components/cards/collection-card.tsx:51
 #: src/components/cards/namespace-card.tsx:36
 #: src/components/collection-list/collection-list-item.tsx:59
-#: src/components/headers/collection-header.tsx:378
+#: src/components/headers/collection-header.tsx:380
 #: src/components/headers/partner-header.tsx:46
 msgid "{company} logo"
 msgstr "{company} logo"

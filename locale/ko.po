@@ -12,15 +12,15 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/headers/collection-header.tsx:175
+#: src/components/headers/collection-header.tsx:176
 msgid "(latest)"
 msgstr "(최신)"
 
-#: src/components/headers/collection-header.tsx:167
+#: src/components/headers/collection-header.tsx:168
 msgid "(signed)"
 msgstr "(서명됨)"
 
-#: src/components/headers/collection-header.tsx:167
+#: src/components/headers/collection-header.tsx:168
 msgid "(unsigned)"
 msgstr "(서명되지 않음)"
 
@@ -64,7 +64,7 @@ msgstr "<0>참고:</0> 브라우저에서 다음 링크가 차단될 수 있습�
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:326
+#: src/containers/namespace-detail/namespace-detail.tsx:336
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>참고:</0> 이 URL을 사용하여 이 네임스페이스에 컬렉션을 업로드하도록 ansible-CBC를 구성합니다. ansible-octets 구성에 대한 자세한 내용은 <1>여기</1><2> </2><3/>에서 확인할 수 있습니다."
 
@@ -109,7 +109,7 @@ msgstr "태그에는 소문자 및 대문자 ASCII 알파벳 문자, 숫자, 밑
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:390
+#: src/containers/namespace-detail/namespace-detail.tsx:401
 msgid "API Error: Failed to set deprecation."
 msgstr "API 오류: 사용 중단을 설정하지 못했습니다."
 
@@ -118,9 +118,9 @@ msgstr "API 오류: 사용 중단을 설정하지 못했습니다."
 #~ msgid "API Error: {0}"
 #~ msgstr "API Error: {0}"
 
-#: src/components/headers/collection-header.tsx:579
-#: src/components/headers/collection-header.tsx:630
-#: src/containers/namespace-detail/namespace-detail.tsx:408
+#: src/components/headers/collection-header.tsx:581
+#: src/components/headers/collection-header.tsx:632
+#: src/containers/namespace-detail/namespace-detail.tsx:419
 msgid "API Error: {status}"
 msgstr "API 오류: {status}"
 
@@ -313,7 +313,7 @@ msgstr "배포판이 연결되어 있지 않고 원격으로 업데이트할 수
 #: src/components/import-modal/import-modal.tsx:78
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/repositories/remote-form.tsx:149
-#: src/components/signing/sign-all-certificates-modal.tsx:35
+#: src/components/signing/sign-all-certificates-modal.tsx:51
 #: src/components/signing/sign-single-certificate-modal.tsx:35
 #: src/components/signing/upload-sign-certificate-modal.tsx:49
 #: src/components/user-form/user-form.tsx:224
@@ -328,11 +328,11 @@ msgstr "취소"
 msgid "Canceled"
 msgstr "취소됨"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:578
+#: src/containers/namespace-detail/namespace-detail.tsx:589
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "<0/>컬렉션의 종속성<1/>이/가 삭제될 때까지 네임스페이스를 삭제할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:202
+#: src/components/headers/collection-header.tsx:203
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "이 컬렉션 <0/>에 종속된 컬렉션<1/>이/가 삭제될 때까지 컬렉션을 삭제할 수 없습니다."
 
@@ -467,16 +467,16 @@ msgstr "코드"
 msgid "Collection"
 msgstr "컬렉션"
 
-#: src/components/headers/collection-header.tsx:785
+#: src/components/headers/collection-header.tsx:787
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "컬렉션 \"{name} v{collectionVersion}\"을/를 삭제할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:714
-#: src/components/headers/collection-header.tsx:729
+#: src/components/headers/collection-header.tsx:716
+#: src/components/headers/collection-header.tsx:731
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "컬렉션 \"{name} v{collectionVersion}\"을/를 성공적으로 삭제했습니다."
 
-#: src/components/headers/collection-header.tsx:832
+#: src/components/headers/collection-header.tsx:834
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "컬렉션 \"{name}\"을/를 삭제할 수 없습니다."
 
@@ -484,7 +484,7 @@ msgstr "컬렉션 \"{name}\"을/를 삭제할 수 없습니다."
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "컬렉션 \"{name}\"을/를 다운로드할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:808
+#: src/components/headers/collection-header.tsx:810
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "컬렉션 \"{name}\"을/를 성공적으로 삭제했습니다."
 
@@ -513,7 +513,7 @@ msgstr "컬렉션에는 종속성이 없습니다."
 msgid "Collection is not being used by any collection."
 msgstr "컬렉션은 어떤 컬렉션에서도 사용되고 있지 않습니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:538
+#: src/containers/namespace-detail/namespace-detail.tsx:549
 msgid "Collection repositories could not be displayed."
 msgstr "컬렉션 리포지토리를 표시할 수 없습니다."
 
@@ -521,7 +521,7 @@ msgstr "컬렉션 리포지토리를 표시할 수 없습니다."
 msgid "Collection upload canceled"
 msgstr "컬렉션 업로드 취소됨"
 
-#: src/components/headers/collection-header.tsx:267
+#: src/components/headers/collection-header.tsx:269
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:293
@@ -537,7 +537,7 @@ msgid "Collections"
 msgstr "컬렉션"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:252
-#: src/containers/namespace-detail/namespace-detail.tsx:294
+#: src/containers/namespace-detail/namespace-detail.tsx:304
 #: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
 msgstr "업로드 후 컬렉션이 나타납니다."
@@ -630,7 +630,7 @@ msgstr "콘텐츠"
 msgid "Content count"
 msgstr "콘텐츠 수"
 
-#: src/components/headers/collection-header.tsx:529
+#: src/components/headers/collection-header.tsx:531
 msgid "Contents"
 msgstr "콘텐츠"
 
@@ -770,11 +770,11 @@ msgstr "컬렉션 삭제"
 msgid "Delete collection remote"
 msgstr "원격 컬렉션 삭제"
 
-#: src/components/headers/collection-header.tsx:329
+#: src/components/headers/collection-header.tsx:331
 msgid "Delete collection version?"
 msgstr "컬렉션 버전을 삭제하시겠습니까?"
 
-#: src/components/headers/collection-header.tsx:330
+#: src/components/headers/collection-header.tsx:332
 msgid "Delete collection?"
 msgstr "컬렉션을 삭제하시겠습니까?"
 
@@ -806,8 +806,8 @@ msgstr "컨테이너를 삭제하시겠습니까?"
 msgid "Delete distribution"
 msgstr "배포 삭제"
 
-#: src/components/headers/collection-header.tsx:194
-#: src/components/headers/collection-header.tsx:210
+#: src/components/headers/collection-header.tsx:195
+#: src/components/headers/collection-header.tsx:211
 msgid "Delete entire collection"
 msgstr "전체 컬렉션 삭제"
 
@@ -824,12 +824,12 @@ msgid "Delete image?"
 msgstr "이미지를 삭제하시겠습니까?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:572
-#: src/containers/namespace-detail/namespace-detail.tsx:586
+#: src/containers/namespace-detail/namespace-detail.tsx:583
+#: src/containers/namespace-detail/namespace-detail.tsx:597
 msgid "Delete namespace"
 msgstr "네임스페이스 삭제"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:222
+#: src/containers/namespace-detail/namespace-detail.tsx:232
 msgid "Delete namespace?"
 msgstr "네임스페이스를 삭제하시겠습니까?"
 
@@ -857,20 +857,20 @@ msgstr "사용자 삭제"
 msgid "Delete user?"
 msgstr "사용자를 삭제하시겠습니까?"
 
-#: src/components/headers/collection-header.tsx:222
+#: src/components/headers/collection-header.tsx:223
 msgid "Delete version {0}"
 msgstr "버전 삭제 {0}"
 
-#: src/components/headers/collection-header.tsx:338
+#: src/components/headers/collection-header.tsx:340
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 msgstr "<0>{0} v{collectionVersion}</0>를 삭제하면 데이터가 손실되어 전체 컬렉션이 삭제됩니다."
 
-#: src/components/headers/collection-header.tsx:347
+#: src/components/headers/collection-header.tsx:349
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "<0>{0} v{collectionVersion}</0>를 삭제하면 데이터가 손실됩니다."
 
-#: src/components/headers/collection-header.tsx:357
-#: src/containers/namespace-detail/namespace-detail.tsx:227
+#: src/components/headers/collection-header.tsx:359
+#: src/containers/namespace-detail/namespace-detail.tsx:237
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "<0>{0}</0>을/를 삭제하면 해당 데이터가 손실됩니다."
 
@@ -898,17 +898,17 @@ msgstr "이 그룹을 삭제하면 {count}명의 사용자에게 영향을 미�
 msgid "Deleting yourself is not allowed."
 msgstr "자신을 삭제하는 것은 허용되지 않습니다."
 
-#: src/components/headers/collection-header.tsx:543
+#: src/components/headers/collection-header.tsx:545
 #: src/containers/collection-detail/collection-dependencies.tsx:105
 #: src/containers/collection-detail/collection-dependencies.tsx:134
 msgid "Dependencies"
 msgstr "종속 항목"
 
-#: src/components/headers/collection-header.tsx:861
+#: src/components/headers/collection-header.tsx:863
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "\"{name}\" 컬렉션의 종속 항목을 표시할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:755
+#: src/components/headers/collection-header.tsx:757
 msgid "Dependent collections"
 msgstr "종속 컬렉션"
 
@@ -948,11 +948,11 @@ msgstr "요약"
 msgid "Distribution name"
 msgstr "배포 이름"
 
-#: src/components/headers/collection-header.tsx:157
+#: src/components/headers/collection-header.tsx:158
 msgid "Docs site"
 msgstr "문서 사이트"
 
-#: src/components/headers/collection-header.tsx:524
+#: src/components/headers/collection-header.tsx:526
 #: src/containers/collection-detail/collection-docs.tsx:121
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
@@ -1031,7 +1031,7 @@ msgstr "실행 환경 편집"
 msgid "Edit group permissions"
 msgstr "그룹 권한 편집"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:562
+#: src/containers/namespace-detail/namespace-detail.tsx:573
 msgid "Edit namespace"
 msgstr "네임스페이스 편집"
 
@@ -1290,15 +1290,15 @@ msgstr "실패"
 msgid "Failed to retrieve user data."
 msgstr "사용자 데이터를 검색하지 못했습니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:409
+#: src/containers/namespace-detail/namespace-detail.tsx:420
 msgid "Failed to sign all collections."
 msgstr "모든 컬렉션에 서명하지 못했습니다."
 
-#: src/components/headers/collection-header.tsx:580
+#: src/components/headers/collection-header.tsx:582
 msgid "Failed to sign all versions in the collection."
 msgstr "컬렉션의 모든 버전에 서명하지 못했습니다."
 
-#: src/components/headers/collection-header.tsx:631
+#: src/components/headers/collection-header.tsx:633
 msgid "Failed to sign the version."
 msgstr "버전에 서명하지 못했습니다."
 
@@ -1428,9 +1428,9 @@ msgid "Hide the signature"
 msgstr "서명 숨기기"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
-#: src/components/headers/collection-header.tsx:366
+#: src/components/headers/collection-header.tsx:368
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
-#: src/containers/namespace-detail/namespace-detail.tsx:234
+#: src/containers/namespace-detail/namespace-detail.tsx:244
 msgid "I understand that this action cannot be undone."
 msgstr "이 작업을 취소할 수 없다는 것을 알고 있습니다."
 
@@ -1474,12 +1474,12 @@ msgstr "가져오기 및 자동 승인"
 msgid "Import and move to staging"
 msgstr "가져오기 및 스테이징으로 이동"
 
-#: src/components/headers/collection-header.tsx:538
+#: src/components/headers/collection-header.tsx:540
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "로그 가져오기"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:603
+#: src/containers/namespace-detail/namespace-detail.tsx:614
 msgid "Imports"
 msgstr "가져오기"
 
@@ -1504,7 +1504,7 @@ msgid "Indexing started for execution environment \"{name}\"."
 msgstr "실행 환경 \"{name}\"에 대한 인덱싱이 시작되었습니다."
 
 #: src/components/collection-detail/collection-info.tsx:57
-#: src/components/headers/collection-header.tsx:519
+#: src/components/headers/collection-header.tsx:521
 msgid "Install"
 msgstr "설치"
 
@@ -1536,7 +1536,7 @@ msgstr "잘못된 파일 이름입니다. 컬렉션은 'namespace-collection_nam
 msgid "Invalid login credentials."
 msgstr "잘못된 로그인 자격 증명입니다."
 
-#: src/components/headers/collection-header.tsx:159
+#: src/components/headers/collection-header.tsx:160
 msgid "Issue tracker"
 msgstr "문제 추적기"
 
@@ -1579,7 +1579,7 @@ msgstr "마지막으로 동기화됨"
 msgid "Last updated"
 msgstr "마지막 업데이트"
 
-#: src/components/headers/collection-header.tsx:449
+#: src/components/headers/collection-header.tsx:451
 msgid "Last updated <0/>"
 msgstr "마지막 업데이트 <0/>"
 
@@ -1729,11 +1729,11 @@ msgstr "이름은 비워 둘 수 없습니다."
 msgid "Namespace"
 msgstr "네임스페이스"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:683
+#: src/containers/namespace-detail/namespace-detail.tsx:694
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "네임스페이스 \"{name}\"은/는 삭제할 수 없습니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:662
+#: src/containers/namespace-detail/namespace-detail.tsx:673
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "네임스페이스 \"{name}\"을/를 성공적으로 삭제했습니다."
 
@@ -1809,7 +1809,7 @@ msgstr "아직 활동이 없습니다."
 msgid "No child task"
 msgstr "하위 작업 없음"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:293
+#: src/containers/namespace-detail/namespace-detail.tsx:303
 #: src/containers/search/search.tsx:152
 msgid "No collections yet"
 msgstr "아직 컬렉션이 없습니다."
@@ -2313,7 +2313,7 @@ msgstr "리포지토리에서 콘텐츠 제거"
 msgid "Remove user from group?"
 msgstr "그룹에서 사용자를 제거하시겠습니까?"
 
-#: src/components/headers/collection-header.tsx:160
+#: src/components/headers/collection-header.tsx:161
 msgid "Repo"
 msgstr "리포지토리"
 
@@ -2434,7 +2434,7 @@ msgstr "레지스트리 선택"
 msgid "Select a tag"
 msgstr "태그 선택"
 
-#: src/components/headers/collection-header.tsx:409
+#: src/components/headers/collection-header.tsx:411
 msgid "Select collection version"
 msgstr "컬렉션 버전 선택"
 
@@ -2500,12 +2500,12 @@ msgstr "표시:"
 msgid "Sign"
 msgstr "서명"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:32
+#: src/components/signing/sign-all-certificates-modal.tsx:48
 msgid "Sign all"
 msgstr "모두 서명"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:27
-#: src/containers/namespace-detail/namespace-detail.tsx:612
+#: src/components/signing/sign-all-certificates-modal.tsx:39
+#: src/containers/namespace-detail/namespace-detail.tsx:623
 msgid "Sign all collections"
 msgstr "모든 컬렉션에 서명"
 
@@ -2514,7 +2514,7 @@ msgstr "모든 컬렉션에 서명"
 msgid "Sign and approve"
 msgstr "서명 및 승인"
 
-#: src/components/headers/collection-header.tsx:230
+#: src/components/headers/collection-header.tsx:231
 msgid "Sign entire collection"
 msgstr "전체 컬렉션에 서명"
 
@@ -2522,7 +2522,7 @@ msgstr "전체 컬렉션에 서명"
 msgid "Sign state"
 msgstr "서명 상태"
 
-#: src/components/headers/collection-header.tsx:238
+#: src/components/headers/collection-header.tsx:239
 msgid "Sign version {0}"
 msgstr "서명 버전 {0}"
 
@@ -2547,15 +2547,23 @@ msgstr "서명 및 승인됨"
 msgid "Signed only"
 msgstr "서명된 항목만 포함"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:418
+#: src/components/signing/sign-all-certificates-modal.tsx:67
+msgid "Signed version(s)"
+msgstr ""
+
+#: src/components/signing/sign-all-certificates-modal.tsx:85
+msgid "Signing service selector:"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:429
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "네임스페이스 \"{0}\"의 모든 컬렉션에 대해 서명이 시작되었습니다."
 
-#: src/components/headers/collection-header.tsx:589
+#: src/components/headers/collection-header.tsx:591
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "컬렉션 \"{0}\"의 모든 버전에 대해 서명이 시작되었습니다."
 
-#: src/components/headers/collection-header.tsx:640
+#: src/components/headers/collection-header.tsx:642
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "\"{0} v{1}\" 컬렉션에 대한 서명이 시작되었습니다."
 
@@ -2855,10 +2863,10 @@ msgid "This account is not set up to manage any namespaces"
 msgstr "이 계정은 네임스페이스를 관리하도록 설정되지 않았습니다."
 
 #: src/components/signing/sign-all-certificates-modal.tsx:47
-msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
-msgstr "이 작업은 <0>{numberOfAffected}</0> 버전에 영향을 미칩니다."
+#~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
+#~ msgstr "이 작업은 <0>{numberOfAffected}</0> 버전에 영향을 미칩니다."
 
-#: src/components/headers/collection-header.tsx:472
+#: src/components/headers/collection-header.tsx:474
 msgid "This collection has been deprecated."
 msgstr "이 컬렉션은 더 이상 사용되지 않습니다."
 
@@ -2944,6 +2952,10 @@ msgstr "사용되지 않음"
 msgid "Unsigned"
 msgstr "서명되지 않음"
 
+#: src/components/signing/sign-all-certificates-modal.tsx:74
+msgid "Unsigned version(s)"
+msgstr ""
+
 #: src/constants.tsx:207
 msgid "Update container information"
 msgstr "컨테이너 정보 업데이트"
@@ -2957,8 +2969,8 @@ msgstr "업데이트됨 <0/>"
 msgid "Upload"
 msgstr "업로드"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:300
-#: src/containers/namespace-detail/namespace-detail.tsx:624
+#: src/containers/namespace-detail/namespace-detail.tsx:310
+#: src/containers/namespace-detail/namespace-detail.tsx:635
 msgid "Upload collection"
 msgstr "컬렉션 업로드"
 
@@ -3123,7 +3135,7 @@ msgstr "사용자가 그룹에 추가되면 나타납니다."
 msgid "Users will appear once created"
 msgstr "사용자가 생성되면 나타납니다."
 
-#: src/components/headers/collection-header.tsx:397
+#: src/components/headers/collection-header.tsx:399
 #: src/containers/certification-dashboard/certification-dashboard.tsx:269
 msgid "Version"
 msgstr "버전"
@@ -3168,7 +3180,7 @@ msgstr "배포 보기"
 msgid "View group"
 msgstr "그룹 보기"
 
-#: src/components/headers/collection-header.tsx:413
+#: src/components/headers/collection-header.tsx:415
 msgid "View more"
 msgstr "더 알아보기"
 
@@ -3211,7 +3223,7 @@ msgstr "경고"
 msgid "We couldn't find the page you're looking for!"
 msgstr "페이지를 찾을 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:158
+#: src/components/headers/collection-header.tsx:159
 msgid "Website"
 msgstr "웹 사이트"
 
@@ -3230,12 +3242,16 @@ msgid "Yes, stop"
 msgstr "예, 중지합니다"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:40
-msgid "You are about to sign <0>all</0> versions under <1>{name}</1>."
-msgstr "<1>{name}</1>에서 <0>all</0> 버전에 서명하려고 합니다."
+#~ msgid "You are about to sign <0>all</0> versions under <1>{name}</1>."
+#~ msgstr "<1>{name}</1>에서 <0>all</0> 버전에 서명하려고 합니다."
 
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
 msgstr "<1>{name}</1>에서 <0>version {version}</0> 에 서명하려고 합니다."
+
+#: src/components/signing/sign-all-certificates-modal.tsx:58
+msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
+msgstr ""
 
 #: src/containers/token/token-standalone.tsx:69
 msgid "You are an SSO user. Your token will expire <0/>."
@@ -3312,7 +3328,7 @@ msgstr "팝업 예제"
 msgid "rejected"
 msgstr "거부됨"
 
-#: src/components/headers/collection-header.tsx:302
+#: src/components/headers/collection-header.tsx:304
 msgid "released {0}"
 msgstr "게시됨 {0}"
 
@@ -3340,7 +3356,7 @@ msgstr "승인 대기 중"
 msgid "waiting for import to finish"
 msgstr "가져오기가 완료될 때까지 대기 중"
 
-#: src/components/headers/collection-header.tsx:440
+#: src/components/headers/collection-header.tsx:442
 msgid "{0} released {1}"
 msgstr "{0}이/가 릴리스됨 {1}"
 
@@ -3352,14 +3368,14 @@ msgstr "{0}이/가 추가되었습니다"
 #~ msgid "{0} will be deleted."
 #~ msgstr "{0} will be deleted."
 
-#: src/components/headers/collection-header.tsx:273
+#: src/components/headers/collection-header.tsx:275
 msgid "{collectionName}'s versions."
 msgstr "{collectionName}의 버전입니다."
 
 #: src/components/cards/collection-card.tsx:51
 #: src/components/cards/namespace-card.tsx:36
 #: src/components/collection-list/collection-list-item.tsx:59
-#: src/components/headers/collection-header.tsx:378
+#: src/components/headers/collection-header.tsx:380
 #: src/components/headers/partner-header.tsx:46
 msgid "{company} logo"
 msgstr "{company} 로고"
