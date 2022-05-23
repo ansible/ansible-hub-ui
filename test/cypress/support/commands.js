@@ -715,7 +715,7 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
         'collection delete',
         record.namespace,
         record.name,
-        'None',
+        record.version,
         record.repository_list[0],
       );
     });
