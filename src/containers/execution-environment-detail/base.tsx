@@ -38,6 +38,7 @@ interface IState {
 
 export interface IDetailSharedProps extends RouteComponentProps {
   containerRepository: ContainerRepositoryType;
+  addAlert: (alert: AlertType) => void;
 }
 
 // A higher order component to wrap individual detail pages
@@ -153,11 +154,7 @@ export function withContainerRepo(WrappedComponent) {
                 this.setState({ redirect: 'list' });
               }}
               addAlert={(text, variant, description = undefined) =>
-                this.setState({
-                  alerts: alerts.concat([
-                    { title: text, variant: variant, description: description },
-                  ]),
-                })
+                this.addAlert(text, variant, description)
               }
             ></DeleteExecutionEnvironmentModal>
           )}
@@ -248,6 +245,9 @@ export function withContainerRepo(WrappedComponent) {
             <WrappedComponent
               containerRepository={this.state.repo}
               editing={this.state.editing}
+              addAlert={({ title, variant, description = null }) =>
+                this.addAlert(title, variant, description)
+              }
               {...this.props}
             />
           </Main>
