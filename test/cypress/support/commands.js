@@ -707,16 +707,6 @@ Cypress.Commands.add('deleteContainersManual', {}, () => {
   });
 });
 
-Cypress.Commands.add('deleteCollections', {}, (namespace) => {
-  range(5).forEach(() => {
-    cy.galaxykit('namespace list-collections ' + namespace).then((json) => {
-      JSON.parse(json).data.forEach((collection) => {
-        cy.galaxykit('collection delete', namespace, collection.name);
-      });
-    });
-  });
-});
-
 Cypress.Commands.add('deleteAllCollections', {}, () => {
   cy.galaxykit('collection list').then((res) => {
     let data = JSON.parse(res[0]).data;
