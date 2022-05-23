@@ -718,11 +718,8 @@ Cypress.Commands.add('deleteCollections', {}, (namespace) => {
 });
 
 Cypress.Commands.add('deleteAllCollections', {}, () => {
-  let url =
-    Cypress.env('prefix') +
-    '_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=100';
-  cy.request(url).then((res) => {
-    let data = res.body.data;
+  cy.galaxykit('collection list').then((res) => {
+    let data = JSON.parse(res[0]).data;
     data.forEach((record) => {
       cy.galaxykit(
         'collection delete',
