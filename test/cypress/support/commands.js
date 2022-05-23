@@ -738,6 +738,7 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
 Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
   cy.login();
   cy.deleteAllCollections();
+  cy.wait(5000);
   cy.galaxykit('namespace list').then((json) => {
     JSON.parse(json).data.forEach((namespace) => {
       cy.galaxykit('namespace delete', namespace.name);
