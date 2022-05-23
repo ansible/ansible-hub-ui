@@ -383,8 +383,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             const taskId = parsePulpIDFromURL(result.data.task);
             return waitForTask(taskId).then(() => {
               const title = collection.deprecated
-                ? t`The collection "${collection.name}" has been successfully undeprecated.`
-                : t`The collection "${collection.name}" has been successfully deprecated.`;
+                ? t`Collection "${collection.name}" has been successfully undeprecated.`
+                : t`Collection "${collection.name}" has been successfully deprecated.`;
               this.setState({
                 alerts: [
                   ...this.state.alerts,
