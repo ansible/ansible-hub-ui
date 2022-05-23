@@ -385,6 +385,15 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         });
         break;
       case 'deprecate':
+        this.setState({
+          alerts: [
+            ...this.state.alerts,
+            {
+              variant: 'info',
+              title: t`Deprecation status update starting for collection "${collection.name}".`,
+            },
+          ],
+        });
         CollectionAPI.setDeprecation(
           collection,
           !collection.deprecated,
