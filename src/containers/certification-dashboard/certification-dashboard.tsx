@@ -385,7 +385,7 @@ class CertificationDashboard extends React.Component<
     }
 
     const needUploadSignature =
-      (this.context.settings.GALAXY_REQUIRE_SIGNATURE_FOR_APPROVAL ?? true) &&
+      this.context.settings.GALAXY_SIGNATURE_UPLOAD_ENABLED &&
       version.sign_state === 'unsigned';
     const approveButton = [
       needUploadSignature && (
