@@ -98,3 +98,4 @@ export { ListItemActions } from './list-item-actions/list-item-actions';
 export { WizardModal } from './patternfly-wrappers/wizard-modal';
 export { PreviewRoles } from './rbac/preview-roles';
 export { SelectRoles } from './rbac/select-roles';
+export { SelectGroup } from './rbac/select-group';
