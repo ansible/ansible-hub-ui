@@ -25,7 +25,6 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import shell from 'shell-escape-tag';
-import { range } from 'lodash';
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
@@ -707,20 +706,26 @@ Cypress.Commands.add('deleteContainersManual', {}, () => {
   });
 });
 
-Cypress.Commands.add('deleteCollections', {}, (namespace) => {
-  range(5).forEach(() => {
-    cy.galaxykit('namespace list-collections ' + namespace).then((json) => {
-      JSON.parse(json).data.forEach((collection) => {
-        cy.galaxykit('collection delete', namespace, collection.name);
-      });
+Cypress.Commands.add('deleteAllCollections', {}, () => {
+  cy.galaxykit('collection list').then((res) => {
+    const data = JSON.parse(res[0]).data;
+    data.forEach((record) => {
+      cy.galaxykit(
+        'collection delete',
+        record.namespace,
+        record.name,
+        record.version,
+        record.repository_list[0],
+      );
     });
   });
 });
 
 Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
+  cy.deleteAllCollections();
+  cy.wait(5000);
   cy.galaxykit('namespace list').then((json) => {
     JSON.parse(json).data.forEach((namespace) => {
-      cy.deleteCollections(namespace.name);
       cy.galaxykit('namespace delete', namespace.name);
     });
   });
