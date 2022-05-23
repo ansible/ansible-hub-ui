@@ -1,7 +1,7 @@
 describe('tests the approval list screen ', () => {
   before(() => {
     cy.settings({
-      GALAXY_AUTO_SIGN_COLLECTIONS: true,
+      GALAXY_REQUIRE_CONTENT_APPROVAL: true,
     });
   });
   beforeEach(() => {
@@ -36,8 +36,8 @@ describe('tests the approval list screen ', () => {
 
     //approve
     cy.get('button[aria-label="Actions"]:first').click();
-    cy.contains('Sign and approve').click();
-    cy.get('tr').eq(1).contains('Signed and approved');
+    cy.contains('Approve').click();
+    cy.get('tr').eq(1).contains('Approved');
   });
 
   it('view the imports logs', () => {
