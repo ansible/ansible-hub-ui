@@ -707,7 +707,7 @@ Cypress.Commands.add('deleteContainersManual', {}, () => {
 });
 
 Cypress.Commands.add('deleteAllCollections', {}, () => {
-  function waitForEmptyCollection(maxLoops) {
+  const waitForEmptyCollection = (maxLoops) => {
     if (maxLoops == 0) {
       cy.log('Max loops reached while waiting for the empty collections.');
       return;
