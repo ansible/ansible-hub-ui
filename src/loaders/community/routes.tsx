@@ -133,7 +133,6 @@ class AuthHandler extends React.Component<
       return null;
     }
 
-
     if (!user && !noAuth) {
       // NOTE: also update LoginLink when changing this
       if (isExternalAuth && UI_EXTERNAL_LOGIN_URI) {
@@ -147,7 +146,6 @@ class AuthHandler extends React.Component<
         ></Redirect>
       );
     }
-
 
     // only enforce this if feature flags are set. Otherwise the container
     // registry will always return a 404 on the first load.
