@@ -88,8 +88,8 @@ class App extends React.Component<RouteComponentProps, IState> {
     this.activateMenu(menu);
 
     const fakeuser = {
-        username: 'john',
-        groups: []
+      username: 'john',
+      groups: [],
     };
 
     this.setState({
@@ -102,13 +102,12 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   makeMenu() {
     if (this.menu) {
-        return this.menu;
-    };
+      return this.menu;
+    }
     return [];
   }
 
   render() {
-
     console.log('LOADER APP RENDER', this.props.location.pathname);
 
     const { featureFlags, menuExpandedSections, selectedRepo, user, settings } =
@@ -243,8 +242,6 @@ class App extends React.Component<RouteComponentProps, IState> {
       />
     );
 
-    
-
     // if user and settings are truthy, menu == this.menu()
     // else menu == []
     //const menu = user && settings ? this.menu() : []; // no longer all set at the same time
@@ -254,7 +251,7 @@ class App extends React.Component<RouteComponentProps, IState> {
     //this.activateMenu(menu);
 
     const makeMenu = () => {
-        return [];
+      return [];
     };
 
     const ItemOrSection = ({ item }) =>
@@ -345,30 +342,28 @@ class App extends React.Component<RouteComponentProps, IState> {
     // );
 
     const Sidebar = () => {
-     
       console.log('LOADER APP RENDER Sidebar() called');
 
       //debugger;
 
       return (
-          <PageSidebar
-            theme='dark'
-            nav={
-              <Nav theme='dark' onToggle={onToggle}>
-                <NavList>
-                  <NavGroup
-                    className={'nav-title'}
-                    title={APPLICATION_NAME}
-                  ></NavGroup>
+        <PageSidebar
+          theme='dark'
+          nav={
+            <Nav theme='dark' onToggle={onToggle}>
+              <NavList>
+                <NavGroup
+                  className={'nav-title'}
+                  title={APPLICATION_NAME}
+                ></NavGroup>
 
-                  <Menu items={menu} />
-                </NavList>
-              </Nav>
-            }
-          />
+                <Menu items={menu} />
+              </NavList>
+            </Nav>
+          }
+        />
       );
     };
-
 
     /*
     // Hide navs on login page
@@ -392,7 +387,6 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private menu() {
-
     console.log('LOADER APP menu()');
 
     const menuItem = (name, options = {}) => ({
@@ -581,7 +575,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   };
 
   private setRepo = (path: string) => {
-    console.log(`LOADER APP setRepo ${path}`)
+    console.log(`LOADER APP setRepo ${path}`);
     this.props.history.push(path);
   };
 
