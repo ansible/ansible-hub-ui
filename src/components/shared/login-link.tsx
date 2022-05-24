@@ -13,8 +13,6 @@ export class LoginLink extends React.Component<IProps> {
   static contextType = AppContext;
 
   render() {
-    console.log('SHARED LOGIN LINK RENDER');
-
     const { button, next } = this.props;
     const { featureFlags } = this.context;
     const className = button ? 'pf-c-button pf-m-primary' : '';
