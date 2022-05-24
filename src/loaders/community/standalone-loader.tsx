@@ -224,7 +224,8 @@ class App extends React.Component<RouteComponentProps, IState> {
       />
     );
 
-    const menu = user && settings ? this.menu() : []; // no longer all set at the same time
+    //const menu = user && settings ? this.menu() : []; // no longer all set at the same time
+    const menu = this.menu();
     this.activateMenu(menu);
 
     const ItemOrSection = ({ item }) =>
@@ -234,7 +235,8 @@ class App extends React.Component<RouteComponentProps, IState> {
         <MenuItem item={item} />
       );
     const MenuItem = ({ item }) => {
-      return item.condition({ user, settings, featureFlags }) ? (
+      //return item.condition({ user, settings, featureFlags }) ? (
+      return (
         <NavItem
           isActive={item.active}
           onClick={(e) => {
@@ -260,7 +262,8 @@ class App extends React.Component<RouteComponentProps, IState> {
             item.name
           )}
         </NavItem>
-      ) : null;
+      );
+      //) : null;
     };
 
     const Menu = ({ items }) => (
@@ -271,7 +274,8 @@ class App extends React.Component<RouteComponentProps, IState> {
       </>
     );
     const MenuSection = ({ section }) =>
-      section.condition({ user, featureFlags, settings }) ? (
+      //section.condition({ user, featureFlags, settings }) ? (
+      (
         <NavExpandable
           title={section.name}
           groupId={section.name}
@@ -280,7 +284,8 @@ class App extends React.Component<RouteComponentProps, IState> {
         >
           <Menu items={section.items} />
         </NavExpandable>
-      ) : null;
+      );
+      //) : null;
 
     const onToggle = ({ groupId, isExpanded }) => {
       this.setState({
@@ -301,7 +306,8 @@ class App extends React.Component<RouteComponentProps, IState> {
                 title={APPLICATION_NAME}
               ></NavGroup>
 
-              {user && featureFlags && <Menu items={menu} />}
+              {/*{user && featureFlags && <Menu items={menu} />}*/}
+              <Menu items={menu} />
             </NavList>
           </Nav>
         }
@@ -369,6 +375,14 @@ class App extends React.Component<RouteComponentProps, IState> {
         menuItem(t`Approval`, {
           condition: ({ user }) => user.model_permissions.move_collection,
           url: Paths.approvalDashboard,
+        }),
+      ]),
+      menuSection(t`Legacy`, {}, [
+        menuItem(t`Community`, {
+          url: Paths.legacyUsers,
+        }),
+        menuItem(t`Roles`, {
+          url: Paths.legacyRoles,
         }),
       ]),
       /*
