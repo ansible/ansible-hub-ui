@@ -707,10 +707,8 @@ Cypress.Commands.add('deleteContainersManual', {}, () => {
 });
 
 Cypress.Commands.add('deleteAllCollections', {}, () => {
-  function waitForEmptyCollection(maxLoops)
-  {
-    if (maxLoops == 0)
-    {
+  function waitForEmptyCollection(maxLoops) {
+    if (maxLoops == 0) {
       cy.log('Max loops reached while waiting for the empty collections.');
       return;
     }
@@ -719,15 +717,14 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
 
     cy.galaxykit('collection list').then((res) => {
       const data = JSON.parse(res[0]).data;
-      if (data.length != 0)
-      {
+      if (data.length != 0) {
         waitForEmptyCollection(maxLoops - 1);
-      }else{
+      } else {
         cy.log('Collections are empty!');
       }
     });
   }
-  
+
   cy.galaxykit('collection list').then((res) => {
     const data = JSON.parse(res[0]).data;
     cy.log(data.length + ' collections found for deletion.');
