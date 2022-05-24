@@ -177,4 +177,13 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       cy.get('[data-cy="body"]').contains(items[i].name);
     });
   });
+
+  it('should redirect to import logs.', () => {
+    cy.get(
+      '[data-cy="kebab-toggle"]:first button[aria-label="Actions"]',
+    ).click();
+    cy.contains('View Import Logs').click();
+    cy.contains('My imports');
+    cy.get('.import-list');
+  });
 });
