@@ -30,10 +30,7 @@ describe('Approval Dashboard process', () => {
     cy.contains('.body', 'No results found', { timeout: 8000 });
     cy.visit('/ui/approval-dashboard');
     cy.contains('button', 'Clear all filters').click();
-    cy.contains(
-      '[data-cy="CertificationDashboard-row"]',
-      'Approved',
-    );
+    cy.contains('[data-cy="CertificationDashboard-row"]', 'Approved');
   });
 
   it('should see item in collections.', () => {
