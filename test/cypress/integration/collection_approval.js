@@ -11,9 +11,9 @@ describe('tests the approval list screen ', () => {
     cy.galaxykit('-i collection upload ansible network');
     cy.menuGo('Collections > Approval');
   });
-  after(() => {
-    cy.settings();
-  });
+  // after(() => {
+  //   cy.settings();
+  // });
 
   it('has a default Needs Review filter', () => {
     cy.get('.pf-c-chip-group__list').contains('Needs Review');
@@ -38,6 +38,7 @@ describe('tests the approval list screen ', () => {
     cy.get('button[aria-label="Actions"]:first').click();
     cy.contains('Approve').click();
     cy.get('tr').eq(1).contains('Approved');
+    cy.settings();
   });
 
   it('view the imports logs', () => {
