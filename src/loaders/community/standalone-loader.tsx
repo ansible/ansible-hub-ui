@@ -100,6 +100,11 @@ class App extends React.Component<RouteComponentProps, IState> {
     // redirect the URL to a 404 state.
     const match = this.isRepoURL(this.props.location.pathname);
     if (match && match.params['repo'] !== selectedRepo) {
+      console.log(
+        'BLOCK PAGE RENDER BECAUSE ON REPO ROUTE AND URL NOT YET CORRECT',
+        this.props.location.pathname,
+        match,
+      );
       return null;
     }
 

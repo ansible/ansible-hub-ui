@@ -9,7 +9,12 @@ import {
   CollectionImportLog,
   CollectionDependencies,
   EditNamespace,
+  LegacyUsers,
+  LegacyUser,
+  LegacyRoles,
+  LegacyRole,
   LoginPage,
+  SocialLoginPage,
   MyImports,
   NamespaceDetail,
   MyNamespaces,
@@ -95,6 +100,9 @@ class AuthHandler extends React.Component<
     // This component is mounted on every route change, so it's a good place
     // to check for an active user.
     const { user, settings } = this.context;
+
+    console.log('ROUTES AuthHandler componentDidMount user', user);
+
     if (!user || !settings) {
       const promises = [];
       promises.push(
@@ -120,6 +128,8 @@ class AuthHandler extends React.Component<
   }
 
   render() {
+    console.log('ROUTES AuthHandler RENDER');
+
     const { isLoading } = this.state;
     const { Component, noAuth, ...props } = this.props;
     const { user, featureFlags } = this.context;
@@ -133,12 +143,23 @@ class AuthHandler extends React.Component<
       return null;
     }
 
+    console.log('ROUTES AuthHandler RENDER featureFlags', featureFlags);
+    console.log('ROUTES AuthHandler RENDER user', user);
+    console.log('ROUTES AuthHandler RENDER noAuth', noAuth);
+    console.log('ROUTES AuthHandler RENDER isExternalAuth', isExternalAuth);
+
+    /*
     if (!user && !noAuth) {
+
+      console.log('ROUTES AuthHandler RENDER NO USER AND NOT NO AUTH');
+
       // NOTE: also update LoginLink when changing this
       if (isExternalAuth && UI_EXTERNAL_LOGIN_URI) {
         window.location.replace(UI_EXTERNAL_LOGIN_URI);
+        console.log('ROUTES AuthHandler EMPTY DIV');
         return <div></div>;
       }
+      console.log('ROUTES AuthHandler REDIRECT TO LOGIN');
       return (
         <Redirect
           push
@@ -146,6 +167,7 @@ class AuthHandler extends React.Component<
         ></Redirect>
       );
     }
+    */
 
     // only enforce this if feature flags are set. Otherwise the container
     // registry will always return a 404 on the first load.
@@ -170,6 +192,10 @@ export class Routes extends React.Component<IRoutesProps> {
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
     return [
+      { comp: LegacyUser, path: Paths.legacyUser },
+      { comp: LegacyUsers, path: Paths.legacyUsers },
+      { comp: LegacyRole, path: Paths.legacyRole },
+      { comp: LegacyRoles, path: Paths.legacyRoles },
       {
         comp: ExecutionEnvironmentDetailActivities,
         path: Paths.executionEnvironmentDetailActivities,
@@ -225,7 +251,7 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: NamespaceDetail, path: Paths.myCollections },
       { comp: NamespaceDetail, path: Paths.myCollectionsByRepo },
       { comp: MyNamespaces, path: Paths.myNamespaces },
-      { comp: LoginPage, path: Paths.login, noAuth: true },
+      { comp: SocialLoginPage, path: Paths.login, noAuth: true },
       { comp: CollectionDocs, path: Paths.collectionDocsPageByRepo },
       { comp: CollectionDocs, path: Paths.collectionDocsIndexByRepo },
       { comp: CollectionDocs, path: Paths.collectionContentDocsByRepo },
@@ -251,6 +277,7 @@ export class Routes extends React.Component<IRoutesProps> {
   }
 
   render() {
+    console.log('ROUTES ROUTES RENDER');
     return (
       <Switch>
         {this.getRoutes().map((route, index) => (

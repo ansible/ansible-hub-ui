@@ -9,10 +9,6 @@ import {
   CollectionImportLog,
   CollectionDependencies,
   EditNamespace,
-  LegacyUsers,
-  LegacyUser,
-  LegacyRoles,
-  LegacyRole,
   LoginPage,
   MyImports,
   NamespaceDetail,
@@ -174,10 +170,6 @@ export class Routes extends React.Component<IRoutesProps> {
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
     return [
-      { comp: LegacyUser, path: Paths.legacyUser },
-      { comp: LegacyUsers, path: Paths.legacyUsers },
-      { comp: LegacyRole, path: Paths.legacyRole },
-      { comp: LegacyRoles, path: Paths.legacyRoles },
       {
         comp: ExecutionEnvironmentDetailActivities,
         path: Paths.executionEnvironmentDetailActivities,

@@ -74,22 +74,43 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidUpdate() {
+    console.log('LOADER APP componentDidUpdate');
     this.setRepoToURL();
   }
 
   componentDidMount() {
+    console.log('LOADER APP componentDidMount');
+
     this.setRepoToURL();
 
-    const menu = this.menu();
+    //const menu = this.menu();
+    const menu = this.makeMenu();
     this.activateMenu(menu);
+
+    const fakeuser = {
+        username: 'john',
+        groups: []
+    };
+
     this.setState({
+      //user: fakeuser,
       menuExpandedSections: menu
         .filter((i) => i.type === 'section' && i.active)
         .map((i) => i.name),
     });
   }
 
+  makeMenu() {
+    if (this.menu) {
+        return this.menu;
+    };
+    return [];
+  }
+
   render() {
+
+    console.log('LOADER APP RENDER', this.props.location.pathname);
+
     const { featureFlags, menuExpandedSections, selectedRepo, user, settings } =
       this.state;
 
@@ -100,6 +121,7 @@ class App extends React.Component<RouteComponentProps, IState> {
     // redirect the URL to a 404 state.
     const match = this.isRepoURL(this.props.location.pathname);
     if (match && match.params['repo'] !== selectedRepo) {
+      console.log('LOADER APP RENDER return NULL!!!');
       return null;
     }
 
@@ -108,6 +130,7 @@ class App extends React.Component<RouteComponentProps, IState> {
     let userDropdownItems = [];
     let userName: string;
 
+    /*
     if (user) {
       if (user.first_name || user.last_name) {
         userName = user.first_name + ' ' + user.last_name;
@@ -180,6 +203,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         ></AboutModalWindow>
       );
     }
+    */
 
     const Header = (
       <PageHeader
@@ -219,8 +243,19 @@ class App extends React.Component<RouteComponentProps, IState> {
       />
     );
 
-    const menu = user && settings ? this.menu() : []; // no longer all set at the same time
-    this.activateMenu(menu);
+    
+
+    // if user and settings are truthy, menu == this.menu()
+    // else menu == []
+    //const menu = user && settings ? this.menu() : []; // no longer all set at the same time
+    const menu = [];
+    //const menu = this.menu();
+    //console.log('LOADER APP RENDER MENU INIT', menu);
+    //this.activateMenu(menu);
+
+    const makeMenu = () => {
+        return [];
+    };
 
     const ItemOrSection = ({ item }) =>
       item.type === 'section' ? (
@@ -229,6 +264,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         <MenuItem item={item} />
       );
     const MenuItem = ({ item }) => {
+      console.log(`LOADER APP RENDER MenuItem === ${item}`);
       return item.condition({ user, settings, featureFlags }) ? (
         <NavItem
           isActive={item.active}
@@ -265,6 +301,7 @@ class App extends React.Component<RouteComponentProps, IState> {
         ))}
       </>
     );
+
     const MenuSection = ({ section }) =>
       section.condition({ user, featureFlags, settings }) ? (
         <NavExpandable
@@ -278,6 +315,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       ) : null;
 
     const onToggle = ({ groupId, isExpanded }) => {
+      console.log('LOADER APP onToggle', groupId, isExpanded);
       this.setState({
         menuExpandedSections: isExpanded
           ? [...menuExpandedSections, groupId]
@@ -285,34 +323,68 @@ class App extends React.Component<RouteComponentProps, IState> {
       });
     };
 
-    const Sidebar = (
-      <PageSidebar
-        theme='dark'
-        nav={
-          <Nav theme='dark' onToggle={onToggle}>
-            <NavList>
-              <NavGroup
-                className={'nav-title'}
-                title={APPLICATION_NAME}
-              ></NavGroup>
+    // const Sidebar = (
+    //   <PageSidebar
+    //     theme='dark'
+    //     nav={
+    //       <Nav theme='dark' onToggle={onToggle}>
+    //         <NavList>
+    //           <NavGroup
+    //             className={'nav-title'}
+    //             title={APPLICATION_NAME}
+    //           ></NavGroup>
 
-              {user && featureFlags && <Menu items={menu} />}
-            </NavList>
-          </Nav>
-        }
-      />
-    );
+    //           {/*
+    //           {user && featureFlags && <Menu items={menu} />}
+    //           */}
+    //           <Menu items={menu} />
+    //         </NavList>
+    //       </Nav>
+    //     }
+    //   />
+    // );
 
+    const Sidebar = () => {
+     
+      console.log('LOADER APP RENDER Sidebar() called');
+
+      //debugger;
+
+      return (
+          <PageSidebar
+            theme='dark'
+            nav={
+              <Nav theme='dark' onToggle={onToggle}>
+                <NavList>
+                  <NavGroup
+                    className={'nav-title'}
+                    title={APPLICATION_NAME}
+                  ></NavGroup>
+
+                  <Menu items={menu} />
+                </NavList>
+              </Nav>
+            }
+          />
+      );
+    };
+
+
+    /*
     // Hide navs on login page
     if (
       this.props.location.pathname === Paths.login ||
       this.props.location.pathname === UI_EXTERNAL_LOGIN_URI
     ) {
+      console.log('LOADER APP RENDER PATHS.LOGIN OR UI_EXTERNAL_LOGIN_URI');
       return this.ctx(<Routes updateInitialData={this.updateInitialData} />);
     }
+    */
 
+    console.log('LOADER APP RENDER DEFAULT RETURN');
+    //debugger;
     return this.ctx(
-      <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
+      <Page isManagedSidebar={true} header={Header} sidebar={Sidebar()}>
         {this.state.aboutModalVisible && aboutModal}
         <Routes updateInitialData={this.updateInitialData} />
       </Page>,
@@ -320,6 +392,9 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private menu() {
+
+    console.log('LOADER APP menu()');
+
     const menuItem = (name, options = {}) => ({
       active: false,
       condition: () => true,
@@ -337,21 +412,21 @@ class App extends React.Component<RouteComponentProps, IState> {
       items,
     });
 
-    return [
+    const newMenu = [
       menuSection(t`Collections`, {}, [
         menuItem(t`Collections`, {
           url: formatPath(Paths.searchByRepo, {
             repo: this.state.selectedRepo,
           }),
-          condition: ({ settings, user }) =>
-            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-            !user.is_anonymous,
+          //condition: ({ settings, user }) =>
+          //  settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
+          //  !user.is_anonymous,
         }),
         menuItem(t`Namespaces`, {
           url: Paths[NAMESPACE_TERM],
-          condition: ({ settings, user }) =>
-            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-            !user.is_anonymous,
+          //condition: ({ settings, user }) =>
+          //  settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
+          //  !user.is_anonymous,
         }),
         menuItem(t`Repository Management`, {
           condition: ({ user }) => !user.is_anonymous,
@@ -364,6 +439,14 @@ class App extends React.Component<RouteComponentProps, IState> {
         menuItem(t`Approval`, {
           condition: ({ user }) => user.model_permissions.move_collection,
           url: Paths.approvalDashboard,
+        }),
+      ]),
+      menuSection(t`Legacy`, {}, [
+        menuItem(t`Community`, {
+          url: Paths.legacyUsers,
+        }),
+        menuItem(t`Roles`, {
+          url: Paths.legacyRoles,
         }),
       ]),
       menuSection(
@@ -403,9 +486,18 @@ class App extends React.Component<RouteComponentProps, IState> {
         }),
       ]),
     ];
+
+    console.log('LOADER APP menu length', newMenu.length);
+    console.log('LOADER APP menu return', newMenu);
+    //if (newMenu.length === 0) {
+    //    debugger;
+    //}
+    return newMenu;
   }
 
   private activateMenu(items) {
+    // activation means the menu item is correlated to the current url path
+    console.log('LOADER APP activateMenu start', items);
     items.forEach(
       (item) =>
         (item.active =
@@ -413,6 +505,7 @@ class App extends React.Component<RouteComponentProps, IState> {
             ? this.activateMenu(item.items)
             : this.props.location.pathname.startsWith(item.url)),
     );
+    console.log('LOADER APP activateMenu done', items);
     return some(items, 'active');
   }
 
@@ -433,6 +526,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   private setRepoToURL() {
     const match = this.isRepoURL(this.props.location.pathname);
+    console.log('LOADER APP setRepoToUrl', this.props.location.pathname, match);
     if (match) {
       if (match.params['repo'] !== this.state.selectedRepo) {
         this.setState({ selectedRepo: match.params['repo'] });
@@ -441,12 +535,23 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private isRepoURL(location) {
-    return matchPath(location, {
+    const matched = matchPath(location, {
       path: Paths.searchByRepo,
     });
+    console.log('LOADER APP isRepoUrl', location, matched);
+    return matched;
   }
 
   private ctx(component) {
+    //console.log('ctx', 'component', component);
+    //console.log('ctx', 'this.state.user', this.state.user);
+    //console.log('ctx', 'this.setUser', this.setUser);
+    //console.log('ctx', 'this.setRepo', this.setRepo);
+    //console.log('ctx', 'this.state.selectedRepo', this.state.selectedRepo);
+    //console.log('ctx', 'this.state.featureFlags', this.state.featureFlags);
+    //console.log('ctx', 'this.state.alerts', this.state.alerts);
+    //console.log('ctx', 'this.state.settings', this.state.settings);
+
     return (
       <AppContext.Provider
         value={{
@@ -467,6 +572,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private setUser = (user: UserType, callback?: () => void) => {
+    console.log(`LOADER APP setUser ${user}`);
     this.setState({ user: user }, () => {
       if (callback) {
         callback();
@@ -475,6 +581,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   };
 
   private setRepo = (path: string) => {
+    console.log(`LOADER APP setRepo ${path}`)
     this.props.history.push(path);
   };
 

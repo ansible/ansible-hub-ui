@@ -6,6 +6,7 @@ export { default as CollectionImportLog } from './collection-detail/collection-i
 export { default as CollectionDependencies } from './collection-detail/collection-dependencies';
 export { default as EditNamespace } from './edit-namespace/edit-namespace';
 export { default as LoginPage } from './login/login';
+export { default as SocialLoginPage } from './login-social/login';
 export { default as MyImports } from './my-imports/my-imports';
 export { default as NamespaceDetail } from './namespace-detail/namespace-detail';
 export { default as MyNamespaces } from './namespace-list/my-namespaces';
