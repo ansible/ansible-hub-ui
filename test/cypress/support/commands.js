@@ -723,7 +723,7 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
         cy.log('Collections are empty!');
       }
     });
-  }
+  };
 
   cy.galaxykit('collection list').then((res) => {
     const data = JSON.parse(res[0]).data;
