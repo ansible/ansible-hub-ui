@@ -348,15 +348,15 @@ class App extends React.Component<RouteComponentProps, IState> {
           url: formatPath(Paths.searchByRepo, {
             repo: this.state.selectedRepo,
           }),
-          condition: ({ settings, user }) =>
-            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-            !user.is_anonymous,
+          //condition: ({ settings, user }) =>
+          //  settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
+          //  !user.is_anonymous,
         }),
         menuItem(t`Namespaces`, {
           url: Paths[NAMESPACE_TERM],
-          condition: ({ settings, user }) =>
-            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-            !user.is_anonymous,
+          //condition: ({ settings, user }) =>
+          //  settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
+          //  !user.is_anonymous,
         }),
         menuItem(t`Repository Management`, {
           condition: ({ user }) => !user.is_anonymous,
@@ -371,6 +371,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           url: Paths.approvalDashboard,
         }),
       ]),
+      /*
       menuSection(
         t`Execution Environments`,
         {
@@ -386,6 +387,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           }),
         ],
       ),
+      */
       menuItem(t`Task Management`, {
         url: Paths.taskList,
         condition: ({ user }) => !user.is_anonymous,
@@ -452,6 +454,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private ctx(component) {
+    console.log('ctx component', component);
     return (
       <AppContext.Provider
         value={{
@@ -472,6 +475,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private setUser = (user: UserType, callback?: () => void) => {
+    console.log('set user', user);
     this.setState({ user: user }, () => {
       if (callback) {
         callback();

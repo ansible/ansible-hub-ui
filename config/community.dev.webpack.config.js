@@ -3,8 +3,10 @@ const webpackBase = require('./webpack.base.config');
 // Used for getting the correct host when running in a container
 const proxyHost = process.env.API_PROXY_HOST || 'localhost';
 const proxyPort = process.env.API_PROXY_PORT || '5001';
-const apiBasePath = process.env.API_BASE_PATH || '/api/';
-const uiExternalLoginURI = process.env.UI_EXTERNAL_LOGIN_URI || '/login';
+//const apiBasePath = process.env.API_BASE_PATH || '/api/';
+const apiBasePath = '/api/';
+//const uiExternalLoginURI = process.env.UI_EXTERNAL_LOGIN_URI || '/login';
+const uiExternalLoginURI = '/login';
 
 module.exports = webpackBase({
   // The host where the API lives. EX: https://localhost:5001

@@ -92,12 +92,14 @@ class App extends React.Component<RouteComponentProps, IState> {
       groups: [],
     };
 
+    /*
     this.setState({
       //user: fakeuser,
       menuExpandedSections: menu
         .filter((i) => i.type === 'section' && i.active)
         .map((i) => i.name),
     });
+    */
   }
 
   makeMenu() {
