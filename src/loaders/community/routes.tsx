@@ -178,23 +178,23 @@ export class Routes extends React.Component<IRoutesProps> {
     }
     return [
       {
-        comp: LegacyUsers,
-        path: Paths.legacyUsers,
-        isDisabled: false
-      },
-      {
         comp: LegacyUser,
         path: Paths.legacyUser,
         isDisabled: false
       },
       {
-        comp: LegacyRoles,
-        path: Paths.legacyRoles,
+        comp: LegacyUsers,
+        path: Paths.legacyUsers,
         isDisabled: false
       },
       {
         comp: LegacyRole,
         path: Paths.legacyRole,
+        isDisabled: false
+      },
+      {
+        comp: LegacyRoles,
+        path: Paths.legacyRoles,
         isDisabled: false
       },
       {
