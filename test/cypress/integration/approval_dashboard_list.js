@@ -52,6 +52,10 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     loadData();
   });
 
+  after(() => {
+    cy.deleteNamespacesAndCollections();
+  });
+
   beforeEach(() => {
     cy.login();
     cy.visit('/ui/approval-dashboard');

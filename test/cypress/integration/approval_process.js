@@ -25,14 +25,14 @@ describe('Approval Dashboard process', () => {
     cy.contains('[data-cy="CertificationDashboard-row"]', 'Needs review');
     cy.contains(
       '[data-cy="CertificationDashboard-row"] button',
-      'Sign and approve',
+      'Approve',
     ).click();
     cy.contains('.body', 'No results found', { timeout: 8000 });
     cy.visit('/ui/approval-dashboard');
     cy.contains('button', 'Clear all filters').click();
     cy.contains(
       '[data-cy="CertificationDashboard-row"]',
-      'Signed and approved',
+      'Approved',
     );
   });
 
