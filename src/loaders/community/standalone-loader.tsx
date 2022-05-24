@@ -402,10 +402,12 @@ class App extends React.Component<RouteComponentProps, IState> {
         ],
       ),
       */
+      /*
       menuItem(t`Task Management`, {
         url: Paths.taskList,
         condition: ({ user }) => !user.is_anonymous,
       }),
+      */
       menuItem(t`Documentation`, {
         url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
         external: true,
@@ -413,6 +415,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
           !user.is_anonymous,
       }),
+      /*
       menuSection(t`User Access`, {}, [
         menuItem(t`Users`, {
           condition: ({ user }) => user.model_permissions.view_user,
@@ -423,6 +426,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           url: Paths.groupList,
         }),
       ]),
+      */
     ];
   }
 
@@ -434,6 +438,7 @@ class App extends React.Component<RouteComponentProps, IState> {
             ? this.activateMenu(item.items)
             : this.props.location.pathname.startsWith(item.url)),
     );
+    //console.log('activateMenu', items);
     return some(items, 'active');
   }
 
@@ -453,6 +458,9 @@ class App extends React.Component<RouteComponentProps, IState> {
     });
 
   private setRepoToURL() {
+    if (this.props.location.pathname.includes('ui/legacy/')) {
+      return null;
+    }
     const match = this.isRepoURL(this.props.location.pathname);
     if (match) {
       if (match.params['repo'] !== this.state.selectedRepo) {
@@ -468,7 +476,7 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private ctx(component) {
-    console.log('ctx component', component);
+    //console.log('ctx component', component);
     return (
       <AppContext.Provider
         value={{

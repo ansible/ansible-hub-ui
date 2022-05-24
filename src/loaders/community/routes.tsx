@@ -33,6 +33,10 @@ import {
   ExecutionEnvironmentManifest,
   TaskListView,
   TaskDetail,
+  LegacyUsers,
+  LegacyUser,
+  LegacyRoles,
+  LegacyRole
 } from 'src/containers';
 import {
   ActiveUserAPI,
@@ -94,6 +98,7 @@ class AuthHandler extends React.Component<
   componentDidMount() {
     // This component is mounted on every route change, so it's a good place
     // to check for an active user.
+    console.log('routes didmount');
     const { user, settings } = this.context;
     if (!user || !settings) {
       const promises = [];
@@ -123,6 +128,8 @@ class AuthHandler extends React.Component<
     const { isLoading } = this.state;
     const { Component, noAuth, ...props } = this.props;
     const { user, featureFlags } = this.context;
+
+    console.log('route render', Component, props);
 
     let isExternalAuth = false;
     if (featureFlags) {
@@ -170,6 +177,26 @@ export class Routes extends React.Component<IRoutesProps> {
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
     return [
+      {
+        comp: LegacyUsers,
+        path: Paths.legacyUsers,
+        isDisabled: false
+      },
+      {
+        comp: LegacyUser,
+        path: Paths.legacyUser,
+        isDisabled: false
+      },
+      {
+        comp: LegacyRoles,
+        path: Paths.legacyRoles,
+        isDisabled: false
+      },
+      {
+        comp: LegacyRole,
+        path: Paths.legacyRole,
+        isDisabled: false
+      },
       {
         comp: ExecutionEnvironmentDetailActivities,
         path: Paths.executionEnvironmentDetailActivities,
