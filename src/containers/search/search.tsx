@@ -366,10 +366,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderSyncToogle(
-    name: string,
-    namespace: string,
-  ): React.ReactNode {
+  private renderSyncToogle(name: string, namespace: string): React.ReactNode {
     const { synclist } = this.state;
 
     if (!synclist) {
@@ -377,13 +374,13 @@ class Search extends React.Component<RouteComponentProps, IState> {
     }
 
     return (
-        <Switch
-          id={namespace + '.' + name}
-          className='sync-toggle'
-          label={t`Sync`}
-          isChecked={this.isCollectionSynced(name, namespace)}
-          onChange={() => this.toggleCollectionSync(name, namespace)}
-        />
+      <Switch
+        id={namespace + '.' + name}
+        className='sync-toggle'
+        label={t`Sync`}
+        isChecked={this.isCollectionSynced(name, namespace)}
+        onChange={() => this.toggleCollectionSync(name, namespace)}
+      />
     );
   }
 
