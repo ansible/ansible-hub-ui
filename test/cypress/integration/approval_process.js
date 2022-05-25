@@ -3,6 +3,7 @@ describe('Approval Dashboard process', () => {
     cy.settings({ GALAXY_REQUIRE_CONTENT_APPROVAL: true });
     cy.login();
     cy.deleteNamespacesAndCollections();
+    cy.galaxykit('-i namespace create', 'appp_n_test');
     cy.galaxykit('-i collection upload', 'appp_n_test', 'appp_c_test1');
   });
 
