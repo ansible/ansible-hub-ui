@@ -1,5 +1,4 @@
 describe('Repo Management tests', () => {
-  let num = (~~(Math.random() * 1000000)).toString();
   let remoteRepoUrl = '/ui/repositories?tab=remote';
   let localRepoUrl = '/ui/repositories';
 
@@ -63,37 +62,6 @@ describe('Repo Management tests', () => {
     ).contains(Cypress.env('prefix') + 'content/community/'); // check content of input
 
     cy.get('button[aria-label="Copy to clipboard"]').eq(1).should('be.enabled');
-  });
-
-  it('edits remote registry', () => {
-    cy.menuGo('Execution Environments > Remote Registries');
-    cy.deleteRegistries();
-    cy.addRemoteRegistry(`docker${num}`, 'https://registry.hub.docker.com/');
-    cy.get('[aria-label="Actions"]').click();
-    cy.contains('Edit').click();
-    cy.contains('Show advanced options').click();
-
-    // enter new values
-    cy.get('input[id="username"]').type('test');
-    cy.get('input[id="password"]').type('test');
-    cy.get('input[id="proxy_url"]').type('https://example.org');
-    cy.get('input[id="proxy_username"]').type('test');
-    cy.get('input[id="proxy_password"]').type('test');
-    cy.intercept(
-      'PUT',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/**/',
-    ).as('editRegistry');
-    cy.contains('Save').click();
-    cy.wait('@editRegistry');
-
-    // verify values have been saved properly.
-    cy.get('[aria-label="Actions"]').click();
-    cy.contains('Edit').click();
-    cy.contains('Show advanced options').click();
-    cy.get('[data-cy="username"]').children().contains('Clear');
-    cy.get('input[id="proxy_url"]').should('have.value', 'https://example.org');
-    cy.get('[data-cy="proxy_username"]').children().contains('Clear');
-    cy.contains('Save').click();
   });
 
   it('starts remote repo sync', () => {
