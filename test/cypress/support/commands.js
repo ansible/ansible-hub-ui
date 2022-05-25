@@ -707,8 +707,27 @@ Cypress.Commands.add('deleteContainersManual', {}, () => {
 });
 
 Cypress.Commands.add('deleteAllCollections', {}, () => {
+  const waitForEmptyCollection = (maxLoops) => {
+    if (maxLoops == 0) {
+      cy.log('Max loops reached while waiting for the empty collections.');
+      return;
+    }
+
+    cy.wait(3000);
+
+    cy.galaxykit('collection list').then((res) => {
+      const data = JSON.parse(res[0]).data;
+      if (data.length != 0) {
+        waitForEmptyCollection(maxLoops - 1);
+      } else {
+        cy.log('Collections are empty!');
+      }
+    });
+  };
+
   cy.galaxykit('collection list').then((res) => {
     const data = JSON.parse(res[0]).data;
+    cy.log(data.length + ' collections found for deletion.');
     data.forEach((record) => {
       cy.galaxykit(
         'collection delete',
@@ -719,11 +738,12 @@ Cypress.Commands.add('deleteAllCollections', {}, () => {
       );
     });
   });
+
+  waitForEmptyCollection(10);
 });
 
 Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
   cy.deleteAllCollections();
-  cy.wait(5000);
   cy.galaxykit('namespace list').then((json) => {
     JSON.parse(json).data.forEach((namespace) => {
       cy.galaxykit('namespace delete', namespace.name);
