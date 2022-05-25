@@ -9,6 +9,7 @@ export class Constants {
   static readonly CARD_DEFAULT_PAGINATION_OPTIONS = [10, 20, 50, 100];
   static readonly INSIGHTS_DEPLOYMENT_MODE = 'insights';
   static readonly STANDALONE_DEPLOYMENT_MODE = 'standalone';
+  static readonly COMMUNITY_DEPLOYMENT_MODE = 'community';
 
   static readonly ADMIN_GROUP = 'system:partner-engineers';
   static PUBLISHED = 'published';

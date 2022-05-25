@@ -105,6 +105,7 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
           );
       })
       .catch((result) => {
+        console.log('CATCH RESULT', result);
         if (result.response.status.toString().startsWith('5')) {
           this.setState({
             passwordValue: '',

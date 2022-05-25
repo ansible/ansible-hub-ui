@@ -83,6 +83,9 @@ export class BaseAPI {
     if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
       request.headers['X-CSRFToken'] = Cookies.get('csrftoken');
     }
+    if (DEPLOYMENT_MODE === Constants.COMMUNITY_DEPLOYMENT_MODE) {
+      request.headers['X-CSRFToken'] = Cookies.get('csrftoken');
+    }
     return request;
   }
 }

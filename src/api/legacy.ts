@@ -11,6 +11,8 @@ export class LegacyAPI extends BaseAPI {
   }
 
   getApiPath(url: string) {
-    return `/${this.API_VERSION}/${url}`;
+    const newUrl = `/${this.API_VERSION}/${url}`;
+    console.log('getapipath', url, newUrl);
+    return newUrl;
   }
 }
