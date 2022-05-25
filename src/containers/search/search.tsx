@@ -272,12 +272,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
               className='card'
               key={c.id}
               {...c}
-              footer={this.renderCollectionControls(
-                c.name,
-                c.namespace.name,
-                false,
-                c,
-              )}
+              footer={this.renderSyncToogle(c.name, c.namespace.name)}
               repo={this.context.selectedRepo}
               menu={this.renderMenu(false, c)}
             />
@@ -371,20 +366,17 @@ class Search extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private renderCollectionControls(
+  private renderSyncToogle(
     name: string,
     namespace: string,
-    list: boolean,
-    collection,
   ): React.ReactNode {
     const { synclist } = this.state;
 
     if (!synclist) {
-      return list ? this.renderMenu(list, collection) : null;
+      return null;
     }
 
     return (
-      <>
         <Switch
           id={namespace + '.' + name}
           className='sync-toggle'
@@ -392,8 +384,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
           isChecked={this.isCollectionSynced(name, namespace)}
           onChange={() => this.toggleCollectionSync(name, namespace)}
         />
-        {list && this.renderMenu(list, collection)}
-      </>
     );
   }
 
@@ -474,12 +464,12 @@ class Search extends React.Component<RouteComponentProps, IState> {
                 showNamespace={true}
                 key={c.id}
                 {...c}
-                controls={this.renderCollectionControls(
-                  c.name,
-                  c.namespace.name,
-                  true,
-                  c,
-                )}
+                controls={
+                  <>
+                    {this.renderSyncToogle(c.name, c.namespace.name)}
+                    {this.renderMenu(true, c)}
+                  </>
+                }
                 repo={this.context.selectedRepo}
               />
             ))}
