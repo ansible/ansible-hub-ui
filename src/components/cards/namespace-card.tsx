@@ -9,7 +9,9 @@ import {
   CardHeader,
   CardHeaderMain,
   CardTitle,
+  Flex,
   Tooltip,
+  FlexItem,
 } from '@patternfly/react-core';
 
 import { Link } from 'react-router-dom';
@@ -22,6 +24,7 @@ interface IProps {
   name: string;
   company: string;
   namespaceURL?: string;
+  menu?: React.ReactNode;
 }
 
 export class NamespaceCard extends React.Component<IProps> {
@@ -32,13 +35,18 @@ export class NamespaceCard extends React.Component<IProps> {
       <Card className='hub-c-card-ns-container'>
         <CardHeader>
           <CardHeaderMain>
-            <Logo
-              alt={t`${company} logo`}
-              fallbackToDefault
-              image={avatar_url}
-              size='40px'
-              unlockWidth
-            />
+            <Flex>
+              <FlexItem>
+                <Logo
+                  alt={t`${company} logo`}
+                  fallbackToDefault
+                  image={avatar_url}
+                  size='40px'
+                  unlockWidth
+                />
+              </FlexItem>
+              <FlexItem>{this.props.menu}</FlexItem>
+            </Flex>
           </CardHeaderMain>
         </CardHeader>
         <Tooltip content={company || name}>

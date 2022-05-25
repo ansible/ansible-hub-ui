@@ -5,9 +5,12 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
+  DropdownItem,
+  Checkbox,
+  Text,
 } from '@patternfly/react-core';
-import { RouteComponentProps, Redirect } from 'react-router-dom';
-import { t } from '@lingui/macro';
+import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
+import { t, Trans } from '@lingui/macro';
 
 import { ParamHelper } from 'src/utilities/param-helper';
 import {
@@ -24,6 +27,8 @@ import {
   NamespaceModal,
   Pagination,
   Sort,
+  StatefulDropdown,
+  DeleteModal,
 } from 'src/components';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
@@ -50,6 +55,13 @@ interface IState {
   loading: boolean;
   redirect?: string;
   inputText: string;
+  isOpenNamespaceModal: boolean;
+  isOpenSignModal: boolean;
+  isNamespaceEmpty: boolean;
+  showImportModal: boolean;
+  selectedNamespace: NamespaceListType;
+  isNamespacePending: boolean;
+  confirmDelete: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -84,6 +96,13 @@ export class NamespaceList extends React.Component<IProps, IState> {
       isModalOpen: false,
       loading: true,
       inputText: params['keywords'] || '',
+      isOpenNamespaceModal: false,
+      isOpenSignModal: false,
+      isNamespaceEmpty: false,
+      showImportModal: false,
+      selectedNamespace: null,
+      isNamespacePending: false,
+      confirmDelete: false,
     };
   }
 
@@ -94,6 +113,10 @@ export class NamespaceList extends React.Component<IProps, IState> {
   };
 
   componentDidMount() {
+    this.loadAll();
+  }
+
+  public loadAll() {
     if (this.props.filterOwner) {
       // Make a query with no params and see if it returns results to tell
       // if the user can edit namespaces
@@ -142,7 +165,17 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <Redirect push to={this.state.redirect} />;
     }
 
-    const { namespaces, params, itemCount, loading, inputText } = this.state;
+    const {
+      namespaces,
+      params,
+      itemCount,
+      loading,
+      inputText,
+      isNamespacePending,
+      isOpenNamespaceModal,
+      confirmDelete,
+      selectedNamespace,
+    } = this.state;
     const { filterOwner } = this.props;
     const { user, alerts } = this.context;
     const noData =
@@ -164,6 +197,35 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     return (
       <div className='hub-namespace-page'>
+        {isOpenNamespaceModal && (
+          <DeleteModal
+            spinner={this.state.isNamespacePending}
+            cancelAction={() => {
+              this.setState({
+                isOpenNamespaceModal: false,
+                confirmDelete: false,
+              });
+            }}
+            deleteAction={this.deleteNamespace}
+            title={t`Delete namespace?`}
+            isDisabled={!confirmDelete || isNamespacePending}
+          >
+            <>
+              <Text className='delete-namespace-modal-message'>
+                <Trans>
+                  Deleting <b>{selectedNamespace.name}</b> and its data will be
+                  lost.
+                </Trans>
+              </Text>
+              <Checkbox
+                isChecked={confirmDelete}
+                onChange={(val) => this.setState({ confirmDelete: val })}
+                label={t`I understand that this action cannot be undone.`}
+                id='delete_confirm'
+              />
+            </>
+          </DeleteModal>
+        )}
         <NamespaceModal
           isOpen={this.state.isModalOpen}
           toggleModal={this.handleModalToggle}
@@ -325,6 +387,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                 repo: this.context.selectedRepo,
               })}
               key={i}
+              menu={this.renderPageControls(ns)}
               {...ns}
             ></NamespaceCard>
           </div>
@@ -376,6 +439,125 @@ export class NamespaceList extends React.Component<IProps, IState> {
   private closeAlert() {
     this.context.setAlerts([]);
   }
+
+  private renderPageControls(namespace) {
+    const dropdownItems = [
+      <DropdownItem
+        key='1'
+        component={
+          <Link
+            to={formatPath(Paths.editNamespace, {
+              namespace: namespace.name,
+            })}
+          >
+            {t`Edit namespace`}
+          </Link>
+        }
+      />,
+      this.context.user.model_permissions.delete_namespace && (
+        <React.Fragment key={'2'}>
+          <DropdownItem
+            onClick={() =>
+              this.setState({
+                selectedNamespace: namespace,
+                isOpenNamespaceModal: true,
+              })
+            }
+          >
+            {t`Delete namespace`}
+          </DropdownItem>
+        </React.Fragment>
+      ),
+      <DropdownItem
+        key='3'
+        component={
+          <Link
+            to={formatPath(
+              Paths.myImports,
+              {},
+              {
+                namespace: namespace.name,
+              },
+            )}
+          >
+            {t`Imports`}
+          </Link>
+        }
+      />,
+
+      <DropdownItem
+        key='sign-collections'
+        onClick={() =>
+          this.setState({ selectedNamespace: namespace, isOpenSignModal: true })
+        }
+      >
+        {t`Sign all collections`}
+      </DropdownItem>,
+      <DropdownItem
+        onClick={() =>
+          this.setState({ selectedNamespace: namespace, showImportModal: true })
+        }
+      >
+        {t`Upload collection`}
+      </DropdownItem>,
+    ].filter(Boolean);
+    /*if (!this.state.showControls) {
+      return <div className='hub-namespace-page-controls'></div>;
+    }*/
+    return (
+      <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
+        {dropdownItems.length > 0 && <StatefulDropdown items={dropdownItems} />}
+      </div>
+    );
+  }
+
+  private deleteNamespace = () => {
+    /*const {
+      namespace: { name },
+    } = this.state;*/
+    const namespace = this.state.selectedNamespace;
+
+    this.setState({ isNamespacePending: true }, () =>
+      NamespaceAPI.delete(namespace.name)
+        .then(() => {
+          this.setState({
+            confirmDelete: false,
+            isNamespacePending: false,
+            isOpenNamespaceModal: false,
+          });
+          this.context.setAlerts([
+            ...this.context.alerts,
+            {
+              variant: 'success',
+              title: (
+                <Trans>
+                  Namespace &quot;{namespace.name}&quot; has been successfully
+                  deleted.
+                </Trans>
+              ),
+            },
+          ]);
+          this.loadAll();
+        })
+        .catch((e) => {
+          const { status, statusText } = e.response;
+          this.setState({
+            isOpenNamespaceModal: false,
+            confirmDelete: false,
+            isNamespacePending: false,
+          });
+
+          this.context.setAlerts([
+            ...this.context.alerts,
+            {
+              variant: 'danger',
+              title: t`Namespace "${namespace.name}" could not be deleted.`,
+              description: errorMessage(status, statusText),
+            },
+          ]);
+        }),
+    );
+  };
 }
 
 NamespaceList.contextType = AppContext;
