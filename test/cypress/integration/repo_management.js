@@ -52,7 +52,7 @@ describe('Repo Management tests', () => {
     cy.get('button[aria-label="Copy to clipboard"]').should('be.enabled');
   });
 
-  it.only('expands and copies CLI config from local repo list', () => {
+  it('expands and copies CLI config from local repo list', () => {
     cy.visit(localRepoUrl);
     cy.get(
       '.pf-c-clipboard-copy button[aria-label="Show content"]:first',
