@@ -1,4 +1,4 @@
-describe('add roles to a group', () => {
+describe('Group Roles Tests', () => {
   const num = (~~(Math.random() * 1000000)).toString();
   const groupName = `test_group_${num}`;
 

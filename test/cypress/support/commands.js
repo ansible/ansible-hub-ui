@@ -333,60 +333,13 @@ Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
   cy.contains('button', 'Edit');
 });
 
-const allPerms = [
-  {
-    group: 'namespaces',
-    permissions: [
-      'Add namespace',
-      'Change namespace',
-      'Delete namespace',
-      'Upload to namespace',
-    ],
-  },
-  {
-    group: 'collections',
-    permissions: ['Modify Ansible repo content', 'Delete collection'],
-  },
-  {
-    group: 'users',
-    permissions: ['View user', 'Delete user', 'Add user', 'Change user'],
-  },
-  {
-    group: 'groups',
-    permissions: ['View group', 'Delete group', 'Add group', 'Change group'],
-  },
-  {
-    group: 'remotes',
-    permissions: ['Change collection remote', 'View collection remote'],
-  },
-  {
-    group: 'containers',
-    permissions: [
-      'Delete container repository',
-      'Change container namespace permissions',
-      'Change containers',
-      'Change image tags',
-      'Create new containers',
-      'Push to existing containers',
-    ],
-  },
-  {
-    group: 'registries',
-    permissions: [
-      'Add remote registry',
-      'Change remote registry',
-      'Delete remote registry',
-    ],
-  },
-];
+// Cypress.Commands.add('removeAllPermissions', {}, (groupName) => {
+//   cy.removePermissions(groupName, allPerms);
+// });
 
-Cypress.Commands.add('removeAllPermissions', {}, (groupName) => {
-  cy.removePermissions(groupName, allPerms);
-});
-
-Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
-  cy.addPermissions(groupName, allPerms);
-});
+// Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
+//   cy.addPermissions(groupName, allPerms);
+// });
 
 Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.menuGo('User Access > Groups');
@@ -829,15 +782,16 @@ Cypress.Commands.add('createRole', {}, (name, description, permissions) => {
   cy.get('input[id="role_description"]').type(description);
 
   permissions.forEach((permissionElement) => {
-    cy.get(
-      `[data-cy=RoleForm-Permissions-row-${permissionElement.group}] .pf-c-select`,
-    ).click();
     permissionElement.permissions.forEach((permission) => {
-      cy.contains('button', permission).click();
-    });
+      cy.get(
+        `[data-cy=RoleForm-Permissions-row-${permissionElement.group}] .pf-c-select input`,
+      ).click();
 
-    // untoggle permission options
-    cy.contains('Permissions').click();
+      cy.contains('button', permission).click();
+
+      // untoggle permission options
+      cy.contains('Permissions').click();
+    });
   });
 
   cy.intercept('POST', Cypress.env('pulpPrefix') + 'roles/').as('saveRole');
