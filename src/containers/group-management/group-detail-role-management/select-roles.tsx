@@ -132,7 +132,11 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
                   <FlexItem flex={{ default: 'flex_1' }}>
                     <Flex>
                       {selectedRoles.map((role) => (
-                        <FlexItem key={role.name} className='hub-permission'>
+                        <FlexItem
+                          key={role.name}
+                          className='hub-permission'
+                          data-cy={`HubPermission-${role.name}`}
+                        >
                           <Label
                             onClose={() =>
                               onRolesUpdate(

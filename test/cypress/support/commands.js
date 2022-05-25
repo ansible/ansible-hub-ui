@@ -886,7 +886,6 @@ Cypress.Commands.add('addRolesToGroup', {}, (groupName, roles) => {
     cy.wait('@postGroupRoles');
   });
   cy.wait('@getGroupRoles');
-  cy.wait('@roles');
 });
 
 Cypress.Commands.add('deleteRole', {}, (role) => {
@@ -912,36 +911,3 @@ Cypress.Commands.add('deleteRole', {}, (role) => {
   cy.wait('@deleteRole');
   cy.wait('@loadRoles');
 });
-
-// Cypress.Commands.add('removeRoleFromGroup', {}, (groupName, role) => {
-//   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('groups');
-//   cy.menuGo('User Access > Groups');
-//   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-//   cy.wait('@groups');
-
-//   cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`)
-//     .find('[data-cy="kebab-toggle"]')
-//     .click()
-//     .contains('Remove Role')
-//     .click();
-
-//   cy.intercept('DELETE', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
-//     'deleteRole',
-//   );
-
-//   cy.intercept('GET', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
-//     'getGroupRoles',
-//   );
-
-//   cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('roles');
-
-//   cy.get('.pf-c-modal-box__footer').contains('Delete').click();
-
-//   cy.wait('@deleteRole');
-//   cy.wait('@getGroupRoles');
-//   cy.wait('@roles');
-// });
-
-// Cypress.Commands.add('removeRolesFromGroup', {}, (groupName, roles) => {
-//   roles.forEach((role) => cy.removeRoleFromGroup(groupName, role));
-// });
