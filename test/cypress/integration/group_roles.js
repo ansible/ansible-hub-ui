@@ -55,7 +55,6 @@ describe('Group Roles Tests', () => {
     cy.galaxykit('group delete', groupName);
     cy.galaxykit('group delete', 'empty_group');
     cy.deleteRole(testRole.name);
-    cy.deleteRole(testContainerRole.name);
   });
 
   it('should add a new role to group', () => {
@@ -151,6 +150,15 @@ describe('Group Roles Tests', () => {
       .contains('Delete')
       .click();
     cy.wait('@deleteGroupRole');
+  });
+
+  it('should not display deleted role in group detail', () => {
+    cy.addRolesToGroup(groupName, [testContainerRole.name]);
+    cy.deleteRole(testContainerRole.name);
+
+    cy.menuGo('User Access > Groups');
+    cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+    cy.get('.body').contains(testContainerRole.name).should('not.exist');
   });
 
   it('should show group empty state', () => {
