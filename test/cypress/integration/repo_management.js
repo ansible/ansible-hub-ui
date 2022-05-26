@@ -64,7 +64,7 @@ describe('Repo Management tests', () => {
     cy.get('button[aria-label="Copy to clipboard"]').eq(1).should('be.enabled');
   });
 
-  it('starts remote repo sync', () => {
+  it.skip('starts remote repo sync', () => {
     cy.visit(remoteRepoUrl);
 
     //checks sync status === 'Running' after sync post request
