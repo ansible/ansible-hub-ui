@@ -99,8 +99,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       this.getSynclist();
     }
-
-    this.setState({ synclist: { collections: [] } as any }); // DEBUG
   }
 
   private get closeAlert() {
