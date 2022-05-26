@@ -738,7 +738,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         } else {
           const { status, statusText } = e.response;
           this.addAlert(
-            t`Group "${this.state.group.name}" could not be displayed.`,
+            t`Group could not be displayed.`,
             'danger',
             errorMessage(status, statusText),
           );
