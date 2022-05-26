@@ -1,1 +1,0 @@
-Implement edit group from group list view

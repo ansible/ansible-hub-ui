@@ -1,1 +1,0 @@
-Makes visible the delete alert upon deletion and redirect from ex env detail page.
