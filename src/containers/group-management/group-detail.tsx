@@ -733,12 +733,16 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         this.setState({ group: result.data });
       })
       .catch((e) => {
-        const { status, statusText } = e.response;
-        this.addAlert(
-          t`Group "${this.state.group.name}" could not be displayed.`,
-          'danger',
-          errorMessage(status, statusText),
-        );
+        if (e.response.status === 404) {
+          this.setState({ redirect: Paths.notFound });
+        } else {
+          const { status, statusText } = e.response;
+          this.addAlert(
+            t`Group could not be displayed.`,
+            'danger',
+            errorMessage(status, statusText),
+          );
+        }
       });
 
     this.setState({
