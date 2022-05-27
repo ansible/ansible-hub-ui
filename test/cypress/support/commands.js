@@ -812,6 +812,10 @@ Cypress.Commands.add('addRolesToGroup', {}, (groupName, roles) => {
   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.wait('@groups');
   cy.get('[data-cy=add-roles]').click();
+
+  cy.get('[aria-label="Items per page"]').click();
+  cy.contains('100 per page').click();
+
   roles.forEach((role) => {
     cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${role}"]`)
       .find('input')
