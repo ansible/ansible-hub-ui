@@ -276,62 +276,62 @@ Cypress.Commands.add('removeRolesFromGroup', {}, (groupName, roles) => {
  *   group: permission group, one of names from PERMISSIONS; namespaces | collections | users | groups | remotes | containers | registries
  *   permissions: array of HUMAN_PERMISSIONS values (of the right group) - eg. "View user"
  */
-Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
-  cy.intercept(
-    'GET',
-    Cypress.env('prefix') + '_ui/v1/groups/*/model-permissions/*',
-  ).as('groups');
-  cy.menuGo('User Access > Groups');
-  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.wait('@groups');
-  cy.contains('button', 'Edit').click();
-  permissions.forEach((permissionElement) => {
-    permissionElement.permissions.forEach((permission) => {
-      // closes previously open dropdowns
-      cy.get('h1').click();
-      cy.get(
-        `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} [aria-label="Options menu"]`,
-      ).click();
-      cy.contains('button', permission).click();
-    });
-  });
-  // need to click outside dropdown to make save button clickable
-  cy.contains('Edit group permissions').click();
-  cy.contains('button', 'Save').click();
-  // wait for for update
-  cy.contains('button', 'Edit');
-});
+// Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
+//   cy.intercept(
+//     'GET',
+//     Cypress.env('prefix') + '_ui/v1/groups/*/model-permissions/*',
+//   ).as('groups');
+//   cy.menuGo('User Access > Groups');
+//   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+//   cy.wait('@groups');
+//   cy.contains('button', 'Edit').click();
+//   permissions.forEach((permissionElement) => {
+//     permissionElement.permissions.forEach((permission) => {
+//       // closes previously open dropdowns
+//       cy.get('h1').click();
+//       cy.get(
+//         `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} [aria-label="Options menu"]`,
+//       ).click();
+//       cy.contains('button', permission).click();
+//     });
+//   });
+//   // need to click outside dropdown to make save button clickable
+//   cy.contains('Edit group permissions').click();
+//   cy.contains('button', 'Save').click();
+//   // wait for for update
+//   cy.contains('button', 'Edit');
+// });
 
-Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
-  cy.menuGo('User Access > Groups');
-  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.contains('button', 'Edit').click();
-  permissions.forEach((permissionElement) => {
-    if (permissionElement.permissions.length > 3) {
-      // Make sure all permissions are visible
-      cy.containsnear(
-        `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `,
-        'more',
-      )
-        .first()
-        .click();
-    }
-    permissionElement.permissions.forEach((permission) => {
-      cy.containsnear(
-        `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `,
-        permission,
-      )
-        .findnear('button')
-        .first()
-        .click();
-    });
-    // closes previously open dropdowns
-    cy.get('h1').click();
-  });
-  cy.contains('button', 'Save').click();
-  // wait for for update
-  cy.contains('button', 'Edit');
-});
+// Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
+//   cy.menuGo('User Access > Groups');
+//   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+//   cy.contains('button', 'Edit').click();
+//   permissions.forEach((permissionElement) => {
+//     if (permissionElement.permissions.length > 3) {
+//       // Make sure all permissions are visible
+//       cy.containsnear(
+//         `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `,
+//         'more',
+//       )
+//         .first()
+//         .click();
+//     }
+//     permissionElement.permissions.forEach((permission) => {
+//       cy.containsnear(
+//         `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `,
+//         permission,
+//       )
+//         .findnear('button')
+//         .first()
+//         .click();
+//     });
+//     // closes previously open dropdowns
+//     cy.get('h1').click();
+//   });
+//   cy.contains('button', 'Save').click();
+//   // wait for for update
+//   cy.contains('button', 'Edit');
+// });
 
 // Cypress.Commands.add('removeAllPermissions', {}, (groupName) => {
 //   cy.removePermissions(groupName, allPerms);
@@ -794,16 +794,7 @@ Cypress.Commands.add('createRole', {}, (name, description, permissions) => {
     });
   });
 
-  cy.intercept('POST', Cypress.env('pulpPrefix') + 'roles/').as('saveRole');
-  cy.intercept(
-    'GET',
-    Cypress.env('pulpPrefix') + 'roles/?name__startswith=galaxy.*',
-  ).as('galaxyRoles');
-
   cy.contains('Save').click();
-
-  cy.wait('@saveRole');
-  cy.wait('@galaxyRoles');
 });
 
 Cypress.Commands.add('addRolesToGroup', {}, (groupName, roles) => {
@@ -828,37 +819,17 @@ Cypress.Commands.add('addRolesToGroup', {}, (groupName, roles) => {
     cy.contains(role);
   });
 
-  cy.intercept('POST', Cypress.env('pulpPrefix') + 'groups/*/roles/').as(
-    'postGroupRoles',
-  );
-
-  cy.intercept('GET', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
-    'getGroupRoles',
-  );
-
   cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('roles');
 
   cy.get('.pf-c-wizard__footer > button').contains('Add').click();
-
-  roles.forEach(() => {
-    cy.wait('@postGroupRoles');
-  });
-  cy.wait('@getGroupRoles');
 });
 
 Cypress.Commands.add('deleteRole', {}, (role) => {
-  cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('roles');
   cy.visit('/ui/roles/');
-  cy.wait('@roles');
 
   cy.get(
     `[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle]`,
   ).click();
-
-  cy.intercept('DELETE', Cypress.env('pulpPrefix') + 'roles/*').as(
-    'deleteRole',
-  );
-  cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('loadRoles');
 
   cy.contains('Delete').click();
   cy.get('[data-cy=DeleteModal]')
@@ -866,6 +837,4 @@ Cypress.Commands.add('deleteRole', {}, (role) => {
     .get('button')
     .contains('Delete')
     .click();
-  cy.wait('@deleteRole');
-  cy.wait('@loadRoles');
 });

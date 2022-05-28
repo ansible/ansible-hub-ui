@@ -145,15 +145,11 @@ describe('Group Roles Tests', () => {
     ).click();
     cy.contains('Remove Role').click();
 
-    cy.intercept('DELETE', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
-      'deleteGroupRole',
-    );
     cy.get('[data-cy="DeleteModal"]')
       .parent()
       .get('.pf-c-button.pf-m-danger')
       .contains('Delete')
       .click();
-    cy.wait('@deleteGroupRole');
   });
 
   it('should not display deleted role in group detail', () => {
