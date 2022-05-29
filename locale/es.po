@@ -109,7 +109,7 @@ msgstr "Una etiqueta puede contener caracteres alfabéticos ASCII en minúsculas
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:401
+#: src/containers/namespace-detail/namespace-detail.tsx:422
 msgid "API Error: Failed to set deprecation."
 msgstr "Error de API: No se ha podido pasar a desuso."
 
@@ -120,7 +120,7 @@ msgstr "Error de API: No se ha podido pasar a desuso."
 
 #: src/components/headers/collection-header.tsx:581
 #: src/components/headers/collection-header.tsx:632
-#: src/containers/namespace-detail/namespace-detail.tsx:419
+#: src/containers/namespace-detail/namespace-detail.tsx:440
 msgid "API Error: {status}"
 msgstr "Error de API: {status}"
 
@@ -330,7 +330,7 @@ msgstr "Cancelar"
 msgid "Canceled"
 msgstr "Cancelado"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:589
+#: src/containers/namespace-detail/namespace-detail.tsx:610
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "No se puede eliminar el espacio de nombres hasta que se <1/>hayan eliminado las dependencias de las <0/>colecciones"
 
@@ -469,6 +469,14 @@ msgstr "Código"
 msgid "Collection"
 msgstr "Colección"
 
+#: src/containers/namespace-detail/namespace-detail.tsx:407
+msgid "Collection \"{0}\" has been successfully deprecated."
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:406
+msgid "Collection \"{0}\" has been successfully undeprecated."
+msgstr ""
+
 #: src/components/headers/collection-header.tsx:787
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "No se pudo eliminar la colección \"{name} v{collectionVersion}\"."
@@ -515,7 +523,7 @@ msgstr "La colección no tiene dependencias."
 msgid "Collection is not being used by any collection."
 msgstr "La colección no está siendo utilizada por ninguna colección."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:549
+#: src/containers/namespace-detail/namespace-detail.tsx:570
 msgid "Collection repositories could not be displayed."
 msgstr "No se pudieron mostrar los repositorios de colecciones."
 
@@ -826,8 +834,8 @@ msgid "Delete image?"
 msgstr "¿Eliminar imagen?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:583
-#: src/containers/namespace-detail/namespace-detail.tsx:597
+#: src/containers/namespace-detail/namespace-detail.tsx:604
+#: src/containers/namespace-detail/namespace-detail.tsx:618
 msgid "Delete namespace"
 msgstr "Eliminar el espacio de nombres"
 
@@ -921,6 +929,10 @@ msgstr "No se pudieron mostrar las colecciones dependientes."
 #: src/components/collection-list/collection-list.tsx:107
 msgid "Deprecate"
 msgstr "Pasar a desuso"
+
+#: src/containers/namespace-detail/namespace-detail.tsx:393
+msgid "Deprecation status update starting for collection \"{0}\"."
+msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:109
 #: src/components/execution-environment/repository-form.tsx:368
@@ -1033,7 +1045,7 @@ msgstr "Modificar entorno de ejecución"
 msgid "Edit group permissions"
 msgstr "Editar los permisos de los grupos"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:573
+#: src/containers/namespace-detail/namespace-detail.tsx:594
 msgid "Edit namespace"
 msgstr "Editar el espacio de nombres"
 
@@ -1248,13 +1260,17 @@ msgstr "Entorno de ejecución"
 msgid "Execution Environments"
 msgstr "Entornos de ejecución"
 
+#: src/containers/execution-environment-list/execution_environment_list.tsx:448
+msgid "Execution environment \"{0}\" has been added successfully."
+msgstr ""
+
 #: src/containers/execution-environment/registry-list.tsx:541
 msgid "Execution environment \"{name}\" could not be indexed."
 msgstr "No se pudo indexar el entorno de ejecución \"{name}\"."
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:448
-msgid "Execution environment \"{name}\" has been added successfully."
-msgstr "El entorno de ejecución \"{name}\" se agregó correctamente."
+#~ msgid "Execution environment \"{name}\" has been added successfully."
+#~ msgstr "El entorno de ejecución \"{name}\" se agregó correctamente."
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:91
 msgid "Execution environment \"{selectedItem}\" could not be deleted."
@@ -1292,7 +1308,7 @@ msgstr "Fallido"
 msgid "Failed to retrieve user data."
 msgstr "Fallo en la recuperación de los datos del usuario."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:420
+#: src/containers/namespace-detail/namespace-detail.tsx:441
 msgid "Failed to sign all collections."
 msgstr "Error al firmar todas las colecciones."
 
@@ -1481,7 +1497,7 @@ msgstr "Importar y trasladar a la puesta en escena"
 msgid "Import log"
 msgstr "Registro de importación"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:614
+#: src/containers/namespace-detail/namespace-detail.tsx:635
 msgid "Imports"
 msgstr "Importaciones"
 
@@ -1731,11 +1747,11 @@ msgstr "El nombre no debe estar vacío."
 msgid "Namespace"
 msgstr "Espacio de nombres"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:694
+#: src/containers/namespace-detail/namespace-detail.tsx:715
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "No se pudo eliminar el espacio de nombres \"{name}\"."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:673
+#: src/containers/namespace-detail/namespace-detail.tsx:694
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "El espacio de nombres \"{name}\" se eliminó correctamente."
 
@@ -2383,12 +2399,13 @@ msgid "Save"
 msgstr "Guardar"
 
 #: src/containers/execution-environment-detail/base.tsx:219
+#: src/containers/execution-environment-list/execution_environment_list.tsx:453
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "Se guardaron los cambios en el entorno de ejecución \"{0}\"."
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:453
-msgid "Saved changes to execution environment \"{name}\"."
-msgstr "Se guardaron los cambios en el entorno de ejecución \"{name}\"."
+#~ msgid "Saved changes to execution environment \"{name}\"."
+#~ msgstr "Se guardaron los cambios en el entorno de ejecución \"{name}\"."
 
 #: src/containers/edit-namespace/edit-namespace.tsx:277
 msgid "Saved changes to namespace \"{0}\"."
@@ -2507,7 +2524,7 @@ msgid "Sign all"
 msgstr "Firmar todo"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:39
-#: src/containers/namespace-detail/namespace-detail.tsx:623
+#: src/containers/namespace-detail/namespace-detail.tsx:644
 msgid "Sign all collections"
 msgstr "Firmar todas las colecciones"
 
@@ -2557,7 +2574,7 @@ msgstr ""
 msgid "Signing service selector:"
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:429
+#: src/containers/namespace-detail/namespace-detail.tsx:450
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Se inició la firma para todas las colecciones del espacio de nombres \"{0}\"."
 
@@ -2972,7 +2989,7 @@ msgid "Upload"
 msgstr "Subir"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:310
-#: src/containers/namespace-detail/namespace-detail.tsx:635
+#: src/containers/namespace-detail/namespace-detail.tsx:656
 msgid "Upload collection"
 msgstr "Subir la colección"
 

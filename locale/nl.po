@@ -109,7 +109,7 @@ msgstr "Een tag mag kleine letters en hoofdletters bevatten, ASCII alfabetische 
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:401
+#: src/containers/namespace-detail/namespace-detail.tsx:422
 msgid "API Error: Failed to set deprecation."
 msgstr "API-fout: Mislukt om deprecatie in te stellen."
 
@@ -120,7 +120,7 @@ msgstr "API-fout: Mislukt om deprecatie in te stellen."
 
 #: src/components/headers/collection-header.tsx:581
 #: src/components/headers/collection-header.tsx:632
-#: src/containers/namespace-detail/namespace-detail.tsx:419
+#: src/containers/namespace-detail/namespace-detail.tsx:440
 msgid "API Error: {status}"
 msgstr "API-fout: {status}"
 
@@ -330,7 +330,7 @@ msgstr "Annuleren"
 msgid "Canceled"
 msgstr "Geannuleerd"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:589
+#: src/containers/namespace-detail/namespace-detail.tsx:610
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "Kan geen namespace verwijderen totdat <0/>de afhankelijkheden van collecties <1/>zijn verwijderd."
 
@@ -469,6 +469,14 @@ msgstr "Code"
 msgid "Collection"
 msgstr "Collectie"
 
+#: src/containers/namespace-detail/namespace-detail.tsx:407
+msgid "Collection \"{0}\" has been successfully deprecated."
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:406
+msgid "Collection \"{0}\" has been successfully undeprecated."
+msgstr ""
+
 #: src/components/headers/collection-header.tsx:787
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "Collection \"{name} v{collectionVersion}\" could not be deleted."
@@ -515,7 +523,7 @@ msgstr "Collectie heeft geen afhankelijkheden."
 msgid "Collection is not being used by any collection."
 msgstr "Collectie wordt niet gebruikt door een collectie."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:549
+#: src/containers/namespace-detail/namespace-detail.tsx:570
 msgid "Collection repositories could not be displayed."
 msgstr "Collection repositories could not be displayed."
 
@@ -826,8 +834,8 @@ msgid "Delete image?"
 msgstr "Delete image?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:583
-#: src/containers/namespace-detail/namespace-detail.tsx:597
+#: src/containers/namespace-detail/namespace-detail.tsx:604
+#: src/containers/namespace-detail/namespace-detail.tsx:618
 msgid "Delete namespace"
 msgstr "Namespace verwijderen"
 
@@ -921,6 +929,10 @@ msgstr "Dependent collections could not be displayed."
 #: src/components/collection-list/collection-list.tsx:107
 msgid "Deprecate"
 msgstr "Afschrijven"
+
+#: src/containers/namespace-detail/namespace-detail.tsx:393
+msgid "Deprecation status update starting for collection \"{0}\"."
+msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:109
 #: src/components/execution-environment/repository-form.tsx:368
@@ -1033,7 +1045,7 @@ msgstr "Uitvoeringsomgeving bewerken"
 msgid "Edit group permissions"
 msgstr "Groepspermissies bewerken"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:573
+#: src/containers/namespace-detail/namespace-detail.tsx:594
 msgid "Edit namespace"
 msgstr "Namespace wijzigen"
 
@@ -1248,13 +1260,17 @@ msgstr "Uitvoeringsomgeving"
 msgid "Execution Environments"
 msgstr "Uitvoeringsomgevingen"
 
+#: src/containers/execution-environment-list/execution_environment_list.tsx:448
+msgid "Execution environment \"{0}\" has been added successfully."
+msgstr ""
+
 #: src/containers/execution-environment/registry-list.tsx:541
 msgid "Execution environment \"{name}\" could not be indexed."
 msgstr "Execution environment \"{name}\" could not be indexed."
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:448
-msgid "Execution environment \"{name}\" has been added successfully."
-msgstr "Execution environment \"{name}\" has been added successfully."
+#~ msgid "Execution environment \"{name}\" has been added successfully."
+#~ msgstr "Execution environment \"{name}\" has been added successfully."
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:91
 msgid "Execution environment \"{selectedItem}\" could not be deleted."
@@ -1292,7 +1308,7 @@ msgstr "Mislukt"
 msgid "Failed to retrieve user data."
 msgstr "Ophalen gebruikersgegevens mislukt."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:420
+#: src/containers/namespace-detail/namespace-detail.tsx:441
 msgid "Failed to sign all collections."
 msgstr "Failed to sign all collections."
 
@@ -1481,7 +1497,7 @@ msgstr "Importeren en verplaatsen naar staging"
 msgid "Import log"
 msgstr "Logboek importeren"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:614
+#: src/containers/namespace-detail/namespace-detail.tsx:635
 msgid "Imports"
 msgstr "Invoer"
 
@@ -1731,11 +1747,11 @@ msgstr "Name must not be empty."
 msgid "Namespace"
 msgstr "Namespace"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:694
+#: src/containers/namespace-detail/namespace-detail.tsx:715
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "Namespace \"{name}\" could not be deleted."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:673
+#: src/containers/namespace-detail/namespace-detail.tsx:694
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "Namespace \"{name}\" succesvol verwijderd."
 
@@ -2383,12 +2399,13 @@ msgid "Save"
 msgstr "Opslaan"
 
 #: src/containers/execution-environment-detail/base.tsx:219
+#: src/containers/execution-environment-list/execution_environment_list.tsx:453
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "Terug naar uitvoeringsomgevingen \"{0}\""
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:453
-msgid "Saved changes to execution environment \"{name}\"."
-msgstr "Terug naar uitvoeringsomgevingen \"{name}\""
+#~ msgid "Saved changes to execution environment \"{name}\"."
+#~ msgstr "Terug naar uitvoeringsomgevingen \"{name}\""
 
 #: src/containers/edit-namespace/edit-namespace.tsx:277
 msgid "Saved changes to namespace \"{0}\"."
@@ -2507,7 +2524,7 @@ msgid "Sign all"
 msgstr "Sign all"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:39
-#: src/containers/namespace-detail/namespace-detail.tsx:623
+#: src/containers/namespace-detail/namespace-detail.tsx:644
 msgid "Sign all collections"
 msgstr "Sign all collections"
 
@@ -2557,7 +2574,7 @@ msgstr ""
 msgid "Signing service selector:"
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:429
+#: src/containers/namespace-detail/namespace-detail.tsx:450
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Signing started for all collections in namespace \"{0}\"."
 
@@ -2972,7 +2989,7 @@ msgid "Upload"
 msgstr "Uploaden"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:310
-#: src/containers/namespace-detail/namespace-detail.tsx:635
+#: src/containers/namespace-detail/namespace-detail.tsx:656
 msgid "Upload collection"
 msgstr "Collectie uploaden"
 
