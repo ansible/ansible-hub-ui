@@ -321,7 +321,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
       });
   }
 
-  private renderMenu(list, collection): any {
+  private renderMenu(list, collection) {
     const menuItems = [];
     menuItems.push(
       <DropdownItem
