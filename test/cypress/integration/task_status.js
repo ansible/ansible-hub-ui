@@ -4,7 +4,8 @@ describe('test status filter label on list view', () => {
     cy.visit('/ui/tasks');
     cy.intercept(
       'GET',
-      '/pulp/api/v3/tasks/?ordering=-pulp_created&offset=0&limit=10',
+      Cypress.env('prefix') +
+        'pulp/api/v3/tasks/?ordering=-pulp_created&offset=0&limit=10',
     ).as('tasks');
 
     cy.wait('@tasks');
