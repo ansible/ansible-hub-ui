@@ -520,7 +520,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             ) : null
           }
         >
-          {collection['deprecated'] && (
+          {collection.deprecated && (
             <Alert
               variant='danger'
               isInline
