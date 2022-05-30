@@ -263,7 +263,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             : null
         }
       >
-        {collection['deprecated'] ? t`Undeprecate` : t`Deprecate`}
+        {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
       </DropdownItem>,
       <DropdownItem
         key='upload-collection-version'
