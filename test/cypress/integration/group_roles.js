@@ -84,7 +84,7 @@ describe('Group Roles Tests', () => {
     cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${testRole.name}"]`);
 
     cy.get('[aria-label="role__icontains"]').clear().type('foo bar{enter}');
-    cy.get('.body').contains('No results found');
+    cy.get('[data-cy="EmptyState"]').contains('No results found');
 
     cy.contains('Clear all filters').click();
     cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${testRole.name}"]`);
@@ -158,7 +158,9 @@ describe('Group Roles Tests', () => {
 
     cy.menuGo('User Access > Groups');
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-    cy.get('.body').contains(testContainerRole.name).should('not.exist');
+    cy.get('[data-cy="EmptyState"]')
+      .contains(testContainerRole.name)
+      .should('not.exist');
   });
 
   it('should show group empty state', () => {
