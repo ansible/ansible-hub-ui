@@ -49,12 +49,8 @@ describe('edit a remote repository', () => {
     cy.get('input[id="username"]').should('have.value', 'test');
     cy.get('input[id="proxy_url"]').should('have.value', 'https://example.org');
     cy.get('input[id="proxy_username"]').should('have.value', 'test');
-    cy.intercept(
-      'PUT',
-      Cypress.env('prefix') + 'content/community/v3/sync/config/',
-    ).as('editRemote');
     cy.contains('Save').click();
-    cy.wait('@editRemote');
+    cy.wait('@editCommunityRemote');
 
     // clear all values
     cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
@@ -67,6 +63,7 @@ describe('edit a remote repository', () => {
     cy.get('input[id="proxy_url"]').clear();
     cy.get('input[id="proxy_username"]').clear();
     cy.contains('Save').click();
+    cy.wait('@editCommunityRemote');
   });
 
   it(`edits remote repo 'rh-certified'`, () => {
