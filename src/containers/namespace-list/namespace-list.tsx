@@ -29,11 +29,25 @@ import {
   Sort,
   StatefulDropdown,
   DeleteModal,
+  SignAllCertificatesModal,
+  AlertType,
 } from 'src/components';
-import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
+import {
+  NamespaceAPI,
+  NamespaceListType,
+  MyNamespaceAPI,
+  CollectionAPI,
+  CollectionListType,
+  SignCollectionAPI,
+} from 'src/api';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { Constants } from 'src/constants';
-import { errorMessage, filterIsSet } from 'src/utilities';
+import {
+  errorMessage,
+  filterIsSet,
+  canSign as canSignNS,
+  waitForTask,
+} from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 import { i18n } from '@lingui/core';
 
@@ -62,6 +76,9 @@ interface IState {
   selectedNamespace: NamespaceListType;
   isNamespacePending: boolean;
   confirmDelete: boolean;
+  canSign: boolean;
+  collections: CollectionListType[];
+  showControls: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -103,6 +120,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
       selectedNamespace: null,
       isNamespacePending: false,
       confirmDelete: false,
+      canSign: false,
+      showControls: false, // becomes true when my-namespaces doesn't 404
+      collections: [],
     };
   }
 
@@ -175,6 +195,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
       isOpenNamespaceModal,
       confirmDelete,
       selectedNamespace,
+      collections,
+      isOpenSignModal,
     } = this.state;
     const { filterOwner } = this.props;
     const { user, alerts } = this.context;
@@ -195,8 +217,32 @@ export class NamespaceList extends React.Component<IProps, IState> {
       this.updateParams(p, () => this.loadNamespaces());
     };
 
+    const total_versions = collections.reduce(
+      (acc, c) => acc + c.total_versions,
+      0,
+    );
+
+    const unsigned_versions = collections.reduce(
+      (acc, c) => acc + c.unsigned_versions,
+      0,
+    );
+
     return (
       <div className='hub-namespace-page'>
+        {isOpenSignModal && (
+          <SignAllCertificatesModal
+            name={this.state.selectedNamespace.name}
+            numberOfAffected={total_versions}
+            affectedUnsigned={unsigned_versions}
+            isOpen={this.state.isOpenSignModal}
+            onSubmit={() => {
+              this.signAllCertificates(this.state.selectedNamespace);
+            }}
+            onCancel={() => {
+              this.setState({ isOpenSignModal: false });
+            }}
+          />
+        )}
         {isOpenNamespaceModal && (
           <DeleteModal
             spinner={this.state.isNamespacePending}
@@ -206,7 +252,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                 confirmDelete: false,
               });
             }}
-            deleteAction={this.deleteNamespace}
+            deleteAction={() => this.deleteNamespace()}
             title={t`Delete namespace?`}
             isDisabled={!confirmDelete || isNamespacePending}
           >
@@ -456,14 +502,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       />,
       this.context.user.model_permissions.delete_namespace && (
         <React.Fragment key={'2'}>
-          <DropdownItem
-            onClick={() =>
-              this.setState({
-                selectedNamespace: namespace,
-                isOpenNamespaceModal: true,
-              })
-            }
-          >
+          <DropdownItem onClick={() => this.tryDeleteNamespace(namespace)}>
             {t`Delete namespace`}
           </DropdownItem>
         </React.Fragment>
@@ -487,36 +526,198 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
       <DropdownItem
         key='sign-collections'
-        onClick={() =>
-          this.setState({ selectedNamespace: namespace, isOpenSignModal: true })
-        }
+        onClick={() => this.trySignAllCertificates(namespace)}
       >
         {t`Sign all collections`}
       </DropdownItem>,
-      <DropdownItem
-        onClick={() =>
-          this.setState({ selectedNamespace: namespace, showImportModal: true })
-        }
-      >
-        {t`Upload collection`}
-      </DropdownItem>,
+
+      this.state.showControls && (
+        <DropdownItem
+          onClick={() =>
+            this.setState({
+              selectedNamespace: namespace,
+              showImportModal: true,
+            })
+          }
+        >
+          {t`Upload collection`}
+        </DropdownItem>
+      ),
     ].filter(Boolean);
-    /*if (!this.state.showControls) {
-      return <div className='hub-namespace-page-controls'></div>;
-    }*/
+
     return (
-      <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
-        {dropdownItems.length > 0 && <StatefulDropdown items={dropdownItems} />}
-      </div>
+      <>
+        {!this.state.showControls && (
+          <div className='hub-namespace-page-controls'></div>
+        )}
+        <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
+          {dropdownItems.length > 0 && (
+            <StatefulDropdown items={dropdownItems} />
+          )}
+        </div>
+      </>
     );
   }
 
-  private deleteNamespace = () => {
-    /*const {
-      namespace: { name },
-    } = this.state;*/
-    const namespace = this.state.selectedNamespace;
+  private trySignAllCertificates(namespace: NamespaceListType) {
+    this.loadNamespace(namespace, () => {
+      if (this.state.canSign) {
+        this.setState({
+          selectedNamespace: namespace,
+          isOpenSignModal: true,
+        });
+      } else {
+        this.context.setAlerts([
+          ...this.context.alerts,
+          {
+            variant: 'warning',
+            title: t`Namespace "${namespace.name}" could not be signed.`,
+            description: 'TODO',
+          },
+        ]);
+      }
+    });
+  }
 
+  private signAllCertificates(namespace: NamespaceListType) {
+    const errorAlert = (status: string | number = 500): AlertType => ({
+      variant: 'danger',
+      title: t`API Error: ${status}`,
+      description: t`Failed to sign all collections.`,
+    });
+
+    this.context.setAlerts([
+      ...this.context.alerts,
+      {
+        id: 'loading-signing',
+        variant: 'success',
+        title: t`Signing started for all collections in namespace "${namespace.name}".`,
+      },
+    ]);
+    this.setState({ isOpenSignModal: false });
+
+    SignCollectionAPI.sign({
+      signing_service: this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE,
+      distro_base_path: this.context.selectedRepo,
+      namespace: namespace.name,
+    })
+      .then((result) => {
+        waitForTask(result.data.task_id)
+          .then(() => {
+            this.loadAll();
+          })
+          .catch((error) => {
+            this.context.setAlerts([...this.context.alerts, errorAlert(error)]);
+          })
+          .finally(() => {
+            this.context.setAlerts([
+              this.context.alerts.filter((x) => x?.id !== 'loading-signing'),
+            ]);
+          });
+      })
+      .catch((error) => {
+        // The request failed in the first place
+        this.context.setAlerts([
+          ...this.context.alerts,
+          errorAlert(error.response.status),
+        ]);
+      });
+  }
+
+  private loadNamespace(namespace, callback) {
+    Promise.all([
+      CollectionAPI.list(
+        {
+          ...ParamHelper.getReduced({ namespace: namespace.name }, ['tab']),
+        },
+        this.context.selectedRepo,
+      ),
+      NamespaceAPI.get(namespace.name),
+      MyNamespaceAPI.get(namespace.name, {
+        include_related: 'my_permissions',
+      }).catch((e) => {
+        // TODO this needs fixing on backend to return nothing in these cases with 200 status
+        // if view only mode is enabled disregard errors and hope
+        if (
+          this.context.user.is_anonymous &&
+          this.context.settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS
+        ) {
+          return null;
+        }
+        // expecting 404 - it just means we can not edit the namespace (unless both NamespaceAPI and MyNamespaceAPI fail)
+        return e.response && e.response.status === 404
+          ? null
+          : Promise.reject(e);
+      }),
+    ])
+      .then((val) => {
+        this.setState({
+          collections: val[0].data.data,
+          itemCount: val[0].data.meta.count,
+          showControls: !!val[2],
+          canSign: canSignNS(this.context, val[2]?.data),
+        });
+
+        this.loadAllRepos(namespace, val[0].data.meta.count, callback);
+      })
+      .catch(() => {
+        this.setState({ redirect: Paths.notFound });
+      });
+  }
+
+  private loadAllRepos(namespace, currentRepoCount, callback) {
+    // get collections in namespace from each repo
+    // except the one we already have
+    const repoPromises = Object.keys(Constants.REPOSITORYNAMES)
+      .filter((repo) => repo !== this.context.selectedRepo)
+      .map((repo) => CollectionAPI.list({ namespace: namespace }, repo));
+
+    Promise.all(repoPromises)
+      .then((results) => {
+        this.setState({
+          isNamespaceEmpty:
+            results.every((val) => val.data.meta.count === 0) &&
+            currentRepoCount === 0,
+        });
+        callback();
+      })
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        this.context.setAlerts({
+          alerts: [
+            ...this.context.alerts,
+            {
+              variant: 'danger',
+              title: t`Collection repositories could not be displayed.`,
+              description: errorMessage(status, statusText),
+            },
+          ],
+        });
+      });
+  }
+
+  private tryDeleteNamespace(namespace) {
+    this.loadNamespace(namespace, () => {
+      if (this.state.isNamespaceEmpty) {
+        this.setState({
+          selectedNamespace: namespace,
+          isOpenNamespaceModal: true,
+        });
+      } else {
+        this.context.setAlerts([
+          ...this.context.alerts,
+          {
+            variant: 'warning',
+            title: t`Namespace "${namespace.name}" could not be deleted.`,
+            description: t`Namespace contains collections.`,
+          },
+        ]);
+      }
+    });
+  }
+
+  private deleteNamespace() {
+    const namespace = this.state.selectedNamespace;
     this.setState({ isNamespacePending: true }, () =>
       NamespaceAPI.delete(namespace.name)
         .then(() => {
@@ -557,7 +758,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           ]);
         }),
     );
-  };
+  }
 }
 
 NamespaceList.contextType = AppContext;
