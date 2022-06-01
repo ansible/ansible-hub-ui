@@ -59,7 +59,11 @@ class NamespaceMenuUtils {
           {showDeleteNamespace ? (
             <DropdownItem
               onClick={() =>
-                NamespaceMenuUtils.deleteNamespace(container, namespace, detailMode)
+                NamespaceMenuUtils.deleteNamespace(
+                  container,
+                  namespace,
+                  detailMode,
+                )
               }
             >
               {t`Delete namespace`}
@@ -100,7 +104,9 @@ class NamespaceMenuUtils {
       showSignCollections && (
         <DropdownItem
           key='sign-collections'
-          onClick={() => NamespaceMenuUtils.signCollections(container, namespace, detailMode)}
+          onClick={() =>
+            NamespaceMenuUtils.signCollections(container, namespace, detailMode)
+          }
         >
           {t`Sign all collections`}
         </DropdownItem>
@@ -108,7 +114,9 @@ class NamespaceMenuUtils {
 
       !detailMode && (
         <DropdownItem
-          onClick={() => NamespaceMenuUtils.uploadCollection(container, namespace)}
+          onClick={() =>
+            NamespaceMenuUtils.uploadCollection(container, namespace)
+          }
         >
           {t`Upload collection`}
         </DropdownItem>
