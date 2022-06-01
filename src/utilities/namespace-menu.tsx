@@ -18,7 +18,7 @@ class NamespaceMenuUtils {
     }
   }
 
-  public signCollection(container, namespace, detailMode) {
+  public signCollections(container, namespace, detailMode) {
     if (detailMode) {
     } else {
     }
