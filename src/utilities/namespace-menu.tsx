@@ -14,23 +14,25 @@ class NamespaceMenuUtils {
 
   public deleteNamespace(container, namespace, detailMode) {
     if (detailMode) {
+      container.setState({ isOpenNamespaceModal: true });
     } else {
+      container.tryDeleteNamespace(namespace);
     }
   }
 
   public signCollections(container, namespace, detailMode) {
     if (detailMode) {
+      container.setState({ isOpenSignModal: true });
     } else {
+      container.trySignAllCertificates(namespace);
     }
   }
 
-  public uploadCollection(container, namespace, detailMode) {
-    if (detailMode) {
-    } else {
-    }
+  public uploadCollection(container, namespace) {
+    container.tryUploadCollection(namespace);
   }
 
-  public getMenu(container, namespace, detailMode) {
+  public renderMenu(container, namespace, detailMode) {
     let showDeleteNamespace = true;
     let showSignCollections = true;
 
@@ -45,7 +47,7 @@ class NamespaceMenuUtils {
         component={
           <Link
             to={formatPath(Paths.editNamespace, {
-              namespace: container.state.namespace.name,
+              namespace: namespace.name,
             })}
           >
             {t`Edit namespace`}
@@ -87,7 +89,7 @@ class NamespaceMenuUtils {
               Paths.myImports,
               {},
               {
-                namespace: container.state.namespace.name,
+                namespace: namespace.name,
               },
             )}
           >
@@ -104,11 +106,9 @@ class NamespaceMenuUtils {
         </DropdownItem>
       ),
 
-      detailMode && (
+      !detailMode && (
         <DropdownItem
-          onClick={() =>
-            this.uploadCollection(container, namespace, detailMode)
-          }
+          onClick={() => this.uploadCollection(container, namespace)}
         >
           {t`Upload collection`}
         </DropdownItem>
@@ -121,4 +121,4 @@ class NamespaceMenuUtils {
   }
 }
 
-export const namespaceMenuUtils = new NamespaceMenuUtils();
+export const namespaceMenu = new NamespaceMenuUtils();

@@ -58,6 +58,7 @@ import {
   errorMessage,
   waitForTask,
   canSign as canSignNS,
+  namespaceMenu,
 } from 'src/utilities';
 import { Constants } from 'src/constants';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
@@ -662,6 +663,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             <StatefulDropdown items={dropdownItems} />
           </div>
         )}
+        {namespaceMenu.renderMenu(this, this.state.namespace, true)}
       </div>
     );
   }

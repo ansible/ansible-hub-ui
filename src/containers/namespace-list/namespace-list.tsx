@@ -48,6 +48,7 @@ import {
   filterIsSet,
   canSign as canSignNS,
   waitForTask,
+  namespaceMenu,
 } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 import { i18n } from '@lingui/core';
@@ -571,6 +572,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           {dropdownItems.length > 0 && (
             <StatefulDropdown items={dropdownItems} />
           )}
+          {namespaceMenu.renderMenu(this, namespace, false)}
         </div>
       </>
     );
