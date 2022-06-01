@@ -12,7 +12,7 @@ import { formatPath, Paths } from 'src/paths';
 class NamespaceMenuUtils {
   public click() {}
 
-  public deleteNamespace(container, namespace, detailMode) {
+  public static deleteNamespace(container, namespace, detailMode) {
     if (detailMode) {
       container.setState({ isOpenNamespaceModal: true });
     } else {
@@ -20,7 +20,7 @@ class NamespaceMenuUtils {
     }
   }
 
-  public signCollections(container, namespace, detailMode) {
+  public static signCollections(container, namespace, detailMode) {
     if (detailMode) {
       container.setState({ isOpenSignModal: true });
     } else {
@@ -28,11 +28,11 @@ class NamespaceMenuUtils {
     }
   }
 
-  public uploadCollection(container, namespace) {
+  public static uploadCollection(container, namespace) {
     container.tryUploadCollection(namespace);
   }
 
-  public renderMenu(container, namespace, detailMode) {
+  public static renderMenu(container, namespace, detailMode) {
     let showDeleteNamespace = true;
     let showSignCollections = true;
 
@@ -59,7 +59,7 @@ class NamespaceMenuUtils {
           {showDeleteNamespace ? (
             <DropdownItem
               onClick={() =>
-                this.deleteNamespace(container, namespace, detailMode)
+                NamespaceMenuUtils.deleteNamespace(container, namespace, detailMode)
               }
             >
               {t`Delete namespace`}
@@ -100,7 +100,7 @@ class NamespaceMenuUtils {
       showSignCollections && (
         <DropdownItem
           key='sign-collections'
-          onClick={() => this.signCollections(container, namespace, detailMode)}
+          onClick={() => NamespaceMenuUtils.signCollections(container, namespace, detailMode)}
         >
           {t`Sign all collections`}
         </DropdownItem>
@@ -108,7 +108,7 @@ class NamespaceMenuUtils {
 
       !detailMode && (
         <DropdownItem
-          onClick={() => this.uploadCollection(container, namespace)}
+          onClick={() => NamespaceMenuUtils.uploadCollection(container, namespace)}
         >
           {t`Upload collection`}
         </DropdownItem>
@@ -121,4 +121,4 @@ class NamespaceMenuUtils {
   }
 }
 
-export const namespaceMenu = new NamespaceMenuUtils();
+export const namespaceMenu = NamespaceMenuUtils;
