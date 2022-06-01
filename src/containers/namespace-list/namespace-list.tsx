@@ -31,6 +31,7 @@ import {
   DeleteModal,
   SignAllCertificatesModal,
   AlertType,
+  ImportModal,
 } from 'src/components';
 import {
   NamespaceAPI,
@@ -79,6 +80,7 @@ interface IState {
   canSign: boolean;
   collections: CollectionListType[];
   showControls: boolean;
+  updateCollection: CollectionListType;
 }
 
 interface IProps extends RouteComponentProps {
@@ -123,6 +125,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       canSign: false,
       showControls: false, // becomes true when my-namespaces doesn't 404
       collections: [],
+      updateCollection: null,
     };
   }
 
@@ -197,6 +200,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
       selectedNamespace,
       collections,
       isOpenSignModal,
+      updateCollection,
+      showImportModal,
     } = this.state;
     const { filterOwner } = this.props;
     const { user, alerts } = this.context;
@@ -229,6 +234,27 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     return (
       <div className='hub-namespace-page'>
+        {showImportModal && (
+          <ImportModal
+            isOpen={showImportModal}
+            onUploadSuccess={() =>
+              this.setState({
+                redirect: formatPath(
+                  Paths.myImports,
+                  {},
+                  {
+                    namespace: selectedNamespace.name,
+                  },
+                ),
+              })
+            }
+            // onCancel
+            setOpen={(isOpen, warn) => this.toggleImportModal(isOpen, warn)}
+            collection={updateCollection}
+            namespace={selectedNamespace.name}
+          />
+        )}
+
         {isOpenSignModal && (
           <SignAllCertificatesModal
             name={this.state.selectedNamespace.name}
@@ -531,18 +557,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
         {t`Sign all collections`}
       </DropdownItem>,
 
-      this.state.showControls && (
-        <DropdownItem
-          onClick={() =>
-            this.setState({
-              selectedNamespace: namespace,
-              showImportModal: true,
-            })
-          }
-        >
-          {t`Upload collection`}
-        </DropdownItem>
-      ),
+      <DropdownItem onClick={() => this.tryUploadCollection(namespace)}>
+        {t`Upload collection`}
+      </DropdownItem>,
     ].filter(Boolean);
 
     return (
@@ -557,6 +574,26 @@ export class NamespaceList extends React.Component<IProps, IState> {
         </div>
       </>
     );
+  }
+
+  private tryUploadCollection(namespace) {
+    this.setState({
+      selectedNamespace: namespace,
+      showImportModal: true,
+    });
+  }
+
+  private toggleImportModal(isOpen: boolean, warning?: string) {
+    const newState = { showImportModal: isOpen };
+    if (warning) {
+      newState['warning'] = warning;
+    }
+
+    if (!isOpen) {
+      newState['updateCollection'] = null;
+    }
+
+    this.setState(newState);
   }
 
   private trySignAllCertificates(namespace: NamespaceListType) {

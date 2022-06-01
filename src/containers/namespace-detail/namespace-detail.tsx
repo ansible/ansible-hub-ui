@@ -384,7 +384,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           showImportModal: true,
         });
         break;
-      case 'deprecate':
+      case 'deprecate': // dead code?
         this.setState({
           alerts: [
             ...this.state.alerts,
