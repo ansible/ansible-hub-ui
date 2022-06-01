@@ -14,7 +14,8 @@ describe('Task detail', () => {
     cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/remotes/?*').as(
       'remotes',
     );
-    cy.contains('button', 'Sync').click();
+
+    cy.get('tr').eq(2).contains('Sync').click();
 
     cy.wait('@sync');
     cy.wait('@remotes');
