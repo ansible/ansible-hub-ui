@@ -21,7 +21,7 @@
     padding-top: 24px;
     flex-grow: 1;
 
-    .cards {
+    .hub-cards {
       display: flex;
       flex-wrap: wrap;
       align-content: flex-start;
@@ -36,7 +36,7 @@
       width: 100%;
     }
 
-    .list {
+    .hub-list {
       margin-bottom: 24px;
       margin-left: 24px;
       margin-right: 24px;
@@ -49,6 +49,10 @@
       .data-list {
         margin-top: -17px;
         margin-bottom: -17px;
+      }
+
+      .sync-toggle {
+        margin-right: 10px;
       }
     }
 

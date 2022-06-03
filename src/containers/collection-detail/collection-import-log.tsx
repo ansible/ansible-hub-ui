@@ -80,6 +80,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
     return (
       <React.Fragment>
         <CollectionHeader
+          reload={() => this.loadData(true)}
           collection={collection}
           params={params}
           updateParams={(params) =>

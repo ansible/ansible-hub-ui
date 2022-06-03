@@ -25,6 +25,7 @@ interface IProps extends CollectionListType {
   className?: string;
   footer?: React.ReactNode;
   repo?: string;
+  menu?: React.ReactNode;
 }
 
 export class CollectionCard extends React.Component<IProps> {
@@ -39,6 +40,7 @@ export class CollectionCard extends React.Component<IProps> {
       footer,
       repo,
       sign_state,
+      menu,
     } = this.props;
 
     const company = namespace.company || namespace.name;
@@ -53,9 +55,11 @@ export class CollectionCard extends React.Component<IProps> {
             image={namespace.avatar_url}
             size='40px'
             unlockWidth
+            flexGrow
           />
           <TextContent>{this.getCertification(repo)}</TextContent>
           <SignatureBadge isCompact signState={sign_state} />
+          {menu}
         </CardHeader>
         <CardHeader>
           <div className='name'>

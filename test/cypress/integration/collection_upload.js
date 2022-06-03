@@ -4,19 +4,68 @@ describe('Collection Upload Tests', () => {
 
   before(() => {
     cy.login();
-
+    cy.deleteNamespacesAndCollections();
     cy.deleteTestGroups();
     cy.deleteTestUsers();
-    cy.galaxykit('collection delete', 'ansible', 'network');
-    cy.galaxykit('collection delete', 'testspace', 'testcollection');
-
     cy.galaxykit('-i collection upload testspace testcollection');
-
     cy.createUser(userName, userPassword);
   });
 
   beforeEach(() => {
     cy.login(userName, userPassword);
+  });
+
+  it('should not upload new collection version in collection list when user does not have permissions', () => {
+    cy.visit(
+      '/ui/repo/published?page_size=10&view_type=list&keywords=testcollection',
+    );
+    cy.contains('testcollection');
+    cy.contains('Upload new version').click();
+    cy.contains("You don't have rights to do this operation.");
+
+    cy.visit(
+      '/ui/repo/published?page_size=10&view_type=card&keywords=testcollection',
+    );
+    cy.contains('testcollection');
+    cy.get('[aria-label=Actions]').click();
+    cy.contains('Upload new version').click();
+    cy.contains("You don't have rights to do this operation.");
+  });
+
+  it('should not upload new collection version in collection detail when user does not have permissions', () => {
+    cy.visit('/ui/repo/published/testspace/testcollection');
+    cy.contains('testcollection');
+    cy.get('button[aria-label=Actions]').click();
+    cy.contains('Upload new version').click();
+    cy.contains("You don't have rights to do this operation.");
+  });
+
+  it('should see upload new collection version in collection list when user does have permissions', () => {
+    cy.login();
+
+    cy.visit(
+      '/ui/repo/published?page_size=10&view_type=list&keywords=testcollection',
+    );
+    cy.contains('testcollection');
+    cy.contains('Upload new version').click();
+    cy.contains('New version of testcollection');
+
+    cy.visit(
+      '/ui/repo/published?page_size=10&view_type=card&keywords=testcollection',
+    );
+    cy.contains('testcollection');
+    cy.get('button[aria-label=Actions]').click();
+    cy.contains('Upload new version').click();
+    cy.contains('New version of testcollection');
+  });
+
+  it('should see upload new collection version in collection detail when user does have permissions', () => {
+    cy.login();
+    cy.visit('/ui/repo/published/testspace/testcollection');
+    cy.contains('testcollection');
+    cy.get('button[aria-label=Actions]').click();
+    cy.contains('Upload new version').click();
+    cy.contains('New version of testcollection');
   });
 
   it('user should not be able to upload new collection without permissions', () => {
@@ -69,6 +118,7 @@ describe('Collection Upload Tests', () => {
 
   it('should not upload new collection version when user does not have permissions', () => {
     cy.visit('/ui/repo/published/testspace');
+
     cy.get('[data-cy="CollectionList-name"]').contains('testcollection');
     cy.contains('Upload new version').should('not.exist');
   });

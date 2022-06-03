@@ -25,7 +25,15 @@ export function loadCollection(
     forceReload,
   )
     .then((result) => {
-      this.setState({ collection: result }, callback);
+      return CollectionAPI.list(
+        {
+          name: this.props.match.params['collection'],
+        },
+        this.context.selectedRepo,
+      ).then((collections) => {
+        result.deprecated = collections.data.data[0].deprecated;
+        this.setState({ collection: result }, callback);
+      });
     })
     .catch(() => {
       this.props.history.push(Paths.notFound);

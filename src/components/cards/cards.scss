@@ -49,6 +49,7 @@
   .logo-row {
     display: flex;
     justify-content: space-between;
+    padding-right: 8px;
 
     .icon {
       color: var(--pf-global--info-color--100);

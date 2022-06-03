@@ -11,6 +11,7 @@ interface IProps {
   className?: string;
   unlockWidth?: boolean;
   fallbackToDefault?: boolean;
+  flexGrow?: boolean;
 }
 
 interface IState {
@@ -32,16 +33,21 @@ export class Logo extends React.Component<IProps, IState> {
       size,
       unlockWidth,
       width,
+      flexGrow,
     } = this.props;
     const { failed } = this.state;
 
     const style = {
       height: size,
       display: 'flex',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       alignItems: 'center',
       width: width,
     };
+
+    if (flexGrow) {
+      style['flexGrow'] = 1;
+    }
 
     if (unlockWidth) {
       style['minWidth'] = size;

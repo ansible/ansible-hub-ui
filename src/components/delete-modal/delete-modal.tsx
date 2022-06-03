@@ -24,6 +24,7 @@ export class DeleteModal extends React.Component<IProps> {
             onClick={deleteAction}
             variant='danger'
             isDisabled={isDisabled}
+            data-cy='delete_button'
           >
             {t`Delete`}
             {spinner && <Spinner size='sm'></Spinner>}
@@ -37,6 +38,7 @@ export class DeleteModal extends React.Component<IProps> {
         title={title}
         titleIconVariant='warning'
         variant='small'
+        data-cy='modal_checkbox'
       >
         {children}
       </Modal>

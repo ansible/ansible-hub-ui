@@ -48,7 +48,11 @@ class CollectionDocs extends React.Component<
   }
 
   componentDidMount() {
-    this.loadCollection(this.context.selectedRepo);
+    this.load(false);
+  }
+
+  private load(forceUpdate) {
+    this.loadCollection(this.context.selectedRepo, forceUpdate);
   }
 
   render() {
@@ -133,6 +137,7 @@ class CollectionDocs extends React.Component<
     return (
       <React.Fragment>
         <CollectionHeader
+          reload={() => this.load(true)}
           collection={collection}
           params={params}
           updateParams={(p) =>
