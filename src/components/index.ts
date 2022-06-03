@@ -47,7 +47,10 @@ export { MarkdownEditor } from './markdown-editor/markdown-editor';
 export { NamespaceCard } from './cards/namespace-card';
 export { NamespaceForm } from './namespace-form/namespace-form';
 export { NamespaceModal } from './namespace-modal/namespace-modal';
-export { NumericLabel } from './numeric-label/numeric-label';
+export {
+  NumericLabel,
+  CollectionNumericLabel,
+} from './numeric-label/numeric-label';
 export { ObjectPermissionField } from './permissions/obect-permission-field';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { PartnerHeader } from './headers/partner-header';

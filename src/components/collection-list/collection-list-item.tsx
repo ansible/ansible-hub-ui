@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 import { Paths, formatPath } from 'src/paths';
 import {
-  NumericLabel,
+  CollectionNumericLabel,
   Tag,
   Logo,
   DeprecatedTag,
@@ -25,7 +25,6 @@ import {
 } from 'src/components';
 import { CollectionListType } from 'src/api';
 import { convertContentSummaryCounts } from 'src/utilities';
-import { Constants } from 'src/constants';
 import { SignatureBadge } from '../signing';
 
 interface IProps extends CollectionListType {
@@ -92,14 +91,12 @@ export class CollectionListItem extends React.Component<IProps> {
           ) : null}
         </div>
         <div className='hub-entry'>{latest_version.metadata.description}</div>
-        <div className='hub-entry pf-l-flex pf-m-wrap content'>
-          {Object.keys(contentSummary.contents).map((k) => (
-            <div key={k}>
-              <NumericLabel
-                className='hub-numeric-label-capitalize-text'
-                label={k}
-                number={contentSummary.contents[k]}
-                pluralLabels={Constants.COLLECTION_PLURAL_LABELS[k]}
+        <div className='hub-entry pf-l-flex pf-m-wrap'>
+          {Object.keys(contentSummary.contents).map((type) => (
+            <div key={type}>
+              <CollectionNumericLabel
+                count={contentSummary.contents[type]}
+                type={type}
               />
             </div>
           ))}

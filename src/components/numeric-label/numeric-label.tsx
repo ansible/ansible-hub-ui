@@ -1,44 +1,34 @@
 import * as React from 'react';
+import { plural } from '@lingui/macro';
 
 interface IProps {
-  className?: string;
-  number: number | string;
-  label?: string;
-  hideNumber?: boolean;
-  pluralLabels?: {
-    [key: string]: {
-      '0': string;
-      '1': string;
-      other: string;
-    }[];
-  };
+  number: number;
+  newline?: boolean;
+  label: string;
 }
 
 export class NumericLabel extends React.Component<IProps> {
   render() {
-    const { className, number, label, hideNumber, pluralLabels } = this.props;
-    let convertedNum: number;
+    const { number, newline, label } = this.props;
 
-    if (typeof number === 'string') {
-      convertedNum = Number(number);
-    } else {
-      convertedNum = number;
+    let numberElem = (
+      <span key='number'>{NumericLabel.roundNumber(number)} </span>
+    );
+    let labelElem = (
+      <span key='label' className='hub-numeric-label-label'>
+        {label}
+      </span>
+    );
+
+    if (newline) {
+      numberElem = <div>{numberElem}</div>;
+      labelElem = <div>{labelElem}</div>;
     }
-
-    const plural = number === 1 ? '' : 's';
 
     return (
       <div>
-        <span>
-          {hideNumber ? null : NumericLabel.roundNumber(convertedNum)}{' '}
-        </span>
-        <span className={className}>
-          {pluralLabels ? (
-            <>{this.setPluralLabel(pluralLabels, number)}</>
-          ) : (
-            <> {label ? label + plural : null} </>
-          )}
-        </span>
+        {numberElem}
+        {labelElem}
       </div>
     );
   }
@@ -65,8 +55,38 @@ export class NumericLabel extends React.Component<IProps> {
     // If larger than a billion, don't even bother.
     return '1B+';
   }
+}
 
-  private setPluralLabel(plurals, number) {
-    return number === 0 || number === 1 ? plurals[number] : plurals['other'];
+interface ICNLProps {
+  count: number;
+  newline?: boolean;
+  type: string;
+}
+
+export class CollectionNumericLabel extends React.Component<ICNLProps> {
+  render() {
+    const { count, newline, type } = this.props;
+
+    const label =
+      {
+        module: plural(count, {
+          one: 'Module',
+          other: 'Modules',
+        }),
+        role: plural(count, {
+          one: 'Role',
+          other: 'Roles',
+        }),
+        plugin: plural(count, {
+          one: 'Plugin',
+          other: 'Plugins',
+        }),
+        dependency: plural(count, {
+          one: 'Dependency',
+          other: 'Dependencies',
+        }),
+      }[type] || type;
+
+    return <NumericLabel number={count} newline={newline} label={label} />;
   }
 }
