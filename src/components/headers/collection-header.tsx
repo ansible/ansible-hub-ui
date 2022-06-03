@@ -45,7 +45,6 @@ import {
   CollectionDetailType,
   SignCollectionAPI,
   CollectionListType,
-  MyNamespaceAPI,
 } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import {
@@ -197,6 +196,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     }
 
     const canSign = canSignNS(this.context, namespace);
+    const canUpload = namespace.related_fields.my_permissions.includes(
+      'galaxy.upload_to_namespace',
+    );
+    const canDeprecate = namespace.related_fields.my_permissions.includes(
+      'galaxy.change_namespace',
+    );
 
     const dropdownItems = [
       noDependencies
@@ -253,25 +258,34 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Sign version ${collection.latest_version.version}`}
         </DropdownItem>
       ),
-      <DropdownItem
-        onClick={() => this.deprecate(collection)}
-        key='deprecate'
-        isDisabled={DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE}
-        description={
-          DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-            ? t`Temporarily disabled due to sync issues. (AAH-1237)`
-            : null
-        }
-      >
-        {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
-      </DropdownItem>,
-      <DropdownItem
-        key='upload-collection-version'
-        onClick={() => this.checkUploadPrivilleges(collection)}
-        data-cy='upload-collection-version-dropdown'
-      >
-        {t`Upload new version`}
-      </DropdownItem>,
+      canDeprecate && (
+        <DropdownItem
+          onClick={() => this.deprecate(collection)}
+          key='deprecate'
+          isDisabled={DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE}
+          description={
+            DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+              ? t`Temporarily disabled due to sync issues. (AAH-1237)`
+              : null
+          }
+        >
+          {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
+        </DropdownItem>
+      ),
+      canUpload && (
+        <DropdownItem
+          key='upload-collection-version'
+          onClick={() =>
+            this.setState({
+              updateCollection: collection,
+              showImportModal: true,
+            })
+          }
+          data-cy='upload-collection-version-dropdown'
+        >
+          {t`Upload new version`}
+        </DropdownItem>
+      ),
     ].filter(Boolean);
 
     return (
@@ -556,41 +570,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         </BaseHeader>
       </React.Fragment>
     );
-  }
-
-  private checkUploadPrivilleges(collection) {
-    const addAlert = () => {
-      this.setState({
-        alerts: [
-          ...this.state.alerts,
-          {
-            title: t`You don't have rights to do this operation.`,
-            variant: 'warning',
-          },
-        ],
-      });
-    };
-
-    MyNamespaceAPI.get(collection.namespace.name, {
-      include_related: 'my_permissions',
-    })
-      .then((value) => {
-        if (
-          value.data.related_fields.my_permissions.includes(
-            'galaxy.upload_to_namespace',
-          )
-        ) {
-          this.setState({
-            updateCollection: collection,
-            showImportModal: true,
-          });
-        } else {
-          addAlert();
-        }
-      })
-      .catch(() => {
-        addAlert();
-      });
   }
 
   private renderTabs(active) {
