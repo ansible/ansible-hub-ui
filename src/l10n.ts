@@ -1,5 +1,6 @@
 import { i18n } from '@lingui/core';
 import * as plurals from 'make-plural/plurals';
+import * as moment from 'moment';
 
 // remember to update .linguirc as well
 const availableLanguages = ['en', 'es', 'fr', 'ko', 'nl', 'ja', 'zh'];
@@ -28,6 +29,8 @@ async function activate(locale: string) {
   i18n.loadLocaleData(locale, { plurals: plurals[locale] });
   i18n.load(locale, messages);
   i18n.activate(locale);
+
+  moment.locale(locale);
 }
 
 activate(userLanguage);
