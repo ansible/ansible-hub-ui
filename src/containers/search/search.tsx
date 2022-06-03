@@ -27,7 +27,6 @@ import {
   CollectionListType,
   SyncListType,
   MySyncListAPI,
-  MyNamespaceAPI,
 } from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
@@ -280,7 +279,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private handleControlClick(collection) {
+  private deprecate(collection) {
     CollectionAPI.setDeprecation(
       collection,
       !collection.deprecated,
@@ -322,45 +321,54 @@ class Search extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderMenu(list, collection) {
-    const menuItems = [];
-    menuItems.push(
-      <DropdownItem
-        onClick={() => this.handleControlClick(collection)}
-        key='deprecate'
-        isDisabled={DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE}
-        description={
-          DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-            ? t`Temporarily disabled due to sync issues. (AAH-1237)`
-            : null
-        }
-      >
-        {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
-      </DropdownItem>,
-    );
-
-    if (!list) {
-      menuItems.push(
-        <DropdownItem
-          onClick={() => this.checkUploadPrivilleges(collection)}
-          key='upload new version'
-        >
-          {t`Upload new version`}
-        </DropdownItem>,
+    const canDeprecate =
+      collection.namespace.related_fields.my_permissions.includes(
+        'galaxy.change_namespace',
       );
-    }
+    const canUpload =
+      collection.namespace.related_fields.my_permissions.includes(
+        'galaxy.upload_to_namespace',
+      );
+
+    const upload = () =>
+      this.setState({
+        updateCollection: collection,
+        showImportModal: true,
+      });
+
+    const menuItems = [
+      canDeprecate && (
+        <DropdownItem
+          onClick={() => this.deprecate(collection)}
+          key='deprecate'
+          isDisabled={DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE}
+          description={
+            DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
+              ? t`Temporarily disabled due to sync issues. (AAH-1237)`
+              : null
+          }
+        >
+          {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
+        </DropdownItem>
+      ),
+      !list && canUpload && (
+        <DropdownItem onClick={upload} key='upload new version'>
+          {t`Upload new version`}
+        </DropdownItem>
+      ),
+    ].filter(Boolean);
 
     return (
-      <React.Fragment>
-        {list && (
-          <Button
-            onClick={() => this.checkUploadPrivilleges(collection)}
-            variant='secondary'
-          >
+      <>
+        {list && canUpload && (
+          <Button onClick={upload} variant='secondary'>
             {t`Upload new version`}
           </Button>
         )}
-        <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
-      </React.Fragment>
+        {menuItems.length > 0 ? (
+          <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
+        ) : null}
+      </>
     );
   }
 
@@ -380,41 +388,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
         onChange={() => this.toggleCollectionSync(name, namespace)}
       />
     );
-  }
-
-  private checkUploadPrivilleges(collection) {
-    const addAlert = () => {
-      this.setState({
-        alerts: [
-          ...this.state.alerts,
-          {
-            title: t`You don't have rights to do this operation.`,
-            variant: 'warning',
-          },
-        ],
-      });
-    };
-
-    MyNamespaceAPI.get(collection.namespace.name, {
-      include_related: 'my_permissions',
-    })
-      .then((value) => {
-        if (
-          value.data.related_fields.my_permissions.includes(
-            'galaxy.upload_to_namespace',
-          )
-        ) {
-          this.setState({
-            updateCollection: collection,
-            showImportModal: true,
-          });
-        } else {
-          addAlert();
-        }
-      })
-      .catch(() => {
-        addAlert();
-      });
   }
 
   private toggleCollectionSync(name: string, namespace: string) {
@@ -494,6 +467,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
         {
           ...ParamHelper.getReduced(this.state.params, ['view_type']),
           deprecated: false,
+          include_related: 'my_permissions',
         },
         this.context.selectedRepo,
       ).then((result) => {
