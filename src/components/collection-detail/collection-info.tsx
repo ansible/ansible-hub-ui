@@ -1,5 +1,4 @@
 import { t, Trans } from '@lingui/macro';
-import * as moment from 'moment';
 import * as React from 'react';
 import './collection-info.scss';
 import { errorMessage } from 'src/utilities';
@@ -22,7 +21,6 @@ import { CollectionDetailType, CollectionAPI } from 'src/api';
 import { Tag, ClipboardCopy, LoginLink } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
-import { userLanguage } from 'src/l10n';
 
 interface IProps extends CollectionDetailType {
   params: {
@@ -45,8 +43,6 @@ export class CollectionInfo extends React.Component<IProps> {
     const { name, latest_version, namespace, params } = this.props;
 
     let installCommand = `ansible-galaxy collection install ${namespace.name}.${name}`;
-
-    moment.locale(userLanguage);
 
     if (params.version) {
       installCommand += `:${params.version}`;
