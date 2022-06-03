@@ -15,7 +15,7 @@ import {
 
 import { Link } from 'react-router-dom';
 
-import { NumericLabel, Logo, SignatureBadge } from 'src/components';
+import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
 import { CollectionListType } from 'src/api';
 import { formatPath, Paths } from 'src/paths';
 import { convertContentSummaryCounts } from 'src/utilities';
@@ -124,17 +124,7 @@ export class CollectionCard extends React.Component<IProps> {
   private renderTypeCount(type, count) {
     return (
       <div key={type}>
-        <div>
-          <NumericLabel number={count} />
-        </div>
-        <div className='type-label'>
-          <NumericLabel
-            number={count}
-            hideNumber={true}
-            label={type}
-            pluralLabels={Constants.COLLECTION_PLURAL_LABELS[type]}
-          />
-        </div>
+        <CollectionNumericLabel count={count} newline type={type} />
       </div>
     );
   }

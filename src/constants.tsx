@@ -268,14 +268,6 @@ export class Constants {
     'windows',
   ];
 
-  static COLLECTION_PLURAL_LABELS = {
-    dependency: {
-      '0': 'dependencies',
-      '1': 'dependency',
-      other: 'dependencies',
-    },
-  };
-
   static TASK_NAMES = {
     'galaxy_ng.app.tasks.promotion._remove_content_from_repository':
       defineMessage({ message: `Remove content from repository` }),
