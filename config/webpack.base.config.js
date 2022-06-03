@@ -4,7 +4,6 @@ const {
   rbac,
   defaultServices,
 } = require('@redhat-cloud-services/frontend-components-config-utilities/standalone');
-const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { execSync } = require('child_process'); // node:child_process
@@ -83,6 +82,7 @@ module.exports = (inputConfigs) => {
 
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
+    definePlugin: globals,
     htmlPlugin: htmlPluginConfig,
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
@@ -91,6 +91,9 @@ module.exports = (inputConfigs) => {
 
     // frontend-components-config 4.5.0+: don't remove patternfly from non-insights builds
     bundlePfModules: isStandalone,
+
+    // frontend-components-config 4.6.9+: keep HtmlWebpackPlugin for standalone
+    useChromeTemplate: !isStandalone,
 
     // insights dev
     ...(!isStandalone &&
@@ -177,7 +180,6 @@ module.exports = (inputConfigs) => {
     newWebpackConfig.entry.App = newEntry;
   }
 
-  plugins.push(new webpack.DefinePlugin(globals));
   plugins.push(new ForkTsCheckerWebpackPlugin());
 
   if (customConfigs.DEPLOYMENT_MODE === 'insights') {
