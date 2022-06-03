@@ -529,7 +529,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           collections: val[0].data.data,
           itemCount: val[0].data.meta.count,
           namespace: val[1].data,
-          showControls: !!val[2],
+          showControls: !!val[2], // FIXME: use the actual my_permissions list
           canSign: canSignNS(this.context, val[2]?.data),
         });
 
