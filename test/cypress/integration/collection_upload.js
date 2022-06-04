@@ -7,6 +7,7 @@ describe('Collection Upload Tests', () => {
     cy.deleteNamespacesAndCollections();
     cy.deleteTestGroups();
     cy.deleteTestUsers();
+
     cy.galaxykit('-i collection upload testspace testcollection');
     cy.createUser(userName, userPassword);
   });
@@ -113,6 +114,7 @@ describe('Collection Upload Tests', () => {
     cy.contains('My imports');
     cy.get('.pf-c-label__content').contains('Running').should('exist');
     cy.wait('@upload', { timeout: 10000 });
+    cy.get('.pf-c-label__content').contains('Failed').should('not.exist');
     cy.get('.pf-c-label__content').contains('Completed').should('exist');
   });
 
