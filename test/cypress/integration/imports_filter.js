@@ -120,7 +120,8 @@ describe('Imports filter test', () => {
   it('partial filter for name is working.', () => {
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+      Cypress.env('prefix') +
+        '_ui/v1/collection-versions/?namespace=*&keywords=my_collection',
     ).as('wait');
 
     cy.get('input[aria-label="keywords"').type('my_collection{enter}');
@@ -136,7 +137,8 @@ describe('Imports filter test', () => {
   it('exact filter for name is working.', () => {
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+      Cypress.env('prefix') +
+        '_ui/v1/collection-versions/?namespace=*&keywords=my_collection1',
     ).as('wait');
 
     cy.get('input[aria-label="keywords"').type('my_collection1{enter}');
@@ -149,7 +151,6 @@ describe('Imports filter test', () => {
       .contains('different_name')
       .should('not.exist');
     cy.get('[data-cy="import-list-data"]').contains('my_collection1');
-    cy.wait(10000);
   });
 
   it('Exact search for completed is working.', () => {
