@@ -48,7 +48,7 @@ msgstr "<0/>이/가 제거되었습니다"
 msgid "<0/> was removed from <1/>"
 msgstr "<0/>이/가 <1/>에서 제거되었습니다"
 
-#: src/components/collection-detail/collection-info.tsx:78
+#: src/components/collection-detail/collection-info.tsx:74
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>참고:</0> ansible-ax를 사용하여 컬렉션 설치는 ansible 2.9+에서만 지원됩니다."
 
@@ -475,7 +475,7 @@ msgstr "컬렉션 \"{name} v{collectionVersion}\"을/를 성공적으로 삭제�
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "컬렉션 \"{name}\"을/를 삭제할 수 없습니다."
 
-#: src/components/collection-detail/collection-info.tsx:188
+#: src/components/collection-detail/collection-info.tsx:184
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "컬렉션 \"{name}\"을/를 다운로드할 수 없습니다."
 
@@ -556,7 +556,7 @@ msgstr "회사 이름"
 
 #: src/components/my-imports/import-list.tsx:87
 #: src/components/status/status-indicator.tsx:67
-#: src/constants.tsx:379
+#: src/constants.tsx:371
 #: src/containers/task-management/task-list-view.tsx:156
 msgid "Completed"
 msgstr "완료됨"
@@ -699,15 +699,15 @@ msgstr "생성됨"
 msgid "Created on"
 msgstr "생성된 시간"
 
-#: src/constants.tsx:294
+#: src/constants.tsx:286
 msgid "Curate all synclist repository"
 msgstr "모든 동기화 목록 리포지토리 선별"
 
-#: src/constants.tsx:285
+#: src/constants.tsx:277
 msgid "Curate synclist repository"
 msgstr "동기화 목록 리포지토리 선별"
 
-#: src/constants.tsx:298
+#: src/constants.tsx:290
 msgid "Curate synclist repository batch"
 msgstr "동기화 목록 리포지토리 배치 선별"
 
@@ -982,7 +982,7 @@ msgstr "서명된 컬렉션만 다운로드"
 msgid "Download requirements file"
 msgstr "요구 사항 파일 다운로드"
 
-#: src/components/collection-detail/collection-info.tsx:116
+#: src/components/collection-detail/collection-info.tsx:112
 msgid "Download tarball"
 msgstr "Tarball 다운로드"
 
@@ -1268,7 +1268,7 @@ msgstr "만료"
 #: src/components/my-imports/import-console.tsx:110
 #: src/components/my-imports/import-list.tsx:91
 #: src/components/status/status-indicator.tsx:75
-#: src/constants.tsx:380
+#: src/constants.tsx:372
 #: src/containers/task-management/task-list-view.tsx:160
 msgid "Failed"
 msgstr "실패"
@@ -1354,7 +1354,7 @@ msgstr "토큰 받기"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "10번 시도 후에 대기 중인 작업을 포기합니다."
 
-#: src/components/collection-detail/collection-info.tsx:159
+#: src/components/collection-detail/collection-info.tsx:155
 msgid "Go to documentation"
 msgstr "문서로 이동"
 
@@ -1456,12 +1456,12 @@ msgstr "이미지"
 msgid "Images will appear once uploaded"
 msgstr "업로드되면 이미지가 나타납니다"
 
-#: src/constants.tsx:282
-#: src/constants.tsx:291
+#: src/constants.tsx:274
+#: src/constants.tsx:283
 msgid "Import and auto approve"
 msgstr "가져오기 및 자동 승인"
 
-#: src/constants.tsx:288
+#: src/constants.tsx:280
 msgid "Import and move to staging"
 msgstr "가져오기 및 스테이징으로 이동"
 
@@ -1494,7 +1494,7 @@ msgstr "인덱스 실행 환경은 registry.redhat.io에서만 지원됩니다."
 msgid "Indexing started for execution environment \"{name}\"."
 msgstr "실행 환경 \"{name}\"에 대한 인덱싱이 시작되었습니다."
 
-#: src/components/collection-detail/collection-info.tsx:57
+#: src/components/collection-detail/collection-info.tsx:53
 #: src/components/headers/collection-header.tsx:519
 msgid "Install"
 msgstr "설치"
@@ -1503,7 +1503,7 @@ msgstr "설치"
 #~ msgid "Install Version"
 #~ msgstr "Install Version"
 
-#: src/components/collection-detail/collection-info.tsx:74
+#: src/components/collection-detail/collection-info.tsx:70
 msgid "Installation"
 msgstr "설치"
 
@@ -1586,7 +1586,7 @@ msgstr "레이어"
 msgid "Learn more"
 msgstr "더 알아보기"
 
-#: src/components/collection-detail/collection-info.tsx:68
+#: src/components/collection-detail/collection-info.tsx:64
 msgid "License"
 msgstr "라이센스"
 
@@ -2042,7 +2042,7 @@ msgid "Progress messages"
 msgstr "진행 상황 메시지"
 
 #: src/components/cards/collection-card.tsx:75
-#: src/components/collection-list/collection-list-item.tsx:89
+#: src/components/collection-list/collection-list-item.tsx:88
 msgid "Provided by {company}"
 msgstr "{company} 제공"
 
@@ -2080,107 +2080,107 @@ msgstr "이미지 가져오기"
 msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible 버전"
 
-#: src/constants.tsx:299
+#: src/constants.tsx:291
 msgid "Pulp Ansible: Collections sync"
 msgstr "Pulp Ansible: 컬렉션 동기화"
 
-#: src/constants.tsx:308
+#: src/constants.tsx:300
 msgid "Pulp Ansible: Roles synchronize"
 msgstr "Pulp Ansible: 역할 동기화"
 
-#: src/constants.tsx:302
+#: src/constants.tsx:294
 msgid "Pulp ansible: Copy content"
 msgstr "Pulp ansible: 콘텐츠 복사"
 
-#: src/constants.tsx:313
+#: src/constants.tsx:305
 msgid "Pulp ansible: Import collection"
 msgstr "Pulp ansible: 컬렉션 가져오기"
 
-#: src/constants.tsx:312
+#: src/constants.tsx:304
 msgid "Pulp ansible: Update collection remote"
 msgstr "Pulp ansible: 원격 컬렉션 업데이트"
 
-#: src/constants.tsx:305
+#: src/constants.tsx:297
 msgid "Pulp ansible: collection sync"
 msgstr "Pulp ansible: 컬렉션 동기화"
 
-#: src/constants.tsx:331
+#: src/constants.tsx:323
 msgid "Pulp container: Build image from containerfile"
 msgstr "Pulp 컨테이너: containerfile에서 이미지 빌드"
 
-#: src/constants.tsx:334
+#: src/constants.tsx:326
 msgid "Pulp container: General multi delete"
 msgstr "Pulp 컨테이너: 일반 다중 삭제"
 
-#: src/constants.tsx:325
+#: src/constants.tsx:317
 msgid "Pulp container: Recursive add content"
 msgstr "Pulp 컨테이너: 재귀적으로 콘텐츠 추가"
 
-#: src/constants.tsx:328
+#: src/constants.tsx:320
 msgid "Pulp container: Recursive remove content"
 msgstr "Pulp 컨테이너: 재귀적으로 콘텐츠 삭제"
 
-#: src/constants.tsx:316
+#: src/constants.tsx:308
 msgid "Pulp container: Tag image"
 msgstr "Pulp 컨테이너: 태그 이미지"
 
-#: src/constants.tsx:322
+#: src/constants.tsx:314
 msgid "Pulp container: Tasks synchronize"
 msgstr "Pulp 컨테이너: 작업 동기화"
 
-#: src/constants.tsx:319
+#: src/constants.tsx:311
 msgid "Pulp container: Untage image"
 msgstr "Pulp 컨테이너: 이미지 태그 분리"
 
-#: src/constants.tsx:370
+#: src/constants.tsx:362
 msgid "Pulpcore: Add and remove"
 msgstr "Pulpcore: 추가 및 제거"
 
-#: src/constants.tsx:373
+#: src/constants.tsx:365
 msgid "Pulpcore: Add or remove"
 msgstr "Pulpcore: 추가 또는 제거"
 
-#: src/constants.tsx:361
+#: src/constants.tsx:353
 msgid "Pulpcore: Delete version"
 msgstr "Pulpcore: 버전 삭제"
 
-#: src/constants.tsx:346
+#: src/constants.tsx:338
 msgid "Pulpcore: General create"
 msgstr "Pulpcore: 일반 생성"
 
-#: src/constants.tsx:352
+#: src/constants.tsx:344
 msgid "Pulpcore: General delete"
 msgstr "Pulpcore: 일반 삭제"
 
-#: src/constants.tsx:349
+#: src/constants.tsx:341
 msgid "Pulpcore: General update"
 msgstr "Pulpcore: 일반 업데이트"
 
-#: src/constants.tsx:337
+#: src/constants.tsx:329
 msgid "Pulpcore: Import repository version"
 msgstr "Pulpcore: 리포지토리 버전 가져오기"
 
-#: src/constants.tsx:340
+#: src/constants.tsx:332
 msgid "Pulpcore: Orphan cleanup"
 msgstr "Pulpcore: Orphan 정리"
 
-#: src/constants.tsx:355
+#: src/constants.tsx:347
 msgid "Pulpcore: Pulp export"
 msgstr "Pulpcore: Pulp 내보내기"
 
-#: src/constants.tsx:358
+#: src/constants.tsx:350
 msgid "Pulpcore: Pulp import"
 msgstr "Pulpcore: Pulp 가져오기"
 
-#: src/constants.tsx:343
+#: src/constants.tsx:335
 msgid "Pulpcore: Repair all artifacts"
 msgstr "Pulpcore: 모든 아티팩트를 수정"
 
-#: src/constants.tsx:364
+#: src/constants.tsx:356
 msgid "Pulpcore: Repair version"
 msgstr "Pulpcore: 복구 버전"
 
-#: src/constants.tsx:367
+#: src/constants.tsx:359
 msgid "Pulpcore: Upload commit"
 msgstr "Pulpcore: 커밋 업로드"
 
@@ -2285,7 +2285,7 @@ msgstr "추가 후 원격 리포지토리가 나타납니다."
 msgid "Remove"
 msgstr "제거"
 
-#: src/constants.tsx:281
+#: src/constants.tsx:273
 msgid "Remove content from repository"
 msgstr "리포지토리에서 콘텐츠 제거"
 
@@ -2317,7 +2317,7 @@ msgstr "리포지토리 관리"
 msgid "Repository name"
 msgstr "리포지터리 이름"
 
-#: src/components/collection-detail/collection-info.tsx:128
+#: src/components/collection-detail/collection-info.tsx:124
 msgid "Requires Ansible"
 msgstr "Ansible 필요"
 
@@ -2339,7 +2339,7 @@ msgstr "역할"
 
 #: src/components/my-imports/import-list.tsx:95
 #: src/components/status/status-indicator.tsx:61
-#: src/constants.tsx:381
+#: src/constants.tsx:373
 #: src/containers/task-management/task-list-view.tsx:164
 msgid "Running"
 msgstr "실행 중"
@@ -2923,7 +2923,7 @@ msgstr "서명되지 않음"
 msgid "Update container information"
 msgstr "컨테이너 정보 업데이트"
 
-#: src/components/collection-list/collection-list-item.tsx:121
+#: src/components/collection-list/collection-list-item.tsx:118
 msgid "Updated <0/>"
 msgstr "업데이트됨 <0/>"
 
@@ -3158,7 +3158,7 @@ msgid "View user"
 msgstr "사용자 보기"
 
 #: src/components/my-imports/import-list.tsx:99
-#: src/constants.tsx:382
+#: src/constants.tsx:374
 #: src/containers/task-management/task-list-view.tsx:168
 msgid "Waiting"
 msgstr "대기 중"
@@ -3226,7 +3226,7 @@ msgstr "Automation Hub에 액세스할 수 없습니다."
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/collection-detail/collection-info.tsx:92
+#: src/components/collection-detail/collection-info.tsx:88
 msgid "You have to be logged in to be able to download the tarball."
 msgstr "tarball을 다운로드하려면 로그인해야 합니다."
 
@@ -3323,11 +3323,27 @@ msgstr "{collectionName}의 버전입니다."
 
 #: src/components/cards/collection-card.tsx:51
 #: src/components/cards/namespace-card.tsx:36
-#: src/components/collection-list/collection-list-item.tsx:59
+#: src/components/collection-list/collection-list-item.tsx:58
 #: src/components/headers/collection-header.tsx:378
 #: src/components/headers/partner-header.tsx:46
 msgid "{company} logo"
 msgstr "{company} 로고"
+
+#: src/components/numeric-label/numeric-label.tsx:84
+msgid "{count, plural, one {Dependency} other {Dependencies}}"
+msgstr ""
+
+#: src/components/numeric-label/numeric-label.tsx:72
+msgid "{count, plural, one {Module} other {Modules}}"
+msgstr ""
+
+#: src/components/numeric-label/numeric-label.tsx:80
+msgid "{count, plural, one {Plugin} other {Plugins}}"
+msgstr ""
+
+#: src/components/numeric-label/numeric-label.tsx:76
+msgid "{count, plural, one {Role} other {Roles}}"
+msgstr ""
 
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
