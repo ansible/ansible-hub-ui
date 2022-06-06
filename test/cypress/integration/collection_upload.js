@@ -7,6 +7,7 @@ describe('Collection Upload Tests', () => {
     cy.deleteNamespacesAndCollections();
     cy.deleteTestGroups();
     cy.deleteTestUsers();
+
     cy.galaxykit('-i collection upload testspace testcollection');
     cy.createUser(userName, userPassword);
   });
@@ -99,12 +100,12 @@ describe('Collection Upload Tests', () => {
     cy.get('a[href="/ui/repo/published/ansible"]').click();
     cy.wait('@namespaces');
     cy.contains('Upload collection').click();
-    cy.fixture('collections/ansible-network-1.2.0.tar.gz', 'binary')
+    cy.fixture('collections/ansible-posix-1.4.0.tar.gz', 'binary')
       .then(Cypress.Blob.binaryStringToBlob)
       .then((fileContent) => {
         cy.get('input[type="file"]').attachFile({
           fileContent,
-          fileName: 'ansible-network-1.2.0.tar.gz',
+          fileName: 'ansible-posix-1.4.0.tar.gz',
           mimeType: 'application/gzip',
         });
       });
@@ -113,6 +114,7 @@ describe('Collection Upload Tests', () => {
     cy.contains('My imports');
     cy.get('.pf-c-label__content').contains('Running').should('exist');
     cy.wait('@upload', { timeout: 10000 });
+    cy.get('.pf-c-label__content').contains('Failed').should('not.exist');
     cy.get('.pf-c-label__content').contains('Completed').should('exist');
   });
 
