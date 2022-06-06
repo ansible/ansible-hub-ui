@@ -804,7 +804,9 @@ Cypress.Commands.add('addRolesToGroup', {}, (groupName, roles) => {
   cy.wait('@groups');
   cy.get('[data-cy=add-roles]').click();
 
-  cy.get('[aria-label="Items per page"]').click();
+  cy.get(
+    '[aria-label="Add roles content"] [aria-label="Items per page"]',
+  ).click();
   cy.contains('100 per page').click();
 
   roles.forEach((role) => {

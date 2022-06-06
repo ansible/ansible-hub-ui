@@ -43,4 +43,8 @@ export default [
       'Delete remote registry',
     ],
   },
+  {
+    group: 'task_management',
+    permissions: ['View all tasks', 'Delete task', 'Change task'],
+  },
 ];
