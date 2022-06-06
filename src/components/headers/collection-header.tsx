@@ -1,6 +1,6 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { errorMessage } from 'src/utilities';
+import { errorMessage, deleteCollectionUtils } from 'src/utilities';
 import './header.scss';
 
 import { Redirect } from 'react-router-dom';
@@ -132,7 +132,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    this.getUsedbyDependencies();
+    deleteCollectionUtils.getUsedbyDependencies(
+      this.props.collection,
+      (data) => this.setState({ noDependencies: data }),
+      (data) => this.setState({ alerts: [...this.state.alerts, data] }),
+    );
   }
 
   render() {
@@ -210,33 +214,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const canSign = canSignNS(this.context, namespace);
 
     const dropdownItems = [
-      noDependencies
-        ? this.context.user.model_permissions.delete_collection && (
-            <DropdownItem
-              key='delete-collection-enabled'
-              onClick={() => this.openDeleteModalWithConfirm()}
-              data-cy='delete-collection-dropdown'
-            >
-              {t`Delete entire collection`}
-            </DropdownItem>
-          )
-        : this.context.user.model_permissions.delete_collection && (
-            <Tooltip
-              key='delete-collection-disabled'
-              position='left'
-              content={
-                <Trans>
-                  Cannot delete until collections <br />
-                  that depend on this collection <br />
-                  have been deleted.
-                </Trans>
-              }
-            >
-              <DropdownItem isDisabled>
-                {t`Delete entire collection`}
-              </DropdownItem>
-            </Tooltip>
-          ),
+      deleteCollectionUtils.deleteMenuOption(noDependencies, this.context, () =>
+        this.openDeleteModalWithConfirm(),
+      ),
       this.context.user.model_permissions.delete_collection && (
         <DropdownItem
           data-cy='delete-version-dropdown'
@@ -383,62 +363,20 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             count={all_versions.length}
           />
         </Modal>
-        {deleteCollection && (
-          <DeleteModal
-            spinner={isDeletionPending}
-            cancelAction={this.closeModal}
-            deleteAction={() =>
-              this.setState({ isDeletionPending: true }, () => {
-                collectionVersion
-                  ? this.deleteCollectionVersion(collectionVersion)
-                  : this.deleteCollection();
-              })
-            }
-            isDisabled={!confirmDelete || isDeletionPending}
-            title={
+        {deleteCollectionUtils.deleteModal(
+          deleteCollection,
+          isDeletionPending,
+          confirmDelete,
+          collectionVersion,
+          () => this.closeModal(),
+          () => {
+            this.setState({ isDeletionPending: true }, () => {
               collectionVersion
-                ? t`Delete collection version?`
-                : t`Delete collection?`
-            }
-          >
-            <>
-              <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
-                {collectionVersion ? (
-                  <>
-                    {deleteCollection.all_versions.length === 1 ? (
-                      <Trans>
-                        Deleting{' '}
-                        <b>
-                          {deleteCollection.name} v{collectionVersion}
-                        </b>{' '}
-                        and its data will be lost and this will cause the entire
-                        collection to be deleted.
-                      </Trans>
-                    ) : (
-                      <Trans>
-                        Deleting{' '}
-                        <b>
-                          {deleteCollection.name} v{collectionVersion}
-                        </b>{' '}
-                        and its data will be lost.
-                      </Trans>
-                    )}
-                  </>
-                ) : (
-                  <Trans>
-                    Deleting <b>{deleteCollection.name}</b> and its data will be
-                    lost.
-                  </Trans>
-                )}
-              </Text>
-              <Checkbox
-                isChecked={confirmDelete}
-                onChange={(val) => this.setState({ confirmDelete: val })}
-                label={t`I understand that this action cannot be undone.`}
-                id='delete_confirm'
-              />
-            </>
-          </DeleteModal>
+                ? this.deleteCollectionVersion(collectionVersion)
+                : this.deleteCollection();
+            });
+          },
+          (val) => this.setState({ confirmDelete: val }),
         )}
         <BaseHeader
           className={className}
