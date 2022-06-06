@@ -141,7 +141,7 @@ describe('RBAC test for user without permissions', () => {
     // can Push to existing containers
   });
 
-  it("shouldn't let remote registries when user doesn't have permission", () => {
+  it("shouldn't let add, delete and sync remote registries when user doesn't have permission", () => {
     // can Add remote registry
     // in here we hide the button (correct), but in containers we dont (wrong)
     cy.visit('/ui/registries');
@@ -246,24 +246,6 @@ describe('RBAC test for user with permissions', () => {
 
     // can Upload to namespace
     cy.contains('Upload collection').should('exist');
-
-    //TODO: not working atm
-    // cy.visit('/ui/repo/published/testspace');
-    // cy.contains('Upload collection').click();
-
-    // cy.fixture('collections/ansible-network-1.2.0.tar.gz', 'binary')
-    //   .then(Cypress.Blob.binaryStringToBlob)
-    //   .then((fileContent) => {
-    //     cy.get('input[type="file"]').attachFile({
-    //       fileContent,
-    //       fileName: 'testspace-network-1.2.0.tar.gz',
-    //       mimeType: 'application/gzip',
-    //     });
-    //   });
-    // // cy.get('input[type="file"]')
-    // cy.get('[data-cy="confirm-upload"]').contains('Upload').click();
-    // cy.contains('You do not have permission to perform this action.')
-    //   .should('not.exist')
   });
 
   it('should let delete collection and modify ansible repo content when user has permissions', () => {
@@ -321,7 +303,7 @@ describe('RBAC test for user with permissions', () => {
     cy.contains('Delete').should('exist');
   });
 
-  it('should display edit and delete buttons when user has permissions', () => {
+  it('should let create, edit or delete container when user has permission', () => {
     addRoleToGroupAndSwitchUser('galaxy.test_containers');
 
     cy.visit('/ui/containers');
@@ -353,7 +335,7 @@ describe('RBAC test for user with permissions', () => {
     // can Push to existing containers
   });
 
-  it('should test remote registries', () => {
+  it('should let add, delete and sync remote registries when user has permission', () => {
     addRoleToGroupAndSwitchUser('galaxy.test_registries');
 
     // can Add remote registry
