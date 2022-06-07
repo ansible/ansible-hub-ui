@@ -55,6 +55,7 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
         groupId={params.group}
         groups={groups}
         name={name}
+        pulpObjectType='pulp_container/namespaces'
         reload={loadAll}
         selectRolesMessage={t`The selected roles will be added to this specific Execution Environment.`}
         updateGroups={(groups) =>
