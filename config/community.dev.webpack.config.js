@@ -43,6 +43,7 @@ module.exports = webpackBase({
   // https://webpack.js.org/configuration/dev-server/#devserverproxy
   // used to get around CORS requirements when running in dev mode
   WEBPACK_PROXY: {
+    '/complete/': `http://${proxyHost}:${proxyPort}`,
     '/api/': `http://${proxyHost}:${proxyPort}`,
     '/pulp/api/': `http://${proxyHost}:${proxyPort}`,
   },

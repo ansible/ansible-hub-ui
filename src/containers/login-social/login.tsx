@@ -73,7 +73,7 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
         >
           {loginForm}
           <Divider component='div'></Divider>
-          <Button isBlock variant='secondary'>
+          <Button isBlock variant='secondary' onClick={this.onGithubLoginButtonClick}>
             Login with Github
           </Button>
         </PFLoginPage>
@@ -87,6 +87,16 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
 
   private handlePasswordChange = (passwordValue) => {
     this.setState({ passwordValue });
+  };
+
+  private onGithubLoginButtonClick = (event) => {
+    // redirect to https://github.com/login/oauth/authorize?client_id=<CLIENTID>>&redirect_uri=https%3A%2F%2Fgalaxy.ansible.com%2Faccounts%2Fgithub%2Flogin%2Fcallback%2F&scope=read%3Aorg+user%3Aemail&response_type=code&state=rTeYdZ2Wlbw4
+    console.log('LOGIN WITH GITHUB');
+
+    const client_id = '3a7ae2a0618cc786fff4';
+    const href = `https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}`;
+
+    window.location.replace(href);
   };
 
   private onLoginButtonClick = (event) => {
