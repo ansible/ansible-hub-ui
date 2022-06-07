@@ -1,15 +1,14 @@
 import { CollectionAPI } from 'src/api';
 
 import React from 'react';
-import { errorMessage } from 'src/utilities';
+import { errorMessage, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 import { t, Trans } from '@lingui/macro';
+import { Paths, formatPath } from 'src/paths';
 
-import { Text, DropdownItem, Checkbox, Tooltip } from '@patternfly/react-core';
-
-import { DeleteModal } from 'src/components';
+import { DropdownItem, Tooltip } from '@patternfly/react-core';
 
 class DeleteCollectionUtils {
-  public getUsedbyDependencies(collection, setDependencies, setAlerts) {
+  public getUsedbyDependencies(collection, setDependencies, setAlert) {
     const { name, namespace } = collection;
     CollectionAPI.getUsedDependenciesByCollection(namespace.name, name)
       .then(({ data }) => {
@@ -17,7 +16,7 @@ class DeleteCollectionUtils {
       })
       .catch((err) => {
         const { status, statusText } = err.response;
-        setAlerts({
+        setAlert({
           variant: 'danger',
           title: t`Dependencies for collection "${name}" could not be displayed.`,
           description: errorMessage(status, statusText),
@@ -55,68 +54,62 @@ class DeleteCollectionUtils {
         );
   }
 
-  public deleteModal(
-    deleteCollection,
-    isDeletionPending,
-    confirmDelete,
-    collectionVersion,
-    cancelAction,
-    deleteAction,
-    onChange,
-  ) {
-    return (
-      deleteCollection && (
-        <DeleteModal
-          spinner={isDeletionPending}
-          cancelAction={() => cancelAction()}
-          deleteAction={() => deleteAction()}
-          isDisabled={!confirmDelete || isDeletionPending}
-          title={
-            collectionVersion
-              ? t`Delete collection version?`
-              : t`Delete collection?`
+  public deleteCollection(component, redirect, selectedRepo, addAlert) {
+    const { deleteCollection, collectionVersion } = component.state;
+
+    CollectionAPI.deleteCollection(selectedRepo, deleteCollection)
+      .then((res) => {
+        const taskId = parsePulpIDFromURL(res.data.task);
+
+        const name =
+          deleteCollection.name +
+          (collectionVersion ? 'v ' + collectionVersion : '');
+
+        waitForTask(taskId).then(() => {
+          addAlert({
+            variant: 'success',
+            title: (
+              <Trans>
+                Collection &quot;{name}
+                &quot; has been successfully deleted.
+              </Trans>
+            ),
+          });
+
+          component.setState({
+            collectionVersion: null,
+            deleteCollection: null,
+            isDeletionPending: false,
+          });
+
+          if (redirect) {
+            component.setState({
+              redirect: formatPath(Paths.namespaceByRepo, {
+                repo: component.context.selectedRepo,
+                namespace: deleteCollection.namespace.name,
+              }),
+            });
           }
-        >
-          <>
-            <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
-              {collectionVersion ? (
-                <>
-                  {deleteCollection.all_versions.length === 1 ? (
-                    <Trans>
-                      Deleting{' '}
-                      <b>
-                        {deleteCollection.name} v{collectionVersion}
-                      </b>{' '}
-                      and its data will be lost and this will cause the entire
-                      collection to be deleted.
-                    </Trans>
-                  ) : (
-                    <Trans>
-                      Deleting{' '}
-                      <b>
-                        {deleteCollection.name} v{collectionVersion}
-                      </b>{' '}
-                      and its data will be lost.
-                    </Trans>
-                  )}
-                </>
-              ) : (
-                <Trans>
-                  Deleting <b>{deleteCollection.name}</b> and its data will be
-                  lost.
-                </Trans>
-              )}
-            </Text>
-            <Checkbox
-              isChecked={confirmDelete}
-              onChange={(val) => onChange(val)}
-              label={t`I understand that this action cannot be undone.`}
-              id='delete_confirm'
-            />
-          </>
-        </DeleteModal>
-      )
-    );
+
+          if (component.load) {
+            component.load();
+          }
+        });
+      })
+      .catch((err) => {
+        const { status, statusText } = err.response;
+        component.setState({
+          collectionVersion: null,
+          deleteCollection: null,
+          isDeletionPending: false,
+        });
+
+        addAlert({
+          variant: 'danger',
+          title: t`Collection "${name}" could not be deleted.`,
+          description: errorMessage(status, statusText),
+        });
+      });
   }
 }
 

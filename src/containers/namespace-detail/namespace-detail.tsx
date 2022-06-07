@@ -153,6 +153,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       isOpenNamespaceModal,
       confirmDelete,
       isNamespacePending,
+      alerts,
     } = this.state;
 
     if (redirect) {
@@ -202,10 +203,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <ImportModal
           isOpen={showImportModal}
           onUploadSuccess={() =>
@@ -314,18 +312,25 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               />
             ) : (
               <section className='body'>
-                <CollectionList
-                  updateParams={updateParams}
-                  params={params}
-                  ignoredParams={ignoredParams}
-                  collections={collections}
-                  itemCount={itemCount}
-                  showControls={this.state.showControls}
-                  handleControlClick={(id, action) =>
-                    this.handleCollectionAction(id, action)
-                  }
-                  repo={this.context.selectedRepo}
-                />
+                {
+                  <CollectionList
+                    updateParams={updateParams}
+                    params={params}
+                    ignoredParams={ignoredParams}
+                    collections={collections}
+                    itemCount={itemCount}
+                    showControls={this.state.showControls}
+                    handleControlClick={(id, action) =>
+                      this.handleCollectionAction(id, action)
+                    }
+                    repo={this.context.selectedRepo}
+                    addAlert={(alert) =>
+                      this.setState({ alerts: [...alerts, alert] })
+                    }
+                    reload={() => this.loadAll()}
+                    context={this.context}
+                  />
+                }
               </section>
             )
           ) : null}

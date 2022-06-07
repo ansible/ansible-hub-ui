@@ -18,8 +18,6 @@ import {
   Text,
   Button,
   DropdownItem,
-  Tooltip,
-  Checkbox,
 } from '@patternfly/react-core';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -34,11 +32,11 @@ import {
   AlertType,
   closeAlertMixin,
   StatefulDropdown,
-  DeleteModal,
   SignSingleCertificateModal,
   SignAllCertificatesModal,
   UploadSingCertificateModal,
   ImportModal,
+  DeleteCollectionModal,
 } from 'src/components';
 
 import {
@@ -363,21 +361,27 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             count={all_versions.length}
           />
         </Modal>
-        {deleteCollectionUtils.deleteModal(
-          deleteCollection,
-          isDeletionPending,
-          confirmDelete,
-          collectionVersion,
-          () => this.closeModal(),
-          () => {
+        <DeleteCollectionModal
+          deleteCollection={deleteCollection}
+          isDeletionPending={isDeletionPending}
+          confirmDelete={confirmDelete}
+          collectionVersion={collectionVersion}
+          cancelAction={() => this.setState({ deleteCollection: null })}
+          deleteAction={() =>
             this.setState({ isDeletionPending: true }, () => {
               collectionVersion
                 ? this.deleteCollectionVersion(collectionVersion)
-                : this.deleteCollection();
-            });
-          },
-          (val) => this.setState({ confirmDelete: val }),
-        )}
+                : deleteCollectionUtils.deleteCollection(
+                    this,
+                    true,
+                    this.context.selectedRepo,
+                    (alert) =>
+                      this.context.setAlerts([...this.state.alerts, alert]),
+                  );
+            })
+          }
+          onChange={(val) => this.setState({ confirmDelete: val })}
+        ></DeleteCollectionModal>
         <BaseHeader
           className={className}
           title={collection.name}
@@ -945,79 +949,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     this.setState({ showImportModal: isOpen });
   }
 
-  private deleteCollection = () => {
-    const {
-      deleteCollection,
-      deleteCollection: { name },
-    } = this.state;
-    CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
-      .then((res) => {
-        const taskId = parsePulpIDFromURL(res.data.task);
-
-        waitForTask(taskId).then(() => {
-          this.context.setAlerts([
-            ...this.context.alerts,
-            {
-              variant: 'success',
-              title: t`Collection "${name}" has been successfully deleted.`,
-            },
-          ]);
-          this.setState({
-            collectionVersion: null,
-            deleteCollection: null,
-            isDeletionPending: false,
-            redirect: formatPath(Paths.namespaceByRepo, {
-              repo: this.context.selectedRepo,
-              namespace: deleteCollection.namespace.name,
-            }),
-          });
-        });
-      })
-      .catch((err) => {
-        const { status, statusText } = err.response;
-        this.setState({
-          collectionVersion: null,
-          deleteCollection: null,
-          isDeletionPending: false,
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: t`Collection "${name}" could not be deleted.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
-        });
-      });
-  };
-
   private openDeleteModalWithConfirm(version = null) {
     this.setState({
       deleteCollection: this.props.collection,
       collectionVersion: version,
       confirmDelete: false,
     });
-  }
-
-  private getUsedbyDependencies() {
-    const { name, namespace } = this.props.collection;
-    CollectionAPI.getUsedDependenciesByCollection(namespace.name, name)
-      .then(({ data }) => {
-        this.setState({ noDependencies: !data.data.length });
-      })
-      .catch((err) => {
-        const { status, statusText } = err.response;
-        this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: t`Dependencies for collection "${name}" could not be displayed.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
-        });
-      });
   }
 
   private closeModal = () => {

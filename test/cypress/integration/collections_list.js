@@ -133,4 +133,37 @@ describe('Collections list Tests', () => {
     cy.get('button[name="community"]:first').click();
     cy.get('.hub-cards .card').should('have.length', 0);
   });
+
+  it('Can delete collection in collection list', () => {
+    cy.get('[data-cy="view_type_list"] svg').click();
+    cy.get('.toolbar')
+      .get('[aria-label="keywords"]:first')
+      .type('my_collection0{enter}');
+    cy.get('.hub-list').contains('my_collection2').should('not.exist');
+    cy.get('.hub-list').contains('my_collection0');
+
+    cy.get('[aria-label=Actions]').click();
+    cy.contains('Delete entire collection').click();
+    cy.get('[data-cy=modal_checkbox] input').click();
+    cy.get('[data-cy=delete-button] button').click();
+    cy.contains('Collection "my_collection0" has been successfully deleted.', {
+      timeout: 15000,
+    });
+    cy.contains('No results found');
+  });
+
+  it('Can delete collection in namespace collection list', () => {
+    cy.visit('/ui/repo/published/my_namespace');
+    cy.get('.toolbar')
+      .get('[aria-label="keywords"]:first')
+      .type('my_collection1{enter}');
+    cy.get('.body').contains('my_collection2').should('not.exist');
+    cy.get('.body').contains('my_collection1');
+
+    cy.get('.body [aria-label=Actions]').click();
+    cy.contains('Delete entire collection').click();
+    cy.get('[data-cy=modal_checkbox] input').click();
+    cy.get('[data-cy=delete-button] button').click();
+    cy.contains('No results found', { timeout: 15000 });
+  });
 });
