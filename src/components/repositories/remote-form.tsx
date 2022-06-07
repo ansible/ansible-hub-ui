@@ -350,6 +350,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
         )}
 
         <FormGroup
+          data-cy='username'
           fieldId={'username'}
           label={t`Username`}
           labelIcon={
@@ -440,6 +441,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             </FormGroup>
 
             <FormGroup
+              data-cy='proxy_username'
               fieldId={'proxy_username'}
               label={t`Proxy username`}
               isRequired={requiredFields.includes('proxy_username')}
