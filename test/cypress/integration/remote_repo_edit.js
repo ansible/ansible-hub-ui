@@ -64,6 +64,17 @@ describe('edit a remote repository', () => {
     cy.get('input[id="proxy_username"]').clear();
     cy.contains('Save').click();
     cy.wait('@editCommunityRemote');
+
+    //check for clear values
+    cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
+    cy.contains('Edit').click();
+    cy.contains('Show advanced options').click();
+    cy.get('input[id="username"]').should('be.empty');
+    cy.get('input[id="password"]').should('be.empty');
+    cy.get('input[id="proxy_url"]').should('be.empty');
+    cy.get('input[id="proxy_username"]').should('be.empty');
+    cy.contains('Save').click();
+    cy.wait('@editCommunityRemote');
   });
 
   it(`edits remote repo 'rh-certified'`, () => {
@@ -123,5 +134,17 @@ describe('edit a remote repository', () => {
     cy.get('input[id="proxy_url"]').clear();
     cy.get('input[id="proxy_username"]').clear();
     cy.contains('Save').click();
+    cy.wait('@editRemote');
+
+    //check for clear values
+    cy.get('[aria-label="Actions"]').eq(1).click(); // click the kebab menu on the 'rh-certified' repo
+    cy.contains('Edit').click();
+    cy.contains('Show advanced options').click();
+    cy.get('input[id="username"]').should('be.empty');
+    cy.get('input[id="password"]').should('be.empty');
+    cy.get('input[id="proxy_url"]').should('be.empty');
+    cy.get('input[id="proxy_username"]').should('be.empty');
+    cy.contains('Save').click();
+    cy.wait('@editRemote');
   });
 });
