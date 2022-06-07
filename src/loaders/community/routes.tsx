@@ -36,7 +36,7 @@ import {
   LegacyUsers,
   LegacyUser,
   LegacyRoles,
-  LegacyRole
+  LegacyRole,
 } from 'src/containers';
 import {
   ActiveUserAPI,
@@ -180,22 +180,22 @@ export class Routes extends React.Component<IRoutesProps> {
       {
         comp: LegacyUser,
         path: Paths.legacyUser,
-        isDisabled: false
+        isDisabled: false,
       },
       {
         comp: LegacyUsers,
         path: Paths.legacyUsers,
-        isDisabled: false
+        isDisabled: false,
       },
       {
         comp: LegacyRole,
         path: Paths.legacyRole,
-        isDisabled: false
+        isDisabled: false,
       },
       {
         comp: LegacyRoles,
         path: Paths.legacyRoles,
-        isDisabled: false
+        isDisabled: false,
       },
       {
         comp: ExecutionEnvironmentDetailActivities,

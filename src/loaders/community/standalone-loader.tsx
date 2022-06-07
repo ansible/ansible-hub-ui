@@ -273,19 +273,18 @@ class App extends React.Component<RouteComponentProps, IState> {
         ))}
       </>
     );
-    const MenuSection = ({ section }) =>
+    const MenuSection = ({ section }) => (
       //section.condition({ user, featureFlags, settings }) ? (
-      (
-        <NavExpandable
-          title={section.name}
-          groupId={section.name}
-          isActive={section.active}
-          isExpanded={menuExpandedSections.includes(section.name)}
-        >
-          <Menu items={section.items} />
-        </NavExpandable>
-      );
-      //) : null;
+      <NavExpandable
+        title={section.name}
+        groupId={section.name}
+        isActive={section.active}
+        isExpanded={menuExpandedSections.includes(section.name)}
+      >
+        <Menu items={section.items} />
+      </NavExpandable>
+    );
+    //) : null;
 
     const onToggle = ({ groupId, isExpanded }) => {
       this.setState({

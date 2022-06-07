@@ -22,7 +22,10 @@ class API extends HubAPI {
           .then((result) => resolve(result.identity))
           .catch((result) => reject(result));
       });
-    } else if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE || DEPLOYMENT_MODE === Constants.COMMUNITY_DEPLOYMENT_MODE) {
+    } else if (
+      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE ||
+      DEPLOYMENT_MODE === Constants.COMMUNITY_DEPLOYMENT_MODE
+    ) {
       return new Promise((resolve, reject) => {
         this.http
           .get(this.apiPath)

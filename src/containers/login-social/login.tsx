@@ -73,7 +73,11 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
         >
           {loginForm}
           <Divider component='div'></Divider>
-          <Button isBlock variant='secondary' onClick={this.onGithubLoginButtonClick}>
+          <Button
+            isBlock
+            variant='secondary'
+            onClick={this.onGithubLoginButtonClick}
+          >
             Login with Github
           </Button>
         </PFLoginPage>
