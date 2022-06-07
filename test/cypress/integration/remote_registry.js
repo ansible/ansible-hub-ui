@@ -94,6 +94,15 @@ describe('Remote Registry Tests', () => {
     cy.get('input[id = "url"]').clear();
     cy.get('input[id = "url"]').type('https://some new url2');
 
+    //edit advanced options
+    cy.contains('Show advanced options').click();
+
+    cy.get('input[id="username"]').type('test');
+    cy.get('input[id="password"]').type('test');
+    cy.get('input[id="proxy_url"]').type('https://example.org');
+    cy.get('input[id="proxy_username"]').type('test');
+    cy.get('input[id="proxy_password"]').type('test');
+
     cy.intercept(
       'GET',
       Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
@@ -102,8 +111,18 @@ describe('Remote Registry Tests', () => {
     cy.contains('button', 'Save').click();
     cy.wait('@registriesGet');
 
+    // verify url change in list view
     cy.visit('/ui/registries');
     cy.contains('table tr', 'https://some new url2');
+
+    // verify advanced option values have been saved properly.
+    cy.get('[aria-label="Actions"]:first').click();
+    cy.contains('Edit').click();
+    cy.contains('Show advanced options').click();
+    cy.get('[data-cy="username"]').children().contains('Clear');
+    cy.get('input[id="proxy_url"]').should('have.value', 'https://example.org');
+    cy.get('[data-cy="proxy_username"]').children().contains('Clear');
+    cy.contains('Save').click();
   });
 
   it('admin can delete data', () => {

@@ -4,19 +4,18 @@ describe('Task table contains correct headers and filter', () => {
     cy.visit('/ui/repositories?tab=remote');
 
     cy.contains('Repo Management');
-    cy.contains('Configure');
     cy.contains('Sync');
 
     cy.intercept(
       'POST',
-      Cypress.env('prefix') + '/content/rh-certified/v3/sync/',
+      Cypress.env('prefix') + 'content/rh-certified/v3/sync/',
     ).as('sync');
 
     cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/remotes/?*').as(
       'remotes',
     );
 
-    cy.contains('button', 'Sync').click();
+    cy.get('tr').eq(2).contains('Sync').click();
 
     cy.wait('@sync');
     cy.wait('@remotes');
