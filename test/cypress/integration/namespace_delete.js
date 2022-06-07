@@ -1,6 +1,7 @@
 describe('Delete a namespace', () => {
-  before(() => {
+  beforeEach(() => {
     cy.login();
+    cy.deleteNamespacesAndCollections();
   });
 
   it('deletes a namespace', () => {
@@ -11,7 +12,7 @@ describe('Delete a namespace', () => {
       Cypress.env('prefix') + '_ui/v1/namespaces/?sort=name*',
     ).as('reload');
     cy.get('a[href*="ui/repo/published/testns1"]').click();
-    cy.get('[data-cy=kebab-toggle]').click();
+    cy.get('[data-cy="ns-kebab-toggle"]').click();
     cy.contains('Delete namespace').click();
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
@@ -20,5 +21,39 @@ describe('Delete a namespace', () => {
       'have.text',
       'Success alert:Namespace "testns1" has been successfully deleted.',
     );
+  });
+
+  it('cannot delete a non-empty namespace', () => {
+    //create namespace
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/namespaces/?sort=name*',
+    ).as('reload');
+    cy.galaxykit('-i namespace create', 'ansible');
+    cy.menuGo('Collections > Namespaces');
+    cy.wait('@reload');
+
+    cy.get('a[href*="ui/repo/published/ansible"]').click();
+
+    //upload a collection
+
+    cy.galaxykit('-i collection upload ansible network');
+
+    // wait for imports to finish successfully
+
+    cy.wait(10000);
+
+    // attempt deletion
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/namespaces/?sort=name&offset=0&limit=20',
+    ).as('namespaces');
+    cy.menuGo('Collections > Namespaces');
+    cy.wait('@namespaces');
+    cy.contains('ansible').parent().contains('View collections').click();
+    cy.get('[data-cy=ns-kebab-toggle]').click();
+    cy.contains('Delete namespace')
+      .invoke('attr', 'aria-disabled')
+      .should('eq', 'true');
   });
 });

@@ -656,7 +656,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             {t`Upload collection`}
           </Button>
         )}
-        {dropdownItems.length > 0 && <StatefulDropdown items={dropdownItems} />}
+        {dropdownItems.length > 0 && (
+          <div data-cy='ns-kebab-toggle'>
+            <StatefulDropdown items={dropdownItems} />
+          </div>
+        )}
       </div>
     );
   }

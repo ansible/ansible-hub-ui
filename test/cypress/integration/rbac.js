@@ -112,7 +112,7 @@ describe('RBAC test for user with all permissions', () => {
     cy.contains('Create').should('exist');
     cy.galaxykit('-i namespace create', 'testspace');
     cy.visit('/ui/repo/published/testspace');
-    cy.get('[data-cy=kebab-toggle] > .pf-c-dropdown').should('exist').click();
+    cy.get('[data-cy="ns-kebab-toggle"]').should('exist').click();
     cy.contains('Edit namespace');
     cy.contains('Delete namespace');
   });
