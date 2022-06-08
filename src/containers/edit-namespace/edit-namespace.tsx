@@ -99,6 +99,12 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       return null;
     }
 
+    const updateNamespace = (namespace) =>
+      this.setState({
+        namespace,
+        unsavedData: true,
+      });
+
     return (
       <React.Fragment>
         <PartnerHeader
@@ -126,28 +132,19 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
         ) : (
           <Main>
             <section className='body'>
-              {params.tab.toLowerCase() === 'edit-details' ? (
+              {params.tab === 'edit-details' ? (
                 <NamespaceForm
-                  namespace={namespace}
                   errorMessages={errorMessages}
-                  updateNamespace={(namespace) =>
-                    this.setState({
-                      namespace: namespace,
-                      unsavedData: true,
-                    })
-                  }
-                />
-              ) : (
-                <ResourcesForm
-                  updateNamespace={(namespace) =>
-                    this.setState({
-                      namespace: namespace,
-                      unsavedData: true,
-                    })
-                  }
                   namespace={namespace}
+                  updateNamespace={updateNamespace}
                 />
-              )}
+              ) : null}
+              {params.tab === 'edit-resources' ? (
+                <ResourcesForm
+                  namespace={namespace}
+                  updateNamespace={updateNamespace}
+                />
+              ) : null}
               <Form>
                 <ActionGroup>
                   <Button

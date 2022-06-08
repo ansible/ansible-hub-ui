@@ -1,14 +1,25 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './namespace-form.scss';
-import { validateURLHelper } from 'src/utilities';
 
-import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
-import { PlusCircleIcon, TrashIcon } from '@patternfly/react-icons';
+import {
+  Alert,
+  Form,
+  FormGroup,
+  TextArea,
+  TextInput,
+} from '@patternfly/react-core';
+import {
+  ExternalLinkAltIcon,
+  PlusCircleIcon,
+  TrashIcon,
+} from '@patternfly/react-icons';
+import { Link } from 'react-router-dom';
 
-import { NamespaceCard } from 'src/components';
 import { NamespaceType } from 'src/api';
-import { ErrorMessagesType } from 'src/utilities';
+import { NamespaceCard } from 'src/components';
+import { Paths, formatPath } from 'src/paths';
+import { ErrorMessagesType, validateURLHelper } from 'src/utilities';
 
 interface IProps {
   namespace: NamespaceType;
@@ -60,6 +71,31 @@ export class NamespaceForm extends React.Component<IProps> {
             <NamespaceCard {...namespace} />
           </div>
         </div>
+
+        <FormGroup fieldId='none' label={t`Namespace owners`}>
+          <Alert
+            isInline
+            variant='info'
+            title={
+              <Trans>
+                Moved to the{' '}
+                <Link
+                  target='_blank'
+                  to={formatPath(
+                    Paths.myCollections,
+                    {
+                      namespace: namespace.name,
+                    },
+                    { tab: 'owners' },
+                  )}
+                >
+                  Namespace owners
+                </Link>{' '}
+                <ExternalLinkAltIcon /> tab
+              </Trans>
+            }
+          />
+        </FormGroup>
 
         <FormGroup
           fieldId='avatar_url'

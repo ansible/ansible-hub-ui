@@ -21,7 +21,7 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
-import { parsePulpIDFromURL, waitForTask } from 'src/utilities';
+import { ParamHelper, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 
 import { AppContext } from 'src/loaders/app-context';
 
@@ -38,6 +38,7 @@ interface IState {
 
 export interface IDetailSharedProps extends RouteComponentProps {
   containerRepository: ContainerRepositoryType;
+  addAlert: (alert: AlertType) => void;
 }
 
 // A higher order component to wrap individual detail pages
@@ -66,40 +67,26 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     render() {
-      if (this.state.redirect === 'list') {
-        return (
-          <Redirect push to={formatPath(Paths.executionEnvironments, {})} />
-        );
-      }
-      if (this.state.redirect === 'activity') {
-        return (
-          <Redirect
-            push
-            to={formatPath(Paths.executionEnvironmentDetailActivities, {
-              container: this.props.match.params['container'],
-            })}
-          />
-        );
-      } else if (this.state.redirect === 'detail') {
-        return (
-          <Redirect
-            push
-            to={formatPath(Paths.executionEnvironmentDetail, {
-              container: this.props.match.params['container'],
-            })}
-          />
-        );
-      } else if (this.state.redirect === 'images') {
-        return (
-          <Redirect
-            push
-            to={formatPath(Paths.executionEnvironmentDetailImages, {
-              container: this.props.match.params['container'],
-            })}
-          />
-        );
-      } else if (this.state.redirect === 'notFound') {
-        return <Redirect push to={Paths.notFound} />;
+      const container = this.props.match.params['container'];
+      const redirect = {
+        list: formatPath(Paths.executionEnvironments, {}),
+        activity: formatPath(Paths.executionEnvironmentDetailActivities, {
+          container,
+        }),
+        detail: formatPath(Paths.executionEnvironmentDetail, {
+          container,
+        }),
+        images: formatPath(Paths.executionEnvironmentDetailImages, {
+          container,
+        }),
+        owners: formatPath(Paths.executionEnvironmentDetailOwners, {
+          container,
+        }),
+        notFound: Paths.notFound,
+      }[this.state.redirect];
+
+      if (redirect) {
+        return <Redirect push to={redirect} />;
       }
 
       if (this.state.loading) {
@@ -148,6 +135,11 @@ export function withContainerRepo(WrappedComponent) {
 
       const { alerts, repo, publishToController, showDeleteModal } = this.state;
 
+      // move to Owner tab when it can have its own breadcrumbs
+      const { group: groupId } = ParamHelper.parseParamString(
+        this.props.location.search,
+      ) as { group?: number };
+
       return (
         <React.Fragment>
           <AlertList
@@ -170,11 +162,7 @@ export function withContainerRepo(WrappedComponent) {
                 this.setState({ redirect: 'list' });
               }}
               addAlert={(text, variant, description = undefined) =>
-                this.setState({
-                  alerts: alerts.concat([
-                    { title: text, variant: variant, description: description },
-                  ]),
-                })
+                this.addAlert(text, variant, description)
               }
             ></DeleteExecutionEnvironmentModal>
           )}
@@ -182,6 +170,7 @@ export function withContainerRepo(WrappedComponent) {
             id={this.props.match.params['container']}
             updateState={(change) => this.setState(change)}
             tab={this.getTab()}
+            groupId={groupId}
             container={this.state.repo}
             pageControls={
               <>
@@ -265,6 +254,9 @@ export function withContainerRepo(WrappedComponent) {
             <WrappedComponent
               containerRepository={this.state.repo}
               editing={this.state.editing}
+              addAlert={({ title, variant, description = null }) =>
+                this.addAlert(title, variant, description)
+              }
               {...this.props}
             />
           </Main>
@@ -294,7 +286,7 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private getTab() {
-      const tabs = ['detail', 'images', 'activity'];
+      const tabs = ['detail', 'images', 'activity', 'owners'];
       const location = this.props.location.pathname.split('/').pop();
 
       for (const tab of tabs) {
