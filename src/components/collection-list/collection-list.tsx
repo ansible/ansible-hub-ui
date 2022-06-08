@@ -5,7 +5,6 @@ import './list.scss';
 import { Button, DropdownItem, DataList } from '@patternfly/react-core';
 
 import { CollectionListType } from 'src/api';
-import { Constants } from 'src/constants';
 import {
   CollectionListItem,
   Pagination,
@@ -95,14 +94,6 @@ export class CollectionList extends React.Component<IProps> {
                 this.props.handleControlClick(collection.id, 'deprecate')
               }
               key='deprecate'
-              isDisabled={
-                DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-              }
-              description={
-                DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-                  ? t`Temporarily disabled due to sync issues. (AAH-1237)`
-                  : null
-              }
             >
               {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
             </DropdownItem>,
