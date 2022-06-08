@@ -33,6 +33,7 @@ import {
   ExecutionEnvironmentDetail,
   ExecutionEnvironmentDetailActivities,
   ExecutionEnvironmentDetailImages,
+  ExecutionEnvironmentDetailOwners,
   ExecutionEnvironmentManifest,
   TaskListView,
   TaskDetail,
@@ -157,6 +158,11 @@ export class Routes extends React.Component<IRoutesProps> {
       {
         comp: ExecutionEnvironmentDetailActivities,
         path: Paths.executionEnvironmentDetailActivities,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        comp: ExecutionEnvironmentDetailOwners,
+        path: Paths.executionEnvironmentDetailOwners,
         isDisabled: isContainerDisabled,
       },
       {

@@ -142,12 +142,14 @@ export const RadioRow: React.FC<{
   rowIndex?: number;
   isSelected: boolean;
   onSelect: (value) => void;
+  isDisabled?: boolean;
   'data-cy'?: string;
-}> = ({ rowIndex, children, isSelected, onSelect, ...props }) => (
+}> = ({ rowIndex, children, isSelected, onSelect, isDisabled, ...props }) => (
   <Tbody>
     <Tr data-cy={props['data-cy']}>
       <Td
         select={{
+          disable: isDisabled,
           variant: 'radio',
           rowIndex,
           onSelect,

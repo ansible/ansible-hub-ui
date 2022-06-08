@@ -169,9 +169,13 @@ export class NamespaceList extends React.Component<IProps, IState> {
           toggleModal={this.handleModalToggle}
           onCreateSuccess={(result) =>
             this.setState({
-              redirect: formatPath(Paths.myCollections, {
-                namespace: result['name'],
-              }),
+              redirect: formatPath(
+                Paths.myCollections,
+                {
+                  namespace: result.name,
+                },
+                { tab: 'owners' },
+              ),
             })
           }
         ></NamespaceModal>

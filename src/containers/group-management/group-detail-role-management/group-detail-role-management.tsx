@@ -6,10 +6,13 @@ import {
   AppliedFilters,
   CompoundFilter,
   DeleteModal,
-  EmptyStateCustom,
+  EmptyStateNoData,
+  GroupRolePermissions,
   LoadingPageWithHeader,
   Pagination,
   RoleListTable,
+  SelectRoles,
+  PreviewRoles,
   ExpandableRow,
   WizardModal,
   EmptyStateFilter,
@@ -39,13 +42,7 @@ import {
 
 import { IAppContextType } from 'src/loaders/app-context';
 
-import { CubesIcon } from '@patternfly/react-icons';
-
 import { Constants } from 'src/constants';
-
-import PreviewRoles from './preview-roles';
-import SelectRoles from './select-roles';
-import GroupRolePermissions from './group-role-permissions';
 
 import './group-detail-role-management.scss';
 
@@ -289,11 +286,10 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
       )}
       {noData ? (
         <section className='body hub-empty-state-box'>
-          <EmptyStateCustom
+          <EmptyStateNoData
             title={t`There are currently no roles assigned to this group.`}
             description={t`Please add a role by using the button below.`}
             button={addRoles}
-            icon={CubesIcon}
           />
         </section>
       ) : (
