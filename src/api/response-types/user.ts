@@ -41,13 +41,19 @@ export class Permissions {
   delete_containerrepository: boolean;
 }
 
+export class GroupType {
+  id: number;
+  name: string;
+  object_roles?: string[];
+}
+
 export class UserType {
   id?: number;
   username: string;
   first_name?: string;
   last_name?: string;
   email?: string;
-  groups: { id: number; name: string }[];
+  groups: GroupType[];
   auth_provider?: [];
   date_joined?: string;
   password?: string;
@@ -61,5 +67,5 @@ export class MeType {
   first_name?: string;
   last_name?: string;
   model_permissions: Permissions;
-  groups: { id: number; name: string }[];
+  groups: GroupType[];
 }

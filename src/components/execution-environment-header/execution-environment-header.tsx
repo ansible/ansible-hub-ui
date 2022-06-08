@@ -1,7 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { Tooltip } from '@patternfly/react-core';
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { BaseHeader, Breadcrumbs, Tabs } from 'src/components';
 import { ContainerRepositoryType } from 'src/api';
 import { lastSyncStatus, lastSynced } from 'src/utilities';
@@ -12,22 +12,25 @@ interface IProps {
   updateState: (any) => void;
   container: ContainerRepositoryType;
   pageControls?: React.ReactElement;
+  groupId?: number;
 }
 
 export class ExecutionEnvironmentHeader extends React.Component<IProps> {
   render() {
+    const { container, groupId, tab } = this.props;
+
     const tabs = [
       { id: 'detail', name: t`Detail` },
       { id: 'activity', name: t`Activity` },
       { id: 'images', name: t`Images` },
+      { id: 'owners', name: t`Owners` },
     ];
 
-    const last_sync_task =
-      this.props.container.pulp.repository.remote?.last_sync_task;
+    const last_sync_task = container.pulp.repository.remote?.last_sync_task;
 
     return (
       <BaseHeader
-        title={this.props.container.name}
+        title={container.name}
         breadcrumbs={
           <Breadcrumbs
             links={[
@@ -35,8 +38,29 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
                 url: Paths.executionEnvironments,
                 name: t`Execution Environments`,
               },
-              { name: this.props.container.name },
-            ]}
+              {
+                name: container.name,
+                url:
+                  tab === 'owners'
+                    ? formatPath(Paths.executionEnvironmentDetail, {
+                        container: container.name,
+                      })
+                    : null,
+              },
+              tab === 'owners'
+                ? {
+                    name: t`Owners`,
+                    url: groupId
+                      ? formatPath(Paths.executionEnvironmentDetailOwners, {
+                          container: container.name,
+                        })
+                      : null,
+                  }
+                : null,
+              tab === 'owners' && groupId
+                ? { name: t`Group ${groupId}` }
+                : null,
+            ].filter(Boolean)}
           />
         }
         pageControls={this.props.pageControls}
@@ -50,9 +74,9 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
           </p>
         )}
         <div style={{ height: '10px' }}>&nbsp;</div>
-        <Tooltip content={this.props.container.description}>
+        <Tooltip content={container.description}>
           <p data-cy='description' className={'hub-m-truncated'}>
-            {this.props.container.description}
+            {container.description}
           </p>
         </Tooltip>
 
@@ -61,9 +85,9 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
           <div className='tabs'>
             <Tabs
               tabs={tabs}
-              params={{ tab: this.props.tab }}
+              params={{ tab }}
               updateParams={(p) => {
-                if (this.props.tab !== p.tab) {
+                if (tab !== p.tab) {
                   this.props.updateState({ redirect: p.tab });
                 }
               }}

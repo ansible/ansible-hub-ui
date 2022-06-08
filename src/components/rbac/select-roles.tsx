@@ -1,9 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
-
-import { RoleType, RoleAPI, GroupRoleType } from 'src/api';
-
 import { Flex, FlexItem, Label } from '@patternfly/react-core';
+import { RoleType, RoleAPI } from 'src/api';
 import {
   CompoundFilter,
   RoleListTable,
@@ -12,24 +10,22 @@ import {
   LoadingPageSpinner,
   CheckboxRow,
   EmptyStateFilter,
-  EmptyStateCustom,
+  EmptyStateNoData,
 } from 'src/components';
-
-import './group-detail-role-management.scss';
 import { filterIsSet } from 'src/utilities';
 
-import { CubesIcon } from '@patternfly/react-icons';
-
 interface SelectRolesProps {
-  assignedRoles: GroupRoleType[];
+  assignedRoles: { role: string }[];
   selectedRoles: RoleType[];
   onRolesUpdate?: (roles) => void;
+  message?: string;
 }
 
-const SelectRoles: React.FC<SelectRolesProps> = ({
+export const SelectRoles: React.FC<SelectRolesProps> = ({
   assignedRoles,
   selectedRoles,
   onRolesUpdate,
+  message,
 }) => {
   const [inputText, setInputText] = useState<string>('');
   const [roles, setRoles] = useState<RoleType[]>([]);
@@ -72,10 +68,9 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
   if (noData && !filterIsSet(localParams, ['name__icontains'])) {
     return (
       <div className='hub-custom-wizard-layout hub-no-data'>
-        <EmptyStateCustom
+        <EmptyStateNoData
           title={t`No assignable roles.`}
           description={t`There are currently no roles that can be assigned to this group.`}
-          icon={CubesIcon}
         />
       </div>
     );
@@ -122,12 +117,20 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
             }}
             direction={{ default: 'column' }}
           >
+            {message && (
+              <FlexItem>
+                <Flex>
+                  <FlexItem>{message}</FlexItem>
+                </Flex>
+              </FlexItem>
+            )}
+
             {Object.keys(selectedRoles).length !== 0 && (
               <FlexItem>
                 <Flex>
                   <FlexItem>
                     <strong>
-                      <Trans>Selected Roles</Trans>
+                      <Trans>Selected roles</Trans>
                     </strong>
                   </FlexItem>
 
@@ -240,4 +243,3 @@ const SelectRoles: React.FC<SelectRolesProps> = ({
     </div>
   );
 };
-export default SelectRoles;

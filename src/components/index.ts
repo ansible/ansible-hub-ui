@@ -32,6 +32,7 @@ export { EmptyStateNoData } from './empty-state/empty-state-no-data';
 export { EmptyStateUnauthorized } from './empty-state/empty-state-unauthorized';
 export { ExecutionEnvironmentHeader } from './execution-environment-header/execution-environment-header';
 export { GroupModal } from './group-management/group-modal';
+export { GroupRolePermissions } from './role-management/group-role-permissions';
 export { HelperText } from './helper-text/helper-text';
 export { ImportConsole } from './my-imports/import-console';
 export { ImportList } from './my-imports/import-list';
@@ -51,6 +52,7 @@ export {
   NumericLabel,
   CollectionNumericLabel,
 } from './numeric-label/numeric-label';
+export { OwnersTab } from './rbac/owners-tab';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { PartnerHeader } from './headers/partner-header';
 export { PermissionChipSelector } from './permissions/permission-chip-selector';
@@ -95,3 +97,6 @@ export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
 export { FileUpload } from './patternfly-wrappers/fileupload';
 export { ListItemActions } from './list-item-actions/list-item-actions';
 export { WizardModal } from './patternfly-wrappers/wizard-modal';
+export { PreviewRoles } from './rbac/preview-roles';
+export { SelectRoles } from './rbac/select-roles';
+export { SelectGroup } from './rbac/select-group';
