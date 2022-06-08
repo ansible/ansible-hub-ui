@@ -253,16 +253,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Sign version ${collection.latest_version.version}`}
         </DropdownItem>
       ),
-      <DropdownItem
-        onClick={() => this.deprecate(collection)}
-        key='deprecate'
-        isDisabled={DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE}
-        description={
-          DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-            ? t`Temporarily disabled due to sync issues. (AAH-1237)`
-            : null
-        }
-      >
+      <DropdownItem onClick={() => this.deprecate(collection)} key='deprecate'>
         {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
       </DropdownItem>,
       <DropdownItem
