@@ -51,8 +51,8 @@ describe('Hub User Management Tests', () => {
       cy.menuGo('User Access > Users');
       cy.get(actionsSelector).click();
       cy.containsnear(actionsSelector, 'Delete').click();
-      cy.get('footer > button:contains("Delete")').should('be.disabled');
-      cy.get('footer > button:contains("Cancel")').click();
+      cy.get('button').contains('Delete').should('be.disabled');
+      cy.get('button').contains('Cancel').click();
     }
 
     it("an ordinary user can't delete themselves", () => {
