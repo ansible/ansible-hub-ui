@@ -40,9 +40,6 @@ import {
   TagLabel,
   TagManifestModal,
   PublishToControllerModal,
-  AlertList,
-  closeAlertMixin,
-  AlertType,
   DateComponent,
   ClipboardCopy,
   DeleteModal,
@@ -59,7 +56,6 @@ interface IState {
   numberOfImages: number;
   params: { page?: number; page_size?: number };
   redirect: string;
-  alerts: AlertType[];
   inputText: string;
 
   // ID for manifest that is open in the manage tags modal.
@@ -103,7 +99,6 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       publishToController: null,
       selectedImage: undefined,
       deleteModalVisible: false,
-      alerts: [],
       confirmDelete: false,
       expandedImage: null,
       isDeletionPending: false,
@@ -199,10 +194,6 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
     return (
       <section className='body'>
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
         {deleteModalVisible && (
           <DeleteModal
             spinner={isDeletionPending}
@@ -242,9 +233,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             this.queryImages(this.props.containerRepository.name)
           }
           repositoryName={this.props.containerRepository.name}
-          onAlert={(alert) => {
-            this.setState({ alerts: this.state.alerts.concat(alert) });
-          }}
+          onAlert={(alert) => this.props.addAlert(alert)}
           containerRepository={this.props.containerRepository}
         />
         <PublishToControllerModal
@@ -591,16 +580,14 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               isDeletionPending: false,
               confirmDelete: false,
               deleteModalVisible: false,
-              alerts: this.state.alerts.concat([
-                {
-                  variant: 'success',
-                  title: (
-                    <Trans>
-                      Image &quot;{digest}&quot; has been successfully deleted.
-                    </Trans>
-                  ),
-                },
-              ]),
+            });
+            this.props.addAlert({
+              variant: 'success',
+              title: (
+                <Trans>
+                  Image &quot;{digest}&quot; has been successfully deleted.
+                </Trans>
+              ),
             });
             this.queryImages(this.props.match.params['container']);
           });
@@ -612,13 +599,11 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             selectedImage: null,
             confirmDelete: false,
             isDeletionPending: false,
-            alerts: this.state.alerts.concat([
-              {
-                variant: 'danger',
-                title: t`Image "${digest}" could not be deleted.`,
-                description: errorMessage(status, statusText),
-              },
-            ]),
+          });
+          this.props.addAlert({
+            variant: 'danger',
+            title: t`Image "${digest}" could not be deleted.`,
+            description: errorMessage(status, statusText),
           });
         }),
     );
@@ -626,10 +611,6 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 
   private get updateParams() {
     return ParamHelper.updateParamsMixin(this.nonQueryStringParams);
-  }
-
-  private get closeAlert() {
-    return closeAlertMixin('alerts');
   }
 }
 
