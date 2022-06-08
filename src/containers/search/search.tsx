@@ -327,12 +327,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
       <DropdownItem
         onClick={() => this.handleControlClick(collection)}
         key='deprecate'
-        isDisabled={DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE}
-        description={
-          DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-            ? t`Temporarily disabled due to sync issues. (AAH-1237)`
-            : null
-        }
       >
         {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
       </DropdownItem>,
