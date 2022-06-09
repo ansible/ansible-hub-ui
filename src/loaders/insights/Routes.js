@@ -102,6 +102,20 @@ const TokenPage = lazy(() =>
   ),
 );
 
+const TaskListView = lazy(() =>
+  import(
+    /* webpackChunkName: "settings" */
+    '../../containers/task-management/task-list-view'
+  ),
+);
+
+const TaskDetail = lazy(() =>
+  import(
+    /* webpackChunkName: "settings" */
+    '../../containers/task-management/task_detail'
+  ),
+);
+
 const CertificationDashboard = lazy(() =>
   import(
     /* webpackChunkName: "settings" */
@@ -140,6 +154,8 @@ export const Routes = () => {
         <Route path={Paths.myCollections} component={ManageNamespace} />
         <Route path={Paths.myCollectionsByRepo} component={ManageNamespace} />
         <Route path={Paths.myNamespaces} component={MyNamespaces} />
+        <Route path={Paths.taskList} component={TaskListView} />
+        <Route path={Paths.taskDetail} component={TaskDetail} />
         <Route
           path={Paths.collectionDocsPageByRepo}
           component={CollectionDocs}
