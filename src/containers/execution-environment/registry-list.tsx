@@ -439,7 +439,14 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           {lastSyncStatus(item) || '---'}
           {lastSynced(item)}
         </td>
-        <ListItemActions kebabItems={dropdownItems} buttons={buttons} />
+        <ListItemActions
+          kebabItems={dropdownItems}
+          buttons={
+            this.context.user.model_permissions.change_containerregistry
+              ? buttons
+              : []
+          }
+        />
       </tr>
     );
   }
