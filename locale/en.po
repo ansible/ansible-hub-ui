@@ -93,12 +93,12 @@ msgstr "<0>{name}</0> will be permanently deleted."
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:552
-#: src/components/repositories/remote-form.tsx:598
+#: src/components/repositories/remote-form.tsx:554
+#: src/components/repositories/remote-form.tsx:600
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "A PEM encoded client certificate used for authentication."
 
-#: src/components/repositories/remote-form.tsx:522
+#: src/components/repositories/remote-form.tsx:524
 msgid "A PEM encoded private key used for authentication."
 msgstr "A PEM encoded private key used for authentication."
 
@@ -119,8 +119,8 @@ msgstr "API Error: Failed to set deprecation."
 #~ msgid "API Error: {0}"
 #~ msgstr "API Error: {0}"
 
-#: src/components/headers/collection-header.tsx:669
-#: src/components/headers/collection-header.tsx:720
+#: src/components/headers/collection-header.tsx:660
+#: src/components/headers/collection-header.tsx:711
 #: src/containers/namespace-detail/namespace-detail.tsx:440
 msgid "API Error: {status}"
 msgstr "API Error: {status}"
@@ -275,7 +275,7 @@ msgstr "Approve"
 msgid "Approved"
 msgstr "Approved"
 
-#: src/components/user-form/user-form.tsx:135
+#: src/components/user-form/user-form.tsx:137
 msgid "Authentication provider"
 msgstr "Authentication provider"
 
@@ -291,7 +291,7 @@ msgstr "Browser OS"
 msgid "Browser Version"
 msgstr "Browser Version"
 
-#: src/components/repositories/remote-form.tsx:595
+#: src/components/repositories/remote-form.tsx:597
 msgid "CA certificate"
 msgstr "CA certificate"
 
@@ -309,7 +309,7 @@ msgid "Can't update remote without a distribution attached to it."
 msgstr "Can't update remote without a distribution attached to it."
 
 #: src/components/confirm-modal/confirm-modal.tsx:40
-#: src/components/delete-modal/delete-modal.tsx:33
+#: src/components/delete-modal/delete-modal.tsx:34
 #: src/components/execution-environment/repository-form.tsx:164
 #: src/components/execution-environment/tag-manifest-modal.tsx:129
 #: src/components/group-management/group-modal.tsx:59
@@ -319,7 +319,7 @@ msgstr "Can't update remote without a distribution attached to it."
 #: src/components/signing/sign-all-certificates-modal.tsx:51
 #: src/components/signing/sign-single-certificate-modal.tsx:35
 #: src/components/signing/upload-sign-certificate-modal.tsx:49
-#: src/components/user-form/user-form.tsx:224
+#: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail.tsx:440
@@ -449,11 +449,11 @@ msgstr "Clear all filters"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 
-#: src/components/repositories/remote-form.tsx:549
+#: src/components/repositories/remote-form.tsx:551
 msgid "Client certificate"
 msgstr "Client certificate"
 
-#: src/components/repositories/remote-form.tsx:519
+#: src/components/repositories/remote-form.tsx:521
 msgid "Client key"
 msgstr "Client key"
 
@@ -470,12 +470,12 @@ msgstr "Code"
 msgid "Collection"
 msgstr "Collection"
 
-#: src/components/headers/collection-header.tsx:804
+#: src/components/headers/collection-header.tsx:795
 #: src/containers/search/search.tsx:315
 msgid "Collection \"{0}\" could not be deprecated."
 msgstr "Collection \"{0}\" could not be deprecated."
 
-#: src/components/headers/collection-header.tsx:805
+#: src/components/headers/collection-header.tsx:796
 #: src/containers/search/search.tsx:316
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "Collection \"{0}\" could not be undeprecated."
@@ -488,16 +488,16 @@ msgstr "Collection \"{0}\" has been successfully deprecated."
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr "Collection \"{0}\" has been successfully undeprecated."
 
-#: src/components/headers/collection-header.tsx:919
+#: src/components/headers/collection-header.tsx:910
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "Collection \"{name} v{collectionVersion}\" could not be deleted."
 
-#: src/components/headers/collection-header.tsx:848
-#: src/components/headers/collection-header.tsx:863
+#: src/components/headers/collection-header.tsx:839
+#: src/components/headers/collection-header.tsx:854
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 
-#: src/components/headers/collection-header.tsx:975
+#: src/components/headers/collection-header.tsx:966
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "Collection \"{name}\" could not be deleted."
 
@@ -505,7 +505,7 @@ msgstr "Collection \"{name}\" could not be deleted."
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "Collection \"{name}\" could not be downloaded."
 
-#: src/components/headers/collection-header.tsx:951
+#: src/components/headers/collection-header.tsx:942
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "Collection \"{name}\" has been successfully deleted."
 
@@ -542,7 +542,7 @@ msgstr "Collection repositories could not be displayed."
 msgid "Collection upload canceled"
 msgstr "Collection upload canceled"
 
-#: src/components/headers/collection-header.tsx:322
+#: src/components/headers/collection-header.tsx:313
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:293
@@ -651,7 +651,7 @@ msgstr "Content"
 msgid "Content count"
 msgstr "Content count"
 
-#: src/components/headers/collection-header.tsx:619
+#: src/components/headers/collection-header.tsx:610
 msgid "Contents"
 msgstr "Contents"
 
@@ -700,8 +700,12 @@ msgid "Create a new namespace"
 msgstr "Create a new namespace"
 
 #: src/components/user-form/user-form.tsx:97
-msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+#~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+#~ msgstr "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+
+#: src/components/user-form/user-form.tsx:99
+msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+msgstr "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 
 #: src/constants.tsx:165
 #: src/constants.tsx:205
@@ -791,11 +795,11 @@ msgstr "Delete collection"
 msgid "Delete collection remote"
 msgstr "Delete collection remote"
 
-#: src/components/headers/collection-header.tsx:384
+#: src/components/headers/collection-header.tsx:375
 msgid "Delete collection version?"
 msgstr "Delete collection version?"
 
-#: src/components/headers/collection-header.tsx:385
+#: src/components/headers/collection-header.tsx:376
 msgid "Delete collection?"
 msgstr "Delete collection?"
 
@@ -882,15 +886,15 @@ msgstr "Delete user?"
 msgid "Delete version {0}"
 msgstr "Delete version {0}"
 
-#: src/components/headers/collection-header.tsx:393
+#: src/components/headers/collection-header.tsx:384
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 msgstr "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 
-#: src/components/headers/collection-header.tsx:402
+#: src/components/headers/collection-header.tsx:393
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 
-#: src/components/headers/collection-header.tsx:412
+#: src/components/headers/collection-header.tsx:403
 #: src/containers/namespace-detail/namespace-detail.tsx:237
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "Deleting <0>{0}</0> and its data will be lost."
@@ -919,17 +923,17 @@ msgstr "Deleting this group will affect {count} users."
 msgid "Deleting yourself is not allowed."
 msgstr "Deleting yourself is not allowed."
 
-#: src/components/headers/collection-header.tsx:633
+#: src/components/headers/collection-header.tsx:624
 #: src/containers/collection-detail/collection-dependencies.tsx:105
 #: src/containers/collection-detail/collection-dependencies.tsx:135
 msgid "Dependencies"
 msgstr "Dependencies"
 
-#: src/components/headers/collection-header.tsx:1004
+#: src/components/headers/collection-header.tsx:995
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "Dependencies for collection \"{name}\" could not be displayed."
 
-#: src/components/headers/collection-header.tsx:889
+#: src/components/headers/collection-header.tsx:880
 msgid "Dependent collections"
 msgstr "Dependent collections"
 
@@ -937,9 +941,9 @@ msgstr "Dependent collections"
 msgid "Dependent collections could not be displayed."
 msgstr "Dependent collections could not be displayed."
 
-#: src/components/collection-list/collection-list.tsx:107
-#: src/components/headers/collection-header.tsx:266
-#: src/containers/search/search.tsx:337
+#: src/components/collection-list/collection-list.tsx:98
+#: src/components/headers/collection-header.tsx:257
+#: src/containers/search/search.tsx:331
 msgid "Deprecate"
 msgstr "Deprecate"
 
@@ -979,7 +983,7 @@ msgstr "Distribution name"
 msgid "Docs site"
 msgstr "Docs site"
 
-#: src/components/headers/collection-header.tsx:614
+#: src/components/headers/collection-header.tsx:605
 #: src/containers/collection-detail/collection-docs.tsx:125
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
@@ -994,15 +998,15 @@ msgstr "Documentation on how to configure the <0>ansible-galaxy</0> client can b
 msgid "Done"
 msgstr "Done"
 
-#: src/components/repositories/remote-form.tsx:631
+#: src/components/repositories/remote-form.tsx:633
 msgid "Download CA certification file"
 msgstr "Download CA certification file"
 
-#: src/components/repositories/remote-form.tsx:585
+#: src/components/repositories/remote-form.tsx:587
 msgid "Download client certification file"
 msgstr "Download client certification file"
 
-#: src/components/repositories/remote-form.tsx:641
+#: src/components/repositories/remote-form.tsx:643
 msgid "Download concurrency"
 msgstr "Download concurrency"
 
@@ -1086,7 +1090,7 @@ msgstr "Edit resources"
 msgid "Edit user"
 msgstr "Edit user"
 
-#: src/components/user-form/user-form.tsx:89
+#: src/components/user-form/user-form.tsx:91
 #: src/containers/group-management/group-detail.tsx:737
 #: src/containers/group-management/group-detail.tsx:809
 #: src/containers/user-management/user-list.tsx:174
@@ -1325,11 +1329,11 @@ msgstr "Failed to retrieve user data."
 msgid "Failed to sign all collections."
 msgstr "Failed to sign all collections."
 
-#: src/components/headers/collection-header.tsx:670
+#: src/components/headers/collection-header.tsx:661
 msgid "Failed to sign all versions in the collection."
 msgstr "Failed to sign all versions in the collection."
 
-#: src/components/headers/collection-header.tsx:721
+#: src/components/headers/collection-header.tsx:712
 msgid "Failed to sign the version."
 msgstr "Failed to sign the version."
 
@@ -1369,7 +1373,7 @@ msgstr "Find execution environments in this registry"
 msgid "Finished at"
 msgstr "Finished at"
 
-#: src/components/user-form/user-form.tsx:87
+#: src/components/user-form/user-form.tsx:89
 #: src/containers/group-management/group-detail.tsx:729
 #: src/containers/group-management/group-detail.tsx:819
 #: src/containers/user-management/user-list.tsx:166
@@ -1423,8 +1427,8 @@ msgstr "Group \"{group}\" has been successfully deleted."
 msgid "Group list"
 msgstr "Group list"
 
-#: src/components/user-form/user-form.tsx:147
-#: src/components/user-form/user-form.tsx:161
+#: src/components/user-form/user-form.tsx:149
+#: src/components/user-form/user-form.tsx:163
 #: src/constants.tsx:55
 #: src/containers/group-management/group-detail.tsx:230
 #: src/containers/group-management/group-list.tsx:145
@@ -1437,7 +1441,7 @@ msgstr "Groups"
 #: src/components/execution-environment/repository-form.tsx:486
 #: src/components/namespace-form/namespace-form.tsx:124
 #: src/components/namespace-modal/namespace-modal.tsx:180
-#: src/components/user-form/user-form.tsx:296
+#: src/components/user-form/user-form.tsx:298
 #: src/containers/group-management/group-list.tsx:517
 msgid "Groups list could not be displayed."
 msgstr "Groups list could not be displayed."
@@ -1450,7 +1454,7 @@ msgstr "Groups will appear once created"
 msgid "Groups with access"
 msgstr "Groups with access"
 
-#: src/components/repositories/remote-form.tsx:420
+#: src/components/repositories/remote-form.tsx:421
 msgid "Hide advanced options"
 msgstr "Hide advanced options"
 
@@ -1459,13 +1463,13 @@ msgid "Hide the signature"
 msgstr "Hide the signature"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
-#: src/components/headers/collection-header.tsx:421
+#: src/components/headers/collection-header.tsx:412
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
 #: src/containers/namespace-detail/namespace-detail.tsx:244
 msgid "I understand that this action cannot be undone."
 msgstr "I understand that this action cannot be undone."
 
-#: src/components/repositories/remote-form.tsx:503
+#: src/components/repositories/remote-form.tsx:505
 msgid "If selected, TLS peer validation must be performed."
 msgstr "If selected, TLS peer validation must be performed."
 
@@ -1505,7 +1509,7 @@ msgstr "Import and auto approve"
 msgid "Import and move to staging"
 msgstr "Import and move to staging"
 
-#: src/components/headers/collection-header.tsx:628
+#: src/components/headers/collection-header.tsx:619
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "Import log"
@@ -1535,7 +1539,7 @@ msgid "Indexing started for execution environment \"{name}\"."
 msgstr "Indexing started for execution environment \"{name}\"."
 
 #: src/components/collection-detail/collection-info.tsx:53
-#: src/components/headers/collection-header.tsx:609
+#: src/components/headers/collection-header.tsx:600
 msgid "Install"
 msgstr "Install"
 
@@ -1591,7 +1595,7 @@ msgstr "Keywords"
 msgid "Last modified"
 msgstr "Last modified"
 
-#: src/components/user-form/user-form.tsx:88
+#: src/components/user-form/user-form.tsx:90
 #: src/containers/group-management/group-detail.tsx:733
 #: src/containers/group-management/group-detail.tsx:814
 #: src/containers/user-management/user-list.tsx:170
@@ -1610,7 +1614,7 @@ msgstr "Last synced"
 msgid "Last updated"
 msgstr "Last updated"
 
-#: src/components/headers/collection-header.tsx:504
+#: src/components/headers/collection-header.tsx:495
 msgid "Last updated <0/>"
 msgstr "Last updated <0/>"
 
@@ -1630,7 +1634,7 @@ msgstr "Learn more"
 msgid "License"
 msgstr "License"
 
-#: src/components/repositories/remote-form.tsx:676
+#: src/components/repositories/remote-form.tsx:678
 msgid "Limits total download rate in requests per second."
 msgstr "Limits total download rate in requests per second."
 
@@ -1642,8 +1646,8 @@ msgstr "Link URL"
 msgid "Link text"
 msgstr "Link text"
 
-#: src/components/collection-list/collection-list.tsx:49
-#: src/containers/search/search.tsx:456
+#: src/components/collection-list/collection-list.tsx:48
+#: src/containers/search/search.tsx:450
 msgid "List of Collections"
 msgstr "List of Collections"
 
@@ -1699,7 +1703,7 @@ msgstr "Message"
 msgid "Modify Ansible repo content"
 msgstr "Modify Ansible repo content"
 
-#: src/components/repositories/remote-form.tsx:685
+#: src/components/repositories/remote-form.tsx:687
 msgid "Must be an integer."
 msgstr "Must be an integer."
 
@@ -1760,11 +1764,11 @@ msgstr "Name must not be empty."
 msgid "Namespace"
 msgstr "Namespace"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:715
+#: src/containers/namespace-detail/namespace-detail.tsx:719
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "Namespace \"{name}\" could not be deleted."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:694
+#: src/containers/namespace-detail/namespace-detail.tsx:698
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "Namespace \"{name}\" has been successfully deleted."
 
@@ -1932,7 +1936,7 @@ msgstr "No users will be affected."
 msgid "No users yet"
 msgstr "No users yet"
 
-#: src/components/user-form/user-form.tsx:202
+#: src/components/user-form/user-form.tsx:204
 msgid "Not a super user"
 msgstr "Not a super user"
 
@@ -1958,7 +1962,7 @@ msgstr "Not required for use by other collections"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:653
+#: src/components/repositories/remote-form.tsx:655
 msgid "Number must be greater than 0"
 msgstr "Number must be greater than 0"
 
@@ -1990,17 +1994,17 @@ msgstr "Partially signed"
 msgid "Partners"
 msgstr "Partners"
 
-#: src/components/repositories/remote-form.tsx:389
-#: src/components/user-form/user-form.tsx:92
+#: src/components/repositories/remote-form.tsx:390
+#: src/components/user-form/user-form.tsx:94
 #: src/containers/login/login.tsx:55
 msgid "Password"
 msgstr "Password"
 
-#: src/components/user-form/user-form.tsx:110
+#: src/components/user-form/user-form.tsx:112
 msgid "Password confirmation"
 msgstr "Password confirmation"
 
-#: src/components/user-form/user-form.tsx:107
+#: src/components/user-form/user-form.tsx:109
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
@@ -2097,15 +2101,15 @@ msgstr "Progress messages"
 msgid "Provided by {company}"
 msgstr "Provided by {company}"
 
-#: src/components/repositories/remote-form.tsx:426
+#: src/components/repositories/remote-form.tsx:427
 msgid "Proxy URL"
 msgstr "Proxy URL"
 
-#: src/components/repositories/remote-form.tsx:472
+#: src/components/repositories/remote-form.tsx:474
 msgid "Proxy password"
 msgstr "Proxy password"
 
-#: src/components/repositories/remote-form.tsx:444
+#: src/components/repositories/remote-form.tsx:446
 msgid "Proxy username"
 msgstr "Proxy username"
 
@@ -2255,7 +2259,7 @@ msgstr "Push new containers"
 msgid "Push to existing containers"
 msgstr "Push to existing containers"
 
-#: src/components/repositories/remote-form.tsx:673
+#: src/components/repositories/remote-form.tsx:675
 msgid "Rate Limit"
 msgstr "Rate Limit"
 
@@ -2372,7 +2376,7 @@ msgstr "Repository name"
 msgid "Requires Ansible"
 msgstr "Requires Ansible"
 
-#: src/components/user-form/user-form.tsx:253
+#: src/components/user-form/user-form.tsx:255
 msgid "Requires super user permissions to edit."
 msgstr "Requires super user permissions to edit."
 
@@ -2404,7 +2408,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
 #: src/components/repositories/remote-form.tsx:142
-#: src/components/user-form/user-form.tsx:221
+#: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:197
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 #: src/containers/group-management/group-detail.tsx:433
@@ -2466,7 +2470,7 @@ msgstr "Select a registry"
 msgid "Select a tag"
 msgstr "Select a tag"
 
-#: src/components/headers/collection-header.tsx:464
+#: src/components/headers/collection-header.tsx:455
 msgid "Select collection version"
 msgstr "Select collection version"
 
@@ -2475,7 +2479,7 @@ msgstr "Select collection version"
 msgid "Select file"
 msgstr "Select file"
 
-#: src/components/user-form/user-form.tsx:173
+#: src/components/user-form/user-form.tsx:175
 msgid "Select groups"
 msgstr "Select groups"
 
@@ -2516,7 +2520,7 @@ msgstr "Server version"
 msgid "Settings"
 msgstr "Settings"
 
-#: src/components/repositories/remote-form.tsx:421
+#: src/components/repositories/remote-form.tsx:422
 msgid "Show advanced options"
 msgstr "Show advanced options"
 
@@ -2591,11 +2595,11 @@ msgstr "Signing service selector:"
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Signing started for all collections in namespace \"{0}\"."
 
-#: src/components/headers/collection-header.tsx:679
+#: src/components/headers/collection-header.tsx:670
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "Signing started for all versions in collection \"{0}\""
 
-#: src/components/headers/collection-header.tsx:730
+#: src/components/headers/collection-header.tsx:721
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "Signing started for collection \"{0} v{1}\"."
 
@@ -2692,22 +2696,22 @@ msgstr "Successfully copied to clipboard!"
 #~ msgid "Successfully stopped task."
 #~ msgstr "Successfully stopped task."
 
-#: src/components/user-form/user-form.tsx:201
+#: src/components/user-form/user-form.tsx:203
 #: src/containers/user-management/user-list.tsx:358
 msgid "Super user"
 msgstr "Super user"
 
-#: src/components/user-form/user-form.tsx:256
+#: src/components/user-form/user-form.tsx:258
 msgid "Super users can't disable themselves."
 msgstr "Super users can't disable themselves."
 
-#: src/components/user-form/user-form.tsx:193
+#: src/components/user-form/user-form.tsx:195
 #: src/containers/user-management/user-list.tsx:355
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "Super users have all system permissions regardless of what groups they are in."
 
 #: src/components/repositories/remote-repository-table.tsx:180
-#: src/containers/search/search.tsx:378
+#: src/containers/search/search.tsx:372
 msgid "Sync"
 msgstr "Sync"
 
@@ -2741,7 +2745,7 @@ msgstr "Sync started for remote registry \"{name}\"."
 msgid "Sync status"
 msgstr "Sync status"
 
-#: src/components/repositories/remote-form.tsx:500
+#: src/components/repositories/remote-form.tsx:502
 msgid "TLS validation"
 msgstr "TLS validation"
 
@@ -2820,8 +2824,8 @@ msgstr "Tasks will appear once created."
 #: src/components/collection-list/collection-list.tsx:103
 #: src/components/headers/collection-header.tsx:262
 #: src/containers/search/search.tsx:333
-msgid "Temporarily disabled due to sync issues. (AAH-1237)"
-msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
+#~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
+#~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
 #: src/components/namespace-form/namespace-form.tsx:192
 msgid "Text: {0}"
@@ -2839,12 +2843,12 @@ msgstr "The URL of an external content source."
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr "The certificate for \"{0} {1} v{2}\" could not be saved."
 
-#: src/components/headers/collection-header.tsx:779
+#: src/components/headers/collection-header.tsx:770
 #: src/containers/search/search.tsx:293
 msgid "The collection \"{0}\" has been successfully deprecated."
 msgstr "The collection \"{0}\" has been successfully deprecated."
 
-#: src/components/headers/collection-header.tsx:780
+#: src/components/headers/collection-header.tsx:771
 #: src/containers/search/search.tsx:294
 msgid "The collection \"{0}\" has been successfully undeprecated."
 msgstr "The collection \"{0}\" has been successfully undeprecated."
@@ -2861,11 +2865,11 @@ msgstr "The collection you have selected doesn't appear to match {0}"
 msgid "The file is not available for this version of {collectionName}"
 msgstr "The file is not available for this version of {collectionName}"
 
-#: src/components/repositories/remote-form.tsx:394
+#: src/components/repositories/remote-form.tsx:395
 msgid "The password to be used for authentication when syncing."
 msgstr "The password to be used for authentication when syncing."
 
-#: src/components/repositories/remote-form.tsx:395
+#: src/components/repositories/remote-form.tsx:396
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "The password to be used for authentication when syncing. This is not required when using a token."
 
@@ -2873,11 +2877,11 @@ msgstr "The password to be used for authentication when syncing. This is not req
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 
-#: src/components/repositories/remote-form.tsx:359
+#: src/components/repositories/remote-form.tsx:360
 msgid "The username to be used for authentication when syncing."
 msgstr "The username to be used for authentication when syncing."
 
-#: src/components/repositories/remote-form.tsx:360
+#: src/components/repositories/remote-form.tsx:361
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "The username to be used for authentication when syncing. This is not required when using a token."
 
@@ -2910,7 +2914,7 @@ msgstr "This account is not set up to manage any namespaces"
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
 #~ msgstr "This action will affect <0>{numberOfAffected}</0> version(s)."
 
-#: src/components/headers/collection-header.tsx:527
+#: src/components/headers/collection-header.tsx:518
 msgid "This collection has been deprecated."
 msgstr "This collection has been deprecated."
 
@@ -2954,7 +2958,7 @@ msgstr "Token for authenticating to the server URL."
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:644
+#: src/components/repositories/remote-form.tsx:646
 msgid "Total number of simultaneous connections."
 msgstr "Total number of simultaneous connections."
 
@@ -2987,9 +2991,9 @@ msgstr "URL must not be empty."
 msgid "URL: {0}"
 msgstr "URL: {0}"
 
-#: src/components/collection-list/collection-list.tsx:107
-#: src/components/headers/collection-header.tsx:266
-#: src/containers/search/search.tsx:337
+#: src/components/collection-list/collection-list.tsx:98
+#: src/components/headers/collection-header.tsx:257
+#: src/containers/search/search.tsx:331
 msgid "Undeprecate"
 msgstr "Undeprecate"
 
@@ -3020,10 +3024,10 @@ msgstr "Upload"
 msgid "Upload collection"
 msgstr "Upload collection"
 
-#: src/components/collection-list/collection-list.tsx:89
-#: src/components/headers/collection-header.tsx:273
-#: src/containers/search/search.tsx:347
-#: src/containers/search/search.tsx:359
+#: src/components/collection-list/collection-list.tsx:88
+#: src/components/headers/collection-header.tsx:264
+#: src/containers/search/search.tsx:341
+#: src/containers/search/search.tsx:353
 msgid "Upload new version"
 msgstr "Upload new version"
 
@@ -3138,13 +3142,13 @@ msgstr "User details"
 msgid "User list"
 msgstr "User list"
 
-#: src/components/user-form/user-form.tsx:188
+#: src/components/user-form/user-form.tsx:190
 msgid "User type"
 msgstr "User type"
 
 #: src/components/about-modal/about-modal.tsx:85
-#: src/components/repositories/remote-form.tsx:354
-#: src/components/user-form/user-form.tsx:86
+#: src/components/repositories/remote-form.tsx:355
+#: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:725
 #: src/containers/group-management/group-detail.tsx:804
 #: src/containers/login/login.tsx:52
@@ -3184,7 +3188,7 @@ msgstr "Users will appear once added to this group"
 msgid "Users will appear once created"
 msgstr "Users will appear once created"
 
-#: src/components/headers/collection-header.tsx:452
+#: src/components/headers/collection-header.tsx:443
 #: src/containers/certification-dashboard/certification-dashboard.tsx:269
 msgid "Version"
 msgstr "Version"
@@ -3229,7 +3233,7 @@ msgstr "View distribution"
 msgid "View group"
 msgstr "View group"
 
-#: src/components/headers/collection-header.tsx:468
+#: src/components/headers/collection-header.tsx:459
 msgid "View more"
 msgstr "View more"
 
@@ -3326,8 +3330,8 @@ msgstr "You do not have access to Automation Hub"
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/headers/collection-header.tsx:567
-#: src/containers/search/search.tsx:391
+#: src/components/headers/collection-header.tsx:558
+#: src/containers/search/search.tsx:385
 msgid "You don't have rights to do this operation."
 msgstr "You don't have rights to do this operation."
 
@@ -3382,7 +3386,7 @@ msgstr "popover example"
 msgid "rejected"
 msgstr "rejected"
 
-#: src/components/headers/collection-header.tsx:357
+#: src/components/headers/collection-header.tsx:348
 msgid "released {0}"
 msgstr "released {0}"
 
@@ -3410,7 +3414,7 @@ msgstr "waiting for approval"
 msgid "waiting for import to finish"
 msgstr "waiting for import to finish"
 
-#: src/components/headers/collection-header.tsx:495
+#: src/components/headers/collection-header.tsx:486
 msgid "{0} released {1}"
 msgstr "{0} released {1}"
 
@@ -3422,14 +3426,14 @@ msgstr "{0} was added"
 #~ msgid "{0} will be deleted."
 #~ msgstr "{0} will be deleted."
 
-#: src/components/headers/collection-header.tsx:328
+#: src/components/headers/collection-header.tsx:319
 msgid "{collectionName}'s versions."
 msgstr "{collectionName}'s versions."
 
 #: src/components/cards/collection-card.tsx:53
 #: src/components/cards/namespace-card.tsx:36
 #: src/components/collection-list/collection-list-item.tsx:58
-#: src/components/headers/collection-header.tsx:433
+#: src/components/headers/collection-header.tsx:424
 #: src/components/headers/partner-header.tsx:46
 msgid "{company} logo"
 msgstr "{company} logo"

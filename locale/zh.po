@@ -92,12 +92,12 @@ msgstr "<0>{name}</0> 将被永久删除。"
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:552
-#: src/components/repositories/remote-form.tsx:598
+#: src/components/repositories/remote-form.tsx:554
+#: src/components/repositories/remote-form.tsx:600
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "用于身份验证的 PEM 编码客户端证书。"
 
-#: src/components/repositories/remote-form.tsx:522
+#: src/components/repositories/remote-form.tsx:524
 msgid "A PEM encoded private key used for authentication."
 msgstr "用于验证的 PEM 编码私钥。"
 
@@ -118,8 +118,8 @@ msgstr "API 错误：无法设置弃用。"
 #~ msgid "API Error: {0}"
 #~ msgstr "API Error: {0}"
 
-#: src/components/headers/collection-header.tsx:669
-#: src/components/headers/collection-header.tsx:720
+#: src/components/headers/collection-header.tsx:660
+#: src/components/headers/collection-header.tsx:711
 #: src/containers/namespace-detail/namespace-detail.tsx:440
 msgid "API Error: {status}"
 msgstr "API 错误：{status}"
@@ -272,7 +272,7 @@ msgstr "批准"
 msgid "Approved"
 msgstr "已批准"
 
-#: src/components/user-form/user-form.tsx:135
+#: src/components/user-form/user-form.tsx:137
 msgid "Authentication provider"
 msgstr "身份验证供应商"
 
@@ -288,7 +288,7 @@ msgstr "浏览器 OS"
 msgid "Browser Version"
 msgstr "浏览器版本"
 
-#: src/components/repositories/remote-form.tsx:595
+#: src/components/repositories/remote-form.tsx:597
 msgid "CA certificate"
 msgstr "CA 证书"
 
@@ -306,7 +306,7 @@ msgid "Can't update remote without a distribution attached to it."
 msgstr "在未将一个发布附加到它时，无法远程更新。"
 
 #: src/components/confirm-modal/confirm-modal.tsx:40
-#: src/components/delete-modal/delete-modal.tsx:33
+#: src/components/delete-modal/delete-modal.tsx:34
 #: src/components/execution-environment/repository-form.tsx:164
 #: src/components/execution-environment/tag-manifest-modal.tsx:129
 #: src/components/group-management/group-modal.tsx:59
@@ -316,7 +316,7 @@ msgstr "在未将一个发布附加到它时，无法远程更新。"
 #: src/components/signing/sign-all-certificates-modal.tsx:51
 #: src/components/signing/sign-single-certificate-modal.tsx:35
 #: src/components/signing/upload-sign-certificate-modal.tsx:49
-#: src/components/user-form/user-form.tsx:224
+#: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail.tsx:440
@@ -446,11 +446,11 @@ msgstr "清除所有过滤器"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "点击您要在其中使用上述执行环境的 Controller URL，它将启动该控制器的控制台。登录（如果需要）并按照步骤完成配置。"
 
-#: src/components/repositories/remote-form.tsx:549
+#: src/components/repositories/remote-form.tsx:551
 msgid "Client certificate"
 msgstr "客户端证书"
 
-#: src/components/repositories/remote-form.tsx:519
+#: src/components/repositories/remote-form.tsx:521
 msgid "Client key"
 msgstr "客户端密钥"
 
@@ -467,12 +467,12 @@ msgstr "代码"
 msgid "Collection"
 msgstr "集合"
 
-#: src/components/headers/collection-header.tsx:804
+#: src/components/headers/collection-header.tsx:795
 #: src/containers/search/search.tsx:315
 msgid "Collection \"{0}\" could not be deprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:805
+#: src/components/headers/collection-header.tsx:796
 #: src/containers/search/search.tsx:316
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr ""
@@ -485,16 +485,16 @@ msgstr ""
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:919
+#: src/components/headers/collection-header.tsx:910
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "集合 \"{name} v{collectionVersion}\" 无法被删除。"
 
-#: src/components/headers/collection-header.tsx:848
-#: src/components/headers/collection-header.tsx:863
+#: src/components/headers/collection-header.tsx:839
+#: src/components/headers/collection-header.tsx:854
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "成功删除集合 \"{name} v{collectionVersion}\"。"
 
-#: src/components/headers/collection-header.tsx:975
+#: src/components/headers/collection-header.tsx:966
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "集合 \"{name}\" 无法被删除。"
 
@@ -502,7 +502,7 @@ msgstr "集合 \"{name}\" 无法被删除。"
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "集合 \"{name}\" 无法下载。"
 
-#: src/components/headers/collection-header.tsx:951
+#: src/components/headers/collection-header.tsx:942
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "集合 \"{name}\" 已成功删除"
 
@@ -539,7 +539,7 @@ msgstr "无法显示集合仓库。"
 msgid "Collection upload canceled"
 msgstr "集合上传已取消"
 
-#: src/components/headers/collection-header.tsx:322
+#: src/components/headers/collection-header.tsx:313
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:293
@@ -648,7 +648,7 @@ msgstr "内容"
 msgid "Content count"
 msgstr "内容数"
 
-#: src/components/headers/collection-header.tsx:619
+#: src/components/headers/collection-header.tsx:610
 msgid "Contents"
 msgstr "内容"
 
@@ -697,8 +697,12 @@ msgid "Create a new namespace"
 msgstr "创建新的命名空间,"
 
 #: src/components/user-form/user-form.tsx:97
-msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "使用至少 9 个字符创建密码，包括特殊字符，例如 <!@$%>。避免使用通用名称或表达式。"
+#~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+#~ msgstr "使用至少 9 个字符创建密码，包括特殊字符，例如 <!@$%>。避免使用通用名称或表达式。"
+
+#: src/components/user-form/user-form.tsx:99
+msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+msgstr ""
 
 #: src/constants.tsx:165
 #: src/constants.tsx:205
@@ -788,11 +792,11 @@ msgstr "删除集合"
 msgid "Delete collection remote"
 msgstr "删除集合远程"
 
-#: src/components/headers/collection-header.tsx:384
+#: src/components/headers/collection-header.tsx:375
 msgid "Delete collection version?"
 msgstr "删除集合版本？"
 
-#: src/components/headers/collection-header.tsx:385
+#: src/components/headers/collection-header.tsx:376
 msgid "Delete collection?"
 msgstr "删除集合？"
 
@@ -879,15 +883,15 @@ msgstr "删除用户？"
 msgid "Delete version {0}"
 msgstr "删除版本 {0}"
 
-#: src/components/headers/collection-header.tsx:393
+#: src/components/headers/collection-header.tsx:384
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 msgstr "删除 <0>{0} v{collectionVersion}</0> 其数据将会丢失，这会导致整个集合被删除。"
 
-#: src/components/headers/collection-header.tsx:402
+#: src/components/headers/collection-header.tsx:393
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "删除 <0>{0} v{collectionVersion}</0> 其数据将会丢失。"
 
-#: src/components/headers/collection-header.tsx:412
+#: src/components/headers/collection-header.tsx:403
 #: src/containers/namespace-detail/namespace-detail.tsx:237
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "删除 <0>{0}</0> 其数据将会丢失。"
@@ -916,17 +920,17 @@ msgstr "删除此组将影响 {count} 个用户。"
 msgid "Deleting yourself is not allowed."
 msgstr "不允许删除自己。"
 
-#: src/components/headers/collection-header.tsx:633
+#: src/components/headers/collection-header.tsx:624
 #: src/containers/collection-detail/collection-dependencies.tsx:105
 #: src/containers/collection-detail/collection-dependencies.tsx:135
 msgid "Dependencies"
 msgstr "依赖项"
 
-#: src/components/headers/collection-header.tsx:1004
+#: src/components/headers/collection-header.tsx:995
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "无法显示集合 \"{name}\" 的依赖项。"
 
-#: src/components/headers/collection-header.tsx:889
+#: src/components/headers/collection-header.tsx:880
 msgid "Dependent collections"
 msgstr "依赖性集合"
 
@@ -934,9 +938,9 @@ msgstr "依赖性集合"
 msgid "Dependent collections could not be displayed."
 msgstr "无法显示依赖集合。"
 
-#: src/components/collection-list/collection-list.tsx:107
-#: src/components/headers/collection-header.tsx:266
-#: src/containers/search/search.tsx:337
+#: src/components/collection-list/collection-list.tsx:98
+#: src/components/headers/collection-header.tsx:257
+#: src/containers/search/search.tsx:331
 msgid "Deprecate"
 msgstr "弃用"
 
@@ -976,7 +980,7 @@ msgstr "发布名称"
 msgid "Docs site"
 msgstr "文档站点"
 
-#: src/components/headers/collection-header.tsx:614
+#: src/components/headers/collection-header.tsx:605
 #: src/containers/collection-detail/collection-docs.tsx:125
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
@@ -991,15 +995,15 @@ msgstr "有关如何配置 <0>ansible-galaxy</0> 客户端的文档位于<1>这�
 msgid "Done"
 msgstr "完成"
 
-#: src/components/repositories/remote-form.tsx:631
+#: src/components/repositories/remote-form.tsx:633
 msgid "Download CA certification file"
 msgstr "下载 CA 认证文件"
 
-#: src/components/repositories/remote-form.tsx:585
+#: src/components/repositories/remote-form.tsx:587
 msgid "Download client certification file"
 msgstr "下载客户端认证文件"
 
-#: src/components/repositories/remote-form.tsx:641
+#: src/components/repositories/remote-form.tsx:643
 msgid "Download concurrency"
 msgstr "下载并发"
 
@@ -1083,7 +1087,7 @@ msgstr "编辑资源"
 msgid "Edit user"
 msgstr "编辑用户"
 
-#: src/components/user-form/user-form.tsx:89
+#: src/components/user-form/user-form.tsx:91
 #: src/containers/group-management/group-detail.tsx:737
 #: src/containers/group-management/group-detail.tsx:809
 #: src/containers/user-management/user-list.tsx:174
@@ -1322,11 +1326,11 @@ msgstr "获取用户数据失败。"
 msgid "Failed to sign all collections."
 msgstr "签发所有集合失败。"
 
-#: src/components/headers/collection-header.tsx:670
+#: src/components/headers/collection-header.tsx:661
 msgid "Failed to sign all versions in the collection."
 msgstr "为集合中的所有版本进行签名失败。"
 
-#: src/components/headers/collection-header.tsx:721
+#: src/components/headers/collection-header.tsx:712
 msgid "Failed to sign the version."
 msgstr "为版本签名失败。"
 
@@ -1366,7 +1370,7 @@ msgstr "在此 registry 中查找执行环境"
 msgid "Finished at"
 msgstr "完成于"
 
-#: src/components/user-form/user-form.tsx:87
+#: src/components/user-form/user-form.tsx:89
 #: src/containers/group-management/group-detail.tsx:729
 #: src/containers/group-management/group-detail.tsx:819
 #: src/containers/user-management/user-list.tsx:166
@@ -1420,8 +1424,8 @@ msgstr "组 \"{group}\" 已成功删除。"
 msgid "Group list"
 msgstr "组列表"
 
-#: src/components/user-form/user-form.tsx:147
-#: src/components/user-form/user-form.tsx:161
+#: src/components/user-form/user-form.tsx:149
+#: src/components/user-form/user-form.tsx:163
 #: src/constants.tsx:55
 #: src/containers/group-management/group-detail.tsx:230
 #: src/containers/group-management/group-list.tsx:145
@@ -1434,7 +1438,7 @@ msgstr "组"
 #: src/components/execution-environment/repository-form.tsx:486
 #: src/components/namespace-form/namespace-form.tsx:124
 #: src/components/namespace-modal/namespace-modal.tsx:180
-#: src/components/user-form/user-form.tsx:296
+#: src/components/user-form/user-form.tsx:298
 #: src/containers/group-management/group-list.tsx:517
 msgid "Groups list could not be displayed."
 msgstr "无法显示组列表。"
@@ -1447,7 +1451,7 @@ msgstr "组在创建后会出现"
 msgid "Groups with access"
 msgstr "带有访问权限的组"
 
-#: src/components/repositories/remote-form.tsx:420
+#: src/components/repositories/remote-form.tsx:421
 msgid "Hide advanced options"
 msgstr "隐藏高级选项"
 
@@ -1456,13 +1460,13 @@ msgid "Hide the signature"
 msgstr "隐藏签名"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
-#: src/components/headers/collection-header.tsx:421
+#: src/components/headers/collection-header.tsx:412
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
 #: src/containers/namespace-detail/namespace-detail.tsx:244
 msgid "I understand that this action cannot be undone."
 msgstr "我理解这个行动是无法撤销的。"
 
-#: src/components/repositories/remote-form.tsx:503
+#: src/components/repositories/remote-form.tsx:505
 msgid "If selected, TLS peer validation must be performed."
 msgstr "如果选中，则必须执行 TLS 对等验证。"
 
@@ -1502,7 +1506,7 @@ msgstr "导入和自动批准"
 msgid "Import and move to staging"
 msgstr "导入并移至 staging"
 
-#: src/components/headers/collection-header.tsx:628
+#: src/components/headers/collection-header.tsx:619
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "导入日志"
@@ -1532,7 +1536,7 @@ msgid "Indexing started for execution environment \"{name}\"."
 msgstr "为执行环境 \"{name}\" 执行索引已开始。"
 
 #: src/components/collection-detail/collection-info.tsx:53
-#: src/components/headers/collection-header.tsx:609
+#: src/components/headers/collection-header.tsx:600
 msgid "Install"
 msgstr "安装"
 
@@ -1588,7 +1592,7 @@ msgstr "关键字"
 msgid "Last modified"
 msgstr "最后修改"
 
-#: src/components/user-form/user-form.tsx:88
+#: src/components/user-form/user-form.tsx:90
 #: src/containers/group-management/group-detail.tsx:733
 #: src/containers/group-management/group-detail.tsx:814
 #: src/containers/user-management/user-list.tsx:170
@@ -1607,7 +1611,7 @@ msgstr "最后同步"
 msgid "Last updated"
 msgstr "最后更新"
 
-#: src/components/headers/collection-header.tsx:504
+#: src/components/headers/collection-header.tsx:495
 msgid "Last updated <0/>"
 msgstr "最后更新 <0/>"
 
@@ -1627,7 +1631,7 @@ msgstr "了解更多"
 msgid "License"
 msgstr "许可证"
 
-#: src/components/repositories/remote-form.tsx:676
+#: src/components/repositories/remote-form.tsx:678
 msgid "Limits total download rate in requests per second."
 msgstr "限制请求的每秒总下载率。"
 
@@ -1639,8 +1643,8 @@ msgstr "链接 URL"
 msgid "Link text"
 msgstr "链接文本"
 
-#: src/components/collection-list/collection-list.tsx:49
-#: src/containers/search/search.tsx:456
+#: src/components/collection-list/collection-list.tsx:48
+#: src/containers/search/search.tsx:450
 msgid "List of Collections"
 msgstr "集合列表"
 
@@ -1696,7 +1700,7 @@ msgstr "信息"
 msgid "Modify Ansible repo content"
 msgstr "修改 Ansible repo 内容"
 
-#: src/components/repositories/remote-form.tsx:685
+#: src/components/repositories/remote-form.tsx:687
 msgid "Must be an integer."
 msgstr "必须是整数。"
 
@@ -1757,11 +1761,11 @@ msgstr "名称不能为空。"
 msgid "Namespace"
 msgstr "命名空间"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:715
+#: src/containers/namespace-detail/namespace-detail.tsx:719
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "命名空间 \"{name}\" 无法被删除。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:694
+#: src/containers/namespace-detail/namespace-detail.tsx:698
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "命名空间 \"{name}\" 已被成功删除。"
 
@@ -1929,7 +1933,7 @@ msgstr "任何用户都不会受到影响。"
 msgid "No users yet"
 msgstr "还没有用户"
 
-#: src/components/user-form/user-form.tsx:202
+#: src/components/user-form/user-form.tsx:204
 msgid "Not a super user"
 msgstr "不是一个超级用户"
 
@@ -1955,7 +1959,7 @@ msgstr "其他集合不需要使用"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:653
+#: src/components/repositories/remote-form.tsx:655
 msgid "Number must be greater than 0"
 msgstr "此字段必须大于 0"
 
@@ -1987,17 +1991,17 @@ msgstr "部分签名"
 msgid "Partners"
 msgstr "合作伙伴"
 
-#: src/components/repositories/remote-form.tsx:389
-#: src/components/user-form/user-form.tsx:92
+#: src/components/repositories/remote-form.tsx:390
+#: src/components/user-form/user-form.tsx:94
 #: src/containers/login/login.tsx:55
 msgid "Password"
 msgstr "密码"
 
-#: src/components/user-form/user-form.tsx:110
+#: src/components/user-form/user-form.tsx:112
 msgid "Password confirmation"
 msgstr "确认密码"
 
-#: src/components/user-form/user-form.tsx:107
+#: src/components/user-form/user-form.tsx:109
 msgid "Passwords do not match"
 msgstr "密码不匹配"
 
@@ -2094,15 +2098,15 @@ msgstr "进度消息"
 msgid "Provided by {company}"
 msgstr "由 {company} 提供"
 
-#: src/components/repositories/remote-form.tsx:426
+#: src/components/repositories/remote-form.tsx:427
 msgid "Proxy URL"
 msgstr "代理 URL"
 
-#: src/components/repositories/remote-form.tsx:472
+#: src/components/repositories/remote-form.tsx:474
 msgid "Proxy password"
 msgstr "代理密码"
 
-#: src/components/repositories/remote-form.tsx:444
+#: src/components/repositories/remote-form.tsx:446
 msgid "Proxy username"
 msgstr "代理用户名"
 
@@ -2252,7 +2256,7 @@ msgstr "推送新容器"
 msgid "Push to existing containers"
 msgstr "推送到现有容器"
 
-#: src/components/repositories/remote-form.tsx:673
+#: src/components/repositories/remote-form.tsx:675
 msgid "Rate Limit"
 msgstr "速率限制"
 
@@ -2369,7 +2373,7 @@ msgstr "仓库名称"
 msgid "Requires Ansible"
 msgstr "需要 Ansible"
 
-#: src/components/user-form/user-form.tsx:253
+#: src/components/user-form/user-form.tsx:255
 msgid "Requires super user permissions to edit."
 msgstr "需要超级用户权限进行编辑。"
 
@@ -2401,7 +2405,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
 #: src/components/repositories/remote-form.tsx:142
-#: src/components/user-form/user-form.tsx:221
+#: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:197
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 #: src/containers/group-management/group-detail.tsx:433
@@ -2463,7 +2467,7 @@ msgstr "选择 registry"
 msgid "Select a tag"
 msgstr "选择标签"
 
-#: src/components/headers/collection-header.tsx:464
+#: src/components/headers/collection-header.tsx:455
 msgid "Select collection version"
 msgstr "选择集合版本"
 
@@ -2472,7 +2476,7 @@ msgstr "选择集合版本"
 msgid "Select file"
 msgstr "选择文件"
 
-#: src/components/user-form/user-form.tsx:173
+#: src/components/user-form/user-form.tsx:175
 msgid "Select groups"
 msgstr "选择组"
 
@@ -2513,7 +2517,7 @@ msgstr "服务器版本"
 msgid "Settings"
 msgstr "设置"
 
-#: src/components/repositories/remote-form.tsx:421
+#: src/components/repositories/remote-form.tsx:422
 msgid "Show advanced options"
 msgstr "显示高级选项"
 
@@ -2588,11 +2592,11 @@ msgstr ""
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "开始签发命名空间 \"{0}\" 中的所有集合。"
 
-#: src/components/headers/collection-header.tsx:679
+#: src/components/headers/collection-header.tsx:670
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "开始签发集合中所有版本 \"{0}\""
 
-#: src/components/headers/collection-header.tsx:730
+#: src/components/headers/collection-header.tsx:721
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "开始签发集合 \"{0} v{1}\"。"
 
@@ -2689,22 +2693,22 @@ msgstr "成功复制至剪贴板！"
 #~ msgid "Successfully stopped task."
 #~ msgstr "Successfully stopped task."
 
-#: src/components/user-form/user-form.tsx:201
+#: src/components/user-form/user-form.tsx:203
 #: src/containers/user-management/user-list.tsx:358
 msgid "Super user"
 msgstr "超级用户"
 
-#: src/components/user-form/user-form.tsx:256
+#: src/components/user-form/user-form.tsx:258
 msgid "Super users can't disable themselves."
 msgstr "超级用户无法禁用自身。"
 
-#: src/components/user-form/user-form.tsx:193
+#: src/components/user-form/user-form.tsx:195
 #: src/containers/user-management/user-list.tsx:355
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "超级用户具有所有系统权限，无论他们所在的组是什么。"
 
 #: src/components/repositories/remote-repository-table.tsx:180
-#: src/containers/search/search.tsx:378
+#: src/containers/search/search.tsx:372
 msgid "Sync"
 msgstr "同步"
 
@@ -2738,7 +2742,7 @@ msgstr "远程 registry \"{name}\" 的同步开始。"
 msgid "Sync status"
 msgstr "同步状态"
 
-#: src/components/repositories/remote-form.tsx:500
+#: src/components/repositories/remote-form.tsx:502
 msgid "TLS validation"
 msgstr "TLS 验证"
 
@@ -2817,8 +2821,8 @@ msgstr "任务在创建后将显示。"
 #: src/components/collection-list/collection-list.tsx:103
 #: src/components/headers/collection-header.tsx:262
 #: src/containers/search/search.tsx:333
-msgid "Temporarily disabled due to sync issues. (AAH-1237)"
-msgstr "因同步问题而临时禁用。(AAH-1237)"
+#~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
+#~ msgstr "因同步问题而临时禁用。(AAH-1237)"
 
 #: src/components/namespace-form/namespace-form.tsx:192
 msgid "Text: {0}"
@@ -2836,12 +2840,12 @@ msgstr "外部内容源的 URL。"
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:779
+#: src/components/headers/collection-header.tsx:770
 #: src/containers/search/search.tsx:293
 msgid "The collection \"{0}\" has been successfully deprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:780
+#: src/components/headers/collection-header.tsx:771
 #: src/containers/search/search.tsx:294
 msgid "The collection \"{0}\" has been successfully undeprecated."
 msgstr ""
@@ -2858,11 +2862,11 @@ msgstr "您选择的集合没与 {0} 不匹配。"
 msgid "The file is not available for this version of {collectionName}"
 msgstr "文件不适用于 {collectionName} 的这个版本"
 
-#: src/components/repositories/remote-form.tsx:394
+#: src/components/repositories/remote-form.tsx:395
 msgid "The password to be used for authentication when syncing."
 msgstr "同步时用于身份验证的密码。"
 
-#: src/components/repositories/remote-form.tsx:395
+#: src/components/repositories/remote-form.tsx:396
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同步时要用于身份验证的密码。在使用令牌时不需要此密码。"
 
@@ -2870,11 +2874,11 @@ msgstr "同步时要用于身份验证的密码。在使用令牌时不需要此
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "令牌将在 30 天没有活动时过期。定期运行以下命令以防止您的令牌过期。"
 
-#: src/components/repositories/remote-form.tsx:359
+#: src/components/repositories/remote-form.tsx:360
 msgid "The username to be used for authentication when syncing."
 msgstr "同步时用于身份验证的用户名。"
 
-#: src/components/repositories/remote-form.tsx:360
+#: src/components/repositories/remote-form.tsx:361
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "同步时要用于身份验证的用户名。在使用令牌时不需要此用户名。"
 
@@ -2907,7 +2911,7 @@ msgstr "此帐户没有设置为管理任何命名空间"
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
 #~ msgstr "此操作将影响 <0>{numberOfAffected}</0> 版本。"
 
-#: src/components/headers/collection-header.tsx:527
+#: src/components/headers/collection-header.tsx:518
 msgid "This collection has been deprecated."
 msgstr "这个集合已弃用。"
 
@@ -2951,7 +2955,7 @@ msgstr "用于向服务器 URL 进行身份验证的令牌。"
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:644
+#: src/components/repositories/remote-form.tsx:646
 msgid "Total number of simultaneous connections."
 msgstr "同时连接总数。"
 
@@ -2984,9 +2988,9 @@ msgstr "URL 不能为空。"
 msgid "URL: {0}"
 msgstr "URL：{0}"
 
-#: src/components/collection-list/collection-list.tsx:107
-#: src/components/headers/collection-header.tsx:266
-#: src/containers/search/search.tsx:337
+#: src/components/collection-list/collection-list.tsx:98
+#: src/components/headers/collection-header.tsx:257
+#: src/containers/search/search.tsx:331
 msgid "Undeprecate"
 msgstr "取消弃用"
 
@@ -3017,10 +3021,10 @@ msgstr "上传"
 msgid "Upload collection"
 msgstr "上传集合"
 
-#: src/components/collection-list/collection-list.tsx:89
-#: src/components/headers/collection-header.tsx:273
-#: src/containers/search/search.tsx:347
-#: src/containers/search/search.tsx:359
+#: src/components/collection-list/collection-list.tsx:88
+#: src/components/headers/collection-header.tsx:264
+#: src/containers/search/search.tsx:341
+#: src/containers/search/search.tsx:353
 msgid "Upload new version"
 msgstr "上传新版本"
 
@@ -3135,13 +3139,13 @@ msgstr "用户详情"
 msgid "User list"
 msgstr "用户列表"
 
-#: src/components/user-form/user-form.tsx:188
+#: src/components/user-form/user-form.tsx:190
 msgid "User type"
 msgstr "用户类型"
 
 #: src/components/about-modal/about-modal.tsx:85
-#: src/components/repositories/remote-form.tsx:354
-#: src/components/user-form/user-form.tsx:86
+#: src/components/repositories/remote-form.tsx:355
+#: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:725
 #: src/containers/group-management/group-detail.tsx:804
 #: src/containers/login/login.tsx:52
@@ -3181,7 +3185,7 @@ msgstr "用户添加至该组后会出现"
 msgid "Users will appear once created"
 msgstr "用户创建后将会出现"
 
-#: src/components/headers/collection-header.tsx:452
+#: src/components/headers/collection-header.tsx:443
 #: src/containers/certification-dashboard/certification-dashboard.tsx:269
 msgid "Version"
 msgstr "版本"
@@ -3226,7 +3230,7 @@ msgstr "查看分发"
 msgid "View group"
 msgstr "查看组"
 
-#: src/components/headers/collection-header.tsx:468
+#: src/components/headers/collection-header.tsx:459
 msgid "View more"
 msgstr "查看更多"
 
@@ -3323,8 +3327,8 @@ msgstr "您无法访问 Automation Hub"
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/headers/collection-header.tsx:567
-#: src/containers/search/search.tsx:391
+#: src/components/headers/collection-header.tsx:558
+#: src/containers/search/search.tsx:385
 msgid "You don't have rights to do this operation."
 msgstr ""
 
@@ -3379,7 +3383,7 @@ msgstr "弹出示例"
 msgid "rejected"
 msgstr "拒绝"
 
-#: src/components/headers/collection-header.tsx:357
+#: src/components/headers/collection-header.tsx:348
 msgid "released {0}"
 msgstr "发布的 {0}"
 
@@ -3407,7 +3411,7 @@ msgstr "等待批准"
 msgid "waiting for import to finish"
 msgstr "等待导入结束"
 
-#: src/components/headers/collection-header.tsx:495
+#: src/components/headers/collection-header.tsx:486
 msgid "{0} released {1}"
 msgstr "{0} 发布的 {1}"
 
@@ -3419,14 +3423,14 @@ msgstr "{0} 被添加"
 #~ msgid "{0} will be deleted."
 #~ msgstr "{0} will be deleted."
 
-#: src/components/headers/collection-header.tsx:328
+#: src/components/headers/collection-header.tsx:319
 msgid "{collectionName}'s versions."
 msgstr "{collectionName}的版本。"
 
 #: src/components/cards/collection-card.tsx:53
 #: src/components/cards/namespace-card.tsx:36
 #: src/components/collection-list/collection-list-item.tsx:58
-#: src/components/headers/collection-header.tsx:433
+#: src/components/headers/collection-header.tsx:424
 #: src/components/headers/partner-header.tsx:46
 msgid "{company} logo"
 msgstr "{company} 标志"
