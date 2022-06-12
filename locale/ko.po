@@ -92,12 +92,12 @@ msgstr "<0>{name}</0>이/가 영구적으로 삭제됩니다."
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:552
-#: src/components/repositories/remote-form.tsx:598
+#: src/components/repositories/remote-form.tsx:554
+#: src/components/repositories/remote-form.tsx:600
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "인증에 사용되는 PEM 인코딩 클라이언트 인증서입니다."
 
-#: src/components/repositories/remote-form.tsx:522
+#: src/components/repositories/remote-form.tsx:524
 msgid "A PEM encoded private key used for authentication."
 msgstr "인증에 사용되는 PEM 인코딩 개인 키입니다."
 
@@ -118,8 +118,8 @@ msgstr "API 오류: 사용 중단을 설정하지 못했습니다."
 #~ msgid "API Error: {0}"
 #~ msgstr "API Error: {0}"
 
-#: src/components/headers/collection-header.tsx:669
-#: src/components/headers/collection-header.tsx:720
+#: src/components/headers/collection-header.tsx:660
+#: src/components/headers/collection-header.tsx:711
 #: src/containers/namespace-detail/namespace-detail.tsx:440
 msgid "API Error: {status}"
 msgstr "API 오류: {status}"
@@ -272,7 +272,7 @@ msgstr "승인"
 msgid "Approved"
 msgstr "승인됨"
 
-#: src/components/user-form/user-form.tsx:135
+#: src/components/user-form/user-form.tsx:137
 msgid "Authentication provider"
 msgstr "인증 제공자"
 
@@ -288,7 +288,7 @@ msgstr "브라우저 OS"
 msgid "Browser Version"
 msgstr "브라우저 버전"
 
-#: src/components/repositories/remote-form.tsx:595
+#: src/components/repositories/remote-form.tsx:597
 msgid "CA certificate"
 msgstr "CA 인증서"
 
@@ -306,7 +306,7 @@ msgid "Can't update remote without a distribution attached to it."
 msgstr "배포판이 연결되어 있지 않고 원격으로 업데이트할 수 없습니다."
 
 #: src/components/confirm-modal/confirm-modal.tsx:40
-#: src/components/delete-modal/delete-modal.tsx:33
+#: src/components/delete-modal/delete-modal.tsx:34
 #: src/components/execution-environment/repository-form.tsx:164
 #: src/components/execution-environment/tag-manifest-modal.tsx:129
 #: src/components/group-management/group-modal.tsx:59
@@ -316,7 +316,7 @@ msgstr "배포판이 연결되어 있지 않고 원격으로 업데이트할 수
 #: src/components/signing/sign-all-certificates-modal.tsx:51
 #: src/components/signing/sign-single-certificate-modal.tsx:35
 #: src/components/signing/upload-sign-certificate-modal.tsx:49
-#: src/components/user-form/user-form.tsx:224
+#: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail.tsx:440
@@ -446,11 +446,11 @@ msgstr "모든 필터 지우기"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "위의 실행 환경을 사용하려는 컨트롤러 URL을 클릭하면 해당 컨트롤러의 콘솔이 실행됩니다. (필요한 경우) 로그인하고 단계에 따라 구성을 완료합니다."
 
-#: src/components/repositories/remote-form.tsx:549
+#: src/components/repositories/remote-form.tsx:551
 msgid "Client certificate"
 msgstr "클라이언트 인증서"
 
-#: src/components/repositories/remote-form.tsx:519
+#: src/components/repositories/remote-form.tsx:521
 msgid "Client key"
 msgstr "클라이언트 키"
 
@@ -467,12 +467,12 @@ msgstr "코드"
 msgid "Collection"
 msgstr "컬렉션"
 
-#: src/components/headers/collection-header.tsx:804
+#: src/components/headers/collection-header.tsx:795
 #: src/containers/search/search.tsx:315
 msgid "Collection \"{0}\" could not be deprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:805
+#: src/components/headers/collection-header.tsx:796
 #: src/containers/search/search.tsx:316
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr ""
@@ -485,16 +485,16 @@ msgstr ""
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:919
+#: src/components/headers/collection-header.tsx:910
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "컬렉션 \"{name} v{collectionVersion}\"을/를 삭제할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:848
-#: src/components/headers/collection-header.tsx:863
+#: src/components/headers/collection-header.tsx:839
+#: src/components/headers/collection-header.tsx:854
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "컬렉션 \"{name} v{collectionVersion}\"을/를 성공적으로 삭제했습니다."
 
-#: src/components/headers/collection-header.tsx:975
+#: src/components/headers/collection-header.tsx:966
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "컬렉션 \"{name}\"을/를 삭제할 수 없습니다."
 
@@ -502,7 +502,7 @@ msgstr "컬렉션 \"{name}\"을/를 삭제할 수 없습니다."
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "컬렉션 \"{name}\"을/를 다운로드할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:951
+#: src/components/headers/collection-header.tsx:942
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "컬렉션 \"{name}\"을/를 성공적으로 삭제했습니다."
 
@@ -539,7 +539,7 @@ msgstr "컬렉션 리포지토리를 표시할 수 없습니다."
 msgid "Collection upload canceled"
 msgstr "컬렉션 업로드 취소됨"
 
-#: src/components/headers/collection-header.tsx:322
+#: src/components/headers/collection-header.tsx:313
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:293
@@ -648,7 +648,7 @@ msgstr "콘텐츠"
 msgid "Content count"
 msgstr "콘텐츠 수"
 
-#: src/components/headers/collection-header.tsx:619
+#: src/components/headers/collection-header.tsx:610
 msgid "Contents"
 msgstr "콘텐츠"
 
@@ -697,8 +697,12 @@ msgid "Create a new namespace"
 msgstr "새 네임스페이스 생성"
 
 #: src/components/user-form/user-form.tsx:97
-msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "일반 이름이나 표현식을 사용하지 않는 특수 문자 (예: <!@$%>)를 포함하여 최소 9자로 암호를 생성합니다."
+#~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+#~ msgstr "일반 이름이나 표현식을 사용하지 않는 특수 문자 (예: <!@$%>)를 포함하여 최소 9자로 암호를 생성합니다."
+
+#: src/components/user-form/user-form.tsx:99
+msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+msgstr ""
 
 #: src/constants.tsx:165
 #: src/constants.tsx:205
@@ -788,11 +792,11 @@ msgstr "컬렉션 삭제"
 msgid "Delete collection remote"
 msgstr "원격 컬렉션 삭제"
 
-#: src/components/headers/collection-header.tsx:384
+#: src/components/headers/collection-header.tsx:375
 msgid "Delete collection version?"
 msgstr "컬렉션 버전을 삭제하시겠습니까?"
 
-#: src/components/headers/collection-header.tsx:385
+#: src/components/headers/collection-header.tsx:376
 msgid "Delete collection?"
 msgstr "컬렉션을 삭제하시겠습니까?"
 
@@ -879,15 +883,15 @@ msgstr "사용자를 삭제하시겠습니까?"
 msgid "Delete version {0}"
 msgstr "버전 삭제 {0}"
 
-#: src/components/headers/collection-header.tsx:393
+#: src/components/headers/collection-header.tsx:384
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 msgstr "<0>{0} v{collectionVersion}</0>를 삭제하면 데이터가 손실되어 전체 컬렉션이 삭제됩니다."
 
-#: src/components/headers/collection-header.tsx:402
+#: src/components/headers/collection-header.tsx:393
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "<0>{0} v{collectionVersion}</0>를 삭제하면 데이터가 손실됩니다."
 
-#: src/components/headers/collection-header.tsx:412
+#: src/components/headers/collection-header.tsx:403
 #: src/containers/namespace-detail/namespace-detail.tsx:237
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "<0>{0}</0>을/를 삭제하면 해당 데이터가 손실됩니다."
@@ -916,17 +920,17 @@ msgstr "이 그룹을 삭제하면 {count}명의 사용자에게 영향을 미�
 msgid "Deleting yourself is not allowed."
 msgstr "자신을 삭제하는 것은 허용되지 않습니다."
 
-#: src/components/headers/collection-header.tsx:633
+#: src/components/headers/collection-header.tsx:624
 #: src/containers/collection-detail/collection-dependencies.tsx:105
 #: src/containers/collection-detail/collection-dependencies.tsx:135
 msgid "Dependencies"
 msgstr "종속 항목"
 
-#: src/components/headers/collection-header.tsx:1004
+#: src/components/headers/collection-header.tsx:995
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "\"{name}\" 컬렉션의 종속 항목을 표시할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:889
+#: src/components/headers/collection-header.tsx:880
 msgid "Dependent collections"
 msgstr "종속 컬렉션"
 
@@ -934,9 +938,9 @@ msgstr "종속 컬렉션"
 msgid "Dependent collections could not be displayed."
 msgstr "종속 컬렉션을 표시할 수 없습니다."
 
-#: src/components/collection-list/collection-list.tsx:107
-#: src/components/headers/collection-header.tsx:266
-#: src/containers/search/search.tsx:337
+#: src/components/collection-list/collection-list.tsx:98
+#: src/components/headers/collection-header.tsx:257
+#: src/containers/search/search.tsx:331
 msgid "Deprecate"
 msgstr "더 이상 사용되지 않음"
 
@@ -976,7 +980,7 @@ msgstr "배포 이름"
 msgid "Docs site"
 msgstr "문서 사이트"
 
-#: src/components/headers/collection-header.tsx:614
+#: src/components/headers/collection-header.tsx:605
 #: src/containers/collection-detail/collection-docs.tsx:125
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
@@ -991,15 +995,15 @@ msgstr "<0>ansible-octets</0> 클라이언트를 구성하는 방법에 대한 �
 msgid "Done"
 msgstr "완료"
 
-#: src/components/repositories/remote-form.tsx:631
+#: src/components/repositories/remote-form.tsx:633
 msgid "Download CA certification file"
 msgstr "CA 인증서 파일 다운로드"
 
-#: src/components/repositories/remote-form.tsx:585
+#: src/components/repositories/remote-form.tsx:587
 msgid "Download client certification file"
 msgstr "클라이언트 인증 파일 다운로드"
 
-#: src/components/repositories/remote-form.tsx:641
+#: src/components/repositories/remote-form.tsx:643
 msgid "Download concurrency"
 msgstr "동시 다운로드"
 
@@ -1083,7 +1087,7 @@ msgstr "리소스 편집"
 msgid "Edit user"
 msgstr "사용자 편집"
 
-#: src/components/user-form/user-form.tsx:89
+#: src/components/user-form/user-form.tsx:91
 #: src/containers/group-management/group-detail.tsx:737
 #: src/containers/group-management/group-detail.tsx:809
 #: src/containers/user-management/user-list.tsx:174
@@ -1322,11 +1326,11 @@ msgstr "사용자 데이터를 검색하지 못했습니다."
 msgid "Failed to sign all collections."
 msgstr "모든 컬렉션에 서명하지 못했습니다."
 
-#: src/components/headers/collection-header.tsx:670
+#: src/components/headers/collection-header.tsx:661
 msgid "Failed to sign all versions in the collection."
 msgstr "컬렉션의 모든 버전에 서명하지 못했습니다."
 
-#: src/components/headers/collection-header.tsx:721
+#: src/components/headers/collection-header.tsx:712
 msgid "Failed to sign the version."
 msgstr "버전에 서명하지 못했습니다."
 
@@ -1366,7 +1370,7 @@ msgstr "이 레지스트리에서 실행 환경 찾기"
 msgid "Finished at"
 msgstr "완료"
 
-#: src/components/user-form/user-form.tsx:87
+#: src/components/user-form/user-form.tsx:89
 #: src/containers/group-management/group-detail.tsx:729
 #: src/containers/group-management/group-detail.tsx:819
 #: src/containers/user-management/user-list.tsx:166
@@ -1420,8 +1424,8 @@ msgstr "그룹 \"{group}\"이/가 성공적으로 삭제되었습니다."
 msgid "Group list"
 msgstr "그룹 목록"
 
-#: src/components/user-form/user-form.tsx:147
-#: src/components/user-form/user-form.tsx:161
+#: src/components/user-form/user-form.tsx:149
+#: src/components/user-form/user-form.tsx:163
 #: src/constants.tsx:55
 #: src/containers/group-management/group-detail.tsx:230
 #: src/containers/group-management/group-list.tsx:145
@@ -1434,7 +1438,7 @@ msgstr "그룹"
 #: src/components/execution-environment/repository-form.tsx:486
 #: src/components/namespace-form/namespace-form.tsx:124
 #: src/components/namespace-modal/namespace-modal.tsx:180
-#: src/components/user-form/user-form.tsx:296
+#: src/components/user-form/user-form.tsx:298
 #: src/containers/group-management/group-list.tsx:517
 msgid "Groups list could not be displayed."
 msgstr "그룹 목록을 표시할 수 없습니다."
@@ -1447,7 +1451,7 @@ msgstr "그룹이 생성되면 나타납니다."
 msgid "Groups with access"
 msgstr "액세스 권한이 있는 그룹"
 
-#: src/components/repositories/remote-form.tsx:420
+#: src/components/repositories/remote-form.tsx:421
 msgid "Hide advanced options"
 msgstr "고급 옵션 숨기기"
 
@@ -1456,13 +1460,13 @@ msgid "Hide the signature"
 msgstr "서명 숨기기"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
-#: src/components/headers/collection-header.tsx:421
+#: src/components/headers/collection-header.tsx:412
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
 #: src/containers/namespace-detail/namespace-detail.tsx:244
 msgid "I understand that this action cannot be undone."
 msgstr "이 작업을 취소할 수 없다는 것을 알고 있습니다."
 
-#: src/components/repositories/remote-form.tsx:503
+#: src/components/repositories/remote-form.tsx:505
 msgid "If selected, TLS peer validation must be performed."
 msgstr "선택한 경우 TLS 피어 유효성 검사를 수행해야 합니다."
 
@@ -1502,7 +1506,7 @@ msgstr "가져오기 및 자동 승인"
 msgid "Import and move to staging"
 msgstr "가져오기 및 스테이징으로 이동"
 
-#: src/components/headers/collection-header.tsx:628
+#: src/components/headers/collection-header.tsx:619
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "로그 가져오기"
@@ -1532,7 +1536,7 @@ msgid "Indexing started for execution environment \"{name}\"."
 msgstr "실행 환경 \"{name}\"에 대한 인덱싱이 시작되었습니다."
 
 #: src/components/collection-detail/collection-info.tsx:53
-#: src/components/headers/collection-header.tsx:609
+#: src/components/headers/collection-header.tsx:600
 msgid "Install"
 msgstr "설치"
 
@@ -1588,7 +1592,7 @@ msgstr "키워드"
 msgid "Last modified"
 msgstr "마지막으로 변경된 사항"
 
-#: src/components/user-form/user-form.tsx:88
+#: src/components/user-form/user-form.tsx:90
 #: src/containers/group-management/group-detail.tsx:733
 #: src/containers/group-management/group-detail.tsx:814
 #: src/containers/user-management/user-list.tsx:170
@@ -1607,7 +1611,7 @@ msgstr "마지막으로 동기화됨"
 msgid "Last updated"
 msgstr "마지막 업데이트"
 
-#: src/components/headers/collection-header.tsx:504
+#: src/components/headers/collection-header.tsx:495
 msgid "Last updated <0/>"
 msgstr "마지막 업데이트 <0/>"
 
@@ -1627,7 +1631,7 @@ msgstr "더 알아보기"
 msgid "License"
 msgstr "라이센스"
 
-#: src/components/repositories/remote-form.tsx:676
+#: src/components/repositories/remote-form.tsx:678
 msgid "Limits total download rate in requests per second."
 msgstr "초당 요청의 총 다운로드 속도를 제한합니다."
 
@@ -1639,8 +1643,8 @@ msgstr "링크 URL"
 msgid "Link text"
 msgstr "링크 텍스트"
 
-#: src/components/collection-list/collection-list.tsx:49
-#: src/containers/search/search.tsx:456
+#: src/components/collection-list/collection-list.tsx:48
+#: src/containers/search/search.tsx:450
 msgid "List of Collections"
 msgstr "컬렉션 목록"
 
@@ -1696,7 +1700,7 @@ msgstr "메시지"
 msgid "Modify Ansible repo content"
 msgstr "Ansible 리포지토리 콘텐츠 수정"
 
-#: src/components/repositories/remote-form.tsx:685
+#: src/components/repositories/remote-form.tsx:687
 msgid "Must be an integer."
 msgstr "정수여야 합니다."
 
@@ -1757,11 +1761,11 @@ msgstr "이름은 비워 둘 수 없습니다."
 msgid "Namespace"
 msgstr "네임스페이스"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:715
+#: src/containers/namespace-detail/namespace-detail.tsx:719
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "네임스페이스 \"{name}\"은/는 삭제할 수 없습니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:694
+#: src/containers/namespace-detail/namespace-detail.tsx:698
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "네임스페이스 \"{name}\"을/를 성공적으로 삭제했습니다."
 
@@ -1929,7 +1933,7 @@ msgstr "사용자에게 영향을 미치지 않습니다."
 msgid "No users yet"
 msgstr "아직 사용자가 없음"
 
-#: src/components/user-form/user-form.tsx:202
+#: src/components/user-form/user-form.tsx:204
 msgid "Not a super user"
 msgstr "슈퍼 유저가 아닙니다"
 
@@ -1955,7 +1959,7 @@ msgstr "다른 컬렉션에 사용할 필요가 없음"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:653
+#: src/components/repositories/remote-form.tsx:655
 msgid "Number must be greater than 0"
 msgstr "이 필드는 0보다 커야 합니다."
 
@@ -1987,17 +1991,17 @@ msgstr "부분적으로 서명"
 msgid "Partners"
 msgstr "파트너"
 
-#: src/components/repositories/remote-form.tsx:389
-#: src/components/user-form/user-form.tsx:92
+#: src/components/repositories/remote-form.tsx:390
+#: src/components/user-form/user-form.tsx:94
 #: src/containers/login/login.tsx:55
 msgid "Password"
 msgstr "암호"
 
-#: src/components/user-form/user-form.tsx:110
+#: src/components/user-form/user-form.tsx:112
 msgid "Password confirmation"
 msgstr "암호 확인"
 
-#: src/components/user-form/user-form.tsx:107
+#: src/components/user-form/user-form.tsx:109
 msgid "Passwords do not match"
 msgstr "암호가 일치하지 않음"
 
@@ -2094,15 +2098,15 @@ msgstr "진행 상황 메시지"
 msgid "Provided by {company}"
 msgstr "{company} 제공"
 
-#: src/components/repositories/remote-form.tsx:426
+#: src/components/repositories/remote-form.tsx:427
 msgid "Proxy URL"
 msgstr "프록시 URL"
 
-#: src/components/repositories/remote-form.tsx:472
+#: src/components/repositories/remote-form.tsx:474
 msgid "Proxy password"
 msgstr "프록시 암호"
 
-#: src/components/repositories/remote-form.tsx:444
+#: src/components/repositories/remote-form.tsx:446
 msgid "Proxy username"
 msgstr "프록시 사용자 이름"
 
@@ -2252,7 +2256,7 @@ msgstr "새 컨테이너 푸시"
 msgid "Push to existing containers"
 msgstr "기존 컨테이너로 푸시"
 
-#: src/components/repositories/remote-form.tsx:673
+#: src/components/repositories/remote-form.tsx:675
 msgid "Rate Limit"
 msgstr "속도 제한"
 
@@ -2369,7 +2373,7 @@ msgstr "리포지터리 이름"
 msgid "Requires Ansible"
 msgstr "Ansible 필요"
 
-#: src/components/user-form/user-form.tsx:253
+#: src/components/user-form/user-form.tsx:255
 msgid "Requires super user permissions to edit."
 msgstr "편집하려면 슈퍼 사용자 권한이 필요합니다."
 
@@ -2401,7 +2405,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
 #: src/components/repositories/remote-form.tsx:142
-#: src/components/user-form/user-form.tsx:221
+#: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:197
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 #: src/containers/group-management/group-detail.tsx:433
@@ -2463,7 +2467,7 @@ msgstr "레지스트리 선택"
 msgid "Select a tag"
 msgstr "태그 선택"
 
-#: src/components/headers/collection-header.tsx:464
+#: src/components/headers/collection-header.tsx:455
 msgid "Select collection version"
 msgstr "컬렉션 버전 선택"
 
@@ -2472,7 +2476,7 @@ msgstr "컬렉션 버전 선택"
 msgid "Select file"
 msgstr "파일 선택"
 
-#: src/components/user-form/user-form.tsx:173
+#: src/components/user-form/user-form.tsx:175
 msgid "Select groups"
 msgstr "그룹 선택"
 
@@ -2513,7 +2517,7 @@ msgstr "서버 버전"
 msgid "Settings"
 msgstr "설정"
 
-#: src/components/repositories/remote-form.tsx:421
+#: src/components/repositories/remote-form.tsx:422
 msgid "Show advanced options"
 msgstr "고급 옵션 표시"
 
@@ -2588,11 +2592,11 @@ msgstr ""
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "네임스페이스 \"{0}\"의 모든 컬렉션에 대해 서명이 시작되었습니다."
 
-#: src/components/headers/collection-header.tsx:679
+#: src/components/headers/collection-header.tsx:670
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "컬렉션 \"{0}\"의 모든 버전에 대해 서명이 시작되었습니다."
 
-#: src/components/headers/collection-header.tsx:730
+#: src/components/headers/collection-header.tsx:721
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "\"{0} v{1}\" 컬렉션에 대한 서명이 시작되었습니다."
 
@@ -2689,22 +2693,22 @@ msgstr "클립보드에 성공적으로 복사되었습니다."
 #~ msgid "Successfully stopped task."
 #~ msgstr "Successfully stopped task."
 
-#: src/components/user-form/user-form.tsx:201
+#: src/components/user-form/user-form.tsx:203
 #: src/containers/user-management/user-list.tsx:358
 msgid "Super user"
 msgstr "슈퍼유저"
 
-#: src/components/user-form/user-form.tsx:256
+#: src/components/user-form/user-form.tsx:258
 msgid "Super users can't disable themselves."
 msgstr "슈퍼유저는 자신을 비활성화할 수 없습니다."
 
-#: src/components/user-form/user-form.tsx:193
+#: src/components/user-form/user-form.tsx:195
 #: src/containers/user-management/user-list.tsx:355
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "슈퍼유저는 어떤 그룹에 있는지에 관계없이 모든 시스템 권한을 갖습니다."
 
 #: src/components/repositories/remote-repository-table.tsx:180
-#: src/containers/search/search.tsx:378
+#: src/containers/search/search.tsx:372
 msgid "Sync"
 msgstr "동기화"
 
@@ -2738,7 +2742,7 @@ msgstr "원격 레지스트리 \"{name}\"에 대한 동기화가 시작되었습
 msgid "Sync status"
 msgstr "동기화 상태"
 
-#: src/components/repositories/remote-form.tsx:500
+#: src/components/repositories/remote-form.tsx:502
 msgid "TLS validation"
 msgstr "TLS 인증"
 
@@ -2817,8 +2821,8 @@ msgstr "작업이 생성된 후 표시됩니다"
 #: src/components/collection-list/collection-list.tsx:103
 #: src/components/headers/collection-header.tsx:262
 #: src/containers/search/search.tsx:333
-msgid "Temporarily disabled due to sync issues. (AAH-1237)"
-msgstr "동기화 문제로 인해 일시적으로 비활성화되었습니다. (AAH-1237)"
+#~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
+#~ msgstr "동기화 문제로 인해 일시적으로 비활성화되었습니다. (AAH-1237)"
 
 #: src/components/namespace-form/namespace-form.tsx:192
 msgid "Text: {0}"
@@ -2836,12 +2840,12 @@ msgstr "외부 콘텐츠 소스의 URL입니다."
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:779
+#: src/components/headers/collection-header.tsx:770
 #: src/containers/search/search.tsx:293
 msgid "The collection \"{0}\" has been successfully deprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:780
+#: src/components/headers/collection-header.tsx:771
 #: src/containers/search/search.tsx:294
 msgid "The collection \"{0}\" has been successfully undeprecated."
 msgstr ""
@@ -2858,11 +2862,11 @@ msgstr "선택한 컬렉션이 {0}와/과 일치하지 않습니다."
 msgid "The file is not available for this version of {collectionName}"
 msgstr "이 {collectionName} 버전에서는 파일을 사용할 수 없습니다."
 
-#: src/components/repositories/remote-form.tsx:394
+#: src/components/repositories/remote-form.tsx:395
 msgid "The password to be used for authentication when syncing."
 msgstr "동기화 시 인증에 사용할 암호입니다."
 
-#: src/components/repositories/remote-form.tsx:395
+#: src/components/repositories/remote-form.tsx:396
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "동기화 시 인증에 사용할 암호입니다. 토큰을 사용할 때는 필요하지 않습니다."
 
@@ -2870,11 +2874,11 @@ msgstr "동기화 시 인증에 사용할 암호입니다. 토큰을 사용할 �
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "토큰은 30일 동안 활동이 없으면 만료됩니다. 다음 명령을 주기적으로 실행하여 토큰이 만료되지 않도록 하십시오."
 
-#: src/components/repositories/remote-form.tsx:359
+#: src/components/repositories/remote-form.tsx:360
 msgid "The username to be used for authentication when syncing."
 msgstr "동기화 시 인증에 사용할 사용자 이름입니다."
 
-#: src/components/repositories/remote-form.tsx:360
+#: src/components/repositories/remote-form.tsx:361
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "동기화 시 인증에 사용할 사용자 이름입니다. 이 사용자 이름은 토큰을 사용할 때 필요하지 않습니다."
 
@@ -2907,7 +2911,7 @@ msgstr "이 계정은 네임스페이스를 관리하도록 설정되지 않았�
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
 #~ msgstr "이 작업은 <0>{numberOfAffected}</0> 버전에 영향을 미칩니다."
 
-#: src/components/headers/collection-header.tsx:527
+#: src/components/headers/collection-header.tsx:518
 msgid "This collection has been deprecated."
 msgstr "이 컬렉션은 더 이상 사용되지 않습니다."
 
@@ -2951,7 +2955,7 @@ msgstr "서버 URL을 인증하는 데 사용되는 토큰입니다."
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:644
+#: src/components/repositories/remote-form.tsx:646
 msgid "Total number of simultaneous connections."
 msgstr "총 동시 연결 수입니다."
 
@@ -2984,9 +2988,9 @@ msgstr "URL은 비워 둘 수 없습니다."
 msgid "URL: {0}"
 msgstr "URL: {0}"
 
-#: src/components/collection-list/collection-list.tsx:107
-#: src/components/headers/collection-header.tsx:266
-#: src/containers/search/search.tsx:337
+#: src/components/collection-list/collection-list.tsx:98
+#: src/components/headers/collection-header.tsx:257
+#: src/containers/search/search.tsx:331
 msgid "Undeprecate"
 msgstr "사용되지 않음"
 
@@ -3017,10 +3021,10 @@ msgstr "업로드"
 msgid "Upload collection"
 msgstr "컬렉션 업로드"
 
-#: src/components/collection-list/collection-list.tsx:89
-#: src/components/headers/collection-header.tsx:273
-#: src/containers/search/search.tsx:347
-#: src/containers/search/search.tsx:359
+#: src/components/collection-list/collection-list.tsx:88
+#: src/components/headers/collection-header.tsx:264
+#: src/containers/search/search.tsx:341
+#: src/containers/search/search.tsx:353
 msgid "Upload new version"
 msgstr "새 버전 업로드"
 
@@ -3135,13 +3139,13 @@ msgstr "사용자 세부 정보"
 msgid "User list"
 msgstr "사용자 목록"
 
-#: src/components/user-form/user-form.tsx:188
+#: src/components/user-form/user-form.tsx:190
 msgid "User type"
 msgstr "사용자 유형"
 
 #: src/components/about-modal/about-modal.tsx:85
-#: src/components/repositories/remote-form.tsx:354
-#: src/components/user-form/user-form.tsx:86
+#: src/components/repositories/remote-form.tsx:355
+#: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:725
 #: src/containers/group-management/group-detail.tsx:804
 #: src/containers/login/login.tsx:52
@@ -3181,7 +3185,7 @@ msgstr "사용자가 그룹에 추가되면 나타납니다."
 msgid "Users will appear once created"
 msgstr "사용자가 생성되면 나타납니다."
 
-#: src/components/headers/collection-header.tsx:452
+#: src/components/headers/collection-header.tsx:443
 #: src/containers/certification-dashboard/certification-dashboard.tsx:269
 msgid "Version"
 msgstr "버전"
@@ -3226,7 +3230,7 @@ msgstr "배포 보기"
 msgid "View group"
 msgstr "그룹 보기"
 
-#: src/components/headers/collection-header.tsx:468
+#: src/components/headers/collection-header.tsx:459
 msgid "View more"
 msgstr "더 알아보기"
 
@@ -3323,8 +3327,8 @@ msgstr "Automation Hub에 액세스할 수 없습니다."
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/headers/collection-header.tsx:567
-#: src/containers/search/search.tsx:391
+#: src/components/headers/collection-header.tsx:558
+#: src/containers/search/search.tsx:385
 msgid "You don't have rights to do this operation."
 msgstr ""
 
@@ -3379,7 +3383,7 @@ msgstr "팝업 예제"
 msgid "rejected"
 msgstr "거부됨"
 
-#: src/components/headers/collection-header.tsx:357
+#: src/components/headers/collection-header.tsx:348
 msgid "released {0}"
 msgstr "게시됨 {0}"
 
@@ -3407,7 +3411,7 @@ msgstr "승인 대기 중"
 msgid "waiting for import to finish"
 msgstr "가져오기가 완료될 때까지 대기 중"
 
-#: src/components/headers/collection-header.tsx:495
+#: src/components/headers/collection-header.tsx:486
 msgid "{0} released {1}"
 msgstr "{0}이/가 릴리스됨 {1}"
 
@@ -3419,14 +3423,14 @@ msgstr "{0}이/가 추가되었습니다"
 #~ msgid "{0} will be deleted."
 #~ msgstr "{0} will be deleted."
 
-#: src/components/headers/collection-header.tsx:328
+#: src/components/headers/collection-header.tsx:319
 msgid "{collectionName}'s versions."
 msgstr "{collectionName}의 버전입니다."
 
 #: src/components/cards/collection-card.tsx:53
 #: src/components/cards/namespace-card.tsx:36
 #: src/components/collection-list/collection-list-item.tsx:58
-#: src/components/headers/collection-header.tsx:433
+#: src/components/headers/collection-header.tsx:424
 #: src/components/headers/partner-header.tsx:46
 msgid "{company} logo"
 msgstr "{company} 로고"
