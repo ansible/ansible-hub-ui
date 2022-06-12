@@ -272,7 +272,7 @@ msgstr "承認"
 msgid "Approved"
 msgstr "承認済"
 
-#: src/components/user-form/user-form.tsx:135
+#: src/components/user-form/user-form.tsx:137
 msgid "Authentication provider"
 msgstr "認証プロバイダー"
 
@@ -315,7 +315,7 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 #: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:35
 #: src/components/signing/sign-single-certificate-modal.tsx:35
-#: src/components/user-form/user-form.tsx:224
+#: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail.tsx:440
@@ -674,8 +674,12 @@ msgid "Create a new namespace"
 msgstr "新規名前空間の作成"
 
 #: src/components/user-form/user-form.tsx:97
-msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "特殊文字 (例: <!@$%>) を含めた 9 文字以上のパスワードを作成します。一般的な名前または式は使用しないでください。"
+#~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+#~ msgstr "特殊文字 (例: <!@$%>) を含めた 9 文字以上のパスワードを作成します。一般的な名前または式は使用しないでください。"
+
+#: src/components/user-form/user-form.tsx:99
+msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+msgstr ""
 
 #: src/constants.tsx:165
 #: src/constants.tsx:205
@@ -911,7 +915,7 @@ msgstr "依存するコレクション"
 msgid "Dependent collections could not be displayed."
 msgstr "依存するコレクションを表示できませんでした。"
 
-#: src/components/collection-list/collection-list.tsx:107
+#: src/components/collection-list/collection-list.tsx:98
 msgid "Deprecate"
 msgstr "非推奨"
 
@@ -1050,7 +1054,7 @@ msgstr "リソースの編集"
 msgid "Edit user"
 msgstr "ユーザーの編集"
 
-#: src/components/user-form/user-form.tsx:89
+#: src/components/user-form/user-form.tsx:91
 #: src/containers/group-management/group-detail.tsx:737
 #: src/containers/group-management/group-detail.tsx:809
 #: src/containers/user-management/user-list.tsx:174
@@ -1329,7 +1333,7 @@ msgstr "このレジストリーでの実行環境の検索"
 msgid "Finished at"
 msgstr "終了日時"
 
-#: src/components/user-form/user-form.tsx:87
+#: src/components/user-form/user-form.tsx:89
 #: src/containers/group-management/group-detail.tsx:729
 #: src/containers/group-management/group-detail.tsx:819
 #: src/containers/user-management/user-list.tsx:166
@@ -1383,8 +1387,8 @@ msgstr "グループ \"{group}\" が正常に削除されました。"
 msgid "Group list"
 msgstr "グループリスト"
 
-#: src/components/user-form/user-form.tsx:147
-#: src/components/user-form/user-form.tsx:161
+#: src/components/user-form/user-form.tsx:149
+#: src/components/user-form/user-form.tsx:163
 #: src/constants.tsx:55
 #: src/containers/group-management/group-detail.tsx:230
 #: src/containers/group-management/group-list.tsx:145
@@ -1397,7 +1401,7 @@ msgstr "グループ"
 #: src/components/execution-environment/repository-form.tsx:486
 #: src/components/namespace-form/namespace-form.tsx:124
 #: src/components/namespace-modal/namespace-modal.tsx:180
-#: src/components/user-form/user-form.tsx:296
+#: src/components/user-form/user-form.tsx:298
 #: src/containers/group-management/group-list.tsx:517
 msgid "Groups list could not be displayed."
 msgstr "グループリストを表示できませんでした。"
@@ -1551,7 +1555,7 @@ msgstr "キーワード"
 msgid "Last modified"
 msgstr "最終更新日"
 
-#: src/components/user-form/user-form.tsx:88
+#: src/components/user-form/user-form.tsx:90
 #: src/containers/group-management/group-detail.tsx:733
 #: src/containers/group-management/group-detail.tsx:814
 #: src/containers/user-management/user-list.tsx:170
@@ -1602,7 +1606,7 @@ msgstr "リンク URL"
 msgid "Link text"
 msgstr "リンクテキスト"
 
-#: src/components/collection-list/collection-list.tsx:49
+#: src/components/collection-list/collection-list.tsx:48
 #: src/containers/search/search.tsx:267
 msgid "List of Collections"
 msgstr "コレクションの一覧"
@@ -1885,7 +1889,7 @@ msgstr "影響を受けるユーザーはありません。"
 msgid "No users yet"
 msgstr "まだユーザーはありません"
 
-#: src/components/user-form/user-form.tsx:202
+#: src/components/user-form/user-form.tsx:204
 msgid "Not a super user"
 msgstr "スーパーユーザーではありません"
 
@@ -1944,16 +1948,16 @@ msgid "Partners"
 msgstr "パートナー"
 
 #: src/components/repositories/remote-form.tsx:389
-#: src/components/user-form/user-form.tsx:92
+#: src/components/user-form/user-form.tsx:94
 #: src/containers/login/login.tsx:55
 msgid "Password"
 msgstr "パスワード"
 
-#: src/components/user-form/user-form.tsx:110
+#: src/components/user-form/user-form.tsx:112
 msgid "Password confirmation"
 msgstr "パスワードの確認"
 
-#: src/components/user-form/user-form.tsx:107
+#: src/components/user-form/user-form.tsx:109
 msgid "Passwords do not match"
 msgstr "パスワードが一致しません"
 
@@ -2321,7 +2325,7 @@ msgstr "リポジトリー名"
 msgid "Requires Ansible"
 msgstr "Ansible が必要です"
 
-#: src/components/user-form/user-form.tsx:253
+#: src/components/user-form/user-form.tsx:255
 msgid "Requires super user permissions to edit."
 msgstr "編集にはスーパーユーザー権限が必要です。"
 
@@ -2353,7 +2357,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
 #: src/components/repositories/remote-form.tsx:142
-#: src/components/user-form/user-form.tsx:221
+#: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:197
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 #: src/containers/group-management/group-detail.tsx:433
@@ -2422,7 +2426,7 @@ msgstr "コレクションバージョンの選択"
 msgid "Select file"
 msgstr "ファイルの選択"
 
-#: src/components/user-form/user-form.tsx:173
+#: src/components/user-form/user-form.tsx:175
 msgid "Select groups"
 msgstr "グループの選択"
 
@@ -2631,16 +2635,16 @@ msgstr "クリップボードへのコピーに成功しました!"
 #~ msgid "Successfully stopped task."
 #~ msgstr "Successfully stopped task."
 
-#: src/components/user-form/user-form.tsx:201
+#: src/components/user-form/user-form.tsx:203
 #: src/containers/user-management/user-list.tsx:358
 msgid "Super user"
 msgstr "スーパーユーザー"
 
-#: src/components/user-form/user-form.tsx:256
+#: src/components/user-form/user-form.tsx:258
 msgid "Super users can't disable themselves."
 msgstr "スーパーユーザーは、自分自身を無効にできません。"
 
-#: src/components/user-form/user-form.tsx:193
+#: src/components/user-form/user-form.tsx:195
 #: src/containers/user-management/user-list.tsx:355
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "スーパーユーザーには、所属するグループに関係なく、すべてのシステムパーミッションが割り当てられています。"
@@ -2757,8 +2761,8 @@ msgid "Tasks will appear once created."
 msgstr "タスクは作成後に表示されます。"
 
 #: src/components/collection-list/collection-list.tsx:103
-msgid "Temporarily disabled due to sync issues. (AAH-1237)"
-msgstr "同期の問題により一時的に無効です。(AAH-1237)"
+#~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
+#~ msgstr "同期の問題により一時的に無効です。(AAH-1237)"
 
 #: src/components/namespace-form/namespace-form.tsx:192
 msgid "Text: {0}"
@@ -2910,7 +2914,7 @@ msgstr "URL を空白にすることはできません。"
 msgid "URL: {0}"
 msgstr "URL: {0}"
 
-#: src/components/collection-list/collection-list.tsx:107
+#: src/components/collection-list/collection-list.tsx:98
 msgid "Undeprecate"
 msgstr "非推奨解除"
 
@@ -2936,7 +2940,7 @@ msgstr "アップロード"
 msgid "Upload collection"
 msgstr "コレクションのアップロード"
 
-#: src/components/collection-list/collection-list.tsx:89
+#: src/components/collection-list/collection-list.tsx:88
 msgid "Upload new version"
 msgstr "新規バージョンのアップロード"
 
@@ -3042,13 +3046,13 @@ msgstr "エラーの詳細"
 msgid "User list"
 msgstr "ユーザーリスト"
 
-#: src/components/user-form/user-form.tsx:188
+#: src/components/user-form/user-form.tsx:190
 msgid "User type"
 msgstr "ユーザータイプ"
 
 #: src/components/about-modal/about-modal.tsx:85
 #: src/components/repositories/remote-form.tsx:354
-#: src/components/user-form/user-form.tsx:86
+#: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:725
 #: src/containers/group-management/group-detail.tsx:804
 #: src/containers/login/login.tsx:52

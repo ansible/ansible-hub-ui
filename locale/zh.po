@@ -272,7 +272,7 @@ msgstr "批准"
 msgid "Approved"
 msgstr "已批准"
 
-#: src/components/user-form/user-form.tsx:135
+#: src/components/user-form/user-form.tsx:137
 msgid "Authentication provider"
 msgstr "身份验证供应商"
 
@@ -315,7 +315,7 @@ msgstr "在未将一个发布附加到它时，无法远程更新。"
 #: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:35
 #: src/components/signing/sign-single-certificate-modal.tsx:35
-#: src/components/user-form/user-form.tsx:224
+#: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail.tsx:440
@@ -674,8 +674,12 @@ msgid "Create a new namespace"
 msgstr "创建新的命名空间,"
 
 #: src/components/user-form/user-form.tsx:97
-msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "使用至少 9 个字符创建密码，包括特殊字符，例如 <!@$%>。避免使用通用名称或表达式。"
+#~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+#~ msgstr "使用至少 9 个字符创建密码，包括特殊字符，例如 <!@$%>。避免使用通用名称或表达式。"
+
+#: src/components/user-form/user-form.tsx:99
+msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+msgstr ""
 
 #: src/constants.tsx:165
 #: src/constants.tsx:205
@@ -911,7 +915,7 @@ msgstr "依赖性集合"
 msgid "Dependent collections could not be displayed."
 msgstr "无法显示依赖集合。"
 
-#: src/components/collection-list/collection-list.tsx:107
+#: src/components/collection-list/collection-list.tsx:98
 msgid "Deprecate"
 msgstr "弃用"
 
@@ -1050,7 +1054,7 @@ msgstr "编辑资源"
 msgid "Edit user"
 msgstr "编辑用户"
 
-#: src/components/user-form/user-form.tsx:89
+#: src/components/user-form/user-form.tsx:91
 #: src/containers/group-management/group-detail.tsx:737
 #: src/containers/group-management/group-detail.tsx:809
 #: src/containers/user-management/user-list.tsx:174
@@ -1329,7 +1333,7 @@ msgstr "在此 registry 中查找执行环境"
 msgid "Finished at"
 msgstr "完成于"
 
-#: src/components/user-form/user-form.tsx:87
+#: src/components/user-form/user-form.tsx:89
 #: src/containers/group-management/group-detail.tsx:729
 #: src/containers/group-management/group-detail.tsx:819
 #: src/containers/user-management/user-list.tsx:166
@@ -1383,8 +1387,8 @@ msgstr "组 \"{group}\" 已成功删除。"
 msgid "Group list"
 msgstr "组列表"
 
-#: src/components/user-form/user-form.tsx:147
-#: src/components/user-form/user-form.tsx:161
+#: src/components/user-form/user-form.tsx:149
+#: src/components/user-form/user-form.tsx:163
 #: src/constants.tsx:55
 #: src/containers/group-management/group-detail.tsx:230
 #: src/containers/group-management/group-list.tsx:145
@@ -1397,7 +1401,7 @@ msgstr "组"
 #: src/components/execution-environment/repository-form.tsx:486
 #: src/components/namespace-form/namespace-form.tsx:124
 #: src/components/namespace-modal/namespace-modal.tsx:180
-#: src/components/user-form/user-form.tsx:296
+#: src/components/user-form/user-form.tsx:298
 #: src/containers/group-management/group-list.tsx:517
 msgid "Groups list could not be displayed."
 msgstr "无法显示组列表。"
@@ -1551,7 +1555,7 @@ msgstr "关键字"
 msgid "Last modified"
 msgstr "最后修改"
 
-#: src/components/user-form/user-form.tsx:88
+#: src/components/user-form/user-form.tsx:90
 #: src/containers/group-management/group-detail.tsx:733
 #: src/containers/group-management/group-detail.tsx:814
 #: src/containers/user-management/user-list.tsx:170
@@ -1602,7 +1606,7 @@ msgstr "链接 URL"
 msgid "Link text"
 msgstr "链接文本"
 
-#: src/components/collection-list/collection-list.tsx:49
+#: src/components/collection-list/collection-list.tsx:48
 #: src/containers/search/search.tsx:267
 msgid "List of Collections"
 msgstr "集合列表"
@@ -1885,7 +1889,7 @@ msgstr "任何用户都不会受到影响。"
 msgid "No users yet"
 msgstr "还没有用户"
 
-#: src/components/user-form/user-form.tsx:202
+#: src/components/user-form/user-form.tsx:204
 msgid "Not a super user"
 msgstr "不是一个超级用户"
 
@@ -1944,16 +1948,16 @@ msgid "Partners"
 msgstr "合作伙伴"
 
 #: src/components/repositories/remote-form.tsx:389
-#: src/components/user-form/user-form.tsx:92
+#: src/components/user-form/user-form.tsx:94
 #: src/containers/login/login.tsx:55
 msgid "Password"
 msgstr "密码"
 
-#: src/components/user-form/user-form.tsx:110
+#: src/components/user-form/user-form.tsx:112
 msgid "Password confirmation"
 msgstr "确认密码"
 
-#: src/components/user-form/user-form.tsx:107
+#: src/components/user-form/user-form.tsx:109
 msgid "Passwords do not match"
 msgstr "密码不匹配"
 
@@ -2321,7 +2325,7 @@ msgstr "仓库名称"
 msgid "Requires Ansible"
 msgstr "需要 Ansible"
 
-#: src/components/user-form/user-form.tsx:253
+#: src/components/user-form/user-form.tsx:255
 msgid "Requires super user permissions to edit."
 msgstr "需要超级用户权限进行编辑。"
 
@@ -2353,7 +2357,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
 #: src/components/repositories/remote-form.tsx:142
-#: src/components/user-form/user-form.tsx:221
+#: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:197
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 #: src/containers/group-management/group-detail.tsx:433
@@ -2422,7 +2426,7 @@ msgstr "选择集合版本"
 msgid "Select file"
 msgstr "选择文件"
 
-#: src/components/user-form/user-form.tsx:173
+#: src/components/user-form/user-form.tsx:175
 msgid "Select groups"
 msgstr "选择组"
 
@@ -2631,16 +2635,16 @@ msgstr "成功复制至剪贴板！"
 #~ msgid "Successfully stopped task."
 #~ msgstr "Successfully stopped task."
 
-#: src/components/user-form/user-form.tsx:201
+#: src/components/user-form/user-form.tsx:203
 #: src/containers/user-management/user-list.tsx:358
 msgid "Super user"
 msgstr "超级用户"
 
-#: src/components/user-form/user-form.tsx:256
+#: src/components/user-form/user-form.tsx:258
 msgid "Super users can't disable themselves."
 msgstr "超级用户无法禁用自身。"
 
-#: src/components/user-form/user-form.tsx:193
+#: src/components/user-form/user-form.tsx:195
 #: src/containers/user-management/user-list.tsx:355
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "超级用户具有所有系统权限，无论他们所在的组是什么。"
@@ -2757,8 +2761,8 @@ msgid "Tasks will appear once created."
 msgstr "任务在创建后将显示。"
 
 #: src/components/collection-list/collection-list.tsx:103
-msgid "Temporarily disabled due to sync issues. (AAH-1237)"
-msgstr "因同步问题而临时禁用。(AAH-1237)"
+#~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
+#~ msgstr "因同步问题而临时禁用。(AAH-1237)"
 
 #: src/components/namespace-form/namespace-form.tsx:192
 msgid "Text: {0}"
@@ -2910,7 +2914,7 @@ msgstr "URL 不能为空。"
 msgid "URL: {0}"
 msgstr "URL：{0}"
 
-#: src/components/collection-list/collection-list.tsx:107
+#: src/components/collection-list/collection-list.tsx:98
 msgid "Undeprecate"
 msgstr "取消弃用"
 
@@ -2936,7 +2940,7 @@ msgstr "上传"
 msgid "Upload collection"
 msgstr "上传集合"
 
-#: src/components/collection-list/collection-list.tsx:89
+#: src/components/collection-list/collection-list.tsx:88
 msgid "Upload new version"
 msgstr "上传新版本"
 
@@ -3042,13 +3046,13 @@ msgstr "用户详情"
 msgid "User list"
 msgstr "用户列表"
 
-#: src/components/user-form/user-form.tsx:188
+#: src/components/user-form/user-form.tsx:190
 msgid "User type"
 msgstr "用户类型"
 
 #: src/components/about-modal/about-modal.tsx:85
 #: src/components/repositories/remote-form.tsx:354
-#: src/components/user-form/user-form.tsx:86
+#: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:725
 #: src/containers/group-management/group-detail.tsx:804
 #: src/containers/login/login.tsx:52

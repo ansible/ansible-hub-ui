@@ -272,7 +272,7 @@ msgstr "승인"
 msgid "Approved"
 msgstr "승인됨"
 
-#: src/components/user-form/user-form.tsx:135
+#: src/components/user-form/user-form.tsx:137
 msgid "Authentication provider"
 msgstr "인증 제공자"
 
@@ -315,7 +315,7 @@ msgstr "배포판이 연결되어 있지 않고 원격으로 업데이트할 수
 #: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:35
 #: src/components/signing/sign-single-certificate-modal.tsx:35
-#: src/components/user-form/user-form.tsx:224
+#: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail.tsx:440
@@ -674,8 +674,12 @@ msgid "Create a new namespace"
 msgstr "새 네임스페이스 생성"
 
 #: src/components/user-form/user-form.tsx:97
-msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "일반 이름이나 표현식을 사용하지 않는 특수 문자 (예: <!@$%>)를 포함하여 최소 9자로 암호를 생성합니다."
+#~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+#~ msgstr "일반 이름이나 표현식을 사용하지 않는 특수 문자 (예: <!@$%>)를 포함하여 최소 9자로 암호를 생성합니다."
+
+#: src/components/user-form/user-form.tsx:99
+msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+msgstr ""
 
 #: src/constants.tsx:165
 #: src/constants.tsx:205
@@ -911,7 +915,7 @@ msgstr "종속 컬렉션"
 msgid "Dependent collections could not be displayed."
 msgstr "종속 컬렉션을 표시할 수 없습니다."
 
-#: src/components/collection-list/collection-list.tsx:107
+#: src/components/collection-list/collection-list.tsx:98
 msgid "Deprecate"
 msgstr "더 이상 사용되지 않음"
 
@@ -1050,7 +1054,7 @@ msgstr "리소스 편집"
 msgid "Edit user"
 msgstr "사용자 편집"
 
-#: src/components/user-form/user-form.tsx:89
+#: src/components/user-form/user-form.tsx:91
 #: src/containers/group-management/group-detail.tsx:737
 #: src/containers/group-management/group-detail.tsx:809
 #: src/containers/user-management/user-list.tsx:174
@@ -1329,7 +1333,7 @@ msgstr "이 레지스트리에서 실행 환경 찾기"
 msgid "Finished at"
 msgstr "완료"
 
-#: src/components/user-form/user-form.tsx:87
+#: src/components/user-form/user-form.tsx:89
 #: src/containers/group-management/group-detail.tsx:729
 #: src/containers/group-management/group-detail.tsx:819
 #: src/containers/user-management/user-list.tsx:166
@@ -1383,8 +1387,8 @@ msgstr "그룹 \"{group}\"이/가 성공적으로 삭제되었습니다."
 msgid "Group list"
 msgstr "그룹 목록"
 
-#: src/components/user-form/user-form.tsx:147
-#: src/components/user-form/user-form.tsx:161
+#: src/components/user-form/user-form.tsx:149
+#: src/components/user-form/user-form.tsx:163
 #: src/constants.tsx:55
 #: src/containers/group-management/group-detail.tsx:230
 #: src/containers/group-management/group-list.tsx:145
@@ -1397,7 +1401,7 @@ msgstr "그룹"
 #: src/components/execution-environment/repository-form.tsx:486
 #: src/components/namespace-form/namespace-form.tsx:124
 #: src/components/namespace-modal/namespace-modal.tsx:180
-#: src/components/user-form/user-form.tsx:296
+#: src/components/user-form/user-form.tsx:298
 #: src/containers/group-management/group-list.tsx:517
 msgid "Groups list could not be displayed."
 msgstr "그룹 목록을 표시할 수 없습니다."
@@ -1551,7 +1555,7 @@ msgstr "키워드"
 msgid "Last modified"
 msgstr "마지막으로 변경된 사항"
 
-#: src/components/user-form/user-form.tsx:88
+#: src/components/user-form/user-form.tsx:90
 #: src/containers/group-management/group-detail.tsx:733
 #: src/containers/group-management/group-detail.tsx:814
 #: src/containers/user-management/user-list.tsx:170
@@ -1602,7 +1606,7 @@ msgstr "링크 URL"
 msgid "Link text"
 msgstr "링크 텍스트"
 
-#: src/components/collection-list/collection-list.tsx:49
+#: src/components/collection-list/collection-list.tsx:48
 #: src/containers/search/search.tsx:267
 msgid "List of Collections"
 msgstr "컬렉션 목록"
@@ -1885,7 +1889,7 @@ msgstr "사용자에게 영향을 미치지 않습니다."
 msgid "No users yet"
 msgstr "아직 사용자가 없음"
 
-#: src/components/user-form/user-form.tsx:202
+#: src/components/user-form/user-form.tsx:204
 msgid "Not a super user"
 msgstr "슈퍼 유저가 아닙니다"
 
@@ -1944,16 +1948,16 @@ msgid "Partners"
 msgstr "파트너"
 
 #: src/components/repositories/remote-form.tsx:389
-#: src/components/user-form/user-form.tsx:92
+#: src/components/user-form/user-form.tsx:94
 #: src/containers/login/login.tsx:55
 msgid "Password"
 msgstr "암호"
 
-#: src/components/user-form/user-form.tsx:110
+#: src/components/user-form/user-form.tsx:112
 msgid "Password confirmation"
 msgstr "암호 확인"
 
-#: src/components/user-form/user-form.tsx:107
+#: src/components/user-form/user-form.tsx:109
 msgid "Passwords do not match"
 msgstr "암호가 일치하지 않음"
 
@@ -2321,7 +2325,7 @@ msgstr "리포지터리 이름"
 msgid "Requires Ansible"
 msgstr "Ansible 필요"
 
-#: src/components/user-form/user-form.tsx:253
+#: src/components/user-form/user-form.tsx:255
 msgid "Requires super user permissions to edit."
 msgstr "편집하려면 슈퍼 사용자 권한이 필요합니다."
 
@@ -2353,7 +2357,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
 #: src/components/repositories/remote-form.tsx:142
-#: src/components/user-form/user-form.tsx:221
+#: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:197
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 #: src/containers/group-management/group-detail.tsx:433
@@ -2422,7 +2426,7 @@ msgstr "컬렉션 버전 선택"
 msgid "Select file"
 msgstr "파일 선택"
 
-#: src/components/user-form/user-form.tsx:173
+#: src/components/user-form/user-form.tsx:175
 msgid "Select groups"
 msgstr "그룹 선택"
 
@@ -2631,16 +2635,16 @@ msgstr "클립보드에 성공적으로 복사되었습니다."
 #~ msgid "Successfully stopped task."
 #~ msgstr "Successfully stopped task."
 
-#: src/components/user-form/user-form.tsx:201
+#: src/components/user-form/user-form.tsx:203
 #: src/containers/user-management/user-list.tsx:358
 msgid "Super user"
 msgstr "슈퍼유저"
 
-#: src/components/user-form/user-form.tsx:256
+#: src/components/user-form/user-form.tsx:258
 msgid "Super users can't disable themselves."
 msgstr "슈퍼유저는 자신을 비활성화할 수 없습니다."
 
-#: src/components/user-form/user-form.tsx:193
+#: src/components/user-form/user-form.tsx:195
 #: src/containers/user-management/user-list.tsx:355
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "슈퍼유저는 어떤 그룹에 있는지에 관계없이 모든 시스템 권한을 갖습니다."
@@ -2757,8 +2761,8 @@ msgid "Tasks will appear once created."
 msgstr "작업이 생성된 후 표시됩니다"
 
 #: src/components/collection-list/collection-list.tsx:103
-msgid "Temporarily disabled due to sync issues. (AAH-1237)"
-msgstr "동기화 문제로 인해 일시적으로 비활성화되었습니다. (AAH-1237)"
+#~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
+#~ msgstr "동기화 문제로 인해 일시적으로 비활성화되었습니다. (AAH-1237)"
 
 #: src/components/namespace-form/namespace-form.tsx:192
 msgid "Text: {0}"
@@ -2910,7 +2914,7 @@ msgstr "URL은 비워 둘 수 없습니다."
 msgid "URL: {0}"
 msgstr "URL: {0}"
 
-#: src/components/collection-list/collection-list.tsx:107
+#: src/components/collection-list/collection-list.tsx:98
 msgid "Undeprecate"
 msgstr "사용되지 않음"
 
@@ -2936,7 +2940,7 @@ msgstr "업로드"
 msgid "Upload collection"
 msgstr "컬렉션 업로드"
 
-#: src/components/collection-list/collection-list.tsx:89
+#: src/components/collection-list/collection-list.tsx:88
 msgid "Upload new version"
 msgstr "새 버전 업로드"
 
@@ -3042,13 +3046,13 @@ msgstr "사용자 세부 정보"
 msgid "User list"
 msgstr "사용자 목록"
 
-#: src/components/user-form/user-form.tsx:188
+#: src/components/user-form/user-form.tsx:190
 msgid "User type"
 msgstr "사용자 유형"
 
 #: src/components/about-modal/about-modal.tsx:85
 #: src/components/repositories/remote-form.tsx:354
-#: src/components/user-form/user-form.tsx:86
+#: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:725
 #: src/containers/group-management/group-detail.tsx:804
 #: src/containers/login/login.tsx:52

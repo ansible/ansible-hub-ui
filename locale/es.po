@@ -274,7 +274,7 @@ msgstr "Aprobar"
 msgid "Approved"
 msgstr "Aprobado"
 
-#: src/components/user-form/user-form.tsx:135
+#: src/components/user-form/user-form.tsx:137
 msgid "Authentication provider"
 msgstr "Proveedor de autenticación"
 
@@ -317,7 +317,7 @@ msgstr "No se puede actualizar el control remoto sin una distribución adjunta."
 #: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:35
 #: src/components/signing/sign-single-certificate-modal.tsx:35
-#: src/components/user-form/user-form.tsx:224
+#: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail.tsx:440
@@ -676,8 +676,12 @@ msgid "Create a new namespace"
 msgstr "Crear un nuevo espacio de nombres"
 
 #: src/components/user-form/user-form.tsx:97
-msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "Cree una contraseña con, al menos, 9 caracteres, incluidos los caracteres especiales, por ejemplo, <!@$%>. Evite utilizar nombres o expresiones comunes."
+#~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+#~ msgstr "Cree una contraseña con, al menos, 9 caracteres, incluidos los caracteres especiales, por ejemplo, <!@$%>. Evite utilizar nombres o expresiones comunes."
+
+#: src/components/user-form/user-form.tsx:99
+msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+msgstr ""
 
 #: src/constants.tsx:165
 #: src/constants.tsx:205
@@ -913,7 +917,7 @@ msgstr "Colecciones dependientes"
 msgid "Dependent collections could not be displayed."
 msgstr "No se pudieron mostrar las colecciones dependientes."
 
-#: src/components/collection-list/collection-list.tsx:107
+#: src/components/collection-list/collection-list.tsx:98
 msgid "Deprecate"
 msgstr "Pasar a desuso"
 
@@ -1052,7 +1056,7 @@ msgstr "Editar recursos"
 msgid "Edit user"
 msgstr "Editar el usuario"
 
-#: src/components/user-form/user-form.tsx:89
+#: src/components/user-form/user-form.tsx:91
 #: src/containers/group-management/group-detail.tsx:737
 #: src/containers/group-management/group-detail.tsx:809
 #: src/containers/user-management/user-list.tsx:174
@@ -1331,7 +1335,7 @@ msgstr "Buscar entornos de ejecución en este registro"
 msgid "Finished at"
 msgstr "Finalizado a las"
 
-#: src/components/user-form/user-form.tsx:87
+#: src/components/user-form/user-form.tsx:89
 #: src/containers/group-management/group-detail.tsx:729
 #: src/containers/group-management/group-detail.tsx:819
 #: src/containers/user-management/user-list.tsx:166
@@ -1385,8 +1389,8 @@ msgstr "El grupo \"{group}\" se eliminó correctamente."
 msgid "Group list"
 msgstr "Lista de grupos"
 
-#: src/components/user-form/user-form.tsx:147
-#: src/components/user-form/user-form.tsx:161
+#: src/components/user-form/user-form.tsx:149
+#: src/components/user-form/user-form.tsx:163
 #: src/constants.tsx:55
 #: src/containers/group-management/group-detail.tsx:230
 #: src/containers/group-management/group-list.tsx:145
@@ -1399,7 +1403,7 @@ msgstr "Grupos"
 #: src/components/execution-environment/repository-form.tsx:486
 #: src/components/namespace-form/namespace-form.tsx:124
 #: src/components/namespace-modal/namespace-modal.tsx:180
-#: src/components/user-form/user-form.tsx:296
+#: src/components/user-form/user-form.tsx:298
 #: src/containers/group-management/group-list.tsx:517
 msgid "Groups list could not be displayed."
 msgstr "No se pudo mostrar la lista de grupos."
@@ -1553,7 +1557,7 @@ msgstr "Palabras clave"
 msgid "Last modified"
 msgstr "Última modificación"
 
-#: src/components/user-form/user-form.tsx:88
+#: src/components/user-form/user-form.tsx:90
 #: src/containers/group-management/group-detail.tsx:733
 #: src/containers/group-management/group-detail.tsx:814
 #: src/containers/user-management/user-list.tsx:170
@@ -1604,7 +1608,7 @@ msgstr "Enlace URL"
 msgid "Link text"
 msgstr "Texto del enlace"
 
-#: src/components/collection-list/collection-list.tsx:49
+#: src/components/collection-list/collection-list.tsx:48
 #: src/containers/search/search.tsx:267
 msgid "List of Collections"
 msgstr "Lista de colecciones"
@@ -1887,7 +1891,7 @@ msgstr "Ningún usuario se verá afectado."
 msgid "No users yet"
 msgstr "No existe ningún usuario"
 
-#: src/components/user-form/user-form.tsx:202
+#: src/components/user-form/user-form.tsx:204
 msgid "Not a super user"
 msgstr "No es un superusuario"
 
@@ -1946,16 +1950,16 @@ msgid "Partners"
 msgstr "Socios"
 
 #: src/components/repositories/remote-form.tsx:389
-#: src/components/user-form/user-form.tsx:92
+#: src/components/user-form/user-form.tsx:94
 #: src/containers/login/login.tsx:55
 msgid "Password"
 msgstr "Contraseña"
 
-#: src/components/user-form/user-form.tsx:110
+#: src/components/user-form/user-form.tsx:112
 msgid "Password confirmation"
 msgstr "Confirmación de la contraseña"
 
-#: src/components/user-form/user-form.tsx:107
+#: src/components/user-form/user-form.tsx:109
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
@@ -2323,7 +2327,7 @@ msgstr "Nombre del repositorio"
 msgid "Requires Ansible"
 msgstr "Requiere Ansible"
 
-#: src/components/user-form/user-form.tsx:253
+#: src/components/user-form/user-form.tsx:255
 msgid "Requires super user permissions to edit."
 msgstr "Requiere permisos de superusuario para su edición."
 
@@ -2355,7 +2359,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/group-management/group-modal.tsx:56
 #: src/components/repositories/remote-form.tsx:142
-#: src/components/user-form/user-form.tsx:221
+#: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:197
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 #: src/containers/group-management/group-detail.tsx:433
@@ -2424,7 +2428,7 @@ msgstr "Seleccione la versión de la colección"
 msgid "Select file"
 msgstr "Seleccionar archivo"
 
-#: src/components/user-form/user-form.tsx:173
+#: src/components/user-form/user-form.tsx:175
 msgid "Select groups"
 msgstr "Seleccionar grupos"
 
@@ -2633,16 +2637,16 @@ msgstr "Copiado correctamente en el portapapeles"
 #~ msgid "Successfully stopped task."
 #~ msgstr "Successfully stopped task."
 
-#: src/components/user-form/user-form.tsx:201
+#: src/components/user-form/user-form.tsx:203
 #: src/containers/user-management/user-list.tsx:358
 msgid "Super user"
 msgstr "Súper usuario"
 
-#: src/components/user-form/user-form.tsx:256
+#: src/components/user-form/user-form.tsx:258
 msgid "Super users can't disable themselves."
 msgstr "Los superusuarios no pueden desactivarse a sí mismos."
 
-#: src/components/user-form/user-form.tsx:193
+#: src/components/user-form/user-form.tsx:195
 #: src/containers/user-management/user-list.tsx:355
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "Los superusuarios tienen todos los permisos del sistema independientemente de los grupos a los que pertenezcan."
@@ -2759,8 +2763,8 @@ msgid "Tasks will appear once created."
 msgstr "Las tareas aparecerán una vez creadas."
 
 #: src/components/collection-list/collection-list.tsx:103
-msgid "Temporarily disabled due to sync issues. (AAH-1237)"
-msgstr "Deshabilitado temporalmente debido a problemas de sincronización. (AAH-1237)"
+#~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
+#~ msgstr "Deshabilitado temporalmente debido a problemas de sincronización. (AAH-1237)"
 
 #: src/components/namespace-form/namespace-form.tsx:192
 msgid "Text: {0}"
@@ -2912,7 +2916,7 @@ msgstr "La URL no debe estar vacía."
 msgid "URL: {0}"
 msgstr "URL: {0}"
 
-#: src/components/collection-list/collection-list.tsx:107
+#: src/components/collection-list/collection-list.tsx:98
 msgid "Undeprecate"
 msgstr "Cancelar paso a desuso"
 
@@ -2938,7 +2942,7 @@ msgstr "Subir"
 msgid "Upload collection"
 msgstr "Subir la colección"
 
-#: src/components/collection-list/collection-list.tsx:89
+#: src/components/collection-list/collection-list.tsx:88
 msgid "Upload new version"
 msgstr "Subir una nueva versión"
 
@@ -3044,13 +3048,13 @@ msgstr "Detalles del usuario"
 msgid "User list"
 msgstr "Lista de usuarios"
 
-#: src/components/user-form/user-form.tsx:188
+#: src/components/user-form/user-form.tsx:190
 msgid "User type"
 msgstr "Tipo de usuario"
 
 #: src/components/about-modal/about-modal.tsx:85
 #: src/components/repositories/remote-form.tsx:354
-#: src/components/user-form/user-form.tsx:86
+#: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:725
 #: src/containers/group-management/group-detail.tsx:804
 #: src/containers/login/login.tsx:52
