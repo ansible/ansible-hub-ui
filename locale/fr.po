@@ -233,7 +233,7 @@ msgstr "Approuver"
 msgid "Approved"
 msgstr "Approuvé"
 
-#: src/components/user-form/user-form.tsx:134
+#: src/components/user-form/user-form.tsx:136
 msgid "Authentication provider"
 msgstr "Fournisseur d’authentification"
 
@@ -271,7 +271,7 @@ msgstr "Impossible de mettre à jour l’utilisateur distant sans qu'une distrib
 #: src/components/group-management/group-modal.tsx:58
 #: src/components/namespace-modal/namespace-modal.tsx:114
 #: src/components/repositories/remote-form.tsx:171
-#: src/components/user-form/user-form.tsx:224
+#: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:195
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:151
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:134
@@ -585,8 +585,12 @@ msgid "Create a new namespace"
 msgstr "Créer un nouvel espace de nom"
 
 #: src/components/user-form/user-form.tsx:96
-msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "Créez un mot de passe comportant au moins 9 caractères, y compris les caractères spéciaux, par exemple <!@$%>. Évitez d'utiliser des noms communs ou des expressions."
+#~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+#~ msgstr "Créez un mot de passe comportant au moins 9 caractères, y compris les caractères spéciaux, par exemple <!@$%>. Évitez d'utiliser des noms communs ou des expressions."
+
+#: src/components/user-form/user-form.tsx:98
+msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
+msgstr ""
 
 #: src/constants.tsx:165
 #: src/constants.tsx:205
@@ -925,7 +929,7 @@ msgstr "Modifier les ressources"
 msgid "Edit user"
 msgstr "Modifier l’utilisateur"
 
-#: src/components/user-form/user-form.tsx:88
+#: src/components/user-form/user-form.tsx:90
 #: src/containers/group-management/group-detail.tsx:686
 #: src/containers/group-management/group-detail.tsx:751
 #: src/containers/user-management/user-list.tsx:174
@@ -1004,7 +1008,7 @@ msgstr "Erreur de chargement du groupe."
 #: src/components/execution-environment/repository-form.tsx:476
 #: src/components/namespace-form/namespace-form.tsx:122
 #: src/components/namespace-modal/namespace-modal.tsx:171
-#: src/components/user-form/user-form.tsx:295
+#: src/components/user-form/user-form.tsx:297
 #: src/containers/group-management/group-list.tsx:476
 msgid "Error loading groups."
 msgstr "Erreur de chargement des groupes."
@@ -1153,7 +1157,7 @@ msgstr "Trouver les environnements d'exécution dans ce registre"
 msgid "Finished at"
 msgstr "Terminé"
 
-#: src/components/user-form/user-form.tsx:86
+#: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:678
 #: src/containers/group-management/group-detail.tsx:761
 #: src/containers/user-management/user-list.tsx:166
@@ -1191,8 +1195,8 @@ msgstr "Groupe"
 msgid "Group list"
 msgstr "Liste des groupes"
 
-#: src/components/user-form/user-form.tsx:147
-#: src/components/user-form/user-form.tsx:161
+#: src/components/user-form/user-form.tsx:149
+#: src/components/user-form/user-form.tsx:163
 #: src/constants.tsx:55
 #: src/containers/group-management/group-detail.tsx:211
 #: src/containers/group-management/group-list.tsx:132
@@ -1330,7 +1334,7 @@ msgstr "Mots clés"
 msgid "Last modified"
 msgstr "Dernière modification"
 
-#: src/components/user-form/user-form.tsx:87
+#: src/components/user-form/user-form.tsx:89
 #: src/containers/group-management/group-detail.tsx:682
 #: src/containers/group-management/group-detail.tsx:756
 #: src/containers/user-management/user-list.tsx:170
@@ -1639,7 +1643,7 @@ msgstr "Aucun utilisateur ne sera affecté."
 msgid "No users yet"
 msgstr "Aucun utilisateur existant"
 
-#: src/components/user-form/user-form.tsx:202
+#: src/components/user-form/user-form.tsx:204
 msgid "Not a super user"
 msgstr "Ne correspond pas à un super utilisateur"
 
@@ -1690,16 +1694,16 @@ msgid "Partners"
 msgstr "Partenaires"
 
 #: src/components/repositories/remote-form.tsx:380
-#: src/components/user-form/user-form.tsx:91
+#: src/components/user-form/user-form.tsx:93
 #: src/containers/login/login.tsx:59
 msgid "Password"
 msgstr "Mot de passe"
 
-#: src/components/user-form/user-form.tsx:109
+#: src/components/user-form/user-form.tsx:111
 msgid "Password confirmation"
 msgstr "Confirmation du mot de passe"
 
-#: src/components/user-form/user-form.tsx:106
+#: src/components/user-form/user-form.tsx:108
 msgid "Passwords do not match"
 msgstr "Les mots de passe ne correspondent pas"
 
@@ -2040,7 +2044,7 @@ msgstr "Nom du référentiel"
 msgid "Requires Ansible"
 msgstr "Nécessite Ansible"
 
-#: src/components/user-form/user-form.tsx:253
+#: src/components/user-form/user-form.tsx:255
 msgid "Requires super user permissions to edit."
 msgstr "Nécessite des droits de super utilisateur pour être modifié."
 
@@ -2067,7 +2071,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/repository-form.tsx:158
 #: src/components/group-management/group-modal.tsx:55
 #: src/components/repositories/remote-form.tsx:164
-#: src/components/user-form/user-form.tsx:221
+#: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:192
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:139
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:125
@@ -2107,7 +2111,7 @@ msgstr "Sélectionnez la version de la collection"
 msgid "Select file"
 msgstr "Sélectionner un fichier"
 
-#: src/components/user-form/user-form.tsx:173
+#: src/components/user-form/user-form.tsx:175
 msgid "Select groups"
 msgstr "Sélectionner les groupes"
 
@@ -2245,16 +2249,16 @@ msgstr "On a réussi à supprimer un utilisateur d'un groupe."
 msgid "Successfully stopped task."
 msgstr "La tâche a été arrêtée avec succès."
 
-#: src/components/user-form/user-form.tsx:201
+#: src/components/user-form/user-form.tsx:203
 #: src/containers/user-management/user-list.tsx:355
 msgid "Super user"
 msgstr "Super utilisateur"
 
-#: src/components/user-form/user-form.tsx:256
+#: src/components/user-form/user-form.tsx:258
 msgid "Super users can't disable themselves."
 msgstr "Les super utilisateurs ne peuvent pas se désactiver eux-mêmes."
 
-#: src/components/user-form/user-form.tsx:193
+#: src/components/user-form/user-form.tsx:195
 #: src/containers/user-management/user-list.tsx:352
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "Les super utilisateurs disposent de toutes les autorisations du système, quels que soient les groupes auxquels ils appartiennent."
@@ -2567,12 +2571,12 @@ msgstr "Informations sur l'utilisateur"
 msgid "User list"
 msgstr "Liste des utilisateurs"
 
-#: src/components/user-form/user-form.tsx:188
+#: src/components/user-form/user-form.tsx:190
 msgid "User type"
 msgstr "Type d’utilisateur"
 
 #: src/components/repositories/remote-form.tsx:345
-#: src/components/user-form/user-form.tsx:85
+#: src/components/user-form/user-form.tsx:87
 #: src/containers/about-modal/about-modal.tsx:77
 #: src/containers/group-management/group-detail.tsx:674
 #: src/containers/group-management/group-detail.tsx:746
