@@ -2,6 +2,7 @@ import { PulpAPI } from './pulp';
 
 class API extends PulpAPI {
   apiPath = 'groups/';
+  useOrdering = false; // listRoles produces surprising order when using ?ordering=role, but works with ?sort=role
 
   listRoles(groupId, params?) {
     return super.list(params, `${this.apiPath}${groupId}/roles/`);
