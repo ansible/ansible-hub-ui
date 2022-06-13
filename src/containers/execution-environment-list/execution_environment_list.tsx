@@ -142,7 +142,8 @@ class ExecutionEnvironmentList extends React.Component<
         <Trans>Push container images</Trans> <ExternalLinkAltIcon />
       </Button>
     );
-    const addRemoteButton = (
+    const addRemoteButton = this.context.user.model_permissions
+      .add_containernamespace && (
       <Button
         onClick={() =>
           this.setState({
