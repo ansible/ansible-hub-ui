@@ -97,6 +97,10 @@ export class OwnersTab extends React.Component<IProps, IState> {
   }
 
   private renderGroups({ buttonAdd, groups }) {
+    const sortedGroups = [...groups].sort(({ name: a }, { name: b }) =>
+      a < b ? -1 : a > b ? 1 : 0,
+    );
+
     return (
       <>
         <div>
@@ -130,7 +134,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
             updateParams={() => null}
           />
           <tbody>
-            {groups.map((group, i) => this.renderGroupRow(group, i))}
+            {sortedGroups.map((group, i) => this.renderGroupRow(group, i))}
           </tbody>
         </table>
       </>
@@ -175,6 +179,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
     const { showRoleRemoveModal, showRoleSelectWizard } = this.state;
     const group = this.props.groups.find(({ id }) => Number(groupId) === id);
     const roles = group?.object_roles;
+    const sortedRoles = [...roles].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
 
     if (!group) {
       return null;
@@ -228,7 +233,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
             ],
           }}
         >
-          {roles.map((role, i) => (
+          {sortedRoles.map((role, i) => (
             <ExpandableRow
               key={i}
               rowIndex={i}
