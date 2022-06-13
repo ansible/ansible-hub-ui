@@ -2,6 +2,8 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './namespace-detail.scss';
 
+import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+
 import {
   withRouter,
   RouteComponentProps,
@@ -377,7 +379,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           !collection.deprecated,
           this.context.selectedRepo,
         )
-          .then(() => this.loadCollections())
+          .then((result) => {
+            const taskId = parsePulpIDFromURL(result.data.task);
+            return waitForTask(taskId).then(() => {
+              return this.loadCollections();
+            });
+          })
           .catch(() => {
             this.setState({
               warning: t`API Error: Failed to set deprecation.`,
