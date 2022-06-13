@@ -104,16 +104,6 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
       });
   };
 
-  const addRoles = (
-    <Button
-      onClick={() => setShowAddRolesModal(true)}
-      variant='primary'
-      data-cy='add-roles'
-    >
-      <Trans>Add roles</Trans>
-    </Button>
-  );
-
   const deleteRole = () => {
     const pulpId = parsePulpIDFromURL(selectedDeleteRole.pulp_href);
 
@@ -176,6 +166,16 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
       }
     });
   }
+
+  const addRoles = user.is_superuser && (
+    <Button
+      onClick={() => setShowAddRolesModal(true)}
+      variant='primary'
+      data-cy='add-roles'
+    >
+      <Trans>Add roles</Trans>
+    </Button>
+  );
 
   if (loading) {
     return (
@@ -312,9 +312,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                       ]}
                     />
                   </ToolbarItem>
-                  {user.model_permissions.change_group && (
-                    <ToolbarItem>{addRoles}</ToolbarItem>
-                  )}
+                  <ToolbarItem>{addRoles}</ToolbarItem>
                 </ToolbarGroup>
               </ToolbarContent>
             </Toolbar>
@@ -366,12 +364,14 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     <td>{role.role}</td>
                     <ListItemActions
                       kebabItems={[
-                        <DropdownItem
-                          key='remove-role'
-                          onClick={() => setSelectedDeleteRole(role)}
-                        >
-                          {t`Remove Role`}
-                        </DropdownItem>,
+                        user.is_superuser && (
+                          <DropdownItem
+                            key='remove-role'
+                            onClick={() => setSelectedDeleteRole(role)}
+                          >
+                            {t`Remove Role`}
+                          </DropdownItem>
+                        ),
                       ]}
                     />
                   </ExpandableRow>

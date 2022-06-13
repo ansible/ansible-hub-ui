@@ -1,6 +1,6 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { List, ListItem, Spinner } from '@patternfly/react-core';
+import { List, ListItem, Spinner, Alert } from '@patternfly/react-core';
 import { DeleteModal } from 'src/components/delete-modal/delete-modal';
 import { UserType } from 'src/api';
 
@@ -10,11 +10,13 @@ interface IProps {
   deleteAction: () => void;
   name: string;
   users?: UserType[];
+  canViewUsers?: boolean;
 }
 
 export class DeleteGroupModal extends React.Component<IProps> {
   render() {
-    const { cancelAction, count, deleteAction, name, users } = this.props;
+    const { cancelAction, count, deleteAction, name, users, canViewUsers } =
+      this.props;
 
     return (
       <DeleteModal
@@ -48,13 +50,26 @@ export class DeleteGroupModal extends React.Component<IProps> {
               </List>
             </>
           )}
-          {users && !count && <p>{t`No users will be affected.`}</p>}
-          {!users && (
-            <p>
-              <Trans>
-                Checking for affected users... <Spinner size='sm' />
-              </Trans>
-            </p>
+
+          {canViewUsers ? (
+            <>
+              {users && !count && <p>{t`No users will be affected.`}</p>}
+              {!users && (
+                <p>
+                  <Trans>
+                    Checking for affected users... <Spinner size='sm' />
+                  </Trans>
+                </p>
+              )}
+            </>
+          ) : (
+            <Alert
+              title={t`This group can include users`}
+              variant='warning'
+              isInline
+            >
+              <Trans>You don&apos;t have permission to display users.</Trans>
+            </Alert>
           )}
         </div>
       </DeleteModal>
