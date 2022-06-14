@@ -420,9 +420,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     RoleAPI.delete(roleID)
       .then(() =>
         this.addAlert(
-          t`
-            Role "${name}" has been successfully deleted.
-          `,
+          t`Role "${name}" has been successfully deleted.`,
           'success',
         ),
       )
