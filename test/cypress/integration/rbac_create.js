@@ -8,7 +8,7 @@ describe('add and delete roles', () => {
   it('adds a new role', () => {
     cy.contains('Add roles').click();
 
-    //checks role name input
+    // checks role name input
 
     cy.get('input[id="role_name"]').type('a');
 
@@ -37,7 +37,7 @@ describe('add and delete roles', () => {
     cy.get('input[id="role_name"]').clear().type(`galaxy.test${num}`);
     cy.contains('Save').should('be.enabled');
 
-    //checks role description input
+    // checks role description input
 
     cy.get('input[id="role_description"]').type('a');
 
@@ -66,13 +66,15 @@ describe('add and delete roles', () => {
 
     cy.contains('Save').click();
 
-    //check list view
+    // check list view, use filter
+
+    cy.get('[data-cy=compound_filter] input').type('test{enter}');
 
     cy.get('tbody').contains(`galaxy.test${num}`);
     cy.get('[aria-label="Details"]:first').click();
     cy.contains('Add namespace');
 
-    //delete role
+    // delete role
 
     cy.get('[aria-label="Actions"]:first').click();
     cy.contains('Delete').click();
