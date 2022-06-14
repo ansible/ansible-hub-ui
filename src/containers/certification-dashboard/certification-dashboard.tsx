@@ -328,6 +328,11 @@ class CertificationDashboard extends React.Component<
       );
     }
     if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
+      const {
+        signatures_enabled,
+        can_upload_signatures,
+        require_upload_signatures,
+      } = this.context?.featureFlags || {};
       return (
         <Label
           variant='outline'
@@ -335,7 +340,9 @@ class CertificationDashboard extends React.Component<
           icon={<ExclamationTriangleIcon />}
         >
           {version.sign_state === 'unsigned' &&
-          this.context.settings.GALAXY_REQUIRE_SIGNATURE_FOR_APPROVAL
+          signatures_enabled &&
+          can_upload_signatures &&
+          require_upload_signatures
             ? t`Needs signature and review`
             : t`Needs review`}
         </Label>
@@ -375,20 +382,27 @@ class CertificationDashboard extends React.Component<
   }
 
   private renderButtons(version: CollectionVersion) {
-    const { featureFlags } = this.context;
     // not checking namespace permissions here, auto_sign happens API side, so is the permission check
-    const canSign =
-      featureFlags?.collection_signing && featureFlags?.collection_auto_sign;
+    const {
+      signatures_enabled,
+      can_upload_signatures,
+      collection_auto_sign,
+      require_upload_signatures,
+    } = this.context?.featureFlags || {};
+    const canSign = signatures_enabled && collection_auto_sign;
 
     if (this.state.updatingVersions.includes(version)) {
       return <ListItemActions />; // empty td;
     }
 
-    const needUploadSignature =
-      this.context.settings.GALAXY_SIGNATURE_UPLOAD_ENABLED &&
+    const canUploadSignature =
+      signatures_enabled &&
+      can_upload_signatures &&
       version.sign_state === 'unsigned';
+    const mustUploadSignature = canUploadSignature && require_upload_signatures;
+
     const approveButton = [
-      needUploadSignature && (
+      canUploadSignature && (
         <React.Fragment key='upload'>
           <Button onClick={() => this.openUploadCertificateModal(version)}>
             {t`Upload signature`}
@@ -397,7 +411,7 @@ class CertificationDashboard extends React.Component<
       ),
       <Button
         key='approve'
-        isDisabled={needUploadSignature}
+        isDisabled={mustUploadSignature}
         onClick={() =>
           this.updateCertification(
             version,
