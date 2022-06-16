@@ -328,11 +328,8 @@ class CertificationDashboard extends React.Component<
       );
     }
     if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
-      const {
-        signatures_enabled,
-        can_upload_signatures,
-        require_upload_signatures,
-      } = this.context?.featureFlags || {};
+      const { can_upload_signatures, require_upload_signatures } =
+        this.context?.featureFlags || {};
       return (
         <Label
           variant='outline'
@@ -340,7 +337,6 @@ class CertificationDashboard extends React.Component<
           icon={<ExclamationTriangleIcon />}
         >
           {version.sign_state === 'unsigned' &&
-          signatures_enabled &&
           can_upload_signatures &&
           require_upload_signatures
             ? t`Needs signature and review`
@@ -384,21 +380,16 @@ class CertificationDashboard extends React.Component<
   private renderButtons(version: CollectionVersion) {
     // not checking namespace permissions here, auto_sign happens API side, so is the permission check
     const {
-      signatures_enabled,
       can_upload_signatures,
       collection_auto_sign,
       require_upload_signatures,
     } = this.context?.featureFlags || {};
-    const canSign = signatures_enabled && collection_auto_sign;
-
     if (this.state.updatingVersions.includes(version)) {
       return <ListItemActions />; // empty td;
     }
 
     const canUploadSignature =
-      signatures_enabled &&
-      can_upload_signatures &&
-      version.sign_state === 'unsigned';
+      can_upload_signatures && version.sign_state === 'unsigned';
     const mustUploadSignature = canUploadSignature && require_upload_signatures;
 
     const approveButton = [
@@ -420,7 +411,7 @@ class CertificationDashboard extends React.Component<
           )
         }
       >
-        {canSign ? t`Sign and approve` : t`Approve`}
+        {collection_auto_sign ? t`Sign and approve` : t`Approve`}
       </Button>,
     ].filter(Boolean);
 
@@ -453,7 +444,7 @@ class CertificationDashboard extends React.Component<
         isDisabled={isDisabled}
         key='certify'
       >
-        {canSign ? t`Sign and approve` : t`Approve`}
+        {collection_auto_sign ? t`Sign and approve` : t`Approve`}
       </DropdownItem>
     );
 

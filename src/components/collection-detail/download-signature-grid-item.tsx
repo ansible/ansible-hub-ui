@@ -18,16 +18,11 @@ interface Props {
 }
 
 export const DownloadSignatureGridItem: FC<Props> = ({ version }) => {
-  const { signatures_enabled, display_signatures } =
-    useContext()?.featureFlags || {};
+  const { display_signatures } = useContext()?.featureFlags || {};
   const [show, setShow] = useState(false);
 
   // No signature object or the signatures is empty
-  if (
-    !signatures_enabled ||
-    !display_signatures ||
-    version.metadata.signatures?.length < 1
-  ) {
+  if (!display_signatures || version.metadata.signatures?.length < 1) {
     return null;
   }
 
