@@ -142,18 +142,22 @@ class ExecutionEnvironmentList extends React.Component<
         <Trans>Push container images</Trans> <ExternalLinkAltIcon />
       </Button>
     );
-    const addRemoteButton = (
-      <Button
-        onClick={() =>
-          this.setState({
-            showRemoteModal: true,
-            itemToEdit: {} as ExecutionEnvironmentType,
-          })
-        }
-        variant='primary'
-      >
-        <Trans>Add execution environment</Trans>
-      </Button>
+    const addRemoteButton = this.context.user?.model_permissions
+      ?.add_containernamespace && (
+      <>
+        <Button
+          onClick={() =>
+            this.setState({
+              showRemoteModal: true,
+              itemToEdit: {} as ExecutionEnvironmentType,
+            })
+          }
+          variant='primary'
+        >
+          <Trans>Add execution environment</Trans>
+        </Button>
+        <div>&nbsp;</div>
+      </>
     );
 
     return (
@@ -197,7 +201,6 @@ class ExecutionEnvironmentList extends React.Component<
             button={
               <>
                 {addRemoteButton}
-                <div>&nbsp;</div>
                 {pushImagesButton}
               </>
             }
