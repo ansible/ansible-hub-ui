@@ -20,9 +20,21 @@ objects:
       image: ${IMAGE}:${IMAGE_TAG}
       navItems:
         - appId: "automationHub"
-          title: "Automation Hub"
+          title: "Collections"
           href: "/ansible/automation-hub"
-          product: "Red Hat Insights"
+          product: "Ansible Automation Hub"
+        - appId: "automationHub"
+          title: "Partners"
+          href: "/ansible/automation-hub/partners"
+          product: "Ansible Automation Hub"
+        - appId: "automationHub"
+          title: "Repo Management"
+          href: "/ansible/automation-hub/repositories"
+          product: "Ansible Automation Hub"
+        - appId: "automationHub"
+          title: "Connect to Hub"
+          href: "/ansible/automation-hub/token"
+          product: "Ansible Automation Hub"
       module:
         manifestLocation: "/apps/automation-hub/fed-mods.json"
         modules:
