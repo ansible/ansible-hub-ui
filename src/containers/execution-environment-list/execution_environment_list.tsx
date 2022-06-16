@@ -354,7 +354,7 @@ class ExecutionEnvironmentList extends React.Component<
           {t`Edit`}
         </DropdownItem>
       ),
-      item.pulp.repository.remote && (
+      item.pulp.repository.remote && canEdit && (
         <DropdownItem key='sync' onClick={() => this.sync(item.name)}>
           {t`Sync from registry`}
         </DropdownItem>
