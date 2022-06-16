@@ -50,6 +50,8 @@ export class LegacyRoleList extends React.Component<IProps> {
 
     console.log('legacyrolelist props', this.props);
 
+    console.log('LEGACY ROLE LIST 1');
+
     return (
       <div>
         <h1>LegacyRoleList Component</h1>

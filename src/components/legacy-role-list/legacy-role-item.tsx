@@ -40,6 +40,20 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
     //const role_url = '/' + role.github_user + '/' + role.name;
     const role_url = role.github_user + '/' + role.name;
 
+    let release_date = null
+    let release_name = null
+    const lv = role.summary_fields.versions[0]
+    if (lv !== undefined && lv !== null) {
+        release_date = lv.release_date
+        release_name = lv.name
+    }
+    if (release_date === undefined || release_date === null || release_date === "") {
+       release_date = role.modified 
+    }
+    if (release_name === undefined || release_name === null || release_name === "") {
+       release_name = ""
+    }
+
     const cells = [];
 
     cells.push(
@@ -82,11 +96,11 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
           <Trans>
             Updated{' '}
             <DateComponent
-              date={role.summary_fields.versions[0].release_date}
+              date={release_date}
             />
           </Trans>
         </div>
-        <div className='hub-entry'>v{role.summary_fields.versions[0].name}</div>
+        <div className='hub-entry'>{release_name}</div>
       </DataListCell>,
     );
 

@@ -210,6 +210,20 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
 
     let installCommand = `ansible-galaxy role install ${github_user}.${name}`;
 
+    let release_date = null
+    let release_name = null
+    const lv = role.summary_fields.versions[0]
+    if (lv !== undefined && lv !== null) {
+        release_date = lv.release_date
+        release_name = lv.name
+    }
+    if (release_date === undefined || release_date === null || release_date === "") {
+       release_date = role.modified 
+    }
+    if (release_name === undefined || release_name === null || release_name === "") {
+       release_name = ""
+    }
+
     const header_cells = [];
     if (this.state.role !== undefined && this.state.role !== null) {
       header_cells.push(
@@ -250,12 +264,12 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
             <Trans>
               Updated{' '}
               <DateComponent
-                date={this.state.role.summary_fields.versions[0].release_date}
+                date={release_date}
               />
             </Trans>
           </div>
           <div className='hub-entry'>
-            v{this.state.role.summary_fields.versions[0].name}
+            v{release_name}
           </div>
         </DataListCell>,
       );
