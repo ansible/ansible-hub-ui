@@ -312,9 +312,10 @@ class CertificationDashboard extends React.Component<
       return <span className='fa fa-lg fa-spin fa-spinner' />;
     }
     if (version.repository_list.includes(Constants.PUBLISHED)) {
+      const { display_signatures } = this.context?.featureFlags || {};
       return (
         <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-          {version.sign_state === 'signed'
+          {display_signatures && version.sign_state === 'signed'
             ? t`Signed and approved`
             : t`Approved`}
         </Label>
