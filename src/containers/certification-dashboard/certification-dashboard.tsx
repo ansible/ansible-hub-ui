@@ -392,6 +392,7 @@ class CertificationDashboard extends React.Component<
     const canUploadSignature =
       can_upload_signatures && version.sign_state === 'unsigned';
     const mustUploadSignature = canUploadSignature && require_upload_signatures;
+    const autoSign = collection_auto_sign && !require_upload_signatures;
 
     const approveButton = [
       canUploadSignature && (
@@ -412,7 +413,7 @@ class CertificationDashboard extends React.Component<
           )
         }
       >
-        {collection_auto_sign ? t`Sign and approve` : t`Approve`}
+        {autoSign ? t`Sign and approve` : t`Approve`}
       </Button>,
     ].filter(Boolean);
 
@@ -445,7 +446,7 @@ class CertificationDashboard extends React.Component<
         isDisabled={isDisabled}
         key='certify'
       >
-        {collection_auto_sign ? t`Sign and approve` : t`Approve`}
+        {autoSign ? t`Sign and approve` : t`Approve`}
       </DropdownItem>
     );
 
