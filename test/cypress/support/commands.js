@@ -246,7 +246,7 @@ Cypress.Commands.add('removeRoleFromGroup', {}, (groupName, role) => {
   cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`)
     .find('[data-cy="kebab-toggle"]')
     .click()
-    .contains('Remove Role')
+    .contains('Remove role')
     .click();
 
   cy.intercept('DELETE', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(

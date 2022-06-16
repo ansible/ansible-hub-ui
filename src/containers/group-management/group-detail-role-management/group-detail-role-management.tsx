@@ -377,7 +377,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                             key='remove-role'
                             onClick={() => setSelectedDeleteRole(role)}
                           >
-                            {t`Remove Role`}
+                            {t`Remove role`}
                           </DropdownItem>
                         ),
                       ]}

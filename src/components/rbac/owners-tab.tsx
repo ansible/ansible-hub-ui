@@ -247,7 +247,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
                     key='remove-role'
                     onClick={() => this.setState({ showRoleRemoveModal: role })}
                   >
-                    {t`Remove Role`}
+                    {t`Remove role`}
                   </DropdownItem>,
                 ]}
               />
