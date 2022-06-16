@@ -367,13 +367,15 @@ class ExecutionEnvironmentRegistryList extends React.Component<
 
   private renderTableRow(item, index: number) {
     const buttons = [
-      <Button
-        key='sync'
-        variant='secondary'
-        onClick={() => this.syncRegistry(item)}
-      >
-        <Trans>Sync from registry</Trans>
-      </Button>,
+      this.context.user.model_permissions.change_containerregistry && (
+        <Button
+          key='sync'
+          variant='secondary'
+          onClick={() => this.syncRegistry(item)}
+        >
+          <Trans>Sync from registry</Trans>
+        </Button>
+      ),
     ];
 
     const dropdownItems = [
