@@ -40,6 +40,7 @@ import { LegacyUserAPI } from 'src/api/legacyuser';
 import { LegacyUserListType } from 'src/api';
 import { LegacyUserListItem } from 'src/components/legacy-user-list/legacy-user-item';
 import { LegacyRoleListType } from 'src/api';
+import { LegacyRoleListItem } from 'src/components/legacy-role-list/legacy-role-item';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
@@ -50,8 +51,18 @@ interface LURProps {
 }
 
 interface LURState {
+  mounted: boolean;
+  count: number;
   user: LegacyUserListType;
   roles: LegacyRoleListType[];
+  params: {
+    page?: number;
+    page_size?: number;
+    order_by?: string;
+    keywords?: string;
+    tags?: string[];
+    view_type?: string;
+  };
 }
 
 // class App extends React.Component<{}, { value: string }> {
@@ -62,12 +73,21 @@ class LegacyUserRoles extends React.Component<LURProps, LURState> {
     console.log('legacy user role props', props);
     this.state = {
       //...props,
+      mounted: false,
+      count: 0,
       user: props.user,
       roles: null,
+      params: {
+        page: 1,
+        page_size: 10,
+        order_by: 'created',
+      },
+
     };
     console.log('init state', this.state);
   }
 
+  /*
   componentDidMount() {
     const user = this.state.user;
     const url = 'roles/?namespace=' + user.id;
@@ -82,8 +102,78 @@ class LegacyUserRoles extends React.Component<LURProps, LURState> {
       });
     });
   }
+  */
+
+  componentDidMount() {
+
+    const user = this.state.user;
+
+    const thisPath = window.location.pathname;
+    console.log("thisPath", thisPath);
+    const thisHref = window.location.href;
+    console.log("thisHref", thisHref);
+    const thisQS = window.location.search;
+    console.log('thisQS', thisQS);
+    const urlParams = new URLSearchParams(thisQS);
+    console.log('urlParams', urlParams);
+    let page_num = parseInt(urlParams.get('page')) || 1;
+    console.log('page_num', page_num);
+    let page_size = parseInt(urlParams.get('page_size')) || 10;
+    console.log('page_size', page_size);
+    let order_by = urlParams.get('order_by') || 'created';
+    console.log('order_by', order_by);
+
+    const url = `roles/?namespace=${user.id}&page=${page_num}&page_size=${page_size}&order_by=${order_by}`;
+    LegacyRoleAPI.get(url).then((response) => {
+      console.log(response.data);
+      //this.setState({legacyroles: response.data});
+      this.setState((state, props) => ({
+        mounted: true,
+        params: {
+            page: page_num,
+            page_size: page_size,
+            order_by: order_by,
+        },
+        count: response.data.count,
+        user: user,
+        roles: response.data.results,
+      }));
+
+      console.log('didmount', 'state', this.state);
+    });
+
+  }
+
+  updateParams = (p) => {
+    console.log('updateParams', p);
+    const {
+        page,
+        page_size,
+        order_by
+    } = p;
+    const user = this.state.user;
+
+    const url = `roles/?namespace=${user.id}&page=${page}&page_size=${page_size}&order_by=${order_by}`;
+    LegacyRoleAPI.get(url).then((response) => {
+      console.log(response.data);
+      //this.setState({legacyroles: response.data});
+      this.setState((state, props) => ({
+        mounted: true,
+        params: {
+            page: page,
+            page_size: page_size,
+            order_by: order_by,
+        },
+        count: response.data.count,
+        user: user,
+        roles: response.data.results,
+      }));
+    });
+
+  }
 
   render() {
+    /*
     console.log(this.state);
 
     const infocells = [];
@@ -101,6 +191,35 @@ class LegacyUserRoles extends React.Component<LURProps, LURState> {
     }
 
     return <DataListItemCells dataListCells={infocells} />;
+    */
+
+    return (
+     <div>
+        {/*<BaseHeader title={t`Legacy Roles`}></BaseHeader>*/}
+        <React.Fragment>
+          { this.state.mounted && 
+              <DataList aria-label={t`List of Legacy Roles`}>
+                {this.state.roles &&
+                  this.state.roles.map((lrole) => (
+                    <LegacyRoleListItem
+                      key={lrole.github_user + lrole.name + lrole.id}
+                      role={lrole}
+                      show_thumbnail={false}
+                    />
+                  ))}
+              </DataList>
+          }
+          { this.state.mounted && 
+              <Pagination
+                params={this.state.params}
+                //updateParams={(p) => this.updateParams(p)}
+                updateParams={this.updateParams}
+                count={this.state.count}
+              />
+          }
+        </React.Fragment>
+      </div>
+     )
   }
 }
 
@@ -147,6 +266,7 @@ class LegacyUser extends React.Component<RouteComponentProps, IProps> {
         user: response.data,
       }));
     });
+
   }
 
   render() {

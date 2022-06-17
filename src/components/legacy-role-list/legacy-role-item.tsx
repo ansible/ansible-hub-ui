@@ -31,11 +31,12 @@ import { LegacyRoleDetailType } from 'src/api/response-types/legacy-role';
 
 interface LegacyRoleProps {
   role: LegacyRoleDetailType;
+  show_thumbnail: boolean;
 }
 
 export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
   render() {
-    const { role } = this.props;
+    const { role, show_thumbnail } = this.props;
     //const role_url = 'legacy/roles/' + role.github_user + '/' + role.name;
     //const role_url = '/' + role.github_user + '/' + role.name;
     const role_url = role.github_user + '/' + role.name;
@@ -56,18 +57,20 @@ export class LegacyRoleListItem extends React.Component<LegacyRoleProps> {
 
     const cells = [];
 
-    cells.push(
-      <DataListCell isFilled={false} alignRight={false} key='ns'>
-        <Logo
-          alt={t`role.github_user logo`}
-          //fallbackToDefault
-          image={role.summary_fields.namespace.avatar_url}
-          size='70px'
-          unlockWidth
-          width='97px'
-        ></Logo>
-      </DataListCell>,
-    );
+    if ( show_thumbnail !== false ) {
+        cells.push(
+          <DataListCell isFilled={false} alignRight={false} key='ns'>
+            <Logo
+              alt={t`role.github_user logo`}
+              //fallbackToDefault
+              image={role.summary_fields.namespace.avatar_url}
+              size='70px'
+              unlockWidth
+              width='97px'
+            ></Logo>
+          </DataListCell>,
+        );
+    }
 
     cells.push(
       <DataListCell key='content'>
