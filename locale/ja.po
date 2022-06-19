@@ -193,7 +193,7 @@ msgid "Add container repository"
 msgstr "コンテナーリポジトリーの追加"
 
 #: src/components/execution-environment/repository-form.tsx:152
-#: src/containers/execution-environment-list/execution_environment_list.tsx:155
+#: src/containers/execution-environment-list/execution_environment_list.tsx:157
 msgid "Add execution environment"
 msgstr "実行環境の追加"
 
@@ -627,12 +627,12 @@ msgstr "コンテナー名には、英数字、「.」、「_」、「-」、お
 msgid "Container namespace"
 msgstr "コンテナーの名前空間"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:307
+#: src/containers/execution-environment-list/execution_environment_list.tsx:310
 msgid "Container registry type"
 msgstr "コンテナーレジストリータイプ"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:231
-#: src/containers/execution-environment-list/execution_environment_list.tsx:287
+#: src/containers/execution-environment-list/execution_environment_list.tsx:234
+#: src/containers/execution-environment-list/execution_environment_list.tsx:290
 msgid "Container repository name"
 msgstr "コンテナーリポジトリー名"
 
@@ -715,7 +715,7 @@ msgid "Create new user"
 msgstr "新規ユーザーの作成"
 
 #: src/containers/execution-environment/registry-list.tsx:327
-#: src/containers/execution-environment-list/execution_environment_list.tsx:297
+#: src/containers/execution-environment-list/execution_environment_list.tsx:300
 #: src/containers/group-management/group-detail.tsx:824
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
@@ -767,10 +767,10 @@ msgid "Date created"
 msgstr "作成日"
 
 #: src/components/delete-modal/delete-modal.tsx:29
-#: src/containers/execution-environment/registry-list.tsx:406
+#: src/containers/execution-environment/registry-list.tsx:408
 #: src/containers/execution-environment-detail/base.tsx:144
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:416
-#: src/containers/execution-environment-list/execution_environment_list.tsx:378
+#: src/containers/execution-environment-list/execution_environment_list.tsx:381
 #: src/containers/group-management/group-detail.tsx:272
 #: src/containers/group-management/group-list.tsx:434
 #: src/containers/task-management/task-list-view.tsx:313
@@ -952,7 +952,7 @@ msgstr ""
 #: src/components/execution-environment/repository-form.tsx:368
 #: src/components/namespace-form/namespace-form.tsx:152
 #: src/components/role-list-table/role-list-table.tsx:49
-#: src/containers/execution-environment-list/execution_environment_list.tsx:292
+#: src/containers/execution-environment-list/execution_environment_list.tsx:295
 #: src/containers/task-management/task_detail.tsx:342
 msgid "Description"
 msgstr "説明"
@@ -1034,10 +1034,10 @@ msgstr "ドロップダウン"
 
 #: src/components/repositories/remote-repository-table.tsx:128
 #: src/containers/edit-namespace/edit-namespace.tsx:152
-#: src/containers/execution-environment/registry-list.tsx:393
+#: src/containers/execution-environment/registry-list.tsx:395
 #: src/containers/execution-environment-detail/base.tsx:194
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
-#: src/containers/execution-environment-list/execution_environment_list.tsx:351
+#: src/containers/execution-environment-list/execution_environment_list.tsx:354
 #: src/containers/group-management/group-detail.tsx:360
 #: src/containers/group-management/group-list.tsx:420
 #: src/containers/settings/user-profile.tsx:96
@@ -1153,7 +1153,7 @@ msgstr "API からのインポート取得エラー"
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Error loading dependent collections."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:498
+#: src/containers/execution-environment-list/execution_environment_list.tsx:501
 msgid "Error loading environments."
 msgstr "環境の読み込みエラー。"
 
@@ -1267,18 +1267,18 @@ msgid "Execution Environment"
 msgstr "実行環境"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:36
-#: src/containers/execution-environment-list/execution_environment_list.tsx:173
+#: src/containers/execution-environment-list/execution_environment_list.tsx:177
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:107
 #: src/loaders/standalone/standalone-loader.tsx:370
 #: src/loaders/standalone/standalone-loader.tsx:376
 msgid "Execution Environments"
 msgstr "実行環境"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:448
+#: src/containers/execution-environment-list/execution_environment_list.tsx:451
 msgid "Execution environment \"{0}\" has been added successfully."
 msgstr ""
 
-#: src/containers/execution-environment/registry-list.tsx:541
+#: src/containers/execution-environment/registry-list.tsx:543
 msgid "Execution environment \"{name}\" could not be indexed."
 msgstr "実行環境 \"{name}\" をインデックス化できませんでした。"
 
@@ -1361,7 +1361,7 @@ msgstr "{0} 別にフィルター"
 msgid "Find content"
 msgstr "コンテンツの検索"
 
-#: src/containers/execution-environment/registry-list.tsx:413
+#: src/containers/execution-environment/registry-list.tsx:415
 msgid "Find execution environments in this registry"
 msgstr "このレジストリーでの実行環境の検索"
 
@@ -1515,7 +1515,7 @@ msgstr "ログのインポート"
 msgid "Imports"
 msgstr "インポート"
 
-#: src/containers/execution-environment/registry-list.tsx:421
+#: src/containers/execution-environment/registry-list.tsx:423
 msgid "Index execution environments"
 msgstr "実行環境のインデックス作成"
 
@@ -1523,7 +1523,7 @@ msgstr "実行環境のインデックス作成"
 #~ msgid "Indexing execution environments in {name}"
 #~ msgstr "Indexing execution environments in {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:414
+#: src/containers/execution-environment/registry-list.tsx:416
 msgid "Indexing execution environments is only supported on registry.redhat.io"
 msgstr "実行環境は registry.redhat.io でのみサポートされます。"
 
@@ -1531,7 +1531,7 @@ msgstr "実行環境は registry.redhat.io でのみサポートされます。"
 #~ msgid "Indexing failed for {name}"
 #~ msgstr "Indexing failed for {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:525
+#: src/containers/execution-environment/registry-list.tsx:527
 msgid "Indexing started for execution environment \"{name}\"."
 msgstr "実行環境 \"{name}\" のインデックス化が開始されました。"
 
@@ -1588,7 +1588,7 @@ msgstr "このウィンドウを安全に閉じることができます。この
 msgid "Keywords"
 msgstr "キーワード"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:302
+#: src/containers/execution-environment-list/execution_environment_list.tsx:305
 msgid "Last modified"
 msgstr "最終更新日"
 
@@ -1653,7 +1653,7 @@ msgstr "コレクションの一覧"
 msgid "Load token"
 msgstr "トークンの読み込み"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:408
+#: src/containers/execution-environment-list/execution_environment_list.tsx:411
 #: src/containers/repositories/repository-list.tsx:118
 msgid "Local"
 msgstr "ローカル"
@@ -1846,7 +1846,7 @@ msgstr "子タスクなし"
 msgid "No collections yet"
 msgstr "まだコレクションはありません"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:195
+#: src/containers/execution-environment-list/execution_environment_list.tsx:199
 msgid "No container repositories yet"
 msgstr "まだコンテナーリポジトリーはありません"
 
@@ -2302,7 +2302,7 @@ msgstr "拒否"
 msgid "Rejected"
 msgstr "拒否"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:408
+#: src/containers/execution-environment-list/execution_environment_list.tsx:411
 #: src/containers/repositories/repository-list.tsx:119
 msgid "Remote"
 msgstr "リモート"
@@ -2317,15 +2317,15 @@ msgstr "リモートレジストリー"
 msgid "Remote name"
 msgstr "リモート名"
 
-#: src/containers/execution-environment/registry-list.tsx:480
+#: src/containers/execution-environment/registry-list.tsx:482
 msgid "Remote registry \"{name}\" could not be deleted."
 msgstr "リモートレジストリー \"{name}\" を削除できませんでした。"
 
-#: src/containers/execution-environment/registry-list.tsx:513
+#: src/containers/execution-environment/registry-list.tsx:515
 msgid "Remote registry \"{name}\" could not be synced."
 msgstr "リモートレジストリー \"{name}\" を同期できませんでした。"
 
-#: src/containers/execution-environment/registry-list.tsx:471
+#: src/containers/execution-environment/registry-list.tsx:473
 msgid "Remote registry \"{name}\" has been successfully deleted."
 msgstr "リモートレジストリー \"{name}\" が正常に削除されました。"
 
@@ -2413,7 +2413,7 @@ msgid "Save"
 msgstr "保存"
 
 #: src/containers/execution-environment-detail/base.tsx:219
-#: src/containers/execution-environment-list/execution_environment_list.tsx:453
+#: src/containers/execution-environment-list/execution_environment_list.tsx:456
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "実行環境 \"{0}\" への変更を保存しました。"
 
@@ -2445,13 +2445,13 @@ msgstr "最後までスクロール"
 #~ msgid "Search my namespaces"
 #~ msgstr "Search my namespaces"
 
-#: src/containers/execution-environment/registry-list.tsx:499
+#: src/containers/execution-environment/registry-list.tsx:501
 #: src/containers/execution-environment-detail/base.tsx:334
-#: src/containers/execution-environment-list/execution_environment_list.tsx:534
+#: src/containers/execution-environment-list/execution_environment_list.tsx:537
 msgid "See the task management <0>detail page </0>for the status of this task."
 msgstr "このタスクのステータスについては、タスク管理の <0>詳細ページ</0> を参照してください。"
 
-#: src/containers/execution-environment/registry-list.tsx:528
+#: src/containers/execution-environment/registry-list.tsx:530
 msgid "See the task management <0>detail page</0>for the status of this task."
 msgstr "このタスクのステータスについては、タスク管理の <0>詳細ページ</0> を参照してください。"
 
@@ -2713,13 +2713,13 @@ msgid "Sync"
 msgstr "同期"
 
 #: src/containers/execution-environment-detail/base.tsx:345
-#: src/containers/execution-environment-list/execution_environment_list.tsx:544
+#: src/containers/execution-environment-list/execution_environment_list.tsx:547
 msgid "Sync failed for {name}"
 msgstr "{name} の同期に失敗しました"
 
-#: src/containers/execution-environment/registry-list.tsx:375
+#: src/containers/execution-environment/registry-list.tsx:376
 #: src/containers/execution-environment-detail/base.tsx:122
-#: src/containers/execution-environment-list/execution_environment_list.tsx:356
+#: src/containers/execution-environment-list/execution_environment_list.tsx:359
 msgid "Sync from registry"
 msgstr "レジストリーからの同期"
 
@@ -2729,11 +2729,11 @@ msgstr "レジストリーからの同期"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:529
+#: src/containers/execution-environment-list/execution_environment_list.tsx:532
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "実行環境 \"{name}\" の同期が開始されました。"
 
-#: src/containers/execution-environment/registry-list.tsx:496
+#: src/containers/execution-environment/registry-list.tsx:498
 #: src/containers/execution-environment-detail/base.tsx:331
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "リモートレジストリー \"{name}\" の同期が開始されました。"
@@ -3045,7 +3045,7 @@ msgstr "アップストリーム名"
 #: src/components/execution-environment/publish-to-controller-modal.tsx:279
 #: src/containers/execution-environment-detail/base.tsx:135
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:408
-#: src/containers/execution-environment-list/execution_environment_list.tsx:369
+#: src/containers/execution-environment-list/execution_environment_list.tsx:372
 msgid "Use in Controller"
 msgstr "コントローラーでの使用"
 
@@ -3311,7 +3311,7 @@ msgstr "SSO ユーザーです。トークンは <0/> に期限が切れます�
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
 msgstr "ここでカスタムマークダウンを入力して、プロファイルのリソースタブをカスタマイズできます。"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:196
+#: src/containers/execution-environment-list/execution_environment_list.tsx:200
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "現在、コンテナーリポジトリーはありません。開始するには、CLI でコンテナーリポジトリーを追加します。"
 

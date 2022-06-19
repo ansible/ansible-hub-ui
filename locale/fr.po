@@ -193,7 +193,7 @@ msgid "Add container repository"
 msgstr "Ajouter le référentiel du conteneur"
 
 #: src/components/execution-environment/repository-form.tsx:152
-#: src/containers/execution-environment-list/execution_environment_list.tsx:155
+#: src/containers/execution-environment-list/execution_environment_list.tsx:157
 msgid "Add execution environment"
 msgstr "Ajoutez un environnement d'exécution"
 
@@ -627,12 +627,12 @@ msgstr "Les noms de conteneurs ne peuvent contenir que des chiffres alphanuméri
 msgid "Container namespace"
 msgstr "Espace de noms des conteneurs"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:307
+#: src/containers/execution-environment-list/execution_environment_list.tsx:310
 msgid "Container registry type"
 msgstr "Type de registre des conteneurs"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:231
-#: src/containers/execution-environment-list/execution_environment_list.tsx:287
+#: src/containers/execution-environment-list/execution_environment_list.tsx:234
+#: src/containers/execution-environment-list/execution_environment_list.tsx:290
 msgid "Container repository name"
 msgstr "Nom du référentiel du conteneur"
 
@@ -715,7 +715,7 @@ msgid "Create new user"
 msgstr "Créer un nouvel utilisateur"
 
 #: src/containers/execution-environment/registry-list.tsx:327
-#: src/containers/execution-environment-list/execution_environment_list.tsx:297
+#: src/containers/execution-environment-list/execution_environment_list.tsx:300
 #: src/containers/group-management/group-detail.tsx:824
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
@@ -767,10 +767,10 @@ msgid "Date created"
 msgstr "Date de création"
 
 #: src/components/delete-modal/delete-modal.tsx:29
-#: src/containers/execution-environment/registry-list.tsx:406
+#: src/containers/execution-environment/registry-list.tsx:408
 #: src/containers/execution-environment-detail/base.tsx:144
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:416
-#: src/containers/execution-environment-list/execution_environment_list.tsx:378
+#: src/containers/execution-environment-list/execution_environment_list.tsx:381
 #: src/containers/group-management/group-detail.tsx:272
 #: src/containers/group-management/group-list.tsx:434
 #: src/containers/task-management/task-list-view.tsx:313
@@ -952,7 +952,7 @@ msgstr ""
 #: src/components/execution-environment/repository-form.tsx:368
 #: src/components/namespace-form/namespace-form.tsx:152
 #: src/components/role-list-table/role-list-table.tsx:49
-#: src/containers/execution-environment-list/execution_environment_list.tsx:292
+#: src/containers/execution-environment-list/execution_environment_list.tsx:295
 #: src/containers/task-management/task_detail.tsx:342
 msgid "Description"
 msgstr "Description"
@@ -1034,10 +1034,10 @@ msgstr "Menu déroulant"
 
 #: src/components/repositories/remote-repository-table.tsx:128
 #: src/containers/edit-namespace/edit-namespace.tsx:152
-#: src/containers/execution-environment/registry-list.tsx:393
+#: src/containers/execution-environment/registry-list.tsx:395
 #: src/containers/execution-environment-detail/base.tsx:194
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
-#: src/containers/execution-environment-list/execution_environment_list.tsx:351
+#: src/containers/execution-environment-list/execution_environment_list.tsx:354
 #: src/containers/group-management/group-detail.tsx:360
 #: src/containers/group-management/group-list.tsx:420
 #: src/containers/settings/user-profile.tsx:96
@@ -1153,7 +1153,7 @@ msgstr "Erreur lors de la récupération de l'importation à partir de l'API"
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Error loading dependent collections."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:498
+#: src/containers/execution-environment-list/execution_environment_list.tsx:501
 msgid "Error loading environments."
 msgstr "Erreur de chargement des environnements."
 
@@ -1267,18 +1267,18 @@ msgid "Execution Environment"
 msgstr "Environnement d'exécution"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:36
-#: src/containers/execution-environment-list/execution_environment_list.tsx:173
+#: src/containers/execution-environment-list/execution_environment_list.tsx:177
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:107
 #: src/loaders/standalone/standalone-loader.tsx:370
 #: src/loaders/standalone/standalone-loader.tsx:376
 msgid "Execution Environments"
 msgstr "Environnements d'exécution"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:448
+#: src/containers/execution-environment-list/execution_environment_list.tsx:451
 msgid "Execution environment \"{0}\" has been added successfully."
 msgstr ""
 
-#: src/containers/execution-environment/registry-list.tsx:541
+#: src/containers/execution-environment/registry-list.tsx:543
 msgid "Execution environment \"{name}\" could not be indexed."
 msgstr "Environnements d'exécution \"{name}\" n’a pas pu être indexé."
 
@@ -1361,7 +1361,7 @@ msgstr "Filtrer par {0}"
 msgid "Find content"
 msgstr "Trouver contenu"
 
-#: src/containers/execution-environment/registry-list.tsx:413
+#: src/containers/execution-environment/registry-list.tsx:415
 msgid "Find execution environments in this registry"
 msgstr "Trouver les environnements d'exécution dans ce registre"
 
@@ -1515,7 +1515,7 @@ msgstr "Journal des importations"
 msgid "Imports"
 msgstr "Importations"
 
-#: src/containers/execution-environment/registry-list.tsx:421
+#: src/containers/execution-environment/registry-list.tsx:423
 msgid "Index execution environments"
 msgstr "Indexation des environnements d'exécution"
 
@@ -1523,7 +1523,7 @@ msgstr "Indexation des environnements d'exécution"
 #~ msgid "Indexing execution environments in {name}"
 #~ msgstr "Indexing execution environments in {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:414
+#: src/containers/execution-environment/registry-list.tsx:416
 msgid "Indexing execution environments is only supported on registry.redhat.io"
 msgstr "L'indexation des environnements d'exécution n'est prise en charge que sur registry.redhat.io"
 
@@ -1531,7 +1531,7 @@ msgstr "L'indexation des environnements d'exécution n'est prise en charge que s
 #~ msgid "Indexing failed for {name}"
 #~ msgstr "Indexing failed for {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:525
+#: src/containers/execution-environment/registry-list.tsx:527
 msgid "Indexing started for execution environment \"{name}\"."
 msgstr "L’indexation commence pour l’environnement d’exécution \"{name}\"."
 
@@ -1588,7 +1588,7 @@ msgstr "Vous pouvez fermer cette fenêtre en toute sécurité. Ces tâches se te
 msgid "Keywords"
 msgstr "Mots clés"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:302
+#: src/containers/execution-environment-list/execution_environment_list.tsx:305
 msgid "Last modified"
 msgstr "Dernière modification"
 
@@ -1653,7 +1653,7 @@ msgstr "Liste des collections"
 msgid "Load token"
 msgstr "Jeton de charge"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:408
+#: src/containers/execution-environment-list/execution_environment_list.tsx:411
 #: src/containers/repositories/repository-list.tsx:118
 msgid "Local"
 msgstr "Local"
@@ -1846,7 +1846,7 @@ msgstr "Aucune tâche dépendante"
 msgid "No collections yet"
 msgstr "Pas encore de collections"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:195
+#: src/containers/execution-environment-list/execution_environment_list.tsx:199
 msgid "No container repositories yet"
 msgstr "Pas encore de référentiels de conteneurs"
 
@@ -2302,7 +2302,7 @@ msgstr "Rejeter"
 msgid "Rejected"
 msgstr "Rejeté"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:408
+#: src/containers/execution-environment-list/execution_environment_list.tsx:411
 #: src/containers/repositories/repository-list.tsx:119
 msgid "Remote"
 msgstr "Utilisateur à distance"
@@ -2317,15 +2317,15 @@ msgstr "Registres distants"
 msgid "Remote name"
 msgstr "Nom de l’utilisateur à distance"
 
-#: src/containers/execution-environment/registry-list.tsx:480
+#: src/containers/execution-environment/registry-list.tsx:482
 msgid "Remote registry \"{name}\" could not be deleted."
 msgstr "Le registre distant \"{name}\" n’a pas pu être supprimé."
 
-#: src/containers/execution-environment/registry-list.tsx:513
+#: src/containers/execution-environment/registry-list.tsx:515
 msgid "Remote registry \"{name}\" could not be synced."
 msgstr "Le registre distant \"{name}\" n’a pas pu être synchronisé."
 
-#: src/containers/execution-environment/registry-list.tsx:471
+#: src/containers/execution-environment/registry-list.tsx:473
 msgid "Remote registry \"{name}\" has been successfully deleted."
 msgstr "Suppression réussie du registre distant  \"{name}\" ."
 
@@ -2413,7 +2413,7 @@ msgid "Save"
 msgstr "Enregistrer"
 
 #: src/containers/execution-environment-detail/base.tsx:219
-#: src/containers/execution-environment-list/execution_environment_list.tsx:453
+#: src/containers/execution-environment-list/execution_environment_list.tsx:456
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "Changements à l’environnement d'exécution \"{0}\" sauvegardé."
 
@@ -2445,13 +2445,13 @@ msgstr "Faites défiler jusqu'à la fin"
 #~ msgid "Search my namespaces"
 #~ msgstr "Search my namespaces"
 
-#: src/containers/execution-environment/registry-list.tsx:499
+#: src/containers/execution-environment/registry-list.tsx:501
 #: src/containers/execution-environment-detail/base.tsx:334
-#: src/containers/execution-environment-list/execution_environment_list.tsx:534
+#: src/containers/execution-environment-list/execution_environment_list.tsx:537
 msgid "See the task management <0>detail page </0>for the status of this task."
 msgstr "Voir la <0>page de détails </0> de gestion des tâches pour voir le statut de cette tâche."
 
-#: src/containers/execution-environment/registry-list.tsx:528
+#: src/containers/execution-environment/registry-list.tsx:530
 msgid "See the task management <0>detail page</0>for the status of this task."
 msgstr "Voir la <0>page de détails </0> de gestion des tâches pour voir le statut de cette tâche.."
 
@@ -2713,13 +2713,13 @@ msgid "Sync"
 msgstr "Sync"
 
 #: src/containers/execution-environment-detail/base.tsx:345
-#: src/containers/execution-environment-list/execution_environment_list.tsx:544
+#: src/containers/execution-environment-list/execution_environment_list.tsx:547
 msgid "Sync failed for {name}"
 msgstr "Sync a échoué pour {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:375
+#: src/containers/execution-environment/registry-list.tsx:376
 #: src/containers/execution-environment-detail/base.tsx:122
-#: src/containers/execution-environment-list/execution_environment_list.tsx:356
+#: src/containers/execution-environment-list/execution_environment_list.tsx:359
 msgid "Sync from registry"
 msgstr "Sync à partir du registre"
 
@@ -2729,11 +2729,11 @@ msgstr "Sync à partir du registre"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:529
+#: src/containers/execution-environment-list/execution_environment_list.tsx:532
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "Sync démarrée pour l’environnement d’exécution \"{name}\"."
 
-#: src/containers/execution-environment/registry-list.tsx:496
+#: src/containers/execution-environment/registry-list.tsx:498
 #: src/containers/execution-environment-detail/base.tsx:331
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "Sync démarrée pour le registre distant \"{name}\"."
@@ -3045,7 +3045,7 @@ msgstr "Nom en amont"
 #: src/components/execution-environment/publish-to-controller-modal.tsx:279
 #: src/containers/execution-environment-detail/base.tsx:135
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:408
-#: src/containers/execution-environment-list/execution_environment_list.tsx:369
+#: src/containers/execution-environment-list/execution_environment_list.tsx:372
 msgid "Use in Controller"
 msgstr "Utilisation dans le contrôleur"
 
@@ -3311,7 +3311,7 @@ msgstr "Vous êtes un utilisateur SSO. Votre jeton va expirer <0/>."
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
 msgstr "Vous pouvez personnaliser l'onglet \"Ressources\" de votre profil en saisissant des tag personnalisées ici."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:196
+#: src/containers/execution-environment-list/execution_environment_list.tsx:200
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "Vous n'avez actuellement aucun référentiel de conteneur. Ajoutez un référentiel de conteneurs via le CLI pour commencer."
 
