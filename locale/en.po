@@ -65,7 +65,7 @@ msgstr "<0>Note:</0> The following links may be blocked by your browser. Copy an
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:324
+#: src/containers/namespace-detail/namespace-detail.tsx:326
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 
@@ -110,7 +110,7 @@ msgstr "A tag may contain lowercase and uppercase ASCII alphabetic characters, d
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:383
+#: src/containers/namespace-detail/namespace-detail.tsx:402
 msgid "API Error: Failed to set deprecation."
 msgstr "API Error: Failed to set deprecation."
 
@@ -121,7 +121,7 @@ msgstr "API Error: Failed to set deprecation."
 
 #: src/components/headers/collection-header.tsx:579
 #: src/components/headers/collection-header.tsx:630
-#: src/containers/namespace-detail/namespace-detail.tsx:401
+#: src/containers/namespace-detail/namespace-detail.tsx:420
 msgid "API Error: {status}"
 msgstr "API Error: {status}"
 
@@ -300,7 +300,7 @@ msgstr "CA certificate"
 #~ msgstr "CLI Configuration"
 
 #: src/components/repositories/local-repository-table.tsx:69
-#: src/containers/namespace-detail/namespace-detail.tsx:167
+#: src/containers/namespace-detail/namespace-detail.tsx:169
 msgid "CLI configuration"
 msgstr "CLI configuration"
 
@@ -330,7 +330,7 @@ msgstr "Cancel"
 msgid "Canceled"
 msgstr "Canceled"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:571
+#: src/containers/namespace-detail/namespace-detail.tsx:590
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 
@@ -465,6 +465,14 @@ msgstr "Code"
 msgid "Collection"
 msgstr "Collection"
 
+#: src/containers/namespace-detail/namespace-detail.tsx:387
+msgid "Collection \"{0}\" has been successfully deprecated."
+msgstr "Collection \"{0}\" has been successfully deprecated."
+
+#: src/containers/namespace-detail/namespace-detail.tsx:386
+msgid "Collection \"{0}\" has been successfully undeprecated."
+msgstr "Collection \"{0}\" has been successfully undeprecated."
+
 #: src/components/headers/collection-header.tsx:785
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "Collection \"{name} v{collectionVersion}\" could not be deleted."
@@ -511,7 +519,7 @@ msgstr "Collection does not have dependencies."
 msgid "Collection is not being used by any collection."
 msgstr "Collection is not being used by any collection."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:531
+#: src/containers/namespace-detail/namespace-detail.tsx:550
 msgid "Collection repositories could not be displayed."
 msgstr "Collection repositories could not be displayed."
 
@@ -527,7 +535,7 @@ msgid "Collection versions"
 msgstr "Collection versions"
 
 #: src/constants.tsx:37
-#: src/containers/namespace-detail/namespace-detail.tsx:164
+#: src/containers/namespace-detail/namespace-detail.tsx:166
 #: src/containers/search/search.tsx:98
 #: src/loaders/standalone/standalone-loader.tsx:341
 #: src/loaders/standalone/standalone-loader.tsx:342
@@ -535,7 +543,7 @@ msgid "Collections"
 msgstr "Collections"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:236
-#: src/containers/namespace-detail/namespace-detail.tsx:292
+#: src/containers/namespace-detail/namespace-detail.tsx:294
 #: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
 msgstr "Collections will appear once uploaded"
@@ -826,12 +834,12 @@ msgid "Delete image?"
 msgstr "Delete image?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:565
-#: src/containers/namespace-detail/namespace-detail.tsx:579
+#: src/containers/namespace-detail/namespace-detail.tsx:584
+#: src/containers/namespace-detail/namespace-detail.tsx:598
 msgid "Delete namespace"
 msgstr "Delete namespace"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:220
+#: src/containers/namespace-detail/namespace-detail.tsx:222
 msgid "Delete namespace?"
 msgstr "Delete namespace?"
 
@@ -872,7 +880,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 
 #: src/components/headers/collection-header.tsx:357
-#: src/containers/namespace-detail/namespace-detail.tsx:225
+#: src/containers/namespace-detail/namespace-detail.tsx:227
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "Deleting <0>{0}</0> and its data will be lost."
 
@@ -1029,7 +1037,7 @@ msgstr "Edit execution environment"
 msgid "Edit group permissions"
 msgstr "Edit group permissions"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:555
+#: src/containers/namespace-detail/namespace-detail.tsx:574
 msgid "Edit namespace"
 msgstr "Edit namespace"
 
@@ -1288,7 +1296,7 @@ msgstr "Failed"
 msgid "Failed to retrieve user data."
 msgstr "Failed to retrieve user data."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:402
+#: src/containers/namespace-detail/namespace-detail.tsx:421
 msgid "Failed to sign all collections."
 msgstr "Failed to sign all collections."
 
@@ -1428,7 +1436,7 @@ msgstr "Hide the signature"
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
 #: src/components/headers/collection-header.tsx:366
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
-#: src/containers/namespace-detail/namespace-detail.tsx:232
+#: src/containers/namespace-detail/namespace-detail.tsx:234
 msgid "I understand that this action cannot be undone."
 msgstr "I understand that this action cannot be undone."
 
@@ -1477,7 +1485,7 @@ msgstr "Import and move to staging"
 msgid "Import log"
 msgstr "Import log"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:596
+#: src/containers/namespace-detail/namespace-detail.tsx:615
 msgid "Imports"
 msgstr "Imports"
 
@@ -1727,11 +1735,11 @@ msgstr "Name must not be empty."
 msgid "Namespace"
 msgstr "Namespace"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:676
+#: src/containers/namespace-detail/namespace-detail.tsx:695
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "Namespace \"{name}\" could not be deleted."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:655
+#: src/containers/namespace-detail/namespace-detail.tsx:674
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "Namespace \"{name}\" has been successfully deleted."
 
@@ -1800,7 +1808,7 @@ msgstr "No activities yet"
 msgid "No child task"
 msgstr "No child task"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:291
+#: src/containers/namespace-detail/namespace-detail.tsx:293
 #: src/containers/search/search.tsx:152
 msgid "No collections yet"
 msgstr "No collections yet"
@@ -2336,7 +2344,7 @@ msgstr "Requires super user permissions to edit."
 msgid "Reserve resources"
 msgstr "Reserve resources"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:172
+#: src/containers/namespace-detail/namespace-detail.tsx:174
 msgid "Resources"
 msgstr "Resources"
 
@@ -2491,7 +2499,7 @@ msgid "Sign all"
 msgstr "Sign all"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:27
-#: src/containers/namespace-detail/namespace-detail.tsx:605
+#: src/containers/namespace-detail/namespace-detail.tsx:624
 msgid "Sign all collections"
 msgstr "Sign all collections"
 
@@ -2533,7 +2541,7 @@ msgstr "Signed and approved"
 msgid "Signed only"
 msgstr "Signed only"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:411
+#: src/containers/namespace-detail/namespace-detail.tsx:430
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Signing started for all collections in namespace \"{0}\"."
 
@@ -2938,8 +2946,8 @@ msgstr "Updated <0/>"
 msgid "Upload"
 msgstr "Upload"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:298
-#: src/containers/namespace-detail/namespace-detail.tsx:617
+#: src/containers/namespace-detail/namespace-detail.tsx:300
+#: src/containers/namespace-detail/namespace-detail.tsx:636
 msgid "Upload collection"
 msgstr "Upload collection"
 

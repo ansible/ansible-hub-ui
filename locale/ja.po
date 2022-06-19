@@ -64,7 +64,7 @@ msgstr "<0>注記:</0> 以下のリンクはブラウザーによってブロッ
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:324
+#: src/containers/namespace-detail/namespace-detail.tsx:326
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>注記:</0> この URL を使用して ansible-galaxy を設定して、この名前空間にコレクションをアップロードします。ansible-galaxy の設定に関する詳細は <1>ここ</1><2></2><3/> を参照してください。"
 
@@ -109,7 +109,7 @@ msgstr "タグには、小文字、大文字、小文字、数字、アンダー
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:383
+#: src/containers/namespace-detail/namespace-detail.tsx:402
 msgid "API Error: Failed to set deprecation."
 msgstr "API エラー: 非推奨の設定に失敗しました。"
 
@@ -120,7 +120,7 @@ msgstr "API エラー: 非推奨の設定に失敗しました。"
 
 #: src/components/headers/collection-header.tsx:579
 #: src/components/headers/collection-header.tsx:630
-#: src/containers/namespace-detail/namespace-detail.tsx:401
+#: src/containers/namespace-detail/namespace-detail.tsx:420
 msgid "API Error: {status}"
 msgstr "API エラー: {status}"
 
@@ -297,7 +297,7 @@ msgstr "CA 証明書"
 #~ msgstr "CLI Configuration"
 
 #: src/components/repositories/local-repository-table.tsx:69
-#: src/containers/namespace-detail/namespace-detail.tsx:167
+#: src/containers/namespace-detail/namespace-detail.tsx:169
 msgid "CLI configuration"
 msgstr "CLI 設定"
 
@@ -327,7 +327,7 @@ msgstr "取り消し"
 msgid "Canceled"
 msgstr "取り消し済み"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:571
+#: src/containers/namespace-detail/namespace-detail.tsx:590
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "コレクションの依存関係が<0/>削除されるまで<1/>名前空間は削除できません"
 
@@ -462,6 +462,14 @@ msgstr "コード"
 msgid "Collection"
 msgstr "コレクション"
 
+#: src/containers/namespace-detail/namespace-detail.tsx:387
+msgid "Collection \"{0}\" has been successfully deprecated."
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:386
+msgid "Collection \"{0}\" has been successfully undeprecated."
+msgstr ""
+
 #: src/components/headers/collection-header.tsx:785
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "コレクション \"{name} v{collectionVersion}\" を削除できませんでした。"
@@ -508,7 +516,7 @@ msgstr "コレクションには依存関係がありません。"
 msgid "Collection is not being used by any collection."
 msgstr "コレクションはどのコレクションでも使用されていません。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:531
+#: src/containers/namespace-detail/namespace-detail.tsx:550
 msgid "Collection repositories could not be displayed."
 msgstr "コレクションリポジトリーを表示できませんでした。"
 
@@ -524,7 +532,7 @@ msgid "Collection versions"
 msgstr "コレクションのバージョン"
 
 #: src/constants.tsx:37
-#: src/containers/namespace-detail/namespace-detail.tsx:164
+#: src/containers/namespace-detail/namespace-detail.tsx:166
 #: src/containers/search/search.tsx:98
 #: src/loaders/standalone/standalone-loader.tsx:341
 #: src/loaders/standalone/standalone-loader.tsx:342
@@ -532,7 +540,7 @@ msgid "Collections"
 msgstr "コレクション"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:236
-#: src/containers/namespace-detail/namespace-detail.tsx:292
+#: src/containers/namespace-detail/namespace-detail.tsx:294
 #: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
 msgstr "コレクションはアップロードされると表示されます"
@@ -823,12 +831,12 @@ msgid "Delete image?"
 msgstr "イメージを削除しますか?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:565
-#: src/containers/namespace-detail/namespace-detail.tsx:579
+#: src/containers/namespace-detail/namespace-detail.tsx:584
+#: src/containers/namespace-detail/namespace-detail.tsx:598
 msgid "Delete namespace"
 msgstr "名前空間の削除"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:220
+#: src/containers/namespace-detail/namespace-detail.tsx:222
 msgid "Delete namespace?"
 msgstr "名前空間を削除しますか?"
 
@@ -869,7 +877,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "<0>{0} v{collectionVersion}</0> を削除すると、そのデータが失われます。"
 
 #: src/components/headers/collection-header.tsx:357
-#: src/containers/namespace-detail/namespace-detail.tsx:225
+#: src/containers/namespace-detail/namespace-detail.tsx:227
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "<0>{0}</0> を削除すると、そのデータが失われます。"
 
@@ -1026,7 +1034,7 @@ msgstr "実行環境の編集"
 msgid "Edit group permissions"
 msgstr "グループ権限の編集"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:555
+#: src/containers/namespace-detail/namespace-detail.tsx:574
 msgid "Edit namespace"
 msgstr "名前空間の編集"
 
@@ -1285,7 +1293,7 @@ msgstr "失敗"
 msgid "Failed to retrieve user data."
 msgstr "ユーザーデータの取得に失敗しました。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:402
+#: src/containers/namespace-detail/namespace-detail.tsx:421
 msgid "Failed to sign all collections."
 msgstr "すべてのコレクションの署名に失敗しました。"
 
@@ -1425,7 +1433,7 @@ msgstr "署名の非表示"
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
 #: src/components/headers/collection-header.tsx:366
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
-#: src/containers/namespace-detail/namespace-detail.tsx:232
+#: src/containers/namespace-detail/namespace-detail.tsx:234
 msgid "I understand that this action cannot be undone."
 msgstr "この操作は元に戻せないことを理解しています。"
 
@@ -1474,7 +1482,7 @@ msgstr "インポートしてステージングに移動"
 msgid "Import log"
 msgstr "ログのインポート"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:596
+#: src/containers/namespace-detail/namespace-detail.tsx:615
 msgid "Imports"
 msgstr "インポート"
 
@@ -1724,11 +1732,11 @@ msgstr "名前を空白にすることはできません。"
 msgid "Namespace"
 msgstr "名前空間"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:676
+#: src/containers/namespace-detail/namespace-detail.tsx:695
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "名前空間 \"{name}\" を削除できませんでした。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:655
+#: src/containers/namespace-detail/namespace-detail.tsx:674
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "名前空間 \"{name}\" が正常に削除されました。"
 
@@ -1797,7 +1805,7 @@ msgstr "まだアクティビティーはありません"
 msgid "No child task"
 msgstr "子タスクなし"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:291
+#: src/containers/namespace-detail/namespace-detail.tsx:293
 #: src/containers/search/search.tsx:152
 msgid "No collections yet"
 msgstr "まだコレクションはありません"
@@ -2333,7 +2341,7 @@ msgstr "編集にはスーパーユーザー権限が必要です。"
 msgid "Reserve resources"
 msgstr "リソースの予約"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:172
+#: src/containers/namespace-detail/namespace-detail.tsx:174
 msgid "Resources"
 msgstr "リソース"
 
@@ -2488,7 +2496,7 @@ msgid "Sign all"
 msgstr "すべて署名する"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:27
-#: src/containers/namespace-detail/namespace-detail.tsx:605
+#: src/containers/namespace-detail/namespace-detail.tsx:624
 msgid "Sign all collections"
 msgstr "すべてのコレクションに署名する"
 
@@ -2530,7 +2538,7 @@ msgstr "署名済みおよび承認済み"
 msgid "Signed only"
 msgstr "署名済みのみ"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:411
+#: src/containers/namespace-detail/namespace-detail.tsx:430
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "名前空間 \"{0}\" のすべてのコレクションで署名を開始しました。"
 
@@ -2935,8 +2943,8 @@ msgstr "<0/> を更新"
 msgid "Upload"
 msgstr "アップロード"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:298
-#: src/containers/namespace-detail/namespace-detail.tsx:617
+#: src/containers/namespace-detail/namespace-detail.tsx:300
+#: src/containers/namespace-detail/namespace-detail.tsx:636
 msgid "Upload collection"
 msgstr "コレクションのアップロード"
 
