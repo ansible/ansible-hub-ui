@@ -360,8 +360,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
     const menuItems = [];
     menuItems.push(
       <React.Fragment key='fragment'>
-        {deleteCollectionUtils.deleteMenuOption(true, this.context, () =>
-          this.tryOpenDeleteModalWithConfirm(collection),
+        {deleteCollectionUtils.deleteMenuOption(
+          true,
+          this.context.user.model_permissions.delete_collection,
+          () => this.tryOpenDeleteModalWithConfirm(collection),
         )}
       </React.Fragment>,
       <DropdownItem

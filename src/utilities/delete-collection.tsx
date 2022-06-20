@@ -5,7 +5,9 @@ import { errorMessage, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 import { t, Trans } from '@lingui/macro';
 import { Paths, formatPath } from 'src/paths';
 
-import { DropdownItem, Tooltip } from '@patternfly/react-core';
+import { Text, DropdownItem, Checkbox, Tooltip } from '@patternfly/react-core';
+
+import { DeleteModal } from 'src/components';
 
 class DeleteCollectionUtils {
   public getUsedbyDependencies(collection, setDependencies, setAlert) {
@@ -24,9 +26,13 @@ class DeleteCollectionUtils {
       });
   }
 
-  public deleteMenuOption(noDependencies, context, onClick) {
+  public deleteMenuOption(
+    noDependencies,
+    delete_collection_permission: boolean,
+    onClick,
+  ) {
     return noDependencies
-      ? context.user.model_permissions.delete_collection && (
+      ? delete_collection_permission && (
           <DropdownItem
             key='delete-collection-enabled'
             onClick={() => onClick()}
@@ -35,7 +41,7 @@ class DeleteCollectionUtils {
             {t`Delete entire collection`}
           </DropdownItem>
         )
-      : context.user.model_permissions.delete_collection && (
+      : delete_collection_permission && (
           <Tooltip
             key='delete-collection-disabled'
             position='left'
@@ -52,6 +58,70 @@ class DeleteCollectionUtils {
             </DropdownItem>
           </Tooltip>
         );
+  }
+
+  public deleteModal(
+    deleteCollection,
+    isDeletionPending,
+    confirmDelete,
+    collectionVersion,
+    cancelAction,
+    deleteAction,
+    onChange,
+  ) {
+    return (
+      deleteCollection && (
+        <DeleteModal
+          spinner={isDeletionPending}
+          cancelAction={() => cancelAction()}
+          deleteAction={() => deleteAction()}
+          isDisabled={!confirmDelete || isDeletionPending}
+          title={
+            collectionVersion
+              ? t`Delete collection version?`
+              : t`Delete collection?`
+          }
+        >
+          <>
+            <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
+              {collectionVersion ? (
+                <>
+                  {deleteCollection.all_versions.length === 1 ? (
+                    <Trans>
+                      Deleting{' '}
+                      <b>
+                        {deleteCollection.name} v{collectionVersion}
+                      </b>{' '}
+                      and its data will be lost and this will cause the entire
+                      collection to be deleted.
+                    </Trans>
+                  ) : (
+                    <Trans>
+                      Deleting{' '}
+                      <b>
+                        {deleteCollection.name} v{collectionVersion}
+                      </b>{' '}
+                      and its data will be lost.
+                    </Trans>
+                  )}
+                </>
+              ) : (
+                <Trans>
+                  Deleting <b>{deleteCollection.name}</b> and its data will be
+                  lost.
+                </Trans>
+              )}
+            </Text>
+            <Checkbox
+              isChecked={confirmDelete}
+              onChange={(val) => onChange(val)}
+              label={t`I understand that this action cannot be undone.`}
+              id='delete_confirm'
+            />
+          </>
+        </DeleteModal>
+      )
+    );
   }
 
   public deleteCollection(component, redirect, selectedRepo, addAlert) {

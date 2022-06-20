@@ -212,8 +212,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const canSign = canSignNS(this.context, namespace);
 
     const dropdownItems = [
-      deleteCollectionUtils.deleteMenuOption(noDependencies, this.context, () =>
-        this.openDeleteModalWithConfirm(),
+      deleteCollectionUtils.deleteMenuOption(
+        noDependencies,
+        this.context.user.model_permissions.delete_collection,
+        () => this.openDeleteModalWithConfirm(),
       ),
       this.context.user.model_permissions.delete_collection && (
         <DropdownItem

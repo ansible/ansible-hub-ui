@@ -49,6 +49,7 @@ import {
   DeleteModal,
   AlertType,
   SignAllCertificatesModal,
+  DeleteCollectionModal,
 } from 'src/components';
 
 import {
@@ -58,7 +59,9 @@ import {
   errorMessage,
   waitForTask,
   canSign as canSignNS,
+  deleteCollectionUtils,
 } from 'src/utilities';
+
 import { Constants } from 'src/constants';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
@@ -87,6 +90,8 @@ interface IState {
   confirmDelete: boolean;
   isNamespacePending: boolean;
   alerts: AlertType[];
+  deleteCollection: CollectionListType;
+  isDeletionPending: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -126,6 +131,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       confirmDelete: false,
       isNamespacePending: false,
       alerts: [],
+      deleteCollection: null,
+      isDeletionPending: false,
     };
   }
 
@@ -154,6 +161,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       confirmDelete,
       isNamespacePending,
       alerts,
+      deleteCollection,
+      isDeletionPending,
     } = this.state;
 
     if (redirect) {
@@ -222,6 +231,24 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           collection={updateCollection}
           namespace={namespace.name}
         />
+        <DeleteCollectionModal
+          deleteCollection={deleteCollection}
+          isDeletionPending={isDeletionPending}
+          confirmDelete={confirmDelete}
+          collectionVersion={null}
+          cancelAction={() => this.setState({ deleteCollection: null })}
+          deleteAction={() =>
+            this.setState({ isDeletionPending: true }, () => {
+              deleteCollectionUtils.deleteCollection(
+                this,
+                false,
+                this.context.selectedRepo,
+                (alert) => this.setState({ alerts: [...alerts, alert] }),
+              );
+            })
+          }
+          onChange={(val) => this.setState({ confirmDelete: val })}
+        ></DeleteCollectionModal>
         {isOpenNamespaceModal && (
           <DeleteModal
             spinner={isNamespacePending}
@@ -320,15 +347,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                     collections={collections}
                     itemCount={itemCount}
                     showControls={this.state.showControls}
-                    handleControlClick={(id, action) =>
-                      this.handleCollectionAction(id, action)
-                    }
                     repo={this.context.selectedRepo}
-                    addAlert={(alert) =>
-                      this.setState({ alerts: [...alerts, alert] })
+                    renderCollectionControls={(collection) =>
+                      this.renderCollectionControls(collection)
                     }
-                    reload={() => this.loadAll()}
-                    context={this.context}
                   />
                 }
               </section>
@@ -739,6 +761,80 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   get closeAlert() {
     return closeAlertMixin('alerts');
+  }
+
+  private tryOpenDeleteModalWithConfirm(collection) {
+    deleteCollectionUtils.getUsedbyDependencies(
+      collection,
+      (noDependencies) =>
+        this.openDeleteModalWithConfirm(noDependencies, collection),
+      (alert) =>
+        this.setState({
+          alerts: [...this.state.alerts, alert],
+        }),
+    );
+  }
+
+  private openDeleteModalWithConfirm(noDependencies, collection) {
+    if (noDependencies) {
+      this.setState({
+        deleteCollection: collection,
+        confirmDelete: false,
+      });
+    } else {
+      this.setState({
+        alerts: [
+          ...this.state.alerts,
+          {
+            title: (
+              <Trans>
+                Cannot delete until collections <br />
+                that depend on this collection <br />
+                have been deleted.
+              </Trans>
+            ),
+            variant: 'warning',
+          },
+        ],
+      });
+    }
+  }
+
+  private renderCollectionControls(collection: CollectionListType) {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Button
+          onClick={() => this.handleCollectionAction(collection.id, 'upload')}
+          variant='secondary'
+        >
+          {t`Upload new version`}
+        </Button>
+        <StatefulDropdown
+          items={[
+            <React.Fragment key='fragment'>
+              {deleteCollectionUtils.deleteMenuOption(
+                true,
+                this.context.user.model_permissions.delete_collection,
+                () => this.tryOpenDeleteModalWithConfirm(collection),
+              )}
+            </React.Fragment>,
+            <DropdownItem
+              onClick={() =>
+                this.handleCollectionAction(collection.id, 'deprecate')
+              }
+              key='deprecate'
+            >
+              {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
+            </DropdownItem>,
+          ]}
+          ariaLabel='collection-kebab'
+        />
+      </div>
+    );
+  }
+
+  public load() {
+    this.loadAll();
   }
 }
 
