@@ -164,7 +164,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
             )
           }
           onChange={(val) => this.setState({ confirmDelete: val })}
-        ></DeleteCollectionModal>
+        />
 
         {showImportModal && (
           <ImportModal
@@ -359,13 +359,11 @@ class Search extends React.Component<RouteComponentProps, IState> {
   private renderMenu(list, collection) {
     const menuItems = [];
     menuItems.push(
-      <React.Fragment key='fragment'>
-        {deleteCollectionUtils.deleteMenuOption(
-          true,
-          this.context.user.model_permissions.delete_collection,
-          () => this.tryOpenDeleteModalWithConfirm(collection),
-        )}
-      </React.Fragment>,
+      deleteCollectionUtils.deleteMenuOption(
+        true,
+        this.context.user.model_permissions.delete_collection,
+        () => this.tryOpenDeleteModalWithConfirm(collection),
+      ),
       <DropdownItem
         onClick={() => this.handleControlClick(collection)}
         key='deprecate'

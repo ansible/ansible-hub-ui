@@ -2,15 +2,16 @@ import React from 'react';
 import { t, Trans } from '@lingui/macro';
 import { Text, Checkbox } from '@patternfly/react-core';
 import { DeleteModal } from 'src/components';
+import { CollectionDetailType, CollectionListType } from 'src/api';
 
 interface IProps {
-  deleteCollection: any;
+  deleteCollection: CollectionDetailType | CollectionListType;
   isDeletionPending: boolean;
   confirmDelete: boolean;
-  collectionVersion: string | null;
+  collectionVersion?: string;
   cancelAction: () => void;
   deleteAction: () => void;
-  onChange: (val: any) => void;
+  onChange: (val) => void;
 }
 
 export class DeleteCollectionModal extends React.Component<IProps> {
@@ -42,7 +43,7 @@ export class DeleteCollectionModal extends React.Component<IProps> {
             <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
               {collectionVersion ? (
                 <>
-                  {deleteCollection.all_versions.length === 1 ? (
+                  {deleteCollection['all_versions'].length === 1 ? (
                     <Trans>
                       Deleting{' '}
                       <b>

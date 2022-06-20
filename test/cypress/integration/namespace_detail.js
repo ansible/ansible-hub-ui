@@ -26,7 +26,7 @@ describe('Namespace detail screen', () => {
     cy.get(
       '[data-cy="CollectionListItem"]:first button[aria-label="Actions"]',
     ).click();
-    cy.get('[data-cy="CollectionListItem"]:first li > a:first').click();
+    cy.contains('.body ul a', 'Deprecate').click();
 
     // Reload the page
     cy.visit('/ui/repo/published/namespace_detail_test');

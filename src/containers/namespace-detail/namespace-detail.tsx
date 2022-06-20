@@ -248,7 +248,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             })
           }
           onChange={(val) => this.setState({ confirmDelete: val })}
-        ></DeleteCollectionModal>
+        />
         {isOpenNamespaceModal && (
           <DeleteModal
             spinner={isNamespacePending}
@@ -339,20 +339,18 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               />
             ) : (
               <section className='body'>
-                {
-                  <CollectionList
-                    updateParams={updateParams}
-                    params={params}
-                    ignoredParams={ignoredParams}
-                    collections={collections}
-                    itemCount={itemCount}
-                    showControls={this.state.showControls}
-                    repo={this.context.selectedRepo}
-                    renderCollectionControls={(collection) =>
-                      this.renderCollectionControls(collection)
-                    }
-                  />
-                }
+                <CollectionList
+                  updateParams={updateParams}
+                  params={params}
+                  ignoredParams={ignoredParams}
+                  collections={collections}
+                  itemCount={itemCount}
+                  showControls={this.state.showControls}
+                  repo={this.context.selectedRepo}
+                  renderCollectionControls={(collection) =>
+                    this.renderCollectionControls(collection)
+                  }
+                />
               </section>
             )
           ) : null}
@@ -811,13 +809,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         </Button>
         <StatefulDropdown
           items={[
-            <React.Fragment key='fragment'>
-              {deleteCollectionUtils.deleteMenuOption(
-                true,
-                this.context.user.model_permissions.delete_collection,
-                () => this.tryOpenDeleteModalWithConfirm(collection),
-              )}
-            </React.Fragment>,
+            deleteCollectionUtils.deleteMenuOption(
+              true,
+              this.context.user.model_permissions.delete_collection,
+              () => this.tryOpenDeleteModalWithConfirm(collection),
+            ),
             <DropdownItem
               onClick={() =>
                 this.handleCollectionAction(collection.id, 'deprecate')

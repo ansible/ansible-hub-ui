@@ -383,7 +383,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             })
           }
           onChange={(val) => this.setState({ confirmDelete: val })}
-        ></DeleteCollectionModal>
+        />
         <BaseHeader
           className={className}
           title={collection.name}
