@@ -383,7 +383,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         });
     };
 
-    if (!users) {
+    const { view_user } = this.context.user.model_permissions;
+
+    if (!users && view_user) {
       this.queryUsers();
     }
 
@@ -394,6 +396,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         deleteAction={deleteAction}
         name={group.name}
         users={users}
+        canViewUsers={view_user}
       />
     );
   }
