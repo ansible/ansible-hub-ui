@@ -19,6 +19,7 @@ interface SelectRolesProps {
   selectedRoles: RoleType[];
   onRolesUpdate?: (roles) => void;
   message?: string;
+  pulpObjectType?: string;
 }
 
 export const SelectRoles: React.FC<SelectRolesProps> = ({
@@ -26,6 +27,7 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
   selectedRoles,
   onRolesUpdate,
   message,
+  pulpObjectType,
 }) => {
   const [inputText, setInputText] = useState<string>('');
   const [roles, setRoles] = useState<RoleType[]>([]);
@@ -43,13 +45,14 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
 
   const queryRoles = () => {
     setLoading(true);
-    RoleAPI.list({ name__startswith: 'galaxy.', ...localParams }).then(
-      ({ data }) => {
-        setRoles(data.results);
-        setRolesItemCount(data.count);
-        setLoading(false);
-      },
-    );
+    RoleAPI.list(
+      { name__startswith: 'galaxy.', ...localParams },
+      pulpObjectType,
+    ).then(({ data }) => {
+      setRoles(data.results);
+      setRolesItemCount(data.count);
+      setLoading(false);
+    });
   };
 
   if (loading) {

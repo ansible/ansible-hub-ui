@@ -429,6 +429,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               groupId={params.group}
               groups={namespace.groups}
               name={namespace.name}
+              pulpObjectType='pulp_ansible/namespaces'
               reload={() => this.load()}
               selectRolesMessage={t`The selected roles will be added to this specific namespace.`}
               updateGroups={(groups) =>

@@ -30,6 +30,7 @@ interface IProps {
   groupId?: number;
   groups: GroupType[];
   name: string;
+  pulpObjectType: string;
   reload: () => void;
   selectRolesMessage: string;
   updateGroups: (groups: GroupType[]) => Promise<void>;
@@ -294,7 +295,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
   }
 
   private renderGroupSelectWizard() {
-    const { groups, selectRolesMessage } = this.props;
+    const { groups, pulpObjectType, selectRolesMessage } = this.props;
     const {
       showGroupSelectWizard: { group, roles = [] },
     } = this.state;
@@ -332,6 +333,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
               this.setState({ showGroupSelectWizard: { group, roles } })
             }
             message={selectRolesMessage}
+            pulpObjectType={pulpObjectType}
           />
         ),
         canJumpTo: hasGroup,
@@ -362,6 +364,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
   }
 
   private renderRoleSelectWizard(group) {
+    const { pulpObjectType } = this.props;
     const {
       showRoleSelectWizard: { roles = [] },
     } = this.state;
@@ -382,6 +385,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
             onRolesUpdate={(roles) =>
               this.setState({ showRoleSelectWizard: { roles } })
             }
+            pulpObjectType={pulpObjectType}
           />
         ),
         backButtonText: t`Cancel`,
