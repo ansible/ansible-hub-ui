@@ -268,8 +268,9 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderDeleteModal() {
     const name = this.state.selectedGroup && this.state.selectedGroup.name;
     const { deleteModalUsers: users, deleteModalCount: count } = this.state;
+    const { view_user } = this.context.user.model_permissions;
 
-    if (!users) {
+    if (!users && view_user) {
       this.queryUsers();
     }
 
@@ -280,6 +281,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         deleteAction={() => this.selectedGroup(this.state.selectedGroup)}
         name={name}
         users={users}
+        canViewUsers={view_user}
       />
     );
   }
@@ -402,20 +404,6 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     const { user } = this.context;
     const dropdownItems = [
       <React.Fragment key='dropdown'>
-        <DropdownItem
-          key='edit'
-          onClick={() => {
-            this.setState({
-              selectedGroup: { ...group },
-              redirect: formatPath(Paths.groupDetail, {
-                group: group.id,
-              }),
-            });
-          }}
-        >
-          <Trans>Edit</Trans>
-        </DropdownItem>
-
         {!!user && user.model_permissions.delete_group && (
           <DropdownItem
             aria-label='Delete'
