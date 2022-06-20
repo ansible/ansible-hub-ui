@@ -37,6 +37,7 @@ import {
   DeleteModal,
   SignSingleCertificateModal,
   SignAllCertificatesModal,
+  UploadSingCertificateModal,
   ImportModal,
 } from 'src/components';
 
@@ -46,6 +47,9 @@ import {
   SignCollectionAPI,
   CollectionListType,
   MyNamespaceAPI,
+  CollectionVersion,
+  Repositories,
+  CertificateUploadAPI,
 } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import {
@@ -93,6 +97,8 @@ interface IState {
   isDeletionPending: boolean;
   updateCollection: CollectionListType;
   showImportModal: boolean;
+  uploadCertificateModalOpen: boolean;
+  versionToUploadCertificate: CollectionVersion;
 }
 
 export class CollectionHeader extends React.Component<IProps, IState> {
@@ -120,6 +126,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       isDeletionPending: false,
       updateCollection: null,
       showImportModal: false,
+      uploadCertificateModalOpen: false,
+      versionToUploadCertificate: undefined,
     };
   }
 
@@ -177,7 +185,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const latestVersion = collection.latest_version.created_at;
 
-    const { display_signatures } = this.context?.featureFlags || {};
+    const { display_signatures, can_upload_signatures } =
+      this.context?.featureFlags || {};
 
     const signedString = (v) => {
       if (display_signatures && 'sign_state' in v) {
@@ -239,7 +248,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           {t`Delete version ${collection.latest_version.version}`}
         </DropdownItem>
       ),
-      canSign && (
+      canSign && !can_upload_signatures && (
         <DropdownItem
           key='sign-all'
           onClick={() => this.setState({ isOpenSignAllModal: true })}
@@ -250,7 +259,16 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       canSign && (
         <DropdownItem
           key='sign-version'
-          onClick={() => this.setState({ isOpenSignModal: true })}
+          onClick={() => {
+            if (can_upload_signatures) {
+              this.setState({
+                uploadCertificateModalOpen: true,
+                versionToUploadCertificate: collection.latest_version,
+              });
+            } else {
+              this.setState({ isOpenSignModal: true });
+            }
+          }}
         >
           {t`Sign version ${collection.latest_version.version}`}
         </DropdownItem>
@@ -291,6 +309,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
         )}
         {canSign && (
           <>
+            <UploadSingCertificateModal
+              isOpen={this.state.uploadCertificateModalOpen}
+              onCancel={() => this.closeUploadCertificateModal()}
+              onSubmit={(d) => this.submitCertificate(d)}
+            />
             <SignAllCertificatesModal
               name={collectionName}
               numberOfAffected={collection.total_versions}
@@ -637,6 +660,63 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
   private renderSelectVersions(versions, count) {
     return versions.slice(0, count);
+  }
+
+  private async submitCertificate(file: File) {
+    const version = this.state.versionToUploadCertificate;
+    const response = await Repositories.getRepository({
+      name: this.context.selectedRepo,
+    });
+    const signed_collection = `${PULP_API_BASE_PATH}content/ansible/collection_versions/${version.id}/`;
+
+    this.setState({
+      alerts: this.state.alerts.concat({
+        id: 'upload-certificate',
+        variant: 'info',
+        title: t`The certificate for "${version.namespace} ${version.name} v${version.version}" is being uploaded.`,
+      }),
+    });
+
+    this.closeUploadCertificateModal();
+
+    CertificateUploadAPI.upload({
+      file,
+      repository: response.data.results[0].pulp_href,
+      signed_collection,
+    })
+      .then((result) => {
+        return waitForTask(parsePulpIDFromURL(result.data.task)).then(() => {
+          if (this.props.reload) {
+            this.props.reload();
+          }
+          this.setState({
+            alerts: this.state.alerts
+              .filter(({ id }) => id !== 'upload-certificate')
+              .concat({
+                variant: 'success',
+                title: t`Certificate for collection "${version.namespace} ${version.name} v${version.version}" has been successfully uploaded.`,
+              }),
+          });
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          alerts: this.state.alerts
+            .filter(({ id }) => id !== 'upload-certificate')
+            .concat({
+              variant: 'danger',
+              title: t`The certificate for "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+              description: error,
+            }),
+        });
+      });
+  }
+
+  private closeUploadCertificateModal() {
+    this.setState({
+      uploadCertificateModalOpen: false,
+      versionToUploadCertificate: undefined,
+    });
   }
 
   private paginateVersions(versions) {
