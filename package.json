@@ -46,7 +46,7 @@
         "@ls-lint/ls-lint": "^1.11.0",
         "@redhat-cloud-services/frontend-components-config": "^4.6.13",
         "@redhat-cloud-services/frontend-components-config-utilities": "^1.5.20",
-        "@typescript-eslint/eslint-plugin": "^5.27.1",
+        "@typescript-eslint/eslint-plugin": "^5.28.0",
         "@typescript-eslint/parser": "^5.22.0",
         "babel-core": "^7.0.0-bridge.0",
         "babel-plugin-lodash": "^3.3.4",
