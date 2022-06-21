@@ -23,6 +23,10 @@ import { AppContext } from 'src/loaders/app-context';
 //import { filterIsSet } from 'src/utilities';
 //import { Paths } from 'src/paths';
 
+//components/collection-list/collection-filter.tsx 
+import { CollectionFilter } from 'src/components';
+
+
 interface IProps {
   legacyroles: LegacyRoleListType[];
   //numberOfResults: number;
@@ -118,10 +122,15 @@ class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
     const {
         page,
         page_size,
-        order_by
+        order_by,
+        keywords,
     } = p;
 
-    const url = `roles/?page=${page}&page_size=${page_size}&order_by=${order_by}`;
+    let url = `roles/?page=${page}&page_size=${page_size}&order_by=${order_by}`;
+    if (keywords !== null && keywords !== undefined && keywords !== "") {
+        url = url + '&keywords=' + encodeURIComponent(keywords);
+    }
+
     LegacyRoleAPI.get(url).then((response) => {
       console.log(response.data);
       //this.setState({legacyroles: response.data});
@@ -163,10 +172,38 @@ class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
 
     console.log('render', 'props', this.props);
 
+    const ignoredParams = [
+        'namespace',
+        'page',
+        'page_size',
+        'sort',
+        'tab',
+        'view_type'
+    ];
+
     return (
       <div>
         <BaseHeader title={t`Legacy Roles`}></BaseHeader>
         <React.Fragment>
+
+          { this.state.mounted && 
+            <CollectionFilter
+                ignoredParams={ignoredParams}
+                params={this.state.params}
+                updateParams={this.updateParams}
+            />
+          }
+
+          { this.state.mounted && 
+              <Pagination
+                params={this.state.params}
+                //updateParams={(p) => this.updateParams(p)}
+                updateParams={this.updateParams}
+                count={this.state.count}
+              />
+          }
+
+
           { this.state.mounted && 
               <DataList aria-label={t`List of Legacy Roles`}>
                 {this.state.legacyroles &&
@@ -174,10 +211,12 @@ class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
                     <LegacyRoleListItem
                       key={lrole.github_user + lrole.name + lrole.id}
                       role={lrole}
+                      show_thumbnail={true}
                     />
                   ))}
               </DataList>
           }
+
           { this.state.mounted && 
               <Pagination
                 params={this.state.params}

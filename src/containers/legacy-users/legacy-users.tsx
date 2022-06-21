@@ -22,6 +22,8 @@ import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
 //import { filterIsSet } from 'src/utilities';
 //import { Paths } from 'src/paths';
+//
+import { CollectionFilter } from 'src/components';
 
 interface IProps {
   legacyusers: LegacyUserListType[];
@@ -96,10 +98,15 @@ class LegacyUsers extends React.Component<RouteComponentProps, IProps> {
     const {
         page,
         page_size,
-        order_by
+        order_by,
+        keywords,
     } = p;
 
-    const url = `users/?page=${page}&page_size=${page_size}&order_by=${order_by}`;
+    let url = `users/?page=${page}&page_size=${page_size}&order_by=${order_by}`;
+    if (keywords !== null && keywords !== undefined && keywords !== "") {
+        url = url + '&keywords=' + encodeURIComponent(keywords);
+    }
+
     LegacyUserAPI.get(url).then((response) => {
       console.log(response.data);
       //this.setState({legacyroles: response.data});
@@ -118,10 +125,37 @@ class LegacyUsers extends React.Component<RouteComponentProps, IProps> {
   }
 
   render() {
+
+    const ignoredParams = [
+        'namespace',
+        'page',
+        'page_size',
+        'sort',
+        'tab',
+        'view_type'
+    ];
+
     return (
       <div>
         <BaseHeader title={t`Legacy Authors`}></BaseHeader>
         <React.Fragment>
+
+          { this.state.mounted && 
+            <CollectionFilter
+                ignoredParams={ignoredParams}
+                params={this.state.params}
+                updateParams={this.updateParams}
+            />
+          }
+
+          { this.state.mounted && 
+              <Pagination
+                params={this.state.params}
+                updateParams={this.updateParams}
+                count={this.state.count}
+              />
+          }
+
           { this.state.mounted && 
               <DataList aria-label={t`List of Legacy Authors`}>
                 {this.state.legacyusers &&
