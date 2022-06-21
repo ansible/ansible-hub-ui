@@ -137,7 +137,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    this.loadAll();
+    this.load();
 
     this.setState({ alerts: this.context.alerts || [] });
   }
@@ -486,7 +486,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       .then((result) => {
         waitForTask(result.data.task_id)
           .then(() => {
-            this.loadAll();
+            this.load();
           })
           .catch((error) => {
             this.setState({
@@ -523,7 +523,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     });
   }
 
-  private loadAll() {
+  private load() {
     Promise.all([
       CollectionAPI.list(
         {
@@ -827,10 +827,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         />
       </div>
     );
-  }
-
-  public load() {
-    this.loadAll();
   }
 }
 

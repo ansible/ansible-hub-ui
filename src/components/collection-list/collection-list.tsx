@@ -27,15 +27,11 @@ interface IProps {
   showControls?: boolean;
   handleControlClick?: (id, event) => void;
   repo?: string;
-  renderCollectionControls: (collection) => any;
+  renderCollectionControls: (collection) => React.ReactElement;
 }
 
 // only used in namespace detail, collections uses individual items
 export class CollectionList extends React.Component<IProps> {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       collections,
