@@ -14,7 +14,6 @@ import {
   AlertList,
   AlertType,
   closeAlertMixin,
-  LoadingPageWithHeader,
   LoadingPageSpinner,
 } from 'src/components';
 import { ActiveUserAPI } from 'src/api';
@@ -24,7 +23,6 @@ import { errorMessage } from 'src/utilities';
 interface IState {
   token: string;
   alerts: AlertType[];
-  loading: boolean;
   loadingToken: boolean;
 }
 
@@ -35,24 +33,15 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
     this.state = {
       token: undefined,
       alerts: [],
-      loading: true,
       loadingToken: false,
     };
   }
 
-  componentDidMount() {
-    this.setState({ loading: false });
-  }
-
   render() {
-    const { token, alerts, loading, loadingToken } = this.state;
+    const { token, alerts, loadingToken } = this.state;
     const unauthorised = !this.context.user || this.context.user.is_anonymous;
     const expiration = this.context.settings.GALAXY_TOKEN_EXPIRATION;
     const expirationDate = new Date(Date.now() + 1000 * 60 * expiration);
-
-    if (loading) {
-      return <LoadingPageWithHeader></LoadingPageWithHeader>;
-    }
 
     return (
       <React.Fragment>
