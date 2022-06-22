@@ -14,6 +14,7 @@ import {
   AlertList,
   AlertType,
   closeAlertMixin,
+  LoadingPageSpinner,
 } from 'src/components';
 import { ActiveUserAPI } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
@@ -22,6 +23,7 @@ import { errorMessage } from 'src/utilities';
 interface IState {
   token: string;
   alerts: AlertType[];
+  loadingToken: boolean;
 }
 
 class TokenPage extends React.Component<RouteComponentProps, IState> {
@@ -31,10 +33,12 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
     this.state = {
       token: undefined,
       alerts: [],
+      loadingToken: false,
     };
   }
+
   render() {
-    const { token, alerts } = this.state;
+    const { token, alerts, loadingToken } = this.state;
     const unauthorised = !this.context.user || this.context.user.is_anonymous;
     const expiration = this.context.settings.GALAXY_TOKEN_EXPIRATION;
     const expirationDate = new Date(Date.now() + 1000 * 60 * expiration);
@@ -91,12 +95,14 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
                       </CardBody>
                       <ClipboardCopy>{token}</ClipboardCopy>
                     </div>
-                  ) : (
+                  ) : !token && !loadingToken ? (
                     <div className='load-token'>
                       <Button
                         onClick={() => this.loadToken()}
                       >{t`Load token`}</Button>
                     </div>
+                  ) : (
+                    <LoadingPageSpinner />
                   )}
                 </CardBody>
               </section>
@@ -108,21 +114,26 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadToken() {
-    ActiveUserAPI.getToken()
-      .then((result) => this.setState({ token: result.data.token }))
-      .catch((e) => {
-        const { status, statusText } = e.response;
-        this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: t`Token could not be displayed.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
+    this.setState({ loadingToken: true }, () => {
+      ActiveUserAPI.getToken()
+        .then((result) =>
+          this.setState({ token: result.data.token, loadingToken: false }),
+        )
+        .catch((e) => {
+          const { status, statusText } = e.response;
+          this.setState({
+            alerts: [
+              ...this.state.alerts,
+              {
+                variant: 'danger',
+                title: t`Token could not be displayed.`,
+                description: errorMessage(status, statusText),
+              },
+            ],
+            loadingToken: false,
+          });
         });
-      });
+    });
   }
 
   private get closeAlert() {

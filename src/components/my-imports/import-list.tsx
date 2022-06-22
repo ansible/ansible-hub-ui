@@ -6,10 +6,13 @@ import {
   Pagination,
   FormSelect,
   FormSelectOption,
-  Spinner,
   Toolbar,
 } from '@patternfly/react-core';
-import { AppliedFilters, CompoundFilter } from 'src/components';
+import {
+  AppliedFilters,
+  CompoundFilter,
+  LoadingPageSpinner,
+} from 'src/components';
 import { PulpStatus, NamespaceType, ImportListType } from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { filterIsSet } from 'src/utilities';
@@ -141,7 +144,7 @@ export class ImportList extends React.Component<IProps, IState> {
     if (loading) {
       return (
         <div className='loading'>
-          <Spinner />
+          <LoadingPageSpinner />
         </div>
       );
     }
