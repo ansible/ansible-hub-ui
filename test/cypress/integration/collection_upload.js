@@ -23,7 +23,9 @@ describe('Collection Upload Tests', () => {
     cy.contains('testcollection');
     cy.contains('Upload new version').click();
     cy.contains("You don't have rights to do this operation.");
+  });
 
+  it('should not upload new collection version in collection list/cards when user does not have permissions', () => {
     cy.visit(
       '/ui/repo/published?page_size=10&view_type=card&keywords=testcollection',
     );

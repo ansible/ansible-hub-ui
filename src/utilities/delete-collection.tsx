@@ -31,7 +31,7 @@ class DeleteCollectionUtils {
     delete_collection_permission: boolean,
     onClick,
   ) {
-    return noDependencies
+    let ret = noDependencies
       ? delete_collection_permission && (
           <DropdownItem
             key='delete-collection-enabled'
@@ -58,6 +58,9 @@ class DeleteCollectionUtils {
             </DropdownItem>
           </Tooltip>
         );
+
+    if (!ret) ret = <div></div>;
+    return ret;
   }
 
   public deleteModal(
