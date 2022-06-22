@@ -312,9 +312,10 @@ class CertificationDashboard extends React.Component<
       return <span className='fa fa-lg fa-spin fa-spinner' />;
     }
     if (version.repository_list.includes(Constants.PUBLISHED)) {
+      const { display_signatures } = this.context?.featureFlags || {};
       return (
         <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-          {version.sign_state === 'signed'
+          {display_signatures && version.sign_state === 'signed'
             ? t`Signed and approved`
             : t`Approved`}
         </Label>
@@ -328,6 +329,8 @@ class CertificationDashboard extends React.Component<
       );
     }
     if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
+      const { can_upload_signatures, require_upload_signatures } =
+        this.context?.featureFlags || {};
       return (
         <Label
           variant='outline'
@@ -335,7 +338,8 @@ class CertificationDashboard extends React.Component<
           icon={<ExclamationTriangleIcon />}
         >
           {version.sign_state === 'unsigned' &&
-          this.context.settings.GALAXY_REQUIRE_SIGNATURE_FOR_APPROVAL
+          can_upload_signatures &&
+          require_upload_signatures
             ? t`Needs signature and review`
             : t`Needs review`}
         </Label>
@@ -375,20 +379,23 @@ class CertificationDashboard extends React.Component<
   }
 
   private renderButtons(version: CollectionVersion) {
-    const { featureFlags } = this.context;
     // not checking namespace permissions here, auto_sign happens API side, so is the permission check
-    const canSign =
-      featureFlags?.collection_signing && featureFlags?.collection_auto_sign;
-
+    const {
+      can_upload_signatures,
+      collection_auto_sign,
+      require_upload_signatures,
+    } = this.context?.featureFlags || {};
     if (this.state.updatingVersions.includes(version)) {
       return <ListItemActions />; // empty td;
     }
 
-    const needUploadSignature =
-      this.context.settings.GALAXY_SIGNATURE_UPLOAD_ENABLED &&
-      version.sign_state === 'unsigned';
+    const canUploadSignature =
+      can_upload_signatures && version.sign_state === 'unsigned';
+    const mustUploadSignature = canUploadSignature && require_upload_signatures;
+    const autoSign = collection_auto_sign && !require_upload_signatures;
+
     const approveButton = [
-      needUploadSignature && (
+      canUploadSignature && (
         <React.Fragment key='upload'>
           <Button onClick={() => this.openUploadCertificateModal(version)}>
             {t`Upload signature`}
@@ -397,7 +404,7 @@ class CertificationDashboard extends React.Component<
       ),
       <Button
         key='approve'
-        isDisabled={needUploadSignature}
+        isDisabled={mustUploadSignature}
         onClick={() =>
           this.updateCertification(
             version,
@@ -406,7 +413,7 @@ class CertificationDashboard extends React.Component<
           )
         }
       >
-        {canSign ? t`Sign and approve` : t`Approve`}
+        {autoSign ? t`Sign and approve` : t`Approve`}
       </Button>,
     ].filter(Boolean);
 
@@ -439,7 +446,7 @@ class CertificationDashboard extends React.Component<
         isDisabled={isDisabled}
         key='certify'
       >
-        {canSign ? t`Sign and approve` : t`Approve`}
+        {autoSign ? t`Sign and approve` : t`Approve`}
       </DropdownItem>
     );
 

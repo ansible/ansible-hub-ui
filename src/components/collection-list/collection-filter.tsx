@@ -47,6 +47,8 @@ export class CollectionFilter extends React.Component<IProps, IState> {
 
   render() {
     const { ignoredParams, params, updateParams } = this.props;
+    const { display_signatures } = this.context?.featureFlags || {};
+
     const filterConfig = [
       {
         id: 'keywords',
@@ -61,7 +63,7 @@ export class CollectionFilter extends React.Component<IProps, IState> {
           title: tag,
         })),
       },
-      this.context?.featureFlags?.collection_signing === true && {
+      display_signatures && {
         id: 'sign_state',
         title: t`Sign state`,
         inputType: 'select' as const,

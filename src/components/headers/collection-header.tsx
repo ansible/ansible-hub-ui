@@ -177,8 +177,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const latestVersion = collection.latest_version.created_at;
 
+    const { display_signatures } = this.context?.featureFlags || {};
+
     const signedString = (v) => {
-      if ('sign_state' in v) {
+      if (display_signatures && 'sign_state' in v) {
         return v.sign_state === 'signed' ? t`(signed)` : t`(unsigned)`;
       } else {
         return '';
