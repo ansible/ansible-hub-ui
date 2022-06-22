@@ -10,7 +10,7 @@ import {
   Text,
 } from '@patternfly/react-core';
 import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
-import { t, Trans } from '@lingui/macro';
+import { t } from '@lingui/macro';
 
 import { ParamHelper } from 'src/utilities/param-helper';
 import {
@@ -27,8 +27,6 @@ import {
   NamespaceModal,
   Pagination,
   Sort,
-  StatefulDropdown,
-  DeleteModal,
   SignAllCertificatesModal,
   AlertType,
   ImportModal,
@@ -569,12 +567,11 @@ export class NamespaceList extends React.Component<IProps, IState> {
         {!this.state.showControls && (
           <div className='hub-namespace-page-controls'></div>
         )}
-        <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
-          {/*dropdownItems.length > 0 && (
+
+        {/*dropdownItems.length > 0 && (
             <StatefulDropdown items={dropdownItems} />
           )*/}
-          {namespaceMenu.renderMenu(this, namespace, false)}
-        </div>
+        {namespaceMenu.renderMenu(this, namespace, false)}
       </>
     );
   }
@@ -723,24 +720,16 @@ export class NamespaceList extends React.Component<IProps, IState> {
       })
       .catch((err) => {
         const { status, statusText } = err.response;
-        this.context.setAlerts({
-          alerts: [
-            ...this.context.alerts,
-            {
-              variant: 'danger',
-              title: t`Collection repositories could not be displayed.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
+        this.addAlert({
+          variant: 'danger',
+          title: t`Collection repositories could not be displayed.`,
+          description: errorMessage(status, statusText),
         });
       });
   }
 
   public addAlert(alert) {
-    debugger;
-    this.context.setAlerts({
-      alerts: [...this.context.alerts, alert],
-    });
+    this.context.setAlerts([...this.context.alerts, alert]);
   }
 
   /*

@@ -8,21 +8,9 @@ import { formatPath, Paths, namespaceBreadcrumb } from 'src/paths';
 
 import { StatefulDropdown, DeleteModal } from 'src/components';
 
-import {
-  NamespaceAPI,
-  NamespaceListType,
-  MyNamespaceAPI,
-  CollectionAPI,
-  CollectionListType,
-  SignCollectionAPI,
-} from 'src/api';
+import { NamespaceAPI } from 'src/api';
 
-import {
-  errorMessage,
-  filterIsSet,
-  canSign as canSignNS,
-  waitForTask,
-} from 'src/utilities';
+import { errorMessage } from 'src/utilities';
 
 class NamespaceMenuUtils {
   public click() {}
@@ -43,7 +31,7 @@ class NamespaceMenuUtils {
           isOpenNamespaceModal: true,
         });
       } else {
-        container.addAlert(container, {
+        container.addAlert({
           variant: 'warning',
           title: t`Namespace "${namespace.name}" could not be deleted.`,
           description: t`Namespace contains collections.`,
@@ -53,7 +41,6 @@ class NamespaceMenuUtils {
   }
 
   public static deleteNamespaceConfirm(container, redirect) {
-    debugger;
     const namespace = container.state.namespace;
     container.setState({ isNamespacePending: true }, () =>
       NamespaceAPI.delete(namespace.name)
@@ -63,17 +50,15 @@ class NamespaceMenuUtils {
             isNamespacePending: false,
             isOpenNamespaceModal: false,
           });
-          /*container.addAlert(
-            {
-              variant: 'success',
-              title: (
-                <Trans>
-                  Namespace &quot;{namespace.name}&quot; has been successfully
-                  deleted.
-                </Trans>
-              ),
-            });
-          */
+          container.addAlert({
+            variant: 'success',
+            title: (
+              <Trans>
+                Namespace &quot;{namespace.name}&quot; has been successfully
+                deleted.
+              </Trans>
+            ),
+          });
 
           if (redirect) {
             container.setState({
@@ -101,7 +86,6 @@ class NamespaceMenuUtils {
   }
 
   public static deleteModal(container, redirect: boolean) {
-    debugger;
     return (
       <>
         {container.state.isOpenNamespaceModal && (
@@ -236,6 +220,7 @@ class NamespaceMenuUtils {
 
       !detailMode && (
         <DropdownItem
+          key='upload-collections'
           onClick={() =>
             NamespaceMenuUtils.uploadCollection(container, namespace)
           }
@@ -246,9 +231,9 @@ class NamespaceMenuUtils {
     ].filter(Boolean);
 
     return (
-      <>
+      <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
         {dropdownItems.length > 0 && <StatefulDropdown items={dropdownItems} />}
-      </>
+      </div>
     );
   }
 }

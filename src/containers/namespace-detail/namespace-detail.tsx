@@ -4,21 +4,8 @@ import './namespace-detail.scss';
 
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
-import {
-  Alert,
-  AlertActionCloseButton,
-  Button,
-  DropdownItem,
-  Tooltip,
-  Text,
-  Checkbox,
-} from '@patternfly/react-core';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { Alert, AlertActionCloseButton, Button } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 
 import ReactMarkdown from 'react-markdown';
@@ -42,11 +29,9 @@ import {
   PartnerHeader,
   EmptyStateNoData,
   RepoSelector,
-  StatefulDropdown,
   ClipboardCopy,
   AlertList,
   closeAlertMixin,
-  DeleteModal,
   AlertType,
   SignAllCertificatesModal,
 } from 'src/components';
