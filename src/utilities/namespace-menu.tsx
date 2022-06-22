@@ -1,13 +1,28 @@
 import * as React from 'react';
 
-import { DropdownItem, Tooltip } from '@patternfly/react-core';
+import { DropdownItem, Tooltip, Text, Checkbox } from '@patternfly/react-core';
 
-import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { t, Trans } from '@lingui/macro';
+import { formatPath, Paths, namespaceBreadcrumb } from 'src/paths';
 
-import { StatefulDropdown } from 'src/components';
+import { StatefulDropdown, DeleteModal } from 'src/components';
 
-import { formatPath, Paths } from 'src/paths';
+import {
+  NamespaceAPI,
+  NamespaceListType,
+  MyNamespaceAPI,
+  CollectionAPI,
+  CollectionListType,
+  SignCollectionAPI,
+} from 'src/api';
+
+import {
+  errorMessage,
+  filterIsSet,
+  canSign as canSignNS,
+  waitForTask,
+} from 'src/utilities';
 
 class NamespaceMenuUtils {
   public click() {}
@@ -16,8 +31,115 @@ class NamespaceMenuUtils {
     if (detailMode) {
       container.setState({ isOpenNamespaceModal: true });
     } else {
-      container.tryDeleteNamespace(namespace);
+      NamespaceMenuUtils.tryDeleteNamespace(container, namespace);
     }
+  }
+
+  public static tryDeleteNamespace(container, namespace) {
+    container.loadNamespace(namespace, () => {
+      if (container.state.isNamespaceEmpty) {
+        container.setState({
+          namespace: namespace,
+          isOpenNamespaceModal: true,
+        });
+      } else {
+        container.addAlert(container, {
+          variant: 'warning',
+          title: t`Namespace "${namespace.name}" could not be deleted.`,
+          description: t`Namespace contains collections.`,
+        });
+      }
+    });
+  }
+
+  public static deleteNamespaceConfirm(container, redirect) {
+    debugger;
+    const namespace = container.state.namespace;
+    container.setState({ isNamespacePending: true }, () =>
+      NamespaceAPI.delete(namespace.name)
+        .then(() => {
+          container.setState({
+            confirmDelete: false,
+            isNamespacePending: false,
+            isOpenNamespaceModal: false,
+          });
+          /*container.addAlert(
+            {
+              variant: 'success',
+              title: (
+                <Trans>
+                  Namespace &quot;{namespace.name}&quot; has been successfully
+                  deleted.
+                </Trans>
+              ),
+            });
+          */
+
+          if (redirect) {
+            container.setState({
+              redirect: formatPath(namespaceBreadcrumb.url, {}),
+            });
+          } else {
+            container.loadAll();
+          }
+        })
+        .catch((e) => {
+          const { status, statusText } = e.response;
+          container.setState({
+            isOpenNamespaceModal: false,
+            confirmDelete: false,
+            isNamespacePending: false,
+          });
+
+          container.addAlert({
+            variant: 'danger',
+            title: t`Namespace "${namespace.name}" could not be deleted.`,
+            description: errorMessage(status, statusText),
+          });
+        }),
+    );
+  }
+
+  public static deleteModal(container, redirect: boolean) {
+    debugger;
+    return (
+      <>
+        {container.state.isOpenNamespaceModal && (
+          <DeleteModal
+            spinner={container.state.isNamespacePending}
+            cancelAction={() => {
+              container.setState({
+                isOpenNamespaceModal: false,
+                confirmDelete: false,
+              });
+            }}
+            deleteAction={() =>
+              NamespaceMenuUtils.deleteNamespaceConfirm(container, redirect)
+            }
+            title={t`Delete namespace?`}
+            isDisabled={
+              !container.state.confirmDelete ||
+              container.state.isNamespacePending
+            }
+          >
+            <>
+              <Text className='delete-namespace-modal-message'>
+                <Trans>
+                  Deleting <b>{container.state.namespace.name}</b> and its data
+                  will be lost.
+                </Trans>
+              </Text>
+              <Checkbox
+                isChecked={container.state.confirmDelete}
+                onChange={(val) => container.setState({ confirmDelete: val })}
+                label={t`I understand that this action cannot be undone.`}
+                id='delete_confirm'
+              />
+            </>
+          </DeleteModal>
+        )}
+      </>
+    );
   }
 
   public static signCollections(container, namespace, detailMode) {
@@ -124,7 +246,9 @@ class NamespaceMenuUtils {
     ].filter(Boolean);
 
     return (
-      dropdownItems.length > 0 && <StatefulDropdown items={dropdownItems} />
+      <>
+        {dropdownItems.length > 0 && <StatefulDropdown items={dropdownItems} />}
+      </>
     );
   }
 }

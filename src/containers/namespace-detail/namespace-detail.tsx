@@ -225,7 +225,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           collection={updateCollection}
           namespace={namespace.name}
         />
-        {isOpenNamespaceModal && (
+        {/*isOpenNamespaceModal && (
           <DeleteModal
             spinner={isNamespacePending}
             cancelAction={this.closeModal}
@@ -247,7 +247,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               />
             </>
           </DeleteModal>
-        )}
+        )*/}
+        {namespaceMenu.deleteModal(this, true)}
         {warning ? (
           <Alert
             className='hub-c-alert-namespace'
@@ -584,6 +585,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     const { canSign, collections } = this.state;
     const { can_upload_signatures } = this.context?.featureFlags || {};
 
+    /*
     const dropdownItems = [
       <DropdownItem
         key='1'
@@ -647,6 +649,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         </DropdownItem>
       ),
     ].filter(Boolean);
+    */
+
     if (!this.state.showControls) {
       return <div className='hub-namespace-page-controls'></div>;
     }
@@ -658,11 +662,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             {t`Upload collection`}
           </Button>
         )}
-        {dropdownItems.length > 0 && (
+        {/*dropdownItems.length > 0 && (
           <div data-cy='ns-kebab-toggle'>
             <StatefulDropdown items={dropdownItems} />
           </div>
-        )}
+        )*/}
         {namespaceMenu.renderMenu(this, this.state.namespace, true)}
       </div>
     );
@@ -681,6 +685,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     this.setState(newState);
   }
 
+  /*
   private deleteNamespace = () => {
     const {
       namespace: { name },
@@ -727,15 +732,21 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             },
           );
         }),
-    );
-  };
-
+    );*/
+  /*
   private closeModal = () => {
     this.setState({ isOpenNamespaceModal: false, confirmDelete: false });
   };
+  */
 
   get closeAlert() {
     return closeAlertMixin('alerts');
+  }
+
+  public addAlert(alert) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
   }
 }
 

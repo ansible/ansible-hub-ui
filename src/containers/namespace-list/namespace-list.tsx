@@ -270,7 +270,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             }}
           />
         )}
-        {isOpenNamespaceModal && (
+        {/*isOpenNamespaceModal && (
           <DeleteModal
             spinner={this.state.isNamespacePending}
             cancelAction={() => {
@@ -298,7 +298,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
               />
             </>
           </DeleteModal>
-        )}
+          )*/}
+        {namespaceMenu.deleteModal(this, false)}
         <NamespaceModal
           isOpen={this.state.isModalOpen}
           toggleModal={this.handleModalToggle}
@@ -514,7 +515,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
   }
 
   private renderPageControls(namespace) {
-    const dropdownItems = [
+    /* const dropdownItems = [
       <DropdownItem
         key='1'
         component={
@@ -561,7 +562,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       <DropdownItem onClick={() => this.tryUploadCollection(namespace)}>
         {t`Upload collection`}
       </DropdownItem>,
-    ].filter(Boolean);
+    ].filter(Boolean);*/
 
     return (
       <>
@@ -569,9 +570,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
           <div className='hub-namespace-page-controls'></div>
         )}
         <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
-          {dropdownItems.length > 0 && (
+          {/*dropdownItems.length > 0 && (
             <StatefulDropdown items={dropdownItems} />
-          )}
+          )*/}
           {namespaceMenu.renderMenu(this, namespace, false)}
         </div>
       </>
@@ -735,26 +736,14 @@ export class NamespaceList extends React.Component<IProps, IState> {
       });
   }
 
-  private tryDeleteNamespace(namespace) {
-    this.loadNamespace(namespace, () => {
-      if (this.state.isNamespaceEmpty) {
-        this.setState({
-          selectedNamespace: namespace,
-          isOpenNamespaceModal: true,
-        });
-      } else {
-        this.context.setAlerts([
-          ...this.context.alerts,
-          {
-            variant: 'warning',
-            title: t`Namespace "${namespace.name}" could not be deleted.`,
-            description: t`Namespace contains collections.`,
-          },
-        ]);
-      }
+  public addAlert(alert) {
+    debugger;
+    this.context.setAlerts({
+      alerts: [...this.context.alerts, alert],
     });
   }
 
+  /*
   private deleteNamespace() {
     const namespace = this.state.selectedNamespace;
     this.setState({ isNamespacePending: true }, () =>
@@ -797,7 +786,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           ]);
         }),
     );
-  }
+  }*/
 }
 
 NamespaceList.contextType = AppContext;

@@ -78,6 +78,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     };
     NamespaceAPI.create(data)
       .then(() => {
+        debugger;
         this.toggleModal();
         this.setState({
           newNamespaceName: '',
