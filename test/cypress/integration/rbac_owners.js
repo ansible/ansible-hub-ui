@@ -1,0 +1,169 @@
+describe('Namespace owners tab', () => {
+  const num = (~~(Math.random() * 1000000)).toString();
+
+  before(() => {
+    cy.deleteNamespacesAndCollections();
+    cy.galaxykit(`-i namespace create rbac_owners_${num}`);
+  });
+
+  beforeEach(() => {
+    cy.login();
+    cy.visit(`/ui/repo/published/rbac_owners_${num}`);
+    cy.get('.pf-c-tabs__item-text').contains('Namespace owners').click();
+  });
+
+  it('add and remove group and roles', () => {
+    testOwnersTab({
+      num,
+      permission: 'change_namespace',
+      permissionGroup: 'Galaxy',
+      permissionLabel: 'Change namespace',
+      role: 'galaxy.collection_publisher',
+      roleFilter: 'publish',
+    });
+  });
+});
+
+describe('Execution Environment Owners tab', () => {
+  const num = (~~(Math.random() * 1000000)).toString();
+
+  before(() => {
+    cy.login();
+    cy.deleteRegistries();
+    cy.deleteContainers();
+
+    cy.galaxykit(
+      'registry create',
+      `rbac_owners_${num}_registry`,
+      'https://registry.hub.docker.com/',
+    );
+    cy.galaxykit(
+      'container create',
+      `rbac_owners_${num}`,
+      'library/alpine',
+      `rbac_owners_${num}_registry`,
+    );
+  });
+
+  beforeEach(() => {
+    cy.login();
+    cy.visit(`/ui/containers/rbac_owners_${num}`);
+    cy.get('.pf-c-tabs__item-text').contains('Owners').click();
+  });
+
+  it('add and remove group and roles', () => {
+    testOwnersTab({
+      num,
+      permission: 'change_containernamespace',
+      permissionGroup: 'Container',
+      permissionLabel: 'Change container namespace permissions',
+      role: 'galaxy.execution_environment_publisher',
+      roleFilter: 'publish',
+    });
+  });
+});
+
+function testOwnersTab({
+  num,
+  permission,
+  permissionGroup,
+  permissionLabel,
+  role,
+  roleFilter,
+}) {
+  // new thing, expect no owners
+  cy.get('.pf-c-empty-state');
+  cy.get('button').contains('Select a group').click();
+
+  // group role modal
+  // find partner-engineers, select, check indicator, next
+  cy.get('[data-cy=compound_filter] input[aria-label=name__contains]').type(
+    'system{enter}',
+  );
+  cy.get(
+    '[data-cy="GroupListTable-CheckboxRow-row-system:partner-engineers"] input[type=radio]',
+  ).click();
+
+  cy.get('strong').contains('Selected group');
+  cy.get('.hub-permission').contains('system:partner-engineers');
+
+  cy.get('footer button').contains('Next').click();
+
+  // find collection_publisher, select, check indicator, next
+  cy.get('[data-cy=compound_filter] input[aria-label=name__icontains]').type(
+    `${roleFilter}{enter}`,
+  );
+  cy.get(
+    `[data-cy="RoleListTable-CheckboxRow-row-${role}"] input[type=checkbox]`,
+  ).click();
+
+  cy.get('strong').contains('Selected roles');
+  cy.get('.hub-permission').contains(role);
+
+  cy.get('footer button').contains('Next').click();
+
+  // see preview, add
+  cy.get('strong').contains('system:partner-engineers');
+  cy.get('strong').contains(role);
+
+  cy.get('.hub-permission strong').contains(permissionGroup);
+  cy.get('.hub-permission').contains(permission);
+
+  cy.get('footer button').contains('Add').click();
+  cy.get('.pf-c-alert__title').contains(
+    `Group "system:partner-engineers" has been successfully added to "rbac_owners_${num}".`,
+  );
+  cy.get('tr[data-cy="OwnersTab-row-system:partner-engineers"]');
+
+  // group list view, try modal, open group
+  cy.get('button').contains('Select a group').click();
+  cy.get('.pf-c-wizard__footer-cancel').click();
+
+  cy.get('tr[data-cy="OwnersTab-row-system:partner-engineers"] a').click();
+
+  // role list view, use modal
+  cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`);
+  cy.get('button').contains('Add roles').click();
+  cy.get('.pf-c-table__check input[type=checkbox]').not('[disabled]').click();
+  cy.get('footer button').contains('Next').click();
+  cy.get('footer button').contains('Add').click();
+  cy.get('.pf-c-alert__title').contains(
+    `Group "system:partner-engineers" roles successfully updated in "rbac_owners_${num}".`,
+  );
+
+  // role list view, expand
+  cy.get('tbody[role=rowgroup]').should('have.length', 2);
+  cy.get(
+    `[data-cy="RoleListTable-ExpandableRow-row-${role}"] .pf-c-table__toggle button`,
+  ).click();
+  cy.get('.pf-c-label').contains(permissionLabel);
+
+  // role list view, remove
+  cy.get(
+    `[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle] button`,
+  ).click();
+  cy.get('.pf-c-dropdown__menu-item').contains('Remove role').click();
+  cy.get('.pf-c-modal-box__body strong').contains('system:partner-engineers');
+  cy.get('.pf-c-modal-box__body strong').contains(role);
+  cy.get('.pf-c-modal-box__body strong').contains(`rbac_owners_${num}`);
+  cy.get('[data-cy=delete_button]').click();
+  cy.get('.pf-c-alert__title').contains(
+    `Group "system:partner-engineers" roles successfully updated in "rbac_owners_${num}".`,
+  );
+
+  // breadcrumb back to group list
+  cy.get('.pf-c-breadcrumb__item a').last().click();
+
+  // list view, delete, see empty
+  cy.get(
+    'tr[data-cy="OwnersTab-row-system:partner-engineers"] [data-cy=kebab-toggle] button',
+  ).click();
+  cy.get('.pf-c-dropdown__menu-item').contains('Remove group').click();
+  cy.get('.pf-c-modal-box__body strong').contains('system:partner-engineers');
+  cy.get('.pf-c-modal-box__body strong').contains(role);
+  cy.get('[data-cy=delete_button]').click();
+  cy.get('.pf-c-alert__title').contains(
+    `Group "system:partner-engineers" has been successfully removed from "rbac_owners_${num}".`,
+  );
+  cy.get('.pf-c-empty-state');
+}
