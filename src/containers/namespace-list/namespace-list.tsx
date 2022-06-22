@@ -75,7 +75,7 @@ interface IState {
   isOpenSignModal: boolean;
   isNamespaceEmpty: boolean;
   showImportModal: boolean;
-  selectedNamespace: NamespaceListType;
+  namespace: NamespaceListType; // selected namespace in menu
   isNamespacePending: boolean;
   confirmDelete: boolean;
   canSign: boolean;
@@ -120,7 +120,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       isOpenSignModal: false,
       isNamespaceEmpty: false,
       showImportModal: false,
-      selectedNamespace: null,
+      namespace: null,
       isNamespacePending: false,
       confirmDelete: false,
       canSign: false,
@@ -198,7 +198,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       isNamespacePending,
       isOpenNamespaceModal,
       confirmDelete,
-      selectedNamespace,
+      namespace,
       collections,
       isOpenSignModal,
       updateCollection,
@@ -244,7 +244,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                   Paths.myImports,
                   {},
                   {
-                    namespace: selectedNamespace.name,
+                    namespace: namespace.name,
                   },
                 ),
               })
@@ -252,18 +252,18 @@ export class NamespaceList extends React.Component<IProps, IState> {
             // onCancel
             setOpen={(isOpen, warn) => this.toggleImportModal(isOpen, warn)}
             collection={updateCollection}
-            namespace={selectedNamespace.name}
+            namespace={namespace.name}
           />
         )}
 
         {isOpenSignModal && (
           <SignAllCertificatesModal
-            name={this.state.selectedNamespace.name}
+            name={this.state.namespace.name}
             numberOfAffected={total_versions}
             affectedUnsigned={unsigned_versions}
             isOpen={this.state.isOpenSignModal}
             onSubmit={() => {
-              this.signAllCertificates(this.state.selectedNamespace);
+              this.signAllCertificates(this.state.namespace);
             }}
             onCancel={() => {
               this.setState({ isOpenSignModal: false });
@@ -581,7 +581,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
   private tryUploadCollection(namespace) {
     this.setState({
-      selectedNamespace: namespace,
+      namespace: namespace,
       showImportModal: true,
     });
   }
@@ -603,7 +603,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     this.loadNamespace(namespace, () => {
       if (this.state.canSign) {
         this.setState({
-          selectedNamespace: namespace,
+          namespace: namespace,
           isOpenSignModal: true,
         });
       } else {
