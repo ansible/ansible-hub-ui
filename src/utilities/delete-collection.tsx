@@ -59,7 +59,9 @@ class DeleteCollectionUtils {
           </Tooltip>
         );
 
-    if (!ret) ret = <div></div>;
+    if (!ret) {
+      ret = <div></div>;
+    }
     return ret;
   }
 
