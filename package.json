@@ -63,6 +63,9 @@
         "webpack": "^4.44.2",
         "webpack-cli": "^3.3.12"
     },
+    "overrides": {
+        "node-sass": "himdel/npm-empty"
+    },
     "scripts": {
         "build": "webpack --config config/insights.prod.webpack.config.js",
         "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
