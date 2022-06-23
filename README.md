@@ -15,7 +15,7 @@ This app can be developed in standalone mode or insights mode. Insights mode com
 ### Develop in Standalone Mode
 
 1. Clone the [galaxy_ng](https://github.com/ansible/galaxy_ng) repo and follow the instructions for starting up the API.
-2. Install node. Node v13+ are known to work. Older versions may work as well.
+2. Install node. Node v16+ is known to work. Older versions may work as well.
 3. `npm install`
 4. `npm run start-standalone`
 
