@@ -61,7 +61,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           id: 'updated_at',
         },
         {
-          title: t`Repo URL`,
+          title: t`Distribution URL`,
           type: 'none',
           id: 'ansible_cli_url',
         },
