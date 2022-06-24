@@ -126,6 +126,7 @@ jobs:
           TOKEN_AUTH_DISABLED=True
           X_PULP_CONTENT_HOST='localhost'
           GALAXY_REQUIRE_CONTENT_APPROVAL=False
+          GALAXY_COLLECTION_SIGNING_SERVICE='ansible-default'
         " | sed 's/^\s\+//' | tee settings/settings.py
 
         podman run \
