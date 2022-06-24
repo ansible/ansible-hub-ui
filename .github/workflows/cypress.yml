@@ -80,9 +80,9 @@ jobs:
           #       /tmp/ansible \
           #       /etc/ansible \
 
-          COPY --chmod=755 collection-sign.sh /
-          COPY --chmod=755 signing-setup.sh /
           COPY --chmod=644 ansible-sign.key /tmp/
+          COPY --chmod=755 collection-sign.sh /var/lib/pulp/scripts/
+          COPY --chmod=755 signing-setup.sh /tmp/
 
           RUN pip3 install --upgrade \
             requests \
@@ -96,7 +96,7 @@ jobs:
           RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
           RUN ln -sv /galaxy_ng_static `ls -d /usr/local/lib/python*/site-packages/galaxy_ng/app/`static
 
-          RUN /signing-setup.sh
+          RUN /tmp/signing-setup.sh
           #  podman exec pulp pulpcore-manager add-signing-service ...
         ' | tee Containerfile
 
