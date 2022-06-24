@@ -80,9 +80,9 @@ jobs:
           #       /tmp/ansible \
           #       /etc/ansible \
 
-          COPY collection-sign.sh /
-          COPY signing-setup.sh /
-          COPY ansible-sign.key /
+          COPY --chmod=755 collection-sign.sh /
+          COPY --chmod=755 signing-setup.sh /
+          COPY --chmod=644 ansible-sign.key /
 
           RUN pip3 install --upgrade \
             requests \
