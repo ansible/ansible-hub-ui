@@ -45,6 +45,11 @@ jobs:
         path: pulp_galaxy_ng/image
         key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post788
 
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v2
+      with:
+        path: 'ansible-hub-ui'
+
     - name: "Build pulp-galaxy-ng"
       if: steps.cache-container.outputs.cache-hit != 'true'
       working-directory: 'pulp_galaxy_ng'
@@ -73,6 +78,9 @@ jobs:
           #       /tmp/ansible \
           #       /etc/ansible \
 
+          COPY ../ansible-hub-ui/.github/workflows/scripts/collection-sign.sh /
+          COPY ../ansible-hub-ui/.github/workflows/scripts/signing-setup.sh /
+
           RUN pip3 install --upgrade \
             requests \
             git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
@@ -84,6 +92,9 @@ jobs:
 
           RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
           RUN ln -sv /galaxy_ng_static `ls -d /usr/local/lib/python*/site-packages/galaxy_ng/app/`static
+
+          RUN /signing-setup.sh
+          #  podman exec pulp pulpcore-manager add-signing-service ...
         ' | tee Containerfile
 
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
@@ -125,15 +136,6 @@ jobs:
              --tmpfs /var/lib/containers \
              --device /dev/fuse \
              localhost/pulp/pulp-galaxy-ng:latest
-
-    - name: "Add signing service"
-      run: | # Run the signing-setup script
-
-
-    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
-      uses: actions/checkout@v2
-      with:
-        path: 'ansible-hub-ui'
 
     - name: "Install node 16"
       uses: actions/setup-node@v2
@@ -202,6 +204,10 @@ jobs:
     - name: "Ensure galaxykit can connect to the server"
       run: |
         galaxykit -s 'http://localhost:8002/api/galaxy/' -u admin -p admin collection list
+
+    - name: "Check initial feature flags"
+      run: |
+        curl -s -u admin:admin http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
