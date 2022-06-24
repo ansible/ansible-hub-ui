@@ -82,7 +82,7 @@ jobs:
 
           COPY --chmod=755 collection-sign.sh /
           COPY --chmod=755 signing-setup.sh /
-          COPY --chmod=644 ansible-sign.key /
+          COPY --chmod=644 ansible-sign.key /tmp/
 
           RUN pip3 install --upgrade \
             requests \
