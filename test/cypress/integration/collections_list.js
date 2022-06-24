@@ -150,6 +150,7 @@ describe('Collections list Tests', () => {
       timeout: 15000,
     });
     cy.contains('No results found');
+    cy.galaxykit('-i collection upload my_namespace my_collection0');
   });
 
   it('Can delete collection in namespace collection list', () => {
@@ -157,13 +158,27 @@ describe('Collections list Tests', () => {
     cy.get('.toolbar')
       .get('[aria-label="keywords"]:first')
       .type('my_collection1{enter}');
-    cy.get('.body').contains('my_collection2').should('not.exist');
+
+    // because of randomized order of items in list and weird filter behavior
+    // we have to check that all of them dissapeared, not only one particular
+    range(21).forEach((i) => {
+      if (i != 1) {
+        cy.get('.body')
+          .contains('my_collection' + i)
+          .should('not.exist');
+      }
+    });
     cy.get('.body').contains('my_collection1');
 
     cy.get('.body [aria-label=Actions]').click();
     cy.contains('Delete entire collection').click();
     cy.get('[data-cy=modal_checkbox] input').click();
     cy.get('[data-cy=delete-button] button').click();
-    cy.contains('No results found', { timeout: 15000 });
+
+    cy.contains('Collection "my_collection1" has been successfully deleted.', {
+      timeout: 15000,
+    });
+    cy.contains('No results found');
+    cy.galaxykit('-i collection upload my_namespace my_collection1');
   });
 });
