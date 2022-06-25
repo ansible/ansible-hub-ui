@@ -8,9 +8,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
   };
 
   let deleteTestGroup = () => {
-    cy.intercept('GET', Cypress.env('prefix') + `ui/group-list`).as('groups');
     cy.visit('/ui/group-list');
-    cy.wait('@groups');
     cy.intercept(
       'GET',
       Cypress.env('prefix') +
