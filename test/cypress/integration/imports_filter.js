@@ -42,6 +42,7 @@ describe('Imports filter test', () => {
   });
 
   it('should fail on importing existing collection', () => {
+    cy.galaxykit(`collection upload test_namespace ${testCollection}`);
     cy.visit('/ui/my-imports?namespace=test_namespace');
 
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
@@ -57,16 +58,6 @@ describe('Imports filter test', () => {
     cy.get(
       '[data-cy="MyImports"] [data-cy="ImportConsole"] .message-list',
     ).contains('Failed');
-  });
-
-  it('should redirect to new uploaded collection', () => {
-    cy.visit('/ui/my-imports?namespace=test_namespace');
-
-    cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
-    cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]')
-      .contains(`test_namespace.${testCollection}`)
-      .click();
-    cy.contains(testCollection);
   });
 
   it('should be able to switch between namespaces', () => {
