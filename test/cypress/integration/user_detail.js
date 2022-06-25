@@ -9,7 +9,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
 
     cy.galaxykit('group create', `alphaGroup${num}`);
     cy.galaxykit('user create', 'testUser', 'testUserpassword');
-    cy.galaxykit('user group add', `alphaGroup${num}`, 'testUser');
+    cy.galaxykit('user group add', 'testUser', `alphaGroup${num}`);
   });
 
   after(() => {

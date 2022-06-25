@@ -468,10 +468,9 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   const adminPassword = Cypress.env('password');
   const galaxykitCommand = Cypress.env('galaxykit') || 'galaxykit';
   const server = Cypress.config().baseUrl + Cypress.env('prefix');
-  const options =
-    args.length >= 1 && typeof args[args.length - 1] == 'object'
-      ? args.splice(args.length - 1, 1)[0]
-      : [];
+  const options = (args.length >= 1 &&
+    typeof args[args.length - 1] == 'object' &&
+    args.splice(args.length - 1, 1)[0]) || { failOnNonZeroExit: false };
 
   cy.log(`${galaxykitCommand} ${operation} ${args}`);
   const cmd = shell`${shell.preserve(
@@ -483,7 +482,8 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   return cy.exec(cmd, options).then(({ code, stderr, stdout }) => {
     console.log(`RUN ${cmd}`, options, { code, stderr, stdout });
 
-    if (stderr) {
+    if (code || stderr) {
+      cy.log('galaxykit code: ' + code);
       cy.log('galaxykit stderr: ' + stderr);
       return Promise.reject(new Error(`Galaxykit failed: ${stderr}`));
     }
