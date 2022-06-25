@@ -16,5 +16,5 @@ echo "${KEY_FINGERPRINT}:6:" | gpg --import-ownertrust
 
 HAS_SIGNING=$(django-admin shell -c 'from pulpcore.app.models import SigningService;print(SigningService.objects.filter(name="ansible-default").count())' || true)
 if [[ "$HAS_SIGNING" -eq "0" ]]; then
-   django-admin add-signing-service ansible-default /var/lib/pulp/scripts/collection_sign.sh ${KEY_ID}
+   django-admin add-signing-service ansible-default /var/lib/pulp/scripts/collection-sign.sh ${KEY_ID}
 fi
