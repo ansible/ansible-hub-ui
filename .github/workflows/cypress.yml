@@ -60,26 +60,6 @@ jobs:
         echo '\
           FROM ghcr.io/pulp/pulp-ci-centos:latest
 
-          # Add the folders permissions copy files etc.
-          # RUN set -ex; \
-          #   mkdir -p /entrypoints.d \
-          #           /etc/ansible \
-          #   && mkdir --mode=2775 -p /var/lib/pulp \
-          #   && chown ${USER_NAME}:${USER_GROUP} /var/lib/pulp \
-          #   && mkdir --mode=2775 -p \
-          #           /var/lib/pulp/artifact \
-          #           /var/lib/pulp/tmp \
-          #           /var/lib/pulp/scripts \
-          #           /etc/pulp/certs \
-          #           /tmp/ansible \
-          #   && chown ${USER_NAME}:${USER_GROUP} /var/lib/pulp/artifact \
-          #   && chown ${USER_NAME}:${USER_GROUP} /var/lib/pulp/tmp \
-          #   && chown ${USER_NAME}:${USER_GROUP} /var/lib/pulp/scripts \
-          #   && chown ${USER_NAME}:${USER_GROUP} /etc/pulp/certs \
-          #   && chown ${USER_NAME}:${USER_GROUP} \
-          #       /tmp/ansible \
-          #       /etc/ansible \
-
           COPY --chmod=644 ansible-sign.key /tmp/
           COPY --chmod=755 collection-sign.sh /var/lib/pulp/scripts/
           COPY --chmod=755 signing-setup.sh /tmp/
@@ -95,9 +75,6 @@ jobs:
 
           RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
           RUN ln -sv /galaxy_ng_static `ls -d /usr/local/lib/python*/site-packages/galaxy_ng/app/`static
-
-          #RUN /tmp/signing-setup.sh
-          #  podman exec pulp pulpcore-manager add-signing-service ...
         ' | tee Containerfile
 
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
