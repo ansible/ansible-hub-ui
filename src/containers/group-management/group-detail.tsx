@@ -331,26 +331,67 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderPermissions() {
-    const groups = Constants.PERMISSIONS;
-    const {
-      editPermissions,
-      savingPermissions,
-      permissions: selectedPermissions,
-    } = this.state;
-
+    const { editPermissions, savingPermissions, permissions } = this.state;
     const { user, featureFlags } = this.context;
-    let isUserMgmtDisabled = false;
-    const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
-    if (featureFlags) {
-      isUserMgmtDisabled = featureFlags.external_authentication;
-    }
-    if (isUserMgmtDisabled) {
-      Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-        if (perm in filteredPermissions) {
-          delete filteredPermissions[perm];
+    const { external_authentication } = featureFlags || {};
+
+    const ChipRow = ({ permGroup: { object_permissions } }) => {
+      const availablePermissions = object_permissions
+        // hide selected
+        .filter((perm) => !permissions.find((selected) => perm === selected))
+        // hide list when in keycloak mode
+        .filter(
+          (perm) =>
+            !external_authentication ||
+            !Constants.USER_GROUP_MGMT_PERMISSIONS.find(
+              (disabled) => perm === disabled,
+            ),
+        )
+        // make human readable (FIXME: sorted by English instead of using a predefined order)
+        .map((value) => Constants.HUMAN_PERMISSIONS[value] || value)
+        .sort();
+
+      const selectedPermissions = permissions
+        // hide permissions not in this group
+        .filter((selected) =>
+          object_permissions.find((perm) => selected === perm),
+        )
+        // make human readable
+        .map((value) => Constants.HUMAN_PERMISSIONS[value] || value);
+
+      const onClear = () => {
+        this.setState({
+          permissions: permissions.filter(
+            (x) => !object_permissions.includes(x),
+          ),
+        });
+      };
+
+      const onSelect = (_event, selection) => {
+        // FIXME: PermissionChipSelector should really work with the actual values, not english strings
+        const value = twoWayMapper(selection, Constants.HUMAN_PERMISSIONS);
+        const newPerms = new Set(this.state.permissions);
+        if (newPerms.has(value)) {
+          newPerms.delete(value);
+        } else {
+          newPerms.add(value);
         }
-      });
-    }
+        this.setState({ permissions: Array.from(newPerms) });
+      };
+
+      return (
+        <PermissionChipSelector
+          availablePermissions={availablePermissions}
+          isViewOnly={!editPermissions}
+          menuAppendTo='inline'
+          multilingual
+          onClear={onClear}
+          onSelect={onSelect}
+          selectedPermissions={selectedPermissions}
+          setSelected={(permissions) => this.setState({ permissions })}
+        />
+      );
+    };
 
     return (
       <section className='body'>
@@ -362,62 +403,18 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           )}
         </div>
         <div>
-          {groups.map((group) => (
+          {Constants.PERMISSIONS.map((permGroup) => (
             <Flex
               style={{ marginTop: '16px' }}
               alignItems={{ default: 'alignItemsCenter' }}
-              key={group.name}
-              className={group.name}
+              key={permGroup.name}
+              className={permGroup.name}
             >
               <FlexItem style={{ minWidth: '200px' }}>
-                {i18n._(group.label)}
+                {i18n._(permGroup.label)}
               </FlexItem>
               <FlexItem grow={{ default: 'grow' }}>
-                <PermissionChipSelector
-                  availablePermissions={group.object_permissions
-                    .filter(
-                      (perm) =>
-                        !selectedPermissions.find(
-                          (selected) => selected === perm,
-                        ),
-                    )
-                    .map((value) => twoWayMapper(value, filteredPermissions))
-                    .sort()}
-                  selectedPermissions={selectedPermissions
-                    .filter((selected) =>
-                      group.object_permissions.find(
-                        (perm) => selected === perm,
-                      ),
-                    )
-                    .map((value) => twoWayMapper(value, filteredPermissions))}
-                  setSelected={(perms) => this.setState({ permissions: perms })}
-                  menuAppendTo='inline'
-                  multilingual={true}
-                  isViewOnly={!editPermissions}
-                  onClear={() => {
-                    const clearedPerms = group.object_permissions;
-                    this.setState({
-                      permissions: this.state.permissions.filter(
-                        (x) => !clearedPerms.includes(x),
-                      ),
-                    });
-                  }}
-                  onSelect={(event, selection) => {
-                    const newPerms = new Set(this.state.permissions);
-                    if (
-                      newPerms.has(twoWayMapper(selection, filteredPermissions))
-                    ) {
-                      newPerms.delete(
-                        twoWayMapper(selection, filteredPermissions),
-                      );
-                    } else {
-                      newPerms.add(
-                        twoWayMapper(selection, filteredPermissions),
-                      );
-                    }
-                    this.setState({ permissions: Array.from(newPerms) });
-                  }}
-                />
+                <ChipRow permGroup={permGroup} />
               </FlexItem>
             </Flex>
           ))}
@@ -851,8 +848,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(user: UserType, index: number) {
     const currentUser = this.context.user;
     const { featureFlags } = this.context;
-    let isUserMgmtDisabled = false;
-
+    const isUserMgmtDisabled = featureFlags?.external_authentication;
     const dropdownItems = [
       !!currentUser &&
         currentUser.model_permissions.change_group &&
@@ -865,9 +861,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           </DropdownItem>
         ),
     ];
-    if (featureFlags) {
-      isUserMgmtDisabled = featureFlags.external_authentication;
-    }
     return (
       <tr data-cy={`GroupDetail-users-${user.username}`} key={index}>
         <td>
