@@ -8,8 +8,8 @@ describe('Imports filter test', () => {
     cy.deleteNamespacesAndCollections();
 
     // insert test data
-    cy.galaxykit('namespace create test_namespace');
-    cy.galaxykit(`collection upload test_namespace ${testCollection}`);
+    cy.galaxykit('namespace create', 'test_namespace');
+    cy.galaxykit('collection upload', 'test_namespace', testCollection);
 
     cy.galaxykit('namespace create filter_test_namespace');
     cy.galaxykit('collection upload filter_test_namespace my_collection1');
@@ -42,7 +42,7 @@ describe('Imports filter test', () => {
   });
 
   it('should fail on importing existing collection', () => {
-    cy.galaxykit(`collection upload test_namespace ${testCollection}`);
+    cy.galaxykit('-i collection upload', 'test_namespace', testCollection);
     cy.visit('/ui/my-imports?namespace=test_namespace');
 
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
