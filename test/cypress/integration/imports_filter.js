@@ -88,22 +88,22 @@ describe('Imports filter test', () => {
       'GET',
       Cypress.env('prefix') +
         '_ui/v1/imports/collections/?namespace=filter_test_namespace&*',
-    ).as('collectionsInNamespace');
+    ).as('collectionsInNamespace2');
     cy.intercept(
       'GET',
       Cypress.env('prefix') + '_ui/v1/imports/collections/*',
-    ).as('collectionDetail');
+    ).as('collectionDetail2');
     cy.intercept(
       'GET',
       Cypress.env('prefix') +
         '_ui/v1/collection-versions/?namespace=filter_test_namespace&name=*',
-    ).as('collectionVersions');
+    ).as('collectionVersions2');
 
     cy.get('[aria-label="Select namespace"]').select('filter_test_namespace');
 
-    cy.wait('@collectionsInNamespace');
-    cy.wait('@collectionDetail');
-    cy.wait('@collectionVersions');
+    cy.wait('@collectionsInNamespace2');
+    cy.wait('@collectionDetail2');
+    cy.wait('@collectionVersions2');
 
     cy.get('[data-cy="ImportList-row-my_collection1"]').should('be.visible');
   });
