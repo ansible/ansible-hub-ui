@@ -96,7 +96,7 @@ jobs:
           RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
           RUN ln -sv /galaxy_ng_static `ls -d /usr/local/lib/python*/site-packages/galaxy_ng/app/`static
 
-          RUN /tmp/signing-setup.sh
+          #RUN /tmp/signing-setup.sh
           #  podman exec pulp pulpcore-manager add-signing-service ...
         ' | tee Containerfile
 
@@ -182,6 +182,10 @@ jobs:
       run: |
         # podman exec pulp pip install django_extensions
         podman exec pulp pulpcore-manager reset-admin-password --password admin
+
+    - name: "Enable signing service"
+      run: |
+        podman exec pulp /tmp/signing-setup.sh
 
     - name: "Install Cypress & test dependencies"
       working-directory: 'ansible-hub-ui/test'
