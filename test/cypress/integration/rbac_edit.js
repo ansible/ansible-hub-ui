@@ -22,16 +22,16 @@ describe('edits a role', () => {
 
     // edit role - first filter by editable and name fragment
 
-    cy.get('[data-cy=compound_filter] > div:nth(1) > button').click();
+    cy.get('[data-cy=compound_filter] > div:nth-child(1) > button').click();
     cy.get('[data-cy=compound_filter] li[role=menuitem]')
       .contains('Editable')
       .click();
-    cy.get('[data-cy=compound_filter] > div:nth(2) > button').click();
+    cy.get('[data-cy=compound_filter] > div:nth-child(2) > button').click();
     cy.get('[data-cy=compound_filter] li[role=menuitem]')
       .contains('Editable')
       .click();
 
-    cy.get('[data-cy=compound_filter] > div:nth(1) > button').click();
+    cy.get('[data-cy=compound_filter] > div:nth-child(1) > button').click();
     cy.get('[data-cy=compound_filter] li[role=menuitem]')
       .contains('Role name')
       .click();
