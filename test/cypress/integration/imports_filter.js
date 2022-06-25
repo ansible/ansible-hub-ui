@@ -9,11 +9,12 @@ describe('Imports filter test', () => {
 
     // insert test data
     cy.galaxykit('namespace create test_namespace');
-    cy.galaxykit('namespace create filter_test_namespace');
+    cy.galaxykit(`collection upload test_namespace ${testCollection}`);
 
-    cy.galaxykit('-i collection upload filter_test_namespace my_collection1');
-    cy.galaxykit('-i collection upload filter_test_namespace my_collection2');
-    cy.galaxykit('-i collection upload filter_test_namespace different_name');
+    cy.galaxykit('namespace create filter_test_namespace');
+    cy.galaxykit('collection upload filter_test_namespace my_collection1');
+    cy.galaxykit('collection upload filter_test_namespace my_collection2');
+    cy.galaxykit('collection upload filter_test_namespace different_name');
   });
 
   after(() => {
@@ -26,9 +27,8 @@ describe('Imports filter test', () => {
   });
 
   it('should display success info after importing collection', () => {
-    cy.galaxykit(`-i collection upload test_namespace ${testCollection}`);
-
     cy.visit('/ui/my-imports?namespace=test_namespace');
+
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).click();
     cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
       `test_namespace.${testCollection}`,
@@ -42,9 +42,8 @@ describe('Imports filter test', () => {
   });
 
   it('should fail on importing existing collection', () => {
-    cy.galaxykit(`-i collection upload test_namespace ${testCollection}`);
-
     cy.visit('/ui/my-imports?namespace=test_namespace');
+
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
     cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
       `test_namespace.${testCollection}`,
@@ -62,6 +61,7 @@ describe('Imports filter test', () => {
 
   it('should redirect to new uploaded collection', () => {
     cy.visit('/ui/my-imports?namespace=test_namespace');
+
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
     cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]')
       .contains(`test_namespace.${testCollection}`)
