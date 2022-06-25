@@ -439,42 +439,52 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     const { pulp_href, locked } = role;
     const roleID = parsePulpIDFromURL(pulp_href);
 
+    const editItem = (
+      <DropdownItem
+        key='edit'
+        isDisabled={locked}
+        onClick={() =>
+          this.setState({
+            redirect: formatPath(Paths.roleEdit, { role: roleID }),
+          })
+        }
+      >
+        {t`Edit`}
+      </DropdownItem>
+    );
+    const deleteItem = (
+      <DropdownItem
+        key='delete'
+        isDisabled={locked}
+        onClick={() =>
+          this.setState({
+            showDeleteModal: true,
+            roleToEdit: role,
+          })
+        }
+      >
+        {t`Delete`}
+      </DropdownItem>
+    );
     const dropdownItems = [
-      // this.context.user.model_permissions.change_containerregistry && (
-
-      <Tooltip key='edit' content={t`Built-in roles cannot be edited.`}>
-        <DropdownItem
-          key='edit'
-          isDisabled={locked}
-          onClick={() =>
-            this.setState({
-              redirect: formatPath(Paths.roleEdit, { role: roleID }),
-            })
-          }
-        >
-          {t`Edit`}
-        </DropdownItem>
-      </Tooltip>,
-
-      // ),
-      // this.context.user.model_permissions.delete_containerregistry && (
-
-      <Tooltip key='delete' content={t`Built-in roles cannot be deleted.`}>
-        <DropdownItem
-          key='delete'
-          isDisabled={locked}
-          onClick={() =>
-            this.setState({
-              showDeleteModal: true,
-              roleToEdit: role,
-            })
-          }
-        >
-          {t`Delete`}
-        </DropdownItem>
-      </Tooltip>,
-      // ),
+      // this.context.user.model_permissions.change_containerregistry &&
+      locked ? (
+        <Tooltip key='edit' content={t`Built-in roles cannot be edited.`}>
+          {editItem}
+        </Tooltip>
+      ) : (
+        editItem
+      ),
+      // this.context.user.model_permissions.delete_containerregistry &&
+      locked ? (
+        <Tooltip key='delete' content={t`Built-in roles cannot be deleted.`}>
+          {deleteItem}
+        </Tooltip>
+      ) : (
+        deleteItem
+      ),
     ];
+
     return dropdownItems;
   };
 
