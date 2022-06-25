@@ -40,7 +40,8 @@ describe('edits a role', () => {
     ).type(`test${num}{enter}`);
 
     cy.get('[aria-label="Actions"]:first').click();
-    cy.contains('Edit').click();
+    cy.get('li[role=menuitem]').contains('Edit').click();
+
     cy.get('input[id="role_name"]').should('be.disabled');
     cy.get('input[id="role_description"]').clear().type('new description');
 
