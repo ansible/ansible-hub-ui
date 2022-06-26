@@ -39,7 +39,7 @@ describe('Execution Environment Owners tab', () => {
     cy.galaxykit(
       'registry create',
       `rbac_owners_${num}_registry`,
-      'https://registry.hub.docker.com/',
+      Cypress.env('remote_registry'),
     );
     cy.galaxykit(
       'container create',

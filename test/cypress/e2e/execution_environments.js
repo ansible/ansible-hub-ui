@@ -10,7 +10,7 @@ describe('execution environments', () => {
     cy.galaxykit(
       'registry create',
       `docker${num}`,
-      'https://registry.hub.docker.com/',
+      Cypress.env('remote_registry'),
     );
     cy.galaxykit(
       'container create',

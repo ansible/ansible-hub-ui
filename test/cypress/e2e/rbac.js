@@ -16,7 +16,7 @@ describe('RBAC test for user without permissions', () => {
     cy.galaxykit(
       '-i registry create',
       'docker',
-      'https://registry.hub.docker.com/',
+      Cypress.env('remote_registry'),
     );
 
     cy.galaxykit(
@@ -228,7 +228,7 @@ describe('RBAC test for user with permissions', () => {
     cy.galaxykit(
       '-i registry create',
       'docker',
-      'https://registry.hub.docker.com/',
+      Cypress.env('remote_registry'),
     );
     cy.addRemoteContainer({
       name: `testcontainer`,

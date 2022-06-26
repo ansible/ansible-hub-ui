@@ -12,7 +12,7 @@ describe('Execution Environments - Use in Controller', () => {
     cy.login();
     cy.deleteRegistries();
     cy.deleteContainers();
-    cy.addRemoteRegistry(`docker${num}`, 'https://registry.hub.docker.com/');
+    cy.addRemoteRegistry(`docker${num}`, Cypress.env('remote_registry'));
 
     cy.addRemoteContainer({
       name: `remotepine${num}`,

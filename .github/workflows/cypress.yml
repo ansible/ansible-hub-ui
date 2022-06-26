@@ -184,7 +184,8 @@ jobs:
           "settings": "../../pulp_galaxy_ng/settings/settings.py",
           "restart": "podman exec pulp bash -c \"s6-svc -r /var/run/s6/services/pulpcore-api\"; sleep 10",
           "containers": "localhost:8002",
-          "galaxykit": "galaxykit --ignore-certs"
+          "galaxykit": "galaxykit --ignore-certs",
+          "remote_registry": "http://localhost:4567"
         }' > cypress.env.json
 
     - name: "Ensure index.html uses the new js"
@@ -204,6 +205,11 @@ jobs:
       run: |
         HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:8002/api/galaxy/v3/auth/token/ | jq -r .token`
         curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:8002/api/galaxy/ | jq
+
+    - name: "Mock remote registry"
+      working-directory: 'ansible-hub-ui/test'
+      run: |
+        npm run mock:registry &
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
