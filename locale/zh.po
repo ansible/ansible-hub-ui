@@ -64,7 +64,7 @@ msgstr "<0>{0}</0> 将被永久删除。"
 msgid "<0>{name}</0> will be permanently deleted."
 msgstr "<0>{name}</0> 将被永久删除。"
 
-#: src/containers/group-management/group-detail.tsx:576
+#: src/containers/group-management/group-detail.tsx:574
 msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 msgstr "<0>{username}</0> 将从 <1>{groupname}</1> 中删除"
 
@@ -127,9 +127,9 @@ msgstr "活动"
 #: src/components/execution-environment/repository-form.tsx:325
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:107
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:174
-#: src/containers/group-management/group-detail.tsx:458
-#: src/containers/group-management/group-detail.tsx:649
-#: src/containers/group-management/group-detail.tsx:700
+#: src/containers/group-management/group-detail.tsx:456
+#: src/containers/group-management/group-detail.tsx:647
+#: src/containers/group-management/group-detail.tsx:698
 msgid "Add"
 msgstr "添加"
 
@@ -180,7 +180,7 @@ msgstr "向镜像添加新标签"
 msgid "Add remote registry"
 msgstr "添加远程 registry"
 
-#: src/containers/group-management/group-detail.tsx:444
+#: src/containers/group-management/group-detail.tsx:442
 msgid "Add selected users to group"
 msgstr "将所选用户添加到组"
 
@@ -275,8 +275,8 @@ msgstr "在未将一个发布附加到它时，无法远程更新。"
 #: src/containers/edit-namespace/edit-namespace.tsx:195
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:151
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:134
-#: src/containers/group-management/group-detail.tsx:418
-#: src/containers/group-management/group-detail.tsx:461
+#: src/containers/group-management/group-detail.tsx:416
+#: src/containers/group-management/group-detail.tsx:459
 #: src/containers/namespace-detail/import-modal/import-modal.tsx:77
 msgid "Cancel"
 msgstr "取消"
@@ -604,7 +604,7 @@ msgstr "创建新用户"
 
 #: src/containers/execution-environment/registry-list.tsx:323
 #: src/containers/execution-environment-list/execution_environment_list.tsx:309
-#: src/containers/group-management/group-detail.tsx:766
+#: src/containers/group-management/group-detail.tsx:764
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
 msgstr "已创建"
@@ -881,7 +881,7 @@ msgstr "下拉菜单"
 #: src/containers/execution-environment-detail/base.tsx:154
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:92
 #: src/containers/execution-environment-list/execution_environment_list.tsx:363
-#: src/containers/group-management/group-detail.tsx:338
+#: src/containers/group-management/group-detail.tsx:380
 #: src/containers/settings/user-profile.tsx:102
 #: src/containers/user-management/user-detail.tsx:120
 #: src/containers/user-management/user-edit.tsx:68
@@ -930,8 +930,8 @@ msgid "Edit user"
 msgstr "编辑用户"
 
 #: src/components/user-form/user-form.tsx:90
-#: src/containers/group-management/group-detail.tsx:686
-#: src/containers/group-management/group-detail.tsx:751
+#: src/containers/group-management/group-detail.tsx:684
+#: src/containers/group-management/group-detail.tsx:749
 #: src/containers/user-management/user-list.tsx:174
 #: src/containers/user-management/user-list.tsx:213
 #: src/containers/user-management/user-list.tsx:276
@@ -950,7 +950,7 @@ msgstr "删除集合版本出错。"
 msgid "Error deleting collection."
 msgstr "删除集合出错。"
 
-#: src/containers/group-management/group-detail.tsx:544
+#: src/containers/group-management/group-detail.tsx:542
 #: src/containers/group-management/group-list.tsx:450
 msgid "Error deleting group."
 msgstr "删除组错误。"
@@ -1042,9 +1042,9 @@ msgstr "加载任务时出错。"
 msgid "Error loading token."
 msgstr "加载令牌时出错。"
 
-#: src/containers/group-management/group-detail.tsx:487
-#: src/containers/group-management/group-detail.tsx:608
-#: src/containers/group-management/group-detail.tsx:843
+#: src/containers/group-management/group-detail.tsx:485
+#: src/containers/group-management/group-detail.tsx:606
+#: src/containers/group-management/group-detail.tsx:841
 #: src/containers/group-management/group-list.tsx:303
 #: src/containers/user-management/user-list.tsx:419
 msgid "Error loading users."
@@ -1058,7 +1058,7 @@ msgstr "错误消息"
 msgid "Error message:"
 msgstr "错误消息："
 
-#: src/containers/group-management/group-detail.tsx:862
+#: src/containers/group-management/group-detail.tsx:860
 msgid "Error removing user from a group."
 msgstr "从组中删除用户时出错。"
 
@@ -1067,7 +1067,7 @@ msgstr "从组中删除用户时出错。"
 msgid "Error stopping task."
 msgstr "停止任务时出错。"
 
-#: src/containers/group-management/group-detail.tsx:594
+#: src/containers/group-management/group-detail.tsx:592
 msgid "Error updating users."
 msgstr "更新用户时出错。"
 
@@ -1158,8 +1158,8 @@ msgid "Finished at"
 msgstr "完成于"
 
 #: src/components/user-form/user-form.tsx:88
-#: src/containers/group-management/group-detail.tsx:678
-#: src/containers/group-management/group-detail.tsx:761
+#: src/containers/group-management/group-detail.tsx:676
+#: src/containers/group-management/group-detail.tsx:759
 #: src/containers/user-management/user-list.tsx:166
 #: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:264
@@ -1335,8 +1335,8 @@ msgid "Last modified"
 msgstr "最后修改"
 
 #: src/components/user-form/user-form.tsx:89
-#: src/containers/group-management/group-detail.tsx:682
-#: src/containers/group-management/group-detail.tsx:756
+#: src/containers/group-management/group-detail.tsx:680
+#: src/containers/group-management/group-detail.tsx:754
 #: src/containers/user-management/user-list.tsx:170
 #: src/containers/user-management/user-list.tsx:212
 #: src/containers/user-management/user-list.tsx:270
@@ -1638,7 +1638,7 @@ msgstr "还没有任务"
 msgid "No users will be affected."
 msgstr "任何用户都不会受到影响。"
 
-#: src/containers/group-management/group-detail.tsx:639
+#: src/containers/group-management/group-detail.tsx:637
 #: src/containers/user-management/user-list.tsx:245
 msgid "No users yet"
 msgstr "还没有用户"
@@ -2004,7 +2004,7 @@ msgstr "远程名称"
 msgid "Remote repositories will appear once added"
 msgstr "添加后会出现远程仓库"
 
-#: src/containers/group-management/group-detail.tsx:821
+#: src/containers/group-management/group-detail.tsx:819
 msgid "Remove"
 msgstr "删除"
 
@@ -2012,7 +2012,7 @@ msgstr "删除"
 msgid "Remove content from repository"
 msgstr "从仓库中删除内容"
 
-#: src/containers/group-management/group-detail.tsx:574
+#: src/containers/group-management/group-detail.tsx:572
 msgid "Remove user from group?"
 msgstr "从组中删除用户？"
 
@@ -2075,7 +2075,7 @@ msgstr "SSO URL"
 #: src/containers/edit-namespace/edit-namespace.tsx:192
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:139
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:125
-#: src/containers/group-management/group-detail.tsx:411
+#: src/containers/group-management/group-detail.tsx:409
 msgid "Save"
 msgstr "保存"
 
@@ -2128,7 +2128,7 @@ msgstr "选择命名空间"
 msgid "Select permissions"
 msgstr "选择权限"
 
-#: src/containers/group-management/group-detail.tsx:515
+#: src/containers/group-management/group-detail.tsx:513
 msgid "Select users"
 msgstr "选择用户"
 
@@ -2223,7 +2223,7 @@ msgstr "成功删除集合版本。"
 msgid "Successfully deleted collection."
 msgstr "成功删除集合。"
 
-#: src/containers/group-management/group-detail.tsx:540
+#: src/containers/group-management/group-detail.tsx:538
 #: src/containers/group-management/group-list.tsx:438
 msgid "Successfully deleted group."
 msgstr "成功删除组。"
@@ -2240,7 +2240,7 @@ msgstr "成功删除远程 registry {name}"
 msgid "Successfully deleted user."
 msgstr "成功删除用户。"
 
-#: src/containers/group-management/group-detail.tsx:857
+#: src/containers/group-management/group-detail.tsx:855
 msgid "Successfully removed a user from a group."
 msgstr "成功从组中删除用户。"
 
@@ -2566,7 +2566,7 @@ msgid "User details"
 msgstr "用户详情"
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:332
-#: src/containers/group-management/group-detail.tsx:779
+#: src/containers/group-management/group-detail.tsx:777
 #: src/containers/user-management/user-list.tsx:299
 msgid "User list"
 msgstr "用户列表"
@@ -2578,8 +2578,8 @@ msgstr "用户类型"
 #: src/components/repositories/remote-form.tsx:345
 #: src/components/user-form/user-form.tsx:87
 #: src/containers/about-modal/about-modal.tsx:77
-#: src/containers/group-management/group-detail.tsx:674
-#: src/containers/group-management/group-detail.tsx:746
+#: src/containers/group-management/group-detail.tsx:672
+#: src/containers/group-management/group-detail.tsx:744
 #: src/containers/login/login.tsx:56
 #: src/containers/user-management/user-list.tsx:162
 #: src/containers/user-management/user-list.tsx:210
@@ -2601,7 +2601,7 @@ msgstr "用户名：{0}"
 msgid "Users"
 msgstr "用户"
 
-#: src/containers/group-management/group-detail.tsx:640
+#: src/containers/group-management/group-detail.tsx:638
 msgid "Users will appear once added to this group"
 msgstr "用户添加至该组后会出现"
 
@@ -2747,7 +2747,7 @@ msgstr "您必须登录才能下载 tarball。"
 msgid "You have unsaved changes"
 msgstr "您有未保存的更改"
 
-#: src/containers/group-management/group-detail.tsx:440
+#: src/containers/group-management/group-detail.tsx:438
 msgid "add-user-modal"
 msgstr "add-user-modal"
 
