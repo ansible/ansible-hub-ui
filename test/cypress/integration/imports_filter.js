@@ -8,12 +8,13 @@ describe('Imports filter test', () => {
     cy.deleteNamespacesAndCollections();
 
     // insert test data
-    cy.galaxykit('namespace create test_namespace');
-    cy.galaxykit('namespace create filter_test_namespace');
+    cy.galaxykit('namespace create', 'test_namespace');
+    cy.galaxykit('collection upload', 'test_namespace', testCollection);
 
-    cy.galaxykit('-i collection upload filter_test_namespace my_collection1');
-    cy.galaxykit('-i collection upload filter_test_namespace my_collection2');
-    cy.galaxykit('-i collection upload filter_test_namespace different_name');
+    cy.galaxykit('namespace create filter_test_namespace');
+    cy.galaxykit('collection upload filter_test_namespace my_collection1');
+    cy.galaxykit('collection upload filter_test_namespace my_collection2');
+    cy.galaxykit('collection upload filter_test_namespace different_name');
   });
 
   after(() => {
@@ -26,9 +27,8 @@ describe('Imports filter test', () => {
   });
 
   it('should display success info after importing collection', () => {
-    cy.galaxykit(`-i collection upload test_namespace ${testCollection}`);
-
     cy.visit('/ui/my-imports?namespace=test_namespace');
+
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).click();
     cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
       `test_namespace.${testCollection}`,
@@ -42,9 +42,9 @@ describe('Imports filter test', () => {
   });
 
   it('should fail on importing existing collection', () => {
-    cy.galaxykit(`-i collection upload test_namespace ${testCollection}`);
-
+    cy.galaxykit('-i collection upload', 'test_namespace', testCollection);
     cy.visit('/ui/my-imports?namespace=test_namespace');
+
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
     cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
       `test_namespace.${testCollection}`,
@@ -58,15 +58,6 @@ describe('Imports filter test', () => {
     cy.get(
       '[data-cy="MyImports"] [data-cy="ImportConsole"] .message-list',
     ).contains('Failed');
-  });
-
-  it('should redirect to new uploaded collection', () => {
-    cy.visit('/ui/my-imports?namespace=test_namespace');
-    cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
-    cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]')
-      .contains(`test_namespace.${testCollection}`)
-      .click();
-    cy.contains(testCollection);
   });
 
   it('should be able to switch between namespaces', () => {
@@ -97,22 +88,22 @@ describe('Imports filter test', () => {
       'GET',
       Cypress.env('prefix') +
         '_ui/v1/imports/collections/?namespace=filter_test_namespace&*',
-    ).as('collectionsInNamespace');
+    ).as('collectionsInNamespace2');
     cy.intercept(
       'GET',
       Cypress.env('prefix') + '_ui/v1/imports/collections/*',
-    ).as('collectionDetail');
+    ).as('collectionDetail2');
     cy.intercept(
       'GET',
       Cypress.env('prefix') +
         '_ui/v1/collection-versions/?namespace=filter_test_namespace&name=*',
-    ).as('collectionVersions');
+    ).as('collectionVersions2');
 
     cy.get('[aria-label="Select namespace"]').select('filter_test_namespace');
 
-    cy.wait('@collectionsInNamespace');
-    cy.wait('@collectionDetail');
-    cy.wait('@collectionVersions');
+    cy.wait('@collectionsInNamespace2');
+    cy.wait('@collectionDetail2');
+    cy.wait('@collectionVersions2');
 
     cy.get('[data-cy="ImportList-row-my_collection1"]').should('be.visible');
   });
@@ -120,7 +111,7 @@ describe('Imports filter test', () => {
   it('partial filter for name is working.', () => {
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+      Cypress.env('prefix') + '_ui/v1/collection-versions/?*',
     ).as('wait');
 
     cy.get('input[aria-label="keywords"').type('my_collection{enter}');
@@ -136,7 +127,7 @@ describe('Imports filter test', () => {
   it('exact filter for name is working.', () => {
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+      Cypress.env('prefix') + '_ui/v1/collection-versions/?*',
     ).as('wait');
 
     cy.get('input[aria-label="keywords"').type('my_collection1{enter}');
@@ -149,7 +140,6 @@ describe('Imports filter test', () => {
       .contains('different_name')
       .should('not.exist');
     cy.get('[data-cy="import-list-data"]').contains('my_collection1');
-    cy.wait(10000);
   });
 
   it('Exact search for completed is working.', () => {
