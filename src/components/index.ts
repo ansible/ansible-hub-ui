@@ -23,17 +23,17 @@ export { CollectionUsedbyDependenciesList } from './collection-dependencies-list
 export { CompoundFilter } from './patternfly-wrappers/compound-filter';
 export { DateComponent } from './date-component/date-component';
 export { DeleteExecutionEnvironmentModal } from './delete-modal/delete-execution-environment-modal';
-export { DeleteGroupModal } from './group-management/delete-group-modal';
+export { DeleteGroupModal } from './rbac/delete-group-modal';
 export { DeleteModal } from './delete-modal/delete-modal';
-export { DeleteUserModal } from './delete-modal/delete-user-modal';
+export { DeleteUserModal } from './rbac/delete-user-modal';
 export { DeprecatedTag } from './tags/deprecated-tag';
 export { EmptyStateCustom } from './empty-state/empty-state-custom';
 export { EmptyStateFilter } from './empty-state/empty-state-filter';
 export { EmptyStateNoData } from './empty-state/empty-state-no-data';
 export { EmptyStateUnauthorized } from './empty-state/empty-state-unauthorized';
 export { ExecutionEnvironmentHeader } from './execution-environment-header/execution-environment-header';
-export { GroupModal } from './group-management/group-modal';
-export { GroupRolePermissions } from './role-management/group-role-permissions';
+export { GroupModal } from './rbac/group-modal';
+export { GroupRolePermissions } from './rbac/group-role-permissions';
 export { HelperText } from './helper-text/helper-text';
 export { ImportConsole } from './my-imports/import-console';
 export { ImportList } from './my-imports/import-list';
@@ -56,15 +56,15 @@ export {
 export { OwnersTab } from './rbac/owners-tab';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { PartnerHeader } from './headers/partner-header';
-export { PermissionChipSelector } from './permissions/permission-chip-selector';
+export { PermissionChipSelector } from './rbac/permission-chip-selector';
 export { PublishToControllerModal } from './execution-environment/publish-to-controller-modal';
 export { RemoteForm } from './repositories/remote-form';
 export { RemoteRepositoryTable } from './repositories/remote-repository-table';
 export { RepoSelector } from './repo-selector/repo-selector';
 export { RepositoryForm } from './execution-environment/repository-form';
-export { RoleForm } from './role-management/role-form';
-export { RoleHeader } from './role-management/role-header';
-export { RolePermissions } from './role-management/role-permissions';
+export { RoleForm } from './rbac/role-form';
+export { RoleHeader } from './rbac/role-header';
+export { RolePermissions } from './rbac/role-permissions';
 export { ResourcesForm } from './namespace-form/resources-form';
 export { TagManifestModal } from './execution-environment/tag-manifest-modal';
 export { ShaLabel } from './sha-label/sha-label';
@@ -85,14 +85,14 @@ export { Tag } from './tags/tag';
 export { TagLabel } from './tag-label/tag-label';
 export { Tooltip } from './patternfly-wrappers/tooltip';
 export { UIVersion } from './shared/ui-version';
-export { UserForm } from './user-form/user-form';
-export { UserFormPage } from './user-form/user-form-page';
+export { UserForm } from './rbac/user-form';
+export { UserFormPage } from './rbac/user-form-page';
 export {
   RoleListTable,
   ExpandableRow,
   CheckboxRow,
   RadioRow,
-} from './role-list-table/role-list-table';
+} from './rbac/role-list-table';
 export { WriteOnlyField } from './patternfly-wrappers/write-only-field';
 export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
 export { FileUpload } from './patternfly-wrappers/fileupload';
