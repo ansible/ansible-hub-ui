@@ -606,7 +606,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         title={t`Remove user from group?`}
       >
         <Trans>
-          User <b>{username}</b> will be removed from group<b>{groupname}</b>.
+          User <b>{username}</b> will be removed from group <b>{groupname}</b>.
         </Trans>
       </DeleteModal>
     );
