@@ -170,10 +170,26 @@ jobs:
           "containers": "localhost:8002"
         }' > cypress.env.json
 
+    - name: "Wait for pulp to start responding"
+      run: |
+        for attempt in {1..5}; do
+          curl -sf http://localhost:8002/static/galaxy_ng/index.html && break || true
+          echo attempt $attempt / 5 failed, trying again in 1m
+          sleep 1m
+        done
+
     - name: "Ensure index.html uses the new js"
       run: |
         echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
+
+    - name: "Ensure galaxykit can connect to the server"
+      run: |
+        galaxykit -s 'http://localhost:8002/api/galaxy/' -u admin -p admin namespace list
+
+    - name: "Check initial feature flags"
+      run: |
+        curl -s -u admin:admin http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
