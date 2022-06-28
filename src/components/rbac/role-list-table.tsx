@@ -51,7 +51,7 @@ export const RoleListTable: React.FC<Props> = ({
         id: 'description',
       },
       {
-        title: t`Locked`,
+        title: t`Editable`,
         type: 'none',
         id: 'locked',
       },

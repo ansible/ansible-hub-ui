@@ -1,6 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { sortBy } from 'lodash';
 import {
   Button,
   DropdownItem,
@@ -97,6 +98,8 @@ export class OwnersTab extends React.Component<IProps, IState> {
   }
 
   private renderGroups({ buttonAdd, groups }) {
+    const sortedGroups = sortBy(groups, 'name');
+
     return (
       <>
         <div>
@@ -130,7 +133,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
             updateParams={() => null}
           />
           <tbody>
-            {groups.map((group, i) => this.renderGroupRow(group, i))}
+            {sortedGroups.map((group, i) => this.renderGroupRow(group, i))}
           </tbody>
         </table>
       </>
@@ -175,6 +178,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
     const { showRoleRemoveModal, showRoleSelectWizard } = this.state;
     const group = this.props.groups.find(({ id }) => Number(groupId) === id);
     const roles = group?.object_roles;
+    const sortedRoles = sortBy(roles);
 
     if (!group) {
       return null;
@@ -228,7 +232,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
             ],
           }}
         >
-          {roles.map((role, i) => (
+          {sortedRoles.map((role, i) => (
             <ExpandableRow
               key={i}
               rowIndex={i}
@@ -242,7 +246,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
                     key='remove-role'
                     onClick={() => this.setState({ showRoleRemoveModal: role })}
                   >
-                    {t`Remove Role`}
+                    {t`Remove role`}
                   </DropdownItem>,
                 ]}
               />

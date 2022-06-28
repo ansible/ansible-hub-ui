@@ -15,7 +15,7 @@ describe('RBAC table contains correct headers and filter', () => {
     );
 
     //ensure proper headers
-    [('Role name', 'Description', 'Created', 'Locked')].forEach((item) => {
+    [('Role name', 'Description', 'Created', 'Editable')].forEach((item) => {
       cy.get('tr[data-cy="SortTable-headers"] th').contains(item);
     });
   });
