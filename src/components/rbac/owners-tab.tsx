@@ -9,6 +9,8 @@ import {
   ToolbarContent,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { ExclamationTriangleIcon } from '@patternfly/react-icons';
+
 import { GroupType, RoleType } from 'src/api';
 import {
   DeleteModal,
@@ -23,8 +25,10 @@ import {
   SelectRoles,
   SortTable,
   WizardModal,
+  EmptyStateCustom,
 } from 'src/components';
 import { ParamHelper, errorMessage } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IProps {
   addAlert: (alert) => void;
@@ -82,7 +86,13 @@ export class OwnersTab extends React.Component<IProps, IState> {
         {showGroupRemoveModal ? this.renderGroupRemoveModal() : null}
         {showGroupSelectWizard ? this.renderGroupSelectWizard() : null}
 
-        {noData ? (
+        {!this.context.user.is_superuser ? (
+          <EmptyStateCustom
+            title={t`You do not have the required permissions.`}
+            description={t`Please contact the server administrator for elevated permissions.`}
+            icon={ExclamationTriangleIcon}
+          />
+        ) : noData ? (
           <EmptyStateNoData
             title={t`There are currently no owners assigned.`}
             description={t`Please add an owner by using the button below.`}
@@ -504,3 +514,4 @@ export class OwnersTab extends React.Component<IProps, IState> {
     });
   }
 }
+OwnersTab.contextType = AppContext;
