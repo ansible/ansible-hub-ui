@@ -84,7 +84,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     }
 
     if (!params['sort']) {
-      params['sort'] = '-pulp_created';
+      params['sort'] = 'name';
     }
 
     if (!params['name__startswith']) {
@@ -220,16 +220,16 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
 
                               {
                                 id: 'locked',
-                                title: t`Status`,
+                                title: t`Editable`,
                                 inputType: 'select',
                                 options: [
                                   {
                                     id: 'true',
-                                    title: t`Locked`,
+                                    title: t`Built-in`,
                                   },
                                   {
                                     id: 'false',
-                                    title: t`Unlocked`,
+                                    title: t`Editable`,
                                   },
                                 ],
                               },
@@ -258,11 +258,13 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort', 'ordering']}
                     niceValues={{
-                      locked: { true: t`Locked`, false: t`Unlocked` },
+                      locked: { true: t`Built-in`, false: t`Editable` },
+                      name__startswith: { 'galaxy.': t`true` },
                     }}
                     niceNames={{
+                      locked: t`Editable`,
                       name__icontains: t`Role name`,
-                      locked: t`Status`,
+                      name__startswith: t`Galaxy only`,
                     }}
                   />
                 </div>
@@ -298,7 +300,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                             id: 'pulp_created',
                           },
                           {
-                            title: t`Locked`,
+                            title: t`Editable`,
                             type: 'none',
                             id: 'locked',
                           },
@@ -371,26 +373,23 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                             <DateComponent date={role.pulp_created} />
                           </td>
 
-                          {role.locked ? (
-                            <Tooltip
-                              content={t`Locked roles cannot be edited or deleted.`}
-                            >
-                              <td>
-                                <Trans>Locked</Trans>
-                              </td>
-                            </Tooltip>
-                          ) : (
-                            <td>{t`Unlocked`}</td>
-                          )}
-                          {!role.locked ? (
-                            <ListItemActions
-                              kebabItems={this.renderDropdownItems(role)}
-                            />
-                          ) : (
-                            <ListItemActions
-                              kebabItems={this.renderDropdownItems(role)}
-                            />
-                          )}
+                          <td>
+                            {role.locked ? (
+                              <Tooltip
+                                content={t`Built-in roles cannot be edited or deleted.`}
+                              >
+                                <span
+                                  style={{ whiteSpace: 'nowrap' }}
+                                >{t`Built-in`}</span>
+                              </Tooltip>
+                            ) : (
+                              t`Editable`
+                            )}
+                          </td>
+
+                          <ListItemActions
+                            kebabItems={this.renderDropdownItems(role)}
+                          />
                         </ExpandableRow>
                       ))}
                     </RoleListTable>
@@ -418,9 +417,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     RoleAPI.delete(roleID)
       .then(() =>
         this.addAlert(
-          t`
-            Role "${name}" has been successfully deleted.
-          `,
+          t`Role "${name}" has been successfully deleted.`,
           'success',
         ),
       )
@@ -442,42 +439,52 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     const { pulp_href, locked } = role;
     const roleID = parsePulpIDFromURL(pulp_href);
 
+    const editItem = (
+      <DropdownItem
+        key='edit'
+        isDisabled={locked}
+        onClick={() =>
+          this.setState({
+            redirect: formatPath(Paths.roleEdit, { role: roleID }),
+          })
+        }
+      >
+        {t`Edit`}
+      </DropdownItem>
+    );
+    const deleteItem = (
+      <DropdownItem
+        key='delete'
+        isDisabled={locked}
+        onClick={() =>
+          this.setState({
+            showDeleteModal: true,
+            roleToEdit: role,
+          })
+        }
+      >
+        {t`Delete`}
+      </DropdownItem>
+    );
     const dropdownItems = [
-      // this.context.user.model_permissions.change_containerregistry && (
-
-      <Tooltip key='edit' content={t`Locked roles cannot be edited.`}>
-        <DropdownItem
-          key='edit'
-          isDisabled={locked}
-          onClick={() =>
-            this.setState({
-              redirect: formatPath(Paths.roleEdit, { role: roleID }),
-            })
-          }
-        >
-          {t`Edit`}
-        </DropdownItem>
-      </Tooltip>,
-
-      // ),
-      // this.context.user.model_permissions.delete_containerregistry && (
-
-      <Tooltip key='delete' content={t`Locked roles cannot be deleted.`}>
-        <DropdownItem
-          key='delete'
-          isDisabled={locked}
-          onClick={() =>
-            this.setState({
-              showDeleteModal: true,
-              roleToEdit: role,
-            })
-          }
-        >
-          {t`Delete`}
-        </DropdownItem>
-      </Tooltip>,
-      // ),
+      // this.context.user.model_permissions.change_containerregistry &&
+      locked ? (
+        <Tooltip key='edit' content={t`Built-in roles cannot be edited.`}>
+          {editItem}
+        </Tooltip>
+      ) : (
+        editItem
+      ),
+      // this.context.user.model_permissions.delete_containerregistry &&
+      locked ? (
+        <Tooltip key='delete' content={t`Built-in roles cannot be deleted.`}>
+          {deleteItem}
+        </Tooltip>
+      ) : (
+        deleteItem
+      ),
     ];
+
     return dropdownItems;
   };
 

@@ -7,7 +7,7 @@ import {
   CompoundFilter,
   DeleteModal,
   EmptyStateNoData,
-  GroupRolePermissions,
+  RolePermissions,
   LoadingPageWithHeader,
   Pagination,
   RoleListTable,
@@ -232,6 +232,11 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
         id: 'role',
       },
       {
+        title: t`Description`,
+        type: 'none',
+        id: 'description',
+      },
+      {
         title: '',
         type: 'none',
         id: 'kebab',
@@ -354,14 +359,17 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     key={i}
                     rowIndex={i}
                     expandableRowContent={
-                      <GroupRolePermissions
-                        name={role.role}
+                      <RolePermissions
                         filteredPermissions={filteredPermissions}
+                        selectedPermissions={role.permissions}
+                        showCustom={true}
+                        showEmpty={false}
                       />
                     }
                     data-cy={`RoleListTable-ExpandableRow-row-${role.role}`}
                   >
                     <td>{role.role}</td>
+                    <td>{role.description}</td>
                     <ListItemActions
                       kebabItems={[
                         user.is_superuser && (
@@ -369,7 +377,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                             key='remove-role'
                             onClick={() => setSelectedDeleteRole(role)}
                           >
-                            {t`Remove Role`}
+                            {t`Remove role`}
                           </DropdownItem>
                         ),
                       ]}
