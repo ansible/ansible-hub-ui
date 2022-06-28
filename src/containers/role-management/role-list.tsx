@@ -151,6 +151,12 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       });
     }
 
+    const addRoles = this.context.user.is_superuser && (
+      <Link to={Paths.createRole}>
+        <Button variant={'primary'}>{t`Add roles`}</Button>
+      </Link>
+    );
+
     return (
       <React.Fragment>
         <AlertList
@@ -183,11 +189,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
           <EmptyStateNoData
             title={t`There are currently no roles`}
             description={t`Please add a role by using the button below.`}
-            button={
-              <Link to={Paths.createRole}>
-                <Button variant={'primary'}>{t`Add roles`}</Button>
-              </Link>
-            }
+            button={addRoles}
           />
         ) : (
           <Main>
@@ -234,11 +236,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                             ]}
                           />
                         </ToolbarItem>
-                        <ToolbarItem>
-                          <Link to={Paths.createRole}>
-                            <Button variant={'primary'}>{t`Add roles`}</Button>
-                          </Link>
-                        </ToolbarItem>
+                        <ToolbarItem>{addRoles}</ToolbarItem>
                       </ToolbarGroup>
                     </ToolbarContent>
                   </Toolbar>
