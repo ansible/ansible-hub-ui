@@ -13,6 +13,7 @@ import {
   getHumanSize,
   waitForTask,
 } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -396,14 +397,16 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       >
         {t`Use in Controller`}
       </DropdownItem>,
-      <DropdownItem
-        key='delete-image'
-        onClick={() => {
-          this.setState({ deleteModalVisible: true, selectedImage: image });
-        }}
-      >
-        {t`Delete`}
-      </DropdownItem>,
+      this.context.user.model_permissions.delete_containerrepository && (
+        <DropdownItem
+          key='delete-image'
+          onClick={() => {
+            this.setState({ deleteModalVisible: true, selectedImage: image });
+          }}
+        >
+          {t`Delete`}
+        </DropdownItem>
+      ),
     ].filter((truthy) => truthy);
 
     return (
@@ -615,3 +618,4 @@ class ExecutionEnvironmentDetailImages extends React.Component<
 }
 
 export default withRouter(withContainerRepo(ExecutionEnvironmentDetailImages));
+ExecutionEnvironmentDetailImages.contextType = AppContext;
