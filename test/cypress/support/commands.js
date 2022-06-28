@@ -200,12 +200,50 @@ Cypress.Commands.add('createGroup', {}, (name) => {
   cy.contains(name).should('exist');
 });
 
+Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
+  cy.menuGo('User Access > Groups');
+  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+  cy.contains('button', 'Users').click();
+  cy.contains('button', 'Add').click();
+  cy.get('input.pf-c-select__toggle-typeahead').type(userName);
+  cy.contains('button', userName).click();
+  cy.get('.pf-c-content h2').click(); // click modal header to close dropdown
+  cy.contains('footer > button', 'Add').click({ force: true });
+  cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
+});
+
+Cypress.Commands.add('createRole', {}, (name, description, permissions) => {
+  cy.visit('ui/roles/create');
+
+  cy.get('input[id="role_name"]').type(name);
+  cy.get('input[id="role_description"]').type(description);
+
+  permissions.forEach((permissionElement) => {
+    permissionElement.permissions.forEach((permission) => {
+      cy.get(
+        `[data-cy=RoleForm-Permissions-row-${permissionElement.group}] .pf-c-select input`,
+      ).click();
+
+      cy.contains('button', permission).click();
+
+      // untoggle permission options
+      cy.contains('Permissions').click();
+    });
+  });
+
+  cy.contains('Save').click();
+});
+
 Cypress.Commands.add('addRolesToGroup', {}, (groupName, roles) => {
   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('groups');
   cy.menuGo('User Access > Groups');
   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.wait('@groups');
   cy.get('[data-cy=add-roles]').click();
+
+  cy.get('[aria-label="Items per page"]').click();
+  cy.contains('100 per page').click();
+
   roles.forEach((role) => {
     cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${role}"]`)
       .find('input')
@@ -218,30 +256,13 @@ Cypress.Commands.add('addRolesToGroup', {}, (groupName, roles) => {
     cy.contains(role);
   });
 
-  cy.intercept('POST', Cypress.env('pulpPrefix') + 'groups/*/roles/').as(
-    'postGroupRoles',
-  );
-
-  cy.intercept('GET', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
-    'getGroupRoles',
-  );
-
   cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('roles');
 
   cy.get('.pf-c-wizard__footer > button').contains('Add').click();
-
-  roles.forEach(() => {
-    cy.wait('@postGroupRoles');
-  });
-  cy.wait('@getGroupRoles');
-  cy.wait('@roles');
 });
 
-Cypress.Commands.add('removeRoleFromGroup', {}, (groupName, role) => {
-  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('groups');
-  cy.menuGo('User Access > Groups');
-  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.wait('@groups');
+Cypress.Commands.add('deleteRole', {}, (role) => {
+  cy.visit('/ui/roles/');
 
   cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`)
     .find('[data-cy="kebab-toggle"]')
@@ -249,37 +270,8 @@ Cypress.Commands.add('removeRoleFromGroup', {}, (groupName, role) => {
     .contains('Remove role')
     .click();
 
-  cy.intercept('DELETE', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
-    'deleteRole',
-  );
-
-  cy.intercept('GET', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
-    'getGroupRoles',
-  );
-
-  cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('roles');
-
-  cy.get('.pf-c-modal-box__footer').contains('Delete').click();
-
-  cy.wait('@deleteRole');
-  cy.wait('@getGroupRoles');
-  cy.wait('@roles');
-});
-
-Cypress.Commands.add('removeRolesFromGroup', {}, (groupName, roles) => {
-  roles.forEach((role) => cy.removeRoleFromGroup(groupName, role));
-});
-
-Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
-  cy.menuGo('User Access > Groups');
-  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.contains('button', 'Users').click();
-  cy.contains('button', 'Add').click();
-  cy.get('input.pf-c-select__toggle-typeahead').type(userName);
-  cy.contains('button', userName).click();
-  cy.get('.pf-c-content h2').click(); // click modal header to close dropdown
-  cy.contains('footer > button', 'Add').click({ force: true });
-  cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
+  cy.contains('Delete').click();
+  cy.get('[data-cy="delete-button"]').contains('Delete').click();
 });
 
 Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
