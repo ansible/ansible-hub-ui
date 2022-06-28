@@ -97,8 +97,12 @@ export function withContainerRepo(WrappedComponent) {
         permissions.includes(
           'container.namespace_change_containerdistribution',
         ) || permissions.includes('container.change_containernamespace');
+      const canSync = permissions.includes(
+        'container.change_containernamespace',
+      );
+
       const dropdownItems = [
-        this.state.repo.pulp.repository.remote && (
+        this.state.repo.pulp.repository.remote && canSync && (
           <DropdownItem
             key='sync'
             onClick={() => this.sync(this.state.repo.name)}
