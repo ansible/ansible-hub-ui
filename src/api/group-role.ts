@@ -2,6 +2,7 @@ import { PulpAPI } from './pulp';
 
 class API extends PulpAPI {
   apiPath = 'groups/';
+  useOrdering = true;
 
   listRoles(groupId, params?) {
     return super.list(params, `${this.apiPath}${groupId}/roles/`);

@@ -37,6 +37,7 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
   const [localParams, setLocalParams] = useState({
     page: 1,
     page_size: 10,
+    sort: 'name',
   });
 
   useEffect(() => {
