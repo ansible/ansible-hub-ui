@@ -3,7 +3,10 @@ describe('Namespace owners tab', () => {
 
   before(() => {
     cy.deleteNamespacesAndCollections();
+    cy.deleteTestGroups();
+
     cy.galaxykit(`-i namespace create rbac_owners_${num}`);
+    cy.galaxykit('-i group create', `owners_group`);
   });
 
   beforeEach(() => {
@@ -31,6 +34,7 @@ describe('Execution Environment Owners tab', () => {
     cy.login();
     cy.deleteRegistries();
     cy.deleteContainers();
+    cy.deleteTestGroups();
 
     cy.galaxykit(
       'registry create',
@@ -43,6 +47,7 @@ describe('Execution Environment Owners tab', () => {
       'library/alpine',
       `rbac_owners_${num}_registry`,
     );
+    cy.galaxykit('-i group create', `owners_group`);
   });
 
   beforeEach(() => {
@@ -78,14 +83,14 @@ function testOwnersTab({
   // group role modal
   // find partner-engineers, select, check indicator, next
   cy.get('[data-cy=compound_filter] input[aria-label=name__contains]').type(
-    'system{enter}',
+    'owners{enter}',
   );
   cy.get(
-    '[data-cy="GroupListTable-CheckboxRow-row-system:partner-engineers"] input[type=radio]',
+    '[data-cy="GroupListTable-CheckboxRow-row-owners_group"] input[type=radio]',
   ).click();
 
   cy.get('strong').contains('Selected group');
-  cy.get('.hub-permission').contains('system:partner-engineers');
+  cy.get('.hub-permission').contains('owners_group');
 
   cy.get('footer button').contains('Next').click();
 
@@ -103,7 +108,7 @@ function testOwnersTab({
   cy.get('footer button').contains('Next').click();
 
   // see preview, add
-  cy.get('strong').contains('system:partner-engineers');
+  cy.get('strong').contains('owners_group');
   cy.get('strong').contains(role);
 
   cy.get('.hub-permission strong').contains(permissionGroup);
@@ -111,15 +116,15 @@ function testOwnersTab({
 
   cy.get('footer button').contains('Add').click();
   cy.get('.pf-c-alert__title').contains(
-    `Group "system:partner-engineers" has been successfully added to "rbac_owners_${num}".`,
+    `Group "owners_group" has been successfully added to "rbac_owners_${num}".`,
   );
-  cy.get('tr[data-cy="OwnersTab-row-system:partner-engineers"]');
+  cy.get('tr[data-cy="OwnersTab-row-owners_group"]');
 
   // group list view, try modal, open group
   cy.get('button').contains('Select a group').click();
   cy.get('.pf-c-wizard__footer-cancel').click();
 
-  cy.get('tr[data-cy="OwnersTab-row-system:partner-engineers"] a').click();
+  cy.get('tr[data-cy="OwnersTab-row-owners_group"] a').click();
 
   // role list view, use modal
   cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`);
@@ -128,7 +133,7 @@ function testOwnersTab({
   cy.get('footer button').contains('Next').click();
   cy.get('footer button').contains('Add').click();
   cy.get('.pf-c-alert__title').contains(
-    `Group "system:partner-engineers" roles successfully updated in "rbac_owners_${num}".`,
+    `Group "owners_group" roles successfully updated in "rbac_owners_${num}".`,
   );
 
   // role list view, expand
@@ -143,12 +148,12 @@ function testOwnersTab({
     `[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle] button`,
   ).click();
   cy.get('.pf-c-dropdown__menu-item').contains('Remove role').click();
-  cy.get('.pf-c-modal-box__body strong').contains('system:partner-engineers');
+  cy.get('.pf-c-modal-box__body strong').contains('owners_group');
   cy.get('.pf-c-modal-box__body strong').contains(role);
   cy.get('.pf-c-modal-box__body strong').contains(`rbac_owners_${num}`);
   cy.get('[data-cy=delete_button]').click();
   cy.get('.pf-c-alert__title').contains(
-    `Group "system:partner-engineers" roles successfully updated in "rbac_owners_${num}".`,
+    `Group "owners_group" roles successfully updated in "rbac_owners_${num}".`,
   );
 
   // breadcrumb back to group list
@@ -156,14 +161,14 @@ function testOwnersTab({
 
   // list view, delete, see empty
   cy.get(
-    'tr[data-cy="OwnersTab-row-system:partner-engineers"] [data-cy=kebab-toggle] button',
+    'tr[data-cy="OwnersTab-row-owners_group"] [data-cy=kebab-toggle] button',
   ).click();
   cy.get('.pf-c-dropdown__menu-item').contains('Remove group').click();
-  cy.get('.pf-c-modal-box__body strong').contains('system:partner-engineers');
+  cy.get('.pf-c-modal-box__body strong').contains('owners_group');
   cy.get('.pf-c-modal-box__body strong').contains(role);
   cy.get('[data-cy=delete_button]').click();
   cy.get('.pf-c-alert__title').contains(
-    `Group "system:partner-engineers" has been successfully removed from "rbac_owners_${num}".`,
+    `Group "owners_group" has been successfully removed from "rbac_owners_${num}".`,
   );
   cy.get('.pf-c-empty-state');
 }
