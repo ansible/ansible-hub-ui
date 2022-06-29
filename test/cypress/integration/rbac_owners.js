@@ -129,7 +129,10 @@ function testOwnersTab({
   // role list view, use modal
   cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`);
   cy.get('button').contains('Add roles').click();
-  cy.get('.pf-c-table__check input[type=checkbox]').not('[disabled]').click();
+  cy.get('.pf-c-table__check input[type=checkbox]')
+    .not('[disabled]')
+    .first()
+    .click();
   cy.get('footer button').contains('Next').click();
   cy.get('footer button').contains('Add').click();
   cy.get('.pf-c-alert__title').contains(
