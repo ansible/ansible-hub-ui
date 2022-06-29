@@ -9,8 +9,8 @@ import { Text, DropdownItem, Checkbox, Tooltip } from '@patternfly/react-core';
 
 import { DeleteModal } from 'src/components';
 
-class DeleteCollectionUtils {
-  public getUsedbyDependencies(collection, setDependencies, setAlert) {
+export class DeleteCollectionUtils {
+  public static getUsedbyDependencies(collection, setDependencies, setAlert) {
     const { name, namespace } = collection;
     CollectionAPI.getUsedDependenciesByCollection(namespace.name, name)
       .then(({ data }) => {
@@ -26,46 +26,45 @@ class DeleteCollectionUtils {
       });
   }
 
-  public deleteMenuOption(
+  public static deleteMenuOption(
     noDependencies,
     delete_collection_permission: boolean,
     onClick,
   ) {
-    let ret = noDependencies
-      ? delete_collection_permission && (
-          <DropdownItem
-            key='delete-collection-enabled'
-            onClick={() => onClick()}
-            data-cy='delete-collection-dropdown'
-          >
-            {t`Delete entire collection`}
-          </DropdownItem>
-        )
-      : delete_collection_permission && (
-          <Tooltip
-            key='delete-collection-disabled'
-            position='left'
-            content={
-              <Trans>
-                Cannot delete until collections <br />
-                that depend on this collection <br />
-                have been deleted.
-              </Trans>
-            }
-          >
-            <DropdownItem isDisabled>
-              {t`Delete entire collection`}
-            </DropdownItem>
-          </Tooltip>
-        );
-
-    if (!ret) {
-      ret = <div></div>;
+    if (!delete_collection_permission) {
+      return null;
     }
-    return ret;
+
+    if (!noDependencies) {
+      return (
+        <Tooltip
+          key='delete-collection-disabled'
+          position='left'
+          content={
+            <Trans>
+              Cannot delete until collections <br />
+              that depend on this collection <br />
+              have been deleted.
+            </Trans>
+          }
+        >
+          <DropdownItem isDisabled>{t`Delete entire collection`}</DropdownItem>
+        </Tooltip>
+      );
+    }
+
+    return (
+      <DropdownItem
+        key='delete-collection-enabled'
+        onClick={() => onClick()}
+        data-cy='delete-collection-dropdown'
+      >
+        {t`Delete entire collection`}
+      </DropdownItem>
+    );
   }
 
-  public deleteModal(
+  public static deleteModal(
     deleteCollection,
     isDeletionPending,
     confirmDelete,
@@ -129,7 +128,50 @@ class DeleteCollectionUtils {
     );
   }
 
-  public deleteCollection(component, redirect, selectedRepo, addAlert) {
+  public static tryOpenDeleteModalWithConfirm(component, collection) {
+    DeleteCollectionUtils.getUsedbyDependencies(
+      collection,
+      (noDependencies) =>
+        DeleteCollectionUtils.openDeleteModalWithConfirm(
+          component,
+          noDependencies,
+          collection,
+        ),
+      (alerts) =>
+        component.setState({ alerts: [...component.state.alerts, alerts] }),
+    );
+  }
+
+  public static openDeleteModalWithConfirm(
+    component,
+    noDependencies,
+    collection,
+  ) {
+    if (noDependencies) {
+      component.setState({
+        deleteCollection: collection,
+        confirmDelete: false,
+      });
+    } else {
+      component.setState({
+        alerts: [
+          ...component.state.alerts,
+          {
+            title: (
+              <Trans>
+                Cannot delete until collections <br />
+                that depend on this collection <br />
+                have been deleted.
+              </Trans>
+            ),
+            variant: 'warning',
+          },
+        ],
+      });
+    }
+  }
+
+  public static deleteCollection(component, redirect, selectedRepo, addAlert) {
     const { deleteCollection, collectionVersion } = component.state;
 
     CollectionAPI.deleteCollection(selectedRepo, deleteCollection)
@@ -187,5 +229,3 @@ class DeleteCollectionUtils {
       });
   }
 }
-
-export const deleteCollectionUtils = new DeleteCollectionUtils();

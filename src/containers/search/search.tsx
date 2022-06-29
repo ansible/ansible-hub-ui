@@ -3,7 +3,7 @@ import * as React from 'react';
 import './search.scss';
 import {
   errorMessage,
-  deleteCollectionUtils,
+  DeleteCollectionUtils,
   filterIsSet,
   waitForTask,
   parsePulpIDFromURL,
@@ -155,7 +155,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
           collectionVersion={null}
           cancelAction={() => this.setState({ deleteCollection: null })}
           deleteAction={() =>
-            deleteCollectionUtils.deleteCollection(
+            DeleteCollectionUtils.deleteCollection(
               this,
               false,
               this.context.selectedRepo,
@@ -359,10 +359,11 @@ class Search extends React.Component<RouteComponentProps, IState> {
   private renderMenu(list, collection) {
     const menuItems = [];
     menuItems.push(
-      deleteCollectionUtils.deleteMenuOption(
+      DeleteCollectionUtils.deleteMenuOption(
         true,
         this.context.user.model_permissions.delete_collection,
-        () => this.tryOpenDeleteModalWithConfirm(collection),
+        () =>
+          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm(this, collection),
       ),
       <DropdownItem
         onClick={() => this.handleControlClick(collection)}
@@ -396,40 +397,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
         <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
       </React.Fragment>
     );
-  }
-
-  private tryOpenDeleteModalWithConfirm(collection) {
-    deleteCollectionUtils.getUsedbyDependencies(
-      collection,
-      (noDependencies) =>
-        this.openDeleteModalWithConfirm(noDependencies, collection),
-      (alerts) => this.setState({ alerts: [...this.state.alerts, alerts] }),
-    );
-  }
-
-  private openDeleteModalWithConfirm(noDependencies, collection) {
-    if (noDependencies) {
-      this.setState({
-        deleteCollection: collection,
-        confirmDelete: false,
-      });
-    } else {
-      this.setState({
-        alerts: [
-          ...this.state.alerts,
-          {
-            title: (
-              <Trans>
-                Cannot delete until collections <br />
-                that depend on this collection <br />
-                have been deleted.
-              </Trans>
-            ),
-            variant: 'warning',
-          },
-        ],
-      });
-    }
   }
 
   private renderSyncToogle(name: string, namespace: string): React.ReactNode {

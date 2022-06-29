@@ -18,4 +18,4 @@ export { waitForTask } from './wait-for-task';
 export { errorMessage } from './fail-alerts';
 export { validateURLHelper } from './validateURLHelper';
 export { canSign } from './can-sign';
-export { deleteCollectionUtils } from './delete-collection';
+export { DeleteCollectionUtils } from './delete-collection';

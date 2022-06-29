@@ -59,7 +59,7 @@ import {
   errorMessage,
   waitForTask,
   canSign as canSignNS,
-  deleteCollectionUtils,
+  DeleteCollectionUtils,
 } from 'src/utilities';
 
 import { Constants } from 'src/constants';
@@ -239,7 +239,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           cancelAction={() => this.setState({ deleteCollection: null })}
           deleteAction={() =>
             this.setState({ isDeletionPending: true }, () => {
-              deleteCollectionUtils.deleteCollection(
+              DeleteCollectionUtils.deleteCollection(
                 this,
                 false,
                 this.context.selectedRepo,
@@ -761,43 +761,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     return closeAlertMixin('alerts');
   }
 
-  private tryOpenDeleteModalWithConfirm(collection) {
-    deleteCollectionUtils.getUsedbyDependencies(
-      collection,
-      (noDependencies) =>
-        this.openDeleteModalWithConfirm(noDependencies, collection),
-      (alert) =>
-        this.setState({
-          alerts: [...this.state.alerts, alert],
-        }),
-    );
-  }
-
-  private openDeleteModalWithConfirm(noDependencies, collection) {
-    if (noDependencies) {
-      this.setState({
-        deleteCollection: collection,
-        confirmDelete: false,
-      });
-    } else {
-      this.setState({
-        alerts: [
-          ...this.state.alerts,
-          {
-            title: (
-              <Trans>
-                Cannot delete until collections <br />
-                that depend on this collection <br />
-                have been deleted.
-              </Trans>
-            ),
-            variant: 'warning',
-          },
-        ],
-      });
-    }
-  }
-
   private renderCollectionControls(collection: CollectionListType) {
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -809,10 +772,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         </Button>
         <StatefulDropdown
           items={[
-            deleteCollectionUtils.deleteMenuOption(
+            DeleteCollectionUtils.deleteMenuOption(
               true,
               this.context.user.model_permissions.delete_collection,
-              () => this.tryOpenDeleteModalWithConfirm(collection),
+              () =>
+                DeleteCollectionUtils.tryOpenDeleteModalWithConfirm(
+                  this,
+                  collection,
+                ),
             ),
             <DropdownItem
               onClick={() =>

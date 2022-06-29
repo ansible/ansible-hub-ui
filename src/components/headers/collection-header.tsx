@@ -1,6 +1,6 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { errorMessage, deleteCollectionUtils } from 'src/utilities';
+import { errorMessage, DeleteCollectionUtils } from 'src/utilities';
 import './header.scss';
 
 import { Redirect } from 'react-router-dom';
@@ -130,7 +130,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    deleteCollectionUtils.getUsedbyDependencies(
+    DeleteCollectionUtils.getUsedbyDependencies(
       this.props.collection,
       (data) => this.setState({ noDependencies: data }),
       (data) => this.setState({ alerts: [...this.state.alerts, data] }),
@@ -212,7 +212,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const canSign = canSignNS(this.context, namespace);
 
     const dropdownItems = [
-      deleteCollectionUtils.deleteMenuOption(
+      DeleteCollectionUtils.deleteMenuOption(
         noDependencies,
         this.context.user.model_permissions.delete_collection,
         () => this.openDeleteModalWithConfirm(),
@@ -373,7 +373,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             this.setState({ isDeletionPending: true }, () => {
               collectionVersion
                 ? this.deleteCollectionVersion(collectionVersion)
-                : deleteCollectionUtils.deleteCollection(
+                : DeleteCollectionUtils.deleteCollection(
                     this,
                     true,
                     this.context.selectedRepo,

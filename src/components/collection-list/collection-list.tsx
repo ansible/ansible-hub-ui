@@ -27,7 +27,7 @@ interface IProps {
   showControls?: boolean;
   handleControlClick?: (id, event) => void;
   repo?: string;
-  renderCollectionControls: (collection) => React.ReactElement;
+  renderCollectionControls: (collection) => React.ReactNode;
 }
 
 // only used in namespace detail, collections uses individual items
