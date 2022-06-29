@@ -151,10 +151,10 @@ function testOwnersTab({
     `[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle] button`,
   ).click();
   cy.get('.pf-c-dropdown__menu-item').contains('Remove role').click();
-  cy.get('.pf-c-modal-box__body strong').contains('owners_group');
-  cy.get('.pf-c-modal-box__body strong').contains(role);
-  cy.get('.pf-c-modal-box__body strong').contains(`rbac_owners_${num}`);
-  cy.get('[data-cy=delete_button]').click();
+  cy.get('.pf-c-modal-box__body b').contains('owners_group');
+  cy.get('.pf-c-modal-box__body b').contains(role);
+  cy.get('.pf-c-modal-box__body b').contains(`rbac_owners_${num}`);
+  cy.get('[data-cy=delete-button]').click();
   cy.get('.pf-c-alert__title').contains(
     `Group "owners_group" roles successfully updated in "rbac_owners_${num}".`,
   );
@@ -167,9 +167,9 @@ function testOwnersTab({
     'tr[data-cy="OwnersTab-row-owners_group"] [data-cy=kebab-toggle] button',
   ).click();
   cy.get('.pf-c-dropdown__menu-item').contains('Remove group').click();
-  cy.get('.pf-c-modal-box__body strong').contains('owners_group');
-  cy.get('.pf-c-modal-box__body strong').contains(role);
-  cy.get('[data-cy=delete_button]').click();
+  cy.get('.pf-c-modal-box__body b').contains('owners_group');
+  cy.get('.pf-c-modal-box__body b').contains(role);
+  cy.get('[data-cy=delete-button]').click();
   cy.get('.pf-c-alert__title').contains(
     `Group "owners_group" has been successfully removed from "rbac_owners_${num}".`,
   );
