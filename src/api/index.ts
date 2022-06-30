@@ -8,6 +8,7 @@ export {
 export {
   CollectionListType,
   CollectionDetailType,
+  CollectionExcludesType,
   CollectionUsedByDependencies,
   DocsBlobType,
   PluginContentType,

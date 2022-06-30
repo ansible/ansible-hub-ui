@@ -81,7 +81,6 @@ export class API extends HubAPI {
         .get(`content/${repositoryPath}/v3/excludes/`)
         .then((result) => {
           resolve(result.data);
-          console.log('data: ', result.data);
         })
         .catch((err) => reject(err));
     });

@@ -111,6 +111,10 @@ export class ContentSummaryType {
   description: string;
 }
 
+export class CollectionExcludesType {
+  collections: Array<string>;
+}
+
 export class CollectionDetailType {
   deprecated: boolean;
   all_versions: {
