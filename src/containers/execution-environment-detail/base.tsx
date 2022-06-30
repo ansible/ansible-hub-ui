@@ -287,11 +287,17 @@ export function withContainerRepo(WrappedComponent) {
 
     private getTab() {
       const tabs = ['detail', 'images', 'activity', 'owners'];
-      const location = this.props.location.pathname.split('/').pop();
+      const location = this.props.location.pathname.split('/');
+      const index = location.findIndex((s) => s === '_content');
 
-      for (const tab of tabs) {
-        if (location.includes(tab)) {
-          return tab;
+      // match /containers/owners/_content/owners but not /containers/owners
+      // also handles /containers/:name/_content/images/:digest
+      if (index !== -1) {
+        const loc = location[index + 1];
+        for (const tab of tabs) {
+          if (loc === tab) {
+            return tab;
+          }
         }
       }
 
