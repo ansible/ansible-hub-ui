@@ -180,7 +180,7 @@ function testOwnersTab({
   ).click();
   cy.get('.pf-c-dropdown__menu-item').contains('Remove group').click();
   cy.get('.pf-c-modal-box__body b').contains('owners_group');
-  cy.get('.pf-c-modal-box__body b').contains(role);
+  cy.get('.pf-c-modal-box__body b').contains(`rbac_owners_${num}`);
   cy.get('[data-cy=delete-button]').click();
   cy.get('.pf-c-alert__title')
     .contains(
