@@ -50,5 +50,18 @@ describe('add roles to a group', () => {
     // check group detail page for added roles/permissions.
     cy.get('button[aria-label="Details"]').click();
     cy.contains('Add namespace');
+
+    // delete role (cleanup)
+    cy.menuGo('User Access > Roles');
+    cy.get('[data-cy=compound_filter] input[aria-label=name__icontains]').type(
+      `alpha${num}{enter}`,
+    );
+    cy.get(`[data-cy=RoleListTable] tr`)
+      .contains(`galaxy.alpha${num}`)
+      .parent('tr')
+      .find('[data-cy=kebab-toggle]')
+      .click();
+    cy.get('.pf-c-dropdown__menu-item').contains('Delete').click();
+    cy.get(`[data-cy=delete-button]`).click();
   });
 });
