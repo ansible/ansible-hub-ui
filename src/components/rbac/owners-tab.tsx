@@ -9,6 +9,8 @@ import {
   ToolbarContent,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { ExclamationTriangleIcon } from '@patternfly/react-icons';
+
 import { GroupType, RoleType } from 'src/api';
 import {
   DeleteModal,
@@ -23,8 +25,10 @@ import {
   SelectRoles,
   SortTable,
   WizardModal,
+  EmptyStateCustom,
 } from 'src/components';
 import { ParamHelper, errorMessage } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IProps {
   addAlert: (alert) => void;
@@ -82,7 +86,14 @@ export class OwnersTab extends React.Component<IProps, IState> {
         {showGroupRemoveModal ? this.renderGroupRemoveModal() : null}
         {showGroupSelectWizard ? this.renderGroupSelectWizard() : null}
 
-        {noData ? (
+        {!this.context.user.is_superuser &&
+        !this.context.user.model_permissions.view_group ? (
+          <EmptyStateCustom
+            title={t`You do not have the required permissions.`}
+            description={t`Please contact the server administrator for elevated permissions.`}
+            icon={ExclamationTriangleIcon}
+          />
+        ) : noData ? (
           <EmptyStateNoData
             title={t`There are currently no owners assigned.`}
             description={t`Please add an owner by using the button below.`}
@@ -144,16 +155,18 @@ export class OwnersTab extends React.Component<IProps, IState> {
     const { urlPrefix } = this.props;
 
     const dropdownItems = [
-      <DropdownItem
-        key='remove'
-        onClick={() => {
-          this.setState({
-            showGroupRemoveModal: group,
-          });
-        }}
-      >
-        <Trans>Remove group</Trans>
-      </DropdownItem>,
+      this.context.user.model_permissions.change_containernamespace && (
+        <DropdownItem
+          key='remove'
+          onClick={() => {
+            this.setState({
+              showGroupRemoveModal: group,
+            });
+          }}
+        >
+          <Trans>Remove group</Trans>
+        </DropdownItem>
+      ),
     ];
 
     return (
@@ -184,7 +197,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
       return null;
     }
 
-    const buttonAdd = (
+    const buttonAdd = this.context.user.is_superuser && (
       <Button
         onClick={() =>
           this.setState({
@@ -242,12 +255,16 @@ export class OwnersTab extends React.Component<IProps, IState> {
               <td>{role}</td>
               <ListItemActions
                 kebabItems={[
-                  <DropdownItem
-                    key='remove-role'
-                    onClick={() => this.setState({ showRoleRemoveModal: role })}
-                  >
-                    {t`Remove role`}
-                  </DropdownItem>,
+                  this.context.user.is_superuser && (
+                    <DropdownItem
+                      key='remove-role'
+                      onClick={() =>
+                        this.setState({ showRoleRemoveModal: role })
+                      }
+                    >
+                      {t`Remove role`}
+                    </DropdownItem>
+                  ),
                 ]}
               />
             </ExpandableRow>
@@ -504,3 +521,4 @@ export class OwnersTab extends React.Component<IProps, IState> {
     });
   }
 }
+OwnersTab.contextType = AppContext;
