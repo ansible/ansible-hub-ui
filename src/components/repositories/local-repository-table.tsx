@@ -4,6 +4,7 @@ import * as React from 'react';
 import { DateComponent, EmptyStateNoData, SortTable, ClipboardCopy } from '..';
 import { Constants } from 'src/constants';
 import { getRepoUrl } from 'src/utilities';
+import { CollectionAPI } from 'src/api';
 
 interface IProps {
   repositories: {
@@ -94,6 +95,13 @@ export class LocalRepositoryTable extends React.Component<IProps> {
         </tbody>
       </table>
     );
+  }
+
+  private getCollectionCount(repo) {
+    CollectionAPI.getPublishedCount(repo).then((count) => {
+      console.log('pubCount: ', count);
+      return count;
+    });
   }
 
   private renderRow(distribution) {
