@@ -115,9 +115,13 @@ function testOwnersTab({
   cy.get('.hub-permission').contains(permission);
 
   cy.get('footer button').contains('Add').click();
-  cy.get('.pf-c-alert__title').contains(
-    `Group "owners_group" has been successfully added to "rbac_owners_${num}".`,
-  );
+  cy.get('.pf-c-alert__title')
+    .contains(
+      `Group "owners_group" has been successfully added to "rbac_owners_${num}".`,
+    )
+    .parent('.pf-c-alert')
+    .find('button')
+    .click();
   cy.get('tr[data-cy="OwnersTab-row-owners_group"]');
 
   // group list view, try modal, open group
@@ -135,9 +139,13 @@ function testOwnersTab({
     .click();
   cy.get('footer button').contains('Next').click();
   cy.get('footer button').contains('Add').click();
-  cy.get('.pf-c-alert__title').contains(
-    `Group "owners_group" roles successfully updated in "rbac_owners_${num}".`,
-  );
+  cy.get('.pf-c-alert__title')
+    .contains(
+      `Group "owners_group" roles successfully updated in "rbac_owners_${num}".`,
+    )
+    .parent('.pf-c-alert')
+    .find('button')
+    .click();
 
   // role list view, expand
   cy.get('tbody[role=rowgroup]').should('have.length', 2);
@@ -155,9 +163,13 @@ function testOwnersTab({
   cy.get('.pf-c-modal-box__body b').contains(role);
   cy.get('.pf-c-modal-box__body b').contains(`rbac_owners_${num}`);
   cy.get('[data-cy=delete-button]').click();
-  cy.get('.pf-c-alert__title').contains(
-    `Group "owners_group" roles successfully updated in "rbac_owners_${num}".`,
-  );
+  cy.get('.pf-c-alert__title')
+    .contains(
+      `Group "owners_group" roles successfully updated in "rbac_owners_${num}".`,
+    )
+    .parent('.pf-c-alert')
+    .find('button')
+    .click();
 
   // breadcrumb back to group list
   cy.get('.pf-c-breadcrumb__item a').last().click();
@@ -170,8 +182,12 @@ function testOwnersTab({
   cy.get('.pf-c-modal-box__body b').contains('owners_group');
   cy.get('.pf-c-modal-box__body b').contains(role);
   cy.get('[data-cy=delete-button]').click();
-  cy.get('.pf-c-alert__title').contains(
-    `Group "owners_group" has been successfully removed from "rbac_owners_${num}".`,
-  );
+  cy.get('.pf-c-alert__title')
+    .contains(
+      `Group "owners_group" has been successfully removed from "rbac_owners_${num}".`,
+    )
+    .parent('.pf-c-alert')
+    .find('button')
+    .click();
   cy.get('.pf-c-empty-state');
 }
