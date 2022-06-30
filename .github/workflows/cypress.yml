@@ -43,15 +43,26 @@ jobs:
       uses: actions/cache@v2
       with:
         path: pulp_galaxy_ng/image
-        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post788
+        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post2240-
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v2
+      with:
+        path: 'ansible-hub-ui'
 
     - name: "Build pulp-galaxy-ng"
       if: steps.cache-container.outputs.cache-hit != 'true'
       working-directory: 'pulp_galaxy_ng'
       run: |
+        cp -iv ../ansible-hub-ui/.github/workflows/scripts/* .
+
         echo '# Containerfile'
         echo '\
           FROM ghcr.io/pulp/pulp-ci-centos:latest
+
+          COPY --chmod=644 ansible-sign.key /tmp/
+          COPY --chmod=755 collection-sign.sh /var/lib/pulp/scripts/
+          COPY --chmod=755 signing-setup.sh /tmp/
 
           RUN pip3 install --upgrade \
             requests \
@@ -92,6 +103,7 @@ jobs:
           TOKEN_AUTH_DISABLED=True
           X_PULP_CONTENT_HOST='localhost'
           GALAXY_REQUIRE_CONTENT_APPROVAL=False
+          GALAXY_COLLECTION_SIGNING_SERVICE='ansible-default'
         " | sed 's/^\s\+//' | tee settings/settings.py
 
         podman run \
@@ -105,11 +117,6 @@ jobs:
              --tmpfs /var/lib/containers \
              --device /dev/fuse \
              localhost/pulp/pulp-galaxy-ng:latest
-
-    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
-      uses: actions/checkout@v2
-      with:
-        path: 'ansible-hub-ui'
 
     - name: "Install node 16"
       uses: actions/setup-node@v2
@@ -153,6 +160,10 @@ jobs:
         # podman exec pulp pip install django_extensions
         podman exec pulp pulpcore-manager reset-admin-password --password admin
 
+    - name: "Enable signing service"
+      run: |
+        podman exec pulp /tmp/signing-setup.sh
+
     - name: "Install Cypress & test dependencies"
       working-directory: 'ansible-hub-ui/test'
       run: |
@@ -178,6 +189,10 @@ jobs:
     - name: "Ensure galaxykit can connect to the server"
       run: |
         galaxykit -s 'http://localhost:8002/api/galaxy/' -u admin -p admin collection list
+
+    - name: "Check initial feature flags"
+      run: |
+        curl -s -u admin:admin http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
