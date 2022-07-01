@@ -19,12 +19,14 @@ import {
   Button,
   DropdownItem,
   Label,
+  ButtonVariant,
 } from '@patternfly/react-core';
 
 import {
   ExclamationTriangleIcon,
   ExclamationCircleIcon,
   CheckCircleIcon,
+  DownloadIcon,
 } from '@patternfly/react-icons';
 
 import {
@@ -33,6 +35,7 @@ import {
   TaskAPI,
   CertificateUploadAPI,
   Repositories,
+  CollectionAPI,
 } from 'src/api';
 import { errorMessage, filterIsSet, ParamHelper } from 'src/utilities';
 import {
@@ -368,6 +371,14 @@ class CertificationDashboard extends React.Component<
           >
             {version.version}
           </Link>
+          <Button
+            variant={ButtonVariant.link}
+            onClick={() => {
+              this.download(version.namespace, version.name, version.version);
+            }}
+          >
+            <DownloadIcon />
+          </Button>
         </td>
         <td>
           <DateComponent date={version.created_at} />
@@ -644,6 +655,14 @@ class CertificationDashboard extends React.Component<
           updatingVersions: [],
         });
       }),
+    );
+  }
+
+  private download(namespace: string, name: string, version: string) {
+    CollectionAPI.getDownloadURL('staging', namespace, name, version).then(
+      (downloadURL: string) => {
+        window.location.assign(downloadURL);
+      },
     );
   }
 
