@@ -37,6 +37,7 @@ export const UploadSingCertificateModal: React.FC<Props> = ({
         <Button
           key='upload'
           variant={ButtonVariant.primary}
+          isDisabled={!filename}
           onClick={() => {
             onSubmit(path);
             setFilename('');
