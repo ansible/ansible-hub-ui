@@ -45,6 +45,7 @@ import {
 import { AppContext } from '../app-context';
 
 import { Paths, formatPath } from 'src/paths';
+import { AlertType } from 'src/components';
 
 interface IRoutesProps {
   updateInitialData: (
@@ -52,6 +53,7 @@ interface IRoutesProps {
       user?: UserType;
       featureFlags?: FeatureFlagsType;
       settings?: SettingsType;
+      alerts?: AlertType[];
     },
     callback?: () => void,
   ) => void;
@@ -65,6 +67,7 @@ interface IAuthHandlerProps extends RouteComponentProps {
       user?: UserType;
       featureFlags?: FeatureFlagsType;
       settings?: SettingsType;
+      alerts?: AlertType[];
     },
     callback?: () => void,
   ) => void;
@@ -100,6 +103,15 @@ class AuthHandler extends React.Component<
       promises.push(
         FeatureFlagsAPI.get().then(({ data }) => {
           // we need this even if ActiveUserAPI fails, otherwise isExternalAuth will always be false, breaking keycloak redirect
+          if ('_messages' in data) {
+            this.props.updateInitialData({
+              alerts: data._messages.map((msg) => ({
+                variant: 'warning',
+                title: msg.split(':')[1],
+              })),
+            });
+          }
+
           this.props.updateInitialData({ featureFlags: data });
         }),
       );

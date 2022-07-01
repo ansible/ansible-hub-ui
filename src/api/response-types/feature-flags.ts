@@ -10,4 +10,5 @@ export class FeatureFlagsType {
   display_signatures: boolean;
   require_upload_signatures: boolean;
   signatures_enabled: boolean;
+  _messages: string[];
 }
