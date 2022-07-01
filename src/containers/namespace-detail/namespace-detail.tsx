@@ -581,6 +581,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   private renderPageControls() {
     const { canSign, collections } = this.state;
+    const { can_upload_signatures } = this.context?.featureFlags || {};
 
     const dropdownItems = [
       <DropdownItem
@@ -636,7 +637,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </Link>
         }
       />,
-      canSign && (
+      canSign && !can_upload_signatures && (
         <DropdownItem
           key='sign-collections'
           onClick={() => this.setState({ isOpenSignModal: true })}

@@ -1,1 +1,1 @@
-Add signature upload elements for Insights mode
+Add signature upload elements for Insights mode. Change the Sign buttons when upload certificate enabled
