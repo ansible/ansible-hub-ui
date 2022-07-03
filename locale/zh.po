@@ -3034,8 +3034,12 @@ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
 msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:608
-msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
-msgstr "用户 <0>{username}</0> 将从组<1>{groupname}</1> 中删除。"
+msgid "User <0>{username}</0> will be removed from group <1>{groupname}</1>."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:608
+#~ msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
+#~ msgstr "用户 <0>{username}</0> 将从组<1>{groupname}</1> 中删除。"
 
 #: src/loaders/standalone/standalone-loader.tsx:395
 msgid "User Access"

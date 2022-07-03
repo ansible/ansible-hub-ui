@@ -3034,8 +3034,12 @@ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
 msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:608
-msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
-msgstr "ユーザー <0>{username}</0> がグループ <1>{groupname}</1> から削除されます。"
+msgid "User <0>{username}</0> will be removed from group <1>{groupname}</1>."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:608
+#~ msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
+#~ msgstr "ユーザー <0>{username}</0> がグループ <1>{groupname}</1> から削除されます。"
 
 #: src/loaders/standalone/standalone-loader.tsx:395
 msgid "User Access"
