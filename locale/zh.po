@@ -12,15 +12,15 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/headers/collection-header.tsx:192
+#: src/components/headers/collection-header.tsx:201
 msgid "(latest)"
 msgstr "（最新）"
 
-#: src/components/headers/collection-header.tsx:184
+#: src/components/headers/collection-header.tsx:193
 msgid "(signed)"
 msgstr "（已签名）"
 
-#: src/components/headers/collection-header.tsx:184
+#: src/components/headers/collection-header.tsx:193
 msgid "(unsigned)"
 msgstr "（未签名）"
 
@@ -118,8 +118,8 @@ msgstr "API 错误：无法设置弃用。"
 #~ msgid "API Error: {0}"
 #~ msgstr "API Error: {0}"
 
-#: src/components/headers/collection-header.tsx:662
-#: src/components/headers/collection-header.tsx:713
+#: src/components/headers/collection-header.tsx:742
+#: src/components/headers/collection-header.tsx:793
 #: src/containers/namespace-detail/namespace-detail.tsx:440
 msgid "API Error: {status}"
 msgstr "API 错误：{status}"
@@ -328,14 +328,15 @@ msgstr "取消"
 msgid "Canceled"
 msgstr "已取消"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:610
+#: src/containers/namespace-detail/namespace-detail.tsx:611
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "无法删除命名空间，直到 <0/> 集合的依赖项已 <1/> 被删除"
 
-#: src/components/headers/collection-header.tsx:219
+#: src/components/headers/collection-header.tsx:228
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "无法删除集合，直到集合 <0/>依赖于此集合 <1/> 已被删除。"
 
+#: src/components/headers/collection-header.tsx:697
 #: src/containers/certification-dashboard/certification-dashboard.tsx:532
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 msgstr ""
@@ -467,12 +468,12 @@ msgstr "代码"
 msgid "Collection"
 msgstr "集合"
 
-#: src/components/headers/collection-header.tsx:797
+#: src/components/headers/collection-header.tsx:877
 #: src/containers/search/search.tsx:315
 msgid "Collection \"{0}\" could not be deprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:798
+#: src/components/headers/collection-header.tsx:878
 #: src/containers/search/search.tsx:316
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr ""
@@ -485,16 +486,16 @@ msgstr ""
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:912
+#: src/components/headers/collection-header.tsx:992
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "集合 \"{name} v{collectionVersion}\" 无法被删除。"
 
-#: src/components/headers/collection-header.tsx:841
-#: src/components/headers/collection-header.tsx:856
+#: src/components/headers/collection-header.tsx:921
+#: src/components/headers/collection-header.tsx:936
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "成功删除集合 \"{name} v{collectionVersion}\"。"
 
-#: src/components/headers/collection-header.tsx:968
+#: src/components/headers/collection-header.tsx:1048
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "集合 \"{name}\" 无法被删除。"
 
@@ -502,7 +503,7 @@ msgstr "集合 \"{name}\" 无法被删除。"
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "集合 \"{name}\" 无法下载。"
 
-#: src/components/headers/collection-header.tsx:944
+#: src/components/headers/collection-header.tsx:1024
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "集合 \"{name}\" 已成功删除"
 
@@ -539,7 +540,7 @@ msgstr "无法显示集合仓库。"
 msgid "Collection upload canceled"
 msgstr "集合上传已取消"
 
-#: src/components/headers/collection-header.tsx:315
+#: src/components/headers/collection-header.tsx:338
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:293
@@ -648,7 +649,7 @@ msgstr "内容"
 msgid "Content count"
 msgstr "内容数"
 
-#: src/components/headers/collection-header.tsx:612
+#: src/components/headers/collection-header.tsx:635
 msgid "Contents"
 msgstr "内容"
 
@@ -792,11 +793,11 @@ msgstr "删除集合"
 msgid "Delete collection remote"
 msgstr "删除集合远程"
 
-#: src/components/headers/collection-header.tsx:377
+#: src/components/headers/collection-header.tsx:400
 msgid "Delete collection version?"
 msgstr "删除集合版本？"
 
-#: src/components/headers/collection-header.tsx:378
+#: src/components/headers/collection-header.tsx:401
 msgid "Delete collection?"
 msgstr "删除集合？"
 
@@ -828,8 +829,8 @@ msgstr "删除容器？"
 msgid "Delete distribution"
 msgstr "作业发布"
 
-#: src/components/headers/collection-header.tsx:211
-#: src/components/headers/collection-header.tsx:227
+#: src/components/headers/collection-header.tsx:220
+#: src/components/headers/collection-header.tsx:236
 msgid "Delete entire collection"
 msgstr "删除整个集合"
 
@@ -846,8 +847,8 @@ msgid "Delete image?"
 msgstr "删除镜像？"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:604
-#: src/containers/namespace-detail/namespace-detail.tsx:618
+#: src/containers/namespace-detail/namespace-detail.tsx:605
+#: src/containers/namespace-detail/namespace-detail.tsx:619
 msgid "Delete namespace"
 msgstr "删除命名空间"
 
@@ -879,19 +880,19 @@ msgstr "删除用户"
 msgid "Delete user?"
 msgstr "删除用户？"
 
-#: src/components/headers/collection-header.tsx:239
+#: src/components/headers/collection-header.tsx:248
 msgid "Delete version {0}"
 msgstr "删除版本 {0}"
 
-#: src/components/headers/collection-header.tsx:386
+#: src/components/headers/collection-header.tsx:409
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 msgstr "删除 <0>{0} v{collectionVersion}</0> 其数据将会丢失，这会导致整个集合被删除。"
 
-#: src/components/headers/collection-header.tsx:395
+#: src/components/headers/collection-header.tsx:418
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "删除 <0>{0} v{collectionVersion}</0> 其数据将会丢失。"
 
-#: src/components/headers/collection-header.tsx:405
+#: src/components/headers/collection-header.tsx:428
 #: src/containers/namespace-detail/namespace-detail.tsx:237
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "删除 <0>{0}</0> 其数据将会丢失。"
@@ -920,17 +921,17 @@ msgstr "删除此组将影响 {count} 个用户。"
 msgid "Deleting yourself is not allowed."
 msgstr "不允许删除自己。"
 
-#: src/components/headers/collection-header.tsx:626
+#: src/components/headers/collection-header.tsx:649
 #: src/containers/collection-detail/collection-dependencies.tsx:105
 #: src/containers/collection-detail/collection-dependencies.tsx:135
 msgid "Dependencies"
 msgstr "依赖项"
 
-#: src/components/headers/collection-header.tsx:997
+#: src/components/headers/collection-header.tsx:1077
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "无法显示集合 \"{name}\" 的依赖项。"
 
-#: src/components/headers/collection-header.tsx:882
+#: src/components/headers/collection-header.tsx:962
 msgid "Dependent collections"
 msgstr "依赖性集合"
 
@@ -939,7 +940,7 @@ msgid "Dependent collections could not be displayed."
 msgstr "无法显示依赖集合。"
 
 #: src/components/collection-list/collection-list.tsx:98
-#: src/components/headers/collection-header.tsx:259
+#: src/components/headers/collection-header.tsx:277
 #: src/containers/search/search.tsx:331
 msgid "Deprecate"
 msgstr "弃用"
@@ -980,11 +981,11 @@ msgstr ""
 msgid "Distribution name"
 msgstr "发布名称"
 
-#: src/components/headers/collection-header.tsx:172
+#: src/components/headers/collection-header.tsx:180
 msgid "Docs site"
 msgstr "文档站点"
 
-#: src/components/headers/collection-header.tsx:607
+#: src/components/headers/collection-header.tsx:630
 #: src/containers/collection-detail/collection-docs.tsx:125
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
@@ -1063,7 +1064,7 @@ msgstr "编辑执行环境"
 msgid "Edit group permissions"
 msgstr "编辑组权限"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:594
+#: src/containers/namespace-detail/namespace-detail.tsx:595
 msgid "Edit namespace"
 msgstr "编辑命名空间"
 
@@ -1330,11 +1331,11 @@ msgstr "获取用户数据失败。"
 msgid "Failed to sign all collections."
 msgstr "签发所有集合失败。"
 
-#: src/components/headers/collection-header.tsx:663
+#: src/components/headers/collection-header.tsx:743
 msgid "Failed to sign all versions in the collection."
 msgstr "为集合中的所有版本进行签名失败。"
 
-#: src/components/headers/collection-header.tsx:714
+#: src/components/headers/collection-header.tsx:794
 msgid "Failed to sign the version."
 msgstr "为版本签名失败。"
 
@@ -1395,7 +1396,7 @@ msgstr "Galaxy 徽标"
 msgid "Get token"
 msgstr "获得令牌"
 
-#: src/utilities/wait-for-task.ts:9
+#: src/utilities/wait-for-task.ts:17
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "10 次尝试后放弃等待任务."
 
@@ -1464,7 +1465,7 @@ msgid "Hide the signature"
 msgstr "隐藏签名"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
-#: src/components/headers/collection-header.tsx:414
+#: src/components/headers/collection-header.tsx:437
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
 #: src/containers/namespace-detail/namespace-detail.tsx:244
 msgid "I understand that this action cannot be undone."
@@ -1510,12 +1511,12 @@ msgstr "导入和自动批准"
 msgid "Import and move to staging"
 msgstr "导入并移至 staging"
 
-#: src/components/headers/collection-header.tsx:621
+#: src/components/headers/collection-header.tsx:644
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "导入日志"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:635
+#: src/containers/namespace-detail/namespace-detail.tsx:636
 msgid "Imports"
 msgstr "导入"
 
@@ -1540,7 +1541,7 @@ msgid "Indexing started for execution environment \"{name}\"."
 msgstr "为执行环境 \"{name}\" 执行索引已开始。"
 
 #: src/components/collection-detail/collection-info.tsx:53
-#: src/components/headers/collection-header.tsx:602
+#: src/components/headers/collection-header.tsx:625
 msgid "Install"
 msgstr "安装"
 
@@ -1572,7 +1573,7 @@ msgstr "无效的文件名。集合的格式为 'namespace-collection_name-1.0.0
 msgid "Invalid login credentials."
 msgstr "登录凭据无效。"
 
-#: src/components/headers/collection-header.tsx:174
+#: src/components/headers/collection-header.tsx:182
 msgid "Issue tracker"
 msgstr "问题跟踪器"
 
@@ -1615,7 +1616,7 @@ msgstr "最后同步"
 msgid "Last updated"
 msgstr "最后更新"
 
-#: src/components/headers/collection-header.tsx:497
+#: src/components/headers/collection-header.tsx:520
 msgid "Last updated <0/>"
 msgstr "最后更新 <0/>"
 
@@ -1765,11 +1766,11 @@ msgstr "名称不能为空。"
 msgid "Namespace"
 msgstr "命名空间"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:719
+#: src/containers/namespace-detail/namespace-detail.tsx:720
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "命名空间 \"{name}\" 无法被删除。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:698
+#: src/containers/namespace-detail/namespace-detail.tsx:699
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "命名空间 \"{name}\" 已被成功删除。"
 
@@ -2349,7 +2350,7 @@ msgstr "从仓库中删除内容"
 msgid "Remove user from group?"
 msgstr "从组中删除用户？"
 
-#: src/components/headers/collection-header.tsx:175
+#: src/components/headers/collection-header.tsx:183
 msgid "Repo"
 msgstr "仓库"
 
@@ -2471,7 +2472,7 @@ msgstr "选择 registry"
 msgid "Select a tag"
 msgstr "选择标签"
 
-#: src/components/headers/collection-header.tsx:457
+#: src/components/headers/collection-header.tsx:480
 msgid "Select collection version"
 msgstr "选择集合版本"
 
@@ -2542,7 +2543,7 @@ msgid "Sign all"
 msgstr "签发所有"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:39
-#: src/containers/namespace-detail/namespace-detail.tsx:644
+#: src/containers/namespace-detail/namespace-detail.tsx:645
 msgid "Sign all collections"
 msgstr "签发所有集合"
 
@@ -2551,7 +2552,7 @@ msgstr "签发所有集合"
 msgid "Sign and approve"
 msgstr "签发并批准"
 
-#: src/components/headers/collection-header.tsx:247
+#: src/components/headers/collection-header.tsx:256
 msgid "Sign entire collection"
 msgstr "删除整个集合"
 
@@ -2559,7 +2560,7 @@ msgstr "删除整个集合"
 msgid "Sign state"
 msgstr "集群状态"
 
-#: src/components/headers/collection-header.tsx:255
+#: src/components/headers/collection-header.tsx:273
 msgid "Sign version {0}"
 msgstr "签发版本 {0}"
 
@@ -2596,11 +2597,11 @@ msgstr ""
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "开始签发命名空间 \"{0}\" 中的所有集合。"
 
-#: src/components/headers/collection-header.tsx:672
+#: src/components/headers/collection-header.tsx:752
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "开始签发集合中所有版本 \"{0}\""
 
-#: src/components/headers/collection-header.tsx:723
+#: src/components/headers/collection-header.tsx:803
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "开始签发集合 \"{0} v{1}\"。"
 
@@ -2787,6 +2788,10 @@ msgstr "任务管理"
 msgid "Task detail"
 msgstr "任务详情"
 
+#: src/utilities/wait-for-task.ts:10
+msgid "Task failed without error message."
+msgstr ""
+
 #: src/containers/task-management/task_detail.tsx:194
 msgid "Task group"
 msgstr "任务组"
@@ -2840,16 +2845,21 @@ msgstr "URL 需要采用 'http(s)://' 格式。"
 msgid "The URL of an external content source."
 msgstr "外部内容源的 URL。"
 
+#: src/components/headers/collection-header.tsx:708
 #: src/containers/certification-dashboard/certification-dashboard.tsx:544
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:772
+#: src/components/headers/collection-header.tsx:676
+msgid "The certificate for \"{0} {1} v{2}\" is being uploaded."
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:852
 #: src/containers/search/search.tsx:293
 msgid "The collection \"{0}\" has been successfully deprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:773
+#: src/components/headers/collection-header.tsx:853
 #: src/containers/search/search.tsx:294
 msgid "The collection \"{0}\" has been successfully undeprecated."
 msgstr ""
@@ -2915,7 +2925,7 @@ msgstr "此帐户没有设置为管理任何命名空间"
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
 #~ msgstr "此操作将影响 <0>{numberOfAffected}</0> 版本。"
 
-#: src/components/headers/collection-header.tsx:520
+#: src/components/headers/collection-header.tsx:543
 msgid "This collection has been deprecated."
 msgstr "这个集合已弃用。"
 
@@ -2993,7 +3003,7 @@ msgid "URL: {0}"
 msgstr "URL：{0}"
 
 #: src/components/collection-list/collection-list.tsx:98
-#: src/components/headers/collection-header.tsx:259
+#: src/components/headers/collection-header.tsx:277
 #: src/containers/search/search.tsx:331
 msgid "Undeprecate"
 msgstr "取消弃用"
@@ -3021,12 +3031,12 @@ msgid "Upload"
 msgstr "上传"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:310
-#: src/containers/namespace-detail/namespace-detail.tsx:656
+#: src/containers/namespace-detail/namespace-detail.tsx:657
 msgid "Upload collection"
 msgstr "上传集合"
 
 #: src/components/collection-list/collection-list.tsx:88
-#: src/components/headers/collection-header.tsx:266
+#: src/components/headers/collection-header.tsx:284
 #: src/containers/search/search.tsx:341
 #: src/containers/search/search.tsx:353
 msgid "Upload new version"
@@ -3123,8 +3133,12 @@ msgstr ""
 #~ msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:608
-msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
-msgstr "用户 <0>{username}</0> 将从组<1>{groupname}</1> 中删除。"
+msgid "User <0>{username}</0> will be removed from group <1>{groupname}</1>."
+msgstr ""
+
+#: src/containers/group-management/group-detail.tsx:608
+#~ msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
+#~ msgstr "用户 <0>{username}</0> 将从组<1>{groupname}</1> 中删除。"
 
 #: src/loaders/standalone/standalone-loader.tsx:395
 msgid "User Access"
@@ -3189,7 +3203,7 @@ msgstr "用户添加至该组后会出现"
 msgid "Users will appear once created"
 msgstr "用户创建后将会出现"
 
-#: src/components/headers/collection-header.tsx:445
+#: src/components/headers/collection-header.tsx:468
 #: src/containers/certification-dashboard/certification-dashboard.tsx:269
 msgid "Version"
 msgstr "版本"
@@ -3234,7 +3248,7 @@ msgstr "查看分发"
 msgid "View group"
 msgstr "查看组"
 
-#: src/components/headers/collection-header.tsx:461
+#: src/components/headers/collection-header.tsx:484
 msgid "View more"
 msgstr "查看更多"
 
@@ -3277,7 +3291,7 @@ msgstr "警告"
 msgid "We couldn't find the page you're looking for!"
 msgstr "我们无法找到您要查找的页面！"
 
-#: src/components/headers/collection-header.tsx:173
+#: src/components/headers/collection-header.tsx:181
 msgid "Website"
 msgstr "网站"
 
@@ -3331,7 +3345,7 @@ msgstr "您无法访问 Automation Hub"
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/headers/collection-header.tsx:560
+#: src/components/headers/collection-header.tsx:583
 #: src/containers/search/search.tsx:385
 msgid "You don't have rights to do this operation."
 msgstr ""
@@ -3387,7 +3401,7 @@ msgstr "弹出示例"
 msgid "rejected"
 msgstr "拒绝"
 
-#: src/components/headers/collection-header.tsx:350
+#: src/components/headers/collection-header.tsx:373
 msgid "released {0}"
 msgstr "发布的 {0}"
 
@@ -3415,7 +3429,7 @@ msgstr "等待批准"
 msgid "waiting for import to finish"
 msgstr "等待导入结束"
 
-#: src/components/headers/collection-header.tsx:488
+#: src/components/headers/collection-header.tsx:511
 msgid "{0} released {1}"
 msgstr "{0} 发布的 {1}"
 
@@ -3427,14 +3441,14 @@ msgstr "{0} 被添加"
 #~ msgid "{0} will be deleted."
 #~ msgstr "{0} will be deleted."
 
-#: src/components/headers/collection-header.tsx:321
+#: src/components/headers/collection-header.tsx:344
 msgid "{collectionName}'s versions."
 msgstr "{collectionName}的版本。"
 
 #: src/components/cards/collection-card.tsx:53
 #: src/components/cards/namespace-card.tsx:36
 #: src/components/collection-list/collection-list-item.tsx:58
-#: src/components/headers/collection-header.tsx:426
+#: src/components/headers/collection-header.tsx:449
 #: src/components/headers/partner-header.tsx:46
 msgid "{company} logo"
 msgstr "{company} 标志"
