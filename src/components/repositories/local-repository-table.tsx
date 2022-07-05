@@ -4,7 +4,7 @@ import * as React from 'react';
 import { DateComponent, EmptyStateNoData, SortTable, ClipboardCopy } from '..';
 import { Constants } from 'src/constants';
 import { getRepoUrl } from 'src/utilities';
-import { CollectionAPI, CollectionExcludesType } from 'src/api';
+import { CollectionCount } from 'src/components';
 
 interface IProps {
   repositories: {
@@ -97,30 +97,6 @@ export class LocalRepositoryTable extends React.Component<IProps> {
     );
   }
 
-  private getCollectionCount(repo) {
-    const promises = [];
-    promises.push(
-      CollectionAPI.getPublishedCount(repo).then((count) => {
-        return count;
-      }),
-    );
-
-    promises.push(
-      CollectionAPI.getExcludesCount(repo).then(
-        (results: CollectionExcludesType) => {
-          const excludedCollections = results.collections;
-          const count = excludedCollections.length;
-          return count;
-        },
-      ),
-    );
-
-    Promise.all(promises).then((results) => {
-      const count = results[0] - results[1];
-      return <td>{count}</td>;
-    });
-  }
-
   private renderRow(distribution) {
     const cliConfig = [
       '[galaxy]',
@@ -135,7 +111,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
       <tr key={distribution.name}>
         <td>{distribution.name}</td>
         <td>{distribution.repository.name}</td>
-        {this.getCollectionCount(distribution.base_path)}
+        <td>{<CollectionCount repositoryPath={distribution.base_path} />}</td>
         {DEPLOYMENT_MODE ===
         Constants.INSIGHTS_DEPLOYMENT_MODE ? null : distribution.repository
             .pulp_last_updated ? (

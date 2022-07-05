@@ -112,7 +112,7 @@ export class ContentSummaryType {
 }
 
 export class CollectionExcludesType {
-  collections: Array<string>;
+  collections: string[];
 }
 
 export class CollectionDetailType {

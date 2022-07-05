@@ -65,25 +65,21 @@ export class API extends HubAPI {
   }
 
   getPublishedCount(repositoryPath: string) {
-    return new Promise((resolve, reject) => {
-      this.http
-        .get(`v3/plugin/ansible/content/${repositoryPath}/collections/index/`)
-        .then((result) => {
-          resolve(result.data.meta.count);
-        })
-        .catch((err) => reject(err));
-    });
+    return this.http
+      .get(`v3/plugin/ansible/content/${repositoryPath}/collections/index/`)
+      .then((result) => {
+        result.data.meta.count;
+      })
+      .catch((err) => err);
   }
 
   getExcludesCount(repositoryPath: string) {
-    return new Promise((resolve, reject) => {
-      this.http
-        .get(`content/${repositoryPath}/v3/excludes/`)
-        .then((result) => {
-          resolve(result.data);
-        })
-        .catch((err) => reject(err));
-    });
+    return this.http
+      .get(`content/${repositoryPath}/v3/excludes/`)
+      .then((result) => {
+        result.data;
+      })
+      .catch((err) => err);
   }
 
   setDeprecation(
