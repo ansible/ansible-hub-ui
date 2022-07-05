@@ -68,18 +68,16 @@ export class API extends HubAPI {
     return this.http
       .get(`v3/plugin/ansible/content/${repositoryPath}/collections/index/`)
       .then((result) => {
-        result.data.meta.count;
-      })
-      .catch((err) => err);
+        return result.data.meta.count;
+      });
   }
 
   getExcludesCount(repositoryPath: string) {
     return this.http
       .get(`content/${repositoryPath}/v3/excludes/`)
       .then((result) => {
-        result.data;
-      })
-      .catch((err) => err);
+        return result.data;
+      });
   }
 
   setDeprecation(
