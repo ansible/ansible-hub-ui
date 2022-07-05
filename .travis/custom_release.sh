@@ -2,21 +2,16 @@
 set -e
 set -x
 
-if [ "${TRAVIS_BRANCH}" = "master" ]
-then
-    for env in ci qa
-    do
+if [ "${TRAVIS_BRANCH}" = "master" ]; then
+    for env in ci qa ; do
+        # always push to stage-beta
         echo "PUSHING ${env}-beta"
         rm -rf ./dist/.git
         .travis/release.sh "${env}-beta"
-    done
-fi
 
+        # only push to stage-stable when enabled
+        [ -f .cloud-stage-cron.enabled ] || continue
 
-if [ "${TRAVIS_BRANCH}" = "master-stable" ]
-then
-    for env in ci qa
-    do
         echo "PUSHING ${env}-stable"
         rm -rf ./dist/.git
         .travis/release.sh "${env}-stable"
