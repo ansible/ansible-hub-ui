@@ -18,7 +18,7 @@ describe('Repo Management tests', () => {
     cy.visit(localRepoUrl);
     cy.get('[data-cy="SortTable-headers"]').contains('Distribution name');
     cy.get('[data-cy="SortTable-headers"]').contains('Repository name');
-    cy.get('[data-cy="SortTable-headers"]').contains('Content count');
+    cy.get('[data-cy="SortTable-headers"]').contains('Collection count');
     cy.get('[data-cy="SortTable-headers"]').contains('Last updated');
     cy.get('[data-cy="SortTable-headers"]').contains('Distribution URL');
     cy.get('[data-cy="SortTable-headers"]').contains('CLI configuration');
