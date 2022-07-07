@@ -4,27 +4,26 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: ko\n"
+"Language: en\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Plural-Forms: \n"
 
-#: src/components/headers/collection-header.tsx:201
+#: src/components/headers/collection-header.tsx:190
 msgid "(latest)"
 msgstr "(최신)"
 
-#: src/components/headers/collection-header.tsx:193
+#: src/components/headers/collection-header.tsx:182
 msgid "(signed)"
 msgstr "(서명됨)"
 
-#: src/components/headers/collection-header.tsx:193
+#: src/components/headers/collection-header.tsx:182
 msgid "(unsigned)"
 msgstr "(서명되지 않음)"
 
-#: src/components/repositories/remote-form.tsx:174
+#: src/components/repositories/remote-form.tsx:173
 msgid "(uploaded)"
 msgstr "(업로드됨)"
 
@@ -68,11 +67,11 @@ msgstr "<0>참고:</0> 브라우저에서 다음 링크가 차단될 수 있습�
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>참고:</0> 이 URL을 사용하여 이 네임스페이스에 컬렉션을 업로드하도록 ansible-CBC를 구성합니다. ansible-octets 구성에 대한 자세한 내용은 <1>여기</1><2> </2><3/>에서 확인할 수 있습니다."
 
-#: src/containers/token/token-standalone.tsx:90
+#: src/containers/token/token-standalone.tsx:86
 msgid "<0>WARNING</0> copy this token now. This is the only time you will ever see it."
 msgstr "<0>경고</0> 이 토큰을 지금 복사합니다. 이 토큰이 표시되는 유일한 시간입니다."
 
-#: src/containers/token/token-standalone.tsx:81
+#: src/containers/token/token-standalone.tsx:77
 msgid "<0>WARNING</0> loading a new token will delete your old token."
 msgstr "<0>경고</0> 새 토큰을 로드하면 이전 토큰이 삭제됩니다."
 
@@ -118,8 +117,8 @@ msgstr "API 오류: 사용 중단을 설정하지 못했습니다."
 #~ msgid "API Error: {0}"
 #~ msgstr "API Error: {0}"
 
-#: src/components/headers/collection-header.tsx:742
-#: src/components/headers/collection-header.tsx:793
+#: src/components/headers/collection-header.tsx:660
+#: src/components/headers/collection-header.tsx:711
 #: src/containers/namespace-detail/namespace-detail.tsx:440
 msgid "API Error: {status}"
 msgstr "API 오류: {status}"
@@ -133,11 +132,11 @@ msgstr "API 오류: {status}"
 msgid "API error. Status code: {0}"
 msgstr "API 오류. 상태 코드: {0}"
 
-#: src/containers/token/token-standalone.tsx:60
+#: src/containers/token/token-standalone.tsx:56
 msgid "API token"
 msgstr "API 토큰"
 
-#: src/containers/token/token-standalone.tsx:52
+#: src/containers/token/token-standalone.tsx:48
 #: src/loaders/standalone/standalone-loader.tsx:360
 msgid "API token management"
 msgstr "API 토큰 관리"
@@ -166,9 +165,9 @@ msgstr "활동"
 #: src/components/execution-environment/repository-form.tsx:333
 #: src/components/execution-environment/tag-manifest-modal.tsx:169
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
-#: src/containers/group-management/group-detail.tsx:477
-#: src/containers/group-management/group-detail.tsx:697
-#: src/containers/group-management/group-detail.tsx:748
+#: src/containers/group-management/group-detail.tsx:480
+#: src/containers/group-management/group-detail.tsx:700
+#: src/containers/group-management/group-detail.tsx:751
 msgid "Add"
 msgstr "추가"
 
@@ -193,7 +192,7 @@ msgid "Add container repository"
 msgstr "컨테이너 리포지토리 추가"
 
 #: src/components/execution-environment/repository-form.tsx:152
-#: src/containers/execution-environment-list/execution_environment_list.tsx:157
+#: src/containers/execution-environment-list/execution_environment_list.tsx:155
 msgid "Add execution environment"
 msgstr "실행 환경 추가"
 
@@ -219,7 +218,7 @@ msgstr "이미지에 새 태그 추가"
 msgid "Add remote registry"
 msgstr "원격 레지스트리 추가"
 
-#: src/containers/group-management/group-detail.tsx:463
+#: src/containers/group-management/group-detail.tsx:466
 msgid "Add selected users to group"
 msgstr "그룹에 선택한 사용자 추가"
 
@@ -261,14 +260,14 @@ msgstr "승인 대시보드"
 msgid "Approval status:"
 msgstr "승인 상태:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:416
-#: src/containers/certification-dashboard/certification-dashboard.tsx:449
+#: src/containers/certification-dashboard/certification-dashboard.tsx:409
+#: src/containers/certification-dashboard/certification-dashboard.tsx:442
 msgid "Approve"
 msgstr "승인"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:179
 #: src/containers/certification-dashboard/certification-dashboard.tsx:208
-#: src/containers/certification-dashboard/certification-dashboard.tsx:320
+#: src/containers/certification-dashboard/certification-dashboard.tsx:319
 msgid "Approved"
 msgstr "승인됨"
 
@@ -280,11 +279,11 @@ msgstr "인증 제공자"
 msgid "Browse..."
 msgstr "검색 중..."
 
-#: src/components/about-modal/about-modal.tsx:107
+#: src/components/about-modal/about-modal.tsx:94
 msgid "Browser OS"
 msgstr "브라우저 OS"
 
-#: src/components/about-modal/about-modal.tsx:104
+#: src/components/about-modal/about-modal.tsx:91
 msgid "Browser Version"
 msgstr "브라우저 버전"
 
@@ -319,8 +318,8 @@ msgstr "배포판이 연결되어 있지 않고 원격으로 업데이트할 수
 #: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
-#: src/containers/group-management/group-detail.tsx:437
-#: src/containers/group-management/group-detail.tsx:480
+#: src/containers/group-management/group-detail.tsx:440
+#: src/containers/group-management/group-detail.tsx:483
 msgid "Cancel"
 msgstr "취소"
 
@@ -328,20 +327,19 @@ msgstr "취소"
 msgid "Canceled"
 msgstr "취소됨"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:611
+#: src/containers/namespace-detail/namespace-detail.tsx:610
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "<0/>컬렉션의 종속성<1/>이/가 삭제될 때까지 네임스페이스를 삭제할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:228
+#: src/components/headers/collection-header.tsx:217
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "이 컬렉션 <0/>에 종속된 컬렉션<1/>이/가 삭제될 때까지 컬렉션을 삭제할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:697
-#: src/containers/certification-dashboard/certification-dashboard.tsx:532
+#: src/containers/certification-dashboard/certification-dashboard.tsx:525
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
-msgstr ""
+msgstr "컬렉션 \"{0} {1} v{2}\"에 대한 인증서가 성공적으로 업로드되었습니다."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:587
+#: src/containers/certification-dashboard/certification-dashboard.tsx:580
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "컬렉션 \"{0} {1} v{2}\"에 대한 인증 상태가 성공적으로 업데이트되었습니다."
 
@@ -412,8 +410,8 @@ msgstr "작업 변경"
 msgid "Change user"
 msgstr "사용자 변경"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:601
-#: src/containers/certification-dashboard/certification-dashboard.tsx:629
+#: src/containers/certification-dashboard/certification-dashboard.tsx:594
+#: src/containers/certification-dashboard/certification-dashboard.tsx:622
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "컬렉션 \"{0} {1} v{2}\"에 대한 인증 상태 변경 사항을 저장할 수 없습니다."
 
@@ -468,34 +466,34 @@ msgstr "코드"
 msgid "Collection"
 msgstr "컬렉션"
 
-#: src/components/headers/collection-header.tsx:877
+#: src/components/headers/collection-header.tsx:795
 #: src/containers/search/search.tsx:315
 msgid "Collection \"{0}\" could not be deprecated."
-msgstr ""
+msgstr "컬렉션 \"{0}\"을/를 더 이상 사용하지 않을 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:878
+#: src/components/headers/collection-header.tsx:796
 #: src/containers/search/search.tsx:316
 msgid "Collection \"{0}\" could not be undeprecated."
-msgstr ""
+msgstr "컬렉션 \"{0}\"을/를 지원 중단할 수 없습니다."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:407
 msgid "Collection \"{0}\" has been successfully deprecated."
-msgstr ""
+msgstr "컬렉션 \"{0}\"이/가 더 이상 사용되지 않습니다."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:406
 msgid "Collection \"{0}\" has been successfully undeprecated."
-msgstr ""
+msgstr "컬렉션 \"{0}\"이/가 성공적으로 지원 중단되었습니다."
 
-#: src/components/headers/collection-header.tsx:992
+#: src/components/headers/collection-header.tsx:910
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "컬렉션 \"{name} v{collectionVersion}\"을/를 삭제할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:921
-#: src/components/headers/collection-header.tsx:936
+#: src/components/headers/collection-header.tsx:839
+#: src/components/headers/collection-header.tsx:854
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "컬렉션 \"{name} v{collectionVersion}\"을/를 성공적으로 삭제했습니다."
 
-#: src/components/headers/collection-header.tsx:1048
+#: src/components/headers/collection-header.tsx:966
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "컬렉션 \"{name}\"을/를 삭제할 수 없습니다."
 
@@ -503,7 +501,7 @@ msgstr "컬렉션 \"{name}\"을/를 삭제할 수 없습니다."
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "컬렉션 \"{name}\"을/를 다운로드할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:1024
+#: src/components/headers/collection-header.tsx:942
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "컬렉션 \"{name}\"을/를 성공적으로 삭제했습니다."
 
@@ -540,7 +538,7 @@ msgstr "컬렉션 리포지토리를 표시할 수 없습니다."
 msgid "Collection upload canceled"
 msgstr "컬렉션 업로드 취소됨"
 
-#: src/components/headers/collection-header.tsx:338
+#: src/components/headers/collection-header.tsx:313
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:293
@@ -578,7 +576,7 @@ msgstr "커뮤니티 컬렉션에는 문서 또는 컨텐츠 수가 없지만 �
 msgid "Company name"
 msgstr "회사 이름"
 
-#: src/components/my-imports/import-list.tsx:90
+#: src/components/my-imports/import-list.tsx:87
 #: src/components/status/status-indicator.tsx:67
 #: src/constants.tsx:371
 #: src/containers/task-management/task-list-view.tsx:156
@@ -628,12 +626,12 @@ msgstr "컨테이너 이름에는 영숫자 문자 \".\", \"_\", \"-\" 및 최�
 msgid "Container namespace"
 msgstr "컨테이너 네임스페이스"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:309
+#: src/containers/execution-environment-list/execution_environment_list.tsx:307
 msgid "Container registry type"
 msgstr "컨테이너 레지스트리 유형"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:233
-#: src/containers/execution-environment-list/execution_environment_list.tsx:289
+#: src/containers/execution-environment-list/execution_environment_list.tsx:231
+#: src/containers/execution-environment-list/execution_environment_list.tsx:287
 msgid "Container repository name"
 msgstr "컨테이너 리포지터리 이름"
 
@@ -649,7 +647,7 @@ msgstr "콘텐츠"
 msgid "Content count"
 msgstr "콘텐츠 수"
 
-#: src/components/headers/collection-header.tsx:635
+#: src/components/headers/collection-header.tsx:610
 msgid "Contents"
 msgstr "콘텐츠"
 
@@ -699,11 +697,11 @@ msgstr "새 네임스페이스 생성"
 
 #: src/components/user-form/user-form.tsx:97
 #~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-#~ msgstr "일반 이름이나 표현식을 사용하지 않는 특수 문자 (예: <!@$%>)를 포함하여 최소 9자로 암호를 생성합니다."
+#~ msgstr "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 
 #: src/components/user-form/user-form.tsx:99
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr ""
+msgstr "일반 이름이나 표현식을 사용하지 않는 특수 문자 (예: <!@$%>)를 포함하여 최소 {minLength}자로 암호를 생성합니다."
 
 #: src/constants.tsx:165
 #: src/constants.tsx:205
@@ -716,8 +714,8 @@ msgid "Create new user"
 msgstr "새 사용자 만들기"
 
 #: src/containers/execution-environment/registry-list.tsx:327
-#: src/containers/execution-environment-list/execution_environment_list.tsx:299
-#: src/containers/group-management/group-detail.tsx:821
+#: src/containers/execution-environment-list/execution_environment_list.tsx:297
+#: src/containers/group-management/group-detail.tsx:824
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
 msgstr "생성됨"
@@ -768,10 +766,10 @@ msgid "Date created"
 msgstr "생성된 날짜"
 
 #: src/components/delete-modal/delete-modal.tsx:29
-#: src/containers/execution-environment/registry-list.tsx:408
+#: src/containers/execution-environment/registry-list.tsx:406
 #: src/containers/execution-environment-detail/base.tsx:144
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:416
-#: src/containers/execution-environment-list/execution_environment_list.tsx:380
+#: src/containers/execution-environment-list/execution_environment_list.tsx:378
 #: src/containers/group-management/group-detail.tsx:272
 #: src/containers/group-management/group-list.tsx:434
 #: src/containers/task-management/task-list-view.tsx:313
@@ -793,11 +791,11 @@ msgstr "컬렉션 삭제"
 msgid "Delete collection remote"
 msgstr "원격 컬렉션 삭제"
 
-#: src/components/headers/collection-header.tsx:400
+#: src/components/headers/collection-header.tsx:375
 msgid "Delete collection version?"
 msgstr "컬렉션 버전을 삭제하시겠습니까?"
 
-#: src/components/headers/collection-header.tsx:401
+#: src/components/headers/collection-header.tsx:376
 msgid "Delete collection?"
 msgstr "컬렉션을 삭제하시겠습니까?"
 
@@ -829,8 +827,8 @@ msgstr "컨테이너를 삭제하시겠습니까?"
 msgid "Delete distribution"
 msgstr "배포 삭제"
 
-#: src/components/headers/collection-header.tsx:220
-#: src/components/headers/collection-header.tsx:236
+#: src/components/headers/collection-header.tsx:209
+#: src/components/headers/collection-header.tsx:225
 msgid "Delete entire collection"
 msgstr "전체 컬렉션 삭제"
 
@@ -847,8 +845,8 @@ msgid "Delete image?"
 msgstr "이미지를 삭제하시겠습니까?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:605
-#: src/containers/namespace-detail/namespace-detail.tsx:619
+#: src/containers/namespace-detail/namespace-detail.tsx:604
+#: src/containers/namespace-detail/namespace-detail.tsx:618
 msgid "Delete namespace"
 msgstr "네임스페이스 삭제"
 
@@ -880,19 +878,19 @@ msgstr "사용자 삭제"
 msgid "Delete user?"
 msgstr "사용자를 삭제하시겠습니까?"
 
-#: src/components/headers/collection-header.tsx:248
+#: src/components/headers/collection-header.tsx:237
 msgid "Delete version {0}"
 msgstr "버전 삭제 {0}"
 
-#: src/components/headers/collection-header.tsx:409
+#: src/components/headers/collection-header.tsx:384
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 msgstr "<0>{0} v{collectionVersion}</0>를 삭제하면 데이터가 손실되어 전체 컬렉션이 삭제됩니다."
 
-#: src/components/headers/collection-header.tsx:418
+#: src/components/headers/collection-header.tsx:393
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "<0>{0} v{collectionVersion}</0>를 삭제하면 데이터가 손실됩니다."
 
-#: src/components/headers/collection-header.tsx:428
+#: src/components/headers/collection-header.tsx:403
 #: src/containers/namespace-detail/namespace-detail.tsx:237
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "<0>{0}</0>을/를 삭제하면 해당 데이터가 손실됩니다."
@@ -921,17 +919,17 @@ msgstr "이 그룹을 삭제하면 {count}명의 사용자에게 영향을 미�
 msgid "Deleting yourself is not allowed."
 msgstr "자신을 삭제하는 것은 허용되지 않습니다."
 
-#: src/components/headers/collection-header.tsx:649
+#: src/components/headers/collection-header.tsx:624
 #: src/containers/collection-detail/collection-dependencies.tsx:105
 #: src/containers/collection-detail/collection-dependencies.tsx:135
 msgid "Dependencies"
 msgstr "종속 항목"
 
-#: src/components/headers/collection-header.tsx:1077
+#: src/components/headers/collection-header.tsx:995
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "\"{name}\" 컬렉션의 종속 항목을 표시할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:962
+#: src/components/headers/collection-header.tsx:880
 msgid "Dependent collections"
 msgstr "종속 컬렉션"
 
@@ -940,20 +938,20 @@ msgid "Dependent collections could not be displayed."
 msgstr "종속 컬렉션을 표시할 수 없습니다."
 
 #: src/components/collection-list/collection-list.tsx:98
-#: src/components/headers/collection-header.tsx:277
+#: src/components/headers/collection-header.tsx:257
 #: src/containers/search/search.tsx:331
 msgid "Deprecate"
 msgstr "더 이상 사용되지 않음"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:393
 msgid "Deprecation status update starting for collection \"{0}\"."
-msgstr ""
+msgstr "\"{0}\" 컬렉션에 대한 사용 중단 상태 업데이트를 시작합니다."
 
 #: src/components/collection-detail/collection-content-list.tsx:109
 #: src/components/execution-environment/repository-form.tsx:368
 #: src/components/namespace-form/namespace-form.tsx:152
 #: src/components/role-list-table/role-list-table.tsx:49
-#: src/containers/execution-environment-list/execution_environment_list.tsx:294
+#: src/containers/execution-environment-list/execution_environment_list.tsx:292
 #: src/containers/task-management/task_detail.tsx:342
 msgid "Description"
 msgstr "설명"
@@ -973,19 +971,15 @@ msgstr "세부 정보"
 msgid "Digest"
 msgstr "요약"
 
-#: src/components/repositories/local-repository-table.tsx:64
-msgid "Distribution URL"
-msgstr ""
-
 #: src/components/repositories/local-repository-table.tsx:44
 msgid "Distribution name"
 msgstr "배포 이름"
 
-#: src/components/headers/collection-header.tsx:180
+#: src/components/headers/collection-header.tsx:172
 msgid "Docs site"
 msgstr "문서 사이트"
 
-#: src/components/headers/collection-header.tsx:630
+#: src/components/headers/collection-header.tsx:605
 #: src/containers/collection-detail/collection-docs.tsx:125
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
@@ -1030,7 +1024,7 @@ msgstr "여기에 파일을 드래그하거나 업로드할 파일을 찾습니�
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:57
 msgid "Drag and drop a file or upload one'"
-msgstr ""
+msgstr "파일을 드래그 앤 드롭하거나 파일 업로드"
 
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:78
 #: src/components/patternfly-wrappers/stateful-dropdown.tsx:89
@@ -1039,11 +1033,11 @@ msgstr "드롭다운"
 
 #: src/components/repositories/remote-repository-table.tsx:128
 #: src/containers/edit-namespace/edit-namespace.tsx:152
-#: src/containers/execution-environment/registry-list.tsx:395
+#: src/containers/execution-environment/registry-list.tsx:393
 #: src/containers/execution-environment-detail/base.tsx:194
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
-#: src/containers/execution-environment-list/execution_environment_list.tsx:353
-#: src/containers/group-management/group-detail.tsx:401
+#: src/containers/execution-environment-list/execution_environment_list.tsx:351
+#: src/containers/group-management/group-detail.tsx:360
 #: src/containers/group-management/group-list.tsx:420
 #: src/containers/settings/user-profile.tsx:96
 #: src/containers/user-management/user-detail.tsx:119
@@ -1064,7 +1058,7 @@ msgstr "실행 환경 편집"
 msgid "Edit group permissions"
 msgstr "그룹 권한 편집"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:595
+#: src/containers/namespace-detail/namespace-detail.tsx:594
 msgid "Edit namespace"
 msgstr "네임스페이스 편집"
 
@@ -1093,8 +1087,8 @@ msgid "Edit user"
 msgstr "사용자 편집"
 
 #: src/components/user-form/user-form.tsx:91
-#: src/containers/group-management/group-detail.tsx:734
-#: src/containers/group-management/group-detail.tsx:806
+#: src/containers/group-management/group-detail.tsx:737
+#: src/containers/group-management/group-detail.tsx:809
 #: src/containers/user-management/user-list.tsx:174
 #: src/containers/user-management/user-list.tsx:213
 #: src/containers/user-management/user-list.tsx:276
@@ -1158,7 +1152,7 @@ msgstr "API에서 가져오는 동안 오류 발생"
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Error loading dependent collections."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:500
+#: src/containers/execution-environment-list/execution_environment_list.tsx:498
 msgid "Error loading environments."
 msgstr "환경을 로드하는 동안 오류가 발생했습니다."
 
@@ -1272,24 +1266,24 @@ msgid "Execution Environment"
 msgstr "실행 환경"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:36
-#: src/containers/execution-environment-list/execution_environment_list.tsx:175
+#: src/containers/execution-environment-list/execution_environment_list.tsx:173
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:107
 #: src/loaders/standalone/standalone-loader.tsx:370
 #: src/loaders/standalone/standalone-loader.tsx:376
 msgid "Execution Environments"
 msgstr "실행 환경"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:450
+#: src/containers/execution-environment-list/execution_environment_list.tsx:448
 msgid "Execution environment \"{0}\" has been added successfully."
-msgstr ""
+msgstr "실행 환경 \"{0}\"이/가 성공적으로 추가되었습니다."
 
-#: src/containers/execution-environment/registry-list.tsx:543
+#: src/containers/execution-environment/registry-list.tsx:541
 msgid "Execution environment \"{name}\" could not be indexed."
 msgstr "실행 환경 \"{name}\"을/를 인덱싱할 수 없습니다."
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:448
 #~ msgid "Execution environment \"{name}\" has been added successfully."
-#~ msgstr "실행 환경 \"{name}\"이/가 성공적으로 추가되었습니다."
+#~ msgstr "Execution environment \"{name}\" has been added successfully."
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:91
 msgid "Execution environment \"{selectedItem}\" could not be deleted."
@@ -1307,12 +1301,12 @@ msgstr "실행 환경 \"{selectedItem}\"이/가 성공적으로 삭제되었습�
 #~ msgid "Execution environment saved."
 #~ msgstr "Execution environment saved."
 
-#: src/containers/token/token-standalone.tsx:71
+#: src/containers/token/token-standalone.tsx:67
 msgid "Expiration"
 msgstr "만료"
 
 #: src/components/my-imports/import-console.tsx:113
-#: src/components/my-imports/import-list.tsx:94
+#: src/components/my-imports/import-list.tsx:91
 #: src/components/status/status-indicator.tsx:75
 #: src/constants.tsx:372
 #: src/containers/task-management/task-list-view.tsx:160
@@ -1331,11 +1325,11 @@ msgstr "사용자 데이터를 검색하지 못했습니다."
 msgid "Failed to sign all collections."
 msgstr "모든 컬렉션에 서명하지 못했습니다."
 
-#: src/components/headers/collection-header.tsx:743
+#: src/components/headers/collection-header.tsx:661
 msgid "Failed to sign all versions in the collection."
 msgstr "컬렉션의 모든 버전에 서명하지 못했습니다."
 
-#: src/components/headers/collection-header.tsx:794
+#: src/components/headers/collection-header.tsx:712
 msgid "Failed to sign the version."
 msgstr "버전에 서명하지 못했습니다."
 
@@ -1355,7 +1349,7 @@ msgstr "리포지터리로 필터링"
 #: src/components/patternfly-wrappers/compound-filter.tsx:127
 #: src/components/patternfly-wrappers/compound-filter.tsx:170
 msgid "Filter by {0}"
-msgstr "{0}으로 필터링"
+msgstr "{0}로/으로 필터링"
 
 #: src/components/permissions/obect-permission-field.tsx:52
 #~ msgid "Find a group"
@@ -1366,7 +1360,7 @@ msgstr "{0}으로 필터링"
 msgid "Find content"
 msgstr "콘텐츠 검색"
 
-#: src/containers/execution-environment/registry-list.tsx:415
+#: src/containers/execution-environment/registry-list.tsx:413
 msgid "Find execution environments in this registry"
 msgstr "이 레지스트리에서 실행 환경 찾기"
 
@@ -1376,8 +1370,8 @@ msgid "Finished at"
 msgstr "완료"
 
 #: src/components/user-form/user-form.tsx:89
-#: src/containers/group-management/group-detail.tsx:726
-#: src/containers/group-management/group-detail.tsx:816
+#: src/containers/group-management/group-detail.tsx:729
+#: src/containers/group-management/group-detail.tsx:819
 #: src/containers/user-management/user-list.tsx:166
 #: src/containers/user-management/user-list.tsx:211
 #: src/containers/user-management/user-list.tsx:264
@@ -1396,7 +1390,7 @@ msgstr "Galaxy 로고"
 msgid "Get token"
 msgstr "토큰 받기"
 
-#: src/utilities/wait-for-task.ts:17
+#: src/utilities/wait-for-task.ts:9
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "10번 시도 후에 대기 중인 작업을 포기합니다."
 
@@ -1417,11 +1411,11 @@ msgstr "그룹 \"{0}\"을/를 표시할 수 없습니다."
 msgid "Group \"{0}\" has been successfully deleted."
 msgstr "그룹 \"{0}\"이/가 성공적으로 삭제되었습니다."
 
-#: src/containers/group-management/group-detail.tsx:573
+#: src/containers/group-management/group-detail.tsx:576
 msgid "Group \"{group}\" could not be deleted."
 msgstr "그룹 \"{group}\"을/를 삭제할 수 없습니다."
 
-#: src/containers/group-management/group-detail.tsx:565
+#: src/containers/group-management/group-detail.tsx:568
 msgid "Group \"{group}\" has been successfully deleted."
 msgstr "그룹 \"{group}\"이/가 성공적으로 삭제되었습니다."
 
@@ -1460,12 +1454,12 @@ msgstr "액세스 권한이 있는 그룹"
 msgid "Hide advanced options"
 msgstr "고급 옵션 숨기기"
 
-#: src/components/collection-detail/download-signature-grid-item.tsx:43
+#: src/components/collection-detail/download-signature-grid-item.tsx:44
 msgid "Hide the signature"
 msgstr "서명 숨기기"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
-#: src/components/headers/collection-header.tsx:437
+#: src/components/headers/collection-header.tsx:412
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
 #: src/containers/namespace-detail/namespace-detail.tsx:244
 msgid "I understand that this action cannot be undone."
@@ -1511,16 +1505,16 @@ msgstr "가져오기 및 자동 승인"
 msgid "Import and move to staging"
 msgstr "가져오기 및 스테이징으로 이동"
 
-#: src/components/headers/collection-header.tsx:644
+#: src/components/headers/collection-header.tsx:619
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "로그 가져오기"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:636
+#: src/containers/namespace-detail/namespace-detail.tsx:635
 msgid "Imports"
 msgstr "가져오기"
 
-#: src/containers/execution-environment/registry-list.tsx:423
+#: src/containers/execution-environment/registry-list.tsx:421
 msgid "Index execution environments"
 msgstr "인덱스 실행 환경"
 
@@ -1528,7 +1522,7 @@ msgstr "인덱스 실행 환경"
 #~ msgid "Indexing execution environments in {name}"
 #~ msgstr "Indexing execution environments in {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:416
+#: src/containers/execution-environment/registry-list.tsx:414
 msgid "Indexing execution environments is only supported on registry.redhat.io"
 msgstr "인덱스 실행 환경은 registry.redhat.io에서만 지원됩니다."
 
@@ -1536,12 +1530,12 @@ msgstr "인덱스 실행 환경은 registry.redhat.io에서만 지원됩니다."
 #~ msgid "Indexing failed for {name}"
 #~ msgstr "Indexing failed for {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:527
+#: src/containers/execution-environment/registry-list.tsx:525
 msgid "Indexing started for execution environment \"{name}\"."
 msgstr "실행 환경 \"{name}\"에 대한 인덱싱이 시작되었습니다."
 
 #: src/components/collection-detail/collection-info.tsx:53
-#: src/components/headers/collection-header.tsx:625
+#: src/components/headers/collection-header.tsx:600
 msgid "Install"
 msgstr "설치"
 
@@ -1557,7 +1551,7 @@ msgstr "설치"
 msgid "Instructions"
 msgstr "설명"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:630
+#: src/containers/certification-dashboard/certification-dashboard.tsx:623
 msgid "Internal Server Error"
 msgstr "내부 서버 오류"
 
@@ -1573,7 +1567,7 @@ msgstr "잘못된 파일 이름입니다. 컬렉션은 'namespace-collection_nam
 msgid "Invalid login credentials."
 msgstr "잘못된 로그인 자격 증명입니다."
 
-#: src/components/headers/collection-header.tsx:182
+#: src/components/headers/collection-header.tsx:174
 msgid "Issue tracker"
 msgstr "문제 추적기"
 
@@ -1589,17 +1583,17 @@ msgstr "동시에 태그를 포함 및 제외하는 것은 바람직하지 않�
 msgid "It's safe to close this window. These tasks will finish in the background."
 msgstr "이 창을 닫는 것이 안전합니다. 이러한 작업은 백그라운드에서 완료됩니다."
 
-#: src/components/collection-list/collection-filter.tsx:55
+#: src/components/collection-list/collection-filter.tsx:53
 msgid "Keywords"
 msgstr "키워드"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:304
+#: src/containers/execution-environment-list/execution_environment_list.tsx:302
 msgid "Last modified"
 msgstr "마지막으로 변경된 사항"
 
 #: src/components/user-form/user-form.tsx:90
-#: src/containers/group-management/group-detail.tsx:730
-#: src/containers/group-management/group-detail.tsx:811
+#: src/containers/group-management/group-detail.tsx:733
+#: src/containers/group-management/group-detail.tsx:814
 #: src/containers/user-management/user-list.tsx:170
 #: src/containers/user-management/user-list.tsx:212
 #: src/containers/user-management/user-list.tsx:270
@@ -1616,7 +1610,7 @@ msgstr "마지막으로 동기화됨"
 msgid "Last updated"
 msgstr "마지막 업데이트"
 
-#: src/components/headers/collection-header.tsx:520
+#: src/components/headers/collection-header.tsx:495
 msgid "Last updated <0/>"
 msgstr "마지막 업데이트 <0/>"
 
@@ -1654,11 +1648,11 @@ msgid "List of Collections"
 msgstr "컬렉션 목록"
 
 #: src/containers/token/token-insights.tsx:145
-#: src/containers/token/token-standalone.tsx:102
+#: src/containers/token/token-standalone.tsx:98
 msgid "Load token"
 msgstr "토큰 로드"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:410
+#: src/containers/execution-environment-list/execution_environment_list.tsx:408
 #: src/containers/repositories/repository-list.tsx:118
 msgid "Local"
 msgstr "지역"
@@ -1727,11 +1721,11 @@ msgstr "내 프로필"
 #: src/components/execution-environment/repository-form.tsx:171
 #: src/components/execution-environment/repository-form.tsx:199
 #: src/components/group-management/group-modal.tsx:73
-#: src/components/my-imports/import-list.tsx:81
-#: src/components/my-imports/import-list.tsx:119
+#: src/components/my-imports/import-list.tsx:78
+#: src/components/my-imports/import-list.tsx:116
 #: src/components/namespace-form/namespace-form.tsx:62
 #: src/components/namespace-modal/namespace-modal.tsx:128
-#: src/components/repositories/remote-form.tsx:194
+#: src/components/repositories/remote-form.tsx:193
 #: src/containers/execution-environment/registry-list.tsx:265
 #: src/containers/execution-environment/registry-list.tsx:293
 #: src/containers/execution-environment/registry-list.tsx:322
@@ -1760,17 +1754,17 @@ msgstr "이름은 2자 이상이어야 합니다."
 msgid "Name must not be empty."
 msgstr "이름은 비워 둘 수 없습니다."
 
-#: src/components/my-imports/import-list.tsx:225
+#: src/components/my-imports/import-list.tsx:222
 #: src/containers/certification-dashboard/certification-dashboard.tsx:158
 #: src/containers/certification-dashboard/certification-dashboard.tsx:259
 msgid "Namespace"
 msgstr "네임스페이스"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:720
+#: src/containers/namespace-detail/namespace-detail.tsx:719
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "네임스페이스 \"{name}\"은/는 삭제할 수 없습니다."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:699
+#: src/containers/namespace-detail/namespace-detail.tsx:698
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "네임스페이스 \"{name}\"을/를 성공적으로 삭제했습니다."
 
@@ -1810,13 +1804,13 @@ msgstr "생성된 네임스페이스가 나타납니다."
 msgid "Needs Review"
 msgstr "검토 필요"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:344
+#: src/containers/certification-dashboard/certification-dashboard.tsx:340
 msgid "Needs review"
-msgstr ""
+msgstr "검토 필요"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:343
+#: src/containers/certification-dashboard/certification-dashboard.tsx:339
 msgid "Needs signature and review"
-msgstr ""
+msgstr "서명 및 검토 필요"
 
 #: src/components/import-modal/import-modal.tsx:59
 msgid "New collection"
@@ -1851,7 +1845,7 @@ msgstr "하위 작업 없음"
 msgid "No collections yet"
 msgstr "아직 컬렉션이 없습니다."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:197
+#: src/containers/execution-environment-list/execution_environment_list.tsx:195
 msgid "No container repositories yet"
 msgstr "아직 컨테이너 리포지토리가 없음"
 
@@ -1873,7 +1867,7 @@ msgstr "아직 그룹 없음"
 msgid "No images yet"
 msgstr "아직 이미지가 없음"
 
-#: src/components/my-imports/import-list.tsx:157
+#: src/components/my-imports/import-list.tsx:154
 msgid "No imports"
 msgstr "가져오기 없음"
 
@@ -1933,7 +1927,7 @@ msgstr "아직 작업이 없습니다."
 msgid "No users will be affected."
 msgstr "사용자에게 영향을 미치지 않습니다."
 
-#: src/containers/group-management/group-detail.tsx:687
+#: src/containers/group-management/group-detail.tsx:690
 #: src/containers/user-management/user-list.tsx:245
 msgid "No users yet"
 msgstr "아직 사용자가 없음"
@@ -1984,11 +1978,11 @@ msgstr "오프라인 토큰"
 msgid "Parent task"
 msgstr "상위 작업"
 
-#: src/components/collection-list/collection-filter.tsx:73
+#: src/components/collection-list/collection-filter.tsx:71
 msgid "Partial"
 msgstr "부분적"
 
-#: src/components/signing/signature-badge.tsx:32
+#: src/components/signing/signature-badge.tsx:33
 msgid "Partially signed"
 msgstr "부분적으로 서명"
 
@@ -2076,7 +2070,7 @@ msgstr "먼저 편집 권한을 완료하십시오."
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:53
 msgid "Please select a signature file to upload."
-msgstr ""
+msgstr "업로드할 서명 파일을 선택하십시오."
 
 #: src/components/import-modal/import-modal.tsx:149
 msgid "Please select no more than one file."
@@ -2133,7 +2127,7 @@ msgstr "개인 컨테이너 가져오기"
 msgid "Pull this image"
 msgstr "이미지 가져오기"
 
-#: src/components/about-modal/about-modal.tsx:92
+#: src/components/about-modal/about-modal.tsx:79
 msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible 버전"
 
@@ -2241,7 +2235,7 @@ msgstr "Pulpcore: 복구 버전"
 msgid "Pulpcore: Upload commit"
 msgstr "Pulpcore: 커밋 업로드"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:144
+#: src/containers/execution-environment-list/execution_environment_list.tsx:142
 msgid "Push container images"
 msgstr "컨테이너 이미지 푸시"
 
@@ -2297,17 +2291,17 @@ msgstr "레지스트리 URL"
 msgid "Registry sync status"
 msgstr "레지스트리 동기화 상태"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:466
+#: src/containers/certification-dashboard/certification-dashboard.tsx:459
 msgid "Reject"
 msgstr "거부"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:171
 #: src/containers/certification-dashboard/certification-dashboard.tsx:210
-#: src/containers/certification-dashboard/certification-dashboard.tsx:327
+#: src/containers/certification-dashboard/certification-dashboard.tsx:326
 msgid "Rejected"
 msgstr "거부됨"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:410
+#: src/containers/execution-environment-list/execution_environment_list.tsx:408
 #: src/containers/repositories/repository-list.tsx:119
 msgid "Remote"
 msgstr "원격"
@@ -2322,15 +2316,15 @@ msgstr "원격 레지스트리"
 msgid "Remote name"
 msgstr "원격 이름"
 
-#: src/containers/execution-environment/registry-list.tsx:482
+#: src/containers/execution-environment/registry-list.tsx:480
 msgid "Remote registry \"{name}\" could not be deleted."
 msgstr "원격 레지스트리 \"{name}\"은/는 삭제할 수 없습니다."
 
-#: src/containers/execution-environment/registry-list.tsx:515
+#: src/containers/execution-environment/registry-list.tsx:513
 msgid "Remote registry \"{name}\" could not be synced."
 msgstr "원격 레지스트리 \"{name}\"을/를 동기화할 수 없습니다."
 
-#: src/containers/execution-environment/registry-list.tsx:473
+#: src/containers/execution-environment/registry-list.tsx:471
 msgid "Remote registry \"{name}\" has been successfully deleted."
 msgstr "원격 레지스트리 \"{name}\"을/를 성공적으로 삭제했습니다"
 
@@ -2338,7 +2332,7 @@ msgstr "원격 레지스트리 \"{name}\"을/를 성공적으로 삭제했습니
 msgid "Remote repositories will appear once added"
 msgstr "추가 후 원격 리포지토리가 나타납니다."
 
-#: src/containers/group-management/group-detail.tsx:860
+#: src/containers/group-management/group-detail.tsx:864
 msgid "Remove"
 msgstr "제거"
 
@@ -2346,11 +2340,11 @@ msgstr "제거"
 msgid "Remove content from repository"
 msgstr "리포지토리에서 콘텐츠 제거"
 
-#: src/containers/group-management/group-detail.tsx:606
+#: src/containers/group-management/group-detail.tsx:609
 msgid "Remove user from group?"
 msgstr "그룹에서 사용자를 제거하시겠습니까?"
 
-#: src/components/headers/collection-header.tsx:183
+#: src/components/headers/collection-header.tsx:175
 msgid "Repo"
 msgstr "리포지토리"
 
@@ -2359,8 +2353,8 @@ msgid "Repo Management"
 msgstr "리포지토리 관리"
 
 #: src/components/repositories/local-repository-table.tsx:64
-#~ msgid "Repo URL"
-#~ msgstr "리포지토리 URL"
+msgid "Repo URL"
+msgstr "리포지토리 URL"
 
 #: src/components/repositories/remote-repository-table.tsx:69
 msgid "Repositories"
@@ -2394,7 +2388,7 @@ msgstr "리소스"
 msgid "Role"
 msgstr "역할"
 
-#: src/components/my-imports/import-list.tsx:98
+#: src/components/my-imports/import-list.tsx:95
 #: src/components/status/status-indicator.tsx:61
 #: src/constants.tsx:373
 #: src/containers/task-management/task-list-view.tsx:164
@@ -2413,18 +2407,18 @@ msgstr "SSO URL"
 #: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:197
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
-#: src/containers/group-management/group-detail.tsx:430
+#: src/containers/group-management/group-detail.tsx:433
 msgid "Save"
 msgstr "저장"
 
 #: src/containers/execution-environment-detail/base.tsx:219
-#: src/containers/execution-environment-list/execution_environment_list.tsx:455
+#: src/containers/execution-environment-list/execution_environment_list.tsx:453
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "실행 환경 \"{0}\"에 대한 변경 사항을 저장했습니다."
 
 #: src/containers/execution-environment-list/execution_environment_list.tsx:453
 #~ msgid "Saved changes to execution environment \"{name}\"."
-#~ msgstr "실행 환경 \"{name}\"에 대한 변경 사항을 저장했습니다."
+#~ msgstr "Saved changes to execution environment \"{name}\"."
 
 #: src/containers/edit-namespace/edit-namespace.tsx:277
 msgid "Saved changes to namespace \"{0}\"."
@@ -2450,13 +2444,13 @@ msgstr "끝까지 스크롤"
 #~ msgid "Search my namespaces"
 #~ msgstr "Search my namespaces"
 
-#: src/containers/execution-environment/registry-list.tsx:501
+#: src/containers/execution-environment/registry-list.tsx:499
 #: src/containers/execution-environment-detail/base.tsx:334
-#: src/containers/execution-environment-list/execution_environment_list.tsx:536
+#: src/containers/execution-environment-list/execution_environment_list.tsx:534
 msgid "See the task management <0>detail page </0>for the status of this task."
 msgstr "이 작업의 상태에 대해서는 작업 관리 <0>세부 정보 페이지 </0>를 참조하십시오."
 
-#: src/containers/execution-environment/registry-list.tsx:530
+#: src/containers/execution-environment/registry-list.tsx:528
 msgid "See the task management <0>detail page</0>for the status of this task."
 msgstr "이 작업의 상태에 대해서는 작업 관리 <0>세부 정보 페이지</0>를 참조하십시오."
 
@@ -2472,7 +2466,7 @@ msgstr "레지스트리 선택"
 msgid "Select a tag"
 msgstr "태그 선택"
 
-#: src/components/headers/collection-header.tsx:480
+#: src/components/headers/collection-header.tsx:455
 msgid "Select collection version"
 msgstr "컬렉션 버전 선택"
 
@@ -2489,7 +2483,7 @@ msgstr "그룹 선택"
 #~ msgid "Select input"
 #~ msgstr "Select input"
 
-#: src/components/my-imports/import-list.tsx:238
+#: src/components/my-imports/import-list.tsx:235
 msgid "Select namespace"
 msgstr "네임스페이스 선택"
 
@@ -2498,7 +2492,7 @@ msgstr "네임스페이스 선택"
 msgid "Select permissions"
 msgstr "권한 선택"
 
-#: src/containers/group-management/group-detail.tsx:539
+#: src/containers/group-management/group-detail.tsx:542
 msgid "Select users"
 msgstr "사용자 선택"
 
@@ -2514,7 +2508,7 @@ msgstr "서버 URL을 표시할 수 없습니다."
 msgid "Server error. Please come back later."
 msgstr "서버 오류. 나중에 다시 시도하십시오."
 
-#: src/components/about-modal/about-modal.tsx:85
+#: src/components/about-modal/about-modal.tsx:76
 msgid "Server version"
 msgstr "서버 버전"
 
@@ -2526,7 +2520,7 @@ msgstr "설정"
 msgid "Show advanced options"
 msgstr "고급 옵션 표시"
 
-#: src/components/collection-detail/download-signature-grid-item.tsx:43
+#: src/components/collection-detail/download-signature-grid-item.tsx:44
 msgid "Show the signature"
 msgstr "서명 표시"
 
@@ -2543,24 +2537,24 @@ msgid "Sign all"
 msgstr "모두 서명"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:39
-#: src/containers/namespace-detail/namespace-detail.tsx:645
+#: src/containers/namespace-detail/namespace-detail.tsx:644
 msgid "Sign all collections"
 msgstr "모든 컬렉션에 서명"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:416
-#: src/containers/certification-dashboard/certification-dashboard.tsx:449
+#: src/containers/certification-dashboard/certification-dashboard.tsx:409
+#: src/containers/certification-dashboard/certification-dashboard.tsx:442
 msgid "Sign and approve"
 msgstr "서명 및 승인"
 
-#: src/components/headers/collection-header.tsx:256
+#: src/components/headers/collection-header.tsx:245
 msgid "Sign entire collection"
 msgstr "전체 컬렉션에 서명"
 
-#: src/components/collection-list/collection-filter.tsx:68
+#: src/components/collection-list/collection-filter.tsx:66
 msgid "Sign state"
 msgstr "서명 상태"
 
-#: src/components/headers/collection-header.tsx:273
+#: src/components/headers/collection-header.tsx:253
 msgid "Sign version {0}"
 msgstr "서명 버전 {0}"
 
@@ -2568,16 +2562,16 @@ msgstr "서명 버전 {0}"
 msgid "Sign version {version}"
 msgstr "서명 버전 {version}"
 
-#: src/components/collection-detail/download-signature-grid-item.tsx:33
+#: src/components/collection-detail/download-signature-grid-item.tsx:34
 msgid "Signature"
 msgstr "서명"
 
-#: src/components/collection-list/collection-filter.tsx:71
-#: src/components/signing/signature-badge.tsx:28
+#: src/components/collection-list/collection-filter.tsx:69
+#: src/components/signing/signature-badge.tsx:29
 msgid "Signed"
 msgstr "서명됨"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:319
+#: src/containers/certification-dashboard/certification-dashboard.tsx:318
 msgid "Signed and approved"
 msgstr "서명 및 승인됨"
 
@@ -2587,21 +2581,21 @@ msgstr "서명된 항목만 포함"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:67
 msgid "Signed version(s)"
-msgstr ""
+msgstr "서명된 버전"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:85
 msgid "Signing service selector:"
-msgstr ""
+msgstr "서비스 선택기에 서명합니다."
 
 #: src/containers/namespace-detail/namespace-detail.tsx:450
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "네임스페이스 \"{0}\"의 모든 컬렉션에 대해 서명이 시작되었습니다."
 
-#: src/components/headers/collection-header.tsx:752
+#: src/components/headers/collection-header.tsx:670
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "컬렉션 \"{0}\"의 모든 버전에 대해 서명이 시작되었습니다."
 
-#: src/components/headers/collection-header.tsx:803
+#: src/components/headers/collection-header.tsx:721
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "\"{0} v{1}\" 컬렉션에 대한 서명이 시작되었습니다."
 
@@ -2625,8 +2619,8 @@ msgstr "시작 시간"
 msgid "State"
 msgstr "상태"
 
-#: src/components/my-imports/import-list.tsx:85
-#: src/components/my-imports/import-list.tsx:120
+#: src/components/my-imports/import-list.tsx:82
+#: src/components/my-imports/import-list.tsx:117
 #: src/containers/certification-dashboard/certification-dashboard.tsx:166
 #: src/containers/certification-dashboard/certification-dashboard.tsx:214
 #: src/containers/certification-dashboard/certification-dashboard.tsx:279
@@ -2718,13 +2712,13 @@ msgid "Sync"
 msgstr "동기화"
 
 #: src/containers/execution-environment-detail/base.tsx:345
-#: src/containers/execution-environment-list/execution_environment_list.tsx:546
+#: src/containers/execution-environment-list/execution_environment_list.tsx:544
 msgid "Sync failed for {name}"
 msgstr "{name}에 대한 동기화 실패"
 
-#: src/containers/execution-environment/registry-list.tsx:376
+#: src/containers/execution-environment/registry-list.tsx:375
 #: src/containers/execution-environment-detail/base.tsx:122
-#: src/containers/execution-environment-list/execution_environment_list.tsx:358
+#: src/containers/execution-environment-list/execution_environment_list.tsx:356
 msgid "Sync from registry"
 msgstr "레지스트리에서 동기화"
 
@@ -2734,11 +2728,11 @@ msgstr "레지스트리에서 동기화"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:531
+#: src/containers/execution-environment-list/execution_environment_list.tsx:529
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "실행 환경 \"{name}\"에 대한 동기화가 시작되었습니다."
 
-#: src/containers/execution-environment/registry-list.tsx:498
+#: src/containers/execution-environment/registry-list.tsx:496
 #: src/containers/execution-environment-detail/base.tsx:331
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "원격 레지스트리 \"{name}\"에 대한 동기화가 시작되었습니다."
@@ -2751,7 +2745,7 @@ msgstr "동기화 상태"
 msgid "TLS validation"
 msgstr "TLS 인증"
 
-#: src/components/collection-list/collection-filter.tsx:59
+#: src/components/collection-list/collection-filter.tsx:57
 #: src/components/execution-environment/publish-to-controller-modal.tsx:314
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:275
@@ -2787,10 +2781,6 @@ msgstr "작업 관리"
 #: src/containers/task-management/task_detail.tsx:153
 msgid "Task detail"
 msgstr "작업 세부 정보"
-
-#: src/utilities/wait-for-task.ts:10
-msgid "Task failed without error message."
-msgstr ""
 
 #: src/containers/task-management/task_detail.tsx:194
 msgid "Task group"
@@ -2831,7 +2821,7 @@ msgstr "작업이 생성된 후 표시됩니다"
 #: src/components/headers/collection-header.tsx:262
 #: src/containers/search/search.tsx:333
 #~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
-#~ msgstr "동기화 문제로 인해 일시적으로 비활성화되었습니다. (AAH-1237)"
+#~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
 #: src/components/namespace-form/namespace-form.tsx:192
 msgid "Text: {0}"
@@ -2841,28 +2831,23 @@ msgstr "텍스트: {0}"
 msgid "The URL needs to be in 'http(s)://' format."
 msgstr "URL은 'http(s)://' 형식이어야 합니다."
 
-#: src/components/repositories/remote-form.tsx:214
+#: src/components/repositories/remote-form.tsx:213
 msgid "The URL of an external content source."
 msgstr "외부 콘텐츠 소스의 URL입니다."
 
-#: src/components/headers/collection-header.tsx:708
-#: src/containers/certification-dashboard/certification-dashboard.tsx:544
+#: src/containers/certification-dashboard/certification-dashboard.tsx:537
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
-msgstr ""
+msgstr "\"{0} {1} v{2}\"의 인증서를 저장할 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:676
-msgid "The certificate for \"{0} {1} v{2}\" is being uploaded."
-msgstr ""
-
-#: src/components/headers/collection-header.tsx:852
+#: src/components/headers/collection-header.tsx:770
 #: src/containers/search/search.tsx:293
 msgid "The collection \"{0}\" has been successfully deprecated."
-msgstr ""
+msgstr "컬렉션 \"{0}\"을/를 성공적으로 삭제했습니다."
 
-#: src/components/headers/collection-header.tsx:853
+#: src/components/headers/collection-header.tsx:771
 #: src/containers/search/search.tsx:294
 msgid "The collection \"{0}\" has been successfully undeprecated."
-msgstr ""
+msgstr "컬렉션 \"{0}\"을/를 성공적으로 삭제했습니다."
 
 #: src/components/import-modal/import-modal.tsx:174
 msgid "The collection you have selected does not match this namespace."
@@ -2900,7 +2885,7 @@ msgstr "동기화 시 인증에 사용할 사용자 이름입니다. 이 사용�
 msgid "There are no repos associated with this remote."
 msgstr "원격 연결된 리포지토리가 없습니다."
 
-#: src/components/my-imports/import-list.tsx:158
+#: src/components/my-imports/import-list.tsx:155
 msgid "There have not been any imports on this namespace."
 msgstr "이 네임 스페이스에는 가져오기가 없습니다."
 
@@ -2923,9 +2908,9 @@ msgstr "이 계정은 네임스페이스를 관리하도록 설정되지 않았�
 
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
-#~ msgstr "이 작업은 <0>{numberOfAffected}</0> 버전에 영향을 미칩니다."
+#~ msgstr "This action will affect <0>{numberOfAffected}</0> version(s)."
 
-#: src/components/headers/collection-header.tsx:543
+#: src/components/headers/collection-header.tsx:518
 msgid "This collection has been deprecated."
 msgstr "이 컬렉션은 더 이상 사용되지 않습니다."
 
@@ -2957,7 +2942,7 @@ msgstr "토큰을 취소하거나 모든 토큰을 보려면 <0>오프라인 API
 msgid "Token"
 msgstr "토큰"
 
-#: src/containers/token/token-standalone.tsx:129
+#: src/containers/token/token-standalone.tsx:120
 msgid "Token could not be displayed."
 msgstr "토큰을 표시할 수 없습니다."
 
@@ -2986,11 +2971,11 @@ msgstr "교육 <0/>"
 msgid "Type"
 msgstr "유형"
 
-#: src/components/about-modal/about-modal.tsx:95
+#: src/components/about-modal/about-modal.tsx:82
 msgid "UI Version"
 msgstr "UI 버전"
 
-#: src/components/repositories/remote-form.tsx:212
+#: src/components/repositories/remote-form.tsx:211
 msgid "URL"
 msgstr "URL"
 
@@ -3003,19 +2988,19 @@ msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/components/collection-list/collection-list.tsx:98
-#: src/components/headers/collection-header.tsx:277
+#: src/components/headers/collection-header.tsx:257
 #: src/containers/search/search.tsx:331
 msgid "Undeprecate"
 msgstr "사용되지 않음"
 
-#: src/components/collection-list/collection-filter.tsx:72
-#: src/components/signing/signature-badge.tsx:30
+#: src/components/collection-list/collection-filter.tsx:70
+#: src/components/signing/signature-badge.tsx:31
 msgid "Unsigned"
 msgstr "서명되지 않음"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:74
 msgid "Unsigned version(s)"
-msgstr ""
+msgstr "서명되지 않은 버전"
 
 #: src/constants.tsx:207
 msgid "Update container information"
@@ -3031,21 +3016,21 @@ msgid "Upload"
 msgstr "업로드"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:310
-#: src/containers/namespace-detail/namespace-detail.tsx:657
+#: src/containers/namespace-detail/namespace-detail.tsx:656
 msgid "Upload collection"
 msgstr "컬렉션 업로드"
 
 #: src/components/collection-list/collection-list.tsx:88
-#: src/components/headers/collection-header.tsx:284
+#: src/components/headers/collection-header.tsx:264
 #: src/containers/search/search.tsx:341
 #: src/containers/search/search.tsx:353
 msgid "Upload new version"
 msgstr "새 버전 업로드"
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:33
-#: src/containers/certification-dashboard/certification-dashboard.tsx:401
+#: src/containers/certification-dashboard/certification-dashboard.tsx:394
 msgid "Upload signature"
-msgstr ""
+msgstr "서명 업로드"
 
 #: src/constants.tsx:196
 #: src/constants.tsx:204
@@ -3059,7 +3044,7 @@ msgstr "업스트림 이름"
 #: src/components/execution-environment/publish-to-controller-modal.tsx:279
 #: src/containers/execution-environment-detail/base.tsx:135
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:408
-#: src/containers/execution-environment-list/execution_environment_list.tsx:371
+#: src/containers/execution-environment-list/execution_environment_list.tsx:369
 msgid "Use in Controller"
 msgstr "컨트롤러에서 사용"
 
@@ -3095,7 +3080,7 @@ msgstr "이 URL을 사용하여 클라이언트가 Automation Hub에서 콘텐�
 msgid "Use this token to authenticate clients that need to download content from Automation Hub. This is a secret token used to protect your content. Store your API token in a secure location."
 msgstr "이 토큰을 사용하여 Automation Hub에서 콘텐츠를 다운로드해야 하는 클라이언트를 인증합니다. 이는 콘텐츠를 보호하는 데 사용되는 시크릿 토큰입니다. API 토큰을 안전한 위치에 저장합니다."
 
-#: src/containers/token/token-standalone.tsx:64
+#: src/containers/token/token-standalone.tsx:60
 msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
 msgstr "이 토큰을 사용하여 <0>ansible-CBC</0> 클라이언트를 인증합니다."
 
@@ -3103,7 +3088,7 @@ msgstr "이 토큰을 사용하여 <0>ansible-CBC</0> 클라이언트를 인증�
 msgid "Useful links"
 msgstr "유용한 링크"
 
-#: src/containers/group-management/group-detail.tsx:634
+#: src/containers/group-management/group-detail.tsx:637
 msgid "User \"{0}\" could not be added to group \"{1}\"."
 msgstr "사용자 \"{0}\"을/를 그룹 \"{1}\"에 추가할 수 없습니다."
 
@@ -3112,11 +3097,11 @@ msgstr "사용자 \"{0}\"을/를 그룹 \"{1}\"에 추가할 수 없습니다."
 msgid "User \"{0}\" could not be deleted."
 msgstr "사용자 \"{0}\"을/를 삭제할 수 없습니다."
 
-#: src/containers/group-management/group-detail.tsx:922
+#: src/containers/group-management/group-detail.tsx:929
 msgid "User \"{0}\" could not be removed from group \"{name}\"."
 msgstr "사용자 \"{0}\"을/를 그룹 \"{name}\"에서 제거할 수 없습니다."
 
-#: src/containers/group-management/group-detail.tsx:627
+#: src/containers/group-management/group-detail.tsx:630
 msgid "User \"{0}\" has been successfully added to group \"{1}\"."
 msgstr "사용자 \"{0}\"이/가 그룹 \"{1}\"에 성공적으로 추가되었습니다."
 
@@ -3124,27 +3109,23 @@ msgstr "사용자 \"{0}\"이/가 그룹 \"{1}\"에 성공적으로 추가되었�
 msgid "User \"{0}\" has been successfully deleted."
 msgstr "사용자 \"{0}\"이/가 성공적으로 삭제되었습니다."
 
-#: src/containers/group-management/group-detail.tsx:914
+#: src/containers/group-management/group-detail.tsx:921
 msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
-msgstr ""
+msgstr "사용자 \"{0}\"이/가 그룹 \"{name}\"에서 성공적으로 제거되었습니다."
 
 #: src/containers/group-management/group-detail.tsx:921
 #~ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
-#~ msgstr "사용자 \"{0}\"이/가 그룹 \"{name}\"에서 성공적으로 제거되었습니다."
+#~ msgstr "User \"{0}\" has been successfully removed group \"{name}\"."
 
-#: src/containers/group-management/group-detail.tsx:608
-msgid "User <0>{username}</0> will be removed from group <1>{groupname}</1>."
-msgstr ""
-
-#: src/containers/group-management/group-detail.tsx:608
-#~ msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
-#~ msgstr "사용자 <0>{username}</0>이/가 그룹 <1>{groupname}</1>에서 삭제됩니다."
+#: src/containers/group-management/group-detail.tsx:611
+msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
+msgstr "사용자 <0>{username}</0>이/가 그룹 <1>{groupname}</1>에서 삭제됩니다."
 
 #: src/loaders/standalone/standalone-loader.tsx:395
 msgid "User Access"
 msgstr "사용자 액세스"
 
-#: src/components/about-modal/about-modal.tsx:101
+#: src/components/about-modal/about-modal.tsx:88
 msgid "User Groups"
 msgstr "사용자 그룹"
 
@@ -3152,7 +3133,7 @@ msgstr "사용자 그룹"
 msgid "User details"
 msgstr "사용자 세부 정보"
 
-#: src/containers/group-management/group-detail.tsx:835
+#: src/containers/group-management/group-detail.tsx:838
 #: src/containers/user-management/user-list.tsx:300
 msgid "User list"
 msgstr "사용자 목록"
@@ -3161,11 +3142,11 @@ msgstr "사용자 목록"
 msgid "User type"
 msgstr "사용자 유형"
 
-#: src/components/about-modal/about-modal.tsx:98
+#: src/components/about-modal/about-modal.tsx:85
 #: src/components/repositories/remote-form.tsx:355
 #: src/components/user-form/user-form.tsx:88
-#: src/containers/group-management/group-detail.tsx:722
-#: src/containers/group-management/group-detail.tsx:801
+#: src/containers/group-management/group-detail.tsx:725
+#: src/containers/group-management/group-detail.tsx:804
 #: src/containers/login/login.tsx:52
 #: src/containers/user-management/user-list.tsx:162
 #: src/containers/user-management/user-list.tsx:210
@@ -3187,15 +3168,15 @@ msgstr "사용자 이름: {0}"
 msgid "Users"
 msgstr "사용자"
 
-#: src/containers/group-management/group-detail.tsx:508
-#: src/containers/group-management/group-detail.tsx:653
-#: src/containers/group-management/group-detail.tsx:896
+#: src/containers/group-management/group-detail.tsx:511
+#: src/containers/group-management/group-detail.tsx:656
+#: src/containers/group-management/group-detail.tsx:903
 #: src/containers/group-management/group-list.tsx:316
 #: src/containers/user-management/user-list.tsx:419
 msgid "Users list could not be displayed."
 msgstr "사용자 목록을 표시할 수 없습니다."
 
-#: src/containers/group-management/group-detail.tsx:688
+#: src/containers/group-management/group-detail.tsx:691
 msgid "Users will appear once added to this group"
 msgstr "사용자가 그룹에 추가되면 나타납니다."
 
@@ -3203,7 +3184,7 @@ msgstr "사용자가 그룹에 추가되면 나타납니다."
 msgid "Users will appear once created"
 msgstr "사용자가 생성되면 나타납니다."
 
-#: src/components/headers/collection-header.tsx:468
+#: src/components/headers/collection-header.tsx:443
 #: src/containers/certification-dashboard/certification-dashboard.tsx:269
 msgid "Version"
 msgstr "버전"
@@ -3216,7 +3197,7 @@ msgstr "버전:"
 msgid "View Ansible distribution"
 msgstr "Ansible 배포 보기"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:435
+#: src/containers/certification-dashboard/certification-dashboard.tsx:428
 msgid "View Import Logs"
 msgstr "가져오기 로그 보기"
 
@@ -3248,7 +3229,7 @@ msgstr "배포 보기"
 msgid "View group"
 msgstr "그룹 보기"
 
-#: src/components/headers/collection-header.tsx:484
+#: src/components/headers/collection-header.tsx:459
 msgid "View more"
 msgstr "더 알아보기"
 
@@ -3272,7 +3253,7 @@ msgstr "동기화 목록 보기"
 msgid "View user"
 msgstr "사용자 보기"
 
-#: src/components/my-imports/import-list.tsx:102
+#: src/components/my-imports/import-list.tsx:99
 #: src/constants.tsx:374
 #: src/containers/task-management/task-list-view.tsx:168
 msgid "Waiting"
@@ -3291,7 +3272,7 @@ msgstr "경고"
 msgid "We couldn't find the page you're looking for!"
 msgstr "페이지를 찾을 수 없습니다."
 
-#: src/components/headers/collection-header.tsx:181
+#: src/components/headers/collection-header.tsx:173
 msgid "Website"
 msgstr "웹 사이트"
 
@@ -3311,17 +3292,17 @@ msgstr "예, 중지합니다"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:40
 #~ msgid "You are about to sign <0>all</0> versions under <1>{name}</1>."
-#~ msgstr "<1>{name}</1>에서 <0>all</0> 버전에 서명하려고 합니다."
+#~ msgstr "You are about to sign <0>all</0> versions under <1>{name}</1>."
 
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
-msgstr "<1>{name}</1>에서 <0>version {version}</0> 에 서명하려고 합니다."
+msgstr "<1>{name}</1>에서 <0>version {version}에 서명하려고 합니다."
 
 #: src/components/signing/sign-all-certificates-modal.tsx:58
 msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
-msgstr ""
+msgstr "<1>{name}</1>에서 <0>{numberOfAffected}</0> 버전에 서명하려고 합니다."
 
-#: src/containers/token/token-standalone.tsx:73
+#: src/containers/token/token-standalone.tsx:69
 msgid "You are an SSO user. Your token will expire <0/>."
 msgstr "SSO 사용자입니다. 토큰은 <0/> 만료됩니다."
 
@@ -3329,7 +3310,7 @@ msgstr "SSO 사용자입니다. 토큰은 <0/> 만료됩니다."
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
 msgstr "여기에서 사용자 정의 마크다운을 입력하여 프로필의 리소스 탭을 사용자 지정할 수 있습니다."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:198
+#: src/containers/execution-environment-list/execution_environment_list.tsx:196
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "현재 컨테이너 리포지토리가 없습니다. 시작하려면 CLI를 통해 컨테이너 리포지토리를 추가합니다."
 
@@ -3345,10 +3326,10 @@ msgstr "Automation Hub에 액세스할 수 없습니다."
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/headers/collection-header.tsx:583
+#: src/components/headers/collection-header.tsx:558
 #: src/containers/search/search.tsx:385
 msgid "You don't have rights to do this operation."
-msgstr ""
+msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
 
 #: src/components/collection-detail/collection-info.tsx:88
 msgid "You have to be logged in to be able to download the tarball."
@@ -3358,7 +3339,7 @@ msgstr "tarball을 다운로드하려면 로그인해야 합니다."
 msgid "You have unsaved changes"
 msgstr "저장되지 않은 변경 사항이 있습니다"
 
-#: src/containers/group-management/group-detail.tsx:459
+#: src/containers/group-management/group-detail.tsx:462
 msgid "add-user-modal"
 msgstr "add-user-modal"
 
@@ -3379,7 +3360,7 @@ msgstr "콘텐츠 찾기"
 msgid "hidden value"
 msgstr "숨겨진 값"
 
-#: src/components/collection-list/collection-filter.tsx:95
+#: src/components/collection-list/collection-filter.tsx:93
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
 msgstr "키워드"
@@ -3401,7 +3382,7 @@ msgstr "팝업 예제"
 msgid "rejected"
 msgstr "거부됨"
 
-#: src/components/headers/collection-header.tsx:373
+#: src/components/headers/collection-header.tsx:348
 msgid "released {0}"
 msgstr "게시됨 {0}"
 
@@ -3413,11 +3394,11 @@ msgstr "게시됨 {0}"
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:93
+#: src/components/collection-list/collection-filter.tsx:91
 msgid "sign state"
 msgstr "서명 상태"
 
-#: src/components/collection-list/collection-filter.tsx:94
+#: src/components/collection-list/collection-filter.tsx:92
 msgid "tags"
 msgstr "태그"
 
@@ -3429,7 +3410,7 @@ msgstr "승인 대기 중"
 msgid "waiting for import to finish"
 msgstr "가져오기가 완료될 때까지 대기 중"
 
-#: src/components/headers/collection-header.tsx:511
+#: src/components/headers/collection-header.tsx:486
 msgid "{0} released {1}"
 msgstr "{0}이/가 릴리스됨 {1}"
 
@@ -3441,33 +3422,33 @@ msgstr "{0}이/가 추가되었습니다"
 #~ msgid "{0} will be deleted."
 #~ msgstr "{0} will be deleted."
 
-#: src/components/headers/collection-header.tsx:344
+#: src/components/headers/collection-header.tsx:319
 msgid "{collectionName}'s versions."
 msgstr "{collectionName}의 버전입니다."
 
 #: src/components/cards/collection-card.tsx:53
 #: src/components/cards/namespace-card.tsx:36
 #: src/components/collection-list/collection-list-item.tsx:58
-#: src/components/headers/collection-header.tsx:449
+#: src/components/headers/collection-header.tsx:424
 #: src/components/headers/partner-header.tsx:46
 msgid "{company} logo"
 msgstr "{company} 로고"
 
 #: src/components/numeric-label/numeric-label.tsx:84
 msgid "{count, plural, one {Dependency} other {Dependencies}}"
-msgstr ""
+msgstr "{count, plural, one {Dependency} other {Dependencies}}"
 
 #: src/components/numeric-label/numeric-label.tsx:72
 msgid "{count, plural, one {Module} other {Modules}}"
-msgstr ""
+msgstr "{count, plural, one {Module} other {Modules}}"
 
 #: src/components/numeric-label/numeric-label.tsx:80
 msgid "{count, plural, one {Plugin} other {Plugins}}"
-msgstr ""
+msgstr "{count, plural, one {Plugin} other {Plugins}}"
 
 #: src/components/numeric-label/numeric-label.tsx:76
 msgid "{count, plural, one {Role} other {Roles}}"
-msgstr ""
+msgstr "{count, plural, one {Role} other {Roles}}"
 
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
