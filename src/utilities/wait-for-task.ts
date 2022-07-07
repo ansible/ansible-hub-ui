@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import { TaskAPI } from 'src/api';
 import { parsePulpIDFromURL } from './parse-pulp-id';
 
-export function waitForTask(task, bailAfter = 10) {
+export function waitForTask(task, waitMs = 5000, bailAfter = 10) {
   return TaskAPI.get(task).then((result) => {
     const failing = ['skipped', 'failed', 'canceled'];
 
@@ -19,7 +19,7 @@ export function waitForTask(task, bailAfter = 10) {
         );
       }
 
-      return new Promise((r) => setTimeout(r, 5000)).then(() =>
+      return new Promise((r) => setTimeout(r, waitMs)).then(() =>
         waitForTask(task, bailAfter - 1),
       );
     }
