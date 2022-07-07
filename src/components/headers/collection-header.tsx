@@ -370,7 +370,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                 >
                   v{v.version}
                 </Button>{' '}
-                {t`released ${isLatestVersion(v)}`}
+                {t`updated ${isLatestVersion(v)}`}
               </ListItem>
             ))}
           </List>
@@ -509,7 +509,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                       }
                     >
                       <Trans>
-                        {v.version} released {isLatestVersion(v)}
+                        {v.version} updated {isLatestVersion(v)}
                       </Trans>
                     </SelectOption>
                   ))}
