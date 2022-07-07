@@ -15,7 +15,10 @@ const isBuild = process.env.NODE_ENV === 'production';
 // a normal webpack config. See config/insights.prod.webpack.config.js for an
 // example
 
-const gitCommit = execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim();
+// only run git when HUB_UI_VERSION is NOT provided
+const gitCommit =
+  process.env.HUB_UI_VERSION ||
+  execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim();
 
 // Default user defined settings
 const defaultConfigs = [
