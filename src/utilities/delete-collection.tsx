@@ -171,8 +171,15 @@ export class DeleteCollectionUtils {
     }
   }
 
-  public static deleteCollection(component, redirect, selectedRepo, addAlert) {
-    const { deleteCollection, collectionVersion } = component.state;
+  public static deleteCollection(
+    state,
+    setState,
+    load,
+    redirect,
+    selectedRepo,
+    addAlert,
+  ) {
+    const { deleteCollection, collectionVersion } = state;
 
     CollectionAPI.deleteCollection(selectedRepo, deleteCollection)
       .then((res) => {
@@ -193,29 +200,29 @@ export class DeleteCollectionUtils {
             ),
           });
 
-          component.setState({
+          setState({
             collectionVersion: null,
             deleteCollection: null,
             isDeletionPending: false,
           });
 
           if (redirect) {
-            component.setState({
+            setState({
               redirect: formatPath(Paths.namespaceByRepo, {
                 repo: selectedRepo,
                 namespace: deleteCollection.namespace.name,
               }),
             });
-          }
-
-          if (component.load) {
-            component.load();
+          } else {
+            if (load) {
+              load();
+            }
           }
         });
       })
       .catch((err) => {
         const { status, statusText } = err.response;
-        component.setState({
+        setState({
           collectionVersion: null,
           deleteCollection: null,
           isDeletionPending: false,

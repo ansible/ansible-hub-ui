@@ -374,7 +374,9 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               collectionVersion
                 ? this.deleteCollectionVersion(collectionVersion)
                 : DeleteCollectionUtils.deleteCollection(
-                    this,
+                    this.state,
+                    (state) => this.setState(state),
+                    null,
                     true,
                     this.context.selectedRepo,
                     (alert) =>

@@ -240,7 +240,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           deleteAction={() =>
             this.setState({ isDeletionPending: true }, () => {
               DeleteCollectionUtils.deleteCollection(
-                this,
+                this.state,
+                (state) => this.setState(state),
+                () => this.load(),
                 false,
                 this.context.selectedRepo,
                 (alert) => this.setState({ alerts: [...alerts, alert] }),
