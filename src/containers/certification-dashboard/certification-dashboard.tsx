@@ -34,7 +34,13 @@ import {
   CertificateUploadAPI,
   Repositories,
 } from 'src/api';
-import { errorMessage, filterIsSet, ParamHelper } from 'src/utilities';
+import {
+  errorMessage,
+  filterIsSet,
+  ParamHelper,
+  parsePulpIDFromURL,
+  waitForTask,
+} from 'src/utilities';
 import {
   LoadingPageWithHeader,
   CompoundFilter,
@@ -522,19 +528,25 @@ class CertificationDashboard extends React.Component<
       signed_collection,
     })
       .then((result) => {
-        // This is a hack because it task return the full task api path:
-        // eg.: /api/automation-hub/pulp/api/v3/tasks/0be64cb4-3b7e-4a6b-b35d-c3b589923a90/
-        this.waitForUpdate(
-          result.data.task.slice(0, -1).split('/').pop(),
-          version,
-        );
-        this.addAlert(
-          <Trans>
-            Certificate for collection &quot;{version.namespace} {version.name}{' '}
-            v{version.version}&quot; has been successfully uploaded.
-          </Trans>,
-          'success',
-        );
+        waitForTask(parsePulpIDFromURL(result.data.task))
+          .then(() => {
+            this.updateList();
+            this.setState({
+              alerts: this.state.alerts.concat({
+                variant: 'success',
+                title: t`Certificate for collection "${version.namespace} ${version.name} v${version.version}" has been successfully uploaded.`,
+              }),
+            });
+          })
+          .catch((error) => {
+            this.setState({
+              alerts: this.state.alerts.concat({
+                variant: 'danger',
+                title: t`The certificate for "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+                description: error,
+              }),
+            });
+          });
       })
       .catch((error) => {
         const { status, statusText } = error.response;
@@ -606,21 +618,13 @@ class CertificationDashboard extends React.Component<
     );
   }
 
-  private waitForUpdate(result, version) {
-    const taskId = result;
+  private waitForUpdate(taskId, version) {
     return TaskAPI.get(taskId).then(async (result) => {
       if (result.data.state === 'waiting' || result.data.state === 'running') {
         await new Promise((r) => setTimeout(r, 500));
         this.waitForUpdate(taskId, version);
       } else if (result.data.state === 'completed') {
-        return CollectionVersionAPI.list(this.state.params).then(
-          async (result) => {
-            this.setState({
-              versions: result.data.data,
-              updatingVersions: [],
-            });
-          },
-        );
+        return this.updateList();
       } else {
         this.setState({
           updatingVersions: [],
@@ -631,6 +635,15 @@ class CertificationDashboard extends React.Component<
           }),
         });
       }
+    });
+  }
+
+  private updateList() {
+    return CollectionVersionAPI.list(this.state.params).then(async (result) => {
+      this.setState({
+        versions: result.data.data,
+        updatingVersions: [],
+      });
     });
   }
 
