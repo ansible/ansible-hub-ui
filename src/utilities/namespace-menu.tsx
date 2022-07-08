@@ -13,8 +13,6 @@ import { NamespaceAPI } from 'src/api';
 import { errorMessage } from 'src/utilities';
 
 class NamespaceMenuUtils {
-  public click() {}
-
   public static deleteNamespace(container, namespace, detailMode) {
     if (detailMode) {
       container.setState({ isOpenNamespaceModal: true });
