@@ -792,7 +792,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             >
               {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
             </DropdownItem>,
-          ]}
+          ].filter(Boolean)}
           ariaLabel='collection-kebab'
         />
       </div>

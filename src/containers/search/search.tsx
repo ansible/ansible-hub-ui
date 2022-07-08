@@ -402,7 +402,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
             {t`Upload new version`}
           </Button>
         )}
-        <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
+        <StatefulDropdown
+          items={menuItems.filter(Boolean)}
+          ariaLabel='collection-kebab'
+        />
       </React.Fragment>
     );
   }
