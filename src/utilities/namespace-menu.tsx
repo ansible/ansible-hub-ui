@@ -231,7 +231,7 @@ class NamespaceMenuUtils {
     ].filter(Boolean);
 
     return (
-      <div className='hub-namespace-page-controls' data-cy='kebab-toggle'>
+      <div data-cy='ns-kebab-toggle'>
         {dropdownItems.length > 0 && <StatefulDropdown items={dropdownItems} />}
       </div>
     );
