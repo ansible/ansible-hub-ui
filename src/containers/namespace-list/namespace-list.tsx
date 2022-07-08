@@ -5,11 +5,8 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  DropdownItem,
-  Checkbox,
-  Text,
 } from '@patternfly/react-core';
-import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 import { t } from '@lingui/macro';
 
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -193,9 +190,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
       itemCount,
       loading,
       inputText,
-      isNamespacePending,
-      isOpenNamespaceModal,
-      confirmDelete,
       namespace,
       collections,
       isOpenSignModal,

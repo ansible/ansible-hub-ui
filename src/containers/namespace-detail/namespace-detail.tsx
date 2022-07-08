@@ -136,9 +136,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       showImportModal,
       warning,
       updateCollection,
-      isOpenNamespaceModal,
-      confirmDelete,
-      isNamespacePending,
     } = this.state;
 
     if (redirect) {
@@ -567,8 +564,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private renderPageControls() {
-    const { canSign, collections } = this.state;
-    const { can_upload_signatures } = this.context?.featureFlags || {};
+    const { collections } = this.state;
+    //const { can_upload_signatures } = this.context?.featureFlags || {};
 
     /*
     const dropdownItems = [
