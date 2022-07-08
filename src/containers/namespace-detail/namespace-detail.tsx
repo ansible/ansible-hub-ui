@@ -779,7 +779,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               this.context.user.model_permissions.delete_collection,
               () =>
                 DeleteCollectionUtils.tryOpenDeleteModalWithConfirm(
-                  this,
+                  this.state,
+                  (state) => this.setState(state),
                   collection,
                 ),
             ),

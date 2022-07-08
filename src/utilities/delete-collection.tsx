@@ -128,34 +128,35 @@ export class DeleteCollectionUtils {
     );
   }
 
-  public static tryOpenDeleteModalWithConfirm(component, collection) {
+  public static tryOpenDeleteModalWithConfirm(state, setState, collection) {
     DeleteCollectionUtils.getUsedbyDependencies(
       collection,
       (noDependencies) =>
         DeleteCollectionUtils.openDeleteModalWithConfirm(
-          component,
+          state,
+          setState,
           noDependencies,
           collection,
         ),
-      (alerts) =>
-        component.setState({ alerts: [...component.state.alerts, alerts] }),
+      (alerts) => setState({ alerts: [...state.alerts, alerts] }),
     );
   }
 
   public static openDeleteModalWithConfirm(
-    component,
+    state,
+    setState,
     noDependencies,
     collection,
   ) {
     if (noDependencies) {
-      component.setState({
+      setState({
         deleteCollection: collection,
         confirmDelete: false,
       });
     } else {
-      component.setState({
+      setState({
         alerts: [
-          ...component.state.alerts,
+          ...state.alerts,
           {
             title: (
               <Trans>

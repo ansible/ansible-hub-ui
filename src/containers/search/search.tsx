@@ -367,7 +367,11 @@ class Search extends React.Component<RouteComponentProps, IState> {
         true,
         this.context.user.model_permissions.delete_collection,
         () =>
-          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm(this, collection),
+          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm(
+            this.state,
+            (state) => this.setState(state),
+            collection,
+          ),
       ),
       <DropdownItem
         onClick={() => this.handleControlClick(collection)}
