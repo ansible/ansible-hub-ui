@@ -1,4 +1,4 @@
-import { t, Trans } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './search.scss';
 import {
@@ -155,13 +155,15 @@ class Search extends React.Component<RouteComponentProps, IState> {
           collectionVersion={null}
           cancelAction={() => this.setState({ deleteCollection: null })}
           deleteAction={() =>
-            DeleteCollectionUtils.deleteCollection(
-              this,
-              false,
-              this.context.selectedRepo,
-              (alert) =>
-                this.setState({ alerts: [...this.state.alerts, alert] }),
-            )
+            this.setState({ isDeletionPending: true }, () => {
+              DeleteCollectionUtils.deleteCollection(
+                this,
+                false,
+                this.context.selectedRepo,
+                (alert) =>
+                  this.setState({ alerts: [...this.state.alerts, alert] }),
+              );
+            })
           }
           onChange={(val) => this.setState({ confirmDelete: val })}
         />

@@ -22,10 +22,7 @@ interface IProps {
   updateParams: (params) => void;
   itemCount: number;
   ignoredParams: string[];
-
-  showNamespace?: boolean;
   showControls?: boolean;
-  handleControlClick?: (id, event) => void;
   repo?: string;
   renderCollectionControls: (collection) => React.ReactNode;
 }

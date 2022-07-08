@@ -202,7 +202,7 @@ export class DeleteCollectionUtils {
           if (redirect) {
             component.setState({
               redirect: formatPath(Paths.namespaceByRepo, {
-                repo: component.context.selectedRepo,
+                repo: selectedRepo,
                 namespace: deleteCollection.namespace.name,
               }),
             });
