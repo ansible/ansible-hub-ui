@@ -255,7 +255,7 @@ msgstr "Alle"
 msgid "Approval"
 msgstr "Goedkeuring"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:132
+#: src/containers/certification-dashboard/certification-dashboard.tsx:138
 msgid "Approval dashboard"
 msgstr "Goedkeuring dashboard"
 
@@ -263,14 +263,14 @@ msgstr "Goedkeuring dashboard"
 msgid "Approval status:"
 msgstr "Goedkeuringsstatus:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:416
-#: src/containers/certification-dashboard/certification-dashboard.tsx:449
+#: src/containers/certification-dashboard/certification-dashboard.tsx:422
+#: src/containers/certification-dashboard/certification-dashboard.tsx:455
 msgid "Approve"
 msgstr "Goedkeuring"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:179
-#: src/containers/certification-dashboard/certification-dashboard.tsx:208
-#: src/containers/certification-dashboard/certification-dashboard.tsx:320
+#: src/containers/certification-dashboard/certification-dashboard.tsx:185
+#: src/containers/certification-dashboard/certification-dashboard.tsx:214
+#: src/containers/certification-dashboard/certification-dashboard.tsx:326
 msgid "Approved"
 msgstr "Goedgekeurd"
 
@@ -317,7 +317,7 @@ msgstr "Ik kan niet op afstand updaten zonder dat er een distributie aan vastzit
 #: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:51
 #: src/components/signing/sign-single-certificate-modal.tsx:35
-#: src/components/signing/upload-sign-certificate-modal.tsx:49
+#: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
@@ -339,11 +339,11 @@ msgid "Cannot delete until collections <0/>that depend on this collection <1/>ha
 msgstr "Kan niet verwijderen totdat collecties <0/>die van deze collectie afhankelijk zijn, <1/>zijn verwijderd."
 
 #: src/components/headers/collection-header.tsx:697
-#: src/containers/certification-dashboard/certification-dashboard.tsx:532
+#: src/containers/certification-dashboard/certification-dashboard.tsx:537
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:587
+#: src/containers/certification-dashboard/certification-dashboard.tsx:599
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 
@@ -414,8 +414,8 @@ msgstr "Taak wijzigen"
 msgid "Change user"
 msgstr "Gebruiker wijzigen"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:601
-#: src/containers/certification-dashboard/certification-dashboard.tsx:629
+#: src/containers/certification-dashboard/certification-dashboard.tsx:613
+#: src/containers/certification-dashboard/certification-dashboard.tsx:633
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 
@@ -466,7 +466,7 @@ msgid "Code"
 msgstr "Code"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:89
-#: src/containers/certification-dashboard/certification-dashboard.tsx:264
+#: src/containers/certification-dashboard/certification-dashboard.tsx:270
 msgid "Collection"
 msgstr "Collectie"
 
@@ -509,7 +509,7 @@ msgstr "Collection \"{name}\" could not be downloaded."
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "Collectieversie \"{name}\" succesvol verwijderd."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:162
+#: src/containers/certification-dashboard/certification-dashboard.tsx:168
 msgid "Collection Name"
 msgstr "Naam collectie"
 
@@ -545,7 +545,7 @@ msgstr "Upload collectie geannuleerd"
 #: src/components/headers/collection-header.tsx:338
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
-#: src/containers/certification-dashboard/certification-dashboard.tsx:293
+#: src/containers/certification-dashboard/certification-dashboard.tsx:299
 msgid "Collection versions"
 msgstr "Collectie-versies"
 
@@ -557,7 +557,7 @@ msgstr "Collectie-versies"
 msgid "Collections"
 msgstr "Collecties"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:252
+#: src/containers/certification-dashboard/certification-dashboard.tsx:258
 #: src/containers/namespace-detail/namespace-detail.tsx:304
 #: src/containers/search/search.tsx:211
 msgid "Collections will appear once uploaded"
@@ -765,7 +765,7 @@ msgstr "AFGESCHAFT"
 msgid "Date"
 msgstr "Datum"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:274
+#: src/containers/certification-dashboard/certification-dashboard.tsx:280
 msgid "Date created"
 msgstr "Datum aangemaakt"
 
@@ -1030,7 +1030,7 @@ msgstr "Tarball downloaden"
 msgid "Drag a file here or browse to upload"
 msgstr "Sleep een bestand hierheen of blader om te uploaden"
 
-#: src/components/signing/upload-sign-certificate-modal.tsx:57
+#: src/components/signing/upload-sign-certificate-modal.tsx:58
 msgid "Drag and drop a file or upload one'"
 msgstr ""
 
@@ -1559,7 +1559,7 @@ msgstr "Installatie"
 msgid "Instructions"
 msgstr "Instructies"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:630
+#: src/containers/certification-dashboard/certification-dashboard.tsx:634
 msgid "Internal Server Error"
 msgstr "Internal Server Error"
 
@@ -1763,8 +1763,8 @@ msgid "Name must not be empty."
 msgstr "Name must not be empty."
 
 #: src/components/my-imports/import-list.tsx:225
-#: src/containers/certification-dashboard/certification-dashboard.tsx:158
-#: src/containers/certification-dashboard/certification-dashboard.tsx:259
+#: src/containers/certification-dashboard/certification-dashboard.tsx:164
+#: src/containers/certification-dashboard/certification-dashboard.tsx:265
 msgid "Namespace"
 msgstr "Namespace"
 
@@ -1807,16 +1807,16 @@ msgstr "Namespaces list could not be displayed."
 msgid "Namespaces will appear once created"
 msgstr "Namespaces zullen verschijnen zodra ze zijn aangemaakt"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:175
-#: src/containers/certification-dashboard/certification-dashboard.tsx:209
+#: src/containers/certification-dashboard/certification-dashboard.tsx:181
+#: src/containers/certification-dashboard/certification-dashboard.tsx:215
 msgid "Needs Review"
 msgstr "Vereist herziening"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:344
+#: src/containers/certification-dashboard/certification-dashboard.tsx:350
 msgid "Needs review"
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:343
+#: src/containers/certification-dashboard/certification-dashboard.tsx:349
 msgid "Needs signature and review"
 msgstr ""
 
@@ -1883,7 +1883,7 @@ msgstr "Geen invoer"
 msgid "No local repositories yet"
 msgstr "Nog geen lokale repository's"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:251
+#: src/containers/certification-dashboard/certification-dashboard.tsx:257
 msgid "No managed collections yet"
 msgstr "Nog geen beheerde collecties"
 
@@ -2076,7 +2076,7 @@ msgstr "Permissions for group \"{0}\" could not be displayed."
 msgid "Please finish editing permissions first."
 msgstr "Maak eerst het bewerken van de machtigingen af."
 
-#: src/components/signing/upload-sign-certificate-modal.tsx:53
+#: src/components/signing/upload-sign-certificate-modal.tsx:54
 msgid "Please select a signature file to upload."
 msgstr ""
 
@@ -2299,13 +2299,13 @@ msgstr "URL register"
 msgid "Registry sync status"
 msgstr "Status registersynchronisatie"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:466
+#: src/containers/certification-dashboard/certification-dashboard.tsx:472
 msgid "Reject"
 msgstr "Weigeren"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:171
-#: src/containers/certification-dashboard/certification-dashboard.tsx:210
-#: src/containers/certification-dashboard/certification-dashboard.tsx:327
+#: src/containers/certification-dashboard/certification-dashboard.tsx:177
+#: src/containers/certification-dashboard/certification-dashboard.tsx:216
+#: src/containers/certification-dashboard/certification-dashboard.tsx:333
 msgid "Rejected"
 msgstr "Geweigerd"
 
@@ -2479,7 +2479,7 @@ msgid "Select collection version"
 msgstr "Collectieversie selecteren"
 
 #: src/components/import-modal/import-modal.tsx:95
-#: src/components/signing/upload-sign-certificate-modal.tsx:58
+#: src/components/signing/upload-sign-certificate-modal.tsx:59
 msgid "Select file"
 msgstr "Selecteer bestand"
 
@@ -2549,8 +2549,8 @@ msgstr "Sign all"
 msgid "Sign all collections"
 msgstr "Sign all collections"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:416
-#: src/containers/certification-dashboard/certification-dashboard.tsx:449
+#: src/containers/certification-dashboard/certification-dashboard.tsx:422
+#: src/containers/certification-dashboard/certification-dashboard.tsx:455
 msgid "Sign and approve"
 msgstr "Sign and approve"
 
@@ -2579,7 +2579,7 @@ msgstr "Signature"
 msgid "Signed"
 msgstr "Signed"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:319
+#: src/containers/certification-dashboard/certification-dashboard.tsx:325
 msgid "Signed and approved"
 msgstr "Signed and approved"
 
@@ -2629,9 +2629,9 @@ msgstr "Staat"
 
 #: src/components/my-imports/import-list.tsx:85
 #: src/components/my-imports/import-list.tsx:120
-#: src/containers/certification-dashboard/certification-dashboard.tsx:166
-#: src/containers/certification-dashboard/certification-dashboard.tsx:214
-#: src/containers/certification-dashboard/certification-dashboard.tsx:279
+#: src/containers/certification-dashboard/certification-dashboard.tsx:172
+#: src/containers/certification-dashboard/certification-dashboard.tsx:220
+#: src/containers/certification-dashboard/certification-dashboard.tsx:285
 #: src/containers/task-management/task-list-view.tsx:151
 #: src/containers/task-management/task-list-view.tsx:197
 #: src/containers/task-management/task-list-view.tsx:246
@@ -2848,7 +2848,8 @@ msgid "The URL of an external content source."
 msgstr "De URL van een externe inhoudsbron."
 
 #: src/components/headers/collection-header.tsx:708
-#: src/containers/certification-dashboard/certification-dashboard.tsx:544
+#: src/containers/certification-dashboard/certification-dashboard.tsx:545
+#: src/containers/certification-dashboard/certification-dashboard.tsx:556
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr ""
 
@@ -3028,7 +3029,7 @@ msgid "Updated <0/>"
 msgstr "Bijgewerkt <0/>"
 
 #: src/components/import-modal/import-modal.tsx:71
-#: src/components/signing/upload-sign-certificate-modal.tsx:46
+#: src/components/signing/upload-sign-certificate-modal.tsx:47
 msgid "Upload"
 msgstr "Uploaden"
 
@@ -3045,7 +3046,7 @@ msgid "Upload new version"
 msgstr "Nieuwe versie uploaden"
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:33
-#: src/containers/certification-dashboard/certification-dashboard.tsx:401
+#: src/containers/certification-dashboard/certification-dashboard.tsx:407
 msgid "Upload signature"
 msgstr ""
 
@@ -3206,7 +3207,7 @@ msgid "Users will appear once created"
 msgstr "Gebruikers verschijnen zodra ze zijn aangemaakt"
 
 #: src/components/headers/collection-header.tsx:468
-#: src/containers/certification-dashboard/certification-dashboard.tsx:269
+#: src/containers/certification-dashboard/certification-dashboard.tsx:275
 msgid "Version"
 msgstr "Versie"
 
@@ -3218,7 +3219,7 @@ msgstr "Versie:"
 msgid "View Ansible distribution"
 msgstr "Ansible-distributie weergeven"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:435
+#: src/containers/certification-dashboard/certification-dashboard.tsx:441
 msgid "View Import Logs"
 msgstr "Importlogs weergeven"
 

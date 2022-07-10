@@ -253,7 +253,7 @@ msgstr "所有"
 msgid "Approval"
 msgstr "批准"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:132
+#: src/containers/certification-dashboard/certification-dashboard.tsx:138
 msgid "Approval dashboard"
 msgstr "批准仪表板"
 
@@ -261,14 +261,14 @@ msgstr "批准仪表板"
 msgid "Approval status:"
 msgstr "批准状态："
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:416
-#: src/containers/certification-dashboard/certification-dashboard.tsx:449
+#: src/containers/certification-dashboard/certification-dashboard.tsx:422
+#: src/containers/certification-dashboard/certification-dashboard.tsx:455
 msgid "Approve"
 msgstr "批准"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:179
-#: src/containers/certification-dashboard/certification-dashboard.tsx:208
-#: src/containers/certification-dashboard/certification-dashboard.tsx:320
+#: src/containers/certification-dashboard/certification-dashboard.tsx:185
+#: src/containers/certification-dashboard/certification-dashboard.tsx:214
+#: src/containers/certification-dashboard/certification-dashboard.tsx:326
 msgid "Approved"
 msgstr "已批准"
 
@@ -315,7 +315,7 @@ msgstr "在未将一个发布附加到它时，无法远程更新。"
 #: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:51
 #: src/components/signing/sign-single-certificate-modal.tsx:35
-#: src/components/signing/upload-sign-certificate-modal.tsx:49
+#: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
@@ -337,11 +337,11 @@ msgid "Cannot delete until collections <0/>that depend on this collection <1/>ha
 msgstr "无法删除集合，直到集合 <0/>依赖于此集合 <1/> 已被删除。"
 
 #: src/components/headers/collection-header.tsx:697
-#: src/containers/certification-dashboard/certification-dashboard.tsx:532
+#: src/containers/certification-dashboard/certification-dashboard.tsx:537
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:587
+#: src/containers/certification-dashboard/certification-dashboard.tsx:599
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "集合 \"{0} {1} v{2}\" 的认证状态已被成功更新。"
 
@@ -412,8 +412,8 @@ msgstr "更改任务"
 msgid "Change user"
 msgstr "更改用户"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:601
-#: src/containers/certification-dashboard/certification-dashboard.tsx:629
+#: src/containers/certification-dashboard/certification-dashboard.tsx:613
+#: src/containers/certification-dashboard/certification-dashboard.tsx:633
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "无法保存集合\"{0} {1} v{2}\"认证状态的更改 。"
 
@@ -464,7 +464,7 @@ msgid "Code"
 msgstr "代码"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:89
-#: src/containers/certification-dashboard/certification-dashboard.tsx:264
+#: src/containers/certification-dashboard/certification-dashboard.tsx:270
 msgid "Collection"
 msgstr "集合"
 
@@ -507,7 +507,7 @@ msgstr "集合 \"{name}\" 无法下载。"
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "集合 \"{name}\" 已成功删除"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:162
+#: src/containers/certification-dashboard/certification-dashboard.tsx:168
 msgid "Collection Name"
 msgstr "集合名称"
 
@@ -543,7 +543,7 @@ msgstr "集合上传已取消"
 #: src/components/headers/collection-header.tsx:338
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
-#: src/containers/certification-dashboard/certification-dashboard.tsx:293
+#: src/containers/certification-dashboard/certification-dashboard.tsx:299
 msgid "Collection versions"
 msgstr "集合版本"
 
@@ -555,7 +555,7 @@ msgstr "集合版本"
 msgid "Collections"
 msgstr "集合"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:252
+#: src/containers/certification-dashboard/certification-dashboard.tsx:258
 #: src/containers/namespace-detail/namespace-detail.tsx:304
 #: src/containers/search/search.tsx:211
 msgid "Collections will appear once uploaded"
@@ -763,7 +763,7 @@ msgstr "弃用"
 msgid "Date"
 msgstr "日期"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:274
+#: src/containers/certification-dashboard/certification-dashboard.tsx:280
 msgid "Date created"
 msgstr "创建日期"
 
@@ -1028,7 +1028,7 @@ msgstr "下载 tarball"
 msgid "Drag a file here or browse to upload"
 msgstr "把文件拖放在这里或浏览以上传"
 
-#: src/components/signing/upload-sign-certificate-modal.tsx:57
+#: src/components/signing/upload-sign-certificate-modal.tsx:58
 msgid "Drag and drop a file or upload one'"
 msgstr ""
 
@@ -1557,7 +1557,7 @@ msgstr "安装"
 msgid "Instructions"
 msgstr "说明"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:630
+#: src/containers/certification-dashboard/certification-dashboard.tsx:634
 msgid "Internal Server Error"
 msgstr "内部服务器错误"
 
@@ -1761,8 +1761,8 @@ msgid "Name must not be empty."
 msgstr "名称不能为空。"
 
 #: src/components/my-imports/import-list.tsx:225
-#: src/containers/certification-dashboard/certification-dashboard.tsx:158
-#: src/containers/certification-dashboard/certification-dashboard.tsx:259
+#: src/containers/certification-dashboard/certification-dashboard.tsx:164
+#: src/containers/certification-dashboard/certification-dashboard.tsx:265
 msgid "Namespace"
 msgstr "命名空间"
 
@@ -1805,16 +1805,16 @@ msgstr "无法显示命名空间列表。"
 msgid "Namespaces will appear once created"
 msgstr "命名空间在创建后会出现"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:175
-#: src/containers/certification-dashboard/certification-dashboard.tsx:209
+#: src/containers/certification-dashboard/certification-dashboard.tsx:181
+#: src/containers/certification-dashboard/certification-dashboard.tsx:215
 msgid "Needs Review"
 msgstr "需要审核"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:344
+#: src/containers/certification-dashboard/certification-dashboard.tsx:350
 msgid "Needs review"
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:343
+#: src/containers/certification-dashboard/certification-dashboard.tsx:349
 msgid "Needs signature and review"
 msgstr ""
 
@@ -1881,7 +1881,7 @@ msgstr "没有导入"
 msgid "No local repositories yet"
 msgstr "还没有本地仓库"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:251
+#: src/containers/certification-dashboard/certification-dashboard.tsx:257
 msgid "No managed collections yet"
 msgstr "还没有受管集合"
 
@@ -2074,7 +2074,7 @@ msgstr "无法显示组 \"{0}\" 的权限。"
 msgid "Please finish editing permissions first."
 msgstr "请首先完成编辑权限。"
 
-#: src/components/signing/upload-sign-certificate-modal.tsx:53
+#: src/components/signing/upload-sign-certificate-modal.tsx:54
 msgid "Please select a signature file to upload."
 msgstr ""
 
@@ -2297,13 +2297,13 @@ msgstr "Registry URL"
 msgid "Registry sync status"
 msgstr "Registry 同步状态"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:466
+#: src/containers/certification-dashboard/certification-dashboard.tsx:472
 msgid "Reject"
 msgstr "拒绝"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:171
-#: src/containers/certification-dashboard/certification-dashboard.tsx:210
-#: src/containers/certification-dashboard/certification-dashboard.tsx:327
+#: src/containers/certification-dashboard/certification-dashboard.tsx:177
+#: src/containers/certification-dashboard/certification-dashboard.tsx:216
+#: src/containers/certification-dashboard/certification-dashboard.tsx:333
 msgid "Rejected"
 msgstr "拒绝"
 
@@ -2477,7 +2477,7 @@ msgid "Select collection version"
 msgstr "选择集合版本"
 
 #: src/components/import-modal/import-modal.tsx:95
-#: src/components/signing/upload-sign-certificate-modal.tsx:58
+#: src/components/signing/upload-sign-certificate-modal.tsx:59
 msgid "Select file"
 msgstr "选择文件"
 
@@ -2547,8 +2547,8 @@ msgstr "签发所有"
 msgid "Sign all collections"
 msgstr "签发所有集合"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:416
-#: src/containers/certification-dashboard/certification-dashboard.tsx:449
+#: src/containers/certification-dashboard/certification-dashboard.tsx:422
+#: src/containers/certification-dashboard/certification-dashboard.tsx:455
 msgid "Sign and approve"
 msgstr "签发并批准"
 
@@ -2577,7 +2577,7 @@ msgstr "签名"
 msgid "Signed"
 msgstr "已签名"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:319
+#: src/containers/certification-dashboard/certification-dashboard.tsx:325
 msgid "Signed and approved"
 msgstr "已签名并批准"
 
@@ -2627,9 +2627,9 @@ msgstr "状态"
 
 #: src/components/my-imports/import-list.tsx:85
 #: src/components/my-imports/import-list.tsx:120
-#: src/containers/certification-dashboard/certification-dashboard.tsx:166
-#: src/containers/certification-dashboard/certification-dashboard.tsx:214
-#: src/containers/certification-dashboard/certification-dashboard.tsx:279
+#: src/containers/certification-dashboard/certification-dashboard.tsx:172
+#: src/containers/certification-dashboard/certification-dashboard.tsx:220
+#: src/containers/certification-dashboard/certification-dashboard.tsx:285
 #: src/containers/task-management/task-list-view.tsx:151
 #: src/containers/task-management/task-list-view.tsx:197
 #: src/containers/task-management/task-list-view.tsx:246
@@ -2846,7 +2846,8 @@ msgid "The URL of an external content source."
 msgstr "外部内容源的 URL。"
 
 #: src/components/headers/collection-header.tsx:708
-#: src/containers/certification-dashboard/certification-dashboard.tsx:544
+#: src/containers/certification-dashboard/certification-dashboard.tsx:545
+#: src/containers/certification-dashboard/certification-dashboard.tsx:556
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr ""
 
@@ -3026,7 +3027,7 @@ msgid "Updated <0/>"
 msgstr "更新的 <0/>"
 
 #: src/components/import-modal/import-modal.tsx:71
-#: src/components/signing/upload-sign-certificate-modal.tsx:46
+#: src/components/signing/upload-sign-certificate-modal.tsx:47
 msgid "Upload"
 msgstr "上传"
 
@@ -3043,7 +3044,7 @@ msgid "Upload new version"
 msgstr "上传新版本"
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:33
-#: src/containers/certification-dashboard/certification-dashboard.tsx:401
+#: src/containers/certification-dashboard/certification-dashboard.tsx:407
 msgid "Upload signature"
 msgstr ""
 
@@ -3204,7 +3205,7 @@ msgid "Users will appear once created"
 msgstr "用户创建后将会出现"
 
 #: src/components/headers/collection-header.tsx:468
-#: src/containers/certification-dashboard/certification-dashboard.tsx:269
+#: src/containers/certification-dashboard/certification-dashboard.tsx:275
 msgid "Version"
 msgstr "版本"
 
@@ -3216,7 +3217,7 @@ msgstr "版本："
 msgid "View Ansible distribution"
 msgstr "查看 Ansible 发布"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:435
+#: src/containers/certification-dashboard/certification-dashboard.tsx:441
 msgid "View Import Logs"
 msgstr "查看导入日志"
 
