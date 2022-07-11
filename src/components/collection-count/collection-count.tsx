@@ -9,7 +9,7 @@ interface IProps {
   repositoryPath: string;
 }
 interface IState {
-  collectionCount: string;
+  collectionCount: number;
   alerts: AlertType[];
   loading: boolean;
 }
@@ -18,7 +18,7 @@ export class CollectionCount extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      collectionCount: '',
+      collectionCount: null,
       alerts: [],
       loading: true,
     };
@@ -30,13 +30,7 @@ export class CollectionCount extends React.Component<IProps, IState> {
 
   render() {
     const { collectionCount, loading } = this.state;
-    return collectionCount && !loading ? (
-      <td>{collectionCount}</td>
-    ) : !collectionCount && loading ? (
-      <Spinner />
-    ) : (
-      <td></td>
-    );
+    return !loading ? <td>{collectionCount}</td> : <Spinner />;
   }
 
   private getCollectionCount(repo) {
@@ -61,7 +55,7 @@ export class CollectionCount extends React.Component<IProps, IState> {
     Promise.all(promises)
       .then((results) => {
         const count = results[0] - results[1];
-        this.setState({ collectionCount: count.toString(), loading: false });
+        this.setState({ collectionCount: count, loading: false });
       })
       .catch((err) => {
         this.setState({ loading: false });

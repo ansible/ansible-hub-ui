@@ -111,7 +111,9 @@ export class LocalRepositoryTable extends React.Component<IProps> {
       <tr key={distribution.name}>
         <td>{distribution.name}</td>
         <td>{distribution.repository.name}</td>
-        <td>{<CollectionCount repositoryPath={distribution.base_path} />}</td>
+        <td>
+          <CollectionCount repositoryPath={distribution.base_path} />
+        </td>
         {DEPLOYMENT_MODE ===
         Constants.INSIGHTS_DEPLOYMENT_MODE ? null : distribution.repository
             .pulp_last_updated ? (
