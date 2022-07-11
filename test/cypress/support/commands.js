@@ -181,7 +181,7 @@ Cypress.Commands.add(
   },
 );
 
-Cypress.Commands.add('createGroup', {}, (name) => {
+Cypress.Commands.add('createGroupManually', {}, (name) => {
   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
     'loadGroups',
   );
@@ -200,7 +200,7 @@ Cypress.Commands.add('createGroup', {}, (name) => {
   cy.contains(name).should('exist');
 });
 
-Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
+Cypress.Commands.add('addUserToGroupManually', {}, (groupName, userName) => {
   cy.menuGo('User Access > Groups');
   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.contains('button', 'Users').click();
@@ -212,34 +212,41 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
 });
 
-Cypress.Commands.add('createRole', {}, (name, description, permissions) => {
-  console.log(name, description, permissions);
-  cy.galaxykit(
-    'role create',
-    name,
-    description,
-    `--permissions=${permissions.join(',')}`,
-  );
-});
+Cypress.Commands.add(
+  'createRole',
+  {},
+  (name, description, permissions = [], ignoreError = false) => {
+    cy.galaxykit(
+      `${ignoreError ? '-i' : ''} role create`,
+      name,
+      description,
+      `--permissions=${permissions.join(',')}`,
+    );
+  },
+);
 
 Cypress.Commands.add('addRoleToGroup', {}, (groupName, role) => {
   cy.galaxykit('group role add', groupName, role);
 });
 
-Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
-  cy.menuGo('User Access > Groups');
-  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.contains('button', 'Users').click();
-  cy.get(
-    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
-  ).click();
-  cy.containsnear(
-    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
-    'Remove',
-  ).click();
-  cy.contains('button.pf-m-danger', 'Delete').click();
-  cy.contains('[data-cy=main-tabs]', userName).should('not.exist');
-});
+Cypress.Commands.add(
+  'removeUserFromGroupManually',
+  {},
+  (groupName, userName) => {
+    cy.menuGo('User Access > Groups');
+    cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+    cy.contains('button', 'Users').click();
+    cy.get(
+      `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
+    ).click();
+    cy.containsnear(
+      `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
+      'Remove',
+    ).click();
+    cy.contains('button.pf-m-danger', 'Delete').click();
+    cy.contains('[data-cy=main-tabs]', userName).should('not.exist');
+  },
+);
 
 Cypress.Commands.add('deleteUser', {}, (username) => {
   cy.menuGo('User Access > Users');
@@ -267,7 +274,7 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
   );
 });
 
-Cypress.Commands.add('deleteGroup', {}, (name) => {
+Cypress.Commands.add('deleteGroupManually', {}, (name) => {
   cy.menuGo('User Access > Groups');
   cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/*').as(
     'deleteGroup',

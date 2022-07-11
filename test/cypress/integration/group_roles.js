@@ -32,7 +32,7 @@ describe('Group Roles Tests', () => {
 
   before(() => {
     cy.login();
-    cy.createGroup(groupName);
+    cy.galaxykit('-i group create', groupName);
     cy.createRole(
       testContainerRole.name,
       testContainerRole.description,
