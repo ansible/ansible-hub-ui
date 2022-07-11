@@ -6,7 +6,7 @@ import { AlertType } from 'src/components';
 import { errorMessage } from 'src/utilities';
 
 interface IProps {
-  repositoryPath: string;
+  distributionPath: string;
 }
 interface IState {
   collectionCount: number;
@@ -25,7 +25,7 @@ export class CollectionCount extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    this.getCollectionCount(this.props.repositoryPath);
+    this.getCollectionCount(this.props.distributionPath);
   }
 
   render() {
@@ -34,7 +34,7 @@ export class CollectionCount extends React.Component<IProps, IState> {
   }
 
   private getCollectionCount(repo) {
-    const { repositoryPath } = this.props;
+    const { distributionPath } = this.props;
     const promises = [];
     promises.push(
       CollectionAPI.getPublishedCount(repo).then((count) => {
@@ -61,7 +61,7 @@ export class CollectionCount extends React.Component<IProps, IState> {
         this.setState({ loading: false });
         const { status, statusText } = err.response;
         this.addAlert(
-          t`Collection count for "${repositoryPath}" could not be displayed.`,
+          t`Collection count for "${distributionPath}" could not be displayed.`,
           'danger',
           errorMessage(status, statusText),
         );

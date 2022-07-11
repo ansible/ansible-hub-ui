@@ -64,17 +64,17 @@ export class API extends HubAPI {
     }));
   }
 
-  getPublishedCount(repositoryPath: string) {
+  getPublishedCount(distributionPath: string) {
     return this.http
-      .get(`v3/plugin/ansible/content/${repositoryPath}/collections/index/`)
+      .get(`v3/plugin/ansible/content/${distributionPath}/collections/index/`)
       .then((result) => {
         return result.data.meta.count;
       });
   }
 
-  getExcludesCount(repositoryPath: string) {
+  getExcludesCount(distributionPath: string) {
     return this.http
-      .get(`content/${repositoryPath}/v3/excludes/`)
+      .get(`content/${distributionPath}/v3/excludes/`)
       .then((result) => {
         return result.data;
       });
