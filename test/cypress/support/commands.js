@@ -213,65 +213,17 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
 });
 
 Cypress.Commands.add('createRole', {}, (name, description, permissions) => {
-  cy.visit('ui/roles/create');
-
-  cy.get('input[id="role_name"]').type(name);
-  cy.get('input[id="role_description"]').type(description);
-
-  permissions.forEach((permissionElement) => {
-    permissionElement.permissions.forEach((permission) => {
-      cy.get(
-        `[data-cy=RoleForm-Permissions-row-${permissionElement.group}] .pf-c-select input`,
-      ).click();
-
-      cy.contains('button', permission).click();
-
-      // untoggle permission options
-      cy.contains('Permissions').click();
-    });
-  });
-
-  cy.contains('Save').click();
+  console.log(name, description, permissions);
+  cy.galaxykit(
+    'role create',
+    name,
+    description,
+    `--permissions=${permissions.join(',')}`,
+  );
 });
 
-Cypress.Commands.add('addRolesToGroup', {}, (groupName, roles) => {
-  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('groups');
-  cy.menuGo('User Access > Groups');
-  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.wait('@groups');
-  cy.get('[data-cy=add-roles]').click();
-
-  cy.get('[aria-label="Items per page"]').click();
-  cy.contains('100 per page').click();
-
-  roles.forEach((role) => {
-    cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${role}"]`)
-      .find('input')
-      .click();
-  });
-
-  cy.get('.pf-c-wizard__footer > button').contains('Next').click();
-
-  roles.forEach((role) => {
-    cy.contains(role);
-  });
-
-  cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('roles');
-
-  cy.get('.pf-c-wizard__footer > button').contains('Add').click();
-});
-
-Cypress.Commands.add('deleteRole', {}, (role) => {
-  cy.visit('/ui/roles/');
-
-  cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`)
-    .find('[data-cy="kebab-toggle"]')
-    .click()
-    .contains('Remove role')
-    .click();
-
-  cy.contains('Delete').click();
-  cy.get('[data-cy="delete-button"]').contains('Delete').click();
+Cypress.Commands.add('addRoleToGroup', {}, (groupName, role) => {
+  cy.galaxykit('group role add', groupName, role);
 });
 
 Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {

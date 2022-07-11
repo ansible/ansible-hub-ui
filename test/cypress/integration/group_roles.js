@@ -5,36 +5,25 @@ describe('Group Roles Tests', () => {
   const testRole = {
     name: `galaxy.test_role_${num}`,
     description: 'test role for test group',
-    permissions: [
-      {
-        group: 'groups',
-        permissions: [
-          'Add group',
-          'Change group',
-          'Delete group',
-          'View group',
-        ],
-      },
-      {
-        group: 'namespaces',
-        permissions: ['Add namespace', 'Delete namespace'],
-      },
-    ],
+    permissions: {
+      'galaxy.add_group': 'Add group',
+      'galaxy.change_group': 'Change group',
+      'galaxy.delete_group': 'Delete group',
+      'galaxy.view_group': 'View group',
+      'galaxy.add_namespace': 'Add namespace',
+      'galaxy.delete_namespace': 'Delete namespace',
+    },
   };
 
   const testContainerRole = {
-    name: 'galaxy.test_container_role',
+    name: `galaxy.test_container_role_${num}`,
     description: 'this is test container role',
-    permissions: [
-      {
-        group: 'containers',
-        permissions: [
-          'Change containers',
-          'Change image tags',
-          'Delete container repository',
-        ],
-      },
-    ],
+    permissions: {
+      'container.namespace_change_containerdistribution': 'Change containers',
+      'container.namespace_modify_content_containerpushrepository':
+        'Change image tags',
+      'container.delete_containerrepository': 'Delete container repository',
+    },
   };
 
   beforeEach(() => {
@@ -47,19 +36,51 @@ describe('Group Roles Tests', () => {
     cy.createRole(
       testContainerRole.name,
       testContainerRole.description,
-      testContainerRole.permissions,
+      Object.keys(testContainerRole.permissions),
     );
   });
 
   after(() => {
     cy.galaxykit('group delete', groupName);
     cy.galaxykit('group delete', 'empty_group');
-    cy.deleteRole(testRole.name);
+    cy.galaxykit('role delete', testRole.name);
   });
 
   it('should add a new role to group', () => {
-    cy.createRole(testRole.name, testRole.description, testRole.permissions);
-    cy.addRolesToGroup(groupName, [testRole.name]);
+    cy.createRole(
+      testRole.name,
+      testRole.description,
+      Object.keys(testRole.permissions),
+    );
+
+    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('groups');
+    cy.menuGo('User Access > Groups');
+    cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+    cy.wait('@groups');
+    cy.get('[data-cy=add-roles]').click();
+
+    cy.get('[aria-label="Items per page"]').click();
+    cy.contains('100 per page').click();
+
+    cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${testRole.name}"]`)
+      .find('input')
+      .click();
+
+    cy.get('.pf-c-wizard__footer > button').contains('Next').click();
+
+    cy.contains(testRole.name);
+
+    cy.intercept('POST', Cypress.env('pulpPrefix') + 'groups/*/roles/').as(
+      'addRoles',
+    );
+    cy.intercept('GET', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
+      'getRoles',
+    );
+
+    cy.get('.pf-c-wizard__footer > button').contains('Add').click();
+
+    cy.wait('@addRoles');
+    cy.wait('@getRoles');
 
     cy.menuGo('User Access > Groups');
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
@@ -69,10 +90,8 @@ describe('Group Roles Tests', () => {
     ).click();
 
     cy.contains('1 more').click();
-    testRole.permissions.forEach(({ permissions }) => {
-      permissions.forEach((perm) => {
-        cy.contains(perm);
-      });
+    Object.values(testRole.permissions).forEach((perm) => {
+      cy.contains(perm);
     });
   });
 
@@ -143,14 +162,14 @@ describe('Group Roles Tests', () => {
     cy.get(
       `[data-cy="RoleListTable-ExpandableRow-row-${testRole.name}"] [data-cy="kebab-toggle"]`,
     ).click();
-    cy.contains('Remove Role').click();
+    cy.get('.pf-c-dropdown__menu-item').contains('Remove role').click();
 
     cy.get('[data-cy="delete-button"]').contains('Delete').click();
   });
 
   it('should not display deleted role in group detail', () => {
-    cy.addRolesToGroup(groupName, [testContainerRole.name]);
-    cy.deleteRole(testContainerRole.name);
+    cy.addRoleToGroup(groupName, testContainerRole.name);
+    cy.galaxykit('role delete', testContainerRole.name);
 
     cy.menuGo('User Access > Groups');
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
@@ -160,7 +179,7 @@ describe('Group Roles Tests', () => {
   });
 
   it('should show group empty state', () => {
-    cy.createGroup('empty_group');
+    cy.galaxykit('-i group create', 'empty_group');
     cy.menuGo('User Access > Groups');
     cy.get(`[data-cy="GroupList-row-empty_group"] a`).click();
     cy.contains('There are currently no roles assigned to this group.');
