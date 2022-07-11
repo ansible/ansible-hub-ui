@@ -70,17 +70,7 @@ describe('Group Roles Tests', () => {
 
     cy.contains(testRole.name);
 
-    cy.intercept('POST', Cypress.env('pulpPrefix') + 'groups/*/roles/').as(
-      'addRoles',
-    );
-    cy.intercept('GET', Cypress.env('pulpPrefix') + 'groups/*/roles/*').as(
-      'getRoles',
-    );
-
     cy.get('.pf-c-wizard__footer > button').contains('Add').click();
-
-    cy.wait('@addRoles');
-    cy.wait('@getRoles');
 
     cy.menuGo('User Access > Groups');
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
@@ -168,7 +158,7 @@ describe('Group Roles Tests', () => {
   });
 
   it('should not display deleted role in group detail', () => {
-    cy.addRoleToGroup(groupName, testContainerRole.name);
+    cy.galaxykit('group role add', groupName, testContainerRole.name);
     cy.galaxykit('role delete', testContainerRole.name);
 
     cy.menuGo('User Access > Groups');

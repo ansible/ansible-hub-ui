@@ -225,10 +225,6 @@ Cypress.Commands.add(
   },
 );
 
-Cypress.Commands.add('addRoleToGroup', {}, (groupName, role) => {
-  cy.galaxykit('group role add', groupName, role);
-});
-
 Cypress.Commands.add(
   'removeUserFromGroupManually',
   {},
