@@ -1,37 +1,23 @@
 import { Constants } from 'src/constants';
 import { HubAPI } from './hub';
 
-type GetUserReturn = Awaited<
-  Promise<ReturnType<typeof window.insights.chrome.auth.getUser>>
->;
-
 class API extends HubAPI {
   apiPath = this.getUIPath('me/');
 
-  getUser(): Promise<GetUserReturn['identity']> {
+  getUser() {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      return new Promise((resolve, reject) => {
-        window.insights.chrome.auth
-          .getUser()
-          // we don't care about entitlements stuff in the UI, so just
-          // return the user's identity
-          .then((result) => resolve(result.identity))
-          .catch((result) => reject(result));
-      });
+      // we don't care about entitlements stuff in the UI, so just
+      // return the user's identity
+      return window.insights.chrome.auth
+        .getUser()
+        .then((result) => result.identity);
     } else if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      return new Promise((resolve, reject) => {
-        this.http
-          .get(this.apiPath)
-          .then((result) => {
-            resolve(result.data);
-          })
-          .catch((result) => reject(result));
-      });
+      return this.getActiveUser();
     }
   }
 
   getActiveUser() {
-    return this.http.get(this.apiPath);
+    return this.http.get(this.apiPath).then((result) => result.data);
   }
 
   saveUser(data) {

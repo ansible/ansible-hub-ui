@@ -54,7 +54,7 @@ class App extends Component {
       ActiveUserAPI.getActiveUser(),
       SettingsAPI.get(),
       window.insights.chrome.auth.getUser(), // no output, just wait
-    ]).then(([{ data: activeUser }, { data: settings }]) =>
+    ]).then(([activeUser, { data: settings }]) =>
       this.setState({
         activeUser,
         settings,
