@@ -72,11 +72,8 @@ echo "Get pod names"
 AH_API_POD=$(oc get pod -l pod=automation-hub-galaxy-api -o jsonpath='{.items[0].metadata.name}')
 DB_POD=$(oc get pod -l service=db -o jsonpath='{.items[0].metadata.name}')
 
-echo "Creating test data"
-oc exec $AH_API_POD -c automation-hub-galaxy-api -i -- /entrypoint.sh manage shell < dev/ephemeral/create_objects.py
-
-echo "Fixing keycloak user permissions"
-oc exec $AH_API_POD -c automation-hub-galaxy-api -i -- /entrypoint.sh manage shell < dev/ephemeral/fixuser.py
+echo "Creating admin user and data used for tests: i.e. namespaces, groups, users, tokens"
+oc exec $AH_API_POD -c automation-hub-galaxy-api -i -- /entrypoint.sh manage shell < dev/common/setup_test_data.py
 
 cd ..
 # end configuring ephemeral
