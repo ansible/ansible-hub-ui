@@ -1,5 +1,3 @@
-import allPerms from '../support/permissions';
-
 const adminUsername = Cypress.env('username');
 const adminPassword = Cypress.env('password');
 
@@ -8,30 +6,29 @@ const userPassword = 'I am a complicated passw0rd';
 
 const groupName = 'testgroup';
 
-const addRoleToGroupAndSwitchUser = (role) => {
-  cy.login(adminUsername, adminPassword);
-  cy.addRolesToGroup(groupName, [role]);
-  cy.login(userName, userPassword);
-};
-
 describe('RBAC test for user without permissions', () => {
   before(() => {
+    cy.settings({
+      GALAXY_REQUIRE_CONTENT_APPROVAL: false,
+    });
     cy.login(adminUsername, adminPassword);
 
     cy.galaxykit(
-      'registry create',
+      '-i registry create',
       'docker',
       'https://registry.hub.docker.com/',
     );
+
     cy.galaxykit(
-      'container create',
+      '-i container create',
       `testcontainer`,
       'library/alpine',
       `docker`,
     );
-    cy.galaxykit('user create', userName, userPassword);
-    cy.galaxykit('group create', groupName);
-    cy.galaxykit('user group add', userName, groupName);
+
+    cy.galaxykit('-i user create', userName, userPassword);
+    cy.galaxykit('-i group create', groupName);
+    cy.galaxykit('-i user group add', userName, groupName);
 
     cy.galaxykit('-i namespace create', 'testspace');
     cy.galaxykit('-i collection upload testspace testcollection');
@@ -39,6 +36,7 @@ describe('RBAC test for user without permissions', () => {
 
   after(() => {
     cy.login(adminUsername, adminPassword);
+
     cy.deleteTestGroups();
     cy.deleteTestUsers();
     cy.deleteRegistries();
@@ -71,9 +69,6 @@ describe('RBAC test for user without permissions', () => {
 
     // cannot Delete collection
     cy.get('[data-cy=kebab-toggle]').should('not.exist');
-
-    // cannot Modify Ansible repo content
-    // ???
   });
 
   it("shouldn't let view, add, change and delete users when user doesn't have permission", () => {
@@ -111,10 +106,7 @@ describe('RBAC test for user without permissions', () => {
     cy.visit('/ui/containers');
 
     // cannot Create new containers
-    //FIXME create containers: this will fail after SAVE in modal without permissions
-    // hide button or make it disabled like in other pages if no permissions?
-    // solution:
-    // cy.contains('Add execution environment').should('not.exist');
+    cy.contains('Add execution environment').should('not.exist');
 
     // cannot Change and Delete container
     cy.get(
@@ -129,16 +121,7 @@ describe('RBAC test for user without permissions', () => {
     cy.contains('Delete').should('not.exist');
 
     // temporary solution (button should not be visible, if user has no permissions to sync it)
-    cy.contains('Sync from registry').click();
-    cy.get('[data-cy="AlertList"] .pf-c-alert__title').contains(
-      'Sync failed for testcontainer',
-    );
-
-    // can Change container namespace permissions
-
-    // can Change image tags
-
-    // can Push to existing containers
+    cy.contains('Sync from registry').should('not.exist');
   });
 
   it("shouldn't let add, delete and sync remote registries when user doesn't have permission", () => {
@@ -153,38 +136,95 @@ describe('RBAC test for user without permissions', () => {
     cy.contains('Delete').should('not.exist');
 
     // cannot sync remote registry
-    //FIXME sync remote registry (change remote registry): should this buttons be shown if no permissions?
-    // If user has no permissions this will show alert error
-    // solution would be hiding the sync button if no permissions
-    // solution:
-    // cy.contains('Sync from registry').should('not.exist');
-
-    // current workaround
-    cy.contains('Sync from registry').click();
-    cy.get('[data-cy="AlertList"] .pf-c-alert__title').contains(
-      'Remote registry "docker" could not be synced.',
-    );
+    cy.contains('Sync from registry').should('not.exist');
   });
 
   it("shouldn't let view all tasks, change and delete task when user doesn't have permission", () => {
-    // cannot View all tasks
-    //FIXME: task permissions are currently not implemented, but we have roles for them?
-    // solution:
-    // cy.menuMissing('Task Management');
-    // cy.visit('/ui/tasks');
-    // cy.contains('You do not have permission to perform this action.')
-    // actions not supported in UI
-    // can Change task
-    // can Delete task
+    cy.visit('/ui/tasks');
+
+    cy.get('[aria-label="Task list"] tr td a').first().click();
+
+    cy.contains('404 - Page not found');
   });
 });
 
 describe('RBAC test for user with permissions', () => {
+  const allPerms = [
+    {
+      group: 'namespaces',
+      permissions: [
+        'galaxy.add_namespace',
+        'galaxy.change_namespace',
+        'galaxy.delete_namespace',
+        'galaxy.upload_to_namespace',
+      ],
+    },
+    {
+      group: 'collections',
+      permissions: [
+        'ansible.modify_ansible_repo_content',
+        'ansible.delete_collection',
+      ],
+    },
+    {
+      group: 'users',
+      permissions: [
+        'galaxy.view_user',
+        'galaxy.delete_user',
+        'galaxy.add_user',
+        'galaxy.change_user',
+      ],
+    },
+    {
+      group: 'groups',
+      permissions: [
+        'galaxy.view_group',
+        'galaxy.delete_group',
+        'galaxy.add_group',
+        'galaxy.change_group',
+      ],
+    },
+    {
+      group: 'remotes',
+      permissions: [
+        'ansible.change_collectionremote',
+        'ansible.view_collectionremote',
+      ],
+    },
+    {
+      group: 'containers',
+      permissions: [
+        'container.delete_containerrepository',
+        'container.change_containernamespace',
+        'container.namespace_change_containerdistribution',
+        'container.namespace_modify_content_containerpushrepository',
+        'container.add_containernamespace',
+        'container.namespace_push_containerdistribution',
+      ],
+    },
+    {
+      group: 'registries',
+      permissions: [
+        'galaxy.add_containerregistryremote',
+        'galaxy.change_containerregistryremote',
+        'galaxy.delete_containerregistryremote',
+      ],
+    },
+    {
+      group: 'task_management',
+      permissions: ['core.view_task', 'core.delete_task', 'core.change_task'],
+    },
+  ];
+
   before(() => {
     cy.login(adminUsername, adminPassword);
 
+    cy.settings({
+      GALAXY_REQUIRE_CONTENT_APPROVAL: false,
+    });
+
     cy.galaxykit(
-      'registry create',
+      '-i registry create',
       'docker',
       'https://registry.hub.docker.com/',
     );
@@ -195,42 +235,37 @@ describe('RBAC test for user with permissions', () => {
       include_tags: 'latest',
     });
 
-    cy.galaxykit('user create', userName, userPassword);
-    cy.galaxykit('group create', groupName);
-    cy.galaxykit('user group add', userName, groupName);
+    cy.galaxykit('-i user create', userName, userPassword);
+    cy.galaxykit('-i group create', groupName);
+    cy.galaxykit('-i user group add', userName, groupName);
 
     allPerms.forEach((perm) => {
       cy.createRole(
         `galaxy.test_${perm.group}`,
         `role with ${perm.group} perms`,
-        [perm],
+        perm.permissions,
+        true,
       );
     });
   });
 
   after(() => {
     cy.login(adminUsername, adminPassword);
+
     cy.deleteTestGroups();
     cy.deleteTestUsers();
     cy.deleteRegistries();
     cy.deleteContainers();
     cy.deleteNamespacesAndCollections();
 
-    // delete roles manually
-    cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('roles');
-
-    cy.visit('/ui/roles');
-
-    cy.wait('@roles').then((result) => {
-      const data = result.response.body.results;
-      data.forEach(({ name }) => {
-        name.includes('galaxy.test_') && cy.deleteRole(name);
-      });
+    allPerms.forEach(({ group }) => {
+      cy.galaxykit('-i role delete', group);
     });
   });
 
   it('should display create, edit and delete buttons in namespace when user has permissions', () => {
-    addRoleToGroupAndSwitchUser('galaxy.test_namespaces');
+    cy.galaxykit('-i group role add', groupName, 'galaxy.test_namespaces');
+    cy.login(userName, userPassword);
 
     cy.galaxykit('-i namespace create', 'testspace');
     cy.visit('/ui/namespaces');
@@ -249,7 +284,8 @@ describe('RBAC test for user with permissions', () => {
   });
 
   it('should let delete collection and modify ansible repo content when user has permissions', () => {
-    addRoleToGroupAndSwitchUser('galaxy.test_collections');
+    cy.galaxykit('-i group role add', groupName, 'galaxy.test_collections');
+    cy.login(userName, userPassword);
 
     cy.galaxykit('-i collection upload testspace testcollection');
     cy.visit('/ui/repo/published/testspace/testcollection');
@@ -257,13 +293,11 @@ describe('RBAC test for user with permissions', () => {
     // can Delete collection
     cy.get('[data-cy=kebab-toggle]').should('exist').click();
     cy.contains('Delete entire collection');
-
-    // can Modify Ansible repo content
-    // ???
   });
 
   it('should let view, add, change and delete users when user has permissions', () => {
-    addRoleToGroupAndSwitchUser('galaxy.test_users');
+    cy.galaxykit('-i group role add', groupName, 'galaxy.test_users');
+    cy.login(userName, userPassword);
 
     // can View user
     cy.menuPresent('User Access > Users');
@@ -285,7 +319,8 @@ describe('RBAC test for user with permissions', () => {
   });
 
   it('should let view, add, change and delete groups when user has permissions', () => {
-    addRoleToGroupAndSwitchUser('galaxy.test_groups');
+    cy.galaxykit('-i group role add', groupName, 'galaxy.test_groups');
+    cy.login(userName, userPassword);
 
     // can View group
     cy.menuPresent('User Access > Groups');
@@ -299,18 +334,17 @@ describe('RBAC test for user with permissions', () => {
     cy.get(
       '[data-cy="GroupList-row-testgroup"] [data-cy=kebab-toggle] > .pf-c-dropdown',
     ).click();
-    cy.contains('Edit').should('exist');
     cy.contains('Delete').should('exist');
   });
 
   it('should let create, edit or delete container when user has permission', () => {
-    addRoleToGroupAndSwitchUser('galaxy.test_containers');
+    cy.galaxykit('-i group role add', groupName, 'galaxy.test_containers');
+    cy.login(userName, userPassword);
 
     cy.visit('/ui/containers');
 
     // can Create new containers
-    //FIXME create containers:
-    // cy.contains('Add execution environment').should('exist');
+    cy.contains('Add execution environment').should('exist');
 
     // can Change and Delete container
     cy.get(
@@ -327,16 +361,11 @@ describe('RBAC test for user with permissions', () => {
     cy.get('[data-cy="AlertList"] .pf-c-alert__title').contains(
       'Sync started for remote registry "testcontainer".',
     );
-
-    // can Change container namespace permissions
-
-    // can Change image tags
-
-    // can Push to existing containers
   });
 
   it('should let add, delete and sync remote registries when user has permission', () => {
-    addRoleToGroupAndSwitchUser('galaxy.test_registries');
+    cy.galaxykit('-i group role add', groupName, 'galaxy.test_registries');
+    cy.login(userName, userPassword);
 
     // can Add remote registry
     cy.visit('/ui/registries');
@@ -348,8 +377,6 @@ describe('RBAC test for user with permissions', () => {
     cy.contains('Delete');
 
     // can sync remote registry
-    //FIXME sync remote registry (change remote registry): already mention above
-    // current workaround
     cy.contains('Sync from registry').click();
     cy.get('[data-cy="AlertList"] .pf-c-alert__title').contains(
       'Sync started for remote registry "docker".',
@@ -357,15 +384,11 @@ describe('RBAC test for user with permissions', () => {
   });
 
   it('should let view all tasks, change and delete task when user has permission', () => {
-    addRoleToGroupAndSwitchUser('galaxy.test_task_management');
+    cy.galaxykit('-i group role add', groupName, 'galaxy.test_task_management');
+    cy.login(userName, userPassword);
 
-    // can View all tasks
-    cy.menuPresent('Task Management');
     cy.visit('/ui/tasks');
-    cy.contains('Task Management');
-
-    // not supported in our UI
-    // can Change task
-    // can Delete task
+    cy.get('[aria-label="Task list"] tr td a').first().click();
+    cy.contains('Task detail');
   });
 });

@@ -775,27 +775,18 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
   });
 });
 
-Cypress.Commands.add('createRole', {}, (name, description, permissions) => {
-  cy.visit('ui/roles/create');
-
-  cy.get('input[id="role_name"]').type(name);
-  cy.get('input[id="role_description"]').type(description);
-
-  permissions.forEach((permissionElement) => {
-    permissionElement.permissions.forEach((permission) => {
-      cy.get(
-        `[data-cy=RoleForm-Permissions-row-${permissionElement.group}] .pf-c-select input`,
-      ).click();
-
-      cy.contains('button', permission).click();
-
-      // untoggle permission options
-      cy.contains('Permissions').click();
-    });
-  });
-
-  cy.contains('Save').click();
-});
+Cypress.Commands.add(
+  'createRole',
+  {},
+  (name, description, permissions = [], ignoreError = false) => {
+    cy.galaxykit(
+      `${ignoreError ? '-i' : ''} role create`,
+      name,
+      description,
+      `--permissions=${permissions.join(',')}`,
+    );
+  },
+);
 
 Cypress.Commands.add('addRolesToGroup', {}, (groupName, roles) => {
   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('groups');
