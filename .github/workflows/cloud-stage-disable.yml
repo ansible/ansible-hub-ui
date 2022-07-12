@@ -1,4 +1,4 @@
-name: "Disable periodic stage deploy"
+name: "Disable automatic stage-stable deploy on push to master"
 
 on:
   workflow_dispatch: # allow running manually
