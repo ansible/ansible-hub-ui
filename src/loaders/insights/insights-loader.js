@@ -18,7 +18,6 @@ class App extends Component {
     super(props);
 
     this.state = {
-      user: null,
       activeUser: null,
       selectedRepo: DEFAULT_REPO,
       alerts: [],
@@ -36,7 +35,7 @@ class App extends Component {
     // time
     this.appNav = window.insights.chrome.on('APP_NAVIGATION', (event) => {
       // might be undefined early in the load, or may not happen at all
-      if (!event?.domEvent) {
+      if (!event?.domEvent?.href) {
         return;
       }
 
@@ -44,36 +43,23 @@ class App extends Component {
       // menu events don't have the /beta, converting
       const basename = this.props.basename.replace(/^\/beta\//, '/');
 
-      if (event.domEvent.href) {
-        // prod-beta
-        // domEvent: has the right href, always starts with /ansible/ansible-hub, no /beta prefix
-        // (navId: corresponds to the last url component, but not the same one, ansible-hub means /ansible/ansible-hub, partners means /ansible/ansible-hub/partners)
+      // domEvent: has the right href, always starts with /ansible/ansible-hub, no /beta prefix
+      // go to the href, relative to our *actual* basename (basename has no trailing /, so a path will start with / unless empty
+      const href = event.domEvent.href.replace(basename, '') || '/';
 
-        // go to the href, relative to our *actual* basename (basename has no trailing /, so a path will start with / unless empty
-        this.props.history.push(
-          event.domEvent.href.replace(basename, '') || '/',
-        );
-      } else {
-        // FIXME: may no longer be needed by the time this gets to prod-stable
-        // prod-stable
-        // (domEvent is a react event, no href (there is an absolute url in domEvent.target.href))
-        // navId: corresponds to the first url component after prefix, "" means /ansible/ansible-hub, partners means /ansible/ansible-hub/partners
-        this.props.history.push(`/${event.navId}`);
-      }
+      this.props.history.push(href);
     });
 
-    window.insights.chrome.auth
-      .getUser()
-      .then((user) => this.setState({ user: user }));
-    let promises = [];
-    promises.push(ActiveUserAPI.getActiveUser());
-    promises.push(SettingsAPI.get());
-    Promise.all(promises).then((results) => {
+    Promise.all([
+      ActiveUserAPI.getActiveUser(),
+      SettingsAPI.get(),
+      window.insights.chrome.auth.getUser(), // no output, just wait
+    ]).then(([{ data: activeUser }, { data: settings }]) =>
       this.setState({
-        activeUser: results[0].data,
-        settings: results[1].data,
-      });
-    });
+        activeUser,
+        settings,
+      }),
+    );
   }
 
   componentWillUnmount() {
@@ -120,7 +106,7 @@ class App extends Component {
     // Wait for the user data to load before any of the child components are
     // rendered. This will prevent API calls from happening
     // before the app can authenticate
-    if (!this.state.user || !this.state.activeUser) {
+    if (!this.state.activeUser) {
       return null;
     }
 
