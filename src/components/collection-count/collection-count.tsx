@@ -30,7 +30,7 @@ export class CollectionCount extends React.Component<IProps, IState> {
 
   render() {
     const { collectionCount, loading } = this.state;
-    return !loading ? <>{collectionCount}</> : <Spinner />;
+    return !loading ? <>{collectionCount}</> : <Spinner size='sm' />;
   }
 
   private getCollectionCount(repo) {
