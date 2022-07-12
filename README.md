@@ -40,16 +40,14 @@ We're using Github Actions for deployment.
 
 The Github Action invokes the [RedHatInsights/insights-frontend-builder-common//bootstrap.sh](https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh) script, which builds the local branch and pushes the results to [RedHatInsights/ansible-hub-ui-build](https://github.com/RedHatInsights/ansible-hub-ui-build/branches). There, a separate Jenkins process awaits.
 
-- any push to the `master` branch will deploy to `ansible-hub-ui-build` branches `ci-beta` and `qa-beta`
-- any push to the `master` branch will ALSO deploy to `ansible-hub-ui-build` branches `ci-stable` and `qa-stable`, when `.cloud-stage-cron.enabled` exists
+- any push to the `master` branch will deploy to `ansible-hub-ui-build` `qa-beta` branch
+- any push to the `master` branch will ALSO deploy to `ansible-hub-ui-build` `qa-stable` branch when `.cloud-stage-cron.enabled` exists
 - any push to the `prod-beta` branch will deploy to a `ansible-hub-ui-build` `prod-beta` branch
 - any push to the `prod-stable` branch will deploy to a `ansible-hub-ui-build` `prod-stable` branch
-- the `ansible-hub-ui-build` `master` branch is not used, as PRs against `master` end up in `ci-beta` and `qa-beta`
+- the `ansible-hub-ui-build` `master` branch is not used, as PRs against `master` end up in `qa-beta`
 
-- `ci-beta` builds end up on `ci.console.redhat.com/beta`
-- `ci-stable` builds end up on `ci.console.redhat.com`
-- `qa-beta` builds end up on `qa.console.redhat.com/beta`
-- `qa-stable` builds end up on `qa.console.redhat.com`
+- `qa-beta` builds end up on `console.stage.redhat.com/beta`
+- `qa-stable` builds end up on `console.stage.redhat.com`
 - `prod-beta` builds end up on `console.redhat.com/beta`
 - `prod-stable` builds end up on `console.redhat.com`
 
