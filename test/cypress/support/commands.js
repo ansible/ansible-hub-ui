@@ -270,77 +270,6 @@ Cypress.Commands.add('removeRolesFromGroup', {}, (groupName, roles) => {
   roles.forEach((role) => cy.removeRoleFromGroup(groupName, role));
 });
 
-/*
- * groupName: name of the group you want to add permissions to
- * permissions: array of {group, permissions}
- *   group: permission group, one of names from PERMISSIONS; namespaces | collections | users | groups | remotes | containers | registries
- *   permissions: array of HUMAN_PERMISSIONS values (of the right group) - eg. "View user"
- */
-// Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
-//   cy.intercept(
-//     'GET',
-//     Cypress.env('prefix') + '_ui/v1/groups/*/model-permissions/*',
-//   ).as('groups');
-//   cy.menuGo('User Access > Groups');
-//   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-//   cy.wait('@groups');
-//   cy.contains('button', 'Edit').click();
-//   permissions.forEach((permissionElement) => {
-//     permissionElement.permissions.forEach((permission) => {
-//       // closes previously open dropdowns
-//       cy.get('h1').click();
-//       cy.get(
-//         `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} [aria-label="Options menu"]`,
-//       ).click();
-//       cy.contains('button', permission).click();
-//     });
-//   });
-//   // need to click outside dropdown to make save button clickable
-//   cy.contains('Edit group permissions').click();
-//   cy.contains('button', 'Save').click();
-//   // wait for for update
-//   cy.contains('button', 'Edit');
-// });
-
-// Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
-//   cy.menuGo('User Access > Groups');
-//   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-//   cy.contains('button', 'Edit').click();
-//   permissions.forEach((permissionElement) => {
-//     if (permissionElement.permissions.length > 3) {
-//       // Make sure all permissions are visible
-//       cy.containsnear(
-//         `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `,
-//         'more',
-//       )
-//         .first()
-//         .click();
-//     }
-//     permissionElement.permissions.forEach((permission) => {
-//       cy.containsnear(
-//         `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `,
-//         permission,
-//       )
-//         .findnear('button')
-//         .first()
-//         .click();
-//     });
-//     // closes previously open dropdowns
-//     cy.get('h1').click();
-//   });
-//   cy.contains('button', 'Save').click();
-//   // wait for for update
-//   cy.contains('button', 'Edit');
-// });
-
-// Cypress.Commands.add('removeAllPermissions', {}, (groupName) => {
-//   cy.removePermissions(groupName, allPerms);
-// });
-
-// Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
-//   cy.addPermissions(groupName, allPerms);
-// });
-
 Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.menuGo('User Access > Groups');
   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
@@ -787,35 +716,6 @@ Cypress.Commands.add(
     );
   },
 );
-
-Cypress.Commands.add('addRolesToGroup', {}, (groupName, roles) => {
-  cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('groups');
-  cy.menuGo('User Access > Groups');
-  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.wait('@groups');
-  cy.get('[data-cy=add-roles]').click();
-
-  cy.get(
-    '[aria-label="Add roles content"] [aria-label="Items per page"]',
-  ).click();
-  cy.contains('100 per page').click();
-
-  roles.forEach((role) => {
-    cy.get(`[data-cy="RoleListTable-CheckboxRow-row-${role}"]`)
-      .find('input')
-      .click();
-  });
-
-  cy.get('.pf-c-wizard__footer > button').contains('Next').click();
-
-  roles.forEach((role) => {
-    cy.contains(role);
-  });
-
-  cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('roles');
-
-  cy.get('.pf-c-wizard__footer > button').contains('Add').click();
-});
 
 Cypress.Commands.add('deleteRole', {}, (role) => {
   cy.visit('/ui/roles/');

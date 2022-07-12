@@ -1,5 +1,3 @@
-import permissions from '../support/permissions';
-
 describe('Hub Group Management Tests', () => {
   before(() => {
     cy.deleteTestGroups();
@@ -38,33 +36,29 @@ describe('Hub Group Management Tests', () => {
     cy.deleteUser(userName);
   });
 
-  it('admin user can add/remove roles to/from a group', () => {
-    const groupName = 'testGroup';
-    const roleName = 'galaxy.all_perms_role';
+  it.skip('admin user can add/remove roles to/from a group', () => {
+    const name = 'testGroup';
+    const galaxyRoles = [
+      'galaxy.collection_admin',
+      'galaxy.execution_environment_admin',
+      'galaxy.namespace_owner',
+      'galaxy.publisher',
+      'galaxy.synclist_owner',
+    ];
 
-    cy.galaxykit('group create', groupName);
+    cy.galaxykit('group create', name);
 
-    cy.createRole(roleName, 'This role has all galaxy perms', permissions);
-    cy.addRolesToGroup(groupName, [roleName]);
+    cy.addRolesToGroup(name, galaxyRoles);
 
-    cy.contains(
-      `Role ${roleName} has been successfully added to ${groupName}.`,
-    );
+    galaxyRoles.forEach((role) => {
+      cy.contains(`Role ${role} has been successfully added to ${name}.`);
 
-    cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${roleName}"]`);
+      cy.get(`[data-cy="RoleListTable-ExpandableRow-row-${role}"]`);
+    });
 
-    cy.get(
-      `[data-cy="RoleListTable-ExpandableRow-row-${roleName}"] [data-cy="kebab-toggle"]`,
-    ).click();
-    cy.contains('Remove Role').click();
-    cy.get('[data-cy="DeleteModal"]')
-      .parent()
-      .get('.pf-c-button.pf-m-danger')
-      .contains('Delete')
-      .click();
-
+    cy.removeRolesFromGroup(name, galaxyRoles);
     cy.contains('There are currently no roles assigned to this group.');
 
-    cy.galaxykit('group delete', groupName);
+    cy.galaxykit('group delete', name);
   });
 });
