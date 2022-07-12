@@ -11,6 +11,7 @@ export { Breadcrumbs } from './patternfly-wrappers/breadcrumbs';
 export { CardListSwitcher } from './card-list-switcher/card-list-switcher';
 export { CollectionCard } from './cards/collection-card';
 export { CollectionContentList } from './collection-detail/collection-content-list';
+export { CollectionCount } from './collection-count/collection-count';
 export { CollectionHeader } from './headers/collection-header';
 export { CollectionInfo } from './collection-detail/collection-info';
 export { CollectionFilter } from './collection-list/collection-filter';

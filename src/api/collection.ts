@@ -64,6 +64,22 @@ export class API extends HubAPI {
     }));
   }
 
+  getPublishedCount(distributionPath: string) {
+    return this.http
+      .get(`v3/plugin/ansible/content/${distributionPath}/collections/index/`)
+      .then((result) => {
+        return result.data.meta.count;
+      });
+  }
+
+  getExcludesCount(distributionPath: string) {
+    return this.http
+      .get(`content/${distributionPath}/v3/excludes/`)
+      .then((result) => {
+        return result.data;
+      });
+  }
+
   setDeprecation(
     collection: CollectionListType,
     isDeprecated: boolean,

@@ -4,6 +4,7 @@ import * as React from 'react';
 import { DateComponent, EmptyStateNoData, SortTable, ClipboardCopy } from '..';
 import { Constants } from 'src/constants';
 import { getRepoUrl } from 'src/utilities';
+import { CollectionCount } from 'src/components';
 
 interface IProps {
   repositories: {
@@ -51,7 +52,7 @@ export class LocalRepositoryTable extends React.Component<IProps> {
           id: 'repository',
         },
         {
-          title: t`Content count`,
+          title: t`Collection count`,
           type: 'none',
           id: 'content',
         },
@@ -110,7 +111,9 @@ export class LocalRepositoryTable extends React.Component<IProps> {
       <tr key={distribution.name}>
         <td>{distribution.name}</td>
         <td>{distribution.repository.name}</td>
-        <td>{distribution.repository.content_count}</td>
+        <td>
+          <CollectionCount distributionPath={distribution.base_path} />
+        </td>
         {DEPLOYMENT_MODE ===
         Constants.INSIGHTS_DEPLOYMENT_MODE ? null : distribution.repository
             .pulp_last_updated ? (
