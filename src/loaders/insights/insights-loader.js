@@ -7,7 +7,7 @@ import { Alert } from '@patternfly/react-core';
 import { Routes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
-import { ActiveUserAPI, SettingsAPI } from 'src/api';
+import { ActiveUserAPI, FeatureFlagsAPI, SettingsAPI } from 'src/api';
 import { Paths } from 'src/paths';
 import { UIVersion } from 'src/components';
 
@@ -22,6 +22,7 @@ class App extends Component {
       selectedRepo: DEFAULT_REPO,
       alerts: [],
       settings: {},
+      featureFlags: {},
     };
   }
 
@@ -50,13 +51,26 @@ class App extends Component {
       this.props.history.push(href);
     });
 
+    const getFeatureFlags = FeatureFlagsAPI.get().then(
+      ({ data: featureFlags }) => ({
+        featureFlags,
+        alerts: (featureFlags?._messages || []).map((msg) => ({
+          variant: 'warning',
+          title: msg.split(':')[1],
+        })),
+      }),
+    );
+
     Promise.all([
       ActiveUserAPI.getActiveUser(),
       SettingsAPI.get(),
+      getFeatureFlags,
       window.insights.chrome.auth.getUser(), // no output, just wait
-    ]).then(([activeUser, { data: settings }]) =>
+    ]).then(([activeUser, { data: settings }, { alerts, featureFlags }]) =>
       this.setState({
         activeUser,
+        alerts,
+        featureFlags,
         settings,
       }),
     );
@@ -113,12 +127,13 @@ class App extends Component {
     return (
       <AppContext.Provider
         value={{
-          user: this.state.activeUser,
-          setUser: this.setActiveUser,
-          selectedRepo: this.state.selectedRepo,
           alerts: this.state.alerts,
+          featureFlags: this.state.featureFlags,
+          selectedRepo: this.state.selectedRepo,
           setAlerts: this.setAlerts,
+          setUser: this.setActiveUser,
           settings: this.state.settings,
+          user: this.state.activeUser,
         }}
       >
         <Alert

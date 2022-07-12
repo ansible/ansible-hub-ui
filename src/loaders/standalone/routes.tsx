@@ -97,38 +97,37 @@ class AuthHandler extends React.Component<
   componentDidMount() {
     // This component is mounted on every route change, so it's a good place
     // to check for an active user.
-    const { user, settings } = this.context;
-    if (!user || !settings) {
-      const promises = [];
-      promises.push(
-        FeatureFlagsAPI.get().then(({ data }) => {
-          // we need this even if ActiveUserAPI fails, otherwise isExternalAuth will always be false, breaking keycloak redirect
-          if ('_messages' in data) {
-            this.props.updateInitialData({
-              alerts: data._messages.map((msg) => ({
-                variant: 'warning',
-                title: msg.split(':')[1],
-              })),
-            });
-          }
-
-          this.props.updateInitialData({ featureFlags: data });
-        }),
-      );
-      promises.push(ActiveUserAPI.getUser());
-      promises.push(SettingsAPI.get());
-      Promise.all(promises)
-        .then((results) => {
-          this.props.updateInitialData(
-            {
-              user: results[1],
-              settings: results[2].data,
-            },
-            () => this.setState({ isLoading: false }),
-          );
-        })
-        .catch(() => this.setState({ isLoading: false }));
+    const { user, settings, featureFlags } = this.context;
+    if (user && settings && featureFlags) {
+      return;
     }
+
+    const getFeatureFlags = FeatureFlagsAPI.get().then(
+      ({ data: featureFlags }) => ({
+        featureFlags,
+        alerts: (featureFlags?._messages || []).map((msg) => ({
+          variant: 'warning',
+          title: msg.split(':')[1],
+        })),
+      }),
+    );
+
+    Promise.all([ActiveUserAPI.getUser(), SettingsAPI.get(), getFeatureFlags])
+      .then(([user, { data: settings }, { alerts, featureFlags }]) => {
+        this.props.updateInitialData({
+          alerts,
+          featureFlags,
+          settings,
+          user,
+        });
+      })
+      .catch(() => {
+        // we need this even if ActiveUserAPI fails, otherwise isExternalAuth will always be false, breaking keycloak redirect
+        return getFeatureFlags.then(({ alerts, featureFlags }) =>
+          this.props.updateInitialData({ alerts, featureFlags }),
+        );
+      })
+      .then(() => this.setState({ isLoading: false }));
   }
 
   render() {
