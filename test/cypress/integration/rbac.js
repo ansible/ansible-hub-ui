@@ -131,7 +131,9 @@ describe('RBAC test for user without permissions', () => {
     cy.contains('Add remote registry').should('not.exist');
 
     // can Change and Delete remote registry
-    cy.get('[data-cy="kebab-toggle"]').click();
+    cy.get(
+      '[data-cy="ExecutionEnvironmentRegistryList-row-docker"] [data-cy="kebab-toggle"]',
+    ).click();
     cy.contains('Edit').should('not.exist');
     cy.contains('Delete').should('not.exist');
 
