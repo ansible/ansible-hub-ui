@@ -3,7 +3,7 @@ name: "Deploy cloud.redhat.com"
 on:
   workflow_dispatch: # allow running manually
   push:
-    branches: [ "master", "master-stable", "prod-beta", "prod-stable" ]
+    branches: [ "master", "prod-beta", "prod-stable" ]
 
 concurrency:
   group: deploy-cloud-${{ github.ref }}

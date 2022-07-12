@@ -40,16 +40,14 @@ We're using Github Actions for deployment.
 
 The Github Action invokes the [RedHatInsights/insights-frontend-builder-common//bootstrap.sh](https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh) script, which builds the local branch and pushes the results to [RedHatInsights/ansible-hub-ui-build](https://github.com/RedHatInsights/ansible-hub-ui-build/branches). There, a separate Jenkins process awaits.
 
-- any push to the `master` branch will deploy to `ansible-hub-ui-build` branches `ci-beta` and `qa-beta`
-- any push to the `master-stable` branch will deploy to `ansible-hub-ui-build` branches `ci-stable` and `qa-stable`
+- any push to the `master` branch will deploy to `ansible-hub-ui-build` `qa-beta` branch
+- any push to the `master` branch will ALSO deploy to `ansible-hub-ui-build` `qa-stable` branch when `.cloud-stage-cron.enabled` exists
 - any push to the `prod-beta` branch will deploy to a `ansible-hub-ui-build` `prod-beta` branch
 - any push to the `prod-stable` branch will deploy to a `ansible-hub-ui-build` `prod-stable` branch
-- the `ansible-hub-ui-build` `master` branch is not used, as PRs against `master` end up in `ci-beta` and `qa-beta`
+- the `ansible-hub-ui-build` `master` branch is not used, as PRs against `master` end up in `qa-beta`
 
-- `ci-beta` builds end up on `ci.console.redhat.com/beta`
-- `ci-stable` builds end up on `ci.console.redhat.com`
-- `qa-beta` builds end up on `qa.console.redhat.com/beta`
-- `qa-stable` builds end up on `qa.console.redhat.com`
+- `qa-beta` builds end up on `console.stage.redhat.com/beta`
+- `qa-stable` builds end up on `console.stage.redhat.com`
 - `prod-beta` builds end up on `console.redhat.com/beta`
 - `prod-stable` builds end up on `console.redhat.com`
 
@@ -58,9 +56,8 @@ The Github Action invokes the [RedHatInsights/insights-frontend-builder-common//
 List of all workflows:
 
 - `backported-labels`: Add a backported-* label when a PR is backported to stable-*; on patchback merges
-- `cloud-stage-cron`: Deploy master to master-stable when enabled, trigger `deploy-cloud`; cron
-- `cloud-stage-disable`: Disable cron deploy from master; manual
-- `cloud-stage-enable`: Enable cron deploy from master; manual
+- `cloud-stage-disable`: Disable deploy-cloud from master to stage-stable (stage-beta always on); manual
+- `cloud-stage-enable`: Enable deploy-cloud from master to stage-stable (stage-beta always on); manual
 - `cypress`: Run Cypress integration tests; on PRs, pushes and cron
 - `deploy-cloud`: Deploy to c.r.c; when the relevant branch is updated
 - `dev-release`: Build and upload to github releases, update `dev` tag; when master is updated
@@ -71,8 +68,7 @@ List of all workflows:
 
 List by branches:
 
-- `master`: `backported-labels`, `cloud-stage-cron`, `cypress`, `deploy-cloud`, `dev-release`, `i18n`, `pr-checks`, `stable-release`, `update-manifest`
-- `master-stable`: `deploy-cloud`
+- `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `i18n`, `pr-checks`, `stable-release`, `update-manifest`
 - `prod-beta`: `deploy-cloud`
 - `prod-stable`: `deploy-cloud`
 - `stable-4.2`: `backported-labels`, `pr-checks`, `stable-release`
