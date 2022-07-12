@@ -32,6 +32,7 @@ interface IState {
 
 export class RepoSelector extends React.Component<IProps, IState> {
   static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -39,10 +40,6 @@ export class RepoSelector extends React.Component<IProps, IState> {
   }
 
   render() {
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      return null;
-    }
-
     const repoNames = Constants.REPOSITORYNAMES;
 
     return (
