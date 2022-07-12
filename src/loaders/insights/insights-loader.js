@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withRouter, matchPath } from 'react-router-dom';
@@ -137,7 +138,7 @@ class App extends Component {
         <Alert
           isInline
           variant='info'
-          title='The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections.'
+          title={t`The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections.`}
         />
         <Routes childProps={this.props} />
         <UIVersion />
