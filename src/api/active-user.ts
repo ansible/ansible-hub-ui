@@ -1,22 +1,11 @@
 import { Constants } from 'src/constants';
 import { HubAPI } from './hub';
+import { UserType } from './response-types/user';
 
 class API extends HubAPI {
   apiPath = this.getUIPath('me/');
 
-  getUser() {
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      // we don't care about entitlements stuff in the UI, so just
-      // return the user's identity
-      return window.insights.chrome.auth
-        .getUser()
-        .then((result) => result.identity);
-    } else if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      return this.getActiveUser();
-    }
-  }
-
-  getActiveUser() {
+  getUser(): Promise<UserType> {
     return this.http.get(this.apiPath).then((result) => result.data);
   }
 

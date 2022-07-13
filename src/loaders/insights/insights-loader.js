@@ -62,7 +62,7 @@ class App extends Component {
     );
 
     Promise.all([
-      ActiveUserAPI.getActiveUser(),
+      ActiveUserAPI.getUser(),
       SettingsAPI.get(),
       getFeatureFlags,
       window.insights.chrome.auth.getUser(), // no output, just wait
