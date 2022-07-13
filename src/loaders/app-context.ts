@@ -3,7 +3,7 @@ import { UserType, FeatureFlagsType, SettingsType } from 'src/api';
 import { AlertType } from 'src/components';
 
 export interface IAppContextType {
-  user: UserType;
+  user?: UserType;
   setUser: (user: UserType) => void;
   selectedRepo?: string;
   setRepo: (repo: string) => void;

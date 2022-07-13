@@ -6,14 +6,8 @@ import { Alert } from '@patternfly/react-core';
 import { Routes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
-import {
-  ActiveUserAPI,
-  FeatureFlagsAPI,
-  FeatureFlagsType,
-  SettingsAPI,
-  SettingsType,
-  UserType,
-} from 'src/api';
+import { loadContext } from '../load-context';
+import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { Paths } from 'src/paths';
 import { AlertType, UIVersion } from 'src/components';
 
@@ -31,7 +25,7 @@ interface IState {
   featureFlags: FeatureFlagsType;
   selectedRepo: string;
   settings?: SettingsType;
-  user: UserType;
+  user?: UserType;
 }
 
 class App extends Component<IProps, IState> {
@@ -74,28 +68,7 @@ class App extends Component<IProps, IState> {
       this.props.history.push(href);
     });
 
-    const getFeatureFlags = FeatureFlagsAPI.get().then(
-      ({ data: featureFlags }) => ({
-        featureFlags,
-        alerts: (featureFlags?._messages || []).map((msg) => ({
-          variant: 'warning',
-          title: msg.split(':')[1],
-        })),
-      }),
-    );
-
-    Promise.all([
-      ActiveUserAPI.getUser(),
-      SettingsAPI.get(),
-      getFeatureFlags,
-    ]).then(([user, { data: settings }, { alerts, featureFlags }]) =>
-      this.setState({
-        alerts,
-        featureFlags,
-        settings,
-        user,
-      }),
-    );
+    loadContext().then((data) => this.setState(data));
   }
 
   componentWillUnmount() {

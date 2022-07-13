@@ -34,16 +34,9 @@ import {
   TaskListView,
   TaskDetail,
 } from 'src/containers';
-import {
-  ActiveUserAPI,
-  FeatureFlagsAPI,
-  FeatureFlagsType,
-  SettingsAPI,
-  UserType,
-  SettingsType,
-} from 'src/api';
+import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AppContext } from '../app-context';
-
+import { loadContext } from '../load-context';
 import { Paths, formatPath } from 'src/paths';
 import { AlertType } from 'src/components';
 
@@ -102,31 +95,8 @@ class AuthHandler extends React.Component<
       return;
     }
 
-    const getFeatureFlags = FeatureFlagsAPI.get().then(
-      ({ data: featureFlags }) => ({
-        featureFlags,
-        alerts: (featureFlags?._messages || []).map((msg) => ({
-          variant: 'warning',
-          title: msg.split(':')[1],
-        })),
-      }),
-    );
-
-    Promise.all([ActiveUserAPI.getUser(), SettingsAPI.get(), getFeatureFlags])
-      .then(([user, { data: settings }, { alerts, featureFlags }]) => {
-        this.props.updateInitialData({
-          alerts,
-          featureFlags,
-          settings,
-          user,
-        });
-      })
-      .catch(() => {
-        // we need this even if ActiveUserAPI fails, otherwise isExternalAuth will always be false, breaking keycloak redirect
-        return getFeatureFlags.then(({ alerts, featureFlags }) =>
-          this.props.updateInitialData({ alerts, featureFlags }),
-        );
-      })
+    loadContext()
+      .then((data) => this.props.updateInitialData(data))
       .then(() => this.setState({ isLoading: false }));
   }
 
