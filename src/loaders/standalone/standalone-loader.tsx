@@ -450,14 +450,14 @@ class App extends React.Component<RouteComponentProps, IState> {
     return (
       <AppContext.Provider
         value={{
-          user: this.state.user,
-          setUser: this.setUser,
-          selectedRepo: this.state.selectedRepo,
-          setRepo: this.setRepo,
-          featureFlags: this.state.featureFlags,
           alerts: this.state.alerts,
+          featureFlags: this.state.featureFlags,
+          selectedRepo: this.state.selectedRepo,
           setAlerts: this.setAlerts,
+          setRepo: this.setRepo,
+          setUser: this.setUser,
           settings: this.state.settings,
+          user: this.state.user,
         }}
       >
         {component}
