@@ -37,8 +37,22 @@ interface Window {
         getUser: () => Promise<{
           identity: {
             account_number: string;
-            username: string;
-            groups: { id: number; name: string }[];
+            internal: {
+              account_id: number;
+              org_id: string;
+            };
+            org_id: string;
+            type?: string;
+            user: {
+              email: string;
+              first_name: string;
+              is_active?: boolean;
+              is_internal: boolean;
+              is_org_admin: boolean;
+              last_name: string;
+              locale?: string;
+              username: string;
+            };
           };
         }>;
       };
