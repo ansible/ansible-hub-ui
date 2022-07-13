@@ -27,11 +27,11 @@ interface IProps {
 }
 
 interface IState {
-  activeUser: UserType;
   alerts: AlertType[];
   featureFlags: FeatureFlagsType;
   selectedRepo: string;
   settings?: SettingsType;
+  user: UserType;
 }
 
 class App extends Component<IProps, IState> {
@@ -39,11 +39,11 @@ class App extends Component<IProps, IState> {
     super(props);
 
     this.state = {
-      activeUser: null,
       alerts: [],
       featureFlags: null,
       selectedRepo: DEFAULT_REPO,
       settings: null,
+      user: null,
     };
   }
 
@@ -88,12 +88,12 @@ class App extends Component<IProps, IState> {
       ActiveUserAPI.getUser(),
       SettingsAPI.get(),
       getFeatureFlags,
-    ]).then(([activeUser, { data: settings }, { alerts, featureFlags }]) =>
+    ]).then(([user, { data: settings }, { alerts, featureFlags }]) =>
       this.setState({
-        activeUser,
         alerts,
         featureFlags,
         settings,
+        user,
       }),
     );
   }
@@ -142,7 +142,7 @@ class App extends Component<IProps, IState> {
     // Wait for the user data to load before any of the child components are
     // rendered. This will prevent API calls from happening
     // before the app can authenticate
-    if (!this.state.activeUser) {
+    if (!this.state.user) {
       return null;
     }
 
@@ -154,9 +154,9 @@ class App extends Component<IProps, IState> {
           selectedRepo: this.state.selectedRepo,
           setAlerts: this.setAlerts,
           setRepo: this.setRepo,
-          setUser: this.setActiveUser,
+          setUser: this.setUser,
           settings: this.state.settings,
-          user: this.state.activeUser,
+          user: this.state.user,
         }}
       >
         <Alert
@@ -170,8 +170,8 @@ class App extends Component<IProps, IState> {
     );
   }
 
-  setActiveUser = (user) => {
-    this.setState({ activeUser: user });
+  setUser = (user) => {
+    this.setState({ user });
   };
 
   setAlerts = (alerts) => {
