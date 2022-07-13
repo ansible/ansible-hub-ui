@@ -65,7 +65,6 @@ class App extends Component {
       ActiveUserAPI.getUser(),
       SettingsAPI.get(),
       getFeatureFlags,
-      window.insights.chrome.auth.getUser(), // no output, just wait
     ]).then(([activeUser, { data: settings }, { alerts, featureFlags }]) =>
       this.setState({
         activeUser,
