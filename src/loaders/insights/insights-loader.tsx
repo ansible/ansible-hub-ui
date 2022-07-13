@@ -1,30 +1,53 @@
 import { t } from '@lingui/macro';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { withRouter, matchPath } from 'react-router-dom';
+import { RouteComponentProps, withRouter, matchPath } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Alert } from '@patternfly/react-core';
 import { Routes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
-import { ActiveUserAPI, FeatureFlagsAPI, SettingsAPI } from 'src/api';
+import {
+  ActiveUserAPI,
+  FeatureFlagsAPI,
+  FeatureFlagsType,
+  SettingsAPI,
+  SettingsType,
+  UserType,
+} from 'src/api';
 import { Paths } from 'src/paths';
-import { UIVersion } from 'src/components';
+import { AlertType, UIVersion } from 'src/components';
 
 const DEFAULT_REPO = 'published';
 
-class App extends Component {
+interface IProps {
+  basename: string;
+  history: RouteComponentProps['history'];
+  location: RouteComponentProps['location'];
+  match: RouteComponentProps['match'];
+}
+
+interface IState {
+  activeUser: UserType;
+  alerts: AlertType[];
+  featureFlags: FeatureFlagsType;
+  selectedRepo: string;
+  settings?: SettingsType;
+}
+
+class App extends Component<IProps, IState> {
   constructor(props) {
     super(props);
 
     this.state = {
       activeUser: null,
-      selectedRepo: DEFAULT_REPO,
       alerts: [],
-      settings: {},
-      featureFlags: {},
+      featureFlags: null,
+      selectedRepo: DEFAULT_REPO,
+      settings: null,
     };
   }
+
+  appNav: () => void;
 
   componentDidMount() {
     window.insights.chrome.init();
@@ -130,6 +153,7 @@ class App extends Component {
           featureFlags: this.state.featureFlags,
           selectedRepo: this.state.selectedRepo,
           setAlerts: this.setAlerts,
+          setRepo: this.setRepo,
           setUser: this.setActiveUser,
           settings: this.state.settings,
           user: this.state.activeUser,
@@ -159,15 +183,11 @@ class App extends Component {
       path: Paths.collectionByRepo,
     });
   };
-}
 
-App.propTypes = {
-  history: PropTypes.object,
-  basename: PropTypes.string.isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
-  }),
-};
+  setRepo = (_repo: string) => {
+    throw new Error('RepoSelector & setRepo only available in standalone');
+  };
+}
 
 /**
  * withRouter: https://reacttraining.com/react-router/web/api/withRouter
