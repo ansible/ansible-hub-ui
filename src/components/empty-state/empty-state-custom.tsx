@@ -25,7 +25,10 @@ export class EmptyStateCustom extends React.Component<IProps> {
 
   render() {
     return (
-      <EmptyState variant={EmptyStateVariant[this.props.variant]}>
+      <EmptyState
+        variant={EmptyStateVariant[this.props.variant]}
+        data-cy='EmptyState'
+      >
         <EmptyStateIcon icon={this.props.icon} />
         <Title headingLevel='h4' size='lg'>
           {this.props.title}

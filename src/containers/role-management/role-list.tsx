@@ -170,6 +170,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
             }
             deleteAction={() => this.deleteRole(roleToEdit)}
             title={t`Delete role?`}
+            data-cy='DeleteModal'
           >
             <Trans>
               <p>
@@ -366,6 +367,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                           }
                           colSpan={6}
                           rowIndex={i}
+                          data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
                         >
                           <td data-cy='name-field'>{role.name}</td>
                           <td>{role.description}</td>
@@ -490,7 +492,6 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
 
   private queryRoles = () => {
     const { params } = this.state;
-
     this.setState({ loading: true }, () => {
       RoleAPI.list(params)
         .then((result) => {
