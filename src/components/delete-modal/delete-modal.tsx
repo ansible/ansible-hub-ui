@@ -9,6 +9,7 @@ export interface IProps {
   isDisabled?: boolean;
   title: string;
   spinner?: boolean;
+  'data-cy'?: string;
 }
 
 export class DeleteModal extends React.Component<IProps> {
