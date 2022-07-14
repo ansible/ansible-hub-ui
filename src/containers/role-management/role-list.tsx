@@ -365,9 +365,9 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                               ))}
                             </>
                           }
+                          data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
                           colSpan={6}
                           rowIndex={i}
-                          data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
                         >
                           <td data-cy='name-field'>{role.name}</td>
                           <td>{role.description}</td>

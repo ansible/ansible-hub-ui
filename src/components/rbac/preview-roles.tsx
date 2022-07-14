@@ -36,7 +36,11 @@ export const PreviewRoles = ({ group, selectedRoles }: Props) => (
             {role?.description && `- ${role?.description}`}
             <Flex className='hub-permissions'>
               {role.permissions.map((permission) => (
-                <FlexItem key={permission} className='hub-permission'>
+                <FlexItem
+                  key={permission}
+                  className='hub-permission'
+                  data-cy={`HubPermission-${permission}`}
+                >
                   <Tooltip
                     content={
                       Constants.HUMAN_PERMISSIONS[permission] || permission
