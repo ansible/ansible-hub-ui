@@ -89,6 +89,13 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
     } else {
       this.queryTasks();
     }
+
+    if (!this.context.user?.model_permissions?.view_task) {
+      this.addAlert(
+        t`You do not have permission to view all tasks. Only tasks created by you are visible.`,
+        'info',
+      );
+    }
   }
 
   render() {
@@ -424,6 +431,19 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
             ],
           });
         });
+    });
+  }
+
+  private addAlert(title, variant, description?) {
+    this.setState({
+      alerts: [
+        ...this.state.alerts,
+        {
+          description,
+          title,
+          variant,
+        },
+      ],
     });
   }
 
