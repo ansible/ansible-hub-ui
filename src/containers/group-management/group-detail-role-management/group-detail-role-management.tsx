@@ -139,6 +139,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
       deleteAction={deleteRole}
       spinner={isRoleDeleting}
       isDisabled={isRoleDeleting}
+      data-cy='DeleteModal'
     >
       <Trans>
         You are about to remove <strong>{selectedDeleteRole?.role}</strong> from{' '}
