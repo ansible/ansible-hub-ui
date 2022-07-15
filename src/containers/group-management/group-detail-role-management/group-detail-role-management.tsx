@@ -168,7 +168,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
     });
   }
 
-  const addRoles = user.is_superuser && (
+  const addRoles = user?.model_permissions?.change_group && (
     <Button
       onClick={() => setShowAddRolesModal(true)}
       variant='primary'
