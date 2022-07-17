@@ -3294,8 +3294,8 @@ msgid "rejected"
 msgstr "拒否"
 
 #: src/components/headers/collection-header.tsx:302
-msgid "released {0}"
-msgstr "{0} のリリース"
+#~ msgid "released {0}"
+#~ msgstr "{0} のリリース"
 
 #: src/components/patternfly-wrappers/toolbar.tsx:84
 #~ msgid "search button"
@@ -3313,6 +3313,10 @@ msgstr "署名状態"
 msgid "tags"
 msgstr "タグ"
 
+#: src/components/headers/collection-header.tsx:302
+msgid "updated {0}"
+msgstr ""
+
 #: src/components/my-imports/import-console.tsx:142
 msgid "waiting for approval"
 msgstr "承認待ち"
@@ -3322,8 +3326,12 @@ msgid "waiting for import to finish"
 msgstr "インポートの完了を待機中"
 
 #: src/components/headers/collection-header.tsx:440
-msgid "{0} released {1}"
-msgstr "{0} を {1} にリリース"
+#~ msgid "{0} released {1}"
+#~ msgstr "{0} を {1} にリリース"
+
+#: src/components/headers/collection-header.tsx:440
+msgid "{0} updated {1}"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
 msgid "{0} was added"

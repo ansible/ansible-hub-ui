@@ -3296,8 +3296,8 @@ msgid "rejected"
 msgstr "afgewezen"
 
 #: src/components/headers/collection-header.tsx:302
-msgid "released {0}"
-msgstr "{0} vrijgegeven"
+#~ msgid "released {0}"
+#~ msgstr "{0} vrijgegeven"
 
 #: src/components/patternfly-wrappers/toolbar.tsx:84
 #~ msgid "search button"
@@ -3315,6 +3315,10 @@ msgstr "sign state"
 msgid "tags"
 msgstr "Tags"
 
+#: src/components/headers/collection-header.tsx:302
+msgid "updated {0}"
+msgstr ""
+
 #: src/components/my-imports/import-console.tsx:142
 msgid "waiting for approval"
 msgstr "wacht op goedkeuring"
@@ -3324,8 +3328,12 @@ msgid "waiting for import to finish"
 msgstr "wacht tot importeren is voltooid"
 
 #: src/components/headers/collection-header.tsx:440
-msgid "{0} released {1}"
-msgstr "{0} heeft {1} vrijgegeven"
+#~ msgid "{0} released {1}"
+#~ msgstr "{0} heeft {1} vrijgegeven"
+
+#: src/components/headers/collection-header.tsx:440
+msgid "{0} updated {1}"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
 msgid "{0} was added"
