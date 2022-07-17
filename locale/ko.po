@@ -239,7 +239,7 @@ msgstr "포함할 태그 추가"
 msgid "Add user"
 msgstr "사용자 추가"
 
-#: src/components/execution-environment/repository-form.tsx:396
+#: src/components/execution-environment/repository-form.tsx:388
 msgid ""
 "Adding groups provides access to all repositories in the\n"
 "\"{namespace}\" container namespace."
@@ -253,7 +253,7 @@ msgstr "모두"
 msgid "Approval"
 msgstr "승인"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:138
+#: src/containers/certification-dashboard/certification-dashboard.tsx:141
 msgid "Approval dashboard"
 msgstr "승인 대시보드"
 
@@ -261,14 +261,14 @@ msgstr "승인 대시보드"
 msgid "Approval status:"
 msgstr "승인 상태:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:422
-#: src/containers/certification-dashboard/certification-dashboard.tsx:455
+#: src/containers/certification-dashboard/certification-dashboard.tsx:433
+#: src/containers/certification-dashboard/certification-dashboard.tsx:466
 msgid "Approve"
 msgstr "승인"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:185
-#: src/containers/certification-dashboard/certification-dashboard.tsx:214
-#: src/containers/certification-dashboard/certification-dashboard.tsx:326
+#: src/containers/certification-dashboard/certification-dashboard.tsx:188
+#: src/containers/certification-dashboard/certification-dashboard.tsx:217
+#: src/containers/certification-dashboard/certification-dashboard.tsx:329
 msgid "Approved"
 msgstr "승인됨"
 
@@ -296,7 +296,7 @@ msgstr "CA 인증서"
 #~ msgid "CLI Configuration"
 #~ msgstr "CLI Configuration"
 
-#: src/components/repositories/local-repository-table.tsx:69
+#: src/components/repositories/local-repository-table.tsx:70
 #: src/containers/namespace-detail/namespace-detail.tsx:169
 msgid "CLI configuration"
 msgstr "CLI 구성"
@@ -337,11 +337,11 @@ msgid "Cannot delete until collections <0/>that depend on this collection <1/>ha
 msgstr "이 컬렉션 <0/>에 종속된 컬렉션<1/>이/가 삭제될 때까지 컬렉션을 삭제할 수 없습니다."
 
 #: src/components/headers/collection-header.tsx:697
-#: src/containers/certification-dashboard/certification-dashboard.tsx:537
+#: src/containers/certification-dashboard/certification-dashboard.tsx:548
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:599
+#: src/containers/certification-dashboard/certification-dashboard.tsx:610
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "컬렉션 \"{0} {1} v{2}\"에 대한 인증 상태가 성공적으로 업데이트되었습니다."
 
@@ -412,8 +412,8 @@ msgstr "작업 변경"
 msgid "Change user"
 msgstr "사용자 변경"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:613
-#: src/containers/certification-dashboard/certification-dashboard.tsx:633
+#: src/containers/certification-dashboard/certification-dashboard.tsx:624
+#: src/containers/certification-dashboard/certification-dashboard.tsx:644
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "컬렉션 \"{0} {1} v{2}\"에 대한 인증 상태 변경 사항을 저장할 수 없습니다."
 
@@ -464,7 +464,7 @@ msgid "Code"
 msgstr "코드"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:89
-#: src/containers/certification-dashboard/certification-dashboard.tsx:270
+#: src/containers/certification-dashboard/certification-dashboard.tsx:273
 msgid "Collection"
 msgstr "컬렉션"
 
@@ -507,7 +507,7 @@ msgstr "컬렉션 \"{name}\"을/를 다운로드할 수 없습니다."
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "컬렉션 \"{name}\"을/를 성공적으로 삭제했습니다."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:168
+#: src/containers/certification-dashboard/certification-dashboard.tsx:171
 msgid "Collection Name"
 msgstr "컬렉션 이름"
 
@@ -518,6 +518,14 @@ msgstr "컬렉션 네임스페이스"
 #: src/constants.tsx:65
 msgid "Collection Remotes"
 msgstr "원격 걸렉션"
+
+#: src/components/repositories/local-repository-table.tsx:55
+msgid "Collection count"
+msgstr ""
+
+#: src/components/collection-count/collection-count.tsx:64
+msgid "Collection count for \"{distributionPath}\" could not be displayed."
+msgstr ""
 
 #: src/containers/collection-detail/collection-dependencies.tsx:141
 #: src/containers/collection-detail/collection-dependencies.tsx:149
@@ -541,9 +549,9 @@ msgid "Collection upload canceled"
 msgstr "컬렉션 업로드 취소됨"
 
 #: src/components/headers/collection-header.tsx:338
-#: src/components/repositories/local-repository-table.tsx:84
+#: src/components/repositories/local-repository-table.tsx:85
 #: src/components/repositories/remote-repository-table.tsx:98
-#: src/containers/certification-dashboard/certification-dashboard.tsx:299
+#: src/containers/certification-dashboard/certification-dashboard.tsx:302
 msgid "Collection versions"
 msgstr "컬렉션 버전"
 
@@ -555,7 +563,7 @@ msgstr "컬렉션 버전"
 msgid "Collections"
 msgstr "컬렉션"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:258
+#: src/containers/certification-dashboard/certification-dashboard.tsx:261
 #: src/containers/namespace-detail/namespace-detail.tsx:304
 #: src/containers/search/search.tsx:211
 msgid "Collections will appear once uploaded"
@@ -646,8 +654,8 @@ msgid "Content"
 msgstr "콘텐츠"
 
 #: src/components/repositories/local-repository-table.tsx:54
-msgid "Content count"
-msgstr "콘텐츠 수"
+#~ msgid "Content count"
+#~ msgstr "콘텐츠 수"
 
 #: src/components/headers/collection-header.tsx:635
 msgid "Contents"
@@ -763,7 +771,7 @@ msgstr "더 이상 사용되지 않음"
 msgid "Date"
 msgstr "날짜"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:280
+#: src/containers/certification-dashboard/certification-dashboard.tsx:283
 msgid "Date created"
 msgstr "생성된 날짜"
 
@@ -950,7 +958,7 @@ msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:109
-#: src/components/execution-environment/repository-form.tsx:368
+#: src/components/execution-environment/repository-form.tsx:360
 #: src/components/namespace-form/namespace-form.tsx:152
 #: src/components/role-list-table/role-list-table.tsx:49
 #: src/containers/execution-environment-list/execution_environment_list.tsx:294
@@ -973,11 +981,11 @@ msgstr "세부 정보"
 msgid "Digest"
 msgstr "요약"
 
-#: src/components/repositories/local-repository-table.tsx:64
+#: src/components/repositories/local-repository-table.tsx:65
 msgid "Distribution URL"
 msgstr ""
 
-#: src/components/repositories/local-repository-table.tsx:44
+#: src/components/repositories/local-repository-table.tsx:45
 msgid "Distribution name"
 msgstr "배포 이름"
 
@@ -1439,8 +1447,8 @@ msgstr "그룹 목록"
 msgid "Groups"
 msgstr "그룹"
 
-#: src/components/execution-environment/repository-form.tsx:415
-#: src/components/execution-environment/repository-form.tsx:486
+#: src/components/execution-environment/repository-form.tsx:407
+#: src/components/execution-environment/repository-form.tsx:478
 #: src/components/namespace-form/namespace-form.tsx:124
 #: src/components/namespace-modal/namespace-modal.tsx:180
 #: src/components/user-form/user-form.tsx:298
@@ -1452,7 +1460,7 @@ msgstr "그룹 목록을 표시할 수 없습니다."
 msgid "Groups will appear once created"
 msgstr "그룹이 생성되면 나타납니다."
 
-#: src/components/execution-environment/repository-form.tsx:392
+#: src/components/execution-environment/repository-form.tsx:384
 msgid "Groups with access"
 msgstr "액세스 권한이 있는 그룹"
 
@@ -1557,7 +1565,7 @@ msgstr "설치"
 msgid "Instructions"
 msgstr "설명"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:634
+#: src/containers/certification-dashboard/certification-dashboard.tsx:645
 msgid "Internal Server Error"
 msgstr "내부 서버 오류"
 
@@ -1578,8 +1586,8 @@ msgid "Issue tracker"
 msgstr "문제 추적기"
 
 #: src/components/execution-environment/repository-form.tsx:359
-msgid "It does not make sense to include and exclude tags at the same time."
-msgstr "동시에 태그를 포함 및 제외하는 것은 바람직하지 않습니다."
+#~ msgid "It does not make sense to include and exclude tags at the same time."
+#~ msgstr "동시에 태그를 포함 및 제외하는 것은 바람직하지 않습니다."
 
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:224
 #~ msgid "It's safe to close this window. These tasks will finish in the"
@@ -1610,7 +1618,7 @@ msgstr "성"
 msgid "Last synced"
 msgstr "마지막으로 동기화됨"
 
-#: src/components/repositories/local-repository-table.tsx:59
+#: src/components/repositories/local-repository-table.tsx:60
 #: src/components/repositories/remote-repository-table.tsx:74
 #: src/containers/execution-environment/registry-list.tsx:332
 msgid "Last updated"
@@ -1761,8 +1769,8 @@ msgid "Name must not be empty."
 msgstr "이름은 비워 둘 수 없습니다."
 
 #: src/components/my-imports/import-list.tsx:225
-#: src/containers/certification-dashboard/certification-dashboard.tsx:164
-#: src/containers/certification-dashboard/certification-dashboard.tsx:265
+#: src/containers/certification-dashboard/certification-dashboard.tsx:167
+#: src/containers/certification-dashboard/certification-dashboard.tsx:268
 msgid "Namespace"
 msgstr "네임스페이스"
 
@@ -1805,16 +1813,16 @@ msgstr "네임스페이스 목록을 표시할 수 없습니다."
 msgid "Namespaces will appear once created"
 msgstr "생성된 네임스페이스가 나타납니다."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:181
-#: src/containers/certification-dashboard/certification-dashboard.tsx:215
+#: src/containers/certification-dashboard/certification-dashboard.tsx:184
+#: src/containers/certification-dashboard/certification-dashboard.tsx:218
 msgid "Needs Review"
 msgstr "검토 필요"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:350
+#: src/containers/certification-dashboard/certification-dashboard.tsx:353
 msgid "Needs review"
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:349
+#: src/containers/certification-dashboard/certification-dashboard.tsx:352
 msgid "Needs signature and review"
 msgstr ""
 
@@ -1877,11 +1885,11 @@ msgstr "아직 이미지가 없음"
 msgid "No imports"
 msgstr "가져오기 없음"
 
-#: src/components/repositories/local-repository-table.tsx:31
+#: src/components/repositories/local-repository-table.tsx:32
 msgid "No local repositories yet"
 msgstr "아직 로컬 리포지토리가 없음"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:257
+#: src/containers/certification-dashboard/certification-dashboard.tsx:260
 msgid "No managed collections yet"
 msgstr "아직 관리되는 컬렉션이 없습니다."
 
@@ -2297,13 +2305,13 @@ msgstr "레지스트리 URL"
 msgid "Registry sync status"
 msgstr "레지스트리 동기화 상태"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:472
+#: src/containers/certification-dashboard/certification-dashboard.tsx:483
 msgid "Reject"
 msgstr "거부"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:177
-#: src/containers/certification-dashboard/certification-dashboard.tsx:216
-#: src/containers/certification-dashboard/certification-dashboard.tsx:333
+#: src/containers/certification-dashboard/certification-dashboard.tsx:180
+#: src/containers/certification-dashboard/certification-dashboard.tsx:219
+#: src/containers/certification-dashboard/certification-dashboard.tsx:336
 msgid "Rejected"
 msgstr "거부됨"
 
@@ -2370,7 +2378,7 @@ msgstr "리포지토리"
 msgid "Repository Management"
 msgstr "리포지토리 관리"
 
-#: src/components/repositories/local-repository-table.tsx:49
+#: src/components/repositories/local-repository-table.tsx:50
 msgid "Repository name"
 msgstr "리포지터리 이름"
 
@@ -2547,8 +2555,8 @@ msgstr "모두 서명"
 msgid "Sign all collections"
 msgstr "모든 컬렉션에 서명"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:422
-#: src/containers/certification-dashboard/certification-dashboard.tsx:455
+#: src/containers/certification-dashboard/certification-dashboard.tsx:433
+#: src/containers/certification-dashboard/certification-dashboard.tsx:466
 msgid "Sign and approve"
 msgstr "서명 및 승인"
 
@@ -2577,7 +2585,7 @@ msgstr "서명"
 msgid "Signed"
 msgstr "서명됨"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:325
+#: src/containers/certification-dashboard/certification-dashboard.tsx:328
 msgid "Signed and approved"
 msgstr "서명 및 승인됨"
 
@@ -2627,9 +2635,9 @@ msgstr "상태"
 
 #: src/components/my-imports/import-list.tsx:85
 #: src/components/my-imports/import-list.tsx:120
-#: src/containers/certification-dashboard/certification-dashboard.tsx:172
-#: src/containers/certification-dashboard/certification-dashboard.tsx:220
-#: src/containers/certification-dashboard/certification-dashboard.tsx:285
+#: src/containers/certification-dashboard/certification-dashboard.tsx:175
+#: src/containers/certification-dashboard/certification-dashboard.tsx:223
+#: src/containers/certification-dashboard/certification-dashboard.tsx:288
 #: src/containers/task-management/task-list-view.tsx:151
 #: src/containers/task-management/task-list-view.tsx:197
 #: src/containers/task-management/task-list-view.tsx:246
@@ -2846,8 +2854,8 @@ msgid "The URL of an external content source."
 msgstr "외부 콘텐츠 소스의 URL입니다."
 
 #: src/components/headers/collection-header.tsx:708
-#: src/containers/certification-dashboard/certification-dashboard.tsx:545
 #: src/containers/certification-dashboard/certification-dashboard.tsx:556
+#: src/containers/certification-dashboard/certification-dashboard.tsx:567
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr ""
 
@@ -3044,7 +3052,7 @@ msgid "Upload new version"
 msgstr "새 버전 업로드"
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:33
-#: src/containers/certification-dashboard/certification-dashboard.tsx:407
+#: src/containers/certification-dashboard/certification-dashboard.tsx:418
 msgid "Upload signature"
 msgstr ""
 
@@ -3205,7 +3213,7 @@ msgid "Users will appear once created"
 msgstr "사용자가 생성되면 나타납니다."
 
 #: src/components/headers/collection-header.tsx:468
-#: src/containers/certification-dashboard/certification-dashboard.tsx:275
+#: src/containers/certification-dashboard/certification-dashboard.tsx:278
 msgid "Version"
 msgstr "버전"
 
@@ -3217,7 +3225,7 @@ msgstr "버전:"
 msgid "View Ansible distribution"
 msgstr "Ansible 배포 보기"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:441
+#: src/containers/certification-dashboard/certification-dashboard.tsx:452
 msgid "View Import Logs"
 msgstr "가져오기 로그 보기"
 
@@ -3403,8 +3411,8 @@ msgid "rejected"
 msgstr "거부됨"
 
 #: src/components/headers/collection-header.tsx:373
-msgid "released {0}"
-msgstr "게시됨 {0}"
+#~ msgid "released {0}"
+#~ msgstr "게시됨 {0}"
 
 #: src/components/patternfly-wrappers/toolbar.tsx:84
 #~ msgid "search button"
@@ -3422,6 +3430,10 @@ msgstr "서명 상태"
 msgid "tags"
 msgstr "태그"
 
+#: src/components/headers/collection-header.tsx:373
+msgid "updated {0}"
+msgstr ""
+
 #: src/components/my-imports/import-console.tsx:145
 msgid "waiting for approval"
 msgstr "승인 대기 중"
@@ -3431,8 +3443,12 @@ msgid "waiting for import to finish"
 msgstr "가져오기가 완료될 때까지 대기 중"
 
 #: src/components/headers/collection-header.tsx:511
-msgid "{0} released {1}"
-msgstr "{0}이/가 릴리스됨 {1}"
+#~ msgid "{0} released {1}"
+#~ msgstr "{0}이/가 릴리스됨 {1}"
+
+#: src/components/headers/collection-header.tsx:511
+msgid "{0} updated {1}"
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
 msgid "{0} was added"
