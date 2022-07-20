@@ -126,7 +126,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || this.context.user.is_anonymous) {
+    if (
+      !this.context.user ||
+      this.context.user.is_anonymous ||
+      !this.context.user.model_permissions.view_group
+    ) {
       this.setState({ unauthorised: true });
     } else {
       this.queryGroup();
