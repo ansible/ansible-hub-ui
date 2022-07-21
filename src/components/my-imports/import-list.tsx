@@ -12,15 +12,22 @@ import {
   AppliedFilters,
   CompoundFilter,
   LoadingPageSpinner,
+  APISearchTypeAhead,
 } from 'src/components';
-import { PulpStatus, NamespaceType, ImportListType } from 'src/api';
+import {
+  PulpStatus,
+  NamespaceType,
+  ImportListType,
+  MyNamespaceAPI,
+  NamespaceListType,
+} from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { filterIsSet } from 'src/utilities';
 import { Constants } from 'src/constants';
 import { DateComponent, EmptyStateNoData, EmptyStateFilter } from '..';
+import { createTippyWithPlugins } from '@patternfly/react-core/dist/esm/helpers/Popper/DeprecatedTippyTypes';
 
 interface IProps {
-  namespaces: NamespaceType[];
   importList: ImportListType[];
   selectedImport: ImportListType;
   numberOfResults: number;
@@ -39,6 +46,7 @@ interface IProps {
 interface IState {
   kwField: string;
   inputText: string;
+  namespaces: NamespaceType[];
 }
 
 export class ImportList extends React.Component<IProps, IState> {
@@ -48,7 +56,12 @@ export class ImportList extends React.Component<IProps, IState> {
     this.state = {
       kwField: '',
       inputText: '',
+      namespaces: [],
     };
+  }
+
+  componentDidMount() {
+    this.loadNamespaces(this.props.params.namespace);
   }
 
   render() {
@@ -56,7 +69,6 @@ export class ImportList extends React.Component<IProps, IState> {
       selectImport,
       importList,
       selectedImport,
-      namespaces,
       numberOfResults,
       params,
       updateParams,
@@ -65,7 +77,8 @@ export class ImportList extends React.Component<IProps, IState> {
 
     return (
       <div className='import-list'>
-        {this.renderNamespacePicker(namespaces)}
+        {/*this.renderNamespacePicker(namespaces)*/}
+        {this.renderApiSearchAhead()}
         <Toolbar>
           <CompoundFilter
             inputText={this.state.inputText}
@@ -215,6 +228,7 @@ export class ImportList extends React.Component<IProps, IState> {
     }
   }
 
+  /*
   private renderNamespacePicker(namespaces) {
     return (
       <div className='namespace-selector-wrapper'>
@@ -237,6 +251,63 @@ export class ImportList extends React.Component<IProps, IState> {
               <FormSelectOption key={ns.name} label={ns.name} value={ns.name} />
             ))}
           </FormSelect>
+        </div>
+      </div>
+    );
+  }*/
+
+  private loadNamespaces(namespace_filter) {
+    MyNamespaceAPI.list({ page_size: 100, keywords: namespace_filter })
+      .then((result) => {
+        this.setState({ namespaces: result.data.data });
+
+        //let namespaces = result.data.data;
+        //let namespace = this.props.params.namespace;
+
+        /*if (namespace && namespaces.filter((item) => item.name == namespace).length == 0)
+        {
+          debugger;
+            // append namespace in params to list, so we are able to select it
+            MyNamespaceAPI.list({ page_size: 100, keywords: namespace }).then((result) => {
+
+              // filter it again to make sure we are not selecting additional namespaces that 
+              // contains the substring of our namespace we want to search
+              let new_namespace = result.data.data.filter((item) => item.name == namespace);
+              new_namespace = new_namespace[0];
+
+              namespaces.push(new_namespace);
+              this.setState({namespaces : namespaces});
+            });
+        }else
+        {
+          this.setState({namespaces : namespaces});
+        }*/
+      })
+      .catch((result) => console.log(result));
+  }
+
+  private renderApiSearchAhead() {
+    return (
+      <div className='namespace-selector-wrapper'>
+        <div className='label'>{t`Namespace`}</div>
+        <div className='selector'>
+          <APISearchTypeAhead
+            loadResults={(name) => this.loadNamespaces(name)}
+            onSelect={(event, value) => {
+              const params = ParamHelper.setParam(
+                this.props.params,
+                'namespace',
+                value,
+              );
+              params['page'] = 1;
+              this.props.updateParams(params);
+            }}
+            placeholderText={t`Select a namespace`}
+            selections={this.state.namespaces.filter(
+              (namespace) => namespace.name == this.props.params.namespace,
+            )}
+            results={this.state.namespaces}
+          />
         </div>
       </div>
     );

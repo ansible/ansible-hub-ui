@@ -31,7 +31,6 @@ interface IState {
     keyword?: string;
     namespace?: string;
   };
-  namespaces: NamespaceType[];
   resultsCount: number;
   importDetailError: string;
   followLogs: boolean;
@@ -57,7 +56,6 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
       selectedImport: undefined,
       importList: [],
       params: params,
-      namespaces: [],
       selectedImportDetails: undefined,
       resultsCount: 0,
       importDetailError: '',
@@ -71,9 +69,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
   componentDidMount() {
     // Load namespaces, use the namespaces to query the import list,
     // use the import list to load the task details
-    this.loadNamespaces(() =>
-      this.loadImportList(() => this.loadTaskDetails()),
-    );
+    this.loadNamespace(() => this.loadImportList(() => this.loadTaskDetails()));
 
     this.polling = setInterval(() => {
       const { selectedImport, selectedImportDetails } = this.state;
@@ -98,7 +94,6 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
       selectedImport,
       importList,
       params,
-      namespaces,
       selectedImportDetails,
       resultsCount,
       loadingImports,
@@ -126,7 +121,6 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                   loading={loadingImports}
                   numberOfResults={resultsCount}
                   params={params}
-                  namespaces={namespaces}
                   selectImport={(sImport) => this.selectImport(sImport)}
                   updateParams={(params) => {
                     this.updateParams(params, () =>
@@ -211,8 +205,13 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
     });
   }
 
-  private loadNamespaces(callback?: () => void) {
-    MyNamespaceAPI.list({ page_size: 1000 })
+  private loadNamespace(callback?: () => void) {
+    if (!this.state.params.namespace) return;
+
+    MyNamespaceAPI.list({
+      page_size: 100,
+      keywords: this.state.params.namespace,
+    })
       .then((result) => {
         const namespaces = result.data.data;
         let selectedNS;
@@ -229,7 +228,6 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
 
         this.setState(
           {
-            namespaces: namespaces,
             params: {
               ...this.state.params,
               namespace: selectedNS.name,
