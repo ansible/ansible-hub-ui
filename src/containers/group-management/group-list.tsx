@@ -128,7 +128,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
     const { user } = this.context;
     const noData =
-      groups.length === 0 && !filterIsSet(params, ['name__icontains']);
+      groups.length === 0 && !filterIsSet(params, ['name__contains']);
 
     if (redirect) {
       return <Redirect push to={redirect} />;
@@ -181,7 +181,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                           params={params}
                           filterConfig={[
                             {
-                              id: 'name__icontains',
+                              id: 'name__contains',
                               title: t`Group name`,
                             },
                           ]}
@@ -222,7 +222,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
                   niceNames={{
-                    name__icontains: 'Group name',
+                    name__contains: 'Group name',
                   }}
                 />
               </div>
