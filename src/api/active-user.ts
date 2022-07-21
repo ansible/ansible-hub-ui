@@ -16,14 +16,11 @@ class API extends HubAPI {
   // insights has some asinine way of loading tokens that involves forcing the
   // page to refresh before loading the token that can't be done witha single
   // API request.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getToken(): Promise<any> {
+  getToken(): Promise<{ data: { token: string } }> {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      return new Promise((resolve, reject) => {
-        reject(
-          'Use window.insights.chrome.auth to get tokens for insights deployments',
-        );
-      });
+      return Promise.reject(
+        'Use window.insights.chrome.auth to get tokens for insights deployments',
+      );
     }
 
     return this.http.post('v3/auth/token/', {});
@@ -40,22 +37,14 @@ class API extends HubAPI {
   login(username, password) {
     const loginURL = this.getUIPath('auth/login/');
 
-    return new Promise((resolve, reject) => {
-      // Make a get request to the login endpoint to set CSRF tokens before making
-      // the authentication reqest
-      this.http
-        .get(loginURL)
-        .then(() => {
-          this.http
-            .post(loginURL, {
-              username: username,
-              password: password,
-            })
-            .then((response) => resolve(response))
-            .catch((err) => reject(err));
-        })
-        .catch((err) => reject(err));
-    });
+    // Make a get request to the login endpoint to set CSRF tokens before making
+    // the authentication reqest
+    return this.http.get(loginURL).then(() =>
+      this.http.post(loginURL, {
+        username,
+        password,
+      }),
+    );
   }
 }
 
