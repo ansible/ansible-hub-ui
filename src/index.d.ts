@@ -56,7 +56,7 @@ interface Window {
           };
         }>;
       };
-      identifyApp: (s: string) => void;
+      identifyApp: (s: string, title?: string) => void;
       init: () => void;
       on: (s: string, f: (event) => void) => () => void;
     };
