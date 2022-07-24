@@ -105,22 +105,17 @@ export class DeleteCollectionUtils {
   }
 
   public static deleteCollection({
-    state,
+    collection,
     setState,
     load,
     redirect,
     selectedRepo,
     addAlert,
   }) {
-    const { deleteCollection, collectionVersion } = state;
-
-    CollectionAPI.deleteCollection(selectedRepo, deleteCollection)
+    CollectionAPI.deleteCollection(selectedRepo, collection)
       .then((res) => {
         const taskId = parsePulpIDFromURL(res.data.task);
-
-        const name =
-          deleteCollection.name +
-          (collectionVersion ? 'v ' + collectionVersion : '');
+        const name = collection.name;
 
         waitForTask(taskId).then(() => {
           addAlert({
@@ -133,15 +128,10 @@ export class DeleteCollectionUtils {
             ),
           });
 
-          setState({
-            collectionVersion: null,
-            deleteCollection: null,
-            isDeletionPending: false,
-          });
-
           if (redirect) {
             setState({ redirect });
           }
+
           if (load) {
             load();
           }
@@ -149,17 +139,18 @@ export class DeleteCollectionUtils {
       })
       .catch((err) => {
         const { status, statusText } = err.response;
-        setState({
-          collectionVersion: null,
-          deleteCollection: null,
-          isDeletionPending: false,
-        });
 
         addAlert({
           variant: 'danger',
           title: t`Collection "${name}" could not be deleted.`,
           description: errorMessage(status, statusText),
         });
-      });
+      })
+      .finally(() =>
+        setState({
+          deleteCollection: null,
+          isDeletionPending: false,
+        }),
+      );
   }
 }

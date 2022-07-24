@@ -163,7 +163,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
           deleteAction={() =>
             this.setState({ isDeletionPending: true }, () =>
               DeleteCollectionUtils.deleteCollection({
-                state: this.state,
+                collection: deleteCollection,
                 setState: (state) => this.setState(state),
                 load: () => this.load(),
                 redirect: false,
