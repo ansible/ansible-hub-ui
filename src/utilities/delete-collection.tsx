@@ -20,16 +20,16 @@ export class DeleteCollectionUtils {
       });
   }
 
-  public static deleteMenuOption(
+  public static deleteMenuOption({
+    canDeleteCollection,
     noDependencies,
-    delete_collection_permission: boolean,
     onClick,
-  ) {
-    if (!delete_collection_permission) {
+  }) {
+    if (!canDeleteCollection) {
       return null;
     }
 
-    if (!noDependencies) {
+    if (noDependencies === false) {
       return (
         <Tooltip
           key='delete-collection-disabled'
@@ -50,7 +50,7 @@ export class DeleteCollectionUtils {
     return (
       <DropdownItem
         key='delete-collection-enabled'
-        onClick={() => onClick()}
+        onClick={onClick}
         data-cy='delete-collection-dropdown'
       >
         {t`Delete entire collection`}
@@ -58,45 +58,49 @@ export class DeleteCollectionUtils {
     );
   }
 
-  public static tryOpenDeleteModalWithConfirm(state, setState, collection) {
+  public static tryOpenDeleteModalWithConfirm({
+    addAlert,
+    setState,
+    collection,
+  }) {
     DeleteCollectionUtils.getUsedbyDependencies(collection)
       .then((noDependencies) =>
-        DeleteCollectionUtils.openDeleteModalWithConfirm(
-          state,
+        DeleteCollectionUtils.openDeleteModalWithConfirm({
+          addAlert,
           setState,
           noDependencies,
           collection,
-        ),
+        }),
       )
-      .catch((alert) => setState({ alerts: [...state.alerts, alert] }));
+      .catch((alert) => addAlert(alert));
   }
 
-  public static openDeleteModalWithConfirm(
-    state,
+  private static openDeleteModalWithConfirm({
+    addAlert,
     setState,
     noDependencies,
     collection,
-  ) {
+  }) {
     if (noDependencies) {
       setState({
         deleteCollection: collection,
         confirmDelete: false,
       });
     } else {
+      addAlert({
+        title: (
+          <Trans>
+            Cannot delete until collections <br />
+            that depend on this collection <br />
+            have been deleted.
+          </Trans>
+        ),
+        variant: 'warning',
+      });
+
       setState({
-        alerts: [
-          ...state.alerts,
-          {
-            title: (
-              <Trans>
-                Cannot delete until collections <br />
-                that depend on this collection <br />
-                have been deleted.
-              </Trans>
-            ),
-            variant: 'warning',
-          },
-        ],
+        deleteCollection: collection,
+        confirmDelete: false,
       });
     }
   }

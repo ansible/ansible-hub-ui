@@ -758,6 +758,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     this.setState({ isOpenNamespaceModal: false, confirmDelete: false });
   };
 
+  private addAlert(alert: AlertType) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
+  }
+
   get closeAlert() {
     return closeAlertMixin('alerts');
   }
@@ -773,16 +779,17 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         </Button>
         <StatefulDropdown
           items={[
-            DeleteCollectionUtils.deleteMenuOption(
-              true,
-              this.context.user.model_permissions.delete_collection,
-              () =>
-                DeleteCollectionUtils.tryOpenDeleteModalWithConfirm(
-                  this.state,
-                  (state) => this.setState(state),
+            DeleteCollectionUtils.deleteMenuOption({
+              canDeleteCollection:
+                this.context.user.model_permissions.delete_collection,
+              noDependencies: null,
+              onClick: () =>
+                DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
+                  addAlert: (alert) => this.addAlert(alert),
+                  setState: (state) => this.setState(state),
                   collection,
-                ),
-            ),
+                }),
+            }),
             <DropdownItem
               onClick={() =>
                 this.handleCollectionAction(collection.id, 'deprecate')

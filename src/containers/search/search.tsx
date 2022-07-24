@@ -115,6 +115,12 @@ class Search extends React.Component<RouteComponentProps, IState> {
     }
   }
 
+  private addAlert(alert: AlertType) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
+  }
+
   private get closeAlert() {
     return closeAlertMixin('alerts');
   }
@@ -360,25 +366,25 @@ class Search extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderMenu(list, collection) {
-    const menuItems = [];
-    menuItems.push(
-      DeleteCollectionUtils.deleteMenuOption(
-        true,
-        this.context.user.model_permissions.delete_collection,
-        () =>
-          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm(
-            this.state,
-            (state) => this.setState(state),
+    const menuItems = [
+      DeleteCollectionUtils.deleteMenuOption({
+        canDeleteCollection:
+          this.context.user.model_permissions.delete_collection,
+        noDependencies: null,
+        onClick: () =>
+          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
+            addAlert: (alert) => this.addAlert(alert),
+            setState: (state) => this.setState(state),
             collection,
-          ),
-      ),
+          }),
+      }),
       <DropdownItem
         onClick={() => this.handleControlClick(collection)}
         key='deprecate'
       >
         {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
       </DropdownItem>,
-    );
+    ];
 
     if (!list) {
       menuItems.push(

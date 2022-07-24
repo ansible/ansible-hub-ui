@@ -211,11 +211,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const canSign = canSignNS(this.context, namespace);
 
     const dropdownItems = [
-      DeleteCollectionUtils.deleteMenuOption(
+      DeleteCollectionUtils.deleteMenuOption({
+        canDeleteCollection:
+          this.context.user.model_permissions.delete_collection,
         noDependencies,
-        this.context.user.model_permissions.delete_collection,
-        () => this.openDeleteModalWithConfirm(),
-      ),
+        onClick: () => this.openDeleteModalWithConfirm(),
+      }),
       this.context.user.model_permissions.delete_collection && (
         <DropdownItem
           data-cy='delete-version-dropdown'
