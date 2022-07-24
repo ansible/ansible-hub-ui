@@ -130,11 +130,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    DeleteCollectionUtils.getUsedbyDependencies(
-      this.props.collection,
-      (data) => this.setState({ noDependencies: data }),
-      (data) => this.setState({ alerts: [...this.state.alerts, data] }),
-    );
+    const { collection } = this.props;
+    DeleteCollectionUtils.getUsedbyDependencies(collection)
+      .then((noDependencies) => this.setState({ noDependencies }))
+      .catch((alert) => this.addAlert(alert));
   }
 
   render() {
@@ -964,6 +963,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   private closeModal = () => {
     this.setState({ deleteCollection: null });
   };
+
+  private addAlert(alert: AlertType) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
+  }
 
   get closeAlert() {
     return closeAlertMixin('alerts');

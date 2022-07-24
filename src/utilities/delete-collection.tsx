@@ -10,17 +10,15 @@ import { Text, DropdownItem, Checkbox, Tooltip } from '@patternfly/react-core';
 import { DeleteModal } from 'src/components';
 
 export class DeleteCollectionUtils {
-  public static getUsedbyDependencies(collection, setDependencies, setAlert) {
+  public static getUsedbyDependencies(collection) {
     const { name, namespace } = collection;
-    CollectionAPI.getUsedDependenciesByCollection(namespace.name, name)
-      .then(({ data }) => {
-        setDependencies(!data.data.length);
-      })
+    return CollectionAPI.getUsedDependenciesByCollection(namespace.name, name)
+      .then(({ data }) => data.data.length === 0)
       .catch((err) => {
         const { status, statusText } = err.response;
-        setAlert({
-          variant: 'danger',
+        return Promise.reject({
           title: t`Dependencies for collection "${name}" could not be displayed.`,
+          variant: 'danger',
           description: errorMessage(status, statusText),
         });
       });
@@ -129,17 +127,16 @@ export class DeleteCollectionUtils {
   }
 
   public static tryOpenDeleteModalWithConfirm(state, setState, collection) {
-    DeleteCollectionUtils.getUsedbyDependencies(
-      collection,
-      (noDependencies) =>
+    DeleteCollectionUtils.getUsedbyDependencies(collection)
+      .then((noDependencies) =>
         DeleteCollectionUtils.openDeleteModalWithConfirm(
           state,
           setState,
           noDependencies,
           collection,
         ),
-      (alerts) => setState({ alerts: [...state.alerts, alerts] }),
-    );
+      )
+      .catch((alert) => setState({ alerts: [...state.alerts, alert] }));
   }
 
   public static openDeleteModalWithConfirm(
