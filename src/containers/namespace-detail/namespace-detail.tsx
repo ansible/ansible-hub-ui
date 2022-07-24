@@ -238,16 +238,16 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           setConfirmDelete={(confirmDelete) => this.setState({ confirmDelete })}
           cancelAction={() => this.setState({ deleteCollection: null })}
           deleteAction={() =>
-            this.setState({ isDeletionPending: true }, () => {
-              DeleteCollectionUtils.deleteCollection(
-                this.state,
-                (state) => this.setState(state),
-                () => this.load(),
-                false,
-                this.context.selectedRepo,
-                (alert) => this.setState({ alerts: [...alerts, alert] }),
-              );
-            })
+            this.setState({ isDeletionPending: true }, () =>
+              DeleteCollectionUtils.deleteCollection({
+                state: this.state,
+                setState: (state) => this.setState(state),
+                load: () => this.load(),
+                redirect: false,
+                selectedRepo: this.context.selectedRepo,
+                addAlert: (alert) => this.addAlert(alert),
+              }),
+            )
           }
         />
         {isOpenNamespaceModal && (

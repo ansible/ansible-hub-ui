@@ -2,7 +2,6 @@ import { t, Trans } from '@lingui/macro';
 import React from 'react';
 import { DropdownItem, Tooltip } from '@patternfly/react-core';
 import { CollectionAPI } from 'src/api';
-import { Paths, formatPath } from 'src/paths';
 import { errorMessage, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 
 export class DeleteCollectionUtils {
@@ -105,14 +104,14 @@ export class DeleteCollectionUtils {
     }
   }
 
-  public static deleteCollection(
+  public static deleteCollection({
     state,
     setState,
     load,
     redirect,
     selectedRepo,
     addAlert,
-  ) {
+  }) {
     const { deleteCollection, collectionVersion } = state;
 
     CollectionAPI.deleteCollection(selectedRepo, deleteCollection)
@@ -141,16 +140,10 @@ export class DeleteCollectionUtils {
           });
 
           if (redirect) {
-            setState({
-              redirect: formatPath(Paths.namespaceByRepo, {
-                repo: selectedRepo,
-                namespace: deleteCollection.namespace.name,
-              }),
-            });
-          } else {
-            if (load) {
-              load();
-            }
+            setState({ redirect });
+          }
+          if (load) {
+            load();
           }
         });
       })

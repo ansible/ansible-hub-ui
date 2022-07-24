@@ -374,15 +374,18 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             this.setState({ isDeletionPending: true }, () => {
               collectionVersion
                 ? this.deleteCollectionVersion(collectionVersion)
-                : DeleteCollectionUtils.deleteCollection(
-                    this.state,
-                    (state) => this.setState(state),
-                    null,
-                    true,
-                    this.context.selectedRepo,
-                    (alert) =>
+                : DeleteCollectionUtils.deleteCollection({
+                    state: this.state,
+                    setState: (state) => this.setState(state),
+                    load: null,
+                    redirect: formatPath(Paths.namespaceByRepo, {
+                      repo: this.context.selectedRepo,
+                      namespace: deleteCollection.namespace.name,
+                    }),
+                    selectedRepo: this.context.selectedRepo,
+                    addAlert: (alert) =>
                       this.context.setAlerts([...this.state.alerts, alert]),
-                  );
+                  });
             })
           }
         />
