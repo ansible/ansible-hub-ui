@@ -367,6 +367,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           deleteCollection={deleteCollection}
           isDeletionPending={isDeletionPending}
           confirmDelete={confirmDelete}
+          setConfirmDelete={(confirmDelete) => this.setState({ confirmDelete })}
           collectionVersion={collectionVersion}
           cancelAction={() => this.setState({ deleteCollection: null })}
           deleteAction={() =>
@@ -384,7 +385,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   );
             })
           }
-          onChange={(val) => this.setState({ confirmDelete: val })}
         />
         <BaseHeader
           className={className}

@@ -152,7 +152,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
           deleteCollection={deleteCollection}
           isDeletionPending={isDeletionPending}
           confirmDelete={confirmDelete}
-          collectionVersion={null}
+          setConfirmDelete={(confirmDelete) => this.setState({ confirmDelete })}
           cancelAction={() => this.setState({ deleteCollection: null })}
           deleteAction={() =>
             this.setState({ isDeletionPending: true }, () => {
@@ -167,7 +167,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
               );
             })
           }
-          onChange={(val) => this.setState({ confirmDelete: val })}
         />
 
         {showImportModal && (

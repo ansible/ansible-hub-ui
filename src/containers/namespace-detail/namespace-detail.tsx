@@ -235,7 +235,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           deleteCollection={deleteCollection}
           isDeletionPending={isDeletionPending}
           confirmDelete={confirmDelete}
-          collectionVersion={null}
+          setConfirmDelete={(confirmDelete) => this.setState({ confirmDelete })}
           cancelAction={() => this.setState({ deleteCollection: null })}
           deleteAction={() =>
             this.setState({ isDeletionPending: true }, () => {
@@ -249,7 +249,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
               );
             })
           }
-          onChange={(val) => this.setState({ confirmDelete: val })}
         />
         {isOpenNamespaceModal && (
           <DeleteModal
