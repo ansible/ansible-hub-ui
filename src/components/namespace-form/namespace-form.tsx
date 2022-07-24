@@ -23,7 +23,6 @@ import { errorMessage, ErrorMessagesType } from 'src/utilities';
 interface IProps {
   namespace: NamespaceType;
   errorMessages: ErrorMessagesType;
-  userId: string;
 
   updateNamespace: (namespace) => void;
 }

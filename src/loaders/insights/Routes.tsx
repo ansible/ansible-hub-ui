@@ -4,130 +4,148 @@ import PropTypes from 'prop-types';
 import { Paths } from 'src/paths';
 import { LoadingPageWithHeader } from 'src/components';
 
-const EditNamespace = lazy(() =>
-  import(
-    /* webpackChunkName: "namespace_detail" */
-    '../../containers/edit-namespace/edit-namespace'
-  ),
+const EditNamespace = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "namespace_detail" */
+      '../../containers/edit-namespace/edit-namespace'
+    ),
 );
 
-const CollectionDetail = lazy(() =>
-  import(
-    /* webpackChunkName: "collection_detail" */
-    '../../containers/collection-detail/collection-detail'
-  ),
+const CollectionDetail = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "collection_detail" */
+      '../../containers/collection-detail/collection-detail'
+    ),
 );
 
-const CollectionContent = lazy(() =>
-  import(
-    /* webpackChunkName: "collection_detail" */
-    '../../containers/collection-detail/collection-content'
-  ),
+const CollectionContent = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "collection_detail" */
+      '../../containers/collection-detail/collection-content'
+    ),
 );
 
-const CollectionDocs = lazy(() =>
-  import(
-    /* webpackChunkName: "collection_detail" */
-    '../../containers/collection-detail/collection-docs'
-  ),
+const CollectionDocs = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "collection_detail" */
+      '../../containers/collection-detail/collection-docs'
+    ),
 );
 
-const CollectionImportLog = lazy(() =>
-  import(
-    /* webpackChunkName: "collection_detail" */
-    '../../containers/collection-detail/collection-import-log'
-  ),
+const CollectionImportLog = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "collection_detail" */
+      '../../containers/collection-detail/collection-import-log'
+    ),
 );
 
-const CollectionDependencies = lazy(() =>
-  import(
-    /* webpackChunkName: "collection_detail" */
-    '../../containers/collection-detail/collection-dependencies'
-  ),
+const CollectionDependencies = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "collection_detail" */
+      '../../containers/collection-detail/collection-dependencies'
+    ),
 );
 
-const NotFound = lazy(() =>
-  import(
-    /* webpackChunkName: "not_found" */
-    '../../containers/not-found/not-found'
-  ),
+const NotFound = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "not_found" */
+      '../../containers/not-found/not-found'
+    ),
 );
 
-const MyNamespaces = lazy(() =>
-  import(
-    /* webpackChunkName: "namespace_list" */
-    '../../containers/namespace-list/my-namespaces'
-  ),
+const MyNamespaces = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "namespace_list" */
+      '../../containers/namespace-list/my-namespaces'
+    ),
 );
 
-const ManageNamespace = lazy(() =>
-  import(
-    /* webpackChunkName: "namespace_detail" */
-    '../../containers/namespace-detail/namespace-detail'
-  ),
+const ManageNamespace = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "namespace_detail" */
+      '../../containers/namespace-detail/namespace-detail'
+    ),
 );
 
-const PartnerDetail = lazy(() =>
-  import(
-    /* webpackChunkName: "namespace_detail" */
-    '../../containers/namespace-detail/namespace-detail'
-  ),
+const PartnerDetail = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "namespace_detail" */
+      '../../containers/namespace-detail/namespace-detail'
+    ),
 );
 
-const Partners = lazy(() =>
-  import(
-    /* webpackChunkName: "namespace_list" */
-    '../../containers/namespace-list/' + NAMESPACE_TERM
-  ),
+const Partners = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "namespace_list" */
+      '../../containers/namespace-list/' + NAMESPACE_TERM
+    ),
 );
 
-const MyImports = lazy(() =>
-  import(
-    /* webpackChunkName: "my_imports" */
-    '../../containers/my-imports/my-imports'
-  ),
+const MyImports = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "my_imports" */
+      '../../containers/my-imports/my-imports'
+    ),
 );
 
-const Search = lazy(() =>
-  import(
-    /* webpackChunkName: "search" */
-    '../../containers/search/search'
-  ),
+const Search = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "search" */
+      '../../containers/search/search'
+    ),
 );
 
-const TokenPage = lazy(() =>
-  import(
-    /* webpackChunkName: "settings" */
-    '../../containers/token/token-insights'
-  ),
+const TokenPage = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "settings" */
+      '../../containers/token/token-insights'
+    ),
 );
 
-const TaskListView = lazy(() =>
-  import(
-    /* webpackChunkName: "settings" */
-    '../../containers/task-management/task-list-view'
-  ),
+const TaskListView = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "settings" */
+      '../../containers/task-management/task-list-view'
+    ),
 );
 
-const TaskDetail = lazy(() =>
-  import(
-    /* webpackChunkName: "settings" */
-    '../../containers/task-management/task_detail'
-  ),
+const TaskDetail = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "settings" */
+      '../../containers/task-management/task_detail'
+    ),
 );
 
-const CertificationDashboard = lazy(() =>
-  import(
-    /* webpackChunkName: "settings" */
-    '../../containers/certification-dashboard/certification-dashboard'
-  ),
+const CertificationDashboard = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "settings" */
+      '../../containers/certification-dashboard/certification-dashboard'
+    ),
 );
 
-const Repository = lazy(() =>
-  import(
-    /* webpackChunkName: "repository-list" */
-    '../../containers/repositories/repository-list'
-  ),
+const Repository = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "repository-list" */
+      '../../containers/repositories/repository-list'
+    ),
 );
 
 /**

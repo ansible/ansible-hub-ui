@@ -47,3 +47,10 @@ body,
 #root {
   height: 100%;
 }
+
+// insights mode Sidenav/Navigation overrides this for all navitems, restoring in main
+.pf-c-page__main {
+  .pf-c-nav__list > .pf-c-nav__item:not(:first-child) {
+    border-top: 0;
+  }
+}

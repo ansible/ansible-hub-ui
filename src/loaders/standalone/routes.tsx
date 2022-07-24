@@ -34,16 +34,9 @@ import {
   TaskListView,
   TaskDetail,
 } from 'src/containers';
-import {
-  ActiveUserAPI,
-  FeatureFlagsAPI,
-  FeatureFlagsType,
-  SettingsAPI,
-  UserType,
-  SettingsType,
-} from 'src/api';
+import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AppContext } from '../app-context';
-
+import { loadContext } from '../load-context';
 import { Paths, formatPath } from 'src/paths';
 import { AlertType } from 'src/components';
 
@@ -97,38 +90,14 @@ class AuthHandler extends React.Component<
   componentDidMount() {
     // This component is mounted on every route change, so it's a good place
     // to check for an active user.
-    const { user, settings } = this.context;
-    if (!user || !settings) {
-      const promises = [];
-      promises.push(
-        FeatureFlagsAPI.get().then(({ data }) => {
-          // we need this even if ActiveUserAPI fails, otherwise isExternalAuth will always be false, breaking keycloak redirect
-          if ('_messages' in data) {
-            this.props.updateInitialData({
-              alerts: data._messages.map((msg) => ({
-                variant: 'warning',
-                title: msg.split(':')[1],
-              })),
-            });
-          }
-
-          this.props.updateInitialData({ featureFlags: data });
-        }),
-      );
-      promises.push(ActiveUserAPI.getUser());
-      promises.push(SettingsAPI.get());
-      Promise.all(promises)
-        .then((results) => {
-          this.props.updateInitialData(
-            {
-              user: results[1],
-              settings: results[2].data,
-            },
-            () => this.setState({ isLoading: false }),
-          );
-        })
-        .catch(() => this.setState({ isLoading: false }));
+    const { user, settings, featureFlags } = this.context;
+    if (user && settings && featureFlags) {
+      return;
     }
+
+    loadContext()
+      .then((data) => this.props.updateInitialData(data))
+      .then(() => this.setState({ isLoading: false }));
   }
 
   render() {

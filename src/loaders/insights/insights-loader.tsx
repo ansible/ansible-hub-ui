@@ -1,41 +1,58 @@
-import PropTypes from 'prop-types';
+import { t } from '@lingui/macro';
 import React, { Component } from 'react';
-import { withRouter, matchPath } from 'react-router-dom';
+import { RouteComponentProps, withRouter, matchPath } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Alert } from '@patternfly/react-core';
 import { Routes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
-import { ActiveUserAPI, SettingsAPI } from 'src/api';
+import { loadContext } from '../load-context';
+import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { Paths } from 'src/paths';
-import { UIVersion } from 'src/components';
+import { AlertType, UIVersion } from 'src/components';
 
 const DEFAULT_REPO = 'published';
 
-class App extends Component {
+interface IProps {
+  basename: string;
+  history: RouteComponentProps['history'];
+  location: RouteComponentProps['location'];
+  match: RouteComponentProps['match'];
+}
+
+interface IState {
+  alerts: AlertType[];
+  featureFlags: FeatureFlagsType;
+  selectedRepo: string;
+  settings?: SettingsType;
+  user?: UserType;
+}
+
+class App extends Component<IProps, IState> {
   constructor(props) {
     super(props);
 
     this.state = {
-      user: null,
-      activeUser: null,
-      selectedRepo: DEFAULT_REPO,
       alerts: [],
-      settings: {},
+      featureFlags: null,
+      selectedRepo: DEFAULT_REPO,
+      settings: null,
+      user: null,
     };
   }
 
+  appNav: () => void;
+
   componentDidMount() {
     window.insights.chrome.init();
-    window.insights.chrome.identifyApp('automation-hub');
-    document.title = APPLICATION_NAME; // change window title from automationHub
+    window.insights.chrome.identifyApp('automation-hub', APPLICATION_NAME);
 
     // This listens for insights navigation events, so this will fire
     // when items in the nav are clicked or the app is loaded for the first
     // time
     this.appNav = window.insights.chrome.on('APP_NAVIGATION', (event) => {
       // might be undefined early in the load, or may not happen at all
-      if (!event?.domEvent) {
+      if (!event?.domEvent?.href) {
         return;
       }
 
@@ -43,36 +60,14 @@ class App extends Component {
       // menu events don't have the /beta, converting
       const basename = this.props.basename.replace(/^\/beta\//, '/');
 
-      if (event.domEvent.href) {
-        // prod-beta
-        // domEvent: has the right href, always starts with /ansible/ansible-hub, no /beta prefix
-        // (navId: corresponds to the last url component, but not the same one, ansible-hub means /ansible/ansible-hub, partners means /ansible/ansible-hub/partners)
+      // domEvent: has the right href, always starts with /ansible/ansible-hub, no /beta prefix
+      // go to the href, relative to our *actual* basename (basename has no trailing /, so a path will start with / unless empty
+      const href = event.domEvent.href.replace(basename, '') || '/';
 
-        // go to the href, relative to our *actual* basename (basename has no trailing /, so a path will start with / unless empty
-        this.props.history.push(
-          event.domEvent.href.replace(basename, '') || '/',
-        );
-      } else {
-        // FIXME: may no longer be needed by the time this gets to prod-stable
-        // prod-stable
-        // (domEvent is a react event, no href (there is an absolute url in domEvent.target.href))
-        // navId: corresponds to the first url component after prefix, "" means /ansible/ansible-hub, partners means /ansible/ansible-hub/partners
-        this.props.history.push(`/${event.navId}`);
-      }
+      this.props.history.push(href);
     });
 
-    window.insights.chrome.auth
-      .getUser()
-      .then((user) => this.setState({ user: user }));
-    let promises = [];
-    promises.push(ActiveUserAPI.getActiveUser());
-    promises.push(SettingsAPI.get());
-    Promise.all(promises).then((results) => {
-      this.setState({
-        activeUser: results[0].data,
-        settings: results[1].data,
-      });
-    });
+    loadContext().then((data) => this.setState(data));
   }
 
   componentWillUnmount() {
@@ -119,25 +114,27 @@ class App extends Component {
     // Wait for the user data to load before any of the child components are
     // rendered. This will prevent API calls from happening
     // before the app can authenticate
-    if (!this.state.user || !this.state.activeUser) {
+    if (!this.state.user) {
       return null;
     }
 
     return (
       <AppContext.Provider
         value={{
-          user: this.state.activeUser,
-          setUser: this.setActiveUser,
-          selectedRepo: this.state.selectedRepo,
           alerts: this.state.alerts,
+          featureFlags: this.state.featureFlags,
+          selectedRepo: this.state.selectedRepo,
           setAlerts: this.setAlerts,
+          setRepo: this.setRepo,
+          setUser: this.setUser,
           settings: this.state.settings,
+          user: this.state.user,
         }}
       >
         <Alert
           isInline
           variant='info'
-          title='The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections.'
+          title={t`The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections.`}
         />
         <Routes childProps={this.props} />
         <UIVersion />
@@ -145,8 +142,8 @@ class App extends Component {
     );
   }
 
-  setActiveUser = (user) => {
-    this.setState({ activeUser: user });
+  setUser = (user) => {
+    this.setState({ user });
   };
 
   setAlerts = (alerts) => {
@@ -158,15 +155,11 @@ class App extends Component {
       path: Paths.collectionByRepo,
     });
   };
-}
 
-App.propTypes = {
-  history: PropTypes.object,
-  basename: PropTypes.string.isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
-  }),
-};
+  setRepo = (_repo: string) => {
+    throw new Error('RepoSelector & setRepo only available in standalone');
+  };
+}
 
 /**
  * withRouter: https://reacttraining.com/react-router/web/api/withRouter
