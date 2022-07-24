@@ -1,13 +1,9 @@
-import { CollectionAPI } from 'src/api';
-
-import React from 'react';
-import { errorMessage, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 import { t, Trans } from '@lingui/macro';
+import React from 'react';
+import { DropdownItem, Tooltip } from '@patternfly/react-core';
+import { CollectionAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
-
-import { Text, DropdownItem, Checkbox, Tooltip } from '@patternfly/react-core';
-
-import { DeleteModal } from 'src/components';
+import { errorMessage, parsePulpIDFromURL, waitForTask } from 'src/utilities';
 
 export class DeleteCollectionUtils {
   public static getUsedbyDependencies(collection) {
@@ -59,70 +55,6 @@ export class DeleteCollectionUtils {
       >
         {t`Delete entire collection`}
       </DropdownItem>
-    );
-  }
-
-  public static deleteModal(
-    deleteCollection,
-    isDeletionPending,
-    confirmDelete,
-    collectionVersion,
-    cancelAction,
-    deleteAction,
-    onChange,
-  ) {
-    return (
-      deleteCollection && (
-        <DeleteModal
-          spinner={isDeletionPending}
-          cancelAction={() => cancelAction()}
-          deleteAction={() => deleteAction()}
-          isDisabled={!confirmDelete || isDeletionPending}
-          title={
-            collectionVersion
-              ? t`Delete collection version?`
-              : t`Delete collection?`
-          }
-        >
-          <>
-            <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
-              {collectionVersion ? (
-                <>
-                  {deleteCollection.all_versions.length === 1 ? (
-                    <Trans>
-                      Deleting{' '}
-                      <b>
-                        {deleteCollection.name} v{collectionVersion}
-                      </b>{' '}
-                      and its data will be lost and this will cause the entire
-                      collection to be deleted.
-                    </Trans>
-                  ) : (
-                    <Trans>
-                      Deleting{' '}
-                      <b>
-                        {deleteCollection.name} v{collectionVersion}
-                      </b>{' '}
-                      and its data will be lost.
-                    </Trans>
-                  )}
-                </>
-              ) : (
-                <Trans>
-                  Deleting <b>{deleteCollection.name}</b> and its data will be
-                  lost.
-                </Trans>
-              )}
-            </Text>
-            <Checkbox
-              isChecked={confirmDelete}
-              onChange={(val) => onChange(val)}
-              label={t`I understand that this action cannot be undone.`}
-              id='delete_confirm'
-            />
-          </>
-        </DeleteModal>
-      )
     );
   }
 
