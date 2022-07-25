@@ -403,22 +403,20 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(group, index: number) {
     const { user } = this.context;
     const dropdownItems = [
-      <React.Fragment key='dropdown'>
-        {!!user && user.model_permissions.delete_group && (
-          <DropdownItem
-            aria-label='Delete'
-            key='delete'
-            onClick={() => {
-              this.setState({
-                selectedGroup: group,
-                deleteModalVisible: true,
-              });
-            }}
-          >
-            <Trans>Delete</Trans>
-          </DropdownItem>
-        )}
-      </React.Fragment>,
+      !!user && user.model_permissions.delete_group && (
+        <DropdownItem
+          aria-label='Delete'
+          key='delete'
+          onClick={() => {
+            this.setState({
+              selectedGroup: group,
+              deleteModalVisible: true,
+            });
+          }}
+        >
+          <Trans>Delete</Trans>
+        </DropdownItem>
+      ),
     ];
     return (
       <tr data-cy={`GroupList-row-${group.name}`} key={index}>

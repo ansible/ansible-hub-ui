@@ -19,6 +19,7 @@ interface IProps {
   };
   menuAppendTo?: 'parent' | 'inline';
   toggleIcon?: React.ReactElement;
+  style?: React.CSSProperties;
 }
 
 interface IState {
@@ -59,6 +60,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
         placeholderText={this.props.placeholderText}
         isDisabled={this.props.isDisabled}
         toggleIcon={this.props.toggleIcon}
+        style={this.props.style}
       >
         {this.getOptions()}
       </Select>
