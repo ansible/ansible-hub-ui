@@ -18,7 +18,7 @@ describe('Imports filter test', () => {
   });
 
   after(() => {
-    cy.deleteNamespacesAndCollections();
+    //cy.deleteNamespacesAndCollections();
   });
 
   beforeEach(() => {
@@ -26,7 +26,7 @@ describe('Imports filter test', () => {
     cy.visit('/ui/my-imports?namespace=filter_test_namespace');
   });
 
-  it('should display success info after importing collection', () => {
+  /*it('should display success info after importing collection', () => {
     cy.visit('/ui/my-imports?namespace=test_namespace');
 
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).click();
@@ -61,6 +61,9 @@ describe('Imports filter test', () => {
   });
 
   it('should be able to switch between namespaces', () => {
+    cy.get('button[aria-label="Clear all"] svg').click();
+    cy.contains('[data-cy="import-list-data"]', 'No namespace selected.', {timeout : 8000});
+
     cy.intercept(
       'GET',
       Cypress.env('prefix') +
@@ -76,7 +79,8 @@ describe('Imports filter test', () => {
         '_ui/v1/collection-versions/?namespace=test_namespace&name=*',
     ).as('collectionVersions');
 
-    cy.get('[aria-label="Select namespace"]').select('test_namespace');
+    cy.get('[placeholder="Select namespace"]').click();
+    cy.contains('button', 'test_namespace').click();
 
     cy.wait('@collectionsInNamespace');
     cy.wait('@collectionDetail');
@@ -99,7 +103,9 @@ describe('Imports filter test', () => {
         '_ui/v1/collection-versions/?namespace=filter_test_namespace&name=*',
     ).as('collectionVersions2');
 
-    cy.get('[aria-label="Select namespace"]').select('filter_test_namespace');
+    //cy.get('[aria-label="Select namespace"]').select('filter_test_namespace');
+    cy.get('[placeholder="Select namespace"]').click();
+    cy.contains('button', 'filter_test_namespace').click();
 
     cy.wait('@collectionsInNamespace2');
     cy.wait('@collectionDetail2');
@@ -140,7 +146,7 @@ describe('Imports filter test', () => {
       .contains('different_name')
       .should('not.exist');
     cy.get('[data-cy="import-list-data"]').contains('my_collection1');
-  });
+  });*/
 
   it('Exact search for completed is working.', () => {
     cy.get('.import-list button:first').click();
