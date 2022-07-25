@@ -126,7 +126,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || this.context.user.is_anonymous) {
+    if (
+      !this.context.user ||
+      this.context.user.is_anonymous ||
+      !this.context.user.model_permissions.view_group
+    ) {
       this.setState({ unauthorised: true });
     } else {
       this.queryGroup();
@@ -290,7 +294,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <APISearchTypeAhead
           results={this.state.options}
           loadResults={(name) =>
-            UserAPI.list({ username__contains: name, page_size: 5 })
+            UserAPI.list({ username__contains: name, page_size: 1000 })
               .then((result) => {
                 let filteredUsers = [];
                 result.data.data.forEach((user) => {
@@ -353,6 +357,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             })
           }
           isDisabled={false}
+          style={{ overflowY: 'auto', maxHeight: '350px' }}
         />
       </Modal>
     );
@@ -449,7 +454,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadOptions() {
-    UserAPI.list()
+    UserAPI.list({ page_size: 1000 })
       .then((result) => {
         const options = result.data.data
           .filter((user) => !this.state.users.find((u) => u.id === user.id))

@@ -335,9 +335,11 @@ class ExecutionEnvironmentList extends React.Component<
   private renderTableRow(item, index: number) {
     const description = item.description;
 
-    const canEdit = item.namespace.my_permissions.includes(
-      'container.change_containernamespace',
-    );
+    const permissions = item.namespace.my_permissions;
+
+    const canEdit =
+      permissions.includes('container.change_containernamespace') ||
+      permissions.includes('container.namespace_change_containerdistribution');
 
     const dropdownItems = [
       canEdit && (

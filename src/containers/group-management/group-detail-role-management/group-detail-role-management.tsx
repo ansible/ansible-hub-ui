@@ -168,7 +168,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
     });
   }
 
-  const addRoles = user.is_superuser && (
+  const addRoles = user?.model_permissions?.change_group && (
     <Button
       onClick={() => setShowAddRolesModal(true)}
       variant='primary'
@@ -373,7 +373,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     <td>{role.description}</td>
                     <ListItemActions
                       kebabItems={[
-                        user.is_superuser && (
+                        user.model_permissions.change_group && (
                           <DropdownItem
                             key='remove-role'
                             onClick={() => setSelectedDeleteRole(role)}
