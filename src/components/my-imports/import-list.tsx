@@ -302,7 +302,16 @@ export class ImportList extends React.Component<IProps, IState> {
               params['page'] = 1;
               this.props.updateParams(params);
             }}
-            placeholderText={t`Select a namespace`}
+            onClear={() => {
+              const params = ParamHelper.setParam(
+                this.props.params,
+                'namespace',
+                '',
+              );
+              params['page'] = 1;
+              this.props.updateParams(params);
+            }}
+            placeholderText={t`Select namespace`}
             selections={this.state.namespaces.filter(
               (namespace) => namespace.name == this.props.params.namespace,
             )}
