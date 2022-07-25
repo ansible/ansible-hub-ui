@@ -151,11 +151,51 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       });
     }
 
-    const addRoles = this.context.user.is_superuser && (
+    const isSuperuser = this.context.user.is_superuser;
+
+    const addRoles = isSuperuser && (
       <Link to={Paths.createRole}>
         <Button variant={'primary'}>{t`Add roles`}</Button>
       </Link>
     );
+
+    let tableHeader = [
+      {
+        title: '',
+        type: 'none',
+        id: 'expander',
+      },
+      {
+        title: t`Role name`,
+        type: 'alpha',
+        id: 'name',
+      },
+      {
+        title: t`Description`,
+        type: 'none',
+        id: 'description',
+      },
+      {
+        title: t`Created`,
+        type: 'number',
+        id: 'pulp_created',
+      },
+      {
+        title: t`Editable`,
+        type: 'none',
+        id: 'locked',
+      },
+    ];
+    if (isSuperuser) {
+      tableHeader = [
+        ...tableHeader,
+        {
+          title: '',
+          type: 'none',
+          id: 'kebab',
+        },
+      ];
+    }
 
     return (
       <React.Fragment>
@@ -278,40 +318,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                       updateParams={(p) => {
                         this.updateParams(p, () => this.queryRoles());
                       }}
-                      tableHeader={{
-                        headers: [
-                          {
-                            title: '',
-                            type: 'none',
-                            id: 'expander',
-                          },
-                          {
-                            title: t`Role name`,
-                            type: 'alpha',
-                            id: 'name',
-                          },
-                          {
-                            title: t`Description`,
-                            type: 'none',
-                            id: 'description',
-                          },
-                          {
-                            title: t`Created`,
-                            type: 'number',
-                            id: 'pulp_created',
-                          },
-                          {
-                            title: t`Editable`,
-                            type: 'none',
-                            id: 'locked',
-                          },
-                          {
-                            title: '',
-                            type: 'none',
-                            id: 'kebab',
-                          },
-                        ],
-                      }}
+                      tableHeader={{ headers: tableHeader }}
                     >
                       {roles.map((role, i) => (
                         <ExpandableRow
@@ -388,10 +395,11 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                               t`Editable`
                             )}
                           </td>
-
-                          <ListItemActions
-                            kebabItems={this.renderDropdownItems(role)}
-                          />
+                          {isSuperuser && (
+                            <ListItemActions
+                              kebabItems={this.renderDropdownItems(role)}
+                            />
+                          )}
                         </ExpandableRow>
                       ))}
                     </RoleListTable>
@@ -468,24 +476,29 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
         {t`Delete`}
       </DropdownItem>
     );
-    const dropdownItems = [
-      // this.context.user.model_permissions.change_containerregistry &&
-      locked ? (
-        <Tooltip key='edit' content={t`Built-in roles cannot be edited.`}>
-          {editItem}
-        </Tooltip>
-      ) : (
-        editItem
-      ),
-      // this.context.user.model_permissions.delete_containerregistry &&
-      locked ? (
-        <Tooltip key='delete' content={t`Built-in roles cannot be deleted.`}>
-          {deleteItem}
-        </Tooltip>
-      ) : (
-        deleteItem
-      ),
-    ];
+    const dropdownItems = this.context.user.is_superuser
+      ? [
+          // this.context.user.model_permissions.change_containerregistry &&
+          locked ? (
+            <Tooltip key='edit' content={t`Built-in roles cannot be edited.`}>
+              {editItem}
+            </Tooltip>
+          ) : (
+            editItem
+          ),
+          // this.context.user.model_permissions.delete_containerregistry &&
+          locked ? (
+            <Tooltip
+              key='delete'
+              content={t`Built-in roles cannot be deleted.`}
+            >
+              {deleteItem}
+            </Tooltip>
+          ) : (
+            deleteItem
+          ),
+        ]
+      : null;
 
     return dropdownItems;
   };
