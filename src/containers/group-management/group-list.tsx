@@ -222,7 +222,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
                   niceNames={{
-                    name__contains: 'Group name',
+                    name__contains: t`Group name`,
                   }}
                 />
               </div>
