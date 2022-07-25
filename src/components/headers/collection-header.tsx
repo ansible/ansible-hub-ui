@@ -1,6 +1,6 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { errorMessage } from 'src/utilities';
+import { errorMessage, DeleteCollectionUtils } from 'src/utilities';
 import './header.scss';
 
 import { Redirect } from 'react-router-dom';
@@ -18,8 +18,6 @@ import {
   Text,
   Button,
   DropdownItem,
-  Tooltip,
-  Checkbox,
 } from '@patternfly/react-core';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -34,11 +32,11 @@ import {
   AlertType,
   closeAlertMixin,
   StatefulDropdown,
-  DeleteModal,
   SignSingleCertificateModal,
   SignAllCertificatesModal,
   UploadSingCertificateModal,
   ImportModal,
+  DeleteCollectionModal,
 } from 'src/components';
 
 import {
@@ -132,7 +130,10 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
-    this.getUsedbyDependencies();
+    const { collection } = this.props;
+    DeleteCollectionUtils.getUsedbyDependencies(collection)
+      .then((noDependencies) => this.setState({ noDependencies }))
+      .catch((alert) => this.addAlert(alert));
   }
 
   render() {
@@ -210,33 +211,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const canSign = canSignNS(this.context, namespace);
 
     const dropdownItems = [
-      noDependencies
-        ? this.context.user.model_permissions.delete_collection && (
-            <DropdownItem
-              key='delete-collection-enabled'
-              onClick={() => this.openDeleteModalWithConfirm()}
-              data-cy='delete-collection-dropdown'
-            >
-              {t`Delete entire collection`}
-            </DropdownItem>
-          )
-        : this.context.user.model_permissions.delete_collection && (
-            <Tooltip
-              key='delete-collection-disabled'
-              position='left'
-              content={
-                <Trans>
-                  Cannot delete until collections <br />
-                  that depend on this collection <br />
-                  have been deleted.
-                </Trans>
-              }
-            >
-              <DropdownItem isDisabled>
-                {t`Delete entire collection`}
-              </DropdownItem>
-            </Tooltip>
-          ),
+      DeleteCollectionUtils.deleteMenuOption({
+        canDeleteCollection:
+          this.context.user.model_permissions.delete_collection,
+        noDependencies,
+        onClick: () => this.openDeleteModalWithConfirm(),
+      }),
       this.context.user.model_permissions.delete_collection && (
         <DropdownItem
           data-cy='delete-version-dropdown'
@@ -383,63 +363,32 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             count={all_versions.length}
           />
         </Modal>
-        {deleteCollection && (
-          <DeleteModal
-            spinner={isDeletionPending}
-            cancelAction={this.closeModal}
-            deleteAction={() =>
-              this.setState({ isDeletionPending: true }, () => {
-                collectionVersion
-                  ? this.deleteCollectionVersion(collectionVersion)
-                  : this.deleteCollection();
-              })
-            }
-            isDisabled={!confirmDelete || isDeletionPending}
-            title={
+        <DeleteCollectionModal
+          deleteCollection={deleteCollection}
+          isDeletionPending={isDeletionPending}
+          confirmDelete={confirmDelete}
+          setConfirmDelete={(confirmDelete) => this.setState({ confirmDelete })}
+          collectionVersion={collectionVersion}
+          cancelAction={() => this.setState({ deleteCollection: null })}
+          deleteAction={() =>
+            this.setState({ isDeletionPending: true }, () => {
               collectionVersion
-                ? t`Delete collection version?`
-                : t`Delete collection?`
-            }
-          >
-            <>
-              <Text style={{ paddingBottom: 'var(--pf-global--spacer--md)' }}>
-                {collectionVersion ? (
-                  <>
-                    {deleteCollection.all_versions.length === 1 ? (
-                      <Trans>
-                        Deleting{' '}
-                        <b>
-                          {deleteCollection.name} v{collectionVersion}
-                        </b>{' '}
-                        and its data will be lost and this will cause the entire
-                        collection to be deleted.
-                      </Trans>
-                    ) : (
-                      <Trans>
-                        Deleting{' '}
-                        <b>
-                          {deleteCollection.name} v{collectionVersion}
-                        </b>{' '}
-                        and its data will be lost.
-                      </Trans>
-                    )}
-                  </>
-                ) : (
-                  <Trans>
-                    Deleting <b>{deleteCollection.name}</b> and its data will be
-                    lost.
-                  </Trans>
-                )}
-              </Text>
-              <Checkbox
-                isChecked={confirmDelete}
-                onChange={(val) => this.setState({ confirmDelete: val })}
-                label={t`I understand that this action cannot be undone.`}
-                id='delete_confirm'
-              />
-            </>
-          </DeleteModal>
-        )}
+                ? this.deleteCollectionVersion(collectionVersion)
+                : DeleteCollectionUtils.deleteCollection({
+                    collection: deleteCollection,
+                    setState: (state) => this.setState(state),
+                    load: null,
+                    redirect: formatPath(Paths.namespaceByRepo, {
+                      repo: this.context.selectedRepo,
+                      namespace: deleteCollection.namespace.name,
+                    }),
+                    selectedRepo: this.context.selectedRepo,
+                    addAlert: (alert) =>
+                      this.context.setAlerts([...this.state.alerts, alert]),
+                  });
+            })
+          }
+        />
         <BaseHeader
           className={className}
           title={collection.name}
@@ -1007,52 +956,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     this.setState({ showImportModal: isOpen });
   }
 
-  private deleteCollection = () => {
-    const {
-      deleteCollection,
-      deleteCollection: { name },
-    } = this.state;
-    CollectionAPI.deleteCollection(this.context.selectedRepo, deleteCollection)
-      .then((res) => {
-        const taskId = parsePulpIDFromURL(res.data.task);
-
-        waitForTask(taskId).then(() => {
-          this.context.setAlerts([
-            ...this.context.alerts,
-            {
-              variant: 'success',
-              title: t`Collection "${name}" has been successfully deleted.`,
-            },
-          ]);
-          this.setState({
-            collectionVersion: null,
-            deleteCollection: null,
-            isDeletionPending: false,
-            redirect: formatPath(Paths.namespaceByRepo, {
-              repo: this.context.selectedRepo,
-              namespace: deleteCollection.namespace.name,
-            }),
-          });
-        });
-      })
-      .catch((err) => {
-        const { status, statusText } = err.response;
-        this.setState({
-          collectionVersion: null,
-          deleteCollection: null,
-          isDeletionPending: false,
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: t`Collection "${name}" could not be deleted.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
-        });
-      });
-  };
-
   private openDeleteModalWithConfirm(version = null) {
     this.setState({
       deleteCollection: this.props.collection,
@@ -1061,30 +964,15 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     });
   }
 
-  private getUsedbyDependencies() {
-    const { name, namespace } = this.props.collection;
-    CollectionAPI.getUsedDependenciesByCollection(namespace.name, name)
-      .then(({ data }) => {
-        this.setState({ noDependencies: !data.data.length });
-      })
-      .catch((err) => {
-        const { status, statusText } = err.response;
-        this.setState({
-          alerts: [
-            ...this.state.alerts,
-            {
-              variant: 'danger',
-              title: t`Dependencies for collection "${name}" could not be displayed.`,
-              description: errorMessage(status, statusText),
-            },
-          ],
-        });
-      });
-  }
-
   private closeModal = () => {
     this.setState({ deleteCollection: null });
   };
+
+  private addAlert(alert: AlertType) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
+  }
 
   get closeAlert() {
     return closeAlertMixin('alerts');

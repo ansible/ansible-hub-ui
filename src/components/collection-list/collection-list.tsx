@@ -2,13 +2,12 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './list.scss';
 
-import { Button, DropdownItem, DataList } from '@patternfly/react-core';
-
+import { DataList } from '@patternfly/react-core';
 import { CollectionListType } from 'src/api';
+
 import {
   CollectionListItem,
   Pagination,
-  StatefulDropdown,
   EmptyStateFilter,
 } from 'src/components';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -23,11 +22,9 @@ interface IProps {
   updateParams: (params) => void;
   itemCount: number;
   ignoredParams: string[];
-
-  showNamespace?: boolean;
   showControls?: boolean;
-  handleControlClick?: (id, event) => void;
   repo?: string;
+  renderCollectionControls: (collection) => React.ReactNode;
 }
 
 // only used in namespace detail, collections uses individual items
@@ -50,7 +47,7 @@ export class CollectionList extends React.Component<IProps> {
             collections.map((c) => (
               <CollectionListItem
                 controls={
-                  showControls ? this.renderCollectionControls(c) : null
+                  showControls ? this.props.renderCollectionControls(c) : null
                 }
                 key={c.id}
                 {...c}
@@ -75,32 +72,6 @@ export class CollectionList extends React.Component<IProps> {
           count={itemCount}
         />
       </React.Fragment>
-    );
-  }
-
-  private renderCollectionControls(collection: CollectionListType) {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Button
-          onClick={() => this.props.handleControlClick(collection.id, 'upload')}
-          variant='secondary'
-        >
-          {t`Upload new version`}
-        </Button>
-        <StatefulDropdown
-          items={[
-            <DropdownItem
-              onClick={() =>
-                this.props.handleControlClick(collection.id, 'deprecate')
-              }
-              key='deprecate'
-            >
-              {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
-            </DropdownItem>,
-          ]}
-          ariaLabel='collection-kebab'
-        />
-      </div>
     );
   }
 }

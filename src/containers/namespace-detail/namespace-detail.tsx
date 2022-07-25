@@ -49,6 +49,7 @@ import {
   DeleteModal,
   AlertType,
   SignAllCertificatesModal,
+  DeleteCollectionModal,
 } from 'src/components';
 
 import {
@@ -58,7 +59,9 @@ import {
   errorMessage,
   waitForTask,
   canSign as canSignNS,
+  DeleteCollectionUtils,
 } from 'src/utilities';
+
 import { Constants } from 'src/constants';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
@@ -87,6 +90,8 @@ interface IState {
   confirmDelete: boolean;
   isNamespacePending: boolean;
   alerts: AlertType[];
+  deleteCollection: CollectionListType;
+  isDeletionPending: boolean;
 }
 
 interface IProps extends RouteComponentProps {
@@ -126,11 +131,13 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       confirmDelete: false,
       isNamespacePending: false,
       alerts: [],
+      deleteCollection: null,
+      isDeletionPending: false,
     };
   }
 
   componentDidMount() {
-    this.loadAll();
+    this.load();
 
     this.setState({ alerts: this.context.alerts || [] });
   }
@@ -153,6 +160,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       isOpenNamespaceModal,
       confirmDelete,
       isNamespacePending,
+      alerts,
+      deleteCollection,
+      isDeletionPending,
     } = this.state;
 
     if (redirect) {
@@ -202,10 +212,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
     return (
       <React.Fragment>
-        <AlertList
-          alerts={this.state.alerts}
-          closeAlert={(i) => this.closeAlert(i)}
-        />
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <ImportModal
           isOpen={showImportModal}
           onUploadSuccess={() =>
@@ -223,6 +230,25 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           setOpen={(isOpen, warn) => this.toggleImportModal(isOpen, warn)}
           collection={updateCollection}
           namespace={namespace.name}
+        />
+        <DeleteCollectionModal
+          deleteCollection={deleteCollection}
+          isDeletionPending={isDeletionPending}
+          confirmDelete={confirmDelete}
+          setConfirmDelete={(confirmDelete) => this.setState({ confirmDelete })}
+          cancelAction={() => this.setState({ deleteCollection: null })}
+          deleteAction={() =>
+            this.setState({ isDeletionPending: true }, () =>
+              DeleteCollectionUtils.deleteCollection({
+                collection: deleteCollection,
+                setState: (state) => this.setState(state),
+                load: () => this.load(),
+                redirect: false,
+                selectedRepo: this.context.selectedRepo,
+                addAlert: (alert) => this.addAlert(alert),
+              }),
+            )
+          }
         />
         {isOpenNamespaceModal && (
           <DeleteModal
@@ -321,10 +347,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   collections={collections}
                   itemCount={itemCount}
                   showControls={this.state.showControls}
-                  handleControlClick={(id, action) =>
-                    this.handleCollectionAction(id, action)
-                  }
                   repo={this.context.selectedRepo}
+                  renderCollectionControls={(collection) =>
+                    this.renderCollectionControls(collection)
+                  }
                 />
               </section>
             )
@@ -461,7 +487,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       .then((result) => {
         waitForTask(result.data.task_id)
           .then(() => {
-            this.loadAll();
+            this.load();
           })
           .catch((error) => {
             this.setState({
@@ -498,7 +524,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     });
   }
 
-  private loadAll() {
+  private load() {
     Promise.all([
       CollectionAPI.list(
         {
@@ -732,8 +758,51 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     this.setState({ isOpenNamespaceModal: false, confirmDelete: false });
   };
 
+  private addAlert(alert: AlertType) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
+  }
+
   get closeAlert() {
     return closeAlertMixin('alerts');
+  }
+
+  private renderCollectionControls(collection: CollectionListType) {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Button
+          onClick={() => this.handleCollectionAction(collection.id, 'upload')}
+          variant='secondary'
+        >
+          {t`Upload new version`}
+        </Button>
+        <StatefulDropdown
+          items={[
+            DeleteCollectionUtils.deleteMenuOption({
+              canDeleteCollection:
+                this.context.user.model_permissions.delete_collection,
+              noDependencies: null,
+              onClick: () =>
+                DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
+                  addAlert: (alert) => this.addAlert(alert),
+                  setState: (state) => this.setState(state),
+                  collection,
+                }),
+            }),
+            <DropdownItem
+              onClick={() =>
+                this.handleCollectionAction(collection.id, 'deprecate')
+              }
+              key='deprecate'
+            >
+              {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
+            </DropdownItem>,
+          ].filter(Boolean)}
+          ariaLabel='collection-kebab'
+        />
+      </div>
+    );
   }
 }
 

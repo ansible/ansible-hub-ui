@@ -93,3 +93,4 @@ export { WriteOnlyField } from './patternfly-wrappers/write-only-field';
 export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
 export { FileUpload } from './patternfly-wrappers/fileupload';
 export { ListItemActions } from './list-item-actions/list-item-actions';
+export { DeleteCollectionModal } from './delete-modal/delete-collection-modal';

@@ -1,7 +1,13 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import './search.scss';
-import { errorMessage } from 'src/utilities';
+import {
+  errorMessage,
+  DeleteCollectionUtils,
+  filterIsSet,
+  waitForTask,
+  parsePulpIDFromURL,
+} from 'src/utilities';
 
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { DataList, Switch, DropdownItem, Button } from '@patternfly/react-core';
@@ -21,6 +27,7 @@ import {
   AlertType,
   closeAlertMixin,
   ImportModal,
+  DeleteCollectionModal,
 } from 'src/components';
 import {
   CollectionAPI,
@@ -32,7 +39,6 @@ import {
 import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
-import { filterIsSet, waitForTask, parsePulpIDFromURL } from 'src/utilities';
 import { Paths, formatPath } from 'src/paths';
 
 interface IState {
@@ -51,6 +57,10 @@ interface IState {
   updateCollection: CollectionListType;
   showImportModal: boolean;
   redirect: string;
+  noDependencies: boolean;
+  deleteCollection: CollectionListType;
+  confirmDelete: boolean;
+  isDeletionPending: boolean;
 }
 
 class Search extends React.Component<RouteComponentProps, IState> {
@@ -86,6 +96,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
       updateCollection: null,
       showImportModal: false,
       redirect: null,
+      noDependencies: false,
+      deleteCollection: null,
+      confirmDelete: false,
+      isDeletionPending: false,
     };
   }
 
@@ -99,6 +113,12 @@ class Search extends React.Component<RouteComponentProps, IState> {
     if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
       this.getSynclist();
     }
+  }
+
+  private addAlert(alert: AlertType) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
   }
 
   private get closeAlert() {
@@ -117,6 +137,9 @@ class Search extends React.Component<RouteComponentProps, IState> {
       numberOfResults,
       showImportModal,
       updateCollection,
+      deleteCollection,
+      confirmDelete,
+      isDeletionPending,
     } = this.state;
     const noData =
       collections.length === 0 &&
@@ -131,6 +154,26 @@ class Search extends React.Component<RouteComponentProps, IState> {
           alerts={this.state.alerts}
           closeAlert={(i) => this.closeAlert(i)}
         />
+        <DeleteCollectionModal
+          deleteCollection={deleteCollection}
+          isDeletionPending={isDeletionPending}
+          confirmDelete={confirmDelete}
+          setConfirmDelete={(confirmDelete) => this.setState({ confirmDelete })}
+          cancelAction={() => this.setState({ deleteCollection: null })}
+          deleteAction={() =>
+            this.setState({ isDeletionPending: true }, () =>
+              DeleteCollectionUtils.deleteCollection({
+                collection: deleteCollection,
+                setState: (state) => this.setState(state),
+                load: () => this.load(),
+                redirect: false,
+                selectedRepo: this.context.selectedRepo,
+                addAlert: (alert) => this.addAlert(alert),
+              }),
+            )
+          }
+        />
+
         {showImportModal && (
           <ImportModal
             isOpen={showImportModal}
@@ -322,15 +365,25 @@ class Search extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderMenu(list, collection) {
-    const menuItems = [];
-    menuItems.push(
+    const menuItems = [
+      DeleteCollectionUtils.deleteMenuOption({
+        canDeleteCollection:
+          this.context.user.model_permissions.delete_collection,
+        noDependencies: null,
+        onClick: () =>
+          DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({
+            addAlert: (alert) => this.addAlert(alert),
+            setState: (state) => this.setState(state),
+            collection,
+          }),
+      }),
       <DropdownItem
         onClick={() => this.handleControlClick(collection)}
         key='deprecate'
       >
         {collection.deprecated ? t`Undeprecate` : t`Deprecate`}
       </DropdownItem>,
-    );
+    ];
 
     if (!list) {
       menuItems.push(
@@ -353,7 +406,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
             {t`Upload new version`}
           </Button>
         )}
-        <StatefulDropdown items={menuItems} ariaLabel='collection-kebab' />
+        <StatefulDropdown
+          items={menuItems.filter(Boolean)}
+          ariaLabel='collection-kebab'
+        />
       </React.Fragment>
     );
   }
