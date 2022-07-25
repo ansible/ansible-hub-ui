@@ -36,6 +36,7 @@ export const DownloadSignatureGridItem: FC<Props> = ({ version }) => {
               style={{ padding: 0 }}
               variant={ButtonVariant.link}
               icon={<DownloadIcon />}
+              data-cy='toggle-signature-button'
               onClick={() => {
                 setShow(!show);
               }}

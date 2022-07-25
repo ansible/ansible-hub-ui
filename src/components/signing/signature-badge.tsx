@@ -35,6 +35,7 @@ export const SignatureBadge: FC<Props> = ({
 
   return (
     <Label
+      data-cy='signature-badge'
       variant='outline'
       className='hub-signature-badge'
       color={signState === 'signed' ? 'green' : 'orange'}

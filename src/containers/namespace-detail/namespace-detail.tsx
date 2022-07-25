@@ -666,6 +666,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       canSign && !can_upload_signatures && (
         <DropdownItem
           key='sign-collections'
+          data-cy='sign-all-collections-button'
           onClick={() => this.setState({ isOpenSignModal: true })}
         >
           {t`Sign all collections`}

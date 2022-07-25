@@ -28,7 +28,12 @@ export const SignSingleCertificateModal: React.FC<Props> = ({
     isOpen={isOpen}
     onClose={onCancel}
     actions={[
-      <Button key='sign' variant={ButtonVariant.primary} onClick={onSubmit}>
+      <Button
+        key='sign'
+        data-cy='modal-sign-button'
+        variant={ButtonVariant.primary}
+        onClick={onSubmit}
+      >
         {t`Sign`}
       </Button>,
       <Button key='cancel' variant={ButtonVariant.link} onClick={onCancel}>

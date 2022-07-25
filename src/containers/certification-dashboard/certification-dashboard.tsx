@@ -422,6 +422,7 @@ class CertificationDashboard extends React.Component<
       <Button
         key='approve'
         isDisabled={mustUploadSignature}
+        data-cy='approve-button'
         onClick={() =>
           this.updateCertification(
             version,

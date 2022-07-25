@@ -231,6 +231,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       canSign && !can_upload_signatures && (
         <DropdownItem
           key='sign-all'
+          data-cy='sign-collection-button'
           onClick={() => this.setState({ isOpenSignAllModal: true })}
         >
           {t`Sign entire collection`}
@@ -249,6 +250,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
               this.setState({ isOpenSignModal: true });
             }
           }}
+          data-cy='sign-version-button'
         >
           {t`Sign version ${collection.latest_version.version}`}
         </DropdownItem>
