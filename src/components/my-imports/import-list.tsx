@@ -77,7 +77,6 @@ export class ImportList extends React.Component<IProps, IState> {
 
     return (
       <div className='import-list'>
-        {/*this.renderNamespacePicker(namespaces)*/}
         {this.renderApiSearchAhead()}
         <Toolbar>
           <CompoundFilter
@@ -150,6 +149,12 @@ export class ImportList extends React.Component<IProps, IState> {
   }
 
   private renderList(selectImport, importList, selectedImport, loading) {
+    if (!this.props.params.namespace) {
+      return (
+        <EmptyStateNoData title={t`No namespace selected.`} description={''} />
+      );
+    }
+
     if (loading) {
       return (
         <div className='loading'>
@@ -157,6 +162,7 @@ export class ImportList extends React.Component<IProps, IState> {
         </div>
       );
     }
+
     if (
       importList.length === 0 &&
       !filterIsSet(this.props.params, ['keywords', 'state'])
