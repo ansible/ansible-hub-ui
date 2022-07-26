@@ -11,7 +11,6 @@ import {
   ImportAPI,
   ImportDetailType,
   ImportListType,
-  NamespaceType,
   PulpStatus,
   MyNamespaceAPI,
   CollectionVersion,

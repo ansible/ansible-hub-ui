@@ -105,7 +105,6 @@ describe('Imports filter test', () => {
         '_ui/v1/collection-versions/?namespace=filter_test_namespace&name=*',
     ).as('collectionVersions2');
 
-    //cy.get('[aria-label="Select namespace"]').select('filter_test_namespace');
     cy.get('[placeholder="Select namespace"]').click();
     cy.contains('button', 'filter_test_namespace').click();
 

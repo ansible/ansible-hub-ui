@@ -2,12 +2,7 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import cx from 'classnames';
 import './my-imports.scss';
-import {
-  Pagination,
-  FormSelect,
-  FormSelectOption,
-  Toolbar,
-} from '@patternfly/react-core';
+import { Pagination, Toolbar } from '@patternfly/react-core';
 import {
   AppliedFilters,
   CompoundFilter,
@@ -19,13 +14,11 @@ import {
   NamespaceType,
   ImportListType,
   MyNamespaceAPI,
-  NamespaceListType,
 } from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { filterIsSet } from 'src/utilities';
 import { Constants } from 'src/constants';
 import { DateComponent, EmptyStateNoData, EmptyStateFilter } from '..';
-import { createTippyWithPlugins } from '@patternfly/react-core/dist/esm/helpers/Popper/DeprecatedTippyTypes';
 
 interface IProps {
   importList: ImportListType[];
@@ -234,60 +227,10 @@ export class ImportList extends React.Component<IProps, IState> {
     }
   }
 
-  /*
-  private renderNamespacePicker(namespaces) {
-    return (
-      <div className='namespace-selector-wrapper'>
-        <div className='label'>{t`Namespace`}</div>
-        <div className='selector'>
-          <FormSelect
-            onChange={(val) => {
-              const params = ParamHelper.setParam(
-                this.props.params,
-                'namespace',
-                val,
-              );
-              params['page'] = 1;
-              this.props.updateParams(params);
-            }}
-            value={this.props.params.namespace}
-            aria-label={t`Select namespace`}
-          >
-            {namespaces.map((ns) => (
-              <FormSelectOption key={ns.name} label={ns.name} value={ns.name} />
-            ))}
-          </FormSelect>
-        </div>
-      </div>
-    );
-  }*/
-
   private loadNamespaces(namespace_filter) {
     MyNamespaceAPI.list({ page_size: 100, keywords: namespace_filter })
       .then((result) => {
         this.setState({ namespaces: result.data.data });
-
-        //let namespaces = result.data.data;
-        //let namespace = this.props.params.namespace;
-
-        /*if (namespace && namespaces.filter((item) => item.name == namespace).length == 0)
-        {
-          debugger;
-            // append namespace in params to list, so we are able to select it
-            MyNamespaceAPI.list({ page_size: 100, keywords: namespace }).then((result) => {
-
-              // filter it again to make sure we are not selecting additional namespaces that 
-              // contains the substring of our namespace we want to search
-              let new_namespace = result.data.data.filter((item) => item.name == namespace);
-              new_namespace = new_namespace[0];
-
-              namespaces.push(new_namespace);
-              this.setState({namespaces : namespaces});
-            });
-        }else
-        {
-          this.setState({namespaces : namespaces});
-        }*/
       })
       .catch((result) => console.log(result));
   }
