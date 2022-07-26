@@ -1,1 +1,0 @@
-Show the proper MINIMUM PASSWORD LENGTH in UI
