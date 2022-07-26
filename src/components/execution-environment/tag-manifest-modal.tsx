@@ -266,7 +266,6 @@ export class TagManifestModal extends React.Component<IProps, IState> {
           promise: ContainerTagAPI.untag(
             repository.pulp.repository.pulp_id,
             tag,
-            containerManifest.digest,
           ).catch((e) => this.handleFailedTag(tag, e, 'remove')),
         });
       }
