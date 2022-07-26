@@ -240,6 +240,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       'view_type',
     ];
 
+    const canEditOwners =
+      this.state.namespace.related_fields.my_permissions?.includes(
+        'galaxy.change_namespace',
+      ) || this.context.user.model_permissions.change_namespace;
+
     return (
       <React.Fragment>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
@@ -416,6 +421,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   alerts: [...this.state.alerts, alert],
                 })
               }
+              canEditOwners={canEditOwners}
               groupId={params.group}
               groups={namespace.groups}
               name={namespace.name}
@@ -582,7 +588,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         },
         this.context.selectedRepo,
       ),
-      NamespaceAPI.get(this.props.match.params['namespace']),
+      NamespaceAPI.get(this.props.match.params['namespace'], {
+        include_related: 'my_permissions',
+      }),
       MyNamespaceAPI.get(this.props.match.params['namespace'], {
         include_related: 'my_permissions',
       }).catch((e) => {
