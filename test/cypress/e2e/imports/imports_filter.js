@@ -18,7 +18,7 @@ describe('Imports filter test', () => {
   });
 
   after(() => {
-    //cy.deleteNamespacesAndCollections();
+    cy.deleteNamespacesAndCollections();
   });
 
   beforeEach(() => {
@@ -26,7 +26,7 @@ describe('Imports filter test', () => {
     cy.visit('/ui/my-imports?namespace=filter_test_namespace');
   });
 
-  /*it('should display success info after importing collection', () => {
+  it('should display success info after importing collection', () => {
     cy.visit('/ui/my-imports?namespace=test_namespace');
 
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).click();
@@ -62,7 +62,9 @@ describe('Imports filter test', () => {
 
   it('should be able to switch between namespaces', () => {
     cy.get('button[aria-label="Clear all"] svg').click();
-    cy.contains('[data-cy="import-list-data"]', 'No namespace selected.', {timeout : 8000});
+    cy.contains('[data-cy="import-list-data"]', 'No namespace selected.', {
+      timeout: 8000,
+    });
 
     cy.intercept(
       'GET',
@@ -146,20 +148,20 @@ describe('Imports filter test', () => {
       .contains('different_name')
       .should('not.exist');
     cy.get('[data-cy="import-list-data"]').contains('my_collection1');
-  });*/
+  });
 
   it('Exact search for completed is working.', () => {
-    cy.get('.import-list button:first').click();
-    cy.contains('a', 'Status').click();
+    cy.get('[data-cy="compound_filter"] button:first').click();
+    cy.contains('[data-cy="compound_filter"] a', 'Status').click();
 
-    cy.get('.import-list button').eq(1).click();
+    cy.get('[data-cy="compound_filter"] button').eq(1).click();
 
     // waiting to another query, otherwise sporadic failuers
     cy.intercept(
       'GET',
       Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
     ).as('wait');
-    cy.contains('a', 'Completed').click();
+    cy.contains('[data-cy="compound_filter"] a', 'Completed').click();
 
     cy.wait('@wait');
 
@@ -169,20 +171,22 @@ describe('Imports filter test', () => {
   });
 
   it('Exact search for waiting is working.', () => {
-    cy.get('.import-list button:first').click();
-    cy.contains('a', 'Status').click();
+    cy.get('[data-cy="compound_filter"] button:first').click();
+    cy.contains('[data-cy="compound_filter"] a', 'Status').click();
 
-    cy.get('.import-list button').eq(1).click();
-    cy.contains('a', 'Waiting').click();
+    cy.get('[data-cy="compound_filter"] button').eq(1).click();
+    cy.contains('[data-cy="compound_filter"] a', 'Waiting').click();
     cy.contains('No results found');
   });
 
   it('Exact search for name and completed is working.', () => {
-    cy.get('input[aria-label="keywords"').type('my_collection1{enter}');
-    cy.get('.import-list button:first').click();
-    cy.contains('a', 'Status').click();
+    cy.get('[data-cy="compound_filter"] input[aria-label="keywords"').type(
+      'my_collection1{enter}',
+    );
+    cy.get('[data-cy="compound_filter"] button:first').click();
+    cy.contains('[data-cy="compound_filter"] a', 'Status').click();
 
-    cy.get('.import-list button').eq(1).click();
+    cy.get('[data-cy="compound_filter"] button').eq(1).click();
 
     // waiting to another query, otherwise sporadic failuers
     cy.intercept(
@@ -200,11 +204,13 @@ describe('Imports filter test', () => {
   });
 
   it('Partial search for name and completed is working.', () => {
-    cy.get('input[aria-label="keywords"').type('my_collection{enter}');
-    cy.get('.import-list button:first').click();
-    cy.contains('a', 'Status').click();
+    cy.get('[data-cy="compound_filter"] input[aria-label="keywords"').type(
+      'my_collection{enter}',
+    );
+    cy.get('[data-cy="compound_filter"] button:first').click();
+    cy.contains('[data-cy="compound_filter"] a', 'Status').click();
 
-    cy.get('.import-list button').eq(1).click();
+    cy.get('[data-cy="compound_filter"] button').eq(1).click();
 
     // waiting to another query, otherwise sporadic failuers
     cy.intercept(
