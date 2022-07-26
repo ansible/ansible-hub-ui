@@ -71,7 +71,9 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
     this.loadNamespace(() => this.loadImportList(() => this.loadTaskDetails()));
 
     this.polling = setInterval(() => {
-      if (!this.state.params.namespace) return;
+      if (!this.state.params.namespace) {
+        return;
+      }
 
       const { selectedImport, selectedImportDetails } = this.state;
       const allowedStates = [PulpStatus.running, PulpStatus.waiting];
@@ -207,7 +209,9 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadNamespace(callback?: () => void) {
-    if (!this.state.params.namespace) return;
+    if (!this.state.params.namespace) {
+      return;
+    }
 
     MyNamespaceAPI.get(this.state.params.namespace)
       .then((result) => {
