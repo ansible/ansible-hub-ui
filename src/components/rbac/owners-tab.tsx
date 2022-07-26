@@ -9,7 +9,6 @@ import {
   ToolbarContent,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 
 import { GroupType, RoleType } from 'src/api';
 import {
@@ -25,7 +24,6 @@ import {
   SelectRoles,
   SortTable,
   WizardModal,
-  EmptyStateCustom,
 } from 'src/components';
 import { ParamHelper, errorMessage } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
@@ -40,6 +38,7 @@ interface IProps {
   selectRolesMessage: string;
   updateGroups: (groups: GroupType[]) => Promise<void>;
   urlPrefix: string;
+  canEditOwners: boolean;
 }
 
 interface IState {
@@ -62,7 +61,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { groups, groupId } = this.props;
+    const { groups, groupId, canEditOwners } = this.props;
     const { showGroupRemoveModal, showGroupSelectWizard } = this.state;
     const loading = !groups;
     const noData = groups?.length === 0;
@@ -86,18 +85,15 @@ export class OwnersTab extends React.Component<IProps, IState> {
         {showGroupRemoveModal ? this.renderGroupRemoveModal() : null}
         {showGroupSelectWizard ? this.renderGroupSelectWizard() : null}
 
-        {!this.context.user.is_superuser &&
-        !this.context.user.model_permissions.view_group ? (
-          <EmptyStateCustom
-            title={t`You do not have the required permissions.`}
-            description={t`Please contact the server administrator for elevated permissions.`}
-            icon={ExclamationTriangleIcon}
-          />
-        ) : noData ? (
+        {noData ? (
           <EmptyStateNoData
             title={t`There are currently no owners assigned.`}
-            description={t`Please add an owner by using the button below.`}
-            button={buttonAdd}
+            description={
+              canEditOwners
+                ? t`Please add an owner by using the button below.`
+                : ''
+            }
+            button={canEditOwners ? buttonAdd : null}
           />
         ) : groupId ? (
           this.renderRoles({ groupId })
@@ -111,15 +107,19 @@ export class OwnersTab extends React.Component<IProps, IState> {
   private renderGroups({ buttonAdd, groups }) {
     const sortedGroups = sortBy(groups, 'name');
 
+    const { canEditOwners } = this.props;
+
     return (
       <>
-        <div>
-          <Toolbar>
-            <ToolbarContent>
-              <ToolbarItem>{buttonAdd}</ToolbarItem>
-            </ToolbarContent>
-          </Toolbar>
-        </div>
+        {canEditOwners && (
+          <div>
+            <Toolbar>
+              <ToolbarContent>
+                <ToolbarItem>{buttonAdd}</ToolbarItem>
+              </ToolbarContent>
+            </Toolbar>
+          </div>
+        )}
 
         <table
           aria-label={t`Group list`}
@@ -152,7 +152,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
   }
 
   private renderGroupRow(group, index: number) {
-    const { urlPrefix } = this.props;
+    const { urlPrefix, canEditOwners } = this.props;
 
     const dropdownItems = [
       this.context.user.model_permissions.change_containernamespace && (
@@ -182,7 +182,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
             {group.name}
           </Link>
         </td>
-        <ListItemActions kebabItems={dropdownItems} />
+        {canEditOwners && <ListItemActions kebabItems={dropdownItems} />}
       </tr>
     );
   }
