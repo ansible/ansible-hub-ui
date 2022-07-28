@@ -361,18 +361,24 @@ export class RepositoryForm extends React.Component<IProps, IState> {
               isInline
               variant='info'
               title={
-                <Trans>
-                  Moved to the{' '}
-                  <Link
-                    target='_blank'
-                    to={formatPath(Paths.executionEnvironmentDetailOwners, {
-                      container: name,
-                    })}
-                  >
-                    Owners
-                  </Link>{' '}
-                  <ExternalLinkAltIcon /> tab
-                </Trans>
+                isNew ? (
+                  <Trans>
+                    Moved to the <b>Owners</b> tab
+                  </Trans>
+                ) : (
+                  <Trans>
+                    Moved to the{' '}
+                    <Link
+                      target='_blank'
+                      to={formatPath(Paths.executionEnvironmentDetailOwners, {
+                        container: name,
+                      })}
+                    >
+                      Owners
+                    </Link>{' '}
+                    <ExternalLinkAltIcon /> tab
+                  </Trans>
+                )
               }
             />
           </FormGroup>
