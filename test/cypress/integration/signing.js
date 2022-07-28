@@ -3,7 +3,7 @@ describe('signing versions', () => {
     cy.deleteNamespacesAndCollections();
   });
 
-  describe('auto sign on approval', () => {
+  describe.skip('auto sign on approval', () => {
     before(() => {
       cy.settings({
         GALAXY_AUTO_SIGN_COLLECTIONS: true,
@@ -62,7 +62,7 @@ describe('signing versions', () => {
     });
   });
 
-  describe('sign after approval', () => {
+  describe.skip('sign after approval', () => {
     before(() => {
       cy.settings({
         GALAXY_AUTO_SIGN_COLLECTIONS: false,
