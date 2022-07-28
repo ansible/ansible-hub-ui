@@ -45,7 +45,7 @@ describe('Group list tests for sorting, paging and filtering', () => {
 
   it('filter is working', () => {
     cy.get('.body')
-      .get('[placeholder="Filter by group"]:first')
+      .get('[placeholder="Filter by group name"]:first')
       .type('group_test0{enter}');
     cy.get('.body').contains('group_test0');
     cy.get('.body').contains('group_test1').should('not.exist');
