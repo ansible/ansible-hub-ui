@@ -444,6 +444,7 @@ class ExecutionEnvironmentList extends React.Component<
                 {
                   showRemoteModal: false,
                   itemToEdit: null,
+                  formError: [],
                   alerts: alerts.concat({
                     variant: 'success',
                     title: isNew ? (
@@ -478,6 +479,7 @@ class ExecutionEnvironmentList extends React.Component<
           this.setState({
             showRemoteModal: false,
             itemToEdit: null,
+            formError: [],
           })
         }
         addAlert={(variant, title, description) =>

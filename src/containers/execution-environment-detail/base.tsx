@@ -213,6 +213,7 @@ export function withContainerRepo(WrappedComponent) {
                       this.setState({
                         editing: false,
                         loading: true,
+                        formError: [],
                         alerts: alerts.concat({
                           variant: 'success',
                           title: (
@@ -245,7 +246,9 @@ export function withContainerRepo(WrappedComponent) {
                       }),
                     );
                 }}
-                onCancel={() => this.setState({ editing: false })}
+                onCancel={() =>
+                  this.setState({ editing: false, formError: [] })
+                }
                 distributionPulpId={this.state.repo.pulp.distribution.pulp_id}
                 isRemote={!!this.state.repo.pulp.repository.remote}
                 isNew={false}
