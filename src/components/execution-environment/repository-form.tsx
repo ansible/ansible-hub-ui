@@ -175,6 +175,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                   isDisabled={true}
                   type='text'
                 />
+                {this.renderNameError(formError)}
               </FormGroup>
 
               <FormGroup
@@ -207,6 +208,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                   onChange={(value) => this.setState({ name: value })}
                   validated={this.validateName(name)}
                 />
+                {this.renderNameError(formError)}
               </FormGroup>
 
               <FormGroup
@@ -580,5 +582,19 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       });
     }
     return isEmpty(xorWith(original, newOne, isEqual)) && same;
+  }
+
+  private renderNameError(formError) {
+    const nameError = formError
+      ? formError.find((e) => e.field == 'name')
+      : null;
+
+    return (
+      nameError && (
+        <Alert title={nameError.title} variant='danger' isInline>
+          {nameError.detail}
+        </Alert>
+      )
+    );
   }
 }

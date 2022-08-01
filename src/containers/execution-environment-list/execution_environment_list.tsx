@@ -468,6 +468,7 @@ class ExecutionEnvironmentList extends React.Component<
                   return {
                     title: error.title,
                     detail: error.source.parameter + ': ' + error.detail,
+                    field: error.source.parameter,
                   };
                 }),
               });
