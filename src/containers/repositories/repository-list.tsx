@@ -11,7 +11,6 @@ import {
   LocalRepositoryTable,
   RemoteForm,
 } from '../../components';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import { ParamHelper, mapErrorMessages } from '../../utilities';
 import { Constants } from '../../constants';
 import {
@@ -167,9 +166,9 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
           </div>
         </BaseHeader>
         <Main className='repository-list'>
-          <Section className='body'>
+          <section className='body'>
             {this.renderContent(params, loading, itemCount, content)}
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

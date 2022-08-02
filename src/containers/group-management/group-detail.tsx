@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 
 import {
   AlertList,
@@ -256,7 +255,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const groups = Constants.PERMISSIONS;
     const selectedPermissions = this.state.permissions;
     return (
-      <Section className='body'>
+      <section className='body'>
         <div>
           {groups.map(group => (
             <Flex
@@ -318,7 +317,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             </Flex>
           ))}
         </div>
-      </Section>
+      </section>
     );
   }
 
@@ -457,7 +456,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       params['sort'] = 'username';
     }
     return (
-      <Section className='body'>
+      <section className='body'>
         <div className='toolbar'>
           <Toolbar>
             <ToolbarContent>
@@ -525,7 +524,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             count={itemCount}
           />
         </div>{' '}
-      </Section>
+      </section>
     );
   }
 
@@ -533,7 +532,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const { params } = this.state;
     if (users.length === 0) {
       return (
-        <Section className='body'>
+        <section className='body'>
           <EmptyState className='empty' variant={EmptyStateVariant.full}>
             <EmptyStateIcon icon={WarningTriangleIcon} />
             <Title headingLevel='h2' size='lg'>
@@ -543,7 +542,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
               Please try adjusting your search query.
             </EmptyStateBody>
           </EmptyState>
-        </Section>
+        </section>
       );
     }
 

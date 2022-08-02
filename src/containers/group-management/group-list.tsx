@@ -6,7 +6,6 @@ import {
   Redirect,
   Link,
 } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import { GroupAPI } from '../../api';
 import { mapErrorMessages, ParamHelper } from '../../utilities';
 import {
@@ -123,7 +122,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         {editModalVisible ? this.renderEditModal() : null}
         <BaseHeader title='Groups'></BaseHeader>
         <Main>
-          <Section className='body'>
+          <section className='body'>
             <div className='toolbar'>
               <Toolbar>
                 <ToolbarContent>
@@ -187,7 +186,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                 count={itemCount}
               />
             </div>
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

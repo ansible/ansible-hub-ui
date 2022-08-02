@@ -9,7 +9,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { BaseHeader, Main } from '../../components';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Toolbar,
   ToolbarGroup,
@@ -128,7 +127,7 @@ class CertificationDashboard extends React.Component<
           closeAlert={i => this.closeAlert(i)}
         />
         <Main className='certification-dashboard'>
-          <Section className='body'>
+          <section className='body'>
             <div className='toolbar'>
               <Toolbar>
                 <ToolbarGroup>
@@ -205,7 +204,7 @@ class CertificationDashboard extends React.Component<
                 count={itemCount}
               />
             </div>
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

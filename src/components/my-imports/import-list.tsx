@@ -6,20 +6,20 @@ import * as moment from 'moment';
 import { cloneDeep } from 'lodash';
 
 import {
+  Button,
+  ButtonVariant,
   EmptyState,
-  EmptyStateIcon,
   EmptyStateBody,
-  Title,
-  TextInput,
-  Pagination,
+  EmptyStateIcon,
   FormSelect,
   FormSelectOption,
   InputGroup,
-  Button,
-  ButtonVariant,
+  Pagination,
+  Spinner,
+  TextInput,
+  Title,
 } from '@patternfly/react-core';
 import { InfoIcon, SearchIcon } from '@patternfly/react-icons';
-import { Spinner } from '@redhat-cloud-services/frontend-components';
 
 import { PulpStatus, NamespaceType, ImportListType } from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -128,7 +128,7 @@ export class ImportList extends React.Component<IProps, IState> {
     if (loading) {
       return (
         <div className='loading'>
-          <Spinner centered={true} />
+          <Spinner />
         </div>
       );
     }

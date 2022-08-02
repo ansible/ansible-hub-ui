@@ -2,7 +2,6 @@ import * as React from 'react';
 import './namespace-list.scss';
 
 import { RouteComponentProps } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   EmptyState,
   EmptyStateIcon,
@@ -163,8 +162,8 @@ export class NamespaceList extends React.Component<IProps, IState> {
             </div>
           </div>
         </BaseHeader>
-        <Section className='card-area'>{this.renderBody()}</Section>
-        <Section className='footer'>
+        <section className='card-area'>{this.renderBody()}</section>
+        <section className='footer'>
           <Pagination
             params={params}
             updateParams={p =>
@@ -173,7 +172,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
             count={itemCount}
           />
-        </Section>
+        </section>
       </div>
     );
   }
@@ -185,15 +184,15 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     if (loading) {
       return (
-        <Section>
+        <section>
           <LoadingPageSpinner></LoadingPageSpinner>;
-        </Section>
+        </section>
       );
     }
 
     if (namespaces.length === 0) {
       return (
-        <Section>
+        <section>
           <EmptyState className='empty' variant={EmptyStateVariant.full}>
             <EmptyStateIcon icon={SearchIcon} />
             <Title headingLevel='h2' size='lg'>
@@ -217,12 +216,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
               </Button>
             )}
           </EmptyState>
-        </Section>
+        </section>
       );
     }
 
     return (
-      <Section className='card-layout'>
+      <section className='card-layout'>
         {namespaces.map((ns, i) => (
           <div key={i} className='card-wrapper'>
             <NamespaceCard
@@ -235,7 +234,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             ></NamespaceCard>
           </div>
         ))}
-      </Section>
+      </section>
     );
   }
 

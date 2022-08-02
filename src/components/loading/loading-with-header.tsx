@@ -1,29 +1,19 @@
 import * as React from 'react';
+import { Skeleton, Title } from '@patternfly/react-core';
 
-import {
-  Skeleton,
-  PageHeaderTitle,
-  PageHeader,
-  Section,
-} from '@redhat-cloud-services/frontend-components';
-
-import { Main } from '../../components';
-
-import { LoadingPageSpinner } from '../../components';
+import { LoadingPageSpinner, Main } from '../../components';
 
 export class LoadingPageWithHeader extends React.Component<{}> {
   render() {
     return (
       <React.Fragment>
-        <PageHeader>
-          <PageHeaderTitle
-            title={<Skeleton size='sm'></Skeleton>}
-          ></PageHeaderTitle>
-        </PageHeader>
+        <section className='pf-l-page-header pf-c-page-header pf-l-page__main-section pf-c-page__main-section pf-m-light'>
+          <Title headingLevel='h1' size='2xl' children={<Skeleton />} />
+        </section>
         <Main>
-          <Section>
+          <section>
             <LoadingPageSpinner></LoadingPageSpinner>
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

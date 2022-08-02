@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 
 import { ImportAPI, ImportDetailType, ImportListType } from '../../api';
 import {
@@ -92,7 +91,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
           repo={this.context.selectedRepo}
         />
         <Main>
-          <Section className='body'>
+          <section className='body'>
             <ImportConsole
               loading={loadingImports}
               task={selectedImportDetail}
@@ -102,7 +101,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
               apiError={apiError}
               hideCollectionName={true}
             />
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

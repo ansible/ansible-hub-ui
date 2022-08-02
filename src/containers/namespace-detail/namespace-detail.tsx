@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Button,
   DropdownItem,
@@ -170,7 +169,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           pageControls={this.renderPageControls()}
         ></PartnerHeader>
         <Main>
-          <Section className='body'>
+          <section className='body'>
             {tab.toLowerCase() === 'collections' ? (
               <CollectionList
                 updateParams={params =>
@@ -206,7 +205,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             {tab.toLowerCase() === 'resources'
               ? this.renderResources(namespace)
               : null}
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

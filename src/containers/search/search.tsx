@@ -2,7 +2,6 @@ import * as React from 'react';
 import './search.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   DataList,
   EmptyState,
@@ -191,10 +190,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
             </div>
           </div>
         </BaseHeader>
-        <Section className='collection-container'>
+        <section className='collection-container'>
           {this.renderCollections(collections, params)}
-        </Section>
-        <Section className='footer'>
+        </section>
+        <section className='footer'>
           <Pagination
             params={params}
             updateParams={p =>
@@ -203,7 +202,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
             perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
             count={numberOfResults}
           />
-        </Section>
+        </section>
       </div>
     );
   }
