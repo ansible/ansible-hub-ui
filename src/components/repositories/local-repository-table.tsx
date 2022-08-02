@@ -88,12 +88,6 @@ export class LocalRepositoryTable extends React.Component<IProps> {
       ],
     };
 
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      sortTableOptions.headers = sortTableOptions.headers.filter(object => {
-        return object.id !== 'updated_at' && object.id !== 'cli_config';
-      });
-    }
-
     return (
       <table
         aria-label='Collection versions'
@@ -126,25 +120,21 @@ export class LocalRepositoryTable extends React.Component<IProps> {
         <td>{distribution.name}</td>
         <td>{distribution.repository.name}</td>
         <td>{distribution.repository.content_count}</td>
-        {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? null : (
-          <td>
-            {!!distribution.repository.pulp_last_updated
-              ? moment(distribution.repository.pulp_last_updated).fromNow()
-              : '---'}
-          </td>
-        )}
+        <td>
+          {!!distribution.repository.pulp_last_updated
+            ? moment(distribution.repository.pulp_last_updated).fromNow()
+            : '---'}
+        </td>
         <td>
           <ClipboardCopy isReadOnly>
             {getRepoUrl(distribution.base_path)}
           </ClipboardCopy>
         </td>
-        {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? null : (
-          <td>
-            <ClipboardCopy isCode isReadOnly variant={'expansion'}>
-              {cliConfig.join('\n')}
-            </ClipboardCopy>
-          </td>
-        )}
+        <td>
+          <ClipboardCopy isCode isReadOnly variant={'expansion'}>
+            {cliConfig.join('\n')}
+          </ClipboardCopy>
+        </td>
         <td>
           <span>
             <StatefulDropdown

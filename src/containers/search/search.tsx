@@ -88,9 +88,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     this.queryCollections();
-
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE)
-      this.getSynclist();
   }
 
   render() {
@@ -330,20 +327,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
         </div>
       </div>
     );
-  }
-
-  private getSynclist() {
-    MySyncListAPI.list().then(result => {
-      // ignore results if more than 1 is returned
-      // TODO: should we throw an error for this or just ignore it?
-      if (result.data.meta.count === 1) {
-        this.setState({ synclist: result.data.data[0] });
-      } else {
-        console.error(
-          `my-synclist returned ${result.data.meta.count} synclists`,
-        );
-      }
-    });
   }
 
   private queryCollections() {

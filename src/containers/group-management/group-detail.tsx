@@ -42,7 +42,6 @@ import {
 import { Constants } from '../../constants';
 import * as moment from 'moment';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
-import { InsightsUserType } from '../../api/response-types/user';
 import { AppContext } from '../../loaders/app-context';
 
 interface IState {

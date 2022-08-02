@@ -5,16 +5,11 @@ export class Constants {
 
   static readonly CARD_DEFAULT_PAGE_SIZE = 12;
   static readonly CARD_DEFAULT_PAGINATION_OPTIONS = [12, 24, 60, 120];
-  static readonly INSIGHTS_DEPLOYMENT_MODE = 'insights';
-  static readonly STANDALONE_DEPLOYMENT_MODE = 'standalone';
 
   static readonly ADMIN_GROUP = 'system:partner-engineers';
   static PUBLISHED = 'published';
 
-  static CERTIFIED_REPO =
-    DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE
-      ? 'published'
-      : 'rh-certified';
+  static CERTIFIED_REPO = 'rh-certified';
 
   static NOTCERTIFIED = 'rejected';
   static NEEDSREVIEW = 'staging';

@@ -69,10 +69,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       params['tab'] = 'local';
     }
 
-    if (
-      !params['tab'] &&
-      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE
-    ) {
+    if (!params['tab']) {
       params['tab'] = 'local';
     }
 
@@ -151,25 +148,23 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
           />
         )}
         <BaseHeader title='Repo Management'>
-          {DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE ? (
-            <div className='header-bottom'>
-              <div className='tab-link-container'>
-                <div className='tabs'>
-                  <Tabs
-                    tabs={tabs}
-                    params={params}
-                    updateParams={p => {
-                      // empty the content before updating the params to prevent
-                      // rendering from breaking when the wrong content is loaded
-                      this.setState({ content: [] }, () =>
-                        this.updateParams(p, () => this.loadContent()),
-                      );
-                    }}
-                  />
-                </div>
+          <div className='header-bottom'>
+            <div className='tab-link-container'>
+              <div className='tabs'>
+                <Tabs
+                  tabs={tabs}
+                  params={params}
+                  updateParams={p => {
+                    // empty the content before updating the params to prevent
+                    // rendering from breaking when the wrong content is loaded
+                    this.setState({ content: [] }, () =>
+                      this.updateParams(p, () => this.loadContent()),
+                    );
+                  }}
+                />
               </div>
             </div>
-          ) : null}
+          </div>
         </BaseHeader>
         <Main className='repository-list'>
           <Section className='body'>
@@ -182,11 +177,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
 
   private renderContent(params, loading, itemCount, content) {
     const { user } = this.context;
-    // Dont show remotes on insights
-    if (
-      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ||
-      (!!params.tab && params.tab.toLowerCase() === 'local')
-    ) {
+    if (!!params.tab && params.tab.toLowerCase() === 'local') {
       return (
         <div>
           {loading ? (
@@ -253,10 +244,6 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
         });
       } else {
         let APIClass = DistributionAPI;
-
-        if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-          APIClass = MyDistributionAPI;
-        }
 
         APIClass.list().then(result => {
           this.setState({

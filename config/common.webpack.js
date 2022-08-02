@@ -5,10 +5,6 @@ const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const gitRevisionPlugin = new GitRevisionPlugin({
   branch: true,
 });
-const entry =
-  process.env.NODE_ENV === 'production'
-    ? path.resolve(__dirname, '../src/entry.js')
-    : path.resolve(__dirname, '../src/entry-dev.js');
 
 const gitBranch = process.env.BRANCH || gitRevisionPlugin.branch();
 const betaBranch =
@@ -31,7 +27,6 @@ const publicPath = `/${deploymentEnv}/ansible/`;
 
 module.exports = {
   paths: {
-    entry,
     public: path.resolve(__dirname, '../dist'),
     publicPath,
   },
