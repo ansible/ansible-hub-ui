@@ -85,7 +85,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
           <ObjectPermissionField
             groups={namespace.groups}
             availablePermissions={['change_namespace', 'upload_to_namespace']}
-            setGroups={g => {
+            setGroups={(g) => {
               const newNS = { ...namespace };
               newNS.groups = g;
               this.props.updateNamespace(newNS);

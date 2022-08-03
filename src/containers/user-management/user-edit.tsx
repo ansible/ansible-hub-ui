@@ -22,7 +22,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
   componentDidMount() {
     const id = this.props.match.params['userID'];
     UserAPI.get(id)
-      .then(result => this.setState({ user: result.data }))
+      .then((result) => this.setState({ user: result.data }))
       .catch(() => this.props.history.push(Paths.notFound));
   }
 
@@ -72,7 +72,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
           this.props.history.push(Paths.userList);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });
   };

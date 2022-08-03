@@ -63,7 +63,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
     this.props.setSelected([]);
   };
 
-  private onToggle = isOpen => {
+  private onToggle = (isOpen) => {
     this.setState({
       isOpen: isOpen,
     });

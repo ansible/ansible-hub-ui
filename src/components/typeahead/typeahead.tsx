@@ -35,7 +35,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
   render() {
     let selected = null;
     if (this.props.selections) {
-      selected = this.props.selections.map(group => group.name);
+      selected = this.props.selections.map((group) => group.name);
     }
 
     const { isOpen } = this.state;
@@ -89,7 +89,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
     return options;
   }
 
-  private onFilter = evt => {
+  private onFilter = (evt) => {
     if (evt !== null) {
       const textInput = evt.target.value;
       this.props.loadResults(textInput);
@@ -97,7 +97,7 @@ export class APISearchTypeAhead extends React.Component<IProps, IState> {
     return this.getOptions();
   };
 
-  private onToggle = isOpen => {
+  private onToggle = (isOpen) => {
     this.setState({
       isOpen,
     });

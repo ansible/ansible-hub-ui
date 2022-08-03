@@ -14,10 +14,10 @@ export class BaseAPI {
   constructor() {
     this.http = axios.create({
       baseURL: this.apiBaseURL,
-      paramsSerializer: params => ParamHelper.getQueryString(params),
+      paramsSerializer: (params) => ParamHelper.getQueryString(params),
     });
 
-    this.http.interceptors.request.use(request => this.authHandler(request));
+    this.http.interceptors.request.use((request) => this.authHandler(request));
   }
 
   // Use this function to get paths in the _ui API. That will ensure the API version

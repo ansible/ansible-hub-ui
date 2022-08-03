@@ -56,7 +56,7 @@ class CollectionDetail extends React.Component<
       },
     ];
 
-    const setVersion = version =>
+    const setVersion = (version) =>
       this.updateParams({ ...params, version }, () =>
         this.loadCollection(this.context.selectedRepo, true),
       );

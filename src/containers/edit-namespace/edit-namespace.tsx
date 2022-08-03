@@ -65,7 +65,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    ActiveUserAPI.getUser().then(result => {
+    ActiveUserAPI.getUser().then((result) => {
       this.setState({ userId: result.account_number }, () =>
         this.loadNamespace(),
       );
@@ -73,14 +73,8 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
   }
 
   render() {
-    const {
-      namespace,
-      errorMessages,
-      saving,
-      redirect,
-      params,
-      userId,
-    } = this.state;
+    const { namespace, errorMessages, saving, redirect, params, userId } =
+      this.state;
 
     if (redirect) {
       return <Redirect to={redirect} />;
@@ -105,11 +99,11 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
           ]}
           tabs={['Edit details', 'Edit resources']}
           params={params}
-          updateParams={p => this.updateParams(p)}
+          updateParams={(p) => this.updateParams(p)}
         ></PartnerHeader>
         <AlertList
           alerts={this.state.alerts}
-          closeAlert={i => this.closeAlert(i)}
+          closeAlert={(i) => this.closeAlert(i)}
         />
         <Main>
           <section className='body'>
@@ -118,7 +112,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
                 userId={userId}
                 namespace={namespace}
                 errorMessages={errorMessages}
-                updateNamespace={namespace =>
+                updateNamespace={(namespace) =>
                   this.setState({
                     namespace: namespace,
                     unsavedData: true,
@@ -127,7 +121,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
               />
             ) : (
               <ResourcesForm
-                updateNamespace={namespace =>
+                updateNamespace={(namespace) =>
                   this.setState({
                     namespace: namespace,
                     unsavedData: true,
@@ -163,14 +157,14 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
 
   private loadNamespace() {
     MyNamespaceAPI.get(this.props.match.params['namespace'])
-      .then(response => {
+      .then((response) => {
         // Add an empty link to the end of the links array to create an empty field
         // on the link edit form for adding new links
         const emptyLink: NamespaceLinkType = { name: '', url: '' };
         response.data.links.push(emptyLink);
         this.setState({ namespace: response.data });
       })
-      .catch(response => {
+      .catch((response) => {
         this.setState({ redirect: Paths.notFound });
       });
   }
@@ -190,7 +184,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
       namespace.links = setLinks;
 
       MyNamespaceAPI.update(this.state.namespace.name, namespace)
-        .then(result => {
+        .then((result) => {
           this.setState({
             namespace: result.data,
             errorMessages: {},
@@ -201,7 +195,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
             }),
           });
         })
-        .catch(error => {
+        .catch((error) => {
           const result = error.response;
           if (result.status === 400) {
             this.setState({

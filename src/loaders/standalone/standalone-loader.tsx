@@ -222,7 +222,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                   isOpen={this.state.selectExpanded}
                   selections={this.getRepoName(this.state.selectedRepo)}
                   isPlain={false}
-                  onToggle={isExpanded => {
+                  onToggle={(isExpanded) => {
                     this.setState({ selectExpanded: isExpanded });
                   }}
                   onSelect={(event, value) => {
@@ -332,7 +332,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   private getRepoName(basePath) {
     const newRepoName = Object.keys(Constants.REPOSITORYNAMES).find(
-      key => Constants.REPOSITORYNAMES[key] === basePath,
+      (key) => Constants.REPOSITORYNAMES[key] === basePath,
     );
 
     // allowing the repo to go through even if isn't one that we support so
@@ -358,11 +358,11 @@ class App extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private setUser = user => {
+  private setUser = (user) => {
     this.setState({ user: user });
   };
 
-  private setRepo = repo => {
+  private setRepo = (repo) => {
     this.setState({ selectedRepo: repo });
   };
 }

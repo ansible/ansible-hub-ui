@@ -72,7 +72,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
       <div className={className}>
         <Nav theme='light'>
           <NavList>
-            {Object.keys(table).map(key =>
+            {Object.keys(table).map((key) =>
               table[key].length === 0
                 ? null
                 : this.renderLinks(table[key], key),
@@ -112,10 +112,7 @@ export class TableOfContents extends React.Component<IProps, IState> {
         const url = sanitizeDocsUrls(file.name);
         table.documentation.push({
           display: this.capitalize(
-            file.name
-              .split('.')[0]
-              .split('_')
-              .join(' '),
+            file.name.split('.')[0].split('_').join(' '),
           ),
           url: formatPath(Paths.collectionDocsPageByRepo, {
             ...baseUrlParams,

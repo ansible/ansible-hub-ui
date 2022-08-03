@@ -116,7 +116,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       <React.Fragment>
         <AlertList
           alerts={alerts}
-          closeAlert={i => this.closeAlert(i)}
+          closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
         <DeleteUserModal
           isOpen={showDeleteModal}
@@ -139,7 +139,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                   <ToolbarGroup>
                     <ToolbarItem>
                       <CompoundFilter
-                        updateParams={p =>
+                        updateParams={(p) =>
                           this.updateParams(p, () => this.queryUsers())
                         }
                         params={params}
@@ -178,7 +178,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
 
               <Pagination
                 params={params}
-                updateParams={p =>
+                updateParams={(p) =>
                   this.updateParams(p, () => this.queryUsers())
                 }
                 count={itemCount}
@@ -187,7 +187,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
             </div>
             <div>
               <AppliedFilters
-                updateParams={p =>
+                updateParams={(p) =>
                   this.updateParams(p, () => this.queryUsers())
                 }
                 params={params}
@@ -199,7 +199,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
             <div style={{ paddingTop: '24px', paddingBottom: '8px' }}>
               <Pagination
                 params={params}
-                updateParams={p =>
+                updateParams={(p) =>
                   this.updateParams(p, () => this.queryUsers())
                 }
                 count={itemCount}
@@ -272,7 +272,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={p => this.updateParams(p, () => this.queryUsers())}
+          updateParams={(p) => this.updateParams(p, () => this.queryUsers())}
         />
         <tbody>{users.map((user, i) => this.renderTableRow(user, i))}</tbody>
       </table>
@@ -329,7 +329,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         <td>{user.last_name}</td>
         <td>{user.first_name}</td>
         <td>
-          {user.groups.map(g => (
+          {user.groups.map((g) => (
             <Label key={g.id}>{g.name}</Label>
           ))}
         </td>
@@ -343,11 +343,11 @@ class UserList extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private deleteUser = user => {
+  private deleteUser = (user) => {
     this.setState({ deleteUser: user, showDeleteModal: true });
   };
 
-  private closeModal = didDelete =>
+  private closeModal = (didDelete) =>
     this.setState(
       {
         deleteUser: undefined,
@@ -362,7 +362,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
 
   private queryUsers() {
     this.setState({ loading: true }, () =>
-      UserAPI.list(this.state.params).then(result =>
+      UserAPI.list(this.state.params).then((result) =>
         this.setState({
           users: result.data.data,
           itemCount: result.data.meta.count,

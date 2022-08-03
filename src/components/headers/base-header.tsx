@@ -17,14 +17,8 @@ interface IProps {
 
 export class BaseHeader extends React.Component<IProps, {}> {
   render() {
-    const {
-      title,
-      imageURL,
-      pageControls,
-      children,
-      breadcrumbs,
-      className,
-    } = this.props;
+    const { title, imageURL, pageControls, children, breadcrumbs, className } =
+      this.props;
     return (
       <div className={cx('background', className)}>
         {breadcrumbs ? (

@@ -96,10 +96,10 @@ export class LocalRepositoryTable extends React.Component<IProps> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={p => console.log(p)}
+          updateParams={(p) => console.log(p)}
         />
         <tbody>
-          {repositories.map(distribution => this.renderRow(distribution))}
+          {repositories.map((distribution) => this.renderRow(distribution))}
         </tbody>
       </table>
     );

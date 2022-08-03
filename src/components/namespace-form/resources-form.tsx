@@ -42,7 +42,7 @@ export class ResourcesForm extends React.Component<IProps, {}> {
                 className='resources-editor'
                 id='resources'
                 value={namespace.resources}
-                onChange={value => this.updateResources(value)}
+                onChange={(value) => this.updateResources(value)}
                 placeholder={placeholder}
               />
             </FormGroup>

@@ -21,9 +21,9 @@ module.exports = (on, config) => {
 
   // in plugins file
   on('task', {
-    log (message) {
-        console.log(message)
-        return null
-    }
-  })
-}
+    log(message) {
+      console.log(message);
+      return null;
+    },
+  });
+};

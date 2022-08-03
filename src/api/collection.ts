@@ -102,11 +102,11 @@ export class API extends BaseAPI {
           .get(path, {
             params: params,
           })
-          .then(result => {
+          .then((result) => {
             this.cachedCollection = result.data;
             resolve(result.data);
           })
-          .catch(result => {
+          .catch((result) => {
             reject(result);
           });
       });
@@ -120,10 +120,10 @@ export class API extends BaseAPI {
         .get(
           `content/${distro_base_path}/v3/collections/${namespace}/${name}/versions/${version}/`,
         )
-        .then(result => {
+        .then((result) => {
           resolve(result.data['download_url']);
         })
-        .catch(err => reject(err));
+        .catch((err) => reject(err));
     });
   }
 }

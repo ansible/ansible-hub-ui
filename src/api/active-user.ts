@@ -12,10 +12,10 @@ class API extends BaseAPI {
     return new Promise((resolve, reject) => {
       this.http
         .get(this.apiPath)
-        .then(result => {
+        .then((result) => {
           resolve(result.data);
         })
-        .catch(result => reject(result));
+        .catch((result) => reject(result));
     });
   }
 
@@ -53,10 +53,10 @@ class API extends BaseAPI {
               username: username,
               password: password,
             })
-            .then(response => resolve(response))
-            .catch(err => reject(err));
+            .then((response) => resolve(response))
+            .catch((err) => reject(err));
         })
-        .catch(err => reject(err));
+        .catch((err) => reject(err));
     });
   }
 }

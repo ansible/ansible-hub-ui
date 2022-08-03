@@ -21,14 +21,8 @@ interface IProps {
 
 export class PartnerHeader extends React.Component<IProps, {}> {
   render() {
-    const {
-      namespace,
-      breadcrumbs,
-      tabs,
-      pageControls,
-      params,
-      updateParams,
-    } = this.props;
+    const { namespace, breadcrumbs, tabs, pageControls, params, updateParams } =
+      this.props;
     return (
       <BaseHeader
         title={namespace.company || namespace.name}
@@ -43,7 +37,7 @@ export class PartnerHeader extends React.Component<IProps, {}> {
             <Tabs
               tabs={tabs}
               params={params}
-              updateParams={p => updateParams(p)}
+              updateParams={(p) => updateParams(p)}
             />
           </div>
           {namespace.links.length > 0 ? (
