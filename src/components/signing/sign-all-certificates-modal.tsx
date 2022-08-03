@@ -67,11 +67,6 @@ export const SignAllCertificatesModal: React.FC<Props> = ({
             <SplitItem>
               <Trans>Signed version(s)</Trans>
             </SplitItem>
-            <SplitItem>
-              <Badge isRead data-cy='signed-number-badge'>
-                {numberOfAffected - affectedUnsigned}
-              </Badge>
-            </SplitItem>
             <SplitItem></SplitItem>
             <SplitItem>
               <Trans>Unsigned version(s)</Trans>
