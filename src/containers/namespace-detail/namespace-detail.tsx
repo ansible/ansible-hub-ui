@@ -9,7 +9,7 @@ import {
   ClipboardCopy,
 } from '@patternfly/react-core';
 
-import * as ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 
 import {
   CollectionListType,
@@ -240,7 +240,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private renderResources(namespace: NamespaceType) {
     return (
       <div className='pf-c-content preview'>
-        <ReactMarkdown children={namespace.resources} />
+        <ReactMarkdown>{namespace.resources}</ReactMarkdown>
       </div>
     );
   }
