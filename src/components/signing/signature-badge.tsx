@@ -8,7 +8,7 @@ import {
 import { useContext } from 'src/loaders/app-context';
 
 interface Props extends LabelProps {
-  signState: 'signed' | 'unsigned' | 'partial';
+  signState: 'signed' | 'unsigned';
 }
 
 export const SignatureBadge: FC<Props> = ({
@@ -28,8 +28,6 @@ export const SignatureBadge: FC<Props> = ({
         return t`Signed`;
       case 'unsigned':
         return t`Unsigned`;
-      case 'partial':
-        return t`Partially signed`;
     }
   };
 

@@ -70,7 +70,6 @@ export class CollectionFilter extends React.Component<IProps, IState> {
         options: [
           { id: 'signed', title: t`Signed` },
           { id: 'unsigned', title: t`Unsigned` },
-          { id: 'partial', title: t`Partial` },
         ],
       },
     ].filter(Boolean);
