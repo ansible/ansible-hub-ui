@@ -26,7 +26,8 @@ jobs:
 
     - name: "Install galaxykit dependency"
       run: |
-        pip install git+https://github.com/ansible/galaxykit.git
+        # FIXME(rbac): pip install git+https://github.com/ansible/galaxykit.git
+        pip install galaxykit==0.8.0
 
     - name: "Set env.SHORT_BRANCH, env.GALAXY_NG_COMMIT"
       run: |
