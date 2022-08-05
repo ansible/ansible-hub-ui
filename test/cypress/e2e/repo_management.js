@@ -26,8 +26,9 @@ describe('Repo Management tests', () => {
 
   it('admin user sees download_concurrency in remote config', () => {
     cy.visit(remoteRepoUrl);
-    cy.contains('.title-box', 'Repo Management');
+    cy.contains('.body', 'community'); // without this, sporadic failures
     cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
+    cy.contains('Edit'); // without this, sporadic failures
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
     cy.get('#download_concurrency').should('exist');
