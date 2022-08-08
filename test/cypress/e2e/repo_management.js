@@ -94,10 +94,7 @@ describe('Repo Management tests', () => {
     cy.visit(localRepoUrl);
     cy.contains('.hub-tab-link-container span', 'Remote').click();
     cy.contains('.body', 'rh-certified');
-
-    cy.contains('.body button', 'Configure');
     cy.contains('.body button', 'Sync');
-
     cy.get('.body button[aria-label="Actions"]').eq(0).click();
     cy.contains('.body a', 'Edit');
     cy.get('.body button[aria-label="Actions"]').eq(1).click();
@@ -109,10 +106,7 @@ describe('Repo Management tests', () => {
     cy.visit(localRepoUrl);
     cy.contains('.hub-tab-link-container span', 'Remote').click();
     cy.contains('.body', 'rh-certified');
-
-    cy.contains('.body button', 'Configure').should('not.exist');
     cy.contains('.body button', 'Sync').should('not.exist');
-
     cy.get('.body button[aria-label="Actions"]').should('not.exist');
   });
 
