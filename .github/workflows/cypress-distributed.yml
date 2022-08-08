@@ -1,4 +1,4 @@
-name: Cypress
+name: Distributed Cypress run
 
 on:
   # allow running manually
