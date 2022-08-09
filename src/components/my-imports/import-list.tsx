@@ -16,7 +16,7 @@ import {
   MyNamespaceAPI,
 } from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
-import { filterIsSet } from 'src/utilities';
+import { filterIsSet, errorMessage } from 'src/utilities';
 import { Constants } from 'src/constants';
 import { DateComponent, EmptyStateNoData, EmptyStateFilter } from '..';
 
@@ -34,6 +34,7 @@ interface IProps {
 
   selectImport: (x) => void;
   updateParams: (filters) => void;
+  addAlert: (alert) => void;
 }
 
 interface IState {
@@ -228,11 +229,17 @@ export class ImportList extends React.Component<IProps, IState> {
   }
 
   private loadNamespaces(namespace_filter) {
-    MyNamespaceAPI.list({ page_size: 100, keywords: namespace_filter })
+    MyNamespaceAPI.list({ page_size: 10, keywords: namespace_filter + 'dsdds' })
       .then((result) => {
         this.setState({ namespaces: result.data.data });
       })
-      .catch((result) => console.log(result));
+      .catch((e) =>
+        this.props.addAlert({
+          variant: 'danger',
+          title: t`Namespaces list could not be displayed.`,
+          description: errorMessage(e.status, e.statusText),
+        }),
+      );
   }
 
   private renderApiSearchAhead() {
@@ -261,9 +268,7 @@ export class ImportList extends React.Component<IProps, IState> {
               this.props.updateParams(params);
             }}
             placeholderText={t`Select namespace`}
-            selections={this.state.namespaces.filter(
-              (namespace) => namespace.name == this.props.params.namespace,
-            )}
+            selections={[{ id: -1, name: this.props.params.namespace }]}
             results={this.state.namespaces}
           />
         </div>
