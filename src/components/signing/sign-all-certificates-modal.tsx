@@ -1,6 +1,5 @@
 import { t, Trans } from '@lingui/macro';
 import {
-  Badge,
   Button,
   ButtonVariant,
   Form,
@@ -27,8 +26,6 @@ interface Props {
 
 export const SignAllCertificatesModal: React.FC<Props> = ({
   name,
-  numberOfAffected,
-  affectedUnsigned,
   isOpen,
   onSubmit,
   onCancel,
@@ -57,8 +54,8 @@ export const SignAllCertificatesModal: React.FC<Props> = ({
         <GridItem span={12}>
           <p>
             <Trans>
-              You are about to sign <strong>{numberOfAffected}</strong>{' '}
-              version(s) under <strong>{name}</strong>.
+              You are about to sign <strong>all versions</strong> under{' '}
+              <strong>{name}</strong>.
             </Trans>
           </p>
         </GridItem>
@@ -67,19 +64,9 @@ export const SignAllCertificatesModal: React.FC<Props> = ({
             <SplitItem>
               <Trans>Signed version(s)</Trans>
             </SplitItem>
-            <SplitItem>
-              <Badge isRead data-cy='signed-number-badge'>
-                {numberOfAffected - affectedUnsigned}
-              </Badge>
-            </SplitItem>
             <SplitItem></SplitItem>
             <SplitItem>
               <Trans>Unsigned version(s)</Trans>
-            </SplitItem>
-            <SplitItem>
-              <Badge isRead data-cy='unsigned-number-badge'>
-                {affectedUnsigned}
-              </Badge>
             </SplitItem>
           </Split>
         </GridItem>

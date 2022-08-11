@@ -1,4 +1,4 @@
-type SignState = 'signed' | 'unsigned' | 'partial';
+type SignState = 'signed' | 'unsigned';
 
 export class CollectionUploadType {
   id: string;
