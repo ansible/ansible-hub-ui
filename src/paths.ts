@@ -13,7 +13,8 @@ export function formatPath(
   }
 
   if (params) {
-    return `${url}?${ParamHelper.getQueryString(params)}`;
+    const path = `${url}?${ParamHelper.getQueryString(params)}`;
+    return path;
   } else {
     return url;
   }
