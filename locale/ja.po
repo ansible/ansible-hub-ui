@@ -313,7 +313,7 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 #: src/components/import-modal/import-modal.tsx:78
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/repositories/remote-form.tsx:149
-#: src/components/signing/sign-all-certificates-modal.tsx:52
+#: src/components/signing/sign-all-certificates-modal.tsx:49
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/components/user-form/user-form.tsx:226
@@ -1994,12 +1994,12 @@ msgid "Parent task"
 msgstr "親タスク"
 
 #: src/components/collection-list/collection-filter.tsx:73
-msgid "Partial"
-msgstr "部分的"
+#~ msgid "Partial"
+#~ msgstr "部分的"
 
 #: src/components/signing/signature-badge.tsx:32
-msgid "Partially signed"
-msgstr "部分署名済み"
+#~ msgid "Partially signed"
+#~ msgstr "部分署名済み"
 
 #: src/paths.ts:73
 msgid "Partners"
@@ -2547,11 +2547,11 @@ msgstr "表示:"
 msgid "Sign"
 msgstr "署名"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:49
+#: src/components/signing/sign-all-certificates-modal.tsx:46
 msgid "Sign all"
 msgstr "すべて署名する"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:39
+#: src/components/signing/sign-all-certificates-modal.tsx:36
 #: src/containers/namespace-detail/namespace-detail.tsx:672
 msgid "Sign all collections"
 msgstr "すべてのコレクションへの署名"
@@ -2594,11 +2594,11 @@ msgstr "署名済みおよび承認済み"
 msgid "Signed only"
 msgstr "署名済みのみ"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:68
+#: src/components/signing/sign-all-certificates-modal.tsx:65
 msgid "Signed version(s)"
 msgstr "署名済みバージョン"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:90
+#: src/components/signing/sign-all-certificates-modal.tsx:77
 msgid "Signing service selector:"
 msgstr "署名サービスセレクター:"
 
@@ -3027,7 +3027,7 @@ msgstr "非推奨解除"
 msgid "Unsigned"
 msgstr "未署名"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:77
+#: src/components/signing/sign-all-certificates-modal.tsx:69
 msgid "Unsigned version(s)"
 msgstr "未署名バージョン"
 
@@ -3323,6 +3323,10 @@ msgstr "はい"
 msgid "Yes, stop"
 msgstr "はい、停止します"
 
+#: src/components/signing/sign-all-certificates-modal.tsx:56
+msgid "You are about to sign <0>all versions</0> under <1>{name}</1>."
+msgstr ""
+
 #: src/components/signing/sign-all-certificates-modal.tsx:40
 #~ msgid "You are about to sign <0>all</0> versions under <1>{name}</1>."
 #~ msgstr "You are about to sign <0>all</0> versions under <1>{name}</1>."
@@ -3332,8 +3336,8 @@ msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
 msgstr "<1>{name}</1> として <0>バージョン {version}</0> に署名しようとしています。"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:59
-msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
-msgstr "<1>{name}</1> として <0>{numberOfAffected}</0> バージョンに署名しようとしています。"
+#~ msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
+#~ msgstr "<1>{name}</1> として <0>{numberOfAffected}</0> バージョンに署名しようとしています。"
 
 #: src/containers/token/token-standalone.tsx:73
 msgid "You are an SSO user. Your token will expire <0/>."
@@ -3397,7 +3401,7 @@ msgstr "find-content"
 msgid "hidden value"
 msgstr "非表示の値"
 
-#: src/components/collection-list/collection-filter.tsx:95
+#: src/components/collection-list/collection-filter.tsx:94
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
 msgstr "キーワード"
@@ -3431,11 +3435,11 @@ msgstr "拒否"
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:93
+#: src/components/collection-list/collection-filter.tsx:92
 msgid "sign state"
 msgstr "署名状態"
 
-#: src/components/collection-list/collection-filter.tsx:94
+#: src/components/collection-list/collection-filter.tsx:93
 msgid "tags"
 msgstr "タグ"
 

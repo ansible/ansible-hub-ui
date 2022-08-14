@@ -313,7 +313,7 @@ msgstr "在未将一个发布附加到它时，无法远程更新。"
 #: src/components/import-modal/import-modal.tsx:78
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/repositories/remote-form.tsx:149
-#: src/components/signing/sign-all-certificates-modal.tsx:52
+#: src/components/signing/sign-all-certificates-modal.tsx:49
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/components/user-form/user-form.tsx:226
@@ -1994,12 +1994,12 @@ msgid "Parent task"
 msgstr "父任务"
 
 #: src/components/collection-list/collection-filter.tsx:73
-msgid "Partial"
-msgstr "部分"
+#~ msgid "Partial"
+#~ msgstr "部分"
 
 #: src/components/signing/signature-badge.tsx:32
-msgid "Partially signed"
-msgstr "部分签名"
+#~ msgid "Partially signed"
+#~ msgstr "部分签名"
 
 #: src/paths.ts:73
 msgid "Partners"
@@ -2547,11 +2547,11 @@ msgstr "显示："
 msgid "Sign"
 msgstr "签发"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:49
+#: src/components/signing/sign-all-certificates-modal.tsx:46
 msgid "Sign all"
 msgstr "签发所有"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:39
+#: src/components/signing/sign-all-certificates-modal.tsx:36
 #: src/containers/namespace-detail/namespace-detail.tsx:672
 msgid "Sign all collections"
 msgstr "签发所有集合"
@@ -2594,11 +2594,11 @@ msgstr "已签名并批准"
 msgid "Signed only"
 msgstr "仅包括签发的"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:68
+#: src/components/signing/sign-all-certificates-modal.tsx:65
 msgid "Signed version(s)"
 msgstr "签名的版本"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:90
+#: src/components/signing/sign-all-certificates-modal.tsx:77
 msgid "Signing service selector:"
 msgstr "签名服务选择器："
 
@@ -3027,7 +3027,7 @@ msgstr "取消弃用"
 msgid "Unsigned"
 msgstr "未签名"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:77
+#: src/components/signing/sign-all-certificates-modal.tsx:69
 msgid "Unsigned version(s)"
 msgstr "未签名的版本"
 
@@ -3323,6 +3323,10 @@ msgstr "是"
 msgid "Yes, stop"
 msgstr "是，停止"
 
+#: src/components/signing/sign-all-certificates-modal.tsx:56
+msgid "You are about to sign <0>all versions</0> under <1>{name}</1>."
+msgstr ""
+
 #: src/components/signing/sign-all-certificates-modal.tsx:40
 #~ msgid "You are about to sign <0>all</0> versions under <1>{name}</1>."
 #~ msgstr "You are about to sign <0>all</0> versions under <1>{name}</1>."
@@ -3332,8 +3336,8 @@ msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
 msgstr "您将签发 <1>{name}</1> 下 <0> 版本 {version}</0>。"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:59
-msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
-msgstr "您将在 <1>{name}</1> 下签发 <0>{numberOfAffected}</0> 版本。"
+#~ msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
+#~ msgstr "您将在 <1>{name}</1> 下签发 <0>{numberOfAffected}</0> 版本。"
 
 #: src/containers/token/token-standalone.tsx:73
 msgid "You are an SSO user. Your token will expire <0/>."
@@ -3397,7 +3401,7 @@ msgstr "查找内容"
 msgid "hidden value"
 msgstr "隐藏值"
 
-#: src/components/collection-list/collection-filter.tsx:95
+#: src/components/collection-list/collection-filter.tsx:94
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
 msgstr "关键字"
@@ -3431,11 +3435,11 @@ msgstr "拒绝"
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:93
+#: src/components/collection-list/collection-filter.tsx:92
 msgid "sign state"
 msgstr "签发状态"
 
-#: src/components/collection-list/collection-filter.tsx:94
+#: src/components/collection-list/collection-filter.tsx:93
 msgid "tags"
 msgstr "标签"
 

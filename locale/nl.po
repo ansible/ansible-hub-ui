@@ -315,7 +315,7 @@ msgstr "Ik kan niet op afstand updaten zonder dat er een distributie aan vastzit
 #: src/components/import-modal/import-modal.tsx:78
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/repositories/remote-form.tsx:149
-#: src/components/signing/sign-all-certificates-modal.tsx:52
+#: src/components/signing/sign-all-certificates-modal.tsx:49
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/components/user-form/user-form.tsx:226
@@ -1996,12 +1996,12 @@ msgid "Parent task"
 msgstr "Oudertaak"
 
 #: src/components/collection-list/collection-filter.tsx:73
-msgid "Partial"
-msgstr "Partial"
+#~ msgid "Partial"
+#~ msgstr "Partial"
 
 #: src/components/signing/signature-badge.tsx:32
-msgid "Partially signed"
-msgstr "Partially signed"
+#~ msgid "Partially signed"
+#~ msgstr "Partially signed"
 
 #: src/paths.ts:73
 msgid "Partners"
@@ -2549,11 +2549,11 @@ msgstr "Tonen:"
 msgid "Sign"
 msgstr "Sign"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:49
+#: src/components/signing/sign-all-certificates-modal.tsx:46
 msgid "Sign all"
 msgstr "Sign all"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:39
+#: src/components/signing/sign-all-certificates-modal.tsx:36
 #: src/containers/namespace-detail/namespace-detail.tsx:672
 msgid "Sign all collections"
 msgstr "Sign all collections"
@@ -2596,11 +2596,11 @@ msgstr "Signed and approved"
 msgid "Signed only"
 msgstr "Signed only"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:68
+#: src/components/signing/sign-all-certificates-modal.tsx:65
 msgid "Signed version(s)"
 msgstr ""
 
-#: src/components/signing/sign-all-certificates-modal.tsx:90
+#: src/components/signing/sign-all-certificates-modal.tsx:77
 msgid "Signing service selector:"
 msgstr ""
 
@@ -3029,7 +3029,7 @@ msgstr "Afschrijving ongedaan maken"
 msgid "Unsigned"
 msgstr "Unsigned"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:77
+#: src/components/signing/sign-all-certificates-modal.tsx:69
 msgid "Unsigned version(s)"
 msgstr ""
 
@@ -3325,6 +3325,10 @@ msgstr "Ja"
 msgid "Yes, stop"
 msgstr "Ja, stoppen"
 
+#: src/components/signing/sign-all-certificates-modal.tsx:56
+msgid "You are about to sign <0>all versions</0> under <1>{name}</1>."
+msgstr ""
+
 #: src/components/signing/sign-all-certificates-modal.tsx:40
 #~ msgid "You are about to sign <0>all</0> versions under <1>{name}</1>."
 #~ msgstr "You are about to sign <0>all</0> versions under <1>{name}</1>."
@@ -3334,8 +3338,8 @@ msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
 msgstr "You are about to sign <0>version {version}</0> under <1>{name}</1>."
 
 #: src/components/signing/sign-all-certificates-modal.tsx:59
-msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
-msgstr ""
+#~ msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."
+#~ msgstr ""
 
 #: src/containers/token/token-standalone.tsx:73
 msgid "You are an SSO user. Your token will expire <0/>."
@@ -3399,7 +3403,7 @@ msgstr "find-content"
 msgid "hidden value"
 msgstr "verborgen waarde"
 
-#: src/components/collection-list/collection-filter.tsx:95
+#: src/components/collection-list/collection-filter.tsx:94
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
 msgstr "trefwoorden"
@@ -3433,11 +3437,11 @@ msgstr "afgewezen"
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:93
+#: src/components/collection-list/collection-filter.tsx:92
 msgid "sign state"
 msgstr "sign state"
 
-#: src/components/collection-list/collection-filter.tsx:94
+#: src/components/collection-list/collection-filter.tsx:93
 msgid "tags"
 msgstr "Tags"
 
