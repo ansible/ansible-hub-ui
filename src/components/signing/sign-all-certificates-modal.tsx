@@ -17,8 +17,6 @@ import React from 'react';
 
 interface Props {
   name: string;
-  numberOfAffected: number;
-  affectedUnsigned: number;
   isOpen: boolean;
   onSubmit: () => void;
   onCancel: () => void;

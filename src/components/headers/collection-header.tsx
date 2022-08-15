@@ -296,8 +296,6 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             />
             <SignAllCertificatesModal
               name={collectionName}
-              numberOfAffected={collection.total_versions}
-              affectedUnsigned={collection.unsigned_versions}
               isOpen={this.state.isOpenSignAllModal}
               onSubmit={this.signCollection}
               onCancel={() => {
