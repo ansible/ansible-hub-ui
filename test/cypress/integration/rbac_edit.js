@@ -23,16 +23,16 @@ describe('edits a role', () => {
     // edit role - first filter by editable and name fragment
 
     cy.get('[data-cy=compound_filter] > div:nth-child(1) > button').click();
-    cy.get('[data-cy=compound_filter] li[role=menuitem]')
+    cy.get('[data-cy=compound_filter] [role=menuitem]')
       .contains('Editable')
       .click();
     cy.get('[data-cy=compound_filter] > div:nth-child(2) > button').click();
-    cy.get('[data-cy=compound_filter] li[role=menuitem]')
+    cy.get('[data-cy=compound_filter] [role=menuitem]')
       .contains('Editable')
       .click();
 
     cy.get('[data-cy=compound_filter] > div:nth-child(1) > button').click();
-    cy.get('[data-cy=compound_filter] li[role=menuitem]')
+    cy.get('[data-cy=compound_filter] [role=menuitem]')
       .contains('Role name')
       .click();
     cy.get(
@@ -40,7 +40,7 @@ describe('edits a role', () => {
     ).type(`test${num}{enter}`);
 
     cy.get('[aria-label="Actions"]:first').click();
-    cy.get('li[role=menuitem]').contains('Edit').click();
+    cy.get('[role=menuitem]').contains('Edit').click();
 
     cy.get('input[id="role_name"]').should('be.disabled');
     cy.get('input[id="role_description"]').clear().type('new description');
