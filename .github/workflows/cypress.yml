@@ -191,6 +191,12 @@ jobs:
       run: |
         curl -s -u admin:admin http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
 
+    # galaxykit#53 turns out to be incompatible with 4.5, but already released in 0.8.0, patching out
+    - name: "Patch galaxykit"
+      run: |
+        sed -i -e '/def wait_for_task/,$d' ~/.local/lib/python*/site-packages/galaxykit/utils.py
+        ( echo 'def wait_for_task(client, task):' ; echo '    return task' ) >> ~/.local/lib/python*/site-packages/galaxykit/utils.py
+
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
