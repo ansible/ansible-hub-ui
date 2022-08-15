@@ -2,15 +2,11 @@ import { PulpAPI } from './pulp';
 
 export class API extends PulpAPI {
   apiPath = 'tasks/';
+  useOrdering = true;
 
-  list(params) {
-    const changedParams = { ...params };
-    if (changedParams['sort']) {
-      changedParams['ordering'] = changedParams['sort'];
-      delete changedParams['sort'];
-    }
-    return super.list(changedParams);
-  }
+  // get(id)
+  // list(params)
+  // patch(id, data)
 }
 
 export const TaskManagementAPI = new API();

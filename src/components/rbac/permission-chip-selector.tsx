@@ -11,9 +11,10 @@ import {
 } from '@patternfly/react-core';
 
 interface IProps {
-  availablePermissions: string[];
+  availablePermissions?: string[];
   selectedPermissions: string[];
-  setSelected: (selected: string[]) => void;
+  customPermissions?: string[];
+  setSelected?: (selected: string[]) => void;
   isDisabled?: boolean;
   isViewOnly?: boolean;
   onSelect?: (event, selection) => void;

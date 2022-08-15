@@ -43,12 +43,17 @@ export const RoleListTable: React.FC<Props> = ({
       {
         title: t`Role`,
         type: 'alpha',
-        id: 'name',
+        id: 'role',
       },
       {
         title: t`Description`,
         type: 'none',
         id: 'description',
+      },
+      {
+        title: t`Editable`,
+        type: 'none',
+        id: 'locked',
       },
       {
         title: '',
@@ -79,12 +84,13 @@ export const ExpandableRow: React.FC<{
   rowIndex: number;
   expandableRowContent?: React.ReactNode;
   colSpan?: number;
-}> = ({ rowIndex, children, expandableRowContent, colSpan }) => {
+  'data-cy'?: string;
+}> = ({ rowIndex, children, expandableRowContent, colSpan, ...props }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <Tbody isExpanded={isExpanded}>
-      <Tr>
+      <Tr data-cy={props['data-cy']}>
         <Td
           expand={{
             onToggle: () => setIsExpanded(!isExpanded),
@@ -97,7 +103,11 @@ export const ExpandableRow: React.FC<{
       {expandableRowContent && (
         <Tr isExpanded={isExpanded}>
           <Td colSpan={colSpan ?? 4}>
-            <ExpandableRowContent>{expandableRowContent}</ExpandableRowContent>
+            {isExpanded && (
+              <ExpandableRowContent>
+                {expandableRowContent}
+              </ExpandableRowContent>
+            )}
           </Td>
         </Tr>
       )}
@@ -109,11 +119,14 @@ export const CheckboxRow: React.FC<{
   rowIndex?: number;
   isSelected: boolean;
   onSelect: (value) => void;
-}> = ({ rowIndex, children, isSelected, onSelect }) => (
+  isDisabled?: boolean;
+  'data-cy'?: string;
+}> = ({ rowIndex, children, isSelected, onSelect, isDisabled, ...props }) => (
   <Tbody>
-    <Tr>
+    <Tr data-cy={props['data-cy']}>
       <Td
         select={{
+          disable: isDisabled,
           variant: 'checkbox',
           rowIndex,
           onSelect,
@@ -129,11 +142,14 @@ export const RadioRow: React.FC<{
   rowIndex?: number;
   isSelected: boolean;
   onSelect: (value) => void;
-}> = ({ rowIndex, children, isSelected, onSelect }) => (
+  isDisabled?: boolean;
+  'data-cy'?: string;
+}> = ({ rowIndex, children, isSelected, onSelect, isDisabled, ...props }) => (
   <Tbody>
-    <Tr>
+    <Tr data-cy={props['data-cy']}>
       <Td
         select={{
+          disable: isDisabled,
           variant: 'radio',
           rowIndex,
           onSelect,

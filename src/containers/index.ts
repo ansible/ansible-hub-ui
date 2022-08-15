@@ -18,6 +18,13 @@ export { default as UserList } from './user-management/user-list';
 export { default as EditUser } from './user-management/user-edit';
 export { default as UserDetail } from './user-management/user-detail';
 export { default as UserCreate } from './user-management/user-create';
+export { default as RoleCreate } from './role-management/role-create';
+export {
+  mapNetworkErrors,
+  validateInput,
+} from './role-management/map-role-errors';
+export { default as RoleList } from './role-management/role-list';
+export { default as EditRole } from './role-management/role-edit';
 export { default as UserProfile } from './settings/user-profile';
 export { default as GroupList } from './group-management/group-list';
 export { default as GroupDetail } from './group-management/group-detail';
@@ -27,6 +34,7 @@ export { default as ExecutionEnvironmentRegistryList } from './execution-environ
 export { default as ExecutionEnvironmentDetail } from './execution-environment-detail/execution_environment_detail';
 export { default as ExecutionEnvironmentDetailActivities } from './execution-environment-detail/execution_environment_detail_activities';
 export { default as ExecutionEnvironmentDetailImages } from './execution-environment-detail/execution_environment_detail_images';
+export { default as ExecutionEnvironmentDetailOwners } from './execution-environment-detail/execution_environment_detail_owners';
 export { default as ExecutionEnvironmentManifest } from './execution-environment-manifest/execution-environment-manifest';
 export { default as TaskDetail } from './task-management/task_detail';
 export { default as TaskListView } from './task-management/task-list-view';

@@ -10,9 +10,8 @@ class API extends PulpAPI {
     });
   }
 
-  untag(repositoryID: string, tag: string, digest: string) {
+  untag(repositoryID: string, tag: string) {
     return this.http.post(`${this.apiPath}${repositoryID}/untag/`, {
-      digest: digest,
       tag: tag,
     });
   }

@@ -4,16 +4,20 @@ import './header.scss';
 
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 
-import { BaseHeader, Logo, Tabs, TabsType, Breadcrumbs } from 'src/components';
+import {
+  BaseHeader,
+  Logo,
+  Tabs,
+  TabsType,
+  Breadcrumbs,
+  BreadcrumbType,
+} from 'src/components';
 import { NamespaceType } from 'src/api';
 
 interface IProps {
   namespace: NamespaceType;
   tabs: TabsType[];
-  breadcrumbs: {
-    url?: string;
-    name: string;
-  }[];
+  breadcrumbs: BreadcrumbType[];
   params: { tab?: string };
   updateParams: (p) => void;
 

@@ -1,24 +1,25 @@
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './namespace-form.scss';
-import { validateURLHelper } from 'src/utilities';
 
 import {
+  Alert,
   Form,
   FormGroup,
-  TextInput,
   TextArea,
-  Alert,
+  TextInput,
 } from '@patternfly/react-core';
-import { PlusCircleIcon, TrashIcon } from '@patternfly/react-icons';
-
 import {
-  NamespaceCard,
-  ObjectPermissionField,
-  AlertType,
-} from 'src/components';
+  ExternalLinkAltIcon,
+  PlusCircleIcon,
+  TrashIcon,
+} from '@patternfly/react-icons';
+import { Link } from 'react-router-dom';
+
 import { NamespaceType } from 'src/api';
-import { errorMessage, ErrorMessagesType } from 'src/utilities';
+import { NamespaceCard } from 'src/components';
+import { Paths, formatPath } from 'src/paths';
+import { ErrorMessagesType, validateURLHelper } from 'src/utilities';
 
 interface IProps {
   namespace: NamespaceType;
@@ -27,33 +28,14 @@ interface IProps {
   updateNamespace: (namespace) => void;
 }
 
-interface IState {
-  newNamespaceGroup: string;
-  formErrors?: {
-    groups?: AlertType;
-  };
-}
-
-export class NamespaceForm extends React.Component<IProps, IState> {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      newNamespaceGroup: '',
-      formErrors: {
-        groups: null,
-      },
-    };
-  }
-
+export class NamespaceForm extends React.Component<IProps> {
   render() {
     const { namespace, errorMessages } = this.props;
-
-    const { formErrors } = this.state;
 
     if (!namespace) {
       return null;
     }
+
     return (
       <Form>
         <div className='hub-card-row'>
@@ -90,45 +72,29 @@ export class NamespaceForm extends React.Component<IProps, IState> {
           </div>
         </div>
 
-        <FormGroup
-          fieldId='groups'
-          label={t`Namespace owners`}
-          className='namespace-owners'
-          helperTextInvalid={errorMessages['groups']}
-          validated={this.toError(
-            !isNaN(Number(this.state.newNamespaceGroup)) &&
-              !('groups' in errorMessages),
-          )}
-        >
-          <br />
-          {formErrors?.groups ? (
-            <Alert title={formErrors.groups.title} variant='danger' isInline>
-              {formErrors.groups.description}
-            </Alert>
-          ) : (
-            <ObjectPermissionField
-              groups={namespace.groups}
-              availablePermissions={['change_namespace', 'upload_to_namespace']}
-              setGroups={(g) => {
-                const newNS = { ...namespace };
-                newNS.groups = g;
-                this.props.updateNamespace(newNS);
-              }}
-              onError={(err) => {
-                const { status, statusText } = err.response;
-                this.setState({
-                  formErrors: {
-                    ...this.state.formErrors,
-                    groups: {
-                      title: t`Groups list could not be displayed.`,
-                      description: errorMessage(status, statusText),
-                      variant: 'danger',
+        <FormGroup fieldId='none' label={t`Namespace owners`}>
+          <Alert
+            isInline
+            variant='info'
+            title={
+              <Trans>
+                Moved to the{' '}
+                <Link
+                  target='_blank'
+                  to={formatPath(
+                    Paths.myCollections,
+                    {
+                      namespace: namespace.name,
                     },
-                  },
-                });
-              }}
-            ></ObjectPermissionField>
-          )}
+                    { tab: 'owners' },
+                  )}
+                >
+                  Namespace owners
+                </Link>{' '}
+                <ExternalLinkAltIcon /> tab
+              </Trans>
+            }
+          />
         </FormGroup>
 
         <FormGroup

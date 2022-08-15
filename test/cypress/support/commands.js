@@ -181,7 +181,7 @@ Cypress.Commands.add(
   },
 );
 
-Cypress.Commands.add('createGroup', {}, (name) => {
+Cypress.Commands.add('createGroupManually', {}, (name) => {
   cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/?*').as(
     'loadGroups',
   );
@@ -200,125 +200,7 @@ Cypress.Commands.add('createGroup', {}, (name) => {
   cy.contains(name).should('exist');
 });
 
-/*
- * groupName: name of the group you want to add permissions to
- * permissions: array of {group, permissions}
- *   group: permission group, one of names from PERMISSIONS; namespaces | collections | users | groups | remotes | containers | registries
- *   permissions: array of HUMAN_PERMISSIONS values (of the right group) - eg. "View user"
- */
-Cypress.Commands.add('addPermissions', {}, (groupName, permissions) => {
-  cy.intercept(
-    'GET',
-    Cypress.env('prefix') + '_ui/v1/groups/*/model-permissions/*',
-  ).as('groups');
-  cy.menuGo('User Access > Groups');
-  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.wait('@groups');
-  cy.contains('button', 'Edit').click();
-  permissions.forEach((permissionElement) => {
-    permissionElement.permissions.forEach((permission) => {
-      // closes previously open dropdowns
-      cy.get('h1').click();
-      cy.get(
-        `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} [aria-label="Options menu"]`,
-      ).click();
-      cy.contains('button', permission).click();
-    });
-  });
-  // need to click outside dropdown to make save button clickable
-  cy.contains('Edit group permissions').click();
-  cy.contains('button', 'Save').click();
-  // wait for for update
-  cy.contains('button', 'Edit');
-});
-
-Cypress.Commands.add('removePermissions', {}, (groupName, permissions) => {
-  cy.menuGo('User Access > Groups');
-  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.contains('button', 'Edit').click();
-  permissions.forEach((permissionElement) => {
-    if (permissionElement.permissions.length > 3) {
-      // Make sure all permissions are visible
-      cy.containsnear(
-        `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `,
-        'more',
-      )
-        .first()
-        .click();
-    }
-    permissionElement.permissions.forEach((permission) => {
-      cy.containsnear(
-        `.pf-l-flex.pf-m-align-items-center.${permissionElement.group} `,
-        permission,
-      )
-        .findnear('button')
-        .first()
-        .click();
-    });
-    // closes previously open dropdowns
-    cy.get('h1').click();
-  });
-  cy.contains('button', 'Save').click();
-  // wait for for update
-  cy.contains('button', 'Edit');
-});
-
-const allPerms = [
-  {
-    group: 'namespaces',
-    permissions: [
-      'Add namespace',
-      'Change namespace',
-      'Delete namespace',
-      'Upload to namespace',
-    ],
-  },
-  {
-    group: 'collections',
-    permissions: ['Modify Ansible repo content', 'Delete collection'],
-  },
-  {
-    group: 'users',
-    permissions: ['View user', 'Delete user', 'Add user', 'Change user'],
-  },
-  {
-    group: 'groups',
-    permissions: ['View group', 'Delete group', 'Add group', 'Change group'],
-  },
-  {
-    group: 'remotes',
-    permissions: ['Change collection remote', 'View collection remote'],
-  },
-  {
-    group: 'containers',
-    permissions: [
-      'Delete container repository',
-      'Change container namespace permissions',
-      'Change containers',
-      'Change image tags',
-      'Create new containers',
-      'Push to existing containers',
-    ],
-  },
-  {
-    group: 'registries',
-    permissions: [
-      'Add remote registry',
-      'Change remote registry',
-      'Delete remote registry',
-    ],
-  },
-];
-
-Cypress.Commands.add('removeAllPermissions', {}, (groupName) => {
-  cy.removePermissions(groupName, allPerms);
-});
-
-Cypress.Commands.add('addAllPermissions', {}, (groupName) => {
-  cy.addPermissions(groupName, allPerms);
-});
-
-Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
+Cypress.Commands.add('addUserToGroupManually', {}, (groupName, userName) => {
   cy.menuGo('User Access > Groups');
   cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
   cy.contains('button', 'Users').click();
@@ -330,20 +212,37 @@ Cypress.Commands.add('addUserToGroup', {}, (groupName, userName) => {
   cy.get(`[data-cy="GroupDetail-users-${userName}"]`).should('exist');
 });
 
-Cypress.Commands.add('removeUserFromGroup', {}, (groupName, userName) => {
-  cy.menuGo('User Access > Groups');
-  cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
-  cy.contains('button', 'Users').click();
-  cy.get(
-    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
-  ).click();
-  cy.containsnear(
-    `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
-    'Remove',
-  ).click();
-  cy.contains('button.pf-m-danger', 'Delete').click();
-  cy.contains('[data-cy=main-tabs]', userName).should('not.exist');
-});
+Cypress.Commands.add(
+  'createRole',
+  {},
+  (name, description, permissions = [], ignoreError = false) => {
+    cy.galaxykit(
+      `${ignoreError ? '-i' : ''} role create`,
+      name,
+      description,
+      `--permissions=${permissions.join(',')}`,
+    );
+  },
+);
+
+Cypress.Commands.add(
+  'removeUserFromGroupManually',
+  {},
+  (groupName, userName) => {
+    cy.menuGo('User Access > Groups');
+    cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
+    cy.contains('button', 'Users').click();
+    cy.get(
+      `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
+    ).click();
+    cy.containsnear(
+      `[data-cy="GroupDetail-users-${userName}"] [aria-label="Actions"]`,
+      'Remove',
+    ).click();
+    cy.contains('button.pf-m-danger', 'Delete').click();
+    cy.contains('[data-cy=main-tabs]', userName).should('not.exist');
+  },
+);
 
 Cypress.Commands.add('deleteUser', {}, (username) => {
   cy.menuGo('User Access > Users');
@@ -371,7 +270,7 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
   );
 });
 
-Cypress.Commands.add('deleteGroup', {}, (name) => {
+Cypress.Commands.add('deleteGroupManually', {}, (name) => {
   cy.menuGo('User Access > Groups');
   cy.intercept('DELETE', Cypress.env('prefix') + '_ui/v1/groups/*').as(
     'deleteGroup',
@@ -398,10 +297,9 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   const adminPassword = Cypress.env('password');
   const galaxykitCommand = Cypress.env('galaxykit') || 'galaxykit';
   const server = Cypress.config().baseUrl + Cypress.env('prefix');
-  const options =
-    args.length >= 1 && typeof args[args.length - 1] == 'object'
-      ? args.splice(args.length - 1, 1)[0]
-      : [];
+  const options = (args.length >= 1 &&
+    typeof args[args.length - 1] == 'object' &&
+    args.splice(args.length - 1, 1)[0]) || { failOnNonZeroExit: false };
 
   cy.log(`${galaxykitCommand} ${operation} ${args}`);
   const cmd = shell`${shell.preserve(
@@ -413,7 +311,9 @@ Cypress.Commands.add('galaxykit', {}, (operation, ...args) => {
   return cy.exec(cmd, options).then(({ code, stderr, stdout }) => {
     console.log(`RUN ${cmd}`, options, { code, stderr, stdout });
 
-    if (stderr) {
+    if (code || stderr) {
+      cy.log('galaxykit code: ' + code);
+      cy.log('galaxykit stderr: ' + stderr);
       return Promise.reject(new Error(`Galaxykit failed: ${stderr}`));
     }
 
@@ -753,4 +653,32 @@ Cypress.Commands.add('deleteNamespacesAndCollections', {}, () => {
       cy.galaxykit('namespace delete', namespace.name);
     });
   });
+});
+
+Cypress.Commands.add(
+  'createRole',
+  {},
+  (name, description, permissions = [], ignoreError = false) => {
+    cy.galaxykit(
+      `${ignoreError ? '-i' : ''} role create`,
+      name,
+      description,
+      `--permissions=${permissions.join(',')}`,
+    );
+  },
+);
+
+Cypress.Commands.add('deleteRole', {}, (role) => {
+  cy.visit('/ui/roles/');
+
+  cy.get(
+    `[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle]`,
+  ).click();
+
+  cy.contains('Delete').click();
+  cy.get('[data-cy=DeleteModal]')
+    .parent()
+    .get('button')
+    .contains('Delete')
+    .click();
 });

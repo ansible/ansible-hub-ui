@@ -15,12 +15,20 @@ interface IProps {
   title: string;
   description: ReactNode;
   button?: ReactElement;
+  variant?: 'xs' | 'small' | 'large' | 'xl' | 'full';
 }
 
 export class EmptyStateCustom extends React.Component<IProps> {
+  static defaultProps = {
+    variant: 'small',
+  };
+
   render() {
     return (
-      <EmptyState variant={EmptyStateVariant.small}>
+      <EmptyState
+        variant={EmptyStateVariant[this.props.variant]}
+        data-cy='EmptyState'
+      >
         <EmptyStateIcon icon={this.props.icon} />
         <Title headingLevel='h4' size='lg'>
           {this.props.title}

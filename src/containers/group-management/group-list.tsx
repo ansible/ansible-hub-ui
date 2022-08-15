@@ -127,7 +127,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     } = this.state;
 
     const { user } = this.context;
-    const noData = groups.length === 0 && !filterIsSet(params, ['name']);
+    const noData =
+      groups.length === 0 && !filterIsSet(params, ['name__contains']);
 
     if (redirect) {
       return <Redirect push to={redirect} />;
@@ -180,8 +181,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                           params={params}
                           filterConfig={[
                             {
-                              id: 'name',
-                              title: t`Group`,
+                              id: 'name__contains',
+                              title: t`Group name`,
                             },
                           ]}
                         />
@@ -220,6 +221,9 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                   }}
                   params={params}
                   ignoredParams={['page_size', 'page', 'sort']}
+                  niceNames={{
+                    name__contains: t`Group name`,
+                  }}
                 />
               </div>
               {loading ? <LoadingPageSpinner /> : this.renderTable(params)}
@@ -268,8 +272,9 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderDeleteModal() {
     const name = this.state.selectedGroup && this.state.selectedGroup.name;
     const { deleteModalUsers: users, deleteModalCount: count } = this.state;
+    const { view_user } = this.context.user.model_permissions;
 
-    if (!users) {
+    if (!users && view_user) {
       this.queryUsers();
     }
 
@@ -280,6 +285,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         deleteAction={() => this.selectedGroup(this.state.selectedGroup)}
         name={name}
         users={users}
+        canViewUsers={view_user}
       />
     );
   }
@@ -371,7 +377,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     const sortTableOptions = {
       headers: [
         {
-          title: t`Group`,
+          title: t`Group name`,
           type: 'alpha',
           id: 'name',
         },
@@ -401,40 +407,20 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(group, index: number) {
     const { user } = this.context;
     const dropdownItems = [
-      <React.Fragment key='dropdown'>
+      !!user && user.model_permissions.delete_group && (
         <DropdownItem
-          key='edit'
+          aria-label='Delete'
+          key='delete'
           onClick={() => {
             this.setState({
-              selectedGroup: { ...group },
-              redirect: formatPath(
-                Paths.groupDetail,
-                {
-                  group: group.id,
-                },
-                { isEditing: true },
-              ),
+              selectedGroup: group,
+              deleteModalVisible: true,
             });
           }}
         >
-          <Trans>Edit</Trans>
+          <Trans>Delete</Trans>
         </DropdownItem>
-
-        {!!user && user.model_permissions.delete_group && (
-          <DropdownItem
-            aria-label='Delete'
-            key='delete'
-            onClick={() => {
-              this.setState({
-                selectedGroup: group,
-                deleteModalVisible: true,
-              });
-            }}
-          >
-            <Trans>Delete</Trans>
-          </DropdownItem>
-        )}
-      </React.Fragment>,
+      ),
     ];
     return (
       <tr data-cy={`GroupList-row-${group.name}`} key={index}>

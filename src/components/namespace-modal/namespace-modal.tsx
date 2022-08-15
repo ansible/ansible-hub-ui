@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import {
-  Alert,
   Button,
   Form,
   FormGroup,
@@ -11,9 +10,9 @@ import {
   TextInput,
 } from '@patternfly/react-core';
 
-import { NamespaceAPI, GroupObjectPermissionType } from 'src/api';
-import { AlertType, HelperText, ObjectPermissionField } from 'src/components';
-import { errorMessage, ErrorMessagesType } from 'src/utilities';
+import { NamespaceAPI } from 'src/api';
+import { HelperText } from 'src/components';
+import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {
   isOpen: boolean;
@@ -24,11 +23,7 @@ interface IProps {
 interface IState {
   newNamespaceName: string;
   newNamespaceNameValid: boolean;
-  newGroups: GroupObjectPermissionType[];
   errorMessages: ErrorMessagesType;
-  formErrors: {
-    groups: AlertType;
-  };
 }
 
 export class NamespaceModal extends React.Component<IProps, IState> {
@@ -41,11 +36,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
     this.state = {
       newNamespaceName: '',
       newNamespaceNameValid: true,
-      newGroups: [],
       errorMessages: {},
-      formErrors: {
-        groups: null,
-      },
     };
   }
 
@@ -74,14 +65,13 @@ export class NamespaceModal extends React.Component<IProps, IState> {
   private handleSubmit = () => {
     const data = {
       name: this.state.newNamespaceName,
-      groups: this.state.newGroups,
+      groups: [],
     };
     NamespaceAPI.create(data)
       .then(() => {
         this.toggleModal();
         this.setState({
           newNamespaceName: '',
-          newGroups: [],
           errorMessages: {},
         });
         this.props.onCreateSuccess(data);
@@ -100,8 +90,7 @@ export class NamespaceModal extends React.Component<IProps, IState> {
   };
 
   render() {
-    const { newNamespaceName, newGroups, newNamespaceNameValid, formErrors } =
-      this.state;
+    const { newNamespaceName, newNamespaceNameValid } = this.state;
 
     return (
       <Modal
@@ -152,40 +141,6 @@ export class NamespaceModal extends React.Component<IProps, IState> {
                 }}
               />
             </InputGroup>
-          </FormGroup>
-          <FormGroup
-            label={t`Namespace owners`}
-            fieldId='groups'
-            helperTextInvalid={this.state.errorMessages['groups']}
-          >
-            {formErrors?.groups ? (
-              <Alert title={formErrors.groups.title} variant='danger' isInline>
-                {formErrors.groups.description}
-              </Alert>
-            ) : (
-              <ObjectPermissionField
-                availablePermissions={[
-                  'change_namespace',
-                  'upload_to_namespace',
-                ]}
-                groups={newGroups}
-                setGroups={(g) => this.setState({ newGroups: g })}
-                menuAppendTo='parent'
-                onError={(err) => {
-                  const { status, statusText } = err.response;
-                  this.setState({
-                    formErrors: {
-                      ...this.state.formErrors,
-                      groups: {
-                        title: t`Groups list could not be displayed.`,
-                        description: errorMessage(status, statusText),
-                        variant: 'danger',
-                      },
-                    },
-                  });
-                }}
-              />
-            )}
           </FormGroup>
         </Form>
       </Modal>

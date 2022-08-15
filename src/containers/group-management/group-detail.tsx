@@ -1,5 +1,4 @@
 import { t, Trans } from '@lingui/macro';
-import { i18n } from '@lingui/core';
 
 import * as React from 'react';
 import { errorMessage } from 'src/utilities';
@@ -30,7 +29,6 @@ import {
   LoadingPageWithHeader,
   Main,
   Pagination,
-  PermissionChipSelector,
   SortTable,
   Tabs,
 } from 'src/components';
@@ -40,23 +38,23 @@ import {
   UserType,
   GroupObjectPermissionType,
 } from 'src/api';
-import { filterIsSet, ParamHelper, twoWayMapper } from 'src/utilities';
+import { filterIsSet, ParamHelper } from 'src/utilities';
 import { formatPath, Paths } from 'src/paths';
 import {
-  ActionGroup,
   Button,
   DropdownItem,
-  Flex,
-  FlexItem,
-  Form,
   Modal,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { Constants } from 'src/constants';
+
 import { AppContext } from 'src/loaders/app-context';
+
+import './group-management.scss';
+
+import GroupDetailRoleManagement from './group-detail-role-management/group-detail-role-management';
 
 interface IState {
   group: GroupObjectPermissionType;
@@ -66,7 +64,7 @@ interface IState {
     page_size?: number;
     sort?: string;
     tab: string;
-    isEditing: boolean;
+    [key: string]: string | number;
   };
   users: UserType[];
   allUsers: UserType[];
@@ -75,8 +73,6 @@ interface IState {
   addModalVisible: boolean;
   options: { id: number; name: string }[];
   selected: { id: number; name: string }[];
-  editPermissions: boolean;
-  savingPermissions: boolean;
   showDeleteModal: boolean;
   showUserRemoveModal: UserType | null;
   permissions: string[];
@@ -88,6 +84,10 @@ interface IState {
 
 class GroupDetail extends React.Component<RouteComponentProps, IState> {
   nonQueryStringParams = ['group'];
+
+  userQueryStringParams = ['username', 'first_name', 'last_name', 'email'];
+
+  roleQueryStringParams = ['role__icontains'];
 
   constructor(props) {
     super(props);
@@ -107,17 +107,15 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         id: id,
         page: 0,
         page_size: params['page_size'] || 10,
-        sort: params['sort'] || 'username',
-        tab: params['tab'] || 'permissions',
-        isEditing: params['isEditing'] === 'true',
+        sort:
+          params['sort'] || (params['tab'] === 'access' ? 'role' : 'username'),
+        tab: params['tab'] || 'access',
       },
       itemCount: 0,
       alerts: [],
       addModalVisible: false,
       options: undefined,
       selected: [],
-      editPermissions: false,
-      savingPermissions: false,
       showDeleteModal: false,
       showUserRemoveModal: null,
       permissions: [],
@@ -128,41 +126,14 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    this.setState({ editPermissions: this.state.params.isEditing });
-    if (!this.context.user || this.context.user.is_anonymous) {
+    if (
+      !this.context.user ||
+      this.context.user.is_anonymous ||
+      !this.context.user.model_permissions.view_group
+    ) {
       this.setState({ unauthorised: true });
     } else {
-      GroupAPI.get(this.state.params.id)
-        .then((result) => {
-          this.setState({ group: result.data });
-        })
-        .catch((e) => {
-          const { status, statusText } = e.response;
-          this.addAlert(
-            t`Group "${this.state.group.name}" could not be displayed.`,
-            'danger',
-            errorMessage(status, statusText),
-          );
-        });
-
-      GroupAPI.getPermissions(this.state.params.id)
-        .then((result) => {
-          this.setState({
-            originalPermissions: result.data.data.map((p) => ({
-              id: p.id,
-              name: p.permission,
-            })),
-            permissions: result.data.data.map((x) => x.permission),
-          });
-        })
-        .catch((e) => {
-          const { status, statusText } = e.response;
-          this.addAlert(
-            t`Permissions for group "${this.state.group.name}" could not be displayed.`,
-            'danger',
-            errorMessage(status, statusText),
-          );
-        });
+      this.queryGroup();
     }
   }
 
@@ -174,7 +145,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const {
       addModalVisible,
       alerts,
-      editPermissions,
       group,
       params,
       showDeleteModal,
@@ -184,7 +154,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     } = this.state;
     const { user } = this.context;
 
-    const tabs = [{ id: 'permissions', name: t`Permissions` }];
+    const tabs = [{ id: 'access', name: t`Access` }];
     if (!!user && user.model_permissions.view_user) {
       tabs.push({ id: 'users', name: t`Users` });
     }
@@ -219,11 +189,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         {showDeleteModal ? this.renderGroupDeleteModal() : null}
         {showUserRemoveModal ? this.renderUserRemoveModal() : null}
         <BaseHeader
-          title={
-            editPermissions && params.tab == 'permissions'
-              ? t`Edit group permissions`
-              : group.name
-          }
+          title={group.name}
           breadcrumbs={
             <Breadcrumbs
               links={[
@@ -237,8 +203,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           <div className='hub-tab-link-container'>
             <div className='tabs'>
               <Tabs
-                isDisabled={editPermissions}
-                disabledTitle={t`Please finish editing permissions first.`}
                 tabs={tabs}
                 params={params}
                 updateParams={(p) => this.updateParams(p)}
@@ -247,7 +211,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           </div>
         </BaseHeader>
         <Main data-cy='main-tabs'>
-          {params.tab == 'permissions' ? this.renderPermissions() : null}
+          {params.tab == 'access' ? this.renderGroupDetail() : null}
           {params.tab == 'users' ? this.renderUsers(users) : null}
         </Main>
       </React.Fragment>
@@ -256,7 +220,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   private renderControls() {
     const { user } = this.context;
-    const { editPermissions } = this.state;
 
     if (!user || !user.model_permissions.delete_group) {
       return null;
@@ -265,7 +228,6 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     return (
       <ToolbarItem>
         <Button
-          isDisabled={editPermissions}
           onClick={() => this.setState({ showDeleteModal: true })}
           variant='secondary'
         >
@@ -275,171 +237,19 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     );
   }
 
-  private actionCancelPermissions() {
-    const { originalPermissions } = this.state;
-    this.setState({
-      editPermissions: false,
-      permissions: originalPermissions.map((p) => p.name),
-    });
-  }
-
-  private actionSavePermissions() {
-    const { group, originalPermissions, permissions } = this.state;
-    const promises = [];
-
-    // Add permissions
-    permissions.forEach((permission) => {
-      if (!originalPermissions.find((p) => p.name === permission)) {
-        promises.push(
-          GroupAPI.addPermission(group.id, {
-            permission: permission,
-          }).catch((e) => {
-            const { status, statusText } = e.response;
-            this.addAlert(
-              t`Permission "${permission}" could not be not added to group "${this.state.group}".`,
-              'danger',
-              errorMessage(status, statusText),
-            );
-          }),
-        );
-      }
-    });
-
-    // Remove permissions
-    originalPermissions.forEach((original) => {
-      if (!permissions.includes(original.name)) {
-        promises.push(
-          GroupAPI.removePermission(group.id, original.id).catch((e) => {
-            const { status, statusText } = e.response;
-            this.addAlert(
-              t`Permission "${original.name}" could not be not removed from group "${this.state.group}".`,
-              'danger',
-              errorMessage(status, statusText),
-            );
-          }),
-        );
-      }
-    });
-
-    this.setState({ savingPermissions: true }); // disable Save/Cancel while waiting
-    Promise.all(promises).then(() =>
-      this.setState({
-        editPermissions: false,
-        savingPermissions: false,
-      }),
-    );
-  }
-
-  private renderPermissions() {
-    const { editPermissions, savingPermissions, permissions } = this.state;
-    const { user, featureFlags } = this.context;
-    const { external_authentication } = featureFlags || {};
-
-    const ChipRow = ({ permGroup: { object_permissions } }) => {
-      const availablePermissions = object_permissions
-        // hide selected
-        .filter((perm) => !permissions.find((selected) => perm === selected))
-        // hide list when in keycloak mode
-        .filter(
-          (perm) =>
-            !external_authentication ||
-            !Constants.USER_GROUP_MGMT_PERMISSIONS.find(
-              (disabled) => perm === disabled,
-            ),
-        )
-        // make human readable (FIXME: sorted by English instead of using a predefined order)
-        .map((value) => Constants.HUMAN_PERMISSIONS[value] || value)
-        .sort();
-
-      const selectedPermissions = permissions
-        // hide permissions not in this group
-        .filter((selected) =>
-          object_permissions.find((perm) => selected === perm),
-        )
-        // make human readable
-        .map((value) => Constants.HUMAN_PERMISSIONS[value] || value);
-
-      const onClear = () => {
-        this.setState({
-          permissions: permissions.filter(
-            (x) => !object_permissions.includes(x),
-          ),
-        });
-      };
-
-      const onSelect = (_event, selection) => {
-        // FIXME: PermissionChipSelector should really work with the actual values, not english strings
-        const value = twoWayMapper(selection, Constants.HUMAN_PERMISSIONS);
-        const newPerms = new Set(this.state.permissions);
-        if (newPerms.has(value)) {
-          newPerms.delete(value);
-        } else {
-          newPerms.add(value);
-        }
-        this.setState({ permissions: Array.from(newPerms) });
-      };
-
-      return (
-        <PermissionChipSelector
-          availablePermissions={availablePermissions}
-          isViewOnly={!editPermissions}
-          menuAppendTo='inline'
-          multilingual
-          onClear={onClear}
-          onSelect={onSelect}
-          selectedPermissions={selectedPermissions}
-          setSelected={(permissions) => this.setState({ permissions })}
-        />
-      );
-    };
-
+  private renderGroupDetail() {
+    const { params, group } = this.state;
     return (
-      <section className='body'>
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          {!editPermissions && user.model_permissions.change_group && (
-            <Button onClick={() => this.setState({ editPermissions: true })}>
-              {t`Edit`}
-            </Button>
-          )}
-        </div>
-        <div>
-          {Constants.PERMISSIONS.map((permGroup) => (
-            <Flex
-              style={{ marginTop: '16px' }}
-              alignItems={{ default: 'alignItemsCenter' }}
-              key={permGroup.name}
-              className={permGroup.name}
-            >
-              <FlexItem style={{ minWidth: '200px' }}>
-                {i18n._(permGroup.label)}
-              </FlexItem>
-              <FlexItem grow={{ default: 'grow' }}>
-                <ChipRow permGroup={permGroup} />
-              </FlexItem>
-            </Flex>
-          ))}
-        </div>
-        {editPermissions && (
-          <Form>
-            <ActionGroup>
-              <Button
-                variant='primary'
-                isDisabled={savingPermissions}
-                onClick={() => this.actionSavePermissions()}
-              >
-                {t`Save`}
-              </Button>
-              <Button
-                variant='secondary'
-                isDisabled={savingPermissions}
-                onClick={() => this.actionCancelPermissions()}
-              >
-                {t`Cancel`}
-              </Button>
-            </ActionGroup>
-          </Form>
-        )}
-      </section>
+      <GroupDetailRoleManagement
+        params={params}
+        updateParams={(p) => this.updateParams(p)}
+        context={this.context}
+        group={group}
+        addAlert={(title, variant, description) =>
+          this.addAlert(title, variant, description)
+        }
+        nonQueryParams={this.userQueryStringParams}
+      />
     );
   }
 
@@ -484,7 +294,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         <APISearchTypeAhead
           results={this.state.options}
           loadResults={(name) =>
-            UserAPI.list({ username__contains: name, page_size: 5 })
+            UserAPI.list({ username__contains: name, page_size: 1000 })
               .then((result) => {
                 let filteredUsers = [];
                 result.data.data.forEach((user) => {
@@ -547,6 +357,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             })
           }
           isDisabled={false}
+          style={{ overflowY: 'auto', maxHeight: '350px' }}
         />
       </Modal>
     );
@@ -577,7 +388,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         });
     };
 
-    if (!users) {
+    const { view_user } = this.context.user.model_permissions;
+
+    if (!users && view_user) {
       this.queryUsers();
     }
 
@@ -588,6 +401,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         deleteAction={deleteAction}
         name={group.name}
         users={users}
+        canViewUsers={view_user}
       />
     );
   }
@@ -640,7 +454,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadOptions() {
-    UserAPI.list()
+    UserAPI.list({ page_size: 1000 })
       .then((result) => {
         const options = result.data.data
           .filter((user) => !this.state.users.find((u) => u.id === user.id))
@@ -671,11 +485,17 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderUsers(users) {
-    const { params, itemCount } = this.state;
+    const { itemCount, params } = this.state;
     const { user, featureFlags } = this.context;
     const noData =
       itemCount === 0 &&
-      !filterIsSet(params, ['username', 'first_name', 'last_name', 'email']);
+      !filterIsSet(this.state.params, [
+        'username',
+        'first_name',
+        'last_name',
+        'email',
+        'role__icontains',
+      ]);
     let isUserMgmtDisabled = false;
     if (featureFlags) {
       isUserMgmtDisabled = featureFlags.external_authentication;
@@ -769,11 +589,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             params={params}
             ignoredParams={[
               'id',
-              'isEditing',
               'page',
               'page_size',
               'sort',
               'tab',
+              'role__icontains',
             ]}
           />
         </div>
@@ -880,9 +700,20 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private queryUsers() {
+    const params = {
+      ...ParamHelper.getReduced(this.state.params, [
+        ...this.roleQueryStringParams,
+      ]),
+      sort: ParamHelper.validSortParams(
+        this.state.params['sort'],
+        this.userQueryStringParams,
+        'username',
+      ),
+      groups__name: this.state.group.name,
+    };
+
     UserAPI.list({
-      ...this.state.params,
-      ...{ groups__name: this.state.group.name },
+      ...params,
     })
       .then((result) =>
         this.setState({
@@ -898,6 +729,29 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           errorMessage(status, statusText),
         );
       });
+  }
+
+  private queryGroup() {
+    GroupAPI.get(this.state.params.id)
+      .then((result) => {
+        this.setState({ group: result.data });
+      })
+      .catch((e) => {
+        if (e.response.status === 404) {
+          this.setState({ redirect: Paths.notFound });
+        } else {
+          const { status, statusText } = e.response;
+          this.addAlert(
+            t`Group could not be displayed.`,
+            'danger',
+            errorMessage(status, statusText),
+          );
+        }
+      });
+
+    this.setState({
+      users: null,
+    });
   }
 
   private deleteUser(user) {

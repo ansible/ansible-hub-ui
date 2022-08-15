@@ -24,12 +24,16 @@ import {
   UserProfile,
   GroupList,
   GroupDetail,
+  RoleList,
+  RoleCreate,
+  EditRole,
   RepositoryList,
   ExecutionEnvironmentList,
   ExecutionEnvironmentRegistryList,
   ExecutionEnvironmentDetail,
   ExecutionEnvironmentDetailActivities,
   ExecutionEnvironmentDetailImages,
+  ExecutionEnvironmentDetailOwners,
   ExecutionEnvironmentManifest,
   TaskListView,
   TaskDetail,
@@ -143,7 +147,7 @@ export class Routes extends React.Component<IRoutesProps> {
 
   // Note: must be ordered from most specific to least specific
   getRoutes(): IRouteConfig[] {
-    const { featureFlags } = this.context;
+    const { featureFlags, user } = this.context;
     let isContainerDisabled = true;
     let isUserMgmtDisabled = false;
     if (featureFlags) {
@@ -154,6 +158,11 @@ export class Routes extends React.Component<IRoutesProps> {
       {
         comp: ExecutionEnvironmentDetailActivities,
         path: Paths.executionEnvironmentDetailActivities,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        comp: ExecutionEnvironmentDetailOwners,
+        path: Paths.executionEnvironmentDetailOwners,
         isDisabled: isContainerDisabled,
       },
       {
@@ -188,6 +197,13 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: GroupList, path: Paths.groupList },
       { comp: GroupDetail, path: Paths.groupDetail },
       { comp: TaskDetail, path: Paths.taskDetail },
+      { comp: EditRole, path: Paths.roleEdit },
+      {
+        comp: RoleCreate,
+        path: Paths.createRole,
+        isDisabled: !user?.is_superuser,
+      },
+      { comp: RoleList, path: Paths.roleList },
       { comp: RepositoryList, path: Paths.repositories },
       { comp: UserProfile, path: Paths.userProfileSettings },
       {
