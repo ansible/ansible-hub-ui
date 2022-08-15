@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { List, ListItem, ListVariant } from '@patternfly/react-core';
 
-import { EmptyStateNoData } from 'src/components';
+import { EmptyStateNoData, HelperText } from 'src/components';
 
 import { CollectionDetailType } from 'src/api';
 
@@ -32,9 +32,22 @@ export class CollectionDependenciesList extends React.Component<IProps> {
     return (
       <List variant={ListVariant.inline} className='hub-c-list-dependencies'>
         {dependencies_repos.map((dependency, i) => (
-          <ListItem key={i} style={{ marginRight: '70px' }}>
-            <Link to={dependency.path}>{dependency.name}</Link>
-          </ListItem>
+          <>
+            {dependency.path && (
+              <ListItem key={i} style={{ marginRight: '70px' }}>
+                <Link to={dependency.path}>{dependency.name}</Link>
+              </ListItem>
+            )}
+
+            {!dependency.path && (
+              <ListItem key={i} style={{ marginRight: '70px' }}>
+                {dependency.name}
+                <HelperText
+                  content={t`Collection was not found in the system. You must upload it.`}
+                />
+              </ListItem>
+            )}
+          </>
         ))}
       </List>
     );

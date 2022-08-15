@@ -217,23 +217,29 @@ class CollectionDependencies extends React.Component<
     return CollectionVersionAPI.list({
       namespace: dependency_repo.namespace,
       name: dependency_repo.name,
-    }).then((result) => {
-      dependency_repo.repo = result.data.data[0].repository_list[0];
-      const dependencies =
-        this.state.collection.latest_version.metadata.dependencies;
+    })
+      .then((result) => {
+        dependency_repo.repo = result.data.data[0].repository_list[0];
+        const dependencies =
+          this.state.collection.latest_version.metadata.dependencies;
 
-      dependency_repo.path = formatPath(
-        Paths.collectionByRepo,
-        {
-          collection: dependency_repo.name,
-          namespace: dependency_repo.namespace,
-          repo: dependency_repo.repo,
-        },
-        this.separateVersion(
-          dependencies[dependency_repo.namespace + '.' + dependency_repo.name],
-        ),
-      );
-    });
+        dependency_repo.path = formatPath(
+          Paths.collectionByRepo,
+          {
+            collection: dependency_repo.name,
+            namespace: dependency_repo.namespace,
+            repo: dependency_repo.repo,
+          },
+          this.separateVersion(
+            dependencies[
+              dependency_repo.namespace + '.' + dependency_repo.name
+            ],
+          ),
+        );
+      })
+      .catch(() => {
+        // do nothing, dependency_repo.path stays empty
+      });
   }
 
   private loadUsedByDependencies() {
