@@ -16,6 +16,7 @@ import {
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
   ExecutionEnvironmentType,
+  SignContainersAPI,
 } from 'src/api';
 import { filterIsSet, parsePulpIDFromURL, ParamHelper } from 'src/utilities';
 import {
@@ -60,6 +61,7 @@ interface IState {
   selectedItem: ExecutionEnvironmentType;
   inputText: string;
   formError: { title: string; detail: string }[];
+  signServicePath: string;
 }
 
 class ExecutionEnvironmentList extends React.Component<
@@ -96,6 +98,7 @@ class ExecutionEnvironmentList extends React.Component<
       selectedItem: null,
       inputText: '',
       formError: [],
+      signServicePath: '',
     };
   }
 
@@ -103,10 +106,60 @@ class ExecutionEnvironmentList extends React.Component<
     if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorized: true, loading: false });
     } else {
-      this.queryEnvironments();
+      this.loadSigningService();
       this.setState({ alerts: this.context.alerts });
     }
   }
+
+  private loadSigningService() {
+    // load the service
+    debugger;
+    const service = this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE;
+    SignContainersAPI.getSigningService(service).then((result) => {
+      const pulp_href = result.data.results[0]['pulp_href'];
+      this.setState({ signServicePath: pulp_href }, () =>
+        this.queryEnvironments(),
+      );
+    });
+  }
+
+  private sign(item) {
+    debugger;
+    SignContainersAPI.sign(
+      item.pulp.repository.pulp_id,
+      this.state.signServicePath,
+    ).then((result) => {
+      debugger;
+    });
+
+    /*SignContainersAPI.getRepository(item.name).then( (result) => 
+    {
+      debugger;
+      let containerId = this.getIdFromPulpHref(result.data.results[0].pulp_href);
+      const item2 = item;
+      SignContainersAPI.sign(containerId, this.state.signServicePath).then( (result) => {
+        debugger;
+      });
+    });*/
+  }
+
+  /*private getIdFromPulpHref(pulp_href)
+  {
+    const strings = pulp_href.split('/');
+    let pulp_id = '';
+    
+    if (strings.length >= 1)
+    {
+      pulp_id = strings[strings.length-1];
+      
+      if (strings.length >= 2 && strings[strings.length-1] == "")
+      {
+        pulp_id = strings[strings.length-2];
+      }
+    }
+
+    return pulp_id;
+  }*/
 
   componentWillUnmount() {
     this.context.setAlerts([]);
@@ -382,6 +435,9 @@ class ExecutionEnvironmentList extends React.Component<
           {t`Delete`}
         </DropdownItem>
       ),
+      <DropdownItem key='sign' onClick={() => this.sign(item)}>
+        {t`Sign`}
+      </DropdownItem>,
     ].filter((truthy) => truthy);
 
     return (
