@@ -32,7 +32,6 @@ import {
 import {
   CollectionVersionAPI,
   CollectionVersion,
-  TaskAPI,
   CertificateUploadAPI,
   Repositories,
   CollectionAPI,
@@ -631,27 +630,21 @@ class CertificationDashboard extends React.Component<
   }
 
   private waitForUpdate(taskId, version) {
-    return TaskAPI.get(taskId).then(async (result) => {
-      if (result.data.state === 'waiting' || result.data.state === 'running') {
-        await new Promise((r) => setTimeout(r, 500));
-        this.waitForUpdate(taskId, version);
-      } else if (result.data.state === 'completed') {
-        return this.updateList();
-      } else {
+    return waitForTask(taskId, 500)
+      .catch((errorMessage) =>
         this.setState({
-          updatingVersions: [],
           alerts: this.state.alerts.concat({
             variant: 'danger',
             title: t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-            description: errorMessage(500, t`Internal Server Error`),
+            description: errorMessage,
           }),
-        });
-      }
-    });
+        }),
+      )
+      .then(() => this.updateList());
   }
 
   private updateList() {
-    return CollectionVersionAPI.list(this.state.params).then(async (result) => {
+    return CollectionVersionAPI.list(this.state.params).then((result) => {
       this.setState({
         versions: result.data.data,
         updatingVersions: [],
