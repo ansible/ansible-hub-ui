@@ -582,74 +582,38 @@ class CertificationDashboard extends React.Component<
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {
-    const { alerts } = this.state;
-    // Set the selected version to loading
-    this.setState(
-      {
-        updatingVersions: [],
-      },
-      () =>
-        CollectionVersionAPI.setRepository(
-          version.namespace,
-          version.name,
-          version.version,
-          originalRepo,
-          destinationRepo,
-        )
-          .then(
-            (result) =>
-              // Since pulp doesn't reply with the new object, perform a
-              // second query to get the updated data
-              {
-                this.setState({
-                  updatingVersions: [version],
-                });
-                this.waitForUpdate(result.data.remove_task_id, version);
-              },
-            this.addAlert(
-              <Trans>
-                Certification status for collection &quot;{version.namespace}{' '}
-                {version.name} v{version.version}&quot; has been successfully
-                updated.
-              </Trans>,
-              'success',
-            ),
-          )
-          .catch((error) => {
-            const { status, statusText } = error.response;
-            this.setState({
-              updatingVersions: [],
-              alerts: alerts.concat({
-                variant: 'danger',
-                title: t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-                description: errorMessage(status, statusText),
-              }),
-            });
-          }),
-    );
-  }
+    this.setState({ updatingVersions: [version] });
 
-  private waitForUpdate(taskId, version) {
-    return waitForTask(taskId, 500)
-      .catch((errorMessage) =>
-        this.setState({
-          alerts: this.state.alerts.concat({
-            variant: 'danger',
-            title: t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-            description: errorMessage,
-          }),
-        }),
+    CollectionVersionAPI.setRepository(
+      version.namespace,
+      version.name,
+      version.version,
+      originalRepo,
+      destinationRepo,
+    )
+      .then((result) => waitForTask(result.data.remove_task_id, 500))
+      .then(() =>
+        this.addAlert(
+          t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
+          'success',
+        ),
       )
-      .then(() => this.updateList());
-  }
+      .then(() => CollectionVersionAPI.list(this.state.params))
+      .then((result) =>
+        this.setState({ updatingVersions: [], versions: result.data.data }),
+      )
+      .catch((error) => {
+        const description = !error.response
+          ? error
+          : errorMessage(error.response.status, error.response.statusText);
 
-  private updateList() {
-    return CollectionVersionAPI.list(this.state.params).then((result) => {
-      this.setState({
-        versions: result.data.data,
-        updatingVersions: [],
+        this.setState({ updatingVersions: [] });
+        this.addAlert(
+          t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+          'danger',
+          description,
+        );
       });
-    });
   }
 
   private queryCollections() {
