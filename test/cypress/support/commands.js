@@ -330,7 +330,7 @@ Cypress.Commands.add('settings', {}, (newSettings) => {
       : [];
 
   const newLines = pythonify(newSettings);
-  cy.task('log', `SETTINGS ${settings} ${newLines.join('\n')}`);
+  console.log('log', `SETTINGS ${settings} ${newLines.join('\n')}`);
 
   return cy
     .readFile(settings)
@@ -356,8 +356,7 @@ Cypress.Commands.add('settings', {}, (newSettings) => {
         url: Cypress.env('prefix') + '_ui/v1/feature-flags/',
         retryOnStatusCodeFailure: true,
       }).then((response) => {
-        cy.task(
-          'log',
+        console.log(
           `feture flags after settings change ${JSON.stringify(response.body)}`,
         );
         expect(response.status).to.eq(200);
