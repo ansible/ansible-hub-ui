@@ -599,21 +599,19 @@ class CertificationDashboard extends React.Component<
         ),
       )
       .then(() => CollectionVersionAPI.list(this.state.params))
-      .then((result) =>
-        this.setState({ updatingVersions: [], versions: result.data.data }),
-      )
+      .then((result) => this.setState({ versions: result.data.data }))
       .catch((error) => {
         const description = !error.response
           ? error
           : errorMessage(error.response.status, error.response.statusText);
 
-        this.setState({ updatingVersions: [] });
         this.addAlert(
           t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
           'danger',
           description,
         );
-      });
+      })
+      .finally(() => this.setState({ updatingVersions: [] }));
   }
 
   private queryCollections() {
