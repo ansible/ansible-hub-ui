@@ -1,28 +1,4 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
 // https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import shell from 'shell-escape-tag';
 
@@ -354,7 +330,7 @@ Cypress.Commands.add('settings', {}, (newSettings) => {
       : [];
 
   const newLines = pythonify(newSettings);
-  cy.task('log', `SETTINGS ${settings} ${newLines.join('\n')}`);
+  console.log('log', `SETTINGS ${settings} ${newLines.join('\n')}`);
 
   return cy
     .readFile(settings)
@@ -380,8 +356,7 @@ Cypress.Commands.add('settings', {}, (newSettings) => {
         url: Cypress.env('prefix') + '_ui/v1/feature-flags/',
         retryOnStatusCodeFailure: true,
       }).then((response) => {
-        cy.task(
-          'log',
+        console.log(
           `feture flags after settings change ${JSON.stringify(response.body)}`,
         );
         expect(response.status).to.eq(200);
