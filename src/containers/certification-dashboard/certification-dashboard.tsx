@@ -1,4 +1,4 @@
-import { t, Trans } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './certification-dashboard.scss';
 
@@ -75,7 +75,7 @@ interface IState {
   unauthorized: boolean;
   inputText: string;
   uploadCertificateModalOpen: boolean;
-  versionToUploadCertificate: CollectionVersion;
+  versionToUploadCertificate?: CollectionVersion;
 }
 
 class CertificationDashboard extends React.Component<
@@ -112,7 +112,7 @@ class CertificationDashboard extends React.Component<
       unauthorized: false,
       inputText: '',
       uploadCertificateModalOpen: false,
-      versionToUploadCertificate: undefined,
+      versionToUploadCertificate: null,
     };
   }
 
@@ -526,11 +526,18 @@ class CertificationDashboard extends React.Component<
     });
   }
 
+  private closeUploadCertificateModal() {
+    this.setState({
+      uploadCertificateModalOpen: false,
+      versionToUploadCertificate: null,
+    });
+  }
+
   private submitCertificate(file: File) {
     const version = this.state.versionToUploadCertificate;
     const signed_collection = `${PULP_API_BASE_PATH}content/ansible/collection_versions/${version.id}/`;
 
-    Repositories.getRepository({
+    return Repositories.getRepository({
       name: 'staging',
     })
       .then((response) =>
@@ -540,55 +547,33 @@ class CertificationDashboard extends React.Component<
           signed_collection,
         }),
       )
-      .then((result) => {
-        waitForTask(parsePulpIDFromURL(result.data.task))
-          .then(() => {
-            CollectionVersionAPI.list(this.state.params).then((result) =>
-              this.setState({ versions: result.data.data }),
-            );
-            this.setState({
-              alerts: this.state.alerts.concat({
-                variant: 'success',
-                title: t`Certificate for collection "${version.namespace} ${version.name} v${version.version}" has been successfully uploaded.`,
-              }),
-            });
-          })
-          .catch((error) => {
-            this.setState({
-              alerts: this.state.alerts.concat({
-                variant: 'danger',
-                title: t`The certificate for "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-                description: error,
-              }),
-            });
-          });
-      })
+      .then((result) => waitForTask(parsePulpIDFromURL(result.data.task)))
+      .then(() =>
+        this.addAlert(
+          t`Certificate for collection "${version.namespace} ${version.name} v${version.version}" has been successfully uploaded.`,
+          'success',
+        ),
+      )
+      .then(() => CollectionVersionAPI.list(this.state.params))
+      .then((result) => this.setState({ versions: result.data.data }))
       .catch((error) => {
-        const { status, statusText } = error.response;
-        this.setState({
-          alerts: this.state.alerts.concat({
-            variant: 'danger',
-            title: t`The certificate for "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-            description: errorMessage(status, statusText),
-          }),
-        });
-      })
-      .finally(() => {
-        this.closeUploadCertificateModal();
-      });
-  }
+        const description = !error.response
+          ? error
+          : errorMessage(error.response.status, error.response.statusText);
 
-  private closeUploadCertificateModal() {
-    this.setState({
-      uploadCertificateModalOpen: false,
-      versionToUploadCertificate: undefined,
-    });
+        this.addAlert(
+          t`The certificate for "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+          'danger',
+          description,
+        );
+      })
+      .finally(() => this.closeUploadCertificateModal());
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {
     this.setState({ updatingVersions: [version] });
 
-    CollectionVersionAPI.setRepository(
+    return CollectionVersionAPI.setRepository(
       version.namespace,
       version.name,
       version.version,
