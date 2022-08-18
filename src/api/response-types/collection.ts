@@ -56,7 +56,6 @@ export class CollectionListType {
   id: string;
   name: string;
   description: string;
-  // download_count: number;
   deprecated: boolean;
   latest_version: CollectionVersion;
   sign_state: SignState;
@@ -68,9 +67,6 @@ export class CollectionListType {
     avatar_url: string;
     company: string;
   };
-  total_versions: number;
-  signed_versions: number;
-  unsigned_versions: number;
 }
 
 export class PluginContentType {
@@ -129,10 +125,6 @@ export class CollectionDetailType {
   name: string;
   description: string;
   sign_state: SignState;
-  total_versions: number;
-  signed_versions: number;
-  unsigned_versions: number;
-  // download_count: number;
 
   namespace: {
     id: number;
