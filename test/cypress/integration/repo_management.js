@@ -33,9 +33,57 @@ describe('Repo Management tests', () => {
     cy.get('[data-cy="SortTable-headers"]').contains('Last updated');
     cy.get('[data-cy="SortTable-headers"]').contains('Last sync');
     cy.get('[data-cy="SortTable-headers"]').contains('Sync status');
-
-    cy.contains('Configure');
     cy.contains('Sync');
+  });
+
+  it('retrieves and copies token from local repo list', () => {
+    cy.visit(localRepoUrl);
+    cy.intercept(
+      'GET',
+      Cypress.env('prefix') + '_ui/v1/distributions/?offset=0&limit=10',
+    ).as('loadRepos');
+    cy.wait('@loadRepos');
+    cy.get('button').contains('Get token').click();
+
+    cy.get('button').contains('Load token').click();
+    cy.get('[aria-label="Copyable input"]')
+      .invoke('val')
+      .should('have.length', 40);
+    cy.get('button[aria-label="Copy to clipboard"]').should('be.enabled');
+  });
+
+  it('expands and copies CLI config from local repo list', () => {
+    cy.visit(localRepoUrl);
+    cy.get(
+      '.pf-c-clipboard-copy button[aria-label="Show content"]:first',
+    ).click(); //show expandable content
+    cy.get(
+      '.pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre:first',
+    ).contains(Cypress.env('prefix') + 'content/community/'); // check content of input
+
+    cy.get('button[aria-label="Copy to clipboard"]').eq(1).should('be.enabled');
+  });
+
+  it.skip('starts remote repo sync', () => {
+    cy.visit(remoteRepoUrl);
+
+    //checks sync status === 'Running' after sync post request
+    cy.intercept(
+      'POST',
+      Cypress.env('prefix') + 'content/rh-certified/v3/sync/',
+    ).as('startSync');
+    cy.get('td')
+      .contains('rh-certified')
+      .parent()
+      .children('td:nth-child(6)')
+      .contains('Sync')
+      .click();
+    cy.wait('@startSync');
+    cy.get('td')
+      .contains('rh-certified')
+      .parent()
+      .children('td:nth-child(5)')
+      .should('have.text', 'Running ');
   });
 
   /* FIXME: Needs more work to handle uploading a requirements.yml
