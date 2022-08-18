@@ -1,3 +1,5 @@
+type SignState = 'signed' | 'unsigned' | 'partial';
+
 export class CollectionUploadType {
   id: string;
   file: File;
@@ -18,7 +20,7 @@ export class CollectionVersion {
   namespace: string;
   name: string;
   repository_list: string[];
-  sign_state: 'signed' | 'unsigned' | 'partial';
+  sign_state: SignState;
 }
 
 class RenderedFile {
@@ -45,7 +47,7 @@ export class CollectionVersionDetail extends CollectionVersion {
       pulp_created: string;
     }[];
   };
-  sign_state: 'signed' | 'unsigned' | 'partial';
+  sign_state: SignState;
   requires_ansible?: string;
   docs_blob: DocsBlobType;
 }
@@ -57,7 +59,7 @@ export class CollectionListType {
   // download_count: number;
   deprecated: boolean;
   latest_version: CollectionVersion;
-  sign_state: 'unsigned' | 'signed' | 'partial';
+  sign_state: SignState;
 
   namespace: {
     id: number;
@@ -112,13 +114,14 @@ export class CollectionDetailType {
     id: string;
     version: string;
     created: string;
+    sign_state?: SignState;
   }[];
   latest_version: CollectionVersionDetail;
 
   id: string;
   name: string;
   description: string;
-  sign_state: 'unsigned' | 'signed' | 'partial';
+  sign_state: SignState;
   // download_count: number;
 
   namespace: {

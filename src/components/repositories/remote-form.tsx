@@ -158,6 +158,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
   private renderForm(requiredFields, disabledFields) {
     const { remote, errorMessages } = this.props;
     const { filenames } = this.state;
+    const { signatures_enabled } = this.context?.featureFlags || {};
 
     const docsAnsibleLink = (
       <a
@@ -230,8 +231,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
           />
         </FormGroup>
 
-        {!disabledFields.includes('signed_only') &&
-        this.context.featureFlags?.collection_signing ? (
+        {!disabledFields.includes('signed_only') && signatures_enabled ? (
           <FormGroup
             fieldId={'signed_only'}
             name={t`Signed only`}

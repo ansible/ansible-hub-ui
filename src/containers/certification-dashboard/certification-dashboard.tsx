@@ -296,9 +296,10 @@ class CertificationDashboard extends React.Component<
       return <span className='fa fa-lg fa-spin fa-spinner' />;
     }
     if (version.repository_list.includes(Constants.PUBLISHED)) {
+      const { display_signatures } = this.context?.featureFlags || {};
       return (
         <Label variant='outline' color='green' icon={<CheckCircleIcon />}>
-          {version.sign_state === 'signed'
+          {display_signatures && version.sign_state === 'signed'
             ? t`Signed and approved`
             : t`Approved`}
         </Label>
@@ -312,13 +313,19 @@ class CertificationDashboard extends React.Component<
       );
     }
     if (version.repository_list.includes(Constants.NEEDSREVIEW)) {
+      const { can_upload_signatures, require_upload_signatures } =
+        this.context?.featureFlags || {};
       return (
         <Label
           variant='outline'
           color='orange'
           icon={<ExclamationTriangleIcon />}
         >
-          {t`Needs Review`}
+          {version.sign_state === 'unsigned' &&
+          can_upload_signatures &&
+          require_upload_signatures
+            ? t`Needs signature and review`
+            : t`Needs review`}
         </Label>
       );
     }
@@ -356,14 +363,14 @@ class CertificationDashboard extends React.Component<
   }
 
   private renderButtons(version: CollectionVersion) {
-    const { featureFlags } = this.context;
     // not checking namespace permissions here, auto_sign happens API side, so is the permission check
-    const canSign =
-      featureFlags?.collection_signing && featureFlags?.collection_auto_sign;
-
+    const { collection_auto_sign, require_upload_signatures } =
+      this.context?.featureFlags || {};
     if (this.state.updatingVersions.includes(version)) {
       return <ListItemActions />; // empty td;
     }
+
+    const autoSign = collection_auto_sign && !require_upload_signatures;
 
     const approveButton = [
       <Button
@@ -376,9 +383,10 @@ class CertificationDashboard extends React.Component<
           )
         }
       >
-        <span>{canSign ? t`Sign and approve` : t`Approve`}</span>
+        {autoSign ? t`Sign and approve` : t`Approve`}
       </Button>,
-    ];
+    ].filter(Boolean);
+
     const importsLink = (
       <DropdownItem
         key='imports'
@@ -408,7 +416,7 @@ class CertificationDashboard extends React.Component<
         isDisabled={isDisabled}
         key='certify'
       >
-        {canSign ? t`Sign and approve` : t`Approve`}
+        {autoSign ? t`Sign and approve` : t`Approve`}
       </DropdownItem>
     );
 
