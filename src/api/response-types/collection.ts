@@ -114,7 +114,7 @@ export class CollectionDetailType {
     id: string;
     version: string;
     created: string;
-    sign_state: SignState;
+    sign_state?: SignState;
   }[];
   latest_version: CollectionVersionDetail;
 
