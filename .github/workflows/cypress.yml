@@ -206,11 +206,11 @@ jobs:
     - name: "ls"
       run: |
         ls
-        cd home
+        cd ansible-hub-ui
         ls
-        cd runner
-        ls
-        cd work
+        cd test
+        cd cypress
+        cd integration
         ls
 
     - name: "Prepare specific tests - remove the rest"
