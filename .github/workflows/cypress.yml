@@ -205,12 +205,15 @@ jobs:
 
     - name: "ls"
       run: |
+        echo '--------------------------' 
         ls
         cd ansible-hub-ui
+        echo '--------------------------' 
         ls
         cd test
         cd cypress
         cd integration
+        echo '--------------------------' 
         ls
 
     - name: "Prepare specific tests - remove the rest"
