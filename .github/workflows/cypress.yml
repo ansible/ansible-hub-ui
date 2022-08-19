@@ -22,7 +22,21 @@ jobs:
       # base of a PR, or pushed-to branch outside PRs, or master
       BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/master' }}
 
+    strategy:
+      matrix:
+        test:
+        - 'collections'
+        - 'approval'
+        - 'execution_environments'
+        - 'groups_and_users'
+        - 'namespaces'
+        - 'repo'
+        - 'misc'
+
     steps:
+
+    - name: "Echo matrix test"
+      run: echo ${{ matrix.test }}
 
     - name: "Install galaxykit dependency"
       run: |
@@ -194,6 +208,21 @@ jobs:
     - name: "Check initial feature flags"
       run: |
         curl -s -u admin:admin http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
+
+    - name: "Prepare specific tests - remove the rest"
+      working-directory: 'ansible-hub-ui/test/cypress/integration'
+      run: |
+        for d in * ; do
+          echo "$d"
+          echo "Matrix test: ${{ matrix.test }}"
+          not_delete=${{ matrix.test }}
+          echo "not delete = $not_delete"
+          if [ "$not_delete" != "$d" ];
+          then
+            echo "removing $d"  
+            rm -r $d
+          fi
+        done
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
