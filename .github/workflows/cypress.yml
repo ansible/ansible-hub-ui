@@ -212,6 +212,7 @@ jobs:
     - name: "Prepare specific tests - remove the rest"
       working-directory: 'ansible-hub-ui/test/cypress/integration'
       run: |
+        ls
         for d in * ; do
           echo "$d"
           echo "Matrix test: ${{ matrix.test }}"
