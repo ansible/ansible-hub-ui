@@ -3,21 +3,16 @@ describe('Repo Management tests', () => {
   let localRepoUrl = '/ui/repositories';
 
   let noPrivilegesUser0 = 'noPrivilegesUser0';
-  //let somePrivilegesUser0 = 'somePrivilegesUser0';
 
   before(() => {
     cy.deleteTestGroups();
     cy.deleteTestUsers();
     cy.galaxykit('user create', noPrivilegesUser0, noPrivilegesUser0);
-
-    /*cy.galaxykit('user create', somePrivilegesUser0, somePrivilegesUser0);
-    cy.galaxykit('group create', 'Group0');
-    cy.galaxykit('user group add', somePrivilegesUser0, 'Group0');*/
-    //cy.galaxykit('group perm add', 'group0', 'galaxy.view_user');
   });
 
   after(() => {
     cy.deleteTestUsers();
+    cy.deleteTestGroups();
   });
 
   beforeEach(() => {
@@ -28,7 +23,6 @@ describe('Repo Management tests', () => {
     cy.visit(remoteRepoUrl);
     cy.contains('.body', 'community'); // without this, sporadic failures
     cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
-    cy.contains('Edit'); // without this, sporadic failures
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
     cy.get('#download_concurrency').should('exist');
