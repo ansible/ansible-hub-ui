@@ -26,12 +26,6 @@ jobs:
       matrix:
         test:
         - 'collections'
-        - 'approval'
-        - 'execution_environments'
-        - 'groups_and_users'
-        - 'namespaces'
-        - 'repo'
-        - 'misc'
 
     steps:
 
@@ -210,8 +204,13 @@ jobs:
         curl -s -u admin:admin http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
 
     - name: "ls"
-      working-directory: 'ansible-hub-ui/test/cypress/integration'
       run: |
+        ls
+        cd home
+        ls
+        cd runner
+        ls
+        cd work
         ls
 
     - name: "Prepare specific tests - remove the rest"
