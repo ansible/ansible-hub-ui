@@ -208,10 +208,14 @@ jobs:
         echo '--------------------------' 
         ls
         cd ansible-hub-ui
-        echo '--------------------------' 
+        echo 'cd ansibble-hub-ui--------------------------' 
         ls
         cd test
+        echo 'cd test--------------------------' 
+        ls
         cd cypress
+        echo 'cd cypress--------------------------' 
+        ls
         cd integration
         echo '--------------------------' 
         ls
