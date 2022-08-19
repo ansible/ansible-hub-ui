@@ -209,10 +209,14 @@ jobs:
       run: |
         curl -s -u admin:admin http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
 
-    - name: "Prepare specific tests - remove the rest"
+    - name: "ls"
       working-directory: 'ansible-hub-ui/test/cypress/integration'
       run: |
         ls
+
+    - name: "Prepare specific tests - remove the rest"
+      working-directory: 'ansible-hub-ui/test/cypress/integration'
+      run: |
         for d in * ; do
           echo "$d"
           echo "Matrix test: ${{ matrix.test }}"
