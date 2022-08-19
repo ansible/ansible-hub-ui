@@ -25,7 +25,8 @@ jobs:
     strategy:
       matrix:
         test:
-        - 'collections'
+        - 'rbac'
+        - 'imports'
 
     steps:
 
@@ -203,37 +204,22 @@ jobs:
       run: |
         curl -s -u admin:admin http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
 
-    - name: "ls"
-      run: |
-        echo '--------------------------' 
-        ls
-        cd ansible-hub-ui
-        echo 'cd ansibble-hub-ui--------------------------' 
-        ls
-        cd test
-        echo 'cd test--------------------------' 
-        ls
-        cd cypress
-        echo 'cd cypress--------------------------' 
-        ls
-        cd integration
-        echo '--------------------------' 
-        ls
-
     - name: "Prepare specific tests - remove the rest"
-      working-directory: 'ansible-hub-ui/test/cypress/integration'
+      working-directory: 'ansible-hub-ui/test/cypress/e2e'
       run: |
+        ls
         for d in * ; do
-          echo "$d"
-          echo "Matrix test: ${{ matrix.test }}"
+          #echo "$d"
+          #echo "Matrix test: ${{ matrix.test }}"
           not_delete=${{ matrix.test }}
-          echo "not delete = $not_delete"
+          #echo "not delete = $not_delete"
           if [ "$not_delete" != "$d" ];
           then
             echo "removing $d"  
             rm -r $d
           fi
         done
+        ls
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
