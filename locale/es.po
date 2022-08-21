@@ -12,19 +12,19 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/headers/collection-header.tsx:175
+#: src/components/headers/collection-header.tsx:177
 msgid "(latest)"
 msgstr "(más reciente)"
 
-#: src/components/headers/collection-header.tsx:167
+#: src/components/headers/collection-header.tsx:169
 msgid "(signed)"
 msgstr "(firmado)"
 
-#: src/components/headers/collection-header.tsx:167
+#: src/components/headers/collection-header.tsx:169
 msgid "(unsigned)"
 msgstr "(no firmado)"
 
-#: src/components/repositories/remote-form.tsx:173
+#: src/components/repositories/remote-form.tsx:174
 msgid "(uploaded)"
 msgstr "(cargado)"
 
@@ -92,12 +92,12 @@ msgstr "<0>{name}</0> se eliminará permanentemente."
 #~ msgid "<0>{username}</0> will be removed from <1>{groupname}</1>."
 #~ msgstr "<0>{username}</0> will be removed from <1>{groupname}</1>."
 
-#: src/components/repositories/remote-form.tsx:552
-#: src/components/repositories/remote-form.tsx:598
+#: src/components/repositories/remote-form.tsx:554
+#: src/components/repositories/remote-form.tsx:600
 msgid "A PEM encoded client certificate used for authentication."
 msgstr "Un certificado de cliente codificado en PEM utilizado para la autenticación."
 
-#: src/components/repositories/remote-form.tsx:522
+#: src/components/repositories/remote-form.tsx:524
 msgid "A PEM encoded private key used for authentication."
 msgstr "Una clave privada codificada en PEM utilizada para la autenticación."
 
@@ -118,8 +118,8 @@ msgstr "Error de API: No se ha podido pasar a desuso."
 #~ msgid "API Error: {0}"
 #~ msgstr "API Error: {0}"
 
-#: src/components/headers/collection-header.tsx:579
-#: src/components/headers/collection-header.tsx:630
+#: src/components/headers/collection-header.tsx:581
+#: src/components/headers/collection-header.tsx:632
 #: src/containers/namespace-detail/namespace-detail.tsx:420
 msgid "API Error: {status}"
 msgstr "Error de API: {status}"
@@ -263,14 +263,14 @@ msgstr "Cuadro de mandos de aprobación"
 msgid "Approval status:"
 msgstr "Estado de aprobación:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:379
-#: src/containers/certification-dashboard/certification-dashboard.tsx:411
+#: src/containers/certification-dashboard/certification-dashboard.tsx:386
+#: src/containers/certification-dashboard/certification-dashboard.tsx:419
 msgid "Approve"
 msgstr "Aprobar"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:168
 #: src/containers/certification-dashboard/certification-dashboard.tsx:197
-#: src/containers/certification-dashboard/certification-dashboard.tsx:303
+#: src/containers/certification-dashboard/certification-dashboard.tsx:304
 msgid "Approved"
 msgstr "Aprobado"
 
@@ -290,7 +290,7 @@ msgstr "Sistema operativo del navegador"
 msgid "Browser Version"
 msgstr "Versión del navegador"
 
-#: src/components/repositories/remote-form.tsx:595
+#: src/components/repositories/remote-form.tsx:597
 msgid "CA certificate"
 msgstr "Certificado de CA"
 
@@ -333,11 +333,11 @@ msgstr "Cancelado"
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "No se puede eliminar el espacio de nombres hasta que se <1/>hayan eliminado las dependencias de las <0/>colecciones"
 
-#: src/components/headers/collection-header.tsx:202
+#: src/components/headers/collection-header.tsx:204
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "No se puede eliminar hasta que se <1/>hayan eliminado las colecciones <0/>que dependen de esta colección."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:493
+#: src/containers/certification-dashboard/certification-dashboard.tsx:501
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "El estado de certificación para la colección \"{0} {1} v{2}\" se actualizó correctamente."
 
@@ -408,8 +408,8 @@ msgstr "Cambiar tarea"
 msgid "Change user"
 msgstr "Cambiar usuario"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:507
-#: src/containers/certification-dashboard/certification-dashboard.tsx:535
+#: src/containers/certification-dashboard/certification-dashboard.tsx:515
+#: src/containers/certification-dashboard/certification-dashboard.tsx:543
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "No se pudieron guardar los cambios para el estado de certificación \"{0} {1} v{2}\"."
 
@@ -443,11 +443,11 @@ msgstr "Borrar todos los filtros"
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "Haga clic en la URL del Controlador en el que desea utilizar el entorno de ejecución anterior y se lanzará la consola de ese Controlador. Inicie sesión (si es necesario) y siga los pasos para completar la configuración."
 
-#: src/components/repositories/remote-form.tsx:549
+#: src/components/repositories/remote-form.tsx:551
 msgid "Client certificate"
 msgstr "Certificado de cliente"
 
-#: src/components/repositories/remote-form.tsx:519
+#: src/components/repositories/remote-form.tsx:521
 msgid "Client key"
 msgstr "Clave de cliente"
 
@@ -472,16 +472,16 @@ msgstr ""
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:785
+#: src/components/headers/collection-header.tsx:787
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "No se pudo eliminar la colección \"{name} v{collectionVersion}\"."
 
-#: src/components/headers/collection-header.tsx:714
-#: src/components/headers/collection-header.tsx:729
+#: src/components/headers/collection-header.tsx:716
+#: src/components/headers/collection-header.tsx:731
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "La colección \"{name} v{collectionVersion}\" se eliminó correctamente."
 
-#: src/components/headers/collection-header.tsx:832
+#: src/components/headers/collection-header.tsx:834
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "No se pudo eliminar la colección \"{name}\"."
 
@@ -489,7 +489,7 @@ msgstr "No se pudo eliminar la colección \"{name}\"."
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "No se pudo descargar la colección \"{name}\"."
 
-#: src/components/headers/collection-header.tsx:808
+#: src/components/headers/collection-header.tsx:810
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "La colección \"{name}\" se eliminó correctamente."
 
@@ -526,7 +526,7 @@ msgstr "No se pudieron mostrar los repositorios de colecciones."
 msgid "Collection upload canceled"
 msgstr "Carga de la colección cancelada"
 
-#: src/components/headers/collection-header.tsx:267
+#: src/components/headers/collection-header.tsx:269
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:277
@@ -635,7 +635,7 @@ msgstr "Contenido"
 msgid "Content count"
 msgstr "Recuento de contenidos"
 
-#: src/components/headers/collection-header.tsx:529
+#: src/components/headers/collection-header.tsx:531
 msgid "Contents"
 msgstr "Contenido"
 
@@ -779,11 +779,11 @@ msgstr "Eliminar la colección"
 msgid "Delete collection remote"
 msgstr "Eliminar el mando a distancia de la colección"
 
-#: src/components/headers/collection-header.tsx:329
+#: src/components/headers/collection-header.tsx:331
 msgid "Delete collection version?"
 msgstr "¿Eliminar la versión de la colección?"
 
-#: src/components/headers/collection-header.tsx:330
+#: src/components/headers/collection-header.tsx:332
 msgid "Delete collection?"
 msgstr "¿Eliminar la colección?"
 
@@ -815,8 +815,8 @@ msgstr "¿Eliminar contenedor?"
 msgid "Delete distribution"
 msgstr "Borrar la distribución"
 
-#: src/components/headers/collection-header.tsx:194
-#: src/components/headers/collection-header.tsx:210
+#: src/components/headers/collection-header.tsx:196
+#: src/components/headers/collection-header.tsx:212
 msgid "Delete entire collection"
 msgstr "Borrar toda la colección"
 
@@ -866,19 +866,19 @@ msgstr "Eliminar usuario"
 msgid "Delete user?"
 msgstr "¿Eliminar usuario?"
 
-#: src/components/headers/collection-header.tsx:222
+#: src/components/headers/collection-header.tsx:224
 msgid "Delete version {0}"
 msgstr "Eliminar versión {0}"
 
-#: src/components/headers/collection-header.tsx:338
+#: src/components/headers/collection-header.tsx:340
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost and this will cause the entire collection to be deleted."
 msgstr "Al eliminar <0>{0} v{collectionVersion}</0>, se perderán sus datos y esto hará que se elimine toda la colección."
 
-#: src/components/headers/collection-header.tsx:347
+#: src/components/headers/collection-header.tsx:349
 msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "Al eliminar <0>{0} v{collectionVersion}</0>, se perderán sus datos."
 
-#: src/components/headers/collection-header.tsx:357
+#: src/components/headers/collection-header.tsx:359
 #: src/containers/namespace-detail/namespace-detail.tsx:227
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "Al eliminar <0>{0}</0>, se perderán sus datos."
@@ -907,17 +907,17 @@ msgstr "La eliminación de este grupo afectará a {count} usuarios."
 msgid "Deleting yourself is not allowed."
 msgstr "No está permitido borrarse a sí mismo."
 
-#: src/components/headers/collection-header.tsx:543
+#: src/components/headers/collection-header.tsx:545
 #: src/containers/collection-detail/collection-dependencies.tsx:105
 #: src/containers/collection-detail/collection-dependencies.tsx:134
 msgid "Dependencies"
 msgstr "Dependencias"
 
-#: src/components/headers/collection-header.tsx:861
+#: src/components/headers/collection-header.tsx:863
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "No se pudieron mostrar las dependencias para la colección \"{name}\"."
 
-#: src/components/headers/collection-header.tsx:755
+#: src/components/headers/collection-header.tsx:757
 msgid "Dependent collections"
 msgstr "Colecciones dependientes"
 
@@ -961,7 +961,7 @@ msgstr "Nombre de la distribución"
 msgid "Docs site"
 msgstr "Sitio de Docs"
 
-#: src/components/headers/collection-header.tsx:524
+#: src/components/headers/collection-header.tsx:526
 #: src/containers/collection-detail/collection-docs.tsx:121
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
@@ -976,15 +976,15 @@ msgstr "La documentación sobre cómo configurar el cliente <0>ansible-galaxy</0
 msgid "Done"
 msgstr "Finalizado"
 
-#: src/components/repositories/remote-form.tsx:631
+#: src/components/repositories/remote-form.tsx:633
 msgid "Download CA certification file"
 msgstr "Descargar el archivo de certificación de CA"
 
-#: src/components/repositories/remote-form.tsx:585
+#: src/components/repositories/remote-form.tsx:587
 msgid "Download client certification file"
 msgstr "Descargar el archivo de certificación del cliente"
 
-#: src/components/repositories/remote-form.tsx:641
+#: src/components/repositories/remote-form.tsx:643
 msgid "Download concurrency"
 msgstr "Descargar la concurrencia"
 
@@ -1299,11 +1299,11 @@ msgstr "Fallo en la recuperación de los datos del usuario."
 msgid "Failed to sign all collections."
 msgstr "Error al firmar todas las colecciones."
 
-#: src/components/headers/collection-header.tsx:580
+#: src/components/headers/collection-header.tsx:582
 msgid "Failed to sign all versions in the collection."
 msgstr "Error al firmar todas las versiones de la colección."
 
-#: src/components/headers/collection-header.tsx:631
+#: src/components/headers/collection-header.tsx:633
 msgid "Failed to sign the version."
 msgstr "Error al firmar la versión."
 
@@ -1424,22 +1424,22 @@ msgstr "Los grupos aparecerán una vez creados"
 msgid "Groups with access"
 msgstr "Grupos con acceso"
 
-#: src/components/repositories/remote-form.tsx:420
+#: src/components/repositories/remote-form.tsx:421
 msgid "Hide advanced options"
 msgstr "Ocultar las opciones avanzadas"
 
-#: src/components/collection-detail/download-signature-grid-item.tsx:44
+#: src/components/collection-detail/download-signature-grid-item.tsx:43
 msgid "Hide the signature"
 msgstr "Ocultar la firma"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
-#: src/components/headers/collection-header.tsx:366
+#: src/components/headers/collection-header.tsx:368
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:230
 #: src/containers/namespace-detail/namespace-detail.tsx:234
 msgid "I understand that this action cannot be undone."
 msgstr "Entiendo que esta acción no se puede deshacer."
 
-#: src/components/repositories/remote-form.tsx:503
+#: src/components/repositories/remote-form.tsx:505
 msgid "If selected, TLS peer validation must be performed."
 msgstr "Si se selecciona, se debe realizar la validación de pares TLS."
 
@@ -1479,7 +1479,7 @@ msgstr "Importación y aprobación automática"
 msgid "Import and move to staging"
 msgstr "Importar y trasladar a la puesta en escena"
 
-#: src/components/headers/collection-header.tsx:538
+#: src/components/headers/collection-header.tsx:540
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "Registro de importación"
@@ -1509,7 +1509,7 @@ msgid "Indexing started for execution environment \"{name}\"."
 msgstr "Se inició la indexación para el entorno de ejecución \"{name}\"."
 
 #: src/components/collection-detail/collection-info.tsx:53
-#: src/components/headers/collection-header.tsx:519
+#: src/components/headers/collection-header.tsx:521
 msgid "Install"
 msgstr "Instalar"
 
@@ -1525,7 +1525,7 @@ msgstr "Instalación"
 msgid "Instructions"
 msgstr "Instrucciones"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:536
+#: src/containers/certification-dashboard/certification-dashboard.tsx:544
 msgid "Internal Server Error"
 msgstr "Error de servidor interno"
 
@@ -1557,7 +1557,7 @@ msgstr "No tiene sentido incluir y excluir etiquetas al mismo tiempo."
 msgid "It's safe to close this window. These tasks will finish in the background."
 msgstr "Es seguro cerrar esta ventana. Estas tareas terminarán en segundo plano."
 
-#: src/components/collection-list/collection-filter.tsx:53
+#: src/components/collection-list/collection-filter.tsx:55
 msgid "Keywords"
 msgstr "Palabras clave"
 
@@ -1584,7 +1584,7 @@ msgstr "Última sincronización"
 msgid "Last updated"
 msgstr "Última actualización"
 
-#: src/components/headers/collection-header.tsx:449
+#: src/components/headers/collection-header.tsx:451
 msgid "Last updated <0/>"
 msgstr "Última actualización <0/>"
 
@@ -1604,7 +1604,7 @@ msgstr "Más información"
 msgid "License"
 msgstr "Licencia"
 
-#: src/components/repositories/remote-form.tsx:676
+#: src/components/repositories/remote-form.tsx:678
 msgid "Limits total download rate in requests per second."
 msgstr "Limita la velocidad total de descarga en solicitudes por segundo."
 
@@ -1673,7 +1673,7 @@ msgstr "Mensaje"
 msgid "Modify Ansible repo content"
 msgstr "Modificar el contenido del repo de Ansible"
 
-#: src/components/repositories/remote-form.tsx:685
+#: src/components/repositories/remote-form.tsx:687
 msgid "Must be an integer."
 msgstr "Debe ser un número entero."
 
@@ -1699,7 +1699,7 @@ msgstr "Mi perfil"
 #: src/components/my-imports/import-list.tsx:116
 #: src/components/namespace-form/namespace-form.tsx:62
 #: src/components/namespace-modal/namespace-modal.tsx:128
-#: src/components/repositories/remote-form.tsx:193
+#: src/components/repositories/remote-form.tsx:194
 #: src/containers/execution-environment/registry-list.tsx:265
 #: src/containers/execution-environment/registry-list.tsx:293
 #: src/containers/execution-environment/registry-list.tsx:322
@@ -1775,9 +1775,16 @@ msgstr "Los espacios de nombres aparecerán una vez creados"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:164
 #: src/containers/certification-dashboard/certification-dashboard.tsx:198
-#: src/containers/certification-dashboard/certification-dashboard.tsx:321
 msgid "Needs Review"
 msgstr "Revisión de necesidades"
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:328
+msgid "Needs review"
+msgstr ""
+
+#: src/containers/certification-dashboard/certification-dashboard.tsx:327
+msgid "Needs signature and review"
+msgstr ""
 
 #: src/components/import-modal/import-modal.tsx:59
 msgid "New collection"
@@ -1925,7 +1932,7 @@ msgstr "No es necesario para el uso de otras colecciones"
 #~ msgid "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 #~ msgstr "Note: this URL contains all collections in Hub. To connect to your organization's sync repository use the URL found on <0>Repository Management</0>."
 
-#: src/components/repositories/remote-form.tsx:653
+#: src/components/repositories/remote-form.tsx:655
 msgid "Number must be greater than 0"
 msgstr "El número debe ser mayor que 0"
 
@@ -1945,11 +1952,11 @@ msgstr "Ficha de conexión"
 msgid "Parent task"
 msgstr "Tarea principal"
 
-#: src/components/collection-list/collection-filter.tsx:71
+#: src/components/collection-list/collection-filter.tsx:73
 msgid "Partial"
 msgstr "Parcial"
 
-#: src/components/signing/signature-badge.tsx:33
+#: src/components/signing/signature-badge.tsx:32
 msgid "Partially signed"
 msgstr "Firmado parcialmente"
 
@@ -1957,7 +1964,7 @@ msgstr "Firmado parcialmente"
 msgid "Partners"
 msgstr "Socios"
 
-#: src/components/repositories/remote-form.tsx:389
+#: src/components/repositories/remote-form.tsx:390
 #: src/components/user-form/user-form.tsx:94
 #: src/containers/login/login.tsx:55
 msgid "Password"
@@ -2060,15 +2067,15 @@ msgstr "Mensajes de progreso"
 msgid "Provided by {company}"
 msgstr "Proporcionado por {company}"
 
-#: src/components/repositories/remote-form.tsx:426
+#: src/components/repositories/remote-form.tsx:427
 msgid "Proxy URL"
 msgstr "URL del proxy"
 
-#: src/components/repositories/remote-form.tsx:472
+#: src/components/repositories/remote-form.tsx:474
 msgid "Proxy password"
 msgstr "Contraseña del proxy"
 
-#: src/components/repositories/remote-form.tsx:444
+#: src/components/repositories/remote-form.tsx:446
 msgid "Proxy username"
 msgstr "Nombre de usuario del proxy"
 
@@ -2218,7 +2225,7 @@ msgstr "Enviar nuevos contenedores"
 msgid "Push to existing containers"
 msgstr "Enviar a los contenedores existentes"
 
-#: src/components/repositories/remote-form.tsx:673
+#: src/components/repositories/remote-form.tsx:675
 msgid "Rate Limit"
 msgstr "Límite de tarifa"
 
@@ -2254,13 +2261,13 @@ msgstr "URL del registro"
 msgid "Registry sync status"
 msgstr "Estado de la sincronización del registro"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:428
+#: src/containers/certification-dashboard/certification-dashboard.tsx:436
 msgid "Reject"
 msgstr "Rechazar"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:160
 #: src/containers/certification-dashboard/certification-dashboard.tsx:199
-#: src/containers/certification-dashboard/certification-dashboard.tsx:310
+#: src/containers/certification-dashboard/certification-dashboard.tsx:311
 msgid "Rejected"
 msgstr "Rechazado"
 
@@ -2428,7 +2435,7 @@ msgstr "Seleccione un registro"
 msgid "Select a tag"
 msgstr "Seleccione una etiqueta"
 
-#: src/components/headers/collection-header.tsx:409
+#: src/components/headers/collection-header.tsx:411
 msgid "Select collection version"
 msgstr "Seleccione la versión de la colección"
 
@@ -2477,11 +2484,11 @@ msgstr "Versión del servidor"
 msgid "Settings"
 msgstr "Ajustes"
 
-#: src/components/repositories/remote-form.tsx:421
+#: src/components/repositories/remote-form.tsx:422
 msgid "Show advanced options"
 msgstr "Mostrar opciones avanzadas"
 
-#: src/components/collection-detail/download-signature-grid-item.tsx:44
+#: src/components/collection-detail/download-signature-grid-item.tsx:43
 msgid "Show the signature"
 msgstr "Mostrar la firma"
 
@@ -2502,20 +2509,20 @@ msgstr "Firmar todo"
 msgid "Sign all collections"
 msgstr "Firmar todas las colecciones"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:379
-#: src/containers/certification-dashboard/certification-dashboard.tsx:411
+#: src/containers/certification-dashboard/certification-dashboard.tsx:386
+#: src/containers/certification-dashboard/certification-dashboard.tsx:419
 msgid "Sign and approve"
 msgstr "Firmar y aprobar"
 
-#: src/components/headers/collection-header.tsx:230
+#: src/components/headers/collection-header.tsx:232
 msgid "Sign entire collection"
 msgstr "Firmar toda la colección"
 
-#: src/components/collection-list/collection-filter.tsx:66
+#: src/components/collection-list/collection-filter.tsx:68
 msgid "Sign state"
 msgstr "Estado de la firma"
 
-#: src/components/headers/collection-header.tsx:238
+#: src/components/headers/collection-header.tsx:240
 msgid "Sign version {0}"
 msgstr "Versión de la firma {0}"
 
@@ -2523,16 +2530,16 @@ msgstr "Versión de la firma {0}"
 msgid "Sign version {version}"
 msgstr "Versión de la firma {version}"
 
-#: src/components/collection-detail/download-signature-grid-item.tsx:34
+#: src/components/collection-detail/download-signature-grid-item.tsx:33
 msgid "Signature"
 msgstr "Firma"
 
-#: src/components/collection-list/collection-filter.tsx:69
-#: src/components/signing/signature-badge.tsx:29
+#: src/components/collection-list/collection-filter.tsx:71
+#: src/components/signing/signature-badge.tsx:28
 msgid "Signed"
 msgstr "Firmado"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:302
+#: src/containers/certification-dashboard/certification-dashboard.tsx:303
 msgid "Signed and approved"
 msgstr "Firmado y aprobado"
 
@@ -2544,11 +2551,11 @@ msgstr "Solo firmado"
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Se inició la firma para todas las colecciones del espacio de nombres \"{0}\"."
 
-#: src/components/headers/collection-header.tsx:589
+#: src/components/headers/collection-header.tsx:591
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "Se inició la firma para todas las versiones de la colección \"{0}\""
 
-#: src/components/headers/collection-header.tsx:640
+#: src/components/headers/collection-header.tsx:642
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "Se inició la firma para la colección \"{0} v{1}\"."
 
@@ -2694,11 +2701,11 @@ msgstr "Se inició la sincronización para el registro remoto \"{name}\"."
 msgid "Sync status"
 msgstr "Estado de sincronización"
 
-#: src/components/repositories/remote-form.tsx:500
+#: src/components/repositories/remote-form.tsx:502
 msgid "TLS validation"
 msgstr "Validación TLS"
 
-#: src/components/collection-list/collection-filter.tsx:57
+#: src/components/collection-list/collection-filter.tsx:59
 #: src/components/execution-environment/publish-to-controller-modal.tsx:314
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:275
@@ -2782,7 +2789,7 @@ msgstr "Texto: {0}"
 msgid "The URL needs to be in 'http(s)://' format."
 msgstr "La URL debe estar en el formato 'http(s)://'."
 
-#: src/components/repositories/remote-form.tsx:213
+#: src/components/repositories/remote-form.tsx:214
 msgid "The URL of an external content source."
 msgstr "La URL de una fuente de contenido externa."
 
@@ -2798,11 +2805,11 @@ msgstr "La colección que ha seleccionado no parece coincidir con {0}"
 msgid "The file is not available for this version of {collectionName}"
 msgstr "El archivo no está disponible para esta versión de {collectionName}"
 
-#: src/components/repositories/remote-form.tsx:394
+#: src/components/repositories/remote-form.tsx:395
 msgid "The password to be used for authentication when syncing."
 msgstr "Contraseña que se utilizará para la autenticación al sincronizar."
 
-#: src/components/repositories/remote-form.tsx:395
+#: src/components/repositories/remote-form.tsx:396
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "Contraseña que se utilizará para la autenticación al sincronizar. Esto no es necesario cuando se utiliza un token."
 
@@ -2810,11 +2817,11 @@ msgstr "Contraseña que se utilizará para la autenticación al sincronizar. Est
 msgid "The token will expire after 30 days of inactivity. Run the command below periodically to prevent your token from expiring."
 msgstr "El token expirará después de 30 días de inactividad. Ejecute el siguiente comando periódicamente para evitar que su token caduque."
 
-#: src/components/repositories/remote-form.tsx:359
+#: src/components/repositories/remote-form.tsx:360
 msgid "The username to be used for authentication when syncing."
 msgstr "El nombre de usuario que se utilizará para la autenticación al sincronizar."
 
-#: src/components/repositories/remote-form.tsx:360
+#: src/components/repositories/remote-form.tsx:361
 msgid "The username to be used for authentication when syncing. This is not required when using a token."
 msgstr "El nombre de usuario que se utilizará para la autenticación al sincronizar. No es necesario cuando se utiliza un token."
 
@@ -2847,7 +2854,7 @@ msgstr "Esta cuenta no está configurada para gestionar ningún espacio de nombr
 msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
 msgstr "Esta acción afectará a <0>{numberOfAffected}</0> versiones."
 
-#: src/components/headers/collection-header.tsx:472
+#: src/components/headers/collection-header.tsx:474
 msgid "This collection has been deprecated."
 msgstr "Esta colección ha pasado a desuso."
 
@@ -2891,7 +2898,7 @@ msgstr "Token para autenticarse en la URL del servidor."
 #~ msgid "Token management"
 #~ msgstr "Token management"
 
-#: src/components/repositories/remote-form.tsx:644
+#: src/components/repositories/remote-form.tsx:646
 msgid "Total number of simultaneous connections."
 msgstr "Número total de conexiones simultáneas."
 
@@ -2912,7 +2919,7 @@ msgstr "Tipo"
 msgid "UI Version"
 msgstr "Versión de la UI"
 
-#: src/components/repositories/remote-form.tsx:211
+#: src/components/repositories/remote-form.tsx:212
 msgid "URL"
 msgstr "URL"
 
@@ -2928,8 +2935,8 @@ msgstr "URL: {0}"
 msgid "Undeprecate"
 msgstr "Cancelar paso a desuso"
 
-#: src/components/collection-list/collection-filter.tsx:70
-#: src/components/signing/signature-badge.tsx:31
+#: src/components/collection-list/collection-filter.tsx:72
+#: src/components/signing/signature-badge.tsx:30
 msgid "Unsigned"
 msgstr "No firmado"
 
@@ -3065,7 +3072,7 @@ msgid "User type"
 msgstr "Tipo de usuario"
 
 #: src/components/about-modal/about-modal.tsx:85
-#: src/components/repositories/remote-form.tsx:354
+#: src/components/repositories/remote-form.tsx:355
 #: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:722
 #: src/containers/group-management/group-detail.tsx:801
@@ -3106,7 +3113,7 @@ msgstr "Los usuarios aparecerán una vez añadidos a este grupo"
 msgid "Users will appear once created"
 msgstr "Los usuarios aparecerán una vez creados"
 
-#: src/components/headers/collection-header.tsx:397
+#: src/components/headers/collection-header.tsx:399
 #: src/containers/certification-dashboard/certification-dashboard.tsx:253
 msgid "Version"
 msgstr "Versión"
@@ -3119,7 +3126,7 @@ msgstr "Versión:"
 msgid "View Ansible distribution"
 msgstr "Ver la distribución de Ansible"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:397
+#: src/containers/certification-dashboard/certification-dashboard.tsx:405
 msgid "View Import Logs"
 msgstr "Ver los registros de importación"
 
@@ -3151,7 +3158,7 @@ msgstr "Ver distribución"
 msgid "View group"
 msgstr "Ver grupo"
 
-#: src/components/headers/collection-header.tsx:413
+#: src/components/headers/collection-header.tsx:415
 msgid "View more"
 msgstr "Ver más"
 
@@ -3273,7 +3280,7 @@ msgstr "buscar contenido"
 msgid "hidden value"
 msgstr "valor oculto"
 
-#: src/components/collection-list/collection-filter.tsx:93
+#: src/components/collection-list/collection-filter.tsx:95
 #: src/containers/namespace-list/namespace-list.tsx:211
 msgid "keywords"
 msgstr "palabras clave"
@@ -3307,15 +3314,15 @@ msgstr "rechazado"
 #~ msgid "search text input"
 #~ msgstr "search text input"
 
-#: src/components/collection-list/collection-filter.tsx:91
+#: src/components/collection-list/collection-filter.tsx:93
 msgid "sign state"
 msgstr "estado de la firma"
 
-#: src/components/collection-list/collection-filter.tsx:92
+#: src/components/collection-list/collection-filter.tsx:94
 msgid "tags"
 msgstr "etiquetas"
 
-#: src/components/headers/collection-header.tsx:302
+#: src/components/headers/collection-header.tsx:304
 msgid "updated {0}"
 msgstr ""
 
@@ -3331,7 +3338,7 @@ msgstr "esperando a que termine la importación"
 #~ msgid "{0} released {1}"
 #~ msgstr "{0} liberado {1}"
 
-#: src/components/headers/collection-header.tsx:440
+#: src/components/headers/collection-header.tsx:442
 msgid "{0} updated {1}"
 msgstr ""
 
@@ -3343,14 +3350,14 @@ msgstr "{0} se añadió"
 #~ msgid "{0} will be deleted."
 #~ msgstr "{0} will be deleted."
 
-#: src/components/headers/collection-header.tsx:273
+#: src/components/headers/collection-header.tsx:275
 msgid "{collectionName}'s versions."
 msgstr "Versiones de {collectionName}."
 
 #: src/components/cards/collection-card.tsx:51
 #: src/components/cards/namespace-card.tsx:36
 #: src/components/collection-list/collection-list-item.tsx:58
-#: src/components/headers/collection-header.tsx:378
+#: src/components/headers/collection-header.tsx:380
 #: src/components/headers/partner-header.tsx:46
 msgid "{company} logo"
 msgstr "{company} Logotipo"
