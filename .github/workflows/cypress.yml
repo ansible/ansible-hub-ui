@@ -22,6 +22,11 @@ jobs:
       # base of a PR, or pushed-to branch outside PRs, or master
       BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/master' }}
 
+    strategy:
+      matrix:
+        test:
+        - 'collections'
+
     steps:
 
     - name: "Install galaxykit dependency"
@@ -207,6 +212,21 @@ jobs:
       run: |
         HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:8002/api/galaxy/v3/auth/token/ | jq -r .token`
         curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:8002/api/galaxy/ | jq
+
+    - name: "Prepare specific tests - remove the rest"
+      working-directory: 'ansible-hub-ui/test/cypress/e2e'
+      run: |
+        for d in * ; do
+          echo "$d"
+          echo "Matrix test: ${{ matrix.test }}"
+          not_delete=${{ matrix.test }}
+          echo "not delete = $not_delete"
+          if [ "$not_delete" != "$d" ];
+          then
+            echo "removing $d"  
+            rm -r $d
+          fi
+        done
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
