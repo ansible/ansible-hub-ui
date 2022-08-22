@@ -1,3 +1,32 @@
+4.5.1 (2022-08-22)
+Features
+--------
+
+- Show the proper MINIMUM PASSWORD LENGTH in UI
+  `AAH-1573 <https://issues.redhat.com/browse/AAH-1573>`_
+- Localize collection modules/roles/... counter
+  `AAH-1684 <https://issues.redhat.com/browse/AAH-1684>`_
+
+
+Bugfixes
+--------
+
+- Repaired - Do not use global active CSS selector in sort table headers
+  `AAH-1546 <https://issues.redhat.com/browse/AAH-1546>`_
+- Wait for setDeprecation task before running loadCollections and success handler.
+  `AAH-1596 <https://issues.redhat.com/browse/AAH-1596>`_
+- Edit group permissions - correctly hide user/group-related permissions in keycloak mode
+  `AAH-1688 <https://issues.redhat.com/browse/AAH-1688>`_
+
+
+Misc
+----
+
+- `AAH-1428 <https://issues.redhat.com/browse/AAH-1428>`_, `AAH-1553 <https://issues.redhat.com/browse/AAH-1553>`_, `AAH-1575 <https://issues.redhat.com/browse/AAH-1575>`_, `AAH-1578 <https://issues.redhat.com/browse/AAH-1578>`_, `AAH-1710 <https://issues.redhat.com/browse/AAH-1710>`_
+
+
+----
+
 
 Features
 --------
