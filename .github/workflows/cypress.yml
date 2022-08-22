@@ -26,6 +26,13 @@ jobs:
       matrix:
         test:
         - 'collections'
+        - 'approval'
+        - 'execution_evnrionments'
+        - 'namespaces'
+        - 'groups_and_users'
+        - 'repo'
+        - 'misc'
+        - 'imports' 
 
     steps:
 
