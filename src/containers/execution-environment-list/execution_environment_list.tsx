@@ -18,7 +18,12 @@ import {
   ExecutionEnvironmentType,
   SignContainersAPI,
 } from 'src/api';
-import { filterIsSet, parsePulpIDFromURL, ParamHelper } from 'src/utilities';
+import {
+  filterIsSet,
+  parsePulpIDFromURL,
+  ParamHelper,
+  RepoSigningUtils,
+} from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -39,6 +44,7 @@ import {
   closeAlertMixin,
   EmptyStateUnauthorized,
   ListItemActions,
+  SignatureBadge,
 } from 'src/components';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from 'src/loaders/app-context';
@@ -113,8 +119,7 @@ class ExecutionEnvironmentList extends React.Component<
 
   private loadSigningService() {
     // load the service
-    debugger;
-    const service = this.context.settings.GALAXY_COLLECTION_SIGNING_SERVICE;
+    const service = this.context.settings.GALAXY_CONTAINER_SIGNING_SERVICE;
     SignContainersAPI.getSigningService(service).then((result) => {
       const pulp_href = result.data.results[0]['pulp_href'];
       this.setState({ signServicePath: pulp_href }, () =>
@@ -124,42 +129,13 @@ class ExecutionEnvironmentList extends React.Component<
   }
 
   private sign(item) {
-    debugger;
-    SignContainersAPI.sign(
-      item.pulp.repository.pulp_id,
+    RepoSigningUtils.sign(
+      item,
       this.state.signServicePath,
-    ).then((result) => {
-      debugger;
-    });
-
-    /*SignContainersAPI.getRepository(item.name).then( (result) => 
-    {
-      debugger;
-      let containerId = this.getIdFromPulpHref(result.data.results[0].pulp_href);
-      const item2 = item;
-      SignContainersAPI.sign(containerId, this.state.signServicePath).then( (result) => {
-        debugger;
-      });
-    });*/
+      (alert) => this.addAlertObj(alert),
+      () => this.loadSigningService(),
+    );
   }
-
-  /*private getIdFromPulpHref(pulp_href)
-  {
-    const strings = pulp_href.split('/');
-    let pulp_id = '';
-    
-    if (strings.length >= 1)
-    {
-      pulp_id = strings[strings.length-1];
-      
-      if (strings.length >= 2 && strings[strings.length-1] == "")
-      {
-        pulp_id = strings[strings.length-2];
-      }
-    }
-
-    return pulp_id;
-  }*/
 
   componentWillUnmount() {
     this.context.setAlerts([]);
@@ -450,6 +426,8 @@ class ExecutionEnvironmentList extends React.Component<
           >
             {item.name}
           </Link>
+          {'  '}
+          {item.signed && <SignatureBadge isCompact signState={item.signed} />}
         </td>
         {description ? (
           <td className={'pf-m-truncate'}>
@@ -548,16 +526,56 @@ class ExecutionEnvironmentList extends React.Component<
     this.setState({ loading: true }, () =>
       ExecutionEnvironmentAPI.list(this.state.params)
         .then((result) =>
-          this.setState({
-            items: result.data.data,
-            itemCount: result.data.meta.count,
-            loading: false,
-          }),
+          this.setState(
+            {
+              items: result.data.data,
+              itemCount: result.data.meta.count,
+              loading: false,
+            },
+            () => this.querySignedEnvironments(),
+          ),
         )
         .catch((e) =>
           this.addAlert(t`Error loading environments.`, 'danger', e?.message),
         ),
     );
+  }
+
+  private querySignedEnvironments() {
+    const promises = [];
+    this.state.items.forEach((item) => {
+      promises.push(
+        SignContainersAPI.getSignature(
+          item.pulp.repository.pulp_id,
+          item.pulp.repository.version,
+        ).catch((ex) => {}),
+      );
+    });
+
+    Promise.all(promises).then((values) => {
+      values.forEach((item, index) => {
+        let signed = '';
+
+        try {
+          signed =
+            item.data.content_summary.added['container.signature'].count > 0
+              ? 'signed'
+              : 'unsigned';
+        } catch {}
+
+        const repo_id = RepoSigningUtils.getIdFromPulpHref(
+          item.data.repository,
+        );
+        const stateItem = this.state.items.filter(
+          (i) => i.pulp.repository.pulp_id == repo_id,
+        );
+
+        if (stateItem.length > 0) {
+          stateItem[0].signed = signed;
+        }
+      });
+      this.setState({ items: this.state.items });
+    });
   }
 
   private get updateParams() {
@@ -569,15 +587,16 @@ class ExecutionEnvironmentList extends React.Component<
   }
 
   private addAlert(title, variant, description?) {
+    this.addAlertObj({
+      description,
+      title,
+      variant,
+    });
+  }
+
+  private addAlertObj(alert) {
     this.setState({
-      alerts: [
-        ...this.state.alerts,
-        {
-          description,
-          title,
-          variant,
-        },
-      ],
+      alerts: [...this.state.alerts, alert],
     });
   }
 
