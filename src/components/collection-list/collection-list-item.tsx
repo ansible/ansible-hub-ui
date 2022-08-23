@@ -37,7 +37,6 @@ export class CollectionListItem extends React.Component<IProps> {
   render() {
     const {
       name,
-      // download_count,
       latest_version,
       namespace,
       showNamespace,
