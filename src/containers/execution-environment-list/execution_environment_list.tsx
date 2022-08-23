@@ -133,7 +133,7 @@ class ExecutionEnvironmentList extends React.Component<
       item,
       this.state.signServicePath,
       (alert) => this.addAlertObj(alert),
-      () => this.loadSigningService(),
+      () => this.querySignedEnvironments(),
     );
   }
 
@@ -548,7 +548,13 @@ class ExecutionEnvironmentList extends React.Component<
         SignContainersAPI.getSignature(
           item.pulp.repository.pulp_id,
           item.pulp.repository.version,
-        ).catch((ex) => {}),
+        ).catch((ex) => {
+          this.addAlertObj({
+            variant: 'danger',
+            title: t`API Error: ${ex}`,
+            description: t`Failed to load signature of ${item.name} v ${item.pulp.repository.version}.`,
+          });
+        }),
       );
     });
 
