@@ -53,7 +53,7 @@ describe('collection tests', () => {
     cy.menuGo('Collections > Collections');
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/namespaces/my_namespace/',
+      Cypress.env('prefix') + '_ui/v1/namespaces/my_namespace/?*',
     ).as('reload');
     cy.get('a[href*="ui/repo/published/my_namespace/my_collection"]').click();
     cy.get('[data-cy=kebab-toggle]').click();
