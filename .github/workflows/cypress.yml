@@ -178,11 +178,13 @@ jobs:
       run: |
         echo -e '{
           "prefix": "/api/galaxy/",
+          "pulpPrefix": "/api/galaxy/pulp/api/v3/",
           "username": "admin",
           "password": "admin",
           "settings": "../../pulp_galaxy_ng/settings/settings.py",
           "restart": "podman exec pulp bash -c \"s6-svc -r /var/run/s6/services/pulpcore-api\"; sleep 10",
-          "containers": "localhost:8002"
+          "containers": "localhost:8002",
+          "galaxykit": "galaxykit --ignore-certs"
         }' > cypress.env.json
 
     - name: "Ensure index.html uses the new js"
