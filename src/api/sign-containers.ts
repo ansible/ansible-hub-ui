@@ -7,9 +7,14 @@ class API extends PulpAPI {
   }
 
   public sign(containerId: string, pulp_type, signServicePath) {
+    let postObj = { manifest_signing_service: signServicePath };
+    if (pulp_type == 'container') {
+      postObj['future_base_path'] = 'library/busybox';
+    }
+
     return this.http.post(
       `/repositories/container/${pulp_type}/${containerId}/sign/`,
-      { manifest_signing_service: signServicePath },
+      postObj,
     );
   }
 
