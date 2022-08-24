@@ -2,12 +2,26 @@ describe('Repo Management tests', () => {
   let remoteRepoUrl = '/ui/repositories?tab=remote';
   let localRepoUrl = '/ui/repositories';
 
+  let noPrivilegesUser0 = 'noPrivilegesUser0';
+
+  before(() => {
+    cy.deleteTestGroups();
+    cy.deleteTestUsers();
+    cy.galaxykit('user create', noPrivilegesUser0, noPrivilegesUser0);
+  });
+
+  after(() => {
+    cy.deleteTestUsers();
+    cy.deleteTestGroups();
+  });
+
   beforeEach(() => {
     cy.login();
   });
 
   it('admin user sees download_concurrency in remote config', () => {
     cy.visit(remoteRepoUrl);
+    cy.contains('.body', 'community'); // without this, sporadic failures
     cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
     cy.contains('Edit').click();
     cy.contains('Show advanced options').click();
@@ -62,6 +76,32 @@ describe('Repo Management tests', () => {
     ).contains(Cypress.env('prefix') + 'content/community/'); // check content of input
 
     cy.get('button[aria-label="Copy to clipboard"]').eq(1).should('be.enabled');
+  });
+
+  it('can see both default repos.', () => {
+    cy.visit(localRepoUrl);
+    cy.contains('.hub-tab-link-container', 'Local');
+    cy.contains('.hub-tab-link-container', 'Remote');
+  });
+
+  it('can see all buttons as admin.', () => {
+    cy.visit(localRepoUrl);
+    cy.contains('.hub-tab-link-container span', 'Remote').click();
+    cy.contains('.body', 'rh-certified');
+    cy.contains('.body button', 'Sync');
+    cy.get('.body button[aria-label="Actions"]').eq(0).click();
+    cy.contains('.body a', 'Edit');
+    cy.get('.body button[aria-label="Actions"]').eq(1).click();
+    cy.contains('.body a', 'Edit');
+  });
+
+  it('can see no buttons as user without privilleges.', () => {
+    cy.login(noPrivilegesUser0, noPrivilegesUser0);
+    cy.visit(localRepoUrl);
+    cy.contains('.hub-tab-link-container span', 'Remote').click();
+    cy.contains('.body', 'rh-certified');
+    cy.contains('.body button', 'Sync').should('not.exist');
+    cy.get('.body button[aria-label="Actions"]').should('not.exist');
   });
 
   it.skip('starts remote repo sync', () => {

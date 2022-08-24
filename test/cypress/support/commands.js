@@ -1,6 +1,7 @@
 // https://on.cypress.io/custom-commands
 
 import shell from 'shell-escape-tag';
+import { range } from 'lodash';
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
@@ -306,8 +307,12 @@ Cypress.Commands.add('deleteTestUsers', {}, () => {
 });
 
 Cypress.Commands.add('deleteTestGroups', {}, () => {
-  cy.galaxykit('group list').then((lines) => {
-    lines.map(col1).forEach((group) => cy.galaxykit('-i group delete', group));
+  range(4).forEach(() => {
+    cy.galaxykit('group list').then((lines) => {
+      lines
+        .map(col1)
+        .forEach((group) => cy.galaxykit('-i group delete', group));
+    });
   });
 });
 
