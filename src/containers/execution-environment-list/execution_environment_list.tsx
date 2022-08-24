@@ -545,29 +545,22 @@ class ExecutionEnvironmentList extends React.Component<
     const promises = [];
     this.state.items.forEach((item) => {
       promises.push(
-        SignContainersAPI.getSignature(
-          item.pulp.repository.pulp_id,
-          item.pulp.repository.version,
-        ).catch((ex) => {
-          this.addAlertObj({
-            variant: 'danger',
-            title: t`API Error: ${ex}`,
-            description: t`Failed to load signature of ${item.name} v ${item.pulp.repository.version}.`,
-          });
-        }),
+        RepoSigningUtils.getSignature(item, (alert) => this.addAlertObj(alert)),
       );
     });
 
     Promise.all(promises).then((values) => {
-      values.forEach((item, index) => {
-        let signed = '';
+      values.forEach((item) => {
+        if (!item) {
+          return;
+        }
 
-        try {
-          signed =
-            item.data.content_summary.added['container.signature'].count > 0
-              ? 'signed'
-              : 'unsigned';
-        } catch {}
+        let signed = 'unsigned';
+        const signature =
+          item.data.content_summary.added['container.signature'];
+        if (signature && signature.count > 0) {
+          signed = 'signed';
+        }
 
         const repo_id = RepoSigningUtils.getIdFromPulpHref(
           item.data.repository,

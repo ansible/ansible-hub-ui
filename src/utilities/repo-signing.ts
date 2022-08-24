@@ -20,9 +20,35 @@ export class RepoSigningUtils {
     return pulp_id;
   }
 
+  public static getContainerPulpType(item) {
+    const pulp_types = item.pulp.repository.pulp_type.split('.');
+    if (pulp_types.length > 1) {
+      return pulp_types[1];
+    } else {
+      return '';
+    }
+  }
+
+  public static getSignature(item, addAlert) {
+    return SignContainersAPI.getSignature(
+      item.pulp.repository.pulp_id,
+      item.pulp.repository.version,
+      RepoSigningUtils.getContainerPulpType(item),
+    ).catch((ex) => {
+      addAlert({
+        variant: 'danger',
+        title: t`API Error: ${ex}`,
+        description: t`Failed to load signature of ${item.name} v ${item.pulp.repository.version}.`,
+      });
+    });
+  }
+
   public static sign(item, signServicePath, addAlert, reload) {
-    debugger;
-    SignContainersAPI.sign(item.pulp.repository.pulp_id, signServicePath)
+    SignContainersAPI.sign(
+      item.pulp.repository.pulp_id,
+      RepoSigningUtils.getContainerPulpType(item),
+      signServicePath,
+    )
       .then((result) => {
         debugger;
         addAlert({
