@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { ExecutionEnvironmentNamespaceAPI, GroupType } from 'src/api';
 import { OwnersTab } from 'src/components';
 import { formatPath, Paths } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 import { ParamHelper } from 'src/utilities';
 import './execution-environment-detail.scss';
 
@@ -12,6 +13,7 @@ import { withContainerRepo, IDetailSharedProps } from './base';
 interface IState {
   name: string;
   groups: GroupType[];
+  canEditOwners: boolean;
   params: {
     group?: number;
   };
@@ -29,6 +31,7 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
     this.state = {
       name: props.containerRepository.name,
       groups: null, // loading
+      canEditOwners: false,
       params,
     };
   }
@@ -45,12 +48,13 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
   }
 
   render() {
-    const { name, groups, params } = this.state;
+    const { name, groups, params, canEditOwners } = this.state;
     const loadAll = () =>
       this.queryNamespace(this.props.containerRepository.name);
 
     return (
       <OwnersTab
+        canEditOwners={canEditOwners}
         addAlert={this.props.addAlert}
         groupId={params.group}
         groups={groups}
@@ -71,10 +75,19 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
   }
 
   queryNamespace(name) {
-    ExecutionEnvironmentNamespaceAPI.get(name).then(({ data: { groups } }) =>
-      this.setState({ name, groups }),
+    ExecutionEnvironmentNamespaceAPI.get(name).then(
+      ({ data: { groups, my_permissions } }) =>
+        this.setState({
+          name: name,
+          groups: groups,
+          canEditOwners:
+            my_permissions.includes('container.change_containernamespace') ||
+            this.context.user.model_permissions.change_containernamespace,
+        }),
     );
   }
 }
+
+ExecutionEnvironmentDetailOwners.contextType = AppContext;
 
 export default withRouter(withContainerRepo(ExecutionEnvironmentDetailOwners));
