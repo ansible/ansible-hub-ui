@@ -180,7 +180,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
               const promise = remoteFormNew
                 ? ExecutionEnvironmentRegistryAPI.create(newRemote)
                 : ExecutionEnvironmentRegistryAPI.smartUpdate(
-                    remoteToEdit.pk,
+                    remoteToEdit.id,
                     remoteToEdit,
                     remoteUnmodified,
                   );
@@ -463,8 +463,8 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     );
   }
 
-  private deleteRegistry({ pk, name }) {
-    ExecutionEnvironmentRegistryAPI.delete(pk)
+  private deleteRegistry({ id, name }) {
+    ExecutionEnvironmentRegistryAPI.delete(id)
       .then(() =>
         this.addAlert(
           <Trans>
@@ -487,8 +487,8 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       });
   }
 
-  private syncRegistry({ pk, name }) {
-    ExecutionEnvironmentRegistryAPI.sync(pk)
+  private syncRegistry({ id, name }) {
+    ExecutionEnvironmentRegistryAPI.sync(id)
       .then((result) => {
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(

@@ -40,7 +40,7 @@ interface IProps {
   includeTags?: string[];
   registry?: string; // pk
   upstreamName?: string;
-  remotePulpId?: string;
+  remoteId?: string;
   addAlert?: (variant, title, description?) => void;
   formError: { title: string; detail: string }[];
 }
@@ -410,7 +410,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
     return ExecutionEnvironmentRegistryAPI.list({
       ...(name ? { name__icontains: name } : {}),
     }).then(({ data }) => {
-      const registries = data.data.map(({ pk, name }) => ({ id: pk, name }));
+      const registries = data.data.map(({ id, name }) => ({ id, name }));
       this.setState({ registries });
       return registries;
     });
@@ -444,7 +444,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       isNew,
       isRemote,
       name: originalName,
-      remotePulpId,
+      remoteId,
     } = this.props;
     const {
       description,
@@ -469,7 +469,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       // remote edit - upstream, tags, registry
       isRemote &&
         !isNew &&
-        ExecutionEnvironmentRemoteAPI.update(remotePulpId, {
+        ExecutionEnvironmentRemoteAPI.update(remoteId, {
           name: originalName, // readonly but required
           upstream_name,
           registry,
