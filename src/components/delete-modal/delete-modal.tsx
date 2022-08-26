@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { Button, Modal, Spinner } from '@patternfly/react-core';
+import { Button, Modal, ModalProps, Spinner } from '@patternfly/react-core';
 
 export interface IProps {
   cancelAction: () => void;
@@ -10,12 +10,24 @@ export interface IProps {
   title: string;
   spinner?: boolean;
   'data-cy'?: string;
+  variant?: ModalProps['variant'];
 }
 
 export class DeleteModal extends React.Component<IProps> {
+  static defaultProps = {
+    variant: 'small',
+  };
+
   render() {
-    const { cancelAction, children, deleteAction, isDisabled, title, spinner } =
-      this.props;
+    const {
+      cancelAction,
+      children,
+      deleteAction,
+      isDisabled,
+      title,
+      spinner,
+      variant,
+    } = this.props;
 
     return (
       <Modal
@@ -39,7 +51,7 @@ export class DeleteModal extends React.Component<IProps> {
         onClose={cancelAction}
         title={title}
         titleIconVariant='warning'
-        variant='small'
+        variant={variant}
         data-cy='modal_checkbox'
       >
         {children}

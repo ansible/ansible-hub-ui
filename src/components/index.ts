@@ -54,6 +54,7 @@ export {
   CollectionNumericLabel,
 } from './numeric-label/numeric-label';
 export { OwnersTab } from './rbac/owners-tab';
+export { EEOwnersTab } from './rbac/ee-owners-tab';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { PartnerHeader } from './headers/partner-header';
 export { PermissionChipSelector } from './rbac/permission-chip-selector';

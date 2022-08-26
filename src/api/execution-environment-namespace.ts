@@ -3,18 +3,20 @@ import { HubAPI } from './hub';
 class API extends HubAPI {
   apiPath = 'pulp/api/v3/pulp_container/namespaces/';
 
-  listRoles(id) {
-    return super.list({}, this.apiPath + id + '/list_roles/');
+  listRoles(id, params?) {
+    return super.list(params, this.apiPath + id + '/list_roles/');
   }
 
-  addRole(id, data) {
-    return super.create(data, this.apiPath + id + '/add_role/');
+  addRole(id, role) {
+    return super.create(role, this.apiPath + id + '/add_role/');
   }
 
-  myPermissions() {}
+  myPermissions(id, params) {
+    return super.list(params, this.apiPath + id + '/my_permissions/');
+  }
 
-  removeRole(id, data) {
-    return super.create(data, this.apiPath + id + '/remove_role/');
+  removeRole(id, role) {
+    return super.create(role, this.apiPath + id + '/remove_role/');
   }
 }
 
