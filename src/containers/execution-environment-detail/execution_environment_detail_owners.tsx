@@ -59,12 +59,12 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
   }
 
   render() {
-    const { name, groups, selectedGroup, canEditOwners } = this.state;
+    const { name, groups, canEditOwners, selectedGroup } = this.state;
     const loadAll = () =>
       this.queryNamespace(this.props.containerRepository.namespace);
 
     return (
-      <OwnersTab
+      <EEOwnersTab
         canEditOwners={canEditOwners}
         addAlert={this.props.addAlert}
         group={selectedGroup}
@@ -81,15 +81,55 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
     );
   }
 
-  queryNamespace(name) {
-    ExecutionEnvironmentNamespaceAPI.get(name).then(({ data: { groups } }) =>
-      this.setState({ 
-        name, 
-        groups,
-        canEditOwners: 
-          my_permissions.includes('container.change_containernamespace') ||
-          hasPermission('container.change_containernamespace'),
+  querySelectedGroup(name, groups) {
+    GroupAPI.list({ name }).then(({ data: { data } }) => {
+      this.setState({
+        selectedGroup: groups.find((g) => g.name === data[0].name),
+      });
     });
+  }
+
+  queryNamespace({ id, name: repoName }) {
+    ExecutionEnvironmentNamespaceAPI.listRoles(id)
+      .then(({ data: { roles } }) => {
+        const groupRoles = [];
+        for (const { groups, role } of roles) {
+          for (const name of groups) {
+            const groupIndex = groupRoles.findIndex((g) => g.name === name);
+            if (groupIndex == -1) {
+              groupRoles.push({ name, object_roles: [role] });
+            } else {
+              groupRoles[groupIndex].object_roles.push(role);
+            }
+          }
+        }
+
+        this.setState({ name: repoName, groups: groupRoles });
+
+        if (this.state.params?.group) {
+          this.querySelectedGroup(this.state.params.group, groupRoles);
+        }
+
+        this.queryMyPermissions(id);
+      })
+      .catch(() => {
+        this.setState({
+          groups: [],
+        });
+      });
+  }
+
+  queryMyPermissions(id) {
+    ExecutionEnvironmentNamespaceAPI.myPermissions(id).then(
+      ({ data: { permissions } }) => {
+
+        this.setState({
+          canEditOwners: 
+            permissions.includes('container.change_containernamespace') ||
+            hasPermission('container.change_containernamespace'),
+        });
+      },
+    );
   }
 }
 

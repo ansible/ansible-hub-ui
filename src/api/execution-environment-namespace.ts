@@ -11,7 +11,7 @@ class API extends HubAPI {
     return super.create(role, this.apiPath + id + '/add_role/');
   }
 
-  myPermissions(id, params) {
+  myPermissions(id, params?) {
     return super.list(params, this.apiPath + id + '/my_permissions/');
   }
 

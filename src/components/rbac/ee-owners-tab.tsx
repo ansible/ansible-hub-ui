@@ -40,6 +40,7 @@ interface IProps {
   selectRolesMessage: string;
   urlPrefix: string;
   namespaceId?: string;
+  canEditOwners: boolean;
 }
 
 interface IState {
@@ -62,7 +63,7 @@ export class EEOwnersTab extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { groups, group } = this.props;
+    const { groups, group, canEditOwners } = this.props;
     const { showGroupRemoveModal, showGroupSelectWizard } = this.state;
     const loading = !groups;
     const noData = groups?.length === 0;
@@ -96,8 +97,12 @@ export class EEOwnersTab extends React.Component<IProps, IState> {
         ) : noData ? (
           <EmptyStateNoData
             title={t`There are currently no owners assigned.`}
-            description={t`Please add an owner by using the button below.`}
-            button={buttonAdd}
+            description={
+              canEditOwners
+                ? t`Please add an owner by using the button below.`
+                : ''
+            }
+            button={canEditOwners ? buttonAdd : null}
           />
         ) : group ? (
           this.renderRoles({ group })
@@ -109,17 +114,20 @@ export class EEOwnersTab extends React.Component<IProps, IState> {
   }
 
   private renderGroups({ buttonAdd, groups }) {
+    const { canEditOwners } = this.props;
     const sortedGroups = sortBy(groups, 'name');
 
     return (
       <>
-        <div>
-          <Toolbar>
-            <ToolbarContent>
-              <ToolbarItem>{buttonAdd}</ToolbarItem>
-            </ToolbarContent>
-          </Toolbar>
-        </div>
+        {canEditOwners && (
+          <div>
+            <Toolbar>
+              <ToolbarContent>
+                <ToolbarItem>{buttonAdd}</ToolbarItem>
+              </ToolbarContent>
+            </Toolbar>
+          </div>
+        )}
 
         <table
           aria-label={t`Group list`}
@@ -152,10 +160,10 @@ export class EEOwnersTab extends React.Component<IProps, IState> {
   }
 
   private renderGroupRow(group, index: number) {
-    const { urlPrefix } = this.props;
+    const { urlPrefix, canEditOwners } = this.props;
 
     const dropdownItems = [
-      this.context.user.model_permissions.change_containernamespace && (
+      canEditOwners && (
         <DropdownItem
           key='remove'
           onClick={() => {
@@ -188,6 +196,7 @@ export class EEOwnersTab extends React.Component<IProps, IState> {
   }
 
   private renderRoles({ group }) {
+    const { canEditOwners } = this.props;
     const { showRoleRemoveModal, showRoleSelectWizard } = this.state;
     const roles = group?.object_roles;
     const sortedRoles = sortBy(roles);
@@ -213,13 +222,15 @@ export class EEOwnersTab extends React.Component<IProps, IState> {
         {showRoleRemoveModal ? this.renderRoleRemoveModal(group) : null}
         {showRoleSelectWizard ? this.renderRoleSelectWizard(group) : null}
 
-        <div>
-          <Toolbar>
-            <ToolbarContent>
-              <ToolbarItem>{buttonAdd}</ToolbarItem>
-            </ToolbarContent>
-          </Toolbar>
-        </div>
+        {canEditOwners && (
+          <div>
+            <Toolbar>
+              <ToolbarContent>
+                <ToolbarItem>{buttonAdd}</ToolbarItem>
+              </ToolbarContent>
+            </Toolbar>
+          </div>
+        )}
 
         <RoleListTable
           params={{}}
@@ -254,7 +265,7 @@ export class EEOwnersTab extends React.Component<IProps, IState> {
               <td>{role}</td>
               <ListItemActions
                 kebabItems={[
-                  this.context.user.is_superuser && (
+                  canEditOwners && (
                     <DropdownItem
                       key='remove-role'
                       onClick={() =>
