@@ -12,7 +12,8 @@ export class LastSyncType {
 }
 
 export class RemoteType {
-  pk: string;
+  id: string;
+  pulp_href: string;
   name: string;
   url: string;
   signed_only: boolean;
