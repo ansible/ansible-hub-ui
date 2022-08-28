@@ -64,7 +64,7 @@ msgstr "<0>注記:</0> 以下のリンクはブラウザーによってブロッ
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:402
+#: src/containers/namespace-detail/namespace-detail.tsx:397
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>注記:</0> この URL を使用して ansible-galaxy を設定して、この名前空間にコレクションをアップロードします。ansible-galaxy の設定に関する詳細は <1>ここ</1><2></2><3/> を参照してください。"
 
@@ -113,7 +113,7 @@ msgstr "タグには、小文字、大文字、小文字、数字、アンダー
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:510
+#: src/containers/namespace-detail/namespace-detail.tsx:504
 msgid "API Error: Failed to set deprecation."
 msgstr "API エラー: 非推奨の設定に失敗しました。"
 
@@ -122,9 +122,9 @@ msgstr "API エラー: 非推奨の設定に失敗しました。"
 #~ msgid "API Error: {0}"
 #~ msgstr "API Error: {0}"
 
-#: src/components/headers/collection-header.tsx:691
-#: src/components/headers/collection-header.tsx:742
-#: src/containers/namespace-detail/namespace-detail.tsx:528
+#: src/components/headers/collection-header.tsx:689
+#: src/components/headers/collection-header.tsx:740
+#: src/containers/namespace-detail/namespace-detail.tsx:522
 msgid "API Error: {status}"
 msgstr "API エラー: {status}"
 
@@ -173,8 +173,8 @@ msgstr "アクティビティー"
 #: src/components/execution-environment/repository-form.tsx:272
 #: src/components/execution-environment/repository-form.tsx:315
 #: src/components/execution-environment/tag-manifest-modal.tsx:169
-#: src/components/rbac/owners-tab.tsx:367
-#: src/components/rbac/owners-tab.tsx:419
+#: src/components/rbac/owners-tab.tsx:368
+#: src/components/rbac/owners-tab.tsx:420
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:217
 #: src/containers/group-management/group-detail.tsx:287
@@ -230,7 +230,7 @@ msgstr "新規タグのイメージへの追加"
 msgid "Add remote registry"
 msgstr "リモートレジストリーの追加"
 
-#: src/components/rbac/owners-tab.tsx:208
+#: src/components/rbac/owners-tab.tsx:207
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:177
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:195
 #: src/containers/role-management/role-list.tsx:158
@@ -352,12 +352,12 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 #: src/components/import-modal/import-modal.tsx:78
 #: src/components/namespace-modal/namespace-modal.tsx:111
 #: src/components/rbac/group-modal.tsx:61
-#: src/components/rbac/owners-tab.tsx:343
-#: src/components/rbac/owners-tab.tsx:412
+#: src/components/rbac/owners-tab.tsx:344
+#: src/components/rbac/owners-tab.tsx:413
 #: src/components/rbac/role-form.tsx:214
 #: src/components/rbac/user-form.tsx:226
 #: src/components/repositories/remote-form.tsx:149
-#: src/components/signing/sign-all-certificates-modal.tsx:49
+#: src/components/signing/sign-all-certificates-modal.tsx:47
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/containers/edit-namespace/edit-namespace.tsx:158
@@ -371,7 +371,7 @@ msgstr "取り消し"
 msgid "Canceled"
 msgstr "取り消し済み"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:699
+#: src/containers/namespace-detail/namespace-detail.tsx:695
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "コレクションの依存関係が<0/>削除されるまで<1/>名前空間は削除できません"
 
@@ -380,7 +380,7 @@ msgstr "コレクションの依存関係が<0/>削除されるまで<1/>名前�
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "このコレクションに依存する<0/>コレクションが削除されるまで<1/>削除できません。"
 
-#: src/components/headers/collection-header.tsx:646
+#: src/components/headers/collection-header.tsx:644
 #: src/containers/certification-dashboard/certification-dashboard.tsx:549
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 msgstr "コレクション \"{0} {1} v{2}\" の証明書が正常にアップロードされました。"
@@ -516,30 +516,30 @@ msgstr "コード"
 msgid "Collection"
 msgstr "コレクション"
 
-#: src/components/headers/collection-header.tsx:826
+#: src/components/headers/collection-header.tsx:824
 #: src/containers/search/search.tsx:358
 msgid "Collection \"{0}\" could not be deprecated."
 msgstr "コレクション \"{0}\" を非推奨化できませんでした。"
 
-#: src/components/headers/collection-header.tsx:827
+#: src/components/headers/collection-header.tsx:825
 #: src/containers/search/search.tsx:359
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化を解除できませんでした。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:495
+#: src/containers/namespace-detail/namespace-detail.tsx:489
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr "コレクション \"{0}\" が正常に非推奨化されました。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:494
+#: src/containers/namespace-detail/namespace-detail.tsx:488
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化が正常に解除されました。"
 
-#: src/components/headers/collection-header.tsx:941
+#: src/components/headers/collection-header.tsx:939
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "コレクション \"{name} v{collectionVersion}\" を削除できませんでした。"
 
-#: src/components/headers/collection-header.tsx:870
-#: src/components/headers/collection-header.tsx:885
+#: src/components/headers/collection-header.tsx:868
+#: src/components/headers/collection-header.tsx:883
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "コレクション \"{name} v{collectionVersion}\" が正常に削除されました。"
 
@@ -588,7 +588,7 @@ msgstr "コレクションには依存関係がありません。"
 msgid "Collection is not being used by any collection."
 msgstr "コレクションはどのコレクションでも使用されていません。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:658
+#: src/containers/namespace-detail/namespace-detail.tsx:654
 msgid "Collection repositories could not be displayed."
 msgstr "コレクションリポジトリーを表示できませんでした。"
 
@@ -596,7 +596,7 @@ msgstr "コレクションリポジトリーを表示できませんでした。
 msgid "Collection upload canceled"
 msgstr "コレクションのアップロードが取り消されました"
 
-#: src/components/headers/collection-header.tsx:318
+#: src/components/headers/collection-header.tsx:316
 #: src/components/repositories/local-repository-table.tsx:85
 #: src/components/repositories/remote-repository-table.tsx:98
 #: src/containers/certification-dashboard/certification-dashboard.tsx:302
@@ -612,7 +612,7 @@ msgid "Collections"
 msgstr "コレクション"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:261
-#: src/containers/namespace-detail/namespace-detail.tsx:370
+#: src/containers/namespace-detail/namespace-detail.tsx:365
 #: src/containers/search/search.tsx:254
 msgid "Collections will appear once uploaded"
 msgstr "コレクションはアップロードされると表示されます"
@@ -705,7 +705,7 @@ msgstr "コンテンツ"
 #~ msgid "Content count"
 #~ msgstr "コンテンツ数"
 
-#: src/components/headers/collection-header.tsx:584
+#: src/components/headers/collection-header.tsx:582
 msgid "Contents"
 msgstr "コンテンツ"
 
@@ -917,12 +917,12 @@ msgid "Delete image?"
 msgstr "イメージを削除しますか?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:693
-#: src/containers/namespace-detail/namespace-detail.tsx:707
+#: src/containers/namespace-detail/namespace-detail.tsx:689
+#: src/containers/namespace-detail/namespace-detail.tsx:703
 msgid "Delete namespace"
 msgstr "名前空間の削除"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:298
+#: src/containers/namespace-detail/namespace-detail.tsx:293
 msgid "Delete namespace?"
 msgstr "名前空間を削除しますか?"
 
@@ -971,7 +971,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "<0>{0} v{collectionVersion}</0> を削除すると、そのデータが失われます。"
 
 #: src/components/delete-modal/delete-collection-modal.tsx:66
-#: src/containers/namespace-detail/namespace-detail.tsx:303
+#: src/containers/namespace-detail/namespace-detail.tsx:298
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "<0>{0}</0> を削除すると、そのデータが失われます。"
 
@@ -999,7 +999,7 @@ msgstr "このグループを削除すると {count} 人のユーザーが影響
 msgid "Deleting yourself is not allowed."
 msgstr "自分自身は削除できません。"
 
-#: src/components/headers/collection-header.tsx:598
+#: src/components/headers/collection-header.tsx:596
 #: src/containers/collection-detail/collection-dependencies.tsx:105
 #: src/containers/collection-detail/collection-dependencies.tsx:135
 msgid "Dependencies"
@@ -1009,7 +1009,7 @@ msgstr "依存関係"
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "コレクション \"{name}\" の依存関係を表示できませんでした。"
 
-#: src/components/headers/collection-header.tsx:911
+#: src/components/headers/collection-header.tsx:909
 msgid "Dependent collections"
 msgstr "依存するコレクション"
 
@@ -1018,12 +1018,12 @@ msgid "Dependent collections could not be displayed."
 msgstr "依存するコレクションを表示できませんでした。"
 
 #: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:862
+#: src/containers/namespace-detail/namespace-detail.tsx:858
 #: src/containers/search/search.tsx:384
 msgid "Deprecate"
 msgstr "非推奨"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:481
+#: src/containers/namespace-detail/namespace-detail.tsx:475
 msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr "コレクション \"{0}\" の非推奨ステータスの更新が開始されています。"
 
@@ -1071,7 +1071,7 @@ msgstr "ディストリビューション名"
 msgid "Docs site"
 msgstr "ドキュメントのサイト"
 
-#: src/components/headers/collection-header.tsx:579
+#: src/components/headers/collection-header.tsx:577
 #: src/containers/collection-detail/collection-docs.tsx:125
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
@@ -1149,7 +1149,7 @@ msgstr "実行環境の編集"
 #~ msgid "Edit group permissions"
 #~ msgstr "グループ権限の編集"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:683
+#: src/containers/namespace-detail/namespace-detail.tsx:679
 msgid "Edit namespace"
 msgstr "名前空間の編集"
 
@@ -1426,15 +1426,15 @@ msgstr "失敗"
 msgid "Failed to retrieve user data."
 msgstr "ユーザーデータの取得に失敗しました。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:529
+#: src/containers/namespace-detail/namespace-detail.tsx:523
 msgid "Failed to sign all collections."
 msgstr "すべてのコレクションの署名に失敗しました。"
 
-#: src/components/headers/collection-header.tsx:692
+#: src/components/headers/collection-header.tsx:690
 msgid "Failed to sign all versions in the collection."
 msgstr "コレクションのすべてのバージョンの署名に失敗しました。"
 
-#: src/components/headers/collection-header.tsx:743
+#: src/components/headers/collection-header.tsx:741
 msgid "Failed to sign the version."
 msgstr "バージョンへの署名に失敗しました。"
 
@@ -1507,12 +1507,12 @@ msgstr "10 回試行した後に、タスクの待機を中止します。"
 msgid "Go to documentation"
 msgstr "ドキュメントに移動"
 
-#: src/components/rbac/owners-tab.tsx:132
+#: src/components/rbac/owners-tab.tsx:130
 #: src/components/rbac/select-group.tsx:85
 msgid "Group"
 msgstr "グループ"
 
-#: src/components/rbac/owners-tab.tsx:474
+#: src/components/rbac/owners-tab.tsx:475
 msgid "Group \"{0}\" could not be added to \"{name}\"."
 msgstr ""
 
@@ -1520,11 +1520,11 @@ msgstr ""
 #~ msgid "Group \"{0}\" could not be displayed."
 #~ msgstr "グループ \"{0}\" を表示できませんでした。"
 
-#: src/components/rbac/owners-tab.tsx:488
+#: src/components/rbac/owners-tab.tsx:489
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
 msgstr ""
 
-#: src/components/rbac/owners-tab.tsx:473
+#: src/components/rbac/owners-tab.tsx:474
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr ""
 
@@ -1532,17 +1532,17 @@ msgstr ""
 msgid "Group \"{0}\" has been successfully deleted."
 msgstr "グループ \"{0}\" が正常に削除されました。"
 
-#: src/components/rbac/owners-tab.tsx:487
+#: src/components/rbac/owners-tab.tsx:488
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
+msgstr ""
+
+#: src/components/rbac/owners-tab.tsx:505
+#: src/components/rbac/owners-tab.tsx:521
+msgid "Group \"{0}\" roles could not be update in \"{name}\"."
 msgstr ""
 
 #: src/components/rbac/owners-tab.tsx:504
 #: src/components/rbac/owners-tab.tsx:520
-msgid "Group \"{0}\" roles could not be update in \"{name}\"."
-msgstr ""
-
-#: src/components/rbac/owners-tab.tsx:503
-#: src/components/rbac/owners-tab.tsx:519
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
 msgstr ""
 
@@ -1558,7 +1558,7 @@ msgstr "グループ \"{group}\" が正常に削除されました。"
 msgid "Group could not be displayed."
 msgstr ""
 
-#: src/components/rbac/owners-tab.tsx:125
+#: src/components/rbac/owners-tab.tsx:123
 #: src/containers/group-management/group-list.tsx:394
 msgid "Group list"
 msgstr "グループリスト"
@@ -1611,7 +1611,7 @@ msgstr "署名の非表示"
 #: src/components/delete-modal/delete-collection-modal.tsx:75
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:222
-#: src/containers/namespace-detail/namespace-detail.tsx:310
+#: src/containers/namespace-detail/namespace-detail.tsx:305
 msgid "I understand that this action cannot be undone."
 msgstr "この操作は元に戻せないことを理解しています。"
 
@@ -1655,12 +1655,12 @@ msgstr "インポートと自動承認"
 msgid "Import and move to staging"
 msgstr "インポートしてステージングに移動"
 
-#: src/components/headers/collection-header.tsx:593
+#: src/components/headers/collection-header.tsx:591
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "ログのインポート"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:724
+#: src/containers/namespace-detail/namespace-detail.tsx:720
 msgid "Imports"
 msgstr "インポート"
 
@@ -1685,7 +1685,7 @@ msgid "Indexing started for execution environment \"{name}\"."
 msgstr "実行環境 \"{name}\" のインデックス化が開始されました。"
 
 #: src/components/collection-detail/collection-info.tsx:53
-#: src/components/headers/collection-header.tsx:574
+#: src/components/headers/collection-header.tsx:572
 msgid "Install"
 msgstr "インストール"
 
@@ -1760,7 +1760,7 @@ msgstr "最終同期"
 msgid "Last updated"
 msgstr "最終更新日時"
 
-#: src/components/headers/collection-header.tsx:469
+#: src/components/headers/collection-header.tsx:467
 msgid "Last updated <0/>"
 msgstr "最終更新日時 <0/>"
 
@@ -1929,11 +1929,11 @@ msgstr "名前を空白にすることはできません。"
 msgid "Namespace"
 msgstr "名前空間"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:809
+#: src/containers/namespace-detail/namespace-detail.tsx:805
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "名前空間 \"{name}\" を削除できませんでした。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:788
+#: src/containers/namespace-detail/namespace-detail.tsx:784
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "名前空間 \"{name}\" が正常に削除されました。"
 
@@ -2018,7 +2018,7 @@ msgstr ""
 msgid "No child task"
 msgstr "子タスクなし"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:369
+#: src/containers/namespace-detail/namespace-detail.tsx:364
 #: src/containers/search/search.tsx:253
 msgid "No collections yet"
 msgstr "まだコレクションはありません"
@@ -2252,13 +2252,13 @@ msgstr "グループ \"{0}\" のパーミッションを表示できませんで
 msgid "Please add a role by using the button below."
 msgstr ""
 
-#: src/components/rbac/owners-tab.tsx:99
+#: src/components/rbac/owners-tab.tsx:92
 msgid "Please add an owner by using the button below."
 msgstr ""
 
 #: src/components/rbac/owners-tab.tsx:93
-msgid "Please contact the server administrator for elevated permissions."
-msgstr ""
+#~ msgid "Please contact the server administrator for elevated permissions."
+#~ msgstr ""
 
 #: src/containers/group-management/group-detail.tsx:241
 #~ msgid "Please finish editing permissions first."
@@ -2277,8 +2277,8 @@ msgid "Please, provide the namespace name"
 msgstr "名前空間名を記入してください。"
 
 #: src/components/markdown-editor/markdown-editor.tsx:38
-#: src/components/rbac/owners-tab.tsx:365
-#: src/components/rbac/owners-tab.tsx:417
+#: src/components/rbac/owners-tab.tsx:366
+#: src/components/rbac/owners-tab.tsx:418
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:215
 msgid "Preview"
 msgstr "プレビュー"
@@ -2292,7 +2292,7 @@ msgid "Progress messages"
 msgstr "進捗メッセージ"
 
 #: src/components/cards/collection-card.tsx:79
-#: src/components/collection-list/collection-list-item.tsx:88
+#: src/components/collection-list/collection-list-item.tsx:87
 msgid "Provided by {company}"
 msgstr "{company} により提供"
 
@@ -2539,20 +2539,20 @@ msgstr "削除"
 msgid "Remove content from repository"
 msgstr "リポジトリーからのコンテンツ削除"
 
-#: src/components/rbac/owners-tab.tsx:167
+#: src/components/rbac/owners-tab.tsx:165
 msgid "Remove group"
 msgstr ""
 
-#: src/components/rbac/owners-tab.tsx:286
+#: src/components/rbac/owners-tab.tsx:287
 msgid "Remove group {groupname}?"
 msgstr ""
 
-#: src/components/rbac/owners-tab.tsx:265
+#: src/components/rbac/owners-tab.tsx:266
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:381
 msgid "Remove role"
 msgstr ""
 
-#: src/components/rbac/owners-tab.tsx:306
+#: src/components/rbac/owners-tab.tsx:307
 msgid "Remove role {role}?"
 msgstr ""
 
@@ -2600,7 +2600,7 @@ msgstr "リソースの予約"
 msgid "Resources"
 msgstr "リソース"
 
-#: src/components/rbac/owners-tab.tsx:236
+#: src/components/rbac/owners-tab.tsx:237
 #: src/components/rbac/role-list-table.tsx:44
 #: src/components/rbac/select-roles.tsx:93
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:231
@@ -2722,9 +2722,9 @@ msgstr "このタスクのステータスについては、タスク管理の <0
 msgid "See the task management <0>detail page</0>for the status of this task."
 msgstr "このタスクのステータスについては、タスク管理の <0>詳細ページ</0> を参照してください。"
 
-#: src/components/rbac/owners-tab.tsx:78
-#: src/components/rbac/owners-tab.tsx:333
-#: src/components/rbac/owners-tab.tsx:376
+#: src/components/rbac/owners-tab.tsx:76
+#: src/components/rbac/owners-tab.tsx:334
+#: src/components/rbac/owners-tab.tsx:377
 msgid "Select a group"
 msgstr "グループの選択"
 
@@ -2736,7 +2736,7 @@ msgstr "レジストリーの選択"
 msgid "Select a tag"
 msgstr "タグの選択"
 
-#: src/components/headers/collection-header.tsx:429
+#: src/components/headers/collection-header.tsx:427
 msgid "Select collection version"
 msgstr "コレクションバージョンの選択"
 
@@ -2762,9 +2762,9 @@ msgstr "名前空間の選択"
 msgid "Select permissions"
 msgstr "パーミッションの選択"
 
-#: src/components/rbac/owners-tab.tsx:348
-#: src/components/rbac/owners-tab.tsx:401
-#: src/components/rbac/owners-tab.tsx:428
+#: src/components/rbac/owners-tab.tsx:349
+#: src/components/rbac/owners-tab.tsx:402
+#: src/components/rbac/owners-tab.tsx:429
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:202
 msgid "Select role(s)"
 msgstr ""
@@ -2817,12 +2817,12 @@ msgstr "表示:"
 msgid "Sign"
 msgstr "署名"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:46
+#: src/components/signing/sign-all-certificates-modal.tsx:44
 msgid "Sign all"
 msgstr "すべて署名する"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:36
-#: src/containers/namespace-detail/namespace-detail.tsx:734
+#: src/components/signing/sign-all-certificates-modal.tsx:34
+#: src/containers/namespace-detail/namespace-detail.tsx:730
 msgid "Sign all collections"
 msgstr "すべてのコレクションへの署名"
 
@@ -2864,23 +2864,23 @@ msgstr "署名済みおよび承認済み"
 msgid "Signed only"
 msgstr "署名済みのみ"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:65
+#: src/components/signing/sign-all-certificates-modal.tsx:63
 msgid "Signed version(s)"
 msgstr "署名済みバージョン"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:77
+#: src/components/signing/sign-all-certificates-modal.tsx:75
 msgid "Signing service selector:"
 msgstr "署名サービスセレクター:"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:538
+#: src/containers/namespace-detail/namespace-detail.tsx:532
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "名前空間 \"{0}\" のすべてのコレクションで署名を開始しました。"
 
-#: src/components/headers/collection-header.tsx:701
+#: src/components/headers/collection-header.tsx:699
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "コレクション \"{0}\" のすべてのバージョンで署名を開始しました"
 
-#: src/components/headers/collection-header.tsx:752
+#: src/components/headers/collection-header.tsx:750
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "コレクション \"{0} v{1}\" の署名を開始しました。"
 
@@ -3128,22 +3128,22 @@ msgstr "URL の形式は 'http(s)://' でなければなりません。"
 msgid "The URL of an external content source."
 msgstr "外部コンテンツソースの URL。"
 
-#: src/components/headers/collection-header.tsx:657
+#: src/components/headers/collection-header.tsx:655
 #: src/containers/certification-dashboard/certification-dashboard.tsx:557
 #: src/containers/certification-dashboard/certification-dashboard.tsx:568
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr "\"{0} {1} v{2}\" の証明書を保存できませんでした。"
 
-#: src/components/headers/collection-header.tsx:625
+#: src/components/headers/collection-header.tsx:623
 msgid "The certificate for \"{0} {1} v{2}\" is being uploaded."
 msgstr "\"{0} {1} v{2}\" の証明書をアップロードしています。"
 
-#: src/components/headers/collection-header.tsx:801
+#: src/components/headers/collection-header.tsx:799
 #: src/containers/search/search.tsx:336
 msgid "The collection \"{0}\" has been successfully deprecated."
 msgstr "コレクション \"{0}\" が正常に非推奨化されました。"
 
-#: src/components/headers/collection-header.tsx:802
+#: src/components/headers/collection-header.tsx:800
 #: src/containers/search/search.tsx:337
 msgid "The collection \"{0}\" has been successfully undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化が正常に解除されました。"
@@ -3172,11 +3172,11 @@ msgstr "同期時に認証に使用するパスワード。"
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するパスワード。トークンを使用する場合は不要です。"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:60
+#: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:64
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:434
+#: src/containers/namespace-detail/namespace-detail.tsx:430
 msgid "The selected roles will be added to this specific namespace."
 msgstr ""
 
@@ -3196,7 +3196,7 @@ msgstr "同期時に認証に使用するユーザー名。トークンを使用
 msgid "There are currently no groups that can be assigned to this namespace."
 msgstr ""
 
-#: src/components/rbac/owners-tab.tsx:98
+#: src/components/rbac/owners-tab.tsx:89
 msgid "There are currently no owners assigned."
 msgstr ""
 
@@ -3241,7 +3241,7 @@ msgstr "このアカウントは、名前空間の管理設定がされていま
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
 #~ msgstr "This action will affect <0>{numberOfAffected}</0> version(s)."
 
-#: src/components/headers/collection-header.tsx:492
+#: src/components/headers/collection-header.tsx:490
 msgid "This collection has been deprecated."
 msgstr "このコレクションは非推奨になりました。"
 
@@ -3343,7 +3343,7 @@ msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:862
+#: src/containers/namespace-detail/namespace-detail.tsx:858
 #: src/containers/search/search.tsx:384
 msgid "Undeprecate"
 msgstr "非推奨解除"
@@ -3353,7 +3353,7 @@ msgstr "非推奨解除"
 msgid "Unsigned"
 msgstr "未署名"
 
-#: src/components/signing/sign-all-certificates-modal.tsx:69
+#: src/components/signing/sign-all-certificates-modal.tsx:67
 msgid "Unsigned version(s)"
 msgstr "未署名バージョン"
 
@@ -3361,7 +3361,7 @@ msgstr "未署名バージョン"
 msgid "Update container information"
 msgstr "コンテナー情報の更新"
 
-#: src/components/collection-list/collection-list-item.tsx:118
+#: src/components/collection-list/collection-list-item.tsx:117
 msgid "Updated <0/>"
 msgstr "<0/> に更新"
 
@@ -3370,13 +3370,13 @@ msgstr "<0/> に更新"
 msgid "Upload"
 msgstr "アップロード"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:376
-#: src/containers/namespace-detail/namespace-detail.tsx:746
+#: src/containers/namespace-detail/namespace-detail.tsx:371
+#: src/containers/namespace-detail/namespace-detail.tsx:742
 msgid "Upload collection"
 msgstr "コレクションのアップロード"
 
 #: src/components/headers/collection-header.tsx:264
-#: src/containers/namespace-detail/namespace-detail.tsx:841
+#: src/containers/namespace-detail/namespace-detail.tsx:837
 #: src/containers/search/search.tsx:394
 #: src/containers/search/search.tsx:406
 msgid "Upload new version"
@@ -3543,7 +3543,7 @@ msgstr "ユーザーはこのグループへの追加後に表示されます"
 msgid "Users will appear once created"
 msgstr "ユーザーは作成後に表示されます"
 
-#: src/components/headers/collection-header.tsx:417
+#: src/components/headers/collection-header.tsx:415
 #: src/containers/certification-dashboard/certification-dashboard.tsx:278
 msgid "Version"
 msgstr "バージョン"
@@ -3588,7 +3588,7 @@ msgstr "ディストリビューションの表示"
 msgid "View group"
 msgstr "グループの表示"
 
-#: src/components/headers/collection-header.tsx:433
+#: src/components/headers/collection-header.tsx:431
 msgid "View more"
 msgstr "詳細表示"
 
@@ -3653,15 +3653,15 @@ msgstr "はい、停止します"
 msgid "You are about to remove <0>{0}</0> from <1>{1}</1>."
 msgstr ""
 
-#: src/components/rbac/owners-tab.tsx:288
+#: src/components/rbac/owners-tab.tsx:289
 msgid "You are about to remove <0>{groupname}</0> from <1>{name}</1>.<2/>This will also remove all associated permissions."
 msgstr ""
 
-#: src/components/rbac/owners-tab.tsx:308
+#: src/components/rbac/owners-tab.tsx:309
 msgid "You are about to remove <0>{role}</0> from <1>{groupname}</1> for <2>{name}</2>.<3/>This will also remove all associated permissions."
 msgstr ""
 
-#: src/components/signing/sign-all-certificates-modal.tsx:56
+#: src/components/signing/sign-all-certificates-modal.tsx:54
 msgid "You are about to sign <0>all versions</0> under <1>{name}</1>."
 msgstr ""
 
@@ -3702,8 +3702,8 @@ msgid "You do not have permission to view all tasks. Only tasks created by you a
 msgstr ""
 
 #: src/components/rbac/owners-tab.tsx:92
-msgid "You do not have the required permissions."
-msgstr ""
+#~ msgid "You do not have the required permissions."
+#~ msgstr ""
 
 #: src/components/rbac/delete-group-modal.tsx:71
 msgid "You don't have permission to display users."
@@ -3713,7 +3713,7 @@ msgstr ""
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/headers/collection-header.tsx:532
+#: src/components/headers/collection-header.tsx:530
 #: src/containers/search/search.tsx:441
 msgid "You don't have rights to do this operation."
 msgstr "この操作を行う権限がありません。"
@@ -3793,7 +3793,7 @@ msgstr "タグ"
 msgid "true"
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:353
+#: src/components/headers/collection-header.tsx:351
 msgid "updated {0}"
 msgstr ""
 
@@ -3809,7 +3809,7 @@ msgstr "インポートの完了を待機中"
 #~ msgid "{0} released {1}"
 #~ msgstr "{0} を {1} にリリース"
 
-#: src/components/headers/collection-header.tsx:460
+#: src/components/headers/collection-header.tsx:458
 msgid "{0} updated {1}"
 msgstr ""
 
@@ -3821,14 +3821,14 @@ msgstr "{0} が追加されました"
 #~ msgid "{0} will be deleted."
 #~ msgstr "{0} will be deleted."
 
-#: src/components/headers/collection-header.tsx:324
+#: src/components/headers/collection-header.tsx:322
 msgid "{collectionName}'s versions."
 msgstr "{collectionName} のバージョン。"
 
 #: src/components/cards/collection-card.tsx:53
 #: src/components/cards/namespace-card.tsx:36
-#: src/components/collection-list/collection-list-item.tsx:58
-#: src/components/headers/collection-header.tsx:398
+#: src/components/collection-list/collection-list-item.tsx:57
+#: src/components/headers/collection-header.tsx:396
 #: src/components/headers/partner-header.tsx:50
 msgid "{company} logo"
 msgstr "{company} ロゴ"
