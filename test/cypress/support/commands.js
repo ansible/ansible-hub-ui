@@ -541,7 +541,7 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
     Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
   ).as('registries');
 
-  cy.visit('/ui/registries');
+  cy.visit('/ui/registries?page_size=100');
 
   cy.wait('@registries').then((result) => {
     var data = result.response.body.data;
@@ -557,7 +557,7 @@ Cypress.Commands.add('deleteContainers', {}, () => {
     Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
   ).as('listLoad');
 
-  cy.visit('/ui/containers');
+  cy.visit('/ui/containers?page_size=100');
 
   cy.wait('@listLoad').then((result) => {
     var data = result.response.body.data;
