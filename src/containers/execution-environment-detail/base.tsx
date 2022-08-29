@@ -311,8 +311,6 @@ export function withContainerRepo(WrappedComponent) {
       RepoSigningUtils.getSignature(this.state.repo, (alert) =>
         this.addAlertObj(alert),
       ).then((item) => {
-        debugger;
-
         let signed = 'unsigned';
         const signature =
           item.data.content_summary.added['container.signature'];
@@ -320,7 +318,8 @@ export function withContainerRepo(WrappedComponent) {
           signed = 'signed';
         }
 
-        this.state.repo.signed = signed;
+        const repo = this.state.repo;
+        repo.signed = signed;
         this.setState({
           loading: false,
           repo: this.state.repo,

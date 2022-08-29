@@ -1,4 +1,3 @@
-import { HubAPI } from './hub';
 import { PulpAPI } from './pulp';
 
 class API extends PulpAPI {
@@ -7,7 +6,7 @@ class API extends PulpAPI {
   }
 
   public sign(containerId: string, pulp_type, signServicePath) {
-    let postObj = { manifest_signing_service: signServicePath };
+    const postObj = { manifest_signing_service: signServicePath };
     if (pulp_type == 'container') {
       postObj['future_base_path'] = 'library/busybox';
     }
