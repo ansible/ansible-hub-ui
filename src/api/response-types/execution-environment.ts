@@ -64,4 +64,5 @@ export class ContainerRepositoryType {
   description: string;
   created: string;
   updated: string;
+  signed: string;
 }

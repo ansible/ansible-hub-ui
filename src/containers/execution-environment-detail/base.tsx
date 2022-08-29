@@ -6,6 +6,7 @@ import {
   ContainerRepositoryType,
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
+  SignContainersAPI,
 } from 'src/api';
 import { formatPath, Paths } from '../../paths';
 import { Button, DropdownItem } from '@patternfly/react-core';
@@ -21,7 +22,12 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
-import { ParamHelper, parsePulpIDFromURL, waitForTask } from 'src/utilities';
+import {
+  ParamHelper,
+  parsePulpIDFromURL,
+  waitForTask,
+  RepoSigningUtils,
+} from 'src/utilities';
 
 import { AppContext } from 'src/loaders/app-context';
 
@@ -34,6 +40,7 @@ interface IState {
   alerts: AlertType[];
   showDeleteModal: boolean;
   formError: { title: string; detail: string }[];
+  signServicePath: string;
 }
 
 export interface IDetailSharedProps extends RouteComponentProps {
@@ -59,11 +66,12 @@ export function withContainerRepo(WrappedComponent) {
         alerts: [],
         showDeleteModal: false,
         formError: [],
+        signServicePath: '',
       };
     }
 
     componentDidMount() {
-      this.loadRepo();
+      this.loadSigningService();
     }
 
     render() {
@@ -135,6 +143,14 @@ export function withContainerRepo(WrappedComponent) {
             {t`Delete`}
           </DropdownItem>
         ),
+        <DropdownItem
+          key='sign'
+          onClick={() => {
+            this.sign();
+          }}
+        >
+          {t`Sign`}
+        </DropdownItem>,
       ].filter((truthy) => truthy);
 
       const { alerts, repo, publishToController, showDeleteModal } = this.state;
@@ -271,10 +287,12 @@ export function withContainerRepo(WrappedComponent) {
     private loadRepo() {
       ExecutionEnvironmentAPI.get(this.props.match.params['container'])
         .then((result) => {
-          this.setState({
-            loading: false,
-            repo: result.data,
-          });
+          this.setState(
+            {
+              repo: result.data,
+            },
+            () => this.loadSignature(),
+          );
 
           const last_sync_task =
             result.data.pulp.repository.remote?.last_sync_task || {};
@@ -287,6 +305,36 @@ export function withContainerRepo(WrappedComponent) {
           }
         })
         .catch(() => this.setState({ redirect: 'notFound' }));
+    }
+
+    private loadSignature() {
+      RepoSigningUtils.getSignature(this.state.repo, (alert) =>
+        this.addAlertObj(alert),
+      ).then((item) => {
+        debugger;
+
+        let signed = 'unsigned';
+        const signature =
+          item.data.content_summary.added['container.signature'];
+        if (signature && signature.count > 0) {
+          signed = 'signed';
+        }
+
+        this.state.repo.signed = signed;
+        this.setState({
+          loading: false,
+          repo: this.state.repo,
+        });
+      });
+    }
+
+    private loadSigningService() {
+      // load the service
+      const service = this.context.settings.GALAXY_CONTAINER_SIGNING_SERVICE;
+      SignContainersAPI.getSigningService(service).then((result) => {
+        const pulp_href = result.data.results[0]['pulp_href'];
+        this.setState({ signServicePath: pulp_href }, () => this.loadRepo());
+      });
     }
 
     private getTab() {
@@ -313,15 +361,16 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private addAlert(title, variant, description?) {
+      this.addAlertObj({
+        description,
+        title,
+        variant,
+      });
+    }
+
+    private addAlertObj(alert) {
       this.setState({
-        alerts: [
-          ...this.state.alerts,
-          {
-            description,
-            title,
-            variant,
-          },
-        ],
+        alerts: [...this.state.alerts, alert],
       });
     }
 
@@ -345,6 +394,15 @@ export function withContainerRepo(WrappedComponent) {
           this.loadRepo();
         })
         .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
+    }
+
+    private sign() {
+      RepoSigningUtils.sign(
+        this.state.repo,
+        this.state.signServicePath,
+        (alert) => this.addAlertObj(alert),
+        () => this.loadRepo(),
+      );
     }
   };
 }
