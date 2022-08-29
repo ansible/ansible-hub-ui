@@ -2,7 +2,7 @@ import { SignContainersAPI } from 'src/api';
 
 import { waitForTaskUrl } from 'src/utilities';
 
-import { t, Trans } from '@lingui/macro';
+import { t } from '@lingui/macro';
 
 export class RepoSigningUtils {
   public static getIdFromPulpHref(pulp_href: string): string {
@@ -50,18 +50,18 @@ export class RepoSigningUtils {
       signServicePath,
     )
       .then((result) => {
-        debugger;
         addAlert({
           id: 'loading-signing',
           variant: 'success',
           title: t`Signing started for container "${item.name} v${item.pulp.repository.version}".`,
         });
         return waitForTaskUrl(result.data.task).then(() => {
-          if (reload) reload();
+          if (reload) {
+            reload();
+          }
         });
       })
       .catch((ex) => {
-        debugger;
         addAlert({
           variant: 'danger',
           title: t`API Error: ${ex}`,

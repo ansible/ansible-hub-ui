@@ -133,7 +133,7 @@ class ExecutionEnvironmentList extends React.Component<
       item,
       this.state.signServicePath,
       (alert) => this.addAlertObj(alert),
-      () => this.querySignedEnvironments(),
+      () => this.queryEnvironments(),
     );
   }
 
