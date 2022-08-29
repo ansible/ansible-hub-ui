@@ -9,7 +9,6 @@ module.exports = webpackBase({
 
   // Path to the API on the API host. EX: /api/automation-hub
   API_BASE_PATH: '/api/automation-hub/',
-  PULP_API_BASE_PATH: '/api/automation-hub/pulp/api/v3/',
 
   // Value for standalone.api.target
   API_PROXY_TARGET: `http://${proxyHost}:${proxyPort}`,

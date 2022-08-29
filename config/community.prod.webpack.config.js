@@ -4,7 +4,6 @@ const webpackBase = require('./webpack.base.config');
 module.exports = webpackBase({
   API_HOST: '',
   API_BASE_PATH: '/api/',
-  PULP_API_BASE_PATH: '/api/pulp/api/v3/',
   UI_BASE_PATH: '/ui/',
   DEPLOYMENT_MODE: 'standalone',
   NAMESPACE_TERM: 'namespaces',
