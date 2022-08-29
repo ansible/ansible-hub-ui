@@ -183,7 +183,7 @@ jobs:
 
     - name: "Ensure galaxykit can connect to the server"
       run: |
-        galaxykit -s 'http://localhost:8002/api/galaxy/' -u admin -p admin collection list
+        galaxykit -s 'http://localhost:8002/api/galaxy/' -u admin -p admin namespace list
 
     - name: "Check initial feature flags"
       run: |
