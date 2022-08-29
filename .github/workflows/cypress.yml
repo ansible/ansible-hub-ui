@@ -64,6 +64,9 @@ jobs:
         echo '\
           FROM ghcr.io/pulp/pulp-ci-centos:3.18
 
+          # fix pip install failing to build python-ldap on missing lber.h
+          RUN yum -y install openldap-devel
+
           COPY --chmod=644 ansible-sign.key /tmp/
           COPY --chmod=755 collection-sign.sh /var/lib/pulp/scripts/
           COPY --chmod=755 signing-setup.sh /tmp/
