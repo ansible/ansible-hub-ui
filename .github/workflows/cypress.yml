@@ -32,7 +32,10 @@ jobs:
     - name: "Set env.SHORT_BRANCH, env.GALAXY_NG_COMMIT"
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
-        GALAXY_NG_COMMIT=`GET https://api.github.com/repos/ansible/galaxy_ng/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+        GALAXY_NG_COMMIT=`curl -s https://api.github.com/repos/ansible/galaxy_ng/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+
+        # blow up without galaxy_ng commit info
+        [ -n "$GALAXY_NG_COMMIT" ]
 
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "GALAXY_NG_COMMIT=${GALAXY_NG_COMMIT}" >> $GITHUB_ENV
@@ -44,7 +47,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: pulp_galaxy_ng/image
-        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post2240-
+        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post2480
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v2
@@ -193,7 +196,12 @@ jobs:
 
     - name: "Check initial feature flags"
       run: |
-        curl -s -u admin:admin http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
+        curl -s http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
+
+    - name: "Check component versions"
+      run: |
+        HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:8002/api/galaxy/v3/auth/token/ | jq -r .token`
+        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:8002/api/galaxy/ | jq
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
