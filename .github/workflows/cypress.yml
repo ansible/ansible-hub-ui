@@ -39,8 +39,8 @@ jobs:
 
     - name: "Install galaxykit dependency"
       run: |
-        # pip install git+https://github.com/ansible/galaxykit.git@branch_name
-        pip install git+https://github.com/ansible/galaxykit.git
+        # FIXME(test aah1721 ee v3 updates) pip install git+https://github.com/ansible/galaxykit.git@branch_name
+        pip install git+https://github.com/jerabekjiri/galaxykit.git@update-ee-repositories-endpoints
 
     - name: "Set env.SHORT_BRANCH, env.GALAXY_NG_COMMIT"
       run: |
