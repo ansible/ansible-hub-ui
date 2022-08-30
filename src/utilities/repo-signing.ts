@@ -43,7 +43,7 @@ export class RepoSigningUtils {
     });
   }
 
-  public static sign(item, addAlert, reload) {
+  public static sign(item, context, addAlert, reload) {
     if (
       item.pulp.repository.remote &&
       Object.keys(item.pulp.repository.remote.last_sync_task || {}).length == 0
@@ -56,12 +56,14 @@ export class RepoSigningUtils {
       return;
     }
 
-    RepoSigningUtils.getSignature(item, addAlert)
+    const service = context.settings.GALAXY_CONTAINER_SIGNING_SERVICE;
+    SignContainersAPI.getSigningService(service)
       .then((result) => {
+        const pulp_href = result.data.results[0]['pulp_href'];
         return SignContainersAPI.sign(
           item.pulp.repository.pulp_id,
           RepoSigningUtils.getContainerPulpType(item),
-          result.data.signServicePath,
+          pulp_href,
         ).then((result) => {
           addAlert({
             id: 'loading-signing',

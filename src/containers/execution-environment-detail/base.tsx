@@ -69,7 +69,7 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     componentDidMount() {
-      this.loadSigningService();
+      this.loadRepo();
     }
 
     render() {
@@ -309,32 +309,31 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private loadSignature() {
+      if (!this.context.featureFlags.display_signatures) {
+        this.setState({ loading: false });
+      }
+
       RepoSigningUtils.getSignature(this.state.repo, (alert) =>
         this.addAlertObj(alert),
-      ).then((item) => {
-        let signed = 'unsigned';
-        const signature =
-          item.data.content_summary.added['container.signature'];
-        if (signature && signature.count > 0) {
-          signed = 'signed';
-        }
+      )
+        .then((item) => {
+          let signed = 'unsigned';
+          const signature =
+            item.data.content_summary.added['container.signature'];
+          if (signature && signature.count > 0) {
+            signed = 'signed';
+          }
 
-        const repo = this.state.repo;
-        repo.signed = signed;
-        this.setState({
-          loading: false,
-          repo: this.state.repo,
+          const repo = this.state.repo;
+          repo.signed = signed;
+          this.setState({
+            loading: false,
+            repo: this.state.repo,
+          });
+        })
+        .catch(() => {
+          this.setState({ loading: false });
         });
-      });
-    }
-
-    private loadSigningService() {
-      // load the service
-      const service = this.context.settings.GALAXY_CONTAINER_SIGNING_SERVICE;
-      SignContainersAPI.getSigningService(service).then((result) => {
-        const pulp_href = result.data.results[0]['pulp_href'];
-        this.setState({ signServicePath: pulp_href }, () => this.loadRepo());
-      });
     }
 
     private getTab() {
@@ -399,7 +398,7 @@ export function withContainerRepo(WrappedComponent) {
     private sign() {
       RepoSigningUtils.sign(
         this.state.repo,
-        this.state.signServicePath,
+        this.context,
         (alert) => this.addAlertObj(alert),
         () => this.loadRepo(),
       );
