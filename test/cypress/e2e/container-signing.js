@@ -1,7 +1,6 @@
 describe('Container Signing', () => {
   const user = 'EESignTestUser';
   const password = 'MyPassword123';
-  const group = 'EESignTestGroup';
 
   function deleteAll() {
     cy.deleteRegistries();
@@ -43,7 +42,9 @@ describe('Container Signing', () => {
     // remote 2 is not synced intentionaly - we need test that throws error
   });
 
-  after(() => {});
+  after(() => {
+    deleteAll();
+  });
 
   it('can sign remote1', () => {
     cy.login();
