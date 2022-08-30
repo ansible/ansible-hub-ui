@@ -6,7 +6,6 @@ import {
   ContainerRepositoryType,
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
-  SignContainersAPI,
 } from 'src/api';
 import { formatPath, Paths } from '../../paths';
 import { Button, DropdownItem } from '@patternfly/react-core';
@@ -41,7 +40,6 @@ interface IState {
   alerts: AlertType[];
   showDeleteModal: boolean;
   formError: { title: string; detail: string }[];
-  signServicePath: string;
 }
 
 export interface IDetailSharedProps extends RouteComponentProps {
@@ -67,7 +65,6 @@ export function withContainerRepo(WrappedComponent) {
         alerts: [],
         showDeleteModal: false,
         formError: [],
-        signServicePath: '',
       };
     }
 

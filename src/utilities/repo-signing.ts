@@ -43,7 +43,7 @@ export class RepoSigningUtils {
     });
   }
 
-  public static sign(item, signServicePath, addAlert, reload) {
+  public static sign(item, addAlert, reload) {
     if (
       item.pulp.repository.remote &&
       Object.keys(item.pulp.repository.remote.last_sync_task || {}).length == 0
@@ -56,21 +56,23 @@ export class RepoSigningUtils {
       return;
     }
 
-    SignContainersAPI.sign(
-      item.pulp.repository.pulp_id,
-      RepoSigningUtils.getContainerPulpType(item),
-      signServicePath,
-    )
+    RepoSigningUtils.getSignature(item, addAlert)
       .then((result) => {
-        addAlert({
-          id: 'loading-signing',
-          variant: 'success',
-          title: t`Signing started for container "${item.name} v${item.pulp.repository.version}".`,
-        });
-        return waitForTaskUrl(result.data.task).then(() => {
-          if (reload) {
-            reload();
-          }
+        return SignContainersAPI.sign(
+          item.pulp.repository.pulp_id,
+          RepoSigningUtils.getContainerPulpType(item),
+          result.data.signServicePath,
+        ).then((result) => {
+          addAlert({
+            id: 'loading-signing',
+            variant: 'success',
+            title: t`Signing started for container "${item.name} v${item.pulp.repository.version}".`,
+          });
+          return waitForTaskUrl(result.data.task).then(() => {
+            if (reload) {
+              reload();
+            }
+          });
         });
       })
       .catch((ex) => {

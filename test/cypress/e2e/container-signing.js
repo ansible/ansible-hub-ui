@@ -1,16 +1,24 @@
 describe('Container Signing', () => {
   const user = 'EESignTestUser';
   const password = 'MyPassword123';
+  const group = 'EESignTestGroup';
 
-  before(() => {
-    cy.login();
-
+  function deleteAll() {
     cy.deleteRegistries();
     cy.deleteContainers();
     cy.deleteTestUsers();
+    cy.deleteTestGroups();
+  }
 
-    // user without privilleges
-    cy.galaxykit('user create', user, password);
+  before(() => {
+    cy.login();
+    deleteAll();
+
+    // user without sign privilleges
+    cy.galaxykit('-i user create', user, password);
+    cy.galaxykit('-i group create', group);
+    cy.galaxykit('-i user group add', user, group);
+    cy.galaxykit('-i group role add', group, 'galaxy.');
 
     cy.galaxykit(
       'registry create',
