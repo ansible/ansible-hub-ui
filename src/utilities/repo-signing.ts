@@ -44,6 +44,18 @@ export class RepoSigningUtils {
   }
 
   public static sign(item, signServicePath, addAlert, reload) {
+    if (
+      item.pulp.repository.remote &&
+      Object.keys(item.pulp.repository.remote.last_sync_task || {}).length == 0
+    ) {
+      addAlert({
+        variant: 'danger',
+        description: t`Container must be synchronized with remote repository first.`,
+        title: t`Failed to sign the container version.`,
+      });
+      return;
+    }
+
     SignContainersAPI.sign(
       item.pulp.repository.pulp_id,
       RepoSigningUtils.getContainerPulpType(item),
@@ -64,8 +76,8 @@ export class RepoSigningUtils {
       .catch((ex) => {
         addAlert({
           variant: 'danger',
-          title: t`API Error: ${ex}`,
-          description: t`Failed to sign the container version.`,
+          description: t`API Error: ${ex}`,
+          title: t`Failed to sign the container version.`,
         });
       });
   }
