@@ -16,14 +16,8 @@ import {
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
   ExecutionEnvironmentType,
-  SignContainersAPI,
 } from 'src/api';
-import {
-  filterIsSet,
-  parsePulpIDFromURL,
-  ParamHelper,
-  RepoSigningUtils,
-} from 'src/utilities';
+import { filterIsSet, parsePulpIDFromURL, ParamHelper } from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -44,7 +38,6 @@ import {
   closeAlertMixin,
   EmptyStateUnauthorized,
   ListItemActions,
-  SignatureBadge,
 } from 'src/components';
 import { formatPath, Paths } from '../../paths';
 import { AppContext } from 'src/loaders/app-context';
@@ -67,7 +60,6 @@ interface IState {
   selectedItem: ExecutionEnvironmentType;
   inputText: string;
   formError: { title: string; detail: string }[];
-  signServicePath: string;
 }
 
 class ExecutionEnvironmentList extends React.Component<
@@ -104,7 +96,6 @@ class ExecutionEnvironmentList extends React.Component<
       selectedItem: null,
       inputText: '',
       formError: [],
-      signServicePath: '',
     };
   }
 
@@ -112,29 +103,9 @@ class ExecutionEnvironmentList extends React.Component<
     if (!this.context.user || this.context.user.is_anonymous) {
       this.setState({ unauthorized: true, loading: false });
     } else {
-      this.loadSigningService();
+      this.queryEnvironments();
       this.setState({ alerts: this.context.alerts });
     }
-  }
-
-  private loadSigningService() {
-    // load the service
-    const service = this.context.settings.GALAXY_CONTAINER_SIGNING_SERVICE;
-    SignContainersAPI.getSigningService(service).then((result) => {
-      const pulp_href = result.data.results[0]['pulp_href'];
-      this.setState({ signServicePath: pulp_href }, () =>
-        this.queryEnvironments(),
-      );
-    });
-  }
-
-  private sign(item) {
-    RepoSigningUtils.sign(
-      item,
-      this.state.signServicePath,
-      (alert) => this.addAlertObj(alert),
-      () => this.queryEnvironments(),
-    );
   }
 
   componentWillUnmount() {
@@ -411,9 +382,6 @@ class ExecutionEnvironmentList extends React.Component<
           {t`Delete`}
         </DropdownItem>
       ),
-      <DropdownItem key='sign' onClick={() => this.sign(item)}>
-        {t`Sign`}
-      </DropdownItem>,
     ].filter((truthy) => truthy);
 
     return (
@@ -426,8 +394,6 @@ class ExecutionEnvironmentList extends React.Component<
           >
             {item.name}
           </Link>
-          {'  '}
-          {item.signed && <SignatureBadge isCompact signState={item.signed} />}
         </td>
         {description ? (
           <td className={'pf-m-truncate'}>
@@ -525,56 +491,17 @@ class ExecutionEnvironmentList extends React.Component<
   private queryEnvironments() {
     this.setState({ loading: true }, () =>
       ExecutionEnvironmentAPI.list(this.state.params)
-        .then((result) =>
-          this.setState(
-            {
-              items: result.data.data,
-              itemCount: result.data.meta.count,
-              loading: false,
-            },
-            () => this.querySignedEnvironments(),
-          ),
-        )
+        .then((result) => {
+          this.setState({
+            items: result.data.data,
+            itemCount: result.data.meta.count,
+            loading: false,
+          });
+        })
         .catch((e) =>
           this.addAlert(t`Error loading environments.`, 'danger', e?.message),
         ),
     );
-  }
-
-  private querySignedEnvironments() {
-    const promises = [];
-    this.state.items.forEach((item) => {
-      promises.push(
-        RepoSigningUtils.getSignature(item, (alert) => this.addAlertObj(alert)),
-      );
-    });
-
-    Promise.all(promises).then((values) => {
-      values.forEach((item) => {
-        if (!item) {
-          return;
-        }
-
-        let signed = 'unsigned';
-        const signature =
-          item.data.content_summary.added['container.signature'];
-        if (signature && signature.count > 0) {
-          signed = 'signed';
-        }
-
-        const repo_id = RepoSigningUtils.getIdFromPulpHref(
-          item.data.repository,
-        );
-        const stateItem = this.state.items.filter(
-          (i) => i.pulp.repository.pulp_id == repo_id,
-        );
-
-        if (stateItem.length > 0) {
-          stateItem[0].signed = signed;
-        }
-      });
-      this.setState({ items: this.state.items });
-    });
   }
 
   private get updateParams() {

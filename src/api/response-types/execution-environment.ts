@@ -9,7 +9,6 @@ export class ExecutionEnvironmentType {
     distribution: { base_path: string };
     repository: { pulp_id: string; version: string };
   };
-  signed: string;
 }
 
 export class ContainerManifestType {
