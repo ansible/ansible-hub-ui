@@ -66,7 +66,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
         }
         pageControls={this.props.pageControls}
       >
-        {this.props.displaySignatures && this.props.container.signed && (
+        {displaySignatures && this.props.container.signed && (
           <SignatureBadge
             isCompact
             signState={
