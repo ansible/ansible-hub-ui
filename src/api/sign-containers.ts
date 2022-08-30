@@ -25,7 +25,7 @@ class API extends PulpAPI {
 
   public getSignature(containerId, version, pulp_type) {
     return this.http.get(
-      `/repositories/container/${pulp_type}/${containerId}/versions/${version}`,
+      `/repositories/container/${pulp_type}/${containerId}/versions/${version}/`,
     );
   }
 }

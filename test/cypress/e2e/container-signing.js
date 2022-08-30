@@ -7,7 +7,6 @@ describe('Container Signing', () => {
     cy.deleteRegistries();
     cy.deleteContainers();
     cy.deleteTestUsers();
-    cy.deleteTestGroups();
   }
 
   before(() => {
@@ -16,9 +15,6 @@ describe('Container Signing', () => {
 
     // user without sign privilleges
     cy.galaxykit('-i user create', user, password);
-    cy.galaxykit('-i group create', group);
-    cy.galaxykit('-i user group add', user, group);
-    cy.galaxykit('-i group role add', group, 'galaxy.');
 
     cy.galaxykit(
       'registry create',
@@ -94,10 +90,12 @@ describe('Container Signing', () => {
     });
   });
 
-  /*it('cant see sign button when user has no rights', () => {
+  it('cant see sign button when user has no rights', () => {
     cy.login(user, password);
     cy.visit('/ui/containers/local1');
-    cy.get('button[aria-label="Actions"]').click();
-
-  });*/
+    // this is now covered by alert that should not be here in the future
+    cy.get('button[aria-label="Actions"]').click({ force: true });
+    cy.contains('[role="menuitem"]', 'Use in Controller');
+    cy.contains('[role="menuitem"]', 'Sign').should('not.exist');
+  });
 });

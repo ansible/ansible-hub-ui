@@ -38,7 +38,7 @@ export class RepoSigningUtils {
       addAlert({
         variant: 'danger',
         title: t`API Error: ${ex}`,
-        description: t`Failed to load signature of ${item.name} v ${item.pulp.repository.version}.`,
+        description: t`Failed to load signature of ${item.name}.`,
       });
     });
   }
@@ -68,7 +68,7 @@ export class RepoSigningUtils {
           addAlert({
             id: 'loading-signing',
             variant: 'success',
-            title: t`Signing started for container "${item.name} v${item.pulp.repository.version}".`,
+            title: t`Signing started for container "${item.name}".`,
           });
           return waitForTaskUrl(result.data.task).then(() => {
             if (reload) {
