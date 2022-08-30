@@ -27,6 +27,7 @@ import {
   parsePulpIDFromURL,
   waitForTask,
   RepoSigningUtils,
+  canSignEE,
 } from 'src/utilities';
 
 import { AppContext } from 'src/loaders/app-context';
@@ -143,14 +144,16 @@ export function withContainerRepo(WrappedComponent) {
             {t`Delete`}
           </DropdownItem>
         ),
-        <DropdownItem
-          key='sign'
-          onClick={() => {
-            this.sign();
-          }}
-        >
-          {t`Sign`}
-        </DropdownItem>,
+        this.state.repo && canSignEE(this.context, this.state.repo) && (
+          <DropdownItem
+            key='sign'
+            onClick={() => {
+              this.sign();
+            }}
+          >
+            {t`Sign`}
+          </DropdownItem>
+        ),
       ].filter((truthy) => truthy);
 
       const { alerts, repo, publishToController, showDeleteModal } = this.state;
@@ -192,6 +195,7 @@ export function withContainerRepo(WrappedComponent) {
             tab={this.getTab()}
             groupId={groupId}
             container={this.state.repo}
+            displaySignatures={this.context.featureFlags.display_signatures}
             pageControls={
               <>
                 {showEdit ? (

@@ -17,6 +17,6 @@ export { lastSynced, lastSyncStatus } from './last-sync-task';
 export { waitForTask, waitForTaskUrl } from './wait-for-task';
 export { errorMessage } from './fail-alerts';
 export { validateURLHelper } from './validateURLHelper';
-export { canSign } from './can-sign';
+export { canSign, canSignEE } from './can-sign';
 export { DeleteCollectionUtils } from './delete-collection';
 export { RepoSigningUtils } from './repo-signing';

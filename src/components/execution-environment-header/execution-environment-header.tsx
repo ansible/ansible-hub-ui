@@ -13,11 +13,12 @@ interface IProps {
   container: ContainerRepositoryType;
   pageControls?: React.ReactElement;
   groupId?: number;
+  displaySignatures: boolean;
 }
 
 export class ExecutionEnvironmentHeader extends React.Component<IProps> {
   render() {
-    const { container, groupId, tab } = this.props;
+    const { container, groupId, tab, displaySignatures } = this.props;
 
     const tabs = [
       { id: 'detail', name: t`Detail` },
@@ -65,7 +66,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
         }
         pageControls={this.props.pageControls}
       >
-        {this.props.container.signed && (
+        {this.props.displaySignatures && this.props.container.signed && (
           <SignatureBadge
             isCompact
             signState={
