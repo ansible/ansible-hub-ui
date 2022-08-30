@@ -686,8 +686,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   private signCollection = () => {
     const errorAlert = (status: string | number = 500): AlertType => ({
       variant: 'danger',
-      title: t`API Error: ${status}`,
-      description: t`Failed to sign all versions in the collection.`,
+      title: t`Failed to sign all versions in the collection.`,
+      description: t`API Error: ${status}`,
     });
 
     this.setState({
@@ -737,8 +737,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
   private signVersion = () => {
     const errorAlert = (status: string | number = 500): AlertType => ({
       variant: 'danger',
-      title: t`API Error: ${status}`,
-      description: t`Failed to sign the version.`,
+      title: t`Failed to sign the version.`,
+      description: t`API Error: ${status}`,
     });
 
     this.setState({

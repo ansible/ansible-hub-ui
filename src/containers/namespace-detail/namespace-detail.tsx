@@ -519,8 +519,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private signAllCertificates(namespace: NamespaceType) {
     const errorAlert = (status: string | number = 500): AlertType => ({
       variant: 'danger',
-      title: t`API Error: ${status}`,
-      description: t`Failed to sign all collections.`,
+      title: t`Failed to sign all collections.`,
+      description: t`API Error: ${status}`,
     });
 
     this.setState({
