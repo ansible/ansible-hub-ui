@@ -20,6 +20,7 @@ interface IProps {
     page_size?: number;
     tags?: string[];
     view_type?: string;
+    fingerprint?: string;
   };
   updateParams: (p) => void;
 }
@@ -49,6 +50,9 @@ export class CollectionFilter extends React.Component<IProps, IState> {
     const { ignoredParams, params, updateParams } = this.props;
     const { display_signatures } = this.context?.featureFlags || {};
 
+    const fingerprints =
+      this.context?.settings.SIGNATURE_FINGERPRINT_LABELS || {};
+
     const filterConfig = [
       {
         id: 'keywords',
@@ -61,6 +65,15 @@ export class CollectionFilter extends React.Component<IProps, IState> {
         options: Constants.COLLECTION_FILTER_TAGS.map((tag) => ({
           id: tag,
           title: tag,
+        })),
+      },
+      fingerprints && {
+        id: 'signature_fingerprint',
+        title: t`Signature Type`,
+        inputType: 'select' as const,
+        options: Object.keys(fingerprints).map((k) => ({
+          id: k,
+          title: k,
         })),
       },
       display_signatures && {

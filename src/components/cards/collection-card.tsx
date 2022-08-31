@@ -13,6 +13,8 @@ import {
   Tooltip,
 } from '@patternfly/react-core';
 
+import { AppContext } from 'src/loaders/app-context';
+
 import { Link } from 'react-router-dom';
 
 import { CollectionNumericLabel, Logo, SignatureBadge } from 'src/components';
@@ -30,6 +32,7 @@ interface IProps extends CollectionListType {
 
 export class CollectionCard extends React.Component<IProps> {
   MAX_DESCRIPTION_LENGTH = 60;
+  static contextType = AppContext;
 
   render() {
     const {
@@ -99,6 +102,22 @@ export class CollectionCard extends React.Component<IProps> {
   }
 
   private getCertification(repo) {
+    const { latest_version } = this.props;
+    const fingerprints =
+      this.context?.settings.SIGNATURE_FINGERPRINT_LABELS || {};
+
+    for (const i of Object.keys(fingerprints)) {
+      for (const signature of latest_version.metadata.signatures) {
+        if (fingerprints[i].includes(signature.pubkey_fingerprint)) {
+          return (
+            <Text component={TextVariants.small}>
+              <Badge isRead>{i}</Badge>
+            </Text>
+          );
+        }
+      }
+    }
+
     if (repo === Constants.CERTIFIED_REPO) {
       return (
         <Text component={TextVariants.small}>

@@ -6,6 +6,13 @@ export class CollectionUploadType {
   sha256: string;
 }
 
+export class SignatureType {
+  signature: string;
+  pubkey_fingerprint: string;
+  signing_service: string;
+  pulp_created: string;
+}
+
 export class CollectionVersion {
   id: string;
   version: string;
@@ -14,6 +21,7 @@ export class CollectionVersion {
     description: string;
     tags: string[];
     dependencies: DependencyType[];
+    signatures: SignatureType[];
   };
   created_at: string;
   // contents: ContentSummaryType[]; // deprecated
@@ -40,12 +48,7 @@ export class CollectionVersionDetail extends CollectionVersion {
     issues: string;
     repository: string;
     dependencies: DependencyType[];
-    signatures: {
-      signature: string;
-      pubkey_fingerprint: string;
-      signing_service: string;
-      pulp_created: string;
-    }[];
+    signatures: SignatureType[];
   };
   sign_state: SignState;
   requires_ansible?: string;

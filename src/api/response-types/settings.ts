@@ -6,4 +6,5 @@ export class SettingsType {
   GALAXY_AUTO_SIGN_COLLECTIONS: boolean;
   GALAXY_REQUIRE_SIGNATURE_FOR_APPROVAL: boolean;
   GALAXY_SIGNATURE_UPLOAD_ENABLED: boolean;
+  SIGNATURE_FINGERPRINT_LABELS: { [key: string]: string[] };
 }
