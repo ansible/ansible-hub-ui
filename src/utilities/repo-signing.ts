@@ -5,21 +5,6 @@ import { waitForTaskUrl } from 'src/utilities';
 import { t } from '@lingui/macro';
 
 export class RepoSigningUtils {
-  public static getIdFromPulpHref(pulp_href: string): string {
-    const strings = pulp_href.split('/');
-    let pulp_id = '';
-
-    if (strings.length >= 1) {
-      pulp_id = strings[strings.length - 1];
-
-      if (strings.length >= 2 && strings[strings.length - 1] == '') {
-        pulp_id = strings[strings.length - 2];
-      }
-    }
-
-    return pulp_id;
-  }
-
   public static getContainerPulpType(item) {
     const pulp_types = item.pulp.repository.pulp_type.split('.');
     if (pulp_types.length > 1) {
@@ -66,7 +51,6 @@ export class RepoSigningUtils {
           pulp_href,
         ).then((result) => {
           addAlert({
-            id: 'loading-signing',
             variant: 'success',
             title: t`Signing started for container "${item.name}".`,
           });

@@ -17,12 +17,6 @@ class API extends PulpAPI {
     );
   }
 
-  /*public getRepository(repoName: string) {
-    return this.http.get(
-      `/repositories/container/container-push/?name=${repoName}`,
-    );
-  }*/
-
   public getSignature(containerId, version, pulp_type) {
     return this.http.get(
       `/repositories/container/${pulp_type}/${containerId}/versions/${version}/`,
