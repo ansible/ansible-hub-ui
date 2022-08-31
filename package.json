@@ -74,6 +74,7 @@
     "scripts": {
         "build": "webpack --config config/insights.prod.webpack.config.js",
         "build-standalone": "NODE_ENV=production webpack --config config/standalone.prod.webpack.config.js",
+        "build-community": "NODE_ENV=production webpack --config config/community.prod.webpack.config.js",
         "build:prod": "NODE_ENV=production webpack --config config/insights.prod.webpack.config.js",
         "deploy": "npm-run-all build:prod test-prettier lint:ts",
         "eslint": "eslint --ext .js,.jsx,.ts,.tsx src/ config/ test/",
