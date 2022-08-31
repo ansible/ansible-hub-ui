@@ -25,50 +25,38 @@ import {
   SortTable,
   WizardModal,
 } from 'src/components';
-import { ParamHelper, errorMessage } from 'src/utilities';
+import { ParamHelper } from 'src/utilities';
 
 interface IProps {
-  addAlert: (alert) => void;
-  groupId?: number;
+  group?: GroupType;
   groups: GroupType[];
   name: string;
   pulpObjectType: string;
-  reload: () => void;
   selectRolesMessage: string;
-  updateGroups: (groups: GroupType[]) => Promise<void>;
   urlPrefix: string;
   canEditOwners: boolean;
-}
-
-interface IState {
+  addGroup?: (group, roles) => void;
+  removeGroup?: (group) => void;
+  addRole?: (role, groups) => void;
+  removeRole?: (role, group) => void;
   showGroupRemoveModal?: GroupType;
   showGroupSelectWizard?: { group?: GroupType; roles?: RoleType[] };
   showRoleRemoveModal?: string;
   showRoleSelectWizard?: { roles?: RoleType[] };
+  updateProps: (prop) => void;
 }
 
-export class OwnersTab extends React.Component<IProps, IState> {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      showGroupRemoveModal: null,
-      showGroupSelectWizard: null,
-      showRoleRemoveModal: null,
-      showRoleSelectWizard: null,
-    };
-  }
-
+export class OwnersTab extends React.Component<IProps> {
   render() {
-    const { groups, groupId, canEditOwners } = this.props;
-    const { showGroupRemoveModal, showGroupSelectWizard } = this.state;
+    const { groups, group, canEditOwners } = this.props;
+    const { showGroupRemoveModal, showGroupSelectWizard } = this.props;
     const loading = !groups;
     const noData = groups?.length === 0;
 
     const buttonAdd = (
       <Button
         onClick={() =>
-          this.setState({
+          this.props.updateProps({
             showGroupSelectWizard: {},
           })
         }
@@ -94,8 +82,8 @@ export class OwnersTab extends React.Component<IProps, IState> {
             }
             button={canEditOwners ? buttonAdd : null}
           />
-        ) : groupId ? (
-          this.renderRoles({ groupId })
+        ) : group ? (
+          this.renderRoles({ group })
         ) : (
           this.renderGroups({ buttonAdd, groups })
         )}
@@ -157,7 +145,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
         <DropdownItem
           key='remove'
           onClick={() => {
-            this.setState({
+            this.props.updateProps({
               showGroupRemoveModal: group,
             });
           }}
@@ -174,7 +162,10 @@ export class OwnersTab extends React.Component<IProps, IState> {
             to={
               urlPrefix +
               '?' +
-              ParamHelper.getQueryString({ group: group.id, tab: 'owners' })
+              ParamHelper.getQueryString({
+                group: group?.id || group?.name,
+                tab: 'owners',
+              })
             }
           >
             {group.name}
@@ -185,10 +176,9 @@ export class OwnersTab extends React.Component<IProps, IState> {
     );
   }
 
-  private renderRoles({ groupId }) {
+  private renderRoles({ group }) {
     const { canEditOwners } = this.props;
-    const { showRoleRemoveModal, showRoleSelectWizard } = this.state;
-    const group = this.props.groups.find(({ id }) => Number(groupId) === id);
+    const { showRoleRemoveModal, showRoleSelectWizard } = this.props;
     const roles = group?.object_roles;
     const sortedRoles = sortBy(roles);
 
@@ -199,7 +189,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
     const buttonAdd = (
       <Button
         onClick={() =>
-          this.setState({
+          this.props.updateProps({
             showRoleSelectWizard: {},
           })
         }
@@ -260,7 +250,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
                     <DropdownItem
                       key='remove-role'
                       onClick={() =>
-                        this.setState({ showRoleRemoveModal: role })
+                        this.props.updateProps({ showRoleRemoveModal: role })
                       }
                     >
                       {t`Remove role`}
@@ -276,14 +266,16 @@ export class OwnersTab extends React.Component<IProps, IState> {
   }
 
   private renderGroupRemoveModal() {
-    const group = this.state.showGroupRemoveModal as GroupType;
+    const group = this.props.showGroupRemoveModal as GroupType;
     const groupname = group.name;
     const name = this.props.name;
 
     return (
       <DeleteModal
-        cancelAction={() => this.setState({ showGroupRemoveModal: null })}
-        deleteAction={() => this.removeGroup(group)}
+        cancelAction={() =>
+          this.props.updateProps({ showGroupRemoveModal: null })
+        }
+        deleteAction={() => this.props.removeGroup(group)}
         title={t`Remove group ${groupname}?`}
       >
         <Trans>
@@ -298,12 +290,14 @@ export class OwnersTab extends React.Component<IProps, IState> {
   private renderRoleRemoveModal(group) {
     const groupname = group.name;
     const name = this.props.name;
-    const role = this.state.showRoleRemoveModal;
+    const role = this.props.showRoleRemoveModal;
 
     return (
       <DeleteModal
-        cancelAction={() => this.setState({ showRoleRemoveModal: null })}
-        deleteAction={() => this.removeRole(role, group)}
+        cancelAction={() =>
+          this.props.updateProps({ showRoleRemoveModal: null })
+        }
+        deleteAction={() => this.props.removeRole(role, group)}
         title={t`Remove role ${role}?`}
       >
         <Trans>
@@ -320,7 +314,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
     const { groups, pulpObjectType, selectRolesMessage } = this.props;
     const {
       showGroupSelectWizard: { group, roles = [] },
-    } = this.state;
+    } = this.props;
 
     const hasGroup = !!group;
     const hasRoles = !!roles?.length;
@@ -337,7 +331,9 @@ export class OwnersTab extends React.Component<IProps, IState> {
             assignedGroups={groups}
             selectedGroup={group}
             updateGroup={(group) =>
-              this.setState({ showGroupSelectWizard: { group, roles } })
+              this.props.updateProps({
+                showGroupSelectWizard: { group, roles },
+              })
             }
           />
         ),
@@ -352,7 +348,9 @@ export class OwnersTab extends React.Component<IProps, IState> {
             assignedRoles={assignedRoles}
             selectedRoles={roles}
             onRolesUpdate={(roles) =>
-              this.setState({ showGroupSelectWizard: { group, roles } })
+              this.props.updateProps({
+                showGroupSelectWizard: { group, roles },
+              })
             }
             message={selectRolesMessage}
             pulpObjectType={pulpObjectType}
@@ -376,11 +374,11 @@ export class OwnersTab extends React.Component<IProps, IState> {
         steps={steps}
         title={t`Select a group`}
         onClose={() =>
-          this.setState({
+          this.props.updateProps({
             showGroupSelectWizard: null,
           })
         }
-        onSave={() => this.addGroup(group, roles)}
+        onSave={() => this.props.addGroup(group, roles)}
       />
     );
   }
@@ -389,7 +387,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
     const { pulpObjectType } = this.props;
     const {
       showRoleSelectWizard: { roles = [] },
-    } = this.state;
+    } = this.props;
 
     const hasRoles = !!roles?.length;
 
@@ -405,7 +403,7 @@ export class OwnersTab extends React.Component<IProps, IState> {
             assignedRoles={assignedRoles}
             selectedRoles={roles}
             onRolesUpdate={(roles) =>
-              this.setState({ showRoleSelectWizard: { roles } })
+              this.props.updateProps({ showRoleSelectWizard: { roles } })
             }
             pulpObjectType={pulpObjectType}
           />
@@ -428,97 +426,12 @@ export class OwnersTab extends React.Component<IProps, IState> {
         steps={steps}
         title={t`Select role(s)`}
         onClose={() =>
-          this.setState({
+          this.props.updateProps({
             showRoleSelectWizard: null,
           })
         }
-        onSave={() => this.updateGroup(group, roles)}
+        onSave={() => this.props.addRole(group, roles)}
       />
     );
-  }
-
-  private updateGroups({ groups, alertSuccess, alertFailure, stateSuccess }) {
-    const { reload, updateGroups } = this.props;
-
-    return updateGroups(groups)
-      .then(() => {
-        this.setState(stateSuccess);
-        this.props.addAlert({
-          title: alertSuccess,
-          variant: 'success',
-        });
-        reload(); // ensure reload() sets groups: null to trigger loading spinner
-      })
-      .catch(({ response: { status, statusText } }) => {
-        this.props.addAlert({
-          title: alertFailure,
-          variant: 'danger',
-          description: errorMessage(status, statusText),
-        });
-      });
-  }
-
-  private addGroup(group, roles) {
-    const { name, groups } = this.props;
-    const newGroup = {
-      ...group,
-      object_roles: roles.map(({ name }) => name),
-    };
-    const newGroups = [...groups, newGroup];
-
-    return this.updateGroups({
-      groups: newGroups,
-      stateSuccess: {
-        showGroupSelectWizard: null,
-      },
-      alertSuccess: t`Group "${group.name}" has been successfully added to "${name}".`,
-      alertFailure: t`Group "${group.name}" could not be added to "${name}".`,
-    });
-  }
-
-  private removeGroup(group) {
-    const { name, groups } = this.props;
-    const newGroups = groups.filter((g) => g !== group);
-
-    return this.updateGroups({
-      groups: newGroups,
-      stateSuccess: {
-        showGroupRemoveModal: null,
-      },
-      alertSuccess: t`Group "${group.name}" has been successfully removed from "${name}".`,
-      alertFailure: t`Group "${group.name}" could not be removed from "${name}".`,
-    });
-  }
-
-  private updateGroup(group, roles) {
-    const { name, groups } = this.props;
-    const newGroup = {
-      ...group,
-      object_roles: [...group.object_roles, ...roles.map(({ name }) => name)],
-    };
-    const newGroups = groups.map((g) => (g === group ? newGroup : g));
-
-    return this.updateGroups({
-      groups: newGroups,
-      stateSuccess: { showRoleSelectWizard: null },
-      alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
-      alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
-    });
-  }
-
-  private removeRole(role, group) {
-    const { name, groups } = this.props;
-    const newGroup = {
-      ...group,
-      object_roles: group.object_roles.filter((name) => name !== role),
-    };
-    const newGroups = groups.map((g) => (g === group ? newGroup : g));
-
-    return this.updateGroups({
-      groups: newGroups,
-      stateSuccess: { showRoleRemoveModal: null },
-      alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
-      alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
-    });
   }
 }

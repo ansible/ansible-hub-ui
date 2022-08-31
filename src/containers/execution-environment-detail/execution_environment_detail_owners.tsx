@@ -122,9 +122,8 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
   queryMyPermissions(id) {
     ExecutionEnvironmentNamespaceAPI.myPermissions(id).then(
       ({ data: { permissions } }) => {
-
         this.setState({
-          canEditOwners: 
+          canEditOwners:
             permissions.includes('container.change_containernamespace') ||
             hasPermission('container.change_containernamespace'),
         });
