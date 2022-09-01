@@ -4,12 +4,16 @@ on:
   # allow running manually
   workflow_dispatch:
   pull_request:
-    branches: [ 'master', 'stable-*' ]
+    branches: [ 'master', 'stable-*', 'feature/*' ]
   push:
-    branches: [ 'master', 'stable-*' ]
+    branches: [ 'master', 'stable-*', 'feature/*' ]
   # daily on master
   schedule:
-    - cron:  '30 5 * * *'
+  - cron: '30 5 * * *'
+
+concurrency:
+  group: cypress-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   cypress:
@@ -22,12 +26,16 @@ jobs:
 
     - name: "Install galaxykit dependency"
       run: |
+        # pip install git+https://github.com/ansible/galaxykit.git@branch_name
         pip install galaxykit==0.7.0
 
     - name: "Set env.SHORT_BRANCH, env.GALAXY_NG_COMMIT"
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
-        GALAXY_NG_COMMIT=`GET https://api.github.com/repos/ansible/galaxy_ng/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+        GALAXY_NG_COMMIT=`curl -s https://api.github.com/repos/ansible/galaxy_ng/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+
+        # blow up without galaxy_ng commit info
+        [ -n "$GALAXY_NG_COMMIT" ]
 
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "GALAXY_NG_COMMIT=${GALAXY_NG_COMMIT}" >> $GITHUB_ENV
@@ -39,7 +47,12 @@ jobs:
       uses: actions/cache@v2
       with:
         path: pulp_galaxy_ng/image
-        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post788
+        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post2500
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v2
+      with:
+        path: 'ansible-hub-ui'
 
     - name: "Build pulp-galaxy-ng"
       if: steps.cache-container.outputs.cache-hit != 'true'
@@ -47,7 +60,7 @@ jobs:
       run: |
         echo '# Containerfile'
         echo '\
-          FROM docker.io/pulp/pulp-ci-centos:latest
+          FROM ghcr.io/pulp/pulp-ci-centos:3.15
 
           RUN pip3 install --upgrade \
             requests \
@@ -63,6 +76,7 @@ jobs:
         ' | tee Containerfile
 
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
+        rm -f image # ensure older version is gone, podman save errors otherwise
         podman save localhost/pulp/pulp-galaxy-ng:latest -o image
 
     - name: "Load pulp-galaxy-ng from cache"
@@ -100,11 +114,6 @@ jobs:
              --tmpfs /var/lib/containers \
              --device /dev/fuse \
              localhost/pulp/pulp-galaxy-ng:latest
-
-    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
-      uses: actions/checkout@v2
-      with:
-        path: 'ansible-hub-ui'
 
     - name: "Install node 16"
       uses: actions/setup-node@v2
@@ -158,17 +167,32 @@ jobs:
       run: |
         echo -e '{
           "prefix": "/api/galaxy/",
+          "pulpPrefix": "/pulp/api/v3/",
           "username": "admin",
           "password": "admin",
           "settings": "../../pulp_galaxy_ng/settings/settings.py",
           "restart": "podman exec pulp bash -c \"s6-svc -r /var/run/s6/services/pulpcore-api\"; sleep 10",
-          "containers": "localhost:8002"
+          "containers": "localhost:8002",
+          "galaxykit": "galaxykit --ignore-certs"
         }' > cypress.env.json
 
     - name: "Ensure index.html uses the new js"
       run: |
         echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
+
+    - name: "Ensure galaxykit can connect to the server"
+      run: |
+        galaxykit -s 'http://localhost:8002/api/galaxy/' -u admin -p admin namespace list
+
+    - name: "Check initial feature flags"
+      run: |
+        curl -s http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
+
+    - name: "Check component versions"
+      run: |
+        HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:8002/api/galaxy/v3/auth/token/ | jq -r .token`
+        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:8002/api/galaxy/ | jq
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
