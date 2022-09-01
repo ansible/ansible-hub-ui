@@ -46,6 +46,7 @@ export class ContainerRepositoryType {
         exclude_tags: string[];
         last_sync_task: LastSyncType;
       };
+      sign_state: string;
     };
     distribution: {
       pulp_id: string;
@@ -63,5 +64,4 @@ export class ContainerRepositoryType {
   description: string;
   created: string;
   updated: string;
-  signed: string;
 }

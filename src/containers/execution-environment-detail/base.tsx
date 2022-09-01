@@ -288,12 +288,10 @@ export function withContainerRepo(WrappedComponent) {
     private loadRepo() {
       ExecutionEnvironmentAPI.get(this.props.match.params['container'])
         .then((result) => {
-          this.setState(
-            {
-              repo: result.data,
-            },
-            () => this.loadSignature(),
-          );
+          this.setState({
+            repo: result.data,
+            loading: false,
+          });
 
           const last_sync_task =
             result.data.pulp.repository.remote?.last_sync_task || {};
@@ -306,34 +304,6 @@ export function withContainerRepo(WrappedComponent) {
           }
         })
         .catch(() => this.setState({ redirect: 'notFound' }));
-    }
-
-    private loadSignature() {
-      if (!this.context.featureFlags.display_signatures) {
-        this.setState({ loading: false });
-      }
-
-      RepoSigningUtils.getSignature(this.state.repo, (alert) =>
-        this.addAlertObj(alert),
-      )
-        .then((item) => {
-          let signed = 'unsigned';
-          const signature =
-            item.data.content_summary.added['container.signature'];
-          if (signature && signature.count > 0) {
-            signed = 'signed';
-          }
-
-          const repo = this.state.repo;
-          repo.signed = signed;
-          this.setState({
-            loading: false,
-            repo: this.state.repo,
-          });
-        })
-        .catch(() => {
-          this.setState({ loading: false });
-        });
     }
 
     private getTab() {

@@ -16,12 +16,6 @@ class API extends PulpAPI {
       postObj,
     );
   }
-
-  public getSignature(containerId, version, pulp_type) {
-    return this.http.get(
-      `/repositories/container/${pulp_type}/${containerId}/versions/${version}/`,
-    );
-  }
 }
 
 export const SignContainersAPI = new API();

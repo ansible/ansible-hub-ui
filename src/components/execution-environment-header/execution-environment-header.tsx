@@ -66,14 +66,17 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
         }
         pageControls={this.props.pageControls}
       >
-        {displaySignatures && this.props.container.signed && (
-          <SignatureBadge
-            isCompact
-            signState={
-              this.props.container.signed == 'signed' ? 'signed' : 'unsigned'
-            }
-          />
-        )}
+        {displaySignatures &&
+          this.props.container.pulp.repository.sign_state && (
+            <SignatureBadge
+              isCompact
+              signState={
+                this.props.container.pulp.repository.sign_state == 'signed'
+                  ? 'signed'
+                  : 'unsigned'
+              }
+            />
+          )}
         {last_sync_task && (
           <p className='hub-m-truncated'>
             <Trans>

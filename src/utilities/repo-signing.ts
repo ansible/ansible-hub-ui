@@ -14,20 +14,6 @@ export class RepoSigningUtils {
     }
   }
 
-  public static getSignature(item, addAlert) {
-    return SignContainersAPI.getSignature(
-      item.pulp.repository.pulp_id,
-      item.pulp.repository.version,
-      RepoSigningUtils.getContainerPulpType(item),
-    ).catch((ex) => {
-      addAlert({
-        variant: 'danger',
-        title: t`API Error: ${ex}`,
-        description: t`Failed to load signature of ${item.name}.`,
-      });
-    });
-  }
-
   public static sign(item, context, addAlert, reload) {
     if (
       item.pulp.repository.remote &&
