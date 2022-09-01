@@ -9,6 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { execSync } = require('child_process'); // node:child_process
 
 const isBuild = process.env.NODE_ENV === 'production';
+const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=default)
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
 // should be imported, initialized with the following settings and exported like
@@ -111,6 +112,12 @@ module.exports = (inputConfigs) => {
           rbac,
           ...defaultServices,
         },
+      }),
+
+    // insights deployments from master
+    ...(!isStandalone &&
+      cloudBeta && {
+        deployment: cloudBeta === 'true' ? 'beta/apps' : 'apps',
       }),
   });
 
