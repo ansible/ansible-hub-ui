@@ -7,6 +7,7 @@ import {
   CollectionDetailType,
   CollectionUsedByDependencies,
   CollectionVersionAPI,
+  CollectionVersion,
 } from 'src/api';
 import {
   CollectionHeader,
@@ -28,7 +29,7 @@ import './collection-dependencies.scss';
 
 interface IState {
   collection: CollectionDetailType;
-  dependencies_repos: any;
+  dependencies_repos: CollectionVersion[];
   params: {
     page?: number;
     page_size?: number;
@@ -196,11 +197,12 @@ class CollectionDependencies extends React.Component<
     const promises = [];
 
     Object.keys(dependencies).forEach((dependency) => {
-      const [namespace, collection] = String(dependency).split('.');
+      const [namespace, collection] = dependency.split('.');
       const dependency_repo = {
         name: collection,
         namespace: namespace,
         repo: '',
+        path: '',
       };
       dependencies_repos.push(dependency_repo);
 
@@ -238,7 +240,9 @@ class CollectionDependencies extends React.Component<
         );
       })
       .catch(() => {
-        // do nothing, dependency_repo.path stays empty
+        // do nothing, dependency_repo.path and repo stays empty
+        // this may mean that collection was not found - thus is not in the system.
+        // user will be notified in the list of dependencies rather than alerts
       });
   }
 
