@@ -232,7 +232,10 @@ export class SignatureKeysList extends React.Component<
     const dropdownItems = [
       <DropdownItem
         key='download-key'
-        onClick={() => console.log('TODO download', item)}
+        onClick={() => {
+          document.location =
+            'data:application/octet-stream,' + encodeURIComponent(public_key);
+        }}
       >
         {t`Download key`}
       </DropdownItem>,
