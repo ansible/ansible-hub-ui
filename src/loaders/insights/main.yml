@@ -1,0 +1,25 @@
+# https://github.com/RedHatInsights/cloud-services-config/blob/ci-beta/main.yml (ci-beta, ci-stable, prod-beta, prod-stable)
+
+automation-hub:
+  title: Automation Hub
+  api:
+    versions:
+      - v3
+  deployment_repo: https://github.com/RedHatInsights/ansible-hub-ui-build
+  productId: Ansible Automation Hub
+  frontend:
+    paths:
+      - /ansible/automation-hub
+    sub_apps:
+      - id: ''
+        title: Collections
+        default: true
+      - id: partners
+        title: Partners
+      - id: repositories
+        title: Repo Management
+      - id: tasks
+        title: Task Management
+      - id: token
+        title: Connect to Hub
+  source_repo: https://github.com/ansible/ansible-hub-ui

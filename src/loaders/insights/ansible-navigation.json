@@ -1,0 +1,38 @@
+// https://github.com/RedHatInsights/cloud-services-config/blob/ci-beta/chrome/ansible-navigation.json (ci-beta, ci-stable, prod-beta, prod-stable)
+
+{
+    "title": "Automation Hub",
+    "expandable": true,
+    "routes": [
+        {
+            "appId": "automationHub",
+            "title": "Collections",
+            "href": "/ansible/automation-hub/",
+            "product": "Ansible Automation Hub"
+        },
+        {
+            "appId": "automationHub",
+            "title": "Partners",
+            "href": "/ansible/automation-hub/partners",
+            "product": "Ansible Automation Hub"
+        },
+        {
+            "appId": "automationHub",
+            "title": "Repo Management",
+            "href": "/ansible/automation-hub/repositories",
+            "product": "Ansible Automation Hub"
+        },
+        {
+            "appId": "automationHub",
+            "title": "Task Management",
+            "href": "/ansible/automation-hub/tasks",
+            "product": "Ansible Automation Hub"
+        },
+        {
+            "appId": "automationHub",
+            "title": "Connect to Hub",
+            "href": "/ansible/automation-hub/token",
+            "product": "Ansible Automation Hub"
+        }
+    ]
+}
