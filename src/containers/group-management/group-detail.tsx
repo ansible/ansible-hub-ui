@@ -52,8 +52,6 @@ import {
 
 import { AppContext } from 'src/loaders/app-context';
 
-import './group-management.scss';
-
 import GroupDetailRoleManagement from './group-detail-role-management/group-detail-role-management';
 
 interface IState {

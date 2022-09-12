@@ -1,6 +1,5 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import './group-management.scss';
 import { errorMessage } from 'src/utilities';
 
 import {
@@ -167,7 +166,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
         ) : (
           <Main>
             <section className='body'>
-              <div className='hub-group-list-toolbar'>
+              <div className='hub-list-toolbar'>
                 <Toolbar>
                   <ToolbarContent>
                     <ToolbarGroup>

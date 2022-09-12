@@ -238,7 +238,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
               <LoadingPageSpinner />
             ) : (
               <section className='body'>
-                <div className='role-list'>
+                <div className='hub-list-toolbar'>
                   <Toolbar>
                     <ToolbarContent>
                       <ToolbarGroup>
