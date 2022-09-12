@@ -27,7 +27,7 @@ jobs:
         test:
         - 'collections'
         - 'approval'
-        - 'execution_evnrionments'
+        - 'execution_environments'
         - 'namespaces'
         - 'groups_and_users'
         - 'repo'
