@@ -47,7 +47,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: pulp_galaxy_ng/image
-        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post2503
+        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post2547
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v2
@@ -66,6 +66,7 @@ jobs:
 
           COPY --chmod=644 ansible-sign.key /tmp/
           COPY --chmod=755 collection-sign.sh /var/lib/pulp/scripts/
+          COPY --chmod=755 container-sign.sh /var/lib/pulp/scripts/
           COPY --chmod=755 signing-setup.sh /tmp/
 
           RUN pip3 install --upgrade \
@@ -108,6 +109,8 @@ jobs:
           X_PULP_CONTENT_HOST='localhost'
           GALAXY_REQUIRE_CONTENT_APPROVAL=False
           GALAXY_COLLECTION_SIGNING_SERVICE='ansible-default'
+          GALAXY_CONTAINER_SIGNING_SERVICE='container-default'
+          GALAXY_FEATURE_FLAGS__container_signing=True
         " | sed 's/^\s\+//' | tee settings/settings.py
 
         podman run \
