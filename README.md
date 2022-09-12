@@ -71,9 +71,22 @@ List by branches:
 - `master`: `backported-labels`, `cypress`, `deploy-cloud`, `dev-release`, `i18n`, `pr-checks`, `stable-release`, `update-manifest`
 - `prod-beta`: `deploy-cloud`
 - `prod-stable`: `deploy-cloud`
-- `stable-4.2`: `backported-labels`, `pr-checks`, `stable-release`
-- `stable-4.4`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
-- `stable-4.5`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
+- `stable-1.2`: `backported-labels`, `pr-checks`, `stable-release`
+- `stable-2.1`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
+- `stable-2.2`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
+
+### Version mapping
+
+Our branches and backport labels now use AAP versions, not AAH versions, while upstream releases (and tags) do use the AAH version.
+To map between the two:
+
+|branch|AAH version|
+|-|-|
+|stable-1.2|4.2|
+|stable-2.0|4.3 (obsolete)|
+|stable-2.1|4.4|
+|stable-2.2|4.5|
+|stable-2.3|4.6|
 
 ## Patternfly
 

@@ -15,8 +15,8 @@ jobs:
       matrix:
         branch:
         - 'master'
-        - 'stable-4.4'
-        - 'stable-4.5'
+        - 'stable-2.1'
+        - 'stable-2.2'
 
     steps:
 
