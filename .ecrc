@@ -1,8 +1,9 @@
 {
   "Exclude": [
     "\\.svg$",
-    "^.git\\/",
     "^LICENSE$",
+    "^\\.git\\/",
+    "^\\.github\\/workflows\\/scripts\\/ansible-sign\\.key$",
     "^\\.travis\\/deploy_key\\.enc$",
     "^\\.travis\\/deploy_manifest\\.gpg$",
     "^dist\\/",
