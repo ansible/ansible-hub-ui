@@ -4,6 +4,7 @@ import { Flex, FlexItem, Label, Divider } from '@patternfly/react-core';
 import { RoleType, GroupType } from 'src/api';
 import { Tooltip } from 'src/components';
 import { Constants } from 'src/constants';
+import { translateLockedRolesDescription } from 'src/utilities';
 
 interface Props {
   group: GroupType;
@@ -33,7 +34,11 @@ export const PreviewRoles = ({ group, selectedRoles }: Props) => (
         <React.Fragment key={role.name}>
           <FlexItem>
             <strong>{role.name}</strong>{' '}
-            {role?.description && `- ${role?.description}`}
+            {role?.description &&
+              `- ${translateLockedRolesDescription(
+                role.name,
+                role.description,
+              )}`}
             <Flex className='hub-permissions'>
               {role.permissions.map((permission) => (
                 <FlexItem

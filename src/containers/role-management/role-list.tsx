@@ -46,6 +46,7 @@ import {
   ParamHelper,
   parsePulpIDFromURL,
   twoWayMapper,
+  translateLockedRolesDescription,
 } from 'src/utilities';
 
 import { RoleAPI } from 'src/api/role';
@@ -377,7 +378,12 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                           rowIndex={i}
                         >
                           <td data-cy='name-field'>{role.name}</td>
-                          <td>{role.description}</td>
+                          <td>
+                            {translateLockedRolesDescription(
+                              role.name,
+                              role.description,
+                            )}
+                          </td>
                           <td>
                             <DateComponent date={role.pulp_created} />
                           </td>
