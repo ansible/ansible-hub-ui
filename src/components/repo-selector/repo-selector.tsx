@@ -94,6 +94,6 @@ export class RepoSelector extends React.Component<IProps, IState> {
 
   private getRepoName(repoName) {
     const repo = Constants.REPOSITORYNAMES[repoName];
-    return i18n._(repo);
+    return repo ? i18n._(repo) : repoName;
   }
 }
