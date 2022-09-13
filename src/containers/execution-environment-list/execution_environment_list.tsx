@@ -128,7 +128,8 @@ class ExecutionEnvironmentList extends React.Component<
     } = this.state;
     const { user } = this.context;
 
-    const noData = items.length === 0 && !filterIsSet(params, ['name']);
+    const noData =
+      items.length === 0 && !filterIsSet(params, ['name__icontains']);
 
     const pushImagesButton = (
       <Button
@@ -229,7 +230,7 @@ class ExecutionEnvironmentList extends React.Component<
                             params={params}
                             filterConfig={[
                               {
-                                id: 'name',
+                                id: 'name__icontains',
                                 title: t`Container repository name`,
                               },
                             ]}
@@ -258,6 +259,9 @@ class ExecutionEnvironmentList extends React.Component<
                     }}
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort']}
+                    niceNames={{
+                      name__icontains: t`Name`,
+                    }}
                   />
                 </div>
                 {this.renderTable(params)}
