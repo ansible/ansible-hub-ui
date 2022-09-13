@@ -35,6 +35,7 @@ export class RepoSigningUtils {
           item.pulp.repository.pulp_id,
           RepoSigningUtils.getContainerPulpType(item),
           pulp_href,
+          item.pulp.distribution.base_path,
         ).then((result) => {
           addAlert({
             variant: 'success',
