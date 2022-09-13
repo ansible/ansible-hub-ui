@@ -6,13 +6,13 @@ import { List, ListItem, ListVariant } from '@patternfly/react-core';
 
 import { EmptyStateNoData, HelperText } from 'src/components';
 
-import { CollectionDetailType } from 'src/api';
+import { CollectionDetailType, CollectionVersion } from 'src/api';
 
 import 'src/containers/collection-detail/collection-dependencies.scss';
 
 interface IProps {
   collection: CollectionDetailType;
-  dependencies_repos: any;
+  dependencies_repos: (CollectionVersion & { path?: string })[];
 }
 
 export class CollectionDependenciesList extends React.Component<IProps> {
