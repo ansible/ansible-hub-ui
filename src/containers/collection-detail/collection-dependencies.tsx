@@ -155,7 +155,6 @@ class CollectionDependencies extends React.Component<
                   ) : (
                     <CollectionDependenciesList
                       collection={this.state.collection}
-                      /*repo={this.context.selectedRepo}*/
                       dependencies_repos={this.state.dependencies_repos}
                     />
                   )}
