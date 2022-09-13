@@ -491,13 +491,13 @@ class ExecutionEnvironmentList extends React.Component<
   private queryEnvironments() {
     this.setState({ loading: true }, () =>
       ExecutionEnvironmentAPI.list(this.state.params)
-        .then((result) =>
+        .then((result) => {
           this.setState({
             items: result.data.data,
             itemCount: result.data.meta.count,
             loading: false,
-          }),
-        )
+          });
+        })
         .catch((e) =>
           this.addAlert(t`Error loading environments.`, 'danger', e?.message),
         ),
@@ -513,15 +513,16 @@ class ExecutionEnvironmentList extends React.Component<
   }
 
   private addAlert(title, variant, description?) {
+    this.addAlertObj({
+      description,
+      title,
+      variant,
+    });
+  }
+
+  private addAlertObj(alert) {
     this.setState({
-      alerts: [
-        ...this.state.alerts,
-        {
-          description,
-          title,
-          variant,
-        },
-      ],
+      alerts: [...this.state.alerts, alert],
     });
   }
 

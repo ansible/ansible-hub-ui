@@ -21,7 +21,13 @@ import {
   StatefulDropdown,
   closeAlertMixin,
 } from 'src/components';
-import { ParamHelper, parsePulpIDFromURL, waitForTask } from 'src/utilities';
+import {
+  ParamHelper,
+  parsePulpIDFromURL,
+  waitForTask,
+  RepoSigningUtils,
+  canSignEE,
+} from 'src/utilities';
 
 import { AppContext } from 'src/loaders/app-context';
 
@@ -135,6 +141,16 @@ export function withContainerRepo(WrappedComponent) {
             {t`Delete`}
           </DropdownItem>
         ),
+        this.state.repo && canSignEE(this.context, this.state.repo) && (
+          <DropdownItem
+            key='sign'
+            onClick={() => {
+              this.sign();
+            }}
+          >
+            {t`Sign`}
+          </DropdownItem>
+        ),
       ].filter((truthy) => truthy);
 
       const { alerts, repo, publishToController, showDeleteModal } = this.state;
@@ -176,6 +192,7 @@ export function withContainerRepo(WrappedComponent) {
             tab={this.getTab()}
             groupId={groupId}
             container={this.state.repo}
+            displaySignatures={this.context.featureFlags.display_signatures}
             pageControls={
               <>
                 {showEdit ? (
@@ -272,8 +289,8 @@ export function withContainerRepo(WrappedComponent) {
       ExecutionEnvironmentAPI.get(this.props.match.params['container'])
         .then((result) => {
           this.setState({
-            loading: false,
             repo: result.data,
+            loading: false,
           });
 
           const last_sync_task =
@@ -313,15 +330,16 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private addAlert(title, variant, description?) {
+      this.addAlertObj({
+        description,
+        title,
+        variant,
+      });
+    }
+
+    private addAlertObj(alert) {
       this.setState({
-        alerts: [
-          ...this.state.alerts,
-          {
-            description,
-            title,
-            variant,
-          },
-        ],
+        alerts: [...this.state.alerts, alert],
       });
     }
 
@@ -345,6 +363,15 @@ export function withContainerRepo(WrappedComponent) {
           this.loadRepo();
         })
         .catch(() => this.addAlert(t`Sync failed for ${name}`, 'danger'));
+    }
+
+    private sign() {
+      RepoSigningUtils.sign(
+        this.state.repo,
+        this.context,
+        (alert) => this.addAlertObj(alert),
+        () => this.loadRepo(),
+      );
     }
   };
 }

@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro';
 import { TaskAPI } from 'src/api';
+import { parsePulpIDFromURL } from './parse-pulp-id';
 
 export function waitForTask(task, bailAfter = 10) {
   return TaskAPI.get(task).then((result) => {
@@ -23,4 +24,8 @@ export function waitForTask(task, bailAfter = 10) {
       );
     }
   });
+}
+
+export function waitForTaskUrl(taskUrl, bailAfter = 10) {
+  return waitForTask(parsePulpIDFromURL(taskUrl), bailAfter);
 }

@@ -2,7 +2,7 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { Tooltip } from '@patternfly/react-core';
 import { Paths, formatPath } from 'src/paths';
-import { BaseHeader, Breadcrumbs, Tabs } from 'src/components';
+import { BaseHeader, Breadcrumbs, Tabs, SignatureBadge } from 'src/components';
 import { ContainerRepositoryType } from 'src/api';
 import { lastSyncStatus, lastSynced } from 'src/utilities';
 
@@ -13,11 +13,12 @@ interface IProps {
   container: ContainerRepositoryType;
   pageControls?: React.ReactElement;
   groupId?: number;
+  displaySignatures: boolean;
 }
 
 export class ExecutionEnvironmentHeader extends React.Component<IProps> {
   render() {
-    const { container, groupId, tab } = this.props;
+    const { container, groupId, tab, displaySignatures } = this.props;
 
     const tabs = [
       { id: 'detail', name: t`Detail` },
@@ -65,6 +66,17 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
         }
         pageControls={this.props.pageControls}
       >
+        {displaySignatures &&
+          this.props.container.pulp.repository.sign_state && (
+            <SignatureBadge
+              isCompact
+              signState={
+                this.props.container.pulp.repository.sign_state == 'signed'
+                  ? 'signed'
+                  : 'unsigned'
+              }
+            />
+          )}
         {last_sync_task && (
           <p className='hub-m-truncated'>
             <Trans>

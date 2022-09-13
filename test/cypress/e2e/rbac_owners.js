@@ -152,7 +152,7 @@ function testOwnersTab({
   cy.get(
     `[data-cy="RoleListTable-ExpandableRow-row-${role}"] .pf-c-table__toggle button`,
   ).click();
-  cy.get('.pf-c-label').contains(permissionLabel);
+  cy.contains('.pf-c-label', permissionLabel, { timeout: 10000 });
 
   // role list view, remove
   cy.get(
