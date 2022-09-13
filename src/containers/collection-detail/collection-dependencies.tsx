@@ -6,6 +6,8 @@ import {
   CollectionAPI,
   CollectionDetailType,
   CollectionUsedByDependencies,
+  CollectionVersionAPI,
+  CollectionVersion,
 } from 'src/api';
 import {
   CollectionHeader,
@@ -27,6 +29,7 @@ import './collection-dependencies.scss';
 
 interface IState {
   collection: CollectionDetailType;
+  dependencies_repos: CollectionVersion[];
   params: {
     page?: number;
     page_size?: number;
@@ -59,6 +62,7 @@ class CollectionDependencies extends React.Component<
 
     this.state = {
       collection: undefined,
+      dependencies_repos: [],
       params: params,
       usedByDependencies: [],
       usedByDependenciesCount: 0,
@@ -151,7 +155,7 @@ class CollectionDependencies extends React.Component<
                   ) : (
                     <CollectionDependenciesList
                       collection={this.state.collection}
-                      repo={this.context.selectedRepo}
+                      dependencies_repos={this.state.dependencies_repos}
                     />
                   )}
                   <p>{t`This collection is being used by`}</p>
@@ -178,7 +182,67 @@ class CollectionDependencies extends React.Component<
   }
 
   private loadData(forceReload = false) {
-    this.loadCollection(forceReload, () => this.loadUsedByDependencies());
+    this.loadCollection(forceReload, () =>
+      this.loadCollectionsDependenciesRepos(() =>
+        this.loadUsedByDependencies(),
+      ),
+    );
+  }
+
+  private loadCollectionsDependenciesRepos(callback) {
+    const dependencies =
+      this.state.collection.latest_version.metadata.dependencies;
+    const dependencies_repos = [];
+    const promises = [];
+
+    Object.keys(dependencies).forEach((dependency) => {
+      const [namespace, collection] = dependency.split('.');
+      const dependency_repo = {
+        name: collection,
+        namespace: namespace,
+        repo: '',
+        path: '',
+      };
+      dependencies_repos.push(dependency_repo);
+
+      const promise = this.loadDependencyRepo(dependency_repo);
+      promises.push(promise);
+    });
+
+    Promise.all(promises).then(() => {
+      this.setState({ dependencies_repos: dependencies_repos }, callback());
+    });
+  }
+
+  private loadDependencyRepo(dependency_repo) {
+    return CollectionVersionAPI.list({
+      namespace: dependency_repo.namespace,
+      name: dependency_repo.name,
+    })
+      .then((result) => {
+        dependency_repo.repo = result.data.data[0].repository_list[0];
+        const dependencies =
+          this.state.collection.latest_version.metadata.dependencies;
+
+        dependency_repo.path = formatPath(
+          Paths.collectionByRepo,
+          {
+            collection: dependency_repo.name,
+            namespace: dependency_repo.namespace,
+            repo: dependency_repo.repo,
+          },
+          this.separateVersion(
+            dependencies[
+              dependency_repo.namespace + '.' + dependency_repo.name
+            ],
+          ),
+        );
+      })
+      .catch(() => {
+        // do nothing, dependency_repo.path and repo stays empty
+        // this may mean that collection was not found - thus is not in the system.
+        // user will be notified in the list of dependencies rather than alerts
+      });
   }
 
   private loadUsedByDependencies() {
@@ -250,6 +314,11 @@ class CollectionDependencies extends React.Component<
 
   get closeAlert() {
     return closeAlertMixin('alerts');
+  }
+
+  private separateVersion(version) {
+    const v = version.match(/((\d+\.*)+)/);
+    return v ? { version: v[0] } : {};
   }
 }
 
