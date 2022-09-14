@@ -68,7 +68,10 @@ export class AppliedFilters extends React.Component<IProps> {
             <Chip
               key={i}
               onClick={() =>
-                updateParams(ParamHelper.deleteParam(params, key, v))
+                updateParams({
+                  ...ParamHelper.deleteParam(params, key, v),
+                  page: 1,
+                })
               }
             >
               {niceValues?.[key]?.[v] || v}

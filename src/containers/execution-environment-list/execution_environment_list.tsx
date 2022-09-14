@@ -221,12 +221,11 @@ class ExecutionEnvironmentList extends React.Component<
                             onChange={(text) =>
                               this.setState({ inputText: text })
                             }
-                            updateParams={(p) => {
-                              p['page'] = 1;
+                            updateParams={(p) =>
                               this.updateParams(p, () =>
                                 this.queryEnvironments(),
-                              );
-                            }}
+                              )
+                            }
                             params={params}
                             filterConfig={[
                               {

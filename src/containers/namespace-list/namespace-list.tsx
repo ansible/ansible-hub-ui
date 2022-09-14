@@ -157,11 +157,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
     // Namespaces or Partners
     const title = i18n._(namespaceBreadcrumb.name);
 
-    const updateParams = (p) => {
-      p['page'] = 1;
-      this.updateParams(p, () => this.loadNamespaces());
-    };
-
     return (
       <div className='hub-namespace-page'>
         <NamespaceModal
@@ -210,14 +205,16 @@ export class NamespaceList extends React.Component<IProps, IState> {
                       <CompoundFilter
                         inputText={inputText}
                         onChange={(text) => this.setState({ inputText: text })}
-                        updateParams={updateParams}
+                        updateParams={(p) =>
+                          this.updateParams(p, () => this.loadNamespaces())
+                        }
                         params={params}
                         filterConfig={[{ id: 'keywords', title: t`keywords` }]}
                       />
                       <AppliedFilters
                         style={{ marginTop: '16px' }}
                         updateParams={(p) => {
-                          updateParams(p);
+                          this.updateParams(p, () => this.loadNamespaces());
                           this.setState({ inputText: '' });
                         }}
                         params={params}
@@ -232,7 +229,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
                           { title: t`Name`, id: 'name', type: 'alpha' },
                         ]}
                         params={params}
-                        updateParams={updateParams}
+                        updateParams={(p) =>
+                          this.updateParams(p, () => this.loadNamespaces())
+                        }
                       />
                     </ToolbarItem>
                     {user?.model_permissions?.add_namespace && (

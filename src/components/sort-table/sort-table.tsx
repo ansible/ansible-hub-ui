@@ -26,13 +26,14 @@ export class SortTable extends React.Component<IProps> {
     // Alphabetical sorting is inverted in Django, so flip it here to make
     // things match up with the UI.
     isMinus = !isMinus;
-    this.props.updateParams(
-      ParamHelper.setParam(
+    this.props.updateParams({
+      ...ParamHelper.setParam(
         this.props.params,
         'sort',
         (isMinus ? '-' : '') + id,
       ),
-    );
+      page: 1,
+    });
   }
   private getIcon(type, id) {
     if (type == 'none') {

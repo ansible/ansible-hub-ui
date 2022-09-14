@@ -70,10 +70,7 @@ export class ImportList extends React.Component<IProps, IState> {
           <CompoundFilter
             inputText={this.state.inputText}
             onChange={(text) => this.setState({ inputText: text })}
-            updateParams={(p) => {
-              p['page'] = 1;
-              this.props.updateParams(p);
-            }}
+            updateParams={(p) => this.props.updateParams(p)}
             params={params}
             filterConfig={[
               {
@@ -109,7 +106,6 @@ export class ImportList extends React.Component<IProps, IState> {
 
         <AppliedFilters
           updateParams={(p) => {
-            p['page'] = 1;
             this.props.updateParams(p);
             this.setState({ inputText: '' });
           }}

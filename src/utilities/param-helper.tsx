@@ -151,7 +151,7 @@ export class ParamHelper {
       params = ParamHelper.deleteParam(params, key);
     }
 
-    updateParams(params);
+    updateParams({ ...params, page: 1 });
   }
 
   // check if params are valid for sorting

@@ -185,23 +185,25 @@ export class CompoundFilter extends React.Component<IProps, IState> {
   }
 
   private submitMultiple(newValues: string[]) {
-    this.props.updateParams(
-      ParamHelper.setParam(
+    this.props.updateParams({
+      ...ParamHelper.setParam(
         this.props.params,
         this.state.selectedFilter.id,
         newValues,
       ),
-    );
+      page: 1,
+    });
   }
 
   private submitFilter(id = undefined) {
-    this.props.updateParams(
-      ParamHelper.setParam(
+    this.props.updateParams({
+      ...ParamHelper.setParam(
         this.props.params,
         this.state.selectedFilter.id,
         id ? id : this.props.inputText,
       ),
-    );
+      page: 1,
+    });
   }
 
   private onToggle = () => {

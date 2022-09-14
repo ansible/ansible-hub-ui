@@ -143,10 +143,9 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
                             onChange={(text) =>
                               this.setState({ inputText: text })
                             }
-                            updateParams={(p) => {
-                              p['page'] = 1;
-                              this.updateParams(p, () => this.queryTasks());
-                            }}
+                            updateParams={(p) =>
+                              this.updateParams(p, () => this.queryTasks())
+                            }
                             params={params}
                             filterConfig={[
                               {
@@ -265,10 +264,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
         <SortTable
           options={sortTableOptions}
           params={params}
-          updateParams={(p) => {
-            p['page'] = 1;
-            this.updateParams(p, () => this.queryTasks());
-          }}
+          updateParams={(p) => this.updateParams(p, () => this.queryTasks())}
         />
         <tbody>{items.map((item, i) => this.renderTableRow(item, i))}</tbody>
       </table>

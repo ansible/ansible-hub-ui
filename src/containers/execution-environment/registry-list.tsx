@@ -251,12 +251,9 @@ class ExecutionEnvironmentRegistryList extends React.Component<
                             onChange={(text) =>
                               this.setState({ inputText: text })
                             }
-                            updateParams={(p) => {
-                              p['page'] = 1;
-                              this.updateParams(p, () =>
-                                this.queryRegistries(),
-                              );
-                            }}
+                            updateParams={(p) =>
+                              this.updateParams(p, () => this.queryRegistries())
+                            }
                             params={params}
                             filterConfig={[
                               {
