@@ -54,3 +54,21 @@ body,
     border-top: 0;
   }
 }
+
+// list screen toolbars
+// FIXME: merge these 2; also with search, namespace-list, namespace-details, hub-toolbar-wrapper
+.hub-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hub-list-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .pf-c-toolbar__content {
+    padding-left: 0;
+  }
+}

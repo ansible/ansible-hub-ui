@@ -133,7 +133,7 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
               <LoadingPageSpinner />
             ) : (
               <section className='body'>
-                <div className='hub-task-list'>
+                <div className='hub-list-toolbar'>
                   <Toolbar>
                     <ToolbarContent>
                       <ToolbarGroup>

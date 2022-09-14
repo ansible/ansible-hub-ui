@@ -245,7 +245,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
           tag={publishToController?.tag}
         />
 
-        <div className='detail-images-toolbar toolbar'>
+        <div className='hub-toolbar toolbar'>
           <Toolbar>
             <ToolbarContent>
               <ToolbarGroup>

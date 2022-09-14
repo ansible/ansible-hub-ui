@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { t, Trans } from '@lingui/macro';
 import { errorMessage } from 'src/utilities';
-import './registry-list.scss';
 
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
@@ -242,7 +241,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
               <LoadingPageSpinner />
             ) : (
               <section className='body'>
-                <div className='hub-container-list-toolbar'>
+                <div className='hub-list-toolbar'>
                   <Toolbar>
                     <ToolbarContent>
                       <ToolbarGroup>

@@ -1,6 +1,5 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import './user-management.scss';
 
 import {
   withRouter,
@@ -142,7 +141,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         ) : (
           <Main>
             <section className='body'>
-              <div className='hub-user-list-toolbar'>
+              <div className='hub-list-toolbar'>
                 <Toolbar>
                   <ToolbarContent>
                     <ToolbarGroup>

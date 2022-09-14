@@ -7,7 +7,6 @@ import {
 } from 'src/containers/role-management/map-role-errors';
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-import './role.scss';
 
 import {
   RoleForm,

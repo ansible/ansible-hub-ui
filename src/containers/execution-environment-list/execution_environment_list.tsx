@@ -210,7 +210,7 @@ class ExecutionEnvironmentList extends React.Component<
               <LoadingPageSpinner />
             ) : (
               <section className='body'>
-                <div className='hub-container-list-toolbar'>
+                <div className='hub-list-toolbar'>
                   <Toolbar>
                     <ToolbarContent>
                       <ToolbarGroup>
