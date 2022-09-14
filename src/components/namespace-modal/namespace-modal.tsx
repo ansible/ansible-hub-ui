@@ -112,7 +112,12 @@ export class NamespaceModal extends React.Component<IProps, IState> {
           </Button>,
         ]}
       >
-        <Form>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            this.handleSubmit();
+          }}
+        >
           <FormGroup
             label={t`Name`}
             isRequired
