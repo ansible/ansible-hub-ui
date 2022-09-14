@@ -245,6 +245,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         'galaxy.change_namespace',
       ) || this.context.user.model_permissions.change_namespace;
 
+    // remove ?group (owners tab) when switching tabs
+    const tabParams = { ...params };
+    delete tabParams.group;
+
     return (
       <React.Fragment>
         <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
@@ -324,7 +328,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           namespace={namespace}
           breadcrumbs={breadcrumbs}
           tabs={tabs}
-          params={params}
+          params={tabParams}
           updateParams={(p) => this.updateParams(p)}
           pageControls={this.renderPageControls()}
           contextSelector={
