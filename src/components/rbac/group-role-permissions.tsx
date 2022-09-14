@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { RoleAPI } from 'src/api';
 import { Constants } from 'src/constants';
 import { RolePermissions, LoadingPageSpinner } from 'src/components';
+import { translateLockedRolesDescription } from 'src/utilities';
 
 interface IProps {
   name: string;
@@ -31,7 +32,7 @@ export const GroupRolePermissions = ({ name, filteredPermissions }: IProps) => {
 
   return (
     <>
-      <p>{role.description}</p>
+      <p>{translateLockedRolesDescription(role.name, role.description)}</p>
       <RolePermissions
         filteredPermissions={filteredPermissions}
         selectedPermissions={role.permissions}

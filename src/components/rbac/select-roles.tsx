@@ -12,7 +12,7 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
 } from 'src/components';
-import { filterIsSet } from 'src/utilities';
+import { filterIsSet, translateLockedRolesDescription } from 'src/utilities';
 
 interface SelectRolesProps {
   assignedRoles: { role: string }[];
@@ -228,7 +228,12 @@ export const SelectRoles: React.FC<SelectRolesProps> = ({
                         data-cy={`RoleListTable-CheckboxRow-row-${role.name}`}
                       >
                         <td>{role.name}</td>
-                        <td>{role.description}</td>
+                        <td>
+                          {translateLockedRolesDescription(
+                            role.name,
+                            role.description,
+                          )}
+                        </td>
                       </CheckboxRow>
                     ))}
                   </RoleListTable>

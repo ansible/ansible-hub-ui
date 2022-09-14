@@ -30,6 +30,7 @@ import {
   filterIsSet,
   ParamHelper,
   parsePulpIDFromURL,
+  translateLockedRolesDescription,
 } from 'src/utilities';
 import {
   Button,
@@ -370,7 +371,12 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     data-cy={`RoleListTable-ExpandableRow-row-${role.role}`}
                   >
                     <td>{role.role}</td>
-                    <td>{role.description}</td>
+                    <td>
+                      {translateLockedRolesDescription(
+                        role.role,
+                        role.description,
+                      )}
+                    </td>
                     <ListItemActions
                       kebabItems={[
                         user.model_permissions.change_group && (
