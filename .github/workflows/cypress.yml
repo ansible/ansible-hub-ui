@@ -23,6 +23,7 @@ jobs:
       BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/master' }}
 
     strategy:
+      fail-fast: false
       matrix:
         test:
         - 'collections'
@@ -32,7 +33,7 @@ jobs:
         - 'groups_and_users'
         - 'repo'
         - 'misc'
-        - 'imports' 
+        - 'imports'
 
     steps:
 
@@ -223,30 +224,16 @@ jobs:
     - name: "Check if e2e contains only dirs in matrix test array"
       working-directory: 'ansible-hub-ui'
       run: |
-        ls test/cypress/e2e
-        yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress-distributed.yml | sort
-        diff -Naur <(ls test/cypress/e2e) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress-distributed.yml | sort)
-    
-    - name: "Prepare specific tests - remove the rest and copy files from folder to the root directory"
-      working-directory: 'ansible-hub-ui/test/cypress/e2e'
-      run: |
-        for d in * ; do
-          not_delete=${{ matrix.test }}
-          if [ "$not_delete" != "$d" ];
-          then
-            echo "removing $d"  
-            rm -r $d
-          fi
-        done
-
-        echo "moving files to root test directory"
-        mv ${{ matrix.test }}/* .
-        echo "removing ${{ matrix.test }} folder"
-        rm -r ${{ matrix.test }}
+        diff -Naur <(ls test/cypress/e2e) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
+        dir=${{matrix.test}}
+        pattern="s/\*\*/$dir/"
+        sed -i "$pattern" cypress.config.js
+        echo "result of the config file:"
+        cat cypress.config.js
         npm run cypress:chrome
 
     - uses: actions/upload-artifact@v2
