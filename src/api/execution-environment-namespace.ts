@@ -1,7 +1,7 @@
-import { HubAPI } from './hub';
+import { PulpAPI } from './pulp';
 
-class API extends HubAPI {
-  apiPath = 'pulp/api/v3/pulp_container/namespaces/';
+class API extends PulpAPI {
+  apiPath = 'pulp_container/namespaces/';
 
   listRoles(id, params?) {
     return super.list(params, this.apiPath + id + '/list_roles/');

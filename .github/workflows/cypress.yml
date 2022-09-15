@@ -50,6 +50,9 @@ jobs:
         # blow up without galaxy_ng commit info
         [ -n "$GALAXY_NG_COMMIT" ]
 
+        SHORT_BRANCH=fix/refactor-ee-repositories
+        GALAXY_NG_COMMIT=3c85dedb77f92687c659ad01f82947aa323b609b
+        
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "GALAXY_NG_COMMIT=${GALAXY_NG_COMMIT}" >> $GITHUB_ENV
 
@@ -84,7 +87,7 @@ jobs:
 
           RUN pip3 install --upgrade \
             requests \
-            git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }} && \
+            git+https://github.com/jerabekjiri/galaxy_ng.git@${{ env.SHORT_BRANCH }} && \
             rm -rf /root/.cache/pip
 
           RUN mkdir -p /etc/nginx/pulp/
