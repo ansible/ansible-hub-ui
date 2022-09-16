@@ -60,7 +60,7 @@ export const SelectGroup: React.FC<IProps> = ({
 
   const noData = groups.length === 0;
 
-  if (noData && !filterIsSet(localParams, ['name__contains'])) {
+  if (noData && !filterIsSet(localParams, ['name__icontains'])) {
     return (
       <div className='hub-custom-wizard-layout hub-no-data'>
         <EmptyStateNoData
@@ -140,7 +140,7 @@ export const SelectGroup: React.FC<IProps> = ({
                   updateParams={(p) => setLocalParams(p)}
                   filterConfig={[
                     {
-                      id: 'name__contains',
+                      id: 'name__icontains',
                       title: t`Name`,
                     },
                   ]}
@@ -153,14 +153,14 @@ export const SelectGroup: React.FC<IProps> = ({
                   setInputText('');
                 }}
                 params={localParams}
-                niceNames={{ name__contains: t`Name` }}
+                niceNames={{ name__icontains: t`Name` }}
                 ignoredParams={['sort', 'page_size', 'page']}
                 style={{ marginTop: '8px' }}
               />
             </FlexItem>
 
             <FlexItem style={{ flexGrow: 1 }}>
-              {noData && filterIsSet(localParams, ['name__contains']) ? (
+              {noData && filterIsSet(localParams, ['name__icontains']) ? (
                 <div className='hub-no-filter-data'>
                   <EmptyStateFilter />
                 </div>
