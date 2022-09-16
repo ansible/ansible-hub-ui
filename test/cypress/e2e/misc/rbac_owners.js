@@ -82,7 +82,7 @@ function testOwnersTab({
 
   // group role modal
   // find partner-engineers, select, check indicator, next
-  cy.get('[data-cy=compound_filter] input[aria-label=name__contains]').type(
+  cy.get('[data-cy=compound_filter] input[aria-label=name__icontains]').type(
     'owners{enter}',
   );
   cy.get(
