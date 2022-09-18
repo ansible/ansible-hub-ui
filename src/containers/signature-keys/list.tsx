@@ -278,29 +278,19 @@ export class SignatureKeysList extends React.Component<
             loading: false,
             items: [],
             itemCount: 0,
-            alerts: [
-              ...this.state.alerts,
-              {
-                variant: 'danger',
-                title: t`Signature keys could not be displayed.`,
-                description: errorMessage(status, statusText),
-              },
-            ],
+          });
+          this.addAlert({
+            title: t`Signature keys could not be displayed.`,
+            variant: 'danger',
+            description: errorMessage(status, statusText),
           });
         });
     });
   }
 
-  private addAlert(title, variant, description?) {
+  private addAlert(alert: AlertType) {
     this.setState({
-      alerts: [
-        ...this.state.alerts,
-        {
-          description,
-          title,
-          variant,
-        },
-      ],
+      alerts: [...this.state.alerts, alert],
     });
   }
 
