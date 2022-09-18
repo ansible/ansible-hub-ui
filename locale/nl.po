@@ -68,7 +68,7 @@ msgstr "<0>Opmerking:</0> De volgende links kunnen door je browser worden geblok
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Opmerking:</0> Gebruik deze URL om ansible-galaxy te configureren om collecties naar deze namespace te uploaden. Meer informatie over configuraties van ansible-galaxy vindt u <1>hier</1><2> </2><3/>."
 
-#: src/containers/role-management/role-list.tsx:215
+#: src/containers/role-management/role-list.tsx:216
 msgid "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
 msgstr ""
 
@@ -80,7 +80,7 @@ msgstr "<0>WAARSCHUWING</0> kopieer dit token nu. Dit is de enige keer dat u het
 msgid "<0>WARNING</0> loading a new token will delete your old token."
 msgstr "<0>WAARSCHUWING</0> het laden van een nieuw token zal uw oude token verwijderen."
 
-#: src/containers/execution-environment/registry-list.tsx:227
+#: src/containers/execution-environment/registry-list.tsx:226
 msgid "<0>{0}</0> will be deleted."
 msgstr "<0>{0}</0> zal worden gewist."
 
@@ -122,9 +122,13 @@ msgstr "API-fout: Mislukt om deprecatie in te stellen."
 #~ msgid "API Error: {0}"
 #~ msgstr "API Error: {0}"
 
-#: src/components/headers/collection-header.tsx:689
-#: src/components/headers/collection-header.tsx:740
-#: src/containers/namespace-detail/namespace-detail.tsx:522
+#: src/utilities/repo-signing.ts:54
+msgid "API Error: {ex}"
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:690
+#: src/components/headers/collection-header.tsx:741
+#: src/containers/namespace-detail/namespace-detail.tsx:523
 msgid "API Error: {status}"
 msgstr "API-fout: {status}"
 
@@ -150,7 +154,7 @@ msgstr "Beheer van tokens"
 msgid "About"
 msgstr "Over"
 
-#: src/containers/group-management/group-detail.tsx:157
+#: src/containers/group-management/group-detail.tsx:155
 msgid "Access"
 msgstr ""
 
@@ -166,7 +170,7 @@ msgstr "Activiteiten"
 msgid "Activities will appear once you push something"
 msgstr "Activiteiten zullen verschijnen zodra u op iets drukt"
 
-#: src/components/execution-environment-header/execution-environment-header.tsx:24
+#: src/components/execution-environment-header/execution-environment-header.tsx:25
 msgid "Activity"
 msgstr "Activiteit"
 
@@ -176,10 +180,10 @@ msgstr "Activiteit"
 #: src/components/rbac/owners-tab.tsx:368
 #: src/components/rbac/owners-tab.tsx:420
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:217
-#: src/containers/group-management/group-detail.tsx:287
-#: src/containers/group-management/group-detail.tsx:517
-#: src/containers/group-management/group-detail.tsx:568
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:218
+#: src/containers/group-management/group-detail.tsx:285
+#: src/containers/group-management/group-detail.tsx:515
+#: src/containers/group-management/group-detail.tsx:566
 msgid "Add"
 msgstr "Toevoegen"
 
@@ -225,19 +229,19 @@ msgid "Add new tag to image"
 msgstr "Nieuwe tag aan afbeelding toevoegen"
 
 #: src/constants.tsx:181
-#: src/containers/execution-environment/registry-list.tsx:152
-#: src/containers/execution-environment/registry-list.tsx:215
+#: src/containers/execution-environment/registry-list.tsx:151
+#: src/containers/execution-environment/registry-list.tsx:214
 msgid "Add remote registry"
 msgstr "Extern register toevoegen"
 
 #: src/components/rbac/owners-tab.tsx:207
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:177
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:195
-#: src/containers/role-management/role-list.tsx:158
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:178
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:196
+#: src/containers/role-management/role-list.tsx:159
 msgid "Add roles"
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:273
+#: src/containers/group-management/group-detail.tsx:271
 msgid "Add selected users to group"
 msgstr "Geselecteerde gebruikers aan groep toevoegen"
 
@@ -269,8 +273,16 @@ msgstr "Gebruiker toevoegen"
 msgid "All"
 msgstr "Alle"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:117
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:118
 msgid "All associated permissions under this role were removed."
+msgstr ""
+
+#: src/constants.tsx:394
+msgid "Allow all actions on a task."
+msgstr ""
+
+#: src/constants.tsx:395
+msgid "Allow all actions on a taskschedule."
 msgstr ""
 
 #: src/loaders/standalone/standalone-loader.tsx:364
@@ -289,6 +301,10 @@ msgstr "Goedkeuringsstatus:"
 #: src/containers/certification-dashboard/certification-dashboard.tsx:467
 msgid "Approve"
 msgstr "Goedkeuring"
+
+#: src/constants.tsx:382
+msgid "Approve, reject and sync collections from remotes."
+msgstr ""
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:188
 #: src/containers/certification-dashboard/certification-dashboard.tsx:217
@@ -312,21 +328,21 @@ msgstr "Browser OS"
 msgid "Browser Version"
 msgstr "Browserversie"
 
-#: src/containers/role-management/role-list.tsx:269
-#: src/containers/role-management/role-list.tsx:302
-#: src/containers/role-management/role-list.tsx:392
+#: src/containers/role-management/role-list.tsx:270
+#: src/containers/role-management/role-list.tsx:303
+#: src/containers/role-management/role-list.tsx:398
 msgid "Built-in"
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:493
+#: src/containers/role-management/role-list.tsx:499
 msgid "Built-in roles cannot be deleted."
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:388
+#: src/containers/role-management/role-list.tsx:394
 msgid "Built-in roles cannot be edited or deleted."
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:483
+#: src/containers/role-management/role-list.tsx:489
 msgid "Built-in roles cannot be edited."
 msgstr ""
 
@@ -364,8 +380,8 @@ msgstr "Ik kan niet op afstand updaten zonder dat er een distributie aan vastzit
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/containers/edit-namespace/edit-namespace.tsx:158
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:210
-#: src/containers/group-management/group-detail.tsx:290
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:211
+#: src/containers/group-management/group-detail.tsx:288
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -403,6 +419,10 @@ msgstr "Wijzigen"
 msgid "Change Ansible distribution"
 msgstr "Ansible-distributie wijzigen"
 
+#: src/constants.tsx:383
+msgid "Change and upload collections to namespaces."
+msgstr ""
+
 #: src/constants.tsx:157
 msgid "Change collection remote"
 msgstr "Collectie op afstand wijzigen"
@@ -427,6 +447,10 @@ msgstr "Containers wijzigen"
 #: src/constants.tsx:217
 msgid "Change distribution"
 msgstr "Verdeling wijzigen"
+
+#: src/constants.tsx:387
+msgid "Change existing execution environments."
+msgstr ""
 
 #: src/constants.tsx:187
 msgid "Change group"
@@ -463,7 +487,7 @@ msgstr "Gebruiker wijzigen"
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 
-#: src/containers/group-management/group-list.tsx:364
+#: src/containers/group-management/group-list.tsx:363
 msgid "Changes to group \"{0}\" could not be saved."
 msgstr "Changes to group \"{0}\" could not be saved."
 
@@ -471,7 +495,7 @@ msgstr "Changes to group \"{0}\" could not be saved."
 msgid "Changes to namespace \"{0}\" could not be saved."
 msgstr "Changes to namespace \"{0}\" could not be saved."
 
-#: src/containers/role-management/role-edit.tsx:240
+#: src/containers/role-management/role-edit.tsx:244
 msgid "Changes to role \"{name}\" could not be saved."
 msgstr ""
 
@@ -577,12 +601,12 @@ msgstr ""
 msgid "Collection count for \"{distributionPath}\" could not be displayed."
 msgstr ""
 
-#: src/containers/collection-detail/collection-dependencies.tsx:141
-#: src/containers/collection-detail/collection-dependencies.tsx:149
+#: src/containers/collection-detail/collection-dependencies.tsx:145
+#: src/containers/collection-detail/collection-dependencies.tsx:153
 msgid "Collection does not have any dependencies."
 msgstr "Collectie heeft geen afhankelijkheden."
 
-#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:29
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:27
 msgid "Collection does not have dependencies."
 msgstr "Collectie heeft geen afhankelijkheden."
 
@@ -604,6 +628,10 @@ msgstr "Upload collectie geannuleerd"
 #: src/containers/certification-dashboard/certification-dashboard.tsx:302
 msgid "Collection versions"
 msgstr "Collectie-versies"
+
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:46
+msgid "Collection was not found in the system. You must upload it."
+msgstr ""
 
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:192
@@ -678,6 +706,10 @@ msgstr "Neem contact op met de beheerder van uw organisatie voor meer informatie
 #~ msgid "Container Registry"
 #~ msgstr "Container Registry"
 
+#: src/utilities/repo-signing.ts:24
+msgid "Container must be synchronized with remote repository first."
+msgstr ""
+
 #: src/components/execution-environment/repository-form.tsx:182
 msgid "Container names can only contain alphanumeric characters, \".\", \"_\", \"-\" and a up to one \"/\"."
 msgstr "Containernamen kunnen alleen alfanumerieke tekens, \".\", \"_\", \"-\" en maximaal één \"/\" bevatten."
@@ -738,12 +770,12 @@ msgstr "Kon import-log niet laden"
 
 #: src/components/namespace-modal/namespace-modal.tsx:108
 #: src/components/rbac/group-modal.tsx:57
-#: src/containers/group-management/group-list.tsx:162
-#: src/containers/group-management/group-list.tsx:199
+#: src/containers/group-management/group-list.tsx:161
+#: src/containers/group-management/group-list.tsx:198
 #: src/containers/namespace-list/namespace-list.tsx:244
 #: src/containers/namespace-list/namespace-list.tsx:294
-#: src/containers/user-management/user-list.tsx:184
-#: src/containers/user-management/user-list.tsx:249
+#: src/containers/user-management/user-list.tsx:183
+#: src/containers/user-management/user-list.tsx:248
 msgid "Create"
 msgstr "Maken"
 
@@ -755,7 +787,7 @@ msgstr "Een groep maken"
 msgid "Create a new namespace"
 msgstr "Een nieuwe namespace maken"
 
-#: src/containers/role-management/role-create.tsx:67
+#: src/containers/role-management/role-create.tsx:66
 msgid "Create a new role"
 msgstr ""
 
@@ -767,12 +799,16 @@ msgstr ""
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 msgstr ""
 
+#: src/constants.tsx:386
+msgid "Create and update execution environments under existing container namespaces."
+msgstr ""
+
 #: src/constants.tsx:165
 #: src/constants.tsx:205
 msgid "Create new containers"
 msgstr "Nieuwe containers maken"
 
-#: src/containers/role-management/role-create.tsx:62
+#: src/containers/role-management/role-create.tsx:61
 msgid "Create new role"
 msgstr ""
 
@@ -781,11 +817,15 @@ msgstr ""
 msgid "Create new user"
 msgstr "Nieuwe gebruiker maken"
 
-#: src/containers/execution-environment/registry-list.tsx:327
+#: src/constants.tsx:380
+msgid "Create, delete and change collection namespaces. Upload and delete collections. Sync collections from remotes. Approve and reject collections."
+msgstr ""
+
+#: src/containers/execution-environment/registry-list.tsx:326
 #: src/containers/execution-environment-list/execution_environment_list.tsx:299
-#: src/containers/group-management/group-detail.tsx:641
-#: src/containers/role-management/role-list.tsx:179
-#: src/containers/user-management/user-list.tsx:286
+#: src/containers/group-management/group-detail.tsx:639
+#: src/containers/role-management/role-list.tsx:180
+#: src/containers/user-management/user-list.tsx:285
 msgid "Created"
 msgstr "Gemaakt"
 
@@ -839,17 +879,17 @@ msgid "Date created"
 msgstr "Datum aangemaakt"
 
 #: src/components/delete-modal/delete-modal.tsx:30
-#: src/containers/execution-environment/registry-list.tsx:408
-#: src/containers/execution-environment-detail/base.tsx:135
+#: src/containers/execution-environment/registry-list.tsx:407
+#: src/containers/execution-environment-detail/base.tsx:141
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:407
 #: src/containers/execution-environment-list/execution_environment_list.tsx:382
-#: src/containers/group-management/group-detail.tsx:234
-#: src/containers/group-management/group-list.tsx:421
-#: src/containers/role-management/role-list.tsx:476
+#: src/containers/group-management/group-detail.tsx:232
+#: src/containers/group-management/group-list.tsx:420
+#: src/containers/role-management/role-list.tsx:482
 #: src/containers/task-management/task-list-view.tsx:320
 #: src/containers/task-management/task-list-view.tsx:336
 #: src/containers/user-management/user-detail.tsx:129
-#: src/containers/user-management/user-list.tsx:340
+#: src/containers/user-management/user-list.tsx:339
 msgid "Delete"
 msgstr "Verwijderen"
 
@@ -932,15 +972,15 @@ msgstr "Namespace verwijderen"
 msgid "Delete remote registry"
 msgstr "Extern register verwijderen"
 
-#: src/containers/execution-environment/registry-list.tsx:225
+#: src/containers/execution-environment/registry-list.tsx:224
 msgid "Delete remote registry?"
 msgstr "Extern register verwijderen?"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:137
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:138
 msgid "Delete role: {0}"
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:212
+#: src/containers/role-management/role-list.tsx:213
 msgid "Delete role?"
 msgstr ""
 
@@ -1002,8 +1042,8 @@ msgid "Deleting yourself is not allowed."
 msgstr "Jezelf verwijderen is niet toegestaan."
 
 #: src/components/headers/collection-header.tsx:596
-#: src/containers/collection-detail/collection-dependencies.tsx:105
-#: src/containers/collection-detail/collection-dependencies.tsx:135
+#: src/containers/collection-detail/collection-dependencies.tsx:109
+#: src/containers/collection-detail/collection-dependencies.tsx:139
 msgid "Dependencies"
 msgstr "Afhankelijkheden"
 
@@ -1015,7 +1055,7 @@ msgstr "Dependencies for collection \"{name}\" could not be displayed."
 msgid "Dependent collections"
 msgstr "Afhankelijke collecties"
 
-#: src/containers/collection-detail/collection-dependencies.tsx:214
+#: src/containers/collection-detail/collection-dependencies.tsx:278
 msgid "Dependent collections could not be displayed."
 msgstr "Dependent collections could not be displayed."
 
@@ -1036,8 +1076,8 @@ msgstr ""
 #: src/components/rbac/role-list-table.tsx:49
 #: src/components/rbac/select-roles.tsx:98
 #: src/containers/execution-environment-list/execution_environment_list.tsx:294
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:236
-#: src/containers/role-management/role-list.tsx:174
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:237
+#: src/containers/role-management/role-list.tsx:175
 #: src/containers/task-management/task_detail.tsx:342
 msgid "Description"
 msgstr "Omschrijving"
@@ -1046,7 +1086,7 @@ msgstr "Omschrijving"
 msgid "Descriptive name"
 msgstr "Beschrijvende naam"
 
-#: src/components/execution-environment-header/execution-environment-header.tsx:23
+#: src/components/execution-environment-header/execution-environment-header.tsx:24
 msgid "Detail"
 msgstr "Detail"
 
@@ -1127,15 +1167,15 @@ msgstr "Dropdown"
 
 #: src/components/repositories/remote-repository-table.tsx:128
 #: src/containers/edit-namespace/edit-namespace.tsx:120
-#: src/containers/execution-environment/registry-list.tsx:395
-#: src/containers/execution-environment-detail/base.tsx:187
+#: src/containers/execution-environment/registry-list.tsx:394
+#: src/containers/execution-environment-detail/base.tsx:204
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
 #: src/containers/execution-environment-list/execution_environment_list.tsx:355
-#: src/containers/role-management/role-list.tsx:462
+#: src/containers/role-management/role-list.tsx:468
 #: src/containers/settings/user-profile.tsx:96
 #: src/containers/user-management/user-detail.tsx:119
 #: src/containers/user-management/user-edit.tsx:67
-#: src/containers/user-management/user-list.tsx:328
+#: src/containers/user-management/user-list.tsx:327
 msgid "Edit"
 msgstr "Bewerken"
 
@@ -1159,7 +1199,7 @@ msgstr "Namespace wijzigen"
 msgid "Edit remote"
 msgstr "Op afstand bewerken"
 
-#: src/containers/execution-environment/registry-list.tsx:215
+#: src/containers/execution-environment/registry-list.tsx:214
 msgid "Edit remote registry"
 msgstr "Extern register bewerken"
 
@@ -1171,7 +1211,7 @@ msgstr "Extern register bewerken"
 msgid "Edit resources"
 msgstr "Hulpbronnen bewerken"
 
-#: src/containers/role-management/role-edit.tsx:159
+#: src/containers/role-management/role-edit.tsx:160
 msgid "Edit role permissions"
 msgstr ""
 
@@ -1184,21 +1224,21 @@ msgid "Edit user"
 msgstr "Gebruiker wijzigen"
 
 #: src/components/rbac/role-list-table.tsx:54
-#: src/containers/role-management/role-list.tsx:184
-#: src/containers/role-management/role-list.tsx:264
-#: src/containers/role-management/role-list.tsx:273
-#: src/containers/role-management/role-list.tsx:302
-#: src/containers/role-management/role-list.tsx:306
-#: src/containers/role-management/role-list.tsx:395
+#: src/containers/role-management/role-list.tsx:185
+#: src/containers/role-management/role-list.tsx:265
+#: src/containers/role-management/role-list.tsx:274
+#: src/containers/role-management/role-list.tsx:303
+#: src/containers/role-management/role-list.tsx:307
+#: src/containers/role-management/role-list.tsx:401
 msgid "Editable"
 msgstr ""
 
 #: src/components/rbac/user-form.tsx:91
-#: src/containers/group-management/group-detail.tsx:554
-#: src/containers/group-management/group-detail.tsx:626
-#: src/containers/user-management/user-list.tsx:174
-#: src/containers/user-management/user-list.tsx:213
-#: src/containers/user-management/user-list.tsx:276
+#: src/containers/group-management/group-detail.tsx:552
+#: src/containers/group-management/group-detail.tsx:624
+#: src/containers/user-management/user-list.tsx:173
+#: src/containers/user-management/user-list.tsx:212
+#: src/containers/user-management/user-list.tsx:275
 msgid "Email"
 msgstr "E-mail"
 
@@ -1214,7 +1254,7 @@ msgstr "Omgeving"
 #~ msgid "Error deleting collection."
 #~ msgstr "Error deleting collection."
 
-#: src/containers/group-management/group-list.tsx:476
+#: src/containers/group-management/group-list.tsx:475
 msgid "Error deleting group."
 msgstr "Fout bij verwijderen groep."
 
@@ -1372,7 +1412,7 @@ msgstr "Error {statusCode} - {statusText}: You do not have the required permissi
 msgid "Execution Environment"
 msgstr "Uitvoeringsomgeving"
 
-#: src/components/execution-environment-header/execution-environment-header.tsx:39
+#: src/components/execution-environment-header/execution-environment-header.tsx:40
 #: src/containers/execution-environment-list/execution_environment_list.tsx:175
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:107
 #: src/loaders/standalone/standalone-loader.tsx:370
@@ -1384,7 +1424,7 @@ msgstr "Uitvoeringsomgevingen"
 msgid "Execution environment \"{0}\" has been added successfully."
 msgstr ""
 
-#: src/containers/execution-environment/registry-list.tsx:543
+#: src/containers/execution-environment/registry-list.tsx:542
 msgid "Execution environment \"{name}\" could not be indexed."
 msgstr "Execution environment \"{name}\" could not be indexed."
 
@@ -1428,15 +1468,20 @@ msgstr "Mislukt"
 msgid "Failed to retrieve user data."
 msgstr "Ophalen gebruikersgegevens mislukt."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:523
+#: src/containers/namespace-detail/namespace-detail.tsx:522
 msgid "Failed to sign all collections."
 msgstr "Failed to sign all collections."
 
-#: src/components/headers/collection-header.tsx:690
+#: src/components/headers/collection-header.tsx:689
 msgid "Failed to sign all versions in the collection."
 msgstr "Failed to sign all versions in the collection."
 
-#: src/components/headers/collection-header.tsx:741
+#: src/utilities/repo-signing.ts:25
+#: src/utilities/repo-signing.ts:55
+msgid "Failed to sign the container version."
+msgstr ""
+
+#: src/components/headers/collection-header.tsx:740
 msgid "Failed to sign the version."
 msgstr "Failed to sign the version."
 
@@ -1467,7 +1512,7 @@ msgstr "Filteren op {0}"
 msgid "Find content"
 msgstr "Inhoud zoeken"
 
-#: src/containers/execution-environment/registry-list.tsx:415
+#: src/containers/execution-environment/registry-list.tsx:414
 msgid "Find execution environments in this registry"
 msgstr "Uitvoeringsomgevingen in dit register zoeken"
 
@@ -1477,11 +1522,11 @@ msgid "Finished at"
 msgstr "Voltooid op"
 
 #: src/components/rbac/user-form.tsx:89
-#: src/containers/group-management/group-detail.tsx:546
-#: src/containers/group-management/group-detail.tsx:636
-#: src/containers/user-management/user-list.tsx:166
-#: src/containers/user-management/user-list.tsx:211
-#: src/containers/user-management/user-list.tsx:264
+#: src/containers/group-management/group-detail.tsx:544
+#: src/containers/group-management/group-detail.tsx:634
+#: src/containers/user-management/user-list.tsx:165
+#: src/containers/user-management/user-list.tsx:210
+#: src/containers/user-management/user-list.tsx:263
 msgid "First name"
 msgstr "Voornaam"
 
@@ -1493,7 +1538,7 @@ msgstr "Logs volgen"
 msgid "Galaxy Logo"
 msgstr "Galaxy-logo"
 
-#: src/containers/role-management/role-list.tsx:308
+#: src/containers/role-management/role-list.tsx:309
 msgid "Galaxy only"
 msgstr ""
 
@@ -1501,7 +1546,7 @@ msgstr ""
 msgid "Get token"
 msgstr "Token ophalen"
 
-#: src/utilities/wait-for-task.ts:17
+#: src/utilities/wait-for-task.ts:18
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "Wachten op een taak wordt na 10 pogingen opgegeven."
 
@@ -1530,7 +1575,7 @@ msgstr ""
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr ""
 
-#: src/containers/group-management/group-list.tsx:461
+#: src/containers/group-management/group-list.tsx:460
 msgid "Group \"{0}\" has been successfully deleted."
 msgstr "Group \"{0}\" has been successfully deleted."
 
@@ -1548,26 +1593,26 @@ msgstr ""
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:384
+#: src/containers/group-management/group-detail.tsx:382
 msgid "Group \"{group}\" could not be deleted."
 msgstr "Group \"{group}\" could not be deleted."
 
-#: src/containers/group-management/group-detail.tsx:376
+#: src/containers/group-management/group-detail.tsx:374
 msgid "Group \"{group}\" has been successfully deleted."
 msgstr "Group \"{group}\" has been successfully deleted."
 
-#: src/containers/group-management/group-detail.tsx:745
+#: src/containers/group-management/group-detail.tsx:743
 msgid "Group could not be displayed."
 msgstr ""
 
 #: src/components/rbac/owners-tab.tsx:123
-#: src/containers/group-management/group-list.tsx:394
+#: src/containers/group-management/group-list.tsx:393
 msgid "Group list"
 msgstr "Groepslijst"
 
-#: src/containers/group-management/group-list.tsx:185
-#: src/containers/group-management/group-list.tsx:225
-#: src/containers/group-management/group-list.tsx:380
+#: src/containers/group-management/group-list.tsx:184
+#: src/containers/group-management/group-list.tsx:224
+#: src/containers/group-management/group-list.tsx:379
 msgid "Group name"
 msgstr ""
 
@@ -1575,26 +1620,26 @@ msgstr ""
 msgid "Group {0}"
 msgstr ""
 
-#: src/components/execution-environment-header/execution-environment-header.tsx:61
+#: src/components/execution-environment-header/execution-environment-header.tsx:62
 msgid "Group {groupId}"
 msgstr ""
 
 #: src/components/rbac/user-form.tsx:149
 #: src/components/rbac/user-form.tsx:163
 #: src/constants.tsx:55
-#: src/containers/group-management/group-detail.tsx:196
-#: src/containers/group-management/group-list.tsx:146
-#: src/containers/user-management/user-list.tsx:282
+#: src/containers/group-management/group-detail.tsx:194
+#: src/containers/group-management/group-list.tsx:145
+#: src/containers/user-management/user-list.tsx:281
 #: src/loaders/standalone/standalone-loader.tsx:400
 msgid "Groups"
 msgstr "Groepen"
 
 #: src/components/rbac/user-form.tsx:298
-#: src/containers/group-management/group-list.tsx:503
+#: src/containers/group-management/group-list.tsx:502
 msgid "Groups list could not be displayed."
 msgstr "Groups list could not be displayed."
 
-#: src/containers/group-management/group-list.tsx:154
+#: src/containers/group-management/group-list.tsx:153
 msgid "Groups will appear once created"
 msgstr "Groepen zullen verschijnen zodra ze zijn aangemaakt"
 
@@ -1639,7 +1684,7 @@ msgstr "Image \"{digest}\" has been successfully deleted."
 msgid "Image layers"
 msgstr "Afbeeldingslagen"
 
-#: src/components/execution-environment-header/execution-environment-header.tsx:25
+#: src/components/execution-environment-header/execution-environment-header.tsx:26
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:304
 msgid "Images"
 msgstr "Afbeeldingen"
@@ -1666,7 +1711,7 @@ msgstr "Logboek importeren"
 msgid "Imports"
 msgstr "Invoer"
 
-#: src/containers/execution-environment/registry-list.tsx:423
+#: src/containers/execution-environment/registry-list.tsx:422
 msgid "Index execution environments"
 msgstr "Index uitvoeringsomgevingen"
 
@@ -1674,7 +1719,7 @@ msgstr "Index uitvoeringsomgevingen"
 #~ msgid "Indexing execution environments in {name}"
 #~ msgstr "Indexing execution environments in {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:416
+#: src/containers/execution-environment/registry-list.tsx:415
 msgid "Indexing execution environments is only supported on registry.redhat.io"
 msgstr "Het indexeren van uitvoeringsomgevingen wordt alleen ondersteund op registry.redhat.io"
 
@@ -1682,7 +1727,7 @@ msgstr "Het indexeren van uitvoeringsomgevingen wordt alleen ondersteund op regi
 #~ msgid "Indexing failed for {name}"
 #~ msgstr "Indexing failed for {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:527
+#: src/containers/execution-environment/registry-list.tsx:526
 msgid "Indexing started for execution environment \"{name}\"."
 msgstr "Indexing started for execution environment \"{name}\"."
 
@@ -1744,11 +1789,11 @@ msgid "Last modified"
 msgstr "Laatste wijziging"
 
 #: src/components/rbac/user-form.tsx:90
-#: src/containers/group-management/group-detail.tsx:550
-#: src/containers/group-management/group-detail.tsx:631
-#: src/containers/user-management/user-list.tsx:170
-#: src/containers/user-management/user-list.tsx:212
-#: src/containers/user-management/user-list.tsx:270
+#: src/containers/group-management/group-detail.tsx:548
+#: src/containers/group-management/group-detail.tsx:629
+#: src/containers/user-management/user-list.tsx:169
+#: src/containers/user-management/user-list.tsx:211
+#: src/containers/user-management/user-list.tsx:269
 msgid "Last name"
 msgstr "Achternaam"
 
@@ -1758,7 +1803,7 @@ msgstr "Laatste synchronisatie"
 
 #: src/components/repositories/local-repository-table.tsx:60
 #: src/components/repositories/remote-repository-table.tsx:74
-#: src/containers/execution-environment/registry-list.tsx:332
+#: src/containers/execution-environment/registry-list.tsx:331
 msgid "Last updated"
 msgstr "Laatst geüpdatet"
 
@@ -1766,7 +1811,7 @@ msgstr "Laatst geüpdatet"
 msgid "Last updated <0/>"
 msgstr "Laatst geüpdatet <0/>"
 
-#: src/components/execution-environment-header/execution-environment-header.tsx:70
+#: src/components/execution-environment-header/execution-environment-header.tsx:82
 msgid "Last updated from registry {0}"
 msgstr "Laatst bijgewerkt vanuit register {0}"
 
@@ -1830,6 +1875,10 @@ msgstr "Logo URL"
 msgid "Logout"
 msgstr "Afmelden"
 
+#: src/constants.tsx:379
+msgid "Manage all content types."
+msgstr ""
+
 #: src/components/execution-environment/tag-manifest-modal.tsx:134
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:383
 msgid "Manage tags"
@@ -1887,7 +1936,7 @@ msgstr "Mijn profiel"
 #: src/components/my-imports/import-list.tsx:81
 #: src/components/my-imports/import-list.tsx:119
 #: src/components/namespace-form/namespace-form.tsx:43
-#: src/components/namespace-modal/namespace-modal.tsx:117
+#: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/rbac/group-modal.tsx:75
 #: src/components/rbac/role-form.tsx:90
 #: src/components/rbac/select-group.tsx:144
@@ -1895,11 +1944,11 @@ msgstr "Mijn profiel"
 #: src/components/rbac/select-roles.tsx:178
 #: src/components/rbac/select-roles.tsx:190
 #: src/components/repositories/remote-form.tsx:194
-#: src/containers/execution-environment/registry-list.tsx:265
-#: src/containers/execution-environment/registry-list.tsx:293
-#: src/containers/execution-environment/registry-list.tsx:322
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:316
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:348
+#: src/containers/execution-environment/registry-list.tsx:264
+#: src/containers/execution-environment/registry-list.tsx:292
+#: src/containers/execution-environment/registry-list.tsx:321
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:317
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:349
 #: src/containers/namespace-list/namespace-list.tsx:232
 #: src/containers/task-management/task_detail.tsx:268
 msgid "Name"
@@ -1939,11 +1988,11 @@ msgstr "Namespace \"{name}\" could not be deleted."
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "Namespace \"{name}\" succesvol verwijderd."
 
-#: src/components/namespace-modal/namespace-modal.tsx:125
+#: src/components/namespace-modal/namespace-modal.tsx:130
 msgid "Namespace name"
 msgstr "Namespace"
 
-#: src/components/namespace-modal/namespace-modal.tsx:124
+#: src/components/namespace-modal/namespace-modal.tsx:129
 msgid "Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’."
 msgstr "Namespace-namen zijn beperkt tot alfanumerieke tekens en underscores, moeten minimaal 2 tekens lang zijn en mogen niet beginnen met een '_'."
 
@@ -1958,7 +2007,7 @@ msgstr "Eigenaars van de namespace"
 #~ msgstr "Namespace successfully edited."
 
 #: src/loaders/standalone/standalone-loader.tsx:350
-#: src/paths.ts:76
+#: src/paths.ts:77
 msgid "Namespaces"
 msgstr "Namespaces"
 
@@ -2033,13 +2082,13 @@ msgstr "Nog geen containerrepository's"
 msgid "No data"
 msgstr "Geen gegevens"
 
-#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:28
-#: src/containers/collection-detail/collection-dependencies.tsx:140
-#: src/containers/collection-detail/collection-dependencies.tsx:148
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:26
+#: src/containers/collection-detail/collection-dependencies.tsx:144
+#: src/containers/collection-detail/collection-dependencies.tsx:152
 msgid "No dependencies"
 msgstr "Geen afhankelijkheden"
 
-#: src/containers/group-management/group-list.tsx:153
+#: src/containers/group-management/group-list.tsx:152
 msgid "No groups yet"
 msgstr "Nog geen groepen"
 
@@ -2071,7 +2120,7 @@ msgstr "Geen oudertaak"
 msgid "No permission"
 msgstr "Geen machtiging"
 
-#: src/containers/execution-environment/registry-list.tsx:235
+#: src/containers/execution-environment/registry-list.tsx:234
 msgid "No remote registries yet"
 msgstr "Nog geen registers op afstand"
 
@@ -2107,8 +2156,8 @@ msgstr "Nog geen taken"
 msgid "No users will be affected."
 msgstr "Geen enkele gebruiker zal hierdoor worden getroffen."
 
-#: src/containers/group-management/group-detail.tsx:507
-#: src/containers/user-management/user-list.tsx:245
+#: src/containers/group-management/group-detail.tsx:505
+#: src/containers/user-management/user-list.tsx:244
 msgid "No users yet"
 msgstr "Nog geen gebruikers"
 
@@ -2150,8 +2199,8 @@ msgstr "OS / Arch"
 msgid "Offline token"
 msgstr "Offline token"
 
-#: src/components/execution-environment-header/execution-environment-header.tsx:26
-#: src/components/execution-environment-header/execution-environment-header.tsx:52
+#: src/components/execution-environment-header/execution-environment-header.tsx:27
+#: src/components/execution-environment-header/execution-environment-header.tsx:53
 msgid "Owners"
 msgstr ""
 
@@ -2171,7 +2220,7 @@ msgstr "Oudertaak"
 #~ msgid "Partially signed"
 #~ msgstr "Partially signed"
 
-#: src/paths.ts:77
+#: src/paths.ts:78
 msgid "Partners"
 msgstr "Partners"
 
@@ -2245,12 +2294,12 @@ msgstr "In afwachting"
 #~ msgid "Permissions"
 #~ msgstr "Machtigingen"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:100
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:101
 msgid "Permissions for group \"{0}\" could not be displayed."
 msgstr "Permissions for group \"{0}\" could not be displayed."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:297
-#: src/containers/role-management/role-list.tsx:232
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:298
+#: src/containers/role-management/role-list.tsx:233
 msgid "Please add a role by using the button below."
 msgstr ""
 
@@ -2281,7 +2330,7 @@ msgstr "Geef de naam van de namespace op"
 #: src/components/markdown-editor/markdown-editor.tsx:38
 #: src/components/rbac/owners-tab.tsx:366
 #: src/components/rbac/owners-tab.tsx:418
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:215
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:216
 msgid "Preview"
 msgstr "Voorvertoning"
 
@@ -2456,6 +2505,14 @@ msgstr "Push nieuwe containers"
 msgid "Push to existing containers"
 msgstr "Push naar bestaande containers"
 
+#: src/constants.tsx:385
+msgid "Push, and change execution environments."
+msgstr ""
+
+#: src/constants.tsx:384
+msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
+msgstr ""
+
 #: src/components/repositories/remote-form.tsx:675
 msgid "Rate Limit"
 msgstr "Tarieflimiet"
@@ -2484,11 +2541,11 @@ msgstr "Registries list could not be displayed."
 msgid "Registry"
 msgstr "Register"
 
-#: src/containers/execution-environment/registry-list.tsx:337
+#: src/containers/execution-environment/registry-list.tsx:336
 msgid "Registry URL"
 msgstr "URL register"
 
-#: src/containers/execution-environment/registry-list.tsx:342
+#: src/containers/execution-environment/registry-list.tsx:341
 msgid "Registry sync status"
 msgstr "Status registersynchronisatie"
 
@@ -2508,7 +2565,7 @@ msgid "Remote"
 msgstr "Afstand"
 
 #: src/constants.tsx:96
-#: src/containers/execution-environment/registry-list.tsx:232
+#: src/containers/execution-environment/registry-list.tsx:231
 #: src/loaders/standalone/standalone-loader.tsx:379
 msgid "Remote Registries"
 msgstr "Externe registers"
@@ -2517,15 +2574,15 @@ msgstr "Externe registers"
 msgid "Remote name"
 msgstr "Externe naam"
 
-#: src/containers/execution-environment/registry-list.tsx:482
+#: src/containers/execution-environment/registry-list.tsx:481
 msgid "Remote registry \"{name}\" could not be deleted."
 msgstr "Remote registry \"{name}\" could not be deleted."
 
-#: src/containers/execution-environment/registry-list.tsx:515
+#: src/containers/execution-environment/registry-list.tsx:514
 msgid "Remote registry \"{name}\" could not be synced."
 msgstr "Remote registry \"{name}\" could not be synced."
 
-#: src/containers/execution-environment/registry-list.tsx:473
+#: src/containers/execution-environment/registry-list.tsx:472
 msgid "Remote registry \"{name}\" has been successfully deleted."
 msgstr "Extern register {name} met succes verwijderd"
 
@@ -2533,7 +2590,7 @@ msgstr "Extern register {name} met succes verwijderd"
 msgid "Remote repositories will appear once added"
 msgstr "Externe repository's zullen verschijnen zodra ze zijn toegevoegd"
 
-#: src/containers/group-management/group-detail.tsx:680
+#: src/containers/group-management/group-detail.tsx:678
 msgid "Remove"
 msgstr "Verwijderen"
 
@@ -2550,7 +2607,7 @@ msgid "Remove group {groupname}?"
 msgstr ""
 
 #: src/components/rbac/owners-tab.tsx:266
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:381
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:387
 msgid "Remove role"
 msgstr ""
 
@@ -2558,7 +2615,7 @@ msgstr ""
 msgid "Remove role {role}?"
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:420
+#: src/containers/group-management/group-detail.tsx:418
 msgid "Remove user from group?"
 msgstr "Gebruiker uit groep verwijderen?"
 
@@ -2605,56 +2662,56 @@ msgstr "Hulpbronnen"
 #: src/components/rbac/owners-tab.tsx:237
 #: src/components/rbac/role-list-table.tsx:44
 #: src/components/rbac/select-roles.tsx:93
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:231
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:232
 msgid "Role"
 msgstr "Rol"
 
-#: src/containers/role-management/role-create.tsx:146
+#: src/containers/role-management/role-create.tsx:145
 msgid "Role \"{0}\" could not be created."
 msgstr ""
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:123
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:124
 msgid "Role \"{0}\" could not be deleted."
 msgstr ""
 
-#: src/containers/role-management/role-edit.tsx:109
+#: src/containers/role-management/role-edit.tsx:110
 msgid "Role \"{0}\" could not be displayed."
 msgstr ""
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:115
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:116
 msgid "Role \"{0}\" has been successfully removed."
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:437
+#: src/containers/role-management/role-list.tsx:443
 msgid "Role \"{name}\" could not be deleted."
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:430
+#: src/containers/role-management/role-list.tsx:436
 msgid "Role \"{name}\" has been successfully deleted."
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:169
-#: src/containers/role-management/role-list.tsx:259
-#: src/containers/role-management/role-list.tsx:307
+#: src/containers/role-management/role-list.tsx:170
+#: src/containers/role-management/role-list.tsx:260
+#: src/containers/role-management/role-list.tsx:308
 msgid "Role name"
 msgstr ""
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:277
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:278
 msgid "Role {0} could not be assigned to group {1}."
 msgstr ""
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:264
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:265
 msgid "Role {0} has been successfully added to {1}."
 msgstr ""
 
-#: src/containers/role-management/role-create.tsx:61
-#: src/containers/role-management/role-edit.tsx:148
-#: src/containers/role-management/role-list.tsx:226
+#: src/containers/role-management/role-create.tsx:60
+#: src/containers/role-management/role-edit.tsx:149
+#: src/containers/role-management/role-list.tsx:227
 #: src/loaders/standalone/standalone-loader.tsx:404
 msgid "Roles"
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:524
+#: src/containers/role-management/role-list.tsx:530
 msgid "Roles list could not be displayed."
 msgstr ""
 
@@ -2681,7 +2738,7 @@ msgstr "SSO URL"
 msgid "Save"
 msgstr "Opslaan"
 
-#: src/containers/execution-environment-detail/base.tsx:212
+#: src/containers/execution-environment-detail/base.tsx:229
 #: src/containers/execution-environment-list/execution_environment_list.tsx:457
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "Terug naar uitvoeringsomgevingen \"{0}\""
@@ -2714,13 +2771,13 @@ msgstr "Bladeren naar het einde"
 #~ msgid "Search my namespaces"
 #~ msgstr "Search my namespaces"
 
-#: src/containers/execution-environment/registry-list.tsx:501
-#: src/containers/execution-environment-detail/base.tsx:336
-#: src/containers/execution-environment-list/execution_environment_list.tsx:538
+#: src/containers/execution-environment/registry-list.tsx:500
+#: src/containers/execution-environment-detail/base.tsx:354
+#: src/containers/execution-environment-list/execution_environment_list.tsx:539
 msgid "See the task management <0>detail page </0>for the status of this task."
 msgstr "See the task management <0>detail page </0>for the status of this task."
 
-#: src/containers/execution-environment/registry-list.tsx:530
+#: src/containers/execution-environment/registry-list.tsx:529
 msgid "See the task management <0>detail page</0>for the status of this task."
 msgstr "See the task management <0>detail page</0>for the status of this task."
 
@@ -2767,11 +2824,11 @@ msgstr "Machtigingen selecteren"
 #: src/components/rbac/owners-tab.tsx:349
 #: src/components/rbac/owners-tab.tsx:402
 #: src/components/rbac/owners-tab.tsx:429
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:202
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:203
 msgid "Select role(s)"
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:349
+#: src/containers/group-management/group-detail.tsx:347
 msgid "Select users"
 msgstr "Gebruikers selecteren"
 
@@ -2816,6 +2873,7 @@ msgid "Showing:"
 msgstr "Tonen:"
 
 #: src/components/signing/sign-single-certificate-modal.tsx:37
+#: src/containers/execution-environment-detail/base.tsx:151
 msgid "Sign"
 msgstr "Sign"
 
@@ -2885,6 +2943,10 @@ msgstr "Signing started for all versions in collection \"{0}\""
 #: src/components/headers/collection-header.tsx:750
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "Signing started for collection \"{0} v{1}\"."
+
+#: src/utilities/repo-signing.ts:42
+msgid "Signing started for container \"{0}\"."
+msgstr ""
 
 #: src/components/repositories/remote-form.tsx:281
 msgid "Single sign on URL."
@@ -2980,7 +3042,7 @@ msgstr "Succesvol gekopieerd naar klembord!"
 #~ msgstr "Successfully stopped task."
 
 #: src/components/rbac/user-form.tsx:203
-#: src/containers/user-management/user-list.tsx:358
+#: src/containers/user-management/user-list.tsx:357
 msgid "Super user"
 msgstr "Supergebruiker"
 
@@ -2989,7 +3051,7 @@ msgid "Super users can't disable themselves."
 msgstr "Supergebruikers kunnen zichzelf niet uitschakelen."
 
 #: src/components/rbac/user-form.tsx:195
-#: src/containers/user-management/user-list.tsx:355
+#: src/containers/user-management/user-list.tsx:354
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "Supergebruikers hebben alle systeemmachtigingen, ongeacht de groepen waarin ze zitten."
 
@@ -2998,13 +3060,13 @@ msgstr "Supergebruikers hebben alle systeemmachtigingen, ongeacht de groepen waa
 msgid "Sync"
 msgstr "Synchroniseren"
 
-#: src/containers/execution-environment-detail/base.tsx:347
-#: src/containers/execution-environment-list/execution_environment_list.tsx:548
+#: src/containers/execution-environment-detail/base.tsx:365
+#: src/containers/execution-environment-list/execution_environment_list.tsx:549
 msgid "Sync failed for {name}"
 msgstr "Sync mislukt voor {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:376
-#: src/containers/execution-environment-detail/base.tsx:113
+#: src/containers/execution-environment/registry-list.tsx:375
+#: src/containers/execution-environment-detail/base.tsx:119
 #: src/containers/execution-environment-list/execution_environment_list.tsx:360
 msgid "Sync from registry"
 msgstr "Synchroniseren vanuit register"
@@ -3015,12 +3077,12 @@ msgstr "Synchroniseren vanuit register"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:533
+#: src/containers/execution-environment-list/execution_environment_list.tsx:534
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "Sync started for execution environment \"{name}\"."
 
-#: src/containers/execution-environment/registry-list.tsx:498
-#: src/containers/execution-environment-detail/base.tsx:333
+#: src/containers/execution-environment/registry-list.tsx:497
+#: src/containers/execution-environment-detail/base.tsx:351
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "Sync started for remote registry \"{name}\"."
 
@@ -3069,7 +3131,7 @@ msgstr "Taakbeheer"
 msgid "Task detail"
 msgstr "Taakdetail"
 
-#: src/utilities/wait-for-task.ts:10
+#: src/utilities/wait-for-task.ts:11
 msgid "Task failed without error message."
 msgstr ""
 
@@ -3162,7 +3224,7 @@ msgstr "De collectie die u hebt geselecteerd lijkt niet overeen te komen met {0}
 msgid "The file is not available for this version of {collectionName}"
 msgstr "Het bestand is niet beschikbaar voor deze versie van {collectionName}"
 
-#: src/components/rbac/preview-roles.tsx:26
+#: src/components/rbac/preview-roles.tsx:27
 msgid "The following roles will be applied to group: <0>{0}</0>"
 msgstr ""
 
@@ -3202,11 +3264,11 @@ msgstr ""
 msgid "There are currently no owners assigned."
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:231
+#: src/containers/role-management/role-list.tsx:232
 msgid "There are currently no roles"
 msgstr ""
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:296
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:297
 msgid "There are currently no roles assigned to this group."
 msgstr ""
 
@@ -3247,11 +3309,11 @@ msgstr "Deze account is niet ingesteld om namespaces te beheren"
 msgid "This collection has been deprecated."
 msgstr "Deze collectie is afgeschreven."
 
-#: src/containers/collection-detail/collection-dependencies.tsx:157
+#: src/containers/collection-detail/collection-dependencies.tsx:161
 msgid "This collection is being used by"
 msgstr "Deze collectie wordt gebruikt door"
 
-#: src/containers/collection-detail/collection-dependencies.tsx:145
+#: src/containers/collection-detail/collection-dependencies.tsx:149
 msgid "This collections requires the following collections for use"
 msgstr "Deze collectie vereist de volgende collecties voor gebruik"
 
@@ -3287,7 +3349,7 @@ msgstr "Deze tag is al geselecteerd voor deze afbeelding. U kunt deze niet tweem
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "Dit gebruikt dezelfde {docsAnsibleLink}-indeling als de ansible-galaxy CLI met het voorbehoud dat rollen niet worden ondersteund en dat de bronparameter niet wordt ondersteund."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:149
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:150
 msgid "This will revoke all permissions associated with this role from the group."
 msgstr ""
 
@@ -3372,6 +3434,10 @@ msgstr "Bijgewerkt <0/>"
 msgid "Upload"
 msgstr "Uploaden"
 
+#: src/constants.tsx:381
+msgid "Upload and modify collections."
+msgstr ""
+
 #: src/containers/namespace-detail/namespace-detail.tsx:371
 #: src/containers/namespace-detail/namespace-detail.tsx:742
 msgid "Upload collection"
@@ -3399,7 +3465,7 @@ msgid "Upstream name"
 msgstr "Naam stroomopwaarts"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:279
-#: src/containers/execution-environment-detail/base.tsx:126
+#: src/containers/execution-environment-detail/base.tsx:132
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:398
 #: src/containers/execution-environment-list/execution_environment_list.tsx:373
 msgid "Use in Controller"
@@ -3445,7 +3511,7 @@ msgstr "Gebruik dit token voor authenticatie van de <0>ansible-galaxy</0>-client
 msgid "Useful links"
 msgstr "Nuttige links"
 
-#: src/containers/group-management/group-detail.tsx:448
+#: src/containers/group-management/group-detail.tsx:446
 msgid "User \"{0}\" could not be added to group \"{1}\"."
 msgstr "User \"{0}\" could not be added to group \"{1}\"."
 
@@ -3454,11 +3520,11 @@ msgstr "User \"{0}\" could not be added to group \"{1}\"."
 msgid "User \"{0}\" could not be deleted."
 msgstr "User \"{0}\" could not be deleted."
 
-#: src/containers/group-management/group-detail.tsx:776
+#: src/containers/group-management/group-detail.tsx:774
 msgid "User \"{0}\" could not be removed from group \"{name}\"."
 msgstr "User \"{0}\" could not be removed from group \"{name}\"."
 
-#: src/containers/group-management/group-detail.tsx:441
+#: src/containers/group-management/group-detail.tsx:439
 msgid "User \"{0}\" has been successfully added to group \"{1}\"."
 msgstr "User \"{0}\" has been successfully added to group \"{1}\"."
 
@@ -3466,7 +3532,7 @@ msgstr "User \"{0}\" has been successfully added to group \"{1}\"."
 msgid "User \"{0}\" has been successfully deleted."
 msgstr "User \"{0}\" has been successfully deleted."
 
-#: src/containers/group-management/group-detail.tsx:768
+#: src/containers/group-management/group-detail.tsx:766
 msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
 msgstr ""
 
@@ -3474,7 +3540,7 @@ msgstr ""
 #~ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
 #~ msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:422
+#: src/containers/group-management/group-detail.tsx:420
 msgid "User <0>{username}</0> will be removed from group <1>{groupname}</1>."
 msgstr ""
 
@@ -3494,8 +3560,8 @@ msgstr "Gebruikersgroepen"
 msgid "User details"
 msgstr "Gebruikersdetails"
 
-#: src/containers/group-management/group-detail.tsx:655
-#: src/containers/user-management/user-list.tsx:300
+#: src/containers/group-management/group-detail.tsx:653
+#: src/containers/user-management/user-list.tsx:299
 msgid "User list"
 msgstr "Gebruikerslijst"
 
@@ -3506,12 +3572,12 @@ msgstr "Type gebruiker"
 #: src/components/about-modal/about-modal.tsx:98
 #: src/components/rbac/user-form.tsx:88
 #: src/components/repositories/remote-form.tsx:355
-#: src/containers/group-management/group-detail.tsx:542
-#: src/containers/group-management/group-detail.tsx:621
+#: src/containers/group-management/group-detail.tsx:540
+#: src/containers/group-management/group-detail.tsx:619
 #: src/containers/login/login.tsx:52
-#: src/containers/user-management/user-list.tsx:162
-#: src/containers/user-management/user-list.tsx:210
-#: src/containers/user-management/user-list.tsx:259
+#: src/containers/user-management/user-list.tsx:161
+#: src/containers/user-management/user-list.tsx:209
+#: src/containers/user-management/user-list.tsx:258
 msgid "Username"
 msgstr "Gebruikersnaam"
 
@@ -3520,28 +3586,28 @@ msgid "Username: {0}"
 msgstr "Gebruikersnaam: {0}"
 
 #: src/constants.tsx:45
-#: src/containers/group-management/group-detail.tsx:159
+#: src/containers/group-management/group-detail.tsx:157
 #: src/containers/user-management/user-create.tsx:49
 #: src/containers/user-management/user-detail.tsx:80
 #: src/containers/user-management/user-edit.tsx:62
-#: src/containers/user-management/user-list.tsx:139
+#: src/containers/user-management/user-list.tsx:138
 #: src/loaders/standalone/standalone-loader.tsx:396
 msgid "Users"
 msgstr "Gebruikers"
 
-#: src/containers/group-management/group-detail.tsx:318
-#: src/containers/group-management/group-detail.tsx:467
-#: src/containers/group-management/group-detail.tsx:727
-#: src/containers/group-management/group-list.tsx:322
-#: src/containers/user-management/user-list.tsx:419
+#: src/containers/group-management/group-detail.tsx:316
+#: src/containers/group-management/group-detail.tsx:465
+#: src/containers/group-management/group-detail.tsx:725
+#: src/containers/group-management/group-list.tsx:321
+#: src/containers/user-management/user-list.tsx:418
 msgid "Users list could not be displayed."
 msgstr "Users list could not be displayed."
 
-#: src/containers/group-management/group-detail.tsx:508
+#: src/containers/group-management/group-detail.tsx:506
 msgid "Users will appear once added to this group"
 msgstr "Gebruikers verschijnen nadat ze zijn toegevoegd aan deze groep"
 
-#: src/containers/user-management/user-list.tsx:246
+#: src/containers/user-management/user-list.tsx:245
 msgid "Users will appear once created"
 msgstr "Gebruikers verschijnen zodra ze zijn aangemaakt"
 
@@ -3614,6 +3680,22 @@ msgstr "Synclist weergeven"
 msgid "View user"
 msgstr "Gebruiker weergeven"
 
+#: src/constants.tsx:388
+msgid "View, add, remove and change groups."
+msgstr ""
+
+#: src/constants.tsx:390
+msgid "View, add, remove and change synclists."
+msgstr ""
+
+#: src/constants.tsx:389
+msgid "View, add, remove and change users."
+msgstr ""
+
+#: src/constants.tsx:391
+msgid "View, and cancel any task."
+msgstr ""
+
 #: src/components/my-imports/import-list.tsx:102
 #: src/constants.tsx:374
 #: src/containers/task-management/task-list-view.tsx:175
@@ -3651,7 +3733,7 @@ msgstr "Ja"
 msgid "Yes, stop"
 msgstr "Ja, stoppen"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:144
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:145
 msgid "You are about to remove <0>{0}</0> from <1>{1}</1>."
 msgstr ""
 
@@ -3691,7 +3773,7 @@ msgstr "U kunt het tabblad Hulpbronnen op uw profiel aanpassen door hier aangepa
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "U hebt momenteel geen containerrepository's. Voeg een containerrepository toe via de CLI om te beginnen."
 
-#: src/containers/execution-environment/registry-list.tsx:236
+#: src/containers/execution-environment/registry-list.tsx:235
 msgid "You currently have no remote registries."
 msgstr "U hebt momenteel geen externe registers."
 
@@ -3728,7 +3810,7 @@ msgstr "U moet ingelogd zijn om de tarball te kunnen downloaden."
 msgid "You have unsaved changes"
 msgstr "Er zijn niet-opgeslagen wijzigingen"
 
-#: src/containers/group-management/group-detail.tsx:269
+#: src/containers/group-management/group-detail.tsx:267
 msgid "add-user-modal"
 msgstr "add-user-modal"
 
@@ -3791,7 +3873,7 @@ msgstr "sign state"
 msgid "tags"
 msgstr "Tags"
 
-#: src/containers/role-management/role-list.tsx:303
+#: src/containers/role-management/role-list.tsx:304
 msgid "true"
 msgstr ""
 
