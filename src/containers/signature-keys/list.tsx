@@ -56,11 +56,7 @@ export class SignatureKeysList extends React.Component<
     ]);
 
     if (!params['page_size']) {
-      params['page_size'] = 10;
-    }
-
-    if (!params['sort']) {
-      params['sort'] = '-pulp_created';
+      params['page_size'] = 100;
     }
 
     this.state = {
@@ -86,8 +82,7 @@ export class SignatureKeysList extends React.Component<
     const { params, itemCount, loading, items, alerts, unauthorised } =
       this.state;
 
-    const noData =
-      items.length === 0 && !filterIsSet(params, ['name__contains', 'state']);
+    const noData = items.length === 0 && !filterIsSet(params, ['name']);
 
     return (
       <React.Fragment>
@@ -126,7 +121,7 @@ export class SignatureKeysList extends React.Component<
                             params={params}
                             filterConfig={[
                               {
-                                id: 'name__contains',
+                                id: 'name',
                                 title: t`Name`,
                               },
                             ]}
@@ -153,7 +148,7 @@ export class SignatureKeysList extends React.Component<
                     params={params}
                     ignoredParams={['page_size', 'page', 'sort', 'ordering']}
                     niceNames={{
-                      name__contains: t`Name`,
+                      name: t`Name`,
                     }}
                   />
                 </div>
@@ -182,7 +177,7 @@ export class SignatureKeysList extends React.Component<
       headers: [
         {
           title: t`Name`,
-          type: 'alpha',
+          type: 'none',
           id: 'name',
         },
         {
@@ -192,7 +187,7 @@ export class SignatureKeysList extends React.Component<
         },
         {
           title: t`Created on`,
-          type: 'numeric',
+          type: 'none',
           id: 'pulp_created',
         },
         {
