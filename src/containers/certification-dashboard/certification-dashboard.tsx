@@ -554,8 +554,7 @@ class CertificationDashboard extends React.Component<
           'success',
         ),
       )
-      .then(() => CollectionVersionAPI.list(this.state.params))
-      .then((result) => this.setState({ versions: result.data.data }))
+      .then(() => this.queryCollections())
       .catch((error) => {
         const description = !error.response
           ? error
@@ -587,8 +586,7 @@ class CertificationDashboard extends React.Component<
           'success',
         ),
       )
-      .then(() => CollectionVersionAPI.list(this.state.params))
-      .then((result) => this.setState({ versions: result.data.data }))
+      .then(() => this.queryCollections())
       .catch((error) => {
         const description = !error.response
           ? error
@@ -599,20 +597,31 @@ class CertificationDashboard extends React.Component<
           'danger',
           description,
         );
-      })
-      .finally(() => this.setState({ updatingVersions: [] }));
+      });
   }
 
   private queryCollections() {
     this.setState({ loading: true }, () =>
-      CollectionVersionAPI.list(this.state.params).then((result) => {
-        this.setState({
-          versions: result.data.data,
-          itemCount: result.data.meta.count,
-          loading: false,
-          updatingVersions: [],
-        });
-      }),
+      CollectionVersionAPI.list(this.state.params)
+        .then((result) => {
+          this.setState({
+            versions: result.data.data,
+            itemCount: result.data.meta.count,
+            loading: false,
+            updatingVersions: [],
+          });
+        })
+        .catch((error) => {
+          this.addAlert(
+            t`Error loading collections.`,
+            'danger',
+            error?.message,
+          );
+          this.setState({
+            loading: false,
+            updatingVersions: [],
+          });
+        }),
     );
   }
 
