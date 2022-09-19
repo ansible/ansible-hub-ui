@@ -52,7 +52,7 @@ jobs:
 
         SHORT_BRANCH=fix/refactor-ee-repositories
         GALAXY_NG_COMMIT=3c85dedb77f92687c659ad01f82947aa323b609b
-        
+
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "GALAXY_NG_COMMIT=${GALAXY_NG_COMMIT}" >> $GITHUB_ENV
 

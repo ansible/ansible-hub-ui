@@ -434,7 +434,7 @@ class ExecutionEnvironmentList extends React.Component<
     } = pulp?.repository?.remote || {};
     const remote = pulp?.repository ? !!pulp?.repository?.remote : true; // add only supports remote
     const isNew = !pulp?.repository; // only exists in real data
-    const distributionPulpId = pulp?.distribution?.pulp_id;
+    const distributionPulpId = pulp?.distribution?.id;
     const { alerts } = this.state;
     return (
       <RepositoryForm
