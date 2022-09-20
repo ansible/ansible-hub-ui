@@ -22,7 +22,12 @@ import {
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
-import { errorMessage } from 'src/utilities';
+import {
+  errorMessage,
+  ErrorMessagesType,
+  mapErrorMessages,
+  isFieldValid,
+} from 'src/utilities';
 
 interface IProps {
   name: string;
@@ -56,9 +61,10 @@ interface IState {
   registries?: { id: string; name: string }[];
   registrySelection?: { id: string; name: string }[];
   upstreamName: string;
-  formErrors?: {
+  /*formErrors?: {
     registries?: AlertType;
-  };
+  };*/
+  formErrors: ErrorMessagesType;
 }
 
 export class RepositoryForm extends React.Component<IProps, IState> {
@@ -75,9 +81,10 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       registries: null,
       registrySelection: [],
       upstreamName: this.props.upstreamName || '',
-      formErrors: {
+      /*formErrors: {
         registries: null,
-      },
+      },*/
+      formErrors: {},
     };
   }
 
@@ -94,18 +101,10 @@ export class RepositoryForm extends React.Component<IProps, IState> {
             });
           }
         })
-        .catch((e) => {
-          const { status, statusText } = e.response;
-          this.setState({
-            formErrors: {
-              ...this.state.formErrors,
-              registries: {
-                title: t`Registries list could not be displayed.`,
-                description: errorMessage(status, statusText),
-                variant: 'danger',
-              },
-            },
-          });
+        .catch((res) => {
+          debugger;
+          const error = mapErrorMessages(res);
+          this.setState({ formErrors: error });
         });
     }
   }
@@ -124,6 +123,8 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       addTagsExclude,
       formErrors,
     } = this.state;
+
+    this.validateName(this.state.name);
 
     return (
       <Modal
@@ -179,15 +180,15 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 key='name'
                 fieldId='name'
                 label={t`Name`}
-                helperTextInvalid={t`Container names can only contain alphanumeric characters, ".", "_", "-" and a up to one "/".`}
-                validated={this.validateName(name)}
+                helperTextInvalid={this.state.formErrors['name']}
+                validated={isFieldValid(this.state.formErrors, 'name')}
               >
                 <TextInput
                   id='name'
                   value={name}
                   isDisabled={!isNew}
                   onChange={(value) => this.setState({ name: value })}
-                  validated={this.validateName(name)}
+                  validated={isFieldValid(this.state.formErrors, 'name')}
                 />
               </FormGroup>
 
@@ -217,6 +218,31 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 isRequired={true}
               >
                 {formErrors?.registries ? (
+                  <></>
+                ) : (
+                  <>
+                    {registries ? (
+                      <APISearchTypeAhead
+                        loadResults={(name) => this.loadRegistries(name)}
+                        onClear={() => this.setState({ registrySelection: [] })}
+                        onSelect={(event, value) =>
+                          this.setState({
+                            registrySelection: registries.filter(
+                              ({ name }) => name === value,
+                            ),
+                          })
+                        }
+                        placeholderText={t`Select a registry`}
+                        results={registries}
+                        selections={registrySelection}
+                      />
+                    ) : (
+                      <Spinner />
+                    )}
+                  </>
+                )}
+
+                {/* formErrors?.registries ? (
                   <Alert
                     title={formErrors.registries.title}
                     variant='danger'
@@ -245,7 +271,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                       <Spinner />
                     )}
                   </>
-                )}
+                    )*/}
               </FormGroup>
 
               <FormGroup
@@ -388,11 +414,19 @@ export class RepositoryForm extends React.Component<IProps, IState> {
   }
 
   private validateName(name) {
+    debugger;
     const regex = /^([0-9A-Za-z._-]+\/)?[0-9A-Za-z._-]+$/;
     if (name === '' || regex.test(name)) {
-      return 'default';
+      if (this.state.formErrors['name'] != null) {
+        this.setState({ formErrors: { name: null } });
+      }
+
+      return;
     } else {
-      return 'error';
+      const error = t`Container names can only contain alphanumeric characters, ".", "_", "-" and a up to one "/".`;
+      if (this.state.formErrors['name'] != error) {
+        this.setState({ formErrors: { name: error } });
+      }
     }
   }
 
@@ -402,7 +436,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       // no validation for local
       return true;
     }
-    const nameValid = name && this.validateName(name) === 'default';
+    const nameValid = name && !this.state.formErrors['name'];
     return nameValid && upstreamName && registrySelection.length;
   }
 

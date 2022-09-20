@@ -3,7 +3,7 @@ import { RemoteType } from '.';
 import { smartUpdate } from './remotes';
 
 class API extends HubAPI {
-  apiPath = this.getUIPath('execution-environments/registries/');
+  apiPath = this.getUIPath('execution-environments/registries/typo');
 
   // list(params?)
   // create(data)
