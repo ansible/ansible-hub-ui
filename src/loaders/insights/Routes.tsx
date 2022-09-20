@@ -148,6 +148,14 @@ const Repository = lazy(
     ),
 );
 
+const SignatureKeysList = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "signature-keys-list" */
+      '../../containers/signature-keys/list'
+    ),
+);
+
 /**
  * the Switch component changes routes depending on the path.
  *
@@ -172,6 +180,7 @@ export const Routes = () => {
         <Route path={Paths.myCollections} component={ManageNamespace} />
         <Route path={Paths.myCollectionsByRepo} component={ManageNamespace} />
         <Route path={Paths.myNamespaces} component={MyNamespaces} />
+        <Route path={Paths.signatureKeys} component={SignatureKeysList} />
         <Route path={Paths.taskList} component={TaskListView} />
         <Route path={Paths.taskDetail} component={TaskDetail} />
         <Route

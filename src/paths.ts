@@ -70,6 +70,7 @@ export enum Paths {
   userProfileSettings = '/settings/user-profile',
   repositories = '/repositories',
   taskList = '/tasks',
+  signatureKeys = '/signature-keys',
 }
 
 export const namespaceBreadcrumb = {

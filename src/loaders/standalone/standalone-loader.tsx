@@ -385,6 +385,10 @@ class App extends React.Component<RouteComponentProps, IState> {
         url: Paths.taskList,
         condition: ({ user }) => !user.is_anonymous,
       }),
+      menuItem(t`Signature Keys`, {
+        url: Paths.signatureKeys,
+        condition: ({ featureFlags }) => featureFlags.display_signatures,
+      }),
       menuItem(t`Documentation`, {
         url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
         external: true,
