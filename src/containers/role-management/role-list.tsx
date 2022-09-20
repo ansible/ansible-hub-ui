@@ -249,10 +249,9 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                             onChange={(text) =>
                               this.setState({ inputText: text })
                             }
-                            updateParams={(p) => {
-                              p['page'] = 1;
-                              this.updateParams(p, () => this.queryRoles());
-                            }}
+                            updateParams={(p) =>
+                              this.updateParams(p, () => this.queryRoles())
+                            }
                             params={params}
                             filterConfig={[
                               {

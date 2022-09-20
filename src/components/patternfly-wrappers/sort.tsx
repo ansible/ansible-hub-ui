@@ -69,13 +69,14 @@ export class Sort extends React.Component<IProps, IState> {
     const desc = isDescending ? '-' : '';
 
     this.setState({ isExpanded: false }, () =>
-      this.props.updateParams(
-        ParamHelper.setParam(
+      this.props.updateParams({
+        ...ParamHelper.setParam(
           this.props.params,
           this.props.sortParamName,
           desc + option.id,
         ),
-      ),
+        page: 1,
+      }),
     );
   }
 
@@ -83,13 +84,14 @@ export class Sort extends React.Component<IProps, IState> {
     const field = this.getSelected(this.props.params);
     const descending = !this.getIsDescending(this.props.params);
 
-    this.props.updateParams(
-      ParamHelper.setParam(
+    this.props.updateParams({
+      ...ParamHelper.setParam(
         this.props.params,
         this.props.sortParamName,
         (descending ? '-' : '') + field.id,
       ),
-    );
+      page: 1,
+    });
   }
 
   private getIsDescending(params) {

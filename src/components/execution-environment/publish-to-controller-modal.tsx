@@ -371,7 +371,6 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
                   inputText={this.state.inputText}
                   onChange={(text) => this.setState({ inputText: text })}
                   updateParams={(controllerParams) => {
-                    controllerParams.page = 1;
                     this.setState({ controllerParams }, () =>
                       this.fetchControllers(),
                     );
