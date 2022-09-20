@@ -1,4 +1,4 @@
-import { t, Trans } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './certification-dashboard.scss';
 
@@ -32,7 +32,6 @@ import {
 import {
   CollectionVersionAPI,
   CollectionVersion,
-  TaskAPI,
   CertificateUploadAPI,
   Repositories,
   CollectionAPI,
@@ -76,7 +75,7 @@ interface IState {
   unauthorized: boolean;
   inputText: string;
   uploadCertificateModalOpen: boolean;
-  versionToUploadCertificate: CollectionVersion;
+  versionToUploadCertificate?: CollectionVersion;
 }
 
 class CertificationDashboard extends React.Component<
@@ -113,7 +112,7 @@ class CertificationDashboard extends React.Component<
       unauthorized: false,
       inputText: '',
       uploadCertificateModalOpen: false,
-      versionToUploadCertificate: undefined,
+      versionToUploadCertificate: null,
     };
   }
 
@@ -527,148 +526,102 @@ class CertificationDashboard extends React.Component<
     });
   }
 
-  private async submitCertificate(file: File) {
-    const version = this.state.versionToUploadCertificate;
-    const response = await Repositories.getRepository({
-      name: 'staging',
-    });
-    const signed_collection = `${PULP_API_BASE_PATH}content/ansible/collection_versions/${version.id}/`;
-
-    CertificateUploadAPI.upload({
-      file,
-      repository: response.data.results[0].pulp_href,
-      signed_collection,
-    })
-      .then((result) => {
-        waitForTask(parsePulpIDFromURL(result.data.task))
-          .then(() => {
-            this.updateList();
-            this.setState({
-              alerts: this.state.alerts.concat({
-                variant: 'success',
-                title: t`Certificate for collection "${version.namespace} ${version.name} v${version.version}" has been successfully uploaded.`,
-              }),
-            });
-          })
-          .catch((error) => {
-            this.setState({
-              alerts: this.state.alerts.concat({
-                variant: 'danger',
-                title: t`The certificate for "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-                description: error,
-              }),
-            });
-          });
-      })
-      .catch((error) => {
-        const { status, statusText } = error.response;
-        this.setState({
-          alerts: this.state.alerts.concat({
-            variant: 'danger',
-            title: t`The certificate for "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-            description: errorMessage(status, statusText),
-          }),
-        });
-      })
-      .finally(() => {
-        this.closeUploadCertificateModal();
-      });
-  }
-
   private closeUploadCertificateModal() {
     this.setState({
       uploadCertificateModalOpen: false,
-      versionToUploadCertificate: undefined,
+      versionToUploadCertificate: null,
     });
+  }
+
+  private submitCertificate(file: File) {
+    const version = this.state.versionToUploadCertificate;
+    const signed_collection = `${PULP_API_BASE_PATH}content/ansible/collection_versions/${version.id}/`;
+
+    return Repositories.getRepository({
+      name: 'staging',
+    })
+      .then((response) =>
+        CertificateUploadAPI.upload({
+          file,
+          repository: response.data.results[0].pulp_href,
+          signed_collection,
+        }),
+      )
+      .then((result) => waitForTask(parsePulpIDFromURL(result.data.task)))
+      .then(() =>
+        this.addAlert(
+          t`Certificate for collection "${version.namespace} ${version.name} v${version.version}" has been successfully uploaded.`,
+          'success',
+        ),
+      )
+      .then(() => this.queryCollections())
+      .catch((error) => {
+        const description = !error.response
+          ? error
+          : errorMessage(error.response.status, error.response.statusText);
+
+        this.addAlert(
+          t`The certificate for "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+          'danger',
+          description,
+        );
+      })
+      .finally(() => this.closeUploadCertificateModal());
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {
-    const { alerts } = this.state;
-    // Set the selected version to loading
-    this.setState(
-      {
-        updatingVersions: [],
-      },
-      () =>
-        CollectionVersionAPI.setRepository(
-          version.namespace,
-          version.name,
-          version.version,
-          originalRepo,
-          destinationRepo,
-        )
-          .then(
-            (result) =>
-              // Since pulp doesn't reply with the new object, perform a
-              // second query to get the updated data
-              {
-                this.setState({
-                  updatingVersions: [version],
-                });
-                this.waitForUpdate(result.data.remove_task_id, version);
-              },
-            this.addAlert(
-              <Trans>
-                Certification status for collection &quot;{version.namespace}{' '}
-                {version.name} v{version.version}&quot; has been successfully
-                updated.
-              </Trans>,
-              'success',
-            ),
-          )
-          .catch((error) => {
-            const { status, statusText } = error.response;
-            this.setState({
-              updatingVersions: [],
-              alerts: alerts.concat({
-                variant: 'danger',
-                title: t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-                description: errorMessage(status, statusText),
-              }),
-            });
-          }),
-    );
-  }
+    this.setState({ updatingVersions: [version] });
 
-  private waitForUpdate(taskId, version) {
-    return TaskAPI.get(taskId).then(async (result) => {
-      if (result.data.state === 'waiting' || result.data.state === 'running') {
-        await new Promise((r) => setTimeout(r, 500));
-        this.waitForUpdate(taskId, version);
-      } else if (result.data.state === 'completed') {
-        return this.updateList();
-      } else {
-        this.setState({
-          updatingVersions: [],
-          alerts: this.state.alerts.concat({
-            variant: 'danger',
-            title: t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-            description: errorMessage(500, t`Internal Server Error`),
-          }),
-        });
-      }
-    });
-  }
+    return CollectionVersionAPI.setRepository(
+      version.namespace,
+      version.name,
+      version.version,
+      originalRepo,
+      destinationRepo,
+    )
+      .then((result) => waitForTask(result.data.remove_task_id, 500))
+      .then(() =>
+        this.addAlert(
+          t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
+          'success',
+        ),
+      )
+      .then(() => this.queryCollections())
+      .catch((error) => {
+        const description = !error.response
+          ? error
+          : errorMessage(error.response.status, error.response.statusText);
 
-  private updateList() {
-    return CollectionVersionAPI.list(this.state.params).then(async (result) => {
-      this.setState({
-        versions: result.data.data,
-        updatingVersions: [],
+        this.addAlert(
+          t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+          'danger',
+          description,
+        );
       });
-    });
   }
 
   private queryCollections() {
     this.setState({ loading: true }, () =>
-      CollectionVersionAPI.list(this.state.params).then((result) => {
-        this.setState({
-          versions: result.data.data,
-          itemCount: result.data.meta.count,
-          loading: false,
-          updatingVersions: [],
-        });
-      }),
+      CollectionVersionAPI.list(this.state.params)
+        .then((result) => {
+          this.setState({
+            versions: result.data.data,
+            itemCount: result.data.meta.count,
+            loading: false,
+            updatingVersions: [],
+          });
+        })
+        .catch((error) => {
+          this.addAlert(
+            t`Error loading collections.`,
+            'danger',
+            error?.message,
+          );
+          this.setState({
+            loading: false,
+            updatingVersions: [],
+          });
+        }),
     );
   }
 

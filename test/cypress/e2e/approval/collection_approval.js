@@ -29,16 +29,21 @@ describe('tests the approval list screen ', () => {
     cy.get('.pf-c-chip > button[aria-label="close"]').click();
     cy.wait('@reload');
 
-    //reject
-
+    // reject
     cy.get('button[aria-label="Actions"]:first').click();
     cy.contains('Reject').click();
-    cy.get('tr').eq(1).contains('Rejected');
+    cy.contains(
+      '[data-cy="CertificationDashboard-row"]:first-child',
+      'Rejected',
+    );
 
-    //approve
+    // approve
     cy.get('button[aria-label="Actions"]:first').click();
     cy.contains('Approve').click();
-    cy.get('tr').eq(1).contains('Approved');
+    cy.contains(
+      '[data-cy="CertificationDashboard-row"]:first-child',
+      'Approved',
+    );
   });
 
   it('view the imports logs', () => {
