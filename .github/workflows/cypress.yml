@@ -22,6 +22,19 @@ jobs:
       # base of a PR, or pushed-to branch outside PRs, or master
       BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/master' }}
 
+    strategy:
+      fail-fast: false
+      matrix:
+        test:
+        - 'collections'
+        - 'approval'
+        - 'execution_environments'
+        - 'namespaces'
+        - 'groups_and_users'
+        - 'repo'
+        - 'misc'
+        - 'imports'
+
     steps:
 
     - name: "Install galaxykit dependency"
@@ -208,9 +221,17 @@ jobs:
         HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:8002/api/galaxy/v3/auth/token/ | jq -r .token`
         curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:8002/api/galaxy/ | jq
 
+    - name: "Check if e2e contains only dirs in matrix test array"
+      working-directory: 'ansible-hub-ui'
+      run: |
+        diff -Naur <(ls test/cypress/e2e) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
+
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
+        sed -i '/specPattern:/s/\*\*/${{matrix.test}}/' cypress.config.js
+        echo "result of the config file:"
+        cat cypress.config.js
         npm run cypress:chrome
 
     - uses: actions/upload-artifact@v2
