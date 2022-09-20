@@ -1,7 +1,15 @@
 import { t } from '@lingui/macro';
 import { TaskAPI } from 'src/api';
 
-export function waitForTask(task, bailAfter = 10) {
+interface Options {
+  bailAfter?: number;
+  waitMs?: number;
+}
+
+export function waitForTask(task, options: Options = {}) {
+  // default to 5s wait with max 10 attempts
+  const { waitMs = 5000, bailAfter = 10 } = options;
+
   return TaskAPI.get(task).then((result) => {
     if (result.data.state !== 'completed') {
       if (!bailAfter) {
@@ -10,8 +18,8 @@ export function waitForTask(task, bailAfter = 10) {
         );
       }
 
-      return new Promise((r) => setTimeout(r, 5000)).then(() =>
-        waitForTask(task, bailAfter - 1),
+      return new Promise((r) => setTimeout(r, waitMs)).then(() =>
+        waitForTask(task, { ...options, bailAfter: bailAfter - 1 }),
       );
     }
   });

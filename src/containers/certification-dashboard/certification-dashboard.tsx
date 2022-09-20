@@ -1,4 +1,4 @@
-import { t, Trans } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import './certification-dashboard.scss';
 
@@ -27,8 +27,13 @@ import {
   CheckCircleIcon,
 } from '@patternfly/react-icons';
 
-import { CollectionVersionAPI, CollectionVersion, TaskAPI } from 'src/api';
-import { errorMessage, filterIsSet, ParamHelper } from 'src/utilities';
+import { CollectionVersionAPI, CollectionVersion } from 'src/api';
+import {
+  ParamHelper,
+  errorMessage,
+  filterIsSet,
+  waitForTask,
+} from 'src/utilities';
 import {
   LoadingPageWithHeader,
   CompoundFilter,
@@ -473,91 +478,60 @@ class CertificationDashboard extends React.Component<
   }
 
   private updateCertification(version, originalRepo, destinationRepo) {
-    const { alerts } = this.state;
-    // Set the selected version to loading
-    this.setState(
-      {
-        updatingVersions: [],
-      },
-      () =>
-        CollectionVersionAPI.setRepository(
-          version.namespace,
-          version.name,
-          version.version,
-          originalRepo,
-          destinationRepo,
-        )
-          .then(
-            (result) =>
-              // Since pulp doesn't reply with the new object, perform a
-              // second query to get the updated data
-              {
-                this.setState({
-                  updatingVersions: [version],
-                });
-                this.waitForUpdate(result.data.remove_task_id, version);
-              },
-            this.addAlert(
-              <Trans>
-                Certification status for collection &quot;{version.namespace}{' '}
-                {version.name} v{version.version}&quot; has been successfully
-                updated.
-              </Trans>,
-              'success',
-            ),
-          )
-          .catch((error) => {
-            const { status, statusText } = error.response;
-            this.setState({
-              updatingVersions: [],
-              alerts: alerts.concat({
-                variant: 'danger',
-                title: t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-                description: errorMessage(status, statusText),
-              }),
-            });
-          }),
-    );
-  }
+    this.setState({ updatingVersions: [version] });
 
-  private waitForUpdate(result, version) {
-    const taskId = result;
-    return TaskAPI.get(taskId).then(async (result) => {
-      if (result.data.state === 'waiting' || result.data.state === 'running') {
-        await new Promise((r) => setTimeout(r, 500));
-        this.waitForUpdate(taskId, version);
-      } else if (result.data.state === 'completed') {
-        return CollectionVersionAPI.list(this.state.params).then(
-          async (result) => {
-            this.setState({
-              versions: result.data.data,
-              updatingVersions: [],
-            });
-          },
+    return CollectionVersionAPI.setRepository(
+      version.namespace,
+      version.name,
+      version.version,
+      originalRepo,
+      destinationRepo,
+    )
+      .then((result) =>
+        waitForTask(result.data.remove_task_id, { waitMs: 500 }),
+      )
+      .then(() =>
+        this.addAlert(
+          t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
+          'success',
+        ),
+      )
+      .then(() => this.queryCollections())
+      .catch((error) => {
+        const description = !error.response
+          ? error
+          : errorMessage(error.response.status, error.response.statusText);
+
+        this.addAlert(
+          t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
+          'danger',
+          description,
         );
-      } else {
-        this.setState({
-          updatingVersions: [],
-          alerts: this.state.alerts.concat({
-            variant: 'danger',
-            title: t`Changes to certification status for collection "${version.namespace} ${version.name} v${version.version}" could not be saved.`,
-            description: errorMessage(500, t`Internal Server Error`),
-          }),
-        });
-      }
-    });
+      });
   }
 
   private queryCollections() {
     this.setState({ loading: true }, () =>
-      CollectionVersionAPI.list(this.state.params).then((result) => {
-        this.setState({
-          versions: result.data.data,
-          itemCount: result.data.meta.count,
-          loading: false,
-          updatingVersions: [],
-        });
-      }),
+      CollectionVersionAPI.list(this.state.params)
+        .then((result) => {
+          this.setState({
+            versions: result.data.data,
+            itemCount: result.data.meta.count,
+            loading: false,
+            updatingVersions: [],
+          });
+        })
+        .catch((error) => {
+          this.addAlert(
+            t`Error loading collections.`,
+            'danger',
+            error?.message,
+          );
+          this.setState({
+            loading: false,
+            updatingVersions: [],
+          });
+        }),
     );
   }
 
