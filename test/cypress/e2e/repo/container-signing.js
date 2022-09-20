@@ -54,6 +54,8 @@ describe('Container Signing', () => {
       timeout: 10000,
     });
 
+    cy.contains('Last updated from registry');
+
     cy.get('button[aria-label="Actions"]').click();
     cy.contains('ul li a', 'Sign').click();
     cy.contains('Signing started for container "remote1');
