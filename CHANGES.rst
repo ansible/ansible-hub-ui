@@ -1,3 +1,14 @@
+4.5.3 (2022-09-20)
+Bugfixes
+--------
+
+- EE list: filter by name__icontains, not name exact
+  `AAH-1913 <https://issues.redhat.com/browse/AAH-1913>`_
+
+
+----
+
+
 4.5.2 (2022-08-23)
 ==================
 
