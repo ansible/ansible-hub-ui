@@ -229,9 +229,7 @@ jobs:
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
-        dir=${{matrix.test}}
-        pattern="s/\*\*/$dir/"
-        sed -i "$pattern" cypress.config.js
+        sed -i '/specPattern:/s/\*\*/${{matrix.test}}/' cypress.config.js
         echo "result of the config file:"
         cat cypress.config.js
         npm run cypress:chrome
