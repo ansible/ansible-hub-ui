@@ -229,7 +229,9 @@ export class ImportList extends React.Component<IProps, IState> {
   }
 
   private loadNamespaces(namespace_filter) {
-    if (!namespace_filter) namespace_filter = '';
+    if (!namespace_filter) {
+      namespace_filter = '';
+    }
     MyNamespaceAPI.list({ page_size: 10, keywords: namespace_filter })
       .then((result) => {
         this.setState({ namespaces: result.data.data });
