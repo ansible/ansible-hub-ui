@@ -5,7 +5,15 @@ import './my-imports.scss';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { cloneDeep } from 'lodash';
 
-import { BaseHeader, ImportConsole, ImportList, Main } from 'src/components';
+import {
+  BaseHeader,
+  ImportConsole,
+  ImportList,
+  Main,
+  closeAlertMixin,
+  AlertType,
+  AlertList,
+} from 'src/components';
 
 import {
   ImportAPI,
@@ -35,6 +43,7 @@ interface IState {
   followLogs: boolean;
   loadingImports: boolean;
   loadingImportDetails: boolean;
+  alerts: AlertType[];
 }
 
 class MyImports extends React.Component<RouteComponentProps, IState> {
@@ -62,6 +71,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
       loadingImports: true,
       loadingImportDetails: true,
       selectedCollectionVersion: undefined,
+      alerts: [],
     };
   }
 
@@ -92,6 +102,16 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
     clearInterval(this.polling);
   }
 
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
+
+  private addAlert(alert) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
+  }
+
   render() {
     const {
       selectedImport,
@@ -114,11 +134,16 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
       <React.Fragment>
         <div ref={this.topOfPage}></div>
         <BaseHeader title={t`My imports`} />
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        />
         <Main>
           <section className='body'>
             <div className='hub-page-container' data-cy='MyImports'>
               <div className='import-list'>
                 <ImportList
+                  addAlert={(alert) => this.addAlert(alert)}
                   importList={importList}
                   selectedImport={selectedImport}
                   loading={loadingImports}
