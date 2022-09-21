@@ -94,6 +94,7 @@
         "start": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/insights.dev.webpack.config.js",
         "start-pulp": "NODE_ENV=development API_PROXY_PORT=8080 API_BASE_PATH='/api/galaxy/' webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
         "start-standalone": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/standalone.dev.webpack.config.js",
+        "start-community": "NODE_ENV=development webpack serve --host 0.0.0.0 --config config/community.dev.webpack.config.js",
         "test": "npm run test-build && npm run test-run",
         "test-build": "test/scripts/ctn-build.sh",
         "test-prettier": "echo 'Testing for formatting. If this fails, run npm run prettier'; npm run prettier:check",
