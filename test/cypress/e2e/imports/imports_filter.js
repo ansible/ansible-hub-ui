@@ -61,7 +61,7 @@ describe('Imports filter test', () => {
   });
 
   it('should be able to switch between namespaces', () => {
-    cy.get('button[aria-label="Clear all"] svg').click();
+    cy.get('button[aria-label="Clear all"]').click();
     cy.contains('[data-cy="import-list-data"]', 'No namespace selected.', {
       timeout: 8000,
     });
@@ -81,7 +81,8 @@ describe('Imports filter test', () => {
         '_ui/v1/collection-versions/?namespace=test_namespace&name=*',
     ).as('collectionVersions');
 
-    cy.get('[placeholder="Select namespace"]').click();
+    cy.get('[placeholder="Select namespace"]').clear();
+    cy.get('[placeholder="Select namespace"]').type('test_namespace');
     cy.contains('button', 'test_namespace').click();
 
     cy.wait('@collectionsInNamespace');
