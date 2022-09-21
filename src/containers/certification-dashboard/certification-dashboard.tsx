@@ -579,7 +579,9 @@ class CertificationDashboard extends React.Component<
       originalRepo,
       destinationRepo,
     )
-      .then((result) => waitForTask(result.data.remove_task_id, 500))
+      .then((result) =>
+        waitForTask(result.data.remove_task_id, { waitMs: 500 }),
+      )
       .then(() =>
         this.addAlert(
           t`Certification status for collection "${version.namespace} ${version.name} v${version.version}" has been successfully updated.`,
