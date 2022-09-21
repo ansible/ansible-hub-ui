@@ -20,7 +20,7 @@ export function waitForTask(task, waitMs = 5000, bailAfter = 10) {
       }
 
       return new Promise((r) => setTimeout(r, waitMs)).then(() =>
-        waitForTask(task, bailAfter - 1),
+        waitForTask(task, waitMs, bailAfter - 1),
       );
     }
   });
