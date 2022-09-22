@@ -2,6 +2,15 @@
 set -e
 set -x
 
+# triggered by workflow_dispatch
+if [ "${TRAVIS_BRANCH}" = "custom" ]; then
+  HUB_CLOUD_BETA="$CUSTOM_BETA" npm run deploy
+  echo "PUSHING $CUSTOM_BRANCH"
+  rm -rf ./dist/.git
+  .travis/release.sh "$CUSTOM_BRANCH"
+  exit 0
+fi
+
 if [ "${TRAVIS_BRANCH}" = "master" ]; then
     # always push to stage-beta
     HUB_CLOUD_BETA="true" npm run deploy
