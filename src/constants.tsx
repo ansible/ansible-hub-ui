@@ -250,9 +250,10 @@ export class Constants {
     published: defineMessage({ message: `Published` }),
     'rh-certified': defineMessage({ message: `Red Hat Certified` }),
     community: defineMessage({ message: `Community` }),
+    validated: defineMessage({ message: `Validated` }),
   };
 
-  static ALLOWEDREPOS = ['community', 'published', 'rh-certified'];
+  static ALLOWEDREPOS = ['community', 'published', 'rh-certified', 'validated'];
 
   static COLLECTION_FILTER_TAGS = [
     'application',
