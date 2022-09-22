@@ -72,6 +72,13 @@ export function withContainerRepo(WrappedComponent) {
       this.loadRepo();
     }
 
+    componentDidUpdate() {
+      // when reloading the same tab, state doesn't reset
+      if (this.state.redirect) {
+        this.setState({ redirect: null });
+      }
+    }
+
     render() {
       const container = this.props.match.params['container'];
       const redirect = {
@@ -98,6 +105,7 @@ export function withContainerRepo(WrappedComponent) {
       if (this.state.loading) {
         return <LoadingPageWithHeader />;
       }
+
       const permissions = this.state.repo.namespace.my_permissions;
       const showEdit =
         permissions.includes(
@@ -337,7 +345,7 @@ export function withContainerRepo(WrappedComponent) {
       });
     }
 
-    private addAlertObj(alert) {
+    private addAlertObj(alert: AlertType) {
       this.setState({
         alerts: [...this.state.alerts, alert],
       });

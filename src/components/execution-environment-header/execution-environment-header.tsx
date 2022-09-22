@@ -98,11 +98,9 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
             <Tabs
               tabs={tabs}
               params={{ tab }}
-              updateParams={(p) => {
-                if (tab !== p.tab) {
-                  this.props.updateState({ redirect: p.tab });
-                }
-              }}
+              updateParams={({ tab }) =>
+                this.props.updateState({ redirect: tab })
+              }
             />
           </div>
         </div>
