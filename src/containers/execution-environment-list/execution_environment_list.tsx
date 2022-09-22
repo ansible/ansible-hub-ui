@@ -59,7 +59,6 @@ interface IState {
   showDeleteModal: boolean;
   selectedItem: ExecutionEnvironmentType;
   inputText: string;
-  formError: { title: string; detail: string }[];
 }
 
 class ExecutionEnvironmentList extends React.Component<
@@ -95,7 +94,6 @@ class ExecutionEnvironmentList extends React.Component<
       showDeleteModal: false,
       selectedItem: null,
       inputText: '',
-      formError: [],
     };
   }
 
@@ -450,51 +448,36 @@ class ExecutionEnvironmentList extends React.Component<
         permissions={namespace?.my_permissions || []}
         remoteId={remoteId}
         distributionPulpId={distributionPulpId}
-        formError={this.state.formError}
         onSave={(promise, form) => {
-          promise
-            .then(() => {
-              this.setState(
-                {
-                  showRemoteModal: false,
-                  itemToEdit: null,
-                  alerts: alerts.concat({
-                    variant: 'success',
-                    title: isNew ? (
-                      <Trans>
-                        Execution environment &quot;{form.name}&quot; has been
-                        added successfully.
-                      </Trans>
-                    ) : (
-                      <Trans>
-                        Saved changes to execution environment &quot;{form.name}
-                        &quot;.
-                      </Trans>
-                    ),
-                  }),
-                },
-                () => this.queryEnvironments(),
-              );
-            })
-            .catch((err) => {
-              this.setState({
-                formError: err.response.data.errors.map((error) => {
-                  return {
-                    title: error.title,
-                    detail: error.source.parameter + ': ' + error.detail,
-                  };
+          promise.then(() => {
+            this.setState(
+              {
+                showRemoteModal: false,
+                itemToEdit: null,
+                alerts: alerts.concat({
+                  variant: 'success',
+                  title: isNew ? (
+                    <Trans>
+                      Execution environment &quot;{form.name}&quot; has been
+                      added successfully.
+                    </Trans>
+                  ) : (
+                    <Trans>
+                      Saved changes to execution environment &quot;{form.name}
+                      &quot;.
+                    </Trans>
+                  ),
                 }),
-              });
-            });
+              },
+              () => this.queryEnvironments(),
+            );
+          });
         }}
         onCancel={() =>
           this.setState({
             showRemoteModal: false,
             itemToEdit: null,
           })
-        }
-        addAlert={(variant, title, description) =>
-          this.addAlert(title, variant, description)
         }
       />
     );
