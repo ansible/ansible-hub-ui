@@ -113,7 +113,8 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
             namespaceBreadcrumb,
             {
               name: namespace.name,
-              url: formatPath(Paths.myCollections, {
+              url: formatPath(Paths.namespaceByRepo, {
+                repo: this.context.selectedRepo,
                 namespace: namespace.name,
               }),
             },
@@ -222,7 +223,8 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
               errorMessages: {},
               saving: false,
               unsavedData: false,
-              redirect: formatPath(Paths.myCollections, {
+              redirect: formatPath(Paths.namespaceByRepo, {
+                repo: this.context.selectedRepo,
                 namespace: this.state.namespace.name,
               }),
             },
@@ -268,7 +270,8 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
 
   private cancel() {
     this.setState({
-      redirect: formatPath(Paths.myCollections, {
+      redirect: formatPath(Paths.namespaceByRepo, {
+        repo: this.context.selectedRepo,
         namespace: this.state.namespace.name,
       }),
     });

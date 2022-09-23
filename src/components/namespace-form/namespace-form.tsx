@@ -82,8 +82,9 @@ export class NamespaceForm extends React.Component<IProps> {
                 <Link
                   target='_blank'
                   to={formatPath(
-                    Paths.myCollections,
+                    Paths.namespaceByRepo,
                     {
+                      repo: 'published',
                       namespace: namespace.name,
                     },
                     { tab: 'owners' },

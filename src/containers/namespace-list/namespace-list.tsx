@@ -165,8 +165,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
           onCreateSuccess={(result) =>
             this.setState({
               redirect: formatPath(
-                Paths.myCollections,
+                Paths.namespaceByRepo,
                 {
+                  repo: 'published',
                   namespace: result.name,
                 },
                 { tab: 'owners' },
