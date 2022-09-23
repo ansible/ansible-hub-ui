@@ -126,18 +126,20 @@ export class ImportList extends React.Component<IProps, IState> {
         <div data-cy='import-list-data'>
           {this.renderList(selectImport, importList, selectedImport, loading)}
         </div>
-        <Pagination
-          itemCount={numberOfResults}
-          perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
-          page={params.page || 1}
-          onSetPage={(_, p) =>
-            updateParams(ParamHelper.setParam(params, 'page', p))
-          }
-          onPerPageSelect={(_, p) => {
-            updateParams({ ...params, page: 1, page_size: p });
-          }}
-          isCompact={true}
-        />
+        {this.props.params.namespace && (
+          <Pagination
+            itemCount={numberOfResults}
+            perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
+            page={params.page || 1}
+            onSetPage={(_, p) =>
+              updateParams(ParamHelper.setParam(params, 'page', p))
+            }
+            onPerPageSelect={(_, p) => {
+              updateParams({ ...params, page: 1, page_size: p });
+            }}
+            isCompact={true}
+          />
+        )}
       </div>
     );
   }

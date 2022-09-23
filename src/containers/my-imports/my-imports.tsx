@@ -20,7 +20,6 @@ import {
   ImportDetailType,
   ImportListType,
   PulpStatus,
-  MyNamespaceAPI,
   CollectionVersion,
   CollectionVersionAPI,
 } from 'src/api';
@@ -78,7 +77,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
   componentDidMount() {
     // Load namespaces, use the namespaces to query the import list,
     // use the import list to load the task details
-    this.loadNamespace(() => this.loadImportList(() => this.loadTaskDetails()));
+    this.loadImportList(() => this.loadTaskDetails());
 
     this.polling = setInterval(() => {
       if (!this.state.params.namespace) {
@@ -151,33 +150,38 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                   params={params}
                   selectImport={(sImport) => this.selectImport(sImport)}
                   updateParams={(params) => {
-                    this.updateParams(params, () =>
-                      this.setState(
-                        {
-                          loadingImports: true,
-                          loadingImportDetails: true,
-                        },
-                        () => this.loadImportList(() => this.loadTaskDetails()),
-                      ),
-                    );
+                    this.updateParams(params, () => {
+                      if (params.namespace) {
+                        this.setState(
+                          {
+                            loadingImports: true,
+                            loadingImportDetails: true,
+                          },
+                          () =>
+                            this.loadImportList(() => this.loadTaskDetails()),
+                        );
+                      }
+                    });
                   }}
                 />
               </div>
 
               <div className='hub-import-console'>
-                <ImportConsole
-                  loading={loadingImportDetails}
-                  task={selectedImportDetails}
-                  followMessages={followLogs}
-                  setFollowMessages={(isFollowing) => {
-                    this.setState({
-                      followLogs: isFollowing,
-                    });
-                  }}
-                  selectedImport={selectedImport}
-                  apiError={importDetailError}
-                  collectionVersion={selectedCollectionVersion}
-                />
+                {this.state.params.namespace && (
+                  <ImportConsole
+                    loading={loadingImportDetails}
+                    task={selectedImportDetails}
+                    followMessages={followLogs}
+                    setFollowMessages={(isFollowing) => {
+                      this.setState({
+                        followLogs: isFollowing,
+                      });
+                    }}
+                    selectedImport={selectedImport}
+                    apiError={importDetailError}
+                    collectionVersion={selectedCollectionVersion}
+                  />
+                )}
               </div>
             </div>
           </section>
@@ -233,29 +237,9 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
     });
   }
 
-  private loadNamespace(callback?: () => void) {
-    if (!this.state.params.namespace) {
-      return;
-    }
-
-    MyNamespaceAPI.get(this.state.params.namespace)
-      .then((result) => {
-        const namespace = result.data;
-
-        this.setState(
-          {
-            params: {
-              ...this.state.params,
-              namespace: namespace.name,
-            },
-          },
-          callback,
-        );
-      })
-      .catch((result) => console.log(result));
-  }
-
   private loadImportList(callback?: () => void) {
+    if (!this.state.params.namespace) return;
+
     ImportAPI.list({ ...this.state.params, sort: '-created' })
       .then((importList) => {
         this.setState(
