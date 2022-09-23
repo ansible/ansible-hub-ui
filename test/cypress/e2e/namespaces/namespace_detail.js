@@ -74,4 +74,29 @@ describe('Namespace detail screen', () => {
 
     // The test for success are impmeneted in the collection_upload file
   });
+
+  it('should filter by repositories', () => {
+    const namespace = 'coolestnamespace';
+    cy.galaxykit('-i namespace create', namespace);
+    cy.visit(`/ui/repo/published/${namespace}`);
+
+    cy.get('.nav-select').contains('Published').click();
+    cy.contains('Red Hat Certified').click();
+
+    cy.get('.nav-select').contains('Red Hat Certified');
+    cy.url().should('include', `/repo/rh-certified/${namespace}`);
+
+    cy.visit(`/ui/repo/community/${namespace}`);
+    cy.get('.nav-select').contains('Community');
+  });
+
+  it('repo selector should be disabled in collection detail ', () => {
+    const namespace = 'coolestnamespace';
+    const collection = 'coolestcollection';
+    cy.galaxykit('-i namespace create', namespace);
+    cy.galaxykit('collection upload', namespace, collection);
+
+    cy.visit(`/ui/repo/published/${namespace}/${collection}`);
+    cy.get('.nav-select').contains('Published').should('be.disabled');
+  });
 });
