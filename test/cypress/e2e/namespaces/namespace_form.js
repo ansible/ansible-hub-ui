@@ -84,6 +84,6 @@ describe('A namespace form', () => {
     let id = parseInt(Math.random() * 1000000);
     getInputBox().type(`testns_${id}`);
     getCreateButton().click();
-    getUrl().should('match', /\/ui\/my-namespaces\/testns_/);
+    getUrl().should('match', /\/ui\/repo\/published\/testns_/);
   });
 });
