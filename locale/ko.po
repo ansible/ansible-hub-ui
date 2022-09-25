@@ -193,7 +193,7 @@ msgid "Add container repository"
 msgstr "컨테이너 리포지토리 추가"
 
 #: src/components/execution-environment/repository-form.tsx:152
-#: src/containers/execution-environment-list/execution_environment_list.tsx:155
+#: src/containers/execution-environment-list/execution_environment_list.tsx:157
 msgid "Add execution environment"
 msgstr "실행 환경 추가"
 
@@ -612,12 +612,12 @@ msgstr "컨테이너 이름에는 영숫자 문자 \".\", \"_\", \"-\" 및 최�
 msgid "Container namespace"
 msgstr "컨테이너 네임스페이스"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:307
+#: src/containers/execution-environment-list/execution_environment_list.tsx:312
 msgid "Container registry type"
 msgstr "컨테이너 레지스트리 유형"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:231
-#: src/containers/execution-environment-list/execution_environment_list.tsx:287
+#: src/containers/execution-environment-list/execution_environment_list.tsx:233
+#: src/containers/execution-environment-list/execution_environment_list.tsx:292
 msgid "Container repository name"
 msgstr "컨테이너 리포지터리 이름"
 
@@ -700,7 +700,7 @@ msgid "Create new user"
 msgstr "새 사용자 만들기"
 
 #: src/containers/execution-environment/registry-list.tsx:327
-#: src/containers/execution-environment-list/execution_environment_list.tsx:297
+#: src/containers/execution-environment-list/execution_environment_list.tsx:302
 #: src/containers/group-management/group-detail.tsx:821
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
@@ -755,7 +755,7 @@ msgstr "생성된 날짜"
 #: src/containers/execution-environment/registry-list.tsx:406
 #: src/containers/execution-environment-detail/base.tsx:144
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:416
-#: src/containers/execution-environment-list/execution_environment_list.tsx:378
+#: src/containers/execution-environment-list/execution_environment_list.tsx:383
 #: src/containers/group-management/group-detail.tsx:272
 #: src/containers/group-management/group-list.tsx:434
 #: src/containers/task-management/task-list-view.tsx:313
@@ -931,7 +931,7 @@ msgstr "더 이상 사용되지 않음"
 #: src/components/execution-environment/repository-form.tsx:368
 #: src/components/namespace-form/namespace-form.tsx:152
 #: src/components/role-list-table/role-list-table.tsx:49
-#: src/containers/execution-environment-list/execution_environment_list.tsx:292
+#: src/containers/execution-environment-list/execution_environment_list.tsx:297
 #: src/containers/task-management/task_detail.tsx:342
 msgid "Description"
 msgstr "설명"
@@ -1012,7 +1012,7 @@ msgstr "드롭다운"
 #: src/containers/execution-environment/registry-list.tsx:393
 #: src/containers/execution-environment-detail/base.tsx:194
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
-#: src/containers/execution-environment-list/execution_environment_list.tsx:351
+#: src/containers/execution-environment-list/execution_environment_list.tsx:356
 #: src/containers/group-management/group-detail.tsx:401
 #: src/containers/group-management/group-list.tsx:420
 #: src/containers/settings/user-profile.tsx:96
@@ -1128,7 +1128,7 @@ msgstr "API에서 가져오는 동안 오류 발생"
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Error loading dependent collections."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:498
+#: src/containers/execution-environment-list/execution_environment_list.tsx:503
 msgid "Error loading environments."
 msgstr "환경을 로드하는 동안 오류가 발생했습니다."
 
@@ -1242,7 +1242,7 @@ msgid "Execution Environment"
 msgstr "실행 환경"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:36
-#: src/containers/execution-environment-list/execution_environment_list.tsx:173
+#: src/containers/execution-environment-list/execution_environment_list.tsx:175
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:107
 #: src/loaders/standalone/standalone-loader.tsx:370
 #: src/loaders/standalone/standalone-loader.tsx:376
@@ -1253,7 +1253,7 @@ msgstr "실행 환경"
 msgid "Execution environment \"{name}\" could not be indexed."
 msgstr "실행 환경 \"{name}\"을/를 인덱싱할 수 없습니다."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:448
+#: src/containers/execution-environment-list/execution_environment_list.tsx:453
 msgid "Execution environment \"{name}\" has been added successfully."
 msgstr "실행 환경 \"{name}\"이/가 성공적으로 추가되었습니다."
 
@@ -1559,7 +1559,7 @@ msgstr "이 창을 닫는 것이 안전합니다. 이러한 작업은 백그라�
 msgid "Keywords"
 msgstr "키워드"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:302
+#: src/containers/execution-environment-list/execution_environment_list.tsx:307
 msgid "Last modified"
 msgstr "마지막으로 변경된 사항"
 
@@ -1624,7 +1624,7 @@ msgstr "컬렉션 목록"
 msgid "Load token"
 msgstr "토큰 로드"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:408
+#: src/containers/execution-environment-list/execution_environment_list.tsx:413
 #: src/containers/repositories/repository-list.tsx:118
 msgid "Local"
 msgstr "지역"
@@ -1701,6 +1701,7 @@ msgstr "내 프로필"
 #: src/containers/execution-environment/registry-list.tsx:265
 #: src/containers/execution-environment/registry-list.tsx:293
 #: src/containers/execution-environment/registry-list.tsx:322
+#: src/containers/execution-environment-list/execution_environment_list.tsx:262
 #: src/containers/namespace-list/namespace-list.tsx:228
 #: src/containers/task-management/task_detail.tsx:268
 msgid "Name"
@@ -1817,7 +1818,7 @@ msgstr "하위 작업 없음"
 msgid "No collections yet"
 msgstr "아직 컬렉션이 없습니다."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:195
+#: src/containers/execution-environment-list/execution_environment_list.tsx:197
 msgid "No container repositories yet"
 msgstr "아직 컨테이너 리포지토리가 없음"
 
@@ -2203,7 +2204,7 @@ msgstr "Pulpcore: 복구 버전"
 msgid "Pulpcore: Upload commit"
 msgstr "Pulpcore: 커밋 업로드"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:142
+#: src/containers/execution-environment-list/execution_environment_list.tsx:144
 msgid "Push container images"
 msgstr "컨테이너 이미지 푸시"
 
@@ -2269,7 +2270,7 @@ msgstr "거부"
 msgid "Rejected"
 msgstr "거부됨"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:408
+#: src/containers/execution-environment-list/execution_environment_list.tsx:413
 #: src/containers/repositories/repository-list.tsx:119
 msgid "Remote"
 msgstr "원격"
@@ -2383,7 +2384,7 @@ msgstr "저장"
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "실행 환경 \"{0}\"에 대한 변경 사항을 저장했습니다."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:453
+#: src/containers/execution-environment-list/execution_environment_list.tsx:458
 msgid "Saved changes to execution environment \"{name}\"."
 msgstr "실행 환경 \"{name}\"에 대한 변경 사항을 저장했습니다."
 
@@ -2413,7 +2414,7 @@ msgstr "끝까지 스크롤"
 
 #: src/containers/execution-environment/registry-list.tsx:499
 #: src/containers/execution-environment-detail/base.tsx:334
-#: src/containers/execution-environment-list/execution_environment_list.tsx:534
+#: src/containers/execution-environment-list/execution_environment_list.tsx:539
 msgid "See the task management <0>detail page </0>for the status of this task."
 msgstr "이 작업의 상태에 대해서는 작업 관리 <0>세부 정보 페이지 </0>를 참조하십시오."
 
@@ -2670,13 +2671,13 @@ msgid "Sync"
 msgstr "동기화"
 
 #: src/containers/execution-environment-detail/base.tsx:345
-#: src/containers/execution-environment-list/execution_environment_list.tsx:544
+#: src/containers/execution-environment-list/execution_environment_list.tsx:549
 msgid "Sync failed for {name}"
 msgstr "{name}에 대한 동기화 실패"
 
 #: src/containers/execution-environment/registry-list.tsx:375
 #: src/containers/execution-environment-detail/base.tsx:122
-#: src/containers/execution-environment-list/execution_environment_list.tsx:356
+#: src/containers/execution-environment-list/execution_environment_list.tsx:361
 msgid "Sync from registry"
 msgstr "레지스트리에서 동기화"
 
@@ -2686,7 +2687,7 @@ msgstr "레지스트리에서 동기화"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:529
+#: src/containers/execution-environment-list/execution_environment_list.tsx:534
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "실행 환경 \"{name}\"에 대한 동기화가 시작되었습니다."
 
@@ -2971,7 +2972,7 @@ msgstr "업스트림 이름"
 #: src/components/execution-environment/publish-to-controller-modal.tsx:279
 #: src/containers/execution-environment-detail/base.tsx:135
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:408
-#: src/containers/execution-environment-list/execution_environment_list.tsx:369
+#: src/containers/execution-environment-list/execution_environment_list.tsx:374
 msgid "Use in Controller"
 msgstr "컨트롤러에서 사용"
 
@@ -3233,7 +3234,7 @@ msgstr "SSO 사용자입니다. 토큰은 <0/> 만료됩니다."
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
 msgstr "여기에서 사용자 정의 마크다운을 입력하여 프로필의 리소스 탭을 사용자 지정할 수 있습니다."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:196
+#: src/containers/execution-environment-list/execution_environment_list.tsx:198
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "현재 컨테이너 리포지토리가 없습니다. 시작하려면 CLI를 통해 컨테이너 리포지토리를 추가합니다."
 
