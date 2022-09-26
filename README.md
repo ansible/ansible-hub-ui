@@ -74,6 +74,7 @@ List by branches:
 - `stable-4.2`: `backported-labels`, `pr-checks`, `stable-release`
 - `stable-4.4`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
 - `stable-4.5`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
+- `stable-4.6`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
 
 ### Version mapping
 
