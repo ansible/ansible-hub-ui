@@ -17,6 +17,7 @@ jobs:
         - 'master'
         - 'stable-4.4'
         - 'stable-4.5'
+        - 'stable-4.6'
 
     steps:
 
