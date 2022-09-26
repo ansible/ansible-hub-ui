@@ -14,10 +14,10 @@ on:
         required: true
         type: choice
         options:
-          - prod-beta
-          - prod-stable
-          - qa-beta
-          - qa-stable
+        - prod-beta
+        - prod-stable
+        - qa-beta
+        - qa-stable
       commit:
         description: 'deploy custom commit'
         required: true
