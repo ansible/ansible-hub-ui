@@ -75,7 +75,7 @@ jobs:
 
         echo '# Containerfile'
         echo '\
-          FROM ghcr.io/pulp/pulp-ci-centos:latest
+          FROM ghcr.io/pulp/pulp-ci-centos:3.21
 
           COPY --chmod=644 ansible-sign.key /tmp/
           COPY --chmod=755 collection-sign.sh /var/lib/pulp/scripts/
