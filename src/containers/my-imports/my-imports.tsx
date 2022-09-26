@@ -129,6 +129,9 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
       return null;
     }
 
+    let empty: boolean;
+    empty = this.state.params.namespace ? true : false;
+
     return (
       <React.Fragment>
         <div ref={this.topOfPage}></div>
@@ -160,6 +163,11 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
                           () =>
                             this.loadImportList(() => this.loadTaskDetails()),
                         );
+                      } else {
+                        this.setState({
+                          importDetailError: t`No data`,
+                          loadingImportDetails: false,
+                        });
                       }
                     });
                   }}
@@ -167,21 +175,20 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
               </div>
 
               <div className='hub-import-console'>
-                {this.state.params.namespace && (
-                  <ImportConsole
-                    loading={loadingImportDetails}
-                    task={selectedImportDetails}
-                    followMessages={followLogs}
-                    setFollowMessages={(isFollowing) => {
-                      this.setState({
-                        followLogs: isFollowing,
-                      });
-                    }}
-                    selectedImport={selectedImport}
-                    apiError={importDetailError}
-                    collectionVersion={selectedCollectionVersion}
-                  />
-                )}
+                <ImportConsole
+                  empty={this.state.params.namespace ? false : true}
+                  loading={loadingImportDetails}
+                  task={selectedImportDetails}
+                  followMessages={followLogs}
+                  setFollowMessages={(isFollowing) => {
+                    this.setState({
+                      followLogs: isFollowing,
+                    });
+                  }}
+                  selectedImport={selectedImport}
+                  apiError={importDetailError}
+                  collectionVersion={selectedCollectionVersion}
+                />
               </div>
             </div>
           </section>
@@ -239,6 +246,10 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
 
   private loadImportList(callback?: () => void) {
     if (!this.state.params.namespace) {
+      this.setState({
+        importDetailError: t`No data`,
+        loadingImportDetails: false,
+      });
       return;
     }
 

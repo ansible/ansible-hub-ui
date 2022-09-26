@@ -93,6 +93,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
         <Main>
           <section className='body'>
             <ImportConsole
+              empty={false}
               loading={loadingImports}
               task={selectedImportDetail}
               followMessages={false}
