@@ -75,6 +75,19 @@ List by branches:
 - `stable-4.4`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
 - `stable-4.5`: `backported-labels`, `cypress`, `pr-checks`, `stable-release` (and `i18n` via cron from master)
 
+### Version mapping
+
+Our branches, backport labels, releases and tags use AAH versions, but Jira uses AAP versions.
+To map between the two:
+
+|AAP version|AAH version|
+|-|-|
+|1.2|4.2|
+|2.0|4.3 (obsolete)|
+|2.1|4.4|
+|2.2|4.5|
+|2.3|4.6|
+
 ## Patternfly
 
 - This project imports Patternfly components:
