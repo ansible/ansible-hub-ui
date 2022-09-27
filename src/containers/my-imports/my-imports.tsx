@@ -129,9 +129,6 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
       return null;
     }
 
-    let empty: boolean;
-    empty = this.state.params.namespace ? true : false;
-
     return (
       <React.Fragment>
         <div ref={this.topOfPage}></div>
@@ -176,7 +173,7 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
 
               <div className='hub-import-console'>
                 <ImportConsole
-                  empty={this.state.params.namespace ? false : true}
+                  empty={!this.state.params.namespace}
                   loading={loadingImportDetails}
                   task={selectedImportDetails}
                   followMessages={followLogs}
