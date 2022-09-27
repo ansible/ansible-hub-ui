@@ -2,25 +2,25 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import cx from 'classnames';
 import './my-imports.scss';
-import {
-  Pagination,
-  FormSelect,
-  FormSelectOption,
-  Toolbar,
-} from '@patternfly/react-core';
+import { Pagination, Toolbar } from '@patternfly/react-core';
 import {
   AppliedFilters,
   CompoundFilter,
   LoadingPageSpinner,
+  APISearchTypeAhead,
 } from 'src/components';
-import { PulpStatus, NamespaceType, ImportListType } from 'src/api';
+import {
+  PulpStatus,
+  NamespaceType,
+  ImportListType,
+  MyNamespaceAPI,
+} from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
-import { filterIsSet } from 'src/utilities';
+import { filterIsSet, errorMessage } from 'src/utilities';
 import { Constants } from 'src/constants';
 import { DateComponent, EmptyStateNoData, EmptyStateFilter } from '..';
 
 interface IProps {
-  namespaces: NamespaceType[];
   importList: ImportListType[];
   selectedImport: ImportListType;
   numberOfResults: number;
@@ -34,11 +34,13 @@ interface IProps {
 
   selectImport: (x) => void;
   updateParams: (filters) => void;
+  addAlert: (alert) => void;
 }
 
 interface IState {
   kwField: string;
   inputText: string;
+  namespaces: NamespaceType[];
 }
 
 export class ImportList extends React.Component<IProps, IState> {
@@ -48,7 +50,12 @@ export class ImportList extends React.Component<IProps, IState> {
     this.state = {
       kwField: '',
       inputText: '',
+      namespaces: [],
     };
+  }
+
+  componentDidMount() {
+    this.loadNamespaces(this.props.params.namespace);
   }
 
   render() {
@@ -56,7 +63,6 @@ export class ImportList extends React.Component<IProps, IState> {
       selectImport,
       importList,
       selectedImport,
-      namespaces,
       numberOfResults,
       params,
       updateParams,
@@ -65,7 +71,7 @@ export class ImportList extends React.Component<IProps, IState> {
 
     return (
       <div className='import-list'>
-        {this.renderNamespacePicker(namespaces)}
+        {this.renderApiSearchAhead()}
         <Toolbar>
           <CompoundFilter
             inputText={this.state.inputText}
@@ -120,23 +126,31 @@ export class ImportList extends React.Component<IProps, IState> {
         <div data-cy='import-list-data'>
           {this.renderList(selectImport, importList, selectedImport, loading)}
         </div>
-        <Pagination
-          itemCount={numberOfResults}
-          perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
-          page={params.page || 1}
-          onSetPage={(_, p) =>
-            updateParams(ParamHelper.setParam(params, 'page', p))
-          }
-          onPerPageSelect={(_, p) => {
-            updateParams({ ...params, page: 1, page_size: p });
-          }}
-          isCompact={true}
-        />
+        {this.props.params.namespace && (
+          <Pagination
+            itemCount={numberOfResults}
+            perPage={params.page_size || Constants.DEFAULT_PAGE_SIZE}
+            page={params.page || 1}
+            onSetPage={(_, p) =>
+              updateParams(ParamHelper.setParam(params, 'page', p))
+            }
+            onPerPageSelect={(_, p) => {
+              updateParams({ ...params, page: 1, page_size: p });
+            }}
+            isCompact={true}
+          />
+        )}
       </div>
     );
   }
 
   private renderList(selectImport, importList, selectedImport, loading) {
+    if (!this.props.params.namespace) {
+      return (
+        <EmptyStateNoData title={t`No namespace selected.`} description={''} />
+      );
+    }
+
     if (loading) {
       return (
         <div className='loading'>
@@ -144,6 +158,7 @@ export class ImportList extends React.Component<IProps, IState> {
         </div>
       );
     }
+
     if (
       importList.length === 0 &&
       !filterIsSet(this.props.params, ['keywords', 'state'])
@@ -215,28 +230,52 @@ export class ImportList extends React.Component<IProps, IState> {
     }
   }
 
-  private renderNamespacePicker(namespaces) {
+  private loadNamespaces(namespace_filter) {
+    if (!namespace_filter) {
+      namespace_filter = '';
+    }
+    MyNamespaceAPI.list({ page_size: 10, keywords: namespace_filter })
+      .then((result) => {
+        this.setState({ namespaces: result.data.data });
+      })
+      .catch((e) =>
+        this.props.addAlert({
+          variant: 'danger',
+          title: t`Namespaces list could not be displayed.`,
+          description: errorMessage(e.status, e.statusText),
+        }),
+      );
+  }
+
+  private renderApiSearchAhead() {
     return (
       <div className='namespace-selector-wrapper'>
         <div className='label'>{t`Namespace`}</div>
         <div className='selector'>
-          <FormSelect
-            onChange={(val) => {
+          <APISearchTypeAhead
+            loadResults={(name) => this.loadNamespaces(name)}
+            onSelect={(event, value) => {
               const params = ParamHelper.setParam(
                 this.props.params,
                 'namespace',
-                val,
+                value,
               );
               params['page'] = 1;
               this.props.updateParams(params);
             }}
-            value={this.props.params.namespace}
-            aria-label={t`Select namespace`}
-          >
-            {namespaces.map((ns) => (
-              <FormSelectOption key={ns.name} label={ns.name} value={ns.name} />
-            ))}
-          </FormSelect>
+            onClear={() => {
+              const params = ParamHelper.setParam(
+                this.props.params,
+                'namespace',
+                '',
+              );
+              params['page'] = 1;
+              this.props.updateParams(params);
+            }}
+            placeholderText={t`Select namespace`}
+            selections={[{ id: -1, name: this.props.params.namespace }]}
+            results={this.state.namespaces}
+          />
         </div>
       </div>
     );

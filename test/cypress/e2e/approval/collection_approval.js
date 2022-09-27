@@ -66,7 +66,8 @@ describe('tests the approval list screen ', () => {
     cy.contains('View Import Logs').click();
     cy.wait('@imports');
     cy.contains('My imports');
-    cy.get('.selector').contains('ansible');
+    cy.get('[placeholder="Select namespace"]').should('have.value', 'ansible');
+
     cy.get('.pf-c-chip-group__list').contains('network');
     cy.get('.pf-c-chip-group').contains('1.0.0');
   });
