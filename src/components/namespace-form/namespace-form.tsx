@@ -20,6 +20,7 @@ import { NamespaceType } from 'src/api';
 import { NamespaceCard } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { ErrorMessagesType, validateURLHelper } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IProps {
   namespace: NamespaceType;
@@ -29,6 +30,8 @@ interface IProps {
 }
 
 export class NamespaceForm extends React.Component<IProps> {
+  static contextType = AppContext;
+
   render() {
     const { namespace, errorMessages } = this.props;
 
@@ -84,7 +87,7 @@ export class NamespaceForm extends React.Component<IProps> {
                   to={formatPath(
                     Paths.namespaceByRepo,
                     {
-                      repo: 'published',
+                      repo: this.context.selectedRepo,
                       namespace: namespace.name,
                     },
                     { tab: 'owners' },
