@@ -5,15 +5,21 @@ import './my-imports.scss';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { cloneDeep } from 'lodash';
 
-import { BaseHeader, ImportConsole, ImportList, Main } from 'src/components';
+import {
+  BaseHeader,
+  ImportConsole,
+  ImportList,
+  Main,
+  closeAlertMixin,
+  AlertType,
+  AlertList,
+} from 'src/components';
 
 import {
   ImportAPI,
   ImportDetailType,
   ImportListType,
-  NamespaceType,
   PulpStatus,
-  MyNamespaceAPI,
   CollectionVersion,
   CollectionVersionAPI,
 } from 'src/api';
@@ -31,12 +37,12 @@ interface IState {
     keyword?: string;
     namespace?: string;
   };
-  namespaces: NamespaceType[];
   resultsCount: number;
   importDetailError: string;
   followLogs: boolean;
   loadingImports: boolean;
   loadingImportDetails: boolean;
+  alerts: AlertType[];
 }
 
 class MyImports extends React.Component<RouteComponentProps, IState> {
@@ -57,7 +63,6 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
       selectedImport: undefined,
       importList: [],
       params: params,
-      namespaces: [],
       selectedImportDetails: undefined,
       resultsCount: 0,
       importDetailError: '',
@@ -65,17 +70,20 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
       loadingImports: true,
       loadingImportDetails: true,
       selectedCollectionVersion: undefined,
+      alerts: [],
     };
   }
 
   componentDidMount() {
     // Load namespaces, use the namespaces to query the import list,
     // use the import list to load the task details
-    this.loadNamespaces(() =>
-      this.loadImportList(() => this.loadTaskDetails()),
-    );
+    this.loadImportList(() => this.loadTaskDetails());
 
     this.polling = setInterval(() => {
+      if (!this.state.params.namespace) {
+        return;
+      }
+
       const { selectedImport, selectedImportDetails } = this.state;
       const allowedStates = [PulpStatus.running, PulpStatus.waiting];
 
@@ -93,12 +101,21 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
     clearInterval(this.polling);
   }
 
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
+  }
+
+  private addAlert(alert) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
+  }
+
   render() {
     const {
       selectedImport,
       importList,
       params,
-      namespaces,
       selectedImportDetails,
       resultsCount,
       loadingImports,
@@ -116,34 +133,47 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
       <React.Fragment>
         <div ref={this.topOfPage}></div>
         <BaseHeader title={t`My imports`} />
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        />
         <Main>
           <section className='body'>
             <div className='hub-page-container' data-cy='MyImports'>
               <div className='import-list'>
                 <ImportList
+                  addAlert={(alert) => this.addAlert(alert)}
                   importList={importList}
                   selectedImport={selectedImport}
                   loading={loadingImports}
                   numberOfResults={resultsCount}
                   params={params}
-                  namespaces={namespaces}
                   selectImport={(sImport) => this.selectImport(sImport)}
                   updateParams={(params) => {
-                    this.updateParams(params, () =>
-                      this.setState(
-                        {
-                          loadingImports: true,
-                          loadingImportDetails: true,
-                        },
-                        () => this.loadImportList(() => this.loadTaskDetails()),
-                      ),
-                    );
+                    this.updateParams(params, () => {
+                      if (params.namespace) {
+                        this.setState(
+                          {
+                            loadingImports: true,
+                            loadingImportDetails: true,
+                          },
+                          () =>
+                            this.loadImportList(() => this.loadTaskDetails()),
+                        );
+                      } else {
+                        this.setState({
+                          importDetailError: t`No data`,
+                          loadingImportDetails: false,
+                        });
+                      }
+                    });
                   }}
                 />
               </div>
 
               <div className='hub-import-console'>
                 <ImportConsole
+                  empty={!this.state.params.namespace}
                   loading={loadingImportDetails}
                   task={selectedImportDetails}
                   followMessages={followLogs}
@@ -211,37 +241,15 @@ class MyImports extends React.Component<RouteComponentProps, IState> {
     });
   }
 
-  private loadNamespaces(callback?: () => void) {
-    MyNamespaceAPI.list({ page_size: 1000 })
-      .then((result) => {
-        const namespaces = result.data.data;
-        let selectedNS;
-
-        if (this.state.params.namespace) {
-          selectedNS = namespaces.find(
-            (x) => x.name === this.state.params.namespace,
-          );
-        }
-
-        if (!selectedNS) {
-          selectedNS = namespaces[0];
-        }
-
-        this.setState(
-          {
-            namespaces: namespaces,
-            params: {
-              ...this.state.params,
-              namespace: selectedNS.name,
-            },
-          },
-          callback,
-        );
-      })
-      .catch((result) => console.log(result));
-  }
-
   private loadImportList(callback?: () => void) {
+    if (!this.state.params.namespace) {
+      this.setState({
+        importDetailError: t`No data`,
+        loadingImportDetails: false,
+      });
+      return;
+    }
+
     ImportAPI.list({ ...this.state.params, sort: '-created' })
       .then((importList) => {
         this.setState(

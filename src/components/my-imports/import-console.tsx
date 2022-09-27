@@ -19,6 +19,7 @@ import { StatusIndicator } from 'src/components';
 import { Constants } from 'src/constants';
 
 interface IProps {
+  empty: boolean;
   task: ImportDetailType;
   followMessages: boolean;
   selectedImport: ImportListType;
@@ -128,7 +129,11 @@ export class ImportConsole extends React.Component<IProps> {
   }
 
   private renderTitle(selectedImport) {
-    const { task, hideCollectionName, collectionVersion } = this.props;
+    const { task, hideCollectionName, collectionVersion, empty } = this.props;
+
+    if (empty) {
+      return;
+    }
 
     let collectionHead = (
       <>
