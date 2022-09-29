@@ -26,14 +26,7 @@ jobs:
       fail-fast: false
       matrix:
         test:
-        - 'collections'
-        - 'approval'
-        - 'execution_environments'
-        - 'namespaces'
-        - 'groups_and_users'
         - 'repo'
-        - 'misc'
-        - 'imports'
 
     steps:
 
