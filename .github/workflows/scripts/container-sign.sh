@@ -9,9 +9,9 @@
 export PULP_CONTAINER_SIGNING_KEY_FINGERPRINT=EBED170E8C9480E22A1D059B15250E9EC0A62577
 
 # Create a file with passphrase only if the key is password protected.
-echo "Galaxy2022" > /tmp/key_password.txt
-
-cat /tmp/key_password.txt
+touch /tmp/key_password.txt
+chmod 777 /tmp/key_password.txt
+echo "Galaxy2022" >> /tmp/key_password.txt
 
 # pulp_container SigningService will pass the next 3 variables to the script.
 MANIFEST_PATH=$1
