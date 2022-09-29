@@ -11,6 +11,8 @@ export PULP_CONTAINER_SIGNING_KEY_FINGERPRINT=EBED170E8C9480E22A1D059B15250E9EC0
 # Create a file with passphrase only if the key is password protected.
 echo "Galaxy2022" > /tmp/key_password.txt
 
+cat /tmp/key_password.txt
+
 # pulp_container SigningService will pass the next 3 variables to the script.
 MANIFEST_PATH=$1
 IMAGE_REFERENCE="$REFERENCE"
