@@ -253,7 +253,7 @@ msgstr "すべて"
 msgid "Approval"
 msgstr "承認"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:121
+#: src/containers/certification-dashboard/certification-dashboard.tsx:126
 msgid "Approval dashboard"
 msgstr "承認ダッシュボード"
 
@@ -261,14 +261,14 @@ msgstr "承認ダッシュボード"
 msgid "Approval status:"
 msgstr "承認状態:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:386
-#: src/containers/certification-dashboard/certification-dashboard.tsx:419
+#: src/containers/certification-dashboard/certification-dashboard.tsx:391
+#: src/containers/certification-dashboard/certification-dashboard.tsx:424
 msgid "Approve"
 msgstr "承認"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:168
-#: src/containers/certification-dashboard/certification-dashboard.tsx:197
-#: src/containers/certification-dashboard/certification-dashboard.tsx:304
+#: src/containers/certification-dashboard/certification-dashboard.tsx:173
+#: src/containers/certification-dashboard/certification-dashboard.tsx:202
+#: src/containers/certification-dashboard/certification-dashboard.tsx:309
 msgid "Approved"
 msgstr "承認済"
 
@@ -335,7 +335,7 @@ msgstr "コレクションの依存関係が<0/>削除されるまで<1/>名前�
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "このコレクションに依存する<0/>コレクションが削除されるまで<1/>削除できません。"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:501
+#: src/containers/certification-dashboard/certification-dashboard.tsx:495
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "コレクション \"{0} {1} v{2}\" の認定ステータスが正常に更新されました。"
 
@@ -406,8 +406,7 @@ msgstr "タスクの変更"
 msgid "Change user"
 msgstr "ユーザーの変更"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:515
-#: src/containers/certification-dashboard/certification-dashboard.tsx:543
+#: src/containers/certification-dashboard/certification-dashboard.tsx:506
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "コレクション \"{0} {1} v{2}\" の認定ステータスへの変更を保存できませんでした。"
 
@@ -458,7 +457,7 @@ msgid "Code"
 msgstr "コード"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:89
-#: src/containers/certification-dashboard/certification-dashboard.tsx:248
+#: src/containers/certification-dashboard/certification-dashboard.tsx:253
 msgid "Collection"
 msgstr "コレクション"
 
@@ -491,7 +490,7 @@ msgstr "コレクション \"{name}\" をダウンロードできませんでし
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "コレクション \"{name}\" が正常に削除されました。"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:151
+#: src/containers/certification-dashboard/certification-dashboard.tsx:156
 msgid "Collection Name"
 msgstr "コレクション名"
 
@@ -527,7 +526,7 @@ msgstr "コレクションのアップロードが取り消されました"
 #: src/components/headers/collection-header.tsx:269
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
-#: src/containers/certification-dashboard/certification-dashboard.tsx:277
+#: src/containers/certification-dashboard/certification-dashboard.tsx:282
 msgid "Collection versions"
 msgstr "コレクションのバージョン"
 
@@ -539,7 +538,7 @@ msgstr "コレクションのバージョン"
 msgid "Collections"
 msgstr "コレクション"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:236
+#: src/containers/certification-dashboard/certification-dashboard.tsx:241
 #: src/containers/namespace-detail/namespace-detail.tsx:294
 #: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
@@ -747,7 +746,7 @@ msgstr "非推奨"
 msgid "Date"
 msgstr "日付"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:258
+#: src/containers/certification-dashboard/certification-dashboard.tsx:263
 msgid "Date created"
 msgstr "作成日"
 
@@ -1124,6 +1123,10 @@ msgstr "API からのインポート取得エラー"
 #~ msgid "Error loading collection repositories."
 #~ msgstr "Error loading collection repositories."
 
+#: src/containers/certification-dashboard/certification-dashboard.tsx:526
+msgid "Error loading collections."
+msgstr ""
+
 #: src/containers/collection-detail/collection-dependencies.tsx:209
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Error loading dependent collections."
@@ -1362,7 +1365,7 @@ msgstr "Galaxy ロゴ"
 msgid "Get token"
 msgstr "トークンの取得"
 
-#: src/utilities/wait-for-task.ts:9
+#: src/utilities/wait-for-task.ts:17
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "10 回試行した後に、タスクの待機を中止します。"
 
@@ -1524,8 +1527,8 @@ msgid "Instructions"
 msgstr "手順"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:544
-msgid "Internal Server Error"
-msgstr "内部サーバーエラー"
+#~ msgid "Internal Server Error"
+#~ msgstr "内部サーバーエラー"
 
 #: src/components/import-modal/import-modal.tsx:153
 msgid "Invalid file format."
@@ -1728,8 +1731,8 @@ msgid "Name must not be empty."
 msgstr "名前を空白にすることはできません。"
 
 #: src/components/my-imports/import-list.tsx:221
-#: src/containers/certification-dashboard/certification-dashboard.tsx:147
-#: src/containers/certification-dashboard/certification-dashboard.tsx:243
+#: src/containers/certification-dashboard/certification-dashboard.tsx:152
+#: src/containers/certification-dashboard/certification-dashboard.tsx:248
 msgid "Namespace"
 msgstr "名前空間"
 
@@ -1772,16 +1775,16 @@ msgstr "名前空間リストを表示できませんでした。"
 msgid "Namespaces will appear once created"
 msgstr "名前空間は作成後に表示されます"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:164
-#: src/containers/certification-dashboard/certification-dashboard.tsx:198
+#: src/containers/certification-dashboard/certification-dashboard.tsx:169
+#: src/containers/certification-dashboard/certification-dashboard.tsx:203
 msgid "Needs Review"
 msgstr "レビューが必要"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:328
+#: src/containers/certification-dashboard/certification-dashboard.tsx:333
 msgid "Needs review"
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:327
+#: src/containers/certification-dashboard/certification-dashboard.tsx:332
 msgid "Needs signature and review"
 msgstr ""
 
@@ -1848,7 +1851,7 @@ msgstr "インポートなし"
 msgid "No local repositories yet"
 msgstr "まだローカルリポジトリーはありません"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:235
+#: src/containers/certification-dashboard/certification-dashboard.tsx:240
 msgid "No managed collections yet"
 msgstr "まだ管理コレクションはありません"
 
@@ -2260,13 +2263,13 @@ msgstr "レジストリー URL"
 msgid "Registry sync status"
 msgstr "レジストリーの同期ステータス"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:436
+#: src/containers/certification-dashboard/certification-dashboard.tsx:441
 msgid "Reject"
 msgstr "拒否"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:160
-#: src/containers/certification-dashboard/certification-dashboard.tsx:199
-#: src/containers/certification-dashboard/certification-dashboard.tsx:311
+#: src/containers/certification-dashboard/certification-dashboard.tsx:165
+#: src/containers/certification-dashboard/certification-dashboard.tsx:204
+#: src/containers/certification-dashboard/certification-dashboard.tsx:316
 msgid "Rejected"
 msgstr "拒否"
 
@@ -2508,8 +2511,8 @@ msgstr "すべて署名する"
 msgid "Sign all collections"
 msgstr "すべてのコレクションに署名する"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:386
-#: src/containers/certification-dashboard/certification-dashboard.tsx:419
+#: src/containers/certification-dashboard/certification-dashboard.tsx:391
+#: src/containers/certification-dashboard/certification-dashboard.tsx:424
 msgid "Sign and approve"
 msgstr "署名および承認"
 
@@ -2538,7 +2541,7 @@ msgstr "署名"
 msgid "Signed"
 msgstr "署名済み"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:303
+#: src/containers/certification-dashboard/certification-dashboard.tsx:308
 msgid "Signed and approved"
 msgstr "署名済みおよび承認済み"
 
@@ -2580,9 +2583,9 @@ msgstr "状態"
 
 #: src/components/my-imports/import-list.tsx:82
 #: src/components/my-imports/import-list.tsx:117
-#: src/containers/certification-dashboard/certification-dashboard.tsx:155
-#: src/containers/certification-dashboard/certification-dashboard.tsx:203
-#: src/containers/certification-dashboard/certification-dashboard.tsx:263
+#: src/containers/certification-dashboard/certification-dashboard.tsx:160
+#: src/containers/certification-dashboard/certification-dashboard.tsx:208
+#: src/containers/certification-dashboard/certification-dashboard.tsx:268
 #: src/containers/task-management/task-list-view.tsx:151
 #: src/containers/task-management/task-list-view.tsx:197
 #: src/containers/task-management/task-list-view.tsx:246
@@ -3113,7 +3116,7 @@ msgid "Users will appear once created"
 msgstr "ユーザーは作成後に表示されます"
 
 #: src/components/headers/collection-header.tsx:399
-#: src/containers/certification-dashboard/certification-dashboard.tsx:253
+#: src/containers/certification-dashboard/certification-dashboard.tsx:258
 msgid "Version"
 msgstr "バージョン"
 
@@ -3125,7 +3128,7 @@ msgstr "バージョン:"
 msgid "View Ansible distribution"
 msgstr "Ansible ディストリビューションの表示"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:405
+#: src/containers/certification-dashboard/certification-dashboard.tsx:410
 msgid "View Import Logs"
 msgstr "インポートログの表示"
 

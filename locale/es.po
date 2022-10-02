@@ -255,7 +255,7 @@ msgstr "Todos"
 msgid "Approval"
 msgstr "Aprobación"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:121
+#: src/containers/certification-dashboard/certification-dashboard.tsx:126
 msgid "Approval dashboard"
 msgstr "Cuadro de mandos de aprobación"
 
@@ -263,14 +263,14 @@ msgstr "Cuadro de mandos de aprobación"
 msgid "Approval status:"
 msgstr "Estado de aprobación:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:386
-#: src/containers/certification-dashboard/certification-dashboard.tsx:419
+#: src/containers/certification-dashboard/certification-dashboard.tsx:391
+#: src/containers/certification-dashboard/certification-dashboard.tsx:424
 msgid "Approve"
 msgstr "Aprobar"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:168
-#: src/containers/certification-dashboard/certification-dashboard.tsx:197
-#: src/containers/certification-dashboard/certification-dashboard.tsx:304
+#: src/containers/certification-dashboard/certification-dashboard.tsx:173
+#: src/containers/certification-dashboard/certification-dashboard.tsx:202
+#: src/containers/certification-dashboard/certification-dashboard.tsx:309
 msgid "Approved"
 msgstr "Aprobado"
 
@@ -337,7 +337,7 @@ msgstr "No se puede eliminar el espacio de nombres hasta que se <1/>hayan elimin
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "No se puede eliminar hasta que se <1/>hayan eliminado las colecciones <0/>que dependen de esta colección."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:501
+#: src/containers/certification-dashboard/certification-dashboard.tsx:495
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "El estado de certificación para la colección \"{0} {1} v{2}\" se actualizó correctamente."
 
@@ -408,8 +408,7 @@ msgstr "Cambiar tarea"
 msgid "Change user"
 msgstr "Cambiar usuario"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:515
-#: src/containers/certification-dashboard/certification-dashboard.tsx:543
+#: src/containers/certification-dashboard/certification-dashboard.tsx:506
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "No se pudieron guardar los cambios para el estado de certificación \"{0} {1} v{2}\"."
 
@@ -460,7 +459,7 @@ msgid "Code"
 msgstr "Código"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:89
-#: src/containers/certification-dashboard/certification-dashboard.tsx:248
+#: src/containers/certification-dashboard/certification-dashboard.tsx:253
 msgid "Collection"
 msgstr "Colección"
 
@@ -493,7 +492,7 @@ msgstr "No se pudo descargar la colección \"{name}\"."
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "La colección \"{name}\" se eliminó correctamente."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:151
+#: src/containers/certification-dashboard/certification-dashboard.tsx:156
 msgid "Collection Name"
 msgstr "Nombre de la colección"
 
@@ -529,7 +528,7 @@ msgstr "Carga de la colección cancelada"
 #: src/components/headers/collection-header.tsx:269
 #: src/components/repositories/local-repository-table.tsx:84
 #: src/components/repositories/remote-repository-table.tsx:98
-#: src/containers/certification-dashboard/certification-dashboard.tsx:277
+#: src/containers/certification-dashboard/certification-dashboard.tsx:282
 msgid "Collection versions"
 msgstr "Versiones de la colección"
 
@@ -541,7 +540,7 @@ msgstr "Versiones de la colección"
 msgid "Collections"
 msgstr "Colecciones"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:236
+#: src/containers/certification-dashboard/certification-dashboard.tsx:241
 #: src/containers/namespace-detail/namespace-detail.tsx:294
 #: src/containers/search/search.tsx:153
 msgid "Collections will appear once uploaded"
@@ -749,7 +748,7 @@ msgstr "OBSOLETO"
 msgid "Date"
 msgstr "Fecha"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:258
+#: src/containers/certification-dashboard/certification-dashboard.tsx:263
 msgid "Date created"
 msgstr "Fecha de creación"
 
@@ -1126,6 +1125,10 @@ msgstr "Error al importar desde la API"
 #~ msgid "Error loading collection repositories."
 #~ msgstr "Error loading collection repositories."
 
+#: src/containers/certification-dashboard/certification-dashboard.tsx:526
+msgid "Error loading collections."
+msgstr ""
+
 #: src/containers/collection-detail/collection-dependencies.tsx:209
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Error loading dependent collections."
@@ -1364,7 +1367,7 @@ msgstr "Logotipo de Galaxy"
 msgid "Get token"
 msgstr "Obtener token"
 
-#: src/utilities/wait-for-task.ts:9
+#: src/utilities/wait-for-task.ts:17
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "Abandonar la espera de la tarea después de 10 intentos."
 
@@ -1526,8 +1529,8 @@ msgid "Instructions"
 msgstr "Instrucciones"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:544
-msgid "Internal Server Error"
-msgstr "Error de servidor interno"
+#~ msgid "Internal Server Error"
+#~ msgstr "Error de servidor interno"
 
 #: src/components/import-modal/import-modal.tsx:153
 msgid "Invalid file format."
@@ -1730,8 +1733,8 @@ msgid "Name must not be empty."
 msgstr "El nombre no debe estar vacío."
 
 #: src/components/my-imports/import-list.tsx:221
-#: src/containers/certification-dashboard/certification-dashboard.tsx:147
-#: src/containers/certification-dashboard/certification-dashboard.tsx:243
+#: src/containers/certification-dashboard/certification-dashboard.tsx:152
+#: src/containers/certification-dashboard/certification-dashboard.tsx:248
 msgid "Namespace"
 msgstr "Espacio de nombres"
 
@@ -1774,16 +1777,16 @@ msgstr "No se pudo mostrar la lista de espacios de nombres."
 msgid "Namespaces will appear once created"
 msgstr "Los espacios de nombres aparecerán una vez creados"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:164
-#: src/containers/certification-dashboard/certification-dashboard.tsx:198
+#: src/containers/certification-dashboard/certification-dashboard.tsx:169
+#: src/containers/certification-dashboard/certification-dashboard.tsx:203
 msgid "Needs Review"
 msgstr "Revisión de necesidades"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:328
+#: src/containers/certification-dashboard/certification-dashboard.tsx:333
 msgid "Needs review"
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:327
+#: src/containers/certification-dashboard/certification-dashboard.tsx:332
 msgid "Needs signature and review"
 msgstr ""
 
@@ -1850,7 +1853,7 @@ msgstr "No hay importaciones"
 msgid "No local repositories yet"
 msgstr "Todavía no hay repositorios locales"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:235
+#: src/containers/certification-dashboard/certification-dashboard.tsx:240
 msgid "No managed collections yet"
 msgstr "Todavía no hay colecciones gestionadas"
 
@@ -2262,13 +2265,13 @@ msgstr "URL del registro"
 msgid "Registry sync status"
 msgstr "Estado de la sincronización del registro"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:436
+#: src/containers/certification-dashboard/certification-dashboard.tsx:441
 msgid "Reject"
 msgstr "Rechazar"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:160
-#: src/containers/certification-dashboard/certification-dashboard.tsx:199
-#: src/containers/certification-dashboard/certification-dashboard.tsx:311
+#: src/containers/certification-dashboard/certification-dashboard.tsx:165
+#: src/containers/certification-dashboard/certification-dashboard.tsx:204
+#: src/containers/certification-dashboard/certification-dashboard.tsx:316
 msgid "Rejected"
 msgstr "Rechazado"
 
@@ -2510,8 +2513,8 @@ msgstr "Firmar todo"
 msgid "Sign all collections"
 msgstr "Firmar todas las colecciones"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:386
-#: src/containers/certification-dashboard/certification-dashboard.tsx:419
+#: src/containers/certification-dashboard/certification-dashboard.tsx:391
+#: src/containers/certification-dashboard/certification-dashboard.tsx:424
 msgid "Sign and approve"
 msgstr "Firmar y aprobar"
 
@@ -2540,7 +2543,7 @@ msgstr "Firma"
 msgid "Signed"
 msgstr "Firmado"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:303
+#: src/containers/certification-dashboard/certification-dashboard.tsx:308
 msgid "Signed and approved"
 msgstr "Firmado y aprobado"
 
@@ -2582,9 +2585,9 @@ msgstr "Estado"
 
 #: src/components/my-imports/import-list.tsx:82
 #: src/components/my-imports/import-list.tsx:117
-#: src/containers/certification-dashboard/certification-dashboard.tsx:155
-#: src/containers/certification-dashboard/certification-dashboard.tsx:203
-#: src/containers/certification-dashboard/certification-dashboard.tsx:263
+#: src/containers/certification-dashboard/certification-dashboard.tsx:160
+#: src/containers/certification-dashboard/certification-dashboard.tsx:208
+#: src/containers/certification-dashboard/certification-dashboard.tsx:268
 #: src/containers/task-management/task-list-view.tsx:151
 #: src/containers/task-management/task-list-view.tsx:197
 #: src/containers/task-management/task-list-view.tsx:246
@@ -3115,7 +3118,7 @@ msgid "Users will appear once created"
 msgstr "Los usuarios aparecerán una vez creados"
 
 #: src/components/headers/collection-header.tsx:399
-#: src/containers/certification-dashboard/certification-dashboard.tsx:253
+#: src/containers/certification-dashboard/certification-dashboard.tsx:258
 msgid "Version"
 msgstr "Versión"
 
@@ -3127,7 +3130,7 @@ msgstr "Versión:"
 msgid "View Ansible distribution"
 msgstr "Ver la distribución de Ansible"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:405
+#: src/containers/certification-dashboard/certification-dashboard.tsx:410
 msgid "View Import Logs"
 msgstr "Ver los registros de importación"
 
