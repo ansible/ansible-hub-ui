@@ -293,7 +293,7 @@ msgstr "Aprobación"
 msgid "Approval dashboard"
 msgstr "Cuadro de mandos de aprobación"
 
-#: src/components/my-imports/import-console.tsx:184
+#: src/components/my-imports/import-console.tsx:189
 msgid "Approval status:"
 msgstr "Estado de aprobación:"
 
@@ -663,7 +663,7 @@ msgstr "Las colecciones de la comunidad no tienen documentos ni recuentos de con
 msgid "Company name"
 msgstr "Nombre de la empresa"
 
-#: src/components/my-imports/import-list.tsx:87
+#: src/components/my-imports/import-list.tsx:93
 #: src/components/status/status-indicator.tsx:67
 #: src/constants.tsx:372
 #: src/containers/task-management/task-list-view.tsx:162
@@ -758,7 +758,7 @@ msgstr "No se pudo mostrar la lista de controladores."
 msgid "Copy to clipboard"
 msgstr "Copiar al portapapeles"
 
-#: src/containers/collection-detail/collection-import-log.tsx:111
+#: src/containers/collection-detail/collection-import-log.tsx:112
 msgid "Could not load import log"
 msgstr "No se ha podido cargar el registro de importación"
 
@@ -1123,7 +1123,7 @@ msgstr "Documentación"
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "La documentación sobre cómo configurar el cliente <0>ansible-galaxy</0> se puede encontrar <1>aquí</1>. Utilice los siguientes parámetros para configurar el cliente."
 
-#: src/components/my-imports/import-console.tsx:106
+#: src/components/my-imports/import-console.tsx:107
 #: src/containers/task-management/task_detail.tsx:312
 msgid "Done"
 msgstr "Finalizado"
@@ -1279,7 +1279,7 @@ msgstr "Error al borrar el grupo."
 #~ msgid "Error editing group."
 #~ msgstr "Error editing group."
 
-#: src/containers/my-imports/my-imports.tsx:304
+#: src/containers/my-imports/my-imports.tsx:312
 msgid "Error fetching import from API"
 msgstr "Error al importar desde la API"
 
@@ -1365,7 +1365,7 @@ msgstr "Error al cargar los entornos."
 msgid "Error message"
 msgstr "Mensaje de error"
 
-#: src/components/my-imports/import-console.tsx:194
+#: src/components/my-imports/import-console.tsx:199
 msgid "Error message:"
 msgstr "Mensaje de error"
 
@@ -1460,8 +1460,8 @@ msgstr "El entorno de ejecución \"{selectedItem}\" se eliminó correctamente."
 msgid "Expiration"
 msgstr "Expiración"
 
-#: src/components/my-imports/import-console.tsx:113
-#: src/components/my-imports/import-list.tsx:91
+#: src/components/my-imports/import-console.tsx:114
+#: src/components/my-imports/import-list.tsx:97
 #: src/components/status/status-indicator.tsx:75
 #: src/constants.tsx:373
 #: src/containers/task-management/task-list-view.tsx:166
@@ -1538,7 +1538,7 @@ msgstr "Finalizado a las"
 msgid "First name"
 msgstr "Nombre"
 
-#: src/components/my-imports/import-console.tsx:84
+#: src/components/my-imports/import-console.tsx:85
 msgid "Follow logs"
 msgstr "Registros de seguimiento"
 
@@ -1928,7 +1928,7 @@ msgstr ""
 msgid "Must be an integer."
 msgstr "Debe ser un número entero."
 
-#: src/containers/my-imports/my-imports.tsx:118
+#: src/containers/my-imports/my-imports.tsx:135
 msgid "My imports"
 msgstr "Mis importaciones"
 
@@ -1945,8 +1945,8 @@ msgstr "Mi perfil"
 #: src/components/collection-detail/collection-content-list.tsx:107
 #: src/components/execution-environment/repository-form.tsx:153
 #: src/components/execution-environment/repository-form.tsx:181
-#: src/components/my-imports/import-list.tsx:78
-#: src/components/my-imports/import-list.tsx:115
+#: src/components/my-imports/import-list.tsx:84
+#: src/components/my-imports/import-list.tsx:121
 #: src/components/namespace-form/namespace-form.tsx:43
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/rbac/group-modal.tsx:75
@@ -1990,7 +1990,7 @@ msgstr "El nombre debe tener más de 2 caracteres"
 msgid "Name must not be empty."
 msgstr "El nombre no debe estar vacío."
 
-#: src/components/my-imports/import-list.tsx:221
+#: src/components/my-imports/import-list.tsx:253
 #: src/containers/certification-dashboard/certification-dashboard.tsx:166
 #: src/containers/certification-dashboard/certification-dashboard.tsx:267
 msgid "Namespace"
@@ -2027,6 +2027,7 @@ msgstr "Propietarios de espacios de nombres"
 msgid "Namespaces"
 msgstr "Espacios de nombres"
 
+#: src/components/my-imports/import-list.tsx:244
 #: src/containers/namespace-list/namespace-list.tsx:125
 #: src/containers/namespace-list/namespace-list.tsx:366
 msgid "Namespaces list could not be displayed."
@@ -2094,7 +2095,9 @@ msgstr "Todavía no hay colecciones"
 msgid "No container repositories yet"
 msgstr "Todavía no hay repositorios de contenedores"
 
-#: src/containers/my-imports/my-imports.tsx:263
+#: src/containers/my-imports/my-imports.tsx:165
+#: src/containers/my-imports/my-imports.tsx:247
+#: src/containers/my-imports/my-imports.tsx:271
 msgid "No data"
 msgstr "No hay datos"
 
@@ -2112,7 +2115,7 @@ msgstr "No hay grupos para añadir"
 msgid "No images yet"
 msgstr "Todavía no hay imágenes"
 
-#: src/components/my-imports/import-list.tsx:153
+#: src/components/my-imports/import-list.tsx:168
 msgid "No imports"
 msgstr "No hay importaciones"
 
@@ -2123,6 +2126,10 @@ msgstr "Todavía no hay repositorios locales"
 #: src/containers/certification-dashboard/certification-dashboard.tsx:259
 msgid "No managed collections yet"
 msgstr "Todavía no hay colecciones gestionadas"
+
+#: src/components/my-imports/import-list.tsx:150
+msgid "No namespace selected."
+msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx:286
 msgid "No namespaces yet"
@@ -2164,7 +2171,7 @@ msgstr "No se ha seleccionado ninguna etiqueta o compendio."
 msgid "No task group"
 msgstr "Ningún grupo de trabajo"
 
-#: src/components/my-imports/import-console.tsx:99
+#: src/components/my-imports/import-console.tsx:100
 msgid "No task messages available"
 msgstr "No hay mensajes de tareas disponibles"
 
@@ -2739,7 +2746,7 @@ msgstr ""
 msgid "Roles list could not be displayed."
 msgstr ""
 
-#: src/components/my-imports/import-list.tsx:95
+#: src/components/my-imports/import-list.tsx:101
 #: src/components/status/status-indicator.tsx:61
 #: src/constants.tsx:374
 #: src/containers/task-management/task-list-view.tsx:170
@@ -2779,7 +2786,7 @@ msgstr "Se guardaron los cambios en el espacio de nombres \"{0}\"."
 msgid "Saved changes to user \"{username}\"."
 msgstr "Se guardaron los cambios en el usuario \"{username}\"."
 
-#: src/components/my-imports/import-console.tsx:84
+#: src/components/my-imports/import-console.tsx:85
 msgid "Scroll to end"
 msgstr "Desplácese hasta el final"
 
@@ -2836,7 +2843,7 @@ msgstr "Seleccionar grupos"
 #~ msgid "Select input"
 #~ msgstr "Select input"
 
-#: src/components/my-imports/import-list.tsx:234
+#: src/components/my-imports/import-list.tsx:275
 msgid "Select namespace"
 msgstr "Seleccione el espacio de nombres"
 
@@ -3009,8 +3016,8 @@ msgstr "Iniciado a las"
 msgid "State"
 msgstr "Estado"
 
-#: src/components/my-imports/import-list.tsx:82
-#: src/components/my-imports/import-list.tsx:116
+#: src/components/my-imports/import-list.tsx:88
+#: src/components/my-imports/import-list.tsx:122
 #: src/containers/certification-dashboard/certification-dashboard.tsx:174
 #: src/containers/certification-dashboard/certification-dashboard.tsx:222
 #: src/containers/certification-dashboard/certification-dashboard.tsx:287
@@ -3020,7 +3027,7 @@ msgstr "Estado"
 msgid "Status"
 msgstr "Estado"
 
-#: src/components/my-imports/import-console.tsx:180
+#: src/components/my-imports/import-console.tsx:185
 msgid "Status:"
 msgstr "Estado"
 
@@ -3320,7 +3327,7 @@ msgstr ""
 msgid "There are no repos associated with this remote."
 msgstr "No hay repos asociados a este remoto."
 
-#: src/components/my-imports/import-list.tsx:154
+#: src/components/my-imports/import-list.tsx:169
 msgid "There have not been any imports on this namespace."
 msgstr "No ha habido ninguna importación en este espacio de nombres."
 
@@ -3660,7 +3667,7 @@ msgstr ""
 msgid "Version"
 msgstr "Versión"
 
-#: src/components/my-imports/import-console.tsx:188
+#: src/components/my-imports/import-console.tsx:193
 msgid "Version:"
 msgstr "Versión:"
 
@@ -3740,7 +3747,7 @@ msgstr ""
 msgid "View, and cancel any task."
 msgstr ""
 
-#: src/components/my-imports/import-list.tsx:99
+#: src/components/my-imports/import-list.tsx:105
 #: src/constants.tsx:375
 #: src/containers/task-management/task-list-view.tsx:174
 msgid "Waiting"
@@ -3858,11 +3865,11 @@ msgstr "Tiene cambios no guardados"
 msgid "add-user-modal"
 msgstr "add-user-modal"
 
-#: src/components/my-imports/import-console.tsx:147
+#: src/components/my-imports/import-console.tsx:152
 msgid "approved"
 msgstr "aprobado"
 
-#: src/components/my-imports/import-console.tsx:149
+#: src/components/my-imports/import-console.tsx:154
 msgid "could not be determined yet"
 msgstr "aún no se ha podido determinar"
 
@@ -3893,7 +3900,7 @@ msgstr "por página"
 msgid "popover example"
 msgstr "ejemplo de ventana emergente"
 
-#: src/components/my-imports/import-console.tsx:143
+#: src/components/my-imports/import-console.tsx:148
 msgid "rejected"
 msgstr "rechazado"
 
@@ -3925,11 +3932,11 @@ msgstr ""
 msgid "updated {0}"
 msgstr ""
 
-#: src/components/my-imports/import-console.tsx:145
+#: src/components/my-imports/import-console.tsx:150
 msgid "waiting for approval"
 msgstr "a la espera de la aprobación"
 
-#: src/components/my-imports/import-console.tsx:138
+#: src/components/my-imports/import-console.tsx:143
 msgid "waiting for import to finish"
 msgstr "esperando a que termine la importación"
 
