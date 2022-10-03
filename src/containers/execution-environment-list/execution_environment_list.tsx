@@ -126,7 +126,7 @@ class ExecutionEnvironmentList extends React.Component<
       showDeleteModal,
       selectedItem,
     } = this.state;
-    const { user } = this.context;
+    const { hasPermission } = this.context;
 
     const noData =
       items.length === 0 && !filterIsSet(params, ['name__icontains']);
@@ -145,7 +145,7 @@ class ExecutionEnvironmentList extends React.Component<
         <Trans>Push container images</Trans> <ExternalLinkAltIcon />
       </Button>
     );
-    const addRemoteButton = user?.model_permissions?.add_containernamespace && (
+    const addRemoteButton = hasPermission('add_containernamespace') && (
       <Button
         onClick={() =>
           this.setState({
@@ -344,6 +344,8 @@ class ExecutionEnvironmentList extends React.Component<
       permissions.includes('container.change_containernamespace') ||
       permissions.includes('container.namespace_change_containerdistribution');
 
+    const { hasPermission } = this.context;
+
     const dropdownItems = [
       canEdit && (
         <DropdownItem
@@ -375,7 +377,7 @@ class ExecutionEnvironmentList extends React.Component<
       >
         {t`Use in Controller`}
       </DropdownItem>,
-      this.context.user.model_permissions.delete_containerrepository && (
+      hasPermission('delete_containerrepository') && (
         <DropdownItem
           key='delete'
           onClick={() =>

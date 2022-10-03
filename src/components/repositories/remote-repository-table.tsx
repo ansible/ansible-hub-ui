@@ -109,7 +109,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
   }
 
   private renderRow(remote, i) {
-    const { user } = this.props;
+    const { hasPermission } = this.context;
     const buttons = remote.repositories.length
       ? this.getConfigureOrSyncButton(remote)
       : [
@@ -123,7 +123,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
           </Tooltip>,
         ];
     const dropdownItems = [
-      remote.repositories.length && user?.model_permissions?.change_remote && (
+      remote.repositories.length && hasPermission('change_remote') && (
         <DropdownItem key='edit' onClick={() => this.props.editRemote(remote)}>
           {t`Edit`}
         </DropdownItem>
@@ -148,8 +148,8 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
   }
 
   private getConfigureOrSyncButton(remote: RemoteType) {
-    const { user } = this.props;
-    if (!user?.model_permissions?.change_remote) {
+    const { hasPermission } = this.context;
+    if (!hasPermission('change_remote')) {
       return null;
     }
     const configButton = [

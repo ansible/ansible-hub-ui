@@ -117,11 +117,8 @@ class CertificationDashboard extends React.Component<
   }
 
   componentDidMount() {
-    if (
-      !this.context.user ||
-      this.context.user.is_anonymous ||
-      !this.context.user.model_permissions.move_collection
-    ) {
+    const { user, hasPermission } = this.context;
+    if (!user || user.is_anonymous || !hasPermission('move_collection')) {
       this.setState({ unauthorized: true });
     } else {
       this.queryCollections();

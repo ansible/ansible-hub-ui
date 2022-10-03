@@ -41,10 +41,9 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
     if (this.state.redirect) {
       return <Redirect push to={this.state.redirect} />;
     }
-
+    const { hasPermission } = this.context;
     const { user, errorMessages } = this.state;
-    const notAuthorised =
-      !this.context.user || !this.context.user.model_permissions.add_user;
+    const notAuthorised = !this.context.user || !hasPermission('add_user');
     const breadcrumbs = [
       { url: Paths.userList, name: t`Users` },
       { name: t`Create new user` },
