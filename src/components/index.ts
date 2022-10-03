@@ -38,6 +38,7 @@ export { HelperText } from './helper-text/helper-text';
 export { ImportConsole } from './my-imports/import-console';
 export { ImportList } from './my-imports/import-list';
 export { ImportModal } from './import-modal/import-modal';
+export { ListPage } from './page/list-page';
 export { LinkTabs } from './patternfly-wrappers/link-tabs';
 export { LoadingPageSpinner } from './loading/loading-page-spinner';
 export { LoadingPageWithHeader } from './loading/loading-with-header';
