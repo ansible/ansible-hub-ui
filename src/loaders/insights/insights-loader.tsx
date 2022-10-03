@@ -10,6 +10,7 @@ import { loadContext } from '../load-context';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { Paths } from 'src/paths';
 import { AlertType, UIVersion } from 'src/components';
+import { hasPermission } from 'src/utilities';
 
 const DEFAULT_REPO = 'published';
 
@@ -129,6 +130,15 @@ class App extends Component<IProps, IState> {
           setUser: this.setUser,
           settings: this.state.settings,
           user: this.state.user,
+          hasPermission: (name) =>
+            hasPermission(
+              {
+                user: this.state.user,
+                settings: this.state.settings,
+                featureFlags: this.state.featureFlags,
+              },
+              name,
+            ),
         }}
       >
         <Alert

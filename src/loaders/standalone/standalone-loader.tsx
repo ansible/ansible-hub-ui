@@ -44,6 +44,7 @@ import {
   SmallLogo,
   StatefulDropdown,
 } from 'src/components';
+import { hasPermission } from 'src/utilities';
 import { AppContext } from '../app-context';
 import Logo from 'src/../static/images/logo_large.svg';
 
@@ -466,6 +467,15 @@ class App extends React.Component<RouteComponentProps, IState> {
           setUser: this.setUser,
           settings: this.state.settings,
           user: this.state.user,
+          hasPermission: (name) =>
+            hasPermission(
+              {
+                user: this.state.user,
+                settings: this.state.settings,
+                featureFlags: this.state.featureFlags,
+              },
+              name,
+            ),
         }}
       >
         {component}
