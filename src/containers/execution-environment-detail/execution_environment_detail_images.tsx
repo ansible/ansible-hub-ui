@@ -398,7 +398,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       >
         {t`Use in Controller`}
       </DropdownItem>,
-      hasPermission('delete_containerrepository') && (
+      hasPermission('container.delete_containerrepository') && (
         <DropdownItem
           key='delete-image'
           onClick={() => {

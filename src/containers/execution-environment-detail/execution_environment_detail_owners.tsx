@@ -83,7 +83,7 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
           groups: groups,
           canEditOwners:
             my_permissions.includes('container.change_containernamespace') ||
-            hasPermission('change_containernamespace'),
+            hasPermission('container.change_containernamespace'),
         }),
     );
   }

@@ -363,7 +363,8 @@ class App extends React.Component<RouteComponentProps, IState> {
           condition: ({ user }) => !user.is_anonymous,
         }),
         menuItem(t`Approval`, {
-          condition: ({ user }) => user.model_permissions.move_collection,
+          condition: (params) =>
+            hasPermission(params, 'ansible.modify_ansible_repo_content'),
           url: Paths.approvalDashboard,
         }),
       ]),
@@ -399,15 +400,15 @@ class App extends React.Component<RouteComponentProps, IState> {
       }),
       menuSection(t`User Access`, {}, [
         menuItem(t`Users`, {
-          condition: ({ user }) => user.model_permissions.view_user,
+          condition: (params) => hasPermission(params, 'view_user'),
           url: Paths.userList,
         }),
         menuItem(t`Groups`, {
-          condition: ({ user }) => user.model_permissions.view_group,
+          condition: (params) => hasPermission(params, 'galaxy.view_group'),
           url: Paths.groupList,
         }),
         menuItem(t`Roles`, {
-          condition: ({ user }) => user.model_permissions.view_group,
+          condition: (params) => hasPermission(params, 'galaxy.view_group'),
           url: Paths.roleList,
         }),
       ]),

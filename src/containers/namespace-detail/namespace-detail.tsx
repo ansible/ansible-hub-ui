@@ -251,7 +251,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     const canEditOwners =
       this.state.namespace.related_fields.my_permissions?.includes(
         'galaxy.change_namespace',
-      ) || hasPermission('change_namespace');
+      ) || hasPermission('galaxy.change_namespace');
 
     // remove ?group (owners tab) when switching tabs
     const tabParams = { ...params };
@@ -694,7 +694,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </Link>
         }
       />,
-      hasPermission('delete_namespace') && (
+      hasPermission('galaxy.delete_namespace') && (
         <React.Fragment key={'2'}>
           {this.state.isNamespaceEmpty ? (
             <DropdownItem
@@ -854,7 +854,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         <StatefulDropdown
           items={[
             DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection: hasPermission('delete_collection'),
+              canDeleteCollection: hasPermission('ansible.delete_collection'),
               noDependencies: null,
               onClick: () =>
                 DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({

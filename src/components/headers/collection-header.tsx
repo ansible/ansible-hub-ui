@@ -212,11 +212,11 @@ export class CollectionHeader extends React.Component<IProps, IState> {
 
     const dropdownItems = [
       DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection: hasPermission('delete_collection'),
+        canDeleteCollection: hasPermission('ansible.delete_collection'),
         noDependencies,
         onClick: () => this.openDeleteModalWithConfirm(),
       }),
-      hasPermission('delete_collection') && (
+      hasPermission('ansible.delete_collection') && (
         <DropdownItem
           data-cy='delete-version-dropdown'
           key='delete-collection-version'

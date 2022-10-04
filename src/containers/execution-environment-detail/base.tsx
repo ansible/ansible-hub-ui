@@ -139,7 +139,7 @@ export function withContainerRepo(WrappedComponent) {
         >
           {t`Use in Controller`}
         </DropdownItem>,
-        hasPermission('delete_containerrepository') && (
+        hasPermission('container.delete_containerrepository') && (
           <DropdownItem
             key='delete'
             onClick={() => {

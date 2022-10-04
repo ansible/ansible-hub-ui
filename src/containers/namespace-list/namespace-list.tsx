@@ -235,7 +235,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                         }
                       />
                     </ToolbarItem>
-                    {hasPermission('add_namespace') && (
+                    {hasPermission('galaxy.add_namespace') && (
                       <ToolbarItem key='create-button'>
                         <Button
                           variant='primary'
@@ -289,7 +289,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
       ? t`Namespaces will appear once created`
       : t`This account is not set up to manage any namespaces`;
 
-    const noDataButton = hasPermission('add_namespace') ? (
+    const noDataButton = hasPermission('galaxy.add_namespace') ? (
       <Button variant='primary' onClick={() => this.handleModalToggle()}>
         {t`Create`}
       </Button>

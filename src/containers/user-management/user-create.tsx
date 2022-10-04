@@ -43,7 +43,8 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
     }
     const { hasPermission } = this.context;
     const { user, errorMessages } = this.state;
-    const notAuthorised = !this.context.user || !hasPermission('add_user');
+    const notAuthorised =
+      !this.context.user || !hasPermission('galaxy.add_user');
     const breadcrumbs = [
       { url: Paths.userList, name: t`Users` },
       { name: t`Create new user` },

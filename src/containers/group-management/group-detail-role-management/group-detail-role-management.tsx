@@ -169,7 +169,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
     });
   }
 
-  const addRoles = hasPermission('change_group') && (
+  const addRoles = hasPermission('galaxy.change_group') && (
     <Button
       onClick={() => setShowAddRolesModal(true)}
       variant='primary'
@@ -379,7 +379,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     </td>
                     <ListItemActions
                       kebabItems={[
-                        hasPermission('change_group') && (
+                        hasPermission('galaxy.change_group') && (
                           <DropdownItem
                             key='remove-role'
                             onClick={() => setSelectedDeleteRole(role)}

@@ -125,7 +125,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     const { user, hasPermission } = this.context;
-    if (!user || user.is_anonymous || !hasPermission('view_group')) {
+    if (!user || user.is_anonymous || !hasPermission('galaxy.view_group')) {
       this.setState({ unauthorised: true });
     } else {
       this.queryGroup();
@@ -150,7 +150,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const { user, hasPermission } = this.context;
 
     const tabs = [{ id: 'access', name: t`Access` }];
-    if (!!user && hasPermission('view_user')) {
+    if (!!user && hasPermission('galaxy.view_user')) {
       tabs.push({ id: 'users', name: t`Users` });
     }
 
@@ -216,7 +216,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private renderControls() {
     const { hasPermission, user } = this.context;
 
-    if (!user || !hasPermission('delete_group')) {
+    if (!user || !hasPermission('galaxy.delete_group')) {
       return null;
     }
 
@@ -383,7 +383,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         });
     };
     const { hasPermission } = this.context;
-    const { view_user } = hasPermission('view_user');
+    const { view_user } = hasPermission('galaxy.view_user');
 
     if (!users && view_user) {
       this.queryUsers();
@@ -503,7 +503,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           description={t`Users will appear once added to this group`}
           button={
             !!user &&
-            hasPermission('change_group') &&
+            hasPermission('galaxy.change_group') &&
             !isUserMgmtDisabled && (
               <Button
                 variant='primary'
@@ -552,17 +552,19 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                   />
                 </ToolbarItem>
               </ToolbarGroup>
-              {!!user && hasPermission('change_group') && !isUserMgmtDisabled && (
-                <ToolbarGroup>
-                  <ToolbarItem>
-                    <Button
-                      onClick={() => this.setState({ addModalVisible: true })}
-                    >
-                      {t`Add`}
-                    </Button>
-                  </ToolbarItem>
-                </ToolbarGroup>
-              )}
+              {!!user &&
+                hasPermission('galaxy.change_group') &&
+                !isUserMgmtDisabled && (
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <Button
+                        onClick={() => this.setState({ addModalVisible: true })}
+                      >
+                        {t`Add`}
+                      </Button>
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                )}
             </ToolbarContent>
           </Toolbar>
 
@@ -663,14 +665,16 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
     const { featureFlags, hasPermission } = this.context;
     const isUserMgmtDisabled = featureFlags?.external_authentication;
     const dropdownItems = [
-      !!currentUser && hasPermission('change_group') && !isUserMgmtDisabled && (
-        <DropdownItem
-          key='delete'
-          onClick={() => this.setState({ showUserRemoveModal: user })}
-        >
-          {t`Remove`}
-        </DropdownItem>
-      ),
+      !!currentUser &&
+        hasPermission('galaxy.change_group') &&
+        !isUserMgmtDisabled && (
+          <DropdownItem
+            key='delete'
+            onClick={() => this.setState({ showUserRemoveModal: user })}
+          >
+            {t`Remove`}
+          </DropdownItem>
+        ),
     ];
     return (
       <tr data-cy={`GroupDetail-users-${user.username}`} key={index}>

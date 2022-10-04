@@ -485,7 +485,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     const { hasPermission } = this.context;
     const dropdownItems = this.context.user.is_superuser
       ? [
-          // hasPermission('change_containerregistry') &&
+          // hasPermission('galaxy.change_containerregistryremote') &&
           locked ? (
             <Tooltip key='edit' content={t`Built-in roles cannot be edited.`}>
               {editItem}
@@ -493,7 +493,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
           ) : (
             editItem
           ),
-          // hasPermission('delete_containerregistry') &&
+          // hasPermission('galaxy.delete_containerregistryremote') &&
           locked ? (
             <Tooltip
               key='delete'

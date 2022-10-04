@@ -105,7 +105,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     const { user, hasPermission } = this.context;
-    if (!user || !hasPermission('view_group')) {
+    if (!user || !hasPermission('galaxy.view_group')) {
       this.setState({ unauthorized: true });
     } else {
       this.queryGroups();
@@ -154,7 +154,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             description={t`Groups will appear once created`}
             button={
               !!user &&
-              hasPermission('add_group') && (
+              hasPermission('galaxy.add_group') && (
                 <Button
                   variant='primary'
                   onClick={() => this.setState({ createModalVisible: true })}
@@ -188,7 +188,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                         />
                       </ToolbarItem>
                     </ToolbarGroup>
-                    {!!user && hasPermission('add_group') && (
+                    {!!user && hasPermission('galaxy.add_group') && (
                       <ToolbarGroup>
                         <ToolbarItem>
                           <Button
@@ -273,7 +273,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
     const name = this.state.selectedGroup && this.state.selectedGroup.name;
     const { deleteModalUsers: users, deleteModalCount: count } = this.state;
     const { hasPermission } = this.context;
-    const { view_user } = hasPermission('view_user');
+    const { view_user } = hasPermission('galaxy.view_user');
 
     if (!users && view_user) {
       this.queryUsers();
@@ -408,7 +408,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(group, index: number) {
     const { user, hasPermission } = this.context;
     const dropdownItems = [
-      !!user && hasPermission('delete_group') && (
+      !!user && hasPermission('galaxy.delete_group') && (
         <DropdownItem
           aria-label='Delete'
           key='delete'

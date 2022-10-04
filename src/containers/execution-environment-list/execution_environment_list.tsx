@@ -145,7 +145,9 @@ class ExecutionEnvironmentList extends React.Component<
         <Trans>Push container images</Trans> <ExternalLinkAltIcon />
       </Button>
     );
-    const addRemoteButton = hasPermission('add_containernamespace') && (
+    const addRemoteButton = hasPermission(
+      'container.add_containernamespace',
+    ) && (
       <Button
         onClick={() =>
           this.setState({
@@ -377,7 +379,7 @@ class ExecutionEnvironmentList extends React.Component<
       >
         {t`Use in Controller`}
       </DropdownItem>,
-      hasPermission('delete_containerrepository') && (
+      hasPermission('container.delete_containerrepository') && (
         <DropdownItem
           key='delete'
           onClick={() =>

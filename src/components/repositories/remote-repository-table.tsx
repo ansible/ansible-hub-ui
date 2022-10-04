@@ -123,11 +123,15 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
           </Tooltip>,
         ];
     const dropdownItems = [
-      remote.repositories.length && hasPermission('change_remote') && (
-        <DropdownItem key='edit' onClick={() => this.props.editRemote(remote)}>
-          {t`Edit`}
-        </DropdownItem>
-      ),
+      remote.repositories.length &&
+        hasPermission('ansible.change_collectionremote') && (
+          <DropdownItem
+            key='edit'
+            onClick={() => this.props.editRemote(remote)}
+          >
+            {t`Edit`}
+          </DropdownItem>
+        ),
     ];
     return (
       <tr key={i}>
@@ -149,7 +153,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
 
   private getConfigureOrSyncButton(remote: RemoteType) {
     const { hasPermission } = this.context;
-    if (!hasPermission('change_remote')) {
+    if (!hasPermission('ansible.change_collectionremote')) {
       return null;
     }
     const configButton = [
