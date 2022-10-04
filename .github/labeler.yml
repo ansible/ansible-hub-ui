@@ -1,0 +1,16 @@
+# Ensure PR with changes to app functionality gets backport labels
+# to be looked at by PR author and reviewer to keep or remove
+# called by .github/workflows/labeler.yml
+
+backport-4.2:
+- src/**/*
+
+backport-4.4:
+- src/**/*
+
+backport-4.5:
+- src/**/*
+
+backport-4.6:
+- src/**/*
+- test/**/*
