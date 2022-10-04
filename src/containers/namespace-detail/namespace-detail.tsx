@@ -203,7 +203,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         name: namespace.name,
         url:
           tab === 'owners'
-            ? formatPath(Paths.myCollections, { namespace: namespace.name })
+            ? formatPath(Paths.namespaceByRepo, {
+                repo: this.context.selectedRepo,
+                namespace: namespace.name,
+              })
             : null,
       },
       tab === 'owners'
@@ -211,8 +214,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             name: t`Namespace owners`,
             url: params.group
               ? formatPath(
-                  Paths.myCollections,
-                  { namespace: namespace.name },
+                  Paths.namespaceByRepo,
+                  {
+                    repo: this.context.selectedRepo,
+                    namespace: namespace.name,
+                  },
                   { tab: 'owners' },
                 )
               : null,
@@ -438,7 +444,8 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   groups,
                 })
               }
-              urlPrefix={formatPath(Paths.myCollections, {
+              urlPrefix={formatPath(Paths.namespaceByRepo, {
+                repo: this.context.selectedRepo,
                 namespace: namespace.name,
               })}
             />

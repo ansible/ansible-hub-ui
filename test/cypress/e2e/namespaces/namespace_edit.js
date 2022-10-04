@@ -70,7 +70,7 @@ describe('Edit a namespace', () => {
   it('saves a new company name', () => {
     cy.get('#company').clear().type('Company name');
     saveButton().click();
-    cy.url().should('match', /\/ui\/my-namespaces\/testns1/);
+    cy.url().should('match', /\/ui\/repo\/published\/testns1/);
     cy.get('.pf-c-title').should('contain', 'Company name');
   });
 
