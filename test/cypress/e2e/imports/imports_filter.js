@@ -27,7 +27,7 @@ describe('Imports filter test', () => {
   });
 
   it('should display success info after importing collection', () => {
-    cy.visit('/ui/my-imports?namespace=test_namespace');
+    cy.visit('/ui/my-imports?namespace=test_namespace/typo');
 
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).click();
     cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
