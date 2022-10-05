@@ -8,16 +8,18 @@ import { Redirect } from 'react-router-dom';
 import * as moment from 'moment';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import {
-  Select,
-  SelectOption,
-  SelectVariant,
+  Alert,
+  Button,
+  DropdownItem,
+  Flex,
+  FlexItem,
   List,
   ListItem,
   Modal,
-  Alert,
+  Select,
+  SelectOption,
+  SelectVariant,
   Text,
-  Button,
-  DropdownItem,
 } from '@patternfly/react-core';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -266,6 +268,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       </DropdownItem>,
     ].filter(Boolean);
 
+    const issueUrl =
+      'https://access.redhat.com/support/cases/#/case/new/open-case/describe-issue/recommendations?caseCreate=true&product=Ansible%20Automation%20Hub&version=Online&summary=' +
+      encodeURIComponent(
+        `${namespace.name}-${collectionName}-${collection.latest_version.version}`,
+      );
+
     return (
       <React.Fragment>
         {showImportModal && (
@@ -477,11 +485,21 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             </div>
           }
           pageControls={
-            dropdownItems.length > 0 ? (
-              <div data-cy='kebab-toggle'>
-                <StatefulDropdown items={dropdownItems} />
-              </div>
-            ) : null
+            <Flex>
+              {DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? (
+                <FlexItem>
+                  <a href={issueUrl} target='_blank' rel='noreferrer'>
+                    {t`Create issue`}
+                  </a>{' '}
+                  <ExternalLinkAltIcon />
+                </FlexItem>
+              ) : null}
+              {dropdownItems.length > 0 ? (
+                <FlexItem data-cy='kebab-toggle'>
+                  <StatefulDropdown items={dropdownItems} />
+                </FlexItem>
+              ) : null}
+            </Flex>
           }
         >
           {collection.deprecated && (
