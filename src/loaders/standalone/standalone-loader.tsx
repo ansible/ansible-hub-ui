@@ -400,7 +400,7 @@ class App extends React.Component<RouteComponentProps, IState> {
       }),
       menuSection(t`User Access`, {}, [
         menuItem(t`Users`, {
-          condition: (params) => hasPermission(params, 'view_user'),
+          condition: (params) => hasPermission(params, 'galaxy.view_user'),
           url: Paths.userList,
         }),
         menuItem(t`Groups`, {
