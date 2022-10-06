@@ -42,7 +42,7 @@ export class CollectionDependenciesList extends React.Component<IProps> {
             )}
             {!dependency.path && (
               <ListItem key={i} style={{ marginRight: '70px' }}>
-                {dependency.name}
+                {dependency.namespace + '.' + dependency.name}
                 <HelperText
                   content={t`Collection was not found in the system. You must upload it.`}
                 />
