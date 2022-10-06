@@ -40,7 +40,6 @@ export class CollectionDependenciesList extends React.Component<IProps> {
                 </Link>
               </ListItem>
             )}
-
             {!dependency.path && (
               <ListItem key={i} style={{ marginRight: '70px' }}>
                 {dependency.name}
