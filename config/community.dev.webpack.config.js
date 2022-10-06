@@ -4,7 +4,8 @@ const webpackBase = require('./webpack.base.config');
 const proxyHost = process.env.API_PROXY_HOST || 'localhost';
 const proxyPort = process.env.API_PROXY_PORT || '5001';
 const apiBasePath = process.env.API_BASE_PATH || '/api/';
-const uiExternalLoginURI = process.env.UI_EXTERNAL_LOGIN_URI || '/login/github/';
+const uiExternalLoginURI =
+  process.env.UI_EXTERNAL_LOGIN_URI || '/login/github/';
 
 module.exports = webpackBase({
   // The host where the API lives. EX: https://localhost:5001
@@ -45,6 +46,7 @@ module.exports = webpackBase({
   // used to get around CORS requirements when running in dev mode
   WEBPACK_PROXY: {
     '/api/': `http://${proxyHost}:${proxyPort}`,
+    '/complete/': `http://${proxyHost}:${proxyPort}`,
     '/login/': `http://${proxyHost}:${proxyPort}`,
     '/pulp/api/': `http://${proxyHost}:${proxyPort}`,
   },
