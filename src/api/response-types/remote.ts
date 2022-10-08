@@ -1,5 +1,5 @@
 import { PulpStatus } from './pulp';
-import { WriteOnlyFieldType } from './write-only-field';
+import { HiddenFieldType } from './hidden-field';
 
 export class LastSyncType {
   state: PulpStatus;
@@ -33,7 +33,7 @@ export class RemoteType {
   client_cert?: string;
   ca_cert?: string;
 
-  write_only_fields: WriteOnlyFieldType[];
+  hidden_fields?: HiddenFieldType[];
 
   repositories: {
     name: string;

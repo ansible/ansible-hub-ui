@@ -48,7 +48,7 @@ export {
   ContainerRepositoryType,
 } from './response-types/execution-environment';
 export { ExecutionEnvironmentRemoteAPI } from './execution-environment-remote';
-export { WriteOnlyFieldType } from './response-types/write-only-field';
+export { HiddenFieldType } from './response-types/hidden-field';
 export { ActivitiesAPI } from './activities';
 export { ContainerTagAPI } from './container-tag';
 export { FeatureFlagsType } from './response-types/feature-flags';

@@ -15,7 +15,7 @@ import {
   Switch,
 } from '@patternfly/react-core';
 
-import { WriteOnlyField, HelperText, FileUpload } from 'src/components';
+import { HiddenField, HelperText, FileUpload } from 'src/components';
 
 import { AppContext } from 'src/loaders/app-context';
 
@@ -25,9 +25,9 @@ import {
   ExclamationCircleIcon,
 } from '@patternfly/react-icons';
 
-import { RemoteType, WriteOnlyFieldType } from 'src/api';
+import { RemoteType, HiddenFieldType } from 'src/api';
 import { Constants } from 'src/constants';
-import { isFieldSet, isWriteOnly, ErrorMessagesType } from 'src/utilities';
+import { isFieldSet, isHidden, ErrorMessagesType } from 'src/utilities';
 
 import { validateURLHelper } from 'src/utilities';
 
@@ -258,8 +258,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
             validated={this.toError(!('token' in errorMessages))}
             helperTextInvalid={errorMessages['token']}
           >
-            <WriteOnlyField
-              isValueSet={isFieldSet('token', remote.write_only_fields)}
+            <HiddenField
+              isValueSet={isFieldSet('token', remote.hidden_fields)}
               onClear={() => this.updateIsSet('token', false)}
             >
               <TextInput
@@ -270,7 +270,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 value={remote.token || ''}
                 onChange={(value) => this.updateRemote(value, 'token')}
               />
-            </WriteOnlyField>
+            </HiddenField>
           </FormGroup>
         )}
 
@@ -366,10 +366,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
           validated={this.toError(!('username' in errorMessages))}
           helperTextInvalid={errorMessages['username']}
         >
-          <WriteOnlyField
+          <HiddenField
             isValueSet={
-              isWriteOnly('username', remote.write_only_fields) &&
-              isFieldSet('username', remote.write_only_fields)
+              isHidden('username', remote.hidden_fields) &&
+              isFieldSet('username', remote.hidden_fields)
             }
             onClear={() => this.updateIsSet('username', false)}
           >
@@ -382,7 +382,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               value={remote.username || ''}
               onChange={(value) => this.updateRemote(value, 'username')}
             />
-          </WriteOnlyField>
+          </HiddenField>
         </FormGroup>
 
         <FormGroup
@@ -401,8 +401,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
           validated={this.toError(!('password' in errorMessages))}
           helperTextInvalid={errorMessages['password']}
         >
-          <WriteOnlyField
-            isValueSet={isFieldSet('password', remote.write_only_fields)}
+          <HiddenField
+            isValueSet={isFieldSet('password', remote.hidden_fields)}
             onClear={() => this.updateIsSet('password', false)}
           >
             <TextInput
@@ -414,7 +414,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               value={remote.password || ''}
               onChange={(value) => this.updateRemote(value, 'password')}
             />
-          </WriteOnlyField>
+          </HiddenField>
         </FormGroup>
 
         <ExpandableSection
@@ -448,10 +448,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
               validated={this.toError(!('proxy_username' in errorMessages))}
               helperTextInvalid={errorMessages['proxy_username']}
             >
-              <WriteOnlyField
+              <HiddenField
                 isValueSet={
-                  isWriteOnly('proxy_username', remote.write_only_fields) &&
-                  isFieldSet('proxy_username', remote.write_only_fields)
+                  isHidden('proxy_username', remote.hidden_fields) &&
+                  isFieldSet('proxy_username', remote.hidden_fields)
                 }
                 onClear={() => this.updateIsSet('proxy_username', false)}
               >
@@ -466,7 +466,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                     this.updateRemote(value, 'proxy_username')
                   }
                 />
-              </WriteOnlyField>
+              </HiddenField>
             </FormGroup>
 
             <FormGroup
@@ -476,11 +476,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
               validated={this.toError(!('proxy_password' in errorMessages))}
               helperTextInvalid={errorMessages['proxy_password']}
             >
-              <WriteOnlyField
-                isValueSet={isFieldSet(
-                  'proxy_password',
-                  remote.write_only_fields,
-                )}
+              <HiddenField
+                isValueSet={isFieldSet('proxy_password', remote.hidden_fields)}
                 onClear={() => this.updateIsSet('proxy_password', false)}
               >
                 <TextInput
@@ -494,7 +491,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                     this.updateRemote(value, 'proxy_password')
                   }
                 />
-              </WriteOnlyField>
+              </HiddenField>
             </FormGroup>
 
             <FormGroup
@@ -528,8 +525,8 @@ export class RemoteForm extends React.Component<IProps, IState> {
               validated={this.toError(!('client_key' in errorMessages))}
               helperTextInvalid={errorMessages['client_key']}
             >
-              <WriteOnlyField
-                isValueSet={isFieldSet('client_key', remote.write_only_fields)}
+              <HiddenField
+                isValueSet={isFieldSet('client_key', remote.hidden_fields)}
                 onClear={() => this.updateIsSet('client_key', false)}
               >
                 <FileUpload
@@ -543,7 +540,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                   hideDefaultPreview
                   onChange={fileOnChange('client_key')}
                 />
-              </WriteOnlyField>
+              </HiddenField>
             </FormGroup>
 
             <FormGroup
@@ -748,10 +745,10 @@ export class RemoteForm extends React.Component<IProps, IState> {
   }
 
   private updateIsSet(fieldName: string, value: boolean) {
-    const writeOnlyFields = this.props.remote.write_only_fields;
-    const newFields: WriteOnlyFieldType[] = [];
+    const hiddenFields = this.props.remote.hidden_fields;
+    const newFields: HiddenFieldType[] = [];
 
-    for (const field of writeOnlyFields) {
+    for (const field of hiddenFields) {
       if (field.name === fieldName) {
         field.is_set = value;
       }
@@ -760,7 +757,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
     }
 
     const update = { ...this.props.remote };
-    update.write_only_fields = newFields;
+    // update.write_only_fields = newFields;
     update[fieldName] = null;
 
     this.props.updateRemote(update);

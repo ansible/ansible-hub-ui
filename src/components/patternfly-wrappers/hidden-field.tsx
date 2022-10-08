@@ -13,7 +13,7 @@ interface IProps {
   children: React.ReactNode;
 }
 
-export class WriteOnlyField extends React.Component<IProps> {
+export class HiddenField extends React.Component<IProps> {
   render() {
     const { onClear, isValueSet, children } = this.props;
 

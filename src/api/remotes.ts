@@ -11,8 +11,11 @@ export function smartUpdate(remote: RemoteType, unmodifiedRemote: RemoteType) {
   // stops returning field: null on write only fields
   const reducedData: RemoteType = clearSetFieldsFromRequest(
     remote,
-    remote.write_only_fields,
+    remote.hidden_fields,
   ) as RemoteType;
+
+  // hidden_fields are write_only, no need to send it
+  delete reducedData['hidden_fields'];
 
   // Pulp complains if auth_url gets sent with a request that doesn't include a
   // valid token, even if the token exists in the database and isn't being changed.

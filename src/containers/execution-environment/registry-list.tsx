@@ -135,7 +135,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
               name: '',
               // API defaults to true when not sending anything, make the UI fit
               tls_validation: true,
-              write_only_fields: [
+              hidden_fields: [
                 { name: 'username', is_set: false },
                 { name: 'password', is_set: false },
                 { name: 'proxy_username', is_set: false },
@@ -166,6 +166,8 @@ class ExecutionEnvironmentRegistryList extends React.Component<
             saveRemote={() => {
               const { remoteFormNew, remoteToEdit } = this.state;
               const newRemote = { ...remoteToEdit };
+
+              delete newRemote['hidden_fields'];
 
               if (remoteFormNew) {
                 // prevent "This field may not be blank." when writing in and then deleting username/password/etc

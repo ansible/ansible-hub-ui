@@ -93,7 +93,7 @@ export {
   CheckboxRow,
   RadioRow,
 } from './rbac/role-list-table';
-export { WriteOnlyField } from './patternfly-wrappers/write-only-field';
+export { HiddenField } from './patternfly-wrappers/hidden-field';
 export { ClipboardCopy } from './patternfly-wrappers/clipboard-copy';
 export { FileUpload } from './patternfly-wrappers/fileupload';
 export { ListItemActions } from './list-item-actions/list-item-actions';

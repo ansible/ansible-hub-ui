@@ -7,8 +7,8 @@ export { twoWayMapper } from './two-way-mapper';
 export {
   clearSetFieldsFromRequest,
   isFieldSet,
-  isWriteOnly,
-} from './write-only-fields';
+  isHidden,
+} from './hidden-fields';
 export { filterIsSet } from './filter-is-set';
 export { truncateSha } from './truncate_sha';
 export { getHumanSize } from './get_human_size';
