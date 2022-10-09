@@ -293,7 +293,7 @@ msgstr "Goedkeuring"
 msgid "Approval dashboard"
 msgstr "Goedkeuring dashboard"
 
-#: src/components/my-imports/import-console.tsx:184
+#: src/components/my-imports/import-console.tsx:189
 msgid "Approval status:"
 msgstr "Goedkeuringsstatus:"
 
@@ -663,7 +663,7 @@ msgstr "Gemeenschapscollecties hebben geen documenten of tellingen van de inhoud
 msgid "Company name"
 msgstr "Bedrijfsnaam"
 
-#: src/components/my-imports/import-list.tsx:87
+#: src/components/my-imports/import-list.tsx:93
 #: src/components/status/status-indicator.tsx:67
 #: src/constants.tsx:372
 #: src/containers/task-management/task-list-view.tsx:162
@@ -758,7 +758,7 @@ msgstr "Controllers list could not be displayed."
 msgid "Copy to clipboard"
 msgstr "Gekopieerd naar klembord"
 
-#: src/containers/collection-detail/collection-import-log.tsx:111
+#: src/containers/collection-detail/collection-import-log.tsx:112
 msgid "Could not load import log"
 msgstr "Kon import-log niet laden"
 
@@ -1123,7 +1123,7 @@ msgstr "Documentatie"
 msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be found <1>here</1>. Use the following parameters to configure the client."
 msgstr "Documentatie over het configureren van de <0>ansible-galaxy</0>-client kan <1>hier</1> worden gevonden. Gebruik de volgende parameters om de client te configureren."
 
-#: src/components/my-imports/import-console.tsx:106
+#: src/components/my-imports/import-console.tsx:107
 #: src/containers/task-management/task_detail.tsx:312
 msgid "Done"
 msgstr "Gereed"
@@ -1279,7 +1279,7 @@ msgstr "Fout bij verwijderen groep."
 #~ msgid "Error editing group."
 #~ msgstr "Error editing group."
 
-#: src/containers/my-imports/my-imports.tsx:304
+#: src/containers/my-imports/my-imports.tsx:312
 msgid "Error fetching import from API"
 msgstr "Fout bij ophalen import uit API"
 
@@ -1365,7 +1365,7 @@ msgstr "Fout bij het laden van omgevingen."
 msgid "Error message"
 msgstr "Foutbericht"
 
-#: src/components/my-imports/import-console.tsx:194
+#: src/components/my-imports/import-console.tsx:199
 msgid "Error message:"
 msgstr "Foutbericht:"
 
@@ -1460,8 +1460,8 @@ msgstr "Execution environment \"{selectedItem}\" has been successfully deleted."
 msgid "Expiration"
 msgstr "Vervaldatum"
 
-#: src/components/my-imports/import-console.tsx:113
-#: src/components/my-imports/import-list.tsx:91
+#: src/components/my-imports/import-console.tsx:114
+#: src/components/my-imports/import-list.tsx:97
 #: src/components/status/status-indicator.tsx:75
 #: src/constants.tsx:373
 #: src/containers/task-management/task-list-view.tsx:166
@@ -1538,7 +1538,7 @@ msgstr "Voltooid op"
 msgid "First name"
 msgstr "Voornaam"
 
-#: src/components/my-imports/import-console.tsx:84
+#: src/components/my-imports/import-console.tsx:85
 msgid "Follow logs"
 msgstr "Logs volgen"
 
@@ -1928,7 +1928,7 @@ msgstr ""
 msgid "Must be an integer."
 msgstr "Moet een geheel getal zijn."
 
-#: src/containers/my-imports/my-imports.tsx:118
+#: src/containers/my-imports/my-imports.tsx:135
 msgid "My imports"
 msgstr "Mijn import"
 
@@ -1945,8 +1945,8 @@ msgstr "Mijn profiel"
 #: src/components/collection-detail/collection-content-list.tsx:107
 #: src/components/execution-environment/repository-form.tsx:153
 #: src/components/execution-environment/repository-form.tsx:181
-#: src/components/my-imports/import-list.tsx:78
-#: src/components/my-imports/import-list.tsx:115
+#: src/components/my-imports/import-list.tsx:84
+#: src/components/my-imports/import-list.tsx:121
 #: src/components/namespace-form/namespace-form.tsx:43
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/rbac/group-modal.tsx:75
@@ -1990,7 +1990,7 @@ msgstr "Naam moet langer zijn dan 2 tekens"
 msgid "Name must not be empty."
 msgstr "Name must not be empty."
 
-#: src/components/my-imports/import-list.tsx:221
+#: src/components/my-imports/import-list.tsx:253
 #: src/containers/certification-dashboard/certification-dashboard.tsx:166
 #: src/containers/certification-dashboard/certification-dashboard.tsx:267
 msgid "Namespace"
@@ -2027,6 +2027,7 @@ msgstr "Eigenaars van de namespace"
 msgid "Namespaces"
 msgstr "Namespaces"
 
+#: src/components/my-imports/import-list.tsx:244
 #: src/containers/namespace-list/namespace-list.tsx:125
 #: src/containers/namespace-list/namespace-list.tsx:366
 msgid "Namespaces list could not be displayed."
@@ -2094,7 +2095,9 @@ msgstr "Nog geen collecties"
 msgid "No container repositories yet"
 msgstr "Nog geen containerrepository's"
 
-#: src/containers/my-imports/my-imports.tsx:263
+#: src/containers/my-imports/my-imports.tsx:165
+#: src/containers/my-imports/my-imports.tsx:247
+#: src/containers/my-imports/my-imports.tsx:271
 msgid "No data"
 msgstr "Geen gegevens"
 
@@ -2112,7 +2115,7 @@ msgstr "Nog geen groepen"
 msgid "No images yet"
 msgstr "Nog geen beelden"
 
-#: src/components/my-imports/import-list.tsx:153
+#: src/components/my-imports/import-list.tsx:168
 msgid "No imports"
 msgstr "Geen invoer"
 
@@ -2123,6 +2126,10 @@ msgstr "Nog geen lokale repository's"
 #: src/containers/certification-dashboard/certification-dashboard.tsx:259
 msgid "No managed collections yet"
 msgstr "Nog geen beheerde collecties"
+
+#: src/components/my-imports/import-list.tsx:150
+msgid "No namespace selected."
+msgstr ""
 
 #: src/containers/namespace-list/namespace-list.tsx:286
 msgid "No namespaces yet"
@@ -2164,7 +2171,7 @@ msgstr "Geen tag of digest geselecteerd."
 msgid "No task group"
 msgstr "Geen taakgroep"
 
-#: src/components/my-imports/import-console.tsx:99
+#: src/components/my-imports/import-console.tsx:100
 msgid "No task messages available"
 msgstr "Geen taakberichten beschikbaar"
 
@@ -2739,7 +2746,7 @@ msgstr ""
 msgid "Roles list could not be displayed."
 msgstr ""
 
-#: src/components/my-imports/import-list.tsx:95
+#: src/components/my-imports/import-list.tsx:101
 #: src/components/status/status-indicator.tsx:61
 #: src/constants.tsx:374
 #: src/containers/task-management/task-list-view.tsx:170
@@ -2779,7 +2786,7 @@ msgstr "Saved changes to namespace \"{0}\"."
 msgid "Saved changes to user \"{username}\"."
 msgstr "Modus Niet-opgeslagen wijzigingen \"{username}\""
 
-#: src/components/my-imports/import-console.tsx:84
+#: src/components/my-imports/import-console.tsx:85
 msgid "Scroll to end"
 msgstr "Bladeren naar het einde"
 
@@ -2836,7 +2843,7 @@ msgstr "Groepen selecteren"
 #~ msgid "Select input"
 #~ msgstr "Select input"
 
-#: src/components/my-imports/import-list.tsx:234
+#: src/components/my-imports/import-list.tsx:275
 msgid "Select namespace"
 msgstr "Namespace selecteren"
 
@@ -3009,8 +3016,8 @@ msgstr "Gestart op"
 msgid "State"
 msgstr "Staat"
 
-#: src/components/my-imports/import-list.tsx:82
-#: src/components/my-imports/import-list.tsx:116
+#: src/components/my-imports/import-list.tsx:88
+#: src/components/my-imports/import-list.tsx:122
 #: src/containers/certification-dashboard/certification-dashboard.tsx:174
 #: src/containers/certification-dashboard/certification-dashboard.tsx:222
 #: src/containers/certification-dashboard/certification-dashboard.tsx:287
@@ -3020,7 +3027,7 @@ msgstr "Staat"
 msgid "Status"
 msgstr "Status"
 
-#: src/components/my-imports/import-console.tsx:180
+#: src/components/my-imports/import-console.tsx:185
 msgid "Status:"
 msgstr "Status:"
 
@@ -3320,7 +3327,7 @@ msgstr ""
 msgid "There are no repos associated with this remote."
 msgstr "Er zijn geen repo's verbonden met dit externe item."
 
-#: src/components/my-imports/import-list.tsx:154
+#: src/components/my-imports/import-list.tsx:169
 msgid "There have not been any imports on this namespace."
 msgstr "Er zijn geen importen geweest op deze namespace."
 
@@ -3660,7 +3667,7 @@ msgstr ""
 msgid "Version"
 msgstr "Versie"
 
-#: src/components/my-imports/import-console.tsx:188
+#: src/components/my-imports/import-console.tsx:193
 msgid "Version:"
 msgstr "Versie:"
 
@@ -3740,7 +3747,7 @@ msgstr ""
 msgid "View, and cancel any task."
 msgstr ""
 
-#: src/components/my-imports/import-list.tsx:99
+#: src/components/my-imports/import-list.tsx:105
 #: src/constants.tsx:375
 #: src/containers/task-management/task-list-view.tsx:174
 msgid "Waiting"
@@ -3858,11 +3865,11 @@ msgstr "Er zijn niet-opgeslagen wijzigingen"
 msgid "add-user-modal"
 msgstr "add-user-modal"
 
-#: src/components/my-imports/import-console.tsx:147
+#: src/components/my-imports/import-console.tsx:152
 msgid "approved"
 msgstr "goedgekeurd"
 
-#: src/components/my-imports/import-console.tsx:149
+#: src/components/my-imports/import-console.tsx:154
 msgid "could not be determined yet"
 msgstr "kon nog niet worden vastgesteld"
 
@@ -3893,7 +3900,7 @@ msgstr "per pagina"
 msgid "popover example"
 msgstr "popover-voorbeeld"
 
-#: src/components/my-imports/import-console.tsx:143
+#: src/components/my-imports/import-console.tsx:148
 msgid "rejected"
 msgstr "afgewezen"
 
@@ -3925,11 +3932,11 @@ msgstr ""
 msgid "updated {0}"
 msgstr ""
 
-#: src/components/my-imports/import-console.tsx:145
+#: src/components/my-imports/import-console.tsx:150
 msgid "waiting for approval"
 msgstr "wacht op goedkeuring"
 
-#: src/components/my-imports/import-console.tsx:138
+#: src/components/my-imports/import-console.tsx:143
 msgid "waiting for import to finish"
 msgstr "wacht tot importeren is voltooid"
 
