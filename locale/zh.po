@@ -64,7 +64,7 @@ msgstr "<0>注：</0> 您的浏览器可能会阻止以下链接。手动复制�
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:401
+#: src/containers/namespace-detail/namespace-detail.tsx:407
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>注：</0>使用这个 URL 将 ansible-galaxy 配置为上传集合到这个命名空间。有关 ansible-galaxy 配置的更多信息，请参阅<1>这里</1><2></2><3/>。"
 
@@ -113,7 +113,7 @@ msgstr "标签可以包含小写和大写 ASCII 字母字符、数字、下划�
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:508
+#: src/containers/namespace-detail/namespace-detail.tsx:515
 msgid "API Error: Failed to set deprecation."
 msgstr "API 错误：无法设置弃用。"
 
@@ -128,7 +128,7 @@ msgstr ""
 
 #: src/components/headers/collection-header.tsx:690
 #: src/components/headers/collection-header.tsx:741
-#: src/containers/namespace-detail/namespace-detail.tsx:527
+#: src/containers/namespace-detail/namespace-detail.tsx:534
 msgid "API Error: {status}"
 msgstr "API 错误：{status}"
 
@@ -267,7 +267,7 @@ msgstr "添加用户"
 #~ "\"{namespace}\" container namespace."
 #~ msgstr "通过添加组，可以访问 \"{namespace}\" 容器命名空间中的所有存储库。"
 
-#: src/containers/namespace-list/namespace-list.tsx:185
+#: src/containers/namespace-list/namespace-list.tsx:186
 msgid "All"
 msgstr "所有"
 
@@ -376,7 +376,7 @@ msgstr "在未将一个发布附加到它时，无法远程更新。"
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
-#: src/containers/edit-namespace/edit-namespace.tsx:158
+#: src/containers/edit-namespace/edit-namespace.tsx:159
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:211
 #: src/containers/group-management/group-detail.tsx:288
@@ -387,7 +387,7 @@ msgstr "取消"
 msgid "Canceled"
 msgstr "已取消"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:699
+#: src/containers/namespace-detail/namespace-detail.tsx:706
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "无法删除命名空间，直到 <0/> 集合的依赖项已 <1/> 被删除"
 
@@ -488,7 +488,7 @@ msgstr "无法保存集合\"{0} {1} v{2}\"认证状态的更改 。"
 msgid "Changes to group \"{0}\" could not be saved."
 msgstr "无法保存对组 \"{0}\" 的更改。"
 
-#: src/containers/edit-namespace/edit-namespace.tsx:255
+#: src/containers/edit-namespace/edit-namespace.tsx:257
 msgid "Changes to namespace \"{0}\" could not be saved."
 msgstr "对命名空间 \"{0}\" 的更改不能被保存。"
 
@@ -549,11 +549,11 @@ msgstr "集合 \"{0}\" 无法被弃用。"
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "集合 \"{0}\" 无法取消弃用。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:493
+#: src/containers/namespace-detail/namespace-detail.tsx:500
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr "集合 \"{0}\" 已成功弃用。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:492
+#: src/containers/namespace-detail/namespace-detail.tsx:499
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr "集合 \"{0}\" 已成功取消弃用。"
 
@@ -611,7 +611,7 @@ msgstr "集合没有依赖项。"
 msgid "Collection is not being used by any collection."
 msgstr "集合没有被任何集合使用。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:658
+#: src/containers/namespace-detail/namespace-detail.tsx:665
 msgid "Collection repositories could not be displayed."
 msgstr "无法显示集合仓库。"
 
@@ -639,7 +639,7 @@ msgid "Collections"
 msgstr "集合"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:260
-#: src/containers/namespace-detail/namespace-detail.tsx:369
+#: src/containers/namespace-detail/namespace-detail.tsx:375
 #: src/containers/search/search.tsx:254
 msgid "Collections will appear once uploaded"
 msgstr "上传后会出现集合"
@@ -657,7 +657,7 @@ msgstr "社区"
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "社区集合没有文档或内容计数，但所有内容都会被同步"
 
-#: src/components/namespace-form/namespace-form.tsx:57
+#: src/components/namespace-form/namespace-form.tsx:60
 msgid "Company name"
 msgstr "公司名称"
 
@@ -769,8 +769,8 @@ msgstr "无法加载导入日志"
 #: src/components/rbac/group-modal.tsx:57
 #: src/containers/group-management/group-list.tsx:161
 #: src/containers/group-management/group-list.tsx:198
-#: src/containers/namespace-list/namespace-list.tsx:243
-#: src/containers/namespace-list/namespace-list.tsx:293
+#: src/containers/namespace-list/namespace-list.tsx:244
+#: src/containers/namespace-list/namespace-list.tsx:294
 #: src/containers/user-management/user-list.tsx:183
 #: src/containers/user-management/user-list.tsx:248
 msgid "Create"
@@ -957,12 +957,12 @@ msgid "Delete image?"
 msgstr "删除镜像？"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:693
-#: src/containers/namespace-detail/namespace-detail.tsx:707
+#: src/containers/namespace-detail/namespace-detail.tsx:700
+#: src/containers/namespace-detail/namespace-detail.tsx:714
 msgid "Delete namespace"
 msgstr "删除命名空间"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:297
+#: src/containers/namespace-detail/namespace-detail.tsx:303
 msgid "Delete namespace?"
 msgstr "删除命名空间？"
 
@@ -1011,7 +1011,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "删除 <0>{0} v{collectionVersion}</0> 其数据将会丢失。"
 
 #: src/components/delete-modal/delete-collection-modal.tsx:66
-#: src/containers/namespace-detail/namespace-detail.tsx:302
+#: src/containers/namespace-detail/namespace-detail.tsx:308
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "删除 <0>{0}</0> 其数据将会丢失。"
 
@@ -1058,18 +1058,18 @@ msgid "Dependent collections could not be displayed."
 msgstr "无法显示依赖集合。"
 
 #: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:862
+#: src/containers/namespace-detail/namespace-detail.tsx:869
 #: src/containers/search/search.tsx:384
 msgid "Deprecate"
 msgstr "弃用"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:479
+#: src/containers/namespace-detail/namespace-detail.tsx:486
 msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr "为集合 \"{0}\" 开始的弃用状态更新。"
 
 #: src/components/collection-detail/collection-content-list.tsx:109
 #: src/components/execution-environment/repository-form.tsx:342
-#: src/components/namespace-form/namespace-form.tsx:117
+#: src/components/namespace-form/namespace-form.tsx:121
 #: src/components/rbac/role-form.tsx:113
 #: src/components/rbac/role-list-table.tsx:49
 #: src/components/rbac/select-roles.tsx:98
@@ -1168,7 +1168,7 @@ msgid "Dropdown"
 msgstr "下拉菜单"
 
 #: src/components/repositories/remote-repository-table.tsx:128
-#: src/containers/edit-namespace/edit-namespace.tsx:120
+#: src/containers/edit-namespace/edit-namespace.tsx:121
 #: src/containers/execution-environment/registry-list.tsx:391
 #: src/containers/execution-environment-detail/base.tsx:212
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
@@ -1193,7 +1193,7 @@ msgstr "编辑执行环境"
 #~ msgid "Edit group permissions"
 #~ msgstr "编辑组权限"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:683
+#: src/containers/namespace-detail/namespace-detail.tsx:690
 msgid "Edit namespace"
 msgstr "编辑命名空间"
 
@@ -1474,7 +1474,7 @@ msgstr "失败"
 msgid "Failed to retrieve user data."
 msgstr "获取用户数据失败。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:526
+#: src/containers/namespace-detail/namespace-detail.tsx:533
 msgid "Failed to sign all collections."
 msgstr "签发所有集合失败。"
 
@@ -1622,7 +1622,7 @@ msgstr "组列表"
 msgid "Group name"
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:222
+#: src/containers/namespace-detail/namespace-detail.tsx:228
 msgid "Group {0}"
 msgstr ""
 
@@ -1664,7 +1664,7 @@ msgstr "隐藏签名"
 #: src/components/delete-modal/delete-collection-modal.tsx:75
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:222
-#: src/containers/namespace-detail/namespace-detail.tsx:309
+#: src/containers/namespace-detail/namespace-detail.tsx:315
 msgid "I understand that this action cannot be undone."
 msgstr "我理解这个行动是无法撤销的。"
 
@@ -1713,7 +1713,7 @@ msgstr "导入并移至 staging"
 msgid "Import log"
 msgstr "导入日志"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:724
+#: src/containers/namespace-detail/namespace-detail.tsx:731
 msgid "Imports"
 msgstr "导入"
 
@@ -1841,11 +1841,11 @@ msgstr "许可证"
 msgid "Limits total download rate in requests per second."
 msgstr "限制请求的每秒总下载率。"
 
-#: src/components/namespace-form/namespace-form.tsx:258
+#: src/components/namespace-form/namespace-form.tsx:262
 msgid "Link URL"
 msgstr "链接 URL"
 
-#: src/components/namespace-form/namespace-form.tsx:246
+#: src/components/namespace-form/namespace-form.tsx:250
 msgid "Link text"
 msgstr "链接文本"
 
@@ -1877,7 +1877,7 @@ msgstr "登录到您的帐户"
 msgid "Login"
 msgstr "登录"
 
-#: src/components/namespace-form/namespace-form.tsx:102
+#: src/components/namespace-form/namespace-form.tsx:106
 msgid "Logo URL"
 msgstr "徽标 URL"
 
@@ -1910,7 +1910,7 @@ msgstr "信息"
 msgid "Modify Ansible repo content"
 msgstr "修改 Ansible repo 内容"
 
-#: src/components/namespace-form/namespace-form.tsx:80
+#: src/components/namespace-form/namespace-form.tsx:83
 msgid "Moved to the <0>Namespace owners</0> <1/> tab"
 msgstr ""
 
@@ -1930,7 +1930,7 @@ msgstr "必须是整数。"
 msgid "My imports"
 msgstr "我的导入"
 
-#: src/containers/namespace-list/namespace-list.tsx:190
+#: src/containers/namespace-list/namespace-list.tsx:191
 msgid "My namespaces"
 msgstr "我的命名空间"
 
@@ -1945,7 +1945,7 @@ msgstr "我的配置集"
 #: src/components/execution-environment/repository-form.tsx:181
 #: src/components/my-imports/import-list.tsx:84
 #: src/components/my-imports/import-list.tsx:121
-#: src/components/namespace-form/namespace-form.tsx:43
+#: src/components/namespace-form/namespace-form.tsx:46
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/rbac/group-modal.tsx:75
 #: src/components/rbac/role-form.tsx:90
@@ -1960,7 +1960,7 @@ msgstr "我的配置集"
 #: src/containers/execution-environment-list/execution_environment_list.tsx:262
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:317
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:349
-#: src/containers/namespace-list/namespace-list.tsx:229
+#: src/containers/namespace-list/namespace-list.tsx:230
 #: src/containers/signature-keys/list.tsx:125
 #: src/containers/signature-keys/list.tsx:151
 #: src/containers/signature-keys/list.tsx:179
@@ -1984,7 +1984,7 @@ msgstr "名称不能以 '_' 开头"
 msgid "Name must be longer than 2 characters"
 msgstr "名称必须大于 2 个字符"
 
-#: src/components/namespace-form/namespace-form.tsx:212
+#: src/components/namespace-form/namespace-form.tsx:216
 msgid "Name must not be empty."
 msgstr "名称不能为空。"
 
@@ -1994,11 +1994,11 @@ msgstr "名称不能为空。"
 msgid "Namespace"
 msgstr "命名空间"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:809
+#: src/containers/namespace-detail/namespace-detail.tsx:816
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "命名空间 \"{name}\" 无法被删除。"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:788
+#: src/containers/namespace-detail/namespace-detail.tsx:795
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "命名空间 \"{name}\" 已被成功删除。"
 
@@ -2010,9 +2010,9 @@ msgstr "命名空间名称"
 msgid "Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’."
 msgstr "命名空间名称限制为字母数字字符和下划线，长度最少为 2 个字符，且不能以 '_' 开头。"
 
-#: src/components/namespace-form/namespace-form.tsx:75
+#: src/components/namespace-form/namespace-form.tsx:78
 #: src/containers/namespace-detail/namespace-detail.tsx:195
-#: src/containers/namespace-detail/namespace-detail.tsx:211
+#: src/containers/namespace-detail/namespace-detail.tsx:214
 msgid "Namespace owners"
 msgstr "命名空间所有者"
 
@@ -2027,11 +2027,11 @@ msgstr "命名空间"
 
 #: src/components/my-imports/import-list.tsx:244
 #: src/containers/namespace-list/namespace-list.tsx:125
-#: src/containers/namespace-list/namespace-list.tsx:366
+#: src/containers/namespace-list/namespace-list.tsx:367
 msgid "Namespaces list could not be displayed."
 msgstr "无法显示命名空间列表。"
 
-#: src/containers/namespace-list/namespace-list.tsx:288
+#: src/containers/namespace-list/namespace-list.tsx:289
 msgid "Namespaces will appear once created"
 msgstr "命名空间在创建后会出现"
 
@@ -2084,7 +2084,7 @@ msgstr ""
 msgid "No child task"
 msgstr "没有子任务"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:368
+#: src/containers/namespace-detail/namespace-detail.tsx:374
 #: src/containers/search/search.tsx:253
 msgid "No collections yet"
 msgstr "还没有集合"
@@ -2129,7 +2129,7 @@ msgstr "还没有受管集合"
 msgid "No namespace selected."
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:286
+#: src/containers/namespace-list/namespace-list.tsx:287
 msgid "No namespaces yet"
 msgstr "还没有命名空间"
 
@@ -2762,7 +2762,7 @@ msgstr "SSO URL"
 #: src/components/rbac/role-form.tsx:208
 #: src/components/rbac/user-form.tsx:223
 #: src/components/repositories/remote-form.tsx:142
-#: src/containers/edit-namespace/edit-namespace.tsx:155
+#: src/containers/edit-namespace/edit-namespace.tsx:156
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 msgid "Save"
 msgstr "保存"
@@ -2776,7 +2776,7 @@ msgstr "已保存对执行环境 \"{0}\" 的变化。"
 #~ msgid "Saved changes to execution environment \"{name}\"."
 #~ msgstr "Saved changes to execution environment \"{name}\"."
 
-#: src/containers/edit-namespace/edit-namespace.tsx:235
+#: src/containers/edit-namespace/edit-namespace.tsx:237
 msgid "Saved changes to namespace \"{0}\"."
 msgstr "保存对命名空间 \"{0}\" 的更改。"
 
@@ -2911,7 +2911,7 @@ msgid "Sign all"
 msgstr "签发所有"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:34
-#: src/containers/namespace-detail/namespace-detail.tsx:734
+#: src/containers/namespace-detail/namespace-detail.tsx:741
 msgid "Sign all collections"
 msgstr "签发所有集合"
 
@@ -2978,7 +2978,7 @@ msgstr "签名的版本"
 msgid "Signing service selector:"
 msgstr "签名服务选择器："
 
-#: src/containers/namespace-detail/namespace-detail.tsx:536
+#: src/containers/namespace-detail/namespace-detail.tsx:543
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "开始签发命名空间 \"{0}\" 中的所有集合。"
 
@@ -3222,7 +3222,7 @@ msgstr "任务在创建后将显示。"
 #~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
 #~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
-#: src/components/namespace-form/namespace-form.tsx:157
+#: src/components/namespace-form/namespace-form.tsx:161
 msgid "Text: {0}"
 msgstr "文本：{0}"
 
@@ -3285,7 +3285,7 @@ msgstr "同步时要用于身份验证的密码。在使用令牌时不需要此
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:434
+#: src/containers/namespace-detail/namespace-detail.tsx:440
 msgid "The selected roles will be added to this specific namespace."
 msgstr ""
 
@@ -3342,7 +3342,7 @@ msgstr "没有资源记录"
 msgid "These users will lose access to the group content:"
 msgstr "这些用户将丢失对组群内容的访问权限："
 
-#: src/containers/namespace-list/namespace-list.tsx:289
+#: src/containers/namespace-list/namespace-list.tsx:290
 msgid "This account is not set up to manage any namespaces"
 msgstr "此帐户没有设置为管理任何命名空间"
 
@@ -3443,16 +3443,16 @@ msgstr "UI 版本"
 msgid "URL"
 msgstr "URL"
 
-#: src/components/namespace-form/namespace-form.tsx:230
+#: src/components/namespace-form/namespace-form.tsx:234
 msgid "URL must not be empty."
 msgstr "URL 不能为空。"
 
-#: src/components/namespace-form/namespace-form.tsx:160
+#: src/components/namespace-form/namespace-form.tsx:164
 msgid "URL: {0}"
 msgstr "URL：{0}"
 
 #: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:862
+#: src/containers/namespace-detail/namespace-detail.tsx:869
 #: src/containers/search/search.tsx:384
 msgid "Undeprecate"
 msgstr "取消弃用"
@@ -3483,13 +3483,13 @@ msgstr "上传"
 msgid "Upload and modify collections."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:375
-#: src/containers/namespace-detail/namespace-detail.tsx:746
+#: src/containers/namespace-detail/namespace-detail.tsx:381
+#: src/containers/namespace-detail/namespace-detail.tsx:753
 msgid "Upload collection"
 msgstr "上传集合"
 
 #: src/components/headers/collection-header.tsx:264
-#: src/containers/namespace-detail/namespace-detail.tsx:841
+#: src/containers/namespace-detail/namespace-detail.tsx:848
 #: src/containers/search/search.tsx:394
 #: src/containers/search/search.tsx:406
 msgid "Upload new version"
@@ -3552,7 +3552,7 @@ msgstr "使用此令牌来验证需要从 Automation Hub 下载内容的客户�
 msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
 msgstr "使用此令牌来验证 <0>ansible-galaxy</0> 客户端。"
 
-#: src/components/namespace-form/namespace-form.tsx:132
+#: src/components/namespace-form/namespace-form.tsx:136
 msgid "Useful links"
 msgstr "有用的链接"
 
@@ -3855,7 +3855,7 @@ msgstr "您没有执行此操作的权限。"
 msgid "You have to be logged in to be able to download the tarball."
 msgstr "您必须登录才能下载 tar 包。"
 
-#: src/containers/edit-namespace/edit-namespace.tsx:166
+#: src/containers/edit-namespace/edit-namespace.tsx:167
 msgid "You have unsaved changes"
 msgstr "您有未保存的更改"
 
@@ -3881,7 +3881,7 @@ msgid "hidden value"
 msgstr "隐藏值"
 
 #: src/components/collection-list/collection-filter.tsx:94
-#: src/containers/namespace-list/namespace-list.tsx:212
+#: src/containers/namespace-list/namespace-list.tsx:213
 msgid "keywords"
 msgstr "关键字"
 

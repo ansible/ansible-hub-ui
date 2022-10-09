@@ -64,7 +64,7 @@ msgstr "<0>Nota:</0> Es probable que su navegador bloquee los siguientes enlaces
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:401
+#: src/containers/namespace-detail/namespace-detail.tsx:407
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Nota:</0> Utilice esta URL para configurar ansible-galaxy para cargar colecciones en este espacio de nombres. Puede encontrar más información sobre la configuración de ansible-galaxy <1>aquí</1><2> </2><3/>."
 
@@ -113,7 +113,7 @@ msgstr "Una etiqueta puede contener caracteres alfabéticos ASCII en minúsculas
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:508
+#: src/containers/namespace-detail/namespace-detail.tsx:515
 msgid "API Error: Failed to set deprecation."
 msgstr "Error de API: No se ha podido pasar a desuso."
 
@@ -128,7 +128,7 @@ msgstr ""
 
 #: src/components/headers/collection-header.tsx:690
 #: src/components/headers/collection-header.tsx:741
-#: src/containers/namespace-detail/namespace-detail.tsx:527
+#: src/containers/namespace-detail/namespace-detail.tsx:534
 msgid "API Error: {status}"
 msgstr "Error de API: {status}"
 
@@ -269,7 +269,7 @@ msgstr "Añadir usuario"
 #~ "La adición de grupos proporciona acceso a todos los repositorios en el\n"
 #~ "espacio de nombres del contenedor \"{namespace}\"."
 
-#: src/containers/namespace-list/namespace-list.tsx:185
+#: src/containers/namespace-list/namespace-list.tsx:186
 msgid "All"
 msgstr "Todos"
 
@@ -378,7 +378,7 @@ msgstr "No se puede actualizar el control remoto sin una distribución adjunta."
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
-#: src/containers/edit-namespace/edit-namespace.tsx:158
+#: src/containers/edit-namespace/edit-namespace.tsx:159
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:211
 #: src/containers/group-management/group-detail.tsx:288
@@ -389,7 +389,7 @@ msgstr "Cancelar"
 msgid "Canceled"
 msgstr "Cancelado"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:699
+#: src/containers/namespace-detail/namespace-detail.tsx:706
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "No se puede eliminar el espacio de nombres hasta que se <1/>hayan eliminado las dependencias de las <0/>colecciones"
 
@@ -490,7 +490,7 @@ msgstr "No se pudieron guardar los cambios para el estado de certificación \"{0
 msgid "Changes to group \"{0}\" could not be saved."
 msgstr "No se pudieron guardar los cambios para el grupo \"{0}\"."
 
-#: src/containers/edit-namespace/edit-namespace.tsx:255
+#: src/containers/edit-namespace/edit-namespace.tsx:257
 msgid "Changes to namespace \"{0}\" could not be saved."
 msgstr "No se pudieron guardar los cambios para el espacio de nombres \"{0}\"."
 
@@ -551,11 +551,11 @@ msgstr ""
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:493
+#: src/containers/namespace-detail/namespace-detail.tsx:500
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:492
+#: src/containers/namespace-detail/namespace-detail.tsx:499
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr ""
 
@@ -613,7 +613,7 @@ msgstr "La colección no tiene dependencias."
 msgid "Collection is not being used by any collection."
 msgstr "La colección no está siendo utilizada por ninguna colección."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:658
+#: src/containers/namespace-detail/namespace-detail.tsx:665
 msgid "Collection repositories could not be displayed."
 msgstr "No se pudieron mostrar los repositorios de colecciones."
 
@@ -641,7 +641,7 @@ msgid "Collections"
 msgstr "Colecciones"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:260
-#: src/containers/namespace-detail/namespace-detail.tsx:369
+#: src/containers/namespace-detail/namespace-detail.tsx:375
 #: src/containers/search/search.tsx:254
 msgid "Collections will appear once uploaded"
 msgstr "Las colecciones aparecerán una vez cargadas"
@@ -659,7 +659,7 @@ msgstr "Comunidad"
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "Las colecciones de la comunidad no tienen documentos ni recuentos de contenido, sino que se sincroniza todo el contenido"
 
-#: src/components/namespace-form/namespace-form.tsx:57
+#: src/components/namespace-form/namespace-form.tsx:60
 msgid "Company name"
 msgstr "Nombre de la empresa"
 
@@ -771,8 +771,8 @@ msgstr "No se ha podido cargar el registro de importación"
 #: src/components/rbac/group-modal.tsx:57
 #: src/containers/group-management/group-list.tsx:161
 #: src/containers/group-management/group-list.tsx:198
-#: src/containers/namespace-list/namespace-list.tsx:243
-#: src/containers/namespace-list/namespace-list.tsx:293
+#: src/containers/namespace-list/namespace-list.tsx:244
+#: src/containers/namespace-list/namespace-list.tsx:294
 #: src/containers/user-management/user-list.tsx:183
 #: src/containers/user-management/user-list.tsx:248
 msgid "Create"
@@ -959,12 +959,12 @@ msgid "Delete image?"
 msgstr "¿Eliminar imagen?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:693
-#: src/containers/namespace-detail/namespace-detail.tsx:707
+#: src/containers/namespace-detail/namespace-detail.tsx:700
+#: src/containers/namespace-detail/namespace-detail.tsx:714
 msgid "Delete namespace"
 msgstr "Eliminar el espacio de nombres"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:297
+#: src/containers/namespace-detail/namespace-detail.tsx:303
 msgid "Delete namespace?"
 msgstr "¿Eliminar el espacio de nombres?"
 
@@ -1013,7 +1013,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "Al eliminar <0>{0} v{collectionVersion}</0>, se perderán sus datos."
 
 #: src/components/delete-modal/delete-collection-modal.tsx:66
-#: src/containers/namespace-detail/namespace-detail.tsx:302
+#: src/containers/namespace-detail/namespace-detail.tsx:308
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "Al eliminar <0>{0}</0>, se perderán sus datos."
 
@@ -1060,18 +1060,18 @@ msgid "Dependent collections could not be displayed."
 msgstr "No se pudieron mostrar las colecciones dependientes."
 
 #: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:862
+#: src/containers/namespace-detail/namespace-detail.tsx:869
 #: src/containers/search/search.tsx:384
 msgid "Deprecate"
 msgstr "Pasar a desuso"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:479
+#: src/containers/namespace-detail/namespace-detail.tsx:486
 msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr ""
 
 #: src/components/collection-detail/collection-content-list.tsx:109
 #: src/components/execution-environment/repository-form.tsx:342
-#: src/components/namespace-form/namespace-form.tsx:117
+#: src/components/namespace-form/namespace-form.tsx:121
 #: src/components/rbac/role-form.tsx:113
 #: src/components/rbac/role-list-table.tsx:49
 #: src/components/rbac/select-roles.tsx:98
@@ -1170,7 +1170,7 @@ msgid "Dropdown"
 msgstr "Desplegable"
 
 #: src/components/repositories/remote-repository-table.tsx:128
-#: src/containers/edit-namespace/edit-namespace.tsx:120
+#: src/containers/edit-namespace/edit-namespace.tsx:121
 #: src/containers/execution-environment/registry-list.tsx:391
 #: src/containers/execution-environment-detail/base.tsx:212
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
@@ -1195,7 +1195,7 @@ msgstr "Modificar entorno de ejecución"
 #~ msgid "Edit group permissions"
 #~ msgstr "Editar los permisos de los grupos"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:683
+#: src/containers/namespace-detail/namespace-detail.tsx:690
 msgid "Edit namespace"
 msgstr "Editar el espacio de nombres"
 
@@ -1476,7 +1476,7 @@ msgstr "Fallido"
 msgid "Failed to retrieve user data."
 msgstr "Fallo en la recuperación de los datos del usuario."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:526
+#: src/containers/namespace-detail/namespace-detail.tsx:533
 msgid "Failed to sign all collections."
 msgstr "Error al firmar todas las colecciones."
 
@@ -1624,7 +1624,7 @@ msgstr "Lista de grupos"
 msgid "Group name"
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:222
+#: src/containers/namespace-detail/namespace-detail.tsx:228
 msgid "Group {0}"
 msgstr ""
 
@@ -1666,7 +1666,7 @@ msgstr "Ocultar la firma"
 #: src/components/delete-modal/delete-collection-modal.tsx:75
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:222
-#: src/containers/namespace-detail/namespace-detail.tsx:309
+#: src/containers/namespace-detail/namespace-detail.tsx:315
 msgid "I understand that this action cannot be undone."
 msgstr "Entiendo que esta acción no se puede deshacer."
 
@@ -1715,7 +1715,7 @@ msgstr "Importar y trasladar a la puesta en escena"
 msgid "Import log"
 msgstr "Registro de importación"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:724
+#: src/containers/namespace-detail/namespace-detail.tsx:731
 msgid "Imports"
 msgstr "Importaciones"
 
@@ -1843,11 +1843,11 @@ msgstr "Licencia"
 msgid "Limits total download rate in requests per second."
 msgstr "Limita la velocidad total de descarga en solicitudes por segundo."
 
-#: src/components/namespace-form/namespace-form.tsx:258
+#: src/components/namespace-form/namespace-form.tsx:262
 msgid "Link URL"
 msgstr "Enlace URL"
 
-#: src/components/namespace-form/namespace-form.tsx:246
+#: src/components/namespace-form/namespace-form.tsx:250
 msgid "Link text"
 msgstr "Texto del enlace"
 
@@ -1879,7 +1879,7 @@ msgstr "Acceda a su cuenta"
 msgid "Login"
 msgstr "Inicio de sesión"
 
-#: src/components/namespace-form/namespace-form.tsx:102
+#: src/components/namespace-form/namespace-form.tsx:106
 msgid "Logo URL"
 msgstr "URL del logotipo"
 
@@ -1912,7 +1912,7 @@ msgstr "Mensaje"
 msgid "Modify Ansible repo content"
 msgstr "Modificar el contenido del repo de Ansible"
 
-#: src/components/namespace-form/namespace-form.tsx:80
+#: src/components/namespace-form/namespace-form.tsx:83
 msgid "Moved to the <0>Namespace owners</0> <1/> tab"
 msgstr ""
 
@@ -1932,7 +1932,7 @@ msgstr "Debe ser un número entero."
 msgid "My imports"
 msgstr "Mis importaciones"
 
-#: src/containers/namespace-list/namespace-list.tsx:190
+#: src/containers/namespace-list/namespace-list.tsx:191
 msgid "My namespaces"
 msgstr "Mis espacios de nombres"
 
@@ -1947,7 +1947,7 @@ msgstr "Mi perfil"
 #: src/components/execution-environment/repository-form.tsx:181
 #: src/components/my-imports/import-list.tsx:84
 #: src/components/my-imports/import-list.tsx:121
-#: src/components/namespace-form/namespace-form.tsx:43
+#: src/components/namespace-form/namespace-form.tsx:46
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/rbac/group-modal.tsx:75
 #: src/components/rbac/role-form.tsx:90
@@ -1962,7 +1962,7 @@ msgstr "Mi perfil"
 #: src/containers/execution-environment-list/execution_environment_list.tsx:262
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:317
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:349
-#: src/containers/namespace-list/namespace-list.tsx:229
+#: src/containers/namespace-list/namespace-list.tsx:230
 #: src/containers/signature-keys/list.tsx:125
 #: src/containers/signature-keys/list.tsx:151
 #: src/containers/signature-keys/list.tsx:179
@@ -1986,7 +1986,7 @@ msgstr "El nombre no puede empezar por \"_\""
 msgid "Name must be longer than 2 characters"
 msgstr "El nombre debe tener más de 2 caracteres"
 
-#: src/components/namespace-form/namespace-form.tsx:212
+#: src/components/namespace-form/namespace-form.tsx:216
 msgid "Name must not be empty."
 msgstr "El nombre no debe estar vacío."
 
@@ -1996,11 +1996,11 @@ msgstr "El nombre no debe estar vacío."
 msgid "Namespace"
 msgstr "Espacio de nombres"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:809
+#: src/containers/namespace-detail/namespace-detail.tsx:816
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "No se pudo eliminar el espacio de nombres \"{name}\"."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:788
+#: src/containers/namespace-detail/namespace-detail.tsx:795
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "El espacio de nombres \"{name}\" se eliminó correctamente."
 
@@ -2012,9 +2012,9 @@ msgstr "Nombre del espacio de nombres"
 msgid "Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’."
 msgstr "Los nombres de los espacios de nombres están limitados a caracteres alfanuméricos y guiones bajos, deben tener una longitud mínima de 2 caracteres y no pueden empezar con \"_\"."
 
-#: src/components/namespace-form/namespace-form.tsx:75
+#: src/components/namespace-form/namespace-form.tsx:78
 #: src/containers/namespace-detail/namespace-detail.tsx:195
-#: src/containers/namespace-detail/namespace-detail.tsx:211
+#: src/containers/namespace-detail/namespace-detail.tsx:214
 msgid "Namespace owners"
 msgstr "Propietarios de espacios de nombres"
 
@@ -2029,11 +2029,11 @@ msgstr "Espacios de nombres"
 
 #: src/components/my-imports/import-list.tsx:244
 #: src/containers/namespace-list/namespace-list.tsx:125
-#: src/containers/namespace-list/namespace-list.tsx:366
+#: src/containers/namespace-list/namespace-list.tsx:367
 msgid "Namespaces list could not be displayed."
 msgstr "No se pudo mostrar la lista de espacios de nombres."
 
-#: src/containers/namespace-list/namespace-list.tsx:288
+#: src/containers/namespace-list/namespace-list.tsx:289
 msgid "Namespaces will appear once created"
 msgstr "Los espacios de nombres aparecerán una vez creados"
 
@@ -2086,7 +2086,7 @@ msgstr ""
 msgid "No child task"
 msgstr "Ninguna tarea infantil"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:368
+#: src/containers/namespace-detail/namespace-detail.tsx:374
 #: src/containers/search/search.tsx:253
 msgid "No collections yet"
 msgstr "Todavía no hay colecciones"
@@ -2131,7 +2131,7 @@ msgstr "Todavía no hay colecciones gestionadas"
 msgid "No namespace selected."
 msgstr ""
 
-#: src/containers/namespace-list/namespace-list.tsx:286
+#: src/containers/namespace-list/namespace-list.tsx:287
 msgid "No namespaces yet"
 msgstr "Todavía no hay espacios de nombres"
 
@@ -2764,7 +2764,7 @@ msgstr "SSO URL"
 #: src/components/rbac/role-form.tsx:208
 #: src/components/rbac/user-form.tsx:223
 #: src/components/repositories/remote-form.tsx:142
-#: src/containers/edit-namespace/edit-namespace.tsx:155
+#: src/containers/edit-namespace/edit-namespace.tsx:156
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 msgid "Save"
 msgstr "Guardar"
@@ -2778,7 +2778,7 @@ msgstr "Se guardaron los cambios en el entorno de ejecución \"{0}\"."
 #~ msgid "Saved changes to execution environment \"{name}\"."
 #~ msgstr "Se guardaron los cambios en el entorno de ejecución \"{name}\"."
 
-#: src/containers/edit-namespace/edit-namespace.tsx:235
+#: src/containers/edit-namespace/edit-namespace.tsx:237
 msgid "Saved changes to namespace \"{0}\"."
 msgstr "Se guardaron los cambios en el espacio de nombres \"{0}\"."
 
@@ -2913,7 +2913,7 @@ msgid "Sign all"
 msgstr "Firmar todo"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:34
-#: src/containers/namespace-detail/namespace-detail.tsx:734
+#: src/containers/namespace-detail/namespace-detail.tsx:741
 msgid "Sign all collections"
 msgstr "Firmar todas las colecciones"
 
@@ -2980,7 +2980,7 @@ msgstr ""
 msgid "Signing service selector:"
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:536
+#: src/containers/namespace-detail/namespace-detail.tsx:543
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Se inició la firma para todas las colecciones del espacio de nombres \"{0}\"."
 
@@ -3224,7 +3224,7 @@ msgstr "Las tareas aparecerán una vez creadas."
 #~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
 #~ msgstr "Deshabilitado temporalmente debido a problemas de sincronización. (AAH-1237)"
 
-#: src/components/namespace-form/namespace-form.tsx:157
+#: src/components/namespace-form/namespace-form.tsx:161
 msgid "Text: {0}"
 msgstr "Texto: {0}"
 
@@ -3287,7 +3287,7 @@ msgstr "Contraseña que se utilizará para la autenticación al sincronizar. Est
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:434
+#: src/containers/namespace-detail/namespace-detail.tsx:440
 msgid "The selected roles will be added to this specific namespace."
 msgstr ""
 
@@ -3344,7 +3344,7 @@ msgstr "No hay registro de recursos"
 msgid "These users will lose access to the group content:"
 msgstr "Estos usuarios perderán el acceso al contenido del grupo:"
 
-#: src/containers/namespace-list/namespace-list.tsx:289
+#: src/containers/namespace-list/namespace-list.tsx:290
 msgid "This account is not set up to manage any namespaces"
 msgstr "Esta cuenta no está configurada para gestionar ningún espacio de nombres"
 
@@ -3445,16 +3445,16 @@ msgstr "Versión de la UI"
 msgid "URL"
 msgstr "URL"
 
-#: src/components/namespace-form/namespace-form.tsx:230
+#: src/components/namespace-form/namespace-form.tsx:234
 msgid "URL must not be empty."
 msgstr "La URL no debe estar vacía."
 
-#: src/components/namespace-form/namespace-form.tsx:160
+#: src/components/namespace-form/namespace-form.tsx:164
 msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:862
+#: src/containers/namespace-detail/namespace-detail.tsx:869
 #: src/containers/search/search.tsx:384
 msgid "Undeprecate"
 msgstr "Cancelar paso a desuso"
@@ -3485,13 +3485,13 @@ msgstr "Subir"
 msgid "Upload and modify collections."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:375
-#: src/containers/namespace-detail/namespace-detail.tsx:746
+#: src/containers/namespace-detail/namespace-detail.tsx:381
+#: src/containers/namespace-detail/namespace-detail.tsx:753
 msgid "Upload collection"
 msgstr "Subir la colección"
 
 #: src/components/headers/collection-header.tsx:264
-#: src/containers/namespace-detail/namespace-detail.tsx:841
+#: src/containers/namespace-detail/namespace-detail.tsx:848
 #: src/containers/search/search.tsx:394
 #: src/containers/search/search.tsx:406
 msgid "Upload new version"
@@ -3554,7 +3554,7 @@ msgstr "Utilice este token para autenticar a los clientes que necesitan descarga
 msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
 msgstr "Utilice este token para autenticar el cliente <0>ansible-galaxy</0>."
 
-#: src/components/namespace-form/namespace-form.tsx:132
+#: src/components/namespace-form/namespace-form.tsx:136
 msgid "Useful links"
 msgstr "Enlaces útiles"
 
@@ -3857,7 +3857,7 @@ msgstr ""
 msgid "You have to be logged in to be able to download the tarball."
 msgstr "Tiene que estar conectado para poder descargar el tarball."
 
-#: src/containers/edit-namespace/edit-namespace.tsx:166
+#: src/containers/edit-namespace/edit-namespace.tsx:167
 msgid "You have unsaved changes"
 msgstr "Tiene cambios no guardados"
 
@@ -3883,7 +3883,7 @@ msgid "hidden value"
 msgstr "valor oculto"
 
 #: src/components/collection-list/collection-filter.tsx:94
-#: src/containers/namespace-list/namespace-list.tsx:212
+#: src/containers/namespace-list/namespace-list.tsx:213
 msgid "keywords"
 msgstr "palabras clave"
 

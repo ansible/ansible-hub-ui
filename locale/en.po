@@ -65,7 +65,7 @@ msgstr "<0>Note:</0> The following links may be blocked by your browser. Copy an
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:401
+#: src/containers/namespace-detail/namespace-detail.tsx:407
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 
@@ -114,7 +114,7 @@ msgstr "A tag may contain lowercase and uppercase ASCII alphabetic characters, d
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:508
+#: src/containers/namespace-detail/namespace-detail.tsx:515
 msgid "API Error: Failed to set deprecation."
 msgstr "API Error: Failed to set deprecation."
 
@@ -129,7 +129,7 @@ msgstr "API Error: {ex}"
 
 #: src/components/headers/collection-header.tsx:690
 #: src/components/headers/collection-header.tsx:741
-#: src/containers/namespace-detail/namespace-detail.tsx:527
+#: src/containers/namespace-detail/namespace-detail.tsx:534
 msgid "API Error: {status}"
 msgstr "API Error: {status}"
 
@@ -270,7 +270,7 @@ msgstr "Add user"
 #~ "Adding groups provides access to all repositories in the\n"
 #~ "\"{namespace}\" container namespace."
 
-#: src/containers/namespace-list/namespace-list.tsx:185
+#: src/containers/namespace-list/namespace-list.tsx:186
 msgid "All"
 msgstr "All"
 
@@ -379,7 +379,7 @@ msgstr "Can't update remote without a distribution attached to it."
 #: src/components/signing/sign-all-certificates-modal.tsx:47
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
-#: src/containers/edit-namespace/edit-namespace.tsx:158
+#: src/containers/edit-namespace/edit-namespace.tsx:159
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:211
 #: src/containers/group-management/group-detail.tsx:288
@@ -390,7 +390,7 @@ msgstr "Cancel"
 msgid "Canceled"
 msgstr "Canceled"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:699
+#: src/containers/namespace-detail/namespace-detail.tsx:706
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 
@@ -491,7 +491,7 @@ msgstr "Changes to certification status for collection \"{0} {1} v{2}\" could no
 msgid "Changes to group \"{0}\" could not be saved."
 msgstr "Changes to group \"{0}\" could not be saved."
 
-#: src/containers/edit-namespace/edit-namespace.tsx:255
+#: src/containers/edit-namespace/edit-namespace.tsx:257
 msgid "Changes to namespace \"{0}\" could not be saved."
 msgstr "Changes to namespace \"{0}\" could not be saved."
 
@@ -552,11 +552,11 @@ msgstr "Collection \"{0}\" could not be deprecated."
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "Collection \"{0}\" could not be undeprecated."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:493
+#: src/containers/namespace-detail/namespace-detail.tsx:500
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr "Collection \"{0}\" has been successfully deprecated."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:492
+#: src/containers/namespace-detail/namespace-detail.tsx:499
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr "Collection \"{0}\" has been successfully undeprecated."
 
@@ -614,7 +614,7 @@ msgstr "Collection does not have dependencies."
 msgid "Collection is not being used by any collection."
 msgstr "Collection is not being used by any collection."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:658
+#: src/containers/namespace-detail/namespace-detail.tsx:665
 msgid "Collection repositories could not be displayed."
 msgstr "Collection repositories could not be displayed."
 
@@ -642,7 +642,7 @@ msgid "Collections"
 msgstr "Collections"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:260
-#: src/containers/namespace-detail/namespace-detail.tsx:369
+#: src/containers/namespace-detail/namespace-detail.tsx:375
 #: src/containers/search/search.tsx:254
 msgid "Collections will appear once uploaded"
 msgstr "Collections will appear once uploaded"
@@ -660,7 +660,7 @@ msgstr "Community"
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "Community collections do not have docs nor content counts, but all content gets synchronized"
 
-#: src/components/namespace-form/namespace-form.tsx:57
+#: src/components/namespace-form/namespace-form.tsx:60
 msgid "Company name"
 msgstr "Company name"
 
@@ -772,8 +772,8 @@ msgstr "Could not load import log"
 #: src/components/rbac/group-modal.tsx:57
 #: src/containers/group-management/group-list.tsx:161
 #: src/containers/group-management/group-list.tsx:198
-#: src/containers/namespace-list/namespace-list.tsx:243
-#: src/containers/namespace-list/namespace-list.tsx:293
+#: src/containers/namespace-list/namespace-list.tsx:244
+#: src/containers/namespace-list/namespace-list.tsx:294
 #: src/containers/user-management/user-list.tsx:183
 #: src/containers/user-management/user-list.tsx:248
 msgid "Create"
@@ -960,12 +960,12 @@ msgid "Delete image?"
 msgstr "Delete image?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:693
-#: src/containers/namespace-detail/namespace-detail.tsx:707
+#: src/containers/namespace-detail/namespace-detail.tsx:700
+#: src/containers/namespace-detail/namespace-detail.tsx:714
 msgid "Delete namespace"
 msgstr "Delete namespace"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:297
+#: src/containers/namespace-detail/namespace-detail.tsx:303
 msgid "Delete namespace?"
 msgstr "Delete namespace?"
 
@@ -1014,7 +1014,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 
 #: src/components/delete-modal/delete-collection-modal.tsx:66
-#: src/containers/namespace-detail/namespace-detail.tsx:302
+#: src/containers/namespace-detail/namespace-detail.tsx:308
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "Deleting <0>{0}</0> and its data will be lost."
 
@@ -1061,18 +1061,18 @@ msgid "Dependent collections could not be displayed."
 msgstr "Dependent collections could not be displayed."
 
 #: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:862
+#: src/containers/namespace-detail/namespace-detail.tsx:869
 #: src/containers/search/search.tsx:384
 msgid "Deprecate"
 msgstr "Deprecate"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:479
+#: src/containers/namespace-detail/namespace-detail.tsx:486
 msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr "Deprecation status update starting for collection \"{0}\"."
 
 #: src/components/collection-detail/collection-content-list.tsx:109
 #: src/components/execution-environment/repository-form.tsx:342
-#: src/components/namespace-form/namespace-form.tsx:117
+#: src/components/namespace-form/namespace-form.tsx:121
 #: src/components/rbac/role-form.tsx:113
 #: src/components/rbac/role-list-table.tsx:49
 #: src/components/rbac/select-roles.tsx:98
@@ -1171,7 +1171,7 @@ msgid "Dropdown"
 msgstr "Dropdown"
 
 #: src/components/repositories/remote-repository-table.tsx:128
-#: src/containers/edit-namespace/edit-namespace.tsx:120
+#: src/containers/edit-namespace/edit-namespace.tsx:121
 #: src/containers/execution-environment/registry-list.tsx:391
 #: src/containers/execution-environment-detail/base.tsx:212
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
@@ -1196,7 +1196,7 @@ msgstr "Edit execution environment"
 #~ msgid "Edit group permissions"
 #~ msgstr "Edit group permissions"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:683
+#: src/containers/namespace-detail/namespace-detail.tsx:690
 msgid "Edit namespace"
 msgstr "Edit namespace"
 
@@ -1477,7 +1477,7 @@ msgstr "Failed"
 msgid "Failed to retrieve user data."
 msgstr "Failed to retrieve user data."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:526
+#: src/containers/namespace-detail/namespace-detail.tsx:533
 msgid "Failed to sign all collections."
 msgstr "Failed to sign all collections."
 
@@ -1625,7 +1625,7 @@ msgstr "Group list"
 msgid "Group name"
 msgstr "Group name"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:222
+#: src/containers/namespace-detail/namespace-detail.tsx:228
 msgid "Group {0}"
 msgstr "Group {0}"
 
@@ -1667,7 +1667,7 @@ msgstr "Hide the signature"
 #: src/components/delete-modal/delete-collection-modal.tsx:75
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:222
-#: src/containers/namespace-detail/namespace-detail.tsx:309
+#: src/containers/namespace-detail/namespace-detail.tsx:315
 msgid "I understand that this action cannot be undone."
 msgstr "I understand that this action cannot be undone."
 
@@ -1716,7 +1716,7 @@ msgstr "Import and move to staging"
 msgid "Import log"
 msgstr "Import log"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:724
+#: src/containers/namespace-detail/namespace-detail.tsx:731
 msgid "Imports"
 msgstr "Imports"
 
@@ -1844,11 +1844,11 @@ msgstr "License"
 msgid "Limits total download rate in requests per second."
 msgstr "Limits total download rate in requests per second."
 
-#: src/components/namespace-form/namespace-form.tsx:258
+#: src/components/namespace-form/namespace-form.tsx:262
 msgid "Link URL"
 msgstr "Link URL"
 
-#: src/components/namespace-form/namespace-form.tsx:246
+#: src/components/namespace-form/namespace-form.tsx:250
 msgid "Link text"
 msgstr "Link text"
 
@@ -1880,7 +1880,7 @@ msgstr "Log in to your account"
 msgid "Login"
 msgstr "Login"
 
-#: src/components/namespace-form/namespace-form.tsx:102
+#: src/components/namespace-form/namespace-form.tsx:106
 msgid "Logo URL"
 msgstr "Logo URL"
 
@@ -1913,7 +1913,7 @@ msgstr "Message"
 msgid "Modify Ansible repo content"
 msgstr "Modify Ansible repo content"
 
-#: src/components/namespace-form/namespace-form.tsx:80
+#: src/components/namespace-form/namespace-form.tsx:83
 msgid "Moved to the <0>Namespace owners</0> <1/> tab"
 msgstr "Moved to the <0>Namespace owners</0> <1/> tab"
 
@@ -1933,7 +1933,7 @@ msgstr "Must be an integer."
 msgid "My imports"
 msgstr "My imports"
 
-#: src/containers/namespace-list/namespace-list.tsx:190
+#: src/containers/namespace-list/namespace-list.tsx:191
 msgid "My namespaces"
 msgstr "My namespaces"
 
@@ -1948,7 +1948,7 @@ msgstr "My profile"
 #: src/components/execution-environment/repository-form.tsx:181
 #: src/components/my-imports/import-list.tsx:84
 #: src/components/my-imports/import-list.tsx:121
-#: src/components/namespace-form/namespace-form.tsx:43
+#: src/components/namespace-form/namespace-form.tsx:46
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/rbac/group-modal.tsx:75
 #: src/components/rbac/role-form.tsx:90
@@ -1963,7 +1963,7 @@ msgstr "My profile"
 #: src/containers/execution-environment-list/execution_environment_list.tsx:262
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:317
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:349
-#: src/containers/namespace-list/namespace-list.tsx:229
+#: src/containers/namespace-list/namespace-list.tsx:230
 #: src/containers/signature-keys/list.tsx:125
 #: src/containers/signature-keys/list.tsx:151
 #: src/containers/signature-keys/list.tsx:179
@@ -1987,7 +1987,7 @@ msgstr "Name cannot begin with '_'"
 msgid "Name must be longer than 2 characters"
 msgstr "Name must be longer than 2 characters"
 
-#: src/components/namespace-form/namespace-form.tsx:212
+#: src/components/namespace-form/namespace-form.tsx:216
 msgid "Name must not be empty."
 msgstr "Name must not be empty."
 
@@ -1997,11 +1997,11 @@ msgstr "Name must not be empty."
 msgid "Namespace"
 msgstr "Namespace"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:809
+#: src/containers/namespace-detail/namespace-detail.tsx:816
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "Namespace \"{name}\" could not be deleted."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:788
+#: src/containers/namespace-detail/namespace-detail.tsx:795
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "Namespace \"{name}\" has been successfully deleted."
 
@@ -2013,9 +2013,9 @@ msgstr "Namespace name"
 msgid "Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’."
 msgstr "Namespace names are limited to alphanumeric characters and underscores, must have a minimum length of 2 characters and cannot start with an ‘_’."
 
-#: src/components/namespace-form/namespace-form.tsx:75
+#: src/components/namespace-form/namespace-form.tsx:78
 #: src/containers/namespace-detail/namespace-detail.tsx:195
-#: src/containers/namespace-detail/namespace-detail.tsx:211
+#: src/containers/namespace-detail/namespace-detail.tsx:214
 msgid "Namespace owners"
 msgstr "Namespace owners"
 
@@ -2030,11 +2030,11 @@ msgstr "Namespaces"
 
 #: src/components/my-imports/import-list.tsx:244
 #: src/containers/namespace-list/namespace-list.tsx:125
-#: src/containers/namespace-list/namespace-list.tsx:366
+#: src/containers/namespace-list/namespace-list.tsx:367
 msgid "Namespaces list could not be displayed."
 msgstr "Namespaces list could not be displayed."
 
-#: src/containers/namespace-list/namespace-list.tsx:288
+#: src/containers/namespace-list/namespace-list.tsx:289
 msgid "Namespaces will appear once created"
 msgstr "Namespaces will appear once created"
 
@@ -2087,7 +2087,7 @@ msgstr "No assignable roles."
 msgid "No child task"
 msgstr "No child task"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:368
+#: src/containers/namespace-detail/namespace-detail.tsx:374
 #: src/containers/search/search.tsx:253
 msgid "No collections yet"
 msgstr "No collections yet"
@@ -2132,7 +2132,7 @@ msgstr "No managed collections yet"
 msgid "No namespace selected."
 msgstr "No namespace selected."
 
-#: src/containers/namespace-list/namespace-list.tsx:286
+#: src/containers/namespace-list/namespace-list.tsx:287
 msgid "No namespaces yet"
 msgstr "No namespaces yet"
 
@@ -2765,7 +2765,7 @@ msgstr "SSO URL"
 #: src/components/rbac/role-form.tsx:208
 #: src/components/rbac/user-form.tsx:223
 #: src/components/repositories/remote-form.tsx:142
-#: src/containers/edit-namespace/edit-namespace.tsx:155
+#: src/containers/edit-namespace/edit-namespace.tsx:156
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 msgid "Save"
 msgstr "Save"
@@ -2779,7 +2779,7 @@ msgstr "Saved changes to execution environment \"{0}\"."
 #~ msgid "Saved changes to execution environment \"{name}\"."
 #~ msgstr "Saved changes to execution environment \"{name}\"."
 
-#: src/containers/edit-namespace/edit-namespace.tsx:235
+#: src/containers/edit-namespace/edit-namespace.tsx:237
 msgid "Saved changes to namespace \"{0}\"."
 msgstr "Saved changes to namespace \"{0}\"."
 
@@ -2914,7 +2914,7 @@ msgid "Sign all"
 msgstr "Sign all"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:34
-#: src/containers/namespace-detail/namespace-detail.tsx:734
+#: src/containers/namespace-detail/namespace-detail.tsx:741
 msgid "Sign all collections"
 msgstr "Sign all collections"
 
@@ -2981,7 +2981,7 @@ msgstr "Signed version(s)"
 msgid "Signing service selector:"
 msgstr "Signing service selector:"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:536
+#: src/containers/namespace-detail/namespace-detail.tsx:543
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Signing started for all collections in namespace \"{0}\"."
 
@@ -3225,7 +3225,7 @@ msgstr "Tasks will appear once created."
 #~ msgid "Temporarily disabled due to sync issues. (AAH-1237)"
 #~ msgstr "Temporarily disabled due to sync issues. (AAH-1237)"
 
-#: src/components/namespace-form/namespace-form.tsx:157
+#: src/components/namespace-form/namespace-form.tsx:161
 msgid "Text: {0}"
 msgstr "Text: {0}"
 
@@ -3288,7 +3288,7 @@ msgstr "The password to be used for authentication when syncing. This is not req
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr "The selected roles will be added to this specific Execution Environment."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:434
+#: src/containers/namespace-detail/namespace-detail.tsx:440
 msgid "The selected roles will be added to this specific namespace."
 msgstr "The selected roles will be added to this specific namespace."
 
@@ -3345,7 +3345,7 @@ msgstr "There's no resource record"
 msgid "These users will lose access to the group content:"
 msgstr "These users will lose access to the group content:"
 
-#: src/containers/namespace-list/namespace-list.tsx:289
+#: src/containers/namespace-list/namespace-list.tsx:290
 msgid "This account is not set up to manage any namespaces"
 msgstr "This account is not set up to manage any namespaces"
 
@@ -3446,16 +3446,16 @@ msgstr "UI Version"
 msgid "URL"
 msgstr "URL"
 
-#: src/components/namespace-form/namespace-form.tsx:230
+#: src/components/namespace-form/namespace-form.tsx:234
 msgid "URL must not be empty."
 msgstr "URL must not be empty."
 
-#: src/components/namespace-form/namespace-form.tsx:160
+#: src/components/namespace-form/namespace-form.tsx:164
 msgid "URL: {0}"
 msgstr "URL: {0}"
 
 #: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:862
+#: src/containers/namespace-detail/namespace-detail.tsx:869
 #: src/containers/search/search.tsx:384
 msgid "Undeprecate"
 msgstr "Undeprecate"
@@ -3486,13 +3486,13 @@ msgstr "Upload"
 msgid "Upload and modify collections."
 msgstr "Upload and modify collections."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:375
-#: src/containers/namespace-detail/namespace-detail.tsx:746
+#: src/containers/namespace-detail/namespace-detail.tsx:381
+#: src/containers/namespace-detail/namespace-detail.tsx:753
 msgid "Upload collection"
 msgstr "Upload collection"
 
 #: src/components/headers/collection-header.tsx:264
-#: src/containers/namespace-detail/namespace-detail.tsx:841
+#: src/containers/namespace-detail/namespace-detail.tsx:848
 #: src/containers/search/search.tsx:394
 #: src/containers/search/search.tsx:406
 msgid "Upload new version"
@@ -3555,7 +3555,7 @@ msgstr "Use this token to authenticate clients that need to download content fro
 msgid "Use this token to authenticate the <0>ansible-galaxy</0> client."
 msgstr "Use this token to authenticate the <0>ansible-galaxy</0> client."
 
-#: src/components/namespace-form/namespace-form.tsx:132
+#: src/components/namespace-form/namespace-form.tsx:136
 msgid "Useful links"
 msgstr "Useful links"
 
@@ -3858,7 +3858,7 @@ msgstr "You don't have rights to do this operation."
 msgid "You have to be logged in to be able to download the tarball."
 msgstr "You have to be logged in to be able to download the tarball."
 
-#: src/containers/edit-namespace/edit-namespace.tsx:166
+#: src/containers/edit-namespace/edit-namespace.tsx:167
 msgid "You have unsaved changes"
 msgstr "You have unsaved changes"
 
@@ -3884,7 +3884,7 @@ msgid "hidden value"
 msgstr "hidden value"
 
 #: src/components/collection-list/collection-filter.tsx:94
-#: src/containers/namespace-list/namespace-list.tsx:212
+#: src/containers/namespace-list/namespace-list.tsx:213
 msgid "keywords"
 msgstr "keywords"
 
