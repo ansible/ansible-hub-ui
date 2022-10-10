@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
+import { AppContext } from 'src/loaders/app-context';
 import { RemoteType, UserType, PulpStatus } from 'src/api';
 import { DateComponent, SortTable, ListItemActions } from 'src/components';
 import { Constants } from 'src/constants';
@@ -19,6 +20,8 @@ interface IProps {
 }
 
 export class RemoteRepositoryTable extends React.Component<IProps> {
+  static contextType = AppContext;
+
   polling: ReturnType<typeof setInterval>;
   refreshOnStatuses = [PulpStatus.waiting, PulpStatus.running];
 
