@@ -125,7 +125,86 @@ describe('Remote Registry Tests', () => {
     cy.contains('Save').click();
   });
 
-  it('admin can delete data', () => {
+  it('verify correctly assembled hidden_fields', () => {
+    cy.intercept(
+      'POST',
+      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/',
+    ).as('remoteRegistries');
+
+    cy.addRemoteRegistry('foobar', 'https://whatever', {
+      username: 'testuser',
+      password: 'testpassword',
+      proxy_url: 'https://whateverproxy',
+      proxy_username: 'some proxy_username2',
+      proxy_password: 'some proxy_password2',
+      download_concurrency: 5,
+      rate_limit: 5,
+    });
+
+    // test correct request with hidden fields
+    cy.wait('@remoteRegistries').should((xhr) => {
+      const reqBody = xhr.request.body;
+      const resBody = xhr.response.body;
+
+      // check data in request
+      expect(reqBody.name).to.equal('foobar');
+      expect(reqBody.username).to.equal('testuser');
+      expect(reqBody.password).to.equal('testpassword');
+      expect(reqBody.hidden_fields).to.be.undefined;
+
+      // check data in response
+      expect(resBody.name).to.equal('foobar');
+      expect(resBody.username).not.to.exist;
+      expect(resBody.password).not.to.exist;
+      expect(resBody.hidden_fields).to.exist;
+
+      // check for hidden_fields in response
+      expect(resBody.hidden_fields).to.deep.equal([
+        { name: 'username', is_set: true },
+        { name: 'password', is_set: true },
+        { name: 'client_key', is_set: false },
+        { name: 'proxy_username', is_set: true },
+        { name: 'proxy_password', is_set: true },
+      ]);
+    });
+  });
+
+  it('hidden_fields should be read_only', () => {
+    cy.addRemoteRegistry('myremote', 'https://myurl', {
+      username: 'mytestuser',
+      password: 'mytestpassword',
+      proxy_url: 'https://myproxy',
+      proxy_username: 'myproxyusername',
+      proxy_password: 'myproxypassword',
+      download_concurrency: 5,
+      rate_limit: 5,
+    });
+
+    cy.get(
+      '[data-cy="kebab-toggle"]:first button[aria-label="Actions"]',
+    ).click();
+    cy.get('.pf-c-dropdown__menu-item').contains('Edit').click();
+
+    cy.get('input[id="name"]').should('be.disabled');
+    cy.get('input[id="name"]').should('have.value', 'myremote');
+    cy.get('input[id="url"]').should('not.be.disabled');
+
+    cy.get(
+      '[data-cy="username"] > .pf-c-form__group-control > .pf-c-input-group > input',
+    ).should('be.disabled');
+    cy.get(
+      '[data-cy="password"] > .pf-c-form__group-control > .pf-c-input-group > input',
+    ).should('be.disabled');
+    cy.get('.pf-c-expandable-section__toggle-text').click();
+    cy.get(
+      '[data-cy="proxy_username"] > .pf-c-form__group-control > .pf-c-input-group > input',
+    ).should('be.disabled');
+    cy.get(
+      '[data-cy="proxy_password"] > .pf-c-form__group-control > .pf-c-input-group > input',
+    ).should('be.disabled');
+  });
+
+  it.skip('admin can delete data', () => {
     cy.deleteRegistries();
   });
 });
