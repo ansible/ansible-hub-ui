@@ -204,7 +204,7 @@ describe('Remote Registry Tests', () => {
     ).should('be.disabled');
   });
 
-  it.skip('admin can delete data', () => {
+  it('admin can delete data', () => {
     cy.deleteRegistries();
   });
 });
