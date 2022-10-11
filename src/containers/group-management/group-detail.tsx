@@ -124,11 +124,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    if (
-      !this.context.user ||
-      this.context.user.is_anonymous ||
-      !this.context.user.model_permissions.view_group
-    ) {
+    const { user, hasPermission } = this.context;
+    if (!user || user.is_anonymous || !hasPermission('galaxy.view_group')) {
       this.setState({ unauthorised: true });
     } else {
       this.queryGroup();
@@ -150,10 +147,10 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       users,
       unauthorised,
     } = this.state;
-    const { user } = this.context;
+    const { user, hasPermission } = this.context;
 
     const tabs = [{ id: 'access', name: t`Access` }];
-    if (!!user && user.model_permissions.view_user) {
+    if (!!user && hasPermission('galaxy.view_user')) {
       tabs.push({ id: 'users', name: t`Users` });
     }
 
@@ -217,9 +214,9 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderControls() {
-    const { user } = this.context;
+    const { hasPermission, user } = this.context;
 
-    if (!user || !user.model_permissions.delete_group) {
+    if (!user || !hasPermission('galaxy.delete_group')) {
       return null;
     }
 
@@ -385,8 +382,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           );
         });
     };
-
-    const { view_user } = this.context.user.model_permissions;
+    const { hasPermission } = this.context;
+    const { view_user } = hasPermission('galaxy.view_user');
 
     if (!users && view_user) {
       this.queryUsers();
@@ -484,7 +481,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   private renderUsers(users) {
     const { itemCount, params } = this.state;
-    const { user, featureFlags } = this.context;
+    const { user, featureFlags, hasPermission } = this.context;
     const noData =
       itemCount === 0 &&
       !filterIsSet(this.state.params, [
@@ -506,7 +503,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           description={t`Users will appear once added to this group`}
           button={
             !!user &&
-            user.model_permissions.change_group &&
+            hasPermission('galaxy.change_group') &&
             !isUserMgmtDisabled && (
               <Button
                 variant='primary'
@@ -556,7 +553,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
                 </ToolbarItem>
               </ToolbarGroup>
               {!!user &&
-                user.model_permissions.change_group &&
+                hasPermission('galaxy.change_group') &&
                 !isUserMgmtDisabled && (
                   <ToolbarGroup>
                     <ToolbarItem>
@@ -665,11 +662,11 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   private renderTableRow(user: UserType, index: number) {
     const currentUser = this.context.user;
-    const { featureFlags } = this.context;
+    const { featureFlags, hasPermission } = this.context;
     const isUserMgmtDisabled = featureFlags?.external_authentication;
     const dropdownItems = [
       !!currentUser &&
-        currentUser.model_permissions.change_group &&
+        hasPermission('galaxy.change_group') &&
         !isUserMgmtDisabled && (
           <DropdownItem
             key='delete'

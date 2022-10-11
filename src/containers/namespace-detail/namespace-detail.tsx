@@ -246,10 +246,12 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       'view_type',
     ];
 
+    const { hasPermission } = this.context;
+
     const canEditOwners =
       this.state.namespace.related_fields.my_permissions?.includes(
         'galaxy.change_namespace',
-      ) || this.context.user.model_permissions.change_namespace;
+      ) || hasPermission('galaxy.change_namespace');
 
     // remove ?group (owners tab) when switching tabs
     const tabParams = { ...params };
@@ -677,6 +679,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private renderPageControls() {
     const { canSign, collections } = this.state;
     const { can_upload_signatures } = this.context?.featureFlags || {};
+    const { hasPermission } = this.context;
 
     const dropdownItems = [
       <DropdownItem
@@ -691,7 +694,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           </Link>
         }
       />,
-      this.context.user.model_permissions.delete_namespace && (
+      hasPermission('galaxy.delete_namespace') && (
         <React.Fragment key={'2'}>
           {this.state.isNamespaceEmpty ? (
             <DropdownItem
@@ -839,6 +842,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   }
 
   private renderCollectionControls(collection: CollectionListType) {
+    const { hasPermission } = this.context;
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Button
@@ -850,8 +854,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         <StatefulDropdown
           items={[
             DeleteCollectionUtils.deleteMenuOption({
-              canDeleteCollection:
-                this.context.user.model_permissions.delete_collection,
+              canDeleteCollection: hasPermission('ansible.delete_collection'),
               noDependencies: null,
               onClick: () =>
                 DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({

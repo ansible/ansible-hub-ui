@@ -11,6 +11,7 @@ export interface IAppContextType {
   alerts?: AlertType[];
   setAlerts?: (alerts: AlertType[]) => void;
   settings: SettingsType;
+  hasPermission: (name: string) => boolean;
 }
 
 export const AppContext = React.createContext<IAppContextType>(undefined);

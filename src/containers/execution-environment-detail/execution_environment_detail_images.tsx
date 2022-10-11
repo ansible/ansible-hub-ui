@@ -345,6 +345,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     canEditTags: boolean,
     cols: number,
   ) {
+    const { hasPermission } = this.context;
     const manifestLink = (digestOrTag) =>
       formatPath(Paths.executionEnvironmentManifest, {
         container: this.props.match.params['container'],
@@ -397,7 +398,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       >
         {t`Use in Controller`}
       </DropdownItem>,
-      this.context.user.model_permissions.delete_containerrepository && (
+      hasPermission('container.delete_containerrepository') && (
         <DropdownItem
           key='delete-image'
           onClick={() => {

@@ -92,7 +92,8 @@ class UserList extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || !this.context.user.model_permissions.view_user) {
+    const { user, hasPermission } = this.context;
+    if (!user || !hasPermission('galaxy.view_user')) {
       this.setState({ unauthorized: true });
     } else {
       this.queryUsers();
@@ -111,7 +112,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
       unauthorized,
     } = this.state;
 
-    const { user } = this.context;
+    const { user, hasPermission } = this.context;
 
     if (redirect) {
       return <Redirect push to={redirect} />;
@@ -176,7 +177,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
                         />
                       </ToolbarItem>
                     </ToolbarGroup>
-                    {!!user && user.model_permissions.add_user ? (
+                    {!!user && hasPermission('galaxy.add_user') ? (
                       <ToolbarGroup>
                         <ToolbarItem>
                           <Link to={Paths.createUser}>
@@ -311,10 +312,8 @@ class UserList extends React.Component<RouteComponentProps, IState> {
 
   private renderTableRow(user: UserType, index: number) {
     const dropdownItems = [];
-    if (
-      !!this.context.user &&
-      this.context.user.model_permissions.change_user
-    ) {
+    const { hasPermission } = this.context;
+    if (!!this.context.user && hasPermission('galaxy.change_user')) {
       dropdownItems.push(
         <DropdownItem
           key='edit'
@@ -330,10 +329,7 @@ class UserList extends React.Component<RouteComponentProps, IState> {
         />,
       );
     }
-    if (
-      !!this.context.user &&
-      this.context.user.model_permissions.delete_user
-    ) {
+    if (!!this.context.user && hasPermission('galaxy.delete_user')) {
       dropdownItems.push(
         <DropdownItem key='delete' onClick={() => this.deleteUser(user)}>
           {t`Delete`}

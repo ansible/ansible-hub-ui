@@ -481,9 +481,11 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
         {t`Delete`}
       </DropdownItem>
     );
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { hasPermission } = this.context;
     const dropdownItems = this.context.user.is_superuser
       ? [
-          // this.context.user.model_permissions.change_containerregistry &&
+          // hasPermission('galaxy.change_containerregistryremote') &&
           locked ? (
             <Tooltip key='edit' content={t`Built-in roles cannot be edited.`}>
               {editItem}
@@ -491,7 +493,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
           ) : (
             editItem
           ),
-          // this.context.user.model_permissions.delete_containerregistry &&
+          // hasPermission('galaxy.delete_containerregistryremote') &&
           locked ? (
             <Tooltip
               key='delete'

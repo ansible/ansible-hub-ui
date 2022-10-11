@@ -44,6 +44,7 @@ import {
   SmallLogo,
   StatefulDropdown,
 } from 'src/components';
+import { hasPermission } from 'src/utilities';
 import { AppContext } from '../app-context';
 import Logo from 'src/../static/images/logo_large.svg';
 
@@ -362,7 +363,8 @@ class App extends React.Component<RouteComponentProps, IState> {
           condition: ({ user }) => !user.is_anonymous,
         }),
         menuItem(t`Approval`, {
-          condition: ({ user }) => user.model_permissions.move_collection,
+          condition: (params) =>
+            hasPermission(params, 'ansible.modify_ansible_repo_content'),
           url: Paths.approvalDashboard,
         }),
       ]),
@@ -398,15 +400,15 @@ class App extends React.Component<RouteComponentProps, IState> {
       }),
       menuSection(t`User Access`, {}, [
         menuItem(t`Users`, {
-          condition: ({ user }) => user.model_permissions.view_user,
+          condition: (params) => hasPermission(params, 'galaxy.view_user'),
           url: Paths.userList,
         }),
         menuItem(t`Groups`, {
-          condition: ({ user }) => user.model_permissions.view_group,
+          condition: (params) => hasPermission(params, 'galaxy.view_group'),
           url: Paths.groupList,
         }),
         menuItem(t`Roles`, {
-          condition: ({ user }) => user.model_permissions.view_group,
+          condition: (params) => hasPermission(params, 'galaxy.view_group'),
           url: Paths.roleList,
         }),
       ]),
@@ -466,6 +468,15 @@ class App extends React.Component<RouteComponentProps, IState> {
           setUser: this.setUser,
           settings: this.state.settings,
           user: this.state.user,
+          hasPermission: (name) =>
+            hasPermission(
+              {
+                user: this.state.user,
+                settings: this.state.settings,
+                featureFlags: this.state.featureFlags,
+              },
+              name,
+            ),
         }}
       >
         {component}

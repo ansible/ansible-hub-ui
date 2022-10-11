@@ -144,7 +144,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     const { namespaces, params, itemCount, loading, inputText } = this.state;
     const { filterOwner } = this.props;
-    const { user, alerts } = this.context;
+    const { alerts, hasPermission } = this.context;
     const noData =
       !filterIsSet(this.state.params, ['keywords']) &&
       namespaces !== undefined &&
@@ -235,7 +235,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                         }
                       />
                     </ToolbarItem>
-                    {user?.model_permissions?.add_namespace && (
+                    {hasPermission('galaxy.add_namespace') && (
                       <ToolbarItem key='create-button'>
                         <Button
                           variant='primary'
@@ -282,14 +282,14 @@ export class NamespaceList extends React.Component<IProps, IState> {
   private renderBody() {
     const { namespaces, loading } = this.state;
     const { namespacePath, filterOwner } = this.props;
-    const { user } = this.context;
+    const { hasPermission } = this.context;
 
     const noDataTitle = t`No namespaces yet`;
     const noDataDescription = !filterOwner
       ? t`Namespaces will appear once created`
       : t`This account is not set up to manage any namespaces`;
 
-    const noDataButton = user?.model_permissions?.add_namespace ? (
+    const noDataButton = hasPermission('galaxy.add_namespace') ? (
       <Button variant='primary' onClick={() => this.handleModalToggle()}>
         {t`Create`}
       </Button>

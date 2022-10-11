@@ -75,6 +75,7 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
   }
 
   queryNamespace(name) {
+    const { hasPermission } = this.context;
     ExecutionEnvironmentNamespaceAPI.get(name).then(
       ({ data: { groups, my_permissions } }) =>
         this.setState({
@@ -82,7 +83,7 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
           groups: groups,
           canEditOwners:
             my_permissions.includes('container.change_containernamespace') ||
-            this.context.user.model_permissions.change_containernamespace,
+            hasPermission('container.change_containernamespace'),
         }),
     );
   }

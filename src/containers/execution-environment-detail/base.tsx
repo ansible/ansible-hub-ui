@@ -114,7 +114,7 @@ export function withContainerRepo(WrappedComponent) {
       const canSync = permissions.includes(
         'container.change_containernamespace',
       );
-
+      const { hasPermission } = this.context;
       const dropdownItems = [
         this.state.repo.pulp.repository.remote && canSync && (
           <DropdownItem
@@ -139,7 +139,7 @@ export function withContainerRepo(WrappedComponent) {
         >
           {t`Use in Controller`}
         </DropdownItem>,
-        this.context.user.model_permissions.delete_containerrepository && (
+        hasPermission('container.delete_containerrepository') && (
           <DropdownItem
             key='delete'
             onClick={() => {

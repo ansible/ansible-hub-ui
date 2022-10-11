@@ -154,7 +154,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
     </DeleteModal>
   );
 
-  const { user, featureFlags } = context;
+  const { featureFlags, hasPermission } = context;
   let isUserMgmtDisabled = false;
   const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
   if (featureFlags) {
@@ -169,7 +169,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
     });
   }
 
-  const addRoles = user?.model_permissions?.change_group && (
+  const addRoles = hasPermission('galaxy.change_group') && (
     <Button
       onClick={() => setShowAddRolesModal(true)}
       variant='primary'
@@ -379,7 +379,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     </td>
                     <ListItemActions
                       kebabItems={[
-                        user.model_permissions.change_group && (
+                        hasPermission('galaxy.change_group') && (
                           <DropdownItem
                             key='remove-role'
                             onClick={() => setSelectedDeleteRole(role)}

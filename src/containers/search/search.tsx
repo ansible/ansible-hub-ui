@@ -365,10 +365,10 @@ class Search extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderMenu(list, collection) {
+    const { hasPermission } = this.context;
     const menuItems = [
       DeleteCollectionUtils.deleteMenuOption({
-        canDeleteCollection:
-          this.context.user.model_permissions.delete_collection,
+        canDeleteCollection: hasPermission('ansible.delete_collection'),
         noDependencies: null,
         onClick: () =>
           DeleteCollectionUtils.tryOpenDeleteModalWithConfirm({

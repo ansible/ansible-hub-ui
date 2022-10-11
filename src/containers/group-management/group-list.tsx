@@ -104,7 +104,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    if (!this.context.user || !this.context.user.model_permissions.view_group) {
+    const { user, hasPermission } = this.context;
+    if (!user || !hasPermission('galaxy.view_group')) {
       this.setState({ unauthorized: true });
     } else {
       this.queryGroups();
@@ -125,7 +126,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       unauthorized,
     } = this.state;
 
-    const { user } = this.context;
+    const { user, hasPermission } = this.context;
     const noData =
       groups.length === 0 && !filterIsSet(params, ['name__icontains']);
 
@@ -153,7 +154,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
             description={t`Groups will appear once created`}
             button={
               !!user &&
-              user.model_permissions.add_group && (
+              hasPermission('galaxy.add_group') && (
                 <Button
                   variant='primary'
                   onClick={() => this.setState({ createModalVisible: true })}
@@ -187,7 +188,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
                         />
                       </ToolbarItem>
                     </ToolbarGroup>
-                    {!!user && user.model_permissions.add_group && (
+                    {!!user && hasPermission('galaxy.add_group') && (
                       <ToolbarGroup>
                         <ToolbarItem>
                           <Button
@@ -271,7 +272,8 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   private renderDeleteModal() {
     const name = this.state.selectedGroup && this.state.selectedGroup.name;
     const { deleteModalUsers: users, deleteModalCount: count } = this.state;
-    const { view_user } = this.context.user.model_permissions;
+    const { hasPermission } = this.context;
+    const { view_user } = hasPermission('galaxy.view_user');
 
     if (!users && view_user) {
       this.queryUsers();
@@ -404,9 +406,9 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
   }
 
   private renderTableRow(group, index: number) {
-    const { user } = this.context;
+    const { user, hasPermission } = this.context;
     const dropdownItems = [
-      !!user && user.model_permissions.delete_group && (
+      !!user && hasPermission('galaxy.delete_group') && (
         <DropdownItem
           aria-label='Delete'
           key='delete'

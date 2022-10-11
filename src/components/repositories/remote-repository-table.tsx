@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
+import { AppContext } from 'src/loaders/app-context';
 import { RemoteType, UserType, PulpStatus } from 'src/api';
 import { DateComponent, SortTable, ListItemActions } from 'src/components';
 import { Constants } from 'src/constants';
@@ -19,6 +20,8 @@ interface IProps {
 }
 
 export class RemoteRepositoryTable extends React.Component<IProps> {
+  static contextType = AppContext;
+
   polling: ReturnType<typeof setInterval>;
   refreshOnStatuses = [PulpStatus.waiting, PulpStatus.running];
 
@@ -109,7 +112,7 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
   }
 
   private renderRow(remote, i) {
-    const { user } = this.props;
+    const { hasPermission } = this.context;
     const buttons = remote.repositories.length
       ? this.getConfigureOrSyncButton(remote)
       : [
@@ -123,11 +126,15 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
           </Tooltip>,
         ];
     const dropdownItems = [
-      remote.repositories.length && user?.model_permissions?.change_remote && (
-        <DropdownItem key='edit' onClick={() => this.props.editRemote(remote)}>
-          {t`Edit`}
-        </DropdownItem>
-      ),
+      remote.repositories.length &&
+        hasPermission('ansible.change_collectionremote') && (
+          <DropdownItem
+            key='edit'
+            onClick={() => this.props.editRemote(remote)}
+          >
+            {t`Edit`}
+          </DropdownItem>
+        ),
     ];
     return (
       <tr key={i}>
@@ -148,8 +155,8 @@ export class RemoteRepositoryTable extends React.Component<IProps> {
   }
 
   private getConfigureOrSyncButton(remote: RemoteType) {
-    const { user } = this.props;
-    if (!user?.model_permissions?.change_remote) {
+    const { hasPermission } = this.context;
+    if (!hasPermission('ansible.change_collectionremote')) {
       return null;
     }
     const configButton = [

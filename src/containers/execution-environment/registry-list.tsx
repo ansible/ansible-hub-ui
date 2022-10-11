@@ -124,8 +124,8 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       return <EmptyStateUnauthorized />;
     }
 
-    const addButton = this.context.user.model_permissions
-      .add_containerregistry ? (
+    const { hasPermission } = this.context;
+    const addButton = hasPermission('galaxy.add_containerregistry') ? (
       <Button
         onClick={() =>
           this.setState({
@@ -362,8 +362,9 @@ class ExecutionEnvironmentRegistryList extends React.Component<
   }
 
   private renderTableRow(item, index: number) {
+    const { hasPermission } = this.context;
     const buttons = [
-      this.context.user.model_permissions.change_containerregistry && (
+      hasPermission('galaxy.change_containerregistryremote') && (
         <Button
           key='sync'
           variant='secondary'
@@ -375,7 +376,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     ];
 
     const dropdownItems = [
-      this.context.user.model_permissions.change_containerregistry && (
+      hasPermission('galaxy.change_containerregistryremote') && (
         <DropdownItem
           key='edit'
           onClick={() =>
@@ -391,7 +392,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
           <Trans>Edit</Trans>
         </DropdownItem>
       ),
-      this.context.user.model_permissions.delete_containerregistry && (
+      hasPermission('galaxy.delete_containerregistryremote') && (
         <DropdownItem
           key='delete'
           onClick={() =>

@@ -117,10 +117,11 @@ class CertificationDashboard extends React.Component<
   }
 
   componentDidMount() {
+    const { user, hasPermission } = this.context;
     if (
-      !this.context.user ||
-      this.context.user.is_anonymous ||
-      !this.context.user.model_permissions.move_collection
+      !user ||
+      user.is_anonymous ||
+      !hasPermission('ansible.modify_ansible_repo_content')
     ) {
       this.setState({ unauthorized: true });
     } else {
