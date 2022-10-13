@@ -1,1 +1,0 @@
-Users without `core.view_task` permission get alert notification.
