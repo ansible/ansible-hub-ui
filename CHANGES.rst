@@ -1,4 +1,23 @@
 4.6.0 (2022-10-13)
+Bugfixes
+--------
+
+- Owners tab - go up to group list when clicking the tab
+  `AAH-1733 <https://issues.redhat.com/browse/AAH-1733>`_
+- Moved to the *owners tab only clickable when already created
+  `AAH-1792 <https://issues.redhat.com/browse/AAH-1792>`_
+
+
+Misc
+----
+
+- `AAH-618 <https://issues.redhat.com/browse/AAH-618>`_
+
+
+----
+
+
+4.6.0 (2022-10-13)
 No significant changes.
 
 
