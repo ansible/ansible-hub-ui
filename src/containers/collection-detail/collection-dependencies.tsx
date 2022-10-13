@@ -198,7 +198,8 @@ class CollectionDependencies extends React.Component<
     Object.keys(dependencies).forEach((dependency) => {
       const [namespace, collection] = dependency.split('.');
       let version = dependencies[dependency];
-      version = version.replace('=', '').replace('<', '').replace('>', '');
+      version = this.separateVersion(version).version;
+
       const dependency_repo = {
         name: collection,
         namespace: namespace,
@@ -225,9 +226,6 @@ class CollectionDependencies extends React.Component<
     })
       .then((result) => {
         dependency_repo.repo = result.data.data[0].repository_list[0];
-        const dependencies =
-          this.state.collection.latest_version.metadata.dependencies;
-
         dependency_repo.path = formatPath(
           Paths.collectionByRepo,
           {
@@ -235,11 +233,7 @@ class CollectionDependencies extends React.Component<
             namespace: dependency_repo.namespace,
             repo: dependency_repo.repo,
           },
-          this.separateVersion(
-            dependencies[
-              dependency_repo.namespace + '.' + dependency_repo.name
-            ],
-          ),
+          dependency_repo.version,
         );
       })
       .catch(() => {
