@@ -6,7 +6,7 @@ export function formatPath(
   data,
   params?: Record<string, string | boolean>,
 ) {
-  let url = path as string;
+  let url = (path as string) + '/';
 
   for (const k of Object.keys(data)) {
     url = url.replace(':' + k + '+', data[k]).replace(':' + k, data[k]);
