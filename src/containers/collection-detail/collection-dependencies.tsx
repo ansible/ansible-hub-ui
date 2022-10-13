@@ -197,9 +197,12 @@ class CollectionDependencies extends React.Component<
 
     Object.keys(dependencies).forEach((dependency) => {
       const [namespace, collection] = dependency.split('.');
+      let version = dependencies[dependency];
+      version = version.replace('=', '').replace('<', '').replace('>', '');
       const dependency_repo = {
         name: collection,
         namespace: namespace,
+        version: version,
         repo: '',
         path: '',
       };
@@ -218,6 +221,7 @@ class CollectionDependencies extends React.Component<
     return CollectionVersionAPI.list({
       namespace: dependency_repo.namespace,
       name: dependency_repo.name,
+      version: dependency_repo.version,
     })
       .then((result) => {
         dependency_repo.repo = result.data.data[0].repository_list[0];
