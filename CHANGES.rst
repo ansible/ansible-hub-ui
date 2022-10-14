@@ -1,6 +1,13 @@
+4.6.1 (2022-10-14)
+No significant changes.
+
+
 4.6.0 (2022-10-13)
 Bugfixes
 --------
+
+- Added search ahead in namespace selection in imports.
+  `AAH-1725 <https://issues.redhat.com/browse/AAH-1725>`_
 
 - Owners tab - go up to group list when clicking the tab
   `AAH-1733 <https://issues.redhat.com/browse/AAH-1733>`_
