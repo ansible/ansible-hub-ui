@@ -64,7 +64,7 @@ msgstr "<0>Nota:</0> Es probable que su navegador bloquee los siguientes enlaces
 #~ msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 #~ msgstr "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1>."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:407
+#: src/containers/namespace-detail/namespace-detail.tsx:409
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Nota:</0> Utilice esta URL para configurar ansible-galaxy para cargar colecciones en este espacio de nombres. Puede encontrar más información sobre la configuración de ansible-galaxy <1>aquí</1><2> </2><3/>."
 
@@ -113,7 +113,7 @@ msgstr "Una etiqueta puede contener caracteres alfabéticos ASCII en minúsculas
 #~ msgid "API Error: 500"
 #~ msgstr "API Error: 500"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:515
+#: src/containers/namespace-detail/namespace-detail.tsx:517
 msgid "API Error: Failed to set deprecation."
 msgstr "Error de API: No se ha podido pasar a desuso."
 
@@ -126,9 +126,9 @@ msgstr "Error de API: No se ha podido pasar a desuso."
 msgid "API Error: {ex}"
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:690
-#: src/components/headers/collection-header.tsx:741
-#: src/containers/namespace-detail/namespace-detail.tsx:534
+#: src/components/headers/collection-header.tsx:691
+#: src/components/headers/collection-header.tsx:742
+#: src/containers/namespace-detail/namespace-detail.tsx:536
 msgid "API Error: {status}"
 msgstr "Error de API: {status}"
 
@@ -146,15 +146,15 @@ msgid "API token"
 msgstr "Token API"
 
 #: src/containers/token/token-standalone.tsx:52
-#: src/loaders/standalone/standalone-loader.tsx:360
+#: src/loaders/standalone/standalone-loader.tsx:361
 msgid "API token management"
 msgstr "Gestión de tokens de API"
 
-#: src/loaders/standalone/standalone-loader.tsx:166
+#: src/loaders/standalone/standalone-loader.tsx:167
 msgid "About"
 msgstr "Acerca de"
 
-#: src/containers/group-management/group-detail.tsx:155
+#: src/containers/group-management/group-detail.tsx:152
 msgid "Access"
 msgstr ""
 
@@ -181,9 +181,9 @@ msgstr "Actividad"
 #: src/components/rbac/owners-tab.tsx:420
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:218
-#: src/containers/group-management/group-detail.tsx:285
-#: src/containers/group-management/group-detail.tsx:515
-#: src/containers/group-management/group-detail.tsx:566
+#: src/containers/group-management/group-detail.tsx:282
+#: src/containers/group-management/group-detail.tsx:512
+#: src/containers/group-management/group-detail.tsx:563
 msgid "Add"
 msgstr "Añadir"
 
@@ -208,7 +208,7 @@ msgid "Add container repository"
 msgstr "Agregar el repositorio de contenedores"
 
 #: src/components/execution-environment/repository-form.tsx:134
-#: src/containers/execution-environment-list/execution_environment_list.tsx:158
+#: src/containers/execution-environment-list/execution_environment_list.tsx:160
 msgid "Add execution environment"
 msgstr "Agregar entorno de ejecución"
 
@@ -241,7 +241,7 @@ msgstr "Añadir registro remoto"
 msgid "Add roles"
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:271
+#: src/containers/group-management/group-detail.tsx:268
 msgid "Add selected users to group"
 msgstr "Añadir los usuarios seleccionados al grupo"
 
@@ -285,11 +285,11 @@ msgstr ""
 msgid "Allow all actions on a taskschedule."
 msgstr ""
 
-#: src/loaders/standalone/standalone-loader.tsx:364
+#: src/loaders/standalone/standalone-loader.tsx:365
 msgid "Approval"
 msgstr "Aprobación"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:140
+#: src/containers/certification-dashboard/certification-dashboard.tsx:141
 msgid "Approval dashboard"
 msgstr "Cuadro de mandos de aprobación"
 
@@ -297,8 +297,8 @@ msgstr "Cuadro de mandos de aprobación"
 msgid "Approval status:"
 msgstr "Estado de aprobación:"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:433
-#: src/containers/certification-dashboard/certification-dashboard.tsx:466
+#: src/containers/certification-dashboard/certification-dashboard.tsx:434
+#: src/containers/certification-dashboard/certification-dashboard.tsx:467
 msgid "Approve"
 msgstr "Aprobar"
 
@@ -306,9 +306,9 @@ msgstr "Aprobar"
 msgid "Approve, reject and sync collections from remotes."
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:187
-#: src/containers/certification-dashboard/certification-dashboard.tsx:216
-#: src/containers/certification-dashboard/certification-dashboard.tsx:328
+#: src/containers/certification-dashboard/certification-dashboard.tsx:188
+#: src/containers/certification-dashboard/certification-dashboard.tsx:217
+#: src/containers/certification-dashboard/certification-dashboard.tsx:329
 msgid "Approved"
 msgstr "Aprobado"
 
@@ -334,7 +334,7 @@ msgstr "Versión del navegador"
 msgid "Built-in"
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:498
+#: src/containers/role-management/role-list.tsx:500
 msgid "Built-in roles cannot be deleted."
 msgstr ""
 
@@ -342,7 +342,7 @@ msgstr ""
 msgid "Built-in roles cannot be edited or deleted."
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:488
+#: src/containers/role-management/role-list.tsx:490
 msgid "Built-in roles cannot be edited."
 msgstr ""
 
@@ -381,7 +381,7 @@ msgstr "No se puede actualizar el control remoto sin una distribución adjunta."
 #: src/containers/edit-namespace/edit-namespace.tsx:159
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:211
-#: src/containers/group-management/group-detail.tsx:288
+#: src/containers/group-management/group-detail.tsx:285
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -389,7 +389,7 @@ msgstr "Cancelar"
 msgid "Canceled"
 msgstr "Cancelado"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:706
+#: src/containers/namespace-detail/namespace-detail.tsx:709
 msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
 msgstr "No se puede eliminar el espacio de nombres hasta que se <1/>hayan eliminado las dependencias de las <0/>colecciones"
 
@@ -398,12 +398,12 @@ msgstr "No se puede eliminar el espacio de nombres hasta que se <1/>hayan elimin
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "No se puede eliminar hasta que se <1/>hayan eliminado las colecciones <0/>que dependen de esta colección."
 
-#: src/components/headers/collection-header.tsx:644
-#: src/containers/certification-dashboard/certification-dashboard.tsx:553
+#: src/components/headers/collection-header.tsx:645
+#: src/containers/certification-dashboard/certification-dashboard.tsx:554
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:587
+#: src/containers/certification-dashboard/certification-dashboard.tsx:588
 msgid "Certification status for collection \"{0} {1} v{2}\" has been successfully updated."
 msgstr "El estado de certificación para la colección \"{0} {1} v{2}\" se actualizó correctamente."
 
@@ -482,11 +482,11 @@ msgstr "Cambiar tarea"
 msgid "Change user"
 msgstr "Cambiar usuario"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:598
+#: src/containers/certification-dashboard/certification-dashboard.tsx:599
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
 msgstr "No se pudieron guardar los cambios para el estado de certificación \"{0} {1} v{2}\"."
 
-#: src/containers/group-management/group-list.tsx:363
+#: src/containers/group-management/group-list.tsx:365
 msgid "Changes to group \"{0}\" could not be saved."
 msgstr "No se pudieron guardar los cambios para el grupo \"{0}\"."
 
@@ -537,34 +537,34 @@ msgid "Code"
 msgstr "Código"
 
 #: src/components/collection-dependencies-list/collection-usedby-dependencies-list.tsx:89
-#: src/containers/certification-dashboard/certification-dashboard.tsx:272
+#: src/containers/certification-dashboard/certification-dashboard.tsx:273
 msgid "Collection"
 msgstr "Colección"
 
-#: src/components/headers/collection-header.tsx:824
+#: src/components/headers/collection-header.tsx:825
 #: src/containers/search/search.tsx:358
 msgid "Collection \"{0}\" could not be deprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:825
+#: src/components/headers/collection-header.tsx:826
 #: src/containers/search/search.tsx:359
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:500
+#: src/containers/namespace-detail/namespace-detail.tsx:502
 msgid "Collection \"{0}\" has been successfully deprecated."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:499
+#: src/containers/namespace-detail/namespace-detail.tsx:501
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:939
+#: src/components/headers/collection-header.tsx:940
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "No se pudo eliminar la colección \"{name} v{collectionVersion}\"."
 
-#: src/components/headers/collection-header.tsx:868
-#: src/components/headers/collection-header.tsx:883
+#: src/components/headers/collection-header.tsx:869
+#: src/components/headers/collection-header.tsx:884
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "La colección \"{name} v{collectionVersion}\" se eliminó correctamente."
 
@@ -580,7 +580,7 @@ msgstr "No se pudo descargar la colección \"{name}\"."
 msgid "Collection \"{name}\" has been successfully deleted."
 msgstr "La colección \"{name}\" se eliminó correctamente."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:170
+#: src/containers/certification-dashboard/certification-dashboard.tsx:171
 msgid "Collection Name"
 msgstr "Nombre de la colección"
 
@@ -613,7 +613,7 @@ msgstr "La colección no tiene dependencias."
 msgid "Collection is not being used by any collection."
 msgstr "La colección no está siendo utilizada por ninguna colección."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:665
+#: src/containers/namespace-detail/namespace-detail.tsx:667
 msgid "Collection repositories could not be displayed."
 msgstr "No se pudieron mostrar los repositorios de colecciones."
 
@@ -621,27 +621,27 @@ msgstr "No se pudieron mostrar los repositorios de colecciones."
 msgid "Collection upload canceled"
 msgstr "Carga de la colección cancelada"
 
-#: src/components/headers/collection-header.tsx:316
+#: src/components/headers/collection-header.tsx:317
 #: src/components/repositories/local-repository-table.tsx:85
-#: src/components/repositories/remote-repository-table.tsx:98
-#: src/containers/certification-dashboard/certification-dashboard.tsx:301
+#: src/components/repositories/remote-repository-table.tsx:101
+#: src/containers/certification-dashboard/certification-dashboard.tsx:302
 msgid "Collection versions"
 msgstr "Versiones de la colección"
 
-#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:46
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
 msgid "Collection was not found in the system. You must upload it."
 msgstr ""
 
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:192
 #: src/containers/search/search.tsx:199
-#: src/loaders/standalone/standalone-loader.tsx:341
 #: src/loaders/standalone/standalone-loader.tsx:342
+#: src/loaders/standalone/standalone-loader.tsx:343
 msgid "Collections"
 msgstr "Colecciones"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:260
-#: src/containers/namespace-detail/namespace-detail.tsx:375
+#: src/containers/certification-dashboard/certification-dashboard.tsx:261
+#: src/containers/namespace-detail/namespace-detail.tsx:377
 #: src/containers/search/search.tsx:254
 msgid "Collections will appear once uploaded"
 msgstr "Las colecciones aparecerán una vez cargadas"
@@ -666,11 +666,11 @@ msgstr "Nombre de la empresa"
 #: src/components/my-imports/import-list.tsx:93
 #: src/components/status/status-indicator.tsx:67
 #: src/constants.tsx:372
-#: src/containers/task-management/task-list-view.tsx:162
+#: src/containers/task-management/task-list-view.tsx:163
 msgid "Completed"
 msgstr "Completado"
 
-#: src/components/repositories/remote-repository-table.tsx:161
+#: src/components/repositories/remote-repository-table.tsx:168
 msgid "Configure"
 msgstr "Configurar"
 
@@ -717,12 +717,12 @@ msgstr "Los nombres de los contenedores solo pueden contener caracteres alfanum�
 msgid "Container namespace"
 msgstr "Espacio de nombres del contenedor"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:312
+#: src/containers/execution-environment-list/execution_environment_list.tsx:314
 msgid "Container registry type"
 msgstr "Tipo de registro de contenedores"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:233
-#: src/containers/execution-environment-list/execution_environment_list.tsx:292
+#: src/containers/execution-environment-list/execution_environment_list.tsx:235
+#: src/containers/execution-environment-list/execution_environment_list.tsx:294
 msgid "Container repository name"
 msgstr "Nombre del repositorio de contenedores"
 
@@ -738,7 +738,7 @@ msgstr "Contenido"
 #~ msgid "Content count"
 #~ msgstr "Recuento de contenidos"
 
-#: src/components/headers/collection-header.tsx:582
+#: src/components/headers/collection-header.tsx:583
 msgid "Contents"
 msgstr "Contenido"
 
@@ -769,12 +769,12 @@ msgstr "No se ha podido cargar el registro de importación"
 
 #: src/components/namespace-modal/namespace-modal.tsx:108
 #: src/components/rbac/group-modal.tsx:57
-#: src/containers/group-management/group-list.tsx:161
-#: src/containers/group-management/group-list.tsx:198
+#: src/containers/group-management/group-list.tsx:162
+#: src/containers/group-management/group-list.tsx:199
 #: src/containers/namespace-list/namespace-list.tsx:244
 #: src/containers/namespace-list/namespace-list.tsx:294
-#: src/containers/user-management/user-list.tsx:183
-#: src/containers/user-management/user-list.tsx:248
+#: src/containers/user-management/user-list.tsx:184
+#: src/containers/user-management/user-list.tsx:249
 msgid "Create"
 msgstr "Crear"
 
@@ -821,15 +821,15 @@ msgid "Create, delete and change collection namespaces. Upload and delete collec
 msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx:323
-#: src/containers/execution-environment-list/execution_environment_list.tsx:302
-#: src/containers/group-management/group-detail.tsx:639
+#: src/containers/execution-environment-list/execution_environment_list.tsx:304
+#: src/containers/group-management/group-detail.tsx:636
 #: src/containers/role-management/role-list.tsx:180
-#: src/containers/user-management/user-list.tsx:285
+#: src/containers/user-management/user-list.tsx:286
 msgid "Created"
 msgstr "Creado"
 
 #: src/containers/signature-keys/list.tsx:189
-#: src/containers/task-management/task-list-view.tsx:237
+#: src/containers/task-management/task-list-view.tsx:238
 #: src/containers/task-management/task_detail.tsx:178
 msgid "Created on"
 msgstr "Creado el"
@@ -862,7 +862,7 @@ msgstr "Etiquetas incluidas actualmente"
 msgid "Custom permissions"
 msgstr ""
 
-#: src/loaders/standalone/standalone-loader.tsx:147
+#: src/loaders/standalone/standalone-loader.tsx:148
 msgid "Customer Support <0/>"
 msgstr "Asistencia al cliente <0/>"
 
@@ -874,22 +874,22 @@ msgstr "OBSOLETO"
 msgid "Date"
 msgstr "Fecha"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:282
+#: src/containers/certification-dashboard/certification-dashboard.tsx:283
 msgid "Date created"
 msgstr "Fecha de creación"
 
 #: src/components/delete-modal/delete-modal.tsx:30
-#: src/containers/execution-environment/registry-list.tsx:404
+#: src/containers/execution-environment/registry-list.tsx:405
 #: src/containers/execution-environment-detail/base.tsx:149
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:407
-#: src/containers/execution-environment-list/execution_environment_list.tsx:385
-#: src/containers/group-management/group-detail.tsx:232
-#: src/containers/group-management/group-list.tsx:420
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:408
+#: src/containers/execution-environment-list/execution_environment_list.tsx:389
+#: src/containers/group-management/group-detail.tsx:229
+#: src/containers/group-management/group-list.tsx:422
 #: src/containers/role-management/role-list.tsx:481
-#: src/containers/task-management/task-list-view.tsx:316
-#: src/containers/task-management/task-list-view.tsx:332
-#: src/containers/user-management/user-detail.tsx:129
-#: src/containers/user-management/user-list.tsx:339
+#: src/containers/task-management/task-list-view.tsx:317
+#: src/containers/task-management/task-list-view.tsx:333
+#: src/containers/user-management/user-detail.tsx:126
+#: src/containers/user-management/user-list.tsx:335
 msgid "Delete"
 msgstr "ELIMINAR"
 
@@ -959,12 +959,12 @@ msgid "Delete image?"
 msgstr "¿Eliminar imagen?"
 
 #: src/constants.tsx:193
-#: src/containers/namespace-detail/namespace-detail.tsx:700
-#: src/containers/namespace-detail/namespace-detail.tsx:714
+#: src/containers/namespace-detail/namespace-detail.tsx:703
+#: src/containers/namespace-detail/namespace-detail.tsx:717
 msgid "Delete namespace"
 msgstr "Eliminar el espacio de nombres"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:303
+#: src/containers/namespace-detail/namespace-detail.tsx:305
 msgid "Delete namespace?"
 msgstr "¿Eliminar el espacio de nombres?"
 
@@ -1000,7 +1000,7 @@ msgstr "Eliminar usuario"
 msgid "Delete user?"
 msgstr "¿Eliminar usuario?"
 
-#: src/components/headers/collection-header.tsx:226
+#: src/components/headers/collection-header.tsx:227
 msgid "Delete version {0}"
 msgstr "Eliminar versión {0}"
 
@@ -1013,7 +1013,7 @@ msgid "Deleting <0>{0} v{collectionVersion}</0> and its data will be lost."
 msgstr "Al eliminar <0>{0} v{collectionVersion}</0>, se perderán sus datos."
 
 #: src/components/delete-modal/delete-collection-modal.tsx:66
-#: src/containers/namespace-detail/namespace-detail.tsx:308
+#: src/containers/namespace-detail/namespace-detail.tsx:310
 msgid "Deleting <0>{0}</0> and its data will be lost."
 msgstr "Al eliminar <0>{0}</0>, se perderán sus datos."
 
@@ -1041,7 +1041,7 @@ msgstr "La eliminación de este grupo afectará a {count} usuarios."
 msgid "Deleting yourself is not allowed."
 msgstr "No está permitido borrarse a sí mismo."
 
-#: src/components/headers/collection-header.tsx:596
+#: src/components/headers/collection-header.tsx:597
 #: src/containers/collection-detail/collection-dependencies.tsx:109
 #: src/containers/collection-detail/collection-dependencies.tsx:139
 msgid "Dependencies"
@@ -1051,7 +1051,7 @@ msgstr "Dependencias"
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "No se pudieron mostrar las dependencias para la colección \"{name}\"."
 
-#: src/components/headers/collection-header.tsx:909
+#: src/components/headers/collection-header.tsx:910
 msgid "Dependent collections"
 msgstr "Colecciones dependientes"
 
@@ -1059,13 +1059,13 @@ msgstr "Colecciones dependientes"
 msgid "Dependent collections could not be displayed."
 msgstr "No se pudieron mostrar las colecciones dependientes."
 
-#: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:869
+#: src/components/headers/collection-header.tsx:258
+#: src/containers/namespace-detail/namespace-detail.tsx:872
 #: src/containers/search/search.tsx:384
 msgid "Deprecate"
 msgstr "Pasar a desuso"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:486
+#: src/containers/namespace-detail/namespace-detail.tsx:488
 msgid "Deprecation status update starting for collection \"{0}\"."
 msgstr ""
 
@@ -1075,7 +1075,7 @@ msgstr ""
 #: src/components/rbac/role-form.tsx:113
 #: src/components/rbac/role-list-table.tsx:49
 #: src/components/rbac/select-roles.tsx:98
-#: src/containers/execution-environment-list/execution_environment_list.tsx:297
+#: src/containers/execution-environment-list/execution_environment_list.tsx:299
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:237
 #: src/containers/role-management/role-list.tsx:175
 #: src/containers/task-management/task_detail.tsx:342
@@ -1097,7 +1097,7 @@ msgstr ""
 #: src/components/execution-environment/publish-to-controller-modal.tsx:344
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:173
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:269
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:482
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:483
 msgid "Digest"
 msgstr "Resumen"
 
@@ -1113,9 +1113,9 @@ msgstr "Nombre de la distribución"
 msgid "Docs site"
 msgstr "Sitio de Docs"
 
-#: src/components/headers/collection-header.tsx:577
+#: src/components/headers/collection-header.tsx:578
 #: src/containers/collection-detail/collection-docs.tsx:125
-#: src/loaders/standalone/standalone-loader.tsx:392
+#: src/loaders/standalone/standalone-loader.tsx:394
 msgid "Documentation"
 msgstr "Documentación"
 
@@ -1169,17 +1169,17 @@ msgstr ""
 msgid "Dropdown"
 msgstr "Desplegable"
 
-#: src/components/repositories/remote-repository-table.tsx:128
+#: src/components/repositories/remote-repository-table.tsx:135
 #: src/containers/edit-namespace/edit-namespace.tsx:121
-#: src/containers/execution-environment/registry-list.tsx:391
+#: src/containers/execution-environment/registry-list.tsx:392
 #: src/containers/execution-environment-detail/base.tsx:212
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
-#: src/containers/execution-environment-list/execution_environment_list.tsx:358
+#: src/containers/execution-environment-list/execution_environment_list.tsx:362
 #: src/containers/role-management/role-list.tsx:467
 #: src/containers/settings/user-profile.tsx:96
-#: src/containers/user-management/user-detail.tsx:119
+#: src/containers/user-management/user-detail.tsx:116
 #: src/containers/user-management/user-edit.tsx:67
-#: src/containers/user-management/user-list.tsx:327
+#: src/containers/user-management/user-list.tsx:326
 msgid "Edit"
 msgstr "Editar"
 
@@ -1195,7 +1195,7 @@ msgstr "Modificar entorno de ejecución"
 #~ msgid "Edit group permissions"
 #~ msgstr "Editar los permisos de los grupos"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:690
+#: src/containers/namespace-detail/namespace-detail.tsx:693
 msgid "Edit namespace"
 msgstr "Editar el espacio de nombres"
 
@@ -1238,11 +1238,11 @@ msgid "Editable"
 msgstr ""
 
 #: src/components/rbac/user-form.tsx:91
-#: src/containers/group-management/group-detail.tsx:552
-#: src/containers/group-management/group-detail.tsx:624
-#: src/containers/user-management/user-list.tsx:173
-#: src/containers/user-management/user-list.tsx:212
-#: src/containers/user-management/user-list.tsx:275
+#: src/containers/group-management/group-detail.tsx:549
+#: src/containers/group-management/group-detail.tsx:621
+#: src/containers/user-management/user-list.tsx:174
+#: src/containers/user-management/user-list.tsx:213
+#: src/containers/user-management/user-list.tsx:276
 msgid "Email"
 msgstr "Correo electrónico"
 
@@ -1258,7 +1258,7 @@ msgstr "Entorno"
 #~ msgid "Error deleting collection."
 #~ msgstr "Error deleting collection."
 
-#: src/containers/group-management/group-list.tsx:475
+#: src/containers/group-management/group-list.tsx:477
 msgid "Error deleting group."
 msgstr "Error al borrar el grupo."
 
@@ -1299,7 +1299,7 @@ msgstr "Error al importar desde la API"
 #~ msgid "Error loading collection repositories."
 #~ msgstr "Error loading collection repositories."
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:618
+#: src/containers/certification-dashboard/certification-dashboard.tsx:619
 msgid "Error loading collections."
 msgstr ""
 
@@ -1307,7 +1307,7 @@ msgstr ""
 #~ msgid "Error loading dependent collections."
 #~ msgstr "Error loading dependent collections."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:505
+#: src/containers/execution-environment-list/execution_environment_list.tsx:509
 msgid "Error loading environments."
 msgstr "Error al cargar los entornos."
 
@@ -1421,18 +1421,18 @@ msgid "Execution Environment"
 msgstr "Entorno de ejecución"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:40
-#: src/containers/execution-environment-list/execution_environment_list.tsx:176
+#: src/containers/execution-environment-list/execution_environment_list.tsx:178
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:107
-#: src/loaders/standalone/standalone-loader.tsx:370
-#: src/loaders/standalone/standalone-loader.tsx:376
+#: src/loaders/standalone/standalone-loader.tsx:372
+#: src/loaders/standalone/standalone-loader.tsx:378
 msgid "Execution Environments"
 msgstr "Entornos de ejecución"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:455
+#: src/containers/execution-environment-list/execution_environment_list.tsx:459
 msgid "Execution environment \"{0}\" has been added successfully."
 msgstr ""
 
-#: src/containers/execution-environment/registry-list.tsx:539
+#: src/containers/execution-environment/registry-list.tsx:540
 msgid "Execution environment \"{name}\" could not be indexed."
 msgstr "No se pudo indexar el entorno de ejecución \"{name}\"."
 
@@ -1464,7 +1464,7 @@ msgstr "Expiración"
 #: src/components/my-imports/import-list.tsx:97
 #: src/components/status/status-indicator.tsx:75
 #: src/constants.tsx:373
-#: src/containers/task-management/task-list-view.tsx:166
+#: src/containers/task-management/task-list-view.tsx:167
 msgid "Failed"
 msgstr "Fallido"
 
@@ -1476,11 +1476,11 @@ msgstr "Fallido"
 msgid "Failed to retrieve user data."
 msgstr "Fallo en la recuperación de los datos del usuario."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:533
+#: src/containers/namespace-detail/namespace-detail.tsx:535
 msgid "Failed to sign all collections."
 msgstr "Error al firmar todas las colecciones."
 
-#: src/components/headers/collection-header.tsx:689
+#: src/components/headers/collection-header.tsx:690
 msgid "Failed to sign all versions in the collection."
 msgstr "Error al firmar todas las versiones de la colección."
 
@@ -1489,7 +1489,7 @@ msgstr "Error al firmar todas las versiones de la colección."
 msgid "Failed to sign the container version."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:740
+#: src/components/headers/collection-header.tsx:741
 msgid "Failed to sign the version."
 msgstr "Error al firmar la versión."
 
@@ -1520,21 +1520,21 @@ msgstr "Filtrar por {0}"
 msgid "Find content"
 msgstr "Buscar contenido"
 
-#: src/containers/execution-environment/registry-list.tsx:411
+#: src/containers/execution-environment/registry-list.tsx:412
 msgid "Find execution environments in this registry"
 msgstr "Buscar entornos de ejecución en este registro"
 
-#: src/containers/task-management/task-list-view.tsx:247
+#: src/containers/task-management/task-list-view.tsx:248
 #: src/containers/task-management/task_detail.tsx:172
 msgid "Finished at"
 msgstr "Finalizado a las"
 
 #: src/components/rbac/user-form.tsx:89
-#: src/containers/group-management/group-detail.tsx:544
-#: src/containers/group-management/group-detail.tsx:634
-#: src/containers/user-management/user-list.tsx:165
-#: src/containers/user-management/user-list.tsx:210
-#: src/containers/user-management/user-list.tsx:263
+#: src/containers/group-management/group-detail.tsx:541
+#: src/containers/group-management/group-detail.tsx:631
+#: src/containers/user-management/user-list.tsx:166
+#: src/containers/user-management/user-list.tsx:211
+#: src/containers/user-management/user-list.tsx:264
 msgid "First name"
 msgstr "Nombre"
 
@@ -1542,7 +1542,7 @@ msgstr "Nombre"
 msgid "Follow logs"
 msgstr "Registros de seguimiento"
 
-#: src/loaders/standalone/standalone-loader.tsx:176
+#: src/loaders/standalone/standalone-loader.tsx:177
 msgid "Galaxy Logo"
 msgstr "Logotipo de Galaxy"
 
@@ -1583,7 +1583,7 @@ msgstr ""
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
 msgstr ""
 
-#: src/containers/group-management/group-list.tsx:460
+#: src/containers/group-management/group-list.tsx:462
 msgid "Group \"{0}\" has been successfully deleted."
 msgstr "El grupo \"{0}\" se eliminó correctamente."
 
@@ -1601,26 +1601,26 @@ msgstr ""
 msgid "Group \"{0}\" roles successfully updated in \"{name}\"."
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:382
+#: src/containers/group-management/group-detail.tsx:379
 msgid "Group \"{group}\" could not be deleted."
 msgstr "No se pudo eliminar el grupo \"{group}\"."
 
-#: src/containers/group-management/group-detail.tsx:374
+#: src/containers/group-management/group-detail.tsx:371
 msgid "Group \"{group}\" has been successfully deleted."
 msgstr "El grupo \"{group}\" se eliminó correctamente."
 
-#: src/containers/group-management/group-detail.tsx:743
+#: src/containers/group-management/group-detail.tsx:740
 msgid "Group could not be displayed."
 msgstr ""
 
 #: src/components/rbac/owners-tab.tsx:123
-#: src/containers/group-management/group-list.tsx:393
+#: src/containers/group-management/group-list.tsx:395
 msgid "Group list"
 msgstr "Lista de grupos"
 
-#: src/containers/group-management/group-list.tsx:184
-#: src/containers/group-management/group-list.tsx:224
-#: src/containers/group-management/group-list.tsx:379
+#: src/containers/group-management/group-list.tsx:185
+#: src/containers/group-management/group-list.tsx:225
+#: src/containers/group-management/group-list.tsx:381
 msgid "Group name"
 msgstr ""
 
@@ -1635,19 +1635,19 @@ msgstr ""
 #: src/components/rbac/user-form.tsx:149
 #: src/components/rbac/user-form.tsx:163
 #: src/constants.tsx:55
-#: src/containers/group-management/group-detail.tsx:194
-#: src/containers/group-management/group-list.tsx:145
-#: src/containers/user-management/user-list.tsx:281
-#: src/loaders/standalone/standalone-loader.tsx:404
+#: src/containers/group-management/group-detail.tsx:191
+#: src/containers/group-management/group-list.tsx:146
+#: src/containers/user-management/user-list.tsx:282
+#: src/loaders/standalone/standalone-loader.tsx:406
 msgid "Groups"
 msgstr "Grupos"
 
 #: src/components/rbac/user-form.tsx:298
-#: src/containers/group-management/group-list.tsx:502
+#: src/containers/group-management/group-list.tsx:504
 msgid "Groups list could not be displayed."
 msgstr "No se pudo mostrar la lista de grupos."
 
-#: src/containers/group-management/group-list.tsx:153
+#: src/containers/group-management/group-list.tsx:154
 msgid "Groups will appear once created"
 msgstr "Los grupos aparecerán una vez creados"
 
@@ -1666,7 +1666,7 @@ msgstr "Ocultar la firma"
 #: src/components/delete-modal/delete-collection-modal.tsx:75
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:55
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:222
-#: src/containers/namespace-detail/namespace-detail.tsx:315
+#: src/containers/namespace-detail/namespace-detail.tsx:317
 msgid "I understand that this action cannot be undone."
 msgstr "Entiendo que esta acción no se puede deshacer."
 
@@ -1678,11 +1678,11 @@ msgstr "Si se selecciona, se debe realizar la validación de pares TLS."
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "Si el controlador no aparece en la tabla, compruebe el archivo settings.py."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:608
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:609
 msgid "Image \"{digest}\" could not be deleted."
 msgstr "No se pudo eliminar la imagen \"{digest}\"."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:590
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:591
 msgid "Image \"{digest}\" has been successfully deleted."
 msgstr "La imagen \"{digest}\" se eliminó correctamente."
 
@@ -1710,16 +1710,16 @@ msgstr "Importación y aprobación automática"
 msgid "Import and move to staging"
 msgstr "Importar y trasladar a la puesta en escena"
 
-#: src/components/headers/collection-header.tsx:591
+#: src/components/headers/collection-header.tsx:592
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "Registro de importación"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:731
+#: src/containers/namespace-detail/namespace-detail.tsx:734
 msgid "Imports"
 msgstr "Importaciones"
 
-#: src/containers/execution-environment/registry-list.tsx:419
+#: src/containers/execution-environment/registry-list.tsx:420
 msgid "Index execution environments"
 msgstr "Entornos de ejecución de índices"
 
@@ -1727,7 +1727,7 @@ msgstr "Entornos de ejecución de índices"
 #~ msgid "Indexing execution environments in {name}"
 #~ msgstr "Indexing execution environments in {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:412
+#: src/containers/execution-environment/registry-list.tsx:413
 msgid "Indexing execution environments is only supported on registry.redhat.io"
 msgstr "La indexación de entornos de ejecución sólo es compatible con registry.redhat.io"
 
@@ -1735,12 +1735,12 @@ msgstr "La indexación de entornos de ejecución sólo es compatible con registr
 #~ msgid "Indexing failed for {name}"
 #~ msgstr "Indexing failed for {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:523
+#: src/containers/execution-environment/registry-list.tsx:524
 msgid "Indexing started for execution environment \"{name}\"."
 msgstr "Se inició la indexación para el entorno de ejecución \"{name}\"."
 
 #: src/components/collection-detail/collection-info.tsx:53
-#: src/components/headers/collection-header.tsx:572
+#: src/components/headers/collection-header.tsx:573
 msgid "Install"
 msgstr "Instalar"
 
@@ -1796,30 +1796,30 @@ msgstr ""
 msgid "Keywords"
 msgstr "Palabras clave"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:307
+#: src/containers/execution-environment-list/execution_environment_list.tsx:309
 msgid "Last modified"
 msgstr "Última modificación"
 
 #: src/components/rbac/user-form.tsx:90
-#: src/containers/group-management/group-detail.tsx:548
-#: src/containers/group-management/group-detail.tsx:629
-#: src/containers/user-management/user-list.tsx:169
-#: src/containers/user-management/user-list.tsx:211
-#: src/containers/user-management/user-list.tsx:269
+#: src/containers/group-management/group-detail.tsx:545
+#: src/containers/group-management/group-detail.tsx:626
+#: src/containers/user-management/user-list.tsx:170
+#: src/containers/user-management/user-list.tsx:212
+#: src/containers/user-management/user-list.tsx:270
 msgid "Last name"
 msgstr "Apellido"
 
-#: src/components/repositories/remote-repository-table.tsx:79
+#: src/components/repositories/remote-repository-table.tsx:82
 msgid "Last synced"
 msgstr "Última sincronización"
 
 #: src/components/repositories/local-repository-table.tsx:60
-#: src/components/repositories/remote-repository-table.tsx:74
+#: src/components/repositories/remote-repository-table.tsx:77
 #: src/containers/execution-environment/registry-list.tsx:328
 msgid "Last updated"
 msgstr "Última actualización"
 
-#: src/components/headers/collection-header.tsx:467
+#: src/components/headers/collection-header.tsx:468
 msgid "Last updated <0/>"
 msgstr "Última actualización <0/>"
 
@@ -1861,7 +1861,7 @@ msgstr "Lista de colecciones"
 msgid "Load token"
 msgstr "Ficha de carga"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:415
+#: src/containers/execution-environment-list/execution_environment_list.tsx:419
 #: src/containers/repositories/repository-list.tsx:118
 msgid "Local"
 msgstr "Local"
@@ -1883,7 +1883,7 @@ msgstr "Inicio de sesión"
 msgid "Logo URL"
 msgstr "URL del logotipo"
 
-#: src/loaders/standalone/standalone-loader.tsx:137
+#: src/loaders/standalone/standalone-loader.tsx:138
 msgid "Logout"
 msgstr "Finalización de la sesión"
 
@@ -1892,7 +1892,7 @@ msgid "Manage all content types."
 msgstr ""
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:134
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:383
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:384
 msgid "Manage tags"
 msgstr "Gestionar etiquetas"
 
@@ -1938,7 +1938,7 @@ msgstr "Mis espacios de nombres"
 
 #: src/containers/settings/user-profile.tsx:77
 #: src/containers/settings/user-profile.tsx:78
-#: src/loaders/standalone/standalone-loader.tsx:126
+#: src/loaders/standalone/standalone-loader.tsx:127
 msgid "My profile"
 msgstr "Mi perfil"
 
@@ -1959,7 +1959,7 @@ msgstr "Mi perfil"
 #: src/containers/execution-environment/registry-list.tsx:261
 #: src/containers/execution-environment/registry-list.tsx:289
 #: src/containers/execution-environment/registry-list.tsx:318
-#: src/containers/execution-environment-list/execution_environment_list.tsx:262
+#: src/containers/execution-environment-list/execution_environment_list.tsx:264
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:317
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:349
 #: src/containers/namespace-list/namespace-list.tsx:230
@@ -1991,16 +1991,16 @@ msgid "Name must not be empty."
 msgstr "El nombre no debe estar vacío."
 
 #: src/components/my-imports/import-list.tsx:253
-#: src/containers/certification-dashboard/certification-dashboard.tsx:166
-#: src/containers/certification-dashboard/certification-dashboard.tsx:267
+#: src/containers/certification-dashboard/certification-dashboard.tsx:167
+#: src/containers/certification-dashboard/certification-dashboard.tsx:268
 msgid "Namespace"
 msgstr "Espacio de nombres"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:816
+#: src/containers/namespace-detail/namespace-detail.tsx:819
 msgid "Namespace \"{name}\" could not be deleted."
 msgstr "No se pudo eliminar el espacio de nombres \"{name}\"."
 
-#: src/containers/namespace-detail/namespace-detail.tsx:795
+#: src/containers/namespace-detail/namespace-detail.tsx:798
 msgid "Namespace \"{name}\" has been successfully deleted."
 msgstr "El espacio de nombres \"{name}\" se eliminó correctamente."
 
@@ -2022,7 +2022,7 @@ msgstr "Propietarios de espacios de nombres"
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
-#: src/loaders/standalone/standalone-loader.tsx:350
+#: src/loaders/standalone/standalone-loader.tsx:351
 #: src/paths.ts:78
 msgid "Namespaces"
 msgstr "Espacios de nombres"
@@ -2037,16 +2037,16 @@ msgstr "No se pudo mostrar la lista de espacios de nombres."
 msgid "Namespaces will appear once created"
 msgstr "Los espacios de nombres aparecerán una vez creados"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:183
-#: src/containers/certification-dashboard/certification-dashboard.tsx:217
+#: src/containers/certification-dashboard/certification-dashboard.tsx:184
+#: src/containers/certification-dashboard/certification-dashboard.tsx:218
 msgid "Needs Review"
 msgstr "Revisión de necesidades"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:352
+#: src/containers/certification-dashboard/certification-dashboard.tsx:353
 msgid "Needs review"
 msgstr ""
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:351
+#: src/containers/certification-dashboard/certification-dashboard.tsx:352
 msgid "Needs signature and review"
 msgstr ""
 
@@ -2086,12 +2086,12 @@ msgstr ""
 msgid "No child task"
 msgstr "Ninguna tarea infantil"
 
-#: src/containers/namespace-detail/namespace-detail.tsx:374
+#: src/containers/namespace-detail/namespace-detail.tsx:376
 #: src/containers/search/search.tsx:253
 msgid "No collections yet"
 msgstr "Todavía no hay colecciones"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:198
+#: src/containers/execution-environment-list/execution_environment_list.tsx:200
 msgid "No container repositories yet"
 msgstr "Todavía no hay repositorios de contenedores"
 
@@ -2107,7 +2107,7 @@ msgstr "No hay datos"
 msgid "No dependencies"
 msgstr "No hay dependencias"
 
-#: src/containers/group-management/group-list.tsx:152
+#: src/containers/group-management/group-list.tsx:153
 msgid "No groups yet"
 msgstr "No hay grupos para añadir"
 
@@ -2123,7 +2123,7 @@ msgstr "No hay importaciones"
 msgid "No local repositories yet"
 msgstr "Todavía no hay repositorios locales"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:259
+#: src/containers/certification-dashboard/certification-dashboard.tsx:260
 msgid "No managed collections yet"
 msgstr "Todavía no hay colecciones gestionadas"
 
@@ -2175,7 +2175,7 @@ msgstr "Ningún grupo de trabajo"
 msgid "No task messages available"
 msgstr "No hay mensajes de tareas disponibles"
 
-#: src/containers/task-management/task-list-view.tsx:127
+#: src/containers/task-management/task-list-view.tsx:128
 msgid "No tasks yet"
 msgstr "Todavía no hay tareas"
 
@@ -2183,8 +2183,8 @@ msgstr "Todavía no hay tareas"
 msgid "No users will be affected."
 msgstr "Ningún usuario se verá afectado."
 
-#: src/containers/group-management/group-detail.tsx:505
-#: src/containers/user-management/user-list.tsx:244
+#: src/containers/group-management/group-detail.tsx:502
+#: src/containers/user-management/user-list.tsx:245
 msgid "No users yet"
 msgstr "No existe ningún usuario"
 
@@ -2218,7 +2218,7 @@ msgstr "No es necesario para el uso de otras colecciones"
 msgid "Number must be greater than 0"
 msgstr "El número debe ser mayor que 0"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:487
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:488
 msgid "OS / Arch"
 msgstr "OS / Arch"
 
@@ -2580,40 +2580,40 @@ msgstr "URL del registro"
 msgid "Registry sync status"
 msgstr "Estado de la sincronización del registro"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:483
+#: src/containers/certification-dashboard/certification-dashboard.tsx:484
 msgid "Reject"
 msgstr "Rechazar"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:179
-#: src/containers/certification-dashboard/certification-dashboard.tsx:218
-#: src/containers/certification-dashboard/certification-dashboard.tsx:335
+#: src/containers/certification-dashboard/certification-dashboard.tsx:180
+#: src/containers/certification-dashboard/certification-dashboard.tsx:219
+#: src/containers/certification-dashboard/certification-dashboard.tsx:336
 msgid "Rejected"
 msgstr "Rechazado"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:415
+#: src/containers/execution-environment-list/execution_environment_list.tsx:419
 #: src/containers/repositories/repository-list.tsx:119
 msgid "Remote"
 msgstr "Remoto"
 
 #: src/constants.tsx:96
 #: src/containers/execution-environment/registry-list.tsx:231
-#: src/loaders/standalone/standalone-loader.tsx:379
+#: src/loaders/standalone/standalone-loader.tsx:381
 msgid "Remote Registries"
 msgstr "Registros remotos"
 
-#: src/components/repositories/remote-repository-table.tsx:64
+#: src/components/repositories/remote-repository-table.tsx:67
 msgid "Remote name"
 msgstr "Nombre remoto"
 
-#: src/containers/execution-environment/registry-list.tsx:478
+#: src/containers/execution-environment/registry-list.tsx:479
 msgid "Remote registry \"{name}\" could not be deleted."
 msgstr "No se pudo eliminar el registro remoto \"{name}\"."
 
-#: src/containers/execution-environment/registry-list.tsx:511
+#: src/containers/execution-environment/registry-list.tsx:512
 msgid "Remote registry \"{name}\" could not be synced."
 msgstr "No se pudo sincronizar el registro remoto \"{name}\"."
 
-#: src/containers/execution-environment/registry-list.tsx:469
+#: src/containers/execution-environment/registry-list.tsx:470
 msgid "Remote registry \"{name}\" has been successfully deleted."
 msgstr "El registro remoto \"{name}\" se eliminó correctamente."
 
@@ -2621,7 +2621,7 @@ msgstr "El registro remoto \"{name}\" se eliminó correctamente."
 msgid "Remote repositories will appear once added"
 msgstr "Los repositorios remotos aparecerán una vez añadidos"
 
-#: src/containers/group-management/group-detail.tsx:678
+#: src/containers/group-management/group-detail.tsx:675
 msgid "Remove"
 msgstr "Eliminar"
 
@@ -2646,7 +2646,7 @@ msgstr ""
 msgid "Remove role {role}?"
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:418
+#: src/containers/group-management/group-detail.tsx:415
 msgid "Remove user from group?"
 msgstr "¿Eliminar al usuario del grupo?"
 
@@ -2662,11 +2662,11 @@ msgstr "Gestión de reposiciones"
 #~ msgid "Repo URL"
 #~ msgstr "URL de reposiciones"
 
-#: src/components/repositories/remote-repository-table.tsx:69
+#: src/components/repositories/remote-repository-table.tsx:72
 msgid "Repositories"
 msgstr "Repositorios"
 
-#: src/loaders/standalone/standalone-loader.tsx:356
+#: src/loaders/standalone/standalone-loader.tsx:357
 msgid "Repository Management"
 msgstr "Gestión de repositorios"
 
@@ -2738,18 +2738,18 @@ msgstr ""
 #: src/containers/role-management/role-create.tsx:60
 #: src/containers/role-management/role-edit.tsx:149
 #: src/containers/role-management/role-list.tsx:227
-#: src/loaders/standalone/standalone-loader.tsx:408
+#: src/loaders/standalone/standalone-loader.tsx:410
 msgid "Roles"
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:529
+#: src/containers/role-management/role-list.tsx:531
 msgid "Roles list could not be displayed."
 msgstr ""
 
 #: src/components/my-imports/import-list.tsx:101
 #: src/components/status/status-indicator.tsx:61
 #: src/constants.tsx:374
-#: src/containers/task-management/task-list-view.tsx:170
+#: src/containers/task-management/task-list-view.tsx:171
 msgid "Running"
 msgstr "Ejecutándose"
 
@@ -2770,7 +2770,7 @@ msgid "Save"
 msgstr "Guardar"
 
 #: src/containers/execution-environment-detail/base.tsx:237
-#: src/containers/execution-environment-list/execution_environment_list.tsx:460
+#: src/containers/execution-environment-list/execution_environment_list.tsx:464
 msgid "Saved changes to execution environment \"{0}\"."
 msgstr "Se guardaron los cambios en el entorno de ejecución \"{0}\"."
 
@@ -2802,13 +2802,13 @@ msgstr "Desplácese hasta el final"
 #~ msgid "Search my namespaces"
 #~ msgstr "Search my namespaces"
 
-#: src/containers/execution-environment/registry-list.tsx:497
+#: src/containers/execution-environment/registry-list.tsx:498
 #: src/containers/execution-environment-detail/base.tsx:362
-#: src/containers/execution-environment-list/execution_environment_list.tsx:542
+#: src/containers/execution-environment-list/execution_environment_list.tsx:546
 msgid "See the task management <0>detail page </0>for the status of this task."
 msgstr "Consulte la página de detalle <0>de gestión de tareas </0>para ver el estado de esta tarea."
 
-#: src/containers/execution-environment/registry-list.tsx:526
+#: src/containers/execution-environment/registry-list.tsx:527
 msgid "See the task management <0>detail page</0>for the status of this task."
 msgstr "Consulte la página de detalle <0>de gestión de tareas</0>para ver el estado de esta tarea."
 
@@ -2826,7 +2826,7 @@ msgstr "Seleccione un registro"
 msgid "Select a tag"
 msgstr "Seleccione una etiqueta"
 
-#: src/components/headers/collection-header.tsx:427
+#: src/components/headers/collection-header.tsx:428
 msgid "Select collection version"
 msgstr "Seleccione la versión de la colección"
 
@@ -2859,7 +2859,7 @@ msgstr "Seleccionar permisos"
 msgid "Select role(s)"
 msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:347
+#: src/containers/group-management/group-detail.tsx:344
 msgid "Select users"
 msgstr "Seleccionar usuarios"
 
@@ -2913,16 +2913,16 @@ msgid "Sign all"
 msgstr "Firmar todo"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:34
-#: src/containers/namespace-detail/namespace-detail.tsx:741
+#: src/containers/namespace-detail/namespace-detail.tsx:744
 msgid "Sign all collections"
 msgstr "Firmar todas las colecciones"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:433
-#: src/containers/certification-dashboard/certification-dashboard.tsx:466
+#: src/containers/certification-dashboard/certification-dashboard.tsx:434
+#: src/containers/certification-dashboard/certification-dashboard.tsx:467
 msgid "Sign and approve"
 msgstr "Firmar y aprobar"
 
-#: src/components/headers/collection-header.tsx:235
+#: src/components/headers/collection-header.tsx:236
 msgid "Sign entire collection"
 msgstr "Firmar toda la colección"
 
@@ -2930,7 +2930,7 @@ msgstr "Firmar toda la colección"
 msgid "Sign state"
 msgstr "Estado de la firma"
 
-#: src/components/headers/collection-header.tsx:253
+#: src/components/headers/collection-header.tsx:254
 msgid "Sign version {0}"
 msgstr "Versión de la firma {0}"
 
@@ -2943,7 +2943,7 @@ msgid "Signature"
 msgstr "Firma"
 
 #: src/containers/signature-keys/list.tsx:93
-#: src/loaders/standalone/standalone-loader.tsx:388
+#: src/loaders/standalone/standalone-loader.tsx:390
 msgid "Signature Keys"
 msgstr ""
 
@@ -2964,7 +2964,7 @@ msgstr ""
 msgid "Signed"
 msgstr "Firmado"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:327
+#: src/containers/certification-dashboard/certification-dashboard.tsx:328
 msgid "Signed and approved"
 msgstr "Firmado y aprobado"
 
@@ -2980,15 +2980,15 @@ msgstr ""
 msgid "Signing service selector:"
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:543
+#: src/containers/namespace-detail/namespace-detail.tsx:545
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "Se inició la firma para todas las colecciones del espacio de nombres \"{0}\"."
 
-#: src/components/headers/collection-header.tsx:699
+#: src/components/headers/collection-header.tsx:700
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "Se inició la firma para todas las versiones de la colección \"{0}\""
 
-#: src/components/headers/collection-header.tsx:750
+#: src/components/headers/collection-header.tsx:751
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "Se inició la firma para la colección \"{0} v{1}\"."
 
@@ -3008,7 +3008,7 @@ msgstr "Tamaño"
 msgid "Sort results"
 msgstr "Ordenar resultados"
 
-#: src/containers/task-management/task-list-view.tsx:242
+#: src/containers/task-management/task-list-view.tsx:243
 msgid "Started at"
 msgstr "Iniciado a las"
 
@@ -3018,12 +3018,12 @@ msgstr "Estado"
 
 #: src/components/my-imports/import-list.tsx:88
 #: src/components/my-imports/import-list.tsx:122
-#: src/containers/certification-dashboard/certification-dashboard.tsx:174
-#: src/containers/certification-dashboard/certification-dashboard.tsx:222
-#: src/containers/certification-dashboard/certification-dashboard.tsx:287
-#: src/containers/task-management/task-list-view.tsx:157
-#: src/containers/task-management/task-list-view.tsx:203
-#: src/containers/task-management/task-list-view.tsx:252
+#: src/containers/certification-dashboard/certification-dashboard.tsx:175
+#: src/containers/certification-dashboard/certification-dashboard.tsx:223
+#: src/containers/certification-dashboard/certification-dashboard.tsx:288
+#: src/containers/task-management/task-list-view.tsx:158
+#: src/containers/task-management/task-list-view.tsx:204
+#: src/containers/task-management/task-list-view.tsx:253
 msgid "Status"
 msgstr "Estado"
 
@@ -3031,14 +3031,14 @@ msgstr "Estado"
 msgid "Status:"
 msgstr "Estado"
 
-#: src/containers/task-management/task-list-view.tsx:325
-#: src/containers/task-management/task-list-view.tsx:341
+#: src/containers/task-management/task-list-view.tsx:326
+#: src/containers/task-management/task-list-view.tsx:342
 #: src/containers/task-management/task_detail.tsx:133
 #: src/containers/task-management/task_detail.tsx:365
 msgid "Stop task"
 msgstr "Detener la tarea"
 
-#: src/containers/task-management/task-list-view.tsx:354
+#: src/containers/task-management/task-list-view.tsx:355
 msgid "Stop task?"
 msgstr "¿Detener la tarea?"
 
@@ -3090,7 +3090,7 @@ msgstr "Copiado correctamente en el portapapeles"
 #~ msgstr "Successfully stopped task."
 
 #: src/components/rbac/user-form.tsx:203
-#: src/containers/user-management/user-list.tsx:357
+#: src/containers/user-management/user-list.tsx:353
 msgid "Super user"
 msgstr "Súper usuario"
 
@@ -3099,23 +3099,23 @@ msgid "Super users can't disable themselves."
 msgstr "Los superusuarios no pueden desactivarse a sí mismos."
 
 #: src/components/rbac/user-form.tsx:195
-#: src/containers/user-management/user-list.tsx:354
+#: src/containers/user-management/user-list.tsx:350
 msgid "Super users have all system permissions regardless of what groups they are in."
 msgstr "Los superusuarios tienen todos los permisos del sistema independientemente de los grupos a los que pertenezcan."
 
-#: src/components/repositories/remote-repository-table.tsx:180
+#: src/components/repositories/remote-repository-table.tsx:187
 #: src/containers/search/search.tsx:428
 msgid "Sync"
 msgstr "Sincronizar"
 
 #: src/containers/execution-environment-detail/base.tsx:373
-#: src/containers/execution-environment-list/execution_environment_list.tsx:552
+#: src/containers/execution-environment-list/execution_environment_list.tsx:556
 msgid "Sync failed for {name}"
 msgstr "Sincronización fallida para {name}"
 
-#: src/containers/execution-environment/registry-list.tsx:372
+#: src/containers/execution-environment/registry-list.tsx:373
 #: src/containers/execution-environment-detail/base.tsx:127
-#: src/containers/execution-environment-list/execution_environment_list.tsx:363
+#: src/containers/execution-environment-list/execution_environment_list.tsx:367
 msgid "Sync from registry"
 msgstr "Sincronización desde el registro"
 
@@ -3125,16 +3125,16 @@ msgstr "Sincronización desde el registro"
 #~ msgid "Sync initiated for {name}"
 #~ msgstr "Sync initiated for {name}"
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:537
+#: src/containers/execution-environment-list/execution_environment_list.tsx:541
 msgid "Sync started for execution environment \"{name}\"."
 msgstr "Se inició la sincronización para el entorno de ejecución \"{name}\"."
 
-#: src/containers/execution-environment/registry-list.tsx:494
+#: src/containers/execution-environment/registry-list.tsx:495
 #: src/containers/execution-environment-detail/base.tsx:359
 msgid "Sync started for remote registry \"{name}\"."
 msgstr "Se inició la sincronización para el registro remoto \"{name}\"."
 
-#: src/components/repositories/remote-repository-table.tsx:84
+#: src/components/repositories/remote-repository-table.tsx:87
 msgid "Sync status"
 msgstr "Estado de sincronización"
 
@@ -3153,11 +3153,11 @@ msgstr "Etiqueta"
 msgid "Tags could not be displayed."
 msgstr "No se pudieron mostrar las etiquetas."
 
-#: src/containers/task-management/task-list-view.tsx:392
+#: src/containers/task-management/task-list-view.tsx:393
 msgid "Task \"{name}\" could not be stopped."
 msgstr "No se pudo detener la tarea \"{name}\"."
 
-#: src/containers/task-management/task-list-view.tsx:376
+#: src/containers/task-management/task-list-view.tsx:377
 msgid "Task \"{name}\" stopped successfully."
 msgstr "La tarea \"{name}\" se detuvo correctamente."
 
@@ -3170,8 +3170,8 @@ msgid "Task \"{taskName}\" stopped successfully."
 msgstr "La tarea \"{taskName}\" se detuvo correctamente."
 
 #: src/constants.tsx:105
-#: src/containers/task-management/task-list-view.tsx:122
-#: src/loaders/standalone/standalone-loader.tsx:384
+#: src/containers/task-management/task-list-view.tsx:123
+#: src/loaders/standalone/standalone-loader.tsx:386
 msgid "Task Management"
 msgstr "Gestión de tareas"
 
@@ -3191,7 +3191,7 @@ msgstr "Grupo de trabajo"
 msgid "Task groups"
 msgstr "Grupos de trabajo"
 
-#: src/containers/task-management/task-list-view.tsx:261
+#: src/containers/task-management/task-list-view.tsx:262
 msgid "Task list"
 msgstr "Lista de tareas"
 
@@ -3199,9 +3199,9 @@ msgstr "Lista de tareas"
 msgid "Task management"
 msgstr "Gestión de tareas"
 
-#: src/containers/task-management/task-list-view.tsx:153
-#: src/containers/task-management/task-list-view.tsx:202
-#: src/containers/task-management/task-list-view.tsx:232
+#: src/containers/task-management/task-list-view.tsx:154
+#: src/containers/task-management/task-list-view.tsx:203
+#: src/containers/task-management/task-list-view.tsx:233
 #: src/containers/task-management/task_detail.tsx:158
 msgid "Task name"
 msgstr "Nombre de la tarea"
@@ -3210,11 +3210,11 @@ msgstr "Nombre de la tarea"
 msgid "Task to change tag \"{0}\" could not be completed."
 msgstr "No se ha podido completar la tarea de cambiar la etiqueta \"{0}\"."
 
-#: src/containers/task-management/task-list-view.tsx:424
+#: src/containers/task-management/task-list-view.tsx:425
 msgid "Tasks list could not be displayed."
 msgstr "No se pudo mostrar la lista de tareas."
 
-#: src/containers/task-management/task-list-view.tsx:128
+#: src/containers/task-management/task-list-view.tsx:129
 msgid "Tasks will appear once created."
 msgstr "Las tareas aparecerán una vez creadas."
 
@@ -3228,7 +3228,7 @@ msgstr "Las tareas aparecerán una vez creadas."
 msgid "Text: {0}"
 msgstr "Texto: {0}"
 
-#: src/loaders/insights/insights-loader.tsx:137
+#: src/loaders/insights/insights-loader.tsx:147
 msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
 msgstr ""
 
@@ -3240,21 +3240,21 @@ msgstr "La URL debe estar en el formato 'http(s)://'."
 msgid "The URL of an external content source."
 msgstr "La URL de una fuente de contenido externa."
 
-#: src/components/headers/collection-header.tsx:655
-#: src/containers/certification-dashboard/certification-dashboard.tsx:564
+#: src/components/headers/collection-header.tsx:656
+#: src/containers/certification-dashboard/certification-dashboard.tsx:565
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:623
+#: src/components/headers/collection-header.tsx:624
 msgid "The certificate for \"{0} {1} v{2}\" is being uploaded."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:799
+#: src/components/headers/collection-header.tsx:800
 #: src/containers/search/search.tsx:336
 msgid "The collection \"{0}\" has been successfully deprecated."
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:800
+#: src/components/headers/collection-header.tsx:801
 #: src/containers/search/search.tsx:337
 msgid "The collection \"{0}\" has been successfully undeprecated."
 msgstr ""
@@ -3287,7 +3287,7 @@ msgstr "Contraseña que se utilizará para la autenticación al sincronizar. Est
 msgid "The selected roles will be added to this specific Execution Environment."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:440
+#: src/containers/namespace-detail/namespace-detail.tsx:442
 msgid "The selected roles will be added to this specific namespace."
 msgstr ""
 
@@ -3323,7 +3323,7 @@ msgstr ""
 msgid "There are currently no roles that can be assigned to this group."
 msgstr ""
 
-#: src/components/repositories/remote-repository-table.tsx:117
+#: src/components/repositories/remote-repository-table.tsx:120
 msgid "There are no repos associated with this remote."
 msgstr "No hay repos asociados a este remoto."
 
@@ -3352,7 +3352,7 @@ msgstr "Esta cuenta no está configurada para gestionar ningún espacio de nombr
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
 #~ msgstr "Esta acción afectará a <0>{numberOfAffected}</0> versiones."
 
-#: src/components/headers/collection-header.tsx:490
+#: src/components/headers/collection-header.tsx:491
 msgid "This collection has been deprecated."
 msgstr "Esta colección ha pasado a desuso."
 
@@ -3428,7 +3428,7 @@ msgstr "Número total de conexiones simultáneas."
 msgid "Traceback"
 msgstr "Traceback"
 
-#: src/loaders/standalone/standalone-loader.tsx:156
+#: src/loaders/standalone/standalone-loader.tsx:157
 msgid "Training <0/>"
 msgstr "Formación <0/>"
 
@@ -3453,8 +3453,8 @@ msgstr "La URL no debe estar vacía."
 msgid "URL: {0}"
 msgstr "URL: {0}"
 
-#: src/components/headers/collection-header.tsx:257
-#: src/containers/namespace-detail/namespace-detail.tsx:869
+#: src/components/headers/collection-header.tsx:258
+#: src/containers/namespace-detail/namespace-detail.tsx:872
 #: src/containers/search/search.tsx:384
 msgid "Undeprecate"
 msgstr "Cancelar paso a desuso"
@@ -3485,20 +3485,20 @@ msgstr "Subir"
 msgid "Upload and modify collections."
 msgstr ""
 
-#: src/containers/namespace-detail/namespace-detail.tsx:381
-#: src/containers/namespace-detail/namespace-detail.tsx:753
+#: src/containers/namespace-detail/namespace-detail.tsx:383
+#: src/containers/namespace-detail/namespace-detail.tsx:756
 msgid "Upload collection"
 msgstr "Subir la colección"
 
-#: src/components/headers/collection-header.tsx:264
-#: src/containers/namespace-detail/namespace-detail.tsx:848
+#: src/components/headers/collection-header.tsx:265
+#: src/containers/namespace-detail/namespace-detail.tsx:852
 #: src/containers/search/search.tsx:394
 #: src/containers/search/search.tsx:406
 msgid "Upload new version"
 msgstr "Subir una nueva versión"
 
 #: src/components/signing/upload-sign-certificate-modal.tsx:33
-#: src/containers/certification-dashboard/certification-dashboard.tsx:417
+#: src/containers/certification-dashboard/certification-dashboard.tsx:418
 msgid "Upload signature"
 msgstr ""
 
@@ -3513,8 +3513,8 @@ msgstr "Nombre del upstream"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:279
 #: src/containers/execution-environment-detail/base.tsx:140
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:398
-#: src/containers/execution-environment-list/execution_environment_list.tsx:376
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:399
+#: src/containers/execution-environment-list/execution_environment_list.tsx:380
 msgid "Use in Controller"
 msgstr "Uso en el controlador"
 
@@ -3558,7 +3558,7 @@ msgstr "Utilice este token para autenticar el cliente <0>ansible-galaxy</0>."
 msgid "Useful links"
 msgstr "Enlaces útiles"
 
-#: src/containers/group-management/group-detail.tsx:446
+#: src/containers/group-management/group-detail.tsx:443
 msgid "User \"{0}\" could not be added to group \"{1}\"."
 msgstr "El usuario \"{0}\" no se pudo agregar al grupo \"{1}\"."
 
@@ -3567,11 +3567,11 @@ msgstr "El usuario \"{0}\" no se pudo agregar al grupo \"{1}\"."
 msgid "User \"{0}\" could not be deleted."
 msgstr "No se pudo eliminar el usuario \"{0}\"."
 
-#: src/containers/group-management/group-detail.tsx:774
+#: src/containers/group-management/group-detail.tsx:771
 msgid "User \"{0}\" could not be removed from group \"{name}\"."
 msgstr "El usuario \"{0}\" no se pudo eliminar del grupo \"{name}\"."
 
-#: src/containers/group-management/group-detail.tsx:439
+#: src/containers/group-management/group-detail.tsx:436
 msgid "User \"{0}\" has been successfully added to group \"{1}\"."
 msgstr "El usuario \"{0}\" se agregó correctamente al grupo \"{1}\"."
 
@@ -3579,7 +3579,7 @@ msgstr "El usuario \"{0}\" se agregó correctamente al grupo \"{1}\"."
 msgid "User \"{0}\" has been successfully deleted."
 msgstr "El usuario \"{0}\" se eliminó correctamente."
 
-#: src/containers/group-management/group-detail.tsx:766
+#: src/containers/group-management/group-detail.tsx:763
 msgid "User \"{0}\" has been successfully removed from group \"{name}\"."
 msgstr ""
 
@@ -3587,7 +3587,7 @@ msgstr ""
 #~ msgid "User \"{0}\" has been successfully removed group \"{name}\"."
 #~ msgstr ""
 
-#: src/containers/group-management/group-detail.tsx:420
+#: src/containers/group-management/group-detail.tsx:417
 msgid "User <0>{username}</0> will be removed from group <1>{groupname}</1>."
 msgstr ""
 
@@ -3595,7 +3595,7 @@ msgstr ""
 #~ msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
 #~ msgstr "El usuario <0>{username}</0> se eliminará del grupo<1>{groupname}</1>."
 
-#: src/loaders/standalone/standalone-loader.tsx:399
+#: src/loaders/standalone/standalone-loader.tsx:401
 msgid "User Access"
 msgstr "Acceso de los usuarios"
 
@@ -3603,12 +3603,12 @@ msgstr "Acceso de los usuarios"
 msgid "User Groups"
 msgstr "Grupos de usuarios"
 
-#: src/containers/user-management/user-detail.tsx:83
+#: src/containers/user-management/user-detail.tsx:80
 msgid "User details"
 msgstr "Detalles del usuario"
 
-#: src/containers/group-management/group-detail.tsx:653
-#: src/containers/user-management/user-list.tsx:299
+#: src/containers/group-management/group-detail.tsx:650
+#: src/containers/user-management/user-list.tsx:300
 msgid "User list"
 msgstr "Lista de usuarios"
 
@@ -3619,42 +3619,42 @@ msgstr "Tipo de usuario"
 #: src/components/about-modal/about-modal.tsx:98
 #: src/components/rbac/user-form.tsx:88
 #: src/components/repositories/remote-form.tsx:355
-#: src/containers/group-management/group-detail.tsx:540
-#: src/containers/group-management/group-detail.tsx:619
+#: src/containers/group-management/group-detail.tsx:537
+#: src/containers/group-management/group-detail.tsx:616
 #: src/containers/login/login.tsx:52
-#: src/containers/user-management/user-list.tsx:161
-#: src/containers/user-management/user-list.tsx:209
-#: src/containers/user-management/user-list.tsx:258
+#: src/containers/user-management/user-list.tsx:162
+#: src/containers/user-management/user-list.tsx:210
+#: src/containers/user-management/user-list.tsx:259
 msgid "Username"
 msgstr "Usuario"
 
-#: src/loaders/standalone/standalone-loader.tsx:120
+#: src/loaders/standalone/standalone-loader.tsx:121
 msgid "Username: {0}"
 msgstr "Nombre de usuario: {0}"
 
 #: src/constants.tsx:45
-#: src/containers/group-management/group-detail.tsx:157
+#: src/containers/group-management/group-detail.tsx:154
 #: src/containers/user-management/user-create.tsx:49
-#: src/containers/user-management/user-detail.tsx:80
+#: src/containers/user-management/user-detail.tsx:77
 #: src/containers/user-management/user-edit.tsx:62
-#: src/containers/user-management/user-list.tsx:138
-#: src/loaders/standalone/standalone-loader.tsx:400
+#: src/containers/user-management/user-list.tsx:139
+#: src/loaders/standalone/standalone-loader.tsx:402
 msgid "Users"
 msgstr "Usuarios"
 
-#: src/containers/group-management/group-detail.tsx:316
-#: src/containers/group-management/group-detail.tsx:465
-#: src/containers/group-management/group-detail.tsx:725
-#: src/containers/group-management/group-list.tsx:321
-#: src/containers/user-management/user-list.tsx:418
+#: src/containers/group-management/group-detail.tsx:313
+#: src/containers/group-management/group-detail.tsx:462
+#: src/containers/group-management/group-detail.tsx:722
+#: src/containers/group-management/group-list.tsx:323
+#: src/containers/user-management/user-list.tsx:414
 msgid "Users list could not be displayed."
 msgstr "No se pudo mostrar la lista de usuarios."
 
-#: src/containers/group-management/group-detail.tsx:506
+#: src/containers/group-management/group-detail.tsx:503
 msgid "Users will appear once added to this group"
 msgstr "Los usuarios aparecerán una vez añadidos a este grupo"
 
-#: src/containers/user-management/user-list.tsx:245
+#: src/containers/user-management/user-list.tsx:246
 msgid "Users will appear once created"
 msgstr "Los usuarios aparecerán una vez creados"
 
@@ -3662,8 +3662,8 @@ msgstr "Los usuarios aparecerán una vez creados"
 msgid "Validated"
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:415
-#: src/containers/certification-dashboard/certification-dashboard.tsx:277
+#: src/components/headers/collection-header.tsx:416
+#: src/containers/certification-dashboard/certification-dashboard.tsx:278
 msgid "Version"
 msgstr "Versión"
 
@@ -3675,7 +3675,7 @@ msgstr "Versión:"
 msgid "View Ansible distribution"
 msgstr "Ver la distribución de Ansible"
 
-#: src/containers/certification-dashboard/certification-dashboard.tsx:452
+#: src/containers/certification-dashboard/certification-dashboard.tsx:453
 msgid "View Import Logs"
 msgstr "Ver los registros de importación"
 
@@ -3707,7 +3707,7 @@ msgstr "Ver distribución"
 msgid "View group"
 msgstr "Ver grupo"
 
-#: src/components/headers/collection-header.tsx:431
+#: src/components/headers/collection-header.tsx:432
 msgid "View more"
 msgstr "Ver más"
 
@@ -3749,7 +3749,7 @@ msgstr ""
 
 #: src/components/my-imports/import-list.tsx:105
 #: src/constants.tsx:375
-#: src/containers/task-management/task-list-view.tsx:174
+#: src/containers/task-management/task-list-view.tsx:175
 msgid "Waiting"
 msgstr "Esperando"
 
@@ -3779,7 +3779,7 @@ msgstr "Requisitos de YAML"
 msgid "Yes"
 msgstr "SÍ"
 
-#: src/containers/task-management/task-list-view.tsx:356
+#: src/containers/task-management/task-list-view.tsx:357
 #: src/containers/task-management/task_detail.tsx:366
 msgid "Yes, stop"
 msgstr "Sí, parar"
@@ -3820,7 +3820,7 @@ msgstr "Usted es un usuario SSO. Su token expirará <0/>."
 msgid "You can can customize the Resources tab on your profile by entering custom markdown here."
 msgstr "Puede personalizar la pestaña de Recursos de su perfil introduciendo aquí una marca personalizada."
 
-#: src/containers/execution-environment-list/execution_environment_list.tsx:199
+#: src/containers/execution-environment-list/execution_environment_list.tsx:201
 msgid "You currently have no container repositories. Add a container repository via the CLI to get started."
 msgstr "Actualmente no tiene repositorios de contenedores. Añada un repositorio de contenedores a través de la CLI para empezar."
 
@@ -3832,7 +3832,7 @@ msgstr "Actualmente no tiene registros remotos."
 msgid "You do not have access to Automation Hub"
 msgstr "No tiene acceso al Automation Hub"
 
-#: src/containers/task-management/task-list-view.tsx:95
+#: src/containers/task-management/task-list-view.tsx:96
 msgid "You do not have permission to view all tasks. Only tasks created by you are visible."
 msgstr ""
 
@@ -3848,7 +3848,7 @@ msgstr ""
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/headers/collection-header.tsx:530
+#: src/components/headers/collection-header.tsx:531
 #: src/containers/search/search.tsx:441
 msgid "You don't have rights to do this operation."
 msgstr ""
@@ -3861,7 +3861,7 @@ msgstr "Tiene que estar conectado para poder descargar el tarball."
 msgid "You have unsaved changes"
 msgstr "Tiene cambios no guardados"
 
-#: src/containers/group-management/group-detail.tsx:267
+#: src/containers/group-management/group-detail.tsx:264
 msgid "add-user-modal"
 msgstr "add-user-modal"
 
@@ -3928,7 +3928,7 @@ msgstr "etiquetas"
 msgid "true"
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:351
+#: src/components/headers/collection-header.tsx:352
 msgid "updated {0}"
 msgstr ""
 
@@ -3944,7 +3944,7 @@ msgstr "esperando a que termine la importación"
 #~ msgid "{0} released {1}"
 #~ msgstr "{0} liberado {1}"
 
-#: src/components/headers/collection-header.tsx:458
+#: src/components/headers/collection-header.tsx:459
 msgid "{0} updated {1}"
 msgstr ""
 
@@ -3956,14 +3956,14 @@ msgstr "{0} se añadió"
 #~ msgid "{0} will be deleted."
 #~ msgstr "{0} will be deleted."
 
-#: src/components/headers/collection-header.tsx:322
+#: src/components/headers/collection-header.tsx:323
 msgid "{collectionName}'s versions."
 msgstr "Versiones de {collectionName}."
 
 #: src/components/cards/collection-card.tsx:53
 #: src/components/cards/namespace-card.tsx:36
 #: src/components/collection-list/collection-list-item.tsx:57
-#: src/components/headers/collection-header.tsx:396
+#: src/components/headers/collection-header.tsx:397
 #: src/components/headers/partner-header.tsx:50
 msgid "{company} logo"
 msgstr "{company} Logotipo"
@@ -3988,7 +3988,7 @@ msgstr ""
 msgid "{n, plural, one {# byte} other {# bytes}}"
 msgstr "{n, plural, one {# byte} other {# bytes}}"
 
-#: src/containers/task-management/task-list-view.tsx:357
+#: src/containers/task-management/task-list-view.tsx:358
 msgid "{name} will be cancelled."
 msgstr "{name} se cancelará."
 
