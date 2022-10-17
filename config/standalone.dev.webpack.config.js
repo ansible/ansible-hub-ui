@@ -43,5 +43,7 @@ module.exports = webpackBase({
   WEBPACK_PROXY: {
     '/api/': `http://${proxyHost}:${proxyPort}`,
     '/pulp/api/': `http://${proxyHost}:${proxyPort}`,
+    '/v2/': `http://${proxyHost}:${proxyPort}`,
+    '/extensions/v2/': `http://${proxyHost}:${proxyPort}`,
   },
 });
