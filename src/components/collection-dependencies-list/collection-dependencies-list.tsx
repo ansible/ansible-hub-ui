@@ -44,7 +44,7 @@ export class CollectionDependenciesList extends React.Component<IProps> {
               <ListItem key={i} style={{ marginRight: '70px' }}>
                 {dependency.namespace + '.' + dependency.name}
                 <HelperText
-                  content={t`Collection was not found in the system. You must upload it.`}
+                  content={t`Collection version ${dependency.version} was not found in the system. You must upload it.`}
                 />
               </ListItem>
             )}
