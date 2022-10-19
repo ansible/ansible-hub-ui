@@ -145,6 +145,11 @@ class App extends Component<IProps, IState> {
       >
         <Alert
           isInline
+          variant='warning'
+          title={t`Automation Hub has a scheduled downtime between 8am-9am ET on 2022-11-15.`}
+        />
+        <Alert
+          isInline
           variant='info'
           title={t`The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections.`}
         />
