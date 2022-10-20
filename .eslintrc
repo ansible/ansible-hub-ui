@@ -26,6 +26,7 @@
     // overridden in test/.eslintrc
     APPLICATION_NAME: "readonly",
     NAMESPACE_TERM: "readonly",
+    UI_BASE_PATH: "readonly",
   },
   rules: {
     "curly": ["error", "all"],

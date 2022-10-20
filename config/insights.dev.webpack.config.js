@@ -3,6 +3,8 @@ const webpackBase = require('./webpack.base.config');
 const proxyHost = process.env.API_PROXY_HOST || 'localhost';
 const proxyPort = process.env.API_PROXY_PORT || '5001';
 
+const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=default)
+
 module.exports = webpackBase({
   // The host where the API lives. EX: https://localhost:5001
   API_HOST: '',
@@ -14,7 +16,10 @@ module.exports = webpackBase({
   API_PROXY_TARGET: `http://${proxyHost}:${proxyPort}`,
 
   // Path on the host where the UI is found. EX: /apps/automation-hub
-  UI_BASE_PATH: '',
+  UI_BASE_PATH:
+    cloudBeta !== 'false'
+      ? '/beta/ansible/automation-hub/'
+      : '/ansible/automation-hub/',
 
   // Port that the UI is served over
   UI_PORT: 8002,

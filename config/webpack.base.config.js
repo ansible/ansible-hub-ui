@@ -106,8 +106,8 @@ module.exports = (inputConfigs) => {
     // insights dev
     ...(!isStandalone &&
       !isBuild && {
-        appUrl: '/beta/ansible/automation-hub/',
-        deployment: 'beta/apps',
+        appUrl: customConfigs.UI_BASE_PATH,
+        deployment: cloudBeta !== 'false' ? 'beta/apps' : 'apps',
         standalone: {
           api: {
             context: [customConfigs.API_BASE_PATH],
