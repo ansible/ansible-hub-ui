@@ -619,6 +619,10 @@ msgstr "컬렉션 리포지토리를 표시할 수 없습니다."
 msgid "Collection upload canceled"
 msgstr "컬렉션 업로드 취소됨"
 
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
+msgid "Collection version {0} was not found in the system. You must upload it."
+msgstr ""
+
 #: src/components/headers/collection-header.tsx:317
 #: src/components/repositories/local-repository-table.tsx:85
 #: src/components/repositories/remote-repository-table.tsx:101
@@ -627,8 +631,8 @@ msgid "Collection versions"
 msgstr "컬렉션 버전"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
-msgid "Collection was not found in the system. You must upload it."
-msgstr ""
+#~ msgid "Collection was not found in the system. You must upload it."
+#~ msgstr ""
 
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:192
@@ -1053,7 +1057,7 @@ msgstr "\"{name}\" 컬렉션의 종속 항목을 표시할 수 없습니다."
 msgid "Dependent collections"
 msgstr "종속 컬렉션"
 
-#: src/containers/collection-detail/collection-dependencies.tsx:278
+#: src/containers/collection-detail/collection-dependencies.tsx:276
 msgid "Dependent collections could not be displayed."
 msgstr "종속 컬렉션을 표시할 수 없습니다."
 

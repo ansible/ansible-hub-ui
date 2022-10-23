@@ -622,6 +622,10 @@ msgstr "Collection repositories could not be displayed."
 msgid "Collection upload canceled"
 msgstr "Collection upload canceled"
 
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
+msgid "Collection version {0} was not found in the system. You must upload it."
+msgstr "Collection version {0} was not found in the system. You must upload it."
+
 #: src/components/headers/collection-header.tsx:317
 #: src/components/repositories/local-repository-table.tsx:85
 #: src/components/repositories/remote-repository-table.tsx:101
@@ -630,8 +634,8 @@ msgid "Collection versions"
 msgstr "Collection versions"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
-msgid "Collection was not found in the system. You must upload it."
-msgstr "Collection was not found in the system. You must upload it."
+#~ msgid "Collection was not found in the system. You must upload it."
+#~ msgstr "Collection was not found in the system. You must upload it."
 
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:192
@@ -1056,7 +1060,7 @@ msgstr "Dependencies for collection \"{name}\" could not be displayed."
 msgid "Dependent collections"
 msgstr "Dependent collections"
 
-#: src/containers/collection-detail/collection-dependencies.tsx:278
+#: src/containers/collection-detail/collection-dependencies.tsx:276
 msgid "Dependent collections could not be displayed."
 msgstr "Dependent collections could not be displayed."
 

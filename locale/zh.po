@@ -619,6 +619,10 @@ msgstr "无法显示集合仓库。"
 msgid "Collection upload canceled"
 msgstr "集合上传已取消"
 
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
+msgid "Collection version {0} was not found in the system. You must upload it."
+msgstr ""
+
 #: src/components/headers/collection-header.tsx:317
 #: src/components/repositories/local-repository-table.tsx:85
 #: src/components/repositories/remote-repository-table.tsx:101
@@ -627,8 +631,8 @@ msgid "Collection versions"
 msgstr "集合版本"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
-msgid "Collection was not found in the system. You must upload it."
-msgstr ""
+#~ msgid "Collection was not found in the system. You must upload it."
+#~ msgstr ""
 
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:192
@@ -1053,7 +1057,7 @@ msgstr "无法显示集合 \"{name}\" 的依赖项。"
 msgid "Dependent collections"
 msgstr "依赖性集合"
 
-#: src/containers/collection-detail/collection-dependencies.tsx:278
+#: src/containers/collection-detail/collection-dependencies.tsx:276
 msgid "Dependent collections could not be displayed."
 msgstr "无法显示依赖集合。"
 

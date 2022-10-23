@@ -619,6 +619,10 @@ msgstr "Les référentiels de la collection n’ont pas pu être affichés."
 msgid "Collection upload canceled"
 msgstr "Le téléchargement de la collection a été annulé"
 
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
+msgid "Collection version {0} was not found in the system. You must upload it."
+msgstr ""
+
 #: src/components/headers/collection-header.tsx:317
 #: src/components/repositories/local-repository-table.tsx:85
 #: src/components/repositories/remote-repository-table.tsx:101
@@ -627,8 +631,8 @@ msgid "Collection versions"
 msgstr "Versions de la collection"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
-msgid "Collection was not found in the system. You must upload it."
-msgstr ""
+#~ msgid "Collection was not found in the system. You must upload it."
+#~ msgstr ""
 
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:192
@@ -1053,7 +1057,7 @@ msgstr "Les dépendances de la collection \"{name}\" n’ont pas pu être affich
 msgid "Dependent collections"
 msgstr "Collections dépendantes"
 
-#: src/containers/collection-detail/collection-dependencies.tsx:278
+#: src/containers/collection-detail/collection-dependencies.tsx:276
 msgid "Dependent collections could not be displayed."
 msgstr "Les collections dépendantes n’ont pas pu être affichées."
 

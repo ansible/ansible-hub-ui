@@ -619,6 +619,10 @@ msgstr "コレクションリポジトリーを表示できませんでした。
 msgid "Collection upload canceled"
 msgstr "コレクションのアップロードが取り消されました"
 
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
+msgid "Collection version {0} was not found in the system. You must upload it."
+msgstr ""
+
 #: src/components/headers/collection-header.tsx:317
 #: src/components/repositories/local-repository-table.tsx:85
 #: src/components/repositories/remote-repository-table.tsx:101
@@ -627,8 +631,8 @@ msgid "Collection versions"
 msgstr "コレクションのバージョン"
 
 #: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
-msgid "Collection was not found in the system. You must upload it."
-msgstr ""
+#~ msgid "Collection was not found in the system. You must upload it."
+#~ msgstr ""
 
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:192
@@ -1053,7 +1057,7 @@ msgstr "コレクション \"{name}\" の依存関係を表示できませんで
 msgid "Dependent collections"
 msgstr "依存するコレクション"
 
-#: src/containers/collection-detail/collection-dependencies.tsx:278
+#: src/containers/collection-detail/collection-dependencies.tsx:276
 msgid "Dependent collections could not be displayed."
 msgstr "依存するコレクションを表示できませんでした。"
 
