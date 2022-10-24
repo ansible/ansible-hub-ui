@@ -1,3 +1,9 @@
+# 4.4 End of life
+
+The 4.4 branch (AAP 2.1) has reached end of life as of June 2, 2023 ([ref](https://access.redhat.com/support/policy/updates/ansible-automation-platform)), it is no longer maintained.
+
+---
+
 # Ansible Automation Hub UI
 
 Frontend for Ansible Automation Hub. The backend for this project can be [found here](https://github.com/ansible/galaxy_ng/).
