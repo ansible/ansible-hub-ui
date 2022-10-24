@@ -5,18 +5,15 @@ import { I18nProvider } from '@lingui/react';
 import { i18n } from '@lingui/core';
 import { init } from './store';
 import App from './loaders/insights/insights-loader';
-import getBaseName from './utilities/getBaseName';
 import 'src/l10n';
 
 // Entrypoint for compiling the app to run in insights production mode.
 
-const basename = getBaseName(window.location.pathname);
-
 const AnsibleHub = () => (
   <Provider store={init().getStore()}>
-    <Router basename={basename}>
+    <Router basename={UI_BASE_PATH}>
       <I18nProvider i18n={i18n}>
-        <App basename={basename} />
+        <App basename={UI_BASE_PATH} />
       </I18nProvider>
     </Router>
   </Provider>
