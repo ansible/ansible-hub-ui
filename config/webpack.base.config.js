@@ -1,7 +1,6 @@
 /* global require, module, __dirname */
 const { resolve } = require('path');
 const config = require('@redhat-cloud-services/frontend-components-config');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isBuild = process.env.NODE_ENV === 'production';
@@ -157,7 +156,7 @@ module.exports = (inputConfigs) => {
     newWebpackConfig.entry.App = newEntry;
   }
 
-  plugins.push(new ForkTsCheckerWebpackPlugin());
+  // ForkTsCheckerWebpackPlugin is part of default config since @redhat-cloud-services/frontend-components-config 4.6.24
 
   return {
     ...newWebpackConfig,
