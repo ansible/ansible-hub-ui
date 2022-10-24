@@ -10,7 +10,6 @@
         "@lingui/react": "^3.14.0",
         "@patternfly/patternfly": "^4.217.1",
         "@patternfly/react-core": "^4.250.1",
-        "@patternfly/react-table": "^4.111.4",
         "@redhat-cloud-services/frontend-components-utilities": "^3.3.2",
         "@types/node": "^16.18.0",
         "@types/react": "^16.14.25",
