@@ -17,3 +17,4 @@ fi
 
 # do not use dev dockerfile
 rm $APP_ROOT/Dockerfile
+rm $APP_ROOT/.dockerignore
