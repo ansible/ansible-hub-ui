@@ -28,6 +28,8 @@ set -exv
 source <(curl -sSL $COMMON_BUILDER/src/frontend-build.sh)
 BUILD_RESULTS=$?
 
+export IMAGE_FRONTEND_TAG=${IMAGE_TAG}
+
 # install bonfire repo/initialize
 CICD_URL=https://raw.githubusercontent.com/RedHatInsights/bonfire/master/cicd
 curl -s "$CICD_URL/bootstrap.sh" > .cicd_bootstrap.sh
@@ -42,6 +44,7 @@ bonfire deploy \
     --ref-env insights-stage \
     --set-template-ref ${COMPONENT_NAME}=master \
     --set-image-tag ${IMAGE_BACKEND}=${IMAGE_BACKEND_TAG} \
+    --set-image-tag ${IMAGE_FRONTEND}=${IMAGE_FRONTEND_TAG} \
     --set-template-ref automation-hub-frontend=${IMAGE_FRONTEND_SHA1} \
     --frontends=true \
     --namespace ${NAMESPACE} \
