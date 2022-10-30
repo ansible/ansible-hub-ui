@@ -57,13 +57,13 @@ jobs:
 
     - name: "Cache container image for pulp_galaxy_ng ${{ env.SHORT_BRANCH }} ${{ env.GALAXY_NG_COMMIT }}"
       id: cache-container
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: pulp_galaxy_ng/image
         key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post2547
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         path: 'ansible-hub-ui'
 
@@ -90,9 +90,6 @@ jobs:
           RUN ln /usr/local/lib/python*/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
           RUN ln /usr/local/lib/python*/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
           RUN ln /usr/local/lib/python*/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
-
-          RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
-          RUN ln -sv /galaxy_ng_static `ls -d /usr/local/lib/python*/site-packages/galaxy_ng/app/`static
         ' | tee Containerfile
 
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
@@ -107,7 +104,7 @@ jobs:
     - name: "Configure and run pulp-galaxy-ng"
       working-directory: 'pulp_galaxy_ng'
       run: |
-        mkdir settings static
+        mkdir settings
         echo '# settings/settings.py'
         echo "\
           ANSIBLE_API_HOSTNAME='http://localhost:8002'
@@ -128,10 +125,9 @@ jobs:
 
         podman run \
              --detach \
-             --publish 8002:80 \
+             --publish 5001:80 \
              --name pulp \
              --volume "$(pwd)/settings":/etc/pulp \
-             --volume "$(pwd)/static":/galaxy_ng_static \
              --tmpfs /var/lib/pulp \
              --tmpfs /var/lib/pgsql \
              --tmpfs /var/lib/containers \
@@ -139,12 +135,12 @@ jobs:
              localhost/pulp/pulp-galaxy-ng:latest
 
     - name: "Install node 16"
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '16'
 
     - name: "Cache ~/.npm & ~/.cache/Cypress"
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: |
           ~/.npm
@@ -169,11 +165,14 @@ jobs:
         BUILD_HASH=`ls dist/js/App*js | cut -d. -f2,3`
         echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
 
-        rm -rf ../pulp_galaxy_ng/static/galaxy_ng/ || true
-        mv -v dist/ ../pulp_galaxy_ng/static/galaxy_ng
-
-        # apply changes, runs collectstatic and serves static assets
-        podman exec pulp bash -c "s6-svc -r /var/run/s6-rc/servicedirs/pulpcore-api"
+    - name: "Serve standalone UI"
+      run: |
+        mkdir -p www/static/
+        mv ansible-hub-ui/dist www/static/galaxy_ng
+        cd www
+        echo '{}' > package.json
+        npm install local-web-server
+        node_modules/.bin/ws --port 8002 --directory . --spa static/galaxy_ng/index.html --rewrite '/api/(.*) -> http://localhost:5001/api/$1' &
 
     - name: "Reset admin password"
       run: |
@@ -234,7 +233,7 @@ jobs:
         cat cypress.config.js
         npm run cypress:chrome
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       if: failure()
       with:
         name: screenshots_and_videos
