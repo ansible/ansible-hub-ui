@@ -3232,7 +3232,7 @@ msgstr "Taken verschijnen zodra ze zijn aangemaakt."
 msgid "Text: {0}"
 msgstr "Tekst: {0}"
 
-#: src/loaders/insights/insights-loader.tsx:147
+#: src/loaders/insights/insights-loader.tsx:149
 msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
 msgstr ""
 

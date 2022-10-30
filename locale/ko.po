@@ -3230,7 +3230,7 @@ msgstr "작업이 생성된 후 표시됩니다"
 msgid "Text: {0}"
 msgstr "텍스트: {0}"
 
-#: src/loaders/insights/insights-loader.tsx:147
+#: src/loaders/insights/insights-loader.tsx:149
 msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
 msgstr ""
 
