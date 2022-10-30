@@ -72,6 +72,40 @@ jobs:
       with:
         path: 'ansible-hub-ui'
 
+    - name: "Build pulp-galaxy-ng"
+      if: steps.cache-container.outputs.cache-hit != 'true'
+      working-directory: 'pulp_galaxy_ng'
+      run: |
+        cp -iv ../ansible-hub-ui/.github/workflows/scripts/* .
+
+        echo '# Containerfile'
+        echo '\
+          FROM ghcr.io/pulp/pulp-ci-centos:latest
+
+          COPY --chmod=644 ansible-sign.key /tmp/
+          COPY --chmod=755 collection-sign.sh /var/lib/pulp/scripts/
+          COPY --chmod=755 container-sign.sh /var/lib/pulp/scripts/
+          COPY --chmod=755 signing-setup.sh /tmp/
+
+          RUN pip3 install --upgrade \
+            requests \
+            git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
+
+          RUN mkdir -p /etc/nginx/pulp/
+          RUN ln /usr/local/lib/python*/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
+          RUN ln /usr/local/lib/python*/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
+          RUN ln /usr/local/lib/python*/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
+        ' | tee Containerfile
+
+        buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:noui .
+        rm -f image # ensure older version is gone, podman save errors otherwise
+        podman save localhost/pulp/pulp-galaxy-ng:noui -o image
+
+    - name: "Load pulp-galaxy-ng from cache"
+      if: steps.cache-container.outputs.cache-hit == 'true'
+      working-directory: 'pulp_galaxy_ng'
+      run: podman load -i image
+
     - name: "Cache ~/.npm & ~/.cache/Cypress"
       uses: actions/cache@v3
       with:
@@ -98,48 +132,24 @@ jobs:
         BUILD_HASH=`ls dist/js/App*js | cut -d. -f2,3`
         echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
 
-    - name: "Build pulp-galaxy-ng"
-      if: steps.cache-container.outputs.cache-hit != 'true'
+    - name: "Rebuild container with UI"
       working-directory: 'pulp_galaxy_ng'
       run: |
-        cp -iv ../ansible-hub-ui/.github/workflows/scripts/* .
         mv -v ../ansible-hub-ui/dist galaxy_ng_static
 
-        echo '# Containerfile'
         echo '\
-          FROM ghcr.io/pulp/pulp-ci-centos:latest
+          FROM localhost/pulp/pulp-galaxy-ng:noui
 
-          COPY --chmod=644 ansible-sign.key /tmp/
-          COPY --chmod=755 collection-sign.sh /var/lib/pulp/scripts/
-          COPY --chmod=755 container-sign.sh /var/lib/pulp/scripts/
-          COPY --chmod=755 signing-setup.sh /tmp/
-
-          RUN pip3 install --upgrade \
-            requests \
-            git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
-
-          RUN mkdir -p /etc/nginx/pulp/
-          RUN ln /usr/local/lib/python*/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
-          RUN ln /usr/local/lib/python*/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
-          RUN ln /usr/local/lib/python*/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
-
-          RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
-          RUN ln -sv /galaxy_ng_static `ls -d /usr/local/lib/python*/site-packages/galaxy_ng/app/`static
           COPY --chmod=644 galaxy_ng_static /galaxy_ng_static
+          RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
+          RUN mv /galaxy_ng_static `ls -d /usr/local/lib/python*/site-packages/galaxy_ng/app/`static/
 
           USER pulp:pulp
           RUN PULP_STATIC_ROOT=/var/lib/operator/static/ PULP_CONTENT_ORIGIN=localhost /usr/local/bin/pulpcore-manager collectstatic --clear --noinput --link
           USER root:root
-        ' | tee Containerfile
+        ' | tee Containerfile2
 
-        buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
-        rm -f image # ensure older version is gone, podman save errors otherwise
-        podman save localhost/pulp/pulp-galaxy-ng:latest -o image
-
-    - name: "Load pulp-galaxy-ng from cache"
-      if: steps.cache-container.outputs.cache-hit == 'true'
-      working-directory: 'pulp_galaxy_ng'
-      run: podman load -i image
+        buildah bud --file Containerfile2 --tag localhost/pulp/pulp-galaxy-ng:latest .
 
     - name: "Configure and run pulp-galaxy-ng"
       working-directory: 'pulp_galaxy_ng'
