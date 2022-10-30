@@ -125,7 +125,7 @@ class ExecutionEnvironmentRegistryList extends React.Component<
     }
 
     const { hasPermission } = this.context;
-    const addButton = hasPermission('galaxy.add_containerregistry') ? (
+    const addButton = hasPermission('galaxy.add_containerregistryremote') ? (
       <Button
         onClick={() =>
           this.setState({
