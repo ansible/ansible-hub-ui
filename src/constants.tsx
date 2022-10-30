@@ -26,78 +26,69 @@ export class Constants {
       name: 'namespaces',
       label: defineMessage({ message: `Collection Namespaces` }),
       object_permissions: [
-        'galaxy.add_namespace', // model_permissions.add_namespace
-        'galaxy.change_namespace', // (model_permissions.change_namespace)
-        'galaxy.delete_namespace', // model_permissions.delete_namespace
-        'galaxy.upload_to_namespace', // (model_permissions.upload_to_namespace)
+        'galaxy.add_namespace',
+        'galaxy.change_namespace',
+        'galaxy.delete_namespace',
+        'galaxy.upload_to_namespace',
       ],
     },
     {
       name: 'collections',
       label: defineMessage({ message: `Collections` }),
       object_permissions: [
-        'ansible.modify_ansible_repo_content', // model_permissions.move_collection
-        'ansible.delete_collection', // model_permissions.delete_collection
+        'ansible.modify_ansible_repo_content',
+        'ansible.delete_collection',
       ],
     },
     {
       name: 'users',
       label: defineMessage({ message: `Users` }),
       object_permissions: [
-        'galaxy.view_user', // model_permissions.view_user
-        'galaxy.delete_user', // model_permissions.delete_user
-        'galaxy.add_user', // model_permissions.add_user
-        'galaxy.change_user', // model_permissions.change_user
+        'galaxy.view_user',
+        'galaxy.delete_user',
+        'galaxy.add_user',
+        'galaxy.change_user',
       ],
     },
     {
       name: 'groups',
       label: defineMessage({ message: `Groups` }),
       object_permissions: [
-        'galaxy.view_group', // model_permissions.view_group
-        'galaxy.delete_group', // model_permissions.delete_group
-        'galaxy.add_group', // model_permissions.add_group
-        'galaxy.change_group', // model_permissions.change_group
+        'galaxy.view_group',
+        'galaxy.delete_group',
+        'galaxy.add_group',
+        'galaxy.change_group',
       ],
     },
     {
       name: 'remotes',
       label: defineMessage({ message: `Collection Remotes` }),
       object_permissions: [
-        'ansible.change_collectionremote', // model_permissions.change_remote
+        'ansible.change_collectionremote',
         'ansible.view_collectionremote',
-        // 'ansible.add_collectionremote', // (model_permissions.add_remote)
-        // 'ansible.delete_collectionremote', // (model_permissions.delete_remote)
       ],
     },
     {
       name: 'containers',
       label: defineMessage({ message: `Containers` }),
       object_permissions: [
-        // Turning off private container permissions since they aren't supported yet
-        // 'container.namespace_pull_containerdistribution',
-        // 'container.namespace_view_containerdistribution',
-
-        // 'container.add_containerrepository', // (model_permissions.add_containerrepository)
-        // 'container.change_containerrepository', // (model_permissions.change_containerrepository)
-        'container.delete_containerrepository', // model_permissions.delete_containerrepository
+        'container.delete_containerrepository',
 
         'container.namespace_change_containerdistribution',
         'container.namespace_modify_content_containerpushrepository',
         'container.namespace_push_containerdistribution',
 
-        'container.add_containernamespace', // (model_permissions.add_containernamespace)
-        'container.change_containernamespace', // (model_permissions.change_containernamespace)
-        // 'container.delete_containernamespace', // (model_permissions.delete_containernamespace)
+        'container.add_containernamespace',
+        'container.change_containernamespace',
       ],
     },
     {
       name: 'registries',
       label: defineMessage({ message: `Remote Registries` }),
       object_permissions: [
-        'galaxy.add_containerregistryremote', // model_permissions.add_containerregistry
-        'galaxy.change_containerregistryremote', // model_permissions.change_containerregistry
-        'galaxy.delete_containerregistryremote', // model_permissions.delete_containerregistry
+        'galaxy.add_containerregistryremote',
+        'galaxy.change_containerregistryremote',
+        'galaxy.delete_containerregistryremote',
       ],
     },
     {
@@ -109,37 +100,6 @@ export class Constants {
         'core.view_task',
       ],
     },
-
-    // These aren't currently used. Removing them to reduce confusion in the UI
-    // {
-    //   name: 'distribution',
-    //   label: '...',
-    //   object_permissions: [
-    //     'ansible.view_ansibledistribution', // (model_permissions.view_distribution)
-    //     'ansible.add_ansibledistribution', // (model_permissions.add_distribution)
-    //     'ansible.change_ansibledistribution', // (model_permissions.change_distribution)
-    //     'ansible.delete_ansibledistribution', // (model_permissions.delete_distribution)
-    //   ],
-    // },
-    // {
-    //   name: 'synclists',
-    //   label: '...',
-    //   object_permissions: [
-    //     'galaxy.delete_synclist',
-    //     'galaxy.change_synclist',
-    //     'galaxy.view_synclist',
-    //     'galaxy.add_synclist',
-    //   ],
-    // },
-    // {
-    //   name: 'container_distribution',
-    //   label: '...',
-    //   object_permissions: [
-    //     'container.add_containerdistribution', // (model_permissions.add_containerdistribution)
-    //     'container.change_containerdistribution', // (model_permissions.change_containerdistribution)
-    //     'container.delete_containerdistribution', // (model_permissions.delete_containerdistribution)
-    //   ],
-    // },
   ];
 
   static USER_GROUP_MGMT_PERMISSIONS = [
