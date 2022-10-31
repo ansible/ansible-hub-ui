@@ -45,7 +45,7 @@
         "@lingui/macro": "^3.14.0",
         "@ls-lint/ls-lint": "^1.11.2",
         "@redhat-cloud-services/frontend-components-config": "^4.6.21",
-        "@typescript-eslint/eslint-plugin": "^5.39.0",
+        "@typescript-eslint/eslint-plugin": "^5.41.0",
         "@typescript-eslint/parser": "^5.39.0",
         "babel-core": "^7.0.0-bridge.0",
         "babel-plugin-lodash": "^3.3.4",
