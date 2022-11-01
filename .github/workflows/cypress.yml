@@ -173,6 +173,7 @@ jobs:
         mv -v dist/ ../pulp_galaxy_ng/static/galaxy_ng
 
         # apply changes, runs collectstatic and serves static assets
+        podman exec --user pulp:pulp pulp bash -c "PULP_STATIC_ROOT=/var/lib/operator/static/ PULP_CONTENT_ORIGIN=localhost /usr/local/bin/pulpcore-manager collectstatic --clear --noinput --link"
         podman exec pulp bash -c "s6-svc -r /var/run/s6-rc/servicedirs/pulpcore-api"
 
     - name: "Reset admin password"
