@@ -4,8 +4,8 @@ set -e
 # Signing keyring
 export KEY_FINGERPRINT=$(gpg --show-keys --with-colons --with-fingerprint /tmp/ansible-sign.key | awk -F: '$1 == "fpr" {print $10;}' | head -n1)
 export KEY_ID=${KEY_FINGERPRINT: -16}
-gpg --batch --no-default-keyring --keyring /etc/pulp/certs/galaxy.kbx --import /tmp/ansible-sign.key
-echo "${KEY_FINGERPRINT}:6:" | gpg --batch --no-default-keyring --keyring /etc/pulp/certs/galaxy.kbx --import-ownertrust
+gpg --batch --no-default-keyring --keyring /tmp/galaxy.kbx --import /tmp/ansible-sign.key
+echo "${KEY_FINGERPRINT}:6:" | gpg --batch --no-default-keyring --keyring /tmp/galaxy.kbx --import-ownertrust
 
 # Collection signing service
 gpg --batch --import /tmp/ansible-sign.key
