@@ -82,7 +82,7 @@ describe('Collection Upload Tests', () => {
       'namespaces',
     );
 
-    cy.get('a[href="/ui/repo/published/ansible"]').click();
+    cy.get('a[href="/ui/repo/published/ansible/"]').click();
     cy.wait('@namespaces');
     cy.contains('Upload collection').should('not.exist');
   });
@@ -99,7 +99,7 @@ describe('Collection Upload Tests', () => {
       'namespaces',
     );
 
-    cy.get('a[href="/ui/repo/published/ansible"]').click();
+    cy.get('a[href="/ui/repo/published/ansible/"]').click();
     cy.wait('@namespaces');
     cy.contains('Upload collection').click();
     cy.fixture('collections/ansible-posix-1.4.0.tar.gz', 'binary')
