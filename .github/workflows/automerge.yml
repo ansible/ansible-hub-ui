@@ -30,4 +30,4 @@ jobs:
         echo "PR name:  ${{ github.event.pull_request.title }}"
         echo "Actor:  ${{ github.actor }}"
         cd ./ansible-hub-ui/.github/workflows
-        node automerge.js "${{ github.head_ref }}" "${{ github.event.pull_request.title }}" "dependabot[bot]"
+        node automerge.js "${{ github.head_ref }}" "${{ github.event.pull_request.title }}" "${{ github.actor }}"
