@@ -178,6 +178,7 @@ jobs:
           GALAXY_COLLECTION_SIGNING_SERVICE='ansible-default'
           GALAXY_CONTAINER_SIGNING_SERVICE='container-default'
           GALAXY_FEATURE_FLAGS__container_signing=True
+          PULP_STATIC_ROOT='/var/lib/operator/static/'
         " | sed 's/^\s\+//' | tee settings/settings.py
 
         podman run \
