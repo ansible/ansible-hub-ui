@@ -9,7 +9,7 @@ class API extends HubAPI {
   // update(pk, data)
 
   sync(name) {
-    const apiPath = this.getUIPath('execution-environments/repositories/');
+    const apiPath = 'v3/plugin/execution-environments/repositories/';
     return this.http.post(apiPath + name + '/_content/sync/', {});
   }
 }

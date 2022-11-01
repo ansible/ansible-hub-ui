@@ -1,8 +1,7 @@
 import { HubAPI } from './hub';
 
 class API extends HubAPI {
-  apiPath = this.getUIPath('execution-environments/repositories/');
-
+  apiPath = 'v3/plugin/execution-environments/repositories/';
   readme(name) {
     return this.http.get(this.apiPath + name + '/_content/readme/');
   }

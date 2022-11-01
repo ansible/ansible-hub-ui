@@ -155,7 +155,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   );
                 }
                 activities.push({
-                  created: activity.pulp_created,
+                  created: activity.created_at,
                   action: activityDescription,
                 });
               });
@@ -189,7 +189,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
                   );
                 }
                 activities.push({
-                  created: activity.pulp_created,
+                  created: activity.created_at,
                   action: activityDescription,
                 });
               });

@@ -445,7 +445,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             </LabelGroup>
           </td>
           <td>
-            <DateComponent date={image.pulp_created} />
+            <DateComponent date={image.created_at} />
           </td>
           <td>{isManifestList ? '---' : image.layers}</td>
           <td>{isManifestList ? '---' : getHumanSize(image.size)}</td>
@@ -543,14 +543,14 @@ class ExecutionEnvironmentDetailImages extends React.Component<
               image_manifests,
               layers,
               media_type,
-              pulp_created,
+              created_at,
               tags,
             }) => ({
               digest,
               image_manifests,
               isManifestList: !!media_type.match('manifest.list'),
               layers: layers.length,
-              pulp_created,
+              created_at,
               size: sum(layers.map((l) => l.size || 0)),
               tags,
             }),

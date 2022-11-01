@@ -1,11 +1,16 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
-import { ExecutionEnvironmentNamespaceAPI, GroupType } from 'src/api';
+import {
+  ExecutionEnvironmentNamespaceAPI,
+  GroupType,
+  GroupAPI,
+  RoleType,
+} from 'src/api';
 import { OwnersTab } from 'src/components';
 import { formatPath, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
-import { ParamHelper } from 'src/utilities';
+import { ParamHelper, errorMessage } from 'src/utilities';
 import './execution-environment-detail.scss';
 
 import { withContainerRepo, IDetailSharedProps } from './base';
@@ -14,9 +19,14 @@ interface IState {
   name: string;
   groups: GroupType[];
   canEditOwners: boolean;
+  selectedGroup: GroupType;
   params: {
     group?: number;
   };
+  showGroupRemoveModal?: GroupType;
+  showGroupSelectWizard?: { group?: GroupType; roles?: RoleType[] };
+  showRoleRemoveModal?: string;
+  showRoleSelectWizard?: { roles?: RoleType[] };
 }
 
 class ExecutionEnvironmentDetailOwners extends React.Component<
@@ -32,41 +42,140 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
       name: props.containerRepository.name,
       groups: null, // loading
       canEditOwners: false,
+      selectedGroup: null,
       params,
+      showGroupRemoveModal: null,
+      showGroupSelectWizard: null,
+      showRoleRemoveModal: null,
+      showRoleSelectWizard: null,
     };
   }
 
   componentDidMount() {
-    this.queryNamespace(this.props.containerRepository.name);
+    this.queryNamespace(this.props.containerRepository.namespace);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.location.search !== this.props.location.search) {
       const params = ParamHelper.parseParamString(this.props.location.search);
-      this.setState({ params });
+
+      if (!params['group']) {
+        this.setState({
+          selectedGroup: null,
+        });
+      }
+
+      this.setState({ params }, () =>
+        this.queryNamespace(this.props.containerRepository.namespace),
+      );
     }
   }
 
+  updateGroupRoles({ roles, alertSuccess, alertFailure, stateUpdate }) {
+    Promise.all(roles)
+      .then(() => {
+        this.props.addAlert({
+          title: alertSuccess,
+          variant: 'success',
+        });
+        this.queryNamespace(this.props.containerRepository.namespace); // ensure reload() sets groups: null to trigger loading spinner
+      })
+      .catch(({ response: { status, statusText } }) => {
+        this.props.addAlert({
+          title: alertFailure,
+          variant: 'danger',
+          description: errorMessage(status, statusText),
+        });
+      })
+      .finally(() => {
+        this.setState(stateUpdate);
+      });
+  }
+
   render() {
-    const { name, groups, params, canEditOwners } = this.state;
-    const loadAll = () =>
-      this.queryNamespace(this.props.containerRepository.name);
+    const { name, groups, canEditOwners, selectedGroup } = this.state;
 
     return (
       <OwnersTab
+        showGroupRemoveModal={this.state.showGroupRemoveModal}
+        showGroupSelectWizard={this.state.showGroupSelectWizard}
+        showRoleRemoveModal={this.state.showRoleRemoveModal}
+        showRoleSelectWizard={this.state.showRoleSelectWizard}
         canEditOwners={canEditOwners}
-        addAlert={this.props.addAlert}
-        groupId={params.group}
+        group={selectedGroup}
         groups={groups}
         name={name}
         pulpObjectType='pulp_container/namespaces'
-        reload={loadAll}
+        updateProps={(prop) => {
+          this.setState(prop);
+        }}
+        addGroup={(group, roles) => {
+          const rolePromises = roles.map((role) =>
+            ExecutionEnvironmentNamespaceAPI.addRole(
+              this.props.containerRepository.namespace.id,
+              {
+                role: role.name,
+                groups: [group.name],
+              },
+            ),
+          );
+          this.updateGroupRoles({
+            roles: rolePromises,
+            alertSuccess: t`Group "${group.name}" has been successfully added to "${name}".`,
+            alertFailure: t`Group "${group.name}" could not be added to "${name}".`,
+            stateUpdate: { showGroupSelectWizard: null },
+          });
+        }}
+        removeGroup={(group) => {
+          const roles = group.object_roles.map((role) =>
+            ExecutionEnvironmentNamespaceAPI.removeRole(
+              this.props.containerRepository.namespace.id,
+              {
+                role,
+                groups: [group.name],
+              },
+            ),
+          );
+          this.updateGroupRoles({
+            roles,
+            alertSuccess: t`Group "${group.name}" has been successfully removed from "${name}".`,
+            alertFailure: t`Group "${group.name}" could not be removed from "${name}".`,
+            stateUpdate: { showGroupRemoveModal: null },
+          });
+        }}
+        addRole={(group, roles) => {
+          const rolePromises = roles.map((role) =>
+            ExecutionEnvironmentNamespaceAPI.addRole(
+              this.props.containerRepository.namespace.id,
+              {
+                role: role.name,
+                groups: [group.name],
+              },
+            ),
+          );
+          this.updateGroupRoles({
+            roles: rolePromises,
+            alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
+            alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
+            stateUpdate: { showRoleSelectWizard: null },
+          });
+        }}
+        removeRole={(role, group) => {
+          const removedRole = ExecutionEnvironmentNamespaceAPI.removeRole(
+            this.props.containerRepository.namespace.id,
+            {
+              role,
+              groups: [group.name],
+            },
+          );
+          this.updateGroupRoles({
+            roles: [removedRole],
+            alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
+            alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
+            stateUpdate: { showRoleRemoveModal: null },
+          });
+        }}
         selectRolesMessage={t`The selected roles will be added to this specific Execution Environment.`}
-        updateGroups={(groups) =>
-          ExecutionEnvironmentNamespaceAPI.update(name, {
-            groups,
-          })
-        }
         urlPrefix={formatPath(Paths.executionEnvironmentDetailOwners, {
           container: name,
         })}
@@ -74,18 +183,61 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
     );
   }
 
-  queryNamespace(name) {
+  assignRolesToGroup(roles) {
+    const groupRoles = [];
+    for (const { groups, role } of roles) {
+      for (const name of groups) {
+        const groupIndex = groupRoles.findIndex((g) => g.name === name);
+        if (groupIndex == -1) {
+          groupRoles.push({ name, object_roles: [role] });
+        } else {
+          groupRoles[groupIndex].object_roles.push(role);
+        }
+      }
+    }
+    return groupRoles;
+  }
+
+  querySelectedGroup(name, groups) {
+    GroupAPI.list({ name }).then(({ data: { data } }) => {
+      this.setState({
+        selectedGroup: groups.find((g) => g.name === data[0].name),
+      });
+    });
+  }
+
+  queryNamespace({ id, name: repoName }) {
     const { hasPermission } = this.context;
-    ExecutionEnvironmentNamespaceAPI.get(name).then(
-      ({ data: { groups, my_permissions } }) =>
+    ExecutionEnvironmentNamespaceAPI.myPermissions(id)
+      .then(({ data: { permissions } }) => {
+        ExecutionEnvironmentNamespaceAPI.listRoles(id)
+          .then(({ data: { roles } }) => {
+            const groupRoles = this.assignRolesToGroup(roles);
+
+            this.setState({
+              name: repoName,
+              groups: groupRoles,
+              canEditOwners:
+                permissions.includes('container.change_containernamespace') ||
+                hasPermission('container.change_containernamespace'),
+            });
+
+            if (this.state.params?.group) {
+              this.querySelectedGroup(this.state.params.group, groupRoles);
+            }
+          })
+          .catch(() => {
+            this.setState({
+              groups: [],
+            });
+          });
+      })
+      .catch(() => {
         this.setState({
-          name: name,
-          groups: groups,
-          canEditOwners:
-            my_permissions.includes('container.change_containernamespace') ||
-            hasPermission('container.change_containernamespace'),
-        }),
-    );
+          groups: [],
+          canEditOwners: false,
+        });
+      });
   }
 }
 

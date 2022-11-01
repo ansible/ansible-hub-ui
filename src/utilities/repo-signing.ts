@@ -32,7 +32,7 @@ export class RepoSigningUtils {
       .then((result) => {
         const pulp_href = result.data.results[0]['pulp_href'];
         return SignContainersAPI.sign(
-          item.pulp.repository.pulp_id,
+          item.pulp.repository.id,
           RepoSigningUtils.getContainerPulpType(item),
           pulp_href,
           item.pulp.distribution.base_path,

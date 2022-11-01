@@ -1,10 +1,10 @@
 import { LastSyncType } from './remote';
 
 export class ExecutionEnvironmentType {
-  created: string;
+  created_at: string;
   name: string;
   description: string;
-  updated: string;
+  updated_at: string;
   pulp: {
     distribution: { base_path: string };
     repository: { pulp_id: string; version: string };
@@ -13,7 +13,7 @@ export class ExecutionEnvironmentType {
 
 export class ContainerManifestType {
   pulp_id: string;
-  pulp_created: string;
+  created_at: string;
   digest: string;
   schema_version: number;
   config_blob: {
@@ -30,38 +30,47 @@ export class ContainerRepositoryType {
   name: string;
   pulp: {
     repository: {
-      pulp_id: string;
+      id: string;
       pulp_type: string;
       version: string;
       name: string;
       description: string;
-      pulp_created: string;
+      created_at: string;
+      updated_at: string;
       last_sync_task: string;
       pulp_labels: object;
       remote?: {
-        pulp_id: string;
+        id: string;
+        pulp_href: string;
         registry: string;
         upstream_name: string;
         include_tags: string[];
         exclude_tags: string[];
         last_sync_task: LastSyncType;
+        created_at: string;
+        updated_at: string;
       };
       sign_state: string;
     };
     distribution: {
-      pulp_id: string;
+      id: string;
       base_path: string;
       name: string;
-      pulp_created: string;
+      created_at: string;
+      updated_at: string;
       pulp_labels: object;
     };
   };
   namespace: {
+    id: string;
+    pulp_href: string;
     name: string;
     my_permissions: string[];
     owners: string[];
+    created_at: string;
+    updated_at: string;
   };
   description: string;
-  created: string;
-  updated: string;
+  created_at: string;
+  updated_at: string;
 }

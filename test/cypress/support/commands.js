@@ -459,7 +459,8 @@ Cypress.Commands.add(
 
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
+      Cypress.env('prefix') +
+        'v3/plugin/execution-environments/repositories/?*',
     ).as('listLoad');
 
     cy.contains('button', 'Save').click();
@@ -564,7 +565,7 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
 Cypress.Commands.add('deleteContainers', {}, () => {
   cy.intercept(
     'GET',
-    Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
+    Cypress.env('prefix') + 'v3/plugin/execution-environments/repositories/?*',
   ).as('listLoad');
 
   cy.visit('/ui/containers?page_size=100');
@@ -580,7 +581,7 @@ Cypress.Commands.add('deleteContainers', {}, () => {
 Cypress.Commands.add('deleteContainersManual', {}, () => {
   cy.intercept(
     'GET',
-    Cypress.env('prefix') + '_ui/v1/execution-environments/repositories/?*',
+    Cypress.env('prefix') + 'v3/plugin/execution-environments/repositories/?*',
   ).as('listLoad');
 
   cy.visit('/ui/containers');

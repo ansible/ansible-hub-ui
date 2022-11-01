@@ -124,7 +124,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
     const { digest } = this.props;
 
     return ExecutionEnvironmentAPI.tags(image, {
-      sort: '-pulp_created',
+      sort: '-created_at',
       ...(digest ? { tagged_manifest__digest: digest } : {}),
       ...(name ? { name__icontains: name } : {}),
     })

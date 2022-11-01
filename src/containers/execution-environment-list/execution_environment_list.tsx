@@ -303,12 +303,12 @@ class ExecutionEnvironmentList extends React.Component<
         {
           title: t`Created`,
           type: 'numeric',
-          id: 'created',
+          id: 'created_at',
         },
         {
           title: t`Last modified`,
           type: 'alpha',
-          id: 'updated',
+          id: 'updated_at',
         },
         {
           title: t`Container registry type`,
@@ -410,10 +410,10 @@ class ExecutionEnvironmentList extends React.Component<
           <td></td>
         )}
         <td>
-          <DateComponent date={item.created} />
+          <DateComponent date={item.created_at} />
         </td>
         <td>
-          <DateComponent date={item.updated} />
+          <DateComponent date={item.updated_at} />
         </td>
         <td>
           <Label>{item.pulp.repository.remote ? t`Remote` : t`Local`}</Label>
@@ -425,11 +425,16 @@ class ExecutionEnvironmentList extends React.Component<
 
   private renderRemoteModal(itemToEdit) {
     const { name, namespace, description, pulp } = itemToEdit;
-    const { pulp_id, registry, upstream_name, include_tags, exclude_tags } =
-      pulp?.repository?.remote || {};
+    const {
+      id: remoteId,
+      registry,
+      upstream_name,
+      include_tags,
+      exclude_tags,
+    } = pulp?.repository?.remote || {};
     const remote = pulp?.repository ? !!pulp?.repository?.remote : true; // add only supports remote
     const isNew = !pulp?.repository; // only exists in real data
-    const distributionPulpId = pulp?.distribution?.pulp_id;
+    const distributionPulpId = pulp?.distribution?.id;
     const { alerts } = this.state;
     return (
       <RepositoryForm
@@ -443,7 +448,7 @@ class ExecutionEnvironmentList extends React.Component<
         excludeTags={exclude_tags || []}
         includeTags={include_tags || []}
         permissions={namespace?.my_permissions || []}
-        remotePulpId={pulp_id}
+        remoteId={remoteId}
         distributionPulpId={distributionPulpId}
         formError={this.state.formError}
         onSave={(promise, form) => {

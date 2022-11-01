@@ -30,6 +30,8 @@ import {
   MyNamespaceAPI,
   NamespaceType,
   SignCollectionAPI,
+  GroupType,
+  RoleType,
 } from 'src/api';
 
 import {
@@ -94,6 +96,11 @@ interface IState {
   alerts: AlertType[];
   deleteCollection: CollectionListType;
   isDeletionPending: boolean;
+  showGroupRemoveModal?: GroupType;
+  showGroupSelectWizard?: { group?: GroupType; roles?: RoleType[] };
+  showRoleRemoveModal?: string;
+  showRoleSelectWizard?: { roles?: RoleType[] };
+  group: GroupType;
 }
 
 interface IProps extends RouteComponentProps {
@@ -135,6 +142,11 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       alerts: [],
       deleteCollection: null,
       isDeletionPending: false,
+      showGroupRemoveModal: null,
+      showGroupSelectWizard: null,
+      showRoleRemoveModal: null,
+      showRoleSelectWizard: null,
+      group: null,
     };
   }
 
@@ -156,8 +168,41 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       ]);
 
       params['namespace'] = this.props.match.params['namespace'];
-      this.setState({ params });
+
+      this.setState({
+        params,
+        group: this.filterGroup(params['group'], this.state.namespace.groups),
+      });
     }
+  }
+
+  filterGroup(groupId, groups) {
+    return groupId ? groups.find(({ id }) => Number(groupId) === id) : null;
+  }
+
+  private updateGroups({ groups, alertSuccess, alertFailure, stateUpdate }) {
+    const { name } = this.state.namespace;
+    MyNamespaceAPI.update(name, {
+      ...this.state.namespace,
+      groups,
+    })
+      .then(() => {
+        this.addAlert({
+          title: alertSuccess,
+          variant: 'success',
+        });
+        this.load(); // ensure reload() sets groups: null to trigger loading spinner
+      })
+      .catch(({ response: { status, statusText } }) => {
+        this.addAlert({
+          title: alertFailure,
+          variant: 'danger',
+          description: errorMessage(status, statusText),
+        });
+      })
+      .finally(() => {
+        this.setState(stateUpdate);
+      });
   }
 
   render() {
@@ -428,24 +473,83 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           {tab === 'resources' ? this.renderResources(namespace) : null}
           {tab === 'owners' ? (
             <OwnersTab
-              addAlert={(alert: AlertType) =>
-                this.setState({
-                  alerts: [...this.state.alerts, alert],
-                })
-              }
+              showGroupRemoveModal={this.state.showGroupRemoveModal}
+              showGroupSelectWizard={this.state.showGroupSelectWizard}
+              showRoleRemoveModal={this.state.showRoleRemoveModal}
+              showRoleSelectWizard={this.state.showRoleSelectWizard}
               canEditOwners={canEditOwners}
-              groupId={params.group}
+              group={this.state.group}
               groups={namespace.groups}
               name={namespace.name}
               pulpObjectType='pulp_ansible/namespaces'
-              reload={() => this.load()}
               selectRolesMessage={t`The selected roles will be added to this specific namespace.`}
-              updateGroups={(groups) =>
-                MyNamespaceAPI.update(namespace.name, {
-                  ...namespace,
-                  groups,
-                })
-              }
+              updateProps={(prop) => {
+                this.setState(prop);
+              }}
+              addGroup={(group, roles) => {
+                const { groups, name } = namespace;
+                const newGroup = {
+                  ...group,
+                  object_roles: roles.map(({ name }) => name),
+                };
+                const newGroups = [...groups, newGroup];
+
+                this.updateGroups({
+                  groups: newGroups,
+                  alertSuccess: t`Group "${group.name}" has been successfully added to "${name}".`,
+                  alertFailure: t`Group "${group.name}" could not be added to "${name}".`,
+                  stateUpdate: { showGroupSelectWizard: null },
+                });
+              }}
+              removeGroup={(group) => {
+                const { name, groups } = namespace;
+                const newGroups = groups.filter((g) => g !== group);
+                this.updateGroups({
+                  groups: newGroups,
+                  alertSuccess: t`Group "${group.name}" has been successfully removed from "${name}".`,
+                  alertFailure: t`Group "${group.name}" could not be removed from "${name}".`,
+                  stateUpdate: { showGroupRemoveModal: null },
+                });
+              }}
+              addRole={(group, roles) => {
+                const { name, groups } = namespace;
+                const newGroup = {
+                  ...group,
+                  object_roles: [
+                    ...group.object_roles,
+                    ...roles.map(({ name }) => name),
+                  ],
+                };
+                const newGroups = groups.map((g) =>
+                  g === group ? newGroup : g,
+                );
+
+                this.updateGroups({
+                  groups: newGroups,
+                  alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
+                  alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
+                  stateUpdate: { showRoleSelectWizard: null },
+                });
+              }}
+              removeRole={(role, group) => {
+                const { name, groups } = namespace;
+                const newGroup = {
+                  ...group,
+                  object_roles: group.object_roles.filter(
+                    (name) => name !== role,
+                  ),
+                };
+                const newGroups = groups.map((g) =>
+                  g === group ? newGroup : g,
+                );
+
+                this.updateGroups({
+                  groups: newGroups,
+                  alertSuccess: t`Group "${group.name}" roles successfully updated in "${name}".`,
+                  alertFailure: t`Group "${group.name}" roles could not be update in "${name}".`,
+                  stateUpdate: { showRoleRemoveModal: null },
+                });
+              }}
               urlPrefix={formatPath(Paths.namespaceByRepo, {
                 repo: this.context.selectedRepo,
                 namespace: namespace.name,
@@ -628,6 +732,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           namespace: val[1].data,
           showControls: !!val[2],
           canSign: canSignNS(this.context, val[2]?.data),
+          group: this.filterGroup(
+            this.state.params['group'],
+            val[1].data['groups'],
+          ),
         });
 
         this.loadAllRepos(val[0].data.meta.count);
