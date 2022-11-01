@@ -84,7 +84,8 @@ jobs:
 
           RUN pip3 install --upgrade \
             requests \
-            git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
+            git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }} && \
+            rm -rf /root/.cache/pip
 
           RUN mkdir -p /etc/nginx/pulp/
           RUN ln /usr/local/lib/python*/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
