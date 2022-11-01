@@ -57,13 +57,13 @@ jobs:
 
     - name: "Cache container image for pulp_galaxy_ng ${{ env.SHORT_BRANCH }} ${{ env.GALAXY_NG_COMMIT }}"
       id: cache-container
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: pulp_galaxy_ng/image
-        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post2547
+        key: pulp-galaxy-ng-${{ env.SHORT_BRANCH }}-${{ env.GALAXY_NG_COMMIT }}
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         path: 'ansible-hub-ui'
 
@@ -84,7 +84,8 @@ jobs:
 
           RUN pip3 install --upgrade \
             requests \
-            git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
+            git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }} && \
+            rm -rf /root/.cache/pip
 
           RUN mkdir -p /etc/nginx/pulp/
           RUN ln /usr/local/lib/python*/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
@@ -139,20 +140,20 @@ jobs:
              localhost/pulp/pulp-galaxy-ng:latest
 
     - name: "Install node 16"
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '16'
 
     - name: "Cache ~/.npm & ~/.cache/Cypress"
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: |
           ~/.npm
           ~/.cache/Cypress
-        key: ${{ runner.os }}-node-${{ env.SHORT_BRANCH }}-${{ hashFiles('ansible-hub-ui/**/package-lock.json') }}
+        key: npm-${{ env.SHORT_BRANCH }}-${{ hashFiles('ansible-hub-ui/**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node-${{ env.SHORT_BRANCH }}-
-          ${{ runner.os }}-node-
+          npm-${{ env.SHORT_BRANCH }}-
+          npm-
 
     - name: "Build standalone UI"
       working-directory: 'ansible-hub-ui'
@@ -173,6 +174,7 @@ jobs:
         mv -v dist/ ../pulp_galaxy_ng/static/galaxy_ng
 
         # apply changes, runs collectstatic and serves static assets
+        podman exec --user pulp:pulp pulp bash -c "PULP_STATIC_ROOT=/var/lib/operator/static/ PULP_CONTENT_ORIGIN=localhost /usr/local/bin/pulpcore-manager collectstatic --clear --noinput --link"
         podman exec pulp bash -c "s6-svc -r /var/run/s6-rc/servicedirs/pulpcore-api"
 
     - name: "Reset admin password"
@@ -182,7 +184,7 @@ jobs:
 
     - name: "Enable signing service"
       run: |
-        podman exec pulp /tmp/signing-setup.sh
+        podman exec --user pulp:pulp pulp /tmp/signing-setup.sh
 
     - name: "Install Cypress & test dependencies"
       working-directory: 'ansible-hub-ui/test'
@@ -234,7 +236,7 @@ jobs:
         cat cypress.config.js
         npm run cypress:chrome
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       if: failure()
       with:
         name: screenshots_and_videos
