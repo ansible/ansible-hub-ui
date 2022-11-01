@@ -60,7 +60,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: pulp_galaxy_ng/image
-        key: ${{ runner.os }}-container-${{ env.GALAXY_NG_COMMIT }}-post2765
+        key: pulp-galaxy-ng-${{ env.GALAXY_NG_COMMIT }}
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v3
@@ -118,10 +118,10 @@ jobs:
         path: |
           ~/.npm
           ~/.cache/Cypress
-        key: ${{ runner.os }}-node-${{ env.SHORT_BRANCH }}-${{ hashFiles('ansible-hub-ui/**/package-lock.json') }}
+        key: npm-${{ env.SHORT_BRANCH }}-${{ hashFiles('ansible-hub-ui/**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node-${{ env.SHORT_BRANCH }}-
-          ${{ runner.os }}-node-
+          npm-${{ env.SHORT_BRANCH }}-
+          npm-
 
     - name: "Build standalone UI"
       working-directory: 'ansible-hub-ui'
