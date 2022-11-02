@@ -102,6 +102,11 @@ module.exports = (inputConfigs) => {
     // frontend-components-config 4.6.9+: keep HtmlWebpackPlugin for standalone
     useChromeTemplate: !isStandalone,
 
+    // frontend-components-config 4.6.25-29+: ensure hashed filenames
+    useFileHash: true,
+    liveReload: false,
+    _unstableHotReload: false,
+
     // insights dev
     ...(!isStandalone &&
       !isBuild && {
