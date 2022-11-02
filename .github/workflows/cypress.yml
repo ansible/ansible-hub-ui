@@ -46,12 +46,14 @@ jobs:
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
         GALAXY_NG_COMMIT=`curl -s https://api.github.com/repos/ansible/galaxy_ng/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+        COMPOSE_PROFILE=`[ "${{ matrix.test }}" = 'insights' ] && echo 'insights' || echo 'standalone'`
 
         # blow up without galaxy_ng commit info
         [ -n "$GALAXY_NG_COMMIT" ]
 
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "GALAXY_NG_COMMIT=${GALAXY_NG_COMMIT}" >> $GITHUB_ENV
+        echo "COMPOSE_PROFILE=${COMPOSE_PROFILE}" >> $GITHUB_ENV
 
     - run: "mkdir pulp_galaxy_ng"
 
@@ -89,8 +91,9 @@ jobs:
     - name: "Configure and run pulp-galaxy-ng"
       working-directory: 'pulp_galaxy_ng'
       run: |
+        # static unused in insights
         mkdir settings static
-        mv settings.py settings/
+        cp -aiv ../ansible-hub-ui/.github/workflows/cypress/settings.py."$COMPOSE_PROFILE" settings/settings.py
 
         podman run \
              --detach \
@@ -159,7 +162,7 @@ jobs:
     - name: "Configure Cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
-        cp -aiv ../.github/workflows/cypress/cypress.env.json cypress.env.json
+        cp -aiv ../.github/workflows/cypress/cypress.env.json."$COMPOSE_PROFILE" cypress.env.json
 
     - name: "Ensure index.html uses the new js"
       run: |
