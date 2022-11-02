@@ -71,30 +71,11 @@ jobs:
       if: steps.cache-container.outputs.cache-hit != 'true'
       working-directory: 'pulp_galaxy_ng'
       run: |
-        cp -iv ../ansible-hub-ui/.github/workflows/scripts/* .
-
-        echo '# Containerfile'
-        echo '\
-          FROM ghcr.io/pulp/pulp-ci-centos:latest
-
-          COPY --chmod=644 ansible-sign.key /tmp/
-          COPY --chmod=755 collection-sign.sh /var/lib/pulp/scripts/
-          COPY --chmod=755 container-sign.sh /var/lib/pulp/scripts/
-          COPY --chmod=755 signing-setup.sh /tmp/
-
-          RUN pip3 install --upgrade \
-            requests \
-            git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }} && \
-            rm -rf /root/.cache/pip
-
-          RUN mkdir -p /etc/nginx/pulp/
-          RUN ln /usr/local/lib/python*/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
-          RUN ln /usr/local/lib/python*/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
-          RUN ln /usr/local/lib/python*/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
-
-          RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
-          RUN ln -sv /galaxy_ng_static `ls -d /usr/local/lib/python*/site-packages/galaxy_ng/app/`static
-        ' | tee Containerfile
+        cp -aiv ../ansible-hub-ui/.github/workflows/cypress/* .
+        sed -i \
+          -e 's|\$REPO|ansible/galaxy_ng|' \
+          -e 's|\$BRANCH|${{ env.SHORT_BRANCH }}|' \
+          Containerfile
 
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
         rm -f image # ensure older version is gone, podman save errors otherwise
@@ -109,23 +90,7 @@ jobs:
       working-directory: 'pulp_galaxy_ng'
       run: |
         mkdir settings static
-        echo '# settings/settings.py'
-        echo "\
-          ANSIBLE_API_HOSTNAME='http://localhost:8002'
-          ANSIBLE_CONTENT_HOSTNAME='http://localhost:8002/api/galaxy/v3/artifacts/collections'
-          CONTENT_ORIGIN='http://localhost:8002'
-          GALAXY_API_PATH_PREFIX='/api/galaxy/'
-          GALAXY_AUTHENTICATION_CLASSES=['rest_framework.authentication.SessionAuthentication', 'rest_framework.authentication.TokenAuthentication']
-          GALAXY_DEPLOYMENT_MODE='standalone'
-          PULP_CONTENT_PATH_PREFIX='/api/galaxy/v3/artifacts/collections/'
-          RH_ENTITLEMENT_REQUIRED='insights'
-          TOKEN_AUTH_DISABLED=True
-          X_PULP_CONTENT_HOST='localhost'
-          GALAXY_REQUIRE_CONTENT_APPROVAL=False
-          GALAXY_COLLECTION_SIGNING_SERVICE='ansible-default'
-          GALAXY_CONTAINER_SIGNING_SERVICE='container-default'
-          GALAXY_FEATURE_FLAGS__container_signing=True
-        " | sed 's/^\s\+//' | tee settings/settings.py
+        mv settings.py settings/
 
         podman run \
              --detach \
@@ -194,16 +159,7 @@ jobs:
     - name: "Configure Cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
-        echo -e '{
-          "prefix": "/api/galaxy/",
-          "pulpPrefix": "/api/galaxy/pulp/api/v3/",
-          "username": "admin",
-          "password": "admin",
-          "settings": "../../pulp_galaxy_ng/settings/settings.py",
-          "restart": "podman exec pulp bash -c \"s6-svc -r /var/run/s6-rc/servicedirs/pulpcore-api\"; sleep 10",
-          "containers": "localhost:8002",
-          "galaxykit": "galaxykit --ignore-certs"
-        }' > cypress.env.json
+        cp -aiv ../.github/workflows/cypress/cypress.env.json cypress.env.json
 
     - name: "Ensure index.html uses the new js"
       run: |
