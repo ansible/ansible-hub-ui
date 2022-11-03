@@ -1,3 +1,4 @@
+process.env.NODE_ENV = 'production';
 const webpackBase = require('./webpack.base.config');
 
 // Compile configuration for deploying to insights
