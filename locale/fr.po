@@ -138,7 +138,7 @@ msgstr "Erreur d’API : {status}"
 #: src/components/import-modal/import-modal.tsx:222
 #: src/components/import-modal/import-modal.tsx:227
 msgid "API error. Status code: {0}"
-msgstr "Erreur API. Statut code : {0}"
+msgstr "Erreur API. Statut code: {0}"
 
 #: src/containers/token/token-standalone.tsx:60
 msgid "API token"
@@ -294,7 +294,7 @@ msgstr "Tableau de bord des approbations"
 
 #: src/components/my-imports/import-console.tsx:189
 msgid "Approval status:"
-msgstr "Statut d'approbation :"
+msgstr "Statut d'approbation:"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:433
 #: src/containers/certification-dashboard/certification-dashboard.tsx:466
@@ -317,7 +317,7 @@ msgstr "Fournisseur d’authentification"
 
 #: src/components/patternfly-wrappers/fileupload.tsx:13
 msgid "Browse..."
-msgstr "Navigation...."
+msgstr "Navigation..."
 
 #: src/components/about-modal/about-modal.tsx:107
 msgid "Browser OS"
@@ -389,7 +389,7 @@ msgid "Canceled"
 msgstr "Annulé"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:699
-msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
+msgid "Cannot delete namespace until <0/>collections' dependencies have been deleted<1/>"
 msgstr "Impossible de supprimer un espace de nom <0/> tant que les dépendances des collections n'ont pas été supprimées<1/>"
 
 #: src/utilities/delete-collection.tsx:37
@@ -565,7 +565,7 @@ msgstr "La collection \"{name} v{collectionVersion}\" n’a pas pu être supprim
 #: src/components/headers/collection-header.tsx:868
 #: src/components/headers/collection-header.tsx:883
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
-msgstr "La collection  \"{name} v{collectionVersion}\"  a été supprimée."
+msgstr "La collection  \"{name} v{collectionVersion}\" a été supprimée."
 
 #: src/utilities/delete-collection.tsx:145
 msgid "Collection \"{name}\" could not be deleted."
@@ -3969,23 +3969,23 @@ msgstr "{company} logo"
 
 #: src/components/numeric-label/numeric-label.tsx:84
 msgid "{count, plural, one {Dependency} other {Dependencies}}"
-msgstr "{count, plural, one {Dependency} autre {Dependencies}}"
+msgstr "{count, plural, one {Dependency} other {Dependencies}}"
 
 #: src/components/numeric-label/numeric-label.tsx:72
 msgid "{count, plural, one {Module} other {Modules}}"
-msgstr "{count, plural, one {Module} autre {Modules}}"
+msgstr "{count, plural, one {Module} other {Modules}}"
 
 #: src/components/numeric-label/numeric-label.tsx:80
 msgid "{count, plural, one {Plugin} other {Plugins}}"
-msgstr "{count, plural, one {Plugin} autre {Plugins}}"
+msgstr "{count, plural, one {Plugin} other {Plugins}}"
 
 #: src/components/numeric-label/numeric-label.tsx:76
 msgid "{count, plural, one {Role} other {Roles}}"
-msgstr "{count, plural, one {Role} autre {Roles}}"
+msgstr "{count, plural, one {Role} other {Roles}}"
 
 #: src/utilities/get_human_size.ts:14
 msgid "{n, plural, one {# byte} other {# bytes}}"
-msgstr "{n, plural, one {# byte} autre {# bytes}}"
+msgstr "{n, plural, one {# byte} other {# bytes}}"
 
 #: src/containers/task-management/task-list-view.tsx:357
 msgid "{name} will be cancelled."
