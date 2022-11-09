@@ -795,7 +795,7 @@ msgstr "Crear un nuevo usuario"
 
 #: src/components/rbac/user-form.tsx:99
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "Cree una contraseña con, al menos, 9 caracteres, incluidos los caracteres especiales, por ejemplo, {minLength}. Evite utilizar nombres o expresiones comunes."
+msgstr "Cree una contraseña con, al menos, {minLength} caracteres, incluidos los caracteres especiales, por ejemplo, ex <!@$%>. Evite utilizar nombres o expresiones comunes."
 
 #: src/constants.tsx:387
 msgid "Create and update execution environments under existing container namespaces."
@@ -1568,7 +1568,7 @@ msgstr "Grupo"
 
 #: src/components/rbac/owners-tab.tsx:475
 msgid "Group \"{0}\" could not be added to \"{name}\"."
-msgstr "No se pudo eliminar el grupo \"{0}\"."
+msgstr "No se pudo agregar el grupo \"{0}\" a la \"{name}\"."
 
 #: src/containers/group-management/group-detail.tsx:142
 #~ msgid "Group \"{0}\" could not be displayed."
@@ -1625,11 +1625,11 @@ msgstr "Nombre del grupo"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:222
 msgid "Group {0}"
-msgstr "Grupo"
+msgstr "Grupo {0}"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:62
 msgid "Group {groupId}"
-msgstr "Grupo"
+msgstr "Grupo {groupId}"
 
 #: src/components/rbac/user-form.tsx:149
 #: src/components/rbac/user-form.tsx:163
@@ -2706,7 +2706,7 @@ msgstr "No se pudo eliminar la imagen \"{0}\"."
 
 #: src/containers/role-management/role-edit.tsx:110
 msgid "Role \"{0}\" could not be displayed."
-msgstr "No se pudieron mostrar las etiquetas."
+msgstr "No se pudo mostrar el rol \"{0}\"."
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:116
 msgid "Role \"{0}\" has been successfully removed."
@@ -3945,7 +3945,7 @@ msgstr "esperando a que termine la importación"
 
 #: src/components/headers/collection-header.tsx:458
 msgid "{0} updated {1}"
-msgstr "Actualizado {0}"
+msgstr "{0} Actualizado {1}"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
 msgid "{0} was added"
@@ -4001,7 +4001,7 @@ msgstr "{subTitle}"
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx:35
 msgid "{title} content"
-msgstr "Contenido"
+msgstr "Contenido {title}"
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx:34
 msgid "{title} steps"

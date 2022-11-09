@@ -3805,7 +3805,7 @@ msgstr "<1>{name}</1>에서 <0>모든 버전</0>에 서명하려고 합니다."
 
 #: src/components/signing/sign-single-certificate-modal.tsx:45
 msgid "You are about to sign <0>version {version}</0> under <1>{name}</1>."
-msgstr "<1>{name}</1>에서 <0>version {version}에 서명하려고 합니다."
+msgstr "<1>{name}</1>에서 <0>version {version}</0> 에 서명하려고 합니다."
 
 #: src/components/signing/sign-all-certificates-modal.tsx:59
 #~ msgid "You are about to sign <0>{numberOfAffected}</0> version(s) under <1>{name}</1>."

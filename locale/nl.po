@@ -795,7 +795,7 @@ msgstr "Een nieuwe gebruiker aanmaken"
 
 #: src/components/rbac/user-form.tsx:99
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "Maak een wachtwoord van ten minste 9 tekens, inclusief speciale tekens , bijvoorbeeld {minLength}. Vermijd het gebruik van veelvoorkomende namen of uitdrukkingen."
+msgstr "Maak een wachtwoord van ten minste {minLength} tekens, inclusief speciale tekens , bijvoorbeeld ex <!@$%>. Vermijd het gebruik van veelvoorkomende namen of uitdrukkingen."
 
 #: src/constants.tsx:387
 msgid "Create and update execution environments under existing container namespaces."
@@ -1568,7 +1568,7 @@ msgstr "Groep"
 
 #: src/components/rbac/owners-tab.tsx:475
 msgid "Group \"{0}\" could not be added to \"{name}\"."
-msgstr "Groep \"{0}\" kon niet worden verwijderd."
+msgstr "Groep \"{0}\" kan niet worden toegevoegd aan \"{name}\"."
 
 #: src/containers/group-management/group-detail.tsx:142
 #~ msgid "Group \"{0}\" could not be displayed."
@@ -1625,11 +1625,11 @@ msgstr "Naam van de groep"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:222
 msgid "Group {0}"
-msgstr "Groep"
+msgstr "Groep {0}"
 
 #: src/components/execution-environment-header/execution-environment-header.tsx:62
 msgid "Group {groupId}"
-msgstr "Groep"
+msgstr "Groep {groupId}"
 
 #: src/components/rbac/user-form.tsx:149
 #: src/components/rbac/user-form.tsx:163
@@ -2706,7 +2706,7 @@ msgstr "Afbeelding \"{0}\" kon niet worden verwijderd."
 
 #: src/containers/role-management/role-edit.tsx:110
 msgid "Role \"{0}\" could not be displayed."
-msgstr "Tags konden niet worden weergegeven."
+msgstr "Rol \"{0}\" kan niet worden weergegeven."
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:116
 msgid "Role \"{0}\" has been successfully removed."
@@ -2952,7 +2952,7 @@ msgstr "Handtekening"
 
 #: src/containers/signature-keys/list.tsx:278
 msgid "Signature keys could not be displayed."
-msgstr "Tags konden niet worden weergegeven."
+msgstr "Handtekeningsleutels konden niet worden weergegeven."
 
 #: src/containers/signature-keys/list.tsx:99
 msgid "Signature keys will appear once created."
@@ -3158,7 +3158,7 @@ msgstr "Taak \"{name}\" kon niet worden gestopt."
 
 #: src/containers/task-management/task-list-view.tsx:376
 msgid "Task \"{name}\" stopped successfully."
-msgstr "Taak '{name}' gestopt."
+msgstr "Taak \"{name}\" gestopt."
 
 #: src/containers/task-management/task_detail.tsx:404
 msgid "Task \"{taskName}\" could not be stopped."
@@ -3166,7 +3166,7 @@ msgstr "Taak \"{taskName}\" kon niet worden gestopt."
 
 #: src/containers/task-management/task_detail.tsx:388
 msgid "Task \"{taskName}\" stopped successfully."
-msgstr "Taak '{taskName}' gestopt."
+msgstr "Taak \"{taskName}\" gestopt."
 
 #: src/constants.tsx:105
 #: src/containers/task-management/task-list-view.tsx:122
@@ -3945,7 +3945,7 @@ msgstr "wacht tot importeren is voltooid"
 
 #: src/components/headers/collection-header.tsx:458
 msgid "{0} updated {1}"
-msgstr "Bijgewerkt {0}"
+msgstr "{0} Bijgewerkt {1}"
 
 #: src/containers/execution-environment-detail/execution_environment_detail_activities.tsx:219
 msgid "{0} was added"
@@ -4001,7 +4001,7 @@ msgstr "{subTitle}"
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx:35
 msgid "{title} content"
-msgstr "inhoud"
+msgstr "{title} inhoud"
 
 #: src/components/patternfly-wrappers/wizard-modal.tsx:34
 msgid "{title} steps"
