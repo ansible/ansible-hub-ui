@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Constants } from '../constants';
 import { ParamHelper } from '../utilities';
-import * as Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 
 export class BaseAPI {
   UI_API_VERSION = 'v1';
@@ -14,10 +14,10 @@ export class BaseAPI {
   constructor() {
     this.http = axios.create({
       baseURL: this.apiBaseURL,
-      paramsSerializer: params => ParamHelper.getQueryString(params),
+      paramsSerializer: (params) => ParamHelper.getQueryString(params),
     });
 
-    this.http.interceptors.request.use(request => this.authHandler(request));
+    this.http.interceptors.request.use((request) => this.authHandler(request));
   }
 
   // Use this function to get paths in the _ui API. That will ensure the API version
@@ -61,15 +61,7 @@ export class BaseAPI {
   }
 
   private async authHandler(request) {
-    // This runs before every API request and ensures that the user is
-    // authenticated before the request is executed. On most calls it appears
-    // to only add ~10ms of latency.
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      await (window as any).insights.chrome.auth.getUser();
-    }
-    if (DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE) {
-      request.headers['X-CSRFToken'] = Cookies.get('csrftoken');
-    }
+    request.headers['X-CSRFToken'] = Cookies.get('csrftoken');
     return request;
   }
 

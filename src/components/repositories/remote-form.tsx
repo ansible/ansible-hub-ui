@@ -133,7 +133,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             id='name'
             type='text'
             value={remote.name || ''}
-            onChange={value => this.updateRemote(value, 'name')}
+            onChange={(value) => this.updateRemote(value, 'name')}
           />
         </FormGroup>
         <FormGroup
@@ -153,7 +153,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             id='url'
             type='text'
             value={remote.url || ''}
-            onChange={value => this.updateRemote(value, 'url')}
+            onChange={(value) => this.updateRemote(value, 'url')}
           />
         </FormGroup>
         {!disabledFields.includes('token') && (
@@ -177,7 +177,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 type='password'
                 id='token'
                 value={remote.token || ''}
-                onChange={value => this.updateRemote(value, 'token')}
+                onChange={(value) => this.updateRemote(value, 'token')}
               />
             </WriteOnlyField>
           </FormGroup>
@@ -198,7 +198,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               id='ssoUrl'
               type='text'
               value={this.props.remote.auth_url || ''}
-              onChange={value => this.updateRemote(value, 'auth_url')}
+              onChange={(value) => this.updateRemote(value, 'auth_url')}
             />
           </FormGroup>
         )}
@@ -289,7 +289,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               id='username'
               type='text'
               value={remote.username || ''}
-              onChange={value => this.updateRemote(value, 'username')}
+              onChange={(value) => this.updateRemote(value, 'username')}
             />
           </FormGroup>
           <FormGroup
@@ -313,7 +313,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 id='password'
                 type='password'
                 value={remote.password || ''}
-                onChange={value => this.updateRemote(value, 'password')}
+                onChange={(value) => this.updateRemote(value, 'password')}
               />
             </WriteOnlyField>
           </FormGroup>
@@ -331,7 +331,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               id='proxy_url'
               type='text'
               value={remote.proxy_url || ''}
-              onChange={value => this.updateRemote(value, 'proxy_url')}
+              onChange={(value) => this.updateRemote(value, 'proxy_url')}
             />
           </FormGroup>
 
@@ -349,7 +349,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               id='proxy_username'
               type='text'
               value={remote.proxy_username || ''}
-              onChange={value => this.updateRemote(value, 'proxy_username')}
+              onChange={(value) => this.updateRemote(value, 'proxy_username')}
             />
           </FormGroup>
 
@@ -374,7 +374,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
                 id='proxy_password'
                 type='password'
                 value={remote.proxy_password || ''}
-                onChange={value => this.updateRemote(value, 'proxy_password')}
+                onChange={(value) => this.updateRemote(value, 'proxy_password')}
               />
             </WriteOnlyField>
           </FormGroup>
@@ -390,7 +390,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
             helperTextInvalid={errorMessages['tls_validation']}
           >
             <Checkbox
-              onChange={value => this.updateRemote(value, 'tls_validation')}
+              onChange={(value) => this.updateRemote(value, 'tls_validation')}
               id='tls_validation'
               isChecked={remote.tls_validation}
             />
@@ -532,7 +532,7 @@ export class RemoteForm extends React.Component<IProps, IState> {
               type='number'
               value={remote.download_concurrency}
               validated={remote.download_concurrency > 0 ? 'default' : 'error'}
-              onChange={value =>
+              onChange={(value) =>
                 this.updateRemote(parseInt(value), 'download_concurrency')
               }
             />

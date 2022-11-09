@@ -2,7 +2,6 @@ import * as React from 'react';
 import './namespace-list.scss';
 
 import { RouteComponentProps } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   EmptyState,
   EmptyStateIcon,
@@ -89,7 +88,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     if (this.props.filterOwner) {
       // Make a query with no params and see if it returns results to tell
       // if the user can edit namespaces
-      MyNamespaceAPI.list({}).then(results => {
+      MyNamespaceAPI.list({}).then((results) => {
         if (results.data.meta.count !== 0) {
           this.loadNamespaces();
         } else {
@@ -131,7 +130,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
         <NamespaceModal
           isOpen={this.state.isModalOpen}
           toggleModal={this.handleModalToggle}
-          onCreateSuccess={result =>
+          onCreateSuccess={(result) =>
             this.props.history.push(
               formatPath(Paths.myCollections, {
                 namespace: result['name'],
@@ -145,7 +144,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
               params={params}
               sortOptions={[{ title: 'Name', id: 'name', type: 'alpha' }]}
               searchPlaceholder={'Search ' + title.toLowerCase()}
-              updateParams={p =>
+              updateParams={(p) =>
                 this.updateParams(p, () => this.loadNamespaces())
               }
               extraInputs={extra}
@@ -153,7 +152,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             <div>
               <Pagination
                 params={params}
-                updateParams={p =>
+                updateParams={(p) =>
                   this.updateParams(p, () => this.loadNamespaces())
                 }
                 count={itemCount}
@@ -163,17 +162,17 @@ export class NamespaceList extends React.Component<IProps, IState> {
             </div>
           </div>
         </BaseHeader>
-        <Section className='card-area'>{this.renderBody()}</Section>
-        <Section className='footer'>
+        <section className='card-area'>{this.renderBody()}</section>
+        <section className='footer'>
           <Pagination
             params={params}
-            updateParams={p =>
+            updateParams={(p) =>
               this.updateParams(p, () => this.loadNamespaces())
             }
             perPageOptions={Constants.CARD_DEFAULT_PAGINATION_OPTIONS}
             count={itemCount}
           />
-        </Section>
+        </section>
       </div>
     );
   }
@@ -185,15 +184,15 @@ export class NamespaceList extends React.Component<IProps, IState> {
 
     if (loading) {
       return (
-        <Section>
+        <section>
           <LoadingPageSpinner></LoadingPageSpinner>;
-        </Section>
+        </section>
       );
     }
 
     if (namespaces.length === 0) {
       return (
-        <Section>
+        <section>
           <EmptyState className='empty' variant={EmptyStateVariant.full}>
             <EmptyStateIcon icon={SearchIcon} />
             <Title headingLevel='h2' size='lg'>
@@ -217,12 +216,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
               </Button>
             )}
           </EmptyState>
-        </Section>
+        </section>
       );
     }
 
     return (
-      <Section className='card-layout'>
+      <section className='card-layout'>
         {namespaces.map((ns, i) => (
           <div key={i} className='card-wrapper'>
             <NamespaceCard
@@ -235,7 +234,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             ></NamespaceCard>
           </div>
         ))}
-      </Section>
+      </section>
     );
   }
 
@@ -243,12 +242,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
     let apiFunc: any;
 
     if (this.props.filterOwner) {
-      apiFunc = p => MyNamespaceAPI.list(p);
+      apiFunc = (p) => MyNamespaceAPI.list(p);
     } else {
-      apiFunc = p => NamespaceAPI.list(p);
+      apiFunc = (p) => NamespaceAPI.list(p);
     }
     this.setState({ loading: true }, () => {
-      apiFunc(this.state.params).then(results => {
+      apiFunc(this.state.params).then((results) => {
         this.setState({
           namespaces: results.data.data,
           itemCount: results.data.meta.count,

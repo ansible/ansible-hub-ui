@@ -29,14 +29,8 @@ export class CollectionCard extends React.Component<IProps> {
   MAX_DESCRIPTION_LENGTH = 60;
 
   render() {
-    const {
-      name,
-      latest_version,
-      namespace,
-      className,
-      footer,
-      repo,
-    } = this.props;
+    const { name, latest_version, namespace, className, footer, repo } =
+      this.props;
 
     const company = namespace.company || namespace.name;
     const contentSummary = convertContentSummaryCounts(latest_version.contents);
@@ -75,7 +69,7 @@ export class CollectionCard extends React.Component<IProps> {
           </div>
         </CardBody>
         <CardBody className='type-container'>
-          {Object.keys(contentSummary.contents).map(k =>
+          {Object.keys(contentSummary.contents).map((k) =>
             this.renderTypeCount(k, contentSummary.contents[k]),
           )}
         </CardBody>

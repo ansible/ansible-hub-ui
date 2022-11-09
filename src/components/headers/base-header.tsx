@@ -2,7 +2,7 @@ import * as React from 'react';
 import cx from 'classnames';
 import './header.scss';
 
-import { PageHeaderTitle } from '@redhat-cloud-services/frontend-components';
+import { Title } from '@patternfly/react-core';
 
 import { Logo } from '../../components';
 
@@ -17,14 +17,8 @@ interface IProps {
 
 export class BaseHeader extends React.Component<IProps, {}> {
   render() {
-    const {
-      title,
-      imageURL,
-      pageControls,
-      children,
-      breadcrumbs,
-      className,
-    } = this.props;
+    const { title, imageURL, pageControls, children, breadcrumbs, className } =
+      this.props;
     return (
       <div className={cx('background', className)}>
         {breadcrumbs ? (
@@ -43,7 +37,7 @@ export class BaseHeader extends React.Component<IProps, {}> {
               />
             ) : null}
             <div>
-              <PageHeaderTitle title={title} />
+              <Title headingLevel='h1' size='2xl' children={title} />
             </div>
           </div>
 

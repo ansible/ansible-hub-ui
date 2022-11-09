@@ -50,7 +50,7 @@ class AuthHandler extends React.Component<IProps, IState> {
     const { user, setUser } = this.context;
     if (!user) {
       ActiveUserAPI.getUser()
-        .then(result => {
+        .then((result) => {
           setUser(result);
           this.setState({ isLoading: false });
         })
@@ -126,7 +126,7 @@ export class Routes extends React.Component<any> {
         {this.routes.map((route, index) => (
           <Route
             key={index}
-            render={props => (
+            render={(props) => (
               <AuthHandler
                 noAuth={route.noAuth}
                 Component={route.comp}

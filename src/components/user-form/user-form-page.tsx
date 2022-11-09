@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import { Section } from '@redhat-cloud-services/frontend-components';
-
 import { BaseHeader, Main, Breadcrumbs, UserForm } from '../../components';
 import { UserType } from '../../api';
 
@@ -46,7 +44,7 @@ export class UserFormPage extends React.Component<IProps> {
           title={title}
         ></BaseHeader>
         <Main>
-          <Section className='body'>
+          <section className='body'>
             {extraControls}
             <UserForm
               isMe={isMe}
@@ -58,7 +56,7 @@ export class UserFormPage extends React.Component<IProps> {
               onCancel={onCancel}
               isNewUser={isNewUser}
             ></UserForm>
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

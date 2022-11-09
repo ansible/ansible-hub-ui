@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 
 import {
   CollectionHeader,
@@ -57,7 +56,7 @@ class CollectionDetail extends React.Component<
       },
     ];
 
-    const setVersion = version =>
+    const setVersion = (version) =>
       this.updateParams({ ...params, version }, () =>
         this.loadCollection(this.context.selectedRepo, true),
       );
@@ -73,13 +72,13 @@ class CollectionDetail extends React.Component<
           setVersion={setVersion}
         />
         <Main>
-          <Section className='body'>
+          <section className='body'>
             <CollectionInfo
               {...collection}
               params={params}
               setVersion={setVersion}
             />
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );

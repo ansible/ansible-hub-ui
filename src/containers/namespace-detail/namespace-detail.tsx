@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import {
   Button,
   DropdownItem,
@@ -10,7 +9,7 @@ import {
   ClipboardCopy,
 } from '@patternfly/react-core';
 
-import * as ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 
 import {
   CollectionListType,
@@ -128,7 +127,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       <React.Fragment>
         <ImportModal
           isOpen={showImportModal}
-          onUploadSuccess={result =>
+          onUploadSuccess={(result) =>
             this.props.history.push(
               formatPath(
                 Paths.myImports,
@@ -166,14 +165,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           breadcrumbs={breadcrumbs.concat([{ name: namespace.name }])}
           tabs={tabs}
           params={params}
-          updateParams={p => this.updateParams(p)}
+          updateParams={(p) => this.updateParams(p)}
           pageControls={this.renderPageControls()}
         ></PartnerHeader>
         <Main>
-          <Section className='body'>
+          <section className='body'>
             {tab.toLowerCase() === 'collections' ? (
               <CollectionList
-                updateParams={params =>
+                updateParams={(params) =>
                   this.updateParams(params, () => this.loadCollections())
                 }
                 params={params}
@@ -206,14 +205,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
             {tab.toLowerCase() === 'resources'
               ? this.renderResources(namespace)
               : null}
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );
   }
 
   private handleCollectionAction(id, action) {
-    const collection = this.state.collections.find(x => x.id === id);
+    const collection = this.state.collections.find((x) => x.id === id);
 
     switch (action) {
       case 'upload':
@@ -229,7 +228,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           this.context.selectedRepo,
         )
           .then(() => this.loadCollections())
-          .catch(error => {
+          .catch((error) => {
             this.setState({
               warning: 'API Error: Failed to set deprecation.',
             });
@@ -241,7 +240,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
   private renderResources(namespace: NamespaceType) {
     return (
       <div className='pf-c-content preview'>
-        <ReactMarkdown children={namespace.resources} />
+        <ReactMarkdown>{namespace.resources}</ReactMarkdown>
       </div>
     );
   }
@@ -252,7 +251,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         ...ParamHelper.getReduced(this.state.params, this.nonAPIParams),
       },
       this.context.selectedRepo,
-    ).then(result => {
+    ).then((result) => {
       this.setState({
         collections: result.data.data,
         itemCount: result.data.meta.count,
@@ -270,14 +269,14 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       ),
       NamespaceAPI.get(this.props.match.params['namespace']),
     ])
-      .then(val => {
+      .then((val) => {
         this.setState({
           collections: val[0].data.data,
           itemCount: val[0].data.meta.count,
           namespace: val[1].data,
         });
       })
-      .catch(response => {
+      .catch((response) => {
         this.setState({ redirect: Paths.notFound });
       });
   }

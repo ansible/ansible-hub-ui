@@ -92,7 +92,7 @@ export class UserForm extends React.Component<IProps, IState> {
     ];
     return (
       <Form>
-        {formFields.map(v => (
+        {formFields.map((v) => (
           <FormGroup
             isRequired={requiredFields.includes(v.id)}
             key={v.id}
@@ -137,7 +137,7 @@ export class UserForm extends React.Component<IProps, IState> {
             isDisabled={isReadonly}
             id={'password-confirm'}
             value={passwordConfirm}
-            onChange={value => {
+            onChange={(value) => {
               this.setState({ passwordConfirm: value });
             }}
             type='password'
@@ -148,7 +148,7 @@ export class UserForm extends React.Component<IProps, IState> {
             {user.groups.length !== 0 && (
               <ChipGroup>
                 {' '}
-                {user.groups.map(group => (
+                {user.groups.map((group) => (
                   <Chip isReadOnly cellPadding={'1px'}>
                     {group.name}
                   </Chip>
@@ -215,10 +215,10 @@ export class UserForm extends React.Component<IProps, IState> {
 
     const newUser = { ...user };
 
-    const i = user.groups.findIndex(g => g.name === selection);
+    const i = user.groups.findIndex((g) => g.name === selection);
     if (i === -1) {
       const addedGroup = this.state.searchGroups.find(
-        g => g.name === selection,
+        (g) => g.name === selection,
       );
       user.groups.push(addedGroup);
     } else {
@@ -228,8 +228,8 @@ export class UserForm extends React.Component<IProps, IState> {
     this.props.updateUser(newUser, this.props.errorMessages);
   };
 
-  private loadGroups = name => {
-    GroupAPI.list({ name__contains: name, page_size: 5 }).then(result =>
+  private loadGroups = (name) => {
+    GroupAPI.list({ name__contains: name, page_size: 5 }).then((result) =>
       this.setState({ searchGroups: result.data.data }),
     );
   };

@@ -11,7 +11,6 @@ import {
   LocalRepositoryTable,
   RemoteForm,
 } from '../../components';
-import { Section } from '@redhat-cloud-services/frontend-components';
 import { ParamHelper, mapErrorMessages } from '../../utilities';
 import { Constants } from '../../constants';
 import {
@@ -69,10 +68,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       params['tab'] = 'local';
     }
 
-    if (
-      !params['tab'] &&
-      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE
-    ) {
+    if (!params['tab']) {
       params['tab'] = 'local';
     }
 
@@ -121,7 +117,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
                   remoteToEdit,
                   this.unModifiedRemote,
                 )
-                  .then(r => {
+                  .then((r) => {
                     this.setState(
                       {
                         errorMessages: {},
@@ -131,7 +127,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
                       () => this.loadContent(),
                     );
                   })
-                  .catch(err =>
+                  .catch((err) =>
                     this.setState({ errorMessages: mapErrorMessages(err) }),
                   );
               } catch {
@@ -151,30 +147,28 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
           />
         )}
         <BaseHeader title='Repo Management'>
-          {DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE ? (
-            <div className='header-bottom'>
-              <div className='tab-link-container'>
-                <div className='tabs'>
-                  <Tabs
-                    tabs={tabs}
-                    params={params}
-                    updateParams={p => {
-                      // empty the content before updating the params to prevent
-                      // rendering from breaking when the wrong content is loaded
-                      this.setState({ content: [] }, () =>
-                        this.updateParams(p, () => this.loadContent()),
-                      );
-                    }}
-                  />
-                </div>
+          <div className='header-bottom'>
+            <div className='tab-link-container'>
+              <div className='tabs'>
+                <Tabs
+                  tabs={tabs}
+                  params={params}
+                  updateParams={(p) => {
+                    // empty the content before updating the params to prevent
+                    // rendering from breaking when the wrong content is loaded
+                    this.setState({ content: [] }, () =>
+                      this.updateParams(p, () => this.loadContent()),
+                    );
+                  }}
+                />
               </div>
             </div>
-          ) : null}
+          </div>
         </BaseHeader>
         <Main className='repository-list'>
-          <Section className='body'>
+          <section className='body'>
             {this.renderContent(params, loading, itemCount, content)}
-          </Section>
+          </section>
         </Main>
       </React.Fragment>
     );
@@ -182,11 +176,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
 
   private renderContent(params, loading, itemCount, content) {
     const { user } = this.context;
-    // Dont show remotes on insights
-    if (
-      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ||
-      (!!params.tab && params.tab.toLowerCase() === 'local')
-    ) {
+    if (!!params.tab && params.tab.toLowerCase() === 'local') {
       return (
         <div>
           {loading ? (
@@ -210,8 +200,8 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
               remotes={content}
               updateParams={this.updateParams}
               editRemote={this.selectRemoteToEdit}
-              syncRemote={distro =>
-                RemoteAPI.sync(distro).then(result => this.loadContent())
+              syncRemote={(distro) =>
+                RemoteAPI.sync(distro).then((result) => this.loadContent())
               }
               user={user}
               refreshRemotes={this.refreshContent}
@@ -244,7 +234,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       if (params['tab'] == 'remote') {
         RemoteAPI.list(
           ParamHelper.getReduced(params, this.nonQueryStringParams),
-        ).then(result => {
+        ).then((result) => {
           this.setState({
             loading: false,
             content: result.data.data,
@@ -254,11 +244,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       } else {
         let APIClass = DistributionAPI;
 
-        if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-          APIClass = MyDistributionAPI;
-        }
-
-        APIClass.list().then(result => {
+        APIClass.list().then((result) => {
           this.setState({
             loading: false,
             content: result.data.data,

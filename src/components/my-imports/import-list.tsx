@@ -6,20 +6,20 @@ import * as moment from 'moment';
 import { cloneDeep } from 'lodash';
 
 import {
+  Button,
+  ButtonVariant,
   EmptyState,
-  EmptyStateIcon,
   EmptyStateBody,
-  Title,
-  TextInput,
-  Pagination,
+  EmptyStateIcon,
   FormSelect,
   FormSelectOption,
   InputGroup,
-  Button,
-  ButtonVariant,
+  Pagination,
+  Spinner,
+  TextInput,
+  Title,
 } from '@patternfly/react-core';
 import { InfoIcon, SearchIcon } from '@patternfly/react-icons';
-import { Spinner } from '@redhat-cloud-services/frontend-components';
 
 import { PulpStatus, NamespaceType, ImportListType } from '../../api';
 import { ParamHelper } from '../../utilities/param-helper';
@@ -75,8 +75,8 @@ export class ImportList extends React.Component<IProps, IState> {
         <InputGroup className='search-box'>
           <TextInput
             value={kwField}
-            onChange={k => this.setState({ kwField: k })}
-            onKeyPress={e => this.handleEnter(e)}
+            onChange={(k) => this.setState({ kwField: k })}
+            onKeyPress={(e) => this.handleEnter(e)}
             type='search'
             aria-label='search text input'
             placeholder='Search imports'
@@ -128,7 +128,7 @@ export class ImportList extends React.Component<IProps, IState> {
     if (loading) {
       return (
         <div className='loading'>
-          <Spinner centered={true} />
+          <Spinner />
         </div>
       );
     }
@@ -149,7 +149,7 @@ export class ImportList extends React.Component<IProps, IState> {
 
     return (
       <div>
-        {importList.map(item => {
+        {importList.map((item) => {
           return (
             <div
               onClick={() => selectImport(item)}
@@ -220,7 +220,7 @@ export class ImportList extends React.Component<IProps, IState> {
         <div className='label'>Namespace</div>
         <div className='selector'>
           <FormSelect
-            onChange={val =>
+            onChange={(val) =>
               this.props.updateParams(
                 ParamHelper.setParam(this.props.params, 'namespace', val),
               )
@@ -228,7 +228,7 @@ export class ImportList extends React.Component<IProps, IState> {
             value={this.props.params.namespace}
             aria-label='Select namespace'
           >
-            {namespaces.map(ns => (
+            {namespaces.map((ns) => (
               <FormSelectOption key={ns.name} label={ns.name} value={ns.name} />
             ))}
           </FormSelect>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import './namespace-form.scss';
 
 import { Form, FormGroup, TextArea } from '@patternfly/react-core';
-import * as ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 
 import { NamespaceType } from '../../api';
 
@@ -42,7 +42,7 @@ export class ResourcesForm extends React.Component<IProps, {}> {
                 className='resources-editor'
                 id='resources'
                 value={namespace.resources}
-                onChange={value => this.updateResources(value)}
+                onChange={(value) => this.updateResources(value)}
                 placeholder={placeholder}
               />
             </FormGroup>
@@ -51,11 +51,9 @@ export class ResourcesForm extends React.Component<IProps, {}> {
           <div className='column preview-container'>
             Preview
             <div className='pf-c-content preview'>
-              {namespace.resources ? (
-                <ReactMarkdown children={namespace.resources} />
-              ) : (
-                <ReactMarkdown children={placeholder} />
-              )}
+              <ReactMarkdown>
+                {namespace.resources || placeholder}
+              </ReactMarkdown>
             </div>
           </div>
         </div>

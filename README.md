@@ -10,7 +10,7 @@ This project can now be run as a container alongside the API. Just follow the in
 
 ## Develop without containers
 
-This app can be developed in standalone mode or insights mode. Insights mode compiles the app to be run on the Red Hat cloud services platform (insights) and requires access to the Red Hat VPN as well as the insights proxy. Standalone mode only requires a running instance of the galaxy API for the UI to connect to.
+Standalone mode only requires a running instance of the galaxy API for the UI to connect to.
 
 ### Develop in Standalone Mode
 
@@ -25,7 +25,3 @@ The app will run on http://localhost:8002 and proxy requests for `api/automation
 
 - This project imports Patternfly components:
   - [Patternfly React](https://github.com/patternfly/patternfly-react)
-
-## Insights Components
-
-Insights Platform will deliver components and static assets through [npm](https://www.npmjs.com/package/@red-hat-insights/insights-frontend-components). ESI tags are used to import the [chroming](https://github.com/RedHatInsights/insights-chrome) which takes care of the header, sidebar, and footer.
