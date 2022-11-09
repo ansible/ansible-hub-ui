@@ -1,5 +1,6 @@
 const webpackBase = require('./webpack.base.config');
 const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=default)
+process.env.NODE_ENV = 'production';
 
 // Compile configuration for deploying to insights
 module.exports = webpackBase({
