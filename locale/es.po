@@ -593,7 +593,7 @@ msgstr "Mandos a distancia de la colección"
 
 #: src/components/repositories/local-repository-table.tsx:55
 msgid "Collection count"
-msgstr "Nombre de la colección"
+msgstr "Cuenta de la colección"
 
 #: src/components/collection-count/collection-count.tsx:64
 msgid "Collection count for \"{distributionPath}\" could not be displayed."
@@ -2643,7 +2643,7 @@ msgstr "Eliminar el papel"
 
 #: src/components/rbac/owners-tab.tsx:307
 msgid "Remove role {role}?"
-msgstr "Eliminar el papel {role}?"
+msgstr "Eliminar el rol {role}?"
 
 #: src/containers/group-management/group-detail.tsx:418
 msgid "Remove user from group?"

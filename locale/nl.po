@@ -593,11 +593,11 @@ msgstr "Externe items collectie"
 
 #: src/components/repositories/local-repository-table.tsx:55
 msgid "Collection count"
-msgstr "Naam collectie"
+msgstr "Collectie tellen"
 
 #: src/components/collection-count/collection-count.tsx:64
 msgid "Collection count for \"{distributionPath}\" could not be displayed."
-msgstr "Afhankelijkheden voor collectie \"{distributionPath}\" konden niet worden weergegeven."
+msgstr "Collectie tellen \"{distributionPath}\" konden niet worden weergegeven."
 
 #: src/containers/collection-detail/collection-dependencies.tsx:145
 #: src/containers/collection-detail/collection-dependencies.tsx:153
@@ -2977,7 +2977,7 @@ msgstr "Ondertekende versie(s)"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:75
 msgid "Signing service selector:"
-msgstr "Ondertekeningdienst  niet gevonden"
+msgstr "Ondertekenservice selector:"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:536
 msgid "Signing started for all collections in namespace \"{0}\"."
@@ -3251,12 +3251,12 @@ msgstr "Het certificaat voor \"{0} {1} v{2}\" wordt geüpload."
 #: src/components/headers/collection-header.tsx:799
 #: src/containers/search/search.tsx:336
 msgid "The collection \"{0}\" has been successfully deprecated."
-msgstr "Collectie '{0}' verwijderd."
+msgstr "Collectie '{0}' verouderd."
 
 #: src/components/headers/collection-header.tsx:800
 #: src/containers/search/search.tsx:337
 msgid "The collection \"{0}\" has been successfully undeprecated."
-msgstr "Collectie '{0}' verwijderd."
+msgstr "Collectie '{0}' niet verouderd."
 
 #: src/components/import-modal/import-modal.tsx:174
 msgid "The collection you have selected does not match this namespace."
