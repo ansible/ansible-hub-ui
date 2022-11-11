@@ -331,7 +331,7 @@ msgstr "Versión del navegador"
 #: src/containers/role-management/role-list.tsx:302
 #: src/containers/role-management/role-list.tsx:397
 msgid "Built-in"
-msgstr "Construido en"
+msgstr "Incorporado"
 
 #: src/containers/role-management/role-list.tsx:498
 msgid "Built-in roles cannot be deleted."
@@ -787,7 +787,7 @@ msgstr "Crear un nuevo espacio de nombres"
 
 #: src/containers/role-management/role-create.tsx:66
 msgid "Create a new role"
-msgstr "Crear un nuevo usuario"
+msgstr "Crear un nuevo rol"
 
 #: src/components/user-form/user-form.tsx:97
 #~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
@@ -795,7 +795,7 @@ msgstr "Crear un nuevo usuario"
 
 #: src/components/rbac/user-form.tsx:99
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "Cree una contraseña con, al menos, {minLength} caracteres, incluidos los caracteres especiales, por ejemplo, ex <!@$%>. Evite utilizar nombres o expresiones comunes."
+msgstr "Cree una contraseña con, al menos, {minLength} caracteres, incluidos los caracteres especiales, por ejemplo <!@$%>. Evite utilizar nombres o expresiones comunes."
 
 #: src/constants.tsx:387
 msgid "Create and update execution environments under existing container namespaces."
@@ -808,7 +808,7 @@ msgstr "Crear nuevo grupo de contenedores"
 
 #: src/containers/role-management/role-create.tsx:61
 msgid "Create new role"
-msgstr "Crear nuevo usuario"
+msgstr "Crear nuevo rol"
 
 #: src/containers/user-management/user-create.tsx:50
 #: src/containers/user-management/user-create.tsx:52
@@ -859,7 +859,7 @@ msgstr "Etiquetas incluidas actualmente"
 
 #: src/components/rbac/role-permissions.tsx:46
 msgid "Custom permissions"
-msgstr "Seleccionar permisos"
+msgstr "Otros permisos"
 
 #: src/loaders/standalone/standalone-loader.tsx:147
 msgid "Customer Support <0/>"
@@ -977,11 +977,11 @@ msgstr "¿Borrar el registro remoto?"
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:138
 msgid "Delete role: {0}"
-msgstr "Eliminar el papel: {0}"
+msgstr "Eliminar el rol: {0}"
 
 #: src/containers/role-management/role-list.tsx:213
 msgid "Delete role?"
-msgstr "¿Borrar el papel?"
+msgstr "¿Borrar el rol?"
 
 #: src/constants.tsx:194
 msgid "Delete synclist"
@@ -1102,7 +1102,7 @@ msgstr "Resumen"
 
 #: src/components/repositories/local-repository-table.tsx:65
 msgid "Distribution URL"
-msgstr "Nombre de la distribución"
+msgstr "URL de la distribución"
 
 #: src/components/repositories/local-repository-table.tsx:45
 msgid "Distribution name"
@@ -1576,11 +1576,11 @@ msgstr "No se pudo agregar el grupo \"{0}\" a la \"{name}\"."
 
 #: src/components/rbac/owners-tab.tsx:489
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
-msgstr "El usuario \"{0}\" no se pudo eliminar del grupo \"{name}\"."
+msgstr "El grupo \"{0}\" no se pudo eliminar de \"{name}\"."
 
 #: src/components/rbac/owners-tab.tsx:474
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
-msgstr "El usuario \"{0}\" se agregó correctamente al grupo \"{name}\"."
+msgstr "El grupo \"{0}\" se agregó correctamente a \"{name}\"."
 
 #: src/containers/group-management/group-list.tsx:460
 msgid "Group \"{0}\" has been successfully deleted."
@@ -1610,7 +1610,7 @@ msgstr "El grupo \"{group}\" se eliminó correctamente."
 
 #: src/containers/group-management/group-detail.tsx:743
 msgid "Group could not be displayed."
-msgstr "No se pudo mostrar el grupo \"\"."
+msgstr "No se pudo mostrar el grupo."
 
 #: src/components/rbac/owners-tab.tsx:123
 #: src/containers/group-management/group-list.tsx:393
@@ -1913,7 +1913,7 @@ msgstr "Modificar el contenido del repo de Ansible"
 
 #: src/components/namespace-form/namespace-form.tsx:80
 msgid "Moved to the <0>Namespace owners</0> <1/> tab"
-msgstr "Se ha trasladado a la pestaña <0>Propietarios de espacios de nombres</0> <1/> "
+msgstr "Movido a la pestaña <0>Propietarios de espacios de nombres</0> <1/> "
 
 #: src/components/execution-environment/repository-form.tsx:369
 msgid "Moved to the <0>Owners</0> <1/> tab"
@@ -2327,7 +2327,7 @@ msgstr "No se pudieron mostrar los permisos para el grupo \"{0}\"."
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:298
 #: src/containers/role-management/role-list.tsx:233
 msgid "Please add a role by using the button below."
-msgstr "Por favor, añada un papel utilizando el botón de abajo."
+msgstr "Por favor, añada un rol utilizando el botón de abajo."
 
 #: src/components/rbac/owners-tab.tsx:92
 msgid "Please add an owner by using the button below."
@@ -2387,7 +2387,7 @@ msgstr "Nombre de usuario del proxy"
 
 #: src/containers/signature-keys/list.tsx:194
 msgid "Public key"
-msgstr "Público"
+msgstr "Llave pública"
 
 #: src/constants.tsx:250
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:158
@@ -2702,7 +2702,7 @@ msgstr "No se ha podido crear el rol \"{0}\"."
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:124
 msgid "Role \"{0}\" could not be deleted."
-msgstr "No se pudo eliminar la imagen \"{0}\"."
+msgstr "No se pudo eliminar la rol \"{0}\"."
 
 #: src/containers/role-management/role-edit.tsx:110
 msgid "Role \"{0}\" could not be displayed."
@@ -2710,7 +2710,7 @@ msgstr "No se pudo mostrar el rol \"{0}\"."
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:116
 msgid "Role \"{0}\" has been successfully removed."
-msgstr "El usuario \"{0}\" se eliminó correctamente del grupo \"\"."
+msgstr "El rol \"{0}\" se eliminó correctamente."
 
 #: src/containers/role-management/role-list.tsx:442
 msgid "Role \"{name}\" could not be deleted."
@@ -2718,7 +2718,7 @@ msgstr "No se pudo eliminar la imagen \"{name}\"."
 
 #: src/containers/role-management/role-list.tsx:435
 msgid "Role \"{name}\" has been successfully deleted."
-msgstr "La imagen \"{name}\" se eliminó correctamente."
+msgstr "El rol \"{name}\" se eliminó correctamente."
 
 #: src/containers/role-management/role-list.tsx:170
 #: src/containers/role-management/role-list.tsx:259
@@ -2732,7 +2732,7 @@ msgstr "El rol {0} no pudo ser asignado al grupo {1}."
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:265
 msgid "Role {0} has been successfully added to {1}."
-msgstr "El usuario \"{0}\" se agregó correctamente al grupo \"{1}\"."
+msgstr "El rol \"{0}\" se agregó correctamente a \"{1}\"."
 
 #: src/containers/role-management/role-create.tsx:60
 #: src/containers/role-management/role-edit.tsx:149
@@ -2868,7 +2868,7 @@ msgstr "Grupo seleccionado"
 
 #: src/components/rbac/select-roles.tsx:137
 msgid "Selected roles"
-msgstr "Funciones seleccionadas"
+msgstr "Roles seleccionados"
 
 #: src/containers/token/token-insights.tsx:181
 msgid "Server URL"
@@ -2952,11 +2952,11 @@ msgstr "Firma"
 
 #: src/containers/signature-keys/list.tsx:278
 msgid "Signature keys could not be displayed."
-msgstr "No se pudieron mostrar las etiquetas."
+msgstr "No se pudieron mostrar las firmas."
 
 #: src/containers/signature-keys/list.tsx:99
 msgid "Signature keys will appear once created."
-msgstr "Los usuarios aparecerán una vez creados"
+msgstr "Las firmas aparecerán una vez creados"
 
 #: src/components/collection-list/collection-filter.tsx:71
 #: src/components/signing/signature-badge.tsx:28
@@ -2977,7 +2977,7 @@ msgstr "Versión(es) firmada(s)"
 
 #: src/components/signing/sign-all-certificates-modal.tsx:75
 msgid "Signing service selector:"
-msgstr "No se encontró el servicio de firmas "
+msgstr "Selecciona un servicio de firmas "
 
 #: src/containers/namespace-detail/namespace-detail.tsx:536
 msgid "Signing started for all collections in namespace \"{0}\"."
@@ -2993,7 +2993,7 @@ msgstr "Se inició la firma para la colección \"{0} v{1}\"."
 
 #: src/utilities/repo-signing.ts:42
 msgid "Signing started for container \"{0}\"."
-msgstr "Se inició la firma para la colección \"{0} v\"."
+msgstr "Se inició la firma para el contenedor \"{0}\"."
 
 #: src/components/repositories/remote-form.tsx:281
 msgid "Single sign on URL."
@@ -3251,7 +3251,7 @@ msgstr "Se está cargando el certificado para \"{0} {1} v{2}\"."
 #: src/components/headers/collection-header.tsx:799
 #: src/containers/search/search.tsx:336
 msgid "The collection \"{0}\" has been successfully deprecated."
-msgstr "La colección \"{0}\" se eliminó correctamente."
+msgstr "La colección \"{0}\" se ha pasado a desuso correctamente."
 
 #: src/components/headers/collection-header.tsx:800
 #: src/containers/search/search.tsx:337
@@ -3312,15 +3312,15 @@ msgstr "Actualmente no hay propietarios asignados."
 
 #: src/containers/role-management/role-list.tsx:232
 msgid "There are currently no roles"
-msgstr "Actualmente no hay funciones"
+msgstr "Actualmente no hay roles"
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:297
 msgid "There are currently no roles assigned to this group."
-msgstr "Actualmente no hay funciones asignadas a este grupo."
+msgstr "Actualmente no hay roles asignados a este grupo."
 
 #: src/components/rbac/select-roles.tsx:77
 msgid "There are currently no roles that can be assigned to this group."
-msgstr "Actualmente no hay funciones que se puedan asignar a este grupo."
+msgstr "Actualmente no hay roles que se puedan asignar a este grupo."
 
 #: src/components/repositories/remote-repository-table.tsx:117
 msgid "There are no repos associated with this remote."
@@ -3373,11 +3373,11 @@ msgstr "Este campo no puede estar en blanco"
 
 #: src/containers/role-management/map-role-errors.ts:18
 msgid "This field must be longer than 2 characters"
-msgstr "El nombre debe tener más de 2 caracteres"
+msgstr "Este campo debe tener más de 2 caracteres"
 
 #: src/containers/role-management/map-role-errors.ts:20
 msgid "This field must start with 'galaxy.'."
-msgstr "Este campo debe empezar por \"galaxia\"."
+msgstr "Este campo debe empezar por 'galaxy.'."
 
 #: src/components/rbac/delete-group-modal.tsx:67
 msgid "This group can include users"
@@ -3969,7 +3969,7 @@ msgstr "{company} Logotipo"
 
 #: src/components/numeric-label/numeric-label.tsx:84
 msgid "{count, plural, one {Dependency} other {Dependencies}}"
-msgstr "{count, plural, one {Dependency} other {Dependencies}}"
+msgstr "{count, plural, one {Dependencia} other {Dependencias}}"
 
 #: src/components/numeric-label/numeric-label.tsx:72
 msgid "{count, plural, one {Module} other {Modules}}"

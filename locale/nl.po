@@ -787,7 +787,7 @@ msgstr "Een nieuwe namespace maken"
 
 #: src/containers/role-management/role-create.tsx:66
 msgid "Create a new role"
-msgstr "Een nieuwe gebruiker aanmaken"
+msgstr "Een nieuwe rol aanmaken"
 
 #: src/components/user-form/user-form.tsx:97
 #~ msgid "Create a password using at least 9 characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
@@ -795,7 +795,7 @@ msgstr "Een nieuwe gebruiker aanmaken"
 
 #: src/components/rbac/user-form.tsx:99
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
-msgstr "Maak een wachtwoord van ten minste {minLength} tekens, inclusief speciale tekens , bijvoorbeeld ex <!@$%>. Vermijd het gebruik van veelvoorkomende namen of uitdrukkingen."
+msgstr "Maak een wachtwoord van ten minste {minLength} tekens, inclusief speciale tekens, bijvoorbeeld <!@$%>. Vermijd het gebruik van veelvoorkomende namen of uitdrukkingen."
 
 #: src/constants.tsx:387
 msgid "Create and update execution environments under existing container namespaces."
@@ -808,7 +808,7 @@ msgstr "Nieuwe containers maken"
 
 #: src/containers/role-management/role-create.tsx:61
 msgid "Create new role"
-msgstr "Nieuwe gebruiker maken"
+msgstr "Nieuwe rol maken"
 
 #: src/containers/user-management/user-create.tsx:50
 #: src/containers/user-management/user-create.tsx:52
@@ -1576,11 +1576,11 @@ msgstr "Groep \"{0}\" kan niet worden toegevoegd aan \"{name}\"."
 
 #: src/components/rbac/owners-tab.tsx:489
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
-msgstr "Gebruiker \"{0}\" kon niet worden verwijderd uit groep \"{name}\"."
+msgstr "Groep \"{0}\" kon niet worden verwijderd uit \"{name}\"."
 
 #: src/components/rbac/owners-tab.tsx:474
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
-msgstr "Gebruiker \"{0}\" is toegevoegd aan groep \"{name}\"."
+msgstr "Groep \"{0}\" is toegevoegd aan \"{name}\"."
 
 #: src/containers/group-management/group-list.tsx:460
 msgid "Group \"{0}\" has been successfully deleted."
@@ -2710,7 +2710,7 @@ msgstr "Rol \"{0}\" kan niet worden weergegeven."
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:116
 msgid "Role \"{0}\" has been successfully removed."
-msgstr "Gebruiker \"{0}\" is verwijderd uit groep \"\"."
+msgstr "Rol \"{0}\" is verwijderd."
 
 #: src/containers/role-management/role-list.tsx:442
 msgid "Role \"{name}\" could not be deleted."
@@ -2732,7 +2732,7 @@ msgstr "Rol {0} kon niet worden toegewezen aan groep {1}."
 
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:265
 msgid "Role {0} has been successfully added to {1}."
-msgstr "Gebruiker \"{0}\" is toegevoegd aan groep \"{1}\"."
+msgstr "Rol \"{0}\" is toegevoegd aan \"{1}\"."
 
 #: src/containers/role-management/role-create.tsx:60
 #: src/containers/role-management/role-edit.tsx:149
@@ -2743,7 +2743,7 @@ msgstr "Rollen"
 
 #: src/containers/role-management/role-list.tsx:529
 msgid "Roles list could not be displayed."
-msgstr "De gebruikerslijst kon niet worden weergegeven."
+msgstr "De rollenlijst kon niet worden weergegeven."
 
 #: src/components/my-imports/import-list.tsx:101
 #: src/components/status/status-indicator.tsx:61
@@ -2944,7 +2944,7 @@ msgstr "Handtekening"
 #: src/containers/signature-keys/list.tsx:93
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Signature Keys"
-msgstr "Handtekening"
+msgstr "Handtekeningsleutels"
 
 #: src/containers/signature-keys/list.tsx:208
 msgid "Signature keys"
@@ -2956,7 +2956,7 @@ msgstr "Handtekeningsleutels konden niet worden weergegeven."
 
 #: src/containers/signature-keys/list.tsx:99
 msgid "Signature keys will appear once created."
-msgstr "Gebruikers verschijnen zodra ze zijn aangemaakt"
+msgstr "Handtekeningsleutels verschijnen zodra ze zijn aangemaakt"
 
 #: src/components/collection-list/collection-filter.tsx:71
 #: src/components/signing/signature-badge.tsx:28
@@ -3365,7 +3365,7 @@ msgstr "Deze collectie vereist de volgende collecties voor gebruik"
 
 #: src/containers/role-management/map-role-errors.ts:16
 msgid "This field can only contain letters and numbers"
-msgstr "Naam mag alleen letters en cijfers bevatten"
+msgstr "Dit feld mag alleen letters en cijfers bevatten"
 
 #: src/containers/role-management/map-role-errors.ts:14
 msgid "This field may not be blank."
@@ -3373,7 +3373,7 @@ msgstr "Dit veld mag niet leeg zijn"
 
 #: src/containers/role-management/map-role-errors.ts:18
 msgid "This field must be longer than 2 characters"
-msgstr "Naam moet langer zijn dan 2 tekens"
+msgstr "Dit veld moet langer zijn dan 2 tekens"
 
 #: src/containers/role-management/map-role-errors.ts:20
 msgid "This field must start with 'galaxy.'."
@@ -3523,7 +3523,7 @@ msgstr "Gebruik de pagina <0>Repository Management</0> om collecties te synchron
 
 #: src/components/execution-environment/repository-form.tsx:201
 msgid "Use the namespace/name format for namespaced containers. Otherwise, use the library/name format."
-msgstr "Gebruik de indeling namespace/naam voor containers met namespace. Gebruik in andere gevallen de indeling bibliotheek/naam."
+msgstr "Gebruik de indeling namespace/naam voor containers met namespace. Gebruik in andere gevallen de indeling library/naam."
 
 #: src/containers/token/token-insights.tsx:128
 #~ msgid "Use this URL to configure the API endpoints that clients need to"

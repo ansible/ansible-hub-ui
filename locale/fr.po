@@ -49,7 +49,7 @@ msgstr "<0/> a été retiré de <1/>"
 
 #: src/components/collection-detail/collection-info.tsx:74
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
-msgstr "<0>Remarque</0> : L'installation de collections avec ansible-galaxy n'est prise en charge que dans ansible 2.9+"
+msgstr "<0>Remarque:</0> L'installation de collections avec ansible-galaxy n'est prise en charge que dans ansible 2.9+"
 
 #: src/components/execution-environment/publish-to-controller-modal.tsx:361
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
@@ -495,7 +495,7 @@ msgstr "Les changements à l’espace-nom \"{0}\" n’ont pas pu être sauvegard
 
 #: src/containers/role-management/role-edit.tsx:244
 msgid "Changes to role \"{name}\" could not be saved."
-msgstr "Les changements au groupe \"{name}\" n’ont pas pu être sauvegardés."
+msgstr "Les changements au rôle \"{name}\" n’ont pas pu être sauvegardés."
 
 #: src/components/rbac/delete-group-modal.tsx:59
 msgid "Checking for affected users... <0/>"
@@ -859,7 +859,7 @@ msgstr "Tags actuellement inclus"
 
 #: src/components/rbac/role-permissions.tsx:46
 msgid "Custom permissions"
-msgstr "Personnaliser les permissions"
+msgstr "Autres permissions"
 
 #: src/loaders/standalone/standalone-loader.tsx:147
 msgid "Customer Support <0/>"
@@ -1141,7 +1141,7 @@ msgstr "Télécharger la concurrence"
 
 #: src/containers/signature-keys/list.tsx:235
 msgid "Download key"
-msgstr "Clé de téléchargement"
+msgstr "Télécharger l'clé"
 
 #: src/components/repositories/remote-form.tsx:238
 msgid "Download only signed collections"
@@ -1300,7 +1300,7 @@ msgstr "Erreur lors de la récupération de l'importation à partir de l'API"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:618
 msgid "Error loading collections."
-msgstr "Erreur de chargement des contrôleurs"
+msgstr "Erreur de chargement des collections"
 
 #: src/containers/collection-detail/collection-dependencies.tsx:209
 #~ msgid "Error loading dependent collections."
@@ -1576,11 +1576,11 @@ msgstr "Groupe \"{0}\" n’a pas pu être ajouté à  \"{name}\"."
 
 #: src/components/rbac/owners-tab.tsx:489
 msgid "Group \"{0}\" could not be removed from \"{name}\"."
-msgstr "L’utilsateur \"{0}\" n’a pas pu être supprimé de \"{name}\"."
+msgstr "Le groupe \"{0}\" n’a pas pu être supprimé de \"{name}\"."
 
 #: src/components/rbac/owners-tab.tsx:474
 msgid "Group \"{0}\" has been successfully added to \"{name}\"."
-msgstr "L’utilsateur \"{0}\" a été ajouté à \"{name}\"."
+msgstr "Le groupe \"{0}\" a été ajouté à \"{name}\"."
 
 #: src/containers/group-management/group-list.tsx:460
 msgid "Group \"{0}\" has been successfully deleted."
@@ -1588,7 +1588,7 @@ msgstr "Le groupe \"{0}\" a été supprimé."
 
 #: src/components/rbac/owners-tab.tsx:488
 msgid "Group \"{0}\" has been successfully removed from \"{name}\"."
-msgstr "L’utilsateur \"{0}\" a été supprimé du groupe \"{name}\"."
+msgstr "Le groupe \"{0}\" a été supprimé de \"{name}\"."
 
 #: src/components/rbac/owners-tab.tsx:505
 #: src/components/rbac/owners-tab.tsx:521
@@ -1913,7 +1913,7 @@ msgstr "Modifier le contenu du référentiel Ansible"
 
 #: src/components/namespace-form/namespace-form.tsx:80
 msgid "Moved to the <0>Namespace owners</0> <1/> tab"
-msgstr "Déplacé vers les propriétaires de l'espace de nommage <0></0> <1/> onglet"
+msgstr "Déplacé vers <0>les propriétaires de l'espace de nommage</0> <1/> onglet"
 
 #: src/components/execution-environment/repository-form.tsx:369
 msgid "Moved to the <0>Owners</0> <1/> tab"
@@ -2039,7 +2039,7 @@ msgstr "Les espaces de noms apparaîtront une fois créés"
 #: src/containers/certification-dashboard/certification-dashboard.tsx:183
 #: src/containers/certification-dashboard/certification-dashboard.tsx:217
 msgid "Needs Review"
-msgstr "Examen Besoins"
+msgstr "Besoin de examen"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:352
 msgid "Needs review"
@@ -3377,7 +3377,7 @@ msgstr "Ce champ doit comporter plus de 2 caractères"
 
 #: src/containers/role-management/map-role-errors.ts:20
 msgid "This field must start with 'galaxy.'."
-msgstr "Ce champ doit commencer par \"galaxy\"."
+msgstr "Ce champ doit commencer par 'galaxy.'."
 
 #: src/components/rbac/delete-group-modal.tsx:67
 msgid "This group can include users"

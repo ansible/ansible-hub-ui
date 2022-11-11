@@ -3377,7 +3377,7 @@ msgstr "이 필드는 2자 이상이어야 합니다."
 
 #: src/containers/role-management/map-role-errors.ts:20
 msgid "This field must start with 'galaxy.'."
-msgstr "이 필드는 'galaxy'로 시작해야 합니다."
+msgstr "이 필드는 'galaxy.'로 시작해야 합니다."
 
 #: src/components/rbac/delete-group-modal.tsx:67
 msgid "This group can include users"

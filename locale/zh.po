@@ -1913,15 +1913,15 @@ msgstr "修改 Ansible repo 内容"
 
 #: src/components/namespace-form/namespace-form.tsx:80
 msgid "Moved to the <0>Namespace owners</0> <1/> tab"
-msgstr "移到 <0>Namespace owners</0> <1/> 标签页"
+msgstr "移到 <0>命名空间所有者</0> <1/> 标签页"
 
 #: src/components/execution-environment/repository-form.tsx:369
 msgid "Moved to the <0>Owners</0> <1/> tab"
-msgstr "移到 <0>Owners</0> <1/> 标签页"
+msgstr "移到 <0>所有者</0> <1/> 标签页"
 
 #: src/components/execution-environment/repository-form.tsx:365
 msgid "Moved to the <0>Owners</0> tab"
-msgstr "移到 <0>Owners</0> 标签页"
+msgstr "移到 <0>所有者</0> 标签页"
 
 #: src/components/repositories/remote-form.tsx:687
 msgid "Must be an integer."
