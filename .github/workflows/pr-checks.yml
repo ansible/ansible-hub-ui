@@ -52,7 +52,7 @@ jobs:
         popd
 
         # dependencies
-        pip install lint-po yamllint
+        npm run lint-setup
 
         # run linters
         npm run lint
