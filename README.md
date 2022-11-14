@@ -26,10 +26,6 @@ The app will run on http://localhost:8002 and proxy requests for `api/automation
 - This project imports Patternfly components:
   - [Patternfly React](https://github.com/patternfly/patternfly-react)
 
-## Insights Components
-
-Insights Platform will deliver components and static assets through [npm](https://www.npmjs.com/package/@red-hat-insights/insights-frontend-components). ESI tags are used to import the [chroming](https://github.com/RedHatInsights/insights-chrome) which takes care of the header, sidebar, and footer.
-
 ## UI Testing
 
 For more information about UI testing go to [test README](https://github.com/ansible/ansible-hub-ui/tree/master/test/README.md).

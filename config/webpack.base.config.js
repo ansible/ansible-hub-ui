@@ -1,8 +1,6 @@
 /* global require, module, __dirname */
 const { resolve } = require('path');
 const config = require('@redhat-cloud-services/frontend-components-config');
-const webpack = require('webpack');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isBuild = process.env.NODE_ENV === 'production';
@@ -74,6 +72,7 @@ module.exports = (inputConfigs) => {
 
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
+    definePlugin: globals,
     htmlPlugin: htmlPluginConfig,
     debug: customConfigs.UI_DEBUG,
     https: customConfigs.UI_USE_HTTPS,
@@ -83,6 +82,12 @@ module.exports = (inputConfigs) => {
 
     // frontend-components-config 4.5.0+: don't remove patternfly from non-insights builds
     bundlePfModules: isStandalone,
+
+    // frontend-components-config 4.6.9+: keep HtmlWebpackPlugin for standalone
+    useChromeTemplate: !isStandalone,
+
+    // frontend-components-config 4.6.25-29+: ensure hashed filenames
+    useFileHash: true,
   });
 
   // Override sections of the webpack config to work with TypeScript
@@ -154,8 +159,7 @@ module.exports = (inputConfigs) => {
     newWebpackConfig.entry.App = newEntry;
   }
 
-  plugins.push(new webpack.DefinePlugin(globals));
-  plugins.push(new ForkTsCheckerWebpackPlugin());
+  // ForkTsCheckerWebpackPlugin is part of default config since @redhat-cloud-services/frontend-components-config 4.6.24
 
   return {
     ...newWebpackConfig,
