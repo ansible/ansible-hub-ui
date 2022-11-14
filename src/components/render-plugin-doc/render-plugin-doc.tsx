@@ -1,40 +1,12 @@
 import * as React from 'react';
 import './render-plugin-doc.scss';
 
-import { PluginContentType } from 'src/api';
-
-class PluginOption {
-  name: string;
-  description: string[];
-  type: string;
-  required: boolean;
-  default?: string | number | boolean;
-  aliases?: string[];
-  suboptions?: PluginOption[];
-}
-
-class PluginDoc {
-  short_description: string;
-  description: string[];
-  options?: PluginOption[];
-  requirements?: string[];
-  notes?: string[];
-  deprecated?: {
-    removed_in?: string;
-    alternative?: string;
-    why?: string;
-  };
-}
-
-class ReturnedValue {
-  name: string;
-  description: string[];
-  returned: string;
-  type: string;
-  // if string: display the value, if object or list return JSON
-  sample: any;
-  contains: ReturnedValue[];
-}
+import {
+  PluginContentType,
+  PluginDoc,
+  PluginOption,
+  ReturnedValue,
+} from 'src/api';
 
 // Documentation for module doc string spec
 // https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_documenting.html
@@ -70,7 +42,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     };
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error) {
     console.log(error);
     this.setState({ renderError: true });
   }
@@ -85,7 +57,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       let doc: PluginDoc;
       let example: string;
       let returnVals: ReturnedValue[];
-      let content: any;
+      let content;
       try {
         doc = this.parseDocString(plugin);
         example = this.parseExamples(plugin);
@@ -184,7 +156,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       if (depth > maxDepth) {
         maxDepth = depth;
       }
-      for (let op of options) {
+      for (const op of options) {
         // Description is expected to be an array of strings. If its not,
         // do what we can to make it one
         op.description = this.ensureListofStrings(op.description);
@@ -242,7 +214,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       if (depth > maxDepth) {
         maxDepth = depth;
       }
-      for (let ret of returnV) {
+      for (const ret of returnV) {
         // Description is expected to be an array of strings. If its not,
         // do what we can to make it one
         ret.description = this.ensureListofStrings(ret.description);
@@ -307,12 +279,13 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
       const textMatch = match[2];
 
       switch (type) {
-        case 'L':
+        case 'L': {
           const url = textMatch.split(',');
           return renderDocLink(url[0], url[1]);
+        }
         case 'U':
           return (
-            <a href={textMatch} target='_blank'>
+            <a href={textMatch} target='_blank' rel='noreferrer'>
               {textMatch}
             </a>
           );
@@ -377,7 +350,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     );
   }
 
-  private renderTableOfContents(content: any) {
+  private renderTableOfContents(content) {
     // return this.props.renderTableOfContentsLink('Synopsis', 'synopsis');
 
     return (
@@ -481,7 +454,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     parent: string,
   ) {
     let output = [];
-    parameters.forEach((option, i) => {
+    parameters.forEach((option) => {
       const spacers = [];
       const key = `${parent}-${option.name}`;
       for (let x = 0; x < depth; x++) {
@@ -586,7 +559,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
         {option['vars'] ? (
           <div className='plugin-config'>
             {option['vars'].map((v, i) => (
-              <div>var: {v.name}</div>
+              <div key={i}>var: {v.name}</div>
             ))}
           </div>
         ) : null}
@@ -713,7 +686,7 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
   ) {
     let entries = [];
 
-    returnValues.forEach((option, i) => {
+    returnValues.forEach((option) => {
       const spacers = [];
       for (let x = 0; x < depth; x++) {
         spacers.push(<td key={x} colSpan={1} className='spacer' />);

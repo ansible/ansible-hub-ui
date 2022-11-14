@@ -5,12 +5,13 @@
     padding: 5px;
     vertical-align: top;
   }
+
   ul {
-    margin-top: 0px;
+    margin-top: 0;
   }
 
   small {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   // ensures the bottom of the table always has a border even
@@ -21,12 +22,12 @@
 
   .spacer {
     width: 20px;
-    border-top: 0px;
-    border-bottom: 0px;
+    border-top: 0;
+    border-bottom: 0;
   }
 
   .parent {
-    border-bottom: 0px;
+    border-bottom: 0;
   }
 }
 
@@ -59,5 +60,5 @@
   font-family: var(--pf-global--FontFamily--monospace);
   display: inline-block;
   border-radius: 2px;
-  padding: 0px 2px 0px 2px;
+  padding: 0 2px;
 }
