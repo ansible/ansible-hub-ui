@@ -1,5 +1,5 @@
-const webpackBase = require('./webpack.base.config');
 process.env.NODE_ENV = 'production';
+const webpackBase = require('./webpack.base.config');
 
 // Compile configuration for stnadalone mode
 module.exports = webpackBase({
