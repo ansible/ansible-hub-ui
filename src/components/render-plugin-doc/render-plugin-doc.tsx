@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './render-plugin-doc.scss';
 
-import { PluginContentType } from './types';
+import { PluginContentType } from 'src/api';
 
 class PluginOption {
   name: string;
