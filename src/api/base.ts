@@ -14,7 +14,9 @@ export class BaseAPI {
   constructor() {
     this.http = axios.create({
       baseURL: this.apiBaseURL,
-      paramsSerializer: (params) => ParamHelper.getQueryString(params),
+      paramsSerializer: {
+        serialize: (params) => ParamHelper.getQueryString(params),
+      },
     });
 
     this.http.interceptors.request.use((request) => this.authHandler(request));
