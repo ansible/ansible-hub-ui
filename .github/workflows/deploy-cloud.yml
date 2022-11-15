@@ -41,7 +41,7 @@ jobs:
         echo -e "TRAVIS_COMMIT_MESSAGE<<EOF\n${TRAVIS_COMMIT_MESSAGE}\nEOF" >> $GITHUB_ENV
 
     - name: "Install node 16"
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '16'
 
