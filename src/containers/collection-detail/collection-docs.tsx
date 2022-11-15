@@ -9,13 +9,12 @@ import { Alert } from '@patternfly/react-core';
 
 import {
   CollectionHeader,
-  TableOfContents,
+  EmptyStateCustom,
   LoadingPageWithHeader,
   Main,
-  EmptyStateCustom,
+  RenderPluginDoc,
+  TableOfContents,
 } from 'src/components';
-
-import { RenderPluginDoc } from '@ansible/galaxy-doc-builder';
 
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
