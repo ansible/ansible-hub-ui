@@ -28,6 +28,7 @@ interface IState {
     galaxy_ng_commit: string;
     pulp_ansible_version: string;
     server_version: string;
+    aap_version: string;
   };
 }
 
@@ -39,6 +40,7 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
         galaxy_ng_commit: '',
         pulp_ansible_version: '',
         server_version: '',
+        aap_version: '',
       },
     };
   }
@@ -50,6 +52,7 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
           galaxy_ng_commit: result.data.galaxy_ng_commit,
           pulp_ansible_version: result.data.pulp_ansible_version,
           server_version: result.data.server_version,
+          aap_version: result.data?.aap_version,
         },
       });
     });
@@ -91,6 +94,13 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
 
             <Label>{t`Pulp Ansible Version`}</Label>
             <Value>{this.state.applicationInfo.pulp_ansible_version}</Value>
+
+            {this.state.applicationInfo?.aap_version && (
+              <>
+                <Label>{t`Ansible Automation Platform`}</Label>
+                <Value>{this.state.applicationInfo.aap_version}</Value>
+              </>
+            )}
 
             <Label>{t`UI Version`}</Label>
             <Value>{UI_COMMIT_HASH}</Value>
