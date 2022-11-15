@@ -307,6 +307,7 @@ class App extends React.Component<RouteComponentProps, IState> {
     // Hide navs on login page
     if (
       this.props.location.pathname === Paths.login ||
+      this.props.location.pathname === formatPath(Paths.login, {}) ||
       this.props.location.pathname === UI_EXTERNAL_LOGIN_URI
     ) {
       return this.ctx(<Routes updateInitialData={this.updateInitialData} />);
