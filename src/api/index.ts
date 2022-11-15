@@ -6,13 +6,16 @@ export {
   NamespaceLinkType,
 } from './response-types/namespace';
 export {
-  CollectionListType,
   CollectionDetailType,
+  CollectionListType,
+  CollectionUploadType,
+  CollectionVersion,
+  ContentSummaryType,
   DocsBlobType,
   PluginContentType,
-  CollectionUploadType,
-  ContentSummaryType,
-  CollectionVersion,
+  PluginDoc,
+  PluginOption,
+  ReturnedValue,
 } from './response-types/collection';
 export {
   ImportListType,
