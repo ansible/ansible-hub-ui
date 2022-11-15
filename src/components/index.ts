@@ -58,6 +58,7 @@ export { Pagination } from './patternfly-wrappers/pagination';
 export { PartnerHeader } from './headers/partner-header';
 export { PermissionChipSelector } from './rbac/permission-chip-selector';
 export { PublishToControllerModal } from './execution-environment/publish-to-controller-modal';
+export { RenderPluginDoc } from './render-plugin-doc/render-plugin-doc';
 export { RemoteForm } from './repositories/remote-form';
 export { RemoteRepositoryTable } from './repositories/remote-repository-table';
 export { RepoSelector } from './repo-selector/repo-selector';
