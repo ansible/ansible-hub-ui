@@ -26,7 +26,7 @@ jobs:
         echo "TRAVIS_BRANCH=${TRAVIS_BRANCH}" >> $GITHUB_ENV
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: "Install node 16"
       uses: actions/setup-node@v3

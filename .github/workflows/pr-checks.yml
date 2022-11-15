@@ -12,7 +12,7 @@ jobs:
     steps:
 
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         ref: ${{ github.event.after }}  # for PR avoids checking out merge commit
         fetch-depth: 0  # include all history
@@ -31,7 +31,7 @@ jobs:
     steps:
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: "Install node 16"
       uses: actions/setup-node@v3
@@ -64,7 +64,7 @@ jobs:
     # need to checkout out head, the merge commit won't have any merges in history
     # also need more than 1 commit, assuming no PR will have more than 128
     - name: "Checkout ansible-hub-ui HEAD"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 128
         ref: ${{ github.event.pull_request.head.sha }}
@@ -83,13 +83,13 @@ jobs:
     steps:
 
     - name: "Checkout ansible-hub-ui (${{ github.base_ref }})"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         ref: ${{ github.base_ref }}
         path: 'base'
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         path: 'pr'
 
