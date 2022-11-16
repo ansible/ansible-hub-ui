@@ -1,3 +1,5 @@
+const apiPrefix = Cypress.env('apiPrefix');
+
 describe('Remote Registry Tests', () => {
   before(() => {
     cy.visit('/');
@@ -63,7 +65,7 @@ describe('Remote Registry Tests', () => {
 
     cy.intercept(
       'POST',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/*/sync',
+      apiPrefix + '_ui/v1/execution-environments/registries/*/sync',
     ).as('sync');
 
     cy.get(
@@ -105,7 +107,7 @@ describe('Remote Registry Tests', () => {
 
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
+      apiPrefix + '_ui/v1/execution-environments/registries/?*',
     ).as('registriesGet');
 
     cy.contains('button', 'Save').click();

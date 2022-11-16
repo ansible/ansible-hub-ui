@@ -1,3 +1,5 @@
+const apiPrefix = Cypress.env('apiPrefix');
+
 describe('user detail tests all fields, editing, and deleting', () => {
   const num = (~~(Math.random() * 1000000)).toString();
 
@@ -36,9 +38,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.get('button[type=submit]').click();
 
     cy.visit('/ui/users');
-    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/users/*/').as(
-      'testUser',
-    );
+    cy.intercept('GET', apiPrefix + '_ui/v1/users/*/').as('testUser');
     cy.contains('testUser').click();
     cy.wait('@testUser');
 
@@ -66,7 +66,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.reload();
     //checks those fields
     cy.visit('/ui/users');
-    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/users/*/').as('user');
+    cy.intercept('GET', apiPrefix + '_ui/v1/users/*/').as('user');
     cy.contains('testUser').click();
     cy.wait('@user');
     cy.get('[data-cy="DataForm-field-first_name"]').contains('new_first_name');
@@ -94,8 +94,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.get('button[type="submit"]').click();
     cy.intercept(
       'GET',
-      Cypress.env('prefix') +
-        '_ui/v1/repo/published/?deprecated=false&offset=0&limit=10',
+      apiPrefix + '_ui/v1/repo/published/?deprecated=false&offset=0&limit=10',
     );
 
     //unable to log in with test credentials

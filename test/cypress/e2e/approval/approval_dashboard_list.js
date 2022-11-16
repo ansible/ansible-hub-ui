@@ -1,5 +1,7 @@
 import { range, sortBy } from 'lodash';
 
+const apiPrefix = Cypress.env('apiPrefix');
+
 describe('Approval Dashboard list tests for sorting, paging and filtering', () => {
   let items = [];
 
@@ -29,7 +31,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     // we cant delete all data using galaxykit right now, because when collection is rejected
     // it cant be deleted. So we must load the data, that are right now in the table
     let intercept_url =
-      Cypress.env('prefix') +
+      apiPrefix +
       '_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=100';
 
     cy.visit('/ui/approval-dashboard?page_size=100');

@@ -1,3 +1,5 @@
+const apiPrefix = Cypress.env('apiPrefix');
+
 describe('Task detail', () => {
   before(() => {
     cy.login();
@@ -6,14 +8,11 @@ describe('Task detail', () => {
     cy.contains('Repo Management');
     cy.contains('Sync');
 
-    cy.intercept(
-      'POST',
-      Cypress.env('prefix') + 'content/rh-certified/v3/sync/',
-    ).as('sync');
-
-    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/remotes/?*').as(
-      'remotes',
+    cy.intercept('POST', apiPrefix + 'content/rh-certified/v3/sync/').as(
+      'sync',
     );
+
+    cy.intercept('GET', apiPrefix + '_ui/v1/remotes/?*').as('remotes');
 
     cy.get('tr').eq(2).contains('Sync').click();
 

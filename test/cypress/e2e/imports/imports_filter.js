@@ -1,3 +1,5 @@
+const apiPrefix = Cypress.env('apiPrefix');
+
 describe('Imports filter test', () => {
   const testCollection = `test_collection_${Math.random()
     .toString(36)
@@ -68,17 +70,14 @@ describe('Imports filter test', () => {
 
     cy.intercept(
       'GET',
-      Cypress.env('prefix') +
-        '_ui/v1/imports/collections/?namespace=test_namespace&*',
+      apiPrefix + '_ui/v1/imports/collections/?namespace=test_namespace&*',
     ).as('collectionsInNamespace');
+    cy.intercept('GET', apiPrefix + '_ui/v1/imports/collections/*').as(
+      'collectionDetail',
+    );
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/imports/collections/*',
-    ).as('collectionDetail');
-    cy.intercept(
-      'GET',
-      Cypress.env('prefix') +
-        '_ui/v1/collection-versions/?namespace=test_namespace&name=*',
+      apiPrefix + '_ui/v1/collection-versions/?namespace=test_namespace&name=*',
     ).as('collectionVersions');
 
     cy.get('[placeholder="Select namespace"]').clear();
@@ -93,16 +92,15 @@ describe('Imports filter test', () => {
 
     cy.intercept(
       'GET',
-      Cypress.env('prefix') +
+      apiPrefix +
         '_ui/v1/imports/collections/?namespace=filter_test_namespace&*',
     ).as('collectionsInNamespace2');
+    cy.intercept('GET', apiPrefix + '_ui/v1/imports/collections/*').as(
+      'collectionDetail2',
+    );
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/imports/collections/*',
-    ).as('collectionDetail2');
-    cy.intercept(
-      'GET',
-      Cypress.env('prefix') +
+      apiPrefix +
         '_ui/v1/collection-versions/?namespace=filter_test_namespace&name=*',
     ).as('collectionVersions2');
 

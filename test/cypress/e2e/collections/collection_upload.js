@@ -1,3 +1,5 @@
+const apiPrefix = Cypress.env('apiPrefix');
+
 describe('Collection Upload Tests', () => {
   const userName = 'testUser';
   const userPassword = 'I am a complicated passw0rd';
@@ -74,13 +76,11 @@ describe('Collection Upload Tests', () => {
   it('user should not be able to upload new collection without permissions', () => {
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+      apiPrefix + '_ui/v1/collection-versions/?namespace=*',
     ).as('upload');
     cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
-    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/repo/published/*').as(
-      'namespaces',
-    );
+    cy.intercept('GET', apiPrefix + '_ui/v1/repo/published/*').as('namespaces');
 
     cy.get('a[href="/ui/repo/published/ansible/"]').click();
     cy.wait('@namespaces');
@@ -91,13 +91,11 @@ describe('Collection Upload Tests', () => {
     cy.login();
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/collection-versions/?namespace=*',
+      apiPrefix + '_ui/v1/collection-versions/?namespace=*',
     ).as('upload');
     cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
-    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/repo/published/*').as(
-      'namespaces',
-    );
+    cy.intercept('GET', apiPrefix + '_ui/v1/repo/published/*').as('namespaces');
 
     cy.get('a[href="/ui/repo/published/ansible/"]').click();
     cy.wait('@namespaces');

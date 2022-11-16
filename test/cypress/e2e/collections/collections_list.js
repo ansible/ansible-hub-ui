@@ -1,5 +1,7 @@
 import { range } from 'lodash';
 
+const apiPrefix = Cypress.env('apiPrefix');
+
 describe('Collections list Tests', () => {
   function deprecate(list) {
     const container = list ? '.hub-list' : '.hub-cards';
@@ -30,7 +32,7 @@ describe('Collections list Tests', () => {
     // that is because when you deprecate, delete collection and upload it again, the collection
     // stays deprecated
     let request_url =
-      Cypress.env('prefix') +
+      apiPrefix +
       '_ui/v1/repo/published/?limit=1&name=my_collection0&offset=0"';
 
     cy.request(request_url).then((data) => {

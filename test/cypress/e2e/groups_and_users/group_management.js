@@ -1,3 +1,5 @@
+const apiPrefix = Cypress.env('apiPrefix');
+
 describe('Hub Group Management Tests', () => {
   before(() => {
     cy.deleteTestGroups();
@@ -47,7 +49,7 @@ describe('Hub Group Management Tests', () => {
     cy.createRole(roleName, 'This role has all galaxy perms', [], true);
 
     // add role to group manually
-    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/groups/*').as('groups');
+    cy.intercept('GET', apiPrefix + '_ui/v1/groups/*').as('groups');
     cy.menuGo('User Access > Groups');
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
     cy.wait('@groups');
