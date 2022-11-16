@@ -1,4 +1,5 @@
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Imports filter test', () => {
   const testCollection = `test_collection_${Math.random()
@@ -25,7 +26,7 @@ describe('Imports filter test', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/ui/my-imports?namespace=filter_test_namespace');
+    cy.visit(uiPrefix + 'my-imports?namespace=filter_test_namespace');
   });
 
   it('partial filter for name is working.', () => {

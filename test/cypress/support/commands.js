@@ -4,6 +4,7 @@ import shell from 'shell-escape-tag';
 import { range } from 'lodash';
 
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
@@ -51,7 +52,7 @@ Cypress.Commands.add('apiLogin', {}, (username, password) => {
 Cypress.Commands.add('manualLogin', {}, (username, password) => {
   cy.intercept('POST', apiPrefix + '_ui/v1/auth/login/').as('login');
   cy.intercept('GET', apiPrefix + '_ui/v1/feature-flags/').as('feature-flags');
-  cy.visit('/ui/login');
+  cy.visit(uiPrefix + 'login');
   cy.get('#pf-login-username-id').type(username);
   cy.get('#pf-login-password-id').type(`${password}{enter}`);
   cy.wait('@login');
@@ -514,7 +515,7 @@ Cypress.Commands.add('deleteRegistriesManual', {}, () => {
     apiPrefix + '_ui/v1/execution-environments/registries/?*',
   ).as('registries');
 
-  cy.visit('/ui/registries');
+  cy.visit(uiPrefix + 'registries');
 
   cy.wait('@registries').then((result) => {
     var data = result.response.body.data;
@@ -535,7 +536,7 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
     apiPrefix + '_ui/v1/execution-environments/registries/?*',
   ).as('registries');
 
-  cy.visit('/ui/registries?page_size=100');
+  cy.visit(uiPrefix + 'registries?page_size=100');
 
   cy.wait('@registries').then((result) => {
     var data = result.response.body.data;
@@ -551,7 +552,7 @@ Cypress.Commands.add('deleteContainers', {}, () => {
     apiPrefix + 'v3/plugin/execution-environments/repositories/?*',
   ).as('listLoad');
 
-  cy.visit('/ui/containers?page_size=100');
+  cy.visit(uiPrefix + 'containers?page_size=100');
 
   cy.wait('@listLoad').then((result) => {
     var data = result.response.body.data;
@@ -567,7 +568,7 @@ Cypress.Commands.add('deleteContainersManual', {}, () => {
     apiPrefix + 'v3/plugin/execution-environments/repositories/?*',
   ).as('listLoad');
 
-  cy.visit('/ui/containers');
+  cy.visit(uiPrefix + 'containers');
 
   cy.wait('@listLoad').then((result) => {
     var data = result.response.body.data;
@@ -646,7 +647,7 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('deleteRole', {}, (role) => {
-  cy.visit('/ui/roles/');
+  cy.visit(uiPrefix + 'roles/');
 
   cy.get(
     `[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle]`,

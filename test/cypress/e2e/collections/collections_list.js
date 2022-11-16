@@ -1,6 +1,7 @@
 import { range } from 'lodash';
 
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Collections list Tests', () => {
   function deprecate(list) {
@@ -18,7 +19,7 @@ describe('Collections list Tests', () => {
   }
 
   function undeprecate() {
-    cy.visit('/ui/repo/published/my_namespace/my_collection0');
+    cy.visit(uiPrefix + 'repo/published/my_namespace/my_collection0');
     cy.contains('This collection has been deprecated.');
     cy.get('[aria-label=Actions]').click();
     cy.contains('Undeprecate').click();
@@ -59,7 +60,7 @@ describe('Collections list Tests', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/ui/repo/published');
+    cy.visit(uiPrefix + 'repo/published');
     cy.contains('Collections');
   });
 
@@ -156,7 +157,7 @@ describe('Collections list Tests', () => {
   });
 
   it('Can delete collection in namespace collection list', () => {
-    cy.visit('/ui/repo/published/my_namespace');
+    cy.visit(uiPrefix + 'repo/published/my_namespace');
     cy.get('.toolbar')
       .get('[aria-label="keywords"]:first')
       .type('my_collection1{enter}');

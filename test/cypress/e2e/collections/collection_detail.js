@@ -1,6 +1,9 @@
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Collection detail', () => {
   const baseURL =
-    '/ui/repo/published/collection_detail_test_namespace/collection_detail_test_collection';
+    uiPrefix +
+    'repo/published/collection_detail_test_namespace/collection_detail_test_collection';
 
   function deprecate() {
     cy.get('[aria-label=Actions]').click();
@@ -104,7 +107,7 @@ describe('Collection detail', () => {
     cy.get('.body').contains('Installation');
 
     cy.get('.body').contains(
-      'a[href="/ui/repo/published/collection_detail_test_namespace/collection_detail_test_collection/docs/"]',
+      `a[href="${uiPrefix}repo/published/collection_detail_test_namespace/collection_detail_test_collection/docs/"]`,
       'Go to documentation',
     );
 

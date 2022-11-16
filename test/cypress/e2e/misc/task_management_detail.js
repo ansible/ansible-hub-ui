@@ -1,9 +1,10 @@
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Task detail', () => {
   before(() => {
     cy.login();
-    cy.visit('/ui/repositories?tab=remote');
+    cy.visit(uiPrefix + 'repositories?tab=remote');
 
     cy.contains('Repo Management');
     cy.contains('Sync');
@@ -22,7 +23,7 @@ describe('Task detail', () => {
 
   it('contains correct headers and field names.', () => {
     cy.login();
-    cy.visit('/ui/tasks');
+    cy.visit(uiPrefix + 'tasks');
     cy.contains('pulp_ansible.app.tasks.collections.sync').click();
 
     cy.contains('h1', 'Pulp Ansible: Collections sync');

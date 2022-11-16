@@ -1,4 +1,5 @@
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 describe('user detail tests all fields, editing, and deleting', () => {
   const num = (~~(Math.random() * 1000000)).toString();
@@ -29,7 +30,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
     //  { group: 'users', permissions: ['View user'] },
     //]);
 
-    cy.visit('/ui/users');
+    cy.visit(uiPrefix + 'users');
     cy.contains('testUser').click();
     cy.contains('Edit').click();
     selectInput('first_name').type('first_name');
@@ -37,7 +38,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
     selectInput('email').type('example@example.com');
     cy.get('button[type=submit]').click();
 
-    cy.visit('/ui/users');
+    cy.visit(uiPrefix + 'users');
     cy.intercept('GET', apiPrefix + '_ui/v1/users/*/').as('testUser');
     cy.contains('testUser').click();
     cy.wait('@testUser');
@@ -55,7 +56,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
   });
 
   it('edits user', () => {
-    cy.visit('/ui/users');
+    cy.visit(uiPrefix + 'users');
     cy.contains('testUser').click();
     //edits some fields
     cy.contains('Edit').click();
@@ -65,7 +66,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.get('button[type=submit]').click();
     cy.reload();
     //checks those fields
-    cy.visit('/ui/users');
+    cy.visit(uiPrefix + 'users');
     cy.intercept('GET', apiPrefix + '_ui/v1/users/*/').as('user');
     cy.contains('testUser').click();
     cy.wait('@user');
@@ -77,7 +78,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
   });
 
   it('deletes user', () => {
-    cy.visit('/ui/users');
+    cy.visit(uiPrefix + 'users');
     cy.contains('testUser').click();
     cy.contains('Delete').click();
     cy.get('[data-cy="delete-button"]').click();
@@ -99,7 +100,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
 
     //unable to log in with test credentials
 
-    cy.get('a[href*="/ui/users/"]').click();
+    cy.get(`a[href*="${uiPrefix}users/"]`).click();
     cy.contains('User detail');
     cy.contains('Edit').should('not.exist');
     cy.contains('Delete').should('not.exist');

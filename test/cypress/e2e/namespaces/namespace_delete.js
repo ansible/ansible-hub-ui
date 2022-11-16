@@ -1,4 +1,5 @@
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Delete a namespace', () => {
   beforeEach(() => {
@@ -12,7 +13,7 @@ describe('Delete a namespace', () => {
     cy.intercept('GET', apiPrefix + '_ui/v1/namespaces/?sort=name*').as(
       'reload',
     );
-    cy.get('a[href*="ui/repo/published/testns1"]').click();
+    cy.get(`a[href*="${uiPrefix}repo/published/testns1"]`).click();
     cy.get('[data-cy="ns-kebab-toggle"]').click();
     cy.contains('Delete namespace').click();
     cy.get('input[id=delete_confirm]').click();
@@ -33,7 +34,7 @@ describe('Delete a namespace', () => {
     cy.menuGo('Collections > Namespaces');
     cy.wait('@reload');
 
-    cy.get('a[href*="ui/repo/published/ansible"]').click();
+    cy.get(`a[href*="${uiPrefix}repo/published/ansible"]`).click();
 
     //upload a collection
 

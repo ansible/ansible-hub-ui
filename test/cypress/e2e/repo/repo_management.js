@@ -1,8 +1,9 @@
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Repo Management tests', () => {
-  let remoteRepoUrl = '/ui/repositories?tab=remote';
-  let localRepoUrl = '/ui/repositories';
+  let remoteRepoUrl = uiPrefix + 'repositories?tab=remote';
+  let localRepoUrl = uiPrefix + 'repositories';
 
   let noPrivilegesUser0 = 'noPrivilegesUser0';
 

@@ -1,4 +1,5 @@
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 describe('tests the approval list screen ', () => {
   before(() => {
@@ -11,7 +12,7 @@ describe('tests the approval list screen ', () => {
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'ansible');
     cy.galaxykit('-i collection upload ansible network');
-    cy.visit('/ui/approval-dashboard');
+    cy.visit(uiPrefix + 'approval-dashboard');
   });
 
   after(() => {

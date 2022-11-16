@@ -1,4 +1,5 @@
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Token Management Tests', () => {
   before(() => {
@@ -11,7 +12,7 @@ describe('Token Management Tests', () => {
   });
 
   it('user can load token', () => {
-    cy.visit('/ui/token');
+    cy.visit(uiPrefix + 'token');
     cy.intercept('POST', apiPrefix + 'v3/auth/token/').as('tokenPost');
 
     cy.contains('Load token').click();

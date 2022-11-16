@@ -1,3 +1,5 @@
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Edit a namespace', () => {
   let kebabToggle = () => {
     return cy.get('button[id^=pf-dropdown-toggle-id-] > svg').parent().click();
@@ -44,7 +46,7 @@ describe('Edit a namespace', () => {
     cy.login();
     cy.galaxykit('-i namespace create', 'testns1');
     cy.menuGo('Collections > Namespaces');
-    cy.get('a[href*="ui/repo/published/testns1"]').click();
+    cy.get(`a[href*="${uiPrefix}repo/published/testns1"]`).click();
     kebabToggle();
     cy.contains('Edit namespace').click();
   });
@@ -70,7 +72,7 @@ describe('Edit a namespace', () => {
   it('saves a new company name', () => {
     cy.get('#company').clear().type('Company name');
     saveButton().click();
-    cy.url().should('match', /\/ui\/repo\/published\/testns1/);
+    cy.url().should('match', new RegExp(`${uiPrefix}repo/published/testns1`));
     cy.get('.pf-c-title').should('contain', 'Company name');
   });
 

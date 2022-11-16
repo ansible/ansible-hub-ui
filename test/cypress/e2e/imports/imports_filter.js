@@ -1,4 +1,5 @@
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Imports filter test', () => {
   const testCollection = `test_collection_${Math.random()
@@ -25,11 +26,11 @@ describe('Imports filter test', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/ui/my-imports?namespace=filter_test_namespace');
+    cy.visit(uiPrefix + 'my-imports?namespace=filter_test_namespace');
   });
 
   it('should display success info after importing collection', () => {
-    cy.visit('/ui/my-imports?namespace=test_namespace');
+    cy.visit(uiPrefix + 'my-imports?namespace=test_namespace');
 
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).click();
     cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
@@ -45,7 +46,7 @@ describe('Imports filter test', () => {
 
   it('should fail on importing existing collection', () => {
     cy.galaxykit('-i collection upload', 'test_namespace', testCollection);
-    cy.visit('/ui/my-imports?namespace=test_namespace');
+    cy.visit(uiPrefix + 'my-imports?namespace=test_namespace');
 
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
     cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(

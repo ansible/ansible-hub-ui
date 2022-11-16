@@ -1,7 +1,8 @@
 const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
 
 describe('edit a remote repository', () => {
-  let remoteRepoUrl = '/ui/repositories?tab=remote';
+  let remoteRepoUrl = uiPrefix + 'repositories?tab=remote';
 
   beforeEach(() => {
     cy.login();

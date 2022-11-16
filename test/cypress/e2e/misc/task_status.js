@@ -1,7 +1,9 @@
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('test status filter label on list view', () => {
   before(() => {
     cy.login();
-    cy.visit('/ui/tasks');
+    cy.visit(uiPrefix + 'tasks');
     cy.intercept(
       'GET',
       Cypress.env('pulpPrefix') +
