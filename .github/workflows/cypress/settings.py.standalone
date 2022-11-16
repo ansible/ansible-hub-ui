@@ -2,7 +2,6 @@ ANSIBLE_API_HOSTNAME='http://localhost:8002'
 ANSIBLE_CONTENT_HOSTNAME='http://localhost:8002/api/galaxy/v3/artifacts/collections'
 CONTENT_ORIGIN='http://localhost:8002'
 GALAXY_API_PATH_PREFIX='/api/galaxy/'
-GALAXY_AUTHENTICATION_CLASSES=['rest_framework.authentication.SessionAuthentication', 'rest_framework.authentication.TokenAuthentication']
 GALAXY_DEPLOYMENT_MODE='standalone'
 PULP_CONTENT_PATH_PREFIX='/api/galaxy/v3/artifacts/collections/'
 RH_ENTITLEMENT_REQUIRED='insights'
