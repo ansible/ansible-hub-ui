@@ -147,7 +147,7 @@ msgid "API token"
 msgstr "API token"
 
 #: src/containers/token/token-standalone.tsx:52
-#: src/loaders/standalone/standalone-loader.tsx:361
+#: src/loaders/standalone/standalone-loader.tsx:362
 msgid "API token management"
 msgstr "API token management"
 
@@ -286,7 +286,11 @@ msgstr "Allow all actions on a task."
 msgid "Allow all actions on a taskschedule."
 msgstr "Allow all actions on a taskschedule."
 
-#: src/loaders/standalone/standalone-loader.tsx:365
+#: src/components/about-modal/about-modal.tsx:100
+msgid "Ansible Automation Platform"
+msgstr "Ansible Automation Platform"
+
+#: src/loaders/standalone/standalone-loader.tsx:366
 msgid "Approval"
 msgstr "Approval"
 
@@ -321,11 +325,11 @@ msgstr "Authentication provider"
 msgid "Browse..."
 msgstr "Browse..."
 
-#: src/components/about-modal/about-modal.tsx:107
+#: src/components/about-modal/about-modal.tsx:117
 msgid "Browser OS"
 msgstr "Browser OS"
 
-#: src/components/about-modal/about-modal.tsx:104
+#: src/components/about-modal/about-modal.tsx:114
 msgid "Browser Version"
 msgstr "Browser Version"
 
@@ -633,15 +637,15 @@ msgstr "Collection version {0} was not found in the system. You must upload it."
 msgid "Collection versions"
 msgstr "Collection versions"
 
-#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:46
 #~ msgid "Collection was not found in the system. You must upload it."
 #~ msgstr "Collection was not found in the system. You must upload it."
 
 #: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:237
 #: src/containers/search/search.tsx:199
-#: src/loaders/standalone/standalone-loader.tsx:342
 #: src/loaders/standalone/standalone-loader.tsx:343
+#: src/loaders/standalone/standalone-loader.tsx:344
 msgid "Collections"
 msgstr "Collections"
 
@@ -660,7 +664,7 @@ msgid "Community"
 msgstr "Community"
 
 #: src/components/collection-detail/collection-content-list.tsx:149
-#: src/containers/collection-detail/collection-docs.tsx:287
+#: src/containers/collection-detail/collection-docs.tsx:286
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "Community collections do not have docs nor content counts, but all content gets synchronized"
 
@@ -1119,8 +1123,8 @@ msgid "Docs site"
 msgstr "Docs site"
 
 #: src/components/headers/collection-header.tsx:578
-#: src/containers/collection-detail/collection-docs.tsx:125
-#: src/loaders/standalone/standalone-loader.tsx:394
+#: src/containers/collection-detail/collection-docs.tsx:124
+#: src/loaders/standalone/standalone-loader.tsx:395
 msgid "Documentation"
 msgstr "Documentation"
 
@@ -1428,8 +1432,8 @@ msgstr "Execution Environment"
 #: src/components/execution-environment-header/execution-environment-header.tsx:40
 #: src/containers/execution-environment-list/execution_environment_list.tsx:178
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:107
-#: src/loaders/standalone/standalone-loader.tsx:372
-#: src/loaders/standalone/standalone-loader.tsx:378
+#: src/loaders/standalone/standalone-loader.tsx:373
+#: src/loaders/standalone/standalone-loader.tsx:379
 msgid "Execution Environments"
 msgstr "Execution Environments"
 
@@ -1651,7 +1655,7 @@ msgstr "Group {groupId}"
 #: src/containers/group-management/group-detail.tsx:191
 #: src/containers/group-management/group-list.tsx:146
 #: src/containers/user-management/user-list.tsx:282
-#: src/loaders/standalone/standalone-loader.tsx:406
+#: src/loaders/standalone/standalone-loader.tsx:407
 msgid "Groups"
 msgstr "Groups"
 
@@ -2035,7 +2039,7 @@ msgstr "Namespace owners"
 #~ msgid "Namespace successfully edited."
 #~ msgstr "Namespace successfully edited."
 
-#: src/loaders/standalone/standalone-loader.tsx:351
+#: src/loaders/standalone/standalone-loader.tsx:352
 #: src/paths.ts:78
 msgid "Namespaces"
 msgstr "Namespaces"
@@ -2207,7 +2211,7 @@ msgstr "Not a super user"
 
 #: src/components/rbac/permission-chip-selector.tsx:82
 #: src/components/typeahead/typeahead.tsx:88
-#: src/containers/collection-detail/collection-docs.tsx:276
+#: src/containers/collection-detail/collection-docs.tsx:275
 msgid "Not found"
 msgstr "Not found"
 
@@ -2421,7 +2425,7 @@ msgstr "Pull private containers"
 msgid "Pull this image"
 msgstr "Pull this image"
 
-#: src/components/about-modal/about-modal.tsx:92
+#: src/components/about-modal/about-modal.tsx:95
 msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible Version"
 
@@ -2610,7 +2614,7 @@ msgstr "Remote"
 
 #: src/constants.tsx:87
 #: src/containers/execution-environment/registry-list.tsx:231
-#: src/loaders/standalone/standalone-loader.tsx:381
+#: src/loaders/standalone/standalone-loader.tsx:382
 msgid "Remote Registries"
 msgstr "Remote Registries"
 
@@ -2679,7 +2683,7 @@ msgstr "Repo Management"
 msgid "Repositories"
 msgstr "Repositories"
 
-#: src/loaders/standalone/standalone-loader.tsx:357
+#: src/loaders/standalone/standalone-loader.tsx:358
 msgid "Repository Management"
 msgstr "Repository Management"
 
@@ -2751,7 +2755,7 @@ msgstr "Role {0} has been successfully added to {1}."
 #: src/containers/role-management/role-create.tsx:60
 #: src/containers/role-management/role-edit.tsx:149
 #: src/containers/role-management/role-list.tsx:227
-#: src/loaders/standalone/standalone-loader.tsx:410
+#: src/loaders/standalone/standalone-loader.tsx:411
 msgid "Roles"
 msgstr "Roles"
 
@@ -2896,7 +2900,7 @@ msgstr "Server URL could not be displayed."
 msgid "Server error. Please come back later."
 msgstr "Server error. Please come back later."
 
-#: src/components/about-modal/about-modal.tsx:85
+#: src/components/about-modal/about-modal.tsx:88
 msgid "Server version"
 msgstr "Server version"
 
@@ -2956,7 +2960,7 @@ msgid "Signature"
 msgstr "Signature"
 
 #: src/containers/signature-keys/list.tsx:93
-#: src/loaders/standalone/standalone-loader.tsx:390
+#: src/loaders/standalone/standalone-loader.tsx:391
 msgid "Signature Keys"
 msgstr "Signature Keys"
 
@@ -3184,7 +3188,7 @@ msgstr "Task \"{taskName}\" stopped successfully."
 
 #: src/constants.tsx:96
 #: src/containers/task-management/task-list-view.tsx:123
-#: src/loaders/standalone/standalone-loader.tsx:386
+#: src/loaders/standalone/standalone-loader.tsx:387
 msgid "Task Management"
 msgstr "Task Management"
 
@@ -3280,7 +3284,7 @@ msgstr "The collection you have selected does not match this namespace."
 msgid "The collection you have selected doesn't appear to match {0}"
 msgstr "The collection you have selected doesn't appear to match {0}"
 
-#: src/containers/collection-detail/collection-docs.tsx:277
+#: src/containers/collection-detail/collection-docs.tsx:276
 msgid "The file is not available for this version of {collectionName}"
 msgstr "The file is not available for this version of {collectionName}"
 
@@ -3450,7 +3454,7 @@ msgstr "Training <0/>"
 msgid "Type"
 msgstr "Type"
 
-#: src/components/about-modal/about-modal.tsx:95
+#: src/components/about-modal/about-modal.tsx:105
 msgid "UI Version"
 msgstr "UI Version"
 
@@ -3608,11 +3612,11 @@ msgstr "User <0>{username}</0> will be removed from group <1>{groupname}</1>."
 #~ msgid "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
 #~ msgstr "User <0>{username}</0> will be removed from group<1>{groupname}</1>."
 
-#: src/loaders/standalone/standalone-loader.tsx:401
+#: src/loaders/standalone/standalone-loader.tsx:402
 msgid "User Access"
 msgstr "User Access"
 
-#: src/components/about-modal/about-modal.tsx:101
+#: src/components/about-modal/about-modal.tsx:111
 msgid "User Groups"
 msgstr "User Groups"
 
@@ -3629,7 +3633,7 @@ msgstr "User list"
 msgid "User type"
 msgstr "User type"
 
-#: src/components/about-modal/about-modal.tsx:98
+#: src/components/about-modal/about-modal.tsx:108
 #: src/components/rbac/user-form.tsx:88
 #: src/components/repositories/remote-form.tsx:355
 #: src/containers/group-management/group-detail.tsx:537
@@ -3651,7 +3655,7 @@ msgstr "Username: {0}"
 #: src/containers/user-management/user-detail.tsx:77
 #: src/containers/user-management/user-edit.tsx:62
 #: src/containers/user-management/user-list.tsx:139
-#: src/loaders/standalone/standalone-loader.tsx:402
+#: src/loaders/standalone/standalone-loader.tsx:403
 msgid "Users"
 msgstr "Users"
 
@@ -3771,7 +3775,7 @@ msgid "Waiting for {pendingTasks} task(s) to finish."
 msgstr "Waiting for {pendingTasks} task(s) to finish."
 
 #: src/components/collection-detail/collection-content-list.tsx:148
-#: src/containers/collection-detail/collection-docs.tsx:286
+#: src/containers/collection-detail/collection-docs.tsx:285
 msgid "Warning"
 msgstr "Warning"
 
