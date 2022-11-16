@@ -1,0 +1,13 @@
+ANSIBLE_API_HOSTNAME='http://localhost:8002'
+ANSIBLE_CONTENT_HOSTNAME='http://localhost:8002/api/galaxy/v3/artifacts/collections'
+CONTENT_ORIGIN='http://localhost:8002'
+GALAXY_API_PATH_PREFIX='/api/galaxy/'
+GALAXY_DEPLOYMENT_MODE='standalone'
+PULP_CONTENT_PATH_PREFIX='/api/galaxy/v3/artifacts/collections/'
+RH_ENTITLEMENT_REQUIRED='insights'
+TOKEN_AUTH_DISABLED=True
+X_PULP_CONTENT_HOST='localhost'
+GALAXY_REQUIRE_CONTENT_APPROVAL=False
+GALAXY_COLLECTION_SIGNING_SERVICE='ansible-default'
+GALAXY_CONTAINER_SIGNING_SERVICE='container-default'
+GALAXY_FEATURE_FLAGS__container_signing=True

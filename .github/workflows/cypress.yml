@@ -34,6 +34,7 @@ jobs:
         - 'repo'
         - 'misc'
         - 'imports'
+        - 'insights'
 
     steps:
 
@@ -42,16 +43,22 @@ jobs:
         # pip install git+https://github.com/ansible/galaxykit.git@branch_name
         pip install git+https://github.com/ansible/galaxykit.git
 
-    - name: "Set env.SHORT_BRANCH, env.GALAXY_NG_COMMIT"
+    - name: "Set env.SHORT_BRANCH, GALAXY_NG_COMMIT, COMPOSE_PROFILE, API_BASE"
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
         GALAXY_NG_COMMIT=`curl -s https://api.github.com/repos/ansible/galaxy_ng/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+        COMPOSE_PROFILE=`[ "${{ matrix.test }}" = 'insights' ] && echo 'insights' || echo 'standalone'`
+        API_PORT=`[ "$COMPOSE_PROFILE" = "standalone" ] && echo '8002' || echo '5001'`
+        API_BASE=http://localhost:"$API_PORT"/api/`[ "$COMPOSE_PROFILE" = 'standalone' ] && echo 'galaxy' || echo 'automation-hub'`
 
         # blow up without galaxy_ng commit info
         [ -n "$GALAXY_NG_COMMIT" ]
 
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "GALAXY_NG_COMMIT=${GALAXY_NG_COMMIT}" >> $GITHUB_ENV
+        echo "COMPOSE_PROFILE=${COMPOSE_PROFILE}" >> $GITHUB_ENV
+        echo "API_PORT=${API_PORT}" >> $GITHUB_ENV
+        echo "API_BASE=${API_BASE}" >> $GITHUB_ENV
 
     - run: "mkdir pulp_galaxy_ng"
 
@@ -71,30 +78,11 @@ jobs:
       if: steps.cache-container.outputs.cache-hit != 'true'
       working-directory: 'pulp_galaxy_ng'
       run: |
-        cp -iv ../ansible-hub-ui/.github/workflows/scripts/* .
-
-        echo '# Containerfile'
-        echo '\
-          FROM ghcr.io/pulp/pulp-ci-centos:latest
-
-          COPY --chmod=644 ansible-sign.key /tmp/
-          COPY --chmod=755 collection-sign.sh /var/lib/pulp/scripts/
-          COPY --chmod=755 container-sign.sh /var/lib/pulp/scripts/
-          COPY --chmod=755 signing-setup.sh /tmp/
-
-          RUN pip3 install --upgrade \
-            requests \
-            git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }} && \
-            rm -rf /root/.cache/pip
-
-          RUN mkdir -p /etc/nginx/pulp/
-          RUN ln /usr/local/lib/python*/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
-          RUN ln /usr/local/lib/python*/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
-          RUN ln /usr/local/lib/python*/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
-
-          RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
-          RUN ln -sv /galaxy_ng_static `ls -d /usr/local/lib/python*/site-packages/galaxy_ng/app/`static
-        ' | tee Containerfile
+        cp -aiv ../ansible-hub-ui/.github/workflows/cypress/* .
+        sed -i \
+          -e 's|\$REPO|ansible/galaxy_ng|' \
+          -e 's|\$BRANCH|${{ env.SHORT_BRANCH }}|' \
+          Containerfile
 
         buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
         rm -f image # ensure older version is gone, podman save errors otherwise
@@ -108,28 +96,13 @@ jobs:
     - name: "Configure and run pulp-galaxy-ng"
       working-directory: 'pulp_galaxy_ng'
       run: |
+        # static unused in insights
         mkdir settings static
-        echo '# settings/settings.py'
-        echo "\
-          ANSIBLE_API_HOSTNAME='http://localhost:8002'
-          ANSIBLE_CONTENT_HOSTNAME='http://localhost:8002/api/galaxy/v3/artifacts/collections'
-          CONTENT_ORIGIN='http://localhost:8002'
-          GALAXY_API_PATH_PREFIX='/api/galaxy/'
-          GALAXY_AUTHENTICATION_CLASSES=['rest_framework.authentication.SessionAuthentication', 'rest_framework.authentication.TokenAuthentication']
-          GALAXY_DEPLOYMENT_MODE='standalone'
-          PULP_CONTENT_PATH_PREFIX='/api/galaxy/v3/artifacts/collections/'
-          RH_ENTITLEMENT_REQUIRED='insights'
-          TOKEN_AUTH_DISABLED=True
-          X_PULP_CONTENT_HOST='localhost'
-          GALAXY_REQUIRE_CONTENT_APPROVAL=False
-          GALAXY_COLLECTION_SIGNING_SERVICE='ansible-default'
-          GALAXY_CONTAINER_SIGNING_SERVICE='container-default'
-          GALAXY_FEATURE_FLAGS__container_signing=True
-        " | sed 's/^\s\+//' | tee settings/settings.py
+        cp -aiv ../ansible-hub-ui/.github/workflows/cypress/settings.py."$COMPOSE_PROFILE" settings/settings.py
 
         podman run \
              --detach \
-             --publish 8002:80 \
+             --publish "$API_PORT":80 \
              --name pulp \
              --volume "$(pwd)/settings":/etc/pulp \
              --volume "$(pwd)/static":/galaxy_ng_static \
@@ -156,6 +129,7 @@ jobs:
           npm-
 
     - name: "Build standalone UI"
+      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       working-directory: 'ansible-hub-ui'
       run: |
         npm install
@@ -177,6 +151,29 @@ jobs:
         podman exec --user pulp:pulp pulp bash -c "PULP_STATIC_ROOT=/var/lib/operator/static/ PULP_CONTENT_ORIGIN=localhost /usr/local/bin/pulpcore-manager collectstatic --clear --noinput --link"
         podman exec pulp bash -c "s6-svc -r /var/run/s6-rc/servicedirs/pulpcore-api"
 
+    - name: "Run insights UI"
+      if: ${{ env.COMPOSE_PROFILE == 'insights' }}
+      working-directory: 'ansible-hub-ui'
+      run: |
+        npm install
+
+        # production displays unknown translations literally, make sure it's up to date
+        npm run gettext:extract
+        npm run gettext:compile
+
+        # pre-pull containers (and check for version changes)
+        FROM=node_modules/@redhat-cloud-services/frontend-components-config-utilities/standalone/services/
+        grep postgres:9.6 "$FROM"/rbac.js
+        docker pull postgres:9.6
+        grep redis:5.0.4 "$FROM"/rbac.js
+        docker pull redis:5.0.4
+        grep quay.io/cloudservices/rbac "$FROM"/rbac.js
+        docker pull quay.io/cloudservices/rbac
+        grep jboss/keycloak "$FROM"/default/chrome.js
+        docker pull jboss/keycloak
+
+        npm run start &
+
     - name: "Reset admin password"
       run: |
         # podman exec pulp pip install django_extensions
@@ -194,34 +191,34 @@ jobs:
     - name: "Configure Cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
-        echo -e '{
-          "prefix": "/api/galaxy/",
-          "pulpPrefix": "/api/galaxy/pulp/api/v3/",
-          "username": "admin",
-          "password": "admin",
-          "settings": "../../pulp_galaxy_ng/settings/settings.py",
-          "restart": "podman exec pulp bash -c \"s6-svc -r /var/run/s6-rc/servicedirs/pulpcore-api\"; sleep 10",
-          "containers": "localhost:8002",
-          "galaxykit": "galaxykit --ignore-certs"
-        }' > cypress.env.json
+        cp -aiv ../.github/workflows/cypress/cypress.env.json."$COMPOSE_PROFILE" cypress.env.json
 
     - name: "Ensure index.html uses the new js"
+      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       run: |
         echo 'expecting /static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
         curl http://localhost:8002/static/galaxy_ng/index.html | tee /dev/stderr | grep '/static/galaxy_ng/js/App.'"$BUILD_HASH"'.js'
 
-    - name: "Ensure galaxykit can connect to the server"
+    - name: "Ensure insights is served"
+      if: ${{ env.COMPOSE_PROFILE == 'insights' }}
       run: |
-        galaxykit -s 'http://localhost:8002/api/galaxy/' -u admin -p admin collection list
+        echo wait for containers to start
+        curl http://localhost:8002/beta/ansible/automation-hub/ | tee /dev/stderr | grep '/beta/apps/chrome/js/'
+
+    - name: "Ensure galaxykit can connect to the server"
+      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
+      run: |
+        galaxykit -s "$API_BASE"/ -u admin -p admin collection list
 
     - name: "Check initial feature flags"
       run: |
-        curl -s http://localhost:8002/api/galaxy/_ui/v1/feature-flags/ | jq
+        curl -s "$API_BASE"/_ui/v1/feature-flags/ | jq
 
     - name: "Check component versions"
+      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       run: |
-        HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:8002/api/galaxy/v3/auth/token/ | jq -r .token`
-        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:8002/api/galaxy/ | jq
+        HUB_TOKEN=`curl -s -u admin:admin -d '' "$API_BASE"/v3/auth/token/ | jq -r .token`
+        curl -s -H "Authorization: Token $HUB_TOKEN" "$API_BASE"/ | jq
 
     - name: "Check if e2e contains only dirs in matrix test array"
       working-directory: 'ansible-hub-ui'

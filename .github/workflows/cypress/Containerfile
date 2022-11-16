@@ -1,0 +1,19 @@
+FROM ghcr.io/pulp/pulp-ci-centos:latest
+
+COPY --chmod=644 ansible-sign.key /tmp/
+COPY --chmod=755 collection-sign.sh /var/lib/pulp/scripts/
+COPY --chmod=755 container-sign.sh /var/lib/pulp/scripts/
+COPY --chmod=755 signing-setup.sh /tmp/
+
+RUN pip3 install --upgrade \
+  requests \
+  git+https://github.com/$REPO.git@$BRANCH && \
+  rm -rf /root/.cache/pip
+
+RUN mkdir -p /etc/nginx/pulp/
+RUN ln /usr/local/lib/python*/site-packages/pulp_ansible/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_ansible.conf
+RUN ln /usr/local/lib/python*/site-packages/pulp_container/app/webserver_snippets/nginx.conf /etc/nginx/pulp/pulp_container.conf
+RUN ln /usr/local/lib/python*/site-packages/galaxy_ng/app/webserver_snippets/nginx.conf /etc/nginx/pulp/galaxy_ng.conf
+
+RUN rm -rf /usr/local/lib/python*/site-packages/galaxy_ng/app/static/
+RUN ln -sv /galaxy_ng_static `ls -d /usr/local/lib/python*/site-packages/galaxy_ng/app/`static
