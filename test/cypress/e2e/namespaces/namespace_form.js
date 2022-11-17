@@ -19,9 +19,6 @@ describe('A namespace form', () => {
   let createNamespace = () => {
     return cy.galaxykit('-i namespace create', 'testns1');
   };
-  let getUrl = () => {
-    return cy.url();
-  };
 
   beforeEach(() => {
     cy.login();
