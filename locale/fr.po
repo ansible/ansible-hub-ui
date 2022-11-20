@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/components/headers/collection-header.tsx:200
 msgid "(latest)"
@@ -389,8 +390,12 @@ msgid "Canceled"
 msgstr "Annulé"
 
 #: src/containers/namespace-detail/namespace-detail.tsx:699
-msgid "Cannot delete namespace until <0/>collections' dependencies have been deleted<1/>"
-msgstr "Impossible de supprimer un espace de nom <0/> tant que les dépendances des collections n'ont pas été supprimées<1/>"
+msgid "Cannot delete namespace until <0/>collections' dependencies have <1/>been deleted"
+msgstr ""
+
+#: src/containers/namespace-detail/namespace-detail.tsx:699
+#~ msgid "Cannot delete namespace until <0/>collections' dependencies have been deleted<1/>"
+#~ msgstr "Impossible de supprimer un espace de nom <0/> tant que les dépendances des collections n'ont pas été supprimées<1/>"
 
 #: src/utilities/delete-collection.tsx:37
 #: src/utilities/delete-collection.tsx:91
