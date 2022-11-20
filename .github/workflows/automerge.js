@@ -20,7 +20,7 @@ if (!actor) {
 
 if (actor != 'dependabot[bot]') {
   console.log('Automerge works only for PRs created by dependabot.');
-  process.exit(0);
+  process.exit(1);
 }
 
 if (prTitle.includes('patternfly')) {
@@ -35,7 +35,7 @@ if (prTitle.includes('@types/node')) {
     console.log('Version does match the pattern ' + pattern);
   } else {
     console.log('Version does not match the pattern ' + pattern);
-    return;
+    process.exit(1);
   }
 }
 
