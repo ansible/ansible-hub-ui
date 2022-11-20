@@ -1,4 +1,5 @@
 const apiPrefix = Cypress.env('apiPrefix');
+const pulpPrefix = Cypress.env('pulpPrefix');
 
 describe('Hub Group Management Tests', () => {
   before(() => {
@@ -66,7 +67,7 @@ describe('Hub Group Management Tests', () => {
 
     cy.contains(roleName);
 
-    cy.intercept('GET', Cypress.env('pulpPrefix') + 'roles/*').as('roles');
+    cy.intercept('GET', pulpPrefix + 'roles/*').as('roles');
 
     cy.get('.pf-c-wizard__footer > button').contains('Add').click();
 
