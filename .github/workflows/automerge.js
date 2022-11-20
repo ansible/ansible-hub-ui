@@ -1,60 +1,41 @@
-let { exec } = require('node:child_process');
-console.log(exec);
+const { exec } = require('node:child_process');
+const [ _node, _automerge, branch, prTitle, actor ] = process.argv;
 
-let branch = '';
-let actor = '';
-let prName = '';
-
-if (process.argv.length >= 3) {
-  branch = process.argv[2];
-}
-if (process.argv.length >= 4) {
-  prName = process.argv[3];
-}
-if (process.argv.length >= 5) {
-  actor = process.argv[4];
-}
-
-console.log('--------------------------------------------------------');
+console.log({ branch, prTitle, actor });
 
 if (!branch) {
   console.log('Branch name argument (first) was not specified');
-  return;
+  process.exit(1);
 }
 
-if (!prName) {
-  console.log('prName argument (second) was not specified');
-  return;
+if (!prTitle) {
+  console.log('PR title argument (second) was not specified');
+  process.exit(1);
 }
 
 if (!actor) {
   console.log('Actor argument (third) was not specified');
-  return;
+  process.exit(1);
 }
-
-console.log(branch);
-console.log(prName);
-console.log(actor);
 
 if (actor != 'dependabot[bot]') {
   console.log('Automerge works only for PRs created by dependabot.');
-  return;
+  process.exit(1);
 }
 
-if (prName.includes('patternfly')) {
-  console.log('Automerge cant merge patternfly Prs.');
-  return;
+if (prTitle.includes('patternfly')) {
+  console.log('Automerge can\'t merge patternfly PRs.');
+  process.exit(1);
 }
 
-if (prName.includes('types/node')) {
-  console.log('Checking for types node version.');
-  let pattern = /from 16[.]\d\d[.]\d\d to 16[.]\d\d[.]\d\d/;
-  let res = pattern.test(prName);
-  if (res) {
+if (prTitle.includes('@types/node')) {
+  console.log('Checking for @types/node version.');
+  const pattern = /from 16[.]\d+[.]\d+ to 16[.]\d+[.]\d+/;
+  if (pattern.test(prTitle)) {
     console.log('Version does match the pattern ' + pattern);
   } else {
     console.log('Version does not match the pattern ' + pattern);
-    return;
+    process.exit(1);
   }
 }
 
