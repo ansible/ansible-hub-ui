@@ -41,7 +41,7 @@ describe('execution environments', () => {
     cy.get('.title-box').should('have.text', `remotepine${num}`);
     cy.get('.pf-c-form-control').should(
       'have.value',
-      `podman pull localhost:8002/remotepine${num}:latest`,
+      `podman pull localhost:8002/remotepine${num}`,
     );
   });
 
