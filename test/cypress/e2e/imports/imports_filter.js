@@ -26,11 +26,11 @@ describe('Imports filter test', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(uiPrefix + 'my-imports?namespace=filter_test_namespace');
+    cy.visit(`${uiPrefix}my-imports?namespace=filter_test_namespace`);
   });
 
   it('should display success info after importing collection', () => {
-    cy.visit(uiPrefix + 'my-imports?namespace=test_namespace');
+    cy.visit(`${uiPrefix}my-imports?namespace=test_namespace`);
 
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).click();
     cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
@@ -46,7 +46,7 @@ describe('Imports filter test', () => {
 
   it('should fail on importing existing collection', () => {
     cy.galaxykit('-i collection upload', 'test_namespace', testCollection);
-    cy.visit(uiPrefix + 'my-imports?namespace=test_namespace');
+    cy.visit(`${uiPrefix}my-imports?namespace=test_namespace`);
 
     cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
     cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
@@ -71,14 +71,14 @@ describe('Imports filter test', () => {
 
     cy.intercept(
       'GET',
-      apiPrefix + '_ui/v1/imports/collections/?namespace=test_namespace&*',
+      `${apiPrefix}_ui/v1/imports/collections/?namespace=test_namespace&*`,
     ).as('collectionsInNamespace');
-    cy.intercept('GET', apiPrefix + '_ui/v1/imports/collections/*').as(
+    cy.intercept('GET', `${apiPrefix}_ui/v1/imports/collections/*`).as(
       'collectionDetail',
     );
     cy.intercept(
       'GET',
-      apiPrefix + '_ui/v1/collection-versions/?namespace=test_namespace&name=*',
+      `${apiPrefix}_ui/v1/collection-versions/?namespace=test_namespace&name=*`,
     ).as('collectionVersions');
 
     cy.get('[placeholder="Select namespace"]').clear();
@@ -93,16 +93,14 @@ describe('Imports filter test', () => {
 
     cy.intercept(
       'GET',
-      apiPrefix +
-        '_ui/v1/imports/collections/?namespace=filter_test_namespace&*',
+      `${apiPrefix}_ui/v1/imports/collections/?namespace=filter_test_namespace&*`,
     ).as('collectionsInNamespace2');
-    cy.intercept('GET', apiPrefix + '_ui/v1/imports/collections/*').as(
+    cy.intercept('GET', `${apiPrefix}_ui/v1/imports/collections/*`).as(
       'collectionDetail2',
     );
     cy.intercept(
       'GET',
-      apiPrefix +
-        '_ui/v1/collection-versions/?namespace=filter_test_namespace&name=*',
+      `${apiPrefix}_ui/v1/collection-versions/?namespace=filter_test_namespace&name=*`,
     ).as('collectionVersions2');
 
     cy.get('[placeholder="Select namespace"]').click();

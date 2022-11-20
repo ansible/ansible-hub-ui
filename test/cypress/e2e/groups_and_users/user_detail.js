@@ -30,7 +30,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
     //  { group: 'users', permissions: ['View user'] },
     //]);
 
-    cy.visit(uiPrefix + 'users');
+    cy.visit(`${uiPrefix}users`);
     cy.contains('testUser').click();
     cy.contains('Edit').click();
     selectInput('first_name').type('first_name');
@@ -38,8 +38,8 @@ describe('user detail tests all fields, editing, and deleting', () => {
     selectInput('email').type('example@example.com');
     cy.get('button[type=submit]').click();
 
-    cy.visit(uiPrefix + 'users');
-    cy.intercept('GET', apiPrefix + '_ui/v1/users/*/').as('testUser');
+    cy.visit(`${uiPrefix}users`);
+    cy.intercept('GET', `${apiPrefix}_ui/v1/users/*/`).as('testUser');
     cy.contains('testUser').click();
     cy.wait('@testUser');
 
@@ -56,7 +56,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
   });
 
   it('edits user', () => {
-    cy.visit(uiPrefix + 'users');
+    cy.visit(`${uiPrefix}users`);
     cy.contains('testUser').click();
     //edits some fields
     cy.contains('Edit').click();
@@ -66,8 +66,8 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.get('button[type=submit]').click();
     cy.reload();
     //checks those fields
-    cy.visit(uiPrefix + 'users');
-    cy.intercept('GET', apiPrefix + '_ui/v1/users/*/').as('user');
+    cy.visit(`${uiPrefix}users`);
+    cy.intercept('GET', `${apiPrefix}_ui/v1/users/*/`).as('user');
     cy.contains('testUser').click();
     cy.wait('@user');
     cy.get('[data-cy="DataForm-field-first_name"]').contains('new_first_name');
@@ -78,7 +78,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
   });
 
   it('deletes user', () => {
-    cy.visit(uiPrefix + 'users');
+    cy.visit(`${uiPrefix}users`);
     cy.contains('testUser').click();
     cy.contains('Delete').click();
     cy.get('[data-cy="delete-button"]').click();
@@ -95,7 +95,7 @@ describe('user detail tests all fields, editing, and deleting', () => {
     cy.get('button[type="submit"]').click();
     cy.intercept(
       'GET',
-      apiPrefix + '_ui/v1/repo/published/?deprecated=false&offset=0&limit=10',
+      `${apiPrefix}_ui/v1/repo/published/?deprecated=false&offset=0&limit=10`,
     );
 
     //unable to log in with test credentials

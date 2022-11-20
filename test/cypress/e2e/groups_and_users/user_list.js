@@ -24,7 +24,7 @@ describe('User list tests for sorting, paging and filtering', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(uiPrefix + 'users');
+    cy.visit(`${uiPrefix}users`);
   });
 
   it('table contains all columns', () => {

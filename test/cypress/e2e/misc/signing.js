@@ -27,7 +27,7 @@ describe('signing versions', () => {
     });
 
     it('has the switch to sync only certified repos', () => {
-      cy.visit(uiPrefix + 'repositories?tab=remote');
+      cy.visit(`${uiPrefix}repositories?tab=remote`);
       cy.get('[aria-label="Actions"]:first').click(); // click the kebab menu on the 'community' repo
       cy.contains('Edit').click();
       cy.contains('Show advanced options').click();
@@ -35,7 +35,7 @@ describe('signing versions', () => {
     });
 
     it('signs when the Sign and Approve button is pressed', () => {
-      cy.visit(uiPrefix + 'approval-dashboard');
+      cy.visit(`${uiPrefix}approval-dashboard`);
 
       // Check if the button is correctly worded
       cy.get('[data-cy="approve-button"]').should(
@@ -50,7 +50,7 @@ describe('signing versions', () => {
       cy.wait(10000);
 
       // Go and check if it is signed in the collections
-      cy.visit(uiPrefix + 'repo/published');
+      cy.visit(`${uiPrefix}repo/published`);
       cy.get('[data-cy="signature-badge"]', { timeout: 20000 }).should(
         'have.length',
         1,
@@ -58,7 +58,7 @@ describe('signing versions', () => {
       cy.get('[data-cy="signature-badge"]').first().should('contain', 'Signed');
 
       // Optimization: check the signature button too here
-      cy.visit(uiPrefix + 'repo/published/autosign_test/test_collection');
+      cy.visit(`${uiPrefix}repo/published/autosign_test/test_collection`);
       cy.get('[data-cy="signature-badge"]').first().should('contain', 'Signed');
       cy.get('[data-cy="toggle-signature-button"]').should('be.visible');
     });
@@ -101,7 +101,7 @@ describe('signing versions', () => {
     });
 
     it('can sign all collections and versions from the namespace screen', () => {
-      cy.visit(uiPrefix + 'repo/published/namespace_signing_test');
+      cy.visit(`${uiPrefix}repo/published/namespace_signing_test`);
 
       // Make sure it is unsigned at first
       cy.get('[data-cy="signature-badge"]')
@@ -127,7 +127,7 @@ describe('signing versions', () => {
     });
 
     it('can sign a single version in the collection from collection details', () => {
-      cy.visit(uiPrefix + 'repo/published/collection_signing_test/collection1');
+      cy.visit(`${uiPrefix}repo/published/collection_signing_test/collection1`);
 
       // Make sure it is unsigned at first
       cy.get('[data-cy="signature-badge"]')
@@ -151,7 +151,7 @@ describe('signing versions', () => {
     });
 
     it('can sign all version in the collection from collection details', () => {
-      cy.visit(uiPrefix + 'repo/published/collection_signing_test/collection2');
+      cy.visit(`${uiPrefix}repo/published/collection_signing_test/collection2`);
 
       // Make sure it is unsigned at first
       cy.get('[data-cy="signature-badge"]')

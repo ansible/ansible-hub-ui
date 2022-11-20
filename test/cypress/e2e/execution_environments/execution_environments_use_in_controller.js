@@ -23,7 +23,7 @@ describe('Execution Environments - Use in Controller', () => {
       include_tags: 'latest',
     });
 
-    cy.visit(uiPrefix + 'containers/');
+    cy.visit(`${uiPrefix}containers/`);
     cy.contains('.body', `remotepine${num}`, { timeout: 10000 });
 
     cy.syncRemoteContainer(`remotepine${num}`);

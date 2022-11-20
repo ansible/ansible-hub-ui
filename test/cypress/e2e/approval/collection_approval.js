@@ -12,7 +12,7 @@ describe('tests the approval list screen ', () => {
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'ansible');
     cy.galaxykit('-i collection upload ansible network');
-    cy.visit(uiPrefix + 'approval-dashboard');
+    cy.visit(`${uiPrefix}approval-dashboard`);
   });
 
   after(() => {
@@ -26,8 +26,7 @@ describe('tests the approval list screen ', () => {
   it('rejects certification status and approves it again', () => {
     cy.intercept(
       'GET',
-      apiPrefix +
-        '_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=10',
+      `${apiPrefix}_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=10`,
     ).as('reload');
     cy.get('.pf-c-chip > button[aria-label="close"]').click();
     cy.wait('@reload');
@@ -52,8 +51,7 @@ describe('tests the approval list screen ', () => {
   it('view the imports logs', () => {
     cy.intercept(
       'GET',
-      apiPrefix +
-        '_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=10',
+      `${apiPrefix}_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=10`,
     ).as('reload');
     cy.get('.pf-c-chip > button[aria-label="close"]').click();
     cy.wait('@reload');
@@ -63,8 +61,7 @@ describe('tests the approval list screen ', () => {
     cy.get('button[aria-label="Actions"]:first').click();
     cy.intercept(
       'GET',
-      apiPrefix +
-        '_ui/v1/imports/collections/?namespace=ansible&name=network&version=1.0.0&sort=-created&offset=0&limit=10',
+      `${apiPrefix}_ui/v1/imports/collections/?namespace=ansible&name=network&version=1.0.0&sort=-created&offset=0&limit=10`,
     ).as('imports');
     cy.contains('View Import Logs').click();
     cy.wait('@imports');

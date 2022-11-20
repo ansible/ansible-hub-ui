@@ -3,12 +3,12 @@ const uiPrefix = Cypress.env('uiPrefix');
 describe('RBAC table contains correct headers and filter', () => {
   before(() => {
     cy.login();
-    cy.visit(uiPrefix + 'roles');
+    cy.visit(`${uiPrefix}roles`);
   });
 
   it('table contains all columns and filter', () => {
     cy.login();
-    cy.visit(uiPrefix + 'roles');
+    cy.visit(`${uiPrefix}roles`);
     cy.contains('Roles');
 
     // ensure role names begin with 'galaxy.'

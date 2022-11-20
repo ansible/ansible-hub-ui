@@ -2,7 +2,7 @@ const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('edit a remote repository', () => {
-  let remoteRepoUrl = uiPrefix + 'repositories?tab=remote';
+  let remoteRepoUrl = `${uiPrefix}repositories?tab=remote`;
 
   beforeEach(() => {
     cy.login();
@@ -37,7 +37,7 @@ describe('edit a remote repository', () => {
           fileName: 'test.yaml',
         });
       });
-    cy.intercept('PUT', apiPrefix + 'content/community/v3/sync/config/').as(
+    cy.intercept('PUT', `${apiPrefix}content/community/v3/sync/config/`).as(
       'editCommunityRemote',
     );
     cy.contains('Save').click();
@@ -102,7 +102,7 @@ describe('edit a remote repository', () => {
     cy.get('input[id="proxy_url"]').type('https://example.org');
     cy.get('input[id="proxy_username"]').type('test');
     cy.get('input[id="proxy_password"]').type('test');
-    cy.intercept('PUT', apiPrefix + 'content/rh-certified/v3/sync/config/').as(
+    cy.intercept('PUT', `${apiPrefix}content/rh-certified/v3/sync/config/`).as(
       'editRemote',
     );
     cy.contains('Save').click();
@@ -116,7 +116,7 @@ describe('edit a remote repository', () => {
     cy.get('input[id="username"]').should('have.value', 'test');
     cy.get('input[id="proxy_url"]').should('have.value', 'https://example.org');
     cy.get('input[id="proxy_username"]').should('have.value', 'test');
-    cy.intercept('PUT', apiPrefix + 'content/community/v3/sync/config/').as(
+    cy.intercept('PUT', `${apiPrefix}content/community/v3/sync/config/`).as(
       'editRemote',
     );
     cy.contains('Save').click();

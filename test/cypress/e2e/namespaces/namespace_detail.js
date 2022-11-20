@@ -15,7 +15,7 @@ describe('Namespace detail screen', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(uiPrefix + 'repo/published/namespace_detail_test');
+    cy.visit(`${uiPrefix}repo/published/namespace_detail_test`);
   });
 
   it('should display the collections belonging to the namespace', () => {
@@ -31,7 +31,7 @@ describe('Namespace detail screen', () => {
     cy.contains('.body ul a', 'Deprecate').click();
 
     // Reload the page
-    cy.visit(uiPrefix + 'repo/published/namespace_detail_test');
+    cy.visit(`${uiPrefix}repo/published/namespace_detail_test`);
 
     cy.get('[data-cy="CollectionListItem"]:first').contains('DEPRECATED');
   });

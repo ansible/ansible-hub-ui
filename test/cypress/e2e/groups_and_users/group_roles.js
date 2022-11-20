@@ -55,7 +55,7 @@ describe('Group Roles Tests', () => {
       Object.keys(testRole.permissions),
     );
 
-    cy.intercept('GET', apiPrefix + '_ui/v1/groups/*').as('groups');
+    cy.intercept('GET', `${apiPrefix}_ui/v1/groups/*`).as('groups');
     cy.menuGo('User Access > Groups');
     cy.get(`[data-cy="GroupList-row-${groupName}"] a`).click();
     cy.wait('@groups');

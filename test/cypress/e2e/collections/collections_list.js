@@ -19,7 +19,7 @@ describe('Collections list Tests', () => {
   }
 
   function undeprecate() {
-    cy.visit(uiPrefix + 'repo/published/my_namespace/my_collection0');
+    cy.visit(`${uiPrefix}repo/published/my_namespace/my_collection0`);
     cy.contains('This collection has been deprecated.');
     cy.get('[aria-label=Actions]').click();
     cy.contains('Undeprecate').click();
@@ -32,9 +32,7 @@ describe('Collections list Tests', () => {
     // undeprecate collection if deprecated from previous repeated run (otherwise, tests fails)
     // that is because when you deprecate, delete collection and upload it again, the collection
     // stays deprecated
-    let request_url =
-      apiPrefix +
-      '_ui/v1/repo/published/?limit=1&name=my_collection0&offset=0"';
+    let request_url = `${apiPrefix}_ui/v1/repo/published/?limit=1&name=my_collection0&offset=0"`;
 
     cy.request(request_url).then((data) => {
       const deprecated = data.body.data[0].deprecated;
@@ -60,7 +58,7 @@ describe('Collections list Tests', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(uiPrefix + 'repo/published');
+    cy.visit(`${uiPrefix}repo/published`);
     cy.contains('Collections');
   });
 
@@ -157,7 +155,7 @@ describe('Collections list Tests', () => {
   });
 
   it('Can delete collection in namespace collection list', () => {
-    cy.visit(uiPrefix + 'repo/published/my_namespace');
+    cy.visit(`${uiPrefix}repo/published/my_namespace`);
     cy.get('.toolbar')
       .get('[aria-label="keywords"]:first')
       .type('my_collection1{enter}');

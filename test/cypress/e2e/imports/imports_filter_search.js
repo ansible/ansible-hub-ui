@@ -26,11 +26,11 @@ describe('Imports filter test', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(uiPrefix + 'my-imports?namespace=filter_test_namespace');
+    cy.visit(`${uiPrefix}my-imports?namespace=filter_test_namespace`);
   });
 
   it('partial filter for name is working.', () => {
-    cy.intercept('GET', apiPrefix + '_ui/v1/collection-versions/?*').as('wait');
+    cy.intercept('GET', `${apiPrefix}_ui/v1/collection-versions/?*`).as('wait');
 
     cy.get('input[aria-label="keywords"').type('my_collection{enter}');
     cy.wait('@wait');
@@ -43,7 +43,7 @@ describe('Imports filter test', () => {
   });
 
   it('exact filter for name is working.', () => {
-    cy.intercept('GET', apiPrefix + '_ui/v1/collection-versions/?*').as('wait');
+    cy.intercept('GET', `${apiPrefix}_ui/v1/collection-versions/?*`).as('wait');
 
     cy.get('input[aria-label="keywords"').type('my_collection1{enter}');
     cy.wait('@wait');
@@ -66,7 +66,7 @@ describe('Imports filter test', () => {
     // waiting to another query, otherwise sporadic failuers
     cy.intercept(
       'GET',
-      apiPrefix + '_ui/v1/collection-versions/?namespace=*',
+      `${apiPrefix}_ui/v1/collection-versions/?namespace=*`,
     ).as('wait');
     cy.contains('[data-cy="compound_filter"] a', 'Completed').click();
 
@@ -98,7 +98,7 @@ describe('Imports filter test', () => {
     // waiting to another query, otherwise sporadic failuers
     cy.intercept(
       'GET',
-      apiPrefix + '_ui/v1/collection-versions/?namespace=*',
+      `${apiPrefix}_ui/v1/collection-versions/?namespace=*`,
     ).as('wait');
     cy.contains('a', 'Completed').click();
 
@@ -122,7 +122,7 @@ describe('Imports filter test', () => {
     // waiting to another query, otherwise sporadic failuers
     cy.intercept(
       'GET',
-      apiPrefix + '_ui/v1/collection-versions/?namespace=*',
+      `${apiPrefix}_ui/v1/collection-versions/?namespace=*`,
     ).as('wait');
     cy.contains('a', 'Completed').click();
     cy.wait('@wait');

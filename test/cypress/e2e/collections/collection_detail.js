@@ -1,9 +1,7 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Collection detail', () => {
-  const baseURL =
-    uiPrefix +
-    'repo/published/collection_detail_test_namespace/collection_detail_test_collection';
+  const baseURL = `${uiPrefix}repo/published/collection_detail_test_namespace/collection_detail_test_collection`;
 
   function deprecate() {
     cy.get('[aria-label=Actions]').click();

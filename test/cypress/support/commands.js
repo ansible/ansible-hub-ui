@@ -35,7 +35,7 @@ Cypress.Commands.add('menuGo', {}, (name) => {
 });
 
 Cypress.Commands.add('apiLogin', {}, (username, password) => {
-  let loginUrl = apiPrefix + '_ui/v1/auth/login/';
+  let loginUrl = `${apiPrefix}_ui/v1/auth/login/`;
   cy.request('GET', loginUrl).then(() => {
     cy.getCookie('csrftoken').then((csrftoken) => {
       cy.request({
@@ -50,9 +50,9 @@ Cypress.Commands.add('apiLogin', {}, (username, password) => {
 });
 
 Cypress.Commands.add('manualLogin', {}, (username, password) => {
-  cy.intercept('POST', apiPrefix + '_ui/v1/auth/login/').as('login');
-  cy.intercept('GET', apiPrefix + '_ui/v1/feature-flags/').as('feature-flags');
-  cy.visit(uiPrefix + 'login');
+  cy.intercept('POST', `${apiPrefix}_ui/v1/auth/login/`).as('login');
+  cy.intercept('GET', `${apiPrefix}_ui/v1/feature-flags/`).as('feature-flags');
+  cy.visit(`${uiPrefix}login`);
   cy.get('#pf-login-username-id').type(username);
   cy.get('#pf-login-password-id').type(`${password}{enter}`);
   cy.wait('@login');
@@ -100,7 +100,7 @@ Cypress.Commands.add('cookieLogin', {}, (username, password) => {
 });
 
 Cypress.Commands.add('logout', {}, () => {
-  cy.intercept('GET', apiPrefix + '_ui/v1/feature-flags/').as('feature-flags');
+  cy.intercept('GET', `${apiPrefix}_ui/v1/feature-flags/`).as('feature-flags');
   cy.get('[aria-label="user-dropdown"] button').click();
   cy.get('[aria-label="logout"]').click();
   cy.wait('@feature-flags');
@@ -143,7 +143,7 @@ Cypress.Commands.add(
     cy.get('#password').type(user.password);
     cy.get('#password-confirm').type(user.password);
 
-    cy.intercept('POST', apiPrefix + '_ui/v1/users/').as('createUser');
+    cy.intercept('POST', `${apiPrefix}_ui/v1/users/`).as('createUser');
 
     cy.contains('Save').click();
     cy.wait('@createUser');
@@ -154,13 +154,13 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('createGroupManually', {}, (name) => {
-  cy.intercept('GET', apiPrefix + '_ui/v1/groups/?*').as('loadGroups');
+  cy.intercept('GET', `${apiPrefix}_ui/v1/groups/?*`).as('loadGroups');
   cy.menuGo('User Access > Groups');
   cy.wait('@loadGroups');
 
   cy.contains('Create').click();
 
-  cy.intercept('POST', apiPrefix + '_ui/v1/groups/').as('submitGroup');
+  cy.intercept('POST', `${apiPrefix}_ui/v1/groups/`).as('submitGroup');
   cy.contains('div', 'Name *').findnear('input').first().type(`${name}{enter}`);
   cy.wait('@submitGroup');
 
@@ -214,14 +214,14 @@ Cypress.Commands.add(
 
 Cypress.Commands.add('deleteUser', {}, (username) => {
   cy.menuGo('User Access > Users');
-  cy.intercept('DELETE', apiPrefix + '_ui/v1/users/*').as('deleteUser');
+  cy.intercept('DELETE', `${apiPrefix}_ui/v1/users/*`).as('deleteUser');
   cy.get(`[data-cy="UserList-row-${username}"] [aria-label="Actions"]`).click();
   cy.containsnear(
     `[data-cy="UserList-row-${username}"] [aria-label="Actions"]`,
     'Delete',
   ).click();
 
-  cy.intercept('GET', apiPrefix + '_ui/v1/users/?*').as('userList');
+  cy.intercept('GET', `${apiPrefix}_ui/v1/users/?*`).as('userList');
 
   cy.contains('[role=dialog] button', 'Delete').click();
   cy.wait('@deleteUser').then(({ response }) => {
@@ -238,8 +238,8 @@ Cypress.Commands.add('deleteUser', {}, (username) => {
 
 Cypress.Commands.add('deleteGroupManually', {}, (name) => {
   cy.menuGo('User Access > Groups');
-  cy.intercept('DELETE', apiPrefix + '_ui/v1/groups/*').as('deleteGroup');
-  cy.intercept('GET', apiPrefix + '_ui/v1/groups/?*').as('listGroups');
+  cy.intercept('DELETE', `${apiPrefix}_ui/v1/groups/*`).as('deleteGroup');
+  cy.intercept('GET', `${apiPrefix}_ui/v1/groups/?*`).as('listGroups');
   cy.get(`[data-cy="GroupList-row-${name}"] [aria-label="Actions"]`).click();
   cy.get('[aria-label=Delete]').click();
   cy.contains('[role=dialog] button', 'Delete').click();
@@ -343,7 +343,7 @@ Cypress.Commands.add('settings', {}, (newSettings) => {
       // wait for server to respond with a good status (502 means server didn't restart yet)
       // ..after waiting to make sure we're not faster than the restart
       cy.request({
-        url: apiPrefix + '_ui/v1/feature-flags/',
+        url: `${apiPrefix}_ui/v1/feature-flags/`,
         retryOnStatusCodeFailure: true,
       }).then((response) => {
         console.log(
@@ -389,12 +389,12 @@ Cypress.Commands.add('addRemoteRegistry', {}, (name, url, extra = null) => {
 
   cy.intercept(
     'POST',
-    apiPrefix + '_ui/v1/execution-environments/registries/',
+    `${apiPrefix}_ui/v1/execution-environments/registries/`,
   ).as('registries');
 
   cy.intercept(
     'GET',
-    apiPrefix + '_ui/v1/execution-environments/registries/?*',
+    `${apiPrefix}_ui/v1/execution-environments/registries/?*`,
   ).as('registriesGet');
 
   cy.contains('button', 'Save').click();
@@ -439,12 +439,12 @@ Cypress.Commands.add(
 
     cy.intercept(
       'POST',
-      apiPrefix + '_ui/v1/execution-environments/remotes/',
+      `${apiPrefix}_ui/v1/execution-environments/remotes/`,
     ).as('saved');
 
     cy.intercept(
       'GET',
-      apiPrefix + 'v3/plugin/execution-environments/repositories/?*',
+      `${apiPrefix}v3/plugin/execution-environments/repositories/?*`,
     ).as('listLoad');
 
     cy.contains('button', 'Save').click();
@@ -512,10 +512,10 @@ Cypress.Commands.add('syncRemoteContainer', {}, (name) => {
 Cypress.Commands.add('deleteRegistriesManual', {}, () => {
   cy.intercept(
     'GET',
-    apiPrefix + '_ui/v1/execution-environments/registries/?*',
+    `${apiPrefix}_ui/v1/execution-environments/registries/?*`,
   ).as('registries');
 
-  cy.visit(uiPrefix + 'registries');
+  cy.visit(`${uiPrefix}registries`);
 
   cy.wait('@registries').then((result) => {
     var data = result.response.body.data;
@@ -533,10 +533,10 @@ Cypress.Commands.add('deleteRegistriesManual', {}, () => {
 Cypress.Commands.add('deleteRegistries', {}, () => {
   cy.intercept(
     'GET',
-    apiPrefix + '_ui/v1/execution-environments/registries/?*',
+    `${apiPrefix}_ui/v1/execution-environments/registries/?*`,
   ).as('registries');
 
-  cy.visit(uiPrefix + 'registries?page_size=100');
+  cy.visit(`${uiPrefix}registries?page_size=100`);
 
   cy.wait('@registries').then((result) => {
     var data = result.response.body.data;
@@ -549,10 +549,10 @@ Cypress.Commands.add('deleteRegistries', {}, () => {
 Cypress.Commands.add('deleteContainers', {}, () => {
   cy.intercept(
     'GET',
-    apiPrefix + 'v3/plugin/execution-environments/repositories/?*',
+    `${apiPrefix}v3/plugin/execution-environments/repositories/?*`,
   ).as('listLoad');
 
-  cy.visit(uiPrefix + 'containers?page_size=100');
+  cy.visit(`${uiPrefix}containers?page_size=100`);
 
   cy.wait('@listLoad').then((result) => {
     var data = result.response.body.data;
@@ -565,10 +565,10 @@ Cypress.Commands.add('deleteContainers', {}, () => {
 Cypress.Commands.add('deleteContainersManual', {}, () => {
   cy.intercept(
     'GET',
-    apiPrefix + 'v3/plugin/execution-environments/repositories/?*',
+    `${apiPrefix}v3/plugin/execution-environments/repositories/?*`,
   ).as('listLoad');
 
-  cy.visit(uiPrefix + 'containers');
+  cy.visit(`${uiPrefix}containers`);
 
   cy.wait('@listLoad').then((result) => {
     var data = result.response.body.data;
@@ -647,7 +647,7 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('deleteRole', {}, (role) => {
-  cy.visit(uiPrefix + 'roles/');
+  cy.visit(`${uiPrefix}roles/`);
 
   cy.get(
     `[data-cy="RoleListTable-ExpandableRow-row-${role}"] [data-cy=kebab-toggle]`,

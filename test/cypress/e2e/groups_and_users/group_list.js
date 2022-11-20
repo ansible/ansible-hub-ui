@@ -22,7 +22,7 @@ describe('Group list tests for sorting, paging and filtering', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(uiPrefix + 'group-list');
+    cy.visit(`${uiPrefix}group-list`);
   });
 
   it('table contains all columns', () => {

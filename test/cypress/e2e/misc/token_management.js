@@ -12,8 +12,8 @@ describe('Token Management Tests', () => {
   });
 
   it('user can load token', () => {
-    cy.visit(uiPrefix + 'token');
-    cy.intercept('POST', apiPrefix + 'v3/auth/token/').as('tokenPost');
+    cy.visit(`${uiPrefix}token`);
+    cy.intercept('POST', `${apiPrefix}v3/auth/token/`).as('tokenPost');
 
     cy.contains('Load token').click();
     cy.get('.pf-c-clipboard-copy').should('exist');

@@ -2,8 +2,8 @@ const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Repo Management tests', () => {
-  let remoteRepoUrl = uiPrefix + 'repositories?tab=remote';
-  let localRepoUrl = uiPrefix + 'repositories';
+  let remoteRepoUrl = `${uiPrefix}repositories?tab=remote`;
+  let localRepoUrl = `${uiPrefix}repositories`;
 
   let noPrivilegesUser0 = 'noPrivilegesUser0';
 
@@ -57,7 +57,7 @@ describe('Repo Management tests', () => {
     cy.visit(localRepoUrl);
     cy.intercept(
       'GET',
-      apiPrefix + '_ui/v1/distributions/?offset=0&limit=10',
+      `${apiPrefix}_ui/v1/distributions/?offset=0&limit=10`,
     ).as('loadRepos');
     cy.wait('@loadRepos');
     cy.get('button').contains('Get token').click();
@@ -76,7 +76,7 @@ describe('Repo Management tests', () => {
     ).click(); //show expandable content
     cy.get(
       '.pf-c-clipboard-copy > .pf-c-clipboard-copy__expandable-content > pre:first',
-    ).contains(apiPrefix + 'content/community/'); // check content of input
+    ).contains(`${apiPrefix}content/community/`); // check content of input
 
     cy.get('button[aria-label="Copy to clipboard"]').eq(1).should('be.enabled');
   });
@@ -111,7 +111,7 @@ describe('Repo Management tests', () => {
     cy.visit(remoteRepoUrl);
 
     //checks sync status === 'Running' after sync post request
-    cy.intercept('POST', apiPrefix + 'content/rh-certified/v3/sync/').as(
+    cy.intercept('POST', `${apiPrefix}content/rh-certified/v3/sync/`).as(
       'startSync',
     );
     cy.get('td')
@@ -144,7 +144,7 @@ describe('Repo Management tests', () => {
     cy.get('input[id="proxy_url"]').type('https://example.org');
     cy.get('input[id="proxy_username"]').type('test');
     cy.get('input[id="proxy_password"]').type('test');
-    cy.intercept('PUT', apiPrefix + 'content/community/v3/sync/config/').as(
+    cy.intercept('PUT', `${apiPrefix}content/community/v3/sync/config/`).as(
       'saveConfig',
     );
     cy.contains('Save').click();

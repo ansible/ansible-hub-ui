@@ -106,7 +106,7 @@ describe('My Profile Tests', () => {
   });
 
   it('user can save form', () => {
-    cy.intercept('PUT', apiPrefix + '_ui/v1/me/').as('saveForm');
+    cy.intercept('PUT', `${apiPrefix}_ui/v1/me/`).as('saveForm');
 
     cy.contains('Save').click();
     cy.get('[aria-label="Success Alert"]').contains(

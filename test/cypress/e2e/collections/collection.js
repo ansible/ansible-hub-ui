@@ -25,7 +25,7 @@ describe('collection tests', () => {
 
   it('deletes an entire collection', () => {
     cy.galaxykit('-i collection upload test_namespace test_collection');
-    cy.visit(uiPrefix + 'repo/published/test_namespace/test_collection');
+    cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
     cy.get('[data-cy=kebab-toggle]').click();
     cy.get('[data-cy=delete-collection-dropdown]').click();
@@ -33,10 +33,9 @@ describe('collection tests', () => {
 
     cy.intercept(
       'DELETE',
-      apiPrefix +
-        'v3/plugin/ansible/content/published/collections/index/test_namespace/test_collection',
+      `${apiPrefix}v3/plugin/ansible/content/published/collections/index/test_namespace/test_collection`,
     ).as('deleteCollection');
-    cy.intercept('GET', apiPrefix + 'v3/tasks/*').as('taskStatus');
+    cy.intercept('GET', `${apiPrefix}v3/tasks/*`).as('taskStatus');
 
     cy.get('button').contains('Delete').click();
 
@@ -54,7 +53,7 @@ describe('collection tests', () => {
   it('deletes a collection version', () => {
     cy.galaxykit('-i collection upload my_namespace my_collection');
     cy.menuGo('Collections > Collections');
-    cy.intercept('GET', apiPrefix + '_ui/v1/namespaces/my_namespace/?*').as(
+    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/my_namespace/?*`).as(
       'reload',
     );
     cy.get(

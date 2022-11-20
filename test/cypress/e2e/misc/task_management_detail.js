@@ -4,16 +4,16 @@ const uiPrefix = Cypress.env('uiPrefix');
 describe('Task detail', () => {
   before(() => {
     cy.login();
-    cy.visit(uiPrefix + 'repositories?tab=remote');
+    cy.visit(`${uiPrefix}repositories?tab=remote`);
 
     cy.contains('Repo Management');
     cy.contains('Sync');
 
-    cy.intercept('POST', apiPrefix + 'content/rh-certified/v3/sync/').as(
+    cy.intercept('POST', `${apiPrefix}content/rh-certified/v3/sync/`).as(
       'sync',
     );
 
-    cy.intercept('GET', apiPrefix + '_ui/v1/remotes/?*').as('remotes');
+    cy.intercept('GET', `${apiPrefix}_ui/v1/remotes/?*`).as('remotes');
 
     cy.get('tr').eq(2).contains('Sync').click();
 
@@ -23,7 +23,7 @@ describe('Task detail', () => {
 
   it('contains correct headers and field names.', () => {
     cy.login();
-    cy.visit(uiPrefix + 'tasks');
+    cy.visit(`${uiPrefix}tasks`);
     cy.contains('pulp_ansible.app.tasks.collections.sync').click();
 
     cy.contains('h1', 'Pulp Ansible: Collections sync');

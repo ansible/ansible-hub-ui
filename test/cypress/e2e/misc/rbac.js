@@ -51,13 +51,13 @@ describe('RBAC test for user without permissions', () => {
   });
 
   it("shouldn't display create, edit and delete buttons in namespace when user doesn't have permission", () => {
-    cy.visit(uiPrefix + 'namespaces');
+    cy.visit(`${uiPrefix}namespaces`);
 
     // cannot Add namespace
     cy.contains('Create').should('not.exist');
 
     cy.galaxykit('-i namespace create', 'testspace');
-    cy.visit(uiPrefix + 'repo/published/testspace');
+    cy.visit(`${uiPrefix}repo/published/testspace`);
 
     // cannot Change namespace and Delete namespace
     cy.get('[data-cy=kebab-toggle]').should('not.exist');
@@ -67,7 +67,7 @@ describe('RBAC test for user without permissions', () => {
   });
 
   it("shouldn't let delete collection and modify ansible repo content when user doesn't have permission", () => {
-    cy.visit(uiPrefix + 'repo/published/testspace/testcollection');
+    cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
 
     // cannot Delete collection
     cy.get('[data-cy=kebab-toggle]').should('not.exist');
@@ -76,16 +76,16 @@ describe('RBAC test for user without permissions', () => {
   it("shouldn't let view, add, change and delete users when user doesn't have permission", () => {
     // cannot View user
     cy.menuMissing('User Access > Users');
-    cy.visit(uiPrefix + 'users');
+    cy.visit(`${uiPrefix}users`);
     cy.contains('You do not have access to Automation Hub');
 
     // cannot Add user
     cy.contains('Create').should('not.exist');
-    cy.visit(uiPrefix + 'users/create');
+    cy.visit(`${uiPrefix}users/create`);
     cy.contains('You do not have access to Automation Hub');
 
     // cannot Change and Delete user
-    cy.visit(uiPrefix + 'users');
+    cy.visit(`${uiPrefix}users`);
     cy.get('[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle]').should(
       'not.exist',
     );
@@ -94,7 +94,7 @@ describe('RBAC test for user without permissions', () => {
   it("shouldn't let view, add, change and delete groups when user doesn't have permission", () => {
     // cannot View group
     cy.menuMissing('User Access > Groups');
-    cy.visit(uiPrefix + 'group-list');
+    cy.visit(`${uiPrefix}group-list`);
     cy.contains('You do not have access to Automation Hub');
 
     // cannot Add group
@@ -105,7 +105,7 @@ describe('RBAC test for user without permissions', () => {
   });
 
   it("shouldn't let create, edit or delete container when user doesn't have permission", () => {
-    cy.visit(uiPrefix + 'containers');
+    cy.visit(`${uiPrefix}containers`);
 
     // cannot Create new containers
     cy.contains('Add execution environment').should('not.exist');
@@ -117,7 +117,7 @@ describe('RBAC test for user without permissions', () => {
     cy.contains('Edit').should('not.exist');
     cy.contains('Delete').should('not.exist');
 
-    cy.visit(uiPrefix + 'containers/testcontainer');
+    cy.visit(`${uiPrefix}containers/testcontainer`);
     cy.contains('Edit').should('not.exist');
     cy.get('[aria-label="Actions"]').click();
     cy.contains('Delete').should('not.exist');
@@ -129,7 +129,7 @@ describe('RBAC test for user without permissions', () => {
   it("shouldn't let add, delete and sync remote registries when user doesn't have permission", () => {
     // can Add remote registry
     // in here we hide the button (correct), but in containers we dont (wrong)
-    cy.visit(uiPrefix + 'registries');
+    cy.visit(`${uiPrefix}registries`);
     cy.contains('Add remote registry').should('not.exist');
 
     // can Change and Delete remote registry
@@ -144,7 +144,7 @@ describe('RBAC test for user without permissions', () => {
   });
 
   it("shouldn't let view all tasks, change and delete task when user doesn't have permission", () => {
-    cy.visit(uiPrefix + 'tasks');
+    cy.visit(`${uiPrefix}tasks`);
 
     cy.get('[aria-label="Task list"] tr td a').first().click();
 
@@ -272,13 +272,13 @@ describe('RBAC test for user with permissions', () => {
     cy.login(userName, userPassword);
 
     cy.galaxykit('-i namespace create', 'testspace');
-    cy.visit(uiPrefix + 'namespaces');
+    cy.visit(`${uiPrefix}namespaces`);
 
     // can Add namespace
     cy.contains('Create').should('exist');
     cy.galaxykit('-i namespace create', 'testspace');
 
-    cy.visit(uiPrefix + 'repo/published/testspace');
+    cy.visit(`${uiPrefix}repo/published/testspace`);
     cy.get('[data-cy="ns-kebab-toggle"]').should('exist').click();
     cy.contains('Edit namespace');
     cy.contains('Delete namespace');
@@ -292,7 +292,7 @@ describe('RBAC test for user with permissions', () => {
     cy.login(userName, userPassword);
 
     cy.galaxykit('-i collection upload testspace testcollection');
-    cy.visit(uiPrefix + 'repo/published/testspace/testcollection');
+    cy.visit(`${uiPrefix}repo/published/testspace/testcollection`);
 
     // can Delete collection
     cy.get('[data-cy=kebab-toggle]').should('exist').click();
@@ -305,16 +305,16 @@ describe('RBAC test for user with permissions', () => {
 
     // can View user
     cy.menuPresent('User Access > Users');
-    cy.visit(uiPrefix + 'users');
+    cy.visit(`${uiPrefix}users`);
     cy.contains('Users');
 
     // can Add user
     cy.contains('Create');
-    cy.visit(uiPrefix + 'users/create');
+    cy.visit(`${uiPrefix}users/create`);
     cy.contains('Create new user');
 
     // can Change and Delete user
-    cy.visit(uiPrefix + 'users');
+    cy.visit(`${uiPrefix}users`);
     cy.get(
       '[data-cy="UserList-row-testUser"] [data-cy=kebab-toggle] > .pf-c-dropdown',
     ).click();
@@ -328,7 +328,7 @@ describe('RBAC test for user with permissions', () => {
 
     // can View group
     cy.menuPresent('User Access > Groups');
-    cy.visit(uiPrefix + 'group-list');
+    cy.visit(`${uiPrefix}group-list`);
     cy.contains('Groups');
 
     // can Add group
@@ -345,7 +345,7 @@ describe('RBAC test for user with permissions', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_containers');
     cy.login(userName, userPassword);
 
-    cy.visit(uiPrefix + 'containers');
+    cy.visit(`${uiPrefix}containers`);
 
     // can Create new containers
     cy.contains('Add execution environment').should('exist');
@@ -357,7 +357,7 @@ describe('RBAC test for user with permissions', () => {
     cy.contains('Edit').should('exist');
     cy.contains('Delete').should('exist');
 
-    cy.visit(uiPrefix + 'containers/testcontainer');
+    cy.visit(`${uiPrefix}containers/testcontainer`);
     cy.contains('Edit').should('exist');
     cy.get('[aria-label="Actions"]').click();
     cy.contains('Delete').should('exist');
@@ -372,7 +372,7 @@ describe('RBAC test for user with permissions', () => {
     cy.login(userName, userPassword);
 
     // can Add remote registry
-    cy.visit(uiPrefix + 'registries');
+    cy.visit(`${uiPrefix}registries`);
     cy.contains('Add remote registry').should('exist');
 
     // can Change and Delete remote registry
@@ -391,7 +391,7 @@ describe('RBAC test for user with permissions', () => {
     cy.galaxykit('-i group role add', groupName, 'galaxy.test_task_management');
     cy.login(userName, userPassword);
 
-    cy.visit(uiPrefix + 'tasks');
+    cy.visit(`${uiPrefix}tasks`);
     cy.get('[aria-label="Task list"] tr td a').first().click();
     cy.contains('Task detail');
   });

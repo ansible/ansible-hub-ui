@@ -10,7 +10,7 @@ describe('Delete a namespace', () => {
   it('deletes a namespace', () => {
     cy.galaxykit('-i namespace create', 'testns1');
     cy.menuGo('Collections > Namespaces');
-    cy.intercept('GET', apiPrefix + '_ui/v1/namespaces/?sort=name*').as(
+    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as(
       'reload',
     );
     cy.get(`a[href*="${uiPrefix}repo/published/testns1"]`).click();
@@ -27,7 +27,7 @@ describe('Delete a namespace', () => {
 
   it('cannot delete a non-empty namespace', () => {
     //create namespace
-    cy.intercept('GET', apiPrefix + '_ui/v1/namespaces/?sort=name*').as(
+    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as(
       'reload',
     );
     cy.galaxykit('-i namespace create', 'ansible');
@@ -47,7 +47,7 @@ describe('Delete a namespace', () => {
     // attempt deletion
     cy.intercept(
       'GET',
-      apiPrefix + '_ui/v1/namespaces/?sort=name&offset=0&limit=20',
+      `${apiPrefix}_ui/v1/namespaces/?sort=name&offset=0&limit=20`,
     ).as('namespaces');
     cy.menuGo('Collections > Namespaces');
     cy.wait('@namespaces');

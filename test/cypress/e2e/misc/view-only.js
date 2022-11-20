@@ -48,7 +48,7 @@ describe('view-only mode', () => {
     });
 
     it('can load Namespaces', () => {
-      cy.visit(uiPrefix + 'namespaces');
+      cy.visit(`${uiPrefix}namespaces`);
       cy.contains('.pf-c-title', 'Namespaces');
 
       cy.contains('button', 'Create').should('not.exist');
@@ -63,7 +63,7 @@ describe('view-only mode', () => {
     });
 
     it('gets Unauthorized elsewhere', () => {
-      cy.visit(uiPrefix + 'repositories');
+      cy.visit(`${uiPrefix}repositories`);
       cy.contains('You do not have access to Automation Hub');
       cy.contains('.pf-c-button', 'Login');
     });
