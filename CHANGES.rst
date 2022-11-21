@@ -1,3 +1,16 @@
+4.5.4 (2022-11-21)
+==================
+
+Bugfixes
+--------
+
+- Fix success alert after signature upload failure
+  `AAH-1769 <https://issues.redhat.com/browse/AAH-1769>`_
+
+
+----
+
+
 4.5.3 (2022-09-20)
 Bugfixes
 --------
