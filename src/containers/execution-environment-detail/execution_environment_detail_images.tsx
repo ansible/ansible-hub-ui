@@ -349,9 +349,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     canEditTags: boolean,
     cols: number,
   ) {
+    const container = this.props.match.params['container'];
     const manifestLink = (digestOrTag) =>
       formatPath(Paths.executionEnvironmentManifest, {
-        container: this.props.match.params['container'],
+        container,
         digest: digestOrTag,
       });
 
@@ -366,11 +367,13 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       </Link>
     );
 
-    const url = getContainersURL();
-    let instruction =
-      image.tags.length === 0
-        ? image.digest
-        : this.props.match.params['container'] + ':' + image.tags[0];
+    const instructions =
+      'podman pull ' +
+      getContainersURL({
+        name: container,
+        tag: image.tags?.[0],
+        digest: image.digest,
+      });
 
     const isRemote = !!this.props.containerRepository.pulp.repository.remote;
     const { isManifestList } = image;
@@ -458,9 +461,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             )}
           </td>
           <td>
-            <ClipboardCopy isReadOnly>
-              {'podman pull ' + url + '/' + instruction}
-            </ClipboardCopy>
+            <ClipboardCopy isReadOnly>{instructions}</ClipboardCopy>
           </td>
 
           <td style={{ paddingRight: '0px', textAlign: 'right' }}>

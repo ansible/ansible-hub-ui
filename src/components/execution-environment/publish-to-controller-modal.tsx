@@ -181,8 +181,7 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
 
   renderControllers() {
     const { image, isOpen } = this.props;
-    const { controllers, controllerCount, digest, tag } = this.state;
-    const url = getContainersURL();
+    const { controllers, digest, tag } = this.state;
     const unsafeLinksSupported = !Object.keys(window).includes('chrome');
 
     if (!isOpen || !controllers) {
@@ -198,13 +197,18 @@ export class PublishToControllerModal extends React.Component<IProps, IState> {
       return t`No tag or digest selected.`;
     }
 
+    const imageUrl = encodeURIComponent(
+      getContainersURL({
+        name: image,
+        tag,
+        digest,
+      }),
+    );
+
     return (
       <List isPlain isBordered>
         {controllers.map((host) => {
-          const imageUrl = `${url}/${tag ? `${image}:${tag}` : digest}`;
-          const href = `${host}/#/execution_environments/add?image=${encodeURIComponent(
-            imageUrl,
-          )}`;
+          const href = `${host}/#/execution_environments/add?image=${imageUrl}`;
 
           return (
             <ListItem style={{ paddingTop: '8px' }}>
