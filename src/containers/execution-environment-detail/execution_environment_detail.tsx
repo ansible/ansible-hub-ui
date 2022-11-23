@@ -56,18 +56,16 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 
   renderDetail() {
-    const url = getContainersURL();
-    const instructions =
-      'podman pull ' +
-      url +
-      '/' +
-      this.props.containerRepository.name +
-      ':latest';
-
     const { containerRepository } = this.props;
     const canEdit = containerRepository.namespace.my_permissions.includes(
       'container.change_containernamespace',
     );
+
+    const instructions =
+      'podman pull ' +
+      getContainersURL({
+        name: containerRepository.name,
+      });
 
     return (
       <Flex direction={{ default: 'column' }}>
