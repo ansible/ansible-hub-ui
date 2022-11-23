@@ -346,9 +346,10 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     cols: number,
   ) {
     const { hasPermission } = this.context;
+    const container = this.props.match.params['container'];
     const manifestLink = (digestOrTag) =>
       formatPath(Paths.executionEnvironmentManifest, {
-        container: this.props.match.params['container'],
+        container,
         digest: digestOrTag,
       });
 
@@ -363,11 +364,13 @@ class ExecutionEnvironmentDetailImages extends React.Component<
       </Link>
     );
 
-    const url = getContainersURL();
-    const instruction =
-      image.tags.length === 0
-        ? image.digest
-        : this.props.match.params['container'] + ':' + image.tags[0];
+    const instructions =
+      'podman pull ' +
+      getContainersURL({
+        name: container,
+        tag: image.tags?.[0],
+        digest: image.digest,
+      });
 
     const isRemote = !!this.props.containerRepository.pulp.repository.remote;
     const { isManifestList } = image;
@@ -457,9 +460,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
             )}
           </td>
           <td>
-            <ClipboardCopy isReadOnly>
-              {'podman pull ' + url + '/' + instruction}
-            </ClipboardCopy>
+            <ClipboardCopy isReadOnly>{instructions}</ClipboardCopy>
           </td>
           <ListItemActions kebabItems={dropdownItems} />
         </tr>
