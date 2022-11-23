@@ -10,6 +10,19 @@ export function getRepoUrl(distributionPath: string) {
 }
 
 // returns the server name for (protocol-less) container urls
-export function getContainersURL() {
-  return window.location.href.split('://')[1].split('/ui')[0];
+// url/image, url/image:tag, url/image@digest (including sha256: prefix)
+export function getContainersURL({
+  name,
+  tag,
+  digest,
+}: {
+  name: string;
+  tag?: string;
+  digest?: string;
+}) {
+  const host = window.location.host;
+
+  return `${host}/${name}${tag ? `:${tag}` : ''}${
+    digest && !tag ? `@${digest}` : ''
+  }`;
 }
