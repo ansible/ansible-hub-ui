@@ -73,6 +73,7 @@ jobs:
 
           RUN pip3 install --upgrade \
             requests \
+            distutils==65.5.1 \
             git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
 
           RUN mkdir -p /etc/nginx/pulp/
