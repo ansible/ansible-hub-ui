@@ -63,7 +63,6 @@ jobs:
           FROM ghcr.io/pulp/pulp-ci-centos:3.15
 
           RUN pip3 install --upgrade \
-            requests \
             git+https://github.com/ansible/galaxy_ng.git@${{ env.SHORT_BRANCH }}
 
           RUN mkdir -p /etc/nginx/pulp/
