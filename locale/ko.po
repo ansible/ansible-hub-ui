@@ -52,7 +52,7 @@ msgstr "<0/>이/가 <1/>에서 제거되었습니다"
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>참고:</0> ansible-ax를 사용하여 컬렉션 설치는 ansible 2.9+에서만 지원됩니다."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:361
+#: src/components/execution-environment/publish-to-controller-modal.tsx:365
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
 msgstr "<0>참고:</0> 브라우저에서 다음 링크가 차단될 수 있습니다. 외부 링크를 수동으로 복사하여 붙여넣습니다."
 
@@ -179,7 +179,7 @@ msgstr "활동"
 #: src/components/execution-environment/tag-manifest-modal.tsx:169
 #: src/components/rbac/owners-tab.tsx:366
 #: src/components/rbac/owners-tab.tsx:418
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:114
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:218
 #: src/containers/group-management/group-detail.tsx:282
 #: src/containers/group-management/group-detail.tsx:512
@@ -191,7 +191,7 @@ msgstr "추가"
 msgid "Add Ansible distribution"
 msgstr "Ansible 배포 추가"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:106
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:104
 msgid "Add a README with instructions for using this container."
 msgstr "이 컨테이너 사용에 대한 정보가 포함된 README를 추가합니다."
 
@@ -383,7 +383,7 @@ msgstr "배포판이 연결되어 있지 않고 원격으로 업데이트할 수
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/containers/edit-namespace/edit-namespace.tsx:159
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:158
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:211
 #: src/containers/group-management/group-detail.tsx:285
 msgid "Cancel"
@@ -520,7 +520,7 @@ msgstr "지우기"
 msgid "Clear all filters"
 msgstr "모든 필터 지우기"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:353
+#: src/components/execution-environment/publish-to-controller-modal.tsx:357
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "위의 실행 환경을 사용하려는 컨트롤러 URL을 클릭하면 해당 컨트롤러의 콘솔이 실행됩니다. (필요한 경우) 로그인하고 단계에 따라 구성을 완료합니다."
 
@@ -532,7 +532,7 @@ msgstr "클라이언트 인증서"
 msgid "Client key"
 msgstr "클라이언트 키"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:284
+#: src/components/execution-environment/publish-to-controller-modal.tsx:288
 msgid "Close"
 msgstr "닫기"
 
@@ -750,8 +750,8 @@ msgstr "콘텐츠"
 msgid "Contents"
 msgstr "콘텐츠"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:382
-#: src/components/execution-environment/publish-to-controller-modal.tsx:411
+#: src/components/execution-environment/publish-to-controller-modal.tsx:386
+#: src/components/execution-environment/publish-to-controller-modal.tsx:415
 msgid "Controller name"
 msgstr "컨트롤러 이름"
 
@@ -759,8 +759,8 @@ msgstr "컨트롤러 이름"
 msgid "Controllers list could not be displayed."
 msgstr "컨트롤러 목록을 표시할 수 없습니다."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:225
-#: src/components/execution-environment/publish-to-controller-modal.tsx:228
+#: src/components/execution-environment/publish-to-controller-modal.tsx:229
+#: src/components/execution-environment/publish-to-controller-modal.tsx:232
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:16
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:130
 msgid "Copy to clipboard"
@@ -889,7 +889,7 @@ msgstr "생성된 날짜"
 #: src/components/delete-modal/delete-modal.tsx:42
 #: src/containers/execution-environment/registry-list.tsx:405
 #: src/containers/execution-environment-detail/base.tsx:149
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:408
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:411
 #: src/containers/execution-environment-list/execution_environment_list.tsx:389
 #: src/containers/group-management/group-detail.tsx:229
 #: src/containers/group-management/group-list.tsx:422
@@ -1102,10 +1102,10 @@ msgstr "세부 정보"
 msgid "Details"
 msgstr "세부 정보"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:344
+#: src/components/execution-environment/publish-to-controller-modal.tsx:348
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:173
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:269
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:483
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:484
 msgid "Digest"
 msgstr "요약"
 
@@ -1181,7 +1181,7 @@ msgstr "드롭다운"
 #: src/containers/edit-namespace/edit-namespace.tsx:121
 #: src/containers/execution-environment/registry-list.tsx:392
 #: src/containers/execution-environment-detail/base.tsx:212
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:97
 #: src/containers/execution-environment-list/execution_environment_list.tsx:362
 #: src/containers/role-management/role-list.tsx:467
 #: src/containers/settings/user-profile.tsx:96
@@ -1424,7 +1424,7 @@ msgstr "오류 {statusCode} - {statusText}: 이 요청을 진행하는 데 필�
 #~ msgid "Error: delete failed"
 #~ msgstr "Error: delete failed"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:309
+#: src/components/execution-environment/publish-to-controller-modal.tsx:313
 msgid "Execution Environment"
 msgstr "실행 환경"
 
@@ -1690,15 +1690,15 @@ msgstr "이 작업을 취소할 수 없다는 것을 알고 있습니다."
 msgid "If selected, TLS peer validation must be performed."
 msgstr "선택한 경우 TLS 피어 유효성 검사를 수행해야 합니다."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:261
+#: src/components/execution-environment/publish-to-controller-modal.tsx:265
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "컨트롤러가 표에 나열되지 않은 경우 settings.py를 확인합니다."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:609
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:610
 msgid "Image \"{digest}\" could not be deleted."
 msgstr "이미지 \"{digest}\"은/는 삭제할 수 없습니다."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:591
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:592
 msgid "Image \"{digest}\" has been successfully deleted."
 msgstr "이미지 \"{digest}\"이/가 성공적으로 삭제되었습니다."
 
@@ -1768,7 +1768,7 @@ msgstr "설치"
 msgid "Installation"
 msgstr "설치"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:78
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:76
 msgid "Instructions"
 msgstr "설명"
 
@@ -1847,7 +1847,7 @@ msgstr "레지스트리 {0}에서 마지막으로 업데이트됨"
 msgid "Layers"
 msgstr "레이어"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:265
+#: src/components/execution-environment/publish-to-controller-modal.tsx:269
 msgid "Learn more"
 msgstr "더 알아보기"
 
@@ -1908,7 +1908,7 @@ msgid "Manage all content types."
 msgstr "모든 콘텐츠 유형을 관리합니다."
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:134
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:384
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:387
 msgid "Manage tags"
 msgstr "태그 관리"
 
@@ -2078,11 +2078,11 @@ msgstr "{0}의 새로운 버전"
 msgid "No"
 msgstr "제공되지 않음"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:299
+#: src/components/execution-environment/publish-to-controller-modal.tsx:303
 msgid "No Controllers available"
 msgstr "사용 가능한 컨트롤러 없음"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:105
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:103
 msgid "No README"
 msgstr "README 없음"
 
@@ -2179,7 +2179,7 @@ msgstr "필터 기준과 일치하는 결과가 없습니다. 필터 설정을 �
 msgid "No signature keys yet"
 msgstr "서명 키가 없음"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:200
+#: src/components/execution-environment/publish-to-controller-modal.tsx:199
 msgid "No tag or digest selected."
 msgstr "태그 또는 요악이 선택되어 있지 않습니다."
 
@@ -2234,7 +2234,7 @@ msgstr "다른 컬렉션에 사용할 필요가 없음"
 msgid "Number must be greater than 0"
 msgstr "이 필드는 0보다 커야 합니다."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:488
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:489
 msgid "OS / Arch"
 msgstr "OS/ Arch"
 
@@ -2420,7 +2420,7 @@ msgstr "풀 배포"
 msgid "Pull private containers"
 msgstr "개인 컨테이너 가져오기"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:81
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:79
 msgid "Pull this image"
 msgstr "이미지 가져오기"
 
@@ -2781,7 +2781,7 @@ msgstr "SSO URL"
 #: src/components/rbac/user-form.tsx:223
 #: src/components/repositories/remote-form.tsx:142
 #: src/containers/edit-namespace/edit-namespace.tsx:156
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:146
 msgid "Save"
 msgstr "저장"
 
@@ -2838,7 +2838,7 @@ msgstr "그룹 선택"
 msgid "Select a registry"
 msgstr "레지스트리 선택"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:331
+#: src/components/execution-environment/publish-to-controller-modal.tsx:335
 msgid "Select a tag"
 msgstr "태그 선택"
 
@@ -3159,7 +3159,7 @@ msgid "TLS validation"
 msgstr "TLS 인증"
 
 #: src/components/collection-list/collection-filter.tsx:59
-#: src/components/execution-environment/publish-to-controller-modal.tsx:314
+#: src/components/execution-environment/publish-to-controller-modal.tsx:318
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:153
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:265
 msgid "Tag"
@@ -3527,9 +3527,9 @@ msgstr "네임스페이스에 업로드"
 msgid "Upstream name"
 msgstr "업스트림 이름"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:279
+#: src/components/execution-environment/publish-to-controller-modal.tsx:283
 #: src/containers/execution-environment-detail/base.tsx:140
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:399
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:402
 #: src/containers/execution-environment-list/execution_environment_list.tsx:380
 msgid "Use in Controller"
 msgstr "컨트롤러에서 사용"

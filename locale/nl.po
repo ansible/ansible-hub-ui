@@ -52,7 +52,7 @@ msgstr "<0/> werd verwijderd uit <1/>"
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>Opmerking:</0> Het installeren van collecties met ansible-galaxy wordt alleen ondersteund in ansible 2.9+"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:361
+#: src/components/execution-environment/publish-to-controller-modal.tsx:365
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
 msgstr "<0>Opmerking:</0> De volgende links kunnen door uw browser worden geblokkeerd. Kopieer en plak de externe link handmatig."
 
@@ -179,7 +179,7 @@ msgstr "Activiteit"
 #: src/components/execution-environment/tag-manifest-modal.tsx:169
 #: src/components/rbac/owners-tab.tsx:366
 #: src/components/rbac/owners-tab.tsx:418
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:114
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:218
 #: src/containers/group-management/group-detail.tsx:282
 #: src/containers/group-management/group-detail.tsx:512
@@ -191,7 +191,7 @@ msgstr "Toevoegen"
 msgid "Add Ansible distribution"
 msgstr "Ansible-distributie toevoegen"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:106
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:104
 msgid "Add a README with instructions for using this container."
 msgstr "Voeg een README toe met instructies voor het gebruik van deze container."
 
@@ -383,7 +383,7 @@ msgstr "Ik kan niet op afstand updaten zonder dat er een distributie aan vastzit
 #: src/components/signing/sign-single-certificate-modal.tsx:40
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/containers/edit-namespace/edit-namespace.tsx:159
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:158
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:211
 #: src/containers/group-management/group-detail.tsx:285
 msgid "Cancel"
@@ -520,7 +520,7 @@ msgstr "Wissen"
 msgid "Clear all filters"
 msgstr "Alle filters wissen"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:353
+#: src/components/execution-environment/publish-to-controller-modal.tsx:357
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "Klik op de controller-URL waarin u de bovenstaande uitvoeringsomgeving wilt gebruiken, en het zal de console van die controller starten. Log in (indien nodig) en volg de stappen om de configuratie te voltooien."
 
@@ -532,7 +532,7 @@ msgstr "Klantcertificaat"
 msgid "Client key"
 msgstr "Klantsleutel"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:284
+#: src/components/execution-environment/publish-to-controller-modal.tsx:288
 msgid "Close"
 msgstr "Sluiten"
 
@@ -750,8 +750,8 @@ msgstr "inhoud"
 msgid "Contents"
 msgstr "Inhoud"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:382
-#: src/components/execution-environment/publish-to-controller-modal.tsx:411
+#: src/components/execution-environment/publish-to-controller-modal.tsx:386
+#: src/components/execution-environment/publish-to-controller-modal.tsx:415
 msgid "Controller name"
 msgstr "Naam controller"
 
@@ -759,8 +759,8 @@ msgstr "Naam controller"
 msgid "Controllers list could not be displayed."
 msgstr "Controllerslijst kon niet worden weergegeven."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:225
-#: src/components/execution-environment/publish-to-controller-modal.tsx:228
+#: src/components/execution-environment/publish-to-controller-modal.tsx:229
+#: src/components/execution-environment/publish-to-controller-modal.tsx:232
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:16
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:130
 msgid "Copy to clipboard"
@@ -889,7 +889,7 @@ msgstr "Datum aangemaakt"
 #: src/components/delete-modal/delete-modal.tsx:42
 #: src/containers/execution-environment/registry-list.tsx:405
 #: src/containers/execution-environment-detail/base.tsx:149
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:408
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:411
 #: src/containers/execution-environment-list/execution_environment_list.tsx:389
 #: src/containers/group-management/group-detail.tsx:229
 #: src/containers/group-management/group-list.tsx:422
@@ -1102,10 +1102,10 @@ msgstr "Detail"
 msgid "Details"
 msgstr "Meer informatie"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:344
+#: src/components/execution-environment/publish-to-controller-modal.tsx:348
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:173
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:269
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:483
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:484
 msgid "Digest"
 msgstr "Digest"
 
@@ -1181,7 +1181,7 @@ msgstr "Dropdown"
 #: src/containers/edit-namespace/edit-namespace.tsx:121
 #: src/containers/execution-environment/registry-list.tsx:392
 #: src/containers/execution-environment-detail/base.tsx:212
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:97
 #: src/containers/execution-environment-list/execution_environment_list.tsx:362
 #: src/containers/role-management/role-list.tsx:467
 #: src/containers/settings/user-profile.tsx:96
@@ -1424,7 +1424,7 @@ msgstr "Fout {statusCode} - {statusText}: U hebt niet de vereiste machtigingen o
 #~ msgid "Error: delete failed"
 #~ msgstr "Error: delete failed"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:309
+#: src/components/execution-environment/publish-to-controller-modal.tsx:313
 msgid "Execution Environment"
 msgstr "Uitvoeringsomgeving"
 
@@ -1690,15 +1690,15 @@ msgstr "Ik begrijp dat deze actie niet ongedaan kan worden gemaakt."
 msgid "If selected, TLS peer validation must be performed."
 msgstr "Indien geselecteerd, moet TLS-peervalidatie worden uitgevoerd."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:261
+#: src/components/execution-environment/publish-to-controller-modal.tsx:265
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "Als de controller niet in de tabel voorkomt, controleer dan settings.py."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:609
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:610
 msgid "Image \"{digest}\" could not be deleted."
 msgstr "Afbeelding \"{digest}\" kon niet worden verwijderd."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:591
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:592
 msgid "Image \"{digest}\" has been successfully deleted."
 msgstr "Afbeelding \"{digest}\" is verwijderd."
 
@@ -1768,7 +1768,7 @@ msgstr "Installeren"
 msgid "Installation"
 msgstr "Installatie"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:78
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:76
 msgid "Instructions"
 msgstr "Instructies"
 
@@ -1847,7 +1847,7 @@ msgstr "Laatst bijgewerkt vanuit register {0}"
 msgid "Layers"
 msgstr "Lagen"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:265
+#: src/components/execution-environment/publish-to-controller-modal.tsx:269
 msgid "Learn more"
 msgstr "Meer lezen"
 
@@ -1908,7 +1908,7 @@ msgid "Manage all content types."
 msgstr "Beheer alle soorten inhoud."
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:134
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:384
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:387
 msgid "Manage tags"
 msgstr "Tags beheren"
 
@@ -2078,11 +2078,11 @@ msgstr "Nieuwe versie van {0}"
 msgid "No"
 msgstr "Geen"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:299
+#: src/components/execution-environment/publish-to-controller-modal.tsx:303
 msgid "No Controllers available"
 msgstr "Geen controllers beschikbaar"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:105
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:103
 msgid "No README"
 msgstr "Geen README"
 
@@ -2179,7 +2179,7 @@ msgstr "Geen resultaten voldoen aan de filtercriteria. Probeer uw filterinstelli
 msgid "No signature keys yet"
 msgstr "Nog geen handtekeningensleutels"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:200
+#: src/components/execution-environment/publish-to-controller-modal.tsx:199
 msgid "No tag or digest selected."
 msgstr "Geen tag of digest geselecteerd."
 
@@ -2234,7 +2234,7 @@ msgstr "Niet vereist voor gebruik door andere collecties"
 msgid "Number must be greater than 0"
 msgstr "Getal moet groter zijn dan 0"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:488
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:489
 msgid "OS / Arch"
 msgstr "OS / Arch"
 
@@ -2420,7 +2420,7 @@ msgstr "Trekverdeling"
 msgid "Pull private containers"
 msgstr "Privé-containers trekken"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:81
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:79
 msgid "Pull this image"
 msgstr "Deze afbeelding trekken"
 
@@ -2781,7 +2781,7 @@ msgstr "SSO URL"
 #: src/components/rbac/user-form.tsx:223
 #: src/components/repositories/remote-form.tsx:142
 #: src/containers/edit-namespace/edit-namespace.tsx:156
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:146
 msgid "Save"
 msgstr "Opslaan"
 
@@ -2838,7 +2838,7 @@ msgstr "Een groep selecteren"
 msgid "Select a registry"
 msgstr "Een register selecteren"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:331
+#: src/components/execution-environment/publish-to-controller-modal.tsx:335
 msgid "Select a tag"
 msgstr "Een tag selecteren"
 
@@ -3159,7 +3159,7 @@ msgid "TLS validation"
 msgstr "TLS-validatie"
 
 #: src/components/collection-list/collection-filter.tsx:59
-#: src/components/execution-environment/publish-to-controller-modal.tsx:314
+#: src/components/execution-environment/publish-to-controller-modal.tsx:318
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:153
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:265
 msgid "Tag"
@@ -3527,9 +3527,9 @@ msgstr "Uploaden naar namespace"
 msgid "Upstream name"
 msgstr "Naam stroomopwaarts"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:279
+#: src/components/execution-environment/publish-to-controller-modal.tsx:283
 #: src/containers/execution-environment-detail/base.tsx:140
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:399
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:402
 #: src/containers/execution-environment-list/execution_environment_list.tsx:380
 msgid "Use in Controller"
 msgstr "Gebruiken in controller"
