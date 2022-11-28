@@ -37,6 +37,9 @@ jobs:
         # blow up without galaxy_ng commit info
         [ -n "$GALAXY_NG_COMMIT" ]
 
+        # temporary, use cached container that still works
+        GALAXY_NG_COMMIT="f621cf8f21d7a32c64c3daf46706825c53bdada5"
+
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "GALAXY_NG_COMMIT=${GALAXY_NG_COMMIT}" >> $GITHUB_ENV
 
