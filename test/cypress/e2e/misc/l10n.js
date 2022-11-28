@@ -1,3 +1,5 @@
+const uiPrefix = Cypress.env('uiPrefix');
+
 // Note up to date there is no translation for any string in 'es' and 'nl'.
 const languageCheckHelper = (url, selector) => (language, message) => {
   cy.visit(url, {
@@ -14,7 +16,7 @@ const languageCheckHelper = (url, selector) => (language, message) => {
 };
 
 describe('Localization tests with the t`String` format', () => {
-  const helper = languageCheckHelper('/ui/repositories', 'h1');
+  const helper = languageCheckHelper(`${uiPrefix}repositories`, 'h1');
 
   beforeEach(() => {
     cy.login();
@@ -36,7 +38,7 @@ describe('Localization tests with the t`String` format', () => {
 
 describe('Localization tests with the <Trans> format', () => {
   const helper = languageCheckHelper(
-    '/ui/containers',
+    `${uiPrefix}containers`,
     '[data-cy="push-images-button"]',
   );
 

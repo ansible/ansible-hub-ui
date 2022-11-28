@@ -1,3 +1,6 @@
+const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Delete a namespace', () => {
   beforeEach(() => {
     cy.login();
@@ -7,11 +10,10 @@ describe('Delete a namespace', () => {
   it('deletes a namespace', () => {
     cy.galaxykit('-i namespace create', 'testns1');
     cy.menuGo('Collections > Namespaces');
-    cy.intercept(
-      'GET',
-      Cypress.env('prefix') + '_ui/v1/namespaces/?sort=name*',
-    ).as('reload');
-    cy.get('a[href*="ui/repo/published/testns1"]').click();
+    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as(
+      'reload',
+    );
+    cy.get(`a[href*="${uiPrefix}repo/published/testns1"]`).click();
     cy.get('[data-cy="ns-kebab-toggle"]').click();
     cy.contains('Delete namespace').click();
     cy.get('input[id=delete_confirm]').click();
@@ -25,15 +27,14 @@ describe('Delete a namespace', () => {
 
   it('cannot delete a non-empty namespace', () => {
     //create namespace
-    cy.intercept(
-      'GET',
-      Cypress.env('prefix') + '_ui/v1/namespaces/?sort=name*',
-    ).as('reload');
+    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as(
+      'reload',
+    );
     cy.galaxykit('-i namespace create', 'ansible');
     cy.menuGo('Collections > Namespaces');
     cy.wait('@reload');
 
-    cy.get('a[href*="ui/repo/published/ansible"]').click();
+    cy.get(`a[href*="${uiPrefix}repo/published/ansible"]`).click();
 
     //upload a collection
 
@@ -46,7 +47,7 @@ describe('Delete a namespace', () => {
     // attempt deletion
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/namespaces/?sort=name&offset=0&limit=20',
+      `${apiPrefix}_ui/v1/namespaces/?sort=name&offset=0&limit=20`,
     ).as('namespaces');
     cy.menuGo('Collections > Namespaces');
     cy.wait('@namespaces');

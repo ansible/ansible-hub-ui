@@ -1,3 +1,5 @@
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Namespace detail screen', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
@@ -13,7 +15,7 @@ describe('Namespace detail screen', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/ui/repo/published/namespace_detail_test');
+    cy.visit(`${uiPrefix}repo/published/namespace_detail_test`);
   });
 
   it('should display the collections belonging to the namespace', () => {
@@ -29,7 +31,7 @@ describe('Namespace detail screen', () => {
     cy.contains('.body ul a', 'Deprecate').click();
 
     // Reload the page
-    cy.visit('/ui/repo/published/namespace_detail_test');
+    cy.visit(`${uiPrefix}repo/published/namespace_detail_test`);
 
     cy.get('[data-cy="CollectionListItem"]:first').contains('DEPRECATED');
   });
@@ -78,7 +80,7 @@ describe('Namespace detail screen', () => {
   it('should filter by repositories', () => {
     const namespace = 'coolestnamespace';
     cy.galaxykit('-i namespace create', namespace);
-    cy.visit(`/ui/repo/published/${namespace}`);
+    cy.visit(`${uiPrefix}repo/published/${namespace}`);
 
     cy.get('.nav-select').contains('Published').click();
     cy.contains('Red Hat Certified').click();
@@ -86,7 +88,7 @@ describe('Namespace detail screen', () => {
     cy.get('.nav-select').contains('Red Hat Certified');
     cy.url().should('include', `/repo/rh-certified/${namespace}`);
 
-    cy.visit(`/ui/repo/community/${namespace}`);
+    cy.visit(`${uiPrefix}repo/community/${namespace}`);
     cy.get('.nav-select').contains('Community');
   });
 
@@ -96,7 +98,7 @@ describe('Namespace detail screen', () => {
     cy.galaxykit('-i namespace create', namespace);
     cy.galaxykit('collection upload', namespace, collection);
 
-    cy.visit(`/ui/repo/published/${namespace}/${collection}`);
+    cy.visit(`${uiPrefix}repo/published/${namespace}/${collection}`);
     cy.get('.nav-select').contains('Published').should('be.disabled');
   });
 });

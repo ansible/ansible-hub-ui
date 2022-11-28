@@ -1,3 +1,6 @@
+const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
+
 const waitForTaskToFinish = (task, maxRequests, level = 0) => {
   if (level === maxRequests) {
     throw `Maximum requests exceeded.`;
@@ -22,7 +25,7 @@ describe('collection tests', () => {
 
   it('deletes an entire collection', () => {
     cy.galaxykit('-i collection upload test_namespace test_collection');
-    cy.visit('/ui/repo/published/test_namespace/test_collection');
+    cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
     cy.get('[data-cy=kebab-toggle]').click();
     cy.get('[data-cy=delete-collection-dropdown]').click();
@@ -30,10 +33,9 @@ describe('collection tests', () => {
 
     cy.intercept(
       'DELETE',
-      Cypress.env('prefix') +
-        'v3/plugin/ansible/content/published/collections/index/test_namespace/test_collection',
+      `${apiPrefix}v3/plugin/ansible/content/published/collections/index/test_namespace/test_collection`,
     ).as('deleteCollection');
-    cy.intercept('GET', Cypress.env('prefix') + '/v3/tasks/*').as('taskStatus');
+    cy.intercept('GET', `${apiPrefix}v3/tasks/*`).as('taskStatus');
 
     cy.get('button').contains('Delete').click();
 
@@ -51,11 +53,12 @@ describe('collection tests', () => {
   it('deletes a collection version', () => {
     cy.galaxykit('-i collection upload my_namespace my_collection');
     cy.menuGo('Collections > Collections');
-    cy.intercept(
-      'GET',
-      Cypress.env('prefix') + '_ui/v1/namespaces/my_namespace/?*',
-    ).as('reload');
-    cy.get('a[href*="ui/repo/published/my_namespace/my_collection"]').click();
+    cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/my_namespace/?*`).as(
+      'reload',
+    );
+    cy.get(
+      `a[href*="${uiPrefix}repo/published/my_namespace/my_collection"]`,
+    ).click();
     cy.get('[data-cy=kebab-toggle]').click();
     cy.get('[data-cy=delete-version-dropdown]').click();
     cy.get('input[id=delete_confirm]').click();

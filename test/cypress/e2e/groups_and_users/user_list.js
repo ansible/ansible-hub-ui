@@ -1,5 +1,7 @@
 import { range, sortBy } from 'lodash';
 
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('User list tests for sorting, paging and filtering', () => {
   let items = [];
 
@@ -22,7 +24,7 @@ describe('User list tests for sorting, paging and filtering', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/ui/users');
+    cy.visit(`${uiPrefix}users`);
   });
 
   it('table contains all columns', () => {

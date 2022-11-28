@@ -1,3 +1,5 @@
+const apiPrefix = Cypress.env('apiPrefix');
+
 describe('My Profile Tests', () => {
   const username = 'nopermission';
   const password = 'n0permissi0n';
@@ -104,7 +106,7 @@ describe('My Profile Tests', () => {
   });
 
   it('user can save form', () => {
-    cy.intercept('PUT', Cypress.env('prefix') + '_ui/v1/me/').as('saveForm');
+    cy.intercept('PUT', `${apiPrefix}_ui/v1/me/`).as('saveForm');
 
     cy.contains('Save').click();
     cy.get('[aria-label="Success Alert"]').contains(

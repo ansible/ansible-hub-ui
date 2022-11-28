@@ -1,19 +1,19 @@
+const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Task detail', () => {
   before(() => {
     cy.login();
-    cy.visit('/ui/repositories?tab=remote');
+    cy.visit(`${uiPrefix}repositories?tab=remote`);
 
     cy.contains('Repo Management');
     cy.contains('Sync');
 
-    cy.intercept(
-      'POST',
-      Cypress.env('prefix') + 'content/rh-certified/v3/sync/',
-    ).as('sync');
-
-    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/remotes/?*').as(
-      'remotes',
+    cy.intercept('POST', `${apiPrefix}content/rh-certified/v3/sync/`).as(
+      'sync',
     );
+
+    cy.intercept('GET', `${apiPrefix}_ui/v1/remotes/?*`).as('remotes');
 
     cy.get('tr').eq(2).contains('Sync').click();
 
@@ -23,7 +23,7 @@ describe('Task detail', () => {
 
   it('contains correct headers and field names.', () => {
     cy.login();
-    cy.visit('/ui/tasks');
+    cy.visit(`${uiPrefix}tasks`);
     cy.contains('pulp_ansible.app.tasks.collections.sync').click();
 
     cy.contains('h1', 'Pulp Ansible: Collections sync');

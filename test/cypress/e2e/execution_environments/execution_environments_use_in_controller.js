@@ -1,3 +1,5 @@
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Execution Environments - Use in Controller', () => {
   let num = (~~(Math.random() * 1000000)).toString(); // FIXME: maybe drop everywhere once AAH-1095 is fixed
 
@@ -21,7 +23,7 @@ describe('Execution Environments - Use in Controller', () => {
       include_tags: 'latest',
     });
 
-    cy.visit('/ui/containers/');
+    cy.visit(`${uiPrefix}containers/`);
     cy.contains('.body', `remotepine${num}`, { timeout: 10000 });
 
     cy.syncRemoteContainer(`remotepine${num}`);

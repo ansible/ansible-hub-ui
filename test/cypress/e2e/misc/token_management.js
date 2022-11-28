@@ -1,3 +1,6 @@
+const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Token Management Tests', () => {
   before(() => {
     cy.deleteTestUsers();
@@ -9,10 +12,8 @@ describe('Token Management Tests', () => {
   });
 
   it('user can load token', () => {
-    cy.visit('/ui/token');
-    cy.intercept('POST', Cypress.env('prefix') + 'v3/auth/token/').as(
-      'tokenPost',
-    );
+    cy.visit(`${uiPrefix}token`);
+    cy.intercept('POST', `${apiPrefix}v3/auth/token/`).as('tokenPost');
 
     cy.contains('Load token').click();
     cy.get('.pf-c-clipboard-copy').should('exist');

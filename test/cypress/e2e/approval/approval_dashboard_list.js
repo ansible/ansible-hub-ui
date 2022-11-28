@@ -1,5 +1,8 @@
 import { range, sortBy } from 'lodash';
 
+const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Approval Dashboard list tests for sorting, paging and filtering', () => {
   let items = [];
 
@@ -28,11 +31,9 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
   function loadData() {
     // we cant delete all data using galaxykit right now, because when collection is rejected
     // it cant be deleted. So we must load the data, that are right now in the table
-    let intercept_url =
-      Cypress.env('prefix') +
-      '_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=100';
+    let intercept_url = `${apiPrefix}_ui/v1/collection-versions/?sort=-pulp_created&offset=0&limit=100`;
 
-    cy.visit('/ui/approval-dashboard?page_size=100');
+    cy.visit(`${uiPrefix}approval-dashboard?page_size=100`);
     cy.intercept('GET', intercept_url).as('data');
     cy.contains('button', 'Clear all filters').click();
 
@@ -58,7 +59,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
 
   beforeEach(() => {
     cy.login();
-    cy.visit('/ui/approval-dashboard');
+    cy.visit(`${uiPrefix}approval-dashboard`);
     cy.contains('button', 'Clear all filters').click();
   });
 

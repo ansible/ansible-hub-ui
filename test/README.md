@@ -37,13 +37,15 @@ These are separate from the project's own dependencies. Run the following from t
 The tests need to know details about the instance of Automation Hub that it's running against. Create a file named `cypress.env.json` in the test/ directory, and use the below example as a template or start by copying `cypress.env.json.template`.
 
     {
-        "baseUrl": "http://localhost:8002/",
-        "prefix": "<api root>",
+        "apiPrefix": "<api root>",
+        "pulpPrefix": "<pulp api root>",
+        "uiPrefix": "<ui base path>",
         "username": "<your username here>",
         "password": "<your password here>",
-        "settings": "../../galaxy_ng/galaxy_ng/app/settings.py",
-        "restart": "true",
-        "containers": "localhost:5001"
+        "settings": "<path to galaxy_ng settings.py>",
+        "restart": "<command to call to apply settings change>",
+        "containers": "<container push target>",
+        "galaxykit": "<galaxykit command>"
     }
 
 *note*: the api root for the docker development environment of ansible/galaxy\_ng is `/api/automation-hub/`, while pulp-oci-images uses `/api/galaxy/`.

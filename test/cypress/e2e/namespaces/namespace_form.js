@@ -1,3 +1,5 @@
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('A namespace form', () => {
   let getCreateNamespace = () => {
     return cy.get('.pf-c-button.pf-m-primary');
@@ -16,9 +18,6 @@ describe('A namespace form', () => {
   };
   let createNamespace = () => {
     return cy.galaxykit('-i namespace create', 'testns1');
-  };
-  let getUrl = () => {
-    return cy.url();
   };
 
   beforeEach(() => {
@@ -84,6 +83,6 @@ describe('A namespace form', () => {
     let id = parseInt(Math.random() * 1000000);
     getInputBox().type(`testns_${id}`);
     getCreateButton().click();
-    getUrl().should('match', /\/ui\/repo\/published\/testns_/);
+    cy.url().should('match', new RegExp(`${uiPrefix}repo/published/testns_`));
   });
 });

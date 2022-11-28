@@ -1,3 +1,5 @@
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Namespace owners tab', () => {
   const num = (~~(Math.random() * 1000000)).toString();
 
@@ -11,7 +13,7 @@ describe('Namespace owners tab', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(`/ui/repo/published/rbac_owners_${num}`);
+    cy.visit(`${uiPrefix}repo/published/rbac_owners_${num}`);
     cy.get('.pf-c-tabs__item-text').contains('Namespace owners').click();
   });
 
@@ -52,7 +54,7 @@ describe('Execution Environment Owners tab', () => {
 
   beforeEach(() => {
     cy.login();
-    cy.visit(`/ui/containers/rbac_owners_${num}`);
+    cy.visit(`${uiPrefix}containers/rbac_owners_${num}`);
     cy.get('.pf-c-tabs__item-text').contains('Owners').click();
   });
 

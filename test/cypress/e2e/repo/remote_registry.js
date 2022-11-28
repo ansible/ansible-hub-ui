@@ -1,3 +1,6 @@
+const apiPrefix = Cypress.env('apiPrefix');
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Remote Registry Tests', () => {
   before(() => {
     cy.visit('/');
@@ -38,7 +41,7 @@ describe('Remote Registry Tests', () => {
   });
 
   it('admin can view data', () => {
-    cy.visit('/ui/registries');
+    cy.visit(`${uiPrefix}registries`);
 
     // table headers
     cy.contains('Remote Registries');
@@ -59,11 +62,11 @@ describe('Remote Registry Tests', () => {
   });
 
   it('user can sync succesfully remote registry', () => {
-    cy.visit('/ui/registries');
+    cy.visit(`${uiPrefix}registries`);
 
     cy.intercept(
       'POST',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/*/sync',
+      `${apiPrefix}_ui/v1/execution-environments/registries/*/sync`,
     ).as('sync');
 
     cy.get(
@@ -105,14 +108,14 @@ describe('Remote Registry Tests', () => {
 
     cy.intercept(
       'GET',
-      Cypress.env('prefix') + '_ui/v1/execution-environments/registries/?*',
+      `${apiPrefix}_ui/v1/execution-environments/registries/?*`,
     ).as('registriesGet');
 
     cy.contains('button', 'Save').click();
     cy.wait('@registriesGet');
 
     // verify url change in list view
-    cy.visit('/ui/registries');
+    cy.visit(`${uiPrefix}registries`);
     cy.contains('table tr', 'https://some new url2');
 
     // verify advanced option values have been saved properly.
