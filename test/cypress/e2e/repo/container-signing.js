@@ -17,23 +17,21 @@ describe('Container Signing', () => {
     // user without sign privilleges
     cy.galaxykit('-i user create', user, password);
 
-    cy.galaxykit(
-      'registry create',
-      `docker`,
-      'https://registry.hub.docker.com/',
-    );
+    cy.galaxykit('registry create', 'registry', 'https://quay.io/');
 
     cy.addRemoteContainer({
       name: 'remote1',
-      upstream_name: 'pulp/test-fixture-1',
-      registry: 'docker',
+      upstream_name: 'ansible/docker-test-containers',
+      registry: 'registry',
+      include_tags: 'hello-world',
       exclude_tags: '*-source',
     });
 
     cy.addRemoteContainer({
       name: 'remote2',
-      upstream_name: 'pulp/test-fixture-1',
-      registry: 'docker',
+      upstream_name: 'ansible/docker-test-containers',
+      registry: 'registry',
+      include_tags: 'busybox',
       exclude_tags: '*-source',
     });
 

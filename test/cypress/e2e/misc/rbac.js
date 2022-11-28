@@ -9,17 +9,13 @@ describe('RBAC test for user without permissions', () => {
   before(() => {
     cy.login();
 
-    cy.galaxykit(
-      '-i registry create',
-      'docker',
-      'https://registry.hub.docker.com/',
-    );
+    cy.galaxykit('-i registry create', 'registry', 'https://quay.io/');
 
     cy.galaxykit(
       '-i container create',
       `testcontainer`,
-      'library/alpine',
-      `docker`,
+      'ansible/docker-test-containers',
+      `registry`,
     );
 
     cy.galaxykit('-i user create', userName, userPassword);
@@ -128,7 +124,7 @@ describe('RBAC test for user without permissions', () => {
 
     // can Change and Delete remote registry
     cy.get(
-      '[data-cy="ExecutionEnvironmentRegistryList-row-docker"] [data-cy="kebab-toggle"]',
+      '[data-cy="ExecutionEnvironmentRegistryList-row-registry"] [data-cy="kebab-toggle"]',
     ).click();
     cy.contains('Edit').should('not.exist');
     cy.contains('Delete').should('not.exist');
@@ -217,16 +213,12 @@ describe('RBAC test for user with permissions', () => {
   before(() => {
     cy.login();
 
-    cy.galaxykit(
-      '-i registry create',
-      'docker',
-      'https://registry.hub.docker.com/',
-    );
+    cy.galaxykit('-i registry create', 'registry', 'https://quay.io/');
     cy.addRemoteContainer({
       name: `testcontainer`,
-      upstream_name: 'library/alpine',
-      registry: `docker`,
-      include_tags: 'latest',
+      upstream_name: 'ansible/docker-test-containers',
+      registry: `registry`,
+      include_tags: 'hello-world',
     });
 
     cy.galaxykit('-i user create', userName, userPassword);
@@ -373,7 +365,7 @@ describe('RBAC test for user with permissions', () => {
     // can sync remote registry
     cy.contains('Sync from registry').click();
     cy.get('[data-cy="AlertList"] .pf-c-alert__title').contains(
-      'Sync started for remote registry "docker".',
+      'Sync started for remote registry "registry".',
     );
   });
 

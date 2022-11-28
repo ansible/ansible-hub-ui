@@ -1,24 +1,18 @@
 describe('execution environments', () => {
-  let num = (~~(Math.random() * 1000000)).toString();
-
   before(() => {
     cy.login();
 
     cy.deleteRegistriesManual();
     cy.deleteContainersManual();
 
-    cy.galaxykit(
-      'registry create',
-      `docker${num}`,
-      'https://registry.hub.docker.com/',
-    );
+    cy.galaxykit('registry create', `registry`, 'https://quay.io/');
     cy.galaxykit(
       'container create',
-      `remotepine${num}`,
-      'library/alpine',
-      `docker${num}`,
+      `remotepine`,
+      'ansible/docker-test-containers',
+      `registry`,
     );
-    cy.addLocalContainer(`localpine${num}`, 'alpine');
+    cy.addLocalContainer(`localpine`, 'alpine');
   });
 
   beforeEach(() => {
@@ -27,7 +21,7 @@ describe('execution environments', () => {
   });
 
   it('edits a remote container', () => {
-    cy.contains('a', `remotepine${num}`).click();
+    cy.contains('a', `remotepine`).click();
     cy.get('.pf-c-button.pf-m-secondary').contains('Edit').click();
     cy.get('#description').type('This is the description.');
     cy.contains('button', 'Save').click();
@@ -39,7 +33,7 @@ describe('execution environments', () => {
   });
 
   it('edits a local container', () => {
-    cy.contains('a', `localpine${num}`).click();
+    cy.contains('a', `localpine`).click();
     cy.get('.pf-c-button.pf-m-secondary').contains('Edit').click();
     cy.get('#description').type('This is the description.');
     cy.contains('button', 'Save').click();

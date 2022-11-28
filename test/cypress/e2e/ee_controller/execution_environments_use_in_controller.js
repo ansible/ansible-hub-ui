@@ -1,26 +1,24 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Execution Environments - Use in Controller', () => {
-  let num = (~~(Math.random() * 1000000)).toString(); // FIXME: maybe drop everywhere once AAH-1095 is fixed
-
   before(() => {
     cy.login();
     cy.deleteRegistries();
     cy.deleteContainers();
-    cy.addRemoteRegistry(`docker${num}`, 'https://registry.hub.docker.com/');
+    cy.addRemoteRegistry(`registry`, 'https://quay.io/');
 
     cy.addRemoteContainer({
-      name: `remotepine${num}`,
-      upstream_name: 'library/alpine',
-      registry: `docker${num}`,
-      include_tags: 'latest',
+      name: `remotepine`,
+      upstream_name: 'ansible/docker-test-containers',
+      registry: `registry`,
+      include_tags: 'hello-world',
     });
 
     cy.visit(`${uiPrefix}containers/`);
-    cy.contains('.body', `remotepine${num}`, { timeout: 10000 });
+    cy.contains('.body', `remotepine`, { timeout: 10000 });
 
-    cy.syncRemoteContainer(`remotepine${num}`);
-    cy.addLocalContainer(`localpine${num}`, 'alpine');
+    cy.syncRemoteContainer(`remotepine`);
+    cy.addLocalContainer(`localpine`, 'alpine');
   });
 
   beforeEach(() => {

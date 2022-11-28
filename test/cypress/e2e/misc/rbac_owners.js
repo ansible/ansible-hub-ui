@@ -1,25 +1,22 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Namespace owners tab', () => {
-  const num = (~~(Math.random() * 1000000)).toString();
-
   before(() => {
     cy.deleteNamespacesAndCollections();
     cy.deleteTestGroups();
 
-    cy.galaxykit(`-i namespace create rbac_owners_${num}`);
+    cy.galaxykit(`-i namespace create rbac_owners`);
     cy.galaxykit('-i group create', `owners_group`);
   });
 
   beforeEach(() => {
     cy.login();
-    cy.visit(`${uiPrefix}repo/published/rbac_owners_${num}`);
+    cy.visit(`${uiPrefix}repo/published/rbac_owners`);
     cy.get('.pf-c-tabs__item-text').contains('Namespace owners').click();
   });
 
   it('add and remove group and roles', () => {
     testOwnersTab({
-      num,
       permission: 'change_namespace',
       permissionGroup: 'Galaxy',
       permissionLabel: 'Change namespace',
@@ -30,37 +27,30 @@ describe('Namespace owners tab', () => {
 });
 
 describe('Execution Environment Owners tab', () => {
-  const num = (~~(Math.random() * 1000000)).toString();
-
   before(() => {
     cy.login();
     cy.deleteRegistries();
     cy.deleteContainers();
     cy.deleteTestGroups();
 
-    cy.galaxykit(
-      'registry create',
-      `rbac_owners_${num}_registry`,
-      'https://registry.hub.docker.com/',
-    );
+    cy.galaxykit('registry create', `rbac_owners_registry`, 'https://quay.io/');
     cy.galaxykit(
       'container create',
-      `rbac_owners_${num}`,
-      'library/alpine',
-      `rbac_owners_${num}_registry`,
+      `rbac_owners`,
+      'ansible/docker-test-containers',
+      `rbac_owners_registry`,
     );
     cy.galaxykit('-i group create', `owners_group`);
   });
 
   beforeEach(() => {
     cy.login();
-    cy.visit(`${uiPrefix}containers/rbac_owners_${num}`);
+    cy.visit(`${uiPrefix}containers/rbac_owners`);
     cy.get('.pf-c-tabs__item-text').contains('Owners').click();
   });
 
   it('add and remove group and roles', () => {
     testOwnersTab({
-      num,
       permission: 'change_containernamespace',
       permissionGroup: 'Container',
       permissionLabel: 'Change container namespace permissions',
@@ -71,7 +61,6 @@ describe('Execution Environment Owners tab', () => {
 });
 
 function testOwnersTab({
-  num,
   permission,
   permissionGroup,
   permissionLabel,
@@ -119,7 +108,7 @@ function testOwnersTab({
   cy.get('footer button').contains('Add').click();
   cy.get('.pf-c-alert__title')
     .contains(
-      `Group "owners_group" has been successfully added to "rbac_owners_${num}".`,
+      `Group "owners_group" has been successfully added to "rbac_owners".`,
     )
     .parent('.pf-c-alert')
     .find('button')
@@ -143,7 +132,7 @@ function testOwnersTab({
   cy.get('footer button').contains('Add').click();
   cy.get('.pf-c-alert__title')
     .contains(
-      `Group "owners_group" roles successfully updated in "rbac_owners_${num}".`,
+      `Group "owners_group" roles successfully updated in "rbac_owners".`,
     )
     .parent('.pf-c-alert')
     .find('button')
@@ -163,11 +152,11 @@ function testOwnersTab({
   cy.get('.pf-c-dropdown__menu-item').contains('Remove role').click();
   cy.get('.pf-c-modal-box__body b').contains('owners_group');
   cy.get('.pf-c-modal-box__body b').contains(role);
-  cy.get('.pf-c-modal-box__body b').contains(`rbac_owners_${num}`);
+  cy.get('.pf-c-modal-box__body b').contains(`rbac_owners`);
   cy.get('[data-cy=delete-button]').click();
   cy.get('.pf-c-alert__title')
     .contains(
-      `Group "owners_group" roles successfully updated in "rbac_owners_${num}".`,
+      `Group "owners_group" roles successfully updated in "rbac_owners".`,
     )
     .parent('.pf-c-alert')
     .find('button')
@@ -182,11 +171,11 @@ function testOwnersTab({
   ).click();
   cy.get('.pf-c-dropdown__menu-item').contains('Remove group').click();
   cy.get('.pf-c-modal-box__body b').contains('owners_group');
-  cy.get('.pf-c-modal-box__body b').contains(`rbac_owners_${num}`);
+  cy.get('.pf-c-modal-box__body b').contains(`rbac_owners`);
   cy.get('[data-cy=delete-button]').click();
   cy.get('.pf-c-alert__title')
     .contains(
-      `Group "owners_group" has been successfully removed from "rbac_owners_${num}".`,
+      `Group "owners_group" has been successfully removed from "rbac_owners".`,
     )
     .parent('.pf-c-alert')
     .find('button')
