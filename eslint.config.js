@@ -1,15 +1,22 @@
 const globals = require('globals');
+const react = require('eslint-plugin-react');
+//const reactRecommended = require('eslint-plugin-react/configs/recommended');
+const ts = require('@typescript-eslint/eslint-plugin');
 
 module.exports = [
   // .eslintrc extends
   'eslint:recommended',
-  // require('eslint-plugin-react'), // TODO Unexpected key "deprecatedRules" found.
+  //reactRecommended,
   // require('@typescript-eslint/eslint-plugin/dist/configs/eslint-recommended'), // TODO Unexpected key "overrides" found.
   require('eslint-config-prettier'),
 
   // .eslintrc
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
+    plugins: {
+      react,
+      ts,
+    },
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -48,7 +55,7 @@ module.exports = [
       },
     },
     rules: {
-      "@typescript-eslint/no-var-requires": "off",
+      "ts/no-var-requires": "off",
     },
   },
 
