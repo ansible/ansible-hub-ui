@@ -1,6 +1,5 @@
 import React from 'react';
 import { t, Trans } from '@lingui/macro';
-import { i18n } from '@lingui/core';
 import { AppContext } from 'src/loaders/app-context';
 import {
   Link,
@@ -27,6 +26,7 @@ import {
   ListItemActions,
   PermissionChipSelector,
   DateComponent,
+  PermissionCategories,
 } from 'src/components';
 import {
   Button,
@@ -131,8 +131,6 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
 
     const noData =
       roleCount === 0 && !filterIsSet(params, ['name__icontains', 'locked']);
-
-    const groups = Constants.PERMISSIONS;
 
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
@@ -325,51 +323,11 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                           key={role.name}
                           expandableRowContent={
                             <>
-                              {groups.map((group) => (
-                                <Flex
-                                  style={{ marginTop: '16px' }}
-                                  alignItems={{ default: 'alignItemsCenter' }}
-                                  key={group.name}
-                                  className={group.name}
-                                >
-                                  <FlexItem style={{ minWidth: '200px' }}>
-                                    {i18n._(group.label)}
-                                  </FlexItem>
-                                  <FlexItem grow={{ default: 'grow' }}>
-                                    <PermissionChipSelector
-                                      availablePermissions={group.object_permissions
-                                        .filter(
-                                          (perm) =>
-                                            !role.permissions.find(
-                                              (selected) => selected === perm,
-                                            ),
-                                        )
-                                        .map((value) =>
-                                          twoWayMapper(
-                                            value,
-                                            filteredPermissions,
-                                          ),
-                                        )
-                                        .sort()}
-                                      selectedPermissions={role.permissions
-                                        .filter((selected) =>
-                                          group.object_permissions.find(
-                                            (perm) => selected === perm,
-                                          ),
-                                        )
-                                        .map((value) =>
-                                          twoWayMapper(
-                                            value,
-                                            filteredPermissions,
-                                          ),
-                                        )}
-                                      menuAppendTo='inline'
-                                      multilingual={true}
-                                      isViewOnly={true}
-                                    />
-                                  </FlexItem>
-                                </Flex>
-                              ))}
+                              <PermissionCategories
+                                isPermGroupVisible={true}
+                                displayUnknownPerms={true}
+                                role={role}
+                              />
                             </>
                           }
                           data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}

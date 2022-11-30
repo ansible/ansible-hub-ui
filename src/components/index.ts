@@ -56,6 +56,7 @@ export {
 export { OwnersTab } from './rbac/owners-tab';
 export { Pagination } from './patternfly-wrappers/pagination';
 export { PartnerHeader } from './headers/partner-header';
+export { PermissionCategories } from './rbac/permission-categories';
 export { PermissionChipSelector } from './rbac/permission-chip-selector';
 export { PublishToControllerModal } from './execution-environment/publish-to-controller-modal';
 export { RenderPluginDoc } from './render-plugin-doc/render-plugin-doc';
