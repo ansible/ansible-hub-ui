@@ -77,7 +77,6 @@ jobs:
       working-directory: 'oci_env'
       run: |
         pip install --editable ./client/
-
         # merge common, profile-specific and test matrix specific config
         cat ../ansible-hub-ui/.github/workflows/cypress/compose.env.common \
           ../ansible-hub-ui/.github/workflows/cypress/compose.env."$COMPOSE_PROFILE" \
