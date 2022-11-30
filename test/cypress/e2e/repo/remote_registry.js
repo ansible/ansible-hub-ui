@@ -3,13 +3,13 @@ const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Remote Registry Tests', () => {
   before(() => {
-    cy.visit('/');
+    cy.visit(uiPrefix);
     cy.login();
     cy.deleteRegistries();
   });
 
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit(uiPrefix);
     cy.login();
   });
 

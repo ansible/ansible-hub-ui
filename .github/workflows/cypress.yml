@@ -26,15 +26,18 @@ jobs:
       fail-fast: false
       matrix:
         test:
-        - 'collections'
         - 'approval'
+        - 'collections'
+        - 'ee_controller'
         - 'execution_environments'
-        - 'namespaces'
         - 'groups_and_users'
-        - 'repo'
-        - 'misc'
         - 'imports'
         - 'insights'
+        - 'misc'
+        - 'namespaces'
+        - 'repo'
+        - 'view-only-access'
+        - 'view-only-download'
 
     steps:
 
@@ -74,19 +77,11 @@ jobs:
       run: |
         pip install --editable ./client/
 
-        PROFILE=`[ "$COMPOSE_PROFILE" = 'standalone' ] && echo 'galaxy_ng/base' || echo 'galaxy_ng/base:galaxy_ng/insights'`
-        echo '
-          COMPOSE_PROFILE='"$PROFILE"'
-          DEV_SOURCE_PATH=galaxy_ng
-          COMPOSE_BINARY=docker
-          DJANGO_SUPERUSER_USERNAME=admin
-          DJANGO_SUPERUSER_PASSWORD=admin
-          API_PORT=5001
-
-          ENABLE_SIGNING=1
-          SETUP_TEST_DATA=0
-          UPDATE_UI=0
-        ' | sed 's/^\s\+//' | tee compose.env
+        # merge common, profile-specific and test matrix specific config
+        cat ../ansible-hub-ui/.github/workflows/cypress/compose.env.common \
+          ../ansible-hub-ui/.github/workflows/cypress/compose.env."$COMPOSE_PROFILE" \
+          ../ansible-hub-ui/test/cypress/e2e/"${{ matrix.test }}"/compose.env \
+          | sed 's/^\s\+//' | tee compose.env || [ -s compose.env ]
 
     - name: "oci-env compose build"
       working-directory: 'oci_env'
@@ -187,6 +182,7 @@ jobs:
         echo waiting for containers to start
         sleep 30
         curl http://localhost:8002/beta/ansible/automation-hub/ | tee /dev/stderr | grep '/beta/apps/chrome/js/'
+        sleep 10
 
     - name: "Ensure galaxykit can connect to API (standalone)"
       if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
@@ -211,19 +207,21 @@ jobs:
       run: |
         curl -s http://localhost:5001/api/automation-hub/_ui/v1/feature-flags/ | jq
 
-    - name: "Check component versions (standalone)"
+    - name: "Check component versions & settings (standalone)"
       if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       run: |
         HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:5001/api/galaxy/v3/auth/token/ | jq -r .token`
         curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/ | jq
+        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/_ui/v1/settings/ | jq
 
-    - name: "Check component versions (insights)"
+    - name: "Check component versions & settings (insights)"
       if: ${{ env.COMPOSE_PROFILE == 'insights' }}
       run: |
         BEARER=`curl -s -H "Content-Type: application/x-www-form-urlencoded" \
           -d "client_id=cloud-services&username=admin&password=admin&grant_type=password" \
           http://localhost:8002/auth/realms/redhat-external/protocol/openid-connect/token | jq -r .access_token`
         curl -s -H "Authorization: Bearer $BEARER" http://localhost:8002/api/automation-hub/ | jq
+        curl -s -H "Authorization: Bearer $BEARER" http://localhost:8002/api/automation-hub/_ui/v1/settings/ | jq
 
     - name: "Check if e2e contains only dirs in matrix test array"
       working-directory: 'ansible-hub-ui'
@@ -234,8 +232,8 @@ jobs:
       working-directory: 'ansible-hub-ui/test'
       run: |
         sed -i '/specPattern:/s/\*\*/${{matrix.test}}/' cypress.config.js
-        echo "result of the config file:"
-        cat cypress.config.js
+        grep specPattern cypress.config.js
+
         npm run cypress:chrome
 
     - uses: actions/upload-artifact@v3

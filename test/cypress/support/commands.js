@@ -301,59 +301,6 @@ Cypress.Commands.add('deleteTestGroups', {}, () => {
   });
 });
 
-/// settings.py manipulation
-Cypress.Commands.add('settings', {}, (newSettings) => {
-  const settings = Cypress.env('settings'); // location for the settings.py file
-  const restart = Cypress.env('restart'); // command to apply the settings
-
-  const pythonifyValue = (v) =>
-    v === true
-      ? 'True'
-      : v === false
-      ? 'False'
-      : v == null
-      ? 'None'
-      : JSON.stringify(v);
-  const pythonify = (obj) =>
-    obj
-      ? Object.keys(obj).map((k) => `${k} = ${pythonifyValue(obj[k])} #CYPRESS`)
-      : [];
-
-  const newLines = pythonify(newSettings);
-  console.log('log', `SETTINGS ${settings} ${newLines.join('\n')}`);
-
-  return cy
-    .readFile(settings)
-    .then((data) => {
-      const currentLines = data
-        .split('\n')
-        .filter((line) => !line.match('#CYPRESS'));
-      return cy.writeFile(settings, [...currentLines, ...newLines].join('\n'));
-    })
-    .then(() => cy.exec(restart))
-    .then(({ code, stderr, stdout }) => {
-      console.log(`RUN ${restart} ${code} ${stdout} ${stderr}`);
-
-      if (code) {
-        return Promise.reject(new Error(`Restart failed (${code}): ${stderr}`));
-      }
-    })
-    .then(() => cy.wait(2000))
-    .then(() => {
-      // wait for server to respond with a good status (502 means server didn't restart yet)
-      // ..after waiting to make sure we're not faster than the restart
-      cy.request({
-        url: `${apiPrefix}_ui/v1/feature-flags/`,
-        retryOnStatusCodeFailure: true,
-      }).then((response) => {
-        console.log(
-          `feture flags after settings change ${JSON.stringify(response.body)}`,
-        );
-        expect(response.status).to.eq(200);
-      });
-    });
-});
-
 Cypress.Commands.add('addRemoteRegistry', {}, (name, url, extra = null) => {
   cy.menuGo('Execution Environments > Remote Registries');
   cy.contains('button', 'Add remote registry').click();

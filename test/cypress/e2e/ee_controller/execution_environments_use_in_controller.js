@@ -4,13 +4,6 @@ describe('Execution Environments - Use in Controller', () => {
   let num = (~~(Math.random() * 1000000)).toString(); // FIXME: maybe drop everywhere once AAH-1095 is fixed
 
   before(() => {
-    cy.settings({
-      CONNECTED_ANSIBLE_CONTROLLERS: [
-        'https://www.example.com',
-        'https://another.example.com',
-      ],
-    });
-
     cy.login();
     cy.deleteRegistries();
     cy.deleteContainers();
@@ -130,9 +123,5 @@ describe('Execution Environments - Use in Controller', () => {
         cy.get('button[aria-label="Close"]').click();
       });
     });
-  });
-
-  after(() => {
-    cy.settings(); // reset
   });
 });
