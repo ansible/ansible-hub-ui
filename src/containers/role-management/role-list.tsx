@@ -24,7 +24,6 @@ import {
   RoleListTable,
   ExpandableRow,
   ListItemActions,
-  PermissionChipSelector,
   DateComponent,
   PermissionCategories,
 } from 'src/components';
@@ -35,8 +34,6 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  Flex,
-  FlexItem,
   Tooltip,
 } from '@patternfly/react-core';
 import { RoleType } from 'src/api/response-types/role';
@@ -45,7 +42,6 @@ import {
   filterIsSet,
   ParamHelper,
   parsePulpIDFromURL,
-  twoWayMapper,
   translateLockedRolesDescription,
 } from 'src/utilities';
 

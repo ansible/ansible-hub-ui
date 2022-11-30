@@ -2,7 +2,6 @@ import * as React from 'react';
 import { i18n } from '@lingui/core';
 import { AppContext } from 'src/loaders/app-context';
 import { RoleType, PermissionType } from 'src/api';
-import { twoWayMapper } from 'src/utilities';
 import { PermissionChipSelector } from 'src/components';
 
 import { Flex, FlexItem } from '@patternfly/react-core';
@@ -54,24 +53,13 @@ export class PermissionCategories extends React.Component<IProps, IState> {
                     (perm) =>
                       !role.permissions.find((selected) => selected === perm),
                   )
-                  // .map((value) =>
-                  //   twoWayMapper(
-                  //     value,
-                  //     filteredPermissions,
-                  //   ),
-                  // )
+                  .map((permission) => this.getNicenames(permission))
                   .sort()}
-                selectedPermissions={
-                  role.permissions.filter((selected) =>
+                selectedPermissions={role.permissions
+                  .filter((selected) =>
                     group.object_permissions.find((perm) => selected === perm),
                   )
-                  // .map((value) =>
-                  //   twoWayMapper(
-                  //     value,
-                  //     filteredPermissions,
-                  //   ),
-                  // )
-                }
+                  .map((permission) => this.getNicenames(permission))}
                 menuAppendTo='inline'
                 multilingual={true}
                 isViewOnly={true}
@@ -101,5 +89,14 @@ export class PermissionCategories extends React.Component<IProps, IState> {
       formattedPermissions,
     ) as PermissionType[];
     return arrayPermissions;
+  }
+
+  private getNicenames(permission) {
+    const { model_permissions } = this.context.user;
+    if (model_permissions[permission].name !== undefined) {
+      return model_permissions[permission].name;
+    } else {
+      return undefined;
+    }
   }
 }
