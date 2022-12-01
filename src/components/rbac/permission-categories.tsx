@@ -32,7 +32,6 @@ export class PermissionCategories extends React.Component<IProps, IState> {
 
   render() {
     const { groups } = this.state;
-    console.log('groups are us: ', groups);
     const { role } = this.props;
     return (
       <React.Fragment>
