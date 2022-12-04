@@ -165,7 +165,7 @@ msgstr "活动"
 #: src/components/execution-environment/repository-form.tsx:290
 #: src/components/execution-environment/repository-form.tsx:333
 #: src/components/execution-environment/tag-manifest-modal.tsx:169
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:118
 #: src/containers/group-management/group-detail.tsx:477
 #: src/containers/group-management/group-detail.tsx:697
 #: src/containers/group-management/group-detail.tsx:748
@@ -176,7 +176,7 @@ msgstr "添加"
 msgid "Add Ansible distribution"
 msgstr "添加 Ansible 发布"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:106
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:108
 msgid "Add a README with instructions for using this container."
 msgstr "添加一个包括使用这个容器信息的 README。"
 
@@ -317,7 +317,7 @@ msgstr "在未将一个发布附加到它时，无法远程更新。"
 #: src/components/signing/sign-single-certificate-modal.tsx:35
 #: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:162
 #: src/containers/group-management/group-detail.tsx:437
 #: src/containers/group-management/group-detail.tsx:480
 msgid "Cancel"
@@ -1010,7 +1010,7 @@ msgstr "下拉菜单"
 #: src/containers/edit-namespace/edit-namespace.tsx:152
 #: src/containers/execution-environment/registry-list.tsx:393
 #: src/containers/execution-environment-detail/base.tsx:194
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:101
 #: src/containers/execution-environment-list/execution_environment_list.tsx:356
 #: src/containers/group-management/group-detail.tsx:401
 #: src/containers/group-management/group-list.tsx:420
@@ -1804,7 +1804,7 @@ msgstr "否"
 msgid "No Controllers available"
 msgstr "没有控制器可用"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:105
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:107
 msgid "No README"
 msgstr "没有 README"
 
@@ -2378,7 +2378,7 @@ msgstr "SSO URL"
 #: src/components/repositories/remote-form.tsx:142
 #: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:197
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:150
 #: src/containers/group-management/group-detail.tsx:430
 msgid "Save"
 msgstr "保存"
