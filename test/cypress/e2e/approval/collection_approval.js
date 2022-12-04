@@ -2,21 +2,12 @@ const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('tests the approval list screen ', () => {
-  before(() => {
-    cy.settings({
-      GALAXY_REQUIRE_CONTENT_APPROVAL: true,
-    });
-  });
   beforeEach(() => {
     cy.login();
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'ansible');
     cy.galaxykit('-i collection upload ansible network');
     cy.visit(`${uiPrefix}approval-dashboard`);
-  });
-
-  after(() => {
-    cy.settings();
   });
 
   it('has a default Needs Review filter', () => {
@@ -41,10 +32,10 @@ describe('tests the approval list screen ', () => {
 
     // approve
     cy.get('button[aria-label="Actions"]:first').click();
-    cy.contains('Approve').click();
+    cy.contains('Sign and approve').click();
     cy.contains(
       '[data-cy="CertificationDashboard-row"]:first-child',
-      'Approved',
+      'Signed and approved',
     );
   });
 

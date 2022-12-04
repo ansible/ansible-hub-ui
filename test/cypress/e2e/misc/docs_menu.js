@@ -1,6 +1,8 @@
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Token Management Tests', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit(uiPrefix);
     cy.login();
   });
 

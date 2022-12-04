@@ -26,15 +26,18 @@ jobs:
       fail-fast: false
       matrix:
         test:
-        - 'collections'
         - 'approval'
+        - 'collections'
+        - 'ee_controller'
         - 'execution_environments'
-        - 'namespaces'
         - 'groups_and_users'
-        - 'repo'
-        - 'misc'
         - 'imports'
         - 'insights'
+        - 'misc'
+        - 'namespaces'
+        - 'repo'
+        - 'view-only-access'
+        - 'view-only-download'
 
     steps:
 
@@ -43,74 +46,50 @@ jobs:
         # pip install git+https://github.com/ansible/galaxykit.git@branch_name
         pip install git+https://github.com/ansible/galaxykit.git
 
-    - name: "Set env.SHORT_BRANCH, GALAXY_NG_COMMIT, COMPOSE_PROFILE, API_BASE"
+    - name: "Set env.SHORT_BRANCH, COMPOSE_PROFILE"
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
-        GALAXY_NG_COMMIT=`curl -s https://api.github.com/repos/ansible/galaxy_ng/branches/${SHORT_BRANCH} | jq -r .commit.sha`
         COMPOSE_PROFILE=`[ "${{ matrix.test }}" = 'insights' ] && echo 'insights' || echo 'standalone'`
-        API_PORT=`[ "$COMPOSE_PROFILE" = "standalone" ] && echo '8002' || echo '5001'`
-        API_BASE=http://localhost:"$API_PORT"/api/`[ "$COMPOSE_PROFILE" = 'standalone' ] && echo 'galaxy' || echo 'automation-hub'`
-
-        # blow up without galaxy_ng commit info
-        [ -n "$GALAXY_NG_COMMIT" ]
 
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
-        echo "GALAXY_NG_COMMIT=${GALAXY_NG_COMMIT}" >> $GITHUB_ENV
         echo "COMPOSE_PROFILE=${COMPOSE_PROFILE}" >> $GITHUB_ENV
-        echo "API_PORT=${API_PORT}" >> $GITHUB_ENV
-        echo "API_BASE=${API_BASE}" >> $GITHUB_ENV
-
-    - run: "mkdir pulp_galaxy_ng"
-
-    - name: "Cache container image for pulp_galaxy_ng ${{ env.SHORT_BRANCH }} ${{ env.GALAXY_NG_COMMIT }}"
-      id: cache-container
-      uses: actions/cache@v3
-      with:
-        path: pulp_galaxy_ng/image
-        key: pulp-galaxy-ng-${{ env.SHORT_BRANCH }}-${{ env.GALAXY_NG_COMMIT }}
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v3
       with:
         path: 'ansible-hub-ui'
 
-    - name: "Build pulp-galaxy-ng"
-      if: steps.cache-container.outputs.cache-hit != 'true'
-      working-directory: 'pulp_galaxy_ng'
+    - name: "Checkout galaxy_ng (${{ env.SHORT_BRANCH }})"
+      uses: actions/checkout@v3
+      with:
+        repository: 'ansible/galaxy_ng'
+        ref: '${{ env.SHORT_BRANCH }}'
+        path: 'galaxy_ng'
+
+    - name: "Checkout oci_env (main)"
+      uses: actions/checkout@v3
+      with:
+        repository: 'pulp/oci_env'
+        path: 'oci_env'
+
+    - name: "Configure oci_env"
+      working-directory: 'oci_env'
       run: |
-        cp -aiv ../ansible-hub-ui/.github/workflows/cypress/* .
-        sed -i \
-          -e 's|\$REPO|ansible/galaxy_ng|' \
-          -e 's|\$BRANCH|${{ env.SHORT_BRANCH }}|' \
-          Containerfile
+        pip install --editable ./client/
 
-        buildah bud --file Containerfile --tag localhost/pulp/pulp-galaxy-ng:latest .
-        rm -f image # ensure older version is gone, podman save errors otherwise
-        podman save localhost/pulp/pulp-galaxy-ng:latest -o image
+        # merge common, profile-specific and test matrix specific config
+        cat ../ansible-hub-ui/.github/workflows/cypress/compose.env.common \
+          ../ansible-hub-ui/.github/workflows/cypress/compose.env."$COMPOSE_PROFILE" \
+          ../ansible-hub-ui/test/cypress/e2e/"${{ matrix.test }}"/compose.env \
+          | sed 's/^\s\+//' | tee compose.env || [ -s compose.env ]
 
-    - name: "Load pulp-galaxy-ng from cache"
-      if: steps.cache-container.outputs.cache-hit == 'true'
-      working-directory: 'pulp_galaxy_ng'
-      run: podman load -i image
+    - name: "oci-env compose build"
+      working-directory: 'oci_env'
+      run: 'oci-env compose build'
 
-    - name: "Configure and run pulp-galaxy-ng"
-      working-directory: 'pulp_galaxy_ng'
-      run: |
-        # static unused in insights
-        mkdir settings static
-        cp -aiv ../ansible-hub-ui/.github/workflows/cypress/settings.py."$COMPOSE_PROFILE" settings/settings.py
-
-        podman run \
-             --detach \
-             --publish "$API_PORT":80 \
-             --name pulp \
-             --volume "$(pwd)/settings":/etc/pulp \
-             --volume "$(pwd)/static":/galaxy_ng_static \
-             --tmpfs /var/lib/pulp \
-             --tmpfs /var/lib/pgsql \
-             --tmpfs /var/lib/containers \
-             --device /dev/fuse \
-             localhost/pulp/pulp-galaxy-ng:latest
+    - name: "oci-env compose up"
+      working-directory: 'oci_env'
+      run: 'oci-env compose up &'
 
     - name: "Install node 16"
       uses: actions/setup-node@v3
@@ -144,12 +123,19 @@ jobs:
         BUILD_HASH=`ls dist/js/App*js | cut -d. -f2,3`
         echo "BUILD_HASH=${BUILD_HASH}" >> $GITHUB_ENV
 
-        rm -rf ../pulp_galaxy_ng/static/galaxy_ng/ || true
-        mv -v dist/ ../pulp_galaxy_ng/static/galaxy_ng
-
-        # apply changes, runs collectstatic and serves static assets
-        podman exec --user pulp:pulp pulp bash -c "PULP_STATIC_ROOT=/var/lib/operator/static/ PULP_CONTENT_ORIGIN=localhost /usr/local/bin/pulpcore-manager collectstatic --clear --noinput --link"
-        podman exec pulp bash -c "s6-svc -r /var/run/s6-rc/servicedirs/pulpcore-api"
+    - name: "Serve standalone UI"
+      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
+      run: |
+        mkdir -p www/static/
+        mv ansible-hub-ui/dist www/static/galaxy_ng
+        cd www
+        echo '{}' > package.json
+        npm install local-web-server
+        node_modules/.bin/ws --port 8002 --directory . --spa static/galaxy_ng/index.html \
+          --rewrite '/api/(.*) -> http://localhost:5001/api/$1' \
+          --rewrite '/pulp/api/(.*) -> http://localhost:5001/pulp/api/$1' \
+          --rewrite '/v2/(.*) -> http://localhost:5001/v2/$1' \
+          --rewrite '/extensions/v2/(.*) -> http://localhost:5001/extensions/v2/$1' &
 
     - name: "Run insights UI"
       if: ${{ env.COMPOSE_PROFILE == 'insights' }}
@@ -174,15 +160,6 @@ jobs:
 
         npm run start &
 
-    - name: "Reset admin password"
-      run: |
-        # podman exec pulp pip install django_extensions
-        podman exec pulp pulpcore-manager reset-admin-password --password admin
-
-    - name: "Enable signing service"
-      run: |
-        podman exec --user pulp:pulp pulp /tmp/signing-setup.sh
-
     - name: "Install Cypress & test dependencies"
       working-directory: 'ansible-hub-ui/test'
       run: |
@@ -202,23 +179,49 @@ jobs:
     - name: "Ensure insights is served"
       if: ${{ env.COMPOSE_PROFILE == 'insights' }}
       run: |
-        echo wait for containers to start
+        echo waiting for containers to start
+        sleep 30
         curl http://localhost:8002/beta/ansible/automation-hub/ | tee /dev/stderr | grep '/beta/apps/chrome/js/'
+        sleep 30
 
-    - name: "Ensure galaxykit can connect to the server"
+    - name: "Ensure galaxykit can connect to API (standalone)"
       if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       run: |
-        galaxykit -s "$API_BASE"/ -u admin -p admin collection list
+        galaxykit -s http://localhost:8002/api/galaxy/ -u admin -p admin collection list
 
-    - name: "Check initial feature flags"
+    - name: "Ensure galaxykit can connect to API (insights)"
+      if: ${{ env.COMPOSE_PROFILE == 'insights' }}
       run: |
-        curl -s "$API_BASE"/_ui/v1/feature-flags/ | jq
+        galaxykit -s http://localhost:8002/api/automation-hub/ \
+          -u admin -p admin \
+          --auth-url http://localhost:8002/auth/realms/redhat-external/protocol/openid-connect/token \
+          collection list
 
-    - name: "Check component versions"
+    - name: "Check initial feature flags (standalone)"
       if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
       run: |
-        HUB_TOKEN=`curl -s -u admin:admin -d '' "$API_BASE"/v3/auth/token/ | jq -r .token`
-        curl -s -H "Authorization: Token $HUB_TOKEN" "$API_BASE"/ | jq
+        curl -s http://localhost:5001/api/galaxy/_ui/v1/feature-flags/ | jq
+
+    - name: "Check initial feature flags (insights)"
+      if: ${{ env.COMPOSE_PROFILE == 'insights' }}
+      run: |
+        curl -s http://localhost:5001/api/automation-hub/_ui/v1/feature-flags/ | jq
+
+    - name: "Check component versions & settings (standalone)"
+      if: ${{ env.COMPOSE_PROFILE == 'standalone' }}
+      run: |
+        HUB_TOKEN=`curl -s -u admin:admin -d '' http://localhost:5001/api/galaxy/v3/auth/token/ | jq -r .token`
+        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/ | jq
+        curl -s -H "Authorization: Token $HUB_TOKEN" http://localhost:5001/api/galaxy/_ui/v1/settings/ | jq
+
+    - name: "Check component versions & settings (insights)"
+      if: ${{ env.COMPOSE_PROFILE == 'insights' }}
+      run: |
+        BEARER=`curl -s -H "Content-Type: application/x-www-form-urlencoded" \
+          -d "client_id=cloud-services&username=admin&password=admin&grant_type=password" \
+          http://localhost:8002/auth/realms/redhat-external/protocol/openid-connect/token | jq -r .access_token`
+        curl -s -H "Authorization: Bearer $BEARER" http://localhost:8002/api/automation-hub/ | jq
+        curl -s -H "Authorization: Bearer $BEARER" http://localhost:8002/api/automation-hub/_ui/v1/settings/ | jq
 
     - name: "Check if e2e contains only dirs in matrix test array"
       working-directory: 'ansible-hub-ui'
@@ -229,8 +232,8 @@ jobs:
       working-directory: 'ansible-hub-ui/test'
       run: |
         sed -i '/specPattern:/s/\*\*/${{matrix.test}}/' cypress.config.js
-        echo "result of the config file:"
-        cat cypress.config.js
+        grep specPattern cypress.config.js
+
         npm run cypress:chrome
 
     - uses: actions/upload-artifact@v3
@@ -243,7 +246,8 @@ jobs:
 
     - name: "Kill container, show debug info"
       if: always()
+      working-directory: 'oci_env'
       run: |
-        podman exec pulp bash -c "pip3 list && pip3 install pipdeptree && pipdeptree"
-        podman logs pulp
-        podman kill pulp
+        oci-env exec bash -c "pip3 list && pip3 install pipdeptree && pipdeptree"
+        oci-env compose logs
+        oci-env compose kill

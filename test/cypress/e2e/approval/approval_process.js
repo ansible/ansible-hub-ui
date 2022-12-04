@@ -2,8 +2,6 @@ const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Approval Dashboard process', () => {
   before(() => {
-    cy.settings({ GALAXY_REQUIRE_CONTENT_APPROVAL: true });
-    cy.login();
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'appp_n_test');
     cy.galaxykit('-i collection upload', 'appp_n_test', 'appp_c_test1');
@@ -11,7 +9,6 @@ describe('Approval Dashboard process', () => {
 
   after(() => {
     cy.deleteNamespacesAndCollections();
-    cy.settings();
   });
 
   beforeEach(() => {
@@ -27,12 +24,15 @@ describe('Approval Dashboard process', () => {
     cy.contains('[data-cy="CertificationDashboard-row"]', 'Needs review');
     cy.contains(
       '[data-cy="CertificationDashboard-row"] button',
-      'Approve',
+      'Sign and approve',
     ).click();
     cy.contains('.body', 'No results found', { timeout: 8000 });
     cy.visit(`${uiPrefix}approval-dashboard`);
     cy.contains('button', 'Clear all filters').click();
-    cy.contains('[data-cy="CertificationDashboard-row"]', 'Approved');
+    cy.contains(
+      '[data-cy="CertificationDashboard-row"]',
+      'Signed and approved',
+    );
 
     // should see item in collections
     cy.visit(`${uiPrefix}repo/published?page_size=100`);

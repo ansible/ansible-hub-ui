@@ -1,6 +1,8 @@
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('Collections list', () => {
   beforeEach(() => {
-    cy.visit('/beta/ansible/automation-hub');
+    cy.visit(uiPrefix);
 
     cy.contains('Sign in to your account');
     cy.screenshot();

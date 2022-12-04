@@ -1,8 +1,5 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
-const adminUsername = Cypress.env('username');
-const adminPassword = Cypress.env('password');
-
 const userName = 'testUser';
 const userPassword = 'I am a complicated passw0rd';
 
@@ -10,10 +7,7 @@ const groupName = 'testgroup';
 
 describe('RBAC test for user without permissions', () => {
   before(() => {
-    cy.settings({
-      GALAXY_REQUIRE_CONTENT_APPROVAL: false,
-    });
-    cy.login(adminUsername, adminPassword);
+    cy.login();
 
     cy.galaxykit(
       '-i registry create',
@@ -37,7 +31,7 @@ describe('RBAC test for user without permissions', () => {
   });
 
   after(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
 
     cy.deleteTestGroups();
     cy.deleteTestUsers();
@@ -221,11 +215,7 @@ describe('RBAC test for user with permissions', () => {
   ];
 
   before(() => {
-    cy.login(adminUsername, adminPassword);
-
-    cy.settings({
-      GALAXY_REQUIRE_CONTENT_APPROVAL: false,
-    });
+    cy.login();
 
     cy.galaxykit(
       '-i registry create',
@@ -254,7 +244,7 @@ describe('RBAC test for user with permissions', () => {
   });
 
   after(() => {
-    cy.login(adminUsername, adminPassword);
+    cy.login();
 
     cy.deleteTestGroups();
     cy.deleteTestUsers();
