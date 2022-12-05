@@ -12,6 +12,14 @@ import Logo from 'src/../static/images/logo_large.svg';
 import { ApplicationInfoAPI, UserType } from 'src/api';
 import { detect } from 'detect-browser';
 
+const Label = ({ children }: { children: React.ReactNode }) => (
+  <TextListItem component={TextListItemVariants.dt}>{children}</TextListItem>
+);
+
+const Value = ({ children }: { children: React.ReactNode }) => (
+  <TextListItem component={TextListItemVariants.dd}>{children}</TextListItem>
+);
+
 interface IProps {
   isOpen: boolean;
   trademark: string;
@@ -62,17 +70,6 @@ export class AboutModalWindow extends React.Component<IProps, IState> {
     const { isOpen, onClose, brandImageAlt, productName, user, userName } =
       this.props;
     const browser = detect();
-
-    const Label = ({ children }) => (
-      <TextListItem component={TextListItemVariants.dt}>
-        {children}
-      </TextListItem>
-    );
-    const Value = ({ children }) => (
-      <TextListItem component={TextListItemVariants.dd}>
-        {children}
-      </TextListItem>
-    );
 
     return (
       <AboutModal
