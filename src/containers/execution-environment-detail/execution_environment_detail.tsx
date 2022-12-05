@@ -88,17 +88,19 @@ class ExecutionEnvironmentDetail extends React.Component<
             <Card>
               <CardBody>
                 <Title headingLevel='h2' size='lg'>
-                  {!this.state.markdownEditing && this.state.readme && canEdit && (
-                    <Button
-                      className={'hub-c-button-edit'}
-                      variant={'primary'}
-                      onClick={() => {
-                        this.setState({ markdownEditing: true });
-                      }}
-                    >
-                      {t`Edit`}
-                    </Button>
-                  )}
+                  {!this.state.markdownEditing &&
+                    this.state.readme &&
+                    canEdit && (
+                      <Button
+                        className={'hub-c-button-edit'}
+                        variant={'primary'}
+                        onClick={() => {
+                          this.setState({ markdownEditing: true });
+                        }}
+                      >
+                        {t`Edit`}
+                      </Button>
+                    )}
                 </Title>
                 {!this.state.markdownEditing && !this.state.readme ? (
                   <EmptyStateNoData
