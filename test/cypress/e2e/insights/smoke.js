@@ -15,9 +15,6 @@ describe('cloud smoketest', () => {
     cy.galaxykit(`collection upload autohubtest3 ${collectionName}3`);
     cy.galaxykit(`collection move autohubtest3 ${collectionName}3`);
 
-    // make the browser larger so that the menus are visible
-    cy.viewport(2000, 2000);
-
     // handle cloud login
     cy.login();
 
@@ -46,12 +43,10 @@ describe('cloud smoketest', () => {
       cy.get('.collection-container').should('be.visible');
 
       // wait for collections to load
-      //cy.get('.hub-c-card-collection-container .name a').should(
-      cy.get('.collection-card-container .name a').should('exist');
+      cy.get('.hub-c-card-collection-container .name a').should('exist');
 
       // click on the first available collection
-      //cy.get('.hub-c-card-collection-container .name a')
-      cy.get('.collection-card-container .name a').first().click();
+      cy.get('.hub-c-card-collection-container .name a').first().click();
 
       // wait for collection detail to load
       cy.get('.info-panel');
@@ -65,15 +60,12 @@ describe('cloud smoketest', () => {
       cy.get('[data-ouia-component-id="Partners"]').click();
 
       // wait for the the Partners list to appear
-      //cy.get('.hub-namespace-page').should('be.visible');
-      cy.get('.namespace-page').should('be.visible');
+      cy.get('.hub-namespace-page').should('be.visible');
 
       // click on the first available Partner
-      //cy.get('.hub-c-card-ns-container .pf-c-card__footer a')
-      cy.get('.ns-card-container .pf-c-card__footer a').first().click();
+      cy.get('.hub-c-card-ns-container .pf-c-card__footer a').first().click();
 
       // wait for the summary|list to load
-      //cy.get('.namespace-detail').should('be.visible');
       cy.get('[aria-label="List of Collections"]').should('be.visible');
 
       // ensure the upload collection button appears
