@@ -320,8 +320,8 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                           expandableRowContent={
                             <>
                               <PermissionCategories
-                                isPermGroupVisible={true}
-                                displayUnknownPerms={true}
+                                showEmpty={true}
+                                showCustom={true}
                                 role={role}
                               />
                             </>

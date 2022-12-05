@@ -11,8 +11,8 @@ interface IState {
 }
 
 interface IProps {
-  isPermGroupVisible: boolean;
-  displayUnknownPerms: boolean;
+  showEmpty: boolean;
+  showCustom: boolean;
   role: RoleType;
 }
 
@@ -33,6 +33,38 @@ export class PermissionCategories extends React.Component<IProps, IState> {
   render() {
     const { groups } = this.state;
     const { role } = this.props;
+
+    const permFilter = (availablePermissions) =>
+      role.permissions
+        .filter((selected) =>
+          availablePermissions.find((perm) => selected === perm),
+        )
+        .map((permission) => this.getNicenames(permission));
+
+    const getSelected = (group) => permFilter(group.object_permissions);
+
+    const customPermissions = selectedPermissions.filter(
+      (perm) => !Object.keys(filteredPermissions).includes(perm),
+    );
+
+    const origGroups = Constants.PERMISSIONS.map((group) => ({
+      ...group,
+      label: i18n._(group.label),
+    }));
+    const allGroups = showCustom
+      ? [
+          ...origGroups,
+          {
+            name: 'custom',
+            label: t`Custom permissions`,
+            object_permissions: customPermissions,
+          },
+        ]
+      : origGroups;
+    const groups = showEmpty
+      ? allGroups
+      : allGroups.filter((group) => getSelected(group).length);
+
     return (
       <React.Fragment>
         {groups.map((group) => (
