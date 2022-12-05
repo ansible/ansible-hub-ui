@@ -19,7 +19,7 @@ describe('cloud smoketest', () => {
     cy.viewport(2000, 2000);
 
     // handle cloud login
-    cy.manualCloudLogin();
+    cy.login();
 
     /*****************************************************
      * To reduce clutter in each test function, we'll

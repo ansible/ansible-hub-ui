@@ -60,12 +60,6 @@ Cypress.Commands.add('manualLogin', {}, (username, password) => {
 });
 
 Cypress.Commands.add('manualCloudLogin', {}, (username, password) => {
-  if (!username && !password) {
-    // defult to admin
-    username = Cypress.env('username');
-    password = Cypress.env('password');
-  }
-
   cy.visit(uiPrefix);
 
   cy.get('input[id^="username"]').type(username);
@@ -124,12 +118,16 @@ Cypress.Commands.add('logout', {}, () => {
 
 Cypress.Commands.add('login', {}, (username, password) => {
   if (!username && !password) {
-    // defult to admin
+    // default to admin
     username = Cypress.env('username');
     password = Cypress.env('password');
   }
 
-  cy.apiLogin(username, password);
+  if (Cypress.env('insightsLogin')) {
+    cy.manualCloudLogin(username, password);
+  } else {
+    cy.apiLogin(username, password);
+  }
 });
 
 Cypress.Commands.add(
