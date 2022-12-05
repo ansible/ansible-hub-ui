@@ -1,39 +1,35 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Edit a namespace', () => {
-  let kebabToggle = () => {
+  const kebabToggle = () => {
     return cy.get('button[id^=pf-dropdown-toggle-id-] > svg').parent().click();
   };
 
-  let saveButton = () => {
+  const saveButton = () => {
     return cy.contains('Save');
   };
 
-  let getLinkTextField = () => {
+  const getLinkTextField = () => {
     return cy
       .get('div.useful-links > div.link-name input')
       .invoke('attr', 'placeholder', 'Link text')
+      .first()
       .click();
   };
 
-  let getUrlField = () => {
-    return cy.get('div.useful-links div.link-url #url').click();
+  const getUrlField = () => {
+    return cy.get('div.useful-links div.link-url #url').first().click();
   };
 
-  let linksHelper = () => {
-    return cy.get('#links-helper');
-  };
-
-  let getEditTab = () => {
+  const getEditTab = () => {
     return cy
       .get(
         'ul.pf-c-tabs__list > li.pf-c-tabs__item > button > span.pf-c-tabs__item-text',
       )
-      .contains('Edit resources')
-      .click();
+      .contains('Edit resources');
   };
 
-  let getTextField = () => {
+  const getTextField = () => {
     return cy.get('div.pf-c-form__group-control > textarea.pf-c-form-control');
   };
 
@@ -62,8 +58,7 @@ describe('Edit a namespace', () => {
         'This name is too long vaðlaheiðarvegavinnuverkfærageymsluskúraútidyralyklakippuhringur',
       );
     saveButton().click();
-    let helperText = cy.get('#company-helper');
-    helperText.should(
+    cy.get('#company-helper').should(
       'have.text',
       'Ensure this field has no more than 64 characters.',
     );
@@ -100,24 +95,24 @@ describe('Edit a namespace', () => {
   });
 
   it('tests the Links field', () => {
-    getLinkTextField().first().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
-    getUrlField().first().type('https://example.com');
+    getLinkTextField().type('Too long ^TrR>dG(F55:5(P:!sdafd#ZWCf2');
+    getUrlField().type('https://example.com');
     saveButton().click();
-    linksHelper().should(
+    cy.get('#links-helper').should(
       'contain',
       'Text: Ensure this field has no more than 32 characters.',
     );
-    getLinkTextField().first().clear();
+    getLinkTextField().clear();
     cy.contains('.useful-links', 'Name must not be empty.');
 
-    getLinkTextField().first().type('Link to example website');
-    getUrlField().first().clear();
+    getLinkTextField().type('Link to example website');
+    getUrlField().clear();
     cy.contains('.useful-links', 'URL must not be empty.');
 
-    getUrlField().first().type('example.com');
+    getUrlField().type('example.com');
     cy.contains('.useful-links', 'The URL needs to be in');
 
-    getUrlField().first().clear().type('https://example.com/');
+    getUrlField().clear().type('https://example.com/');
     saveButton().click();
     cy.get('div.link a')
       .should('contain', 'Link to example website')
@@ -134,7 +129,7 @@ describe('Edit a namespace', () => {
   });
 
   it('edits namespace resources', () => {
-    getEditTab();
+    getEditTab().click();
     getTextField()
       .invoke('attr', 'placeholder')
       .should(
@@ -145,7 +140,7 @@ describe('Edit a namespace', () => {
     saveButton().click();
     kebabToggle();
     cy.contains('Edit namespace').click();
-    getEditTab();
+    getEditTab().click();
     getTextField().should('contain', 'Editing the readme file');
   });
 });

@@ -1,28 +1,15 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('A namespace form', () => {
-  let getCreateNamespace = () => {
-    return cy.get('.pf-c-button.pf-m-primary');
-  };
-  let getMessage = () => {
-    return cy.get('.pf-c-form__helper-text');
-  };
-  let getCreateButton = () => {
-    return cy.get('.pf-c-modal-box__footer .pf-m-primary');
-  };
-  let getInputBox = () => {
-    return cy.get('#pf-modal-part-2 #newNamespaceName');
-  };
-  let clearInput = () => {
-    return cy.get('#pf-modal-part-2 #newNamespaceName').clear();
-  };
-  let createNamespace = () => {
-    return cy.galaxykit('-i namespace create', 'testns1');
-  };
+  const getCreateNamespace = () => cy.get('.pf-c-button.pf-m-primary');
+  const getMessage = () => cy.get('.pf-c-form__helper-text');
+  const getCreateButton = () => cy.get('.pf-c-modal-box__footer .pf-m-primary');
+  const getInputBox = () => cy.get('#pf-modal-part-2 #newNamespaceName');
+  const clearInput = () => getInputBox().clear();
 
   beforeEach(() => {
     cy.login();
-    createNamespace();
+    cy.galaxykit('-i namespace create', 'testns1');
     cy.menuGo('Collections > Namespaces');
     getCreateNamespace().click();
   });
@@ -80,7 +67,7 @@ describe('A namespace form', () => {
   });
 
   it('creates a new namespace with no error messages', () => {
-    let id = parseInt(Math.random() * 1000000);
+    const id = parseInt(Math.random() * 1000000);
     getInputBox().type(`testns_${id}`);
     getCreateButton().click();
     cy.url().should('match', new RegExp(`${uiPrefix}repo/published/testns_`));

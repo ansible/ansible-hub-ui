@@ -1,0 +1,1 @@
+../misc/task_management_detail.js
