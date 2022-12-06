@@ -43,7 +43,8 @@ The tests need to know details about the instance of Automation Hub that it's ru
         "username": "<your username here>",
         "password": "<your password here>",
         "containers": "<container push target>",
-        "galaxykit": "<galaxykit command>"
+        "galaxykit": "<galaxykit command>",
+        "insightsLogin": true|false
     }
 
 *note*: the api root for the docker development environment of ansible/galaxy\_ng is `/api/automation-hub/`, while pulp-oci-images uses `/api/galaxy/`.

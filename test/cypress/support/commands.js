@@ -59,6 +59,16 @@ Cypress.Commands.add('manualLogin', {}, (username, password) => {
   cy.wait('@feature-flags');
 });
 
+Cypress.Commands.add('manualCloudLogin', {}, (username, password) => {
+  cy.visit(uiPrefix);
+
+  cy.get('input[id^="username"]').type(username);
+  cy.get('input[id^="password"').type(`${password}{enter}`);
+
+  // wait for the user menu
+  cy.get('#UserMenu');
+});
+
 Cypress.Commands.add('cookieLogout', {}, () => {
   cy.clearCookie('sessionid');
   cy.clearCookie('csrftoken');
@@ -108,12 +118,16 @@ Cypress.Commands.add('logout', {}, () => {
 
 Cypress.Commands.add('login', {}, (username, password) => {
   if (!username && !password) {
-    // defult to admin
+    // default to admin
     username = Cypress.env('username');
     password = Cypress.env('password');
   }
 
-  cy.apiLogin(username, password);
+  if (Cypress.env('insightsLogin')) {
+    cy.manualCloudLogin(username, password);
+  } else {
+    cy.apiLogin(username, password);
+  }
 });
 
 Cypress.Commands.add(
