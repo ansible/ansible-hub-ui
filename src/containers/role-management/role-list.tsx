@@ -321,7 +321,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                             <>
                               <PermissionCategories
                                 showEmpty={true}
-                                showCustom={true}
+                                showCustom={false}
                                 role={role}
                               />
                             </>

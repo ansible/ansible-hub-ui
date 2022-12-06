@@ -7,7 +7,7 @@ import {
   CompoundFilter,
   DeleteModal,
   EmptyStateNoData,
-  RolePermissions,
+  PermissionCategories,
   LoadingPageWithHeader,
   Pagination,
   RoleListTable,
@@ -361,9 +361,8 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     key={i}
                     rowIndex={i}
                     expandableRowContent={
-                      <RolePermissions
-                        filteredPermissions={filteredPermissions}
-                        selectedPermissions={role.permissions}
+                      <PermissionCategories
+                        role={role}
                         showCustom={true}
                         showEmpty={false}
                       />

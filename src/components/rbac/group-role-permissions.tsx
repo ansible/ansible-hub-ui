@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 import { RoleAPI } from 'src/api';
-import { Constants } from 'src/constants';
-import { RolePermissions, LoadingPageSpinner } from 'src/components';
+import { PermissionCategories, LoadingPageSpinner } from 'src/components';
 import { translateLockedRolesDescription } from 'src/utilities';
 
 interface IProps {
   name: string;
-  filteredPermissions?: {
-    [key: string]: string;
-  };
 }
 
-export const GroupRolePermissions = ({ name, filteredPermissions }: IProps) => {
+export const GroupRolePermissions = ({ name }: IProps) => {
   const [role, setRole] = useState(null);
 
   useEffect(() => {
@@ -26,19 +22,10 @@ export const GroupRolePermissions = ({ name, filteredPermissions }: IProps) => {
     return <LoadingPageSpinner />;
   }
 
-  if (!filteredPermissions) {
-    filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
-  }
-
   return (
     <>
       <p>{translateLockedRolesDescription(role.name, role.description)}</p>
-      <RolePermissions
-        filteredPermissions={filteredPermissions}
-        selectedPermissions={role.permissions}
-        showCustom={true}
-        showEmpty={false}
-      />
+      <PermissionCategories role={role} showCustom={true} showEmpty={false} />
     </>
   );
 };

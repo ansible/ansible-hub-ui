@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { i18n } from '@lingui/core';
+import { t } from '@lingui/macro';
 import { AppContext } from 'src/loaders/app-context';
-import { RoleType, PermissionType } from 'src/api';
+import { RoleType, GroupRoleType, PermissionType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
 
 import { Flex, FlexItem } from '@patternfly/react-core';
@@ -13,7 +14,7 @@ interface IState {
 interface IProps {
   showEmpty: boolean;
   showCustom: boolean;
-  role: RoleType;
+  role: RoleType | GroupRoleType;
 }
 
 export class PermissionCategories extends React.Component<IProps, IState> {
@@ -32,42 +33,30 @@ export class PermissionCategories extends React.Component<IProps, IState> {
 
   render() {
     const { groups } = this.state;
-    const { role } = this.props;
+    const { role, showEmpty, showCustom } = this.props;
 
-    const permFilter = (availablePermissions) =>
-      role.permissions
-        .filter((selected) =>
-          availablePermissions.find((perm) => selected === perm),
-        )
-        .map((permission) => this.getNicenames(permission));
-
-    const getSelected = (group) => permFilter(group.object_permissions);
-
-    const customPermissions = selectedPermissions.filter(
-      (perm) => !Object.keys(filteredPermissions).includes(perm),
-    );
-
-    const origGroups = Constants.PERMISSIONS.map((group) => ({
+    const origGroups = groups.map((group) => ({
       ...group,
       label: i18n._(group.label),
     }));
+
     const allGroups = showCustom
       ? [
           ...origGroups,
           {
-            name: 'custom',
             label: t`Custom permissions`,
-            object_permissions: customPermissions,
+            object_permissions: this.customPermissions(role),
           },
         ]
       : origGroups;
-    const groups = showEmpty
+
+    const groupsToMap = showEmpty
       ? allGroups
-      : allGroups.filter((group) => getSelected(group).length);
+      : allGroups.filter((group) => this.getSelected(group).length);
 
     return (
       <React.Fragment>
-        {groups.map((group) => (
+        {groupsToMap.map((group) => (
           <Flex
             style={{ marginTop: '16px' }}
             alignItems={{ default: 'alignItemsCenter' }}
@@ -129,5 +118,26 @@ export class PermissionCategories extends React.Component<IProps, IState> {
     } else {
       return undefined;
     }
+  }
+
+  private permFilter(availablePermissions) {
+    const { role } = this.props;
+    return role.permissions
+      .filter((selected) =>
+        availablePermissions.find((perm) => selected === perm),
+      )
+      .map((permission) => this.getNicenames(permission));
+  }
+
+  private getSelected(group) {
+    return this.permFilter(group.object_permissions);
+  }
+
+  private customPermissions(role) {
+    const { model_permissions } = this.context.user;
+    const custom = role.permissions.filter(
+      (perm) => !Object.keys(model_permissions).includes(perm),
+    );
+    return custom;
   }
 }
