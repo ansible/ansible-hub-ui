@@ -2,6 +2,8 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import { i18n } from '@lingui/core';
 import { PermissionChipSelector } from 'src/components';
+import { AppContext } from 'src/loaders/app-context';
+import { PermissionType } from 'src/api';
 import {
   ActionGroup,
   Button,
@@ -21,6 +23,7 @@ import { twoWayMapper } from 'src/utilities';
 import { Constants } from 'src/constants';
 interface IState {
   permissions: string[];
+  groups: PermissionType[];
 }
 interface IProps {
   nameDisabled?: boolean;
@@ -40,21 +43,27 @@ interface IProps {
 }
 
 export class RoleForm extends React.Component<IProps, IState> {
+  static contextType = AppContext;
   constructor(props) {
     super(props);
     this.state = {
       permissions: [],
+      groups: [],
     };
   }
 
   componentDidMount() {
+    const { model_permissions } = this.context.user;
     if (this.props.originalPermissions) {
-      this.setState({ permissions: this.props.originalPermissions });
+      this.setState({
+        permissions: this.props.originalPermissions,
+        groups: this.formatPermissions(model_permissions),
+      });
     }
   }
 
   render() {
-    const { permissions: selectedPermissions } = this.state;
+    const { permissions: selectedPermissions, groups } = this.state;
     const {
       name,
       onNameChange,
@@ -70,7 +79,7 @@ export class RoleForm extends React.Component<IProps, IState> {
       isSavingDisabled,
       saving,
     } = this.props;
-    const groups = Constants.PERMISSIONS;
+    // const groups = Constants.PERMISSIONS;
 
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
 
@@ -217,5 +226,25 @@ export class RoleForm extends React.Component<IProps, IState> {
         </Form>
       </React.Fragment>
     );
+  }
+
+  private formatPermissions(permissions): PermissionType[] {
+    const formattedPermissions = {};
+    for (const [key, value] of Object.entries(permissions)) {
+      if (value['ui_category'] in formattedPermissions) {
+        formattedPermissions[value['ui_category']]['object_permissions'].push(
+          key,
+        );
+      } else {
+        formattedPermissions[value['ui_category']] = {
+          label: value['ui_category'],
+          object_permissions: [key],
+        };
+      }
+    }
+    const arrayPermissions = Object.values(
+      formattedPermissions,
+    ) as PermissionType[];
+    return arrayPermissions;
   }
 }
