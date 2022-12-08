@@ -258,7 +258,6 @@ jobs:
 
     - name: "List cached screenshots"
       if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'true' }}
-      continue-on-error: true
       run: |
         echo 'Compare screenshots'
         echo ${{ env.COMPARE_SCREENSHOTS}}
@@ -291,8 +290,8 @@ jobs:
         echo "$ACTOR"
         CAN_FAIL=false
 
-        if $(echo $PR_TITLE | grep -q "patternfly") && [ "$ACTOR" = "dependabot[bot]" ]; then
-          echo "can fail on patternfly PRs"
+        if [ "$ACTOR" = "dependabot[bot]" ]; then
+          echo "can fail on dependabots PRs"
           CAN_FAIL=true
         fi
 
@@ -337,7 +336,7 @@ jobs:
         name: screenshots_diffs
         path: |
           ansible-hub-ui/test/cypress/screenshots
-          
+
     - name: "Kill container, show debug info"
       if: always()
       working-directory: 'oci_env'
