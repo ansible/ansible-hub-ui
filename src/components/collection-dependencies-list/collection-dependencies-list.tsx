@@ -12,7 +12,9 @@ import 'src/containers/collection-detail/collection-dependencies.scss';
 
 interface IProps {
   collection: CollectionDetailType;
-  dependencies_repos: (CollectionVersion & { path?: string })[];
+  dependencies_repos: (CollectionVersion & {
+    path?: string;
+  })[];
 }
 
 export class CollectionDependenciesList extends React.Component<IProps> {
@@ -31,26 +33,32 @@ export class CollectionDependenciesList extends React.Component<IProps> {
 
     return (
       <List variant={ListVariant.inline} className='hub-c-list-dependencies'>
-        {dependencies_repos.map((dependency, i) => (
-          <>
-            {dependency.path && (
-              <ListItem key={i} style={{ marginRight: '70px' }}>
-                <Link to={dependency.path}>
-                  {dependency.namespace + '.' + dependency.name}
-                </Link>
-              </ListItem>
-            )}
-            {!dependency.path && (
-              <ListItem key={i} style={{ marginRight: '70px' }}>
-                {dependency.namespace + '.' + dependency.name}
-                <HelperText
-                  content={t`Collection version ${dependency.version} was not found in the system. You must upload it.`}
-                />
-              </ListItem>
-            )}
-          </>
-        ))}
+        {dependencies_repos.map((dependency, i) =>
+          this.listDep(dependency, i, dependencies),
+        )}
       </List>
     );
+  }
+
+  private listDep(dependency, i, dependencies) {
+    const fqn = dependency.namespace + '.' + dependency.name;
+    const version_range = dependencies[fqn];
+
+    if (dependency.path) {
+      return (
+        <ListItem key={i} style={{ marginRight: '70px' }}>
+          <Link to={dependency.path}>{fqn}</Link>: {version_range}
+        </ListItem>
+      );
+    } else {
+      return (
+        <ListItem key={i} style={{ marginRight: '70px' }}>
+          {fqn}: {version_range}
+          <HelperText
+            content={t`No version of ${fqn} exists that matches ${version_range}.`}
+          />
+        </ListItem>
+      );
+    }
   }
 }
