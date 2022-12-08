@@ -117,6 +117,10 @@ function waitForAll() {
 
       if (allCompleted && allSuccess) {
         console.log('All checks has completed succesfuly,.');
+
+        // merge the PR
+        
+
         process.exit(0);
       }
 

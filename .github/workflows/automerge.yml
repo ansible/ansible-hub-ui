@@ -6,8 +6,13 @@ on:
 
 jobs:
   automerge:
-    if: github.actor == 'dependabot[bot]'
+    #if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
+    permissions:
+      # All other permissions are set to none
+      checks: write
+      contents: read
+      pull-requests: write
     steps:
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
@@ -18,9 +23,25 @@ jobs:
       with:
         node-version: '16'
 
+    - name: "Echo variables"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "${{ github.event.pull_request.url }}"
+        echo "${{ github.event.pull_request.number }}"
+        gh pr merge ${{ github.event.pull_request.number }} -s --admin
+    
     - name: "Run automerge.js"
       working-directory: ".github/workflows"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         node automerge.js "${{ github.head_ref }}" "${{ github.event.pull_request.title }}" "${{ github.actor }}"
+
+    - name: "Automerge the PR"
+      working-directory: ".github/workflows"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "Automerge of PR"
+        gh pr merge "${{ github.event.pull_request.url }}"
