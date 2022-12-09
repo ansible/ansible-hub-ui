@@ -1,5 +1,6 @@
 describe('cloud smoketest', () => {
   before(() => {
+    cy.deleteNamespacesAndCollections();
     // create a single collection ...
     const suffix = Math.floor(Math.random() * 10000);
     const collectionNamespace = `namespace_${suffix}`;
