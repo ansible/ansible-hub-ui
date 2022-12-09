@@ -60,10 +60,11 @@ export class RoleForm extends React.Component<IProps, IState> {
         groups: this.formatPermissions(model_permissions),
       });
     }
+    // this.getKeyByValue(model_permissions, 'Add namespace')
   }
 
   render() {
-    const { permissions: selectedPermissions, groups } = this.state;
+    const { permissions: selectedPermissions } = this.state;
     const {
       name,
       onNameChange,
@@ -79,7 +80,7 @@ export class RoleForm extends React.Component<IProps, IState> {
       isSavingDisabled,
       saving,
     } = this.props;
-    // const groups = Constants.PERMISSIONS;
+    const groups = Constants.PERMISSIONS;
 
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
 
@@ -144,12 +145,12 @@ export class RoleForm extends React.Component<IProps, IState> {
               <Flex
                 style={{ marginTop: '16px' }}
                 alignItems={{ default: 'alignItemsCenter' }}
-                key={group.label}
-                className={group.label}
-                data-cy={`RoleForm-Permissions-row-${group.label}`}
+                key={group.name}
+                className={group.name}
+                data-cy={`RoleForm-Permissions-row-${group.name}`}
               >
                 <FlexItem style={{ minWidth: '200px' }}>
-                  {i18n._(group.label)}
+                  {i18n._(group.name)}
                 </FlexItem>
                 <FlexItem grow={{ default: 'grow' }}>
                   <PermissionChipSelector
@@ -160,7 +161,7 @@ export class RoleForm extends React.Component<IProps, IState> {
                             (selected) => selected === perm,
                           ),
                       )
-                      .map((value) => twoWayMapper(value, filteredPermissions))
+                      .map((value) => this.getNicenames(value))
                       .sort()}
                     selectedPermissions={selectedPermissions
                       .filter((selected) =>
@@ -168,7 +169,7 @@ export class RoleForm extends React.Component<IProps, IState> {
                           (perm) => selected === perm,
                         ),
                       )
-                      .map((value) => twoWayMapper(value, filteredPermissions))}
+                      .map((value) => this.getNicenames(value))}
                     setSelected={(perms) =>
                       this.setState({ permissions: perms })
                     }
@@ -247,4 +248,19 @@ export class RoleForm extends React.Component<IProps, IState> {
     ) as PermissionType[];
     return arrayPermissions;
   }
+
+  private getNicenames(permission) {
+    const { model_permissions } = this.context.user;
+    if (model_permissions[permission].name !== undefined) {
+      return model_permissions[permission].name;
+    } else {
+      return undefined;
+    }
+  }
+
+  // private getKeyByValue(permissions, value) {
+  //   // console.log('key ', Object.keys(permissions).find(key => Object[key] === value));
+  //   // return Object.keys(permissions).find(key => Object[key] === value);
+  //   console.log('value: ', );
+  // }
 }
