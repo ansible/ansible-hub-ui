@@ -166,7 +166,7 @@ const SignatureKeysList = lazy(
  */
 export const Routes = () => {
   return (
-    <Suspense fallback={LoadingPageWithHeader}>
+    <Suspense fallback={<LoadingPageWithHeader />}>
       <Switch>
         <Route path={Paths.repositories} component={Repository} />
         <Route
