@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter, matchPath } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Alert } from '@patternfly/react-core';
+import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import { Routes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
@@ -21,9 +22,6 @@ interface IProps {
   match: RouteComponentProps['match'];
 }
 
-// might get called before router mount, ignore
-let appNav = () => null;
-
 const isRepoURL = (location) =>
   matchPath(location, { path: Paths.collectionByRepo });
 
@@ -39,14 +37,22 @@ const App = (props: IProps) => {
     throw new Error('RepoSelector & setRepo only available in standalone');
   };
 
+  const { identifyApp, on, updateDocumentTitle } = useChrome();
+
   // componentDidMount
   useEffect(() => {
-    // TODO
-    window.insights.chrome.init();
-    window.insights.chrome.identifyApp('automation-hub', APPLICATION_NAME);
+    identifyApp('automation-hub');
+    updateDocumentTitle(APPLICATION_NAME);
+
+    loadContext().then(({ alerts, featureFlags, settings, user }) => {
+      setAlerts(alerts);
+      setFeatureFlags(featureFlags);
+      setSettings(settings);
+      setUser(user);
+    });
 
     // This listens for insights navigation events, so this will fire when items in the nav are clicked or the app is loaded for the first time
-    appNav = window.insights.chrome.on('APP_NAVIGATION', (event) => {
+    const unregister = on('APP_NAVIGATION', (event) => {
       // might be undefined early in the load, or may not happen at all
       if (!event?.domEvent?.href) {
         return;
@@ -65,15 +71,9 @@ const App = (props: IProps) => {
       props.history.push(href);
     });
 
-    loadContext().then(({ alerts, featureFlags, settings, user }) => {
-      setAlerts(alerts);
-      setFeatureFlags(featureFlags);
-      setSettings(settings);
-      setUser(user);
-    });
-
-    // componentWillUnmount
-    return () => appNav();
+    return () => {
+      unregister?.();
+    };
   }, []);
 
   // componentDidUpdate
