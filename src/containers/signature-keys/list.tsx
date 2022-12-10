@@ -8,9 +8,10 @@ import {
   ListItemActions,
   ListPage,
 } from 'src/components';
+import { isLoggedIn } from 'src/permissions';
 
 export const SignatureKeysList = ListPage<SigningServiceType>({
-  condition: ({ user }) => user && !user.is_anonymous,
+  condition: isLoggedIn,
   defaultPageSize: 100,
   displayName: 'SignatureKeysList',
   errorTitle: t`Signature keys could not be displayed.`,

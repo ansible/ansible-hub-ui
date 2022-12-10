@@ -22,6 +22,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
+import { CanContext } from 'src/permissions';
 import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 
 interface IState<T> {
@@ -44,7 +45,6 @@ interface IState<T> {
 // !items.length - no visible data but a filter is on, EmptyStateFilter with a clear filters button, CompoundFilter + AppliedFilters
 // (data) - also renders SortTable
 
-type CanPermission = (o: { featureFlags; settings; user }) => boolean;
 type FilterConfig = { id: string; title: string }[];
 type ParamsType = { page?: number; page_size?: number };
 type Query<T> = (o: {
@@ -59,7 +59,7 @@ type SortHeaders = {
 }[];
 
 interface ListPageParams<T> {
-  condition: CanPermission;
+  condition: CanContext;
   defaultPageSize: number;
   displayName: string;
   errorTitle: string;
