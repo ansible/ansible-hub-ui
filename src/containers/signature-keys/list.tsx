@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { DropdownItem } from '@patternfly/react-core';
+import { downloadSignatureKeyAction } from 'src/actions';
 import { SigningServiceAPI, SigningServiceType } from 'src/api';
 import {
   ClipboardCopy,
@@ -28,15 +28,7 @@ export const SignatureKeysList = ListPage<SigningServiceType>({
     const { name, pubkey_fingerprint, public_key, pulp_created } = item;
 
     const dropdownItems = [
-      <DropdownItem
-        key='download-key'
-        onClick={() => {
-          document.location =
-            'data:application/octet-stream,' + encodeURIComponent(public_key);
-        }}
-      >
-        {t`Download key`}
-      </DropdownItem>,
+      downloadSignatureKeyAction.dropdownItem({ public_key }),
     ];
 
     return (
