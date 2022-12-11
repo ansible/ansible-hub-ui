@@ -2,13 +2,6 @@ describe('Execution Environments - Use in Controller', () => {
   let num = (~~(Math.random() * 1000000)).toString(); // FIXME: maybe drop everywhere once AAH-1095 is fixed
 
   before(() => {
-    cy.settings({
-      CONNECTED_ANSIBLE_CONTROLLERS: [
-        'https://www.example.com',
-        'https://another.example.com',
-      ],
-    });
-
     cy.login();
 
     cy.deleteRegistries();
@@ -31,6 +24,15 @@ describe('Execution Environments - Use in Controller', () => {
   beforeEach(() => {
     cy.login();
     cy.menuGo('Execution Environments > Execution Environments');
+    cy.intercept('GET', Cypress.env('prefix') + '_ui/v1/controllers/?*', {
+      body: {
+        data: [
+          { host: 'https://www.example.com' },
+          { host: 'https://another.example.com' },
+        ],
+        meta: { count: 2 },
+      },
+    });
   });
 
   it('admin sees containers', () => {
@@ -93,14 +95,6 @@ describe('Execution Environments - Use in Controller', () => {
         cy.contains('a', 'https://another.example.com');
         cy.get('ul.pf-c-list > li > a').should('have.length', 2);
 
-        // filter controllers
-        cy.get('input[placeholder="Filter by controller name"]')
-          .click()
-          .type('another{enter}');
-        cy.contains('a', 'https://another.example.com');
-        cy.get('ul.pf-c-list > li > a').should('have.length', 1);
-        cy.contains('a', 'https://www.example.com').should('not.exist');
-
         // unset tag, see digest
         cy.get('.pf-m-typeahead .pf-c-select__toggle-clear').click();
         cy.contains('a', 'https://another.example.com')
@@ -120,17 +114,9 @@ describe('Execution Environments - Use in Controller', () => {
             /^https:\/\/another\.example\.com\/#\/execution_environments\/add\?image=.*latest$/,
           );
 
-        // unfilter controllers
-        cy.contains('Clear all filters').click();
-        cy.get('ul.pf-c-list > li > a').should('have.length', 2);
-
         // leave
         cy.get('button[aria-label="Close"]').click();
       });
     });
-  });
-
-  after(() => {
-    cy.settings(); // reset
   });
 });
