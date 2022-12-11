@@ -230,6 +230,8 @@ jobs:
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
+      env:
+        CONSOLE_LOG_TO_TERMINAL: true
       run: |
         sed -i '/specPattern:/s/\*\*/${{matrix.test}}/' cypress.config.js
         grep specPattern cypress.config.js
