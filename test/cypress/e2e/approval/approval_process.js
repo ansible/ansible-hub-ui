@@ -1,7 +1,5 @@
 describe('Approval Dashboard process', () => {
   before(() => {
-    cy.settings({ GALAXY_REQUIRE_CONTENT_APPROVAL: true });
-    cy.login();
     cy.deleteNamespacesAndCollections();
     cy.galaxykit('-i namespace create', 'appp_n_test');
     cy.galaxykit('-i collection upload', 'appp_n_test', 'appp_c_test1');
@@ -9,7 +7,6 @@ describe('Approval Dashboard process', () => {
 
   after(() => {
     cy.deleteNamespacesAndCollections();
-    cy.settings();
   });
 
   beforeEach(() => {
@@ -17,25 +14,6 @@ describe('Approval Dashboard process', () => {
   });
 
   it('should test the whole approval process.', () => {
-    cy.visit('/ui/repo/published');
-    cy.contains('No collections yet');
-
-    // should approve
-    cy.visit('/ui/approval-dashboard');
-    cy.contains('[data-cy="CertificationDashboard-row"]', 'Needs review');
-    cy.contains(
-      '[data-cy="CertificationDashboard-row"] button',
-      'Approve',
-    ).click();
-    cy.contains('.body', 'No results found', { timeout: 8000 });
-    cy.visit('/ui/approval-dashboard');
-    cy.contains('button', 'Clear all filters').click();
-    cy.contains('[data-cy="CertificationDashboard-row"]', 'Approved');
-
-    // should see item in collections
-    cy.visit('/ui/repo/published?page_size=100');
-    cy.contains('.collection-container', 'appp_c_test1');
-
     // should reject
     cy.visit('/ui/approval-dashboard');
     cy.contains('button', 'Clear all filters').click();
@@ -48,5 +26,24 @@ describe('Approval Dashboard process', () => {
     // should not see items in collections
     cy.visit('/ui/repo/published');
     cy.contains('No collections yet');
+
+    // should approve
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
+    cy.contains('[data-cy="CertificationDashboard-row"]', 'Rejected');
+    cy.get('[data-cy="kebab-toggle"]:first button[aria-label="Actions"]').click(
+      { force: true },
+    );
+    cy.contains('Approve').click({ force: true });
+
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('.body', 'No results found', { timeout: 8000 });
+    cy.visit('/ui/approval-dashboard');
+    cy.contains('button', 'Clear all filters').click();
+    cy.contains('[data-cy="CertificationDashboard-row"]', 'Approved');
+
+    // should see item in collections
+    cy.visit('/ui/repo/published?page_size=100');
+    cy.contains('.collection-container', 'appp_c_test1');
   });
 });
