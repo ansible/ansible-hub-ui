@@ -44,25 +44,6 @@ describe('Imports filter test', () => {
     ).contains('Done');
   });
 
-  it('should fail on importing existing collection', () => {
-    cy.galaxykit('-i collection upload', 'test_namespace', testCollection);
-    cy.visit(`${uiPrefix}my-imports?namespace=test_namespace`);
-
-    cy.get(`[data-cy="ImportList-row-${testCollection}"]`).first().click();
-    cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
-      `test_namespace.${testCollection}`,
-    );
-    cy.get(
-      '[data-cy="MyImports"] [data-cy="ImportConsole"] .title-bar',
-    ).contains('Failed', { timeout: 10000 });
-    cy.get('[data-cy="MyImports"] [data-cy="ImportConsole"]').contains(
-      'Error message',
-    );
-    cy.get(
-      '[data-cy="MyImports"] [data-cy="ImportConsole"] .message-list',
-    ).contains('Failed');
-  });
-
   it('should be able to switch between namespaces', () => {
     cy.get('button[aria-label="Clear all"]').click();
     cy.contains('[data-cy="import-list-data"]', 'No namespace selected.', {
