@@ -49,7 +49,8 @@ describe('Imports filter test', () => {
     ).as('wait');
 
     cy.get('input[aria-label="keywords"').type('my_collection1{enter}');
-    cy.wait('@wait');
+    cy.wait('@wait'); // search
+    cy.wait('@wait'); // submit
 
     cy.get('[data-cy="import-list-data"]')
       .contains('my_collection2')
