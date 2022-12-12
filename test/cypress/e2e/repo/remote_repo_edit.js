@@ -22,6 +22,12 @@ describe('edit a remote repository', () => {
 
     cy.contains('Show advanced options').click();
 
+    // clear if already set
+    cy.contains('.pf-c-modal-box__body button', 'Clear').click({
+      force: true,
+      multiple: true,
+    });
+
     // enter new values
     cy.get('input[id="url"]').type('https://galaxy.ansible.com/api/');
     cy.get('input[id="username"]').type('test');
