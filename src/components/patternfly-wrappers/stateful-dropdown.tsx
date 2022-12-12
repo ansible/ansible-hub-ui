@@ -10,7 +10,7 @@ import {
 
 interface IProps {
   /** List of patternfly DropdownItem components */
-  items: React.ReactNodeArray;
+  items: React.ReactNode[];
 
   /** Callback fired when the user selects an item */
   onSelect?: (event) => void;

@@ -10,13 +10,15 @@ import 'src/l10n';
 // Entrypoint for compiling the app to run in insights production mode.
 
 const AnsibleHub = () => (
-  <Provider store={init().getStore()}>
-    <Router basename={UI_BASE_PATH}>
-      <I18nProvider i18n={i18n}>
-        <App basename={UI_BASE_PATH} />
-      </I18nProvider>
-    </Router>
-  </Provider>
+  <React.StrictMode>
+    <Provider store={init().getStore()}>
+      <Router basename={UI_BASE_PATH}>
+        <I18nProvider i18n={i18n}>
+          <App basename={UI_BASE_PATH} />
+        </I18nProvider>
+      </Router>
+    </Provider>
+  </React.StrictMode>
 );
 
 export default AnsibleHub;
