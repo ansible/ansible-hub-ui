@@ -18,9 +18,6 @@ import {
   Spinner,
 } from '@patternfly/react-core';
 
-import { twoWayMapper } from 'src/utilities';
-
-import { Constants } from 'src/constants';
 interface IState {
   permissions: string[];
   groups: PermissionType[];
@@ -57,14 +54,13 @@ export class RoleForm extends React.Component<IProps, IState> {
     if (this.props.originalPermissions) {
       this.setState({
         permissions: this.props.originalPermissions,
-        groups: this.formatPermissions(model_permissions),
       });
     }
-    // this.getKeyByValue(model_permissions, 'Add namespace')
+    this.setState({ groups: this.formatPermissions(model_permissions) });
   }
 
   render() {
-    const { permissions: selectedPermissions } = this.state;
+    const { permissions: selectedPermissions, groups } = this.state;
     const {
       name,
       onNameChange,
@@ -80,9 +76,8 @@ export class RoleForm extends React.Component<IProps, IState> {
       isSavingDisabled,
       saving,
     } = this.props;
-    const groups = Constants.PERMISSIONS;
 
-    const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
+    const { model_permissions } = this.context.user;
 
     return (
       <React.Fragment>
@@ -145,12 +140,12 @@ export class RoleForm extends React.Component<IProps, IState> {
               <Flex
                 style={{ marginTop: '16px' }}
                 alignItems={{ default: 'alignItemsCenter' }}
-                key={group.name}
-                className={group.name}
-                data-cy={`RoleForm-Permissions-row-${group.name}`}
+                key={group.label}
+                className={group.label}
+                data-cy={`RoleForm-Permissions-row-${group.label}`}
               >
                 <FlexItem style={{ minWidth: '200px' }}>
-                  {i18n._(group.name)}
+                  {i18n._(group.label)}
                 </FlexItem>
                 <FlexItem grow={{ default: 'grow' }}>
                   <PermissionChipSelector
@@ -188,15 +183,15 @@ export class RoleForm extends React.Component<IProps, IState> {
                       const newPerms = new Set(this.state.permissions);
                       if (
                         newPerms.has(
-                          twoWayMapper(selection, filteredPermissions),
+                          this.getKeyByValue(model_permissions, selection),
                         )
                       ) {
                         newPerms.delete(
-                          twoWayMapper(selection, filteredPermissions),
+                          this.getKeyByValue(model_permissions, selection),
                         );
                       } else {
                         newPerms.add(
-                          twoWayMapper(selection, filteredPermissions),
+                          this.getKeyByValue(model_permissions, selection),
                         );
                       }
                       this.setState({
@@ -258,9 +253,14 @@ export class RoleForm extends React.Component<IProps, IState> {
     }
   }
 
-  // private getKeyByValue(permissions, value) {
-  //   // console.log('key ', Object.keys(permissions).find(key => Object[key] === value));
-  //   // return Object.keys(permissions).find(key => Object[key] === value);
-  //   console.log('value: ', );
-  // }
+  private getKeyByValue(permissions, value) {
+    const permArray = Object.entries(permissions);
+    let realName = '';
+    permArray.map((p) => {
+      if (value === p[1]['name']) {
+        realName = p[0];
+      }
+    });
+    return realName;
+  }
 }
