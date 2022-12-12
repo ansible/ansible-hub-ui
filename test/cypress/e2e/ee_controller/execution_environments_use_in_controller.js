@@ -75,7 +75,6 @@ describe('Execution Environments - Use in Controller', () => {
       it(`Use in Controller - ${type} ${opener.name}`, () => {
         opener(type);
 
-        // sporadic failure
         // shows links
         cy.contains('a', 'https://www.example.com')
           .should('have.attr', 'href')
@@ -105,12 +104,12 @@ describe('Execution Environments - Use in Controller', () => {
 
         // search tag
         cy.get('input.pf-c-select__toggle-typeahead').click();
-        cy.contains('.pf-c-select__menu', 'latest').click();
+        cy.contains('.pf-c-select__menu', 'hello-world').click();
         cy.contains('a', 'https://another.example.com')
           .should('have.attr', 'href')
           .and(
             'match',
-            /^https:\/\/another\.example\.com\/#\/execution_environments\/add\?image=.*latest$/,
+            /^https:\/\/another\.example\.com\/#\/execution_environments\/add\?image=.*hello-world$/,
           );
 
         // unfilter controllers
