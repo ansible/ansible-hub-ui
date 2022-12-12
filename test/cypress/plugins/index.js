@@ -14,17 +14,12 @@
 
 /**
  * @type {Cypress.PluginConfig}
+ * (on, config):
+ *   `on` is used to hook into various events Cypress emits
+ *   `config` is the resolved Cypress config
  */
 module.exports = (on) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
-  require('./console-logger').install(on);
-
-  // in plugins file
-  on('task', {
-    log(message) {
-      console.log(message);
-      return null;
-    },
-  });
+  if (process.env.CONSOLE_LOG_TO_TERMINAL) {
+    require('./console-logger').install(on);
+  }
 };

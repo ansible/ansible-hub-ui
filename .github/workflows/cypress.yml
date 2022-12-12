@@ -184,8 +184,6 @@ jobs:
           "pulpPrefix": "/pulp/api/v3/",
           "username": "admin",
           "password": "admin",
-          "settings": "../../pulp_galaxy_ng/settings/settings.py",
-          "restart": "podman exec pulp bash -c \"s6-svc -r /var/run/s6/services/pulpcore-api\"; sleep 10",
           "containers": "localhost:8002",
           "galaxykit": "galaxykit --ignore-certs"
         }' > cypress.env.json
@@ -224,6 +222,8 @@ jobs:
 
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
+      env:
+        CONSOLE_LOG_TO_TERMINAL: true
       run: |
         npm run cypress:chrome
 
