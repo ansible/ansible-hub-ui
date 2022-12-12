@@ -1,4 +1,4 @@
-describe('view-only mode', () => {
+describe.skip('view-only mode', () => {
   before(() => {
     cy.galaxykit('collection upload');
   });
