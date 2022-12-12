@@ -41,14 +41,10 @@ The tests need to know details about the instance of Automation Hub that it's ru
         "prefix": "<api root>",
         "username": "<your username here>",
         "password": "<your password here>",
-        "settings": "../../galaxy_ng/galaxy_ng/app/settings.py",
-        "restart": "true",
         "containers": "localhost:5001"
     }
 
 *note*: the api root for the docker development environment of ansible/galaxy\_ng is `/api/automation-hub/`, while pulp-oci-images uses `/api/galaxy/`.
-
-*note*: `settings` should point to galaxy\_ng `settings.py` relative to the `test/` folder, `restart` is a command to restart the server, true works in development because the server is watching for changes.
 
 *note*: `containers` is what you would use with `docker push`/`podman push` to add a local container
 
