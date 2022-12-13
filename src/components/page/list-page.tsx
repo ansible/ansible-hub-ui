@@ -63,6 +63,7 @@ interface ListPageParams<T> {
   condition: CanContext;
   defaultPageSize: number;
   defaultSort?: string;
+  didMount?: ({ context, addAlert }) => void;
   displayName: string;
   errorTitle: string;
   filterConfig: FilterConfig;
@@ -77,6 +78,8 @@ interface ListPageParams<T> {
 export const ListPage = function <T>({
   // { featureFlags, settings, user } => bool
   condition,
+  // extra code to run on mount
+  didMount,
   // component name for debugging
   displayName,
   // initial page size
@@ -135,6 +138,13 @@ export const ListPage = function <T>({
         this.setState({ loading: false, unauthorised: true });
       } else {
         this.query();
+      }
+
+      if (didMount) {
+        didMount({
+          context: this.context,
+          addAlert: (alert) => this.addAlert(alert),
+        });
       }
     }
 
