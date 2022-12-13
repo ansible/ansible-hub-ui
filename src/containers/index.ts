@@ -39,3 +39,8 @@ export { default as ExecutionEnvironmentManifest } from './execution-environment
 export { default as TaskDetail } from './task-management/task_detail';
 export { default as TaskListView } from './task-management/task-list-view';
 export { default as SignatureKeysList } from './signature-keys/list';
+
+export { default as LegacyRoles } from './legacy-roles/legacy-roles';
+export { default as LegacyRole } from './legacy-roles/legacy-role';
+export { default as LegacyNamespaces } from './legacy-namespaces/legacy-namespaces';
+export { default as LegacyNamespace } from './legacy-namespaces/legacy-namespace';

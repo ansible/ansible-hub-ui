@@ -384,13 +384,28 @@ class App extends React.Component<RouteComponentProps, IState> {
           }),
         ],
       ),
+      menuSection(
+        t`Legacy`,
+        {
+          condition: ({ featureFlags }) => featureFlags.legacy_roles,
+        },
+        [
+          menuItem(t`Legacy Roles`, {
+            url: Paths.legacyRoles,
+          }),
+          menuItem(t`Legacy Namespaces`, {
+            url: Paths.legacyNamespaces,
+          }),
+        ],
+      ),
       menuItem(t`Task Management`, {
         url: Paths.taskList,
         condition: ({ user }) => !user.is_anonymous,
       }),
       menuItem(t`Signature Keys`, {
         url: Paths.signatureKeys,
-        condition: ({ featureFlags }) => featureFlags.display_signatures,
+        condition: ({ featureFlags, user }) =>
+          featureFlags.display_signatures && !user.is_anonymous,
       }),
       menuItem(t`Documentation`, {
         url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
@@ -443,6 +458,10 @@ class App extends React.Component<RouteComponentProps, IState> {
     });
 
   private setRepoToURL() {
+    // bypass this logic if looking at legacy things ...
+    if (matchPath(this.props.location.pathname, { path: '/legacy' })) {
+      return null;
+    }
     const match = this.isRepoURL(this.props.location.pathname);
     if (match) {
       if (match.params['repo'] !== this.state.selectedRepo) {
