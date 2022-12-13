@@ -62,6 +62,7 @@ type SortHeaders = {
 interface ListPageParams<T> {
   condition: CanContext;
   defaultPageSize: number;
+  defaultSort?: string;
   displayName: string;
   errorTitle: string;
   filterConfig: FilterConfig;
@@ -80,6 +81,8 @@ export const ListPage = function <T>({
   displayName,
   // initial page size
   defaultPageSize,
+  // initial sort ordering
+  defaultSort,
   // alert on query failure
   errorTitle,
   // filters
@@ -110,6 +113,10 @@ export const ListPage = function <T>({
 
       if (!params['page_size']) {
         params['page_size'] = defaultPageSize;
+      }
+
+      if (!params['sort'] && defaultSort) {
+        params['sort'] = defaultSort;
       }
 
       this.state = {
