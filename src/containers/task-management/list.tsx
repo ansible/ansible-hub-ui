@@ -53,7 +53,7 @@ interface IState {
   inputText: string;
 }
 
-export class TaskListView extends React.Component<RouteComponentProps, IState> {
+export class TaskList extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
 
@@ -449,6 +449,6 @@ export class TaskListView extends React.Component<RouteComponentProps, IState> {
   }
 }
 
-export default withRouter(TaskListView);
+export default withRouter(TaskList);
 
-TaskListView.contextType = AppContext;
+TaskList.contextType = AppContext;

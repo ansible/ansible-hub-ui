@@ -40,7 +40,7 @@ import {
   ExecutionEnvironmentDetailImages,
   ExecutionEnvironmentDetailOwners,
   ExecutionEnvironmentManifest,
-  TaskListView,
+  TaskList,
   TaskDetail,
 } from 'src/containers';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
@@ -203,7 +203,7 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: LegacyRoles, path: Paths.legacyRoles },
 
       {
-        comp: TaskListView,
+        comp: TaskList,
         path: Paths.taskList,
       },
       { comp: GroupList, path: Paths.groupList },

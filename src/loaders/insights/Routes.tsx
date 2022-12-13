@@ -116,11 +116,11 @@ const TokenPage = lazy(
     ),
 );
 
-const TaskListView = lazy(
+const TaskList = lazy(
   () =>
     import(
       /* webpackChunkName: "settings" */
-      '../../containers/task-management/task-list-view'
+      '../../containers/task-management/list'
     ),
 );
 
@@ -181,7 +181,7 @@ export const Routes = () => {
         <Route path={Paths.myCollectionsByRepo} component={ManageNamespace} />
         <Route path={Paths.myNamespaces} component={MyNamespaces} />
         <Route path={Paths.signatureKeys} component={SignatureKeysList} />
-        <Route path={Paths.taskList} component={TaskListView} />
+        <Route path={Paths.taskList} component={TaskList} />
         <Route path={Paths.taskDetail} component={TaskDetail} />
         <Route
           path={Paths.collectionDocsPageByRepo}

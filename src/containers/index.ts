@@ -37,7 +37,7 @@ export { default as ExecutionEnvironmentDetailImages } from './execution-environ
 export { default as ExecutionEnvironmentDetailOwners } from './execution-environment-detail/execution_environment_detail_owners';
 export { default as ExecutionEnvironmentManifest } from './execution-environment-manifest/execution-environment-manifest';
 export { default as TaskDetail } from './task-management/task_detail';
-export { default as TaskListView } from './task-management/task-list-view';
+export { default as TaskList } from './task-management/list';
 export { default as SignatureKeysList } from './signature-keys/list';
 
 export { default as LegacyRoles } from './legacy-roles/legacy-roles';
