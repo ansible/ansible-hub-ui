@@ -53,6 +53,7 @@ jobs:
 
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "COMPOSE_PROFILE=${COMPOSE_PROFILE}" >> $GITHUB_ENV
+        echo "COMPOSE_INTERACTIVE_NO_CLI=1" >> $GITHUB_ENV
 
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v3
