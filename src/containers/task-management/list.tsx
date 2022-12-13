@@ -56,7 +56,7 @@ interface IState {
 const maybeTranslate = (name) =>
   (Constants.TASK_NAMES[name] && i18n._(Constants.TASK_NAMES[name])) || name;
 
-export class TaskListView extends React.Component<RouteProps, IState> {
+export class TaskList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -444,6 +444,6 @@ export class TaskListView extends React.Component<RouteProps, IState> {
   }
 }
 
-export default withRouter(TaskListView);
+export default withRouter(TaskList);
 
-TaskListView.contextType = AppContext;
+TaskList.contextType = AppContext;

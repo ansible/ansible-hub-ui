@@ -43,7 +43,7 @@ import {
   Search,
   SignatureKeysList,
   TaskDetail,
-  TaskListView,
+  TaskList,
   TokenStandalone,
   UserCreate,
   UserDetail,
@@ -215,12 +215,12 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       { component: LegacyRoles, path: Paths.legacyRoles },
 
       {
-        component: TaskListView,
+        component: TaskList,
         path: Paths.taskList,
       },
+      { component: TaskDetail, path: Paths.taskDetail },
       { component: GroupList, path: Paths.groupList },
       { component: GroupDetail, path: Paths.groupDetail },
-      { component: TaskDetail, path: Paths.taskDetail },
       { component: EditRole, path: Paths.roleEdit },
       {
         component: RoleCreate,

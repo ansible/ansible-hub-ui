@@ -75,13 +75,9 @@ const SignatureKeysList = lazy(
   () => import('src/containers/signature-keys/list'),
 );
 
-const TaskDetail = lazy(
-  () => import('src/containers/task-management/task_detail'),
-);
+const TaskDetail = lazy(() => import('src/containers/task-management/detail'));
 
-const TaskListView = lazy(
-  () => import('src/containers/task-management/task-list-view'),
-);
+const TaskList = lazy(() => import('src/containers/task-management/list'));
 
 const TokenInsights = lazy(() => import('src/containers/token/token-insights'));
 
@@ -104,7 +100,7 @@ const routes = [
   { path: Paths.myCollectionsByRepo, component: NamespaceDetail },
   { path: Paths.myNamespaces, component: MyNamespaces },
   { path: Paths.signatureKeys, component: SignatureKeysList },
-  { path: Paths.taskList, component: TaskListView },
+  { path: Paths.taskList, component: TaskList },
   { path: Paths.taskDetail, component: TaskDetail },
   {
     path: Paths.collectionDocsPageByRepo,
