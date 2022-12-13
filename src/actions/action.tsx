@@ -1,15 +1,29 @@
 import * as React from 'react';
 import { Button, DropdownItem } from '@patternfly/react-core';
 
-export const Action = ({ title, onClick }) => ({
-  dropdownItem: (item) => (
-    <DropdownItem key={title} onClick={() => onClick(item)}>
-      {title}
-    </DropdownItem>
-  ),
-  button: (item) => (
-    <Button key={title} onClick={() => onClick(item)}>
-      {title}
-    </Button>
-  ),
+interface ActionParams {
+  buttonVariant?: 'primary' | 'secondary';
+  onClick: (item) => void;
+  title: string;
+  visible?: (item) => boolean;
+}
+
+export const Action = ({
+  buttonVariant,
+  title,
+  onClick,
+  visible = () => true,
+}: ActionParams) => ({
+  dropdownItem: (item) =>
+    visible(item) ? (
+      <DropdownItem key={title} onClick={() => onClick(item)}>
+        {title}
+      </DropdownItem>
+    ) : null,
+  button: (item) =>
+    visible(item) ? (
+      <Button variant={buttonVariant} key={title} onClick={() => onClick(item)}>
+        {title}
+      </Button>
+    ) : null,
 });
