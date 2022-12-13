@@ -15,6 +15,7 @@ import {
 import { LegacyRoleAPI } from 'src/api/legacyrole';
 import { LegacyRoleListType } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
+import { Constants } from 'src/constants';
 
 interface IProps {
   legacyroles: LegacyRoleListType[];
@@ -143,7 +144,7 @@ class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
 
     return (
       <div>
-        <BaseHeader title={t`Legacy Roles`}></BaseHeader>
+        <BaseHeader title={t`${Constants.LEGACY_ROLE_PREFIX_TITLE} Roles`}></BaseHeader>
         <React.Fragment>
           {loading ? (
             <LoadingPageSpinner />
