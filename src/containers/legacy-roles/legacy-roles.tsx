@@ -144,7 +144,9 @@ class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
 
     return (
       <div>
-        <BaseHeader title={t`${Constants.LEGACY_ROLE_PREFIX_TITLE} Roles`}></BaseHeader>
+        <BaseHeader
+          title={t`${Constants.LEGACY_ROLE_PREFIX_TITLE} Roles`}
+        ></BaseHeader>
         <React.Fragment>
           {loading ? (
             <LoadingPageSpinner />
