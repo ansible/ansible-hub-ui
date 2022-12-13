@@ -8,3 +8,6 @@ export type CanContext = (o: {
 }) => boolean;
 
 export const isLoggedIn: CanContext = ({ user }) => user && !user.is_anonymous;
+
+export const canViewAllTasks: CanContext = ({ hasPermission }) =>
+  hasPermission('core.view_task');
