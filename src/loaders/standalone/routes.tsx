@@ -9,6 +9,10 @@ import {
   CollectionImportLog,
   CollectionDependencies,
   EditNamespace,
+  LegacyNamespaces,
+  LegacyNamespace,
+  LegacyRoles,
+  LegacyRole,
   LoginPage,
   MyImports,
   NamespaceDetail,
@@ -191,6 +195,13 @@ export class Routes extends React.Component<IRoutesProps> {
         path: Paths.executionEnvironmentsRegistries,
         isDisabled: isContainerDisabled,
       },
+
+      // LEGACY ...
+      { comp: LegacyNamespace, path: Paths.legacyNamespace },
+      { comp: LegacyNamespaces, path: Paths.legacyNamespaces },
+      { comp: LegacyRole, path: Paths.legacyRole },
+      { comp: LegacyRoles, path: Paths.legacyRoles },
+
       {
         comp: TaskListView,
         path: Paths.taskList,

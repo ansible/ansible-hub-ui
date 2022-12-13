@@ -103,3 +103,6 @@ export { WizardModal } from './patternfly-wrappers/wizard-modal';
 export { PreviewRoles } from './rbac/preview-roles';
 export { SelectRoles } from './rbac/select-roles';
 export { SelectGroup } from './rbac/select-group';
+
+export { LegacyRoleListItem } from './legacy-role-list/legacy-role-item';
+export { LegacyNamespaceListItem } from './legacy-namespace-list/legacy-namespace-item';
