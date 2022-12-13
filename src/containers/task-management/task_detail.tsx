@@ -49,7 +49,11 @@ interface IState {
   alerts: AlertType[];
   cancelModalVisible: boolean;
   taskName: string;
-  resources: { name: string; type: string }[];
+  resources: {
+    name?: string;
+    type: string;
+    pluginName?: string;
+  }[];
   redirect: string;
   polling: ReturnType<typeof setInterval>;
 }
@@ -263,6 +267,14 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
                                 {resource.type}
                               </DescriptionListDescription>
                             </DescriptionListGroup>
+                            {resource.pluginName && (
+                              <DescriptionListGroup>
+                                <DescriptionListTerm>{t`Plugin`}</DescriptionListTerm>
+                                <DescriptionListDescription>
+                                  {resource.pluginName}
+                                </DescriptionListDescription>
+                              </DescriptionListGroup>
+                            )}
                             {resource.name && (
                               <DescriptionListGroup>
                                 <DescriptionListTerm>{t`Name`}</DescriptionListTerm>
@@ -456,20 +468,40 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
           result.data.reserved_resources_record.forEach((resource) => {
             const url = resource.replace(PULP_API_BASE_PATH, '');
             const id = parsePulpIDFromURL(url);
-            const urlParts = resource.split('/');
-            const type = id ? urlParts[4] : urlParts[urlParts.length - 2];
+            const urlParts = url.split('/');
+            let resourceType = '';
+            let pluginName = '';
+
+            // pulp hrefs follow this pattern for resources added by plugins:
+            // /<resource name>/<plugin name>/<resource type>/<pk>/
+            // Locks can be added on the entire resource (ex /repositories/) or on a specific
+            // instance of a resource (ex /repositories/ansible/ansible/123123/
+
+            // if the url has 3 or more segements, parse out the resource, plugin name, and resource type
+            if (urlParts.length >= 3) {
+              resourceType = `${urlParts[0]}: ${urlParts[2]}`;
+              pluginName = urlParts[1];
+              // otherwise, just return the resource type
+            } else {
+              resource = urlParts[0];
+            }
+
             if (id) {
               allRelatedTasks.push(
                 GenericPulpAPI.get(url)
                   .then((result) => {
-                    resources.push({ name: result.data.name, type });
+                    resources.push({
+                      name: result.data.name,
+                      type: resourceType,
+                      pluginName: pluginName,
+                    });
                   })
                   .catch(() => {
                     return true;
                   }),
               );
             } else {
-              resources.push({ type });
+              resources.push({ type: resourceType });
             }
           });
         }
