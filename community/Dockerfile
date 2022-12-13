@@ -4,6 +4,8 @@ RUN mkdir -p /workspace/ && \
     apk add --no-cache git
 COPY . /workspace/
 RUN npm ci && \
+    npm run gettext:extract && \
+    npm run gettext:compile && \
     npm run build-community
 
 FROM registry.access.redhat.com/ubi8/nginx-120:latest
