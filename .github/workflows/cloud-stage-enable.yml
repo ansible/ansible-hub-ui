@@ -18,9 +18,17 @@ jobs:
         git config --global user.name 'GH Actions'
         git config --global user.email 'gh_actions@users.noreply.github.com'
 
+        # decrypt deploy key and use
+        gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.MANIFEST_PASSPHRASE }}" --output .travis/deploy_manifest .travis/deploy_manifest.gpg
+
+        chmod 600 .travis/deploy_manifest
+        eval `ssh-agent -s`
+        ssh-add .travis/deploy_manifest
+
+        git remote set-url origin git@github.com:ansible/ansible-hub-ui.git
+
         touch .cloud-stage-cron.enabled
         git add .cloud-stage-cron.enabled
 
         git commit -m 'Enable cloud stage cron deploy '`date --iso=d`
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ansible/ansible-hub-ui.git
         git push origin HEAD:master
