@@ -1,6 +1,5 @@
 import { t, defineMessage } from '@lingui/macro';
 
-
 export class Constants {
   static readonly SEARCH_VIEW_TYPE_LOCAL_KEY = 'search_view_type';
   static readonly DEFAULT_PAGE_SIZE = 10;

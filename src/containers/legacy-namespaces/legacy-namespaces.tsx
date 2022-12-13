@@ -133,7 +133,9 @@ class LegacyNamespaces extends React.Component<
 
     return (
       <div>
-        <BaseHeader title={t`${Constants.LEGACY_ROLE_PREFIX_TITLE} Namespaces`}></BaseHeader>
+        <BaseHeader
+          title={t`${Constants.LEGACY_ROLE_PREFIX_TITLE} Namespaces`}
+        ></BaseHeader>
         <React.Fragment>
           {loading ? (
             <LoadingPageSpinner />
@@ -156,7 +158,9 @@ class LegacyNamespaces extends React.Component<
                 count={this.state.count}
               />
 
-              <DataList aria-label={t`List of ${Constants.LEGACY_ROLE_PREFIX_TITLE} Namespaces`}>
+              <DataList
+                aria-label={t`List of ${Constants.LEGACY_ROLE_PREFIX_TITLE} Namespaces`}
+              >
                 {this.state.legacynamespaces &&
                   this.state.legacynamespaces.map((lnamespace) => (
                     <LegacyNamespaceListItem

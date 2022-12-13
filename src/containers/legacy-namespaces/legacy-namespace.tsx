@@ -140,7 +140,9 @@ class LegacyNamespaceRoles extends React.Component<
             />
           ) : (
             <div>
-              <DataList aria-label={t`List of ${Constants.LEGACY_ROLE_PREFIX_TITLE} Roles`}>
+              <DataList
+                aria-label={t`List of ${Constants.LEGACY_ROLE_PREFIX_TITLE} Roles`}
+              >
                 {this.state.roles.map((lrole, ix) => (
                   <LegacyRoleListItem
                     key={ix}
