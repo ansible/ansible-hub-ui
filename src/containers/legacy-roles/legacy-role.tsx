@@ -37,6 +37,7 @@ import { LegacyRoleAPI } from 'src/api/legacyrole';
 import { AppContext } from 'src/loaders/app-context';
 import { LegacyRoleDetailType } from 'src/api/response-types/legacy-role';
 import { LegacyRoleVersionDetailType } from 'src/api/response-types/legacy-role';
+import { Constants } from 'src/constants';
 
 interface RoleMeta {
   role: LegacyRoleDetailType;
@@ -351,7 +352,7 @@ class LegacyRole extends React.Component<RouteComponentProps, IProps> {
 
     const breadcrumbs = [
       {
-        name: 'Legacy Roles',
+        name: `${Constants.LEGACY_ROLE_PREFIX_TITLE} Roles`,
         url: formatPath(Paths.legacyRoles, {}),
       },
       {

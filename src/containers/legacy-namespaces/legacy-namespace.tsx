@@ -25,6 +25,7 @@ import { LegacyRoleAPI } from 'src/api/legacyrole';
 import { LegacyNamespaceAPI } from 'src/api/legacynamespace';
 import { LegacyNamespaceListType, LegacyRoleListType } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
+import { Constants } from 'src/constants';
 
 interface LegacyNamespaceRolesProps {
   namespace: LegacyNamespaceListType;
@@ -139,7 +140,7 @@ class LegacyNamespaceRoles extends React.Component<
             />
           ) : (
             <div>
-              <DataList aria-label={t`List of Legacy Roles`}>
+              <DataList aria-label={t`List of ${Constants.LEGACY_ROLE_PREFIX_TITLE} Roles`}>
                 {this.state.roles.map((lrole, ix) => (
                   <LegacyRoleListItem
                     key={ix}

@@ -47,6 +47,7 @@ import {
 import { hasPermission } from 'src/utilities';
 import { AppContext } from '../app-context';
 import Logo from 'src/../static/images/logo_large.svg';
+import { Constants } from 'src/constants';
 
 interface IState {
   user: UserType;
@@ -385,15 +386,15 @@ class App extends React.Component<RouteComponentProps, IState> {
         ],
       ),
       menuSection(
-        t`Legacy`,
+        t`${Constants.LEGACY_ROLE_PREFIX_TITLE}`,
         {
           condition: ({ featureFlags }) => featureFlags.legacy_roles,
         },
         [
-          menuItem(t`Legacy Roles`, {
+          menuItem(t`${Constants.LEGACY_ROLE_PREFIX_TITLE} Roles`, {
             url: Paths.legacyRoles,
           }),
-          menuItem(t`Legacy Namespaces`, {
+          menuItem(t`${Constants.LEGACY_ROLE_PREFIX_TITLE} Namespaces`, {
             url: Paths.legacyNamespaces,
           }),
         ],
