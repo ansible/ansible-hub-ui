@@ -197,13 +197,12 @@ class CollectionDependencies extends React.Component<
 
     Object.keys(dependencies).forEach((dependency) => {
       const [namespace, collection] = dependency.split('.');
-      let version = dependencies[dependency];
-      version = this.separateVersion(version).version;
+      const version_range = dependencies[dependency];
 
       const dependency_repo = {
         name: collection,
         namespace: namespace,
-        version: version,
+        version_range: version_range,
         repo: '',
         path: '',
       };
@@ -222,19 +221,16 @@ class CollectionDependencies extends React.Component<
     return CollectionVersionAPI.list({
       namespace: dependency_repo.namespace,
       name: dependency_repo.name,
-      version: dependency_repo.version,
+      version_range: dependency_repo.version_range,
+      page_size: 1,
     })
       .then((result) => {
         dependency_repo.repo = result.data.data[0].repository_list[0];
-        dependency_repo.path = formatPath(
-          Paths.collectionByRepo,
-          {
-            collection: dependency_repo.name,
-            namespace: dependency_repo.namespace,
-            repo: dependency_repo.repo,
-          },
-          dependency_repo.version,
-        );
+        dependency_repo.path = formatPath(Paths.collectionByRepo, {
+          collection: dependency_repo.name,
+          namespace: dependency_repo.namespace,
+          repo: dependency_repo.repo,
+        });
       })
       .catch(() => {
         // do nothing, dependency_repo.path and repo stays empty
