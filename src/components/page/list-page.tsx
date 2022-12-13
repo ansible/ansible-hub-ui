@@ -15,6 +15,7 @@ import {
   EmptyStateFilter,
   EmptyStateNoData,
   EmptyStateUnauthorized,
+  FilterOption,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -45,7 +46,7 @@ interface IState<T> {
 // !items.length - no visible data but a filter is on, EmptyStateFilter with a clear filters button, CompoundFilter + AppliedFilters
 // (data) - also renders SortTable
 
-type FilterConfig = { id: string; title: string }[];
+type FilterConfig = FilterOption[];
 type ParamsType = { page?: number; page_size?: number };
 type Query<T> = (o: {
   params?: ParamsType;
