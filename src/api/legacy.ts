@@ -19,11 +19,6 @@ export class LegacyAPI extends BaseAPI {
     const pageSize =
       parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
     const page = parseInt(params['page']) || 1;
-
-    delete params['page'];
-    delete params['page_size'];
-
-    params['offset'] = page * pageSize - pageSize;
     params['page_size'] = pageSize;
 
     return params;
