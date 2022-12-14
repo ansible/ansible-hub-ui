@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { i18n } from '@lingui/core';
 import { t } from '@lingui/macro';
 import { AppContext } from 'src/loaders/app-context';
 import { RoleType, GroupRoleType, PermissionType } from 'src/api';
@@ -37,7 +36,7 @@ export class PermissionCategories extends React.Component<IProps, IState> {
 
     const origGroups = groups.map((group) => ({
       ...group,
-      label: i18n._(group.label),
+      label: group.label,
     }));
 
     const allGroups = showCustom
@@ -63,9 +62,7 @@ export class PermissionCategories extends React.Component<IProps, IState> {
             key={group.label}
             className={group.label}
           >
-            <FlexItem style={{ minWidth: '200px' }}>
-              {i18n._(group.label)}
-            </FlexItem>
+            <FlexItem style={{ minWidth: '200px' }}>{group.label}</FlexItem>
             <FlexItem grow={{ default: 'grow' }}>
               <PermissionChipSelector
                 availablePermissions={group.object_permissions
@@ -81,7 +78,6 @@ export class PermissionCategories extends React.Component<IProps, IState> {
                   )
                   .map((permission) => this.getNicenames(permission))}
                 menuAppendTo='inline'
-                multilingual={true}
                 isViewOnly={true}
               />
             </FlexItem>
