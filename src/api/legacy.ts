@@ -10,6 +10,11 @@ export class LegacyAPI extends BaseAPI {
     super(API_HOST + API_BASE_PATH);
   }
 
+  public mapPageToOffset(p) {
+    // override BaseAPI's function to persist page, page_size, etc ...
+    return p;
+  }
+
   get(apiPath: string) {
     const fullPath = 'v1/' + apiPath;
     if (fullPath.includes('?')) {
