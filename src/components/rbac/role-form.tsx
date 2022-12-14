@@ -4,6 +4,7 @@ import { i18n } from '@lingui/core';
 import { PermissionChipSelector } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
 import { PermissionType } from 'src/api';
+import { twoWayMapper } from 'src/utilities';
 import {
   ActionGroup,
   Button,
@@ -156,7 +157,7 @@ export class RoleForm extends React.Component<IProps, IState> {
                             (selected) => selected === perm,
                           ),
                       )
-                      .map((value) => this.getNicenames(value))
+                      .map((value) => twoWayMapper(model_permissions, value))
                       .sort()}
                     selectedPermissions={selectedPermissions
                       .filter((selected) =>
@@ -164,7 +165,7 @@ export class RoleForm extends React.Component<IProps, IState> {
                           (perm) => selected === perm,
                         ),
                       )
-                      .map((value) => this.getNicenames(value))}
+                      .map((value) => twoWayMapper(model_permissions, value))}
                     setSelected={(perms) =>
                       this.setState({ permissions: perms })
                     }
@@ -182,16 +183,14 @@ export class RoleForm extends React.Component<IProps, IState> {
                     onSelect={(event, selection) => {
                       const newPerms = new Set(this.state.permissions);
                       if (
-                        newPerms.has(
-                          this.getKeyByValue(model_permissions, selection),
-                        )
+                        newPerms.has(twoWayMapper(model_permissions, selection))
                       ) {
                         newPerms.delete(
-                          this.getKeyByValue(model_permissions, selection),
+                          twoWayMapper(model_permissions, selection),
                         );
                       } else {
                         newPerms.add(
-                          this.getKeyByValue(model_permissions, selection),
+                          twoWayMapper(model_permissions, selection),
                         );
                       }
                       this.setState({
@@ -255,12 +254,37 @@ export class RoleForm extends React.Component<IProps, IState> {
 
   private getKeyByValue(permissions, value) {
     const permArray = Object.entries(permissions);
-    let realName = '';
+    let realName = undefined;
     permArray.map((p) => {
       if (value === p[1]['name']) {
         realName = p[0];
       }
     });
     return realName;
+  }
+
+  private helper(permissions: object, value: string) {
+    Object.keys(permissions).find((key) => {
+      permissions[key]['name'] === value;
+    });
+  }
+
+  private thisMapper(mapper, value) {
+    let name = undefined;
+    if (Object.keys(mapper).includes(value)) {
+      if (mapper[value]?.name !== undefined) {
+        return mapper[value].name;
+      } else {
+        return value;
+      }
+    } else {
+      const permArray = Object.entries(mapper);
+      permArray.map((p) => {
+        if (value === p[1]['name']) {
+          name = p[0];
+        }
+      });
+      return name;
+    }
   }
 }

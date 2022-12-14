@@ -5,6 +5,7 @@ import { Flex, FlexItem } from '@patternfly/react-core';
 import { Constants } from 'src/constants';
 import { PermissionChipSelector } from 'src/components';
 import { twoWayMapper } from 'src/utilities';
+import { useContext } from 'src/loaders/app-context';
 
 interface IProps {
   filteredPermissions: { [key: string]: string };
@@ -21,12 +22,13 @@ export const RolePermissions: React.FC<IProps> = ({
   showCustom,
   showEmpty,
 }) => {
+  const { model_permissions } = useContext().user;
   const permFilter = (availablePermissions) =>
     selectedPermissions
       .filter((selected) =>
         availablePermissions.find((perm) => selected === perm),
       )
-      .map((value) => twoWayMapper(value, filteredPermissions) ?? value);
+      .map((value) => twoWayMapper(model_permissions, value) ?? value);
 
   const getSelected = (group) => permFilter(group.object_permissions);
 
@@ -77,7 +79,7 @@ export const RolePermissions: React.FC<IProps> = ({
                             (selected) => selected === perm,
                           ),
                       )
-                      .map((value) => twoWayMapper(value, filteredPermissions))
+                      .map((value) => twoWayMapper(model_permissions, value))
                       .sort(),
                     setSelected: setPermissions,
                     onClear: () => {
@@ -92,15 +94,15 @@ export const RolePermissions: React.FC<IProps> = ({
                       const newPermissions = new Set(selectedPermissions);
                       if (
                         newPermissions.has(
-                          twoWayMapper(selection, filteredPermissions),
+                          twoWayMapper(model_permissions, selection),
                         )
                       ) {
                         newPermissions.delete(
-                          twoWayMapper(selection, filteredPermissions),
+                          twoWayMapper(model_permissions, selection),
                         );
                       } else {
                         newPermissions.add(
-                          twoWayMapper(selection, filteredPermissions),
+                          twoWayMapper(model_permissions, selection),
                         );
                       }
                       setPermissions(Array.from(newPermissions));

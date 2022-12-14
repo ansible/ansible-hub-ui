@@ -72,6 +72,7 @@ interface IState {
 }
 
 export class RoleList extends React.Component<RouteComponentProps, IState> {
+  static contextType = AppContext;
   constructor(props) {
     super(props);
 
@@ -137,6 +138,8 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     const { featureFlags } = this.context;
     let isUserMgmtDisabled = false;
     const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
+
+    const { model_permissions } = this.context.user;
 
     if (redirect) {
       return <Redirect push to={redirect} />;
@@ -346,8 +349,8 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                                         )
                                         .map((value) =>
                                           twoWayMapper(
+                                            model_permissions,
                                             value,
-                                            filteredPermissions,
                                           ),
                                         )
                                         .sort()}
@@ -359,8 +362,8 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                                         )
                                         .map((value) =>
                                           twoWayMapper(
+                                            model_permissions,
                                             value,
-                                            filteredPermissions,
                                           ),
                                         )}
                                       menuAppendTo='inline'
