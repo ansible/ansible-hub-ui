@@ -39,7 +39,6 @@ interface IState {
   editing: boolean;
   alerts: AlertType[];
   showDeleteModal: boolean;
-  formError: { title: string; detail: string }[];
 }
 
 export interface IDetailSharedProps extends RouteComponentProps {
@@ -64,7 +63,6 @@ export function withContainerRepo(WrappedComponent) {
         editing: false,
         alerts: [],
         showDeleteModal: false,
-        formError: [],
       };
     }
 
@@ -223,45 +221,32 @@ export function withContainerRepo(WrappedComponent) {
                 namespace={this.state.repo.namespace.name}
                 description={this.state.repo.description}
                 permissions={permissions}
-                formError={this.state.formError}
                 onSave={(promise) => {
-                  promise
-                    .then((results) => {
-                      const task = results.find((x) => x.data && x.data.task);
-                      this.setState({
-                        editing: false,
-                        loading: true,
-                        alerts: alerts.concat({
-                          variant: 'success',
-                          title: (
-                            <Trans>
-                              Saved changes to execution environment &quot;
-                              {this.state.repo.name}&quot;.
-                            </Trans>
-                          ),
-                        }),
-                      });
-                      if (task) {
-                        waitForTask(
-                          task.data.task.split('tasks/')[1].replace('/', ''),
-                        ).then(() => {
-                          this.loadRepo();
-                        });
-                      } else {
-                        this.loadRepo();
-                      }
-                    })
-                    .catch((err) =>
-                      this.setState({
-                        formError: err.response.data.errors.map((error) => {
-                          return {
-                            title: error.title,
-                            detail:
-                              error.source.parameter + ': ' + error.detail,
-                          };
-                        }),
+                  promise.then((results) => {
+                    const task = results.find((x) => x.data && x.data.task);
+                    this.setState({
+                      editing: false,
+                      loading: true,
+                      alerts: alerts.concat({
+                        variant: 'success',
+                        title: (
+                          <Trans>
+                            Saved changes to execution environment &quot;
+                            {this.state.repo.name}&quot;.
+                          </Trans>
+                        ),
                       }),
-                    );
+                    });
+                    if (task) {
+                      waitForTask(
+                        task.data.task.split('tasks/')[1].replace('/', ''),
+                      ).then(() => {
+                        this.loadRepo();
+                      });
+                    } else {
+                      this.loadRepo();
+                    }
+                  });
                 }}
                 onCancel={() => this.setState({ editing: false })}
                 distributionPulpId={this.state.repo.pulp.distribution.id}

@@ -26,3 +26,68 @@ export function mapErrorMessages(err): ErrorMessagesType {
 
   return messages;
 }
+
+export function isFieldValid(
+  errorMessagesType: ErrorMessagesType,
+  name,
+): 'default' | 'error' {
+  let names = [];
+  if (Array.isArray(name)) {
+    names = name;
+  } else {
+    names.push(name);
+  }
+
+  if (!errorMessagesType) {
+    return 'default';
+  }
+
+  return names.find((n) => errorMessagesType[n]) ? 'error' : 'default';
+}
+
+export function isFormValid(errorMessages: ErrorMessagesType) {
+  if (!errorMessages) {
+    return true;
+  }
+
+  return !Object.values(errorMessages).find(Boolean);
+}
+
+export function alertErrorsWithoutFields(
+  errorMessages: ErrorMessagesType,
+  fields,
+  addAlert,
+  title,
+  setErrorMessages,
+) {
+  if (!errorMessages) {
+    return;
+  }
+
+  // select only errors without associated field
+  const errors = Object.keys(errorMessages)
+    .filter((field) => !fields.includes(field))
+    .map((field) => errorMessages[field]);
+
+  if (errors.length) {
+    // alert them
+    addAlert({
+      variant: 'danger',
+      title: title,
+      description: errors.join('\n'),
+    });
+
+    // filter only errors with field, rest will be removed from the state, because they were already alerted
+    const formErrors = {};
+
+    Object.keys(errorMessages).forEach((field) => {
+      if (fields.includes(field)) {
+        formErrors[field] = errorMessages[field];
+      }
+    });
+
+    setErrorMessages(formErrors);
+  }
+
+  return;
+}

@@ -15,14 +15,27 @@ import {
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon, TagIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
-import { AlertType, APISearchTypeAhead, HelperText } from 'src/components';
+import {
+  AlertType,
+  APISearchTypeAhead,
+  HelperText,
+  AlertList,
+  closeAlertMixin,
+} from 'src/components';
 import {
   ContainerDistributionAPI,
   ExecutionEnvironmentRegistryAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
-import { errorMessage } from 'src/utilities';
+import {
+  errorMessage,
+  ErrorMessagesType,
+  isFieldValid,
+  isFormValid,
+  mapErrorMessages,
+  alertErrorsWithoutFields,
+} from 'src/utilities';
 
 interface IProps {
   name: string;
@@ -42,13 +55,12 @@ interface IProps {
   upstreamName?: string;
   remoteId?: string;
   addAlert?: (variant, title, description?) => void;
-  formError: { title: string; detail: string }[];
 }
 
 interface IState {
   name: string;
   description: string;
-
+  alerts: AlertType[];
   addTagsInclude: string;
   addTagsExclude: string;
   excludeTags?: string[];
@@ -56,9 +68,7 @@ interface IState {
   registries?: { id: string; name: string }[];
   registrySelection?: { id: string; name: string }[];
   upstreamName: string;
-  formErrors?: {
-    registries?: AlertType;
-  };
+  formErrors: ErrorMessagesType;
 }
 
 export class RepositoryForm extends React.Component<IProps, IState> {
@@ -75,9 +85,8 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       registries: null,
       registrySelection: [],
       upstreamName: this.props.upstreamName || '',
-      formErrors: {
-        registries: null,
-      },
+      formErrors: {},
+      alerts: [],
     };
   }
 
@@ -96,15 +105,14 @@ export class RepositoryForm extends React.Component<IProps, IState> {
         })
         .catch((e) => {
           const { status, statusText } = e.response;
+          const errorTitle = t`Registries list could not be displayed.`;
+          this.addAlert({
+            variant: 'danger',
+            title: errorTitle,
+            description: errorMessage(status, statusText),
+          });
           this.setState({
-            formErrors: {
-              ...this.state.formErrors,
-              registries: {
-                title: t`Registries list could not be displayed.`,
-                description: errorMessage(status, statusText),
-                variant: 'danger',
-              },
-            },
+            formErrors: { ...this.state.formErrors, registries: errorTitle },
           });
         });
     }
@@ -147,6 +155,10 @@ export class RepositoryForm extends React.Component<IProps, IState> {
           </Button>,
         ]}
       >
+        <AlertList
+          alerts={this.state.alerts}
+          closeAlert={(i) => this.closeAlert(i)}
+        />
         <Form>
           {!isRemote ? (
             <>
@@ -179,15 +191,18 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 key='name'
                 fieldId='name'
                 label={t`Name`}
-                helperTextInvalid={t`Container names can only contain alphanumeric characters, ".", "_", "-" and a up to one "/".`}
-                validated={this.validateName(name)}
+                helperTextInvalid={this.state.formErrors['name']}
+                validated={isFieldValid(this.state.formErrors, 'name')}
               >
                 <TextInput
                   id='name'
                   value={name}
                   isDisabled={!isNew}
-                  onChange={(value) => this.setState({ name: value })}
-                  validated={this.validateName(name)}
+                  onChange={(value) => {
+                    this.setState({ name: value });
+                    this.validateName(value);
+                  }}
+                  validated={isFieldValid(this.state.formErrors, 'name')}
                 />
               </FormGroup>
 
@@ -215,16 +230,16 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                 label={t`Registry`}
                 className='hub-formgroup-registry'
                 isRequired={true}
+                helperTextInvalid={
+                  this.state.formErrors['registries'] ||
+                  this.state.formErrors['registry']
+                }
+                validated={isFieldValid(this.state.formErrors, [
+                  'registries',
+                  'registry',
+                ])}
               >
-                {formErrors?.registries ? (
-                  <Alert
-                    title={formErrors.registries.title}
-                    variant='danger'
-                    isInline
-                  >
-                    {formErrors.registries.description}
-                  </Alert>
-                ) : (
+                {!formErrors?.registries && (
                   <>
                     {registries ? (
                       <APISearchTypeAhead
@@ -235,6 +250,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                             registrySelection: registries.filter(
                               ({ name }) => name === value,
                             ),
+                            formErrors: { ...formErrors, registry: null },
                           })
                         }
                         placeholderText={t`Select a registry`}
@@ -390,9 +406,11 @@ export class RepositoryForm extends React.Component<IProps, IState> {
   private validateName(name) {
     const regex = /^([0-9A-Za-z._-]+\/)?[0-9A-Za-z._-]+$/;
     if (name === '' || regex.test(name)) {
-      return 'default';
+      this.setState({ formErrors: { ...this.state.formErrors, name: null } });
+      return;
     } else {
-      return 'error';
+      const error = t`Container names can only contain alphanumeric characters, ".", "_", "-" and a up to one "/".`;
+      this.setState({ formErrors: { ...this.state.formErrors, name: error } });
     }
   }
 
@@ -402,8 +420,13 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       // no validation for local
       return true;
     }
-    const nameValid = name && this.validateName(name) === 'default';
-    return nameValid && upstreamName && registrySelection.length;
+
+    if (!isFormValid(this.state.formErrors)) {
+      return false;
+    }
+
+    // validation for non empty fields
+    return name && upstreamName && registrySelection.length;
   }
 
   private loadRegistries(name?) {
@@ -455,30 +478,53 @@ export class RepositoryForm extends React.Component<IProps, IState> {
       upstreamName: upstream_name,
     } = this.state;
 
+    let promise = null;
     if (isRemote && isNew) {
-      return ExecutionEnvironmentRemoteAPI.create({
+      promise = ExecutionEnvironmentRemoteAPI.create({
         name,
         upstream_name,
         registry,
         include_tags,
         exclude_tags,
       });
+    } else {
+      promise = Promise.all([
+        // remote edit - upstream, tags, registry
+        isRemote &&
+          !isNew &&
+          ExecutionEnvironmentRemoteAPI.update(remoteId, {
+            name: originalName, // readonly but required
+            upstream_name,
+            registry,
+            include_tags,
+            exclude_tags,
+          }),
+        // remote edit or local edit - description, if changed
+        description !== originalDescription &&
+          ContainerDistributionAPI.patch(distributionPulpId, { description }),
+      ]);
     }
 
-    return Promise.all([
-      // remote edit - upstream, tags, registry
-      isRemote &&
-        !isNew &&
-        ExecutionEnvironmentRemoteAPI.update(remoteId, {
-          name: originalName, // readonly but required
-          upstream_name,
-          registry,
-          include_tags,
-          exclude_tags,
-        }),
-      // remote edit or local edit - description, if changed
-      description !== originalDescription &&
-        ContainerDistributionAPI.patch(distributionPulpId, { description }),
-    ]);
+    return promise.catch((e) => {
+      this.setState({ formErrors: mapErrorMessages(e) });
+      alertErrorsWithoutFields(
+        this.state.formErrors,
+        ['name', 'registry', 'registries'],
+        (alert) => this.addAlert(alert),
+        t`Error when saving registry.`,
+        (state) => this.setState({ formErrors: state }),
+      );
+      return Promise.reject(new Error(e));
+    });
+  }
+
+  private addAlert(alert) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
+  }
+
+  private get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 }
