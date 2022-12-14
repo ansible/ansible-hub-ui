@@ -12,16 +12,8 @@ export class LegacyAPI extends BaseAPI {
   }
 
   public mapPageToOffset(p) {
-    // Need to copy the object to make sure we aren't accidentally
-    // setting page state
-    const params = { ...p };
-
-    const pageSize =
-      parseInt(params['page_size']) || Constants.DEFAULT_PAGE_SIZE;
-    const page = parseInt(params['page']) || 1;
-    params['page_size'] = pageSize;
-
-    return params;
+    // override BaseAPI's function to persist page, page_size, etc ...
+    return p;
   }
 
   get(apiPath: string) {
