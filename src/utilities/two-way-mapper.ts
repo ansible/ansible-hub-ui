@@ -2,11 +2,7 @@
 export function twoWayMapper(mapper: object, value: string) {
   let name = undefined;
   if (Object.keys(mapper).includes(value)) {
-    if (mapper[value]?.name !== undefined) {
-      return mapper[value].name;
-    } else {
-      return value;
-    }
+    return mapper[value]?.name || value;
   } else {
     const permArray = Object.entries(mapper);
     permArray.map((p) => {

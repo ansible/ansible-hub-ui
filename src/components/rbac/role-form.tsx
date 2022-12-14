@@ -242,49 +242,4 @@ export class RoleForm extends React.Component<IProps, IState> {
     ) as PermissionType[];
     return arrayPermissions;
   }
-
-  private getNicenames(permission) {
-    const { model_permissions } = this.context.user;
-    if (model_permissions[permission].name !== undefined) {
-      return model_permissions[permission].name;
-    } else {
-      return undefined;
-    }
-  }
-
-  private getKeyByValue(permissions, value) {
-    const permArray = Object.entries(permissions);
-    let realName = undefined;
-    permArray.map((p) => {
-      if (value === p[1]['name']) {
-        realName = p[0];
-      }
-    });
-    return realName;
-  }
-
-  private helper(permissions: object, value: string) {
-    Object.keys(permissions).find((key) => {
-      permissions[key]['name'] === value;
-    });
-  }
-
-  private thisMapper(mapper, value) {
-    let name = undefined;
-    if (Object.keys(mapper).includes(value)) {
-      if (mapper[value]?.name !== undefined) {
-        return mapper[value].name;
-      } else {
-        return value;
-      }
-    } else {
-      const permArray = Object.entries(mapper);
-      permArray.map((p) => {
-        if (value === p[1]['name']) {
-          name = p[0];
-        }
-      });
-      return name;
-    }
-  }
 }
