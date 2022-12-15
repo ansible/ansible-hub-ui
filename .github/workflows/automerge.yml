@@ -1,7 +1,7 @@
 name: Automerge
 
 on:
-  pull_request:
+  pull_request_target:
     branches: [ 'master', 'stable-*', 'feature/*' ]
 
 jobs:
@@ -24,3 +24,10 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         node automerge.js "${{ github.head_ref }}" "${{ github.event.pull_request.title }}" "${{ github.actor }}"
+
+    - name: "Automerge the PR"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "Automerge of PR"
+        gh pr merge "${{ github.event.pull_request.url }}" -s
