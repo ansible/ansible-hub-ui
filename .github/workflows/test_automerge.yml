@@ -1,0 +1,19 @@
+name: Test Automerge
+
+on:
+  pull_request_target:
+    branches: [ 'master', 'stable-*', 'feature/*' ]
+
+jobs:
+  test_automerge:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: "Checkout ansible-hub-ui (${{ github.ref }})"
+      uses: actions/checkout@v3
+
+    - name: "Run test automerge"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "${{ github.event.pull_request.title }}"
