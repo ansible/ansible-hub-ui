@@ -40,6 +40,7 @@ describe('screenshots', () => {
     // screenshot('/signature-keys'); // TODO fake empty API response
     screenshot('/users');
     screenshot('/group-list');
-    screenshot('/roles');
+
+    // screenshot('/roles');  // TODO fake empty API response
   });
 });
