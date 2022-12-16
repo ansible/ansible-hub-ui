@@ -63,7 +63,6 @@ jobs:
         UI_COMMIT_MASTER=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
         echo "UI_COMMIT_MASTER=${UI_COMMIT_MASTER}" >> $GITHUB_ENV
 
-        echo ${{ github.event_name }}
         COMPARE_SCREENSHOTS=${{ github.event_name == 'pull_request' }}
         echo 'compare screenshots:'
         echo $COMPARE_SCREENSHOTS
@@ -259,8 +258,6 @@ jobs:
     - name: "List cached screenshots"
       if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'true' }}
       run: |
-        echo 'Compare screenshots'
-        echo ${{ env.COMPARE_SCREENSHOTS}}
         ls ansible-hub-ui/test/screenshots.js/
 
     - name: "Run cypress"
@@ -284,16 +281,6 @@ jobs:
       working-directory: 'ansible-hub-ui/test'
       run: |
         changed=false
-        PR_TITLE="${{ github.event.pull_request.title }}"
-        ACTOR="${{ github.actor }}"
-        echo "$PR_TITLE"
-        echo "$ACTOR"
-        CAN_FAIL=false
-
-        if [ "$ACTOR" = "dependabot[bot]" ]; then
-          echo "can fail on dependabots PRs"
-          CAN_FAIL=true
-        fi
 
         for orig in screenshots.js/*; do
           echo $orig
@@ -310,7 +297,7 @@ jobs:
           fi
         done
 
-        if [ "$changed" = true ] && [ CAN_FAIL = true ]; then
+        if [ "$changed" = true ]; then
           echo "Process failed because change occured"
           exit 1
         fi
@@ -329,13 +316,6 @@ jobs:
         path: |
           ansible-hub-ui/test/cypress/screenshots
           ansible-hub-ui/test/cypress/videos
-
-    - uses: actions/upload-artifact@v3
-      if: ${{ !failure() && env.UPLOAD_DIFF }}
-      with:
-        name: screenshots_diffs
-        path: |
-          ansible-hub-ui/test/cypress/screenshots
 
     - name: "Kill container, show debug info"
       if: always()
