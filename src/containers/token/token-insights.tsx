@@ -201,6 +201,25 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
               https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
             </ClipboardCopy>
           </section>
+          <section className='body pf-c-content'>
+            <h2>{t`CRC public key`}</h2>
+            <p>
+              <Trans>
+                We use a number of keys to sign our software packages. The
+                necessary public keys are included in the relevant products and
+                are used to automatically verify software updates. You can also
+                verify the packages manually using the keys on this page. More
+                information can be found{' '}
+                <a
+                  href='https://access.redhat.com/security/team/key'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  here.
+                </a>
+              </Trans>
+            </p>
+          </section>
         </Main>
       </React.Fragment>
     );
