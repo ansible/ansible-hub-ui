@@ -17,12 +17,11 @@ import { WarningTriangleIcon } from '@patternfly/react-icons';
 
 import {
   CollectionHeader,
-  TableOfContents,
   LoadingPageWithHeader,
   Main,
-} from '../../components';
-
-import { RenderPluginDoc } from '@ansible/galaxy-doc-builder';
+  RenderPluginDoc,
+  TableOfContents,
+} from 'src/components';
 
 import { loadCollection, IBaseCollectionState } from './base';
 import { ParamHelper, sanitizeDocsUrls } from '../../utilities';

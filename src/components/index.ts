@@ -43,6 +43,7 @@ export { ObjectPermissionField } from './permissions/obect-permission-field';
 export { PermissionChipSelector } from './permissions/permission-chip-selector';
 export { APISearchTypeAhead } from './typeahead/typeahead';
 export { GroupModal } from './group-management/group-modal';
+export { RenderPluginDoc } from './render-plugin-doc/render-plugin-doc';
 export { RemoteForm } from './repositories/remote-form';
 export { RemoteRepositoryTable } from './repositories/remote-repository-table';
 export { LocalRepositoryTable } from './repositories/local-repository-table';

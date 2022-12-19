@@ -54,15 +54,48 @@ export class CollectionListType {
   };
 }
 
+export class PluginOption {
+  name: string;
+  description: string[];
+  type: string;
+  required: boolean;
+  default?: string | number | boolean;
+  aliases?: string[];
+  suboptions?: PluginOption[];
+}
+
+export class PluginDoc {
+  short_description: string;
+  description: string[];
+  options?: PluginOption[];
+  requirements?: string[];
+  notes?: string[];
+  deprecated?: {
+    removed_in?: string;
+    alternative?: string;
+    why?: string;
+  };
+}
+
+export class ReturnedValue {
+  name: string;
+  description: string[];
+  returned: string;
+  type: string;
+  // if string: display the value, if object or list return JSON
+  sample: string | object;
+  contains: ReturnedValue[];
+}
+
 export class PluginContentType {
   content_type: string;
   content_name: string;
   readme_filename: string;
   readme_html: string;
   doc_strings: {
-    doc: any;
-    metadata: any;
-    return: any;
+    doc: PluginDoc;
+    metadata: unknown;
+    return: ReturnedValue[];
     examples: string;
   };
 }
