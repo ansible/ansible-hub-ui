@@ -27,7 +27,9 @@ jobs:
       matrix:
         test:
         - 'approval'
+        - 'approval_list'
         - 'collections'
+        - 'collections_list'
         - 'ee_controller'
         - 'execution_environments'
         - 'groups_and_users'
