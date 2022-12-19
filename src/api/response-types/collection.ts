@@ -34,7 +34,7 @@ export class CollectionVersionDetail extends CollectionVersion {
     description: string;
     tags: string[];
     authors: string[];
-    license: string;
+    license: string[];
     homepage: string;
     documentation: string;
     issues: string;
