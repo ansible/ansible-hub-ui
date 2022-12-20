@@ -323,6 +323,9 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                                 showEmpty={true}
                                 showCustom={false}
                                 role={role}
+                                showUserMgmt={
+                                  !featureFlags.external_authentication
+                                }
                               />
                             </>
                           }

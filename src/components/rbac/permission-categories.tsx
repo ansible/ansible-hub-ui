@@ -3,7 +3,7 @@ import { t } from '@lingui/macro';
 import { AppContext } from 'src/loaders/app-context';
 import { RoleType, GroupRoleType, PermissionType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
-
+import { Constants } from 'src/constants';
 import { Flex, FlexItem } from '@patternfly/react-core';
 
 interface IState {
@@ -14,6 +14,7 @@ interface IProps {
   showEmpty: boolean;
   showCustom: boolean;
   role: RoleType | GroupRoleType;
+  showUserMgmt?: boolean;
 }
 
 export class PermissionCategories extends React.Component<IProps, IState> {
@@ -32,7 +33,19 @@ export class PermissionCategories extends React.Component<IProps, IState> {
 
   render() {
     const { groups } = this.state;
-    const { role, showEmpty, showCustom } = this.props;
+    const { role, showEmpty, showCustom, showUserMgmt } = this.props;
+
+    console.log('groups: ', groups);
+    console.log('role: ', role);
+
+    if (!showUserMgmt) {
+      Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
+        console.log('perm in filtered: ', perm);
+        // if (perm in filteredPermissions) {
+        //   delete filteredPermissions[perm];
+        // }
+      });
+    }
 
     const origGroups = groups.map((group) => ({
       ...group,
@@ -109,11 +122,7 @@ export class PermissionCategories extends React.Component<IProps, IState> {
 
   private getNicenames(permission) {
     const { model_permissions } = this.context.user;
-    if (model_permissions[permission].name !== undefined) {
-      return model_permissions[permission].name;
-    } else {
-      return undefined;
-    }
+    return model_permissions[permission]?.name || permission;
   }
 
   private permFilter(availablePermissions) {
