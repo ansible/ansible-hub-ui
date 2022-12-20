@@ -63,3 +63,6 @@ export const canEditAnsibleRepositoryAccess = has_model_or_obj_perms(
 // Ansible Repository Versions
 // simulating has_repository_model_or_obj_perms by passing in repository as item
 export const canRevertAnsibleRepositoryVersion = canEditAnsibleRepository;
+
+// Tasks
+export const canViewAllTasks = has_model_perms('core.view_task');

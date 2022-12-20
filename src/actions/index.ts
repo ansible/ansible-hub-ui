@@ -14,3 +14,4 @@ export { ansibleRepositoryVersionRevertAction } from './ansible-repository-versi
 export { ansibleRepositoryCollectionVersionAddAction } from './ansible-repository-collection-version-add';
 export { ansibleRepositoryCollectionVersionRemoveAction } from './ansible-repository-collection-version-remove';
 export { signatureKeyDownloadAction } from './signature-key-download';
+export { taskStopAction } from './task-stop';
