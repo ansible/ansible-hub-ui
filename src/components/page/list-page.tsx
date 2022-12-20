@@ -51,7 +51,12 @@ type ParamsType = { page?: number; page_size?: number };
 type Query<T> = (o: {
   params?: ParamsType;
 }) => Promise<{ data: { count: number; results: T[] } }>;
-type RenderTableRow<T> = (item: T, index: number) => React.ReactNode;
+type RenderTableRow<T> = (
+  item: T,
+  index: number,
+  { setState },
+) => React.ReactNode;
+type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
 type SortHeaders = {
   title: string;
   type: string;
@@ -59,23 +64,25 @@ type SortHeaders = {
   className?: string;
 }[];
 
-interface ListPageParams<T> {
+interface ListPageParams<T, ExtraState> {
   condition: CanContext;
   defaultPageSize: number;
   defaultSort?: string;
   didMount?: ({ context, addAlert }) => void;
   displayName: string;
   errorTitle: string;
+  extraState?: ExtraState;
   filterConfig: FilterConfig;
   noDataDescription: string;
   noDataTitle: string;
   query: Query<T>;
+  renderModals?: RenderModals;
   renderTableRow: RenderTableRow<T>;
   sortHeaders: SortHeaders;
   title: string;
 }
 
-export const ListPage = function <T>({
+export const ListPage = function <T, ExtraState = Record<string, never>>({
   // { featureFlags, settings, user } => bool
   condition,
   // extra code to run on mount
@@ -88,6 +95,8 @@ export const ListPage = function <T>({
   defaultSort,
   // alert on query failure
   errorTitle,
+  // extra initial state
+  extraState,
   // filters
   filterConfig,
   // EmptyStateNoData
@@ -95,13 +104,15 @@ export const ListPage = function <T>({
   noDataTitle,
   // ({ params }) => Promise<{ data: { count, results[] } }>
   query,
+  // ({ addAlert, state, setState, query }) => <ConfirmationModal... />
+  renderModals,
   // (item, index) => <tr>...</tr>
   renderTableRow,
   // table headers
   sortHeaders,
   // container title
   title,
-}: ListPageParams<T>) {
+}: ListPageParams<T, ExtraState>) {
   const klass = class extends React.Component<RouteComponentProps, IState<T>> {
     static displayName = displayName;
     static contextType = AppContext;
@@ -130,6 +141,7 @@ export const ListPage = function <T>({
         loading: true,
         params,
         unauthorised: false,
+        ...extraState,
       };
     }
 
@@ -161,6 +173,13 @@ export const ListPage = function <T>({
         (filterConfig || []).map(({ id, title }) => [id, title]),
       );
 
+      const actionContext = {
+        addAlert: (alert) => this.addAlert(alert),
+        state: this.state,
+        setState: (s) => this.setState(s),
+        query: () => this.query(),
+      };
+
       return (
         <React.Fragment>
           <AlertList
@@ -168,6 +187,7 @@ export const ListPage = function <T>({
             closeAlert={(i) => this.closeAlert(i)}
           ></AlertList>
           <BaseHeader title={title} />
+          {renderModals?.(actionContext)}
           {unauthorised ? (
             <EmptyStateUnauthorized />
           ) : noData && !loading ? (
@@ -220,7 +240,7 @@ export const ListPage = function <T>({
                   {loading ? (
                     <LoadingPageSpinner />
                   ) : (
-                    this.renderTable(params, updateParams)
+                    this.renderTable(params, updateParams, actionContext)
                   )}
 
                   <Pagination
@@ -236,7 +256,7 @@ export const ListPage = function <T>({
       );
     }
 
-    private renderTable(params, updateParams) {
+    private renderTable(params, updateParams, actionContext) {
       const { items } = this.state;
 
       if (!items.length) {
@@ -250,7 +270,9 @@ export const ListPage = function <T>({
             params={params}
             updateParams={updateParams}
           />
-          <tbody>{items.map((item, i) => renderTableRow(item, i))}</tbody>
+          <tbody>
+            {items.map((item, i) => renderTableRow(item, i, actionContext))}
+          </tbody>
         </table>
       );
     }

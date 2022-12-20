@@ -24,11 +24,11 @@ export const SignatureKeysList = ListPage<SigningServiceType>({
   noDataDescription: t`Signature keys will appear once created.`,
   noDataTitle: t`No signature keys yet`,
   query: ({ params }) => SigningServiceAPI.list(params),
-  renderTableRow(item: SigningServiceType, index: number) {
+  renderTableRow(item: SigningServiceType, index: number, actionContext) {
     const { name, pubkey_fingerprint, public_key, pulp_created } = item;
 
     const dropdownItems = [
-      signatureKeyDownloadAction.dropdownItem({ public_key }),
+      signatureKeyDownloadAction.dropdownItem({ public_key }, actionContext),
     ];
 
     return (
