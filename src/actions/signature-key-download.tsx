@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { Action } from './action';
 
-export const downloadSignatureKeyAction = Action({
+export const signatureKeyDownloadAction = Action({
   title: t`Download key`,
   onClick: ({ public_key }) =>
     (document.location =

@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { downloadSignatureKeyAction } from 'src/actions';
+import { signatureKeyDownloadAction } from 'src/actions';
 import { SigningServiceAPI, SigningServiceType } from 'src/api';
 import {
   ClipboardCopy,
@@ -28,7 +28,7 @@ export const SignatureKeysList = ListPage<SigningServiceType>({
     const { name, pubkey_fingerprint, public_key, pulp_created } = item;
 
     const dropdownItems = [
-      downloadSignatureKeyAction.dropdownItem({ public_key }),
+      signatureKeyDownloadAction.dropdownItem({ public_key }),
     ];
 
     return (

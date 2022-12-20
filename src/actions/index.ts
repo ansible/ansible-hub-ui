@@ -1,1 +1,1 @@
-export { downloadSignatureKeyAction } from './signature-keys-download-key';
+export { signatureKeyDownloadAction } from './signature-key-download';
