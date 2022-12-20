@@ -11,10 +11,10 @@ import {
 } from '@patternfly/react-core';
 
 interface IProps {
-  availablePermissions?: string[];
-  selectedPermissions: string[];
+  availablePermissions?: object[];
+  selectedPermissions: object[];
   customPermissions?: string[];
-  setSelected?: (selected: string[]) => void;
+  setSelected?: (selected: object[]) => void;
   isDisabled?: boolean;
   isViewOnly?: boolean;
   onSelect?: (event, selection) => void;
@@ -83,8 +83,8 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
               />,
             ]
           : this.props.availablePermissions.map((option, index) => (
-              <SelectOption key={index} value={option}>
-                {this.props.multilingual ? i18n._(option) : option}
+              <SelectOption key={index} value={option['value']}>
+                {option['label']}
               </SelectOption>
             ))}
       </Select>
@@ -110,16 +110,22 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
 
   private onSelect = (event, selection) => {
     // value contains orginal key in english
-    if (this.props.multilingual && selection.value) {
+    console.log('selectionfirst: ', selection);
+
+    if (selection.value) {
+      selection = selection.value;
+    }
+    if (selection.value) {
       selection = selection.value;
     }
 
+    console.log('selection: ', selection);
     if (this.props.onSelect) {
       this.props.onSelect(event, selection);
     } else {
       const newPerms = new Set(this.props.selectedPermissions);
       if (newPerms.has(selection)) {
-        newPerms.delete(selection);
+        newPerms.delete(selection['value']);
       } else {
         newPerms.add(selection);
       }

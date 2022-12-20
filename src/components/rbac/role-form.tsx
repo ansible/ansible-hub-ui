@@ -37,7 +37,7 @@ interface IProps {
   cancelRole: () => void;
   isSavingDisabled: boolean;
   saving: boolean;
-  originalPermissions?: string[];
+  originalPermissions?: object[];
 }
 
 export class RoleForm extends React.Component<IProps, IState> {
@@ -157,15 +157,16 @@ export class RoleForm extends React.Component<IProps, IState> {
                             (selected) => selected === perm,
                           ),
                       )
-                      .map((value) => twoWayMapper(model_permissions, value))
-                      .sort()}
+                      .sort()
+                      .map((value) => this.getNamePair(value))}
                     selectedPermissions={selectedPermissions
                       .filter((selected) =>
                         group.object_permissions.find(
                           (perm) => selected === perm,
                         ),
                       )
-                      .map((value) => twoWayMapper(model_permissions, value))}
+                      .sort()
+                      .map((value) => this.getNamePair(value))}
                     setSelected={(perms) =>
                       this.setState({ permissions: perms })
                     }
@@ -181,17 +182,12 @@ export class RoleForm extends React.Component<IProps, IState> {
                       });
                     }}
                     onSelect={(event, selection) => {
+                      // console.log('selection: ', selection);
                       const newPerms = new Set(this.state.permissions);
-                      if (
-                        newPerms.has(twoWayMapper(model_permissions, selection))
-                      ) {
-                        newPerms.delete(
-                          twoWayMapper(model_permissions, selection),
-                        );
+                      if (newPerms.has(selection)) {
+                        newPerms.delete(selection);
                       } else {
-                        newPerms.add(
-                          twoWayMapper(model_permissions, selection),
-                        );
+                        newPerms.add(selection);
                       }
                       this.setState({
                         permissions: Array.from(newPerms),
@@ -241,5 +237,17 @@ export class RoleForm extends React.Component<IProps, IState> {
       formattedPermissions,
     ) as PermissionType[];
     return arrayPermissions;
+  }
+
+  private getNamePair(permission) {
+    const { model_permissions } = this.context.user;
+    const perm = {};
+    if (model_permissions[permission].name !== undefined) {
+      perm['value'] = permission;
+      perm['label'] = model_permissions[permission].name;
+      return perm;
+    } else {
+      return undefined;
+    }
   }
 }
