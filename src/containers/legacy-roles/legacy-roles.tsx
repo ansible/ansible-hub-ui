@@ -87,26 +87,28 @@ class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
 
   updateParams = (p) => {
     const { page, page_size, order_by, keywords, tags } = p;
-
-    LegacyRoleAPI.list({
-      page: page,
-      page_size: page_size,
-      order_by: order_by,
-      tags: tags,
-      keywords: keywords,
-    }).then((response) => {
-      this.setState(() => ({
-        mounted: true,
-        params: {
-          page: page,
-          page_size: page_size,
-          order_by: order_by,
-          keywords: keywords,
-          tags: tags,
-        },
-        count: response.data.count,
-        legacyroles: response.data.results,
-      }));
+    this.setState({ loading: true }, () => {
+      LegacyRoleAPI.list({
+        page: page,
+        page_size: page_size,
+        order_by: order_by,
+        tags: tags,
+        keywords: keywords,
+      }).then((response) => {
+        this.setState(() => ({
+          mounted: true,
+          loading: false,
+          params: {
+            page: page,
+            page_size: page_size,
+            order_by: order_by,
+            keywords: keywords,
+            tags: tags,
+          },
+          count: response.data.count,
+          legacyroles: response.data.results,
+        }));
+      });
     });
   };
 

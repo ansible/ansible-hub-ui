@@ -83,24 +83,26 @@ class LegacyNamespaces extends React.Component<
 
   updateParams = (p) => {
     const { page, page_size, order_by, keywords } = p;
-    LegacyNamespaceAPI.list({
-      page: page,
-      page_size: page_size,
-      order_by: order_by,
-      keywords: keywords,
-    }).then((response) => {
-      this.setState(() => ({
-        mounted: true,
-        loading: false,
-        params: {
-          page: page,
-          page_size: page_size,
-          order_by: order_by,
-          keywords: keywords,
-        },
-        count: response.data.count,
-        legacynamespaces: response.data.results,
-      }));
+    this.setState({ loading: true }, () => {
+      LegacyNamespaceAPI.list({
+        page: page,
+        page_size: page_size,
+        order_by: order_by,
+        keywords: keywords,
+      }).then((response) => {
+        this.setState(() => ({
+          mounted: true,
+          loading: false,
+          params: {
+            page: page,
+            page_size: page_size,
+            order_by: order_by,
+            keywords: keywords,
+          },
+          count: response.data.count,
+          legacynamespaces: response.data.results,
+        }));
+      });
     });
   };
 
