@@ -34,16 +34,13 @@ export class PermissionCategories extends React.Component<IProps, IState> {
   render() {
     const { groups } = this.state;
     const { role, showEmpty, showCustom, showUserMgmt } = this.props;
-
-    console.log('groups: ', groups);
-    console.log('role: ', role);
+    const { model_permissions } = this.context.user;
 
     if (!showUserMgmt) {
       Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-        console.log('perm in filtered: ', perm);
-        // if (perm in filteredPermissions) {
-        //   delete filteredPermissions[perm];
-        // }
+        if (perm in model_permissions) {
+          delete model_permissions[perm];
+        }
       });
     }
 

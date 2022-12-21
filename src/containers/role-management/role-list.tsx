@@ -47,7 +47,6 @@ import {
 
 import { RoleAPI } from 'src/api/role';
 import { Paths, formatPath } from 'src/paths';
-import { Constants } from 'src/constants';
 
 interface IState {
   roles: RoleType[];
@@ -129,21 +128,9 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       roleCount === 0 && !filterIsSet(params, ['name__icontains', 'locked']);
 
     const { featureFlags } = this.context;
-    let isUserMgmtDisabled = false;
-    const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
 
     if (redirect) {
       return <Redirect push to={redirect} />;
-    }
-    if (featureFlags) {
-      isUserMgmtDisabled = featureFlags.external_authentication;
-    }
-    if (isUserMgmtDisabled) {
-      Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-        if (perm in filteredPermissions) {
-          delete filteredPermissions[perm];
-        }
-      });
     }
 
     const isSuperuser = this.context.user.is_superuser;
