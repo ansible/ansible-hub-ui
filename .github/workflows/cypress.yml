@@ -21,7 +21,6 @@ jobs:
     env:
       # base of a PR, or pushed-to branch outside PRs, or master
       BRANCH: ${{ github.base_ref || github.ref || 'refs/heads/master' }}
-      UPLOAD_DIFF: false
 
     strategy:
       fail-fast: false
@@ -293,7 +292,6 @@ jobs:
           if [ "$num" -gt 10 ]; then
             echo "screenshot $orig changed: $num" 1>&2
             changed=true
-            echo "UPLOAD_DIFF=true" >> $GITHUB_ENV
           fi
         done
 
