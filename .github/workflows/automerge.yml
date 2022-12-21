@@ -30,4 +30,4 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo "Automerge of PR"
-        gh pr merge "${{ github.event.pull_request.number }}" -s
+        gh pr merge "${{ github.event.pull_request.number }}" -s --auto
