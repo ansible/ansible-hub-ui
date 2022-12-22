@@ -1,0 +1,1 @@
+Fix bug where the resource type on "reserved resources" on the task management page always returns "api".
