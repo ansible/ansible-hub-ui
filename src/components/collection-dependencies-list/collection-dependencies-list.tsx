@@ -46,6 +46,7 @@ export class CollectionDependenciesList extends React.Component<IProps> {
                 this.separateVersion(dependencies[dependency]),
               )}
             >
+              {this.splitDependencyName(dependency).namespace}.
               {this.splitDependencyName(dependency).collection}
             </Link>
           </ListItem>
