@@ -571,11 +571,11 @@ export class RenderPluginDoc extends React.Component<IProps, IState> {
     let choices, defaul;
 
     if (option['type'] === 'bool') {
-      choices = ['no', 'yes'];
+      choices = ['true', 'false'];
       if (option['default'] === true) {
-        defaul = 'yes';
+        defaul = 'true';
       } else if (option['default'] === false) {
-        defaul = 'no';
+        defaul = 'false';
       }
     } else {
       choices = option['choices'] || [];
