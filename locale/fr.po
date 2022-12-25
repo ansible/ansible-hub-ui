@@ -48,11 +48,11 @@ msgstr "<0/> a été supprimé"
 msgid "<0/> was removed from <1/>"
 msgstr "<0/> a été retiré de <1/>"
 
-#: src/components/collection-detail/collection-info.tsx:74
+#: src/components/collection-detail/collection-info.tsx:78
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>Remarque:</0> L'installation de collections avec ansible-galaxy n'est prise en charge que dans ansible 2.9+"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:361
+#: src/components/execution-environment/publish-to-controller-modal.tsx:365
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
 msgstr "<0>Note:</0> les liens suivants sont sans doute bloqués par votre navigateur. Copier et coller le liens externe manuellement."
 
@@ -165,7 +165,7 @@ msgstr "Activité"
 #: src/components/execution-environment/repository-form.tsx:290
 #: src/components/execution-environment/repository-form.tsx:333
 #: src/components/execution-environment/tag-manifest-modal.tsx:169
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:118
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:116
 #: src/containers/group-management/group-detail.tsx:477
 #: src/containers/group-management/group-detail.tsx:697
 #: src/containers/group-management/group-detail.tsx:748
@@ -176,7 +176,7 @@ msgstr "Ajouter"
 msgid "Add Ansible distribution"
 msgstr "Voir la distribution Ansible"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:108
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:106
 msgid "Add a README with instructions for using this container."
 msgstr "Ajoutez un fichier README avec des instructions pour utiliser ce conteneur."
 
@@ -280,11 +280,11 @@ msgstr "Fournisseur d’authentification"
 msgid "Browse..."
 msgstr "Navigation...."
 
-#: src/components/about-modal/about-modal.tsx:94
+#: src/components/about-modal/about-modal.tsx:91
 msgid "Browser OS"
 msgstr "Navigateur SE"
 
-#: src/components/about-modal/about-modal.tsx:91
+#: src/components/about-modal/about-modal.tsx:88
 msgid "Browser Version"
 msgstr "Version du navigateur"
 
@@ -317,7 +317,7 @@ msgstr "Impossible de mettre à jour l’utilisateur distant sans qu'une distrib
 #: src/components/signing/sign-single-certificate-modal.tsx:35
 #: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:200
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:162
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:160
 #: src/containers/group-management/group-detail.tsx:437
 #: src/containers/group-management/group-detail.tsx:480
 msgid "Cancel"
@@ -422,7 +422,7 @@ msgstr "Les changements à l’espace-nom \"{0}\" n’ont pas pu être sauvegard
 msgid "Checking for affected users... <0/>"
 msgstr "Vérification des utilisateurs affectés... <0/>"
 
-#: src/containers/task-management/task_detail.tsx:218
+#: src/containers/task-management/task_detail.tsx:222
 msgid "Child tasks"
 msgstr "Tâches de dépendants"
 
@@ -436,7 +436,7 @@ msgstr "Effacer"
 msgid "Clear all filters"
 msgstr "Effacer tous les filtres"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:353
+#: src/components/execution-environment/publish-to-controller-modal.tsx:357
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "Cliquez sur l'URL du contrôleur dans lequel vous voulez utiliser l'environnement d'exécution ci-dessus, ce qui lancera la console de ce contrôleur. Connectez-vous (si nécessaire) et suivez les étapes pour terminer la configuration."
 
@@ -448,11 +448,11 @@ msgstr "Certificat client"
 msgid "Client key"
 msgstr "Clé du client"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:284
+#: src/components/execution-environment/publish-to-controller-modal.tsx:288
 msgid "Close"
 msgstr "Fermer"
 
-#: src/containers/task-management/task_detail.tsx:310
+#: src/containers/task-management/task_detail.tsx:322
 msgid "Code"
 msgstr "Code"
 
@@ -482,7 +482,7 @@ msgstr "La collection  \"{name} v{collectionVersion}\"  a été supprimée."
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "La collection \"{name}\" n’a pas pu être supprimée."
 
-#: src/components/collection-detail/collection-info.tsx:184
+#: src/components/collection-detail/collection-info.tsx:188
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "La collection \"{name}\" n’a pas pu être téléchargée."
 
@@ -553,7 +553,7 @@ msgid "Community"
 msgstr "Communauté"
 
 #: src/components/collection-detail/collection-content-list.tsx:149
-#: src/containers/collection-detail/collection-docs.tsx:282
+#: src/containers/collection-detail/collection-docs.tsx:281
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "Les collections de la communauté n’ont pas de nombres de contenus ou de document, mais tout le contenu est synchronisé"
 
@@ -636,8 +636,8 @@ msgstr "Nombre de contenus"
 msgid "Contents"
 msgstr "Contenus"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:383
-#: src/components/execution-environment/publish-to-controller-modal.tsx:412
+#: src/components/execution-environment/publish-to-controller-modal.tsx:387
+#: src/components/execution-environment/publish-to-controller-modal.tsx:416
 msgid "Controller name"
 msgstr "Nom du contrôleur"
 
@@ -645,8 +645,8 @@ msgstr "Nom du contrôleur"
 msgid "Controllers list could not be displayed."
 msgstr "Le liste des contrôleurs n’a pas pu être affichée."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:225
-#: src/components/execution-environment/publish-to-controller-modal.tsx:228
+#: src/components/execution-environment/publish-to-controller-modal.tsx:229
+#: src/components/execution-environment/publish-to-controller-modal.tsx:232
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:16
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:130
 msgid "Copy to clipboard"
@@ -706,7 +706,7 @@ msgid "Created"
 msgstr "Créé"
 
 #: src/containers/task-management/task-list-view.tsx:231
-#: src/containers/task-management/task_detail.tsx:178
+#: src/containers/task-management/task_detail.tsx:182
 msgid "Created on"
 msgstr "Créé le"
 
@@ -753,7 +753,7 @@ msgstr "Date de création"
 #: src/components/delete-modal/delete-modal.tsx:28
 #: src/containers/execution-environment/registry-list.tsx:406
 #: src/containers/execution-environment-detail/base.tsx:144
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:416
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:419
 #: src/containers/execution-environment-list/execution_environment_list.tsx:383
 #: src/containers/group-management/group-detail.tsx:272
 #: src/containers/group-management/group-list.tsx:434
@@ -931,11 +931,11 @@ msgstr "Dépréciation de"
 #: src/components/namespace-form/namespace-form.tsx:152
 #: src/components/role-list-table/role-list-table.tsx:49
 #: src/containers/execution-environment-list/execution_environment_list.tsx:297
-#: src/containers/task-management/task_detail.tsx:342
+#: src/containers/task-management/task_detail.tsx:354
 msgid "Description"
 msgstr "Description"
 
-#: src/containers/task-management/task_detail.tsx:165
+#: src/containers/task-management/task_detail.tsx:169
 msgid "Descriptive name"
 msgstr "Nom descriptif"
 
@@ -943,10 +943,10 @@ msgstr "Nom descriptif"
 msgid "Detail"
 msgstr "Détail"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:344
+#: src/components/execution-environment/publish-to-controller-modal.tsx:348
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:177
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:279
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:490
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:491
 msgid "Digest"
 msgstr "Digest"
 
@@ -959,7 +959,7 @@ msgid "Docs site"
 msgstr "Site des docs"
 
 #: src/components/headers/collection-header.tsx:526
-#: src/containers/collection-detail/collection-docs.tsx:121
+#: src/containers/collection-detail/collection-docs.tsx:120
 #: src/loaders/standalone/standalone-loader.tsx:388
 msgid "Documentation"
 msgstr "Documentation"
@@ -969,7 +969,7 @@ msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be
 msgstr "La documentation sur la façon de configurer le client <0>ansible-galaxy</0> se trouve <1>ici</1>. Utilisez les paramètres suivants pour configurer le client."
 
 #: src/components/my-imports/import-console.tsx:103
-#: src/containers/task-management/task_detail.tsx:312
+#: src/containers/task-management/task_detail.tsx:324
 msgid "Done"
 msgstr "Terminé"
 
@@ -993,7 +993,7 @@ msgstr "Ne télécharger que les collections signées"
 msgid "Download requirements file"
 msgstr "Télécharger le fichier des exigences"
 
-#: src/components/collection-detail/collection-info.tsx:112
+#: src/components/collection-detail/collection-info.tsx:116
 msgid "Download tarball"
 msgstr "Télécharger l'archive"
 
@@ -1010,7 +1010,7 @@ msgstr "Menu déroulant"
 #: src/containers/edit-namespace/edit-namespace.tsx:152
 #: src/containers/execution-environment/registry-list.tsx:393
 #: src/containers/execution-environment-detail/base.tsx:194
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:101
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
 #: src/containers/execution-environment-list/execution_environment_list.tsx:356
 #: src/containers/group-management/group-detail.tsx:401
 #: src/containers/group-management/group-list.tsx:420
@@ -1185,7 +1185,7 @@ msgstr "Erreur de chargement des environnements."
 #~ msgid "Error loading users."
 #~ msgstr "Error loading users."
 
-#: src/containers/task-management/task_detail.tsx:338
+#: src/containers/task-management/task_detail.tsx:350
 msgid "Error message"
 msgstr "Message d'erreur"
 
@@ -1240,7 +1240,7 @@ msgstr "Erreur {statusCode} - {statusText}: vous ne possédez pas les permission
 #~ msgid "Error: delete failed"
 #~ msgstr "Error: delete failed"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:309
+#: src/components/execution-environment/publish-to-controller-modal.tsx:313
 msgid "Execution Environment"
 msgstr "Environnement d'exécution"
 
@@ -1340,7 +1340,7 @@ msgid "Find execution environments in this registry"
 msgstr "Trouver les environnements d'exécution dans ce registre"
 
 #: src/containers/task-management/task-list-view.tsx:241
-#: src/containers/task-management/task_detail.tsx:172
+#: src/containers/task-management/task_detail.tsx:176
 msgid "Finished at"
 msgstr "Terminé"
 
@@ -1369,7 +1369,7 @@ msgstr "Jeton API"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "Abandon de l'attente de la tâche après 10 tentatives."
 
-#: src/components/collection-detail/collection-info.tsx:155
+#: src/components/collection-detail/collection-info.tsx:159
 msgid "Go to documentation"
 msgstr "Afficher la documentation"
 
@@ -1444,15 +1444,15 @@ msgstr "Je comprends que cette action ne puisse être annulée."
 msgid "If selected, TLS peer validation must be performed."
 msgstr "Si cette option est sélectionnée, la validation par les pairs TLS doit être effectuée."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:261
+#: src/components/execution-environment/publish-to-controller-modal.tsx:265
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "Si le contrôleur ne figure pas dans le tableau, vérifiez settings.py."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:618
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:619
 msgid "Image \"{digest}\" could not be deleted."
 msgstr "Image \"{digest}\" n’a pas pu être supprimée"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:598
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:599
 msgid "Image \"{digest}\" has been successfully deleted."
 msgstr "Image \"{digest}\" a été supprimée"
 
@@ -1518,11 +1518,11 @@ msgstr "Installer"
 #~ msgid "Install Version"
 #~ msgstr "Install Version"
 
-#: src/components/collection-detail/collection-info.tsx:70
+#: src/components/collection-detail/collection-info.tsx:74
 msgid "Installation"
 msgstr "Installation"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:78
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:76
 msgid "Instructions"
 msgstr "Instructions"
 
@@ -1597,7 +1597,7 @@ msgstr "Dernière mise à jour du registre {0}"
 msgid "Layers"
 msgstr "Couches"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:265
+#: src/components/execution-environment/publish-to-controller-modal.tsx:269
 msgid "Learn more"
 msgstr "En savoir plus"
 
@@ -1654,7 +1654,7 @@ msgid "Logout"
 msgstr "Déconnexion"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:134
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:393
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:396
 msgid "Manage tags"
 msgstr "Gérer les tags"
 
@@ -1666,7 +1666,7 @@ msgstr "Gérer les jetons"
 msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 msgstr "Les listes de manifestes ne sont pas actuellement prises en charge sur cet écran, veuillez utiliser l'onglet <0>Images</0> pour voir les détails des listes de manifestes."
 
-#: src/containers/task-management/task_detail.tsx:309
+#: src/containers/task-management/task_detail.tsx:321
 msgid "Message"
 msgstr "Message"
 
@@ -1706,7 +1706,7 @@ msgstr "Mon profil"
 #: src/containers/execution-environment/registry-list.tsx:322
 #: src/containers/execution-environment-list/execution_environment_list.tsx:262
 #: src/containers/namespace-list/namespace-list.tsx:228
-#: src/containers/task-management/task_detail.tsx:268
+#: src/containers/task-management/task_detail.tsx:280
 msgid "Name"
 msgstr "Nom"
 
@@ -1800,11 +1800,11 @@ msgstr "Nouvelle version de {0}"
 msgid "No"
 msgstr "Non"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:299
+#: src/components/execution-environment/publish-to-controller-modal.tsx:303
 msgid "No Controllers available"
 msgstr "Aucun contrôleur disponible"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:107
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:105
 msgid "No README"
 msgstr "Pas de README"
 
@@ -1812,7 +1812,7 @@ msgstr "Pas de README"
 msgid "No activities yet"
 msgstr "Pas encore d'activités"
 
-#: src/containers/task-management/task_detail.tsx:242
+#: src/containers/task-management/task_detail.tsx:246
 msgid "No child task"
 msgstr "Aucune tâche dépendante"
 
@@ -1859,7 +1859,7 @@ msgstr "Pas encore de collections gérées"
 msgid "No namespaces yet"
 msgstr "Pas encore d'espace de noms"
 
-#: src/containers/task-management/task_detail.tsx:213
+#: src/containers/task-management/task_detail.tsx:217
 msgid "No parent task"
 msgstr "Aucune tâche parentale"
 
@@ -1883,11 +1883,11 @@ msgstr "Aucun résultat trouvé"
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "Aucun résultat ne correspond aux critères de filtrage. Essayez de modifier les paramètres de votre filtre."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:200
+#: src/components/execution-environment/publish-to-controller-modal.tsx:199
 msgid "No tag or digest selected."
 msgstr "Aucun tag ou digest sélectionné."
 
-#: src/containers/task-management/task_detail.tsx:196
+#: src/containers/task-management/task_detail.tsx:200
 msgid "No task group"
 msgstr "Pas de groupe de travail"
 
@@ -1914,7 +1914,7 @@ msgstr "Ne correspond pas à un super utilisateur"
 
 #: src/components/permissions/permission-chip-selector.tsx:81
 #: src/components/typeahead/typeahead.tsx:86
-#: src/containers/collection-detail/collection-docs.tsx:271
+#: src/containers/collection-detail/collection-docs.tsx:270
 msgid "Not found"
 msgstr "Introuvable"
 
@@ -1938,7 +1938,7 @@ msgstr "Non requis pour l'utilisation par d'autres collections"
 msgid "Number must be greater than 0"
 msgstr "Ce champ doit être supérieur à 0"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:495
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:496
 msgid "OS / Arch"
 msgstr "OS / Arch"
 
@@ -1950,7 +1950,7 @@ msgstr "Jeton hors ligne"
 #~ msgid "Page logo"
 #~ msgstr "Page logo"
 
-#: src/containers/task-management/task_detail.tsx:200
+#: src/containers/task-management/task_detail.tsx:204
 msgid "Parent task"
 msgstr "Tâche parentale"
 
@@ -2052,6 +2052,10 @@ msgstr "Veuillez ne pas sélectionner plus d'un fichier."
 msgid "Please, provide the namespace name"
 msgstr "Veuillez fournir le nom de l'espace de nom"
 
+#: src/containers/task-management/task_detail.tsx:272
+msgid "Plugin"
+msgstr ""
+
 #: src/components/markdown-editor/markdown-editor.tsx:38
 msgid "Preview"
 msgstr "Prévisualisation"
@@ -2060,7 +2064,7 @@ msgstr "Prévisualisation"
 #~ msgid "Profile saved."
 #~ msgstr "Profile saved."
 
-#: src/containers/task-management/task_detail.tsx:292
+#: src/containers/task-management/task_detail.tsx:304
 msgid "Progress messages"
 msgstr "Messages de progression"
 
@@ -2095,11 +2099,11 @@ msgstr "Extraire distribution"
 msgid "Pull private containers"
 msgstr "Extraire les conteneurs privés"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:81
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:79
 msgid "Pull this image"
 msgstr "Extraire cette image"
 
-#: src/components/about-modal/about-modal.tsx:79
+#: src/components/about-modal/about-modal.tsx:76
 msgid "Pulp Ansible Version"
 msgstr "Version Ansible Pulp"
 
@@ -2340,7 +2344,7 @@ msgstr "Gestion du référentiel"
 msgid "Repository name"
 msgstr "Nom du référentiel"
 
-#: src/components/collection-detail/collection-info.tsx:124
+#: src/components/collection-detail/collection-info.tsx:128
 msgid "Requires Ansible"
 msgstr "Nécessite Ansible"
 
@@ -2348,7 +2352,7 @@ msgstr "Nécessite Ansible"
 msgid "Requires super user permissions to edit."
 msgstr "Nécessite des droits de super utilisateur pour être modifié."
 
-#: src/containers/task-management/task_detail.tsx:251
+#: src/containers/task-management/task_detail.tsx:255
 msgid "Reserve resources"
 msgstr "Ressources de réserve"
 
@@ -2378,7 +2382,7 @@ msgstr "SSO URL"
 #: src/components/repositories/remote-form.tsx:142
 #: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:197
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:150
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:148
 #: src/containers/group-management/group-detail.tsx:430
 msgid "Save"
 msgstr "Enregistrer"
@@ -2433,7 +2437,7 @@ msgstr "Sélectionner un groupe"
 msgid "Select a registry"
 msgstr "Sélectionnez un registre"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:331
+#: src/components/execution-environment/publish-to-controller-modal.tsx:335
 msgid "Select a tag"
 msgstr "Sélectionner un tag"
 
@@ -2478,7 +2482,7 @@ msgstr "L’URL du serveur n’a pas pu être affiché."
 msgid "Server error. Please come back later."
 msgstr "Erreur de serveur. Veuillez essayer plus tard."
 
-#: src/components/about-modal/about-modal.tsx:76
+#: src/components/about-modal/about-modal.tsx:73
 msgid "Server version"
 msgstr "Version du serveur"
 
@@ -2577,7 +2581,7 @@ msgstr "Trier les résultats"
 msgid "Started at"
 msgstr "Démarré"
 
-#: src/containers/task-management/task_detail.tsx:311
+#: src/containers/task-management/task_detail.tsx:323
 msgid "State"
 msgstr "État"
 
@@ -2598,8 +2602,8 @@ msgstr "Statut :"
 
 #: src/containers/task-management/task-list-view.tsx:322
 #: src/containers/task-management/task-list-view.tsx:338
-#: src/containers/task-management/task_detail.tsx:133
-#: src/containers/task-management/task_detail.tsx:365
+#: src/containers/task-management/task_detail.tsx:137
+#: src/containers/task-management/task_detail.tsx:377
 msgid "Stop task"
 msgstr "Arrêter la tâche"
 
@@ -2708,7 +2712,7 @@ msgid "TLS validation"
 msgstr "Validation TLS"
 
 #: src/components/collection-list/collection-filter.tsx:59
-#: src/components/execution-environment/publish-to-controller-modal.tsx:314
+#: src/components/execution-environment/publish-to-controller-modal.tsx:318
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:275
 msgid "Tag"
@@ -2726,11 +2730,11 @@ msgstr "La tâche \"{name}\" n’a pas pu être arrêtée."
 msgid "Task \"{name}\" stopped successfully."
 msgstr "La tâche \"{name}\" a été arrêtée."
 
-#: src/containers/task-management/task_detail.tsx:404
+#: src/containers/task-management/task_detail.tsx:416
 msgid "Task \"{taskName}\" could not be stopped."
 msgstr "La tâche \"{taskName}\" n’a pas pu être arrêtée."
 
-#: src/containers/task-management/task_detail.tsx:388
+#: src/containers/task-management/task_detail.tsx:400
 msgid "Task \"{taskName}\" stopped successfully."
 msgstr "La tâche \"{taskName}\" a été arrêtée."
 
@@ -2740,15 +2744,15 @@ msgstr "La tâche \"{taskName}\" a été arrêtée."
 msgid "Task Management"
 msgstr "Jobs de gestion"
 
-#: src/containers/task-management/task_detail.tsx:153
+#: src/containers/task-management/task_detail.tsx:157
 msgid "Task detail"
 msgstr "Détail de la tâche"
 
-#: src/containers/task-management/task_detail.tsx:194
+#: src/containers/task-management/task_detail.tsx:198
 msgid "Task group"
 msgstr "Groupe de travail"
 
-#: src/containers/task-management/task_detail.tsx:189
+#: src/containers/task-management/task_detail.tsx:193
 msgid "Task groups"
 msgstr "Groupes de travail"
 
@@ -2756,14 +2760,14 @@ msgstr "Groupes de travail"
 msgid "Task list"
 msgstr "Liste des tâches"
 
-#: src/containers/task-management/task_detail.tsx:104
+#: src/containers/task-management/task_detail.tsx:108
 msgid "Task management"
 msgstr "Gestion des tâches"
 
 #: src/containers/task-management/task-list-view.tsx:147
 #: src/containers/task-management/task-list-view.tsx:196
 #: src/containers/task-management/task-list-view.tsx:226
-#: src/containers/task-management/task_detail.tsx:158
+#: src/containers/task-management/task_detail.tsx:162
 msgid "Task name"
 msgstr "Nom de la tâche"
 
@@ -2803,7 +2807,7 @@ msgstr "La collection que vous avez sélectionnée ne correspond pas à cet espa
 msgid "The collection you have selected doesn't appear to match {0}"
 msgstr "La collection que vous avez sélectionnée ne semble pas correspondre à {0}"
 
-#: src/containers/collection-detail/collection-docs.tsx:272
+#: src/containers/collection-detail/collection-docs.tsx:271
 msgid "The file is not available for this version of {collectionName}"
 msgstr "Le fichier n'est pas disponible pour cette version de {collectionName}"
 
@@ -2835,12 +2839,12 @@ msgstr "Il n'y a pas de référentiel associé à cet utilisateur à distance"
 msgid "There have not been any imports on this namespace."
 msgstr "Il n'y a pas eu d'importations sur cet espace de nom."
 
-#: src/containers/task-management/task_detail.tsx:329
-#: src/containers/task-management/task_detail.tsx:330
+#: src/containers/task-management/task_detail.tsx:341
+#: src/containers/task-management/task_detail.tsx:342
 msgid "There is no progress message."
 msgstr "Il n'y a pas de message de progression."
 
-#: src/containers/task-management/task_detail.tsx:279
+#: src/containers/task-management/task_detail.tsx:291
 msgid "There's no resource record"
 msgstr "Il n'y a pas d'enregistrement de ressources"
 
@@ -2904,7 +2908,7 @@ msgstr "Jeton d’authentification à l’URL du serveur"
 msgid "Total number of simultaneous connections."
 msgstr "Nombre total de connexions simultanées."
 
-#: src/containers/task-management/task_detail.tsx:344
+#: src/containers/task-management/task_detail.tsx:356
 msgid "Traceback"
 msgstr "Traceback"
 
@@ -2913,11 +2917,11 @@ msgid "Training <0/>"
 msgstr "Formation <0/>"
 
 #: src/components/collection-detail/collection-content-list.tsx:108
-#: src/containers/task-management/task_detail.tsx:261
+#: src/containers/task-management/task_detail.tsx:265
 msgid "Type"
 msgstr "Type"
 
-#: src/components/about-modal/about-modal.tsx:82
+#: src/components/about-modal/about-modal.tsx:79
 msgid "UI Version"
 msgstr "UI Version"
 
@@ -2972,9 +2976,9 @@ msgstr "Télécharger vers l'espace de nom"
 msgid "Upstream name"
 msgstr "Nom en amont"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:279
+#: src/components/execution-environment/publish-to-controller-modal.tsx:283
 #: src/containers/execution-environment-detail/base.tsx:135
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:408
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:411
 #: src/containers/execution-environment-list/execution_environment_list.tsx:374
 msgid "Use in Controller"
 msgstr "Utilisation dans le contrôleur"
@@ -3056,7 +3060,7 @@ msgstr ""
 msgid "User Access"
 msgstr "Accès des utilisateurs"
 
-#: src/components/about-modal/about-modal.tsx:88
+#: src/components/about-modal/about-modal.tsx:85
 msgid "User Groups"
 msgstr "Groupes d'utilisateurs"
 
@@ -3073,7 +3077,7 @@ msgstr "Liste des utilisateurs"
 msgid "User type"
 msgstr "Type d’utilisateur"
 
-#: src/components/about-modal/about-modal.tsx:85
+#: src/components/about-modal/about-modal.tsx:82
 #: src/components/repositories/remote-form.tsx:355
 #: src/components/user-form/user-form.tsx:88
 #: src/containers/group-management/group-detail.tsx:722
@@ -3195,7 +3199,7 @@ msgid "Waiting for {pendingTasks} task(s) to finish."
 msgstr "patientez jusqu’à ce que les tâche(s) {pendingTasks} se terminent."
 
 #: src/components/collection-detail/collection-content-list.tsx:148
-#: src/containers/collection-detail/collection-docs.tsx:281
+#: src/containers/collection-detail/collection-docs.tsx:280
 msgid "Warning"
 msgstr "Avertissement"
 
@@ -3217,7 +3221,7 @@ msgid "Yes"
 msgstr "Oui"
 
 #: src/containers/task-management/task-list-view.tsx:353
-#: src/containers/task-management/task_detail.tsx:366
+#: src/containers/task-management/task_detail.tsx:378
 msgid "Yes, stop"
 msgstr "Oui, arrêtez"
 
@@ -3253,7 +3257,7 @@ msgstr "Vous n'avez pas accès à Automation Hub"
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/collection-detail/collection-info.tsx:88
+#: src/components/collection-detail/collection-info.tsx:92
 msgid "You have to be logged in to be able to download the tarball."
 msgstr "Vous devez être connecté pour pouvoir télécharger l'archive tarball."
 
@@ -3388,6 +3392,6 @@ msgstr "{n, plural, one {# byte} other {# bytes}}"
 msgid "{name} will be cancelled."
 msgstr "{name} sera annulé."
 
-#: src/containers/task-management/task_detail.tsx:368
+#: src/containers/task-management/task_detail.tsx:380
 msgid "{name} will stop running."
 msgstr "{name} va cesser de fonctionner."
