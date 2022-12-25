@@ -48,11 +48,11 @@ msgstr "<0/>이/가 제거되었습니다"
 msgid "<0/> was removed from <1/>"
 msgstr "<0/>이/가 <1/>에서 제거되었습니다"
 
-#: src/components/collection-detail/collection-info.tsx:74
+#: src/components/collection-detail/collection-info.tsx:78
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>참고:</0> ansible-ax를 사용하여 컬렉션 설치는 ansible 2.9+에서만 지원됩니다."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:361
+#: src/components/execution-environment/publish-to-controller-modal.tsx:365
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the external link manually."
 msgstr "<0>참고:</0> 브라우저에서 다음 링크가 차단될 수 있습니다. 외부 링크를 수동으로 복사하여 붙여넣습니다."
 
@@ -320,11 +320,11 @@ msgstr "인증 제공자"
 msgid "Browse..."
 msgstr "검색 중..."
 
-#: src/components/about-modal/about-modal.tsx:107
+#: src/components/about-modal/about-modal.tsx:104
 msgid "Browser OS"
 msgstr "브라우저 OS"
 
-#: src/components/about-modal/about-modal.tsx:104
+#: src/components/about-modal/about-modal.tsx:101
 msgid "Browser Version"
 msgstr "브라우저 버전"
 
@@ -502,7 +502,7 @@ msgstr "역할 \"{name}\"에 대한 변경 사항을 저장할 수 없습니다.
 msgid "Checking for affected users... <0/>"
 msgstr "영향을 받는 사용자를 확인합니다... <0/>"
 
-#: src/containers/task-management/task_detail.tsx:218
+#: src/containers/task-management/task_detail.tsx:222
 msgid "Child tasks"
 msgstr "하위 작업"
 
@@ -516,7 +516,7 @@ msgstr "지우기"
 msgid "Clear all filters"
 msgstr "모든 필터 지우기"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:353
+#: src/components/execution-environment/publish-to-controller-modal.tsx:357
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "위의 실행 환경을 사용하려는 컨트롤러 URL을 클릭하면 해당 컨트롤러의 콘솔이 실행됩니다. (필요한 경우) 로그인하고 단계에 따라 구성을 완료합니다."
 
@@ -528,11 +528,11 @@ msgstr "클라이언트 인증서"
 msgid "Client key"
 msgstr "클라이언트 키"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:284
+#: src/components/execution-environment/publish-to-controller-modal.tsx:288
 msgid "Close"
 msgstr "닫기"
 
-#: src/containers/task-management/task_detail.tsx:310
+#: src/containers/task-management/task_detail.tsx:322
 msgid "Code"
 msgstr "코드"
 
@@ -572,7 +572,7 @@ msgstr "컬렉션 \"{name} v{collectionVersion}\"을/를 성공적으로 삭제�
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "컬렉션 \"{name}\"을/를 삭제할 수 없습니다."
 
-#: src/components/collection-detail/collection-info.tsx:185
+#: src/components/collection-detail/collection-info.tsx:189
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "컬렉션 \"{name}\"을/를 다운로드할 수 없습니다."
 
@@ -628,7 +628,7 @@ msgstr "컬렉션 업로드 취소됨"
 msgid "Collection versions"
 msgstr "컬렉션 버전"
 
-#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:46
+#: src/components/collection-dependencies-list/collection-dependencies-list.tsx:47
 msgid "Collection was not found in the system. You must upload it."
 msgstr "컬렉션을 시스템에서 찾을 수 없습니다. 업로드해야 합니다."
 
@@ -655,7 +655,7 @@ msgid "Community"
 msgstr "커뮤니티"
 
 #: src/components/collection-detail/collection-content-list.tsx:149
-#: src/containers/collection-detail/collection-docs.tsx:287
+#: src/containers/collection-detail/collection-docs.tsx:286
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "커뮤니티 컬렉션에는 문서 또는 컨텐츠 수가 없지만 모든 콘텐츠가 동기화됩니다."
 
@@ -742,8 +742,8 @@ msgstr "콘텐츠"
 msgid "Contents"
 msgstr "콘텐츠"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:382
-#: src/components/execution-environment/publish-to-controller-modal.tsx:411
+#: src/components/execution-environment/publish-to-controller-modal.tsx:386
+#: src/components/execution-environment/publish-to-controller-modal.tsx:415
 msgid "Controller name"
 msgstr "컨트롤러 이름"
 
@@ -751,8 +751,8 @@ msgstr "컨트롤러 이름"
 msgid "Controllers list could not be displayed."
 msgstr "컨트롤러 목록을 표시할 수 없습니다."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:225
-#: src/components/execution-environment/publish-to-controller-modal.tsx:228
+#: src/components/execution-environment/publish-to-controller-modal.tsx:229
+#: src/components/execution-environment/publish-to-controller-modal.tsx:232
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:16
 #: src/containers/execution-environment-manifest/execution-environment-manifest.tsx:130
 msgid "Copy to clipboard"
@@ -830,7 +830,7 @@ msgstr "생성됨"
 
 #: src/containers/signature-keys/list.tsx:189
 #: src/containers/task-management/task-list-view.tsx:237
-#: src/containers/task-management/task_detail.tsx:178
+#: src/containers/task-management/task_detail.tsx:182
 msgid "Created on"
 msgstr "생성된 시간"
 
@@ -881,7 +881,7 @@ msgstr "생성된 날짜"
 #: src/components/delete-modal/delete-modal.tsx:30
 #: src/containers/execution-environment/registry-list.tsx:404
 #: src/containers/execution-environment-detail/base.tsx:149
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:407
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:410
 #: src/containers/execution-environment-list/execution_environment_list.tsx:385
 #: src/containers/group-management/group-detail.tsx:232
 #: src/containers/group-management/group-list.tsx:420
@@ -1078,11 +1078,11 @@ msgstr "\"{0}\" 컬렉션에 대한 사용 중단 상태 업데이트를 시작�
 #: src/containers/execution-environment-list/execution_environment_list.tsx:297
 #: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:237
 #: src/containers/role-management/role-list.tsx:175
-#: src/containers/task-management/task_detail.tsx:342
+#: src/containers/task-management/task_detail.tsx:354
 msgid "Description"
 msgstr "설명"
 
-#: src/containers/task-management/task_detail.tsx:165
+#: src/containers/task-management/task_detail.tsx:169
 msgid "Descriptive name"
 msgstr "설명적인 이름"
 
@@ -1094,10 +1094,10 @@ msgstr "세부 정보"
 msgid "Details"
 msgstr "세부 정보"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:344
+#: src/components/execution-environment/publish-to-controller-modal.tsx:348
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:173
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:269
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:482
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:483
 msgid "Digest"
 msgstr "요약"
 
@@ -1114,7 +1114,7 @@ msgid "Docs site"
 msgstr "문서 사이트"
 
 #: src/components/headers/collection-header.tsx:577
-#: src/containers/collection-detail/collection-docs.tsx:125
+#: src/containers/collection-detail/collection-docs.tsx:124
 #: src/loaders/standalone/standalone-loader.tsx:392
 msgid "Documentation"
 msgstr "문서"
@@ -1124,7 +1124,7 @@ msgid "Documentation on how to configure the <0>ansible-galaxy</0> client can be
 msgstr "<0>ansible-octets</0> 클라이언트를 구성하는 방법에 대한 설명서는 <1>여기</1>에서 찾을 수 있습니다. 다음 매개변수를 사용하여 클라이언트를 구성하십시오."
 
 #: src/components/my-imports/import-console.tsx:107
-#: src/containers/task-management/task_detail.tsx:312
+#: src/containers/task-management/task_detail.tsx:324
 msgid "Done"
 msgstr "완료"
 
@@ -1152,7 +1152,7 @@ msgstr "서명된 컬렉션만 다운로드"
 msgid "Download requirements file"
 msgstr "요구 사항 파일 다운로드"
 
-#: src/components/collection-detail/collection-info.tsx:113
+#: src/components/collection-detail/collection-info.tsx:117
 msgid "Download tarball"
 msgstr "Tarball 다운로드"
 
@@ -1361,7 +1361,7 @@ msgstr "환경을 로드하는 동안 오류가 발생했습니다."
 #~ msgid "Error loading users."
 #~ msgstr "Error loading users."
 
-#: src/containers/task-management/task_detail.tsx:338
+#: src/containers/task-management/task_detail.tsx:350
 msgid "Error message"
 msgstr "오류 메시지"
 
@@ -1416,7 +1416,7 @@ msgstr "오류 {statusCode} - {statusText}: 이 요청을 진행하는 데 필�
 #~ msgid "Error: delete failed"
 #~ msgstr "Error: delete failed"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:309
+#: src/components/execution-environment/publish-to-controller-modal.tsx:313
 msgid "Execution Environment"
 msgstr "실행 환경"
 
@@ -1525,7 +1525,7 @@ msgid "Find execution environments in this registry"
 msgstr "이 레지스트리에서 실행 환경 찾기"
 
 #: src/containers/task-management/task-list-view.tsx:247
-#: src/containers/task-management/task_detail.tsx:172
+#: src/containers/task-management/task_detail.tsx:176
 msgid "Finished at"
 msgstr "완료"
 
@@ -1558,7 +1558,7 @@ msgstr "토큰 받기"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "10번 시도 후에 대기 중인 작업을 포기합니다."
 
-#: src/components/collection-detail/collection-info.tsx:156
+#: src/components/collection-detail/collection-info.tsx:160
 msgid "Go to documentation"
 msgstr "문서로 이동"
 
@@ -1674,15 +1674,15 @@ msgstr "이 작업을 취소할 수 없다는 것을 알고 있습니다."
 msgid "If selected, TLS peer validation must be performed."
 msgstr "선택한 경우 TLS 피어 유효성 검사를 수행해야 합니다."
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:261
+#: src/components/execution-environment/publish-to-controller-modal.tsx:265
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "컨트롤러가 표에 나열되지 않은 경우 settings.py를 확인합니다."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:608
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:609
 msgid "Image \"{digest}\" could not be deleted."
 msgstr "이미지 \"{digest}\"은/는 삭제할 수 없습니다."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:590
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:591
 msgid "Image \"{digest}\" has been successfully deleted."
 msgstr "이미지 \"{digest}\"이/가 성공적으로 삭제되었습니다."
 
@@ -1748,11 +1748,11 @@ msgstr "설치"
 #~ msgid "Install Version"
 #~ msgstr "Install Version"
 
-#: src/components/collection-detail/collection-info.tsx:70
+#: src/components/collection-detail/collection-info.tsx:74
 msgid "Installation"
 msgstr "설치"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:78
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:76
 msgid "Instructions"
 msgstr "설명"
 
@@ -1831,7 +1831,7 @@ msgstr "레지스트리 {0}에서 마지막으로 업데이트됨"
 msgid "Layers"
 msgstr "레이어"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:265
+#: src/components/execution-environment/publish-to-controller-modal.tsx:269
 msgid "Learn more"
 msgstr "더 알아보기"
 
@@ -1892,7 +1892,7 @@ msgid "Manage all content types."
 msgstr "모든 콘텐츠 유형을 관리합니다."
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:134
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:383
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:386
 msgid "Manage tags"
 msgstr "태그 관리"
 
@@ -1904,7 +1904,7 @@ msgstr "토큰 관리"
 msgid "Manifest lists are not currently supported on this screen, please use the <0>Images</0> tab to see manifest list details."
 msgstr "현재 이 화면에서 매니페스트 목록이 지원되지 않습니다. <0>Images</0> 탭을 사용하여 매니페스트 목록 세부 정보를 확인하십시오."
 
-#: src/containers/task-management/task_detail.tsx:309
+#: src/containers/task-management/task_detail.tsx:321
 msgid "Message"
 msgstr "메시지"
 
@@ -1966,7 +1966,7 @@ msgstr "내 프로필"
 #: src/containers/signature-keys/list.tsx:125
 #: src/containers/signature-keys/list.tsx:151
 #: src/containers/signature-keys/list.tsx:179
-#: src/containers/task-management/task_detail.tsx:268
+#: src/containers/task-management/task_detail.tsx:280
 msgid "Name"
 msgstr "이름"
 
@@ -2062,7 +2062,7 @@ msgstr "{0}의 새로운 버전"
 msgid "No"
 msgstr "제공되지 않음"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:299
+#: src/components/execution-environment/publish-to-controller-modal.tsx:303
 msgid "No Controllers available"
 msgstr "사용 가능한 컨트롤러 없음"
 
@@ -2082,7 +2082,7 @@ msgstr "할당 가능한 그룹이 없습니다."
 msgid "No assignable roles."
 msgstr "할당할 수 있는 역할이 없습니다."
 
-#: src/containers/task-management/task_detail.tsx:242
+#: src/containers/task-management/task_detail.tsx:246
 msgid "No child task"
 msgstr "하위 작업 없음"
 
@@ -2135,7 +2135,7 @@ msgstr "선택된 네임스페이스가 없습니다."
 msgid "No namespaces yet"
 msgstr "아직 네임스페이스가 없음"
 
-#: src/containers/task-management/task_detail.tsx:213
+#: src/containers/task-management/task_detail.tsx:217
 msgid "No parent task"
 msgstr "상위 작업 없음"
 
@@ -2163,11 +2163,11 @@ msgstr "필터 기준과 일치하는 결과가 없습니다. 필터 설정을 �
 msgid "No signature keys yet"
 msgstr "서명 키가 없음"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:200
+#: src/components/execution-environment/publish-to-controller-modal.tsx:199
 msgid "No tag or digest selected."
 msgstr "태그 또는 요악이 선택되어 있지 않습니다."
 
-#: src/containers/task-management/task_detail.tsx:196
+#: src/containers/task-management/task_detail.tsx:200
 msgid "No task group"
 msgstr "작업 그룹 없음"
 
@@ -2194,7 +2194,7 @@ msgstr "슈퍼 유저가 아닙니다"
 
 #: src/components/rbac/permission-chip-selector.tsx:82
 #: src/components/typeahead/typeahead.tsx:88
-#: src/containers/collection-detail/collection-docs.tsx:276
+#: src/containers/collection-detail/collection-docs.tsx:275
 msgid "Not found"
 msgstr "찾을 수 없음"
 
@@ -2218,7 +2218,7 @@ msgstr "다른 컬렉션에 사용할 필요가 없음"
 msgid "Number must be greater than 0"
 msgstr "이 필드는 0보다 커야 합니다."
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:487
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:488
 msgid "OS / Arch"
 msgstr "OS/ Arch"
 
@@ -2235,7 +2235,7 @@ msgstr "소유자"
 #~ msgid "Page logo"
 #~ msgstr "Page logo"
 
-#: src/containers/task-management/task_detail.tsx:200
+#: src/containers/task-management/task_detail.tsx:204
 msgid "Parent task"
 msgstr "상위 작업"
 
@@ -2354,6 +2354,10 @@ msgstr "하나 이상의 파일을 선택하지 마십시오."
 msgid "Please, provide the namespace name"
 msgstr "네임 스페이스 이름을 입력하십시오."
 
+#: src/containers/task-management/task_detail.tsx:272
+msgid "Plugin"
+msgstr ""
+
 #: src/components/markdown-editor/markdown-editor.tsx:38
 #: src/components/rbac/owners-tab.tsx:366
 #: src/components/rbac/owners-tab.tsx:418
@@ -2365,7 +2369,7 @@ msgstr "미리보기"
 #~ msgid "Profile saved."
 #~ msgstr "Profile saved."
 
-#: src/containers/task-management/task_detail.tsx:292
+#: src/containers/task-management/task_detail.tsx:304
 msgid "Progress messages"
 msgstr "진행 상황 메시지"
 
@@ -2404,11 +2408,11 @@ msgstr "풀 배포"
 msgid "Pull private containers"
 msgstr "개인 컨테이너 가져오기"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:81
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:79
 msgid "Pull this image"
 msgstr "이미지 가져오기"
 
-#: src/components/about-modal/about-modal.tsx:92
+#: src/components/about-modal/about-modal.tsx:89
 msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible 버전"
 
@@ -2674,7 +2678,7 @@ msgstr "리포지토리 관리"
 msgid "Repository name"
 msgstr "리포지터리 이름"
 
-#: src/components/collection-detail/collection-info.tsx:125
+#: src/components/collection-detail/collection-info.tsx:129
 msgid "Requires Ansible"
 msgstr "Ansible 필요"
 
@@ -2682,7 +2686,7 @@ msgstr "Ansible 필요"
 msgid "Requires super user permissions to edit."
 msgstr "편집하려면 슈퍼 사용자 권한이 필요합니다."
 
-#: src/containers/task-management/task_detail.tsx:251
+#: src/containers/task-management/task_detail.tsx:255
 msgid "Reserve resources"
 msgstr "리소스 예약"
 
@@ -2822,7 +2826,7 @@ msgstr "그룹 선택"
 msgid "Select a registry"
 msgstr "레지스트리 선택"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:331
+#: src/components/execution-environment/publish-to-controller-modal.tsx:335
 msgid "Select a tag"
 msgstr "태그 선택"
 
@@ -2883,7 +2887,7 @@ msgstr "서버 URL을 표시할 수 없습니다."
 msgid "Server error. Please come back later."
 msgstr "서버 오류. 나중에 다시 시도하십시오."
 
-#: src/components/about-modal/about-modal.tsx:85
+#: src/components/about-modal/about-modal.tsx:82
 msgid "Server version"
 msgstr "서버 버전"
 
@@ -3012,7 +3016,7 @@ msgstr "결과 정렬"
 msgid "Started at"
 msgstr "시작 시간"
 
-#: src/containers/task-management/task_detail.tsx:311
+#: src/containers/task-management/task_detail.tsx:323
 msgid "State"
 msgstr "상태"
 
@@ -3033,8 +3037,8 @@ msgstr "상태:"
 
 #: src/containers/task-management/task-list-view.tsx:325
 #: src/containers/task-management/task-list-view.tsx:341
-#: src/containers/task-management/task_detail.tsx:133
-#: src/containers/task-management/task_detail.tsx:365
+#: src/containers/task-management/task_detail.tsx:137
+#: src/containers/task-management/task_detail.tsx:377
 msgid "Stop task"
 msgstr "작업 중지"
 
@@ -3143,7 +3147,7 @@ msgid "TLS validation"
 msgstr "TLS 인증"
 
 #: src/components/collection-list/collection-filter.tsx:59
-#: src/components/execution-environment/publish-to-controller-modal.tsx:314
+#: src/components/execution-environment/publish-to-controller-modal.tsx:318
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:153
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:265
 msgid "Tag"
@@ -3161,11 +3165,11 @@ msgstr "작업 \"{name}\"을/를 중지할 수 없습니다."
 msgid "Task \"{name}\" stopped successfully."
 msgstr "작업 \"{name}\"이/가 성공적으로 중지되었습니다."
 
-#: src/containers/task-management/task_detail.tsx:404
+#: src/containers/task-management/task_detail.tsx:416
 msgid "Task \"{taskName}\" could not be stopped."
 msgstr "작업 \"{taskName}\"을/를 중지할 수 없습니다."
 
-#: src/containers/task-management/task_detail.tsx:388
+#: src/containers/task-management/task_detail.tsx:400
 msgid "Task \"{taskName}\" stopped successfully."
 msgstr "작업 \"{taskName}\"이/가 성공적으로 중지되었습니다."
 
@@ -3175,7 +3179,7 @@ msgstr "작업 \"{taskName}\"이/가 성공적으로 중지되었습니다."
 msgid "Task Management"
 msgstr "작업 관리"
 
-#: src/containers/task-management/task_detail.tsx:153
+#: src/containers/task-management/task_detail.tsx:157
 msgid "Task detail"
 msgstr "작업 세부 정보"
 
@@ -3183,11 +3187,11 @@ msgstr "작업 세부 정보"
 msgid "Task failed without error message."
 msgstr "오류 메시지 없이 작업이 실패했습니다."
 
-#: src/containers/task-management/task_detail.tsx:194
+#: src/containers/task-management/task_detail.tsx:198
 msgid "Task group"
 msgstr "작업 그룹"
 
-#: src/containers/task-management/task_detail.tsx:189
+#: src/containers/task-management/task_detail.tsx:193
 msgid "Task groups"
 msgstr "작업 그룹"
 
@@ -3195,14 +3199,14 @@ msgstr "작업 그룹"
 msgid "Task list"
 msgstr "작업 목록"
 
-#: src/containers/task-management/task_detail.tsx:104
+#: src/containers/task-management/task_detail.tsx:108
 msgid "Task management"
 msgstr "작업 관리"
 
 #: src/containers/task-management/task-list-view.tsx:153
 #: src/containers/task-management/task-list-view.tsx:202
 #: src/containers/task-management/task-list-view.tsx:232
-#: src/containers/task-management/task_detail.tsx:158
+#: src/containers/task-management/task_detail.tsx:162
 msgid "Task name"
 msgstr "작업 이름"
 
@@ -3267,7 +3271,7 @@ msgstr "선택한 컬렉션이 이 네임스페이스와 일치하지 않습니�
 msgid "The collection you have selected doesn't appear to match {0}"
 msgstr "선택한 컬렉션이 {0}와/과 일치하지 않습니다."
 
-#: src/containers/collection-detail/collection-docs.tsx:277
+#: src/containers/collection-detail/collection-docs.tsx:276
 msgid "The file is not available for this version of {collectionName}"
 msgstr "이 {collectionName} 버전에서는 파일을 사용할 수 없습니다."
 
@@ -3331,12 +3335,12 @@ msgstr "원격 연결된 리포지토리가 없습니다."
 msgid "There have not been any imports on this namespace."
 msgstr "이 네임 스페이스에는 가져오기가 없습니다."
 
-#: src/containers/task-management/task_detail.tsx:329
-#: src/containers/task-management/task_detail.tsx:330
+#: src/containers/task-management/task_detail.tsx:341
+#: src/containers/task-management/task_detail.tsx:342
 msgid "There is no progress message."
 msgstr "진행 중인 메시지가 없습니다."
 
-#: src/containers/task-management/task_detail.tsx:279
+#: src/containers/task-management/task_detail.tsx:291
 msgid "There's no resource record"
 msgstr "리소스 레코드가 없습니다."
 
@@ -3424,7 +3428,7 @@ msgstr "서버 URL을 인증하는 데 사용되는 토큰입니다."
 msgid "Total number of simultaneous connections."
 msgstr "총 동시 연결 수입니다."
 
-#: src/containers/task-management/task_detail.tsx:344
+#: src/containers/task-management/task_detail.tsx:356
 msgid "Traceback"
 msgstr "추적"
 
@@ -3433,11 +3437,11 @@ msgid "Training <0/>"
 msgstr "교육 <0/>"
 
 #: src/components/collection-detail/collection-content-list.tsx:108
-#: src/containers/task-management/task_detail.tsx:261
+#: src/containers/task-management/task_detail.tsx:265
 msgid "Type"
 msgstr "유형"
 
-#: src/components/about-modal/about-modal.tsx:95
+#: src/components/about-modal/about-modal.tsx:92
 msgid "UI Version"
 msgstr "UI 버전"
 
@@ -3511,9 +3515,9 @@ msgstr "네임스페이스에 업로드"
 msgid "Upstream name"
 msgstr "업스트림 이름"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:279
+#: src/components/execution-environment/publish-to-controller-modal.tsx:283
 #: src/containers/execution-environment-detail/base.tsx:140
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:398
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:401
 #: src/containers/execution-environment-list/execution_environment_list.tsx:376
 msgid "Use in Controller"
 msgstr "컨트롤러에서 사용"
@@ -3599,7 +3603,7 @@ msgstr "사용자 <0>{username}</0>이/가 그룹 <1>{groupname}</1>에서 삭�
 msgid "User Access"
 msgstr "사용자 액세스"
 
-#: src/components/about-modal/about-modal.tsx:101
+#: src/components/about-modal/about-modal.tsx:98
 msgid "User Groups"
 msgstr "사용자 그룹"
 
@@ -3616,7 +3620,7 @@ msgstr "사용자 목록"
 msgid "User type"
 msgstr "사용자 유형"
 
-#: src/components/about-modal/about-modal.tsx:98
+#: src/components/about-modal/about-modal.tsx:95
 #: src/components/rbac/user-form.tsx:88
 #: src/components/repositories/remote-form.tsx:355
 #: src/containers/group-management/group-detail.tsx:540
@@ -3758,7 +3762,7 @@ msgid "Waiting for {pendingTasks} task(s) to finish."
 msgstr "{pendingTasks} 작업이 완료될 때까지 기다립니다."
 
 #: src/components/collection-detail/collection-content-list.tsx:148
-#: src/containers/collection-detail/collection-docs.tsx:286
+#: src/containers/collection-detail/collection-docs.tsx:285
 msgid "Warning"
 msgstr "경고"
 
@@ -3780,7 +3784,7 @@ msgid "Yes"
 msgstr "제공됨"
 
 #: src/containers/task-management/task-list-view.tsx:356
-#: src/containers/task-management/task_detail.tsx:366
+#: src/containers/task-management/task_detail.tsx:378
 msgid "Yes, stop"
 msgstr "예, 중지합니다"
 
@@ -3853,7 +3857,7 @@ msgstr "사용자를 표시할 수 있는 권한이 없습니다."
 msgid "You don't have rights to do this operation."
 msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
 
-#: src/components/collection-detail/collection-info.tsx:88
+#: src/components/collection-detail/collection-info.tsx:92
 msgid "You have to be logged in to be able to download the tarball."
 msgstr "tarball을 다운로드하려면 로그인해야 합니다."
 
@@ -3992,7 +3996,7 @@ msgstr "{n, plural, one {# byte} other {# bytes}}"
 msgid "{name} will be cancelled."
 msgstr "{name}이/가 취소됩니다."
 
-#: src/containers/task-management/task_detail.tsx:368
+#: src/containers/task-management/task_detail.tsx:380
 msgid "{name} will stop running."
 msgstr "{name}이/가 실행을 중지합니다."
 
