@@ -40,7 +40,7 @@ msgstr "<0/> が <1/> から削除されました"
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>注記:</0> ansible-galaxy を使用したコレクションのインストールは、ansible 2.9+ でのみサポートされます。"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:358
+#: src/components/execution-environment/publish-to-controller-modal.tsx:362
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the link manually."
 msgstr "<0>注記:</0> 以下のリンクはブラウザーによってブロックされる可能性があります。リンクを手動でコピーアンドペーストしてください。"
 
@@ -125,7 +125,7 @@ msgstr "アクティビティー"
 
 #: src/components/execution-environment/repository-form.tsx:282
 #: src/components/execution-environment/repository-form.tsx:325
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:107
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:105
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:174
 #: src/containers/group-management/group-detail.tsx:456
 #: src/containers/group-management/group-detail.tsx:647
@@ -137,7 +137,7 @@ msgstr "追加"
 msgid "Add Ansible distribution"
 msgstr "Ansible ディストリビューションの追加"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:97
 msgid "Add a README with instructions for using this container."
 msgstr "このコンテナーの使用手順を記載した README を追加します。"
 
@@ -273,7 +273,7 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 #: src/components/repositories/remote-form.tsx:171
 #: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:195
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:151
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:149
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:134
 #: src/containers/group-management/group-detail.tsx:416
 #: src/containers/group-management/group-detail.tsx:459
@@ -378,7 +378,7 @@ msgstr "消去"
 msgid "Clear all filters"
 msgstr "すべてのフィルターの解除"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:350
+#: src/components/execution-environment/publish-to-controller-modal.tsx:354
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "上記の実行環境を使用するコントローラー URL をクリックすると、そのコントローラーのコンソールを起動します。ログイン (必要な場合) して、手順に従い、設定を完了します。"
 
@@ -390,7 +390,7 @@ msgstr "クライアント証明書"
 msgid "Client key"
 msgstr "クライアントキー"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:281
+#: src/components/execution-environment/publish-to-controller-modal.tsx:285
 msgid "Close"
 msgstr "閉じる"
 
@@ -462,7 +462,7 @@ msgid "Community"
 msgstr "コミュニティー"
 
 #: src/components/collection-detail/collection-content-list.tsx:150
-#: src/containers/collection-detail/collection-docs.tsx:281
+#: src/containers/collection-detail/collection-docs.tsx:280
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "コミュニティーコレクションにはドキュメントやコンテンツ数はありませんが、すべてのコンテンツが同期されます"
 
@@ -545,13 +545,13 @@ msgstr "コンテンツ数"
 msgid "Contents"
 msgstr "内容"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:380
-#: src/components/execution-environment/publish-to-controller-modal.tsx:409
+#: src/components/execution-environment/publish-to-controller-modal.tsx:384
+#: src/components/execution-environment/publish-to-controller-modal.tsx:413
 msgid "Controller name"
 msgstr "コントローラー名"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:222
-#: src/components/execution-environment/publish-to-controller-modal.tsx:224
+#: src/components/execution-environment/publish-to-controller-modal.tsx:226
+#: src/components/execution-environment/publish-to-controller-modal.tsx:228
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:16
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピーする"
@@ -657,7 +657,7 @@ msgstr "作成日"
 #: src/components/delete-modal/delete-modal.tsx:28
 #: src/components/headers/collection-header.tsx:273
 #: src/containers/execution-environment/registry-list.tsx:392
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:410
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:413
 #: src/containers/execution-environment-list/execution_environment_list.tsx:390
 #: src/containers/group-management/group-detail.tsx:253
 #: src/containers/group-management/group-list.tsx:401
@@ -816,10 +816,10 @@ msgstr "分かりやすい名前"
 msgid "Detail"
 msgstr "詳細"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:341
+#: src/components/execution-environment/publish-to-controller-modal.tsx:345
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:177
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:275
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:489
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:490
 msgid "Digest"
 msgstr "ダイジェスト"
 
@@ -832,7 +832,7 @@ msgid "Docs site"
 msgstr "ドキュメントのサイト"
 
 #: src/components/headers/collection-header.tsx:462
-#: src/containers/collection-detail/collection-docs.tsx:120
+#: src/containers/collection-detail/collection-docs.tsx:119
 #: src/loaders/standalone/standalone-loader.tsx:381
 msgid "Documentation"
 msgstr "ドキュメント"
@@ -879,7 +879,7 @@ msgstr "ドロップダウン"
 #: src/containers/edit-namespace/edit-namespace.tsx:148
 #: src/containers/execution-environment/registry-list.tsx:379
 #: src/containers/execution-environment-detail/base.tsx:154
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:92
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:90
 #: src/containers/execution-environment-list/execution_environment_list.tsx:363
 #: src/containers/group-management/group-detail.tsx:380
 #: src/containers/settings/user-profile.tsx:102
@@ -1076,12 +1076,12 @@ msgstr "ユーザーの更新エラー。"
 #~ msgid "Error: changes weren't saved"
 #~ msgstr "Error: changes weren't saved"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:610
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:611
 #: src/containers/execution-environment-list/execution_environment_list.tsx:543
 msgid "Error: delete failed"
 msgstr "エラー: 削除に失敗しました"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:306
+#: src/components/execution-environment/publish-to-controller-modal.tsx:310
 msgid "Execution Environment"
 msgstr "実行環境"
 
@@ -1228,7 +1228,7 @@ msgstr "この操作は元に戻せないことを理解しています。"
 msgid "If selected, TLS peer validation must be performed."
 msgstr "選択されている場合は、TLS ピア検証を行う必要があります。"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:258
+#: src/components/execution-environment/publish-to-controller-modal.tsx:262
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "コントローラーが表に記載されていない場合は、settings.py を確認してください。"
 
@@ -1294,7 +1294,7 @@ msgstr "インストール"
 msgid "Installation"
 msgstr "インストール"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:73
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:71
 msgid "Instructions"
 msgstr "手順"
 
@@ -1365,7 +1365,7 @@ msgstr "レジストリー {0} からの最終更新"
 msgid "Layers"
 msgstr "レイヤー"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:262
+#: src/components/execution-environment/publish-to-controller-modal.tsx:266
 msgid "Learn more"
 msgstr "詳細情報"
 
@@ -1421,7 +1421,7 @@ msgstr "ロゴ URL"
 msgid "Logout"
 msgstr "ログアウト"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:387
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:390
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:139
 msgid "Manage tags"
 msgstr "タグの管理"
@@ -1535,11 +1535,11 @@ msgstr "{0} の新規バージョン"
 msgid "No"
 msgstr "不可"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:296
+#: src/components/execution-environment/publish-to-controller-modal.tsx:300
 msgid "No Controllers available"
 msgstr "利用可能なコントローラーがありません"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:98
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:96
 msgid "No README"
 msgstr "README なし"
 
@@ -1618,7 +1618,7 @@ msgstr "結果が見つかりません"
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "絞り込みの基準と一致する結果がありません。フィルター設定を変更してみてください。"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:198
+#: src/components/execution-environment/publish-to-controller-modal.tsx:197
 msgid "No tag or digest selected."
 msgstr "タグまたはダイジェストが選択されていません。"
 
@@ -1649,7 +1649,7 @@ msgstr "スーパーユーザーではありません"
 
 #: src/components/permissions/permission-chip-selector.tsx:83
 #: src/components/typeahead/typeahead.tsx:86
-#: src/containers/collection-detail/collection-docs.tsx:270
+#: src/containers/collection-detail/collection-docs.tsx:269
 msgid "Not found"
 msgstr "見つかりません"
 
@@ -1673,7 +1673,7 @@ msgstr "注記: この URL には、ハブ内のすべてのコレクション�
 msgid "Number must be greater than 0"
 msgstr "数字は 0 より大きくなければなりません"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:494
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:495
 msgid "OS / Arch"
 msgstr "OS / アーキテクチャー"
 
@@ -1811,7 +1811,7 @@ msgstr "ディストリビューションのプル"
 msgid "Pull private containers"
 msgstr "プライベートコンテナーのプル"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:76
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:74
 msgid "Pull this image"
 msgstr "このイメージのプル"
 
@@ -2073,7 +2073,7 @@ msgstr "SSO URL"
 #: src/components/repositories/remote-form.tsx:164
 #: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:192
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:139
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:137
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:125
 #: src/containers/group-management/group-detail.tsx:409
 msgid "Save"
@@ -2099,7 +2099,7 @@ msgstr "最後までスクロール"
 msgid "Select a registry"
 msgstr "レジストリーの選択"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:328
+#: src/components/execution-environment/publish-to-controller-modal.tsx:332
 msgid "Select a tag"
 msgstr "タグの選択"
 
@@ -2202,7 +2202,7 @@ msgstr "タスクの停止"
 msgid "Stop task?"
 msgstr "タスクを停止しますか?"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:596
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:597
 msgid "Success: {digest} was deleted"
 msgstr "成功: {digest} が削除されました"
 
@@ -2295,7 +2295,7 @@ msgid "TLS validation"
 msgstr "TLS 検証"
 
 #: src/components/collection-list/collection-filter.tsx:48
-#: src/components/execution-environment/publish-to-controller-modal.tsx:311
+#: src/components/execution-environment/publish-to-controller-modal.tsx:315
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:271
 msgid "Tag"
@@ -2362,7 +2362,7 @@ msgstr "選択したコレクションは、この名前空間と一致しませ
 msgid "The collection you have selected doesn't appear to match {0}"
 msgstr "選択したコレクションは、{0} と一致しないようです。"
 
-#: src/containers/collection-detail/collection-docs.tsx:271
+#: src/containers/collection-detail/collection-docs.tsx:270
 msgid "The file is not available for this version of {collectionName}"
 msgstr "このファイルは、このバージョンの {collectionName} では使用できません。"
 
@@ -2510,9 +2510,9 @@ msgstr "名前空間へのアップロード"
 msgid "Upstream name"
 msgstr "アップストリーム名"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:276
+#: src/components/execution-environment/publish-to-controller-modal.tsx:280
 #: src/containers/execution-environment-detail/base.tsx:122
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:402
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:405
 #: src/containers/execution-environment-list/execution_environment_list.tsx:381
 msgid "Use in Controller"
 msgstr "コントローラーでの使用"
@@ -2689,7 +2689,7 @@ msgid "Waiting for {pendingTasks} task(s) to finish."
 msgstr "{pendingTasks} タスクが完了するのを待機中。"
 
 #: src/components/collection-detail/collection-content-list.tsx:149
-#: src/containers/collection-detail/collection-docs.tsx:280
+#: src/containers/collection-detail/collection-docs.tsx:279
 msgid "Warning"
 msgstr "警告"
 

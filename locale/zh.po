@@ -40,7 +40,7 @@ msgstr "<0/> 已从 <1/> 中删除"
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>注：</0>只有 ansible 2.9+ 支持使用 ansible-galaxy 安装集合。"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:358
+#: src/components/execution-environment/publish-to-controller-modal.tsx:362
 msgid "<0>Note:</0> The following links may be blocked by your browser. Copy and paste the link manually."
 msgstr "<0>注：</0> 您的浏览器可能会阻止以下链接。手动复制并粘贴链接。"
 
@@ -125,7 +125,7 @@ msgstr "活动"
 
 #: src/components/execution-environment/repository-form.tsx:282
 #: src/components/execution-environment/repository-form.tsx:325
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:107
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:105
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:174
 #: src/containers/group-management/group-detail.tsx:456
 #: src/containers/group-management/group-detail.tsx:647
@@ -137,7 +137,7 @@ msgstr "添加"
 msgid "Add Ansible distribution"
 msgstr "添加 Ansible 发布"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:99
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:97
 msgid "Add a README with instructions for using this container."
 msgstr "添加一个包括使用这个容器信息的 README。"
 
@@ -273,7 +273,7 @@ msgstr "在未将一个发布附加到它时，无法远程更新。"
 #: src/components/repositories/remote-form.tsx:171
 #: src/components/user-form/user-form.tsx:226
 #: src/containers/edit-namespace/edit-namespace.tsx:195
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:151
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:149
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:134
 #: src/containers/group-management/group-detail.tsx:416
 #: src/containers/group-management/group-detail.tsx:459
@@ -378,7 +378,7 @@ msgstr "清除"
 msgid "Clear all filters"
 msgstr "清除所有过滤器"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:350
+#: src/components/execution-environment/publish-to-controller-modal.tsx:354
 msgid "Click on the Controller URL that you want to use the above execution environment in, and it will launch that Controller's console. Log in (if necessary) and follow the steps to complete the configuration."
 msgstr "点击您要在其中使用上述执行环境的 Controller URL，它将启动该控制器的控制台。登录（如果需要）并按照步骤完成配置。"
 
@@ -390,7 +390,7 @@ msgstr "客户端证书"
 msgid "Client key"
 msgstr "客户端密钥"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:281
+#: src/components/execution-environment/publish-to-controller-modal.tsx:285
 msgid "Close"
 msgstr "关闭"
 
@@ -462,7 +462,7 @@ msgid "Community"
 msgstr "社区"
 
 #: src/components/collection-detail/collection-content-list.tsx:150
-#: src/containers/collection-detail/collection-docs.tsx:281
+#: src/containers/collection-detail/collection-docs.tsx:280
 msgid "Community collections do not have docs nor content counts, but all content gets synchronized"
 msgstr "社区集合没有文档或内容计数，但所有内容都会被同步"
 
@@ -545,13 +545,13 @@ msgstr "内容数"
 msgid "Contents"
 msgstr "内容"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:380
-#: src/components/execution-environment/publish-to-controller-modal.tsx:409
+#: src/components/execution-environment/publish-to-controller-modal.tsx:384
+#: src/components/execution-environment/publish-to-controller-modal.tsx:413
 msgid "Controller name"
 msgstr "控制器名称"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:222
-#: src/components/execution-environment/publish-to-controller-modal.tsx:224
+#: src/components/execution-environment/publish-to-controller-modal.tsx:226
+#: src/components/execution-environment/publish-to-controller-modal.tsx:228
 #: src/components/patternfly-wrappers/clipboard-copy.tsx:16
 msgid "Copy to clipboard"
 msgstr "复制到剪贴板。"
@@ -657,7 +657,7 @@ msgstr "创建日期"
 #: src/components/delete-modal/delete-modal.tsx:28
 #: src/components/headers/collection-header.tsx:273
 #: src/containers/execution-environment/registry-list.tsx:392
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:410
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:413
 #: src/containers/execution-environment-list/execution_environment_list.tsx:390
 #: src/containers/group-management/group-detail.tsx:253
 #: src/containers/group-management/group-list.tsx:401
@@ -816,10 +816,10 @@ msgstr "描述性名称"
 msgid "Detail"
 msgstr "详情"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:341
+#: src/components/execution-environment/publish-to-controller-modal.tsx:345
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:177
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:275
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:489
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:490
 msgid "Digest"
 msgstr "摘要"
 
@@ -832,7 +832,7 @@ msgid "Docs site"
 msgstr "文档站点"
 
 #: src/components/headers/collection-header.tsx:462
-#: src/containers/collection-detail/collection-docs.tsx:120
+#: src/containers/collection-detail/collection-docs.tsx:119
 #: src/loaders/standalone/standalone-loader.tsx:381
 msgid "Documentation"
 msgstr "文档"
@@ -879,7 +879,7 @@ msgstr "下拉菜单"
 #: src/containers/edit-namespace/edit-namespace.tsx:148
 #: src/containers/execution-environment/registry-list.tsx:379
 #: src/containers/execution-environment-detail/base.tsx:154
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:92
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:90
 #: src/containers/execution-environment-list/execution_environment_list.tsx:363
 #: src/containers/group-management/group-detail.tsx:380
 #: src/containers/settings/user-profile.tsx:102
@@ -1076,12 +1076,12 @@ msgstr "更新用户时出错。"
 #~ msgid "Error: changes weren't saved"
 #~ msgstr "Error: changes weren't saved"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:610
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:611
 #: src/containers/execution-environment-list/execution_environment_list.tsx:543
 msgid "Error: delete failed"
 msgstr "错误：删除失败"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:306
+#: src/components/execution-environment/publish-to-controller-modal.tsx:310
 msgid "Execution Environment"
 msgstr "执行环境"
 
@@ -1228,7 +1228,7 @@ msgstr "我理解这个行动是无法撤销的。"
 msgid "If selected, TLS peer validation must be performed."
 msgstr "如果选中，则必须执行 TLS 对等验证。"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:258
+#: src/components/execution-environment/publish-to-controller-modal.tsx:262
 msgid "If the Controller is not listed in the table, check settings.py."
 msgstr "如果控制器没有在表中列出，请检查 settings.py。"
 
@@ -1294,7 +1294,7 @@ msgstr "安装"
 msgid "Installation"
 msgstr "安装"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:73
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:71
 msgid "Instructions"
 msgstr "说明"
 
@@ -1365,7 +1365,7 @@ msgstr "最后从 registry {0} 更新"
 msgid "Layers"
 msgstr "层"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:262
+#: src/components/execution-environment/publish-to-controller-modal.tsx:266
 msgid "Learn more"
 msgstr "了解更多"
 
@@ -1421,7 +1421,7 @@ msgstr "徽标 URL"
 msgid "Logout"
 msgstr "退出"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:387
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:390
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:139
 msgid "Manage tags"
 msgstr "管理标签"
@@ -1535,11 +1535,11 @@ msgstr "{0} 的新版本."
 msgid "No"
 msgstr "否"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:296
+#: src/components/execution-environment/publish-to-controller-modal.tsx:300
 msgid "No Controllers available"
 msgstr "没有控制器可用"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:98
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:96
 msgid "No README"
 msgstr "没有 README"
 
@@ -1618,7 +1618,7 @@ msgstr "没有找到结果"
 msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "没有结果与过滤条件匹配。尝试更改过滤器设置。"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:198
+#: src/components/execution-environment/publish-to-controller-modal.tsx:197
 msgid "No tag or digest selected."
 msgstr "没有选择标签或摘要。"
 
@@ -1649,7 +1649,7 @@ msgstr "不是一个超级用户"
 
 #: src/components/permissions/permission-chip-selector.tsx:83
 #: src/components/typeahead/typeahead.tsx:86
-#: src/containers/collection-detail/collection-docs.tsx:270
+#: src/containers/collection-detail/collection-docs.tsx:269
 msgid "Not found"
 msgstr "未找到"
 
@@ -1673,7 +1673,7 @@ msgstr "注意：此 URL 包含 Hub 中的所有集合。要连接到组织的�
 msgid "Number must be greater than 0"
 msgstr "此字段必须大于 0"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:494
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:495
 msgid "OS / Arch"
 msgstr "OS/ Arch"
 
@@ -1811,7 +1811,7 @@ msgstr "拉却u分发"
 msgid "Pull private containers"
 msgstr "拉取私有容器"
 
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:76
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:74
 msgid "Pull this image"
 msgstr "拉取此镜像"
 
@@ -2073,7 +2073,7 @@ msgstr "SSO URL"
 #: src/components/repositories/remote-form.tsx:164
 #: src/components/user-form/user-form.tsx:223
 #: src/containers/edit-namespace/edit-namespace.tsx:192
-#: src/containers/execution-environment-detail/execution_environment_detail.tsx:139
+#: src/containers/execution-environment-detail/execution_environment_detail.tsx:137
 #: src/containers/execution-environment-detail/tag-manifest-modal.tsx:125
 #: src/containers/group-management/group-detail.tsx:409
 msgid "Save"
@@ -2099,7 +2099,7 @@ msgstr "滚动至末尾"
 msgid "Select a registry"
 msgstr "选择 registry"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:328
+#: src/components/execution-environment/publish-to-controller-modal.tsx:332
 msgid "Select a tag"
 msgstr "选择标签"
 
@@ -2202,7 +2202,7 @@ msgstr "停止任务"
 msgid "Stop task?"
 msgstr "停止任务？"
 
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:596
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:597
 msgid "Success: {digest} was deleted"
 msgstr "成功：{digest} 已删除"
 
@@ -2295,7 +2295,7 @@ msgid "TLS validation"
 msgstr "TLS 验证"
 
 #: src/components/collection-list/collection-filter.tsx:48
-#: src/components/execution-environment/publish-to-controller-modal.tsx:311
+#: src/components/execution-environment/publish-to-controller-modal.tsx:315
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:157
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:271
 msgid "Tag"
@@ -2362,7 +2362,7 @@ msgstr "您选择的集合与此命名空间不匹配。"
 msgid "The collection you have selected doesn't appear to match {0}"
 msgstr "您选择的集合没与 {0} 不匹配。"
 
-#: src/containers/collection-detail/collection-docs.tsx:271
+#: src/containers/collection-detail/collection-docs.tsx:270
 msgid "The file is not available for this version of {collectionName}"
 msgstr "文件不适用于 {collectionName} 的这个版本"
 
@@ -2510,9 +2510,9 @@ msgstr "上传到命名空间"
 msgid "Upstream name"
 msgstr "上游名称"
 
-#: src/components/execution-environment/publish-to-controller-modal.tsx:276
+#: src/components/execution-environment/publish-to-controller-modal.tsx:280
 #: src/containers/execution-environment-detail/base.tsx:122
-#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:402
+#: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:405
 #: src/containers/execution-environment-list/execution_environment_list.tsx:381
 msgid "Use in Controller"
 msgstr "在控制器中使用"
@@ -2689,7 +2689,7 @@ msgid "Waiting for {pendingTasks} task(s) to finish."
 msgstr "正在等待 {pendingTasks} 个任务结束"
 
 #: src/components/collection-detail/collection-content-list.tsx:149
-#: src/containers/collection-detail/collection-docs.tsx:280
+#: src/containers/collection-detail/collection-docs.tsx:279
 msgid "Warning"
 msgstr "警告"
 
