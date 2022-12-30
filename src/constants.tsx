@@ -159,35 +159,6 @@ export class Constants {
     'galaxy.view_user': t`View user`,
   };
 
-  static GROUP_HUMAN_PERMISSIONS = {
-    change_namespace: t`Change namespace`,
-    upload_to_namespace: t`Upload to namespace`,
-    add_containernamespace: t`Create new containers`,
-    namespace_pull_containerdistribution: t`Pull private containers`,
-    namespace_change_containerdistribution: t`Update container information`,
-    namespace_view_containerdistribution: t`View private containers`,
-    namespace_modify_content_containerpushrepository: t`Change image tags`,
-    change_containernamespace: t`Change container namespace permissions`,
-    namespace_push_containerdistribution: t`Push images to existing containers`,
-    view_containernamespace: t`View container's namespace`,
-    delete_containernamespace: t`Delete container's namespace`,
-    namespace_delete_containerdistribution: t`Delete container's distribution`,
-    namespace_view_containerpushrepository: t`View container's repository`,
-    namespace_add_containerdistribution: t`Push new containers`,
-    change_containerdistribution: t`Change distribution`,
-    delete_containerdistribution: t`Delete distribution`,
-    push_containerdistribution: t`Push distribution`,
-    pull_containerdistribution: t`Pull distribution`,
-    view_containerdistribution: t`View distribution`,
-  };
-
-  static CONTAINER_NAMESPACE_PERMISSIONS = [
-    'change_containernamespace',
-    'namespace_push_containerdistribution',
-    'namespace_change_containerdistribution',
-    'namespace_modify_content_containerpushrepository',
-    'namespace_add_containerdistribution',
-  ];
   static UPSTREAM_HOSTS = [
     'galaxy.ansible.com',
     'galaxy-dev.ansible.com',
