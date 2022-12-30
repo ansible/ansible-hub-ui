@@ -305,16 +305,14 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                         <ExpandableRow
                           key={role.name}
                           expandableRowContent={
-                            <>
-                              <PermissionCategories
-                                showEmpty={true}
-                                showCustom={false}
-                                role={role}
-                                showUserMgmt={
-                                  !featureFlags.external_authentication
-                                }
-                              />
-                            </>
+                            <PermissionCategories
+                              role={role}
+                              showCustom={true}
+                              showEmpty={false}
+                              showUserMgmt={
+                                !featureFlags.external_authentication
+                              }
+                            />
                           }
                           data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
                           colSpan={6}
