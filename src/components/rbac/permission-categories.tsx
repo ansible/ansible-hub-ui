@@ -1,88 +1,111 @@
 import * as React from 'react';
 import { t } from '@lingui/macro';
 import { AppContext } from 'src/loaders/app-context';
-import { RoleType, GroupRoleType } from 'src/api';
+import { RoleType, GroupRoleType, ModelPermissionsType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
 import { Constants } from 'src/constants';
 import { Flex, FlexItem } from '@patternfly/react-core';
 
 interface IProps {
-  showEmpty: boolean;
-  showCustom: boolean;
   role: RoleType | GroupRoleType;
+  showCustom: boolean;
+  showEmpty: boolean;
   showUserMgmt?: boolean;
 }
 
-export class PermissionCategories extends React.Component<IProps, IState> {
-  static contextType = AppContext;
-  constructor(props) {
-    super(props);
-    this.state = {
-      groups: [],
-    };
-  }
+function knownPermissionsAndCategories(
+  model_permissions: ModelPermissionsType,
+  allPermissions: string[] = Object.keys(model_permissions),
+): {
+  label: string;
+  allPermissions: string[];
+  availablePermissions?: string[];
+  selectedPermissions?: string[];
+}[] {
+  const categories = {};
 
-  componentDidMount() {
-    const { model_permissions } = this.context.user;
-    this.setState({ groups: this.formatPermissions(model_permissions) });
-  }
+  Object.entries(model_permissions)
+    .filter(([k, _]) => allPermissions.includes(k))
+    .forEach(([permission, { ui_category }]) => {
+      categories[ui_category] ||= { label: ui_category, allPermissions: [] };
+      categories[ui_category].allPermissions.push(permission);
+    });
+
+  return Object.values(categories);
+}
+
+export class PermissionCategories extends React.Component<IProps> {
+  static contextType = AppContext;
 
   render() {
-    const { groups } = this.state;
-    const { role, showEmpty, showCustom, showUserMgmt } = this.props;
+    const { role, showCustom, showEmpty, showUserMgmt } = this.props;
     const { model_permissions } = this.context.user;
 
-    if (!showUserMgmt) {
-      Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-        if (perm in model_permissions) {
-          delete model_permissions[perm];
-        }
-      });
-    }
+    // show user/group permissions by default
+    const allPermissions = Object.keys(model_permissions).filter(
+      (permission) =>
+        showUserMgmt !== false ||
+        !Constants.USER_GROUP_MGMT_PERMISSIONS.includes(permission),
+    );
 
-    const origGroups = groups.map((group) => ({
-      ...group,
-      label: group.label,
-    }));
+    const groups = knownPermissionsAndCategories(
+      model_permissions,
+      allPermissions,
+    );
 
     const allGroups = showCustom
       ? [
-          ...origGroups,
+          ...groups,
           {
             label: t`Custom permissions`,
-            object_permissions: this.customPermissions(role),
+            allPermissions: role.permissions.filter(
+              (permission) => !allPermissions.includes(permission),
+            ),
           },
         ]
-      : origGroups;
+      : groups;
 
-    const groupsToMap = showEmpty
-      ? allGroups
-      : allGroups.filter((group) => this.getSelected(group).length);
+    const withActive = allGroups.map((group) => ({
+      ...group,
+      selectedPermissions: group.allPermissions.filter((permission) =>
+        role.permissions.includes(permission),
+      ),
+      availablePermissions: group.allPermissions.filter(
+        (permission) => !role.permissions.includes(permission),
+      ),
+    }));
+
+    const groupsToShow = showEmpty
+      ? withActive
+      : withActive.filter((group) => group.selectedPermissions.length);
 
     return (
       <React.Fragment>
-        {groupsToMap.map((group) => (
+        {groupsToShow.length ? null : (
+          <Flex
+            style={{ marginTop: '16px' }}
+            alignItems={{ default: 'alignItemsCenter' }}
+            key={'no-permissions'}
+            data-cy={'PermissionCategories-no-permissions'}
+          >
+            <FlexItem
+              style={{ minWidth: '200px' }}
+            >{t`No permissions`}</FlexItem>
+            <FlexItem grow={{ default: 'grow' }}></FlexItem>
+          </Flex>
+        )}
+        {groupsToShow.map((group) => (
           <Flex
             style={{ marginTop: '16px' }}
             alignItems={{ default: 'alignItemsCenter' }}
             key={group.label}
-            className={group.label}
+            data-cy={`PermissionCategories-${group.label}`}
           >
             <FlexItem style={{ minWidth: '200px' }}>{group.label}</FlexItem>
             <FlexItem grow={{ default: 'grow' }}>
               <PermissionChipSelector
-                availablePermissions={group.object_permissions
-                  .filter(
-                    (perm) =>
-                      !role.permissions.find((selected) => selected === perm),
-                  )
-                  .map((permission) => this.getNicenames(permission))
-                  .sort()}
-                selectedPermissions={role.permissions
-                  .filter((selected) =>
-                    group.object_permissions.find((perm) => selected === perm),
-                  )
-                  .map((permission) => this.getNicenames(permission))}
+                availablePermissions={group.availablePermissions}
+                selectedPermissions={group.selectedPermissions}
                 menuAppendTo='inline'
                 isViewOnly={true}
               />
@@ -91,51 +114,5 @@ export class PermissionCategories extends React.Component<IProps, IState> {
         ))}
       </React.Fragment>
     );
-  }
-
-  private formatPermissions(permissions): PermissionType[] {
-    const formattedPermissions = {};
-    for (const [key, value] of Object.entries(permissions)) {
-      if (value['ui_category'] in formattedPermissions) {
-        formattedPermissions[value['ui_category']]['object_permissions'].push(
-          key,
-        );
-      } else {
-        formattedPermissions[value['ui_category']] = {
-          label: value['ui_category'],
-          object_permissions: [key],
-        };
-      }
-    }
-    const arrayPermissions = Object.values(
-      formattedPermissions,
-    );
-    return arrayPermissions;
-  }
-
-  private getNicenames(permission) {
-    const { model_permissions } = this.context.user;
-    return model_permissions[permission]?.name || permission;
-  }
-
-  private permFilter(availablePermissions) {
-    const { role } = this.props;
-    return role.permissions
-      .filter((selected) =>
-        availablePermissions.find((perm) => selected === perm),
-      )
-      .map((permission) => this.getNicenames(permission));
-  }
-
-  private getSelected(group) {
-    return this.permFilter(group.object_permissions);
-  }
-
-  private customPermissions(role) {
-    const { model_permissions } = this.context.user;
-    const custom = role.permissions.filter(
-      (perm) => !Object.keys(model_permissions).includes(perm),
-    );
-    return custom;
   }
 }
