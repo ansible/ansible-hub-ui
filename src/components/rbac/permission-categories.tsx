@@ -1,14 +1,10 @@
 import * as React from 'react';
 import { t } from '@lingui/macro';
 import { AppContext } from 'src/loaders/app-context';
-import { RoleType, GroupRoleType, PermissionType } from 'src/api';
+import { RoleType, GroupRoleType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
 import { Constants } from 'src/constants';
 import { Flex, FlexItem } from '@patternfly/react-core';
-
-interface IState {
-  groups: PermissionType[];
-}
 
 interface IProps {
   showEmpty: boolean;
@@ -113,7 +109,7 @@ export class PermissionCategories extends React.Component<IProps, IState> {
     }
     const arrayPermissions = Object.values(
       formattedPermissions,
-    ) as PermissionType[];
+    );
     return arrayPermissions;
   }
 
