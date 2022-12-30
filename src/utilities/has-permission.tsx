@@ -4,5 +4,5 @@ export function hasPermission({ user, settings, featureFlags }, name) {
     return false;
   }
 
-  return !!user.model_permissions[name]['has_model_permission'];
+  return !!user.model_permissions[name].has_model_permission;
 }

@@ -41,7 +41,7 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
     if (this.props.isViewOnly) {
       const items = this.props.selectedPermissions.length
         ? this.props.selectedPermissions.map((permission) => ({
-            label: model_permissions[permission].name || permission,
+            label: model_permissions[permission]?.name || permission,
             value: permission,
           }))
         : [{ label: this.placeholderText(), value: null }];
