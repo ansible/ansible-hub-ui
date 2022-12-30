@@ -1,6 +1,5 @@
 import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-
 import * as React from 'react';
 import {
   Label,
@@ -9,6 +8,7 @@ import {
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IProps {
   availablePermissions?: string[];
@@ -28,21 +28,29 @@ interface IState {
 }
 
 export class PermissionChipSelector extends React.Component<IProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
     this.state = { isOpen: false };
   }
 
   render() {
+    const { model_permissions } = this.context.user;
+
     if (this.props.isViewOnly) {
       const items = this.props.selectedPermissions.length
-        ? this.props.selectedPermissions
-        : [this.placeholderText()];
+        ? this.props.selectedPermissions.map((permission) => ({
+            label: model_permissions[permission].name || permission,
+            value: permission,
+          }))
+        : [{ label: this.placeholderText(), value: null }];
+
       return (
         <LabelGroup>
           {items.map((text) => (
-            <Label key={text}>
-              {this.props.multilingual ? i18n._(text) : text}
+            <Label key={text.value || 'placeholder'} title={text.value}>
+              {text.label}
             </Label>
           ))}
         </LabelGroup>
