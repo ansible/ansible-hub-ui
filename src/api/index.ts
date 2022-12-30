@@ -27,7 +27,12 @@ export {
 export { PulpStatus } from './response-types/pulp';
 export { ImportAPI } from './import';
 export { ActiveUserAPI } from './active-user';
-export { UserType, MeType, GroupType } from './response-types/user';
+export {
+  GroupType,
+  MeType,
+  ModelPermissionsType,
+  UserType,
+} from './response-types/user';
 export { CollectionVersionAPI } from './collection-version';
 export { MyNamespaceAPI } from './my-namespace';
 export { UserAPI } from './user';
