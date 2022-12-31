@@ -8,6 +8,7 @@ import { Flex, FlexItem } from '@patternfly/react-core';
 
 interface IProps {
   permissions: string[];
+  setSelected?: (permissions) => void;
   showCustom: boolean;
   showEmpty: boolean;
   showUserMgmt?: boolean;
@@ -38,7 +39,7 @@ export class PermissionCategories extends React.Component<IProps> {
   static contextType = AppContext;
 
   render() {
-    const { permissions, showCustom, showEmpty, showUserMgmt } =
+    const { permissions, setSelected, showCustom, showEmpty, showUserMgmt } =
       this.props;
     const { model_permissions } = this.context.user;
 
@@ -107,8 +108,26 @@ export class PermissionCategories extends React.Component<IProps> {
               <PermissionChipSelector
                 availablePermissions={group.availablePermissions}
                 selectedPermissions={group.selectedPermissions}
-                menuAppendTo='inline'
-                isViewOnly={true}
+                isViewOnly={!setSelected}
+                onCategoryClear={() =>
+                  setSelected(
+                    permissions.filter(
+                      (permission) =>
+                        !group.allPermissions.includes(permission),
+                    ),
+                  )
+                }
+                onPermissionToggle={(permission) => {
+                  const newPerms = new Set(permissions);
+
+                  if (newPerms.has(permission)) {
+                    newPerms.delete(permission);
+                  } else {
+                    newPerms.add(permission);
+                  }
+
+                  setSelected(Array.from(newPerms));
+                }}
               />
             </FlexItem>
           </Flex>
