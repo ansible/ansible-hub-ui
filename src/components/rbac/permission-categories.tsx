@@ -11,7 +11,6 @@ interface IProps {
   setSelected?: (permissions) => void;
   showCustom: boolean;
   showEmpty: boolean;
-  showUserMgmt?: boolean;
 }
 
 function knownPermissionsAndCategories(
@@ -39,14 +38,15 @@ export class PermissionCategories extends React.Component<IProps> {
   static contextType = AppContext;
 
   render() {
-    const { permissions, setSelected, showCustom, showEmpty, showUserMgmt } =
-      this.props;
-    const { model_permissions } = this.context.user;
+    const { permissions, setSelected, showCustom, showEmpty } = this.props;
+    const { featureFlags, user } = this.context;
+    const { model_permissions } = user;
+    const showUserManagement = !featureFlags.external_authentication;
 
     // show user/group permissions by default
     const allPermissions = Object.keys(model_permissions).filter(
       (permission) =>
-        showUserMgmt !== false ||
+        showUserManagement ||
         !Constants.USER_GROUP_MGMT_PERMISSIONS.includes(permission),
     );
 

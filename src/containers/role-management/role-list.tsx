@@ -127,8 +127,6 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     const noData =
       roleCount === 0 && !filterIsSet(params, ['name__icontains', 'locked']);
 
-    const { featureFlags } = this.context;
-
     if (redirect) {
       return <Redirect push to={redirect} />;
     }
@@ -309,9 +307,6 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                               permissions={role.permissions}
                               showCustom={true}
                               showEmpty={false}
-                              showUserMgmt={
-                                !featureFlags.external_authentication
-                              }
                             />
                           }
                           data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
