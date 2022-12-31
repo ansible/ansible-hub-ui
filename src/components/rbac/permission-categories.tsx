@@ -44,11 +44,11 @@ export class PermissionCategories extends React.Component<IProps> {
     const showUserManagement = !featureFlags.external_authentication;
 
     // show user/group permissions by default
-    const allPermissions = Object.keys(model_permissions).filter(
-      (permission) =>
-        showUserManagement ||
-        !Constants.USER_GROUP_MGMT_PERMISSIONS.includes(permission),
-    );
+    const userManagementFilter = (permission) =>
+      showUserManagement ||
+      !Constants.USER_GROUP_MGMT_PERMISSIONS.includes(permission);
+    const allPermissions =
+      Object.keys(model_permissions).filter(userManagementFilter);
 
     const groups = knownPermissionsAndCategories(
       model_permissions,
@@ -60,9 +60,9 @@ export class PermissionCategories extends React.Component<IProps> {
           ...groups,
           {
             label: t`Custom permissions`,
-            allPermissions: permissions.filter(
-              (permission) => !allPermissions.includes(permission),
-            ),
+            allPermissions: permissions
+              .filter(userManagementFilter)
+              .filter((permission) => !allPermissions.includes(permission)),
           },
         ]
       : groups;
