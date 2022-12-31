@@ -81,7 +81,7 @@ describe('Group Roles Tests', () => {
       `[data-cy="RoleListTable-ExpandableRow-row-${testRole.name}"] .pf-c-table__toggle`,
     ).click();
 
-    cy.contains('1 more').click();
+    cy.contains('2 more').click();
     Object.values(testRole.permissions).forEach((perm) => {
       cy.contains(perm);
     });
