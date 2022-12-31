@@ -347,7 +347,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     rowIndex={i}
                     expandableRowContent={
                       <PermissionCategories
-                        role={role}
+                        permissions={role.permissions}
                         showCustom={true}
                         showEmpty={false}
                       />

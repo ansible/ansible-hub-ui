@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { t } from '@lingui/macro';
 import { AppContext } from 'src/loaders/app-context';
-import { RoleType, GroupRoleType, ModelPermissionsType } from 'src/api';
+import { ModelPermissionsType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
 import { Constants } from 'src/constants';
 import { Flex, FlexItem } from '@patternfly/react-core';
 
 interface IProps {
-  role: RoleType | GroupRoleType;
+  permissions: string[];
   showCustom: boolean;
   showEmpty: boolean;
   showUserMgmt?: boolean;
@@ -38,7 +38,8 @@ export class PermissionCategories extends React.Component<IProps> {
   static contextType = AppContext;
 
   render() {
-    const { role, showCustom, showEmpty, showUserMgmt } = this.props;
+    const { permissions, showCustom, showEmpty, showUserMgmt } =
+      this.props;
     const { model_permissions } = this.context.user;
 
     // show user/group permissions by default
@@ -58,7 +59,7 @@ export class PermissionCategories extends React.Component<IProps> {
           ...groups,
           {
             label: t`Custom permissions`,
-            allPermissions: role.permissions.filter(
+            allPermissions: permissions.filter(
               (permission) => !allPermissions.includes(permission),
             ),
           },
@@ -68,10 +69,10 @@ export class PermissionCategories extends React.Component<IProps> {
     const withActive = allGroups.map((group) => ({
       ...group,
       selectedPermissions: group.allPermissions.filter((permission) =>
-        role.permissions.includes(permission),
+        permissions.includes(permission),
       ),
       availablePermissions: group.allPermissions.filter(
-        (permission) => !role.permissions.includes(permission),
+        (permission) => !permissions.includes(permission),
       ),
     }));
 

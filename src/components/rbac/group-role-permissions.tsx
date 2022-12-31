@@ -25,7 +25,11 @@ export const GroupRolePermissions = ({ name }: IProps) => {
   return (
     <>
       <p>{translateLockedRolesDescription(role.name, role.description)}</p>
-      <PermissionCategories role={role} showCustom={true} showEmpty={false} />
+      <PermissionCategories
+        permissions={role.permissions}
+        showCustom={true}
+        showEmpty={false}
+      />
     </>
   );
 };

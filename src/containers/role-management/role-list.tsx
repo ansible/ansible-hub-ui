@@ -306,7 +306,7 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                           key={role.name}
                           expandableRowContent={
                             <PermissionCategories
-                              role={role}
+                              permissions={role.permissions}
                               showCustom={true}
                               showEmpty={false}
                               showUserMgmt={
