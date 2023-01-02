@@ -53,14 +53,16 @@ class LegacyNamespaces extends React.Component<
   }
 
   componentDidMount() {
+    const p: any = {};
     const thisQS = window.location.search;
     const urlParams = new URLSearchParams(thisQS);
-    const page = parseInt(urlParams.get('page')) || 1;
-    const page_size = parseInt(urlParams.get('page_size')) || 10;
-    const order_by = urlParams.get('order_by') || 'name';
-    const keywords = urlParams.get('keywords') || null;
+    p.page = parseInt(urlParams.get('page')) || 1;
+    p.page_size = parseInt(urlParams.get('page_size')) || 10;
+    p.order_by = urlParams.get('order_by') || 'name';
+    p.keywords = urlParams.get('keywords') || null;
 
-    LegacyNamespaceAPI.list({
+    this.updateParams(p);
+    /*LegacyNamespaceAPI.list({
       page: page,
       page_size: page_size,
       order_by: order_by,
@@ -78,7 +80,7 @@ class LegacyNamespaces extends React.Component<
         count: response.data.count,
         legacynamespaces: response.data.results,
       }));
-    });
+    });*/
   }
 
   updateParams = (p) => {
