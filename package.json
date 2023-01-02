@@ -60,7 +60,7 @@
         "prettier": "^2.3.2",
         "sass": "^1.57.1",
         "sass-loader": "^13.2.0",
-        "source-map-loader": "^4.0.0",
+        "source-map-loader": "^4.0.1",
         "style-loader": "^3.3.1",
         "stylelint": "^14.16.0",
         "stylelint-config-standard-scss": "^6.1.0",
