@@ -17,6 +17,15 @@ updates:
       interval: 'weekly'
     commit-message:
       prefix: '[stable-4.6] '
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: 'npm'
     directory: '/'
@@ -25,14 +34,32 @@ updates:
       interval: 'weekly'
     commit-message:
       prefix: '[stable-4.5] '
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: 'npm'
     directory: '/'
     target-branch: 'stable-4.4'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
     commit-message:
       prefix: '[stable-4.4] '
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: 'npm'
     directory: '/'
@@ -41,6 +68,15 @@ updates:
       interval: 'monthly'
     commit-message:
       prefix: '[stable-4.2] '
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     # Workflow files stored in the default location of `.github/workflows`
@@ -70,7 +106,7 @@ updates:
     commit-message:
       prefix: '[stable-4.4] '
     schedule:
-      interval: "weekly"
+      interval: "monthly"
 
   - package-ecosystem: "github-actions"
     directory: "/"
