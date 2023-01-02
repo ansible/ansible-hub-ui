@@ -116,6 +116,7 @@ jobs:
                 -e 's/\(\[name\]\|automationHub\)\.[0-9]\+\.\(\[fullhash\]\)/\1.TIMESTAMP.\2/g' \
                 -e 's/"UI_COMMIT_HASH": ".*"/"UI_COMMIT_HASH": "HASH"/' |
               grep -v '^Current branch:' |
+              grep -v '^Waiting for ' |
               grep -v '^Root folder:' > ~/webpack-config/"$version"/"$file".json
           done
 
