@@ -1,6 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './legacy-roles.scss';
+import { EmptyStateNoData } from 'src/components';
 
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 
@@ -159,9 +160,14 @@ class LegacyRoleVersions extends React.Component<RoleMeta, RoleVersionsIProps> {
       <div id='versions-div'>
         {!this.state.loading &&
         this.state.role_versions &&
-        this.state.role_versions.length == 0
-          ? t`The role is versionless and will always install from the head/main/master branch.`
-          : ''}
+        this.state.role_versions.length == 0 ? (
+          <EmptyStateNoData
+            title={t`No versions`}
+            description={t`The role is versionless and will always install from the head/main/master branch.`}
+          />
+        ) : (
+          ''
+        )}
 
         <DataList aria-label={t`List of versions`}>
           {this.state.role_versions.reverse().map((rversion) => (
