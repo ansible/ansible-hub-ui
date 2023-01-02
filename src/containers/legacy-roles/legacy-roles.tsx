@@ -54,35 +54,16 @@ class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
   }
 
   componentDidMount() {
+    const p: any = {};
     const thisQS = window.location.search;
     const urlParams = new URLSearchParams(thisQS);
-    const page = parseInt(urlParams.get('page')) || 1;
-    const page_num = parseInt(urlParams.get('page')) || 1;
-    const page_size = parseInt(urlParams.get('page_size')) || 10;
-    const order_by = urlParams.get('order_by') || 'created';
-    const keywords = urlParams.get('keywords');
-    const tags = urlParams.get('tags');
-
-    LegacyRoleAPI.list({
-      page: page,
-      page_size: page_size,
-      order_by: order_by,
-      tags: tags,
-      keywords: keywords,
-    }).then((response) => {
-      this.setState(() => ({
-        mounted: true,
-        loading: false,
-        params: {
-          page: page_num,
-          page_size: page_size,
-          order_by: order_by,
-          keywords: keywords,
-        },
-        count: response.data.count,
-        legacyroles: response.data.results,
-      }));
-    });
+    p.page = parseInt(urlParams.get('page')) || 1;
+    p.page_num = parseInt(urlParams.get('page')) || 1;
+    p.page_size = parseInt(urlParams.get('page_size')) || 10;
+    p.order_by = urlParams.get('order_by') || 'created';
+    p.keywords = urlParams.get('keywords');
+    p.tags = urlParams.get('tags');
+    this.updateParams(p);
   }
 
   updateParams = (p) => {
