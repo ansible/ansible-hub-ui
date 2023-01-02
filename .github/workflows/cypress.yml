@@ -26,6 +26,7 @@ jobs:
       fail-fast: false
       matrix:
         test:
+        - 'screenshots'
         - 'approval'
         - 'collections'
         - 'ee_controller'
@@ -55,6 +56,17 @@ jobs:
         echo "COMPOSE_PROFILE=${COMPOSE_PROFILE}" >> $GITHUB_ENV
         echo "COMPOSE_INTERACTIVE_NO_CLI=1" >> $GITHUB_ENV
 
+    - name: "Set variables for screenshots"
+      if: matrix.test == 'screenshots'
+      run: |
+        UI_COMMIT_MASTER=`curl -s https://api.github.com/repos/ansible/ansible-hub-ui/branches/${SHORT_BRANCH} | jq -r .commit.sha`
+        echo "UI_COMMIT_MASTER=${UI_COMMIT_MASTER}" >> $GITHUB_ENV
+
+        COMPARE_SCREENSHOTS=${{ github.event_name == 'pull_request' }}
+        echo 'compare screenshots:'
+        echo $COMPARE_SCREENSHOTS
+        echo "COMPARE_SCREENSHOTS=${COMPARE_SCREENSHOTS}" >> $GITHUB_ENV
+
     - name: "Checkout ansible-hub-ui (${{ github.ref }})"
       uses: actions/checkout@v3
       with:
@@ -77,7 +89,6 @@ jobs:
       working-directory: 'oci_env'
       run: |
         pip install --editable ./client/
-
         # merge common, profile-specific and test matrix specific config
         cat ../ansible-hub-ui/.github/workflows/cypress/compose.env.common \
           ../ansible-hub-ui/.github/workflows/cypress/compose.env."$COMPOSE_PROFILE" \
@@ -166,6 +177,11 @@ jobs:
       run: |
         npm install
 
+    - name: "Install Imagemagick"
+      if: matrix.test == 'screenshots'
+      run: |
+        sudo apt install imagemagick
+
     - name: "Configure Cypress"
       working-directory: 'ansible-hub-ui/test'
       run: |
@@ -229,6 +245,20 @@ jobs:
       run: |
         diff -Naur <(ls test/cypress/e2e) <(yq '.jobs.cypress.strategy.matrix.test[]' .github/workflows/cypress.yml | sort)
 
+    - name: "Cache master screenshots"
+      if: matrix.test == 'screenshots'
+      uses: actions/cache@v3
+      with:
+        path: ansible-hub-ui/test/screenshots.js/
+        key: screenshots-${{env.SHORT_BRANCH}}-${{ env.UI_COMMIT_MASTER }}
+        restore-keys: |
+          screenshots-${{env.SHORT_BRANCH}}-
+
+    - name: "List cached screenshots"
+      if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'true' }}
+      run: |
+        ls ansible-hub-ui/test/screenshots.js/
+
     - name: "Run cypress"
       working-directory: 'ansible-hub-ui/test'
       env:
@@ -238,6 +268,44 @@ jobs:
         grep specPattern cypress.config.js
 
         npm run cypress:chrome
+
+    - name: "List new screenshots"
+      if: matrix.test == 'screenshots'
+      continue-on-error: true
+      run: |
+        ls ansible-hub-ui/test/cypress/screenshots/screenshots.js/
+
+    - name: "Compare screenshots"
+      if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'true' }}
+      working-directory: 'ansible-hub-ui/test'
+      run: |
+        changed=false
+
+        for orig in screenshots.js/*; do
+          echo $orig
+          new=cypress/screenshots/"$orig"
+          diff=cypress/screenshots/diff--"$(basename "$orig")"
+
+          num=$(compare -metric RMSE "$orig" "$new" "$diff" 2>&1 | awk '{ print $1 }')
+          echo $num
+          num=${num%.*}
+          if [ "$num" -gt 10 ]; then
+            echo "screenshot $orig changed: $num" 1>&2
+            changed=true
+          fi
+        done
+
+        if [ "$changed" = true ]; then
+          echo "Process failed because change occured"
+          exit 1
+        fi
+
+    - name: "Move Cache master screenshots"
+      if: ${{ matrix.test == 'screenshots' && env.COMPARE_SCREENSHOTS == 'false' }}
+      working-directory: 'ansible-hub-ui/test'
+      run: |
+        rm -rf screenshots.js/
+        mv cypress/screenshots/screenshots.js/ ./
 
     - uses: actions/upload-artifact@v3
       if: failure()
