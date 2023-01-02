@@ -1,6 +1,4 @@
 import { t } from '@lingui/macro';
-import { i18n } from '@lingui/core';
-
 import * as React from 'react';
 import {
   Label,
@@ -9,18 +7,15 @@ import {
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IProps {
   availablePermissions?: string[];
   selectedPermissions: string[];
-  customPermissions?: string[];
-  setSelected?: (selected: string[]) => void;
   isDisabled?: boolean;
   isViewOnly?: boolean;
-  onSelect?: (event, selection) => void;
-  onClear?: () => void;
-  menuAppendTo?: 'parent' | 'inline';
-  multilingual?: boolean;
+  onCategoryClear?: () => void;
+  onPermissionToggle?: (permission: string) => void;
 }
 
 interface IState {
@@ -28,53 +23,73 @@ interface IState {
 }
 
 export class PermissionChipSelector extends React.Component<IProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
     this.state = { isOpen: false };
   }
 
   render() {
-    if (this.props.isViewOnly) {
-      const items = this.props.selectedPermissions.length
-        ? this.props.selectedPermissions
-        : [this.placeholderText()];
+    const { model_permissions } = this.context.user;
+    const {
+      availablePermissions,
+      isDisabled,
+      isViewOnly,
+      onCategoryClear,
+      onPermissionToggle,
+      selectedPermissions,
+    } = this.props;
+    const { isOpen } = this.state;
+
+    if (isViewOnly) {
+      const items = selectedPermissions.map((permission) => ({
+        label: model_permissions[permission]?.name || permission,
+        value: permission,
+      }));
+
       return (
         <LabelGroup>
+          {items.length ? null : (
+            <Label key='placeholder'>{t`No permission`}</Label>
+          )}
           {items.map((text) => (
-            <Label key={text}>
-              {this.props.multilingual ? i18n._(text) : text}
+            <Label key={text.value} title={text.value}>
+              {text.label}
             </Label>
           ))}
         </LabelGroup>
       );
     }
 
-    let selections = [];
-    if (this.props.multilingual) {
-      selections = this.props.selectedPermissions.map((value) => ({
-        // orginal english value
-        value,
-        // translated
-        toString: () => i18n._(value),
-      }));
-    } else {
-      selections = this.props.selectedPermissions;
-    }
+    // { value: 'galaxy.foo', toString: () => "View foo (translated)" }
+    const selections = selectedPermissions.map((permission) => ({
+      value: permission,
+      toString: () => model_permissions[permission]?.name || permission,
+    }));
 
     return (
       <Select
-        menuAppendTo={this.props.menuAppendTo}
+        menuAppendTo='inline'
         variant={SelectVariant.typeaheadMulti}
         typeAheadAriaLabel={t`Select permissions`}
-        onToggle={this.onToggle}
-        onSelect={this.onSelect}
-        onClear={this.props.onClear ? this.props.onClear : this.clearSelection}
+        onToggle={(isOpen) => this.setState({ isOpen })}
+        onSelect={(event, permission) =>
+          onPermissionToggle(permission['value'] || permission)
+        }
+        onClear={() => onCategoryClear()}
         selections={selections}
-        isOpen={this.state.isOpen}
-        placeholderText={this.placeholderText()}
-        isDisabled={!!this.props.isDisabled}
+        isOpen={isOpen}
+        placeholderText={
+          !isDisabled && !isViewOnly
+            ? t`Select permissions`
+            : selectedPermissions.length === 0
+            ? t`No permission`
+            : ''
+        }
+        isDisabled={!!isDisabled}
       >
-        {this.props.availablePermissions.length === 0
+        {availablePermissions.length === 0
           ? [
               <SelectOption
                 isDisabled={true}
@@ -82,49 +97,12 @@ export class PermissionChipSelector extends React.Component<IProps, IState> {
                 value={t`Not found`}
               />,
             ]
-          : this.props.availablePermissions.map((option, index) => (
-              <SelectOption key={index} value={option}>
-                {this.props.multilingual ? i18n._(option) : option}
+          : availablePermissions.map((permission) => (
+              <SelectOption key={permission} value={permission}>
+                {model_permissions[permission]?.name || permission}
               </SelectOption>
             ))}
       </Select>
     );
   }
-
-  private placeholderText() {
-    if (!this.props.isDisabled && !this.props.isViewOnly) {
-      return t`Select permissions`;
-    }
-    return this.props.selectedPermissions.length === 0 ? t`No permission` : '';
-  }
-
-  private clearSelection = () => {
-    this.props.setSelected([]);
-  };
-
-  private onToggle = (isOpen) => {
-    this.setState({
-      isOpen: isOpen,
-    });
-  };
-
-  private onSelect = (event, selection) => {
-    // value contains orginal key in english
-    if (this.props.multilingual && selection.value) {
-      selection = selection.value;
-    }
-
-    if (this.props.onSelect) {
-      this.props.onSelect(event, selection);
-    } else {
-      const newPerms = new Set(this.props.selectedPermissions);
-      if (newPerms.has(selection)) {
-        newPerms.delete(selection);
-      } else {
-        newPerms.add(selection);
-      }
-
-      this.props.setSelected(Array.from(newPerms));
-    }
-  };
 }

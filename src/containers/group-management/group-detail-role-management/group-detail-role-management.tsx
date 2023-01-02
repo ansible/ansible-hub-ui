@@ -7,7 +7,7 @@ import {
   CompoundFilter,
   DeleteModal,
   EmptyStateNoData,
-  RolePermissions,
+  PermissionCategories,
   LoadingPageWithHeader,
   Pagination,
   RoleListTable,
@@ -42,8 +42,6 @@ import {
 } from '@patternfly/react-core';
 
 import { IAppContextType } from 'src/loaders/app-context';
-
-import { Constants } from 'src/constants';
 
 import './group-detail-role-management.scss';
 
@@ -154,20 +152,7 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
     </DeleteModal>
   );
 
-  const { featureFlags, hasPermission } = context;
-  let isUserMgmtDisabled = false;
-  const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
-  if (featureFlags) {
-    isUserMgmtDisabled = featureFlags.external_authentication;
-  }
-
-  if (isUserMgmtDisabled) {
-    Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-      if (perm in filteredPermissions) {
-        delete filteredPermissions[perm];
-      }
-    });
-  }
+  const { hasPermission } = context;
 
   const addRoles = hasPermission('galaxy.change_group') && (
     <Button
@@ -361,9 +346,8 @@ const GroupDetailRoleManagement: React.FC<Props> = ({
                     key={i}
                     rowIndex={i}
                     expandableRowContent={
-                      <RolePermissions
-                        filteredPermissions={filteredPermissions}
-                        selectedPermissions={role.permissions}
+                      <PermissionCategories
+                        permissions={role.permissions}
                         showCustom={true}
                         showEmpty={false}
                       />

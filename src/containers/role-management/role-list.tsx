@@ -1,6 +1,5 @@
 import React from 'react';
 import { t, Trans } from '@lingui/macro';
-import { i18n } from '@lingui/core';
 import { AppContext } from 'src/loaders/app-context';
 import {
   Link,
@@ -25,8 +24,8 @@ import {
   RoleListTable,
   ExpandableRow,
   ListItemActions,
-  PermissionChipSelector,
   DateComponent,
+  PermissionCategories,
 } from 'src/components';
 import {
   Button,
@@ -35,8 +34,6 @@ import {
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  Flex,
-  FlexItem,
   Tooltip,
 } from '@patternfly/react-core';
 import { RoleType } from 'src/api/response-types/role';
@@ -45,13 +42,11 @@ import {
   filterIsSet,
   ParamHelper,
   parsePulpIDFromURL,
-  twoWayMapper,
   translateLockedRolesDescription,
 } from 'src/utilities';
 
 import { RoleAPI } from 'src/api/role';
 import { Paths, formatPath } from 'src/paths';
-import { Constants } from 'src/constants';
 
 interface IState {
   roles: RoleType[];
@@ -132,24 +127,8 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
     const noData =
       roleCount === 0 && !filterIsSet(params, ['name__icontains', 'locked']);
 
-    const groups = Constants.PERMISSIONS;
-
-    const { featureFlags } = this.context;
-    let isUserMgmtDisabled = false;
-    const filteredPermissions = { ...Constants.HUMAN_PERMISSIONS };
-
     if (redirect) {
       return <Redirect push to={redirect} />;
-    }
-    if (featureFlags) {
-      isUserMgmtDisabled = featureFlags.external_authentication;
-    }
-    if (isUserMgmtDisabled) {
-      Constants.USER_GROUP_MGMT_PERMISSIONS.forEach((perm) => {
-        if (perm in filteredPermissions) {
-          delete filteredPermissions[perm];
-        }
-      });
     }
 
     const isSuperuser = this.context.user.is_superuser;
@@ -324,53 +303,11 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
                         <ExpandableRow
                           key={role.name}
                           expandableRowContent={
-                            <>
-                              {groups.map((group) => (
-                                <Flex
-                                  style={{ marginTop: '16px' }}
-                                  alignItems={{ default: 'alignItemsCenter' }}
-                                  key={group.name}
-                                  className={group.name}
-                                >
-                                  <FlexItem style={{ minWidth: '200px' }}>
-                                    {i18n._(group.label)}
-                                  </FlexItem>
-                                  <FlexItem grow={{ default: 'grow' }}>
-                                    <PermissionChipSelector
-                                      availablePermissions={group.object_permissions
-                                        .filter(
-                                          (perm) =>
-                                            !role.permissions.find(
-                                              (selected) => selected === perm,
-                                            ),
-                                        )
-                                        .map((value) =>
-                                          twoWayMapper(
-                                            value,
-                                            filteredPermissions,
-                                          ),
-                                        )
-                                        .sort()}
-                                      selectedPermissions={role.permissions
-                                        .filter((selected) =>
-                                          group.object_permissions.find(
-                                            (perm) => selected === perm,
-                                          ),
-                                        )
-                                        .map((value) =>
-                                          twoWayMapper(
-                                            value,
-                                            filteredPermissions,
-                                          ),
-                                        )}
-                                      menuAppendTo='inline'
-                                      multilingual={true}
-                                      isViewOnly={true}
-                                    />
-                                  </FlexItem>
-                                </Flex>
-                              ))}
-                            </>
+                            <PermissionCategories
+                              permissions={role.permissions}
+                              showCustom={true}
+                              showEmpty={false}
+                            />
                           }
                           data-cy={`RoleListTable-ExpandableRow-row-${role.name}`}
                           colSpan={6}

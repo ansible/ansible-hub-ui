@@ -3,7 +3,7 @@ import React from 'react';
 import { Flex, FlexItem, Label, Divider } from '@patternfly/react-core';
 import { RoleType, GroupType } from 'src/api';
 import { Tooltip } from 'src/components';
-import { Constants } from 'src/constants';
+import { useContext } from 'src/loaders/app-context';
 import { translateLockedRolesDescription } from 'src/utilities';
 
 interface Props {
@@ -21,47 +21,51 @@ const splitByDot = (perm: string) => {
   );
 };
 
-export const PreviewRoles = ({ group, selectedRoles }: Props) => (
-  <div className='hub-custom-wizard-layout'>
-    <p>
-      <Trans>
-        The following roles will be applied to group:{' '}
-        <strong>{group.name}</strong>
-      </Trans>
-    </p>
-    <Flex direction={{ default: 'column' }} className='hub-preview-roles'>
-      {selectedRoles.map((role) => (
-        <React.Fragment key={role.name}>
-          <FlexItem>
-            <strong>{role.name}</strong>{' '}
-            {role?.description &&
-              `- ${translateLockedRolesDescription(
-                role.name,
-                role.description,
-              )}`}
-            <Flex className='hub-permissions'>
-              {role.permissions.map((permission) => (
-                <FlexItem
-                  key={permission}
-                  className='hub-permission'
-                  data-cy={`HubPermission-${permission}`}
-                >
-                  <Tooltip
-                    content={
-                      Constants.HUMAN_PERMISSIONS[permission] || permission
-                    }
+export const PreviewRoles = ({ group, selectedRoles }: Props) => {
+  const { model_permissions } = useContext().user;
+
+  return (
+    <div className='hub-custom-wizard-layout'>
+      <p>
+        <Trans>
+          The following roles will be applied to group:{' '}
+          <strong>{group.name}</strong>
+        </Trans>
+      </p>
+      <Flex direction={{ default: 'column' }} className='hub-preview-roles'>
+        {selectedRoles.map((role) => (
+          <React.Fragment key={role.name}>
+            <FlexItem>
+              <strong>{role.name}</strong>{' '}
+              {role?.description &&
+                `- ${translateLockedRolesDescription(
+                  role.name,
+                  role.description,
+                )}`}
+              <Flex className='hub-permissions'>
+                {role.permissions.map((permission) => (
+                  <FlexItem
+                    key={permission}
+                    className='hub-permission'
+                    data-cy={`HubPermission-${permission}`}
                   >
-                    <Label>{splitByDot(permission)}</Label>
-                  </Tooltip>
-                </FlexItem>
-              ))}
-            </Flex>
-          </FlexItem>
-          <FlexItem>
-            <Divider />
-          </FlexItem>
-        </React.Fragment>
-      ))}
-    </Flex>
-  </div>
-);
+                    <Tooltip
+                      content={
+                        model_permissions[permission]?.name || permission
+                      }
+                    >
+                      <Label>{splitByDot(permission)}</Label>
+                    </Tooltip>
+                  </FlexItem>
+                ))}
+              </Flex>
+            </FlexItem>
+            <FlexItem>
+              <Divider />
+            </FlexItem>
+          </React.Fragment>
+        ))}
+      </Flex>
+    </div>
+  );
+};

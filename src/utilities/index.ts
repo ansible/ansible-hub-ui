@@ -9,7 +9,6 @@ export {
   alertErrorsWithoutFields,
 } from './map-error-messages';
 export { getRepoUrl, getContainersURL } from './get-repo-url';
-export { twoWayMapper } from './two-way-mapper';
 export {
   clearSetFieldsFromRequest,
   isFieldSet,

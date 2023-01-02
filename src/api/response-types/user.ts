@@ -1,25 +1,11 @@
-export class Permissions {
-  add_group: boolean;
-  add_namespace: boolean;
-  upload_to_namespace: boolean;
-  change_distribution: boolean;
-  change_namespace: boolean;
-  change_remote: boolean;
-  move_collection: boolean;
-  view_distribution: boolean;
-  view_group: boolean;
-  view_user: boolean;
-  delete_group: boolean;
-  delete_user: boolean;
-  change_group: boolean;
-  change_user: boolean;
-  add_user: boolean;
-  delete_namespace: boolean;
-  add_containerregistry: boolean;
-  change_containerregistry: boolean;
-  delete_containerregistry: boolean;
-  delete_collection: boolean;
-  delete_containerrepository: boolean;
+export class ModelPermissionsType {
+  [key: string]: {
+    global_description: string;
+    has_model_permission: boolean;
+    name: string;
+    object_description: string;
+    ui_category: string;
+  };
 }
 
 export class GroupType {
@@ -38,7 +24,7 @@ export class UserType {
   auth_provider?: [];
   date_joined?: string;
   password?: string;
-  model_permissions?: Permissions;
+  model_permissions?: ModelPermissionsType;
   is_superuser?: boolean;
   is_anonymous?: boolean;
 }
@@ -47,6 +33,6 @@ export class MeType {
   username: string;
   first_name?: string;
   last_name?: string;
-  model_permissions: Permissions;
+  model_permissions: ModelPermissionsType;
   groups: GroupType[];
 }
