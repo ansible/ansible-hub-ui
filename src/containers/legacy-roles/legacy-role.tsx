@@ -1,6 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './legacy-roles.scss';
+import { EmptyStateNoData } from 'src/components';
 
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 
@@ -132,6 +133,7 @@ class LegacyRoleVersion extends React.Component<
 
 interface RoleVersionsIProps {
   role_versions: LegacyRoleVersionDetailType[];
+  loading: boolean;
 }
 
 class LegacyRoleVersions extends React.Component<RoleMeta, RoleVersionsIProps> {
@@ -139,6 +141,7 @@ class LegacyRoleVersions extends React.Component<RoleMeta, RoleVersionsIProps> {
     super(props);
     this.state = {
       role_versions: [],
+      loading: true,
     };
   }
 
@@ -147,6 +150,7 @@ class LegacyRoleVersions extends React.Component<RoleMeta, RoleVersionsIProps> {
     LegacyRoleAPI.get(url).then((response) => {
       this.setState(() => ({
         role_versions: response.data.results,
+        loading: false,
       }));
     });
   }
@@ -154,6 +158,17 @@ class LegacyRoleVersions extends React.Component<RoleMeta, RoleVersionsIProps> {
   render() {
     return (
       <div id='versions-div'>
+        {!this.state.loading &&
+        this.state.role_versions &&
+        this.state.role_versions.length == 0 ? (
+          <EmptyStateNoData
+            title={t`No versions`}
+            description={t`The role is versionless and will always install from the head/main/master branch.`}
+          />
+        ) : (
+          ''
+        )}
+
         <DataList aria-label={t`List of versions`}>
           {this.state.role_versions.reverse().map((rversion) => (
             <DataListItem key={rversion.name} aria-labelledby='compact-item2'>
