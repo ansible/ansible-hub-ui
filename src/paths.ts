@@ -58,6 +58,10 @@ export function formatEEPath(path, data, params?) {
 }
 
 export enum Paths {
+  ansibleRemoteDetail = '/ansible/remotes/:name',
+  ansibleRemotes = '/ansible/remotes',
+  ansibleRepositories = '/ansible/repositories',
+  ansibleRepositoryDetail = '/ansible/repositories/:name',
   executionEnvironmentDetail = '/containers/:container',
   executionEnvironmentDetailWithNamespace = '/containers/:namespace/:container',
   executionEnvironmentDetailActivities = '/containers/:container/_content/activity',

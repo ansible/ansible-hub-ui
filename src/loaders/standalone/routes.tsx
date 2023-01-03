@@ -3,6 +3,10 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType } from 'src/components';
 import {
+  AnsibleRemoteDetail,
+  AnsibleRemoteList,
+  AnsibleRepositoryDetail,
+  AnsibleRepositoryList,
   CertificationDashboard,
   CollectionContent,
   CollectionDependencies,
@@ -223,6 +227,13 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
       },
       { component: RoleList, path: Paths.roleList },
       { component: RepositoryList, path: Paths.repositories },
+      { component: AnsibleRemoteDetail, path: Paths.ansibleRemoteDetail },
+      { component: AnsibleRemoteList, path: Paths.ansibleRemotes },
+      {
+        component: AnsibleRepositoryDetail,
+        path: Paths.ansibleRepositoryDetail,
+      },
+      { component: AnsibleRepositoryList, path: Paths.ansibleRepositories },
       { component: UserProfile, path: Paths.userProfileSettings },
       {
         component: UserCreate,

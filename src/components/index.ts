@@ -32,6 +32,7 @@ export { DeleteGroupModal } from './rbac/delete-group-modal';
 export { DeleteModal } from './delete-modal/delete-modal';
 export { DeleteUserModal } from './rbac/delete-user-modal';
 export { DeprecatedTag } from './tags/deprecated-tag';
+export { Details } from './shared/details';
 export { EmptyStateCustom } from './empty-state/empty-state-custom';
 export { EmptyStateFilter } from './empty-state/empty-state-filter';
 export { EmptyStateNoData } from './empty-state/empty-state-no-data';
