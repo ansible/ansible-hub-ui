@@ -168,7 +168,7 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             <Trans>
               To revoke a token or see all of your tokens, visit the{' '}
               <a
-                href='https://sso.redhat.com/auth/realms/redhat-external/account/applications'
+                href='https://sso.redhat.com/auth/realms/redhat-external/account'
                 target='_blank'
                 rel='noreferrer'
               >
