@@ -54,7 +54,7 @@ type Query<T> = (o: {
 type RenderTableRow<T> = (
   item: T,
   index: number,
-  { setState },
+  { addAlert, setState },
 ) => React.ReactNode;
 type RenderModals = ({ addAlert, state, setState, query }) => React.ReactNode;
 type SortHeaders = {
@@ -73,6 +73,7 @@ interface ListPageParams<T, ExtraState> {
   errorTitle: string;
   extraState?: ExtraState;
   filterConfig: FilterConfig;
+  headerActions?: any[];
   noDataDescription: string;
   noDataTitle: string;
   query: Query<T>;
@@ -99,6 +100,8 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
   extraState,
   // filters
   filterConfig,
+  // displayed after filters
+  headerActions,
   // EmptyStateNoData
   noDataDescription,
   noDataTitle,
@@ -216,9 +219,16 @@ export const ListPage = function <T, ExtraState = Record<string, never>>({
                               filterConfig={filterConfig}
                             />
                           </ToolbarItem>
+                          {headerActions?.length &&
+                            headerActions.map((action) => (
+                              <ToolbarItem>
+                                {action.button(null, actionContext)}
+                              </ToolbarItem>
+                            ))}
                         </ToolbarGroup>
                       </ToolbarContent>
                     </Toolbar>
+
                     <Pagination
                       params={params}
                       updateParams={updateParams}

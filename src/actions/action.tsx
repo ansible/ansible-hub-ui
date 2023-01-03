@@ -4,7 +4,7 @@ import { Button, DropdownItem } from '@patternfly/react-core';
 interface ActionParams {
   buttonVariant?: 'primary' | 'secondary';
   modal?: ({ addAlert, state, setState, query }) => React.ReactNode;
-  onClick: (item, { setState }) => void;
+  onClick: (item, actionContext) => void;
   title: string;
   visible?: (item) => boolean;
 }
@@ -16,18 +16,18 @@ export const Action = ({
   modal = null,
   visible = () => true,
 }: ActionParams) => ({
-  dropdownItem: (item, { setState }) =>
+  dropdownItem: (item, actionContext) =>
     visible(item) ? (
-      <DropdownItem key={title} onClick={() => onClick(item, { setState })}>
+      <DropdownItem key={title} onClick={() => onClick(item, actionContext)}>
         {title}
       </DropdownItem>
     ) : null,
-  button: (item, { setState }) =>
+  button: (item, actionContext) =>
     visible(item) ? (
       <Button
         variant={buttonVariant}
         key={title}
-        onClick={() => onClick(item, { setState })}
+        onClick={() => onClick(item, actionContext)}
       >
         {title}
       </Button>

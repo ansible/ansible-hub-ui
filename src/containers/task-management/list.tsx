@@ -75,12 +75,12 @@ export const TaskList = ListPage<TaskType, IState>({
   query: ({ params }) => TaskManagementAPI.list(params),
   renderModals: ({ addAlert, setState, state, query }) =>
     taskStopAction.modal({ addAlert, setState, state, query }),
-  renderTableRow(item: TaskType, index: number, { setState }) {
+  renderTableRow(item: TaskType, index: number, actionContext) {
     const { name, state, pulp_created, started_at, finished_at, pulp_href } =
       item;
     const taskId = parsePulpIDFromURL(pulp_href);
 
-    const buttons = [taskStopAction.button(item, { setState })];
+    const buttons = [taskStopAction.button(item, actionContext)];
 
     return (
       <tr key={index}>
