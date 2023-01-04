@@ -118,8 +118,13 @@ module.exports = (inputConfigs) => {
           rbac,
           ...defaultServices,
         },
+        registry: [
+          ({ app }) =>
+            app.get('/api/featureflags/v0', (_req, res) => {
+              res.send({ toggles: [] });
+            }),
+        ],
       }),
-
     // insights deployments from master
     ...(!isStandalone &&
       cloudBeta && {
