@@ -59,16 +59,18 @@ export class CollectionInfo extends React.Component<IProps> {
             ))}
           </GridItem>
 
-          <GridItem>
-            <Split hasGutter={true}>
-              <SplitItem className='install-title'>{t`License`}</SplitItem>
-              <SplitItem isFilled>
-                {latest_version.metadata.license
-                  ? latest_version.metadata.license.join(', ')
-                  : ''}
-              </SplitItem>
-            </Split>
-          </GridItem>
+          {latest_version?.metadata?.license?.length > 0 && (
+            <GridItem>
+              <Split hasGutter={true}>
+                <SplitItem className='install-title'>{t`License`}</SplitItem>
+                <SplitItem isFilled>
+                  {latest_version.metadata.license
+                    ? latest_version.metadata.license.join(', ')
+                    : ''}
+                </SplitItem>
+              </Split>
+            </GridItem>
+          )}
           <GridItem>
             <Split hasGutter={true}>
               <SplitItem className='install-title'>{t`Installation`}</SplitItem>
