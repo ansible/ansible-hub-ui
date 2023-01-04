@@ -5,6 +5,7 @@
     "author": "Red Hat, Inc.",
     "private": true,
     "dependencies": {
+        "@ansible/ansible-ui-framework": "^2.4.4",
         "@babel/runtime": "^7.21.0",
         "@lingui/react": "^3.17.2",
         "@patternfly/patternfly": "^4.224.2",
