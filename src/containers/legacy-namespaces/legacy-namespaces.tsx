@@ -53,34 +53,14 @@ class LegacyNamespaces extends React.Component<
   }
 
   componentDidMount() {
-    const p: any = {};
     const thisQS = window.location.search;
     const urlParams = new URLSearchParams(thisQS);
-    p.page = parseInt(urlParams.get('page')) || 1;
-    p.page_size = parseInt(urlParams.get('page_size')) || 10;
-    p.order_by = urlParams.get('order_by') || 'name';
-    p.keywords = urlParams.get('keywords') || null;
-
-    this.updateParams(p);
-    /*LegacyNamespaceAPI.list({
-      page: page,
-      page_size: page_size,
-      order_by: order_by,
-      keywords: keywords,
-    }).then((response) => {
-      this.setState(() => ({
-        mounted: true,
-        loading: false,
-        params: {
-          page: page,
-          page_size: page_size,
-          order_by: order_by,
-          keywords: keywords,
-        },
-        count: response.data.count,
-        legacynamespaces: response.data.results,
-      }));
-    });*/
+    this.updateParams({
+      page: parseInt(urlParams.get('page')) || 1,
+      page_size: parseInt(urlParams.get('page_size')) || 10,
+      order_by: urlParams.get('order_by') || 'name',
+      keywords: urlParams.get('keywords') || null,
+    });
   }
 
   updateParams = (p) => {

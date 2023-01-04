@@ -54,16 +54,16 @@ class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
   }
 
   componentDidMount() {
-    const p: any = {};
     const thisQS = window.location.search;
     const urlParams = new URLSearchParams(thisQS);
-    p.page = parseInt(urlParams.get('page')) || 1;
-    p.page_num = parseInt(urlParams.get('page')) || 1;
-    p.page_size = parseInt(urlParams.get('page_size')) || 10;
-    p.order_by = urlParams.get('order_by') || 'created';
-    p.keywords = urlParams.get('keywords');
-    p.tags = urlParams.get('tags');
-    this.updateParams(p);
+    this.updateParams({
+      page: parseInt(urlParams.get('page')) || 1,
+      page_num: parseInt(urlParams.get('page')) || 1,
+      page_size: parseInt(urlParams.get('page_size')) || 10,
+      order_by: urlParams.get('order_by') || 'created',
+      keywords: urlParams.get('keywords'),
+      tags: urlParams.get('tags'),
+    });
   }
 
   updateParams = (p) => {
