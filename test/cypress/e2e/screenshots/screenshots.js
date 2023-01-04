@@ -31,14 +31,14 @@ describe('screenshots', () => {
     screenshot('/repo/published');
     screenshot('/namespaces');
     // TODO - problems - repositories are showing minutes, so text may quickly change and generate diff
-    screenshot('/repositories');
+    //screenshot('/repositories');
     screenshot('/token');
     screenshot('/approval-dashboard');
     screenshot('/containers');
     screenshot('/registries');
     // screenshot('/tasks'); // TODO fake empty API response
     // screenshot('/signature-keys'); // TODO fake empty API response
-    screenshot('/users');
+    //screenshot('/users');
     screenshot('/group-list');
 
     // screenshot('/roles');  // TODO fake empty API response
