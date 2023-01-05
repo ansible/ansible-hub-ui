@@ -1,7 +1,6 @@
-// TODO - canSign can be renamed to canSignNS
 import { FeatureFlagsType } from 'src/api';
 
-export const canSign = (
+export const canSignNamespace = (
   { featureFlags }: { featureFlags: FeatureFlagsType },
   namespace,
 ) => {

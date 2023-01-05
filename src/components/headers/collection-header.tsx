@@ -55,7 +55,7 @@ import {
 import { Paths, formatPath } from 'src/paths';
 import {
   waitForTask,
-  canSign as canSignNS,
+  canSignNamespace,
   parsePulpIDFromURL,
 } from 'src/utilities';
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -208,7 +208,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
       return <Navigate to={redirect} />;
     }
 
-    const canSign = canSignNS(this.context, namespace);
+    const canSign = canSignNamespace(this.context, namespace);
 
     const { hasPermission } = this.context;
 

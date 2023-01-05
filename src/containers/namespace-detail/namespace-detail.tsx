@@ -57,7 +57,7 @@ import {
   filterIsSet,
   errorMessage,
   waitForTask,
-  canSign as canSignNS,
+  canSignNamespace,
   DeleteCollectionUtils,
 } from 'src/utilities';
 
@@ -724,7 +724,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           itemCount: val[0].data.meta.count,
           namespace: val[1].data,
           showControls: !!val[2],
-          canSign: canSignNS(this.context, val[2]?.data),
+          canSign: canSignNamespace(this.context, val[2]?.data),
           group: this.filterGroup(
             this.state.params['group'],
             val[1].data['groups'],
