@@ -1,8 +1,21 @@
 const uiPrefix = Cypress.env('uiPrefix');
+const insightsLogin = Cypress.env('insightsLogin');
+const namespaceName = Cypress.env('namespaceName');
 
 describe('Edit a namespace', () => {
+
+  let goToNamespaces = () => {
+    if (insightsLogin)
+    {
+      cy.visit(`${uiPrefix}${namespaceName}`);
+    }else
+    {
+      cy.menuGo('Collections > Namespaces');
+    }
+  }
+
   let kebabToggle = () => {
-    return cy.get('button[id^=pf-dropdown-toggle-id-] > svg').parent().click();
+    cy.get('[data-cy="ns-kebab-toggle"] button[aria-label="Actions"]').click();
   };
 
   let saveButton = () => {
@@ -45,8 +58,9 @@ describe('Edit a namespace', () => {
   beforeEach(() => {
     cy.login();
     cy.galaxykit('-i namespace create', 'testns1');
-    cy.menuGo('Collections > Namespaces');
+    goToNamespaces();
     cy.get(`a[href*="${uiPrefix}repo/published/testns1"]`).click();
+    cy.contains('No collections yet');
     kebabToggle();
     cy.contains('Edit namespace').click();
   });
@@ -69,12 +83,14 @@ describe('Edit a namespace', () => {
     );
   });
 
+
   it('saves a new company name', () => {
     cy.get('#company').clear().type('Company name');
     saveButton().click();
     cy.url().should('match', new RegExp(`${uiPrefix}repo/published/testns1`));
     cy.get('.pf-c-title').should('contain', 'Company name');
   });
+
 
   it('tests the Logo URL field', () => {
     const url = 'https://example.com/';

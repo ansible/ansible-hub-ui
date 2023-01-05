@@ -1,15 +1,33 @@
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
+const insightsLogin = Cypress.env('insightsLogin');
+const namespaceName = Cypress.env('namespaceName');
+
+function goToNamespaces()
+{
+  if (insightsLogin)
+  {
+    cy.visit(`${uiPrefix}${namespaceName}`);
+  }else
+  {
+    cy.menuGo('Collections > Namespaces');
+  }
+}
 
 describe('Delete a namespace', () => {
+
+  before(() => {
+    cy.deleteNamespacesAndCollections();
+  });
+
   beforeEach(() => {
     cy.login();
-    cy.deleteNamespacesAndCollections();
   });
 
   it('deletes a namespace', () => {
     cy.galaxykit('-i namespace create', 'testns1');
-    cy.menuGo('Collections > Namespaces');
+    goToNamespaces();
+
     cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as(
       'reload',
     );
@@ -19,11 +37,9 @@ describe('Delete a namespace', () => {
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.wait('@reload');
-    cy.get('h4[class=pf-c-alert__title]').should(
-      'have.text',
-      'Success alert:Namespace "testns1" has been successfully deleted.',
-    );
+    cy.contains('Namespace "testns1" has been successfully deleted.');
   });
+
 
   it('cannot delete a non-empty namespace', () => {
     //create namespace
@@ -31,7 +47,7 @@ describe('Delete a namespace', () => {
       'reload',
     );
     cy.galaxykit('-i namespace create', 'ansible');
-    cy.menuGo('Collections > Namespaces');
+    goToNamespaces();
     cy.wait('@reload');
 
     cy.get(`a[href*="${uiPrefix}repo/published/ansible"]`).click();
@@ -49,7 +65,7 @@ describe('Delete a namespace', () => {
       'GET',
       `${apiPrefix}_ui/v1/namespaces/?sort=name&offset=0&limit=20`,
     ).as('namespaces');
-    cy.menuGo('Collections > Namespaces');
+    goToNamespaces();
     cy.wait('@namespaces');
     cy.contains('ansible').parent().contains('View collections').click();
     cy.get('[data-cy=ns-kebab-toggle]').click();
