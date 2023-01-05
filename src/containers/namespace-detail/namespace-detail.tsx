@@ -436,6 +436,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   renderCollectionControls={(collection) =>
                     this.renderCollectionControls(collection)
                   }
+                  displaySignatures={
+                    this.context.featureFlags.display_signatures
+                  }
                 />
               </section>
             )

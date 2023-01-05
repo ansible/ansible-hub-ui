@@ -478,10 +478,12 @@ export class CollectionHeader extends React.Component<IProps, IState> {
                   </Trans>
                 </span>
               ) : null}
-              <SignatureBadge
-                isCompact
-                signState={collection.latest_version.sign_state}
-              />
+              {display_signatures ? (
+                <SignatureBadge
+                  isCompact
+                  signState={collection.latest_version.sign_state}
+                />
+              ) : null}
             </div>
           }
           pageControls={

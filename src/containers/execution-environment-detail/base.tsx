@@ -223,7 +223,7 @@ export function withContainerRepo(WrappedComponent) {
             tab={this.getTab()}
             groupId={groupId}
             container={this.state.repo}
-            displaySignatures={this.context.featureFlags.display_signatures}
+            displaySignatures={this.context.featureFlags.container_signing}
             pageControls={
               <>
                 {showEdit ? (
