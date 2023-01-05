@@ -5,6 +5,9 @@ export class FeatureFlagsType {
   // keycloak login screen
   external_authentication: boolean;
 
+  // community version
+  legacy_roles: boolean;
+
   // collection signing
   can_create_signatures: boolean;
   can_upload_signatures: boolean;
