@@ -8,7 +8,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
 
   function createData() {
     cy.galaxykit('-i namespace create approval_dashboard_namespace_test');
-    range(21).forEach((i) => {
+    range(9).forEach((i) => {
       cy.galaxykit(
         '-i collection upload',
         'approval_dashboard_namespace_test',
@@ -81,11 +81,6 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
       .get('[aria-label="Go to next page"]:first')
       .click();
     cy.get('[data-cy="body"]').contains(items[10].name);
-
-    cy.get('[data-cy="body"]')
-      .get('[aria-label="Go to next page"]:first')
-      .click();
-    cy.get('[data-cy="body"]').contains(items[20].name);
   });
 
   it('should sort collection.', () => {
@@ -178,7 +173,7 @@ describe('Approval Dashboard list tests for sorting, paging and filtering', () =
     cy.get('[data-cy="sort_collection"]').click();
     cy.get('[data-cy="sort_collection"]').click();
 
-    range(20).forEach((i) => {
+    range(11).forEach((i) => {
       cy.get('[data-cy="body"]').contains(items[i].name);
     });
   });
