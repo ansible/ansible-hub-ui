@@ -3,19 +3,15 @@ const uiPrefix = Cypress.env('uiPrefix');
 const insightsLogin = Cypress.env('insightsLogin');
 const namespaceName = Cypress.env('namespaceName');
 
-function goToNamespaces()
-{
-  if (insightsLogin)
-  {
+function goToNamespaces() {
+  if (insightsLogin) {
     cy.visit(`${uiPrefix}${namespaceName}`);
-  }else
-  {
+  } else {
     cy.menuGo('Collections > Namespaces');
   }
 }
 
 describe('Delete a namespace', () => {
-
   before(() => {
     cy.deleteNamespacesAndCollections();
   });
@@ -39,7 +35,6 @@ describe('Delete a namespace', () => {
     cy.wait('@reload');
     cy.contains('Namespace "testns1" has been successfully deleted.');
   });
-
 
   it('cannot delete a non-empty namespace', () => {
     //create namespace

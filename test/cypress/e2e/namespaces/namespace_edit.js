@@ -3,16 +3,13 @@ const insightsLogin = Cypress.env('insightsLogin');
 const namespaceName = Cypress.env('namespaceName');
 
 describe('Edit a namespace', () => {
-
   let goToNamespaces = () => {
-    if (insightsLogin)
-    {
+    if (insightsLogin) {
       cy.visit(`${uiPrefix}${namespaceName}`);
-    }else
-    {
+    } else {
       cy.menuGo('Collections > Namespaces');
     }
-  }
+  };
 
   let kebabToggle = () => {
     cy.get('[data-cy="ns-kebab-toggle"] button[aria-label="Actions"]').click();
@@ -83,14 +80,12 @@ describe('Edit a namespace', () => {
     );
   });
 
-
   it('saves a new company name', () => {
     cy.get('#company').clear().type('Company name');
     saveButton().click();
     cy.url().should('match', new RegExp(`${uiPrefix}repo/published/testns1`));
     cy.get('.pf-c-title').should('contain', 'Company name');
   });
-
 
   it('tests the Logo URL field', () => {
     const url = 'https://example.com/';
