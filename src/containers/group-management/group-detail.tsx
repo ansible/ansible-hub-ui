@@ -487,10 +487,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
         'email',
         'role__icontains',
       ]);
-    let isUserMgmtDisabled = false;
-    if (featureFlags) {
-      isUserMgmtDisabled = featureFlags.external_authentication;
-    }
+    const isUserMgmtDisabled = featureFlags.external_authentication;
 
     if (noData) {
       return (
@@ -659,7 +656,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
   private renderTableRow(user: UserType, index: number) {
     const currentUser = this.context.user;
     const { featureFlags, hasPermission } = this.context;
-    const isUserMgmtDisabled = featureFlags?.external_authentication;
+    const isUserMgmtDisabled = featureFlags.external_authentication;
     const dropdownItems = [
       !!currentUser &&
         hasPermission('galaxy.change_group') &&

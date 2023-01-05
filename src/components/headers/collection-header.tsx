@@ -187,7 +187,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const latestVersion = collection.latest_version.created_at;
 
     const { display_signatures, can_upload_signatures } =
-      this.context?.featureFlags || {};
+      this.context.featureFlags;
 
     const signedString = (v) => {
       if (display_signatures && 'sign_state' in v) {

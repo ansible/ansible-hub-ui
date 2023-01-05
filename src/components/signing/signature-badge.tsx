@@ -16,7 +16,7 @@ export const SignatureBadge: FC<Props> = ({
   isCompact = false,
   ...props
 }) => {
-  const { display_signatures } = useContext()?.featureFlags || {};
+  const { display_signatures } = useContext().featureFlags;
 
   if (!display_signatures) {
     return null;

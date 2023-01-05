@@ -779,7 +779,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   private renderPageControls() {
     const { canSign, collections } = this.state;
-    const { can_upload_signatures } = this.context?.featureFlags || {};
+    const { can_upload_signatures } = this.context.featureFlags;
     const { hasPermission } = this.context;
 
     const dropdownItems = [

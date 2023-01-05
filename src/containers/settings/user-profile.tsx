@@ -56,10 +56,7 @@ class UserProfile extends React.Component<RouteProps, IState> {
 
     const { user, errorMessages, inEditMode, alerts } = this.state;
     const { featureFlags } = this.context;
-    let isUserMgmtDisabled = false;
-    if (featureFlags) {
-      isUserMgmtDisabled = featureFlags.external_authentication;
-    }
+    const isUserMgmtDisabled = featureFlags.external_authentication;
 
     if (!user) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
