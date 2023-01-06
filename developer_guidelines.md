@@ -82,8 +82,8 @@ Example:
 
 ```
 // Static route
-<Redirect push to={Paths.search}/>
+<Link to={Paths.search} />
 
 // Dynamic route
-<Redirect push to={formatPath(Paths.editNamespace, {namespace: NSname});}/>
+<Link to={formatPath(Paths.editNamespace, { namespace: "NSname" })} />
 ```
