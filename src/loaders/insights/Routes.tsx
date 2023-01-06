@@ -1,5 +1,4 @@
 import React, { lazy, Suspense } from 'react';
-import PropTypes from 'prop-types';
 import { Route, Routes, Redirect } from 'react-router-dom';
 import { LoadingPageWithHeader } from 'src/components';
 import { Paths } from 'src/paths';
@@ -142,12 +141,4 @@ export const InsightsRoutes = () => {
       </Routes>
     </Suspense>
   );
-};
-
-InsightsRoutes.propTypes = {
-  childProps: PropTypes.shape({
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }),
-  }),
 };
