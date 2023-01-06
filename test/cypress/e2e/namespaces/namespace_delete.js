@@ -48,8 +48,7 @@ describe('Delete a namespace', () => {
     cy.get(`a[href*="${uiPrefix}repo/published/ansible"]`).click();
 
     //upload a collection
-
-    cy.galaxykit('-i collection upload ansible network');
+    cy.createApprovedCollection('ansible', 'network');
 
     // wait for imports to finish successfully
 
