@@ -73,8 +73,8 @@ class LegacyNamespaceRoles extends React.Component<
     const namespace = this.state.namespace;
     const thisQS = window.location.search;
     const urlParams = new URLSearchParams(thisQS);
-    const page = parseInt(urlParams.get('page')) || 1;
-    const page_size = parseInt(urlParams.get('page_size')) || 10;
+    const page = parseInt(urlParams.get('page'), 10) || 1;
+    const page_size = parseInt(urlParams.get('page_size'), 10) || 10;
     const order_by = urlParams.get('order_by') || 'created';
 
     LegacyRoleAPI.list({

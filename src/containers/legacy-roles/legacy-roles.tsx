@@ -56,57 +56,39 @@ class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
   componentDidMount() {
     const thisQS = window.location.search;
     const urlParams = new URLSearchParams(thisQS);
-    const page = parseInt(urlParams.get('page')) || 1;
-    const page_num = parseInt(urlParams.get('page')) || 1;
-    const page_size = parseInt(urlParams.get('page_size')) || 10;
-    const order_by = urlParams.get('order_by') || 'created';
-    const keywords = urlParams.get('keywords');
-    const tags = urlParams.get('tags');
-
-    LegacyRoleAPI.list({
-      page: page,
-      page_size: page_size,
-      order_by: order_by,
-      tags: tags,
-      keywords: keywords,
-    }).then((response) => {
-      this.setState(() => ({
-        mounted: true,
-        loading: false,
-        params: {
-          page: page_num,
-          page_size: page_size,
-          order_by: order_by,
-          keywords: keywords,
-        },
-        count: response.data.count,
-        legacyroles: response.data.results,
-      }));
+    this.updateParams({
+      page: parseInt(urlParams.get('page'), 10) || 1,
+      page_size: parseInt(urlParams.get('page_size'), 10) || 10,
+      order_by: urlParams.get('order_by') || 'created',
+      keywords: urlParams.get('keywords'),
+      tags: urlParams.get('tags'),
     });
   }
 
   updateParams = (p) => {
     const { page, page_size, order_by, keywords, tags } = p;
-
-    LegacyRoleAPI.list({
-      page: page,
-      page_size: page_size,
-      order_by: order_by,
-      tags: tags,
-      keywords: keywords,
-    }).then((response) => {
-      this.setState(() => ({
-        mounted: true,
-        params: {
-          page: page,
-          page_size: page_size,
-          order_by: order_by,
-          keywords: keywords,
-          tags: tags,
-        },
-        count: response.data.count,
-        legacyroles: response.data.results,
-      }));
+    this.setState({ loading: true }, () => {
+      LegacyRoleAPI.list({
+        page: page,
+        page_size: page_size,
+        order_by: order_by,
+        tags: tags,
+        keywords: keywords,
+      }).then((response) => {
+        this.setState(() => ({
+          mounted: true,
+          loading: false,
+          params: {
+            page: page,
+            page_size: page_size,
+            order_by: order_by,
+            keywords: keywords,
+            tags: tags,
+          },
+          count: response.data.count,
+          legacyroles: response.data.results,
+        }));
+      });
     });
   };
 

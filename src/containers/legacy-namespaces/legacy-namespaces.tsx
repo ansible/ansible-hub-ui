@@ -55,52 +55,36 @@ class LegacyNamespaces extends React.Component<
   componentDidMount() {
     const thisQS = window.location.search;
     const urlParams = new URLSearchParams(thisQS);
-    const page = parseInt(urlParams.get('page')) || 1;
-    const page_size = parseInt(urlParams.get('page_size')) || 10;
-    const order_by = urlParams.get('order_by') || 'name';
-    const keywords = urlParams.get('keywords') || null;
-
-    LegacyNamespaceAPI.list({
-      page: page,
-      page_size: page_size,
-      order_by: order_by,
-      keywords: keywords,
-    }).then((response) => {
-      this.setState(() => ({
-        mounted: true,
-        loading: false,
-        params: {
-          page: page,
-          page_size: page_size,
-          order_by: order_by,
-          keywords: keywords,
-        },
-        count: response.data.count,
-        legacynamespaces: response.data.results,
-      }));
+    this.updateParams({
+      page: parseInt(urlParams.get('page'), 10) || 1,
+      page_size: parseInt(urlParams.get('page_size'), 10) || 10,
+      order_by: urlParams.get('order_by') || 'name',
+      keywords: urlParams.get('keywords') || null,
     });
   }
 
   updateParams = (p) => {
     const { page, page_size, order_by, keywords } = p;
-    LegacyNamespaceAPI.list({
-      page: page,
-      page_size: page_size,
-      order_by: order_by,
-      keywords: keywords,
-    }).then((response) => {
-      this.setState(() => ({
-        mounted: true,
-        loading: false,
-        params: {
-          page: page,
-          page_size: page_size,
-          order_by: order_by,
-          keywords: keywords,
-        },
-        count: response.data.count,
-        legacynamespaces: response.data.results,
-      }));
+    this.setState({ loading: true }, () => {
+      LegacyNamespaceAPI.list({
+        page: page,
+        page_size: page_size,
+        order_by: order_by,
+        keywords: keywords,
+      }).then((response) => {
+        this.setState(() => ({
+          mounted: true,
+          loading: false,
+          params: {
+            page: page,
+            page_size: page_size,
+            order_by: order_by,
+            keywords: keywords,
+          },
+          count: response.data.count,
+          legacynamespaces: response.data.results,
+        }));
+      });
     });
   };
 
