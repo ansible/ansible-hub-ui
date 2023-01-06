@@ -1,12 +1,12 @@
 const uiPrefix = Cypress.env('uiPrefix');
+const disableRepoSwitch = Cypress.env('disableRepoSwitch');
 
 describe('Namespace detail screen', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
-
     cy.galaxykit('-i namespace create', 'namespace_detail_test');
-    cy.galaxykit('-i collection upload namespace_detail_test collection1');
-    cy.galaxykit('-i collection upload namespace_detail_test collection2');
+    cy.createApprovedCollection('namespace_detail_test', 'collection1');
+    cy.createApprovedCollection('namespace_detail_test', 'collection2');
   });
 
   after(() => {
@@ -77,28 +77,30 @@ describe('Namespace detail screen', () => {
     // The test for success are impmeneted in the collection_upload file
   });
 
-  it('should filter by repositories', () => {
-    const namespace = 'coolestnamespace';
-    cy.galaxykit('-i namespace create', namespace);
-    cy.visit(`${uiPrefix}repo/published/${namespace}`);
+  if (!disableRepoSwitch) {
+    it('should filter by repositories', () => {
+      const namespace = 'coolestnamespace';
+      cy.galaxykit('-i namespace create', namespace);
+      cy.visit(`${uiPrefix}repo/published/${namespace}`);
 
-    cy.get('.nav-select').contains('Published').click();
-    cy.contains('Red Hat Certified').click();
+      cy.get('.nav-select').contains('Published').click();
+      cy.contains('Red Hat Certified').click();
 
-    cy.get('.nav-select').contains('Red Hat Certified');
-    cy.url().should('include', `/repo/rh-certified/${namespace}`);
+      cy.get('.nav-select').contains('Red Hat Certified');
+      cy.url().should('include', `/repo/rh-certified/${namespace}`);
 
-    cy.visit(`${uiPrefix}repo/community/${namespace}`);
-    cy.get('.nav-select').contains('Community');
-  });
+      cy.visit(`${uiPrefix}repo/community/${namespace}`);
+      cy.get('.nav-select').contains('Community');
+    });
 
-  it('repo selector should be disabled in collection detail ', () => {
-    const namespace = 'coolestnamespace';
-    const collection = 'coolestcollection';
-    cy.galaxykit('-i namespace create', namespace);
-    cy.galaxykit('collection upload', namespace, collection);
+    it('repo selector should be disabled in collection detail ', () => {
+      const namespace = 'coolestnamespace';
+      const collection = 'coolestcollection';
+      cy.galaxykit('-i namespace create', namespace);
+      cy.createApprovedCollection(namespace, collection);
 
-    cy.visit(`${uiPrefix}repo/published/${namespace}/${collection}`);
-    cy.get('.nav-select').contains('Published').should('be.disabled');
-  });
+      cy.visit(`${uiPrefix}repo/published/${namespace}/${collection}`);
+      cy.get('.nav-select').contains('Published').should('be.disabled');
+    });
+  }
 });

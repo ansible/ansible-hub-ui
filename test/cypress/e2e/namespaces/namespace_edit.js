@@ -2,7 +2,7 @@ const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Edit a namespace', () => {
   let kebabToggle = () => {
-    return cy.get('button[id^=pf-dropdown-toggle-id-] > svg').parent().click();
+    cy.get('[data-cy="ns-kebab-toggle"] button[aria-label="Actions"]').click();
   };
 
   let saveButton = () => {
@@ -45,8 +45,9 @@ describe('Edit a namespace', () => {
   beforeEach(() => {
     cy.login();
     cy.galaxykit('-i namespace create', 'testns1');
-    cy.menuGo('Collections > Namespaces');
+    cy.goToNamespaces();
     cy.get(`a[href*="${uiPrefix}repo/published/testns1"]`).click();
+    cy.contains('No collections yet');
     kebabToggle();
     cy.contains('Edit namespace').click();
   });
