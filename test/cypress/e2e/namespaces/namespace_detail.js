@@ -97,7 +97,7 @@ describe('Namespace detail screen', () => {
       const namespace = 'coolestnamespace';
       const collection = 'coolestcollection';
       cy.galaxykit('-i namespace create', namespace);
-      cy.galaxykit('collection upload', namespace, collection);
+      cy.createApprovedCollection(namespace, collection);
 
       cy.visit(`${uiPrefix}repo/published/${namespace}/${collection}`);
       cy.get('.nav-select').contains('Published').should('be.disabled');
