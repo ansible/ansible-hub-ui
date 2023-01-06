@@ -1,19 +1,24 @@
-import { Route, Routes, Redirect } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
-import { Paths } from 'src/paths';
+import { Route, Routes, Redirect } from 'react-router-dom';
 import { LoadingPageWithHeader } from 'src/components';
+import { Paths } from 'src/paths';
 
-const EditNamespace = lazy(
-  () => import('src/containers/edit-namespace/edit-namespace'),
-);
-
-const CollectionDetail = lazy(
-  () => import('src/containers/collection-detail/collection-detail'),
+const CertificationDashboard = lazy(
+  () =>
+    import('src/containers/certification-dashboard/certification-dashboard'),
 );
 
 const CollectionContent = lazy(
   () => import('src/containers/collection-detail/collection-content'),
+);
+
+const CollectionDependencies = lazy(
+  () => import('src/containers/collection-detail/collection-dependencies'),
+);
+
+const CollectionDetail = lazy(
+  () => import('src/containers/collection-detail/collection-detail'),
 );
 
 const CollectionDocs = lazy(
@@ -24,52 +29,43 @@ const CollectionImportLog = lazy(
   () => import('src/containers/collection-detail/collection-import-log'),
 );
 
-const CollectionDependencies = lazy(
-  () => import('src/containers/collection-detail/collection-dependencies'),
+const EditNamespace = lazy(
+  () => import('src/containers/edit-namespace/edit-namespace'),
 );
 
-const NotFound = lazy(() => import('src/containers/not-found/not-found'));
+const MyImports = lazy(() => import('src/containers/my-imports/my-imports'));
 
 const MyNamespaces = lazy(
   () => import('src/containers/namespace-list/my-namespaces'),
 );
 
-const ManageNamespace = lazy(
+const NamespaceDetail = lazy(
   () => import('src/containers/namespace-detail/namespace-detail'),
 );
 
-const PartnerDetail = lazy(
-  () => import('src/containers/namespace-detail/namespace-detail'),
-);
+const NotFound = lazy(() => import('src/containers/not-found/not-found'));
 
 const Partners = lazy(() => import('src/containers/namespace-list/partners'));
 
-const MyImports = lazy(() => import('src/containers/my-imports/my-imports'));
+const RepositoryList = lazy(
+  () => import('src/containers/repositories/repository-list'),
+);
 
 const Search = lazy(() => import('src/containers/search/search'));
 
-const TokenPage = lazy(() => import('src/containers/token/token-insights'));
-
-const TaskListView = lazy(
-  () => import('src/containers/task-management/task-list-view'),
+const SignatureKeysList = lazy(
+  () => import('src/containers/signature-keys/list'),
 );
 
 const TaskDetail = lazy(
   () => import('src/containers/task-management/task_detail'),
 );
 
-const CertificationDashboard = lazy(
-  () =>
-    import('src/containers/certification-dashboard/certification-dashboard'),
+const TaskListView = lazy(
+  () => import('src/containers/task-management/task-list-view'),
 );
 
-const Repository = lazy(
-  () => import('src/containers/repositories/repository-list'),
-);
-
-const SignatureKeysList = lazy(
-  () => import('src/containers/signature-keys/list'),
-);
+const TokenPage = lazy(() => import('src/containers/token/token-insights'));
 
 /**
  * the Routes component changes routes depending on the path.
@@ -83,7 +79,7 @@ export const InsightsRoutes = () => {
   return (
     <Suspense fallback={<LoadingPageWithHeader />}>
       <Routes>
-        <Route path={Paths.repositories} component={Repository} />
+        <Route path={Paths.repositories} component={RepositoryList} />
         <Route
           path={Paths.approvalDashboard}
           component={CertificationDashboard}
@@ -92,8 +88,8 @@ export const InsightsRoutes = () => {
         <Route path={Paths.token} component={TokenPage} />
         <Route path={Paths[NAMESPACE_TERM]} component={Partners} />
         <Route path={Paths.editNamespace} component={EditNamespace} />
-        <Route path={Paths.myCollections} component={ManageNamespace} />
-        <Route path={Paths.myCollectionsByRepo} component={ManageNamespace} />
+        <Route path={Paths.myCollections} component={NamespaceDetail} />
+        <Route path={Paths.myCollectionsByRepo} component={NamespaceDetail} />
         <Route path={Paths.myNamespaces} component={MyNamespaces} />
         <Route path={Paths.signatureKeys} component={SignatureKeysList} />
         <Route path={Paths.taskList} component={TaskListView} />
@@ -123,7 +119,7 @@ export const InsightsRoutes = () => {
           component={CollectionDependencies}
         />
         <Route path={Paths.collectionByRepo} component={CollectionDetail} />
-        <Route path={Paths.namespaceByRepo} component={PartnerDetail} />
+        <Route path={Paths.namespaceByRepo} component={NamespaceDetail} />
         <Route path={Paths.searchByRepo} component={Search} />
         <Route path={Paths.collectionDocsPage} component={CollectionDocs} />
         <Route path={Paths.collectionDocsIndex} component={CollectionDocs} />
@@ -138,7 +134,7 @@ export const InsightsRoutes = () => {
         />
         <Route path={Paths.myImports} component={MyImports} />
         <Route path={Paths.collection} component={CollectionDetail} />
-        <Route path={Paths.namespace} component={PartnerDetail} />
+        <Route path={Paths.namespace} component={NamespaceDetail} />
         <Route path={Paths.search} component={Search} />
         <Route>
           <Redirect push to={Paths.notFound} />
