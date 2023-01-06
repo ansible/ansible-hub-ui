@@ -19,14 +19,14 @@ describe('A namespace form', () => {
 
   before(() => {
     cy.deleteNamespacesAndCollections();
-  })
+  });
 
   beforeEach(() => {
     cy.login();
     createNamespace();
     cy.goToNamespaces();
     cy.contains('button', 'Create').click();
-    cy.contains("Create a new namespace");
+    cy.contains('Create a new namespace');
   });
 
   it('should give message if input has no characters', () => {
