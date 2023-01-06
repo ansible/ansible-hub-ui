@@ -1,15 +1,5 @@
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
-const insightsLogin = Cypress.env('insightsLogin');
-const namespaceName = Cypress.env('namespaceName');
-
-function goToNamespaces() {
-  if (insightsLogin) {
-    cy.visit(`${uiPrefix}${namespaceName}`);
-  } else {
-    cy.menuGo('Collections > Namespaces');
-  }
-}
 
 describe('Delete a namespace', () => {
   before(() => {
@@ -22,7 +12,7 @@ describe('Delete a namespace', () => {
 
   it('deletes a namespace', () => {
     cy.galaxykit('-i namespace create', 'testns1');
-    goToNamespaces();
+    cy.goToNamespaces();
 
     cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/?sort=name*`).as(
       'reload',
@@ -42,7 +32,7 @@ describe('Delete a namespace', () => {
       'reload',
     );
     cy.galaxykit('-i namespace create', 'ansible');
-    goToNamespaces();
+    cy.goToNamespaces();
     cy.wait('@reload');
 
     cy.get(`a[href*="${uiPrefix}repo/published/ansible"]`).click();
@@ -59,7 +49,7 @@ describe('Delete a namespace', () => {
       'GET',
       `${apiPrefix}_ui/v1/namespaces/?sort=name&offset=0&limit=20`,
     ).as('namespaces');
-    goToNamespaces();
+    cy.goToNamespaces();
     cy.wait('@namespaces');
     cy.contains('ansible').parent().contains('View collections').click();
     cy.get('[data-cy=ns-kebab-toggle]').click();

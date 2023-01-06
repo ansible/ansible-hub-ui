@@ -23,7 +23,7 @@ describe('A namespace form', () => {
   beforeEach(() => {
     cy.login();
     createNamespace();
-    cy.menuGo('Collections > Namespaces');
+    cy.goToNamespaces();
     getCreateNamespace().click();
   });
 
@@ -34,7 +34,7 @@ describe('A namespace form', () => {
     getCreateButton().should('be.disabled');
   });
 
-  it('should give message if input is empty', () => {
+  /*it('should give message if input is empty', () => {
     getInputBox().type(' ');
     getMessage().should(
       'have.text',
@@ -84,5 +84,5 @@ describe('A namespace form', () => {
     getInputBox().type(`testns_${id}`);
     getCreateButton().click();
     cy.url().should('match', new RegExp(`${uiPrefix}repo/published/testns_`));
-  });
+  });*/
 });

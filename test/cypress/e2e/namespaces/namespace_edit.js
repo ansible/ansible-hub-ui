@@ -1,15 +1,6 @@
 const uiPrefix = Cypress.env('uiPrefix');
-const insightsLogin = Cypress.env('insightsLogin');
-const namespaceName = Cypress.env('namespaceName');
 
 describe('Edit a namespace', () => {
-  let goToNamespaces = () => {
-    if (insightsLogin) {
-      cy.visit(`${uiPrefix}${namespaceName}`);
-    } else {
-      cy.menuGo('Collections > Namespaces');
-    }
-  };
 
   let kebabToggle = () => {
     cy.get('[data-cy="ns-kebab-toggle"] button[aria-label="Actions"]').click();
@@ -55,7 +46,7 @@ describe('Edit a namespace', () => {
   beforeEach(() => {
     cy.login();
     cy.galaxykit('-i namespace create', 'testns1');
-    goToNamespaces();
+    cy.goToNamespaces();
     cy.get(`a[href*="${uiPrefix}repo/published/testns1"]`).click();
     cy.contains('No collections yet');
     kebabToggle();

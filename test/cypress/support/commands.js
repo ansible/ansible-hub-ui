@@ -6,6 +6,7 @@ import { range } from 'lodash';
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
 const insightsLogin = Cypress.env('insightsLogin');
+const namespaceName = Cypress.env('namespaceName');
 
 Cypress.Commands.add('findnear', { prevSubject: true }, (subject, selector) => {
   return subject.closest(`*:has(${selector})`).find(selector);
@@ -546,6 +547,18 @@ Cypress.Commands.add('deleteContainersManual', {}, () => {
     });
   });
 });
+
+Cypress.Commands.add(
+  'goToNamespaces',
+  {},
+  () => {
+    if (insightsLogin) {
+      cy.visit(`${uiPrefix}${namespaceName}`);
+    } else {
+      cy.menuGo('Collections > Namespaces');
+    }
+  },
+);
 
 Cypress.Commands.add(
   'createApprovedCollection',
