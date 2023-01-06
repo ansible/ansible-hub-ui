@@ -1,7 +1,6 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Edit a namespace', () => {
-
   let kebabToggle = () => {
     cy.get('[data-cy="ns-kebab-toggle"] button[aria-label="Actions"]').click();
   };

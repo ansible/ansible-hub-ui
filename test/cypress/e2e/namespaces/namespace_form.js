@@ -1,9 +1,6 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('A namespace form', () => {
-  let getCreateNamespace = () => {
-    return cy.get('.pf-c-button.pf-m-primary');
-  };
   let getMessage = () => {
     return cy.get('.pf-c-form__helper-text');
   };
@@ -11,20 +8,25 @@ describe('A namespace form', () => {
     return cy.get('.pf-c-modal-box__footer .pf-m-primary');
   };
   let getInputBox = () => {
-    return cy.get('#pf-modal-part-2 #newNamespaceName');
+    return cy.get('input[name="newNamespaceName"]');
   };
   let clearInput = () => {
-    return cy.get('#pf-modal-part-2 #newNamespaceName').clear();
+    return getInputBox().clear();
   };
   let createNamespace = () => {
     return cy.galaxykit('-i namespace create', 'testns1');
   };
 
+  before(() => {
+    cy.deleteNamespacesAndCollections();
+  })
+
   beforeEach(() => {
     cy.login();
     createNamespace();
     cy.goToNamespaces();
-    getCreateNamespace().click();
+    cy.contains('button', 'Create').click();
+    cy.contains("Create a new namespace");
   });
 
   it('should give message if input has no characters', () => {
@@ -34,7 +36,7 @@ describe('A namespace form', () => {
     getCreateButton().should('be.disabled');
   });
 
-  /*it('should give message if input is empty', () => {
+  it('should give message if input is empty', () => {
     getInputBox().type(' ');
     getMessage().should(
       'have.text',
@@ -84,5 +86,5 @@ describe('A namespace form', () => {
     getInputBox().type(`testns_${id}`);
     getCreateButton().click();
     cy.url().should('match', new RegExp(`${uiPrefix}repo/published/testns_`));
-  });*/
+  });
 });

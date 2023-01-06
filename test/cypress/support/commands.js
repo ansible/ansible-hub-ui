@@ -548,17 +548,13 @@ Cypress.Commands.add('deleteContainersManual', {}, () => {
   });
 });
 
-Cypress.Commands.add(
-  'goToNamespaces',
-  {},
-  () => {
-    if (insightsLogin) {
-      cy.visit(`${uiPrefix}${namespaceName}`);
-    } else {
-      cy.menuGo('Collections > Namespaces');
-    }
-  },
-);
+Cypress.Commands.add('goToNamespaces', {}, () => {
+  if (insightsLogin) {
+    cy.visit(`${uiPrefix}${namespaceName}`);
+  } else {
+    cy.menuGo('Collections > Namespaces');
+  }
+});
 
 Cypress.Commands.add(
   'createApprovedCollection',
