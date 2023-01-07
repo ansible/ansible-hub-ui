@@ -198,10 +198,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
           className='header'
           title={t`Collections`}
           contextSelector={
-            <RepoSelector
-              selectedRepo={this.context.selectedRepo}
-              path={Paths.searchByRepo}
-            />
+            <RepoSelector selectedRepo={this.context.selectedRepo} />
           }
         >
           {!noData && (

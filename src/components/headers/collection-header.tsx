@@ -404,11 +404,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
             )
           }
           contextSelector={
-            <RepoSelector
-              selectedRepo={this.context.selectedRepo}
-              path={Paths.searchByRepo}
-              isDisabled
-            />
+            <RepoSelector selectedRepo={this.context.selectedRepo} isDisabled />
           }
           breadcrumbs={<Breadcrumbs links={breadcrumbs} />}
           versionControl={

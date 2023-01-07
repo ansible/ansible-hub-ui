@@ -387,7 +387,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           contextSelector={
             <RepoSelector
               selectedRepo={this.context.selectedRepo}
-              path={this.props.match.path as Paths} // Paths.namespaceByRepo or Paths.myCollectionsByRepo
               pathParams={{ namespace: namespace.name }}
             />
           }

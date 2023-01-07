@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 import React, { useState } from 'react';
-import { redirect } from 'react-router-dom';
+import { redirect, useMatch } from 'react-router-dom';
 import {
   Flex,
   FlexItem,
@@ -11,26 +11,23 @@ import {
   SelectOption,
 } from '@patternfly/react-core';
 import { Constants } from 'src/constants';
-import { Paths, formatPath } from 'src/paths';
+import { formatPath } from 'src/paths';
 
 import './repo-selector.scss';
 
 interface IProps {
   selectedRepo: string;
-  // Path of the component that's using the component. This is required so that
-  // the url for the repo can be updated correctly.
-  path: Paths;
   pathParams?: Record<string, string>;
   isDisabled?: boolean;
 }
 
 export const RepoSelector = ({
   selectedRepo,
-  path,
   pathParams,
   isDisabled,
 }: IProps) => {
   const [selectExpanded, setSelectExpanded] = useState<boolean>(false);
+  const { path } = useMatch(); // Paths.namespaceByRepo, Paths.myCollectionsByRepo, Paths.searchByRepo .. TODO, works?
 
   const getRepoName = (repoName) => {
     const repo = Constants.REPOSITORYNAMES[repoName];
