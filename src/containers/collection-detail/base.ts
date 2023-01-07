@@ -1,3 +1,4 @@
+import { redirect } from 'react-router-dom';
 import { CollectionDetailType, CollectionAPI } from 'src/api';
 import { AlertType } from 'src/components';
 import { Paths } from 'src/paths';
@@ -38,7 +39,6 @@ export function loadCollection({
       });
     })
     .catch(() => {
-      // FIXME
-      this.props.history.push(Paths.notFound);
+      redirect(Paths.notFound);
     });
 }

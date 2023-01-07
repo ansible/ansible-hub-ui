@@ -1,4 +1,5 @@
 import { cloneDeep } from 'lodash';
+import { redirect } from 'react-router-dom';
 
 export class ParamHelper {
   // Helper class for managing param object.
@@ -134,7 +135,7 @@ export class ParamHelper {
       // the component re-runs render() and the callback typically gets
       // executed before that happens
       this.setState({ params: params }, callback);
-      this.props.history.push({
+      redirect({
         pathname: this.props.location.pathname,
         search: '?' + ParamHelper.getQueryString(params, ignoreParams || []),
       });

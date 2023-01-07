@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
-import { RouteComponentProps, withRouter, matchPath } from 'react-router-dom';
+import { RouteComponentProps, withRouter, matchPath, redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
@@ -65,7 +65,7 @@ const App = (props: IProps) => {
       // go to the href, relative to our *actual* basename (basename has no trailing /, so a path will start with / unless empty
       const href = event.domEvent.href.replace(basename, '') || '/';
 
-      props.history.push(href);
+      redirect(href);
     });
 
     return () => {
