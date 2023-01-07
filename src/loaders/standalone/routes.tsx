@@ -1,80 +1,74 @@
-import * as React from 'react';
+import React from 'react';
 import { Routes, Route, Redirect, RouteComponentProps } from 'react-router-dom';
-
+import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
+import { AlertType } from 'src/components';
 import {
   CertificationDashboard,
   CollectionContent,
+  CollectionDependencies,
   CollectionDetail,
   CollectionDocs,
   CollectionImportLog,
-  CollectionDependencies,
   EditNamespace,
-  LegacyNamespaces,
-  LegacyNamespace,
-  LegacyRoles,
-  LegacyRole,
-  LoginPage,
-  MyImports,
-  NamespaceDetail,
-  MyNamespaces,
-  Partners,
-  NotFound,
-  Search,
-  TokenPageStandalone,
-  UserList,
-  EditUser,
-  UserDetail,
-  UserCreate,
-  UserProfile,
-  GroupList,
-  GroupDetail,
-  RoleList,
-  RoleCreate,
   EditRole,
-  RepositoryList,
-  SignatureKeysList,
-  ExecutionEnvironmentList,
-  ExecutionEnvironmentRegistryList,
+  EditUser,
   ExecutionEnvironmentDetail,
   ExecutionEnvironmentDetailActivities,
   ExecutionEnvironmentDetailImages,
   ExecutionEnvironmentDetailOwners,
+  ExecutionEnvironmentList,
   ExecutionEnvironmentManifest,
-  TaskListView,
+  ExecutionEnvironmentRegistryList,
+  GroupDetail,
+  GroupList,
+  LegacyNamespace,
+  LegacyNamespaces,
+  LegacyRole,
+  LegacyRoles,
+  LoginPage,
+  MyImports,
+  MyNamespaces,
+  NamespaceDetail,
+  NotFound,
+  Partners,
+  RepositoryList,
+  RoleCreate,
+  RoleList,
+  Search,
+  SignatureKeysList,
   TaskDetail,
+  TaskListView,
+  TokenPageStandalone,
+  UserCreate,
+  UserDetail,
+  UserList,
+  UserProfile,
 } from 'src/containers';
-import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
-import { AppContext } from '../app-context';
-import { loadContext } from '../load-context';
+import { AppContext } from 'src/loaders/app-context';
+import { loadContext } from 'src/loaders/load-context';
 import { Paths, formatPath } from 'src/paths';
-import { AlertType } from 'src/components';
+
+type UpdateInitialData = (
+  data: {
+    user?: UserType;
+    featureFlags?: FeatureFlagsType;
+    settings?: SettingsType;
+    alerts?: AlertType[];
+  },
+  callback?: () => void,
+) => void;
 
 interface IRoutesProps {
-  updateInitialData: (
-    data: {
-      user?: UserType;
-      featureFlags?: FeatureFlagsType;
-      settings?: SettingsType;
-      alerts?: AlertType[];
-    },
-    callback?: () => void,
-  ) => void;
+  updateInitialData: UpdateInitialData;
 }
 
 interface IAuthHandlerProps extends RouteComponentProps {
   Component: React.ElementType;
-  noAuth: boolean;
-  updateInitialData: (
-    data: {
-      user?: UserType;
-      featureFlags?: FeatureFlagsType;
-      settings?: SettingsType;
-      alerts?: AlertType[];
-    },
-    callback?: () => void,
-  ) => void;
   isDisabled: boolean;
+  noAuth: boolean;
+  updateInitialData: UpdateInitialData;
 }
+
 interface IAuthHandlerState {
   isLoading: boolean;
 }
