@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { Route, Routes, Redirect } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { LoadingPageWithHeader } from 'src/components';
 import { Paths } from 'src/paths';
 
@@ -67,77 +67,74 @@ const TaskListView = lazy(
 const TokenPage = lazy(() => import('src/containers/token/token-insights'));
 
 /**
- * the Routes component changes routes depending on the path.
- *
- * Route properties:
- *      exact - path must match exactly,
- *      path - https://prod.foo.redhat.com:1337/insights/advisor/rules
- *      component - component to be rendered when a route has been chosen.
+ * changes routes depending on the path
+ * https://reactrouter.com/en/main/route/route
  */
 export const InsightsRoutes = () => {
   return (
     <Suspense fallback={<LoadingPageWithHeader />}>
       <Routes>
-        <Route path={Paths.repositories} component={RepositoryList} />
+        <Route path={Paths.repositories} element={<RepositoryList />} />
         <Route
           path={Paths.approvalDashboard}
-          component={CertificationDashboard}
+          element={<CertificationDashboard />}
         />
-        <Route path={Paths.notFound} component={NotFound} />
-        <Route path={Paths.token} component={TokenPage} />
-        <Route path={Paths[NAMESPACE_TERM]} component={Partners} />
-        <Route path={Paths.editNamespace} component={EditNamespace} />
-        <Route path={Paths.myCollections} component={NamespaceDetail} />
-        <Route path={Paths.myCollectionsByRepo} component={NamespaceDetail} />
-        <Route path={Paths.myNamespaces} component={MyNamespaces} />
-        <Route path={Paths.signatureKeys} component={SignatureKeysList} />
-        <Route path={Paths.taskList} component={TaskListView} />
-        <Route path={Paths.taskDetail} component={TaskDetail} />
+        <Route path={Paths.notFound} element={<NotFound />} />
+        <Route path={Paths.token} element={<TokenPage />} />
+        <Route path={Paths.partners} element={<Partners />} />
+        <Route path={Paths.editNamespace} element={<EditNamespace />} />
+        <Route path={Paths.myCollections} element={<NamespaceDetail />} />
+        <Route path={Paths.myCollectionsByRepo} element={<NamespaceDetail />} />
+        <Route path={Paths.myNamespaces} element={<MyNamespaces />} />
+        <Route path={Paths.signatureKeys} element={<SignatureKeysList />} />
+        <Route path={Paths.taskList} element={<TaskListView />} />
+        <Route path={Paths.taskDetail} element={<TaskDetail />} />
         <Route
           path={Paths.collectionDocsPageByRepo}
-          component={CollectionDocs}
+          element={<CollectionDocs />}
         />
         <Route
           path={Paths.collectionDocsIndexByRepo}
-          component={CollectionDocs}
+          element={<CollectionDocs />}
         />
         <Route
           path={Paths.collectionContentDocsByRepo}
-          component={CollectionDocs}
+          element={<CollectionDocs />}
         />
         <Route
           path={Paths.collectionContentListByRepo}
-          component={CollectionContent}
+          element={<CollectionContent />}
         />
         <Route
           path={Paths.collectionImportLogByRepo}
-          component={CollectionImportLog}
+          element={<CollectionImportLog />}
         />
         <Route
           path={Paths.collectionDependenciesByRepo}
-          component={CollectionDependencies}
+          element={<CollectionDependencies />}
         />
-        <Route path={Paths.collectionByRepo} component={CollectionDetail} />
-        <Route path={Paths.namespaceByRepo} component={NamespaceDetail} />
-        <Route path={Paths.searchByRepo} component={Search} />
-        <Route path={Paths.collectionDocsPage} component={CollectionDocs} />
-        <Route path={Paths.collectionDocsIndex} component={CollectionDocs} />
-        <Route path={Paths.collectionContentDocs} component={CollectionDocs} />
+        <Route path={Paths.collectionByRepo} element={<CollectionDetail />} />
+        <Route path={Paths.namespaceByRepo} element={<NamespaceDetail />} />
+        <Route path={Paths.searchByRepo} element={<Search />} />
+        <Route path={Paths.collectionDocsPage} element={<CollectionDocs />} />
+        <Route path={Paths.collectionDocsIndex} element={<CollectionDocs />} />
+        <Route
+          path={Paths.collectionContentDocs}
+          element={<CollectionDocs />}
+        />
         <Route
           path={Paths.collectionContentList}
-          component={CollectionContent}
+          element={<CollectionContent />}
         />
         <Route
           path={Paths.collectionImportLog}
-          component={CollectionImportLog}
+          element={<CollectionImportLog />}
         />
-        <Route path={Paths.myImports} component={MyImports} />
-        <Route path={Paths.collection} component={CollectionDetail} />
-        <Route path={Paths.namespace} component={NamespaceDetail} />
-        <Route path={Paths.search} component={Search} />
-        <Route>
-          <Redirect push to={Paths.notFound} />
-        </Route>
+        <Route path={Paths.myImports} element={<MyImports />} />
+        <Route path={Paths.collection} element={<CollectionDetail />} />
+        <Route path={Paths.namespace} element={<NamespaceDetail />} />
+        <Route path={Paths.search} element={<Search />} />
+        <Route element={<Navigate to={Paths.notFound} />} />
       </Routes>
     </Suspense>
   );
