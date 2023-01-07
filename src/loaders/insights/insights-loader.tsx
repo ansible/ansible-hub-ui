@@ -20,7 +20,7 @@ interface IProps {
 }
 
 const isRepoURL = (location) =>
-  matchPath(location, { path: Paths.collectionByRepo });
+  matchPath({ path: Paths.collectionByRepo }, location);
 
 const App = (props: IProps) => {
   const location = useLocation();

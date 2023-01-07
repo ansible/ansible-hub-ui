@@ -461,7 +461,7 @@ class App extends React.Component<RouteComponentProps, IState> {
 
   private setRepoToURL() {
     // bypass this logic if looking at legacy things ...
-    if (matchPath(this.props.location.pathname, { path: '/legacy' })) {
+    if (matchPath({ path: '/legacy' }, this.props.location.pathname)) {
       return null;
     }
     const match = this.isRepoURL(this.props.location.pathname);
@@ -473,9 +473,12 @@ class App extends React.Component<RouteComponentProps, IState> {
   }
 
   private isRepoURL(location) {
-    return matchPath(location, {
-      path: Paths.searchByRepo,
-    });
+    return matchPath(
+      {
+        path: Paths.searchByRepo,
+      },
+      location,
+    );
   }
 
   private ctx(component) {
