@@ -51,8 +51,8 @@ class ExecutionEnvironmentManifest extends React.Component<
     super(props);
 
     this.state = {
-      container: { name: this.props.match.params['container'] },
-      digest: this.props.match.params['digest'], // digest or tag until loading done
+      container: { name: this.props.routeParams.container },
+      digest: this.props.routeParams.digest, // digest or tag until loading done
       environment: [],
       error: false,
       labels: [],

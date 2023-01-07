@@ -117,7 +117,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       'page_size',
     ]);
 
-    params['namespace'] = props.match.params['namespace'];
+    params['namespace'] = props.routeParams.namespace;
 
     this.state = {
       canSign: false,
@@ -163,7 +163,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         'page_size',
       ]);
 
-      params['namespace'] = this.props.match.params['namespace'];
+      params['namespace'] = this.props.routeParams.namespace;
 
       this.setState({
         params,
@@ -700,10 +700,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         },
         this.context.selectedRepo,
       ),
-      NamespaceAPI.get(this.props.match.params['namespace'], {
+      NamespaceAPI.get(this.props.routeParams.namespace, {
         include_related: 'my_permissions',
       }),
-      MyNamespaceAPI.get(this.props.match.params['namespace'], {
+      MyNamespaceAPI.get(this.props.routeParams.namespace, {
         include_related: 'my_permissions',
       }).catch((e) => {
         // TODO this needs fixing on backend to return nothing in these cases with 200 status
@@ -747,7 +747,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       .filter((repo) => repo !== this.context.selectedRepo)
       .map((repo) =>
         CollectionAPI.list(
-          { namespace: this.props.match.params['namespace'] },
+          { namespace: this.props.routeParams.namespace },
           repo,
         ),
       );

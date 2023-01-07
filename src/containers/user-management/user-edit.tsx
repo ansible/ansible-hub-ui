@@ -29,7 +29,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    const id = this.props.match.params['userID'];
+    const id = this.props.routeParams.userID;
 
     UserAPI.get(id)
       .then((result) =>

@@ -63,7 +63,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
 
-    const id = this.props.match.params['role'];
+    const id = this.props.routeParams.role;
 
     this.state = {
       role: null,

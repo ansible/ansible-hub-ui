@@ -187,7 +187,7 @@ class LegacyNamespace extends React.Component<
 
   constructor(props) {
     super(props);
-    const namespaceid = props.match.params.namespaceid;
+    const namespaceid = props.routeParams.namespaceid;
     this.state = {
       ...props,
       loading: true,

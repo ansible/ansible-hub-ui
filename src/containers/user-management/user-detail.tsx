@@ -43,7 +43,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     const { hasPermission, user } = this.context;
-    const id = this.props.match.params['userID'];
+    const id = this.props.routeParams.userID;
     if (!user || user.is_anonymous || !hasPermission('galaxy.view_user')) {
       this.setState({ unauthorised: true });
     } else {

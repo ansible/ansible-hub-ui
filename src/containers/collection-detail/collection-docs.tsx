@@ -53,7 +53,7 @@ class CollectionDocs extends React.Component<
 
   render() {
     const { params, collection } = this.state;
-    const urlFields = this.props.match.params;
+    const urlFields = this.props.routeParams;
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -287,7 +287,7 @@ class CollectionDocs extends React.Component<
   private loadCollection(forceReload) {
     loadCollection({
       forceReload,
-      matchParams: this.props.match.params,
+      matchParams: this.props.routeParams,
       selectedRepo: this.context.selectedRepo,
       setCollection: (collection) => this.setState({ collection }),
       stateParams: this.state.params,

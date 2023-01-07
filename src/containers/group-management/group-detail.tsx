@@ -86,7 +86,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
 
-    const id = this.props.match.params['group'];
+    const id = this.props.routeParams.group;
 
     const params = ParamHelper.parseParamString(props.location.search, [
       'page',

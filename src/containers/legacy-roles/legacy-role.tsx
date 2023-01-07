@@ -193,8 +193,8 @@ interface IProps {
 class LegacyRole extends React.Component<RouteComponentProps, IProps> {
   constructor(props) {
     super(props);
-    const roleUser = props.match.params.username;
-    const roleName = props.match.params.name;
+    const roleUser = props.routeParams.username;
+    const roleName = props.routeParams.name;
     this.state = {
       id: null,
       role: null,

@@ -82,7 +82,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params['task'] !== this.props.match.params['task']) {
+    if (prevProps.routeParams.task !== this.props.routeParams.task) {
       this.setState({ loading: true });
       this.loadContent();
     }
@@ -423,7 +423,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       this.setState({ polling: setInterval(() => this.loadContent(), 10000) });
     }
 
-    const taskId = this.props.match.params['task'];
+    const taskId = this.props.routeParams.task;
     return TaskManagementAPI.get(taskId)
       .then((result) => {
         const allRelatedTasks = [];

@@ -110,7 +110,7 @@ class CollectionDetail extends React.Component<
   private loadCollection(forceReload) {
     loadCollection({
       forceReload,
-      matchParams: this.props.match.params,
+      matchParams: this.props.routeParams,
       selectedRepo: this.context.selectedRepo,
       setCollection: (collection) => this.setState({ collection }),
       stateParams: this.state.params,

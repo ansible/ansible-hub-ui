@@ -189,7 +189,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadNamespace() {
-    MyNamespaceAPI.get(this.props.match.params['namespace'])
+    MyNamespaceAPI.get(this.props.routeParams.namespace)
       .then((response) => {
         // Add an empty link to the end of the links array to create an empty field
         // on the link edit form for adding new links

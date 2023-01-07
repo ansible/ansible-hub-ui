@@ -80,7 +80,7 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     render() {
-      const container = this.props.match.params['container'];
+      const container = this.props.routeParams.container;
       const redirect = {
         list: formatPath(Paths.executionEnvironments, {}),
         activity: formatPath(Paths.executionEnvironmentDetailActivities, {
@@ -195,7 +195,7 @@ export function withContainerRepo(WrappedComponent) {
             ></DeleteExecutionEnvironmentModal>
           )}
           <ExecutionEnvironmentHeader
-            id={this.props.match.params['container']}
+            id={this.props.routeParams.container}
             updateState={(change) => this.setState(change)}
             tab={this.getTab()}
             groupId={groupId}
@@ -281,7 +281,7 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private loadRepo() {
-      ExecutionEnvironmentAPI.get(this.props.match.params['container'])
+      ExecutionEnvironmentAPI.get(this.props.routeParams.container)
         .then((result) => {
           this.setState({
             repo: result.data,
