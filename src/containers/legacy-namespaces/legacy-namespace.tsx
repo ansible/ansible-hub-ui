@@ -2,7 +2,8 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './legacy-namespace.scss';
 
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
 
 import {
   DataList,

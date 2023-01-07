@@ -6,7 +6,8 @@ import {
   validateInput,
 } from 'src/containers/role-management/map-role-errors';
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Redirect } from 'react-router-dom';
 
 import {
   RoleForm,

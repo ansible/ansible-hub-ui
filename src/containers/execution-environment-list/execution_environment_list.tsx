@@ -2,7 +2,8 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment.scss';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Link } from 'react-router-dom';
 import {
   Button,
   DropdownItem,

@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Redirect } from 'react-router-dom';
 
 import {
   BaseHeader,

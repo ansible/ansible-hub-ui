@@ -1,6 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Redirect } from 'react-router-dom';
 import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
 
 import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';

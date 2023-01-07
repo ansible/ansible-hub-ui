@@ -1,12 +1,8 @@
 import React from 'react';
 import { t, Trans } from '@lingui/macro';
 import { AppContext } from 'src/loaders/app-context';
-import {
-  Link,
-  RouteComponentProps,
-  withRouter,
-  Redirect,
-} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
 import {
   AlertType,
   Pagination,

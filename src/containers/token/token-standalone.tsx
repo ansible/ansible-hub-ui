@@ -2,7 +2,7 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './token.scss';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
 import { Button, Card, CardTitle, CardBody } from '@patternfly/react-core';
 
 import {

@@ -9,7 +9,8 @@ import {
   parsePulpIDFromURL,
 } from 'src/utilities';
 
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Redirect } from 'react-router-dom';
 import { DataList, Switch, DropdownItem, Button } from '@patternfly/react-core';
 import {
   BaseHeader,

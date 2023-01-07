@@ -2,7 +2,8 @@ import * as React from 'react';
 import { t, Trans } from '@lingui/macro';
 import { errorMessage } from 'src/utilities';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Link } from 'react-router-dom';
 import {
   Button,
   DropdownItem,

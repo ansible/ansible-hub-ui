@@ -6,7 +6,8 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { RouteComponentProps, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { RouteComponentProps } from 'src/withRouter';
 import { t } from '@lingui/macro';
 
 import { ParamHelper } from 'src/utilities/param-helper';

@@ -14,7 +14,8 @@ import {
 
 import { RoleAPI } from 'src/api/role';
 
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Redirect } from 'react-router-dom';
 
 import {
   AlertList,

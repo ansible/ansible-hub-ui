@@ -2,7 +2,8 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './certification-dashboard.scss';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Link } from 'react-router-dom';
 import {
   BaseHeader,
   DateComponent,

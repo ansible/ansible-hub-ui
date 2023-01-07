@@ -2,7 +2,8 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './collection-detail.scss';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
 import { Alert } from '@patternfly/react-core';

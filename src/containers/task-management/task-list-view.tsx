@@ -4,7 +4,8 @@ import { i18n } from '@lingui/core';
 import * as React from 'react';
 import './task.scss';
 import { Constants } from 'src/constants';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Toolbar,

@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
-import { withRouter, matchPath, useLocation, redirect } from 'react-router-dom';
+import { matchPath, useLocation, redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
@@ -134,8 +134,7 @@ const App = (props: IProps) => {
 };
 
 /**
- * withRouter: https://reacttraining.com/react-router/web/api/withRouter
  * connect: https://github.com/reactjs/react-redux/blob/master/docs/api.md
  *          https://reactjs.org/docs/higher-order-components.html
  */
-export default withRouter(connect()(App));
+export default connect()(App);

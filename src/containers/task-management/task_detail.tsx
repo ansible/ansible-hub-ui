@@ -2,12 +2,8 @@ import * as React from 'react';
 import './task.scss';
 import { i18n } from '@lingui/core';
 import { t, Trans } from '@lingui/macro';
-import {
-  Link,
-  withRouter,
-  Redirect,
-  RouteComponentProps,
-} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
 import {
   AlertList,
   AlertType,

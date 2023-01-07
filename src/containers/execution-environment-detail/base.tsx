@@ -1,7 +1,9 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 
-import { Link, RouteComponentProps, Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { RouteComponentProps } from 'src/withRouter';
+
 import {
   ContainerRepositoryType,
   ExecutionEnvironmentAPI,

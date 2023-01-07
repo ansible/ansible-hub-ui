@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './my-imports.scss';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
 import { cloneDeep } from 'lodash';
 
 import {

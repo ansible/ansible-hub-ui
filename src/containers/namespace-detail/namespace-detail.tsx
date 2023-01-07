@@ -4,12 +4,8 @@ import './namespace-detail.scss';
 
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
 import {
   Alert,
   AlertActionCloseButton,

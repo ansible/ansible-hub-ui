@@ -1,6 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, Link, RouteComponentProps } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
 import {
   BaseHeader,
   Breadcrumbs,

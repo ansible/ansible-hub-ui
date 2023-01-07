@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './legacy-roles.scss';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'src/withRouter';
 import { DataList } from '@patternfly/react-core';
 import {
   BaseHeader,
