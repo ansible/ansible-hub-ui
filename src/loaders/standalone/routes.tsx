@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route, Redirect, RouteComponentProps } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Routes, Route, redirect, useLocation } from 'react-router-dom';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType } from 'src/components';
 import {
@@ -44,7 +44,7 @@ import {
   UserList,
   UserProfile,
 } from 'src/containers';
-import { AppContext } from 'src/loaders/app-context';
+import { AppContext, useContext } from 'src/loaders/app-context';
 import { loadContext } from 'src/loaders/load-context';
 import { Paths, formatPath } from 'src/paths';
 
@@ -69,10 +69,6 @@ interface IAuthHandlerProps extends RouteComponentProps {
   updateInitialData: UpdateInitialData;
 }
 
-interface IAuthHandlerState {
-  isLoading: boolean;
-}
-
 interface IRouteConfig {
   component: React.ElementType;
   path: string;
@@ -80,66 +76,55 @@ interface IRouteConfig {
   isDisabled?: boolean;
 }
 
-class AuthHandler extends React.Component<
-  IAuthHandlerProps,
-  IAuthHandlerState
-> {
-  static contextType = AppContext;
-  constructor(props, context) {
-    super(props);
-    this.state = { isLoading: !context.user };
-  }
+const AuthHandler = ({
+  Component,
+  isDisabled,
+  noAuth,
+  updateInitialData,
+}: IAuthHandlerProps) => {
+  const { user, settings, featureFlags } = useContext();
+  const [isLoading, setLoading] = useState<boolean>(
+    !user || !settings || !featureFlags,
+  );
+  const { pathname } = useLocation();
 
-  componentDidMount() {
+  useEffect(() => {
     // This component is mounted on every route change, so it's a good place
     // to check for an active user.
-    const { user, settings, featureFlags } = this.context;
     if (user && settings && featureFlags) {
       return;
     }
 
     loadContext()
-      .then((data) => this.props.updateInitialData(data))
-      .then(() => this.setState({ isLoading: false }));
+      .then((data) => updateInitialData(data))
+      .then(() => setLoading(false));
+  }, []);
+
+  if (isLoading) {
+    return null;
   }
 
-  render() {
-    const { isLoading } = this.state;
-    const { Component, noAuth, ...props } = this.props;
-    const { user, featureFlags } = this.context;
-
-    let isExternalAuth = false;
-    if (featureFlags) {
-      isExternalAuth = featureFlags.external_authentication;
-    }
-
-    if (isLoading) {
+  const isExternalAuth = featureFlags.external_authentication;
+  if (!user && !noAuth) {
+    // NOTE: also update LoginLink when changing this
+    if (isExternalAuth && UI_EXTERNAL_LOGIN_URI) {
+      window.location.replace(UI_EXTERNAL_LOGIN_URI);
       return null;
     }
 
-    if (!user && !noAuth) {
-      // NOTE: also update LoginLink when changing this
-      if (isExternalAuth && UI_EXTERNAL_LOGIN_URI) {
-        window.location.replace(UI_EXTERNAL_LOGIN_URI);
-        return <div></div>;
-      }
-      return (
-        <Redirect
-          push
-          to={formatPath(Paths.login, {}, { next: props.location.pathname })}
-        ></Redirect>
-      );
-    }
-
-    // only enforce this if feature flags are set. Otherwise the container
-    // registry will always return a 404 on the first load.
-    if (this.props.isDisabled) {
-      return <Redirect push to={Paths.notFound}></Redirect>;
-    }
-
-    return <Component {...props}></Component>;
+    redirect(formatPath(Paths.login, {}, { next: pathname }));
+    return null;
   }
-}
+
+  // only enforce this if feature flags are set. Otherwise the container
+  // registry will always return a 404 on the first load.
+  if (isDisabled) {
+    redirect(Paths.notFound);
+    return null;
+  }
+
+  return <Component />;
+};
 
 export class StandaloneRoutes extends React.Component<IRoutesProps> {
   static contextType = AppContext;
