@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
-import { RouteComponentProps, withRouter, matchPath, redirect } from 'react-router-dom';
+import { withRouter, matchPath, useLocation, redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
@@ -17,16 +17,14 @@ const DEFAULT_REPO = 'published';
 
 interface IProps {
   basename: string;
-  history: RouteComponentProps['history'];
-  location: RouteComponentProps['location'];
-  match: RouteComponentProps['match'];
 }
 
 const isRepoURL = (location) =>
   matchPath(location, { path: Paths.collectionByRepo });
 
 const App = (props: IProps) => {
-  const match = isRepoURL(props.location.pathname);
+  const location = useLocation();
+  const match = isRepoURL(location.pathname);
 
   const [alerts, setAlerts] = useState<AlertType[]>([]);
   const [featureFlags, setFeatureFlags] = useState<FeatureFlagsType>(null);
