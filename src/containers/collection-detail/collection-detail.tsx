@@ -35,16 +35,12 @@ class CollectionDetail extends React.Component<
   }
 
   componentDidMount() {
-    this.load(true);
-  }
-
-  load(forceReload) {
-    this.loadCollection(this.context.selectedRepo, forceReload);
+    this.loadCollection(true);
   }
 
   componentDidUpdate(prevProps) {
     if (!isEqual(prevProps.location, this.props.location)) {
-      this.loadCollection(this.context.selectedRepo);
+      this.loadCollection(false);
     }
   }
 
@@ -76,13 +72,11 @@ class CollectionDetail extends React.Component<
           closeAlert={(i) => this.closeAlert(i)}
         ></AlertList>
         <CollectionHeader
-          reload={() => this.load(true)}
+          reload={() => this.loadCollection(true)}
           collection={collection}
           params={params}
           updateParams={(p) =>
-            this.updateParams(p, () =>
-              this.loadCollection(this.context.selectedRepo, true),
-            )
+            this.updateParams(p, () => this.loadCollection(true))
           }
           breadcrumbs={breadcrumbs}
           activeTab='install'
@@ -113,8 +107,14 @@ class CollectionDetail extends React.Component<
     );
   }
 
-  get loadCollection() {
-    return loadCollection;
+  private loadCollection(forceReload) {
+    loadCollection({
+      forceReload,
+      matchParams: this.props.match.params,
+      selectedRepo: this.context.selectedRepo,
+      setCollection: (collection) => this.setState({ collection }),
+      stateParams: this.state.params,
+    });
   }
 
   get updateParams() {

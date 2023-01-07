@@ -21,6 +21,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 
+import { loadCollection } from './base';
 import { errorMessage, filterIsSet, ParamHelper } from 'src/utilities';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
@@ -283,19 +284,15 @@ class CollectionDependencies extends React.Component<
   }
 
   private loadCollection(forceReload, callback) {
-    CollectionAPI.getCached(
-      this.props.match.params['namespace'],
-      this.props.match.params['collection'],
-      this.context.selectedRepo,
-      this.state.params.version ? { version: this.state.params.version } : {},
+    loadCollection({
       forceReload,
-    )
-      .then((result) => {
-        this.setState({ collection: result }, callback);
-      })
-      .catch(() => {
-        this.props.history.push(Paths.notFound);
-      });
+      matchParams: this.props.match.params,
+      selectedRepo: this.context.selectedRepo,
+      setCollection: (collection) => this.setState({ collection }, callback),
+      stateParams: this.state.params.version
+        ? { version: this.state.params.version }
+        : {},
+    });
   }
 
   get updateParams() {

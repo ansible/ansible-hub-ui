@@ -31,11 +31,7 @@ class CollectionContent extends React.Component<
   }
 
   componentDidMount() {
-    this.load(false);
-  }
-
-  load(forceReload) {
-    this.loadCollection(this.context.selectedRepo, forceReload);
+    this.loadCollection(false);
   }
 
   render() {
@@ -68,13 +64,11 @@ class CollectionContent extends React.Component<
     return (
       <React.Fragment>
         <CollectionHeader
-          reload={() => this.load(true)}
+          reload={() => this.loadCollection(true)}
           collection={collection}
           params={params}
           updateParams={(params) =>
-            this.updateParams(params, () =>
-              this.loadCollection(this.context.selectedRepo, true),
-            )
+            this.updateParams(params, () => this.loadCollection(true))
           }
           breadcrumbs={breadcrumbs}
           activeTab='contents'
@@ -95,8 +89,14 @@ class CollectionContent extends React.Component<
     );
   }
 
-  get loadCollection() {
-    return loadCollection;
+  private loadCollection(forceReload) {
+    loadCollection({
+      forceReload,
+      matchParams: this.props.match.params,
+      selectedRepo: this.context.selectedRepo,
+      setCollection: (collection) => this.setState({ collection }),
+      stateParams: this.state.params,
+    });
   }
 
   get updateParams() {
