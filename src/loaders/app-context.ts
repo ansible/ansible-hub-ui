@@ -6,7 +6,6 @@ export interface IAppContextType {
   user?: UserType;
   setUser: (user: UserType) => void;
   selectedRepo?: string;
-  setRepo: (repo: string) => void;
   featureFlags: FeatureFlagsType;
   alerts?: AlertType[];
   setAlerts?: (alerts: AlertType[]) => void;

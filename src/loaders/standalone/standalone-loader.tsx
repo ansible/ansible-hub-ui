@@ -486,7 +486,6 @@ class App extends React.Component<RouteComponentProps, IState> {
           featureFlags: this.state.featureFlags,
           selectedRepo: this.state.selectedRepo,
           setAlerts: this.setAlerts,
-          setRepo: this.setRepo,
           setUser: this.setUser,
           settings: this.state.settings,
           user: this.state.user,
@@ -513,10 +512,6 @@ class App extends React.Component<RouteComponentProps, IState> {
         callback();
       }
     });
-  };
-
-  private setRepo = (path: string) => {
-    this.props.history.push(path);
   };
 
   private setAlerts = (alerts: AlertType[]) => {

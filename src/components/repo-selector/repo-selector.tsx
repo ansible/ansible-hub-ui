@@ -1,8 +1,7 @@
 import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-
-import * as React from 'react';
-
+import React from 'react';
+import { redirect } from 'react-router-dom';
 import {
   Flex,
   FlexItem,
@@ -13,7 +12,6 @@ import {
 } from '@patternfly/react-core';
 import { Constants } from 'src/constants';
 import { Paths, formatPath } from 'src/paths';
-import { AppContext } from 'src/loaders/app-context';
 
 import './repo-selector.scss';
 
@@ -31,8 +29,6 @@ interface IState {
 }
 
 export class RepoSelector extends React.Component<IProps, IState> {
-  static contextType = AppContext;
-
   constructor(props) {
     super(props);
 
@@ -69,7 +65,7 @@ export class RepoSelector extends React.Component<IProps, IState> {
                     ...this.props.pathParams,
                     repo: event.target.name,
                   });
-                  this.context.setRepo(path);
+                  redirect(path);
                 }
               }}
               onToggle={(isExpanded) => {

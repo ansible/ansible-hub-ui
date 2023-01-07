@@ -33,9 +33,6 @@ const App = (props: IProps) => {
   const [selectedRepo, setSelectedRepo] = useState<string>(DEFAULT_REPO);
   const [settings, setSettings] = useState<SettingsType>(null);
   const [user, setUser] = useState<UserType>(null);
-  const setRepo = (_repo: string) => {
-    throw new Error('RepoSelector & setRepo only available in standalone');
-  };
 
   const { identifyApp, on, updateDocumentTitle } = useChrome();
 
@@ -113,7 +110,6 @@ const App = (props: IProps) => {
         featureFlags,
         selectedRepo,
         setAlerts,
-        setRepo,
         setUser,
         settings,
         user,
