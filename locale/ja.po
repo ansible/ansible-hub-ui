@@ -48,7 +48,7 @@ msgstr "<0/> が削除されました"
 msgid "<0/> was removed from <1/>"
 msgstr "<0/> が <1/> から削除されました"
 
-#: src/components/collection-detail/collection-info.tsx:78
+#: src/components/collection-detail/collection-info.tsx:80
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>注記:</0> ansible-galaxy を使用したコレクションのインストールは、ansible 2.9+ でのみサポートされます"
 
@@ -68,7 +68,7 @@ msgstr "<0>注記:</0> 以下のリンクはブラウザーによってブロッ
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>注記:</0> この URL を使用して ansible-galaxy を設定して、この名前空間にコレクションをアップロードします。ansible-galaxy の設定に関する詳細は <1>ここ</1><2></2><3/> を参照してください。"
 
-#: src/containers/role-management/role-list.tsx:216
+#: src/containers/role-management/role-list.tsx:195
 msgid "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
 msgstr "<0>ロール<1>{0}</1> は永久に削除されます。</0><2>また、このロールの下にあるすべての関連するパーミッションも削除されます。</2>"
 
@@ -180,7 +180,7 @@ msgstr "アクティビティー"
 #: src/components/rbac/owners-tab.tsx:366
 #: src/components/rbac/owners-tab.tsx:418
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:114
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:218
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:203
 #: src/containers/group-management/group-detail.tsx:282
 #: src/containers/group-management/group-detail.tsx:512
 #: src/containers/group-management/group-detail.tsx:563
@@ -188,24 +188,24 @@ msgid "Add"
 msgstr "追加"
 
 #: src/constants.tsx:114
-msgid "Add Ansible distribution"
-msgstr "Ansible ディストリビューションの追加"
+#~ msgid "Add Ansible distribution"
+#~ msgstr "Ansible ディストリビューションの追加"
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:104
 msgid "Add a README with instructions for using this container."
 msgstr "このコンテナーの使用手順を記載した README を追加します。"
 
 #: src/constants.tsx:115
-msgid "Add collection remote"
-msgstr "コレクションリモートの追加"
+#~ msgid "Add collection remote"
+#~ msgstr "コレクションリモートの追加"
 
 #: src/constants.tsx:124
-msgid "Add container distribution"
-msgstr "コンテナーディストリビューションの追加"
+#~ msgid "Add container distribution"
+#~ msgstr "コンテナーディストリビューションの追加"
 
 #: src/constants.tsx:126
-msgid "Add container repository"
-msgstr "コンテナーリポジトリーの追加"
+#~ msgid "Add container repository"
+#~ msgstr "コンテナーリポジトリーの追加"
 
 #: src/components/execution-environment/repository-form.tsx:142
 #: src/containers/execution-environment-list/execution_environment_list.tsx:158
@@ -213,12 +213,12 @@ msgid "Add execution environment"
 msgstr "実行環境の追加"
 
 #: src/constants.tsx:142
-msgid "Add group"
-msgstr "グループの追加"
+#~ msgid "Add group"
+#~ msgstr "グループの追加"
 
 #: src/constants.tsx:143
-msgid "Add namespace"
-msgstr "名前空間の追加"
+#~ msgid "Add namespace"
+#~ msgstr "名前空間の追加"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:146
 msgid "Add new tag"
@@ -228,16 +228,15 @@ msgstr "新規タグの追加"
 msgid "Add new tag to image"
 msgstr "新規タグのイメージへの追加"
 
-#: src/constants.tsx:141
 #: src/containers/execution-environment/registry-list.tsx:151
 #: src/containers/execution-environment/registry-list.tsx:214
 msgid "Add remote registry"
 msgstr "リモートレジストリーの追加"
 
 #: src/components/rbac/owners-tab.tsx:197
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:178
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:196
-#: src/containers/role-management/role-list.tsx:159
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:163
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:181
+#: src/containers/role-management/role-list.tsx:138
 msgid "Add roles"
 msgstr "ロールの追加"
 
@@ -246,8 +245,8 @@ msgid "Add selected users to group"
 msgstr "選択したユーザーのグループへの追加"
 
 #: src/constants.tsx:144
-msgid "Add synclist"
-msgstr "同期リストの追加"
+#~ msgid "Add synclist"
+#~ msgstr "同期リストの追加"
 
 #: src/components/execution-environment/repository-form.tsx:312
 msgid "Add tag(s) to exclude"
@@ -258,8 +257,8 @@ msgid "Add tag(s) to include"
 msgstr "含めるタグの追加"
 
 #: src/constants.tsx:145
-msgid "Add user"
-msgstr "ユーザーの追加"
+#~ msgid "Add user"
+#~ msgstr "ユーザーの追加"
 
 #: src/components/execution-environment/repository-form.tsx:388
 #~ msgid ""
@@ -273,15 +272,15 @@ msgstr "ユーザーの追加"
 msgid "All"
 msgstr "すべて"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:118
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:116
 msgid "All associated permissions under this role were removed."
 msgstr "このロールに関連付けられているすべてのパーミッションが削除されました。"
 
-#: src/constants.tsx:355
+#: src/constants.tsx:196
 msgid "Allow all actions on a task."
 msgstr "タスクのすべてのアクションを許可します。"
 
-#: src/constants.tsx:356
+#: src/constants.tsx:197
 msgid "Allow all actions on a taskschedule."
 msgstr "taskschedule のすべてのアクションを許可します。"
 
@@ -306,7 +305,7 @@ msgstr "承認状態:"
 msgid "Approve"
 msgstr "承認"
 
-#: src/constants.tsx:343
+#: src/constants.tsx:184
 msgid "Approve, reject and sync collections from remotes."
 msgstr "リモートからのコレクションを承認、拒否、同期します。"
 
@@ -332,21 +331,21 @@ msgstr "ブラウザー OS"
 msgid "Browser Version"
 msgstr "ブラウザーバージョン"
 
-#: src/containers/role-management/role-list.tsx:269
-#: src/containers/role-management/role-list.tsx:302
-#: src/containers/role-management/role-list.tsx:397
+#: src/containers/role-management/role-list.tsx:248
+#: src/containers/role-management/role-list.tsx:281
+#: src/containers/role-management/role-list.tsx:334
 msgid "Built-in"
 msgstr "組み込み"
 
-#: src/containers/role-management/role-list.tsx:500
+#: src/containers/role-management/role-list.tsx:437
 msgid "Built-in roles cannot be deleted."
 msgstr "組み込みのロールは削除できません。"
 
-#: src/containers/role-management/role-list.tsx:393
+#: src/containers/role-management/role-list.tsx:330
 msgid "Built-in roles cannot be edited or deleted."
 msgstr "組み込みのロールは、編集または削除できません。"
 
-#: src/containers/role-management/role-list.tsx:490
+#: src/containers/role-management/role-list.tsx:427
 msgid "Built-in roles cannot be edited."
 msgstr "組み込みのロールは編集できません。"
 
@@ -380,7 +379,7 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 #: src/components/rbac/group-modal.tsx:61
 #: src/components/rbac/owners-tab.tsx:340
 #: src/components/rbac/owners-tab.tsx:411
-#: src/components/rbac/role-form.tsx:214
+#: src/components/rbac/role-form.tsx:146
 #: src/components/rbac/user-form.tsx:226
 #: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:47
@@ -388,7 +387,7 @@ msgstr "ディストリビューションをアタッチせずにリモートは
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/containers/edit-namespace/edit-namespace.tsx:159
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:158
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:211
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:196
 #: src/containers/group-management/group-detail.tsx:285
 msgid "Cancel"
 msgstr "取り消し"
@@ -424,71 +423,71 @@ msgid "Change"
 msgstr "変更"
 
 #: src/constants.tsx:116
-msgid "Change Ansible distribution"
-msgstr "Ansible ディストリビューションの変更"
+#~ msgid "Change Ansible distribution"
+#~ msgstr "Ansible ディストリビューションの変更"
 
-#: src/constants.tsx:344
+#: src/constants.tsx:185
 msgid "Change and upload collections to namespaces."
 msgstr "コレクションを名前空間に変更してアップロードします。"
 
 #: src/constants.tsx:117
-msgid "Change collection remote"
-msgstr "コレクションリモートの変更"
+#~ msgid "Change collection remote"
+#~ msgstr "コレクションリモートの変更"
 
 #: src/constants.tsx:127
-msgid "Change container distribution"
-msgstr "コンテナーディストリビューションの変更"
+#~ msgid "Change container distribution"
+#~ msgstr "コンテナーディストリビューションの変更"
 
 #: src/constants.tsx:128
 #: src/constants.tsx:170
-msgid "Change container namespace permissions"
-msgstr "コンテナーの名前空間パーミッションの変更"
+#~ msgid "Change container namespace permissions"
+#~ msgstr "コンテナーの名前空間パーミッションの変更"
 
 #: src/constants.tsx:129
-msgid "Change container repository"
-msgstr "コンテナーリポジトリーの変更"
+#~ msgid "Change container repository"
+#~ msgstr "コンテナーリポジトリーの変更"
 
 #: src/constants.tsx:133
-msgid "Change containers"
-msgstr "コンテナーの変更"
+#~ msgid "Change containers"
+#~ msgstr "コンテナーの変更"
 
 #: src/constants.tsx:177
-msgid "Change distribution"
-msgstr "ディストリビューションの変更"
+#~ msgid "Change distribution"
+#~ msgstr "ディストリビューションの変更"
 
-#: src/constants.tsx:348
+#: src/constants.tsx:189
 msgid "Change existing execution environments."
 msgstr "既存の実行環境を変更します。"
 
 #: src/constants.tsx:147
-msgid "Change group"
-msgstr "グループの変更"
+#~ msgid "Change group"
+#~ msgstr "グループの変更"
 
 #: src/constants.tsx:134
 #: src/constants.tsx:169
-msgid "Change image tags"
-msgstr "イメージタグの変更"
+#~ msgid "Change image tags"
+#~ msgstr "イメージタグの変更"
 
 #: src/constants.tsx:148
 #: src/constants.tsx:163
-msgid "Change namespace"
-msgstr "名前空間の変更"
+#~ msgid "Change namespace"
+#~ msgstr "名前空間の変更"
 
 #: src/constants.tsx:146
-msgid "Change remote registry"
-msgstr "リモートレジストリーの変更"
+#~ msgid "Change remote registry"
+#~ msgstr "リモートレジストリーの変更"
 
 #: src/constants.tsx:149
-msgid "Change synclist"
-msgstr "同期リストの変更"
+#~ msgid "Change synclist"
+#~ msgstr "同期リストの変更"
 
 #: src/constants.tsx:138
-msgid "Change task"
-msgstr "タスクの変更"
+#~ msgid "Change task"
+#~ msgstr "タスクの変更"
 
 #: src/constants.tsx:150
-msgid "Change user"
-msgstr "ユーザーの変更"
+#~ msgid "Change user"
+#~ msgstr "ユーザーの変更"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:599
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
@@ -580,7 +579,7 @@ msgstr "コレクション \"{name} v{collectionVersion}\" が正常に削除さ
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "コレクション \"{name}\" を削除できませんでした。"
 
-#: src/components/collection-detail/collection-info.tsx:189
+#: src/components/collection-detail/collection-info.tsx:191
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "コレクション \"{name}\" をダウンロードできませんでした。"
 
@@ -593,12 +592,12 @@ msgid "Collection Name"
 msgstr "コレクション名"
 
 #: src/constants.tsx:27
-msgid "Collection Namespaces"
-msgstr "コレクション名前空間"
+#~ msgid "Collection Namespaces"
+#~ msgstr "コレクション名前空間"
 
 #: src/constants.tsx:65
-msgid "Collection Remotes"
-msgstr "コレクションリモート"
+#~ msgid "Collection Remotes"
+#~ msgstr "コレクションリモート"
 
 #: src/components/repositories/local-repository-table.tsx:55
 msgid "Collection count"
@@ -644,7 +643,6 @@ msgstr "コレクションのバージョン"
 #~ msgid "Collection was not found in the system. You must upload it."
 #~ msgstr "システムでコレクションが見つかりませんでした。アップロードする必要があります。"
 
-#: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:237
 #: src/containers/search/search.tsx:199
 #: src/loaders/standalone/standalone-loader.tsx:343
@@ -662,7 +660,7 @@ msgstr "コレクションはアップロードされると表示されます"
 msgid "Command"
 msgstr "コマンド"
 
-#: src/constants.tsx:212
+#: src/constants.tsx:53
 msgid "Community"
 msgstr "コミュニティー"
 
@@ -677,7 +675,7 @@ msgstr "会社名"
 
 #: src/components/my-imports/import-list.tsx:93
 #: src/components/status/status-indicator.tsx:67
-#: src/constants.tsx:332
+#: src/constants.tsx:173
 #: src/containers/task-management/task-list-view.tsx:163
 msgid "Completed"
 msgstr "完了済み"
@@ -739,8 +737,8 @@ msgid "Container repository name"
 msgstr "コンテナーリポジトリー名"
 
 #: src/constants.tsx:73
-msgid "Containers"
-msgstr "コンテナー"
+#~ msgid "Containers"
+#~ msgstr "コンテナー"
 
 #: src/containers/collection-detail/collection-content.tsx:65
 msgid "Content"
@@ -810,14 +808,14 @@ msgstr "新しいロールの作成"
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 msgstr "特殊文字 (例: <!@$%>) を含めた {minLength} 文字以上のパスワードを作成します。一般的な名前または語句は使用しないでください。"
 
-#: src/constants.tsx:347
+#: src/constants.tsx:188
 msgid "Create and update execution environments under existing container namespaces."
 msgstr "既存のコンテナー名前空間の下に実行環境を作成し、更新します。"
 
 #: src/constants.tsx:125
 #: src/constants.tsx:165
-msgid "Create new containers"
-msgstr "新規コンテナーの作成"
+#~ msgid "Create new containers"
+#~ msgstr "新規コンテナーの作成"
 
 #: src/containers/role-management/role-create.tsx:61
 msgid "Create new role"
@@ -828,14 +826,14 @@ msgstr "新しいロールの作成"
 msgid "Create new user"
 msgstr "新規ユーザーの作成"
 
-#: src/constants.tsx:341
+#: src/constants.tsx:182
 msgid "Create, delete and change collection namespaces. Upload and delete collections. Sync collections from remotes. Approve and reject collections."
 msgstr "コレクションの名前空間を作成、削除、および変更します。コレクションをアップロードおよび削除します。リモートからのコレクションを同期します。コレクションを承認および拒否します。"
 
 #: src/containers/execution-environment/registry-list.tsx:323
 #: src/containers/execution-environment-list/execution_environment_list.tsx:302
 #: src/containers/group-management/group-detail.tsx:636
-#: src/containers/role-management/role-list.tsx:180
+#: src/containers/role-management/role-list.tsx:159
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
 msgstr "作成済み"
@@ -846,15 +844,15 @@ msgstr "作成済み"
 msgid "Created on"
 msgstr "作成日時"
 
-#: src/constants.tsx:247
+#: src/constants.tsx:88
 msgid "Curate all synclist repository"
 msgstr "全同期リストリポジトリーのキュレート"
 
-#: src/constants.tsx:238
+#: src/constants.tsx:79
 msgid "Curate synclist repository"
 msgstr "同期リストリポジトリーのキュレート"
 
-#: src/constants.tsx:251
+#: src/constants.tsx:92
 msgid "Curate synclist repository batch"
 msgstr "同期リストリポジトリーのバッチのキュレート"
 
@@ -870,7 +868,7 @@ msgstr "現在除外されているタグ"
 msgid "Currently included tags"
 msgstr "現在含まれているタグ"
 
-#: src/components/rbac/role-permissions.tsx:46
+#: src/components/rbac/permission-categories.tsx:62
 msgid "Custom permissions"
 msgstr "カスタムパーミッション"
 
@@ -897,7 +895,7 @@ msgstr "作成日"
 #: src/containers/execution-environment-list/execution_environment_list.tsx:387
 #: src/containers/group-management/group-detail.tsx:229
 #: src/containers/group-management/group-list.tsx:422
-#: src/containers/role-management/role-list.tsx:481
+#: src/containers/role-management/role-list.tsx:418
 #: src/containers/task-management/task-list-view.tsx:317
 #: src/containers/task-management/task-list-view.tsx:333
 #: src/containers/user-management/user-detail.tsx:126
@@ -906,16 +904,16 @@ msgid "Delete"
 msgstr "削除"
 
 #: src/constants.tsx:118
-msgid "Delete Ansible distribution"
-msgstr "Ansible ディストリビューションの削除"
+#~ msgid "Delete Ansible distribution"
+#~ msgstr "Ansible ディストリビューションの削除"
 
 #: src/constants.tsx:119
-msgid "Delete collection"
-msgstr "コレクションの削除"
+#~ msgid "Delete collection"
+#~ msgstr "コレクションの削除"
 
 #: src/constants.tsx:120
-msgid "Delete collection remote"
-msgstr "コレクションリモートの削除"
+#~ msgid "Delete collection remote"
+#~ msgstr "コレクションリモートの削除"
 
 #: src/components/delete-modal/delete-collection-modal.tsx:38
 msgid "Delete collection version?"
@@ -926,32 +924,32 @@ msgid "Delete collection?"
 msgstr "コレクションを削除しますか?"
 
 #: src/constants.tsx:130
-msgid "Delete container distribution"
-msgstr "コンテナーディストリビューションの削除"
+#~ msgid "Delete container distribution"
+#~ msgstr "コンテナーディストリビューションの削除"
 
 #: src/constants.tsx:131
-msgid "Delete container namespace"
-msgstr "コンテナー名前空間の削除"
+#~ msgid "Delete container namespace"
+#~ msgstr "コンテナー名前空間の削除"
 
 #: src/constants.tsx:132
-msgid "Delete container repository"
-msgstr "コンテナーリポジトリーの削除"
+#~ msgid "Delete container repository"
+#~ msgstr "コンテナーリポジトリーの削除"
 
 #: src/constants.tsx:174
-msgid "Delete container's distribution"
-msgstr "コンテナーのディストリビューションの削除"
+#~ msgid "Delete container's distribution"
+#~ msgstr "コンテナーのディストリビューションの削除"
 
 #: src/constants.tsx:173
-msgid "Delete container's namespace"
-msgstr "コンテナーの名前空間の削除"
+#~ msgid "Delete container's namespace"
+#~ msgstr "コンテナーの名前空間の削除"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:42
 msgid "Delete container?"
 msgstr "コンテナーを削除しますか?"
 
 #: src/constants.tsx:178
-msgid "Delete distribution"
-msgstr "ディストリビューションの削除"
+#~ msgid "Delete distribution"
+#~ msgstr "ディストリビューションの削除"
 
 #: src/utilities/delete-collection.tsx:44
 #: src/utilities/delete-collection.tsx:55
@@ -959,8 +957,8 @@ msgid "Delete entire collection"
 msgstr "コレクション全体の削除"
 
 #: src/constants.tsx:152
-msgid "Delete group"
-msgstr "グループの削除"
+#~ msgid "Delete group"
+#~ msgstr "グループの削除"
 
 #: src/components/rbac/delete-group-modal.tsx:25
 msgid "Delete group?"
@@ -970,7 +968,6 @@ msgstr "グループを削除しますか?"
 msgid "Delete image?"
 msgstr "イメージを削除しますか?"
 
-#: src/constants.tsx:153
 #: src/containers/namespace-detail/namespace-detail.tsx:811
 #: src/containers/namespace-detail/namespace-detail.tsx:825
 msgid "Delete namespace"
@@ -981,32 +978,32 @@ msgid "Delete namespace?"
 msgstr "名前空間を削除しますか?"
 
 #: src/constants.tsx:151
-msgid "Delete remote registry"
-msgstr "リモートレジストリーの削除"
+#~ msgid "Delete remote registry"
+#~ msgstr "リモートレジストリーの削除"
 
 #: src/containers/execution-environment/registry-list.tsx:224
 msgid "Delete remote registry?"
 msgstr "リモートレジストリーを削除しますか?"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:138
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:136
 msgid "Delete role: {0}"
 msgstr "ロールの削除: {0}"
 
-#: src/containers/role-management/role-list.tsx:213
+#: src/containers/role-management/role-list.tsx:192
 msgid "Delete role?"
 msgstr "ロールを削除しますか?"
 
 #: src/constants.tsx:154
-msgid "Delete synclist"
-msgstr "同期リストの削除"
+#~ msgid "Delete synclist"
+#~ msgstr "同期リストの削除"
 
 #: src/constants.tsx:139
-msgid "Delete task"
-msgstr "タスクの削除"
+#~ msgid "Delete task"
+#~ msgstr "タスクの削除"
 
 #: src/constants.tsx:155
-msgid "Delete user"
-msgstr "ユーザーの削除"
+#~ msgid "Delete user"
+#~ msgstr "ユーザーの削除"
 
 #: src/components/rbac/delete-user-modal.tsx:41
 msgid "Delete user?"
@@ -1084,12 +1081,12 @@ msgstr "コレクション \"{0}\" の非推奨ステータスの更新が開始
 #: src/components/collection-detail/collection-content-list.tsx:109
 #: src/components/execution-environment/repository-form.tsx:358
 #: src/components/namespace-form/namespace-form.tsx:121
-#: src/components/rbac/role-form.tsx:113
+#: src/components/rbac/role-form.tsx:105
 #: src/components/rbac/role-list-table.tsx:49
 #: src/components/rbac/select-roles.tsx:98
 #: src/containers/execution-environment-list/execution_environment_list.tsx:297
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:237
-#: src/containers/role-management/role-list.tsx:175
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:222
+#: src/containers/role-management/role-list.tsx:154
 #: src/containers/task-management/task_detail.tsx:354
 msgid "Description"
 msgstr "説明"
@@ -1102,7 +1099,7 @@ msgstr "分かりやすい名前"
 msgid "Detail"
 msgstr "詳細"
 
-#: src/components/rbac/role-form.tsx:82
+#: src/components/rbac/role-form.tsx:74
 msgid "Details"
 msgstr "詳細"
 
@@ -1164,7 +1161,7 @@ msgstr "署名済みコレクションのみのダウンロード"
 msgid "Download requirements file"
 msgstr "要件ファイルのダウンロード"
 
-#: src/components/collection-detail/collection-info.tsx:117
+#: src/components/collection-detail/collection-info.tsx:119
 msgid "Download tarball"
 msgstr "tarball のダウンロード"
 
@@ -1187,7 +1184,7 @@ msgstr "ドロップダウン"
 #: src/containers/execution-environment-detail/base.tsx:210
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:97
 #: src/containers/execution-environment-list/execution_environment_list.tsx:360
-#: src/containers/role-management/role-list.tsx:467
+#: src/containers/role-management/role-list.tsx:404
 #: src/containers/settings/user-profile.tsx:96
 #: src/containers/user-management/user-detail.tsx:116
 #: src/containers/user-management/user-edit.tsx:67
@@ -1240,12 +1237,12 @@ msgid "Edit user"
 msgstr "ユーザーの編集"
 
 #: src/components/rbac/role-list-table.tsx:54
-#: src/containers/role-management/role-list.tsx:185
-#: src/containers/role-management/role-list.tsx:264
-#: src/containers/role-management/role-list.tsx:273
-#: src/containers/role-management/role-list.tsx:302
-#: src/containers/role-management/role-list.tsx:306
-#: src/containers/role-management/role-list.tsx:400
+#: src/containers/role-management/role-list.tsx:164
+#: src/containers/role-management/role-list.tsx:243
+#: src/containers/role-management/role-list.tsx:252
+#: src/containers/role-management/role-list.tsx:281
+#: src/containers/role-management/role-list.tsx:285
+#: src/containers/role-management/role-list.tsx:337
 msgid "Editable"
 msgstr "編集可能"
 
@@ -1479,7 +1476,7 @@ msgstr "有効期限"
 #: src/components/my-imports/import-console.tsx:114
 #: src/components/my-imports/import-list.tsx:97
 #: src/components/status/status-indicator.tsx:75
-#: src/constants.tsx:333
+#: src/constants.tsx:174
 #: src/containers/task-management/task-list-view.tsx:167
 msgid "Failed"
 msgstr "失敗"
@@ -1562,7 +1559,7 @@ msgstr "ログのフォロー"
 msgid "Galaxy Logo"
 msgstr "Galaxy ロゴ"
 
-#: src/containers/role-management/role-list.tsx:308
+#: src/containers/role-management/role-list.tsx:287
 msgid "Galaxy only"
 msgstr "Galaxy のみ"
 
@@ -1574,7 +1571,7 @@ msgstr "トークンの取得"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "10 回試行した後に、タスクの待機を中止します。"
 
-#: src/components/collection-detail/collection-info.tsx:160
+#: src/components/collection-detail/collection-info.tsx:162
 msgid "Go to documentation"
 msgstr "ドキュメントに移動"
 
@@ -1658,7 +1655,6 @@ msgstr "グループ {groupId}"
 
 #: src/components/rbac/user-form.tsx:149
 #: src/components/rbac/user-form.tsx:163
-#: src/constants.tsx:55
 #: src/containers/group-management/group-detail.tsx:191
 #: src/containers/group-management/group-list.tsx:146
 #: src/containers/user-management/user-list.tsx:282
@@ -1725,12 +1721,12 @@ msgstr "イメージ"
 msgid "Images will appear once uploaded"
 msgstr "アップロード後にイメージが表示されます"
 
-#: src/constants.tsx:235
-#: src/constants.tsx:244
+#: src/constants.tsx:76
+#: src/constants.tsx:85
 msgid "Import and auto approve"
 msgstr "インポートと自動承認"
 
-#: src/constants.tsx:241
+#: src/constants.tsx:82
 msgid "Import and move to staging"
 msgstr "インポートしてステージングに移動"
 
@@ -1772,7 +1768,7 @@ msgstr "インストール"
 #~ msgid "Install Version"
 #~ msgstr "Install Version"
 
-#: src/components/collection-detail/collection-info.tsx:74
+#: src/components/collection-detail/collection-info.tsx:76
 msgid "Installation"
 msgstr "インストール"
 
@@ -1863,17 +1859,17 @@ msgstr "詳細情報"
 msgid "Legacy"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:135
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:119
 #: src/loaders/standalone/standalone-loader.tsx:396
 msgid "Legacy Namespaces"
 msgstr ""
 
-#: src/containers/legacy-roles/legacy-roles.tsx:146
+#: src/containers/legacy-roles/legacy-roles.tsx:128
 #: src/loaders/standalone/standalone-loader.tsx:393
 msgid "Legacy Roles"
 msgstr ""
 
-#: src/components/collection-detail/collection-info.tsx:64
+#: src/components/collection-detail/collection-info.tsx:65
 msgid "License"
 msgstr "ライセンス"
 
@@ -1894,16 +1890,16 @@ msgstr "リンクテキスト"
 msgid "List of Collections"
 msgstr "コレクションの一覧"
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:158
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:142
 msgid "List of Legacy Namespaces"
 msgstr ""
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:142
-#: src/containers/legacy-roles/legacy-roles.tsx:170
+#: src/containers/legacy-roles/legacy-roles.tsx:152
 msgid "List of Legacy Roles"
 msgstr ""
 
-#: src/containers/legacy-roles/legacy-role.tsx:157
+#: src/containers/legacy-roles/legacy-role.tsx:172
 msgid "List of versions"
 msgstr ""
 
@@ -1938,7 +1934,7 @@ msgstr "ロゴ URL"
 msgid "Logout"
 msgstr "ログアウト"
 
-#: src/constants.tsx:340
+#: src/constants.tsx:181
 msgid "Manage all content types."
 msgstr "すべてのコンテンツタイプを管理します。"
 
@@ -1960,8 +1956,8 @@ msgid "Message"
 msgstr "メッセージ"
 
 #: src/constants.tsx:121
-msgid "Modify Ansible repo content"
-msgstr "Ansible リポジトリーコンテンツの変更"
+#~ msgid "Modify Ansible repo content"
+#~ msgstr "Ansible リポジトリーコンテンツの変更"
 
 #: src/components/namespace-form/namespace-form.tsx:83
 msgid "Moved to the <0>Namespace owners</0> <1/> tab"
@@ -2001,7 +1997,7 @@ msgstr "自分のプロファイル"
 #: src/components/namespace-form/namespace-form.tsx:46
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/rbac/group-modal.tsx:75
-#: src/components/rbac/role-form.tsx:90
+#: src/components/rbac/role-form.tsx:82
 #: src/components/rbac/select-group.tsx:144
 #: src/components/rbac/select-group.tsx:156
 #: src/components/rbac/select-roles.tsx:178
@@ -2011,8 +2007,8 @@ msgstr "自分のプロファイル"
 #: src/containers/execution-environment/registry-list.tsx:289
 #: src/containers/execution-environment/registry-list.tsx:318
 #: src/containers/execution-environment-list/execution_environment_list.tsx:262
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:317
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:349
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:302
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:334
 #: src/containers/namespace-list/namespace-list.tsx:230
 #: src/containers/signature-keys/list.tsx:125
 #: src/containers/signature-keys/list.tsx:151
@@ -2092,7 +2088,7 @@ msgstr "名前空間リストを表示できませんでした。"
 msgid "Namespaces will appear once created"
 msgstr "名前空間は作成後に表示されます"
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:142
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:126
 msgid "Namespaces will appear once created or roles are imported"
 msgstr ""
 
@@ -2190,7 +2186,7 @@ msgstr "まだ管理コレクションはありません"
 msgid "No namespace selected."
 msgstr "名前空間が選択されていません。"
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:141
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:125
 #: src/containers/namespace-list/namespace-list.tsx:287
 msgid "No namespaces yet"
 msgstr "まだ名前空間はありません"
@@ -2199,9 +2195,14 @@ msgstr "まだ名前空間はありません"
 msgid "No parent task"
 msgstr "親タスクなし"
 
-#: src/components/rbac/permission-chip-selector.tsx:98
+#: src/components/rbac/permission-chip-selector.tsx:54
+#: src/components/rbac/permission-chip-selector.tsx:87
 msgid "No permission"
 msgstr "パーミッションなし"
+
+#: src/components/rbac/permission-categories.tsx:95
+msgid "No permissions"
+msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx:234
 msgid "No remote registries yet"
@@ -2220,7 +2221,7 @@ msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "絞り込みの基準と一致する結果がありません。フィルター設定を変更してみてください。"
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:137
-#: src/containers/legacy-roles/legacy-roles.tsx:152
+#: src/containers/legacy-roles/legacy-roles.tsx:134
 msgid "No roles yet"
 msgstr ""
 
@@ -2257,11 +2258,15 @@ msgstr "まだユーザーはありません"
 msgid "No version of {fqn} exists that matches {version_range}."
 msgstr ""
 
+#: src/containers/legacy-roles/legacy-role.tsx:165
+msgid "No versions"
+msgstr ""
+
 #: src/components/rbac/user-form.tsx:204
 msgid "Not a super user"
 msgstr "スーパーユーザーではありません"
 
-#: src/components/rbac/permission-chip-selector.tsx:82
+#: src/components/rbac/permission-chip-selector.tsx:97
 #: src/components/typeahead/typeahead.tsx:88
 #: src/containers/collection-detail/collection-docs.tsx:275
 msgid "Not found"
@@ -2390,12 +2395,12 @@ msgstr "保留中"
 #~ msgid "Permissions"
 #~ msgstr "Permissions"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:101
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:99
 msgid "Permissions for group \"{0}\" could not be displayed."
 msgstr "グループ \"{0}\" のパーミッションを表示できませんでした。"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:298
-#: src/containers/role-management/role-list.tsx:233
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:283
+#: src/containers/role-management/role-list.tsx:212
 msgid "Please add a role by using the button below."
 msgstr "下のボタンを使用してロールを追加してください。"
 
@@ -2430,7 +2435,7 @@ msgstr ""
 #: src/components/markdown-editor/markdown-editor.tsx:38
 #: src/components/rbac/owners-tab.tsx:364
 #: src/components/rbac/owners-tab.tsx:416
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:216
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:201
 msgid "Preview"
 msgstr "プレビュー"
 
@@ -2467,19 +2472,19 @@ msgstr "プロキシーユーザー名"
 msgid "Public key"
 msgstr "公開鍵"
 
-#: src/constants.tsx:210
+#: src/constants.tsx:51
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:158
 msgid "Published"
 msgstr "公開"
 
 #: src/constants.tsx:180
-msgid "Pull distribution"
-msgstr "ディストリビューションのプル"
+#~ msgid "Pull distribution"
+#~ msgstr "ディストリビューションのプル"
 
 #: src/constants.tsx:135
 #: src/constants.tsx:166
-msgid "Pull private containers"
-msgstr "プライベートコンテナーのプル"
+#~ msgid "Pull private containers"
+#~ msgstr "プライベートコンテナーのプル"
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:79
 msgid "Pull this image"
@@ -2489,107 +2494,107 @@ msgstr "このイメージのプル"
 msgid "Pulp Ansible Version"
 msgstr "Pulp Ansible バージョン"
 
-#: src/constants.tsx:252
+#: src/constants.tsx:93
 msgid "Pulp Ansible: Collections sync"
 msgstr "Pulp Ansible: コレクションの同期"
 
-#: src/constants.tsx:261
+#: src/constants.tsx:102
 msgid "Pulp Ansible: Roles synchronize"
 msgstr "Pulp Ansible: ロールの同期"
 
-#: src/constants.tsx:255
+#: src/constants.tsx:96
 msgid "Pulp ansible: Copy content"
 msgstr "Pulp ansible: コンテンツのコピー"
 
-#: src/constants.tsx:266
+#: src/constants.tsx:107
 msgid "Pulp ansible: Import collection"
 msgstr "Pulp ansible: コレクションのインポート"
 
-#: src/constants.tsx:265
+#: src/constants.tsx:106
 msgid "Pulp ansible: Update collection remote"
 msgstr "Pulp ansible: コレクションリモートの更新"
 
-#: src/constants.tsx:258
+#: src/constants.tsx:99
 msgid "Pulp ansible: collection sync"
 msgstr "Pulp ansible: コレクションの同期"
 
-#: src/constants.tsx:284
+#: src/constants.tsx:125
 msgid "Pulp container: Build image from containerfile"
 msgstr "Pulp コンテナー: コンテナーファイルからのイメージの構築"
 
-#: src/constants.tsx:287
+#: src/constants.tsx:128
 msgid "Pulp container: General multi delete"
 msgstr "Pulp コンテナー: 複数削除 (一般)"
 
-#: src/constants.tsx:278
+#: src/constants.tsx:119
 msgid "Pulp container: Recursive add content"
 msgstr "Pulp コンテナー: コンテンツの再追加"
 
-#: src/constants.tsx:281
+#: src/constants.tsx:122
 msgid "Pulp container: Recursive remove content"
 msgstr "Pulp コンテナー: コンテンツの再帰削除"
 
-#: src/constants.tsx:269
+#: src/constants.tsx:110
 msgid "Pulp container: Tag image"
 msgstr "Pulp コンテナー: イメージのタグ付け"
 
-#: src/constants.tsx:275
+#: src/constants.tsx:116
 msgid "Pulp container: Tasks synchronize"
 msgstr "Pulp コンテナー: タスクの同期"
 
-#: src/constants.tsx:272
+#: src/constants.tsx:113
 msgid "Pulp container: Untage image"
 msgstr "Pulp コンテナー: イメージのタグ付け解除"
 
-#: src/constants.tsx:323
+#: src/constants.tsx:164
 msgid "Pulpcore: Add and remove"
 msgstr "Pulpcore: 追加および削除"
 
-#: src/constants.tsx:326
+#: src/constants.tsx:167
 msgid "Pulpcore: Add or remove"
 msgstr "Pulpcore: 追加または削除"
 
-#: src/constants.tsx:314
+#: src/constants.tsx:155
 msgid "Pulpcore: Delete version"
 msgstr "Pulpcore: バージョンの削除"
 
-#: src/constants.tsx:299
+#: src/constants.tsx:140
 msgid "Pulpcore: General create"
 msgstr "Pulpcore: 作成 (一般)"
 
-#: src/constants.tsx:305
+#: src/constants.tsx:146
 msgid "Pulpcore: General delete"
 msgstr "Pulpcore: 削除 (一般)"
 
-#: src/constants.tsx:302
+#: src/constants.tsx:143
 msgid "Pulpcore: General update"
 msgstr "Pulpcore: 更新 (一般)"
 
-#: src/constants.tsx:290
+#: src/constants.tsx:131
 msgid "Pulpcore: Import repository version"
 msgstr "Pulpcore: リポジトリーバージョンのインポート"
 
-#: src/constants.tsx:293
+#: src/constants.tsx:134
 msgid "Pulpcore: Orphan cleanup"
 msgstr "Pulpcore: 孤立している項目の消去"
 
-#: src/constants.tsx:308
+#: src/constants.tsx:149
 msgid "Pulpcore: Pulp export"
 msgstr "Pulpcore: Pulp エクスポート"
 
-#: src/constants.tsx:311
+#: src/constants.tsx:152
 msgid "Pulpcore: Pulp import"
 msgstr "Pulpcore: Pulp インポート"
 
-#: src/constants.tsx:296
+#: src/constants.tsx:137
 msgid "Pulpcore: Repair all artifacts"
 msgstr "Pulpcore: すべてのアーティファクトの修正"
 
-#: src/constants.tsx:317
+#: src/constants.tsx:158
 msgid "Pulpcore: Repair version"
 msgstr "Pulpcore: バージョンの修復"
 
-#: src/constants.tsx:320
+#: src/constants.tsx:161
 msgid "Pulpcore: Upload commit"
 msgstr "Pulpcore: コミットのアップロード"
 
@@ -2598,26 +2603,26 @@ msgid "Push container images"
 msgstr "コンテナーイメージのプッシュ"
 
 #: src/constants.tsx:179
-msgid "Push distribution"
-msgstr "ディストリビューションのプッシュ"
+#~ msgid "Push distribution"
+#~ msgstr "ディストリビューションのプッシュ"
 
 #: src/constants.tsx:171
-msgid "Push images to existing containers"
-msgstr "既存コンテナーへのイメージのプッシュ"
+#~ msgid "Push images to existing containers"
+#~ msgstr "既存コンテナーへのイメージのプッシュ"
 
 #: src/constants.tsx:176
-msgid "Push new containers"
-msgstr "新規コンテナーのプッシュ"
+#~ msgid "Push new containers"
+#~ msgstr "新規コンテナーのプッシュ"
 
 #: src/constants.tsx:136
-msgid "Push to existing containers"
-msgstr "既存コンテナーへのプッシュ"
+#~ msgid "Push to existing containers"
+#~ msgstr "既存コンテナーへのプッシュ"
 
-#: src/constants.tsx:346
+#: src/constants.tsx:187
 msgid "Push, and change execution environments."
 msgstr "プッシュし、実行環境を変更します。"
 
-#: src/constants.tsx:345
+#: src/constants.tsx:186
 msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
 msgstr "実行環境をプッシュ、削除、および変更します。リモートレジストリーを作成、削除、および変更します。"
 
@@ -2637,7 +2642,7 @@ msgstr "Readme"
 msgid "Reason: task {0}"
 msgstr "理由: タスク {0}"
 
-#: src/constants.tsx:211
+#: src/constants.tsx:52
 msgid "Red Hat Certified"
 msgstr "Red Hat 認定"
 
@@ -2667,7 +2672,7 @@ msgstr "拒否"
 msgid "Rejected"
 msgstr "拒否"
 
-#: src/containers/legacy-roles/legacy-role.tsx:115
+#: src/containers/legacy-roles/legacy-role.tsx:116
 msgid "Released <0/>"
 msgstr ""
 
@@ -2676,7 +2681,6 @@ msgstr ""
 msgid "Remote"
 msgstr "リモート"
 
-#: src/constants.tsx:87
 #: src/containers/execution-environment/registry-list.tsx:231
 #: src/loaders/standalone/standalone-loader.tsx:382
 msgid "Remote Registries"
@@ -2706,7 +2710,7 @@ msgstr "リモートリポジトリーは追加後に表示されます"
 msgid "Remove"
 msgstr "削除"
 
-#: src/constants.tsx:234
+#: src/constants.tsx:75
 msgid "Remove content from repository"
 msgstr "リポジトリーからのコンテンツ削除"
 
@@ -2719,7 +2723,7 @@ msgid "Remove group {groupname}?"
 msgstr "グループ {groupname} を削除しますか?"
 
 #: src/components/rbac/owners-tab.tsx:256
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:387
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:371
 msgid "Remove role"
 msgstr "ロールの削除"
 
@@ -2755,7 +2759,7 @@ msgstr "リポジトリー管理"
 msgid "Repository name"
 msgstr "リポジトリー名"
 
-#: src/components/collection-detail/collection-info.tsx:129
+#: src/components/collection-detail/collection-info.tsx:131
 msgid "Requires Ansible"
 msgstr "Ansible が必要です"
 
@@ -2774,7 +2778,7 @@ msgstr "リソース"
 #: src/components/rbac/owners-tab.tsx:227
 #: src/components/rbac/role-list-table.tsx:44
 #: src/components/rbac/select-roles.tsx:93
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:232
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:217
 msgid "Role"
 msgstr "ロール"
 
@@ -2782,7 +2786,7 @@ msgstr "ロール"
 msgid "Role \"{0}\" could not be created."
 msgstr "ロール \"{0}\" を作成できませんでした。"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:124
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:122
 msgid "Role \"{0}\" could not be deleted."
 msgstr "ロール \"{0}\" を削除できませんでした。"
 
@@ -2790,55 +2794,55 @@ msgstr "ロール \"{0}\" を削除できませんでした。"
 msgid "Role \"{0}\" could not be displayed."
 msgstr "ロール \"{0}\" を表示できませんでした。"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:116
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:114
 msgid "Role \"{0}\" has been successfully removed."
 msgstr "ロール \"{0}\" は正常に削除されました。"
 
-#: src/containers/role-management/role-list.tsx:442
+#: src/containers/role-management/role-list.tsx:379
 msgid "Role \"{name}\" could not be deleted."
 msgstr "ロール \"{name}\" を削除できませんでした。"
 
-#: src/containers/role-management/role-list.tsx:435
+#: src/containers/role-management/role-list.tsx:372
 msgid "Role \"{name}\" has been successfully deleted."
 msgstr "ロール \"{name}\" が正常に削除されました。"
 
-#: src/containers/legacy-roles/legacy-role.tsx:372
+#: src/containers/legacy-roles/legacy-role.tsx:387
 msgid "Role Header"
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:170
-#: src/containers/role-management/role-list.tsx:259
-#: src/containers/role-management/role-list.tsx:307
+#: src/containers/role-management/role-list.tsx:149
+#: src/containers/role-management/role-list.tsx:238
+#: src/containers/role-management/role-list.tsx:286
 msgid "Role name"
 msgstr "ロール名"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:278
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:263
 msgid "Role {0} could not be assigned to group {1}."
 msgstr "ロール {0} をグループ {1} に割り当てられませんでした。"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:265
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:250
 msgid "Role {0} has been successfully added to {1}."
 msgstr "ロール {0} は {1} に正常に追加されました。"
 
 #: src/containers/role-management/role-create.tsx:60
 #: src/containers/role-management/role-edit.tsx:149
-#: src/containers/role-management/role-list.tsx:227
+#: src/containers/role-management/role-list.tsx:206
 #: src/loaders/standalone/standalone-loader.tsx:426
 msgid "Roles"
 msgstr "ロール"
 
-#: src/containers/role-management/role-list.tsx:531
+#: src/containers/role-management/role-list.tsx:468
 msgid "Roles list could not be displayed."
 msgstr "ロールリストを表示できませんでした。"
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:138
-#: src/containers/legacy-roles/legacy-roles.tsx:153
+#: src/containers/legacy-roles/legacy-roles.tsx:135
 msgid "Roles will appear once imported"
 msgstr ""
 
 #: src/components/my-imports/import-list.tsx:101
 #: src/components/status/status-indicator.tsx:61
-#: src/constants.tsx:334
+#: src/constants.tsx:175
 #: src/containers/task-management/task-list-view.tsx:171
 msgid "Running"
 msgstr "実行中"
@@ -2851,7 +2855,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/repository-form.tsx:151
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/rbac/group-modal.tsx:57
-#: src/components/rbac/role-form.tsx:208
+#: src/components/rbac/role-form.tsx:140
 #: src/components/rbac/user-form.tsx:223
 #: src/components/repositories/remote-form.tsx:142
 #: src/containers/edit-namespace/edit-namespace.tsx:156
@@ -2937,15 +2941,15 @@ msgstr "グループの選択"
 msgid "Select namespace"
 msgstr "名前空間の選択"
 
-#: src/components/rbac/permission-chip-selector.tsx:68
-#: src/components/rbac/permission-chip-selector.tsx:96
+#: src/components/rbac/permission-chip-selector.tsx:75
+#: src/components/rbac/permission-chip-selector.tsx:85
 msgid "Select permissions"
 msgstr "パーミッションの選択"
 
 #: src/components/rbac/owners-tab.tsx:345
 #: src/components/rbac/owners-tab.tsx:400
 #: src/components/rbac/owners-tab.tsx:427
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:203
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:188
 msgid "Select role(s)"
 msgstr "ロールの選択"
 
@@ -3259,7 +3263,6 @@ msgstr "タスク \"{taskName}\" を停止できませんでした。"
 msgid "Task \"{taskName}\" stopped successfully."
 msgstr "タスク \"{taskName}\" が正常に停止しました。"
 
-#: src/constants.tsx:96
 #: src/containers/task-management/task-list-view.tsx:123
 #: src/loaders/standalone/standalone-loader.tsx:401
 msgid "Task Management"
@@ -3318,7 +3321,7 @@ msgstr "タスクは作成後に表示されます。"
 msgid "Text: {0}"
 msgstr "テキスト: {0}"
 
-#: src/loaders/insights/insights-loader.tsx:149
+#: src/loaders/insights/insights-loader.tsx:134
 msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
 msgstr "Automation Hub 同期トグルは、AAP 2.0 でのみサポートされるようになりました。以前のバージョンの AAP は、引き続きすべてのコレクションを自動的に同期します。"
 
@@ -3361,7 +3364,7 @@ msgstr "選択したコレクションは、{0} と一致しないようです"
 msgid "The file is not available for this version of {collectionName}"
 msgstr "このファイルは、このバージョンの {collectionName} では使用できません"
 
-#: src/components/rbac/preview-roles.tsx:27
+#: src/components/rbac/preview-roles.tsx:30
 msgid "The following roles will be applied to group: <0>{0}</0>"
 msgstr "グループには、以下のロールが適用されます: <0>{0}</0>"
 
@@ -3372,6 +3375,10 @@ msgstr "同期時に認証に使用するパスワード。"
 #: src/components/repositories/remote-form.tsx:396
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "同期時に認証に使用するパスワード。トークンを使用する場合は不要です。"
+
+#: src/containers/legacy-roles/legacy-role.tsx:166
+msgid "The role is versionless and will always install from the head/main/master branch."
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:178
 msgid "The selected roles will be added to this specific Execution Environment."
@@ -3401,11 +3408,11 @@ msgstr "現在、この名前空間に割り当てることができるグルー
 msgid "There are currently no owners assigned."
 msgstr "現在、所有者は割り当てられていません。"
 
-#: src/containers/role-management/role-list.tsx:232
+#: src/containers/role-management/role-list.tsx:211
 msgid "There are currently no roles"
 msgstr "現在ロールはありません"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:297
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:282
 msgid "There are currently no roles assigned to this group."
 msgstr "現在、このグループに割り当てられているロールはありません。"
 
@@ -3486,7 +3493,7 @@ msgstr "このタグはすでにこのイメージに対して選択されてい
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "これは、ansible-galaxy CLI と同じ {docsAnsibleLink} 形式を使用します。ただし、ロールも、ソースパラメーターもサポート対象外である点に注意が必要です。"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:150
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:148
 msgid "This will revoke all permissions associated with this role from the group."
 msgstr "これにより、このロールに関連付けられたすべてのパーミッションがグループから取り消されます。"
 
@@ -3559,12 +3566,12 @@ msgid "Unsigned version(s)"
 msgstr "未署名バージョン"
 
 #: src/constants.tsx:167
-msgid "Update container information"
-msgstr "コンテナー情報の更新"
+#~ msgid "Update container information"
+#~ msgstr "コンテナー情報の更新"
 
 #: src/components/collection-list/collection-list-item.tsx:117
 #: src/components/legacy-role-list/legacy-role-item.tsx:106
-#: src/containers/legacy-roles/legacy-role.tsx:299
+#: src/containers/legacy-roles/legacy-role.tsx:314
 msgid "Updated <0/>"
 msgstr "<0/> に更新"
 
@@ -3573,7 +3580,7 @@ msgstr "<0/> に更新"
 msgid "Upload"
 msgstr "アップロード"
 
-#: src/constants.tsx:342
+#: src/constants.tsx:183
 msgid "Upload and modify collections."
 msgstr "コレクションをアップロードして変更します。"
 
@@ -3596,8 +3603,8 @@ msgstr "署名のアップロード"
 
 #: src/constants.tsx:156
 #: src/constants.tsx:164
-msgid "Upload to namespace"
-msgstr "名前空間へのアップロード"
+#~ msgid "Upload to namespace"
+#~ msgstr "名前空間へのアップロード"
 
 #: src/components/execution-environment/repository-form.tsx:212
 msgid "Upstream name"
@@ -3724,7 +3731,6 @@ msgstr "ユーザー名"
 msgid "Username: {0}"
 msgstr "ユーザー名: {0}"
 
-#: src/constants.tsx:45
 #: src/containers/group-management/group-detail.tsx:154
 #: src/containers/user-management/user-create.tsx:49
 #: src/containers/user-management/user-detail.tsx:77
@@ -3750,7 +3756,7 @@ msgstr "ユーザーはこのグループへの追加後に表示されます"
 msgid "Users will appear once created"
 msgstr "ユーザーは作成後に表示されます"
 
-#: src/constants.tsx:213
+#: src/constants.tsx:54
 msgid "Validated"
 msgstr "検証済み"
 
@@ -3764,40 +3770,40 @@ msgid "Version:"
 msgstr "バージョン:"
 
 #: src/constants.tsx:122
-msgid "View Ansible distribution"
-msgstr "Ansible ディストリビューションの表示"
+#~ msgid "View Ansible distribution"
+#~ msgstr "Ansible ディストリビューションの表示"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:453
 msgid "View Import Logs"
 msgstr "インポートログの表示"
 
 #: src/constants.tsx:140
-msgid "View all tasks"
-msgstr "すべてのタスクの表示"
+#~ msgid "View all tasks"
+#~ msgstr "すべてのタスクの表示"
 
 #: src/constants.tsx:123
-msgid "View collection remote"
-msgstr "コレクションリモートの表示"
+#~ msgid "View collection remote"
+#~ msgstr "コレクションリモートの表示"
 
 #: src/components/cards/namespace-card.tsx:53
 msgid "View collections"
 msgstr "コレクションの表示"
 
 #: src/constants.tsx:172
-msgid "View container's namespace"
-msgstr "コンテナーの名前空間の表示"
+#~ msgid "View container's namespace"
+#~ msgstr "コンテナーの名前空間の表示"
 
 #: src/constants.tsx:175
-msgid "View container's repository"
-msgstr "コンテナーのリポジトリーの表示"
+#~ msgid "View container's repository"
+#~ msgstr "コンテナーのリポジトリーの表示"
 
 #: src/constants.tsx:181
-msgid "View distribution"
-msgstr "ディストリビューションの表示"
+#~ msgid "View distribution"
+#~ msgstr "ディストリビューションの表示"
 
 #: src/constants.tsx:157
-msgid "View group"
-msgstr "グループの表示"
+#~ msgid "View group"
+#~ msgstr "グループの表示"
 
 #: src/components/headers/collection-header.tsx:432
 msgid "View more"
@@ -3805,12 +3811,12 @@ msgstr "詳細表示"
 
 #: src/constants.tsx:137
 #: src/constants.tsx:168
-msgid "View private containers"
-msgstr "プライベートコンテナーの表示"
+#~ msgid "View private containers"
+#~ msgstr "プライベートコンテナーの表示"
 
 #: src/constants.tsx:158
-msgid "View synclist"
-msgstr "同期リストの表示"
+#~ msgid "View synclist"
+#~ msgstr "同期リストの表示"
 
 #: src/containers/execution-environment/registry-list.tsx:485
 #: src/containers/execution-environment/registry-list.tsx:507
@@ -3820,27 +3826,27 @@ msgstr "同期リストの表示"
 #~ msgstr "View the task <0>here</0>."
 
 #: src/constants.tsx:159
-msgid "View user"
-msgstr "ユーザーの表示"
+#~ msgid "View user"
+#~ msgstr "ユーザーの表示"
 
-#: src/constants.tsx:349
+#: src/constants.tsx:190
 msgid "View, add, remove and change groups."
 msgstr "グループを表示、追加、削除、および変更します。"
 
-#: src/constants.tsx:351
+#: src/constants.tsx:192
 msgid "View, add, remove and change synclists."
 msgstr "同期リストを表示、追加、削除、および変更します。"
 
-#: src/constants.tsx:350
+#: src/constants.tsx:191
 msgid "View, add, remove and change users."
 msgstr "ユーザーを表示、追加、削除、および変更します。"
 
-#: src/constants.tsx:352
+#: src/constants.tsx:193
 msgid "View, and cancel any task."
 msgstr "タスクを表示およびキャンセルします。"
 
 #: src/components/my-imports/import-list.tsx:105
-#: src/constants.tsx:335
+#: src/constants.tsx:176
 #: src/containers/task-management/task-list-view.tsx:175
 msgid "Waiting"
 msgstr "待機中"
@@ -3880,7 +3886,7 @@ msgstr "はい"
 msgid "Yes, stop"
 msgstr "はい、停止します"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:145
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:143
 msgid "You are about to remove <0>{0}</0> from <1>{1}</1>."
 msgstr "<0>{0}</0> を<1>{1}</1> から削除しようとしています。"
 
@@ -3949,7 +3955,7 @@ msgstr "ユーザーを表示するパーミッションがありません。"
 msgid "You don't have rights to do this operation."
 msgstr "この操作を行う権限がありません。"
 
-#: src/components/collection-detail/collection-info.tsx:92
+#: src/components/collection-detail/collection-info.tsx:94
 msgid "You have to be logged in to be able to download the tarball."
 msgstr "tarball をダウンロードするには、ログインしている必要があります。"
 
@@ -4005,7 +4011,7 @@ msgstr "拒否"
 #~ msgstr "released {0}"
 
 #: src/components/legacy-role-list/legacy-role-item.tsx:68
-#: src/containers/legacy-roles/legacy-role.tsx:265
+#: src/containers/legacy-roles/legacy-role.tsx:280
 msgid "role.github_user logo"
 msgstr ""
 
@@ -4025,7 +4031,7 @@ msgstr "署名状態"
 msgid "tags"
 msgstr "タグ"
 
-#: src/containers/role-management/role-list.tsx:303
+#: src/containers/role-management/role-list.tsx:282
 msgid "true"
 msgstr "true"
 

@@ -48,7 +48,7 @@ msgstr "<0/> se eliminó"
 msgid "<0/> was removed from <1/>"
 msgstr "<0/> se eliminó de <1/>"
 
-#: src/components/collection-detail/collection-info.tsx:78
+#: src/components/collection-detail/collection-info.tsx:80
 msgid "<0>Note:</0> Installing collections with ansible-galaxy is only supported in ansible 2.9+"
 msgstr "<0>Nota:</0> La instalación de colecciones con ansible-galaxy sólo es compatible con ansible 2.9+"
 
@@ -68,7 +68,7 @@ msgstr "<0>Nota:</0> Es probable que su navegador bloquee los siguientes enlaces
 msgid "<0>Note:</0> Use this URL to configure ansible-galaxy to upload collections to this namespace. More information on ansible-galaxy configurations can be found <1>here</1><2> </2><3/>."
 msgstr "<0>Nota:</0> Utilice esta URL para configurar ansible-galaxy para cargar colecciones en este espacio de nombres. Puede encontrar más información sobre la configuración de ansible-galaxy <1>aquí</1><2> </2><3/>."
 
-#: src/containers/role-management/role-list.tsx:216
+#: src/containers/role-management/role-list.tsx:195
 msgid "<0>Role <1>{0}</1> will be permanently deleted.</0><2>This will also remove all associated permissions under this role.</2>"
 msgstr "<0>El rol <1>{0}</1> será eliminado permanentemente.</0><2>Esto también eliminará todos los permisos asociados bajo este rol.</2>"
 
@@ -180,7 +180,7 @@ msgstr "Actividad"
 #: src/components/rbac/owners-tab.tsx:366
 #: src/components/rbac/owners-tab.tsx:418
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:114
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:218
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:203
 #: src/containers/group-management/group-detail.tsx:282
 #: src/containers/group-management/group-detail.tsx:512
 #: src/containers/group-management/group-detail.tsx:563
@@ -188,24 +188,24 @@ msgid "Add"
 msgstr "Añadir"
 
 #: src/constants.tsx:114
-msgid "Add Ansible distribution"
-msgstr "Agregar la distribución de Ansible"
+#~ msgid "Add Ansible distribution"
+#~ msgstr "Agregar la distribución de Ansible"
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:104
 msgid "Add a README with instructions for using this container."
 msgstr "Añada un LÉEME con las instrucciones de uso de este contenedor."
 
 #: src/constants.tsx:115
-msgid "Add collection remote"
-msgstr "Agregar la colección a distancia"
+#~ msgid "Add collection remote"
+#~ msgstr "Agregar la colección a distancia"
 
 #: src/constants.tsx:124
-msgid "Add container distribution"
-msgstr "Agregar la distribución del contenedor"
+#~ msgid "Add container distribution"
+#~ msgstr "Agregar la distribución del contenedor"
 
 #: src/constants.tsx:126
-msgid "Add container repository"
-msgstr "Agregar el repositorio de contenedores"
+#~ msgid "Add container repository"
+#~ msgstr "Agregar el repositorio de contenedores"
 
 #: src/components/execution-environment/repository-form.tsx:142
 #: src/containers/execution-environment-list/execution_environment_list.tsx:158
@@ -213,12 +213,12 @@ msgid "Add execution environment"
 msgstr "Agregar entorno de ejecución"
 
 #: src/constants.tsx:142
-msgid "Add group"
-msgstr "Añadir grupo"
+#~ msgid "Add group"
+#~ msgstr "Añadir grupo"
 
 #: src/constants.tsx:143
-msgid "Add namespace"
-msgstr "Añadir espacio de nombres"
+#~ msgid "Add namespace"
+#~ msgstr "Añadir espacio de nombres"
 
 #: src/components/execution-environment/tag-manifest-modal.tsx:146
 msgid "Add new tag"
@@ -228,16 +228,15 @@ msgstr "Añadir nueva etiqueta"
 msgid "Add new tag to image"
 msgstr "Añadir una nueva etiqueta a la imagen"
 
-#: src/constants.tsx:141
 #: src/containers/execution-environment/registry-list.tsx:151
 #: src/containers/execution-environment/registry-list.tsx:214
 msgid "Add remote registry"
 msgstr "Añadir registro remoto"
 
 #: src/components/rbac/owners-tab.tsx:197
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:178
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:196
-#: src/containers/role-management/role-list.tsx:159
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:163
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:181
+#: src/containers/role-management/role-list.tsx:138
 msgid "Add roles"
 msgstr "Agregar roles"
 
@@ -246,8 +245,8 @@ msgid "Add selected users to group"
 msgstr "Añadir los usuarios seleccionados al grupo"
 
 #: src/constants.tsx:144
-msgid "Add synclist"
-msgstr "Añadir lista de sincronización"
+#~ msgid "Add synclist"
+#~ msgstr "Añadir lista de sincronización"
 
 #: src/components/execution-environment/repository-form.tsx:312
 msgid "Add tag(s) to exclude"
@@ -258,8 +257,8 @@ msgid "Add tag(s) to include"
 msgstr "Añadir etiqueta(s) para incluir"
 
 #: src/constants.tsx:145
-msgid "Add user"
-msgstr "Añadir usuario"
+#~ msgid "Add user"
+#~ msgstr "Añadir usuario"
 
 #: src/components/execution-environment/repository-form.tsx:388
 #~ msgid ""
@@ -273,15 +272,15 @@ msgstr "Añadir usuario"
 msgid "All"
 msgstr "Todos"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:118
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:116
 msgid "All associated permissions under this role were removed."
 msgstr "Se han eliminado todos los permisos asociados a este rol."
 
-#: src/constants.tsx:355
+#: src/constants.tsx:196
 msgid "Allow all actions on a task."
 msgstr "Permitir todas las acciones en una tarea."
 
-#: src/constants.tsx:356
+#: src/constants.tsx:197
 msgid "Allow all actions on a taskschedule."
 msgstr "Permitir todas las acciones en un programa de tareas."
 
@@ -306,7 +305,7 @@ msgstr "Estado de aprobación:"
 msgid "Approve"
 msgstr "Aprobar"
 
-#: src/constants.tsx:343
+#: src/constants.tsx:184
 msgid "Approve, reject and sync collections from remotes."
 msgstr "Aprueba, rechaza y sincroniza los cobros desde las remotas."
 
@@ -332,21 +331,21 @@ msgstr "Sistema operativo del navegador"
 msgid "Browser Version"
 msgstr "Versión del navegador"
 
-#: src/containers/role-management/role-list.tsx:269
-#: src/containers/role-management/role-list.tsx:302
-#: src/containers/role-management/role-list.tsx:397
+#: src/containers/role-management/role-list.tsx:248
+#: src/containers/role-management/role-list.tsx:281
+#: src/containers/role-management/role-list.tsx:334
 msgid "Built-in"
 msgstr "Incorporado"
 
-#: src/containers/role-management/role-list.tsx:500
+#: src/containers/role-management/role-list.tsx:437
 msgid "Built-in roles cannot be deleted."
 msgstr "Los roles incorporados no pueden ser eliminados."
 
-#: src/containers/role-management/role-list.tsx:393
+#: src/containers/role-management/role-list.tsx:330
 msgid "Built-in roles cannot be edited or deleted."
 msgstr "Los roles incorporados no pueden ser editados ni eliminados."
 
-#: src/containers/role-management/role-list.tsx:490
+#: src/containers/role-management/role-list.tsx:427
 msgid "Built-in roles cannot be edited."
 msgstr "Los roles incorporados no pueden ser editados."
 
@@ -380,7 +379,7 @@ msgstr "No se puede actualizar el control remoto sin una distribución adjunta."
 #: src/components/rbac/group-modal.tsx:61
 #: src/components/rbac/owners-tab.tsx:340
 #: src/components/rbac/owners-tab.tsx:411
-#: src/components/rbac/role-form.tsx:214
+#: src/components/rbac/role-form.tsx:146
 #: src/components/rbac/user-form.tsx:226
 #: src/components/repositories/remote-form.tsx:149
 #: src/components/signing/sign-all-certificates-modal.tsx:47
@@ -388,7 +387,7 @@ msgstr "No se puede actualizar el control remoto sin una distribución adjunta."
 #: src/components/signing/upload-sign-certificate-modal.tsx:50
 #: src/containers/edit-namespace/edit-namespace.tsx:159
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:158
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:211
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:196
 #: src/containers/group-management/group-detail.tsx:285
 msgid "Cancel"
 msgstr "Cancelar"
@@ -424,71 +423,71 @@ msgid "Change"
 msgstr "Cambiar"
 
 #: src/constants.tsx:116
-msgid "Change Ansible distribution"
-msgstr "Cambiar la distribución de Ansible"
+#~ msgid "Change Ansible distribution"
+#~ msgstr "Cambiar la distribución de Ansible"
 
-#: src/constants.tsx:344
+#: src/constants.tsx:185
 msgid "Change and upload collections to namespaces."
 msgstr "Cambia y sube las colecciones a los espacios de nombres."
 
 #: src/constants.tsx:117
-msgid "Change collection remote"
-msgstr "Cambiar la recogida a distancia"
+#~ msgid "Change collection remote"
+#~ msgstr "Cambiar la recogida a distancia"
 
 #: src/constants.tsx:127
-msgid "Change container distribution"
-msgstr "Cambiar la distribución del contenedor"
+#~ msgid "Change container distribution"
+#~ msgstr "Cambiar la distribución del contenedor"
 
 #: src/constants.tsx:128
 #: src/constants.tsx:170
-msgid "Change container namespace permissions"
-msgstr "Cambiar los permisos del espacio de nombres del contenedor"
+#~ msgid "Change container namespace permissions"
+#~ msgstr "Cambiar los permisos del espacio de nombres del contenedor"
 
 #: src/constants.tsx:129
-msgid "Change container repository"
-msgstr "Cambiar el repositorio de contenedores"
+#~ msgid "Change container repository"
+#~ msgstr "Cambiar el repositorio de contenedores"
 
 #: src/constants.tsx:133
-msgid "Change containers"
-msgstr "Cambiar los contenedores"
+#~ msgid "Change containers"
+#~ msgstr "Cambiar los contenedores"
 
 #: src/constants.tsx:177
-msgid "Change distribution"
-msgstr "Distribución de los cambios"
+#~ msgid "Change distribution"
+#~ msgstr "Distribución de los cambios"
 
-#: src/constants.tsx:348
+#: src/constants.tsx:189
 msgid "Change existing execution environments."
 msgstr "Indexación de entornos de ejecución en "
 
 #: src/constants.tsx:147
-msgid "Change group"
-msgstr "Cambiar de grupo"
+#~ msgid "Change group"
+#~ msgstr "Cambiar de grupo"
 
 #: src/constants.tsx:134
 #: src/constants.tsx:169
-msgid "Change image tags"
-msgstr "Cambiar las etiquetas de las imágenes"
+#~ msgid "Change image tags"
+#~ msgstr "Cambiar las etiquetas de las imágenes"
 
 #: src/constants.tsx:148
 #: src/constants.tsx:163
-msgid "Change namespace"
-msgstr "Cambiar el espacio de nombres"
+#~ msgid "Change namespace"
+#~ msgstr "Cambiar el espacio de nombres"
 
 #: src/constants.tsx:146
-msgid "Change remote registry"
-msgstr "Cambiar el registro remoto"
+#~ msgid "Change remote registry"
+#~ msgstr "Cambiar el registro remoto"
 
 #: src/constants.tsx:149
-msgid "Change synclist"
-msgstr "Cambiar lista de sincronización"
+#~ msgid "Change synclist"
+#~ msgstr "Cambiar lista de sincronización"
 
 #: src/constants.tsx:138
-msgid "Change task"
-msgstr "Cambiar tarea"
+#~ msgid "Change task"
+#~ msgstr "Cambiar tarea"
 
 #: src/constants.tsx:150
-msgid "Change user"
-msgstr "Cambiar usuario"
+#~ msgid "Change user"
+#~ msgstr "Cambiar usuario"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:599
 msgid "Changes to certification status for collection \"{0} {1} v{2}\" could not be saved."
@@ -580,7 +579,7 @@ msgstr "La colección \"{name} v{collectionVersion}\" se eliminó correctamente.
 msgid "Collection \"{name}\" could not be deleted."
 msgstr "No se pudo eliminar la colección \"{name}\"."
 
-#: src/components/collection-detail/collection-info.tsx:189
+#: src/components/collection-detail/collection-info.tsx:191
 msgid "Collection \"{name}\" could not be downloaded."
 msgstr "No se pudo descargar la colección \"{name}\"."
 
@@ -593,12 +592,12 @@ msgid "Collection Name"
 msgstr "Nombre de la colección"
 
 #: src/constants.tsx:27
-msgid "Collection Namespaces"
-msgstr "Espacios de nombres de la colección"
+#~ msgid "Collection Namespaces"
+#~ msgstr "Espacios de nombres de la colección"
 
 #: src/constants.tsx:65
-msgid "Collection Remotes"
-msgstr "Mandos a distancia de la colección"
+#~ msgid "Collection Remotes"
+#~ msgstr "Mandos a distancia de la colección"
 
 #: src/components/repositories/local-repository-table.tsx:55
 msgid "Collection count"
@@ -644,7 +643,6 @@ msgstr "Versiones de la colección"
 #~ msgid "Collection was not found in the system. You must upload it."
 #~ msgstr "La colección no se ha encontrado en el sistema. Debe cargarla."
 
-#: src/constants.tsx:37
 #: src/containers/namespace-detail/namespace-detail.tsx:237
 #: src/containers/search/search.tsx:199
 #: src/loaders/standalone/standalone-loader.tsx:343
@@ -662,7 +660,7 @@ msgstr "Las colecciones aparecerán una vez cargadas"
 msgid "Command"
 msgstr "Comando"
 
-#: src/constants.tsx:212
+#: src/constants.tsx:53
 msgid "Community"
 msgstr "Comunidad"
 
@@ -677,7 +675,7 @@ msgstr "Nombre de la empresa"
 
 #: src/components/my-imports/import-list.tsx:93
 #: src/components/status/status-indicator.tsx:67
-#: src/constants.tsx:332
+#: src/constants.tsx:173
 #: src/containers/task-management/task-list-view.tsx:163
 msgid "Completed"
 msgstr "Completado"
@@ -739,8 +737,8 @@ msgid "Container repository name"
 msgstr "Nombre del repositorio de contenedores"
 
 #: src/constants.tsx:73
-msgid "Containers"
-msgstr "Contenedores"
+#~ msgid "Containers"
+#~ msgstr "Contenedores"
 
 #: src/containers/collection-detail/collection-content.tsx:65
 msgid "Content"
@@ -810,14 +808,14 @@ msgstr "Crear un nuevo rol"
 msgid "Create a password using at least {minLength} characters, including special characters , ex <!@$%>. Avoid using common names or expressions."
 msgstr "Cree una contraseña con, al menos, {minLength} caracteres, incluidos los caracteres especiales, por ejemplo <!@$%>. Evite utilizar nombres o expresiones comunes."
 
-#: src/constants.tsx:347
+#: src/constants.tsx:188
 msgid "Create and update execution environments under existing container namespaces."
 msgstr "Cree y actualice los entornos de ejecución bajo los espacios de nombres de los contenedores existentes."
 
 #: src/constants.tsx:125
 #: src/constants.tsx:165
-msgid "Create new containers"
-msgstr "Crear nuevo grupo de contenedores"
+#~ msgid "Create new containers"
+#~ msgstr "Crear nuevo grupo de contenedores"
 
 #: src/containers/role-management/role-create.tsx:61
 msgid "Create new role"
@@ -828,14 +826,14 @@ msgstr "Crear nuevo rol"
 msgid "Create new user"
 msgstr "Crear nuevo usuario"
 
-#: src/constants.tsx:341
+#: src/constants.tsx:182
 msgid "Create, delete and change collection namespaces. Upload and delete collections. Sync collections from remotes. Approve and reject collections."
 msgstr "Crear, eliminar y modificar los espacios de nombres de las colecciones. Cargar y eliminar colecciones. Sincronizar colecciones desde remotas. Aprobar y rechazar colecciones."
 
 #: src/containers/execution-environment/registry-list.tsx:323
 #: src/containers/execution-environment-list/execution_environment_list.tsx:302
 #: src/containers/group-management/group-detail.tsx:636
-#: src/containers/role-management/role-list.tsx:180
+#: src/containers/role-management/role-list.tsx:159
 #: src/containers/user-management/user-list.tsx:286
 msgid "Created"
 msgstr "Creado"
@@ -846,15 +844,15 @@ msgstr "Creado"
 msgid "Created on"
 msgstr "Creado el"
 
-#: src/constants.tsx:247
+#: src/constants.tsx:88
 msgid "Curate all synclist repository"
 msgstr "Curar todo el repositorio de listas de sincronización"
 
-#: src/constants.tsx:238
+#: src/constants.tsx:79
 msgid "Curate synclist repository"
 msgstr "Curar el repositorio de listas de sincronización"
 
-#: src/constants.tsx:251
+#: src/constants.tsx:92
 msgid "Curate synclist repository batch"
 msgstr "Curar el lote de repositorios de listas de sincronización"
 
@@ -870,7 +868,7 @@ msgstr "Etiquetas excluidas actualmente"
 msgid "Currently included tags"
 msgstr "Etiquetas incluidas actualmente"
 
-#: src/components/rbac/role-permissions.tsx:46
+#: src/components/rbac/permission-categories.tsx:62
 msgid "Custom permissions"
 msgstr "Otros permisos"
 
@@ -897,7 +895,7 @@ msgstr "Fecha de creación"
 #: src/containers/execution-environment-list/execution_environment_list.tsx:387
 #: src/containers/group-management/group-detail.tsx:229
 #: src/containers/group-management/group-list.tsx:422
-#: src/containers/role-management/role-list.tsx:481
+#: src/containers/role-management/role-list.tsx:418
 #: src/containers/task-management/task-list-view.tsx:317
 #: src/containers/task-management/task-list-view.tsx:333
 #: src/containers/user-management/user-detail.tsx:126
@@ -906,16 +904,16 @@ msgid "Delete"
 msgstr "ELIMINAR"
 
 #: src/constants.tsx:118
-msgid "Delete Ansible distribution"
-msgstr "Eliminar la distribución de Ansible"
+#~ msgid "Delete Ansible distribution"
+#~ msgstr "Eliminar la distribución de Ansible"
 
 #: src/constants.tsx:119
-msgid "Delete collection"
-msgstr "Eliminar la colección"
+#~ msgid "Delete collection"
+#~ msgstr "Eliminar la colección"
 
 #: src/constants.tsx:120
-msgid "Delete collection remote"
-msgstr "Eliminar el mando a distancia de la colección"
+#~ msgid "Delete collection remote"
+#~ msgstr "Eliminar el mando a distancia de la colección"
 
 #: src/components/delete-modal/delete-collection-modal.tsx:38
 msgid "Delete collection version?"
@@ -926,32 +924,32 @@ msgid "Delete collection?"
 msgstr "¿Eliminar la colección?"
 
 #: src/constants.tsx:130
-msgid "Delete container distribution"
-msgstr "Eliminar la distribución del contenedor"
+#~ msgid "Delete container distribution"
+#~ msgstr "Eliminar la distribución del contenedor"
 
 #: src/constants.tsx:131
-msgid "Delete container namespace"
-msgstr "Eliminar el espacio de nombres del contenedor"
+#~ msgid "Delete container namespace"
+#~ msgstr "Eliminar el espacio de nombres del contenedor"
 
 #: src/constants.tsx:132
-msgid "Delete container repository"
-msgstr "Eliminar el repositorio de contenedores"
+#~ msgid "Delete container repository"
+#~ msgstr "Eliminar el repositorio de contenedores"
 
 #: src/constants.tsx:174
-msgid "Delete container's distribution"
-msgstr "Borrar la distribución del contenedor"
+#~ msgid "Delete container's distribution"
+#~ msgstr "Borrar la distribución del contenedor"
 
 #: src/constants.tsx:173
-msgid "Delete container's namespace"
-msgstr "Borrar el espacio de nombres del contenedor"
+#~ msgid "Delete container's namespace"
+#~ msgstr "Borrar el espacio de nombres del contenedor"
 
 #: src/components/delete-modal/delete-execution-environment-modal.tsx:42
 msgid "Delete container?"
 msgstr "¿Eliminar contenedor?"
 
 #: src/constants.tsx:178
-msgid "Delete distribution"
-msgstr "Borrar la distribución"
+#~ msgid "Delete distribution"
+#~ msgstr "Borrar la distribución"
 
 #: src/utilities/delete-collection.tsx:44
 #: src/utilities/delete-collection.tsx:55
@@ -959,8 +957,8 @@ msgid "Delete entire collection"
 msgstr "Borrar toda la colección"
 
 #: src/constants.tsx:152
-msgid "Delete group"
-msgstr "Eliminar grupo"
+#~ msgid "Delete group"
+#~ msgstr "Eliminar grupo"
 
 #: src/components/rbac/delete-group-modal.tsx:25
 msgid "Delete group?"
@@ -970,7 +968,6 @@ msgstr "¿Borrar el grupo?"
 msgid "Delete image?"
 msgstr "¿Eliminar imagen?"
 
-#: src/constants.tsx:153
 #: src/containers/namespace-detail/namespace-detail.tsx:811
 #: src/containers/namespace-detail/namespace-detail.tsx:825
 msgid "Delete namespace"
@@ -981,32 +978,32 @@ msgid "Delete namespace?"
 msgstr "¿Eliminar el espacio de nombres?"
 
 #: src/constants.tsx:151
-msgid "Delete remote registry"
-msgstr "Eliminar el registro remoto"
+#~ msgid "Delete remote registry"
+#~ msgstr "Eliminar el registro remoto"
 
 #: src/containers/execution-environment/registry-list.tsx:224
 msgid "Delete remote registry?"
 msgstr "¿Borrar el registro remoto?"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:138
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:136
 msgid "Delete role: {0}"
 msgstr "Eliminar el rol: {0}"
 
-#: src/containers/role-management/role-list.tsx:213
+#: src/containers/role-management/role-list.tsx:192
 msgid "Delete role?"
 msgstr "¿Borrar el rol?"
 
 #: src/constants.tsx:154
-msgid "Delete synclist"
-msgstr "Borrar lista de sincronización"
+#~ msgid "Delete synclist"
+#~ msgstr "Borrar lista de sincronización"
 
 #: src/constants.tsx:139
-msgid "Delete task"
-msgstr "Eliminar tarea"
+#~ msgid "Delete task"
+#~ msgstr "Eliminar tarea"
 
 #: src/constants.tsx:155
-msgid "Delete user"
-msgstr "Eliminar usuario"
+#~ msgid "Delete user"
+#~ msgstr "Eliminar usuario"
 
 #: src/components/rbac/delete-user-modal.tsx:41
 msgid "Delete user?"
@@ -1084,12 +1081,12 @@ msgstr "Actualización del estado de desaprobación a partir de la colección \"
 #: src/components/collection-detail/collection-content-list.tsx:109
 #: src/components/execution-environment/repository-form.tsx:358
 #: src/components/namespace-form/namespace-form.tsx:121
-#: src/components/rbac/role-form.tsx:113
+#: src/components/rbac/role-form.tsx:105
 #: src/components/rbac/role-list-table.tsx:49
 #: src/components/rbac/select-roles.tsx:98
 #: src/containers/execution-environment-list/execution_environment_list.tsx:297
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:237
-#: src/containers/role-management/role-list.tsx:175
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:222
+#: src/containers/role-management/role-list.tsx:154
 #: src/containers/task-management/task_detail.tsx:354
 msgid "Description"
 msgstr "Descripción"
@@ -1102,7 +1099,7 @@ msgstr "Nombre descriptivo"
 msgid "Detail"
 msgstr "Detalle"
 
-#: src/components/rbac/role-form.tsx:82
+#: src/components/rbac/role-form.tsx:74
 msgid "Details"
 msgstr "Detalles"
 
@@ -1164,7 +1161,7 @@ msgstr "Descargar solo colecciones firmadas"
 msgid "Download requirements file"
 msgstr "Descargar el archivo de requisitos"
 
-#: src/components/collection-detail/collection-info.tsx:117
+#: src/components/collection-detail/collection-info.tsx:119
 msgid "Download tarball"
 msgstr "Descargar el tarball"
 
@@ -1187,7 +1184,7 @@ msgstr "Desplegable"
 #: src/containers/execution-environment-detail/base.tsx:210
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:97
 #: src/containers/execution-environment-list/execution_environment_list.tsx:360
-#: src/containers/role-management/role-list.tsx:467
+#: src/containers/role-management/role-list.tsx:404
 #: src/containers/settings/user-profile.tsx:96
 #: src/containers/user-management/user-detail.tsx:116
 #: src/containers/user-management/user-edit.tsx:67
@@ -1240,12 +1237,12 @@ msgid "Edit user"
 msgstr "Editar el usuario"
 
 #: src/components/rbac/role-list-table.tsx:54
-#: src/containers/role-management/role-list.tsx:185
-#: src/containers/role-management/role-list.tsx:264
-#: src/containers/role-management/role-list.tsx:273
-#: src/containers/role-management/role-list.tsx:302
-#: src/containers/role-management/role-list.tsx:306
-#: src/containers/role-management/role-list.tsx:400
+#: src/containers/role-management/role-list.tsx:164
+#: src/containers/role-management/role-list.tsx:243
+#: src/containers/role-management/role-list.tsx:252
+#: src/containers/role-management/role-list.tsx:281
+#: src/containers/role-management/role-list.tsx:285
+#: src/containers/role-management/role-list.tsx:337
 msgid "Editable"
 msgstr "Editable"
 
@@ -1479,7 +1476,7 @@ msgstr "Expiración"
 #: src/components/my-imports/import-console.tsx:114
 #: src/components/my-imports/import-list.tsx:97
 #: src/components/status/status-indicator.tsx:75
-#: src/constants.tsx:333
+#: src/constants.tsx:174
 #: src/containers/task-management/task-list-view.tsx:167
 msgid "Failed"
 msgstr "Fallido"
@@ -1562,7 +1559,7 @@ msgstr "Registros de seguimiento"
 msgid "Galaxy Logo"
 msgstr "Logotipo de Galaxy"
 
-#: src/containers/role-management/role-list.tsx:308
+#: src/containers/role-management/role-list.tsx:287
 msgid "Galaxy only"
 msgstr "Sólo para la Galaxia"
 
@@ -1574,7 +1571,7 @@ msgstr "Obtener token"
 msgid "Giving up waiting for task after 10 attempts."
 msgstr "Abandonar la espera de la tarea después de 10 intentos."
 
-#: src/components/collection-detail/collection-info.tsx:160
+#: src/components/collection-detail/collection-info.tsx:162
 msgid "Go to documentation"
 msgstr "Ir a la documentación"
 
@@ -1658,7 +1655,6 @@ msgstr "Grupo {groupId}"
 
 #: src/components/rbac/user-form.tsx:149
 #: src/components/rbac/user-form.tsx:163
-#: src/constants.tsx:55
 #: src/containers/group-management/group-detail.tsx:191
 #: src/containers/group-management/group-list.tsx:146
 #: src/containers/user-management/user-list.tsx:282
@@ -1725,12 +1721,12 @@ msgstr "Imágenes"
 msgid "Images will appear once uploaded"
 msgstr "Las imágenes aparecerán una vez cargadas"
 
-#: src/constants.tsx:235
-#: src/constants.tsx:244
+#: src/constants.tsx:76
+#: src/constants.tsx:85
 msgid "Import and auto approve"
 msgstr "Importación y aprobación automática"
 
-#: src/constants.tsx:241
+#: src/constants.tsx:82
 msgid "Import and move to staging"
 msgstr "Importar y trasladar a la puesta en escena"
 
@@ -1772,7 +1768,7 @@ msgstr "Instalar"
 #~ msgid "Install Version"
 #~ msgstr "Install Version"
 
-#: src/components/collection-detail/collection-info.tsx:74
+#: src/components/collection-detail/collection-info.tsx:76
 msgid "Installation"
 msgstr "Instalación"
 
@@ -1863,17 +1859,17 @@ msgstr "Más información"
 msgid "Legacy"
 msgstr ""
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:135
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:119
 #: src/loaders/standalone/standalone-loader.tsx:396
 msgid "Legacy Namespaces"
 msgstr ""
 
-#: src/containers/legacy-roles/legacy-roles.tsx:146
+#: src/containers/legacy-roles/legacy-roles.tsx:128
 #: src/loaders/standalone/standalone-loader.tsx:393
 msgid "Legacy Roles"
 msgstr ""
 
-#: src/components/collection-detail/collection-info.tsx:64
+#: src/components/collection-detail/collection-info.tsx:65
 msgid "License"
 msgstr "Licencia"
 
@@ -1894,16 +1890,16 @@ msgstr "Texto del enlace"
 msgid "List of Collections"
 msgstr "Lista de colecciones"
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:158
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:142
 msgid "List of Legacy Namespaces"
 msgstr ""
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:142
-#: src/containers/legacy-roles/legacy-roles.tsx:170
+#: src/containers/legacy-roles/legacy-roles.tsx:152
 msgid "List of Legacy Roles"
 msgstr ""
 
-#: src/containers/legacy-roles/legacy-role.tsx:157
+#: src/containers/legacy-roles/legacy-role.tsx:172
 msgid "List of versions"
 msgstr ""
 
@@ -1938,7 +1934,7 @@ msgstr "URL del logotipo"
 msgid "Logout"
 msgstr "Finalización de la sesión"
 
-#: src/constants.tsx:340
+#: src/constants.tsx:181
 msgid "Manage all content types."
 msgstr "Gestiona todos los tipos de contenido."
 
@@ -1960,8 +1956,8 @@ msgid "Message"
 msgstr "Mensaje"
 
 #: src/constants.tsx:121
-msgid "Modify Ansible repo content"
-msgstr "Modificar el contenido del repo de Ansible"
+#~ msgid "Modify Ansible repo content"
+#~ msgstr "Modificar el contenido del repo de Ansible"
 
 #: src/components/namespace-form/namespace-form.tsx:83
 msgid "Moved to the <0>Namespace owners</0> <1/> tab"
@@ -2001,7 +1997,7 @@ msgstr "Mi perfil"
 #: src/components/namespace-form/namespace-form.tsx:46
 #: src/components/namespace-modal/namespace-modal.tsx:122
 #: src/components/rbac/group-modal.tsx:75
-#: src/components/rbac/role-form.tsx:90
+#: src/components/rbac/role-form.tsx:82
 #: src/components/rbac/select-group.tsx:144
 #: src/components/rbac/select-group.tsx:156
 #: src/components/rbac/select-roles.tsx:178
@@ -2011,8 +2007,8 @@ msgstr "Mi perfil"
 #: src/containers/execution-environment/registry-list.tsx:289
 #: src/containers/execution-environment/registry-list.tsx:318
 #: src/containers/execution-environment-list/execution_environment_list.tsx:262
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:317
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:349
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:302
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:334
 #: src/containers/namespace-list/namespace-list.tsx:230
 #: src/containers/signature-keys/list.tsx:125
 #: src/containers/signature-keys/list.tsx:151
@@ -2092,7 +2088,7 @@ msgstr "No se pudo mostrar la lista de espacios de nombres."
 msgid "Namespaces will appear once created"
 msgstr "Los espacios de nombres aparecerán una vez creados"
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:142
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:126
 msgid "Namespaces will appear once created or roles are imported"
 msgstr ""
 
@@ -2190,7 +2186,7 @@ msgstr "Todavía no hay colecciones gestionadas"
 msgid "No namespace selected."
 msgstr "No se ha seleccionado ningún espacio de nombres."
 
-#: src/containers/legacy-namespaces/legacy-namespaces.tsx:141
+#: src/containers/legacy-namespaces/legacy-namespaces.tsx:125
 #: src/containers/namespace-list/namespace-list.tsx:287
 msgid "No namespaces yet"
 msgstr "Todavía no hay espacios de nombres"
@@ -2199,9 +2195,14 @@ msgstr "Todavía no hay espacios de nombres"
 msgid "No parent task"
 msgstr "Ninguna tarea primaria"
 
-#: src/components/rbac/permission-chip-selector.tsx:98
+#: src/components/rbac/permission-chip-selector.tsx:54
+#: src/components/rbac/permission-chip-selector.tsx:87
 msgid "No permission"
 msgstr "Sin permiso"
+
+#: src/components/rbac/permission-categories.tsx:95
+msgid "No permissions"
+msgstr ""
 
 #: src/containers/execution-environment/registry-list.tsx:234
 msgid "No remote registries yet"
@@ -2220,7 +2221,7 @@ msgid "No results match the filter criteria. Try changing your filter settings."
 msgstr "Ningún resultado coincide con los criterios de filtrado. Pruebe cambiar la configuración del filtro."
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:137
-#: src/containers/legacy-roles/legacy-roles.tsx:152
+#: src/containers/legacy-roles/legacy-roles.tsx:134
 msgid "No roles yet"
 msgstr ""
 
@@ -2257,11 +2258,15 @@ msgstr "No existe ningún usuario"
 msgid "No version of {fqn} exists that matches {version_range}."
 msgstr ""
 
+#: src/containers/legacy-roles/legacy-role.tsx:165
+msgid "No versions"
+msgstr ""
+
 #: src/components/rbac/user-form.tsx:204
 msgid "Not a super user"
 msgstr "No es un superusuario"
 
-#: src/components/rbac/permission-chip-selector.tsx:82
+#: src/components/rbac/permission-chip-selector.tsx:97
 #: src/components/typeahead/typeahead.tsx:88
 #: src/containers/collection-detail/collection-docs.tsx:275
 msgid "Not found"
@@ -2390,12 +2395,12 @@ msgstr "Pendiente"
 #~ msgid "Permissions"
 #~ msgstr "Permissions"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:101
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:99
 msgid "Permissions for group \"{0}\" could not be displayed."
 msgstr "No se pudieron mostrar los permisos para el grupo \"{0}\"."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:298
-#: src/containers/role-management/role-list.tsx:233
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:283
+#: src/containers/role-management/role-list.tsx:212
 msgid "Please add a role by using the button below."
 msgstr "Por favor, añada un rol utilizando el botón de abajo."
 
@@ -2430,7 +2435,7 @@ msgstr ""
 #: src/components/markdown-editor/markdown-editor.tsx:38
 #: src/components/rbac/owners-tab.tsx:364
 #: src/components/rbac/owners-tab.tsx:416
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:216
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:201
 msgid "Preview"
 msgstr "Vista previa"
 
@@ -2467,19 +2472,19 @@ msgstr "Nombre de usuario del proxy"
 msgid "Public key"
 msgstr "Llave pública"
 
-#: src/constants.tsx:210
+#: src/constants.tsx:51
 #: src/containers/execution-environment-detail/execution_environment_detail_images.tsx:158
 msgid "Published"
 msgstr "Publicado"
 
 #: src/constants.tsx:180
-msgid "Pull distribution"
-msgstr "Extraer distribución"
+#~ msgid "Pull distribution"
+#~ msgstr "Extraer distribución"
 
 #: src/constants.tsx:135
 #: src/constants.tsx:166
-msgid "Pull private containers"
-msgstr "Extraer contenedores privados"
+#~ msgid "Pull private containers"
+#~ msgstr "Extraer contenedores privados"
 
 #: src/containers/execution-environment-detail/execution_environment_detail.tsx:79
 msgid "Pull this image"
@@ -2489,107 +2494,107 @@ msgstr "Extraer esta imagen"
 msgid "Pulp Ansible Version"
 msgstr "Versión de Pulp Ansible"
 
-#: src/constants.tsx:252
+#: src/constants.tsx:93
 msgid "Pulp Ansible: Collections sync"
 msgstr "Pulp Ansible: Sincronización de colecciones"
 
-#: src/constants.tsx:261
+#: src/constants.tsx:102
 msgid "Pulp Ansible: Roles synchronize"
 msgstr "Pulp Ansible: Los roles se sincronizan"
 
-#: src/constants.tsx:255
+#: src/constants.tsx:96
 msgid "Pulp ansible: Copy content"
 msgstr "Pulp ansible: Copiar contenido"
 
-#: src/constants.tsx:266
+#: src/constants.tsx:107
 msgid "Pulp ansible: Import collection"
 msgstr "Pulpa ansible: Importar colección"
 
-#: src/constants.tsx:265
+#: src/constants.tsx:106
 msgid "Pulp ansible: Update collection remote"
 msgstr "Pulp ansible: Actualización de la colección remota"
 
-#: src/constants.tsx:258
+#: src/constants.tsx:99
 msgid "Pulp ansible: collection sync"
 msgstr "Pulp ansible: sincronización de colecciones"
 
-#: src/constants.tsx:284
+#: src/constants.tsx:125
 msgid "Pulp container: Build image from containerfile"
 msgstr "Contenedor de Pulp: Construir la imagen desde el archivo de contenedor"
 
-#: src/constants.tsx:287
+#: src/constants.tsx:128
 msgid "Pulp container: General multi delete"
 msgstr "Contenedor de Pulp: Eliminación múltiple general"
 
-#: src/constants.tsx:278
+#: src/constants.tsx:119
 msgid "Pulp container: Recursive add content"
 msgstr "Contenedor de Pulp: Añadir contenido de forma recursiva"
 
-#: src/constants.tsx:281
+#: src/constants.tsx:122
 msgid "Pulp container: Recursive remove content"
 msgstr "Contenedor de Pulp: Eliminar contenido de forma recursiva"
 
-#: src/constants.tsx:269
+#: src/constants.tsx:110
 msgid "Pulp container: Tag image"
 msgstr "Contenedor de Pulp: Imagen de la etiqueta"
 
-#: src/constants.tsx:275
+#: src/constants.tsx:116
 msgid "Pulp container: Tasks synchronize"
 msgstr "Contenedor de Pulp: Las tareas se sincronizan"
 
-#: src/constants.tsx:272
+#: src/constants.tsx:113
 msgid "Pulp container: Untage image"
 msgstr "Contenedor de Pulp: Imagen de untaje"
 
-#: src/constants.tsx:323
+#: src/constants.tsx:164
 msgid "Pulpcore: Add and remove"
 msgstr "Pulpcore: Añadir y eliminar"
 
-#: src/constants.tsx:326
+#: src/constants.tsx:167
 msgid "Pulpcore: Add or remove"
 msgstr "Pulpcore: Añadir o eliminar"
 
-#: src/constants.tsx:314
+#: src/constants.tsx:155
 msgid "Pulpcore: Delete version"
 msgstr "Pulpcore: Borrar versión"
 
-#: src/constants.tsx:299
+#: src/constants.tsx:140
 msgid "Pulpcore: General create"
 msgstr "Pulpcore: Creación general"
 
-#: src/constants.tsx:305
+#: src/constants.tsx:146
 msgid "Pulpcore: General delete"
 msgstr "Pulpcore: Eliminación general"
 
-#: src/constants.tsx:302
+#: src/constants.tsx:143
 msgid "Pulpcore: General update"
 msgstr "Pulpcore: Actualización general"
 
-#: src/constants.tsx:290
+#: src/constants.tsx:131
 msgid "Pulpcore: Import repository version"
 msgstr "Pulpcore: Importar la versión del repositorio"
 
-#: src/constants.tsx:293
+#: src/constants.tsx:134
 msgid "Pulpcore: Orphan cleanup"
 msgstr "Pulpcore: Limpieza de huérfanos"
 
-#: src/constants.tsx:308
+#: src/constants.tsx:149
 msgid "Pulpcore: Pulp export"
 msgstr "Pulpcore: Exportación de Pulp"
 
-#: src/constants.tsx:311
+#: src/constants.tsx:152
 msgid "Pulpcore: Pulp import"
 msgstr "Pulpcore: Importación de Pulp"
 
-#: src/constants.tsx:296
+#: src/constants.tsx:137
 msgid "Pulpcore: Repair all artifacts"
 msgstr "Pulpcore: Repara todos los artefactos"
 
-#: src/constants.tsx:317
+#: src/constants.tsx:158
 msgid "Pulpcore: Repair version"
 msgstr "Pulpcore: Versión de reparación"
 
-#: src/constants.tsx:320
+#: src/constants.tsx:161
 msgid "Pulpcore: Upload commit"
 msgstr "Pulpcore: Subir el finalizado"
 
@@ -2598,26 +2603,26 @@ msgid "Push container images"
 msgstr "Enviar imágenes de contenedores"
 
 #: src/constants.tsx:179
-msgid "Push distribution"
-msgstr "Distribución por envío"
+#~ msgid "Push distribution"
+#~ msgstr "Distribución por envío"
 
 #: src/constants.tsx:171
-msgid "Push images to existing containers"
-msgstr "Enviar las imágenes a los contenedores existentes"
+#~ msgid "Push images to existing containers"
+#~ msgstr "Enviar las imágenes a los contenedores existentes"
 
 #: src/constants.tsx:176
-msgid "Push new containers"
-msgstr "Enviar nuevos contenedores"
+#~ msgid "Push new containers"
+#~ msgstr "Enviar nuevos contenedores"
 
 #: src/constants.tsx:136
-msgid "Push to existing containers"
-msgstr "Enviar a los contenedores existentes"
+#~ msgid "Push to existing containers"
+#~ msgstr "Enviar a los contenedores existentes"
 
-#: src/constants.tsx:346
+#: src/constants.tsx:187
 msgid "Push, and change execution environments."
 msgstr "Empuje, y cambie los entornos de ejecución."
 
-#: src/constants.tsx:345
+#: src/constants.tsx:186
 msgid "Push, delete, and change execution environments. Create, delete and change remote registries."
 msgstr "Empujar, eliminar y cambiar los entornos de ejecución. Crear, eliminar y modificar registros remotos."
 
@@ -2637,7 +2642,7 @@ msgstr "Léame"
 msgid "Reason: task {0}"
 msgstr "Razón: tarea {0}"
 
-#: src/constants.tsx:211
+#: src/constants.tsx:52
 msgid "Red Hat Certified"
 msgstr "Certificado por Red Hat"
 
@@ -2667,7 +2672,7 @@ msgstr "Rechazar"
 msgid "Rejected"
 msgstr "Rechazado"
 
-#: src/containers/legacy-roles/legacy-role.tsx:115
+#: src/containers/legacy-roles/legacy-role.tsx:116
 msgid "Released <0/>"
 msgstr ""
 
@@ -2676,7 +2681,6 @@ msgstr ""
 msgid "Remote"
 msgstr "Remoto"
 
-#: src/constants.tsx:87
 #: src/containers/execution-environment/registry-list.tsx:231
 #: src/loaders/standalone/standalone-loader.tsx:382
 msgid "Remote Registries"
@@ -2706,7 +2710,7 @@ msgstr "Los repositorios remotos aparecerán una vez añadidos"
 msgid "Remove"
 msgstr "Eliminar"
 
-#: src/constants.tsx:234
+#: src/constants.tsx:75
 msgid "Remove content from repository"
 msgstr "Eliminar el contenido del repositorio"
 
@@ -2719,7 +2723,7 @@ msgid "Remove group {groupname}?"
 msgstr "Eliminar el grupo {groupname}?"
 
 #: src/components/rbac/owners-tab.tsx:256
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:387
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:371
 msgid "Remove role"
 msgstr "Eliminar el papel"
 
@@ -2755,7 +2759,7 @@ msgstr "Gestión de repositorios"
 msgid "Repository name"
 msgstr "Nombre del repositorio"
 
-#: src/components/collection-detail/collection-info.tsx:129
+#: src/components/collection-detail/collection-info.tsx:131
 msgid "Requires Ansible"
 msgstr "Requiere Ansible"
 
@@ -2774,7 +2778,7 @@ msgstr "Recursos"
 #: src/components/rbac/owners-tab.tsx:227
 #: src/components/rbac/role-list-table.tsx:44
 #: src/components/rbac/select-roles.tsx:93
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:232
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:217
 msgid "Role"
 msgstr "Rol"
 
@@ -2782,7 +2786,7 @@ msgstr "Rol"
 msgid "Role \"{0}\" could not be created."
 msgstr "No se ha podido crear el rol \"{0}\"."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:124
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:122
 msgid "Role \"{0}\" could not be deleted."
 msgstr "No se pudo eliminar la rol \"{0}\"."
 
@@ -2790,55 +2794,55 @@ msgstr "No se pudo eliminar la rol \"{0}\"."
 msgid "Role \"{0}\" could not be displayed."
 msgstr "No se pudo mostrar el rol \"{0}\"."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:116
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:114
 msgid "Role \"{0}\" has been successfully removed."
 msgstr "El rol \"{0}\" se eliminó correctamente."
 
-#: src/containers/role-management/role-list.tsx:442
+#: src/containers/role-management/role-list.tsx:379
 msgid "Role \"{name}\" could not be deleted."
 msgstr "No se pudo eliminar la imagen \"{name}\"."
 
-#: src/containers/role-management/role-list.tsx:435
+#: src/containers/role-management/role-list.tsx:372
 msgid "Role \"{name}\" has been successfully deleted."
 msgstr "El rol \"{name}\" se eliminó correctamente."
 
-#: src/containers/legacy-roles/legacy-role.tsx:372
+#: src/containers/legacy-roles/legacy-role.tsx:387
 msgid "Role Header"
 msgstr ""
 
-#: src/containers/role-management/role-list.tsx:170
-#: src/containers/role-management/role-list.tsx:259
-#: src/containers/role-management/role-list.tsx:307
+#: src/containers/role-management/role-list.tsx:149
+#: src/containers/role-management/role-list.tsx:238
+#: src/containers/role-management/role-list.tsx:286
 msgid "Role name"
 msgstr "Nombre del rol"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:278
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:263
 msgid "Role {0} could not be assigned to group {1}."
 msgstr "El rol {0} no pudo ser asignado al grupo {1}."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:265
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:250
 msgid "Role {0} has been successfully added to {1}."
 msgstr "El rol \"{0}\" se agregó correctamente a \"{1}\"."
 
 #: src/containers/role-management/role-create.tsx:60
 #: src/containers/role-management/role-edit.tsx:149
-#: src/containers/role-management/role-list.tsx:227
+#: src/containers/role-management/role-list.tsx:206
 #: src/loaders/standalone/standalone-loader.tsx:426
 msgid "Roles"
 msgstr "Roles"
 
-#: src/containers/role-management/role-list.tsx:531
+#: src/containers/role-management/role-list.tsx:468
 msgid "Roles list could not be displayed."
 msgstr "No se pudo mostrar la lista de usuarios."
 
 #: src/containers/legacy-namespaces/legacy-namespace.tsx:138
-#: src/containers/legacy-roles/legacy-roles.tsx:153
+#: src/containers/legacy-roles/legacy-roles.tsx:135
 msgid "Roles will appear once imported"
 msgstr ""
 
 #: src/components/my-imports/import-list.tsx:101
 #: src/components/status/status-indicator.tsx:61
-#: src/constants.tsx:334
+#: src/constants.tsx:175
 #: src/containers/task-management/task-list-view.tsx:171
 msgid "Running"
 msgstr "Ejecutándose"
@@ -2851,7 +2855,7 @@ msgstr "SSO URL"
 #: src/components/execution-environment/repository-form.tsx:151
 #: src/components/execution-environment/tag-manifest-modal.tsx:120
 #: src/components/rbac/group-modal.tsx:57
-#: src/components/rbac/role-form.tsx:208
+#: src/components/rbac/role-form.tsx:140
 #: src/components/rbac/user-form.tsx:223
 #: src/components/repositories/remote-form.tsx:142
 #: src/containers/edit-namespace/edit-namespace.tsx:156
@@ -2937,15 +2941,15 @@ msgstr "Seleccionar grupos"
 msgid "Select namespace"
 msgstr "Seleccione el espacio de nombres"
 
-#: src/components/rbac/permission-chip-selector.tsx:68
-#: src/components/rbac/permission-chip-selector.tsx:96
+#: src/components/rbac/permission-chip-selector.tsx:75
+#: src/components/rbac/permission-chip-selector.tsx:85
 msgid "Select permissions"
 msgstr "Seleccionar permisos"
 
 #: src/components/rbac/owners-tab.tsx:345
 #: src/components/rbac/owners-tab.tsx:400
 #: src/components/rbac/owners-tab.tsx:427
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:203
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:188
 msgid "Select role(s)"
 msgstr "Seleccionar roles"
 
@@ -3259,7 +3263,6 @@ msgstr "No se pudo detener la tarea \"{taskName}\"."
 msgid "Task \"{taskName}\" stopped successfully."
 msgstr "La tarea \"{taskName}\" se detuvo correctamente."
 
-#: src/constants.tsx:96
 #: src/containers/task-management/task-list-view.tsx:123
 #: src/loaders/standalone/standalone-loader.tsx:401
 msgid "Task Management"
@@ -3318,7 +3321,7 @@ msgstr "Las tareas aparecerán una vez creadas."
 msgid "Text: {0}"
 msgstr "Texto: {0}"
 
-#: src/loaders/insights/insights-loader.tsx:149
+#: src/loaders/insights/insights-loader.tsx:134
 msgid "The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections."
 msgstr "El botón de sincronización del centro de automatización ahora sólo es compatible con AAP 2.0. Las versiones anteriores de AAP seguirán sincronizando automáticamente todas las colecciones."
 
@@ -3361,7 +3364,7 @@ msgstr "La colección que ha seleccionado no parece coincidir con {0}"
 msgid "The file is not available for this version of {collectionName}"
 msgstr "El archivo no está disponible para esta versión de {collectionName}"
 
-#: src/components/rbac/preview-roles.tsx:27
+#: src/components/rbac/preview-roles.tsx:30
 msgid "The following roles will be applied to group: <0>{0}</0>"
 msgstr "Los siguientes roles se aplicarán al grupo: <0>{0}</0>"
 
@@ -3372,6 +3375,10 @@ msgstr "Contraseña que se utilizará para la autenticación al sincronizar."
 #: src/components/repositories/remote-form.tsx:396
 msgid "The password to be used for authentication when syncing. This is not required when using a token."
 msgstr "Contraseña que se utilizará para la autenticación al sincronizar. Esto no es necesario cuando se utiliza un token."
+
+#: src/containers/legacy-roles/legacy-role.tsx:166
+msgid "The role is versionless and will always install from the head/main/master branch."
+msgstr ""
 
 #: src/containers/execution-environment-detail/execution_environment_detail_owners.tsx:178
 msgid "The selected roles will be added to this specific Execution Environment."
@@ -3401,11 +3408,11 @@ msgstr "Actualmente no hay grupos que puedan ser asignados a este espacio de nom
 msgid "There are currently no owners assigned."
 msgstr "Actualmente no hay propietarios asignados."
 
-#: src/containers/role-management/role-list.tsx:232
+#: src/containers/role-management/role-list.tsx:211
 msgid "There are currently no roles"
 msgstr "Actualmente no hay roles"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:297
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:282
 msgid "There are currently no roles assigned to this group."
 msgstr "Actualmente no hay roles asignados a este grupo."
 
@@ -3486,7 +3493,7 @@ msgstr "Esta etiqueta ya está seleccionada para esta imagen. No puede añadirla
 msgid "This uses the same {docsAnsibleLink} format as the ansible-galaxy CLI with the caveat that roles aren't supported and the source parameter is not supported."
 msgstr "Esto usa el mismo formato {docsAnsibleLink} que la CLI de ansible-galaxy con la advertencia de que tanto los roles como el parámetro de origen no son compatibles."
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:150
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:148
 msgid "This will revoke all permissions associated with this role from the group."
 msgstr "Esto revocará todos los permisos asociados a este rol del grupo."
 
@@ -3559,12 +3566,12 @@ msgid "Unsigned version(s)"
 msgstr "Versión(es) sin firma"
 
 #: src/constants.tsx:167
-msgid "Update container information"
-msgstr "Actualizar la información del contenedor"
+#~ msgid "Update container information"
+#~ msgstr "Actualizar la información del contenedor"
 
 #: src/components/collection-list/collection-list-item.tsx:117
 #: src/components/legacy-role-list/legacy-role-item.tsx:106
-#: src/containers/legacy-roles/legacy-role.tsx:299
+#: src/containers/legacy-roles/legacy-role.tsx:314
 msgid "Updated <0/>"
 msgstr "Actualizado <0/>"
 
@@ -3573,7 +3580,7 @@ msgstr "Actualizado <0/>"
 msgid "Upload"
 msgstr "Subir"
 
-#: src/constants.tsx:342
+#: src/constants.tsx:183
 msgid "Upload and modify collections."
 msgstr "Subir y modificar colecciones."
 
@@ -3596,8 +3603,8 @@ msgstr "Cargar firma"
 
 #: src/constants.tsx:156
 #: src/constants.tsx:164
-msgid "Upload to namespace"
-msgstr "Subir al espacio de nombres"
+#~ msgid "Upload to namespace"
+#~ msgstr "Subir al espacio de nombres"
 
 #: src/components/execution-environment/repository-form.tsx:212
 msgid "Upstream name"
@@ -3724,7 +3731,6 @@ msgstr "Usuario"
 msgid "Username: {0}"
 msgstr "Nombre de usuario: {0}"
 
-#: src/constants.tsx:45
 #: src/containers/group-management/group-detail.tsx:154
 #: src/containers/user-management/user-create.tsx:49
 #: src/containers/user-management/user-detail.tsx:77
@@ -3750,7 +3756,7 @@ msgstr "Los usuarios aparecerán una vez añadidos a este grupo"
 msgid "Users will appear once created"
 msgstr "Los usuarios aparecerán una vez creados"
 
-#: src/constants.tsx:213
+#: src/constants.tsx:54
 msgid "Validated"
 msgstr "Validado"
 
@@ -3764,40 +3770,40 @@ msgid "Version:"
 msgstr "Versión:"
 
 #: src/constants.tsx:122
-msgid "View Ansible distribution"
-msgstr "Ver la distribución de Ansible"
+#~ msgid "View Ansible distribution"
+#~ msgstr "Ver la distribución de Ansible"
 
 #: src/containers/certification-dashboard/certification-dashboard.tsx:453
 msgid "View Import Logs"
 msgstr "Ver los registros de importación"
 
 #: src/constants.tsx:140
-msgid "View all tasks"
-msgstr "Ver todas las tareas"
+#~ msgid "View all tasks"
+#~ msgstr "Ver todas las tareas"
 
 #: src/constants.tsx:123
-msgid "View collection remote"
-msgstr "Ver la colección a distancia"
+#~ msgid "View collection remote"
+#~ msgstr "Ver la colección a distancia"
 
 #: src/components/cards/namespace-card.tsx:53
 msgid "View collections"
 msgstr "Ver colecciones"
 
 #: src/constants.tsx:172
-msgid "View container's namespace"
-msgstr "Ver el espacio de nombres del contenedor"
+#~ msgid "View container's namespace"
+#~ msgstr "Ver el espacio de nombres del contenedor"
 
 #: src/constants.tsx:175
-msgid "View container's repository"
-msgstr "Ver el repositorio del contenedor"
+#~ msgid "View container's repository"
+#~ msgstr "Ver el repositorio del contenedor"
 
 #: src/constants.tsx:181
-msgid "View distribution"
-msgstr "Ver distribución"
+#~ msgid "View distribution"
+#~ msgstr "Ver distribución"
 
 #: src/constants.tsx:157
-msgid "View group"
-msgstr "Ver grupo"
+#~ msgid "View group"
+#~ msgstr "Ver grupo"
 
 #: src/components/headers/collection-header.tsx:432
 msgid "View more"
@@ -3805,12 +3811,12 @@ msgstr "Ver más"
 
 #: src/constants.tsx:137
 #: src/constants.tsx:168
-msgid "View private containers"
-msgstr "Ver contenedores privados"
+#~ msgid "View private containers"
+#~ msgstr "Ver contenedores privados"
 
 #: src/constants.tsx:158
-msgid "View synclist"
-msgstr "Ver lista de sincronización"
+#~ msgid "View synclist"
+#~ msgstr "Ver lista de sincronización"
 
 #: src/containers/execution-environment/registry-list.tsx:485
 #: src/containers/execution-environment/registry-list.tsx:507
@@ -3820,27 +3826,27 @@ msgstr "Ver lista de sincronización"
 #~ msgstr "View the task <0>here</0>."
 
 #: src/constants.tsx:159
-msgid "View user"
-msgstr "Mostrar usuario"
+#~ msgid "View user"
+#~ msgstr "Mostrar usuario"
 
-#: src/constants.tsx:349
+#: src/constants.tsx:190
 msgid "View, add, remove and change groups."
 msgstr "Ver, añadir, eliminar y modificar grupos."
 
-#: src/constants.tsx:351
+#: src/constants.tsx:192
 msgid "View, add, remove and change synclists."
 msgstr "Ver, añadir, eliminar y cambiar sinclistas."
 
-#: src/constants.tsx:350
+#: src/constants.tsx:191
 msgid "View, add, remove and change users."
 msgstr "Ver, añadir, eliminar y modificar usuarios."
 
-#: src/constants.tsx:352
+#: src/constants.tsx:193
 msgid "View, and cancel any task."
 msgstr "Ver y cancelar cualquier tarea."
 
 #: src/components/my-imports/import-list.tsx:105
-#: src/constants.tsx:335
+#: src/constants.tsx:176
 #: src/containers/task-management/task-list-view.tsx:175
 msgid "Waiting"
 msgstr "Esperando"
@@ -3880,7 +3886,7 @@ msgstr "SÍ"
 msgid "Yes, stop"
 msgstr "Sí, parar"
 
-#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:145
+#: src/containers/group-management/group-detail-role-management/group-detail-role-management.tsx:143
 msgid "You are about to remove <0>{0}</0> from <1>{1}</1>."
 msgstr "Está a punto de eliminar <0>{0}</0> de <1>{1}</1>."
 
@@ -3949,7 +3955,7 @@ msgstr "No tienes permiso para mostrar los usuarios."
 msgid "You don't have rights to do this operation."
 msgstr "No tienes derechos para hacer esta operación."
 
-#: src/components/collection-detail/collection-info.tsx:92
+#: src/components/collection-detail/collection-info.tsx:94
 msgid "You have to be logged in to be able to download the tarball."
 msgstr "Tiene que estar conectado para poder descargar el tarball."
 
@@ -4005,7 +4011,7 @@ msgstr "rechazado"
 #~ msgstr "released {0}"
 
 #: src/components/legacy-role-list/legacy-role-item.tsx:68
-#: src/containers/legacy-roles/legacy-role.tsx:265
+#: src/containers/legacy-roles/legacy-role.tsx:280
 msgid "role.github_user logo"
 msgstr ""
 
@@ -4025,7 +4031,7 @@ msgstr "estado de la firma"
 msgid "tags"
 msgstr "etiquetas"
 
-#: src/containers/role-management/role-list.tsx:303
+#: src/containers/role-management/role-list.tsx:282
 msgid "true"
 msgstr "Verdadero"
 
