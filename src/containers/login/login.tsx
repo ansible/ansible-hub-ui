@@ -7,7 +7,7 @@ import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import Logo from 'src/../static/images/logo_large.svg';
 import { ParamHelper } from 'src/utilities/';
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { ActiveUserAPI } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -30,7 +30,7 @@ class LoginPage extends React.Component<RouteProps, IState> {
     };
 
     const params = ParamHelper.parseParamString(this.props.location.search);
-    this.redirectPage = params['next'] || Paths.search;
+    this.redirectPage = params['next'] || formatPath(Paths.search);
   }
 
   render() {

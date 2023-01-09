@@ -118,7 +118,7 @@ export function withContainerRepo(WrappedComponent) {
         owners: formatEEPath(Paths.executionEnvironmentDetailOwners, {
           container,
         }),
-        notFound: Paths.notFound,
+        notFound: formatPath(Paths.notFound),
       }[this.state.redirect];
 
       if (redirect) {

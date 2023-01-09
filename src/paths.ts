@@ -118,5 +118,5 @@ export const namespaceBreadcrumb = {
     namespaces: t`Namespaces`,
     partners: t`Partners`,
   }[NAMESPACE_TERM],
-  url: Paths[NAMESPACE_TERM],
+  url: formatPath(Paths[NAMESPACE_TERM]),
 };

@@ -177,7 +177,7 @@ class UserList extends React.Component<RouteProps, IState> {
                     {!!user && hasPermission('galaxy.add_user') ? (
                       <ToolbarGroup>
                         <ToolbarItem>
-                          <Link to={Paths.createUser}>
+                          <Link to={formatPath(Paths.createUser)}>
                             <Button>{t`Create`}</Button>
                           </Link>
                         </ToolbarItem>
@@ -242,7 +242,7 @@ class UserList extends React.Component<RouteProps, IState> {
           title={t`No users yet`}
           description={t`Users will appear once created`}
           button={
-            <Link to={Paths.createUser}>
+            <Link to={formatPath(Paths.createUser)}>
               <Button variant={'primary'}>{t`Create`}</Button>
             </Link>
           }

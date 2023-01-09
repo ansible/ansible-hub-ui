@@ -737,7 +737,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         this.loadAllRepos(val[0].data.meta.count);
       })
       .catch(() => {
-        this.setState({ redirect: Paths.notFound });
+        this.setState({ redirect: formatPath(Paths.notFound) });
       });
   }
 
@@ -890,7 +890,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       NamespaceAPI.delete(name)
         .then(() => {
           this.setState({
-            redirect: formatPath(namespaceBreadcrumb.url, {}),
+            redirect: namespaceBreadcrumb.url,
             confirmDelete: false,
             isNamespacePending: false,
           });

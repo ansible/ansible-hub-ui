@@ -16,7 +16,7 @@ import {
   Main,
 } from 'src/components';
 
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 import { RoleAPI } from 'src/api/role';
 
@@ -57,7 +57,7 @@ class RoleCreate extends React.Component<RouteProps, IState> {
 
     const notAuthorised = !this.context.user || this.context.user.is_anonymous;
     const breadcrumbs = [
-      { url: Paths.roleList, name: t`Roles` },
+      { url: formatPath(Paths.roleList), name: t`Roles` },
       { name: t`Create new role` },
     ];
 
@@ -115,7 +115,7 @@ class RoleCreate extends React.Component<RouteProps, IState> {
   private cancelRole = () => {
     this.setState({
       errorMessages: {},
-      redirect: Paths.roleList,
+      redirect: formatPath(Paths.roleList),
     });
   };
 
@@ -125,7 +125,10 @@ class RoleCreate extends React.Component<RouteProps, IState> {
 
       RoleAPI.create({ name, description, permissions })
         .then(() =>
-          this.setState({ redirect: Paths.roleList, errorMessages: null }),
+          this.setState({
+            redirect: formatPath(Paths.roleList),
+            errorMessages: null,
+          }),
         )
         .catch((err) => {
           const { status, statusText } = err.response;

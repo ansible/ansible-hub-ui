@@ -26,7 +26,7 @@ import {
   CardTitle,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
-import { Paths, formatEEPath } from 'src/paths';
+import { Paths, formatEEPath, formatPath } from 'src/paths';
 import { ExecutionEnvironmentAPI } from 'src/api';
 import { getHumanSize } from 'src/utilities';
 import './execution-environment-manifest.scss';
@@ -104,7 +104,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
               links={[
                 {
                   name: t`Execution Environments`,
-                  url: Paths.executionEnvironments,
+                  url: formatPath(Paths.executionEnvironments),
                 },
                 {
                   name: this.state.container.name,

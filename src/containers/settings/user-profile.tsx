@@ -11,7 +11,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 import { UserType, ActiveUserAPI } from 'src/api';
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { mapErrorMessages, ErrorMessagesType } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -46,7 +46,7 @@ class UserProfile extends React.Component<RouteProps, IState> {
         this.initialState = { ...extendedResult };
         this.setState({ user: extendedResult });
       })
-      .catch(() => this.setState({ redirect: Paths.notFound }));
+      .catch(() => this.setState({ redirect: formatPath(Paths.notFound) }));
   }
 
   render() {
@@ -128,7 +128,7 @@ class UserProfile extends React.Component<RouteProps, IState> {
         // redirect to login page when password is changed
         // SSO not relevant, user edit disabled
         if (user.password) {
-          this.setState({ redirect: Paths.login });
+          this.setState({ redirect: formatPath(Paths.login) });
         }
       })
       .catch((err) => {

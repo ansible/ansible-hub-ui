@@ -130,7 +130,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
     const isSuperuser = this.context.user.is_superuser;
 
     const addRoles = isSuperuser && (
-      <Link to={Paths.createRole}>
+      <Link to={formatPath(Paths.createRole)}>
         <Button variant={'primary'}>{t`Add roles`}</Button>
       </Link>
     );

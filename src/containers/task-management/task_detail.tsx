@@ -100,7 +100,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
       redirect,
     } = this.state;
     const breadcrumbs = [
-      { url: Paths.taskList, name: t`Task management` },
+      { url: formatPath(Paths.taskList), name: t`Task management` },
       { name: task ? taskName : '' },
     ];
     let parentTaskId = null;
@@ -515,7 +515,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
         });
       })
       .catch(() => {
-        this.setState({ redirect: Paths.notFound });
+        this.setState({ redirect: formatPath(Paths.notFound) });
       });
   }
 

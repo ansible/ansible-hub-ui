@@ -60,7 +60,7 @@ class UserEdit extends React.Component<RouteProps, IState> {
     }
 
     const breadcrumbs = [
-      { url: Paths.userList, name: t`Users` },
+      { url: formatPath(Paths.userList), name: t`Users` },
       {
         url: formatPath(Paths.userDetail, { userID: user.id }),
         name: user.username,
@@ -78,7 +78,7 @@ class UserEdit extends React.Component<RouteProps, IState> {
           this.setState({ user: user, errorMessages: errorMessages })
         }
         saveUser={this.saveUser}
-        onCancel={() => this.setState({ redirect: Paths.userList })}
+        onCancel={() => this.setState({ redirect: formatPath(Paths.userList) })}
       />
     );
   }
@@ -89,9 +89,9 @@ class UserEdit extends React.Component<RouteProps, IState> {
         // redirect to login page when password of logged user is changed
         // SSO not relevant, user-edit disabled
         if (this.context.user.id === user.id && user.password) {
-          this.setState({ redirect: Paths.login });
+          this.setState({ redirect: formatPath(Paths.login) });
         } else {
-          this.setState({ redirect: Paths.userList });
+          this.setState({ redirect: formatPath(Paths.userList) });
         }
       })
       .catch((err) => {

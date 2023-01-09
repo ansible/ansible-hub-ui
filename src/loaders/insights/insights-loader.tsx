@@ -9,14 +9,14 @@ import '../app.scss';
 import { AppContext } from '../app-context';
 import { loadContext } from '../load-context';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { AlertType, UIVersion } from 'src/components';
 import { hasPermission } from 'src/utilities';
 
 const DEFAULT_REPO = 'published';
 
 const isRepoURL = (location) =>
-  matchPath({ path: Paths.searchByRepo + '/*' }, location);
+  matchPath({ path: formatPath(Paths.searchByRepo) + '*' }, location);
 
 const App = (_props) => {
   const location = useLocation();

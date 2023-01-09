@@ -9,7 +9,7 @@ import {
   UserFormPage,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   mapErrorMessages,
   ErrorMessagesType,
@@ -50,7 +50,7 @@ class UserCreate extends React.Component<RouteProps, IState> {
     const notAuthorised =
       !this.context.user || !hasPermission('galaxy.add_user');
     const breadcrumbs = [
-      { url: Paths.userList, name: t`Users` },
+      { url: formatPath(Paths.userList), name: t`Users` },
       { name: t`Create new user` },
     ];
     const title = t`Create new user`;
@@ -73,7 +73,7 @@ class UserCreate extends React.Component<RouteProps, IState> {
           this.setState({ user: user, errorMessages: errorMessages })
         }
         saveUser={this.saveUser}
-        onCancel={() => this.setState({ redirect: Paths.userList })}
+        onCancel={() => this.setState({ redirect: formatPath(Paths.userList) })}
         isNewUser={true}
       ></UserFormPage>
     );
@@ -81,7 +81,7 @@ class UserCreate extends React.Component<RouteProps, IState> {
   private saveUser = () => {
     const { user } = this.state;
     UserAPI.create(user)
-      .then(() => this.setState({ redirect: Paths.userList }))
+      .then(() => this.setState({ redirect: formatPath(Paths.userList) }))
       .catch((err) => {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });

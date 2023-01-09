@@ -184,7 +184,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
           breadcrumbs={
             <Breadcrumbs
               links={[
-                { url: Paths.groupList, name: t`Groups` },
+                { url: formatPath(Paths.groupList), name: t`Groups` },
                 { name: group.name },
               ]}
             />
@@ -367,7 +367,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
             t`Group "${group}" has been successfully deleted.`,
             'success',
           );
-          this.setState({ redirect: Paths.groupList });
+          this.setState({ redirect: formatPath(Paths.groupList) });
         })
         .catch((e) => {
           const { status, statusText } = e.response;
@@ -729,7 +729,7 @@ class GroupDetail extends React.Component<RouteProps, IState> {
       })
       .catch((e) => {
         if (e.response.status === 404) {
-          this.setState({ redirect: Paths.notFound });
+          this.setState({ redirect: formatPath(Paths.notFound) });
         } else {
           const { status, statusText } = e.response;
           this.addAlert(

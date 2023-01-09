@@ -29,7 +29,7 @@ import {
 } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
 import { Button, ToolbarItem } from '@patternfly/react-core';
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 
 export class Repository {
   name: string;
@@ -298,7 +298,7 @@ class RepositoryList extends React.Component<RouteProps, IState> {
     if (this.state.params.tab == 'local') {
       return (
         <ToolbarItem>
-          <Link to={Paths.token}>
+          <Link to={formatPath(Paths.token)}>
             <Button>{t`Get token`}</Button>
           </Link>
         </ToolbarItem>

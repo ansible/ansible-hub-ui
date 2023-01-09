@@ -58,6 +58,9 @@ interface IProps {
   location: ReturnType<typeof useLocation>;
 }
 
+const isRepoURL = (location) =>
+  matchPath({ path: formatPath(Paths.searchByRepo) + '*' }, location);
+
 class App extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
@@ -98,7 +101,7 @@ class App extends React.Component<IProps, IState> {
     // This gives componentDidUpdate a chance to recognize that route has chnaged
     // and update the internal state to match the route before any pages can
     // redirect the URL to a 404 state.
-    const match = this.isRepoURL(this.props.location.pathname);
+    const match = isRepoURL(this.props.location.pathname);
     if (match && match.params.repo !== selectedRepo) {
       return null;
     }
@@ -123,7 +126,9 @@ class App extends React.Component<IProps, IState> {
         <DropdownItem
           key='profile'
           component={
-            <Link to={Paths.userProfileSettings}>{t`My profile`}</Link>
+            <Link
+              to={formatPath(Paths.userProfileSettings)}
+            >{t`My profile`}</Link>
           }
         ></DropdownItem>,
 
@@ -305,8 +310,7 @@ class App extends React.Component<IProps, IState> {
 
     // Hide navs on login page
     if (
-      this.props.location.pathname === Paths.login ||
-      this.props.location.pathname === formatPath(Paths.login, {}) ||
+      this.props.location.pathname === formatPath(Paths.login) ||
       this.props.location.pathname === UI_EXTERNAL_LOGIN_URI
     ) {
       return this.ctx(
@@ -351,23 +355,23 @@ class App extends React.Component<IProps, IState> {
             !user.is_anonymous,
         }),
         menuItem(t`Namespaces`, {
-          url: Paths[NAMESPACE_TERM],
+          url: formatPath(Paths[NAMESPACE_TERM]),
           condition: ({ settings, user }) =>
             settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
             !user.is_anonymous,
         }),
         menuItem(t`Repository Management`, {
           condition: ({ user }) => !user.is_anonymous,
-          url: Paths.repositories,
+          url: formatPath(Paths.repositories),
         }),
         menuItem(t`API token management`, {
-          url: Paths.token,
+          url: formatPath(Paths.token),
           condition: ({ user }) => !user.is_anonymous,
         }),
         menuItem(t`Approval`, {
           condition: (params) =>
             hasPermission(params, 'ansible.modify_ansible_repo_content'),
-          url: Paths.approvalDashboard,
+          url: formatPath(Paths.approvalDashboard),
         }),
       ]),
       menuSection(
@@ -378,10 +382,10 @@ class App extends React.Component<IProps, IState> {
         },
         [
           menuItem(t`Execution Environments`, {
-            url: Paths.executionEnvironments,
+            url: formatPath(Paths.executionEnvironments),
           }),
           menuItem(t`Remote Registries`, {
-            url: Paths.executionEnvironmentsRegistries,
+            url: formatPath(Paths.executionEnvironmentsRegistries),
           }),
         ],
       ),
@@ -392,19 +396,19 @@ class App extends React.Component<IProps, IState> {
         },
         [
           menuItem(t`Legacy Roles`, {
-            url: Paths.legacyRoles,
+            url: formatPath(Paths.legacyRoles),
           }),
           menuItem(t`Legacy Namespaces`, {
-            url: Paths.legacyNamespaces,
+            url: formatPath(Paths.legacyNamespaces),
           }),
         ],
       ),
       menuItem(t`Task Management`, {
-        url: Paths.taskList,
+        url: formatPath(Paths.taskList),
         condition: ({ user }) => !user.is_anonymous,
       }),
       menuItem(t`Signature Keys`, {
-        url: Paths.signatureKeys,
+        url: formatPath(Paths.signatureKeys),
         condition: ({ featureFlags, user }) =>
           featureFlags.display_signatures && !user.is_anonymous,
       }),
@@ -418,15 +422,15 @@ class App extends React.Component<IProps, IState> {
       menuSection(t`User Access`, {}, [
         menuItem(t`Users`, {
           condition: (params) => hasPermission(params, 'galaxy.view_user'),
-          url: Paths.userList,
+          url: formatPath(Paths.userList),
         }),
         menuItem(t`Groups`, {
           condition: (params) => hasPermission(params, 'galaxy.view_group'),
-          url: Paths.groupList,
+          url: formatPath(Paths.groupList),
         }),
         menuItem(t`Roles`, {
           condition: (params) => hasPermission(params, 'galaxy.view_group'),
-          url: Paths.roleList,
+          url: formatPath(Paths.roleList),
         }),
       ]),
     ];
@@ -459,21 +463,12 @@ class App extends React.Component<IProps, IState> {
     });
 
   private setRepoToURL() {
-    const match = this.isRepoURL(this.props.location.pathname);
+    const match = isRepoURL(this.props.location.pathname);
     if (match) {
       if (match.params.repo !== this.state.selectedRepo) {
         this.setState({ selectedRepo: match.params.repo });
       }
     }
-  }
-
-  private isRepoURL(location) {
-    return matchPath(
-      {
-        path: Paths.searchByRepo + '/*',
-      },
-      location,
-    );
   }
 
   private ctx(component) {

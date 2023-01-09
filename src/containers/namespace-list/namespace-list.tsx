@@ -185,12 +185,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
                   tabs={[
                     {
                       title: t`All`,
-                      link: Paths[NAMESPACE_TERM],
+                      link: formatPath(Paths[NAMESPACE_TERM]),
                       active: !filterOwner,
                     },
                     {
                       title: t`My namespaces`,
-                      link: Paths.myNamespaces,
+                      link: formatPath(Paths.myNamespaces),
                       active: filterOwner,
                     },
                   ]}

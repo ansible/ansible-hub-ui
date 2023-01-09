@@ -1,6 +1,6 @@
 import { CollectionDetailType, CollectionAPI } from 'src/api';
 import { AlertType } from 'src/components';
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 
 export interface IBaseCollectionState {
   params: {
@@ -39,6 +39,6 @@ export function loadCollection({
       });
     })
     .catch(() => {
-      navigate(Paths.notFound);
+      navigate(formatPath(Paths.notFound));
     });
 }

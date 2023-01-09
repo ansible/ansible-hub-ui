@@ -46,7 +46,7 @@ class UserDetail extends React.Component<RouteProps, IState> {
     } else {
       UserAPI.get(id)
         .then((result) => this.setState({ userDetail: result.data }))
-        .catch(() => this.setState({ redirect: Paths.notFound }));
+        .catch(() => this.setState({ redirect: formatPath(Paths.notFound) }));
     }
   }
 
@@ -67,7 +67,7 @@ class UserDetail extends React.Component<RouteProps, IState> {
     }
 
     const breadcrumbs = [
-      { url: Paths.userList, name: t`Users` },
+      { url: formatPath(Paths.userList), name: t`Users` },
       { name: userDetail.username },
     ];
     const title = t`User details`;
@@ -134,7 +134,7 @@ class UserDetail extends React.Component<RouteProps, IState> {
       },
       () => {
         if (didDelete) {
-          this.setState({ redirect: Paths.userList });
+          this.setState({ redirect: formatPath(Paths.userList) });
         }
       },
     );
