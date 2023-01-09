@@ -1,15 +1,19 @@
 const uiPrefix = Cypress.env('uiPrefix');
 
 describe('Insights Menu Tests', () => {
-
-  function menuPresent(item)
-  {
-    cy.contains(`[data-quickstart-id="Automation-Hub"] [data-ouia-component-id="${item}"] a`, item);
+  function menuPresent(item) {
+    cy.contains(
+      `[data-quickstart-id="Automation-Hub"] [data-ouia-component-id="${item}"] a`,
+      item,
+    );
   }
 
-  function menuClick(item, ignoreErrors)
-  {
-    cy.contains(`[data-quickstart-id="Automation-Hub"] [data-ouia-component-id="${item}"] a`, item, ignoreErrors ? {failOnStatusCode: false} : {}).click();
+  function menuClick(item, ignoreErrors) {
+    cy.contains(
+      `[data-quickstart-id="Automation-Hub"] [data-ouia-component-id="${item}"] a`,
+      item,
+      ignoreErrors ? { failOnStatusCode: false } : {},
+    ).click();
   }
 
   let menuItems = [
@@ -63,7 +67,7 @@ describe('Insights Menu Tests', () => {
   });
 
   it('can navigate to Connect to Hub', () => {
-   cy.on('uncaught:exception', (err, runnable) => {
+    cy.on('uncaught:exception', (err, runnable) => {
       // this is needed, otherwise it fails on (fetch)POST 404 /api/featureflags/v0/client/metrics
       // if contains below fails, the test is still failing (it is not caught by this code)
       return false;
