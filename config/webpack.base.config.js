@@ -212,10 +212,7 @@ module.exports = (inputConfigs) => {
         {
           root: resolve(__dirname, '../'),
           exposes: {
-            './RootApp': resolve(
-              __dirname,
-              isBuild ? '../src/app-entry.js' : '../src/dev-entry.js',
-            ),
+            './RootApp': resolve(__dirname, '../src/entry-insights.tsx'),
           },
           ...(!isBuild && {
             // fixes "Shared module is not available for eager consumption"
