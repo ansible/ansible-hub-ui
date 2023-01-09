@@ -1,11 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-export const HTMLComment = ({ text, ...props }) => (
+interface IProps extends React.HTMLAttributes<HTMLDivElement> {
+  text: string;
+}
+
+export const HTMLComment = ({ text, ...props }: IProps) => (
   <div {...props} dangerouslySetInnerHTML={{ __html: `<!-- ${text} -->` }} />
 );
-
-HTMLComment.propTypes = { text: PropTypes.string };
 
 export const UIVersion = () => (
   <HTMLComment
