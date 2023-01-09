@@ -21,6 +21,7 @@ export function formatPath(
 }
 
 export enum Paths {
+  // FIXME: do paths with + still work right? might need double routes
   executionEnvironmentDetailActivities = '/containers/:container+/_content/activity',
   executionEnvironmentDetailImages = '/containers/:container+/_content/images',
   executionEnvironmentDetailOwners = '/containers/:container+/_content/owners',

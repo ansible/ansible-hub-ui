@@ -382,8 +382,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           pageControls={this.renderPageControls()}
           contextSelector={
             <RepoSelector
-              selectedRepo={this.context.selectedRepo}
+              path={this.props.routePath}
               pathParams={{ namespace: namespace.name }}
+              selectedRepo={this.context.selectedRepo}
             />
           }
           filters={

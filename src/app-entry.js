@@ -14,7 +14,7 @@ const AnsibleHub = () => (
     <Provider store={init().getStore()}>
       <Router basename={UI_BASE_PATH}>
         <I18nProvider i18n={i18n}>
-          <App basename={UI_BASE_PATH} />
+          <App />
         </I18nProvider>
       </Router>
     </Provider>

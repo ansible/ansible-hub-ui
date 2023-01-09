@@ -66,6 +66,69 @@ const TaskListView = lazy(
 
 const TokenPage = lazy(() => import('src/containers/token/token-insights'));
 
+const routes = [
+  { path: Paths.repositories, component: RepositoryList },
+  {
+    path: Paths.approvalDashboard,
+    component: CertificationDashboard,
+  },
+  { path: Paths.notFound, component: NotFound },
+  { path: Paths.token, component: TokenPage },
+  { path: Paths.partners, component: Partners },
+  { path: Paths.editNamespace, component: EditNamespace },
+  { path: Paths.myCollections, component: NamespaceDetail },
+  { path: Paths.myCollectionsByRepo, component: NamespaceDetail },
+  { path: Paths.myNamespaces, component: MyNamespaces },
+  { path: Paths.signatureKeys, component: SignatureKeysList },
+  { path: Paths.taskList, component: TaskListView },
+  { path: Paths.taskDetail, component: TaskDetail },
+  {
+    path: Paths.collectionDocsPageByRepo,
+    component: CollectionDocs,
+  },
+  {
+    path: Paths.collectionDocsIndexByRepo,
+    component: CollectionDocs,
+  },
+  {
+    path: Paths.collectionContentDocsByRepo,
+    component: CollectionDocs,
+  },
+  {
+    path: Paths.collectionContentListByRepo,
+    component: CollectionContent,
+  },
+  {
+    path: Paths.collectionImportLogByRepo,
+    component: CollectionImportLog,
+  },
+  {
+    path: Paths.collectionDependenciesByRepo,
+    component: CollectionDependencies,
+  },
+  { path: Paths.collectionByRepo, component: CollectionDetail },
+  { path: Paths.namespaceByRepo, component: NamespaceDetail },
+  { path: Paths.searchByRepo, component: Search },
+  { path: Paths.collectionDocsPage, component: CollectionDocs },
+  { path: Paths.collectionDocsIndex, component: CollectionDocs },
+  {
+    path: Paths.collectionContentDocs,
+    component: CollectionDocs,
+  },
+  {
+    path: Paths.collectionContentList,
+    component: CollectionContent,
+  },
+  {
+    path: Paths.collectionImportLog,
+    component: CollectionImportLog,
+  },
+  { path: Paths.myImports, component: MyImports },
+  { path: Paths.collection, component: CollectionDetail },
+  { path: Paths.namespace, component: NamespaceDetail },
+  { path: Paths.search, component: Search },
+];
+
 /**
  * changes routes depending on the path
  * https://reactrouter.com/en/main/route/route
@@ -74,66 +137,9 @@ export const InsightsRoutes = () => {
   return (
     <Suspense fallback={<LoadingPageWithHeader />}>
       <Routes>
-        <Route path={Paths.repositories} element={<RepositoryList />} />
-        <Route
-          path={Paths.approvalDashboard}
-          element={<CertificationDashboard />}
-        />
-        <Route path={Paths.notFound} element={<NotFound />} />
-        <Route path={Paths.token} element={<TokenPage />} />
-        <Route path={Paths.partners} element={<Partners />} />
-        <Route path={Paths.editNamespace} element={<EditNamespace />} />
-        <Route path={Paths.myCollections} element={<NamespaceDetail />} />
-        <Route path={Paths.myCollectionsByRepo} element={<NamespaceDetail />} />
-        <Route path={Paths.myNamespaces} element={<MyNamespaces />} />
-        <Route path={Paths.signatureKeys} element={<SignatureKeysList />} />
-        <Route path={Paths.taskList} element={<TaskListView />} />
-        <Route path={Paths.taskDetail} element={<TaskDetail />} />
-        <Route
-          path={Paths.collectionDocsPageByRepo}
-          element={<CollectionDocs />}
-        />
-        <Route
-          path={Paths.collectionDocsIndexByRepo}
-          element={<CollectionDocs />}
-        />
-        <Route
-          path={Paths.collectionContentDocsByRepo}
-          element={<CollectionDocs />}
-        />
-        <Route
-          path={Paths.collectionContentListByRepo}
-          element={<CollectionContent />}
-        />
-        <Route
-          path={Paths.collectionImportLogByRepo}
-          element={<CollectionImportLog />}
-        />
-        <Route
-          path={Paths.collectionDependenciesByRepo}
-          element={<CollectionDependencies />}
-        />
-        <Route path={Paths.collectionByRepo} element={<CollectionDetail />} />
-        <Route path={Paths.namespaceByRepo} element={<NamespaceDetail />} />
-        <Route path={Paths.searchByRepo} element={<Search />} />
-        <Route path={Paths.collectionDocsPage} element={<CollectionDocs />} />
-        <Route path={Paths.collectionDocsIndex} element={<CollectionDocs />} />
-        <Route
-          path={Paths.collectionContentDocs}
-          element={<CollectionDocs />}
-        />
-        <Route
-          path={Paths.collectionContentList}
-          element={<CollectionContent />}
-        />
-        <Route
-          path={Paths.collectionImportLog}
-          element={<CollectionImportLog />}
-        />
-        <Route path={Paths.myImports} element={<MyImports />} />
-        <Route path={Paths.collection} element={<CollectionDetail />} />
-        <Route path={Paths.namespace} element={<NamespaceDetail />} />
-        <Route path={Paths.search} element={<Search />} />
+        {routes.map(({ component: Component, path }, index) => (
+          <Route key={index} path={path} element={<Component path={path} />} />
+        ))}
         <Route element={<Navigate to={Paths.notFound} />} />
       </Routes>
     </Suspense>

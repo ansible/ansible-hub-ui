@@ -15,14 +15,10 @@ import { hasPermission } from 'src/utilities';
 
 const DEFAULT_REPO = 'published';
 
-interface IProps {
-  basename: string;
-}
-
 const isRepoURL = (location) =>
   matchPath({ path: Paths.collectionByRepo }, location);
 
-const App = (props: IProps) => {
+const App = (_props) => {
   const location = useLocation();
   const match = isRepoURL(location.pathname);
 
@@ -56,9 +52,10 @@ const App = (props: IProps) => {
 
       // basename is either `/ansible/automation-hub` or `/beta/ansible/automation-hub`, remove trailing /
       // menu events don't have the /beta, converting
-      const basename = props.basename
-        .replace(/^\/beta\//, '/')
-        .replace(/\/$/, '');
+      const basename = UI_BASE_PATH.replace(/^\/beta\//, '/').replace(
+        /\/$/,
+        '',
+      );
 
       // domEvent: has the right href, always starts with /ansible/ansible-hub, no /beta prefix
       // go to the href, relative to our *actual* basename (basename has no trailing /, so a path will start with / unless empty
@@ -67,7 +64,7 @@ const App = (props: IProps) => {
     });
 
     return () => {
-      unregister?.();
+      unregister();
     };
   }, []);
 
@@ -127,7 +124,7 @@ const App = (props: IProps) => {
         variant='info'
         title={t`The Automation Hub sync toggle is now only supported in AAP 2.0. Previous versions of AAP will continue automatically syncing all collections.`}
       />
-      <InsightsRoutes childProps={props} />
+      <InsightsRoutes />
       <UIVersion />
     </AppContext.Provider>
   );

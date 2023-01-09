@@ -54,7 +54,11 @@ interface IState {
   settings: SettingsType;
 }
 
-class App extends React.Component<RouteComponentProps, IState> {
+interface IProps {
+  location: ReturnType<typeof useLocation>;
+}
+
+class App extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -517,4 +521,12 @@ class App extends React.Component<RouteComponentProps, IState> {
   };
 }
 
-export default withRouter(App);
+const withLocation = (App) => {
+  const WithLocation = () => {
+    const location = useLocation();
+    return <App location={location} />;
+  };
+  return WithLocation;
+};
+
+export default withLocation(App);

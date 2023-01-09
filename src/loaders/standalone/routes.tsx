@@ -62,11 +62,12 @@ interface IRoutesProps {
   updateInitialData: UpdateInitialData;
 }
 
-interface IAuthHandlerProps extends RouteComponentProps {
-  Component: React.ElementType;
+interface IAuthHandlerProps {
+  component: React.ElementType;
   isDisabled: boolean;
   noAuth: boolean;
   updateInitialData: UpdateInitialData;
+  path: string;
 }
 
 interface IRouteConfig {
@@ -77,9 +78,10 @@ interface IRouteConfig {
 }
 
 const AuthHandler = ({
-  Component,
+  component: Component,
   isDisabled,
   noAuth,
+  path,
   updateInitialData,
 }: IAuthHandlerProps) => {
   const { user, settings, featureFlags } = useContext();
@@ -121,7 +123,7 @@ const AuthHandler = ({
     return <Navigate to={Paths.notFound} />;
   }
 
-  return <Component />;
+  return <Component path={path} />;
 };
 
 export class StandaloneRoutes extends React.Component<IRoutesProps> {
@@ -256,6 +258,7 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
                   component={component}
                   isDisabled={isDisabled}
                   noAuth={noAuth}
+                  path={path}
                   updateInitialData={updateInitialData}
                 />
               }
