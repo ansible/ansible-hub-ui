@@ -40,7 +40,7 @@ import {
   EmptyStateUnauthorized,
   ListItemActions,
 } from 'src/components';
-import { formatPath, Paths } from '../../paths';
+import { formatPath, formatEEPath, Paths } from '../../paths';
 import { AppContext } from 'src/loaders/app-context';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 
@@ -391,7 +391,7 @@ class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
       <tr data-cy={`ExecutionEnvironmentList-row-${item.name}`} key={index}>
         <td>
           <Link
-            to={formatPath(Paths.executionEnvironmentDetail, {
+            to={formatEEPath(Paths.executionEnvironmentDetail, {
               container: item.pulp.distribution.base_path,
             })}
           >

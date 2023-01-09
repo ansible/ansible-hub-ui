@@ -5,7 +5,7 @@ import { errorMessage } from 'src/utilities';
 
 import { sum } from 'lodash';
 import { ExecutionEnvironmentAPI, ContainerManifestType } from 'src/api';
-import { formatPath, Paths } from 'src/paths';
+import { formatEEPath, Paths } from 'src/paths';
 import {
   ParamHelper,
   filterIsSet,
@@ -49,7 +49,11 @@ import {
   ListItemActions,
 } from '../../components';
 
-import { withContainerRepo, IDetailSharedProps } from './base';
+import {
+  withContainerParamFix,
+  withContainerRepo,
+  IDetailSharedProps,
+} from './base';
 import './execution-environment-detail_images.scss';
 
 interface IState {
@@ -349,7 +353,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
     const { hasPermission } = this.context;
     const container = this.props.routeParams.container;
     const manifestLink = (digestOrTag) =>
-      formatPath(Paths.executionEnvironmentManifest, {
+      formatEEPath(Paths.executionEnvironmentManifest, {
         container,
         digest: digestOrTag,
       });
@@ -620,5 +624,7 @@ class ExecutionEnvironmentDetailImages extends React.Component<
   }
 }
 
-export default withRouter(withContainerRepo(ExecutionEnvironmentDetailImages));
+export default withRouter(
+  withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetailImages)),
+);
 ExecutionEnvironmentDetailImages.contextType = AppContext;

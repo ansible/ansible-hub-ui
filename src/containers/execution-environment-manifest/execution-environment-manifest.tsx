@@ -9,7 +9,7 @@ import {
   Main,
   TagLabel,
   ShaLabel,
-} from '../../components';
+} from 'src/components';
 import {
   DataList,
   DataListItem,
@@ -26,10 +26,11 @@ import {
   CardTitle,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
-import { Paths, formatPath } from '../../paths';
-import { ExecutionEnvironmentAPI } from '../../api';
+import { Paths, formatEEPath } from 'src/paths';
+import { ExecutionEnvironmentAPI } from 'src/api';
 import { getHumanSize } from 'src/utilities';
 import './execution-environment-manifest.scss';
+import { withContainerParamFix } from '../execution-environment-detail/base';
 
 interface IState {
   container: { name: string };
@@ -107,7 +108,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
                 },
                 {
                   name: this.state.container.name,
-                  url: formatPath(Paths.executionEnvironmentDetail, {
+                  url: formatEEPath(Paths.executionEnvironmentDetail, {
                     container: container.name,
                   }),
                 },
@@ -146,7 +147,7 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
               Manifest lists are not currently supported on this screen, please
               use the{' '}
               <Link
-                to={formatPath(Paths.executionEnvironmentDetailImages, {
+                to={formatEEPath(Paths.executionEnvironmentDetailImages, {
                   container: container.name,
                 })}
               >
@@ -273,4 +274,4 @@ class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
   }
 }
 
-export default withRouter(ExecutionEnvironmentManifest);
+export default withRouter(withContainerParamFix(ExecutionEnvironmentManifest));

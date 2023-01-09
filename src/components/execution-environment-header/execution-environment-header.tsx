@@ -1,7 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { Tooltip } from '@patternfly/react-core';
-import { Paths, formatPath } from 'src/paths';
+import { Paths, formatEEPath } from 'src/paths';
 import { BaseHeader, Breadcrumbs, Tabs, SignatureBadge } from 'src/components';
 import { ContainerRepositoryType } from 'src/api';
 import { lastSyncStatus, lastSynced } from 'src/utilities';
@@ -43,7 +43,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
                 name: container.name,
                 url:
                   tab === 'owners'
-                    ? formatPath(Paths.executionEnvironmentDetail, {
+                    ? formatEEPath(Paths.executionEnvironmentDetail, {
                         container: container.name,
                       })
                     : null,
@@ -52,7 +52,7 @@ export class ExecutionEnvironmentHeader extends React.Component<IProps> {
                 ? {
                     name: t`Owners`,
                     url: groupId
-                      ? formatPath(Paths.executionEnvironmentDetailOwners, {
+                      ? formatEEPath(Paths.executionEnvironmentDetailOwners, {
                           container: container.name,
                         })
                       : null,

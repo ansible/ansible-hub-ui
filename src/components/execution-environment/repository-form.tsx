@@ -27,7 +27,7 @@ import {
   ExecutionEnvironmentRegistryAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
-import { Paths, formatPath } from 'src/paths';
+import { Paths, formatEEPath } from 'src/paths';
 import {
   errorMessage,
   ErrorMessagesType,
@@ -386,7 +386,7 @@ export class RepositoryForm extends React.Component<IProps, IState> {
                     Moved to the{' '}
                     <Link
                       target='_blank'
-                      to={formatPath(Paths.executionEnvironmentDetailOwners, {
+                      to={formatEEPath(Paths.executionEnvironmentDetailOwners, {
                         container: name,
                       })}
                     >

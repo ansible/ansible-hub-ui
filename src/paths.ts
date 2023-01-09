@@ -9,7 +9,7 @@ export function formatPath(
   let url = (path as string) + '/';
 
   for (const k of Object.keys(data)) {
-    url = url.replace(':' + k + '+', data[k]).replace(':' + k, data[k]);
+    url = url.replace(':' + k, encodeURIComponent(data[k]));
   }
 
   if (params) {
@@ -20,14 +20,49 @@ export function formatPath(
   }
 }
 
+// handle long/short EE routes:
+// (path, container: 'namespaced/name') -> (pathWithNamespace, { namespace: 'namespaced', container: 'name' })
+// (path, container: 'simple') -> (path, { container: 'simple' })
+// see also withContainerParamFix
+export function formatEEPath(path, data, params?) {
+  const pathsWithNamespace = {
+    [Paths.executionEnvironmentDetail]:
+      Paths.executionEnvironmentDetailWithNamespace,
+    [Paths.executionEnvironmentDetailActivities]:
+      Paths.executionEnvironmentDetailActivitiesWithNamespace,
+    [Paths.executionEnvironmentDetailImages]:
+      Paths.executionEnvironmentDetailImagesWithNamespace,
+    [Paths.executionEnvironmentDetailOwners]:
+      Paths.executionEnvironmentDetailOwnersWithNamespace,
+    [Paths.executionEnvironmentManifest]:
+      Paths.executionEnvironmentManifestWithNamespace,
+  };
+
+  if (data.container?.includes('/')) {
+    const [namespace, container] = data.container.split('/');
+    const pathWithNamespace = pathsWithNamespace[path];
+    return formatPath(
+      pathWithNamespace,
+      { ...data, namespace, container },
+      params,
+    );
+  }
+
+  return formatPath(path, data, params);
+}
+
 export enum Paths {
-  // FIXME: do paths with + still work right? might need double routes
-  executionEnvironmentDetailActivities = '/containers/:container+/_content/activity',
-  executionEnvironmentDetailImages = '/containers/:container+/_content/images',
-  executionEnvironmentDetailOwners = '/containers/:container+/_content/owners',
-  executionEnvironmentDetail = '/containers/:container+',
+  executionEnvironmentDetail = '/containers/:container',
+  executionEnvironmentDetailWithNamespace = '/containers/:namespace/:container',
+  executionEnvironmentDetailActivities = '/containers/:container/_content/activity',
+  executionEnvironmentDetailActivitiesWithNamespace = '/containers/:namespace/:container/_content/activity',
+  executionEnvironmentDetailImages = '/containers/:container/_content/images',
+  executionEnvironmentDetailImagesWithNamespace = '/containers/:namespace/:container/_content/images',
+  executionEnvironmentDetailOwners = '/containers/:container/_content/owners',
+  executionEnvironmentDetailOwnersWithNamespace = '/containers/:namespace/:container/_content/owners',
+  executionEnvironmentManifest = '/containers/:container/_content/images/:digest',
+  executionEnvironmentManifestWithNamespace = '/containers/:namespace/:container/_content/images/:digest',
   executionEnvironments = '/containers',
-  executionEnvironmentManifest = '/containers/:container+/_content/images/:digest',
   executionEnvironmentsRegistries = '/registries',
   roleEdit = '/role/:role',
   roleList = '/roles',
