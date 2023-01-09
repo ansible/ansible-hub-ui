@@ -3,19 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
 import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
-import { InsightsRoutes } from './Routes';
 import '../app.scss';
 import { AppContext } from '../app-context';
 import { loadContext } from '../load-context';
+import { InsightsRoutes } from './routes';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
-import { Paths, formatPath } from 'src/paths';
 import { AlertType, UIVersion } from 'src/components';
+import { Paths, formatPath } from 'src/paths';
 import { hasPermission } from 'src/utilities';
 
 const DEFAULT_REPO = 'published';
 
-const isRepoURL = (location) =>
-  matchPath({ path: formatPath(Paths.searchByRepo) + '*' }, location);
+const isRepoURL = (pathname) =>
+  matchPath({ path: formatPath(Paths.searchByRepo) + '*' }, pathname);
 
 const App = (_props) => {
   const location = useLocation();
