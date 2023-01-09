@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { LoadingPageWithHeader } from 'src/components';
 import { Paths } from 'src/paths';
 
@@ -140,7 +140,7 @@ export const InsightsRoutes = () => {
         {routes.map(({ component: Component, path }, index) => (
           <Route key={index} path={path} element={<Component path={path} />} />
         ))}
-        <Route element={<Navigate to={Paths.notFound} />} />
+        <Route path='*' element={<NotFound path={null} />} />
       </Routes>
     </Suspense>
   );

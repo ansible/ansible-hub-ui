@@ -64,7 +64,7 @@ interface IRoutesProps {
 
 interface IAuthHandlerProps {
   component: React.ElementType;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   noAuth: boolean;
   updateInitialData: UpdateInitialData;
   path: string;
@@ -120,7 +120,7 @@ const AuthHandler = ({
   // only enforce this if feature flags are set. Otherwise the container
   // registry will always return a 404 on the first load.
   if (isDisabled) {
-    return <Navigate to={Paths.notFound} />;
+    return <NotFound path={path} />;
   }
 
   return <Component path={path} />;
@@ -292,6 +292,17 @@ export class StandaloneRoutes extends React.Component<IRoutesProps> {
             />
           ),
         )}
+        <Route
+          path='*'
+          element={
+            <AuthHandler
+              component={NotFound}
+              noAuth={true}
+              path={null}
+              updateInitialData={updateInitialData}
+            />
+          }
+        />
       </Routes>
     );
   }
