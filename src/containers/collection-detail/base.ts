@@ -1,4 +1,3 @@
-import { redirect } from 'react-router-dom';
 import { CollectionDetailType, CollectionAPI } from 'src/api';
 import { AlertType } from 'src/components';
 import { Paths } from 'src/paths';
@@ -16,6 +15,7 @@ export interface IBaseCollectionState {
 export function loadCollection({
   forceReload,
   matchParams,
+  navigate,
   selectedRepo,
   setCollection,
   stateParams,
@@ -39,6 +39,6 @@ export function loadCollection({
       });
     })
     .catch(() => {
-      redirect(Paths.notFound);
+      navigate(Paths.notFound);
     });
 }

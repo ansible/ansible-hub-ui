@@ -111,6 +111,7 @@ class CollectionDetail extends React.Component<
     loadCollection({
       forceReload,
       matchParams: this.props.routeParams,
+      navigate: this.props.navigate,
       selectedRepo: this.context.selectedRepo,
       setCollection: (collection) => this.setState({ collection }),
       stateParams: this.state.params,

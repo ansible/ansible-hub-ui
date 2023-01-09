@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
-import { matchPath, useLocation, redirect } from 'react-router-dom';
+import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
@@ -33,6 +33,7 @@ const App = (props: IProps) => {
   const [user, setUser] = useState<UserType>(null);
 
   const { identifyApp, on, updateDocumentTitle } = useChrome();
+  const navigate = useNavigate();
 
   // componentDidMount
   useEffect(() => {
@@ -62,8 +63,7 @@ const App = (props: IProps) => {
       // domEvent: has the right href, always starts with /ansible/ansible-hub, no /beta prefix
       // go to the href, relative to our *actual* basename (basename has no trailing /, so a path will start with / unless empty
       const href = event.domEvent.href.replace(basename, '') || '/';
-
-      redirect(href);
+      navigate(href);
     });
 
     return () => {

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Routes, Route, redirect, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType } from 'src/components';
 import {
@@ -112,15 +112,13 @@ const AuthHandler = ({
       return null;
     }
 
-    redirect(formatPath(Paths.login, {}, { next: pathname }));
-    return null;
+    return <Navigate to={formatPath(Paths.login, {}, { next: pathname })} />;
   }
 
   // only enforce this if feature flags are set. Otherwise the container
   // registry will always return a 404 on the first load.
   if (isDisabled) {
-    redirect(Paths.notFound);
-    return null;
+    return <Navigate to={Paths.notFound} />;
   }
 
   return <Component />;

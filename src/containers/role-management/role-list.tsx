@@ -124,7 +124,7 @@ export class RoleList extends React.Component<RouteProps, IState> {
       roleCount === 0 && !filterIsSet(params, ['name__icontains', 'locked']);
 
     if (redirect) {
-      return <Redirect push to={redirect} />;
+      return <Navigate to={redirect} />;
     }
 
     const isSuperuser = this.context.user.is_superuser;

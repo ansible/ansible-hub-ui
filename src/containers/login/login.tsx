@@ -35,7 +35,7 @@ class LoginPage extends React.Component<RouteProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect}></Redirect>;
+      return <Navigate to={this.state.redirect} />;
     }
 
     const helperText = (

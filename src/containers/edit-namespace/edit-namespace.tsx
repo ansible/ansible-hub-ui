@@ -89,7 +89,7 @@ class EditNamespace extends React.Component<RouteProps, IState> {
     ];
 
     if (redirect) {
-      return <Redirect push to={redirect} />;
+      return <Navigate to={redirect} />;
     }
 
     if (loading) {

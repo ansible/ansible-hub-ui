@@ -112,7 +112,7 @@ class UserList extends React.Component<RouteProps, IState> {
     const { user, hasPermission } = this.context;
 
     if (redirect) {
-      return <Redirect push to={redirect} />;
+      return <Navigate to={redirect} />;
     }
 
     return (

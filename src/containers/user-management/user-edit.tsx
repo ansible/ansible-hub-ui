@@ -40,7 +40,7 @@ class UserEdit extends React.Component<RouteProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect} />;
+      return <Navigate to={this.state.redirect} />;
     }
 
     const { user, errorMessages, unauthorized } = this.state;
@@ -86,7 +86,7 @@ class UserEdit extends React.Component<RouteProps, IState> {
     const { user } = this.state;
     UserAPI.update(user.id.toString(), user)
       .then(() => {
-        // Redirect to login page when password of logged user is changed
+        // redirect to login page when password of logged user is changed
         // SSO not relevant, user-edit disabled
         if (this.context.user.id === user.id && user.password) {
           this.setState({ redirect: Paths.login });

@@ -108,7 +108,7 @@ class TaskDetail extends React.Component<RouteProps, IState> {
       parentTaskId = parsePulpIDFromURL(parentTask.pulp_href);
     }
     if (redirect) {
-      return <Redirect to={redirect}></Redirect>;
+      return <Navigate to={redirect} />;
     }
 
     return loading ? (

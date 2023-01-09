@@ -127,7 +127,7 @@ class GroupList extends React.Component<RouteProps, IState> {
       groups.length === 0 && !filterIsSet(params, ['name__icontains']);
 
     if (redirect) {
-      return <Redirect push to={redirect} />;
+      return <Navigate to={redirect} />;
     }
 
     return (

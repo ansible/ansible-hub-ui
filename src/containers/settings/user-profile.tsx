@@ -51,7 +51,7 @@ class UserProfile extends React.Component<RouteProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect} />;
+      return <Navigate to={this.state.redirect} />;
     }
 
     const { user, errorMessages, inEditMode, alerts } = this.state;
@@ -125,7 +125,7 @@ class UserProfile extends React.Component<RouteProps, IState> {
           },
           () => this.context.setUser(result.data),
         );
-        // Redirect to login page when password is changed
+        // redirect to login page when password is changed
         // SSO not relevant, user edit disabled
         if (user.password) {
           this.setState({ redirect: Paths.login });

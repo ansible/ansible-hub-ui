@@ -52,7 +52,7 @@ class UserDetail extends React.Component<RouteProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect} />;
+      return <Navigate to={this.state.redirect} />;
     }
 
     const { userDetail, errorMessages, alerts, showDeleteModal, unauthorised } =

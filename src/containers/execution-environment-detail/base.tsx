@@ -99,7 +99,7 @@ export function withContainerRepo(WrappedComponent) {
       }[this.state.redirect];
 
       if (redirect) {
-        return <Redirect push to={redirect} />;
+        return <Navigate to={redirect} />;
       }
 
       if (this.state.loading) {

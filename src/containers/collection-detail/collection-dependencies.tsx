@@ -284,6 +284,7 @@ class CollectionDependencies extends React.Component<RouteProps, IState> {
     loadCollection({
       forceReload,
       matchParams: this.props.routeParams,
+      navigate: this.props.navigate,
       selectedRepo: this.context.selectedRepo,
       setCollection: (collection) => this.setState({ collection }, callback),
       stateParams: this.state.params.version

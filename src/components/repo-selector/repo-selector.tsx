@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 import React, { useState } from 'react';
-import { redirect, useMatch } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Flex,
   FlexItem,
@@ -63,7 +63,7 @@ export const RepoSelector = ({
                   ...pathParams,
                   repo: event.target.name,
                 });
-                redirect(newPath);
+                navigate(newPath);
               }
             }}
             onToggle={(isExpanded) => setSelectExpanded(isExpanded)}

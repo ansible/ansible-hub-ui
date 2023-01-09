@@ -1,13 +1,8 @@
+/* eslint react/prop-types: 0 */
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import '../app.scss';
-import {
-  withRouter,
-  Link,
-  RouteComponentProps,
-  matchPath,
-} from 'react-router-dom';
-
+import { Link, matchPath, useLocation } from 'react-router-dom';
 import '@patternfly/patternfly/patternfly.scss';
 import {
   DropdownItem,
