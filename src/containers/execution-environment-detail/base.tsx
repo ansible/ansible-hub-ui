@@ -1,8 +1,8 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 
-import { Link, Redirect } from 'react-router-dom';
-import { RouteComponentProps } from 'src/withRouter';
+import { Link, Navigate } from 'react-router-dom';
+import { RouteProps } from 'src/utilities';
 
 import {
   ContainerRepositoryType,
@@ -43,14 +43,14 @@ interface IState {
   showDeleteModal: boolean;
 }
 
-export interface IDetailSharedProps extends RouteComponentProps {
+export interface IDetailSharedProps extends RouteProps {
   containerRepository: ContainerRepositoryType;
   addAlert: (alert: AlertType) => void;
 }
 
 // A higher order component to wrap individual detail pages
 export function withContainerRepo(WrappedComponent) {
-  return class extends React.Component<RouteComponentProps, IState> {
+  return class extends React.Component<RouteProps, IState> {
     static contextType = AppContext;
     static displayName = `withContainerRepo(${WrappedComponent.displayName})`;
 

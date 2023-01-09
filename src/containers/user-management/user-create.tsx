@@ -1,18 +1,21 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
-import { Redirect } from 'react-router-dom';
-
+import { Navigate } from 'react-router-dom';
+import { UserType, UserAPI } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
   UserFormPage,
 } from 'src/components';
-import { mapErrorMessages, ErrorMessagesType } from 'src/utilities';
-import { UserType, UserAPI } from 'src/api';
-import { Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths } from 'src/paths';
+import {
+  mapErrorMessages,
+  ErrorMessagesType,
+  withRouter,
+  RouteProps,
+} from 'src/utilities';
 
 interface IState {
   user: UserType;
@@ -20,7 +23,7 @@ interface IState {
   redirect?: string;
 }
 
-class UserCreate extends React.Component<RouteComponentProps, IState> {
+class UserCreate extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

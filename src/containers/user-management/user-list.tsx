@@ -1,8 +1,6 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-
-import { Link, Redirect } from 'react-router-dom';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import React from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import {
   Toolbar,
   ToolbarGroup,
@@ -14,11 +12,8 @@ import {
   Tooltip,
   LabelGroup,
 } from '@patternfly/react-core';
-
 import { UserPlusIcon } from '@patternfly/react-icons';
-
 import { UserAPI, UserType } from 'src/api';
-import { ParamHelper, filterIsSet, errorMessage } from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -37,9 +32,15 @@ import {
   closeAlertMixin,
   ListItemActions,
 } from 'src/components';
-
-import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import {
+  ParamHelper,
+  RouteProps,
+  errorMessage,
+  filterIsSet,
+  withRouter,
+} from 'src/utilities';
 
 interface IState {
   params: {
@@ -57,7 +58,7 @@ interface IState {
   inputText: string;
 }
 
-class UserList extends React.Component<RouteComponentProps, IState> {
+class UserList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

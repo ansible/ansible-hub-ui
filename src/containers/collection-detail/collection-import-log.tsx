@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import { ImportAPI, ImportDetailType, ImportListType } from 'src/api';
 import {
@@ -23,7 +23,7 @@ interface IState extends IBaseCollectionState {
   apiError: string;
 }
 
-class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
+class CollectionImportLog extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

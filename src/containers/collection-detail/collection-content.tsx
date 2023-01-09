@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   CollectionHeader,
@@ -16,7 +16,7 @@ import { AppContext } from 'src/loaders/app-context';
 
 // renders list of contents in a collection
 class CollectionContent extends React.Component<
-  RouteComponentProps,
+  RouteProps,
   IBaseCollectionState
 > {
   constructor(props) {

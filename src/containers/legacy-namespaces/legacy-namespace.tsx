@@ -3,7 +3,7 @@ import * as React from 'react';
 import './legacy-namespace.scss';
 
 import { Link } from 'react-router-dom';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   DataList,
@@ -180,7 +180,7 @@ interface LegacyNamespaceProps {
 }
 
 class LegacyNamespace extends React.Component<
-  RouteComponentProps,
+  RouteProps,
   LegacyNamespaceProps
 > {
   // This is the details page for a legacy namespace

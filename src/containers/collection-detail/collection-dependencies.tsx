@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   CollectionAPI,
@@ -44,10 +44,7 @@ interface IState {
   alerts: AlertType[];
 }
 
-class CollectionDependencies extends React.Component<
-  RouteComponentProps,
-  IState
-> {
+class CollectionDependencies extends React.Component<RouteProps, IState> {
   private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
   private cancelToken: ReturnType<typeof CollectionAPI.getCancelToken>;
 

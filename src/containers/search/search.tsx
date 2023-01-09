@@ -1,17 +1,17 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
+import { Navigate } from 'react-router-dom';
+import { DataList, Switch, DropdownItem, Button } from '@patternfly/react-core';
 import './search.scss';
 import {
-  errorMessage,
   DeleteCollectionUtils,
+  RouteProps,
+  errorMessage,
   filterIsSet,
-  waitForTask,
   parsePulpIDFromURL,
+  waitForTask,
+  withRouter,
 } from 'src/utilities';
-
-import { withRouter, RouteComponentProps } from 'src/withRouter';
-import { Redirect } from 'react-router-dom';
-import { DataList, Switch, DropdownItem, Button } from '@patternfly/react-core';
 import {
   BaseHeader,
   CardListSwitcher,
@@ -64,7 +64,7 @@ interface IState {
   isDeletionPending: boolean;
 }
 
-class Search extends React.Component<RouteComponentProps, IState> {
+class Search extends React.Component<RouteProps, IState> {
   tags: string[];
 
   constructor(props) {

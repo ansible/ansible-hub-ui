@@ -4,7 +4,7 @@ import './legacy-roles.scss';
 import { EmptyStateNoData } from 'src/components';
 
 import { Link } from 'react-router-dom';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   DataList,
@@ -190,7 +190,7 @@ interface IProps {
   activeItem: string;
 }
 
-class LegacyRole extends React.Component<RouteComponentProps, IProps> {
+class LegacyRole extends React.Component<RouteProps, IProps> {
   constructor(props) {
     super(props);
     const roleUser = props.routeParams.username;

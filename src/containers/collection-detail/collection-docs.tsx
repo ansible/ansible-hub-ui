@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './collection-detail.scss';
 
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { RouteProps, withRouter } from 'src/utilities';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
@@ -28,10 +28,7 @@ import {
 } from '@patternfly/react-icons';
 
 // renders markdown files in collection docs/ directory
-class CollectionDocs extends React.Component<
-  RouteComponentProps,
-  IBaseCollectionState
-> {
+class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
   docsRef: React.RefObject<HTMLDivElement>;
   searchBarRef: React.RefObject<HTMLInputElement>;
 

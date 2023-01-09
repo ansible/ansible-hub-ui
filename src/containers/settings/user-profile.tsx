@@ -1,10 +1,8 @@
 import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
-import { Redirect } from 'react-router-dom';
-
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 import { Button } from '@patternfly/react-core';
-
+import { RouteProps, withRouter } from 'src/utilities';
 import {
   LoadingPageWithHeader,
   UserFormPage,
@@ -25,7 +23,7 @@ interface IState {
   redirect?: string;
 }
 
-class UserProfile extends React.Component<RouteComponentProps, IState> {
+class UserProfile extends React.Component<RouteProps, IState> {
   private initialState: UserType;
 
   constructor(props) {

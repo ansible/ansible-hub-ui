@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import { isEqual } from 'lodash';
 
@@ -19,7 +19,7 @@ import { AppContext } from 'src/loaders/app-context';
 
 // renders collection level information
 class CollectionDetail extends React.Component<
-  RouteComponentProps,
+  RouteProps,
   IBaseCollectionState
 > {
   constructor(props) {

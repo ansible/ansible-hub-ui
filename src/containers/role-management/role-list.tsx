@@ -1,8 +1,8 @@
 import React from 'react';
 import { t, Trans } from '@lingui/macro';
 import { AppContext } from 'src/loaders/app-context';
-import { Link, Redirect } from 'react-router-dom';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Link, Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import {
   AlertType,
   Pagination,
@@ -62,7 +62,7 @@ interface IState {
   showDeleteModal: boolean;
 }
 
-export class RoleList extends React.Component<RouteComponentProps, IState> {
+export class RoleList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

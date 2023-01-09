@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   BaseHeader,
@@ -21,7 +21,7 @@ interface IState {
   redirect?: string;
 }
 
-class UserEdit extends React.Component<RouteComponentProps, IState> {
+class UserEdit extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

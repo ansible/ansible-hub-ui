@@ -1,7 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
 
 import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
@@ -41,7 +41,7 @@ interface IState {
   unauthorized: boolean;
 }
 
-class EditNamespace extends React.Component<RouteComponentProps, IState> {
+class EditNamespace extends React.Component<RouteProps, IState> {
   queryParams: URLSearchParams;
 
   constructor(props) {

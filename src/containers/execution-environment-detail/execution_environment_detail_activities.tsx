@@ -1,7 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'src/withRouter';
+import { withRouter } from 'src/utilities';
 import {
   SortTable,
   EmptyStateNoData,

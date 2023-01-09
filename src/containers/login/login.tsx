@@ -1,8 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
-import { Redirect } from 'react-router-dom';
-
+import { Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import { LoginForm, LoginPage as PFLoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
@@ -19,7 +18,7 @@ interface IState {
   redirect?: string;
 }
 
-class LoginPage extends React.Component<RouteComponentProps, IState> {
+class LoginPage extends React.Component<RouteProps, IState> {
   redirectPage: string;
 
   constructor(props) {

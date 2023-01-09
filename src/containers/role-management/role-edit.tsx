@@ -14,8 +14,8 @@ import {
 
 import { RoleAPI } from 'src/api/role';
 
-import { withRouter, RouteComponentProps } from 'src/withRouter';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   AlertList,
@@ -57,7 +57,7 @@ interface IState {
   errorMessages: { [key: string]: string };
 }
 
-class EditRole extends React.Component<RouteComponentProps, IState> {
+class EditRole extends React.Component<RouteProps, IState> {
   nonQueryStringParams = ['role'];
 
   constructor(props) {

@@ -2,8 +2,8 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { errorMessage } from 'src/utilities';
 
-import { Link, Redirect } from 'react-router-dom';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Link, Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import {
   GroupAPI,
   UserAPI,
@@ -66,7 +66,7 @@ interface IState {
   inputText: string;
 }
 
-class GroupList extends React.Component<RouteComponentProps, IState> {
+class GroupList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

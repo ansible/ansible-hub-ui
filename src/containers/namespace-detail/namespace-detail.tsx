@@ -4,8 +4,8 @@ import './namespace-detail.scss';
 
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 
-import { Link, Redirect } from 'react-router-dom';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Link, Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import {
   Alert,
   AlertActionCloseButton,
@@ -99,7 +99,7 @@ interface IState {
   group: GroupType;
 }
 
-interface IProps extends RouteComponentProps {
+interface IProps extends RouteProps {
   selectedRepo: string;
 }
 

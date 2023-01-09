@@ -1,10 +1,8 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
-
+import React from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import { Button } from '@patternfly/react-core';
-
+import { UserType, UserAPI } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -14,10 +12,9 @@ import {
   UserFormPage,
   closeAlertMixin,
 } from 'src/components';
-import { UserType, UserAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
-import { ErrorMessagesType } from 'src/utilities';
+import { ErrorMessagesType, RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   userDetail: UserType;
@@ -28,7 +25,7 @@ interface IState {
   unauthorised: boolean;
 }
 
-class UserDetail extends React.Component<RouteComponentProps, IState> {
+class UserDetail extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

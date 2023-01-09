@@ -6,8 +6,8 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { Redirect } from 'react-router-dom';
-import { RouteComponentProps } from 'src/withRouter';
+import { Navigate } from 'react-router-dom';
+import { RouteProps } from 'src/utilities';
 import { t } from '@lingui/macro';
 
 import { ParamHelper } from 'src/utilities/param-helper';
@@ -53,7 +53,7 @@ interface IState {
   inputText: string;
 }
 
-interface IProps extends RouteComponentProps {
+interface IProps extends RouteProps {
   namespacePath: Paths;
   filterOwner?: boolean;
 }

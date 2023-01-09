@@ -1,7 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { RouteProps, withRouter } from 'src/utilities';
 import { Link } from 'react-router-dom';
 import { ClipboardCopyVariant, Button } from '@patternfly/react-core';
 
@@ -33,7 +33,7 @@ interface IState {
   repoUrl: string;
 }
 
-class TokenPage extends React.Component<RouteComponentProps, IState> {
+class TokenPage extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

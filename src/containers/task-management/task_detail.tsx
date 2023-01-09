@@ -2,8 +2,7 @@ import * as React from 'react';
 import './task.scss';
 import { i18n } from '@lingui/core';
 import { t, Trans } from '@lingui/macro';
-import { Link, Redirect } from 'react-router-dom';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { Link, Navigate } from 'react-router-dom';
 import {
   AlertList,
   AlertType,
@@ -29,13 +28,13 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
+import { capitalize } from 'lodash';
 import { TaskType } from 'src/api/response-types/task';
 import { GenericPulpAPI, TaskManagementAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { Constants } from 'src/constants';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
-import { capitalize } from 'lodash';
-import { errorMessage } from 'src/utilities';
+import { errorMessage, withRouter, RouteProps } from 'src/utilities';
 
 interface IState {
   loading: boolean;
@@ -54,7 +53,7 @@ interface IState {
   polling: ReturnType<typeof setInterval>;
 }
 
-class TaskDetail extends React.Component<RouteComponentProps, IState> {
+class TaskDetail extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
     this.state = {

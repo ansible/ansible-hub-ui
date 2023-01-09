@@ -16,7 +16,7 @@ import {
 import { AppContext } from 'src/loaders/app-context';
 
 import { Link } from 'react-router-dom';
-import { withRouter } from 'src/withRouter';
+import { withRouter } from 'src/utilities';
 
 import {
   Button,

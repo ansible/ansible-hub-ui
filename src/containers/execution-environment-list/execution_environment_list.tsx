@@ -2,7 +2,7 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment.scss';
 
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { RouteProps, withRouter } from 'src/utilities';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -62,10 +62,7 @@ interface IState {
   inputText: string;
 }
 
-class ExecutionEnvironmentList extends React.Component<
-  RouteComponentProps,
-  IState
-> {
+class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

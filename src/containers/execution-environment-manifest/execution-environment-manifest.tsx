@@ -1,7 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { withRouter, RouteComponentProps } from 'src/withRouter';
+import { RouteProps, withRouter } from 'src/utilities';
 import {
   BaseHeader,
   Breadcrumbs,
@@ -43,10 +43,7 @@ interface IState {
   size: number;
 }
 
-class ExecutionEnvironmentManifest extends React.Component<
-  RouteComponentProps,
-  IState
-> {
+class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
