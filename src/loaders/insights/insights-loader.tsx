@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
-import { matchPath, useLocation, useNavigate } from 'react-router-dom';
+import { matchPath, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
@@ -28,8 +28,7 @@ const App = (_props) => {
   const [settings, setSettings] = useState<SettingsType>(null);
   const [user, setUser] = useState<UserType>(null);
 
-  const { identifyApp, on, updateDocumentTitle } = useChrome();
-  const navigate = useNavigate();
+  const { identifyApp, updateDocumentTitle } = useChrome();
 
   // componentDidMount
   useEffect(() => {
@@ -42,30 +41,6 @@ const App = (_props) => {
       setSettings(settings);
       setUser(user);
     });
-
-    // This listens for insights navigation events, so this will fire when items in the nav are clicked or the app is loaded for the first time
-    const unregister = on('APP_NAVIGATION', (event) => {
-      // might be undefined early in the load, or may not happen at all
-      if (!event?.domEvent?.href) {
-        return;
-      }
-
-      // basename is either `/ansible/automation-hub` or `/beta/ansible/automation-hub`, remove trailing /
-      // menu events don't have the /beta, converting
-      const basename = UI_BASE_PATH.replace(/^\/beta\//, '/').replace(
-        /\/$/,
-        '',
-      );
-
-      // domEvent: has the right href, always starts with /ansible/ansible-hub, no /beta prefix
-      // go to the href, relative to our *actual* basename (basename has no trailing /, so a path will start with / unless empty
-      const href = event.domEvent.href.replace(basename, '') || '/';
-      navigate(href);
-    });
-
-    return () => {
-      unregister();
-    };
   }, []);
 
   // componentDidUpdate
