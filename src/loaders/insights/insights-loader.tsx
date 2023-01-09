@@ -16,7 +16,7 @@ import { hasPermission } from 'src/utilities';
 const DEFAULT_REPO = 'published';
 
 const isRepoURL = (location) =>
-  matchPath({ path: Paths.collectionByRepo }, location);
+  matchPath({ path: Paths.searchByRepo + '/*' }, location);
 
 const App = (_props) => {
   const location = useLocation();
@@ -76,8 +76,8 @@ const App = (_props) => {
     // check if the URL matches the base path for the collection detail page
     if (match) {
       // if the URL matches, allow the repo to be switched to the repo defined in the url
-      if (match.params['repo'] !== selectedRepo) {
-        setSelectedRepo(match.params['repo']);
+      if (match.params.repo !== selectedRepo) {
+        setSelectedRepo(match.params.repo);
       }
     } else {
       // For all other URLs, switch the global state back to the "publised" repo if the repo is set to anything else.
@@ -89,7 +89,7 @@ const App = (_props) => {
 
   // block the page from rendering if we're on a repo route and the repo in the url doesn't match the current state
   // This gives componentDidUpdate a chance to recognize that route has changed and update the internal state to match the route before any pages can redirect the URL to a 404 state.
-  if (match && match.params['repo'] !== selectedRepo) {
+  if (match && match.params.repo !== selectedRepo) {
     return null;
   }
 

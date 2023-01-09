@@ -99,7 +99,7 @@ class App extends React.Component<IProps, IState> {
     // and update the internal state to match the route before any pages can
     // redirect the URL to a 404 state.
     const match = this.isRepoURL(this.props.location.pathname);
-    if (match && match.params['repo'] !== selectedRepo) {
+    if (match && match.params.repo !== selectedRepo) {
       return null;
     }
 
@@ -459,14 +459,10 @@ class App extends React.Component<IProps, IState> {
     });
 
   private setRepoToURL() {
-    // bypass this logic if looking at legacy things ...
-    if (matchPath({ path: '/legacy' }, this.props.location.pathname)) {
-      return null;
-    }
     const match = this.isRepoURL(this.props.location.pathname);
     if (match) {
-      if (match.params['repo'] !== this.state.selectedRepo) {
-        this.setState({ selectedRepo: match.params['repo'] });
+      if (match.params.repo !== this.state.selectedRepo) {
+        this.setState({ selectedRepo: match.params.repo });
       }
     }
   }
@@ -474,7 +470,7 @@ class App extends React.Component<IProps, IState> {
   private isRepoURL(location) {
     return matchPath(
       {
-        path: Paths.searchByRepo,
+        path: Paths.searchByRepo + '/*',
       },
       location,
     );
