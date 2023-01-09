@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro';
 import React, { useEffect, useState } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import { InsightsRoutes } from './Routes';
@@ -105,8 +104,4 @@ const App = (_props) => {
   );
 };
 
-/**
- * connect: https://github.com/reactjs/react-redux/blob/master/docs/api.md
- *          https://reactjs.org/docs/higher-order-components.html
- */
-export default connect()(App);
+export default App;
