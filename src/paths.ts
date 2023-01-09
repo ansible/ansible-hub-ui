@@ -1,12 +1,15 @@
 import { t } from '@lingui/macro';
-import { ParamHelper } from './utilities/param-helper';
+import { Constants } from 'src/constants';
+import { ParamHelper } from 'src/utilities';
 
 export function formatPath(
   path: Paths,
-  data,
+  data = {},
   params?: Record<string, string | boolean>,
 ) {
-  let url = (path as string) + '/';
+  // insights router has basename="/" or "/beta/", with hub under a nested "ansible/automation-hub" route - our urls are relative to that
+  let url = DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ? '..' : '';
+  url += (path as string) + '/';
 
   for (const k of Object.keys(data)) {
     url = url.replace(':' + k, encodeURIComponent(data[k]));
