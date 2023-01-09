@@ -150,9 +150,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     this.load();
 
     this.setState({ alerts: this.context.alerts || [] });
-  }
-
-  componentWillUnmount() {
     this.context.setAlerts([]);
   }
 
