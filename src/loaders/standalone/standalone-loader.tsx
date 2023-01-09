@@ -1,4 +1,3 @@
-/* eslint react/prop-types: 0 */
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import '../app.scss';
@@ -7,11 +6,6 @@ import '@patternfly/patternfly/patternfly.scss';
 import {
   DropdownItem,
   DropdownSeparator,
-  Nav,
-  NavExpandable,
-  NavGroup,
-  NavItem,
-  NavList,
   Page,
   PageHeader,
   PageHeaderTools,
@@ -21,9 +15,9 @@ import {
   ExternalLinkAltIcon,
   QuestionCircleIcon,
 } from '@patternfly/react-icons';
-import { reject, some } from 'lodash';
 
 import { StandaloneRoutes } from './routes';
+import { StandaloneMenu } from './menu';
 import { Paths, formatPath } from 'src/paths';
 import {
   ActiveUserAPI,
@@ -49,7 +43,6 @@ interface IState {
   aboutModalVisible: boolean;
   toggleOpen: boolean;
   featureFlags: FeatureFlagsType;
-  menuExpandedSections: string[];
   alerts: AlertType[];
   settings: SettingsType;
 }
@@ -70,7 +63,6 @@ class App extends React.Component<IProps, IState> {
       aboutModalVisible: false,
       toggleOpen: false,
       featureFlags: null,
-      menuExpandedSections: [],
       alerts: [],
       settings: null,
     };
@@ -82,19 +74,10 @@ class App extends React.Component<IProps, IState> {
 
   componentDidMount() {
     this.setRepoToURL();
-
-    const menu = this.menu();
-    this.activateMenu(menu);
-    this.setState({
-      menuExpandedSections: menu
-        .filter((i) => i.type === 'section' && i.active)
-        .map((i) => i.name),
-    });
   }
 
   render() {
-    const { featureFlags, menuExpandedSections, selectedRepo, user, settings } =
-      this.state;
+    const { featureFlags, selectedRepo, user, settings } = this.state;
 
     // block the page from rendering if we're on a repo route and the repo in the
     // url doesn't match the current state
@@ -224,86 +207,14 @@ class App extends React.Component<IProps, IState> {
       />
     );
 
-    const menu = user && settings ? this.menu() : []; // no longer all set at the same time
-    this.activateMenu(menu);
-
-    const ItemOrSection = ({ item }) =>
-      item.type === 'section' ? (
-        <MenuSection section={item} />
-      ) : (
-        <MenuItem item={item} />
-      );
-    const MenuItem = ({ item }) => {
-      return item.condition({ user, settings, featureFlags }) ? (
-        <NavItem
-          isActive={item.active}
-          onClick={(e) => {
-            item.onclick && item.onclick();
-            e.stopPropagation();
-          }}
-        >
-          {item.url && item.external ? (
-            <a
-              href={item.url}
-              data-cy={item['data-cy']}
-              target='_blank'
-              rel='noreferrer'
-            >
-              {item.name}
-              <ExternalLinkAltIcon
-                style={{ position: 'absolute', right: '32px' }}
-              />
-            </a>
-          ) : item.url ? (
-            <Link to={item.url}>{item.name}</Link>
-          ) : (
-            item.name
-          )}
-        </NavItem>
-      ) : null;
-    };
-
-    const Menu = ({ items }) => (
-      <>
-        {items.map((item) => (
-          <ItemOrSection key={item.name} item={item} />
-        ))}
-      </>
-    );
-    const MenuSection = ({ section }) =>
-      section.condition({ user, featureFlags, settings }) ? (
-        <NavExpandable
-          title={section.name}
-          groupId={section.name}
-          isActive={section.active}
-          isExpanded={menuExpandedSections.includes(section.name)}
-        >
-          <Menu items={section.items} />
-        </NavExpandable>
-      ) : null;
-
-    const onToggle = ({ groupId, isExpanded }) => {
-      this.setState({
-        menuExpandedSections: isExpanded
-          ? [...menuExpandedSections, groupId]
-          : reject(menuExpandedSections, (name) => name === groupId),
-      });
-    };
-
     const Sidebar = (
       <PageSidebar
         theme='dark'
         nav={
-          <Nav theme='dark' onToggle={onToggle}>
-            <NavList>
-              <NavGroup
-                className={'nav-title'}
-                title={APPLICATION_NAME}
-              ></NavGroup>
-
-              {user && featureFlags && <Menu items={menu} />}
-            </NavList>
-          </Nav>
+          <StandaloneMenu
+            repository={this.state.selectedRepo}
+            context={{ user, settings, featureFlags }}
+          />
         }
       />
     );
@@ -324,127 +235,6 @@ class App extends React.Component<IProps, IState> {
         <StandaloneRoutes updateInitialData={this.updateInitialData} />
       </Page>,
     );
-  }
-
-  private menu() {
-    const menuItem = (name, options = {}) => ({
-      active: false,
-      condition: () => true,
-      ...options,
-      type: 'item',
-      name,
-    });
-    const menuSection = (name, options = {}, items = []) => ({
-      active: false,
-      condition: (...params) =>
-        some(items, (item) => item.condition(...params)), // any visible items inside
-      ...options,
-      type: 'section',
-      name,
-      items,
-    });
-
-    return [
-      menuSection(t`Collections`, {}, [
-        menuItem(t`Collections`, {
-          url: formatPath(Paths.searchByRepo, {
-            repo: this.state.selectedRepo,
-          }),
-          condition: ({ settings, user }) =>
-            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-            !user.is_anonymous,
-        }),
-        menuItem(t`Namespaces`, {
-          url: formatPath(Paths[NAMESPACE_TERM]),
-          condition: ({ settings, user }) =>
-            settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-            !user.is_anonymous,
-        }),
-        menuItem(t`Repository Management`, {
-          condition: ({ user }) => !user.is_anonymous,
-          url: formatPath(Paths.repositories),
-        }),
-        menuItem(t`API token management`, {
-          url: formatPath(Paths.token),
-          condition: ({ user }) => !user.is_anonymous,
-        }),
-        menuItem(t`Approval`, {
-          condition: (params) =>
-            hasPermission(params, 'ansible.modify_ansible_repo_content'),
-          url: formatPath(Paths.approvalDashboard),
-        }),
-      ]),
-      menuSection(
-        t`Execution Environments`,
-        {
-          condition: ({ featureFlags, user }) =>
-            featureFlags.execution_environments && !user.is_anonymous,
-        },
-        [
-          menuItem(t`Execution Environments`, {
-            url: formatPath(Paths.executionEnvironments),
-          }),
-          menuItem(t`Remote Registries`, {
-            url: formatPath(Paths.executionEnvironmentsRegistries),
-          }),
-        ],
-      ),
-      menuSection(
-        t`Legacy`,
-        {
-          condition: ({ featureFlags }) => featureFlags.legacy_roles,
-        },
-        [
-          menuItem(t`Legacy Roles`, {
-            url: formatPath(Paths.legacyRoles),
-          }),
-          menuItem(t`Legacy Namespaces`, {
-            url: formatPath(Paths.legacyNamespaces),
-          }),
-        ],
-      ),
-      menuItem(t`Task Management`, {
-        url: formatPath(Paths.taskList),
-        condition: ({ user }) => !user.is_anonymous,
-      }),
-      menuItem(t`Signature Keys`, {
-        url: formatPath(Paths.signatureKeys),
-        condition: ({ featureFlags, user }) =>
-          featureFlags.display_signatures && !user.is_anonymous,
-      }),
-      menuItem(t`Documentation`, {
-        url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
-        external: true,
-        condition: ({ settings, user }) =>
-          settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
-          !user.is_anonymous,
-      }),
-      menuSection(t`User Access`, {}, [
-        menuItem(t`Users`, {
-          condition: (params) => hasPermission(params, 'galaxy.view_user'),
-          url: formatPath(Paths.userList),
-        }),
-        menuItem(t`Groups`, {
-          condition: (params) => hasPermission(params, 'galaxy.view_group'),
-          url: formatPath(Paths.groupList),
-        }),
-        menuItem(t`Roles`, {
-          condition: (params) => hasPermission(params, 'galaxy.view_group'),
-          url: formatPath(Paths.roleList),
-        }),
-      ]),
-    ];
-  }
-
-  private activateMenu(items) {
-    items.forEach(
-      (item) =>
-        (item.active =
-          item.type === 'section'
-            ? this.activateMenu(item.items)
-            : this.props.location.pathname.startsWith(item.url)),
-    );
-    return some(items, 'active');
   }
 
   private updateInitialData = (
