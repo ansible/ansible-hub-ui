@@ -1,7 +1,7 @@
 import React from 'react';
 import { I18nProvider } from '@lingui/react';
 import { i18n } from '@lingui/core';
-import App from './loaders/insights/insights-loader';
+import App from './loaders/insights/loader';
 import 'src/l10n';
 
 // Entrypoint for compiling the app to run in insights mode.
