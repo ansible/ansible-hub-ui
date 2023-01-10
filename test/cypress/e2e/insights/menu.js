@@ -67,11 +67,24 @@ describe('Insights Menu Tests', () => {
   });
 
   it('can navigate to Connect to Hub', () => {
+    let metricsFound = false;
+
     cy.on('uncaught:exception', (err, runnable) => {
       // this is needed, otherwise it fails on (fetch)POST 404 /api/featureflags/v0/client/metrics
-      // if contains below fails, the test is still failing (it is not caught by this code)
-      return false;
+      if (metricsFound) {
+        return true;
+      }
+      let res = runnable.commands.find((item) =>
+        item.url.includes('/api/featureflags/v0/client/metrics'),
+      );
+      if (res) {
+        // next exception will fail (without this, all api failures will be ignored)
+        metricsFound = true;
+        return false;
+      }
+      return true;
     });
+
     menuClick('Connect to Hub');
     cy.contains('main', 'Connect Private Automation Hub');
     cy.contains('main .body', 'Connect Private Automation Hub');
