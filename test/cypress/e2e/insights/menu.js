@@ -74,7 +74,7 @@ describe('Insights Menu Tests', () => {
       if (metricsFound) {
         return true;
       }
-      let res = runnable.commands.find((item) =>
+      let res = runnable?.commands?.find((item) =>
         item.url.includes('/api/featureflags/v0/client/metrics'),
       );
       if (res) {
