@@ -1,5 +1,7 @@
 const { range } = require('lodash');
 
+const uiPrefix = Cypress.env('uiPrefix');
+
 describe('screenshots', () => {
   before(() => {
     cy.deleteNamespacesAndCollections();
@@ -21,7 +23,7 @@ describe('screenshots', () => {
 
   it('takes screenshots', () => {
     const screenshot = (path) => {
-      cy.visit(path);
+      cy.visit(`${uiPrefix}${path}`.replace('//', '/'));
       cy.wait(3000);
       cy.screenshot(path.replaceAll('/', '__'));
       cy.wait(1000);
