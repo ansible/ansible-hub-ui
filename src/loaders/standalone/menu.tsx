@@ -125,13 +125,12 @@ function standaloneMenu({ repository }) {
 }
 
 function activateMenu(items, pathname) {
-  items.forEach(
-    (item) =>
-      (item.active =
-        item.type === 'section'
-          ? activateMenu(item.items, pathname)
-          : pathname.startsWith(item.url)),
-  );
+  items.forEach((item) => {
+    item.active =
+      item.type === 'section'
+        ? activateMenu(item.items, pathname)
+        : pathname.replace(/\/$/, '').startsWith(item.url.replace(/\/$/, ''));
+  });
 
   return some(items, 'active');
 }
