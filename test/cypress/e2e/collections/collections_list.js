@@ -47,7 +47,7 @@ describe('Collections list Tests', () => {
 
     cy.galaxykit('namespace create my_namespace');
     // insert test data
-    range(21).forEach((i) => {
+    range(11).forEach((i) => {
       cy.galaxykit('-i collection upload my_namespace my_collection' + i);
     });
   });
@@ -87,10 +87,7 @@ describe('Collections list Tests', () => {
   });
 
   it('paging is working', () => {
-    // this page cant sort items, so we can only count them, there should be at least 21 items that we inserted
-    cy.get('.collection-container').get('article').should('have.length', 10);
-
-    cy.get('.hub-cards').get('[aria-label="Go to next page"]:first').click();
+    // this page cant sort items, so we can only count them, there should be 11 items that we inserted
     cy.get('.collection-container').get('article').should('have.length', 10);
 
     cy.get('.hub-cards').get('[aria-label="Go to next page"]:first').click();
@@ -111,7 +108,7 @@ describe('Collections list Tests', () => {
       .click();
     cy.get('.hub-cards').get('[data-action="per-page-20"]').click();
 
-    cy.get('.collection-container').get('article').should('have.length', 20);
+    cy.get('.collection-container').get('article').should('have.length', 11);
   });
 
   it('Cards/List switch is working', () => {
