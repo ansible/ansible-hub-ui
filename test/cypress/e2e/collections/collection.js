@@ -1,5 +1,6 @@
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');
+const insightsLogin = Cypress.env('insightsLogin');
 
 const waitForTaskToFinish = (task, maxRequests, level = 0) => {
   if (level === maxRequests) {
@@ -24,7 +25,8 @@ describe('collection tests', () => {
   });
 
   it('deletes an entire collection', () => {
-    cy.galaxykit('-i collection upload test_namespace test_collection');
+    cy.createApprovedCollection('test_namespace', 'test_collection');
+
     cy.visit(`${uiPrefix}repo/published/test_namespace/test_collection`);
 
     cy.get('[data-cy=kebab-toggle]').click();
@@ -43,7 +45,7 @@ describe('collection tests', () => {
 
     waitForTaskToFinish('@taskStatus', 10);
     cy.get('@taskStatus.last').then(() => {
-      cy.get('h4[class=pf-c-alert__title]').should(
+      cy.get('[data-cy="AlertList"] h4[class=pf-c-alert__title]').should(
         'have.text',
         'Success alert:Collection "test_collection" has been successfully deleted.',
       );
@@ -51,8 +53,14 @@ describe('collection tests', () => {
   });
 
   it('deletes a collection version', () => {
-    cy.galaxykit('-i collection upload my_namespace my_collection');
-    cy.menuGo('Collections > Collections');
+    cy.createApprovedCollection('my_namespace', 'my_collection');
+
+    if (insightsLogin) {
+      cy.visit(`${uiPrefix}`);
+    } else {
+      cy.menuGo('Collections > Collections');
+    }
+
     cy.intercept('GET', `${apiPrefix}_ui/v1/namespaces/my_namespace/?*`).as(
       'reload',
     );
@@ -64,7 +72,7 @@ describe('collection tests', () => {
     cy.get('input[id=delete_confirm]').click();
     cy.get('button').contains('Delete').click();
     cy.wait('@reload', { timeout: 50000 });
-    cy.get('h4[class=pf-c-alert__title]').should(
+    cy.get('[data-cy="AlertList"] h4[class=pf-c-alert__title]').should(
       'have.text',
       'Success alert:Collection "my_collection v1.0.0" has been successfully deleted.',
     );
