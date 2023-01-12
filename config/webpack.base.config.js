@@ -214,6 +214,11 @@ module.exports = (inputConfigs) => {
           exposes: {
             './RootApp': resolve(__dirname, '../src/entry-insights.tsx'),
           },
+          shared: [
+            {
+              'react-router-dom': { singleton: true, requiredVersion: '*' },
+            },
+          ],
           ...(!isBuild && {
             // fixes "Shared module is not available for eager consumption"
             exclude: ['@patternfly/react-core'],
