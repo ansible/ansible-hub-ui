@@ -67,23 +67,10 @@ describe('Insights Menu Tests', () => {
   });
 
   it('can navigate to Connect to Hub', () => {
-    let metricsFound = false;
-
     cy.on('uncaught:exception', (err, runnable) => {
       return false;
       // this is needed, otherwise it fails on (fetch)POST 404 /api/featureflags/v0/client/metrics
-      /*if (metricsFound) {
-        return true;
-      }
-      let res = runnable?.commands?.find((item) =>
-        item.url.includes('/api/featureflags/v0/client/metrics'),
-      );
-      if (res) {
-        // next exception will fail (without this, all api failures will be ignored)
-        metricsFound = true;
-        return false;
-      }
-      return true;*/
+      // it seems that cy on duration is valid inside it, it does not catch api calls outisde
     });
 
     menuClick('Connect to Hub');
