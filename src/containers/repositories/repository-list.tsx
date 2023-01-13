@@ -18,12 +18,10 @@ import {
   ErrorMessagesType,
   mapErrorMessages,
 } from 'src/utilities';
-import { Constants } from 'src/constants';
 import {
   RemoteAPI,
   RemoteType,
   DistributionAPI,
-  MyDistributionAPI,
   DistributionType,
 } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
@@ -76,10 +74,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
       params['tab'] = 'local';
     }
 
-    if (
-      !params['tab'] &&
-      DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE
-    ) {
+    if (!params['tab']) {
       params['tab'] = 'local';
     }
 
@@ -168,9 +163,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
           title={t`Repo Management`}
           pageControls={this.renderControls()}
         >
-          {DEPLOYMENT_MODE === Constants.STANDALONE_DEPLOYMENT_MODE &&
-          !loading &&
-          !unauthorised ? (
+          {!loading && !unauthorised ? (
             <div className='header-bottom'>
               <div className='hub-tab-link-container'>
                 <div className='tabs'>
@@ -203,11 +196,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
 
   private renderContent(params, content) {
     const { user } = this.context;
-    // Dont show remotes on insights
-    if (
-      DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE ||
-      (!!params.tab && params.tab.toLowerCase() === 'local')
-    ) {
+    if (!!params.tab && params.tab.toLowerCase() === 'local') {
       return (
         <Main className='repository-list'>
           <section className='body'>
@@ -276,13 +265,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
           });
         });
       } else {
-        let APIClass = DistributionAPI;
-
-        if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-          APIClass = MyDistributionAPI;
-        }
-
-        APIClass.list().then((result) => {
+        DistributionAPI.list().then((result) => {
           this.setState({
             loading: false,
             content: result.data.data,

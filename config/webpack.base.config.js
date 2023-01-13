@@ -1,18 +1,13 @@
 const { resolve } = require('path'); // node:path
 const config = require('@redhat-cloud-services/frontend-components-config');
-const {
-  rbac,
-  defaultServices,
-} = require('@redhat-cloud-services/frontend-components-config-utilities/standalone');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { execSync } = require('child_process'); // node:child_process
 
 const isBuild = process.env.NODE_ENV === 'production';
-const cloudBeta = process.env.HUB_CLOUD_BETA; // "true" | "false" | undefined (=default)
 
 // NOTE: This file is not meant to be consumed directly by weback. Instead it
 // should be imported, initialized with the following settings and exported like
-// a normal webpack config. See config/insights.prod.webpack.config.js for an
+// a normal webpack config. See config/standalone.dev.webpack.config.js for an
 // example
 
 // only run git when HUB_UI_VERSION is NOT provided
@@ -27,8 +22,6 @@ const defaultConfigs = [
   { name: 'API_HOST', default: '', scope: 'global' },
   { name: 'API_BASE_PATH', default: '', scope: 'global' },
   { name: 'UI_BASE_PATH', default: '', scope: 'global' },
-  { name: 'DEPLOYMENT_MODE', default: 'standalone', scope: 'global' },
-  { name: 'NAMESPACE_TERM', default: 'namespaces', scope: 'global' },
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
   { name: 'UI_EXTERNAL_LOGIN_URI', default: '/login', scope: 'global' },
   { name: 'UI_COMMIT_HASH', default: gitCommit, scope: 'global' },
@@ -37,12 +30,9 @@ const defaultConfigs = [
   // build time
   { name: 'UI_USE_HTTPS', default: false, scope: 'webpack' },
   { name: 'UI_DEBUG', default: false, scope: 'webpack' },
-  { name: 'TARGET_ENVIRONMENT', default: 'prod', scope: 'webpack' },
   { name: 'UI_PORT', default: 8002, scope: 'webpack' },
   { name: 'WEBPACK_PROXY', default: undefined, scope: 'webpack' },
   { name: 'WEBPACK_PUBLIC_PATH', default: undefined, scope: 'webpack' },
-  { name: 'USE_FAVICON', default: true, scope: 'webpack' },
-  { name: 'API_PROXY_TARGET', default: undefined, scope: 'webpack' },
 ];
 
 module.exports = (inputConfigs) => {
@@ -68,24 +58,16 @@ module.exports = (inputConfigs) => {
     customConfigs.API_BASE_PATH + 'pulp/api/v3/',
   );
 
-  const isStandalone = customConfigs.DEPLOYMENT_MODE !== 'insights';
-
   // config for HtmlWebpackPlugin
   const htmlPluginConfig = {
     // used by src/index.html
     applicationName: customConfigs.APPLICATION_NAME,
-    targetEnv: customConfigs.DEPLOYMENT_MODE,
+
+    favicon: 'static/images/favicon.ico',
 
     // standalone needs injecting js and css into dist/index.html
-    inject: isStandalone,
+    inject: true,
   };
-
-  // being able to turn off the favicon is useful for deploying to insights mode
-  // console.redhat.com sets its own favicon and ours tends to override it if we
-  // set one
-  if (customConfigs.USE_FAVICON) {
-    htmlPluginConfig['favicon'] = 'static/images/favicon.ico';
-  }
 
   const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
@@ -96,35 +78,14 @@ module.exports = (inputConfigs) => {
     // defines port for dev server
     port: customConfigs.UI_PORT,
 
-    // frontend-components-config 4.5.0+: don't remove patternfly from non-insights builds
-    bundlePfModules: isStandalone,
+    // frontend-components-config 4.5.0+: don't remove patternfly from builds
+    bundlePfModules: true,
 
     // frontend-components-config 4.6.9+: keep HtmlWebpackPlugin for standalone
-    useChromeTemplate: !isStandalone,
+    useChromeTemplate: false,
 
     // frontend-components-config 4.6.25-29+: ensure hashed filenames
     useFileHash: true,
-
-    // insights dev
-    ...(!isStandalone &&
-      !isBuild && {
-        appUrl: '/beta/ansible/automation-hub/',
-        deployment: 'beta/apps',
-        standalone: {
-          api: {
-            context: [customConfigs.API_BASE_PATH],
-            target: customConfigs.API_PROXY_TARGET,
-          },
-          rbac,
-          ...defaultServices,
-        },
-      }),
-
-    // insights deployments from master
-    ...(!isStandalone &&
-      cloudBeta && {
-        deployment: cloudBeta === 'true' ? 'beta/apps' : 'apps',
-      }),
   });
 
   // Override sections of the webpack config to work with TypeScript
@@ -188,38 +149,13 @@ module.exports = (inputConfigs) => {
     newWebpackConfig.output.publicPath = customConfigs.WEBPACK_PUBLIC_PATH;
   }
 
-  if (customConfigs.DEPLOYMENT_MODE === 'standalone') {
-    console.log('Overriding configs for standalone mode.');
+  console.log('Overriding configs for standalone mode.');
 
-    const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
-    console.log(`New entry.App: ${newEntry}`);
-    newWebpackConfig.entry.App = newEntry;
-  }
+  const newEntry = resolve(__dirname, '../src/entry-standalone.tsx');
+  console.log(`New entry.App: ${newEntry}`);
+  newWebpackConfig.entry.App = newEntry;
 
   // ForkTsCheckerWebpackPlugin is part of default config since @redhat-cloud-services/frontend-components-config 4.6.24
-
-  if (customConfigs.DEPLOYMENT_MODE === 'insights') {
-    /**
-     * Generates remote containers for chrome 2
-     */
-    plugins.push(
-      require('@redhat-cloud-services/frontend-components-config/federated-modules')(
-        {
-          root: resolve(__dirname, '../'),
-          exposes: {
-            './RootApp': resolve(
-              __dirname,
-              isBuild ? '../src/app-entry.js' : '../src/dev-entry.js',
-            ),
-          },
-          ...(!isBuild && {
-            // fixes "Shared module is not available for eager consumption"
-            exclude: ['@patternfly/react-core'],
-          }),
-        },
-      ),
-    );
-  }
 
   return {
     ...newWebpackConfig,

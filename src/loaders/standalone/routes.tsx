@@ -219,7 +219,7 @@ export class Routes extends React.Component<IRoutesProps> {
       { comp: CertificationDashboard, path: Paths.approvalDashboard },
       { comp: NotFound, path: Paths.notFound },
       { comp: TokenPageStandalone, path: Paths.token },
-      { comp: Partners, path: Paths[NAMESPACE_TERM] },
+      { comp: Partners, path: Paths.namespaces },
       { comp: EditNamespace, path: Paths.editNamespace },
       { comp: NamespaceDetail, path: Paths.myCollections },
       { comp: NamespaceDetail, path: Paths.myCollectionsByRepo },
