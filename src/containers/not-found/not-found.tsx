@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import './not-found.scss';
-// had to declare *.gif in src/index.d.ts
 import NotFoundImage from 'src/../static/images/not_found.svg';
 
 import { RouteProps, withRouter } from 'src/utilities';

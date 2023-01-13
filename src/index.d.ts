@@ -1,20 +1,19 @@
 // Fool TypeScript into thinking that we actually have typings for these components.
 // This will tell typescript that anything from this module is of type any.
 
-declare module 'react-router-hash-link';
 declare module '*.svg';
 
 // Declare configuration globals here so that TypeScript compiles
 /* eslint-disable no-var */
-declare var API_HOST;
 declare var API_BASE_PATH;
-declare var PULP_API_BASE_PATH;
-declare var UI_BASE_PATH;
+declare var API_HOST;
+declare var APPLICATION_NAME;
 declare var DEPLOYMENT_MODE;
 declare var NAMESPACE_TERM;
-declare var APPLICATION_NAME;
-declare var UI_EXTERNAL_LOGIN_URI;
+declare var PULP_API_BASE_PATH;
+declare var UI_BASE_PATH;
 declare var UI_COMMIT_HASH;
+declare var UI_EXTERNAL_LOGIN_URI;
 
 // when DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE only
 interface Window {

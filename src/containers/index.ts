@@ -13,7 +13,6 @@ export { default as Partners } from './namespace-list/partners';
 export { default as NotFound } from './not-found/not-found';
 export { default as Search } from './search/search';
 export { default as TokenPageStandalone } from './token/token-standalone';
-export { default as TokenPageInsights } from './token/token-standalone';
 export { default as UserList } from './user-management/user-list';
 export { default as EditUser } from './user-management/user-edit';
 export { default as UserDetail } from './user-management/user-detail';
