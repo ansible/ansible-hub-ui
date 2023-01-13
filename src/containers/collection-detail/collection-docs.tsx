@@ -54,8 +54,6 @@ class CollectionDocs extends React.Component<
   render() {
     const { params, collection } = this.state;
     const urlFields = this.props.match.params;
-    const name =
-      NAMESPACE_TERM.charAt(0).toUpperCase() + NAMESPACE_TERM.slice(1);
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -104,7 +102,7 @@ class CollectionDocs extends React.Component<
     }
 
     const breadcrumbs = [
-      { url: Paths[NAMESPACE_TERM], name: name },
+      { url: Paths.namespaces, name: 'Namespaces' },
       {
         url: formatPath(Paths.namespaceByRepo, {
           namespace: collection.namespace.name,

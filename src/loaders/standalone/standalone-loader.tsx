@@ -262,7 +262,7 @@ class App extends React.Component<RouteComponentProps, IState> {
                 </Link>
               </NavItem>
               <NavItem>
-                <Link to={Paths[NAMESPACE_TERM]}>Namespaces</Link>
+                <Link to={Paths.namespaces}>Namespaces</Link>
               </NavItem>
               <NavItem>
                 <Link to={Paths.myNamespaces}>My Namespaces</Link>

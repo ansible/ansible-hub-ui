@@ -17,7 +17,6 @@ import {
   RemoteAPI,
   RemoteType,
   DistributionAPI,
-  MyDistributionAPI,
   DistributionType,
 } from '../../api';
 import { AppContext } from '../../loaders/app-context';

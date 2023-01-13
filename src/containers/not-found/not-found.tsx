@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './not-found.scss';
-// had to declare *.gif in src/index.d.ts
 import NotFoundImage from '../../../static/images/not_found.svg';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
