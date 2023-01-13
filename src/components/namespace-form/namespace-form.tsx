@@ -21,7 +21,6 @@ import { NamespaceType } from 'src/api';
 interface IProps {
   namespace: NamespaceType;
   errorMessages: any;
-  userId: string;
 
   updateNamespace: (namespace) => void;
 }
@@ -46,7 +45,7 @@ export class NamespaceForm extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { namespace, errorMessages, userId } = this.props;
+    const { namespace, errorMessages } = this.props;
 
     const { formErrors } = this.state;
 

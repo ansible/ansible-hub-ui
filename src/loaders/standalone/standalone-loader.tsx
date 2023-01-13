@@ -1,5 +1,4 @@
 import { t, Trans } from '@lingui/macro';
-// import PropTypes from 'prop-types';
 import * as React from 'react';
 import '../app.scss';
 import {
@@ -341,7 +340,7 @@ class App extends React.Component<RouteComponentProps, IState> {
             !user.is_anonymous,
         }),
         menuItem(t`Namespaces`, {
-          url: Paths[NAMESPACE_TERM],
+          url: Paths.namespaces,
           condition: ({ settings, user }) =>
             settings.GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS ||
             !user.is_anonymous,

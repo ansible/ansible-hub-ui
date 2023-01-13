@@ -31,7 +31,6 @@ import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { Constants } from 'src/constants';
 import { filterIsSet } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
-import { i18n } from '@lingui/core';
 
 import './namespace-list.scss';
 
@@ -154,9 +153,6 @@ export class NamespaceList extends React.Component<IProps, IState> {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
     }
 
-    // Namespaces or Partners
-    const title = i18n._(namespaceBreadcrumb.name);
-
     const updateParams = (p) => {
       p['page'] = 1;
       this.updateParams(p, () => this.loadNamespaces());
@@ -176,7 +172,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
           }
         ></NamespaceModal>
         <AlertList alerts={alerts} closeAlert={() => this.closeAlert()} />
-        <BaseHeader title={title}>
+        <BaseHeader title={t`Namespaces`}>
           {!this.context.user.is_anonymous && (
             <div className='tab-link-container'>
               <div className='tabs'>
@@ -184,7 +180,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
                   tabs={[
                     {
                       title: t`All`,
-                      link: Paths[NAMESPACE_TERM],
+                      link: Paths.namespaces,
                       active: !filterOwner,
                     },
                     {
