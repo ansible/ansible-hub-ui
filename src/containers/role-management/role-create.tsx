@@ -1,19 +1,20 @@
 import { t } from '@lingui/macro';
-import { errorMessage } from 'src/utilities';
-import {
-  mapNetworkErrors,
-  validateInput,
-} from 'src/containers/role-management/map-role-errors';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { RouteProps, withRouter } from 'src/utilities';
+import {
+  RouteProps,
+  errorMessage,
+  mapNetworkErrors,
+  validateInput,
+  withRouter,
+} from 'src/utilities';
 
 import {
-  RoleForm,
-  RoleHeader,
   AlertType,
   EmptyStateUnauthorized,
   Main,
+  RoleForm,
+  RoleHeader,
 } from 'src/components';
 
 import { Paths, formatPath } from 'src/paths';

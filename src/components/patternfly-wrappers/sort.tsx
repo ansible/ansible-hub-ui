@@ -12,7 +12,7 @@ import {
 
 import { ParamHelper } from 'src/utilities/param-helper';
 
-export class SortFieldType {
+class SortFieldType {
   id: string;
   title: string;
   type: 'numeric' | 'alpha';

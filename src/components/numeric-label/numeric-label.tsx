@@ -7,7 +7,7 @@ interface IProps {
   label: string;
 }
 
-export class NumericLabel extends React.Component<IProps> {
+class NumericLabel extends React.Component<IProps> {
   render() {
     const { number, newline, label } = this.props;
 

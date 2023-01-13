@@ -1,12 +1,5 @@
 import { PulpStatus } from './pulp';
 
-export enum ImportMessageCodes {
-  error = 'error',
-  failed = 'failed',
-  warning = 'warning',
-  success = 'success',
-}
-
 export class ImportListType {
   id: number;
   state: PulpStatus;

@@ -4,7 +4,7 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   text: string;
 }
 
-export const HTMLComment = ({ text, ...props }: IProps) => (
+const HTMLComment = ({ text, ...props }: IProps) => (
   <div {...props} dangerouslySetInnerHTML={{ __html: `<!-- ${text} -->` }} />
 );
 

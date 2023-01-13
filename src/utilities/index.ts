@@ -2,13 +2,13 @@ export { convertContentSummaryCounts } from './content-summary';
 export { ParamHelper } from './param-helper';
 export { sanitizeDocsUrls } from './sanitize-docs-urls';
 export {
-  mapErrorMessages,
   ErrorMessagesType,
+  alertErrorsWithoutFields,
   isFieldValid,
   isFormValid,
-  alertErrorsWithoutFields,
+  mapErrorMessages,
 } from './map-error-messages';
-export { getRepoUrl, getContainersURL } from './get-repo-url';
+export { getContainersURL, getRepoUrl } from './get-repo-url';
 export {
   clearSetFieldsFromRequest,
   isFieldSet,
@@ -28,3 +28,4 @@ export { DeleteCollectionUtils } from './delete-collection';
 export { RepoSigningUtils } from './repo-signing';
 export { translateLockedRolesDescription } from './translate-locked-roles-desc';
 export { RouteProps, withRouter } from './with-router';
+export { mapNetworkErrors, validateInput } from './map-role-errors';

@@ -40,7 +40,7 @@ import {
   EmptyStateUnauthorized,
   ListItemActions,
 } from 'src/components';
-import { formatPath, formatEEPath, Paths } from '../../paths';
+import { formatPath, formatEEPath, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 

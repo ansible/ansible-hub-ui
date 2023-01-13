@@ -19,17 +19,12 @@ export {
   PluginOption,
   ReturnedValue,
 } from './response-types/collection';
-export {
-  ImportListType,
-  ImportDetailType,
-  ImportMessageCodes,
-} from './response-types/import';
+export { ImportListType, ImportDetailType } from './response-types/import';
 export { PulpStatus } from './response-types/pulp';
 export { ImportAPI } from './import';
 export { ActiveUserAPI } from './active-user';
 export {
   GroupType,
-  MeType,
   ModelPermissionsType,
   UserType,
 } from './response-types/user';
@@ -75,8 +70,11 @@ export { RoleType, GroupRoleType } from './response-types/role';
 export { CertificateUploadAPI } from './certificate-upload';
 export { Repositories } from './repositories';
 export { SignContainersAPI } from './sign-containers';
-
-export { LegacyRoleListType } from './response-types/legacy-role';
-export { LegacyRoleDetailType } from './response-types/legacy-role';
-export { LegacyNamespaceListType } from './response-types/legacy-namespace';
-export { LegacyNamespaceDetailType } from './response-types/legacy-namespace';
+export {
+  LegacyRoleDetailType,
+  LegacyRoleListType,
+} from './response-types/legacy-role';
+export {
+  LegacyNamespaceDetailType,
+  LegacyNamespaceListType,
+} from './response-types/legacy-namespace';
