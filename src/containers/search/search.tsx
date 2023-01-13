@@ -3,7 +3,7 @@ import * as React from 'react';
 import './search.scss';
 
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { DataList, Switch } from '@patternfly/react-core';
+import { DataList } from '@patternfly/react-core';
 import {
   BaseHeader,
   CardListSwitcher,
@@ -16,12 +16,7 @@ import {
   Pagination,
   RepoSelector,
 } from 'src/components';
-import {
-  CollectionAPI,
-  CollectionListType,
-  SyncListType,
-  MySyncListAPI,
-} from 'src/api';
+import { CollectionAPI, CollectionListType } from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
 import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
@@ -39,7 +34,6 @@ interface IState {
     view_type?: string;
   };
   loading: boolean;
-  synclist: SyncListType;
 }
 
 class Search extends React.Component<RouteComponentProps, IState> {
@@ -70,16 +64,11 @@ class Search extends React.Component<RouteComponentProps, IState> {
       params: params,
       numberOfResults: 0,
       loading: true,
-      synclist: undefined,
     };
   }
 
   componentDidMount() {
     this.queryCollections();
-
-    if (DEPLOYMENT_MODE === Constants.INSIGHTS_DEPLOYMENT_MODE) {
-      this.getSynclist();
-    }
   }
 
   render() {
@@ -203,61 +192,12 @@ class Search extends React.Component<RouteComponentProps, IState> {
               className='card'
               key={c.id}
               {...c}
-              footer={this.renderSyncToggle(c.name, c.namespace.name)}
               repo={this.context.selectedRepo}
             />
           );
         })}
       </div>
     );
-  }
-
-  private renderSyncToggle(name: string, namespace: string): React.ReactNode {
-    const { synclist } = this.state;
-    if (!synclist) {
-      return null;
-    }
-    return (
-      <Switch
-        id={namespace + '.' + name}
-        className='sync-toggle'
-        label={t`Sync`}
-        isChecked={this.isCollectionSynced(name, namespace)}
-        onChange={() => this.toggleCollectionSync(name, namespace)}
-      />
-    );
-  }
-
-  private toggleCollectionSync(name: string, namespace: string) {
-    const synclist = { ...this.state.synclist };
-
-    const colIndex = synclist.collections.findIndex(
-      (el) => el.name === name && el.namespace === namespace,
-    );
-
-    if (colIndex < 0) {
-      synclist.collections.push({ name: name, namespace: namespace });
-    } else {
-      synclist.collections.splice(colIndex, 1);
-    }
-
-    MySyncListAPI.update(synclist.id, synclist).then((response) => {
-      this.setState({ synclist: response.data });
-      MySyncListAPI.curate(synclist.id).then(() => null);
-    });
-  }
-
-  private isCollectionSynced(name: string, namespace: string): boolean {
-    const { synclist } = this.state;
-    const found = synclist.collections.find(
-      (el) => el.name === name && el.namespace === namespace,
-    );
-
-    if (synclist.policy === 'include') {
-      return !(found === undefined);
-    } else {
-      return found === undefined;
-    }
   }
 
   private renderList(collections) {
@@ -270,7 +210,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
                 showNamespace={true}
                 key={c.id}
                 {...c}
-                controls={this.renderSyncToggle(c.name, c.namespace.name)}
                 repo={this.context.selectedRepo}
               />
             ))}
@@ -278,20 +217,6 @@ class Search extends React.Component<RouteComponentProps, IState> {
         </div>
       </div>
     );
-  }
-
-  private getSynclist() {
-    MySyncListAPI.list().then((result) => {
-      // ignore results if more than 1 is returned
-      // TODO: should we throw an error for this or just ignore it?
-      if (result.data.meta.count === 1) {
-        this.setState({ synclist: result.data.data[0] });
-      } else {
-        console.error(
-          `my-synclist returned ${result.data.meta.count} synclists`,
-        );
-      }
-    });
   }
 
   private queryCollections() {
