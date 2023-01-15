@@ -12,15 +12,15 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/headers/collection-header.tsx:200
+#: src/components/headers/collection-header.tsx:202
 msgid "(latest)"
 msgstr "(最新)"
 
-#: src/components/headers/collection-header.tsx:192
+#: src/components/headers/collection-header.tsx:194
 msgid "(signed)"
 msgstr "(署名済み)"
 
-#: src/components/headers/collection-header.tsx:192
+#: src/components/headers/collection-header.tsx:194
 msgid "(unsigned)"
 msgstr "(未署名)"
 
@@ -126,8 +126,8 @@ msgstr "API エラー: 非推奨の設定に失敗しました。"
 msgid "API Error: {ex}"
 msgstr "API エラー: {ex}"
 
-#: src/components/headers/collection-header.tsx:691
-#: src/components/headers/collection-header.tsx:742
+#: src/components/headers/collection-header.tsx:709
+#: src/components/headers/collection-header.tsx:760
 #: src/containers/namespace-detail/namespace-detail.tsx:640
 msgid "API Error: {status}"
 msgstr "API エラー: {status}"
@@ -405,7 +405,7 @@ msgstr "コレクションの依存関係が<0/>削除されるまで<1/>名前�
 msgid "Cannot delete until collections <0/>that depend on this collection <1/>have been deleted."
 msgstr "このコレクションに依存する<0/>コレクションが削除されるまで<1/>削除できません。"
 
-#: src/components/headers/collection-header.tsx:645
+#: src/components/headers/collection-header.tsx:663
 #: src/containers/certification-dashboard/certification-dashboard.tsx:554
 msgid "Certificate for collection \"{0} {1} v{2}\" has been successfully uploaded."
 msgstr "コレクション \"{0} {1} v{2}\" の証明書が正常にアップロードされました。"
@@ -548,12 +548,12 @@ msgstr "コード"
 msgid "Collection"
 msgstr "コレクション"
 
-#: src/components/headers/collection-header.tsx:825
+#: src/components/headers/collection-header.tsx:843
 #: src/containers/search/search.tsx:358
 msgid "Collection \"{0}\" could not be deprecated."
 msgstr "コレクション \"{0}\" を非推奨化できませんでした。"
 
-#: src/components/headers/collection-header.tsx:826
+#: src/components/headers/collection-header.tsx:844
 #: src/containers/search/search.tsx:359
 msgid "Collection \"{0}\" could not be undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化を解除できませんでした。"
@@ -566,12 +566,12 @@ msgstr "コレクション \"{0}\" が正常に非推奨化されました。"
 msgid "Collection \"{0}\" has been successfully undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化が正常に解除されました。"
 
-#: src/components/headers/collection-header.tsx:940
+#: src/components/headers/collection-header.tsx:958
 msgid "Collection \"{name} v{collectionVersion}\" could not be deleted."
 msgstr "コレクション \"{name} v{collectionVersion}\" を削除できませんでした。"
 
-#: src/components/headers/collection-header.tsx:869
-#: src/components/headers/collection-header.tsx:884
+#: src/components/headers/collection-header.tsx:887
+#: src/components/headers/collection-header.tsx:902
 msgid "Collection \"{name} v{collectionVersion}\" has been successfully deleted."
 msgstr "コレクション \"{name} v{collectionVersion}\" が正常に削除されました。"
 
@@ -632,7 +632,7 @@ msgstr "コレクションのアップロードが取り消されました"
 #~ msgid "Collection version {0} was not found in the system. You must upload it."
 #~ msgstr ""
 
-#: src/components/headers/collection-header.tsx:317
+#: src/components/headers/collection-header.tsx:325
 #: src/components/repositories/local-repository-table.tsx:85
 #: src/components/repositories/remote-repository-table.tsx:101
 #: src/containers/certification-dashboard/certification-dashboard.tsx:302
@@ -748,7 +748,7 @@ msgstr "コンテンツ"
 #~ msgid "Content count"
 #~ msgstr "Content count"
 
-#: src/components/headers/collection-header.tsx:583
+#: src/components/headers/collection-header.tsx:601
 msgid "Contents"
 msgstr "コンテンツ"
 
@@ -811,6 +811,10 @@ msgstr "特殊文字 (例: <!@$%>) を含めた {minLength} 文字以上のパ�
 #: src/constants.tsx:188
 msgid "Create and update execution environments under existing container namespaces."
 msgstr "既存のコンテナー名前空間の下に実行環境を作成し、更新します。"
+
+#: src/components/headers/collection-header.tsx:492
+msgid "Create issue"
+msgstr ""
 
 #: src/constants.tsx:125
 #: src/constants.tsx:165
@@ -1009,7 +1013,7 @@ msgstr "ロールを削除しますか?"
 msgid "Delete user?"
 msgstr "ユーザーを削除しますか?"
 
-#: src/components/headers/collection-header.tsx:227
+#: src/components/headers/collection-header.tsx:229
 msgid "Delete version {0}"
 msgstr "バージョン {0} の削除"
 
@@ -1050,7 +1054,7 @@ msgstr "このグループを削除すると {count} 人のユーザーが影響
 msgid "Deleting yourself is not allowed."
 msgstr "自分自身は削除できません。"
 
-#: src/components/headers/collection-header.tsx:597
+#: src/components/headers/collection-header.tsx:615
 #: src/containers/collection-detail/collection-dependencies.tsx:109
 #: src/containers/collection-detail/collection-dependencies.tsx:139
 msgid "Dependencies"
@@ -1060,7 +1064,7 @@ msgstr "依存関係"
 msgid "Dependencies for collection \"{name}\" could not be displayed."
 msgstr "コレクション \"{name}\" の依存関係を表示できませんでした。"
 
-#: src/components/headers/collection-header.tsx:910
+#: src/components/headers/collection-header.tsx:928
 msgid "Dependent collections"
 msgstr "依存するコレクション"
 
@@ -1068,7 +1072,7 @@ msgstr "依存するコレクション"
 msgid "Dependent collections could not be displayed."
 msgstr "依存するコレクションを表示できませんでした。"
 
-#: src/components/headers/collection-header.tsx:258
+#: src/components/headers/collection-header.tsx:260
 #: src/containers/namespace-detail/namespace-detail.tsx:980
 #: src/containers/search/search.tsx:384
 msgid "Deprecate"
@@ -1118,11 +1122,11 @@ msgstr "ディストリビューション URL"
 msgid "Distribution name"
 msgstr "ディストリビューション名"
 
-#: src/components/headers/collection-header.tsx:179
+#: src/components/headers/collection-header.tsx:181
 msgid "Docs site"
 msgstr "ドキュメントのサイト"
 
-#: src/components/headers/collection-header.tsx:578
+#: src/components/headers/collection-header.tsx:596
 #: src/containers/collection-detail/collection-docs.tsx:124
 #: src/loaders/standalone/standalone-loader.tsx:410
 msgid "Documentation"
@@ -1493,7 +1497,7 @@ msgstr "ユーザーデータの取得に失敗しました。"
 msgid "Failed to sign all collections."
 msgstr "すべてのコレクションの署名に失敗しました。"
 
-#: src/components/headers/collection-header.tsx:690
+#: src/components/headers/collection-header.tsx:708
 msgid "Failed to sign all versions in the collection."
 msgstr "コレクションのすべてのバージョンの署名に失敗しました。"
 
@@ -1502,7 +1506,7 @@ msgstr "コレクションのすべてのバージョンの署名に失敗しま
 msgid "Failed to sign the container version."
 msgstr "コンテナーバージョンに署名できませんでした。"
 
-#: src/components/headers/collection-header.tsx:741
+#: src/components/headers/collection-header.tsx:759
 msgid "Failed to sign the version."
 msgstr "バージョンへの署名に失敗しました。"
 
@@ -1730,7 +1734,7 @@ msgstr "インポートと自動承認"
 msgid "Import and move to staging"
 msgstr "インポートしてステージングに移動"
 
-#: src/components/headers/collection-header.tsx:592
+#: src/components/headers/collection-header.tsx:610
 #: src/containers/collection-detail/collection-import-log.tsx:77
 msgid "Import log"
 msgstr "ログのインポート"
@@ -1760,7 +1764,7 @@ msgid "Indexing started for execution environment \"{name}\"."
 msgstr "実行環境 \"{name}\" のインデックス化が開始されました。"
 
 #: src/components/collection-detail/collection-info.tsx:53
-#: src/components/headers/collection-header.tsx:573
+#: src/components/headers/collection-header.tsx:591
 msgid "Install"
 msgstr "インストール"
 
@@ -1792,7 +1796,7 @@ msgstr "ファイル名が無効です。コレクションの形式は 'namespa
 msgid "Invalid login credentials."
 msgstr "ログイン認証情報が無効です。"
 
-#: src/components/headers/collection-header.tsx:181
+#: src/components/headers/collection-header.tsx:183
 msgid "Issue tracker"
 msgstr "問題トラッカー"
 
@@ -1839,7 +1843,7 @@ msgstr "最終同期"
 msgid "Last updated"
 msgstr "最終更新日時"
 
-#: src/components/headers/collection-header.tsx:468
+#: src/components/headers/collection-header.tsx:476
 msgid "Last updated <0/>"
 msgstr "最終更新日時 <0/>"
 
@@ -2735,7 +2739,7 @@ msgstr "ロール {role} を削除しますか?"
 msgid "Remove user from group?"
 msgstr "グループからユーザーを削除しますか?"
 
-#: src/components/headers/collection-header.tsx:182
+#: src/components/headers/collection-header.tsx:184
 msgid "Repo"
 msgstr "リポジトリー"
 
@@ -2920,7 +2924,7 @@ msgstr "レジストリーの選択"
 msgid "Select a tag"
 msgstr "タグの選択"
 
-#: src/components/headers/collection-header.tsx:428
+#: src/components/headers/collection-header.tsx:436
 msgid "Select collection version"
 msgstr "コレクションバージョンの選択"
 
@@ -3016,7 +3020,7 @@ msgstr "すべてのコレクションへの署名"
 msgid "Sign and approve"
 msgstr "署名および承認"
 
-#: src/components/headers/collection-header.tsx:236
+#: src/components/headers/collection-header.tsx:238
 msgid "Sign entire collection"
 msgstr "コレクション全体への署名"
 
@@ -3024,7 +3028,7 @@ msgstr "コレクション全体への署名"
 msgid "Sign state"
 msgstr "署名状態"
 
-#: src/components/headers/collection-header.tsx:254
+#: src/components/headers/collection-header.tsx:256
 msgid "Sign version {0}"
 msgstr "バージョン {0} への署名"
 
@@ -3078,11 +3082,11 @@ msgstr "署名サービスセレクター:"
 msgid "Signing started for all collections in namespace \"{0}\"."
 msgstr "名前空間 \"{0}\" のすべてのコレクションで署名を開始しました。"
 
-#: src/components/headers/collection-header.tsx:700
+#: src/components/headers/collection-header.tsx:718
 msgid "Signing started for all versions in collection \"{0}\""
 msgstr "コレクション \"{0}\" のすべてのバージョンで署名を開始しました"
 
-#: src/components/headers/collection-header.tsx:751
+#: src/components/headers/collection-header.tsx:769
 msgid "Signing started for collection \"{0} v{1}\"."
 msgstr "コレクション \"{0} v{1}\" の署名を開始しました。"
 
@@ -3333,21 +3337,21 @@ msgstr "URL の形式は 'http(s)://' でなければなりません。"
 msgid "The URL of an external content source."
 msgstr "外部コンテンツソースの URL。"
 
-#: src/components/headers/collection-header.tsx:656
+#: src/components/headers/collection-header.tsx:674
 #: src/containers/certification-dashboard/certification-dashboard.tsx:565
 msgid "The certificate for \"{0} {1} v{2}\" could not be saved."
 msgstr "\"{0} {1} v{2}\" の証明書を保存できませんでした。"
 
-#: src/components/headers/collection-header.tsx:624
+#: src/components/headers/collection-header.tsx:642
 msgid "The certificate for \"{0} {1} v{2}\" is being uploaded."
 msgstr "\"{0} {1} v{2}\" の証明書をアップロードしています。"
 
-#: src/components/headers/collection-header.tsx:800
+#: src/components/headers/collection-header.tsx:818
 #: src/containers/search/search.tsx:336
 msgid "The collection \"{0}\" has been successfully deprecated."
 msgstr "コレクション \"{0}\" が正常に非推奨化されました。"
 
-#: src/components/headers/collection-header.tsx:801
+#: src/components/headers/collection-header.tsx:819
 #: src/containers/search/search.tsx:337
 msgid "The collection \"{0}\" has been successfully undeprecated."
 msgstr "コレクション \"{0}\" の非推奨化が正常に解除されました。"
@@ -3449,7 +3453,7 @@ msgstr "このアカウントは、名前空間の管理設定がされていま
 #~ msgid "This action will affect <0>{numberOfAffected}</0> version(s)."
 #~ msgstr "This action will affect <0>{numberOfAffected}</0> version(s)."
 
-#: src/components/headers/collection-header.tsx:491
+#: src/components/headers/collection-header.tsx:509
 msgid "This collection has been deprecated."
 msgstr "このコレクションは非推奨になりました。"
 
@@ -3550,7 +3554,7 @@ msgstr "URL を空白にすることはできません。"
 msgid "URL: {0}"
 msgstr "URL: {0}"
 
-#: src/components/headers/collection-header.tsx:258
+#: src/components/headers/collection-header.tsx:260
 #: src/containers/namespace-detail/namespace-detail.tsx:980
 #: src/containers/search/search.tsx:384
 msgid "Undeprecate"
@@ -3589,7 +3593,7 @@ msgstr "コレクションをアップロードして変更します。"
 msgid "Upload collection"
 msgstr "コレクションのアップロード"
 
-#: src/components/headers/collection-header.tsx:265
+#: src/components/headers/collection-header.tsx:267
 #: src/containers/namespace-detail/namespace-detail.tsx:960
 #: src/containers/search/search.tsx:394
 #: src/containers/search/search.tsx:406
@@ -3760,7 +3764,7 @@ msgstr "ユーザーは作成後に表示されます"
 msgid "Validated"
 msgstr "検証済み"
 
-#: src/components/headers/collection-header.tsx:416
+#: src/components/headers/collection-header.tsx:424
 #: src/containers/certification-dashboard/certification-dashboard.tsx:278
 msgid "Version"
 msgstr "バージョン"
@@ -3805,7 +3809,7 @@ msgstr "コレクションの表示"
 #~ msgid "View group"
 #~ msgstr "グループの表示"
 
-#: src/components/headers/collection-header.tsx:432
+#: src/components/headers/collection-header.tsx:440
 msgid "View more"
 msgstr "詳細表示"
 
@@ -3868,7 +3872,7 @@ msgstr "お探しのページは見つかりませんでした!"
 msgid "We use a number of keys to sign our software packages. The necessary public keys are included in the relevant products and are used to automatically verify software updates. You can also verify the packages manually using the keys on this page. More information can be found <0>here.</0>"
 msgstr ""
 
-#: src/components/headers/collection-header.tsx:180
+#: src/components/headers/collection-header.tsx:182
 msgid "Website"
 msgstr "Web サイト"
 
@@ -3950,7 +3954,7 @@ msgstr "ユーザーを表示するパーミッションがありません。"
 #~ msgid "You don't have permissions to update this namespace."
 #~ msgstr "You don't have permissions to update this namespace."
 
-#: src/components/headers/collection-header.tsx:531
+#: src/components/headers/collection-header.tsx:549
 #: src/containers/search/search.tsx:441
 msgid "You don't have rights to do this operation."
 msgstr "この操作を行う権限がありません。"
@@ -4035,7 +4039,7 @@ msgstr "タグ"
 msgid "true"
 msgstr "true"
 
-#: src/components/headers/collection-header.tsx:352
+#: src/components/headers/collection-header.tsx:360
 msgid "updated {0}"
 msgstr "{0} を更新"
 
@@ -4051,7 +4055,7 @@ msgstr "インポートの完了を待機中"
 #~ msgid "{0} released {1}"
 #~ msgstr "{0} released {1}"
 
-#: src/components/headers/collection-header.tsx:459
+#: src/components/headers/collection-header.tsx:467
 msgid "{0} updated {1}"
 msgstr "{0} 更新済み {1}"
 
@@ -4063,14 +4067,14 @@ msgstr "{0} が追加されました"
 #~ msgid "{0} will be deleted."
 #~ msgstr "{0} will be deleted."
 
-#: src/components/headers/collection-header.tsx:323
+#: src/components/headers/collection-header.tsx:331
 msgid "{collectionName}'s versions."
 msgstr "{collectionName} のバージョン。"
 
 #: src/components/cards/collection-card.tsx:53
 #: src/components/cards/namespace-card.tsx:36
 #: src/components/collection-list/collection-list-item.tsx:57
-#: src/components/headers/collection-header.tsx:397
+#: src/components/headers/collection-header.tsx:405
 #: src/components/headers/partner-header.tsx:50
 msgid "{company} logo"
 msgstr "{company} ロゴ"
