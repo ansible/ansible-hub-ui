@@ -34,7 +34,8 @@ These are separate from the project's own dependencies. Run the following from t
 
 ### Prepare your `cypress.env.json`
 
-The tests need to know details about the instance of Automation Hub that it's running against. Create a file named `cypress.env.json` in the test/ directory, and use the below example as a template or start by copying `cypress.env.json.template`.
+The tests need to know details about the instance of Automation Hub that it's running against. Create a file named `cypress.env.json` in the test/ directory, and use the below example as a template or start by copying `cypress.env.json.template.standalone`.
+Templates for insights and community modes also exist.
 
     {
         "apiPrefix": "<api root>",
@@ -44,7 +45,8 @@ The tests need to know details about the instance of Automation Hub that it's ru
         "password": "<your password here>",
         "containers": "<container push target>",
         "galaxykit": "<galaxykit command>",
-        "insightsLogin": true|false
+        "insightsLogin": true|false,
+        "disableRepoSwitch": true|false,
     }
 
 *note*: the api root for the docker development environment of ansible/galaxy\_ng is `/api/automation-hub/`, while pulp-oci-images uses `/api/galaxy/`.
