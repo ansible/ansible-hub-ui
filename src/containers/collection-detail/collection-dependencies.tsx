@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   CollectionAPI,
@@ -21,6 +21,7 @@ import {
   closeAlertMixin,
 } from 'src/components';
 
+import { loadCollection } from './base';
 import { errorMessage, filterIsSet, ParamHelper } from 'src/utilities';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
@@ -43,10 +44,7 @@ interface IState {
   alerts: AlertType[];
 }
 
-class CollectionDependencies extends React.Component<
-  RouteComponentProps,
-  IState
-> {
+class CollectionDependencies extends React.Component<RouteProps, IState> {
   private ignoredParams = ['page_size', 'page', 'sort', 'name__icontains'];
   private cancelToken: ReturnType<typeof CollectionAPI.getCancelToken>;
 
@@ -283,19 +281,16 @@ class CollectionDependencies extends React.Component<
   }
 
   private loadCollection(forceReload, callback) {
-    CollectionAPI.getCached(
-      this.props.match.params['namespace'],
-      this.props.match.params['collection'],
-      this.context.selectedRepo,
-      this.state.params.version ? { version: this.state.params.version } : {},
+    loadCollection({
       forceReload,
-    )
-      .then((result) => {
-        this.setState({ collection: result }, callback);
-      })
-      .catch(() => {
-        this.props.history.push(Paths.notFound);
-      });
+      matchParams: this.props.routeParams,
+      navigate: this.props.navigate,
+      selectedRepo: this.context.selectedRepo,
+      setCollection: (collection) => this.setState({ collection }, callback),
+      stateParams: this.state.params.version
+        ? { version: this.state.params.version }
+        : {},
+    });
   }
 
   get updateParams() {

@@ -6,12 +6,14 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { RouteComponentProps, Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { RouteProps } from 'src/utilities';
 import { t } from '@lingui/macro';
 
 import { ParamHelper } from 'src/utilities/param-helper';
 import {
   AlertList,
+  AlertType,
   AppliedFilters,
   BaseHeader,
   CompoundFilter,
@@ -24,6 +26,7 @@ import {
   NamespaceModal,
   Pagination,
   Sort,
+  closeAlertMixin,
 } from 'src/components';
 import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
 import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
@@ -35,6 +38,7 @@ import { i18n } from '@lingui/core';
 import './namespace-list.scss';
 
 interface IState {
+  alerts: AlertType[];
   namespaces: NamespaceListType[];
   itemCount: number;
   params: {
@@ -52,7 +56,7 @@ interface IState {
   inputText: string;
 }
 
-interface IProps extends RouteComponentProps {
+interface IProps extends RouteProps {
   namespacePath: Paths;
   filterOwner?: boolean;
 }
@@ -77,6 +81,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
 
     this.state = {
+      alerts: [],
       namespaces: undefined,
       itemCount: 0,
       params: params,
@@ -94,6 +99,9 @@ export class NamespaceList extends React.Component<IProps, IState> {
   };
 
   componentDidMount() {
+    this.setState({ alerts: this.context.alerts || [] });
+    this.context.setAlerts([]);
+
     if (this.props.filterOwner) {
       // Make a query with no params and see if it returns results to tell
       // if the user can edit namespaces
@@ -118,14 +126,11 @@ export class NamespaceList extends React.Component<IProps, IState> {
               loading: false,
             },
             () =>
-              this.context.setAlerts([
-                ...this.context.alerts,
-                {
-                  variant: 'danger',
-                  title: t`Namespaces list could not be displayed.`,
-                  description: errorMessage(status, statusText),
-                },
-              ]),
+              this.addAlert({
+                variant: 'danger',
+                title: t`Namespaces list could not be displayed.`,
+                description: errorMessage(status, statusText),
+              }),
           );
         });
     } else {
@@ -133,18 +138,16 @@ export class NamespaceList extends React.Component<IProps, IState> {
     }
   }
 
-  componentWillUnmount() {
-    this.context.setAlerts([]);
-  }
-
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect} />;
+      return <Navigate to={this.state.redirect} />;
     }
 
-    const { namespaces, params, itemCount, loading, inputText } = this.state;
+    const { alerts, namespaces, params, itemCount, loading, inputText } =
+      this.state;
     const { filterOwner } = this.props;
-    const { alerts, hasPermission } = this.context;
+    const { hasPermission } = this.context;
+
     const noData =
       !filterIsSet(this.state.params, ['keywords']) &&
       namespaces !== undefined &&
@@ -175,7 +178,7 @@ export class NamespaceList extends React.Component<IProps, IState> {
             })
           }
         ></NamespaceModal>
-        <AlertList alerts={alerts} closeAlert={() => this.closeAlert()} />
+        <AlertList alerts={alerts} closeAlert={(i) => this.closeAlert(i)} />
         <BaseHeader title={title}>
           {!this.context.user.is_anonymous && (
             <div className='hub-tab-link-container'>
@@ -184,12 +187,12 @@ export class NamespaceList extends React.Component<IProps, IState> {
                   tabs={[
                     {
                       title: t`All`,
-                      link: Paths[NAMESPACE_TERM],
+                      link: formatPath(Paths[NAMESPACE_TERM]),
                       active: !filterOwner,
                     },
                     {
                       title: t`My namespaces`,
-                      link: Paths.myNamespaces,
+                      link: formatPath(Paths.myNamespaces),
                       active: filterOwner,
                     },
                   ]}
@@ -360,14 +363,11 @@ export class NamespaceList extends React.Component<IProps, IState> {
               loading: false,
             },
             () =>
-              this.context.setAlerts([
-                ...this.context.alerts,
-                {
-                  variant: 'danger',
-                  title: t`Namespaces list could not be displayed.`,
-                  description: errorMessage(status, statusText),
-                },
-              ]),
+              this.addAlert({
+                variant: 'danger',
+                title: t`Namespaces list could not be displayed.`,
+                description: errorMessage(status, statusText),
+              }),
           );
         });
     });
@@ -377,8 +377,14 @@ export class NamespaceList extends React.Component<IProps, IState> {
     return ParamHelper.updateParamsMixin(this.nonURLParams);
   }
 
-  private closeAlert() {
-    this.context.setAlerts([]);
+  private addAlert(alert: AlertType) {
+    this.setState({
+      alerts: [...this.state.alerts, alert],
+    });
+  }
+
+  get closeAlert() {
+    return closeAlertMixin('alerts');
   }
 }
 

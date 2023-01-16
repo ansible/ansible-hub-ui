@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './legacy-namespaces.scss';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import { DataList } from '@patternfly/react-core';
 import {
   BaseHeader,
@@ -32,7 +32,7 @@ interface LegacyNamespacesProps {
 }
 
 class LegacyNamespaces extends React.Component<
-  RouteComponentProps,
+  RouteProps,
   LegacyNamespacesProps
 > {
   constructor(props) {

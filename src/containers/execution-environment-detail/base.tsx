@@ -1,13 +1,15 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 
-import { Link, RouteComponentProps, Redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { RouteProps } from 'src/utilities';
+
 import {
   ContainerRepositoryType,
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
 } from 'src/api';
-import { formatPath, Paths } from '../../paths';
+import { formatPath, formatEEPath, Paths } from '../../paths';
 import { Button, DropdownItem } from '@patternfly/react-core';
 import {
   AlertList,
@@ -41,16 +43,39 @@ interface IState {
   showDeleteModal: boolean;
 }
 
-export interface IDetailSharedProps extends RouteComponentProps {
+export interface IDetailSharedProps extends RouteProps {
   containerRepository: ContainerRepositoryType;
   addAlert: (alert: AlertType) => void;
 }
 
+// opposite of formatEEPath - converts routeParams from {namespace, container} to {container: "namespace/container"}
+export function withContainerParamFix(WrappedComponent) {
+  const Component = (props: RouteProps) => {
+    const newProps = {
+      ...props,
+      routeParams: {
+        ...props.routeParams,
+        container: [props.routeParams.namespace, props.routeParams.container]
+          .filter(Boolean)
+          .join('/'),
+      },
+    };
+    return <WrappedComponent {...newProps} />;
+  };
+
+  Component.displayName = `withContainerParamFix(${
+    WrappedComponent.displayName || WrappedComponent.name
+  })`;
+  return Component;
+}
+
 // A higher order component to wrap individual detail pages
 export function withContainerRepo(WrappedComponent) {
-  return class extends React.Component<RouteComponentProps, IState> {
+  return class extends React.Component<RouteProps, IState> {
     static contextType = AppContext;
-    static displayName = `withContainerRepo(${WrappedComponent.displayName})`;
+    static displayName = `withContainerRepo(${
+      WrappedComponent.displayName || WrappedComponent.name
+    })`;
 
     constructor(props) {
       super(props);
@@ -78,26 +103,26 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     render() {
-      const container = this.props.match.params['container'];
+      const container = this.props.routeParams.container;
       const redirect = {
-        list: formatPath(Paths.executionEnvironments, {}),
-        activity: formatPath(Paths.executionEnvironmentDetailActivities, {
+        list: formatEEPath(Paths.executionEnvironments, {}),
+        activity: formatEEPath(Paths.executionEnvironmentDetailActivities, {
           container,
         }),
-        detail: formatPath(Paths.executionEnvironmentDetail, {
+        detail: formatEEPath(Paths.executionEnvironmentDetail, {
           container,
         }),
-        images: formatPath(Paths.executionEnvironmentDetailImages, {
+        images: formatEEPath(Paths.executionEnvironmentDetailImages, {
           container,
         }),
-        owners: formatPath(Paths.executionEnvironmentDetailOwners, {
+        owners: formatEEPath(Paths.executionEnvironmentDetailOwners, {
           container,
         }),
-        notFound: Paths.notFound,
+        notFound: formatPath(Paths.notFound),
       }[this.state.redirect];
 
       if (redirect) {
-        return <Redirect push to={redirect} />;
+        return <Navigate to={redirect} />;
       }
 
       if (this.state.loading) {
@@ -193,7 +218,7 @@ export function withContainerRepo(WrappedComponent) {
             ></DeleteExecutionEnvironmentModal>
           )}
           <ExecutionEnvironmentHeader
-            id={this.props.match.params['container']}
+            id={this.props.routeParams.container}
             updateState={(change) => this.setState(change)}
             tab={this.getTab()}
             groupId={groupId}
@@ -279,7 +304,7 @@ export function withContainerRepo(WrappedComponent) {
     }
 
     private loadRepo() {
-      ExecutionEnvironmentAPI.get(this.props.match.params['container'])
+      ExecutionEnvironmentAPI.get(this.props.routeParams.container)
         .then((result) => {
           this.setState({
             repo: result.data,

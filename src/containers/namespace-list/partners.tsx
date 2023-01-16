@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import { NamespaceList } from './namespace-list';
 import { Paths } from 'src/paths';
 
-class Partners extends React.Component<RouteComponentProps> {
+class Partners extends React.Component<RouteProps> {
   render() {
     return (
       <NamespaceList

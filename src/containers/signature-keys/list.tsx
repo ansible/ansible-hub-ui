@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import {
   DropdownItem,
   Toolbar,
@@ -43,10 +43,7 @@ interface IState {
   inputText: string;
 }
 
-export class SignatureKeysList extends React.Component<
-  RouteComponentProps,
-  IState
-> {
+export class SignatureKeysList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

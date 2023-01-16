@@ -1,12 +1,8 @@
 import React from 'react';
 import { t, Trans } from '@lingui/macro';
 import { AppContext } from 'src/loaders/app-context';
-import {
-  Link,
-  RouteComponentProps,
-  withRouter,
-  Redirect,
-} from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import {
   AlertType,
   Pagination,
@@ -66,7 +62,7 @@ interface IState {
   showDeleteModal: boolean;
 }
 
-export class RoleList extends React.Component<RouteComponentProps, IState> {
+export class RoleList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -128,13 +124,13 @@ export class RoleList extends React.Component<RouteComponentProps, IState> {
       roleCount === 0 && !filterIsSet(params, ['name__icontains', 'locked']);
 
     if (redirect) {
-      return <Redirect push to={redirect} />;
+      return <Navigate to={redirect} />;
     }
 
     const isSuperuser = this.context.user.is_superuser;
 
     const addRoles = isSuperuser && (
-      <Link to={Paths.createRole}>
+      <Link to={formatPath(Paths.createRole)}>
         <Button variant={'primary'}>{t`Add roles`}</Button>
       </Link>
     );

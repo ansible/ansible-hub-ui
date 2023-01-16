@@ -1,13 +1,13 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-
+import { Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import { LoginForm, LoginPage as PFLoginPage } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 import Logo from 'src/../static/images/logo_large.svg';
 import { ParamHelper } from 'src/utilities/';
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { ActiveUserAPI } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
 
@@ -18,7 +18,7 @@ interface IState {
   redirect?: string;
 }
 
-class LoginPage extends React.Component<RouteComponentProps, IState> {
+class LoginPage extends React.Component<RouteProps, IState> {
   redirectPage: string;
 
   constructor(props) {
@@ -30,12 +30,12 @@ class LoginPage extends React.Component<RouteComponentProps, IState> {
     };
 
     const params = ParamHelper.parseParamString(this.props.location.search);
-    this.redirectPage = params['next'] || Paths.search;
+    this.redirectPage = params['next'] || formatPath(Paths.search);
   }
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect}></Redirect>;
+      return <Navigate to={this.state.redirect} />;
     }
 
     const helperText = (

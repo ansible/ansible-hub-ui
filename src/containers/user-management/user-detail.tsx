@@ -1,14 +1,8 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
-
+import React from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import { Button } from '@patternfly/react-core';
-
+import { UserType, UserAPI } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -18,10 +12,9 @@ import {
   UserFormPage,
   closeAlertMixin,
 } from 'src/components';
-import { UserType, UserAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
-import { ErrorMessagesType } from 'src/utilities';
+import { ErrorMessagesType, RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
   userDetail: UserType;
@@ -32,7 +25,7 @@ interface IState {
   unauthorised: boolean;
 }
 
-class UserDetail extends React.Component<RouteComponentProps, IState> {
+class UserDetail extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -47,19 +40,19 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
 
   componentDidMount() {
     const { hasPermission, user } = this.context;
-    const id = this.props.match.params['userID'];
+    const id = this.props.routeParams.userID;
     if (!user || user.is_anonymous || !hasPermission('galaxy.view_user')) {
       this.setState({ unauthorised: true });
     } else {
       UserAPI.get(id)
         .then((result) => this.setState({ userDetail: result.data }))
-        .catch(() => this.setState({ redirect: Paths.notFound }));
+        .catch(() => this.setState({ redirect: formatPath(Paths.notFound) }));
     }
   }
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect} />;
+      return <Navigate to={this.state.redirect} />;
     }
 
     const { userDetail, errorMessages, alerts, showDeleteModal, unauthorised } =
@@ -74,7 +67,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
     }
 
     const breadcrumbs = [
-      { url: Paths.userList, name: t`Users` },
+      { url: formatPath(Paths.userList), name: t`Users` },
       { name: userDetail.username },
     ];
     const title = t`User details`;
@@ -141,7 +134,7 @@ class UserDetail extends React.Component<RouteComponentProps, IState> {
       },
       () => {
         if (didDelete) {
-          this.setState({ redirect: Paths.userList });
+          this.setState({ redirect: formatPath(Paths.userList) });
         }
       },
     );

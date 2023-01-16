@@ -4,12 +4,8 @@ import './namespace-detail.scss';
 
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
 
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import {
   Alert,
   AlertActionCloseButton,
@@ -103,7 +99,7 @@ interface IState {
   group: GroupType;
 }
 
-interface IProps extends RouteComponentProps {
+interface IProps extends RouteProps {
   selectedRepo: string;
 }
 
@@ -121,7 +117,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       'page_size',
     ]);
 
-    params['namespace'] = props.match.params['namespace'];
+    params['namespace'] = props.routeParams.namespace;
 
     this.state = {
       canSign: false,
@@ -154,9 +150,6 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     this.load();
 
     this.setState({ alerts: this.context.alerts || [] });
-  }
-
-  componentWillUnmount() {
     this.context.setAlerts([]);
   }
 
@@ -167,7 +160,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         'page_size',
       ]);
 
-      params['namespace'] = this.props.match.params['namespace'];
+      params['namespace'] = this.props.routeParams.namespace;
 
       this.setState({
         params,
@@ -226,7 +219,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
     } = this.state;
 
     if (redirect) {
-      return <Redirect push to={redirect} />;
+      return <Navigate to={redirect} />;
     }
 
     if (!namespace) {
@@ -386,9 +379,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           pageControls={this.renderPageControls()}
           contextSelector={
             <RepoSelector
-              selectedRepo={this.context.selectedRepo}
-              path={this.props.match.path as Paths} // Paths.namespaceByRepo or Paths.myCollectionsByRepo
+              path={this.props.routePath}
               pathParams={{ namespace: namespace.name }}
+              selectedRepo={this.context.selectedRepo}
             />
           }
           filters={
@@ -705,10 +698,10 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         },
         this.context.selectedRepo,
       ),
-      NamespaceAPI.get(this.props.match.params['namespace'], {
+      NamespaceAPI.get(this.props.routeParams.namespace, {
         include_related: 'my_permissions',
       }),
-      MyNamespaceAPI.get(this.props.match.params['namespace'], {
+      MyNamespaceAPI.get(this.props.routeParams.namespace, {
         include_related: 'my_permissions',
       }).catch((e) => {
         // TODO this needs fixing on backend to return nothing in these cases with 200 status
@@ -741,7 +734,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
         this.loadAllRepos(val[0].data.meta.count);
       })
       .catch(() => {
-        this.setState({ redirect: Paths.notFound });
+        this.setState({ redirect: formatPath(Paths.notFound) });
       });
   }
 
@@ -752,7 +745,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       .filter((repo) => repo !== this.context.selectedRepo)
       .map((repo) =>
         CollectionAPI.list(
-          { namespace: this.props.match.params['namespace'] },
+          { namespace: this.props.routeParams.namespace },
           repo,
         ),
       );
@@ -894,7 +887,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
       NamespaceAPI.delete(name)
         .then(() => {
           this.setState({
-            redirect: formatPath(namespaceBreadcrumb.url, {}),
+            redirect: namespaceBreadcrumb.url,
             confirmDelete: false,
             isNamespacePending: false,
           });

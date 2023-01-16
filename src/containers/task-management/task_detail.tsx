@@ -2,12 +2,7 @@ import * as React from 'react';
 import './task.scss';
 import { i18n } from '@lingui/core';
 import { t, Trans } from '@lingui/macro';
-import {
-  Link,
-  withRouter,
-  Redirect,
-  RouteComponentProps,
-} from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import {
   AlertList,
   AlertType,
@@ -33,13 +28,13 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
+import { capitalize } from 'lodash';
 import { TaskType } from 'src/api/response-types/task';
 import { GenericPulpAPI, TaskManagementAPI } from 'src/api';
 import { Paths, formatPath } from 'src/paths';
 import { Constants } from 'src/constants';
 import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
-import { capitalize } from 'lodash';
-import { errorMessage } from 'src/utilities';
+import { errorMessage, withRouter, RouteProps } from 'src/utilities';
 
 interface IState {
   loading: boolean;
@@ -58,7 +53,7 @@ interface IState {
   polling: ReturnType<typeof setInterval>;
 }
 
-class TaskDetail extends React.Component<RouteComponentProps, IState> {
+class TaskDetail extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,7 +81,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params['task'] !== this.props.match.params['task']) {
+    if (prevProps.routeParams.task !== this.props.routeParams.task) {
       this.setState({ loading: true });
       this.loadContent();
     }
@@ -105,7 +100,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       redirect,
     } = this.state;
     const breadcrumbs = [
-      { url: Paths.taskList, name: t`Task management` },
+      { url: formatPath(Paths.taskList), name: t`Task management` },
       { name: task ? taskName : '' },
     ];
     let parentTaskId = null;
@@ -113,7 +108,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       parentTaskId = parsePulpIDFromURL(parentTask.pulp_href);
     }
     if (redirect) {
-      return <Redirect to={redirect}></Redirect>;
+      return <Navigate to={redirect} />;
     }
 
     return loading ? (
@@ -427,7 +422,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
       this.setState({ polling: setInterval(() => this.loadContent(), 10000) });
     }
 
-    const taskId = this.props.match.params['task'];
+    const taskId = this.props.routeParams.task;
     return TaskManagementAPI.get(taskId)
       .then((result) => {
         const allRelatedTasks = [];
@@ -520,7 +515,7 @@ class TaskDetail extends React.Component<RouteComponentProps, IState> {
         });
       })
       .catch(() => {
-        this.setState({ redirect: Paths.notFound });
+        this.setState({ redirect: formatPath(Paths.notFound) });
       });
   }
 

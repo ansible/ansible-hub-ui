@@ -1,284 +1,309 @@
-import * as React from 'react';
-import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom';
-
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
+import { AlertType } from 'src/components';
 import {
   CertificationDashboard,
   CollectionContent,
+  CollectionDependencies,
   CollectionDetail,
   CollectionDocs,
   CollectionImportLog,
-  CollectionDependencies,
   EditNamespace,
-  LegacyNamespaces,
-  LegacyNamespace,
-  LegacyRoles,
-  LegacyRole,
-  LoginPage,
-  MyImports,
-  NamespaceDetail,
-  MyNamespaces,
-  Partners,
-  NotFound,
-  Search,
-  TokenPageStandalone,
-  UserList,
-  EditUser,
-  UserDetail,
-  UserCreate,
-  UserProfile,
-  GroupList,
-  GroupDetail,
-  RoleList,
-  RoleCreate,
   EditRole,
-  RepositoryList,
-  SignatureKeysList,
-  ExecutionEnvironmentList,
-  ExecutionEnvironmentRegistryList,
+  EditUser,
   ExecutionEnvironmentDetail,
   ExecutionEnvironmentDetailActivities,
   ExecutionEnvironmentDetailImages,
   ExecutionEnvironmentDetailOwners,
+  ExecutionEnvironmentList,
   ExecutionEnvironmentManifest,
-  TaskListView,
+  ExecutionEnvironmentRegistryList,
+  GroupDetail,
+  GroupList,
+  LegacyNamespace,
+  LegacyNamespaces,
+  LegacyRole,
+  LegacyRoles,
+  LoginPage,
+  MyImports,
+  MyNamespaces,
+  NamespaceDetail,
+  NotFound,
+  Partners,
+  RepositoryList,
+  RoleCreate,
+  RoleList,
+  Search,
+  SignatureKeysList,
   TaskDetail,
+  TaskListView,
+  TokenPageStandalone,
+  UserCreate,
+  UserDetail,
+  UserList,
+  UserProfile,
 } from 'src/containers';
-import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
-import { AppContext } from '../app-context';
-import { loadContext } from '../load-context';
+import { AppContext, useContext } from 'src/loaders/app-context';
+import { loadContext } from 'src/loaders/load-context';
 import { Paths, formatPath } from 'src/paths';
-import { AlertType } from 'src/components';
+
+type UpdateInitialData = (
+  data: {
+    user?: UserType;
+    featureFlags?: FeatureFlagsType;
+    settings?: SettingsType;
+    alerts?: AlertType[];
+  },
+  callback?: () => void,
+) => void;
 
 interface IRoutesProps {
-  updateInitialData: (
-    data: {
-      user?: UserType;
-      featureFlags?: FeatureFlagsType;
-      settings?: SettingsType;
-      alerts?: AlertType[];
-    },
-    callback?: () => void,
-  ) => void;
+  updateInitialData: UpdateInitialData;
 }
 
-interface IAuthHandlerProps extends RouteComponentProps {
-  Component: React.ElementType;
+interface IAuthHandlerProps {
+  component: React.ElementType;
+  isDisabled?: boolean;
   noAuth: boolean;
-  updateInitialData: (
-    data: {
-      user?: UserType;
-      featureFlags?: FeatureFlagsType;
-      settings?: SettingsType;
-      alerts?: AlertType[];
-    },
-    callback?: () => void,
-  ) => void;
-  isDisabled: boolean;
-}
-interface IAuthHandlerState {
-  isLoading: boolean;
+  updateInitialData: UpdateInitialData;
+  path: string;
 }
 
 interface IRouteConfig {
-  comp: React.ElementType;
+  component: React.ElementType;
   path: string;
   noAuth?: boolean;
   isDisabled?: boolean;
 }
 
-class AuthHandler extends React.Component<
-  IAuthHandlerProps,
-  IAuthHandlerState
-> {
-  static contextType = AppContext;
-  constructor(props, context) {
-    super(props);
-    this.state = { isLoading: !context.user };
-  }
+const AuthHandler = ({
+  component: Component,
+  isDisabled,
+  noAuth,
+  path,
+  updateInitialData,
+}: IAuthHandlerProps) => {
+  const { user, settings, featureFlags } = useContext();
+  const [isLoading, setLoading] = useState<boolean>(
+    !user || !settings || !featureFlags,
+  );
+  const { pathname } = useLocation();
 
-  componentDidMount() {
+  useEffect(() => {
     // This component is mounted on every route change, so it's a good place
     // to check for an active user.
-    const { user, settings, featureFlags } = this.context;
     if (user && settings && featureFlags) {
       return;
     }
 
     loadContext()
-      .then((data) => this.props.updateInitialData(data))
-      .then(() => this.setState({ isLoading: false }));
+      .then((data) => updateInitialData(data))
+      .then(() => setLoading(false));
+  }, []);
+
+  if (isLoading) {
+    return null;
   }
 
-  render() {
-    const { isLoading } = this.state;
-    const { Component, noAuth, ...props } = this.props;
-    const { user, featureFlags } = this.context;
-
-    let isExternalAuth = false;
-    if (featureFlags) {
-      isExternalAuth = featureFlags.external_authentication;
-    }
-
-    if (isLoading) {
+  const isExternalAuth = featureFlags.external_authentication;
+  if (!user && !noAuth) {
+    // NOTE: also update LoginLink when changing this
+    if (isExternalAuth && UI_EXTERNAL_LOGIN_URI) {
+      window.location.replace(UI_EXTERNAL_LOGIN_URI);
       return null;
     }
 
-    if (!user && !noAuth) {
-      // NOTE: also update LoginLink when changing this
-      if (isExternalAuth && UI_EXTERNAL_LOGIN_URI) {
-        window.location.replace(UI_EXTERNAL_LOGIN_URI);
-        return <div></div>;
-      }
-      return (
-        <Redirect
-          push
-          to={formatPath(Paths.login, {}, { next: props.location.pathname })}
-        ></Redirect>
-      );
-    }
-
-    // only enforce this if feature flags are set. Otherwise the container
-    // registry will always return a 404 on the first load.
-    if (this.props.isDisabled) {
-      return <Redirect push to={Paths.notFound}></Redirect>;
-    }
-
-    return <Component {...props}></Component>;
+    return <Navigate to={formatPath(Paths.login, {}, { next: pathname })} />;
   }
-}
 
-export class Routes extends React.Component<IRoutesProps> {
+  // only enforce this if feature flags are set. Otherwise the container
+  // registry will always return a 404 on the first load.
+  if (isDisabled) {
+    return <NotFound path={path} />;
+  }
+
+  return <Component path={path} />;
+};
+
+export class StandaloneRoutes extends React.Component<IRoutesProps> {
   static contextType = AppContext;
 
   // Note: must be ordered from most specific to least specific
   getRoutes(): IRouteConfig[] {
     const { featureFlags, user } = this.context;
+
     let isContainerDisabled = true;
     let isUserMgmtDisabled = false;
     if (featureFlags) {
       isContainerDisabled = !featureFlags.execution_environments;
       isUserMgmtDisabled = featureFlags.external_authentication;
     }
+
     return [
       {
-        comp: ExecutionEnvironmentDetailActivities,
+        component: ExecutionEnvironmentDetailActivities,
+        path: Paths.executionEnvironmentDetailActivitiesWithNamespace,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        component: ExecutionEnvironmentDetailOwners,
+        path: Paths.executionEnvironmentDetailOwnersWithNamespace,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        component: ExecutionEnvironmentManifest,
+        path: Paths.executionEnvironmentManifestWithNamespace,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        component: ExecutionEnvironmentDetailImages,
+        path: Paths.executionEnvironmentDetailImagesWithNamespace,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        component: ExecutionEnvironmentDetail,
+        path: Paths.executionEnvironmentDetailWithNamespace,
+        isDisabled: isContainerDisabled,
+      },
+      {
+        component: ExecutionEnvironmentDetailActivities,
         path: Paths.executionEnvironmentDetailActivities,
         isDisabled: isContainerDisabled,
       },
       {
-        comp: ExecutionEnvironmentDetailOwners,
+        component: ExecutionEnvironmentDetailOwners,
         path: Paths.executionEnvironmentDetailOwners,
         isDisabled: isContainerDisabled,
       },
       {
-        comp: ExecutionEnvironmentManifest,
+        component: ExecutionEnvironmentManifest,
         path: Paths.executionEnvironmentManifest,
         isDisabled: isContainerDisabled,
       },
       {
-        comp: ExecutionEnvironmentDetailImages,
+        component: ExecutionEnvironmentDetailImages,
         path: Paths.executionEnvironmentDetailImages,
         isDisabled: isContainerDisabled,
       },
       {
-        comp: ExecutionEnvironmentDetail,
+        component: ExecutionEnvironmentDetail,
         path: Paths.executionEnvironmentDetail,
         isDisabled: isContainerDisabled,
       },
       {
-        comp: ExecutionEnvironmentList,
+        component: ExecutionEnvironmentList,
         path: Paths.executionEnvironments,
         isDisabled: isContainerDisabled,
       },
       {
-        comp: ExecutionEnvironmentRegistryList,
+        component: ExecutionEnvironmentRegistryList,
         path: Paths.executionEnvironmentsRegistries,
         isDisabled: isContainerDisabled,
       },
 
       // LEGACY ...
-      { comp: LegacyNamespace, path: Paths.legacyNamespace },
-      { comp: LegacyNamespaces, path: Paths.legacyNamespaces },
-      { comp: LegacyRole, path: Paths.legacyRole },
-      { comp: LegacyRoles, path: Paths.legacyRoles },
+      { component: LegacyNamespace, path: Paths.legacyNamespace },
+      { component: LegacyNamespaces, path: Paths.legacyNamespaces },
+      { component: LegacyRole, path: Paths.legacyRole },
+      { component: LegacyRoles, path: Paths.legacyRoles },
 
       {
-        comp: TaskListView,
+        component: TaskListView,
         path: Paths.taskList,
       },
-      { comp: GroupList, path: Paths.groupList },
-      { comp: GroupDetail, path: Paths.groupDetail },
-      { comp: TaskDetail, path: Paths.taskDetail },
-      { comp: EditRole, path: Paths.roleEdit },
+      { component: GroupList, path: Paths.groupList },
+      { component: GroupDetail, path: Paths.groupDetail },
+      { component: TaskDetail, path: Paths.taskDetail },
+      { component: EditRole, path: Paths.roleEdit },
       {
-        comp: RoleCreate,
+        component: RoleCreate,
         path: Paths.createRole,
         isDisabled: !user?.is_superuser,
       },
-      { comp: RoleList, path: Paths.roleList },
-      { comp: RepositoryList, path: Paths.repositories },
-      { comp: UserProfile, path: Paths.userProfileSettings },
+      { component: RoleList, path: Paths.roleList },
+      { component: RepositoryList, path: Paths.repositories },
+      { component: UserProfile, path: Paths.userProfileSettings },
       {
-        comp: UserCreate,
+        component: UserCreate,
         path: Paths.createUser,
         isDisabled: isUserMgmtDisabled,
       },
-      { comp: SignatureKeysList, path: Paths.signatureKeys },
-      { comp: EditUser, path: Paths.editUser, isDisabled: isUserMgmtDisabled },
-      { comp: UserDetail, path: Paths.userDetail },
-      { comp: UserList, path: Paths.userList },
-      { comp: CertificationDashboard, path: Paths.approvalDashboard },
-      { comp: NotFound, path: Paths.notFound },
-      { comp: TokenPageStandalone, path: Paths.token },
-      { comp: Partners, path: Paths[NAMESPACE_TERM] },
-      { comp: EditNamespace, path: Paths.editNamespace },
-      { comp: NamespaceDetail, path: Paths.myCollections },
-      { comp: NamespaceDetail, path: Paths.myCollectionsByRepo },
-      { comp: MyNamespaces, path: Paths.myNamespaces },
-      { comp: LoginPage, path: Paths.login, noAuth: true },
-      { comp: CollectionDocs, path: Paths.collectionDocsPageByRepo },
-      { comp: CollectionDocs, path: Paths.collectionDocsIndexByRepo },
-      { comp: CollectionDocs, path: Paths.collectionContentDocsByRepo },
-      { comp: CollectionContent, path: Paths.collectionContentListByRepo },
-      { comp: CollectionImportLog, path: Paths.collectionImportLogByRepo },
+      { component: SignatureKeysList, path: Paths.signatureKeys },
       {
-        comp: CollectionDependencies,
+        component: EditUser,
+        path: Paths.editUser,
+        isDisabled: isUserMgmtDisabled,
+      },
+      { component: UserDetail, path: Paths.userDetail },
+      { component: UserList, path: Paths.userList },
+      { component: CertificationDashboard, path: Paths.approvalDashboard },
+      { component: NotFound, path: Paths.notFound },
+      { component: TokenPageStandalone, path: Paths.token },
+      { component: Partners, path: Paths[NAMESPACE_TERM] },
+      { component: EditNamespace, path: Paths.editNamespace },
+      { component: NamespaceDetail, path: Paths.myCollections },
+      { component: NamespaceDetail, path: Paths.myCollectionsByRepo },
+      { component: MyNamespaces, path: Paths.myNamespaces },
+      { component: LoginPage, path: Paths.login, noAuth: true },
+      { component: CollectionDocs, path: Paths.collectionDocsPageByRepo },
+      { component: CollectionDocs, path: Paths.collectionDocsIndexByRepo },
+      { component: CollectionDocs, path: Paths.collectionContentDocsByRepo },
+      { component: CollectionContent, path: Paths.collectionContentListByRepo },
+      { component: CollectionImportLog, path: Paths.collectionImportLogByRepo },
+      {
+        component: CollectionDependencies,
         path: Paths.collectionDependenciesByRepo,
       },
-      { comp: CollectionDetail, path: Paths.collectionByRepo },
-      { comp: NamespaceDetail, path: Paths.namespaceByRepo },
-      { comp: Search, path: Paths.searchByRepo },
-      { comp: CollectionDocs, path: Paths.collectionDocsPage },
-      { comp: CollectionDocs, path: Paths.collectionDocsIndex },
-      { comp: CollectionDocs, path: Paths.collectionContentDocs },
-      { comp: CollectionContent, path: Paths.collectionContentList },
-      { comp: CollectionImportLog, path: Paths.collectionImportLog },
-      { comp: MyImports, path: Paths.myImports },
-      { comp: CollectionDetail, path: Paths.collection },
-      { comp: NamespaceDetail, path: Paths.namespace },
-      { comp: Search, path: Paths.search },
+      { component: CollectionDetail, path: Paths.collectionByRepo },
+      { component: NamespaceDetail, path: Paths.namespaceByRepo },
+      { component: Search, path: Paths.searchByRepo },
+      { component: CollectionDocs, path: Paths.collectionDocsPage },
+      { component: CollectionDocs, path: Paths.collectionDocsIndex },
+      { component: CollectionDocs, path: Paths.collectionContentDocs },
+      { component: CollectionContent, path: Paths.collectionContentList },
+      { component: CollectionImportLog, path: Paths.collectionImportLog },
+      { component: MyImports, path: Paths.myImports },
+      { component: CollectionDetail, path: Paths.collection },
+      { component: NamespaceDetail, path: Paths.namespace },
+      { component: Search, path: Paths.search },
     ];
   }
 
   render() {
+    const { updateInitialData } = this.props;
+
     return (
-      <Switch>
-        {this.getRoutes().map((route, index) => (
-          <Route
-            key={index}
-            render={(props) => (
-              <AuthHandler
-                updateInitialData={this.props.updateInitialData}
-                noAuth={route.noAuth}
-                Component={route.comp}
-                isDisabled={route.isDisabled}
-                {...props}
-              ></AuthHandler>
-            )}
-            path={route.path}
-          ></Route>
-        ))}
-      </Switch>
+      <Routes>
+        {this.getRoutes().map(
+          ({ component, isDisabled, noAuth, path }, index) => (
+            <Route
+              element={
+                <AuthHandler
+                  component={component}
+                  isDisabled={isDisabled}
+                  noAuth={noAuth}
+                  path={path}
+                  updateInitialData={updateInitialData}
+                />
+              }
+              key={index}
+              path={path}
+            />
+          ),
+        )}
+        <Route
+          path='*'
+          element={
+            <AuthHandler
+              component={NotFound}
+              noAuth={true}
+              path={null}
+              updateInitialData={updateInitialData}
+            />
+          }
+        />
+      </Routes>
     );
   }
 }

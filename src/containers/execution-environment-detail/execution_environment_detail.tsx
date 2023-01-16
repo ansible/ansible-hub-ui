@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'src/utilities';
 import {
   EmptyStateNoData,
   MarkdownEditor,
@@ -14,7 +14,11 @@ import {
   Card,
   CardBody,
 } from '@patternfly/react-core';
-import { withContainerRepo, IDetailSharedProps } from './base';
+import {
+  withContainerParamFix,
+  withContainerRepo,
+  IDetailSharedProps,
+} from './base';
 import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
 import { getContainersURL } from 'src/utilities';
 import './execution-environment-detail.scss';
@@ -192,4 +196,6 @@ class ExecutionEnvironmentDetail extends React.Component<
   }
 }
 
-export default withRouter(withContainerRepo(ExecutionEnvironmentDetail));
+export default withRouter(
+  withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetail)),
+);

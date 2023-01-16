@@ -4,7 +4,8 @@ import { i18n } from '@lingui/core';
 import * as React from 'react';
 import './task.scss';
 import { Constants } from 'src/constants';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Toolbar,
@@ -53,7 +54,7 @@ interface IState {
   inputText: string;
 }
 
-export class TaskListView extends React.Component<RouteComponentProps, IState> {
+export class TaskListView extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

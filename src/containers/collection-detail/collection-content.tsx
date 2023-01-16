@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   CollectionHeader,
@@ -16,7 +16,7 @@ import { AppContext } from 'src/loaders/app-context';
 
 // renders list of contents in a collection
 class CollectionContent extends React.Component<
-  RouteComponentProps,
+  RouteProps,
   IBaseCollectionState
 > {
   constructor(props) {
@@ -31,11 +31,7 @@ class CollectionContent extends React.Component<
   }
 
   componentDidMount() {
-    this.load(false);
-  }
-
-  load(forceReload) {
-    this.loadCollection(this.context.selectedRepo, forceReload);
+    this.loadCollection(false);
   }
 
   render() {
@@ -68,13 +64,11 @@ class CollectionContent extends React.Component<
     return (
       <React.Fragment>
         <CollectionHeader
-          reload={() => this.load(true)}
+          reload={() => this.loadCollection(true)}
           collection={collection}
           params={params}
           updateParams={(params) =>
-            this.updateParams(params, () =>
-              this.loadCollection(this.context.selectedRepo, true),
-            )
+            this.updateParams(params, () => this.loadCollection(true))
           }
           breadcrumbs={breadcrumbs}
           activeTab='contents'
@@ -95,8 +89,15 @@ class CollectionContent extends React.Component<
     );
   }
 
-  get loadCollection() {
-    return loadCollection;
+  private loadCollection(forceReload) {
+    loadCollection({
+      forceReload,
+      matchParams: this.props.routeParams,
+      navigate: this.props.navigate,
+      selectedRepo: this.context.selectedRepo,
+      setCollection: (collection) => this.setState({ collection }),
+      stateParams: this.state.params,
+    });
   }
 
   get updateParams() {

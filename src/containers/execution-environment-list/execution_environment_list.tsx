@@ -2,7 +2,8 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './execution-environment.scss';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
+import { Link } from 'react-router-dom';
 import {
   Button,
   DropdownItem,
@@ -39,7 +40,7 @@ import {
   EmptyStateUnauthorized,
   ListItemActions,
 } from 'src/components';
-import { formatPath, Paths } from '../../paths';
+import { formatPath, formatEEPath, Paths } from '../../paths';
 import { AppContext } from 'src/loaders/app-context';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 
@@ -61,10 +62,7 @@ interface IState {
   inputText: string;
 }
 
-class ExecutionEnvironmentList extends React.Component<
-  RouteComponentProps,
-  IState
-> {
+class ExecutionEnvironmentList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -393,7 +391,7 @@ class ExecutionEnvironmentList extends React.Component<
       <tr data-cy={`ExecutionEnvironmentList-row-${item.name}`} key={index}>
         <td>
           <Link
-            to={formatPath(Paths.executionEnvironmentDetail, {
+            to={formatEEPath(Paths.executionEnvironmentDetail, {
               container: item.pulp.distribution.base_path,
             })}
           >

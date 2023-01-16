@@ -1,6 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'src/utilities';
 import {
   SortTable,
   EmptyStateNoData,
@@ -9,11 +10,15 @@ import {
   DateComponent,
 } from '../../components';
 import { FlexItem, Flex, Button } from '@patternfly/react-core';
-import { formatPath, Paths } from '../../paths';
+import { formatEEPath, Paths } from '../../paths';
 import { ActivitiesAPI } from '../../api';
 import './execution-environment-detail.scss';
 
-import { withContainerRepo, IDetailSharedProps } from './base';
+import {
+  withContainerParamFix,
+  withContainerRepo,
+  IDetailSharedProps,
+} from './base';
 
 interface IState {
   loading: boolean;
@@ -97,7 +102,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
 
   queryActivities(name) {
     const manifestLink = (digestOrTag) =>
-      formatPath(Paths.executionEnvironmentManifest, {
+      formatEEPath(Paths.executionEnvironmentManifest, {
         container: name,
         digest: digestOrTag,
       });
@@ -234,5 +239,7 @@ class ExecutionEnvironmentDetailActivities extends React.Component<
 }
 
 export default withRouter(
-  withContainerRepo(ExecutionEnvironmentDetailActivities),
+  withContainerParamFix(
+    withContainerRepo(ExecutionEnvironmentDetailActivities),
+  ),
 );

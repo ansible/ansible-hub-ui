@@ -2,7 +2,8 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './certification-dashboard.scss';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
+import { Link } from 'react-router-dom';
 import {
   BaseHeader,
   DateComponent,
@@ -78,10 +79,7 @@ interface IState {
   versionToUploadCertificate?: CollectionVersion;
 }
 
-class CertificationDashboard extends React.Component<
-  RouteComponentProps,
-  IState
-> {
+class CertificationDashboard extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

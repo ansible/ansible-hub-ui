@@ -1,12 +1,12 @@
 import { t } from '@lingui/macro';
 import { errorMessage } from 'src/utilities';
-
 import {
   mapNetworkErrors,
   validateInput,
 } from 'src/containers/role-management/map-role-errors';
-import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   RoleForm,
@@ -16,7 +16,7 @@ import {
   Main,
 } from 'src/components';
 
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 import { RoleAPI } from 'src/api/role';
 
@@ -32,7 +32,7 @@ interface IState {
   alerts: AlertType[];
 }
 
-class RoleCreate extends React.Component<RouteComponentProps, IState> {
+class RoleCreate extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -50,14 +50,14 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect} />;
+      return <Navigate to={this.state.redirect} />;
     }
 
     const { errorMessages, description, name, saving } = this.state;
 
     const notAuthorised = !this.context.user || this.context.user.is_anonymous;
     const breadcrumbs = [
-      { url: Paths.roleList, name: t`Roles` },
+      { url: formatPath(Paths.roleList), name: t`Roles` },
       { name: t`Create new role` },
     ];
 
@@ -115,7 +115,7 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
   private cancelRole = () => {
     this.setState({
       errorMessages: {},
-      redirect: Paths.roleList,
+      redirect: formatPath(Paths.roleList),
     });
   };
 
@@ -125,7 +125,10 @@ class RoleCreate extends React.Component<RouteComponentProps, IState> {
 
       RoleAPI.create({ name, description, permissions })
         .then(() =>
-          this.setState({ redirect: Paths.roleList, errorMessages: null }),
+          this.setState({
+            redirect: formatPath(Paths.roleList),
+            errorMessages: null,
+          }),
         )
         .catch((err) => {
           const { status, statusText } = err.response;

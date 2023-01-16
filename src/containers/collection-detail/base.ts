@@ -1,6 +1,6 @@
 import { CollectionDetailType, CollectionAPI } from 'src/api';
 import { AlertType } from 'src/components';
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 
 export interface IBaseCollectionState {
   params: {
@@ -12,30 +12,33 @@ export interface IBaseCollectionState {
   alerts?: AlertType[];
 }
 
-export function loadCollection(
-  repo,
-  forceReload = false,
-  callback = () => null,
-) {
+export function loadCollection({
+  forceReload,
+  matchParams,
+  navigate,
+  selectedRepo,
+  setCollection,
+  stateParams,
+}) {
   CollectionAPI.getCached(
-    this.props.match.params['namespace'],
-    this.props.match.params['collection'],
-    repo,
-    { ...this.state.params, include_related: 'my_permissions' },
+    matchParams['namespace'],
+    matchParams['collection'],
+    selectedRepo,
+    { ...stateParams, include_related: 'my_permissions' },
     forceReload,
   )
     .then((result) => {
       return CollectionAPI.list(
         {
-          name: this.props.match.params['collection'],
+          name: matchParams['collection'],
         },
-        this.context.selectedRepo,
+        selectedRepo,
       ).then((collections) => {
         result.deprecated = collections.data.data[0].deprecated;
-        this.setState({ collection: result }, callback);
+        setCollection(result);
       });
     })
     .catch(() => {
-      this.props.history.push(Paths.notFound);
+      navigate(formatPath(Paths.notFound));
     });
 }

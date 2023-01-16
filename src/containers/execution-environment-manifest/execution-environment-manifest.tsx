@@ -1,6 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, Link, RouteComponentProps } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import {
   BaseHeader,
   Breadcrumbs,
@@ -8,7 +9,7 @@ import {
   Main,
   TagLabel,
   ShaLabel,
-} from '../../components';
+} from 'src/components';
 import {
   DataList,
   DataListItem,
@@ -25,10 +26,11 @@ import {
   CardTitle,
 } from '@patternfly/react-core';
 import { sum } from 'lodash';
-import { Paths, formatPath } from '../../paths';
-import { ExecutionEnvironmentAPI } from '../../api';
+import { Paths, formatEEPath, formatPath } from 'src/paths';
+import { ExecutionEnvironmentAPI } from 'src/api';
 import { getHumanSize } from 'src/utilities';
 import './execution-environment-manifest.scss';
+import { withContainerParamFix } from '../execution-environment-detail/base';
 
 interface IState {
   container: { name: string };
@@ -42,16 +44,13 @@ interface IState {
   size: number;
 }
 
-class ExecutionEnvironmentManifest extends React.Component<
-  RouteComponentProps,
-  IState
-> {
+class ExecutionEnvironmentManifest extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
     this.state = {
-      container: { name: this.props.match.params['container'] },
-      digest: this.props.match.params['digest'], // digest or tag until loading done
+      container: { name: this.props.routeParams.container },
+      digest: this.props.routeParams.digest, // digest or tag until loading done
       environment: [],
       error: false,
       labels: [],
@@ -105,11 +104,11 @@ class ExecutionEnvironmentManifest extends React.Component<
               links={[
                 {
                   name: t`Execution Environments`,
-                  url: Paths.executionEnvironments,
+                  url: formatPath(Paths.executionEnvironments),
                 },
                 {
                   name: this.state.container.name,
-                  url: formatPath(Paths.executionEnvironmentDetail, {
+                  url: formatEEPath(Paths.executionEnvironmentDetail, {
                     container: container.name,
                   }),
                 },
@@ -148,7 +147,7 @@ class ExecutionEnvironmentManifest extends React.Component<
               Manifest lists are not currently supported on this screen, please
               use the{' '}
               <Link
-                to={formatPath(Paths.executionEnvironmentDetailImages, {
+                to={formatEEPath(Paths.executionEnvironmentDetailImages, {
                   container: container.name,
                 })}
               >
@@ -275,4 +274,4 @@ class ExecutionEnvironmentManifest extends React.Component<
   }
 }
 
-export default withRouter(ExecutionEnvironmentManifest);
+export default withRouter(withContainerParamFix(ExecutionEnvironmentManifest));

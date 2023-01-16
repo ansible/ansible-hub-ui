@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import { ImportAPI, ImportDetailType, ImportListType } from 'src/api';
 import {
@@ -23,7 +23,7 @@ interface IState extends IBaseCollectionState {
   apiError: string;
 }
 
-class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
+class CollectionImportLog extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -111,7 +111,7 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
   private loadData(forceReload = false) {
     const failMsg = t`Could not load import log`;
     this.setState({ loadingImports: true }, () => {
-      this.loadCollection(this.context.selectedRepo, forceReload, () => {
+      this.loadCollection(forceReload, () => {
         ImportAPI.list({
           namespace: this.state.collection.namespace.name,
           name: this.state.collection.name,
@@ -146,8 +146,15 @@ class CollectionImportLog extends React.Component<RouteComponentProps, IState> {
     });
   }
 
-  get loadCollection() {
-    return loadCollection;
+  private loadCollection(forceReload, callback) {
+    loadCollection({
+      forceReload,
+      matchParams: this.props.routeParams,
+      navigate: this.props.navigate,
+      selectedRepo: this.context.selectedRepo,
+      setCollection: (collection) => this.setState({ collection }, callback),
+      stateParams: this.state.params,
+    });
   }
 
   get updateParams() {

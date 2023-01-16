@@ -1,10 +1,10 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
+import { Link } from 'react-router-dom';
 import { ClipboardCopyVariant, Button } from '@patternfly/react-core';
-
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import {
   BaseHeader,
   Main,
@@ -32,7 +32,7 @@ interface IState {
   repoUrl: string;
 }
 
-class TokenPage extends React.Component<RouteComponentProps, IState> {
+class TokenPage extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -98,13 +98,15 @@ class TokenPage extends React.Component<RouteComponentProps, IState> {
             <p>
               <Trans>
                 Use the{' '}
-                <Link to={Paths.repositories}>Repository Management</Link> page
-                to sync collections curated by your organization to the Red Hat
-                Certified repository in your private Automation Hub. Users with
-                the correct permissions can use the sync toggles on the{' '}
-                <Link to={Paths.search}>Collections</Link> page to control which
-                collections are added to their organization&apos;s sync
-                repository.
+                <Link to={formatPath(Paths.repositories)}>
+                  Repository Management
+                </Link>{' '}
+                page to sync collections curated by your organization to the Red
+                Hat Certified repository in your private Automation Hub. Users
+                with the correct permissions can use the sync toggles on the{' '}
+                <Link to={formatPath(Paths.search)}>Collections</Link> page to
+                control which collections are added to their organization&apos;s
+                sync repository.
               </Trans>
             </p>
           </section>

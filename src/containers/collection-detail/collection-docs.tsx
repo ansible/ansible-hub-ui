@@ -2,7 +2,8 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './collection-detail.scss';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
+import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
 import { Alert } from '@patternfly/react-core';
@@ -27,10 +28,7 @@ import {
 } from '@patternfly/react-icons';
 
 // renders markdown files in collection docs/ directory
-class CollectionDocs extends React.Component<
-  RouteComponentProps,
-  IBaseCollectionState
-> {
+class CollectionDocs extends React.Component<RouteProps, IBaseCollectionState> {
   docsRef: React.RefObject<HTMLDivElement>;
   searchBarRef: React.RefObject<HTMLInputElement>;
 
@@ -47,16 +45,12 @@ class CollectionDocs extends React.Component<
   }
 
   componentDidMount() {
-    this.load(false);
-  }
-
-  private load(forceUpdate) {
-    this.loadCollection(this.context.selectedRepo, forceUpdate);
+    this.loadCollection(false);
   }
 
   render() {
     const { params, collection } = this.state;
-    const urlFields = this.props.match.params;
+    const urlFields = this.props.routeParams;
 
     if (!collection) {
       return <LoadingPageWithHeader></LoadingPageWithHeader>;
@@ -136,13 +130,11 @@ class CollectionDocs extends React.Component<
     return (
       <React.Fragment>
         <CollectionHeader
-          reload={() => this.load(true)}
+          reload={() => this.loadCollection(true)}
           collection={collection}
           params={params}
           updateParams={(p) =>
-            this.updateParams(p, () =>
-              this.loadCollection(this.context.selectedRepo, true),
-            )
+            this.updateParams(p, () => this.loadCollection(true))
           }
           breadcrumbs={breadcrumbs}
           activeTab='documentation'
@@ -289,8 +281,15 @@ class CollectionDocs extends React.Component<
     );
   }
 
-  get loadCollection() {
-    return loadCollection;
+  private loadCollection(forceReload) {
+    loadCollection({
+      forceReload,
+      matchParams: this.props.routeParams,
+      navigate: this.props.navigate,
+      selectedRepo: this.context.selectedRepo,
+      setCollection: (collection) => this.setState({ collection }),
+      stateParams: this.state.params,
+    });
   }
 
   get updateParams() {

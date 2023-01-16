@@ -75,15 +75,18 @@ and retained after they are reloaded.
 **NEVER** hardcode URLs to any paths within automation hub. This makes it very difficult
 to update the app's routing later on.
 
-Instead use the `Paths` enum to get URLs for static routes and `formatPath` to get
-dynamic routes. Both of these are found in `src/paths.tsx`
+Instead use the `formatPath` function to get URLs, with paths from the `Paths` enum.
+Both of these are found in `src/paths.tsx`.
 
 Example:
 
 ```
 // Static route
-<Redirect push to={Paths.search}/>
+<Link to={formatPath(Paths.search)} />
 
 // Dynamic route
-<Redirect push to={formatPath(Paths.editNamespace, {namespace: NSname});}/>
+<Link to={formatPath(Paths.editNamespace, { namespace: "NSname" })} />
+
+// With ?params
+<Link to={formatPath(Paths.myNamespaces, {}, { page: 1 })} />
 ```

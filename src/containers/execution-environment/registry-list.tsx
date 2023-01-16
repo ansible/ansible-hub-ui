@@ -2,7 +2,8 @@ import * as React from 'react';
 import { t, Trans } from '@lingui/macro';
 import { errorMessage } from 'src/utilities';
 
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
+import { Link } from 'react-router-dom';
 import {
   Button,
   DropdownItem,
@@ -64,7 +65,7 @@ interface IState {
 }
 
 class ExecutionEnvironmentRegistryList extends React.Component<
-  RouteComponentProps,
+  RouteProps,
   IState
 > {
   constructor(props) {

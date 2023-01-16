@@ -14,7 +14,8 @@ import {
 
 import { RoleAPI } from 'src/api/role';
 
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   AlertList,
@@ -27,7 +28,7 @@ import {
   RoleHeader,
 } from 'src/components';
 
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 import { RoleType } from 'src/api/response-types/role';
 
@@ -56,13 +57,13 @@ interface IState {
   errorMessages: { [key: string]: string };
 }
 
-class EditRole extends React.Component<RouteComponentProps, IState> {
+class EditRole extends React.Component<RouteProps, IState> {
   nonQueryStringParams = ['role'];
 
   constructor(props) {
     super(props);
 
-    const id = this.props.match.params['role'];
+    const id = this.props.routeParams.role;
 
     this.state = {
       role: null,
@@ -105,7 +106,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
         })
         .catch((e) => {
           const { status, statusText } = e.response;
-          this.setState({ redirect: Paths.notFound });
+          this.setState({ redirect: formatPath(Paths.notFound) });
           this.addAlert(
             t`Role "${this.state.role.name}" could not be displayed.`,
             'danger',
@@ -117,7 +118,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect} />;
+      return <Navigate to={this.state.redirect} />;
     }
 
     const {
@@ -146,7 +147,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
     }
 
     const breadcrumbs = [
-      { url: Paths.roleList, name: t`Roles` },
+      { url: formatPath(Paths.roleList), name: t`Roles` },
       { name: role.name },
     ];
 
@@ -205,7 +206,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
   private cancelRole = () => {
     this.setState({
       errorMessages: {},
-      redirect: Paths.roleList,
+      redirect: formatPath(Paths.roleList),
     });
   };
 
@@ -229,7 +230,7 @@ class EditRole extends React.Component<RouteComponentProps, IState> {
       const { name, description } = this.state;
 
       RoleAPI.updatePermissions(roleID, { name, description, permissions })
-        .then(() => this.setState({ redirect: Paths.roleList }))
+        .then(() => this.setState({ redirect: formatPath(Paths.roleList) }))
         .catch((err) => {
           const { status, statusText } = err.response;
           if (err.response.status === 400) {

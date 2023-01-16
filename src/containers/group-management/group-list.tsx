@@ -2,12 +2,8 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { errorMessage } from 'src/utilities';
 
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import {
   GroupAPI,
   UserAPI,
@@ -70,7 +66,7 @@ interface IState {
   inputText: string;
 }
 
-class GroupList extends React.Component<RouteComponentProps, IState> {
+class GroupList extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -131,7 +127,7 @@ class GroupList extends React.Component<RouteComponentProps, IState> {
       groups.length === 0 && !filterIsSet(params, ['name__icontains']);
 
     if (redirect) {
-      return <Redirect push to={redirect} />;
+      return <Navigate to={redirect} />;
     }
 
     return (

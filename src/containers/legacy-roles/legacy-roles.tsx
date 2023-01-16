@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './legacy-roles.scss';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import { DataList } from '@patternfly/react-core';
 import {
   BaseHeader,
@@ -33,7 +33,7 @@ interface IProps {
   ignoredParams: string[];
 }
 
-class LegacyRoles extends React.Component<RouteComponentProps, IProps> {
+class LegacyRoles extends React.Component<RouteProps, IProps> {
   // This is the main roles page
 
   constructor(props) {

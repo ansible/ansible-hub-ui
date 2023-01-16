@@ -1,16 +1,17 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
+import { Navigate } from 'react-router-dom';
+import { DataList, Switch, DropdownItem, Button } from '@patternfly/react-core';
 import './search.scss';
 import {
-  errorMessage,
   DeleteCollectionUtils,
+  RouteProps,
+  errorMessage,
   filterIsSet,
-  waitForTask,
   parsePulpIDFromURL,
+  waitForTask,
+  withRouter,
 } from 'src/utilities';
-
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-import { DataList, Switch, DropdownItem, Button } from '@patternfly/react-core';
 import {
   BaseHeader,
   CardListSwitcher,
@@ -63,7 +64,7 @@ interface IState {
   isDeletionPending: boolean;
 }
 
-class Search extends React.Component<RouteComponentProps, IState> {
+class Search extends React.Component<RouteProps, IState> {
   tags: string[];
 
   constructor(props) {
@@ -127,7 +128,7 @@ class Search extends React.Component<RouteComponentProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect} />;
+      return <Navigate to={this.state.redirect} />;
     }
 
     const {
@@ -199,8 +200,8 @@ class Search extends React.Component<RouteComponentProps, IState> {
           title={t`Collections`}
           contextSelector={
             <RepoSelector
-              selectedRepo={this.context.selectedRepo}
               path={Paths.searchByRepo}
+              selectedRepo={this.context.selectedRepo}
             />
           }
         >

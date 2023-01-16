@@ -1,17 +1,21 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-
+import { Navigate } from 'react-router-dom';
+import { UserType, UserAPI } from 'src/api';
 import {
   BaseHeader,
   Breadcrumbs,
   EmptyStateUnauthorized,
   UserFormPage,
 } from 'src/components';
-import { mapErrorMessages, ErrorMessagesType } from 'src/utilities';
-import { UserType, UserAPI } from 'src/api';
-import { Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import {
+  mapErrorMessages,
+  ErrorMessagesType,
+  withRouter,
+  RouteProps,
+} from 'src/utilities';
 
 interface IState {
   user: UserType;
@@ -19,7 +23,7 @@ interface IState {
   redirect?: string;
 }
 
-class UserCreate extends React.Component<RouteComponentProps, IState> {
+class UserCreate extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -39,14 +43,14 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect} />;
+      return <Navigate to={this.state.redirect} />;
     }
     const { hasPermission } = this.context;
     const { user, errorMessages } = this.state;
     const notAuthorised =
       !this.context.user || !hasPermission('galaxy.add_user');
     const breadcrumbs = [
-      { url: Paths.userList, name: t`Users` },
+      { url: formatPath(Paths.userList), name: t`Users` },
       { name: t`Create new user` },
     ];
     const title = t`Create new user`;
@@ -69,7 +73,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
           this.setState({ user: user, errorMessages: errorMessages })
         }
         saveUser={this.saveUser}
-        onCancel={() => this.setState({ redirect: Paths.userList })}
+        onCancel={() => this.setState({ redirect: formatPath(Paths.userList) })}
         isNewUser={true}
       ></UserFormPage>
     );
@@ -77,7 +81,7 @@ class UserCreate extends React.Component<RouteComponentProps, IState> {
   private saveUser = () => {
     const { user } = this.state;
     UserAPI.create(user)
-      .then(() => this.setState({ redirect: Paths.userList }))
+      .then(() => this.setState({ redirect: formatPath(Paths.userList) }))
       .catch((err) => {
         this.setState({ errorMessages: mapErrorMessages(err) });
       });

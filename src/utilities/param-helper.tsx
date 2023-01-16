@@ -133,9 +133,8 @@ export class ParamHelper {
       // In the example above, foo only gets set to the latest state after
       // the component re-runs render() and the callback typically gets
       // executed before that happens
-      this.setState({ params: params }, callback);
-      this.props.history.push({
-        pathname: this.props.location.pathname,
+      this.setState({ params }, callback);
+      this.props.navigate({
         search: '?' + ParamHelper.getQueryString(params, ignoreParams || []),
       });
     };

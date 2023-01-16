@@ -2,7 +2,8 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './legacy-namespace.scss';
 
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   DataList,
@@ -179,14 +180,14 @@ interface LegacyNamespaceProps {
 }
 
 class LegacyNamespace extends React.Component<
-  RouteComponentProps,
+  RouteProps,
   LegacyNamespaceProps
 > {
   // This is the details page for a legacy namespace
 
   constructor(props) {
     super(props);
-    const namespaceid = props.match.params.namespaceid;
+    const namespaceid = props.routeParams.namespaceid;
     this.state = {
       ...props,
       loading: true,

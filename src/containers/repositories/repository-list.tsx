@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
+import { Link } from 'react-router-dom';
 
 import {
   BaseHeader,
@@ -28,7 +29,7 @@ import {
 } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
 import { Button, ToolbarItem } from '@patternfly/react-core';
-import { Paths } from 'src/paths';
+import { Paths, formatPath } from 'src/paths';
 
 export class Repository {
   name: string;
@@ -54,7 +55,7 @@ interface IState {
   remoteToEdit: RemoteType;
 }
 
-class RepositoryList extends React.Component<RouteComponentProps, IState> {
+class RepositoryList extends React.Component<RouteProps, IState> {
   nonQueryStringParams = ['repository'];
   // Used to save a copy of the remote before it's edited. This can be used to determine
   // which fields were changed when a user hits save.
@@ -297,7 +298,7 @@ class RepositoryList extends React.Component<RouteComponentProps, IState> {
     if (this.state.params.tab == 'local') {
       return (
         <ToolbarItem>
-          <Link to={Paths.token}>
+          <Link to={formatPath(Paths.token)}>
             <Button>{t`Get token`}</Button>
           </Link>
         </ToolbarItem>

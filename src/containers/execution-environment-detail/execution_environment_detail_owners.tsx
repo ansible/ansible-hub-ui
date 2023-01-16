@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'src/utilities';
 import {
   ExecutionEnvironmentNamespaceAPI,
   GroupType,
@@ -8,12 +8,16 @@ import {
   RoleType,
 } from 'src/api';
 import { OwnersTab } from 'src/components';
-import { formatPath, Paths } from 'src/paths';
+import { formatEEPath, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
 import { ParamHelper, errorMessage } from 'src/utilities';
 import './execution-environment-detail.scss';
 
-import { withContainerRepo, IDetailSharedProps } from './base';
+import {
+  withContainerParamFix,
+  withContainerRepo,
+  IDetailSharedProps,
+} from './base';
 
 interface IState {
   name: string;
@@ -176,7 +180,7 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
           });
         }}
         selectRolesMessage={t`The selected roles will be added to this specific Execution Environment.`}
-        urlPrefix={formatPath(Paths.executionEnvironmentDetailOwners, {
+        urlPrefix={formatEEPath(Paths.executionEnvironmentDetailOwners, {
           container: name,
         })}
       />
@@ -243,4 +247,6 @@ class ExecutionEnvironmentDetailOwners extends React.Component<
 
 ExecutionEnvironmentDetailOwners.contextType = AppContext;
 
-export default withRouter(withContainerRepo(ExecutionEnvironmentDetailOwners));
+export default withRouter(
+  withContainerParamFix(withContainerRepo(ExecutionEnvironmentDetailOwners)),
+);

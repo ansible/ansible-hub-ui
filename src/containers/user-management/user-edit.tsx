@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   BaseHeader,
@@ -20,7 +21,7 @@ interface IState {
   redirect?: string;
 }
 
-class UserEdit extends React.Component<RouteComponentProps, IState> {
+class UserEdit extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -28,7 +29,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
   }
 
   componentDidMount() {
-    const id = this.props.match.params['userID'];
+    const id = this.props.routeParams.userID;
 
     UserAPI.get(id)
       .then((result) =>
@@ -39,7 +40,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect} />;
+      return <Navigate to={this.state.redirect} />;
     }
 
     const { user, errorMessages, unauthorized } = this.state;
@@ -59,7 +60,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
     }
 
     const breadcrumbs = [
-      { url: Paths.userList, name: t`Users` },
+      { url: formatPath(Paths.userList), name: t`Users` },
       {
         url: formatPath(Paths.userDetail, { userID: user.id }),
         name: user.username,
@@ -77,7 +78,7 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
           this.setState({ user: user, errorMessages: errorMessages })
         }
         saveUser={this.saveUser}
-        onCancel={() => this.setState({ redirect: Paths.userList })}
+        onCancel={() => this.setState({ redirect: formatPath(Paths.userList) })}
       />
     );
   }
@@ -85,12 +86,12 @@ class UserEdit extends React.Component<RouteComponentProps, IState> {
     const { user } = this.state;
     UserAPI.update(user.id.toString(), user)
       .then(() => {
-        // Redirect to login page when password of logged user is changed
+        // redirect to login page when password of logged user is changed
         // SSO not relevant, user-edit disabled
         if (this.context.user.id === user.id && user.password) {
-          this.setState({ redirect: Paths.login });
+          this.setState({ redirect: formatPath(Paths.login) });
         } else {
-          this.setState({ redirect: Paths.userList });
+          this.setState({ redirect: formatPath(Paths.userList) });
         }
       })
       .catch((err) => {

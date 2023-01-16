@@ -3,7 +3,7 @@ import * as React from 'react';
 import { errorMessage, DeleteCollectionUtils } from 'src/utilities';
 import './header.scss';
 
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import * as moment from 'moment';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
@@ -205,7 +205,7 @@ export class CollectionHeader extends React.Component<IProps, IState> {
     const company = namespace.company || namespace.name;
 
     if (redirect) {
-      return <Redirect push to={redirect} />;
+      return <Navigate to={redirect} />;
     }
 
     const canSign = canSignNS(this.context, namespace);
@@ -413,8 +413,8 @@ export class CollectionHeader extends React.Component<IProps, IState> {
           }
           contextSelector={
             <RepoSelector
-              selectedRepo={this.context.selectedRepo}
               path={Paths.searchByRepo}
+              selectedRepo={this.context.selectedRepo}
               isDisabled
             />
           }

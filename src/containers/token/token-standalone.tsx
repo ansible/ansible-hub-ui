@@ -2,7 +2,7 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import './token.scss';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import { Button, Card, CardTitle, CardBody } from '@patternfly/react-core';
 
 import {
@@ -26,7 +26,7 @@ interface IState {
   loadingToken: boolean;
 }
 
-class TokenPage extends React.Component<RouteComponentProps, IState> {
+class TokenPage extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 

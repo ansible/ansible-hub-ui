@@ -1,6 +1,7 @@
 import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
 
 import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
@@ -40,7 +41,7 @@ interface IState {
   unauthorized: boolean;
 }
 
-class EditNamespace extends React.Component<RouteComponentProps, IState> {
+class EditNamespace extends React.Component<RouteProps, IState> {
   queryParams: URLSearchParams;
 
   constructor(props) {
@@ -88,7 +89,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
     ];
 
     if (redirect) {
-      return <Redirect push to={redirect} />;
+      return <Navigate to={redirect} />;
     }
 
     if (loading) {
@@ -188,7 +189,7 @@ class EditNamespace extends React.Component<RouteComponentProps, IState> {
   }
 
   private loadNamespace() {
-    MyNamespaceAPI.get(this.props.match.params['namespace'])
+    MyNamespaceAPI.get(this.props.routeParams.namespace)
       .then((response) => {
         // Add an empty link to the end of the links array to create an empty field
         // on the link edit form for adding new links

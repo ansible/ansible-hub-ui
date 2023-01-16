@@ -3,12 +3,8 @@ import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import { errorMessage } from 'src/utilities';
 
-import {
-  withRouter,
-  RouteComponentProps,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 
 import {
   AlertList,
@@ -80,7 +76,7 @@ interface IState {
   inputText: string;
 }
 
-class GroupDetail extends React.Component<RouteComponentProps, IState> {
+class GroupDetail extends React.Component<RouteProps, IState> {
   nonQueryStringParams = ['group'];
 
   userQueryStringParams = ['username', 'first_name', 'last_name', 'email'];
@@ -90,7 +86,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   constructor(props) {
     super(props);
 
-    const id = this.props.match.params['group'];
+    const id = this.props.routeParams.group;
 
     const params = ParamHelper.parseParamString(props.location.search, [
       'page',
@@ -134,7 +130,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.redirect} />;
+      return <Navigate to={this.state.redirect} />;
     }
 
     const {
@@ -188,7 +184,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           breadcrumbs={
             <Breadcrumbs
               links={[
-                { url: Paths.groupList, name: t`Groups` },
+                { url: formatPath(Paths.groupList), name: t`Groups` },
                 { name: group.name },
               ]}
             />
@@ -371,7 +367,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
             t`Group "${group}" has been successfully deleted.`,
             'success',
           );
-          this.setState({ redirect: Paths.groupList });
+          this.setState({ redirect: formatPath(Paths.groupList) });
         })
         .catch((e) => {
           const { status, statusText } = e.response;
@@ -733,7 +729,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
       })
       .catch((e) => {
         if (e.response.status === 404) {
-          this.setState({ redirect: Paths.notFound });
+          this.setState({ redirect: formatPath(Paths.notFound) });
         } else {
           const { status, statusText } = e.response;
           this.addAlert(

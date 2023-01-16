@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 import * as React from 'react';
 import './my-imports.scss';
 
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteProps, withRouter } from 'src/utilities';
 import { cloneDeep } from 'lodash';
 
 import {
@@ -45,7 +45,7 @@ interface IState {
   alerts: AlertType[];
 }
 
-class MyImports extends React.Component<RouteComponentProps, IState> {
+class MyImports extends React.Component<RouteProps, IState> {
   polling: ReturnType<typeof setInterval>;
   topOfPage: React.RefObject<HTMLDivElement>;
 
