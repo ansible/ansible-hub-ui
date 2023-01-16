@@ -51,7 +51,20 @@ jobs:
     - name: "Set env.SHORT_BRANCH, COMPOSE_PROFILE"
       run: |
         SHORT_BRANCH=`sed 's/^refs\/heads\///' <<< $BRANCH`
-        COMPOSE_PROFILE=`expr "${{ matrix.test }}" : 'insights*' ] && echo 'insights' || echo 'standalone'`
+
+        # COMPOSE_PROFILE=`[ "${{ matrix.test }}" = 'insights' ] && echo 'insights' || echo 'standalone'`
+
+        test="${{ matrix.test }}"
+        echo $test
+        if expr "$test" : 'insights*' > /dev/null; then
+          COMPOSE_PROFILE=insights
+          echo "insights"
+        else
+          COMPOSE_PROFILE=standalone
+          echo "standalone"
+        fi
+
+
 
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "COMPOSE_PROFILE=${COMPOSE_PROFILE}" >> $GITHUB_ENV
