@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "chrome-remote-interface": "^0.32.0",
-    "cypress": "^11.2.0",
+    "cypress": "^12.3.0",
     "cypress-file-upload": "^5.0.8",
     "shell-escape-tag": "^2.0.2",
     "url-join": "^5.0.0"
