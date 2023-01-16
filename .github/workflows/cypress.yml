@@ -64,8 +64,6 @@ jobs:
           echo "standalone"
         fi
 
-
-
         echo "SHORT_BRANCH=${SHORT_BRANCH}" >> $GITHUB_ENV
         echo "COMPOSE_PROFILE=${COMPOSE_PROFILE}" >> $GITHUB_ENV
         echo "COMPOSE_INTERACTIVE_NO_CLI=1" >> $GITHUB_ENV

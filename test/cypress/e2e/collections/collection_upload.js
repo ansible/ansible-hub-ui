@@ -10,6 +10,7 @@ describe('Collection Upload Tests', () => {
     cy.deleteNamespacesAndCollections();
 
     if (!insightsLogin) {
+      cy.login();
       cy.deleteTestGroups();
       cy.deleteTestUsers();
       cy.createUser(userName, userPassword);
