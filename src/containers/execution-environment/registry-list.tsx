@@ -516,8 +516,8 @@ class ExecutionEnvironmentRegistryList extends React.Component<
       });
   }
 
-  private indexRegistry({ pk, name }) {
-    ExecutionEnvironmentRegistryAPI.index(pk)
+  private indexRegistry({ id, name }) {
+    ExecutionEnvironmentRegistryAPI.index(id)
       .then((result) => {
         const task_id = parsePulpIDFromURL(result.data.task);
         this.addAlert(

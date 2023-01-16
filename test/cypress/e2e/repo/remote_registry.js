@@ -86,6 +86,29 @@ describe('Remote Registry Tests', () => {
     ).contains('Completed', { timeout: 10000 });
   });
 
+  it('users can index only redhat.registry.io', () => {
+    cy.addRemoteRegistry('registry.test.io', 'https://registry.test.io');
+
+    cy.get(
+      'tr[data-cy="ExecutionEnvironmentRegistryList-row-registry.test.io"] button[aria-label="Actions"]',
+    ).click();
+    cy.contains('Index execution environments').should(
+      'have.class',
+      'pf-m-disabled',
+    );
+
+    cy.addRemoteRegistry('registry.redhat.io', 'https://registry.redhat.io');
+
+    cy.get(
+      'tr[data-cy="ExecutionEnvironmentRegistryList-row-registry.redhat.io"] button[aria-label="Actions"]',
+    ).click();
+
+    cy.contains('Index execution environments').click();
+    cy.get('[data-cy="AlertList"]').contains(
+      'Indexing started for execution environment "registry.redhat.io',
+    );
+  });
+
   it('admin can edit new remote registry', () => {
     cy.menuGo('Execution Environments > Remote Registries');
 
