@@ -14,6 +14,7 @@ import { ParamHelper } from 'src/utilities/param-helper';
 
 interface IProps {
   collections: CollectionListType[];
+  displaySignatures: boolean;
   params: {
     sort?: string;
     page?: number;
@@ -32,6 +33,7 @@ export class CollectionList extends React.Component<IProps> {
   render() {
     const {
       collections,
+      displaySignatures,
       params,
       updateParams,
       ignoredParams,
@@ -52,6 +54,7 @@ export class CollectionList extends React.Component<IProps> {
                 key={c.id}
                 {...c}
                 repo={repo}
+                displaySignatures={displaySignatures}
               />
             ))
           ) : (

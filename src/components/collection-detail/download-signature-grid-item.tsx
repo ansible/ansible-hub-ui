@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const DownloadSignatureGridItem: FC<Props> = ({ version }) => {
-  const { display_signatures } = useContext()?.featureFlags || {};
+  const { display_signatures } = useContext().featureFlags;
   const [show, setShow] = useState(false);
 
   // No signature object or the signatures is empty

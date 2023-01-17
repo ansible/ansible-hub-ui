@@ -494,10 +494,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
         'email',
         'role__icontains',
       ]);
-    let isUserMgmtDisabled = false;
-    if (featureFlags) {
-      isUserMgmtDisabled = featureFlags.external_authentication;
-    }
+    const isUserMgmtDisabled = featureFlags.external_authentication;
 
     if (noData) {
       return (
@@ -666,7 +663,8 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
   private renderTableRow(user: UserType, index: number) {
     const currentUser = this.context.user;
     const { featureFlags } = this.context;
-    const isUserMgmtDisabled = featureFlags?.external_authentication;
+    const isUserMgmtDisabled = featureFlags.external_authentication;
+
     const dropdownItems = [
       !!currentUser &&
         currentUser.model_permissions.change_group &&
@@ -679,6 +677,7 @@ class GroupDetail extends React.Component<RouteComponentProps, IState> {
           </DropdownItem>
         ),
     ];
+
     return (
       <tr data-cy={`GroupDetail-users-${user.username}`} key={index}>
         <td>
