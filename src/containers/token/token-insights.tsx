@@ -31,7 +31,7 @@ interface IState {
   repoUrl: string;
 }
 
-class TokenPage extends React.Component<RouteProps, IState> {
+class TokenInsights extends React.Component<RouteProps, IState> {
   constructor(props) {
     super(props);
 
@@ -236,5 +236,5 @@ class TokenPage extends React.Component<RouteProps, IState> {
   }
 }
 
-export default withRouter(TokenPage);
-TokenPage.contextType = AppContext;
+export default withRouter(TokenInsights);
+TokenInsights.contextType = AppContext;

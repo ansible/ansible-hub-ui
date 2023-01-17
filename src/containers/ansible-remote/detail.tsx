@@ -20,7 +20,7 @@ const tabs = [
   { id: 'access', name: t`Access` },
 ];
 
-export const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
+const AnsibleRemoteDetail = PageWithTabs<AnsibleRemoteType>({
   breadcrumbs: ({ name, tab, params: { group } }) =>
     [
       { url: formatPath(Paths.ansibleRemotes), name: t`Remotes` },

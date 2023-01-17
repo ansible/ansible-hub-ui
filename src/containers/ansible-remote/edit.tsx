@@ -29,7 +29,7 @@ const initialRemote: AnsibleRemoteType = {
   ].map((name) => ({ name, is_set: false })),
 };
 
-export const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
+const AnsibleRemoteEdit = Page<AnsibleRemoteType>({
   breadcrumbs: ({ name }) =>
     [
       { url: formatPath(Paths.ansibleRemotes), name: t`Remotes` },

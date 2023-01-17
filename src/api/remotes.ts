@@ -1,6 +1,5 @@
 import { clearSetFieldsFromRequest } from 'src/utilities';
 import { RemoteType } from '.';
-import { HubAPI } from './hub';
 
 // removes unchanged values and write only fields before updating
 export function smartUpdate(remote: RemoteType, unmodifiedRemote: RemoteType) {
@@ -30,27 +29,3 @@ export function smartUpdate(remote: RemoteType, unmodifiedRemote: RemoteType) {
 
   return reducedData;
 }
-
-class API extends HubAPI {
-  apiPath = this.getUIPath('remotes/');
-
-  // can't override the base class update method because this function takes a
-  // third parameter and update only takes 2
-  smartUpdate(distribution, remote: RemoteType, unmodifiedRemote: RemoteType) {
-    const reducedData = smartUpdate(remote, unmodifiedRemote);
-    return this.http.put(
-      `content/${distribution}/v3/sync/config/`,
-      reducedData,
-    );
-  }
-
-  update(_id, _obj) {
-    throw 'use smartUpdate()';
-  }
-
-  sync(distribution) {
-    return this.http.post(`content/${distribution}/v3/sync/`, {});
-  }
-}
-
-export const RemoteAPI = new API();

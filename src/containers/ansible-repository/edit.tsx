@@ -21,7 +21,7 @@ const initialRepository: AnsibleRepositoryType = {
   remote: null,
 };
 
-export const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
+const AnsibleRepositoryEdit = Page<AnsibleRepositoryType>({
   breadcrumbs: ({ name }) =>
     [
       { url: formatPath(Paths.ansibleRepositories), name: t`Repositories` },

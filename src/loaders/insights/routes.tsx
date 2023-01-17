@@ -83,7 +83,7 @@ const TaskListView = lazy(
   () => import('src/containers/task-management/task-list-view'),
 );
 
-const TokenPage = lazy(() => import('src/containers/token/token-insights'));
+const TokenInsights = lazy(() => import('src/containers/token/token-insights'));
 
 const routes = [
   { path: Paths.ansibleRemoteDetail, component: AnsibleRemoteDetail },
@@ -97,7 +97,7 @@ const routes = [
     component: CertificationDashboard,
   },
   { path: Paths.notFound, component: NotFound },
-  { path: Paths.token, component: TokenPage },
+  { path: Paths.token, component: TokenInsights },
   { path: Paths.partners, component: Partners },
   { path: Paths.editNamespace, component: EditNamespace },
   { path: Paths.myCollections, component: NamespaceDetail },

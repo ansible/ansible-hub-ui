@@ -7,7 +7,6 @@ export {
 } from './response-types/namespace';
 export {
   CollectionDetailType,
-  CollectionExcludesType,
   CollectionListType,
   CollectionUploadType,
   CollectionUsedByDependencies,
@@ -39,15 +38,9 @@ export { TaskAPI } from './task';
 export { GroupObjectPermissionType } from './response-types/permissions';
 export { GroupAPI } from './group';
 export { RoleAPI } from './role';
-export { RemoteAPI } from './remotes';
 export { ApplicationInfoAPI } from './application-info';
 export { RemoteType } from './response-types/remote';
-export { DistributionAPI } from './distribution';
 export { MyDistributionAPI } from './my-distribution';
-export {
-  DistributionType,
-  PulpAnsibleDistributionType,
-} from './response-types/distribution';
 export { ExecutionEnvironmentAPI } from './execution-environment';
 export { ExecutionEnvironmentRegistryAPI } from './execution-environment-registry';
 export {
