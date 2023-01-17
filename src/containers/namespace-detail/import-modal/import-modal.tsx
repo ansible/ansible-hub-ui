@@ -9,7 +9,7 @@ import {
   CollectionListType,
   CollectionAPI,
   CollectionUploadType,
-} from '../../../api';
+} from 'src/api';
 
 enum Status {
   uploading = 'uploading',

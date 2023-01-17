@@ -11,7 +11,7 @@ import {
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
 
-import { ParamHelper } from '../../utilities/param-helper';
+import { ParamHelper } from 'src/utilities/param-helper';
 import {
   BaseHeader,
   NamespaceCard,
@@ -20,13 +20,13 @@ import {
   NamespaceModal,
   LoadingPageWithHeader,
   LoadingPageSpinner,
-} from '../../components';
+} from 'src/components';
 import { Button } from '@patternfly/react-core';
 import { ToolbarItem } from '@patternfly/react-core';
-import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from '../../api';
-import { Paths, formatPath } from '../../paths';
-import { Constants } from '../../constants';
-import { AppContext } from '../../loaders/app-context';
+import { NamespaceAPI, NamespaceListType, MyNamespaceAPI } from 'src/api';
+import { Paths, formatPath } from 'src/paths';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   namespaces: NamespaceListType[];

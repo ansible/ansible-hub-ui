@@ -28,11 +28,11 @@ import {
   Pagination,
   LoadingPageSpinner,
   AppliedFilters,
-} from '../../components';
-import { CollectionAPI, CollectionListType } from '../../api';
-import { ParamHelper } from '../../utilities/param-helper';
-import { Constants } from '../../constants';
-import { AppContext } from '../../loaders/app-context';
+} from 'src/components';
+import { CollectionAPI, CollectionListType } from 'src/api';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   collections: CollectionListType[];

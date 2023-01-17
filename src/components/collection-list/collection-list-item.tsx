@@ -14,10 +14,10 @@ import {
 import { Link } from 'react-router-dom';
 import * as moment from 'moment';
 
-import { Paths, formatPath } from '../../paths';
-import { NumericLabel, Tag, Logo, DeprecatedTag } from '../../components';
-import { CollectionListType } from '../../api';
-import { convertContentSummaryCounts } from '../../utilities';
+import { Paths, formatPath } from 'src/paths';
+import { NumericLabel, Tag, Logo, DeprecatedTag } from 'src/components';
+import { CollectionListType } from 'src/api';
+import { convertContentSummaryCounts } from 'src/utilities';
 
 interface IProps extends CollectionListType {
   showNamespace?: boolean;

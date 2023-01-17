@@ -24,9 +24,9 @@ import {
 } from 'src/components';
 
 import { loadCollection, IBaseCollectionState } from './base';
-import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
-import { formatPath, Paths } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
+import { formatPath, Paths } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 
 // renders markdown files in collection docs/ directory
 class CollectionDocs extends React.Component<

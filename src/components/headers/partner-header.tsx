@@ -3,8 +3,8 @@ import './header.scss';
 
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 
-import { BaseHeader, Tabs, Breadcrumbs } from '../../components';
-import { NamespaceType } from '../../api';
+import { BaseHeader, Tabs, Breadcrumbs } from 'src/components';
+import { NamespaceType } from 'src/api';
 
 interface IProps {
   namespace: NamespaceType;

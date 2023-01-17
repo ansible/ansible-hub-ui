@@ -16,7 +16,7 @@ import {
   CollectionAPI,
   NamespaceAPI,
   NamespaceType,
-} from '../../api';
+} from 'src/api';
 
 import {
   CollectionList,
@@ -25,13 +25,13 @@ import {
   LoadingPageWithHeader,
   Main,
   APIButton,
-} from '../../components';
+} from 'src/components';
 
 import { ImportModal } from './import-modal/import-modal';
 
-import { ParamHelper, getRepoUrl } from '../../utilities';
-import { Paths, formatPath } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+import { ParamHelper, getRepoUrl } from 'src/utilities';
+import { Paths, formatPath } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   collections: CollectionListType[];

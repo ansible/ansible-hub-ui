@@ -4,7 +4,7 @@ import './header.scss';
 
 import { Title } from '@patternfly/react-core';
 
-import { Logo } from '../../components';
+import { Logo } from 'src/components';
 
 interface IProps {
   title: string;

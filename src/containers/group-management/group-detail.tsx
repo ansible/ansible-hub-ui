@@ -18,10 +18,10 @@ import {
   SortTable,
   StatefulDropdown,
   Tabs,
-} from '../../components';
-import { GroupAPI, UserAPI, UserType } from '../../api';
-import { ParamHelper, twoWayMapper } from '../../utilities';
-import { formatPath, Paths } from '../../paths';
+} from 'src/components';
+import { GroupAPI, UserAPI, UserType } from 'src/api';
+import { ParamHelper, twoWayMapper } from 'src/utilities';
+import { formatPath, Paths } from 'src/paths';
 import {
   Button,
   DropdownItem,
@@ -38,10 +38,10 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { Constants } from '../../constants';
+import { Constants } from 'src/constants';
 import * as moment from 'moment';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
-import { AppContext } from '../../loaders/app-context';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   group: any;

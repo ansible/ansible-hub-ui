@@ -12,7 +12,7 @@ import {
 
 import { Link } from 'react-router-dom';
 
-import { Logo } from '../../components';
+import { Logo } from 'src/components';
 // Use snake case to match field types provided py python API so that the
 // spread operator can be used.
 interface IProps {

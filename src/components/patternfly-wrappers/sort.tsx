@@ -9,7 +9,7 @@ import {
   SortAlphaUpIcon,
 } from '@patternfly/react-icons';
 
-import { ParamHelper } from '../../utilities/param-helper';
+import { ParamHelper } from 'src/utilities/param-helper';
 
 export class SortFieldType {
   id: string;

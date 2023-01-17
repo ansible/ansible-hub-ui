@@ -1,5 +1,5 @@
-import { CollectionDetailType, CollectionAPI } from '../../api';
-import { Paths } from '../../paths';
+import { CollectionDetailType, CollectionAPI } from 'src/api';
+import { Paths } from 'src/paths';
 
 export interface IBaseCollectionState {
   params: {

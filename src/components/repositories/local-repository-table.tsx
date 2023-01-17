@@ -14,9 +14,9 @@ import {
 import { WarningTriangleIcon } from '@patternfly/react-icons';
 import { SortTable, StatefulDropdown } from '..';
 import * as moment from 'moment';
-import { Constants } from '../../constants';
-import { getRepoUrl } from '../../utilities';
-import { Paths, formatPath } from '../../paths';
+import { Constants } from 'src/constants';
+import { getRepoUrl } from 'src/utilities';
+import { Paths, formatPath } from 'src/paths';
 
 interface IProps {
   repositories: {}[];

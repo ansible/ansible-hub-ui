@@ -4,7 +4,7 @@ import './my-imports.scss';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { cloneDeep } from 'lodash';
 
-import { BaseHeader, ImportConsole, ImportList, Main } from '../../components';
+import { BaseHeader, ImportConsole, ImportList, Main } from 'src/components';
 
 import {
   ImportAPI,
@@ -15,9 +15,9 @@ import {
   MyNamespaceAPI,
   CollectionVersion,
   CollectionVersionAPI,
-} from '../../api';
+} from 'src/api';
 
-import { ParamHelper } from '../../utilities/param-helper';
+import { ParamHelper } from 'src/utilities/param-helper';
 
 interface IState {
   selectedImport: ImportListType;

@@ -8,7 +8,7 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom';
-import { BaseHeader, Main } from '../../components';
+import { BaseHeader, Main } from 'src/components';
 import {
   Toolbar,
   ToolbarGroup,
@@ -29,8 +29,8 @@ import {
   WarningTriangleIcon,
 } from '@patternfly/react-icons';
 
-import { CollectionVersionAPI, CollectionVersion, TaskAPI } from '../../api';
-import { ParamHelper } from '../../utilities';
+import { CollectionVersionAPI, CollectionVersion, TaskAPI } from 'src/api';
+import { ParamHelper } from 'src/utilities';
 import {
   LoadingPageWithHeader,
   StatefulDropdown,
@@ -42,10 +42,10 @@ import {
   closeAlertMixin,
   AlertType,
   SortTable,
-} from '../../components';
-import { Paths, formatPath } from '../../paths';
-import { Constants } from '../../constants';
-import { AppContext } from '../../loaders/app-context';
+} from 'src/components';
+import { Paths, formatPath } from 'src/paths';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   params: {

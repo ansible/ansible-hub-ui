@@ -4,8 +4,8 @@ import './namespace-form.scss';
 import { Form, FormGroup, TextInput, TextArea } from '@patternfly/react-core';
 import { PlusCircleIcon, TrashIcon } from '@patternfly/react-icons';
 
-import { NamespaceCard, ObjectPermissionField } from '../../components';
-import { NamespaceType } from '../../api';
+import { NamespaceCard, ObjectPermissionField } from 'src/components';
+import { NamespaceType } from 'src/api';
 
 interface IProps {
   namespace: NamespaceType;

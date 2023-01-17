@@ -1,5 +1,5 @@
 import * as React from 'react';
-import SmallLogoImage from '../../../static/images/logo_small.svg';
+import SmallLogoImage from 'src/../static/images/logo_small.svg';
 
 interface IProps {
   alt: string;

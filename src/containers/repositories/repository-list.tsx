@@ -10,16 +10,16 @@ import {
   RemoteRepositoryTable,
   LocalRepositoryTable,
   RemoteForm,
-} from '../../components';
-import { ParamHelper, mapErrorMessages } from '../../utilities';
-import { Constants } from '../../constants';
+} from 'src/components';
+import { ParamHelper, mapErrorMessages } from 'src/utilities';
+import { Constants } from 'src/constants';
 import {
   RemoteAPI,
   RemoteType,
   DistributionAPI,
   DistributionType,
-} from '../../api';
-import { AppContext } from '../../loaders/app-context';
+} from 'src/api';
+import { AppContext } from 'src/loaders/app-context';
 
 export class Repository {
   name: string;

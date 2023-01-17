@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { NamespaceList } from './namespace-list';
-import { Paths } from '../../paths';
+import { Paths } from 'src/paths';
 
 class MyNamespaces extends React.Component<RouteComponentProps, {}> {
   render() {

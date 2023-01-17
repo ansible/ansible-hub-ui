@@ -6,8 +6,8 @@ import {
   Redirect,
   Link,
 } from 'react-router-dom';
-import { GroupAPI } from '../../api';
-import { mapErrorMessages, ParamHelper } from '../../utilities';
+import { GroupAPI } from 'src/api';
+import { mapErrorMessages, ParamHelper } from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -20,7 +20,7 @@ import {
   Main,
   Pagination,
   SortTable,
-} from '../../components';
+} from 'src/components';
 import {
   Button,
   EmptyState,
@@ -38,8 +38,8 @@ import {
   WarningTriangleIcon,
   ExclamationTriangleIcon,
 } from '@patternfly/react-icons';
-import { formatPath, Paths } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+import { formatPath, Paths } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   params: {

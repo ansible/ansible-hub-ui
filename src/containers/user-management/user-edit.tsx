@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 
-import { LoadingPageWithHeader, UserFormPage } from '../../components';
-import { mapErrorMessages } from '../../utilities';
-import { UserType, UserAPI } from '../../api';
-import { Paths, formatPath } from '../../paths';
-import { AppContext } from '../../loaders/app-context';
+import { LoadingPageWithHeader, UserFormPage } from 'src/components';
+import { mapErrorMessages } from 'src/utilities';
+import { UserType, UserAPI } from 'src/api';
+import { Paths, formatPath } from 'src/paths';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IState {
   user: UserType;

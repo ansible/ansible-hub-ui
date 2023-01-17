@@ -14,8 +14,8 @@ import {
 
 import { FilterIcon, SearchIcon } from '@patternfly/react-icons';
 
-import { StatefulDropdown } from '../../components';
-import { ParamHelper } from '../../utilities';
+import { StatefulDropdown } from 'src/components';
+import { ParamHelper } from 'src/utilities';
 
 class FilterOption {
   id: string;

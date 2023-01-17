@@ -18,11 +18,11 @@ import {
   ExclamationCircleIcon,
 } from '@patternfly/react-icons';
 
-import { RemoteType, UserType, PulpStatus } from '../../api';
+import { RemoteType, UserType, PulpStatus } from 'src/api';
 import { HelperText, SortTable, StatefulDropdown } from '..';
-import { StatusIndicator } from '../../components';
+import { StatusIndicator } from 'src/components';
 
-import { Constants } from '../../constants';
+import { Constants } from 'src/constants';
 
 interface IProps {
   remotes: RemoteType[];

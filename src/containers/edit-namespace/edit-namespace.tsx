@@ -10,13 +10,13 @@ import {
   closeAlertMixin,
   AlertType,
   Main,
-} from '../../components';
-import { MyNamespaceAPI, NamespaceType, NamespaceLinkType } from '../../api';
+} from 'src/components';
+import { MyNamespaceAPI, NamespaceType, NamespaceLinkType } from 'src/api';
 
 import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
 
-import { Paths, formatPath } from '../../paths';
-import { ParamHelper, mapErrorMessages } from '../../utilities';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, mapErrorMessages } from 'src/utilities';
 
 interface IState {
   namespace: NamespaceType;

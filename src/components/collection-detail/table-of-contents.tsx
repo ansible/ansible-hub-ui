@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 import { Nav, NavExpandable, NavItem, NavList } from '@patternfly/react-core';
 
-import { DocsBlobType } from '../../api';
-import { Paths, formatPath } from '../../paths';
-import { ParamHelper, sanitizeDocsUrls } from '../../utilities';
-import { AppContext } from '../../loaders/app-context';
+import { DocsBlobType } from 'src/api';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper, sanitizeDocsUrls } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
 
 class DocsEntry {
   display: string;

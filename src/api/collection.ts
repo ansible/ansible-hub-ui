@@ -4,7 +4,7 @@ import {
   CollectionListType,
   CollectionUploadType,
   UserType,
-} from '../api';
+} from 'src/api';
 import axios from 'axios';
 
 export class API extends BaseAPI {

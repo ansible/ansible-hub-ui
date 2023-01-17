@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Tab, Tabs as PFTabs } from '@patternfly/react-core';
 
-import { ParamHelper } from '../../utilities/param-helper';
+import { ParamHelper } from 'src/utilities/param-helper';
 
 interface IProps {
   /** List of names for tabs */

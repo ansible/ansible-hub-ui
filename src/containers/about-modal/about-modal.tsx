@@ -7,8 +7,8 @@ import {
   TextListItemVariants,
   TextListVariants,
 } from '@patternfly/react-core';
-import Logo from '../../../static/images/logo_large.svg';
-import { ApplicationInfoAPI, UserType } from '../../api';
+import Logo from 'src/../static/images/logo_large.svg';
+import { ApplicationInfoAPI, UserType } from 'src/api';
 import { detect } from 'detect-browser';
 
 interface IProps {

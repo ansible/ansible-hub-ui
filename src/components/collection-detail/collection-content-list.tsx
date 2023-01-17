@@ -10,10 +10,10 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 
-import { ContentSummaryType } from '../../api';
-import { Paths, formatPath } from '../../paths';
-import { ParamHelper } from '../../utilities/param-helper';
-import { AppContext } from '../../loaders/app-context';
+import { ContentSummaryType } from 'src/api';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IProps {
   contents: ContentSummaryType[];

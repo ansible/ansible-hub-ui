@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
-import { Paths } from '../../paths';
+import { Paths } from 'src/paths';
 
 interface IProps {
   style?: Object;

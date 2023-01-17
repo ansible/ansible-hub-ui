@@ -17,11 +17,11 @@ import {
 
 import { DownloadIcon } from '@patternfly/react-icons';
 
-import { CollectionDetailType, CollectionAPI } from '../../api';
-import { Tag } from '../../components';
-import { Paths, formatPath } from '../../paths';
-import { ParamHelper } from '../../utilities/param-helper';
-import { AppContext } from '../../loaders/app-context';
+import { CollectionDetailType, CollectionAPI } from 'src/api';
+import { Tag } from 'src/components';
+import { Paths, formatPath } from 'src/paths';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IProps extends CollectionDetailType {
   params: {

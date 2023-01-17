@@ -14,14 +14,14 @@ import {
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
 
-import { CollectionListType } from '../../api';
+import { CollectionListType } from 'src/api';
 import {
   CollectionListItem,
   Toolbar,
   Pagination,
   StatefulDropdown,
-} from '../../components';
-import { ParamHelper } from '../../utilities/param-helper';
+} from 'src/components';
+import { ParamHelper } from 'src/utilities/param-helper';
 
 interface IProps {
   collections: CollectionListType[];

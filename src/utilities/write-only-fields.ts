@@ -1,4 +1,4 @@
-import { WriteOnlyFieldType } from '../api';
+import { WriteOnlyFieldType } from 'src/api';
 
 export function isFieldSet(
   name: string,
