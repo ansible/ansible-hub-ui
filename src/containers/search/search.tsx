@@ -1,8 +1,35 @@
 import { t } from '@lingui/macro';
+import { Button, DataList, DropdownItem, Switch } from '@patternfly/react-core';
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
-import { DataList, Switch, DropdownItem, Button } from '@patternfly/react-core';
-import './search.scss';
+import {
+  CollectionAPI,
+  CollectionListType,
+  MyNamespaceAPI,
+  MySyncListAPI,
+  SyncListType,
+} from 'src/api';
+import {
+  AlertList,
+  AlertType,
+  BaseHeader,
+  CardListSwitcher,
+  CollectionCard,
+  CollectionFilter,
+  CollectionListItem,
+  DeleteCollectionModal,
+  EmptyStateFilter,
+  EmptyStateNoData,
+  ImportModal,
+  LoadingPageSpinner,
+  Pagination,
+  RepoSelector,
+  StatefulDropdown,
+  closeAlertMixin,
+} from 'src/components';
+import { Constants } from 'src/constants';
+import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
 import {
   DeleteCollectionUtils,
   RouteProps,
@@ -12,35 +39,8 @@ import {
   waitForTask,
   withRouter,
 } from 'src/utilities';
-import {
-  BaseHeader,
-  CardListSwitcher,
-  CollectionCard,
-  CollectionFilter,
-  CollectionListItem,
-  EmptyStateFilter,
-  EmptyStateNoData,
-  LoadingPageSpinner,
-  Pagination,
-  RepoSelector,
-  StatefulDropdown,
-  AlertList,
-  AlertType,
-  closeAlertMixin,
-  ImportModal,
-  DeleteCollectionModal,
-} from 'src/components';
-import {
-  CollectionAPI,
-  CollectionListType,
-  SyncListType,
-  MySyncListAPI,
-  MyNamespaceAPI,
-} from 'src/api';
 import { ParamHelper } from 'src/utilities/param-helper';
-import { Constants } from 'src/constants';
-import { AppContext } from 'src/loaders/app-context';
-import { Paths, formatPath } from 'src/paths';
+import './search.scss';
 
 interface IState {
   collections: CollectionListType[];

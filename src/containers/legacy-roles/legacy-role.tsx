@@ -1,29 +1,26 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import './legacy-roles.scss';
-import { EmptyStateNoData } from 'src/components';
-
-import { Link } from 'react-router-dom';
-import { RouteProps, withRouter } from 'src/utilities';
-
+import { Trans, t } from '@lingui/macro';
 import {
   DataList,
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
   DataListCell,
+  DataListItem,
+  DataListItemCells,
+  DataListItemRow,
   LabelGroup,
   Nav,
   NavItem,
   NavList,
   Panel,
-  TextContent,
   Text,
+  TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { LegacyRoleAPI } from 'src/api/legacyrole';
+import { LegacyRoleDetailType } from 'src/api/response-types/legacy-role';
+import { LegacyRoleVersionDetailType } from 'src/api/response-types/legacy-role';
+import { EmptyStateNoData } from 'src/components';
 import {
   Breadcrumbs,
   ClipboardCopy,
@@ -33,12 +30,10 @@ import {
   Main,
   Tag,
 } from 'src/components';
-
-import { Paths, formatPath } from 'src/paths';
-import { LegacyRoleAPI } from 'src/api/legacyrole';
 import { AppContext } from 'src/loaders/app-context';
-import { LegacyRoleDetailType } from 'src/api/response-types/legacy-role';
-import { LegacyRoleVersionDetailType } from 'src/api/response-types/legacy-role';
+import { Paths, formatPath } from 'src/paths';
+import { RouteProps, withRouter } from 'src/utilities';
+import './legacy-roles.scss';
 
 interface RoleMeta {
   role: LegacyRoleDetailType;

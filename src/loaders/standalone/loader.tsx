@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { matchPath, useLocation } from 'react-router-dom';
 import '../app.scss';
 import '@patternfly/patternfly/patternfly.scss';
-import { AppContext } from '../app-context';
-import { StandaloneLayout } from './layout';
-import { StandaloneRoutes } from './routes';
+import React, { useEffect, useState } from 'react';
+import { matchPath, useLocation } from 'react-router-dom';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType, UIVersion } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { hasPermission } from 'src/utilities';
+import { AppContext } from '../app-context';
+import { StandaloneLayout } from './layout';
+import { StandaloneRoutes } from './routes';
 
 const isRepoURL = (pathname) =>
   matchPath({ path: formatPath(Paths.searchByRepo) + '*' }, pathname);

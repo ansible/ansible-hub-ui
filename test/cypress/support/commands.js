@@ -1,7 +1,6 @@
 // https://on.cypress.io/custom-commands
-
-import shell from 'shell-escape-tag';
 import { range } from 'lodash';
+import shell from 'shell-escape-tag';
 
 const apiPrefix = Cypress.env('apiPrefix');
 const uiPrefix = Cypress.env('uiPrefix');

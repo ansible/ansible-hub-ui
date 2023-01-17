@@ -1,28 +1,23 @@
-import { t, Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
-
-import * as React from 'react';
-import './task.scss';
-import { Constants } from 'src/constants';
-import { RouteProps, withRouter } from 'src/utilities';
-import { Link } from 'react-router-dom';
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   Toolbar,
+  ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  ToolbarContent,
 } from '@patternfly/react-core';
-import { ParamHelper, filterIsSet, errorMessage } from 'src/utilities';
-import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { TaskManagementAPI } from 'src/api';
+import { TaskType } from 'src/api/response-types/task';
 import {
   AlertList,
   AlertType,
   AppliedFilters,
   BaseHeader,
-  closeAlertMixin,
-  ConfirmModal,
   CompoundFilter,
+  ConfirmModal,
   DateComponent,
   EmptyStateFilter,
   EmptyStateNoData,
@@ -31,13 +26,17 @@ import {
   Main,
   Pagination,
   SortTable,
-  Tooltip,
   StatusIndicator,
+  Tooltip,
+  closeAlertMixin,
 } from 'src/components';
-import { TaskManagementAPI } from 'src/api';
-import { TaskType } from 'src/api/response-types/task';
-import { formatPath, Paths } from 'src/paths';
+import { Constants } from 'src/constants';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
+import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+import './task.scss';
 
 interface IState {
   params: {

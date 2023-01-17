@@ -1,18 +1,16 @@
 import { t } from '@lingui/macro';
 import * as React from 'react';
-
-import { RouteProps, withRouter } from 'src/utilities';
-
 import {
-  CollectionHeader,
   CollectionContentList,
+  CollectionHeader,
   LoadingPageWithHeader,
   Main,
 } from 'src/components';
-import { loadCollection, IBaseCollectionState } from './base';
-import { ParamHelper } from 'src/utilities/param-helper';
-import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper } from 'src/utilities/param-helper';
+import { IBaseCollectionState, loadCollection } from './base';
 
 // renders list of contents in a collection
 class CollectionContent extends React.Component<

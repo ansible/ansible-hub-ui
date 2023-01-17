@@ -1,6 +1,4 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import { RouteProps, withRouter } from 'src/utilities';
 import {
   DropdownItem,
   Toolbar,
@@ -8,7 +6,8 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { ParamHelper, filterIsSet, errorMessage } from 'src/utilities';
+import * as React from 'react';
+import { SigningServiceAPI, SigningServiceType } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -27,8 +26,9 @@ import {
   SortTable,
   closeAlertMixin,
 } from 'src/components';
-import { SigningServiceAPI, SigningServiceType } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
+import { RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, errorMessage, filterIsSet } from 'src/utilities';
 
 interface IState {
   params: {

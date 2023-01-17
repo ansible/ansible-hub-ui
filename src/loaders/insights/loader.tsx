@@ -1,16 +1,16 @@
+import '../app.scss';
 import { t } from '@lingui/macro';
-import React, { useEffect, useState } from 'react';
-import { matchPath, useLocation } from 'react-router-dom';
 import { Alert } from '@patternfly/react-core';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
-import '../app.scss';
-import { AppContext } from '../app-context';
-import { loadContext } from '../load-context';
-import { InsightsRoutes } from './routes';
+import React, { useEffect, useState } from 'react';
+import { matchPath, useLocation } from 'react-router-dom';
 import { FeatureFlagsType, SettingsType, UserType } from 'src/api';
 import { AlertType, UIVersion } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 import { hasPermission } from 'src/utilities';
+import { AppContext } from '../app-context';
+import { loadContext } from '../load-context';
+import { InsightsRoutes } from './routes';
 
 const DEFAULT_REPO = 'published';
 

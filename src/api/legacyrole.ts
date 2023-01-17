@@ -1,5 +1,5 @@
-import { LegacyAPI } from './legacy';
 import axios from 'axios';
+import { LegacyAPI } from './legacy';
 
 export class API extends LegacyAPI {
   apiPath = this.getApiPath('');

@@ -1,5 +1,5 @@
+import { CubesIcon, PlusCircleIcon } from '@patternfly/react-icons';
 import * as React from 'react';
-import { PlusCircleIcon, CubesIcon } from '@patternfly/react-icons';
 import { ReactElement, ReactNode } from 'react';
 import { EmptyStateCustom } from './empty-state-custom';
 

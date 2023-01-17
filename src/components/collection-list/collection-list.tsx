@@ -1,16 +1,14 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './list.scss';
-
 import { DataList } from '@patternfly/react-core';
+import * as React from 'react';
 import { CollectionListType } from 'src/api';
-
 import {
   CollectionListItem,
-  Pagination,
   EmptyStateFilter,
+  Pagination,
 } from 'src/components';
 import { ParamHelper } from 'src/utilities/param-helper';
+import './list.scss';
 
 interface IProps {
   collections: CollectionListType[];

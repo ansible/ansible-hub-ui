@@ -1,9 +1,8 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './legacy-roles.scss';
-
-import { RouteProps, withRouter } from 'src/utilities';
 import { DataList } from '@patternfly/react-core';
+import * as React from 'react';
+import { LegacyRoleListType } from 'src/api';
+import { LegacyRoleAPI } from 'src/api/legacyrole';
 import {
   BaseHeader,
   CollectionFilter,
@@ -12,9 +11,9 @@ import {
   LoadingPageSpinner,
   Pagination,
 } from 'src/components';
-import { LegacyRoleAPI } from 'src/api/legacyrole';
-import { LegacyRoleListType } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
+import { RouteProps, withRouter } from 'src/utilities';
+import './legacy-roles.scss';
 
 interface IProps {
   legacyroles: LegacyRoleListType[];

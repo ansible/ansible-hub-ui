@@ -1,9 +1,4 @@
-import * as React from 'react';
-import { t, Trans } from '@lingui/macro';
-import { errorMessage } from 'src/utilities';
-
-import { RouteProps, withRouter } from 'src/utilities';
-import { Link } from 'react-router-dom';
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   DropdownItem,
@@ -13,16 +8,9 @@ import {
   ToolbarItem,
   Tooltip,
 } from '@patternfly/react-core';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { ExecutionEnvironmentRegistryAPI, RemoteType } from 'src/api';
-import {
-  ParamHelper,
-  filterIsSet,
-  lastSyncStatus,
-  lastSynced,
-  mapErrorMessages,
-  parsePulpIDFromURL,
-  ErrorMessagesType,
-} from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -33,18 +21,28 @@ import {
   DeleteModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  EmptyStateUnauthorized,
+  ListItemActions,
   LoadingPageSpinner,
   Main,
   Pagination,
   RemoteForm,
   SortTable,
   closeAlertMixin,
-  EmptyStateUnauthorized,
-  ListItemActions,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-
 import { Paths, formatPath } from 'src/paths';
+import { errorMessage } from 'src/utilities';
+import { RouteProps, withRouter } from 'src/utilities';
+import {
+  ErrorMessagesType,
+  ParamHelper,
+  filterIsSet,
+  lastSyncStatus,
+  lastSynced,
+  mapErrorMessages,
+  parsePulpIDFromURL,
+} from 'src/utilities';
 
 interface IState {
   alerts: AlertType[];

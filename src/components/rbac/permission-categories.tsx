@@ -1,10 +1,10 @@
-import * as React from 'react';
 import { t } from '@lingui/macro';
-import { AppContext } from 'src/loaders/app-context';
+import { Flex, FlexItem } from '@patternfly/react-core';
+import * as React from 'react';
 import { ModelPermissionsType } from 'src/api';
 import { PermissionChipSelector } from 'src/components';
 import { Constants } from 'src/constants';
-import { Flex, FlexItem } from '@patternfly/react-core';
+import { AppContext } from 'src/loaders/app-context';
 
 interface IProps {
   permissions: string[];

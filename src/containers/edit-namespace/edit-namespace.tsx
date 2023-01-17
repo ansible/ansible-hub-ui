@@ -1,28 +1,27 @@
-import { t, Trans } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
+import { ActionGroup, Button, Form, Spinner } from '@patternfly/react-core';
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
-import { RouteProps, withRouter } from 'src/utilities';
-import { Form, ActionGroup, Button, Spinner } from '@patternfly/react-core';
-
 import { MyNamespaceAPI, NamespaceLinkType, NamespaceType } from 'src/api';
 import {
-  PartnerHeader,
-  NamespaceForm,
-  ResourcesForm,
   AlertList,
-  closeAlertMixin,
   AlertType,
-  Main,
   EmptyStateUnauthorized,
   LoadingPageSpinner,
+  Main,
+  NamespaceForm,
+  PartnerHeader,
+  ResourcesForm,
+  closeAlertMixin,
 } from 'src/components';
 import { AppContext } from 'src/loaders/app-context';
-import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
+import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { RouteProps, withRouter } from 'src/utilities';
 import {
   ErrorMessagesType,
   ParamHelper,
-  mapErrorMessages,
   errorMessage,
+  mapErrorMessages,
 } from 'src/utilities';
 
 interface IState {

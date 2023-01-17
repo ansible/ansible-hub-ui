@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
 import { Button, InputGroup, TextInput } from '@patternfly/react-core';
+import * as React from 'react';
 
 interface IProps {
   /** Specify if the value is set on the backend already */

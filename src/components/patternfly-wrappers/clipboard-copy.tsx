@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { t } from '@lingui/macro';
-
 import { ClipboardCopy as PFClipboardCopy } from '@patternfly/react-core';
+import * as React from 'react';
 
 interface IProps {
   children: string;

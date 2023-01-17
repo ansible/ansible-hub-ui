@@ -1,4 +1,4 @@
-import { CollectionDetailType, CollectionAPI } from 'src/api';
+import { CollectionAPI, CollectionDetailType } from 'src/api';
 import { AlertType } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
 

@@ -1,8 +1,8 @@
+import { Trans, t } from '@lingui/macro';
+import { Checkbox, Text } from '@patternfly/react-core';
 import React from 'react';
-import { t, Trans } from '@lingui/macro';
-import { Text, Checkbox } from '@patternfly/react-core';
-import { DeleteModal } from 'src/components';
 import { CollectionDetailType, CollectionListType } from 'src/api';
+import { DeleteModal } from 'src/components';
 
 interface IProps {
   deleteCollection: CollectionDetailType | CollectionListType;

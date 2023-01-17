@@ -1,21 +1,20 @@
-import { t, Trans } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
+import { Button, ClipboardCopyVariant } from '@patternfly/react-core';
 import * as React from 'react';
-
-import { RouteProps, withRouter } from 'src/utilities';
 import { Link } from 'react-router-dom';
-import { ClipboardCopyVariant, Button } from '@patternfly/react-core';
-import { Paths, formatPath } from 'src/paths';
+import { MyDistributionAPI } from 'src/api';
 import {
-  BaseHeader,
-  Main,
-  ClipboardCopy,
   AlertList,
   AlertType,
+  BaseHeader,
+  ClipboardCopy,
+  Main,
   closeAlertMixin,
 } from 'src/components';
-import { errorMessage, getRepoUrl } from 'src/utilities';
 import { AppContext } from 'src/loaders/app-context';
-import { MyDistributionAPI } from 'src/api';
+import { Paths, formatPath } from 'src/paths';
+import { RouteProps, withRouter } from 'src/utilities';
+import { errorMessage, getRepoUrl } from 'src/utilities';
 
 interface IState {
   tokenData: {

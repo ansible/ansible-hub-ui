@@ -1,9 +1,9 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
+import { Trans, t } from '@lingui/macro';
 import { Tooltip } from '@patternfly/react-core';
-import { Paths, formatEEPath, formatPath } from 'src/paths';
-import { BaseHeader, Breadcrumbs, Tabs, SignatureBadge } from 'src/components';
+import * as React from 'react';
 import { ContainerRepositoryType } from 'src/api';
+import { BaseHeader, Breadcrumbs, SignatureBadge, Tabs } from 'src/components';
+import { Paths, formatEEPath, formatPath } from 'src/paths';
 import { lastSyncStatus, lastSynced } from 'src/utilities';
 
 interface IProps {

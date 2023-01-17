@@ -1,6 +1,4 @@
-import { t, Trans } from '@lingui/macro';
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Trans, t } from '@lingui/macro';
 import {
   DropdownItem,
   DropdownSeparator,
@@ -13,7 +11,9 @@ import {
   ExternalLinkAltIcon,
   QuestionCircleIcon,
 } from '@patternfly/react-icons';
-import { StandaloneMenu } from './menu';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import Logo from 'src/../static/images/logo_large.svg';
 import {
   ActiveUserAPI,
   FeatureFlagsType,
@@ -27,7 +27,7 @@ import {
   StatefulDropdown,
 } from 'src/components';
 import { Paths, formatPath } from 'src/paths';
-import Logo from 'src/../static/images/logo_large.svg';
+import { StandaloneMenu } from './menu';
 
 interface IProps {
   children: React.ReactNode;

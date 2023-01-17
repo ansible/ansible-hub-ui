@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
+import * as React from 'react';
 
 interface IProps {
   results: { name: string; id: number | string }[];

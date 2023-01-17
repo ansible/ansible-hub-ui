@@ -1,27 +1,25 @@
-import { t, Trans } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
+import {
+  Button,
+  DropdownItem,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
+} from '@patternfly/react-core';
 import * as React from 'react';
-import { errorMessage } from 'src/utilities';
-
 import { Link, Navigate } from 'react-router-dom';
-import { RouteProps, withRouter } from 'src/utilities';
 import {
   GroupAPI,
+  GroupObjectPermissionType,
   UserAPI,
   UserType,
-  GroupObjectPermissionType,
 } from 'src/api';
-import {
-  filterIsSet,
-  mapErrorMessages,
-  ParamHelper,
-  ErrorMessagesType,
-} from 'src/utilities';
 import {
   AlertList,
   AlertType,
   AppliedFilters,
   BaseHeader,
-  closeAlertMixin,
   CompoundFilter,
   DeleteGroupModal,
   EmptyStateFilter,
@@ -33,17 +31,18 @@ import {
   Main,
   Pagination,
   SortTable,
+  closeAlertMixin,
 } from 'src/components';
-import {
-  Button,
-  DropdownItem,
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@patternfly/react-core';
-import { formatPath, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
+import { errorMessage } from 'src/utilities';
+import { RouteProps, withRouter } from 'src/utilities';
+import {
+  ErrorMessagesType,
+  ParamHelper,
+  filterIsSet,
+  mapErrorMessages,
+} from 'src/utilities';
 
 interface IState {
   params: {

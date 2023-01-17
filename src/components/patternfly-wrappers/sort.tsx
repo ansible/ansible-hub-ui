@@ -1,16 +1,14 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './sort.scss';
-
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
 import {
-  SortAmountDownIcon,
-  SortAmountUpIcon,
   SortAlphaDownIcon,
   SortAlphaUpIcon,
+  SortAmountDownIcon,
+  SortAmountUpIcon,
 } from '@patternfly/react-icons';
-
+import * as React from 'react';
 import { ParamHelper } from 'src/utilities/param-helper';
+import './sort.scss';
 
 class SortFieldType {
   id: string;

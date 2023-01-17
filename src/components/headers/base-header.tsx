@@ -1,9 +1,8 @@
-import * as React from 'react';
-import cx from 'classnames';
-import './header.scss';
-
 import { Title } from '@patternfly/react-core';
+import cx from 'classnames';
+import * as React from 'react';
 import { Constants } from 'src/constants';
+import './header.scss';
 
 interface IProps {
   title: string;

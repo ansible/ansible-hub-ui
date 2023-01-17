@@ -1,23 +1,21 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-
 import {
-  FormGroup,
-  TextInput,
   ActionGroup,
-  Button,
-  Label,
-  Tooltip,
-  Switch,
   Alert,
+  Button,
+  FormGroup,
+  Label,
+  Switch,
+  TextInput,
   TextInputTypes,
+  Tooltip,
 } from '@patternfly/react-core';
-
-import { AlertType, APISearchTypeAhead, HelperText } from 'src/components';
+import * as React from 'react';
+import { GroupAPI, UserType } from 'src/api';
+import { APISearchTypeAhead, AlertType, HelperText } from 'src/components';
 import { DataForm } from 'src/components/shared/data-form';
-import { UserType, GroupAPI } from 'src/api';
 import { AppContext } from 'src/loaders/app-context';
-import { errorMessage, ErrorMessagesType } from 'src/utilities';
+import { ErrorMessagesType, errorMessage } from 'src/utilities';
 
 interface IProps {
   /** User to edit */

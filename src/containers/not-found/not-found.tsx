@@ -1,12 +1,10 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import './not-found.scss';
-import NotFoundImage from 'src/../static/images/not_found.svg';
-
-import { RouteProps, withRouter } from 'src/utilities';
 import { Bullseye } from '@patternfly/react-core';
-
+import * as React from 'react';
+import NotFoundImage from 'src/../static/images/not_found.svg';
 import { BaseHeader, Main } from 'src/components';
+import { RouteProps, withRouter } from 'src/utilities';
+import './not-found.scss';
 
 class NotFound extends React.Component<RouteProps> {
   render() {

@@ -1,9 +1,4 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import './execution-environment.scss';
-
-import { RouteProps, withRouter } from 'src/utilities';
-import { Link } from 'react-router-dom';
+import { Trans, t } from '@lingui/macro';
 import {
   Button,
   DropdownItem,
@@ -13,12 +8,14 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 import {
   ExecutionEnvironmentAPI,
   ExecutionEnvironmentRemoteAPI,
   ExecutionEnvironmentType,
 } from 'src/api';
-import { filterIsSet, parsePulpIDFromURL, ParamHelper } from 'src/utilities';
 import {
   AlertList,
   AlertType,
@@ -29,6 +26,8 @@ import {
   DeleteExecutionEnvironmentModal,
   EmptyStateFilter,
   EmptyStateNoData,
+  EmptyStateUnauthorized,
+  ListItemActions,
   LoadingPageSpinner,
   Main,
   Pagination,
@@ -37,12 +36,12 @@ import {
   SortTable,
   Tooltip,
   closeAlertMixin,
-  EmptyStateUnauthorized,
-  ListItemActions,
 } from 'src/components';
-import { formatPath, formatEEPath, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import { Paths, formatEEPath, formatPath } from 'src/paths';
+import { RouteProps, withRouter } from 'src/utilities';
+import { ParamHelper, filterIsSet, parsePulpIDFromURL } from 'src/utilities';
+import './execution-environment.scss';
 
 interface IState {
   alerts: AlertType[];

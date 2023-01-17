@@ -1,14 +1,12 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-
 import { Button, DropdownItem, Tooltip } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
-
-import { AppContext } from 'src/loaders/app-context';
-import { RemoteType, UserType, PulpStatus } from 'src/api';
-import { DateComponent, SortTable, ListItemActions } from 'src/components';
+import * as React from 'react';
+import { PulpStatus, RemoteType, UserType } from 'src/api';
+import { DateComponent, ListItemActions, SortTable } from 'src/components';
 import { Constants } from 'src/constants';
-import { lastSynced, lastSyncStatus } from 'src/utilities';
+import { AppContext } from 'src/loaders/app-context';
+import { lastSyncStatus, lastSynced } from 'src/utilities';
 
 interface IProps {
   remotes: RemoteType[];

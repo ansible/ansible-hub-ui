@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
 import {
   ActionGroup,
   Button,
@@ -11,6 +10,7 @@ import {
   TextInput,
   Title,
 } from '@patternfly/react-core';
+import * as React from 'react';
 import { PermissionCategories } from 'src/components';
 
 interface IState {

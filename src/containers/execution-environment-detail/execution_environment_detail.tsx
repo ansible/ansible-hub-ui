@@ -1,26 +1,26 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
-import { withRouter } from 'src/utilities';
 import {
-  EmptyStateNoData,
-  MarkdownEditor,
-  ClipboardCopy,
-} from 'src/components';
-import {
-  FlexItem,
-  Flex,
-  Title,
   Button,
   Card,
   CardBody,
+  Flex,
+  FlexItem,
+  Title,
 } from '@patternfly/react-core';
+import * as React from 'react';
+import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
 import {
+  ClipboardCopy,
+  EmptyStateNoData,
+  MarkdownEditor,
+} from 'src/components';
+import { withRouter } from 'src/utilities';
+import { getContainersURL } from 'src/utilities';
+import {
+  IDetailSharedProps,
   withContainerParamFix,
   withContainerRepo,
-  IDetailSharedProps,
 } from './base';
-import { ExecutionEnvironmentAPI, GroupObjectPermissionType } from 'src/api';
-import { getContainersURL } from 'src/utilities';
 import './execution-environment-detail.scss';
 
 interface IState {
@@ -90,17 +90,19 @@ class ExecutionEnvironmentDetail extends React.Component<
             <Card>
               <CardBody>
                 <Title headingLevel='h2' size='lg'>
-                  {!this.state.markdownEditing && this.state.readme && canEdit && (
-                    <Button
-                      className={'hub-c-button-edit'}
-                      variant={'primary'}
-                      onClick={() => {
-                        this.setState({ markdownEditing: true });
-                      }}
-                    >
-                      {t`Edit`}
-                    </Button>
-                  )}
+                  {!this.state.markdownEditing &&
+                    this.state.readme &&
+                    canEdit && (
+                      <Button
+                        className={'hub-c-button-edit'}
+                        variant={'primary'}
+                        onClick={() => {
+                          this.setState({ markdownEditing: true });
+                        }}
+                      >
+                        {t`Edit`}
+                      </Button>
+                    )}
                 </Title>
                 {!this.state.markdownEditing && !this.state.readme ? (
                   <EmptyStateNoData

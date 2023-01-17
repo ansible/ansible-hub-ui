@@ -1,19 +1,15 @@
-import * as React from 'react';
-import './legacy-namespace-item.scss';
-
 import {
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
   DataListCell,
+  DataListItem,
+  DataListItemCells,
+  DataListItemRow,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
 import { Link } from 'react-router-dom';
-
-import { Paths, formatPath } from 'src/paths';
-import { Logo } from 'src/components';
-
 import { LegacyNamespaceDetailType } from 'src/api';
+import { Logo } from 'src/components';
+import { Paths, formatPath } from 'src/paths';
+import './legacy-namespace-item.scss';
 
 interface LegacyNamespaceProps {
   namespace: LegacyNamespaceDetailType;

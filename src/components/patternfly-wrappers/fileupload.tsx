@@ -1,10 +1,9 @@
-import * as React from 'react';
 import { t } from '@lingui/macro';
-
 import {
-  FileUpload as PFFileUpload,
   FileUploadProps,
+  FileUpload as PFFileUpload,
 } from '@patternfly/react-core';
+import * as React from 'react';
 
 export class FileUpload extends React.Component<FileUploadProps> {
   render() {

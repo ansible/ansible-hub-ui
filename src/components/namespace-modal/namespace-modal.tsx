@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro';
-import * as React from 'react';
 import {
   Button,
   Form,
@@ -9,7 +8,7 @@ import {
   ModalVariant,
   TextInput,
 } from '@patternfly/react-core';
-
+import * as React from 'react';
 import { NamespaceAPI } from 'src/api';
 import { HelperText } from 'src/components';
 import { ErrorMessagesType } from 'src/utilities';

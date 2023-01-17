@@ -1,13 +1,12 @@
 import * as React from 'react';
-
+import { UserType } from 'src/api';
 import {
   BaseHeader,
-  Main,
-  Breadcrumbs,
   BreadcrumbType,
+  Breadcrumbs,
+  Main,
   UserForm,
 } from 'src/components';
-import { UserType } from 'src/api';
 import { ErrorMessagesType } from 'src/utilities';
 
 interface IProps {

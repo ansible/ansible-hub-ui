@@ -1,33 +1,28 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-
-import { AlertType } from 'src/components';
-
+import { Trans, t } from '@lingui/macro';
 import {
-  Button,
-  Modal,
-  Spinner,
-  Label,
-  LabelGroup,
-  Form,
-  FormGroup,
-  TextInput,
-  InputGroup,
   Alert,
   AlertActionLink,
+  Button,
+  Form,
+  FormGroup,
+  InputGroup,
+  Label,
+  LabelGroup,
+  Modal,
+  Spinner,
+  TextInput,
 } from '@patternfly/react-core';
-
 import { TagIcon } from '@patternfly/react-icons';
-
+import * as React from 'react';
 import {
   ContainerManifestType,
-  ExecutionEnvironmentAPI,
-  ContainerTagAPI,
   ContainerRepositoryType,
-  TaskAPI,
+  ContainerTagAPI,
+  ExecutionEnvironmentAPI,
   PulpStatus,
+  TaskAPI,
 } from 'src/api';
-
+import { AlertType } from 'src/components';
 import { parsePulpIDFromURL } from 'src/utilities';
 
 interface IState {

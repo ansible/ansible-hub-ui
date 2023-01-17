@@ -1,69 +1,62 @@
-import { t, Trans } from '@lingui/macro';
-import * as React from 'react';
-import './namespace-detail.scss';
-
-import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
-
-import { Link, Navigate } from 'react-router-dom';
-import { RouteProps, withRouter } from 'src/utilities';
+import { Trans, t } from '@lingui/macro';
 import {
   Alert,
   AlertActionCloseButton,
   Button,
-  DropdownItem,
-  Tooltip,
-  Text,
   Checkbox,
+  DropdownItem,
+  Text,
+  Tooltip,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-
+import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
-
+import { Link, Navigate } from 'react-router-dom';
 import {
-  CollectionListType,
   CollectionAPI,
-  NamespaceAPI,
-  MyNamespaceAPI,
-  NamespaceType,
-  SignCollectionAPI,
+  CollectionListType,
   GroupType,
+  MyNamespaceAPI,
+  NamespaceAPI,
+  NamespaceType,
   RoleType,
+  SignCollectionAPI,
 } from 'src/api';
-
 import {
+  AlertList,
+  AlertType,
+  ClipboardCopy,
   CollectionFilter,
   CollectionList,
+  DeleteCollectionModal,
+  DeleteModal,
+  EmptyStateNoData,
   ImportModal,
   LoadingPageWithHeader,
   Main,
   OwnersTab,
   Pagination,
   PartnerHeader,
-  EmptyStateNoData,
   RepoSelector,
-  StatefulDropdown,
-  ClipboardCopy,
-  AlertList,
-  closeAlertMixin,
-  DeleteModal,
-  AlertType,
   SignAllCertificatesModal,
-  DeleteCollectionModal,
+  StatefulDropdown,
+  closeAlertMixin,
 } from 'src/components';
-
-import {
-  ParamHelper,
-  getRepoUrl,
-  filterIsSet,
-  errorMessage,
-  waitForTask,
-  canSignNamespace,
-  DeleteCollectionUtils,
-} from 'src/utilities';
-
 import { Constants } from 'src/constants';
-import { formatPath, namespaceBreadcrumb, Paths } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath, namespaceBreadcrumb } from 'src/paths';
+import { RouteProps, withRouter } from 'src/utilities';
+import {
+  DeleteCollectionUtils,
+  ParamHelper,
+  canSignNamespace,
+  errorMessage,
+  filterIsSet,
+  getRepoUrl,
+  waitForTask,
+} from 'src/utilities';
+import { parsePulpIDFromURL } from 'src/utilities/parse-pulp-id';
+import './namespace-detail.scss';
 
 interface IState {
   canSign: boolean;

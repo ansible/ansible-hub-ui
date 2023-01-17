@@ -1,8 +1,8 @@
 import { t } from '@lingui/macro';
+import { Button } from '@patternfly/react-core';
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { Button } from '@patternfly/react-core';
-import { UserType, UserAPI } from 'src/api';
+import { UserAPI, UserType } from 'src/api';
 import {
   AlertList,
   AlertType,
@@ -12,8 +12,8 @@ import {
   UserFormPage,
   closeAlertMixin,
 } from 'src/components';
-import { Paths, formatPath } from 'src/paths';
 import { AppContext } from 'src/loaders/app-context';
+import { Paths, formatPath } from 'src/paths';
 import { ErrorMessagesType, RouteProps, withRouter } from 'src/utilities';
 
 interface IState {
