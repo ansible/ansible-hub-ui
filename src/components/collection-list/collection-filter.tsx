@@ -47,7 +47,7 @@ export class CollectionFilter extends React.Component<IProps, IState> {
 
   render() {
     const { ignoredParams, params, updateParams } = this.props;
-    const { display_signatures } = this.context?.featureFlags || {};
+    const { display_signatures } = this.context.featureFlags;
     const display_tags = ignoredParams.includes('tags') === false;
 
     const filterConfig = [

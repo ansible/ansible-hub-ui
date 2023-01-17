@@ -57,7 +57,7 @@ import {
   filterIsSet,
   errorMessage,
   waitForTask,
-  canSign as canSignNS,
+  canSignNamespace,
   DeleteCollectionUtils,
 } from 'src/utilities';
 
@@ -436,6 +436,9 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
                   renderCollectionControls={(collection) =>
                     this.renderCollectionControls(collection)
                   }
+                  displaySignatures={
+                    this.context.featureFlags.display_signatures
+                  }
                 />
               </section>
             )
@@ -724,7 +727,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
           itemCount: val[0].data.meta.count,
           namespace: val[1].data,
           showControls: !!val[2],
-          canSign: canSignNS(this.context, val[2]?.data),
+          canSign: canSignNamespace(this.context, val[2]?.data),
           group: this.filterGroup(
             this.state.params['group'],
             val[1].data['groups'],
@@ -779,7 +782,7 @@ export class NamespaceDetail extends React.Component<IProps, IState> {
 
   private renderPageControls() {
     const { canSign, collections } = this.state;
-    const { can_upload_signatures } = this.context?.featureFlags || {};
+    const { can_upload_signatures } = this.context.featureFlags;
     const { hasPermission } = this.context;
 
     const dropdownItems = [

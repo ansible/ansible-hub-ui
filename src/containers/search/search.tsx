@@ -317,6 +317,7 @@ class Search extends React.Component<RouteProps, IState> {
               footer={this.renderSyncToogle(c.name, c.namespace.name)}
               repo={this.context.selectedRepo}
               menu={this.renderMenu(false, c)}
+              displaySignatures={this.context.featureFlags.display_signatures}
             />
           );
         })}
@@ -517,6 +518,7 @@ class Search extends React.Component<RouteProps, IState> {
                   </>
                 }
                 repo={this.context.selectedRepo}
+                displaySignatures={this.context.featureFlags.display_signatures}
               />
             ))}
           </DataList>

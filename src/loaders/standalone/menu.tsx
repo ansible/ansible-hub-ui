@@ -98,7 +98,8 @@ function standaloneMenu({ repository }) {
     menuItem(t`Signature Keys`, {
       url: formatPath(Paths.signatureKeys),
       condition: ({ featureFlags, user }) =>
-        featureFlags.display_signatures && !user.is_anonymous,
+        (featureFlags.collection_signing || featureFlags.container_signing) &&
+        !user.is_anonymous,
     }),
     menuItem(t`Documentation`, {
       url: 'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',

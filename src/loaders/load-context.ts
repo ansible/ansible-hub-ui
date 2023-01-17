@@ -18,7 +18,7 @@ type ContextFragment = {
 export function loadContext(): Promise<ContextFragment> {
   const getFeatureFlags = FeatureFlagsAPI.get().then(
     ({ data: featureFlags }) => ({
-      alerts: (featureFlags?._messages || []).map((msg) => ({
+      alerts: (featureFlags._messages || []).map((msg) => ({
         variant: 'warning',
         title: msg.split(':')[1],
       })),
